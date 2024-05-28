@@ -40,7 +40,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     // Offest can be found with this sig "45 8B 84 CF ?? ?? ?? ?? 48 8B CD"
     // Struct size can be found with "83 C7 ?? 49 83 EE ?? 75 ?? FF C6"
     // Array size can be found with "83 FF ?? 72 ?? 4C 8B 74 24 ?? 49 8D 9F"
-    [FieldOffset(0x1D3C)] [FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData; 
+    [FieldOffset(0x1D3C)][FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
 
     // The first 10 of them are normal fish, the rest are spectral fish
     [UnscopedRef]
@@ -57,7 +57,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FieldOffset(0x2101)] public byte LocalIndexInAllResult;
     [FieldOffset(0x2102)] public IndividualResultStruct IndividualResult;
     [FieldOffset(0x2124)] public AllResultStruct LocalPlayerAllResult;
-    [FieldOffset(0x214C)] [FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResult;
+    [FieldOffset(0x214C)][FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResult;
 
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet

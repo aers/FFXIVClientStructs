@@ -179,13 +179,13 @@ public unsafe struct StdVector<T, TMemorySpace>
     public readonly Span<T> AsSpan(long index, int count) => new(
         First + index,
         checked((int)CheckedRangeCount(index, count)));
-    
+
     /// <inheritdoc/>
     public readonly StdSpan<T> AsStdSpan() => AsStdSpan(0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly StdSpan<T> AsStdSpan(long index) => AsStdSpan(index, LongCount - index);
-    
+
     /// <inheritdoc/>
     public readonly StdSpan<T> AsStdSpan(long index, long count) =>
       new(First + index, CheckedRangeCount(index, count));
@@ -482,7 +482,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     public void Reverse() => MutateHelper<T, StdVector<T, TMemorySpace>>.DefaultReverse(ref this);
 
     /// <inheritdoc/>
-    public void Reverse(long index, long count) => MutateHelper<T, StdVector<T, TMemorySpace>>.DefaultReverse(ref this, index, count); 
+    public void Reverse(long index, long count) => MutateHelper<T, StdVector<T, TMemorySpace>>.DefaultReverse(ref this, index, count);
 
     /// <inheritdoc/>
     public void Sort() => MutateHelper<T, StdVector<T, TMemorySpace>>.Sort(ref this, 0, LongCount);
@@ -519,10 +519,10 @@ public unsafe struct StdVector<T, TMemorySpace>
             Buffer.MemoryCopy(First + index, p, count * sizeof(T), count * sizeof(T));
         return res;
     }
-    
+
     /// <inheritdoc/>
     public readonly long LongFindIndex(Predicate<T> match) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongFindIndex(in this, match);
-    
+
     /// <inheritdoc/>
     public readonly long LongFindIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongFindIndex(in this, startIndex, match);
 
@@ -531,64 +531,64 @@ public unsafe struct StdVector<T, TMemorySpace>
 
     /// <inheritdoc/>
     public readonly long LongFindLastIndex(Predicate<T> match) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongFindLastIndex(in this, match);
-    
+
     /// <inheritdoc/>
     public readonly long LongFindLastIndex(long startIndex, Predicate<T> match) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongFindLastIndex(in this, startIndex, match);
-    
+
     /// <inheritdoc/>
     public readonly long LongFindLastIndex(long startIndex, long count, Predicate<T> match) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongFindLastIndex(in this, startIndex, count, match);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(in T item) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, item);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(in T item, long index) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, item, index);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(in T item, long index, long count) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, item, index, count);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, subsequence);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, subsequence, index);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, subsequence, index, count);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, 0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, index, LongCount - index);
-    
+
     /// <inheritdoc/>
     public readonly long LongIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongIndexOf(in this, subsequence, subsequenceLength, index, count);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(in T item) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, item);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(in T item, long index) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, item, index);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(in T item, long index, long count) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, item, index, count);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, subsequence);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, subsequence, index);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(ReadOnlySpan<T> subsequence, long index, long count) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, subsequence, index, count);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index);
-    
+
     /// <inheritdoc/>
     public readonly long LongLastIndexOf(T* subsequence, nint subsequenceLength, long index, long count) => LookupHelper<T, StdVector<T, TMemorySpace>>.DefaultLongLastIndexOf(in this, subsequence, subsequenceLength, index, count);
 

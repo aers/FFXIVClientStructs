@@ -20,7 +20,7 @@ public unsafe partial struct LayoutManager {
 [StructLayout(LayoutKind.Explicit, Size = 0x7080)]
 [GenerateInterop]
 public unsafe partial struct OutdoorAreaLayoutData {
-    [FieldOffset(0x1F0)] [FixedSizeArray] internal FixedSizeArray60<OutdoorPlotLayoutData> _plot;
+    [FieldOffset(0x1F0)][FixedSizeArray] internal FixedSizeArray60<OutdoorPlotLayoutData> _plot;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 0E 41 80 F9 FF")]
     public partial void SetFixture(uint plot, uint part, uint fixtureId);
@@ -32,7 +32,7 @@ public unsafe partial struct OutdoorAreaLayoutData {
 [StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 [GenerateInterop]
 public unsafe partial struct OutdoorPlotLayoutData {
-    [FieldOffset(0x28)] [FixedSizeArray] internal FixedSizeArray8<OutdoorPlotFixtureData> _fixture;
+    [FieldOffset(0x28)][FixedSizeArray] internal FixedSizeArray8<OutdoorPlotFixtureData> _fixture;
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 8D 0C AD")]
     public partial void SetFixture(uint part, uint fixture, uint a4 = 0xFFFFFFFF);

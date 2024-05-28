@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Tests.Helpers;
+using InteropGenerator.Tests.Helpers;
 using Xunit;
 using VerifyIG = InteropGenerator.Tests.Helpers.IncrementalGeneratorVerifier<InteropGenerator.Generator.InteropGenerator>;
 
@@ -561,7 +561,7 @@ public class InheritsAttributeTests {
             ("BaseStruct2.InteropGenerator.g.cs", baseStruct2Code),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task PublicMethodInheritance() {
         const string code = """
@@ -598,7 +598,7 @@ public class InheritsAttributeTests {
             code,
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task MethodWithDefaultValueInheritance() {
         const string code = """
@@ -635,7 +635,7 @@ public class InheritsAttributeTests {
             code,
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task MethodWithGenericArgumentInheritance() {
         const string code = """
@@ -672,7 +672,7 @@ public class InheritsAttributeTests {
             code,
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task MethodWithGenericArgumentAndTypeConstraintsInheritance() {
         const string code = """
@@ -709,7 +709,7 @@ public class InheritsAttributeTests {
             code,
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task StringOverloadsInheritance() {
         const string code = """
@@ -790,7 +790,7 @@ public class InheritsAttributeTests {
             ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructGeneratedCode));
     }
-    
+
     [Fact]
     public async Task FixedArrayInheritance() {
         const string code = """
@@ -838,9 +838,9 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-    
-        [Fact]
-        public async Task FixedArrayByteStringInheritance() {
+
+    [Fact]
+    public async Task FixedArrayByteStringInheritance() {
         const string code = """
                             using InteropGeneratorTesting;
 
@@ -915,9 +915,9 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-        
-        [Fact]
-        public async Task FixedArrayCharStringInheritance() {
+
+    [Fact]
+    public async Task FixedArrayCharStringInheritance() {
         const string code = """
                             using InteropGeneratorTesting;
 
@@ -1449,7 +1449,7 @@ public class InheritsAttributeTests {
                                         }
                                     }
                                     """;
-        
+
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("BaseA_A.InteropGenerator.g.cs", baseA_ACode),

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 public unsafe partial struct AgentReconstructionBox {
 
-    [FieldOffset(0x50)] [FixedSizeArray] internal FixedSizeArray10<AgentItemDonationInfo> _itemDonationArray;
+    [FieldOffset(0x50)][FixedSizeArray] internal FixedSizeArray10<AgentItemDonationInfo> _itemDonationArray;
 
     [FieldOffset(0x21C)] public int LimitedTotal; // Actual Donation amount if it exceeds weekly budget
     [FieldOffset(0x220)] public int UnlimitedTotal; // Total attempted donation amount, can exceed weekly budget

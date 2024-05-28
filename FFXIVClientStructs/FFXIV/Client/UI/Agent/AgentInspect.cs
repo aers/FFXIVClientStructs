@@ -31,7 +31,7 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x170)] public Utf8String ChocoboBarding1;
     [FieldOffset(0x1D8)] public Utf8String ChocoboBarding2;
     [FieldOffset(0x240)] public Utf8String ChocoboBarding3;
-    [FieldOffset(0x2A8)] [FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
+    [FieldOffset(0x2A8)][FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
     [FieldOffset(0x4B0)] public FreeCompanyData FreeCompany;
     //Status fields
     //0: Nothing to do 1: Fetching Data; 2: Data ready (Fills window) 3: Probably failure

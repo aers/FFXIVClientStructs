@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
 
@@ -24,7 +24,7 @@ internal sealed record MethodInfo(
     }
 
     public string GetParameterTypeStringWithTrailingType() => Parameters.Any() ? string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type}")) + ", " : "";
-    
+
     public string GetParameterTypeStringForCref() => Parameters.Any() ? string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type.Replace('<', '{').Replace('>', '}')}")) : "";
 
 
@@ -34,7 +34,7 @@ internal sealed record MethodInfo(
         string.Join(", ", Parameters.Select(p => paramsToOverload.Contains(p.Name) ? $"{p.RefKind.GetParameterPrefix()}{p.Name}Ptr" : $"{p.RefKind.GetParameterPrefix()}{p.Name}"));
 
     private string GetParameterTypesAndNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type} {p.Name}"));
-    
+
     private string GetParameterTypesAndNamesStringWithDefaults() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));
 
 

@@ -10,7 +10,7 @@ public unsafe partial struct InfoProxySearchComment {
 
     [FieldOffset(0x20)] public void* Unk20;
     [FieldOffset(0x28)] public UpdateDataPacket UpdateData;
-    
+
     [FieldOffset(0x100)] public Utf8String SearchComment;
     [FieldOffset(0x168)] public Utf8String UnkString1;
     [FieldOffset(0x1D0)] public Utf8String UnkString2;

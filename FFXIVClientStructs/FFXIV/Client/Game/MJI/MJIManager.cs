@@ -48,7 +48,7 @@ public unsafe partial struct MJIManager {
     /// logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
     /// <see cref="MJI.IslandState.LandmarkIds"/> et al for what seems to be used by system logic.
     /// </remarks>
-    [FieldOffset(0x1D4)] [FixedSizeArray] internal FixedSizeArray5<MJILandmarkPlacement> _landmarkPlacements;  // ??
+    [FieldOffset(0x1D4)][FixedSizeArray] internal FixedSizeArray5<MJILandmarkPlacement> _landmarkPlacements;  // ??
 
     /// <summary>
     /// A struct representing building placements on the Island Sanctuary. Each index represents a specific building
@@ -60,8 +60,8 @@ public unsafe partial struct MJIManager {
     /// <see cref="MJI.IslandState.Granaries"/> and <see cref="MJI.IslandState.Workshops"/> for what seems to be
     /// used by system logic.
     /// </remarks>
-    [FieldOffset(0x224)] [FixedSizeArray] internal FixedSizeArray6<MJIBuildingPlacement> _buildingPlacements; 
-    
+    [FieldOffset(0x224)][FixedSizeArray] internal FixedSizeArray6<MJIBuildingPlacement> _buildingPlacements;
+
     /// <summary>
     /// A struct representing information about the cabin.
     /// </summary>
@@ -74,13 +74,13 @@ public unsafe partial struct MJIManager {
     /// <summary>
     /// A struct representing farm (garden/cropland) placements on the current Island Sanctuary.
     /// </summary>
-    [FieldOffset(0x294)] [FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _farmPlacements;
+    [FieldOffset(0x294)][FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _farmPlacements;
 
     /// <summary>
     /// A struct representing pasture placements on the current Island Sanctuary. Identical in behavior (hopefully)
     /// to that of <see cref="FarmPlacements"/>
     /// </summary>
-    [FieldOffset(0x2B8)] [FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _pasturePlacements;
+    [FieldOffset(0x2B8)][FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _pasturePlacements;
 
     [FieldOffset(0x2E0)] public ushort RequestDemandCraftId;
     [FieldOffset(0x2E4)] public int RequestDemandType; // 0 = none, 1 = everything, 2 = specific object

@@ -23,11 +23,11 @@ public unsafe partial struct AgentMJICraftSchedule {
         [FieldOffset(0x0B8)] public StdVector<Utf8String> ThemeNames;
         [FieldOffset(0x0D0)] public StdVector<CraftData> Crafts; // [i] = MJICraftworksObject row i+1
 
-        [FieldOffset(0x0E8)] [FixedSizeArray] internal FixedSizeArray32<StdVector<Pointer<CraftData>>> _unlockedObjectsPerTheme; // [i] = list of objects (filtered by level) for theme i+1
+        [FieldOffset(0x0E8)][FixedSizeArray] internal FixedSizeArray32<StdVector<Pointer<CraftData>>> _unlockedObjectsPerTheme; // [i] = list of objects (filtered by level) for theme i+1
 
         [FieldOffset(0x3E8)] public StdVector<Pointer<CraftData>> CraftsSortedByName;
 
-        [FieldOffset(0x400)] [FixedSizeArray] internal FixedSizeArray4<WorkshopData> _workshopSchedules;
+        [FieldOffset(0x400)][FixedSizeArray] internal FixedSizeArray4<WorkshopData> _workshopSchedules;
 
         [FieldOffset(0x550)] public WorkshopData CopiedSchedule;
 
@@ -36,7 +36,7 @@ public unsafe partial struct AgentMJICraftSchedule {
         [FieldOffset(0x5AC)] public int CurScheduleSettingWorkshop; // set when '+' is clicked
         [FieldOffset(0x5B0)] public int CurScheduleSettingStartingSlot; // set when '+' is clicked
 
-        [FieldOffset(0x5B8)] [FixedSizeArray] internal FixedSizeArray5<MaterialData> _curScheduleSettingMaterials;
+        [FieldOffset(0x5B8)][FixedSizeArray] internal FixedSizeArray5<MaterialData> _curScheduleSettingMaterials;
 
         [FieldOffset(0x7E8)] public byte CurScheduleSettingNumMaterials;
         [FieldOffset(0x7E9)] public byte CurScheduleSettingMaterialsInitializedMask;
@@ -105,7 +105,7 @@ public unsafe partial struct AgentMJICraftSchedule {
         [FieldOffset(0x01)] public byte NumEfficientCrafts;
         // 0x06: byte[6], [i] == i, not sure what is it's purpose
 
-        [FieldOffset(0x08)] [FixedSizeArray] internal FixedSizeArray6<EntryData> _entryData;
+        [FieldOffset(0x08)][FixedSizeArray] internal FixedSizeArray6<EntryData> _entryData;
 
         [FieldOffset(0x50)] public uint UsedTimeSlots; // bit mask
     }
@@ -130,7 +130,7 @@ public unsafe partial struct AgentMJICraftSchedule {
     [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
     [GenerateInterop]
     public unsafe partial struct MaterialAllocation {
- [FieldOffset(0x000)] [FixedSizeArray] internal FixedSizeArray3<MaterialAllocationEntry> _entries; // [0] = current cycle, [1] = current week, [2] = current + next week
+        [FieldOffset(0x000)][FixedSizeArray] internal FixedSizeArray3<MaterialAllocationEntry> _entries; // [0] = current cycle, [1] = current week, [2] = current + next week
 
         [FieldOffset(0x2A0)] public byte Cycle;
         [FieldOffset(0x2A1)] public fixed byte StartingHours[6 * 4];

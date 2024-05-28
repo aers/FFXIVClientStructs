@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using InteropGenerator.Runtime.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
@@ -16,7 +16,7 @@ internal static class IncrementalGeneratorVerifier<TIncrementalGenerator>
         const string config = """
                               build_property.InteropGenerator_InteropNamespace = InteropGeneratorTesting
                               """;
-        
+
         var test = new IncrementalGeneratorTest<TIncrementalGenerator> {
             TestState = {
                 Sources = {

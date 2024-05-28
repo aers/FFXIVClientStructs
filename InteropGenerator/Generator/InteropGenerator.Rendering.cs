@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
@@ -200,7 +200,7 @@ public sealed partial class InteropGenerator {
     private static void RenderStringOverloads(StructInfo structInfo, IndentedTextWriter writer) {
         foreach (StringOverloadInfo stringOverloadInfo in structInfo.StringOverloads) {
             // collect valid replacement targets
-            ImmutableArray<string> paramsToOverload = [..stringOverloadInfo.MethodInfo.Parameters.Where(p => p.Type == "byte*" && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
+            ImmutableArray<string> paramsToOverload = [.. stringOverloadInfo.MethodInfo.Parameters.Where(p => p.Type == "byte*" && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
 
             // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
             string paramNames = stringOverloadInfo.MethodInfo.GetStringOverloadParameterNamesString(paramsToOverload);
@@ -271,8 +271,7 @@ public sealed partial class InteropGenerator {
                             writer.WriteLine($"global::System.Text.Encoding.UTF8.GetBytes(value.AsSpan(), {fixedSizeArrayInfo.FieldName});");
                             writer.WriteLine($"{fixedSizeArrayInfo.FieldName}[{fixedSizeArrayInfo.Size - 1}] = 0;");
                         }
-                    }
-                    else if (fixedSizeArrayInfo.Type == "char") {
+                    } else if (fixedSizeArrayInfo.Type == "char") {
                         writer.WriteLine($"get => new string({fixedSizeArrayInfo.FieldName});");
                         writer.WriteLine("set");
                         using (writer.WriteBlock()) {

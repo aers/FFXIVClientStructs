@@ -30,7 +30,7 @@ public unsafe partial struct AgentMJIGatheringHouse {
     [GenerateInterop]
     public unsafe partial struct StringsData {
         [FieldOffset(0x00)] public Utf8String ConfirmText;
-        [FieldOffset(0x68)] [FixedSizeArray] internal FixedSizeArray2<Utf8String> _finishTimeText;
+        [FieldOffset(0x68)][FixedSizeArray] internal FixedSizeArray2<Utf8String> _finishTimeText;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xB8)]

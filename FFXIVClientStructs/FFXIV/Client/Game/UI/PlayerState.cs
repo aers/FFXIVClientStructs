@@ -11,7 +11,7 @@ public unsafe partial struct PlayerState {
     public static partial PlayerState* Instance();
 
     [FieldOffset(0x00)] public byte IsLoaded;
-    [FieldOffset(0x01)] [FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _characterName;
+    [FieldOffset(0x01)][FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _characterName;
     [FieldOffset(0x41)] public fixed byte PSNOnlineId[17];
     [FieldOffset(0x64)] public uint ObjectId;
     [FieldOffset(0x68)] public ulong ContentId;
@@ -160,7 +160,7 @@ public unsafe partial struct PlayerState {
     #endregion
 
     /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
-    [FieldOffset(0x6E0)] [FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData; 
+    [FieldOffset(0x6E0)][FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
 
     [FieldOffset(0x770)] public byte MentorVersion; // latest is 2
 

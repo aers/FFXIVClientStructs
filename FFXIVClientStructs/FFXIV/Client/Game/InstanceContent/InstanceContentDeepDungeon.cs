@@ -11,9 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
 public unsafe partial struct InstanceContentDeepDungeon {
-    [FieldOffset(0x1D48)] [FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
-    [FieldOffset(0x1D68)] [FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
-    [FieldOffset(0x1D98)] [FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
+    [FieldOffset(0x1D48)][FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
+    [FieldOffset(0x1D68)][FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
+    [FieldOffset(0x1D98)][FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
 
     [FieldOffset(0x1DC8)] public uint BonusLootItemId;
     [FieldOffset(0x1DCC)] public byte Floor;

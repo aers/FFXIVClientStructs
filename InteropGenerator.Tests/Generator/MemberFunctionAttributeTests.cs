@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Tests.Helpers;
+using InteropGenerator.Tests.Helpers;
 using Xunit;
 using VerifyIG = InteropGenerator.Tests.Helpers.IncrementalGeneratorVerifier<InteropGenerator.Generator.InteropGenerator>;
 
@@ -84,7 +84,7 @@ public class MemberFunctionAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetInitializerSource(string.Empty, "TestStruct", ["TestFunction"]));
     }
-    
+
     [Fact]
     public async Task GenerateMemberFunction_ExplicitOffsetMultiple() {
         const string code = """

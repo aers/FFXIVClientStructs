@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Tests.Helpers;
+using InteropGenerator.Tests.Helpers;
 using Xunit;
 using VerifyIG = InteropGenerator.Tests.Helpers.IncrementalGeneratorVerifier<InteropGenerator.Generator.InteropGenerator>;
 
@@ -46,7 +46,7 @@ public class GenerateStringOverloadsAttributeTests {
             code,
             ("TestStruct.InteropGenerator.g.cs", result));
     }
-    
+
     [Fact]
     public async Task GenerateStringOverloadsWithDefaultValue() {
         const string code = """

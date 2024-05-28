@@ -7,8 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 [StructLayout(LayoutKind.Explicit, Size = 0x63F0)]
 [GenerateInterop]
 public unsafe partial struct GroupManager {
-    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray8<PartyMember> _partyMembers;
-    [FieldOffset(0x1C80)] [FixedSizeArray] internal FixedSizeArray20<PartyMember> _allianceMembers;
+    [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray8<PartyMember> _partyMembers;
+    [FieldOffset(0x1C80)][FixedSizeArray] internal FixedSizeArray20<PartyMember> _allianceMembers;
     [FieldOffset(0x63C0)] public uint Unk_3D40;
     [FieldOffset(0x63C4)] public ushort Unk_3D44;
     [FieldOffset(0x63C8)] public long PartyId; // both seem to be unique per party and replicated to every member

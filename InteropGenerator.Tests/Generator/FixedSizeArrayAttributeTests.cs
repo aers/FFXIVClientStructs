@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Tests.Helpers;
+using InteropGenerator.Tests.Helpers;
 using Xunit;
 using VerifyIG = InteropGenerator.Tests.Helpers.IncrementalGeneratorVerifier<InteropGenerator.Generator.InteropGenerator>;
 
@@ -98,7 +98,7 @@ public class FixedSizeArrayAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetFixedSizeArraySource([10, 57]));
     }
-    
+
     [Fact]
     public async Task GenerateFixedArrayByteString() {
         const string code = """
@@ -140,8 +140,8 @@ public class FixedSizeArrayAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-    
-        [Fact]
+
+    [Fact]
     public async Task GenerateFixedArrayCharString() {
         const string code = """
                             using InteropGeneratorTesting;

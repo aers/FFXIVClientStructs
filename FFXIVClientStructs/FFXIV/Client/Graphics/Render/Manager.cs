@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [StructLayout(LayoutKind.Explicit, Size = 0x2D750)]
 [GenerateInterop]
 public unsafe partial struct Manager {
-    [FieldOffset(0x8)] [FixedSizeArray] internal FixedSizeArray32<View> _viewArray;
+    [FieldOffset(0x8)][FixedSizeArray] internal FixedSizeArray32<View> _viewArray;
 
     [FieldOffset(0x13660)] public ModelRenderer ModelRenderer;
 

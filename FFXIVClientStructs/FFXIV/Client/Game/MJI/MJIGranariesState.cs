@@ -21,7 +21,7 @@ public unsafe partial struct MJIGranaryState {
 public unsafe partial struct MJIGranariesState {
     public const int MaxGranaries = 2;
 
-    [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray2<MJIGranaryState> _granary;
+    [FieldOffset(0)][FixedSizeArray] internal FixedSizeArray2<MJIGranaryState> _granary;
     //[FieldOffset(0x90)] public void* u90; // some connection to agent
 
     [MemberFunction("E8 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 54 24")]

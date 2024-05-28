@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0xD28)]
 public unsafe partial struct AozNoteModule {
     public static AozNoteModule* Instance() => Framework.Instance()->GetUiModule()->GetAozNoteModule();
-    
+
     [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray5<ActiveSet> _activeSets;
 
     [GenerateInterop]

@@ -17,7 +17,7 @@ public unsafe partial struct Cursor {
 
     [FieldOffset(0x1B0)] public fixed ulong CursorHandles[16]; //HCURSOR (winuser.h)
 
-    [FieldOffset(0x238)] [FixedSizeArray] internal FixedSizeArray16<Pointer<byte>> _cursorNames;
+    [FieldOffset(0x238)][FixedSizeArray] internal FixedSizeArray16<Pointer<byte>> _cursorNames;
     [FieldOffset(0x2C0)] public int HardwareCursorSize;
     [FieldOffset(0x2C8)] public TextureResourceHandle* SoftwareCursorTexture;
 

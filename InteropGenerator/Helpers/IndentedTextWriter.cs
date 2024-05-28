@@ -1,4 +1,4 @@
-﻿// From the ComputeSharp project
+// From the ComputeSharp project
 // https://github.com/Sergio0694/ComputeSharp/blob/main/src/ComputeSharp.SourceGeneration/Helpers/IndentedTextWriter.cs
 // with modifications for crlf newlines
 

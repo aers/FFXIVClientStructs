@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.STD.ContainerInterface;
+using FFXIVClientStructs.STD.ContainerInterface;
 using FFXIVClientStructs.STD.Helper;
 
 namespace FFXIVClientStructs.STD;

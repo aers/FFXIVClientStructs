@@ -24,7 +24,7 @@ public partial struct PublicContentBozja {
 [StructLayout(LayoutKind.Explicit, Size = 0x1B28)]
 [GenerateInterop]
 public unsafe partial struct DynamicEventContainer {
-    [FieldOffset(0x08)] [FixedSizeArray] internal FixedSizeArray16<DynamicEvent> _events;
+    [FieldOffset(0x08)][FixedSizeArray] internal FixedSizeArray16<DynamicEvent> _events;
 }
 
 // Client::Game::InstanceContent::DynamicEvent

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 
 namespace FFXIVClientStructs.STD.ContainerInterface;

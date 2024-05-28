@@ -8,5 +8,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 public unsafe partial struct View {
     [FieldOffset(0x8)] public uint Flags;
     [FieldOffset(0x10)] public Rectangle CanvasRegion;
-    [FieldOffset(0x20)] [FixedSizeArray] internal FixedSizeArray16<SubView> _subViewArray;
+    [FieldOffset(0x20)][FixedSizeArray] internal FixedSizeArray16<SubView> _subViewArray;
 }

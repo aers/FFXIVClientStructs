@@ -1,4 +1,4 @@
-﻿namespace InteropGenerator.Runtime.Attributes;
+namespace InteropGenerator.Runtime.Attributes;
 
 /// <summary>
 ///     Interop Generator attribute marking the field as a fixed size array.

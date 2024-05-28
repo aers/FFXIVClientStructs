@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;

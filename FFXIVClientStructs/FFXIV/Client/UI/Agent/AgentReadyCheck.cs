@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 public unsafe partial struct AgentReadyCheck {
 
-    [FieldOffset(0xB0)] [FixedSizeArray] internal FixedSizeArray48<ReadyCheckEntry> _readyCheckEntries;
+    [FieldOffset(0xB0)][FixedSizeArray] internal FixedSizeArray48<ReadyCheckEntry> _readyCheckEntries;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ReadyCheckEntry {

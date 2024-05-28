@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0x3488)]
 public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureLogModule();
-    
+
     /// <remarks> Always <c>0x1F</c>, used as column terminator in <see cref="LogModule.LogMessageData"/>. </remarks>
     [FieldOffset(0x80)] internal Utf8String LogMessageDataTerminator;
     [FieldOffset(0xE8)] public UIModule* UIModule;

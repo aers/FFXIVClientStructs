@@ -6,12 +6,12 @@ public unsafe partial struct MonsterNoteManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 E9", 3)]
     public static partial MonsterNoteManager* Instance();
 
-    [FieldOffset(0x00)] [FixedSizeArray] internal FixedSizeArray12<MonsterNoteRankInfo> _rankDataArray;
+    [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray12<MonsterNoteRankInfo> _rankDataArray;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct MonsterNoteRankInfo {
-    [FieldOffset(0x00)] [FixedSizeArray] internal FixedSizeArray10<RankData> _rankDataArray;
+    [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray10<RankData> _rankDataArray;
 
     [FieldOffset(0x28)] public long Flags;
     [FieldOffset(0x30)] public int Rank;

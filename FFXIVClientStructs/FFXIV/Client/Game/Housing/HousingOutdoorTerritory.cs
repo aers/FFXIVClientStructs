@@ -17,9 +17,9 @@ public unsafe partial struct HousingOutdoorTerritory {
     [FieldOffset(0x96AA)] public sbyte EditingFixturesOfPlot;
     [FieldOffset(0x96B0)] public sbyte EditingFurnishingsOfPlot;
 
-    [FieldOffset(0x96B8)] [FixedSizeArray] internal FixedSizeArray60<PlotDetail> _plot;
+    [FieldOffset(0x96B8)][FixedSizeArray] internal FixedSizeArray60<PlotDetail> _plot;
 
-    [FieldOffset(0x9A78)] [FixedSizeArray] internal FixedSizeArray2<ApartmentBuildingState> _apartmentBuilding;
+    [FieldOffset(0x9A78)][FixedSizeArray] internal FixedSizeArray2<ApartmentBuildingState> _apartmentBuilding;
 
 }
 

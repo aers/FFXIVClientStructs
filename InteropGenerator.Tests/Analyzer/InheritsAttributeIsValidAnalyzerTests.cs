@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Diagnostics.Analyzers;
+using InteropGenerator.Diagnostics.Analyzers;
 using InteropGenerator.Tests.Helpers;
 using Xunit;
 
@@ -25,7 +25,7 @@ public class InheritsAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<InheritsAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task InheritsAttributeIsTargetingUnmarkedType_Warn() {
         const string code = """
@@ -45,7 +45,7 @@ public class InheritsAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<InheritsAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task InheritsAttributeIsTargetingMarkedTypeNoInheritsTrue_Warn() {
         const string code = """

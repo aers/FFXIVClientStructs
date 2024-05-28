@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using InteropGenerator.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -23,34 +23,34 @@ public sealed class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
                 return;
 
             context.RegisterSymbolAction(context => {
-                    if (context.Symbol is not IMethodSymbol methodSymbol)
-                        return;
+                if (context.Symbol is not IMethodSymbol methodSymbol)
+                    return;
 
-                    // check for signature attributes
-                    if (!methodSymbol.TryGetAttributeWithType(memberFunctionAttribute, out AttributeData? attributeData) &&
-                        !methodSymbol.TryGetAttributeWithType(staticAddressAttribute, out attributeData))
-                        return;
+                // check for signature attributes
+                if (!methodSymbol.TryGetAttributeWithType(memberFunctionAttribute, out AttributeData? attributeData) &&
+                    !methodSymbol.TryGetAttributeWithType(staticAddressAttribute, out attributeData))
+                    return;
 
-                    if (!attributeData.TryGetConstructorArgument(0, out string? signature))
-                        return;
+                if (!attributeData.TryGetConstructorArgument(0, out string? signature))
+                    return;
 
-                    ValidateSignatureAndReportDiagnostics(signature, attributeData.GetLocation(), context);
-                },
+                ValidateSignatureAndReportDiagnostics(signature, attributeData.GetLocation(), context);
+            },
                 SymbolKind.Method);
 
             context.RegisterSymbolAction(context => {
-                    if (context.Symbol is not INamedTypeSymbol { TypeKind: TypeKind.Struct } structSymbol)
-                        return;
+                if (context.Symbol is not INamedTypeSymbol { TypeKind: TypeKind.Struct } structSymbol)
+                    return;
 
-                    // check for signature attribute
-                    if (!structSymbol.TryGetAttributeWithType(virtualTableAttribute, out AttributeData? attributeData))
-                        return;
+                // check for signature attribute
+                if (!structSymbol.TryGetAttributeWithType(virtualTableAttribute, out AttributeData? attributeData))
+                    return;
 
-                    if (!attributeData.TryGetConstructorArgument(0, out string? signature))
-                        return;
+                if (!attributeData.TryGetConstructorArgument(0, out string? signature))
+                    return;
 
-                    ValidateSignatureAndReportDiagnostics(signature, attributeData.GetLocation(), context);
-                },
+                ValidateSignatureAndReportDiagnostics(signature, attributeData.GetLocation(), context);
+            },
                 SymbolKind.NamedType);
         });
     }

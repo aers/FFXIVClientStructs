@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true), Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AtkUnitBase {
-    [FieldOffset(0x8)] [FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+    [FieldOffset(0x8)][FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public AtkUldManager UldManager;
     [FieldOffset(0xC8)] public AtkResNode* RootNode;
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;

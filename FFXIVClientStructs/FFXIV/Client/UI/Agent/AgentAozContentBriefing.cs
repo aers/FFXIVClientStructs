@@ -40,13 +40,13 @@ public unsafe partial struct AozContentData {
     [FieldOffset(0x48)] public byte CurrentActIndex;
     [FieldOffset(0x49)] public byte CurrentEnemyIndex;
 
-    [FieldOffset(0x4A)] [FixedSizeArray] internal FixedSizeArray3<AozArrangementData> _arrangements;
+    [FieldOffset(0x4A)][FixedSizeArray] internal FixedSizeArray3<AozArrangementData> _arrangements;
 
     [FieldOffset(0x228)] public Utf8String NoviceString;
     [FieldOffset(0x290)] public Utf8String ModerateString;
     [FieldOffset(0x2F8)] public Utf8String AdvancedString;
 
-    [FieldOffset(0x360)] [FixedSizeArray] internal FixedSizeArray3<AozWeeklyReward> _weeklyRewards;
+    [FieldOffset(0x360)][FixedSizeArray] internal FixedSizeArray3<AozWeeklyReward> _weeklyRewards;
 
     [FieldOffset(0x37C)] private float _UnkFloat;
 }

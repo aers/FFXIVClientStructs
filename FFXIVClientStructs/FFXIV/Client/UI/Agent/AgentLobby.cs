@@ -27,7 +27,7 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xA48)] public ExcelSheet* LobbySheet;
     [FieldOffset(0xA50)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0xA58)] public StdDeque<TextParameter> LobbyTextParameters;
-    [FieldOffset(0xA80)] [FixedSizeArray] internal FixedSizeArray13<Utf8String> _utf8Strings;
+    [FieldOffset(0xA80)][FixedSizeArray] internal FixedSizeArray13<Utf8String> _utf8Strings;
 
     [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
     [FieldOffset(0x10E1)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
@@ -242,7 +242,7 @@ public unsafe partial struct CharaSelectCharacterList {
     [MemberFunction("E8 ?? ?? ?? ?? 66 44 89 B6")]
     public static partial void CleanupCharacters();
 
-    [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray40<CharaSelectCharacterMapping> _characterMapping;
+    [FieldOffset(0)][FixedSizeArray] internal FixedSizeArray40<CharaSelectCharacterMapping> _characterMapping;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

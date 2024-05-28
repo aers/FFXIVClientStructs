@@ -23,15 +23,15 @@ public unsafe partial struct AgentHUD {
 
     [FieldOffset(0xCB8)] public int CompanionSummonTimer;
 
-    [FieldOffset(0xCC8)] [FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMemberList;
+    [FieldOffset(0xCC8)][FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMemberList;
 
     [FieldOffset(0x12B8)] public short PartyMemberCount;
     [FieldOffset(0x12C0)] public uint PartyTitleAddonId;
     [FieldOffset(0x12C4)] public fixed uint RaidMemberIds[40];
     [FieldOffset(0x1364)] public int RaidGroupSize;
 
-    [FieldOffset(0x1378)] [FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmityEntries;
-    [FieldOffset(0x13F0)] [FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
+    [FieldOffset(0x1378)][FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmityEntries;
+    [FieldOffset(0x13F0)][FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
 
     [FieldOffset(0x4808)] public StdVector<MapMarkerData> MapMarkers;
     [FieldOffset(0x4820)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;

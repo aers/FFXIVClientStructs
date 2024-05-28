@@ -64,7 +64,7 @@ public unsafe partial struct TargetSystem {
 [GenerateInterop]
 public unsafe partial struct GameObjectArray {
     [FieldOffset(0x00)] public int Length;
-    [FieldOffset(0x08)] [FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects;
+    [FieldOffset(0x08)][FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects;
 
     public GameObject* this[int index] {
         get {

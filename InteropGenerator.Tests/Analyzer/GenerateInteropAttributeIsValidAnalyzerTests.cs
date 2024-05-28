@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Diagnostics.Analyzers;
+using InteropGenerator.Diagnostics.Analyzers;
 using InteropGenerator.Tests.Helpers;
 using Xunit;
 
@@ -122,7 +122,7 @@ public class GenerateInteropAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<GenerateInteropAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetStructMustHaveExplicitLayoutIfInherited_Warn() {
         const string code = """

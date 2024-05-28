@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.STD;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.StdContainerTester;
 

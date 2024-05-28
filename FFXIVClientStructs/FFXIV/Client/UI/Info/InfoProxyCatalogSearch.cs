@@ -10,7 +10,7 @@ public unsafe partial struct InfoProxyCatalogSearch {
 
     [FieldOffset(0x028)] public Utf8String Query;
     //These seem to be only used when non partial matching
-    [FieldOffset(0x90)] [FixedSizeArray] internal FixedSizeArray20<Entry> _entries;
+    [FieldOffset(0x90)][FixedSizeArray] internal FixedSizeArray20<Entry> _entries;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Entry {

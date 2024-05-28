@@ -35,7 +35,7 @@ public unsafe partial struct RecommendEquipModule {
     [FieldOffset(0x7C)] public byte ClassJob;
     [FieldOffset(0x7D)] public byte GrandCompany;
     [FieldOffset(0x7E)] public byte PvpRank;
-    
+
     [MemberFunction("41 54 41 55 41 56 41 57 48 83 EC 28 80 39 00")]
     public partial bool Setup(byte race, byte sex, ushort level, byte classJob, byte grandCompany, byte pvpRank);
 

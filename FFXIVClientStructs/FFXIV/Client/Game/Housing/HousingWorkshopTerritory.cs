@@ -12,20 +12,20 @@ public unsafe partial struct HousingWorkshopTerritory {
 [StructLayout(LayoutKind.Explicit, Size = 0x28F8)]
 [GenerateInterop]
 public unsafe partial struct HousingWorkshopAirshipData {
-    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray4<HousingWorkshopAirshipSubData> _dataList; 
+    [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray4<HousingWorkshopAirshipSubData> _dataList;
 
     [FieldOffset(0x770)] public byte ActiveAirshipId; // 0-3, 255 if none
     [FieldOffset(0x771)] public byte AirshipCount;
 
-    [FieldOffset(0x778)] [FixedSizeArray] internal FixedSizeArray82<Utf8String> _airshipLogList;
+    [FieldOffset(0x778)][FixedSizeArray] internal FixedSizeArray82<Utf8String> _airshipLogList;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8F40)]
 [GenerateInterop]
 public unsafe partial struct HousingWorkshopSubmersibleData {
-    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray4<HousingWorkshopSubmersibleSubData> _dataList;
+    [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray4<HousingWorkshopSubmersibleSubData> _dataList;
 
-    [FieldOffset(0x8C80)] [FixedSizeArray] internal FixedSizeArray5<Pointer<HousingWorkshopSubmersibleSubData>> _dataPointerList;
+    [FieldOffset(0x8C80)][FixedSizeArray] internal FixedSizeArray5<Pointer<HousingWorkshopSubmersibleSubData>> _dataPointerList;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
@@ -50,7 +50,7 @@ public unsafe partial struct HousingWorkshopAirshipSubData {
 
     [FieldOffset(0x37)] public fixed byte Name[20];
 
-    [FieldOffset(0x54)] [FixedSizeArray] internal FixedSizeArray5<HousingWorkshopAirshipGathered> _gatheredData;
+    [FieldOffset(0x54)][FixedSizeArray] internal FixedSizeArray5<HousingWorkshopAirshipGathered> _gatheredData;
 
     /// <summary>
     /// Points to <see cref="HousingWorkshopAirshipData.AirshipLogList"/>
@@ -118,10 +118,10 @@ public unsafe partial struct HousingWorkshopSubmersibleSubData {
     [FieldOffset(0x60)] public SubmarineRating SubmarineRating;
     [FieldOffset(0x62)] public ushort LogSpeed;
 
-    [FieldOffset(0x64)] [FixedSizeArray] internal FixedSizeArray5<HousingWorkshopSubmarineGathered> _gatheredData;
+    [FieldOffset(0x64)][FixedSizeArray] internal FixedSizeArray5<HousingWorkshopSubmarineGathered> _gatheredData;
 
-    [FieldOffset(0x1B0)] [FixedSizeArray] internal FixedSizeArray82<Utf8String> _logList; 
-    
+    [FieldOffset(0x1B0)][FixedSizeArray] internal FixedSizeArray82<Utf8String> _logList;
+
     /// <summary>Gets the registered time as a <see cref="DateTime"/> object</summary>
     public DateTime GetRegisterTime() => DateTime.UnixEpoch.AddSeconds(RegisterTime);
 

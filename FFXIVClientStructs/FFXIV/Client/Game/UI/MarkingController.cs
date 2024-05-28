@@ -13,7 +13,7 @@ public unsafe partial struct MarkingController {
     [FieldOffset(0x98)] public fixed uint LetterMarkerArray[26]; //26 * ObjectId
     [FieldOffset(0x100)] public fixed long MarkerTimeArray[17]; //(1000 * QueryPerformanceCounter / QueryPerformanceFrequency)
 
-    [FieldOffset(0x1E0)] [FixedSizeArray] internal FixedSizeArray8<FieldMarker> _fieldMarkerArray;
+    [FieldOffset(0x1E0)][FixedSizeArray] internal FixedSizeArray8<FieldMarker> _fieldMarkerArray;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

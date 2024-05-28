@@ -35,7 +35,7 @@ public unsafe partial struct InfoProxyCircle {
     [FieldOffset(0x06F0)] public Utf8String UnkString06F0;
     [FieldOffset(0x0758)] public Utf8String UnkString0758;
 
-    [FieldOffset(0x0A98)] [FixedSizeArray] internal FixedSizeArray100<Unk1> _unk1Arr;
+    [FieldOffset(0x0A98)][FixedSizeArray] internal FixedSizeArray100<Unk1> _unk1Arr;
 
     [FieldOffset(0x6850), CExportIgnore] public void* UnkObj6850;
     [FieldOffset(0x6878)] public Utf8String UnkString6878;

@@ -12,7 +12,7 @@ public unsafe partial struct AddonGoldSaucerInfo {
     [FieldOffset(0x230)] public AtkAddonControl AddonControl;
 
     [FieldOffset(0x2A0), FixedSizeArray] internal FixedSizeArray6<Pointer<AtkComponentRadioButton>> _categoryRadioButtons; // General/Chocobo/CardList/CardDecks/Verminion/Mahjong
-    
+
     [FieldOffset(0x2D0), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentRadioButton>> _chocoboRadioButtons; // Parameters/Pedigree/Appearance
 
     [FieldOffset(0x2E8)] public AtkCollisionNode* ContentsSection;

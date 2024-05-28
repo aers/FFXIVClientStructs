@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.STD;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.StdContainerTester;
 
@@ -64,7 +64,7 @@ public static class VectorTester {
         Console.WriteLine("index: " + vecvec.AsSpan()[0].BinarySearch(127));
         vecvec.Dump();
     }
-    
+
     public static StdVector<T> NewRandomVector<T>(long length, Func<long, T> valueGenerator)
         where T : unmanaged {
         var vec = new StdVector<T>();
@@ -74,7 +74,7 @@ public static class VectorTester {
         return vec;
     }
 
-    public static unsafe int Compare<T>(in StdVector<T> l, in StdVector<T> r) where T :unmanaged {
+    public static unsafe int Compare<T>(in StdVector<T> l, in StdVector<T> r) where T : unmanaged {
         var lv = l.First;
         var rv = r.First;
         while (lv < l.Last && rv < r.Last) {

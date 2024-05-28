@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Tests.Helpers;
+using InteropGenerator.Tests.Helpers;
 using Xunit;
 using VerifyIG = InteropGenerator.Tests.Helpers.IncrementalGeneratorVerifier<InteropGenerator.Generator.InteropGenerator>;
 
@@ -44,7 +44,7 @@ public class StaticAddressAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetInitializerSource(string.Empty, "TestStruct", ["Instance"]));
     }
-    
+
     [Fact]
     public async Task GenerateStaticAddress_MultipleOffsets() {
         const string code = """

@@ -10,11 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x008)] public Character* Parent;
 
-    [FieldOffset(0x010)] [FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData; 
+    [FieldOffset(0x010)][FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
 
     [UnscopedRef]
     public ref DrawObjectData Weapon(WeaponSlot which) {
-        return ref WeaponData[(int) which];
+        return ref WeaponData[(int)which];
     }
 
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x00)] public EquipmentModelId Head;

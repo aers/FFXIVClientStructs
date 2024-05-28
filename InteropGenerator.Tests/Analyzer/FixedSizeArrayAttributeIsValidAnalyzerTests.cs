@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Diagnostics.Analyzers;
+using InteropGenerator.Diagnostics.Analyzers;
 using InteropGenerator.Tests.Helpers;
 using Xunit;
 
@@ -92,7 +92,7 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task FixedSizeArrayAttributeImproperFieldName_Warn() {
         const string code = """
@@ -114,7 +114,7 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task FixedSizeArrayAttributeByteStringIsValid_NoWarn() {
         const string code = """
@@ -136,7 +136,7 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task FixedSizeArrayAttributeCharStringIsValid_NoWarn() {
         const string code = """
@@ -158,7 +158,7 @@ public class FixedSizeArrayAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<FixedSizeArrayAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task FixedSizeArrayAttributeStringTypeIsInvalid_Warn() {
         const string code = """

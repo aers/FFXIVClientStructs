@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.STD.Helper;
 
@@ -31,7 +31,7 @@ public partial interface IStdRandomElementReadable<T> {
     void ICollection<T>.Add(T item) => throw new NotSupportedException();
 
     void ICollection<T>.Clear() => throw new NotSupportedException();
-    
+
     void ICollection.CopyTo(Array array, int index) {
         if (array is not T[] typedArray)
             throw new ArgumentException(null, nameof(array));
@@ -70,7 +70,7 @@ public partial interface IStdRandomElementReadable<T> {
     int IList.IndexOf(object? value) => value is T typedValue ? IndexOf(typedValue) : -1;
 
     int IList<T>.IndexOf(T item) => IndexOf(item);
-    
+
     void IList.Insert(int index, object? value) => throw new NotSupportedException();
 
     void IList.Remove(object? value) => throw new NotSupportedException();

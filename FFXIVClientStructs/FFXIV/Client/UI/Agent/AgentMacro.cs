@@ -33,7 +33,7 @@ public unsafe partial struct AgentMacro {
     [FieldOffset(0xBD0)] public StdVector<TextCommandEntry> TextCommands;
     [FieldOffset(0xBE8)] public int FocusedTextCommandIndex;
 
-    [FieldOffset(0xBF0)] [FixedSizeArray] internal FixedSizeArray17<MacroHistoryEvent> _changeHistory;
+    [FieldOffset(0xBF0)][FixedSizeArray] internal FixedSizeArray17<MacroHistoryEvent> _changeHistory;
     [FieldOffset(0xEB10)] public int CurrentHistoryIndex;
 
     /// <summary>

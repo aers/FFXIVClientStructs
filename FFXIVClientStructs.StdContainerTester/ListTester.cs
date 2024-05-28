@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.STD;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.StdContainerTester;
 
@@ -28,7 +28,7 @@ public static class ListTester {
 
             list.AddLastCopy(list.First.Value->Value);
             list.AddLastMove(ref list.First.Value->Next->Value);
-            
+
             Console.WriteLine(string.Join(", ", list.ToArray().Select(x => x.ToString())));
         }
     }

@@ -40,8 +40,8 @@ public unsafe partial struct RecipeNote {
     [StructLayout(LayoutKind.Explicit, Size = 0x500)]
     [GenerateInterop]
     public unsafe partial struct RecipeEntry {
-        [FieldOffset(0x00)] [FixedSizeArray] internal FixedSizeArray8<RecipeIngredient> _ingredients;
-        [FieldOffset(0x440)] [FixedSizeArray] internal FixedSizeArray2<RecipeCrystal> _crystals;
+        [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray8<RecipeIngredient> _ingredients;
+        [FieldOffset(0x440)][FixedSizeArray] internal FixedSizeArray2<RecipeCrystal> _crystals;
         [FieldOffset(0x448)] public Utf8String ItemName;
         [FieldOffset(0x4B0)] public uint IconId;
         [FieldOffset(0x4B4)] public uint ItemId;

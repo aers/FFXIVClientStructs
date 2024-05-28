@@ -22,7 +22,7 @@ public unsafe partial struct InfoProxyFreeCompany {
     [FieldOffset(0x138)] public byte ActiveListItemNum; //0=Topics, 1 = Members, ....
     [FieldOffset(0x139)] public byte MemberTabIndex;
     [FieldOffset(0x13E)] public byte InfoTabIndex;
-    [FieldOffset(0x178)] [FixedSizeArray] internal FixedSizeArray14<RankData> _rankArray;
+    [FieldOffset(0x178)][FixedSizeArray] internal FixedSizeArray14<RankData> _rankArray;
     //668 after
 
 

@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.STD.Helper;
+namespace FFXIVClientStructs.STD.Helper;
 
 public class PairKeyExtractor<TKey, TValue> : IStaticKeyExtractor<StdPair<TKey, TValue>, TKey>
     where TKey : unmanaged

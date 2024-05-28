@@ -1,4 +1,4 @@
-﻿namespace InteropGenerator.Models;
+namespace InteropGenerator.Models;
 
 internal sealed record MemberFunctionInfo(
     MethodInfo MethodInfo,

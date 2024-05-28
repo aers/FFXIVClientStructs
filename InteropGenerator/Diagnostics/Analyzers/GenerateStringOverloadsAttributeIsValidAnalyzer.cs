@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using InteropGenerator.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -22,38 +22,38 @@ public sealed class GenerateStringOverloadsAttributeIsValidAnalyzer : Diagnostic
                 return;
 
             context.RegisterSymbolAction(context => {
-                    if (context.Symbol is not IMethodSymbol methodSymbol)
-                        return;
+                if (context.Symbol is not IMethodSymbol methodSymbol)
+                    return;
 
-                    if (!methodSymbol.HasAttributeWithType(generateStringOverloadsAttribute))
-                        return;
+                if (!methodSymbol.HasAttributeWithType(generateStringOverloadsAttribute))
+                    return;
 
-                    var hasValidParameter = false;
+                var hasValidParameter = false;
 
-                    foreach (IParameterSymbol parameterSymbol in methodSymbol.Parameters) {
-                        bool hasStringIgnore = parameterSymbol.HasAttributeWithType(stringIgnoreAttribute);
-                        if (parameterSymbol.Type is not IPointerTypeSymbol { PointedAtType.SpecialType: SpecialType.System_Byte }) {
-                            if (hasStringIgnore) {
-                                context.ReportDiagnostic(Diagnostic.Create(
-                                    StringIgnoreMustTargetValidParameter,
-                                    parameterSymbol.Locations.FirstOrDefault(),
-                                    parameterSymbol.Name,
-                                    parameterSymbol.Type.ToDisplayString()));
-                            }
-                        } else {
-                            if (!hasStringIgnore)
-                                hasValidParameter = true;
+                foreach (IParameterSymbol parameterSymbol in methodSymbol.Parameters) {
+                    bool hasStringIgnore = parameterSymbol.HasAttributeWithType(stringIgnoreAttribute);
+                    if (parameterSymbol.Type is not IPointerTypeSymbol { PointedAtType.SpecialType: SpecialType.System_Byte }) {
+                        if (hasStringIgnore) {
+                            context.ReportDiagnostic(Diagnostic.Create(
+                                StringIgnoreMustTargetValidParameter,
+                                parameterSymbol.Locations.FirstOrDefault(),
+                                parameterSymbol.Name,
+                                parameterSymbol.Type.ToDisplayString()));
                         }
+                    } else {
+                        if (!hasStringIgnore)
+                            hasValidParameter = true;
                     }
-                    
-                    
-                    if (!hasValidParameter) {
-                        context.ReportDiagnostic(Diagnostic.Create(
-                            GenerateStringOverloadsMethodMustHaveValidParameter,
-                            methodSymbol.Locations.FirstOrDefault(),
-                            methodSymbol.Name));
-                    }
-                },
+                }
+
+
+                if (!hasValidParameter) {
+                    context.ReportDiagnostic(Diagnostic.Create(
+                        GenerateStringOverloadsMethodMustHaveValidParameter,
+                        methodSymbol.Locations.FirstOrDefault(),
+                        methodSymbol.Name));
+                }
+            },
                 SymbolKind.Method);
         });
     }

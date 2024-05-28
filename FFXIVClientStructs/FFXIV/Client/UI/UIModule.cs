@@ -19,7 +19,7 @@ public unsafe partial struct UIModule {
 
     [FieldOffset(0x8)] public void** AtkModuleEvent;
     [FieldOffset(0x10)] public void** ExcelLanguageEvent;
-    
+
     [FieldOffset(0x3B0), FixedSizeArray] internal FixedSizeArray19<RaptureAtkHistory> _atkHistory;
     [FieldOffset(0x7D8)] public int LinkshellCycle;
     [FieldOffset(0x7DC)] public int CrossWorldLinkshellCycle;

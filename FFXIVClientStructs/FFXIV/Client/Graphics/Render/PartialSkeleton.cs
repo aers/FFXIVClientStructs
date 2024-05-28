@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 [GenerateInterop]
 public unsafe partial struct PartialSkeleton {
-    [FieldOffset(0x20)] [FixedSizeArray] internal FixedSizeArray2<hkaSampleBlendJob> _jobs;
+    [FieldOffset(0x20)][FixedSizeArray] internal FixedSizeArray2<hkaSampleBlendJob> _jobs;
     [FieldOffset(0x120)] public short ConnectedParentBoneIndex;
     [FieldOffset(0x122)] public short ConnectedBoneIndex;
     [FieldOffset(0x130)] public fixed ulong HavokAnimatedSkeleton[2];

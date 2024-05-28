@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
@@ -40,8 +40,7 @@ public sealed partial class InteropGenerator {
                 if (virtualTableAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
                     virtualTableAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets)) {
                     virtualTableSignatureInfo = new SignatureInfo(signature, multipleOffsets.Value);
-                }
-                else if (virtualTableAttribute.TryGetConstructorArgument(1, out byte? singleOffset)) {
+                } else if (virtualTableAttribute.TryGetConstructorArgument(1, out byte? singleOffset)) {
                     ImmutableArray<byte> values = [singleOffset.Value];
                     virtualTableSignatureInfo = new SignatureInfo(signature, values);
                 }
@@ -110,7 +109,7 @@ public sealed partial class InteropGenerator {
         using ImmutableArrayBuilder<VirtualFunctionInfo> virtualFunctionBuilder = new();
         using ImmutableArrayBuilder<StaticAddressInfo> staticAddressesBuilder = new();
         using ImmutableArrayBuilder<StringOverloadInfo> stringOverloadsBuilder = new();
-        using ImmutableArrayBuilder<MethodInfo> extraPublicMethodsBuilder = new(); 
+        using ImmutableArrayBuilder<MethodInfo> extraPublicMethodsBuilder = new();
 
         foreach (IMethodSymbol methodSymbol in structSymbol.GetMembers().OfType<IMethodSymbol>()) {
             MethodInfo? methodInfo = null;
@@ -122,7 +121,7 @@ public sealed partial class InteropGenerator {
                 // get signature 
                 if (!mfAttribute.TryGetConstructorArgument(0, out string? signature))
                     continue;
-                
+
                 // if attribute has two arguments, it's either a single byte or an array, if neither, attribute is invalid
                 if (mfAttribute.ConstructorArguments.Length == 2) {
                     if (mfAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
@@ -162,13 +161,11 @@ public sealed partial class InteropGenerator {
                     continue; // ignore malformed attribute
 
                 ImmutableArray<byte> relativeOffsets;
-                
+
                 if (saAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
-                    saAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets))
-                {
+                    saAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets)) {
                     relativeOffsets = multipleOffsets.Value;
-                }
-                else if (saAttribute.TryGetConstructorArgument(1, out byte? singleOffset)) {
+                } else if (saAttribute.TryGetConstructorArgument(1, out byte? singleOffset)) {
                     relativeOffsets = [singleOffset.Value];
                 } else {
                     continue;
@@ -186,7 +183,7 @@ public sealed partial class InteropGenerator {
             } else if (isInherited && methodSymbol.DeclaredAccessibility == Accessibility.Public && !methodSymbol.IsStatic) {
                 if (!TryParseMethod(methodSymbol, token, out methodInfo))
                     continue;
-                
+
                 extraPublicMethodsBuilder.Add(methodInfo);
             }
 
@@ -235,7 +232,7 @@ public sealed partial class InteropGenerator {
             ImmutableArray<SymbolDisplayPart> symbolDisplayParts = methodSymbol.ToDisplayParts(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints));
             constraints = string.Join("", symbolDisplayParts[1..]);
         }
-        
+
         methodInfo =
             new MethodInfo(
                 methodSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),

@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
 using Microsoft.CodeAnalysis;
@@ -23,8 +23,8 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
                 .Where(static si => si is not null)!;
 
         context.RegisterSourceOutput(structInfos,
-            static (sourceContext, item) => { 
-                if (item.NeedsRender()) 
+            static (sourceContext, item) => {
+                if (item.NeedsRender())
                     sourceContext.AddSource($"{item.FullyQualifiedMetadataName}.InteropGenerator.g.cs", RenderStructInfo(item, sourceContext.CancellationToken));
             });
 
@@ -66,7 +66,7 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
             return new GeneratorOptions(
                 interopNamespace);
         });
-        
+
         // group structs with addresses to output resolver code
         IncrementalValueProvider<ImmutableArray<StructInfo>> structInfosWithAddresses = structInfos.Where(static sI => sI.HasSignatures()).Collect();
 

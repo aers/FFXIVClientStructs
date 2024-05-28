@@ -14,7 +14,7 @@ public unsafe partial struct AgentRetainerList {
     [FieldOffset(0x30)] public uint RetainerListOpenedTime;
     [FieldOffset(0x34)] public uint RetainerListSortAddonId;
     [FieldOffset(0x48)] public byte RetainerCount;
-    [FieldOffset(0x50)] [FixedSizeArray] internal FixedSizeArray10<Retainer> _retainers;
+    [FieldOffset(0x50)][FixedSizeArray] internal FixedSizeArray10<Retainer> _retainers;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct Retainer {

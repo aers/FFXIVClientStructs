@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Runtime.InteropServices;
 using InteropGenerator.Extensions;
 using Microsoft.CodeAnalysis;
@@ -24,71 +24,71 @@ public sealed class GenerateInteropAttributeIsValidAnalyzer : DiagnosticAnalyzer
                 return;
 
             context.RegisterSymbolAction(context => {
-                    if (context.Symbol is not INamedTypeSymbol { TypeKind: TypeKind.Struct } typeSymbol)
-                        return;
+                if (context.Symbol is not INamedTypeSymbol { TypeKind: TypeKind.Struct } typeSymbol)
+                    return;
 
-                    // check for attribute on the type
-                    if (!typeSymbol.TryGetAttributeWithType(generateAttribute, out AttributeData? generateAttributeData))
-                        return;
+                // check for attribute on the type
+                if (!typeSymbol.TryGetAttributeWithType(generateAttribute, out AttributeData? generateAttributeData))
+                    return;
 
-                    // get first syntax of symbol; since all need to be partial we can rely on the compiler to check any extras
-                    if (!typeSymbol.TryGetSyntaxNode(context.CancellationToken, out StructDeclarationSyntax? structSyntax)) return;
-                    
-                    // check for StructLayoutAttribute if type has fields or is inherited
-                    if (typeSymbol.GetMembers().OfType<IFieldSymbol>().Any() ||
-                        (generateAttributeData.TryGetConstructorArgument(0, out bool? isInherited) && isInherited.Value == true)) {
-                        if (!typeSymbol.TryGetAttributeWithType(structLayoutAttribute, out AttributeData? structLayoutAttributeData)) {
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                GenerationTargetMustUseStructLayoutAttribute,
-                                structSyntax.Identifier.GetLocation(),
-                                typeSymbol.Name));
-                        } else {
-                            // can't use TryGetConstructorArgument on non-builtin types
-                            if (structLayoutAttributeData.ConstructorArguments.Length >= 1 &&
-                                !structLayoutAttributeData.ConstructorArguments[0].IsNull &&
-                                (LayoutKind)structLayoutAttributeData.ConstructorArguments[0].Value! != LayoutKind.Explicit) {
-                                context.ReportDiagnostic(Diagnostic.Create(
-                                    GenerationTargetMustUseLayoutKindExplicit,
-                                    structLayoutAttributeData.GetLocation(),
-                                    typeSymbol.Name));
-                            }
-                            if (!structLayoutAttributeData.TryGetNamedArgument("Size", out int? _)) {
-                                context.ReportDiagnostic(Diagnostic.Create(
-                                    GenerationTargetMustHaveExplicitSize,
-                                    structLayoutAttributeData.GetLocation(),
-                                    typeSymbol.Name));
-                            }
-                        }
-                    }
+                // get first syntax of symbol; since all need to be partial we can rely on the compiler to check any extras
+                if (!typeSymbol.TryGetSyntaxNode(context.CancellationToken, out StructDeclarationSyntax? structSyntax)) return;
 
-                    // check struct itself
-                    if (!structSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
+                // check for StructLayoutAttribute if type has fields or is inherited
+                if (typeSymbol.GetMembers().OfType<IFieldSymbol>().Any() ||
+                    (generateAttributeData.TryGetConstructorArgument(0, out bool? isInherited) && isInherited.Value == true)) {
+                    if (!typeSymbol.TryGetAttributeWithType(structLayoutAttribute, out AttributeData? structLayoutAttributeData)) {
                         context.ReportDiagnostic(Diagnostic.Create(
-                            GenerationRequiresPartialStruct,
+                            GenerationTargetMustUseStructLayoutAttribute,
                             structSyntax.Identifier.GetLocation(),
                             typeSymbol.Name));
-                    }
-                    // check any parents
-                    SyntaxNode? parentNode = structSyntax.Parent;
-                    while (parentNode is not null) {
-                        if (parentNode is ClassDeclarationSyntax classSyntax) {
+                    } else {
+                        // can't use TryGetConstructorArgument on non-builtin types
+                        if (structLayoutAttributeData.ConstructorArguments.Length >= 1 &&
+                            !structLayoutAttributeData.ConstructorArguments[0].IsNull &&
+                            (LayoutKind)structLayoutAttributeData.ConstructorArguments[0].Value! != LayoutKind.Explicit) {
                             context.ReportDiagnostic(Diagnostic.Create(
-                                NestedStructCannotBeContainedInClass,
-                                classSyntax.Identifier.GetLocation(),
-                                typeSymbol.Name,
-                                classSyntax.Identifier));
-                        } else if (parentNode is StructDeclarationSyntax parentSyntax) {
-                            if (!parentSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
-                                context.ReportDiagnostic(Diagnostic.Create(
-                                    NestedStructMustBeContainedInPartialStruct,
-                                    parentSyntax.Identifier.GetLocation(),
-                                    parentSyntax.Identifier,
-                                    typeSymbol.Name));
-                            }
+                                GenerationTargetMustUseLayoutKindExplicit,
+                                structLayoutAttributeData.GetLocation(),
+                                typeSymbol.Name));
                         }
-                        parentNode = parentNode.Parent;
+                        if (!structLayoutAttributeData.TryGetNamedArgument("Size", out int? _)) {
+                            context.ReportDiagnostic(Diagnostic.Create(
+                                GenerationTargetMustHaveExplicitSize,
+                                structLayoutAttributeData.GetLocation(),
+                                typeSymbol.Name));
+                        }
                     }
-                },
+                }
+
+                // check struct itself
+                if (!structSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
+                    context.ReportDiagnostic(Diagnostic.Create(
+                        GenerationRequiresPartialStruct,
+                        structSyntax.Identifier.GetLocation(),
+                        typeSymbol.Name));
+                }
+                // check any parents
+                SyntaxNode? parentNode = structSyntax.Parent;
+                while (parentNode is not null) {
+                    if (parentNode is ClassDeclarationSyntax classSyntax) {
+                        context.ReportDiagnostic(Diagnostic.Create(
+                            NestedStructCannotBeContainedInClass,
+                            classSyntax.Identifier.GetLocation(),
+                            typeSymbol.Name,
+                            classSyntax.Identifier));
+                    } else if (parentNode is StructDeclarationSyntax parentSyntax) {
+                        if (!parentSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
+                            context.ReportDiagnostic(Diagnostic.Create(
+                                NestedStructMustBeContainedInPartialStruct,
+                                parentSyntax.Identifier.GetLocation(),
+                                parentSyntax.Identifier,
+                                typeSymbol.Name));
+                        }
+                    }
+                    parentNode = parentNode.Parent;
+                }
+            },
                 SymbolKind.NamedType);
         });
     }

@@ -5,5 +5,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
 [GenerateInterop]
 public unsafe partial struct OffscreenRenderingManager {
-    [FieldOffset(0xC8)] [FixedSizeArray] internal FixedSizeArray4<Pointer<Camera>> _cameras;
+    [FieldOffset(0xC8)][FixedSizeArray] internal FixedSizeArray4<Pointer<Camera>> _cameras;
 }

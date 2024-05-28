@@ -196,8 +196,7 @@ public sealed partial class Resolver {
                     if (count == length) {
                         var outLocation = location;
 
-                        foreach(var relOffset in address.RelativeFollowOffsets)
-                        {
+                        foreach (var relOffset in address.RelativeFollowOffsets) {
                             var relativeOffset =
                                 BitConverter.ToInt32(targetSpan.Slice(outLocation + relOffset, 4));
                             outLocation = outLocation + relOffset + 4 + relativeOffset;
@@ -219,7 +218,7 @@ public sealed partial class Resolver {
                 }
             }
         }
-    outLoop: ;
+outLoop:;
 
         SaveCache();
         _hasResolved = true;

@@ -45,7 +45,7 @@ public unsafe partial struct AgentBannerInterface {
 
         public const int NumCharacters = 8;
 
-        [FieldOffset(0x20)] [FixedSizeArray] internal FixedSizeArray8<CharacterData> _characterArray;
+        [FieldOffset(0x20)][FixedSizeArray] internal FixedSizeArray8<CharacterData> _characterArray;
 
         [FieldOffset(0x3B20)] public long Unk3;
         [FieldOffset(0x3B28)] public long Unk4;

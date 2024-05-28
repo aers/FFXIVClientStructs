@@ -6,10 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 [StructLayout(LayoutKind.Explicit, Size = 0x900)]
 [GenerateInterop]
 public unsafe partial struct GameVersion {
-    [FieldOffset(0x00)] [FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _baseVersion;
+    [FieldOffset(0x00)][FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _baseVersion;
     // Big unused gap between base and expansions
     // TODO: make this not an array of arrays
-    [FieldOffset(0xE0)] [FixedSizeArray] internal FixedSizeArray320<byte> _expansionVersion; 
+    [FieldOffset(0xE0)][FixedSizeArray] internal FixedSizeArray320<byte> _expansionVersion;
 
     public string Base => this[0];
     public string Heavensward => this[1];

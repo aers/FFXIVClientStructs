@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.STD;
+using FFXIVClientStructs.STD;
 
 namespace FFXIVClientStructs.StdContainerTester;
 
@@ -24,7 +24,7 @@ public static class StringTester {
         }
         test1.Remove((byte)'x');
         Console.WriteLine(test1);
-        
+
         off = test1.LongCount;
         while (true) {
             off = test1.LongLastIndexOf((byte)'d', off - 1);
@@ -34,10 +34,10 @@ public static class StringTester {
         }
         test1.Remove((byte)'y');
         Console.WriteLine(test1);
-        
+
         test1.InsertString(3, "AAAAAAA");
         Console.WriteLine(test1);
-        
+
         test1.RemoveAll(x => (char)x is 'x' or 'y');
         test1.AddCopy((byte)'_');
         Console.WriteLine(test1);
@@ -45,14 +45,14 @@ public static class StringTester {
         test1.Clear();
         test1.AddString("テスト");
         Console.WriteLine(test1);
-        
+
         test1.TrimExcess();
         test1.AddString("테스트");
         Console.WriteLine(test1);
-        
+
         test1.AddString("氣気气");
         Console.WriteLine(test1);
-        
+
         test1.InsertString(4, "test");
         test1.InsertString(test1.LongCount - 4, "test");
         Console.WriteLine(test1);

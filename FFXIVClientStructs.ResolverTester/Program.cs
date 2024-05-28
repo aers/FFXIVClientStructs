@@ -18,7 +18,7 @@ reader.GetSectionData(dataHeader.Name).GetContent().CopyTo(relocFile.Slice(dataH
 unsafe {
     fixed (byte* bytes = relocFile) {
         FFXIVClientStructs.Interop.Generated.Addresses.Initialize();
-        
+
         var totalSigCount = Resolver.GetInstance.Addresses.Count;
         Console.WriteLine($"Unresolved count: {totalSigCount}");
 

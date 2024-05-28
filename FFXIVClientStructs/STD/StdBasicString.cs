@@ -153,10 +153,10 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
 
     /// <inheritdoc/>
     public readonly StdSpan<T> AsStdSpan() => AsStdSpan(0, LongCount);
-    
+
     /// <inheritdoc/>
     public readonly StdSpan<T> AsStdSpan(long index) => AsStdSpan(index, LongCount - index);
-    
+
     /// <inheritdoc/>
     public readonly StdSpan<T> AsStdSpan(long index, long count) =>
       new(First + index, CheckedRangeCount(index, count));
@@ -185,10 +185,10 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
 
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.BinarySearch(in this, 0, LongCount, item, null);
-    
+
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item, IComparer<T>? comparer) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.BinarySearch(in this, 0, LongCount, item, comparer);
-    
+
     /// <inheritdoc/>
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => LookupHelper<T, StdBasicString<T, TEncoding, TMemorySpace>>.BinarySearch(in this, index, count, item, comparer);
 
@@ -315,7 +315,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
 
     /// <inheritdoc cref="IEnumerable{T}.GetEnumerator"/>
     readonly IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
-    
+
     /// <inheritdoc cref="IEnumerable.GetEnumerator"/>
     readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

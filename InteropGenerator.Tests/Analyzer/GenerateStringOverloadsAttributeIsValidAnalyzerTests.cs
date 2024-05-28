@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Diagnostics.Analyzers;
+using InteropGenerator.Diagnostics.Analyzers;
 using InteropGenerator.Tests.Helpers;
 using Xunit;
 

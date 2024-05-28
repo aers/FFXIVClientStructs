@@ -5,7 +5,7 @@ public interface ICreatable {
 }
 
 // Client::System::Memory::IMemorySpace
-[StructLayout(LayoutKind.Explicit, Size=8)]
+[StructLayout(LayoutKind.Explicit, Size = 8)]
 [GenerateInterop]
 public unsafe partial struct IMemorySpace {
     public T* Create<T>() where T : unmanaged, ICreatable {

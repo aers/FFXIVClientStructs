@@ -12,7 +12,7 @@ public unsafe partial struct IMesh;
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct Mesh {
     [FieldOffset(0x10)] public ColliderMesh* OwnerCollider;
-    
+
     //[VirtualFunction(1)]
     //public partial nint vf1(ColliderMesh* collider, Matrix4x4* worldTransform, void* visitor);
 

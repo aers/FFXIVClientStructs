@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Helpers;
+using InteropGenerator.Helpers;
 
 namespace InteropGenerator.Models;
 

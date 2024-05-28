@@ -1,4 +1,4 @@
-﻿namespace InteropGenerator.Runtime.Attributes;
+namespace InteropGenerator.Runtime.Attributes;
 
 /// <summary>
 ///     Interop Generator attribute marking the method for string overload generation.

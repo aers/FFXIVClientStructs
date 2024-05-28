@@ -35,7 +35,7 @@ public unsafe partial struct MobHunt {
     [FieldOffset(0x08)] public fixed byte AvailableMarkId[18];
     [FieldOffset(0x1A)] public fixed byte ObtainedMarkId[18];
 
-    [FieldOffset(0x2C)] [FixedSizeArray] internal FixedSizeArray18<KillCounts> _currentKills;
+    [FieldOffset(0x2C)][FixedSizeArray] internal FixedSizeArray18<KillCounts> _currentKills;
 
     [FieldOffset(0x194)] public int ObtainedFlags;
 

@@ -137,9 +137,9 @@ public struct StdPair<T1, T2>
             case null:
                 return 1;
             case StdPair<T1, T2> pair: {
-                var res = comparer.Compare(Item1, pair.Item1);
-                return res != 0 ? res : comparer.Compare(Item2, pair.Item2);
-            }
+                    var res = comparer.Compare(Item1, pair.Item1);
+                    return res != 0 ? res : comparer.Compare(Item2, pair.Item2);
+                }
             default:
                 throw new ArgumentException($"Argument must be of type {typeof(StdPair<T1, T2>)}", nameof(other));
         }

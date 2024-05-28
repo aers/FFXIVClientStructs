@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using InteropGenerator.Helpers;
 using Microsoft.CodeAnalysis;
@@ -42,7 +42,7 @@ public static class AttributeDataExtensions {
 
         return false;
     }
-    
+
     /// <summary>
     ///     Tries to get a multi-value constructor argument at a given index from the input <see cref="AttributeData" /> instance.
     /// </summary>
@@ -55,7 +55,7 @@ public static class AttributeDataExtensions {
         if (attributeData.ConstructorArguments.Length > index) {
 
             using ImmutableArrayBuilder<T> values = new();
-            
+
             foreach (TypedConstant typedConstant in attributeData.ConstructorArguments[index].Values) {
                 if (typedConstant.Value is not T value) {
                     result = default;

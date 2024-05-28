@@ -16,7 +16,7 @@ public class GeneralInteropAttributeTests {
             code,
             []);
     }
-    
+
     [Fact]
     public async Task MarkerAttribute() {
         const string code = """

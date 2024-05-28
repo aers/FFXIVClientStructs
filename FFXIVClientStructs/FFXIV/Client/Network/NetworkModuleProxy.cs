@@ -7,7 +7,7 @@ public unsafe partial struct NetworkModuleProxy {
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 49 8B 85")]
     public partial bool IsInCrossWorldDuty();
-    
+
     /// <summary>
     /// Gets current instance<br/>
     /// Does NOT invoke network request

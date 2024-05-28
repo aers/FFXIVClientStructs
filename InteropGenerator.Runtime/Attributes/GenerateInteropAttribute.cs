@@ -1,4 +1,4 @@
-﻿namespace InteropGenerator.Runtime.Attributes;
+namespace InteropGenerator.Runtime.Attributes;
 
 /// <summary>
 ///     Marks the struct as a target for generation by the Interop Generator.

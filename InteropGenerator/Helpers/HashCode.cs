@@ -1,4 +1,4 @@
-﻿// from https://raw.githubusercontent.com/Sergio0694/ComputeSharp/main/src/ComputeSharp.SourceGeneration/Helpers/HashCode.cs
+// from https://raw.githubusercontent.com/Sergio0694/ComputeSharp/main/src/ComputeSharp.SourceGeneration/Helpers/HashCode.cs
 
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

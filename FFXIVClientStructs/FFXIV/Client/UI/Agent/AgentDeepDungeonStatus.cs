@@ -17,8 +17,8 @@ public unsafe partial struct DeepDungeonStatusData {
     [FieldOffset(0x04)] public uint MaxLevel;
     [FieldOffset(0x08)] public uint ClassJobId;
 
-    [FieldOffset(0x18)] [FixedSizeArray] internal FixedSizeArray16<DeepDungeonStatusItem> _pomander;
-    [FieldOffset(0x718)] [FixedSizeArray] internal FixedSizeArray4<DeepDungeonStatusItem> _magicite;
+    [FieldOffset(0x18)][FixedSizeArray] internal FixedSizeArray16<DeepDungeonStatusItem> _pomander;
+    [FieldOffset(0x718)][FixedSizeArray] internal FixedSizeArray4<DeepDungeonStatusItem> _magicite;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]

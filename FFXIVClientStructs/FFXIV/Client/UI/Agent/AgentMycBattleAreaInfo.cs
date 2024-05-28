@@ -16,7 +16,7 @@ public unsafe partial struct AgentMycBattleAreaInfo {
 public unsafe partial struct MycDynamicEventData {
     [FieldOffset(0x0C)] public byte Count;
 
-    [FieldOffset(0x10)] [FixedSizeArray] internal FixedSizeArray3<MycDynamicEvent> _array;
+    [FieldOffset(0x10)][FixedSizeArray] internal FixedSizeArray3<MycDynamicEvent> _array;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]

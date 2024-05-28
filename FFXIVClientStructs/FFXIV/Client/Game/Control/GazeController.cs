@@ -17,7 +17,7 @@ public unsafe partial struct GazeController {
     /// 1 = Head<br/>
     /// 2 = Eyes
     /// </remarks>
-    [FieldOffset(0x20)] [FixedSizeArray] internal FixedSizeArray3<Gaze> _gazes;
+    [FieldOffset(0x20)][FixedSizeArray] internal FixedSizeArray3<Gaze> _gazes;
 
     [FieldOffset(0x5C4)] public int GazesCount;
 

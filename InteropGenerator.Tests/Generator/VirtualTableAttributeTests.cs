@@ -1,4 +1,4 @@
-﻿using InteropGenerator.Tests.Helpers;
+using InteropGenerator.Tests.Helpers;
 using Xunit;
 using VerifyIG = InteropGenerator.Tests.Helpers.IncrementalGeneratorVerifier<InteropGenerator.Generator.InteropGenerator>;
 
@@ -38,7 +38,7 @@ public class VirtualTableAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetInitializerSource(string.Empty, "TestStruct", ["StaticVirtualTable"]));
     }
-    
+
     [Fact]
     public async Task GenerateStaticVirtualTable_MultipleOffsets() {
         const string code = """

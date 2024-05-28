@@ -47,10 +47,10 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? EB 0B")]
     public partial void Ctor();
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10")]
     public partial void Initialize(uint clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6); // a4 is set to +0x3A8, a5 is set to +0x3B0, a6 is set to +0x3B8
-    
+
     [VirtualFunction(4)]
     public partial void SetCameraDistance(float deltaDistance);
 

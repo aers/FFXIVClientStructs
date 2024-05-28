@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
 
@@ -49,7 +49,7 @@ public sealed partial class InteropGenerator {
         token.ThrowIfCancellationRequested();
 
         HashSet<string> alreadyWrittenParents = new();
-        
+
         // inherited fields
         foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
             // write parent accessor if its directly inherited
@@ -107,7 +107,7 @@ public sealed partial class InteropGenerator {
             if (!inheritedStruct.StringOverloads.IsEmpty)
                 RenderStringOverloads(inheritedStruct, writer);
         }
-        
+
         token.ThrowIfCancellationRequested();
 
         // inherited fixed array accessors
@@ -115,7 +115,7 @@ public sealed partial class InteropGenerator {
             if (!inheritedStruct.FixedSizeArrays.IsEmpty)
                 RenderInheritedFixedSizeArrayAccessors(inheritedStruct, path, writer);
         }
-        
+
         token.ThrowIfCancellationRequested();
     }
 
@@ -201,7 +201,7 @@ public sealed partial class InteropGenerator {
             }
         }
     }
-    
+
     private static void RenderInheritedPublicMethods(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
         foreach (MethodInfo methodInfo in inheritedStruct.ExtraInheritedStructInfo!.PublicMethods) {
             if (methodInfo.Name == "Ctor")
@@ -213,7 +213,7 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
         }
     }
-    
+
     private static void RenderInheritedFixedSizeArrayAccessors(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
         foreach (FixedSizeArrayInfo fixedSizeArrayInfo in inheritedStruct.FixedSizeArrays) {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{fixedSizeArrayInfo.GetPublicFieldName()}" />""");
@@ -237,8 +237,7 @@ public sealed partial class InteropGenerator {
                             writer.WriteLine($"global::System.Text.Encoding.UTF8.GetBytes(value.AsSpan(), {path}.{fixedSizeArrayInfo.FieldName});");
                             writer.WriteLine($"{path}.{fixedSizeArrayInfo.FieldName}[{fixedSizeArrayInfo.Size - 1}] = 0;");
                         }
-                    }
-                    else if (fixedSizeArrayInfo.Type == "char") {
+                    } else if (fixedSizeArrayInfo.Type == "char") {
                         writer.WriteLine($"get => new string({path}.{fixedSizeArrayInfo.FieldName});");
                         writer.WriteLine("set");
                         using (writer.WriteBlock()) {

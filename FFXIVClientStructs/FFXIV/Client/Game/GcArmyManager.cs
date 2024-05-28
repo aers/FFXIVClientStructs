@@ -24,7 +24,7 @@ public unsafe partial struct GcArmyManager {
 [StructLayout(LayoutKind.Explicit, Size = 0xB18)]
 [GenerateInterop]
 public unsafe partial struct GcArmyData {
-    [FieldOffset(0)] [FixedSizeArray] internal FixedSizeArray8<GcArmyMember> _members;
+    [FieldOffset(0)][FixedSizeArray] internal FixedSizeArray8<GcArmyMember> _members;
     /// <remarks> RowId of GcArmyProgress </remarks>
     [FieldOffset(0x280)] public byte Progress;
 

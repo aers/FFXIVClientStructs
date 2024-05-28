@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 
 namespace InteropGenerator.Runtime.Attributes;
 
@@ -20,7 +20,7 @@ namespace InteropGenerator.Runtime.Attributes;
 public sealed class MemberFunctionAttribute(string signature, byte[] relativeFollowOffsets) : Attribute {
     public MemberFunctionAttribute(string signature, byte relativeFollowOffset) : this(signature, [relativeFollowOffset]) { }
     public MemberFunctionAttribute(string signature) : this(signature, []) { }
-    
+
     public string Signature { get; } = signature;
     public byte[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
 }

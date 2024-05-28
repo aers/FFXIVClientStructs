@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.STD.ContainerInterface;
+namespace FFXIVClientStructs.STD.ContainerInterface;
 
 /// <summary>
 /// Base interface for mutable containers with items that are randomly accessible.

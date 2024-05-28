@@ -1,4 +1,4 @@
-﻿namespace InteropGenerator.Tests.Helpers;
+namespace InteropGenerator.Tests.Helpers;
 
 internal static class GlobalUsings {
     public const string GetSource = """

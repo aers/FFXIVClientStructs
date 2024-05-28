@@ -1,4 +1,4 @@
-﻿// sourced from https://github.com/Sergio0694/ComputeSharp/blob/main/src/ComputeSharp.SourceGeneration/Extensions/ISymbolExtensions.cs
+// sourced from https://github.com/Sergio0694/ComputeSharp/blob/main/src/ComputeSharp.SourceGeneration/Extensions/ISymbolExtensions.cs
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;

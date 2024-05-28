@@ -41,9 +41,9 @@ public unsafe partial struct ModelRenderer {
     /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_SamplerViewPosition sampler/texture (CRC: 0xBC615663). </summary>
     [FieldOffset(0x20)] public uint SamplerViewPositionId;
 
-    [FieldOffset(0x28)] [FixedSizeArray] internal FixedSizeArray6<ShaderSceneKey> _sceneKeys;
+    [FieldOffset(0x28)][FixedSizeArray] internal FixedSizeArray6<ShaderSceneKey> _sceneKeys;
 
-    [FieldOffset(0x88)] [FixedSizeArray] internal FixedSizeArray3<ShaderSubViewKey> _subViewKeys;
+    [FieldOffset(0x88)][FixedSizeArray] internal FixedSizeArray3<ShaderSubViewKey> _subViewKeys;
 
     [FieldOffset(0xB8)] public ShaderCodeResourceHandle* CharacterSelectionModelVS;
     [FieldOffset(0xC0)] public ShaderCodeResourceHandle* CharacterSelectionModelPS;

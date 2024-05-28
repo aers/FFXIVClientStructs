@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 [StructLayout(LayoutKind.Explicit, Size = 0x100)]
 public unsafe struct BoneSimulator {
     /// <summary> Non-exhaustive list of physics groups </summary>
-    public enum PhysicsGroup : uint
-    {
+    public enum PhysicsGroup : uint {
         Clothing = 2,
         HairA = 3, // Usually the hair's bangs
         HairB = 4, // Typically the back of the hair

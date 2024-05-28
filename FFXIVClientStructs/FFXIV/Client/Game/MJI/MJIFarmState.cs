@@ -14,7 +14,7 @@ public unsafe partial struct MJIFarmState {
     [FieldOffset(0x48)] public fixed byte WaterLevel[20];
     [FieldOffset(0x5C)] public fixed byte GardenerYield[20];
 
-    [FieldOffset(0x70)] [FixedSizeArray] internal FixedSizeArray20<FarmSlotFlags> _farmSlotFlags; 
+    [FieldOffset(0x70)][FixedSizeArray] internal FixedSizeArray20<FarmSlotFlags> _farmSlotFlags;
 
     [FieldOffset(0x88)] public fixed uint PlotObjectIndex[20]; // ??
     [FieldOffset(0xD8)] public fixed uint LayoutId[20];

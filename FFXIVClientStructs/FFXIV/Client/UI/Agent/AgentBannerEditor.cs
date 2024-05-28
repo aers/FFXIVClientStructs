@@ -69,7 +69,7 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x90)] public Dataset Accents;
     [FieldOffset(0xC0)] public Dataset Poses;
     [FieldOffset(0xF0)] public Dataset Expressions;
-    
+
     [FieldOffset(0x120)] public BannerModuleEntry BannerEntry;
 
     [FieldOffset(0x240)] public fixed uint ItemIds[14];

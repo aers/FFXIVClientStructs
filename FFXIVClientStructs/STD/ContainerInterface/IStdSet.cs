@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.STD.Helper;
 
@@ -12,7 +12,7 @@ public interface IStdSet<T>
     /// Gets the number of items, in <see cref="long"/>.
     /// </summary>
     long LongCount { get; }
-    
+
     /// <summary>
     /// Gets the number of items.
     /// </summary>
@@ -29,33 +29,33 @@ public interface IStdSet<T>
     object ICollection.SyncRoot => Array.Empty<byte>();
 
     #endregion
-    
+
     /// <summary>
     /// Returns an <see cref="IEnumerable{T}"/> that iterates over the set in sorted order.
     /// </summary>
     /// <returns>An enumerator that iterates over the set in sorted order.</returns>
     new RedBlackTree<T, T, DefaultKeyExtractor<T>>.Enumerator GetEnumerator();
-    
+
     /// <summary>
     /// Returns an <see cref="IEnumerable{T}"/> that iterates over the set in reverse order.
     /// </summary>
     /// <returns>An enumerator that iterates over the set in reverse order.</returns>
     RedBlackTree<T, T, DefaultKeyExtractor<T>>.Enumerator Reverse();
-    
+
     /// <summary>
     /// Adds an item as a copy of <paramref name="value"/>.
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns>Whether an item has been added.</returns>
     bool AddCopy(in T value);
-    
+
     /// <summary>
     /// Adds an item as a move of <paramref name="value"/>.
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns>Whether an item has been moved.</returns>
     bool AddMove(ref T value);
-    
+
     /// <summary>
     /// Determines if the set contains <paramref name="item"/>.
     /// </summary>
@@ -69,25 +69,25 @@ public interface IStdSet<T>
     /// <param name="item">The item to remove.</param>
     /// <returns><c>true</c> if the item existed and got removed.</returns>
     public bool Remove(in T item);
-    
+
     /// <summary>
     /// Returns the minimum value.
     /// </summary>
     /// <returns>The minimum value.</returns>
     ref readonly T Min();
-    
+
     /// <summary>
     /// Returns the maximum value.
     /// </summary>
     /// <returns>The maximum value.</returns>
     ref readonly T Max();
-    
+
     /// <summary>
     /// Creates a new array, containing data of the set in sorted order.
     /// </summary>
     /// <returns>The new array.</returns>
     T[] ToArray();
-    
+
     /// <summary>
     /// Creates a new array, containing data of the set in reverse order.
     /// </summary>
@@ -97,7 +97,7 @@ public interface IStdSet<T>
     #region Collection interfaces
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    
+
     IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
 
     void ICollection.CopyTo(Array array, int index) {

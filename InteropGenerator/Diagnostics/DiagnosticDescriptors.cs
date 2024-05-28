@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 
 namespace InteropGenerator.Diagnostics;
 
@@ -59,7 +59,7 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true,
         "A struct was marked with the GenerateInterop attribute but does not provide an explicit size.");
-    
+
     public static readonly DiagnosticDescriptor InheritedStructIsNotMarkedInherited = new(
         "CSIG0007",
         "The Inherits attribute targets a struct that is not marked inherited",
@@ -196,7 +196,7 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true,
         "A field marked with the FixedSizeArray attribute has an invalid type format. The type format should be FixedSizeArray#<T>, where # is the size of the array and T is the type.");
-    
+
     public static readonly DiagnosticDescriptor FixedSizeArrayFieldMustHaveProperNaming = new(
         "CSIG0303",
         "Fixed size array backing field must have proper naming",

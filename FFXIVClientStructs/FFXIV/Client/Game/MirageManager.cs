@@ -15,7 +15,7 @@ public unsafe partial struct MirageManager {
     [FieldOffset(0xFA4)] public bool PrismBoxRequested;
     [FieldOffset(0xFA5)] public bool PrismBoxLoaded;
 
-    [FieldOffset(0xFA8)] [FixedSizeArray] internal FixedSizeArray20<GlamourPlate> _glamourPlates;
+    [FieldOffset(0xFA8)][FixedSizeArray] internal FixedSizeArray20<GlamourPlate> _glamourPlates;
     [FieldOffset(0x1458)] public bool GlamourPlatesRequested;
     [FieldOffset(0x1459)] public bool GlamourPlatesLoaded;
 

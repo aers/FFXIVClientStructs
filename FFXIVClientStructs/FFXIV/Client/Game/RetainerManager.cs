@@ -6,7 +6,7 @@ public unsafe partial struct RetainerManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 18", 3)]
     public static partial RetainerManager* Instance();
 
-    [FieldOffset(0x000)] [FixedSizeArray] internal FixedSizeArray10<Retainer> _retainers;
+    [FieldOffset(0x000)][FixedSizeArray] internal FixedSizeArray10<Retainer> _retainers;
     [FieldOffset(0x2D0)] public fixed byte DisplayOrder[10];
     [FieldOffset(0x2DA)] public byte Ready;
     [FieldOffset(0x2DB)] public byte MaxRetainerEntitlement;

@@ -1,4 +1,4 @@
-﻿namespace InteropGenerator.Runtime.Attributes;
+namespace InteropGenerator.Runtime.Attributes;
 
 /// <summary>
 ///     Interop Generator attribute used to mark a method parameter as ignored when using the GenerateStringOverloads

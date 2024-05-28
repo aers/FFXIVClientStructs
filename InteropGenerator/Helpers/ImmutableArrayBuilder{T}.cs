@@ -1,4 +1,4 @@
-﻿// from https://raw.githubusercontent.com/Sergio0694/ComputeSharp/main/src/ComputeSharp.SourceGeneration/Helpers/ImmutableArrayBuilder%7BT%7D.cs
+// from https://raw.githubusercontent.com/Sergio0694/ComputeSharp/main/src/ComputeSharp.SourceGeneration/Helpers/ImmutableArrayBuilder%7BT%7D.cs
 
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.

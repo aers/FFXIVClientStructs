@@ -1,4 +1,4 @@
-﻿namespace InteropGenerator.Runtime.Attributes;
+namespace InteropGenerator.Runtime.Attributes;
 
 /// <summary>
 /// Interop Generator attribute indicating the struct should inherit public fields and methods from parent T.

@@ -29,12 +29,12 @@ public unsafe partial struct ResourceGraph {
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     [GenerateInterop]
     public partial struct CategoryContainer {
-        [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray20<Pointer<CategoryMap>> _categoryMaps;
+        [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray20<Pointer<CategoryMap>> _categoryMaps;
 
         [FieldOffset(0x0), Obsolete("Use CategoryMaps[0]")] public CategoryMap* MainMap;
     }
 
-    [FieldOffset(0x0)] [FixedSizeArray] internal FixedSizeArray20<CategoryContainer> _containerArray; 
+    [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray20<CategoryContainer> _containerArray;
 
     [FieldOffset(0x000), Obsolete("Use ContainerArray[0]")] public CategoryContainer CommonContainer;
     [FieldOffset(0x0A0), Obsolete("Use ContainerArray[1]")] public CategoryContainer BgCommonContainer;

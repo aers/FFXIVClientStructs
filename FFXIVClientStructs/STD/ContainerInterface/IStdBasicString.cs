@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 
 namespace FFXIVClientStructs.STD.ContainerInterface;
 

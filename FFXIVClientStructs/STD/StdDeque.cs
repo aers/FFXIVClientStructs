@@ -99,10 +99,10 @@ public unsafe struct StdDeque<T>
 
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item) => LookupHelper<T, StdDeque<T>>.BinarySearch(in this, 0, LongCount, item, null);
-    
+
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item, IComparer<T>? comparer) => LookupHelper<T, StdDeque<T>>.BinarySearch(in this, 0, LongCount, item, comparer);
-    
+
     /// <inheritdoc/>
     public readonly long BinarySearch(long index, long count, in T item, IComparer<T>? comparer) => LookupHelper<T, StdDeque<T>>.BinarySearch(in this, index, count, item, comparer);
 

@@ -37,7 +37,7 @@ public unsafe partial struct InfoProxyInterface {
     /// </summary>
     [VirtualFunction(6)]
     public partial void EndRequest();
-    
+
     [VirtualFunction(7)]
     public partial uint GetEntryCount();
 }

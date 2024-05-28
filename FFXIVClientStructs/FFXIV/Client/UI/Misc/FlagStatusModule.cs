@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
 public unsafe partial struct FlagStatusModule {
     public static FlagStatusModule* Instance() => Framework.Instance()->GetUiModule()->GetFlagStatusModule();
-    
+
     /// <remarks>
     /// 13 = Default Currency Setting (Index of Rotation array in UIModule.UIModuleHelpers.CurrencySettings)
     /// </remarks>

@@ -1,4 +1,4 @@
-﻿namespace InteropGenerator;
+namespace InteropGenerator;
 
 public static class AttributeNames {
     private const string Namespace = "InteropGenerator.Runtime.Attributes";

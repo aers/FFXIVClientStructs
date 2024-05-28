@@ -15,7 +15,7 @@ public unsafe partial struct AgentRetainerItemTransfer {
 public unsafe partial struct AgentRetainerItemTransferData {
     [FieldOffset(0x00)] public int ItemCount;
 
-    [FieldOffset(0x10)] [FixedSizeArray] internal FixedSizeArray140<DuplicateItemEntry> _duplicateItem;
+    [FieldOffset(0x10)][FixedSizeArray] internal FixedSizeArray140<DuplicateItemEntry> _duplicateItem;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct DuplicateItemEntry {

@@ -12,7 +12,7 @@ public unsafe partial struct InfoProxyCrossWorldLinkShell {
     [FieldOffset(0x30)] public byte Unk30;
     [FieldOffset(0x38)] public Utf8String InvitedName;
     [FieldOffset(0xA0)] public Utf8String UnkString0;
-    [FieldOffset(0x108)] [FixedSizeArray] internal FixedSizeArray8<CWLSEntry> _CWLSArray;
+    [FieldOffset(0x108)][FixedSizeArray] internal FixedSizeArray8<CWLSEntry> _CWLSArray;
     //530 after
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 45 8D 46 FB")]

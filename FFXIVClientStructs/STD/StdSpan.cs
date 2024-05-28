@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.STD.ContainerInterface;
@@ -242,7 +242,7 @@ public unsafe struct StdSpan<T>
     /// <param name="start">The index at which to begin the slice.</param>
     /// <returns>A span that consists of all elements of the current span from <paramref name="start"/> to the end of the span.</returns>
     public StdSpan<T> Slice(long start) => new(_begin + start, CheckedRangeCount(start, _count - start));
-    
+
     /// <summary>
     /// Forms a slice out of the current span starting at a specified index for a specified length.
     /// </summary>

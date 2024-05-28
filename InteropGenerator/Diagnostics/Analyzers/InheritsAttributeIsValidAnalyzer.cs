@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using InteropGenerator.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -21,26 +21,26 @@ public sealed class InheritsAttributeIsValidAnalyzer : DiagnosticAnalyzer {
                 return;
 
             context.RegisterSymbolAction(context => {
-                    if (context.Symbol is not INamedTypeSymbol { TypeKind: TypeKind.Struct } typeSymbol)
-                        return;
+                if (context.Symbol is not INamedTypeSymbol { TypeKind: TypeKind.Struct } typeSymbol)
+                    return;
 
-                    foreach (AttributeData attributeData in typeSymbol.GetAttributes()) {
-                        if (attributeData.AttributeClass is not { } attributeSymbol) continue;
-                        if (!attributeSymbol.HasFullyQualifiedMetadataName(AttributeNames.InheritsAttribute)) continue;
-                        if (attributeSymbol.TypeArguments.Length != 1) continue;
-                        if (attributeSymbol.TypeArguments[0] is not INamedTypeSymbol inheritedTypeSymbol) continue;
+                foreach (AttributeData attributeData in typeSymbol.GetAttributes()) {
+                    if (attributeData.AttributeClass is not { } attributeSymbol) continue;
+                    if (!attributeSymbol.HasFullyQualifiedMetadataName(AttributeNames.InheritsAttribute)) continue;
+                    if (attributeSymbol.TypeArguments.Length != 1) continue;
+                    if (attributeSymbol.TypeArguments[0] is not INamedTypeSymbol inheritedTypeSymbol) continue;
 
-                        if (!inheritedTypeSymbol.TryGetAttributeWithType(generateAttribute, out AttributeData? generateAttributeData) ||
-                            !generateAttributeData.TryGetConstructorArgument(0, out bool? isInherited) ||
-                            !isInherited.Value) {
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                InheritedStructIsNotMarkedInherited,
-                                inheritedTypeSymbol.Locations.FirstOrDefault(),
-                                typeSymbol.Name,
-                                inheritedTypeSymbol.Name));
-                        }
+                    if (!inheritedTypeSymbol.TryGetAttributeWithType(generateAttribute, out AttributeData? generateAttributeData) ||
+                        !generateAttributeData.TryGetConstructorArgument(0, out bool? isInherited) ||
+                        !isInherited.Value) {
+                        context.ReportDiagnostic(Diagnostic.Create(
+                            InheritedStructIsNotMarkedInherited,
+                            inheritedTypeSymbol.Locations.FirstOrDefault(),
+                            typeSymbol.Name,
+                            inheritedTypeSymbol.Name));
                     }
-                },
+                }
+            },
                 SymbolKind.NamedType);
 
         });

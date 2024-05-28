@@ -12,7 +12,7 @@ public unsafe partial struct AtkComponentTreeList {
     [FieldOffset(0x1A8)] public StdVector<Pointer<AtkComponentTreeListItem>> Items;
 
     [FieldOffset(0x21C)] public bool LayoutRefreshPending;
-    
+
     /// <remarks> Does not add it to the <see cref="Items"/> list automatically! </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 45 85 ED")]
     public partial AtkComponentTreeListItem* CreateItem();

@@ -1,4 +1,4 @@
-﻿// sourced from https://github.com/Sergio0694/ComputeSharp/blob/main/src/ComputeSharp.SourceGeneration/Extensions/ITypeSymbolExtensions.cs
+// sourced from https://github.com/Sergio0694/ComputeSharp/blob/main/src/ComputeSharp.SourceGeneration/Extensions/ITypeSymbolExtensions.cs
 
 using InteropGenerator.Helpers;
 using Microsoft.CodeAnalysis;

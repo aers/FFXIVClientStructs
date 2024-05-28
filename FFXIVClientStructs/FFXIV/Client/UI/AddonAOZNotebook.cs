@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonAOZNotebook {
     [FieldOffset(0x308), FixedSizeArray] internal FixedSizeArray16<SpellbookBlock> _spellbookBlocks;
     [FieldOffset(0x820), FixedSizeArray] internal FixedSizeArray24<ActiveAction> _activeActions;
-    
+
     [FieldOffset(0xCB0)] public int TabIndex;
     [FieldOffset(0xCB4)] public int TabCount;
 

@@ -28,7 +28,7 @@ public unsafe partial struct AddonJobHudGNB0 {
         [FieldOffset(0x10)] public AtkResNode* Container;
 
         [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentBase>> _ammo;
-        
+
         [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkResNode>> _ammoNode;
 
         [FieldOffset(0x58)] public AtkResNode* RecoilNode;

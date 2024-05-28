@@ -1,4 +1,4 @@
-﻿using Xunit;
+using Xunit;
 using VerifyIG = InteropGenerator.Tests.Helpers.IncrementalGeneratorVerifier<InteropGenerator.Generator.InteropGenerator>;
 
 namespace InteropGenerator.Tests.Generator;

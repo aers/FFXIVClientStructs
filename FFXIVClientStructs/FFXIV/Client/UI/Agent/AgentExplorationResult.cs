@@ -30,17 +30,17 @@ public unsafe partial struct AgentExplorationResultInterface {
 [StructLayout(LayoutKind.Explicit, Size = 0x4F70)]
 [GenerateInterop]
 public unsafe partial struct ExplorationResultData {
-    [FieldOffset(0x00)] [FixedSizeArray] internal FixedSizeArray151<AtkValue> _valueArray;
+    [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray151<AtkValue> _valueArray;
 
     [FieldOffset(0x988)] public Utf8String Rating;
 
-    [FieldOffset(0xA00)] [FixedSizeArray] internal FixedSizeArray10<ExplorationResultDataItemReturn> _itemReturn;
+    [FieldOffset(0xA00)][FixedSizeArray] internal FixedSizeArray10<ExplorationResultDataItemReturn> _itemReturn;
 
     [FieldOffset(0x10E0)] public byte ItemReturnListCount;
 
-    [FieldOffset(0x10E8)] [FixedSizeArray] internal FixedSizeArray100<Utf8String> _stringArray;
+    [FieldOffset(0x10E8)][FixedSizeArray] internal FixedSizeArray100<Utf8String> _stringArray;
 
-    [FieldOffset(0x3988)] [FixedSizeArray] internal FixedSizeArray100<Pointer<Utf8String>> _stringPointerArray;
+    [FieldOffset(0x3988)][FixedSizeArray] internal FixedSizeArray100<Pointer<Utf8String>> _stringPointerArray;
     [FieldOffset(0x3CA8)] public byte StringPointerListCount;
 }
 
