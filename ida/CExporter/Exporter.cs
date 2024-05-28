@@ -229,7 +229,7 @@ ReExport:
             }
             if (!type.IsStruct() || type.IsEnum) return null;
             if (_structs.Any(t => t.StructType.FullSanitizeName() == type.FullSanitizeName())) return null;
-            var vtable = type.GetField("VTable", _bindingFlags)?.FieldType;
+            var vtable = type.GetField("VirtualTable", _bindingFlags)?.FieldType;
             ProcessedVirtualFunction[] virtualFunctions = [];
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;

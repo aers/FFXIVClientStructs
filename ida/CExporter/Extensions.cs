@@ -38,6 +38,10 @@ public static class TypeExtensions {
         }
     }
 
+    // public static bool IsInheritence(this Type type, ) {
+    //
+    // }
+
     public static string FixTypeName(this Type type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
         type switch {
             _ when type == typeof(void) || type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,

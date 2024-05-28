@@ -42,5 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\FFXIVClientStructs\FFXIVClientStructs.csproj" />
+    <ProjectReference Include="..\..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj" />
   </ItemGroup>
 </Project>
