@@ -1439,13 +1439,21 @@ public class InheritsAttributeTests {
                                     namespace InteropGeneratorTesting;
                                     public static class Addresses
                                     {
-                                        public static void Initialize()
+                                        public static void Register()
                                         {
                                             InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::BaseA_A.Addresses.BaseA_mf);
                                             InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::MiddleA.Addresses.StaticVirtualTable);
                                             InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::BaseB.Addresses.BaseB_mf);
                                             InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::BaseC.Addresses.BaseC_sa);
                                             InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::MiddleC.Addresses.MiddleC_mf);
+                                        }
+                                        public static void Unregister()
+                                        {
+                                            InteropGenerator.Runtime.Resolver.GetInstance.UnregisterAddress(global::BaseA_A.Addresses.BaseA_mf);
+                                            InteropGenerator.Runtime.Resolver.GetInstance.UnregisterAddress(global::MiddleA.Addresses.StaticVirtualTable);
+                                            InteropGenerator.Runtime.Resolver.GetInstance.UnregisterAddress(global::BaseB.Addresses.BaseB_mf);
+                                            InteropGenerator.Runtime.Resolver.GetInstance.UnregisterAddress(global::BaseC.Addresses.BaseC_sa);
+                                            InteropGenerator.Runtime.Resolver.GetInstance.UnregisterAddress(global::MiddleC.Addresses.MiddleC_mf);
                                         }
                                     }
                                     """;

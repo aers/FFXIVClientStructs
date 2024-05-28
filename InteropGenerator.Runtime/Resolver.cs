@@ -222,4 +222,19 @@ outLoop:;
             _preResolveArray[firstByte]!.Add(address);
         }
     }
+    
+    public void UnregisterAddress(Address address) {
+        if (Addresses.Remove(address) &&
+            address.Value != 0) {
+            var firstByte = (byte)address.Bytes[0];
+
+            if (_preResolveArray[firstByte] != null) {
+                _preResolveArray[firstByte]!.Remove(address);
+                if (_preResolveArray[firstByte]!.Count == 0) {
+                    _preResolveArray[firstByte] = null;
+                    _totalBuckets--;
+                }
+            }
+        }
+    }
 }

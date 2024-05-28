@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 
 namespace InteropGenerator.Tests.Helpers;
 
@@ -9,11 +9,18 @@ internal static class SourceGeneration {
         stringBuilder.AppendLine("namespace InteropGeneratorTesting;");
         stringBuilder.AppendLine("public static class Addresses");
         stringBuilder.AppendLine("{");
-        stringBuilder.AppendLine("    public static void Initialize()");
+        stringBuilder.AppendLine("    public static void Register()");
         stringBuilder.AppendLine("    {");
         foreach (string functionName in functionNames) {
             string namespaceWithDot = string.IsNullOrEmpty(containingNamespace) ? string.Empty : containingNamespace + ".";
             stringBuilder.AppendLine($"""        InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress(global::{namespaceWithDot}{containingType}.Addresses.{functionName});""");
+        }
+        stringBuilder.AppendLine("    }");
+        stringBuilder.AppendLine("    public static void Unregister()");
+        stringBuilder.AppendLine("    {");
+        foreach (string functionName in functionNames) {
+            string namespaceWithDot = string.IsNullOrEmpty(containingNamespace) ? string.Empty : containingNamespace + ".";
+            stringBuilder.AppendLine($"""        InteropGenerator.Runtime.Resolver.GetInstance.UnregisterAddress(global::{namespaceWithDot}{containingType}.Addresses.{functionName});""");
         }
         stringBuilder.AppendLine("    }");
         stringBuilder.Append('}');

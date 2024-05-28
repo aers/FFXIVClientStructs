@@ -295,7 +295,7 @@ public sealed partial class InteropGenerator {
         writer.WriteLine($"namespace {generatorNamespace};");
         writer.WriteLine("public static class Addresses");
         using (writer.WriteBlock()) {
-            writer.WriteLine("public static void Initialize()");
+            writer.WriteLine("public static void Register()");
             using (writer.WriteBlock()) {
                 foreach (StructInfo sInfo in structInfos) {
                     // member function addresses
@@ -312,6 +312,23 @@ public sealed partial class InteropGenerator {
                     }
                 }
             }
+            writer.WriteLine("public static void Unregister()");
+            using (writer.WriteBlock()) {
+                foreach (StructInfo sInfo in structInfos) {
+                    // member function addresses
+                    foreach (MemberFunctionInfo mfi in sInfo.MemberFunctions) {
+                        writer.WriteLine(GetRemoveFromResolverString(sInfo, mfi.MethodInfo.Name));
+                    }
+                    // static addresses
+                    foreach (StaticAddressInfo sai in sInfo.StaticAddresses) {
+                        writer.WriteLine(GetRemoveFromResolverString(sInfo, sai.MethodInfo.Name));
+                    }
+                    // static virtual table
+                    if (sInfo.StaticVirtualTableSignature is not null) {
+                        writer.WriteLine(GetRemoveFromResolverString(sInfo, "StaticVirtualTable"));
+                    }
+                }
+            }
         }
 
         return writer.ToString();
@@ -321,6 +338,12 @@ public sealed partial class InteropGenerator {
         string namespaceString = string.IsNullOrEmpty(structInfo.Namespace) ? string.Empty : structInfo.Namespace + ".";
         var fullTypeName = $"global::{namespaceString}{string.Join(".", structInfo.Hierarchy.Reverse())}";
         return $"InteropGenerator.Runtime.Resolver.GetInstance.RegisterAddress({fullTypeName}.Addresses.{signatureName});";
+    }
+
+    private static string GetRemoveFromResolverString(StructInfo structInfo, string signatureName) {
+        string namespaceString = string.IsNullOrEmpty(structInfo.Namespace) ? string.Empty : structInfo.Namespace + ".";
+        var fullTypeName = $"global::{namespaceString}{string.Join(".", structInfo.Hierarchy.Reverse())}";
+        return $"InteropGenerator.Runtime.Resolver.GetInstance.UnregisterAddress({fullTypeName}.Addresses.{signatureName});";
     }
 
     private static string RenderFixedArrayTypes(ImmutableArray<StructInfo> structInfos, string generatorNamespace) {

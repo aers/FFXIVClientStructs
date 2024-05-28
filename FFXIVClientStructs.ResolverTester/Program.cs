@@ -22,7 +22,7 @@ unsafe {
 
         var watch = new Stopwatch();
         watch.Start();
-        FFXIVClientStructs.Interop.Generated.Addresses.Initialize();
+        FFXIVClientStructs.Interop.Generated.Addresses.Register();
         Resolver.GetInstance.Resolve();
         watch.Stop();
         Console.WriteLine($"Resolved in {watch.ElapsedMilliseconds}ms");
@@ -30,7 +30,7 @@ unsafe {
         // re-initialize, should add zero addresses
         watch = new Stopwatch();
         watch.Start();
-        FFXIVClientStructs.Interop.Generated.Addresses.Initialize();
+        FFXIVClientStructs.Interop.Generated.Addresses.Register();
         Resolver.GetInstance.Resolve();
         watch.Stop();
         Console.WriteLine($"Re-resolved in {watch.ElapsedMilliseconds}ms");
@@ -38,10 +38,10 @@ unsafe {
         // clear address list, resolve from cache
         foreach (Address a in Resolver.GetInstance.Addresses)
             a.Value = 0;
-        Resolver.GetInstance.Addresses.Clear();
+        FFXIVClientStructs.Interop.Generated.Addresses.Unregister();
         watch = new Stopwatch();
         watch.Start();
-        FFXIVClientStructs.Interop.Generated.Addresses.Initialize();
+        FFXIVClientStructs.Interop.Generated.Addresses.Register();
         Resolver.GetInstance.Resolve();
         watch.Stop();
         Console.WriteLine($"Resolved from cache in {watch.ElapsedMilliseconds}ms");
