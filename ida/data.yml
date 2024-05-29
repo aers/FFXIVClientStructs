@@ -1056,7 +1056,7 @@ classes:
       0x1406E0670: GetMateriaGrade
       0x14071BF70: ctor
       0x14071BFB0: Copy
-      0x14071C170: Equals
+      0x14071C170: EqualTo
       0x14071C200: Clear
       0x14071C240: SetItemId
       0x14071C300: GetLinkedItem
@@ -1436,10 +1436,10 @@ classes:
       0x14005CD10: Clear
       0x14005A240: Concat
       0x14005A3B0: ConcatCStr
-      0x14005A470: Equals
-      0x14005A4C0: EqualsString
-      0x14005A500: NotEquals
-      0x14005A550: NotEqualsString
+      0x14005A470: EqualTo
+      0x14005A4C0: EqualToString
+      0x14005A500: NotEqualTo
+      0x14005A550: NotEqualToString
       0x14005AE90: GetLength #count of character
       0x14005AF30: CalcLength #does not use saved value
       0x14005AFB0: GetSize
@@ -7131,7 +7131,7 @@ classes:
     funcs:
       0x14066B370: j_ctor
       0x14066B390: ctor
-      0x14066B450: Equals
+      0x14066B450: EqualTo
       0x14096C420: GenerateChecksum # static
   Client::UI::Misc::CharaView:
     vtbls:

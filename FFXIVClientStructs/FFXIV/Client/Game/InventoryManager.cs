@@ -2,7 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-//ctor i guess 40 53 48 83 EC 20 48 8B D9 45 33 C9 B9
+// Client::Game::InventoryManager
+// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9 33 ED B9 ?? ?? ?? ??"
 [StructLayout(LayoutKind.Explicit, Size = 0x3620)]
 [GenerateInterop]
 public unsafe partial struct InventoryManager {
@@ -72,11 +73,11 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4F DD")]
     private static partial int GetSpecialItemId(byte switchCase);
 
-    // Gets the current maximum weekly number of limited tomestones tha player can earn
+    /// <summary>  Gets the current maximum weekly number of limited tomestones tha player can earn. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 42 8D 0C 23")]
     public static partial int GetLimitedTomestoneWeeklyLimit();
 
-    // Gets the number of (limited) tomestones the user has acquired during the current reset cycle.
+    /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
 }
 
@@ -99,15 +100,15 @@ public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x04)] public short Slot;
     /// <summary>
     /// Indicates whether this InventoryItem is symbolic, serving as a link to another InventoryItem<br/>
-    /// identified by the <see cref="LinkedItemSlot"/> and <see cref="LinkedInventoryType"/>.
+    /// identified by <see cref="LinkedItemSlot"/> and <see cref="LinkedInventoryType"/>.
     /// </summary>
     [FieldOffset(0x06)] public bool IsSymbolic;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>false</c>. </remarks>
-    [FieldOffset(0x08)] public uint ItemId;
+    [FieldOffset(0x08), CExporterUnion("Id")] public uint ItemId;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
-    [FieldOffset(0x08), CExportIgnore] public ushort LinkedItemSlot;
+    [FieldOffset(0x08), CExporterUnion("Id")] public ushort LinkedItemSlot;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
-    [FieldOffset(0x0A), CExportIgnore] public ushort LinkedInventoryType;
+    [FieldOffset(0x0A), CExporterUnion("Id")] public ushort LinkedInventoryType;
     [FieldOffset(0x0C)] public uint Quantity;
     [FieldOffset(0x10)] public ushort Spiritbond; // TODO: This field is also used for the collectability value. Not sure if it's the same data type. See also: GetSpiritbond()
     [FieldOffset(0x12)] public ushort Condition;
@@ -131,7 +132,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial void Ctor();
 
     [MemberFunction("8B 42 08 4C 8B C1")]
-    public partial bool IsEqual(InventoryItem* other);
+    public partial bool EqualTo(InventoryItem* other);
 
     /// <summary>Copies the values from the other InventoryItem and, if it's symbolic, resolves its linked item.</summary>
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 4B 48")]

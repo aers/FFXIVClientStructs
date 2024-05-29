@@ -17,14 +17,8 @@ public unsafe partial struct Director {
     [FieldOffset(0x340)] public byte Sequence;
     [FieldOffset(0x342)] public fixed byte UnionData[10]; // I8A-I8J, UI8A-UI8J, Branch etc.
     [FieldOffset(0x350)] public Utf8String Title;
-    [Obsolete("Renamed to Title")]
-    [FieldOffset(0x350)] public Utf8String String0;
     [FieldOffset(0x3B8)] public Utf8String Description;
-    [Obsolete("Renamed to Description")]
-    [FieldOffset(0x3B8)] public Utf8String String1;
     [FieldOffset(0x420)] public Utf8String ReliefText;
-    [Obsolete("Renamed to ReliefText")]
-    [FieldOffset(0x420)] public Utf8String String2;
     [FieldOffset(0x498)] public StdVector<EventHandlerObjective> Objectives; // 10 objectives max
     [FieldOffset(0x4B0)] public uint EventItemId;
 
