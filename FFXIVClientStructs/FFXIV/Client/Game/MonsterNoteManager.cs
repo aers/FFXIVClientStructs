@@ -9,6 +9,7 @@ public unsafe partial struct MonsterNoteManager {
     [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray12<MonsterNoteRankInfo> _rankDataArray;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct MonsterNoteRankInfo {
     [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray10<RankData> _rankDataArray;

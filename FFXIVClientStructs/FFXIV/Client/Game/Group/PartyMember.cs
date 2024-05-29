@@ -1,7 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x390)]
-public unsafe struct PartyMember {
+public unsafe partial struct PartyMember {
     [FieldOffset(0x0)] public StatusManager StatusManager;
     [FieldOffset(0x2F0)] public float X;
     [FieldOffset(0x2F4)] public float Y;
@@ -16,7 +17,7 @@ public unsafe struct PartyMember {
     [FieldOffset(0x31E)] public ushort MaxMP;
     [FieldOffset(0x320)] public ushort TerritoryType;
     [FieldOffset(0x322)] public ushort HomeWorld;
-    [FieldOffset(0x324)] public fixed byte Name[64];
+    [FieldOffset(0x324), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;
     [FieldOffset(0x364)] public byte Sex;
     [FieldOffset(0x365)] public byte ClassJob;
     [FieldOffset(0x366)] public byte Level;

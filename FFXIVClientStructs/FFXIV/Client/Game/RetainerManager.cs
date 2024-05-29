@@ -33,10 +33,11 @@ public unsafe partial struct RetainerManager {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 78 29")]
     public partial Retainer* GetActiveRetainer();
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-    public struct Retainer {
+    public partial struct Retainer {
         [FieldOffset(0x00)] public ulong RetainerId;
-        [FieldOffset(0x08)] public fixed byte Name[32];
+        [FieldOffset(0x08), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
         [FieldOffset(0x28)] public bool Available;
         [FieldOffset(0x29)] public byte ClassJob;
         [FieldOffset(0x2A)] public byte Level;

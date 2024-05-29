@@ -7,9 +7,10 @@ public unsafe partial struct Hater {
     [FieldOffset(0x900)] public int HaterArrayLength;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-public unsafe struct HaterInfo {
-    [FieldOffset(0x00)] public fixed byte Name[64];
+public unsafe partial struct HaterInfo {
+    [FieldOffset(0x00), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;
     [FieldOffset(0x40)] public uint ObjectId;
     [FieldOffset(0x44)] public int Enmity;
 }

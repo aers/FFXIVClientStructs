@@ -10,7 +10,7 @@ public unsafe partial struct UserFileEvent {
     [FieldOffset(0x18)] public nint TempDataPtr;
     [FieldOffset(0x20)] public uint TempDataBytesWritten;
 
-    [FieldOffset(0x30)] public fixed byte FileName[0xC];
+    [FieldOffset(0x30), FixedSizeArray(isString: true)] internal FixedSizeArray12<byte> _fileName;
     [FieldOffset(0x3C)] public bool Unk3C;
     [FieldOffset(0x3D)] public bool IsSavePending;
     [FieldOffset(0x3E)] public bool HasChanges;

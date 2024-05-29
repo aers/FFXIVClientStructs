@@ -18,18 +18,18 @@ public unsafe partial struct HotBarSlot {
     /// The "cost text" to display when 0xCB is in mode 2 or 4.
     ///
     /// This is generally filled with a flexible MP cost (e.g. "All" for certain BLM spells) or "x 123" for items.
-    [FieldOffset(0x68)] public fixed byte CostText[0x20];
+    [FieldOffset(0x68), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _costText;
 
     /// A human-friendly display of the keybind used for this hotbar slot.
     ///
     /// This text will generally lead with a space and have wrapping brackets, e.g. " [Ctrl-3]".
-    [FieldOffset(0x88)] public fixed byte PopUpKeybindHint[0x20];
+    [FieldOffset(0x88), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _popUpKeybindHint;
 
     /// A less-friendly version of the keybind used for this hotbar slot.
     ///
     /// The actual use of this field is unknown, but it appears to be related to the hint in the top-left of the hotbar
     /// UI.
-    [FieldOffset(0xA8)] public fixed byte KeybindHint[0x10];
+    [FieldOffset(0xA8), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _keybindHint;
 
     /// The ID of the action that will be executed when this slot is triggered. Action type is determined by the
     /// CommandType field.

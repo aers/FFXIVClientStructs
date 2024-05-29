@@ -131,10 +131,10 @@ public unsafe partial struct CharaSelectCharacterEntry {
     [FieldOffset(0x18)] public ushort CurrentWorldId;
     [FieldOffset(0x1A)] public ushort HomeWorldId;
 
-    [FieldOffset(0x2C)] public fixed byte Name[32];
-    [FieldOffset(0x4C)] public fixed byte CurrentWorldName[32];
-    [FieldOffset(0x6C)] public fixed byte HomeWorldName[32];
-    [FieldOffset(0x8C)] public fixed byte RawJson[1024];
+    [FieldOffset(0x2C), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+    [FieldOffset(0x4C), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _currentWorldName;
+    [FieldOffset(0x6C), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _homeWorldName;
+    [FieldOffset(0x8C), FixedSizeArray(isString: true)] internal FixedSizeArray1024<byte> _rawJson;
 
     [FieldOffset(0x4A0)] public StdVector<Pointer<CharaSelectRetainerInfo>> RetainerInfo;
 
@@ -158,14 +158,15 @@ public enum CharaSelectCharacterEntryLoginFlags : byte {
     Unk32 = 32, // unsure. sidebar should change to Lobby#1153 "TRAVELED TO" and might print LogMessage#5800 "Unable to execute command. Character is currently visiting the <string(lstr1)> data center."
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe struct CharaSelectRetainerInfo {
+public unsafe partial struct CharaSelectRetainerInfo {
     [FieldOffset(0)] public ulong RetainerId;
     [FieldOffset(0x8)] public ulong OwnerContentId;
     [FieldOffset(0x10)] public ushort Index; // guessed
     [FieldOffset(0x12)] public CharaSelectRetainerInfoLoginFlags LoginFlags;
 
-    [FieldOffset(0x18)] public fixed byte Name[32];
+    [FieldOffset(0x18), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
 }
 
 public enum CharaSelectRetainerInfoLoginFlags : ushort {
@@ -174,9 +175,10 @@ public enum CharaSelectRetainerInfoLoginFlags : ushort {
     NameChangeRequired = 4 // Lobby#66: "Please change your retainer's name after retrieving your character's data./To log in with this character you must first change your retainer's name."
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1E2)]
-public unsafe struct CharaSelectCharacterInfo {
-    [FieldOffset(0x8)] public fixed byte Name[32];
+public unsafe partial struct CharaSelectCharacterInfo {
+    [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public byte CurrentClassJobId;
 
     [FieldOffset(0x2A)] public fixed ushort ClassJobLevelArray[30];

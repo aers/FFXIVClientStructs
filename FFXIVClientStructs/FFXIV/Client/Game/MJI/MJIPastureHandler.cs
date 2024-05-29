@@ -53,12 +53,13 @@ public unsafe partial struct MJIPastureHandler {
     public partial byte GetCurrentRoamingMinionCount();
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = Size)]
-public unsafe struct MJIAnimal {
+public unsafe partial struct MJIAnimal {
     public const int Size = 0x34;
 
     [FieldOffset(0x00)] public byte SlotId;
-    [FieldOffset(0x01)] public fixed byte Nickname[24]; // string
+    [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray24<byte> _nickname;
     [FieldOffset(0x1C)] public uint BNPCNameId;
     [FieldOffset(0x20)] public uint ObjectId;
 
