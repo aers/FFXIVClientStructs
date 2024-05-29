@@ -89,7 +89,13 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2B80)] public SoundManager* SoundManager;
     [FieldOffset(0x2BC8)] public LuaState LuaState;
 
-    [FieldOffset(0x2BF0)] public GameVersion GameVersion;
+    [FieldOffset(0x2BF0), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _baseVersion;
+    // TODO: convert to array of 64 strings each 32 bytes long if possible
+    [FieldOffset(0x2CF0 + 0 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex1Version; // Heavensward
+    [FieldOffset(0x2CF0 + 1 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex2Version; // Stormblood
+    [FieldOffset(0x2CF0 + 2 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex3Version; // Shadowbringers
+    [FieldOffset(0x2CF0 + 3 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex4Version; // Endwalker
+    [FieldOffset(0x2CF0 + 4 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex5Version; // Dawntrail
 
     [FieldOffset(0x3500)] public bool UseWatchDogThread;
 
