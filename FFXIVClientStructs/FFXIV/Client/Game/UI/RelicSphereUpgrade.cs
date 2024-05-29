@@ -7,5 +7,4 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
-public unsafe partial struct RelicSphereUpgrade {
-}
+public unsafe partial struct RelicSphereUpgrade;

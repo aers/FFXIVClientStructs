@@ -7,5 +7,4 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
-public partial struct QTE {
-}
+public partial struct QTE;

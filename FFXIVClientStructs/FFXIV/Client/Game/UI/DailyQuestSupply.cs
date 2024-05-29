@@ -7,5 +7,4 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
-public unsafe partial struct DailyQuestSupply {
-}
+public unsafe partial struct DailyQuestSupply;
