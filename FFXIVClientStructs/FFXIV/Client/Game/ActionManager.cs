@@ -4,8 +4,8 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::ActionManager
-[StructLayout(LayoutKind.Explicit, Size = 0x7F0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x7F0)]
 public unsafe partial struct ActionManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13", 3)]
     public static partial ActionManager* Instance();

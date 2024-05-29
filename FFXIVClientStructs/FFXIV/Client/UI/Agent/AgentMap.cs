@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Map)]
-[StructLayout(LayoutKind.Explicit, Size = 0x12AB8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x12AB8)]
 public unsafe partial struct AgentMap {
     /// <summary> Pointers to markers in <see cref="EventMarkers"/>. </summary>
     [FieldOffset(0x88)] public StdVector<Pointer<MapMarkerData>> EventMarkersPtrs;
@@ -220,8 +220,8 @@ public struct OpenMapInfo {
     // there is a lot more stuff in here depending on what type of map it's used for
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB58)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xB58)]
 public unsafe partial struct QuestLinkContainer {
     [FieldOffset(0x08)] public ushort MarkerCount;
 

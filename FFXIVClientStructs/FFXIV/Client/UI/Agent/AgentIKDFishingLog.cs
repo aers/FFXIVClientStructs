@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.IKDFishingLog)]
-[StructLayout(LayoutKind.Explicit, Size = 0x460)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x460)]
 public unsafe partial struct AgentIKDFishingLog {
     [FieldOffset(0x28)] public uint RouteId;
     [FieldOffset(0x2C), FixedSizeArray] internal FixedSizeArray3<uint> _spotIds;
@@ -25,8 +25,8 @@ public unsafe partial struct AgentIKDFishingLog {
         [FieldOffset(0x0C)] public ushort Points;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x148)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x148)]
     public unsafe partial struct PotentialCatchSpot {
         [FieldOffset(0x00)] public uint SpotId;
         [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray10<LogEntry> _catchEntries;

@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x31F)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x31F)]
 public unsafe partial struct SatisfactionSupplyManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 45 33 C0 66 89 43 60", 3)]
     public static partial SatisfactionSupplyManager* Instance();

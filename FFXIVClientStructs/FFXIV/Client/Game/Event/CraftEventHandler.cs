@@ -39,8 +39,8 @@ public enum CraftCondition : byte {
     GoodOmen,
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
 public unsafe partial struct CraftEventHandler {
     [FieldOffset(0x0)] public EventHandler EventHandler;
     [FieldOffset(0x210), FixedSizeArray] internal FixedSizeArray106<byte> _recipeExcelRows;

@@ -11,8 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonJobHudMCH0 {
     [FieldOffset(0x000)] public AddonJobHud JobHud;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct HeatGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;

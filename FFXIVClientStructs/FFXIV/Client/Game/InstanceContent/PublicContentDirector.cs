@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::LuaEventHandler
 //         Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 89 03 48 8D 8B"
-[StructLayout(LayoutKind.Explicit, Size = 0x1090)]
 [GenerateInterop(isInherited: true)]
 [Inherits<ContentDirector>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1090)]
 public unsafe partial struct PublicContentDirector {
     // fields from PublicContent sheet
     [FieldOffset(0xC48)] public uint NameOffset; // quite useless here

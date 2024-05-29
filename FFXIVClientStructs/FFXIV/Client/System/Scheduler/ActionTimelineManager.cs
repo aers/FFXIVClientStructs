@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct ActionTimelineManager {
     [StaticAddress("4C 8B 43 48 48 8B 0D ?? ?? ?? ??", 7)]
     public static partial ActionTimelineManager* Instance();

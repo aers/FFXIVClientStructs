@@ -10,10 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Graphics::Vfx::VfxDataListenner
 //   Client::Game::Character::CharacterData
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 48 8B 43 08 45 33 C9"
-[StructLayout(LayoutKind.Explicit, Size = 0x1BD0)]
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>]
 [Inherits<CharacterData>(parentOffset: 0x1A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1BD0)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 35", 3)]
 public unsafe partial struct Character {
     [FieldOffset(0x630)] public EmoteController EmoteController;
@@ -143,8 +143,8 @@ public unsafe partial struct Character {
     [VirtualFunction(87)]
     public partial bool IsMount();
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x170)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x170)]
     public partial struct CastInfo {
         [FieldOffset(0x00)] public byte IsCasting;
         [FieldOffset(0x01)] public byte Interruptible;
@@ -172,8 +172,8 @@ public unsafe partial struct Character {
         [FieldOffset(0x01)] public byte Element;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
     public partial struct VfxContainer {
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
 
@@ -188,8 +188,8 @@ public unsafe partial struct Character {
     }
 
     //0x10 bytes are from the base class which is just vtable + gameobject ptr (same as Companion-/DrawDataContainer)
-    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct MountContainer {
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Character* MountObject;
@@ -206,8 +206,8 @@ public unsafe partial struct Character {
         public partial void SetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain);
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct CompanionContainer {
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Companion* CompanionObject;
@@ -218,8 +218,8 @@ public unsafe partial struct Character {
         public partial void SetupCompanion(short companionId, uint param);
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public partial struct OrnamentContainer {
         [FieldOffset(0x08)] public BattleChara* OwnerObject;
         [FieldOffset(0x10)] public Ornament* OrnamentObject;

@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.PlayerSearch)]
-[StructLayout(LayoutKind.Explicit, Size = 0x178)]
 [GenerateInterop]
 [Inherits<InfoProxyCommonList>]
+[StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct InfoProxySearch;

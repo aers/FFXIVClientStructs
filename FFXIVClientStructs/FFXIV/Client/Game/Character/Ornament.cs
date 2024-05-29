@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //     Client::Game::Character::CharacterData
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 EB 03 49 8B CE 48 8B 47 08"
 // ornament = accessory
-[StructLayout(LayoutKind.Explicit, Size = 0x1BF0)]
 [GenerateInterop]
 [Inherits<Character>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1BF0)]
 public unsafe partial struct Ornament {
     [FieldOffset(0x1BD0)] public uint OrnamentId;
     [FieldOffset(0x1BD4)] public byte AttachmentPoint;

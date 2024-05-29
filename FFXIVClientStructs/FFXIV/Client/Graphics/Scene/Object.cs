@@ -5,8 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::Object
 // base class for all graphics objects
 // ctor inlined in all derived class ctors
-[StructLayout(LayoutKind.Explicit, Size = 0x80)]
 [GenerateInterop(isInherited: true)]
+[StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct Object {
     [FieldOffset(0x18)] public Object* ParentObject;
     [FieldOffset(0x20)] public Object* PreviousSiblingObject;

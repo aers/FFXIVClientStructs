@@ -3,8 +3,8 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xF58)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xF58)]
 public unsafe partial struct QuestManager {
     [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();

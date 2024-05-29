@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.GoldSaucer;
 //     Client::Game::Event::Director
 //       Client::Game::Event::LuaEventHandler
 //         Client::Game::Event::EventHandler
-[StructLayout(LayoutKind.Explicit, Size = 0x808)]
 [GenerateInterop]
 [Inherits<GoldSaucerDirector>]
+[StructLayout(LayoutKind.Explicit, Size = 0x808)]
 public unsafe partial struct GFateDirector {
     [FieldOffset(0x678)] public Utf8String MapMarkerTooltipText;
     [FieldOffset(0x6E0)] public uint MapMarkerLevelId;

@@ -26,8 +26,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// 17 - Endwalker Elite
 /// </remarks>
 // Client::Game::UI::MobHunt
-[StructLayout(LayoutKind.Explicit, Size = 0x198)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x198)]
 public unsafe partial struct MobHunt {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 50 08 E8 ?? ?? ?? ?? 84 C0 74 16", 3)]
     public static partial MobHunt* Instance();
@@ -64,8 +64,8 @@ public unsafe partial struct MobHunt {
     public bool IsMarkBillObtained(int index)
         => (ObtainedFlags & 1 << index) != 0;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public partial struct KillCounts {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray5<int> _counts;
 

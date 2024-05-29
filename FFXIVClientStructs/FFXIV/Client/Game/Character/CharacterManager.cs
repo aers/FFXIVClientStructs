@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x338)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct CharacterManager {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray100<Pointer<BattleChara>> _battleCharas;
     [FieldOffset(0x320)] public BattleChara* BattleCharaMemory;

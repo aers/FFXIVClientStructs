@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::MateriaTrade
 //   Component::GUI::AtkModuleInterface::AtkEventInterface
 // Materia Transmutation
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct MateriaTrade {
     [FieldOffset(0x24)] public ushort MateriaId1;
     [FieldOffset(0x26)] public ushort MateriaId2;

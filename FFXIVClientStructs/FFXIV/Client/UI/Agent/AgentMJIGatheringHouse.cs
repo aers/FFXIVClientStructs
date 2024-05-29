@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIGatheringHouse)]
-[StructLayout(LayoutKind.Explicit, Size = 0x200)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x200)]
 public unsafe partial struct AgentMJIGatheringHouse {
     public enum Confirmation : int { None, Start, ChangeExtend, Change, Extend }
 
@@ -26,8 +26,8 @@ public unsafe partial struct AgentMJIGatheringHouse {
     [FieldOffset(0x1F8)] public int SelectExpeditionAddonHandle;
     [FieldOffset(0x1FC)] public Confirmation ConfirmType;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x138)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x138)]
     public unsafe partial struct StringsData {
         [FieldOffset(0x00)] public Utf8String ConfirmText;
         [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray2<Utf8String> _finishTimeText;
@@ -45,8 +45,8 @@ public unsafe partial struct AgentMJIGatheringHouse {
         [FieldOffset(0xB0)] public bool Initialized;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x120)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x120)]
     public unsafe partial struct ExpeditionData {
         [FieldOffset(0x000)] public byte ExpeditionId;
         [FieldOffset(0x008)] public Utf8String Name;

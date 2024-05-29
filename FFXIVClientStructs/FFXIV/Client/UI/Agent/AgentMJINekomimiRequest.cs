@@ -3,14 +3,14 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJINekomimiRequest)]
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentMJINekomimiRequest {
     [FieldOffset(0x28)] public FavorsData* Data;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x318)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x318)]
     public unsafe partial struct FavorsData {
         [FieldOffset(0x000)] public int UpdateState; // 0 initial, 1 request sent, 2 response received, 3 addon updated
 

@@ -2,8 +2,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Buddy
 // ctor "E8 ?? ?? ?? ?? 48 89 AB ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 AB"
-[StructLayout(LayoutKind.Explicit, Size = 0x1B80)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1B80)]
 public unsafe partial struct Buddy {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray9<BuddyMember> _battleBuddies; // BuddyMember array for Companion/Squadron/Trust
     [FieldOffset(0x1B00)] public CompanionInfo CompanionInfo;
@@ -33,8 +33,8 @@ public unsafe partial struct Buddy {
 // sizes for Info structs are estimated
 
 // Chocobo Companion
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct CompanionInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Companion;
     [FieldOffset(0x8)] public float TimeLeft;
@@ -68,8 +68,8 @@ public unsafe struct PetInfo {
 }
 
 // Squadron, Trust, Duty Support
-[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct DutyHelperInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* DutyHelpers; // 7 members
     [FieldOffset(0x9)] public bool HasHelpers;

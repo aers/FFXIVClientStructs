@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x150)]
 [GenerateInterop]
 [Inherits<Camera>]
+[StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct ShadowCamera {
 }

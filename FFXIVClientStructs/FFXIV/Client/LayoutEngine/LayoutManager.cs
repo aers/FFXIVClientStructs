@@ -1,8 +1,8 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x98)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct LayoutManager {
     [FieldOffset(0x20)] public uint TerritoryTypeId;
     [FieldOffset(0x38)] public uint FestivalStatus; // SetActiveFestivals will not allow a change when not 5 or 0
@@ -17,8 +17,8 @@ public unsafe partial struct LayoutManager {
     public partial void SetActiveFestivals(uint* festivalArray); // Array of exactly 4 festivals. Use 0 for none.
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x7080)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x7080)]
 public unsafe partial struct OutdoorAreaLayoutData {
     [FieldOffset(0x1F0), FixedSizeArray] internal FixedSizeArray60<OutdoorPlotLayoutData> _plots;
 
@@ -29,8 +29,8 @@ public unsafe partial struct OutdoorAreaLayoutData {
     public partial void SetFixtureStain(uint plot, uint part, byte stain);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 public unsafe partial struct OutdoorPlotLayoutData {
     [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray8<OutdoorPlotFixtureData> _fixture;
 

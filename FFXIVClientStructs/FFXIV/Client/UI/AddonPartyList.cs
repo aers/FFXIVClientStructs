@@ -39,8 +39,8 @@ public unsafe partial struct AddonPartyList {
     [FieldOffset(0x13DA)] public byte PetCount; // or PetSummoned?
     [FieldOffset(0x13DB)] public byte ChocoboCount; // or ChocoboSummoned?
 
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = Size)]
     public partial struct PartyListMemberStruct {
         public const int Size = 0xF8;
 

@@ -11,8 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonJobHudDRG0 {
     [FieldOffset(0x000)] public AddonJobHud JobHud;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct DragonGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;

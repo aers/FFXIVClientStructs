@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyCommonList>]
+[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe partial struct InfoProxyInvitedList;

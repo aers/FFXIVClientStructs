@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MiragePrismPrismBox)]
-[StructLayout(LayoutKind.Explicit, Size = 0x80)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct AgentMiragePrismPrismBox {
     [FieldOffset(0x28)] public MiragePrismPrismBoxData* Data;
     [FieldOffset(0x39)] public byte TabIndex;
@@ -17,8 +17,8 @@ public unsafe partial struct AgentMiragePrismPrismBox {
     public partial void UpdateItems(bool resetTabIndex, bool a2);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1BAE0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1BAE0)]
 public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray800<PrismBoxItem> _prismBoxItems;
     [FieldOffset(0x1A908)] public PrismBoxItem TempContextItem;

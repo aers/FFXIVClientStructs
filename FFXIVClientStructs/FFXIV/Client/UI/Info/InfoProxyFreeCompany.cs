@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.FreeCompany)]
-[StructLayout(LayoutKind.Explicit, Size = 0x6E8)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x6E8)]
 public unsafe partial struct InfoProxyFreeCompany {
     [FieldOffset(0x20)] public void* Unk20; //Low adress probably high in hierarchy
     [FieldOffset(0x30)] public ulong Id;
@@ -27,8 +27,8 @@ public unsafe partial struct InfoProxyFreeCompany {
     [MemberFunction("E8 ?? ?? ?? ?? EB 2F E8")]
     public partial void RequestDataForCharacter(uint objectId);
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public partial struct RankData {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray10<byte> _permissions;
         [FieldOffset(0x20)] public ushort MemberCount;

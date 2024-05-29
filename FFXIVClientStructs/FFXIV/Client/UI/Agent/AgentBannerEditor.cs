@@ -4,9 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // ctor "40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 53 30"
 [Agent(AgentId.BannerEditor)]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentBannerEditor {
     [FieldOffset(0x28)] public AgentBannerEditorState* EditorState;
 
@@ -14,8 +14,8 @@ public unsafe partial struct AgentBannerEditor {
     public partial void OpenForGearset(int gearsetId);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
 public unsafe partial struct AgentBannerEditorState {
     public enum EditorOpenType : int {
         Portrait = 0,

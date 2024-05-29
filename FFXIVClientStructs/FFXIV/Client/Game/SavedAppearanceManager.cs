@@ -2,8 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x9EB8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x9EB8)]
 public unsafe partial struct SavedAppearanceManager {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray40<SavedAppearanceSlot> _slot;
 

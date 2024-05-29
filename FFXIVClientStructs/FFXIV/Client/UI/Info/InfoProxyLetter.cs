@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.Letter)]
-[StructLayout(LayoutKind.Explicit, Size = 0x5250)]
 [GenerateInterop]
 [Inherits<InfoProxyPageInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x5250)]
 public unsafe partial struct InfoProxyLetter {
     [FieldOffset(0x20)] public uint NumOfDeniedLetters;
     [FieldOffset(0x24)] public ushort NumAttachments;
@@ -20,8 +20,8 @@ public unsafe partial struct InfoProxyLetter {
     [FieldOffset(0x5178)] public Utf8String UnkString0;
     [FieldOffset(0x51E0)] public Utf8String UnkString1;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public unsafe partial struct Letter {
         [FieldOffset(0x00)] public long SenderContentId;// 0xFFFFFFFF for Store
         [FieldOffset(0x08)] public uint Timestamp;

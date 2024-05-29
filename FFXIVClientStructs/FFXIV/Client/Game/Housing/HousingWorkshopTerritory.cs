@@ -9,8 +9,8 @@ public unsafe partial struct HousingWorkshopTerritory {
     [FieldOffset(0x2960)] public HousingWorkshopSubmersibleData Submersible;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x28F8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x28F8)]
 public unsafe partial struct HousingWorkshopAirshipData {
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray4<HousingWorkshopAirshipSubData> _data;
 
@@ -20,16 +20,16 @@ public unsafe partial struct HousingWorkshopAirshipData {
     [FieldOffset(0x778), FixedSizeArray] internal FixedSizeArray82<Utf8String> _airshipLogs;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x8F40)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x8F40)]
 public unsafe partial struct HousingWorkshopSubmersibleData {
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray4<HousingWorkshopSubmersibleSubData> _data;
 
     [FieldOffset(0x8C80), FixedSizeArray] internal FixedSizeArray5<Pointer<HousingWorkshopSubmersibleSubData>> _dataPointers;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 public unsafe partial struct HousingWorkshopAirshipSubData {
     [FieldOffset(0x4)] public uint RegisterTime;
     [FieldOffset(0xC)] public byte RankId;
@@ -85,8 +85,8 @@ public unsafe partial struct HousingWorkshopAirshipGathered {
     [FieldOffset(0x33)] public bool AirshipItemValidAdditional;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2320)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x2320)]
 public unsafe partial struct HousingWorkshopSubmersibleSubData {
     [FieldOffset(0x0)] public HousingWorkshopSubmersibleData* Parent;
     [FieldOffset(0xE)] public byte RankId;

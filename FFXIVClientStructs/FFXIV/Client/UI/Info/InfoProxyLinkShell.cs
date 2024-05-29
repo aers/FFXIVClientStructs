@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.Linkshell)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
 public unsafe partial struct InfoProxyLinkshell {
     [FieldOffset(0x038)] public Utf8String UnkString0;
     [FieldOffset(0x0A0)] public Utf8String UnkString1;

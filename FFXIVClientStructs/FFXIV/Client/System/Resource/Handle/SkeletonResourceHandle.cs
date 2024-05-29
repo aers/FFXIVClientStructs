@@ -5,12 +5,12 @@ using FFXIVClientStructs.Havok.Common.Serialize.Util;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x138)]
 [GenerateInterop]
 [Inherits<ResourceHandle>]
+[StructLayout(LayoutKind.Explicit, Size = 0x138)]
 public unsafe partial struct SkeletonResourceHandle {
-    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public partial struct SkeletonHeader {
         [FieldOffset(0x0)] public uint SklbMagic;
         [FieldOffset(0x4)] public uint SklbVersion;

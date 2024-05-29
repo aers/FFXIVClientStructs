@@ -7,8 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //     Client::Game::Character::CharacterData
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 EB 03 48 8B CD 48 8B 43 08"
 // companion = minion
-[StructLayout(LayoutKind.Explicit, Size = 0x1C90)]
 [GenerateInterop]
 [Inherits<Character>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C90)]
 public partial struct Companion {
 }

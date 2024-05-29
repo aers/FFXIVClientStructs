@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xAE30)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xAE30)]
 public unsafe partial struct HousingOutdoorTerritory {
     [FieldOffset(0x00), CExportIgnore] public HousingTerritory HousingTerritory;
 

@@ -2,8 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x278)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct Inspect {
     [FieldOffset(0xC)] public uint ObjectId;
     [FieldOffset(0x10)] public byte Type;

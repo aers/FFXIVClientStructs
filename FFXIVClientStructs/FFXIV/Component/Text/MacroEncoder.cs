@@ -41,8 +41,8 @@ public unsafe partial struct MacroEncoder {
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 83 F8 ?? 7C ?? 49 8D 8E"), GenerateStringOverloads]
     public partial void EncodeString(Utf8String* output, byte* input);
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public partial struct MacroCodeDescription {
         [FieldOffset(0x00)] public byte Id;
         /* 

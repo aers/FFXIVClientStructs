@@ -31,9 +31,9 @@ public struct BalloonSlot {
 }
 
 [Agent(AgentId.ScreenLog)]
-[StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
 public unsafe partial struct AgentScreenLog {
 
     [FieldOffset(0x350)] public StdDeque<BalloonInfo> BalloonQueue;

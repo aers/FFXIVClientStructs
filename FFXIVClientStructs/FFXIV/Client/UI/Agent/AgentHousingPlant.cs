@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.HousingPlant)]
-[StructLayout(LayoutKind.Explicit, Size = 0x950)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x950)]
 public unsafe partial struct AgentHousingPlant {
     [FieldOffset(0x40)] public uint ContextAddonId;
     [FieldOffset(0x44)] public uint PlotType; // 27 indoor, 14 outdoor, 15 ? - not really sure, changes how the context menu is used

@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::Director
 //         Client::Game::Event::LuaEventHandler
 //           Client::Game::Event::EventHandler
-[StructLayout(LayoutKind.Explicit, Size = 0x12C8)]
 [GenerateInterop]
 [Inherits<PublicContentDirector>]
+[StructLayout(LayoutKind.Explicit, Size = 0x12C8)]
 public unsafe partial struct PublicContentEureka {
     [FieldOffset(0x1090)] public ushort Unk1090; // if set, prints log message 9068 in chat ("Character progression enhancement will be applied to all participants in this duty.")
     [FieldOffset(0x1092)] public ushort Unk1092; // if set, prints log message 4217 in chat ("To facilitate the successful completion of this duty, you have been granted the power of the Echo.")

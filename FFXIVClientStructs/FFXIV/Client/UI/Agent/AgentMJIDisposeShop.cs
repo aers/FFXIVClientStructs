@@ -3,14 +3,14 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIDisposeShop)]
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentMJIDisposeShop {
     [FieldOffset(0x28)] public AgentData* Data;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x170)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x170)]
     public unsafe partial struct AgentData {
         public const int NumCategories = 4;
 

@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x178)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct CSBonusManager {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0", 3, true)]
     public static partial CSBonusManager* Instance();

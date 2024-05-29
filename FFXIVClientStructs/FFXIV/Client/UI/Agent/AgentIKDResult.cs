@@ -3,14 +3,14 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.IKDResult)]
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentIKDResult {
     [FieldOffset(0x28)] public ResultData* Data;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x17A0)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x17A0)]
     public unsafe partial struct ResultData {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray60<CatchResult> _catchResults;
         [FieldOffset(0x2D0)] public byte CatchResultCount;

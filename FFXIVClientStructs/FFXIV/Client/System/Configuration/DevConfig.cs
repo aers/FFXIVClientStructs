@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Configuration;
 //   Common::Configuration::DevConfig
 //     Common::Configuration::ConfigBase
 //       Client::System::Common::NonCopyable
-[StructLayout(LayoutKind.Explicit, Size = 0x110)]
 [GenerateInterop]
 [Inherits<Common.Configuration.DevConfig>]
+[StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public partial struct DevConfig {
 }

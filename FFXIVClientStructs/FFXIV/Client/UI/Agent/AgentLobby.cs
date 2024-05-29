@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 20"
 [Agent(AgentId.Lobby)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1DF8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1DF8)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 71 18 48 89 01", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
@@ -66,8 +66,8 @@ public unsafe partial struct AgentLobby {
     public partial void OpenLoginWaitDialog(int position);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x9C0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x9C0)]
 public unsafe partial struct LobbyData {
     [FieldOffset(0)] public AgentLobby* AgentLobby;
     [FieldOffset(0x8)] public LobbyUIClient LobbyUIClient;
@@ -121,8 +121,8 @@ public unsafe struct LobbySubscriptionInfo // name probably totally wrong
     [FieldOffset(0x38)] public uint DaysUntilNextVeteranRank;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
 public unsafe partial struct CharaSelectCharacterEntry {
     [FieldOffset(0x8)] public ulong ContentId;
     [FieldOffset(0x10)] public byte Index;
@@ -232,8 +232,8 @@ public enum CharaSelectCharacterConfigFlags : ushort {
     // ? = 0x80
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 40 * 0x10)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 40 * 0x10)]
 public unsafe partial struct CharaSelectCharacterList {
     [StaticAddress("4C 8D 3D ?? ?? ?? ?? 48 8B DA", 3)]
     public static partial CharaSelectCharacterList* Instance();

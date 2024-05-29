@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 // Client::Game::Control::TargetSystem
 // ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C0"
-[StructLayout(LayoutKind.Explicit, Size = 0x5370)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x5370)]
 public unsafe partial struct TargetSystem {
     [FieldOffset(0x80)] public GameObject* Target;
     [FieldOffset(0x88)] public GameObject* SoftTarget;
@@ -60,8 +60,8 @@ public unsafe partial struct TargetSystem {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x12C0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x12C0)]
 public unsafe partial struct GameObjectArray {
     [FieldOffset(0x00)] public int Length;
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects;

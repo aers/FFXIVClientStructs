@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //     Client::Graphics::Scene::DrawObject
 //       Client::Graphics::Scene::Object
 // ctor "E8 ?? ?? ?? ?? 48 8D 55 EF 48 89 44 3E"
-[StructLayout(LayoutKind.Explicit, Size = 0x920)]
 [GenerateInterop]
 [Inherits<CharacterBase>]
+[StructLayout(LayoutKind.Explicit, Size = 0x920)]
 public unsafe partial struct Weapon {
     [FieldOffset(0x8F0)] public ushort ModelSetId;
     [FieldOffset(0x8F2)] public ushort SecondaryId;

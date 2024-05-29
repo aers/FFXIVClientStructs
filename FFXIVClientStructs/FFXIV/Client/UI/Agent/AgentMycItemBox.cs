@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MycItemBox)]
-[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct AgentMycItemBox {
 
     /// <remarks>
@@ -12,8 +12,8 @@ public unsafe partial struct AgentMycItemBox {
     [FieldOffset(0x40)] public MycItemBoxData* ItemBoxData;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1580)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1580)]
 public unsafe partial struct MycItemBoxData {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray7<MycItemCategory> _itemCaches;
 
@@ -39,8 +39,8 @@ public unsafe partial struct MycItemBoxData {
     [FieldOffset(0x1558)] public int LastSelectedActionId;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x184)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x184)]
 public unsafe partial struct MycItemCategory {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray48<MycItem> _items;
 

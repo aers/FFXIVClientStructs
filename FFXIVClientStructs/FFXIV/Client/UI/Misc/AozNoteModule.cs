@@ -24,26 +24,26 @@ public unsafe partial struct AozNoteModule {
         [FieldOffset(0x20D), FixedSizeArray] internal FixedSizeArray8<AozCrossHotBarMacroFlag> _crossHotBarMacroFlags;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 12)]
     public partial struct AozHotBar {
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray12<byte> _aozActionIds;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 16)]
     public partial struct AozCrossHotBar {
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray16<byte> _aozActionIds;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 12)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 12)]
     public partial struct AozHotBarMacroFlag {
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray12<bool> _macroFlags;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 16)]
     public partial struct AozCrossHotBarMacroFlag {
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray16<bool> _macroFlags;
     }

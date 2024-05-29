@@ -2,8 +2,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Telepo
 // ctor "E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 89 AB"
-[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct Telepo {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 12", 3)]
     public static partial Telepo* Instance();
@@ -44,8 +44,8 @@ public struct TeleportInfo {
     public bool IsApartment => SubIndex == 128 && !IsSharedHouse;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct SelectUseTicketInvoker {
     [FieldOffset(0x10)] public Telepo* Telepo;
 

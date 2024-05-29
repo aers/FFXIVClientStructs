@@ -3,8 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x228)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x228)]
 public unsafe partial struct ModelRenderer {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct Callback {

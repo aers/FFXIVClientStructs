@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x3888)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x3888)]
 public unsafe partial struct GameObjectManager {
     [FieldOffset(0x04)] public byte Active;
     [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects;

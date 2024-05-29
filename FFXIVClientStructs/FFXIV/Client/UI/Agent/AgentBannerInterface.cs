@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentBannerParty
 //   Client::UI::Agent::AgentBannerInterface
 //     Client::UI::Agent::AgentInterface
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [GenerateInterop(isInherited: true)]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentBannerInterface {
     [FieldOffset(0x28)] public Storage* Data;
 

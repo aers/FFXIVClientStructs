@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIAnimalManagement)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe partial struct AgentMJIAnimalManagement {
     // 0x28 struct of size 0xA0 used for reading excel sheets
     // 0xC8 bool[3] pending initialization requests

@@ -11,9 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 /// On construction, ShaderKeyCount is determined by <see cref="ShaderPackage.MaterialKeyCount"/>, and TextureCount is the number of
 /// <see cref="ShaderPackage.Samplers"/> with <see cref="ShaderPackage.ConstantSamplerUnknown.Slot"/> == <see cref="ShaderPackage.SamplerSlotMaterial"/>.
 /// </remarks>
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 [GenerateInterop]
 [Inherits<ReferencedClassBase>]
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct Material {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct TextureEntry {

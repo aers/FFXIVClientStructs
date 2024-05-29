@@ -3,16 +3,16 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MycBattleAreaInfo)]
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct AgentMycBattleAreaInfo {
 
     [FieldOffset(0x28)] public MycDynamicEventData* MycDynamicEventData;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x178)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct MycDynamicEventData {
     [FieldOffset(0x0C)] public byte Count;
 

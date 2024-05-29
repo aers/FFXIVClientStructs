@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Map
 // ctor "E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 01 E8 ?? ?? ?? ?? 40 88 AB"
-[StructLayout(LayoutKind.Explicit, Size = 0x4000)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x4000)]
 public unsafe partial struct Map {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24", 3)]
     public static partial Map* Instance();
@@ -32,8 +32,8 @@ public unsafe partial struct MarkerInfo {
     [FieldOffset(0x8B)] public bool ShouldRender;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct MapMarkerData {
     [FieldOffset(0x00)] public uint LevelId;
     [FieldOffset(0x04)] public uint ObjectiveId;

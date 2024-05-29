@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIFarmManagement)]
-[StructLayout(LayoutKind.Explicit, Size = 0x13D8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x13D8)]
 public unsafe partial struct AgentMJIFarmManagement {
     public const int MaxSlots = 20;
 

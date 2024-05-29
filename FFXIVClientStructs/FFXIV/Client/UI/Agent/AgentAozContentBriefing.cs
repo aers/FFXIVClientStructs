@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.AozContentBriefing)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 public unsafe partial struct AgentAozContentBriefing {
     [FieldOffset(0x28)] public AozContentData* AozContentData;
     [FieldOffset(0x30)] public Utf8String WeeklyNoviceTitle;
@@ -28,8 +28,8 @@ public unsafe partial struct AgentAozContentBriefing {
     public bool IsWeeklyChallengeComplete(AozWeeklyChallenge challenge) => IsWeeklyChallengeComplete((byte)challenge);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x380)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public unsafe partial struct AozContentData {
     [FieldOffset(0x04)] private int _UnkLoadState;
     [FieldOffset(0x0C)] public int SelectedContentIndex;

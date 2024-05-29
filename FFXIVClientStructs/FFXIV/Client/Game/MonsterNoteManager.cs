@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x460)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x460)]
 public unsafe partial struct MonsterNoteManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 E9", 3)]
     public static partial MonsterNoteManager* Instance();
@@ -21,8 +21,8 @@ public unsafe partial struct MonsterNoteRankInfo {
     [FieldOffset(0x3C)] public int Unknown3; // Seems to be zero padding
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x04)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public unsafe partial struct RankData {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray4<byte> _counts;
 

@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::ActionTimelineDriver
 // ctor "E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? B8"
-[StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
 public unsafe partial struct ActionTimelineDriver {
     public const int TimelineSlotCount = 14;
 

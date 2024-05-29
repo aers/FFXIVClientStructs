@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 // ctor "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F1 E8 ?? ?? ?? ?? 33 C9 48 8D 05 ?? ?? ?? ?? 48 89 06"
 [Agent(AgentId.RetainerList)]
-[StructLayout(LayoutKind.Explicit, Size = 0x5B8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x5B8)]
 public unsafe partial struct AgentRetainerList {
     [FieldOffset(0x30)] public uint RetainerListOpenedTime;
     [FieldOffset(0x34)] public uint RetainerListSortAddonId;

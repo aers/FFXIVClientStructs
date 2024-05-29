@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x08)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct SoftKeyboardDeviceInterface {
     [VirtualFunction(0)]
     public partial void Dtor(bool freeMemory);

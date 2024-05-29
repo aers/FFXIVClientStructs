@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.FriendList)]
-[StructLayout(LayoutKind.Explicit, Size = 0x3AD0)]
 [GenerateInterop]
 [Inherits<InfoProxyCommonList>]
+[StructLayout(LayoutKind.Explicit, Size = 0x3AD0)]
 public unsafe partial struct InfoProxyFriendList {
     [FieldOffset(0x0D8)] public Utf8String Str2;
     [FieldOffset(0x140)] public Utf8String Str3;
@@ -16,8 +16,8 @@ public unsafe partial struct InfoProxyFriendList {
     //3478
     [FieldOffset(0x3798), FixedSizeArray] internal FixedSizeArray800<byte> _unk3798;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct NameBuffer {
         [FieldOffset(0x00), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _value;
     }

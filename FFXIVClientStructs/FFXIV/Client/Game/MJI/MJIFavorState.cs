@@ -3,8 +3,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 // Client::Game::MJI::MJIFavorState
 // ctor "E8 ?? ?? ?? ?? 48 8B F8 66 89 B3"
 // indices: 0-2 are 'prev', 3-5 are 'curr', 6-8 are 'next', order is 4/6/8h
-[StructLayout(LayoutKind.Explicit, Size = 0x50)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct MJIFavorState {
     [FieldOffset(0x00)] public MJIManager* Manager;
     // 0x08: some message listener class, size 0x10, contains vtbl and pointer to this

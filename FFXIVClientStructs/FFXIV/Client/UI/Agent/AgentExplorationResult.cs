@@ -4,31 +4,31 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.AirShipExplorationResult)]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop]
 [Inherits<AgentExplorationResultInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentAirshipExplorationResult {
     [FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
 }
 
 [Agent(AgentId.SubmersibleExplorationResult)]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop]
 [Inherits<AgentExplorationResultInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentSubmersibleExplorationResult {
     [FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop(isInherited: true)]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentExplorationResultInterface {
     [FieldOffset(0x28)] public uint ItemId; // fuel tank or something
     [FieldOffset(0x30)] public ExplorationResultData* Data;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x4F70)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x4F70)]
 public unsafe partial struct ExplorationResultData {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray151<AtkValue> _values;
 
@@ -44,8 +44,8 @@ public unsafe partial struct ExplorationResultData {
     [FieldOffset(0x3CA8)] public byte StringPointerListCount;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct ExplorationResultDataItemReturn {
     [FieldOffset(0x00)] public uint ItemId;
     [FieldOffset(0x04)] public uint Quantity;

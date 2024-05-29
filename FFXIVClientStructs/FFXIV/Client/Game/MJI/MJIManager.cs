@@ -5,8 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 /// </summary>
 // Client::Game::MJI::MJIManager
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 F6 48 C7 01"
-[StructLayout(LayoutKind.Explicit, Size = 0x440)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x440)]
 public unsafe partial struct MJIManager {
     /// <summary>
     /// Reports if the player is currently on the Island Sanctuary.

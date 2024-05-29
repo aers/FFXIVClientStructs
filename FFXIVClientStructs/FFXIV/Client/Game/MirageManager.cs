@@ -2,8 +2,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // ctor "48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 C6 01 00 48 83 C1 04"
 // note: data is cleared when switching zones
-[StructLayout(LayoutKind.Explicit, Size = 0x1478)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1478)]
 public unsafe partial struct MirageManager {
     [StaticAddress("48 8B 1D ?? ?? ?? ?? 48 85 DB 74 48", 3, isPointer: true)]
     public static partial MirageManager* Instance();
@@ -30,8 +30,8 @@ public unsafe partial struct MirageManager {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0F 41 B0 01")]
     public partial bool RestorePrismBoxItem(uint itemIndex);
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public partial struct GlamourPlate {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray12<uint> _itemIds;
         [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray12<byte> _stainIds;

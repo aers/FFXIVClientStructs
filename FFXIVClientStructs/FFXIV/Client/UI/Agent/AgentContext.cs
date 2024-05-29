@@ -7,9 +7,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Context)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1750)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1750)]
 public unsafe partial struct AgentContext {
 
     [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray2<ContextMenu> _contextMenus;
@@ -82,8 +82,8 @@ public unsafe partial struct AgentContext {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x678)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x678)]
 public unsafe partial struct ContextMenu {
     [FieldOffset(0x00)] public short CurrentEventIndex;
     [FieldOffset(0x02)] public short CurrentEventId;

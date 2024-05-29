@@ -6,8 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 // Client::Game::Control::GazeController
 // ctor "48 89 5C 24 ?? 48 8D 05 ?? ?? ?? ?? BA"
-[StructLayout(LayoutKind.Explicit, Size = 0x5E0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x5E0)]
 [VirtualTable("48 89 5C 24 ?? 48 8D 05 ?? ?? ?? ?? BA", 8)]
 public unsafe partial struct GazeController {
     [FieldOffset(0x10)] public BattleChara* OwnerObject;

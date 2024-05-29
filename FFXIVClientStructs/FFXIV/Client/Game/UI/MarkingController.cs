@@ -4,8 +4,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::MarkingController
-[StructLayout(LayoutKind.Explicit, Size = 0x2E0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x2E0)]
 public unsafe partial struct MarkingController {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 4C 8B 85", 3)]
     public static partial MarkingController* Instance();

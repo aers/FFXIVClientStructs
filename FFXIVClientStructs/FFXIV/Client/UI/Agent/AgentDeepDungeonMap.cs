@@ -3,15 +3,15 @@ using System.Runtime.CompilerServices;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.DeepDungeonMap)]
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentDeepDungeonMap {
     [FieldOffset(0x28)] public AgentDeepDungeonMapData* Data;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x36)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x36)]
 public unsafe partial struct AgentDeepDungeonMapData {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray25<sbyte> _maps;
     [FieldOffset(0x19), FixedSizeArray] internal FixedSizeArray25<sbyte> _roomIndexes;

@@ -2,9 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xF0)]
 [GenerateInterop]
 [Inherits<ReferencedClassBase>]
+[StructLayout(LayoutKind.Explicit, Size = 0xF0)]
 public unsafe partial struct Model {
     [FieldOffset(0x18)] public Model* Previous;
     [FieldOffset(0x20)] public Model* Next;

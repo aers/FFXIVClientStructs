@@ -106,8 +106,8 @@ public struct MachinistGauge {
     [FieldOffset(0x0F)] public byte TimerActive;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct DancerGauge {
     [FieldOffset(0x08)] public byte Feathers;
     [FieldOffset(0x09)] public byte Esprit;

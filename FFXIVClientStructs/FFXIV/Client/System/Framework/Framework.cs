@@ -18,8 +18,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 // Client::System::Framework::Framework
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? EB 0A 48 8B CE"
-[StructLayout(LayoutKind.Explicit, Size = 0x35C8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x35C8)]
 public unsafe partial struct Framework {
     [FieldOffset(0x0010)] public SystemConfig SystemConfig;
     [FieldOffset(0x0460)] public DevConfig DevConfig;

@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 // Client::System::Input::Cursor
 //ctor "E8 ?? ?? ?? ?? 48 8B C8 EB ?? 48 8B CE 48 89 8F"
-[StructLayout(LayoutKind.Explicit, Size = 0x378)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x378)]
 public unsafe partial struct Cursor {
     [FieldOffset(0x009)] public bool UseSoftwareCursor;
     [FieldOffset(0x00A)] public byte SoftwareCursorScale;

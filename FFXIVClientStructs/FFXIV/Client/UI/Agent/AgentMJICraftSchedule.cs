@@ -3,16 +3,16 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJICraftSchedule)]
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct AgentMJICraftSchedule {
     [FieldOffset(0x28)] public ScheduleData* Data;
     [FieldOffset(0x30)] public int* CurReviewMaterialsSortOrder; // yeah, it's really a pointer to an int...
     [FieldOffset(0x38)] public int CurReviewMaterialsTab;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0xB60)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0xB60)]
     public unsafe partial struct ScheduleData {
         [FieldOffset(0x000)] public int UpdateState; // 0 initial, 1 request sent, 2 response received
         [FieldOffset(0x004)] public int OpenedModalAddonHandle;
@@ -74,8 +74,8 @@ public unsafe partial struct AgentMJICraftSchedule {
         [FieldOffset(0xB5D)] public DataFlags2 Flags2;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x98)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x98)]
     public unsafe partial struct CraftData {
         // 0x0: first 0x20 bytes is a copy of MJICraftworksObject row data
         [FieldOffset(0x00)] public ushort ItemId;
@@ -99,8 +99,8 @@ public unsafe partial struct AgentMJICraftSchedule {
         [FieldOffset(0x30)] public Utf8String Name;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x54)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x54)]
     public unsafe partial struct WorkshopData {
         [FieldOffset(0x00)] public byte NumScheduleEntries;
         [FieldOffset(0x01)] public byte NumEfficientCrafts;
@@ -128,8 +128,8 @@ public unsafe partial struct AgentMJICraftSchedule {
         [FieldOffset(0x6C)] public uint ItemRowId;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
     public unsafe partial struct MaterialAllocation {
         [FieldOffset(0x000), FixedSizeArray] internal FixedSizeArray3<MaterialAllocationEntry> _entries; // [0] = current cycle, [1] = current week, [2] = current + next week
 
@@ -138,8 +138,8 @@ public unsafe partial struct AgentMJICraftSchedule {
         [FieldOffset(0x2B9), FixedSizeArray] internal FixedSizeArray24<byte> _craftIds;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     public unsafe partial struct MaterialAllocationEntry {
         [FieldOffset(0x00)] public ushort EntryIndex;
         [FieldOffset(0x02), FixedSizeArray] internal FixedSizeArray109<ushort> _usedAmounts; // [i] = num allocated materials of type corresponding to i'th row of MJIItemPouch sheet

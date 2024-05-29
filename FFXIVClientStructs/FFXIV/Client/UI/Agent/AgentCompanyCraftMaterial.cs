@@ -4,9 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CompanyCraftMaterial)]
-[StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 public unsafe partial struct AgentCompanyCraftMaterial {
 
     [FieldOffset(0x94)] public uint ResultItem;

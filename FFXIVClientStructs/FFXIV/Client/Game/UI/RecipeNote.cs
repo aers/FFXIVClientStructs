@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::RecipeNote
 // ctor "E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 48 89 AB"
-[StructLayout(LayoutKind.Explicit, Size = 0xB18)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xB18)]
 public unsafe partial struct RecipeNote {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 FE ?? ?? ?? ?? 75 0F", 3)]
     public static partial RecipeNote* Instance();
@@ -37,8 +37,8 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x01)] public byte Amount;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x500)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x500)]
     public unsafe partial struct RecipeEntry {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<RecipeIngredient> _ingredients;
         [FieldOffset(0x440), FixedSizeArray] internal FixedSizeArray2<RecipeCrystal> _crystals;

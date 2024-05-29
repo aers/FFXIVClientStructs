@@ -4,8 +4,8 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 // 0xA160 for Indoor, 0xAE30 for Outdoor
-[StructLayout(LayoutKind.Explicit, Size = 0xA160)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xA160)]
 public unsafe partial struct HousingTerritory { // this should be renamed to IndoorHousingTerritory and the fields should be copied to OutdoorHousingTerritory
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture;
     [FieldOffset(0x8968)] public HousingObjectManager HousingObjectManager;
@@ -21,8 +21,8 @@ public unsafe struct HousingFurniture {
     [FieldOffset(0x24)] public int Index; // Index into the HousingObjectManager
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xC98)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xC98)]
 public unsafe partial struct HousingObjectManager {
     [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray400<Pointer<GameObject>> _objects;
 }

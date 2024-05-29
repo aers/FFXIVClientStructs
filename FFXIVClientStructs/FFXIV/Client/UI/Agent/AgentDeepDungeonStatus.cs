@@ -3,15 +3,15 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.DeepDungeonStatus)]
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentDeepDungeonStatus {
     [FieldOffset(0x28)] public DeepDungeonStatusData* Data;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x8D8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x8D8)]
 public unsafe partial struct DeepDungeonStatusData {
     [FieldOffset(0x00)] public uint Level;
     [FieldOffset(0x04)] public uint MaxLevel;

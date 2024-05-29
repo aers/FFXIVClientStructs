@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.CrossRealmParty)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1620)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1620)]
 public unsafe partial struct InfoProxyCrossRealm {
     [FieldOffset(0x38D)] public byte LocalPlayerGroupIndex;
     [FieldOffset(0x38E)] public byte GroupCount;
@@ -43,8 +43,8 @@ public unsafe partial struct InfoProxyCrossRealm {
     public static partial bool IsContentIdInParty(ulong contentId);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 public unsafe partial struct CrossRealmGroup {
     [FieldOffset(0x00)] public byte GroupMemberCount;
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray8<CrossRealmMember> _groupMembers;

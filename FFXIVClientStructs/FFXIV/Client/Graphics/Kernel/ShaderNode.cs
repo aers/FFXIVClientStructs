@@ -1,8 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::ShaderNode
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct ShaderNode {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct ShaderPass {

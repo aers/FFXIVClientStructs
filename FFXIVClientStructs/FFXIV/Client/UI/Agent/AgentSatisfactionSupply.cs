@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.SatisfactionSupply)]
-[StructLayout(LayoutKind.Explicit, Size = 0x500)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x500)]
 public unsafe partial struct AgentSatisfactionSupply {
 
     [FieldOffset(0x40)] public SatisfactionSupplyNpcInfo NpcInfo;

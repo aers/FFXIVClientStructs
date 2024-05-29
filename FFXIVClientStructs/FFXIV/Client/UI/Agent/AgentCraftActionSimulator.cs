@@ -4,9 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CraftActionSimulator)]
-[StructLayout(LayoutKind.Explicit, Size = 0x90)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct AgentCraftActionSimulator {
     [FieldOffset(0x28)] public ProgressEfficiencyCalculations* Progress; // Progress tab of the Efficiency Calculations window.
     [FieldOffset(0x40)] public QualityEfficiencyCalculations* Quality; // Quality tab of the Efficiency Calculations window.

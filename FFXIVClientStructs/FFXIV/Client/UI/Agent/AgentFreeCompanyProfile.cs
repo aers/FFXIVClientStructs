@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.FreeCompanyProfile)]
-[StructLayout(LayoutKind.Explicit, Size = 0x27C)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x27C)]
 public unsafe partial struct AgentFreeCompanyProfile {
     //First = 0xe0 00 00 00 00 00 00 00
     //Next were the same as AgentINspect GuildStruct 0x08

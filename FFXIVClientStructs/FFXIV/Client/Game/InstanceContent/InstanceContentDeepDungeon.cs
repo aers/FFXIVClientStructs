@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //         Client::Game::Event::LuaEventHandler
 //           Client::Game::Event::EventHandler
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 E8 ?? ?? ?? ?? C6 87"
-[StructLayout(LayoutKind.Explicit, Size = 0x27D8)]
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
+[StructLayout(LayoutKind.Explicit, Size = 0x27D8)]
 public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x1D48), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
     [FieldOffset(0x1D68), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;

@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Client.UI.Info;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.SocialFriendList)]
-[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 // inlined ctor
 public unsafe partial struct AgentFriendList {
     [FieldOffset(0x28)] public InfoProxyFriendList* InfoProxy;

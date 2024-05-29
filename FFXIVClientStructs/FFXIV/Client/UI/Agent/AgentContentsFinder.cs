@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ContentsFinder)]
-[StructLayout(LayoutKind.Explicit, Size = 0x20E8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x20E8)]
 public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x38)] public Utf8String Description;

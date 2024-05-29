@@ -3,8 +3,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 /// <summary>
 /// A constant buffer (or cbuffer), which is used to send values to shaders. Usually contains 4*n floats.
 /// </summary>
-[StructLayout(LayoutKind.Explicit, Size = 0x70)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct ConstantBuffer {
     public const byte DefaultLoadSourcePointerFlags = 2;
 

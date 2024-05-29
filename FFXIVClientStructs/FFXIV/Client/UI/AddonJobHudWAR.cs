@@ -11,8 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonJobHudWAR0 {
     [FieldOffset(0x000)] public AddonJobHud JobHud;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct BeastGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;

@@ -3,8 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // ctor "48 83 EC 28 48 83 3D ?? ?? ?? ?? ?? 75 2E 33 D2"
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct GcArmyManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 57 7C")]
     public static partial GcArmyManager* Instance();
@@ -21,8 +21,8 @@ public unsafe partial struct GcArmyManager {
     public partial GcArmyMember* GetMember(uint index);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB18)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xB18)]
 public unsafe partial struct GcArmyData {
     [FieldOffset(0), FixedSizeArray] internal FixedSizeArray8<GcArmyMember> _members;
     /// <remarks> RowId of GcArmyProgress </remarks>

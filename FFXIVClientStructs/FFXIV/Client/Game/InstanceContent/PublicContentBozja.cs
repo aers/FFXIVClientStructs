@@ -9,9 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::Director
 //         Client::Game::Event::LuaEventHandler
 //           Client::Game::Event::EventHandler
-[StructLayout(LayoutKind.Explicit, Size = 0x2CB8)]
 [GenerateInterop]
 [Inherits<PublicContentDirector>]
+[StructLayout(LayoutKind.Explicit, Size = 0x2CB8)]
 public partial struct PublicContentBozja {
     [FieldOffset(0x1098)] public DynamicEventContainer DynamicEventContainer;
 
@@ -21,8 +21,8 @@ public partial struct PublicContentBozja {
 
 // Client::Game::InstanceContent::DynamicEventContainer
 //   Client::Game::InstanceContent::ContentSheetWaiterInterface
-[StructLayout(LayoutKind.Explicit, Size = 0x1B28)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1B28)]
 public unsafe partial struct DynamicEventContainer {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray16<DynamicEvent> _events;
 }

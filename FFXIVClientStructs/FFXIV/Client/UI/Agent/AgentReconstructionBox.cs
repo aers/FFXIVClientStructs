@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.ReconstructionBox)]
-[StructLayout(LayoutKind.Explicit, Size = 0x240)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x240)]
 public unsafe partial struct AgentReconstructionBox {
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray10<AgentItemDonationInfo> _donatedItems;
 

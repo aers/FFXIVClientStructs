@@ -9,9 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Inspect)]
-[StructLayout(LayoutKind.Explicit, Size = 0x820)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x820)]
 public unsafe partial struct AgentInspect {
     //Notes to INfoProxies:
     //0xa used for DeepDungeon
@@ -61,8 +61,8 @@ public unsafe partial struct AgentInspect {
         [FieldOffset(0x1E)] public Utf8String GuildName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct ItemData {
         [FieldOffset(0x00)] public uint IconId;
         [FieldOffset(0x04)] public IconFlagsTopRight IconFlags1;

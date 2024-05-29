@@ -2,8 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Network;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB60)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xB60)]
 public unsafe partial struct NetworkModule {
     [FieldOffset(0x028)] public byte LobbyCount;
     [FieldOffset(0x02C), FixedSizeArray] internal FixedSizeArray12<uint> _lobbyPorts;

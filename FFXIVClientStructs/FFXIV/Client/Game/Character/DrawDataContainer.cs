@@ -5,8 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::DrawDataContainer
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8"
-[StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x008)] public Character* Parent;
 
@@ -115,8 +115,8 @@ public unsafe partial struct DrawObjectData {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1A)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A)]
 public unsafe partial struct CustomizeData {
     [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray26<byte> _data;
 

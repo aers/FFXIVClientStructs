@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.LinkshellChat)]
-[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct InfoProxyLinkshellChat;

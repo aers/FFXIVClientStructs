@@ -10,9 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //           Client::Game::Event::EventHandler
 // ctor "40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 33 C0"
 // has id >63000 in InstanceContent sheet
-[StructLayout(LayoutKind.Explicit, Size = 0x1CA8 + 0x658)]
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1CA8 + 0x658)]
 public unsafe partial struct InstanceContentOceanFishing {
 
     // Most of the fields, if not specified, can be found in "83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05"
@@ -80,8 +80,8 @@ public unsafe partial struct InstanceContentOceanFishing {
         [FieldOffset(0xC)] public uint TotalPoints;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct AllResultStruct {
         [FieldOffset(0x0)] public ushort WorldId;
         [FieldOffset(0x2)] public ushort CaughtFish;
@@ -89,8 +89,8 @@ public unsafe partial struct InstanceContentOceanFishing {
         [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray32<byte> _playerName;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x22)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x22)]
     public partial struct IndividualResultStruct {
         [FieldOffset(0x2)] public uint TotalPoints;
         [FieldOffset(0xA)] public uint ExperiencePoints;

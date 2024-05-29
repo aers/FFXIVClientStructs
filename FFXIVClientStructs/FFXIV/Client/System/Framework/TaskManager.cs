@@ -5,8 +5,8 @@ public struct TaskManagerOsData {
     [FieldOffset(0x40)] public nint Handle; // Win32 HANDLE type
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x70)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct TaskManager {
     [FieldOffset(0x08)] public TaskManagerOsData OsData;
     [FieldOffset(0x58)] public RootTask* TaskList;

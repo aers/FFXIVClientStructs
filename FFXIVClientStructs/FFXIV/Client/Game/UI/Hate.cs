@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x108)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x108)]
 public unsafe partial struct Hate {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray32<HateInfo> _hateInfo;
     [FieldOffset(0x100)] public int HateArrayLength;

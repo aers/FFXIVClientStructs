@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 public partial struct SoftKeyboardDeviceInterface {
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public unsafe partial struct SoftKeyboardInputInterface {
         // CAUTION: May be the concrete class' dtor!
         [VirtualFunction(0)]

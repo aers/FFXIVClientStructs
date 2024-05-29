@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Singleton
 //   Client::Graphics::Kernel::Notifier
 // WARNING: THIS IS OUT OF DATE
-[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 [GenerateInterop]
 [Inherits<Notifier>]
+[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 public unsafe partial struct RenderTargetManager {
 
     // the first 65 fields seem to be render target pointers

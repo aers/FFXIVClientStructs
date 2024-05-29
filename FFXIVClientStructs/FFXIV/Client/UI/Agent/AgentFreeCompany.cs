@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //      size 0xAD8
 
 [Agent(AgentId.FreeCompany)]
-[StructLayout(LayoutKind.Explicit, Size = 0xAD8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0xAD8)]
 public unsafe partial struct AgentFreeCompany {
     [FieldOffset(0x040)] public RaptureTextModule* RaptureTextModule;
     [FieldOffset(0x048)] public void* InfoProxy0;
@@ -30,8 +30,8 @@ public unsafe partial struct AgentFreeCompany {
 
     // This supports 3 company actions despite 2 being the current limit.
     // The UI also has a blank 3rd slot
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct FreeCompanyActionTimer {
         [FieldOffset(0x00)] public uint TimeSinceUpdate;
         [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray3<uint> _timeRemainingAtUpdate;
