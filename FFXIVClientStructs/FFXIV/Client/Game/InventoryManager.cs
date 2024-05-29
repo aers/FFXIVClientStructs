@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::InventoryManager
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9 33 ED B9 ?? ?? ?? ??"
-[StructLayout(LayoutKind.Explicit, Size = 0x3620)]
+[StructLayout(LayoutKind.Explicit, Size = 0x36B8)]
 [GenerateInterop]
 public unsafe partial struct InventoryManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
@@ -93,7 +93,7 @@ public unsafe partial struct InventoryContainer {
     public partial InventoryItem* GetInventorySlot(int index);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 [GenerateInterop]
 public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x00)] public InventoryType Container;
@@ -114,10 +114,10 @@ public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x12)] public ushort Condition;
     [FieldOffset(0x14)] public ItemFlags Flags;
     [FieldOffset(0x18)] public ulong CrafterContentId;
-    [FieldOffset(0x20)] public fixed ushort Materia[5];
-    [FieldOffset(0x2A)] public fixed byte MateriaGrade[5];
-    [FieldOffset(0x2F)] public byte Stain;
-    [FieldOffset(0x30)] public uint GlamourId;
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
+    [FieldOffset(0x2A), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
+    [FieldOffset(0x2F), FixedSizeArray] internal FixedSizeArray2<byte> _stains;
+    [FieldOffset(0x34)] public uint GlamourId;
 
     [Flags]
     public enum ItemFlags : byte {
@@ -170,7 +170,7 @@ public unsafe partial struct InventoryItem : ICreatable {
 
     /// <summary>Gets the stain from the original InventoryItem or itself if not symbolic.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 3A 43 08")]
-    public partial byte GetStain();
+    public partial byte GetStain(int index);
 
     /// <summary>Gets the glamour id from the original InventoryItem or itself if not symbolic.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 39 33 75")]
