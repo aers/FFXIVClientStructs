@@ -16,7 +16,7 @@ public unsafe partial struct AddonActionCross {
     [FieldOffset(0x578)] public ControlGuide ControlGuideActionButtons;
     [FieldOffset(0x5C0)] public AtkTextNode* SetNumIconNode;
     [FieldOffset(0x5C8)] public AtkComponentBase* ControlGuideEditComponent;
-    [FieldOffset(0x6C8)] public AtkResNode* RootNode;
+    [FieldOffset(0x6C8)] public AtkResNode* AACRootNode;
     [FieldOffset(0x6D0)] public AtkResNode* ContainerNode;
     [FieldOffset(0x6E0)] public byte ButtonMask; // not raw input data; represents input state after keybinds/mappings
 

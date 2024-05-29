@@ -33,9 +33,9 @@ public unsafe partial struct ConfigModule {
             var sysConfig = Framework.Instance()->SystemConfig;
             var id = (uint)OptionId;
             byte* namePtr = null;
-            if (sysConfig.CommonSystemConfig.ConfigBase.ConfigCount > id) namePtr = (sysConfig.CommonSystemConfig.ConfigBase.ConfigEntry + id)->Name;
-            if (namePtr == null && sysConfig.CommonSystemConfig.UiConfig.ConfigCount > id) namePtr = (sysConfig.CommonSystemConfig.UiConfig.ConfigEntry + id)->Name;
-            if (namePtr == null && sysConfig.CommonSystemConfig.UiControlConfig.ConfigCount > id) namePtr = (sysConfig.CommonSystemConfig.UiControlConfig.ConfigEntry + id)->Name;
+            if (sysConfig.ConfigCount > id) namePtr = (sysConfig.ConfigEntry + id)->Name;
+            if (namePtr == null && sysConfig.ConfigCount > id) namePtr = (sysConfig.ConfigEntry + id)->Name;
+            if (namePtr == null && sysConfig.ConfigCount > id) namePtr = (sysConfig.ConfigEntry + id)->Name;
             if (namePtr == null) return string.Empty;
             var l = 0;
             while (namePtr[l] != 0) l++;

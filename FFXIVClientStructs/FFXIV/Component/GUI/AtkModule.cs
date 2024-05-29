@@ -19,7 +19,7 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x130)] internal nint Resources;
     [FieldOffset(0x1B8)] public AtkFontManager AtkFontManager;
     [FieldOffset(0x250)] public AtkTextureResourceManager AtkTextureResourceManager;
-    [FieldOffset(0x2A8)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
+    [FieldOffset(0x2A8)] public AtkUnitManager* AtkUnitManager;
     [FieldOffset(0x2B0)] public AtkInputManager AtkInputManager;
     [FieldOffset(0x1B50)] public AtkCollisionManager AtkCollisionManager;
     [FieldOffset(0x1B90)] public AtkArrayDataHolder AtkArrayDataHolder;

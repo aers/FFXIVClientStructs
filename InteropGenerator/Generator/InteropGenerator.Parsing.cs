@@ -259,9 +259,10 @@ public sealed partial class InteropGenerator {
         using ImmutableArrayBuilder<FieldInfo> publicFieldBuilder = new();
 
         foreach (IFieldSymbol fieldSymbol in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
-            if (fieldSymbol.Type is not INamedTypeSymbol fieldTypeSymbol)
-                continue;
             if (fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out AttributeData? fixedSizeArrayAttributeData)) {
+                if (fieldSymbol.Type is not INamedTypeSymbol fieldTypeSymbol)
+                    continue;
+                
                 if (!fieldTypeSymbol.IsGenericType || fieldTypeSymbol.TypeArguments.Length != 1) // malformed field
                     continue;
 

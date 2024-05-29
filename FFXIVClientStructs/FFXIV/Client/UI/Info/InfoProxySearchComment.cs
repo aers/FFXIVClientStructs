@@ -17,12 +17,13 @@ public unsafe partial struct InfoProxySearchComment {
     [FieldOffset(0x238)] public bool HasUpdateData;
 
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
-    public struct UpdateDataPacket {
+    [GenerateInterop]
+    public partial struct UpdateDataPacket {
         [FieldOffset(0x00)] public InfoProxyCommonList.CharacterData.OnlineStatus OnlineStatusMask;
         [FieldOffset(0x08)] public ulong LookingForPartyClassJobIdMask;
         [FieldOffset(0x10)] public byte ClassJobId;
         [FieldOffset(0x11)] public InfoProxyCommonList.CharacterData.LanguageMask LanguageMask;
-        [FieldOffset(0x12)] public fixed byte SearchComment[0xC1];
+        [FieldOffset(0x12), FixedSizeArray(isString: true)] internal FixedSizeArray193<byte> _searchComment;
     }
 
     [MemberFunction("38 51 38 74 0A")]

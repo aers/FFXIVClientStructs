@@ -13,12 +13,12 @@ public unsafe partial struct AddonJobHud {
     [FieldOffset(0x222)] public byte Unk222;
 
     // these 4 pointers get set in vf72, and point to varying offsets for each type of gauge
-    [FieldOffset(0x228)] public AddonJobHudGauge* GaugeStandard;
-    [FieldOffset(0x230)] public AddonJobHudGauge* GaugeSimple;
-    [FieldOffset(0x238)] public AddonJobHudGaugeData* DataPrevious;
-    [FieldOffset(0x240)] public AddonJobHudGaugeData* DataCurrent; // Current is always used to apply updates, and then copied onto Previous. The two are compared to detect changes.
+    [FieldOffset(0x228)] public AddonJobHudGauge* GaugeStandardPointer;
+    [FieldOffset(0x230)] public AddonJobHudGauge* GaugeSimplePointer;
+    [FieldOffset(0x238)] public AddonJobHudGaugeData* DataPreviousPointer;
+    [FieldOffset(0x240)] public AddonJobHudGaugeData* DataCurrentPointer; // Current is always used to apply updates, and then copied onto Previous. The two are compared to detect changes.
 
-    [FieldOffset(0x248)] public AtkResNode* RootNode;
+    [FieldOffset(0x248)] public AtkResNode* JobHudRootNode;
 
     [FieldOffset(0x250)] public int TimelineLabelStandard; // always set to 19 by vf75
     [FieldOffset(0x254)] public int TimelineLabelSimple; // always set to 101 by vf75

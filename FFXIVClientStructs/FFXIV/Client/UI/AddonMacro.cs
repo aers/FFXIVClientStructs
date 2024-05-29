@@ -22,11 +22,11 @@ public unsafe partial struct AddonMacro {
     /// <summary>
     /// Array of default icons, used when no macro icon command is used.
     /// </summary>
-    [FieldOffset(0x5EC)] public fixed int MacroSetIcon[100];
+    [FieldOffset(0x5EC), FixedSizeArray] internal FixedSizeArray100<int> _macroSetIcon;
 
     [FieldOffset(0x780), FixedSizeArray] internal FixedSizeArray100<Utf8String> _macroName;
 
-    [FieldOffset(0x3020)] public fixed bool MacroCreated[100];
+    [FieldOffset(0x3020), FixedSizeArray] internal FixedSizeArray100<bool> _macroCreated;
 
     /// <summary>
     /// Note: Value is only set when changing page.

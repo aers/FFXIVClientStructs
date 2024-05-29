@@ -63,8 +63,8 @@ public unsafe partial struct InfoProxyCommonList {
         // 1 byte
         [FieldOffset(0x28)] public byte Sex;
         [FieldOffset(0x29)] public byte Job;
-        [FieldOffset(0x2A)] public fixed byte Name[32];
-        [FieldOffset(0x4A)] public fixed byte FCTag[6];
+        [FieldOffset(0x2A), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+        [FieldOffset(0x4A), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _FCTag;
         // 8 bytes
         [FieldOffset(0x58)] public CharacterIndex* Index;
 

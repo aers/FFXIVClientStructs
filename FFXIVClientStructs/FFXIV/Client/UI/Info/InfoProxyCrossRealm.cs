@@ -62,7 +62,7 @@ public unsafe struct CrossRealmMember {
     [FieldOffset(0x22)] public short HomeWorld;
     [FieldOffset(0x24)] public short CurrentWorld;
     [FieldOffset(0x26)] public byte ClassJobId;
-    [FieldOffset(0x2B)] public fixed byte Name[32];
+    [FieldOffset(0x2B), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x50)] public byte MemberIndex;
     [FieldOffset(0x51)] public byte GroupIndex;
     [FieldOffset(0x53)] public byte IsPartyLeader;

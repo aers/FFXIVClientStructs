@@ -106,7 +106,7 @@ public unsafe struct LobbyDataCenterWorldEntry {
     [FieldOffset(0)] public ushort Id; // RowId in World sheet
     [FieldOffset(0x2)] public ushort Index;
 
-    [FieldOffset(0x14)] public fixed byte Name[32]; // size unknown
+    [FieldOffset(0x14), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name; // size unknown
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)] // size unknown

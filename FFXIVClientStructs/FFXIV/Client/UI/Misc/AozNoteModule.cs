@@ -16,7 +16,7 @@ public unsafe partial struct AozNoteModule {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x290)]
     public partial struct ActiveSet {
-        [FieldOffset(0)] public fixed uint ActiveActions[24]; // Action RowIds
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray24<uint> _activeActions;
         [FieldOffset(0x60), FixedSizeArray(isString: true)] internal FixedSizeArray61<byte> _customName;
         [FieldOffset(0x9D), FixedSizeArray] internal FixedSizeArray10<AozHotBar> _standardHotBars;
         [FieldOffset(0x115), FixedSizeArray] internal FixedSizeArray8<AozCrossHotBar> _crossHotBars;

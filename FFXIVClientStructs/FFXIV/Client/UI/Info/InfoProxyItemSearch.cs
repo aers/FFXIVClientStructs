@@ -20,31 +20,24 @@ public unsafe partial struct InfoProxyItemSearch {
     // [FieldOffset(0x25)] public byte Unk_0x25; // ?
     // [FieldOffset(0x28)] public byte Unk_0x28;
 
-    [FieldOffset(0x30)] private fixed byte InternalListings[MarketBoardListing.Size * 100];
-
     /// <summary>
     /// All items currently available on the general marketboard for the last specified search term (found in <see cref="SearchItemId"/>.
     /// Can be empty if no results were found.
     /// </summary>
-    public Span<MarketBoardListing> Listings => new(Unsafe.AsPointer(ref this.InternalListings[0]), (int)this.ListingCount);
+    [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray100<MarketBoardListing> _listings;
 
     [FieldOffset(0x4810)] public uint ListingCount;
-
-    [FieldOffset(0x4818)] private fixed byte InternalRetainerListings[MarketBoardListing.Size * 20];
 
     /// <summary>
     /// All items currently available for sale from the last targeted retainer. Can be empty if no results were found.
     /// </summary>
-    public Span<MarketBoardListing> RetainerListings =>
-        new(Unsafe.AsPointer(ref this.InternalRetainerListings[0]), (int)this.RetainerListingCount);
-
-    [FieldOffset(0x56A8)] private fixed byte InternalPlayerRetainers[PlayerRetainerInfo.Size * 10];
+    [FieldOffset(0x4818), FixedSizeArray] internal FixedSizeArray20<MarketBoardListing> _retainerListings;
 
     /// <summary>
     /// All retainers currently registered to the player. Needs to be loaded by accessing any retainer's marketboard listings and appears
     /// to be a cache of some sort.
     /// </summary>
-    public Span<PlayerRetainerInfo> PlayerRetainers => new(Unsafe.AsPointer(ref this.InternalPlayerRetainers[0]), (int)this.PlayerRetainerCount);
+    [FieldOffset(0x56A8), FixedSizeArray] internal FixedSizeArray10<PlayerRetainerInfo> _playerRetainers;
 
     [FieldOffset(0x5B58)] public uint PlayerRetainerCount;
 
@@ -52,7 +45,7 @@ public unsafe partial struct InfoProxyItemSearch {
 
     [FieldOffset(0x5680)] public LastPurchasedMarketboardItem LastPurchasedMarketboardItem;
 
-    [FieldOffset(0x5B68)] public fixed uint WishlistItems[10];
+    [FieldOffset(0x5B68), FixedSizeArray] internal FixedSizeArray10<uint> _wishlistItems;
     [FieldOffset(0x5B90)] public uint WishlistSize;
 
     // [FieldOffset(0x5B96)] public byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
@@ -110,7 +103,7 @@ public unsafe struct MarketBoardListing {
     /// <summary>
     /// List of materias associated with this item. Only valid up to the count specified in MateriaCount.
     /// </summary>
-    [FieldOffset(0x9E)] public fixed ushort Materia[5];
+    [FieldOffset(0x9E), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
 
     [FieldOffset(0xA8)] public bool IsHqItem;
     [FieldOffset(0xA9)] public byte MateriaCount;

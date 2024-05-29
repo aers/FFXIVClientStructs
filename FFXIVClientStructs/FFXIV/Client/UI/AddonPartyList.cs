@@ -6,13 +6,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop, Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x13E0)]
 public unsafe partial struct AddonPartyList {
-    [FieldOffset(0x220)] public PartyMembers PartyMember; // 8 PartyListMember
-    [FieldOffset(0x9E0)] public TrustMembers TrustMember; // 7 PartyListMember
+    [FieldOffset(0x220), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _partyMembers;
+    [FieldOffset(0x9E0), FixedSizeArray] internal FixedSizeArray7<PartyListMemberStruct> _trustMembers;
     [FieldOffset(0x10A8)] public PartyListMemberStruct Chocobo;
     [FieldOffset(0x11A0)] public PartyListMemberStruct Pet;
 
-    [FieldOffset(0x1298)] public fixed uint PartyClassJobIconId[8];
-    [FieldOffset(0x12B8)] public fixed uint TrustClassJobIconId[7];
+    [FieldOffset(0x1298), FixedSizeArray] internal FixedSizeArray8<uint> _partyClassJobIconId;
+    [FieldOffset(0x12B8), FixedSizeArray] internal FixedSizeArray7<uint> _trustClassJobIconId;
     [FieldOffset(0x12D4)] public uint ChocoboIconId;
     [FieldOffset(0x12D8)] public uint PetIconId;
 
@@ -39,93 +39,12 @@ public unsafe partial struct AddonPartyList {
     [FieldOffset(0x13DA)] public byte PetCount; // or PetSummoned?
     [FieldOffset(0x13DB)] public byte ChocoboCount; // or ChocoboSummoned?
 
-    [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 8)]
-    public struct PartyMembers {
-        [FieldOffset(PartyListMemberStruct.Size * 00)]
-        public PartyListMemberStruct PartyMember0;
-
-        [FieldOffset(PartyListMemberStruct.Size * 01)]
-        public PartyListMemberStruct PartyMember1;
-
-        [FieldOffset(PartyListMemberStruct.Size * 02)]
-        public PartyListMemberStruct PartyMember2;
-
-        [FieldOffset(PartyListMemberStruct.Size * 03)]
-        public PartyListMemberStruct PartyMember3;
-
-        [FieldOffset(PartyListMemberStruct.Size * 04)]
-        public PartyListMemberStruct PartyMember4;
-
-        [FieldOffset(PartyListMemberStruct.Size * 05)]
-        public PartyListMemberStruct PartyMember5;
-
-        [FieldOffset(PartyListMemberStruct.Size * 06)]
-        public PartyListMemberStruct PartyMember6;
-
-        [FieldOffset(PartyListMemberStruct.Size * 07)]
-        public PartyListMemberStruct PartyMember7;
-
-        public PartyListMemberStruct this[int i] {
-            get {
-                return i switch {
-                    0 => PartyMember0,
-                    1 => PartyMember1,
-                    2 => PartyMember2,
-                    3 => PartyMember3,
-                    4 => PartyMember4,
-                    5 => PartyMember5,
-                    6 => PartyMember6,
-                    7 => PartyMember7,
-                    _ => throw new IndexOutOfRangeException("Index should be in range of 0-7")
-                };
-            }
-        }
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = PartyListMemberStruct.Size * 7)]
-    public struct TrustMembers {
-        [FieldOffset(PartyListMemberStruct.Size * 00)]
-        public PartyListMemberStruct Trust0;
-
-        [FieldOffset(PartyListMemberStruct.Size * 01)]
-        public PartyListMemberStruct Trust1;
-
-        [FieldOffset(PartyListMemberStruct.Size * 02)]
-        public PartyListMemberStruct Trust2;
-
-        [FieldOffset(PartyListMemberStruct.Size * 03)]
-        public PartyListMemberStruct Trust3;
-
-        [FieldOffset(PartyListMemberStruct.Size * 04)]
-        public PartyListMemberStruct Trust4;
-
-        [FieldOffset(PartyListMemberStruct.Size * 05)]
-        public PartyListMemberStruct Trust5;
-
-        [FieldOffset(PartyListMemberStruct.Size * 06)]
-        public PartyListMemberStruct Trust6;
-
-        public PartyListMemberStruct this[int i] {
-            get {
-                return i switch {
-                    0 => Trust0,
-                    1 => Trust1,
-                    2 => Trust2,
-                    3 => Trust3,
-                    4 => Trust4,
-                    5 => Trust5,
-                    6 => Trust6,
-                    _ => throw new IndexOutOfRangeException("Index should be in range of 0-6")
-                };
-            }
-        }
-    }
-
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct PartyListMemberStruct {
+    [GenerateInterop]
+    public partial struct PartyListMemberStruct {
         public const int Size = 0xF8;
 
-        [FieldOffset(0x00)] public StatusIcons StatusIcon;
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray10<Pointer<AtkComponentIconText>> _statusIcons;
         [FieldOffset(0x50)] public AtkComponentBase* PartyMemberComponent;
         [FieldOffset(0x58)] public AtkTextNode* IconBottomLeftText;
         [FieldOffset(0x60)] public AtkResNode* NameAndBarsContainer;
@@ -146,37 +65,5 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(0xD8)] public AtkNineGridNode* ClickFlash;
         [FieldOffset(0xE0)] public AtkNineGridNode* TargetGlow;
         [FieldOffset(0xF0)] public byte EmnityByte; //01 or 02 or FF 
-
-        [StructLayout(LayoutKind.Explicit, Size = 0x50)]
-        public struct StatusIcons {
-            [FieldOffset(0x00)] public AtkComponentIconText* StatusIcon0;
-            [FieldOffset(0x08)] public AtkComponentIconText* StatusIcon1;
-            [FieldOffset(0x10)] public AtkComponentIconText* StatusIcon2;
-            [FieldOffset(0x18)] public AtkComponentIconText* StatusIcon3;
-            [FieldOffset(0x20)] public AtkComponentIconText* StatusIcon4;
-            [FieldOffset(0x28)] public AtkComponentIconText* StatusIcon5;
-            [FieldOffset(0x30)] public AtkComponentIconText* StatusIcon6;
-            [FieldOffset(0x38)] public AtkComponentIconText* StatusIcon7;
-            [FieldOffset(0x40)] public AtkComponentIconText* StatusIcon8;
-            [FieldOffset(0x48)] public AtkComponentIconText* StatusIcon9;
-
-            public AtkComponentIconText* this[int i] {
-                get {
-                    return i switch {
-                        0 => StatusIcon0,
-                        1 => StatusIcon1,
-                        2 => StatusIcon2,
-                        3 => StatusIcon3,
-                        4 => StatusIcon4,
-                        5 => StatusIcon5,
-                        6 => StatusIcon6,
-                        7 => StatusIcon7,
-                        8 => StatusIcon8,
-                        9 => StatusIcon9,
-                        _ => throw new IndexOutOfRangeException("Index should be in range of 0-9")
-                    };
-                }
-            }
-        }
     }
 }

@@ -16,8 +16,8 @@ public unsafe partial struct InfoProxyFreeCompany {
     [FieldOffset(0x70)] public CrestData Crest;
     [FieldOffset(0x78)] public ushort OnlineMembers;
     [FieldOffset(0x7A)] public ushort TotalMembers;
-    [FieldOffset(0x7C)] public fixed byte Name[22];
-    [FieldOffset(0x93)] public fixed byte Master[60];
+    [FieldOffset(0x7C), FixedSizeArray(isString: true)] internal FixedSizeArray22<byte> _name;
+    [FieldOffset(0x93), FixedSizeArray(isString: true)] internal FixedSizeArray60<byte> _master;
     [FieldOffset(0xD0)] public Utf8String UnkD0;
     [FieldOffset(0x138)] public byte ActiveListItemNum; //0=Topics, 1 = Members, ....
     [FieldOffset(0x139)] public byte MemberTabIndex;
@@ -36,7 +36,7 @@ public unsafe partial struct InfoProxyFreeCompany {
         [FieldOffset(0x00)] public fixed byte Permissions[10];
         [FieldOffset(0x20)] public ushort MemberCount;
         [FieldOffset(0x22)] public byte RankNumber;
-        [FieldOffset(0x23)] public fixed byte Name[16];//Guessing allowed laength + 0 byte
+        [FieldOffset(0x23), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _name;
 
         public BasicSettings BasicSettingsData => (BasicSettings)((Permissions[1] & 0x7F << 8) + (ushort)Permissions[0]);
         public ChestAccess Items1 => (ChestAccess)(((Permissions[2] & 0x03) << 1) + ((Permissions[1] & 0x80) >> 7) + (Permissions[4] & 0x10 >> 1));

@@ -89,8 +89,8 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0)] public CustomizeData CustomizeData;
     //[FieldOffset(0x1A)] public byte Unk1A;
     //[FieldOffset(0x1B)] public byte Unk1B;
-    [FieldOffset(0x1C)] public fixed uint ItemIds[14];
-    [FieldOffset(0x54)] public fixed byte ItemStains[14];
+    [FieldOffset(0x1C), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
+    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray14<byte> _itemStains;
     [FieldOffset(0x62)] public byte ClassJobId;
     [FieldOffset(0x63)] public bool VisorHidden;
     [FieldOffset(0x64)] public bool WeaponHidden;

@@ -42,18 +42,18 @@ public sealed partial class InteropGenerator {
 
         var hasPrimaryVirtualFunctions = false;
 
-        ResolveInheritanceOrder(structInfo, string.Empty, 0, 0, inheritedStructs, resolvedInheritanceOrderBuilder, ref hasPrimaryVirtualFunctions);
+        ResolveInheritanceOrder(structInfo, string.Empty, 0, 0, 0, inheritedStructs, resolvedInheritanceOrderBuilder, ref hasPrimaryVirtualFunctions);
 
         ImmutableArray<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder = resolvedInheritanceOrderBuilder.ToImmutable();
 
         token.ThrowIfCancellationRequested();
 
         HashSet<string> alreadyWrittenParents = new();
+        HashSet<string> alreadyWrittenBases = new();
 
         // inherited fields
-        foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
+        foreach ((StructInfo inheritedStruct, string path, int offset) in resolvedInheritanceOrder) {
             // write parent accessor if its directly inherited
-
             if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.InheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)
                 && !alreadyWrittenParents.Contains(inheritedStruct.FullyQualifiedMetadataName)) {
                 string fieldName = inheritedStruct.Name;
@@ -65,10 +65,12 @@ public sealed partial class InteropGenerator {
             }
             // write public fields
             foreach (FieldInfo field in inheritedStruct.ExtraInheritedStructInfo!.PublicFields) {
+                string adjustedFieldName = alreadyWrittenBases.Contains(inheritedStruct.FullyQualifiedMetadataName) ? $"{path.Replace(".", "_")}_{field.Name}" : field.Name;
                 writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{field.Name}" />""");
                 writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {field.Type} {field.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {field.Type} {adjustedFieldName};");
             }
+            alreadyWrittenBases.Add(inheritedStruct.FullyQualifiedMetadataName);
         }
 
         token.ThrowIfCancellationRequested();
@@ -119,7 +121,7 @@ public sealed partial class InteropGenerator {
         token.ThrowIfCancellationRequested();
     }
 
-    private static int ResolveInheritanceOrder(StructInfo structInfo, string path, int offset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, ref bool hasPrimaryVirtualFunctions) {
+    private static int ResolveInheritanceOrder(StructInfo structInfo, string path, int absoluteOffset, int curParentOffset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, ref bool hasPrimaryVirtualFunctions) {
         var processed = 0;
         foreach (InheritanceInfo inheritanceInfo in structInfo.InheritedStructs) {
             // failure earlier in generator, haven't collected all inherited structs
@@ -128,7 +130,7 @@ public sealed partial class InteropGenerator {
             }
 
             if (inheritanceInfo.ParentOffset != 0)
-                offset = inheritanceInfo.ParentOffset;
+                absoluteOffset = curParentOffset + inheritanceInfo.ParentOffset;
 
             StructInfo currentStruct = inheritedStructs[index + processed];
             string baseName = structInfo.Name == currentStruct.Name ? currentStruct.Name + "Base" : currentStruct.Name;
@@ -136,13 +138,13 @@ public sealed partial class InteropGenerator {
 
             processed += 1;
 
-            processed += ResolveInheritanceOrder(currentStruct, newPath, offset, index + processed, inheritedStructs, resolvedInheritanceOrder, ref hasPrimaryVirtualFunctions);
+            processed += ResolveInheritanceOrder(currentStruct, newPath, absoluteOffset, absoluteOffset, index + processed, inheritedStructs, resolvedInheritanceOrder, ref hasPrimaryVirtualFunctions);
 
-            resolvedInheritanceOrder.Add((currentStruct, newPath, offset));
-            if (offset == 0 && !currentStruct.VirtualFunctions.IsEmpty)
+            resolvedInheritanceOrder.Add((currentStruct, newPath, absoluteOffset));
+            if (absoluteOffset == 0 && !currentStruct.VirtualFunctions.IsEmpty)
                 hasPrimaryVirtualFunctions = true;
 
-            offset += currentStruct.ExtraInheritedStructInfo!.Size;
+            absoluteOffset += currentStruct.ExtraInheritedStructInfo!.Size;
         }
         return processed;
     }

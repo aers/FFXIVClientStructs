@@ -74,14 +74,14 @@ public unsafe partial struct UI3DModule {
     }
 
     [FieldOffset(0x10)] public UIModule* UIModule;
-    [FieldOffset(0x20)] public fixed byte ObjectInfoArray[599 * 0x60]; // array of Client::UI::UI3DModule::ObjectInfo
-    [FieldOffset(0xE0C0)] public fixed byte SortedObjectInfoPointerArray[599 * 0x8]; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray599<ObjectInfo> _objectInfoArray; // array of Client::UI::UI3DModule::ObjectInfo
+    [FieldOffset(0xE0C0), FixedSizeArray] internal FixedSizeArray599<Pointer<ObjectInfo>> _sortedObjectInfoPointerArray; // array of Client::UI::UI3DModule::ObjectInfo*, distance sorted(?)
     [FieldOffset(0xF378)] public int SortedObjectInfoCount;
     [FieldOffset(0xF380), FixedSizeArray] internal FixedSizeArray50<Pointer<ObjectInfo>> _namePlateObjectInfoPointerArray; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
     [FieldOffset(0xF510)] public int NamePlateObjectInfoCount;
     // [FieldOffset(0xF518)] public Bit NamePlateBits; // Client::System::Data::Bit
     [FieldOffset(0xF538), FixedSizeArray] internal FixedSizeArray50<GameObjectId> _namePlateObjectIdList; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
-    [FieldOffset(0xF6C8)] public fixed byte NamePlateObjectIdList_2[50 * 0x8]; // seems to contain same data as above, but may be for working data
+    [FieldOffset(0xF6C8), FixedSizeArray] internal FixedSizeArray50<GameObjectId> _namePlateObjectIdList_2; // seems to contain same data as above, but may be for working data
     [FieldOffset(0xF858), FixedSizeArray] internal FixedSizeArray50<Pointer<ObjectInfo>> _characterObjectInfoPointerArray; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
     [FieldOffset(0xF9E8)] public int CharacterObjectInfoCount;
     [FieldOffset(0xF9F0), FixedSizeArray] internal FixedSizeArray68<Pointer<ObjectInfo>> _mapObjectInfoPointerArray; // array of Client::UI::UI3DModule::ObjectInfo* for objects displayed on minimap - summoning bells, mailboxes, etc

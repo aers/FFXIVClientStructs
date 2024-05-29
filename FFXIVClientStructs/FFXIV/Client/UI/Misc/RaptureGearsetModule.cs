@@ -241,7 +241,7 @@ public unsafe partial struct RaptureGearsetModule {
     [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
     public partial struct GearsetEntry {
         [FieldOffset(0x00)] public byte Id;    // This may actually be set number, which is not _quite_ ID.
-        [FieldOffset(0x01)] public fixed byte Name[0x30];
+        [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray48<byte> _name;
         [FieldOffset(0x31)] public byte ClassJob;
         [FieldOffset(0x32)] public byte GlamourSetLink;
         [FieldOffset(0x34)] public short ItemLevel;

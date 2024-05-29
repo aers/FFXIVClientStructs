@@ -74,7 +74,7 @@ public unsafe partial struct BannerModuleData {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct BannerModuleEntry {
-    [FieldOffset(0x00)] public fixed byte BannerTimelineName[0x40];
+    [FieldOffset(0x00), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _bannerTimelineName;
     // [FieldOffset(0x40)] public fixed byte Flags[4]; // see "8B C2 4C 8B C9 99"
     [FieldOffset(0x44)] public HalfVector4 CameraPosition;
     [FieldOffset(0x4C)] public HalfVector4 CameraTarget;

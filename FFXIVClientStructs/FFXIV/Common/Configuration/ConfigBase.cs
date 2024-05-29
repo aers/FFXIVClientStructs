@@ -79,7 +79,7 @@ public unsafe partial struct ConfigEntry {
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 [GenerateInterop(isInherited: true)]
 public unsafe partial struct ChangeEventInterface {
-    [FieldOffset(0x8)] public ChangeEventInterface* Next;
+    [FieldOffset(0x8)] public ChangeEventInterface* NextInterface;
     [FieldOffset(0x10)] public ConfigBase* Owner;
 }
 

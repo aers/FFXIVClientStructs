@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct AchievementListModule {
     public static AchievementListModule* Instance() => Framework.Instance()->GetUiModule()->GetAchievementListModule();
     // [FieldOffset(0x40)] public byte Unk40;
-    [FieldOffset(0x42)] public fixed ushort Watchlist[30];
+    [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray30<ushort> _watchList;
     // [FieldOffset(0x7E)] public byte Unk7E;
     [FieldOffset(0x80)] public byte WatchlistCount; // 30 max
 
