@@ -19,9 +19,9 @@ public unsafe partial struct TextModule {
     [VirtualFunction(8), GenerateStringOverloads]
     public partial int EncodeMacro(byte* input, Utf8String* output);
 
-    [VirtualFunction(9)]
+    [VirtualFunction(9), GenerateStringOverloads]
     public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
 
-    [VirtualFunction(16)]
+    [VirtualFunction(16), GenerateStringOverloads]
     public partial bool FormatString(byte* input, StdDeque<TextParameter>* localParameters, Utf8String* output);
 }

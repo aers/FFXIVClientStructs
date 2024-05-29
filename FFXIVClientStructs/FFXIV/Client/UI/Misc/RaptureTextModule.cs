@@ -7,13 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureTextModule
 // ctor "E8 ?? ?? ?? ?? 48 8D 9F ?? ?? ?? ?? 4D 8B C5"
-[GenerateInterop, Inherits<TextModule>]
+[GenerateInterop, Inherits<TextModule>, Inherits<TextChecker.ExecNonMacroFunc>, Inherits<ExcelLanguageEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE60)]
 public unsafe partial struct RaptureTextModule {
     public static RaptureTextModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureTextModule();
 
-    [FieldOffset(0x510)] public void** ExecNonMacroFunc; // only a vtable
-    [FieldOffset(0x518)] public void** ExcelLanguageEvent; // only a vtable
     [FieldOffset(0x520)] public UIModule* UiModule;
     [FieldOffset(0x528)] public TextChecker TextChecker;
     [FieldOffset(0x620)] public ExcelSheet* AddonSheet;

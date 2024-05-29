@@ -14,8 +14,8 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40
     [FieldOffset(0x10)] public long BufUsed;
     [FieldOffset(0x18)] public long StringLength; // string length not including null terminator
-    [FieldOffset(0x20)] public byte IsEmpty;
-    [FieldOffset(0x21)] public byte IsUsingInlineBuffer;
+    [FieldOffset(0x20)] public bool IsEmpty;
+    [FieldOffset(0x21)] public bool IsUsingInlineBuffer;
     [FieldOffset(0x22)] public fixed byte InlineBuffer[0x40]; // inline buffer used until strlen > 0x40
 
     public static bool HasDefault => true;
@@ -24,8 +24,6 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public static bool IsMovable => true;
 
     public readonly int Length => Math.Max(0, (int)(BufUsed - 1));
-    [Obsolete("Use AsSpan() instead")]
-    public readonly ReadOnlySpan<byte> Span => new(StringPtr, Length);
 
     public readonly ref readonly byte this[int index] => ref AsSpan()[index];
 
@@ -184,15 +182,15 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
 
     public static void ConstructMoveInPlace(ref Utf8String source, out Utf8String target) {
         (target, source) = (source, default);
-        if (target.IsUsingInlineBuffer != 0)
+        if (target.IsUsingInlineBuffer)
             target.StringPtr = (byte*)Unsafe.AsPointer(ref target.InlineBuffer[0]);
     }
 
     public static void Swap(ref Utf8String item1, ref Utf8String item2) {
         (item1, item2) = (item2, item1);
-        if (item1.IsUsingInlineBuffer != 0)
+        if (item1.IsUsingInlineBuffer)
             item1.StringPtr = (byte*)Unsafe.AsPointer(ref item1.InlineBuffer[0]);
-        if (item2.IsUsingInlineBuffer != 0)
+        if (item2.IsUsingInlineBuffer)
             item2.StringPtr = (byte*)Unsafe.AsPointer(ref item2.InlineBuffer[0]);
     }
 }

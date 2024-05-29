@@ -6,20 +6,19 @@ using FFXIVClientStructs.FFXIV.Client.UI.Shell;
 using FFXIVClientStructs.FFXIV.Common.Configuration;
 using FFXIVClientStructs.FFXIV.Component.Completion;
 using FFXIVClientStructs.FFXIV.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UIModule
 //   Client::UI::UIModuleInterface
-[GenerateInterop, Inherits<UIModuleInterface>, Inherits<ChangeEventInterface>(0x18)]
+[GenerateInterop]
+[Inherits<UIModuleInterface>, Inherits<AtkModuleEvent>, Inherits<ExcelLanguageEvent>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xEE030)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 61 ?? 4C 8B F2", 3)]
 public unsafe partial struct UIModule {
     public static UIModule* Instance() => Framework.Instance()->GetUiModule();
-
-    [FieldOffset(0x8)] public void** AtkModuleEvent;
-    [FieldOffset(0x10)] public void** ExcelLanguageEvent;
-
+    
     [FieldOffset(0x3B0), FixedSizeArray] internal FixedSizeArray19<RaptureAtkHistory> _atkHistory;
     [FieldOffset(0x7D8)] public int LinkshellCycle;
     [FieldOffset(0x7DC)] public int CrossWorldLinkshellCycle;
