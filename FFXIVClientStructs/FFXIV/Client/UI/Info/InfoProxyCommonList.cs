@@ -38,7 +38,8 @@ public unsafe partial struct InfoProxyCommonList {
     public partial void ApplyFilters();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-    public struct CharacterData {
+    [GenerateInterop]
+    public partial struct CharacterData {
         [FieldOffset(0x00)] public ulong ContentId;
         [FieldOffset(0x08)] public OnlineStatus State;
         //12 bytes
