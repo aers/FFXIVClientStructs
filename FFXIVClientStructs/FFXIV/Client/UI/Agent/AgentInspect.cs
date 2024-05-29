@@ -31,7 +31,7 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x170)] public Utf8String ChocoboBarding1;
     [FieldOffset(0x1D8)] public Utf8String ChocoboBarding2;
     [FieldOffset(0x240)] public Utf8String ChocoboBarding3;
-    [FieldOffset(0x2A8)][FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
+    [FieldOffset(0x2A8), FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
     [FieldOffset(0x4B0)] public FreeCompanyData FreeCompany;
     //Status fields
     //0: Nothing to do 1: Fetching Data; 2: Data ready (Fills window) 3: Probably failure
@@ -62,14 +62,15 @@ public unsafe partial struct AgentInspect {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct ItemData {
+    [GenerateInterop]
+    public partial struct ItemData {
         [FieldOffset(0x00)] public uint IconId;
         [FieldOffset(0x04)] public IconFlagsTopRight IconFlags1;
         [FieldOffset(0x05)] public ColorRgb Color;
         [FieldOffset(0x08)] public bool Filled;
         [FieldOffset(0x09)] public bool IsILevelSynced; //1 if Level < Level{Equip} So probably ILVSynced
-        [FieldOffset(0x10)] public fixed short ModelMain[4];
-        [FieldOffset(0x18)] public fixed short ModelSub[4];
+        [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray4<short> _modelMain;
+        [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<short> _modelSub;
         [FieldOffset(0x20)] public InventoryItem* Item; //Init 0 unsure
 
         [StructLayout(LayoutKind.Explicit, Size = 0x3)]

@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [GenerateInterop(isInherited: true)]
 [Inherits<ContentDirector>]
 public unsafe partial struct InstanceContentDirector {
-    //[FieldOffset(0x730)] public fixed byte InstanceContentExcelRow[0xA8];
+    //[FieldOffset(0x730), FixedSizeArray] internal FixedSizeArray168<byte> _instanceContentExcelRow;
 
     /// <summary>
     /// This field is stored in minutes

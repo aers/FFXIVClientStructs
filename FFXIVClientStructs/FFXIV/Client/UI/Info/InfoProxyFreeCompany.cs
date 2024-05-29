@@ -22,18 +22,15 @@ public unsafe partial struct InfoProxyFreeCompany {
     [FieldOffset(0x138)] public byte ActiveListItemNum; //0=Topics, 1 = Members, ....
     [FieldOffset(0x139)] public byte MemberTabIndex;
     [FieldOffset(0x13E)] public byte InfoTabIndex;
-    [FieldOffset(0x178)][FixedSizeArray] internal FixedSizeArray14<RankData> _rankArray;
-    //668 after
+    [FieldOffset(0x178), FixedSizeArray] internal FixedSizeArray14<RankData> _ranks;
 
-
-    //0x100fc0d0
-    //40 53 48 81 EC 80 0F 00 00 48 8B 05 E0 47 F9 01 48 33 C4 48 89 84 24 70 0F 00 00 48 8B 0D E6 1E FB 01 8B DA
     [MemberFunction("E8 ?? ?? ?? ?? EB 2F E8")]
     public partial void RequestDataForCharacter(uint objectId);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-    public struct RankData {
-        [FieldOffset(0x00)] public fixed byte Permissions[10];
+    [GenerateInterop]
+    public partial struct RankData {
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray10<byte> _permissions;
         [FieldOffset(0x20)] public ushort MemberCount;
         [FieldOffset(0x22)] public byte RankNumber;
         [FieldOffset(0x23), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _name;

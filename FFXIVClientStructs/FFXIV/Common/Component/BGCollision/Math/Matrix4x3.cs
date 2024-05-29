@@ -3,8 +3,9 @@ using System.Numerics;
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-public unsafe struct Matrix4x3 {
-    [FieldOffset(0x00), CExportIgnore] public fixed float Matrix[12];
+[GenerateInterop]
+public unsafe partial struct Matrix4x3 {
+    [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray12<float> _matrix;
 
     [FieldOffset(0x00), CExportIgnore] public Vector3 Row0;
     [FieldOffset(0x0C), CExportIgnore] public Vector3 Row1;

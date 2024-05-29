@@ -12,9 +12,10 @@ public unsafe partial struct AddonJobHudPLD0 {
     [FieldOffset(0x000)] public AddonJobHud JobHud;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    [GenerateInterop]
     public partial struct OathGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public fixed byte Prerequisites[3];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
         [FieldOffset(0x0C)] public int OathValue;
         [FieldOffset(0x10)] public int OathMax;
     }

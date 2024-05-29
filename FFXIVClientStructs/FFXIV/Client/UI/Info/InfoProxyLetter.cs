@@ -15,7 +15,7 @@ public unsafe partial struct InfoProxyLetter {
     [FieldOffset(0x29)] public byte NumLettersFromGameMasters; // 10 max
     [FieldOffset(0x2A)] public bool HasLettersFromGameMasters;
     [FieldOffset(0x2B)] public bool HasLettersFromSupportDesk;
-    [FieldOffset(0x30)][FixedSizeArray] internal FixedSizeArray130<Letter> _letters;
+    [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray130<Letter> _letters;
     //0xCC0 After
     [FieldOffset(0x5178)] public Utf8String UnkString0;
     [FieldOffset(0x51E0)] public Utf8String UnkString1;
@@ -25,7 +25,7 @@ public unsafe partial struct InfoProxyLetter {
     public unsafe partial struct Letter {
         [FieldOffset(0x00)] public long SenderContentId;// 0xFFFFFFFF for Store
         [FieldOffset(0x08)] public uint Timestamp;
-        [FieldOffset(0x0C)][FixedSizeArray] internal FixedSizeArray5<ItemAttachment> _attachments;
+        [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray5<ItemAttachment> _attachments;
         [FieldOffset(0x38)] public uint Gil;
         [FieldOffset(0x3C)] public bool Read;
 

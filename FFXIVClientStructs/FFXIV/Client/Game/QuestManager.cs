@@ -9,11 +9,11 @@ public unsafe partial struct QuestManager {
     [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();
 
-    [FieldOffset(0x10)][FixedSizeArray] internal FixedSizeArray30<QuestWork> _normalQuests;
-    [FieldOffset(0x5B8)][FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
-    [FieldOffset(0x6A8)][FixedSizeArray] internal FixedSizeArray5<TrackingWork> _trackedQuests;
-    [FieldOffset(0xBC8)][FixedSizeArray] internal FixedSizeArray17<BeastReputationWork> _beastReputation;
-    [FieldOffset(0xCD8)][FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
+    [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray30<QuestWork> _normalQuests;
+    [FieldOffset(0x5B8), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
+    [FieldOffset(0x6A8), FixedSizeArray] internal FixedSizeArray5<TrackingWork> _trackedQuests;
+    [FieldOffset(0xBC8), FixedSizeArray] internal FixedSizeArray17<BeastReputationWork> _beastReputation;
+    [FieldOffset(0xCD8), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
     [FieldOffset(0xE58)] public byte NumLeveAllowances;
 
     [FieldOffset(0xF40)] public byte NumAcceptedQuests;

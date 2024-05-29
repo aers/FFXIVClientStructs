@@ -1,8 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Common.Math;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe struct Matrix2x2 : IEquatable<Matrix2x2> {
-    [FieldOffset(0x0), CExportIgnore] public fixed float Matrix[4];
+[GenerateInterop]
+public unsafe partial struct Matrix2x2 : IEquatable<Matrix2x2> {
+    [FieldOffset(0x0), CExportIgnore, FixedSizeArray] internal FixedSizeArray4<float> _matrix;
 
     [FieldOffset(0x0)] public float M11;
     [FieldOffset(0x4)] public float M12;

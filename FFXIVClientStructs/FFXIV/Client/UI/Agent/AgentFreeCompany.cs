@@ -31,9 +31,10 @@ public unsafe partial struct AgentFreeCompany {
     // This supports 3 company actions despite 2 being the current limit.
     // The UI also has a blank 3rd slot
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct FreeCompanyActionTimer {
+    [GenerateInterop]
+    public partial struct FreeCompanyActionTimer {
         [FieldOffset(0x00)] public uint TimeSinceUpdate;
-        [FieldOffset(0x04)] public fixed uint TimeRemainingAtUpdate[3];
+        [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray3<uint> _timeRemainingAtUpdate;
 
         public uint this[int index] {
             get {

@@ -27,7 +27,7 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xA48)] public ExcelSheet* LobbySheet;
     [FieldOffset(0xA50)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0xA58)] public StdDeque<TextParameter> LobbyTextParameters;
-    [FieldOffset(0xA80)][FixedSizeArray] internal FixedSizeArray13<Utf8String> _utf8Strings;
+    [FieldOffset(0xA80), FixedSizeArray] internal FixedSizeArray13<Utf8String> _tempUtf8Strings;
 
     [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
     [FieldOffset(0x10E1)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
@@ -181,7 +181,7 @@ public unsafe partial struct CharaSelectCharacterInfo {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public byte CurrentClassJobId;
 
-    [FieldOffset(0x2A)] public fixed ushort ClassJobLevelArray[30];
+    [FieldOffset(0x2A), FixedSizeArray] internal FixedSizeArray30<ushort> _classJobLevels;
     [FieldOffset(0x66)] public byte Race;
     [FieldOffset(0x67)] public byte Tribe;
     [FieldOffset(0x68)] public byte Sex;
@@ -213,7 +213,7 @@ public unsafe partial struct CharaSelectCharacterInfo {
     // [FieldOffset(0xD4)] public uint RemakeFlag;
     [FieldOffset(0xD8)] public CharaSelectCharacterConfigFlags ConfigFlags;
     [FieldOffset(0xDA)] public byte VoiceId;
-    // [FieldOffset(0xDB)] public fixed byte WorldName[32]; // always empty?
+    // [FieldOffset(0xDB), FixedSizeArray] internal FixedSizeArray32<byte> _worldName; // always empty?
 
     // [FieldOffset(0x100)] public ulong LoginStatus;
     // [FieldOffset(0x108)] public byte IsOutTerritory;
@@ -244,7 +244,7 @@ public unsafe partial struct CharaSelectCharacterList {
     [MemberFunction("E8 ?? ?? ?? ?? 66 44 89 B6")]
     public static partial void CleanupCharacters();
 
-    [FieldOffset(0)][FixedSizeArray] internal FixedSizeArray40<CharaSelectCharacterMapping> _characterMapping;
+    [FieldOffset(0), FixedSizeArray] internal FixedSizeArray40<CharaSelectCharacterMapping> _characterMapping;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

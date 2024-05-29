@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudMNK0 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct MastersGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0C)] public int BeastChakra1;
         [FieldOffset(0x10)] public int BeastChakra2;
         [FieldOffset(0x14)] public int BeastChakra3;
@@ -69,7 +69,7 @@ public unsafe partial struct AddonJobHudMNK1 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct ChakraGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[1];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
         [FieldOffset(0x0C)] public int ChakraCount;
     }
 

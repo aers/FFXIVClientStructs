@@ -16,7 +16,7 @@ public unsafe partial struct AddonPartyList {
     [FieldOffset(0x12D4)] public uint ChocoboIconId;
     [FieldOffset(0x12D8)] public uint PetIconId;
 
-    [FieldOffset(0x1360)] public fixed short Edited[17]; // 0X11 if edited? Need comfirm
+    [FieldOffset(0x1360), FixedSizeArray] internal FixedSizeArray17<short> _edited; // 0X11 if edited? Need comfirm
 
     [FieldOffset(0x1390)] public AtkNineGridNode* BackgroundNineGridNode;
     [FieldOffset(0x1398)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party

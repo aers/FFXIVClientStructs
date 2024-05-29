@@ -14,7 +14,7 @@ public unsafe partial struct AgentMJINekomimiRequest {
     public unsafe partial struct FavorsData {
         [FieldOffset(0x000)] public int UpdateState; // 0 initial, 1 request sent, 2 response received, 3 addon updated
 
-        [FieldOffset(0x008)][FixedSizeArray] internal FixedSizeArray6<ItemData> _items;
+        [FieldOffset(0x008), FixedSizeArray] internal FixedSizeArray6<ItemData> _items;
 
         [FieldOffset(0x308)] public int WeekStartTime;
         [FieldOffset(0x30C)] public byte FullDeliveryBonus;

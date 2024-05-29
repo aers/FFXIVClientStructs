@@ -9,7 +9,7 @@ public unsafe partial struct Resource {
     [FieldOffset(0x10)] public Resource* PrevResource;
     [FieldOffset(0x18)] public Resource* NextResource;
     [FieldOffset(0x20)] public ResourceHandle* Handle;
-    [FieldOffset(0x28)] public fixed byte Path[80];
+    [FieldOffset(0x28), FixedSizeArray(isString: true)] internal FixedSizeArray80<byte> _path;
     [FieldOffset(0x78)] public void* Listener; // Common::Component::Excel::ExcelResourceListener
     //[FieldOffset(0x80)] public long u80; - some argument passed to StartLoad and returned by vf6
 

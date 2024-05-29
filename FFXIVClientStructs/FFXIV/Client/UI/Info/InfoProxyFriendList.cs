@@ -14,7 +14,7 @@ public unsafe partial struct InfoProxyFriendList {
     [FieldOffset(0x210)] public Utf8String Str5;
     [FieldOffset(0x278), FixedSizeArray] internal FixedSizeArray200<NameBuffer> _names;
     //3478
-    [FieldOffset(0x3798)] public fixed byte Unk3798[800];
+    [FieldOffset(0x3798), FixedSizeArray] internal FixedSizeArray800<byte> _unk3798;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     [GenerateInterop]

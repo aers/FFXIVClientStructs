@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudRRP0 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct SoulGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0C)] public int SoulValue;
         [FieldOffset(0x10)] public int ShroudValue;
         [FieldOffset(0x14)] public int SoulMax;
@@ -77,7 +77,7 @@ public unsafe partial struct AddonJobHudRRP1 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct DeathGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0C)] public int LemureShroudStacks;
         [FieldOffset(0x10)] public int VoidShroudStacks;
         [FieldOffset(0x14)] public int EnshroudTimer;

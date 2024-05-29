@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudAST0 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct ArcanaGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[3];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
         [FieldOffset(0x0C)] public int DrawnCard;
         [FieldOffset(0x10)] public int DrawnMinorArcanum;
         [FieldOffset(0x14)] public int DrawnRoleBuff;

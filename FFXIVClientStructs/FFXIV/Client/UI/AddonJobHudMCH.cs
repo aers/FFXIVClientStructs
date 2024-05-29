@@ -12,9 +12,10 @@ public unsafe partial struct AddonJobHudMCH0 {
     [FieldOffset(0x000)] public AddonJobHud JobHud;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    [GenerateInterop]
     public partial struct HeatGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0C)] public int HeatValue;
         [FieldOffset(0x10)] public int HeatMax;
         [FieldOffset(0x14)] public int HeatMid;

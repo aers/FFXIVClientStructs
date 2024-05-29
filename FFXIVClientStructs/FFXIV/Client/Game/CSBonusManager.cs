@@ -15,17 +15,19 @@ public unsafe partial struct CSBonusManager {
 
     [FieldOffset(0x18)] public uint SeedBase;
 
-    [FieldOffset(0x2C)] public fixed byte WBAchieveFlag[20];
-    [FieldOffset(0x40)] public fixed byte PMAchieveFlag[20];
-    [FieldOffset(0x54)] public fixed byte MMAchieveFlag[4];
+    [FieldOffset(0x2C), FixedSizeArray] internal FixedSizeArray20<byte> _WBAchieveFlag;
+    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray20<byte> _PMAchieveFlag;
+    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray4<byte>  _MMAchieveFlag;
 
-    [FieldOffset(0x7C)] public fixed byte WBReceiveFlag[20];
-    [FieldOffset(0x90)] public fixed byte PMReceiveFlag[20];
-    [FieldOffset(0xA4)] public fixed byte MMReceiveFlag[4];
+    [FieldOffset(0x7C), FixedSizeArray] internal FixedSizeArray20<byte> _WBReceiveFlag;
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray20<byte> _PMReceiveFlag;
+    [FieldOffset(0xA4), FixedSizeArray] internal FixedSizeArray4<byte>  _MMReceiveFlag;
 
     [FieldOffset(0xBA)] public byte WBCount;
 
     [FieldOffset(0xBC)] public byte PMCount;
 
     [FieldOffset(0xBE)] public byte MMCount;
+
+    // 0xC0 (byte) observed to store weekly minimog fate count. probably an array for progress
 }

@@ -25,23 +25,27 @@ public unsafe partial struct AozNoteModule {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 12)]
-    public struct AozHotBar {
-        [FieldOffset(0)] public fixed byte AozActionIds[12];
+    [GenerateInterop]
+    public partial struct AozHotBar {
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray12<byte> _aozActionIds;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct AozCrossHotBar {
-        [FieldOffset(0)] public fixed byte AozActionIds[16];
+    [GenerateInterop]
+    public partial struct AozCrossHotBar {
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray16<byte> _aozActionIds;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 12)]
-    public struct AozHotBarMacroFlag {
-        [FieldOffset(0)] public fixed bool MacroFlag[12];
+    [GenerateInterop]
+    public partial struct AozHotBarMacroFlag {
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray12<bool> _macroFlags;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct AozCrossHotBarMacroFlag {
-        [FieldOffset(0)] public fixed bool MacroFlag[16];
+    [GenerateInterop]
+    public partial struct AozCrossHotBarMacroFlag {
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray16<bool> _macroFlags;
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 0B 41 8B 17")]

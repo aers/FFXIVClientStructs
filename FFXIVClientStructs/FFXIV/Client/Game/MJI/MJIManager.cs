@@ -48,7 +48,7 @@ public unsafe partial struct MJIManager {
     /// logic. To that end, this field doesn't actually seem authoritative for determining what's going on - see
     /// <see cref="MJI.IslandState.LandmarkIds"/> et al for what seems to be used by system logic.
     /// </remarks>
-    [FieldOffset(0x1D4)][FixedSizeArray] internal FixedSizeArray5<MJILandmarkPlacement> _landmarkPlacements;  // ??
+    [FieldOffset(0x1D4), FixedSizeArray] internal FixedSizeArray5<MJILandmarkPlacement> _landmarkPlacements;  // ??
 
     /// <summary>
     /// A struct representing building placements on the Island Sanctuary. Each index represents a specific building
@@ -60,7 +60,7 @@ public unsafe partial struct MJIManager {
     /// <see cref="MJI.IslandState.Granaries"/> and <see cref="MJI.IslandState.Workshops"/> for what seems to be
     /// used by system logic.
     /// </remarks>
-    [FieldOffset(0x224)][FixedSizeArray] internal FixedSizeArray6<MJIBuildingPlacement> _buildingPlacements;
+    [FieldOffset(0x224), FixedSizeArray] internal FixedSizeArray6<MJIBuildingPlacement> _buildingPlacements;
 
     /// <summary>
     /// A struct representing information about the cabin.
@@ -74,13 +74,13 @@ public unsafe partial struct MJIManager {
     /// <summary>
     /// A struct representing farm (garden/cropland) placements on the current Island Sanctuary.
     /// </summary>
-    [FieldOffset(0x294)][FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _farmPlacements;
+    [FieldOffset(0x294), FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _farmPlacements;
 
     /// <summary>
     /// A struct representing pasture placements on the current Island Sanctuary. Identical in behavior (hopefully)
     /// to that of <see cref="FarmPlacements"/>
     /// </summary>
-    [FieldOffset(0x2B8)][FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _pasturePlacements;
+    [FieldOffset(0x2B8), FixedSizeArray] internal FixedSizeArray3<MJIFarmPasturePlacement> _pasturePlacements;
 
     [FieldOffset(0x2E0)] public ushort RequestDemandCraftId;
     [FieldOffset(0x2E4)] public int RequestDemandType; // 0 = none, 1 = everything, 2 = specific object
@@ -109,7 +109,7 @@ public unsafe partial struct MJIManager {
     /// the lower half.
     /// </summary>
     // Set to the row count of the MJICraftworksObject table
-    [FieldOffset(0x2F2)] public fixed byte SupplyAndDemandShifts[91];
+    [FieldOffset(0x2F2), FixedSizeArray] internal FixedSizeArray91<byte> _supplyAndDemandShifts;
 
     /// <summary>
     /// The current day in the Craftworks cycle, from 0 to 6.
@@ -127,7 +127,7 @@ public unsafe partial struct MJIManager {
     /// Like CurrentCycleDay, 0 represents Reset Day. 7, likewise, represents the next reset. This field may not be
     /// populated until the Craftworks have been opened at least once.
     /// </remarks>
-    [FieldOffset(0x3A9)] public fixed byte CraftworksRestDays[4];
+    [FieldOffset(0x3A9), FixedSizeArray] internal FixedSizeArray4<byte> _craftworksRestDays;
 
     /// <summary>
     /// The current groove level of the Isleworks.
@@ -247,7 +247,7 @@ public unsafe partial struct MJIManager {
     /// <param name="itemId">The Craftwork ID to look up</param>
     /// <returns>Returns an enum value.</returns>
     public CraftworkSupply GetSupplyForCraftwork(uint itemId) {
-        return (CraftworkSupply)((this.SupplyAndDemandShifts[itemId] & 0xF0) >> 4);
+        return (CraftworkSupply)((this.SupplyAndDemandShifts[(int)itemId] & 0xF0) >> 4);
     }
 
     /// <summary>
@@ -256,7 +256,7 @@ public unsafe partial struct MJIManager {
     /// <param name="itemId">The Craftwork ID to look up</param>
     /// <returns>Returns an enum value.</returns>
     public CraftworkDemandShift GetDemandShiftForCraftwork(uint itemId) {
-        return (CraftworkDemandShift)(this.SupplyAndDemandShifts[itemId] & 0x0F);
+        return (CraftworkDemandShift)(this.SupplyAndDemandShifts[(int)itemId] & 0x0F);
     }
 }
 

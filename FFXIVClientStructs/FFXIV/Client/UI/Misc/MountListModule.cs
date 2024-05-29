@@ -12,7 +12,7 @@ public unsafe partial struct MountListModule {
     public static MountListModule* Instance() => Framework.Instance()->GetUiModule()->GetMountListModule();
 
     // [FieldOffset(0x40)] public byte Unk40; // set to 1 in ReadFile
-    [FieldOffset(0x42)] public fixed ushort UnseenMounts[10]; // Order column of Mount sheet, offset by 1
+    [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenMounts; // Order column of Mount sheet, offset by 1
     [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray30<ushort> _favorites; // Order column of Mount sheet, offset by 1
     // [FieldOffset(0x92)] public uint Unk92;
 

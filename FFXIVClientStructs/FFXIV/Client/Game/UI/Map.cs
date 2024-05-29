@@ -10,18 +10,18 @@ public unsafe partial struct Map {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24", 3)]
     public static partial Map* Instance();
 
-    [FieldOffset(0x98)][FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questData;
+    [FieldOffset(0x98), FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questMarkers;
 
-    [FieldOffset(0x1178)][FixedSizeArray] internal FixedSizeArray16<MarkerInfo> _levequestData;
+    [FieldOffset(0x1178), FixedSizeArray] internal FixedSizeArray16<MarkerInfo> _levequestMarkers;
 
-    [FieldOffset(0x1AF0)] public StdVector<MapMarkerData> ActiveLevequest; // Markers for active levequest missions, they have to be actually started.
-    [FieldOffset(0x1B18)] public StdList<MarkerInfo> UnacceptedQuests;
-    [FieldOffset(0x1B60)] public StdList<MarkerInfo> GuildLeveAssignments;
-    [FieldOffset(0x1BA8)] public StdList<MarkerInfo> GuildOrderGuides;
-    [FieldOffset(0x1BB8)][FixedSizeArray] internal FixedSizeArray62<MarkerInfo> _housingData;// 60 Plots + 2 Apartments
-    [FieldOffset(0x3E98)] public StdList<MarkerInfo> TripleTriad;
-    [FieldOffset(0x3EA8)] public StdList<MarkerInfo> CustomTalk;
-    [FieldOffset(0x3F50)] public StdList<MarkerInfo> GemstoneTraders;
+    [FieldOffset(0x1AF0)] public StdVector<MapMarkerData> ActiveLevequestMarkers; // Markers for active levequest missions, they have to be actually started.
+    [FieldOffset(0x1B18)] public StdList<MarkerInfo> UnacceptedQuestMarkers;
+    [FieldOffset(0x1B60)] public StdList<MarkerInfo> GuildLeveAssignmentMarkers;
+    [FieldOffset(0x1BA8)] public StdList<MarkerInfo> GuildOrderGuideMarkers;
+    [FieldOffset(0x1BB8), FixedSizeArray] internal FixedSizeArray62<MarkerInfo> _housingMarkers;// 60 Plots + 2 Apartments
+    [FieldOffset(0x3E98)] public StdList<MarkerInfo> TripleTriadMarkers;
+    [FieldOffset(0x3EA8)] public StdList<MarkerInfo> CustomTalkMarkers;
+    [FieldOffset(0x3F50)] public StdList<MarkerInfo> GemstoneTraderMarkers;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]

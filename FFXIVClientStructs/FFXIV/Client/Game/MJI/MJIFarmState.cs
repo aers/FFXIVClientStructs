@@ -9,15 +9,15 @@ public unsafe partial struct MJIFarmState {
     [FieldOffset(0x18)] public bool LayoutInitialized; // if false, PlotObjectIndex / LayoutId arrays are unset
     [FieldOffset(0x1A)] public ushort ReactionEventObjectRowId; // primary row index in ReactionEventObject sheet, equal to 5
 
-    [FieldOffset(0x20)] public fixed byte SeedType[20];
-    [FieldOffset(0x34)] public fixed byte GrowthLevel[20];
-    [FieldOffset(0x48)] public fixed byte WaterLevel[20];
-    [FieldOffset(0x5C)] public fixed byte GardenerYield[20];
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray20<byte> _seedType;
+    [FieldOffset(0x34), FixedSizeArray] internal FixedSizeArray20<byte> _growthLevel;
+    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray20<byte> _waterLevel;
+    [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray20<byte> _gardenerYield;
 
-    [FieldOffset(0x70)][FixedSizeArray] internal FixedSizeArray20<FarmSlotFlags> _farmSlotFlags;
+    [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray20<FarmSlotFlags> _farmSlotFlags;
 
-    [FieldOffset(0x88)] public fixed uint PlotObjectIndex[20]; // ??
-    [FieldOffset(0xD8)] public fixed uint LayoutId[20];
+    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray20<uint> _plotObjectIndex; // ??
+    [FieldOffset(0xD8), FixedSizeArray] internal FixedSizeArray20<uint> _layoutId;
 
     [FieldOffset(0x128)] public StdVector<uint> SeedItemIds; // index = MJICropSeed row id, value = corresponding seed's Item row id
     [FieldOffset(0x140)] public int ExpectedTotalYield; // checked when collect all request is executed

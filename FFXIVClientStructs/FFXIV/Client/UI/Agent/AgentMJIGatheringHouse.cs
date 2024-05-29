@@ -30,7 +30,7 @@ public unsafe partial struct AgentMJIGatheringHouse {
     [GenerateInterop]
     public unsafe partial struct StringsData {
         [FieldOffset(0x00)] public Utf8String ConfirmText;
-        [FieldOffset(0x68)][FixedSizeArray] internal FixedSizeArray2<Utf8String> _finishTimeText;
+        [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray2<Utf8String> _finishTimeText;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
@@ -46,11 +46,12 @@ public unsafe partial struct AgentMJIGatheringHouse {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x120)]
+    [GenerateInterop]
     public unsafe partial struct ExpeditionData {
         [FieldOffset(0x000)] public byte ExpeditionId;
         [FieldOffset(0x008)] public Utf8String Name;
-        [FieldOffset(0x070)] public fixed uint NormalItemIds[MJIGranaryState.MaxNormalResources];
-        [FieldOffset(0x0C0)] public fixed uint NormalIconIds[MJIGranaryState.MaxNormalResources];
+        [FieldOffset(0x070), FixedSizeArray] internal FixedSizeArray20<uint> _normalItemIds;
+        [FieldOffset(0x0C0), FixedSizeArray] internal FixedSizeArray20<uint> _normalIconIds;
         [FieldOffset(0x110)] public byte NumNormalItems;
         [FieldOffset(0x114)] public uint RareItemId;
         [FieldOffset(0x118)] public uint RareIconId;

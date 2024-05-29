@@ -11,5 +11,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop]
 [Inherits<Character>]
 public unsafe partial struct BattleChara {
-    //[FieldOffset(0x1E60)] public fixed byte UnkBattleCharaStruct[0xF00];
+    //[FieldOffset(0x1E60), FixedSizeArray] internal FixedSizeArray3840<byte> _unkBattleCharaStruct;
 }

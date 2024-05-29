@@ -32,10 +32,10 @@ public unsafe partial struct MobHunt {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 50 08 E8 ?? ?? ?? ?? 84 C0 74 16", 3)]
     public static partial MobHunt* Instance();
 
-    [FieldOffset(0x08)] public fixed byte AvailableMarkId[18];
-    [FieldOffset(0x1A)] public fixed byte ObtainedMarkId[18];
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray18<byte> _availableMarkId;
+    [FieldOffset(0x1A), FixedSizeArray] internal FixedSizeArray18<byte> _obtainedMarkId;
 
-    [FieldOffset(0x2C)][FixedSizeArray] internal FixedSizeArray18<KillCounts> _currentKills;
+    [FieldOffset(0x2C), FixedSizeArray] internal FixedSizeArray18<KillCounts> _currentKills;
 
     [FieldOffset(0x194)] public int ObtainedFlags;
 
@@ -65,8 +65,9 @@ public unsafe partial struct MobHunt {
         => (ObtainedFlags & 1 << index) != 0;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
-    public struct KillCounts {
-        [FieldOffset(0x00)] public fixed int Counts[5];
+    [GenerateInterop]
+    public partial struct KillCounts {
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray5<int> _counts;
 
         public int this[int index] => Counts[index];
     }

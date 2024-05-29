@@ -114,8 +114,8 @@ public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x12)] public ushort Condition;
     [FieldOffset(0x14)] public ItemFlags Flags;
     [FieldOffset(0x18)] public ulong CrafterContentId;
-    [FieldOffset(0x20)] public fixed ushort Materia[5];
-    [FieldOffset(0x2A)] public fixed byte MateriaGrade[5];
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
+    [FieldOffset(0x2A), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
     [FieldOffset(0x2F)] public byte Stain;
     [FieldOffset(0x30)] public uint GlamourId;
 

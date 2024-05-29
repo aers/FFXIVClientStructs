@@ -42,7 +42,8 @@ public unsafe partial struct MacroEncoder {
     public partial void EncodeString(Utf8String* output, byte* input);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
-    public struct MacroCodeDescription {
+    [GenerateInterop]
+    public partial struct MacroCodeDescription {
         [FieldOffset(0x00)] public byte Id;
         /* 
          * n N = numeric
@@ -51,7 +52,7 @@ public unsafe partial struct MacroEncoder {
          *   . = can be anything, will auto-detect if its a string/number/conditional etc
          *   * = repeat last param type (if param before * was string this needs to be a string too etc.)
          */
-        [FieldOffset(0x01)] public fixed byte ParamTypes[7];
+        [FieldOffset(0x01), FixedSizeArray] internal FixedSizeArray7<byte> _paramTypes;
 
         [FieldOffset(0x44)] public int TotalParamCount;
         [FieldOffset(0x48)] public int ParamCount;

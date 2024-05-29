@@ -10,16 +10,16 @@ public unsafe partial struct AgentMJIDisposeShop {
     [FieldOffset(0x28)] public AgentData* Data;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x170)]
+    [GenerateInterop]
     public unsafe partial struct AgentData {
-        public const int NumCurrencies = 2;
         public const int NumCategories = 4;
 
         [FieldOffset(0x000)] public int SelectCountAddonHandle;
         [FieldOffset(0x004)] public int ConfirmAddonHandle;
-        [FieldOffset(0x008)] public fixed uint CurrencyIconId[NumCurrencies];
-        [FieldOffset(0x010)] public fixed int CurrencyCount[NumCurrencies];
-        [FieldOffset(0x018)] public fixed int CurrencyStackSize[NumCurrencies];
-        [FieldOffset(0x020)] public fixed uint CurrencyItemId[NumCurrencies];
+        [FieldOffset(0x008), FixedSizeArray] internal FixedSizeArray2<uint> _currencyIconIds;
+        [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray2<int> _currencyCounts;
+        [FieldOffset(0x018), FixedSizeArray] internal FixedSizeArray2<int> _currencyStackSizes;
+        [FieldOffset(0x020), FixedSizeArray] internal FixedSizeArray2<uint> _currencyItemIds;
         [FieldOffset(0x028)] public byte InitializationState; // 0 = none, 1 = opened, 3 = fully initialized
         [FieldOffset(0x029)] public byte CurSelectedCategory;
         [FieldOffset(0x02A)] public byte CurShipItemIndex; // in Items vector
@@ -31,7 +31,7 @@ public unsafe partial struct AgentMJIDisposeShop {
         [FieldOffset(0x0D8)] public StdVector<Utf8String> CategoryNames;
         [FieldOffset(0x0F0)] public StdVector<ItemData> Items;
 
-        [FieldOffset(0x108)][FixedSizeArray] internal FixedSizeArray4<StdVector<Pointer<ItemData>>> _perCategoryItems;
+        [FieldOffset(0x108), FixedSizeArray] internal FixedSizeArray4<StdVector<Pointer<ItemData>>> _perCategoryItems;
 
         [FieldOffset(0x168)] public bool DataInitialized; // set after all sheets are read and vectors are filled with data
         [FieldOffset(0x169)] public bool AddonDirty;

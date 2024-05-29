@@ -11,7 +11,7 @@ public unsafe partial struct ResourceGraph {
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     [GenerateInterop]
     public partial struct CategoryContainer {
-        [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray20<Pointer<CategoryMap>> _categoryMaps;
+        [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray20<Pointer<CategoryMap>> _categoryMaps;
 
         public CategoryMap* MainMap => CategoryMaps[0].Value;
         public CategoryMap* this[int index] => CategoryMaps[index].Value;

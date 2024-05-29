@@ -23,7 +23,7 @@ public unsafe partial struct TargetSystem {
 
     // Names might be inaccurate, these seem to be used to control what the player can interact with at any given time
     // For example, when interacting with the aethernet menu, these values change presumable to limit your ability to select an object other than the aetheryte.
-    [FieldOffset(0x52E0)] public fixed uint TargetModes[8];
+    [FieldOffset(0x52E0), FixedSizeArray] internal FixedSizeArray8<uint> _targetModes;
     [FieldOffset(0x5300)] public uint TargetModeIndex;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
@@ -64,7 +64,7 @@ public unsafe partial struct TargetSystem {
 [GenerateInterop]
 public unsafe partial struct GameObjectArray {
     [FieldOffset(0x00)] public int Length;
-    [FieldOffset(0x08)][FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects;
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects;
 
     public GameObject* this[int index] {
         get {

@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop, Inherits<AtkUldComponentDataInputBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x7C)]
 public unsafe partial struct AtkUldComponentDataTextInput {
-    [FieldOffset(0x10)] public fixed uint Nodes[16];
+    [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray16<uint> _nodes;
     [FieldOffset(0x50)] public ByteColor CandidateColor;
     [FieldOffset(0x54)] public ByteColor IMEColor;
     [FieldOffset(0x58)] public uint MaxWidth;
@@ -15,7 +15,7 @@ public unsafe partial struct AtkUldComponentDataTextInput {
     [FieldOffset(0x68)] public ushort CharSet;
     [FieldOffset(0x6A)] public byte Flags1;
     [FieldOffset(0x6B)] public byte Flags2;
-    [FieldOffset(0x6C)] public fixed byte CharSetExtras[16];
+    [FieldOffset(0x6C), FixedSizeArray] internal FixedSizeArray16<byte> _charSetExtras;
 }
 
 public enum TextInputFlags1 {

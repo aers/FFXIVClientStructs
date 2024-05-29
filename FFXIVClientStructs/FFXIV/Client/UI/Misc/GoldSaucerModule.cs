@@ -12,14 +12,14 @@ public unsafe partial struct GoldSaucerModule {
     public static GoldSaucerModule* Instance() => Framework.Instance()->GetUiModule()->GetGoldSaucerModule();
 
     [FieldOffset(0x40)] internal FixedSizeArray10<TripleTriadDeck> _decks;
-    [FieldOffset(0x284)] public fixed ushort HotbarMinions[23]; // Companion RowIds
-    [FieldOffset(0x2B4)] public fixed ushort UnseenCards[10]; // TripleTriadCard RowIds, the ones indicated with a green dot
+    [FieldOffset(0x284), FixedSizeArray] internal FixedSizeArray23<ushort> _hotbarMinions; // Companion RowIds
+    [FieldOffset(0x2B4), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenCards; // TripleTriadCard RowIds, the ones indicated with a green dot
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x3A)]
     public unsafe partial struct TripleTriadDeck {
         [FieldOffset(0), FixedSizeArray(isString: true)] internal FixedSizeArray48<byte> _name;
-        [FieldOffset(0x30)] public fixed ushort Cards[5]; // TripleTriadCard RowIds
+        [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray5<ushort> _cards; // TripleTriadCard RowIds
     }
 
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 63 DA"), GenerateStringOverloads]

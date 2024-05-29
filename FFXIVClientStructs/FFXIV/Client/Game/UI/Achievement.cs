@@ -11,7 +11,7 @@ public unsafe partial struct Achievement {
     public static partial Achievement* Instance();
 
     [FieldOffset(0x08)] public AchievementState State;
-    [FieldOffset(0x0C)] public fixed byte CompletedAchievements[428];
+    [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray428<byte> _completedAchievements;
 
     [FieldOffset(0x1DC)] public AchievementState ProgressRequestState;
     [FieldOffset(0x1E0)] public uint ProgressAchievementId;

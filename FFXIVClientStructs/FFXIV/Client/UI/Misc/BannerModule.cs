@@ -58,7 +58,7 @@ public unsafe partial struct BannerModule {
 [StructLayout(LayoutKind.Explicit, Size = 0x3E60)]
 public unsafe partial struct BannerModuleData {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray110<BannerModuleEntry> _entries;
-    [FieldOffset(0x3DE0)] public fixed byte BannerId2BannerIndex[110];
+    [FieldOffset(0x3DE0), FixedSizeArray] internal FixedSizeArray110<byte> _bannerId2BannerIndex;
     [FieldOffset(0x3E4E)] public byte NextId;
 
     [FieldOffset(0x3E58)] public BannerModule* BannerModule;
@@ -75,7 +75,7 @@ public unsafe partial struct BannerModuleData {
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x00), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _bannerTimelineName;
-    // [FieldOffset(0x40)] public fixed byte Flags[4]; // see "8B C2 4C 8B C9 99"
+    // [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray4<byte> _flags; // see "8B C2 4C 8B C9 99"
     [FieldOffset(0x44)] public HalfVector4 CameraPosition;
     [FieldOffset(0x4C)] public HalfVector4 CameraTarget;
     [FieldOffset(0x54)] public HalfVector2 HeadDirection;

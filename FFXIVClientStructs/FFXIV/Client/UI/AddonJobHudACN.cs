@@ -20,7 +20,7 @@ public unsafe partial struct AddonJobHudACN0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct AetherflowACNGaugeData {
         [FieldOffset(0x08)] public byte AetherflowStacks;
-        [FieldOffset(0x09)] public fixed byte Prerequisites[1];
+        [FieldOffset(0x09), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
     }
 
     [GenerateInterop, Inherits<AddonJobHudGauge>]
@@ -70,7 +70,7 @@ public unsafe partial struct AddonJobHudSCH0 {
     public partial struct FaerieGaugeData {
         [FieldOffset(0x08)] public int FaeValue;
         [FieldOffset(0x0C)] public int FaeMax;
-        [FieldOffset(0x10)] public fixed byte Prerequisites[3];
+        [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
         [FieldOffset(0x18)] public int SeraphTimeLeft;
         [FieldOffset(0x1C)] public int SeraphMaxTime;
     }
@@ -127,7 +127,7 @@ public unsafe partial struct AddonJobHudSMN0 {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct AetherflowSMNGaugeData {
         [FieldOffset(0x08)] public int AetherflowStacks;
-        [FieldOffset(0x0C)] public fixed byte Prerequisites[1];
+        [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
     }
 
     [GenerateInterop, Inherits<AddonJobHudGauge>]
@@ -170,14 +170,14 @@ public unsafe partial struct AddonJobHudSMN1 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct TranceGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0C)] public int Phase;
         [FieldOffset(0x10)] public int SummonTimeLeft;
         [FieldOffset(0x14)] public int SummonTimeMax;
         [FieldOffset(0x1C)] public byte IfritReady;
         [FieldOffset(0x1D)] public byte TitanReady;
         [FieldOffset(0x1E)] public byte GarudaReady;
-        [FieldOffset(0x20)] public fixed int Prerequisites2[3];
+        [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray3<int> _prerequisites2;
         [FieldOffset(0x2C)] public int CurrentEgi;
         [FieldOffset(0x30)] public int Attunement;
     }

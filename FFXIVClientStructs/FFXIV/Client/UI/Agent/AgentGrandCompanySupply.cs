@@ -18,9 +18,9 @@ public unsafe partial struct AgentGrandCompanySupply {
 [StructLayout(LayoutKind.Explicit, Size = 0x790)]
 [GenerateInterop]
 public unsafe partial struct SupplyProvisioningData {
-    [FieldOffset(0x40)][FixedSizeArray] internal FixedSizeArray8<SupplyProvisioningItem> _supplyData;
+    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray8<SupplyProvisioningItem> _supplyData;
 
-    [FieldOffset(0x580)][FixedSizeArray] internal FixedSizeArray3<SupplyProvisioningItem> _provisioningData;
+    [FieldOffset(0x580), FixedSizeArray] internal FixedSizeArray3<SupplyProvisioningItem> _provisioningData;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]

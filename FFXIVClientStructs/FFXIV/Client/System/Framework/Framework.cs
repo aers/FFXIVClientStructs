@@ -76,9 +76,9 @@ public unsafe partial struct Framework {
 
     [FieldOffset(0x17E0)] public int DataPathType;
 
-    [FieldOffset(0x19EC)][FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _gamePath;
-    [FieldOffset(0x1DFC)][FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _sqPackPath;
-    [FieldOffset(0x220C)][FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _userPath;
+    [FieldOffset(0x19EC), FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _gamePath;
+    [FieldOffset(0x1DFC), FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _sqPackPath;
+    [FieldOffset(0x220C), FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _userPath;
 
     [FieldOffset(0x2B30)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x2B38)] public ExdModule* ExdModule;

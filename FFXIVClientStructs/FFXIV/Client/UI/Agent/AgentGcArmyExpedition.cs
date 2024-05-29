@@ -18,7 +18,7 @@ public unsafe partial struct AgentGcArmyExpedition {
 public unsafe partial struct GcArmyExpeditionData {
     [FieldOffset(0x10)] public int NumEntries;
 
-    [FieldOffset(0x18)][FixedSizeArray] internal FixedSizeArray50<MissionInfo> _missionInfoArray;
+    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray50<MissionInfo> _missionInfo;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]

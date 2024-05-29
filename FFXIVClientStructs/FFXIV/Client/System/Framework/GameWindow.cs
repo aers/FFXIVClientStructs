@@ -14,7 +14,7 @@ public unsafe partial struct GameWindow {
 
     [FieldOffset(0x58)] public int MinWidth;
     [FieldOffset(0x5C)] public int MinHeight;
-    [FieldOffset(0x80)][FixedSizeArray(isString: true)] internal FixedSizeArray257<char> _userName;
+    [FieldOffset(0x80), FixedSizeArray(isString: true)] internal FixedSizeArray257<char> _userName;
 
     public string GetArgument(ulong idx) => Marshal.PtrToStringUTF8(idx >= ArgumentCount ? nint.Zero : (nint)Arguments[idx]) ?? string.Empty;
 }

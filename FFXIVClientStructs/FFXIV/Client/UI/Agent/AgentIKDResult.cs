@@ -12,15 +12,15 @@ public unsafe partial struct AgentIKDResult {
     [StructLayout(LayoutKind.Explicit, Size = 0x17A0)]
     [GenerateInterop]
     public unsafe partial struct ResultData {
-        [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray60<CatchResult> _catchResults;
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray60<CatchResult> _catchResults;
         [FieldOffset(0x2D0)] public byte CatchResultCount;
 
-        [FieldOffset(0x2D4)] public fixed uint ContentBonusIds[13];
+        [FieldOffset(0x2D4), FixedSizeArray] internal FixedSizeArray13<uint> _contentBonusIds;
         [FieldOffset(0x308)] public byte ContentBonusCount;
 
         [FieldOffset(0x310)] public ResultEntry PlayerResult;
 
-        [FieldOffset(0x388)][FixedSizeArray] internal FixedSizeArray10<ResultEntry> _groupResult;
+        [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray10<ResultEntry> _groupResults;
         [FieldOffset(0x838)] public byte GroupSize;
         [FieldOffset(0x839)] public byte PlayerGroupIndex;
 
@@ -33,11 +33,11 @@ public unsafe partial struct AgentIKDResult {
         [FieldOffset(0x854)] public ushort WhiteScripReward;
         [FieldOffset(0x856)] public ushort PurpleScripReward;
 
-        [FieldOffset(0x860)][FixedSizeArray] internal FixedSizeArray60<CatchResultInfo> _catchResultsInfo;
+        [FieldOffset(0x860), FixedSizeArray] internal FixedSizeArray60<CatchResultInfo> _catchResultsInfo;
 
-        [FieldOffset(0xB30)][FixedSizeArray] internal FixedSizeArray13<ContentBonusEntry> _contentBonus;
+        [FieldOffset(0xB30), FixedSizeArray] internal FixedSizeArray13<ContentBonusEntry> _contentBonus;
 
-        [FieldOffset(0x1690)][FixedSizeArray] internal FixedSizeArray13<Pointer<ContentBonusEntry>> _contentBonusPointer;
+        [FieldOffset(0x1690), FixedSizeArray] internal FixedSizeArray13<Pointer<ContentBonusEntry>> _contentBonusPointers;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]

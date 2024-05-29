@@ -18,12 +18,12 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x0031)] public bool Disabled;
     [FieldOffset(0x0034)] public float MasterVolume;
     [FieldOffset(0x0038)] public float ActiveVolume;
-    [FieldOffset(0x003C)] public fixed float Volume[0x13];
-    [FieldOffset(0x0088)] public fixed float UnkVolume2[0x13]; // All are 1.0f
-    [FieldOffset(0x00D4)] public fixed float UnkVolume3[0x13]; // All are 1.0f
-    [FieldOffset(0x0120)] public fixed float UnkVolume4[0x13]; // All are 1.0f
-    [FieldOffset(0x016C)] public fixed bool ChannelMutedArray[0x13];
-    [FieldOffset(0x017F)] public fixed bool ChannelAlwaysOn[0x13];
+    [FieldOffset(0x003C), FixedSizeArray] internal FixedSizeArray19<float> _volume;
+    [FieldOffset(0x0088), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume2; // All are 1.0f
+    [FieldOffset(0x00D4), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume3; // All are 1.0f
+    [FieldOffset(0x0120), FixedSizeArray] internal FixedSizeArray19<float> _unkVolume4; // All are 1.0f
+    [FieldOffset(0x016C), FixedSizeArray] internal FixedSizeArray19<bool> _channelMuted;
+    [FieldOffset(0x017F), FixedSizeArray] internal FixedSizeArray19<bool> _channelAlwaysOn;
 
     [FieldOffset(0x01C9)] public bool MasterEnabled;
     [FieldOffset(0x01CA)] public bool IsSoundAlways;

@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x008)] public Character* Parent;
 
-    [FieldOffset(0x010)][FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
+    [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
 
     [UnscopedRef]
     public ref DrawObjectData Weapon(WeaponSlot which) {
@@ -98,10 +98,8 @@ public unsafe partial struct DrawDataContainer {
     }
 }
 
-
-
-// ctor: E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB
-[StructLayout(LayoutKind.Explicit, Size = Size)]
+// ctor: "E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB"
+[StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct DrawObjectData {
     public const int Size = 0x70;
 
@@ -117,12 +115,10 @@ public unsafe partial struct DrawObjectData {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = Count)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A)]
 [GenerateInterop]
 public unsafe partial struct CustomizeData {
-    private const int Count = 0x1A;
-
-    [FieldOffset(0x00), CExportIgnore] public fixed byte Data[Count];
+    [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray26<byte> _data;
 
     [FieldOffset(0x00)] public byte Race;
     [FieldOffset(0x01)] public byte Sex;

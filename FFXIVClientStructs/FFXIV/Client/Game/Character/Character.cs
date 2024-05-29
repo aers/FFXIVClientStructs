@@ -38,7 +38,7 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
 
-    [FieldOffset(0x1B40)][FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
+    [FieldOffset(0x1B40), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -162,7 +162,7 @@ public unsafe partial struct Character {
         //[FieldOffset(0x4C)] public uint TotalActionCounter?;
         //[FieldOffset(0x50)] public uint OwnActionCounter?;
 
-        [FieldOffset(0x58)][FixedSizeArray] internal FixedSizeArray32<GameObjectId> _actionRecipientsObjectIdArray;
+        [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray32<GameObjectId> _actionRecipientsObjectIds;
         [FieldOffset(0x158)] public int ActionRecipientsCount;
     }
 
@@ -197,7 +197,7 @@ public unsafe partial struct Character {
         [FieldOffset(0x1C)] public float DismountTimer;
         //1 in dismount animation, 4 = instant delete mount when dismounting (used for npcs and such)
         [FieldOffset(0x20)] public byte Flags;
-        [FieldOffset(0x24)] public fixed uint MountedObjectIds[7];
+        [FieldOffset(0x24), FixedSizeArray] internal FixedSizeArray7<uint> _mountedObjectIds;
 
         [MemberFunction("E8 ?? ?? ?? ?? 8B 43 ?? 41 89 46")]
         public partial void CreateAndSetupMount(short mountId, uint buddyModelTop, uint buddyModelBody, uint buddyModelLegs, byte buddyStain, byte unk6, byte unk7);

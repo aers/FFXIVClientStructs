@@ -30,23 +30,24 @@ public unsafe partial struct AgentExplorationResultInterface {
 [StructLayout(LayoutKind.Explicit, Size = 0x4F70)]
 [GenerateInterop]
 public unsafe partial struct ExplorationResultData {
-    [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray151<AtkValue> _valueArray;
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray151<AtkValue> _values;
 
     [FieldOffset(0x988)] public Utf8String Rating;
 
-    [FieldOffset(0xA00)][FixedSizeArray] internal FixedSizeArray10<ExplorationResultDataItemReturn> _itemReturn;
+    [FieldOffset(0xA00), FixedSizeArray] internal FixedSizeArray10<ExplorationResultDataItemReturn> _itemReturn;
 
     [FieldOffset(0x10E0)] public byte ItemReturnListCount;
 
-    [FieldOffset(0x10E8)][FixedSizeArray] internal FixedSizeArray100<Utf8String> _stringArray;
+    [FieldOffset(0x10E8), FixedSizeArray] internal FixedSizeArray100<Utf8String> _strings;
 
-    [FieldOffset(0x3988)][FixedSizeArray] internal FixedSizeArray100<Pointer<Utf8String>> _stringPointerArray;
+    [FieldOffset(0x3988), FixedSizeArray] internal FixedSizeArray100<Pointer<Utf8String>> _stringPointers;
     [FieldOffset(0x3CA8)] public byte StringPointerListCount;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
+[GenerateInterop]
 public unsafe partial struct ExplorationResultDataItemReturn {
     [FieldOffset(0x00)] public uint ItemId;
     [FieldOffset(0x04)] public uint Quantity;
-    [FieldOffset(0x08)] public fixed byte UnknownBytes[0xA8];
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray168<byte> _unknownBytes;
 }

@@ -11,9 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct EmoteHistoryModule {
     public static EmoteHistoryModule* Instance() => Framework.Instance()->GetUiModule()->GetEmoteHistoryModule();
 
-    [FieldOffset(0x42)] public fixed ushort History[6];
-    [FieldOffset(0x4E)] public fixed ushort Favorites[20];
-    [FieldOffset(0x76)] internal fixed byte SeenEmotesBitmask[1]; // unknown size
+    [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray6<ushort> _history;
+    [FieldOffset(0x4E), FixedSizeArray] internal FixedSizeArray20<ushort> _favorites;
+    [FieldOffset(0x76), FixedSizeArray] internal FixedSizeArray1<byte> _seenEmotesBitmask; // unknown size
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 43 20 85 C0 74 17")]
     public partial bool AddToHistory(ushort emoteId);

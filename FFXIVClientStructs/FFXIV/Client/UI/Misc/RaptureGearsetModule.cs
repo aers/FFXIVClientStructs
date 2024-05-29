@@ -225,16 +225,17 @@ public unsafe partial struct RaptureGearsetModule {
         SoulStone,
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public struct GearsetItem {
+    public partial struct GearsetItem {
         public const int Size = 0x1C;
 
         [FieldOffset(0x00)] public uint ItemId;
         [FieldOffset(0x04)] public uint GlamourId;
         [FieldOffset(0x08)] public byte Stain;
 
-        [FieldOffset(0x0A)] public fixed ushort Materia[5];
-        [FieldOffset(0x14)] public fixed byte MateriaGrade[5];
+        [FieldOffset(0x0A), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
+        [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
         [FieldOffset(0x19)] public GearsetItemFlag Flags;
     }
 

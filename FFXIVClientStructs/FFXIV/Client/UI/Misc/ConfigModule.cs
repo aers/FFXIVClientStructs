@@ -9,18 +9,18 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //  "48 8B CB E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 C0 48 8B 5C 24"
 //    16 * (v6 + ConfigOptionCount * a6) + a1 + {ValuesFieldOffset}
 [StructLayout(LayoutKind.Explicit, Size = 0xE5C8)]
+[GenerateInterop]
 public unsafe partial struct ConfigModule {
     public static ConfigModule* Instance() => Framework.Instance()->GetUiModule()->GetConfigModule();
 
     public const int ConfigOptionCount = 715;
     [FieldOffset(0x28)] public UIModule* UIModule;
-    [FieldOffset(0x2C8)] private fixed byte options[Option.Size * ConfigOptionCount];
+    [FieldOffset(0x2C8), FixedSizeArray] internal FixedSizeArray715<Option> _options;
 
-    [FieldOffset(0x5C38)] private fixed byte values[0x10 * ConfigOptionCount];
+    [FieldOffset(0x5C38), FixedSizeArray] internal FixedSizeArray715<OptionValue> _values;
 
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct Option {
-        public const int Size = 0x20;
         [FieldOffset(0x00)] public void* Unk00;
         [FieldOffset(0x08)] public ulong Unk08;
         [FieldOffset(0x10)] public ConfigOption OptionId;
@@ -42,4 +42,7 @@ public unsafe partial struct ConfigModule {
             return l == 0 ? string.Empty : $"{Encoding.UTF8.GetString(namePtr, l)}";
         }
     }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct OptionValue;
 }

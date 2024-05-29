@@ -4,9 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 [GenerateInterop]
 public unsafe partial struct GameObjectManager {
     [FieldOffset(0x04)] public byte Active;
-    [FieldOffset(0x18)][FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objectList;
-    [FieldOffset(0x12D0)][FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objectListFiltered;
-    [FieldOffset(0x2588)][FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objectList3;
+    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects;
+    [FieldOffset(0x12D0), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objectFiltered;
+    [FieldOffset(0x2588), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects3;
     [FieldOffset(0x3840)] public int ObjectListFilteredCount;
     [FieldOffset(0x3844)] public int ObjectList3Count;
 

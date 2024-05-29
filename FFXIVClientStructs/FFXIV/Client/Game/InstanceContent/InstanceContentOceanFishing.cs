@@ -40,7 +40,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     // Offest can be found with this sig "45 8B 84 CF ?? ?? ?? ?? 48 8B CD"
     // Struct size can be found with "83 C7 ?? 49 83 EE ?? 75 ?? FF C6"
     // Array size can be found with "83 FF ?? 72 ?? 4C 8B 74 24 ?? 49 8D 9F"
-    [FieldOffset(0x1D3C)][FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
+    [FieldOffset(0x1D3C), FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
 
     // The first 10 of them are normal fish, the rest are spectral fish
     [UnscopedRef]
@@ -57,7 +57,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FieldOffset(0x2101)] public byte LocalIndexInAllResult;
     [FieldOffset(0x2102)] public IndividualResultStruct IndividualResult;
     [FieldOffset(0x2124)] public AllResultStruct LocalPlayerAllResult;
-    [FieldOffset(0x214C)][FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResult;
+    [FieldOffset(0x214C), FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResults;
 
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet
@@ -81,15 +81,17 @@ public unsafe partial struct InstanceContentOceanFishing {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct AllResultStruct {
+    [GenerateInterop]
+    public partial struct AllResultStruct {
         [FieldOffset(0x0)] public ushort WorldId;
         [FieldOffset(0x2)] public ushort CaughtFish;
         [FieldOffset(0x4)] public ushort TotalPoints;
-        [FieldOffset(0x8)] public fixed byte PlayerName[32];
+        [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray32<byte> _playerName;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x22)]
-    public struct IndividualResultStruct {
+    [GenerateInterop]
+    public partial struct IndividualResultStruct {
         [FieldOffset(0x2)] public uint TotalPoints;
         [FieldOffset(0xA)] public uint ExperiencePoints;
         // Scrip introduced in the last expansion
@@ -97,7 +99,7 @@ public unsafe partial struct InstanceContentOceanFishing {
         // Scrip that is introduced in this expansion
         [FieldOffset(0x10)] public ushort Scrip2Amount;
         // Each element is row id for IKDContentBonus
-        [FieldOffset(0x12)] public fixed byte Bonuses[16];
+        [FieldOffset(0x12), FixedSizeArray] internal FixedSizeArray16<byte> _bonuses;
     }
 
     public enum OceanFishingStatus : uint {

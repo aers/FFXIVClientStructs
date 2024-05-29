@@ -11,5 +11,5 @@ public unsafe partial struct AgentCompanyCraftMaterial {
 
     [FieldOffset(0x94)] public uint ResultItem;
     [FieldOffset(0x99)] public byte SelectedSupplyItemIndex;
-    [FieldOffset(0x9C)] public fixed uint SupplyItem[12];
+    [FieldOffset(0x9C), FixedSizeArray] internal FixedSizeArray12<uint> _supplyItems;
 }

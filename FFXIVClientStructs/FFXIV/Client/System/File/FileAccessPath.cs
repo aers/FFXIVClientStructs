@@ -1,8 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x210)]
-public unsafe struct FileAccessPath {
-    [FieldOffset(0x000)] public fixed char Buffer[260];
+[GenerateInterop]
+public unsafe partial struct FileAccessPath {
+    [FieldOffset(0x000), FixedSizeArray(isString: true)] internal FixedSizeArray260<char> _buffer;
     [FieldOffset(0x208)] public char* LongStringPtr;
 
     public override string ToString() {

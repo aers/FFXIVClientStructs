@@ -122,7 +122,7 @@ public unsafe partial struct Collider {
 [StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe partial struct ColliderStreamed {
     //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
-    [FieldOffset(0x0A8)] public fixed byte PathBase[256]; // root directory of the streamed meshes
+    [FieldOffset(0x0A8), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _pathBase; // root directory of the streamed meshes
     [FieldOffset(0x1A8)] public Resource* Resource;
     [FieldOffset(0x1B0)] public int NumMeshesLoading;
     [FieldOffset(0x1B4)] public bool Loaded;

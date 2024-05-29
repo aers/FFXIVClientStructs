@@ -10,7 +10,7 @@ public unsafe partial struct RecipeNote {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 FE ?? ?? ?? ?? 75 0F", 3)]
     public static partial RecipeNote* Instance();
 
-    [FieldOffset(0x00)] public fixed uint Jobs[8];  // CraftType -> ClassJob
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<uint> _jobs;  // CraftType -> ClassJob
 
     [FieldOffset(0xB8)] public RecipeData* RecipeList;
 
@@ -40,8 +40,8 @@ public unsafe partial struct RecipeNote {
     [StructLayout(LayoutKind.Explicit, Size = 0x500)]
     [GenerateInterop]
     public unsafe partial struct RecipeEntry {
-        [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray8<RecipeIngredient> _ingredients;
-        [FieldOffset(0x440)][FixedSizeArray] internal FixedSizeArray2<RecipeCrystal> _crystals;
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<RecipeIngredient> _ingredients;
+        [FieldOffset(0x440), FixedSizeArray] internal FixedSizeArray2<RecipeCrystal> _crystals;
         [FieldOffset(0x448)] public Utf8String ItemName;
         [FieldOffset(0x4B0)] public uint IconId;
         [FieldOffset(0x4B4)] public uint ItemId;

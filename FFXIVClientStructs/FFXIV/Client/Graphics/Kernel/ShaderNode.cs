@@ -2,7 +2,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::ShaderNode
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe struct ShaderNode {
+[GenerateInterop]
+public unsafe partial struct ShaderNode {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct ShaderPass {
         [FieldOffset(0x0)] public uint VertexShader;
@@ -11,7 +12,7 @@ public unsafe struct ShaderNode {
 
     [FieldOffset(0x08)] public ShaderPackage* OwnerPackage;
     [FieldOffset(0x10)] public uint PassNum;
-    [FieldOffset(0x14)] public fixed byte PassIndices[16];
+    [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray16<byte> _passIndices;
     [FieldOffset(0x28)] public ShaderPass* Passes;
     [FieldOffset(0x30)] public uint* ShaderKeys;
 }

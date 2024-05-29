@@ -11,7 +11,7 @@ public unsafe partial struct ActionTimelineDriver {
 
     // starting from 0x10 is a 0x60-sized struct containing animation request info?! can be passed as a3 to PlayTimeline
 
-    [FieldOffset(0x70)][FixedSizeArray] internal FixedSizeArray14<Pointer<Pointer<SchedulerTimeline>>> _schedulerTimelines; // technically incorrect, but it's really all we need
+    [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray14<Pointer<Pointer<SchedulerTimeline>>> _schedulerTimelines; // technically incorrect, but it's really all we need
     [FieldOffset(0xE0)] public unsafe fixed ushort TimelineIds[TimelineSlotCount]; // The timeline active in each slot or 0 when none
 
     [FieldOffset(0x154)] public unsafe fixed float TimelineSpeeds[TimelineSlotCount]; // Speed for each slot
