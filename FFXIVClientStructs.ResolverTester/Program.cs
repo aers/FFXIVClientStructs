@@ -27,25 +27,6 @@ unsafe {
         watch.Stop();
         Console.WriteLine($"Resolved in {watch.ElapsedMilliseconds}ms");
 
-        // re-initialize, should add zero addresses
-        watch = new Stopwatch();
-        watch.Start();
-        FFXIVClientStructs.Interop.Generated.Addresses.Register();
-        Resolver.GetInstance.Resolve();
-        watch.Stop();
-        Console.WriteLine($"Re-resolved in {watch.ElapsedMilliseconds}ms");
-
-        // clear address list, resolve from cache
-        foreach (Address a in Resolver.GetInstance.Addresses)
-            a.Value = 0;
-        FFXIVClientStructs.Interop.Generated.Addresses.Unregister();
-        watch = new Stopwatch();
-        watch.Start();
-        FFXIVClientStructs.Interop.Generated.Addresses.Register();
-        Resolver.GetInstance.Resolve();
-        watch.Stop();
-        Console.WriteLine($"Resolved from cache in {watch.ElapsedMilliseconds}ms");
-
         var totalSigCount = Resolver.GetInstance.Addresses.Count;
         var resolvedCount = Resolver.GetInstance.Addresses.Count(sig => sig.Value != 0);
         Console.WriteLine($"Resolved count: {resolvedCount} ({((float)resolvedCount / totalSigCount) * 100}%)");
@@ -54,5 +35,8 @@ unsafe {
         var unresolvedSigs = Resolver.GetInstance.Addresses.Where(sig => sig.Value == 0);
         foreach (var sig in unresolvedSigs)
             Console.WriteLine($"[FAIL] {sig.Name}: {sig.String}");
+        
+        foreach (Address address in Resolver.GetInstance.Addresses)
+            Console.WriteLine($"{address.Name} {address.Value - (nuint) new IntPtr(bytes):X}");
     }
 }

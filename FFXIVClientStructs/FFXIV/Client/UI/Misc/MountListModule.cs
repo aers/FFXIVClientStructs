@@ -13,7 +13,7 @@ public unsafe partial struct MountListModule {
 
     // [FieldOffset(0x40)] public byte Unk40; // set to 1 in ReadFile
     [FieldOffset(0x42)] public fixed ushort UnseenMounts[10]; // Order column of Mount sheet, offset by 1
-    [FieldOffset(0x56)] public fixed ushort Favorites[30]; // Order column of Mount sheet, offset by 1
+    [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray30<ushort> _favorites; // Order column of Mount sheet, offset by 1
     // [FieldOffset(0x92)] public uint Unk92;
 
     [MemberFunction("48 83 EC 28 44 0F B7 DA")]
@@ -28,14 +28,6 @@ public unsafe partial struct MountListModule {
     [MemberFunction("48 83 EC 28 45 32 C0 44 0F B7 CA")]
     public partial bool RemoveFromFavorites(ushort orderId);
 
-    private Span<ushort> FavoritesSpan {
-        get {
-            fixed (ushort* ptr = &Favorites[0]) {
-                return new Span<ushort>(ptr, 30);
-            }
-        }
-    }
-
     public bool SwapFavorites(int favoriteSlotIndex1, int favoriteSlotIndex2) {
         if (favoriteSlotIndex1 >= 30 || favoriteSlotIndex2 >= 30)
             return false;
@@ -46,21 +38,21 @@ public unsafe partial struct MountListModule {
     }
 
     public bool IsFavorite(ushort orderId) {
-        foreach (ref var fav in FavoritesSpan)
+        foreach (ref var fav in Favorites)
             if (fav == orderId + 1)
                 return true;
         return false;
     }
 
     public bool HasAnyFavorites() {
-        foreach (ref var fav in FavoritesSpan)
+        foreach (ref var fav in Favorites)
             if (fav != 0)
                 return true;
         return false;
     }
 
     public bool HasFreeFavoriteSlots() {
-        foreach (ref var fav in FavoritesSpan)
+        foreach (ref var fav in Favorites)
             if (fav == 0)
                 return true;
         return false;
