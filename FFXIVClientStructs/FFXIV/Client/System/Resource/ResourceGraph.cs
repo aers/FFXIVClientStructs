@@ -17,7 +17,7 @@ public unsafe partial struct ResourceGraph {
         public CategoryMap* this[int index] => CategoryMaps[index].Value;
     }
 
-    [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray20<CategoryContainer> _containerArray;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray20<CategoryContainer> _containers;
 
-    [UnscopedRef] public ref CategoryContainer GetContainer(ResourceCategory category) => ref ContainerArray[(int)category];
+    [UnscopedRef] public ref CategoryContainer GetContainer(ResourceCategory category) => ref Containers[(int)category];
 }
