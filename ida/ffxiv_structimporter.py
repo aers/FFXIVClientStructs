@@ -854,7 +854,7 @@ if api is None:
                     arg.name = param.name
                     func_data.push_back(arg)
                 tif.create_func(func_data)
-                print(f"updating {func_name} with {tif}")
+                print("updating {0} with {1}".format(func_name, tif))
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
             def should_update_member_func(self):
