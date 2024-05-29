@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
@@ -249,20 +250,8 @@ public unsafe partial struct RaptureGearsetModule {
         [FieldOffset(0x36)] public byte BannerIndex;
         [FieldOffset(0x37)] public GearsetFlag Flags;
         [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray14<GearsetItem> _items;
-        [FieldOffset(0x38 + GearsetItem.Size * 00), Obsolete("Use ItemsSpan[0]")] public GearsetItem MainHand;
-        [FieldOffset(0x38 + GearsetItem.Size * 01), Obsolete("Use ItemsSpan[1]")] public GearsetItem OffHand;
-        [FieldOffset(0x38 + GearsetItem.Size * 02), Obsolete("Use ItemsSpan[2]")] public GearsetItem Head;
-        [FieldOffset(0x38 + GearsetItem.Size * 03), Obsolete("Use ItemsSpan[3]")] public GearsetItem Body;
-        [FieldOffset(0x38 + GearsetItem.Size * 04), Obsolete("Use ItemsSpan[4]")] public GearsetItem Hands;
-        [FieldOffset(0x38 + GearsetItem.Size * 05), Obsolete("Use ItemsSpan[5]")] public GearsetItem Belt;
-        [FieldOffset(0x38 + GearsetItem.Size * 06), Obsolete("Use ItemsSpan[6]")] public GearsetItem Legs;
-        [FieldOffset(0x38 + GearsetItem.Size * 07), Obsolete("Use ItemsSpan[7]")] public GearsetItem Feet;
-        [FieldOffset(0x38 + GearsetItem.Size * 08), Obsolete("Use ItemsSpan[8]")] public GearsetItem Ears;
-        [FieldOffset(0x38 + GearsetItem.Size * 09), Obsolete("Use ItemsSpan[9]")] public GearsetItem Neck;
-        [FieldOffset(0x38 + GearsetItem.Size * 10), Obsolete("Use ItemsSpan[10]")] public GearsetItem Wrists;
-        [FieldOffset(0x38 + GearsetItem.Size * 11), Obsolete("Use ItemsSpan[11]")] public GearsetItem RingRight;
-        [FieldOffset(0x38 + GearsetItem.Size * 12), Obsolete("Use ItemsSpan[12]")] public GearsetItem RingLeft; // aka RightLeft
-        [FieldOffset(0x38 + GearsetItem.Size * 13), Obsolete("Use ItemsSpan[13]")] public GearsetItem SoulStone;
+
+        [UnscopedRef] public ref GearsetItem GetItem(GearsetItemIndex index) => ref Items[(int)index];
 
         /// <returns>Returns a pointer to the BannerModuleEntry* or null if the gearset is not linked to a banner.</returns>
         public BannerModuleEntry* GetBanner() {
