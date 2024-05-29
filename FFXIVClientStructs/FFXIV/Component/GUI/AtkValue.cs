@@ -27,11 +27,6 @@ public enum ValueType {
     Managed = 0x20,
     ManagedString = Managed | String,
     ManagedVector = Managed | Vector,
-
-    [Obsolete("Renamed to ManagedString")]
-    AllocatedString = 0x26,
-    [Obsolete("Renamed to ManagedVector")]
-    AllocatedVector = 0x29
 }
 
 [GenerateInterop]
@@ -85,16 +80,11 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 06 4C 8D 4C 24 ?? 44 8B C3")]
     public partial void ChangeType(ValueType type);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED"), GenerateStringOverloads] // TODO: replace sig with unmanaged variant "E8 ?? ?? ?? ?? 83 0E 20" and remove ObsoleteAttribute
-    [Obsolete("Use SetManagedString instead. This will be replaced by the unmanaged function in Dawntrail.")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 0E 20"), GenerateStringOverloads]
     public partial void SetString(byte* value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED"), GenerateStringOverloads]
     public partial void SetManagedString(byte* value);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]
-    [Obsolete("Renamed to CreateVector")]
-    public partial void CreateArray(int size); // TODO: remove this, it was renamed
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]
     public partial void CreateVector(uint size);

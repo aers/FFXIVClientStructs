@@ -120,10 +120,10 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public partial void Clear();
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 2B D8")]
-    public partial bool EqualsUtf8(Utf8String* other);
+    public partial bool EqualTo(Utf8String* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 84 C0"), GenerateStringOverloads]
-    public partial bool EqualsString(byte* other);
+    public partial bool EqualToString(byte* other);
 
     [MemberFunction("45 33 C0 4C 8B C9 4C 39 41")]
     public partial Utf8String* ToLower();
@@ -168,7 +168,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
 
     public static int Compare(in Utf8String left, in Utf8String right) => left.AsSpan().SequenceCompareTo(right.AsSpan());
 
-    public static bool ContentEquals(in Utf8String left, in Utf8String right) => Unsafe.AsRef(in left).EqualsUtf8((Utf8String*)Unsafe.AsPointer(ref Unsafe.AsRef(in right)));
+    public static bool ContentEquals(in Utf8String left, in Utf8String right) => Unsafe.AsRef(in left).EqualTo((Utf8String*)Unsafe.AsPointer(ref Unsafe.AsRef(in right)));
 
     public static void ConstructDefaultInPlace(out Utf8String item) {
         item = default;
