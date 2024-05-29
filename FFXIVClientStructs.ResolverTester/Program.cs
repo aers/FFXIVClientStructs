@@ -26,7 +26,7 @@ unsafe {
         Resolver.GetInstance.Resolve();
         watch.Stop();
         Console.WriteLine($"Resolved in {watch.ElapsedMilliseconds}ms");
-        
+
         // re-initialize, should add zero addresses
         watch = new Stopwatch();
         watch.Start();
@@ -34,7 +34,7 @@ unsafe {
         Resolver.GetInstance.Resolve();
         watch.Stop();
         Console.WriteLine($"Re-resolved in {watch.ElapsedMilliseconds}ms");
-        
+
         // clear address list, resolve from cache
         foreach (Address a in Resolver.GetInstance.Addresses)
             a.Value = 0;

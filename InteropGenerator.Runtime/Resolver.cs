@@ -15,7 +15,7 @@ public sealed class Resolver {
     private nint _baseAddress;
     private bool _cacheChanged;
     private FileInfo? _cacheFile;
-    
+
     private bool _isSetup;
 
     private ResolverCache? _resolverCache;
@@ -222,7 +222,7 @@ outLoop:;
             _preResolveArray[firstByte]!.Add(address);
         }
     }
-    
+
     public void UnregisterAddress(Address address) {
         if (Addresses.Remove(address) &&
             address.Value != 0) {

@@ -30,7 +30,7 @@ public unsafe partial struct InfoProxyLetter {
         [FieldOffset(0x3C)] public bool Read;
 
         [FieldOffset(0x3F), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _sender;
-        [FieldOffset(0x5F), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _messagePreview; 
+        [FieldOffset(0x5F), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _messagePreview;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x8)]
         public partial struct ItemAttachment {

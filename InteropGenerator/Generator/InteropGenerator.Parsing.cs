@@ -262,7 +262,7 @@ public sealed partial class InteropGenerator {
             if (fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out AttributeData? fixedSizeArrayAttributeData)) {
                 if (fieldSymbol.Type is not INamedTypeSymbol fieldTypeSymbol)
                     continue;
-                
+
                 if (!fieldTypeSymbol.IsGenericType || fieldTypeSymbol.TypeArguments.Length != 1) // malformed field
                     continue;
 

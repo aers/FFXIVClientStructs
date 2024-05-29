@@ -11,7 +11,7 @@ public readonly unsafe struct Pointer<T> : IEquatable<Pointer<T>>, IComparable<P
 
     public static implicit operator T*(Pointer<T> p) => p.Value;
     public static implicit operator Pointer<T>(T* p) => new(p);
-    
+
     public bool Equals(Pointer<T> other) => Value == other.Value;
     public override bool Equals(object? obj) => obj is Pointer<T> other && Equals(other);
     public override int GetHashCode() => ((nint)Value).GetHashCode();
