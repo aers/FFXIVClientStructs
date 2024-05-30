@@ -16,9 +16,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 public unsafe partial struct Character {
     [FieldOffset(0x630)] public EmoteController EmoteController;
     [FieldOffset(0x670)] public MountContainer Mount;
-    [FieldOffset(0x6D8)] public CompanionContainer Companion;
+    [FieldOffset(0x6D8)] public CompanionContainer CompanionData;
     [FieldOffset(0x6F8)] public DrawDataContainer DrawData;
-    [FieldOffset(0x8A0)] public OrnamentContainer Ornament;
+    [FieldOffset(0x8A0)] public OrnamentContainer OrnamentData;
     [FieldOffset(0x918)] public ReaperShroudContainer ReaperShroud;
     
     [FieldOffset(0x970)] public TimelineContainer Timeline;
