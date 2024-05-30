@@ -17,81 +17,70 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Install dependencies for PR branch
-        run: dotnet restore
-      - name: Build PR branch
-        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
-      - uses: actions/upload-artifact@v4
-        with:
-          name: cs-pr
-          path: ida/cs/FFXIVClientStructs.dll
-          retention-days: 1
-  
-  build-main:
-    runs-on: ubuntu-latest
-    steps:
+          path: main
       - uses: actions/checkout@v4
-      - name: Install dependencies for Main branch
-        run: dotnet restore
-      - name: Build Main branch
-        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
-      - uses: actions/upload-artifact@v4
         with:
-          name: cs-main
-          path: ida/cs/FFXIVClientStructs.dll
-          retention-days: 1
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
+      - name: Install dependencies for Main branch
+        run: dotnet restore main/
+      - name: Install dependencies for PR branch
+        run: dotnet restore pr/
+      - name: Build Main branch
+        run: dotnet build main/FFXIVClientStructs/FFXIVClientStructs.csproj
+      - name: Build PR branch
+        run: dotnet build pr/FFXIVClientStructs/FFXIVClientStructs.csproj /p:ApiCompatValidateAssemblies=true /p:ApiCompatContractAssembly=../main/bin/Release/FFXIVClientStructs.dll
 
-  check-breaking-changes:
-    runs-on: ubuntu-latest
-    needs: [build-pr, build-main]
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/download-artifact@v4
-      with:
-        name: cs-pr
-        path: ida/cs-pr
-    - uses: actions/download-artifact@v4
-      with:
-        name: cs-main
-        path: ida/cs-main
-    - name: Check for breaking changes
-      id: breaking_changes
-      run: |
-        dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
-        testout=$(apicompat -l ida/cs-main/FFXIVClientStructs.dll -r ida/cs-pr/FFXIVClientStructs.dll)
-        echo $testout
-        if [ "$testout" != "APICompat ran successfully without finding any breaking changes." ]; then
-          echo "Breaking changes detected"
-          echo "breaking=true" >> $GITHUB_OUTPUT
-        else
-          echo "No breaking changes detected"
-          echo "breaking=false" >> $GITHUB_OUTPUT
-        fi
-    - name: Handle breaking change label
-      uses: actions/github-script@v7
-      env:
-        IS_BREAKING: ${{ steps.breaking_changes.outputs.breaking }}
-      with:
-        script: |
-          if (process.env.IS_BREAKING == "true") {
-            github.rest.issues.addLabels({
-              issue_number: context.payload.pull_request.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["breaking change"]
-            })
-          }
-          else {
-            try {
-              await github.rest.issues.removeLabel({
-                issue_number: context.payload.pull_request.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                name: "breaking change"
-              })
-              console.log(`Breaking change label removed successfully.`);
-            } catch (error) {
-              console.log(`Breaking change label was not found on the issue.`);
-            }
-          }
+#  check-breaking-changes:
+#    runs-on: ubuntu-latest
+#    needs: [build-pr, build-main]
+#    steps:
+#    - uses: actions/checkout@v4
+#    - uses: actions/download-artifact@v4
+#      with:
+#        name: cs-pr
+#        path: ida/cs-pr
+#    - uses: actions/download-artifact@v4
+#      with:
+#        name: cs-main
+#        path: ida/cs-main
+#    - name: Check for breaking changes
+#      id: breaking_changes
+#      run: |
+#        dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
+#        testout=$(apicompat -l ida/cs-main/FFXIVClientStructs.dll -r ida/cs-pr/FFXIVClientStructs.dll)
+#        echo $testout
+#        if [ "$testout" != "APICompat ran successfully without finding any breaking changes." ]; then
+#          echo "Breaking changes detected"
+#          echo "breaking=true" >> $GITHUB_OUTPUT
+#        else
+#          echo "No breaking changes detected"
+#          echo "breaking=false" >> $GITHUB_OUTPUT
+#        fi
+#    - name: Handle breaking change label
+#      uses: actions/github-script@v7
+#      env:
+#        IS_BREAKING: ${{ steps.breaking_changes.outputs.breaking }}
+#      with:
+#        script: |
+#          if (process.env.IS_BREAKING == "true") {
+#            github.rest.issues.addLabels({
+#              issue_number: context.payload.pull_request.number,
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              labels: ["breaking change"]
+#            })
+#          }
+#          else {
+#            try {
+#              await github.rest.issues.removeLabel({
+#                issue_number: context.payload.pull_request.number,
+#                owner: context.repo.owner,
+#                repo: context.repo.repo,
+#                name: "breaking change"
+#              })
+#              console.log(`Breaking change label removed successfully.`);
+#            } catch (error) {
+#              console.log(`Breaking change label was not found on the issue.`);
+#            }
+#          }
