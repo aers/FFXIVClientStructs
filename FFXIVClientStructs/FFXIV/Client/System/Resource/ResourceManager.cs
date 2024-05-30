@@ -11,7 +11,7 @@ public unsafe partial struct ResourceManager {
 
     [StaticAddress("48 89 05 ?? ?? ?? ?? 48 8B 08", 3, isPointer: true)]
     public static partial ResourceManager* Instance();
-    
+
     [MemberFunction("44 8B 12 4D 8B D8 41 0F B7 C2 49 C1 EA 18")]
     public partial ResourceHandle* FindResourceHandle(ResourceCategory* category, uint* type, uint* hash);
 

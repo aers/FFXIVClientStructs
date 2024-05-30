@@ -18,6 +18,6 @@ public unsafe partial struct ResourceGraph {
     }
 
     [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray20<CategoryContainer> _containerArray;
-    
+
     [UnscopedRef] public ref CategoryContainer GetContainer(ResourceCategory category) => ref ContainerArray[(int)category];
 }

@@ -35,8 +35,8 @@ unsafe {
         var unresolvedSigs = Resolver.GetInstance.Addresses.Where(sig => sig.Value == 0);
         foreach (var sig in unresolvedSigs)
             Console.WriteLine($"[FAIL] {sig.Name}: {sig.String}");
-        
+
         foreach (Address address in Resolver.GetInstance.Addresses)
-            Console.WriteLine($"{address.Name} {address.Value - (nuint) new IntPtr(bytes):X}");
+            Console.WriteLine($"{address.Name} {address.Value - (nuint)new IntPtr(bytes):X}");
     }
 }
