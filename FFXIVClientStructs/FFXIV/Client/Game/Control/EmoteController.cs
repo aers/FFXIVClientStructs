@@ -3,8 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct EmoteController {
     [FieldOffset(0x08)] public BattleChara* OwnerObject;
     [FieldOffset(0x14)] public ushort EmoteId;

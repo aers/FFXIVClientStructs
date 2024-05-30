@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyPageInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x20)] public Utf8String Unk20;
     [FieldOffset(0x88)] public byte NumberArrayIndex;
@@ -37,8 +37,8 @@ public unsafe partial struct InfoProxyCommonList {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]
     public partial void ApplyFilters();
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct CharacterData {
         [FieldOffset(0x00)] public ulong ContentId;
         [FieldOffset(0x08)] public OnlineStatus State;

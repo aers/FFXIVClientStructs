@@ -9,9 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CharaCard)]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentCharaCard {
 
     [FieldOffset(0x28)] public Storage* Data;

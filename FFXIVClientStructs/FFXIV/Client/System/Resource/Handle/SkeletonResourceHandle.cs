@@ -5,12 +5,13 @@ using FFXIVClientStructs.Havok.Common.Serialize.Util;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x138)]
 [GenerateInterop]
 [Inherits<ResourceHandle>]
+[StructLayout(LayoutKind.Explicit, Size = 0x138)]
 public unsafe partial struct SkeletonResourceHandle {
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-    public struct SkeletonHeader {
+    public partial struct SkeletonHeader {
         [FieldOffset(0x0)] public uint SklbMagic;
         [FieldOffset(0x4)] public uint SklbVersion;
         [FieldOffset(0x8)] public uint LayerOffset;
@@ -18,8 +19,8 @@ public unsafe partial struct SkeletonResourceHandle {
         [FieldOffset(0x10)] public ushort ConnectBoneIndex;
         [FieldOffset(0x12)] private ushort pad;
         [FieldOffset(0x14)] public uint CharacterId;
-        [FieldOffset(0x18)] public fixed uint SkeletonMappers[4];
-        [FieldOffset(0x28)] public fixed ushort ConnectBoneIds[4];
+        [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<uint> _skeletonMappers;
+        [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray4<ushort> _connectBoneIds;
     }
 
     [FieldOffset(0xC8)] public uint BoneCount;

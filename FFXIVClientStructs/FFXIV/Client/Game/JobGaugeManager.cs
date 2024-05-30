@@ -2,8 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.Gauge;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x60)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe partial struct JobGaugeManager {
     [FieldOffset(0x00)] public JobGauge* CurrentGauge;
 

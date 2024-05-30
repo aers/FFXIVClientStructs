@@ -2,8 +2,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::EventGPoseController
 // ctor "E8 ?? ?? ?? ?? 80 A3 ?? ?? ?? ?? ?? B8 ?? ?? ?? ?? 48 89 83"
-[StructLayout(LayoutKind.Explicit, Size = 0x2F80)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F80)]
 public unsafe partial struct EventGPoseController {
     [MemberFunction("E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 BE 8C 00 00 00 02")]
     public partial void AddCharacterToGPose(Character.Character* character, ulong a1 = 0);

@@ -4,9 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Request)]
-[StructLayout(LayoutKind.Explicit, Size = 0x460)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x460)]
 public unsafe partial struct AgentRequest {
 
     [FieldOffset(0x114)] public sbyte SelectedTurnInSlot; // you can have multiple items to turn in. this defaults to -1 and when you select one of them it becomes its index (starts at 0)

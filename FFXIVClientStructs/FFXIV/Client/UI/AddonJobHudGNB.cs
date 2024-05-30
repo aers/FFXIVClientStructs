@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudGNB0 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct PowderGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[4];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray4<byte> _prerequisites;
         [FieldOffset(0x0C)] public int Ammo;
     }
 

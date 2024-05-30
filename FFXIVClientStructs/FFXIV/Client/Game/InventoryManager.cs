@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::InventoryManager
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9 33 ED B9 ?? ?? ?? ??"
-[StructLayout(LayoutKind.Explicit, Size = 0x3620)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x3620)]
 public unsafe partial struct InventoryManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
     public static partial InventoryManager* Instance();
@@ -81,8 +81,8 @@ public unsafe partial struct InventoryManager {
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct InventoryContainer {
     [FieldOffset(0x00)] public InventoryItem* Items;
     [FieldOffset(0x08)] public InventoryType Type;
@@ -93,8 +93,8 @@ public unsafe partial struct InventoryContainer {
     public partial InventoryItem* GetInventorySlot(int index);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x00)] public InventoryType Container;
     [FieldOffset(0x04)] public short Slot;
@@ -114,8 +114,8 @@ public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x12)] public ushort Condition;
     [FieldOffset(0x14)] public ItemFlags Flags;
     [FieldOffset(0x18)] public ulong CrafterContentId;
-    [FieldOffset(0x20)] public fixed ushort Materia[5];
-    [FieldOffset(0x2A)] public fixed byte MateriaGrade[5];
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
+    [FieldOffset(0x2A), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
     [FieldOffset(0x2F)] public byte Stain;
     [FieldOffset(0x30)] public uint GlamourId;
 

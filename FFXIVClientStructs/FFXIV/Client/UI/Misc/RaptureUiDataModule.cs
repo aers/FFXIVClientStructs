@@ -11,9 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct RaptureUiDataModule {
     public static RaptureUiDataModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureUiDataModule();
 
-    [FieldOffset(0x4D8)] public fixed ushort PartyListTankOrder[16];
-    [FieldOffset(0x4F8)] public fixed ushort PartyListHealerOrder[16];
-    [FieldOffset(0x518)] public fixed ushort PartyListDpsOrder[16];
+    [FieldOffset(0x4D8), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListTankOrder;
+    [FieldOffset(0x4F8), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListHealerOrder;
+    [FieldOffset(0x518), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListDpsOrder;
 
     [MemberFunction("4C 8B D1 41 83 F9 06")]
     public partial void MJI_SetWorkshopPreset(uint presetIndex, uint* mjiCraftWorksObjectList, uint listCount);

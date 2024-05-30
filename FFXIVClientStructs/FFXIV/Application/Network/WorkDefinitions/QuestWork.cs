@@ -1,11 +1,12 @@
 namespace FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-public unsafe struct QuestWork {
+public unsafe partial struct QuestWork {
     [FieldOffset(0x08)] public ushort QuestId;
     [FieldOffset(0x0A)] public byte Sequence;
     [FieldOffset(0x0B)] public byte Flags;
-    [FieldOffset(0x0C)] public fixed byte Variables[6];
+    [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray6<byte> _variables;
     [FieldOffset(0x12)] public byte AcceptClassJob;
 
     public int RewardItemArrayIndex => Flags >> 1 & 3;

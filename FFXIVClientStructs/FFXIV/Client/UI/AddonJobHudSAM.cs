@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudSAM0 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct KenkiGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[3];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
         [FieldOffset(0x0C)] public int MeditationStackCount;
         [FieldOffset(0x10)] public int KenkiValue;
         [FieldOffset(0x14)] public int KenkiMax;
@@ -37,7 +37,7 @@ public unsafe partial struct AddonJobHudSAM0 {
 
         [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentBase>> _meditationGem;
 
-        [FieldOffset(0x60)] public fixed byte HasMeditationStack[3];
+        [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray3<byte> _hasMeditationStack;
         [FieldOffset(0x63)] public bool MeditationStacksGlowing;
         [FieldOffset(0x64)] public int MeditationStackCount;
         [FieldOffset(0x68)] public int GlowTimelineFrameId;
@@ -62,7 +62,7 @@ public unsafe partial struct AddonJobHudSAM0 {
 
         [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentBase>> _meditationStacks;
 
-        [FieldOffset(0x50)] public fixed byte HasMeditationStack[3];
+        [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray3<byte> _hasMeditationStack;
         [FieldOffset(0x53)] public bool MeditationStacksGlowing;
         [FieldOffset(0x54)] public int MeditationStackCount;
         [FieldOffset(0x58)] public int GlowTimelineFrameId;
@@ -86,7 +86,7 @@ public unsafe partial struct AddonJobHudSAM1 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct SenGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[1];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
         [FieldOffset(0x09)] public bool HasSetsu;
         [FieldOffset(0x0A)] public bool HasGetsu;
         [FieldOffset(0x0B)] public bool HasKa;

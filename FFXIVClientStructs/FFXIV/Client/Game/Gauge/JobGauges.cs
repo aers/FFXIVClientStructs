@@ -106,11 +106,12 @@ public struct MachinistGauge {
     [FieldOffset(0x0F)] public byte TimerActive;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe struct DancerGauge {
+public unsafe partial struct DancerGauge {
     [FieldOffset(0x08)] public byte Feathers;
     [FieldOffset(0x09)] public byte Esprit;
-    [FieldOffset(0x0A)] public fixed byte DanceSteps[4];
+    [FieldOffset(0x0A), FixedSizeArray] internal FixedSizeArray4<byte> _danceSteps;
     [FieldOffset(0x0E)] public byte StepIndex;
 
     public DanceStep CurrentStep => (DanceStep)(StepIndex >= 4 ? 0 : DanceSteps[StepIndex]);

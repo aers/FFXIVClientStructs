@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudBRD0 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct SongGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[6];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray6<byte> _prerequisites;
         [FieldOffset(0x10)] public int SoulVoiceValue;
         [FieldOffset(0x14)] public int SoulVoiceMinimumNeeded;
         [FieldOffset(0x1C)] public int SoulVoiceMax;

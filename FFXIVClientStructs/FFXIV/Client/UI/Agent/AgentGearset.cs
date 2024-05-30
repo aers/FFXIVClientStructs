@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.GearSet)]
-[StructLayout(LayoutKind.Explicit, Size = 0xB00)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0xB00)]
 public partial struct AgentGearSet {
     [FieldOffset(0x808)] public GearsetCharaView CharaView;
 

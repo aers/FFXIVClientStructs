@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //     Client::Game::Event::LuaEventHandler
 //       Client::Game::Event::EventHandler
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? B9 ?? ?? ?? ?? 48 89 03 33 ED"
-[StructLayout(LayoutKind.Explicit, Size = 0xC48)]
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
+[StructLayout(LayoutKind.Explicit, Size = 0xC48)]
 public partial struct ContentDirector {
     [FieldOffset(0x536)] public byte ContentTypeRowId;
 

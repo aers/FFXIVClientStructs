@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.GcArmyExpedition)]
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct AgentGcArmyExpedition {
     [FieldOffset(0x28)] public GcArmyExpeditionData* ExpeditionData;
 
@@ -13,12 +13,12 @@ public unsafe partial struct AgentGcArmyExpedition {
     [FieldOffset(0x44)] public int SelectedRow;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1998)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1998)]
 public unsafe partial struct GcArmyExpeditionData {
     [FieldOffset(0x10)] public int NumEntries;
 
-    [FieldOffset(0x18)][FixedSizeArray] internal FixedSizeArray50<MissionInfo> _missionInfoArray;
+    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray50<MissionInfo> _missionInfo;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]

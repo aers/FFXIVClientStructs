@@ -4,9 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // ctor "40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 53 30"
 [Agent(AgentId.BannerEditor)]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentBannerEditor {
     [FieldOffset(0x28)] public AgentBannerEditorState* EditorState;
 
@@ -14,8 +14,8 @@ public unsafe partial struct AgentBannerEditor {
     public partial void OpenForGearset(int gearsetId);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
 public unsafe partial struct AgentBannerEditorState {
     public enum EditorOpenType : int {
         Portrait = 0,
@@ -72,8 +72,8 @@ public unsafe partial struct AgentBannerEditorState {
 
     [FieldOffset(0x120)] public BannerModuleEntry BannerEntry;
 
-    [FieldOffset(0x240)] public fixed uint ItemIds[14];
-    [FieldOffset(0x278)] public fixed byte StainIds[14];
+    [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
+    [FieldOffset(0x278), FixedSizeArray] internal FixedSizeArray14<byte> _stainIds;
 
     [FieldOffset(0x288)] public uint Checksum;
     [FieldOffset(0x28C)] public BannerGearVisibilityFlag GearVisibilityFlag;

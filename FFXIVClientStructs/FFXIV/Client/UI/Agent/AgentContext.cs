@@ -7,12 +7,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Context)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1750)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1750)]
 public unsafe partial struct AgentContext {
 
-    [FieldOffset(0x28)][FixedSizeArray] internal FixedSizeArray2<ContextMenu> _contextMenuArray;
+    [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray2<ContextMenu> _contextMenus;
     [FieldOffset(0x28), CExportIgnore] public ContextMenu MainContextMenu;
     [FieldOffset(0x6A0), CExportIgnore] public ContextMenu SubContextMenu;
     [FieldOffset(0xD18)] public ContextMenu* CurrentContextMenu;
@@ -82,17 +82,17 @@ public unsafe partial struct AgentContext {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x678)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x678)]
 public unsafe partial struct ContextMenu {
     [FieldOffset(0x00)] public short CurrentEventIndex;
     [FieldOffset(0x02)] public short CurrentEventId;
 
-    [FieldOffset(0x08)][FixedSizeArray] internal FixedSizeArray33<AtkValue> _eventParams; // 32 * AtkValue + 1 * AtkValue for submenus with title
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray33<AtkValue> _eventParams; // 32 * AtkValue + 1 * AtkValue for submenus with title
 
-    [FieldOffset(0x428)] public fixed byte EventIdArray[32];
-    [FieldOffset(0x450)] public fixed long EventHandlerArray[32];
-    [FieldOffset(0x558)] public fixed long EventHandlerParamArray[32];
+    [FieldOffset(0x428), FixedSizeArray] internal FixedSizeArray32<byte> _eventIds;
+    [FieldOffset(0x450), FixedSizeArray] internal FixedSizeArray32<long> _eventHandlers;
+    [FieldOffset(0x558), FixedSizeArray] internal FixedSizeArray32<long> _eventHandlerParams;
 
     [FieldOffset(0x660)] public uint ContextItemDisabledMask;
     [FieldOffset(0x664)] public uint ContextSubMenuMask;

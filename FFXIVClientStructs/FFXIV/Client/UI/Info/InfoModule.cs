@@ -2,8 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1C70)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C70)]
 public unsafe partial struct InfoModule {
     public static InfoModule* Instance() => UIModule.Instance()->GetInfoModule();
 
@@ -51,8 +51,8 @@ public enum InfoProxyId : uint {
     Party = 0,
     Party2 = 1,
     PartyInvite = 2,
-    LinkShell = 3,
-    LinkShellMember = 4,
+    Linkshell = 3,
+    LinkshellMember = 4,
     Blacklist = 5,
     FriendList = 6,
     FriendList2 = 7,
@@ -66,13 +66,12 @@ public enum InfoProxyId : uint {
     FreeCompanyMember = 15,
     FreeCompanyMember2 = 16,
     //OTherFCStuff = 17,
-    LinkShellChat = 18,
+    LinkshellChat = 18,
     CrossRealmParty = 19,
     NoviceNetwork = 20,
-    CrossWorldLinkShell = 29,
-    CrossWorldLinkShellMember = 30,
+    CrossWorldLinkshell = 29,
+    CrossWorldLinkshellMember = 30,
     CircleList = 31,
     Circle = 32,
     CircleFinder = 33
-
 }

@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct CurrencyManager {
     [StaticAddress("48 8B 1D ?? ?? ?? ?? 48 85 DB 74 15 48 8B CB E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 D2", 3, isPointer: true)]
     public static partial CurrencyManager* Instance();

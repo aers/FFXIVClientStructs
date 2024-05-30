@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.GoldSaucer;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct GoldSaucerManager {
     [StaticAddress("89 43 64 48 89 1D", 6, isPointer: true)]
     public static partial GoldSaucerManager* Instance();

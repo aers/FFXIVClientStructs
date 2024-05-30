@@ -7,8 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 
 // Client::System::String::Utf8String
 // ctor "E8 ?? ?? ?? ?? 44 2B F7"
-[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {
     [FieldOffset(0x0)] public byte* StringPtr; // pointer to null-terminated string
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40

@@ -7,12 +7,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 // ctor "48 89 5C 24 ?? 57 48 83 EC 30 48 8B FA 48 8B D9 E8 ?? ?? ?? ?? 33 D2"
 [Agent(AgentId.QuestJournal)]
-[StructLayout(LayoutKind.Explicit, Size = 0x280)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x280)]
 public unsafe partial struct AgentQuestJournal {
 
-    [FieldOffset(0x56)] public fixed byte JournalCategoryIds[52];
+    [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray52<byte> _journalCategoryIds;
     [FieldOffset(0x8A)] public bool IsDisplayingCompletedQuests;
 
     [FieldOffset(0x90)] public byte SelectedSection;

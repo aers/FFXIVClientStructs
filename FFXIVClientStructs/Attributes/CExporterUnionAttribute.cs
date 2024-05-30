@@ -1,4 +1,5 @@
 namespace FFXIVClientStructs.Attributes;
+
 [AttributeUsage(AttributeTargets.Field)]
 internal class CExporterUnionAttribute : Attribute {
     public string Union { get; }
@@ -32,4 +33,4 @@ internal class CExporterUnionAttribute : Attribute {
 }
 
 [AttributeUsage(AttributeTargets.Struct)]
-internal class CExporterStructUnionAttribute : Attribute { }
+internal class CExporterStructUnionAttribute : Attribute;

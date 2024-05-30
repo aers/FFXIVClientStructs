@@ -6,22 +6,22 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ContentsFinder)]
-[StructLayout(LayoutKind.Explicit, Size = 0x20E8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x20E8)]
 public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x38)] public Utf8String Description;
 
     // TODO split into 3 separate arrays, (8F0, EE0, 14D0), each with 5 entries, 8F0 seems to be the top row of rewards while 14D0 is the bottom row, EE0 is unknown
-    [FieldOffset(0x8F0)][FixedSizeArray] internal FixedSizeArray15<ItemReward> _itemRewardArray;
+    [FieldOffset(0x8F0), FixedSizeArray] internal FixedSizeArray15<ItemReward> _itemRewards;
 
     [FieldOffset(0x1B6C)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1B78)] public byte NumCollectedRewards; // Value used for "Reward already received"
 
-    [FieldOffset(0x1BC8)][FixedSizeArray] internal FixedSizeArray10<Utf8String> _strings; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
+    [FieldOffset(0x1BC8), FixedSizeArray] internal FixedSizeArray10<Utf8String> _strings; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
 
-    [FieldOffset(0x2007)][FixedSizeArray] internal FixedSizeArray11<ContentsRouletteRole> _contentRouletteRoleBonus;
+    [FieldOffset(0x2007), FixedSizeArray] internal FixedSizeArray11<ContentsRouletteRole> _contentRouletteRoleBonuses;
 
     [FieldOffset(0x2034)] public uint DutyPenaltyMinutes;
     [FieldOffset(0x2038)] public uint UnkPenaltyMinutes;

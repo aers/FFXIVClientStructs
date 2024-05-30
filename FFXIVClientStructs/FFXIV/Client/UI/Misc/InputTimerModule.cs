@@ -31,9 +31,10 @@ public unsafe partial struct InputTimerModule {
     [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray16<InputTimerData> _controllerInputTimers;
     [FieldOffset(0x3DC), FixedSizeArray] internal FixedSizeArray5<InputTimerData> _mouseInputTimers;
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-    public struct InputTimerData {
-        [FieldOffset(0x00)] public fixed float TimerHistory[10];
+    public partial struct InputTimerData {
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray10<float> _timerHistory;
         [FieldOffset(0x28)] public float TotalHistoryTime;
         [FieldOffset(0x2C)] public int HistoryIndex;
         [FieldOffset(0x30)] public float Timer;

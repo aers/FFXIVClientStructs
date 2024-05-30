@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::CharacterData
 // ctor "E8 ?? ?? ?? ?? 4C 8D 4B 30"
-[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 [GenerateInterop(isInherited: true)]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public partial struct CharacterData {
     [FieldOffset(0x8)] public float ModelScale;
     [FieldOffset(0xC)] public int ModelCharaId;

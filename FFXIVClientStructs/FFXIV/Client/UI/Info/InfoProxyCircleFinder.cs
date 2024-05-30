@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.CircleFinder)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1C8)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C8)]
 public unsafe partial struct InfoProxyCircleFinder {
 
     [FieldOffset(0x0A0)] public Utf8String UnkString0;

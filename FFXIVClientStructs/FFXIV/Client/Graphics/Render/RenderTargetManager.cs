@@ -6,13 +6,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Singleton
 //   Client::Graphics::Kernel::Notifier
 // WARNING: THIS IS OUT OF DATE
-[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 [GenerateInterop]
 [Inherits<Notifier>]
+[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 public unsafe partial struct RenderTargetManager {
 
     // the first 65 fields seem to be render target pointers
-    [FieldOffset(0x20)][FixedSizeArray] internal FixedSizeArray64<Pointer<Texture>> _renderTargetArray;
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray64<Pointer<Texture>> _renderTargets;
 
     // specific ones i can name
     // offscreen renderer is used to render models for UI elements like the character window
@@ -39,7 +39,7 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x264)] public uint FarShadowMap_Height;
     [FieldOffset(0x268)] public bool UnkBool_1;
 
-    [FieldOffset(0x270)][FixedSizeArray] internal FixedSizeArray49<Pointer<Texture>> _renderTargetArray2;
+    [FieldOffset(0x270), FixedSizeArray] internal FixedSizeArray49<Pointer<Texture>> _renderTargets2;
 
     [FieldOffset(0x470)] public ushort DynamicResolutionActualTargetHeight; // seems to copy TargetHeight into ActualTargetHeight?
     [FieldOffset(0x472)] public ushort DynamicResolutionTargetHeight;

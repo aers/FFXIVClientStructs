@@ -1,11 +1,11 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
 public unsafe partial struct StatusManager {
     // This field is often null and cannot be relied on to retrieve the owning Character object
     [FieldOffset(0x0)] public Character.Character* Owner;
-    [FieldOffset(0x8)][FixedSizeArray] internal FixedSizeArray60<Status> _status;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray60<Status> _status;
     [FieldOffset(0x2D8)] public uint Flags1;
     [FieldOffset(0x2DC)] public ushort Flags2;
     [FieldOffset(0x2E0)] public long Unk_178;

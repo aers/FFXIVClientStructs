@@ -11,10 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonJobHudDRK0 {
     [FieldOffset(0x000)] public AddonJobHud JobHud;
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct BloodGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0A)] public byte TankStance;
         [FieldOffset(0x0C)] public int BloodValue;
         [FieldOffset(0x10)] public int BloodMax;
@@ -56,10 +57,11 @@ public unsafe partial struct AddonJobHudDRK0 {
 public unsafe partial struct AddonJobHudDRK1 {
     [FieldOffset(0x000)] public AddonJobHud JobHud;
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct DarksideGaugeData {
         [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
-        [FieldOffset(0x08)] public fixed byte Prerequisites[3];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
         [FieldOffset(0x0C)] public int DarksideTimeLeft;
         [FieldOffset(0x10)] public int DarksideTimeMax;
         [FieldOffset(0x14)] public int LivingShadowTimeLeft;

@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIMinionNoteBook)]
-[StructLayout(LayoutKind.Explicit, Size = 0x208)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x208)]
 public unsafe partial struct AgentMJIMinionNoteBook {
 
     [FieldOffset(0x1DC)] public SelectedMinionInfo SelectedFavoriteMinion;

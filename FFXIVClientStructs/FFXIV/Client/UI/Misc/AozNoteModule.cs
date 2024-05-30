@@ -24,24 +24,28 @@ public unsafe partial struct AozNoteModule {
         [FieldOffset(0x20D), FixedSizeArray] internal FixedSizeArray8<AozCrossHotBarMacroFlag> _crossHotBarMacroFlags;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 12)]
-    public struct AozHotBar {
-        [FieldOffset(0)] public fixed byte AozActionIds[12];
+    public partial struct AozHotBar {
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray12<byte> _aozActionIds;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct AozCrossHotBar {
-        [FieldOffset(0)] public fixed byte AozActionIds[16];
+    public partial struct AozCrossHotBar {
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray16<byte> _aozActionIds;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 12)]
-    public struct AozHotBarMacroFlag {
-        [FieldOffset(0)] public fixed bool MacroFlag[12];
+    public partial struct AozHotBarMacroFlag {
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray12<bool> _macroFlags;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct AozCrossHotBarMacroFlag {
-        [FieldOffset(0)] public fixed bool MacroFlag[16];
+    public partial struct AozCrossHotBarMacroFlag {
+        [FieldOffset(0), FixedSizeArray] internal FixedSizeArray16<bool> _macroFlags;
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 0B 41 8B 17")]

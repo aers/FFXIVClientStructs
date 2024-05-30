@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 [GenerateInterop(isInherited: true)]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct InfoProxyInterface {
     [FieldOffset(0x8)] public UIModule* UiModule;
     //For Proxies with a fixed count this is apparently 0
@@ -42,9 +42,9 @@ public unsafe partial struct InfoProxyInterface {
     public partial uint GetEntryCount();
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct InfoProxyInvitedInterface {
     [FieldOffset(0x18)] public Unk18 Unk18Obj;
     //There seems to be a pointer to data at 0x20
@@ -55,9 +55,9 @@ public unsafe partial struct InfoProxyInvitedInterface {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x20)]
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct InfoProxyPageInterface {
     /// <summary>
     /// Handles the InfoProxyAddPage packet and calls <see cref="AddData"/> to load into the InfoProxy. Will also handle dispatching

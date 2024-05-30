@@ -4,8 +4,8 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::ActionManager
-[StructLayout(LayoutKind.Explicit, Size = 0x7F0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x7F0)]
 public unsafe partial struct ActionManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13", 3)]
     public static partial ActionManager* Instance();
@@ -17,7 +17,7 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0x78)] public GameObjectId QueuedTargetId;
     [FieldOffset(0x80)] public uint QueueType;
 
-    [FieldOffset(0x13C)] public fixed uint BlueMageActions[24];
+    [FieldOffset(0x13C), FixedSizeArray] internal FixedSizeArray24<uint> _blueMageActions;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 64 B1 01")]
     public partial bool UseAction(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0, void* a7 = null);

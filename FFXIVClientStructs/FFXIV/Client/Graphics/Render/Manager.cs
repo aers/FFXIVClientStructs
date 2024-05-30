@@ -3,10 +3,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // Client::Graphics::Render::Manager
 //  Client::Graphics::Singleton<Client::Graphics::Render::Manager>
 // ctor "48 89 01 48 8D 59 08"
-[StructLayout(LayoutKind.Explicit, Size = 0x2D750)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D750)]
 public unsafe partial struct Manager {
-    [FieldOffset(0x8)][FixedSizeArray] internal FixedSizeArray32<View> _viewArray;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray32<View> _viewArray;
 
     [FieldOffset(0x13660)] public ModelRenderer ModelRenderer;
 

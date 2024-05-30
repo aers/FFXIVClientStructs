@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.PartyInvite)]
-[StructLayout(LayoutKind.Explicit, Size = 0x148)]
 [GenerateInterop]
 [Inherits<InfoProxyInvitedInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct InfoProxyPartyInvite {
     [FieldOffset(0x03C)] public uint InviteTime;
     [FieldOffset(0x042)] public ushort InviterWorldId;

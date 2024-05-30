@@ -2,9 +2,9 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
-[StructLayout(LayoutKind.Explicit, Size = 0x130)]
 [GenerateInterop(isInherited: true)]
 [Inherits<ReferencedClassBase>]
+[StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public unsafe partial struct Camera {
 
     [FieldOffset(0x50)] public Matrix4x4 ProjectionMatrix;

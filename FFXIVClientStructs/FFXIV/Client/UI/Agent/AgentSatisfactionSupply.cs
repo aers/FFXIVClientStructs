@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.SatisfactionSupply)]
-[StructLayout(LayoutKind.Explicit, Size = 0x500)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x500)]
 public unsafe partial struct AgentSatisfactionSupply {
 
     [FieldOffset(0x40)] public SatisfactionSupplyNpcInfo NpcInfo;
@@ -16,14 +16,14 @@ public unsafe partial struct AgentSatisfactionSupply {
     [FieldOffset(0x7A)] public short LevelUnlocked;
     [FieldOffset(0x7C)] public byte CanGlamour;
 
-    [FieldOffset(0x80)][FixedSizeArray] internal FixedSizeArray3<ItemInfo> _item;
+    [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray3<ItemInfo> _items;
 
     [FieldOffset(0x138)] public void* ENpcResidentRow;
     [FieldOffset(0x140)] public void* Item1Row;
     [FieldOffset(0x148)] public void* Item2Row;
     [FieldOffset(0x150)] public void* Item3Row;
 
-    [FieldOffset(0x158)][FixedSizeArray] internal FixedSizeArray3<AgentDeliveryItemInfo> _deliveryInfo;
+    [FieldOffset(0x158), FixedSizeArray] internal FixedSizeArray3<AgentDeliveryItemInfo> _deliveryInfo;
 
     [FieldOffset(0x470)] public void* Item1Reward1Row;
     [FieldOffset(0x478)] public void* Item2Reward1Row;

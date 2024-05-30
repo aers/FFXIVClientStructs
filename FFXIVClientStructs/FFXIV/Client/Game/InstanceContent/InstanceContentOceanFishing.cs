@@ -10,9 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //           Client::Game::Event::EventHandler
 // ctor "40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 33 C0"
 // has id >63000 in InstanceContent sheet
-[StructLayout(LayoutKind.Explicit, Size = 0x1CA8 + 0x658)]
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1CA8 + 0x658)]
 public unsafe partial struct InstanceContentOceanFishing {
 
     // Most of the fields, if not specified, can be found in "83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05"
@@ -40,7 +40,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     // Offest can be found with this sig "45 8B 84 CF ?? ?? ?? ?? 48 8B CD"
     // Struct size can be found with "83 C7 ?? 49 83 EE ?? 75 ?? FF C6"
     // Array size can be found with "83 FF ?? 72 ?? 4C 8B 74 24 ?? 49 8D 9F"
-    [FieldOffset(0x1D3C)][FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
+    [FieldOffset(0x1D3C), FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
 
     // The first 10 of them are normal fish, the rest are spectral fish
     [UnscopedRef]
@@ -57,7 +57,7 @@ public unsafe partial struct InstanceContentOceanFishing {
     [FieldOffset(0x2101)] public byte LocalIndexInAllResult;
     [FieldOffset(0x2102)] public IndividualResultStruct IndividualResult;
     [FieldOffset(0x2124)] public AllResultStruct LocalPlayerAllResult;
-    [FieldOffset(0x214C)][FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResult;
+    [FieldOffset(0x214C), FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResults;
 
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet
@@ -80,16 +80,18 @@ public unsafe partial struct InstanceContentOceanFishing {
         [FieldOffset(0xC)] public uint TotalPoints;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct AllResultStruct {
+    public partial struct AllResultStruct {
         [FieldOffset(0x0)] public ushort WorldId;
         [FieldOffset(0x2)] public ushort CaughtFish;
         [FieldOffset(0x4)] public ushort TotalPoints;
-        [FieldOffset(0x8)] public fixed byte PlayerName[32];
+        [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray32<byte> _playerName;
     }
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x22)]
-    public struct IndividualResultStruct {
+    public partial struct IndividualResultStruct {
         [FieldOffset(0x2)] public uint TotalPoints;
         [FieldOffset(0xA)] public uint ExperiencePoints;
         // Scrip introduced in the last expansion
@@ -97,7 +99,7 @@ public unsafe partial struct InstanceContentOceanFishing {
         // Scrip that is introduced in this expansion
         [FieldOffset(0x10)] public ushort Scrip2Amount;
         // Each element is row id for IKDContentBonus
-        [FieldOffset(0x12)] public fixed byte Bonuses[16];
+        [FieldOffset(0x12), FixedSizeArray] internal FixedSizeArray16<byte> _bonuses;
     }
 
     public enum OceanFishingStatus : uint {

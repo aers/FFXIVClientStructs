@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 // Client::Game::Event::DirectorModule
 //   Client::Game::Event::ModuleBase
 // ctor "E8 ?? ?? ?? ?? 48 8B 15 ?? ?? ?? ?? 49 8D 8D ?? ?? ?? ?? 48 81 C2 ?? ?? ?? ?? E8 ?? ?? ?? ?? 49 8D 8D"
-[StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 [GenerateInterop]
 [Inherits<ModuleBase>]
+[StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe partial struct DirectorModule {
     [FieldOffset(0x40)] public StdVector<Pointer<Director>> DirectorList;
     //id, ctor/dtor wrapper pair, ctor is func(id, contentId*), dtor just calls the dtor

@@ -3,19 +3,19 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RetainerItemTransfer)]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentRetainerItemTransfer {
     [FieldOffset(0x28)] public AgentRetainerItemTransferData* Data;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x41E8)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x41E8)]
 public unsafe partial struct AgentRetainerItemTransferData {
     [FieldOffset(0x00)] public int ItemCount;
 
-    [FieldOffset(0x10)][FixedSizeArray] internal FixedSizeArray140<DuplicateItemEntry> _duplicateItem;
+    [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray140<DuplicateItemEntry> _duplicateItems;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct DuplicateItemEntry {

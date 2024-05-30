@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.RecipeNote)]
-[StructLayout(LayoutKind.Explicit, Size = 0x568)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x568)]
 public unsafe partial struct AgentRecipeNote {
 
     [FieldOffset(0x398)] public uint ContextMenuResultItemId;

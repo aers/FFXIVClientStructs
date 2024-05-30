@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [InfoProxy(InfoProxyId.SearchComment)]
-[StructLayout(LayoutKind.Explicit, Size = 0x240)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x240)]
 public unsafe partial struct InfoProxySearchComment {
 
     [FieldOffset(0x20)] public void* Unk20;
@@ -16,8 +16,8 @@ public unsafe partial struct InfoProxySearchComment {
     [FieldOffset(0x1D0)] public Utf8String UnkString2;
     [FieldOffset(0x238)] public bool HasUpdateData;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct UpdateDataPacket {
         [FieldOffset(0x00)] public InfoProxyCommonList.CharacterData.OnlineStatus OnlineStatusMask;
         [FieldOffset(0x08)] public ulong LookingForPartyClassJobIdMask;

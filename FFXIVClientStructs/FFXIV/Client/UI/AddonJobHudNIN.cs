@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudNIN0 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct NinkiGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[1];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
         [FieldOffset(0x0C)] public int NinkiValue;
         [FieldOffset(0x10)] public int Max;
         [FieldOffset(0x14)] public int Mid;
@@ -60,7 +60,7 @@ public unsafe partial struct AddonJobHudNIN1 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct HutonGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[2];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0C)] public int TimeLeft; // in ms
         [FieldOffset(0x10)] public int MaxTime;  // in ms
         [FieldOffset(0x14)] public int ManualCasts;

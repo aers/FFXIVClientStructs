@@ -4,16 +4,16 @@ using FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MJIFarmManagement)]
-[StructLayout(LayoutKind.Explicit, Size = 0x13D8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x13D8)]
 public unsafe partial struct AgentMJIFarmManagement {
     public const int MaxSlots = 20;
 
     [FieldOffset(0x0028)] public AtkEventInterface* OpHandler; // pointer to some class derived from AtkEventInterface of size 0x30
     // 0x30..0x40 - a bunch of different addon handles
 
-    [FieldOffset(0x0048)][FixedSizeArray] internal FixedSizeArray20<Slot> _slots;
+    [FieldOffset(0x0048), FixedSizeArray] internal FixedSizeArray20<Slot> _slots;
 
     [FieldOffset(0x13A8)] public StdVector<Seed> Seeds;
 

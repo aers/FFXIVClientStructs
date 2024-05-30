@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudBLM0 {
     [GenerateInterop, Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct ElementalGaugeData {
-        [FieldOffset(0x08)] public fixed byte Prerequisites[5];
+        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray5<byte> _prerequisites;
         [FieldOffset(0x10)] public int ElementStacks; // Positive = Fire, Negative = Ice
         [FieldOffset(0x14)] public int ElementStackMax;
         [FieldOffset(0x18)] public int ElementTimeLeft;

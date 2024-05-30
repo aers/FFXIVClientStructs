@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::Loot
 //   Component::GUI::AtkModuleInterface::AtkEventInterface
 // ctor "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B D9 C6 41 08 00"
-[StructLayout(LayoutKind.Explicit, Size = 0x6A0)]
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x6A0)]
 public unsafe partial struct Loot {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 44 24 60", 3)]
     public static partial Loot* Instance();

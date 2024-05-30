@@ -14,5 +14,5 @@ public unsafe partial struct AddonRetainerItemTransferList {
     [FieldOffset(0x230)] public AtkComponentButton* CancelButton; // Node 8
 
     // Don't know what the real max size is?
-    [FieldOffset(0x238)] public fixed byte ListItems[10]; // Node 8
+    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray10<byte> _listItems; // Node 8
 }

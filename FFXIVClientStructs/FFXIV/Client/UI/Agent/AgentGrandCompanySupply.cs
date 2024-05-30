@@ -4,9 +4,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.GrandCompanySupply)]
-[StructLayout(LayoutKind.Explicit, Size = 0x98)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct AgentGrandCompanySupply {
     [FieldOffset(0x60)] public SupplyProvisioningData* SupplyProvisioningData;
     [FieldOffset(0x68)] public GrandCompanyItem* ItemArray;
@@ -15,12 +15,12 @@ public unsafe partial struct AgentGrandCompanySupply {
     [FieldOffset(0x90)] public int SelectedTab;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x790)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x790)]
 public unsafe partial struct SupplyProvisioningData {
-    [FieldOffset(0x40)][FixedSizeArray] internal FixedSizeArray8<SupplyProvisioningItem> _supplyData;
+    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray8<SupplyProvisioningItem> _supplyData;
 
-    [FieldOffset(0x580)][FixedSizeArray] internal FixedSizeArray3<SupplyProvisioningItem> _provisioningData;
+    [FieldOffset(0x580), FixedSizeArray] internal FixedSizeArray3<SupplyProvisioningItem> _provisioningData;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]

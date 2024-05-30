@@ -9,9 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 40"
 [Agent(AgentId.Hud)]
-[StructLayout(LayoutKind.Explicit, Size = 0x4BA0)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x4BA0)]
 public unsafe partial struct AgentHUD {
     [FieldOffset(0xAA8)] public uint CastBarAddonId;
 
@@ -23,15 +23,15 @@ public unsafe partial struct AgentHUD {
 
     [FieldOffset(0xCB8)] public int CompanionSummonTimer;
 
-    [FieldOffset(0xCC8)][FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMemberList;
+    [FieldOffset(0xCC8), FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMembers;
 
     [FieldOffset(0x12B8)] public short PartyMemberCount;
     [FieldOffset(0x12C0)] public uint PartyTitleAddonId;
-    [FieldOffset(0x12C4)] public fixed uint RaidMemberIds[40];
+    [FieldOffset(0x12C4), FixedSizeArray] internal FixedSizeArray40<uint> _raidMemberIds;
     [FieldOffset(0x1364)] public int RaidGroupSize;
 
-    [FieldOffset(0x1378)][FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmityEntries;
-    [FieldOffset(0x13F0)][FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
+    [FieldOffset(0x1378), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
+    [FieldOffset(0x13F0), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
 
     [FieldOffset(0x4808)] public StdVector<MapMarkerData> MapMarkers;
     [FieldOffset(0x4820)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;

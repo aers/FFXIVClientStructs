@@ -5,9 +5,9 @@ using FFXIVClientStructs.FFXIV.Component.Excel;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.Macro)]
-[StructLayout(LayoutKind.Explicit, Size = 0xEB18)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0xEB18)]
 public unsafe partial struct AgentMacro {
     [FieldOffset(0x28)] public RaptureMacroModule.Macro ClipboardMacro;
     [FieldOffset(0x6B0)] public ExcelSheet* TextCommandParamSheet;
@@ -25,7 +25,7 @@ public unsafe partial struct AgentMacro {
     [FieldOffset(0x6C0)] public Utf8String RawMacroString;
     [FieldOffset(0x728)] public Utf8String ParsedMacroString;
     [FieldOffset(0x790)] public int MacroIconCount;
-    [FieldOffset(0x794)] public fixed uint MacroIconArray[250];
+    [FieldOffset(0x794), FixedSizeArray] internal FixedSizeArray250<uint> _macroIcons;
     [FieldOffset(0xB7C)] public uint IconListAddonId;
 
     [FieldOffset(0xB84)] public uint TextCommandListAddonId;
@@ -33,7 +33,7 @@ public unsafe partial struct AgentMacro {
     [FieldOffset(0xBD0)] public StdVector<TextCommandEntry> TextCommands;
     [FieldOffset(0xBE8)] public int FocusedTextCommandIndex;
 
-    [FieldOffset(0xBF0)][FixedSizeArray] internal FixedSizeArray17<MacroHistoryEvent> _changeHistory;
+    [FieldOffset(0xBF0), FixedSizeArray] internal FixedSizeArray17<MacroHistoryEvent> _changeHistory;
     [FieldOffset(0xEB10)] public int CurrentHistoryIndex;
 
     /// <summary>

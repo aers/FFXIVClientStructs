@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ChatLog)]
-[StructLayout(LayoutKind.Explicit, Size = 0xB28)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0xB28)]
 public unsafe partial struct AgentChatLog {
 
     [FieldOffset(0x40)] public ChatChannel CurrentChannel;

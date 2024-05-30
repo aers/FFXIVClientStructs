@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Detail)]
-[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct AgentDetail {
     [FieldOffset(0x30)] public InfoProxySearchComment* InfoProxySearchCommentPtr;
 

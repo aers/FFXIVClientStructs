@@ -37,10 +37,10 @@ public unsafe partial struct RaptureHotbarModule {
     [FieldOffset(0x52)] public bool DatFileLoadedSuccessfully;
 
     // PvE hotbars starting from MCH onwards, appears to track whether a hotbar was initialized?
-    [FieldOffset(0x54)] internal fixed bool ExpacJobHotbarsCreated[12];
+    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray12<bool> _expacJobHotbarsCreated;
 
     // PvP hotbars for all jobs, appears to track if it's been initialized. 
-    [FieldOffset(0x60)] internal fixed bool PvPHotbarsCreated[22];
+    [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray22<bool> _pvPHotbarsCreated;
 
     // ????? maybe AllowResets?
     [FieldOffset(0x76)] internal bool ClearCallbackPresent;
@@ -54,14 +54,14 @@ public unsafe partial struct RaptureHotbarModule {
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
-    [FieldOffset(0x7C)] public fixed byte HotbarShareStateBitmask[4];
+    [FieldOffset(0x7C), FixedSizeArray] internal FixedSizeArray4<byte> _hotbarShareStateBitmask;
 
     /// <summary>
     /// Another bitmask that appears to be related to hotbar sharing state.
     /// Initialized to 0x3E3F8 (default share state) on game start, but doesn't ever appear to be updated or read elsewhere.
     /// Dead field?
     /// </summary>
-    [FieldOffset(0x80)] internal fixed byte HotbarShareStateBitmask2[4];
+    [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray4<byte> _hotbarShareStateBitmask2;
 
     [FieldOffset(0x88)] public ClearCallback* ClearCallbackPtr;
 
@@ -253,7 +253,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="hotbarId">The hotbar ID (bounded between 0 and 17) to check.</param>
     /// <returns>Returns true if the hotbar is shared, false otherwise.</returns>
     public bool IsHotbarShared(uint hotbarId) {
-        return ((1 << ((int)hotbarId & 7)) & this.HotbarShareStateBitmask[hotbarId >> 3]) > 0;
+        return ((1 << ((int)hotbarId & 7)) & this.HotbarShareStateBitmask[(int)hotbarId >> 3]) > 0;
     }
 
     /// <summary>

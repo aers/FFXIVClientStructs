@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct ContentsFinder {
     [StaticAddress("0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02", 6)]
     public static partial ContentsFinder* Instance();

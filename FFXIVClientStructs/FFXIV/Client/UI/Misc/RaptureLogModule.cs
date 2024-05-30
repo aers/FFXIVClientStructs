@@ -29,9 +29,9 @@ public unsafe partial struct RaptureLogModule {
 
     [FieldOffset(0x33D8)] public ExcelSheet* LogMessageSheet;
     /// <remarks> Set to <c>true</c> to reload the tab. </remarks>
-    [FieldOffset(0x33E8)] public fixed bool ChatTabIsPendingReload[4];
+    [FieldOffset(0x33E8), FixedSizeArray] internal FixedSizeArray4<bool> _chatTabIsPendingReload;
     /// <remarks> Controlled by config options <c>LogTimeDisp</c>, <c>LogTimeDispLog2</c>, <c>LogTimeDispLog3</c> and <c>LogTimeDispLog4</c>. </remarks>
-    [FieldOffset(0x33ED)] public fixed bool ChatTabShouldDisplayTime[4];
+    [FieldOffset(0x33ED), FixedSizeArray] internal FixedSizeArray4<bool> _chatTabShouldDisplayTime;
     /// <remarks> Controlled by config option <c>LogTimeSettingType</c>. </remarks>
     [FieldOffset(0x33F2)] public bool UseServerTime;
     /// <remarks> Controlled by config option <c>LogTimeDispType</c>. </remarks>

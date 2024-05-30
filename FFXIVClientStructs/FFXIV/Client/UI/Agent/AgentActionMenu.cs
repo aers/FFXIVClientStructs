@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.ActionMenu)]
-[StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
 public unsafe partial struct AgentActionMenu {
     [FieldOffset(0x30)] public uint JobIconId;
     [FieldOffset(0x34)] public uint Level;

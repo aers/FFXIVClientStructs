@@ -2,8 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
 // Client::Game::MJI::IslandState
 // ctor "48 89 7C 24 ?? 33 FF 66 C7 01"
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
-public unsafe struct IslandState {
+public unsafe partial struct IslandState {
     // Unknown!! This flag *appears* to control island state for quite a few things and is read *a lot* by Lua, but I
     // haven't been able to tack this down quite yet. 
     [FieldOffset(0x00)] public bool CanEditIsland;
@@ -60,13 +61,13 @@ public unsafe struct IslandState {
     /// <remarks>
     /// The index of this field will be (RowID - 1), so "Islekeep's Stone Hatchet" appears at position 0.
     /// </remarks>
-    [FieldOffset(0x0D)] public fixed byte UnlockedKeyItems[3]; // bitfield
+    [FieldOffset(0x0D), FixedSizeArray] internal FixedSizeArray3<byte> _unlockedKeyItems; // bitfield
 
     /// <summary>
     /// A bitfield representing if a specific recipe (MJIRecipe) is unlocked. Backing field for
     /// <see cref="MJIManager.IsRecipeUnlocked"/>, which should be used where possible.
     /// </summary>
-    [FieldOffset(0x10)] public fixed byte UnlockedRecipes[3]; // bitfield
+    [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray3<byte> _unlockedRecipes; // bitfield
 
     /// <summary>
     /// An array of booleans representing if a specific item is (un)locked. Locked/unavailable items are set to true,
@@ -74,7 +75,7 @@ public unsafe struct IslandState {
     /// An item appears to be unlocked upon being gathered or crafted for the first time.
     /// <seealso cref="MJIManager.IsPouchItemLocked" />
     /// </summary>
-    [FieldOffset(0x14)] public fixed byte LockedPouchItems[109];
+    [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray109<byte> _lockedPouchItems;
 
     /// <summary>
     /// A sub-struct representing the Farm's (Cropland's) current state
@@ -112,21 +113,21 @@ public unsafe struct IslandState {
     /// 
     /// This array is indexed by the RowID of an MJILandmarkPlace.
     /// </summary>
-    [FieldOffset(0x8E)] public fixed byte LandmarkHoursToCompletion[5];
+    [FieldOffset(0x8E), FixedSizeArray] internal FixedSizeArray5<byte> _landmarkHoursToCompletion;
 
     /// <summary>
     /// The RowID of the MJILandmark present at a specific MJILandmarkPlace.
     /// 
     /// This array is indexed by the RowID of an MJILandmarkPlace.
     /// </summary>
-    [FieldOffset(0x93)] public fixed byte LandmarkIds[5];
+    [FieldOffset(0x93), FixedSizeArray] internal FixedSizeArray5<byte> _landmarkIds;
 
     /// <summary>
     /// The current construction status of a landmark at a specific MJILandmarkPlace.
     /// 
     /// This array is indexed by the RowID of an MJILandmarkPlace.
     /// </summary>
-    [FieldOffset(0x98)] public fixed byte LandmarkUnderConstruction[5];
+    [FieldOffset(0x98), FixedSizeArray] internal FixedSizeArray5<byte> _landmarkUnderConstruction;
 
     /// <summary>
     /// The current rotation of a landmark at a specific MJILandmarkPlace.
@@ -140,7 +141,7 @@ public unsafe struct IslandState {
     /// 2 - 180 Degrees
     /// 3 - 90 Degrees Counterclockwise
     /// </remarks>
-    [FieldOffset(0x9D)] public fixed byte LandmarkRotation[5];
+    [FieldOffset(0x9D), FixedSizeArray] internal FixedSizeArray5<byte> _landmarkRotation;
 
     /// <summary>
     /// A struct representing the current state of workshops present on the island. See the struct documentation

@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Agent(AgentId.MycItemBox)]
-[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct AgentMycItemBox {
 
     /// <remarks>
@@ -12,10 +12,10 @@ public unsafe partial struct AgentMycItemBox {
     [FieldOffset(0x40)] public MycItemBoxData* ItemBoxData;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x1580)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1580)]
 public unsafe partial struct MycItemBoxData {
-    [FieldOffset(0x08)][FixedSizeArray] internal FixedSizeArray7<MycItemCategory> _itemCacheArray;
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray7<MycItemCategory> _itemCaches;
 
     [FieldOffset(0x08), Obsolete("Use ItemCacheArray[0]")] public MycItemCategory OffensiveCache;
     [FieldOffset(0x18C), Obsolete("Use ItemCacheArray[1]")] public MycItemCategory DefensiveCache;
@@ -25,7 +25,7 @@ public unsafe partial struct MycItemBoxData {
     [FieldOffset(0x79C), Obsolete("Use ItemCacheArray[5]")] public MycItemCategory DetrimentalCache;
     [FieldOffset(0x920), Obsolete("Use ItemCacheArray[6]")] public MycItemCategory ItemRelatedCache;
 
-    [FieldOffset(0xAA4)][FixedSizeArray] internal FixedSizeArray7<MycItemCategory> _itemHolsterArray;
+    [FieldOffset(0xAA4), FixedSizeArray] internal FixedSizeArray7<MycItemCategory> _itemHolsters;
 
     [FieldOffset(0xAA4), Obsolete("Use ItemHolsterArray[0]")] public MycItemCategory OffensiveHolster;
     [FieldOffset(0xC28), Obsolete("Use ItemHolsterArray[1]")] public MycItemCategory DefensiveHolster;
@@ -39,10 +39,10 @@ public unsafe partial struct MycItemBoxData {
     [FieldOffset(0x1558)] public int LastSelectedActionId;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x184)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x184)]
 public unsafe partial struct MycItemCategory {
-    [FieldOffset(0x00)][FixedSizeArray] internal FixedSizeArray48<MycItem> _itemArray;
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray48<MycItem> _items;
 
     [FieldOffset(0x180)] public int ItemCount;
 }

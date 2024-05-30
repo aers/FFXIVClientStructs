@@ -4,11 +4,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 33 ED C7 81"
 // there are actually two copies of this back to back in the exe
 // maybe for 48 man raid support since the group manager can only hold 1 alliance worth of party members
-[StructLayout(LayoutKind.Explicit, Size = 0x63F0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x63F0)]
 public unsafe partial struct GroupManager {
-    [FieldOffset(0x0)][FixedSizeArray] internal FixedSizeArray8<PartyMember> _partyMembers;
-    [FieldOffset(0x1C80)][FixedSizeArray] internal FixedSizeArray20<PartyMember> _allianceMembers;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray8<PartyMember> _partyMembers;
+    [FieldOffset(0x1C80), FixedSizeArray] internal FixedSizeArray20<PartyMember> _allianceMembers;
     [FieldOffset(0x63C0)] public uint Unk_3D40;
     [FieldOffset(0x63C4)] public ushort Unk_3D44;
     [FieldOffset(0x63C8)] public long PartyId; // both seem to be unique per party and replicated to every member

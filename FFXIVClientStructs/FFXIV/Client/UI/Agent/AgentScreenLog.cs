@@ -31,9 +31,9 @@ public struct BalloonSlot {
 }
 
 [Agent(AgentId.ScreenLog)]
-[StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
 public unsafe partial struct AgentScreenLog {
 
     [FieldOffset(0x350)] public StdDeque<BalloonInfo> BalloonQueue;
@@ -44,5 +44,5 @@ public unsafe partial struct AgentScreenLog {
     [FieldOffset(0x37C)]
     public int BalloonCounter; // count of all balloons since game launch, used as unique balloon ID
 
-    [FieldOffset(0x390)][FixedSizeArray] internal FixedSizeArray10<BalloonSlot> _balloonSlots;
+    [FieldOffset(0x390), FixedSizeArray] internal FixedSizeArray10<BalloonSlot> _balloonSlots;
 }

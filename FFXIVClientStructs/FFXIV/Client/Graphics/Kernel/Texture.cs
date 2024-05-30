@@ -13,8 +13,8 @@ public enum TextureFormat : uint {
 //   Client::Graphics::Kernel::Notifier
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 48 89 07 48 8B CF"
 // renderer texture object, contains platform specific render objects (DX9/DX11/PS3/PS4)
-[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 [Inherits<Notifier>(parentOffset: 0x20)]
 public unsafe partial struct Texture {
     [FieldOffset(0x38)] public uint Width;
