@@ -86,7 +86,7 @@ public unsafe partial struct InstanceContentOceanFishing {
         [FieldOffset(0x0)] public ushort WorldId;
         [FieldOffset(0x2)] public ushort CaughtFish;
         [FieldOffset(0x4)] public ushort TotalPoints;
-        [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray32<byte> _playerName;
+        [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _playerName;
     }
 
     [GenerateInterop]

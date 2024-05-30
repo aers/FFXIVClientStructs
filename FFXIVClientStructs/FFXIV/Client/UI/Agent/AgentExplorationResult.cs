@@ -49,5 +49,4 @@ public unsafe partial struct ExplorationResultData {
 public unsafe partial struct ExplorationResultDataItemReturn {
     [FieldOffset(0x00)] public uint ItemId;
     [FieldOffset(0x04)] public uint Quantity;
-    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray168<byte> _unknownBytes;
 }

@@ -89,7 +89,7 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2B80)] public SoundManager* SoundManager;
     [FieldOffset(0x2BC8)] public LuaState LuaState;
 
-    [FieldOffset(0x2BF0), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _baseVersion;
+    [FieldOffset(0x2BF0), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _gameVersion;
     // TODO: convert to array of 64 strings each 32 bytes long if possible
     [FieldOffset(0x2CF0 + 0 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex1Version; // Heavensward
     [FieldOffset(0x2CF0 + 1 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex2Version; // Stormblood

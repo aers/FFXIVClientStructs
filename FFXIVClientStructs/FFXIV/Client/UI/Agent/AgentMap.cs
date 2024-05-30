@@ -77,7 +77,7 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x6990)] public QuestLinkContainer MiniMapQuestLinkContainer;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 85 C9")]
-    public partial void SetFlagMapMarker(uint territoryId, uint mapId, float mapX, float mapY, uint iconId = 0xEC91);
+    public partial void SetFlagMapMarker(uint territoryId, uint mapId, float x, float y, uint iconId = 0xEC91);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0 ?? 48 8B B4 24")]
     public partial void OpenMapByMapId(uint mapId);
@@ -99,13 +99,13 @@ public unsafe partial struct AgentMap {
 
     public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
         if (MiniMapMarkerCount >= 100) return false;
-        var marker = stackalloc MiniMapMarker[1];
-        marker->MapMarker.Index = MiniMapMarkerCount;
-        marker->MapMarker.X = (short)(position.X * 16.0f);
-        marker->MapMarker.Y = (short)(position.Z * 16.0f);
-        marker->MapMarker.Scale = scale;
-        marker->MapMarker.IconId = icon;
-        MiniMapMarkers[MiniMapMarkerCount++] = *marker;
+        var marker = new MiniMapMarker();
+        marker.MapMarker.Index = MiniMapMarkerCount;
+        marker.MapMarker.X = (short)(position.X * 16.0f);
+        marker.MapMarker.Y = (short)(position.Z * 16.0f);
+        marker.MapMarker.Scale = scale;
+        marker.MapMarker.IconId = icon;
+        MiniMapMarkers[MiniMapMarkerCount++] = marker;
         return true;
     }
 
@@ -113,16 +113,16 @@ public unsafe partial struct AgentMap {
         if (MapMarkerCount >= 132) return false;
         if (textPosition is > 0 and < 12)
             position *= SelectedMapSizeFactorFloat;
-        var marker = stackalloc MapMarkerInfo[1];
-        marker->MapMarker.Index = MapMarkerCount;
-        marker->MapMarker.X = (short)(position.X * 16.0f);
-        marker->MapMarker.Y = (short)(position.Z * 16.0f);
-        marker->MapMarker.Scale = scale;
-        marker->MapMarker.IconId = icon;
-        marker->MapMarker.Subtext = text;
-        marker->MapMarker.SubtextOrientation = textPosition;
-        marker->MapMarker.SubtextStyle = textStyle;
-        MapMarkers[MapMarkerCount++] = *marker;
+        var marker = new MapMarkerInfo();
+        marker.MapMarker.Index = MapMarkerCount;
+        marker.MapMarker.X = (short)(position.X * 16.0f);
+        marker.MapMarker.Y = (short)(position.Z * 16.0f);
+        marker.MapMarker.Scale = scale;
+        marker.MapMarker.IconId = icon;
+        marker.MapMarker.Subtext = text;
+        marker.MapMarker.SubtextOrientation = textPosition;
+        marker.MapMarker.SubtextStyle = textStyle;
+        MapMarkers[MapMarkerCount++] = marker;
         return true;
     }
 

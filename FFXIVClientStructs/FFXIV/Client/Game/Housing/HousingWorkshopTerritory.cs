@@ -48,7 +48,7 @@ public unsafe partial struct HousingWorkshopAirshipSubData {
     [FieldOffset(0x2E)] public ushort Range;
     [FieldOffset(0x30)] public ushort Favor;
 
-    [FieldOffset(0x37), FixedSizeArray] internal FixedSizeArray20<byte> _name;
+    [FieldOffset(0x37), FixedSizeArray(isString: true)] internal FixedSizeArray20<byte> _name;
 
     [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray5<HousingWorkshopAirshipGathered> _gatheredData;
 
