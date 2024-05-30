@@ -57,7 +57,7 @@ public unsafe partial struct MapMarkerData {
         uint levelId,
         Utf8String* tooltipString,
         uint iconId,
-        float x,
+        int x,
         float y,
         float z,
         uint radius,
