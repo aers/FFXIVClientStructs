@@ -1,20 +1,17 @@
 using FFXIVClientStructs.FFXIV.Client.System.Scheduler.Base;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
-// Client::Game::ActionTimelineDriver
 // ctor "E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? B8"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
-public unsafe partial struct ActionTimelineDriver {
-    public const int TimelineSlotCount = 14;
-
+public unsafe partial struct ActionTimelineSequencer {
     // starting from 0x10 is a 0x60-sized struct containing animation request info?! can be passed as a3 to PlayTimeline
 
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray14<Pointer<Pointer<SchedulerTimeline>>> _schedulerTimelines; // technically incorrect, but it's really all we need
-    [FieldOffset(0xE0)] public unsafe fixed ushort TimelineIds[TimelineSlotCount]; // The timeline active in each slot or 0 when none
-
-    [FieldOffset(0x154)] public unsafe fixed float TimelineSpeeds[TimelineSlotCount]; // Speed for each slot
+    
+    [FieldOffset(0xE0), FixedSizeArray] internal FixedSizeArray14<ushort> _timelineIds; // The timeline active in each slot or 0 when none
+    [FieldOffset(0x154), FixedSizeArray] internal FixedSizeArray14<float> _timelineSpeeds; // Speed for each slot
 
     [FieldOffset(0x1C8)] public Character.Character* Parent;
 
@@ -33,22 +30,22 @@ public unsafe partial struct ActionTimelineDriver {
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 C6 4D 8B CC")]
     public partial void SetSlotTimeline(uint slot, ushort actionTimelineId);
 
+    /// <remarks>
+    /// Slots:
+    /// Base = 0,
+    /// UpperBody = 1,
+    /// Facial = 2,
+    /// Add = 3,
+    /// 4-6 unknown purpose
+    /// Lips = 7,
+    /// Parts1 = 8,
+    /// Parts2 = 9,
+    /// Parts3 = 10,
+    /// Parts4 = 11,
+    /// Overlay = 12
+    /// </remarks>
     public SchedulerTimeline* GetSchedulerTimeline(uint slot) {
         var baseTimelineSlot = SchedulerTimelines[(int)slot].Value;
         return baseTimelineSlot == null ? null : baseTimelineSlot->Value;
     }
-}
-
-public enum ActionTimelineSlots : int {
-    Base = 0,
-    UpperBody = 1,
-    Facial = 2,
-    Add = 3,
-    // 4-6 unknown purpose
-    Lips = 7,
-    Parts1 = 8,
-    Parts2 = 9,
-    Parts3 = 10,
-    Parts4 = 11,
-    Overlay = 12
 }

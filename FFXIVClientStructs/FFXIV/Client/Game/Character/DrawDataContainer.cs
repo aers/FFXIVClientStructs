@@ -5,11 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::DrawDataContainer
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8"
-[GenerateInterop]
+[GenerateInterop, Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
 public unsafe partial struct DrawDataContainer {
-    [FieldOffset(0x008)] public Character* Parent;
-
     [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
 
     [UnscopedRef]
@@ -29,8 +27,7 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x24)] public EquipmentModelId LFinger;
 
     [FieldOffset(0x188)] public CustomizeData CustomizeData;
-
-    [FieldOffset(0x1A2)] public uint Unk18A;
+    
     [FieldOffset(0x1A6)] public byte Flags1;
     [FieldOffset(0x1A7)] public byte Flags2;
 

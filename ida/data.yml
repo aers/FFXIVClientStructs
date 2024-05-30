@@ -473,32 +473,6 @@ classes:
       0x140755770: GetSourceIdByIndex
       0x140754D90: AddStatus
       0x140754E60: RemoveStatus
-  Client::Game::ActionTimelineDriver:
-    vtbls:
-      - ea: 0x141A057C8
-    funcs:
-      0x1404DDB30: ctor
-      0x1404DDCC0: PlayTimeline
-      0x1404DE280: GetSlotTimeline
-      0x1404DE670: SetSlotSpeed
-      0x1404DE980: GetSlotSpeed
-      0x1404DEBC0: GetCurrentActionTimelineTimestamp
-      0x1404DF5A0: SetSlotTimeline
-  Client::Game::Character::CharacterData:
-    vtbls:
-      - ea: 0x141A21E08
-  Client::Game::ActionTimelineManager:
-    vtbls:
-      - ea: 0x141A21E88
-    funcs:
-      0x1407BC730: ctor
-      0x140763090: dtor
-      0x141321520: CalculateAndApplyOverallSpeed
-      0x141323A50: SetSlotSpeed
-      0x141323BB0: GetHeightAdjustActionTimelineRowId
-      0x141324670: SetLipsOverrideTimeline
-      0x1413260D0: ClearBannerData
-      0x141326580: GetCurrentBannerTimelineTimestamp
   Client::Game::RetainerManager:
     instances:
       - ea: 0x14222AFD0
@@ -752,7 +726,7 @@ classes:
       0x1407BCE80: Initialize
       0x1407BD0B0: Update
       0x1407BD4C0: UpdateMountAndCompanionMovement # maybe?
-      0x1407BD710: UpdateGazes
+      0x1407BD710: UpdateLookAt
       0x1407BD890: DeleteAllModels
       0x1407BDA20: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
       0x1407BCA60: GetFilteredObjectById
@@ -1485,7 +1459,7 @@ classes:
       0x140508540: ReleaseManagedMemory # called by SetString, frees old strings
       0x1405A52B0: SetBool
       0x1405A5550: SetInt
-      0x1405A5770: SetString
+      0x1405A5770: SetString2
       0x1405A57D0: SetUInt
   Component::GUI::AtkEvent:
     funcs:
@@ -5156,6 +5130,15 @@ classes:
       0x141382930: ctor
       0x141383860: PreUpdate
       0x141382B00: GetActiveCamera
+  Client::Game::Control::MoveControl::SplineController2D<float,SplineVector2,SplineVector2>:
+    vtbls:
+      - ea: 0x141A057F0
+  Client::Game::Control::MoveControl::SplineController2D<float,float,float>:
+    vtbls:
+      - ea: 0x141A057F8
+  Client::Game::Control::MoveControl::SplineVector2:
+    vtbls:
+      - ea: 0x141A057D8
   Client::Game::Control::MoveControl::MoveControllerSubMemberForMine:
     instances:
       - ea: 0x1421D4D20
@@ -7280,6 +7263,36 @@ classes:
       0x14075A190: SetMode
       0x14075C0B0: Finalize
       0x1407BC5C0: ctor
+  Client::Game::Control::CharacterLookAtController:
+    vtbls:
+      - ea: 0x141A05808
+    funcs:
+      0x1404E6AE0: ctor
+      0x1405043A0: dtor
+  Client::Game::Control::CharacterLookAtControlParam:
+    vtbls:
+      - ea: 0x141A05800
+    funcs:
+      0x1404E1B00: ctor
+  Client::Game::Control::CharacterLookAtTargetParam:
+    vtbls:
+      - ea: 0x141A057E8
+  Client::Game::Control::ActionTimelineSequencer:
+    vtbls:
+      - ea: 0x141A057C8
+    funcs:
+      0x1404DDB30: ctor
+      0x1404DDCC0: PlayTimeline
+      0x1404DE280: GetSlotTimeline
+      0x1404DE670: SetSlotSpeed
+      0x1404DE980: GetSlotSpeed
+      0x1404DEBC0: GetCurrentActionTimelineTimestamp
+      0x1404DF5A0: SetSlotTimeline
+  Client::Game::Control::TimelineTransitController:
+    vtbls:
+      - ea: 0x141A057D0
+    funcs:
+      0x1404DFF70: ctor
   Client::Game::Control::EmoteController:
     vtbls:
       - ea: 0x141A22038
@@ -7288,6 +7301,7 @@ classes:
   Client::Game::Character::DrawDataContainer:
     vtbls:
       - ea: 0x141A21E60
+        base: Client::Game::Character::ContainerInterface
     funcs:
       0x1413171F0: ctor
       0x1413189D0: LoadWeapon
@@ -7298,13 +7312,23 @@ classes:
   Client::Game::Character::CompanionContainer:
     vtbls:
       - ea: 0x141B46E68
+        base: Client::Game::Character::ContainerInterface
     funcs:
       0x141313710: ctor
       0x141313A30: GetCompanionDataID
       0x141313870: SetupCompanion
-  Client::Game::Character::CharacterSetup:
+  Client::Game::Character::ContainerInterface:
+    vtbls:
+      - ea: 0x141A21E38
+    vfuncs:
+      0: dtor
+      1: Initialize
+      2: Terminate
+      3: Update
+  Client::Game::Character::CharacterSetupContainer:
     vtbls:
       - ea: 0x141B46EF0
+        base: Client::Game::Character::ContainerInterface
     funcs:
       0x14132F120: ctor
       0x14132F530: SetupRaw
@@ -7316,20 +7340,23 @@ classes:
   Client::Game::Character::OrnamentContainer:
     vtbls:
       - ea: 0x141A3AB50
+        base: Client::Game::Character::ContainerInterface
     funcs:
       0x14131AAE0: HasOrnament
       0x14131AB10: SetupOrnament
   Client::Game::Character::VfxContainer:
     vtbls:
       - ea: 0x141B46EB8
-        base: Client::Game::Character::CharacterSetup
+        base: Client::Game::Character::ContainerInterface
       - ea: 0x141B46EE0
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
+      0x14132C4D0: ctor
       0x14132E760: LoadCharacterSound
   Client::Game::Character::MountContainer:
     vtbls:
       - ea: 0x141B46E90
+        base: Client::Game::Character::ContainerInterface
     funcs:
       0x141313B10: ctor
       0x141314700: CreateAndSetupMount
@@ -7337,28 +7364,32 @@ classes:
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
       - ea: 0x141A3AB78
+        base: Client::Game::Character::ContainerInterface
       - ea: 0x141A3ABA0
         base: Client::Graphics::Vfx::VfxDataListenner
-  Client::Game::Character::GazeContainer:
+  Client::Game::Character::CharacterData:
+    vtbls:
+      - ea: 0x141A21E08
+  Client::Game::Character::TimelineContainer:
+    vtbls:
+      - ea: 0x141A21E88
+        base: Client::Game::Character::ContainerInterface
+    funcs:
+      0x1407BC730: ctor
+      0x140763090: dtor
+      0x141321520: CalculateAndApplyOverallSpeed
+      0x141323A50: SetSlotSpeed
+      0x141323BB0: GetHeightAdjustActionTimelineRowId
+      0x141324670: SetLipsOverrideTimeline
+      0x1413260D0: ClearBannerData
+      0x141326580: GetCurrentBannerTimelineTimestamp
+  Client::Game::Character::LookAtContainer:
     vtbls:
       - ea: 0x141A21EB0
-        base: Client::Game::Character::CharacterSetup
+        base: Client::Game::Character::ContainerInterface
     funcs:
       0x1413278D0: ctor
-      0x1413279F0: Update
-  Client::Game::Control::GazeController:
-    vtbls:
-      - ea: 0x141A05808
-    funcs:
-      0x1405043A0: ctor
-  Client::Game::Control::GazeController::Gaze:
-    vtbls:
-      - ea: 0x141A05800
-    funcs:
-      0x1404E1B00: ctor
-  Client::Game::Control::GazeController::Gaze::TargetInformation:
-    vtbls:
-      - ea: 0x141A057E8
+      0x1413279F0: UpdateLookAt
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141A024D0
@@ -14606,7 +14637,6 @@ classes:
   Client::UI::AddonJobHudACN0::AetherflowACNGaugeData:
     vtbls:
       - ea: 0x141B23438
-        base: Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple
   Client::UI::AddonJobHudACN0::AetherflowACNGauge:
     vtbls:
       - ea: 0x141B23488

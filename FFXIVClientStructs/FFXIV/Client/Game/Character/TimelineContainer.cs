@@ -1,16 +1,15 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
-// Client::System::Scheduler::ActionTimelineManager
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 05"
-// TODO: check which namespace is correct
-[GenerateInterop]
+[GenerateInterop, Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x340)]
-public unsafe partial struct ActionTimelineManager {
-    [FieldOffset(0x08)] public Character.Character* Parent;
-    [FieldOffset(0x10)] public ActionTimelineDriver Driver;
-
+public unsafe partial struct TimelineContainer {
+    [FieldOffset(0x10)] public ActionTimelineSequencer TimelineSequencer;
+    [FieldOffset(0x200)] public TimelineTransitController TimelineTransit;
+    
     [FieldOffset(0x2C4)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
 
     [FieldOffset(0x2E0)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state

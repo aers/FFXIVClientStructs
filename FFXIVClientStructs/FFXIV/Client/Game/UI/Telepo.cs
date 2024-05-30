@@ -27,6 +27,15 @@ public unsafe partial struct Telepo {
     /// Additionally, if <paramref name="residentArea"/> is true, the cost is quartered, and if otherwise either <paramref name="unk"/> or <paramref name="favored"/> is true, the cost is halved.
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 41 0F BF CF")]
     public static partial ulong GetTeleportCost(ushort entryTerritoryId, ushort exitTerritoryId, bool residentArea, bool unk, bool favored);
+    
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public unsafe partial struct SelectUseTicketInvoker {
+        [FieldOffset(0x10)] public Telepo* Telepo;
+
+        [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 80 79 ?? 00 41 0F B6 F8 8B F2")]
+        public partial bool TeleportWithTickets(uint aetheryteId, byte subIndex);
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
@@ -42,13 +51,4 @@ public struct TeleportInfo {
 
     public bool IsSharedHouse => Ward > 0 && Plot > 0;
     public bool IsApartment => SubIndex == 128 && !IsSharedHouse;
-}
-
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct SelectUseTicketInvoker {
-    [FieldOffset(0x10)] public Telepo* Telepo;
-
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 80 79 ?? 00 41 0F B6 F8 8B F2")]
-    public partial bool TeleportWithTickets(uint aetheryteId, byte subIndex);
 }
