@@ -8,5 +8,4 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Inherits<AgentBannerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AgentBannerParty {
-}
+public unsafe partial struct AgentBannerParty;

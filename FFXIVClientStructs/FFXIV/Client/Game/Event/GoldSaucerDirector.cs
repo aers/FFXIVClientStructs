@@ -7,5 +7,4 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
 [StructLayout(LayoutKind.Explicit, Size = 0x678)]
-public unsafe partial struct GoldSaucerDirector {
-}
+public unsafe partial struct GoldSaucerDirector;

@@ -7,5 +7,4 @@ namespace FFXIVClientStructs.FFXIV.Common.Configuration;
 [GenerateInterop(isInherited: true)]
 [Inherits<ConfigBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
-public partial struct DevConfig {
-}
+public partial struct DevConfig;

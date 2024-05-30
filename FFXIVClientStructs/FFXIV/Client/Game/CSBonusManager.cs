@@ -17,11 +17,11 @@ public unsafe partial struct CSBonusManager {
 
     [FieldOffset(0x2C), FixedSizeArray] internal FixedSizeArray20<byte> _WBAchieveFlag;
     [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray20<byte> _PMAchieveFlag;
-    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray4<byte>  _MMAchieveFlag;
+    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray4<byte> _MMAchieveFlag;
 
     [FieldOffset(0x7C), FixedSizeArray] internal FixedSizeArray20<byte> _WBReceiveFlag;
     [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray20<byte> _PMReceiveFlag;
-    [FieldOffset(0xA4), FixedSizeArray] internal FixedSizeArray4<byte>  _MMReceiveFlag;
+    [FieldOffset(0xA4), FixedSizeArray] internal FixedSizeArray4<byte> _MMReceiveFlag;
 
     [FieldOffset(0xBA)] public byte WBCount;
 

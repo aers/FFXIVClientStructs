@@ -10,5 +10,4 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop]
 [Inherits<Character>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1C90)]
-public partial struct Companion {
-}
+public partial struct Companion;
