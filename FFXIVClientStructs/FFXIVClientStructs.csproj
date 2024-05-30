@@ -30,7 +30,12 @@
     
     <InteropGenerator_InteropNamespace>FFXIVClientStructs.Interop.Generated</InteropGenerator_InteropNamespace>
   </PropertyGroup>
-  
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
   <ItemGroup>
     <CompilerVisibleProperty Include="InteropGenerator_InteropNamespace" />
   </ItemGroup>
