@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -91,7 +92,7 @@ public unsafe partial struct ContextMenu {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray33<AtkValue> _eventParams; // 32 * AtkValue + 1 * AtkValue for submenus with title
 
     [FieldOffset(0x428), FixedSizeArray] internal FixedSizeArray32<byte> _eventIds;
-    [FieldOffset(0x450), FixedSizeArray] internal FixedSizeArray32<long> _eventHandlers;
+    [FieldOffset(0x450), FixedSizeArray] internal FixedSizeArray32<Pointer<AtkEventInterface>> _eventHandlers;
     [FieldOffset(0x558), FixedSizeArray] internal FixedSizeArray32<long> _eventHandlerParams;
 
     [FieldOffset(0x660)] public uint ContextItemDisabledMask;
