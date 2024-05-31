@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
 public unsafe partial struct ItemOrderModule {
-    public static ItemOrderModule* Instance() => Framework.Instance()->GetUiModule()->GetItemOrderModule();
+    public static ItemOrderModule* Instance() => Framework.Instance()->GetUIModule()->GetItemOrderModule();
 
     [FieldOffset(0x40)] public ItemOrderModuleSorter* InventorySorter;
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray12<Pointer<ItemOrderModuleSorter>> _armourySorter;

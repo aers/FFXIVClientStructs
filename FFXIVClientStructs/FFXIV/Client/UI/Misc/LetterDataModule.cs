@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA48)]
 public unsafe partial struct LetterDataModule {
-    public static LetterDataModule* Instance() => Framework.Instance()->GetUiModule()->GetLetterDataModule();
+    public static LetterDataModule* Instance() => Framework.Instance()->GetUIModule()->GetLetterDataModule();
 }

@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct VVDActionModule {
-    public static VVDActionModule* Instance() => Framework.Instance()->GetUiModule()->GetVVDActionModule();
+    public static VVDActionModule* Instance() => Framework.Instance()->GetUIModule()->GetVVDActionModule();
 
     [FieldOffset(0x40)] public byte Action1;
     [FieldOffset(0x41)] public byte Action2;

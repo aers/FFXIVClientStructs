@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x528)]
 public unsafe partial struct LogFilterConfig {
-    public static LogFilterConfig* Instance() => Framework.Instance()->GetUiModule()->GetLogFilterConfig();
+    public static LogFilterConfig* Instance() => Framework.Instance()->GetUIModule()->GetLogFilterConfig();
 }

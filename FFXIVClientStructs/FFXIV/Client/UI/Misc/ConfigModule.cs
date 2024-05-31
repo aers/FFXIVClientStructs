@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE5C8)]
 public unsafe partial struct ConfigModule {
-    public static ConfigModule* Instance() => Framework.Instance()->GetUiModule()->GetConfigModule();
+    public static ConfigModule* Instance() => Framework.Instance()->GetUIModule()->GetConfigModule();
 
     public const int ConfigOptionCount = 715;
     [FieldOffset(0x28)] public UIModule* UIModule;

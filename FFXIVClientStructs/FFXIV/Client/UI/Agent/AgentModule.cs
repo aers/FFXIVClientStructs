@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xDF8)]
 public unsafe partial struct AgentModule {
-    public static AgentModule* Instance() => Framework.Instance()->GetUiModule()->GetAgentModule();
+    public static AgentModule* Instance() => Framework.Instance()->GetUIModule()->GetAgentModule();
 
     [FieldOffset(0x8)] public UIModule* UIModule;
     [FieldOffset(0x10)] public byte Initialized;

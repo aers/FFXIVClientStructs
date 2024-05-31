@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct AgentInterface {
-    [FieldOffset(0x10)] public UIModule* UiModule;
+    [FieldOffset(0x10)] public UIModuleInterface* UIModuleInterface;
     [FieldOffset(0x20)] public uint AddonId;
 
     [VirtualFunction(3)]

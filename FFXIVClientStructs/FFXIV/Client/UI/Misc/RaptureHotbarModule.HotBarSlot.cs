@@ -162,7 +162,7 @@ public unsafe partial struct HotBarSlot {
     /// <param name="type">The <see cref="HotbarSlotType"/> that this slot should trigger.</param>
     /// <param name="id">The ID of the command that this slot should trigger.</param>
     public void Set(HotbarSlotType type, uint id) =>
-        Set(Framework.Instance()->GetUiModule(), type, id);
+        Set(Framework.Instance()->GetUIModule(), type, id);
 
     /// <summary>
     /// Populates HotBarSlot.Icon with information from IconB/IconTypeB. 

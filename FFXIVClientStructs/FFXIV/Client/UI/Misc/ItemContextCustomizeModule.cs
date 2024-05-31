@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
 public unsafe partial struct ItemContextCustomizeModule {
-    public static ItemContextCustomizeModule* Instance() => Framework.Instance()->GetUiModule()->GetItemContextCustomizeModule();
+    public static ItemContextCustomizeModule* Instance() => Framework.Instance()->GetUIModule()->GetItemContextCustomizeModule();
 
     [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray128<byte> _firstTier;
     [FieldOffset(0xC0), FixedSizeArray] internal FixedSizeArray128<byte> _secondTier;

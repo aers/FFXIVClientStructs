@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct AchievementListModule {
-    public static AchievementListModule* Instance() => Framework.Instance()->GetUiModule()->GetAchievementListModule();
+    public static AchievementListModule* Instance() => Framework.Instance()->GetUIModule()->GetAchievementListModule();
     // [FieldOffset(0x40)] public byte Unk40;
     [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray30<ushort> _watchList;
     // [FieldOffset(0x7E)] public byte Unk7E;

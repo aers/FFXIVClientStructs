@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct InfoProxyInterface {
-    [FieldOffset(0x8)] public UIModule* UiModule;
+    [FieldOffset(0x8)] public UIModule* UIModule;
     //For Proxies with a fixed count this is apparently 0
     [FieldOffset(0x10)] public uint EntryCount;
 

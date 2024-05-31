@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct RecommendEquipModule {
-    public static RecommendEquipModule* Instance() => Framework.Instance()->GetUiModule()->GetRecommendEquipModule();
+    public static RecommendEquipModule* Instance() => Framework.Instance()->GetUIModule()->GetRecommendEquipModule();
 
     [FieldOffset(0x00)] public bool IsUpdating;
     [FieldOffset(0x01)] public bool IsSetupForDifferentClassJob;

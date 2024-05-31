@@ -123,7 +123,7 @@ public unsafe partial struct Framework {
     public static partial Framework* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
-    public partial UIModule* GetUiModule();
+    public partial UIModule* GetUIModule();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 44 24 ?? 48 8B C8 48 8B D3")]
     public partial UIClipboard* GetUIClipboard();

@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public unsafe partial struct GroupPoseModule {
-    public static GroupPoseModule* Instance() => Framework.Instance()->GetUiModule()->GetGroupPoseModule();
+    public static GroupPoseModule* Instance() => Framework.Instance()->GetUIModule()->GetGroupPoseModule();
 
     // [FieldOffset(0x40)] public byte Unk40;
     // [FieldOffset(0x41)] public byte Unk41;

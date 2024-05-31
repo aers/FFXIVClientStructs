@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct BannerModule {
-    public static BannerModule* Instance() => Framework.Instance()->GetUiModule()->GetBannerModule();
+    public static BannerModule* Instance() => Framework.Instance()->GetUIModule()->GetBannerModule();
 
     [FieldOffset(0x40)] public BannerModuleData* Data;
 

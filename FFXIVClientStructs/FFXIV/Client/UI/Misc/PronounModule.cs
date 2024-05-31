@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
 public unsafe partial struct PronounModule {
-    public static PronounModule* Instance() => Framework.Instance()->GetUiModule()->GetPronounModule();
+    public static PronounModule* Instance() => Framework.Instance()->GetUIModule()->GetPronounModule();
 
     [FieldOffset(0x08)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x10)] public RaptureTextModule* RaptureTextModule;
@@ -22,7 +22,7 @@ public unsafe partial struct PronounModule {
 
     [FieldOffset(0x290)] public GameObject* UiMouseOverTarget;
     [FieldOffset(0x298)] public TextChecker TextChecker;
-    [FieldOffset(0x390)] public UIModule* UiModule;
+    [FieldOffset(0x390)] public UIModule* UIModule;
 
     [VirtualFunction(1)]
     public partial Utf8String* ProcessString(Utf8String* input, bool encode, int maxLength = 1023);

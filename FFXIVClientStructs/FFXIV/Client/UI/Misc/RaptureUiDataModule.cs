@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x5AE8)]
 public unsafe partial struct RaptureUiDataModule {
-    public static RaptureUiDataModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureUiDataModule();
+    public static RaptureUiDataModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureUiDataModule();
 
     [FieldOffset(0x4D8), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListTankOrder;
     [FieldOffset(0x4F8), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListHealerOrder;

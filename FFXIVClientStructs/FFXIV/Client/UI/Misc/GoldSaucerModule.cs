@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 public unsafe partial struct GoldSaucerModule {
-    public static GoldSaucerModule* Instance() => Framework.Instance()->GetUiModule()->GetGoldSaucerModule();
+    public static GoldSaucerModule* Instance() => Framework.Instance()->GetUIModule()->GetGoldSaucerModule();
 
     [FieldOffset(0x40)] internal FixedSizeArray10<TripleTriadDeck> _decks;
     [FieldOffset(0x284), FixedSizeArray] internal FixedSizeArray23<ushort> _hotbarMinions; // Companion RowIds

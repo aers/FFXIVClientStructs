@@ -11,9 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x288F8)]
 public unsafe partial struct RaptureHotbarModule {
-    public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureHotbarModule();
+    public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureHotbarModule();
 
-    [FieldOffset(0x48)] public UIModule* UiModule;
+    [FieldOffset(0x48)] public UIModule* UIModule;
 
     /// <summary>
     /// Set in RaptureHotbarModule's ReadFile after all processing/loading appears to have been completed.

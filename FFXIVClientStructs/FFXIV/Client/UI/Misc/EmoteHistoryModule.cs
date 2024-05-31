@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct EmoteHistoryModule {
-    public static EmoteHistoryModule* Instance() => Framework.Instance()->GetUiModule()->GetEmoteHistoryModule();
+    public static EmoteHistoryModule* Instance() => Framework.Instance()->GetUIModule()->GetEmoteHistoryModule();
 
     [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray6<ushort> _history;
     [FieldOffset(0x4E), FixedSizeArray] internal FixedSizeArray20<ushort> _favorites;

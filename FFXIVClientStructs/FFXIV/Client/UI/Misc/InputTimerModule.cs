@@ -4,8 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x4F8)]
 public unsafe partial struct InputTimerModule {
-    public static InputTimerModule* Instance() => Framework.Instance()->GetUiModule()->GetInputTimerModule();
-    [FieldOffset(0x08)] public UIModule* UiModule;
+    public static InputTimerModule* Instance() => Framework.Instance()->GetUIModule()->GetInputTimerModule();
+    [FieldOffset(0x08)] public UIModule* UIModule;
     [FieldOffset(0x10)] public float AfkTimer; // counts up if AutoAfk is enabled and negative if afk
     [FieldOffset(0x14)] public float ContentInputTimer;
     [FieldOffset(0x18)] public float InputTimer;

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct AddonConfig {
-    public static AddonConfig* Instance() => Framework.Instance()->GetUiModule()->GetAddonConfig();
+    public static AddonConfig* Instance() => Framework.Instance()->GetUIModule()->GetAddonConfig();
 
     [FieldOffset(0x50)] public AddonConfigData* ModuleData;
 

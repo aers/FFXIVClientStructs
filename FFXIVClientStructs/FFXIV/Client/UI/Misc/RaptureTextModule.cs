@@ -10,32 +10,18 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<TextModule>, Inherits<TextChecker.ExecNonMacroFunc>, Inherits<ExcelLanguageEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE60)]
 public unsafe partial struct RaptureTextModule {
-    public static RaptureTextModule* Instance() => Framework.Instance()->GetUiModule()->GetRaptureTextModule();
+    public static RaptureTextModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureTextModule();
 
-    [FieldOffset(0x520)] public UIModule* UiModule;
+    [FieldOffset(0x520)] public UIModule* UIModule;
     [FieldOffset(0x528)] public TextChecker TextChecker;
     [FieldOffset(0x620)] public ExcelSheet* AddonSheet;
 
-    [FieldOffset(0x630 + 0 * 0x68)] public Utf8String Unk630;
-    [FieldOffset(0x630 + 1 * 0x68)] public Utf8String Unk698;
-    [FieldOffset(0x630 + 2 * 0x68)] public Utf8String Unk700;
-    [FieldOffset(0x630 + 3 * 0x68)] public Utf8String Unk768;
-    [FieldOffset(0x630 + 4 * 0x68)] public Utf8String Unk7D0;
-    [FieldOffset(0x630 + 5 * 0x68)] public Utf8String Unk838;
-    [FieldOffset(0x630 + 6 * 0x68)] public Utf8String Unk8A0;
+    [FieldOffset(0x630), FixedSizeArray] internal FixedSizeArray7<Utf8String> _unkStrings0;
 
     [FieldOffset(0x908)] public StdDeque<TextParameter> LocalTextParameters;
     //[FieldOffset(0x930)] public StdDeque<TextParameter> ItemColorParameters;
 
-    [FieldOffset(0x958 + 0 * 0x68)] public Utf8String Unk958;
-    [FieldOffset(0x958 + 1 * 0x68)] public Utf8String Unk9C0;
-    [FieldOffset(0x958 + 2 * 0x68)] public Utf8String UnkA28;
-    [FieldOffset(0x958 + 3 * 0x68)] public Utf8String UnkA90;
-    [FieldOffset(0x958 + 4 * 0x68)] public Utf8String UnkAF8;
-    [FieldOffset(0x958 + 5 * 0x68)] public Utf8String UnkB60;
-    [FieldOffset(0x958 + 6 * 0x68)] public Utf8String UnBC8;
-    [FieldOffset(0x958 + 7 * 0x68)] public Utf8String UnC30;
-    [FieldOffset(0x958 + 8 * 0x68)] public Utf8String UnC98;
+    [FieldOffset(0x958), FixedSizeArray] internal FixedSizeArray9<Utf8String> _unkStrings1;
 
     // [FieldOffset(0xD18)] public RowWrapper<Addon>* AddonRowCache; // only for the first 4000 Addon rows
 
@@ -71,66 +57,6 @@ public unsafe partial struct RaptureTextModule {
     /// </returns>
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 47 30")]
     public static partial byte* FormatName(NameFormatterPlaceholder placeholder, int id, NameFormatterIdConverter idConverter, int intParam2 = 1);
-
-    public static byte* GetItemName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.Item, id, NameFormatterIdConverter.None, intParam2);
-
-    public static byte* GetBNpcName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.BNpcName, intParam2);
-
-    public static byte* GetENpcResidentName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.ENpcResident, intParam2);
-
-    public static byte* GetTreasureName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Treasure, intParam2);
-
-    public static byte* GetAetheryteName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Aetheryte, intParam2);
-
-    public static byte* GetGatheringPointName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.GatheringPointName, intParam2);
-
-    public static byte* GetEObjName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.EObjName, intParam2);
-
-    public static byte* GetCompanionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ObjStr, id, NameFormatterIdConverter.Companion, intParam2);
-
-    public static byte* GetTraitName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Trait, intParam2);
-
-    public static byte* GetActionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Action, intParam2);
-
-    public static byte* GetEventActionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.EventAction, intParam2);
-
-    public static byte* GetGeneralActionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.GeneralAction, intParam2);
-
-    public static byte* GetBuddyActionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.BuddyAction, intParam2);
-
-    public static byte* GetMainCommandName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.MainCommand, intParam2);
-
-    public static byte* GetCraftActionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.CraftAction, intParam2);
-
-    public static byte* GetPetActionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.PetAction, intParam2);
-
-    public static byte* GetCompanyActionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.CompanyAction, intParam2);
-
-    public static byte* GetMountName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Mount, intParam2);
-
-    public static byte* GetBgcArmyActionName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.BgcArmyAction, intParam2);
-
-    public static byte* GetOrnamentName(int id, int intParam2 = 1)
-        => FormatName(NameFormatterPlaceholder.ActStr, id, NameFormatterIdConverter.Ornament, intParam2);
 }
 
 public enum NameFormatterPlaceholder : int {

@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct MinionListModule {
-    public static MinionListModule* Instance() => Framework.Instance()->GetUiModule()->GetMinionListModule();
+    public static MinionListModule* Instance() => Framework.Instance()->GetUIModule()->GetMinionListModule();
 
     // [FieldOffset(0x40)] public byte Unk40; // set to 1 in ReadFile
     [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenCompanions;

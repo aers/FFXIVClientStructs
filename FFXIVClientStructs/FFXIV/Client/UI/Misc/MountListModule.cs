@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct MountListModule {
-    public static MountListModule* Instance() => Framework.Instance()->GetUiModule()->GetMountListModule();
+    public static MountListModule* Instance() => Framework.Instance()->GetUIModule()->GetMountListModule();
 
     // [FieldOffset(0x40)] public byte Unk40; // set to 1 in ReadFile
     [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenMounts; // Order column of Mount sheet, offset by 1

@@ -17,7 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0xEE030)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 61 ?? 4C 8B F2", 3)]
 public unsafe partial struct UIModule {
-    public static UIModule* Instance() => Framework.Instance()->GetUiModule();
+    public static UIModule* Instance() => Framework.Instance()->GetUIModule();
 
     [FieldOffset(0x3B0), FixedSizeArray] internal FixedSizeArray19<RaptureAtkHistory> _atkHistory;
     [FieldOffset(0x7D8)] public int LinkshellCycle;

@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 89 06", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x10F8)]
 public unsafe partial struct AcquaintanceModule {
-    public static AcquaintanceModule* Instance() => Framework.Instance()->GetUiModule()->GetAcquaintanceModule();
+    public static AcquaintanceModule* Instance() => Framework.Instance()->GetUIModule()->GetAcquaintanceModule();
     [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray16<Acquaintance> _tellHistory;
     [FieldOffset(0xE40)] public uint NumTellHistoryEntries;
 

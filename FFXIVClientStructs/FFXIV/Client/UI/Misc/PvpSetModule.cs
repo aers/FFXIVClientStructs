@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct PvpSetModule {
-    public static PvpSetModule* Instance() => Framework.Instance()->GetUiModule()->GetPvpSetModule();
+    public static PvpSetModule* Instance() => Framework.Instance()->GetUIModule()->GetPvpSetModule();
 
     [FieldOffset(0x40)] internal FixedSizeArray20<AdditionalPvpActions> _additionalActions;
     [FieldOffset(0x90)] internal byte Unk90;

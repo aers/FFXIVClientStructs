@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct RetainerTaskDataModule {
-    public static RetainerTaskDataModule* Instance() => Framework.Instance()->GetUiModule()->GetRetainerTaskDataModule();
+    public static RetainerTaskDataModule* Instance() => Framework.Instance()->GetUIModule()->GetRetainerTaskDataModule();
 }

@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct UiSavePackModule {
-    public static UiSavePackModule* Instance() => Framework.Instance()->GetUiModule()->GetUiSavePackModule();
+    public static UiSavePackModule* Instance() => Framework.Instance()->GetUIModule()->GetUiSavePackModule();
 
     [VirtualFunction(13)]
     public partial nint GetSegment(byte segment);
