@@ -83,7 +83,7 @@ public unsafe partial struct LobbyData {
     [FieldOffset(0x9BE)] public ushort HomeWorldId;
 
     [MemberFunction("40 53 56 41 57 48 83 EC 20 33 DB")]
-    public partial CharaSelectCharacterEntry* GetCharacterEntryFromServer(byte index, long contentId);
+    public partial CharaSelectCharacterEntry* GetCharacterEntryFromServer(byte index, ulong contentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 2C 48 8D 48 2C")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryByIndex(int a2, int worldIndex, int characterMappingIndex);

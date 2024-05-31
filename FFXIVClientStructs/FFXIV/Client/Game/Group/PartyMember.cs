@@ -7,7 +7,7 @@ public unsafe partial struct PartyMember {
     [FieldOffset(0x2F0)] public float X;
     [FieldOffset(0x2F4)] public float Y;
     [FieldOffset(0x2F8)] public float Z;
-    [FieldOffset(0x300)] public long ContentId;
+    [FieldOffset(0x300)] public ulong ContentId;
     [FieldOffset(0x308)] public uint ObjectId;
     //[FieldOffset(0x30C)] public uint Unk_ObjectId_1;
     //[FieldOffset(0x310)] public uint Unk_ObjectId_2;

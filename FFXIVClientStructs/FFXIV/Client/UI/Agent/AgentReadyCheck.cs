@@ -16,7 +16,7 @@ public unsafe partial struct AgentReadyCheck {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ReadyCheckEntry {
-        [FieldOffset(0x00)] public long ContentId;
+        [FieldOffset(0x00)] public ulong ContentId;
         [FieldOffset(0x08)] public ReadyCheckStatus Status;
     }
 
