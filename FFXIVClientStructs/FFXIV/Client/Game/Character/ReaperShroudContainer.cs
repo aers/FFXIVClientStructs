@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 

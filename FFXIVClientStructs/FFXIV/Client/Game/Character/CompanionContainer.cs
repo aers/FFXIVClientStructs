@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 [GenerateInterop, Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]

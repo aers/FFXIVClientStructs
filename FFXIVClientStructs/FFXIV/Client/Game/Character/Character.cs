@@ -20,7 +20,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x6F8)] public DrawDataContainer DrawData;
     [FieldOffset(0x8A0)] public OrnamentContainer OrnamentData;
     [FieldOffset(0x918)] public ReaperShroudContainer ReaperShroud;
-    
+
     [FieldOffset(0x970)] public TimelineContainer Timeline;
     [FieldOffset(0xCB0)] public LookAtContainer LookAt;
 

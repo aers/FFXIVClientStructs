@@ -10,7 +10,7 @@ public unsafe partial struct InfoProxySearchComment {
     [FieldOffset(0x28)] public UpdateDataPacket UpdateData;
 
     [FieldOffset(0x100)] public Utf8String SearchComment;
-    
+
     [FieldOffset(0x238)] public bool HasUpdateData;
 
     [GenerateInterop]

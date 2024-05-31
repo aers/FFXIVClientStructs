@@ -1,5 +1,5 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 public unsafe partial struct TimelineContainer {
     [FieldOffset(0x10)] public ActionTimelineSequencer TimelineSequencer;
     [FieldOffset(0x200)] public TimelineTransitController TimelineTransit;
-    
+
     [FieldOffset(0x2C4)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
 
     [FieldOffset(0x2E0)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state

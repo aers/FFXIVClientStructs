@@ -27,7 +27,7 @@ public unsafe partial struct Telepo {
     /// Additionally, if <paramref name="residentArea"/> is true, the cost is quartered, and if otherwise either <paramref name="unk"/> or <paramref name="favored"/> is true, the cost is halved.
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 41 0F BF CF")]
     public static partial ulong GetTeleportCost(ushort entryTerritoryId, ushort exitTerritoryId, bool residentArea, bool unk, bool favored);
-    
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public unsafe partial struct SelectUseTicketInvoker {

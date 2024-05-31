@@ -27,7 +27,7 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x24)] public EquipmentModelId LFinger;
 
     [FieldOffset(0x188)] public CustomizeData CustomizeData;
-    
+
     [FieldOffset(0x1A6)] public byte Flags1;
     [FieldOffset(0x1A7)] public byte Flags2;
 

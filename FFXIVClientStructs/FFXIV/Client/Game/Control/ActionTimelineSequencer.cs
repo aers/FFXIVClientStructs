@@ -9,7 +9,7 @@ public unsafe partial struct ActionTimelineSequencer {
     // starting from 0x10 is a 0x60-sized struct containing animation request info?! can be passed as a3 to PlayTimeline
 
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray14<Pointer<Pointer<SchedulerTimeline>>> _schedulerTimelines; // technically incorrect, but it's really all we need
-    
+
     [FieldOffset(0xE0), FixedSizeArray] internal FixedSizeArray14<ushort> _timelineIds; // The timeline active in each slot or 0 when none
     [FieldOffset(0x154), FixedSizeArray] internal FixedSizeArray14<float> _timelineSpeeds; // Speed for each slot
 
