@@ -35,10 +35,10 @@ public unsafe partial struct AgentFreeCompanyProfile {
     [FieldOffset(0x1A8)] public Utf8String Slogan;
     [FieldOffset(0x210)] public Utf8String EstateName;
     //4 Status bytes
-    [FieldOffset(0x278)] public byte Unk278;
-    [FieldOffset(0x279)] public byte Unk279;
-    [FieldOffset(0x27A)] public byte Unk27A;
-    [FieldOffset(0x27B)] public byte Unk27B;
+    //[FieldOffset(0x278)] public byte Unk278;
+    //[FieldOffset(0x279)] public byte Unk279;
+    //[FieldOffset(0x27A)] public byte Unk27A;
+    //[FieldOffset(0x27B)] public byte Unk27B;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x6)]
     public struct FCProfile {

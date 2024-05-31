@@ -74,33 +74,24 @@ public unsafe partial struct RaptureLogModule {
     public partial void AddMsgSourceEntry(ulong contentId, int messageIndex, ushort worldId, ushort chatType);
 
     public bool GetLogMessage(int index, out byte[] message) {
-        var pMsg = stackalloc Utf8String[1];
-        pMsg->Ctor();
-        var result = GetLogMessage(index, pMsg);
-        message = new Span<byte>(pMsg->StringPtr, (int)pMsg->BufUsed - 1).ToArray();
-        pMsg->Dtor();
+        using var pMsg = new Utf8String();
+        var result = GetLogMessage(index, &pMsg);
+        message = pMsg.AsSpan().ToArray();
         return result;
     }
 
     public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out uint time) {
-        var pMsg = stackalloc Utf8String[1];
-        var pSender = stackalloc Utf8String[1];
-        var pKind = stackalloc short[1];
-        var pTime = stackalloc uint[1];
+        using var pMessage = new Utf8String();
+        using var pSender = new Utf8String();
+        short pKind = 0;
+        uint pTime = 0;
 
-        pMsg->Ctor();
-        pSender->Ctor();
+        var result = GetLogMessageDetail(index, &pKind, &pSender, &pMessage, &pTime);
 
-        var result = GetLogMessageDetail(index, pKind, pSender, pMsg, pTime);
-
-        logKind = *pKind;
-        time = *pTime;
-
-        sender = new Span<byte>(pSender->StringPtr, (int)pSender->BufUsed - 1).ToArray();
-        message = new Span<byte>(pMsg->StringPtr, (int)pMsg->BufUsed - 1).ToArray();
-
-        pMsg->Dtor();
-        pSender->Dtor();
+        logKind = pKind;
+        time = pTime;
+        sender = pSender.AsSpan().ToArray();
+        message = pMessage.AsSpan().ToArray();
         return result;
     }
 }

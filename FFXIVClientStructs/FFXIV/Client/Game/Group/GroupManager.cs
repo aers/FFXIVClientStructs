@@ -9,16 +9,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 public unsafe partial struct GroupManager {
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray8<PartyMember> _partyMembers;
     [FieldOffset(0x1C80), FixedSizeArray] internal FixedSizeArray20<PartyMember> _allianceMembers;
-    [FieldOffset(0x63C0)] public uint Unk_3D40;
-    [FieldOffset(0x63C4)] public ushort Unk_3D44;
+    
     [FieldOffset(0x63C8)] public long PartyId; // both seem to be unique per party and replicated to every member
     [FieldOffset(0x63D0)] public long PartyId_2;
     [FieldOffset(0x63D8)] public uint PartyLeaderIndex; // index of party leader in array
     [FieldOffset(0x63DC)] public byte MemberCount;
-    [FieldOffset(0x63DD)] public byte Unk_3D5D;
+    
     //[FieldOffset(0x3D5E)] public bool IsAlliance;
-    [FieldOffset(0x63DF)] public byte Unk_3D5F; // some sort of count
-    [FieldOffset(0x63E0)] public byte Unk_3D60;
+    
     [FieldOffset(0x63E1)] public byte AllianceFlags; // 0x01 == is alliance; 0x02 == alliance with 5 4-man groups rather than 2 8-man
 
     [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]

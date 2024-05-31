@@ -51,13 +51,13 @@ public unsafe partial struct AgentInspect {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]
     public struct FreeCompanyData {
-        [FieldOffset(0x00)] public byte Unkown4b0; //Maybe FreeCompany get status 1=Finished
+        //[FieldOffset(0x00)] public byte Unkown4b0; //Maybe FreeCompany get status 1=Finished
         [FieldOffset(0x01)] public bool IsPartOfFreeCompany; //HasGuild???????? if 0 Client::UI::RaptureAtkModule.OpenAddon can be called without getting additional infos
         [FieldOffset(0x08)] public long Id;
         [FieldOffset(0x10)] public CrestData Crest;
         [FieldOffset(0x18)] public ushort MemberCount;
         [FieldOffset(0x1A)] public ushort GrandCompany;// 1=Maelstorm 2=TwinAdder 3=ImmortalFlames
-        [FieldOffset(0x1c)] public ushort Unk1C;
+        //[FieldOffset(0x1c)] public ushort Unk1C;
         [FieldOffset(0x1E)] public Utf8String GuildName;
     }
 

@@ -66,9 +66,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     }
 
     public override string ToString() {
-        if (StringPtr == null || BufUsed <= 1)
-            return string.Empty;
-        return Encoding.UTF8.GetString(StringPtr, (int)BufUsed - 1);
+        return AsSpan().IsEmpty ? string.Empty : Encoding.UTF8.GetString(AsSpan());
     }
 
     public void Append(Utf8String* other) => Append((Utf8String*)Unsafe.AsPointer(ref this), other);

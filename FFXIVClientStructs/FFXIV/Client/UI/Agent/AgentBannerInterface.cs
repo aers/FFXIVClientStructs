@@ -40,8 +40,8 @@ public unsafe partial struct AgentBannerInterface {
 
         [FieldOffset(0x0000)] public void* Agent; // AgentBannerParty, maybe other Banner agents
         [FieldOffset(0x0008)] public UIModule* UIModule;
-        [FieldOffset(0x0010)] public uint Unk1; // Maybe count or bitfield, but probably not
-        [FieldOffset(0x0014)] public uint Unk2;
+        //[FieldOffset(0x0010)] public uint Unk1; // Maybe count or bitfield, but probably not
+        //[FieldOffset(0x0014)] public uint Unk2;
 
         public const int NumCharacters = 8;
 

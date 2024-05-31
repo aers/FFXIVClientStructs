@@ -9,8 +9,8 @@ public unsafe partial struct PartyMember {
     [FieldOffset(0x2F8)] public float Z;
     [FieldOffset(0x300)] public long ContentId;
     [FieldOffset(0x308)] public uint ObjectId;
-    [FieldOffset(0x30C)] public uint Unk_ObjectId_1;
-    [FieldOffset(0x310)] public uint Unk_ObjectId_2;
+    //[FieldOffset(0x30C)] public uint Unk_ObjectId_1;
+    //[FieldOffset(0x310)] public uint Unk_ObjectId_2;
     [FieldOffset(0x314)] public uint CurrentHP;
     [FieldOffset(0x318)] public uint MaxHP;
     [FieldOffset(0x31C)] public ushort CurrentMP;
@@ -22,14 +22,6 @@ public unsafe partial struct PartyMember {
     [FieldOffset(0x365)] public byte ClassJob;
     [FieldOffset(0x366)] public byte Level;
     [FieldOffset(0x367)] public byte DamageShield;
-
-    // 0x18 byte struct at 0x208
-    [FieldOffset(0x368)] public byte Unk_Struct_208__0;
-    [FieldOffset(0x36C)] public uint Unk_Struct_208__4;
-    [FieldOffset(0x370)] public ushort Unk_Struct_208__8;
-    [FieldOffset(0x374)] public uint Unk_Struct_208__C;
-    [FieldOffset(0x378)] public ushort Unk_Struct_208__10;
-    [FieldOffset(0x37A)] public ushort Unk_Struct_208__14;
 
     [FieldOffset(0x380)] public byte Flags; // 0x01 == set for valid alliance members
 }
