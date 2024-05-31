@@ -8576,6 +8576,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402D4760: ctor
+      0x1402D5150: InitiateReadyCheck
+      0x1402D6E70: EndReadyCheck
   Client::UI::Agent::AgentFieldMarker:
     vtbls:
       - ea: 0x141A8DDB8
