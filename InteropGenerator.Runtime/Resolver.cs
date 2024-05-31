@@ -133,7 +133,7 @@ public sealed class Resolver {
         foreach (var address in Addresses) {
             if (address.Value == 0) {
                 if (_resolverCache!.Cache.TryGetValue(address.CacheKey, out var offset)) {
-                    address.Value = (nuint)(offset + _baseAddress);
+                    address.Value = (nint)(offset + _baseAddress);
                     var firstByte = (byte)address.Bytes[0];
                     if (_preResolveArray[firstByte] != null) {
                         _preResolveArray[firstByte]!.Remove(address);
@@ -189,7 +189,7 @@ public sealed class Resolver {
                             outLocation = outLocation + relOffset + 4 + relativeOffset;
                         }
 
-                        address.Value = (nuint)(_baseAddress + _textSectionOffset + outLocation);
+                        address.Value = _baseAddress + _textSectionOffset + outLocation;
 
                         if (_resolverCache?.Cache.TryAdd(address.CacheKey, outLocation + _textSectionOffset) == true)
                             _cacheChanged = true;

@@ -37,6 +37,6 @@ unsafe {
             Console.WriteLine($"[FAIL] {sig.Name}: {sig.String}");
 
         foreach (Address address in Resolver.GetInstance.Addresses)
-            Console.WriteLine($"{address.Name} {address.Value - (nuint)new IntPtr(bytes):X}");
+            Console.WriteLine($"{address.Name} {address.Value - new IntPtr(bytes):X}");
     }
 }

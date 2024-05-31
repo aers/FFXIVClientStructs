@@ -34,8 +34,8 @@ public static class Program {
     private static unsafe void SetupMemorySpaceFunctions() {
         TestMemorySpace[0] = (nint)Unsafe.AsPointer(ref TestMemorySpace[1]);
         TestMemorySpace[4] = (nint)(delegate* unmanaged[Stdcall]<void*, ulong, ulong, void*>)&MallocImpl;
-        IMemorySpace.Addresses.GetDefaultSpace.Value = (nuint)(delegate* unmanaged[Stdcall]<IMemorySpace*>)&GetDefaultSpaceImpl;
-        IMemorySpace.Addresses.Free.Value = (nuint)(delegate* unmanaged[Stdcall]<void*, ulong, void>)&FreeImpl;
+        IMemorySpace.Addresses.GetDefaultSpace.Value = (nint)(delegate* unmanaged[Stdcall]<IMemorySpace*>)&GetDefaultSpaceImpl;
+        IMemorySpace.Addresses.Free.Value = (nint)(delegate* unmanaged[Stdcall]<void*, ulong, void>)&FreeImpl;
         return;
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]

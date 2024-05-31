@@ -8,8 +8,8 @@ public sealed class Address {
     public readonly string Name;
     public readonly byte[] RelativeFollowOffsets;
     public readonly string String;
-    public nuint Value;
-    public Address(string name, string @string, byte[] relativeFollowOffsets, ulong[] bytes, ulong[] mask, nuint value) {
+    public nint Value;
+    public Address(string name, string @string, byte[] relativeFollowOffsets, ulong[] bytes, ulong[] mask, nint value) {
         Name = name;
         String = @string;
         RelativeFollowOffsets = relativeFollowOffsets;
