@@ -11,28 +11,24 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct FieldMarkerModule {
     public static FieldMarkerModule* Instance() => Framework.Instance()->GetUIModule()->GetFieldMarkerModule();
 
-    [FieldOffset(0x40)] internal FixedSizeArray30<FieldMarkerPreset> _presetArray;
+    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray30<FieldMarkerPreset> _presets;
 }
 
-[StructLayout(LayoutKind.Sequential, Pack = 0, Size = 0x0C)]
+[StructLayout(LayoutKind.Explicit, Size = 0x0C)]
 public struct GamePresetPoint {
-    public int X;
-    public int Y;
-    public int Z;
+    [FieldOffset(0x00)] public int X;
+    [FieldOffset(0x04)] public int Y;
+    [FieldOffset(0x08)] public int Z;
 }
 
-[StructLayout(LayoutKind.Sequential, Pack = 0, Size = 0x68)]
-public struct FieldMarkerPreset {
-    public GamePresetPoint A;
-    public GamePresetPoint B;
-    public GamePresetPoint C;
-    public GamePresetPoint D;
-    public GamePresetPoint One;
-    public GamePresetPoint Two;
-    public GamePresetPoint Three;
-    public GamePresetPoint Four;
-    public byte ActiveMarkers;
-    public byte Reserved;
-    public ushort ContentFinderConditionId;
-    public int Timestamp;
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
+public partial struct FieldMarkerPreset {
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<GamePresetPoint> _markers;
+    [FieldOffset(0x60)] public byte ActiveMarkers;
+    [FieldOffset(0x61)] private byte Reserved;
+    [FieldOffset(0x62)] public ushort ContentFinderConditionId;
+    [FieldOffset(0x64)] public uint TimeStamp;
+
+    public bool IsMarkerActive(int index) => (ActiveMarkers & 1 << index) != 0;
 }
