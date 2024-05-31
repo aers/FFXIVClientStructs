@@ -59,7 +59,7 @@ public unsafe partial struct ILayoutInstance {
         [FieldOffset(4)] public uint InstanceKey;
     }
 
-    [FieldOffset(0x08)] public LayoutLayer* Layer;
+    [FieldOffset(0x08)] public Layer.LayerManager* Layer;
     [FieldOffset(0x10)] public LayoutManager* Layout;
     [FieldOffset(0x18)] public Identifier Id;
     [FieldOffset(0x20)] public uint SubId; // for instances that are created as part of prefab; high byte is key for nesting level 1 and so on - max 4 nesting levels supported
@@ -84,7 +84,7 @@ public unsafe partial struct ILayoutInstance {
     public partial void SetProperties(FileLayerGroupInstance* data);
 
     [VirtualFunction(5)]
-    public partial void SetLayer(LayoutLayer* layer);
+    public partial void SetLayer(Layer.LayerManager* layer);
 
     [VirtualFunction(6)]
     public partial int GetSizeOf();

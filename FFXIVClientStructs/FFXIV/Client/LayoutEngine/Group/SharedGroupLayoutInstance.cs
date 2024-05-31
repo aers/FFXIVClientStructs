@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
-namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
+namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 
 /// <summary>
 /// A set of instances used together. Can be nested up to 4 levels deep.

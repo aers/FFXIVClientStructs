@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
+namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 /// <summary>
 /// Layer is a flat list of instances that are always loaded together.
@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 [GenerateInterop]
 [Inherits<IManagerBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct LayoutLayer {
+public unsafe partial struct LayerManager {
     [FieldOffset(0x18)] public ushort LayerGroupId;
     [FieldOffset(0x1A)] public ushort FestivalId;
     [FieldOffset(0x1C)] public ushort FestivalSubId;

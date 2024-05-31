@@ -42,10 +42,10 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x1A0)] public StringTable ResourcePaths;
     [FieldOffset(0x1C0)] public ResourceHandle* LvbResourceHandle;
     [FieldOffset(0x1C8)] public StdVector<Pointer<ResourceHandle>> LayerGroupResourceHandles;
-    [FieldOffset(0x1F8)] public StdMap<uint, Pointer<LayoutTerrain>> Terrains;
-    [FieldOffset(0x208)] public StdMap<ushort, Pointer<LayoutLayer>> Layers;
-    [FieldOffset(0x218)] public StdVector<Pointer<LayoutLayer>> FestivalLayersToRemove;
-    [FieldOffset(0x230)] public StdVector<Pointer<LayoutLayer>> FestivalLayersToAdd;
+    [FieldOffset(0x1F8)] public StdMap<uint, Pointer<Terrain.TerrainManager>> Terrains;
+    [FieldOffset(0x208)] public StdMap<ushort, Pointer<Layer.LayerManager>> Layers;
+    [FieldOffset(0x218)] public StdVector<Pointer<Layer.LayerManager>> FestivalLayersToRemove;
+    [FieldOffset(0x230)] public StdVector<Pointer<Layer.LayerManager>> FestivalLayersToAdd;
     [FieldOffset(0x248)] public StdMap<InstanceType, Pointer<StdMap<ulong, Pointer<ILayoutInstance>>>> InstancesByType; // key in nested map is InstanceId << 32 | SubId
     [FieldOffset(0x258)] public StdMap<uint, Pointer<RefCountedString>> CrcToPath;
     [FieldOffset(0x268)] public StdMap<AnalyticShapeDataKey, AnalyticShapeData> CrcToAnalyticShapeData; // note: value is aligned to 16 bytes, so key has tons of padding
