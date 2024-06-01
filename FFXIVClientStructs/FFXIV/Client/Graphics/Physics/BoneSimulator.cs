@@ -25,8 +25,8 @@ public unsafe struct BoneSimulator {
     [FieldOffset(0x30)] public Vector3 Gravity;
     [FieldOffset(0x40)] public Vector3 Wind;
     [FieldOffset(0x54)] public float Spring; // Default is ~60, intense jitter happens above that value. Lesser values remove the spring in the bone.
-    [FieldOffset(0xF6)] public bool Start; // Flag that is set to true when the simulator starts, and is quickly reset
-    [FieldOffset(0xF7)] public bool Stop; // Same as Start, but when the simulator is requested to stop
-    [FieldOffset(0xF8)] public bool Reset; // When set to true, resets the bone simulator
+    [FieldOffset(0xF6)] public bool IsStarted; // Flag that is set to true when the simulator starts, and is quickly reset
+    [FieldOffset(0xF7)] public bool IsStopped; // Same as Start, but when the simulator is requested to stop
+    [FieldOffset(0xF8)] public bool IsReset; // When set to true, resets the bone simulator
 
 }
