@@ -13,9 +13,9 @@ namespace FFXIVClientStructs.STD;
 public unsafe struct StdString
     : IStdBasicString<byte>
         , IStaticNativeObjectOperation<StdString> {
-    [FieldOffset(0x0)] public StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default> BasicString;
-    [FieldOffset(0x0)] public byte* BufferPtr;
-    [FieldOffset(0x0)] public fixed byte Buffer[16];
+    [FieldOffset(0x0), CExporterUnion("Buffer")] public StdBasicString<byte, IStaticEncoding.System, IStaticMemorySpace.Default> BasicString;
+    [FieldOffset(0x0), CExporterUnion("Buffer")] public byte* BufferPtr;
+    [FieldOffset(0x0), CExporterUnion("Buffer")] public fixed byte Buffer[16];
     /// <summary>
     /// This string's length, as a <see cref="ulong"/>.
     /// </summary>
