@@ -7,17 +7,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Inherits<AgentExplorationResultInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AgentAirshipExplorationResult {
-    [FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
-}
+public unsafe partial struct AgentAirshipExplorationResult;
 
 [Agent(AgentId.SubmersibleExplorationResult)]
 [GenerateInterop]
 [Inherits<AgentExplorationResultInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AgentSubmersibleExplorationResult {
-    [FieldOffset(0x00)] public AgentExplorationResultInterface Interface;
-}
+public unsafe partial struct AgentSubmersibleExplorationResult;
 
 [GenerateInterop(isInherited: true)]
 [Inherits<AgentInterface>]

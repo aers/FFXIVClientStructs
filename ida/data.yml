@@ -4971,6 +4971,7 @@ classes:
       0x1404C5CD0: ctor_FromState
       0x1404C5D20: ctor
       0x1404C5D00: Finalize
+      0x1404C6460: Yield
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x141A549B8
