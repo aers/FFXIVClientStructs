@@ -1,7 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+// ExtendArrayData 1 stores pointers to AgentMap.MapMarkers
 [GenerateInterop, Inherits<AtkArrayData>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct ExtendArrayData {
-    [FieldOffset(0x20)] public void** DataArray; // as far as I'm aware this can contain literally any data type they want, yay
+    [FieldOffset(0x20)] public void** DataArray;
 }
