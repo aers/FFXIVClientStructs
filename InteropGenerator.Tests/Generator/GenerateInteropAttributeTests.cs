@@ -39,6 +39,10 @@ public class GeneralInteropAttributeTests {
                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <TestStruct*, void> TestFunction;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
+                                  public static partial class Delegates
+                                  {
+                                      public delegate void TestFunction();
+                                  }
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                   public partial void TestFunction() => VirtualTable->TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
                               }
@@ -88,6 +92,10 @@ public class GeneralInteropAttributeTests {
                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <TestStruct*, void> TestFunction;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
+                                  public static partial class Delegates
+                                  {
+                                      public delegate void TestFunction();
+                                  }
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                   public partial void TestFunction() => VirtualTable->TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
                               }
@@ -125,6 +133,10 @@ public class GeneralInteropAttributeTests {
                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <InnerStruct*, void> TestFunction;
                                       }
                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public InnerStructVirtualTable* VirtualTable;
+                                      public static partial class Delegates
+                                      {
+                                          public delegate void TestFunction();
+                                      }
                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                       public partial void TestFunction() => VirtualTable->TestFunction((InnerStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
                                   }

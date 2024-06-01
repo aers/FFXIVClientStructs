@@ -86,6 +86,10 @@ public sealed partial class InteropGenerator {
         // add entries to the main virtual table for the primary inheritance chain
         if (hasPrimaryVirtualFunctions)
             RenderInheritedVirtualTable(structInfo, resolvedInheritanceOrder, writer);
+        
+        // render delegates for primary inherited virtual table functions
+        if (hasPrimaryVirtualFunctions)
+            RenderInheritedDelegateTypes(structInfo, resolvedInheritanceOrder, writer);
 
         // inherited virtual function bodies
         foreach ((StructInfo inheritedStruct, string path, int offset) in resolvedInheritanceOrder) {
@@ -120,7 +124,6 @@ public sealed partial class InteropGenerator {
 
         token.ThrowIfCancellationRequested();
     }
-
     private static int ResolveInheritanceOrder(StructInfo structInfo, string path, int absoluteOffset, int curParentOffset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, ref bool hasPrimaryVirtualFunctions) {
         var processed = 0;
         foreach (InheritanceInfo inheritanceInfo in structInfo.InheritedStructs) {
@@ -182,6 +185,20 @@ public sealed partial class InteropGenerator {
         // if the only virtual functions were inherited we need to write the vtable accessor
         if (!structInfo.HasVirtualTable()) {
             writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
+        }
+    }
+    
+    private static void RenderInheritedDelegateTypes(StructInfo structInfo, ImmutableArray<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, IndentedTextWriter writer) {
+        writer.WriteLine($"public static partial class Delegates");
+        using (writer.WriteBlock()) {
+            foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
+                // only inherited structs at offset 0 are the primary inheritance chain that make up the main virtual table
+                if (offset != 0)
+                    continue;
+                foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
+                    RenderDelegateTypeForMethod(structInfo.Name, virtualFunctionInfo.MethodInfo, writer);
+                }
+            }
         }
     }
 

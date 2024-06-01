@@ -10,6 +10,7 @@ internal class CExporterUnionAttribute : Attribute {
     /// Creates a struct union with the given union and fields.
     /// </summary>
     /// <param name="union">The union to use for the union and sub struct</param>
+    /// <param name="struct"></param>
     /// <param name="isStruct"></param>
     public CExporterUnionAttribute(string union, string @struct = "", bool isStruct = false) {
         if (isStruct && string.IsNullOrEmpty(@struct)) throw new ArgumentException("Struct name must be provided if IsStruct is true");

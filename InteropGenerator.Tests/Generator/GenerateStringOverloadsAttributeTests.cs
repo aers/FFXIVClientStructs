@@ -203,6 +203,10 @@ public class GenerateStringOverloadsAttributeTests {
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(int argOne, byte* stringArg);
+                                  }
                                   public unsafe static class MemberFunctionPointers
                                   {
                                       public static delegate* unmanaged <TestStruct*, int, byte*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, byte*, int>) TestStruct.Addresses.TestFunction.Value;

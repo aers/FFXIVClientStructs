@@ -35,6 +35,12 @@ public sealed partial class InteropGenerator {
             RenderVirtualTable(structInfo, writer);
             token.ThrowIfCancellationRequested();
         }
+        
+        // write delegate types
+        if (!structInfo.MemberFunctions.IsEmpty || !structInfo.VirtualFunctions.IsEmpty) {
+            RenderDelegateTypes(structInfo, writer);
+            token.ThrowIfCancellationRequested();
+        }
 
         // write member function pointers & method bodies
         if (!structInfo.MemberFunctions.IsEmpty) {
@@ -132,6 +138,35 @@ public sealed partial class InteropGenerator {
         }
     }
 
+    private static void RenderDelegateTypes(StructInfo structInfo, IndentedTextWriter writer) {
+        writer.WriteLine($"public static partial class Delegates");
+        using (writer.WriteBlock()) {
+            foreach (MemberFunctionInfo memberFunctionInfo in structInfo.MemberFunctions) {
+                RenderDelegateTypeForMethod(structInfo.Name, memberFunctionInfo.MethodInfo, writer);
+            }
+            foreach (VirtualFunctionInfo virtualFunctionInfo in structInfo.VirtualFunctions) {
+                RenderDelegateTypeForMethod(structInfo.Name, virtualFunctionInfo.MethodInfo, writer);
+            }
+        }
+    }
+
+    private static void RenderDelegateTypeForMethod(string structType, MethodInfo methodInfo, IndentedTextWriter writer) {
+        // special case marshalled bool return for assemblies without DisableRuntimeMarshalling
+        if (methodInfo.ReturnType == "bool") {
+            writer.WriteLine("[return:global::System.Runtime.InteropServices.MarshalAsAttribute(global::System.Runtime.InteropServices.UnmanagedType.U1)]");
+        }
+        string paramTypesAndNames;
+        if (methodInfo.IsStatic) {
+            paramTypesAndNames = $"{structType}* thisPtr";
+            if (!methodInfo.Parameters.IsEmpty)
+                paramTypesAndNames += $", {methodInfo.GetParameterTypesAndNamesString()}";
+        } else {
+            paramTypesAndNames = methodInfo.GetParameterTypesAndNamesString();
+        }
+        string methodModifiers = methodInfo.Modifiers.Replace(" partial", string.Empty).Replace(" static", string.Empty);
+        writer.WriteLine($"{methodModifiers} delegate {methodInfo.ReturnType} {methodInfo.Name}({paramTypesAndNames});");
+    }
+
     private static void RenderMemberFunctions(StructInfo structInfo, IndentedTextWriter writer) {
         // pointers to functions
         writer.WriteLine("public unsafe static class MemberFunctionPointers");
@@ -203,10 +238,10 @@ public sealed partial class InteropGenerator {
             ImmutableArray<string> paramsToOverload = [.. stringOverloadInfo.MethodInfo.Parameters.Where(p => p.Type == "byte*" && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
 
             // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
-            string paramNames = stringOverloadInfo.MethodInfo.GetStringOverloadParameterNamesString(paramsToOverload);
+            string paramNames = stringOverloadInfo.MethodInfo.GetParameterNamesStringForStringOverload(paramsToOverload);
 
             // "string" overload
-            writer.WriteLine(stringOverloadInfo.MethodInfo.GetStringOverloadDeclarationString("string", paramsToOverload));
+            writer.WriteLine(stringOverloadInfo.MethodInfo.GetDeclarationStringForStringOverload("string", paramsToOverload));
             using (writer.WriteBlock()) {
                 foreach (string overloadParamName in paramsToOverload) {
                     // allocate space for string, supporting UTF8 characters
@@ -232,7 +267,7 @@ public sealed partial class InteropGenerator {
                 }
             }
             // "ReadOnlySpan<byte>" overload
-            writer.WriteLine(stringOverloadInfo.MethodInfo.GetStringOverloadDeclarationString("ReadOnlySpan<byte>", paramsToOverload));
+            writer.WriteLine(stringOverloadInfo.MethodInfo.GetDeclarationStringForStringOverload("ReadOnlySpan<byte>", paramsToOverload));
             using (writer.WriteBlock()) {
                 foreach (string overloadParamName in paramsToOverload) {
                     writer.WriteLine($"fixed (byte* {overloadParamName}Ptr = {overloadParamName})");

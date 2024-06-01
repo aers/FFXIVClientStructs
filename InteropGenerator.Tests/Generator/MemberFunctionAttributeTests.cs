@@ -24,6 +24,10 @@ public class MemberFunctionAttributeTests {
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                  }
                                   public unsafe static class MemberFunctionPointers
                                   {
                                       public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
@@ -63,6 +67,10 @@ public class MemberFunctionAttributeTests {
                                   public static class Addresses
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {4}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                  }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -104,6 +112,10 @@ public class MemberFunctionAttributeTests {
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {4, 10}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                  }
                                   public unsafe static class MemberFunctionPointers
                                   {
                                       public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
@@ -143,6 +155,10 @@ public class MemberFunctionAttributeTests {
                                   public static class Addresses
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "E8 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {1}, new ulong[] {0x00000000DDCCBBE8, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                  }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -184,6 +200,10 @@ public class MemberFunctionAttributeTests {
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "E9 BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {1}, new ulong[] {0x00000000DDCCBBE9, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                  }
                                   public unsafe static class MemberFunctionPointers
                                   {
                                       public static delegate* unmanaged <TestStruct*, int, void*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, int>) TestStruct.Addresses.TestFunction.Value;
@@ -224,6 +244,10 @@ public class MemberFunctionAttributeTests {
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate void TestFunction(int argOne, void* argTwo);
+                                  }
                                   public unsafe static class MemberFunctionPointers
                                   {
                                       public static delegate* unmanaged <TestStruct*, int, void*, void> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, void>) TestStruct.Addresses.TestFunction.Value;
@@ -263,6 +287,10 @@ public class MemberFunctionAttributeTests {
                                   public static class Addresses
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                  }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -307,6 +335,11 @@ public class MemberFunctionAttributeTests {
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction2 = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction2", "?? ?? AA BB CC DD EE ?? ?? EE CC DD BB AA FF ?? ?? EE ?? ?? ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00EEDDCCBBAA0000, 0x00FFAABBDDCCEE00, 0x000000000000EE00}, new ulong[] {0x00FFFFFFFFFF0000, 0x00FFFFFFFFFFFF00, 0x000000000000FF00}, 0);
+                                  }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction2(int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -357,6 +390,10 @@ public class MemberFunctionAttributeTests {
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                   }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(ref int argOne, out int argTwo);
+                                  }
                                   public unsafe static class MemberFunctionPointers
                                   {
                                       public static delegate* unmanaged <TestStruct*, ref int, out int, int> TestFunction => (delegate* unmanaged <TestStruct*, ref int, out int, int>) TestStruct.Addresses.TestFunction.Value;
@@ -400,6 +437,10 @@ public class MemberFunctionAttributeTests {
                                   public static class Addresses
                                   {
                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestNamespace.InnerNamespace.TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                  }
+                                  public static partial class Delegates
+                                  {
+                                      public delegate int TestFunction(int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -446,6 +487,10 @@ public class MemberFunctionAttributeTests {
                                       {
                                           public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.InnerStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                       }
+                                      public static partial class Delegates
+                                      {
+                                          public delegate int TestFunction(int argOne, void* argTwo);
+                                      }
                                       public unsafe static class MemberFunctionPointers
                                       {
                                           public static delegate* unmanaged <InnerStruct*, int, void*, int> TestFunction => (delegate* unmanaged <InnerStruct*, int, void*, int>) InnerStruct.Addresses.TestFunction.Value;
@@ -466,5 +511,50 @@ public class MemberFunctionAttributeTests {
             code,
             ("TestStruct.InnerStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetInitializerSource(string.Empty, "TestStruct.InnerStruct", ["TestFunction"]));
+    }
+    
+    [Fact]
+    public async Task GenerateMemberFunctionBoolReturnDelegate() {
+        const string code = """
+                            [GenerateInterop]
+                            public unsafe partial struct TestStruct
+                            {
+                                [MemberFunction("AA BB CC DD ?? ?? ?? ?? AA BB ?? DD")]
+                                public partial bool TestFunction(int argOne, void * argTwo);
+                            }
+                            """;
+
+        const string result = """
+                              // <auto-generated/>
+                              unsafe partial struct TestStruct
+                              {
+                                  public static class Addresses
+                                  {
+                                      public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                  }
+                                  public static partial class Delegates
+                                  {
+                                      [return:global::System.Runtime.InteropServices.MarshalAsAttribute(global::System.Runtime.InteropServices.UnmanagedType.U1)]
+                                      public delegate bool TestFunction(int argOne, void* argTwo);
+                                  }
+                                  public unsafe static class MemberFunctionPointers
+                                  {
+                                      public static delegate* unmanaged <TestStruct*, int, void*, bool> TestFunction => (delegate* unmanaged <TestStruct*, int, void*, bool>) TestStruct.Addresses.TestFunction.Value;
+                                  }
+                                  public partial bool TestFunction(int argOne, void* argTwo)
+                                  {
+                                      if (MemberFunctionPointers.TestFunction is null)
+                                      {
+                                          InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("TestStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD");
+                                      }
+                                      return MemberFunctionPointers.TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
+                                  }
+                              }
+                              """;
+
+        await VerifyIG.VerifyGeneratorAsync(
+            code,
+            ("TestStruct.InteropGenerator.g.cs", result),
+            SourceGeneration.GetInitializerSource(string.Empty, "TestStruct", ["TestFunction"]));
     }
 }

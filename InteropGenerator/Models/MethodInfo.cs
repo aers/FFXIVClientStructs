@@ -16,7 +16,15 @@ internal sealed record MethodInfo(
 
     public string GetDeclarationStringWithoutPartial() => $"{Modifiers.Replace(" partial", string.Empty)} {ReturnType} {Name}({GetParameterTypesAndNamesStringWithDefaults()}){GenericConstraints}";
 
-    public string GetStringOverloadDeclarationString(string typeReplacement, ImmutableArray<string> paramsToOverload) {
+    public string GetDeclarationStringForDelegateType(string structType) {
+        var paramTypesAndNames = $"{structType}* thisPtr";
+        if (!Parameters.IsEmpty) {
+            paramTypesAndNames += $", {GetParameterTypesAndNamesString()}";
+        }
+        return $"{Modifiers.Replace(" partial", string.Empty)} delegate {ReturnType} {Name}({paramTypesAndNames});";
+    }
+    
+    public string GetDeclarationStringForStringOverload(string typeReplacement, ImmutableArray<string> paramsToOverload) {
         string parameterTypesAndNamesString = string.Join(", ",
             Parameters.Select(p => paramsToOverload.Contains(p.Name) ? $"{p.RefKind.GetParameterPrefix()}{typeReplacement} {p.Name}" : $"{p.RefKind.GetParameterPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));
 
@@ -30,10 +38,10 @@ internal sealed record MethodInfo(
 
     public string GetParameterNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Name}"));
 
-    public string GetStringOverloadParameterNamesString(ImmutableArray<string> paramsToOverload) =>
+    public string GetParameterNamesStringForStringOverload(ImmutableArray<string> paramsToOverload) =>
         string.Join(", ", Parameters.Select(p => paramsToOverload.Contains(p.Name) ? $"{p.RefKind.GetParameterPrefix()}{p.Name}Ptr" : $"{p.RefKind.GetParameterPrefix()}{p.Name}"));
 
-    private string GetParameterTypesAndNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type} {p.Name}"));
+    public string GetParameterTypesAndNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type} {p.Name}"));
 
     private string GetParameterTypesAndNamesStringWithDefaults() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetParameterPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));
 

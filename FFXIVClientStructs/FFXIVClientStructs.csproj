@@ -9,7 +9,11 @@
 
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <NoWarn>CS1591;IDE0251</NoWarn>
+    <!-- CS1591: Missing XML comment for publicly visible type or member
+         IDE0251: Member can be made readonly
+         CS8981: The type name only contains lower-cased ascii characters
+    -->
+    <NoWarn>CS1591;IDE0251;CS8981</NoWarn>
 
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>..\bin\$(Configuration)\</OutputPath>
