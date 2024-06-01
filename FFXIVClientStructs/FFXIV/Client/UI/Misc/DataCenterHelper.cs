@@ -13,11 +13,11 @@ public unsafe partial struct DataCenterHelper {
     [FieldOffset(0x08)] public StdVector<DataCenter> DataCenters;
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x22)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x26)]
     public partial struct DataCenter {
-        [FieldOffset(0x00)] public ushort Region;
-        /// <remarks> RowId of sheet WorldDCGroupType </remarks>
-        [FieldOffset(0x02)] public uint RowId;
+        [FieldOffset(0x00)] public byte Region;
+        [FieldOffset(0x02)] public ushort WorldDCGroupType;
+        [FieldOffset(0x04)] public ushort Index;
         [FieldOffset(0x06), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     }
 }
