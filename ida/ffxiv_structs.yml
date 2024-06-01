@@ -3192,8 +3192,8 @@ enums:
     QuantizedCompressedAnimation: 4
     PredictiveCompressedAnimation: 5
     ReferencePoseAnimation: 6
-- type: Helper::IRedBlackTree::NodeColor
-  name: NodeColor
+- type: Helper::RedBlackTreeNodeColor
+  name: RedBlackTreeNodeColor
   underlying: byte
   namespace: Helper
   values:
@@ -27287,7 +27287,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, unsigned int>, unsigned int, Helper::PairKeyExtractor<unsigned int, unsigned int>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -27318,7 +27318,7 @@ structs:
   - type: Helper::RedBlackTree::Node<Client::Game::Object::GameObject*, Client::Game::Object::GameObject*, Helper::DefaultKeyExtractor<Client::Game::Object::GameObject*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48228,7 +48228,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, __int64>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48259,7 +48259,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48290,7 +48290,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Component::Shell::ShellCommandInterface*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Component::Shell::ShellCommandInterface*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48321,7 +48321,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48352,7 +48352,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>, Component::GUI::AtkResNode*, Helper::PairKeyExtractor<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48383,7 +48383,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48414,7 +48414,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>, unsigned __int16, Helper::PairKeyExtractor<unsigned __int16, Client::UI::Misc::WorldHelper::World>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48445,7 +48445,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<byte*, __int16>, byte*, Helper::PairKeyExtractor<byte*, __int16>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48476,7 +48476,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Animation::Mapper::hkaSkeletonMapper*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Animation::Mapper::hkaSkeletonMapper*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48507,7 +48507,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::Terrain::TerrainManager*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::Terrain::TerrainManager*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48538,7 +48538,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>, unsigned __int16, Helper::PairKeyExtractor<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48569,7 +48569,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<Client::LayoutEngine::InstanceType, StdMap<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>*>, Client::LayoutEngine::InstanceType, Helper::PairKeyExtractor<Client::LayoutEngine::InstanceType, StdMap<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48600,7 +48600,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::RefCountedString*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::RefCountedString*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48631,7 +48631,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::LayoutManager::Filter*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::LayoutManager::Filter*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48662,7 +48662,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::LayoutEngine::LayoutManager*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::LayoutManager*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48693,7 +48693,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, byte*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, byte*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48724,7 +48724,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::ILayoutInstance*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::ILayoutInstance*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48755,7 +48755,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48786,7 +48786,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::CurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::CurrencyItem>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48817,7 +48817,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48848,7 +48848,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, StdPair<unsigned int, unsigned int>>, unsigned int, Helper::PairKeyExtractor<unsigned int, StdPair<unsigned int, unsigned int>>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48879,7 +48879,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, int>, unsigned int, Helper::PairKeyExtractor<unsigned int, int>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48910,7 +48910,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::EventHandler*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::EventHandler*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48941,7 +48941,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<__int64, Client::Game::Event::LuaActor>, __int64, Helper::PairKeyExtractor<__int64, Client::Game::Event::LuaActor>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -48972,7 +48972,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>, unsigned int, Helper::PairKeyExtractor<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -49049,7 +49049,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -49080,7 +49080,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -102701,7 +102701,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Client::LayoutEngine::AnalyticShapeData>, Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Helper::PairKeyExtractor<Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Client::LayoutEngine::AnalyticShapeData>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
@@ -102732,7 +102732,7 @@ structs:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned __int16, StdPair<__int64, __int64>>, unsigned __int16, Helper::PairKeyExtractor<unsigned __int16, StdPair<__int64, __int64>>>*
     name: _Right
     offset: 16
-  - type: Helper::IRedBlackTree::NodeColor
+  - type: Helper::RedBlackTreeNodeColor
     name: _Color
     offset: 24
   - type: byte
