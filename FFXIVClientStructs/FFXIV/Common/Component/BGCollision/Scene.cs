@@ -20,7 +20,8 @@ public unsafe partial struct SceneManager {
     public NodeEnumerator<SceneWrapper> Scenes => new(&FirstScene->Node);
 }
 
-[GenerateInterop, Inherits<Node>]
+[GenerateInterop]
+[Inherits<Node>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct SceneWrapper {
     [FieldOffset(0x20)] public SceneManager* Manager;

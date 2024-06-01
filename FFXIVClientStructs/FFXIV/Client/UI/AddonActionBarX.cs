@@ -3,7 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("_ActionBar01", "_ActionBar02", "_ActionBar03", "_ActionBar04", "_ActionBar05", "_ActionBar06", "_ActionBar07", "_ActionBar08", "_ActionBar09")]
-[GenerateInterop(isInherited: true), Inherits<AddonActionBarBase>]
+[GenerateInterop(isInherited: true)]
+[Inherits<AddonActionBarBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x298)]
 public unsafe partial struct AddonActionBarX {
     [FieldOffset(0x248)] public AtkTextNode* HotbarNumIconTextNode;

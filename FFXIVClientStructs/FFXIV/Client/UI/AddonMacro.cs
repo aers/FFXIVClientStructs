@@ -8,7 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // size 0x30B0
 
 [Addon("Macro")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30B0)]
 public unsafe partial struct AddonMacro {
     [FieldOffset(0x2B8), FixedSizeArray] internal FixedSizeArray100<Pointer<AtkComponentDragDrop>> _dragDropComponent;

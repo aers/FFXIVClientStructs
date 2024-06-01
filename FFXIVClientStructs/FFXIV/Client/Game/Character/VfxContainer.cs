@@ -2,7 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
-[GenerateInterop, Inherits<ContainerInterface>]
+[GenerateInterop]
+[Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
 public unsafe partial struct VfxContainer {
     [FieldOffset(0x18)] public VfxData* VfxData;

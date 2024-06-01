@@ -3,7 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("ActionCrossEditor")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x250)]
 public unsafe partial struct AddonActionCrossEditor {
     [FieldOffset(0x220)] public AtkTextNode* HeadingText;

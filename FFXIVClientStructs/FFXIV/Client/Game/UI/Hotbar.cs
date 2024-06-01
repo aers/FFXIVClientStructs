@@ -2,7 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-[GenerateInterop, Inherits<RaptureHotbarModule.ClearCallback>]
+[GenerateInterop]
+[Inherits<RaptureHotbarModule.ClearCallback>]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83", 3)]
 public unsafe partial struct Hotbar {

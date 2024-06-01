@@ -4,7 +4,8 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Common.Base.System.IO.IStream;
 
-[GenerateInterop, Inherits<hkReferencedObject>]
+[GenerateInterop]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct hkIstream {
     [FieldOffset(0x10)] public hkRefPtr<hkStreamReader> StreamReader;

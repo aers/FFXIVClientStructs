@@ -3,7 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("InventoryExpansion")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x330)]
 public partial struct AddonInventoryExpansion {
     [FieldOffset(0x280)] public AtkAddonControl AddonControl;

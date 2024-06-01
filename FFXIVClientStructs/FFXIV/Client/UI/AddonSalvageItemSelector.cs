@@ -5,7 +5,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("SalvageItemSelector")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1CF8)]
 public unsafe partial struct AddonSalvageItemSelector {
     [FieldOffset(0x0228)] public AgentSalvage.SalvageItemCategory SelectedCategory;

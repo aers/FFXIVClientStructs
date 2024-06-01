@@ -2,7 +2,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
-[GenerateInterop(isInherited: true), Inherits<AtkUnitBase>]
+[GenerateInterop(isInherited: true)]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]
 public unsafe partial struct AddonActionBarBase {
     [FieldOffset(0x220)] public StdVector<ActionBarSlot> ActionBarSlotVector;

@@ -8,7 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // ctor "40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 33 D2 48 8D 8B ?? ?? ?? ?? 48 89 03 41 B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 D2"
 
 [Addon("Teleport")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3A0)]
 public unsafe partial struct AddonTeleport {
     [FieldOffset(0x220)] public AtkComponentRadioButton* TabHeaderAll;

@@ -5,7 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonContextIconMenu
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
 public unsafe partial struct AddonContextIconMenu {
     [FieldOffset(0x220)] public int EntryCount;

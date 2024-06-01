@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[GenerateInterop, Inherits<AtkComponentBase>]
+[GenerateInterop]
+[Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 public unsafe partial struct AtkComponentPortrait {
     [FieldOffset(0xC0)] public AtkImageNode* CharacterImageNode;

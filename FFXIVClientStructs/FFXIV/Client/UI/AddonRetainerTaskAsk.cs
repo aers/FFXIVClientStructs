@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("RetainerTaskAsk")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 83 50 02 00 00 48 89 93 20 02 00 00", 3)]
 public unsafe partial struct AddonRetainerTaskAsk {

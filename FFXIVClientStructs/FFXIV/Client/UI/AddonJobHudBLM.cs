@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// BLM - Elemental Gauge
 /// </summary>
 [Addon("JobHudBLM0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4E0)]
 public unsafe partial struct AddonJobHudBLM0 {
     [FieldOffset(0x260)] public ElementalGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudBLM0 {
     [FieldOffset(0x2D0)] public ElementalGauge GaugeStandard;
     [FieldOffset(0x438)] public ElementalGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct ElementalGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray5<byte> _prerequisites;
@@ -31,7 +33,8 @@ public unsafe partial struct AddonJobHudBLM0 {
         [FieldOffset(0x34)] public bool ParadoxReady;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x168)]
     public partial struct ElementalGauge {
         [FieldOffset(0x010)] public AtkResNode* Container;
@@ -84,7 +87,8 @@ public unsafe partial struct AddonJobHudBLM0 {
         [FieldOffset(0x158)] public AtkResNode* ParadoxGemBase;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
     public partial struct ElementalGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

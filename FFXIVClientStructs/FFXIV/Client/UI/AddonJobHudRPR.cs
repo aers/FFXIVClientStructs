@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// RPR - Soul Gauge
 /// </summary>
 [Addon("JobHudRRP0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3F8)]
 public unsafe partial struct AddonJobHudRRP0 {
     [FieldOffset(0x260)] public SoulGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudRRP0 {
     [FieldOffset(0x2B0)] public SoulGauge GaugeStandard;
     [FieldOffset(0x3A8)] public SoulGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct SoulGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -28,7 +30,8 @@ public unsafe partial struct AddonJobHudRRP0 {
         [FieldOffset(0x24)] public bool Enshrouded;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
     public partial struct SoulGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -49,7 +52,8 @@ public unsafe partial struct AddonJobHudRRP0 {
         [FieldOffset(0xE8)] public AtkComponentBase* ShroudTextContainer;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public partial struct SoulGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -66,7 +70,8 @@ public unsafe partial struct AddonJobHudRRP0 {
 /// RPR - Death Gauge
 /// </summary>
 [Addon("JobHudRRP1")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x490)]
 public unsafe partial struct AddonJobHudRRP1 {
     [FieldOffset(0x260)] public DeathGaugeData DataPrevious;
@@ -74,7 +79,8 @@ public unsafe partial struct AddonJobHudRRP1 {
     [FieldOffset(0x2A0)] public DeathGauge GaugeStandard;
     [FieldOffset(0x3B8)] public DeathGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct DeathGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -83,7 +89,8 @@ public unsafe partial struct AddonJobHudRRP1 {
         [FieldOffset(0x14)] public int EnshroudTimer;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x118)]
     public partial struct DeathGauge {
         [FieldOffset(0x010)] public AtkResNode* Container;
@@ -101,7 +108,8 @@ public unsafe partial struct AddonJobHudRRP1 {
         }
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct DeathGaugeSimple {
         [FieldOffset(0x010)] public AtkResNode* Container;

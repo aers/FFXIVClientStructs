@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 /// Each collider is added to the appropriate quad-tree node, which is then used to speed up raycasts.
 /// Nodes are laid in a contiguous array, level by level, in Morton order swizzle per level.
 /// </summary>
-[GenerateInterop, Inherits<Object>]
+[GenerateInterop]
+[Inherits<Object>]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct Quadtree {
     [FieldOffset(0x08)] public float MinX;
@@ -51,7 +52,8 @@ public unsafe partial struct Quadtree {
 }
 
 // QuadtreeNode is derived from Node, but has no extra members - it's used to have two links (in scene object list and quadtree node object list) in colliders
-[GenerateInterop(isInherited: true), Inherits<Node>]
+[GenerateInterop(isInherited: true)]
+[Inherits<Node>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct QuadtreeNode {
     [CExportIgnore]

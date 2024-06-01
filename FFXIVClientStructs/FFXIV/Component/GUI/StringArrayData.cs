@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[GenerateInterop, Inherits<AtkArrayData>]
+[GenerateInterop]
+[Inherits<AtkArrayData>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct StringArrayData {
     [FieldOffset(0x20)] public byte** StringArray;

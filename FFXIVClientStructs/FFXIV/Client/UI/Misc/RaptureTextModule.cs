@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureTextModule
 // ctor "E8 ?? ?? ?? ?? 48 8D 9F ?? ?? ?? ?? 4D 8B C5"
-[GenerateInterop, Inherits<TextModule>, Inherits<TextChecker.ExecNonMacroFunc>, Inherits<ExcelLanguageEvent>]
+[GenerateInterop]
+[Inherits<TextModule>, Inherits<TextChecker.ExecNonMacroFunc>, Inherits<ExcelLanguageEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE60)]
 public unsafe partial struct RaptureTextModule {
     public static RaptureTextModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureTextModule();

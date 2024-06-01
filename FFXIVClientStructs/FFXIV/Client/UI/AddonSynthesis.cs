@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonSynthesis
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x8A8)]
 public unsafe partial struct AddonSynthesis {
     [FieldOffset(0x238)] public AtkComponentButton* QuitButton;

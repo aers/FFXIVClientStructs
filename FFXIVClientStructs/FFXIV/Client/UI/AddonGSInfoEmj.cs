@@ -3,7 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("GSInfoGeneral")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x250)]
 public unsafe partial struct AddonGSInfoGeneral {
     [FieldOffset(0x220)] public AtkComponentBase* MGPAmountDisplay;

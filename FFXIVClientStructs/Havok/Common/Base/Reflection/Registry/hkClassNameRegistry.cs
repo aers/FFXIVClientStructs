@@ -3,7 +3,8 @@ using FFXIVClientStructs.Havok.Common.Base.Object;
 namespace FFXIVClientStructs.Havok.Common.Base.Reflection.Registry;
 
 // NOTE: this is actually a hkStaticClassNameRegistry : hkClassNameRegistry, which the game uses
-[GenerateInterop, Inherits<hkReferencedObject>]
+[GenerateInterop]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct hkClassNameRegistry {
     [FieldOffset(0x10)] public byte* Name;

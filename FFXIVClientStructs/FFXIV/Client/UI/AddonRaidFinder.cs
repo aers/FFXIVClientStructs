@@ -4,7 +4,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("RaidFinder")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF00)]
 public unsafe partial struct AddonRaidFinder {
     [FieldOffset(0x220)] public AtkAddonControl AddonControl;

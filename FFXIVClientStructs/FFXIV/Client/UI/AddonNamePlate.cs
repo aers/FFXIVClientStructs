@@ -16,7 +16,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("NamePlate")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x470)]
 public unsafe partial struct AddonNamePlate {
     [FieldOffset(0x220)] public BakePlateRenderer BakePlate;

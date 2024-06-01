@@ -16,7 +16,8 @@ public unsafe partial struct NodeLink {
     [FieldOffset(0x10)] public Node* Next;
 }
 
-[GenerateInterop(isInherited: true), Inherits<Object>, Inherits<NodeLink>(8)]
+[GenerateInterop(isInherited: true)]
+[Inherits<Object>, Inherits<NodeLink>(8)]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct Node;
 

@@ -5,7 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Component.SteamApi.Interface;
 /// <a href="https://partner.steamgames.com/doc/api/ISteamUser"><c>ISteamUtils</c></a> instance used by the game.
 /// This struct does not provide or define any API surface related to this interface.
 /// </summary>
-[GenerateInterop, Inherits<SteamInterfaceContext>]
+[GenerateInterop]
+[Inherits<SteamInterfaceContext>]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct ISteamUtils {
     /// <summary>

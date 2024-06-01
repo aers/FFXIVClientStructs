@@ -14,7 +14,8 @@ public enum ColliderType : int {
 }
 
 // base class for individual objects in the collision scene
-[GenerateInterop(isInherited: true), Inherits<Node>, Inherits<QuadtreeNode>(0x20)]
+[GenerateInterop(isInherited: true)]
+[Inherits<Node>, Inherits<QuadtreeNode>(0x20)]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe partial struct Collider {
     //[FieldOffset(0x40)] public uint u40;
@@ -118,7 +119,8 @@ public unsafe partial struct Collider {
 /// In the file system, the whole streamable scene is located in a single directory; the root file is typically called list.pcb.
 /// Individual streamable meshes are called /trXXXX.pcb, where XXXX is MeshId field (with zero padding - formatted as %04d).
 /// </summary>
-[GenerateInterop, Inherits<Collider>]
+[GenerateInterop]
+[Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe partial struct ColliderStreamed {
     //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
@@ -165,7 +167,8 @@ public unsafe partial struct ColliderStreamed {
 /// <summary>
 /// Generic mesh collider.
 /// </summary>
-[GenerateInterop, Inherits<Collider>]
+[GenerateInterop]
+[Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x198)]
 public unsafe partial struct ColliderMesh {
     //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
@@ -192,7 +195,8 @@ public unsafe partial struct ColliderMesh {
 /// <summary>
 /// Box collider - local center is at origin, half-width is 1 in each dimension - so local bounds are (-1,-1,-1) to (1,1,1).
 /// </summary>
-[GenerateInterop, Inherits<Collider>]
+[GenerateInterop]
+[Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
 public unsafe partial struct ColliderBox {
     [FieldOffset(0x0A0)] public Vector3 Translation;
@@ -208,7 +212,8 @@ public unsafe partial struct ColliderBox {
 /// <summary>
 /// Cylinder collider - local center is at origin, local axis is (0,1,0), half-height and radius are 1 - so local bounds are (-1,-1,-1) to (1,1,1).
 /// </summary>
-[GenerateInterop, Inherits<Collider>]
+[GenerateInterop]
+[Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct ColliderCylinder {
     [FieldOffset(0x0A0)] public Vector3 Translation;
@@ -226,7 +231,8 @@ public unsafe partial struct ColliderCylinder {
 /// Sphere collider - local center is at origin, radius is 1 - so local bounds are (-1,-1,-1) to (1,1,1).
 /// At least some parts of the code assume that scale is always uniform.
 /// </summary>
-[GenerateInterop, Inherits<Collider>]
+[GenerateInterop]
+[Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct ColliderSphere {
     [FieldOffset(0x0A0)] public bool Dirty;
@@ -244,7 +250,8 @@ public unsafe partial struct ColliderSphere {
 /// Plane collider - local center is at origin, local normal is (0,0,1), half-side is 1 - so local bounds are (-1,-1,0) to (1,1,0).
 /// There are two flavours of planes - one-sided and two-sided (latter is implemented as a derived class without any new fields).
 /// </summary>
-[GenerateInterop, Inherits<Collider>]
+[GenerateInterop]
+[Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
 public unsafe partial struct ColliderPlane {
     [FieldOffset(0x0A0)] public Vector3 Translation;

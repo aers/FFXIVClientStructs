@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
-[GenerateInterop, Inherits<ContainerInterface>]
+[GenerateInterop]
+[Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public unsafe partial struct OrnamentContainer {
     [FieldOffset(0x10)] public Ornament* OrnamentObject;

@@ -10,7 +10,8 @@ public partial struct PublicInstance {
 
     public bool IsInstancedArea() => InstanceId != 0;
 
-    [GenerateInterop, Inherits<AtkEventInterface>]
+    [GenerateInterop]
+[Inherits<AtkEventInterface>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct Listener;
 }

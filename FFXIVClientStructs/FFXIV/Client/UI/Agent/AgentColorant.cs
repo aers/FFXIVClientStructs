@@ -15,7 +15,8 @@ public partial struct AgentColorant {
 
     // Client::UI::Agent::AgentColorant::ColorantCharaView
     //   Client::UI::Misc::CharaView
-    [GenerateInterop, Inherits<CharaView>]
+    [GenerateInterop]
+[Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
     public unsafe partial struct ColorantCharaView {
         //[FieldOffset(0x2C8)] public uint Unk2C8; // a3 passed to vf13

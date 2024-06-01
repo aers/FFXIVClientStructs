@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// AST - Arcana Gauge
 /// </summary>
 [Addon("JobHudAST0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x468)]
 public unsafe partial struct AddonJobHudAST0 {
     [FieldOffset(0x260)] public ArcanaGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudAST0 {
     [FieldOffset(0x2E0)] public ArcanaGauge GaugeStandard;
     [FieldOffset(0x3A8)] public ArcanaGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct ArcanaGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
@@ -30,7 +32,8 @@ public unsafe partial struct AddonJobHudAST0 {
         [FieldOffset(0x38)] public byte* MinorArcanaName;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
     public partial struct ArcanaGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -48,7 +51,8 @@ public unsafe partial struct AddonJobHudAST0 {
         [FieldOffset(0x78), FixedSizeArray] internal FixedSizeArray3<Astrosign> _astrosigns;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
     public partial struct ArcanaGaugeSimple {
         [FieldOffset(0x10)] public AtkComponentBase* CardContainer;

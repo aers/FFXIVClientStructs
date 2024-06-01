@@ -4,7 +4,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("LookingForGroupDetail")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
 public unsafe partial struct AddonLookingForGroupDetail {
     [FieldOffset(0x248)] public AtkComponentButton* JoinPartyButton;

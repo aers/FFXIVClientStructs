@@ -5,7 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// <summary>
 /// Base struct for all job gauge addons.
 /// </summary>
-[GenerateInterop(isInherited: true), Inherits<AtkUnitBase>]
+[GenerateInterop(isInherited: true)]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x260)]
 public unsafe partial struct AddonJobHud {
     [FieldOffset(0x220)] public byte Unk220;

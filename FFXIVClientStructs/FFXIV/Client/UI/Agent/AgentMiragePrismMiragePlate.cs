@@ -18,7 +18,8 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
 
     // Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
     //   Client::UI::Misc::CharaView
-    [GenerateInterop, Inherits<CharaView>]
+    [GenerateInterop]
+[Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
     public unsafe partial struct MiragePrismMiragePlateCharaView {
         [FieldOffset(0x2C8)] public bool IsUpdatePending;

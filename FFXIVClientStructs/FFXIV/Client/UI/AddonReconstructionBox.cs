@@ -3,7 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("ReconstructionBox")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x440)]
 public unsafe partial struct AddonReconstructionBox {
     [FieldOffset(0x258), FixedSizeArray] internal FixedSizeArray10<AddonItemDonationInfo> _donationInfoArray;

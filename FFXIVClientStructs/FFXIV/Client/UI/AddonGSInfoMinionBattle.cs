@@ -3,7 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 [Addon("GSInfoMinionBattle")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]
 public unsafe partial struct AddonGSInfoMinionBattle {
     [FieldOffset(0x220)] public AtkComponentBase* TournamentMatches;

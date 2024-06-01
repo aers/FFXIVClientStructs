@@ -10,7 +10,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
 // type 3
 // simple text node
-[GenerateInterop, Inherits<AtkResNode>]
+[GenerateInterop]
+[Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xB0)] public uint TextId;

@@ -7,7 +7,8 @@ using FFXIVClientStructs.Havok.Common.Base.Types.Geometry.LocalFrame;
 
 namespace FFXIVClientStructs.Havok.Animation.Rig;
 
-[GenerateInterop, Inherits<hkReferencedObject>]
+[GenerateInterop]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public partial struct hkaSkeleton {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]

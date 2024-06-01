@@ -4,7 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //     Component::GUI::AtkComponentBase
 //       Component::GUI::AtkEventListener
 
-[GenerateInterop, Inherits<AtkComponentInputBase>]
+[GenerateInterop]
+[Inherits<AtkComponentInputBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct AtkComponentNumericInput {
     [FieldOffset(0x1F8)] public int Value; // Found through SetValue function

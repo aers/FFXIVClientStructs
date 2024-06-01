@@ -8,7 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct IMesh;
 
-[GenerateInterop, Inherits<Object>, Inherits<IMesh>(8)]
+[GenerateInterop]
+[Inherits<Object>, Inherits<IMesh>(8)]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct Mesh {
     [FieldOffset(0x10)] public ColliderMesh* OwnerCollider;

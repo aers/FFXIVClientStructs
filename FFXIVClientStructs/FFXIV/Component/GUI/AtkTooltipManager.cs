@@ -4,7 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkToolTipManager
 //      Component::GUI::AtkEventListener
-[GenerateInterop, Inherits<AtkEventListener>]
+[GenerateInterop]
+[Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct AtkTooltipManager {
     public enum AtkTooltipType : byte {

@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// DNC - Step Gauge
 /// </summary>
 [Addon("JobHudDNC0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x398)]
 public unsafe partial struct AddonJobHudDNC0 {
     [FieldOffset(0x260)] public StepGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudDNC0 {
     [FieldOffset(0x2C0)] public StepGauge GaugeStandard;
     [FieldOffset(0x330)] public StepGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public partial struct StepGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -26,7 +28,8 @@ public unsafe partial struct AddonJobHudDNC0 {
         [FieldOffset(0x28)] public int StandardFinishTimeLeft;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct StepGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -41,7 +44,8 @@ public unsafe partial struct AddonJobHudDNC0 {
         [FieldOffset(0x60)] public int StandardFinishActive;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct StepGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -61,7 +65,8 @@ public unsafe partial struct AddonJobHudDNC0 {
 /// DNC - Fourfold Feathers
 /// </summary>
 [Addon("JobHudDNC1")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3A8)]
 public unsafe partial struct AddonJobHudDNC1 {
     [FieldOffset(0x260)] public FeatherGaugeData DataPrevious;
@@ -69,7 +74,8 @@ public unsafe partial struct AddonJobHudDNC1 {
     [FieldOffset(0x2A0)] public FeatherGauge GaugeStandard;
     [FieldOffset(0x338)] public FeatherGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct FeatherGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -79,7 +85,8 @@ public unsafe partial struct AddonJobHudDNC1 {
         [FieldOffset(0x18)] public int EspritMid;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x98)]
     public partial struct FeatherGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -99,7 +106,8 @@ public unsafe partial struct AddonJobHudDNC1 {
         [FieldOffset(0x88)] public int EspritBarValue;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct FeatherGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

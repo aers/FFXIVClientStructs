@@ -2,7 +2,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::CharacterSetupContainer
 // ctor "80 61 10 FC 48 8D 05"
-[GenerateInterop, Inherits<ContainerInterface>]
+[GenerateInterop]
+[Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct CharacterSetupContainer {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9F ?? ?? ?? ?? 48 8D 8F")]

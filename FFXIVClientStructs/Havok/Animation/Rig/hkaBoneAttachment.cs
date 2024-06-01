@@ -5,7 +5,8 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Animation.Rig;
 
-[GenerateInterop, Inherits<hkReferencedObject>]
+[GenerateInterop]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public partial struct hkaBoneAttachment {
     [FieldOffset(0x10)] public hkStringPtr OriginalSkeletonName;

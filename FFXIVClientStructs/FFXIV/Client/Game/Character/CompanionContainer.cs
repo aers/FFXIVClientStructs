@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
-[GenerateInterop, Inherits<ContainerInterface>]
+[GenerateInterop]
+[Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct CompanionContainer {
     [FieldOffset(0x10)] public Companion* CompanionObject;
