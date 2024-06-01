@@ -7,14 +7,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
-// inlined ctor
 public unsafe partial struct AgentFriendList {
     [FieldOffset(0x28)] public InfoProxyFriendList* InfoProxy;
     [FieldOffset(0x30)] public Utf8String SelectedPlayerName;
     [FieldOffset(0xA0)] public ulong SelectedContentId;
-    [FieldOffset(0xB0)] public byte SelectedIndex;
+    [FieldOffset(0xA8)] public ulong StatusRequestContentId;
+    [FieldOffset(0xB0)] public int SelectedIndex;
+    [FieldOffset(0xB4)] public uint SelectYesNoAddonId;
+    [FieldOffset(0xB8)] public uint FriendGroupEditAddonId;
 
-    public uint Count => InfoProxy->GetEntryCount();
-    public InfoProxyCommonList.CharacterData* GetFriend(uint index) => InfoProxy->InfoProxyCommonList.GetEntry(index);
-    public InfoProxyCommonList.CharacterData* this[uint index] => GetFriend(index);
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 33 ED 48 8B CF 89 AB ?? ?? ?? ?? E8")]
+    public partial void OpenFriendEstateTeleportation(ulong contentId);
 }

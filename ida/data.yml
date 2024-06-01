@@ -8172,6 +8172,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14028CFD0: ctor
+      0x14028E810: SendTell
+      0x14028E940: OpenFriendEstateTeleportation
   Client::UI::Agent::AgentPartyMember:
     vtbls:
       - ea: 0x1419E0F20
