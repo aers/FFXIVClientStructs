@@ -5,15 +5,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.STD.Helper;
 
-[StructLayout(LayoutKind.Sequential)]
-public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
-    : IEquatable<RedBlackTree<T, TKey, TKeyExtractor>>
-    where T : unmanaged
-    where TKeyExtractor : IStaticKeyExtractor<T, TKey>
-    where TKey : unmanaged {
-    public Node* Head;
-    public long LongCount;
-
+public interface IRedBlackTree {
     /// <summary>
     /// Colors for link to parent. 
     /// </summary>
@@ -21,6 +13,16 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
         Red,
         Black,
     }
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
+    : IRedBlackTree, IEquatable<RedBlackTree<T, TKey, TKeyExtractor>>
+    where T : unmanaged
+    where TKeyExtractor : IStaticKeyExtractor<T, TKey>
+    where TKey : unmanaged {
+    public Node* Head;
+    public long LongCount;
 
     public readonly RedBlackTree<T, TKey, TKeyExtractor>* Pointer =>
         (RedBlackTree<T, TKey, TKeyExtractor>*)Unsafe.AsPointer(ref Unsafe.AsRef(in this));
@@ -142,81 +144,81 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
             (pNode->_Color, erasedNode->_Color) = (erasedNode->_Color, pNode->_Color); // recolor it
         }
 
-        if (erasedNode->_Color == NodeColor.Black) {
+        if (erasedNode->_Color == IRedBlackTree.NodeColor.Black) {
             // erasing black link, must recolor/rebalance tree
-            for (; fixNode != Head->_Parent && fixNode->_Color == NodeColor.Black; fixNodeParent = fixNode->_Parent) {
+            for (; fixNode != Head->_Parent && fixNode->_Color == IRedBlackTree.NodeColor.Black; fixNodeParent = fixNode->_Parent) {
                 if (fixNode == fixNodeParent->_Left) {
                     // fixup left subtree
                     pNode = fixNodeParent->_Right;
-                    if (pNode->_Color == NodeColor.Red) {
+                    if (pNode->_Color == IRedBlackTree.NodeColor.Red) {
                         // rotate red up from right subtree
-                        pNode->_Color = NodeColor.Black;
-                        fixNodeParent->_Color = NodeColor.Red;
+                        pNode->_Color = IRedBlackTree.NodeColor.Black;
+                        fixNodeParent->_Color = IRedBlackTree.NodeColor.Red;
                         RotateLeft(fixNodeParent);
                         pNode = fixNodeParent->_Right;
                     }
 
                     if (pNode->_Isnil) {
                         fixNode = fixNodeParent; // shouldn't happen
-                    } else if (pNode->_Left->_Color == NodeColor.Black
-                               && pNode->_Right->_Color == NodeColor.Black) {
+                    } else if (pNode->_Left->_Color == IRedBlackTree.NodeColor.Black
+                               && pNode->_Right->_Color == IRedBlackTree.NodeColor.Black) {
                         // redden right subtree with black children
-                        pNode->_Color = NodeColor.Red;
+                        pNode->_Color = IRedBlackTree.NodeColor.Red;
                         fixNode = fixNodeParent;
                     } else {
                         // must rearrange right subtree
-                        if (pNode->_Right->_Color == NodeColor.Black) {
+                        if (pNode->_Right->_Color == IRedBlackTree.NodeColor.Black) {
                             // rotate red up from left sub-subtree
-                            pNode->_Left->_Color = NodeColor.Black;
-                            pNode->_Color = NodeColor.Red;
+                            pNode->_Left->_Color = IRedBlackTree.NodeColor.Black;
+                            pNode->_Color = IRedBlackTree.NodeColor.Red;
                             RotateRight(pNode);
                             pNode = fixNodeParent->_Right;
                         }
 
                         pNode->_Color = fixNodeParent->_Color;
-                        fixNodeParent->_Color = NodeColor.Black;
-                        pNode->_Right->_Color = NodeColor.Black;
+                        fixNodeParent->_Color = IRedBlackTree.NodeColor.Black;
+                        pNode->_Right->_Color = IRedBlackTree.NodeColor.Black;
                         RotateLeft(fixNodeParent);
                         break; // tree now recolored/rebalanced
                     }
                 } else {
                     // fixup right subtree
                     pNode = fixNodeParent->_Left;
-                    if (pNode->_Color == NodeColor.Red) {
+                    if (pNode->_Color == IRedBlackTree.NodeColor.Red) {
                         // rotate red up from left subtree
-                        pNode->_Color = NodeColor.Black;
-                        fixNodeParent->_Color = NodeColor.Red;
+                        pNode->_Color = IRedBlackTree.NodeColor.Black;
+                        fixNodeParent->_Color = IRedBlackTree.NodeColor.Red;
                         RotateRight(fixNodeParent);
                         pNode = fixNodeParent->_Left;
                     }
 
                     if (pNode->_Isnil) {
                         fixNode = fixNodeParent; // shouldn't happen
-                    } else if (pNode->_Right->_Color == NodeColor.Black
-                               && pNode->_Left->_Color == NodeColor.Black) {
+                    } else if (pNode->_Right->_Color == IRedBlackTree.NodeColor.Black
+                               && pNode->_Left->_Color == IRedBlackTree.NodeColor.Black) {
                         // redden left subtree with black children
-                        pNode->_Color = NodeColor.Red;
+                        pNode->_Color = IRedBlackTree.NodeColor.Red;
                         fixNode = fixNodeParent;
                     } else {
                         // must rearrange left subtree
-                        if (pNode->_Left->_Color == NodeColor.Black) {
+                        if (pNode->_Left->_Color == IRedBlackTree.NodeColor.Black) {
                             // rotate red up from right sub-subtree
-                            pNode->_Right->_Color = NodeColor.Black;
-                            pNode->_Color = NodeColor.Red;
+                            pNode->_Right->_Color = IRedBlackTree.NodeColor.Black;
+                            pNode->_Color = IRedBlackTree.NodeColor.Red;
                             RotateLeft(pNode);
                             pNode = fixNodeParent->_Left;
                         }
 
                         pNode->_Color = fixNodeParent->_Color;
-                        fixNodeParent->_Color = NodeColor.Black;
-                        pNode->_Left->_Color = NodeColor.Black;
+                        fixNodeParent->_Color = IRedBlackTree.NodeColor.Black;
+                        pNode->_Left->_Color = IRedBlackTree.NodeColor.Black;
                         RotateRight(fixNodeParent);
                         break; // tree now recolored/rebalanced
                     }
                 }
             }
 
-            fixNode->_Color = NodeColor.Black; // stopping node is black
+            fixNode->_Color = IRedBlackTree.NodeColor.Black; // stopping node is black
         }
 
         if (0 < LongCount) {
@@ -286,7 +288,7 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
             head->_Left = newNode;
             head->_Parent = newNode;
             head->_Right = newNode;
-            newNode->_Color = NodeColor.Black; // the root is black
+            newNode->_Color = IRedBlackTree.NodeColor.Black; // the root is black
             return newNode;
         }
 
@@ -306,15 +308,15 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
             }
         }
 
-        for (var pNode = newNode; pNode->_Parent->_Color == NodeColor.Red;) {
+        for (var pNode = newNode; pNode->_Parent->_Color == IRedBlackTree.NodeColor.Red;) {
             if (pNode->_Parent == pNode->_Parent->_Parent->_Left) {
                 // fixup red-red in left subtree
                 var parentSibling = pNode->_Parent->_Parent->_Right;
-                if (parentSibling->_Color == NodeColor.Red) {
+                if (parentSibling->_Color == IRedBlackTree.NodeColor.Red) {
                     // parent's sibling has two red children, blacken both
-                    pNode->_Parent->_Color = NodeColor.Black;
-                    parentSibling->_Color = NodeColor.Black;
-                    pNode->_Parent->_Parent->_Color = NodeColor.Red;
+                    pNode->_Parent->_Color = IRedBlackTree.NodeColor.Black;
+                    parentSibling->_Color = IRedBlackTree.NodeColor.Black;
+                    pNode->_Parent->_Parent->_Color = IRedBlackTree.NodeColor.Red;
                     pNode = pNode->_Parent->_Parent;
                 } else {
                     // parent's sibling has red and black children
@@ -324,18 +326,18 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
                         RotateLeft(pNode);
                     }
 
-                    pNode->_Parent->_Color = NodeColor.Black; // propagate red up
-                    pNode->_Parent->_Parent->_Color = NodeColor.Red;
+                    pNode->_Parent->_Color = IRedBlackTree.NodeColor.Black; // propagate red up
+                    pNode->_Parent->_Parent->_Color = IRedBlackTree.NodeColor.Red;
                     RotateRight(pNode->_Parent->_Parent);
                 }
             } else {
                 // fixup red-red in right subtree
                 var parentSibling = pNode->_Parent->_Parent->_Left;
-                if (parentSibling->_Color == NodeColor.Red) {
+                if (parentSibling->_Color == IRedBlackTree.NodeColor.Red) {
                     // parent's sibling has two red children, blacken both
-                    pNode->_Parent->_Color = NodeColor.Black;
-                    parentSibling->_Color = NodeColor.Black;
-                    pNode->_Parent->_Parent->_Color = NodeColor.Red;
+                    pNode->_Parent->_Color = IRedBlackTree.NodeColor.Black;
+                    parentSibling->_Color = IRedBlackTree.NodeColor.Black;
+                    pNode->_Parent->_Parent->_Color = IRedBlackTree.NodeColor.Red;
                     pNode = pNode->_Parent->_Parent;
                 } else {
                     // parent's sibling has red and black children
@@ -345,14 +347,14 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
                         RotateRight(pNode);
                     }
 
-                    pNode->_Parent->_Color = NodeColor.Black; // propagate red up
-                    pNode->_Parent->_Parent->_Color = NodeColor.Red;
+                    pNode->_Parent->_Color = IRedBlackTree.NodeColor.Black; // propagate red up
+                    pNode->_Parent->_Parent->_Color = IRedBlackTree.NodeColor.Red;
                     RotateLeft(pNode->_Parent->_Parent);
                 }
             }
         }
 
-        head->_Parent->_Color = NodeColor.Black; // root is always black
+        head->_Parent->_Color = IRedBlackTree.NodeColor.Black; // root is always black
         return newNode;
     }
 
@@ -452,7 +454,7 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
         public Node* _Left;
         public Node* _Parent;
         public Node* _Right;
-        public NodeColor _Color;
+        public IRedBlackTree.NodeColor _Color;
         public bool _Isnil;
         public byte _18;
         public byte _19;
@@ -464,7 +466,7 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
             if (n == null)
                 throw new OutOfMemoryException();
             *n = default;
-            n->_Color = NodeColor.Black;
+            n->_Color = IRedBlackTree.NodeColor.Black;
             n->_Left = n->_Parent = n->_Right = n;
             n->_Isnil = true;
             return n;
@@ -476,7 +478,7 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
             if (n == null)
                 throw new OutOfMemoryException();
             *n = default;
-            n->_Color = NodeColor.Red;
+            n->_Color = IRedBlackTree.NodeColor.Red;
             n->_Left = n->_Parent = n->_Right = head;
             n->_Isnil = false;
 
