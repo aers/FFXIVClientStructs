@@ -35,18 +35,18 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [FieldOffset(0x0)] public ValueType Type;
 
     // union field
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public bool Bool;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public byte Byte;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public int Int;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public long Int64;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public uint UInt;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public ulong UInt64;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public float Float;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public byte* String;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public char* WideString; // C# uses UTF-16 for char, which makes it easy for us to use it here
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public StdVector<AtkValue>* Vector;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public Texture* Texture;
-    [FieldOffset(0x8), CExporterUnion("Union.Value")] public AtkValue* AtkValues;
+    [FieldOffset(0x8), CExporterUnion("Value")] public bool Bool;
+    [FieldOffset(0x8), CExporterUnion("Value")] public byte Byte;
+    [FieldOffset(0x8), CExporterUnion("Value")] public int Int;
+    [FieldOffset(0x8), CExporterUnion("Value")] public long Int64;
+    [FieldOffset(0x8), CExporterUnion("Value")] public uint UInt;
+    [FieldOffset(0x8), CExporterUnion("Value")] public ulong UInt64;
+    [FieldOffset(0x8), CExporterUnion("Value")] public float Float;
+    [FieldOffset(0x8), CExporterUnion("Value")] public byte* String;
+    [FieldOffset(0x8), CExporterUnion("Value")] public char* WideString; // C# uses UTF-16 for char, which makes it easy for us to use it here
+    [FieldOffset(0x8), CExporterUnion("Value")] public StdVector<AtkValue>* Vector;
+    [FieldOffset(0x8), CExporterUnion("Value")] public Texture* Texture;
+    [FieldOffset(0x8), CExporterUnion("Value")] public AtkValue* AtkValues;
 
     public AtkValue() => Ctor();
     public AtkValue(AtkValue* other) => Ctor(other);

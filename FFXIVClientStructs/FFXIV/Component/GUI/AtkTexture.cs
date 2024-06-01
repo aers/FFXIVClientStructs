@@ -8,9 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct AtkTexture : ICreatable {
     // union type
-    [FieldOffset(0x8), CExporterUnion("Union.Texture")] public AtkTextureResource* Resource;
-    [FieldOffset(0x8), CExporterUnion("Union.Texture")] public void* Crest;
-    [FieldOffset(0x8), CExporterUnion("Union.Texture")] public Texture* KernelTexture;
+    [FieldOffset(0x8), CExporterUnion("Texture")] public AtkTextureResource* Resource;
+    [FieldOffset(0x8), CExporterUnion("Texture")] public void* Crest;
+    [FieldOffset(0x8), CExporterUnion("Texture")] public Texture* KernelTexture;
     [FieldOffset(0x10)] public TextureType TextureType;
     [FieldOffset(0x11)] private bool CachedIsTextureReady; // Use IsTextureReady() to get this
 

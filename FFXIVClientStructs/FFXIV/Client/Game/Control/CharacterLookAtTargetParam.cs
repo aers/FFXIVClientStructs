@@ -18,12 +18,12 @@ public partial struct CharacterLookAtTargetParam {
     /// Used when Type is <see cref="TargetInfoType.GameObjectId"/>.<br/>
     /// Unlike other GameObjectIDs, this one appears to be set to fully 0 if the player is not looking at anything.
     /// </remarks>
-    [FieldOffset(0x10), CExporterUnion("Union.Target")] public GameObjectId TargetId;
+    [FieldOffset(0x10), CExporterUnion("Target")] public GameObjectId TargetId;
 
     /// <remarks>
     /// Used when Type is <see cref="TargetInfoType.Unk2"/> or <see cref="TargetInfoType.Unk3"/>.
     /// </remarks>
-    [FieldOffset(0x10), CExporterUnion("Union.Target")] public Vector3 Unk10;
+    [FieldOffset(0x10), CExporterUnion("Target")] public Vector3 Unk10;
     [FieldOffset(0x20)] public int Unk20;
 
     public enum TargetInfoType {

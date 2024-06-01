@@ -6,9 +6,9 @@ public struct Status {
     // this contains different information depending on the type of status
     // debuffs - stack count
     // food/potions - ID of the food/potion in the ItemFood sheet
-    [FieldOffset(0x2), CExporterUnion("Union.Param")] public ushort Param;
+    [FieldOffset(0x2), CExporterUnion("Param")] public ushort Param;
     // remains for compatibility
-    [FieldOffset(0x2), CExporterUnion("Union.Param")] public byte StackCount; // TODO: remove?
+    [FieldOffset(0x2), CExporterUnion("Param")] public byte StackCount; // TODO: remove?
     [FieldOffset(0x4)] public float RemainingTime;
     // objectID matching the entity that cast the effect - regens will be from the white mage ID etc
     [FieldOffset(0x8)] public uint SourceId;
