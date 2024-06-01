@@ -5,6 +5,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
 
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,7 @@
 
   <ItemGroup>
     <CompilerVisibleProperty Include="InteropGenerator_InteropNamespace" />
+    <InternalsVisibleTo Include="CExporter"/>
   </ItemGroup>
   
   <ItemGroup>
@@ -49,12 +51,4 @@
                       OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     <ProjectReference Include="..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.DisableRuntimeMarshalling" />
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>CExporter</_Parameter1>
-    </AssemblyAttribute>
-  </ItemGroup>
-
 </Project>
