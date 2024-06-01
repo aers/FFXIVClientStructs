@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
 using InteropGenerator.Runtime.Attributes;
@@ -193,6 +194,17 @@ ReExport:
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
                 FixedSize = size
+            };
+        }
+        if (field.FieldType.GetCustomAttribute<InlineArrayAttribute>() != null) {
+            var arrLength = field.FieldType.GetCustomAttribute<InlineArrayAttribute>()!.Length;
+            var elementType = field.FieldType.GetGenericArguments()[0];
+            _processType.Add(elementType);
+            return new ProcessedFixedField {
+                FieldType = elementType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = field.Name,
+                FixedSize = arrLength
             };
         }
         _processType.Add(field.FieldType);
