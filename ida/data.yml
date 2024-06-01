@@ -6903,7 +6903,6 @@ classes:
       0x140690CE0: SetCrossHotbarShareState
       0x1406924D0: DeleteAllHotbars                 # (this, performReset) -> void?
       0x14068DA30: PerformMateriaActionMigration
-      0x14068A4E0: IsActionHighlighted               # (this, commandType, commandId) -> bool
       0x140692B50: LoadSavedHotbar                   # (this, groupId, hotbarId)
       0x140693800: GetInstance  # static
   Client::UI::Misc::RaptureHotbarModule::HotbarSlot:
@@ -6939,6 +6938,7 @@ classes:
       0x140689740: IsSlotUsable              # (this, HotbarSlotType, uint) -> bool
       0x1406E0A60: IsSlotActionTargetInRange # (this) -> bool
       0x14068A530: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool
+      0x14068A4E0: IsActionHighlighted               # (this, commandType, commandId) -> bool
       0x14068A770: GetIntermediateActionType # (this) -> IntermediateActionType - ultimately passed to the NumberArray
       0x14068AC40: PopulateIntermediateCooldownInfo # (this, HotBarUiIntermediate*)  - used for array population?
       0x14068AAE0: GetAdjustedCommandId  # ???

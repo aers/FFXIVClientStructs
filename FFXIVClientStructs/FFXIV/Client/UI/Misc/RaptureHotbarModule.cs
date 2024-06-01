@@ -31,7 +31,7 @@ public unsafe partial struct RaptureHotbarModule {
     [FieldOffset(0x51)] public byte ActiveHotbarClassJobId;
 
     /// <summary>
-    /// Appears to be set if HOTBAR.DAT was loaded from disk successfully. Set to 0 if decryption fails or
+    /// Appears to be set if <c>HOTBAR.DAT</c> was loaded from disk successfully. Set to 0 if decryption fails or
     /// the file read errors out. Does not appear to track migration state. Set in ReadFile.
     /// </summary>
     [FieldOffset(0x52)] public bool DatFileLoadedSuccessfully;
@@ -229,19 +229,6 @@ public unsafe partial struct RaptureHotbarModule {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 54 24 ?? 8B 44 24 30")]
     public static partial uint GetSlotAppearance(HotbarSlotType* actionType, uint* actionId, ushort* UNK_0xC4,
         RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
-
-    /// <summary>
-    /// Gets whether the specified action should be highlighted with ants in the UI.
-    /// Internally calls <see cref="ActionManager.IsActionHighlighted"/>.
-    /// </summary>
-    /// <remarks>
-    /// This method does not appear in any code paths.
-    /// </remarks>
-    /// <param name="commandType">The type of the command to look up.</param>
-    /// <param name="commandId">The ID of the command to look up.</param>
-    /// <returns>Returns <c>true</c> if the action would be highlighted, <c>false</c> otherwise.</returns>
-    [MemberFunction("40 53 48 83 EC 20 44 0F B6 CA 41 8B D8")]
-    public partial bool IsActionHighlighted(HotbarSlotType commandType, uint commandId);
 
     /// <summary>
     /// Helper method to check if a specific hotbar is to be shared between all classes or not.
