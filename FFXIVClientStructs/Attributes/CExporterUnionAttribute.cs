@@ -7,13 +7,12 @@ internal class CExporterUnionAttribute : Attribute {
     public bool IsStruct { get; }
 
     /// <summary>
-    /// Creates a struct union with the given name and fields.
+    /// Creates a struct union with the given union and fields.
     /// </summary>
-    /// <param name="name">The name to use for the union and sub struct</param>
+    /// <param name="union">The union to use for the union and sub struct</param>
     /// <param name="isStruct"></param>
-    public CExporterUnionAttribute(string name, bool isStruct = false) {
-        var n = name.Split('.');
-        if (n is not [{ } union, { } @struct] || n.Length > 2) throw new ArgumentException("Name must be in the format 'Union.Struct'", nameof(name));
+    public CExporterUnionAttribute(string union, string @struct = "", bool isStruct = false) {
+        if (isStruct && string.IsNullOrEmpty(@struct)) throw new ArgumentException("Struct name must be provided if IsStruct is true");
         Union = union;
         Struct = @struct;
         IsStruct = isStruct;
