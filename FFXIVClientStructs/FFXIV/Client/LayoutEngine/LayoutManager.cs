@@ -62,7 +62,7 @@ public unsafe partial struct LayoutManager {
     public partial void SetInteriorFixture(int floor, int part, int fixtureId, byte unk = 255);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B C5 EB 6A")]
-    public partial void SetActiveFestivals(uint* festivalArray); // Array of exactly 4 festivals. Use 0 for none.
+    public partial void SetActiveFestivals(GameMain.Festival* festivals); // Array of exactly 4 festivals. Use 0 for none.
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
     public unsafe struct Filter {

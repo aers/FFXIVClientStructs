@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Resource;
 using Thread = FFXIVClientStructs.FFXIV.Client.System.Threading.Thread;
 
 namespace FFXIVClientStructs.FFXIV.Client.Sound;
@@ -10,11 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 /// This class is the low level handler for sound related functions and abstracts from the operating system.
 /// The functions in this class are not intended by SE to be used directly and do not have proper checks for correct values.
 /// </summary>
-[GenerateInterop]
+[GenerateInterop, Inherits<ResourceEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1C88)]
 public unsafe partial struct SoundManager {
-    [FieldOffset(0x0000)] public nint ResourceEventListener;
-    [FieldOffset(0x0008)] public Thread Thread;
+    [FieldOffset(0x0008)] public Thread Thread; // TODO: make Thread properly inheritable
     [FieldOffset(0x0031)] public bool Disabled;
     [FieldOffset(0x0034)] public float MasterVolume;
     [FieldOffset(0x0038)] public float ActiveVolume;

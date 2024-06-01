@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Resource;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
@@ -7,10 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 /// Each prefab is a scene, however it has some limitations (only single embedded layer group with a single layer is supported).
 /// </summary>
 [GenerateInterop]
-[Inherits<ILayoutInstance>]
+[Inherits<ILayoutInstance>, Inherits<ResourceEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
 public unsafe partial struct SharedGroupLayoutInstance {
-    [FieldOffset(0x030)] public void** ResourceEventListener; // base class; contains only vtable
     [FieldOffset(0x038)] public ResourceHandle* ResourceHandle;
     [FieldOffset(0x050)] public Transform Transform;
     [FieldOffset(0x080)] public InstanceList Instances;

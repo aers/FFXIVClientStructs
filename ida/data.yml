@@ -5976,10 +5976,53 @@ classes:
     vtbls:
       - ea: 0x141A0B990
         base: Client::System::Common::NonCopyable
+    vfuncs:
+      1: Initialize
+      2: Deinitialize
+      3: Update
   Client::LayoutEngine::ILayoutInstance:
     vtbls:
       - ea: 0x141A0B9B0
         base: Client::System::Common::NonCopyable
+    vfuncs:
+      1: Init
+      2: Deinit
+      4: SetProperties
+      5: SetLayer
+      6: GetSizeOf
+      7: GetPrimaryPath
+      14: GetTranslation
+      15: GetRotation
+      16: GetScale
+      17: GetTransform
+      18: SetTransform
+      21: HavePrimary
+      23: GetGraphics
+      24: GetGraphics2
+      25: SetGraphics
+      27: CreatePrimary
+      28: DestroyPrimary
+      29: HaveSecondary
+      30: IsColliderLoaded
+      31: GetSecondaryPath
+      32: CreateSecondary
+      33: DestroySecondary
+      34: GetCollider
+      35: GetCollider2
+      36: IsColliderActive
+      37: SetColliderActive
+      38: UpdateCollider
+      55: WantToBeActive
+      63: SetActive
+      64: GetTranslationImpl
+      65: SetTranslationImpl
+      66: GetRotationImpl
+      67: SetRotationImpl
+      68: GetScaleImpl
+      69: SetScaleImpl
+      70: GetTransformImpl
+      71: SetTransformImpl
+      72: GetBoundingSphereImpl
   Client::LayoutEngine::LayoutWorld:
     instances:
       - ea: 0x1421D59A8
@@ -6080,6 +6123,8 @@ classes:
     vtbls:
       - ea: 0x141A0F180
         base: Client::LayoutEngine::ILayoutInstance
+    vfuncs:
+      78: GetLayerMask
   Client::LayoutEngine::Layer::MarkerLayoutInstance:
     vtbls:
       - ea: 0x141A12040
