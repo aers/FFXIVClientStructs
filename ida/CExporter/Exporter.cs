@@ -18,7 +18,6 @@ namespace CExporter;
 public class Exporter {
     private static List<ProcessedEnum> _enums = [];
     private static List<ProcessedStruct> _structs = [];
-    private static BindingFlags _bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
     private static HashSet<Type> _processType = [];
 
     public static string PassString(int i) => i switch {
@@ -49,9 +48,10 @@ public class Exporter {
         Console.WriteLine($"Filtered xiv to {xivStructs.Length} structs");
         Console.WriteLine("::endgroup::");
 
+        var structs = xivStructs.Concat(havokStructs).ToArray();
         var now = DateTime.UtcNow;
 
-        foreach (var sStruct in xivStructs.Concat(havokStructs)) {
+        foreach (var sStruct in structs) {
             ProcessType(sStruct);
         }
 
@@ -103,7 +103,7 @@ public class Exporter {
             foreach (var processedStructField in processedStruct.Fields) {
                 if (!check.TryGetValue(processedStruct.StructType.FullSanitizeName(), out var checkStrings)) continue;
                 if (checkStrings.Contains(processedStructField.FieldName))
-                    ExporterStatics.ErrorList.Add($"Field name overlap detected in {processedStruct.StructType.FullSanitizeName().Pastel(Color.Blue)} with field {processedStructField.FieldName.Pastel(Color.BlueViolet)}");
+                    ExporterStatics.ErrorList.Add($"Field name overlap detected in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {processedStructField.FieldName.Pastel(Color.Red)}");
             }
         }
     }
@@ -229,11 +229,11 @@ ReExport:
             }
             if (!type.IsStruct() || type.IsEnum) return null;
             if (_structs.Any(t => t.StructType.FullSanitizeName() == type.FullSanitizeName())) return null;
-            var vtable = type.GetField("VirtualTable", _bindingFlags)?.FieldType;
+            var vtable = type.GetField("VirtualTable", ExporterStatics.BindingFlags)?.FieldType;
             ProcessedVirtualFunction[] virtualFunctions = [];
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
-                virtualFunctions = vtable.GetFields(_bindingFlags).Select(f => {
+                virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Select(f => {
                     _processType.Add(f.FieldType.GetFunctionPointerReturnType());
                     return new ProcessedVirtualFunction {
                         VirtualFunctionName = f.Name,
@@ -251,10 +251,10 @@ ReExport:
                 }).ToArray();
             }
 
-            var memberFunctionClass = type.GetMember("MemberFunctionPointers", _bindingFlags).FirstOrDefault()?.DeclaringType;
+            var memberFunctionClass = type.GetMember("MemberFunctionPointers", ExporterStatics.BindingFlags).FirstOrDefault()?.DeclaringType;
             ProcessedMemberFunction[] memberFunctionsArray = [];
             if (memberFunctionClass != null) {
-                var memberFunctions = memberFunctionClass.GetMethods(_bindingFlags);
+                var memberFunctions = memberFunctionClass.GetMethods(ExporterStatics.BindingFlags);
                 foreach (var memberFunction in memberFunctions) {
                     var memberFunctionAddress = memberFunction.GetCustomAttribute<MemberFunctionAttribute>();
                     if (memberFunctionAddress == null) continue;
@@ -288,7 +288,7 @@ ReExport:
                 }
             }
 
-            var fields = type.GetFields(_bindingFlags);
+            var fields = type.GetFields(ExporterStatics.BindingFlags).Where(t => !type.IsInheritance(t)).ToArray();
             var unionFields = fields.Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() != null).ToArray();
 
             var unionOffsets = new Dictionary<CExporterUnionAttribute, FieldInfo>(new CExporterUnionCompare());

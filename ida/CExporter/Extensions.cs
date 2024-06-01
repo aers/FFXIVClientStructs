@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using InteropGenerator.Runtime.Attributes;
 
 namespace CExporter;
 
@@ -38,9 +39,23 @@ public static class TypeExtensions {
         }
     }
 
-    // public static bool IsInheritence(this Type type, ) {
-    //
-    // }
+    public static bool IsInheritance(this Type type, FieldInfo field) {
+        var inheritances = type.GetCustomAttributes().Where(t => t.GetType().Name.Contains("InheritsAttribute`1")).Select(t => t.GetType().GetGenericArguments()[0]).ToArray();
+        if (inheritances.Length == 0) return false;
+        foreach (var inheritance in inheritances) {
+            if (inheritance.IsFieldInType(field)) return true;
+            if (IsInheritance(inheritance, field)) return true;
+        }
+        return false;
+    }
+
+    public static bool IsFieldInType(this Type type, FieldInfo field) {
+        var nameStrings = field.Name.Split('_');
+        var index = Array.IndexOf(nameStrings, type.Name);
+        if (index <= 0) return type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == field.Name && f.FieldType == field.FieldType);
+        var name = string.Join("_", nameStrings[(index + 1)..]);
+        return type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == name && f.FieldType == field.FieldType) || type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == field.Name && f.FieldType == field.FieldType);
+    }
 
     public static string FixTypeName(this Type type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
         type switch {
@@ -76,6 +91,7 @@ public static class TypeExtensions {
             _ when type == typeof(char) || type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
             _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]) => 8,
+            _ when type.GetCustomAttribute<InlineArrayAttribute>() is { Length: var length } => type.GetGenericArguments()[0].SizeOf() * length,
             _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ when type.IsEnum => Enum.GetUnderlyingType(type).SizeOf(),
             _ when type.IsGenericType => Marshal.SizeOf(Activator.CreateInstance(type)!),
@@ -149,24 +165,9 @@ public static class TypeExtensions {
         return name;
     }
 
-    public static string FixPtrName(this string name) {
-        var count = 0;
-        while (name[^(count + 1)] == '*')
-            count++;
-        return name[..^count].Replace("*", "Ptr") + new string('*', count);
-    }
-
     public static string FullSanitizeName(this Type type) {
         var name = type.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator);
         return name;
-        var spl = name.Split("<");
-        if (spl.Length == 1) return name;
-        for (var i = 1; i < spl.Length; i++) {
-            var tmp = spl[i];
-            tmp = tmp.Replace(">", "").Replace("unsigned ", "unsigned").Replace(", ", "__");
-            spl[i] = tmp;
-        }
-        return string.Join("_", spl);
     }
 }
 
