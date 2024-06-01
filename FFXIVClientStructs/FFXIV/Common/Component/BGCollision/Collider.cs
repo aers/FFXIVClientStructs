@@ -22,7 +22,7 @@ public unsafe partial struct Collider {
     [FieldOffset(0x48)] public Scene* Scene;
     //0x50: int
     //0x54: padding?
-    //0x58: long
+    [FieldOffset(0x58)] public ulong LayoutObjectId; // low dword = layoutinstance Id.InstanceKey, high dword = layoutinstance SubIndex
     //0x60: long
     [FieldOffset(0x68)] public ulong LayerMask;
     [FieldOffset(0x70)] public ulong ObjectMaterialValue;

@@ -47,6 +47,13 @@ public unsafe partial struct Matrix4x3 {
         M41 = M41, M42 = M42, M43 = M43, M44 = 1
     };
 
+    public Matrix4x3(Matrix4x4 full) {
+        Row0 = new(full.M11, full.M12, full.M13);
+        Row1 = new(full.M21, full.M22, full.M23);
+        Row2 = new(full.M31, full.M32, full.M33);
+        Row3 = new(full.M41, full.M42, full.M43);
+    }
+
     public Vector3 TransformCoordinate(Vector3 local) => new(
         M11 * local.X + M21 * local.Y + M31 * local.Z + M41,
         M12 * local.X + M22 * local.Y + M32 * local.Z + M42,
