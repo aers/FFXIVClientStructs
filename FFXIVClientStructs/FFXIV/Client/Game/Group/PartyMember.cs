@@ -22,6 +22,14 @@ public unsafe partial struct PartyMember {
     [FieldOffset(0x365)] public byte ClassJob;
     [FieldOffset(0x366)] public byte Level;
     [FieldOffset(0x367)] public byte DamageShield;
+    [FieldOffset(0x368), FixedSizeArray] internal FixedSizeArray3<ExtraProperty> _extraProperties;
+    [FieldOffset(0x380)] public byte Flags; // 0x01 == set for valid alliance members, 0x04 == set if XYZ is valid?
 
-    [FieldOffset(0x380)] public byte Flags; // 0x01 == set for valid alliance members
+    public bool IsValidAllianceMember => (Flags & 1) != 0;
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct ExtraProperty {
+        [FieldOffset(0)] public byte Key; // 1 = ?, 2/3 = something eureka related, 5 = bozja rank
+        [FieldOffset(4)] public int Value;
+    }
 }

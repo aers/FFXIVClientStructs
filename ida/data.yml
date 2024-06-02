@@ -108,7 +108,6 @@ functions:
   0x1401C04E0: j_SleepEx
   0x1401C04F0: j_Sleep
   0x14021AEE0: GetLanguageCode
-  0x1402ED040: CountdownPointer
   0x140318B40: CleanupCharaSelectCharacters
   0x140329430: GetGlobalTextParameter
   0x1403356E0: std::vector_SetSize
@@ -465,14 +464,36 @@ classes:
       0x141619290: ctor
   Client::Game::StatusManager:
     funcs:
-      0x1407525B0: Initialize
+      0x1407525B0: ctor
+      0x140752610: Reset
+      0x1407526A0: CopyFrom
+      0x140752840: Update
       0x140754700: HasStatus
-      0x1407558E0: GetStatusIndex
+      0x140754750: HasFlag
+      0x140754780: LogGainMessage
+      0x140754830: LogLoseMessage
+      0x1407548C0: PlayGainVfx
+      0x140754930: PlayLoseVfx
+      0x1407549B0: ExecAllOnGain
+      0x140754A20: SetStatus
+      0x140754D90: AddStatus
+      0x140754E60: RemoveStatus
+      0x1407555D0: UpdateParam
+      0x1407555F0: SetFirstHalf
+      0x140755680: SetSecondHalf
       0x140755720: GetStatusIdByIndex
       0x140755740: GetRemainingTimeByIndex
       0x140755770: GetSourceIdByIndex
-      0x140754D90: AddStatus
-      0x140754E60: RemoveStatus
+      0x1407558E0: GetStatusIndex
+      0x140755930: GetParamForStatus
+      0x140756160: ExecuteStatusOff
+      0x1407563C0: CalculateMovementSpeedModifier
+      0x140756890: CalculateEffectParamSum
+      0x1407569D0: HasStatusWithEffect
+      0x140756AE0: FindStatusIndexByParamEffect
+      0x140756E10: FindStatusById
+      0x140756E40: GetStatusByIndex
+      0x140757290: RefreshFlags
   Client::Game::RetainerManager:
     instances:
       - ea: 0x14222AFD0
@@ -722,21 +743,26 @@ classes:
         base: Client::System::Input::SoftKeyboardDeviceInterface
     funcs:
       0x141445210: ctor
+  Client::Game::Object::GameObjectManager::Lists:
+    funcs:
+      0x1407BCA60: GetFilteredObjectById
+      0x1407BCAF0: GetNetworkedObjectById
+      0x1407BE5F0: SortNetworked
+      0x1407BE710: SortFiltered
   Client::Game::Object::GameObjectManager: # all game objects
     instances:
       - ea: 0x1421FB8E0
         pointer: False
     funcs:
-      0x1407BCE80: Initialize
+      0x1407BCC30: UpdateObjectArrays
+      0x1407BCE50: UpdateObjectArraysWrapper
+      0x1407BCE60: UpdateObjectArraysWrapper2
+      0x1407BCE80: ctor
       0x1407BD0B0: Update
       0x1407BD4C0: UpdateMountAndCompanionMovement # maybe?
       0x1407BD710: UpdateLookAt
       0x1407BD890: DeleteAllModels
       0x1407BDA20: DeleteAllObjects  # IMPORTANT:: DONT EVER CALL THIS FOR REAL OKAY
-      0x1407BCA60: GetFilteredObjectById
-      0x1407BCC30: UpdateObjectArrays
-      0x1407BCE50: UpdateObjectArraysWrapper
-      0x1407BCE60: UpdateObjectArraysWrapper2
   Client::Game::Object::ClientObjectManager: # non-networked objects
     instances:
       - ea: 0x14222B9B0
@@ -883,18 +909,29 @@ classes:
         name: SecondInstance
         pointer: False
     funcs:
+      0x14092DB00: SetPartySize
       0x14092DB60: ctor
       0x14092DCD0: SetPartyEmpty
+      0x14092DE00: UpdatePartyPositions
+      0x14092DEE0: UpdateAllianceNormal
+      0x14092DFE0: UpdateAllianceSmall
+      0x14092E100: UpdateAllianceNormalPositions
+      0x14092E530: UpdateAllianceSmallPositions
       0x14092EA60: GetAllianceMemberByGroupAndIndex  # (this, group, index)
       0x14092EAC0: GetAllianceMemberByIndex # (this, index)
       0x14092EAE0: IsObjectIDInParty # (this, objectID)
       0x14092EB40: IsCharacterInPartyByName # (this, char*)
       0x14092EBC0: IsObjectIDInAlliance
       0x14092EC30: IsObjectIDPartyLeader
+      0x14092EE40: SetPartyMemberExtraProperty
+      0x14092EEA0: SetAllianceMemberExtraProperty
       0x14092EF00: UpdateAllianceMemberAtIndex
+      0x14092F060: UpdateInAllianceFlagForAllCharacters
+      0x14092F1A0: GetPartyMemberByObjectId
       0x14092F200: GetPartyMemberByIndex
       0x14092F280: GetPartyMemberByContentId
-      0x14092F1A0: GetPartyMemberByObjectId
+      0x14092F2D0: GetAllianceMemberByObjectId
+      0x14092F330: GetPartyOrAllianceMemberByObjectId
       0x140B8D6A0: Create
       0x140B8D5E0: GetGroupManager
       0x140B8D600: GetNextInstance
@@ -2041,25 +2078,68 @@ classes:
     funcs:
       0x140049570: StaticInitializer
       0x1400AB7A0: GetCurrentComboActionId
+      0x1409BADF0: ClassifyTarget # (Character*) -> uint enum
+      0x1409BAF50: AdjustRecastTimeByStatusesAndStats # (Exd::Sheets::Action*, int recastMs, int actionCategoryId) -> int ms
+      0x1409BB190: GetFlankType # (vec3* pos, GameObject* obj) -> uint enum
       0x1409BB290: GetActionRange
       0x1409BB3C0: CanUseActionOnTarget
       0x1409BB660: GetActionInRangeOrLoS
       0x1409BBC80: GetAdjustedCastTime
       0x1409BC550: GetAdjustedRecastTime
+      0x1409BCB60: GetAdjustedAdditionalRecastTime
       0x1409BCD10: GetActionCost
       0x1409BD5B0: GetSpellIdForAction
+      0x1409BDE80: NextActionSequence
+      0x1409BDEE0: UpdateAreaTargetingMode
+      0x1409BE8F0: GetRecastGroup
       0x1409BEB40: UseActionLocation
       0x1409BF970: UseGeneralAction
+      0x1409C0250: UseBuddyAction
+      0x1409C0430: UsePetAction
+      0x1409C04D0: UseCompanionAction
+      0x1409C05E0: UsePVPAction
       0x1409C0650: UseFieldMarkerAction
+      0x1409C0700: UseChocoboRaceItemAction
+      0x1409C0740: UseChocoboRaceAbilityAction
+      0x1409C0780: UseBgcArmyAction
+      0x1409C0B10: UseMinionRoulette
+      0x1409C0C70: UseMountRoulette
+      0x1409C0ED0: CanUseMountRoulette
+      0x1409C1030: HasMonkForm
       0x1409C1130: CheckActionResources
+      0x1409C3BF0: AutoFaceTarget
+      0x1409C3C50: AutoFaceTargetPosition
+      0x1409C3D40: IsQueuedActionReady
+      0x1409C3DF0: GetRecastGroupDetail
+      0x1409C3E70: GetRecastGroupDetailForAction
+      0x1409C3EC0: Update
+      0x1409C4530: Initialize
+      0x1409C49A0: CanPlayerClassUseAction
+      0x1409C4A00: CanClassUseAction
       0x1409C4B30: GetActionStatus
       0x1409C68C0: CanUseAction
+      0x1409C6900: IsActionHighlighted  # (this, actionType, actionId)
       0x1409C7150: GetAdjustedActionId
-      0x1409C49A0: CanPlayerClassUseAction
+      0x1409C9050: IsActionAreaTargeted
       0x1409C9170: UseAction
       0x1409C9C10: UseComboAction
+      0x1409C9C80: StartForcedCast
+      0x1409C9E80: OnActionRejected
+      0x1409C9EE0: OnCastCanceled
+      0x1409CA0F0: IsCasting
+      0x1409CA200: IsActionTargetInRange
+      0x1409CA440: ClearQueuedActionInCooldownGroup
+      0x1409CA4C0: CanQueueAction
       0x1409CA5B0: IsRecastTimerActive
+      0x1409CA640: IsChargeExhausted    # (this, groupId, additionalGroupId, maxLevelMaxCharges) -> bool
+      0x1409CA6D0: IsActionCharging     # (this, actionType, actionId) -> bool
+      0x1409CA760: IsActionCharging2    # (this, groupId, maxCharges, maxLevelMaxCharges) -> bool
+      0x1409CA8D0: SetCooldown          # (this, actionType, actionId, newElapsed, newTotal) -> *RecastDetail
       0x1409CA940: StartCooldown
+      0x1409CAAB0: SetCooldownForGroup  # (this, groupId, newElapsed, newTotal) -> *RecastDetail
+      0x1409CAAF0: SkewCooldownForGroup # (this, groupId, skew) -> *RecastDetail
+      0x1409CAB40: ResetCooldownForGroup
+      0x1409CAC50: GetAdditionalRecastGroup
       0x1409CACF0: GetRecastTimeElapsed
       0x1409CAD30: GetRecastTimeElapsedForGroup # (this, groupId) -> float
       0x1409CAD60: SetRecastTimeElapsed # (this, actionType, actionId, newElapsed) -> *RecastDetail
@@ -2067,27 +2147,26 @@ classes:
       0x1409CAE30: GetRecastTimeForGroup  # (this, groupId) -> float
       0x1409CAEB0: UpdateRecastFromNetwork
       0x1409CAEF0: AssignBlueMageActionToSlot
+      0x1409CB030: ForceSetBlueMageActionInSlot
       0x1409CB0E0: GetActiveBlueMageActionInSlot
       0x1409CB100: SwapBlueMageActionSlots
       0x1409CB210: SetBlueMageActions
-      0x1409CECB0: GetMaxCharges              # static
-      0x1409CE440: GetMaxCharges2             # not static - calls static
+      0x1409CB700: CanAssignBlueMageAction
+      0x1409CBB50: UseActionFromShell
+      0x1409CBD10: IsAreaTargetingModeActive
+      0x1409CBE10: StartAreaTargetingMode
+      0x1409CBEF0: CancelAreaTargetingMode
+      0x1409CBF20: RemoveAreaTargetingVfx
+      0x1409CDE20: GetGroundPositionForObject
+      0x1409CE220: GetGroundPositionForCursor
       0x1409CE350: GetCurrentCharges          # (this, actionId) -> uint
+      0x1409CE440: GetMaxCharges2             # not static - calls static
+      0x1409CE760: ResolveTarget
+      0x1409CE930: StartAnimationLock
+      0x1409CE950: IsActionUnlocked
+      0x1409CECB0: GetMaxCharges              # static
+      0x1409CF220: OnCastStarted
       0x1409CFFB0: GetDutyActionId            # (byte dutyActionSlot) -> uint
-      0x1409BE8F0: GetRecastGroup
-      0x1409C3DF0: GetRecastGroupDetail
-      0x1409CAC50: GetAdditionalRecastGroup
-      0x1409CA4C0: IsActionOffCooldown
-      0x1409CA640: IsChargeExhausted    # (this, groupId, additionalGroupId, maxLevelMaxCharges) -> byte
-      0x1409CA6D0: IsActionCharging     # (this, actionType, actionId) -> byte
-      0x1409CA8D0: SetCooldown          # (this, actionType, actionId, newElapsed, newTotal) -> *RecastDetail
-      0x1409CAAB0: SetCooldownForGroup  # (this, groupId, newElapsed, newTotal) -> *RecastDetail
-      0x1409CAAF0: SkewCooldownForGroup # (this, groupId, skew) -> *RecastDetail
-      0x1409CAB40: ResetCooldownForGroup
-      0x1409C6900: IsActionHighlighted  # (this, actionType, actionId)
-      0x1409CA200: IsActionTargetInRange
-      0x1409C3EC0: Update
-      0x1409C4530: Initialize
   Client::Game::JobGaugeManager:
     instances:
       - ea: 0x1421CC1D0
@@ -7301,6 +7380,7 @@ classes:
       0x140749730: SetPosition
       0x1407497E0: SetRotation
       0x14074A900: IsReadyToDraw
+      0x14074AE80: SetEventState
       0x14074B4F0: GetAsCharacter
       0x14074B520: GetAsBattleCharaMaybe # might be some other cast, or even Character too?
       0x14074D2A0: Initialize
@@ -7335,6 +7415,11 @@ classes:
       0x14075A110: SendTitleIdUpdate
       0x14075A190: SetMode
       0x14075C0B0: Finalize
+      0x14075FB50: StartCast
+      0x14075FC50: CancelCast
+      0x140760B10: CalculateMovementSpeedMultiplier
+      0x140761740: StartOmen
+      0x140761AE0: StartOmenDirectional
       0x1407BC5C0: ctor
   Client::Game::Control::CharacterLookAtController:
     vtbls:
@@ -7425,6 +7510,8 @@ classes:
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x14132C4D0: ctor
+      0x14132DC60: SetTether
+      0x14132DD90: ClearTether
       0x14132E760: LoadCharacterSound
   Client::Game::Character::MountContainer:
     vtbls:
@@ -7451,6 +7538,8 @@ classes:
       0x1407BC730: ctor
       0x140763090: dtor
       0x141321520: CalculateAndApplyOverallSpeed
+      0x141321960: SetModelState
+      0x141321B10: SetAnimationState
       0x141323A50: SetSlotSpeed
       0x141323BB0: GetHeightAdjustActionTimelineRowId
       0x141324670: SetLipsOverrideTimeline
@@ -9186,6 +9275,13 @@ classes:
     vtbls:
       - ea: 0x1419E3690
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402EC500: Modify
+      0x1402EC910: Cancel
+      0x1402ECF70: DeactivateIfPartyDissolved
+      0x1402ED040: UpdateTick
+      0x1402ED110: UpdateCountdownDisplay
+      0x1402ED3A0: CloseAgents
   Client::UI::Agent::AgentWeeklyPuzzle:
     vtbls:
       - ea: 0x141A768A8
@@ -13050,6 +13146,9 @@ classes:
       - ea: 0x141C3C750
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
+      0x1414B8D60: GetInstance # static
+      0x1414B9130: GetState # static
+      0x1414B9180: UseFromHolster
       0x1414B9800: ctor
   Client::Game::InstanceContent::PublicContentSouthernFront:
     vtbls:

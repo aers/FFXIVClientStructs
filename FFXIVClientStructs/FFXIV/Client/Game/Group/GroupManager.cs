@@ -19,6 +19,9 @@ public unsafe partial struct GroupManager {
 
     [FieldOffset(0x63E1)] public byte AllianceFlags; // 0x01 == is alliance; 0x02 == alliance with 5 4-man groups rather than 2 8-man
 
+    public unsafe bool IsAlliance => (AllianceFlags & 1) != 0;
+    public unsafe bool IsSmallGroupAlliance => (AllianceFlags & 2) != 0; // alliance containing 6 groups of 4 members rather than 3x8
+
     [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]
     public static partial GroupManager* Instance();
 

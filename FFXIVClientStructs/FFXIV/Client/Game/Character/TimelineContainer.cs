@@ -12,6 +12,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 public unsafe partial struct TimelineContainer {
     [FieldOffset(0x10)] public ActionTimelineSequencer TimelineSequencer;
     [FieldOffset(0x200)] public TimelineTransitController TimelineTransit;
+    [FieldOffset(0x2C0)] public byte ModelState;
+    [FieldOffset(0x2C1), FixedSizeArray] internal FixedSizeArray2<byte> _animationState;
 
     [FieldOffset(0x2C4)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
 

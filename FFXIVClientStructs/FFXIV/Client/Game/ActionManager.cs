@@ -1,5 +1,5 @@
+using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -10,20 +10,83 @@ public unsafe partial struct ActionManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? F3 0F 10 13", 3)]
     public static partial ActionManager* Instance();
 
+    [FieldOffset(0x08)] public float AnimationLock;
+    [FieldOffset(0x0C)] public float CompanionActionCooldown; // companion (minion) summon action has 1.0s cooldown
+    [FieldOffset(0x10)] public float BuddyActionCooldown; // buddy (chocobo) actions have 0.5s cooldown
+    [FieldOffset(0x14)] public float PetActionCooldown; // pet (carbuncle) actions have 0.5s cooldown
+    [FieldOffset(0x18)] public byte NumPetActionsOnCooldown; // you can execute 2 pet actions in short succession
+
+    // the fields below are related to the currently cast spell; there is a substructure at 0x20 with empty constructor with unknown size, they could be part of it
+    [FieldOffset(0x24)] public uint CastSpellId; // result of GetSpellIdForAction for used action
+    [FieldOffset(0x28)] public ActionType CastActionType;
+    [FieldOffset(0x2C)] public uint CastActionId;
+    [FieldOffset(0x30)] public float CastTimeElapsed;
+    [FieldOffset(0x34)] public float CastTimeTotal;
+    [FieldOffset(0x38)] public ulong CastTargetId;
+    [FieldOffset(0x40)] public Vector3 CastTargetPosition;
+    [FieldOffset(0x50)] public float CastRotation; // in radians
+
     [FieldOffset(0x60)] public ComboDetail Combo;
     [FieldOffset(0x68)] public bool ActionQueued;
     [FieldOffset(0x6C)] public ActionType QueuedActionType;
     [FieldOffset(0x70)] public uint QueuedActionId;
     [FieldOffset(0x78)] public GameObjectId QueuedTargetId;
-    [FieldOffset(0x80)] public uint QueueType;
+    [FieldOffset(0x80)] public UseActionMode QueueType;
+    [FieldOffset(0x84)] public uint QueuedComboRouteId;
 
-    [FieldOffset(0x13C), FixedSizeArray] internal FixedSizeArray24<uint> _blueMageActions;
+    // the fields below are related to area-targeting mode
+    [FieldOffset(0x88)] public uint AreaTargetingActionId;
+    [FieldOffset(0x8C)] public ActionType AreaTargetingActionType;
+    [FieldOffset(0x90)] public uint AreaTargetingSpellId;
+    // 0x94: int argument to start function, always 0?
+    // 0x98: ulong object to use for area targeting
+    // 0xA0: bool related to area targeting
+    // 0xA8: vfx* related to area targeting
+    // 0xB0: vfx* related to area targeting
+    // 0xB8: bool should execute at current cursor pos?
+    // 0xBC: uint ???
 
+    [FieldOffset(0x110)] public ushort LastUsedActionSequence;
+    [FieldOffset(0x112)] public ushort LastHandledActionSequence;
+    [FieldOffset(0x114), FixedSizeArray] internal FixedSizeArray24<uint> _blueMageActions;
+    [FieldOffset(0x174), FixedSizeArray] internal FixedSizeArray80<RecastDetail> _cooldowns;
+
+    [FieldOffset(0x7D8)] public float DistanceToTargetHitbox; // distance to target minus both self & target hitbox radius, clamped to 0
+
+    /// <summary>
+    /// Initiate action execution.
+    /// </summary>
+    /// <remarks>
+    /// If called shortly before action is available (due to cooldown or animation lock), action is queued.
+    /// If action is area-targeted, starts area targeting mode rather than executing it immediately.
+    /// </remarks>
+    /// <param name="actionType">Type of action to execute.</param>
+    /// <param name="actionId">Id of action to execute.</param>
+    /// <param name="targetId">Intended target for the action.</param>
+    /// <param name="extraParam">For items - inventory slot to use from (bag id in high byte, slot id in low byte), or 0xFFFF if unspecified (e.g. used from hotbar).</param>
+    /// <param name="mode">Special action execution mode.</param>
+    /// <param name="comboRouteId"></param>
+    /// <param name="outOptAreaTargeted">If non-null, will be set to true if area-targeting mode was started instead of executing an action.</param>
+    /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? EB 64 B1 01")]
-    public partial bool UseAction(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, uint a4 = 0, uint a5 = 0, uint a6 = 0, void* a7 = null);
+    public partial bool UseAction(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, uint extraParam = 0, UseActionMode mode = UseActionMode.None, uint comboRouteId = 0, bool* outOptAreaTargeted = null);
 
+    /// <summary>
+    /// Actually execute the action right now, if possible. This skips queueing, area targeting mode, etc.
+    /// </summary>
+    /// <remarks>
+    /// The function name is a bit misleading - this function is called internally for all actions, not necessarily location-targeted ones.
+    /// This function verifies that action can actually be cast (checks LoS, various states that could prevent successful cast, etc).
+    /// This expects input action to be already adjusted - i.e. don't pass General actions here, it won't work properly. See code for UseAction for details.
+    /// </remarks>
+    /// <param name="actionType">Type of action to execute. Should be adjusted.</param>
+    /// <param name="actionId">Id of action to execute. Should be adjusted.</param>
+    /// <param name="targetId">Intended target for the action. Note that real target can be modified (e.g. replaced with player for self-targeted actions, etc) by ResolveTarget.</param>
+    /// <param name="location">Target position, important for area-targeted spells. Be careful if passing null - game doesn't really expect that and might dereference it in some code paths!</param>
+    /// <param name="extraParam">See UseAction.</param>
+    /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? EB 46")]
-    public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint a4 = 0);
+    public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint extraParam = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 42")]
     public partial uint GetActionStatus(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, bool checkRecastActive = true, bool checkCastingActive = true, uint* outOptExtraInfo = null);
@@ -115,11 +178,26 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 33 D2")]
     public static partial int GetActionCost(ActionType actionType, uint actionId, byte a3, byte a4, byte a5, byte a6);
 
+    /// <summary>
+    /// Calculate cooldown for an action, in milliseconds, optionally adjusted by various class mechanics.
+    /// </summary>
+    /// <param name="actionType">The type of action to check.</param>
+    /// <param name="actionId">The ID of the action to check.</param>
+    /// <param name="applyClassMechanics">If true, applies various class mechanics (traits, etc).</param>
+    /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 8B D6 41 8B CF")]
-    public static partial int GetAdjustedRecastTime(ActionType actionType, uint actionId, byte a3 = 1);
+    public static partial int GetAdjustedRecastTime(ActionType actionType, uint actionId, bool applyClassMechanics = true);
 
+    /// <summary>
+    /// Calculate cast time for an action, in milliseconds, adjusted by player stats (haste, sks/sps, etc.) and optionally various class mechanics.
+    /// </summary>
+    /// <param name="actionType">The type of action to check.</param>
+    /// <param name="actionId">The ID of the action to check.</param>
+    /// <param name="applyProcs">If true, applies various class mechanics (procs, swiftcast, etc).</param>
+    /// <param name="outOptProc">If non-null and applyProcs is true, will be set to applied proc.</param>
+    /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 0F 84 ?? ?? ?? ?? 33 C9")]
-    public static partial int GetAdjustedCastTime(ActionType actionType, uint actionId, byte a3 = 1, byte* a4 = null);
+    public static partial int GetAdjustedCastTime(ActionType actionType, uint actionId, bool applyProcs = true, CastTimeProc* outOptProc = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8")]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
@@ -164,6 +242,53 @@ public unsafe partial struct ActionManager {
     /// <returns>Returns an Action ID.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? EB 17 33 C9")]
     public static partial uint GetDutyActionId(ushort dutyActionSlot);
+
+    /// <summary>
+    /// Calculate target position for area-targeted spell corresponding to current cursor position.
+    /// </summary>
+    /// <param name="outPosition">If successful, contains coordinates of the point on the ground.</param>
+    /// <returns>Whether intersection with ground was found.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 8B 84 24 80 00 00 00 33 C0")]
+    public partial bool GetGroundPositionForCursor(Vector3* outPosition);
+
+    /// <summary>
+    /// If 'auto face target on action execution' config option is enabled, rotate character to face target.
+    /// </summary>
+    /// <param name="position">Target position</param>
+    /// <param name="followTargetId">?</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 81 FE FB 1C 00 00 74 ?? 81 FE 53 5F 00 00 74 ?? 81 FE 6F 73 00 00")]
+    public partial void AutoFaceTargetPosition(Vector3* position, ulong followTargetId = 0xE000_0000);
+
+    /// <summary>
+    /// Called every frame, responsible for ticking down timers (cooldowns, animation lock, etc) and executing queued action as soon as possible.
+    /// </summary>
+    [MemberFunction("48 8B C4 48 89 58 20 57 48 81 EC")]
+    public partial void Update();
+
+    public enum CastTimeProc : byte {
+        None = 0,
+        Firestarter = 1, // THM/BLM
+        Thundercloud = 2, // THM/BLM
+        Swiftcast = 3,
+        Lightspeed = 4, // AST
+        Dualcast = 5, // RDM
+        Abridged = 6, // AST
+        Triplecast = 7, // BLM
+        DemiBahamut = 8, // SMN
+        Requiescat = 9, // PLD
+        DemiPhoenix = 11, // SMN
+        EnhancedHarpe = 12, // RPR
+        SoulsowOutOfCombat = 13, // RPR
+        Acceleration = 14, // RDM
+        DivineMight = 15, // PLD
+    }
+
+    public enum UseActionMode {
+        None = 0, // usual action execution, e.g. a hotbar button press
+        Queue = 1, // previously queued action is now ready and is being executed (=> will ignore queue)
+        Macro = 2, // action execution originating from a macro (=> won't be queued)
+        Combo = 3, // action execution is from a single-button combo
+    }
 }
 
 /// <summary>
