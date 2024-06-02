@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
@@ -23,6 +24,6 @@ public unsafe partial struct VfxContainer {
         [FieldOffset(0x00)] public ushort Id; // Channeling sheet row id
         [FieldOffset(0x02)] public byte Progress; // 0-100
         // 0x8: vfx*
-        [FieldOffset(0x10)] public ulong TargetId;
+        [FieldOffset(0x10)] public GameObjectId TargetId;
     }
 }

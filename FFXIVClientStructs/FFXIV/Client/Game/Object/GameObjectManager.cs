@@ -40,7 +40,7 @@ public unsafe partial struct GameObjectManager {
         /// Binary search for an object by id, using Filtered list.
         /// </summary>
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8B D3 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 54 24")]
-        public partial GameObject* GetFilteredObjectById(ulong id);
+        public partial GameObject* GetFilteredObjectById(GameObjectId objectId);
 
         /// <summary>
         /// Binary search for an object by entity id, using Networked list.

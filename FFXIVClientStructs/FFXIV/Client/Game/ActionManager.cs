@@ -22,7 +22,7 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0x2C)] public uint CastActionId;
     [FieldOffset(0x30)] public float CastTimeElapsed;
     [FieldOffset(0x34)] public float CastTimeTotal;
-    [FieldOffset(0x38)] public ulong CastTargetId;
+    [FieldOffset(0x38)] public GameObjectId CastTargetId;
     [FieldOffset(0x40)] public Vector3 CastTargetPosition;
     [FieldOffset(0x50)] public float CastRotation; // in radians
 
