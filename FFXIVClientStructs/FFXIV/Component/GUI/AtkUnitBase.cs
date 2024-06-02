@@ -202,7 +202,7 @@ public unsafe partial struct AtkUnitBase {
     public partial void OnRefresh(uint numValues, AtkValue* values);
 
     [VirtualFunction(51)]
-    public partial void OnUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
+    public partial void OnRequestedUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 
     [VirtualFunction(53)]
     public partial void FireCloseCallback();
