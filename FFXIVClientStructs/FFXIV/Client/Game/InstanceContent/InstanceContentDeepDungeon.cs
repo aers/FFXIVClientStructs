@@ -26,7 +26,7 @@ public unsafe partial struct InstanceContentDeepDungeon {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DeepDungeonPartyInfo {
-        [FieldOffset(0x00)] public uint ObjectId;
+        [FieldOffset(0x00)] public uint EntityId;
         [FieldOffset(0x04)] public sbyte RoomIndex;
     }
 

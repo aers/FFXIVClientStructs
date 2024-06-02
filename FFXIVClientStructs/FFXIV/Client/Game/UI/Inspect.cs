@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct Inspect {
-    [FieldOffset(0xC)] public uint ObjectId;
+    [FieldOffset(0xC)] public uint EntityId;
     [FieldOffset(0x10)] public byte Type;
     [FieldOffset(0x12)] public short WorldId;
     [FieldOffset(0x14), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;

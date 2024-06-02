@@ -61,7 +61,7 @@ public unsafe partial struct MJIAnimal {
     [FieldOffset(0x00)] public byte SlotId;
     [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray24<byte> _nickname;
     [FieldOffset(0x1C)] public uint BNPCNameId;
-    [FieldOffset(0x20)] public uint ObjectId;
+    [FieldOffset(0x20)] public uint EntityId;
 
     /// <summary>
     /// Row index in MJIAnimals sheet.
@@ -123,7 +123,7 @@ public struct MJIMinionSlot {
     /// </remarks>
     [FieldOffset(0x0)] public byte SlotId;
 
-    [FieldOffset(0x4)] public uint ObjectId;
+    [FieldOffset(0x4)] public uint EntityId;
     [FieldOffset(0x8)] public ushort MinionId;
 
     /// <summary>

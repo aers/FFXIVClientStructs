@@ -30,7 +30,7 @@ public unsafe partial struct TargetSystem {
     public static partial TargetSystem* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 EB 13")]
-    public partial ulong GetCurrentTargetId();
+    public partial GameObjectId GetCurrentTargetId();
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C0 ED")]
     public partial GameObject* GetCurrentTarget();

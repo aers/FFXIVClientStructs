@@ -51,7 +51,7 @@ public unsafe partial struct AgentHUD {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
 public struct HudPartyMemberEnmity {
-    [FieldOffset(0x00)] public uint ObjectId;
+    [FieldOffset(0x00)] public uint EntityId;
     [FieldOffset(0x04)] public int Enmity;
     [FieldOffset(0x08)] public short Index;
 }
@@ -61,5 +61,5 @@ public unsafe struct HudPartyMember {
     [FieldOffset(0x0)] public BattleChara* Object;
     [FieldOffset(0x8)] public byte* Name;
     [FieldOffset(0x10)] public ulong ContentId;
-    [FieldOffset(0x18)] public uint ObjectId;
+    [FieldOffset(0x18)] public uint EntityId;
 }

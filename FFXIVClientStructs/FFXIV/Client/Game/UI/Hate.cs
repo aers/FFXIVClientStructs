@@ -11,6 +11,6 @@ public unsafe partial struct Hate {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public struct HateInfo {
-    [FieldOffset(0x00)] public uint ObjectId;
+    [FieldOffset(0x00)] public uint EntityId;
     [FieldOffset(0x04)] public int Enmity;
 }

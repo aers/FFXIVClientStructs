@@ -12,7 +12,7 @@ public unsafe partial struct Buddy {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x300)]
     public struct BuddyMember {
-        [FieldOffset(0x0)] public uint ObjectId;
+        [FieldOffset(0x0)] public uint EntityId;
         [FieldOffset(0x4)] public uint CurrentHealth;
         [FieldOffset(0x8)] public uint MaxHealth;
 

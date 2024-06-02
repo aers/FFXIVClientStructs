@@ -14,7 +14,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _characterName;
     /// <remarks> PSN-Online-ID or Xbox-Gamertag </remarks>
     [FieldOffset(0x41), FixedSizeArray(isString: true)] internal FixedSizeArray17<byte> _onlineId;
-    [FieldOffset(0x64)] public uint ObjectId;
+    [FieldOffset(0x64)] public uint EntityId;
     [FieldOffset(0x68)] public ulong ContentId;
     /// <remarks>
     /// 0 = Duty penalty<br/>

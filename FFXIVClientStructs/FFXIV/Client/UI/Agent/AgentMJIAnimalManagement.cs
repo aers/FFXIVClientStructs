@@ -51,7 +51,7 @@ public unsafe partial struct AgentMJIAnimalManagement {
     }
     [StructLayout(LayoutKind.Explicit, Size = 0x170)]
     public unsafe partial struct Slot {
-        [FieldOffset(0x000)] public uint ObjectId;
+        [FieldOffset(0x000)] public uint EntityId;
         [FieldOffset(0x008)] public AnimalDesc Desc;
         [FieldOffset(0x088)] public uint FoodItemId;
         [FieldOffset(0x08C)] public uint FoodItemCategoryId;
