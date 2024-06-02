@@ -3,11 +3,13 @@ from luminapie.definitions import Definition
 
 
 class ExcelListFile:
-    def __init__(self, data: list[bytes]):
+    def __init__(self, data):
+        # type: (list[bytes]) -> None
         self.data = b"".join(data).split("\r\n".encode("utf-8"))
         self.parse()
 
     def parse(self):
+        # type: () -> None
         self.header = self.data[0].decode("utf-8").split(",")
         self.version = int(self.header[1])
         self.data = self.data[1:]
@@ -21,15 +23,18 @@ class ExcelListFile:
             self.dict[int(linearr[1])] = linearr[0]
 
     def __repr__(self):
-        return f"""ExcelListFile: {self.header}, {self.dict}"""
+        # type: () -> str
+        return "ExcelListFile: {0}, {1}".format(self.header, self.dict)
 
 
 class ExcelHeader:
-    def __init__(self, data: bytes):
+    def __init__(self, data):
+        # type: (bytes) -> None
         self.data = data
         self.parse()
 
     def parse(self):
+        # type: () -> None
         self.magic = self.data[0:4]
         self.version = int.from_bytes(self.data[4:6], "big")
         self.data_offset = int.from_bytes(self.data[6:8], "big")
@@ -47,40 +52,62 @@ class ExcelHeader:
         ]
 
     def __repr__(self):
-        return f"""Header: {self.magic}, version: {self.version}, data_offset: {self.data_offset}, column_count: {self.column_count}, page_count: {self.page_count}, language_count: {self.language_count}, unknown1: {self.unknown1}, unknown2: {self.unknown2}, variant: {self.variant}, unknown3: {self.unknown3}, row_count: {self.row_count}, unknown4: {self.unknown4}"""
+        # type: () -> str
+        return "Header: {0}, version: {1}, data_offset: {2}, column_count: {3}, page_count: {4}, language_count: {5}, unknown1: {6}, unknown2: {7}, variant: {8}, unknown3: {9}, row_count: {10}, unknown4: {11}".format(
+            self.magic,
+            self.version,
+            self.data_offset,
+            self.column_count,
+            self.page_count,
+            self.language_count,
+            self.unknown1,
+            self.unknown2,
+            self.variant,
+            self.unknown3,
+            self.row_count,
+            self.unknown4,
+        )
 
 
 class ExcelColumnDefinition:
-    def __init__(self, data: bytes):
+    def __init__(self, data):
+        # type: (bytes) -> None
         self.data = data
         self.parse()
 
     def parse(self):
+        # type: () -> None
         self.type = ExcelColumnDataType(int.from_bytes(self.data[0:2], "big"))
         self.offset = int.from_bytes(self.data[2:4], "big")
 
-    def __lt__(self, other: "ExcelColumnDefinition") -> bool:
+    def __lt__(self, other):
+        # type: (ExcelColumnDefinition) -> bool
         return self.offset <= other.offset
 
-    def __repr__(self) -> str:
-        return f"""Column: {self.type.name}, offset: {self.offset:x}"""
+    def __repr__(self):
+        # type: () -> str
+        return "Column: {0}, offset: {1}".format(self.type.name, self.offset)
 
 
 class ExcelDataPagination:
-    def __init__(self, data: bytes):
+    def __init__(self, data):
+        # type: (bytes) -> None
         self.data = data
         self.parse()
 
     def parse(self):
+        # type: () -> None
         self.start_id = int.from_bytes(self.data[0:2], "big")
         self.row_count = int.from_bytes(self.data[2:4], "big")
 
     def __repr__(self):
-        return f"""Pagination: {self.start_id:x}, count: {self.row_count}"""
+        # type: () -> str
+        return "Pagination: {0:x}, count: {1}".format(self.start_id, self.row_count)
 
 
 class ExcelHeaderFile:
-    def __init__(self, data: list[bytes]):
+    def __init__(self, data):
+        # type: (list[bytes]) -> None
         self.data = data[0]
         self.column_definitions: list[ExcelColumnDefinition] = []
         self.pagination: list[ExcelDataPagination] = []
@@ -89,6 +116,7 @@ class ExcelHeaderFile:
         self.parse()
 
     def parse(self):
+        # type: () -> None
         self.header = ExcelHeader(self.data[0:32])
         if self.header.magic != b"EXHF":
             raise Exception("Invalid EXHF header")
@@ -122,9 +150,8 @@ class ExcelHeaderFile:
                 ]
             )
 
-    def map_names(
-        self, names: list[Definition]
-    ) -> tuple[dict[int, tuple[str, str]], int]:
+    def map_names(self, names):
+        # type: (list[Definition]) -> tuple[dict[int, tuple[str, str]], int]
         mapped: dict[int, tuple[str, str]] = {}
         largest_offset_index: int = 0
         for i in range(self.header.column_count):
@@ -167,7 +194,8 @@ class ExcelHeaderFile:
         return [mapped, size]
 
 
-def column_data_type_to_c_type(column_data_type: ExcelColumnDataType) -> str:
+def column_data_type_to_c_type(column_data_type):
+    # type: (ExcelColumnDataType) -> str
     if column_data_type == ExcelColumnDataType.Bool:
         return "bool"
     elif column_data_type == ExcelColumnDataType.Int8:
@@ -203,7 +231,8 @@ def column_data_type_to_c_type(column_data_type: ExcelColumnDataType) -> str:
         return "unsigned __int32"
 
 
-def column_data_type_to_size(column_data_type: ExcelColumnDataType) -> int:
+def column_data_type_to_size(column_data_type):
+    # type: (ExcelColumnDataType) -> int
     if (
         column_data_type == ExcelColumnDataType.Bool
         or column_data_type == ExcelColumnDataType.Int8

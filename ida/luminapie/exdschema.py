@@ -1,42 +1,49 @@
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError, URLError
 from json import loads
-from luminapie.definitions import Definition, RepeatDefinition, get_definition, SemanticVersion
-from typing import Union
+from luminapie.definitions import (
+    Definition,
+    RepeatDefinition,
+    get_definition,
+    SemanticVersion,
+)
 from yaml import load, Loader
 from zipfile import ZipFile
 from tempfile import TemporaryFile
 
-EXDSchemaFields = dict[str, Union[str, list[str], 'EXDSchemaFields']]
 
-
-def get_url(url: str, supress: bool = False) -> Union[bytes, None]:
+def get_url(url, supress=False):
+    # type: (str, bool) -> bytes | None
     req = Request(url)
     try:
         resp = urlopen(req)
         return resp.read()
     except HTTPError as e:
         if not supress:
-            print('HTTP Error code: ', e.code, ' for url: ', url)
+            print("HTTP Error code: ", e.code, " for url: ", url)
         return None
     except URLError as e:
         if not supress:
-            print('HTTP Reason: ', e.reason, ' for url: ', url)
+            print("HTTP Reason: ", e.reason, " for url: ", url)
         return None
 
 
-def get_latest_schema() -> dict[SemanticVersion, str]:
-    json = loads(get_url('https://api.github.com/repos/xivdev/EXDSchema/releases/latest'))
-    assetsJson = json['assets']
+def get_latest_schema():
+    # type: () -> dict[SemanticVersion, str]
+    json = loads(
+        get_url("https://api.github.com/repos/xivdev/EXDSchema/releases/latest")
+    )
+    assetsJson = json["assets"]
     assets = {}
     for asset in assetsJson:
-        version = SemanticVersion(*(int(x) for x in asset['name'].split('.')[0:5]))
-        assets[version] = asset['browser_download_url']
+        version = SemanticVersion(*(int(x) for x in asset["name"].split(".")[0:5]))
+        assets[version] = asset["browser_download_url"]
     assets = dict(sorted(assets.items()))
     return assets
 
 
-def get_latest_schema_url(ver: SemanticVersion) -> str:
+def get_latest_schema_url(ver):
+    # type: (SemanticVersion) -> str
     latest_release = get_latest_schema()
     # check if the current version can be retrieved
     if ver in latest_release:
@@ -47,7 +54,8 @@ def get_latest_schema_url(ver: SemanticVersion) -> str:
             return latest_release[version]
 
 
-def get_definitions(schema: SemanticVersion) -> dict[str, list[Definition]]:
+def get_definitions(schema):
+    # type: (SemanticVersion) -> dict[str, list[Definition]]
     exd_schema_map = {}
     with TemporaryFile() as f:
         f.write(get_url(get_latest_schema_url(schema), True))
@@ -55,9 +63,11 @@ def get_definitions(schema: SemanticVersion) -> dict[str, list[Definition]]:
         schema_zip = ZipFile(f)
 
         for file in schema_zip.namelist():
-            if file.endswith('.yml'):
+            if file.endswith(".yml"):
                 schema_yml = load(schema_zip.read(file), Loader=Loader)
-                exd_schema_map[file.rsplit('.', 1)[0].rsplit('/', 1)[1]] = schema_yml['fields']
+                exd_schema_map[file.rsplit(".", 1)[0].rsplit("/", 1)[1]] = schema_yml[
+                    "fields"
+                ]
 
     defs_map = {}
     for exd in exd_schema_map:

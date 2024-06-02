@@ -1,5 +1,6 @@
 class Crc32:
     def __init__(self):
+        # type: () -> None
         self.poly = 0xEDB88320
         self.table = [0] * 256 * 16
         for i in range(256):
@@ -12,7 +13,8 @@ class Crc32:
                         res = res >> 1
                 self.table[i + j * 256] = res
 
-    def calc(self, value: bytes):
+    def calc(self, value):
+        # type: (bytes) -> int
         start = 0
         size = len(value)
         crc_local = 4294967295 ^ 0
@@ -52,18 +54,21 @@ class Crc32:
 
         return ~(crc_local ^ 4294967295) % (1 << 32)
 
-    def byte(self, number: int, i=0):
+    def byte(self, number, i=0):
+        # type: (int, int) -> int
         return (number & (0xFF << (i * 8))) >> (i * 8)
 
-    def calc_index(self, path: str):
-        path_parts = path.split('/')
+    def calc_index(self, path):
+        # type: (str) -> int
+        path_parts = path.split("/")
         filename = path_parts[-1]
-        folder = path.rstrip(filename).rstrip('/')
+        folder = path.rstrip(filename).rstrip("/")
 
-        foldercrc = self.calc(folder.encode('utf-8'))
-        filecrc = self.calc(filename.encode('utf-8'))
+        foldercrc = self.calc(folder.encode("utf-8"))
+        filecrc = self.calc(filename.encode("utf-8"))
 
         return foldercrc << 32 | filecrc
 
-    def calc_index2(self, path: str):
-        return self.calc(path.encode('utf-8'))
+    def calc_index2(self, path):
+        # type: (str) -> int
+        return self.calc(path.encode("utf-8"))
