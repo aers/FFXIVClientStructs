@@ -743,7 +743,7 @@ classes:
         base: Client::System::Input::SoftKeyboardDeviceInterface
     funcs:
       0x141445210: ctor
-  Client::Game::Object::GameObjectManager::Lists:
+  Client::Game::Object::GameObjectManager::ObjectArrays:
     funcs:
       0x1407BCA60: GetFilteredObjectById
       0x1407BCAF0: GetNetworkedObjectById

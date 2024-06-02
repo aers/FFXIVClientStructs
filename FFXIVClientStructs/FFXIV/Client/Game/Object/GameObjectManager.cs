@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 public unsafe partial struct GameObjectManager {
     [FieldOffset(0x00)] public uint NextUpdateIndex; // rate limiting for updates per frame
     [FieldOffset(0x04)] public byte Active;
-    [FieldOffset(0x18)] public Lists Objects;
+    [FieldOffset(0x18)] public ObjectArrays Objects;
 
     [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA", 3)]
     public static partial GameObjectManager* Instance();
@@ -16,7 +16,7 @@ public unsafe partial struct GameObjectManager {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x3830)]
-    public unsafe partial struct Lists {
+    public unsafe partial struct ObjectArrays {
         // sparse array containing all objects; some slots could be null
         // different ranges have different meaning:
         // 000-199: objects from CharacterManager at index 2*i and their dependendent objects (mounts, minions, etc) at index 2*i+1
@@ -35,5 +35,17 @@ public unsafe partial struct GameObjectManager {
 
         [FieldOffset(0x3828)] public int FilteredCount;
         [FieldOffset(0x382C)] public int NetworkedCount;
+
+        /// <summary>
+        /// Binary search for an object by id, using Filtered list.
+        /// </summary>
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8B D3 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 54 24")]
+        public partial GameObject* GetFilteredObjectById(ulong id);
+
+        /// <summary>
+        /// Binary search for an object by entity id, using Networked list.
+        /// </summary>
+        [MemberFunction("48 89 5C 24 ?? 44 8B 89")]
+        public partial GameObject* GetNetworkedObjectById(uint entityId);
     }
 }
