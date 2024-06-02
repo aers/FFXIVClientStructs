@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentMJINekomimiRequest
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.MJINekomimiRequest)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

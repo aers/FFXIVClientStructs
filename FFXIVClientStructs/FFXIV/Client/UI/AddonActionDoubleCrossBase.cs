@@ -3,6 +3,10 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonActionDoubleCrossBase
+//   Client::UI::AddonActionBarBase
+//     Component::GUI::AtkUnitBase
+//       Component::GUI::AtkEventListener
 [Addon("_ActionDoubleCrossL", "_ActionDoubleCrossR")]
 [GenerateInterop]
 [Inherits<AddonActionBarBase>]

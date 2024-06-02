@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
+// Client::Game::Object::GameObjectManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x3888)]
 public unsafe partial struct GameObjectManager {

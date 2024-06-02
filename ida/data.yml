@@ -30,10 +30,10 @@ globals:
   0x1421D52D8: g_Client::Game::Control::Control_LocalPlayerObjectID
   0x1421D52E0: g_Client::Game::Control::Control_LocalPlayer
   0x1421FB530: g_LastTextCommand
-  0x1421FB8C0: g_CharacterManager_BattleCharaMemoryPtr
-  0x1421FB8C8: g_CharacterManager_CompanionMemoryPtr
-  0x1421FB8F8: g_GameObjectManager_ObjectList
-  0x1421FCBB0: g_GameObjectManager_ObjectListEnd
+  0x1421FB8C0: g_Client::Game::Character::CharacterManager_BattleCharaMemoryPtr
+  0x1421FB8C8: g_Client::Game::Character::CharacterManager_CompanionMemoryPtr
+  0x1421FB8F8: g_Client::Game::Object::GameObjectManager_ObjectList
+  0x1421FCBB0: g_Client::Game::Object::GameObjectManager_ObjectListEnd
   0x142205138: g_Client::Game::UI::Chain.RemainingTime # not a pointer
   0x14220513C: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x1422051BC: g_Client::Game::UI::PlayerState.ObjectId
@@ -655,6 +655,10 @@ classes:
   Application::Network::WorkDefinitions::Base_TypeInfoInterface:
     vtbls:
       - ea: 0x141CA1F98
+  Application::Network::WorkDefinitions::CharaMake:
+    vtbls:
+      - ea: 0x141CA0580
+        base: Application::Network::WorkDefinitions::Base
   Application::Network::WorkDefinitions::QuestWork:
     vtbls:
       - ea: 0x141A22AC8

@@ -3,7 +3,10 @@ using FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-[Agent(AgentId.SocialBlacklist)]
+// Client::UI::Agent::AgentBlacklist
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
+[Agent(AgentId.Blacklist)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]

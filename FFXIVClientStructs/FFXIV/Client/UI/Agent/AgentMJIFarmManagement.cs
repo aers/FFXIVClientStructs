@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentMJIFarmManagement
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.MJIFarmManagement)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonGcArmyExpedition
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("GcArmyExpedition")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

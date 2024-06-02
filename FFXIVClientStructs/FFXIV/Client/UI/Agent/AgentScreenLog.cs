@@ -4,6 +4,26 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentScreenLog
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
+[Agent(AgentId.ScreenLog)]
+[GenerateInterop]
+[Inherits<AgentInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
+public unsafe partial struct AgentScreenLog {
+
+    [FieldOffset(0x350)] public StdDeque<BalloonInfo> BalloonQueue;
+
+    [FieldOffset(0x378)]
+    public byte BalloonsHaveUpdate; // bool used to know if any balloons have been added/changed since last frame update
+
+    [FieldOffset(0x37C)]
+    public int BalloonCounter; // count of all balloons since game launch, used as unique balloon ID
+
+    [FieldOffset(0x390), FixedSizeArray] internal FixedSizeArray10<BalloonSlot> _balloonSlots;
+}
+
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
 public unsafe struct BalloonInfo {
     [FieldOffset(0x0)] public Utf8String FormattedText; // Contains breaks for newlines
@@ -25,21 +45,4 @@ public unsafe struct BalloonInfo {
 public struct BalloonSlot {
     [FieldOffset(0x0)] public int Id;
     [FieldOffset(0x4)] public byte Available; // bool
-}
-
-[Agent(AgentId.ScreenLog)]
-[GenerateInterop]
-[Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
-public unsafe partial struct AgentScreenLog {
-
-    [FieldOffset(0x350)] public StdDeque<BalloonInfo> BalloonQueue;
-
-    [FieldOffset(0x378)]
-    public byte BalloonsHaveUpdate; // bool used to know if any balloons have been added/changed since last frame update
-
-    [FieldOffset(0x37C)]
-    public int BalloonCounter; // count of all balloons since game launch, used as unique balloon ID
-
-    [FieldOffset(0x390), FixedSizeArray] internal FixedSizeArray10<BalloonSlot> _balloonSlots;
 }

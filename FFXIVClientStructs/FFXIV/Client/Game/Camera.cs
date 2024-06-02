@@ -17,6 +17,9 @@ public partial struct Camera {
     [FieldOffset(0x188)] public float SavedDistance;
 }
 
+// Client::Game::LobbyCamera
+//   Client::Game::Camera
+//     Client::Game::CameraBase
 [GenerateInterop]
 [Inherits<Camera>]
 [StructLayout(LayoutKind.Explicit, Size = 0x300)]
@@ -24,16 +27,23 @@ public unsafe partial struct LobbyCamera {
     [FieldOffset(0x2F8)] public void* LobbyExcelSheet;
 }
 
+// Client::Game::Camera3
+//   Client::Game::Camera
+//     Client::Game::CameraBase
 [GenerateInterop]
 [Inherits<Camera>]
 [StructLayout(LayoutKind.Explicit, Size = 0x300)]
 public partial struct Camera3;
 
+// Client::Game::LowCutCamera
+//   Client::Game::CameraBase
 [GenerateInterop]
 [Inherits<CameraBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2E0)]
 public partial struct LowCutCamera;
 
+// Client::Game::Camera4
+//   Client::Game::CameraBase
 [GenerateInterop]
 [Inherits<CameraBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x350)]

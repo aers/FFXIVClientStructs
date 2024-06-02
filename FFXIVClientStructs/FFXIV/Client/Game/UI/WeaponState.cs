@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
+// Client::Game::UI::WeaponState
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public struct WeaponState {
     [FieldOffset(0x00)] public bool IsUnsheathed;

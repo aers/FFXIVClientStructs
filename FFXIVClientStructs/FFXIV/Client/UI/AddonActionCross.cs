@@ -2,6 +2,10 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonActionCross
+//   Client::UI::AddonActionBarBase
+//     Component::GUI::AtkUnitBase
+//       Component::GUI::AtkEventListener
 [Addon("_ActionCross")]
 [GenerateInterop]
 [Inherits<AddonActionBarBase>]

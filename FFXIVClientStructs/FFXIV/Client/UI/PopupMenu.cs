@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::PopupMenu
+//   Component::GUI::AtkEventListener
 // Used in several addons as inlined derivations
 [GenerateInterop]
 [Inherits<AtkEventListener>]

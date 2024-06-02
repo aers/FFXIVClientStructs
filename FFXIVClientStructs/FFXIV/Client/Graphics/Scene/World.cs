@@ -1,5 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
+// Client::Graphics::Scene::World
+//   Client::Graphics::Scene::Object
+//   Client::Graphics::Singleton
 [GenerateInterop]
 [Inherits<Object>]
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]

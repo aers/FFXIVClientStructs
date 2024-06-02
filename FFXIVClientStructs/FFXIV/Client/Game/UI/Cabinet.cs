@@ -1,9 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-/// <summary>
-/// A struct representing the UIState Cabinet (otherwise known as the "Armoire" in-game) and the bitfield for stored
-/// items.
-/// </summary>
+// Client::Game::UI::Cabinet
+// Armoire
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x84)]
 public unsafe partial struct Cabinet {

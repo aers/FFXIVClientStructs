@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentMiragePrismMiragePlate
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.MiragePrismMiragePlate)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
@@ -19,7 +22,7 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
     // Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
-[Inherits<CharaView>]
+    [Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
     public unsafe partial struct MiragePrismMiragePlateCharaView {
         [FieldOffset(0x2C8)] public bool IsUpdatePending;

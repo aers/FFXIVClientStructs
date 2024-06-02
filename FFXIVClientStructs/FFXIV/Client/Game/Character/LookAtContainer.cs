@@ -3,6 +3,8 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
+// Client::Game::Character::LookAtContainer
+//   Client::Game::Character::ContainerInterface
 [GenerateInterop]
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x620)]

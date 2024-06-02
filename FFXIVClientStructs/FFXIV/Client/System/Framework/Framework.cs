@@ -21,6 +21,9 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x35C8)]
 public unsafe partial struct Framework {
+    [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", 7, true)]
+    public static partial Framework* Instance();
+
     [FieldOffset(0x0010)] public SystemConfig SystemConfig;
     [FieldOffset(0x0460)] public DevConfig DevConfig;
     [FieldOffset(0x0570)] public SavedAppearanceManager* SavedAppearanceData;
@@ -118,9 +121,6 @@ public unsafe partial struct Framework {
     /// Handle (type HMODULE) of steam_api64.dll
     /// </summary>
     [FieldOffset(0x35C0)] public nint SteamApiLibraryHandle;
-
-    [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", 7, true)]
-    public static partial Framework* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
     public partial UIModule* GetUIModule();

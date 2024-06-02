@@ -5,6 +5,7 @@ public struct TaskManagerOsData {
     [FieldOffset(0x40)] public nint Handle; // Win32 HANDLE type
 }
 
+// Client::System::Framework::TaskManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct TaskManager {
@@ -16,4 +17,13 @@ public unsafe partial struct TaskManager {
     // Lower priority = executed first
     [MemberFunction("8B C2 48 6B D0 78 48 03 51 58")]
     public partial void AddTask(uint priority, Task* task);
+
+    // Client::System::Framework::TaskManager::RootTask
+    //   Client::System::Framework::Task
+    [GenerateInterop]
+    [Inherits<Task>]
+    [StructLayout(LayoutKind.Explicit, Size = 0x78)]
+    public partial struct RootTask {
+        [FieldOffset(0x38)] public Task UnkTask;
+    }
 }

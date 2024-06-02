@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
+// Client::Game::UI::DirectorTodo
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe struct DirectorTodo {
     [FieldOffset(0x00)] public Director* Director;

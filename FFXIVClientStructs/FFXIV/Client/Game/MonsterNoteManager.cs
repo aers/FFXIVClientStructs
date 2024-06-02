@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::MonsterNoteManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x460)]
 public unsafe partial struct MonsterNoteManager {

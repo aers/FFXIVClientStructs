@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::LuaActor
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe struct LuaActor {
     [FieldOffset(0x08)] public GameObject* Object;

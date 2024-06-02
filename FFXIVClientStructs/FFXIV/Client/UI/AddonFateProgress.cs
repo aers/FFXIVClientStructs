@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonFateProgress
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("FateProgress")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

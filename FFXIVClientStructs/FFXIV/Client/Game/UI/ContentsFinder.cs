@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
+// Client::Game::UI::ContentsFinder
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct ContentsFinder {

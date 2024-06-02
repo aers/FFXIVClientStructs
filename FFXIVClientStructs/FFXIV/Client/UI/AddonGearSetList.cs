@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonGearSetList
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("GearSetList")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

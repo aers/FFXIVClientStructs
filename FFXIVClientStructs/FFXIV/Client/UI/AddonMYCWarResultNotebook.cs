@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonMYCWarResultNotebook
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("MYCWarResultNotebook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

@@ -3,9 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-// 6.31 ctor 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 F6 C6 41 08 00 48 89 71 18
-//      size 0xAD8
-
+// Client::UI::Agent::AgentFreeCompany
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.FreeCompany)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

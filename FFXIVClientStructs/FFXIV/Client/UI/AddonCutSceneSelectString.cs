@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonCutSceneSelectString
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("CutSceneSelectString")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

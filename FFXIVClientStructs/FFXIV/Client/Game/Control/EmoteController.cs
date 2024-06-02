@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
+// Client::Game::Control::EmoteController
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct EmoteController {

@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyLinkshellChat
+//   Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.LinkshellChat)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]

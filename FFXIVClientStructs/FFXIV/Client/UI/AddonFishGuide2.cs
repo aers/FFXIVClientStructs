@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonFishGuide2
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("FishGuide2")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

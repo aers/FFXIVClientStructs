@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonRaidFinder
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("RaidFinder")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

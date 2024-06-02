@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonActionMenu
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("ActionMenu")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

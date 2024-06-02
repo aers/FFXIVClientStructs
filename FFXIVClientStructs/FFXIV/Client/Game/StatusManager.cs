@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::StatusManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
 public unsafe partial struct StatusManager {
@@ -32,4 +33,18 @@ public unsafe partial struct StatusManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FF 3C")]
     public partial void RemoveStatus(int statusIndex, byte u2 = 0); // u2 always appears to be 0
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xC)]
+public struct Status {
+    [FieldOffset(0x0)] public ushort StatusId;
+    // this contains different information depending on the type of status
+    // debuffs - stack count
+    // food/potions - ID of the food/potion in the ItemFood sheet
+    [FieldOffset(0x2), CExporterUnion("Param")] public ushort Param;
+    // remains for compatibility
+    [FieldOffset(0x2), CExporterUnion("Param")] public byte StackCount; // TODO: remove?
+    [FieldOffset(0x4)] public float RemainingTime;
+    // objectID matching the entity that cast the effect - regens will be from the white mage ID etc
+    [FieldOffset(0x8)] public uint SourceId;
 }

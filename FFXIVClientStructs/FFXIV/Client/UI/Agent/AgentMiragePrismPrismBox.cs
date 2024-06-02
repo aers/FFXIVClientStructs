@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentMiragePrismPrismBox
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.MiragePrismPrismBox)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

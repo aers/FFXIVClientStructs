@@ -1,7 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::MirageManager
 // ctor "48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 C6 01 00 48 83 C1 04"
-// note: data is cleared when switching zones
+// Note: Data is cleared when switching zones
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1478)]
 public unsafe partial struct MirageManager {

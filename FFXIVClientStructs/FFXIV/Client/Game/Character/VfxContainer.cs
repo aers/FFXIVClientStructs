@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
+// Client::Game::Character::VfxContainer
+//   Client::Game::Character::ContainerInterface
 [GenerateInterop]
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]

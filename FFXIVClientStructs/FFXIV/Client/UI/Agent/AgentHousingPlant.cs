@@ -1,5 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentHousingPlant
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.HousingPlant)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
+// Client::System::File::FileAccessPath
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x210)]
 public unsafe partial struct FileAccessPath {

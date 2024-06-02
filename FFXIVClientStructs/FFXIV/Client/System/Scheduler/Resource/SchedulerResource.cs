@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Resource;
 
+// Client::System::Scheduler::Resource::SchedulerResource
+//   Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Resource::SchedulerResource>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct SchedulerResource {

@@ -3,6 +3,26 @@ using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::CraftEventHandler
+//   Client::Game::Event::EventHandler
+[GenerateInterop]
+[Inherits<EventHandler>]
+[StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
+public unsafe partial struct CraftEventHandler {
+    [FieldOffset(0x210), FixedSizeArray] internal FixedSizeArray106<byte> _recipeExcelRows;
+    [FieldOffset(0x320)] public Utf8String RecipeName;
+    [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray20<byte> _recipeLevelTableExcelRows;
+    [FieldOffset(0x3F0)] public ExcelSheet* RecipeSheet1;
+    [FieldOffset(0x400)] public ExcelSheet* RecipeSheet2;
+    [FieldOffset(0x410)] public ExcelSheet* RecipeSheet3;
+    [FieldOffset(0x418)] public ExcelSheet* ItemSheet;
+    [FieldOffset(0x448)] public uint DataSource;
+    [FieldOffset(0x44C)] public CraftStateFlags StateFlags;
+    [FieldOffset(0x456)] public ushort StepNumber;
+    [FieldOffset(0x467)] public CraftCondition Condition;
+    [FieldOffset(0x468)] public CraftFlags CraftFlags;
+}
+
 [Flags]
 public enum CraftStateFlags : uint {
     Unk1 = 1 << 0,
@@ -37,22 +57,4 @@ public enum CraftCondition : byte {
     Malleable,
     Primed,
     GoodOmen,
-}
-
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
-public unsafe partial struct CraftEventHandler {
-    [FieldOffset(0x0)] public EventHandler EventHandler;
-    [FieldOffset(0x210), FixedSizeArray] internal FixedSizeArray106<byte> _recipeExcelRows;
-    [FieldOffset(0x320)] public Utf8String RecipeName;
-    [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray20<byte> _recipeLevelTableExcelRows;
-    [FieldOffset(0x3F0)] public ExcelSheet* RecipeSheet1;
-    [FieldOffset(0x400)] public ExcelSheet* RecipeSheet2;
-    [FieldOffset(0x410)] public ExcelSheet* RecipeSheet3;
-    [FieldOffset(0x418)] public ExcelSheet* ItemSheet;
-    [FieldOffset(0x448)] public uint DataSource;
-    [FieldOffset(0x44C)] public CraftStateFlags StateFlags;
-    [FieldOffset(0x456)] public ushort StepNumber;
-    [FieldOffset(0x467)] public CraftCondition Condition;
-    [FieldOffset(0x468)] public CraftFlags CraftFlags;
 }

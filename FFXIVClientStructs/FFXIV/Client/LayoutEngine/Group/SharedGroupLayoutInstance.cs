@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 
+// Client::LayoutEngine::Group::SharedGroupLayoutInstance
+//   Client::LayoutEngine::ILayoutInstance
+//   Client::System::Resource::ResourceEventListener
 /// <summary>
 /// A set of instances used together. Can be nested up to 4 levels deep.
 /// Each prefab is a scene, however it has some limitations (only single embedded layer group with a single layer is supported).

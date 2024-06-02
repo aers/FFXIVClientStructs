@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::DrawDataContainer
+//   Client::Game::Character::ContainerInterface
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8"
 [GenerateInterop]
 [Inherits<ContainerInterface>]

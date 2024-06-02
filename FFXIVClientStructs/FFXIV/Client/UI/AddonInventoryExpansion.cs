@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonInventoryExpansion
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("InventoryExpansion")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

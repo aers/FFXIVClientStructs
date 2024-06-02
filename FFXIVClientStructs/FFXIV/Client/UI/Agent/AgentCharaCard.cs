@@ -25,7 +25,6 @@ public unsafe partial struct AgentCharaCard {
     private partial void OpenCharaCardForObject(GameObject* gameObject);
     public void OpenCharaCard(GameObject* gameObject) => OpenCharaCardForObject(gameObject);
 
-
     // Client::UI::Agent::AgentCharaCard::Storage
     // ctor "E8 ?? ?? ?? ?? 48 8B F0 48 89 73 ?? C6 06"
     // dtor "E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 48 89 73 ?? E8"

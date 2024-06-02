@@ -8,6 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // We do not actually know where all the other values come in, nothing except Flags and Vfx is actually used by Reaper Shroud (not even NpcEquipId, strangely).
 // This probably is used by other transformations too, but we have not found any yet.
 
+// Client::Game::Character::ReaperShroudContainer
+//   Client::Game::Character::ContainerInterface
 [GenerateInterop]
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]

@@ -1,5 +1,10 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
+// Client::Graphics::Kernel::ConstantBuffer
+//   Client::Graphics::Kernel::Buffer
+//     Client::Graphics::Kernel::Resource
+//       Client::Graphics::DelayedReleaseClassBase
+//         Client::Graphics::ReferencedClassBase
 /// <summary>
 /// A constant buffer (or cbuffer), which is used to send values to shaders. Usually contains 4*n floats.
 /// </summary>

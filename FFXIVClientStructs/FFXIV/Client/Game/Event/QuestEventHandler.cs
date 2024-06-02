@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::QuestEventHandler
+//   Client::Game::Event::LuaEventHandler
+//     Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<LuaEventHandler>]
 [StructLayout(LayoutKind.Explicit, Size = 0x610)]

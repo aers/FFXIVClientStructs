@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
+// Client::Game::Character::MountContainer
+//   Client::Game::Character::ContainerInterface
 [GenerateInterop]
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]

@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyCommonList
+//   Client::UI::Info::InfoProxyPageInterface
+//     Client::UI::Info::InfoProxyInterface
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyPageInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]

@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::RaceChocoboManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x26)]
 public unsafe partial struct RaceChocoboManager {

@@ -3,18 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-[Agent(AgentId.AirShipExplorationResult)]
-[GenerateInterop]
-[Inherits<AgentExplorationResultInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AgentAirshipExplorationResult;
-
-[Agent(AgentId.SubmersibleExplorationResult)]
-[GenerateInterop]
-[Inherits<AgentExplorationResultInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
-public unsafe partial struct AgentSubmersibleExplorationResult;
-
+// Client::UI::Agent::AgentExplorationResultInterface
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [GenerateInterop(isInherited: true)]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
@@ -22,6 +13,26 @@ public unsafe partial struct AgentExplorationResultInterface {
     [FieldOffset(0x28)] public uint ItemId; // fuel tank or something
     [FieldOffset(0x30)] public ExplorationResultData* Data;
 }
+
+// Client::UI::Agent::AgentAirshipExplorationResult
+//   Client::UI::Agent::AgentExplorationResultInterface
+//     Client::UI::Agent::AgentInterface
+//       Component::GUI::AtkModuleInterface::AtkEventInterface
+[Agent(AgentId.AirShipExplorationResult)]
+[GenerateInterop]
+[Inherits<AgentExplorationResultInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+public unsafe partial struct AgentAirshipExplorationResult;
+
+// Client::UI::Agent::AgentSubmersibleExplorationResult
+//   Client::UI::Agent::AgentExplorationResultInterface
+//     Client::UI::Agent::AgentInterface
+//       Component::GUI::AtkModuleInterface::AtkEventInterface
+[Agent(AgentId.SubmersibleExplorationResult)]
+[GenerateInterop]
+[Inherits<AgentExplorationResultInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+public unsafe partial struct AgentSubmersibleExplorationResult;
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x4F70)]

@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonArmouryBoard
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("ArmouryBoard")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

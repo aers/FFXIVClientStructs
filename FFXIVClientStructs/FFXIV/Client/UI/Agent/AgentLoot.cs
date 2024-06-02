@@ -1,5 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentLoot
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Loot)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonInventoryBuddy
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("InventoryBuddy")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

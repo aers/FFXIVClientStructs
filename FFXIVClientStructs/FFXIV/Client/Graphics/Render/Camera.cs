@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
+// Client::Graphics::Render::Camera
+//   Client::Graphics::ReferencedClassBase
 [GenerateInterop(isInherited: true)]
 [Inherits<ReferencedClassBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x130)]

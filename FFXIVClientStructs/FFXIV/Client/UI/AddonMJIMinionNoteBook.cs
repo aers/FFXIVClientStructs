@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonMJIMinionNoteBook
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("MJIMinionNoteBook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

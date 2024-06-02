@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
+// Client::LayoutEngine::Layer::BgPartsLayoutInstance
+//   Client::LayoutEngine::ILayoutInstance
 /// <summary>
 /// A simple static model with an optional collider.
 /// </summary>

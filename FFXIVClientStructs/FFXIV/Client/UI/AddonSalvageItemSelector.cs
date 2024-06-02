@@ -4,6 +4,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonSalvageItemSelector
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("SalvageItemSelector")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
@@ -26,5 +29,4 @@ public unsafe partial struct AddonSalvageItemSelector {
         [FieldOffset(0x20)] public byte* JobNamePtr;
         [FieldOffset(0x28)] public byte Unknown28;
     }
-
 }

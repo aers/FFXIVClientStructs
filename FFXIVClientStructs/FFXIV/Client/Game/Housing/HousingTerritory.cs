@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
 
 // 0xA160 for Indoor, 0xAE30 for Outdoor
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0xA160)]
 public unsafe partial struct HousingTerritory { // this should be renamed to IndoorHousingTerritory and the fields should be copied to OutdoorHousingTerritory
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture;

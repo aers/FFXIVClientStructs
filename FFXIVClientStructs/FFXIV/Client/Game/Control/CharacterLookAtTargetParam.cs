@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
+// Client::Game::Control::CharacterLookAtTargetParam
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 [VirtualTable("89 51 18 48 8D 05 ?? ?? ?? ?? 48 89 41 10 48 8D 05", 6)]

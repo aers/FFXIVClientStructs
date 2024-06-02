@@ -2,6 +2,11 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonActionBar
+//   Client::UI::AddonActionBarX
+//     Client::UI::AddonActionBarBase
+//       Component::GUI::AtkUnitBase
+//         Component::GUI::AtkEventListener
 [Addon("_ActionBar")]
 [GenerateInterop]
 [Inherits<AddonActionBarX>]

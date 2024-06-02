@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonCharacterInspect
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("CharacterInspect")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

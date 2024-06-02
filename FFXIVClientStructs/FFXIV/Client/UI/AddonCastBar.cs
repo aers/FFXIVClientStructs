@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonCastBar
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("_CastBar")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
+// Client::Graphics::Scene::EnvScene
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x790)]
 public unsafe partial struct EnvScene {

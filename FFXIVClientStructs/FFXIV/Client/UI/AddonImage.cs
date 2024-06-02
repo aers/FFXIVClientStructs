@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonImage
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("_Image, _Image3")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

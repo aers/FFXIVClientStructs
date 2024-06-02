@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonReconstructionBox
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("ReconstructionBox")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

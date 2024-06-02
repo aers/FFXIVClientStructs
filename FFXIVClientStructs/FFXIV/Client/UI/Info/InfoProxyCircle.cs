@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyCircle
+//   Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.Circle)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]

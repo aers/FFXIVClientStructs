@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonDtr
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("_DTR")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

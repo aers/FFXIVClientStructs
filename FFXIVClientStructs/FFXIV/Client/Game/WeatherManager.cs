@@ -7,6 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct WeatherManager {
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 44 0F B7 45", 3)]
+    public static partial WeatherManager* Instance();
+
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray3<Pointer<ServerWeather>> _weatherPtrs;
     [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray3<ServerWeather> _weathers;
 
@@ -15,9 +18,6 @@ public unsafe partial struct WeatherManager {
     [FieldOffset(0x65)] public byte WeatherOverride;
     [FieldOffset(0x66)] public byte CurrentDaytimeOffset;
     [FieldOffset(0x67)] public byte IndividualWeatherId;
-
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 44 0F B7 45", 3)]
-    public static partial WeatherManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C8 8D 41 ?? A9")]
     public partial byte GetCurrentWeather();

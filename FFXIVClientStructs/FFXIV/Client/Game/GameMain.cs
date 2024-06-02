@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::GameMain
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40E0)]
 public unsafe partial struct GameMain {

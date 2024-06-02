@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
+// Client::Game::UI::Inspect
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct Inspect {

@@ -18,7 +18,7 @@ public partial struct AgentStatus {
     // Client::UI::Agent::AgentStatus::StatusCharaView
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
-[Inherits<CharaView>]
+    [Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
     public partial struct StatusCharaView {
         [FieldOffset(0x2C8)] public uint MainhandItemId;

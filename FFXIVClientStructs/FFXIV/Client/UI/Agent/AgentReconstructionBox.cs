@@ -1,5 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentReconstructionBox
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.ReconstructionBox)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

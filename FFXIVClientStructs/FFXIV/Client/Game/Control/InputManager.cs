@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
+// Client::Game::Control::InputManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public unsafe partial struct InputManager {

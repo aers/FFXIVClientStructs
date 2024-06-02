@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyPartyInvite
+//   Client::UI::Info::InfoProxyInvitedInterface
+//     Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.PartyInvite)]
 [GenerateInterop]
 [Inherits<InfoProxyInvitedInterface>]

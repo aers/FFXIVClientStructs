@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonAetherCurrent
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("AetherCurrent")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

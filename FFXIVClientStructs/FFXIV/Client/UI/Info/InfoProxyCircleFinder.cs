@@ -3,6 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyCircleFinder
+//   Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.CircleFinder)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]

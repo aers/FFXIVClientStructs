@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonLovmPaletteEdit
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("LovmPaletteEdit")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

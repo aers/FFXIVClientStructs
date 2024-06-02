@@ -2,9 +2,13 @@ using FFXIVClientStructs.FFXIV.Client.Game.Gauge;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::JobGaugeManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe partial struct JobGaugeManager {
+    [StaticAddress("48 8B 3D ?? ?? ?? ?? 33 ED", 3)]
+    public static partial JobGaugeManager* Instance();
+
     [FieldOffset(0x00)] public JobGauge* CurrentGauge;
 
     [FieldOffset(0x08), CExporterUnion("Guage")] public JobGauge EmptyGauge;
@@ -34,7 +38,4 @@ public unsafe partial struct JobGaugeManager {
     [FieldOffset(0x08), CExporterUnion("Guage")] public GunbreakerGauge Gunbreaker;
 
     [FieldOffset(0x58)] public byte ClassJobId;
-
-    [StaticAddress("48 8B 3D ?? ?? ?? ?? 33 ED", 3)]
-    public static partial JobGaugeManager* Instance();
 }

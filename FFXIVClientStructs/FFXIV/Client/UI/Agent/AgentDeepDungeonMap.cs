@@ -2,6 +2,9 @@ using System.Runtime.CompilerServices;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentDeepDungeonMap
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.DeepDungeonMap)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

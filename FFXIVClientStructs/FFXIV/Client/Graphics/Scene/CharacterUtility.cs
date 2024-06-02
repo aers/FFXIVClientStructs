@@ -4,6 +4,8 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
+// Client::Graphics::Scene::CharacterUtility
+//   Client::Graphics::Singleton
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x410)]
 public unsafe partial struct CharacterUtility {

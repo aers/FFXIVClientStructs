@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonNeedGreed
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("NeedGreed")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
