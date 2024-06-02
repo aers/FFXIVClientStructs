@@ -1117,6 +1117,9 @@ classes:
   Client::Game::Housing::HousingTerritory:
     vtbls:
       - ea: 0x141A77E98
+    vfuncs:
+      0: dtor
+      6: GetTerritoryType
   Client::Game::Housing::OutdoorTerritory:
     vtbls:
       - ea: 0x141A77FF8
