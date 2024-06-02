@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Common.Math;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe struct HousingFurniture {

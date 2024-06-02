@@ -1,9 +1,9 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-// Client::Game::Housing::WorkshopTerritory
-//   Client::Game::Housing::HousingTerritory
+// Client::Game::WorkshopTerritory
+//   Client::Game::HousingTerritory
 [GenerateInterop]
 [Inherits<HousingTerritory>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]

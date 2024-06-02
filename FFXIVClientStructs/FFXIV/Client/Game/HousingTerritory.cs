@@ -1,6 +1,6 @@
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-// Client::Game::Housing::HousingTerritory
+// Client::Game::HousingTerritory
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct HousingTerritory { // 6 vfuncs

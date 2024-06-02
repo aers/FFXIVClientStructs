@@ -1084,7 +1084,7 @@ classes:
       0x1408A4DB0: GetMember
       0x1409325C0: Update
       0x1408A4BF0: UpdateNotifications
-  Client::Game::Housing::HousingManager:
+  Client::Game::HousingManager:
     instances:
       - ea: 0x14221E520
         pointer: True
@@ -1114,28 +1114,28 @@ classes:
       0x140B406A0: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
       0x140B407C0: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x1400A8E70: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
-  Client::Game::Housing::HousingTerritory:
+  Client::Game::HousingTerritory:
     vtbls:
       - ea: 0x141A77E98
     vfuncs:
       0: dtor
       6: GetTerritoryType
-  Client::Game::Housing::OutdoorTerritory:
+  Client::Game::OutdoorTerritory:
     vtbls:
       - ea: 0x141A77FF8
-        base: Client::Game::Housing::HousingTerritory
+        base: Client::Game::HousingTerritory
     funcs:
       0x140B37950: GetPlotIcon # (this, plotIndex)
       0x140B356E0: IsEstateShared # (this, plotIndex)
       0x140B355B0: IsEstateResident # (this, plotIndex)
-  Client::Game::Housing::IndoorTerritory:
+  Client::Game::IndoorTerritory:
     vtbls:
       - ea: 0x141A78060
-        base: Client::Game::Housing::HousingTerritory
-  Client::Game::Housing::WorkshopTerritory:
+        base: Client::Game::HousingTerritory
+  Client::Game::WorkshopTerritory:
     vtbls:
       - ea: 0x141A780A0
-        base: Client::Game::Housing::HousingTerritory
+        base: Client::Game::HousingTerritory
   Client::Game::WeatherManager::WeatherInterface:
     vtbls:
       - ea: 0x141A77370

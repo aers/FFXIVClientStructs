@@ -1,6 +1,6 @@
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-// Client::Game::Housing::HousingManager
+// Client::Game::HousingManager
 // ctor "E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? EB 07 48 89 1D ?? ?? ?? ?? 48 8D 05"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]

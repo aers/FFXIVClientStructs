@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xC98)]

@@ -1,7 +1,7 @@
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-// Client::Game::Housing::OutdoorTerritory
-//   Client::Game::Housing::HousingTerritory
+// Client::Game::OutdoorTerritory
+//   Client::Game::HousingTerritory
 [GenerateInterop]
 [Inherits<HousingTerritory>]
 [StructLayout(LayoutKind.Explicit, Size = 0xAE60)]
