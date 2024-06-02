@@ -44,7 +44,7 @@ public unsafe partial struct RetainerManager {
         [FieldOffset(0x2B)] public byte ItemCount;
         [FieldOffset(0x2C)] public uint Gil;
         [FieldOffset(0x30)] public RetainerTown Town;
-        [FieldOffset(0x31)] public byte MarkerItemCount;
+        [FieldOffset(0x31)] public byte MarketItemCount;
         [FieldOffset(0x34)] public uint MarketExpire; // 7 Days after last opened retainer
         [FieldOffset(0x38)] public uint VentureId;
         [FieldOffset(0x3C)] public uint VentureComplete;
