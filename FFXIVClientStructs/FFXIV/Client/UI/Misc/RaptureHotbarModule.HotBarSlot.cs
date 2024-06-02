@@ -317,7 +317,7 @@ public partial struct RaptureHotbarModule {
         /// <returns>Returns a range from 0 to 100.</returns>
         [MemberFunction("E8 ?? ?? ?? ?? 89 47 24 E9")]
         public partial int GetSlotActionCooldownPercentage(int* outCooldownSecondsLeft, int a3 = 0);
-        
+
         /// <summary>
         /// Gets whether the specified action should be highlighted with ants in the UI.
         /// Internally calls <see cref="ActionManager.IsActionHighlighted"/>.

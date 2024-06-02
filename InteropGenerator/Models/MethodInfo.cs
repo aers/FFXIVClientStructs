@@ -23,7 +23,7 @@ internal sealed record MethodInfo(
         }
         return $"{Modifiers.Replace(" partial", string.Empty)} delegate {ReturnType} {Name}({paramTypesAndNames});";
     }
-    
+
     public string GetDeclarationStringForStringOverload(string typeReplacement, ImmutableArray<string> paramsToOverload) {
         string parameterTypesAndNamesString = string.Join(", ",
             Parameters.Select(p => paramsToOverload.Contains(p.Name) ? $"{p.RefKind.GetParameterPrefix()}{typeReplacement} {p.Name}" : $"{p.RefKind.GetParameterPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));

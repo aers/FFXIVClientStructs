@@ -86,7 +86,7 @@ public sealed partial class InteropGenerator {
         // add entries to the main virtual table for the primary inheritance chain
         if (hasPrimaryVirtualFunctions)
             RenderInheritedVirtualTable(structInfo, resolvedInheritanceOrder, writer);
-        
+
         // render delegates for primary inherited virtual table functions
         if (hasPrimaryVirtualFunctions)
             RenderInheritedDelegateTypes(structInfo, resolvedInheritanceOrder, writer);
@@ -187,7 +187,7 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
         }
     }
-    
+
     private static void RenderInheritedDelegateTypes(StructInfo structInfo, ImmutableArray<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, IndentedTextWriter writer) {
         writer.WriteLine($"public static partial class Delegates");
         using (writer.WriteBlock()) {

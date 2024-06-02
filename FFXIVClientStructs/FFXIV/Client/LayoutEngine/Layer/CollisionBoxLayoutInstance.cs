@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
+namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 [GenerateInterop]
 [Inherits<TriggerBoxLayoutInstance>]

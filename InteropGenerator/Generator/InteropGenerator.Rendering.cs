@@ -35,7 +35,7 @@ public sealed partial class InteropGenerator {
             RenderVirtualTable(structInfo, writer);
             token.ThrowIfCancellationRequested();
         }
-        
+
         // write delegate types
         if (!structInfo.MemberFunctions.IsEmpty || !structInfo.VirtualFunctions.IsEmpty) {
             RenderDelegateTypes(structInfo, writer);

@@ -512,7 +512,7 @@ public class MemberFunctionAttributeTests {
             ("TestStruct.InnerStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetInitializerSource(string.Empty, "TestStruct.InnerStruct", ["TestFunction"]));
     }
-    
+
     [Fact]
     public async Task GenerateMemberFunctionBoolReturnDelegate() {
         const string code = """
