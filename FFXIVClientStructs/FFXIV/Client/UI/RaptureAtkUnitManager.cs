@@ -2,12 +2,13 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.FFXIV.Component.GUI.AtkModuleInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
+
 // Client::UI::RaptureAtkUnitManager
 //   Component::GUI::AtkUnitManager
 //     Component::GUI::AtkEventListener
-
 // ctor "40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 8B"
-[GenerateInterop, Inherits<AtkUnitManager>]
+[GenerateInterop]
+[Inherits<AtkUnitManager>]
 [VirtualTable("48 8D 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 05", 10)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9D18)]
 public unsafe partial struct RaptureAtkUnitManager {

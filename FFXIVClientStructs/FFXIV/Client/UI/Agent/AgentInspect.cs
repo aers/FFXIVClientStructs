@@ -13,11 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x820)]
 public unsafe partial struct AgentInspect {
-    //Notes to INfoProxies:
-    //0xa used for DeepDungeon
-    //0xd
-
-    //First byte seems to be a bit field
+    // First byte seems to be a bit field
     // [7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 ]
     // None: 7,6,5 set
     // REatiner/Chocobo: 6 is set
@@ -33,8 +29,11 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x240)] public Utf8String ChocoboBarding3;
     [FieldOffset(0x2A8), FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
     [FieldOffset(0x4B0)] public FreeCompanyData FreeCompany;
-    //Status fields
-    //0: Nothing to do 1: Fetching Data; 2: Data ready (Fills window) 3: Probably failure
+    // Status fields
+    // 0: Nothing to do
+    // 1: Fetching Data
+    // 2: Data ready (Fills window)
+    // 3: Probably failure
     [FieldOffset(0x538)] public uint FetchCharacterDataStatus;
     [FieldOffset(0x53c)] public uint FetchSearchCommentStatus;
     [FieldOffset(0x540)] public uint FetchFreeCompanyStatus;
@@ -45,18 +44,19 @@ public unsafe partial struct AgentInspect {
 
     // Client::UI::Agent::AgentInspect::InspectCharaView
     //   Client::UI::Misc::CharaView
-    [GenerateInterop, Inherits<CharaView>]
+    [GenerateInterop]
+    [Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
     public partial struct InspectCharaView;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]
     public struct FreeCompanyData {
-        //[FieldOffset(0x00)] public byte Unkown4b0; //Maybe FreeCompany get status 1=Finished
-        [FieldOffset(0x01)] public bool IsPartOfFreeCompany; //HasGuild???????? if 0 Client::UI::RaptureAtkModule.OpenAddon can be called without getting additional infos
+        //[FieldOffset(0x00)] public byte Unkown4b0; // Maybe FreeCompany get status 1 = Finished
+        [FieldOffset(0x01)] public bool IsPartOfFreeCompany; // HasGuild???????? if 0 Client::UI::RaptureAtkModule.OpenAddon can be called without getting additional infos
         [FieldOffset(0x08)] public long Id;
         [FieldOffset(0x10)] public CrestData Crest;
         [FieldOffset(0x18)] public ushort MemberCount;
-        [FieldOffset(0x1A)] public ushort GrandCompany;// 1=Maelstorm 2=TwinAdder 3=ImmortalFlames
+        [FieldOffset(0x1A)] public ushort GrandCompany; // 1 = Maelstorm 2 = TwinAdder 3 = ImmortalFlames
         //[FieldOffset(0x1c)] public ushort Unk1C;
         [FieldOffset(0x1E)] public Utf8String GuildName;
     }
@@ -68,10 +68,10 @@ public unsafe partial struct AgentInspect {
         [FieldOffset(0x04)] public IconFlagsTopRight IconFlags1;
         [FieldOffset(0x05)] public ColorRgb Color;
         [FieldOffset(0x08)] public bool Filled;
-        [FieldOffset(0x09)] public bool IsILevelSynced; //1 if Level < Level{Equip} So probably ILVSynced
+        [FieldOffset(0x09)] public bool IsILevelSynced; // 1 if Level < Level{Equip} So probably ILVSynced
         [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray4<short> _modelMain;
         [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<short> _modelSub;
-        [FieldOffset(0x20)] public InventoryItem* Item; //Init 0 unsure
+        [FieldOffset(0x20)] public InventoryItem* Item; // Init 0 unsure
 
         [StructLayout(LayoutKind.Explicit, Size = 0x3)]
         public struct ColorRgb {

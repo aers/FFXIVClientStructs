@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// SGE - Eukrasia Gauge
 /// </summary>
 [Addon("JobHudGFF0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2C0)]
 public unsafe partial struct AddonJobHudGFF0 {
     [FieldOffset(0x260)] public EukrasiaGaugeData DataPrevious;
@@ -15,21 +16,24 @@ public unsafe partial struct AddonJobHudGFF0 {
     [FieldOffset(0x280)] public EukrasiaGauge GaugeStandard;
     [FieldOffset(0x2A0)] public EukrasiaGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct EukrasiaGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
         [FieldOffset(0x09)] public bool EukrasiaActive;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct EukrasiaGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public bool EukrasiaActive;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct EukrasiaGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -41,7 +45,8 @@ public unsafe partial struct AddonJobHudGFF0 {
 /// SGE - Addersgall Gauge
 /// </summary>
 [Addon("JobHudGFF1")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x370)]
 public unsafe partial struct AddonJobHudGFF1 {
     [FieldOffset(0x260)] public AddersgallGaugeData DataPrevious;
@@ -49,7 +54,8 @@ public unsafe partial struct AddonJobHudGFF1 {
     [FieldOffset(0x2A0)] public AddersgallGauge GaugeStandard;
     [FieldOffset(0x310)] public AddersgallGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct AddersgallGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -60,7 +66,8 @@ public unsafe partial struct AddonJobHudGFF1 {
         [FieldOffset(0x1C)] public bool InCombat;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct AddersgallGauge {
         [FieldOffset(0x10)] public AtkResNode* AdderstingContainer;
@@ -77,7 +84,8 @@ public unsafe partial struct AddonJobHudGFF1 {
         [FieldOffset(0x68)] public int TimelineFrameId;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct AddersgallGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* AdderstingContainer;

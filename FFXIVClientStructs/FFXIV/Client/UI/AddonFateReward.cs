@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("FateReward")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x570)]
 public unsafe partial struct AddonFateReward {
     [FieldOffset(0x220)] public AtkResNode* AtkResNode220;

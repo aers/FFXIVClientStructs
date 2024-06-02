@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// NIN - Ninki Gauge
 /// </summary>
 [Addon("JobHudNIN0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x308)]
 public unsafe partial struct AddonJobHudNIN0 {
     [FieldOffset(0x260)] public NinkiGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudNIN0 {
     [FieldOffset(0x290)] public NinkiGauge GaugeStandard;
     [FieldOffset(0x2D0)] public NinkiGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct NinkiGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
@@ -24,7 +26,8 @@ public unsafe partial struct AddonJobHudNIN0 {
         [FieldOffset(0x14)] public int Mid;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct NinkiGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -35,7 +38,8 @@ public unsafe partial struct AddonJobHudNIN0 {
         [FieldOffset(0x38)] public bool CanSpend;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct NinkiGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -49,7 +53,8 @@ public unsafe partial struct AddonJobHudNIN0 {
 /// NIN - Huton Gauge
 /// </summary>
 [Addon("JobHudNIN1")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x320)]
 public unsafe partial struct AddonJobHudNIN1 {
     [FieldOffset(0x260)] public HutonGaugeData DataPrevious;
@@ -57,7 +62,8 @@ public unsafe partial struct AddonJobHudNIN1 {
     [FieldOffset(0x290)] public HutonGauge GaugeStandard;
     [FieldOffset(0x2F8)] public HutonGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct HutonGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -66,7 +72,8 @@ public unsafe partial struct AddonJobHudNIN1 {
         [FieldOffset(0x14)] public int ManualCasts;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public partial struct HutonGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -80,7 +87,8 @@ public unsafe partial struct AddonJobHudNIN1 {
         [FieldOffset(0x60)] public bool IsActive;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct HutonGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

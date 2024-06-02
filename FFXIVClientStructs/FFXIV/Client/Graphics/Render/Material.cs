@@ -3,6 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
+// Client::Graphics::Render::Material
+//   Client::Graphics::ReferencedClassBase
 /// <summary>
 /// Represents a renderer material.
 /// </summary>

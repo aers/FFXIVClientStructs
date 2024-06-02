@@ -4,6 +4,9 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 
+// Client::LayoutEngine::LayoutManager
+//   Client::LayoutEngine::IManagerBase
+//     Client::System::Common::NonCopyable
 /// <summary>
 /// An instance of a loaded level.
 /// Ultimately describes a set of 'instances' (pieces of static geometry, lights, vfx, etc), organized in layers.

@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::CameraBase
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public partial struct CameraBase {

@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("_EnemyList")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct AddonEnemyList {
     public const byte MaxEnemyCount = 8;

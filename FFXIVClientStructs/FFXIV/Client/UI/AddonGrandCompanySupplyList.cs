@@ -2,8 +2,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonGrandCompanySupplyList
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("GrandCompanySupplyList")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x760)]
 public unsafe partial struct AddonGrandCompanySupplyList {
     [FieldOffset(0x280)] public AtkComponentList* SupplyProvisioningList;
@@ -25,5 +29,4 @@ public unsafe partial struct AddonGrandCompanySupplyList {
     [FieldOffset(0x2E8)] public int SelectedTab;
     [FieldOffset(0x2EC)] public int SelectedSortBy;
     [FieldOffset(0x2F0)] public int SelectedFilter;
-
 }

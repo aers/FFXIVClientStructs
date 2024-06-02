@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::SatisfactionSupplyManager
+// Custom Deliveries
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x31F)]
 public unsafe partial struct SatisfactionSupplyManager {

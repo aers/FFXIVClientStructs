@@ -8,7 +8,8 @@ using FFXIVClientStructs.Havok.Common.SceneData.Mesh;
 
 namespace FFXIVClientStructs.Havok.Animation.Deform.Skinning;
 
-[GenerateInterop, Inherits<hkReferencedObject>]
+[GenerateInterop]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public partial struct hkaMeshBinding {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]

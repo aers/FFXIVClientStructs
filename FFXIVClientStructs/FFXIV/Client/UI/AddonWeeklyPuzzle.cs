@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("WeeklyPuzzle")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD00)]
 public unsafe partial struct AddonWeeklyPuzzle {
     [FieldOffset(0x220)] public RewardPanelItem RewardPanelCommander;

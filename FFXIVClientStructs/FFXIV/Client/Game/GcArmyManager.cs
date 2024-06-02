@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::GcArmyManager
+// Squadron
 // ctor "48 83 EC 28 48 83 3D ?? ?? ?? ?? ?? 75 2E 33 D2"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

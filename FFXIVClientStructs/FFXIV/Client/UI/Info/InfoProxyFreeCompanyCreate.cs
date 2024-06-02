@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyFreeCompanyCreate
+//   Client::UI::Info::InfoProxyInvitedInterface
+//     Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.FreeCompanyCreate)]
 [GenerateInterop]
 [Inherits<InfoProxyInvitedInterface>]

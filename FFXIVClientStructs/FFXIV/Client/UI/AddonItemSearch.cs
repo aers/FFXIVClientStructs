@@ -8,7 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 89 03 48 89 AB"
 [Addon("ItemSearch")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3EE0)]
 public unsafe partial struct AddonItemSearch {
     [FieldOffset(0x230)] public SearchMode Mode;

@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[GenerateInterop, Inherits<AtkUldComponentDataBase>]
+[GenerateInterop]
+[Inherits<AtkUldComponentDataBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x94)]
 public unsafe partial struct AtkUldComponentDataJournalCanvas {
     [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray32<uint> _nodes;

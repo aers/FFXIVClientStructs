@@ -5,7 +5,8 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Animation.Playback.Control;
 
-[GenerateInterop(isInherited: true), Inherits<hkReferencedObject>]
+[GenerateInterop(isInherited: true)]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct hkaAnimationControl {
     [FieldOffset(0x10)] public float LocalTime;

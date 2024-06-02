@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::RetainerManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x310)]
 public unsafe partial struct RetainerManager {
@@ -19,7 +20,6 @@ public unsafe partial struct RetainerManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 05 4C 39 20")]
     public partial Retainer* GetRetainerBySortedIndex(uint sortedIndex);
-
 
     /// <summary>
     /// Counts the number of Retainers that have an assigned ID.

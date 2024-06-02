@@ -2,8 +2,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonMinionMountBase
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 // AddonMinionNoteBook and AddonMountNoteBook inherit from this
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop(isInherited: true)]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xBF0)]
 public partial struct AddonMinionMountBase {
     [FieldOffset(0x2A0)] public TabController TabController;

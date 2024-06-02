@@ -4,6 +4,8 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
+// Client::Graphics::Scene::Camera
+//   Client::Graphics::Scene::Object
 [GenerateInterop]
 [Inherits<Object>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]

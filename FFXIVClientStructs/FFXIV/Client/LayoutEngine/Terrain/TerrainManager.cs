@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Terrain;
 
+// Client::LayoutEngine::Terrain::TerrainManager
+//   Client::LayoutEngine::IManagerBase
+//     Client::System::Common::NonCopyable
 [GenerateInterop]
 [Inherits<IManagerBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x130)]

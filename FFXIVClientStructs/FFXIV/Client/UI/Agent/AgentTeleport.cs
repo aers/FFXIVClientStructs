@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentTeleport
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Teleport)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

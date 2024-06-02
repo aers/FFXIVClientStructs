@@ -5,5 +5,5 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public partial struct AtkTimelineAnimation {
     [FieldOffset(0x00)] public ushort StartFrameIdx;
     [FieldOffset(0x02)] public ushort EndFrameIdx;
-    [FieldOffset(0x08)] internal FixedSizeArray8<AtkTimelineKeyGroup> _keyGroups;
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray8<AtkTimelineKeyGroup> _keyGroups;
 }

@@ -2,8 +2,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonInventory
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("Inventory")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x320)]
 public partial struct AddonInventory {
     [FieldOffset(0x2A8)] public AtkAddonControl AddonControl;

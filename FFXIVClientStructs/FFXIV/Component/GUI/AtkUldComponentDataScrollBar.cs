@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[GenerateInterop, Inherits<AtkUldComponentDataBase>]
+[GenerateInterop]
+[Inherits<AtkUldComponentDataBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct AtkUldComponentDataScrollBar {
     [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray4<uint> _nodes;

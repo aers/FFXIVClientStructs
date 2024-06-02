@@ -1,11 +1,5 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
-// there's 20+ of these but these are the ones I've encountered/debugged
-public enum TextureFormat : uint {
-    R8G8B8A8 = 5200,
-    D24S8 = 16976 // depth 28 stencil 8, see MS texture formats on google if you really care :)
-}
-
 // Client::Graphics::Kernel::Texture
 //   Client::Graphics::Kernel::Resource
 //     Client::Graphics::Kernel::DelayedReleaseClassBase
@@ -14,8 +8,8 @@ public enum TextureFormat : uint {
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 48 89 07 48 8B CF"
 // renderer texture object, contains platform specific render objects (DX9/DX11/PS3/PS4)
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 [Inherits<Notifier>(parentOffset: 0x20)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct Texture {
     [FieldOffset(0x38)] public uint Width;
     [FieldOffset(0x3C)] public uint Height;
@@ -52,4 +46,10 @@ public unsafe partial struct Texture {
 
     [VirtualFunction(3u)]
     public partial void DecRef();
+}
+
+// there's 20+ of these but these are the ones I've encountered/debugged
+public enum TextureFormat : uint {
+    R8G8B8A8 = 5200,
+    D24S8 = 16976 // depth 28 stencil 8, see MS texture formats on google if you really care :)
 }

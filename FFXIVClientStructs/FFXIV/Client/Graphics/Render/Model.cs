@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
+// Client::Graphics::Render::Model
+//   Client::Graphics::Render::RenderObject
+//     Client::Graphics::ReferencedClassBase
 [GenerateInterop]
 [Inherits<ReferencedClassBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]

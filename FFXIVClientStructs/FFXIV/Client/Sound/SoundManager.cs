@@ -3,15 +3,16 @@ using Thread = FFXIVClientStructs.FFXIV.Client.System.Threading.Thread;
 
 namespace FFXIVClientStructs.FFXIV.Client.Sound;
 
-// Client::Sound::SoundManager:
+// Client::Sound::SoundManager
 //   Client::System::Resource::ResourceEventListener
 //   Client::System::Threading::Thread
-//ctor "E8 ?? ?? ?? ?? EB ?? 48 8B C6 BA ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? 49 8B CF"
+// ctor "E8 ?? ?? ?? ?? EB ?? 48 8B C6 BA ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? 49 8B CF"
 /// <summary>
 /// This class is the low level handler for sound related functions and abstracts from the operating system.
 /// The functions in this class are not intended by SE to be used directly and do not have proper checks for correct values.
 /// </summary>
-[GenerateInterop, Inherits<ResourceEventListener>]
+[GenerateInterop]
+[Inherits<ResourceEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1C88)]
 public unsafe partial struct SoundManager {
     [FieldOffset(0x0008)] public Thread Thread; // TODO: make Thread properly inheritable

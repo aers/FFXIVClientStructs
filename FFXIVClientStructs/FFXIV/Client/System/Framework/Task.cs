@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
+// Client::System::Framework::Task
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct Task {

@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::CSBonusManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct CSBonusManager {

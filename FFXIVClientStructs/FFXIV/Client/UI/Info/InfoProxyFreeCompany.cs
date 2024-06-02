@@ -3,6 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyFreeCompany
+//   Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.FreeCompany)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]

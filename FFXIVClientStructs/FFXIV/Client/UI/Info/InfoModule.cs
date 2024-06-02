@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoModule
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1C70)]
 public unsafe partial struct InfoModule {
@@ -58,7 +59,7 @@ public enum InfoProxyId : uint {
     FriendList2 = 7,
     Letter = 8,
     PlayerSearch = 9,
-    SearchComment = 10, //0xa
+    SearchComment = 10,
     ItemSearch = 11,
     CatalogSearch = 12,
     FreeCompany = 13,

@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("AOZNotebook")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xCC8)]
 public unsafe partial struct AddonAOZNotebook {
     [FieldOffset(0x308), FixedSizeArray] internal FixedSizeArray16<SpellbookBlock> _spellbookBlocks;

@@ -11,7 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
 // common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
 // type 7
-[GenerateInterop, Inherits<AtkComponentInputBase>]
+[GenerateInterop]
+[Inherits<AtkComponentInputBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
 public unsafe partial struct AtkComponentTextInput {
 

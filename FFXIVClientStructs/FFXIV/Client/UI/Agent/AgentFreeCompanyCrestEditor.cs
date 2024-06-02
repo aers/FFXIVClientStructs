@@ -1,5 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentFreeCompanyCrestEditor
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.FreeCompanyCrestEditor)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

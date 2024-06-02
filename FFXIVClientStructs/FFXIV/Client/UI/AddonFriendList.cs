@@ -2,8 +2,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonFriendList
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("FriendList")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public unsafe partial struct AddonFriendList {
     [FieldOffset(0x2F0)] public AtkComponentList* FriendList;

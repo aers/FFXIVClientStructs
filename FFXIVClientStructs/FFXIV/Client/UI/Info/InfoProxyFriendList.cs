@@ -2,6 +2,10 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyFriendList
+//   Client::UI::Info::InfoProxyCommonList
+//     Client::UI::Info::InfoProxyPageInterface
+//       Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.FriendList)]
 [GenerateInterop]
 [Inherits<InfoProxyCommonList>]

@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::ReconstructionBoxManager
+// Doman Enclave Reconstruction Box
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public unsafe partial struct ReconstructionBoxManager {

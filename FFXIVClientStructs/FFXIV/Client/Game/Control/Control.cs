@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
+// Client::Game::Control::Control
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x5B00)]
 public unsafe partial struct Control {

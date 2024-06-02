@@ -1,6 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 
+// Application::Network::WorkDefinitions::QuestWork
+//   Application::Network::WorkDefinitions::Base
 [GenerateInterop]
+[Inherits<Base>]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct QuestWork {
     [FieldOffset(0x08)] public ushort QuestId;

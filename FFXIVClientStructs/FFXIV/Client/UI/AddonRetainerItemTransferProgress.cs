@@ -6,9 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("RetainerItemTransferProgress")]
-[GenerateInterop, Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x240)]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 80 8B ?? ?? ?? ?? ?? 80 8B ?? ?? ?? ?? ?? 80 8B", 3)]
+[StructLayout(LayoutKind.Explicit, Size = 0x240)]
 public unsafe partial struct AddonRetainerItemTransferProgress {
     [FieldOffset(0x220)] public AtkTextNode* EntrustAllItemsButton; // Node 2
     [FieldOffset(0x228)] public AtkComponentButton* CloseWindowButton; // Node 9

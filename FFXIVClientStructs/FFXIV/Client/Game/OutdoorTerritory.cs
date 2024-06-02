@@ -1,18 +1,14 @@
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::OutdoorTerritory
+//   Client::Game::HousingTerritory
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xAE30)]
-public unsafe partial struct HousingOutdoorTerritory {
-    [FieldOffset(0x00), CExportIgnore] public HousingTerritory HousingTerritory;
-
-    /// <summary>
-    /// Get the Icon ID used for map icons in housing areas.
-    /// </summary>
-    /// <param name="plot">Plot number, zero indexed. <value>127</value> for Apartment in main division, <value>128</value> for apartment in subdivision.</param>
-    /// <returns>IconId, or 0 if something went wrong</returns>
-    [MemberFunction("40 56 57 48 83 EC 38 0F B6 FA")]
-    public partial int GetPlotIcon(byte plot);
-
+[Inherits<HousingTerritory>]
+[StructLayout(LayoutKind.Explicit, Size = 0xAE60)]
+public unsafe partial struct OutdoorTerritory {
+    [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture;
+    [FieldOffset(0x8968)] public HousingObjectManager HousingObjectManager;
+    [FieldOffset(0x96A0)] public uint HouseId; // Combines Ward, Plot, and Room
     [FieldOffset(0x96A8)] public sbyte StandingInPlot;
     [FieldOffset(0x96AA)] public sbyte EditingFixturesOfPlot;
     [FieldOffset(0x96B0)] public sbyte EditingFurnishingsOfPlot;
@@ -21,6 +17,13 @@ public unsafe partial struct HousingOutdoorTerritory {
 
     [FieldOffset(0x9A78), FixedSizeArray] internal FixedSizeArray2<ApartmentBuildingState> _apartmentBuildings;
 
+    /// <summary>
+    /// Get the Icon ID used for map icons in housing areas.
+    /// </summary>
+    /// <param name="plot">Plot number, zero indexed. <value>127</value> for Apartment in main division, <value>128</value> for apartment in subdivision.</param>
+    /// <returns>IconId, or 0 if something went wrong</returns>
+    [MemberFunction("40 56 57 48 83 EC 38 0F B6 FA")]
+    public partial int GetPlotIcon(byte plot);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

@@ -3,7 +3,10 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
-[GenerateInterop, Inherits<ContainerInterface>]
+// Client::Game::Character::LookAtContainer
+//   Client::Game::Character::ContainerInterface
+[GenerateInterop]
+[Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x620)]
 public unsafe partial struct LookAtContainer {
     [FieldOffset(0x10)] public CharacterLookAtController Controller;

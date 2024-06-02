@@ -3,6 +3,8 @@ using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
+// Client::Graphics::Render::ModelRenderer
+//   Client::Graphics::Render::BaseRenderer
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x228)]
 public unsafe partial struct ModelRenderer {

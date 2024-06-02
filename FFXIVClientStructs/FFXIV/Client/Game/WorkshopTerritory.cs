@@ -1,9 +1,13 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::WorkshopTerritory
+//   Client::Game::HousingTerritory
+[GenerateInterop]
+[Inherits<HousingTerritory>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
-public unsafe partial struct HousingWorkshopTerritory {
+public unsafe partial struct WorkshopTerritory {
     [FieldOffset(0x68)] public HousingWorkshopAirshipData Airship;
 
     [FieldOffset(0x2960)] public HousingWorkshopSubmersibleData Submersible;

@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.GoldSaucer;
 
+// Client::Game::GoldSaucer::GoldSaucerManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct GoldSaucerManager {

@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
+// Client::Graphics::Scene::CameraManager
+//   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
 public unsafe partial struct CameraManager {

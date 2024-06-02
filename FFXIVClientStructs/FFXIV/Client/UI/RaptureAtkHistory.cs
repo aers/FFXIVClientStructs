@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::RaptureAtkHistory
+//   Component::GUI::AtkModuleInterface::AtkHistoryInterface
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct RaptureAtkHistory {

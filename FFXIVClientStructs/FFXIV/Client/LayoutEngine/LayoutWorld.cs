@@ -2,6 +2,9 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 
+// Client::LayoutEngine::LayoutWorld
+//   Client::LayoutEngine::IManagerBase
+//     Client::System::Common::NonCopyable
 /// <summary>
 /// Root level manager for 'layouts' (loaded levels with static geometry).
 /// </summary>

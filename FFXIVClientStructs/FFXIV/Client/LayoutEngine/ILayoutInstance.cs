@@ -3,50 +3,8 @@ using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 
-public enum InstanceType : byte {
-    BgPart = 1,
-    Light = 3,
-    Vfx = 4,
-    PositionMarker = 5,
-    SharedGroup = 6,
-    Sound = 7,
-    EventNpc = 8,
-    BattleNpc = 9,
-    Aetheryte = 12,
-    EnvSpace = 13,
-    Gathering = 14,
-    HelperObject = 15,
-    Treasure = 16,
-    Weapon = 39,
-    PopRange = 40,
-    ExitRange = 41, // collider in layer 2
-    MapRange = 43, // collider in layer 3
-    NaviMeshRange = 44,
-    EventObject = 45,
-    EnvLocation = 47,
-    EventRange = 49, // collider in layer 4
-    QuestMarker = 51,
-    CollisionBox = 57, // generic collider
-    DoorRange = 58,
-    LineVfx = 59,
-    ClientPath = 65,
-    ServerPath = 66,
-    GimmickRange = 67,
-    TargetMarker = 68,
-    ChairMarker = 69,
-    ClickableRange = 70,
-    PrefetchRange = 71, // collider in layer 5
-    FateRange = 72,
-    SphereCastRange = 75,
-    IndoorObject = 76,
-    OutdoorObject = 77,
-    Decal = 83,
-    ColliderLayer7 = 86,
-    ColliderLayer8 = 87,
-    ColliderLayer9 = 88,
-    ColliderLayer10 = 89,
-}
-
+// Client::LayoutEngine::ILayoutInstance
+//   Client::System::Common::NonCopyable
 // instances can have both graphics and collision representation; for ones that have both one is 'primary' and other is 'secondary'
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
@@ -227,4 +185,48 @@ public unsafe partial struct AnalyticShapeData {
 
     // yes, they really store the collider type in the padding of SRT structure...
     public FileLayerGroupAnalyticCollider.Type Type => (FileLayerGroupAnalyticCollider.Type)Transform.Type;
+}
+
+public enum InstanceType : byte {
+    BgPart = 1,
+    Light = 3,
+    Vfx = 4,
+    PositionMarker = 5,
+    SharedGroup = 6,
+    Sound = 7,
+    EventNpc = 8,
+    BattleNpc = 9,
+    Aetheryte = 12,
+    EnvSpace = 13,
+    Gathering = 14,
+    HelperObject = 15,
+    Treasure = 16,
+    Weapon = 39,
+    PopRange = 40,
+    ExitRange = 41, // collider in layer 2
+    MapRange = 43, // collider in layer 3
+    NaviMeshRange = 44,
+    EventObject = 45,
+    EnvLocation = 47,
+    EventRange = 49, // collider in layer 4
+    QuestMarker = 51,
+    CollisionBox = 57, // generic collider
+    DoorRange = 58,
+    LineVfx = 59,
+    ClientPath = 65,
+    ServerPath = 66,
+    GimmickRange = 67,
+    TargetMarker = 68,
+    ChairMarker = 69,
+    ClickableRange = 70,
+    PrefetchRange = 71, // collider in layer 5
+    FateRange = 72,
+    SphereCastRange = 75,
+    IndoorObject = 76,
+    OutdoorObject = 77,
+    Decal = 83,
+    ColliderLayer7 = 86,
+    ColliderLayer8 = 87,
+    ColliderLayer9 = 88,
+    ColliderLayer10 = 89,
 }

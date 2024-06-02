@@ -8,7 +8,8 @@ using FFXIVClientStructs.Havok.Common.Base.Object;
 
 namespace FFXIVClientStructs.Havok.Animation.Playback;
 
-[GenerateInterop, Inherits<hkReferencedObject>]
+[GenerateInterop]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct hkaAnimatedSkeleton {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]

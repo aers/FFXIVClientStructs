@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::QuestManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xF58)]
 public unsafe partial struct QuestManager {

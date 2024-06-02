@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// RDM - Balance Gauge
 /// </summary>
 [Addon("JobHudRDM0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x440)]
 public unsafe partial struct AddonJobHudRDM0 {
     [FieldOffset(0x260)] public BalanceGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudRDM0 {
     [FieldOffset(0x2B0)] public BalanceGauge GaugeStandard;
     [FieldOffset(0x3B0)] public BalanceGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct BalanceGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
@@ -27,7 +29,8 @@ public unsafe partial struct AddonJobHudRDM0 {
         [FieldOffset(0x20)] public int ManaStacks;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x100)]
     public partial struct BalanceGauge {
         [FieldOffset(0x10)] public ManaBar BlackManaBar;
@@ -65,7 +68,8 @@ public unsafe partial struct AddonJobHudRDM0 {
         }
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct BalanceGaugeSimple {
         [FieldOffset(0x10)] public AtkComponentGaugeBar* BlackManaGaugeBar;

@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
+// Client::Game::SavedAppearanceManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x9EB8)]
 public unsafe partial struct SavedAppearanceManager {

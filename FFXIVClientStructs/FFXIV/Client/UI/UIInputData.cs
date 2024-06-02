@@ -1,10 +1,15 @@
 // Suppress Inconsistent Naming due to VirtualKeyCode Names 
 // ReSharper disable InconsistentNaming
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::UIInputData
+//   Component::GUI::AtkInputData
+//   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
+[Inherits<UserFileEvent>(0x9C8)]
 [StructLayout(LayoutKind.Explicit, Size = 0xA20)]
 public unsafe partial struct UIInputData {
     public static UIInputData* Instance() => Framework.Instance()->UIModule->GetUIInputData();

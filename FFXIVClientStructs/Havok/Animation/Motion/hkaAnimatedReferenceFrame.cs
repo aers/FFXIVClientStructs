@@ -2,7 +2,8 @@ using FFXIVClientStructs.Havok.Common.Base.Object;
 
 namespace FFXIVClientStructs.Havok.Animation.Motion;
 
-[GenerateInterop, Inherits<hkReferencedObject>]
+[GenerateInterop]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public partial struct hkaAnimatedReferenceFrame {
     public enum hkaReferenceFrameTypeEnum {

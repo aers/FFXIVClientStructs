@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyNoviceNetwork
+//   Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.NoviceNetwork)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]

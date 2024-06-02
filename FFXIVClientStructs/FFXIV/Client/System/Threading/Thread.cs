@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Threading;
 
+// Client::System::Threading::Thread
+//   Client::System::Common::NonCopyable
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct Thread {

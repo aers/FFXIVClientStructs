@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// BRD - Song Gauge
 /// </summary>
 [Addon("JobHudBRD0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
 public unsafe partial struct AddonJobHudBRD0 {
     [FieldOffset(0x260)] public SongGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudBRD0 {
     [FieldOffset(0x2E0)] public SongGauge GaugeStandard;
     [FieldOffset(0x3E0)] public SongGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct SongGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray6<byte> _prerequisites;
@@ -32,7 +34,8 @@ public unsafe partial struct AddonJobHudBRD0 {
         [FieldOffset(0x38)] public byte* SongTitle;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x100)]
     public partial struct SongGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -61,7 +64,8 @@ public unsafe partial struct AddonJobHudBRD0 {
         [FieldOffset(0xD0), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentBase>> _songIcon;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     public partial struct SongGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

@@ -30,10 +30,10 @@ globals:
   0x1421D52D8: g_Client::Game::Control::Control_LocalPlayerObjectID
   0x1421D52E0: g_Client::Game::Control::Control_LocalPlayer
   0x1421FB530: g_LastTextCommand
-  0x1421FB8C0: g_CharacterManager_BattleCharaMemoryPtr
-  0x1421FB8C8: g_CharacterManager_CompanionMemoryPtr
-  0x1421FB8F8: g_GameObjectManager_ObjectList
-  0x1421FCBB0: g_GameObjectManager_ObjectListEnd
+  0x1421FB8C0: g_Client::Game::Character::CharacterManager_BattleCharaMemoryPtr
+  0x1421FB8C8: g_Client::Game::Character::CharacterManager_CompanionMemoryPtr
+  0x1421FB8F8: g_Client::Game::Object::GameObjectManager_ObjectList
+  0x1421FCBB0: g_Client::Game::Object::GameObjectManager_ObjectListEnd
   0x142205138: g_Client::Game::UI::Chain.RemainingTime # not a pointer
   0x14220513C: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x1422051BC: g_Client::Game::UI::PlayerState.ObjectId
@@ -655,6 +655,10 @@ classes:
   Application::Network::WorkDefinitions::Base_TypeInfoInterface:
     vtbls:
       - ea: 0x141CA1F98
+  Application::Network::WorkDefinitions::CharaMake:
+    vtbls:
+      - ea: 0x141CA0580
+        base: Application::Network::WorkDefinitions::Base
   Application::Network::WorkDefinitions::QuestWork:
     vtbls:
       - ea: 0x141A22AC8
@@ -1080,7 +1084,7 @@ classes:
       0x1408A4DB0: GetMember
       0x1409325C0: Update
       0x1408A4BF0: UpdateNotifications
-  Client::Game::Housing::HousingManager:
+  Client::Game::HousingManager:
     instances:
       - ea: 0x14221E520
         pointer: True
@@ -1110,19 +1114,28 @@ classes:
       0x140B406A0: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
       0x140B407C0: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x1400A8E70: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
-  Client::Game::Housing::OutdoorTerritory:
+  Client::Game::HousingTerritory:
+    vtbls:
+      - ea: 0x141A77E98
+    vfuncs:
+      0: dtor
+      6: GetTerritoryType
+  Client::Game::OutdoorTerritory:
     vtbls:
       - ea: 0x141A77FF8
+        base: Client::Game::HousingTerritory
     funcs:
       0x140B37950: GetPlotIcon # (this, plotIndex)
       0x140B356E0: IsEstateShared # (this, plotIndex)
       0x140B355B0: IsEstateResident # (this, plotIndex)
-  Client::Game::Housing::IndoorTerritory:
+  Client::Game::IndoorTerritory:
     vtbls:
       - ea: 0x141A78060
-  Client::Game::Housing::WorkshopTerritory:
+        base: Client::Game::HousingTerritory
+  Client::Game::WorkshopTerritory:
     vtbls:
       - ea: 0x141A780A0
+        base: Client::Game::HousingTerritory
   Client::Game::WeatherManager::WeatherInterface:
     vtbls:
       - ea: 0x141A77370

@@ -2,15 +2,18 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
-[Addon("GSInfoEmj")]
-[GenerateInterop, Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x258)]
-public unsafe partial struct AddonGSInfoEmj {
-    [FieldOffset(0x220)] public AtkTextNode* MatchesPlayed;
-    [FieldOffset(0x228)] public AtkTextNode* CurrentRating;
-    [FieldOffset(0x230)] public AtkTextNode* HighestRating;
-    [FieldOffset(0x238)] public AtkTextNode* Rank;
-    [FieldOffset(0x240)] public AtkTextNode* NextRankPoints;
-    [FieldOffset(0x248)] public AtkTextNode* Points;
-    [FieldOffset(0x250)] public AtkComponentButton* ResetRankButton;
+// Client::UI::AddonGSInfoGeneral
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
+[Addon("GSInfoGeneral")]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
+[StructLayout(LayoutKind.Explicit, Size = 0x250)]
+public unsafe partial struct AddonGSInfoGeneral {
+    [FieldOffset(0x220)] public AtkComponentBase* MGPAmountDisplay;
+    [FieldOffset(0x228)] public AtkComponentBase* TournamentMatches;
+    [FieldOffset(0x230)] public AtkComponentBase* TournamentWins;
+    [FieldOffset(0x238)] public AtkComponentBase* TournamentPoints;
+    [FieldOffset(0x240)] public AtkComponentBase* TournamentInfo;
+    [FieldOffset(0x248)] public AtkResNode* TournamentResults;
 }

@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("ContentsFinder")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D B3 38 02 00 00 48 8D 05 ?? ?? ?? ?? 48 89 AB 28 02 00 00 48 89 83 ?? ?? ?? ?? 8D 7D 02 48 89 AB 30 02 00 00 66 90 48 8B CE E8 ?? ?? ?? ?? 48 83 C6 09 48 83 EF 01 75 ?? 48", 3)]
 public unsafe partial struct AddonContentsFinder {

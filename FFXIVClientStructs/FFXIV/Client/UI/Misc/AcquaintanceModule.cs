@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // Client::UI::Misc::AcquaintanceModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 54 41 56 41 57 48 83 EC 20 45 33 E4 48 89 51 10"
-[GenerateInterop, Inherits<UserFileEvent>]
+[GenerateInterop]
+[Inherits<UserFileEvent>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 89 06", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x10F8)]
 public unsafe partial struct AcquaintanceModule {

@@ -5,7 +5,8 @@ using FFXIVClientStructs.Havok.Common.Base.Object;
 
 namespace FFXIVClientStructs.Havok.Animation.Playback.Control.Default;
 
-[GenerateInterop, Inherits<hkaAnimationControl>]
+[GenerateInterop]
+[Inherits<hkaAnimationControl>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct hkaDefaultAnimationControl {
     public enum EaseStatusEnum {
@@ -18,7 +19,8 @@ public unsafe partial struct hkaDefaultAnimationControl {
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct hkaDefaultAnimationControlListener;
 
-    [GenerateInterop, Inherits<hkReferencedObject>]
+    [GenerateInterop]
+    [Inherits<hkReferencedObject>]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct hkaDefaultAnimationControlMapperData {
         [FieldOffset(0x10)] public hkaSkeletonMapper* Mapper;

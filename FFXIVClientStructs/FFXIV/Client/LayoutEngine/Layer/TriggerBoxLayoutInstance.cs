@@ -2,8 +2,8 @@ using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
-public enum ColliderType { None, Box, Sphere, Cylinder, Plane, Mesh, PlaneTwoSided }
-
+// Client::LayoutEngine::Layer::TriggerBoxLayoutInstance
+//   Client::LayoutEngine::ILayoutInstance
 /// <summary>
 /// Base class for various collision-only instances.
 /// </summary>
@@ -22,4 +22,14 @@ public unsafe partial struct TriggerBoxLayoutInstance {
 
     [VirtualFunction(78)]
     public partial ulong GetLayerMask();
+}
+
+public enum ColliderType {
+    None,
+    Box,
+    Sphere,
+    Cylinder,
+    Plane,
+    Mesh,
+    PlaneTwoSided
 }

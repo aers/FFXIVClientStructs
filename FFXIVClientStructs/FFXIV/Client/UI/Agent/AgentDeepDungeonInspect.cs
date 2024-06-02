@@ -3,6 +3,9 @@ using FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// Client::UI::Agent::AgentDeepDungeonInspect
+//   Client::UI::Agent::AgentInterface
+//     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.DeepDungeonInspect)]
 [GenerateInterop]
 [Inherits<AgentInterface>]

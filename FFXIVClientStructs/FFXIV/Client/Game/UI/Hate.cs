@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
+// Client::Game::UI::Hate
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
 public unsafe partial struct Hate {

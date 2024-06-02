@@ -1,8 +1,5 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
-/// <summary>
-/// A struct representing the UIState Achievement
-/// </summary>
 // Client::Game::UI::Achievement
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x558)]

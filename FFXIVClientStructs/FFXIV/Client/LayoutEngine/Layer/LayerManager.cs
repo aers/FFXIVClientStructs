@@ -1,5 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
+// Client::LayoutEngine::Layer::LayerManager
+//   Client::LayoutEngine::IManagerBase
+//     Client::System::Common::NonCopyable
 /// <summary>
 /// Layer is a flat list of instances that are always loaded together.
 /// </summary>

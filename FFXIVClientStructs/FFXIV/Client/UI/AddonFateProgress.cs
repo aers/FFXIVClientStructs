@@ -2,8 +2,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonFateProgress
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
 [Addon("FateProgress")]
-[GenerateInterop, Inherits<AtkUnitBase>]
+[GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
 public unsafe partial struct AddonFateProgress {
     [FieldOffset(0x230)] public byte TabCount;

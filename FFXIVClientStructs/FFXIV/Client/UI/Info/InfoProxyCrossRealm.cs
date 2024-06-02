@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxyCrossRealm
+//   Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.CrossRealmParty)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]

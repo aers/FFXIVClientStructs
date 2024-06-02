@@ -2,7 +2,8 @@ using FFXIVClientStructs.Havok.Common.Base.Object;
 
 namespace FFXIVClientStructs.Havok.Common.SceneData.Mesh;
 
-[GenerateInterop, Inherits<hkReferencedObject>]
+[GenerateInterop]
+[Inherits<hkReferencedObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public partial struct hkxMesh {
     // hkArray<hkRefPtr<hkxMeshSection>> m_sections;

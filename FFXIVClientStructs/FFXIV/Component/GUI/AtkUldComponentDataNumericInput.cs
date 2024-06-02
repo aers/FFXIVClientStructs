@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[GenerateInterop, Inherits<AtkUldComponentDataInputBase>]
+[GenerateInterop]
+[Inherits<AtkUldComponentDataInputBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
 public unsafe partial struct AtkUldComponentDataNumericInput {
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray5<uint> _nodes;

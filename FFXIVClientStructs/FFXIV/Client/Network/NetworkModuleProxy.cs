@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Network;
 
+// Client::Network::NetworkModuleProxy
+//   Client::System::Common::NonCopyable
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct NetworkModuleProxy {

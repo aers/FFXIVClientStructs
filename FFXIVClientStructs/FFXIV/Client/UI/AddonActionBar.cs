@@ -2,8 +2,14 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::AddonActionBar
+//   Client::UI::AddonActionBarX
+//     Client::UI::AddonActionBarBase
+//       Component::GUI::AtkUnitBase
+//         Component::GUI::AtkEventListener
 [Addon("_ActionBar")]
-[GenerateInterop, Inherits<AddonActionBarX>]
+[GenerateInterop]
+[Inherits<AddonActionBarX>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
 public unsafe partial struct AddonActionBar {
     [FieldOffset(0x298)] public AtkComponentBase* CycleUpArrow;

@@ -4,7 +4,8 @@ using FFXIVClientStructs.FFXIV.Component.Excel;
 namespace FFXIVClientStructs.FFXIV.Component.Text;
 
 // this belongs into a Component::Text::Localize namespace but that causes namespace issues
-[GenerateInterop, Inherits<ExcelLanguageEvent>]
+[GenerateInterop]
+[Inherits<ExcelLanguageEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct Localize {
     [FieldOffset(0x08)] public ExcelModuleInterface* ExcelModuleInterface;

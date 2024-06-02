@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// SAM - Kenki Gauge
 /// </summary>
 [Addon("JobHudSAM0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public unsafe partial struct AddonJobHudSAM0 {
     [FieldOffset(0x260)] public KenkiGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudSAM0 {
     [FieldOffset(0x290)] public KenkiGauge GaugeStandard;
     [FieldOffset(0x320)] public KenkiGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct KenkiGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
@@ -24,7 +26,8 @@ public unsafe partial struct AddonJobHudSAM0 {
         [FieldOffset(0x14)] public int KenkiMax;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct KenkiGauge {
         [FieldOffset(0x10)] public AtkResNode* KenkiContainer;
@@ -51,7 +54,8 @@ public unsafe partial struct AddonJobHudSAM0 {
         [FieldOffset(0x88)] public bool KenkiCapped;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct KenkiGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -75,7 +79,8 @@ public unsafe partial struct AddonJobHudSAM0 {
 /// SAM - Sen Gauge
 /// </summary>
 [Addon("JobHudSAM1")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x328)]
 public unsafe partial struct AddonJobHudSAM1 {
     [FieldOffset(0x260)] public SenGaugeData DataPrevious;
@@ -83,7 +88,8 @@ public unsafe partial struct AddonJobHudSAM1 {
     [FieldOffset(0x280)] public SenGauge GaugeStandard;
     [FieldOffset(0x2D0)] public SenGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct SenGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
@@ -92,7 +98,8 @@ public unsafe partial struct AddonJobHudSAM1 {
         [FieldOffset(0x0B)] public bool HasKa;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public partial struct SenGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -108,7 +115,8 @@ public unsafe partial struct AddonJobHudSAM1 {
         [FieldOffset(0x4C)] public int GlowTimelineFrameId;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public partial struct SenGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

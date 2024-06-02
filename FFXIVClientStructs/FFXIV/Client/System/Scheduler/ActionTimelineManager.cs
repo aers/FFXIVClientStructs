@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler;
 
+// Client::System::Scheduler::ActionTimelineManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct ActionTimelineManager {

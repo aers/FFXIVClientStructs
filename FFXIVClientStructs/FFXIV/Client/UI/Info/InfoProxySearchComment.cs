@@ -2,6 +2,8 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
+// Client::UI::Info::InfoProxySearchComment
+//   Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.SearchComment)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]

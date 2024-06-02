@@ -3,7 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Component.Text;
 
-[GenerateInterop(isInherited: true), Inherits<MacroDecoder>(parentOffset: 8)]
+[GenerateInterop(isInherited: true)]
+[Inherits<MacroDecoder>(parentOffset: 8)]
 [StructLayout(LayoutKind.Explicit, Size = 0x510)]
 public unsafe partial struct TextModule {
     [FieldOffset(0x68)] public ExcelModuleInterface* ExcelModuleInterface;

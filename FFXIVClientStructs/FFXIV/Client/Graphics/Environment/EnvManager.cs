@@ -3,9 +3,13 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Environment;
 
+// Client::Graphics::Environment::EnvManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x910)]
 public unsafe partial struct EnvManager {
+    [StaticAddress("48 8B 35 ?? ?? ?? ?? 80 BE 7B 03 00 00 80", 3, isPointer: true)]
+    public static partial EnvManager* Instance();
+
     [FieldOffset(0x08)] public EnvScene* EnvScene;
     [FieldOffset(0x10)] public float DayTimeSeconds;
     [FieldOffset(0x14)] public float ActiveTransitionTime;
@@ -23,7 +27,4 @@ public unsafe partial struct EnvManager {
     [FieldOffset(0x750)] public ShadowCamera ShadowCamera;
 
     [FieldOffset(0x8F4)] public uint UnkFlags;
-
-    [StaticAddress("48 8B 35 ?? ?? ?? ?? 80 BE 7B 03 00 00 80", 3, isPointer: true)]
-    public static partial EnvManager* Instance();
 }

@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[GenerateInterop, Inherits<AtkUldComponentDataBase>]
+[GenerateInterop]
+[Inherits<AtkUldComponentDataBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
 public unsafe partial struct AtkUldComponentDataGaugeBar {
     [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray6<uint> _nodes;

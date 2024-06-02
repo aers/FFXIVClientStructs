@@ -2,8 +2,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
+// Client::UI::TabController
+//   Component::GUI::AtkEventListener
+[GenerateInterop]
+[Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
-public unsafe struct TabController {
+public unsafe partial struct TabController {
     [FieldOffset(0x08)] public AtkStage* AtkStage;
 
     [FieldOffset(0x80)] public int TabIndex;

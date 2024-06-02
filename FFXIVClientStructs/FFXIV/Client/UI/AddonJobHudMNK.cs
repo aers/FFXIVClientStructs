@@ -7,7 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// MNK - Master's Gauge
 /// </summary>
 [Addon("JobHudMNK0")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x420)]
 public unsafe partial struct AddonJobHudMNK0 {
     [FieldOffset(0x260)] public MastersGaugeData DataPrevious;
@@ -15,7 +16,8 @@ public unsafe partial struct AddonJobHudMNK0 {
     [FieldOffset(0x2B0)] public MastersGauge GaugeStandard;
     [FieldOffset(0x360)] public MastersGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct MastersGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -28,7 +30,8 @@ public unsafe partial struct AddonJobHudMNK0 {
         [FieldOffset(0x20)] public int BlitzType;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
     public partial struct MastersGauge {
         [FieldOffset(0x10)] public AtkResNode* NadiContainer;
@@ -49,7 +52,8 @@ public unsafe partial struct AddonJobHudMNK0 {
         [FieldOffset(0xA8)] public AtkResNode* BeastChakraSlots;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
     public partial struct MastersGaugeSimple;
 }
@@ -58,7 +62,8 @@ public unsafe partial struct AddonJobHudMNK0 {
 /// MNK - Chakra Gauge
 /// </summary>
 [Addon("JobHudMNK1")]
-[GenerateInterop, Inherits<AddonJobHud>]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x308)]
 public unsafe partial struct AddonJobHudMNK1 {
     [FieldOffset(0x260)] public ChakraGaugeData DataPrevious;
@@ -66,14 +71,16 @@ public unsafe partial struct AddonJobHudMNK1 {
     [FieldOffset(0x280)] public ChakraGauge GaugeStandard;
     [FieldOffset(0x2C0)] public ChakraGaugeSimple GaugeSimple;
 
-    [GenerateInterop, Inherits<AddonJobHudGaugeData>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct ChakraGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
         [FieldOffset(0x0C)] public int ChakraCount;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct ChakraGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -81,7 +88,8 @@ public unsafe partial struct AddonJobHudMNK1 {
         [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _chakra;
     }
 
-    [GenerateInterop, Inherits<AddonJobHudGauge>]
+    [GenerateInterop]
+[Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct ChakraGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

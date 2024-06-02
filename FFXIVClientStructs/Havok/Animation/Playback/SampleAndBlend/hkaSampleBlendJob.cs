@@ -7,7 +7,8 @@ using FFXIVClientStructs.Havok.Common.Base.Types;
 
 namespace FFXIVClientStructs.Havok.Animation.Playback.SampleAndBlend;
 
-[GenerateInterop, Inherits<hkJob>]
+[GenerateInterop]
+[Inherits<hkJob>]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct hkaSampleBlendJob {
     [StructLayout(LayoutKind.Explicit, Size = 0x190)]

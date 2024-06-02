@@ -1,6 +1,6 @@
-namespace FFXIVClientStructs.FFXIV.Client.Game.Housing;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-// Client::Game::Housing::HousingManager
+// Client::Game::HousingManager
 // ctor "E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? EB 07 48 89 1D ?? ?? ?? ?? 48 8D 05"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
@@ -9,9 +9,9 @@ public unsafe partial struct HousingManager {
     public static partial HousingManager* Instance();
 
     [FieldOffset(0x00)] public HousingTerritory* CurrentTerritory;
-    [FieldOffset(0x08)] public HousingOutdoorTerritory* OutdoorTerritory;
-    [FieldOffset(0x10)] public HousingTerritory* IndoorTerritory;
-    [FieldOffset(0x18)] public HousingWorkshopTerritory* WorkshopTerritory;
+    [FieldOffset(0x08)] public OutdoorTerritory* OutdoorTerritory;
+    [FieldOffset(0x10)] public IndoorTerritory* IndoorTerritory;
+    [FieldOffset(0x18)] public WorkshopTerritory* WorkshopTerritory;
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 BD ?? ?? ?? ?? 48 8D 4D A0")]
     private partial byte GetInvertedBrightness();

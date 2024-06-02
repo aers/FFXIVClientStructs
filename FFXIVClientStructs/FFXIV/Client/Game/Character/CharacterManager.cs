@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
+// Client::Game::Character::CharacterManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct CharacterManager {
