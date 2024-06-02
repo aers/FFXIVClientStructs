@@ -15733,7 +15733,7 @@ classes:
     funcs:
       0x14139B030: CreateInstance
       0x14139B080: ctor
-      0x14139B420: PreloadActionTmbByKey
+      0x14139B420: PreloadActionTmb
   Client::System::Scheduler::TimelineGroup:
     vtbls:
       - ea: 0x141B662D8
