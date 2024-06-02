@@ -1114,9 +1114,13 @@ classes:
       0x140B406A0: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
       0x140B407C0: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x1400A8E70: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
+  Client::Game::Housing::TerritoryInterface:
+    vtbls:
+      - ea: 0x141A77E98
   Client::Game::Housing::OutdoorTerritory:
     vtbls:
       - ea: 0x141A77FF8
+        base: Client::Game::Housing::TerritoryInterface
     funcs:
       0x140B37950: GetPlotIcon # (this, plotIndex)
       0x140B356E0: IsEstateShared # (this, plotIndex)
@@ -1124,9 +1128,11 @@ classes:
   Client::Game::Housing::IndoorTerritory:
     vtbls:
       - ea: 0x141A78060
+        base: Client::Game::Housing::TerritoryInterface
   Client::Game::Housing::WorkshopTerritory:
     vtbls:
       - ea: 0x141A780A0
+        base: Client::Game::Housing::TerritoryInterface
   Client::Game::WeatherManager::WeatherInterface:
     vtbls:
       - ea: 0x141A77370
