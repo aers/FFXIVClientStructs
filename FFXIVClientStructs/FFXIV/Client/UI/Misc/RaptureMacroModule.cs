@@ -47,7 +47,7 @@ public unsafe partial struct RaptureMacroModule {
         [FieldOffset(0)] public uint IconId;
         [FieldOffset(0x4)] public uint MacroIconRowId; // offset by +1
         [FieldOffset(0x8)] public Utf8String Name;
-        [FieldOffset(0x70)] internal FixedSizeArray15<Utf8String> _lines;
+        [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray15<Utf8String> _lines;
 
         /// <summary>
         /// Set the Icon of this Macro and also sets the correct MacroIconRowId
