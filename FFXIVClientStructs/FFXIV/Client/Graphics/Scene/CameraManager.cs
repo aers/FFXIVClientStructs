@@ -9,7 +9,7 @@ public unsafe partial struct CameraManager {
     public static partial CameraManager* Instance();
 
     [FieldOffset(0x50)] public int CameraIndex;
-    [FieldOffset(0x58)][FixedSizeArray] internal FixedSizeArray14<Pointer<Camera>> _cameras;
+    [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray14<Pointer<Camera>> _cameras;
 
     public Camera* CurrentCamera => Cameras[CameraIndex];
 }

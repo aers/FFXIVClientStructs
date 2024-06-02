@@ -9,7 +9,7 @@ public unsafe partial struct Manager {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 69 D1", 3, true)]
     public static partial Manager* Instance();
 
-    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray32<View> _viewArray;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray32<View> _views;
 
     [FieldOffset(0x13660)] public ModelRenderer ModelRenderer;
 

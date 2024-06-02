@@ -29,7 +29,7 @@ public unsafe partial struct AddonRaidFinder {
     [FieldOffset(0x4DC)] public int NumDisplayedEntries; // Use to index into EntryInfoArray
     [FieldOffset(0x4E0)] public int SelectedTab;
 
-    [FieldOffset(0x4E8), FixedSizeArray] internal FixedSizeArray8<RaidFinderDutyEntry> _entryInfoArray;
+    [FieldOffset(0x4E8), FixedSizeArray] internal FixedSizeArray8<RaidFinderDutyEntry> _entries;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]

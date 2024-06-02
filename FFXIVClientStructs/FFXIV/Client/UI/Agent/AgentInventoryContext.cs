@@ -17,7 +17,7 @@ public unsafe partial struct AgentInventoryContext {
     [FieldOffset(0x30)] public int ContextItemCount;
 
     [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray98<AtkValue> _eventParams;
-    [FieldOffset(0x658), FixedSizeArray] internal FixedSizeArray84<byte> _eventIdArray;
+    [FieldOffset(0x658), FixedSizeArray] internal FixedSizeArray84<byte> _eventIds;
     [FieldOffset(0x6AC)] public uint ContextItemDisabledMask;
     [FieldOffset(0x6B0)] public uint ContextItemSubmenuMask;
 

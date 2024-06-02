@@ -27,7 +27,7 @@ public unsafe partial struct GroupPoseModule {
     [FieldOffset(0x70)] public Vector4 CameraPosition; // maybe?
     [FieldOffset(0x80)] public bool IsCharacterOrientedCamera;
 
-    [FieldOffset(0x90)] internal FixedSizeArray3<Light> _lights;
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray3<Light> _lights;
 
     [FieldOffset(0x120)] public bool IsCharacterOrientedLight;
     [FieldOffset(0x121)] public bool IsManualBrightnessEnabled;

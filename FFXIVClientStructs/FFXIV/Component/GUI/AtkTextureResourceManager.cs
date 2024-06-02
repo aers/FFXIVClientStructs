@@ -11,6 +11,6 @@ public unsafe partial struct AtkTextureResourceManager {
     [FieldOffset(0x28)] public int IconLanguageSheetId;
     [FieldOffset(0x2C)] public int IconLanguage;
     // Icon ranges are inclusive: id ∈ [a,b]
-    [FieldOffset(0x30)] internal FixedSizeArray4<StdPair<uint, uint>> _localizedIconRange;
+    [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray4<StdPair<uint, uint>> _localizedIconRange;
     [FieldOffset(0x50)] public uint LocalizedIconRangeCount;
 }

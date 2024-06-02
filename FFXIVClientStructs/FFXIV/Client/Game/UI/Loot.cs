@@ -12,7 +12,7 @@ public unsafe partial struct Loot {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 44 24 60", 3)]
     public static partial Loot* Instance();
 
-    [FieldOffset(0x10)] internal FixedSizeArray16<LootItem> _itemArray;
+    [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray16<LootItem> _items;
 
     [FieldOffset(0x410)] public int SelectedIndex;
     [FieldOffset(0x418)] public uint UnkObjectId;
