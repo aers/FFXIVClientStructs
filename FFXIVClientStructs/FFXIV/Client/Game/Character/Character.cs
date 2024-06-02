@@ -56,6 +56,8 @@ public unsafe partial struct Character {
     /// </remarks>
     [FieldOffset(0x1B60)] public GameObjectId SoftTargetId;
 
+    [FieldOffset(0x1B6C)] public float CastRotation;
+
     [FieldOffset(0x1B98)] public uint NameId;
 
     [FieldOffset(0x1BA8)] public uint CompanionOwnerId;
@@ -148,8 +150,10 @@ public unsafe partial struct Character {
         [FieldOffset(0x01)] public byte Interruptible;
         [FieldOffset(0x02)] public ActionType ActionType;
         [FieldOffset(0x04)] public uint ActionId;
-        [FieldOffset(0x10)] public uint CastTargetId;
+        [FieldOffset(0x08)] public uint Sequence;
+        [FieldOffset(0x10)] public ulong CastTargetId;
         [FieldOffset(0x20)] public Vector3 CastLocation;
+        [FieldOffset(0x30)] public float Rotation;
         [FieldOffset(0x34)] public float CurrentCastTime;
         [FieldOffset(0x38)] public float TotalCastTime;
         [FieldOffset(0x3C)] public float AdjustedTotalCastTime;
@@ -157,8 +161,8 @@ public unsafe partial struct Character {
         [FieldOffset(0x40)] public uint UsedActionId;
 
         [FieldOffset(0x44)] public ActionType UsedActionType;
-        //[FieldOffset(0x4C)] public uint TotalActionCounter?;
-        //[FieldOffset(0x50)] public uint OwnActionCounter?;
+        [FieldOffset(0x4C)] public uint ResponseGlobalCounter;
+        [FieldOffset(0x50)] public uint ResponseSequence;
 
         [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray32<GameObjectId> _actionRecipientsObjectIds;
         [FieldOffset(0x158)] public int ActionRecipientsCount;

@@ -12,11 +12,37 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [GenerateInterop]
 [Inherits<PublicContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2CB8)]
-public partial struct PublicContentBozja {
+public unsafe partial struct PublicContentBozja {
     [FieldOffset(0x1098)] public DynamicEventContainer DynamicEventContainer;
+    [FieldOffset(0x2BC0)] public BozjaState State;
+    [FieldOffset(0x2CB0)] public bool StateInitialized;
 
-    [FieldOffset(0x2BC0)] public uint CurrentExperience; // Mettle
-    [FieldOffset(0x2BC4)] public uint NeededExperience;
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 48 85 FF 74 1D")]
+    public static partial PublicContentBozja* GetInstance();
+
+    /// <summary>
+    /// Returns pointer to the state, if bozja director is active and state is initialized; otherwise returns null.
+    /// </summary>
+    /// <returns></returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 74 1D")]
+    public static partial BozjaState* GetState();
+
+    /// <summary>
+    /// Use lost action from holster into specified duty action slot (slot is ignored for items, which are used directly).
+    /// </summary>
+    /// <param name="holsterIndex">Index of the action in the holster (see HolsterActions array).</param>
+    /// <param name="slot">Action slot (has to be 0 or 1).</param>
+    /// <returns></returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? BD")]
+    public partial bool UseFromHolster(uint holsterIndex, uint slot);
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+public partial struct BozjaState {
+    [FieldOffset(0x00)] public uint CurrentExperience; // Mettle
+    [FieldOffset(0x04)] public uint NeededExperience;
+    [FieldOffset(0x6C), FixedSizeArray] internal FixedSizeArray100<byte> _holsterActions; // elements are MYCTemporaryItem row ids
 }
 
 // Client::Game::InstanceContent::DynamicEventContainer

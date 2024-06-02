@@ -56,7 +56,7 @@ public unsafe partial struct Framework {
     /// </summary>
     [FieldOffset(0x16BC)] public float RealFrameDeltaTime;
     /// <summary>
-    /// If set to anything non-zero, overrides <see cref="FrameDeltaTime"/>. Has lower precedence than <see cref="FrameDeltaTimeOverride2"/>.
+    /// If set to anything non-zero, overrides <see cref="FrameDeltaTime"/>. Has lower precedence than <see cref="NextFrameDeltaTimeOverride"/>.
     /// </summary>
     [FieldOffset(0x16C0)] public float FrameDeltaTimeOverride;
     /// <summary>
@@ -64,8 +64,13 @@ public unsafe partial struct Framework {
     /// </summary>
     [FieldOffset(0x16C4)] public float FrameDeltaFactor;
     [FieldOffset(0x16C8)] public uint FrameCounter;
+    [FieldOffset(0x16D0)] public long FrameDeltaTimeMSInt; // FrameDeltaTime in milliseconds, rounded to integer
+    [FieldOffset(0x16D8)] public float FrameDeltaTimeMSRem; // sub-millisecond difference between real and rounded dt, added to the next frame
+    [FieldOffset(0x16E0)] public long FrameDeltaTimeUSInt; // FrameDeltaTime in microseconds, rounded to integer
+    [FieldOffset(0x16E8)] public float FrameDeltaTimeUSRem; // sub-microsecond difference between real and rounded dt, added to the next frame
     [FieldOffset(0x16F8)] public TaskManager TaskManager;
     [FieldOffset(0x1768)] public ClientTime ClientTime;
+    [FieldOffset(0x17B0)] public float GameSpeedMultiplier; // usually 1, but during recording replay could be different
     [FieldOffset(0x17C4)] public float FrameRate;
     /// <summary>
     /// If true <see cref="FrameDeltaTime"/> is set to 0.
@@ -73,8 +78,9 @@ public unsafe partial struct Framework {
     [FieldOffset(0x17C8)] public bool DiscardFrame;
     /// <summary>
     /// If set to anything non-zero, overrides <see cref="FrameDeltaTime"/>. If negative <see cref="FrameDeltaTimeOverride"/> is used and 60fps as a fallback.
+    /// Unlike <see cref="FrameDeltaTimeOverride"/>, this applies only to the next frame, and is reset to zero on next tick.
     /// </summary>
-    [FieldOffset(0x17CC)] public float FrameDeltaTimeOverride2;
+    [FieldOffset(0x17CC)] public float NextFrameDeltaTimeOverride;
     [FieldOffset(0x17D0)] public bool WindowInactive;
 
     [FieldOffset(0x17E0)] public int DataPathType;
