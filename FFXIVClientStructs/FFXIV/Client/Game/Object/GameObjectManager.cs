@@ -27,7 +27,7 @@ public unsafe partial struct GameObjectManager {
         // 529-598: something MJI (island sanctuary) related
         
         /// <summary>
-        /// Pointers to GameObjects, sorted by ObjectIndex.
+        /// Pointers to GameObjects, sorted by ObjectIndex. Contains null pointers for inactive indexes.
         /// </summary>
         [FieldOffset(0x0000), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _indexSorted;
 
@@ -37,7 +37,7 @@ public unsafe partial struct GameObjectManager {
         [FieldOffset(0x12B8), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _gameObjectIdSorted;
 
         /// <summary>
-        /// Pointers to active GameObjects with a valid Entityid (!= E0000000), sorted by EntityId.
+        /// Pointers to active GameObjects with a valid GameObject.EntityId (!= E0000000), sorted by EntityId.
         /// </summary>
         [FieldOffset(0x2570), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _entityIdSorted;
 
