@@ -8,8 +8,15 @@ public unsafe partial struct ActionTimelineManager {
     public static partial ActionTimelineManager* Instance();
 
     [MemberFunction("48 83 EC 38 48 8B 02 C7 44 24")]
-    public partial bool PreloadActionTmbByKey(byte** key);
+    public partial bool PreloadActionTmb(PreloadActionTmbInfo* info);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C6 48 89 45 A7")]
-    public static partial byte* GetActionTimelineKey(uint actionTimelineRowId);
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct PreloadActionTmbInfo {
+        [FieldOffset(0x00)] public byte* Key;
+
+        // ActionTimeline Row Index
+        // or
+        // WeaponTimeline Row Index + 0x20000
+        [FieldOffset(0x08)] public uint Index;
+    }
 }
