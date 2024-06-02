@@ -5073,8 +5073,22 @@ classes:
     funcs:
       0x1404CEB00: CreateInstance
       0x1404CEBA0: ctor
+      0x1404D0480: CreateCutSceneController
     instances:
       - ea: 0x1421CB4A0
+  Client::System::Scheduler::Control::UIControl:
+    vtbls:
+      - ea: 0x141C59510
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x1415551D0: ctor
+  Client::System::Scheduler::Base::CutSceneController:
+    vtbls:
+      - ea: 0x141B52B18
+        base: Client::System::Scheduler::Base::SchedulerState
+      # Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Base::CutSceneController>
+    funcs:
+      0x1413C2610: ctor
   Client::Graphics::Vfx::VfxData:
     vtbls:
       - ea: 0x1419F6958
