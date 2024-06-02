@@ -26,7 +26,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -70,7 +70,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -114,7 +114,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -158,7 +158,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -202,7 +202,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -246,7 +246,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate void TestFunction(int argOne, void* argTwo);
+                                      public delegate void TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -290,7 +290,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
+                                      public delegate int TestFunction(int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -338,8 +338,8 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
-                                      public delegate int TestFunction2(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
+                                      public delegate int TestFunction2(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -392,7 +392,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(ref int argOne, out int argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, ref int argOne, out int argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -440,7 +440,7 @@ public class MemberFunctionAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
@@ -489,7 +489,7 @@ public class MemberFunctionAttributeTests {
                                       }
                                       public static partial class Delegates
                                       {
-                                          public delegate int TestFunction(int argOne, void* argTwo);
+                                          public delegate int TestFunction(InnerStruct* thisPtr, int argOne, void* argTwo);
                                       }
                                       public unsafe static class MemberFunctionPointers
                                       {
@@ -535,7 +535,7 @@ public class MemberFunctionAttributeTests {
                                   public static partial class Delegates
                                   {
                                       [return:global::System.Runtime.InteropServices.MarshalAsAttribute(global::System.Runtime.InteropServices.UnmanagedType.U1)]
-                                      public delegate bool TestFunction(int argOne, void* argTwo);
+                                      public delegate bool TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {

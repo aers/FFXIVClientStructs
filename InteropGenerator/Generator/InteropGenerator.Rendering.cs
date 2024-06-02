@@ -157,11 +157,11 @@ public sealed partial class InteropGenerator {
         }
         string paramTypesAndNames;
         if (methodInfo.IsStatic) {
+            paramTypesAndNames = methodInfo.GetParameterTypesAndNamesString();
+        } else {
             paramTypesAndNames = $"{structType}* thisPtr";
             if (!methodInfo.Parameters.IsEmpty)
                 paramTypesAndNames += $", {methodInfo.GetParameterTypesAndNamesString()}";
-        } else {
-            paramTypesAndNames = methodInfo.GetParameterTypesAndNamesString();
         }
         string methodModifiers = methodInfo.Modifiers.Replace(" partial", string.Empty).Replace(" static", string.Empty);
         writer.WriteLine($"{methodModifiers} delegate {methodInfo.ReturnType} {methodInfo.Name}({paramTypesAndNames});");

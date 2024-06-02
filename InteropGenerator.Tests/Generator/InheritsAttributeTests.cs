@@ -251,7 +251,7 @@ public class InheritsAttributeTests {
                                                    }
                                                    public static partial class Delegates
                                                    {
-                                                       public delegate int TestFunction(int argOne, void* argTwo);
+                                                       public delegate int TestFunction(BaseStruct* thisPtr, int argOne, void* argTwo);
                                                    }
                                                    public unsafe static class MemberFunctionPointers
                                                    {
@@ -324,7 +324,7 @@ public class InheritsAttributeTests {
                                                    }
                                                    public static partial class Delegates
                                                    {
-                                                       public delegate int TestFunction(int argOne, void* argTwo);
+                                                       public delegate int TestFunction(BaseStruct* thisPtr, int argOne, void* argTwo);
                                                    }
                                                    public unsafe static class MemberFunctionPointers
                                                    {
@@ -406,7 +406,7 @@ public class InheritsAttributeTests {
                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStructVirtualTable* VirtualTable;
                                                    public static partial class Delegates
                                                    {
-                                                       public delegate int TestFunction(int argOne, void* argTwo);
+                                                       public delegate int TestFunction(BaseStruct* thisPtr, int argOne, void* argTwo);
                                                    }
                                                    [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                    public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -427,7 +427,7 @@ public class InheritsAttributeTests {
                                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
                                                                public static partial class Delegates
                                                                {
-                                                                   public delegate int TestFunction(int argOne, void* argTwo);
+                                                                   public delegate int TestFunction(ChildStruct* thisPtr, int argOne, void* argTwo);
                                                                }
                                                                /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
                                                                /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
@@ -475,7 +475,7 @@ public class InheritsAttributeTests {
                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStructVirtualTable* VirtualTable;
                                                    public static partial class Delegates
                                                    {
-                                                       public delegate int TestFunction(int argOne, void* argTwo);
+                                                       public delegate int TestFunction(BaseStruct* thisPtr, int argOne, void* argTwo);
                                                    }
                                                    [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                    public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -494,7 +494,7 @@ public class InheritsAttributeTests {
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
                                                     public static partial class Delegates
                                                     {
-                                                        public delegate int TestFunction2();
+                                                        public delegate int TestFunction2(ChildStruct* thisPtr);
                                                     }
                                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                     public partial int TestFunction2() => VirtualTable->TestFunction2((ChildStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
@@ -513,7 +513,7 @@ public class InheritsAttributeTests {
                                                                }
                                                                public static partial class Delegates
                                                                {
-                                                                   public delegate int TestFunction(int argOne, void* argTwo);
+                                                                   public delegate int TestFunction(ChildStruct* thisPtr, int argOne, void* argTwo);
                                                                }
                                                                /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
                                                                /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
@@ -566,7 +566,7 @@ public class InheritsAttributeTests {
                                            [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct2VirtualTable* VirtualTable;
                                            public static partial class Delegates
                                            {
-                                               public delegate int TestFunction(int argOne, void* argTwo);
+                                               public delegate int TestFunction(BaseStruct2* thisPtr, int argOne, void* argTwo);
                                            }
                                            [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                            public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((BaseStruct2*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -1145,8 +1145,8 @@ public class InheritsAttributeTests {
                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseA_AVirtualTable* VirtualTable;
                                      public static partial class Delegates
                                      {
-                                         public delegate int BaseA_mf();
-                                         public delegate void BaseA_A_vf0(int* arg);
+                                         public delegate int BaseA_mf(BaseA_A* thisPtr);
+                                         public delegate void BaseA_A_vf0(BaseA_A* thisPtr, int* arg);
                                      }
                                      public unsafe static class MemberFunctionPointers
                                      {
@@ -1179,7 +1179,7 @@ public class InheritsAttributeTests {
                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseA_BVirtualTable* VirtualTable;
                                        public static partial class Delegates
                                        {
-                                           public delegate void BaseA_B_vf0(byte* arg);
+                                           public delegate void BaseA_B_vf0(BaseA_B* thisPtr, byte* arg);
                                        }
                                        [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                        public partial void BaseA_B_vf0(byte* arg) => VirtualTable->BaseA_B_vf0((BaseA_B*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
@@ -1221,7 +1221,7 @@ public class InheritsAttributeTests {
                                        public static MiddleAVirtualTable* StaticVirtualTablePointer => (MiddleAVirtualTable*)Addresses.StaticVirtualTable.Value;
                                        public static partial class Delegates
                                        {
-                                           public delegate void MiddleA_vf4(int* arg);
+                                           public delegate void MiddleA_vf4(MiddleA* thisPtr, int* arg);
                                        }
                                        [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                        public partial void MiddleA_vf4(int* arg) => VirtualTable->MiddleA_vf4((MiddleA*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
@@ -1238,7 +1238,7 @@ public class InheritsAttributeTests {
                                      }
                                      public static partial class Delegates
                                      {
-                                         public delegate int BaseB_mf();
+                                         public delegate int BaseB_mf(BaseB* thisPtr);
                                      }
                                      public unsafe static class MemberFunctionPointers
                                      {
@@ -1271,7 +1271,7 @@ public class InheritsAttributeTests {
                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseCVirtualTable* VirtualTable;
                                      public static partial class Delegates
                                      {
-                                         public delegate void BaseC_vf0(int* arg);
+                                         public delegate void BaseC_vf0(BaseC* thisPtr, int* arg);
                                      }
                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                      public partial void BaseC_vf0(int* arg) => VirtualTable->BaseC_vf0((BaseC*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
@@ -1300,7 +1300,7 @@ public class InheritsAttributeTests {
                                        }
                                        public static partial class Delegates
                                        {
-                                           public delegate int MiddleC_mf();
+                                           public delegate int MiddleC_mf(MiddleC* thisPtr);
                                        }
                                        public unsafe static class MemberFunctionPointers
                                        {
@@ -1329,7 +1329,7 @@ public class InheritsAttributeTests {
                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildVirtualTable* VirtualTable;
                                      public static partial class Delegates
                                      {
-                                         public delegate void Child_vf10(int* arg);
+                                         public delegate void Child_vf10(Child* thisPtr, int* arg);
                                      }
                                      [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                      public partial void Child_vf10(int* arg) => VirtualTable->Child_vf10((Child*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
@@ -1357,7 +1357,7 @@ public class InheritsAttributeTests {
                                                 }
                                                 public static partial class Delegates
                                                 {
-                                                    public delegate void BaseA_A_vf0(int* arg);
+                                                    public delegate void BaseA_A_vf0(MiddleA* thisPtr, int* arg);
                                                 }
                                                 /// <inheritdoc cref="BaseA_A.BaseA_A_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
@@ -1408,7 +1408,7 @@ public class InheritsAttributeTests {
                                                 [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public MiddleCVirtualTable* VirtualTable;
                                                 public static partial class Delegates
                                                 {
-                                                    public delegate void BaseC_vf0(int* arg);
+                                                    public delegate void BaseC_vf0(MiddleC* thisPtr, int* arg);
                                                 }
                                                 /// <inheritdoc cref="BaseC.BaseC_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseC">BaseC</see>.</remarks>
@@ -1461,8 +1461,8 @@ public class InheritsAttributeTests {
                                                 }
                                                 public static partial class Delegates
                                                 {
-                                                    public delegate void BaseA_A_vf0(int* arg);
-                                                    public delegate void MiddleA_vf4(int* arg);
+                                                    public delegate void BaseA_A_vf0(Child* thisPtr, int* arg);
+                                                    public delegate void MiddleA_vf4(Child* thisPtr, int* arg);
                                                 }
                                                 /// <inheritdoc cref="BaseA_A.BaseA_A_vf0(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>

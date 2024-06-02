@@ -28,7 +28,7 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -64,7 +64,7 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   public static partial class Delegates
                                   {
-                                      public delegate void TestFunction(int argOne, void* argTwo);
+                                      public delegate void TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                   public partial void TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -104,7 +104,7 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
                                   }
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -145,7 +145,7 @@ public class VirtualFunctionAttributeTests {
                                       [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public InnerStructVirtualTable* VirtualTable;
                                       public static partial class Delegates
                                       {
-                                          public delegate int TestFunction(int argOne, void* argTwo);
+                                          public delegate int TestFunction(InnerStruct* thisPtr, int argOne, void* argTwo);
                                       }
                                       [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                       public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((InnerStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);
@@ -182,7 +182,7 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(out int argOne, void* argTwo);
+                                      public delegate int TestFunction(TestStruct* thisPtr, out int argOne, void* argTwo);
                                   }
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                   public partial int TestFunction(out int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), out argOne, argTwo);
@@ -222,8 +222,8 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, void* argTwo);
-                                      public delegate void TestFunction2();
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
+                                      public delegate void TestFunction2(TestStruct* thisPtr);
                                   }
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);

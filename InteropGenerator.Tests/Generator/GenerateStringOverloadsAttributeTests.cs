@@ -205,7 +205,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(int argOne, byte* stringArg);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, byte* stringArg);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
