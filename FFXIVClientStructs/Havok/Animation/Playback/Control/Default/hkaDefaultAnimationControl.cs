@@ -20,7 +20,7 @@ public unsafe partial struct hkaDefaultAnimationControl {
     public struct hkaDefaultAnimationControlListener;
 
     [GenerateInterop]
-[Inherits<hkReferencedObject>]
+    [Inherits<hkReferencedObject>]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct hkaDefaultAnimationControlMapperData {
         [FieldOffset(0x10)] public hkaSkeletonMapper* Mapper;
