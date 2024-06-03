@@ -34,7 +34,7 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF D5")]
-    public static partial AtkStage* GetSingleton();
+    public static partial AtkStage* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B F0 0F 85")]
     public partial AtkResNode* GetFocus();

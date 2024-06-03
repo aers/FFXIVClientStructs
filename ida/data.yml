@@ -5425,7 +5425,7 @@ classes:
       0x140519C80: GetExtendArrayData
       0x140519D90: ctor
       0x14051A310: Update
-      0x14053C500: GetSingleton
+      0x14053C500: Instance
       0x14053C510: GetSingleton2
       0x140548740: GetSingleton3
       0x1405A1040: Finalize
