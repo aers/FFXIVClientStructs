@@ -7536,7 +7536,7 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
       0x1407BC730: ctor
-      0x140763090: dtor
+      0x140763090: Finalize
       0x141321520: CalculateAndApplyOverallSpeed
       0x141321960: SetModelState
       0x141321B10: SetAnimationState
