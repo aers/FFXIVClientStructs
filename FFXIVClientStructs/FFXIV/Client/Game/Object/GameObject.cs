@@ -44,7 +44,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x160)] public EventHandler* EventHandler;
 
     [VirtualFunction(1)]
-    public partial GameObjectId GetObjectId();
+    public partial GameObjectId GetGameObjectId();
 
     [VirtualFunction(2)]
     public partial ObjectKind GetObjectKind();

@@ -27,7 +27,7 @@ globals:
   0x1421C7D88: g_animationFactorRemainder
   0x1421C7D8C: g_animationFactor #percentage of a 30fps frame rendered this frame
   0x1421CAC60: g_PerformanceFrequency
-  0x1421D52D8: g_Client::Game::Control::Control_LocalPlayerObjectID
+  0x1421D52D8: g_Client::Game::Control::Control_LocalPlayerEntityId
   0x1421D52E0: g_Client::Game::Control::Control_LocalPlayer
   0x1421FB530: g_LastTextCommand
   0x1421FB8C0: g_Client::Game::Character::CharacterManager_BattleCharaMemoryPtr
@@ -7358,7 +7358,7 @@ classes:
     vtbls:
       - ea: 0x141A214D8
     vfuncs:
-      1: GetObjectID
+      1: GetGameObjectId
       2: GetObjectKind
       3: GetObjectType
       4: GetIsTargetable
