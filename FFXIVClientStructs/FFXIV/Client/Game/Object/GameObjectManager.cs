@@ -25,7 +25,7 @@ public unsafe partial struct GameObjectManager {
         // 289-428: ?
         // 429-528: ?
         // 529-598: something MJI (island sanctuary) related
-        
+
         /// <summary>
         /// Pointers to GameObjects, sorted by ObjectIndex. Contains null pointers for inactive indexes.
         /// </summary>

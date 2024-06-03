@@ -17,7 +17,7 @@ public unsafe partial struct AddonJobHudGFF0 {
     [FieldOffset(0x2A0)] public EukrasiaGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct EukrasiaGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
@@ -25,7 +25,7 @@ public unsafe partial struct AddonJobHudGFF0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct EukrasiaGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -33,7 +33,7 @@ public unsafe partial struct AddonJobHudGFF0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct EukrasiaGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -55,7 +55,7 @@ public unsafe partial struct AddonJobHudGFF1 {
     [FieldOffset(0x310)] public AddersgallGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct AddersgallGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -67,7 +67,7 @@ public unsafe partial struct AddonJobHudGFF1 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct AddersgallGauge {
         [FieldOffset(0x10)] public AtkResNode* AdderstingContainer;
@@ -85,7 +85,7 @@ public unsafe partial struct AddonJobHudGFF1 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct AddersgallGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* AdderstingContainer;

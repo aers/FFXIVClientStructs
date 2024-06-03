@@ -17,7 +17,7 @@ public unsafe partial struct AddonJobHudRDM0 {
     [FieldOffset(0x3B0)] public BalanceGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct BalanceGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
@@ -30,7 +30,7 @@ public unsafe partial struct AddonJobHudRDM0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x100)]
     public partial struct BalanceGauge {
         [FieldOffset(0x10)] public ManaBar BlackManaBar;
@@ -69,7 +69,7 @@ public unsafe partial struct AddonJobHudRDM0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct BalanceGaugeSimple {
         [FieldOffset(0x10)] public AtkComponentGaugeBar* BlackManaGaugeBar;

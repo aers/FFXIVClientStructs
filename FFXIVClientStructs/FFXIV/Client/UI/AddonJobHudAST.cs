@@ -17,7 +17,7 @@ public unsafe partial struct AddonJobHudAST0 {
     [FieldOffset(0x3A8)] public ArcanaGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct ArcanaGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
@@ -33,7 +33,7 @@ public unsafe partial struct AddonJobHudAST0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
     public partial struct ArcanaGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -52,7 +52,7 @@ public unsafe partial struct AddonJobHudAST0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
     public partial struct ArcanaGaugeSimple {
         [FieldOffset(0x10)] public AtkComponentBase* CardContainer;

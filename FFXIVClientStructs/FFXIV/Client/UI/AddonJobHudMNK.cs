@@ -17,7 +17,7 @@ public unsafe partial struct AddonJobHudMNK0 {
     [FieldOffset(0x360)] public MastersGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public partial struct MastersGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -31,7 +31,7 @@ public unsafe partial struct AddonJobHudMNK0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
     public partial struct MastersGauge {
         [FieldOffset(0x10)] public AtkResNode* NadiContainer;
@@ -53,7 +53,7 @@ public unsafe partial struct AddonJobHudMNK0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
     public partial struct MastersGaugeSimple;
 }
@@ -72,7 +72,7 @@ public unsafe partial struct AddonJobHudMNK1 {
     [FieldOffset(0x2C0)] public ChakraGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct ChakraGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
@@ -80,7 +80,7 @@ public unsafe partial struct AddonJobHudMNK1 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct ChakraGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -89,7 +89,7 @@ public unsafe partial struct AddonJobHudMNK1 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct ChakraGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

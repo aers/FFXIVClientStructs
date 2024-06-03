@@ -18,7 +18,7 @@ public unsafe partial struct AddonJobHudACN0 {
     [FieldOffset(0x2E0)] public AetherflowACNGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct AetherflowACNGaugeData {
         [FieldOffset(0x08)] public byte AetherflowStacks;
@@ -26,7 +26,7 @@ public unsafe partial struct AddonJobHudACN0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct AetherflowACNGauge {
         [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray3<AetherflowACNStack> _aetherflowStacks;
@@ -41,7 +41,7 @@ public unsafe partial struct AddonJobHudACN0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct AetherflowACNGaugeSimple {
         [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray3<AetherflowACNStackSimple> _aetherflowStacks;
@@ -71,7 +71,7 @@ public unsafe partial struct AddonJobHudSCH0 {
     [FieldOffset(0x330)] public FaerieGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct FaerieGaugeData {
         [FieldOffset(0x08)] public int FaeValue;
@@ -82,7 +82,7 @@ public unsafe partial struct AddonJobHudSCH0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct FaerieGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -105,7 +105,7 @@ public unsafe partial struct AddonJobHudSCH0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public partial struct FaerieGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -133,7 +133,7 @@ public unsafe partial struct AddonJobHudSMN0 {
     [FieldOffset(0x2B8)] public AetherflowSMNGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct AetherflowSMNGaugeData {
         [FieldOffset(0x08)] public int AetherflowStacks;
@@ -141,7 +141,7 @@ public unsafe partial struct AddonJobHudSMN0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct AetherflowSMNGauge {
         [FieldOffset(0x10)] public AtkComponentBase* StackContainer1;
@@ -154,7 +154,7 @@ public unsafe partial struct AddonJobHudSMN0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct AetherflowSMNGaugeSimple {
         [FieldOffset(0x10)] public AtkComponentBase* StackContainer1;
@@ -181,7 +181,7 @@ public unsafe partial struct AddonJobHudSMN1 {
     [FieldOffset(0x3D8)] public TranceGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct TranceGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -197,7 +197,7 @@ public unsafe partial struct AddonJobHudSMN1 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x108)]
     public partial struct TranceGauge {
         [FieldOffset(0x010)] public AtkResNode* Container;
@@ -227,7 +227,7 @@ public unsafe partial struct AddonJobHudSMN1 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct TranceGaugeSimple {
         [FieldOffset(0x10)] public AtkComponentGaugeBar* TranceGaugeBar;

@@ -17,7 +17,7 @@ public unsafe partial struct AddonJobHudWHM0 {
     [FieldOffset(0x310), Obsolete("Wrongly defined supposed to be a pointer based on ctor reference")] public HealingGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct HealingGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
@@ -28,7 +28,7 @@ public unsafe partial struct AddonJobHudWHM0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct HealingGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -45,7 +45,7 @@ public unsafe partial struct AddonJobHudWHM0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public partial struct HealingGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

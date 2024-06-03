@@ -17,7 +17,7 @@ public unsafe partial struct AddonJobHudBRD0 {
     [FieldOffset(0x3E0)] public SongGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct SongGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray6<byte> _prerequisites;
@@ -35,7 +35,7 @@ public unsafe partial struct AddonJobHudBRD0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x100)]
     public partial struct SongGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -65,7 +65,7 @@ public unsafe partial struct AddonJobHudBRD0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     public partial struct SongGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;

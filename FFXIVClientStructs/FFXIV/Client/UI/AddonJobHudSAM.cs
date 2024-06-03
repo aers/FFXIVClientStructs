@@ -17,7 +17,7 @@ public unsafe partial struct AddonJobHudSAM0 {
     [FieldOffset(0x320)] public KenkiGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct KenkiGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
@@ -27,7 +27,7 @@ public unsafe partial struct AddonJobHudSAM0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct KenkiGauge {
         [FieldOffset(0x10)] public AtkResNode* KenkiContainer;
@@ -55,7 +55,7 @@ public unsafe partial struct AddonJobHudSAM0 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct KenkiGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -89,7 +89,7 @@ public unsafe partial struct AddonJobHudSAM1 {
     [FieldOffset(0x2D0)] public SenGaugeSimple GaugeSimple;
 
     [GenerateInterop]
-[Inherits<AddonJobHudGaugeData>]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct SenGaugeData {
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
@@ -99,7 +99,7 @@ public unsafe partial struct AddonJobHudSAM1 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public partial struct SenGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
@@ -116,7 +116,7 @@ public unsafe partial struct AddonJobHudSAM1 {
     }
 
     [GenerateInterop]
-[Inherits<AddonJobHudGauge>]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]
     public partial struct SenGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
