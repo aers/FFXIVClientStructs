@@ -19,7 +19,7 @@ public partial struct AddonWeeklyBingo {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]
 public unsafe struct DutySlotList {
-    [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
+    [FieldOffset(0x8)] public AddonWeeklyBingo* Addon;
     [FieldOffset(0x24)] public uint NumSecondChances;
     [FieldOffset(0x28)] public DutySlot DutySlot1;
     [FieldOffset(0x190)] public DutySlot DutySlot2;
@@ -94,13 +94,13 @@ public unsafe struct StringThing {
     [FieldOffset(0x20)] public byte* ReceiveSealCompleteText; // Select a completed duty to receive a seal.
     [FieldOffset(0x28)] public byte* ReceiveSealIncompleteText; // Complete a task to receive a seal.
     [FieldOffset(0x30)] public byte* SecondChanceRetryText; // Select a completed duty to be rendered incomplete.
-    [FieldOffset(0x40)] public void* addon;
+    [FieldOffset(0x40)] public AddonWeeklyBingo* Addon;
     [FieldOffset(0x48)] public AtkTextNode* TextNode;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x590)]
 public unsafe struct StickerSlotList {
-    [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
+    [FieldOffset(0x8)] public AddonWeeklyBingo* Addon;
     [FieldOffset(0x10)] public StickerSlot StickerSlot1;
     [FieldOffset(0x68)] public StickerSlot StickerSlot2;
     [FieldOffset(0xC0)] public StickerSlot StickerSlot3;
@@ -141,7 +141,7 @@ public unsafe struct StickerSlotList {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe struct StickerSlot {
-    [FieldOffset(0x8)] public void* addon; // AddonWeeklyBingo*
+    [FieldOffset(0x8)] public AddonWeeklyBingo* Addon;
     [FieldOffset(0x10)] public int index; // 1-16
 
     [FieldOffset(0x20)] public AtkComponentButton* Button;

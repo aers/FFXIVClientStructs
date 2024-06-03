@@ -32,10 +32,10 @@ public unsafe partial struct AgentSalvage {
     [FieldOffset(0x3A8), FixedSizeArray] internal FixedSizeArray3<SalvageResult> _desynthResults;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? C7 85")]
-    public partial void* ItemListRefresh();
+    public partial void ItemListRefresh();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 81 BD ?? ?? ?? ?? ?? ?? ?? ?? 7D 1A")]
-    public partial void* ItemListAdd(bool meetsLevelRequirement, InventoryType containerId, int containerSlot, uint itemId, void* exdRow, uint quantity);
+    public partial void ItemListAdd(bool meetsLevelRequirement, InventoryType containerId, int containerSlot, uint itemId, void* exdRow, uint quantity);
 
     public enum SalvageItemCategory {
         InventoryEquipment,

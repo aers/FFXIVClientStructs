@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -41,7 +42,7 @@ public unsafe partial struct AgentActionMenu {
     //[FieldOffset(0x248)] public Utf8String UnkString248;
 
     [FieldOffset(0x2B8)] public StdVector<ExtraCommandData> ExtraCommandData;
-    [FieldOffset(0x2D0)] public void* ExtraCommandExcelSheet;
+    [FieldOffset(0x2D0)] public ExcelSheet* ExtraCommandExcelSheet;
     [FieldOffset(0x2E0)] public uint UpgradeAddonId;
 }
 
