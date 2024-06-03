@@ -103,8 +103,9 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     // Client::UI::RaptureAtkModule::ItemCache
+    [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
-    public struct ItemCache {
+    public partial struct ItemCache {
         [FieldOffset(0x8)] public Utf8String Name;
         [FieldOffset(0x70)] public uint Id;
         [FieldOffset(0x74)] public uint IconId;
@@ -117,16 +118,14 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     // Client::UI::RaptureAtkModule::InventoryCache
+    [GenerateInterop, Inherits<ItemCache>]
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
-    public struct InventoryCache {
-        [FieldOffset(0)] public ItemCache ItemCache;
-    }
+    public partial struct InventoryCache;
 
     // Client::UI::RaptureAtkModule::CrystalCache
+    [GenerateInterop, Inherits<ItemCache>]
     [StructLayout(LayoutKind.Explicit, Size = 0x98)]
-    public struct CrystalCache {
-        [FieldOffset(0)] public ItemCache ItemCache;
-    }
+    public partial struct CrystalCache;
 
     [Flags]
     public enum AgentUpdateFlags : byte {
