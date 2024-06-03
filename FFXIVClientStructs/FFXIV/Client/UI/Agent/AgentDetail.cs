@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct AgentDetail {
-    [FieldOffset(0x30)] public InfoProxySearchComment* InfoProxySearchCommentPtr;
+    [FieldOffset(0x30)] public InfoProxyDetail* InfoProxyDetail;
 
     // Don't use these, as they are probably used for SocialDetail.
     // See functions in PlayerState if you want to check these.
@@ -25,7 +25,7 @@ public unsafe partial struct AgentDetail {
     /// A pointer to the data of the character.
     /// </param>
     /// <param name="updateDataPacket">
-    /// A pointer to <see cref="InfoProxySearchComment.UpdateData"/>.<br/>
+    /// A pointer to <see cref="InfoProxyDetail.UpdateData"/>.<br/>
     /// If set, used to open the editor version of the Social Info window as it will write to this on save.<br/>
     /// Pass <c>null</c> for other players, so it just opens the viewer.
     /// </param>
@@ -34,5 +34,5 @@ public unsafe partial struct AgentDetail {
     /// Can be 0, but will open slightly off-center.
     /// </param>
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? BE ?? ?? ?? ??")]
-    public partial void OpenForCharacterData(InfoProxyCommonList.CharacterData* characterData, InfoProxySearchComment.UpdateDataPacket* updateDataPacket = null, int ownerAddonId = 0);
+    public partial void OpenForCharacterData(InfoProxyCommonList.CharacterData* characterData, InfoProxyDetail.UpdateDataPacket* updateDataPacket = null, int ownerAddonId = 0);
 }

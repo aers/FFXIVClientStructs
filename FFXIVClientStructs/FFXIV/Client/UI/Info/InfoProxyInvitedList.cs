@@ -1,10 +1,8 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-// Client::UI::Info::InfoProxyInvitedList
-//   Client::UI::Info::InfoProxyCommonList
-//     Client::UI::Info::InfoProxyPageInterface
-//       Client::UI::Info::InfoProxyInterface
+// Client::UI::Info::InfoProxyInvitedlist
+//  Client::UI::Info::InfoProxyInterface
 [GenerateInterop(isInherited: true)]
-[Inherits<InfoProxyCommonList>]
-[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
+[Inherits<InfoProxyInterface>]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct InfoProxyInvitedList;

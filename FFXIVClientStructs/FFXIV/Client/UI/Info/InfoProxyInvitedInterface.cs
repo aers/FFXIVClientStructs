@@ -1,9 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoProxyInvitedInterface
-//   Client::UI::Info::InfoProxyInterface
 [GenerateInterop(isInherited: true)]
-[Inherits<InfoProxyInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct InfoProxyInvitedInterface {
     [FieldOffset(0x18)] public Unk18 Unk18Obj;
