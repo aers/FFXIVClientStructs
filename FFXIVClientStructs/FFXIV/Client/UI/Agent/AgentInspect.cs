@@ -37,7 +37,7 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x538)] public uint FetchCharacterDataStatus;
     [FieldOffset(0x53c)] public uint FetchSearchCommentStatus;
     [FieldOffset(0x540)] public uint FetchFreeCompanyStatus;
-    [FieldOffset(0x548)] public InfoProxySearchComment* InfoProxySearchComment;
+    [FieldOffset(0x548)] public InfoProxyDetail* InfoProxyDetail;
     [FieldOffset(0x550)] public InfoProxyFreeCompany* InfoProxyFreeCompany;
 
     [FieldOffset(0x558)] public InspectCharaView CharaView;

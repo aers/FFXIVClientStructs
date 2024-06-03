@@ -2089,7 +2089,7 @@ classes:
       0x1409BCB60: GetAdjustedAdditionalRecastTime
       0x1409BCD10: GetActionCost
       0x1409BD5B0: GetSpellIdForAction
-      0x1409BDE80: NextActionSequence
+      0x1409BDEB0: NextActionSequence
       0x1409BDEE0: UpdateAreaTargetingMode
       0x1409BE8F0: GetRecastGroup
       0x1409BEB40: UseActionLocation
@@ -3366,6 +3366,29 @@ classes:
       3: Reset
       4: GetCurrent
       5: GetCurrent2
+  Client::UI::RaptureAtkHistory:
+    vtbls:
+      - ea: 0x1419BF148
+        base: Component::GUI::AtkModuleInterface::AtkHistoryInterface
+    funcs:
+      0x1400EB910: ctor
+  Client::UI::UIClipboard:
+    vtbls:
+      - ea: 0x1419BF380
+    vfuncs:
+      0: dtor
+    funcs:
+      0x1400EF050: ctor
+      0x1400EF0C0: Attach
+      0x1400EF0F0: Detach
+      0x1400EF120: OnClipboardDataChanged
+      0x1400EF1B0: OnClipboardViewerChainChanged
+  Common::Configuration::ConfigBase::ChangeEventInterface:
+    vtbls:
+      - ea: 0x1419A6F58
+    vfuncs:
+      0: dtor
+      1: OnConfigChange
   Client::UI::Info::InfoProxyInterface:
     vtbls:
       - ea: 0x1419BE978
@@ -3383,6 +3406,33 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
+  Client::UI::Info::InfoProxyInvitedInterface:
+    vtbls:
+      - ea: 0x1419BEA40
+  Client::UI::Info::InfoProxyCommonList:
+    vtbls:
+      - ea: 0x1419BF288
+        base: Client::UI::Info::InfoProxyPageInterface
+    vfuncs:
+      8: ClearListData
+      15: GetCurrentLocationName
+      26: Compare #By IsOnline
+      29: CompareHomeworld
+    funcs:
+      0x1400ECF90: ctor
+      0x1400ED0B0: Finalize
+      0x1400ED760: ClearListDataImpl
+      0x1400EDED0: GetContentIDForEntry
+      0x1400EDEF0: GetEntryByName
+      0x1400EDFF0: GetEntry
+      0x1400EE650: GetEntryByContentId
+      0x1400EE8A0: SwapData
+  Client::UI::Info::InfoProxyInvitedList:
+    vtbls:
+      - ea: 0x1419C05B8
+        base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x140102020: ctor
   Client::UI::Info::InfoModule:
     vtbls:
       - ea: 0x1419BEA88
@@ -3405,37 +3455,7 @@ classes:
     funcs:
       0x1400B2F20: ctor
       0x14017C440: Finalize
-  Common::Configuration::ConfigBase::ChangeEventInterface:
-    vtbls:
-      - ea: 0x1419A6F58
-    vfuncs:
-      0: dtor
-      1: OnConfigChange
-  Client::UI::RaptureAtkHistory:
-    vtbls:
-      - ea: 0x1419BF148
-        base: Component::GUI::AtkModuleInterface::AtkHistoryInterface
-    funcs:
-      0x1400EB910: ctor
-  Client::UI::Info::InfoProxyCommonlist:
-    vtbls:
-      - ea: 0x1419BF288
-        base: Client::UI::Info::InfoProxyPageInterface
-    vfuncs:
-      8: ClearListData
-      15: GetCurrentLocationName
-      26: Compare #By IsOnline
-      29: CompareHomeworld
-    funcs:
-      0x1400ECF90: ctor
-      0x1400ED0B0: Finalize
-      0x1400ED760: ClearListDataImpl
-      0x1400EDED0: GetContentIDForEntry
-      0x1400EDEF0: GetEntryByName
-      0x1400EDFF0: GetEntry
-      0x1400EE650: GetEntryByContentId
-      0x1400EE8A0: SwapData
-  Client::UI::Info::InfoProxySearchComment:
+  Client::UI::Info::InfoProxyDetail:
     vtbls:
       - ea: 0x1419BFB10
         base: Client::UI::Info::InfoProxyInterface
@@ -3455,17 +3475,6 @@ classes:
       0x1400FA580: GetUpdateSearchComment
       0x1400FA5B0: PropagateUpdateData
       0x14017C7B0: Finalize
-  Client::UI::UIClipboard:
-    vtbls:
-      - ea: 0x1419BF380
-    vfuncs:
-      0: dtor
-    funcs:
-      0x1400EF050: ctor
-      0x1400EF0C0: Attach
-      0x1400EF0F0: Detach
-      0x1400EF120: OnClipboardDataChanged
-      0x1400EF1B0: OnClipboardViewerChainChanged
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x1421B0120
@@ -3489,10 +3498,10 @@ classes:
       0x1400F39A0: GetMemberByContentId # Static
       0x1400F3A60: GetMemberByObjectId # Static
       0x1400F3B10: IsContentIdInParty # Static
-  Client::UI::Info::InfoProxyParty:
+  Client::UI::Info::InfoProxyPartyMember:
     vtbls:
       - ea: 0x1419BF3F8
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x1400F3C90: ctor
       0x14017C9E0: Finalize
@@ -3509,14 +3518,12 @@ classes:
     funcs:
       0x1400FCC10: ctor
       0x140100860: RequestDataForCharacter
-  Client::UI::Info::InfoProxyInvitedInterface:
-    vtbls:
-      - ea: 0x1419C05B8
-        base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxy17:
+  Client::UI::Info::InfoProxyFreeCompanyCreate:
     vtbls:
       - ea: 0x1419C0630
         base: Client::UI::Info::InfoProxyInterface
+      - ea: 0x1419C0690
+        base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
       0x1401024D0: ctor
       0x140102570: Finalize
@@ -3536,13 +3543,15 @@ classes:
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
       - ea: 0x1419C0908
+        base: Client::UI::Info::InfoProxyInvitedList
+      - ea: 0x1419C0980
         base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
       0x1401061D0: ctor
       0x1401062B0: InviteToParty
       0x140106490: InviteToPartyContentId
       0x140106550: InviteToPartyInInstance
-  Client::UI::Info::InfoProxyLinkShell:
+  Client::UI::Info::InfoProxyLinkshell:
     vtbls:
       - ea: 0x1419C0998
         base: Client::UI::Info::InfoProxyPageInterface
@@ -3554,13 +3563,13 @@ classes:
   Client::UI::Info::InfoProxyLinkshellMember:
     vtbls:
       - ea: 0x1419C0A18
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x140108560: ctor
   Client::UI::Info::InfoProxyFriendList:
     vtbls:
       - ea: 0x1419C0B10
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x140109280: ctor
       0x14017C820: Finalize
@@ -3582,7 +3591,7 @@ classes:
   Client::UI::Info::InfoProxySearch:
     vtbls:
       - ea: 0x1419C0C88
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x14010D970: ctor
   Client::UI::Info::InfoProxyCatalogSearch:
@@ -3592,9 +3601,11 @@ classes:
     funcs:
       0x14010E000: ctor
       0x14010E090: Finalize
-  Client::UI::Info::InfoProxyFreeCompanyCreate:
+  Client::UI::Info::InfoProxyFreeCompanyInvite:
     vtbls:
       - ea: 0x1419C0DE8
+        base: Client::UI::Info::InfoProxyInvitedList
+      - ea: 0x1419C0E60
         base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
       0x14010EA90: ctor
@@ -3602,35 +3613,33 @@ classes:
   Client::UI::Info::InfoProxyFreeCompanyMember:
     vtbls:
       - ea: 0x1419C0E78
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x14010ED00: ctor
-  Client::UI::Info::InfoProxyLinkShellChat:
+  Client::UI::Info::InfoProxyChat:
     vtbls:
       - ea: 0x1419C0F70
         base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxyInvitedlist:
+  Client::UI::Info::InfoProxyNoviceNetworkList:
     vtbls:
       - ea: 0x1419C0FD0
-        base: Client::UI::Info::InfoProxyCommonlist
-    funcs:
-      0x140110A40: ctor
-  Client::UI::Info::InfoProxy21:
+        base: Client::UI::Info::InfoProxyCommonList
+  Client::UI::Info::InfoProxyNoviceNetworkMember:
     vtbls:
       - ea: 0x1419C10C8
-        base: Client::UI::Info::InfoProxyInvitedlist
+        base: Client::UI::Info::InfoProxyNoviceNetworkList
     funcs:
       0x140110F50: ctor
-  Client::UI::Info::InfoProxy22:
+  Client::UI::Info::InfoProxyNoviceNetworkMentor:
     vtbls:
       - ea: 0x1419C11C0
-        base: Client::UI::Info::InfoProxyInvitedlist
+        base: Client::UI::Info::InfoProxyNoviceNetworkList
     funcs:
       0x140110FC0: ctor
   Client::UI::Info::InfoProxy23:
     vtbls:
       - ea: 0x1419C12B8
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x140111030: ctor
   Client::UI::Info::InfoProxy24:
@@ -3673,7 +3682,7 @@ classes:
   Client::UI::Info::InfoProxyCrossWorldLinkShellMember:
     vtbls:
       - ea: 0x1419C1678
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x14011A450: ctor
   Client::UI::Info::InfoProxyCircleList:
@@ -7510,7 +7519,7 @@ classes:
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x14132C4D0: ctor
-      0x14132DC60: SetTether
+      0x14132DC70: SetTether
       0x14132DD90: ClearTether
       0x14132E760: LoadCharacterSound
   Client::Game::Character::MountContainer:
@@ -14813,6 +14822,7 @@ classes:
   Client::UI::AddonJobHudACN0::AetherflowACNGaugeData:
     vtbls:
       - ea: 0x141B23438
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudACN0::AetherflowACNGauge:
     vtbls:
       - ea: 0x141B23488

@@ -2,13 +2,13 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-// Client::UI::Info::InfoProxySearchComment
+// Client::UI::Info::InfoProxyDetail
 //   Client::UI::Info::InfoProxyInterface
-[InfoProxy(InfoProxyId.SearchComment)]
+[InfoProxy(InfoProxyId.Detail)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x240)]
-public unsafe partial struct InfoProxySearchComment {
+public unsafe partial struct InfoProxyDetail {
     [FieldOffset(0x28)] public UpdateDataPacket UpdateData;
 
     [FieldOffset(0x100)] public Utf8String SearchComment;

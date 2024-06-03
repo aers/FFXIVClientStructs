@@ -26,7 +26,7 @@ public unsafe partial struct AgentDeepDungeonInspect {
         [FieldOffset(0x08)] public uint StatusSearchComment;
         //[FieldOffset(0x0C)] public uint Unk0C;
         [FieldOffset(0x10)] public Utf8String SearchComment;
-        [FieldOffset(0x78)] public InfoProxySearchComment* InfoProxySearchComment; //InfoPRoxy 0xa
+        [FieldOffset(0x78)] public InfoProxyDetail* InfoProxyDetail;
         [FieldOffset(0x80)] public byte Title;
         //[FieldOffset(0x81)] public byte Unk81; //Always 0 (solo in PotD)
         [FieldOffset(0x82)] public byte WorldId;
