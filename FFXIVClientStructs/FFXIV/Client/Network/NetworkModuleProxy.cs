@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Application.Network;
+
 namespace FFXIVClientStructs.FFXIV.Client.Network;
 
 // Client::Network::NetworkModuleProxy

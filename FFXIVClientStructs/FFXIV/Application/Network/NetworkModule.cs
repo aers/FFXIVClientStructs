@@ -1,6 +1,7 @@
+using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
-namespace FFXIVClientStructs.FFXIV.Client.Network;
+namespace FFXIVClientStructs.FFXIV.Application.Network;
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xB60)]
