@@ -41,23 +41,16 @@ game_data = GameData(join(config["GamePath"], "game"))
 # nb: "pattern": "func suffix" OR None
 exd_func_patterns = {
     "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "Row",
+    "48 83 EC 28 85 C9 74 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 07 33 C0 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "Row",
+    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA ? ? ? ? 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 38 C3 48 8B 00 48 83 C4 38 C3": "RowAndSubRowId",
     "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B6 C1 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "RowIndex",
     "48 83 EC 28 48 8B 05 ? ? ? ? 44 8D 81 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "RowIndex",
-    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA ? ? ? ? 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 38 C3 48 8B 00 48 83 C4 38 C3": "RowAndSubRowId",
     "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 14 48 8B 10 48 8B C8 FF 52 08 84 C0 75 07 B0 01 48 83 C4 28 C3 32 C0 48 83 C4 28 C3": "SheetIndex",
-    "48 83 EC 28 85 C9 74 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 07 33 C0 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "Row2",
-    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 17 48 8B 08 48 85 C9 74 0F 8B 01 25 ? ? ? ? 48 03 C1 48 83 C4 28 C3 33 C0 48 83 C4 28 C3": None,
-    # unsure if this is totally accurate but it looks to be the case
     "48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E9 ? ? ? ?": "RowCount",
+    # this last one doesn't seem to exist in the binary anymore
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 17 48 8B 08 48 85 C9 74 0F 8B 01 25 ? ? ? ? 48 03 C1 48 83 C4 28 C3 33 C0 48 83 C4 28 C3": None,
 }
 
-# todo: figure out how/where these exd getters are used
-# .text:0000000140622200                         sub_140622200   proc near               ; CODE XREF: sub_14067D8E0+D3
-# .text:0000000140622200 48 8B 05 F1 7F 46 01                    mov     rax, cs:qword_141A8A1F8
-# .text:0000000140622207 BA 59 01 00 00                          mov     edx, 159h
-# .text:000000014062220C 48 8B 88 E8 2B 00 00                    mov     rcx, [rax+2BE8h]
-# .text:0000000140622213 E9 28 E2 E2 FF                          jmp     sub_140450440
-# .text:0000000140622213                         sub_140622200   endp
 exd_map = ExcelListFile(game_data.get_file(ParsedFileName("exd/root.exl"))).dict
 exd_struct_map = {}
 
@@ -185,8 +178,8 @@ def do_pattern(pattern, suffix, struct_parsed):
             break
 
         # this is mega retarded but it works rofl
-        ins = search_binary(ea, "BA ? ? ? ?", ida_search.SEARCH_DOWN)
-        sheetIdx = idc.get_wide_dword(ins + 1)
+        ins = search_binary(ea, "44 8B C1 BA ? ? ? ?", ida_search.SEARCH_DOWN)
+        sheetIdx = idc.get_wide_dword(ins + 4)
 
         origName = idc.get_func_name(ea)
 
@@ -270,16 +263,16 @@ def run():
     tif, funcdata = ida_typeinf.tinfo_t(), ida_typeinf.func_type_data_t()
     arg1 = ida_typeinf.funcarg_t()
     arg1.type = get_tinfo_from_type("__int64")
-    arg1.name = "a1"
+    arg1.name = "exdModule"
     arg2 = ida_typeinf.funcarg_t()
     arg2.type = get_tinfo_from_type("Component::Exd::SheetsEnum")
-    arg2.name = "sheetIndex"
+    arg2.name = "sheetId"
     arg3 = ida_typeinf.funcarg_t()
     arg3.type = get_tinfo_from_type("unsigned int")
-    arg3.name = "row"
+    arg3.name = "rowId"
     arg4 = ida_typeinf.funcarg_t()
     arg4.type = get_tinfo_from_type("__int16")
-    arg4.name = "subRow"
+    arg4.name = "subRowId"
     arg5 = ida_typeinf.funcarg_t()
     arg5.type = get_tinfo_from_type("__int64 *")
     arg5.name = "a5"
@@ -342,6 +335,49 @@ def run():
         "48 89 5C 24 08 57 48 83 EC 20 48 8B F9 41 8B D8 48 8B 49 20 48 8B 01 ?? ?? ?? 44 8B C3 48 8B CF 48 8B D0 48 8B 5C 24 30 48 83 C4 20 5F E9 ?? ?? ?? ??",
         ida_search.SEARCH_DOWN,
     )
+
+    ida_typeinf.guess_tinfo(tif, ea)
+    if not tif.get_func_details(funcdata):
+        print("Failed to get func details for GetRowBySheetIndexAndRowIndex @ %X" % ea)
+    else:
+        if not funcdata.empty():
+            funcdata.clear()
+        funcdata.push_back(arg1)
+        funcdata.push_back(arg2)
+        funcdata.push_back(arg3)
+
+        funcdata.rettype = get_tinfo_from_type("__int64")
+
+        if not tif.create_func(funcdata):
+            print("! failed to create function type for GetRowBySheetIndexAndRowIndex")
+            return
+
+            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+
+    ea = search_binary(
+        0,
+        "48 8B 49 20 48 8B 01 48 FF 60 08",
+        ida_search.SEARCH_DOWN,
+    )
+
+    ida_typeinf.guess_tinfo(tif, ea)
+    if not tif.get_func_details(funcdata):
+        print("Failed to get func details for GetSheetByIndex @ %X" % ea)
+    else:
+        if not funcdata.empty():
+            funcdata.clear()
+        funcdata.push_back(arg1)
+        funcdata.push_back(arg2)
+
+        funcdata.rettype = get_tinfo_from_type("__int64")
+
+        if not tif.create_func(funcdata):
+            print("! failed to create function type for GetSheetByIndex")
+            return
+
+            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+
+    ea = search_binary(0, "48 8B 49 20 48 8B 01 48 FF 60 08", ida_search.SEARCH_DOWN)
 
     ida_typeinf.guess_tinfo(tif, ea)
     if not tif.get_func_details(funcdata):
