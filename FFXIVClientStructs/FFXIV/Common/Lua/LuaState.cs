@@ -40,7 +40,7 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 03 F8")]
     public partial int lua_gettop();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 83 EB 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? FE CB")]
     public partial void lua_settop(int idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 38 23")]
@@ -64,7 +64,7 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 40 F6 C6")]
     public partial void lua_remove(int idx);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 85 C0 74 6F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 85 C0 74 39")]
     public partial int lua_pcall(int nargs, int nresults, int errfunc);
 
     [MemberFunction("48 83 EC 38 48 89 54 24 ?? 48 8D 15"), GenerateStringOverloads]
@@ -92,7 +92,7 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? 41 2B ED")]
     public partial void lua_pushnil();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 ?? 4C 8B C5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 26 33 D2")]
     public partial int lua_getmetatable(int idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 3B FE 7E")]

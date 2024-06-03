@@ -15,6 +15,6 @@ public unsafe partial struct AddonAetherCurrent {
     [FieldOffset(0x254)] public int TabIndex;
     [FieldOffset(0x258)] public int TabCount;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 65 39 9D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 64 8B 85 ?? ?? ?? ??")]
     public partial void SetTab(int tab);
 }

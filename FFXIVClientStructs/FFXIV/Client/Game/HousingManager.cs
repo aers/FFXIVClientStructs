@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 public unsafe partial struct HousingManager {
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 84")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 23 8D 42 FB")]
     public static partial HousingManager* Instance();
 
     [FieldOffset(0x00)] public HousingTerritory* CurrentTerritory;
@@ -13,14 +13,14 @@ public unsafe partial struct HousingManager {
     [FieldOffset(0x10)] public IndoorTerritory* IndoorTerritory;
     [FieldOffset(0x18)] public WorkshopTerritory* WorkshopTerritory;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 BD ?? ?? ?? ?? 48 8D 4D A0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 BC ?? ?? ?? ?? 48 8D 4D A0")]
     private partial byte GetInvertedBrightness();
     public byte GetBrightness() => (byte)(5 - GetInvertedBrightness());
 
-    [MemberFunction("48 8B 49 10 48 85 C9 74 53")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B ED")]
     public partial bool HasHousePermissions();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4B D0 33 D2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B D6")]
     public partial bool IsInside();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 3B 46 3C")]
@@ -31,7 +31,7 @@ public unsafe partial struct HousingManager {
     public partial byte GetCurrentDivision();
 
     // Apartment / FC Room number
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 D8 E8 ?? ?? ?? ?? 48 8B C8")]
+    [MemberFunction("40 53 48 83 EC 20 48 8B 59 10 48 85 DB 74 24")]
     public partial short GetCurrentRoom();
 
     // -128 for Apartments in Main Division, -127 for Apartments in Subdivision
@@ -39,7 +39,7 @@ public unsafe partial struct HousingManager {
     public partial sbyte GetCurrentPlot();
 
     // Unique Identifier
-    [MemberFunction("E8 ?? ?? ?? ?? 83 CA FF 48 8B D8 8D 4A 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B F8 8D 4A 02")]
     public partial long GetCurrentHouseId();
 
     /// <summary>
@@ -80,7 +80,7 @@ public unsafe partial struct HousingManager {
     /// <param name="pointB">The point to calculate to</param>
     /// <param name="speed">Speed of the submarine to use</param>
     /// <returns>Voyage time</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 4D EB 4D 8B 47 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 8C 24 ?? ?? ?? ?? 03 F8")]
     public static partial uint GetSubmarineVoyageTime(byte pointA, byte pointB, short speed);
 
     /// <summary>

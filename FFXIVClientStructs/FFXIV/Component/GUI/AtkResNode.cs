@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkResNode
 //   Component::GUI::AtkEventTarget
-// ctor "E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90"
+// ctor "E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 20"
 // base class for all UI "nodes" which represent elements of the UI
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventTarget>]
@@ -72,7 +72,7 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
 
-    [MemberFunction("E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 20")]
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 54 FB 04")]
@@ -93,19 +93,19 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 44 8D 4F 30")]
     public partial AtkComponentNode* GetAsAtkComponentNode();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 7F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 63 DF")]
     public partial AtkComponentBase* GetComponent();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 B1 08")]
     public partial AtkComponentList* GetAsAtkComponentList();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 55 56")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4C 35 97")]
     public partial AtkComponentDropDownList* GetAsAtkComponentDropdownList();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 F1")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 48")]
     public partial AtkComponentRadioButton* GetAsAtkComponentRadioButton();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 42 8B 14 3B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 57 33")]
     public partial AtkComponentScrollBar* GetAsAtkComponentScrollBar();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83")]
@@ -114,10 +114,10 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 D0")]
     public partial AtkComponentButton* GetAsAtkComponentButton();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 1E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 42")]
     public partial AtkComponentCheckBox* GetAsAtkComponentCheckBox();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 54 1C 60")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 27")]
     public partial AtkComponentTextNineGrid* GetAsAtkTextNineGrid();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? BA ?? ?? ?? ?? 48 89 86 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 86")]
@@ -132,7 +132,7 @@ public unsafe partial struct AtkResNode : ICreatable {
         AddEvent((ushort)eventType, eventParam, listener, nodeParam, isSystemEvent);
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 38 7D 67")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 38 75 67")]
     public partial void RemoveEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
         bool isSystemEvent);
 
@@ -164,16 +164,16 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 7E 1E")]
     public partial float GetScaleY();
 
-    [MemberFunction("E8 ?? ?? ?? ?? F3 41 0F 58 F9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 BC 2E ?? ?? ?? ?? ??")]
     public partial void SetScale(float X, float Y);
 
     [MemberFunction("E9 ?? ?? ?? ?? F3 0F 5E CA")]
     public partial void SetScaleX(float x);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 D5 48 8B CF")]
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8B 51 10")]
     public partial void SetScaleY(float y);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4C FE")]
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 58 C7 0F 28 D6")]
     public partial float GetX();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 43 10")]
@@ -182,43 +182,43 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 07")]
     public partial void SetX(float x);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 03 BE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7D 6F")]
     public partial void SetY(float y);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 03 C0")]
     public partial ushort GetWidth();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 54 3B 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4F 60 0F B7 F0")]
     public partial ushort GetHeight();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 2B F7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 0F BF C6")]
     public partial void SetWidth(ushort width);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 61 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5D 87")]
     public partial void SetHeight(ushort height);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EB 01 75 DC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EE 01 75 D5 48 8B 4C 24 ??")]
     public partial void ToggleVisibility(bool enable);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 8D B3 48 05 00 00")]
+    [MemberFunction("F6 81 ?? ?? ?? ?? ?? 88 91 ?? ?? ?? ??")]
     public partial void SetAlpha(byte alpha);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 85 C0 75 48")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 85 C0 75 55")]
     public partial ushort GetPriority();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 02 49 8B CD")]
     public partial void SetPriority(ushort priority);
 
-    [MemberFunction("E8 ?? ?? ?? ?? FF C6 3B F5 72 E5 BA ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C3 3B DE 72 E6")]
     public partial void SetUseDepthBasedPriority(bool enable);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 83 F8 66 75 3F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 83 F8 66 EB 99")]
     public partial ushort GetTimelineLabel();
 
     [MemberFunction("48 85 C9 74 12 48 8B 41 10")]
     public partial void EnableTimeline();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 49 83 C7 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 3A C7")]
     public partial void DisableTimeline();
 
     [VirtualFunction(1)]

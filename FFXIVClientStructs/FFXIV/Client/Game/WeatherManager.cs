@@ -19,19 +19,19 @@ public unsafe partial struct WeatherManager {
     [FieldOffset(0x66)] public byte CurrentDaytimeOffset;
     [FieldOffset(0x67)] public byte IndividualWeatherId;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C8 8D 41 ?? A9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C8 83 E9 07")]
     public partial byte GetCurrentWeather();
 
     /// <summary>
     /// Checks if the specified TerritoryType has individual weather.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 48 8D 73 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 E8 4C 8D 73 04")]
     public partial bool HasIndividualWeather(ushort territoryTypeId);
 
     /// <summary>
     /// Gets the IndividualWeather id for the specified TerritoryType, if it has one.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 33 DB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 33 F6")]
     public partial byte GetIndividualWeather(ushort territoryTypeId);
 
     /// <summary>
@@ -40,7 +40,7 @@ public unsafe partial struct WeatherManager {
     /// <param name="territoryTypeId"> The id of the TerritoryType to check the weather for. </param>
     /// <param name="hourOffset"> An hour offset. (0 = Now, 8 = some time after the next weather change) </param>
     /// <returns> The id of a row in the Weather sheet. </returns>
-    [MemberFunction("40 57 48 83 EC 20 0F B7 CA")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 0F B7 CA 41 8B F0")]
     public partial byte GetWeatherForHour(ushort territoryTypeId, int hourOffset);
 
     /// <summary>

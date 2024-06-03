@@ -199,7 +199,7 @@ public unsafe partial struct PlayerState {
         return 0;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 3A 86")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3A 43 01")]
     public partial byte GetGrandCompanyRank();
 
     [MemberFunction("E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C")]
@@ -208,14 +208,14 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether the player is possessing the maximum amount of specialized souls.
     /// </summary>
-    [MemberFunction("0F B6 81 ?? ?? ?? ?? 4C 8D 4C 24 ??")]
+    [MemberFunction("0F B6 81 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 89 44 24 08")]
     public partial bool IsMeisterFlagMaxCount();
 
     /// <summary>
     /// Returns whether the player is specialized in the given DoH ClassJob.
     /// </summary>
     /// <param name="classJobId">The ClassJob row id of the DoH job to check.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 04 41 0F AB F4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 04 41 0F AB F6")]
     public partial bool IsMeisterFlag(uint classJobId);
 
     /// <summary>
@@ -244,7 +244,7 @@ public unsafe partial struct PlayerState {
     /// </summary>
     /// <param name="mountId">The ID of the mount to look up.</param>
     /// <returns>Returns true if the mount has been unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 5D 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 57 41 8B CF")]
     public partial bool IsMountUnlocked(uint mountId);
 
     /// <summary>
@@ -260,7 +260,7 @@ public unsafe partial struct PlayerState {
     /// </summary>
     /// <param name="rollId">The ID of the roll to look up.</param>
     /// <returns>Returns true if the roll has been unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 44 3B 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 44 1F 08")]
     public partial bool IsOrchestrionRollUnlocked(uint rollId);
 
     /// <summary>
@@ -298,7 +298,7 @@ public unsafe partial struct PlayerState {
     /// </remarks>
     /// <param name="kitId">The kit ID to check for.</param>
     /// <returns>Returns true if the framer's kit is unlocked.</returns>
-    [MemberFunction("E9 ?? ?? ?? ?? 33 FF 0F 1F 40 00")]
+    [MemberFunction("E9 ?? ?? ?? ?? 33 FF 90")]
     public partial bool IsFramersKitUnlocked(uint kitId);
 
     public bool IsAetherCurrentUnlocked(uint aetherCurrentId) {
@@ -314,14 +314,14 @@ public unsafe partial struct PlayerState {
     /// Returns whether all aether currents of a zone were discovered.
     /// </summary>
     /// <param name="territoryTypeColumn32">Column 32 of TerritoryType</param>
-    [MemberFunction("4C 8B C9 85 D2 74 48")]
+    [MemberFunction("4C 8B C9 85 D2 74 1D")]
     public partial bool IsAetherCurrentZoneComplete(uint territoryTypeColumn32);
 
     /// <summary>
     /// Check if all vistas of an expansion in the Sightseeing Log have been discovered.
     /// </summary>
     /// <param name="adventureExPhaseId">AdventureExPhase RowId</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 84 24 ?? ?? ?? ?? 4D 85 F6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 90")]
     public partial bool IsAdventureExPhaseComplete(uint adventureExPhaseId);
 
     /// <summary>
@@ -354,7 +354,7 @@ public unsafe partial struct PlayerState {
     private partial uint GetWeeklyBingoFlagsValue(uint mode);
 
     /// <summary>Returns whether the Wondrous Tails Journal has expired or not.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1D 48 8B 4B 10")]
+    [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 8D 90 ?? ?? ?? ??")]
     public partial bool IsWeeklyBingoExpired();
 
     /// <summary>Returns the expiration of the players Wondrous Tails Journal as a unix timestamp.</summary>
@@ -363,7 +363,7 @@ public unsafe partial struct PlayerState {
 
     /// <summary>Returns whether the task is complete or not.</summary>
     /// <param name="index">Task index, starting at 1.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B D7 88 06")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D3 41 88 06")]
     public partial bool IsWeeklyBingoStickerPlaced(int index);
 
     /// <summary>Returns the stored state of the indexed task.</summary>
@@ -407,14 +407,14 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether the player is a Trade Mentor.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 73 1A")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 28 F6 D8")]
     public partial bool IsTradeMentor();
 
     /// <summary>
     /// Returns whether the player is a novice (aka. Sprout or New Adventurer).<br/>
     /// Can be false if /nastatus was used to deactivate it.
     /// </summary>
-    [MemberFunction("0F B6 81 ?? ?? ?? ?? F6 D0 0F B6 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 66 C7 43 ?? ?? ??")]
     public partial bool IsNovice();
 
     /// <summary>

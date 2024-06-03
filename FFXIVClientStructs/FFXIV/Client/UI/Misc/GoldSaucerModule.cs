@@ -23,7 +23,7 @@ public unsafe partial struct GoldSaucerModule {
         [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray5<ushort> _cards; // TripleTriadCard RowIds
     }
 
-    [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 63 DA"), GenerateStringOverloads]
+    [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 63 DA 49 8B C0"), GenerateStringOverloads]
     public partial void SetDeckName(int deckIndex, byte* name);
 
     [MemberFunction("83 FA 09 77 1D")]
@@ -44,6 +44,6 @@ public unsafe partial struct GoldSaucerModule {
     [MemberFunction("40 57 48 83 EC 20 45 33 C9 48 8D B9")]
     public partial int RemoveUnseenCard(ushort cardId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 10 0F B6 F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 5D 10")]
     public partial bool IsUnseenCard(ushort cardId);
 }

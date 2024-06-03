@@ -19,13 +19,13 @@ public unsafe partial struct AchievementListModule {
     [MemberFunction("C6 81 ?? ?? ?? ?? ?? 48 8D 41 42")]
     public partial void UpdateWatchlistCount();
 
-    [MemberFunction("48 83 EC 28 44 0F B7 D2 4C 8D 41 42")]
+    [MemberFunction("48 83 EC 28 33 C0 4C 8D 41 42")]
     public partial bool AddToWatchlist(ushort achievementId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 13 40 84 F6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 FF FF C7")]
     public partial bool RemoveFromWatchlist(ushort achievementId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 48 63 43 70")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 B9 ?? ?? ?? ??")]
     public partial bool IsOnWatchlist(ushort achievementId);
 
     [MemberFunction("33 D2 48 8D 41 42")]

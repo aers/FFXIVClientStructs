@@ -19,7 +19,7 @@ public unsafe partial struct BannerModule {
     /// Create a new Banner entry.
     /// </summary>
     /// <returns>BannerModuleEntry* of the newly created Banner, or null if out of Ids.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 47 41 8B D6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 8F")]
     public partial BannerModuleEntry* CreateBanner();
 
     /// <summary>
@@ -27,7 +27,7 @@ public unsafe partial struct BannerModule {
     /// </summary>
     /// <param name="bannerId">The BannerId of the Banner to delete.</param>
     /// <returns>bool if the deletion was successful or not.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 40 0A F0 FF C3 48 FF C7 83 FB 6E 72 D6 40 0F B6 C6 48 8B 8C 24 ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B 18 49 8B 6B 20 49 8B 73 28 49 8B E3 5F C3 CC CC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0A F0 FF C3 48 FF C7 83 FB 6E 72 D6 48 8B 5C 24 ??")]
     public partial bool DeleteBanner(int bannerId);
 
     /// <summary>
@@ -50,7 +50,7 @@ public unsafe partial struct BannerModule {
     /// </summary>
     /// <param name="bannerIndex">Index in Entries array.</param>
     /// <returns>BannerID, or -1 if not found.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 79 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D0 49 8B CE 8B E8")]
     public partial int GetBannerIdByBannerIndex(int bannerIndex);
 }
 
@@ -67,7 +67,7 @@ public unsafe partial struct BannerModuleData {
     [MemberFunction("40 56 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B F1 7C 08")]
     public partial BannerModuleEntry* CreateBanner();
 
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 63 FA 48 8B D9 85 D2 0F 88")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0A F0 FF C3 48 FF C7 83 FB 6E 72 D6 48 8B 5C 24 ??")]
     public partial bool DeleteBanner(int bannerIndex);
 }
 
@@ -117,7 +117,7 @@ public unsafe partial struct BannerModuleEntry {
     /// <param name="itemIds">A pointer to 14 Item Ids</param>
     /// <param name="stainIds">A pointer to 14 Stain Ids</param>
     /// <param name="gearVisibilityFlag">Gear Visibility Flags</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 89 43 48 48 83 C4 20")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 43 58 48 8B 4D F0")]
     public static partial uint GenerateChecksum(uint* itemIds, byte* stainIds, BannerGearVisibilityFlag gearVisibilityFlag);
 }
 

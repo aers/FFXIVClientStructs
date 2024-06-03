@@ -15,7 +15,7 @@ public unsafe partial struct AgentTryon {
     [FieldOffset(0x28)] public TryonCharaView CharaView;
 
     // you can ignore the openerAddonId in the call and just set it to 0
-    [MemberFunction("E8 ?? ?? ?? ?? EB 56 48 8B 49 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 5B 48 8B 49 10")]
     public static partial bool TryOn(uint openerAddonId, uint itemId, byte stainId, uint glamourItemId, byte glamourStainId);
 
     // Client::UI::Agent::AgentTryon::TryonCharaView

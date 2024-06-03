@@ -53,7 +53,7 @@ public unsafe partial struct RaptureTextModule {
     /// <param name="seconds"></param>
     /// <param name="alternativeMinutesGlyph">Use U+E028 for minutes</param>
     /// <returns>string containing one of 23h, 59m, 59s</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C0 48 8B 4D 88")]
+    [MemberFunction("48 83 EC 28 45 0F B6 C8 85 D2")]
     public partial byte* FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
 
     /// <remarks> Singular only. The usage of intParam2 is unknown. </remarks>
@@ -61,7 +61,7 @@ public unsafe partial struct RaptureTextModule {
     /// A pointer to a null terminated string containing the formatted name.<br/>
     /// It was observed, that it can return a nullptr when the excel page was not loaded. Try calling it again in subsequent frames.
     /// </returns>
-    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 47 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CE 48 8B D0")]
     public static partial byte* FormatName(NameFormatterPlaceholder placeholder, int id, NameFormatterIdConverter idConverter, int intParam2 = 1);
 }
 

@@ -97,19 +97,19 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
         return ToInteger((Utf8String*)Unsafe.AsPointer(ref this), fromBase);
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B E0 BF")]
+    [MemberFunction("E8 ?? ?? ?? ?? B2 E8")]
     public static partial int ToInteger(Utf8String* value, int fromBase = 0); // base 0 = detect format (0x hex, 0b bin, 0o oct)
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 2B F7")]
     public partial void Ctor();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 83 6E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 6E ?? ?? 75 08")]
     public partial void Dtor();
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6"), GenerateStringOverloads]
     public partial void SetString(byte* cStr);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 3B DD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 87 ?? ?? ?? ?? 48 83 EE 80")]
     public partial void Copy(Utf8String* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 ED 79")]
@@ -118,7 +118,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E9 ?? ?? ?? ?? 48 2B D8")]
     public partial bool EqualTo(Utf8String* other);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 84 C0"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 25 83 F9 03"), GenerateStringOverloads]
     public partial bool EqualToString(byte* other);
 
     [MemberFunction("45 33 C0 4C 8B C9 4C 39 41")]
@@ -138,13 +138,13 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A7 E8 ?? ?? ?? ?? EB 18")]
     public partial Utf8String* Replace(Utf8String* toFind, Utf8String* replacement);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 7D 97 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 45 84 ED")]
     public partial int IndexOf(Utf8String* toFind, int startIdx = 0);
 
     [MemberFunction("44 88 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 53 41 54")]
     public partial int FindFirstOf(Utf8String* charsToFind, int startIdx, bool exclude = false);
 
-    [MemberFunction("44 88 4C 24 ?? 53 57 41 56 48 83 EC ?? 48 83 79")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 48 8B F9 45 0F B6 E9")]
     public partial int FindLastOf(Utf8String* toFind, int startIdx, bool exclude = false);
 
     [MemberFunction("48 8B 01 0F B6 04")]
@@ -152,11 +152,11 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
 
     public byte GetCharAt(int idx) => idx < 0 ? byte.MinValue : GetCharAt((ulong)idx);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 C7 48 8D 35")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 80 FF 03")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
 
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 0A 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F0 E8 ?? ?? ?? ?? 48 8D 4D C0")]
     public static partial void SanitizeString(ushort flags, Utf8String* characterList); // flags = 0x27F, characterList = nint.Zero
 
     public static implicit operator ReadOnlySpan<byte>(in Utf8String value)

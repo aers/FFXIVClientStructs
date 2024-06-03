@@ -49,7 +49,7 @@ public unsafe partial struct AozNoteModule {
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray16<bool> _macroFlags;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 0B 41 8B 17")]
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B 14 99")]
     public partial byte* GetActiveSetCustomNamePtr(int activeSetIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0C 8B D3 48 8B CD")]
@@ -58,7 +58,7 @@ public unsafe partial struct AozNoteModule {
     [MemberFunction("41 0F 10 00 8B C2 48 69 D0 ?? ?? ?? ?? 0F 11 84 0A"), GenerateStringOverloads]
     public partial void SetActiveSetCustomName(int activeSetIndex, byte* name);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 69 F6")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B E9 8B F2 48 8B 49 10")]
     public partial void SaveActiveSetHotBars(int activeSetIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 3C 24 40 0F 94 C7")]

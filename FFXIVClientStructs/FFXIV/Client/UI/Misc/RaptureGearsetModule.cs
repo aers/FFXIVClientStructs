@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 45 33 F6 48 89 51 10 48 8D 05 ?? ?? ?? ?? 4C 89 71 08 49 8B D8"
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 5F 40 48 8D 77 48", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 7B 40 48 8D 73 48", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB670)]
 public unsafe partial struct RaptureGearsetModule {
     public static RaptureGearsetModule* Instance() => UIModule.Instance()->GetRaptureGearsetModule();
@@ -23,7 +23,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </summary>
     /// <param name="gearsetId">The index of the gearset to look up.</param>
     /// <returns>Returns a pointer to a GearsetEntry</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4E 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4F 02")]
     public partial GearsetEntry* GetGearset(int gearsetId);
 
     /// <summary>
@@ -45,7 +45,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </remarks>
     /// <param name="gearsetId">The index of the gearset to look up.</param>
     /// <returns>Returns <c>true</c> if the gearset is valid, <c>false</c> otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 0D ?? ?? ?? ?? 84 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B EE 84 C0")]
     public partial bool IsValidGearset(int gearsetId);
 
     /// <summary>
@@ -69,14 +69,14 @@ public unsafe partial struct RaptureGearsetModule {
     /// Delete the gearset at the specified ID.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to delete.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 20 48 8B 16")]
+    [MemberFunction("E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 74 20 48 8B 17")]
     public partial void DeleteGearset(int gearsetId);
 
     /// <summary>
     /// Update the gearset at the specified ID with the currently equipped items.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to delete.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 ?? 0F 8E ?? ?? ?? ?? 80 BE")]
+    [MemberFunction("48 89 6C 24 ?? 57 48 83 EC 20 48 8B F9 48 63 EA")]
     public partial void UpdateGearset(int gearsetId);
 
     /// <summary>
@@ -93,7 +93,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// Returns <c>-1</c> if either the original gearset ID or the new gearset ID is invalid, <c>-2</c> if the player
     /// is currently editing a portrait, otherwise it returns the ID of the original gearset that was moved to a new position.
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 83 F8 FE 0F 8E ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 20 48 8B 16")]
     public partial int ReassignGearsetId(int gearsetId, int newGearsetId);
 
     /// <summary>
@@ -101,7 +101,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </summary>
     /// <param name="gearsetId">The gearset ID to link a glamour plate to </param>
     /// <param name="glamourPlateId">The glamour plate ID to link. 0 resets the linked glamour plate.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 20 41 88 7E 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 32 FF E9 ?? ?? ?? ?? 33 C9")]
     public partial void LinkGlamourPlate(int gearsetId, byte glamourPlateId);
 
     /// <summary>
@@ -120,7 +120,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </summary>
     /// <param name="gearsetId">The ID of the gearset.</param>
     /// <returns>The Banner index, or -1 if it was not linked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 41 3B C7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 41 3B C4")]
     public partial sbyte GetBannerIndex(byte gearsetId);
 
     /// <summary>
@@ -128,7 +128,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </summary>
     /// <param name="gearsetId">The ID of the gearset.</param>
     /// <param name="bannerIndex">The Banner index, or -1 to unlink the Banner.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 40 FE C6")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 70 41 0F B6 D7")]
     public partial void SetBannerIndex(byte gearsetId, sbyte bannerIndex);
 
     /// <summary>
@@ -137,7 +137,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// <param name="gearsetId">The ID of the gearset.</param>
     /// <returns>Returns <c>true</c> if the gearset has a Banner linked to it, <c>false</c> otherwise.</returns>
     /// <remarks>Equivalent to Flags.HasFlag(GearsetFlag.Exists) &amp;&amp; BannerIndex != 0.</remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 3F 48 8B 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 4F 0F B6 D3")]
     public partial bool HasLinkedBanner(byte gearsetId);
 
     [Flags]

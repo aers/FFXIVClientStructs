@@ -48,15 +48,15 @@ public unsafe partial struct TimelineContainer {
     /// <param name="target"> The object id of the target of the emote. </param>
     /// <param name="emoteId"> The row id of the executed emote. </param>
     /// <returns> Returns 0 or one of the row ids for height adjustment for emotes (like kneeling to hug small objects). </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 F8 45 85 FF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 E8 45 85 ED")]
     public partial uint GetHeightAdjustActionTimelineRowId(GameObjectId target, uint emoteId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 D6 41 8B D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 08 F3 0F 10 B1 ?? ?? ?? ??")]
     public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot on the target actor and any children (mounts, ornaments)
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 ?? 48 83 EE ?? 75 ?? 48 8B 74 24 ?? 48 8B 6C 24")]
     public partial void SetLipsOverrideTimeline(ushort actionTimelineId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 80 8E ?? ?? ?? ?? ?? 48 8D 8B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8B 01 FF 50 20 48 8D 8B ?? ?? ?? ?? 48 8B 01 FF 50 20")]
     public partial bool CalculateAndApplyOverallSpeed(); // Calculates the current overall speed and applies it, returns true if the speed changed
 }

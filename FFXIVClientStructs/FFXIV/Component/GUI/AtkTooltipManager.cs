@@ -24,7 +24,7 @@ public unsafe partial struct AtkTooltipManager {
         [FieldOffset(0x14)] public short Unk_14;
         [FieldOffset(0x16)] public byte Unk_16;
 
-        [MemberFunction("E8 ?? ?? ?? ?? 48 C7 C2")]
+        [MemberFunction("E8 ?? ?? ?? ?? C1 FB 04")]
         public partial void Ctor();
     }
 
@@ -38,13 +38,13 @@ public unsafe partial struct AtkTooltipManager {
     [FieldOffset(0x8)] public StdMap<Pointer<AtkResNode>, Pointer<AtkTooltipInfo>> TooltipMap;
     [FieldOffset(0x18)] public AtkStage* AtkStage;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 43 88 34 26")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 85 F6")]
     public partial void AddTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 45 8D 44 24")]
     public partial void RemoveTooltip(AtkResNode* targetNode);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 24 66 83 FA 22")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 EB 02")]
     public partial void ShowTooltip(
         AtkTooltipType type,
         ushort parentId,
@@ -63,6 +63,6 @@ public unsafe partial struct AtkTooltipManager {
         ShowTooltip(AtkTooltipType.Text, parentId, targetNode, args);
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 F6 C5 08")]
+    [MemberFunction("66 3B 91 ?? ?? ?? ?? 75 09")]
     public partial void HideTooltip(ushort parentId, bool unk = false);
 }

@@ -111,7 +111,7 @@ public unsafe partial struct AddonActionCross {
     /// <param name="useLeftSide">True = left side of target bar, False = right side of target bar</param>
     /// <returns>The hotbar ID (<see cref="AddonActionBarBase.RaptureHotbarId"/>) of the set of actions assigned to this input.<br/>
     /// The Cycle Up/Down options will return the values 18 or 19, which are not actual bar IDs. You can use <see cref="GetAdjustedBarTarget"/> instead to account for this.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D0 83 F8 12 74 38")]
+    [MemberFunction("8D 41 FF 83 F8 13")]
     public static partial uint GetBarTarget(uint mapValue, bool* useLeftSide);
 }
 

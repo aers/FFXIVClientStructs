@@ -192,13 +192,13 @@ public unsafe partial struct CurrencyManager {
     /// <remarks>
     /// Used for items in <see cref="SpecialItemBucket"/> only.
     /// </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 EB 11")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 89 47 0C")]
     public partial uint GetItemIdBySpecialId(byte specialId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 76 0A")]
     public partial uint GetItemCount(uint itemId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 CF 03 CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3B D8 76 7C")]
     public partial uint GetItemMaxCount(uint itemId);
 
     /// <remarks>

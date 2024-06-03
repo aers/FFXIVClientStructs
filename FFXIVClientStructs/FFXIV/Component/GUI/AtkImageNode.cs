@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkImageNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
-// common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
+// common CreateAtkNode function "E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13"
 // type 2
 [GenerateInterop]
 [Inherits<AtkResNode>]
@@ -22,7 +22,7 @@ public unsafe partial struct AtkImageNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 48 8B 71 08"), GenerateStringOverloads]
     public partial void LoadTexture(byte* texturePath, uint version = 1);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 43 76")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 E7 0F")]
     public partial void LoadIconTexture(uint iconId, int version);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 FF 78 1E")]

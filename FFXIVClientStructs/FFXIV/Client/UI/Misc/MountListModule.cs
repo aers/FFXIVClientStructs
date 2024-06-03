@@ -17,13 +17,13 @@ public unsafe partial struct MountListModule {
     [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray30<ushort> _favorites; // Order column of Mount sheet, offset by 1
     // [FieldOffset(0x92)] public uint Unk92;
 
-    [MemberFunction("48 83 EC 28 44 0F B7 DA")]
+    [MemberFunction("48 83 EC 28 45 32 C0 44 0F B7 DA")]
     public partial bool AddToUnseenMounts(ushort orderId);
 
-    [MemberFunction("48 83 EC 28 32 C0")]
+    [MemberFunction("40 57 48 83 EC 20 32 C0")]
     public partial bool RemoveFromUnseenMounts(ushort orderId);
 
-    [MemberFunction("48 83 EC 28 44 0F B7 D2 4C 8B C9 45 32 C0 66 90 41 0F B6 C0 66 83 7C 41 ?? ?? 74 10 41 FE C0 41 80 F8 1E 72 EB 33 C0 48 83 C4 28 C3 32 C9 45 0F B7 C2")]
+    [MemberFunction("48 83 EC 28 44 0F B7 D2 4C 8B C9 45 32 C0 66 90 41 0F B6 C0 66 83 7C 41 ?? ?? 74 10 41 FE C0 41 80 F8 1E 72 EB 33 C0 48 83 C4 28 C3 32 C9 45 33 DB")]
     public partial bool AddToFavorites(ushort orderId);
 
     [MemberFunction("48 83 EC 28 45 32 C0 44 0F B7 CA")]

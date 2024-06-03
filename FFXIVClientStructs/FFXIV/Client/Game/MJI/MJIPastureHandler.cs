@@ -49,7 +49,7 @@ public unsafe partial struct MJIPastureHandler {
     /// <summary>
     /// Gets the current number of minions roaming the Island Sanctuary.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 3A C3 72 1E")]
+    [MemberFunction("32 C0 4C 8D 81 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 90 41 81 38 ?? ?? ?? ??")]
     public partial byte GetCurrentRoamingMinionCount();
 }
 

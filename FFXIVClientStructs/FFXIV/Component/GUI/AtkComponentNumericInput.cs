@@ -11,6 +11,6 @@ public unsafe partial struct AtkComponentNumericInput {
     [FieldOffset(0x1F8)] public int Value; // Found through SetValue function
     [FieldOffset(0x2F8)] public AtkUldComponentDataNumericInput Data;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 81 4E ?? ?? ?? ?? ?? EB 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? 81 4F ?? ?? ?? ?? ?? EB 07")]
     public partial void SetValue(int value);
 }

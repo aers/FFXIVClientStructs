@@ -100,7 +100,7 @@ public unsafe partial struct UIState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 88 45 80")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 23")]
     public partial bool IsUnlockLinkUnlocked(uint unlockLink);
 
     /// <summary>
@@ -114,7 +114,7 @@ public unsafe partial struct UIState {
     /// <param name="a4">Exact purpose unknown, but appears to be a flag to respect Unlock Flag 245 (ignore quest
     /// progression?) for quest-based checks. Virtually always <c>true</c> in game code.</param>
     /// <returns>Returns true if the unlock link is unlocked or if the quest is completed.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 CE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 A2")]
     public partial bool IsUnlockLinkUnlockedOrQuestCompleted(uint unlockLinkOrQuestId, byte minQuestProgression = 0, bool a4 = true);
 
     /// <summary>
@@ -134,7 +134,7 @@ public unsafe partial struct UIState {
     /// <item><term>4</term><description>The item does not have an unlock status.</description></item>
     /// </list>
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 01 75 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CD 89 86 ?? ?? ?? ??")]
     public partial long IsItemActionUnlocked(void* itemExdPtr);
 
     /// <summary>
@@ -142,7 +142,7 @@ public unsafe partial struct UIState {
     /// </summary>
     /// <param name="cardId">The ID of the card (technically, of TripleTriadCardResident) to check against.</param>
     /// <returns>Returns true if the card is unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 7B 78")]
+    [MemberFunction("E9 ?? ?? ?? ?? 48 85 DB 74 03")]
     public partial bool IsTripleTriadCardUnlocked(ushort cardId);
 
     /// <summary>
@@ -200,16 +200,16 @@ public unsafe partial struct UIState {
         return ((1 << ((ushort)chocoboTaxiStandId & 7)) & ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId / 8]) > 0;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 22 F0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 FF 08 74 52")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 3C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 38")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
 
-    [MemberFunction("48 83 EC 28 E8 ?? ?? ?? ?? 48 85 C0 74 15 0F B7 40 2A")]
+    [MemberFunction("48 83 EC 28 E8 ?? ?? ?? ?? 48 85 C0 74 14 0F B7 40 2A")]
     public static partial bool IsPublicContentCompleted(uint publicContentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 74 1E")]
+    [MemberFunction("E9 ?? ?? ?? ?? 0F B6 05 ?? ?? ?? ?? 24 01")]
     public static partial bool IsPublicContentUnlocked(uint publicContentId);
 
     /// <summary> Check if the player has seen the cutscene before. </summary>
@@ -222,7 +222,7 @@ public unsafe partial struct UIState {
     public partial bool IsCutsceneSeen(uint cutsceneId);
 
     // Only valid after the timers window has been opened, returns -1 otherwise.
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 49 8D 9F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 8D 48 05")]
     public partial int GetNextMapAllowanceTimestamp();
 
     // Only valid after the timers window has been opened, returns DateTime.MinValue otherwise.

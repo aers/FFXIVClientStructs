@@ -182,7 +182,7 @@ public unsafe partial struct MJIManager {
     /// </summary>
     /// <param name="functionId">The RowID of the MJIFunction to check</param>
     /// <returns>Returns <c>true</c> if the function is unlocked, <c>false</c> otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 3A F0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 88 77 30")]
     public partial bool IsFunctionUnlocked(byte functionId);
 
     /// <summary>
@@ -195,7 +195,7 @@ public unsafe partial struct MJIManager {
     /// <summary>
     /// Gets the total number of slots available in the Island Sanctuary pasture.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 C0 48 8D 9E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 E0 49 8D BD ?? ?? ?? ??")]
     public partial byte GetPastureSlotCount();
 
     /// <summary>

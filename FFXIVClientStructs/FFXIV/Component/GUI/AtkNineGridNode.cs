@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkNineGridNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
-// common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
+// common CreateAtkNode function "E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13"
 // type 4
 [GenerateInterop]
 [Inherits<AtkResNode>]

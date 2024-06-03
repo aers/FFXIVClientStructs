@@ -25,7 +25,7 @@ public unsafe partial struct GroupManager {
     [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]
     public static partial GroupManager* Instance();
 
-    [MemberFunction("48 8D 81 ?? ?? ?? ?? 84 D2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 80")]
     public partial GroupManager* GetNextInstance(bool getNextInstance = true); // if true, simply adds sizeof(GroupManager) to the `this` pointer
 
     [MemberFunction("E8 ?? ?? ?? ?? EB B8 E8")]
@@ -37,7 +37,7 @@ public unsafe partial struct GroupManager {
     [MemberFunction("48 63 81 ?? ?? ?? ?? 85 C0 78 14")]
     public partial bool IsObjectIdPartyLeader(uint objectId);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 44 0F B6 99")]
+    [MemberFunction("E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 19")]
     public partial bool IsCharacterInPartyByName(byte* name);
 
     [MemberFunction("83 FA 14 72 03")]

@@ -101,12 +101,12 @@ public unsafe partial struct AgentBannerEditorState {
     [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 80 79 2C 00")]
     public partial int GetPresetIndex(ushort backgroundIndex, ushort frameIndex, ushort accentIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0A E8 45 8B C7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 74 24 ?? 44 0A F8")]
     public partial void SetFrame(int frameId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 64 24 ?? 44 0A E8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 44 0A F8")]
     public partial void SetAccent(int accentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 48 8B 4D 37")]
+    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 EB 3F")]
     public partial void SetHasChanged(bool hasDataChanged);
 }
