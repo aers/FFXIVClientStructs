@@ -457,7 +457,7 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("values"));
         emitter.Emit(new MappingStart());
         foreach (var (key, val) in e.EnumValues) {
-            emitter.Emit(new Scalar(key));
+            emitter.Emit(new Scalar(AnchorName.Empty, TagName.Empty, key, ScalarStyle.DoubleQuoted, true, false));
             emitter.Emit(new Scalar(val));
         }
         emitter.Emit(new MappingEnd());
