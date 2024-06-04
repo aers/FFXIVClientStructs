@@ -54,8 +54,8 @@ public unsafe partial struct AgentInterface {
 
     public enum GameEvent {
         LoggedIn,
-        UIShown,
-        UIHidden,
+        LoadingEnded, // UI shown
+        LoadingStarted, // UI hidden
         LoggedOut,
         Unk4,
         Unk5, // Entering Duty?
