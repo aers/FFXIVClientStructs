@@ -6,8 +6,6 @@ on:
       - opened
       - synchronize
       - reopened
-    branches:
-      - main
     paths:
       - 'FFXIVClientStructs/**/*.cs'
   
@@ -32,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
       - name: Install dependencies for Main branch
         run: dotnet restore
       - name: Build Main branch
