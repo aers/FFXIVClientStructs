@@ -489,10 +489,15 @@ classes:
       0x1415EBAB0: InitializeLobbyConnection
       0x1415EC290: dtorHelper
       0x1415F1660: Update
-  Application:Network::ZoneConnection:
+  Application::Network::ZoneConnection:
     funcs:
+      0x1415F2F50: ctor
       0x1415F2F80: dtor
-  Application:Network::ChatConnection:
+      0x1415F3270: OpenChannel
+      0x1415F32C0: ReceivePacket
+      0x1415F32E0: SendPacket
+      0x1415F3320: CloseChannel
+  Application::Network::ChatConnection:
     funcs:
       0x1415F35F0: dtor
   Application::Network::LobbyClient::LobbyClientMixin:
