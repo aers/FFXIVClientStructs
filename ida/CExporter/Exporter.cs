@@ -245,7 +245,11 @@ ReExport:
             ProcessedVirtualFunction[] virtualFunctions = [];
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
+                var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => new {Name = t.Name, Parameters = t.GetParameters(), ReturnType = t.ReturnType}).ToArray();
                 virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Select(f => {
+                    var memberFunction = memberFunctions.FirstOrDefault(t => t.Name == f.Name);
+                    var returnType = f.FieldType.GetFunctionPointerReturnType();
+                    if (memberFunction?.ReturnType != returnType) memberFunction = null;
                     _processType.Add(f.FieldType.GetFunctionPointerReturnType());
                     return new ProcessedVirtualFunction {
                         VirtualFunctionName = f.Name,
@@ -256,7 +260,7 @@ ReExport:
                             return new ProcessedField {
                                 FieldType = p,
                                 FieldOffset = -1,
-                                FieldName = i == 0 ? "this" : $"a{i + 1}"
+                                FieldName = i == 0 ? "this" : memberFunction?.Parameters[i-1].Name ?? $"a{i + 1}"
                             };
                         }).ToArray()
                     };

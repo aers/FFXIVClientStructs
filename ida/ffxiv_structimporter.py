@@ -813,14 +813,26 @@ if api is None:
                     )
                 elif struct.virtual_functions != []:
                     s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
-                    ida_struct.add_struc_member(
-                        s,
-                        "vtable",
-                        0,
-                        self.get_idc_type_from_ida_type("__int64"),
-                        None,
-                        self.get_size_from_ida_type("__int64"),
-                    )
+                    if (
+                        ida_struct.add_struc_member(
+                            s,
+                            "vtable",
+                            0,
+                            self.get_idc_type_from_ida_type("__int64"),
+                            None,
+                            self.get_size_from_ida_type("__int64"),
+                        )
+                        == -0x2
+                    ):
+                        ida_struct.del_struc_members(s, 0, 8)
+                        ida_struct.add_struc_member(
+                            s,
+                            "vtable",
+                            0,
+                            self.get_idc_type_from_ida_type("__int64"),
+                            None,
+                            self.get_size_from_ida_type("__int64"),
+                        )
                     meminfo = ida_struct.get_member_by_name(s, "vtable")
                     ida_struct.set_member_tinfo(
                         s, meminfo, 0, self.get_tinfo_from_type(fullname + "VTable*"), 0
