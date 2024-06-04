@@ -698,9 +698,9 @@ if api is None:
                     field_type = self.clean_name(virt_func.return_type)
                     field_type = field_type + "(__fastcall* " + field_name + ")("
                     for param in virt_func.parameters:
-                        field_type = field_type + self.clean_name(param.type) + ""
+                        field_type = field_type + self.clean_name(param.type) + " "
                         field_type = field_type + param.name + ","
-                    field_type = field_type[:-2] + ")"
+                    field_type = field_type[:-1] + ")"
 
                     ida_struct.set_member_tinfo(
                         s, meminfo, 0, self.get_tinfo_from_type(field_type), 0
