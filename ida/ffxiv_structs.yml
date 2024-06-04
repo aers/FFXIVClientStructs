@@ -3558,7 +3558,7 @@ structs:
     name: Size
     offset: 8
   - type: byte
-    name: _subscribedAddons
+    name: SubscribedAddons
     offset: 12
     size: 16
   - type: byte
@@ -4152,7 +4152,7 @@ structs:
   size: 16392
   fields:
   - type: Component::GUI::AtkSimpleTween*
-    name: _list
+    name: List
     offset: 0
     size: 2048
   - type: unsigned int
@@ -4567,7 +4567,7 @@ structs:
   size: 24
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 2
   - type: unsigned int
@@ -4585,7 +4585,7 @@ structs:
   size: 28
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 3
   - type: unsigned int
@@ -4603,7 +4603,7 @@ structs:
   size: 16
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 1
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4618,7 +4618,7 @@ structs:
   size: 20
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 2
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4633,7 +4633,7 @@ structs:
   size: 60
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 6
   - type: unsigned __int16
@@ -4669,7 +4669,7 @@ structs:
   size: 28
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 3
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4684,7 +4684,7 @@ structs:
   size: 32
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 4
   - type: unsigned int
@@ -4702,7 +4702,7 @@ structs:
   size: 44
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 8
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4717,7 +4717,7 @@ structs:
   size: 20
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 2
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4732,7 +4732,7 @@ structs:
   size: 148
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 32
   - type: unsigned __int16
@@ -4759,7 +4759,7 @@ structs:
   size: 40
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 5
   - type: byte
@@ -4786,7 +4786,7 @@ structs:
   size: 32
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 4
   - type: byte
@@ -4804,7 +4804,7 @@ structs:
   size: 52
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 10
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4819,7 +4819,7 @@ structs:
   size: 24
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 3
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4834,7 +4834,7 @@ structs:
   size: 24
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 3
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4849,7 +4849,7 @@ structs:
   size: 20
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 2
   - type: Component::GUI::AtkUldComponentDataBase
@@ -4864,7 +4864,7 @@ structs:
   size: 36
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 4
   - type: unsigned int
@@ -4885,7 +4885,7 @@ structs:
   size: 32
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 4
   - type: unsigned __int16
@@ -4906,7 +4906,7 @@ structs:
   size: 52
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 4
   - type: int
@@ -4939,7 +4939,7 @@ structs:
   size: 36
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 4
   - type: unsigned int
@@ -4960,7 +4960,7 @@ structs:
   size: 24
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 2
   - type: unsigned int
@@ -4978,7 +4978,7 @@ structs:
   size: 40
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 5
   - type: byte
@@ -5005,7 +5005,7 @@ structs:
   size: 56
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 12
     size: 8
   - type: unsigned int
@@ -5115,7 +5115,7 @@ structs:
   size: 2064
   fields:
   - type: Component::GUI::AtkUnitBase*
-    name: _entries
+    name: Entries
     offset: 8
     size: 256
   - type: unsigned __int16
@@ -6265,7 +6265,7 @@ structs:
     name: Handle
     offset: 32
   - type: byte
-    name: _path
+    name: Path
     offset: 40
     size: 80
   - type: __int64
@@ -7821,7 +7821,7 @@ structs:
   size: 144
   fields:
   - type: byte
-    name: _bannerTimelineName
+    name: BannerTimelineName
     offset: 0
     size: 64
   - type: Common::Math::HalfVector4
@@ -8046,7 +8046,7 @@ structs:
     name: UIModule
     offset: 8
   - type: byte
-    name: _rotation
+    name: Rotation
     offset: 16
     size: 5
   - type: byte
@@ -8081,7 +8081,7 @@ structs:
   size: 104
   fields:
   - type: Client::UI::Misc::GamePresetPoint
-    name: _markers
+    name: Markers
     offset: 0
     size: 8
   - type: byte
@@ -8256,7 +8256,7 @@ structs:
     name: CurrentSlotIndex
     offset: 4
   - type: Client::Game::InventoryItem*
-    name: _recommendedItems
+    name: RecommendedItems
     offset: 8
     size: 14
   - type: unsigned __int16
@@ -8360,7 +8360,7 @@ structs:
     name: TempDataBytesWritten
     offset: 32
   - type: byte
-    name: _fileName
+    name: FileName
     offset: 48
     size: 12
   - type: byte
@@ -8478,7 +8478,7 @@ structs:
     name: ClassJobId
     offset: 38
   - type: byte
-    name: _name
+    name: Name
     offset: 43
     size: 32
   - type: byte
@@ -8642,7 +8642,7 @@ structs:
     name: Spiritbond
     offset: 156
   - type: unsigned __int16
-    name: _materia
+    name: Materia
     offset: 158
     size: 5
   - type: byte
@@ -8826,11 +8826,11 @@ structs:
     name: Count
     offset: 1
   - type: unsigned __int16
-    name: _enemies
+    name: Enemies
     offset: 2
     size: 30
   - type: unsigned __int16
-    name: _positions
+    name: Positions
     offset: 62
     size: 30
   virtual_functions: []
@@ -8897,19 +8897,19 @@ structs:
     name: CurrentEventId
     offset: 2
   - type: Component::GUI::AtkValue
-    name: _eventParams
+    name: EventParams
     offset: 8
     size: 33
   - type: byte
-    name: _eventIds
+    name: EventIds
     offset: 1064
     size: 32
   - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
-    name: _eventHandlers
+    name: EventHandlers
     offset: 1104
     size: 32
   - type: __int64
-    name: _eventHandlerParams
+    name: EventHandlerParams
     offset: 1368
     size: 32
   - type: unsigned int
@@ -8999,11 +8999,11 @@ structs:
   size: 54
   fields:
   - type: __int8
-    name: _map
+    name: Map
     offset: 0
     size: 25
   - type: __int8
-    name: _roomIndex
+    name: RoomIndex
     offset: 25
     size: 25
   - type: byte
@@ -9399,7 +9399,7 @@ structs:
     name: LoginFlags
     offset: 18
   - type: byte
-    name: _name
+    name: Name
     offset: 24
     size: 32
   virtual_functions: []
@@ -9993,7 +9993,7 @@ structs:
     name: FrameDelta
     offset: 24
   - type: Client::UI::Agent::AgentInterface*
-    name: _agents
+    name: Agents
     offset: 32
     size: 441
   virtual_functions: []
@@ -10917,7 +10917,7 @@ structs:
     name: Index
     offset: 2
   - type: byte
-    name: _name
+    name: Name
     offset: 20
     size: 32
   virtual_functions: []
@@ -11001,7 +11001,7 @@ structs:
     name: CriticalSection
     offset: 16
   - type: Client::System::Threading::Thread*
-    name: _threads
+    name: Threads
     offset: 56
     size: 512
   - type: int
@@ -11423,11 +11423,11 @@ structs:
     name: ActiveCursorType
     offset: 16
   - type: unsigned __int64
-    name: _cursorHandles
+    name: CursorHandles
     offset: 432
     size: 16
   - type: byte*
-    name: _cursorNames
+    name: CursorNames
     offset: 568
     size: 16
   - type: int
@@ -11618,7 +11618,7 @@ structs:
     name: MinHeight
     offset: 92
   - type: wchar_t
-    name: _userName
+    name: UserName
     offset: 128
     size: 257
   virtual_functions: []
@@ -11702,7 +11702,7 @@ structs:
   size: 528
   fields:
   - type: wchar_t
-    name: _buffer
+    name: Buffer
     offset: 0
     size: 260
   - type: wchar_t*
@@ -11738,7 +11738,7 @@ structs:
     name: Next
     offset: 104
   - type: wchar_t
-    name: _filePath
+    name: FilePath
     offset: 112
     size: 260
   virtual_functions: []
@@ -11784,27 +11784,27 @@ structs:
     name: ActiveVolume
     offset: 56
   - type: float
-    name: _volume
+    name: Volume
     offset: 60
     size: 19
   - type: float
-    name: _unkVolume2
+    name: UnkVolume2
     offset: 136
     size: 19
   - type: float
-    name: _unkVolume3
+    name: UnkVolume3
     offset: 212
     size: 19
   - type: float
-    name: _unkVolume4
+    name: UnkVolume4
     offset: 288
     size: 19
   - type: byte
-    name: _channelMuted
+    name: ChannelMuted
     offset: 364
     size: 19
   - type: byte
-    name: _channelAlwaysOn
+    name: ChannelAlwaysOn
     offset: 383
     size: 19
   - type: byte
@@ -12188,7 +12188,7 @@ structs:
     name: NumRefs
     offset: 0
   - type: byte
-    name: _data
+    name: Data
     offset: 4
     size: 260
   virtual_functions: []
@@ -12206,7 +12206,7 @@ structs:
     name: Collider
     offset: 32
   - type: byte
-    name: _path
+    name: Path
     offset: 40
     size: 260
   - type: int
@@ -12345,7 +12345,7 @@ structs:
     name: CameraIndex
     offset: 80
   - type: Client::Graphics::Scene::Camera*
-    name: _cameras
+    name: Cameras
     offset: 88
     size: 14
   virtual_functions: []
@@ -12357,7 +12357,7 @@ structs:
   size: 1040
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle*
-    name: _resourceHandles
+    name: ResourceHandles
     offset: 8
     size: 87
   - type: Client::Graphics::Kernel::ConstantBuffer*
@@ -12540,7 +12540,7 @@ structs:
   size: 400
   fields:
   - type: Client::Graphics::Render::Camera*
-    name: _cameras
+    name: Cameras
     offset: 200
     size: 4
   virtual_functions: []
@@ -12639,7 +12639,7 @@ structs:
     name: CanvasRegion
     offset: 16
   - type: Client::Graphics::Render::SubView
-    name: _subViews
+    name: SubViews
     offset: 32
     size: 16
   virtual_functions: []
@@ -12842,7 +12842,7 @@ structs:
     name: PassNum
     offset: 16
   - type: byte
-    name: _passIndices
+    name: PassIndices
     offset: 20
     size: 16
   - type: Client::Graphics::Kernel::ShaderNode::ShaderPass*
@@ -13087,7 +13087,7 @@ structs:
   size: 104
   fields:
   - type: byte
-    name: _flags
+    name: Flags
     offset: 0
     size: 104
   virtual_functions: []
@@ -13117,27 +13117,27 @@ structs:
     name: SeedBase
     offset: 24
   - type: byte
-    name: _WBAchieveFlag
+    name: WBAchieveFlag
     offset: 44
     size: 20
   - type: byte
-    name: _PMAchieveFlag
+    name: PMAchieveFlag
     offset: 64
     size: 20
   - type: byte
-    name: _MMAchieveFlag
+    name: MMAchieveFlag
     offset: 84
     size: 4
   - type: byte
-    name: _WBReceiveFlag
+    name: WBReceiveFlag
     offset: 124
     size: 20
   - type: byte
-    name: _PMReceiveFlag
+    name: PMReceiveFlag
     offset: 144
     size: 20
   - type: byte
-    name: _MMReceiveFlag
+    name: MMReceiveFlag
     offset: 164
     size: 4
   - type: byte
@@ -13387,7 +13387,7 @@ structs:
   size: 3224
   fields:
   - type: Client::Game::Object::GameObject*
-    name: _objects
+    name: Objects
     offset: 24
     size: 400
   virtual_functions: []
@@ -13413,7 +13413,7 @@ structs:
   size: 41376
   fields:
   - type: Client::Game::HousingFurniture
-    name: _furniture
+    name: Furniture
     offset: 16
     size: 732
   - type: Client::Game::HousingObjectManager
@@ -13674,11 +13674,11 @@ structs:
     name: CrafterContentId
     offset: 24
   - type: unsigned __int16
-    name: _materia
+    name: Materia
     offset: 32
     size: 5
   - type: byte
-    name: _materiaGrades
+    name: MateriaGrades
     offset: 42
     size: 5
   - type: byte
@@ -13788,7 +13788,7 @@ structs:
   size: 4
   fields:
   - type: byte
-    name: _counts
+    name: Counts
     offset: 0
     size: 4
   virtual_functions: []
@@ -13917,15 +13917,15 @@ structs:
     name: BonusGuaranteeRowId
     offset: 1
   - type: unsigned __int16
-    name: _satisfaction
+    name: Satisfaction
     offset: 2
     size: 10
   - type: byte
-    name: _satisfactionRanks
+    name: SatisfactionRanks
     offset: 22
     size: 10
   - type: byte
-    name: _usedAllowances
+    name: UsedAllowances
     offset: 32
     size: 10
   - type: __int16
@@ -13935,11 +13935,11 @@ structs:
     name: CurrentSupplyRowId
     offset: 44
   - type: __int16
-    name: _currentSupplySubRowIds
+    name: CurrentSupplySubRowIds
     offset: 46
     size: 4
   - type: __int16
-    name: _currentSupplyRewardRowIds
+    name: CurrentSupplyRewardRowIds
     offset: 54
     size: 4
   virtual_functions: []
@@ -13991,7 +13991,7 @@ structs:
   size: 104
   fields:
   - type: byte
-    name: _titlesUnlockBitmask
+    name: TitlesUnlockBitmask
     offset: 8
     size: 92
   - type: byte
@@ -14147,7 +14147,7 @@ structs:
     name: State
     offset: 8
   - type: byte
-    name: _completedAchievements
+    name: CompletedAchievements
     offset: 12
     size: 428
   - type: Client::Game::UI::Achievement::AchievementState
@@ -14205,7 +14205,7 @@ structs:
     name: TimeLeft
     offset: 8
   - type: byte
-    name: _buddyEquipUnlockBitmask
+    name: BuddyEquipUnlockBitmask
     offset: 12
     size: 12
   - type: byte
@@ -14218,7 +14218,7 @@ structs:
     name: BardingFeet
     offset: 26
   - type: byte
-    name: _name
+    name: Name
     offset: 27
     size: 21
   - type: unsigned int
@@ -14294,7 +14294,7 @@ structs:
     name: HasHelpers
     offset: 9
   - type: unsigned int
-    name: _ENpcIds
+    name: ENpcIds
     offset: 12
     size: 7
   virtual_functions: []
@@ -14309,7 +14309,7 @@ structs:
     name: State
     offset: 0
   - type: byte
-    name: _unlockedItems
+    name: UnlockedItems
     offset: 4
     size: 128
   virtual_functions: []
@@ -14424,7 +14424,7 @@ structs:
   size: 184
   fields:
   - type: byte
-    name: _completionFlags
+    name: CompletionFlags
     offset: 8
     size: 11
   - type: byte
@@ -14434,11 +14434,11 @@ structs:
     name: DisplayCount
     offset: 29
   - type: int
-    name: _displayIds
+    name: DisplayIds
     offset: 32
     size: 19
   - type: int
-    name: _displayStatuses
+    name: DisplayStatuses
     offset: 108
     size: 19
   virtual_functions: []
@@ -14579,7 +14579,7 @@ structs:
   size: 72
   fields:
   - type: byte
-    name: _name
+    name: Name
     offset: 0
     size: 64
   - type: unsigned int
@@ -15060,7 +15060,7 @@ structs:
   size: 2840
   fields:
   - type: unsigned int
-    name: _jobs
+    name: Jobs
     offset: 0
     size: 8
   - type: Client::Game::UI::RecipeNote::RecipeData*
@@ -15097,7 +15097,7 @@ structs:
     name: RelicNoteId
     offset: 9
   - type: byte
-    name: _monsterProgress
+    name: MonsterProgress
     offset: 10
     size: 10
   - type: int
@@ -15426,23 +15426,23 @@ structs:
     name: Manager
     offset: 0
   - type: byte
-    name: _craftObjectIds
+    name: CraftObjectIds
     offset: 24
     size: 9
   - type: byte
-    name: _numDelivered
+    name: NumDelivered
     offset: 33
     size: 9
   - type: byte
-    name: _flags1
+    name: Flags1
     offset: 42
     size: 9
   - type: byte
-    name: _flags2
+    name: Flags2
     offset: 51
     size: 9
   - type: byte
-    name: _numScheduled
+    name: NumScheduled
     offset: 60
     size: 9
   - type: int
@@ -15469,11 +15469,11 @@ structs:
     name: RareResourceCount
     offset: 4
   - type: byte
-    name: _normalResourcePouchIds
+    name: NormalResourcePouchIds
     offset: 6
     size: 20
   - type: byte
-    name: _normalResourceCounts
+    name: NormalResourceCounts
     offset: 26
     size: 20
   - type: unsigned int
@@ -15488,7 +15488,7 @@ structs:
   size: 152
   fields:
   - type: Client::Game::MJI::MJIGranaryState
-    name: _granary
+    name: Granary
     offset: 0
     size: 2
   virtual_functions: []
@@ -15568,7 +15568,7 @@ structs:
     name: SlotId
     offset: 0
   - type: byte
-    name: _nickname
+    name: Nickname
     offset: 1
     size: 24
   - type: unsigned int
@@ -15642,7 +15642,7 @@ structs:
     name: NeededExperience
     offset: 4
   - type: byte
-    name: _holsterActions
+    name: HolsterActions
     offset: 108
     size: 100
   virtual_functions: []
@@ -15954,7 +15954,7 @@ structs:
     name: Esprit
     offset: 9
   - type: byte
-    name: _danceSteps
+    name: DanceSteps
     offset: 10
     size: 4
   - type: byte
@@ -16315,15 +16315,15 @@ structs:
   size: 496
   fields:
   - type: Client::System::Scheduler::Base::SchedulerTimeline**
-    name: _schedulerTimelines
+    name: SchedulerTimelines
     offset: 112
     size: 14
   - type: unsigned __int16
-    name: _timelineIds
+    name: TimelineIds
     offset: 224
     size: 14
   - type: float
-    name: _timelineSpeeds
+    name: TimelineSpeeds
     offset: 340
     size: 14
   - type: Client::Game::Character::Character*
@@ -16454,7 +16454,7 @@ structs:
     name: Length
     offset: 0
   - type: Client::Game::Object::GameObject*
-    name: _objects
+    name: Objects
     offset: 8
     size: 599
   virtual_functions: []
@@ -16554,7 +16554,7 @@ structs:
   size: 824
   fields:
   - type: Client::Game::Character::BattleChara*
-    name: _battleCharas
+    name: BattleCharas
     offset: 0
     size: 100
   - type: Client::Game::Character::BattleChara*
@@ -16872,7 +16872,7 @@ structs:
     name: ModelState
     offset: 704
   - type: byte
-    name: _animationState
+    name: AnimationState
     offset: 705
     size: 2
   - type: float
@@ -16978,11 +16978,11 @@ structs:
     name: LobbyCount
     offset: 40
   - type: unsigned int
-    name: _lobbyPorts
+    name: LobbyPorts
     offset: 44
     size: 12
   - type: Client::System::String::Utf8String
-    name: _lobbyHosts
+    name: LobbyHosts
     offset: 96
     size: 12
   - type: int
@@ -17161,7 +17161,7 @@ structs:
     name: Flags
     offset: 11
   - type: byte
-    name: _variables
+    name: Variables
     offset: 12
     size: 6
   - type: byte
@@ -17199,7 +17199,7 @@ structs:
     name: Id
     offset: 0
   - type: byte
-    name: _paramTypes
+    name: ParamTypes
     offset: 1
     size: 7
   - type: int
@@ -17401,11 +17401,11 @@ structs:
   size: 240
   fields:
   - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: _textureResourceHandles
+    name: TextureResourceHandles
     offset: 0
     size: 10
   - type: Client::Graphics::Kernel::Texture*
-    name: _textures
+    name: Textures
     offset: 88
     size: 10
   - type: unsigned __int16
@@ -17686,7 +17686,7 @@ structs:
   size: 132
   fields:
   - type: Common::Component::BGCollision::Collider*
-    name: _colliders
+    name: Colliders
     offset: 0
     size: 16
   - type: int
@@ -17732,11 +17732,11 @@ structs:
     name: ComponentBase
     offset: 0
   - type: Component::GUI::AtkComponentBase*
-    name: _components
+    name: Components
     offset: 8
     size: 4
   - type: Component::GUI::AtkResNode*
-    name: _nodes
+    name: Nodes
     offset: 40
     size: 4
   virtual_functions: []
@@ -17851,7 +17851,7 @@ structs:
     name: AetherflowStacks
     offset: 8
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 9
     size: 1
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
@@ -17872,7 +17872,7 @@ structs:
     name: FaeMax
     offset: 12
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 16
     size: 3
   - type: int
@@ -17993,7 +17993,7 @@ structs:
     name: AetherflowStacks
     offset: 8
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 12
     size: 1
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
@@ -18072,7 +18072,7 @@ structs:
   size: 56
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -18094,7 +18094,7 @@ structs:
     name: GarudaReady
     offset: 30
   - type: int
-    name: _prerequisites2
+    name: Prerequisites2
     offset: 32
     size: 3
   - type: int
@@ -18115,7 +18115,7 @@ structs:
   size: 64
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 3
   - type: int
@@ -18174,7 +18174,7 @@ structs:
   size: 56
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 5
   - type: int
@@ -18228,11 +18228,11 @@ structs:
     name: ElementalTimerDisplay
     offset: 32
   - type: Component::GUI::AtkComponentBase*
-    name: _elementStack
+    name: ElementStack
     offset: 40
     size: 3
   - type: Component::GUI::AtkComponentBase*
-    name: _umbralHearts
+    name: UmbralHearts
     offset: 64
     size: 3
   - type: Component::GUI::AtkComponentBase*
@@ -18245,7 +18245,7 @@ structs:
     name: EnochianGaugeBar
     offset: 104
   - type: Component::GUI::AtkComponentBase*
-    name: _polyglotGem
+    name: PolyglotGem
     offset: 112
     size: 2
   - type: Component::GUI::AtkComponentBase*
@@ -18281,7 +18281,7 @@ structs:
   size: 64
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 6
   - type: int
@@ -18368,11 +18368,11 @@ structs:
     name: ApexArrowStatus
     offset: 112
   - type: Component::GUI::AtkComponentBase*
-    name: _armyRepertoireNote
+    name: ArmyRepertoireNote
     offset: 120
     size: 4
   - type: Component::GUI::AtkComponentBase*
-    name: _wandererRepertoireArrow
+    name: WandererRepertoireArrow
     offset: 152
     size: 3
   - type: Component::GUI::AtkResNode*
@@ -18388,7 +18388,7 @@ structs:
     name: SongsPlayed
     offset: 200
   - type: Component::GUI::AtkComponentBase*
-    name: _songIcon
+    name: SongIcon
     offset: 208
     size: 3
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
@@ -18436,11 +18436,11 @@ structs:
     name: SoulVoiceTickmark
     offset: 96
   - type: Component::GUI::AtkComponentBase*
-    name: _armyRepertoireGem
+    name: ArmyRepertoireGem
     offset: 104
     size: 4
   - type: Component::GUI::AtkComponentBase*
-    name: _wandererRepertoireGem
+    name: WandererRepertoireGem
     offset: 136
     size: 3
   - type: Component::GUI::AtkResNode*
@@ -18450,7 +18450,7 @@ structs:
     name: SongsPlayed
     offset: 168
   - type: Component::GUI::AtkComponentBase*
-    name: _songIcon
+    name: SongIcon
     offset: 176
     size: 3
   - type: byte
@@ -18468,7 +18468,7 @@ structs:
   size: 48
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -18478,7 +18478,7 @@ structs:
     name: CompletedSteps
     offset: 16
   - type: int
-    name: _steps
+    name: Steps
     offset: 20
     size: 4
   - type: int
@@ -18505,7 +18505,7 @@ structs:
     name: DanceStatus
     offset: 24
   - type: Component::GUI::AtkComponentBase*
-    name: _stepIcons
+    name: StepIcons
     offset: 32
     size: 4
   - type: int
@@ -18541,7 +18541,7 @@ structs:
     name: DanceStatus
     offset: 24
   - type: Component::GUI::AtkComponentBase*
-    name: _stepIcons
+    name: StepIcons
     offset: 32
     size: 4
   - type: int
@@ -18571,7 +18571,7 @@ structs:
   size: 32
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -18604,7 +18604,7 @@ structs:
     name: FeatherContainer
     offset: 24
   - type: Component::GUI::AtkComponentBase*
-    name: _feathers
+    name: Feathers
     offset: 32
     size: 4
   - type: int
@@ -18655,7 +18655,7 @@ structs:
     name: FeatherContainer
     offset: 24
   - type: Component::GUI::AtkComponentBase*
-    name: _feathers
+    name: Feathers
     offset: 32
     size: 4
   - type: int
@@ -18688,7 +18688,7 @@ structs:
     name: GaugeData
     offset: 0
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 3
   - type: int
@@ -18815,7 +18815,7 @@ structs:
     name: GaugeData
     offset: 0
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: byte
@@ -18897,7 +18897,7 @@ structs:
     name: GaugeData
     offset: 0
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 3
   - type: int
@@ -18976,7 +18976,7 @@ structs:
   size: 16
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 4
   - type: int
@@ -18997,11 +18997,11 @@ structs:
     name: Container
     offset: 16
   - type: Component::GUI::AtkComponentBase*
-    name: _ammo
+    name: Ammo
     offset: 24
     size: 3
   - type: Component::GUI::AtkResNode*
-    name: _ammoNode
+    name: AmmoNode
     offset: 48
     size: 3
   - type: Component::GUI::AtkResNode*
@@ -19025,11 +19025,11 @@ structs:
   size: 104
   fields:
   - type: Component::GUI::AtkComponentBase*
-    name: _ammoGem
+    name: AmmoGem
     offset: 16
     size: 3
   - type: Component::GUI::AtkResNode*
-    name: _ammoGemGlow
+    name: AmmoGemGlow
     offset: 40
     size: 3
   - type: Component::GUI::AtkComponentBase*
@@ -19053,7 +19053,7 @@ structs:
     name: GaugeData
     offset: 0
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -19189,7 +19189,7 @@ structs:
   size: 40
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -19295,7 +19295,7 @@ structs:
   size: 16
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 1
   - type: int
@@ -19316,7 +19316,7 @@ structs:
     name: Container
     offset: 16
   - type: Component::GUI::AtkComponentBase*
-    name: _chakra
+    name: Chakra
     offset: 24
     size: 5
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
@@ -19334,7 +19334,7 @@ structs:
     name: Container
     offset: 16
   - type: Component::GUI::AtkComponentBase*
-    name: _chakra
+    name: Chakra
     offset: 24
     size: 5
   - type: byte
@@ -19352,7 +19352,7 @@ structs:
   size: 24
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 1
   - type: int
@@ -19428,7 +19428,7 @@ structs:
   size: 24
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -19461,7 +19461,7 @@ structs:
     name: ValueText
     offset: 32
   - type: Component::GUI::AtkComponentBase*
-    name: _blade
+    name: Blade
     offset: 40
     size: 6
   - type: int
@@ -19508,7 +19508,7 @@ structs:
     name: GaugeData
     offset: 0
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 3
   - type: int
@@ -19587,7 +19587,7 @@ structs:
   size: 40
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 3
   - type: int
@@ -19626,7 +19626,7 @@ structs:
     name: WhiteManaGaugeBar
     offset: 24
   - type: Component::GUI::AtkComponentTextNineGrid*
-    name: _manaValueDisplay
+    name: ManaValueDisplay
     offset: 32
     size: 2
   - type: Component::GUI::AtkResNode*
@@ -19680,7 +19680,7 @@ structs:
   size: 40
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -19807,7 +19807,7 @@ structs:
   size: 32
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -19831,7 +19831,7 @@ structs:
   size: 24
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 3
   - type: int
@@ -19876,11 +19876,11 @@ structs:
     name: MeditationContainer
     offset: 64
   - type: Component::GUI::AtkComponentBase*
-    name: _meditationGem
+    name: MeditationGem
     offset: 72
     size: 3
   - type: byte
-    name: _hasMeditationStack
+    name: HasMeditationStack
     offset: 96
     size: 3
   - type: byte
@@ -19943,11 +19943,11 @@ structs:
     name: MeditationContainer
     offset: 48
   - type: Component::GUI::AtkComponentBase*
-    name: _meditationStacks
+    name: MeditationStacks
     offset: 56
     size: 3
   - type: byte
-    name: _hasMeditationStack
+    name: HasMeditationStack
     offset: 80
     size: 3
   - type: byte
@@ -19977,7 +19977,7 @@ structs:
   size: 16
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 1
   - type: byte
@@ -20092,7 +20092,7 @@ structs:
   size: 16
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 1
   - type: byte
@@ -20144,7 +20144,7 @@ structs:
   size: 32
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -20177,11 +20177,11 @@ structs:
     name: AdderstingContainer
     offset: 16
   - type: Component::GUI::AtkComponentBase*
-    name: _addersgallGem
+    name: AddersgallGem
     offset: 24
     size: 3
   - type: Component::GUI::AtkComponentBase*
-    name: _adderstingGem
+    name: AdderstingGem
     offset: 48
     size: 3
   - type: Component::GUI::AtkResNode*
@@ -20217,11 +20217,11 @@ structs:
     name: AdderstingContainer
     offset: 16
   - type: Component::GUI::AtkComponentBase*
-    name: _addersgallGem
+    name: AddersgallGem
     offset: 24
     size: 3
   - type: Component::GUI::AtkComponentBase*
-    name: _adderstingGem
+    name: AdderstingGem
     offset: 48
     size: 3
   - type: Component::GUI::AtkComponentGaugeBar*
@@ -20254,7 +20254,7 @@ structs:
     name: GaugeData
     offset: 0
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 3
   - type: int
@@ -20333,7 +20333,7 @@ structs:
   size: 32
   fields:
   - type: byte
-    name: _prerequisites
+    name: Prerequisites
     offset: 8
     size: 2
   - type: int
@@ -20372,7 +20372,7 @@ structs:
     name: LiliesSpent
     offset: 40
   - type: Component::GUI::AtkComponentBase*
-    name: _lily
+    name: Lily
     offset: 48
     size: 3
   - type: int
@@ -20660,7 +20660,7 @@ structs:
   size: 248
   fields:
   - type: Component::GUI::AtkComponentIconText*
-    name: _statusIcons
+    name: StatusIcons
     offset: 0
     size: 10
   - type: Component::GUI::AtkComponentBase*
@@ -21076,7 +21076,7 @@ structs:
   size: 12
   fields:
   - type: byte
-    name: _aozActionIds
+    name: AozActionIds
     offset: 0
     size: 12
   virtual_functions: []
@@ -21088,7 +21088,7 @@ structs:
   size: 16
   fields:
   - type: byte
-    name: _aozActionIds
+    name: AozActionIds
     offset: 0
     size: 16
   virtual_functions: []
@@ -21100,7 +21100,7 @@ structs:
   size: 12
   fields:
   - type: byte
-    name: _macroFlags
+    name: MacroFlags
     offset: 0
     size: 12
   virtual_functions: []
@@ -21112,7 +21112,7 @@ structs:
   size: 16
   fields:
   - type: byte
-    name: _macroFlags
+    name: MacroFlags
     offset: 0
     size: 16
   virtual_functions: []
@@ -21167,7 +21167,7 @@ structs:
     name: Index
     offset: 4
   - type: byte
-    name: _name
+    name: Name
     offset: 6
     size: 32
   virtual_functions: []
@@ -21179,11 +21179,11 @@ structs:
   size: 58
   fields:
   - type: byte
-    name: _name
+    name: Name
     offset: 0
     size: 48
   - type: unsigned __int16
-    name: _cards
+    name: Cards
     offset: 48
     size: 5
   virtual_functions: []
@@ -21221,7 +21221,7 @@ structs:
   size: 56
   fields:
   - type: float
-    name: _timerHistory
+    name: TimerHistory
     offset: 0
     size: 10
   - type: float
@@ -21265,11 +21265,11 @@ structs:
     name: Stain
     offset: 8
   - type: unsigned __int16
-    name: _materia
+    name: Materia
     offset: 10
     size: 5
   - type: byte
-    name: _materiaGrades
+    name: MateriaGrades
     offset: 20
     size: 5
   - type: Client::UI::Misc::RaptureGearsetModule::GearsetItemFlag
@@ -21287,7 +21287,7 @@ structs:
     name: Id
     offset: 0
   - type: byte
-    name: _name
+    name: Name
     offset: 1
     size: 48
   - type: byte
@@ -21306,7 +21306,7 @@ structs:
     name: Flags
     offset: 55
   - type: Client::UI::Misc::RaptureGearsetModule::GearsetItem
-    name: _items
+    name: Items
     offset: 56
     size: 14
   virtual_functions: []
@@ -21365,15 +21365,15 @@ structs:
     name: PopUpHelp
     offset: 0
   - type: byte
-    name: _costText
+    name: CostText
     offset: 104
     size: 32
   - type: byte
-    name: _popUpKeybindHint
+    name: PopUpKeybindHint
     offset: 136
     size: 32
   - type: byte
-    name: _keybindHint
+    name: KeybindHint
     offset: 168
     size: 16
   - type: unsigned int
@@ -21667,7 +21667,7 @@ structs:
     name: Name
     offset: 8
   - type: Client::System::String::Utf8String
-    name: _lines
+    name: Lines
     offset: 112
     size: 15
   virtual_functions: []
@@ -21724,7 +21724,7 @@ structs:
     name: Id
     offset: 0
   - type: byte
-    name: _comment
+    name: Comment
     offset: 8
     size: 91
   virtual_functions: []
@@ -21742,7 +21742,7 @@ structs:
     name: IsPublic
     offset: 1
   - type: byte
-    name: _name
+    name: Name
     offset: 2
     size: 32
   virtual_functions: []
@@ -21804,11 +21804,11 @@ structs:
     name: Job
     offset: 41
   - type: byte
-    name: _name
+    name: Name
     offset: 42
     size: 32
   - type: byte
-    name: _FCTag
+    name: FCTag
     offset: 74
     size: 6
   - type: Client::UI::Info::InfoProxyCommonList::CharacterIndex*
@@ -21866,7 +21866,7 @@ structs:
     name: LanguageMask
     offset: 17
   - type: byte
-    name: _searchComment
+    name: SearchComment
     offset: 18
     size: 193
   virtual_functions: []
@@ -21878,7 +21878,7 @@ structs:
   size: 88
   fields:
   - type: byte
-    name: _permissions
+    name: Permissions
     offset: 0
     size: 10
   - type: unsigned __int16
@@ -21888,7 +21888,7 @@ structs:
     name: RankNumber
     offset: 34
   - type: byte
-    name: _name
+    name: Name
     offset: 35
     size: 16
   virtual_functions: []
@@ -21900,7 +21900,7 @@ structs:
   size: 64
   fields:
   - type: byte
-    name: _value
+    name: Value
     offset: 0
     size: 64
   virtual_functions: []
@@ -22028,7 +22028,7 @@ structs:
     name: TimeSinceUpdate
     offset: 0
   - type: unsigned int
-    name: _timeRemainingAtUpdate
+    name: TimeRemainingAtUpdate
     offset: 4
     size: 3
   virtual_functions: []
@@ -22117,14 +22117,14 @@ structs:
     name: SpotId
     offset: 0
   - type: Client::UI::Agent::AgentIKDFishingLog::LogEntry
-    name: _catchEntries
+    name: CatchEntries
     offset: 4
     size: 10
   - type: unsigned int
     name: SpecialSpotId
     offset: 164
   - type: Client::UI::Agent::AgentIKDFishingLog::LogEntry
-    name: _specialCatchEntries
+    name: SpecialCatchEntries
     offset: 168
     size: 10
   virtual_functions: []
@@ -22405,15 +22405,15 @@ structs:
     name: ItemId
     offset: 0
   - type: unsigned __int16
-    name: _themeIds
+    name: ThemeIds
     offset: 2
     size: 3
   - type: unsigned __int16
-    name: _materialItemPouchRowIds
+    name: MaterialItemPouchRowIds
     offset: 8
     size: 4
   - type: unsigned __int16
-    name: _materialCosts
+    name: MaterialCosts
     offset: 16
     size: 4
   - type: unsigned __int16
@@ -22513,7 +22513,7 @@ structs:
     name: EntryIndex
     offset: 0
   - type: unsigned __int16
-    name: _usedAmounts
+    name: UsedAmounts
     offset: 2
     size: 109
   - type: unsigned int
@@ -22645,7 +22645,7 @@ structs:
     name: ConfirmText
     offset: 0
   - type: Client::System::String::Utf8String
-    name: _finishTimeText
+    name: FinishTimeText
     offset: 104
     size: 2
   virtual_functions: []
@@ -22663,11 +22663,11 @@ structs:
     name: Name
     offset: 8
   - type: unsigned int
-    name: _normalItemIds
+    name: NormalItemIds
     offset: 112
     size: 20
   - type: unsigned int
-    name: _normalIconIds
+    name: NormalIconIds
     offset: 192
     size: 20
   - type: byte
@@ -23059,7 +23059,7 @@ structs:
     name: Unk1
     offset: 16
   - type: byte
-    name: _buffer
+    name: Buffer
     offset: 18
     size: 46
   virtual_functions: []
@@ -23071,7 +23071,7 @@ structs:
   size: 160
   fields:
   - type: StdMap<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>*
-    name: _categoryMaps
+    name: CategoryMaps
     offset: 0
     size: 20
   virtual_functions: []
@@ -23202,11 +23202,11 @@ structs:
     name: CharacterId
     offset: 20
   - type: unsigned int
-    name: _skeletonMappers
+    name: SkeletonMappers
     offset: 24
     size: 4
   - type: unsigned __int16
-    name: _connectBoneIds
+    name: ConnectBoneIds
     offset: 40
     size: 4
   virtual_functions: []
@@ -23529,11 +23529,11 @@ structs:
   size: 60
   fields:
   - type: unsigned int
-    name: _itemIds
+    name: ItemIds
     offset: 0
     size: 12
   - type: byte
-    name: _stainIds
+    name: StainIds
     offset: 48
     size: 12
   virtual_functions: []
@@ -23548,7 +23548,7 @@ structs:
     name: RetainerId
     offset: 0
   - type: byte
-    name: _name
+    name: Name
     offset: 8
     size: 32
   - type: byte
@@ -23610,7 +23610,7 @@ structs:
   size: 20
   fields:
   - type: int
-    name: _counts
+    name: Counts
     offset: 0
     size: 5
   virtual_functions: []
@@ -23698,11 +23698,11 @@ structs:
   size: 1280
   fields:
   - type: Client::Game::UI::RecipeNote::RecipeIngredient
-    name: _ingredients
+    name: Ingredients
     offset: 0
     size: 8
   - type: Client::Game::UI::RecipeNote::RecipeCrystal
-    name: _crystals
+    name: Crystals
     offset: 1088
     size: 2
   - type: Client::System::String::Utf8String
@@ -23816,15 +23816,15 @@ structs:
   size: 14384
   fields:
   - type: Client::Game::Object::GameObject*
-    name: _indexSorted
+    name: IndexSorted
     offset: 0
     size: 599
   - type: Client::Game::Object::GameObject*
-    name: _gameObjectIdSorted
+    name: GameObjectIdSorted
     offset: 4792
     size: 599
   - type: Client::Game::Object::GameObject*
-    name: _entityIdSorted
+    name: EntityIdSorted
     offset: 9584
     size: 599
   - type: int
@@ -23935,7 +23935,7 @@ structs:
     name: TotalPoints
     offset: 4
   - type: byte
-    name: _playerName
+    name: PlayerName
     offset: 8
     size: 32
   virtual_functions: []
@@ -23959,7 +23959,7 @@ structs:
     name: Scrip2Amount
     offset: 16
   - type: byte
-    name: _bonuses
+    name: Bonuses
     offset: 18
     size: 16
   virtual_functions: []
@@ -24028,7 +24028,7 @@ structs:
   size: 64
   fields:
   - type: Client::Game::Character::ActionEffectHandler::Effect
-    name: _effects
+    name: Effects
     offset: 0
     size: 8
   virtual_functions: []
@@ -24129,7 +24129,7 @@ structs:
     name: ResponseSourceSequence
     offset: 80
   - type: Client::Game::Object::GameObjectId
-    name: _responseTargetIds
+    name: ResponseTargetIds
     offset: 88
     size: 32
   - type: byte
@@ -24461,7 +24461,7 @@ structs:
   size: 16
   fields:
   - type: float
-    name: _f32
+    name: F32
     offset: 0
     size: 4
   virtual_functions: []
@@ -28078,7 +28078,7 @@ structs:
     name: TextInput
     offset: 0
   - type: Component::GUI::AtkInputManager::FocusEntry
-    name: _focusList
+    name: FocusList
     offset: 128
     size: 256
   virtual_functions: []
@@ -28742,7 +28742,7 @@ structs:
     name: IconLanguage
     offset: 44
   - type: StdPair<unsigned int, unsigned int>
-    name: _localizedIconRange
+    name: LocalizedIconRange
     offset: 48
     size: 4
   - type: unsigned int
@@ -28763,7 +28763,7 @@ structs:
     name: EndFrameIdx
     offset: 2
   - type: Component::GUI::AtkTimelineKeyGroup
-    name: _keyGroups
+    name: KeyGroups
     offset: 8
     size: 8
   virtual_functions: []
@@ -28803,7 +28803,7 @@ structs:
   size: 60
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 16
     size: 5
   - type: int
@@ -28836,7 +28836,7 @@ structs:
   size: 124
   fields:
   - type: unsigned int
-    name: _nodes
+    name: Nodes
     offset: 16
     size: 16
   - type: Client::Graphics::ByteColor
@@ -28867,7 +28867,7 @@ structs:
     name: Flags2
     offset: 107
   - type: byte
-    name: _charSetExtras
+    name: CharSetExtras
     offset: 108
     size: 16
   - type: Component::GUI::AtkUldComponentDataInputBase
@@ -29442,7 +29442,7 @@ structs:
   size: 480
   fields:
   - type: byte
-    name: _pathBase
+    name: PathBase
     offset: 168
     size: 256
   - type: Common::Component::BGCollision::Resource*
@@ -30901,40 +30901,40 @@ structs:
     name: UIModule
     offset: 16
   - type: Client::UI::UI3DModule::ObjectInfo
-    name: _objectInfos
+    name: ObjectInfos
     offset: 32
     size: 599
   - type: Client::UI::UI3DModule::ObjectInfo*
-    name: _sortedObjectInfoPointers
+    name: SortedObjectInfoPointers
     offset: 57536
     size: 599
   - type: int
     name: SortedObjectInfoCount
     offset: 62328
   - type: Client::UI::UI3DModule::ObjectInfo*
-    name: _namePlateObjectInfoPointers
+    name: NamePlateObjectInfoPointers
     offset: 62336
     size: 50
   - type: int
     name: NamePlateObjectInfoCount
     offset: 62736
   - type: Client::Game::Object::GameObjectId
-    name: _namePlateObjectIds
+    name: NamePlateObjectIds
     offset: 62776
     size: 50
   - type: Client::Game::Object::GameObjectId
-    name: _namePlateObjectIds_2
+    name: NamePlateObjectIds_2
     offset: 63176
     size: 50
   - type: Client::UI::UI3DModule::ObjectInfo*
-    name: _characterObjectInfoPointers
+    name: CharacterObjectInfoPointers
     offset: 63576
     size: 50
   - type: int
     name: CharacterObjectInfoCount
     offset: 63976
   - type: Client::UI::UI3DModule::ObjectInfo*
-    name: _mapObjectInfoPointers
+    name: MapObjectInfoPointers
     offset: 63984
     size: 68
   - type: int
@@ -30944,11 +30944,11 @@ structs:
     name: TargetObjectInfo
     offset: 64536
   - type: Client::UI::UI3DModule::MemberInfo
-    name: _memberInfos
+    name: MemberInfos
     offset: 64544
     size: 48
   - type: Client::UI::UI3DModule::MemberInfo*
-    name: _memberInfoPointers
+    name: MemberInfoPointers
     offset: 66464
     size: 48
   - type: int
@@ -31120,7 +31120,7 @@ structs:
     name: IsGameWindowFocused
     offset: 1268
   - type: Client::UI::KeyStateFlags
-    name: _keyState
+    name: KeyState
     offset: 1276
     size: 159
   - type: byte
@@ -31144,7 +31144,7 @@ structs:
   size: 136
   fields:
   - type: unsigned __int16
-    name: _watchList
+    name: WatchList
     offset: 66
     size: 30
   - type: byte
@@ -31274,7 +31274,7 @@ structs:
   size: 4344
   fields:
   - type: Client::UI::Misc::AcquaintanceModule::Acquaintance
-    name: _tellHistory
+    name: TellHistory
     offset: 64
     size: 16
   - type: unsigned int
@@ -31626,11 +31626,11 @@ structs:
   size: 15968
   fields:
   - type: Client::UI::Misc::BannerModuleEntry
-    name: _entries
+    name: Entries
     offset: 0
     size: 110
   - type: byte
-    name: _bannerId2BannerIndex
+    name: BannerId2BannerIndex
     offset: 15840
     size: 110
   - type: byte
@@ -31665,11 +31665,11 @@ structs:
     name: CustomizeData
     offset: 0
   - type: unsigned int
-    name: _itemIds
+    name: ItemIds
     offset: 28
     size: 14
   - type: byte
-    name: _itemStains
+    name: ItemStains
     offset: 84
     size: 14
   - type: byte
@@ -31708,11 +31708,11 @@ structs:
     name: UIModule
     offset: 40
   - type: Client::UI::Misc::ConfigModule::Option
-    name: _options
+    name: Options
     offset: 712
     size: 715
   - type: Client::UI::Misc::ConfigModule::OptionValue
-    name: _values
+    name: Values
     offset: 23608
     size: 715
   virtual_functions: []
@@ -31724,15 +31724,15 @@ structs:
   size: 376
   fields:
   - type: unsigned __int16
-    name: _history
+    name: History
     offset: 66
     size: 6
   - type: unsigned __int16
-    name: _favorites
+    name: Favorites
     offset: 78
     size: 20
   - type: byte
-    name: _seenEmotesBitmask
+    name: SeenEmotesBitmask
     offset: 118
     size: 1
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -31883,7 +31883,7 @@ structs:
   size: 3192
   fields:
   - type: Client::UI::Misc::FieldMarkerPreset
-    name: _presets
+    name: Presets
     offset: 64
     size: 30
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -31974,7 +31974,7 @@ structs:
   size: 680
   fields:
   - type: byte
-    name: _flags
+    name: Flags
     offset: 420
     size: 64
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -32065,15 +32065,15 @@ structs:
   size: 712
   fields:
   - type: Client::UI::Misc::GoldSaucerModule::TripleTriadDeck
-    name: _decks
+    name: Decks
     offset: 64
     size: 10
   - type: unsigned __int16
-    name: _hotbarMinions
+    name: HotbarMinions
     offset: 644
     size: 23
   - type: unsigned __int16
-    name: _unseenCards
+    name: UnseenCards
     offset: 692
     size: 10
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -32248,7 +32248,7 @@ structs:
     name: IsCharacterOrientedCamera
     offset: 128
   - type: Client::UI::Misc::GroupPoseModule::Light
-    name: _lights
+    name: Lights
     offset: 144
     size: 3
   - type: byte
@@ -32402,11 +32402,11 @@ structs:
     name: RightStickY
     offset: 88
   - type: Client::UI::Misc::InputTimerModule::InputTimerData
-    name: _controllerInputTimers
+    name: ControllerInputTimers
     offset: 92
     size: 16
   - type: Client::UI::Misc::InputTimerModule::InputTimerData
-    name: _mouseInputTimers
+    name: MouseInputTimers
     offset: 988
     size: 5
   virtual_functions: []
@@ -32418,11 +32418,11 @@ structs:
   size: 400
   fields:
   - type: byte
-    name: _firstTier
+    name: FirstTier
     offset: 64
     size: 128
   - type: byte
-    name: _secondTier
+    name: SecondTier
     offset: 192
     size: 128
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -32519,7 +32519,7 @@ structs:
   size: 4560
   fields:
   - type: unsigned int
-    name: _requestItemIds
+    name: RequestItemIds
     offset: 64
     size: 24
   - type: byte
@@ -32559,23 +32559,23 @@ structs:
     name: RetainerInventoryCount
     offset: 192
   - type: unsigned int
-    name: _saddleBagItemIds
+    name: SaddleBagItemIds
     offset: 200
     size: 70
   - type: unsigned int
-    name: _premiumSaddleBagItemIds
+    name: PremiumSaddleBagItemIds
     offset: 480
     size: 70
   - type: unsigned __int16
-    name: _saddleBagItemCount
+    name: SaddleBagItemCount
     offset: 760
     size: 70
   - type: unsigned __int16
-    name: _premiumSaddleBagItemCount
+    name: PremiumSaddleBagItemCount
     offset: 900
     size: 70
   - type: unsigned int
-    name: _glamourDresserItemIds
+    name: GlamourDresserItemIds
     offset: 1040
     size: 800
   - type: Client::UI::Misc::ItemFinderModuleResult*
@@ -33014,11 +33014,11 @@ structs:
   size: 152
   fields:
   - type: unsigned __int16
-    name: _unseenCompanions
+    name: UnseenCompanions
     offset: 66
     size: 10
   - type: unsigned __int16
-    name: _favorites
+    name: Favorites
     offset: 86
     size: 30
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -33171,11 +33171,11 @@ structs:
   size: 152
   fields:
   - type: unsigned __int16
-    name: _unseenMounts
+    name: UnseenMounts
     offset: 66
     size: 10
   - type: unsigned __int16
-    name: _favorites
+    name: Favorites
     offset: 86
     size: 30
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -33298,7 +33298,7 @@ structs:
   size: 152
   fields:
   - type: Client::UI::Misc::PvpSetModule::AdditionalPvpActions
-    name: _additionalActions
+    name: AdditionalActions
     offset: 64
     size: 20
   - type: byte
@@ -33392,7 +33392,7 @@ structs:
   size: 46704
   fields:
   - type: Client::UI::Misc::RaptureGearsetModule::GearsetEntry
-    name: _entries
+    name: Entries
     offset: 72
     size: 100
   - type: int
@@ -33621,11 +33621,11 @@ structs:
     name: RaptureTextModule
     offset: 64
   - type: Client::UI::Misc::RaptureMacroModule::Macro
-    name: _individual
+    name: Individual
     offset: 88
     size: 100
   - type: Client::UI::Misc::RaptureMacroModule::Macro
-    name: _shared
+    name: Shared
     offset: 167288
     size: 100
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -33863,15 +33863,15 @@ structs:
   size: 23272
   fields:
   - type: unsigned __int16
-    name: _partyListTankOrder
+    name: PartyListTankOrder
     offset: 1240
     size: 16
   - type: unsigned __int16
-    name: _partyListHealerOrder
+    name: PartyListHealerOrder
     offset: 1272
     size: 16
   - type: unsigned __int16
-    name: _partyListDpsOrder
+    name: PartyListDpsOrder
     offset: 1304
     size: 16
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -33974,7 +33974,7 @@ structs:
   size: 1440
   fields:
   - type: Client::UI::Misc::RetainerCommentModule::RetainerComment
-    name: _retainers
+    name: Retainers
     offset: 72
     size: 10
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -34368,7 +34368,7 @@ structs:
   size: 7280
   fields:
   - type: Client::UI::Info::InfoProxyInterface*
-    name: _infoProxies
+    name: InfoProxies
     offset: 6520
     size: 34
   - type: unsigned __int64
@@ -34722,7 +34722,7 @@ structs:
   size: 6656
   fields:
   - type: __int64
-    name: _contentIds
+    name: ContentIds
     offset: 32
     size: 200
   - type: Client::System::String::Utf8String
@@ -34794,7 +34794,7 @@ structs:
     name: Query
     offset: 40
   - type: Client::UI::Info::InfoProxyCatalogSearch::Entry
-    name: _entries
+    name: Entries
     offset: 144
     size: 20
   - type: Client::UI::Info::InfoProxyPageInterface
@@ -35203,7 +35203,7 @@ structs:
     name: GroupMemberCount
     offset: 0
   - type: Client::UI::Info::CrossRealmMember
-    name: _groupMembers
+    name: GroupMembers
     offset: 8
     size: 8
   virtual_functions: []
@@ -35227,7 +35227,7 @@ structs:
     name: UnkString0
     offset: 160
   - type: Client::UI::Info::InfoProxyCrossWorldLinkshell::CrossWorldLinkshellEntry
-    name: _crossWorldLinkshells
+    name: CrossWorldLinkshells
     offset: 264
     size: 8
   - type: Client::UI::Info::InfoProxyInvitedInterface
@@ -35451,11 +35451,11 @@ structs:
     name: TotalMembers
     offset: 122
   - type: byte
-    name: _name
+    name: Name
     offset: 124
     size: 22
   - type: byte
-    name: _master
+    name: Master
     offset: 147
     size: 60
   - type: Client::System::String::Utf8String
@@ -35471,7 +35471,7 @@ structs:
     name: InfoTabIndex
     offset: 318
   - type: Client::UI::Info::InfoProxyFreeCompany::RankData
-    name: _ranks
+    name: Ranks
     offset: 376
     size: 14
   - type: Client::UI::Info::InfoProxyInterface
@@ -35728,7 +35728,7 @@ structs:
     name: Str5
     offset: 528
   - type: Client::UI::Info::InfoProxyFriendList::NameBuffer
-    name: _names
+    name: Names
     offset: 632
     size: 200
   - type: Client::UI::Info::InfoProxyCommonList
@@ -35817,7 +35817,7 @@ structs:
     name: UnkString1
     offset: 160
   - type: Client::UI::Info::InfoProxyLinkshell::Entry
-    name: _linkShells
+    name: LinkShells
     offset: 264
     size: 8
   - type: Client::UI::Info::InfoProxyInterface
@@ -36505,23 +36505,23 @@ structs:
     name: WeeklyCompletion
     offset: 360
   - type: byte
-    name: _weeklyAozContentIds
+    name: WeeklyAozContentIds
     offset: 361
     size: 3
   - type: byte
-    name: _noviceRequirements
+    name: NoviceRequirements
     offset: 364
     size: 3
   - type: byte
-    name: _moderateRequirements
+    name: ModerateRequirements
     offset: 367
     size: 3
   - type: byte
-    name: _advancedRequirements
+    name: AdvancedRequirements
     offset: 370
     size: 3
   - type: byte
-    name: _unkBytes
+    name: UnkBytes
     offset: 373
     size: 3
   - type: byte*
@@ -36615,7 +36615,7 @@ structs:
     name: CurrentEnemyIndex
     offset: 73
   - type: Client::UI::Agent::AozArrangementData
-    name: _arrangements
+    name: Arrangements
     offset: 74
     size: 3
   - type: Client::System::String::Utf8String
@@ -36628,7 +36628,7 @@ structs:
     name: AdvancedString
     offset: 760
   - type: Client::UI::Agent::AozWeeklyReward
-    name: _weeklyRewards
+    name: WeeklyRewards
     offset: 864
     size: 3
   - type: float
@@ -36867,11 +36867,11 @@ structs:
     name: BannerEntry
     offset: 288
   - type: unsigned int
-    name: _itemIds
+    name: ItemIds
     offset: 576
     size: 14
   - type: byte
-    name: _stainIds
+    name: StainIds
     offset: 632
     size: 14
   - type: unsigned int
@@ -37404,7 +37404,7 @@ structs:
     name: SelectedSupplyItemIndex
     offset: 153
   - type: unsigned int
-    name: _supplyItems
+    name: SupplyItems
     offset: 156
     size: 12
   - type: Client::UI::Agent::AgentInterface
@@ -37532,7 +37532,7 @@ structs:
   size: 5968
   fields:
   - type: Client::UI::Agent::ContextMenu
-    name: _contextMenus
+    name: ContextMenus
     offset: 40
     size: 2
   - type: Client::UI::Agent::ContextMenu*
@@ -38478,25 +38478,25 @@ structs:
   size: 20336
   fields:
   - type: Component::GUI::AtkValue
-    name: _values
+    name: Values
     offset: 0
     size: 151
   - type: Client::System::String::Utf8String
     name: Rating
     offset: 2440
   - type: Client::UI::Agent::ExplorationResultDataItemReturn
-    name: _itemReturn
+    name: ItemReturn
     offset: 2560
     size: 10
   - type: byte
     name: ItemReturnListCount
     offset: 4320
   - type: Client::System::String::Utf8String
-    name: _strings
+    name: Strings
     offset: 4328
     size: 100
   - type: Client::System::String::Utf8String*
-    name: _stringPointers
+    name: StringPointers
     offset: 14728
     size: 100
   - type: byte
@@ -38517,7 +38517,7 @@ structs:
     name: PageIndexOffset
     offset: 56
   - type: Client::System::String::Utf8String
-    name: _presetLabels
+    name: PresetLabels
     offset: 64
     size: 30
   - type: Client::System::String::Utf8String
@@ -39298,15 +39298,15 @@ structs:
     name: PlotType
     offset: 68
   - type: Client::UI::Agent::AgentHousingPlant::SelectedItem
-    name: _selectedItems
+    name: SelectedItems
     offset: 72
     size: 2
   - type: Client::UI::Agent::AgentHousingPlant::SelectedItem
-    name: _selectedItems2
+    name: SelectedItems2
     offset: 104
     size: 2
   - type: Client::UI::Agent::AgentHousingPlant::SelectableItem
-    name: _selectableItems
+    name: SelectableItems
     offset: 136
     size: 140
   - type: byte
@@ -39417,7 +39417,7 @@ structs:
     name: RouteId
     offset: 40
   - type: unsigned int
-    name: _spotIds
+    name: SpotIds
     offset: 44
     size: 3
   - type: unsigned int
@@ -39433,11 +39433,11 @@ structs:
     name: SpecialCurrent
     offset: 68
   - type: Client::UI::Agent::AgentIKDFishingLog::LogEntry
-    name: _logs
+    name: Logs
     offset: 72
     size: 3
   - type: Client::UI::Agent::AgentIKDFishingLog::PotentialCatchSpot
-    name: _potentialCatchSpots
+    name: PotentialCatchSpots
     offset: 132
     size: 3
   - type: byte
@@ -39554,11 +39554,11 @@ structs:
     name: ContextItemCount
     offset: 48
   - type: Component::GUI::AtkValue
-    name: _eventParams
+    name: EventParams
     offset: 56
     size: 98
   - type: byte
-    name: _eventIds
+    name: EventIds
     offset: 1624
     size: 84
   - type: unsigned int
@@ -39717,14 +39717,14 @@ structs:
   size: 482
   fields:
   - type: byte
-    name: _name
+    name: Name
     offset: 8
     size: 32
   - type: byte
     name: CurrentClassJobId
     offset: 40
   - type: unsigned __int16
-    name: _classJobLevels
+    name: ClassJobLevels
     offset: 42
     size: 30
   - type: byte
@@ -40258,7 +40258,7 @@ structs:
   size: 388
   fields:
   - type: Client::UI::Agent::MycItem
-    name: _items
+    name: Items
     offset: 0
     size: 48
   - type: int
@@ -40273,7 +40273,7 @@ structs:
   size: 640
   fields:
   - type: byte
-    name: _journalCategoryIds
+    name: JournalCategoryIds
     offset: 86
     size: 52
   - type: byte
@@ -40384,7 +40384,7 @@ structs:
   size: 944
   fields:
   - type: Client::UI::Agent::ReadyCheckEntry
-    name: _readyCheckEntries
+    name: ReadyCheckEntries
     offset: 176
     size: 48
   - type: Client::UI::Agent::AgentInterface
@@ -40553,7 +40553,7 @@ structs:
   size: 576
   fields:
   - type: Client::UI::Agent::ReconstructionBoxItemDonation
-    name: _donatedItems
+    name: DonatedItems
     offset: 80
     size: 10
   - type: int
@@ -40615,7 +40615,7 @@ structs:
     name: ItemCount
     offset: 0
   - type: Client::UI::Agent::AgentRetainerItemTransferData::DuplicateItemEntry
-    name: _duplicateItems
+    name: DuplicateItems
     offset: 16
     size: 140
   virtual_functions: []
@@ -40636,7 +40636,7 @@ structs:
     name: RetainerCount
     offset: 72
   - type: Client::UI::Agent::AgentRetainerList::Retainer
-    name: _retainers
+    name: Retainers
     offset: 80
     size: 10
   - type: Client::UI::Agent::AgentInterface
@@ -40795,7 +40795,7 @@ structs:
     name: DesynthItemId
     offset: 932
   - type: Client::UI::Agent::SalvageResult
-    name: _desynthResults
+    name: DesynthResults
     offset: 936
     size: 3
   - type: Client::UI::Agent::AgentInterface
@@ -40892,7 +40892,7 @@ structs:
     name: BalloonCounter
     offset: 892
   - type: Client::UI::Agent::BalloonSlot
-    name: _balloonSlots
+    name: BalloonSlots
     offset: 912
     size: 10
   - type: Client::UI::Agent::AgentInterface
@@ -40974,7 +40974,7 @@ structs:
   size: 640
   fields:
   - type: Client::UI::Agent::CharaSelectCharacterMapping
-    name: _characterMapping
+    name: CharacterMapping
     offset: 0
     size: 40
   virtual_functions: []
@@ -41082,7 +41082,7 @@ structs:
   size: 3200
   fields:
   - type: Client::System::Resource::ResourceGraph::CategoryContainer
-    name: _containers
+    name: Containers
     offset: 0
     size: 20
   virtual_functions: []
@@ -41999,7 +41999,7 @@ structs:
   size: 464
   fields:
   - type: Client::LayoutEngine::OutdoorPlotFixtureData
-    name: _fixture
+    name: Fixture
     offset: 40
     size: 8
   virtual_functions: []
@@ -42791,11 +42791,11 @@ structs:
     name: SamplerViewPositionId
     offset: 32
   - type: Client::Graphics::Kernel::ShaderSceneKey
-    name: _sceneKeys
+    name: SceneKeys
     offset: 40
     size: 6
   - type: Client::Graphics::Kernel::ShaderSubViewKey
-    name: _subViewKeys
+    name: SubViewKeys
     offset: 136
     size: 3
   - type: Client::System::Resource::Handle::ShaderCodeResourceHandle*
@@ -42839,7 +42839,7 @@ structs:
   size: 1184
   fields:
   - type: Client::Graphics::Kernel::Texture*
-    name: _renderTargets
+    name: RenderTargets
     offset: 32
     size: 64
   - type: unsigned int
@@ -42870,7 +42870,7 @@ structs:
     name: UnkBool_1
     offset: 616
   - type: Client::Graphics::Kernel::Texture*
-    name: _renderTargets2
+    name: RenderTargets2
     offset: 624
     size: 49
   - type: unsigned __int16
@@ -43085,11 +43085,11 @@ structs:
     name: LastHandledActionSequence
     offset: 274
   - type: unsigned int
-    name: _blueMageActions
+    name: BlueMageActions
     offset: 276
     size: 24
   - type: Client::Game::RecastDetail
-    name: _cooldowns
+    name: Cooldowns
     offset: 372
     size: 80
   - type: float
@@ -43369,7 +43369,7 @@ structs:
   size: 2840
   fields:
   - type: Client::Game::GcArmyMember
-    name: _members
+    name: Members
     offset: 0
     size: 8
   - type: byte
@@ -43498,11 +43498,11 @@ structs:
     name: IsApplyingGlamourPlate
     offset: 0
   - type: unsigned int
-    name: _prismBoxItemIds
+    name: PrismBoxItemIds
     offset: 4
     size: 800
   - type: byte
-    name: _prismBoxStainIds
+    name: PrismBoxStainIds
     offset: 3204
     size: 800
   - type: byte
@@ -43512,7 +43512,7 @@ structs:
     name: PrismBoxLoaded
     offset: 4005
   - type: Client::Game::MirageManager::GlamourPlate
-    name: _glamourPlates
+    name: GlamourPlates
     offset: 4008
     size: 20
   - type: byte
@@ -43538,7 +43538,7 @@ structs:
   size: 64
   fields:
   - type: Client::Game::RankData
-    name: _rankData
+    name: RankData
     offset: 0
     size: 10
   - type: __int64
@@ -43565,7 +43565,7 @@ structs:
   size: 44640
   fields:
   - type: Client::Game::HousingFurniture
-    name: _furniture
+    name: Furniture
     offset: 16
     size: 732
   - type: Client::Game::HousingObjectManager
@@ -43584,11 +43584,11 @@ structs:
     name: EditingFurnishingsOfPlot
     offset: 38576
   - type: Client::Game::PlotDetail
-    name: _plots
+    name: Plots
     offset: 38584
     size: 60
   - type: Client::Game::ApartmentBuildingState
-    name: _apartmentBuildings
+    name: ApartmentBuildings
     offset: 39544
     size: 2
   - type: Client::Game::HousingTerritory
@@ -43617,23 +43617,23 @@ structs:
   size: 3928
   fields:
   - type: Application::Network::WorkDefinitions::QuestWork
-    name: _normalQuests
+    name: NormalQuests
     offset: 16
     size: 30
   - type: Application::Network::WorkDefinitions::DailyQuestWork
-    name: _dailyQuests
+    name: DailyQuests
     offset: 1464
     size: 12
   - type: Application::Network::WorkDefinitions::TrackingWork
-    name: _trackedQuests
+    name: TrackedQuests
     offset: 1704
     size: 5
   - type: Application::Network::WorkDefinitions::BeastReputationWork
-    name: _beastReputation
+    name: BeastReputation
     offset: 3016
     size: 17
   - type: Application::Network::WorkDefinitions::LeveWork
-    name: _leveQuests
+    name: LeveQuests
     offset: 3288
     size: 16
   - type: byte
@@ -43676,11 +43676,11 @@ structs:
   size: 784
   fields:
   - type: Client::Game::RetainerManager::Retainer
-    name: _retainers
+    name: Retainers
     offset: 0
     size: 10
   - type: byte
-    name: _displayOrder
+    name: DisplayOrder
     offset: 720
     size: 10
   - type: byte
@@ -43733,7 +43733,7 @@ structs:
     name: CustomizeData
     offset: 16
   - type: byte
-    name: _label
+    name: Label
     offset: 48
     size: 64
   - type: byte
@@ -43754,7 +43754,7 @@ structs:
     name: Owner
     offset: 0
   - type: Client::Game::Status
-    name: _status
+    name: Status
     offset: 8
     size: 60
   - type: unsigned int
@@ -43844,11 +43844,11 @@ structs:
   size: 112
   fields:
   - type: Client::Game::WeatherManager::ServerWeather*
-    name: _weatherPtrs
+    name: WeatherPtrs
     offset: 0
     size: 3
   - type: Client::Game::WeatherManager::ServerWeather
-    name: _weathers
+    name: Weathers
     offset: 24
     size: 3
   - type: byte
@@ -43959,11 +43959,11 @@ structs:
     name: Favor
     offset: 48
   - type: byte
-    name: _name
+    name: Name
     offset: 55
     size: 20
   - type: Client::Game::HousingWorkshopAirshipGathered
-    name: _gatheredData
+    name: GatheredData
     offset: 84
     size: 5
   - type: Client::System::String::Utf8String*
@@ -43996,7 +43996,7 @@ structs:
     name: NextLevelExp
     offset: 28
   - type: byte
-    name: _name
+    name: Name
     offset: 34
     size: 20
   - type: unsigned __int16
@@ -44012,7 +44012,7 @@ structs:
     name: BridgeId
     offset: 64
   - type: byte
-    name: _currentExplorationPoints
+    name: CurrentExplorationPoints
     offset: 66
     size: 5
   - type: unsigned __int16
@@ -44052,11 +44052,11 @@ structs:
     name: LogSpeed
     offset: 98
   - type: Client::Game::HousingWorkshopSubmarineGathered
-    name: _gatheredData
+    name: GatheredData
     offset: 100
     size: 5
   - type: Client::System::String::Utf8String
-    name: _logs
+    name: Logs
     offset: 432
     size: 82
   virtual_functions: []
@@ -44100,7 +44100,7 @@ structs:
   size: 264
   fields:
   - type: Client::Game::UI::HateInfo
-    name: _hateInfo
+    name: HateInfo
     offset: 0
     size: 32
   - type: int
@@ -44118,7 +44118,7 @@ structs:
   size: 2312
   fields:
   - type: Client::Game::UI::HaterInfo
-    name: _haters
+    name: Haters
     offset: 0
     size: 32
   - type: int
@@ -44213,11 +44213,11 @@ structs:
     name: WorldId
     offset: 18
   - type: byte
-    name: _name
+    name: Name
     offset: 20
     size: 64
   - type: byte
-    name: _onlineId
+    name: OnlineId
     offset: 84
     size: 17
   - type: byte
@@ -44254,14 +44254,14 @@ structs:
     name: BuddyEquipLegs
     offset: 155
   - type: unsigned int
-    name: _baseParams
+    name: BaseParams
     offset: 215
     size: 74
   - type: byte
     name: GearVisibilityFlag
     offset: 513
   - type: byte
-    name: _buddyOwnerName
+    name: BuddyOwnerName
     offset: 528
     size: 64
   - type: byte
@@ -44280,7 +44280,7 @@ structs:
     name: BuddyHealerLevel
     offset: 596
   - type: StdPair<unsigned int, unsigned int>
-    name: _contentKeyValueData
+    name: ContentKeyValueData
     offset: 603
     size: 3
   virtual_functions: []
@@ -44292,7 +44292,7 @@ structs:
   size: 1696
   fields:
   - type: Client::Game::UI::LootItem
-    name: _items
+    name: Items
     offset: 16
     size: 16
   - type: int
@@ -44353,15 +44353,15 @@ structs:
   size: 408
   fields:
   - type: byte
-    name: _availableMarkId
+    name: AvailableMarkId
     offset: 8
     size: 18
   - type: byte
-    name: _obtainedMarkId
+    name: ObtainedMarkId
     offset: 26
     size: 18
   - type: Client::Game::UI::MobHunt::KillCounts
-    name: _currentKills
+    name: CurrentKills
     offset: 44
     size: 18
   - type: int
@@ -44421,11 +44421,11 @@ structs:
     name: IsLoaded
     offset: 0
   - type: byte
-    name: _characterName
+    name: CharacterName
     offset: 1
     size: 64
   - type: byte
-    name: _onlineId
+    name: OnlineId
     offset: 65
     size: 17
   - type: unsigned int
@@ -44435,7 +44435,7 @@ structs:
     name: ContentId
     offset: 104
   - type: unsigned int
-    name: _penaltyTimestamps
+    name: PenaltyTimestamps
     offset: 112
     size: 2
   - type: byte
@@ -44463,11 +44463,11 @@ structs:
     name: CurrentLevel
     offset: 136
   - type: __int16
-    name: _classJobLevels
+    name: ClassJobLevels
     offset: 138
     size: 32
   - type: int
-    name: _classJobExperience
+    name: ClassJobExperience
     offset: 204
     size: 32
   - type: __int16
@@ -44498,11 +44498,11 @@ structs:
     name: QuestSpecialFlags
     offset: 343
   - type: unsigned __int16
-    name: _activeFestivalIds
+    name: ActiveFestivalIds
     offset: 344
     size: 4
   - type: unsigned __int16
-    name: _activeFestivalPhases
+    name: ActiveFestivalPhases
     offset: 352
     size: 4
   - type: int
@@ -44524,7 +44524,7 @@ structs:
     name: BasePiety
     offset: 388
   - type: int
-    name: _attributes
+    name: Attributes
     offset: 392
     size: 74
   - type: byte
@@ -44546,7 +44546,7 @@ structs:
     name: FavouriteAetheryteCount
     offset: 694
   - type: unsigned __int16
-    name: _favouriteAetherytes
+    name: FavouriteAetherytes
     offset: 696
     size: 4
   - type: unsigned __int16
@@ -44559,18 +44559,18 @@ structs:
     name: BaseRestedExperience
     offset: 708
   - type: byte
-    name: _ownedMountsBitmask
+    name: OwnedMountsBitmask
     offset: 733
     size: 35
   - type: byte
-    name: _unlockedOrnamentsBitmask
+    name: UnlockedOrnamentsBitmask
     offset: 768
     size: 6
   - type: unsigned __int16
     name: NumOwnedMounts
     offset: 774
   - type: byte
-    name: _caughtFishBitmask
+    name: CaughtFishBitmask
     offset: 948
     size: 159
   - type: unsigned int
@@ -44580,25 +44580,25 @@ structs:
     name: FishingBait
     offset: 1116
   - type: byte
-    name: _unlockedSpearfishingNotebookBitmask
+    name: UnlockedSpearfishingNotebookBitmask
     offset: 1120
     size: 7
   - type: byte
-    name: _caughtSpearfishBitmask
+    name: CaughtSpearfishBitmask
     offset: 1127
     size: 36
   - type: unsigned int
     name: NumSpearfishCaught
     offset: 1164
   - type: byte
-    name: _contentRouletteCompletion
+    name: ContentRouletteCompletion
     offset: 1172
     size: 12
   - type: __int16
     name: PlayerCommendations
     offset: 1184
   - type: byte
-    name: _selectedPoses
+    name: SelectedPoses
     offset: 1186
     size: 7
   - type: byte
@@ -44617,15 +44617,15 @@ structs:
     name: SightseeingLogUnlockStateEx
     offset: 1237
   - type: byte
-    name: _unlockedAdventureExPhaseBitmask
+    name: UnlockedAdventureExPhaseBitmask
     offset: 1238
     size: 1
   - type: byte
-    name: _unlockedAdventureBitmask
+    name: UnlockedAdventureBitmask
     offset: 1280
     size: 37
   - type: byte
-    name: _unlockFlags
+    name: UnlockFlags
     offset: 1321
     size: 44
   - type: byte
@@ -44650,23 +44650,23 @@ structs:
     name: HasNewGcArmyCandidate
     offset: 1388
   - type: byte
-    name: _unlockedMinerFolkloreTomeBitmask
+    name: UnlockedMinerFolkloreTomeBitmask
     offset: 1390
     size: 2
   - type: byte
-    name: _unlockedBotanistFolkloreTomeBitmask
+    name: UnlockedBotanistFolkloreTomeBitmask
     offset: 1392
     size: 2
   - type: byte
-    name: _unlockedFishingFolkloreTomeBitmask
+    name: UnlockedFishingFolkloreTomeBitmask
     offset: 1394
     size: 2
   - type: byte
-    name: _weeklyBingoOrderData
+    name: WeeklyBingoOrderData
     offset: 1660
     size: 16
   - type: byte
-    name: _weeklyBingoRewardData
+    name: WeeklyBingoRewardData
     offset: 1676
     size: 4
   - type: unsigned __int16
@@ -44676,7 +44676,7 @@ structs:
     name: _weeklyBingoFlags
     offset: 1684
   - type: byte
-    name: __weeklyBingoTaskStatus
+    name: _weeklyBingoTaskStatus
     offset: 1688
     size: 4
   - type: byte
@@ -44689,14 +44689,14 @@ structs:
     name: WeeklyBingoUnk63
     offset: 1753
   - type: StdPair<unsigned int, unsigned int>
-    name: _contentKeyValueData
+    name: ContentKeyValueData
     offset: 1760
     size: 3
   - type: byte
     name: MentorVersion
     offset: 1904
   - type: unsigned int
-    name: _desynthesisLevels
+    name: DesynthesisLevels
     offset: 1908
     size: 8
   virtual_functions: []
@@ -44924,7 +44924,7 @@ structs:
     name: DefaultRotation
     offset: 32
   - type: byte
-    name: _name
+    name: Name
     offset: 48
     size: 64
   - type: byte
@@ -45188,15 +45188,15 @@ structs:
     name: SlopesGlamourId
     offset: 12
   - type: byte
-    name: _unlockedKeyItems
+    name: UnlockedKeyItems
     offset: 13
     size: 3
   - type: byte
-    name: _unlockedRecipes
+    name: UnlockedRecipes
     offset: 16
     size: 3
   - type: byte
-    name: _lockedPouchItems
+    name: LockedPouchItems
     offset: 20
     size: 109
   - type: Client::Game::MJI::MJIFarmPasture
@@ -45215,19 +45215,19 @@ structs:
     name: FarmDailyCareFee
     offset: 140
   - type: byte
-    name: _landmarkHoursToCompletion
+    name: LandmarkHoursToCompletion
     offset: 142
     size: 5
   - type: byte
-    name: _landmarkIds
+    name: LandmarkIds
     offset: 147
     size: 5
   - type: byte
-    name: _landmarkUnderConstruction
+    name: LandmarkUnderConstruction
     offset: 152
     size: 5
   - type: byte
-    name: _landmarkRotation
+    name: LandmarkRotation
     offset: 157
     size: 5
   - type: Client::Game::MJI::MJIWorkshops
@@ -45278,22 +45278,22 @@ structs:
     name: FavorState
     offset: 360
   - type: Client::Game::MJI::MJILandmarkPlacement
-    name: _landmarkPlacements
+    name: LandmarkPlacements
     offset: 468
     size: 5
   - type: Client::Game::MJI::MJIBuildingPlacement
-    name: _buildingPlacements
+    name: BuildingPlacements
     offset: 548
     size: 6
   - type: Client::Game::MJI::MJIBuildingPlacement
     name: CabinPlacement
     offset: 644
   - type: Client::Game::MJI::MJIFarmPasturePlacement
-    name: _farmPlacements
+    name: FarmPlacements
     offset: 660
     size: 3
   - type: Client::Game::MJI::MJIFarmPasturePlacement
-    name: _pasturePlacements
+    name: PasturePlacements
     offset: 696
     size: 3
   - type: unsigned __int16
@@ -45312,14 +45312,14 @@ structs:
     name: NextPopularity
     offset: 753
   - type: byte
-    name: _supplyAndDemandShifts
+    name: SupplyAndDemandShifts
     offset: 754
     size: 91
   - type: byte
     name: CurrentCycleDay
     offset: 936
   - type: byte
-    name: _craftworksRestDays
+    name: CraftworksRestDays
     offset: 937
     size: 4
   - type: unsigned int
@@ -45410,7 +45410,7 @@ structs:
   size: 6952
   fields:
   - type: Client::Game::InstanceContent::DynamicEvent
-    name: _events
+    name: Events
     offset: 8
     size: 16
   virtual_functions: []
@@ -45458,7 +45458,7 @@ structs:
     name: HomeWorld
     offset: 802
   - type: byte
-    name: _name
+    name: Name
     offset: 804
     size: 64
   - type: byte
@@ -45474,7 +45474,7 @@ structs:
     name: DamageShield
     offset: 871
   - type: Client::Game::Group::PartyMember::ExtraProperty
-    name: _extraProperties
+    name: ExtraProperties
     offset: 872
     size: 3
   - type: byte
@@ -45658,7 +45658,7 @@ structs:
     name: ObjectFilterArray3
     offset: 16408
   - type: unsigned int
-    name: _targetModes
+    name: TargetModes
     offset: 21216
     size: 8
   - type: unsigned int
@@ -45823,7 +45823,7 @@ structs:
     name: Omen
     offset: 72
   - type: Client::Game::Character::VfxContainer::Tether
-    name: _tethers
+    name: Tethers
     offset: 160
     size: 2
   - type: unsigned __int16
@@ -45918,30 +45918,30 @@ structs:
   size: 344
   fields:
   - type: Client::UI::AddonActionCross::HelpMessage
-    name: _helpMessages
+    name: HelpMessages
     offset: 0
     size: 8
   - type: Component::GUI::AtkComponentNode*
-    name: _numIcons
+    name: NumIcons
     offset: 128
     size: 8
   - type: Component::GUI::AtkResNode*
     name: ContainerNode
     offset: 192
   - type: Component::GUI::AtkComponentBase*
-    name: _dpadComponents
+    name: DpadComponents
     offset: 208
     size: 4
   - type: Component::GUI::AtkResNode*
-    name: _dpadNodes
+    name: DpadNodes
     offset: 240
     size: 4
   - type: Component::GUI::AtkComponentBase*
-    name: _actionButtonComponents
+    name: ActionButtonComponents
     offset: 280
     size: 4
   - type: Component::GUI::AtkResNode*
-    name: _actionButtonNodes
+    name: ActionButtonNodes
     offset: 312
     size: 4
   virtual_functions: []
@@ -45953,7 +45953,7 @@ structs:
   size: 96
   fields:
   - type: Client::UI::AddonActionCross::HelpMessage
-    name: _hotbarHelp
+    name: HotbarHelp
     offset: 0
     size: 4
   - type: Component::GUI::AtkComponentNode*
@@ -45971,7 +45971,7 @@ structs:
   size: 96
   fields:
   - type: Client::UI::AddonJobHudACN0::AetherflowACNGauge::AetherflowACNStack
-    name: _aetherflowStacks
+    name: AetherflowStacks
     offset: 16
     size: 3
   - type: int
@@ -45989,7 +45989,7 @@ structs:
   size: 96
   fields:
   - type: Client::UI::AddonJobHudACN0::AetherflowACNGaugeSimple::AetherflowACNStackSimple
-    name: _aetherflowStacks
+    name: AetherflowStacks
     offset: 16
     size: 3
   - type: int
@@ -46152,7 +46152,7 @@ structs:
     name: AstrosignContainer
     offset: 96
   - type: Client::UI::AddonJobHudAST0::Astrosign
-    name: _astrosigns
+    name: Astrosigns
     offset: 120
     size: 3
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
@@ -46197,7 +46197,7 @@ structs:
     name: AstrosignContainer
     offset: 88
   - type: Client::UI::AddonJobHudAST0::Astrosign
-    name: _astrosigns
+    name: Astrosigns
     offset: 112
     size: 3
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
@@ -46224,7 +46224,7 @@ structs:
     name: ElementStacks
     offset: 40
   - type: Component::GUI::AtkComponentBase*
-    name: _elementStack
+    name: ElementStack
     offset: 48
     size: 3
   - type: int
@@ -46243,7 +46243,7 @@ structs:
     name: IceOrb
     offset: 104
   - type: Client::UI::AddonJobHudBLM0::ElementalGauge::UmbralHeart
-    name: _umbralHearts
+    name: UmbralHearts
     offset: 112
     size: 3
   - type: Component::GUI::AtkResNode*
@@ -46274,7 +46274,7 @@ structs:
     name: PolyglotContainer
     offset: 232
   - type: Client::UI::AddonJobHudBLM0::ElementalGauge::PolyglotStack
-    name: _polyglot
+    name: Polyglot
     offset: 240
     size: 2
   - type: int
@@ -46337,7 +46337,7 @@ structs:
     name: ManaStackContainer
     offset: 200
   - type: Component::GUI::AtkComponentBase*
-    name: _manaStacks
+    name: ManaStacks
     offset: 208
     size: 3
   - type: byte
@@ -46373,7 +46373,7 @@ structs:
     name: Container
     offset: 16
   - type: Client::UI::AddonJobHudRRP1::DeathGauge::ShroudStack
-    name: _shroudStacks
+    name: ShroudStacks
     offset: 24
     size: 5
   - type: Component::GUI::AtkComponentTextNineGrid*
@@ -46397,7 +46397,7 @@ structs:
     name: EnshroudIndicator
     offset: 24
   - type: Client::UI::AddonJobHudRRP1::DeathGaugeSimple::ShroudStackSimple
-    name: _shroudStacks
+    name: ShroudStacks
     offset: 44
     size: 5
   - type: Component::GUI::AtkComponentTextNineGrid*
@@ -46441,27 +46441,27 @@ structs:
   size: 656
   fields:
   - type: unsigned int
-    name: _activeActions
+    name: ActiveActions
     offset: 0
     size: 24
   - type: byte
-    name: _customName
+    name: CustomName
     offset: 96
     size: 61
   - type: Client::UI::Misc::AozNoteModule::AozHotBar
-    name: _standardHotBars
+    name: StandardHotBars
     offset: 157
     size: 10
   - type: Client::UI::Misc::AozNoteModule::AozCrossHotBar
-    name: _crossHotBars
+    name: CrossHotBars
     offset: 277
     size: 8
   - type: Client::UI::Misc::AozNoteModule::AozHotBarMacroFlag
-    name: _standardHotBarMacroFlags
+    name: StandardHotBarMacroFlags
     offset: 405
     size: 10
   - type: Client::UI::Misc::AozNoteModule::AozCrossHotBarMacroFlag
-    name: _crossHotBarMacroFlags
+    name: CrossHotBarMacroFlags
     offset: 525
     size: 8
   virtual_functions: []
@@ -46473,7 +46473,7 @@ structs:
   size: 3584
   fields:
   - type: Client::UI::Misc::RaptureHotbarModule::HotBarSlot
-    name: _slots
+    name: Slots
     offset: 0
     size: 16
   virtual_functions: []
@@ -46485,7 +46485,7 @@ structs:
   size: 80
   fields:
   - type: Client::UI::Misc::RaptureHotbarModule::SavedHotBarSlot
-    name: _slots
+    name: Slots
     offset: 0
     size: 16
   virtual_functions: []
@@ -46497,7 +46497,7 @@ structs:
   size: 40
   fields:
   - type: Client::UI::Misc::RecipeFavoriteModule::RecipeEntry
-    name: _recipes
+    name: Recipes
     offset: 0
     size: 10
   virtual_functions: []
@@ -46515,7 +46515,7 @@ structs:
     name: Timestamp
     offset: 8
   - type: Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment
-    name: _attachments
+    name: Attachments
     offset: 12
     size: 5
   - type: unsigned int
@@ -46525,11 +46525,11 @@ structs:
     name: Read
     offset: 60
   - type: byte
-    name: _sender
+    name: Sender
     offset: 63
     size: 32
   - type: byte
-    name: _messagePreview
+    name: MessagePreview
     offset: 95
     size: 64
   virtual_functions: []
@@ -46541,14 +46541,14 @@ structs:
   size: 6048
   fields:
   - type: Client::UI::Agent::AgentIKDResult::CatchResult
-    name: _catchResults
+    name: CatchResults
     offset: 0
     size: 60
   - type: byte
     name: CatchResultCount
     offset: 720
   - type: unsigned int
-    name: _contentBonusIds
+    name: ContentBonusIds
     offset: 724
     size: 13
   - type: byte
@@ -46558,7 +46558,7 @@ structs:
     name: PlayerResult
     offset: 784
   - type: Client::UI::Agent::AgentIKDResult::ResultEntry
-    name: _groupResults
+    name: GroupResults
     offset: 904
     size: 10
   - type: byte
@@ -46589,15 +46589,15 @@ structs:
     name: PurpleScripReward
     offset: 2134
   - type: Client::UI::Agent::AgentIKDResult::CatchResultInfo
-    name: _catchResultsInfo
+    name: CatchResultsInfo
     offset: 2144
     size: 60
   - type: Client::UI::Agent::AgentIKDResult::ContentBonusEntry
-    name: _contentBonus
+    name: ContentBonus
     offset: 2864
     size: 13
   - type: Client::UI::Agent::AgentIKDResult::ContentBonusEntry*
-    name: _contentBonusPointers
+    name: ContentBonusPointers
     offset: 5776
     size: 13
   virtual_functions: []
@@ -46624,11 +46624,11 @@ structs:
     name: IsILevelSynced
     offset: 9
   - type: __int16
-    name: _modelMain
+    name: ModelMain
     offset: 16
     size: 4
   - type: __int16
-    name: _modelSub
+    name: ModelSub
     offset: 24
     size: 4
   - type: Client::Game::InventoryItem*
@@ -46649,7 +46649,7 @@ structs:
     name: NumEfficientCrafts
     offset: 1
   - type: Client::UI::Agent::AgentMJICraftSchedule::EntryData
-    name: _entryData
+    name: EntryData
     offset: 8
     size: 6
   - type: unsigned int
@@ -46664,18 +46664,18 @@ structs:
   size: 728
   fields:
   - type: Client::UI::Agent::AgentMJICraftSchedule::MaterialAllocationEntry
-    name: _entries
+    name: Entries
     offset: 0
     size: 3
   - type: byte
     name: Cycle
     offset: 672
   - type: byte
-    name: _startingHours
+    name: StartingHours
     offset: 673
     size: 24
   - type: byte
-    name: _craftIds
+    name: CraftIds
     offset: 697
     size: 24
   virtual_functions: []
@@ -46690,7 +46690,7 @@ structs:
     name: UpdateState
     offset: 0
   - type: Client::UI::Agent::AgentMJINekomimiRequest::ItemData
-    name: _items
+    name: Items
     offset: 8
     size: 6
   - type: int
@@ -50414,11 +50414,11 @@ structs:
   size: 424
   fields:
   - type: Component::GUI::AtkComponentGaugeBar::GaugeValueTransitionData
-    name: _transitionData
+    name: TransitionData
     offset: 192
     size: 2
   - type: Component::GUI::AtkComponentGaugeBar::GaugeValue
-    name: _values
+    name: Values
     offset: 256
     size: 2
   - type: Component::GUI::AtkImageNode*
@@ -52420,7 +52420,7 @@ structs:
     name: TextService
     offset: 24
   - type: Client::UI::RaptureAtkHistory*
-    name: _atkHistory
+    name: AtkHistory
     offset: 32
     size: 19
   - type: Client::UI::Misc::RaptureTextModule*
@@ -52529,7 +52529,7 @@ structs:
   size: 544
   fields:
   - type: byte
-    name: _name
+    name: Name
     offset: 8
     size: 32
   - type: Component::GUI::AtkUldManager
@@ -53766,7 +53766,7 @@ structs:
     name: ActionBarLayout
     offset: 624
   - type: Client::UI::AddonActionBarX::Dimensions
-    name: _layoutDimensions
+    name: LayoutDimensions
     offset: 636
     size: 6
   - type: Client::UI::AddonActionBarBase
@@ -54088,7 +54088,7 @@ structs:
     name: PadlockCheckbox
     offset: 936
   - type: Client::UI::AddonActionCross::SlotGroup
-    name: _slotGroups
+    name: SlotGroups
     offset: 944
     size: 4
   - type: Client::UI::AddonActionCross::ControlGuide
@@ -54789,11 +54789,11 @@ structs:
     name: SlotContainerR
     offset: 600
   - type: Client::UI::AddonActionCross::HelpMessage
-    name: _hotbarHelpL
+    name: HotbarHelpL
     offset: 608
     size: 4
   - type: Client::UI::AddonActionCross::HelpMessage
-    name: _hotbarHelpR
+    name: HotbarHelpR
     offset: 672
     size: 4
   - type: byte
@@ -55163,7 +55163,7 @@ structs:
     name: RoleRadioButton
     offset: 624
   - type: Client::UI::ActionInfo
-    name: _actions
+    name: Actions
     offset: 792
     size: 80
   - type: Component::GUI::AtkResNode*
@@ -55805,7 +55805,7 @@ structs:
   size: 608
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
-    name: _tabPointers
+    name: TabPointers
     offset: 552
     size: 4
   - type: int
@@ -56124,11 +56124,11 @@ structs:
   size: 3272
   fields:
   - type: Client::UI::AddonAOZNotebook::SpellbookBlock
-    name: _spellbookBlocks
+    name: SpellbookBlocks
     offset: 776
     size: 16
   - type: Client::UI::AddonAOZNotebook::ActiveAction
-    name: _activeActions
+    name: ActiveActions
     offset: 2080
     size: 24
   - type: int
@@ -57458,7 +57458,7 @@ structs:
     name: AddonControl
     offset: 552
   - type: Component::GUI::AtkComponentRadioButton*
-    name: _radioButtons
+    name: RadioButtons
     offset: 7128
     size: 3
   - type: Component::GUI::AtkUnitBase
@@ -58081,7 +58081,7 @@ structs:
   size: 7168
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
-    name: _radioButtons
+    name: RadioButtons
     offset: 552
     size: 4
   - type: int
@@ -58406,7 +58406,7 @@ structs:
   size: 2096
   fields:
   - type: Component::GUI::AtkComponentButton*
-    name: _buttonNodes
+    name: ButtonNodes
     offset: 544
     size: 31
   - type: Component::GUI::AtkComponentButton*
@@ -58425,7 +58425,7 @@ structs:
     name: MaxDesynthesisLevelTextNode
     offset: 824
   - type: Client::UI::AddonCharacterClass::ClassEntry
-    name: _classEntries
+    name: ClassEntries
     offset: 832
     size: 31
   - type: int
@@ -60023,11 +60023,11 @@ structs:
     name: GoldSaucerRadioButton
     offset: 784
   - type: Component::GUI::AtkTextNode*
-    name: _selectedDutyTextNode
+    name: SelectedDutyTextNode
     offset: 792
     size: 5
   - type: Component::GUI::AtkComponentButton*
-    name: _settingsButton
+    name: SettingsButton
     offset: 968
     size: 8
   - type: Component::GUI::AtkComponentTreeList*
@@ -63316,7 +63316,7 @@ structs:
     name: HoveredButtonIndex
     offset: 560
   - type: Client::UI::AddonFieldMarkerInfo
-    name: _fieldMarkerInfo
+    name: FieldMarkerInfo
     offset: 568
     size: 8
   - type: int
@@ -66251,11 +66251,11 @@ structs:
     name: AddonControl
     offset: 560
   - type: Component::GUI::AtkComponentRadioButton*
-    name: _categoryRadioButtons
+    name: CategoryRadioButtons
     offset: 672
     size: 6
   - type: Component::GUI::AtkComponentRadioButton*
-    name: _chocoboRadioButtons
+    name: ChocoboRadioButtons
     offset: 720
     size: 3
   - type: Component::GUI::AtkCollisionNode*
@@ -67532,7 +67532,7 @@ structs:
     name: PageSelection
     offset: 840
   - type: Component::GUI::AtkComponentButton*
-    name: _pageButtons
+    name: PageButtons
     offset: 848
     size: 9
   - type: Component::GUI::AtkComponentButton*
@@ -67542,7 +67542,7 @@ structs:
     name: GotoLastPageButton
     offset: 928
   - type: Component::GUI::AtkComponentButton*
-    name: _cardButtons
+    name: CardButtons
     offset: 952
     size: 30
   - type: Component::GUI::AtkTextNode*
@@ -71075,11 +71075,11 @@ structs:
   size: 1176
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
-    name: _tabs
+    name: Tabs
     offset: 544
     size: 2
   - type: Component::GUI::AtkComponentDragDrop*
-    name: _slots
+    name: Slots
     offset: 560
     size: 70
   - type: byte
@@ -71395,7 +71395,7 @@ structs:
   size: 784
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
-    name: _buttons
+    name: Buttons
     offset: 600
     size: 5
   - type: Component::GUI::AtkAddonControl
@@ -72031,7 +72031,7 @@ structs:
   size: 832
   fields:
   - type: Component::GUI::AtkComponentDragDrop*
-    name: _slots
+    name: Slots
     offset: 544
     size: 35
   - type: Component::GUI::AtkUnitBase
@@ -73895,7 +73895,7 @@ structs:
     name: SearchText2
     offset: 672
   - type: Client::System::String::Utf8String
-    name: _filterLabels
+    name: FilterLabels
     offset: 1192
     size: 96
   - type: Component::GUI::AtkComponentTextInput*
@@ -82602,7 +82602,7 @@ structs:
     name: JoinPartyButton
     offset: 584
   - type: Component::GUI::AtkComponentButton*
-    name: _joinAllianceButtons
+    name: JoinAllianceButtons
     offset: 592
     size: 6
   - type: Component::GUI::AtkComponentButton*
@@ -83692,22 +83692,22 @@ structs:
   size: 12464
   fields:
   - type: Component::GUI::AtkComponentDragDrop*
-    name: _dragDropComponent
+    name: DragDropComponent
     offset: 696
     size: 100
   - type: int
     name: DefaultIcon
     offset: 1504
   - type: int
-    name: _macroSetIcon
+    name: MacroSetIcon
     offset: 1516
     size: 100
   - type: Client::System::String::Utf8String
-    name: _macroName
+    name: MacroName
     offset: 1920
     size: 100
   - type: byte
-    name: _macroCreated
+    name: MacroCreated
     offset: 12320
     size: 100
   - type: unsigned int
@@ -86504,7 +86504,7 @@ structs:
   size: 1296
   fields:
   - type: Client::UI::LootItemInfo
-    name: _items
+    name: Items
     offset: 544
     size: 16
   - type: int
@@ -87119,11 +87119,11 @@ structs:
   size: 5088
   fields:
   - type: Client::UI::AddonPartyList::PartyListMemberStruct
-    name: _partyMembers
+    name: PartyMembers
     offset: 544
     size: 8
   - type: Client::UI::AddonPartyList::PartyListMemberStruct
-    name: _trustMembers
+    name: TrustMembers
     offset: 2528
     size: 7
   - type: Client::UI::AddonPartyList::PartyListMemberStruct
@@ -87133,11 +87133,11 @@ structs:
     name: Pet
     offset: 4512
   - type: unsigned int
-    name: _partyClassJobIconId
+    name: PartyClassJobIconId
     offset: 4760
     size: 8
   - type: unsigned int
-    name: _trustClassJobIconId
+    name: TrustClassJobIconId
     offset: 4792
     size: 7
   - type: unsigned int
@@ -87147,7 +87147,7 @@ structs:
     name: PetIconId
     offset: 4824
   - type: __int16
-    name: _edited
+    name: Edited
     offset: 4960
     size: 17
   - type: Component::GUI::AtkNineGridNode*
@@ -87846,7 +87846,7 @@ structs:
     name: SelectedTab
     offset: 1248
   - type: Client::UI::RaidFinderDutyEntry
-    name: _entries
+    name: Entries
     offset: 1256
     size: 8
   - type: Component::GUI::AtkUnitBase
@@ -88608,7 +88608,7 @@ structs:
   size: 1088
   fields:
   - type: Client::UI::AddonItemDonationInfo
-    name: _donationInfos
+    name: DonationInfos
     offset: 600
     size: 10
   - type: int
@@ -90029,7 +90029,7 @@ structs:
     name: CancelButton
     offset: 560
   - type: byte
-    name: _listItems
+    name: ListItems
     offset: 568
     size: 10
   - type: Component::GUI::AtkUnitBase
@@ -92507,7 +92507,7 @@ structs:
     name: SelectedCategory
     offset: 552
   - type: Client::UI::AddonSalvageItemSelector::SalvageItem
-    name: _items
+    name: Items
     offset: 688
     size: 140
   - type: unsigned int
@@ -92818,7 +92818,7 @@ structs:
     name: HoveredElementIndex
     offset: 548
   - type: Client::UI::AddonDeliveryItemInfo
-    name: _deliveryInfo
+    name: DeliveryInfo
     offset: 776
     size: 3
   - type: Component::GUI::AtkUnitBase
@@ -96493,7 +96493,7 @@ structs:
   size: 3368
   fields:
   - type: Client::UI::Misc::AozNoteModule::ActiveSet
-    name: _activeSets
+    name: ActiveSets
     offset: 64
     size: 5
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -96653,7 +96653,7 @@ structs:
     name: ZoomRatio
     offset: 196
   - type: Client::UI::Misc::CharaViewItem
-    name: _items
+    name: Items
     offset: 208
     size: 14
   - type: byte
@@ -97258,25 +97258,25 @@ structs:
     name: AtkFontCodeModule
     offset: 256
   - type: Client::System::String::Utf8String
-    name: _tempParseMessage
+    name: TempParseMessage
     offset: 264
     size: 10
   - type: Component::Excel::ExcelSheet*
     name: LogKindSheet
     offset: 1312
   - type: Client::UI::Misc::RaptureLogModuleTab
-    name: _chatTabs
+    name: ChatTabs
     offset: 1328
     size: 5
   - type: Component::Excel::ExcelSheet*
     name: LogMessageSheet
     offset: 13272
   - type: byte
-    name: _chatTabIsPendingReload
+    name: ChatTabIsPendingReload
     offset: 13288
     size: 4
   - type: byte
-    name: _chatTabShouldDisplayTime
+    name: ChatTabShouldDisplayTime
     offset: 13293
     size: 4
   - type: byte
@@ -97429,7 +97429,7 @@ structs:
   size: 392
   fields:
   - type: Client::UI::Misc::RecipeFavoriteModule::CraftingTypeEntry
-    name: _craftingTypes
+    name: CraftingTypes
     offset: 66
     size: 8
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -97637,7 +97637,7 @@ structs:
     name: IsInCrossRealmParty
     offset: 915
   - type: Client::UI::Info::CrossRealmGroup
-    name: _crossRealmGroups
+    name: CrossRealmGroups
     offset: 928
     size: 6
   - type: Client::UI::Info::InfoProxyInterface
@@ -97695,18 +97695,18 @@ structs:
     name: SearchItemId
     offset: 32
   - type: Client::UI::Info::MarketBoardListing
-    name: _listings
+    name: Listings
     offset: 48
     size: 100
   - type: unsigned int
     name: ListingCount
     offset: 18448
   - type: Client::UI::Info::MarketBoardListing
-    name: _retainerListings
+    name: RetainerListings
     offset: 18456
     size: 20
   - type: Client::UI::Info::PlayerRetainerInfo
-    name: _playerRetainers
+    name: PlayerRetainers
     offset: 22184
     size: 10
   - type: unsigned int
@@ -97719,7 +97719,7 @@ structs:
     name: LastPurchasedMarketboardItem
     offset: 22144
   - type: unsigned int
-    name: _wishlistItems
+    name: WishlistItems
     offset: 23400
     size: 10
   - type: unsigned int
@@ -97869,7 +97869,7 @@ structs:
     name: HasLettersFromSupportDesk
     offset: 43
   - type: Client::UI::Info::InfoProxyLetter::Letter
-    name: _letters
+    name: Letters
     offset: 48
     size: 130
   - type: Client::System::String::Utf8String
@@ -98068,7 +98068,7 @@ structs:
     name: Description
     offset: 56
   - type: Client::UI::Agent::ItemReward
-    name: _itemRewards
+    name: ItemRewards
     offset: 2288
     size: 15
   - type: int
@@ -98078,11 +98078,11 @@ structs:
     name: NumCollectedRewards
     offset: 7032
   - type: Client::System::String::Utf8String
-    name: _strings
+    name: Strings
     offset: 7112
     size: 10
   - type: Client::UI::Agent::ContentsRouletteRole
-    name: _contentRouletteRoleBonuses
+    name: ContentRouletteRoleBonuses
     offset: 8199
     size: 11
   - type: unsigned int
@@ -98176,11 +98176,11 @@ structs:
     name: ClassJobId
     offset: 8
   - type: Client::UI::Agent::DeepDungeonStatusItem
-    name: _pomander
+    name: Pomander
     offset: 24
     size: 16
   - type: Client::UI::Agent::DeepDungeonStatusItem
-    name: _magicite
+    name: Magicite
     offset: 1816
     size: 4
   virtual_functions: []
@@ -98206,7 +98206,7 @@ structs:
     name: NumEntries
     offset: 16
   - type: Client::UI::Agent::MissionInfo
-    name: _missionInfo
+    name: MissionInfo
     offset: 24
     size: 50
   virtual_functions: []
@@ -98218,11 +98218,11 @@ structs:
   size: 1936
   fields:
   - type: Client::UI::Agent::SupplyProvisioningItem
-    name: _supplyData
+    name: SupplyData
     offset: 64
     size: 8
   - type: Client::UI::Agent::SupplyProvisioningItem
-    name: _provisioningData
+    name: ProvisioningData
     offset: 1408
     size: 3
   virtual_functions: []
@@ -98255,7 +98255,7 @@ structs:
     name: CompanionSummonTimer
     offset: 3256
   - type: Client::UI::Agent::HudPartyMember
-    name: _partyMembers
+    name: PartyMembers
     offset: 3272
     size: 10
   - type: __int16
@@ -98265,18 +98265,18 @@ structs:
     name: PartyTitleAddonId
     offset: 4800
   - type: unsigned int
-    name: _raidMemberIds
+    name: RaidMemberIds
     offset: 4804
     size: 40
   - type: int
     name: RaidGroupSize
     offset: 4964
   - type: Client::UI::Agent::HudPartyMemberEnmity
-    name: _hudPartyMemberEnmity
+    name: HudPartyMemberEnmity
     offset: 4984
     size: 10
   - type: Client::UI::Agent::HudPartyMemberEnmity*
-    name: _hudPartyMemberEnmityPtrs
+    name: HudPartyMemberEnmityPtrs
     offset: 5104
     size: 10
   - type: StdVector<Client::Game::UI::MapMarkerData>
@@ -98388,19 +98388,19 @@ structs:
     name: HomeWorldId
     offset: 26
   - type: byte
-    name: _name
+    name: Name
     offset: 44
     size: 32
   - type: byte
-    name: _currentWorldName
+    name: CurrentWorldName
     offset: 76
     size: 32
   - type: byte
-    name: _homeWorldName
+    name: HomeWorldName
     offset: 108
     size: 32
   - type: byte
-    name: _rawJson
+    name: RawJson
     offset: 140
     size: 1024
   - type: StdVector<Client::UI::Agent::CharaSelectRetainerInfo*>
@@ -98451,7 +98451,7 @@ structs:
     name: MacroIconCount
     offset: 1936
   - type: unsigned int
-    name: _macroIcons
+    name: MacroIcons
     offset: 1940
     size: 250
   - type: unsigned int
@@ -98467,7 +98467,7 @@ structs:
     name: FocusedTextCommandIndex
     offset: 3048
   - type: Client::UI::Agent::AgentMacro::MacroHistoryEvent
-    name: _changeHistory
+    name: ChangeHistory
     offset: 3056
     size: 17
   - type: int
@@ -98536,7 +98536,7 @@ structs:
     name: MarkerCount
     offset: 8
   - type: Client::UI::Agent::QuestLinkMarker
-    name: _markers
+    name: Markers
     offset: 24
     size: 20
   virtual_functions: []
@@ -98548,14 +98548,14 @@ structs:
   size: 113376
   fields:
   - type: Client::UI::Agent::PrismBoxItem
-    name: _prismBoxItems
+    name: PrismBoxItems
     offset: 8
     size: 800
   - type: Client::UI::Agent::PrismBoxItem
     name: TempContextItem
     offset: 108808
   - type: int
-    name: _pageItemIndexes
+    name: PageItemIndexes
     offset: 108944
     size: 50
   - type: int
@@ -98577,7 +98577,7 @@ structs:
     name: CrystallizeItemCount
     offset: 109176
   - type: Client::UI::Agent::PrismBoxCrystallizeItem
-    name: _crystallizeItems
+    name: CrystallizeItems
     offset: 109180
     size: 140
   - type: Client::UI::Agent::PrismBoxCrystallizeItem
@@ -98704,7 +98704,7 @@ structs:
     name: OpHandler
     offset: 40
   - type: Client::UI::Agent::AgentMJIFarmManagement::Slot
-    name: _slots
+    name: Slots
     offset: 72
     size: 20
   - type: StdVector<Client::UI::Agent::AgentMJIFarmManagement::Seed>
@@ -98877,7 +98877,7 @@ structs:
     name: Count
     offset: 12
   - type: Client::UI::Agent::MycDynamicEvent
-    name: _array
+    name: Array
     offset: 16
     size: 3
   virtual_functions: []
@@ -98889,11 +98889,11 @@ structs:
   size: 5504
   fields:
   - type: Client::UI::Agent::MycItemCategory
-    name: _itemCaches
+    name: ItemCaches
     offset: 8
     size: 7
   - type: Client::UI::Agent::MycItemCategory
-    name: _itemHolsters
+    name: ItemHolsters
     offset: 2724
     size: 7
   - type: int
@@ -98932,7 +98932,7 @@ structs:
     name: CanGlamour
     offset: 124
   - type: Client::UI::Agent::AgentSatisfactionSupply::ItemInfo
-    name: _items
+    name: Items
     offset: 128
     size: 3
   - type: __int64
@@ -98948,7 +98948,7 @@ structs:
     name: Item3Row
     offset: 336
   - type: Client::UI::Agent::AgentDeliveryItemInfo
-    name: _deliveryInfo
+    name: DeliveryInfo
     offset: 344
     size: 3
   - type: __int64
@@ -99288,15 +99288,15 @@ structs:
     name: DataPathType
     offset: 6112
   - type: wchar_t
-    name: _gamePath
+    name: GamePath
     offset: 6636
     size: 260
   - type: wchar_t
-    name: _sqPackPath
+    name: SqPackPath
     offset: 7676
     size: 260
   - type: wchar_t
-    name: _userPath
+    name: UserPath
     offset: 8716
     size: 260
   - type: Component::Excel::ExcelModuleInterface*
@@ -99324,27 +99324,27 @@ structs:
     name: LuaState
     offset: 11208
   - type: byte
-    name: _gameVersion
+    name: GameVersion
     offset: 11248
     size: 256
   - type: byte
-    name: _ex1Version
+    name: Ex1Version
     offset: 11504
     size: 32
   - type: byte
-    name: _ex2Version
+    name: Ex2Version
     offset: 11536
     size: 32
   - type: byte
-    name: _ex3Version
+    name: Ex3Version
     offset: 11568
     size: 32
   - type: byte
-    name: _ex4Version
+    name: Ex4Version
     offset: 11600
     size: 32
   - type: byte
-    name: _ex5Version
+    name: Ex5Version
     offset: 11632
     size: 32
   - type: byte
@@ -99395,7 +99395,7 @@ structs:
   size: 28800
   fields:
   - type: Client::LayoutEngine::OutdoorPlotLayoutData
-    name: _plots
+    name: Plots
     offset: 496
     size: 60
   virtual_functions: []
@@ -100367,11 +100367,11 @@ structs:
   size: 1936
   fields:
   - type: byte
-    name: _weatherIds
+    name: WeatherIds
     offset: 44
     size: 32
   - type: Client::Graphics::Scene::EnvSpace
-    name: _envSpaces
+    name: EnvSpaces
     offset: 176
     size: 8
   virtual_functions: []
@@ -101268,7 +101268,7 @@ structs:
   size: 186192
   fields:
   - type: Client::Graphics::Render::View
-    name: _views
+    name: Views
     offset: 8
     size: 32
   - type: Client::Graphics::Render::ModelRenderer
@@ -101283,7 +101283,7 @@ structs:
   size: 448
   fields:
   - type: Animation::Playback::SampleAndBlend::hkaSampleBlendJob
-    name: _jobs
+    name: Jobs
     offset: 32
     size: 2
   - type: __int16
@@ -101293,11 +101293,11 @@ structs:
     name: ConnectedBoneIndex
     offset: 290
   - type: unsigned __int64
-    name: _havokAnimatedSkeletons
+    name: HavokAnimatedSkeletons
     offset: 304
     size: 2
   - type: unsigned __int64
-    name: _havokPoses
+    name: HavokPoses
     offset: 320
     size: 4
   - type: Client::Graphics::Render::Skeleton*
@@ -101469,11 +101469,11 @@ structs:
   size: 16608
   fields:
   - type: Client::Game::GameMain::Festival
-    name: _activeFestivals
+    name: ActiveFestivals
     offset: 0
     size: 4
   - type: Client::Game::GameMain::Festival
-    name: _queuedFestivals
+    name: QueuedFestivals
     offset: 64
     size: 4
   - type: Client::Game::JobGaugeManager
@@ -101564,7 +101564,7 @@ structs:
   size: 1120
   fields:
   - type: Client::Game::MonsterNoteRankInfo
-    name: _rankData
+    name: RankData
     offset: 0
     size: 12
   virtual_functions: []
@@ -101576,7 +101576,7 @@ structs:
   size: 40632
   fields:
   - type: Client::Game::SavedAppearanceSlot
-    name: _slot
+    name: Slot
     offset: 8
     size: 40
   virtual_functions:
@@ -101610,7 +101610,7 @@ structs:
   size: 10488
   fields:
   - type: Client::Game::HousingWorkshopAirshipSubData
-    name: _data
+    name: Data
     offset: 0
     size: 4
   - type: byte
@@ -101620,7 +101620,7 @@ structs:
     name: AirshipCount
     offset: 1905
   - type: Client::System::String::Utf8String
-    name: _airshipLogs
+    name: AirshipLogs
     offset: 1912
     size: 82
   virtual_functions: []
@@ -101632,11 +101632,11 @@ structs:
   size: 36672
   fields:
   - type: Client::Game::HousingWorkshopSubmersibleSubData
-    name: _data
+    name: Data
     offset: 0
     size: 4
   - type: Client::Game::HousingWorkshopSubmersibleSubData*
-    name: _dataPointers
+    name: DataPointers
     offset: 35968
     size: 5
   virtual_functions: []
@@ -101648,7 +101648,7 @@ structs:
   size: 7040
   fields:
   - type: Client::Game::UI::Buddy::BuddyMember
-    name: _battleBuddies
+    name: BattleBuddies
     offset: 0
     size: 9
   - type: Client::Game::UI::CompanionInfo
@@ -101689,19 +101689,19 @@ structs:
   size: 736
   fields:
   - type: Client::Game::Object::GameObjectId
-    name: _markers
+    name: Markers
     offset: 16
     size: 17
   - type: unsigned int
-    name: _letterMarkers
+    name: LetterMarkers
     offset: 152
     size: 26
   - type: __int64
-    name: _markerTimes
+    name: MarkerTimes
     offset: 256
     size: 17
   - type: Client::Game::UI::FieldMarker
-    name: _fieldMarkers
+    name: FieldMarkers
     offset: 480
     size: 8
   virtual_functions: []
@@ -101749,31 +101749,31 @@ structs:
     name: ReactionEventObjectRowId
     offset: 26
   - type: byte
-    name: _seedType
+    name: SeedType
     offset: 32
     size: 20
   - type: byte
-    name: _growthLevel
+    name: GrowthLevel
     offset: 52
     size: 20
   - type: byte
-    name: _waterLevel
+    name: WaterLevel
     offset: 72
     size: 20
   - type: byte
-    name: _gardenerYield
+    name: GardenerYield
     offset: 92
     size: 20
   - type: Client::Game::MJI::FarmSlotFlags
-    name: _farmSlotFlags
+    name: FarmSlotFlags
     offset: 112
     size: 20
   - type: unsigned int
-    name: _plotObjectIndex
+    name: PlotObjectIndex
     offset: 136
     size: 20
   - type: unsigned int
-    name: _layoutId
+    name: LayoutId
     offset: 216
     size: 20
   - type: StdVector<unsigned int>
@@ -101845,11 +101845,11 @@ structs:
   size: 25584
   fields:
   - type: Client::Game::Group::PartyMember
-    name: _partyMembers
+    name: PartyMembers
     offset: 0
     size: 8
   - type: Client::Game::Group::PartyMember
-    name: _allianceMembers
+    name: AllianceMembers
     offset: 7296
     size: 20
   - type: __int64
@@ -102034,7 +102034,7 @@ structs:
     name: OwnerObject
     offset: 16
   - type: Client::Game::Control::CharacterLookAtControlParam
-    name: _params
+    name: Params
     offset: 32
     size: 3
   - type: int
@@ -102072,7 +102072,7 @@ structs:
   size: 3840
   fields:
   - type: Client::Game::Character::ActionEffectHandler::EffectEntry
-    name: _incomingEffects
+    name: IncomingEffects
     offset: 0
     size: 32
   virtual_functions: []
@@ -102084,7 +102084,7 @@ structs:
   size: 424
   fields:
   - type: Client::Game::Character::DrawObjectData
-    name: _weaponData
+    name: WeaponData
     offset: 16
     size: 3
   - type: Client::Game::Character::EquipmentModelId
@@ -102249,7 +102249,7 @@ structs:
   size: 1440
   fields:
   - type: Client::UI::Misc::RaptureHotbarModule::SavedHotBar
-    name: _hotBars
+    name: HotBars
     offset: 0
     size: 18
   virtual_functions: []
@@ -102594,14 +102594,14 @@ structs:
     name: Crafts
     offset: 208
   - type: StdVector<Client::UI::Agent::AgentMJICraftSchedule::CraftData*>
-    name: _unlockedObjectsPerTheme
+    name: UnlockedObjectsPerTheme
     offset: 232
     size: 32
   - type: StdVector<Client::UI::Agent::AgentMJICraftSchedule::CraftData*>
     name: CraftsSortedByName
     offset: 1000
   - type: Client::UI::Agent::AgentMJICraftSchedule::WorkshopData
-    name: _workshopSchedules
+    name: WorkshopSchedules
     offset: 1024
     size: 4
   - type: Client::UI::Agent::AgentMJICraftSchedule::WorkshopData
@@ -102617,7 +102617,7 @@ structs:
     name: CurScheduleSettingStartingSlot
     offset: 1456
   - type: Client::UI::Agent::AgentMJICraftSchedule::MaterialData
-    name: _curScheduleSettingMaterials
+    name: CurScheduleSettingMaterials
     offset: 1464
     size: 5
   - type: byte
@@ -102722,19 +102722,19 @@ structs:
     name: ConfirmAddonHandle
     offset: 4
   - type: unsigned int
-    name: _currencyIconIds
+    name: CurrencyIconIds
     offset: 8
     size: 2
   - type: int
-    name: _currencyCounts
+    name: CurrencyCounts
     offset: 16
     size: 2
   - type: int
-    name: _currencyStackSizes
+    name: CurrencyStackSizes
     offset: 24
     size: 2
   - type: unsigned int
-    name: _currencyItemIds
+    name: CurrencyItemIds
     offset: 32
     size: 2
   - type: byte
@@ -102765,7 +102765,7 @@ structs:
     name: Items
     offset: 240
   - type: StdVector<Client::UI::Agent::AgentMJIDisposeShop::ItemData*>
-    name: _perCategoryItems
+    name: PerCategoryItems
     offset: 264
     size: 4
   - type: byte
@@ -103685,11 +103685,11 @@ structs:
     name: SoftKeyboardDevice
     offset: 33104
   - type: byte
-    name: _currentUIScene
+    name: CurrentUIScene
     offset: 33384
     size: 16
   - type: byte
-    name: _loadingUIScene
+    name: LoadingUIScene
     offset: 33400
     size: 16
   - type: unsigned __int16
@@ -104564,7 +104564,7 @@ structs:
     name: Unk8338
     offset: 33592
   - type: Client::System::String::Utf8String
-    name: _unkArray
+    name: UnkArray
     offset: 33696
     size: 6
   - type: Client::System::String::Utf8String
@@ -104614,11 +104614,11 @@ structs:
     name: NameplateInfoCount
     offset: 113592
   - type: Client::UI::RaptureAtkModule::NamePlateInfo
-    name: _namePlateInfoEntries
+    name: NamePlateInfoEntries
     offset: 113600
     size: 50
   - type: Client::UI::RaptureAtkModule::CrystalCache
-    name: _crystalItemCache
+    name: CrystalItemCache
     offset: 143016
     size: 18
   - type: Client::UI::RaptureAtkModule::ItemCache*
@@ -104628,7 +104628,7 @@ structs:
     name: EquippedItemCache
     offset: 145760
   - type: Client::UI::RaptureAtkModule::InventoryCache
-    name: _inventoryItemCache
+    name: InventoryItemCache
     offset: 145768
     size: 160
   - type: unsigned int
@@ -104795,7 +104795,7 @@ structs:
     name: InventorySorter
     offset: 64
   - type: Client::UI::Misc::ItemOrderModuleSorter*
-    name: _armourySorter
+    name: ArmourySorter
     offset: 72
     size: 12
   - type: Client::UI::Misc::ItemOrderModuleSorter*
@@ -104913,11 +104913,11 @@ structs:
     name: DatFileLoadedSuccessfully
     offset: 82
   - type: byte
-    name: _expacJobHotbarsCreated
+    name: ExpacJobHotbarsCreated
     offset: 84
     size: 12
   - type: byte
-    name: _pvPHotbarsCreated
+    name: PvPHotbarsCreated
     offset: 96
     size: 22
   - type: byte
@@ -104927,18 +104927,18 @@ structs:
     name: MateriaMeldState
     offset: 120
   - type: byte
-    name: _hotbarShareStateBitmask
+    name: HotbarShareStateBitmask
     offset: 124
     size: 4
   - type: byte
-    name: _hotbarShareStateBitmask2
+    name: HotbarShareStateBitmask2
     offset: 128
     size: 4
   - type: Client::UI::Misc::RaptureHotbarModule::ClearCallback*
     name: ClearCallbackPtr
     offset: 136
   - type: Client::UI::Misc::RaptureHotbarModule::HotBar
-    name: _hotBars
+    name: HotBars
     offset: 144
     size: 18
   - type: Client::UI::Misc::RaptureHotbarModule::HotBar
@@ -104954,7 +104954,7 @@ structs:
     name: PetHotbarMode
     offset: 72048
   - type: Client::UI::Misc::RaptureHotbarModule::SavedHotBarGroup
-    name: _savedHotBars
+    name: SavedHotBars
     offset: 72052
     size: 65
   - type: Client::UI::Misc::CrossHotbarFlags
@@ -104970,7 +104970,7 @@ structs:
     name: ShowPvPHotbarSwapNotification
     offset: 165661
   - type: Client::UI::Misc::RaptureHotbarModule::DutyActionSlot
-    name: _dutyActionSlots
+    name: DutyActionSlots
     offset: 165664
     size: 2
   - type: byte
@@ -105305,14 +105305,14 @@ structs:
     name: AddonSheet
     offset: 1568
   - type: Client::System::String::Utf8String
-    name: _unkStrings0
+    name: UnkStrings0
     offset: 1584
     size: 7
   - type: StdDeque<Component::Text::TextParameter>
     name: LocalTextParameters
     offset: 2312
   - type: Client::System::String::Utf8String
-    name: _unkStrings1
+    name: UnkStrings1
     offset: 2392
     size: 9
   - type: Component::Excel::ExcelSheet*
@@ -105585,7 +105585,7 @@ structs:
     name: ChocoboBarding3
     offset: 576
   - type: Client::UI::Agent::AgentInspect::ItemData
-    name: _items
+    name: Items
     offset: 680
     size: 13
   - type: Client::UI::Agent::AgentInspect::FreeCompanyData
@@ -105743,33 +105743,33 @@ structs:
     name: CurrentMapBgPath
     offset: 656
   - type: Client::System::String::Utf8String
-    name: _mapSelectionStrings
+    name: MapSelectionStrings
     offset: 760
     size: 4
   - type: Client::System::String::Utf8String
     name: MapTitleString
     offset: 1176
   - type: Client::UI::Agent::MapMarkerInfo
-    name: _mapMarkers
+    name: MapMarkers
     offset: 1592
     size: 132
   - type: Client::UI::Agent::TempMapMarker
-    name: _tempMapMarkers
+    name: TempMapMarkers
     offset: 11096
     size: 12
   - type: Client::UI::Agent::FlagMapMarker
     name: FlagMapMarker
     offset: 14360
   - type: Client::UI::Agent::MapMarkerBase
-    name: _warpMarkers
+    name: WarpMarkers
     offset: 14432
     size: 12
   - type: Client::UI::Agent::MiniMapGatheringMarker
-    name: _miniMapGatheringMarkers
+    name: MiniMapGatheringMarkers
     offset: 15104
     size: 6
   - type: Client::UI::Agent::MiniMapMarker
-    name: _miniMapMarkers
+    name: MiniMapMarkers
     offset: 16112
     size: 100
   - type: float
@@ -106289,11 +106289,11 @@ structs:
     name: InsideFestivalTransitionLayerUpdate
     offset: 61
   - type: Client::Game::GameMain::Festival
-    name: _activeFestivals
+    name: ActiveFestivals
     offset: 64
     size: 4
   - type: Client::Game::GameMain::Festival
-    name: _newFestivals
+    name: NewFestivals
     offset: 80
     size: 4
   - type: float
@@ -107058,11 +107058,11 @@ structs:
   size: 16384
   fields:
   - type: Client::Game::UI::MarkerInfo
-    name: _questMarkers
+    name: QuestMarkers
     offset: 152
     size: 30
   - type: Client::Game::UI::MarkerInfo
-    name: _levequestMarkers
+    name: LevequestMarkers
     offset: 4472
     size: 16
   - type: StdVector<Client::Game::UI::MapMarkerData>
@@ -107078,7 +107078,7 @@ structs:
     name: GuildOrderGuideMarkers
     offset: 7080
   - type: Client::Game::UI::MarkerInfo
-    name: _housingMarkers
+    name: HousingMarkers
     offset: 7096
     size: 62
   - type: StdList<Client::Game::UI::MarkerInfo>
@@ -107255,31 +107255,31 @@ structs:
     name: CharaCard
     offset: 96016
   - type: byte
-    name: _unlockLinkBitmask
+    name: UnlockLinkBitmask
     offset: 96596
     size: 64
   - type: byte
-    name: _unlockedAetherytesBitmask
+    name: UnlockedAetherytesBitmask
     offset: 96660
     size: 26
   - type: byte
-    name: _unlockedHowtoBitmask
+    name: UnlockedHowtoBitmask
     offset: 96686
     size: 36
   - type: byte
-    name: _unlockedCompanionsBitmask
+    name: UnlockedCompanionsBitmask
     offset: 96722
     size: 64
   - type: byte
-    name: _chocoboTaxiStandsBitmask
+    name: ChocoboTaxiStandsBitmask
     offset: 96786
     size: 11
   - type: byte
-    name: _cutsceneSeenBitmask
+    name: CutsceneSeenBitmask
     offset: 96798
     size: 159
   - type: byte
-    name: _unlockedTripleTriadCardsBitmask
+    name: UnlockedTripleTriadCardsBitmask
     offset: 96957
     size: 51
   - type: unsigned __int64
@@ -107746,7 +107746,7 @@ structs:
     name: CompanionObject
     offset: 6960
   - type: byte
-    name: _freeCompanyTag
+    name: FreeCompanyTag
     offset: 6976
     size: 6
   - type: Client::Game::Object::GameObjectId
@@ -108257,7 +108257,7 @@ structs:
     name: UIModule
     offset: 8
   - type: Client::UI::Agent::AgentBannerInterface::Storage::CharacterData
-    name: _characters
+    name: Characters
     offset: 32
     size: 8
   - type: __int64
@@ -108371,14 +108371,14 @@ structs:
     name: AtkCursor
     offset: 824
   - type: Component::GUI::AtkEventDispatcher
-    name: _atkEventDispatcher
+    name: AtkEventDispatcher
     offset: 856
     size: 32
   - type: unsigned int
     name: NextEventDispatcherIndex
     offset: 2136
   - type: Component::GUI::AtkEvent
-    name: _registeredEvents
+    name: RegisteredEvents
     offset: 2168
     size: 10000
   virtual_functions: []
@@ -108462,11 +108462,11 @@ structs:
     name: MacroName
     offset: 824
   - type: Client::System::String::Utf8String
-    name: _macroLines
+    name: MacroLines
     offset: 928
     size: 15
   - type: Client::System::String::Utf8String
-    name: _skippedMacroLines
+    name: SkippedMacroLines
     offset: 2488
     size: 15
   - type: int
@@ -108640,7 +108640,7 @@ structs:
     name: LobbyTextParameters
     offset: 2648
   - type: Client::System::String::Utf8String
-    name: _tempUtf8Strings
+    name: TempUtf8Strings
     offset: 2688
     size: 13
   - type: __int8
@@ -108777,15 +108777,15 @@ structs:
     name: AvailableMammetLeavings
     offset: 728
   - type: Client::Game::MJI::MJIAnimal
-    name: _MJIAnimals
+    name: MJIAnimals
     offset: 744
     size: 20
   - type: byte
-    name: _roamingMinions
+    name: RoamingMinions
     offset: 1784
     size: 512
   - type: Client::Game::MJI::MJIMinionSlot
-    name: _minionSlots
+    name: MinionSlots
     offset: 2296
     size: 50
   - type: Client::Game::Event::EventHandler
@@ -108868,14 +108868,14 @@ structs:
   size: 1216
   fields:
   - type: byte
-    name: _recipeExcelRows
+    name: RecipeExcelRows
     offset: 528
     size: 106
   - type: Client::System::String::Utf8String
     name: RecipeName
     offset: 800
   - type: byte
-    name: _recipeLevelTableExcelRows
+    name: RecipeLevelTableExcelRows
     offset: 904
     size: 20
   - type: Component::Excel::ExcelSheet*
@@ -108985,7 +108985,7 @@ structs:
     name: Sequence
     offset: 832
   - type: byte
-    name: _unionData
+    name: UnionData
     offset: 834
     size: 10
   - type: Client::System::String::Utf8String
@@ -109352,7 +109352,7 @@ structs:
   size: 974896
   fields:
   - type: Client::UI::RaptureAtkHistory
-    name: _atkHistory
+    name: AtkHistory
     offset: 944
     size: 19
   - type: int
@@ -110373,7 +110373,7 @@ structs:
     name: SpectralCurrentActive
     offset: 7400
   - type: Client::Game::InstanceContent::InstanceContentOceanFishing::FishDataStruct
-    name: _fishData
+    name: FishData
     offset: 7484
     size: 60
   - type: byte
@@ -110389,7 +110389,7 @@ structs:
     name: LocalPlayerAllResult
     offset: 8484
   - type: Client::Game::InstanceContent::InstanceContentOceanFishing::AllResultStruct
-    name: _allResults
+    name: AllResults
     offset: 8524
     size: 10
   - type: unsigned int
@@ -110670,7 +110670,7 @@ structs:
     name: MagiaAether
     offset: 4265
   - type: Client::System::String::Utf8String
-    name: _publicContentTextDataStrings
+    name: PublicContentTextDataStrings
     offset: 4272
     size: 4
   - type: Client::System::String::Utf8String
@@ -110769,7 +110769,7 @@ structs:
     name: MapMarkerIconId
     offset: 1768
   - type: unsigned int
-    name: _objectIds
+    name: ObjectIds
     offset: 1888
     size: 32
   - type: unsigned int
@@ -110972,15 +110972,15 @@ structs:
   size: 10200
   fields:
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo
-    name: _party
+    name: Party
     offset: 7496
     size: 4
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo
-    name: _items
+    name: Items
     offset: 7528
     size: 16
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo
-    name: _chests
+    name: Chests
     offset: 7576
     size: 16
   - type: unsigned int

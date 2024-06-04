@@ -203,7 +203,7 @@ ReExport:
             return new ProcessedFixedField {
                 FieldType = elementType,
                 FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
+                FieldName = field.Name[1].ToString().ToUpper() + field.Name[2..],
                 FixedSize = arrLength
             };
         }
