@@ -4253,7 +4253,11 @@ classes:
       4: Hide
       5: IsAgentActive
       6: Update
+      7: IsActivatable
       8: GetAddonId
+      9: OnGameEvent
+      10: OnLevelChange
+      11: OnClassJobChange
     funcs:
       0x14021CED0: ctor
       0x14021CF00: Finalize
@@ -4323,6 +4327,9 @@ classes:
       0x1402259C0: GetAgentFGSHud
       0x1402259D0: GetAgentContext
       0x1402259E0: GetAgentInventoryContext
+      0x14022B2D0: PropagateGameEvent
+      0x14022B530: PropagateLevelChange
+      0x14022B590: PropagateClassJobChange
   Client::UI::Agent::AgentEventFade:
     vtbls:
       - ea: 0x1419E0460
@@ -6695,6 +6702,8 @@ classes:
       0x14062A040: Update
       0x14062A4C0: HandleInputUpdate
       0x14062A590: ShouldLimitFps
+      0x14062F830: PropagateLevelChange
+      0x14062F880: PropagateClassJobChange
   Client::UI::Misc::PvpSetModule:
     vtbls:
       - ea: 0x141A1F300
