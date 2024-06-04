@@ -4334,16 +4334,16 @@ classes:
       0x1402641A0: ShowCharacterNotFoundWarning
       0x140264380: GetLobbyText
       0x14031A9B0: SetupLobbyCamera
-  Client::UI::Agent::AgentLobby::LobbyData:
+  Client::UI::Agent::LobbyData:
     funcs:
       0x140241A50: GetCharacterEntryByIndex
-  Client::UI::Agent::AgentLobby::LobbySubscriptionInfo:
+  Client::UI::Agent::LobbySubscriptionInfo:
     funcs:
       0x14161A280: GetDaysUntilNextVeteranRank
       0x14161A290: GetDaysRemaining
       0x14161A2A0: GetVeteranRewardRank
       0x14161A2B0: GetTotalDaysSubscribed
-  Client::UI::Agent::AgentLobby::CharaSelectCharacterEntry:
+  Client::UI::Agent::CharaSelectCharacterEntry:
     funcs:
       0x14023BF20: IsAnyRetainerNameChangeRequired
       0x14023C090: IsInDifferentRegion
@@ -4353,7 +4353,7 @@ classes:
       0x14161A3C0: IsUnk32
       0x14161A3D0: IsMissingExVersionForLogin
       0x14161A420: IsNameChangeRequired
-  Client::UI::Agent::AgentLobby::CharaSelectRetainerInfo:
+  Client::UI::Agent::CharaSelectRetainerInfo:
     funcs:
       0x14161A430: IsNameChangeRequired
   Client::UI::Agent::AgentCursor:
