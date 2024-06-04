@@ -306,7 +306,67 @@ functions:
   0x1400AA9A0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400AAAD0: GetPartyMemberClassJobByContentId
   0x140748B20: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
-  0x14076A390: ProcessActorControlPacket
+  0x140767F30: ProcessPacketSpawnPlayer
+  0x140767F90: ProcessPacketSpawnNPC
+  0x140768000: ProcessPacketSpawnBoss
+  0x140768070: ProcessPacketDespawnCharacter
+  0x1407680D0: ProcessPacketStatusEffectListPlayer
+  0x140768130: ProcessPacketStatusEffectListPlayerDouble
+  0x1407681A0: ProcessPacketUpdateHpMpTp
+  0x140768640: ProcessPacketStatusEffectList
+  0x140768650: ProcessPacketStatusEffectListEureka
+  0x140768790: ProcessPacketStatusEffectListBozja
+  0x140768890: ProcessPacketStatusEffectListDouble
+  0x140768A10: ProcessPacketUpdateClassInfo
+  0x140768A20: ProcessPacketUpdateClassInfoEureka
+  0x140768A70: ProcessPacketUpdateClassInfoBozja
+  0x140768AB0: ProcessPacketEffectResult
+  0x140768EB0: ProcessPacketEffectResultBasic
+  0x140769150: ProcessPacketPlayerStats
+  0x1407691E0: ProcessPacketPlayerSetup
+  0x1407692A0: ProcessPacketFirstAttack
+  0x1407692E0: ProcessPacketPlayerStateFlags
+  0x140769300: ProcessPacketPlayerClassInfo
+  0x140769430: ProcessPacketPlayerBlueMageActions
+  0x140769490: ProcessPacketUpdateRecastTimes
+  0x1407694E0: ProcessPacketActorSetPos
+  0x140769500: ProcessPacketActorMove
+  0x140769580: ProcessPacketPlaceMarker
+  0x1407695A0: ProcessPacketFieldMarkerPreset
+  0x1407695C0: ProcessPacketFieldMarker
+  0x1407695E0: ProcessPacketActorCast
+  0x140769B70: ProcessPacketActorCustomizeData
+  0x140769E60: ProcessPacketActionEffect1
+  0x140769F50: ProcessPacketActionEffect8
+  0x14076A060: ProcessPacketActionEffect16
+  0x14076A170: ProcessPacketActionEffect24
+  0x14076A280: ProcessPacketActionEffect32
+  0x14076A390: ProcessPacketActorControl
+  0x140777C40: ProcessPacketUpdateInventorySlot
+  0x1407780A0: ProcessPacketInventoryActionAck
+  0x140778290: ProcessPacketUpdateParty
+  0x1407789E0: ProcessPacketUpdateAllianceNormal
+  0x140778A20: ProcessPacketUpdateAllianceSmall
+  0x140778A60: ProcessPacketInitZone
+  0x140778C30: ProcessPacketApplyIdScramble
+  0x140778CF0: ProcessPacketUpdateHate
+  0x140778D50: ProcessPacketUpdateHater
+  0x140778E00: ProcessPacketSpawnObject
+  0x140779190: ProcessPacketSpawnTreasure
+  0x1407793A0: ProcessPacketDespawnObject
+  0x1407793E0: ProcessPacketOpenTreasure
+  0x140779630: ProcessPacketLootMessage
+  0x140779680: ProcessPacketTreasureFadeOut
+  0x140779710: ProcessPacketWeatherChange
+  0x140779730: ProcessPacketDiscovery
+  0x140779770: ProcessPacketPlayerTitleList
+  0x1407797C0: ProcessPacketUpdatePartyPositions
+  0x1407797F0: ProcessPacketUpdateAllianceNormalPositions
+  0x140779820: ProcessPacketUpdateAllianceSmallPositions
+  0x140779B30: ProcessPacketRSVData
+  0x140779B50: ProcessPacketRSFData
+  0x140779BB0: ProcessPacketHuntingLogEntry
+  0x140779BF0: ProcessPacketNPCYell
   0x140B1E450: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B71C20: WorldToScreenPoint
   0x14145E250: GetInstanceContentCrystallineConflictDirector
@@ -7430,6 +7490,16 @@ classes:
       0x140761740: StartOmen
       0x140761AE0: StartOmenDirectional
       0x1407BC5C0: ctor
+  Client::Game::Character::Character::CastInfo:
+    funcs:
+      0x1409BDB70: Reset
+      0x1409BDBE0: ClearInfo1
+      0x1409BDC10: ClearInfo2
+      0x1409BDC40: ClearResponse
+      0x1409BDC90: Start
+      0x1409BDCE0: Finish
+      0x1409BDD30: UpdateTotal
+      0x1409BDE00: SetResponseAction
   Client::Game::Control::CharacterLookAtController:
     vtbls:
       - ea: 0x141A05808
@@ -8054,6 +8124,25 @@ classes:
     funcs:
       0x1407BC4E0: ctor
       0x1407BC7A0: Finalize
+  Client::Game::Character::ActionEffectHandler:
+    funcs:
+      0x1407BC410: ctor
+      0x1409DA940: ApplyOneTargetEffect
+      0x1409DC230: ApplySelfEffects
+      0x1409DC430: PlaySoundEffect
+      0x1409DC5F0: ApplyKnockback
+      0x1409DC7C0: ApplyAttract
+      0x1409DCAA0: Init
+      0x1409DCAC0: Clear
+      0x1409DCAE0: GetEmptyIncomingEntry
+      0x1409DCD30: FindIncomingEntry
+      0x1409DCEB0: ApplyAllTargetEffects
+      0x1409DD0B0: ApplyEffectResult
+      0x1409DD180: FinishCast # static
+      0x1409DD360: ShowLogMessage # static
+      0x1409DDD60: ApplyAll # static
+      0x1409DDE90: Receive # static
+      0x1409DE5A0: ConvertQuantizedPosToFloat # static
   Client::Game::Character::MJILivelyActor:
     vtbls:
       - ea: 0x141C41DB0

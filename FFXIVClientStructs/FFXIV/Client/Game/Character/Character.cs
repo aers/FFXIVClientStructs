@@ -137,6 +137,9 @@ public unsafe partial struct Character {
     [VirtualFunction(81)]
     public partial CastInfo* GetCastInfo();
 
+    [VirtualFunction(83)]
+    public partial ActionEffectHandler* GetActionEffectHandler();
+
     [VirtualFunction(85)]
     public partial ForayInfo* GetForayInfo();
 
@@ -150,22 +153,23 @@ public unsafe partial struct Character {
         [FieldOffset(0x01)] public byte Interruptible;
         [FieldOffset(0x02)] public ActionType ActionType;
         [FieldOffset(0x04)] public uint ActionId;
-        [FieldOffset(0x08)] public uint Sequence;
-        [FieldOffset(0x10)] public ulong CastTargetId;
-        [FieldOffset(0x20)] public Vector3 CastLocation;
+        [FieldOffset(0x08)] public uint SourceSequence; // for player-initiated casts - monotonically increasing id of the cast
+        [FieldOffset(0x10)] public GameObjectId TargetId;
+        [FieldOffset(0x20)] public Vector3 TargetLocation;
         [FieldOffset(0x30)] public float Rotation;
         [FieldOffset(0x34)] public float CurrentCastTime;
         [FieldOffset(0x38)] public float TotalCastTime;
         [FieldOffset(0x3C)] public float AdjustedTotalCastTime;
 
-        [FieldOffset(0x40)] public uint UsedActionId;
-
-        [FieldOffset(0x44)] public ActionType UsedActionType;
-        [FieldOffset(0x4C)] public uint ResponseGlobalCounter;
-        [FieldOffset(0x50)] public uint ResponseSequence;
-
-        [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray32<GameObjectId> _actionRecipientsObjectIds;
-        [FieldOffset(0x158)] public int ActionRecipientsCount;
+        // fields below (Response*) are set when ActionEffect is received - at this point cast can't be cancelled - this is the start of the slidecast window
+        [FieldOffset(0x40)] public uint ResponseSpellId;
+        [FieldOffset(0x44)] public ActionType ResponseActionType;
+        [FieldOffset(0x48)] public uint ResponseActionId;
+        [FieldOffset(0x4C)] public uint ResponseGlobalSequence;
+        [FieldOffset(0x50)] public uint ResponseSourceSequence;
+        [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray32<GameObjectId> _responseTargetIds;
+        [FieldOffset(0x158)] public byte ResponseTargetCount;
+        [FieldOffset(0x159)] public byte ResponseFlags; // see ActionEffectHandler.Header.Flags
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 2)]
