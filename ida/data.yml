@@ -1660,7 +1660,6 @@ classes:
       0x14099A180: Update
       0x14099A560: UpdateMainCommands
       0x1409AADE0: ctor
-      0x14062F880: PropagateClassJobChange
       0x140996E40: SetUnlockLinkValue
       0x140996EE0: IsUnlockLinkUnlocked
       0x140996F10: IsUnlockLinkUnlockedOrQuestCompleted
@@ -4329,6 +4328,7 @@ classes:
       0x1402259D0: GetAgentContext
       0x1402259E0: GetAgentInventoryContext
       0x14022B2D0: PropagateGameEvent
+      0x14022B530: PropagateLevelChange
       0x14022B590: PropagateClassJobChange
   Client::UI::Agent::AgentEventFade:
     vtbls:
@@ -6702,6 +6702,8 @@ classes:
       0x14062A040: Update
       0x14062A4C0: HandleInputUpdate
       0x14062A590: ShouldLimitFps
+      0x14062F830: PropagateLevelChange
+      0x14062F880: PropagateClassJobChange
   Client::UI::Misc::PvpSetModule:
     vtbls:
       - ea: 0x141A1F300
