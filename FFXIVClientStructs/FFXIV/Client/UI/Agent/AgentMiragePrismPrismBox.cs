@@ -37,7 +37,7 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x1B9CC)] public PrismBoxCrystallizeItem CrystallizeSelectedItem;
 
     [FieldOffset(0x1B9F4)] public uint FilterFlags;
-    [FieldOffset(0x1B9F8)] public void* AgentCabinet;
+    [FieldOffset(0x1B9F8)] public AgentCabinet* AgentCabinet;
     [FieldOffset(0x1BA00)] public AgentMiragePrismMiragePlate* AgentMiragePrismMiragePlate;
     [FieldOffset(0x1BA08)] public byte FilterLevel;
     [FieldOffset(0x1BA0A)] public byte FilterSex;

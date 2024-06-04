@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Component.Excel;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::Camera
@@ -24,7 +26,7 @@ public partial struct Camera {
 [Inherits<Camera>]
 [StructLayout(LayoutKind.Explicit, Size = 0x300)]
 public unsafe partial struct LobbyCamera {
-    [FieldOffset(0x2F8)] public void* LobbyExcelSheet;
+    [FieldOffset(0x2F8)] public ExcelSheet* LobbyExcelSheet;
 }
 
 // Client::Game::Camera3

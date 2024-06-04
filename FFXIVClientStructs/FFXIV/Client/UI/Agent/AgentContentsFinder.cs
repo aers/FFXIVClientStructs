@@ -30,10 +30,10 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x2078)] public byte SelectedTab;
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8")]
-    public partial void* OpenRegularDuty(uint contentsFinderCondition, byte a2 = 0);
+    public partial void OpenRegularDuty(uint contentsFinderCondition, bool hideIfShown = false);
 
     [MemberFunction("E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20")]
-    public partial void* OpenRouletteDuty(byte roulette, byte a2 = 0);
+    public partial void OpenRouletteDuty(byte roulette, bool hideIfShown = false);
 }
 
 // TODO: remove unused struct?

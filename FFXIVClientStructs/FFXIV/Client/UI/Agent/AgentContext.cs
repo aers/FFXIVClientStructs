@@ -67,10 +67,10 @@ public unsafe partial struct AgentContext {
 
     [MemberFunction("E8 ?? ?? ?? ?? FF CE 48 FF CF")]
     [GenerateStringOverloads]
-    public partial void AddMenuItem(byte* text, void* handler, long handlerParam, bool disabled = false, bool submenu = false);
+    public partial void AddMenuItem(byte* text, AtkEventInterface* handler, long handlerParam, bool disabled = false, bool submenu = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 69 D6")]
-    public partial void AddMenuItem2(uint addonTextId, void* handler, long handlerParam, bool disabled = false, bool submenu = false);
+    public partial void AddMenuItem2(uint addonTextId, AtkEventInterface* handler, long handlerParam, bool disabled = false, bool submenu = false);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 99 ?? ?? ?? ?? 4C 8B D1")]
     [GenerateStringOverloads]
