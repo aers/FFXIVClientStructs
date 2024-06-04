@@ -31,4 +31,7 @@ public partial struct FieldMarkerPreset {
     [FieldOffset(0x64)] public uint TimeStamp;
 
     public bool IsMarkerActive(int index) => (ActiveMarkers & 1 << index) != 0;
+    public void SetMarkerActive(int index, bool active) {
+        ActiveMarkers = (byte)(active ? ActiveMarkers | 1 << index : ActiveMarkers & ~(1 << index));
+    }
 }
