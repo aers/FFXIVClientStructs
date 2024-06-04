@@ -1660,6 +1660,7 @@ classes:
       0x14099A180: Update
       0x14099A560: UpdateMainCommands
       0x1409AADE0: ctor
+      0x14062F880: PropagateClassJobChange
       0x140996E40: SetUnlockLinkValue
       0x140996EE0: IsUnlockLinkUnlocked
       0x140996F10: IsUnlockLinkUnlockedOrQuestCompleted
@@ -4253,7 +4254,11 @@ classes:
       4: Hide
       5: IsAgentActive
       6: Update
+      7: IsActivatable
       8: GetAddonId
+      9: OnGameEvent
+      10: OnLevelChange
+      11: OnClassJobChange
     funcs:
       0x14021CED0: ctor
       0x14021CF00: Finalize
@@ -4323,6 +4328,8 @@ classes:
       0x1402259C0: GetAgentFGSHud
       0x1402259D0: GetAgentContext
       0x1402259E0: GetAgentInventoryContext
+      0x14022B2D0: PropagateGameEvent
+      0x14022B590: PropagateClassJobChange
   Client::UI::Agent::AgentEventFade:
     vtbls:
       - ea: 0x1419E0460
