@@ -33,8 +33,8 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0xA39)] public bool WinSockInitialized;
     [FieldOffset(0xA40)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
 
-    [FieldOffset(0xAE4)] public int CurrentDeviceTime; //Timestamp
-    [FieldOffset(0xAE8)] public int CurrentDeviceTimeMillis; //Milliseconds for A74
+    [FieldOffset(0xAEC)] public int CurrentDeviceTime; //Timestamp
+    [FieldOffset(0xAF0)] public int CurrentDeviceTimeMillis; //Milliseconds for CurrentDeviceTime
 
     [FieldOffset(0xB9E)] public short CurrentInstance;
 
