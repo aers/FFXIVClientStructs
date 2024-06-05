@@ -1156,6 +1156,7 @@ classes:
         pointer: False
     funcs:
       0x140932530: Initialize
+      0x1409325C0: Update
   Client::Game::CSBonusManager:
     instances:
       - ea: 0x1422046A8
@@ -1184,7 +1185,6 @@ classes:
       0x1408A4BE0: GetInstance
       0x1408A4D90: GetMemberCount
       0x1408A4DB0: GetMember
-      0x1409325C0: Update
       0x1408A4BF0: UpdateNotifications
   Client::Game::HousingManager:
     instances:
