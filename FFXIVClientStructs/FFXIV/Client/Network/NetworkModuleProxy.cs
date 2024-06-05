@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Network;
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct NetworkModuleProxy {
     [FieldOffset(0x08)] public NetworkModule* NetworkModule;
+    [FieldOffset(0x10)] public NetworkModulePacketReceiverCallback* ReceiverCallback;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 49 8B 85")]
     public partial bool IsInCrossWorldDuty();
