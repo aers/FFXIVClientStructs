@@ -393,7 +393,7 @@ public sealed partial class InteropGenerator {
                     continue;
 
                 writer.WriteLine($"[global::System.Runtime.CompilerServices.InlineArrayAttribute({fixedSizeArrayInfo.Size})]");
-                writer.WriteLine($"public struct FixedSizeArray{fixedSizeArrayInfo.Size}<T> where T : unmanaged");
+                writer.WriteLine($"internal struct FixedSizeArray{fixedSizeArrayInfo.Size}<T> where T : unmanaged");
                 using (writer.WriteBlock()) {
                     writer.WriteLine("private T _element0;");
                 }

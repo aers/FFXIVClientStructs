@@ -34,7 +34,7 @@ internal static class SourceGeneration {
         foreach (int size in sizes) {
             stringBuilder.Append("\r\n");
             stringBuilder.AppendLine($"[global::System.Runtime.CompilerServices.InlineArrayAttribute({size})]");
-            stringBuilder.AppendLine($"public struct FixedSizeArray{size}<T> where T : unmanaged");
+            stringBuilder.AppendLine($"internal struct FixedSizeArray{size}<T> where T : unmanaged");
             stringBuilder.AppendLine("{");
             stringBuilder.AppendLine("    private T _element0;");
             stringBuilder.Append('}');
