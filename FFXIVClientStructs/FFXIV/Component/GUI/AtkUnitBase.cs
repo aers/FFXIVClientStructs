@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkUnitBase
 //   Component::GUI::AtkEventListener
-// ctor "E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0"
+// ctor "E8 ?? ?? ?? ?? 33 D2 48 8D 9F"
 // base class for all AddonXXX classes (visible UI objects)
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventListener>]
@@ -222,7 +222,7 @@ public unsafe partial struct AtkUnitBase {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 57 47 48 8B CE")]
     public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B C6 48 8B D3 48 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 8B D7 4C 8B 83")]
     public partial bool SetAtkValues(uint numValues, AtkValue* values);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 94 24 ?? ?? ?? ?? 03 96 ?? ?? ?? ??")]
