@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Network;
+using FFXIVClientStructs.FFXIV.Client.Network;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
