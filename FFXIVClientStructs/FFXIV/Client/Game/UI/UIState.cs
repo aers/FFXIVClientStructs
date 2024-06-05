@@ -218,7 +218,7 @@ public unsafe partial struct UIState {
     /// </remarks>
     /// <param name="cutsceneId"> RowId of the Cutscene </param>
     /// <returns> Returns <c>true</c> if the player has seen the cutscene before, otherwise <c>false</c>. </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 0F B6 CE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 0F B6 CB 3A C3")]
     public partial bool IsCutsceneSeen(uint cutsceneId);
 
     // Only valid after the timers window has been opened, returns -1 otherwise.
