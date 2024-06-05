@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
+namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyCommonList>]

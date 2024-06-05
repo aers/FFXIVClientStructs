@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -12,8 +13,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0xAD8)]
 public unsafe partial struct AgentFreeCompany {
     [FieldOffset(0x040)] public RaptureTextModule* RaptureTextModule;
-    [FieldOffset(0x048)] public void* InfoProxy0;
-    [FieldOffset(0x050)] public void* InfoProxy1;
+    [FieldOffset(0x048)] public InfoProxyFreeCompany* InfoProxyFreeCompany;
+    [FieldOffset(0x050)] public InfoProxyFreeCompanyMember* InfoProxyFreeCompanyMember;
 
     [FieldOffset(0x05E)] public byte CurrentMemberPageIndex;
 

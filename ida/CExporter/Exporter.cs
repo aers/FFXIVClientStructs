@@ -203,7 +203,7 @@ ReExport:
             return new ProcessedFixedField {
                 FieldType = elementType,
                 FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
+                FieldName = field.Name[1].ToString().ToUpper() + field.Name[2..],
                 FixedSize = arrLength
             };
         }
@@ -245,7 +245,11 @@ ReExport:
             ProcessedVirtualFunction[] virtualFunctions = [];
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
+                var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => new { Name = t.Name, Parameters = t.GetParameters(), ReturnType = t.ReturnType }).ToArray();
                 virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Select(f => {
+                    var memberFunction = memberFunctions.FirstOrDefault(t => t.Name == f.Name);
+                    var returnType = f.FieldType.GetFunctionPointerReturnType();
+                    if (memberFunction?.ReturnType != returnType) memberFunction = null;
                     _processType.Add(f.FieldType.GetFunctionPointerReturnType());
                     return new ProcessedVirtualFunction {
                         VirtualFunctionName = f.Name,
@@ -256,7 +260,7 @@ ReExport:
                             return new ProcessedField {
                                 FieldType = p,
                                 FieldOffset = -1,
-                                FieldName = i == 0 ? "this" : $"a{i + 1}"
+                                FieldName = i == 0 ? "this" : memberFunction?.Parameters[i - 1].Name ?? $"a{i + 1}"
                             };
                         }).ToArray()
                     };
@@ -457,7 +461,7 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("values"));
         emitter.Emit(new MappingStart());
         foreach (var (key, val) in e.EnumValues) {
-            emitter.Emit(new Scalar(key));
+            emitter.Emit(new Scalar(AnchorName.Empty, TagName.Empty, key, ScalarStyle.DoubleQuoted, true, false));
             emitter.Emit(new Scalar(val));
         }
         emitter.Emit(new MappingEnd());

@@ -93,38 +93,6 @@ public unsafe partial struct LobbyData {
 }
 
 [GenerateInterop]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x848)]
-public unsafe partial struct LobbyUIClient {
-    [FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
-    //[FieldOffset(0x18)] public ?* NetworConfig; // contains hosts and ports
-
-    [FieldOffset(0x30)] public StdVector<LobbyDataCenterWorldEntry> CurrentDataCenterWorlds;
-
-    [FieldOffset(0x48)] public LobbySubscriptionInfo* SubscriptionInfo;
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x54)]
-public unsafe struct LobbyDataCenterWorldEntry {
-    [FieldOffset(0)] public ushort Id; // RowId in World sheet
-    [FieldOffset(0x2)] public ushort Index;
-
-    [FieldOffset(0x14), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name; // size unknown
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x40)] // size unknown
-public unsafe struct LobbySubscriptionInfo // name probably totally wrong
-{
-    [FieldOffset(0x8)] public uint Flags;
-
-    [FieldOffset(0x2D)] public byte VeteranRewardRank;
-
-    [FieldOffset(0x30)] public uint TotalDaysSubscribed;
-    [FieldOffset(0x34)] public uint DaysRemaining;
-    [FieldOffset(0x38)] public uint DaysUntilNextVeteranRank;
-}
-
-[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
 public unsafe partial struct CharaSelectCharacterEntry {
     [FieldOffset(0x8)] public ulong ContentId;
@@ -233,25 +201,4 @@ public enum CharaSelectCharacterConfigFlags : ushort {
     StoreCraftedItemsInInventory = 0x20,
     CloseVisor = 0x40
     // ? = 0x80
-}
-
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 40 * 0x10)]
-public unsafe partial struct CharaSelectCharacterList {
-    [StaticAddress("4C 8D 3D ?? ?? ?? ?? 48 8B DA", 3)]
-    public static partial CharaSelectCharacterList* Instance();
-
-    [StaticAddress("48 89 2D ?? ?? ?? ?? 48 8B 6C 24", 3, true)]
-    public static partial Character* GetCurrentCharacter();
-
-    [MemberFunction("E8 ?? ?? ?? ?? 66 44 89 B6")]
-    public static partial void CleanupCharacters();
-
-    [FieldOffset(0), FixedSizeArray] internal FixedSizeArray40<CharaSelectCharacterMapping> _characterMapping;
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public struct CharaSelectCharacterMapping {
-    [FieldOffset(0)] public ulong ContentId;
-    [FieldOffset(8)] public short ClientObjectIndex; // index in ClientObjectManager
 }

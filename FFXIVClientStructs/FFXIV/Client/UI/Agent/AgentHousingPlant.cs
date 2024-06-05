@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentHousingPlant
@@ -19,7 +21,7 @@ public unsafe partial struct AgentHousingPlant {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct SelectedItem {
-        [FieldOffset(0x00)] public uint InventoryId;
+        [FieldOffset(0x00)] public InventoryType InventoryType;
         [FieldOffset(0x04)] public ushort InventorySlot;
 
         [FieldOffset(0x08)] public uint ItemId;
@@ -27,9 +29,8 @@ public unsafe partial struct AgentHousingPlant {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct SelectableItem {
-        // looks like a Client::UI::RaptureAtkModule::ItemCache
-        [FieldOffset(0x00)] public void* ItemCache;
-        [FieldOffset(0x08)] public uint InventoryId;
+        [FieldOffset(0x00)] public RaptureAtkModule.ItemCache* ItemCache;
+        [FieldOffset(0x08)] public InventoryType InventoryType;
         [FieldOffset(0x0C)] public ushort InventorySlot;
     }
 }

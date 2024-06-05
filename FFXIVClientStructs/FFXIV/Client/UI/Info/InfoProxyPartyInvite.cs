@@ -13,8 +13,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 public unsafe partial struct InfoProxyPartyInvite {
     [FieldOffset(0x03C)] public uint InviteTime;
     [FieldOffset(0x042)] public ushort InviterWorldId;
-    [FieldOffset(0x048)] public Utf8String IviterName;
-    [FieldOffset(0x0B0)] public Utf8String IviterNameWithHomeworld;
+    [FieldOffset(0x048)] public Utf8String InviterName;
+    [FieldOffset(0x0B0)] public Utf8String InviterNameWithHomeworld;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 51"), GenerateStringOverloads]
     public partial bool InviteToParty(ulong contentId, byte* name, ushort worldId);

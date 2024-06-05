@@ -6,8 +6,6 @@ on:
       - opened
       - synchronize
       - reopened
-    branches:
-      - main
     paths:
       - 'FFXIVClientStructs/**/*.cs'
 

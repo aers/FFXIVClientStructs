@@ -698,9 +698,9 @@ if api is None:
                     field_type = self.clean_name(virt_func.return_type)
                     field_type = field_type + "(__fastcall* " + field_name + ")("
                     for param in virt_func.parameters:
-                        field_type = field_type + self.clean_name(param.type) + ""
+                        field_type = field_type + self.clean_name(param.type) + " "
                         field_type = field_type + param.name + ","
-                    field_type = field_type[:-2] + ")"
+                    field_type = field_type[:-1] + ")"
 
                     ida_struct.set_member_tinfo(
                         s, meminfo, 0, self.get_tinfo_from_type(field_type), 0
@@ -813,14 +813,26 @@ if api is None:
                     )
                 elif struct.virtual_functions != []:
                     s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
-                    ida_struct.add_struc_member(
-                        s,
-                        "vtable",
-                        0,
-                        self.get_idc_type_from_ida_type("__int64"),
-                        None,
-                        self.get_size_from_ida_type("__int64"),
-                    )
+                    if (
+                        ida_struct.add_struc_member(
+                            s,
+                            "vtable",
+                            0,
+                            self.get_idc_type_from_ida_type("__int64"),
+                            None,
+                            self.get_size_from_ida_type("__int64"),
+                        )
+                        == -0x2
+                    ):
+                        ida_struct.del_struc_members(s, 0, 8)
+                        ida_struct.add_struc_member(
+                            s,
+                            "vtable",
+                            0,
+                            self.get_idc_type_from_ida_type("__int64"),
+                            None,
+                            self.get_size_from_ida_type("__int64"),
+                        )
                     meminfo = ida_struct.get_member_by_name(s, "vtable")
                     ida_struct.set_member_tinfo(
                         s, meminfo, 0, self.get_tinfo_from_type(fullname + "VTable*"), 0
