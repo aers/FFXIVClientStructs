@@ -19,13 +19,13 @@ public unsafe partial struct AtkModuleInterface {
     public partial ExtendArrayData* GetExtendArrayData(int index);
 
     [VirtualFunction(12)]
-    public partial void ClearNumberArrayData();
+    public partial void ClearNumberArrayData(int index);
 
     [VirtualFunction(13)]
-    public partial void ClearStringArrayData();
+    public partial void ClearStringArrayData(int index);
 
     [VirtualFunction(14)]
-    public partial void ClearExtendArrayData();
+    public partial void ClearExtendArrayData(int index);
 
     [VirtualFunction(15)]
     public partial void ResetNumberArrayDataSubscribers(int index);
