@@ -6,6 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct AtkModuleInterface {
+    [VirtualFunction(0)]
+    public partial void Dtor(bool free);
+
     [VirtualFunction(9)]
     public partial NumberArrayData* GetNumberArrayData(int index);
 
@@ -15,8 +18,35 @@ public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(11)]
     public partial ExtendArrayData* GetExtendArrayData(int index);
 
+    [VirtualFunction(12)]
+    public partial void ClearNumberArrayData();
+
+    [VirtualFunction(13)]
+    public partial void ClearStringArrayData();
+
+    [VirtualFunction(14)]
+    public partial void ClearExtendArrayData();
+
+    [VirtualFunction(15)]
+    public partial void ResetNumberArrayDataSubscribers(int index);
+
+    [VirtualFunction(16)]
+    public partial void ResetStringArrayDataSubscribers(int index);
+
+    [VirtualFunction(21)]
+    public partial bool CloseAddon(uint addonId);
+
+    [VirtualFunction(23)]
+    public partial bool RefreshAddon(uint addonId, uint numValues, AtkValue* values);
+
     [VirtualFunction(26)]
     public partial bool IsAddonReady(uint addonId);
+
+    [VirtualFunction(28)]
+    public partial void ClearFocus();
+
+    [VirtualFunction(33)]
+    public partial bool IsCursorVisible();
 
     [VirtualFunction(40)]
     public partial SoftKeyboardDeviceInterface* GetSoftKeyboardDeviceInterface();
