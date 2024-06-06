@@ -1875,6 +1875,8 @@ classes:
       0x140983AF0: SetInstance
       0x140983B00: GetInstance
       0x140983B10: IsInstancedArea
+      0x140983830: ShowInstanceSelection
+      0x140983A90: CloseInstanceSelection
   Client::Game::UI::PublicInstance::Listener:
     vtbls:
       - ea: 0x141A6FD68
