@@ -640,6 +640,26 @@ classes:
   Component::GUI::AtkModuleInterface:
     vtbls:
       - ea: 0x141A088C0
+    vfuncs:
+      0: dtor
+      9: GetNumberArrayData
+      10: GetStringArrayData
+      11: GetExtendArrayData
+      12: ClearNumberArrayData
+      13: ClearStringArrayData
+      14: ClearExtendArrayData
+      15: ResetNumberArrayDataSubscribers
+      16: ResetStringArrayDataSubscribers
+      17: SetHandlerFunction
+      18: SetAtkModuleEvent
+      21: CloseAddon
+      23: RefreshAddon
+      26: IsAddonReady
+      28: ClearFocus
+      33: IsCursorVisible
+      36: SetAtkHistory
+      39: SetUIVisibility
+      40: GetSoftKeyboardDeviceInterface
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x1419BE928
@@ -1626,6 +1646,9 @@ classes:
       0x140508D90: GetNumberArrayData
       0x140508E30: GetStringArrayData
       0x140508ED0: GetExtendArrayData
+      0x140508F50: ClearNumberArrayData
+      0x140508FD0: ClearStringArrayData
+      0x140509050: ClearExtendArrayData
   Component::GUI::AtkRenderer:
     funcs:
       0x140509970: Initialize
@@ -5926,18 +5949,6 @@ classes:
       - ea: 0x141A096D0
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
-      0: dtor
-      9: GetNumberArrayData
-      10: GetStringArrayData
-      11: GetExtendArrayData
-      17: SetHandlerFunction
-      18: SetAtkModuleEvent
-      21: CloseAddon
-      23: RefreshAddon
-      26: IsAddonReady
-      28: ClearFocus
-      36: SetAtkHistory
-      39: SetUIVisibility
       58: Update
       60: IsUISceneGameMain
       61: GetColorThemeTypeForUIScene

@@ -9,6 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkModule
 //   Component::GUI::AtkModuleInterface
 [GenerateInterop(isInherited: true)]
+[Inherits<AtkModuleInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x82A0)]
 public unsafe partial struct AtkModule {
     [FieldOffset(0x8)] public AtkExternalInterface AtkExternalInterface;
@@ -51,18 +52,6 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x8294)] public bool EnableUiDraw;
 
     [FieldOffset(0x8298)] public bool EnableUiInput;
-
-    [VirtualFunction(9)]
-    public partial NumberArrayData* GetNumberArrayData(int index);
-
-    [VirtualFunction(10)]
-    public partial StringArrayData* GetStringArrayData(int index);
-
-    [VirtualFunction(11)]
-    public partial ExtendArrayData* GetExtendArrayData(int index);
-
-    [VirtualFunction(26)]
-    public partial bool IsAddonReady(uint addonId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 BA 40 84 FF")]
     public partial bool IsTextInputActive();
