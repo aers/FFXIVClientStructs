@@ -19,19 +19,4 @@ public unsafe partial struct RaptureAtkUnitManager {
     [FieldOffset(0x9D00)] public UIModule.UiFlags UiFlags;
 
     [FieldOffset(0x9D14)] public bool IsUiFading; // true whenever FadeMiddleBack is active
-
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01"), GenerateStringOverloads]
-    public partial AtkUnitBase* GetAddonByName(byte* name, int index = 1);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 6B 20")]
-    public partial AtkUnitBase* GetAddonById(ushort id);
-
-    [VirtualFunction(8)]
-    public partial bool ShowAddonById(ushort addonId, bool show); // True calls AtkUnitBase.Show, False calls AtkUnitBase.Hide
-
-    [VirtualFunction(10)]
-    public partial void RefreshAddon(AtkUnitBase* addon, uint numValues, AtkValue* values);
-
-    [VirtualFunction(11)]
-    public partial void UpdateAddonById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
 }
