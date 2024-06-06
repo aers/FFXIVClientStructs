@@ -132,7 +132,7 @@ ReExport:
             .Build();
         var yaml = serializer.Serialize(new YamlExport {
             Enums = [.. _enums],
-            Structs = structsOrdered
+            Structs = structsOrdered.Select(t => t.FixOrder()).ToArray()
         });
 
         new FileInfo(Path.Join(dir.FullName, "ffxiv_structs.yml")).WriteFile(yaml);
@@ -421,6 +421,10 @@ public class ProcessedStruct {
     public required ProcessedMemberFunction[] MemberFunctions;
     [YamlIgnore]
     public Type[] Dependencies => Fields.Select(t => t.FieldType).Where(t => !(t.IsPointer() || t.IsPrimitive || t.IsFixedBuffer() || t.IsEnum || t.IsBaseType())).ToHashSet().ToArray();
+    public ProcessedStruct FixOrder() {
+        Fields = [.. Fields.OrderBy(t => t.FieldOffset)];
+        return this;
+    }
 }
 
 public class ProcessedEnum {

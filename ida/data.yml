@@ -489,10 +489,15 @@ classes:
       0x1415EBAB0: InitializeLobbyConnection
       0x1415EC290: dtorHelper
       0x1415F1660: Update
-  Application:Network::ZoneConnection:
+  Application::Network::ZoneConnection:
     funcs:
+      0x1415F2F50: ctor
       0x1415F2F80: dtor
-  Application:Network::ChatConnection:
+      0x1415F3270: OpenChannel
+      0x1415F32C0: ReceivePacket
+      0x1415F32E0: SendPacket
+      0x1415F3320: CloseChannel
+  Application::Network::ChatConnection:
     funcs:
       0x1415F35F0: dtor
   Application::Network::LobbyClient::LobbyClientMixin:
@@ -635,6 +640,26 @@ classes:
   Component::GUI::AtkModuleInterface:
     vtbls:
       - ea: 0x141A088C0
+    vfuncs:
+      0: dtor
+      9: GetNumberArrayData
+      10: GetStringArrayData
+      11: GetExtendArrayData
+      12: ClearNumberArrayData
+      13: ClearStringArrayData
+      14: ClearExtendArrayData
+      15: ResetNumberArrayDataSubscribers
+      16: ResetStringArrayDataSubscribers
+      17: SetHandlerFunction
+      18: SetAtkModuleEvent
+      21: CloseAddon
+      23: RefreshAddon
+      26: IsAddonReady
+      28: ClearFocus
+      33: IsCursorVisible
+      36: SetAtkHistory
+      39: SetUIVisibility
+      40: GetSoftKeyboardDeviceInterface
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x1419BE928
@@ -1151,6 +1176,7 @@ classes:
         pointer: False
     funcs:
       0x140932530: Initialize
+      0x1409325C0: Update
   Client::Game::CSBonusManager:
     instances:
       - ea: 0x1422046A8
@@ -1179,7 +1205,6 @@ classes:
       0x1408A4BE0: GetInstance
       0x1408A4D90: GetMemberCount
       0x1408A4DB0: GetMember
-      0x1409325C0: Update
       0x1408A4BF0: UpdateNotifications
   Client::Game::HousingManager:
     instances:
@@ -1621,6 +1646,9 @@ classes:
       0x140508D90: GetNumberArrayData
       0x140508E30: GetStringArrayData
       0x140508ED0: GetExtendArrayData
+      0x140508F50: ClearNumberArrayData
+      0x140508FD0: ClearStringArrayData
+      0x140509050: ClearExtendArrayData
   Component::GUI::AtkRenderer:
     funcs:
       0x140509970: Initialize
@@ -1870,6 +1898,8 @@ classes:
       0x140983AF0: SetInstance
       0x140983B00: GetInstance
       0x140983B10: IsInstancedArea
+      0x140983830: ShowInstanceSelection
+      0x140983A90: CloseInstanceSelection
   Client::Game::UI::PublicInstance::Listener:
     vtbls:
       - ea: 0x141A6FD68
@@ -5921,18 +5951,6 @@ classes:
       - ea: 0x141A096D0
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
-      0: dtor
-      9: GetNumberArrayData
-      10: GetStringArrayData
-      11: GetExtendArrayData
-      17: SetHandlerFunction
-      18: SetAtkModuleEvent
-      21: CloseAddon
-      23: RefreshAddon
-      26: IsAddonReady
-      28: ClearFocus
-      36: SetAtkHistory
-      39: SetUIVisibility
       58: Update
       60: IsUISceneGameMain
       61: GetColorThemeTypeForUIScene
