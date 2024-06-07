@@ -112,7 +112,7 @@ public partial struct RaptureHotbarModule {
         /// The current Icon ID (usually used in form <c>ui/icon/{ID}.tex</c>) that this hotbar slot should display. Loaded
         /// with <see cref="LoadIconId"/> based on information in <see cref="ApparentActionId"/>.
         /// </summary>
-        [FieldOffset(0xCC)] public int IconId;
+        [FieldOffset(0xCC)] public uint IconId;
 
         /// <summary>
         /// The "cost" of an action, usually in MP/TP/CP/GP or similar. The specific display type depends on the value in

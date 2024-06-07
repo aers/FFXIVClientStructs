@@ -28,14 +28,14 @@ public unsafe partial struct SupplyProvisioningData {
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public struct SupplyProvisioningItem {
-    [FieldOffset(0x00)] public int ItemId;
+    [FieldOffset(0x00)] public uint ItemId;
     [FieldOffset(0x04)] public int ExpReward;
     [FieldOffset(0x08)] public int SealReward;
 
     [FieldOffset(0x1A)] public byte NumRequested;
     [FieldOffset(0x28)] public Utf8String ItemName;
 
-    [FieldOffset(0x90)] public int ItemCategoryIconId; // eg, Bracelet IconId, Body IconId
+    [FieldOffset(0x90)] public uint ItemCategoryIconId; // eg, Bracelet IconId, Body IconId
 }
 
 /// <summary>
@@ -52,7 +52,7 @@ public struct GrandCompanyItem {
     /// </summary>
     [FieldOffset(0x68)] public InventoryType Inventory;
 
-    [FieldOffset(0x70)] public int IconId;
+    [FieldOffset(0x70)] public uint IconId;
     [FieldOffset(0x74)] public int ExpReward;
     [FieldOffset(0x78)] public int SealReward;
     [FieldOffset(0x80)] public int NumPossessed;

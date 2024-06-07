@@ -33,9 +33,9 @@ public unsafe partial struct UI3DModule {
     // Client::UI::UI3DModule::MapInfo
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct MapInfo {
-        [FieldOffset(0x8)] public int MapId;
+        [FieldOffset(0x8)] public uint MapId;
 
-        [FieldOffset(0xC)] public int IconId;
+        [FieldOffset(0xC)] public uint IconId;
 
         // theres some other unknowns in here
         [FieldOffset(0x12)] public byte Unk_12;
