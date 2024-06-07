@@ -2182,6 +2182,7 @@ classes:
       0x1409BD5B0: GetSpellIdForAction
       0x1409BDEB0: NextActionSequence
       0x1409BDEE0: UpdateAreaTargetingMode
+      0x1409BE830: ShouldLimitAreaTargetingToRange
       0x1409BE8F0: GetRecastGroup
       0x1409BEB40: UseActionLocation
       0x1409BF970: UseGeneralAction
@@ -2193,6 +2194,8 @@ classes:
       0x1409C0700: UseChocoboRaceItemAction
       0x1409C0740: UseChocoboRaceAbilityAction
       0x1409C0780: UseBgcArmyAction
+      0x1409C0940: RouletteCanUseMinion
+      0x1409C09E0: RouletteCanUseMount
       0x1409C0B10: UseMinionRoulette
       0x1409C0C70: UseMountRoulette
       0x1409C0ED0: CanUseMountRoulette
@@ -2245,9 +2248,12 @@ classes:
       0x1409CB700: CanAssignBlueMageAction
       0x1409CBB50: UseActionFromShell
       0x1409CBD10: IsAreaTargetingModeActive
+      0x1409CBD30: IsAreaTargetingUnlockedFromCursor
+      0x1409CBD90: IsAreaTargetingModeActiveAndUnlockedFromCursor
       0x1409CBE10: StartAreaTargetingMode
       0x1409CBEF0: CancelAreaTargetingMode
       0x1409CBF20: RemoveAreaTargetingVfx
+      0x1409CBFA0: GetAreaTargetingCursorScreenPos
       0x1409CDE20: GetGroundPositionForObject
       0x1409CE220: GetGroundPositionForCursor
       0x1409CE350: GetCurrentCharges          # (this, actionId) -> uint

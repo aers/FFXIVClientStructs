@@ -38,13 +38,13 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0x88)] public uint AreaTargetingActionId;
     [FieldOffset(0x8C)] public ActionType AreaTargetingActionType;
     [FieldOffset(0x90)] public uint AreaTargetingSpellId;
-    // 0x94: int argument to start function, always 0?
-    // 0x98: ulong object to use for area targeting
+    // 0x94: int argument to area-targeting start function, always 0?
+    [FieldOffset(0x98)] public GameObjectId AreaTargetingExecuteAtObject; // if != 0xE0000000, on the next update area-targeted action will be executed at this object
     // 0xA0: bool related to area targeting
     // 0xA8: vfx* related to area targeting
     // 0xB0: vfx* related to area targeting
-    // 0xB8: bool should execute at current cursor pos?
-    // 0xBC: uint ???
+    [FieldOffset(0xB8)] public bool AreaTargetingExecuteAtCursor; // if true, on the next update area-targeted action will be executed at cursor
+    // 0xBC: uint related to area targeting, can be 0/1/2
 
     [FieldOffset(0x110)] public ushort LastUsedActionSequence;
     [FieldOffset(0x112)] public ushort LastHandledActionSequence;
@@ -93,6 +93,9 @@ public unsafe partial struct ActionManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
     public partial uint GetAdjustedActionId(uint actionId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 4B 2C")]
+    public static partial uint GetSpellIdForAction(ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7F 4C 01 44 0F 28 C8")]
     public partial float GetRecastTime(ActionType actionType, uint actionId);
