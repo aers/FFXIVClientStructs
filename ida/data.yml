@@ -2037,6 +2037,7 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+      0x1409613C0: PlacePreset
       0x140960980: ClearFieldMarkers
   Client::Game::LimitBreakController:
     instances:
@@ -3377,9 +3378,9 @@ classes:
       - ea: 0x1419BEA98
         base: Component::GUI::AtkEventListener
     vfuncs:
-      8: ShowAddonByID
+      8: SetAddonVisibility
       10: RefreshAddon
-      11: UpdateAddonByID
+      11: AddonRequestUpdateById
     funcs:
       0x14017C1B0: Finalize
       0x140543B80: ctor

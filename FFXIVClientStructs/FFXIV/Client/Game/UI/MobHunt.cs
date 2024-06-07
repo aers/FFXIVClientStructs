@@ -56,7 +56,7 @@ public unsafe partial struct MobHunt {
     /// <param name="itemId">Mark Bill ItemId</param>
     /// <returns>18 Indicates Not Found</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 E0 3C 12")]
-    public partial int GetMarkIndexFromItemId(int itemId);
+    public partial int GetMarkIndexFromItemId(uint itemId);
 
     [MemberFunction("48 89 5C 24 ?? 56 48 83 EC 20 40 32 F6")]
     public partial bool IsMarkBillUnlocked(byte markIndex);

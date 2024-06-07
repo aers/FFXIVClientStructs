@@ -89,7 +89,7 @@ public unsafe partial struct AgentBannerEditorState {
 
     [FieldOffset(0x2B8)] public EditorOpenType OpenType;
 
-    [FieldOffset(0x2C4)] public uint FrameCountdown; // starting at 0.5s on open
+    [FieldOffset(0x2C4)] public float FrameCountdown; // starting at 0.5s on open
     [FieldOffset(0x2C8)] public int GearsetId;
 
     [FieldOffset(0x2D0)] public int CloseDialogAddonId;

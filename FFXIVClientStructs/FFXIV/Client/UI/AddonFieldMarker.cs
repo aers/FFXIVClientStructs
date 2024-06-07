@@ -20,7 +20,7 @@ public unsafe partial struct AddonFieldMarker {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe struct AddonFieldMarkerInfo {
-    [FieldOffset(0x00)] public int IconId; // Map IconId
+    [FieldOffset(0x00)] public uint IconId; // Map IconId
     [FieldOffset(0x04)] public int Active;
     [FieldOffset(0x08)] public byte* TooltipString; //null-terminated cstring
     [FieldOffset(0x10)] public int Slot; // Index 0-7 [A,B,C,D,1,2,3,4] 

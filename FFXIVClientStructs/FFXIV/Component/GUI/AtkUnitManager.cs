@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // ctor "E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8D 05"
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9C90)]
-public partial struct AtkUnitManager {
+public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x30)] public AtkUnitList DepthLayerOneList;
     [FieldOffset(0x840)] public AtkUnitList DepthLayerTwoList;
@@ -26,6 +26,21 @@ public partial struct AtkUnitManager {
     [FieldOffset(0x8130)] public AtkUnitList UnitList17;
     [FieldOffset(0x8940)] public AtkUnitList UnitList18;
     [FieldOffset(0x9C88)] public AtkUnitManagerFlags Flags;
+
+    [VirtualFunction(8)]
+    public partial bool SetAddonVisibility(ushort addonId, bool visible);
+
+    [VirtualFunction(10)]
+    public partial void RefreshAddon(AtkUnitBase* addon, uint numValues, AtkValue* values);
+
+    [VirtualFunction(11)]
+    public partial void AddonRequestUpdateById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01"), GenerateStringOverloads]
+    public partial AtkUnitBase* GetAddonByName(byte* name, int index = 1);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 6B 20")]
+    public partial AtkUnitBase* GetAddonById(ushort id);
 }
 
 [Flags]

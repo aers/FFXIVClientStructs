@@ -68,7 +68,7 @@ public unsafe partial struct PlayerState {
 
     // Size: (MountSheet.Max(row => row.Order) + 7) / 8
     /// <remarks> Use <see cref="IsMountUnlocked"/> </remarks>
-    [FieldOffset(0x2DD), FixedSizeArray] internal FixedSizeArray35<byte> _ownedMountsBitmask;
+    [FieldOffset(0x2DD), FixedSizeArray] internal FixedSizeArray35<byte> _unlockedMountsBitmask;
     // Size: (OrnamentSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
     [FieldOffset(0x300), FixedSizeArray] internal FixedSizeArray6<byte> _unlockedOrnamentsBitmask;

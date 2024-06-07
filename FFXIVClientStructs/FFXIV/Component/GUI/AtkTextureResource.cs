@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe struct AtkTextureResource {
     [FieldOffset(0x0)] public uint TexPathHash; // crc32(full path)
-    [FieldOffset(0x4)] public int IconId;
+    [FieldOffset(0x4)] public uint IconId;
     [FieldOffset(0x8)] public TextureResourceHandle* TexFileResourceHandle;
 
     [FieldOffset(0x10)] public Texture* KernelTextureObject; // Client::Graphics::Kernel::Texture, renderer texture obj

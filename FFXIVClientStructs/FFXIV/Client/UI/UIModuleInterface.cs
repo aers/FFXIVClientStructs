@@ -101,7 +101,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(172), GenerateStringOverloads] public partial void ShowErrorText(byte* text, bool forceVisible = true);
     [VirtualFunction(173)] public partial void ShowTextClassChange(uint classJobId);
     [VirtualFunction(174)] public partial void ShowGetAction(ActionType actionType, uint actionId);
-    [VirtualFunction(175)] public partial void ShowLocationTitle(int territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
+    [VirtualFunction(175)] public partial void ShowLocationTitle(uint territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
     [VirtualFunction(179)] public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
     [VirtualFunction(182)] public partial void ShowStreak(int streak, int streakType);
     [VirtualFunction(183)] public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
