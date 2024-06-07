@@ -27,7 +27,7 @@ globals:
   0x14272BE50: g_animationFactorRemainder
   0x14272BE54: g_animationFactor #percentage of a 30fps frame rendered this frame
 #fail   0x1421CAC60: g_PerformanceFrequency
-  0x14273CC78: g_Client::Game::Control::Control_LocalPlayerObjectID
+  0x14273CC78: g_Client::Game::Control::Control_LocalPlayerEntityId
   0x14273CC80: g_Client::Game::Control::Control_LocalPlayer
 #fail   0x1421FB530: g_LastTextCommand
 #fail   0x1421FB8C0: g_Client::Game::Character::CharacterManager_BattleCharaMemoryPtr
@@ -306,7 +306,67 @@ functions:
   0x1400B55F0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400B57B0: GetPartyMemberClassJobByContentId
   0x14088DF30: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
-  0x1408B1030: ProcessActorControlPacket
+#fail   0x140767F30: ProcessPacketSpawnPlayer
+#fail   0x140767F90: ProcessPacketSpawnNPC
+#fail   0x140768000: ProcessPacketSpawnBoss
+#fail   0x140768070: ProcessPacketDespawnCharacter
+  0x1408AE8B0: ProcessPacketStatusEffectListPlayer
+  0x1408AE910: ProcessPacketStatusEffectListPlayerDouble
+  0x1408AE980: ProcessPacketUpdateHpMpTp
+  0x1408AF140: ProcessPacketStatusEffectList
+  0x1408AF150: ProcessPacketStatusEffectListEureka
+  0x1408AF2B0: ProcessPacketStatusEffectListBozja
+  0x1408AF3E0: ProcessPacketStatusEffectListDouble
+  0x1408AF560: ProcessPacketUpdateClassInfo
+  0x1408AF570: ProcessPacketUpdateClassInfoEureka
+  0x1408AF5C0: ProcessPacketUpdateClassInfoBozja
+  0x1408AF600: ProcessPacketEffectResult
+  0x1408AF9F0: ProcessPacketEffectResultBasic
+  0x1408AFC90: ProcessPacketPlayerStats
+  0x1408AFD20: ProcessPacketPlayerSetup
+  0x1408AFDE0: ProcessPacketFirstAttack
+  0x1408AFE20: ProcessPacketPlayerStateFlags
+  0x1408AFE40: ProcessPacketPlayerClassInfo
+  0x1408AFF70: ProcessPacketPlayerBlueMageActions
+  0x1408AFFD0: ProcessPacketUpdateRecastTimes
+  0x1408B0020: ProcessPacketActorSetPos
+#fail   0x140769500: ProcessPacketActorMove
+#fail   0x140769580: ProcessPacketPlaceMarker
+#fail   0x1407695A0: ProcessPacketFieldMarkerPreset
+  0x1408B0300: ProcessPacketFieldMarker
+  0x1408B0320: ProcessPacketActorCast
+  0x1408B08B0: ProcessPacketActorCustomizeData
+  0x1408B0BA0: ProcessPacketActionEffect1
+  0x1408B0C70: ProcessPacketActionEffect8
+  0x1408B0D60: ProcessPacketActionEffect16
+  0x1408B0E50: ProcessPacketActionEffect24
+  0x1408B0F40: ProcessPacketActionEffect32
+  0x1408B1030: ProcessPacketActorControl
+  0x1408BF010: ProcessPacketUpdateInventorySlot
+  0x1408BF470: ProcessPacketInventoryActionAck
+#fail   0x140778290: ProcessPacketUpdateParty
+#fail   0x1407789E0: ProcessPacketUpdateAllianceNormal
+#fail   0x140778A20: ProcessPacketUpdateAllianceSmall
+  0x1408BFEA0: ProcessPacketInitZone
+  0x1408C0070: ProcessPacketApplyIdScramble
+  0x1408C0130: ProcessPacketUpdateHate
+  0x1408C0190: ProcessPacketUpdateHater
+  0x1408C0240: ProcessPacketSpawnObject
+  0x1408C05E0: ProcessPacketSpawnTreasure
+  0x1408C0800: ProcessPacketDespawnObject
+  0x1408C0840: ProcessPacketOpenTreasure
+  0x1408C0AA0: ProcessPacketLootMessage
+  0x1408C0AF0: ProcessPacketTreasureFadeOut
+  0x1408C0B80: ProcessPacketWeatherChange
+  0x1408C0BA0: ProcessPacketDiscovery
+  0x1408C0BE0: ProcessPacketPlayerTitleList
+  0x1408C0C30: ProcessPacketUpdatePartyPositions
+  0x1408C0C60: ProcessPacketUpdateAllianceNormalPositions
+#fail   0x140779820: ProcessPacketUpdateAllianceSmallPositions
+  0x1408C0FA0: ProcessPacketRSVData
+  0x1408C0FC0: ProcessPacketRSFData
+  0x1408C1020: ProcessPacketHuntingLogEntry
+  0x1408C1060: ProcessPacketNPCYell
   0x140CCA280: IsInMordionGaol # if this returns true, i'm sorry for you
 #fail   0x140B71C20: WorldToScreenPoint
   0x1417B4C70: GetInstanceContentCrystallineConflictDirector
@@ -429,10 +489,15 @@ classes:
 #fail       0x1415EBAB0: InitializeLobbyConnection
       0x141A61660: dtorHelper
 #fail       0x1415F1660: Update
-  Application:Network::ZoneConnection:
+  Application::Network::ZoneConnection:
     funcs:
+#fail       0x1415F2F50: ctor
       0x141A67AF0: dtor
-  Application:Network::ChatConnection:
+      0x141A67DE0: OpenChannel
+      0x141A67E30: ReceivePacket
+      0x141A67E50: SendPacket
+      0x141A67E90: CloseChannel
+  Application::Network::ChatConnection:
     funcs:
 #fail       0x1415F35F0: dtor
   Application::Network::LobbyClient::LobbyClientMixin:
@@ -575,6 +640,26 @@ classes:
   Component::GUI::AtkModuleInterface:
     vtbls:
       - ea: 0x141F0F0A0
+    vfuncs:
+      0: dtor
+      9: GetNumberArrayData
+      10: GetStringArrayData
+      11: GetExtendArrayData
+      12: ClearNumberArrayData
+      13: ClearStringArrayData
+      14: ClearExtendArrayData
+      15: ResetNumberArrayDataSubscribers
+      16: ResetStringArrayDataSubscribers
+      17: SetHandlerFunction
+      18: SetAtkModuleEvent
+      21: CloseAddon
+      23: RefreshAddon
+      26: IsAddonReady
+      28: ClearFocus
+      33: IsCursorVisible
+      36: SetAtkHistory
+      39: SetUIVisibility
+      40: GetSoftKeyboardDeviceInterface
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x141E7FED0
@@ -1091,6 +1176,7 @@ classes:
         pointer: False
     funcs:
       0x140A92610: Initialize
+      0x140A926A0: Update
   Client::Game::CSBonusManager:
     instances:
 #fail       - ea: 0x1422046A8
@@ -1119,7 +1205,6 @@ classes:
       0x1409FAAC0: GetInstance
       0x1409FAC40: GetMemberCount
       0x1409FAC60: GetMember
-      0x140A926A0: Update
       0x1409FAAD0: UpdateNotifications
   Client::Game::HousingManager:
     instances:
@@ -1561,6 +1646,9 @@ classes:
       0x140611BF0: GetNumberArrayData
       0x140611C90: GetStringArrayData
       0x140611D30: GetExtendArrayData
+      0x140611DB0: ClearNumberArrayData
+      0x140611E30: ClearStringArrayData
+      0x140611EB0: ClearExtendArrayData
   Component::GUI::AtkRenderer:
     funcs:
 #fail       0x140509970: Initialize
@@ -1810,6 +1898,8 @@ classes:
       0x140AF3370: SetInstance
       0x140AF3380: GetInstance
       0x140AF3390: IsInstancedArea
+      0x140AF30B0: ShowInstanceSelection
+      0x140AF3310: CloseInstanceSelection
   Client::Game::UI::PublicInstance::Listener:
     vtbls:
       - ea: 0x141F71170
@@ -1947,6 +2037,7 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+#fail       0x1409613C0: PlacePreset
       0x140ACCF20: ClearFieldMarkers
   Client::Game::LimitBreakController:
     instances:
@@ -2089,7 +2180,7 @@ classes:
 #fail       0x1409BCB60: GetAdjustedAdditionalRecastTime
 #fail       0x1409BCD10: GetActionCost
       0x140B2A110: GetSpellIdForAction
-#fail       0x1409BDE80: NextActionSequence
+#fail       0x1409BDEB0: NextActionSequence
 #fail       0x1409BDEE0: UpdateAreaTargetingMode
 #fail       0x1409BE8F0: GetRecastGroup
 #fail       0x1409BEB40: UseActionLocation
@@ -3287,9 +3378,9 @@ classes:
       - ea: 0x141E80040
         base: Component::GUI::AtkEventListener
     vfuncs:
-      8: ShowAddonByID
+      8: SetAddonVisibility
       10: RefreshAddon
-      11: UpdateAddonByID
+      11: AddonRequestUpdateById
     funcs:
       0x1401C7670: Finalize
 #fail       0x140543B80: ctor
@@ -3366,6 +3457,29 @@ classes:
       3: Reset
       4: GetCurrent
       5: GetCurrent2
+  Client::UI::RaptureAtkHistory:
+    vtbls:
+      - ea: 0x141E80748
+        base: Component::GUI::AtkModuleInterface::AtkHistoryInterface
+    funcs:
+#fail       0x1400EB910: ctor
+  Client::UI::UIClipboard:
+    vtbls:
+      - ea: 0x141E809C0
+    vfuncs:
+      0: dtor
+    funcs:
+      0x140117F10: ctor
+      0x140117F80: Attach
+      0x140117FB0: Detach
+      0x140117FE0: OnClipboardDataChanged
+      0x140118070: OnClipboardViewerChainChanged
+  Common::Configuration::ConfigBase::ChangeEventInterface:
+    vtbls:
+#fail       - ea: 0x1419A6F58
+    vfuncs:
+      0: dtor
+      1: OnConfigChange
   Client::UI::Info::InfoProxyInterface:
     vtbls:
 #fail       - ea: 0x1419BE978
@@ -3383,6 +3497,33 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
+  Client::UI::Info::InfoProxyInvitedInterface:
+    vtbls:
+#fail       - ea: 0x1419BEA40
+  Client::UI::Info::InfoProxyCommonList:
+    vtbls:
+#fail       - ea: 0x1419BF288
+        base: Client::UI::Info::InfoProxyPageInterface
+    vfuncs:
+      8: ClearListData
+      15: GetCurrentLocationName
+      26: Compare #By IsOnline
+      29: CompareHomeworld
+    funcs:
+#fail       0x1400ECF90: ctor
+#fail       0x1400ED0B0: Finalize
+#fail       0x1400ED760: ClearListDataImpl
+#fail       0x1400EDED0: GetContentIDForEntry
+      0x1401169F0: GetEntryByName
+      0x140116AE0: GetEntry
+#fail       0x1400EE650: GetEntryByContentId
+#fail       0x1400EE8A0: SwapData
+  Client::UI::Info::InfoProxyInvitedList:
+    vtbls:
+      - ea: 0x141E81C78
+        base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x14012E530: ctor
   Client::UI::Info::InfoModule:
     vtbls:
       - ea: 0x141E80030
@@ -3405,37 +3546,7 @@ classes:
     funcs:
 #fail       0x1400B2F20: ctor
 #fail       0x14017C440: Finalize
-  Common::Configuration::ConfigBase::ChangeEventInterface:
-    vtbls:
-#fail       - ea: 0x1419A6F58
-    vfuncs:
-      0: dtor
-      1: OnConfigChange
-  Client::UI::RaptureAtkHistory:
-    vtbls:
-      - ea: 0x141E80748
-        base: Component::GUI::AtkModuleInterface::AtkHistoryInterface
-    funcs:
-#fail       0x1400EB910: ctor
-  Client::UI::Info::InfoProxyCommonlist:
-    vtbls:
-#fail       - ea: 0x1419BF288
-        base: Client::UI::Info::InfoProxyPageInterface
-    vfuncs:
-      8: ClearListData
-      15: GetCurrentLocationName
-      26: Compare #By IsOnline
-      29: CompareHomeworld
-    funcs:
-#fail       0x1400ECF90: ctor
-#fail       0x1400ED0B0: Finalize
-#fail       0x1400ED760: ClearListDataImpl
-#fail       0x1400EDED0: GetContentIDForEntry
-      0x1401169F0: GetEntryByName
-      0x140116AE0: GetEntry
-#fail       0x1400EE650: GetEntryByContentId
-#fail       0x1400EE8A0: SwapData
-  Client::UI::Info::InfoProxySearchComment:
+  Client::UI::Info::InfoProxyDetail:
     vtbls:
 #fail       - ea: 0x1419BFB10
         base: Client::UI::Info::InfoProxyInterface
@@ -3455,17 +3566,6 @@ classes:
       0x140125440: GetUpdateSearchComment
 #fail       0x1400FA5B0: PropagateUpdateData
 #fail       0x14017C7B0: Finalize
-  Client::UI::UIClipboard:
-    vtbls:
-      - ea: 0x141E809C0
-    vfuncs:
-      0: dtor
-    funcs:
-      0x140117F10: ctor
-      0x140117F80: Attach
-      0x140117FB0: Detach
-      0x140117FE0: OnClipboardDataChanged
-      0x140118070: OnClipboardViewerChainChanged
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x14258FEE0
@@ -3489,10 +3589,10 @@ classes:
       0x14011DD40: GetMemberByContentId # Static
 #fail       0x1400F3A60: GetMemberByObjectId # Static
 #fail       0x1400F3B10: IsContentIdInParty # Static
-  Client::UI::Info::InfoProxyParty:
+  Client::UI::Info::InfoProxyPartyMember:
     vtbls:
       - ea: 0x141E80A68
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
 #fail       0x1400F3C90: ctor
 #fail       0x14017C9E0: Finalize
@@ -3509,14 +3609,12 @@ classes:
     funcs:
 #fail       0x1400FCC10: ctor
       0x14012CBE0: RequestDataForCharacter
-  Client::UI::Info::InfoProxyInvitedInterface:
-    vtbls:
-      - ea: 0x141E81C78
-        base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxy17:
+  Client::UI::Info::InfoProxyFreeCompanyCreate:
     vtbls:
       - ea: 0x141E81CF8
         base: Client::UI::Info::InfoProxyInterface
+#fail       - ea: 0x1419C0690
+        base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
 #fail       0x1401024D0: ctor
       0x14012EAA0: Finalize
@@ -3536,13 +3634,15 @@ classes:
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
       - ea: 0x141E81FD8
+        base: Client::UI::Info::InfoProxyInvitedList
+#fail       - ea: 0x1419C0980
         base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
 #fail       0x1401061D0: ctor
       0x140132B40: InviteToParty
       0x140132D20: InviteToPartyContentId
       0x140132DE0: InviteToPartyInInstance
-  Client::UI::Info::InfoProxyLinkShell:
+  Client::UI::Info::InfoProxyLinkshell:
     vtbls:
 #fail       - ea: 0x1419C0998
         base: Client::UI::Info::InfoProxyPageInterface
@@ -3554,13 +3654,13 @@ classes:
   Client::UI::Info::InfoProxyLinkshellMember:
     vtbls:
 #fail       - ea: 0x1419C0A18
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
 #fail       0x140108560: ctor
   Client::UI::Info::InfoProxyFriendList:
     vtbls:
       - ea: 0x141E82228
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x140135F30: ctor
 #fail       0x14017C820: Finalize
@@ -3582,7 +3682,7 @@ classes:
   Client::UI::Info::InfoProxySearch:
     vtbls:
 #fail       - ea: 0x1419C0C88
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
 #fail       0x14010D970: ctor
   Client::UI::Info::InfoProxyCatalogSearch:
@@ -3592,9 +3692,11 @@ classes:
     funcs:
 #fail       0x14010E000: ctor
 #fail       0x14010E090: Finalize
-  Client::UI::Info::InfoProxyFreeCompanyCreate:
+  Client::UI::Info::InfoProxyFreeCompanyInvite:
     vtbls:
       - ea: 0x141E82580
+        base: Client::UI::Info::InfoProxyInvitedList
+      - ea: 0x141E82600
         base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
 #fail       0x14010EA90: ctor
@@ -3602,35 +3704,33 @@ classes:
   Client::UI::Info::InfoProxyFreeCompanyMember:
     vtbls:
       - ea: 0x141E82618
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
 #fail       0x14010ED00: ctor
-  Client::UI::Info::InfoProxyLinkShellChat:
+  Client::UI::Info::InfoProxyChat:
     vtbls:
       - ea: 0x141E82748
         base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxyInvitedlist:
+  Client::UI::Info::InfoProxyNoviceNetworkList:
     vtbls:
 #fail       - ea: 0x1419C0FD0
-        base: Client::UI::Info::InfoProxyCommonlist
-    funcs:
-      0x14013DC40: ctor
-  Client::UI::Info::InfoProxy21:
+        base: Client::UI::Info::InfoProxyCommonList
+  Client::UI::Info::InfoProxyNoviceNetworkMember:
     vtbls:
 #fail       - ea: 0x1419C10C8
-        base: Client::UI::Info::InfoProxyInvitedlist
+        base: Client::UI::Info::InfoProxyNoviceNetworkList
     funcs:
 #fail       0x140110F50: ctor
-  Client::UI::Info::InfoProxy22:
+  Client::UI::Info::InfoProxyNoviceNetworkMentor:
     vtbls:
 #fail       - ea: 0x1419C11C0
-        base: Client::UI::Info::InfoProxyInvitedlist
+        base: Client::UI::Info::InfoProxyNoviceNetworkList
     funcs:
 #fail       0x140110FC0: ctor
   Client::UI::Info::InfoProxy23:
     vtbls:
 #fail       - ea: 0x1419C12B8
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
 #fail       0x140111030: ctor
   Client::UI::Info::InfoProxy24:
@@ -3673,7 +3773,7 @@ classes:
   Client::UI::Info::InfoProxyCrossWorldLinkShellMember:
     vtbls:
 #fail       - ea: 0x1419C1678
-        base: Client::UI::Info::InfoProxyCommonlist
+        base: Client::UI::Info::InfoProxyCommonList
     funcs:
 #fail       0x14011A450: ctor
   Client::UI::Info::InfoProxyCircleList:
@@ -4184,7 +4284,11 @@ classes:
       4: Hide
       5: IsAgentActive
       6: Update
+      7: IsActivatable
       8: GetAddonId
+      9: OnGameEvent
+      10: OnLevelChange
+      11: OnClassJobChange
     funcs:
       0x14028C460: ctor
       0x14028C490: Finalize
@@ -4254,6 +4358,9 @@ classes:
 #fail       0x1402259C0: GetAgentFGSHud
 #fail       0x1402259D0: GetAgentContext
 #fail       0x1402259E0: GetAgentInventoryContext
+      0x14029D630: PropagateGameEvent
+#fail       0x14022B530: PropagateLevelChange
+#fail       0x14022B590: PropagateClassJobChange
   Client::UI::Agent::AgentEventFade:
     vtbls:
       - ea: 0x141EA3DA0
@@ -4325,16 +4432,16 @@ classes:
       0x1402E5EA0: ShowCharacterNotFoundWarning
       0x1402E6080: GetLobbyText
       0x1403C01F0: SetupLobbyCamera
-  Client::UI::Agent::AgentLobby::LobbyData:
+  Client::UI::Agent::LobbyData:
     funcs:
 #fail       0x140241A50: GetCharacterEntryByIndex
-  Client::UI::Agent::AgentLobby::LobbySubscriptionInfo:
+  Client::UI::Agent::LobbySubscriptionInfo:
     funcs:
       0x141A92600: GetDaysUntilNextVeteranRank
       0x141A92610: GetDaysRemaining
       0x141A92620: GetVeteranRewardRank
       0x141A92630: GetTotalDaysSubscribed
-  Client::UI::Agent::AgentLobby::CharaSelectCharacterEntry:
+  Client::UI::Agent::CharaSelectCharacterEntry:
     funcs:
 #fail       0x14023BF20: IsAnyRetainerNameChangeRequired
 #fail       0x14023C090: IsInDifferentRegion
@@ -4344,7 +4451,7 @@ classes:
       0x141A92740: IsUnk32
 #fail       0x14161A3D0: IsMissingExVersionForLogin
 #fail       0x14161A420: IsNameChangeRequired
-  Client::UI::Agent::AgentLobby::CharaSelectRetainerInfo:
+  Client::UI::Agent::CharaSelectRetainerInfo:
     funcs:
 #fail       0x14161A430: IsNameChangeRequired
   Client::UI::Agent::AgentCursor:
@@ -5845,18 +5952,6 @@ classes:
       - ea: 0x141F0FEB0
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
-      0: dtor
-      9: GetNumberArrayData
-      10: GetStringArrayData
-      11: GetExtendArrayData
-      17: SetHandlerFunction
-      18: SetAtkModuleEvent
-      21: CloseAddon
-      23: RefreshAddon
-      26: IsAddonReady
-      28: ClearFocus
-      36: SetAtkHistory
-      39: SetUIVisibility
       58: Update
       60: IsUISceneGameMain
       61: GetColorThemeTypeForUIScene
@@ -6626,6 +6721,8 @@ classes:
       0x140755E20: Update
       0x140756290: HandleInputUpdate
 #fail       0x14062A590: ShouldLimitFps
+#fail       0x14062F830: PropagateLevelChange
+#fail       0x14062F880: PropagateClassJobChange
   Client::UI::Misc::PvpSetModule:
     vtbls:
       - ea: 0x141F259C0
@@ -7349,7 +7446,7 @@ classes:
     vtbls:
       - ea: 0x141F27628
     vfuncs:
-      1: GetObjectID
+      1: GetGameObjectId
       2: GetObjectKind
       3: GetObjectType
       4: GetIsTargetable
@@ -7421,6 +7518,16 @@ classes:
       0x1408A8000: StartOmen
       0x1408A83A0: StartOmenDirectional
 #fail       0x1407BC5C0: ctor
+  Client::Game::Character::Character::CastInfo:
+    funcs:
+#fail       0x1409BDB70: Reset
+#fail       0x1409BDBE0: ClearInfo1
+#fail       0x1409BDC10: ClearInfo2
+#fail       0x1409BDC40: ClearResponse
+      0x140B2A9B0: Start
+      0x140B2AA00: Finish
+      0x140B2AA50: UpdateTotal
+#fail       0x1409BDE00: SetResponseAction
   Client::Game::Control::CharacterLookAtController:
     vtbls:
       - ea: 0x141F0C180
@@ -7510,7 +7617,7 @@ classes:
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
 #fail       0x14132C4D0: ctor
-#fail       0x14132DC60: SetTether
+#fail       0x14132DC70: SetTether
 #fail       0x14132DD90: ClearTether
 #fail       0x14132E760: LoadCharacterSound
   Client::Game::Character::MountContainer:
@@ -8045,6 +8152,25 @@ classes:
     funcs:
 #fail       0x1407BC4E0: ctor
 #fail       0x1407BC7A0: Finalize
+  Client::Game::Character::ActionEffectHandler:
+    funcs:
+#fail       0x1407BC410: ctor
+#fail       0x1409DA940: ApplyOneTargetEffect
+      0x140B4CB10: ApplySelfEffects
+      0x140B4CD10: PlaySoundEffect
+      0x140B4CEB0: ApplyKnockback
+      0x140B4D080: ApplyAttract
+      0x140B4D3F0: Init
+      0x140B4D410: Clear
+      0x140B4D430: GetEmptyIncomingEntry
+#fail       0x1409DCD30: FindIncomingEntry
+      0x140B4D810: ApplyAllTargetEffects
+      0x140B4DA20: ApplyEffectResult
+#fail       0x1409DD180: FinishCast # static
+#fail       0x1409DD360: ShowLogMessage # static
+      0x140B4E6A0: ApplyAll # static
+      0x140B4E7D0: Receive # static
+      0x140B4F090: ConvertQuantizedPosToFloat # static
   Client::Game::Character::MJILivelyActor:
     vtbls:
       - ea: 0x142140F90
@@ -14813,6 +14939,7 @@ classes:
   Client::UI::AddonJobHudACN0::AetherflowACNGaugeData:
     vtbls:
       - ea: 0x142015FF0
+        base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudACN0::AetherflowACNGauge:
     vtbls:
       - ea: 0x142016040
