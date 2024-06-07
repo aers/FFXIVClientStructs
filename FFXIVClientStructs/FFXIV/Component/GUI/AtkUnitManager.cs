@@ -34,7 +34,7 @@ public unsafe partial struct AtkUnitManager {
     public partial void RefreshAddon(AtkUnitBase* addon, uint numValues, AtkValue* values);
 
     [VirtualFunction(11)]
-    public partial void UpdateAddonById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
+    public partial void AddonRequestUpdateById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01"), GenerateStringOverloads]
     public partial AtkUnitBase* GetAddonByName(byte* name, int index = 1);

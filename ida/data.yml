@@ -3379,7 +3379,7 @@ classes:
     vfuncs:
       8: SetAddonVisibility
       10: RefreshAddon
-      11: UpdateAddonById
+      11: AddonRequestUpdateById
     funcs:
       0x14017C1B0: Finalize
       0x140543B80: ctor
