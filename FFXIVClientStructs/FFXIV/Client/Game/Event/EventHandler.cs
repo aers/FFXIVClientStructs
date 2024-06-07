@@ -136,7 +136,7 @@ public enum EventHandlerType : ushort {
     TreasureHuntDirector = 0x8009,
     GoldSaucerDirector = 0x800A,
     CompanyCraftDirector = 0x800B,
-    SkyIslandDirector = 0x800C,
+    SkyIslandDirector = 0x800C, // used in early phases of the Diadem
     DpsChallengeDirector = 0x800D,
     FateDirector = 0x801A
 }
