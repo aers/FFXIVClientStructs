@@ -367,6 +367,7 @@ functions:
   0x140779B50: ProcessPacketRSFData
   0x140779BB0: ProcessPacketHuntingLogEntry
   0x140779BF0: ProcessPacketNPCYell
+  0x141311DA0: ProcessPacketUIModulePacket
   0x140B1E450: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B71C20: WorldToScreenPoint
   0x14145E250: GetInstanceContentCrystallineConflictDirector
@@ -6661,6 +6662,7 @@ classes:
       106: IsUIHidden
       107: AddAtkHistoryEntry
       108: ClearAtkHistory
+      111: HandlePacket
       112: ShowContentIntroduction
       113: IsContentIntroductionInvisible
       114: HideContentIntroduction

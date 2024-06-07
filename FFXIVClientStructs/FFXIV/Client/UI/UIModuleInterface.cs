@@ -88,6 +88,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(91)] public partial void HideEurekaHud();
     [VirtualFunction(107)] public partial void AddAtkHistoryEntry(Utf8String* text, int historyIdx);
     [VirtualFunction(108)] public partial void ClearAtkHistory(int historyIdx);
+    [VirtualFunction(111)] public partial void HandlePacket(UIModulePacketType type, uint uintParam, void* packet);
     [VirtualFunction(143)] public partial void ToggleUi(UIModule.UiFlags flags, bool enable, bool unknown = true);
     [VirtualFunction(153)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
     [VirtualFunction(154)] public partial void HideGoldSaucerReward();
@@ -113,4 +114,14 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(194)] public partial bool IsMainCommandUnlocked(uint command);
     [VirtualFunction(211)] public partial int RotateLinkshellHistory(int offset);
     [VirtualFunction(213)] public partial int RotateCrossLinkshellHistory(int offset);
+}
+
+public enum UIModulePacketType {
+    ClassJobChange = 2,
+    LevelChange = 3,
+    ShowLogMessage = 4,
+    Logout = 7,
+    CloseLogoutDialog = 8,
+    StartLogoutCountdown = 9,
+    PrintPlayTime = 11,
 }
