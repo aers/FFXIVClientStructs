@@ -3377,9 +3377,9 @@ classes:
       - ea: 0x1419BEA98
         base: Component::GUI::AtkEventListener
     vfuncs:
-      8: ShowAddonByID
+      8: SetAddonVisibility
       10: RefreshAddon
-      11: UpdateAddonByID
+      11: UpdateAddonById
     funcs:
       0x14017C1B0: Finalize
       0x140543B80: ctor
