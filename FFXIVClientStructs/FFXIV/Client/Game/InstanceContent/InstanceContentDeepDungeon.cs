@@ -11,18 +11,18 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [Inherits<InstanceContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x27D8)]
 public unsafe partial struct InstanceContentDeepDungeon {
-    [FieldOffset(0x1D48), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
-    [FieldOffset(0x1D68), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
-    [FieldOffset(0x1D98), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
+    [FieldOffset(0x1D50), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
+    [FieldOffset(0x1D70), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
+    [FieldOffset(0x1DA0), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
 
-    [FieldOffset(0x1DC8)] public uint BonusLootItemId;
-    [FieldOffset(0x1DCC)] public byte Floor;
-    [FieldOffset(0x1DCD)] public byte ReturnProgress;
-    [FieldOffset(0x1DCE)] public byte PassageProgress;
+    [FieldOffset(0x1DD0)] public uint BonusLootItemId;
+    [FieldOffset(0x1DD4)] public byte Floor;
+    [FieldOffset(0x1DD5)] public byte ReturnProgress;
+    [FieldOffset(0x1DD6)] public byte PassageProgress;
 
-    [FieldOffset(0x1DD0)] public byte WeaponLevel;
-    [FieldOffset(0x1DD1)] public byte ArmorLevel;
-    [FieldOffset(0x1DD2)] public byte HoardCount;
+    [FieldOffset(0x1DD8)] public byte WeaponLevel;
+    [FieldOffset(0x1DD9)] public byte ArmorLevel;
+    [FieldOffset(0x1DDA)] public byte HoardCount;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DeepDungeonPartyInfo {
