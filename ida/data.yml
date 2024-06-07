@@ -2037,6 +2037,7 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+      0x1409613C0: PlacePreset
       0x140960980: ClearFieldMarkers
   Client::Game::LimitBreakController:
     instances:
