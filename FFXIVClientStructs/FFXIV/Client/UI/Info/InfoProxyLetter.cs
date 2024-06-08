@@ -27,7 +27,7 @@ public unsafe partial struct InfoProxyLetter {
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public unsafe partial struct Letter {
         [FieldOffset(0x00)] public long SenderContentId;// 0xFFFFFFFF for Store
-        [FieldOffset(0x08)] public uint Timestamp;
+        [FieldOffset(0x08)] public int Timestamp;
         [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray5<ItemAttachment> _attachments;
         [FieldOffset(0x38)] public uint Gil;
         [FieldOffset(0x3C)] public bool Read;

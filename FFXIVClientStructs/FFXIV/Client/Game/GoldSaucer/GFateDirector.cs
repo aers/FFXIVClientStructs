@@ -18,7 +18,7 @@ public unsafe partial struct GFateDirector {
     [FieldOffset(0x6E8)] public uint MapMarkerIconId;
 
     [FieldOffset(0x760), FixedSizeArray] internal FixedSizeArray32<uint> _objectIds;
-    [FieldOffset(0x7E0)] public uint EndTimestamp;
+    [FieldOffset(0x7E0)] public int EndTimestamp;
 
     [FieldOffset(0x7EC)] public ushort BgmId;
 
