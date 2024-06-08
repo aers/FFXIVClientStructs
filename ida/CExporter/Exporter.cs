@@ -339,14 +339,19 @@ ReExport:
                         ];
                     _processType.Add(unionField.FieldType);
                 }
-                foreach (var subStruct in unions.Where(t => !t.IsUnion)) {
+                foreach (var t1 in unions) {
+                    t1.StructSize = t1.Fields.Max(t => t.FieldOffset + t.FieldType.SizeOf());
+                }
+                var subUnions = unions.Where(t => !t.IsUnion).ToArray();
+                foreach (var subStruct in subUnions) {
                     var unionName = subStruct.StructNamespace.Split(ExporterStatics.Separator)[^1];
                     var unionNamespace = subStruct.StructNamespace[..subStruct.StructNamespace.LastIndexOf(ExporterStatics.Separator, StringComparison.Ordinal)];
-                    var unionStructIndex = unions.FindIndex(t => t.StructName == unionNamespace && t.StructName == unionName);
+                    var unionStructIndex = unions.FindIndex(t => t.StructNamespace == unionNamespace && t.StructName == unionName);
                     var unionStruct = unions[unionStructIndex];
                     unionStruct.Fields = [
                         .. unionStruct.Fields,
                         new ProcessedField {
+                            FieldTypeOverride = subStruct.StructTypeOverride,
                             FieldType = type,
                             FieldOffset = 0,
                             FieldName = subStruct.StructName
@@ -369,7 +374,7 @@ ReExport:
                 MemberFunctions = memberFunctionsArray
             };
 
-            foreach (var (unionAttr, fieldInfo) in unionOffsets) {
+            foreach (var (unionAttr, fieldInfo) in unionOffsets.Where(t => !t.Key.IsStruct)) {
                 processedStruct.Fields = [
                     .. processedStruct.Fields,
                     new ProcessedField {
