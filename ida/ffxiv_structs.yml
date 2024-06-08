@@ -3238,6 +3238,7 @@ structs:
   name: Value
   namespace: Component::Text::TextParameter
   union: True
+  size: 8
   fields:
   - type: int
     name: IntValue
@@ -4304,6 +4305,7 @@ structs:
   name: Texture
   namespace: Component::GUI::AtkTexture
   union: True
+  size: 8
   fields:
   - type: Component::GUI::AtkTextureResource*
     name: Resource
@@ -4353,7 +4355,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
-    - type: int
+    - type: unsigned int
       name: iconId
     - type: int
       name: version
@@ -4400,7 +4402,7 @@ structs:
   - type: unsigned int
     name: TexPathHash
     offset: 0
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 4
   - type: Client::System::Resource::Handle::TextureResourceHandle*
@@ -5329,12 +5331,67 @@ structs:
   - type: Component::GUI::AtkUnitManagerFlags
     name: Flags
     offset: 40072
-  virtual_functions: []
-  member_functions: []
+  virtual_functions:
+  - name: SetAddonVisibility
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: addonId
+    - type: byte
+      name: visible
+  - name: RefreshAddon
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+    - type: unsigned int
+      name: numValues
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: AddonRequestUpdateById
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: addonId
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+    - type: byte
+      name: forced
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F8 41 B0 01
+    return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonByName
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: byte*
+      name: name
+    - type: int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 8B 6B 20
+    return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonById
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: id
 - type: Component::GUI::AtkValue::Value
   name: Value
   namespace: Component::GUI::AtkValue
   union: True
+  size: 8
   fields:
   - type: byte
     name: Bool
@@ -6768,7 +6825,7 @@ structs:
   union: False
   size: 24
   fields:
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 0
   - type: int
@@ -6786,6 +6843,7 @@ structs:
   name: Button1
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 8
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
     name: CarpenterButton
@@ -6799,6 +6857,7 @@ structs:
   name: Button2
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 8
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
     name: BlacksmithButton
@@ -6812,6 +6871,7 @@ structs:
   name: Button3
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 8
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
     name: ArmorerButton
@@ -7727,7 +7787,7 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: int
+    - type: unsigned int
       name: territoryId
     - type: byte
       name: zoomAnim
@@ -12115,14 +12175,12 @@ structs:
       name: this
     - type: int
       name: index
-- type: Client::Game::InventoryItem::Id
-  name: Id
-  namespace: Client::Game::InventoryItem
-  union: True
+- type: Client::Game::InventoryItem::Id::Linked
+  name: Linked
+  namespace: Client::Game::InventoryItem::Id
+  union: False
+  size: 4
   fields:
-  - type: unsigned int
-    name: ItemId
-    offset: 0
   - type: unsigned __int16
     name: LinkedItemSlot
     offset: 0
@@ -13233,6 +13291,30 @@ structs:
       name: recommendedLevel
     - type: __int8
       name: a14
+- type: Client::Game::UI::MarkerPresetPlacement
+  name: MarkerPresetPlacement
+  namespace: Client.Game.UI
+  union: False
+  size: 104
+  fields:
+  - type: byte
+    name: Active
+    offset: 0
+    size: 8
+  - type: int
+    name: X
+    offset: 8
+    size: 8
+  - type: int
+    name: Y
+    offset: 40
+    size: 8
+  - type: int
+    name: Z
+    offset: 72
+    size: 8
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::UI::NpcTrade
   name: NpcTrade
   namespace: Client.Game.UI
@@ -14686,6 +14768,7 @@ structs:
   name: Target
   namespace: Client::Game::Control::CharacterLookAtTargetParam
   union: True
+  size: 16
   fields:
   - type: Client::Game::Object::GameObjectId
     name: TargetId
@@ -19290,10 +19373,10 @@ structs:
   union: False
   size: 24
   fields:
-  - type: int
+  - type: unsigned int
     name: MapId
     offset: 8
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 12
   - type: byte
@@ -19730,7 +19813,7 @@ structs:
   - type: byte
     name: CostDisplayMode
     offset: 203
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 204
   - type: unsigned int
@@ -23500,6 +23583,7 @@ structs:
   name: Buffer
   namespace: StdString
   union: True
+  size: 8
   fields:
   - type: byte*
     name: BufferPtr
@@ -29030,6 +29114,7 @@ structs:
   name: Text1
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 104
   fields:
   - type: Client::System::String::Utf8String
     name: CarpenterString
@@ -29043,6 +29128,7 @@ structs:
   name: Text2
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 104
   fields:
   - type: Client::System::String::Utf8String
     name: BlacksmithString
@@ -29056,6 +29142,7 @@ structs:
   name: Text3
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 104
   fields:
   - type: Client::System::String::Utf8String
     name: ArmorerString
@@ -29237,16 +29324,16 @@ structs:
     name: IsUiFading
     offset: 40212
   virtual_functions:
-  - name: ShowAddonById
+  - name: SetAddonVisibility
     offset: 64
     return_type: byte
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
     - type: unsigned __int16
-      name: addonId
+      name: a2
     - type: byte
-      name: show
+      name: a3
   - name: RefreshAddon
     offset: 80
     return_type: void
@@ -29254,44 +29341,26 @@ structs:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
     - type: Component::GUI::AtkUnitBase*
-      name: addon
+      name: a2
     - type: unsigned int
-      name: numValues
+      name: a3
     - type: Component::GUI::AtkValue*
-      name: values
-  - name: UpdateAddonById
+      name: a4
+  - name: AddonRequestUpdateById
     offset: 88
     return_type: void
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
     - type: unsigned __int16
-      name: addonId
+      name: a2
     - type: Component::GUI::NumberArrayData**
-      name: numberArrayData
+      name: a3
     - type: Component::GUI::StringArrayData**
-      name: stringArrayData
+      name: a4
     - type: byte
-      name: forced
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B F8 41 B0 01
-    return_type: Component::GUI::AtkUnitBase*
-    name: GetAddonByName
-    parameters:
-    - type: Client::UI::RaptureAtkUnitManager*
-      name: this
-    - type: byte*
-      name: name
-    - type: int
-      name: index
-  - signature: E8 ?? ?? ?? ?? 8B 6B 20
-    return_type: Component::GUI::AtkUnitBase*
-    name: GetAddonById
-    parameters:
-    - type: Client::UI::RaptureAtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: id
+      name: a5
+  member_functions: []
 - type: Client::UI::UI3DModule
   name: UI3DModule
   namespace: Client.UI
@@ -34914,7 +34983,7 @@ structs:
   - type: Client::UI::Agent::AgentBannerEditorState::EditorOpenType
     name: OpenType
     offset: 696
-  - type: unsigned int
+  - type: float
     name: FrameCountdown
     offset: 708
   - type: int
@@ -35148,7 +35217,7 @@ structs:
   union: False
   size: 168
   fields:
-  - type: int
+  - type: unsigned int
     name: ItemId
     offset: 0
   - type: int
@@ -35163,7 +35232,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: ItemName
     offset: 40
-  - type: int
+  - type: unsigned int
     name: ItemCategoryIconId
     offset: 144
   virtual_functions: []
@@ -35180,7 +35249,7 @@ structs:
   - type: Client::Game::InventoryType
     name: Inventory
     offset: 104
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 112
   - type: int
@@ -42138,6 +42207,12 @@ structs:
   - type: unsigned int
     name: AreaTargetingSpellId
     offset: 144
+  - type: Client::Game::Object::GameObjectId
+    name: AreaTargetingExecuteAtObject
+    offset: 152
+  - type: byte
+    name: AreaTargetingExecuteAtCursor
+    offset: 184
   - type: unsigned __int16
     name: LastUsedActionSequence
     offset: 272
@@ -42464,10 +42539,25 @@ structs:
     offset: 1136
   virtual_functions: []
   member_functions: []
+- type: Client::Game::InventoryItem::Id
+  name: Id
+  namespace: Client::Game::InventoryItem
+  union: True
+  size: 4
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: Client::Game::InventoryItem::Id::Linked
+    name: Linked
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::JobGaugeManager::Guage
   name: Guage
   namespace: Client::Game::JobGaugeManager
   union: True
+  size: 80
   fields:
   - type: Client::Game::Gauge::JobGauge
     name: EmptyGauge
@@ -43541,7 +43631,7 @@ structs:
     parameters:
     - type: Client::Game::UI::MobHunt*
       name: this
-    - type: int
+    - type: unsigned int
       name: itemId
   - signature: 48 89 5C 24 ?? 56 48 83 EC 20 40 32 F6
     return_type: byte
@@ -43699,7 +43789,7 @@ structs:
     name: BaseRestedExperience
     offset: 708
   - type: byte
-    name: OwnedMountsBitmask
+    name: UnlockedMountsBitmask
     offset: 733
     size: 35
   - type: byte
@@ -51466,7 +51556,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkImageNode*
       name: this
-    - type: int
+    - type: unsigned int
       name: iconId
     - type: int
       name: version
@@ -106033,7 +106123,15 @@ structs:
     offset: 480
     size: 8
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 94 C0 EB 19
+    return_type: void
+    name: PlacePreset
+    parameters:
+    - type: Client::Game::UI::MarkingController*
+      name: this
+    - type: Client::Game::UI::MarkerPresetPlacement*
+      name: placement
 - type: Client::Game::UI::Telepo
   name: Telepo
   namespace: Client.Game.UI
@@ -114923,7 +115021,7 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: int
+    - type: unsigned int
       name: a2
     - type: byte
       name: a3
@@ -115863,15 +115961,15 @@ structs:
     offset: 0
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo
     name: Party
-    offset: 7496
+    offset: 7504
     size: 4
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo
     name: Items
-    offset: 7528
+    offset: 7536
     size: 16
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo
     name: Chests
-    offset: 7576
+    offset: 7584
     size: 16
   - type: unsigned int
     name: BonusLootItemId
