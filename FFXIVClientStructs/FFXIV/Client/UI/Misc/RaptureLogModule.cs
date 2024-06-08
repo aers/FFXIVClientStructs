@@ -69,7 +69,7 @@ public unsafe partial struct RaptureLogModule {
     public partial bool GetLogMessage(int index, Utf8String* str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F B6 85 ?? ?? ?? ?? 48 8D 8D")]
-    public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, uint* timeStamp);
+    public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, int* timestamp);
 
     [MemberFunction("4C 8B D1 48 8B 89 ?? ?? ?? ?? 48 85 C9")]
     public partial void AddMsgSourceEntry(ulong contentId, int messageIndex, ushort worldId, ushort chatType);
@@ -81,11 +81,11 @@ public unsafe partial struct RaptureLogModule {
         return result;
     }
 
-    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out uint time) {
+    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out int time) {
         using var pMessage = new Utf8String();
         using var pSender = new Utf8String();
         short pKind = 0;
-        uint pTime = 0;
+        int pTime = 0;
 
         var result = GetLogMessageDetail(index, &pKind, &pSender, &pMessage, &pTime);
 

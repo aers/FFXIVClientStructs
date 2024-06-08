@@ -24,7 +24,7 @@ public unsafe partial struct AgentFreeCompanyProfile {
     [FieldOffset(0x054)] public ushort EstateZone;
     [FieldOffset(0x056)] public ushort World;
     //4 byte unknown Set to 0xe0000000 in ctor
-    [FieldOffset(0x05C)] public uint FoundationDate; //UNIX Timestamp
+    [FieldOffset(0x05C)] public int FoundationDate; //UNIX Timestamp
     [FieldOffset(0x060)] public short MemberCount;
     [FieldOffset(0x062)] public short MembersOnline;
     [FieldOffset(0x064)] public FCProfile Profile;

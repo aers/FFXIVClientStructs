@@ -13,8 +13,8 @@ public unsafe partial struct GcArmyManager {
 
     /// <remarks> Data is loaded on-demand inside GC Barracks </remarks>
     [FieldOffset(0)] public GcArmyData* Data;
-    [FieldOffset(0x08)] public uint LastMissionCompleteNotificationTimestamp;
-    [FieldOffset(0x0C)] public uint LastTrainingCompleteNotificationTimestamp;
+    [FieldOffset(0x08)] public int LastMissionCompleteNotificationTimestamp;
+    [FieldOffset(0x0C)] public int LastTrainingCompleteNotificationTimestamp;
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F0 41 8B DF")]
     public partial uint GetMemberCount();
@@ -61,7 +61,7 @@ public unsafe partial struct GcArmyMember {
     [FieldOffset(0x12)] public GcArmyMemberFlag Flags;
     /// <remarks> RowId of GcArmyCandidateCategory </remarks>
     [FieldOffset(0x13)] public byte CandidateCategory;
-    [FieldOffset(0x14)] public uint EnlistmentTimestamp;
+    [FieldOffset(0x14)] public int EnlistmentTimestamp;
     /// <remarks> RowId of GcArmyCaptureTactics </remarks>
     [FieldOffset(0x1C)] public byte CaptureTactics;
 
