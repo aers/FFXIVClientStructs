@@ -3407,6 +3407,7 @@ classes:
     funcs:
       0x1400AE950: ctor
       0x14017CD10: Finalize
+      0x1405483E0: InitializeAddon
   Client::UI::RaptureAtkColorDataManager:
     vtbls:
       - ea: 0x1419BED58
