@@ -3407,6 +3407,7 @@ classes:
     funcs:
       0x1400AE950: ctor
       0x14017CD10: Finalize
+      0x1405483E0: InitializeAddon
   Client::UI::RaptureAtkColorDataManager:
     vtbls:
       - ea: 0x1419BED58
@@ -5834,7 +5835,7 @@ classes:
       62: OnMouseOut
     funcs:
       0x140538A80: ctor
-      0x140538CB0: Finalize2
+      0x140538CB0: Destructor
       0x1405390F0: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
       0x140539440: SetPosition
       0x1405395C0: SetAlpha
