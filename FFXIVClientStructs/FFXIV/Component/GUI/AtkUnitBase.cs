@@ -61,6 +61,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0")]
     public partial void Ctor();
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 33 F6 48 8B 89")]
+    public partial void Destructor();
+
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]
     public partial float GetScale();
 
