@@ -10,7 +10,8 @@ internal sealed record MethodInfo(
     string ReturnType,
     string GenericConstraints,
     bool IsStatic,
-    EquatableArray<ParameterInfo> Parameters) {
+    EquatableArray<ParameterInfo> Parameters,
+    ObsoleteInfo? ObsoleteInfo) {
 
     public string GetDeclarationString() => $"{Modifiers} {ReturnType} {Name}({GetParameterTypesAndNamesString()}){GenericConstraints}";
 
