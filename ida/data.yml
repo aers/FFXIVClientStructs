@@ -8399,6 +8399,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C52AC0: ctor
+      0x140C53260: ReceiveSearchComment
       0x140CB01F0: Finalize
   Client::UI::Agent::AgentTelepotTown:
     vtbls:
