@@ -305,7 +305,7 @@ functions:
   0x1400AA850: IsLocalPlayerInParty
   0x1400AA9A0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400AAAD0: GetPartyMemberClassJobByContentId
-  0x140748B20: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
+  0x140748B20: ObjectIdToEntityId # returns invalid id if objectid is not a player
   0x140767F30: ProcessPacketSpawnPlayer
   0x140767F90: ProcessPacketSpawnNPC
   0x140768000: ProcessPacketSpawnBoss
@@ -8401,6 +8401,7 @@ classes:
       0x140C52AC0: ctor
       0x140C53260: ReceiveSearchComment
       0x140CB01F0: Finalize
+      0x140C53080: ExamineCharacter
   Client::UI::Agent::AgentTelepotTown:
     vtbls:
       - ea: 0x141A731A0

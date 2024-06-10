@@ -13,20 +13,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x820)]
 public unsafe partial struct AgentInspect {
-    // First byte seems to be a bit field
-    // [7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 ]
-    // None: 7,6,5 set
-    // REatiner/Chocobo: 6 is set
-    // Player: 4 is set
-    [FieldOffset(0x028)] public uint RequestObjectId;
-    [FieldOffset(0x02C)] public uint RequestSearchCommentObjectId;
-    [FieldOffset(0x030)] public uint RequestFreeCompanyObjectId;
-    [FieldOffset(0x034)] public uint CurrentObjectId;
+    [FieldOffset(0x028)] public uint RequestEntityId;
+    [FieldOffset(0x02C)] public uint RequestSearchCommentEntityId;
+    [FieldOffset(0x030)] public uint RequestFreeCompanyEntityId;
+    [FieldOffset(0x034)] public uint CurrentEntityId;
     [FieldOffset(0x038)] public Utf8String SearchComment;
     [FieldOffset(0x108)] public Utf8String PsnName; //OnlineID: XXXXXXXXX
-    [FieldOffset(0x170)] public Utf8String ChocoboBarding1;
-    [FieldOffset(0x1D8)] public Utf8String ChocoboBarding2;
-    [FieldOffset(0x240)] public Utf8String ChocoboBarding3;
+    [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray3<Utf8String> _chocoboBarding;
     [FieldOffset(0x2A8), FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
     [FieldOffset(0x4B0)] public FreeCompanyData FreeCompany;
     // Status fields
@@ -43,7 +36,10 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x558)] public InspectCharaView CharaView;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 49 8B E8 8B DA")]
-    public partial void ReceiveSearchComment(uint objectId, byte* searchComment);
+    public partial void ReceiveSearchComment(uint entityId, byte* searchComment);
+
+    [MemberFunction("48 8B 01 44 88 81 ?? ?? ?? ?? 89 51")]
+    public partial void ExamineCharacter(uint entityId, bool isChocobo = false);
 
     // Client::UI::Agent::AgentInspect::InspectCharaView
     //   Client::UI::Misc::CharaView
@@ -88,13 +84,5 @@ public unsafe partial struct AgentInspect {
             Dyeable = 1,
             Glamoured = 4,
         }
-    }
-
-    public void ExamineCharacter(uint objectId) {
-        RequestObjectId = objectId;
-        RequestSearchCommentObjectId = objectId;
-        RequestFreeCompanyObjectId = objectId;
-        CurrentObjectId = 0xE0000000;
-        AgentInterface.Show();
     }
 }
