@@ -43,7 +43,7 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x558)] public InspectCharaView CharaView;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 49 8B E8 8B DA")]
-    public partial byte ReceiveSearchComment(uint objectId, byte* searchComment);
+    public partial void ReceiveSearchComment(uint objectId, byte* searchComment);
 
     // Client::UI::Agent::AgentInspect::InspectCharaView
     //   Client::UI::Misc::CharaView
