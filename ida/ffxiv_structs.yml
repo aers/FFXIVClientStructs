@@ -475,6 +475,18 @@ enums:
     "Pressed": 2
     "Released": 4
     "Held": 8
+- type: Client::UI::UIModulePacketType
+  name: UIModulePacketType
+  underlying: int
+  namespace: Client.UI
+  values:
+    "ClassJobChange": 2
+    "LevelChange": 3
+    "ShowLogMessage": 4
+    "Logout": 7
+    "CloseLogoutDialog": 8
+    "StartLogoutCountdown": 9
+    "PrintPlayTime": 11
 - type: Client::Game::ActionType
   name: ActionType
   underlying: byte
@@ -5800,8 +5812,8 @@ structs:
   union: False
   size: 24
   fields:
-  - type: unsigned int
-    name: TimeStamp
+  - type: int
+    name: Timestamp
     offset: 0
   - type: unsigned __int64
     name: CpuMilliSeconds
@@ -7633,6 +7645,18 @@ structs:
       name: this
     - type: int
       name: historyIdx
+  - name: HandlePacket
+    offset: 888
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+    - type: Client::UI::UIModulePacketType
+      name: type
+    - type: unsigned int
+      name: uintParam
+    - type: __int64
+      name: packet
   - name: ToggleUi
     offset: 1144
     return_type: void
@@ -7982,7 +8006,7 @@ structs:
   - type: unsigned int
     name: BannerTimelineIcon
     offset: 112
-  - type: unsigned int
+  - type: int
     name: LastUpdated
     offset: 116
   - type: unsigned int
@@ -8194,8 +8218,8 @@ structs:
   - type: unsigned __int16
     name: ContentFinderConditionId
     offset: 98
-  - type: unsigned int
-    name: TimeStamp
+  - type: int
+    name: Timestamp
     offset: 100
   virtual_functions: []
   member_functions: []
@@ -9733,6 +9757,16 @@ structs:
       name: this
     - type: unsigned __int64
       name: idx
+  - signature: E8 ?? ?? ?? ?? EB 0A 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8D
+    return_type: void
+    name: SanitizeString
+    parameters:
+    - type: Client::System::String::Utf8String*
+      name: this
+    - type: unsigned __int16
+      name: flags
+    - type: Client::System::String::Utf8String*
+      name: characterList
 - type: Client::System::Scheduler::ActionTimelineManager
   name: ActionTimelineManager
   namespace: Client.System.Scheduler
@@ -11711,10 +11745,10 @@ structs:
   - type: Client::Game::GcArmyData*
     name: Data
     offset: 0
-  - type: unsigned int
+  - type: int
     name: LastMissionCompleteNotificationTimestamp
     offset: 8
-  - type: unsigned int
+  - type: int
     name: LastTrainingCompleteNotificationTimestamp
     offset: 12
   virtual_functions: []
@@ -11766,7 +11800,7 @@ structs:
   - type: byte
     name: CandidateCategory
     offset: 19
-  - type: unsigned int
+  - type: int
     name: EnlistmentTimestamp
     offset: 20
   - type: byte
@@ -13863,7 +13897,7 @@ structs:
     name: NormalResourceCounts
     offset: 26
     size: 20
-  - type: unsigned int
+  - type: int
     name: FinishTime
     offset: 68
   virtual_functions: []
@@ -14079,7 +14113,7 @@ structs:
   - type: byte
     name: SingleBattle
     offset: 83
-  - type: unsigned int
+  - type: int
     name: StartTimestamp
     offset: 84
   - type: unsigned int
@@ -14828,7 +14862,7 @@ structs:
   name: InputManager
   namespace: Client.Game.Control
   union: False
-  size: 8
+  size: 96
   fields: []
   virtual_functions: []
   member_functions: []
@@ -29360,7 +29394,17 @@ structs:
       name: a4
     - type: byte
       name: a5
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 85 C0 75 1D 48 8B 0B
+    return_type: unsigned __int16
+    name: InitializeAddon
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+    - type: byte*
+      name: addonName
 - type: Client::UI::UI3DModule
   name: UI3DModule
   namespace: Client.UI
@@ -43664,7 +43708,7 @@ structs:
   - type: unsigned __int64
     name: ContentId
     offset: 104
-  - type: unsigned int
+  - type: int
     name: PenaltyTimestamps
     offset: 112
     size: 2
@@ -43864,10 +43908,10 @@ structs:
   - type: byte
     name: MeisterFlag
     offset: 1371
-  - type: unsigned int
+  - type: int
     name: SquadronMissionCompletionTimestamp
     offset: 1376
-  - type: unsigned int
+  - type: int
     name: SquadronTrainingCompletionTimestamp
     offset: 1380
   - type: unsigned __int16
@@ -44062,7 +44106,7 @@ structs:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: 8B 81 ?? ?? ?? ?? C1 E8 04 25
-    return_type: unsigned int
+    return_type: int
     name: GetWeeklyBingoExpireUnixTimestamp
     parameters:
     - type: Client::Game::UI::PlayerState*
@@ -45856,7 +45900,7 @@ structs:
   - type: __int64
     name: SenderContentId
     offset: 0
-  - type: unsigned int
+  - type: int
     name: Timestamp
     offset: 8
   - type: Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment
@@ -52277,6 +52321,18 @@ structs:
     - type: __int64
       name: a5
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 33 F6 48 8B 89
+    return_type: void
+    name: Destructor
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
   - signature: E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8
     return_type: float
     name: GetScale
@@ -96751,8 +96807,8 @@ structs:
       name: sender
     - type: Client::System::String::Utf8String*
       name: message
-    - type: unsigned int*
-      name: timeStamp
+    - type: int*
+      name: timestamp
   - signature: 4C 8B D1 48 8B 89 ?? ?? ?? ?? 48 85 C9
     return_type: void
     name: AddMsgSourceEntry
@@ -101188,7 +101244,7 @@ structs:
   - type: unsigned __int16
     name: World
     offset: 86
-  - type: unsigned int
+  - type: int
     name: FoundationDate
     offset: 92
   - type: __int16
@@ -114867,6 +114923,18 @@ structs:
       name: this
     - type: int
       name: a2
+  - name: HandlePacket
+    offset: 888
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+    - type: Client::UI::UIModulePacketType
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: __int64
+      name: a4
   - name: ToggleUi
     offset: 1144
     return_type: void
@@ -115760,7 +115828,7 @@ structs:
     name: ObjectIds
     offset: 1888
     size: 32
-  - type: unsigned int
+  - type: int
     name: EndTimestamp
     offset: 2016
   - type: unsigned __int16
