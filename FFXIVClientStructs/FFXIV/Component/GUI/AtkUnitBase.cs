@@ -310,6 +310,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(43)]
     public partial void Draw();
 
+    [VirtualFunction(45)]
+    public partial bool LoadUldResourceHandle();
+
     [VirtualFunction(46)]
     public partial bool CheckWindowCollisionAtCoords(short x, short y);
 
