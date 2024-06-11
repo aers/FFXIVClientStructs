@@ -3,6 +3,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkExternalInterface
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public unsafe partial struct AtkExternalInterface {
-    // [VirtualFunction(1)]
-    // public partial void DispatchCallback(AtkValue* result, uint callbackIndex, uint valueCount, AtkValue* values); // guessed, so just a comment for now
+    [VirtualFunction(1)]
+    public partial void CallHandler(AtkValue* result, uint handlerIndex, uint valueCount, AtkValue* values);
+
+    // [VirtualFunction(2)]
+    // public partial void CallTextService(AtkValue* result, uint handlerIndex);  // guessed, so just a comment for now
 }

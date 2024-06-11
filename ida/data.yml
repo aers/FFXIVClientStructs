@@ -629,7 +629,7 @@ classes:
       - ea: 0x141A08160
     vfuncs:
       0: dtor
-      1: DispatchCallback
+      1: CallHandler
   Component::GUI::AtkManagedInterface:
   Component::GUI::AtkModuleEvent:
     vtbls:
