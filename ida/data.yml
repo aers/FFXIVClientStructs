@@ -3388,9 +3388,9 @@ classes:
       8: SetAddonVisibility
       10: RefreshAddon
       11: AddonRequestUpdateById
-      19: IsSoundEffectScdLoaded
-      20: LoadSoundEffectScd
-      21: UnloadSoundEffectScd # it really just DecRefs it
+      19: IsScdResourceLoaded
+      20: LoadScdResource
+      21: UnloadScdResource # it really just DecRefs it
     funcs:
       0x14017C1B0: Finalize
       0x140543B80: ctor
