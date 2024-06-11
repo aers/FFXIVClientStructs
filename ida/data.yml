@@ -1802,6 +1802,19 @@ classes:
       0x140AD9420: IsPlayerStateFlagSet
       0x140B50F70: ctor
       0x140ADD700: GetAttributeByIndex # (this, index)
+      0x140ADB2C0: TrackTraitUnlock
+      0x140ADB350: TrackTraitUnlocks
+      0x140ADB500: TrackStatus
+      0x140ADB5C0: TrackStatuses
+      0x140ADB780: TrackActionUnlock
+      0x140ADB820: TrackActionUnlocks
+      0x140ADB9E0: ClearTracked
+      0x140ADBA20: IsTrackedTraitUnlocked
+      0x140ADBB60: HasTrackedStatus
+      0x140ADBBB0: IsTrackedActionUnlocked
+      0x140ADBCD0: UpdateTrackedStatus
+      0x140ADBD20: InvalidateTrackedUnlocks
+      0x140ADD740: IsTraitUnlocked # (this, traitId, outOptTraitRow, allowPVP, level)
   Client::Game::UI::Revive:
     instances:
       - ea: 0x14276F5A8
@@ -2085,6 +2098,8 @@ classes:
       - ea: 0x141F5A078
     vfuncs:
       0: dtor
+    funcs:
+      0x140B05460: GetActionId
   Client::Game::TitleController:
     instances:
       - ea: 0x14277E040  # UIState.TitleController
