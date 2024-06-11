@@ -3719,6 +3719,8 @@ classes:
     vtbls:
       - ea: 0x1419C0F70
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x1401107B0: GetLinkShellName
   Client::UI::Info::InfoProxyNoviceNetworkList:
     vtbls:
       - ea: 0x1419C0FD0
