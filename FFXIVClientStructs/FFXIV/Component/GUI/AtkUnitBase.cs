@@ -21,16 +21,106 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x108)] public AtkComponentNode* WindowNode;
     [FieldOffset(0x110)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x160)] public AtkValue* AtkValues;
-    [FieldOffset(0x182)] public byte Flags;
-    [FieldOffset(0x189)] public byte UnkFlags189;
+    [FieldOffset(0x168)] public StdVector<Pointer<byte>> CachedAtkValueStrings; // set here: "48 8D 54 24 ?? E8 ?? ?? ?? ?? 48 83 C4 20 41 5E"
+
+    /// <summary>
+    /// <code>
+    /// DepthLayer:<br/>
+    ///   Getter: (Flags180 >> 16) &amp; 0xF<br/>
+    ///   Mask: 0b0000_0000_0000_1111_0000_0000_0000_0000<br/>
+    /// <br/>
+    /// Visibility(?) Flags:<br/>
+    ///   Getter: (Flags180 >> 20) &amp; 0xF<br/>
+    ///   Mask: 0b0000_0000_1111_0000_0000_0000_0000_0000<br/>
+    ///   Values:
+    ///     0b0010 = Is visible<br/>
+    ///     0b0100 = Is hidden due to modal (like Retainer Menu)<br/>
+    /// <br/>
+    /// Applied Visibility(?) Flags:<br/>
+    ///   Getter: (Flags180 >> 24) &amp; 0xF<br/>
+    ///   Mask: 0b0000_1111_0000_0000_0000_0000_0000_0000<br/>
+    ///   Values: same as above<br/>
+    /// <br/>
+    /// UldLoadState:<br/>
+    ///   Getter: (Flags180 >> 28) &amp; 0xF<br/>
+    ///   Mask: 0b1111_0000_0000_0000_0000_0000_0000_0000<br/>
+    ///   Values:
+    ///     0 = Not loaded<br/>
+    ///     1 = UldResource loaded<br/>
+    ///     2 = UldManager finished loading the uld
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x180)] public uint Flags180;
+
+    /// <summary>
+    /// <code>
+    /// 0b1000_0000 Disable auto-focus (not adding it to FocusedUnitsList)
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x188)] public byte Flags188;
+    /// <summary>
+    /// <code>
+    /// 0b0000_0001 = OnSetup was called (= IsReady)<br/>
+    /// 0b0000_0010 = ? ("75 57 F6 83 ?? ?? ?? ?? ?? 74 3F")
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x189)] public byte Flags189;
+    [FieldOffset(0x18A)] public byte Flags18A;
+    [FieldOffset(0x18B)] public byte Flags18B;
+    /// <summary>
+    /// <code>
+    /// 0b0000_1000 = Do not register default events (checked before calling "40 53 48 83 EC 40 48 8B 91")
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x18C)] public byte Flags18C;
+    /// <summary>
+    /// <code>
+    /// 0b0010_0000 = Do not set text in AtkTextNodes from LabelID<br/>
+    /// 0b0100_0000 = Show on Open
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x18D)] public byte Flags18D;
+    [FieldOffset(0x190)] public uint Flags190; // seen being used in AddonAreaMap_vf60
     [FieldOffset(0x194)] public uint OpenTransitionDuration;
     [FieldOffset(0x198)] public uint CloseTransitionDuration;
+    [FieldOffset(0x19C)] public uint Flags19C;
+
     [FieldOffset(0x1A1)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
+
     [FieldOffset(0x1A4)] public float OpenTransitionScale;
     [FieldOffset(0x1A8)] public float CloseTransitionScale;
     [FieldOffset(0x1AC)] public float Scale;
+    /// <summary>
+    /// <code>
+    /// 0b0000_0000_0000_0000_0000_0000_1000_0000 = Do not register default events (inside "40 53 48 83 EC 40 48 8B 91")<br/>
+    /// 0b0000_0000_0000_0000_0000_0010_0000_0000 = Store strings from AtkValues in AtkValueStrings vector? ("8B 81 ?? ?? ?? ?? 4C 8B DA C1 E8 09")
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x1B0)] public uint Flags1B0;
+    /// <summary>
+    /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>
+    /// Mainly used by Gold Saucer addons. Handled in AtkModule handler 50.<br/>
+    /// The following scds can be loaded:
+    /// <code>
+    /// 0 = sound/system/SE_UI.scd
+    /// 1 = sound/system/SE_GS.scd
+    /// 2 = sound/system/SE_TTriad.scd
+    /// 3 = sound/system/SE_EMJ.scd
+    /// 4 = sound/system/SE_10thMG.scd
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x1B4)] public byte SoundEffectScdResourceIndex;
+
     [FieldOffset(0x1B6)] public byte VisibilityFlags;
+
     [FieldOffset(0x1B8)] public ushort DrawOrderIndex;
+    /// <summary>
+    /// <code>
+    /// 0b0000_0100 WindowCollisionNode is RootNode
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x1BA)] public byte Flag1BA;
+
     [FieldOffset(0x1BC)] public short X;
     [FieldOffset(0x1BE)] public short Y;
     [FieldOffset(0x1C0)] public short OpenTransitionOffsetX;
@@ -43,20 +133,23 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1CE)] public ushort ParentId;
     [FieldOffset(0x1D0)] public ushort HostId; // for example, in CharacterProfile this holds the ID of the Character addon
     [FieldOffset(0x1D2)] public ushort ContextMenuParentId;
+
     [FieldOffset(0x1D5)] public byte Alpha;
     [FieldOffset(0x1D6)] public byte ShowHideFlags;
+
     [FieldOffset(0x1D8)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
+    [FieldOffset(0x1E4), FixedSizeArray] internal FixedSizeArray5<Unk1E4Struct> _unk1E4; // something with Focus?? maybe controller tabbing?
 
-    public int DepthLayer => Flags & 0xF;
+    public uint DepthLayer => (Flags180 >> 16) & 0xF;
 
     public bool IsVisible {
-        get => (Flags & 0x20) == 0x20;
-        set => Flags = value ? Flags |= 0x20 : Flags &= 0xDF;
+        get => (Flags180 & 0x200000) != 0;
+        set => Flags180 = value ? Flags180 |= 0x200000 : Flags180 &= 0xFFDFFFFF;
     }
 
     /// <summary> <c>true</c> when Setup is complete. </summary>
-    public bool IsReady => (UnkFlags189 & 0x01) != 0;
+    public bool IsReady => (Flags189 & 0x01) != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0")]
     public partial void Ctor();
@@ -240,4 +333,14 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [VirtualFunction(65)]
     public partial bool AreAllResourcesLoaded();
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
+    public struct Unk1E4Struct {
+        [FieldOffset(0x00)] public byte Unk00;
+        [FieldOffset(0x01)] public byte Unk01;
+        [FieldOffset(0x02)] public short Unk02;
+        [FieldOffset(0x04)] public short Unk04;
+
+        [FieldOffset(0x08)] public int Unk08;
+    }
 }

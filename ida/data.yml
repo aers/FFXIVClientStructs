@@ -3388,6 +3388,9 @@ classes:
       8: SetAddonVisibility
       10: RefreshAddon
       11: AddonRequestUpdateById
+      19: IsSoundEffectScdLoaded
+      20: LoadSoundEffectScd
+      21: UnloadSoundEffectScd # it really just DecRefs it
     funcs:
       0x14017C1B0: Finalize
       0x140543B80: ctor
@@ -5853,6 +5856,7 @@ classes:
       0x14053B920: ContainsNode
       0x14053C060: Draw
       0x14053C360: LoadUldByName
+      0x14053C3F0: SetOpenSoundEffectScdIndex
       0x14053C480: SetOpenTransition
       0x14053C4C0: SetCloseTransition
       0x14053C580: SubscribeAtkArrayData # handler: "4C 8B D2 48 8B D1 41 83 F9 04"
