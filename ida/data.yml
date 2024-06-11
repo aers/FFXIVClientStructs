@@ -5856,11 +5856,11 @@ classes:
       0x14053B920: ContainsNode
       0x14053C060: Draw
       0x14053C360: LoadUldByName
-      0x14053C3F0: SetOpenSoundEffectScdIndex
+      0x14053C3F0: SetScdResourceIndex
       0x14053C480: SetOpenTransition
       0x14053C4C0: SetCloseTransition
-      0x14053C580: SubscribeAtkArrayData # handler: "4C 8B D2 48 8B D1 41 83 F9 04"
-      0x14053C710: UnsubscribeAtkArrayData # handler: "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 41 83 F9 04"
+      0x14053C580: SubscribeAtkArrayData
+      0x14053C710: UnsubscribeAtkArrayData
       0x14053C9C0: SetFocusNode
       0x14053CF40: GetNodeById
       0x14053D070: GetButtonNodeById

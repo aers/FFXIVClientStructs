@@ -109,7 +109,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// 4 = sound/system/SE_10thMG.scd
     /// </code>
     /// </summary>
-    [FieldOffset(0x1B4)] public byte SoundEffectScdResourceIndex;
+    [FieldOffset(0x1B4)] public byte ScdResourceIndex;
 
     [FieldOffset(0x1B6)] public byte VisibilityFlags;
 
