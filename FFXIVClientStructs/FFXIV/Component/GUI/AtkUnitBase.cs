@@ -120,6 +120,21 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 8D 56 01")]
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15"), GenerateStringOverloads]
+    public partial bool LoadUldByName(byte* name, byte a3 = 0, uint a4 = 6);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 24")]
+    public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 06 48 8B CE")]
+    public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B C6 48 8B D3 48 8B CF")]
+    public partial bool SetAtkValues(uint valueCount, AtkValue* values);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F")]
+    public partial bool MoveDelta(short* xDelta, short* yDelta);
+
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 
@@ -219,19 +234,4 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [VirtualFunction(62)]
     public partial void OnMouseOut();
-
-    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 15"), GenerateStringOverloads]
-    public partial bool LoadUldByName(byte* name, byte a3 = 0, uint a4 = 6);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 24")]
-    public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 06 48 8B CE")]
-    public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B C6 48 8B D3 48 8B CF")]
-    public partial bool SetAtkValues(uint valueCount, AtkValue* values);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F")]
-    public partial bool MoveDelta(short* xDelta, short* yDelta);
 }

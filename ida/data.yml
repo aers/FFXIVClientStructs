@@ -5836,6 +5836,7 @@ classes:
     funcs:
       0x140538A80: ctor
       0x140538CB0: Destructor
+      0x1405390E0: FireCallbackAndHideOrClose
       0x1405390F0: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
       0x140539440: SetPosition
       0x1405395C0: SetAlpha
@@ -5860,7 +5861,6 @@ classes:
       0x14053D210: GetComponentListById
       0x14053D2B0: GetTextNodeById
       0x14053D310: GetImageNodeById
-      0x1405390E0: FireCallbackAndHideOrClose
       0x14053D410: FireCallback
       0x14053E030: MoveDelta
       0x14053FAC0: UpdateCollisionNodeList
