@@ -46,7 +46,7 @@ public class GenerateStringOverloadsAttributeTests {
             code,
             ("TestStruct.InteropGenerator.g.cs", result));
     }
-    
+
     [Fact]
     public async Task GenerateStringOverloadsObsolete() {
         const string code = """
@@ -90,7 +90,7 @@ public class GenerateStringOverloadsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("TestStruct.InteropGenerator.g.cs", result));
-    }    
+    }
 
     [Fact]
     public async Task GenerateStringOverloadsWithDefaultValue() {

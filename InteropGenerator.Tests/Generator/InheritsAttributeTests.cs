@@ -40,7 +40,7 @@ public class InheritsAttributeTests {
             code,
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task BasicFieldInheritanceObsolete() {
         const string code = """
@@ -325,7 +325,7 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode),
             SourceGeneration.GetInitializerSource(string.Empty, "BaseStruct", ["TestFunction"]));
     }
-    
+
     [Fact]
     public async Task MemberFunctionInheritanceObsolete() {
         const string code = """
@@ -547,7 +547,7 @@ public class InheritsAttributeTests {
             ("BaseStruct.InteropGenerator.g.cs", baseStructGeneratedCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceGeneratedCode));
     }
-    
+
 
     [Fact]
     public async Task VirtualFunctionInheritanceObsolete() {
@@ -617,7 +617,7 @@ public class InheritsAttributeTests {
             ("BaseStruct.InteropGenerator.g.cs", baseStructGeneratedCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceGeneratedCode));
     }
-    
+
     [Fact]
     public async Task VirtualFunctionInheritanceExistingVirtualTable() {
         const string code = """
@@ -806,7 +806,7 @@ public class InheritsAttributeTests {
               code,
           ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task PublicMethodInheritanceObsolete() {
         const string code = """
@@ -844,7 +844,7 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
               code,
           ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
-    }    
+    }
 
     [Fact]
     public async Task MethodWithDefaultValueInheritance() {
@@ -1037,7 +1037,7 @@ public class InheritsAttributeTests {
             ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructGeneratedCode));
     }
-    
+
     [Fact]
     public async Task StringOverloadsInheritanceObsolete() {
         const string code = """
@@ -1123,7 +1123,7 @@ public class InheritsAttributeTests {
             code,
             ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructGeneratedCode));
-    }    
+    }
 
     [Fact]
     public async Task FixedArrayInheritance() {
@@ -1223,7 +1223,7 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-    
+
     [Fact]
     public async Task FixedArrayByteStringInheritance() {
         const string code = """
@@ -1300,7 +1300,7 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-   
+
     [Fact]
     public async Task FixedArrayByteStringInheritanceObsolete() {
         const string code = """
@@ -1381,7 +1381,7 @@ public class InheritsAttributeTests {
             ("BaseStruct.InteropGenerator.g.cs", baseStructCode),
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritedCode),
             SourceGeneration.GetFixedSizeArraySource([10]));
-    }    
+    }
 
     [Fact]
     public async Task FixedArrayCharStringInheritance() {

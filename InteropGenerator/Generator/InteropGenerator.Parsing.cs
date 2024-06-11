@@ -300,7 +300,7 @@ public sealed partial class InteropGenerator {
                     continue;
 
                 ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(fieldSymbol);
-                
+
                 FieldInfo fieldInfo = new(
                     fieldSymbol.Name,
                     fieldSymbol.Type.GetFullyQualifiedName(),

@@ -32,7 +32,7 @@ public class FixedSizeArrayAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-    
+
     [Fact]
     public async Task GenerateFixedArrayObsolete() {
         const string code = """
@@ -170,7 +170,7 @@ public class FixedSizeArrayAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetFixedSizeArraySource([10]));
     }
-    
+
     [Fact]
     public async Task GenerateFixedArrayByteStringObsolete() {
         const string code = """
