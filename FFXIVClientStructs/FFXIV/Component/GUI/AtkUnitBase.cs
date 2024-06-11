@@ -54,7 +54,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     /// <summary>
     /// <code>
-    /// 0b1000_0000 Disable auto-focus (not adding it to FocusedUnitsList)
+    /// 0b1000_0000 = Disable auto-focus (not adding it to FocusedUnitsList)
     /// </code>
     /// </summary>
     [FieldOffset(0x188)] public byte Flags188;
@@ -116,7 +116,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1B8)] public ushort DrawOrderIndex;
     /// <summary>
     /// <code>
-    /// 0b0000_0100 WindowCollisionNode is RootNode
+    /// 0b0000_0100 = WindowCollisionNode is RootNode
     /// </code>
     /// </summary>
     [FieldOffset(0x1BA)] public byte Flag1BA;

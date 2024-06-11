@@ -630,6 +630,7 @@ classes:
     vfuncs:
       0: dtor
       1: CallHandler
+      2: PlaySoundEffect
   Component::GUI::AtkManagedInterface:
   Component::GUI::AtkModuleEvent:
     vtbls:
