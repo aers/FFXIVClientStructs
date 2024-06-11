@@ -135,6 +135,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F")]
     public partial bool MoveDelta(short* xDelta, short* yDelta);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 0D 48 8B CE")]
+    public partial bool ContainsNode(AtkResNode* node);
+
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 

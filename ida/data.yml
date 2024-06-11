@@ -5850,6 +5850,7 @@ classes:
       0x140539CF0: GetScaledHeight
       0x140539D30: CalculateBounds
       0x14053A500: SetFlag
+      0x14053B920: ContainsNode
       0x14053C060: Draw
       0x14053C360: LoadUldByName
       0x14053C480: SetOpenTransition
