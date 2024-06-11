@@ -101,7 +101,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial byte FireCallbackInt(int callbackValue);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 20 C1 E8 05")]
-    public partial void FireCallback(int valueCount, AtkValue* values, bool close = false);
+    public partial void FireCallback(uint valueCount, AtkValue* values, bool close = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 46 40 0F")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
@@ -203,10 +203,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial bool CheckWindowCollisionAtCoords(short x, short y);
 
     [VirtualFunction(48)]
-    public partial void OnSetup(uint numValues, AtkValue* values);
+    public partial void OnSetup(uint valueCount, AtkValue* values);
 
     [VirtualFunction(50)]
-    public partial void OnRefresh(uint numValues, AtkValue* values);
+    public partial void OnRefresh(uint valueCount, AtkValue* values);
 
     [VirtualFunction(51)]
     public partial void OnRequestedUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
@@ -230,7 +230,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B C6 48 8B D3 48 8B CF")]
-    public partial bool SetAtkValues(uint numValues, AtkValue* values);
+    public partial bool SetAtkValues(uint valueCount, AtkValue* values);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F")]
     public partial bool MoveDelta(short* xDelta, short* yDelta);
