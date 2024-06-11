@@ -70,8 +70,6 @@ public unsafe partial struct AtkResNode : ICreatable {
     /// </summary>
     [FieldOffset(0xA0)] public uint DrawFlags;
 
-    public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
-
     [MemberFunction("E9 ?? ?? ?? ?? 33 C0 48 83 C4 20 5B C3 66 90")]
     public partial void Ctor();
 
@@ -196,6 +194,9 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 61 00")]
     public partial void SetHeight(ushort height);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 EB 05")]
+    public partial bool IsVisible();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EB 01 75 DC")]
     public partial void ToggleVisibility(bool enable);

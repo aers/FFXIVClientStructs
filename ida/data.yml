@@ -5713,7 +5713,7 @@ classes:
       0x14052BC50: GetPriority
       0x14052BC70: SetPriority
       0x14052BC90: IsVisible
-      0x14052BCC0: SetVisibility
+      0x14052BCC0: ToggleVisibility
       0x14052C0F0: GetIsUsingDepthBasedDrawPriority
       0x14052C110: SetUseDepthBasedDrawPriority
       0x14052C160: SetDepth
