@@ -3940,6 +3940,8 @@ classes:
   Client::System::Resource::ResourceEventListener:
     vtbls:
       - ea: 0x1419D6548
+    vfuncs:
+      0: dtor
     funcs:
       0x1401D5100: ctor
   Client::System::Resource::Handle::GrassGridDataResourceHandle:
@@ -10770,6 +10772,8 @@ classes:
     vtbls:
       - ea: 0x141A48240
         base: Client::System::Resource::ResourceEventListener
+    funcs:
+      0x14090ABE0: ctor
   Client::Game::Event::ModuleBase:
     vtbls:
       - ea: 0x141A48268
