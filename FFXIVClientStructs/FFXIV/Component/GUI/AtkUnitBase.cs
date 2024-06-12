@@ -112,7 +112,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
         set => Flags180 = value ? Flags180 |= 0x200000 : Flags180 &= 0xFFDFFFFF;
     }
 
-    /// <summary> <c>true</c> when Setup is complete. </summary>
+    /// <summary>
+    /// Check if OnSetup was called.
+    /// </summary>
     public bool IsReady => (Flags189 & 0x01) != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0")]
@@ -298,6 +300,13 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(62)]
     public partial void OnMouseOut();
 
+    /// <summary>
+    /// Check if all resources are loaded.<br/>
+    /// This includes the uld, an optional scd (for Gold Saucer addons) and textures the uld needs.
+    /// </summary>
+    /// <remarks>
+    /// Use <see cref="IsReady" /> to check if OnSetup has been called (preferred).
+    /// </remarks>
     [VirtualFunction(65)]
     public partial bool IsFullyLoaded();
 }
