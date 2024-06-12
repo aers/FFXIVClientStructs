@@ -1616,6 +1616,7 @@ classes:
       0x140511C90: ctor
   Component::GUI::AtkUldManager:
     funcs:
+      0x140534FA0: InitializeResourceRendererManager
       0x140531CD0: SetupFromULDResourceHandle
       0x1405332B0: CreateTimeline
       0x140534250: ReadTPHD

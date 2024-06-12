@@ -32,7 +32,7 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x38)] public AtkTimelineManager* TimelineManager;
     [FieldOffset(0x40)] public ushort DrawOrderIndex;
     [FieldOffset(0x42)] public ushort NodeListCount;
-    [FieldOffset(0x48)] public void* AtkResourceRendererManager;
+    [FieldOffset(0x48)] public AtkResourceRendererManager* ResourceRendererManager;
     [FieldOffset(0x50)] public AtkResNode** NodeList;
     [FieldOffset(0x58)] public StdLinkedList<Pointer<DuplicateObjectList>> DuplicateObjectsList; // linked list of lists of duplicates
     [FieldOffset(0x78)] public AtkResNode* RootNode;
@@ -41,6 +41,9 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x84)] public ushort NodeListSize; // this is the allocated size of nodelist, count is the amount of nodes it has
     [FieldOffset(0x86)] public byte Flags1;
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 73 18")]
+    public partial void InitializeResourceRendererManager();
 
     [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA")]
     public partial AtkResNode* SearchNodeById(uint id);
