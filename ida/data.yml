@@ -5837,7 +5837,7 @@ classes:
       57: OnOpenTransitionStarted
       61: OnMouseOver
       62: OnMouseOut
-      65: AreAllResourcesLoaded
+      65: IsFullyLoaded
     funcs:
       0x140538A80: ctor
       0x140538CB0: Destructor

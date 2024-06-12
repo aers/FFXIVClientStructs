@@ -104,7 +104,6 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [FieldOffset(0x1D8)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1E0)] public uint CollisionNodeListCount;
-    [FieldOffset(0x1E4), FixedSizeArray] internal FixedSizeArray5<Unk1E4Struct> _unk1E4; // something with Focus?? maybe controller tabbing?
 
     public uint DepthLayer => (Flags180 >> 16) & 0xF;
 
@@ -300,15 +299,5 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void OnMouseOut();
 
     [VirtualFunction(65)]
-    public partial bool AreAllResourcesLoaded();
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
-    public struct Unk1E4Struct {
-        [FieldOffset(0x00)] public byte Unk00;
-        [FieldOffset(0x01)] public byte Unk01;
-        [FieldOffset(0x02)] public short Unk02;
-        [FieldOffset(0x04)] public short Unk04;
-
-        [FieldOffset(0x08)] public int Unk08;
-    }
+    public partial bool IsFullyLoaded();
 }
