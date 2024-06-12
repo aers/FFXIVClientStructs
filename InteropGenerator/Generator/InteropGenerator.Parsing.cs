@@ -10,13 +10,10 @@ namespace InteropGenerator.Generator;
 
 public sealed partial class InteropGenerator {
 
-    private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, CancellationToken token) {
+    private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, AttributeData generateInteropAttributeData, CancellationToken token) {
         // check if we need to collect extra info for inheritance
-        var isInherited = false;
         ExtraInheritedStructInfo? inheritedStructInfo = null;
-        if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.GenerateInteropAttribute, out AttributeData? generateInteropAttributeData)) {
-            generateInteropAttributeData.TryGetConstructorArgument(0, out isInherited);
-        }
+        generateInteropAttributeData.TryGetConstructorArgument(0, out bool isInherited);
 
         // collect info on struct methods
         ParseMethods(structSymbol,
