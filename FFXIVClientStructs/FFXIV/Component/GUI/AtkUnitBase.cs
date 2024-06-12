@@ -54,49 +54,20 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     /// <summary>
     /// <code>
-    /// 0b1000_0000 = Disable auto-focus (not adding it to FocusedUnitsList)
-    /// </code>
-    /// </summary>
-    [FieldOffset(0x188)] public byte Flags188;
-    /// <summary>
-    /// <code>
-    /// 0b0000_0001 = OnSetup was called (= IsReady)<br/>
-    /// 0b0000_0010 = ? ("75 57 F6 83 ?? ?? ?? ?? ?? 74 3F")
+    /// 0b0000_0001 = OnSetup was called (= IsReady)
     /// </code>
     /// </summary>
     [FieldOffset(0x189)] public byte Flags189;
-    [FieldOffset(0x18A)] public byte Flags18A;
-    [FieldOffset(0x18B)] public byte Flags18B;
-    /// <summary>
-    /// <code>
-    /// 0b0000_1000 = Do not register default events (checked before calling "40 53 48 83 EC 40 48 8B 91")
-    /// </code>
-    /// </summary>
-    [FieldOffset(0x18C)] public byte Flags18C;
-    /// <summary>
-    /// <code>
-    /// 0b0010_0000 = Do not set text in AtkTextNodes from LabelID<br/>
-    /// 0b0100_0000 = Show on Open
-    /// </code>
-    /// </summary>
-    [FieldOffset(0x18D)] public byte Flags18D;
-    [FieldOffset(0x190)] public uint Flags190; // seen being used in AddonAreaMap_vf60
+
     [FieldOffset(0x194)] public uint OpenTransitionDuration;
     [FieldOffset(0x198)] public uint CloseTransitionDuration;
-    [FieldOffset(0x19C)] public uint Flags19C;
 
     [FieldOffset(0x1A1)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
 
     [FieldOffset(0x1A4)] public float OpenTransitionScale;
     [FieldOffset(0x1A8)] public float CloseTransitionScale;
     [FieldOffset(0x1AC)] public float Scale;
-    /// <summary>
-    /// <code>
-    /// 0b0000_0000_0000_0000_0000_0000_1000_0000 = Do not register default events (inside "40 53 48 83 EC 40 48 8B 91")<br/>
-    /// 0b0000_0000_0000_0000_0000_0010_0000_0000 = Store strings from AtkValues in AtkValueStrings vector? ("8B 81 ?? ?? ?? ?? 4C 8B DA C1 E8 09")
-    /// </code>
-    /// </summary>
-    [FieldOffset(0x1B0)] public uint Flags1B0;
+
     /// <summary>
     /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>
     /// Mainly used by Gold Saucer addons. Handled in AtkModule handler 50.<br/>
@@ -114,12 +85,6 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1B6)] public byte VisibilityFlags;
 
     [FieldOffset(0x1B8)] public ushort DrawOrderIndex;
-    /// <summary>
-    /// <code>
-    /// 0b0000_0100 = WindowCollisionNode is RootNode
-    /// </code>
-    /// </summary>
-    [FieldOffset(0x1BA)] public byte Flag1BA;
 
     [FieldOffset(0x1BC)] public short X;
     [FieldOffset(0x1BE)] public short Y;

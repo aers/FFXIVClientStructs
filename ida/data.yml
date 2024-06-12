@@ -5979,6 +5979,8 @@ classes:
       0x14056B5C0: HandleInput
       0x14056B9C0: IsTextInputActive
       0x14056B840: SetUIScene
+      0x1400C6750: PlaySoundEffectHandler
+      0x1400C82A0: ScdResourceHandler
   Component::GUI::AtkComponentCheckBox:
     vtbls:
       - ea: 0x141A09718
