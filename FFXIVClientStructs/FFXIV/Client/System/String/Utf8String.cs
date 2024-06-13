@@ -12,15 +12,17 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {
     [FieldOffset(0x0)] public byte* StringPtr; // pointer to null-terminated string
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40
+    /// <remarks>String length including null terminator.</remarks>
     [FieldOffset(0x10)] public long BufUsed;
-    [FieldOffset(0x18)] public long StringLength; // string length not including null terminator
+    /// <remarks>String length not including null terminator.</remarks>
+    [FieldOffset(0x18)] public long StringLength;
     [FieldOffset(0x20)] public bool IsEmpty;
     [FieldOffset(0x21)] public bool IsUsingInlineBuffer;
     [FieldOffset(0x22)] public fixed byte InlineBuffer[0x40]; // inline buffer used until strlen > 0x40
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;
-    public static bool IsCopiable => true;
+    public static bool IsCopyable => true;
     public static bool IsMovable => true;
 
     public readonly int Length => Math.Max(0, (int)(BufUsed - 1));

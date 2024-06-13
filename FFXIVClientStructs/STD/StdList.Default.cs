@@ -14,7 +14,7 @@ public struct StdList<T>
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;
-    public static bool IsCopiable => StdOps<T>.IsCopiable;
+    public static bool IsCopyable => StdOps<T>.IsCopyable;
     public static bool IsMovable => true;
     public static int Compare(in StdList<T> left, in StdList<T> right) => StdOps<StdList<T>>.Compare(left, right);
     public static bool ContentEquals(in StdList<T> left, in StdList<T> right) => StdOps<StdList<T>>.ContentEquals(left, right);

@@ -22,7 +22,7 @@ public unsafe struct StdDeque<T>
     // TODO: set values accordingly after implementing IList<T>
     public static bool HasDefault => throw new NotImplementedException(); // StdOps<T>.HasDefault
     public static bool IsDisposable => true;
-    public static bool IsCopiable => throw new NotImplementedException(); // StdOps<T>.IsCopiable
+    public static bool IsCopyable => throw new NotImplementedException(); // StdOps<T>.IsCopyable
     public static bool IsMovable => true;
 
     public void* ContainerBase; // iterator base nonsense

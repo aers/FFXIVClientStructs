@@ -23,7 +23,7 @@ public unsafe struct StdList<T, TMemorySpace>
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;
-    public static bool IsCopiable => StdOps<T>.IsCopiable;
+    public static bool IsCopyable => StdOps<T>.IsCopyable;
     public static bool IsMovable => true;
 
     /// <inheritdoc/>
@@ -109,7 +109,7 @@ public unsafe struct StdList<T, TMemorySpace>
 
     /// <inheritdoc/>
     public static void ConstructCopyInPlace(in StdList<T, TMemorySpace> source, out StdList<T, TMemorySpace> target) {
-        if (!StdOps<T>.IsCopiable)
+        if (!StdOps<T>.IsCopyable)
             throw new InvalidOperationException("Copying is not supported");
         ConstructDefaultInPlace(out target);
         foreach (ref var v in source)
@@ -127,7 +127,7 @@ public unsafe struct StdList<T, TMemorySpace>
 
     /// <inheritdoc/>
     public static Pointer<IStdList<T>.Node> CreateNodeCopy(in T value) {
-        if (!StdOps<T>.IsCopiable)
+        if (!StdOps<T>.IsCopyable)
             throw new InvalidOperationException("Copying is not supported");
         var alloc = (IStdList<T>.Node*)TMemorySpace.Allocate((nuint)sizeof(IStdList<T>.Node), 0x10);
         if (alloc is null)

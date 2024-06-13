@@ -40,7 +40,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;
-    public static bool IsCopiable => true;
+    public static bool IsCopyable => true;
     public static bool IsMovable => true;
 
     /// <inheritdoc/>

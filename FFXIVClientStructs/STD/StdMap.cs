@@ -17,7 +17,7 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;
-    public static bool IsCopiable => StdOps<TKey>.IsCopiable && StdOps<TValue>.IsCopiable;
+    public static bool IsCopyable => StdOps<TKey>.IsCopyable && StdOps<TValue>.IsCopyable;
     public static bool IsMovable => true;
 
     /// <inheritdoc cref="IStdMap{TKey,TValue}.Count"/>
@@ -39,7 +39,7 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
             if (loc.KeyEquals(key))
                 return ref loc.Bound->_Myval.Item2;
 
-            if (!StdOps<TKey>.IsCopiable)
+            if (!StdOps<TKey>.IsCopyable)
                 throw new InvalidOperationException("Key is not copiable");
             if (!StdOps<TValue>.HasDefault)
                 throw new InvalidOperationException("Value has no default");
@@ -75,9 +75,9 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
                 StdOps<TValue>.StaticDispose(ref loc.Bound->_Myval.Item2);
                 StdOps<TValue>.ConstructCopyInPlace(value, out loc.Bound->_Myval.Item2);
             } else {
-                if (!StdOps<TKey>.IsCopiable)
+                if (!StdOps<TKey>.IsCopyable)
                     throw new InvalidOperationException("Key is not copiable");
-                if (!StdOps<TValue>.IsCopiable)
+                if (!StdOps<TValue>.IsCopyable)
                     throw new InvalidOperationException("Value is not copiable");
 
                 var node = Tree.InsertEmpty<TMemorySpace>(loc);
@@ -92,9 +92,9 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
         var loc = Tree.FindLowerBound(key);
         if (loc.KeyEquals(key))
             return false;
-        if (!StdOps<TKey>.IsCopiable)
+        if (!StdOps<TKey>.IsCopyable)
             throw new InvalidOperationException("Key is not copiable");
-        if (!StdOps<TValue>.IsCopiable)
+        if (!StdOps<TValue>.IsCopyable)
             throw new InvalidOperationException("Value is not copiable");
 
         var node = Tree.InsertEmpty<TMemorySpace>(loc);
@@ -108,7 +108,7 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
         var loc = Tree.FindLowerBound(key);
         if (loc.KeyEquals(key))
             return false;
-        if (!StdOps<TKey>.IsCopiable)
+        if (!StdOps<TKey>.IsCopyable)
             throw new InvalidOperationException("Key is not copiable");
         if (!StdOps<TValue>.IsMovable)
             throw new InvalidOperationException("Value is not movable");
@@ -126,7 +126,7 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
             return false;
         if (!StdOps<TKey>.IsMovable)
             throw new InvalidOperationException("Key is not movable");
-        if (!StdOps<TValue>.IsCopiable)
+        if (!StdOps<TValue>.IsCopyable)
             throw new InvalidOperationException("Value is not copiable");
 
         var node = Tree.InsertEmpty<TMemorySpace>(loc);
@@ -287,7 +287,7 @@ public unsafe struct StdMap<TKey, TValue, TMemorySpace>
     }
     public static void StaticDispose(ref StdMap<TKey, TValue, TMemorySpace> item) => item.Dispose();
     public static void ConstructCopyInPlace(in StdMap<TKey, TValue, TMemorySpace> source, out StdMap<TKey, TValue, TMemorySpace> target) {
-        if (!IsCopiable)
+        if (!IsCopyable)
             throw new InvalidOperationException("Copying is not supported");
         ConstructDefaultInPlace(out target);
         foreach (ref var x in source)

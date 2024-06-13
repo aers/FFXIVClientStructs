@@ -10,7 +10,7 @@ public struct StdMap<TKey, TValue> : IStdMap<TKey, TValue>
 
     public static bool HasDefault => StdMap<TKey, TValue, IStaticMemorySpace.Default>.HasDefault;
     public static bool IsDisposable => StdMap<TKey, TValue, IStaticMemorySpace.Default>.IsDisposable;
-    public static bool IsCopiable => StdMap<TKey, TValue, IStaticMemorySpace.Default>.IsCopiable;
+    public static bool IsCopyable => StdMap<TKey, TValue, IStaticMemorySpace.Default>.IsCopyable;
     public static bool IsMovable => StdMap<TKey, TValue, IStaticMemorySpace.Default>.IsMovable;
     public readonly int Count => WithOps.Count;
     public readonly long LongCount => WithOps.LongCount;

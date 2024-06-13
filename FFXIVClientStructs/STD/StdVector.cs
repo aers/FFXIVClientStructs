@@ -39,7 +39,7 @@ public unsafe struct StdVector<T, TMemorySpace>
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;
-    public static bool IsCopiable => StdOps<T>.IsCopiable;
+    public static bool IsCopyable => StdOps<T>.IsCopyable;
     public static bool IsMovable => true;
 
     /// <inheritdoc/>
@@ -313,7 +313,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     public void InsertCopy(long index, in T item) {
         if (index < 0 || index > LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        if (!StdOps<T>.IsCopiable)
+        if (!StdOps<T>.IsCopyable)
             throw new InvalidOperationException("Items are not copiable.");
 
         EnsureCapacity(LongCount + 1);
@@ -326,7 +326,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     public void InsertMove(long index, ref T item) {
         if (index < 0 || index > LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        if (!StdOps<T>.IsCopiable)
+        if (!StdOps<T>.IsCopyable)
             throw new InvalidOperationException("Items are not copiable.");
 
         EnsureCapacity(LongCount + 1);
@@ -340,7 +340,7 @@ public unsafe struct StdVector<T, TMemorySpace>
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        if (!StdOps<T>.IsCopiable)
+        if (!StdOps<T>.IsCopyable)
             throw new InvalidOperationException("Items are not copiable.");
 
         switch (collection) {
@@ -380,7 +380,7 @@ public unsafe struct StdVector<T, TMemorySpace>
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
-        if (!StdOps<T>.IsCopiable)
+        if (!StdOps<T>.IsCopyable)
             throw new InvalidOperationException("Items are not copiable.");
         if (!StdOps<T>.IsMovable && index != LongCount)
             throw new InvalidOperationException("Items are not movable, and trying to insert in middle.");
@@ -623,7 +623,7 @@ public unsafe struct StdVector<T, TMemorySpace>
     /// <inheritdoc/>
     public void Resize(long newSize, in T defaultValue) {
         var prevCount = LongCount;
-        if (!StdOps<T>.IsCopiable && prevCount < newSize)
+        if (!StdOps<T>.IsCopyable && prevCount < newSize)
             throw new InvalidOperationException("Elements are not copiable, and default value cannot be specified.");
 
         ResizeUndefined(newSize);
