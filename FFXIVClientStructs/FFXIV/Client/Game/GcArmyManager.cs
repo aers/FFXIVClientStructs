@@ -95,8 +95,13 @@ public unsafe partial struct GcArmyMember {
     [FieldOffset(0x48)] public byte StainHands;
     [FieldOffset(0x49)] public byte StainLegs;
     [FieldOffset(0x4A)] public byte StainFeet;
-    // TODO: Verify offsets above
-
+    [FieldOffset(0x4B)] public byte Stain2MainHand;
+    [FieldOffset(0x4C)] public byte Stain2OffHand;
+    [FieldOffset(0x4D)] public byte Stain2Head;
+    [FieldOffset(0x4E)] public byte Stain2Body;
+    [FieldOffset(0x4F)] public byte Stain2Hands;
+    [FieldOffset(0x50)] public byte Stain2Legs;
+    [FieldOffset(0x51)] public byte Stain2Feet;
     [FieldOffset(0x52)] public byte MasteryIndependent;
     [FieldOffset(0x53)] public byte MasteryOffensive;
     [FieldOffset(0x54)] public byte MasteryDefensive;
