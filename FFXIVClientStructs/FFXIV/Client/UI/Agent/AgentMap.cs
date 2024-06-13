@@ -80,7 +80,7 @@ public unsafe partial struct AgentMap {
     public partial void SetFlagMapMarker(uint territoryId, uint mapId, float x, float y, uint iconId = 0xEC91);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0 ?? 48 8B B4 24")]
-    public partial void OpenMapByMapId(uint mapId);
+    public partial void OpenMapByMapId(uint mapId, uint a3 = 0, bool a4 = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 45 28 48 8D 8C 24")]
     public partial void OpenMap(OpenMapInfo* data);
