@@ -50,7 +50,7 @@ public unsafe partial struct GcArmyData {
     [FieldOffset(0x4C0)] public byte MemberCount;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x58)] // TODO: size changed, fix offsets
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct GcArmyMember {
     [FieldOffset(0x00)] public uint Face;
     [FieldOffset(0x04)] public uint ENpcResidentId;
