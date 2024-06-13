@@ -6176,7 +6176,7 @@ classes:
       0x14058DA90: ctor
     vfuncs:
       20: GetWindowCollisionNode
-      21: GetTitlebarCollisionNode
+      21: GetTitleBarCollisionNode
       22: GetCloseButtonNode
       23: SetAddon
       25: ToggleTitleBarVisibility

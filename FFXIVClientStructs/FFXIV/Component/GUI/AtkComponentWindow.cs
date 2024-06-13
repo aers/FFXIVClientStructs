@@ -22,7 +22,7 @@ public unsafe partial struct AtkComponentWindow {
     /// </remarks>
     [FieldOffset(0xC8), FixedSizeArray] internal FixedSizeArray8<int> _nodeIds;
     [FieldOffset(0xE8)] public AtkCollisionNode* WindowCollisionNode;
-    [FieldOffset(0xF0)] public AtkCollisionNode* TitlebarCollisionNode;
+    [FieldOffset(0xF0)] public AtkCollisionNode* TitleBarCollisionNode;
     [FieldOffset(0xF8)] public uint TitleTextId;
     [FieldOffset(0xFC)] public uint SubtitleTextId;
     [FieldOffset(0x100)] public float SubtitleOffsetX;
