@@ -6174,6 +6174,12 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14058DA90: ctor
+    vfuncs:
+      20: GetWindowCollisionNode
+      21: GetTitlebarCollisionNode
+      22: GetCloseButtonNode
+      23: SetAddon
+      25: ToggleTitleBarVisibility
   Component::GUI::AtkComponentJournalCanvas:
     vtbls:
       - ea: 0x141A0A628
