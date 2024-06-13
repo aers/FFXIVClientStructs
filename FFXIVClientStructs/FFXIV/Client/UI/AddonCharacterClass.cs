@@ -21,7 +21,7 @@ public unsafe partial struct AddonCharacterClass {
 
     [FieldOffset(0x828)] public int TabIndex;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 48 8B 01 FF 50 78 48 89 87")]
+    [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B 81 ?? ?? ?? ?? 8B F2")]
     public partial void SetTab(int tab);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]

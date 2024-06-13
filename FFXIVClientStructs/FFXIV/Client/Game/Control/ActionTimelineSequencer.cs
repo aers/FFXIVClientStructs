@@ -16,16 +16,16 @@ public unsafe partial struct ActionTimelineSequencer {
 
     [FieldOffset(0x1C8)] public Character.Character* Parent;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B BC 24 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B BC 24 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B 40")]
     public partial void PlayTimeline(ushort actionTimelineId, void* a3 = null); // Determines which slot the timeline belongs in and then plays it on that slot
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7B 08 48 81 C7")]
     public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 ?? 0F 28 D0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 08 0F 28 D0")]
     public partial float GetSlotSpeed(uint slot);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 F8 8D 8F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 83 F8 4D")]
     public partial ushort GetSlotTimeline(uint slot);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 C6 4D 8B CC")]

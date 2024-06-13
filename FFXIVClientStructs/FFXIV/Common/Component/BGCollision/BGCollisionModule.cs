@@ -48,7 +48,7 @@ public unsafe partial struct BGCollisionModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 84 C0 74 ?? 40 38 BD")]
     public static partial bool Raycast(Vector3 origin, Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
 
-    [MemberFunction("48 83 EC 48 48 8B 05 ?? ?? ?? ?? 4D 8B D1")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 84 C0 75 54")]
     public static partial bool Raycast2(Vector3 origin, Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
 
     public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {

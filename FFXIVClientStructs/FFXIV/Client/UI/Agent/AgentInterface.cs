@@ -46,10 +46,10 @@ public unsafe partial struct AgentInterface {
     [VirtualFunction(11)]
     public partial void OnClassJobChange(byte classJobId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 6E 20")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 85 FF")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 5D 44 8B C5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 7E 4B")]
     public partial bool IsAddonReady();
 
     public enum GameEvent {

@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct CurrencyManager {
-    [StaticAddress("48 8B 1D ?? ?? ?? ?? 48 85 DB 74 15 48 8B CB E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 D2", 3, isPointer: true)]
+    [StaticAddress("48 8B 1D ?? ?? ?? ?? 48 85 DB 74 27 48 8D 4B 20 E8 ?? ?? ?? ?? 48 8D 4B 10 E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 D2", 3, isPointer: true)]
     public static partial CurrencyManager* Instance();
 
     /// <remarks>
@@ -192,13 +192,13 @@ public unsafe partial struct CurrencyManager {
     /// <remarks>
     /// Used for items in <see cref="SpecialItemBucket"/> only.
     /// </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 EB 11")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 89 47 0C")]
     public partial uint GetItemIdBySpecialId(byte specialId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 76 0A")]
     public partial uint GetItemCount(uint itemId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 CF 03 CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3B D8 76 7C")]
     public partial uint GetItemMaxCount(uint itemId);
 
     /// <remarks>

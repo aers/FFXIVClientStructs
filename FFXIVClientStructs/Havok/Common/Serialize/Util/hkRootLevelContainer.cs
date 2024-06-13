@@ -20,6 +20,6 @@ public unsafe partial struct hkRootLevelContainer {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA"), GenerateStringOverloads]
     public partial void* findObjectByType(byte* typeName, void* prevObject);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 45 1B"), GenerateStringOverloads]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA"), GenerateStringOverloads]
     public partial void* findObjectByName(byte* objectName, void* prevObject);
 }

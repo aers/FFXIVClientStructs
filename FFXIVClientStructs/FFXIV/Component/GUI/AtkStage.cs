@@ -39,15 +39,15 @@ public unsafe partial struct AtkStage {
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B F0 0F 85")]
     public partial AtkResNode* GetFocus();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 80 BB")]
+    [MemberFunction("E8 ?? ?? ?? ?? F6 C3 08 74 07")]
     public partial void ClearFocus();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 4C 8B 70 50")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 85 C0 74 06")]
     public partial NumberArrayData** GetNumberArrayData();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 37")]
     public partial StringArrayData** GetStringArrayData();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 70 10")]
+    [MemberFunction("48 8B C8 E8 ?? ?? ?? ?? 48 8B 48 08")]
     public partial ExtendArrayData** GetExtendArrayData();
 }

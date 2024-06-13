@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkCollisionNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
-// common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
+// common CreateAtkNode function "E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13"
 // type 8
 [GenerateInterop]
 [Inherits<AtkResNode>]
@@ -18,7 +18,7 @@ public unsafe partial struct AtkCollisionNode : ICreatable {
     [MemberFunction("E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
     public partial void Ctor();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 1E FE C3")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 48 32 DB")]
     public partial bool CheckCollisionAtCoords(short x, short y, bool inclusive);
 }
 

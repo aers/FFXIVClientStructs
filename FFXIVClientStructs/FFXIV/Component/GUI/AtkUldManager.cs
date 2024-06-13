@@ -42,15 +42,15 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x86)] public byte Flags1;
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded
 
-    [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA")]
+    [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA 74 42")]
     private partial AtkResNode* SearchNodeByIdInternal(uint id);
 
     public AtkResNode* SearchNodeById(uint id) => LoadedState == AtkLoadState.Loaded ? SearchNodeByIdInternal(id) : null;
 
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B FA 33 DB E8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 4D 08")]
     public partial AtkComponentBase* CreateAtkComponent(ComponentType type);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13")]
     public partial AtkResNode* CreateAtkNode(NodeType type);
 
     private static AtkResNode* CreateAtkNodeInternal(NodeType type) {
@@ -82,7 +82,7 @@ public unsafe partial struct AtkUldManager {
         return (AtkCollisionNode*)CreateAtkNodeInternal(NodeType.Collision);
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F 10 41 8B C4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 44 24 ?? 41 8B CF")]
     public partial void UpdateDrawNodeList();
 }
 

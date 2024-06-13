@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct LimitBreakController {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 74 1C", 3)]
+    [StaticAddress("44 88 A6 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??", 3)]
     public static partial LimitBreakController* Instance();
 
     [FieldOffset(0x08)] public byte BarCount;

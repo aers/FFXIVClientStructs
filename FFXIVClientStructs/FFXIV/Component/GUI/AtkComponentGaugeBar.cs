@@ -77,7 +77,7 @@ public unsafe partial struct AtkComponentGaugeBar {
     [FieldOffset(0x1A0)] public short MarginX;
     [FieldOffset(0x1A2)] public short MaxFillPositionX;
 
-    [MemberFunction("45 33 D2 48 8D 05 ?? ?? ?? ?? 4C 89 51 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 89 98 ?? ?? ?? ??")]
     public partial void Ctor();
 
     /// <summary>
@@ -88,9 +88,9 @@ public unsafe partial struct AtkComponentGaugeBar {
     /// <param name="value">The value to set.</param>
     /// <param name="secondaryValue">The secondary value to set (n/a on most gauges)</param>
     /// <param name="instant">Set the value instantaneously without animating the fill nodes.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 44 24 20 45 33 C9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3B 1E")]
     public partial void SetGaugeValue(int value, int secondaryValue, bool instant);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 48 8B 46 20")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 B7 ?? ?? ?? ?? 48 8B 45 20")]
     public partial void SetGaugeRange(int value);
 }

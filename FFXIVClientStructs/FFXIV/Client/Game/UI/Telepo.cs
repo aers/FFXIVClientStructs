@@ -25,7 +25,7 @@ public unsafe partial struct Telepo {
     ///     f(Entry, Exit) := f(Entry, EntryRelay(EntryPlane, ExitPlane)) + Cost(EntryPlane, ExitPlane) + f(ExitRelay(EntryPlane, ExitPlane), Exit).
     /// Then, the growth is halved after 1000, i.e. if f(Entry, Exit) > 1000, then return (f(Entry, Exit) - 1000) / 2 + 1000 instead.
     /// Additionally, if <paramref name="residentArea"/> is true, the cost is quartered, and if otherwise either <paramref name="unk"/> or <paramref name="favored"/> is true, the cost is halved.
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D0 41 0F BF CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 84 9D ?? ?? ?? ??")]
     public static partial ulong GetTeleportCost(ushort entryTerritoryId, ushort exitTerritoryId, bool residentArea, bool unk, bool favored);
 
     [GenerateInterop]

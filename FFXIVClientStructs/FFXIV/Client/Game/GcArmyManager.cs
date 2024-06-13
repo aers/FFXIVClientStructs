@@ -4,11 +4,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::GcArmyManager
 // Squadron
-// ctor "48 83 EC 28 48 83 3D ?? ?? ?? ?? ?? 75 2E 33 D2"
+// ctor "48 83 EC ?? 48 83 3D ?? ?? ?? ?? ?? 75 ?? 33 D2 45 33 C0 8D 4A ?? E8 ?? ?? ?? ?? 33 C9 48 85 C0 74 ?? 48 89 08 48 89 48 ?? 48 89 05"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct GcArmyManager {
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 7C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D AC")]
     public static partial GcArmyManager* Instance();
 
     /// <remarks> Data is loaded on-demand inside GC Barracks </remarks>
@@ -16,10 +16,10 @@ public unsafe partial struct GcArmyManager {
     [FieldOffset(0x08)] public uint LastMissionCompleteNotificationTimestamp;
     [FieldOffset(0x0C)] public uint LastTrainingCompleteNotificationTimestamp;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 41 8B DF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 28 8B FB")]
     public partial uint GetMemberCount();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 63 3B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 48 13")]
     public partial GcArmyMember* GetMember(uint index);
 }
 

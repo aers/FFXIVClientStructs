@@ -79,13 +79,13 @@ public unsafe partial struct AgentMap {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 85 C9")]
     public partial void SetFlagMapMarker(uint territoryId, uint mapId, float x, float y, uint iconId = 0xEC91);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0 ?? 48 8B B4 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 44 24 ?? 0F B6 48 1D")]
     public partial void OpenMapByMapId(uint mapId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 45 28 48 8D 8C 24")]
     public partial void OpenMap(OpenMapInfo* data);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 54 41 55 41 56 48 83 EC 20")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D 70 E8 ?? ?? ?? ?? 48 8D 54 24 ??")]
     public partial void AddGatheringTempMarker(uint styleFlags, int mapX, int mapY, uint iconId, int radius, Utf8String* tooltip);
 
     [MemberFunction("40 53 48 83 EC ?? B2 ?? C6 81 ?? ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 33 D2")]

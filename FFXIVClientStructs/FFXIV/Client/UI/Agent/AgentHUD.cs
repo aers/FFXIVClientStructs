@@ -39,13 +39,13 @@ public unsafe partial struct AgentHUD {
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 44 8B C2 83 E2 1F")]
     public partial bool IsMainCommandEnabled(uint mainCommandId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 B0 01 EB 27")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 32 FF 45 32 C0")]
     public partial bool SetMainCommandEnabledState(uint mainCommandId, bool enabled);
 
     [MemberFunction("48 85 D2 74 7F 48 89 5C 24")]
     public partial void OpenContextMenuFromTarget(GameObject* gameObject);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B CB E8 ?? ?? ?? ?? 48 8B D8")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 08 48 8B CB E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 45 85 F6")]
     public partial byte* GetMainCommandString(uint commandId, bool includeKeybind = true, bool includeNewIndicator = false);
 }
 

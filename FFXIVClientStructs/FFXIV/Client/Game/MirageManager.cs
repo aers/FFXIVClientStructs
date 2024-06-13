@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1478)]
 public unsafe partial struct MirageManager {
-    [StaticAddress("48 8B 1D ?? ?? ?? ?? 48 85 DB 74 48", 3, isPointer: true)]
+    [StaticAddress("74 2C 48 8B 0D ?? ?? ?? ?? 48 85 C9", 5, isPointer: true)]
     public static partial MirageManager* Instance();
 
     [FieldOffset(0)] public bool IsApplyingGlamourPlate;

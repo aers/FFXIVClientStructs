@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkCounterNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
-// common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
+// common CreateAtkNode function "E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13"
 // type 5
 [GenerateInterop]
 [Inherits<AtkResNode>]
@@ -27,9 +27,9 @@ public unsafe partial struct AtkCounterNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0E 8D 04 9B")]
     public partial void SetNumber(int number);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 FF C5 49 83 C4 10"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 FF C4 49 83 C5 10"), GenerateStringOverloads]
     public partial void SetText(byte* text);
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 41 FA")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 F8 08")]
     public partial void UpdateWidth();
 }

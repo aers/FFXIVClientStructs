@@ -18,7 +18,7 @@ public unsafe partial struct AgentRecipeMaterialList {
     [FieldOffset(0x34)] public bool WindowLocked;
     [FieldOffset(0x38)] public RecipeData* Recipe;
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB B1 48 8B 4B 28")]
+    [MemberFunction("E8 ?? ?? ?? ?? C6 47 08 00 EB 30")]
     public partial void OpenByRecipeId(ushort recipeId, uint amount = 1);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 BA ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 5A")]

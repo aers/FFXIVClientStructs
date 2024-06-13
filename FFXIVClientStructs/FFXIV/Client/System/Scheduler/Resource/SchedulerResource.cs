@@ -26,6 +26,6 @@ public unsafe partial struct SchedulerResource {
     /// Returns the data from the contained resource handle or null.
     /// </summary>
     /// <param name="dataLength">The length of the returned data.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 63 83")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B E8 48 63 87 ?? ?? ?? ??")]
     public partial byte* GetResourceData(uint* dataLength);
 }

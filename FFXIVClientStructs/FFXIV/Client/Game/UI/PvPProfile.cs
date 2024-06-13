@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x7C)]
 public unsafe partial struct PvPProfile {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 43 08", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 78 31", 3)]
     public static partial PvPProfile* Instance();
 
     [FieldOffset(0x0)] public byte IsLoaded;
@@ -59,19 +59,19 @@ public unsafe partial struct PvPProfile {
     public partial byte GetPvPRank();
 
     /// <summary>Gets the total accumulated PvP experience for the active Grand Company.</summary>
-    [MemberFunction("0F B6 15 ?? ?? ?? ?? 8D 42 FF 3C 02 77 0F")]
+    [MemberFunction("0F B6 05 ?? ?? ?? ?? FE C8 3C 02 77 08")]
     public partial uint GetPvPTotalExperience();
 
     /// <summary>Gets the experience for the current PvP rank for the active Grand Company.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CC 8B F0")]
+    [MemberFunction("40 53 48 83 EC 20 0F B6 05 ?? ?? ?? ?? 48 8B D9 FE C8")]
     public partial uint GetPvPCurrentRankExperience();
 
     /// <summary>Gets the needed experience for the current PvP rank for the active Grand Company.</summary>
-    [MemberFunction("0F B6 15 ?? ?? ?? ?? 8D 42 FF 3C 02 77 07")]
+    [MemberFunction("48 83 EC 28 0F B6 05 ?? ?? ?? ?? FE C8")]
     public partial uint GetPvPCurrentRankNeededExperience();
 
     /// <summary>Gets the current PvP Series rank.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F0 8B FE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 8D ?? ?? ?? ?? 0F B6 D0")]
     public partial byte GetSeriesCurrentRank();
 
     /// <summary>Gets the claimed PvP Series rank.</summary>

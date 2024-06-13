@@ -39,7 +39,7 @@ public unsafe partial struct ItemFinderModule {
     /// </summary>
     /// <param name="itemId">The Id of the item to search for.</param>
     /// <param name="includeHQAndCollectibles">If <c>true</c>, it also searches for the item id as HQ and collectible versions.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 33 F6 41 83 FC")]
+    [MemberFunction("E8 ?? ?? ?? ?? C6 43 08 01 EB 59")]
     public partial void SearchForItem(uint itemId, bool includeHQAndCollectibles = true);
 }
 

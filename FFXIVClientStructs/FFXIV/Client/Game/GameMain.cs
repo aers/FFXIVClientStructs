@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40E0)]
 public unsafe partial struct GameMain {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 38 05", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F 28 F2 48 89 44 24 ??", 3)]
     public static partial GameMain* Instance();
 
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray4<Festival> _activeFestivals;
@@ -36,19 +36,19 @@ public unsafe partial struct GameMain {
     [MemberFunction("E8 ?? ?? ?? ?? 88 45 F1")]
     public static partial bool IsInPvPArea();
 
-    [MemberFunction("40 53 48 83 EC ?? 48 8B 1D ?? ?? ?? ?? 48 85 DB 75 ?? 32 C0 48 83 C4 ?? 5B C3 48 8D 0D")]
+    [MemberFunction("40 53 48 83 EC 20 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 1E")]
     public static partial bool IsInPvPInstance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10")]
     public static partial bool IsInSanctuary();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? 0F B6 F0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 7E 08 00 4C 8D 2D ?? ?? ?? ??")]
     public static partial bool IsInGPose();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 57 FF 84 C0")]
     public static partial bool IsInIdleCam();
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 60 48 8D 8D")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??")]
     public partial void QueueActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies once the current "event" is done (GPose, Cutscene etc)
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 63 50 FE")]

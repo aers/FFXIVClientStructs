@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 // Client::Game::Control::CharacterLookAtTargetParam
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-[VirtualTable("89 51 18 48 8D 05 ?? ?? ?? ?? 48 89 41 10 48 8D 05", 6)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 09", 6)]
 public partial struct CharacterLookAtTargetParam {
     [FieldOffset(0x8)] public TargetInfoType Type;
 

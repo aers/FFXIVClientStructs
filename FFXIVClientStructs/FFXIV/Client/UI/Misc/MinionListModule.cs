@@ -17,19 +17,19 @@ public unsafe partial struct MinionListModule {
     [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray30<ushort> _favorites;
     // [FieldOffset(0x92)] public uint Unk92;
 
-    [MemberFunction("48 83 EC 28 44 0F B7 D2 4C 8B C9 32 C0")]
+    [MemberFunction("48 83 EC 28 44 0F B7 D2 4C 8B C9 45 32 C0 66 90 41 0F B6 C0 66 44 39 54 41 ??")]
     public partial bool AddToUnseenCompanions(ushort companionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 D3 48 8B CE E8")]
+    [MemberFunction("40 57 48 83 EC 20 4C 8B C1")]
     public partial bool RemoveFromUnseenCompanions(ushort companionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 8D 5D 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 41 8D 5E 0B")]
     public partial bool IsFavorite(ushort companionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 86 ?? ?? ?? ?? 49 8B 4E 10")]
     public partial bool AddToFavorites(ushort companionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 86 ?? ?? ?? ?? 49 8D 96")]
+    [MemberFunction("48 83 EC 28 4C 8B C9 32 C0")]
     public partial bool RemoveFromFavorites(ushort companionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 8E ?? ?? ?? ?? 4C 8D 44 24 ?? 49 83 C1 03")]

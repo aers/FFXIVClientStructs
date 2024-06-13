@@ -21,7 +21,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x35C8)]
 public unsafe partial struct Framework {
-    [StaticAddress("44 0F B6 C0 48 8B 0D ?? ?? ?? ??", 7, true)]
+    [StaticAddress("49 8B DC 48 89 1D ?? ?? ?? ??", 6, true)]
     public static partial Framework* Instance();
 
     [FieldOffset(0x0010)] public SystemConfig SystemConfig;
@@ -137,7 +137,7 @@ public unsafe partial struct Framework {
     [MemberFunction("80 B9 ?? ?? ?? ?? 00 74 ?? 48 8B 81 ?? ?? ?? ?? C3")]
     public partial NetworkModuleProxy* GetNetworkModuleProxy();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 89 47 2C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 03 07")]
     public static partial long GetServerTime();
 
     /// <summary>

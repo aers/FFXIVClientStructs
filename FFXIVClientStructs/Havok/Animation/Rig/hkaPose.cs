@@ -90,7 +90,7 @@ public unsafe partial struct hkaPose {
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 4E 40")]
     public partial hkArray<hkQsTransformf>* AccessSyncedPoseLocalSpace();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 8B 58 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 8D ?? ?? ?? ?? 8B 58 08")]
     public partial hkArray<hkQsTransformf>* AccessSyncedPoseModelSpace();
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 05 E8 ?? ?? ?? ?? 4D 8B 4E 40")]
@@ -99,7 +99,7 @@ public unsafe partial struct hkaPose {
     // [MemberFunction("")]
     // public partial hkArray<float>* GetFloatSlotValues();
 
-    [MemberFunction("48 8B 01 4C 8B C9")]
+    [MemberFunction("48 8B 01 4C 8B C9 4C 8B 41 08")]
     public partial void SetToReferencePose();
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B 01 48 8B D9 48 63 78 30")]
@@ -120,6 +120,6 @@ public unsafe partial struct hkaPose {
     [MemberFunction("48 89 5C 24 ?? 48 8B 01 45 33 C0")]
     public partial byte CheckPoseValidity();
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B 01 33 FF")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 48 8B 01 33 FF 0F 29 74 24 ??")]
     public partial byte CheckPoseTransformsValidity();
 }

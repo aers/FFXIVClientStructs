@@ -8,6 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Configuration;
 [Inherits<Common.Configuration.SystemConfig>]
 [StructLayout(LayoutKind.Explicit, Size = 0x450)]
 public partial struct SystemConfig {
-    [MemberFunction("E8 ?? ?? ?? ?? 66 85 C0 74 19")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 85 C0 74 1A")]
     public partial uint GetLastWorldId();
 }

@@ -13,7 +13,7 @@ public unsafe partial struct Control {
     [FieldOffset(0x5AE8)] public uint LocalPlayerEntityId;
     [FieldOffset(0x5AF0)] public BattleChara* LocalPlayer;
 
-    [StaticAddress("4C 8D 35 ?? ?? ?? ?? 85 D2", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 45 0F 57 E4 F3 0F 10 70 ??", 3)]
     public static partial Control* Instance();
 
     [StaticAddress("48 89 05 ?? ?? ?? ?? 48 8B 49 08", 3, true)]

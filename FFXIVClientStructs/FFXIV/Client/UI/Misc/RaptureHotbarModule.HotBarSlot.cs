@@ -181,7 +181,7 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         public bool IsEmpty => CommandId == 0;
 
-        [MemberFunction("E8 ?? ?? ?? ?? 4C 39 6F 08")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 39 7E 08")]
         public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
 
         /// <summary>
@@ -204,7 +204,7 @@ public partial struct RaptureHotbarModule {
         /// <summary>
         /// Loads cost data to <see cref="CostText"/> or <see cref="CostValue"/> for this hotbar slot.
         /// </summary>
-        [MemberFunction("E8 ?? ?? ?? ?? 40 0A F0 44 8B 83")]
+        [MemberFunction("E8 ?? ?? ?? ?? 40 0A E8 C6 46 3E 00")]
         public partial bool LoadCostDataForSlot(bool isLoaded = true);
 
         /// <summary>
@@ -255,7 +255,7 @@ public partial struct RaptureHotbarModule {
         /// <param name="slotType">The slot type to look up and return information for.</param>
         /// <param name="actionId">The action ID to look up and return information for.</param>
         /// <returns>Returns the cost text for this HotBarSlot.</returns>
-        [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 26 80 38 00")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 29 80 38 00")]
         public partial uint GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
 
         /// <summary>
@@ -284,7 +284,7 @@ public partial struct RaptureHotbarModule {
         /// <param name="slotType">The slot type to check against - always <see cref="ApparentSlotType"/>.</param>
         /// <param name="actionId">The actionID to check against - always <see cref="ApparentActionId"/>.</param>
         /// <returns>Returns a bool indicating if the action within this slot is usable.</returns>
-        [MemberFunction("E8 ?? ?? ?? ?? 88 47 3E E9")]
+        [MemberFunction("E8 ?? ?? ?? ?? 88 46 3E EB AC")]
         public partial bool IsSlotUsable(HotbarSlotType slotType, uint actionId);
 
         /// <summary>
@@ -292,7 +292,7 @@ public partial struct RaptureHotbarModule {
         /// on the hotbar slot.
         /// </summary>
         /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
-        [MemberFunction("E8 ?? ?? ?? ?? 88 47 40 48 8B D7")]
+        [MemberFunction("40 53 48 83 EC 20 44 0F B6 81 ?? ?? ?? ?? 48 8B D9")]
         public partial bool IsSlotActionTargetInRange();
 
         /// <summary>
@@ -305,7 +305,7 @@ public partial struct RaptureHotbarModule {
         /// <param name="slotType">The slot type (normally <see cref="ApparentSlotType"/>) to check.</param>
         /// <param name="actionId">The action ID (normally <see cref="ApparentActionId"/>) to check.</param>
         /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
-        [MemberFunction("40 53 48 83 EC 20 41 8B D8 80 FA 11")]
+        [MemberFunction("40 53 48 83 EC ?? 44 0F B6 CA 41 8B D8 41 8B D1 83 EA ?? 74 ?? 83 EA")]
         public partial bool IsSlotActionTargetInRange2(HotbarSlotType slotType, uint actionId);
 
         /// <summary>
@@ -315,7 +315,7 @@ public partial struct RaptureHotbarModule {
         /// <param name="outCooldownSecondsLeft">An out parameter representing the seconds left in cooldown. Unused if cooldown is GCD.</param>
         /// <param name="a3">Unknown, appears to be a UI-related field for forcing values if the percentage is 0.</param>
         /// <returns>Returns a range from 0 to 100.</returns>
-        [MemberFunction("E8 ?? ?? ?? ?? 89 47 24 E9")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 89 47 24")]
         public partial int GetSlotActionCooldownPercentage(int* outCooldownSecondsLeft, int a3 = 0);
 
         /// <summary>
@@ -328,7 +328,7 @@ public partial struct RaptureHotbarModule {
         /// <param name="commandType">The type of the command to look up.</param>
         /// <param name="commandId">The ID of the command to look up.</param>
         /// <returns>Returns <c>true</c> if the action would be highlighted, <c>false</c> otherwise.</returns>
-        [MemberFunction("40 53 48 83 EC 20 44 0F B6 CA 41 8B D8")]
+        [MemberFunction("40 53 48 83 EC 20 44 0F B6 CA 41 8B D8 41 8B D1 83 EA 01 74 0D")]
         public partial bool IsActionHighlighted(HotbarSlotType commandType, uint commandId);
     }
 

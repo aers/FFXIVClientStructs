@@ -14,6 +14,6 @@ public partial struct AddonInventoryRetainer {
 
     [FieldOffset(0x2E8)] public int TabIndex;
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 70 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 48 8B F1 48 8B 89")]
+    [MemberFunction("E9 ?? ?? ?? ?? 83 FD 0A 75 D4")]
     public partial void SetTab(int tab);
 }

@@ -14,7 +14,7 @@ public unsafe partial struct Cabinet {
     /// <param name="cabinetItemId">The armoire item entry ID to check against. This is not an item ID but a specific ID
     /// from the Cabinet table.</param>
     /// <returns>Returns true if the armoire contains the specified item.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 16 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 98")]
     public partial bool IsItemInCabinet(int cabinetItemId);
 
     /// <summary>

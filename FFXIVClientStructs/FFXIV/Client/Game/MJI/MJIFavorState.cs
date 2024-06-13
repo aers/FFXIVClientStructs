@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
 // Client::Game::MJI::MJIFavorState
-// ctor "E8 ?? ?? ?? ?? 48 8B F8 66 89 B3"
+// ctor "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 48 8D 05 ?? ?? ?? ?? 33 C9"
 // indices: 0-2 are 'prev', 3-5 are 'curr', 6-8 are 'next', order is 4/6/8h
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
