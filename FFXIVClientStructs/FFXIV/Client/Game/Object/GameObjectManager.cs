@@ -47,7 +47,7 @@ public unsafe partial struct GameObjectManager {
         /// <summary>
         /// Binary search for an object by GameObjectId, using the GameObjectId sorted list.
         /// </summary>
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8B D3 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 54 24")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 8B D3 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8E")]
         public partial GameObject* GetObjectByGameObjectId(GameObjectId objectId);
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::Character
 //   Client::Game::Object::GameObject
 //   Client::Game::Character::CharacterData
-// ctor "E8 ?? ?? ?? ?? 48 8B C8 48 8B 43 08 45 33 C9"
+// ctor "E8 ?? ?? ?? ?? 48 8B 53 08 45 33 C9"
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>, Inherits<CharacterData>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1BD0)]

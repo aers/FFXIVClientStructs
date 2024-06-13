@@ -43,7 +43,7 @@ public unsafe partial struct MJIPastureHandler {
     /// <summary>
     /// Collect all leavings gathered by mammets.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 72 48 8D 4D 10")]
+    [MemberFunction("48 83 EC 38 E8 ?? ?? ?? ?? 45 33 C9 C7 44 24 ?? ?? ?? ?? ?? 45 33 C0 8B D0 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 83 C4 38 C3 CC CC CC CC CC CC CC CC 40 53")]
     public partial void CollectLeavingsAll();
 
     /// <summary>

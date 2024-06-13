@@ -33,8 +33,9 @@ public unsafe partial struct PublicContentBozja {
     /// <param name="holsterIndex">Index of the action in the holster (see HolsterActions array).</param>
     /// <param name="slot">Action slot (has to be 0 or 1).</param>
     /// <returns></returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? BD")]
-    public partial bool UseFromHolster(uint holsterIndex, uint slot);
+    // Dawntrail: function inlined @ "48 85 C0 0F 84 ?? ?? ?? ?? 80 78 05 02"
+    // [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? BD")]
+    // public partial bool UseFromHolster(uint holsterIndex, uint slot);
 }
 
 [GenerateInterop]

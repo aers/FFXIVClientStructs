@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::Director
 //         Client::Game::Event::LuaEventHandler
 //           Client::Game::Event::EventHandler
-// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 E8 ?? ?? ?? ?? C6 87"
+// ctor "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 89 03 48 8D 8B"
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x27D8)]

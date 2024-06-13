@@ -256,13 +256,13 @@ public unsafe partial struct ActionManager {
     /// </summary>
     /// <param name="position">Target position</param>
     /// <param name="followTargetId">?</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 81 FE FB 1C 00 00 74 ?? 81 FE 53 5F 00 00 74 ?? 81 FE 6F 73 00 00")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 3D ?? ?? ?? ?? 49 8B E8")]
     public partial void AutoFaceTargetPosition(Vector3* position, ulong followTargetId = 0xE000_0000);
 
     /// <summary>
     /// Called every frame, responsible for ticking down timers (cooldowns, animation lock, etc) and executing queued action as soon as possible.
     /// </summary>
-    [MemberFunction("48 8B C4 48 89 58 20 57 48 81 EC")]
+    [MemberFunction("48 8B C4 48 89 58 ?? 56 48 81 EC ?? ?? ?? ?? 48 8B 35")]
     public partial void Update();
 
     public enum CastTimeProc : byte {

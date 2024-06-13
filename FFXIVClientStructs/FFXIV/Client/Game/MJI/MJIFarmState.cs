@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
 // Client::Game::MJI::MJIFarmState
-// ctor "E8 ?? ?? ?? ?? EB 03 48 8B C7 33 D2 48 89 83 ?? ?? ?? ?? 45 33 C0 8D 4A 01"
+// ctor "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 89 49 10"
 // vast majority of struct info from "E8 ?? ?? ?? ?? 8B 4C 24 24 E8"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]

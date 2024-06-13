@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 
 // Client::Game::MJI::IslandState
-// ctor "48 89 7C 24 ?? 33 FF 66 C7 01"
+// ctor "66 0F 6F 05 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 66 C7 01"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 public unsafe partial struct IslandState {

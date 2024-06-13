@@ -43,7 +43,7 @@ public unsafe partial struct StatusManager {
     /// </summary>
     /// <param name="statusId">Id of status to remove.</param>
     /// <param name="sourceId">Source of status to remove (default value would remove first matching).</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 2C 48 8B 07")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 41 56 48 83 EC ?? 4C 8B 35")]
     public static partial bool ExecuteStatusOff(uint statusId, uint sourceId = 0xE0000000);
 }
 
