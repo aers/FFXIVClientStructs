@@ -6,9 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 [StructLayout(LayoutKind.Explicit, Size = 0x3A0)]
 public unsafe partial struct PartyMember {
     [FieldOffset(0x0)] public StatusManager StatusManager;
-    [FieldOffset(0x2F8)] public float X;
-    [FieldOffset(0x2FC)] public float Y;
-    [FieldOffset(0x300)] public float Z;
+    [FieldOffset(0x2F0)] public float X;
+    [FieldOffset(0x2F4)] public float Y;
+    [FieldOffset(0x2F8)] public float Z;
     [FieldOffset(0x308)] public ulong ContentId;
     [FieldOffset(0x310)] public uint EntityId;
     //[FieldOffset(0x30C)] public uint Unk_ObjectId_1;
