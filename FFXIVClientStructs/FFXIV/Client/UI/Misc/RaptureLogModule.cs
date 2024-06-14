@@ -69,7 +69,7 @@ public unsafe partial struct RaptureLogModule {
     public partial bool GetLogMessage(int index, Utf8String* str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 51 44 0F B6 95 ?? ?? ?? ??")]
-    public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, uint* timeStamp);
+    public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, int* timestamp);
 
     [MemberFunction("4C 8B D9 48 8B 89 ?? ?? ?? ??")]
     public partial void AddMsgSourceEntry(ulong contentId, int messageIndex, ushort worldId, ushort chatType);
