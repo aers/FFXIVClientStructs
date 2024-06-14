@@ -78,12 +78,12 @@ public unsafe partial struct QuestManager {
     /// Use <see cref="GetNextLeveAllowancesUnixTimestamp"/> or <see cref="GetNextLeveAllowancesDateTime"/> instead.
     /// </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 74 24 ?? 8B D8")]
-    private static partial uint GetNextLeveAllowancesTimestamp();
+    private static partial int GetNextLeveAllowancesTimestamp();
 
     /// <summary>
     /// Get the time when the player will receive new leve allowances.
     /// </summary>
-    /// <returns>A unix timestamp as <see cref="uint"/>.</returns>
+    /// <returns>A unix timestamp as <see cref="int"/>.</returns>
     public static int GetNextLeveAllowancesUnixTimestamp() => GetNextLeveAllowancesTimestamp() * 60;
 
     /// <summary>

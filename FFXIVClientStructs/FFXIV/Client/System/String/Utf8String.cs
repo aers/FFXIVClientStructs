@@ -152,17 +152,13 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("48 8B 01 0F B6 04")]
     public partial byte GetCharAt(ulong idx);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 0A 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F0 E8 ?? ?? ?? ?? 48 8D 4D C0")]
     public partial void SanitizeString(ushort flags, Utf8String* characterList);
 
     public byte GetCharAt(int idx) => idx < 0 ? byte.MinValue : GetCharAt((ulong)idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 FF 03")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
-
-
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F0 E8 ?? ?? ?? ?? 48 8D 4D C0")]
-    public static partial void SanitizeString(ushort flags, Utf8String* characterList); // flags = 0x27F, characterList = nint.Zero
 
     public static implicit operator ReadOnlySpan<byte>(in Utf8String value)
         => value.AsSpan();
