@@ -6178,7 +6178,7 @@ classes:
       20: GetWindowCollisionNode
       21: GetTitleBarCollisionNode
       22: GetCloseButtonNode
-      23: SetAddon
+      23: SetOwnerUnitBase
       25: ToggleTitleBarVisibility
   Component::GUI::AtkComponentJournalCanvas:
     vtbls:

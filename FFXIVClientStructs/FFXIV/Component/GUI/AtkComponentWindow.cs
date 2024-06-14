@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
 public unsafe partial struct AtkComponentWindow {
-    [FieldOffset(0xC0)] public AtkUnitBase* UnitBase;
+    [FieldOffset(0xC0)] public AtkUnitBase* OwnerUnitBase;
     /// <remarks>
     /// [0] = Title<br/>
     /// [1] = Subtitle<br/>
