@@ -31,6 +31,16 @@ public class Exporter {
         7 => "Seventh pass",
         8 => "Eighth pass",
         9 => "Ninth pass",
+        10 => "Tenth pass",
+        11 => "Eleventh pass",
+        12 => "Twelfth pass",
+        13 => "Thirteenth pass",
+        14 => "Fourteenth pass",
+        15 => "Fifteenth pass",
+        16 => "Sixteenth pass",
+        17 => "Seventeenth pass",
+        18 => "Eighteenth pass",
+        19 => "Nineteenth pass",
         _ => $"Pass {i}"
     };
 
@@ -115,8 +125,8 @@ public class Exporter {
 
 ReExport:
         foreach (var @struct in _structs.Where(t => !structsOrdered.Contains(t))) {
-            var types = structsOrdered.Select(t => t.StructType).ToArray();
-            if (!@struct.Dependencies.All(t => types.Contains(t))) continue;
+            var types = structsOrdered.Select(t => t.StructTypeOverride ?? t.StructType.FullSanitizeName()).ToArray();
+            if (!@struct.DependencyNames.All(t => types.Contains(t))) continue;
             structsOrdered = [.. structsOrdered, @struct];
         }
 
@@ -426,6 +436,16 @@ public class ProcessedStruct {
     public required ProcessedMemberFunction[] MemberFunctions;
     [YamlIgnore]
     public Type[] Dependencies => Fields.Select(t => t.FieldType).Where(t => !(t.IsPointer() || t.IsPrimitive || t.IsFixedBuffer() || t.IsEnum || t.IsBaseType())).ToHashSet().ToArray();
+    [YamlIgnore]
+    private string[] _dependencyNames = [];
+    [YamlIgnore]
+    public string[] DependencyNames {
+        get {
+            if (_dependencyNames.Length == 0) {
+                _dependencyNames = Fields.Where(t => (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && (!(t.FieldType.IsPointer() || t.FieldType.IsPrimitive || t.FieldType.IsFixedBuffer() || t.FieldType.IsEnum || t.FieldType.IsBaseType()) || t.FieldTypeOverride != null)).Select(t => t.FieldTypeOverride ?? t.FieldType.FullSanitizeName()).Distinct().ToArray();
+            }
+            return _dependencyNames;
+        }}
     public ProcessedStruct FixOrder() {
         Fields = [.. Fields.OrderBy(t => t.FieldOffset)];
         return this;
