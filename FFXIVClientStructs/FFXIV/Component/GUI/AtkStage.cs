@@ -48,6 +48,6 @@ public unsafe partial struct AtkStage {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 37")]
     public partial StringArrayData** GetStringArrayData();
 
-    [MemberFunction("48 8B C8 E8 ?? ?? ?? ?? 48 8B 48 08")]
+    [MemberFunction("48 8B 41 38 48 8B 40 48")]
     public partial ExtendArrayData** GetExtendArrayData();
 }

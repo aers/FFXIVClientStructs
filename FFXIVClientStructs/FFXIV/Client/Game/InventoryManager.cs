@@ -128,10 +128,10 @@ public unsafe partial struct InventoryItem : ICreatable {
         Collectable = 8
     }
 
-    [MemberFunction("41 89 46 1C E8 ?? ?? ?? ??")]
+    [MemberFunction("33 D2 C7 01 ?? ?? ?? ?? 33 C0")]
     public partial void Ctor();
 
-    [MemberFunction("8B 42 08 4C 8B C1")]
+    [MemberFunction("8B 42 08 4C 8B C9 39 41 08")]
     public partial bool EqualTo(InventoryItem* other);
 
     /// <summary>Copies the values from the other InventoryItem and, if it's symbolic, resolves its linked item.</summary>
