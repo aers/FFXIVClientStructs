@@ -22,13 +22,13 @@ public unsafe partial struct AgentTryon {
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
     [Inherits<CharaView>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x320)]
     public unsafe partial struct TryonCharaView {
-        [FieldOffset(0x2C8)] public bool DoUpdate; // beware: fetches data from agent too, happens in vf10
-        [FieldOffset(0x2C9)] public bool HideOtherEquipment;
-        [FieldOffset(0x2CA)] public bool HideVisor;
-        [FieldOffset(0x2CB)] public bool HideWeapon;
-        [FieldOffset(0x2CC)] public bool CloseVisor;
-        [FieldOffset(0x2CD)] public bool DrawWeapon;
+        [FieldOffset(0x318)] public bool DoUpdate; // beware: fetches data from agent too, happens in vf10
+        [FieldOffset(0x319)] public bool HideOtherEquipment;
+        [FieldOffset(0x31A)] public bool HideVisor;
+        [FieldOffset(0x31B)] public bool HideWeapon;
+        [FieldOffset(0x31C)] public bool CloseVisor;
+        [FieldOffset(0x31D)] public bool DrawWeapon;
     }
 }
