@@ -94,7 +94,7 @@ public unsafe partial struct InventoryContainer {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+[StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x00)] public InventoryType Container;
     [FieldOffset(0x04)] public short Slot;
@@ -116,8 +116,8 @@ public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x18)] public ulong CrafterContentId;
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
     [FieldOffset(0x2A), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
-    [FieldOffset(0x2F)] public byte Stain;
-    [FieldOffset(0x30)] public uint GlamourId;
+    [FieldOffset(0x2F), FixedSizeArray] internal FixedSizeArray2<byte> _stains;
+    [FieldOffset(0x34)] public uint GlamourId;
 
     [Flags]
     public enum ItemFlags : byte {
@@ -170,7 +170,7 @@ public unsafe partial struct InventoryItem : ICreatable {
 
     /// <summary>Gets the stain from the original InventoryItem or itself if not symbolic.</summary>
     [MemberFunction("0F B6 41 7D 4C 8B CA")]
-    public partial byte GetStain();
+    public partial byte GetStain(int index);
 
     /// <summary>Gets the glamour id from the original InventoryItem or itself if not symbolic.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 80 78 06 00 75 F2")]
