@@ -14,9 +14,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentTryon {
     [FieldOffset(0x28)] public TryonCharaView CharaView;
 
-    // you can ignore the openerAddonId in the call and just set it to 0
+    /// <remarks> Opener AddonId can be left as 0. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? EB 5B 48 8B 49 10")]
-    public static partial bool TryOn(uint openerAddonId, uint itemId, byte stainId, uint glamourItemId, byte glamourStainId);
+    public static partial bool TryOn(uint openerAddonId, uint itemId, byte stainId = 0, byte stain2Id = 0, uint glamourItemId = 0, bool applyCompanyCrest = false);
 
     // Client::UI::Agent::AgentTryon::TryonCharaView
     //   Client::UI::Misc::CharaView
