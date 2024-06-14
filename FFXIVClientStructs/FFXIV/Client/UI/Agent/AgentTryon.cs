@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Tryon)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x670)]
+[StructLayout(LayoutKind.Explicit, Size = 0x6D0)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 4F 28 48 89 07 E8 ?? ?? ?? ?? 48 C7 87", 3)]
 public unsafe partial struct AgentTryon {
     [FieldOffset(0x28)] public TryonCharaView CharaView;
