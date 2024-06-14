@@ -17,7 +17,7 @@ public unsafe struct StdWString
 
     public static bool HasDefault => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.HasDefault;
     public static bool IsDisposable => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.IsDisposable;
-    public static bool IsCopiable => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.IsCopiable;
+    public static bool IsCopyable => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.IsCopyable;
     public static bool IsMovable => StdBasicString<char, IStaticEncoding.Unicode, IStaticMemorySpace.Default>.IsMovable;
 
     public long LongCapacity {

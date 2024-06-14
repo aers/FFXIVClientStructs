@@ -4,7 +4,8 @@ internal sealed record FixedSizeArrayInfo(
     string FieldName,
     string Type,
     int Size,
-    bool IsString) {
+    bool IsString,
+    ObsoleteInfo? ObsoleteInfo) {
     public string GetPublicFieldName() =>
         // drop _, capitalize first letter
         // _someFieldName => SomeFieldName

@@ -18,10 +18,10 @@ public interface IStaticNativeObjectOperation<T>
     public abstract static bool IsDisposable { get; }
 
     /// <summary>
-    /// Whether the type is copiable.
+    /// Whether the type is copyable.
     /// </summary>
     /// <remarks>If <c>false</c>, then any operation resulting in copies will fail.</remarks>
-    public abstract static bool IsCopiable { get; }
+    public abstract static bool IsCopyable { get; }
 
     /// <summary>
     /// Whether the type is movable.
@@ -63,7 +63,7 @@ public interface IStaticNativeObjectOperation<T>
     /// </summary>
     /// <param name="source">The source.</param>
     /// <param name="target">The target.</param>
-    /// <exception cref="NotSupportedException">If <see cref="IsCopiable"/> is <c>false</c>.</exception>
+    /// <exception cref="NotSupportedException">If <see cref="IsCopyable"/> is <c>false</c>.</exception>
     public abstract static void ConstructCopyInPlace(in T source, out T target);
 
     /// <summary>

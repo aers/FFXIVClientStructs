@@ -21,7 +21,7 @@ public unsafe partial struct PlayerState {
     /// 1 = Unknown<br/>
     /// See also: <see cref="InstanceContent.GetPenaltyRemainingInMinutes" />
     /// </remarks>
-    [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<uint> _penaltyTimestamps;
+    [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<int> _penaltyTimestamps;
 
     [FieldOffset(0x79)] public byte MaxLevel;
     [FieldOffset(0x7A)] public byte MaxExpansion;
@@ -129,8 +129,8 @@ public unsafe partial struct PlayerState {
     /// </remarks>
     [FieldOffset(0x55B)] public byte MeisterFlag;
 
-    [FieldOffset(0x560)] public uint SquadronMissionCompletionTimestamp;
-    [FieldOffset(0x564)] public uint SquadronTrainingCompletionTimestamp;
+    [FieldOffset(0x560)] public int SquadronMissionCompletionTimestamp;
+    [FieldOffset(0x564)] public int SquadronTrainingCompletionTimestamp;
     [FieldOffset(0x568)] public ushort ActiveGcArmyExpedition;
     [FieldOffset(0x56A)] public ushort ActiveGcArmyTraining;
     [FieldOffset(0x56C)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
@@ -359,7 +359,7 @@ public unsafe partial struct PlayerState {
 
     /// <summary>Returns the expiration of the players Wondrous Tails Journal as a unix timestamp.</summary>
     [MemberFunction("8B 81 ?? ?? ?? ?? C1 E8 04 25")]
-    public partial uint GetWeeklyBingoExpireUnixTimestamp();
+    public partial int GetWeeklyBingoExpireUnixTimestamp();
 
     /// <summary>Returns whether the task is complete or not.</summary>
     /// <param name="index">Task index, starting at 1.</param>

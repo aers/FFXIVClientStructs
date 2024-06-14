@@ -28,7 +28,7 @@ public partial struct FieldMarkerPreset {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<GamePresetPoint> _markers;
     [FieldOffset(0x60)] public byte ActiveMarkers;
     [FieldOffset(0x62)] public ushort ContentFinderConditionId;
-    [FieldOffset(0x64)] public uint TimeStamp;
+    [FieldOffset(0x64)] public int Timestamp;
 
     public bool IsMarkerActive(int index) => (ActiveMarkers & 1 << index) != 0;
     public void SetMarkerActive(int index, bool active) {

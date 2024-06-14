@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -9,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
-public unsafe partial struct AtkUnitBase {
+public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public AtkUldManager UldManager;
     [FieldOffset(0xC8)] public AtkResNode* RootNode;
@@ -56,6 +57,12 @@ public unsafe partial struct AtkUnitBase {
 
     /// <summary> <c>true</c> when Setup is complete. </summary>
     public bool IsReady => (UnkFlags189 & 0x01) != 0;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0")]
+    public partial void Ctor();
+
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 33 F6 48 8B 89")]
+    public partial void Destructor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]
     public partial float GetScale();

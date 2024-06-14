@@ -81,11 +81,11 @@ public unsafe partial struct RaptureLogModule {
         return result;
     }
 
-    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out uint time) {
+    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out int time) {
         using var pMessage = new Utf8String();
         using var pSender = new Utf8String();
         short pKind = 0;
-        uint pTime = 0;
+        int pTime = 0;
 
         var result = GetLogMessageDetail(index, &pKind, &pSender, &pMessage, &pTime);
 

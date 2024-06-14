@@ -475,6 +475,18 @@ enums:
     "Pressed": 2
     "Released": 4
     "Held": 8
+- type: Client::UI::UIModulePacketType
+  name: UIModulePacketType
+  underlying: int
+  namespace: Client.UI
+  values:
+    "ClassJobChange": 2
+    "LevelChange": 3
+    "ShowLogMessage": 4
+    "Logout": 7
+    "CloseLogoutDialog": 8
+    "StartLogoutCountdown": 9
+    "PrintPlayTime": 11
 - type: Client::Game::ActionType
   name: ActionType
   underlying: byte
@@ -3238,6 +3250,7 @@ structs:
   name: Value
   namespace: Component::Text::TextParameter
   union: True
+  size: 8
   fields:
   - type: int
     name: IntValue
@@ -4304,6 +4317,7 @@ structs:
   name: Texture
   namespace: Component::GUI::AtkTexture
   union: True
+  size: 8
   fields:
   - type: Component::GUI::AtkTextureResource*
     name: Resource
@@ -4353,7 +4367,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
-    - type: int
+    - type: unsigned int
       name: iconId
     - type: int
       name: version
@@ -4400,7 +4414,7 @@ structs:
   - type: unsigned int
     name: TexPathHash
     offset: 0
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 4
   - type: Client::System::Resource::Handle::TextureResourceHandle*
@@ -5329,12 +5343,67 @@ structs:
   - type: Component::GUI::AtkUnitManagerFlags
     name: Flags
     offset: 40072
-  virtual_functions: []
-  member_functions: []
+  virtual_functions:
+  - name: SetAddonVisibility
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: addonId
+    - type: byte
+      name: visible
+  - name: RefreshAddon
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+    - type: unsigned int
+      name: numValues
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: AddonRequestUpdateById
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: addonId
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+    - type: byte
+      name: forced
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F8 41 B0 01
+    return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonByName
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: byte*
+      name: name
+    - type: int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 8B 6B 20
+    return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonById
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: id
 - type: Component::GUI::AtkValue::Value
   name: Value
   namespace: Component::GUI::AtkValue
   union: True
+  size: 8
   fields:
   - type: byte
     name: Bool
@@ -5743,8 +5812,8 @@ structs:
   union: False
   size: 24
   fields:
-  - type: unsigned int
-    name: TimeStamp
+  - type: int
+    name: Timestamp
     offset: 0
   - type: unsigned __int64
     name: CpuMilliSeconds
@@ -5955,36 +6024,428 @@ structs:
     offset: 12
   virtual_functions: []
   member_functions: []
-- type: Common::Lua::LuaState
-  name: LuaState
+- type: Common::Lua::GCheader
+  name: GCheader
+  namespace: Common.Lua
+  union: False
+  size: 10
+  fields:
+  - type: Common::Lua::GCObject*
+    name: next
+    offset: 0
+  - type: byte
+    name: tt
+    offset: 8
+  - type: byte
+    name: marked
+    offset: 9
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::TString
+  name: TString
+  namespace: Common.Lua
+  union: False
+  size: 24
+  fields:
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: byte
+    name: reserved
+    offset: 10
+  - type: unsigned int
+    name: hash
+    offset: 12
+  - type: unsigned __int64
+    name: len
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::Udata
+  name: Udata
   namespace: Common.Lua
   union: False
   size: 40
   fields:
-  - type: Common::Lua::lua_State*
-    name: State
-    offset: 8
-  - type: byte
-    name: GCEnabled
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: Common::Lua::Table*
+    name: metatable
     offset: 16
+  - type: Common::Lua::Table*
+    name: env
+    offset: 24
+  - type: unsigned __int64
+    name: len
+    offset: 32
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::Table
+  name: Table
+  namespace: Common.Lua
+  union: False
+  size: 64
+  fields:
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: byte
+    name: flags
+    offset: 10
+  - type: byte
+    name: lsizenode
+    offset: 11
+  - type: Common::Lua::Table*
+    name: metatable
+    offset: 16
+  - type: Common::Lua::TValue*
+    name: array
+    offset: 24
+  - type: Common::Lua::Node*
+    name: node
+    offset: 32
+  - type: Common::Lua::Node*
+    name: lastfree
+    offset: 40
+  - type: Common::Lua::GCObject*
+    name: gclist
+    offset: 48
+  - type: int
+    name: sizearray
+    offset: 56
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::Value
+  name: Value
+  namespace: Common.Lua
+  union: True
+  size: 8
+  fields:
+  - type: Common::Lua::GCObject*
+    name: gc
+    offset: 0
   - type: __int64
-    name: LastGCRestart
+    name: p
+    offset: 0
+  - type: double
+    name: n
+    offset: 0
+  - type: int
+    name: b
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::TValue
+  name: TValue
+  namespace: Common.Lua
+  union: False
+  size: 16
+  fields:
+  - type: Common::Lua::Value
+    name: value
+    offset: 0
+  - type: int
+    name: tt
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::TKey
+  name: TKey
+  namespace: Common.Lua
+  union: False
+  size: 24
+  fields:
+  - type: Common::Lua::TValue
+    name: tvk
+    offset: 0
+  - type: Common::Lua::Node*
+    name: next
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::Node
+  name: Node
+  namespace: Common.Lua
+  union: False
+  size: 40
+  fields:
+  - type: Common::Lua::TValue
+    name: i_val
+    offset: 0
+  - type: Common::Lua::TKey
+    name: i_key
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::UpVal::u::l
+  name: l
+  namespace: Common::Lua::UpVal::u
+  union: False
+  size: 16
+  fields:
+  - type: Common::Lua::UpVal*
+    name: prev
+    offset: 0
+  - type: Common::Lua::UpVal*
+    name: next
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::CClosure
+  name: CClosure
+  namespace: Common.Lua
+  union: False
+  size: 56
+  fields:
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: byte
+    name: isC
+    offset: 10
+  - type: byte
+    name: nupvalues
+    offset: 11
+  - type: Common::Lua::GCObject*
+    name: gclist
+    offset: 16
+  - type: Common::Lua::Table*
+    name: env
     offset: 24
   - type: __fastcall
-    name: db_errorfb
+    name: f
     offset: 32
     return_type: int
     parameters:
     - type: Common::Lua::lua_State*
       name: a1
+  - type: Common::Lua::TValue
+    name: _upvalue
+    offset: 40
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::LClosure
+  name: LClosure
+  namespace: Common.Lua
+  union: False
+  size: 48
+  fields:
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: byte
+    name: isC
+    offset: 10
+  - type: byte
+    name: nupvalues
+    offset: 11
+  - type: Common::Lua::GCObject*
+    name: gclist
+    offset: 16
+  - type: Common::Lua::Table*
+    name: env
+    offset: 24
+  - type: Common::Lua::Proto*
+    name: p
+    offset: 32
+  - type: Common::Lua::UpVal*
+    name: _upvals
+    offset: 40
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::Closure
+  name: Closure
+  namespace: Common.Lua
+  union: True
+  size: 56
+  fields:
+  - type: Common::Lua::CClosure
+    name: c
+    offset: 0
+  - type: Common::Lua::LClosure
+    name: l
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::LocVar
+  name: LocVar
+  namespace: Common.Lua
+  union: False
+  size: 16
+  fields:
+  - type: Common::Lua::TString*
+    name: varname
+    offset: 0
+  - type: int
+    name: startpc
+    offset: 8
+  - type: int
+    name: endpc
+    offset: 12
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::Proto
+  name: Proto
+  namespace: Common.Lua
+  union: False
+  size: 120
+  fields:
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: Common::Lua::TValue*
+    name: k
+    offset: 16
+  - type: unsigned int*
+    name: code
+    offset: 24
+  - type: Common::Lua::Proto**
+    name: p
+    offset: 32
+  - type: int*
+    name: lineinfo
+    offset: 40
+  - type: Common::Lua::LocVar*
+    name: locvars
+    offset: 48
+  - type: Common::Lua::TString**
+    name: upvalues
+    offset: 56
+  - type: Common::Lua::TString*
+    name: source
+    offset: 64
+  - type: int
+    name: sizeupvalues
+    offset: 72
+  - type: int
+    name: sizek
+    offset: 76
+  - type: int
+    name: sizecode
+    offset: 80
+  - type: int
+    name: sizelineinfo
+    offset: 84
+  - type: int
+    name: sizep
+    offset: 88
+  - type: int
+    name: sizelocvars
+    offset: 92
+  - type: int
+    name: linedefined
+    offset: 96
+  - type: int
+    name: lastlinedefined
+    offset: 100
+  - type: Common::Lua::GCObject*
+    name: gclist
+    offset: 104
+  - type: byte
+    name: nups
+    offset: 112
+  - type: byte
+    name: numparams
+    offset: 113
+  - type: byte
+    name: is_vararg
+    offset: 114
+  - type: byte
+    name: maxstacksize
+    offset: 115
   virtual_functions: []
   member_functions: []
 - type: Common::Lua::lua_State
   name: lua_State
   namespace: Common.Lua
   union: False
-  size: 176
-  fields: []
+  size: 184
+  fields:
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: byte
+    name: status
+    offset: 10
+  - type: Common::Lua::TValue*
+    name: top
+    offset: 16
+  - type: Common::Lua::TValue*
+    name: _base
+    offset: 24
+  - type: Common::Lua::global_State*
+    name: l_G
+    offset: 32
+  - type: Common::Lua::CallInfo*
+    name: ci
+    offset: 40
+  - type: unsigned int*
+    name: savedpc
+    offset: 48
+  - type: Common::Lua::TValue*
+    name: stack_last
+    offset: 56
+  - type: Common::Lua::TValue*
+    name: stack
+    offset: 64
+  - type: Common::Lua::CallInfo*
+    name: end_ci
+    offset: 72
+  - type: Common::Lua::CallInfo*
+    name: base_ci
+    offset: 80
+  - type: int
+    name: stacksize
+    offset: 88
+  - type: int
+    name: size_ci
+    offset: 92
+  - type: unsigned __int16
+    name: nCcalls
+    offset: 96
+  - type: unsigned __int16
+    name: baseCcalls
+    offset: 98
+  - type: byte
+    name: hookmask
+    offset: 100
+  - type: byte
+    name: allowhook
+    offset: 101
+  - type: int
+    name: basehookcount
+    offset: 104
+  - type: int
+    name: hookcount
+    offset: 108
+  - type: __fastcall
+    name: hook
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Common::Lua::lua_State*
+      name: a1
+    - type: Common::Lua::lua_Debug*
+      name: a2
+  - type: Common::Lua::TValue
+    name: l_gt
+    offset: 120
+  - type: Common::Lua::TValue
+    name: env
+    offset: 136
+  - type: Common::Lua::GCObject*
+    name: openupval
+    offset: 152
+  - type: Common::Lua::GCObject*
+    name: gclist
+    offset: 160
+  - type: Common::Lua::lua_longjmp*
+    name: errorJmp
+    offset: 168
+  - type: __int64
+    name: errfunc
+    offset: 176
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? FF C7 03 F8
@@ -6106,7 +6567,7 @@ structs:
     - type: int
       name: idx
   - signature: E8 ?? ?? ?? ?? 41 8B D3
-    return_type: __int64
+    return_type: Common::Lua::TValue*
     name: index2adr
     parameters:
     - type: Common::Lua::lua_State*
@@ -6151,6 +6612,115 @@ structs:
       name: nargs
     - type: int
       name: nresults
+- type: Common::Lua::stringtable
+  name: stringtable
+  namespace: Common.Lua
+  union: False
+  size: 16
+  fields:
+  - type: Common::Lua::GCObject**
+    name: hash
+    offset: 0
+  - type: unsigned int
+    name: nuse
+    offset: 8
+  - type: int
+    name: size
+    offset: 12
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::CallInfo
+  name: CallInfo
+  namespace: Common.Lua
+  union: False
+  size: 40
+  fields:
+  - type: Common::Lua::TValue*
+    name: _base
+    offset: 0
+  - type: Common::Lua::TValue*
+    name: func
+    offset: 8
+  - type: Common::Lua::TValue*
+    name: top
+    offset: 16
+  - type: unsigned int*
+    name: savedpc
+    offset: 24
+  - type: int
+    name: nresults
+    offset: 32
+  - type: int
+    name: tailcalls
+    offset: 36
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::lua_Debug
+  name: lua_Debug
+  namespace: Common.Lua
+  union: False
+  size: 120
+  fields:
+  - type: int
+    name: _event
+    offset: 0
+  - type: byte*
+    name: name
+    offset: 8
+  - type: byte*
+    name: namewhat
+    offset: 16
+  - type: byte*
+    name: what
+    offset: 24
+  - type: byte*
+    name: source
+    offset: 32
+  - type: int
+    name: currentline
+    offset: 40
+  - type: int
+    name: nups
+    offset: 44
+  - type: int
+    name: linedefined
+    offset: 48
+  - type: int
+    name: lastlinedefined
+    offset: 52
+  - type: byte
+    name: Short_src
+    offset: 56
+    size: 60
+  - type: int
+    name: i_ci
+    offset: 116
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::LuaState
+  name: LuaState
+  namespace: Common.Lua
+  union: False
+  size: 40
+  fields:
+  - type: Common::Lua::lua_State*
+    name: State
+    offset: 8
+  - type: byte
+    name: GCEnabled
+    offset: 16
+  - type: __int64
+    name: LastGCRestart
+    offset: 24
+  - type: __fastcall
+    name: db_errorfb
+    offset: 32
+    return_type: int
+    parameters:
+    - type: Common::Lua::lua_State*
+      name: a1
+  virtual_functions: []
+  member_functions: []
 - type: Common::Lua::LuaThread
   name: LuaThread
   namespace: Common.Lua
@@ -6160,6 +6730,23 @@ structs:
   - type: Common::Lua::LuaState
     name: LuaState
     offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::Mbuffer
+  name: Mbuffer
+  namespace: Common.Lua
+  union: False
+  size: 24
+  fields:
+  - type: byte*
+    name: buffer
+    offset: 0
+  - type: unsigned __int64
+    name: n
+    offset: 8
+  - type: unsigned __int64
+    name: buffsize
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: Common::Configuration::ConfigValue
@@ -6768,7 +7355,7 @@ structs:
   union: False
   size: 24
   fields:
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 0
   - type: int
@@ -6786,6 +7373,7 @@ structs:
   name: Button1
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 8
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
     name: CarpenterButton
@@ -6799,6 +7387,7 @@ structs:
   name: Button2
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 8
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
     name: BlacksmithButton
@@ -6812,6 +7401,7 @@ structs:
   name: Button3
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 8
   fields:
   - type: Component::GUI::AtkComponentRadioButton*
     name: ArmorerButton
@@ -7573,6 +8163,18 @@ structs:
       name: this
     - type: int
       name: historyIdx
+  - name: HandlePacket
+    offset: 888
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+    - type: Client::UI::UIModulePacketType
+      name: type
+    - type: unsigned int
+      name: uintParam
+    - type: __int64
+      name: packet
   - name: ToggleUi
     offset: 1144
     return_type: void
@@ -7727,7 +8329,7 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: int
+    - type: unsigned int
       name: territoryId
     - type: byte
       name: zoomAnim
@@ -7922,7 +8524,7 @@ structs:
   - type: unsigned int
     name: BannerTimelineIcon
     offset: 112
-  - type: unsigned int
+  - type: int
     name: LastUpdated
     offset: 116
   - type: unsigned int
@@ -8134,8 +8736,8 @@ structs:
   - type: unsigned __int16
     name: ContentFinderConditionId
     offset: 98
-  - type: unsigned int
-    name: TimeStamp
+  - type: int
+    name: Timestamp
     offset: 100
   virtual_functions: []
   member_functions: []
@@ -9673,6 +10275,16 @@ structs:
       name: this
     - type: unsigned __int64
       name: idx
+  - signature: E8 ?? ?? ?? ?? EB 0A 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8D 8D
+    return_type: void
+    name: SanitizeString
+    parameters:
+    - type: Client::System::String::Utf8String*
+      name: this
+    - type: unsigned __int16
+      name: flags
+    - type: Client::System::String::Utf8String*
+      name: characterList
 - type: Client::System::Scheduler::ActionTimelineManager
   name: ActionTimelineManager
   namespace: Client.System.Scheduler
@@ -11651,10 +12263,10 @@ structs:
   - type: Client::Game::GcArmyData*
     name: Data
     offset: 0
-  - type: unsigned int
+  - type: int
     name: LastMissionCompleteNotificationTimestamp
     offset: 8
-  - type: unsigned int
+  - type: int
     name: LastTrainingCompleteNotificationTimestamp
     offset: 12
   virtual_functions: []
@@ -11706,7 +12318,7 @@ structs:
   - type: byte
     name: CandidateCategory
     offset: 19
-  - type: unsigned int
+  - type: int
     name: EnlistmentTimestamp
     offset: 20
   - type: byte
@@ -12115,14 +12727,12 @@ structs:
       name: this
     - type: int
       name: index
-- type: Client::Game::InventoryItem::Id
-  name: Id
-  namespace: Client::Game::InventoryItem
-  union: True
+- type: Client::Game::InventoryItem::Id::Linked
+  name: Linked
+  namespace: Client::Game::InventoryItem::Id
+  union: False
+  size: 4
   fields:
-  - type: unsigned int
-    name: ItemId
-    offset: 0
   - type: unsigned __int16
     name: LinkedItemSlot
     offset: 0
@@ -12131,147 +12741,6 @@ structs:
     offset: 2
   virtual_functions: []
   member_functions: []
-- type: Client::Game::InventoryItem
-  name: InventoryItem
-  namespace: Client.Game
-  union: False
-  size: 56
-  fields:
-  - type: Client::Game::InventoryType
-    name: Container
-    offset: 0
-  - type: __int16
-    name: Slot
-    offset: 4
-  - type: byte
-    name: IsSymbolic
-    offset: 6
-  - type: Client::Game::InventoryItem::Id
-    name: Id
-    offset: 8
-  - type: unsigned int
-    name: Quantity
-    offset: 12
-  - type: unsigned __int16
-    name: Spiritbond
-    offset: 16
-  - type: unsigned __int16
-    name: Condition
-    offset: 18
-  - type: Client::Game::InventoryItem::ItemFlags
-    name: Flags
-    offset: 20
-  - type: unsigned __int64
-    name: CrafterContentId
-    offset: 24
-  - type: unsigned __int16
-    name: Materia
-    offset: 32
-    size: 5
-  - type: byte
-    name: MateriaGrades
-    offset: 42
-    size: 5
-  - type: byte
-    name: Stain
-    offset: 47
-  - type: unsigned int
-    name: GlamourId
-    offset: 48
-  virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8D 45 A8
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: 8B 42 08 4C 8B C1
-    return_type: byte
-    name: EqualTo
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-    - type: Client::Game::InventoryItem*
-      name: other
-  - signature: E9 ?? ?? ?? ?? 48 8D 4B 48
-    return_type: byte
-    name: Copy
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-    - type: Client::Game::InventoryItem*
-      name: other
-  - signature: E8 ?? ?? ?? ?? 38 58 06
-    return_type: Client::Game::InventoryItem*
-    name: GetLinkedItem
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 41 3B 06
-    return_type: unsigned int
-    name: GetItemId
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 2B C6
-    return_type: unsigned int
-    name: GetQuantity
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 66 41 3B 85
-    return_type: unsigned __int16
-    name: GetSpiritbond
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 0F B7 F0 EB 04
-    return_type: unsigned __int16
-    name: GetCondition
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B D8 EB 04
-    return_type: unsigned __int64
-    name: GetCrafterContentId
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 3A 43 08
-    return_type: byte
-    name: GetStain
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 39 33 75
-    return_type: unsigned int
-    name: GetGlamourId
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-  - signature: E8 ?? ?? ?? ?? EB 10 32 C0
-    return_type: unsigned __int16
-    name: GetMateriaId
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-    - type: byte
-      name: materiaSlot
-  - signature: E8 ?? ?? ?? ?? 42 3A 04 33
-    return_type: byte
-    name: GetMateriaGrade
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
-    - type: byte
-      name: materiaSlot
-  - signature: E8 ?? ?? ?? ?? 3A 47 67
-    return_type: byte
-    name: GetMateriaCount
-    parameters:
-    - type: Client::Game::InventoryItem*
-      name: this
 - type: Client::Game::RankData
   name: RankData
   namespace: Client.Game
@@ -13233,6 +13702,30 @@ structs:
       name: recommendedLevel
     - type: __int8
       name: a14
+- type: Client::Game::UI::MarkerPresetPlacement
+  name: MarkerPresetPlacement
+  namespace: Client.Game.UI
+  union: False
+  size: 104
+  fields:
+  - type: byte
+    name: Active
+    offset: 0
+    size: 8
+  - type: int
+    name: X
+    offset: 8
+    size: 8
+  - type: int
+    name: Y
+    offset: 40
+    size: 8
+  - type: int
+    name: Z
+    offset: 72
+    size: 8
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::UI::NpcTrade
   name: NpcTrade
   namespace: Client.Game.UI
@@ -13781,7 +14274,7 @@ structs:
     name: NormalResourceCounts
     offset: 26
     size: 20
-  - type: unsigned int
+  - type: int
     name: FinishTime
     offset: 68
   virtual_functions: []
@@ -13997,7 +14490,7 @@ structs:
   - type: byte
     name: SingleBattle
     offset: 83
-  - type: unsigned int
+  - type: int
     name: StartTimestamp
     offset: 84
   - type: unsigned int
@@ -14686,6 +15179,7 @@ structs:
   name: Target
   namespace: Client::Game::Control::CharacterLookAtTargetParam
   union: True
+  size: 16
   fields:
   - type: Client::Game::Object::GameObjectId
     name: TargetId
@@ -14745,7 +15239,7 @@ structs:
   name: InputManager
   namespace: Client.Game.Control
   union: False
-  size: 8
+  size: 96
   fields: []
   virtual_functions: []
   member_functions: []
@@ -15896,6 +16390,18 @@ structs:
   - type: unsigned __int16
     name: Offset
     offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::lua_longjmp::jmp_buf
+  name: jmp_buf
+  namespace: Common.Lua
+  union: False
+  size: 16
+  fields:
+  - type: unsigned __int64
+    name: Part
+    offset: 0
+    size: 2
   virtual_functions: []
   member_functions: []
 - type: Common::Configuration::ConfigProperties::UIntProperties
@@ -19290,10 +19796,10 @@ structs:
   union: False
   size: 24
   fields:
-  - type: int
+  - type: unsigned int
     name: MapId
     offset: 8
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 12
   - type: byte
@@ -19730,7 +20236,7 @@ structs:
   - type: byte
     name: CostDisplayMode
     offset: 203
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 204
   - type: unsigned int
@@ -20237,7 +20743,16 @@ structs:
   namespace: Client.UI.Info
   union: False
   size: 24
-  fields: []
+  fields:
+  - type: unsigned __int64
+    name: Id
+    offset: 0
+  - type: unsigned __int64
+    name: ChatId
+    offset: 8
+  - type: unsigned int
+    name: Flags
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentBannerEditorState::DatasetEntry
@@ -23500,6 +24015,7 @@ structs:
   name: Buffer
   namespace: StdString
   union: True
+  size: 8
   fields:
   - type: byte*
     name: BufferPtr
@@ -27334,6 +27850,200 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
+- type: Common::Lua::lua_longjmp
+  name: lua_longjmp
+  namespace: Common.Lua
+  union: False
+  size: 288
+  fields:
+  - type: Common::Lua::lua_longjmp*
+    name: previous
+    offset: 0
+  - type: Common::Lua::lua_longjmp::jmp_buf
+    name: B
+    offset: 16
+    size: 16
+  - type: int
+    name: status
+    offset: 272
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::UpVal::u
+  name: u
+  namespace: Common::Lua::UpVal
+  union: True
+  size: 16
+  fields:
+  - type: Common::Lua::TValue
+    name: value
+    offset: 0
+  - type: Common::Lua::UpVal::u::l
+    name: l
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::UpVal
+  name: UpVal
+  namespace: Common.Lua
+  union: False
+  size: 40
+  fields:
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: Common::Lua::TValue*
+    name: v
+    offset: 16
+  - type: Common::Lua::UpVal::u
+    name: u
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::global_State
+  name: global_State
+  namespace: Common.Lua
+  union: False
+  size: 432
+  fields:
+  - type: Common::Lua::stringtable
+    name: strt
+    offset: 0
+  - type: __fastcall
+    name: frealloc
+    offset: 16
+    return_type: __int64
+    parameters:
+    - type: __int64
+      name: a1
+    - type: __int64
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned __int64
+      name: a4
+  - type: __int64
+    name: ud
+    offset: 24
+  - type: byte
+    name: currentwhite
+    offset: 32
+  - type: byte
+    name: gcstate
+    offset: 33
+  - type: int
+    name: sweepstrgc
+    offset: 36
+  - type: Common::Lua::GCObject*
+    name: rootgc
+    offset: 40
+  - type: Common::Lua::GCObject**
+    name: sweepgc
+    offset: 48
+  - type: Common::Lua::GCObject*
+    name: gray
+    offset: 56
+  - type: Common::Lua::GCObject*
+    name: grayagain
+    offset: 64
+  - type: Common::Lua::GCObject*
+    name: weak
+    offset: 72
+  - type: Common::Lua::GCObject*
+    name: tmudata
+    offset: 80
+  - type: Common::Lua::Mbuffer
+    name: buff
+    offset: 88
+  - type: unsigned __int64
+    name: GCthreshold
+    offset: 112
+  - type: unsigned __int64
+    name: totalbytes
+    offset: 120
+  - type: unsigned __int64
+    name: estimate
+    offset: 128
+  - type: unsigned __int64
+    name: gcdept
+    offset: 136
+  - type: int
+    name: gcpause
+    offset: 144
+  - type: int
+    name: gcstepmul
+    offset: 148
+  - type: __fastcall
+    name: panic
+    offset: 152
+    return_type: int
+    parameters:
+    - type: Common::Lua::lua_State*
+      name: a1
+  - type: Common::Lua::TValue
+    name: l_registry
+    offset: 160
+  - type: Common::Lua::lua_State*
+    name: mainthread
+    offset: 176
+  - type: Common::Lua::UpVal
+    name: uvhead
+    offset: 184
+  - type: Common::Lua::Table*
+    name: Mt
+    offset: 224
+    size: 9
+  - type: Common::Lua::TString*
+    name: Tmname
+    offset: 296
+    size: 17
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::LG
+  name: LG
+  namespace: Common.Lua
+  union: False
+  size: 616
+  fields:
+  - type: Common::Lua::lua_State
+    name: l
+    offset: 0
+  - type: Common::Lua::global_State
+    name: g
+    offset: 184
+  virtual_functions: []
+  member_functions: []
+- type: Common::Lua::GCObject
+  name: GCObject
+  namespace: Common.Lua
+  union: True
+  size: 184
+  fields:
+  - type: Common::Lua::GCheader
+    name: gch
+    offset: 0
+  - type: Common::Lua::TString
+    name: ts
+    offset: 0
+  - type: Common::Lua::Udata
+    name: u
+    offset: 0
+  - type: Common::Lua::Closure
+    name: cl
+    offset: 0
+  - type: Common::Lua::Table
+    name: h
+    offset: 0
+  - type: Common::Lua::Proto
+    name: p
+    offset: 0
+  - type: Common::Lua::UpVal
+    name: uv
+    offset: 0
+  - type: Common::Lua::lua_State
+    name: th
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: Common::Configuration::ConfigProperties
   name: ConfigProperties
   namespace: Common.Configuration
@@ -29030,6 +29740,7 @@ structs:
   name: Text1
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 104
   fields:
   - type: Client::System::String::Utf8String
     name: CarpenterString
@@ -29043,6 +29754,7 @@ structs:
   name: Text2
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 104
   fields:
   - type: Client::System::String::Utf8String
     name: BlacksmithString
@@ -29056,6 +29768,7 @@ structs:
   name: Text3
   namespace: Client::UI::AddonGuildLeve
   union: True
+  size: 104
   fields:
   - type: Client::System::String::Utf8String
     name: ArmorerString
@@ -29237,16 +29950,16 @@ structs:
     name: IsUiFading
     offset: 40212
   virtual_functions:
-  - name: ShowAddonById
+  - name: SetAddonVisibility
     offset: 64
     return_type: byte
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
     - type: unsigned __int16
-      name: addonId
+      name: a2
     - type: byte
-      name: show
+      name: a3
   - name: RefreshAddon
     offset: 80
     return_type: void
@@ -29254,44 +29967,36 @@ structs:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
     - type: Component::GUI::AtkUnitBase*
-      name: addon
+      name: a2
     - type: unsigned int
-      name: numValues
+      name: a3
     - type: Component::GUI::AtkValue*
-      name: values
-  - name: UpdateAddonById
+      name: a4
+  - name: AddonRequestUpdateById
     offset: 88
     return_type: void
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
     - type: unsigned __int16
-      name: addonId
+      name: a2
     - type: Component::GUI::NumberArrayData**
-      name: numberArrayData
+      name: a3
     - type: Component::GUI::StringArrayData**
-      name: stringArrayData
+      name: a4
     - type: byte
-      name: forced
+      name: a5
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B F8 41 B0 01
-    return_type: Component::GUI::AtkUnitBase*
-    name: GetAddonByName
+  - signature: E8 ?? ?? ?? ?? 85 C0 75 1D 48 8B 0B
+    return_type: unsigned __int16
+    name: InitializeAddon
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
     - type: byte*
-      name: name
-    - type: int
-      name: index
-  - signature: E8 ?? ?? ?? ?? 8B 6B 20
-    return_type: Component::GUI::AtkUnitBase*
-    name: GetAddonById
-    parameters:
-    - type: Client::UI::RaptureAtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: id
+      name: addonName
 - type: Client::UI::UI3DModule
   name: UI3DModule
   namespace: Client.UI
@@ -33301,7 +34006,15 @@ structs:
     parameters:
     - type: Client::UI::Info::InfoProxyChat*
       name: this
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 4C 8B C8 44 8D 43
+    return_type: byte*
+    name: GetLinkShellName
+    parameters:
+    - type: Client::UI::Info::InfoProxyChat*
+      name: this
+    - type: unsigned int
+      name: index
 - type: Client::UI::Info::InfoProxyCircle
   name: InfoProxyCircle
   namespace: Client.UI.Info
@@ -34224,6 +34937,12 @@ structs:
     name: LinkShells
     offset: 264
     size: 8
+  - type: unsigned int
+    name: ActiveLinkShellIndex
+    offset: 456
+  - type: Client::UI::Info::InfoProxyLinkshell::Entry
+    name: ActiveLinkShell
+    offset: 464
   virtual_functions:
   - name: AddData
     offset: 8
@@ -34267,7 +34986,7 @@ structs:
       name: this
   member_functions:
   - signature: 3B 51 10 73 0F 8B C2 48 83 C0 0B
-    return_type: unsigned __int64*
+    return_type: Client::UI::Info::InfoProxyLinkshell::Entry*
     name: GetLinkshellInfo
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshell*
@@ -34280,8 +34999,8 @@ structs:
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshell*
       name: this
-    - type: unsigned __int64*
-      name: info
+    - type: unsigned __int64
+      name: id
 - type: Client::UI::Info::InfoProxyLinkshellMember
   name: InfoProxyLinkshellMember
   namespace: Client.UI.Info
@@ -34914,7 +35633,7 @@ structs:
   - type: Client::UI::Agent::AgentBannerEditorState::EditorOpenType
     name: OpenType
     offset: 696
-  - type: unsigned int
+  - type: float
     name: FrameCountdown
     offset: 708
   - type: int
@@ -35148,7 +35867,7 @@ structs:
   union: False
   size: 168
   fields:
-  - type: int
+  - type: unsigned int
     name: ItemId
     offset: 0
   - type: int
@@ -35163,7 +35882,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: ItemName
     offset: 40
-  - type: int
+  - type: unsigned int
     name: ItemCategoryIconId
     offset: 144
   virtual_functions: []
@@ -35180,7 +35899,7 @@ structs:
   - type: Client::Game::InventoryType
     name: Inventory
     offset: 104
-  - type: int
+  - type: unsigned int
     name: IconId
     offset: 112
   - type: int
@@ -35335,226 +36054,6 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentInterface*
       name: this
-- type: Client::UI::Agent::AgentInventoryContext
-  name: AgentInventoryContext
-  namespace: Client.UI.Agent
-  union: False
-  size: 1912
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-  - type: unsigned int
-    name: BlockingAddonId
-    offset: 40
-  - type: int
-    name: ContexItemStartIndex
-    offset: 44
-  - type: int
-    name: ContextItemCount
-    offset: 48
-  - type: Component::GUI::AtkValue
-    name: EventParams
-    offset: 56
-    size: 98
-  - type: byte
-    name: EventIds
-    offset: 1624
-    size: 84
-  - type: unsigned int
-    name: ContextItemDisabledMask
-    offset: 1708
-  - type: unsigned int
-    name: ContextItemSubmenuMask
-    offset: 1712
-  - type: int
-    name: PositionX
-    offset: 1716
-  - type: int
-    name: PositionY
-    offset: 1720
-  - type: unsigned int
-    name: OwnerAddonId
-    offset: 1736
-  - type: __int16
-    name: YesNoX
-    offset: 1740
-  - type: __int16
-    name: YesNoY
-    offset: 1742
-  - type: Client::Game::InventoryType
-    name: TargetInventoryId
-    offset: 1744
-  - type: int
-    name: TargetInventorySlotId
-    offset: 1748
-  - type: unsigned int
-    name: DummyInventoryId
-    offset: 1756
-  - type: Client::Game::InventoryItem*
-    name: TargetInventorySlot
-    offset: 1768
-  - type: Client::Game::InventoryItem
-    name: TargetDummyItem
-    offset: 1776
-  - type: Client::Game::InventoryType
-    name: BlockedInventoryId
-    offset: 1832
-  - type: int
-    name: BlockedInventorySlotId
-    offset: 1836
-  - type: Client::Game::InventoryItem
-    name: DiscardDummyItem
-    offset: 1848
-  - type: int
-    name: DialogType
-    offset: 1904
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 83 B9 ?? ?? ?? ?? ?? 7E ?? 39 91
-    return_type: void
-    name: OpenForItemSlot
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: unsigned int
-      name: inventory
-    - type: int
-      name: slot
-    - type: int
-      name: a4
-    - type: unsigned int
-      name: addonId
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 89 7C 24 ??
-    return_type: __int64
-    name: UseItem
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: unsigned int
-      name: itemId
-    - type: unsigned int
-      name: inventoryType
-    - type: unsigned int
-      name: itemSlot
-    - type: __int16
-      name: a5
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 0F B7 48
-    return_type: void
-    name: DiscardItem
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: Client::Game::InventoryItem*
-      name: itemSlot
-    - type: Client::Game::InventoryType
-      name: inventory
-    - type: int
-      name: slot
-    - type: unsigned int
-      name: addonId
-    - type: int
-      name: position
-  - signature: E8 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 8B 83
-    return_type: void
-    name: LowerItemQuality
-    parameters:
-    - type: Client::UI::Agent::AgentInventoryContext*
-      name: this
-    - type: Client::Game::InventoryItem*
-      name: itemSlot
-    - type: Client::Game::InventoryType
-      name: inventory
-    - type: int
-      name: slot
-    - type: unsigned int
-      name: addonId
 - type: Client::UI::Agent::AgentItemComp
   name: AgentItemComp
   namespace: Client.UI.Agent
@@ -36399,125 +36898,6 @@ structs:
     offset: 108
   virtual_functions: []
   member_functions: []
-- type: Client::UI::Agent::AgentMiragePrismPrismBox
-  name: AgentMiragePrismPrismBox
-  namespace: Client.UI.Agent
-  union: False
-  size: 128
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-  - type: Client::UI::Agent::MiragePrismPrismBoxData*
-    name: Data
-    offset: 40
-  - type: byte
-    name: TabIndex
-    offset: 57
-  - type: byte
-    name: PageIndex
-    offset: 58
-  - type: Client::Game::InventoryItem
-    name: TempDyeItem
-    offset: 72
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 43 3A
-    return_type: void
-    name: UpdateItems
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
-      name: this
-    - type: byte
-      name: resetTabIndex
-    - type: byte
-      name: a2
 - type: Client::UI::Agent::PrismBoxItem
   name: PrismBoxItem
   namespace: Client.UI.Agent
@@ -42138,6 +42518,12 @@ structs:
   - type: unsigned int
     name: AreaTargetingSpellId
     offset: 144
+  - type: Client::Game::Object::GameObjectId
+    name: AreaTargetingExecuteAtObject
+    offset: 152
+  - type: byte
+    name: AreaTargetingExecuteAtCursor
+    offset: 184
   - type: unsigned __int16
     name: LastUsedActionSequence
     offset: 272
@@ -42464,10 +42850,166 @@ structs:
     offset: 1136
   virtual_functions: []
   member_functions: []
+- type: Client::Game::InventoryItem::Id
+  name: Id
+  namespace: Client::Game::InventoryItem
+  union: True
+  size: 4
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: Client::Game::InventoryItem::Id::Linked
+    name: Linked
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::InventoryItem
+  name: InventoryItem
+  namespace: Client.Game
+  union: False
+  size: 56
+  fields:
+  - type: Client::Game::InventoryType
+    name: Container
+    offset: 0
+  - type: __int16
+    name: Slot
+    offset: 4
+  - type: byte
+    name: IsSymbolic
+    offset: 6
+  - type: Client::Game::InventoryItem::Id
+    name: Id
+    offset: 8
+  - type: unsigned int
+    name: Quantity
+    offset: 12
+  - type: unsigned __int16
+    name: Spiritbond
+    offset: 16
+  - type: unsigned __int16
+    name: Condition
+    offset: 18
+  - type: Client::Game::InventoryItem::ItemFlags
+    name: Flags
+    offset: 20
+  - type: unsigned __int64
+    name: CrafterContentId
+    offset: 24
+  - type: unsigned __int16
+    name: Materia
+    offset: 32
+    size: 5
+  - type: byte
+    name: MateriaGrades
+    offset: 42
+    size: 5
+  - type: byte
+    name: Stain
+    offset: 47
+  - type: unsigned int
+    name: GlamourId
+    offset: 48
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8D 45 A8
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: 8B 42 08 4C 8B C1
+    return_type: byte
+    name: EqualTo
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: other
+  - signature: E9 ?? ?? ?? ?? 48 8D 4B 48
+    return_type: byte
+    name: Copy
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: other
+  - signature: E8 ?? ?? ?? ?? 38 58 06
+    return_type: Client::Game::InventoryItem*
+    name: GetLinkedItem
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 41 3B 06
+    return_type: unsigned int
+    name: GetItemId
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 2B C6
+    return_type: unsigned int
+    name: GetQuantity
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 66 41 3B 85
+    return_type: unsigned __int16
+    name: GetSpiritbond
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B7 F0 EB 04
+    return_type: unsigned __int16
+    name: GetCondition
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B D8 EB 04
+    return_type: unsigned __int64
+    name: GetCrafterContentId
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 3A 43 08
+    return_type: byte
+    name: GetStain
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 39 33 75
+    return_type: unsigned int
+    name: GetGlamourId
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? EB 10 32 C0
+    return_type: unsigned __int16
+    name: GetMateriaId
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+    - type: byte
+      name: materiaSlot
+  - signature: E8 ?? ?? ?? ?? 42 3A 04 33
+    return_type: byte
+    name: GetMateriaGrade
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
+    - type: byte
+      name: materiaSlot
+  - signature: E8 ?? ?? ?? ?? 3A 47 67
+    return_type: byte
+    name: GetMateriaCount
+    parameters:
+    - type: Client::Game::InventoryItem*
+      name: this
 - type: Client::Game::JobGaugeManager::Guage
   name: Guage
   namespace: Client::Game::JobGaugeManager
   union: True
+  size: 80
   fields:
   - type: Client::Game::Gauge::JobGauge
     name: EmptyGauge
@@ -43541,7 +44083,7 @@ structs:
     parameters:
     - type: Client::Game::UI::MobHunt*
       name: this
-    - type: int
+    - type: unsigned int
       name: itemId
   - signature: 48 89 5C 24 ?? 56 48 83 EC 20 40 32 F6
     return_type: byte
@@ -43574,7 +44116,7 @@ structs:
   - type: unsigned __int64
     name: ContentId
     offset: 104
-  - type: unsigned int
+  - type: int
     name: PenaltyTimestamps
     offset: 112
     size: 2
@@ -43699,7 +44241,7 @@ structs:
     name: BaseRestedExperience
     offset: 708
   - type: byte
-    name: OwnedMountsBitmask
+    name: UnlockedMountsBitmask
     offset: 733
     size: 35
   - type: byte
@@ -43774,10 +44316,10 @@ structs:
   - type: byte
     name: MeisterFlag
     offset: 1371
-  - type: unsigned int
+  - type: int
     name: SquadronMissionCompletionTimestamp
     offset: 1376
-  - type: unsigned int
+  - type: int
     name: SquadronTrainingCompletionTimestamp
     offset: 1380
   - type: unsigned __int16
@@ -43972,7 +44514,7 @@ structs:
     - type: Client::Game::UI::PlayerState*
       name: this
   - signature: 8B 81 ?? ?? ?? ?? C1 E8 04 25
-    return_type: unsigned int
+    return_type: int
     name: GetWeeklyBingoExpireUnixTimestamp
     parameters:
     - type: Client::Game::UI::PlayerState*
@@ -45766,7 +46308,7 @@ structs:
   - type: __int64
     name: SenderContentId
     offset: 0
-  - type: unsigned int
+  - type: int
     name: Timestamp
     offset: 8
   - type: Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment
@@ -51466,7 +52008,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkImageNode*
       name: this
-    - type: int
+    - type: unsigned int
       name: iconId
     - type: int
       name: version
@@ -52187,6 +52729,18 @@ structs:
     - type: __int64
       name: a5
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 33 F6 48 8B 89
+    return_type: void
+    name: Destructor
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
   - signature: E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8
     return_type: float
     name: GetScale
@@ -96661,8 +97215,8 @@ structs:
       name: sender
     - type: Client::System::String::Utf8String*
       name: message
-    - type: unsigned int*
-      name: timeStamp
+    - type: int*
+      name: timestamp
   - signature: 4C 8B D1 48 8B 89 ?? ?? ?? ?? 48 85 C9
     return_type: void
     name: AddMsgSourceEntry
@@ -101098,7 +101652,7 @@ structs:
   - type: unsigned __int16
     name: World
     offset: 86
-  - type: unsigned int
+  - type: int
     name: FoundationDate
     offset: 92
   - type: __int16
@@ -102454,6 +103008,226 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentInventoryContext
+  name: AgentInventoryContext
+  namespace: Client.UI.Agent
+  union: False
+  size: 1912
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: unsigned int
+    name: BlockingAddonId
+    offset: 40
+  - type: int
+    name: ContexItemStartIndex
+    offset: 44
+  - type: int
+    name: ContextItemCount
+    offset: 48
+  - type: Component::GUI::AtkValue
+    name: EventParams
+    offset: 56
+    size: 98
+  - type: byte
+    name: EventIds
+    offset: 1624
+    size: 84
+  - type: unsigned int
+    name: ContextItemDisabledMask
+    offset: 1708
+  - type: unsigned int
+    name: ContextItemSubmenuMask
+    offset: 1712
+  - type: int
+    name: PositionX
+    offset: 1716
+  - type: int
+    name: PositionY
+    offset: 1720
+  - type: unsigned int
+    name: OwnerAddonId
+    offset: 1736
+  - type: __int16
+    name: YesNoX
+    offset: 1740
+  - type: __int16
+    name: YesNoY
+    offset: 1742
+  - type: Client::Game::InventoryType
+    name: TargetInventoryId
+    offset: 1744
+  - type: int
+    name: TargetInventorySlotId
+    offset: 1748
+  - type: unsigned int
+    name: DummyInventoryId
+    offset: 1756
+  - type: Client::Game::InventoryItem*
+    name: TargetInventorySlot
+    offset: 1768
+  - type: Client::Game::InventoryItem
+    name: TargetDummyItem
+    offset: 1776
+  - type: Client::Game::InventoryType
+    name: BlockedInventoryId
+    offset: 1832
+  - type: int
+    name: BlockedInventorySlotId
+    offset: 1836
+  - type: Client::Game::InventoryItem
+    name: DiscardDummyItem
+    offset: 1848
+  - type: int
+    name: DialogType
+    offset: 1904
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 83 B9 ?? ?? ?? ?? ?? 7E ?? 39 91
+    return_type: void
+    name: OpenForItemSlot
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: unsigned int
+      name: inventory
+    - type: int
+      name: slot
+    - type: int
+      name: a4
+    - type: unsigned int
+      name: addonId
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 89 7C 24 ??
+    return_type: __int64
+    name: UseItem
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: unsigned int
+      name: itemId
+    - type: unsigned int
+      name: inventoryType
+    - type: unsigned int
+      name: itemSlot
+    - type: __int16
+      name: a5
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 0F B7 48
+    return_type: void
+    name: DiscardItem
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: itemSlot
+    - type: Client::Game::InventoryType
+      name: inventory
+    - type: int
+      name: slot
+    - type: unsigned int
+      name: addonId
+    - type: int
+      name: position
+  - signature: E8 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 8B 83
+    return_type: void
+    name: LowerItemQuality
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: itemSlot
+    - type: Client::Game::InventoryType
+      name: inventory
+    - type: int
+      name: slot
+    - type: unsigned int
+      name: addonId
 - type: Client::UI::Agent::CharaSelectCharacterEntry
   name: CharaSelectCharacterEntry
   namespace: Client.UI.Agent
@@ -102677,6 +103451,125 @@ structs:
     size: 20
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentMiragePrismPrismBox
+  name: AgentMiragePrismPrismBox
+  namespace: Client.UI.Agent
+  union: False
+  size: 128
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: Client::UI::Agent::MiragePrismPrismBoxData*
+    name: Data
+    offset: 40
+  - type: byte
+    name: TabIndex
+    offset: 57
+  - type: byte
+    name: PageIndex
+    offset: 58
+  - type: Client::Game::InventoryItem
+    name: TempDyeItem
+    offset: 72
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 43 3A
+    return_type: void
+    name: UpdateItems
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: byte
+      name: resetTabIndex
+    - type: byte
+      name: a2
 - type: Client::UI::Agent::MiragePrismPrismBoxData
   name: MiragePrismPrismBoxData
   namespace: Client.UI.Agent
@@ -106033,7 +106926,15 @@ structs:
     offset: 480
     size: 8
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 94 C0 EB 19
+    return_type: void
+    name: PlacePreset
+    parameters:
+    - type: Client::Game::UI::MarkingController*
+      name: this
+    - type: Client::Game::UI::MarkerPresetPlacement*
+      name: placement
 - type: Client::Game::UI::Telepo
   name: Telepo
   namespace: Client.Game.UI
@@ -110160,16 +111061,16 @@ structs:
     name: AgentInterface
     offset: 0
   - type: unsigned int
-    name: RequestObjectId
+    name: RequestEntityId
     offset: 40
   - type: unsigned int
-    name: RequestSearchCommentObjectId
+    name: RequestSearchCommentEntityId
     offset: 44
   - type: unsigned int
-    name: RequestFreeCompanyObjectId
+    name: RequestFreeCompanyEntityId
     offset: 48
   - type: unsigned int
-    name: CurrentObjectId
+    name: CurrentEntityId
     offset: 52
   - type: Client::System::String::Utf8String
     name: SearchComment
@@ -110178,14 +111079,9 @@ structs:
     name: PsnName
     offset: 264
   - type: Client::System::String::Utf8String
-    name: ChocoboBarding1
+    name: ChocoboBarding
     offset: 368
-  - type: Client::System::String::Utf8String
-    name: ChocoboBarding2
-    offset: 472
-  - type: Client::System::String::Utf8String
-    name: ChocoboBarding3
-    offset: 576
+    size: 3
   - type: Client::UI::Agent::AgentInspect::ItemData
     name: Items
     offset: 680
@@ -110298,7 +111194,27 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 49 8B E8 8B DA
+    return_type: void
+    name: ReceiveSearchComment
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: unsigned int
+      name: entityId
+    - type: byte*
+      name: searchComment
+  - signature: 48 8B 01 44 88 81 ?? ?? ?? ?? 89 51
+    return_type: void
+    name: ExamineCharacter
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: unsigned int
+      name: entityId
+    - type: byte
+      name: isChocobo
 - type: Client::UI::Agent::LobbyData
   name: LobbyData
   namespace: Client.UI.Agent
@@ -114769,6 +115685,18 @@ structs:
       name: this
     - type: int
       name: a2
+  - name: HandlePacket
+    offset: 888
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+    - type: Client::UI::UIModulePacketType
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: __int64
+      name: a4
   - name: ToggleUi
     offset: 1144
     return_type: void
@@ -114923,7 +115851,7 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: int
+    - type: unsigned int
       name: a2
     - type: byte
       name: a3
@@ -115662,7 +116590,7 @@ structs:
     name: ObjectIds
     offset: 1888
     size: 32
-  - type: unsigned int
+  - type: int
     name: EndTimestamp
     offset: 2016
   - type: unsigned __int16
@@ -115863,15 +116791,15 @@ structs:
     offset: 0
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo
     name: Party
-    offset: 7496
+    offset: 7504
     size: 4
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo
     name: Items
-    offset: 7528
+    offset: 7536
     size: 16
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo
     name: Chests
-    offset: 7576
+    offset: 7584
     size: 16
   - type: unsigned int
     name: BonusLootItemId

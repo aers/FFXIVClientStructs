@@ -11,7 +11,7 @@ public struct StdSet<T>
     public StdSet<T, IStaticMemorySpace.Default> WithOps;
     public static bool HasDefault => StdSet<T, IStaticMemorySpace.Default>.HasDefault;
     public static bool IsDisposable => StdSet<T, IStaticMemorySpace.Default>.IsDisposable;
-    public static bool IsCopiable => StdSet<T, IStaticMemorySpace.Default>.IsCopiable;
+    public static bool IsCopyable => StdSet<T, IStaticMemorySpace.Default>.IsCopyable;
     public static bool IsMovable => StdSet<T, IStaticMemorySpace.Default>.IsMovable;
     public readonly long LongCount => WithOps.LongCount;
     public readonly int Count => WithOps.Count;

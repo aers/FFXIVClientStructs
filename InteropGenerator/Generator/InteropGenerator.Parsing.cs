@@ -10,13 +10,10 @@ namespace InteropGenerator.Generator;
 
 public sealed partial class InteropGenerator {
 
-    private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, CancellationToken token) {
+    private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, AttributeData generateInteropAttributeData, CancellationToken token) {
         // check if we need to collect extra info for inheritance
-        var isInherited = false;
         ExtraInheritedStructInfo? inheritedStructInfo = null;
-        if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.GenerateInteropAttribute, out AttributeData? generateInteropAttributeData)) {
-            generateInteropAttributeData.TryGetConstructorArgument(0, out isInherited);
-        }
+        generateInteropAttributeData.TryGetConstructorArgument(0, out bool isInherited);
 
         // collect info on struct methods
         ParseMethods(structSymbol,
@@ -233,6 +230,8 @@ public sealed partial class InteropGenerator {
             constraints = string.Join("", symbolDisplayParts[1..]);
         }
 
+        ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(methodSymbol);
+
         methodInfo =
             new MethodInfo(
                 methodSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
@@ -240,7 +239,8 @@ public sealed partial class InteropGenerator {
                 methodSymbol.ReturnType.GetFullyQualifiedName(),
                 constraints,
                 methodSymbol.IsStatic,
-                methodSymbol.Parameters.Select(ParseParameter).ToImmutableArray()
+                methodSymbol.Parameters.Select(ParseParameter).ToImmutableArray(),
+                obsoleteInfo
             );
 
         return true;
@@ -277,11 +277,14 @@ public sealed partial class InteropGenerator {
                 if (!fixedSizeArrayAttributeData.TryGetConstructorArgument(0, out bool? isString))
                     continue;
 
+                ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(fieldSymbol);
+
                 FixedSizeArrayInfo fixedSizeArrayInfo = new(
                     fieldSymbol.Name,
                     fieldTypeSymbol.TypeArguments[0].GetFullyQualifiedName(),
                     size,
-                    isString.Value
+                    isString.Value,
+                    obsoleteInfo
                 );
 
                 fixedSizeArrayBuilder.Add(fixedSizeArrayInfo);
@@ -293,10 +296,13 @@ public sealed partial class InteropGenerator {
                 if (!fieldOffsetAttributeData.TryGetConstructorArgument(0, out int fieldOffset))
                     continue;
 
+                ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(fieldSymbol);
+
                 FieldInfo fieldInfo = new(
                     fieldSymbol.Name,
                     fieldSymbol.Type.GetFullyQualifiedName(),
-                    fieldOffset);
+                    fieldOffset,
+                    obsoleteInfo);
 
                 publicFieldBuilder.Add(fieldInfo);
             }
@@ -305,5 +311,19 @@ public sealed partial class InteropGenerator {
 
         fixedSizeArrays = fixedSizeArrayBuilder.ToImmutable();
         publicFields = publicFieldBuilder.ToImmutable();
+    }
+
+    private static ObsoleteInfo? ParseObsoleteInfo(ISymbol symbol) {
+        if (!symbol.TryGetAttributeWithFullyQualifiedMetadataName("System.ObsoleteAttribute", out AttributeData? obsoleteAttributeData) ||
+            !obsoleteAttributeData.TryGetConstructorArgument(0, out string? message))
+            return null;
+
+        var isError = false;
+
+        if (obsoleteAttributeData.ConstructorArguments.Length == 2 &&
+            obsoleteAttributeData.TryGetConstructorArgument(1, out bool? isErrorArgument))
+            isError = isErrorArgument.Value;
+
+        return new ObsoleteInfo(message, isError);
     }
 }

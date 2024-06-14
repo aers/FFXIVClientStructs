@@ -84,7 +84,7 @@ public unsafe partial struct QuestManager {
     /// Get the time when the player will receive new leve allowances.
     /// </summary>
     /// <returns>A unix timestamp as <see cref="uint"/>.</returns>
-    public static uint GetNextLeveAllowancesUnixTimestamp() => GetNextLeveAllowancesTimestamp() * 60;
+    public static int GetNextLeveAllowancesUnixTimestamp() => GetNextLeveAllowancesTimestamp() * 60;
 
     /// <summary>
     /// Get the time when the player will receive new leve allowances.

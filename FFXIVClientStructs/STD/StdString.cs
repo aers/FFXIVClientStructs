@@ -24,7 +24,7 @@ public unsafe struct StdString
 
     public static bool HasDefault => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.HasDefault;
     public static bool IsDisposable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsDisposable;
-    public static bool IsCopiable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsCopiable;
+    public static bool IsCopyable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsCopyable;
     public static bool IsMovable => StdBasicString<char, IStaticEncoding.System, IStaticMemorySpace.Default>.IsMovable;
 
     public long LongCapacity {

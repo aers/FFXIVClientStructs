@@ -95,7 +95,7 @@ public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x69)] public byte AmbientLightingColorBlue;
     [FieldOffset(0x6C)] public float AnimationProgress;
     [FieldOffset(0x70)] public uint BannerTimelineIcon;
-    [FieldOffset(0x74)] public uint LastUpdated; // unix timestamp
+    [FieldOffset(0x74)] public int LastUpdated; // unix timestamp
     [FieldOffset(0x78)] public uint Checksum; // see GenerateChecksum
     [FieldOffset(0x7C)] public ushort BannerBg;
     [FieldOffset(0x7E)] public ushort BannerFrame;

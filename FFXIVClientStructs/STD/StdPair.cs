@@ -36,7 +36,7 @@ public struct StdPair<T1, T2>
 
     public static bool HasDefault { get; } = StdOps<T1>.HasDefault && StdOps<T2>.HasDefault;
     public static bool IsDisposable { get; } = StdOps<T1>.IsDisposable || StdOps<T2>.IsDisposable;
-    public static bool IsCopiable { get; } = StdOps<T1>.IsCopiable && StdOps<T2>.IsCopiable;
+    public static bool IsCopyable { get; } = StdOps<T1>.IsCopyable && StdOps<T2>.IsCopyable;
     public static bool IsMovable { get; } = StdOps<T1>.IsMovable && StdOps<T2>.IsMovable;
 
     /// <inheritdoc cref="ITuple.Length"/>

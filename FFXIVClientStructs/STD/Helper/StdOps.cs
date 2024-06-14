@@ -21,7 +21,7 @@ public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
     static StdOps() {
         if (typeof(T).IsAssignableTo(typeof(IStaticNativeObjectOperation<T>))) {
             HasDefault = (bool)typeof(T).GetProperty(nameof(HasDefault))!.GetValue(null)!;
-            IsCopiable = (bool)typeof(T).GetProperty(nameof(IsCopiable))!.GetValue(null)!;
+            IsCopyable = (bool)typeof(T).GetProperty(nameof(IsCopyable))!.GetValue(null)!;
             IsMovable = (bool)typeof(T).GetProperty(nameof(IsMovable))!.GetValue(null)!;
             IsDisposable = (bool)typeof(T).GetProperty(nameof(IsDisposable))!.GetValue(null)!;
             InnerCompare = (CompareDelegate)Delegate.CreateDelegate(typeof(CompareDelegate), typeof(T), nameof(Compare));
@@ -32,7 +32,7 @@ public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
             InnerStaticDispose = (StaticDisposeDelegate)Delegate.CreateDelegate(typeof(StaticDisposeDelegate), typeof(T), nameof(StaticDispose));
             InnerSwap = (SwapDelegate)Delegate.CreateDelegate(typeof(SwapDelegate), typeof(T), nameof(Swap));
         } else {
-            HasDefault = IsCopiable = IsMovable = true;
+            HasDefault = IsCopyable = IsMovable = true;
             IsDisposable = typeof(T).IsAssignableTo(typeof(IDisposable));
         }
     }
@@ -58,7 +58,7 @@ public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
     public static bool IsDisposable { get; }
 
     /// <inheritdoc/>
-    public static bool IsCopiable { get; }
+    public static bool IsCopyable { get; }
 
     /// <inheritdoc/>
     public static bool IsMovable { get; }
@@ -87,7 +87,7 @@ public abstract class StdOps<T> : IStaticNativeObjectOperation<T>
     /// <inheritdoc/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ConstructCopyInPlace(in T source, out T target) {
-        if (!IsCopiable)
+        if (!IsCopyable)
             throw new InvalidOperationException();
         if (InnerConstructCopyInPlace is not null)
             InnerConstructCopyInPlace(in source, out target);

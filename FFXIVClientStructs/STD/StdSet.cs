@@ -16,7 +16,7 @@ public unsafe struct StdSet<T, TMemorySpace>
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;
-    public static bool IsCopiable => StdOps<T>.IsCopiable;
+    public static bool IsCopyable => StdOps<T>.IsCopyable;
     public static bool IsMovable => true;
 
     /// <inheritdoc/>
@@ -33,7 +33,7 @@ public unsafe struct StdSet<T, TMemorySpace>
 
     /// <inheritdoc/>
     public bool AddCopy(in T value) {
-        if (!StdOps<T>.IsCopiable)
+        if (!StdOps<T>.IsCopyable)
             throw new InvalidOperationException("Copying is not supported");
         if (!Tree.TryInsertEmpty<TMemorySpace>(value, out var node))
             return false;
@@ -273,7 +273,7 @@ public unsafe struct StdSet<T, TMemorySpace>
     }
     public static void StaticDispose(ref StdSet<T, TMemorySpace> item) => item.Dispose();
     public static void ConstructCopyInPlace(in StdSet<T, TMemorySpace> source, out StdSet<T, TMemorySpace> target) {
-        if (!IsCopiable)
+        if (!IsCopyable)
             throw new InvalidOperationException("Copying is not supported");
         ConstructDefaultInPlace(out target);
         foreach (ref var v in source)

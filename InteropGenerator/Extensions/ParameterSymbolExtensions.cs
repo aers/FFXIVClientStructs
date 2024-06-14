@@ -17,7 +17,7 @@ internal static class IParameterSymbolExtensions {
             return "null";
 
         if (defaultValue is bool boolValue)
-            return boolValue ? "true" : "false";
+            return boolValue.ToLowercaseString();
 
         if (defaultValue is float floatValue)
             return defaultValue.ToString() + "f";

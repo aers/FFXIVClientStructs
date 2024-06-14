@@ -71,7 +71,7 @@ public unsafe partial struct DynamicEvent {
     [FieldOffset(0x50)] public byte MaxParticipants;
     [FieldOffset(0x51)] public byte Unknown4;
     [FieldOffset(0x52)] public byte Unknown5;
-    [FieldOffset(0x54)] public uint StartTimestamp;
+    [FieldOffset(0x54)] public int StartTimestamp;
     [FieldOffset(0x58)] public uint SecondsLeft;
     [FieldOffset(0x5C)] public uint SecondsDuration;
 

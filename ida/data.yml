@@ -305,7 +305,7 @@ functions:
   0x1400AA850: IsLocalPlayerInParty
   0x1400AA9A0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400AAAD0: GetPartyMemberClassJobByContentId
-  0x140748B20: ObjectIdToPlayerObjectId # returns invalid id if objectid is not a player
+  0x140748B20: ObjectIdToEntityId # returns invalid id if objectid is not a player
   0x140767F30: ProcessPacketSpawnPlayer
   0x140767F90: ProcessPacketSpawnNPC
   0x140768000: ProcessPacketSpawnBoss
@@ -367,6 +367,7 @@ functions:
   0x140779B50: ProcessPacketRSFData
   0x140779BB0: ProcessPacketHuntingLogEntry
   0x140779BF0: ProcessPacketNPCYell
+  0x141311DA0: ProcessPacketUIModulePacket
   0x140B1E450: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140B71C20: WorldToScreenPoint
   0x14145E250: GetInstanceContentCrystallineConflictDirector
@@ -2182,6 +2183,7 @@ classes:
       0x1409BD5B0: GetSpellIdForAction
       0x1409BDEB0: NextActionSequence
       0x1409BDEE0: UpdateAreaTargetingMode
+      0x1409BE830: ShouldLimitAreaTargetingToRange
       0x1409BE8F0: GetRecastGroup
       0x1409BEB40: UseActionLocation
       0x1409BF970: UseGeneralAction
@@ -2193,6 +2195,8 @@ classes:
       0x1409C0700: UseChocoboRaceItemAction
       0x1409C0740: UseChocoboRaceAbilityAction
       0x1409C0780: UseBgcArmyAction
+      0x1409C0940: RouletteCanUseMinion
+      0x1409C09E0: RouletteCanUseMount
       0x1409C0B10: UseMinionRoulette
       0x1409C0C70: UseMountRoulette
       0x1409C0ED0: CanUseMountRoulette
@@ -2245,9 +2249,12 @@ classes:
       0x1409CB700: CanAssignBlueMageAction
       0x1409CBB50: UseActionFromShell
       0x1409CBD10: IsAreaTargetingModeActive
+      0x1409CBD30: IsAreaTargetingUnlockedFromCursor
+      0x1409CBD90: IsAreaTargetingModeActiveAndUnlockedFromCursor
       0x1409CBE10: StartAreaTargetingMode
       0x1409CBEF0: CancelAreaTargetingMode
       0x1409CBF20: RemoveAreaTargetingVfx
+      0x1409CBFA0: GetAreaTargetingCursorScreenPos
       0x1409CDE20: GetGroundPositionForObject
       0x1409CE220: GetGroundPositionForCursor
       0x1409CE350: GetCurrentCharges          # (this, actionId) -> uint
@@ -3400,6 +3407,7 @@ classes:
     funcs:
       0x1400AE950: ctor
       0x14017CD10: Finalize
+      0x1405483E0: InitializeAddon
   Client::UI::RaptureAtkColorDataManager:
     vtbls:
       - ea: 0x1419BED58
@@ -3711,6 +3719,8 @@ classes:
     vtbls:
       - ea: 0x1419C0F70
         base: Client::UI::Info::InfoProxyInterface
+    funcs:
+      0x1401107B0: GetLinkShellName
   Client::UI::Info::InfoProxyNoviceNetworkList:
     vtbls:
       - ea: 0x1419C0FD0
@@ -5827,7 +5837,7 @@ classes:
       62: OnMouseOut
     funcs:
       0x140538A80: ctor
-      0x140538CB0: Finalize2
+      0x140538CB0: Destructor
       0x1405390F0: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
       0x140539440: SetPosition
       0x1405395C0: SetAlpha
@@ -6655,6 +6665,7 @@ classes:
       106: IsUIHidden
       107: AddAtkHistoryEntry
       108: ClearAtkHistory
+      111: HandlePacket
       112: ShowContentIntroduction
       113: IsContentIntroductionInvisible
       114: HideContentIntroduction
@@ -8390,7 +8401,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C52AC0: ctor
+      0x140C53260: ReceiveSearchComment
       0x140CB01F0: Finalize
+      0x140C53080: ExamineCharacter
   Client::UI::Agent::AgentTelepotTown:
     vtbls:
       - ea: 0x141A731A0

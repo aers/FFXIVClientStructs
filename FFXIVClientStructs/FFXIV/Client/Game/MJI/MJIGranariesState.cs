@@ -10,7 +10,7 @@ public unsafe partial struct MJIGranaryState {
     [FieldOffset(0x04)] public short RareResourceCount;
     [FieldOffset(0x06), FixedSizeArray] internal FixedSizeArray20<byte> _normalResourcePouchIds;
     [FieldOffset(0x1A), FixedSizeArray] internal FixedSizeArray20<byte> _normalResourceCounts;
-    [FieldOffset(0x44)] public uint FinishTime; // unix timestamp
+    [FieldOffset(0x44)] public int FinishTime; // unix timestamp
 }
 
 // Client::Game::MJI::MJIGranariesState

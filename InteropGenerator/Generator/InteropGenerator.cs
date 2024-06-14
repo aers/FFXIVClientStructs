@@ -18,7 +18,7 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
                         // not sure if the check is truly necessary
                         if (context.TargetSymbol is not INamedTypeSymbol structSymbol)
                             return null;
-                        return ParseStructInfo(structSymbol, token);
+                        return ParseStructInfo(structSymbol, context.Attributes[0], token);
                     })
                 .Where(static si => si is not null)!;
 
