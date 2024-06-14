@@ -39,6 +39,19 @@ jobs:
           script: |
             const fs = require('fs');
             const content = fs.readFileSync('./ida/errors.txt', 'utf8');
+            const comments = await github.rest.issues.listComments({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })
+            const comment = comments.find(comment => comment.user.login === 'github-actions[bot]');
+            if (comment) {
+              github.rest.issues.deleteComment({
+                comment_id: comment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+            }
             github.rest.issues.createComment({
               issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
@@ -54,6 +67,38 @@ jobs:
       - name: Exit with error
         if: steps.check_error.outputs.error == 'true'
         run: exit 1
+      - name: Cleanup issue
+        if: steps.check_error.outputs.error == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comments = await github.rest.issues.listComments({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })
+            const comment = comments.find(comment => comment.user.login === 'github-actions[bot]');
+            if (comment) {
+              github.rest.issues.deleteComment({
+                comment_id: comment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+            }
+            const labels = await github.rest.issues.listLabelsOnIssue({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })
+            const label = labels.find(label => label.name === 'requested changes');
+            if (label) {
+              github.rest.issues.removeLabel({
+                issue_number: context.payload.pull_request.number,
+                name: 'requested changes',
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+            }
       - uses: actions/upload-artifact@v4
         with:
           name: structs.yml
