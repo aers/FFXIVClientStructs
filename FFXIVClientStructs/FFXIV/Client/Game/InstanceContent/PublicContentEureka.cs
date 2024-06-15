@@ -16,7 +16,7 @@ public unsafe partial struct PublicContentEureka {
     [FieldOffset(0x117A)] public ushort Unk1092; // if set, prints log message 4217 in chat ("To facilitate the successful completion of this duty, you have been granted the power of the Echo.")
     [FieldOffset(0x117C)] public byte MaxElementalLevel; // if set, prints log message 9067 in chat ("If your elemental level is above <value>, it will be synced.")
 
-    [FieldOffset(0x1100)] public uint CurrentExperience;
+    [FieldOffset(0x1180)] public uint CurrentExperience;
     [FieldOffset(0x1184)] public uint NeededExperience;
     [FieldOffset(0x1188)] public ushort MagiaAetherCharge;
     [FieldOffset(0x118A)] public byte Fire;
