@@ -13,30 +13,30 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x1BD0)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ??", 3)]
 public unsafe partial struct Character {
-    [FieldOffset(0x630)] public EmoteController EmoteController;
-    [FieldOffset(0x670)] public MountContainer Mount;
-    [FieldOffset(0x6D8)] public CompanionContainer CompanionData;
-    [FieldOffset(0x6F8)] public DrawDataContainer DrawData;
-    [FieldOffset(0x8A0)] public OrnamentContainer OrnamentData;
-    [FieldOffset(0x918)] public ReaperShroudContainer ReaperShroud;
+    [FieldOffset(0x640)] public EmoteController EmoteController;
+    [FieldOffset(0x680)] public MountContainer Mount;
+    [FieldOffset(0x6E8)] public CompanionContainer CompanionData;
+    [FieldOffset(0x708)] public DrawDataContainer DrawData;
+    [FieldOffset(0x8E8)] public OrnamentContainer OrnamentData;
+    [FieldOffset(0x960)] public ReaperShroudContainer ReaperShroud;
 
-    [FieldOffset(0x970)] public TimelineContainer Timeline;
-    [FieldOffset(0xCB0)] public LookAtContainer LookAt;
+    [FieldOffset(0x9B0)] public TimelineContainer Timeline;
+    [FieldOffset(0xD00)] public LookAtContainer LookAt;
 
-    [FieldOffset(0x12F0)] public VfxContainer Vfx;
+    [FieldOffset(0x1900)] public VfxContainer Vfx;
 
     // TODO: put this in its own struct
-    [FieldOffset(0x13E0 + 0x30)] public byte StatusFlags4;
+    [FieldOffset(0x1A34)] public byte StatusFlags4;
 
-    [FieldOffset(0x1418)] public CharacterSetupContainer CharacterSetup;
+    [FieldOffset(0x1A58)] public CharacterSetupContainer CharacterSetup;
 
-    [FieldOffset(0x1920)] public Balloon Balloon;
+    [FieldOffset(0x2020)] public Balloon Balloon;
 
-    [FieldOffset(0x1B28)] public float Alpha;
+    [FieldOffset(0x2228)] public float Alpha;
 
-    [FieldOffset(0x1B30)] public Companion* CompanionObject; // minion
+    [FieldOffset(0x2238)] public Companion* CompanionObject; // minion
 
-    [FieldOffset(0x1B40), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
+    [FieldOffset(0x2248), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -45,7 +45,7 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the target for the local player.
     /// </remarks>
-    [FieldOffset(0x1B58)] public GameObjectId TargetId;
+    [FieldOffset(0x2260)] public GameObjectId TargetId;
 
     /// <summary>
     /// The current soft target for this Character. This will not be set for the LocalPlayer.
@@ -54,27 +54,27 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the soft target for the local player.
     /// </remarks>
-    [FieldOffset(0x1B60)] public GameObjectId SoftTargetId;
+    [FieldOffset(0x2268)] public GameObjectId SoftTargetId;
 
-    [FieldOffset(0x1B6C)] public float CastRotation;
+    [FieldOffset(0x2274)] public float CastRotation;
 
-    [FieldOffset(0x1B98)] public uint NameId;
+    [FieldOffset(0x22A0)] public uint NameId;
 
-    [FieldOffset(0x1BA8)] public uint CompanionOwnerId;
+    [FieldOffset(0x22B0)] public uint CompanionOwnerId;
 
-    [FieldOffset(0x1BB0)] public ushort CurrentWorld;
-    [FieldOffset(0x1BB2)] public ushort HomeWorld;
+    [FieldOffset(0x22C8)] public ushort CurrentWorld;
+    [FieldOffset(0x22CA)] public ushort HomeWorld;
 
-    [FieldOffset(0x1BB6)] public CharacterModes Mode;
-    [FieldOffset(0x1BB7)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
+    [FieldOffset(0x22CC)] public CharacterModes Mode;
+    [FieldOffset(0x22CD)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
-    [FieldOffset(0x1BBB)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
+    [FieldOffset(0x22D0)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
     // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
 
     // 0x1 = WeaponDrawn
     // 0x2 = Unknown (Appears to always be set)
-    [FieldOffset(0x1BC1)] public byte StatusFlags3;
+    [FieldOffset(0x22D5)] public byte StatusFlags3;
     // 0x20 = GPose wetness toggled
 
     public bool IsWeaponDrawn => (StatusFlags3 & 0x1) == 0x1;
