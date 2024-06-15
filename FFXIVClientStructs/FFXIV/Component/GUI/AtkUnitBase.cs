@@ -316,8 +316,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void OnMouseOut();
 
     /// <summary>
-    /// Check if all resources are loaded.<br/>
-    /// This includes the uld, an optional scd (for Gold Saucer addons) and textures the uld needs.
+    /// Check if all necessary resources are loaded and nodes/components are set up.
     /// </summary>
     /// <remarks>
     /// Use <see cref="IsReady" /> to check if OnSetup has been called (preferred).
