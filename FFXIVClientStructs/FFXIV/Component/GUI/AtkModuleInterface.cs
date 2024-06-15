@@ -37,7 +37,7 @@ public unsafe partial struct AtkModuleInterface {
     public partial bool CloseAddon(uint addonId);
 
     [VirtualFunction(23)]
-    public partial bool RefreshAddon(uint addonId, uint numValues, AtkValue* values);
+    public partial bool RefreshAddon(uint addonId, uint valueCount, AtkValue* values);
 
     [VirtualFunction(26)]
     public partial bool IsAddonReady(uint addonId);
