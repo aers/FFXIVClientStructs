@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //           Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<PublicContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2DA0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2DA8)]
 public unsafe partial struct PublicContentBozja {
     [FieldOffset(0x1180)] public DynamicEventContainer DynamicEventContainer;
     [FieldOffset(0x2CA8)] public BozjaState State;
