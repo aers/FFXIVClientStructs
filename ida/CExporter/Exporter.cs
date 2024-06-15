@@ -445,7 +445,8 @@ public class ProcessedStruct {
                 _dependencyNames = Fields.Where(t => (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && (!(t.FieldType.IsPointer() || t.FieldType.IsPrimitive || t.FieldType.IsFixedBuffer() || t.FieldType.IsEnum || t.FieldType.IsBaseType()) || t.FieldTypeOverride != null)).Select(t => t.FieldTypeOverride ?? t.FieldType.FullSanitizeName()).Distinct().ToArray();
             }
             return _dependencyNames;
-        }}
+        }
+    }
     public ProcessedStruct FixOrder() {
         Fields = [.. Fields.OrderBy(t => t.FieldOffset)];
         return this;

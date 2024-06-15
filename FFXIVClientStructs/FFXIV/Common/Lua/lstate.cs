@@ -9,12 +9,12 @@ public unsafe partial struct lua_State {
     [FieldOffset(0x10)] public TValue* top; /* first free slot in the stack */
     [FieldOffset(0x18)] public TValue* _base; /* base of current function */
     [FieldOffset(0x20)] public global_State* l_G;
-    [FieldOffset(0x28)] public CallInfo *ci; /* call info for current function */
+    [FieldOffset(0x28)] public CallInfo* ci; /* call info for current function */
     [FieldOffset(0x30)] public uint* savedpc; /* 'savedpc' of current function */
     [FieldOffset(0x38)] public TValue* stack_last; /* last free slot in the stack */
     [FieldOffset(0x40)] public TValue* stack; /* stack base */
-    [FieldOffset(0x48)] public CallInfo *end_ci; /* points after end of ci array*/
-    [FieldOffset(0x50)] public CallInfo *base_ci; /* array of CallInfo's */
+    [FieldOffset(0x48)] public CallInfo* end_ci; /* points after end of ci array*/
+    [FieldOffset(0x50)] public CallInfo* base_ci; /* array of CallInfo's */
     [FieldOffset(0x58)] public int stacksize;
     [FieldOffset(0x5C)] public int size_ci; /* size of array 'base_ci' */
     [FieldOffset(0x60)] public ushort nCcalls; /* number of nested C calls */
@@ -23,7 +23,7 @@ public unsafe partial struct lua_State {
     [FieldOffset(0x65)] public byte allowhook;
     [FieldOffset(0x68)] public int basehookcount;
     [FieldOffset(0x6C)] public int hookcount;
-    [FieldOffset(0x70)] public delegate*unmanaged<lua_State*, lua_Debug*, void> hook; // lua_Hook
+    [FieldOffset(0x70)] public delegate* unmanaged<lua_State*, lua_Debug*, void> hook; // lua_Hook
     [FieldOffset(0x78)] public TValue l_gt; /* table of globals */
     [FieldOffset(0x88)] public TValue env; /* temporary place for environments */
     [FieldOffset(0x98)] public GCObject* openupval; /* list of open upvalues in this stack */
@@ -49,7 +49,7 @@ public unsafe partial struct lua_State {
     public partial void lua_pushvalue(int idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 06 41 8B D7")]
-    public partial void lua_pushcclosure(delegate*unmanaged<lua_State*, int> fn, int n);
+    public partial void lua_pushcclosure(delegate* unmanaged<lua_State*, int> fn, int n);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 56 ?? 85 D2 0F 88"), GenerateStringOverloads]
     public partial void lua_setfield(int idx, byte* k);
@@ -102,7 +102,7 @@ public unsafe partial struct lua_State {
         return luaL_loadbuffer(buff, size, "?");
     }
 
-    public void lua_pushcfunction(delegate*unmanaged<lua_State*, int> f) {
+    public void lua_pushcfunction(delegate* unmanaged<lua_State*, int> f) {
         lua_pushcclosure(f, 0);
     }
 
@@ -114,7 +114,7 @@ public unsafe partial struct lua_State {
         lua_settop(-n - 1);
     }
 
-    public void lua_register(string n, delegate*unmanaged<lua_State*, int> f) {
+    public void lua_register(string n, delegate* unmanaged<lua_State*, int> f) {
         lua_pushcfunction(f);
         lua_setglobal(n);
     }
@@ -124,7 +124,7 @@ public unsafe partial struct lua_State {
 [StructLayout(LayoutKind.Explicit, Size = 0x1B0)]
 public unsafe partial struct global_State {
     [FieldOffset(0x00)] public stringtable strt; /* hash table for strings */
-    [FieldOffset(0x10)] public delegate*unmanaged<void*, void*, ulong, ulong, void*> frealloc; // lua_Alloc /* function to reallocate memory */
+    [FieldOffset(0x10)] public delegate* unmanaged<void*, void*, ulong, ulong, void*> frealloc; // lua_Alloc /* function to reallocate memory */
     [FieldOffset(0x18)] public void* ud; /* auxiliary data to 'frealloc' */
     [FieldOffset(0x20)] public byte currentwhite;
     [FieldOffset(0x21)] public byte gcstate; /* state of garbage collector */
@@ -142,7 +142,7 @@ public unsafe partial struct global_State {
     [FieldOffset(0x88)] public ulong gcdept; // lu_mem /* how much GC is 'behind schedule' */
     [FieldOffset(0x90)] public int gcpause; /* size of pause between successive GCs */
     [FieldOffset(0x94)] public int gcstepmul; /* GC 'granularity' */
-    [FieldOffset(0x98)] public delegate*unmanaged<lua_State*, int> panic; // lua_CFunction /* to be called in unprotected errors */
+    [FieldOffset(0x98)] public delegate* unmanaged<lua_State*, int> panic; // lua_CFunction /* to be called in unprotected errors */
     [FieldOffset(0xA0)] public TValue l_registry;
     [FieldOffset(0xB0)] public lua_State* mainthread;
     [FieldOffset(0xB8)] public UpVal uvhead; /* head of double-linked list of all open upvalues */
