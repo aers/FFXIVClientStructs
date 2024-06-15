@@ -668,6 +668,16 @@ if api is None:
                             0,
                         )
                 if struct.size is not None and struct.size != 0:
+                    if struct.virtual_functions != [] and struct.size == 8:
+                        ida_struct.add_struc_member(
+                            s,
+                            "field_0",
+                            0,
+                            self.get_idc_type_from_ida_type("__int64"),
+                            None,
+                            self.get_size_from_ida_type("__int64"),
+                        )
+                        return
                     size = struct.size - 1
                     if struct.size != ida_struct.get_struc_size(s):
                         ida_struct.add_struc_member(
@@ -785,7 +795,8 @@ if api is None:
                         self.get_struct_opinfo_from_type(fullname + "Union"),
                         self.get_size_from_ida_type(fullname + "Union"),
                     )
-                    meminfo = ida_struct.get_member_by_name(s, "union")
+                    meminfo = ida_struct.get_member(s, 0)
+                    ida_struct.set_member_name(s, 0, "union")
                     ida_struct.set_member_tinfo(
                         s, meminfo, 0, self.get_tinfo_from_type(fullname + "Union"), 0
                     )
@@ -811,7 +822,8 @@ if api is None:
                             None,
                             self.get_size_from_ida_type("__int64"),
                         )
-                    meminfo = ida_struct.get_member_by_name(s, "vtable")
+                    meminfo = ida_struct.get_member(s, 0)
+                    ida_struct.set_member_name(s, 0, "vtable")
                     ida_struct.set_member_tinfo(
                         s, meminfo, 0, self.get_tinfo_from_type(fullname + "VTable*"), 0
                     )
