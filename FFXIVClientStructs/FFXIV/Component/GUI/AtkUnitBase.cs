@@ -88,7 +88,6 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// Mainly used by Gold Saucer addons. Handled in AtkModule handler 50.<br/>
     /// The following scds can be loaded:
     /// <code>
-    /// 0 = sound/system/SE_UI.scd
     /// 1 = sound/system/SE_GS.scd
     /// 2 = sound/system/SE_TTriad.scd
     /// 3 = sound/system/SE_EMJ.scd
