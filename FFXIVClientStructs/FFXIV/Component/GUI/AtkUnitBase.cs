@@ -54,10 +54,25 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     /// <summary>
     /// <code>
+    /// 0b1000_0000 = Disable auto-focus (not adding it to Focused Units list)
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x188)] public byte Flags188;
+
+    /// <summary>
+    /// <code>
     /// 0b0000_0001 = OnSetup was called (= IsReady)
     /// </code>
     /// </summary>
     [FieldOffset(0x189)] public byte Flags189;
+    [FieldOffset(0x18A)] public byte Flags18A;
+
+    /// <summary>
+    /// <code>
+    /// 0b0100_0000 = Don't show on open
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x18D)] public byte Flags18D;
 
     [FieldOffset(0x194)] public uint OpenTransitionDuration;
     [FieldOffset(0x198)] public uint CloseTransitionDuration;
