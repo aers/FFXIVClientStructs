@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 namespace InteropGenerator.Extensions;
 
 public static class RefKindExtensions {
-    public static string GetParameterPrefix(this RefKind refKind) {
+    public static string GetStringPrefix(this RefKind refKind) {
         switch (refKind) {
             case RefKind.In:
                 return "in ";

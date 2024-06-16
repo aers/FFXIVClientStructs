@@ -10,8 +10,5 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkComponentButton>]
 [StructLayout(LayoutKind.Explicit, Size = 0x110)]
 public partial struct AtkComponentCheckBox {
-    public bool IsChecked {
-        get => AtkComponentButton.IsChecked;
-        set => AtkComponentButton.IsChecked = value;
-    }
+
 }

@@ -78,7 +78,7 @@ public sealed partial class InteropGenerator {
         }
 
         token.ThrowIfCancellationRequested();
-
+        
         // inherited member functions
         foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
             if (!inheritedStruct.MemberFunctions.IsEmpty)
@@ -110,6 +110,14 @@ public sealed partial class InteropGenerator {
         }
 
         token.ThrowIfCancellationRequested();
+        
+        // inherited public properties
+        foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
+            if (!inheritedStruct.ExtraInheritedStructInfo!.PublicProperties.IsEmpty)
+                RenderInheritedPublicProperties(inheritedStruct, path, writer);
+        }
+
+        token.ThrowIfCancellationRequested();
 
         // inherited string overloads
         // we can just use the regular renderer here since the overloaded function should also be inherited
@@ -128,6 +136,7 @@ public sealed partial class InteropGenerator {
 
         token.ThrowIfCancellationRequested();
     }
+    
     private static int ResolveInheritanceOrder(StructInfo structInfo, string path, int absoluteOffset, int curParentOffset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, ref bool hasPrimaryVirtualFunctions) {
         var processed = 0;
         foreach (InheritanceInfo inheritanceInfo in structInfo.InheritedStructs) {
@@ -243,6 +252,25 @@ public sealed partial class InteropGenerator {
             }
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+        }
+    }
+    
+    private static void RenderInheritedPublicProperties(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
+        foreach (PropertyInfo propertyInfo in inheritedStruct.ExtraInheritedStructInfo!.PublicProperties) {
+            writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{propertyInfo.Name}" />""");
+            writer.WriteLine($"""/// <remarks>Property inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
+            if (propertyInfo.ObsoleteInfo is not null) {
+                writer.WriteLine($"""[global::System.ObsoleteAttribute("{propertyInfo.ObsoleteInfo.Message}", {propertyInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
+            }
+            writer.WriteLine($"public {propertyInfo.RefKind.GetStringPrefix()}{propertyInfo.Type} {propertyInfo.Name}");
+            using (writer.WriteBlock()) {
+                if (propertyInfo.Get) {
+                    writer.WriteLine($"get => {propertyInfo.RefKind.GetStringPrefix()}{path}.{propertyInfo.Name};");
+                }
+                if (propertyInfo.Set) {
+                    writer.WriteLine($"set => {path}.{propertyInfo.Name} = value;");
+                }
+            }
         }
     }
 
