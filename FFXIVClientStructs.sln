@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteropGenerator.Runtime", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteropGenerator.Tests", "InteropGenerator.Tests\InteropGenerator.Tests.csproj", "{527062AF-EDDF-41A3-80B7-F902445D8045}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelGenerator", "ExcelGenerator\ExcelGenerator.csproj", "{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{527062AF-EDDF-41A3-80B7-F902445D8045}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{527062AF-EDDF-41A3-80B7-F902445D8045}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{527062AF-EDDF-41A3-80B7-F902445D8045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
