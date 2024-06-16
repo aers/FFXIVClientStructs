@@ -3945,6 +3945,8 @@ classes:
   Client::System::Resource::ResourceEventListener:
     vtbls:
       - ea: 0x1419D6548
+    vfuncs:
+      0: dtor
     funcs:
       0x1401D5100: ctor
   Client::System::Resource::Handle::GrassGridDataResourceHandle:
@@ -10786,12 +10788,16 @@ classes:
     vtbls:
       - ea: 0x141A48240
         base: Client::System::Resource::ResourceEventListener
+    funcs:
+      0x14090ABE0: ctor
   Client::Game::Event::ModuleBase:
     vtbls:
       - ea: 0x141A48268
     vfuncs:
       1: SetupClasses
       4: SetupClasses_2
+    funcs:
+      0x1407D0E20: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>:
     vtbls:
       - ea: 0x141A482A0
@@ -11729,6 +11735,7 @@ classes:
         base: Client::Game::Event::ModuleBase
     funcs:
       0x140845EC0: ctor
+      0x140849880: SetupLuaScriptLoader
   Client::Game::Event::LuaActorModule:
     vtbls:
       - ea: 0x141A4E1C8
