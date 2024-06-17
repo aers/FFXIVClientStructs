@@ -32,7 +32,7 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x38)] public AtkTimelineManager* TimelineManager;
     [FieldOffset(0x40)] public ushort DrawOrderIndex;
     [FieldOffset(0x42)] public ushort NodeListCount;
-    [FieldOffset(0x48)] public void* AtkResourceRendererManager;
+    [FieldOffset(0x48)] public AtkResourceRendererManager* ResourceRendererManager;
     [FieldOffset(0x50)] public AtkResNode** NodeList;
     [FieldOffset(0x58)] public StdLinkedList<Pointer<DuplicateObjectList>> DuplicateObjectsList; // linked list of lists of duplicates
     [FieldOffset(0x78)] public AtkResNode* RootNode;
@@ -43,9 +43,7 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded
 
     [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA 74 42")]
-    private partial AtkResNode* SearchNodeByIdInternal(uint id);
-
-    public AtkResNode* SearchNodeById(uint id) => LoadedState == AtkLoadState.Loaded ? SearchNodeByIdInternal(id) : null;
+    public partial AtkResNode* SearchNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 4D 08")]
     public partial AtkComponentBase* CreateAtkComponent(ComponentType type);

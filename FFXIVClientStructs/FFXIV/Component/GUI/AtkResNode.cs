@@ -69,9 +69,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular
     /// </summary>
     [FieldOffset(0xA0)] public uint DrawFlags;
-
-    public bool IsVisible => NodeFlags.HasFlag(NodeFlags.Visible);
-
+    
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 20")]
     public partial void Ctor();
 
@@ -196,6 +194,9 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5D 87")]
     public partial void SetHeight(ushort height);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 7F")]
+    public partial bool IsVisible();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EE 01 75 D5 48 8B 4C 24 ??")]
     public partial void ToggleVisibility(bool enable);

@@ -12,7 +12,7 @@ public sealed partial class InteropGenerator {
 
     private static StructInfo ParseStructInfo(INamedTypeSymbol structSymbol, AttributeData generateInteropAttributeData, CancellationToken token) {
         // check if we need to collect extra info for inheritance
-        ExtraInheritedStructInfo? inheritedStructInfo = null;
+        ExtraInheritedStructInfo? extraInheritedStructInfo = null;
         generateInteropAttributeData.TryGetConstructorArgument(0, out bool isInherited);
 
         // collect info on struct methods
@@ -74,10 +74,12 @@ public sealed partial class InteropGenerator {
             structSymbol.TryGetAttributeWithFullyQualifiedMetadataName("System.Runtime.InteropServices.StructLayoutAttribute", out AttributeData? structLayoutAttributeData) &&
             structLayoutAttributeData.TryGetNamedArgument("Size", out int? size) &&
             size.HasValue) {
-            inheritedStructInfo = new ExtraInheritedStructInfo(
+            ParseProperties(structSymbol, token, out EquatableArray<PropertyInfo> publicProperties);
+            extraInheritedStructInfo = new ExtraInheritedStructInfo(
                 size.Value,
                 publicFields,
-                extraPublicMethods);
+                extraPublicMethods,
+                publicProperties);
         }
 
         // collect all info
@@ -92,7 +94,7 @@ public sealed partial class InteropGenerator {
             virtualTableSignatureInfo,
             fixedSizeArrays,
             inheritanceInfoBuilder.ToImmutable(),
-            inheritedStructInfo);
+            extraInheritedStructInfo);
     }
 
     private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token, bool isInherited,
@@ -311,6 +313,34 @@ public sealed partial class InteropGenerator {
 
         fixedSizeArrays = fixedSizeArrayBuilder.ToImmutable();
         publicFields = publicFieldBuilder.ToImmutable();
+    }
+
+    private static void ParseProperties(INamedTypeSymbol structSymbol, CancellationToken token, out EquatableArray<PropertyInfo> publicProperties) {
+        using ImmutableArrayBuilder<PropertyInfo> publicPropertiesBuilder = new();
+
+        foreach (IPropertySymbol propertySymbol in structSymbol.GetMembers().OfType<IPropertySymbol>()) {
+            if(propertySymbol.DeclaredAccessibility != Accessibility.Public ||
+               propertySymbol.IsIndexer) {
+                continue;
+            }
+
+            ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(propertySymbol);
+
+            PropertyInfo propertyInfo = new(
+                propertySymbol.Name,
+                propertySymbol.Type.GetFullyQualifiedName(),
+                propertySymbol.RefKind,
+                propertySymbol.GetMethod is not null,
+                propertySymbol.SetMethod is not null,
+                obsoleteInfo
+            );
+            
+            publicPropertiesBuilder.Add(propertyInfo);
+            
+            token.ThrowIfCancellationRequested();
+        }
+
+        publicProperties = publicPropertiesBuilder.ToImmutable();
     }
 
     private static ObsoleteInfo? ParseObsoleteInfo(ISymbol symbol) {

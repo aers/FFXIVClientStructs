@@ -629,7 +629,8 @@ classes:
       - ea: 0x141A08160
     vfuncs:
       0: dtor
-      1: DispatchCallback
+      1: CallHandler
+      2: PlaySoundEffect
   Component::GUI::AtkManagedInterface:
   Component::GUI::AtkModuleEvent:
     vtbls:
@@ -1615,6 +1616,7 @@ classes:
       0x140511C90: ctor
   Component::GUI::AtkUldManager:
     funcs:
+      0x140534FA0: InitializeResourceRendererManager
       0x140531CD0: SetupFromULDResourceHandle
       0x1405332B0: CreateTimeline
       0x140534250: ReadTPHD
@@ -3388,6 +3390,9 @@ classes:
       8: SetAddonVisibility
       10: RefreshAddon
       11: AddonRequestUpdateById
+      19: IsScdResourceLoaded
+      20: LoadScdResource
+      21: UnloadScdResource # it really just DecRefs it
     funcs:
       0x14017C1B0: Finalize
       0x140543B80: ctor
@@ -3940,6 +3945,8 @@ classes:
   Client::System::Resource::ResourceEventListener:
     vtbls:
       - ea: 0x1419D6548
+    vfuncs:
+      0: dtor
     funcs:
       0x1401D5100: ctor
   Client::System::Resource::Handle::GrassGridDataResourceHandle:
@@ -5715,7 +5722,7 @@ classes:
       0x14052BC50: GetPriority
       0x14052BC70: SetPriority
       0x14052BC90: IsVisible
-      0x14052BCC0: SetVisibility
+      0x14052BCC0: ToggleVisibility
       0x14052C0F0: GetIsUsingDepthBasedDrawPriority
       0x14052C110: SetUseDepthBasedDrawPriority
       0x14052C160: SetDepth
@@ -5835,9 +5842,11 @@ classes:
       57: OnOpenTransitionStarted
       61: OnMouseOver
       62: OnMouseOut
+      65: IsFullyLoaded
     funcs:
       0x140538A80: ctor
       0x140538CB0: Destructor
+      0x1405390E0: FireCallbackAndHideOrClose
       0x1405390F0: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
       0x140539440: SetPosition
       0x1405395C0: SetAlpha
@@ -5850,19 +5859,20 @@ classes:
       0x140539CF0: GetScaledHeight
       0x140539D30: CalculateBounds
       0x14053A500: SetFlag
+      0x14053B920: ContainsNode
       0x14053C060: Draw
       0x14053C360: LoadUldByName
+      0x14053C3F0: SetScdResourceIndex
       0x14053C480: SetOpenTransition
       0x14053C4C0: SetCloseTransition
-      0x14053C580: SubscribeAtkArrayData # handler: "4C 8B D2 48 8B D1 41 83 F9 04"
-      0x14053C710: UnsubscribeAtkArrayData # handler: "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B DA 48 8B F9 41 83 F9 04"
+      0x14053C580: SubscribeAtkArrayData
+      0x14053C710: UnsubscribeAtkArrayData
       0x14053C9C0: SetFocusNode
       0x14053CF40: GetNodeById
       0x14053D070: GetButtonNodeById
       0x14053D210: GetComponentListById
       0x14053D2B0: GetTextNodeById
       0x14053D310: GetImageNodeById
-      0x1405390E0: FireCallbackAndHideOrClose
       0x14053D410: FireCallback
       0x14053E030: MoveDelta
       0x14053FAC0: UpdateCollisionNodeList
@@ -5974,6 +5984,8 @@ classes:
       0x14056B5C0: HandleInput
       0x14056B9C0: IsTextInputActive
       0x14056B840: SetUIScene
+      0x1400C6750: PlaySoundEffectHandler
+      0x1400C82A0: ScdResourceHandler
   Component::GUI::AtkComponentCheckBox:
     vtbls:
       - ea: 0x141A09718
@@ -6166,6 +6178,12 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14058DA90: ctor
+    vfuncs:
+      20: GetWindowCollisionNode
+      21: GetTitleBarCollisionNode
+      22: GetCloseButtonNode
+      23: SetOwnerUnitBase
+      25: ToggleTitleBarVisibility
   Component::GUI::AtkComponentJournalCanvas:
     vtbls:
       - ea: 0x141A0A628
@@ -10770,12 +10788,16 @@ classes:
     vtbls:
       - ea: 0x141A48240
         base: Client::System::Resource::ResourceEventListener
+    funcs:
+      0x14090ABE0: ctor
   Client::Game::Event::ModuleBase:
     vtbls:
       - ea: 0x141A48268
     vfuncs:
       1: SetupClasses
       4: SetupClasses_2
+    funcs:
+      0x1407D0E20: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>:
     vtbls:
       - ea: 0x141A482A0
@@ -11713,6 +11735,7 @@ classes:
         base: Client::Game::Event::ModuleBase
     funcs:
       0x140845EC0: ctor
+      0x140849880: SetupLuaScriptLoader
   Client::Game::Event::LuaActorModule:
     vtbls:
       - ea: 0x141A4E1C8

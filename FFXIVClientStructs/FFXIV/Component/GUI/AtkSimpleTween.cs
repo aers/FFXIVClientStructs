@@ -34,7 +34,7 @@ public unsafe partial struct AtkSimpleTween : ICreatable {
     public partial void Clear();
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B 87 ?? ?? ?? ?? 4C 8B CF")]
-    public partial void Prepare(int duration, AtkResNode* node, SimpleTweenValue* values, uint numValues, float easingFactor = 0.5f);
+    public partial void Prepare(int duration, AtkResNode* node, SimpleTweenValue* values, uint valueCount, float easingFactor = 0.5f);
 
     [MemberFunction("E8 ?? ?? ?? ?? FF 4F 5C")]
     public partial void Execute();

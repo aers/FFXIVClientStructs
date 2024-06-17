@@ -8,7 +8,7 @@ public unsafe partial struct LuaState {
     [FieldOffset(0x08)] public lua_State* State;
     [FieldOffset(0x10)] public bool GCEnabled;
     [FieldOffset(0x18)] public long LastGCRestart;
-    [FieldOffset(0x20)] public delegate*unmanaged<lua_State*, int> db_errorfb;
+    [FieldOffset(0x20)] public delegate* unmanaged<lua_State*, int> db_errorfb;
 
     public string?[] DoString(string code, string? name = null) {
         var top = State->lua_gettop();

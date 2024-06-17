@@ -30,7 +30,7 @@ public unsafe struct Udata {
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe struct Table {
     [FieldOffset(0x00)] public GCheader gch; // CommonHeader
-    [FieldOffset(0x0A)] public byte flags; /* 1<<p means tagmethod(p) is not present */ 
+    [FieldOffset(0x0A)] public byte flags; /* 1<<p means tagmethod(p) is not present */
     [FieldOffset(0x0B)] public byte lsizenode; /* log2 of size of 'node' array */
     [FieldOffset(0x10)] public Table* metatable;
     [FieldOffset(0x18)] public TValue* array; /* array part */
@@ -85,7 +85,7 @@ public unsafe struct CClosure {
     [FieldOffset(0x10)] public GCObject* gclist;
     [FieldOffset(0x18)] public Table* env;
     // end of ClosureHeader
-    [FieldOffset(0x20)] public delegate*unmanaged<lua_State*, int> f; // lua_CFunction
+    [FieldOffset(0x20)] public delegate* unmanaged<lua_State*, int> f; // lua_CFunction
     [FieldOffset(0x28)] internal TValue _upvalue;  // TValue upvalue[1];
     public Span<TValue> upvalue => new(Unsafe.AsPointer(ref _upvalue), nupvalues);
 }
@@ -125,7 +125,7 @@ public unsafe struct LocVar {
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public unsafe struct Proto {
     [FieldOffset(0x00)] public GCheader gch; // CommonHeader
-    [FieldOffset(0x10)] public TValue *k; /* constants used by the function */
+    [FieldOffset(0x10)] public TValue* k; /* constants used by the function */
     [FieldOffset(0x18)] public uint* code;
     [FieldOffset(0x20)] public Proto** p; /* functions defined inside the function */
     [FieldOffset(0x28)] public int* lineinfo; /* map from opcodes to source lines */
