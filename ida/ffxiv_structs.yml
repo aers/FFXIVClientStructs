@@ -3948,7 +3948,31 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
+  virtual_functions:
+  - name: CallHandler
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkExternalInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: result
+    - type: unsigned int
+      name: handlerIndex
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: PlaySoundEffect
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkExternalInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: result
+    - type: int
+      name: soundEffectId
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerBase
   name: AtkFontAnalyzerBase
@@ -4231,7 +4255,7 @@ structs:
     - type: unsigned int
       name: addonId
     - type: unsigned int
-      name: numValues
+      name: valueCount
     - type: Component::GUI::AtkValue*
       name: values
   - name: IsAddonReady
@@ -4260,6 +4284,14 @@ structs:
     parameters:
     - type: Component::GUI::AtkModuleInterface*
       name: this
+  member_functions: []
+- type: Component::GUI::AtkResourceRendererManager
+  name: AtkResourceRendererManager
+  namespace: Component.GUI
+  union: False
+  size: 280
+  fields: []
+  virtual_functions: []
   member_functions: []
 - type: Component::GUI::SimpleTweenAnimation
   name: SimpleTweenAnimation
@@ -5249,7 +5281,7 @@ structs:
   size: 32
   fields:
   - type: Component::GUI::AtkUldObjectInfo
-    name: ObjectInfo
+    name: AtkUldObjectInfo
     offset: 0
   - type: unsigned int
     name: AlignmentType
@@ -5363,7 +5395,7 @@ structs:
     - type: Component::GUI::AtkUnitBase*
       name: addon
     - type: unsigned int
-      name: numValues
+      name: valueCount
     - type: Component::GUI::AtkValue*
       name: values
   - name: AddonRequestUpdateById
@@ -10366,7 +10398,13 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::System::Resource::ResourceEventListener*
+      name: this
   member_functions: []
 - type: Client::System::Resource::ResourceManager
   name: ResourceManager
@@ -10928,7 +10966,13 @@ structs:
   - type: __int64
     name: EventHandle
     offset: 712
-  virtual_functions: []
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::Sound::SoundManager*
+      name: this
   member_functions:
   - signature: F3 0F 10 0D ?? ?? ?? ?? 48 63 C2
     return_type: float
@@ -15095,16 +15139,22 @@ structs:
     offset: 120
   virtual_functions: []
   member_functions: []
-- type: Client::Game::Event::ModuleBase
-  name: ModuleBase
+- type: Client::Game::Event::LuaScriptLoader
+  name: LuaScriptLoader
   namespace: Client.Game.Event
   union: False
-  size: 64
+  size: 8
   fields:
-  - type: Common::Lua::LuaState*
-    name: LuaState
-    offset: 8
-  virtual_functions: []
+  - type: Client::System::Resource::ResourceEventListener
+    name: ResourceEventListener
+    offset: 0
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaScriptLoader*
+      name: this
   member_functions: []
 - type: Client::Game::Control::ActionTimelineSequencer
   name: ActionTimelineSequencer
@@ -26106,6 +26156,19 @@ structs:
     offset: 28
   virtual_functions: []
   member_functions: []
+- type: Helper::RedBlackTree<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>
+  name: RedBlackTree`3
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  virtual_functions: []
+  member_functions: []
 - type: StdPair<Client::System::String::Utf8String, __int64>
   name: StdPair`2
   namespace: ''
@@ -26444,25 +26507,25 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
+- type: StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned int
+    name: Item1
+    offset: 0
+  - type: Client::System::Resource::Handle::ResourceHandle*
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
 - type: Helper::RedBlackTree<StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>>
   name: RedBlackTree`3
   namespace: Helper
   union: False
   fields:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>>*
-    name: Head
-    offset: 0
-  - type: __int64
-    name: LongCount
-    offset: 8
-  virtual_functions: []
-  member_functions: []
-- type: Helper::RedBlackTree<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>
-  name: RedBlackTree`3
-  namespace: Helper
-  union: False
-  fields:
-  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
     name: Head
     offset: 0
   - type: __int64
@@ -26481,19 +26544,6 @@ structs:
   - type: Client::LayoutEngine::ILayoutInstance*
     name: Item2
     offset: 8
-  virtual_functions: []
-  member_functions: []
-- type: StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
-  name: StdPair`2
-  namespace: ''
-  union: False
-  fields:
-  - type: unsigned int
-    name: Item1
-    offset: 0
-  - type: Client::System::Resource::Handle::ResourceHandle*
-    name: Item2
-    offset: 4
   virtual_functions: []
   member_functions: []
 - type: Shader::CameraParameter
@@ -27358,6 +27408,12 @@ structs:
       name: this
     - type: unsigned __int16
       name: height
+  - signature: E8 ?? ?? ?? ?? 84 C0 EB 05
+    return_type: byte
+    name: IsVisible
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
   - signature: E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EB 01 75 DC
     return_type: void
     name: ToggleVisibility
@@ -27725,7 +27781,7 @@ structs:
   size: 24
   fields:
   - type: Component::GUI::AtkUldObjectInfo
-    name: ObjectInfo
+    name: AtkUldObjectInfo
     offset: 0
   - type: Component::GUI::ComponentType
     name: ComponentType
@@ -27777,8 +27833,8 @@ structs:
   - type: unsigned __int16
     name: NodeListCount
     offset: 66
-  - type: __int64
-    name: AtkResourceRendererManager
+  - type: Component::GUI::AtkResourceRendererManager*
+    name: ResourceRendererManager
     offset: 72
   - type: Component::GUI::AtkResNode**
     name: NodeList
@@ -27806,9 +27862,15 @@ structs:
     offset: 137
   virtual_functions: []
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 8B 73 18
+    return_type: void
+    name: InitializeResourceRendererManager
+    parameters:
+    - type: Component::GUI::AtkUldManager*
+      name: this
   - signature: F6 81 ?? ?? ?? ?? ?? 44 8B CA
     return_type: Component::GUI::AtkResNode*
-    name: SearchNodeByIdInternal
+    name: SearchNodeById
     parameters:
     - type: Component::GUI::AtkUldManager*
       name: this
@@ -48758,6 +48820,16 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
+- type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*, Helper::IStaticMemorySpace::Default>
+  name: StdMap`3
+  namespace: ''
+  union: False
+  fields:
+  - type: Helper::RedBlackTree<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>
+    name: Tree
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, __int64>>
   name: Node
   namespace: Helper
@@ -49559,22 +49631,43 @@ structs:
     offset: 2
   virtual_functions: []
   member_functions: []
+- type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
+    name: _Left
+    offset: 0
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
+    name: _Parent
+    offset: 8
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
+    name: _Myval
+    offset: 28
+  virtual_functions: []
+  member_functions: []
 - type: StdMap<unsigned __int64, Client::LayoutEngine::ILayoutInstance*, Helper::IStaticMemorySpace::Default>
   name: StdMap`3
   namespace: ''
   union: False
   fields:
   - type: Helper::RedBlackTree<StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>>
-    name: Tree
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*, Helper::IStaticMemorySpace::Default>
-  name: StdMap`3
-  namespace: ''
-  union: False
-  fields:
-  - type: Helper::RedBlackTree<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>
     name: Tree
     offset: 0
   virtual_functions: []
@@ -49606,37 +49699,6 @@ structs:
     name: _19
     offset: 27
   - type: StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>
-    name: _Myval
-    offset: 28
-  virtual_functions: []
-  member_functions: []
-- type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>
-  name: Node
-  namespace: Helper
-  union: False
-  fields:
-  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
-    name: _Left
-    offset: 0
-  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
-    name: _Parent
-    offset: 8
-  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
-    name: _Right
-    offset: 16
-  - type: Helper::RedBlackTreeNodeColor
-    name: _Color
-    offset: 24
-  - type: byte
-    name: _Isnil
-    offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
-  - type: StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
     name: _Myval
     offset: 28
   virtual_functions: []
@@ -51792,6 +51854,31 @@ structs:
   - type: Component::GUI::AtkComponentBase
     name: AtkComponentBase
     offset: 0
+  - type: Component::GUI::AtkUnitBase*
+    name: OwnerUnitBase
+    offset: 192
+  - type: int
+    name: NodeIds
+    offset: 200
+    size: 8
+  - type: Component::GUI::AtkCollisionNode*
+    name: WindowCollisionNode
+    offset: 232
+  - type: Component::GUI::AtkCollisionNode*
+    name: TitleBarCollisionNode
+    offset: 240
+  - type: unsigned int
+    name: TitleTextId
+    offset: 248
+  - type: unsigned int
+    name: SubtitleTextId
+    offset: 252
+  - type: float
+    name: SubtitleOffsetX
+    offset: 256
+  - type: byte
+    name: ShowFlags
+    offset: 260
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -52139,7 +52226,7 @@ structs:
     - type: Component::GUI::SimpleTweenValue*
       name: values
     - type: unsigned int
-      name: numValues
+      name: valueCount
     - type: float
       name: easingFactor
   - signature: E8 ?? ?? ?? ?? FF 4F 5C
@@ -52359,12 +52446,24 @@ structs:
   - type: Component::GUI::AtkValue*
     name: AtkValues
     offset: 352
+  - type: StdVector<byte*>
+    name: CachedAtkValueStrings
+    offset: 360
+  - type: unsigned int
+    name: Flags180
+    offset: 384
   - type: byte
-    name: Flags
-    offset: 386
+    name: Flags188
+    offset: 392
   - type: byte
-    name: UnkFlags189
+    name: Flags189
     offset: 393
+  - type: byte
+    name: Flags18A
+    offset: 394
+  - type: byte
+    name: Flags18D
+    offset: 397
   - type: unsigned int
     name: OpenTransitionDuration
     offset: 404
@@ -52383,6 +52482,9 @@ structs:
   - type: float
     name: Scale
     offset: 428
+  - type: byte
+    name: ScdResourceIndex
+    offset: 436
   - type: byte
     name: VisibilityFlags
     offset: 438
@@ -52634,6 +52736,12 @@ structs:
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -52651,7 +52759,7 @@ structs:
     - type: Component::GUI::AtkUnitBase*
       name: this
     - type: unsigned int
-      name: numValues
+      name: valueCount
     - type: Component::GUI::AtkValue*
       name: values
   - name: OnRefresh
@@ -52661,7 +52769,7 @@ structs:
     - type: Component::GUI::AtkUnitBase*
       name: this
     - type: unsigned int
-      name: numValues
+      name: valueCount
     - type: Component::GUI::AtkValue*
       name: values
   - name: OnRequestedUpdate
@@ -52689,6 +52797,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -52841,7 +52955,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
-    - type: int
+    - type: unsigned int
       name: valueCount
     - type: Component::GUI::AtkValue*
       name: values
@@ -52936,7 +53050,7 @@ structs:
     - type: Component::GUI::AtkUnitBase*
       name: this
     - type: unsigned int
-      name: numValues
+      name: valueCount
     - type: Component::GUI::AtkValue*
       name: values
   - signature: E8 ?? ?? ?? ?? 0F BF 8C 24 ?? ?? ?? ?? 01 8F
@@ -52949,6 +53063,14 @@ structs:
       name: xDelta
     - type: __int16*
       name: yDelta
+  - signature: E8 ?? ?? ?? ?? 8D 55 0D 48 8B CE
+    return_type: byte
+    name: ContainsNode
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
+    - type: Component::GUI::AtkResNode*
+      name: node
 - type: Common::Log::LogModule
   name: LogModule
   namespace: Common.Log
@@ -53491,6 +53613,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionBarBase*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionBarBase*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -53546,6 +53674,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonActionBarBase*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionBarBase*
       name: this
@@ -53814,6 +53948,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionBarX*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionBarX*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -53869,6 +54009,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonActionBarX*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionBarX*
       name: this
@@ -54199,6 +54345,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionCross*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionCross*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -54254,6 +54406,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonActionCross*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionCross*
       name: this
@@ -54523,6 +54681,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionCrossEditor*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionCrossEditor*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -54578,6 +54742,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonActionCrossEditor*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionCrossEditor*
       name: this
@@ -54865,6 +55035,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionDoubleCrossBase*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionDoubleCrossBase*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -54920,6 +55096,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonActionDoubleCrossBase*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionDoubleCrossBase*
       name: this
@@ -55244,6 +55426,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionMenu*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionMenu*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -55299,6 +55487,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonActionMenu*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionMenu*
       name: this
@@ -55548,6 +55742,12 @@ structs:
     parameters:
     - type: Client::UI::AddonAdventureNoteBook*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -55603,6 +55803,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonAdventureNoteBook*
       name: this
@@ -55859,6 +56065,12 @@ structs:
     parameters:
     - type: Client::UI::AddonAetherCurrent*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAetherCurrent*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -55914,6 +56126,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonAetherCurrent*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonAetherCurrent*
       name: this
@@ -56182,6 +56400,12 @@ structs:
     parameters:
     - type: Client::UI::AddonAOZNotebook*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAOZNotebook*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -56237,6 +56461,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonAOZNotebook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonAOZNotebook*
       name: this
@@ -56496,6 +56726,12 @@ structs:
     parameters:
     - type: Client::UI::AddonArmouryBoard*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonArmouryBoard*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -56551,6 +56787,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonArmouryBoard*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonArmouryBoard*
       name: this
@@ -56813,6 +57055,12 @@ structs:
     parameters:
     - type: Client::UI::AddonBank*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonBank*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -56868,6 +57116,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonBank*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonBank*
       name: this
@@ -57195,6 +57449,12 @@ structs:
     parameters:
     - type: Client::UI::AddonBannerEditor*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonBannerEditor*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -57250,6 +57510,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonBannerEditor*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonBannerEditor*
       name: this
@@ -57506,6 +57772,12 @@ structs:
     parameters:
     - type: Client::UI::AddonBuddy*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonBuddy*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -57561,6 +57833,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonBuddy*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonBuddy*
       name: this
@@ -57824,6 +58102,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCastBar*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCastBar*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -57879,6 +58163,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonCastBar*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCastBar*
       name: this
@@ -58141,6 +58431,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCharacter*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacter*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -58196,6 +58492,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonCharacter*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCharacter*
       name: this
@@ -58476,6 +58778,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCharacterClass*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacterClass*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -58531,6 +58839,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonCharacterClass*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCharacterClass*
       name: this
@@ -58788,6 +59102,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCharacterInspect*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacterInspect*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -58843,6 +59163,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonCharacterInspect*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCharacterInspect*
       name: this
@@ -59095,6 +59421,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCharacterRepute*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacterRepute*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -59150,6 +59482,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonCharacterRepute*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCharacterRepute*
       name: this
@@ -59420,6 +59758,12 @@ structs:
     parameters:
     - type: Client::UI::AddonChatLogPanel*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -59475,6 +59819,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonChatLogPanel*
       name: this
@@ -59727,6 +60077,12 @@ structs:
     parameters:
     - type: Client::UI::AddonChocoboBreedTraining*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChocoboBreedTraining*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -59782,6 +60138,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonChocoboBreedTraining*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonChocoboBreedTraining*
       name: this
@@ -60132,6 +60494,12 @@ structs:
     parameters:
     - type: Client::UI::AddonContentsFinder*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonContentsFinder*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -60187,6 +60555,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonContentsFinder*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonContentsFinder*
       name: this
@@ -60457,6 +60831,12 @@ structs:
     parameters:
     - type: Client::UI::AddonContentsFinderConfirm*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonContentsFinderConfirm*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -60512,6 +60892,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonContentsFinderConfirm*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonContentsFinderConfirm*
       name: this
@@ -60797,6 +61183,12 @@ structs:
     parameters:
     - type: Client::UI::AddonContextIconMenu*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonContextIconMenu*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -60852,6 +61244,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonContextIconMenu*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonContextIconMenu*
       name: this
@@ -61108,6 +61506,12 @@ structs:
     parameters:
     - type: Client::UI::AddonContextMenu*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonContextMenu*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -61163,6 +61567,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonContextMenu*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonContextMenu*
       name: this
@@ -61415,6 +61825,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCutSceneSelectString*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCutSceneSelectString*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -61470,6 +61886,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonCutSceneSelectString*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCutSceneSelectString*
       name: this
@@ -61761,6 +62183,12 @@ structs:
     parameters:
     - type: Client::UI::AddonDtr*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonDtr*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -61816,6 +62244,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonDtr*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonDtr*
       name: this
@@ -62074,6 +62508,12 @@ structs:
     parameters:
     - type: Client::UI::AddonEnemyList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonEnemyList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -62129,6 +62569,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonEnemyList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonEnemyList*
       name: this
@@ -62387,6 +62833,12 @@ structs:
     parameters:
     - type: Client::UI::AddonExp*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonExp*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -62442,6 +62894,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonExp*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonExp*
       name: this
@@ -62697,6 +63155,12 @@ structs:
     parameters:
     - type: Client::UI::AddonFateProgress*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFateProgress*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -62752,6 +63216,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonFateProgress*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFateProgress*
       name: this
@@ -63056,6 +63526,12 @@ structs:
     parameters:
     - type: Client::UI::AddonFateReward*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFateReward*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -63111,6 +63587,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonFateReward*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFateReward*
       name: this
@@ -63370,6 +63852,12 @@ structs:
     parameters:
     - type: Client::UI::AddonFieldMarker*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFieldMarker*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -63425,6 +63913,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonFieldMarker*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFieldMarker*
       name: this
@@ -63674,6 +64168,12 @@ structs:
     parameters:
     - type: Client::UI::AddonFishGuide2*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -63729,6 +64229,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFishGuide2*
       name: this
@@ -63996,6 +64502,12 @@ structs:
     parameters:
     - type: Client::UI::AddonFriendList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFriendList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -64051,6 +64563,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonFriendList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFriendList*
       name: this
@@ -64396,6 +64914,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGathering*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGathering*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -64451,6 +64975,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGathering*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGathering*
       name: this
@@ -64700,6 +65230,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGatheringMasterpiece*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGatheringMasterpiece*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -64755,6 +65291,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGatheringMasterpiece*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGatheringMasterpiece*
       name: this
@@ -65028,6 +65570,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGcArmyCapture*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGcArmyCapture*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -65083,6 +65631,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGcArmyCapture*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGcArmyCapture*
       name: this
@@ -65377,6 +65931,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGcArmyExpedition*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGcArmyExpedition*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -65432,6 +65992,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGcArmyExpedition*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGcArmyExpedition*
       name: this
@@ -65681,6 +66247,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGcArmyExpeditionResult*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGcArmyExpeditionResult*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -65739,6 +66311,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGcArmyExpeditionResult*
       name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGcArmyExpeditionResult*
+      name: this
   member_functions: []
 - type: Client::UI::AddonGearSetList
   name: AddonGearSetList
@@ -65750,7 +66328,7 @@ structs:
     name: AtkUnitBase
     offset: 0
   - type: byte
-    name: ResetPosition
+    name: ShouldResetPosition
     offset: 14989
   virtual_functions:
   - name: Dtor
@@ -65985,6 +66563,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGearSetList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGearSetList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -66040,6 +66624,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGearSetList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGearSetList*
       name: this
@@ -66315,6 +66905,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGoldSaucerInfo*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGoldSaucerInfo*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -66370,6 +66966,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGoldSaucerInfo*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGoldSaucerInfo*
       name: this
@@ -66658,6 +67260,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGrandCompanySupplyList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -66713,6 +67321,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGrandCompanySupplyList*
       name: this
@@ -66965,6 +67579,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGrandCompanySupplyReward*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyReward*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -67020,6 +67640,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyReward*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGrandCompanySupplyReward*
       name: this
@@ -67269,6 +67895,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoCardDeck*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardDeck*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -67324,6 +67956,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardDeck*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoCardDeck*
       name: this
@@ -67629,6 +68267,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoCardList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -67684,6 +68328,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoCardList*
       name: this
@@ -67936,6 +68586,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoChocoboParam*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoChocoboParam*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -67991,6 +68647,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoChocoboParam*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoChocoboParam*
       name: this
@@ -68240,6 +68902,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoEditDeck*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -68295,6 +68963,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoEditDeck*
       name: this
@@ -68562,6 +69236,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoEmj*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEmj*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -68617,6 +69297,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEmj*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoEmj*
       name: this
@@ -68881,6 +69567,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoGeneral*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoGeneral*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -68936,6 +69628,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoGeneral*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoGeneral*
       name: this
@@ -69197,6 +69895,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoMinionBattle*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoMinionBattle*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -69252,6 +69956,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoMinionBattle*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoMinionBattle*
       name: this
@@ -69573,6 +70283,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGuildLeve*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGuildLeve*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -69628,6 +70344,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonGuildLeve*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGuildLeve*
       name: this
@@ -69883,6 +70605,12 @@ structs:
     parameters:
     - type: Client::UI::AddonHudLayoutScreen*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonHudLayoutScreen*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -69938,6 +70666,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonHudLayoutScreen*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonHudLayoutScreen*
       name: this
@@ -70187,6 +70921,12 @@ structs:
     parameters:
     - type: Client::UI::AddonHudLayoutWindow*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonHudLayoutWindow*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -70242,6 +70982,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonHudLayoutWindow*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonHudLayoutWindow*
       name: this
@@ -70503,6 +71249,12 @@ structs:
     parameters:
     - type: Client::UI::AddonImage*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonImage*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -70558,6 +71310,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonImage*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonImage*
       name: this
@@ -70810,6 +71568,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventory*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventory*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -70865,6 +71629,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonInventory*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventory*
       name: this
@@ -71130,6 +71900,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryBuddy*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryBuddy*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -71185,6 +71961,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryBuddy*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryBuddy*
       name: this
@@ -71449,6 +72231,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryEvent*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryEvent*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -71504,6 +72292,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryEvent*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryEvent*
       name: this
@@ -71764,6 +72558,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryExpansion*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryExpansion*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -71819,6 +72619,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryExpansion*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryExpansion*
       name: this
@@ -72079,6 +72885,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryGrid*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryGrid*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -72134,6 +72946,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryGrid*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryGrid*
       name: this
@@ -72386,6 +73204,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryLarge*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryLarge*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -72441,6 +73265,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryLarge*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryLarge*
       name: this
@@ -72701,6 +73531,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryRetainer*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryRetainer*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -72756,6 +73592,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryRetainer*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryRetainer*
       name: this
@@ -73016,6 +73858,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryRetainerLarge*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryRetainerLarge*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -73071,6 +73919,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryRetainerLarge*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryRetainerLarge*
       name: this
@@ -73325,6 +74179,12 @@ structs:
     parameters:
     - type: Client::UI::AddonItemInspectionList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemInspectionList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -73380,6 +74240,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonItemInspectionList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonItemInspectionList*
       name: this
@@ -73626,6 +74492,12 @@ structs:
     parameters:
     - type: Client::UI::AddonItemInspectionResult*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemInspectionResult*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -73681,6 +74553,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonItemInspectionResult*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonItemInspectionResult*
       name: this
@@ -73955,6 +74833,12 @@ structs:
     parameters:
     - type: Client::UI::AddonItemSearch*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemSearch*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -74010,6 +74894,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonItemSearch*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonItemSearch*
       name: this
@@ -74295,6 +75185,12 @@ structs:
     parameters:
     - type: Client::UI::AddonItemSearchResult*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemSearchResult*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -74350,6 +75246,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonItemSearchResult*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonItemSearchResult*
       name: this
@@ -74626,6 +75528,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHud*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHud*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -74681,6 +75589,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHud*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHud*
       name: this
@@ -74939,6 +75853,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudACN0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudACN0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -74994,6 +75914,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudACN0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudACN0*
       name: this
@@ -75252,6 +76178,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudSCH0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSCH0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -75307,6 +76239,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSCH0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSCH0*
       name: this
@@ -75565,6 +76503,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudSMN0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSMN0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -75620,6 +76564,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSMN0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSMN0*
       name: this
@@ -75878,6 +76828,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudSMN1*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSMN1*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -75933,6 +76889,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSMN1*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSMN1*
       name: this
@@ -76191,6 +77153,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudAST0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudAST0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -76246,6 +77214,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudAST0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudAST0*
       name: this
@@ -76504,6 +77478,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudBLM0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudBLM0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -76559,6 +77539,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudBLM0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudBLM0*
       name: this
@@ -76817,6 +77803,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudBRD0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudBRD0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -76872,6 +77864,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudBRD0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudBRD0*
       name: this
@@ -77130,6 +78128,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudDNC0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDNC0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -77185,6 +78189,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudDNC0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudDNC0*
       name: this
@@ -77443,6 +78453,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudDNC1*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDNC1*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -77498,6 +78514,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudDNC1*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudDNC1*
       name: this
@@ -77825,6 +78847,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudGNB0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudGNB0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -77880,6 +78908,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudGNB0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudGNB0*
       name: this
@@ -78161,6 +79195,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudMNK0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudMNK0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -78216,6 +79256,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudMNK0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudMNK0*
       name: this
@@ -78474,6 +79520,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudMNK1*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudMNK1*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -78529,6 +79581,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudMNK1*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudMNK1*
       name: this
@@ -78787,6 +79845,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudNIN0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudNIN0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -78842,6 +79906,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudNIN0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudNIN0*
       name: this
@@ -79100,6 +80170,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudNIN1*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudNIN1*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -79155,6 +80231,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudNIN1*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudNIN1*
       name: this
@@ -79436,6 +80518,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudRDM0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRDM0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -79491,6 +80579,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRDM0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudRDM0*
       name: this
@@ -79749,6 +80843,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudRRP0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRRP0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -79804,6 +80904,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRRP0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudRRP0*
       name: this
@@ -80062,6 +81168,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudRRP1*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRRP1*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -80117,6 +81229,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRRP1*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudRRP1*
       name: this
@@ -80375,6 +81493,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudSAM0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSAM0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -80430,6 +81554,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSAM0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSAM0*
       name: this
@@ -80688,6 +81818,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudSAM1*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSAM1*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -80743,6 +81879,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSAM1*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSAM1*
       name: this
@@ -81001,6 +82143,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudGFF0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudGFF0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -81056,6 +82204,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudGFF0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudGFF0*
       name: this
@@ -81314,6 +82468,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudGFF1*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudGFF1*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -81369,6 +82529,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudGFF1*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudGFF1*
       name: this
@@ -81647,6 +82813,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudWHM0*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudWHM0*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -81702,6 +82874,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudWHM0*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudWHM0*
       name: this
@@ -82011,6 +83189,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJournalDetail*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJournalDetail*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -82066,6 +83250,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJournalDetail*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJournalDetail*
       name: this
@@ -82342,6 +83532,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJournalResult*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJournalResult*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -82397,6 +83593,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonJournalResult*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJournalResult*
       name: this
@@ -82695,6 +83897,12 @@ structs:
     parameters:
     - type: Client::UI::AddonLookingForGroupDetail*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLookingForGroupDetail*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -82750,6 +83958,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonLookingForGroupDetail*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonLookingForGroupDetail*
       name: this
@@ -83131,6 +84345,12 @@ structs:
     parameters:
     - type: Client::UI::AddonLotteryDaily*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLotteryDaily*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -83186,6 +84406,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonLotteryDaily*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonLotteryDaily*
       name: this
@@ -83435,6 +84661,12 @@ structs:
     parameters:
     - type: Client::UI::AddonLovmPaletteEdit*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -83490,6 +84722,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonLovmPaletteEdit*
       name: this
@@ -83761,6 +84999,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMacro*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMacro*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -83816,6 +85060,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonMacro*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMacro*
       name: this
@@ -84077,6 +85327,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMaterializeDialog*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMaterializeDialog*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -84132,6 +85388,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonMaterializeDialog*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMaterializeDialog*
       name: this
@@ -84378,6 +85640,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMateriaRetrieveDialog*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMateriaRetrieveDialog*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -84433,6 +85701,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonMateriaRetrieveDialog*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMateriaRetrieveDialog*
       name: this
@@ -84685,6 +85959,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMinionMountBase*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -84740,6 +86020,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMinionMountBase*
       name: this
@@ -85004,6 +86290,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMiragePrismPrismBox*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMiragePrismPrismBox*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -85059,6 +86351,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonMiragePrismPrismBox*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMiragePrismPrismBox*
       name: this
@@ -85308,6 +86606,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMJIMinionNoteBook*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -85363,6 +86667,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMJIMinionNoteBook*
       name: this
@@ -85621,6 +86931,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMobHunt*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMobHunt*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -85676,6 +86992,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonMobHunt*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMobHunt*
       name: this
@@ -85934,6 +87256,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMYCWarResultNotebook*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMYCWarResultNotebook*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -85989,6 +87317,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonMYCWarResultNotebook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMYCWarResultNotebook*
       name: this
@@ -86247,6 +87581,12 @@ structs:
     parameters:
     - type: Client::UI::AddonNamePlate*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonNamePlate*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -86302,6 +87642,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonNamePlate*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonNamePlate*
       name: this
@@ -86558,6 +87904,12 @@ structs:
     parameters:
     - type: Client::UI::AddonNeedGreed*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonNeedGreed*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -86613,6 +87965,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonNeedGreed*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonNeedGreed*
       name: this
@@ -86862,6 +88220,12 @@ structs:
     parameters:
     - type: Client::UI::AddonOrnamentNoteBook*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -86917,6 +88281,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonOrnamentNoteBook*
       name: this
@@ -87243,6 +88613,12 @@ structs:
     parameters:
     - type: Client::UI::AddonPartyList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonPartyList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -87298,6 +88674,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonPartyList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonPartyList*
       name: this
@@ -87547,6 +88929,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRaceChocoboResult*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRaceChocoboResult*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -87602,6 +88990,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRaceChocoboResult*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRaceChocoboResult*
       name: this
@@ -87894,6 +89288,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRaidFinder*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRaidFinder*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -87949,6 +89349,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRaidFinder*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRaidFinder*
       name: this
@@ -88351,6 +89757,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRecipeNote*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRecipeNote*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -88406,6 +89818,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRecipeNote*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRecipeNote*
       name: this
@@ -88659,6 +90077,12 @@ structs:
     parameters:
     - type: Client::UI::AddonReconstructionBox*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonReconstructionBox*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -88714,6 +90138,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonReconstructionBox*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonReconstructionBox*
       name: this
@@ -89056,6 +90486,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRelicNoteBook*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRelicNoteBook*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -89111,6 +90547,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRelicNoteBook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRelicNoteBook*
       name: this
@@ -89390,6 +90832,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRepair*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRepair*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -89445,6 +90893,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRepair*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRepair*
       name: this
@@ -89763,6 +91217,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRequest*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRequest*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -89818,6 +91278,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRequest*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRequest*
       name: this
@@ -90077,6 +91543,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerItemTransferList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -90132,6 +91604,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerItemTransferList*
       name: this
@@ -90390,6 +91868,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerItemTransferProgress*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferProgress*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -90445,6 +91929,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferProgress*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerItemTransferProgress*
       name: this
@@ -90691,6 +92181,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -90746,6 +92242,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerList*
       name: this
@@ -91019,6 +92521,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerSell*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerSell*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -91074,6 +92582,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerSell*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerSell*
       name: this
@@ -91326,6 +92840,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerTaskAsk*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerTaskAsk*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -91381,6 +92901,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerTaskAsk*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerTaskAsk*
       name: this
@@ -91627,6 +93153,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerTaskList*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerTaskList*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -91682,6 +93214,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerTaskList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerTaskList*
       name: this
@@ -91934,6 +93472,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerTaskResult*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerTaskResult*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -91989,6 +93533,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerTaskResult*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerTaskResult*
       name: this
@@ -92247,6 +93797,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSalvageDialog*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -92302,6 +93858,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSalvageDialog*
       name: this
@@ -92558,6 +94120,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSalvageItemSelector*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSalvageItemSelector*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -92613,6 +94181,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageItemSelector*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSalvageItemSelector*
       name: this
@@ -92866,6 +94440,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSatisfactionSupply*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSatisfactionSupply*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -92921,6 +94501,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionSupply*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSatisfactionSupply*
       name: this
@@ -93170,6 +94756,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSelectIconString*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectIconString*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -93225,6 +94817,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSelectIconString*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSelectIconString*
       name: this
@@ -93477,6 +95075,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSelectOk*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectOk*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -93532,6 +95136,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSelectOk*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSelectOk*
       name: this
@@ -93781,6 +95391,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSelectString*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectString*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -93836,6 +95452,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSelectString*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSelectString*
       name: this
@@ -94130,6 +95752,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSelectYesno*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectYesno*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -94185,6 +95813,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSelectYesno*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSelectYesno*
       name: this
@@ -94434,6 +96068,12 @@ structs:
     parameters:
     - type: Client::UI::AddonShopCardDialog*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonShopCardDialog*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -94489,6 +96129,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonShopCardDialog*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonShopCardDialog*
       name: this
@@ -94753,6 +96399,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSocial*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSocial*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -94808,6 +96460,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSocial*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSocial*
       name: this
@@ -95168,6 +96826,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSynthesis*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSynthesis*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -95223,6 +96887,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonSynthesis*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSynthesis*
       name: this
@@ -95511,6 +97181,12 @@ structs:
     parameters:
     - type: Client::UI::AddonTalk*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTalk*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -95566,6 +97242,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonTalk*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonTalk*
       name: this
@@ -95887,6 +97569,12 @@ structs:
     parameters:
     - type: Client::UI::AddonTeleport*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTeleport*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -95942,6 +97630,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonTeleport*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonTeleport*
       name: this
@@ -96200,6 +97894,12 @@ structs:
     parameters:
     - type: Client::UI::AddonWeeklyBingo*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonWeeklyBingo*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -96255,6 +97955,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonWeeklyBingo*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonWeeklyBingo*
       name: this
@@ -108567,6 +110273,16 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
+- type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: ContainerInterface::IStdList::Node<Client::Game::UI::MarkerInfo>
   name: Node
   namespace: ContainerInterface
@@ -108651,16 +110367,6 @@ structs:
   union: False
   fields:
   - type: StdMap<unsigned __int64, Client::LayoutEngine::ILayoutInstance*, Helper::IStaticMemorySpace::Default>
-    name: WithOps
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
-  name: StdMap`2
-  namespace: ''
-  union: False
-  fields:
-  - type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   virtual_functions: []
@@ -109450,6 +111156,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionBar*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionBar*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -109505,6 +111217,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonActionBar*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionBar*
       name: this
@@ -109810,6 +111528,12 @@ structs:
     parameters:
     - type: Client::UI::AddonWeeklyPuzzle*
       name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonWeeklyPuzzle*
+      name: this
   - name: CheckWindowCollisionAtCoords
     offset: 368
     return_type: byte
@@ -109865,6 +111589,12 @@ structs:
   - name: OnMouseOut
     offset: 496
     return_type: void
+    parameters:
+    - type: Client::UI::AddonWeeklyPuzzle*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
     parameters:
     - type: Client::UI::AddonWeeklyPuzzle*
       name: this
@@ -111528,6 +113258,10 @@ structs:
       name: this
     - type: unsigned int
       name: mapId
+    - type: unsigned int
+      name: territoryId
+    - type: byte
+      name: a4
   - signature: E8 ?? ?? ?? ?? 49 8B 45 28 48 8D 8C 24
     return_type: void
     name: OpenMap
@@ -113100,26 +114834,6 @@ structs:
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
-- type: Client::Game::Event::DirectorModule
-  name: DirectorModule
-  namespace: Client.Game.Event
-  union: False
-  size: 160
-  fields:
-  - type: Client::Game::Event::ModuleBase
-    name: ModuleBase
-    offset: 0
-  - type: StdVector<Client::Game::Event::Director*>
-    name: DirectorList
-    offset: 64
-  - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>
-    name: DirectorFactories
-    offset: 88
-  - type: Client::Game::InstanceContent::ContentDirector*
-    name: ActiveContentDirector
-    offset: 152
-  virtual_functions: []
-  member_functions: []
 - type: Client::Game::Event::EventHandler
   name: EventHandler
   namespace: Client.Game.Event
@@ -113202,44 +114916,6 @@ structs:
     - type: Client::Game::Event::EventHandler*
       name: this
   member_functions: []
-- type: Client::Game::Event::EventHandlerModule
-  name: EventHandlerModule
-  namespace: Client.Game.Event
-  union: False
-  size: 192
-  fields:
-  - type: Client::Game::Event::ModuleBase
-    name: ModuleBase
-    offset: 0
-  - type: StdMap<unsigned int, Client::Game::Event::EventHandler*>
-    name: EventHandlerMap
-    offset: 64
-  - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>
-    name: EventHandlerFactories
-    offset: 80
-  - type: Client::Game::Event::CraftEventHandler*
-    name: CraftEventHandler
-    offset: 96
-  - type: Client::Game::Event::EventHandler*
-    name: CraftLeveEventHandler
-    offset: 104
-  - type: Client::Game::Event::EventHandler*
-    name: FishingEventHandler
-    offset: 112
-  - type: Client::Game::Event::EventHandler*
-    name: ExitRangeEventHandler
-    offset: 120
-  - type: Client::Game::Event::EventHandler*
-    name: TripleTriadEventHandler
-    offset: 128
-  - type: Client::Game::Event::EventHandler*
-    name: GroupPoseEventHandler
-    offset: 136
-  - type: Client::Game::Event::EventHandler*
-    name: IdleCameraEventHandler
-    offset: 144
-  virtual_functions: []
-  member_functions: []
 - type: Client::Game::Event::EventSceneModule
   name: EventSceneModule
   namespace: Client.Game.Event
@@ -113263,195 +114939,6 @@ structs:
     offset: 496
   virtual_functions: []
   member_functions: []
-- type: Client::Game::Event::LuaActorModule
-  name: LuaActorModule
-  namespace: Client.Game.Event
-  union: False
-  size: 80
-  fields:
-  - type: Client::Game::Event::ModuleBase
-    name: ModuleBase
-    offset: 0
-  - type: StdMap<__int64, Client::Game::Event::LuaActor>
-    name: ActorMap
-    offset: 64
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Event::LuaEventHandler
-  name: LuaEventHandler
-  namespace: Client.Game.Event
-  union: False
-  size: 816
-  fields:
-  - type: Client::Game::Event::EventHandler
-    name: EventHandler
-    offset: 0
-  - type: Common::Lua::LuaState*
-    name: LuaState
-    offset: 528
-  - type: Client::System::String::Utf8String
-    name: LuaClass
-    offset: 576
-  - type: Client::System::String::Utf8String
-    name: LuaKey
-    offset: 680
-  virtual_functions:
-  - name: GetTitle
-    offset: 1576
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetDescription
-    offset: 1992
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2000
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2008
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2016
-    return_type: byte
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  - name: GetEventItemId
-    offset: 2032
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  - name: GetObjectives
-    offset: 2048
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  member_functions: []
-- type: Client::Game::Event::QuestEventHandler
-  name: QuestEventHandler
-  namespace: Client.Game.Event
-  union: False
-  size: 1552
-  fields:
-  - type: Client::Game::Event::LuaEventHandler
-    name: LuaEventHandler
-    offset: 0
-  - type: unsigned __int16
-    name: QuestId
-    offset: 824
-  - type: Client::System::String::Utf8String
-    name: Title
-    offset: 832
-  virtual_functions:
-  - name: GetTitle
-    offset: 1576
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetDescription
-    offset: 1992
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2000
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2008
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2016
-    return_type: byte
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  - name: GetEventItemId
-    offset: 2032
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  - name: GetObjectives
-    offset: 2048
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  member_functions:
-  - signature: 4C 8B DC 55 57 41 54 41 55 48 81 EC
-    return_type: void
-    name: GetTodoArgs
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::Game::Character::BattleChara*
-      name: localPlayer
-    - type: byte
-      name: idx
-    - type: unsigned int*
-      name: arg0
-    - type: unsigned int*
-      name: arg1
-    - type: unsigned int*
-      name: arg2
-  - signature: E8 ?? ?? ?? ?? 41 88 07 45 33 D2
-    return_type: byte
-    name: IsTodoChecked
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::Game::Character::BattleChara*
-      name: localPlayer
-    - type: byte
-      name: idx
 - type: Client::Game::Character::Character
   name: Character
   namespace: Client.Game.Character
@@ -114021,6 +115508,44 @@ structs:
   - type: __int64
     name: Unk4
     offset: 15144
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>
+  name: LuaScriptLoader`1
+  namespace: Client.Game.Event
+  union: False
+  fields:
+  - type: Client::Game::Event::LuaScriptLoader
+    name: Loader
+    offset: 0
+  - type: Common::Lua::LuaState*
+    name: LuaState
+    offset: 8
+  - type: Client::Game::Event::LuaEventHandler*
+    name: Parent
+    offset: 16
+  - type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
+    name: Handles
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>
+  name: LuaScriptLoader`1
+  namespace: Client.Game.Event
+  union: False
+  fields:
+  - type: Client::Game::Event::LuaScriptLoader
+    name: Loader
+    offset: 0
+  - type: Common::Lua::LuaState*
+    name: LuaState
+    offset: 8
+  - type: Client::Game::Event::ModuleBase*
+    name: Parent
+    offset: 16
+  - type: StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
+    name: Handles
+    offset: 24
   virtual_functions: []
   member_functions: []
 - type: Component::Shell::ShellCommandModule
@@ -114769,62 +116294,120 @@ structs:
     - type: Client::Game::Event::CraftEventHandler*
       name: this
   member_functions: []
-- type: Client::Game::Event::Director
-  name: Director
+- type: Client::Game::Event::LuaEventHandler
+  name: LuaEventHandler
   namespace: Client.Game.Event
   union: False
-  size: 1208
+  size: 816
+  fields:
+  - type: Client::Game::Event::EventHandler
+    name: EventHandler
+    offset: 0
+  - type: Common::Lua::LuaState*
+    name: LuaState
+    offset: 528
+  - type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>
+    name: LuaScriptLoader
+    offset: 536
+  - type: Client::System::String::Utf8String
+    name: LuaClass
+    offset: 576
+  - type: Client::System::String::Utf8String
+    name: LuaKey
+    offset: 680
+  virtual_functions:
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+  member_functions: []
+- type: Client::Game::Event::ModuleBase
+  name: ModuleBase
+  namespace: Client.Game.Event
+  union: False
+  size: 64
+  fields:
+  - type: Common::Lua::LuaState*
+    name: LuaState
+    offset: 8
+  - type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>
+    name: LuaScriptLoader
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::QuestEventHandler
+  name: QuestEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1552
   fields:
   - type: Client::Game::Event::LuaEventHandler
     name: LuaEventHandler
     offset: 0
-  - type: Client::Game::Event::EventHandlerInfo*
-    name: EventHandlerInfo
-    offset: 816
-  - type: unsigned int
-    name: ContentId
+  - type: unsigned __int16
+    name: QuestId
     offset: 824
-  - type: byte
-    name: ContentFlags
-    offset: 828
-  - type: byte
-    name: Sequence
-    offset: 832
-  - type: byte
-    name: UnionData
-    offset: 834
-    size: 10
   - type: Client::System::String::Utf8String
     name: Title
-    offset: 848
-  - type: Client::System::String::Utf8String
-    name: Description
-    offset: 952
-  - type: Client::System::String::Utf8String
-    name: ReliefText
-    offset: 1056
-  - type: StdVector<Client::Game::Event::EventHandlerObjective>
-    name: Objectives
-    offset: 1176
-  - type: unsigned int
-    name: EventItemId
-    offset: 1200
+    offset: 832
   virtual_functions:
-  - name: PopulateMapMarkers
-    offset: 2136
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::Director*
-      name: this
-    - type: unsigned __int16
-      name: territoryTypeId
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: markerVector
   - name: GetTitle
     offset: 1576
     return_type: void
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -114832,7 +116415,7 @@ structs:
     offset: 1992
     return_type: void
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -114840,7 +116423,7 @@ structs:
     offset: 2000
     return_type: void
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -114848,7 +116431,7 @@ structs:
     offset: 2008
     return_type: int
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
     - type: int
       name: a2
@@ -114856,165 +116439,53 @@ structs:
     offset: 2016
     return_type: byte
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
   - name: GetEventItemId
     offset: 2032
     return_type: unsigned int
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
   - name: GetObjectives
     offset: 2048
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
   - name: GetRecommendedLevel
     offset: 2072
     return_type: int
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
-  member_functions: []
-- type: Client::Game::Event::EventFramework
-  name: EventFramework
-  namespace: Client.Game.Event
-  union: False
-  size: 15376
-  fields:
-  - type: Client::Game::Event::EventHandlerModule
-    name: EventHandlerModule
-    offset: 0
-  - type: Client::Game::Event::DirectorModule
-    name: DirectorModule
-    offset: 192
-  - type: Client::Game::Event::LuaActorModule
-    name: LuaActorModule
-    offset: 352
-  - type: Client::Game::Event::EventSceneModule
-    name: EventSceneModule
-    offset: 432
-  - type: int
-    name: LoadState
-    offset: 13168
-  - type: Common::Lua::LuaState*
-    name: LuaState
-    offset: 13176
-  - type: Common::Lua::LuaThread
-    name: LuaThread
-    offset: 13184
-  - type: Client::Game::Event::EventState
-    name: EventState1
-    offset: 13272
-  - type: Client::Game::Event::EventState
-    name: EventState2
-    offset: 13368
-  virtual_functions: []
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 8D 43
-    return_type: Client::Game::InstanceContent::ContentDirector*
-    name: GetContentDirector
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 0F B6 98
-    return_type: Client::Game::InstanceContent::InstanceContentDirector*
-    name: GetInstanceContentDirector
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 0F B6 88
-    return_type: Client::Game::InstanceContent::PublicContentDirector*
-    name: GetPublicContentDirector
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 32 C9 0F B6 D9
-    return_type: Client::Game::Event::EventHandler*
-    name: GetEventHandlerById
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-    - type: unsigned int
-      name: id
-- type: Client::Game::Event::GoldSaucerDirector
-  name: GoldSaucerDirector
-  namespace: Client.Game.Event
-  union: False
-  size: 1656
-  fields:
-  - type: Client::Game::Event::Director
-    name: Director
-    offset: 0
-  virtual_functions:
-  - name: GetTitle
-    offset: 1576
+  - signature: 4C 8B DC 55 57 41 54 41 55 48 81 EC
     return_type: void
+    name: GetTodoArgs
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetDescription
-    offset: 1992
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2000
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2008
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2016
+    - type: Client::Game::Character::BattleChara*
+      name: localPlayer
+    - type: byte
+      name: idx
+    - type: unsigned int*
+      name: arg0
+    - type: unsigned int*
+      name: arg1
+    - type: unsigned int*
+      name: arg2
+  - signature: E8 ?? ?? ?? ?? 41 88 07 45 33 D2
     return_type: byte
+    name: IsTodoChecked
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
-  - name: GetEventItemId
-    offset: 2032
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-  - name: GetObjectives
-    offset: 2048
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-  - name: PopulateMapMarkers
-    offset: 2136
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-    - type: unsigned __int16
-      name: a2
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: a3
-  member_functions: []
+    - type: Client::Game::Character::BattleChara*
+      name: localPlayer
+    - type: byte
+      name: idx
 - type: Client::Game::Character::BattleChara
   name: BattleChara
   namespace: Client.Game.Character
@@ -115982,6 +117453,263 @@ structs:
     - type: int
       name: a2
   member_functions: []
+- type: Client::Game::Event::Director
+  name: Director
+  namespace: Client.Game.Event
+  union: False
+  size: 1208
+  fields:
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
+    offset: 0
+  - type: Client::Game::Event::EventHandlerInfo*
+    name: EventHandlerInfo
+    offset: 816
+  - type: unsigned int
+    name: ContentId
+    offset: 824
+  - type: byte
+    name: ContentFlags
+    offset: 828
+  - type: byte
+    name: Sequence
+    offset: 832
+  - type: byte
+    name: UnionData
+    offset: 834
+    size: 10
+  - type: Client::System::String::Utf8String
+    name: Title
+    offset: 848
+  - type: Client::System::String::Utf8String
+    name: Description
+    offset: 952
+  - type: Client::System::String::Utf8String
+    name: ReliefText
+    offset: 1056
+  - type: StdVector<Client::Game::Event::EventHandlerObjective>
+    name: Objectives
+    offset: 1176
+  - type: unsigned int
+    name: EventItemId
+    offset: 1200
+  virtual_functions:
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: markerVector
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+  member_functions: []
+- type: Client::Game::Event::DirectorModule
+  name: DirectorModule
+  namespace: Client.Game.Event
+  union: False
+  size: 160
+  fields:
+  - type: Client::Game::Event::ModuleBase
+    name: ModuleBase
+    offset: 0
+  - type: StdVector<Client::Game::Event::Director*>
+    name: DirectorList
+    offset: 64
+  - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>
+    name: DirectorFactories
+    offset: 88
+  - type: Client::Game::InstanceContent::ContentDirector*
+    name: ActiveContentDirector
+    offset: 152
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::EventHandlerModule
+  name: EventHandlerModule
+  namespace: Client.Game.Event
+  union: False
+  size: 192
+  fields:
+  - type: Client::Game::Event::ModuleBase
+    name: ModuleBase
+    offset: 0
+  - type: StdMap<unsigned int, Client::Game::Event::EventHandler*>
+    name: EventHandlerMap
+    offset: 64
+  - type: StdMap<unsigned __int16, StdPair<__int64, __int64>>
+    name: EventHandlerFactories
+    offset: 80
+  - type: Client::Game::Event::CraftEventHandler*
+    name: CraftEventHandler
+    offset: 96
+  - type: Client::Game::Event::EventHandler*
+    name: CraftLeveEventHandler
+    offset: 104
+  - type: Client::Game::Event::EventHandler*
+    name: FishingEventHandler
+    offset: 112
+  - type: Client::Game::Event::EventHandler*
+    name: ExitRangeEventHandler
+    offset: 120
+  - type: Client::Game::Event::EventHandler*
+    name: TripleTriadEventHandler
+    offset: 128
+  - type: Client::Game::Event::EventHandler*
+    name: GroupPoseEventHandler
+    offset: 136
+  - type: Client::Game::Event::EventHandler*
+    name: IdleCameraEventHandler
+    offset: 144
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::GoldSaucerDirector
+  name: GoldSaucerDirector
+  namespace: Client.Game.Event
+  union: False
+  size: 1656
+  fields:
+  - type: Client::Game::Event::Director
+    name: Director
+    offset: 0
+  virtual_functions:
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: a3
+  member_functions: []
+- type: Client::Game::Event::LuaActorModule
+  name: LuaActorModule
+  namespace: Client.Game.Event
+  union: False
+  size: 80
+  fields:
+  - type: Client::Game::Event::ModuleBase
+    name: ModuleBase
+    offset: 0
+  - type: StdMap<__int64, Client::Game::Event::LuaActor>
+    name: ActorMap
+    offset: 64
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::InstanceContent::ContentDirector
   name: ContentDirector
   namespace: Client.Game.InstanceContent
@@ -116780,6 +118508,67 @@ structs:
     - type: StdVector<Client::Game::UI::MapMarkerData>*
       name: a3
   member_functions: []
+- type: Client::Game::Event::EventFramework
+  name: EventFramework
+  namespace: Client.Game.Event
+  union: False
+  size: 15376
+  fields:
+  - type: Client::Game::Event::EventHandlerModule
+    name: EventHandlerModule
+    offset: 0
+  - type: Client::Game::Event::DirectorModule
+    name: DirectorModule
+    offset: 192
+  - type: Client::Game::Event::LuaActorModule
+    name: LuaActorModule
+    offset: 352
+  - type: Client::Game::Event::EventSceneModule
+    name: EventSceneModule
+    offset: 432
+  - type: int
+    name: LoadState
+    offset: 13168
+  - type: Common::Lua::LuaState*
+    name: LuaState
+    offset: 13176
+  - type: Common::Lua::LuaThread
+    name: LuaThread
+    offset: 13184
+  - type: Client::Game::Event::EventState
+    name: EventState1
+    offset: 13272
+  - type: Client::Game::Event::EventState
+    name: EventState2
+    offset: 13368
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 8D 43
+    return_type: Client::Game::InstanceContent::ContentDirector*
+    name: GetContentDirector
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B6 98
+    return_type: Client::Game::InstanceContent::InstanceContentDirector*
+    name: GetInstanceContentDirector
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 0F B6 88
+    return_type: Client::Game::InstanceContent::PublicContentDirector*
+    name: GetPublicContentDirector
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 32 C9 0F B6 D9
+    return_type: Client::Game::Event::EventHandler*
+    name: GetEventHandlerById
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: unsigned int
+      name: id
 - type: Client::Game::InstanceContent::InstanceContentDeepDungeon
   name: InstanceContentDeepDungeon
   namespace: Client.Game.InstanceContent
