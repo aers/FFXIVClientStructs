@@ -9,6 +9,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13", [1, 457])]
 public unsafe partial struct AtkComponentNode {
     [FieldOffset(0xB0)] public AtkComponentBase* Component;
+
+    // 7.0 inlines this ctor
+    public void Ctor() {
+        AtkResNode.Ctor();
+        VirtualTable = StaticVirtualTablePointer;
+    }
 }

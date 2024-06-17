@@ -35,10 +35,10 @@ public sealed partial class InteropGenerator {
         if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.VirtualTableAttribute, out AttributeData? virtualTableAttribute)) {
             if (virtualTableAttribute.TryGetConstructorArgument(0, out string? signature)) {
                 if (virtualTableAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
-                    virtualTableAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets)) {
+                    virtualTableAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<ushort>? multipleOffsets)) {
                     virtualTableSignatureInfo = new SignatureInfo(signature, multipleOffsets.Value);
-                } else if (virtualTableAttribute.TryGetConstructorArgument(1, out byte? singleOffset)) {
-                    ImmutableArray<byte> values = [singleOffset.Value];
+                } else if (virtualTableAttribute.TryGetConstructorArgument(1, out ushort? singleOffset)) {
+                    ImmutableArray<ushort> values = [singleOffset.Value];
                     virtualTableSignatureInfo = new SignatureInfo(signature, values);
                 }
             }
@@ -115,7 +115,7 @@ public sealed partial class InteropGenerator {
 
             // check for one of the method body generation attributes
             if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.MemberFunctionAttribute, out AttributeData? mfAttribute)) {
-                ImmutableArray<byte> relativeOffsets = ImmutableArray<byte>.Empty;
+                ImmutableArray<ushort> relativeOffsets = ImmutableArray<ushort>.Empty;
 
                 // get signature 
                 if (!mfAttribute.TryGetConstructorArgument(0, out string? signature))
@@ -124,9 +124,9 @@ public sealed partial class InteropGenerator {
                 // if attribute has two arguments, it's either a single byte or an array, if neither, attribute is invalid
                 if (mfAttribute.ConstructorArguments.Length == 2) {
                     if (mfAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
-                        mfAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets))
+                        mfAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<ushort>? multipleOffsets))
                         relativeOffsets = multipleOffsets.Value;
-                    else if (mfAttribute.TryGetConstructorArgument(1, out byte? singleOffset))
+                    else if (mfAttribute.TryGetConstructorArgument(1, out ushort? singleOffset))
                         relativeOffsets = [singleOffset.Value];
                     else
                         continue;
@@ -159,12 +159,12 @@ public sealed partial class InteropGenerator {
                     !saAttribute.TryGetConstructorArgument(2, out bool? isPointer))
                     continue; // ignore malformed attribute
 
-                ImmutableArray<byte> relativeOffsets;
+                ImmutableArray<ushort> relativeOffsets;
 
                 if (saAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
-                    saAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<byte>? multipleOffsets)) {
+                    saAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<ushort>? multipleOffsets)) {
                     relativeOffsets = multipleOffsets.Value;
-                } else if (saAttribute.TryGetConstructorArgument(1, out byte? singleOffset)) {
+                } else if (saAttribute.TryGetConstructorArgument(1, out ushort? singleOffset)) {
                     relativeOffsets = [singleOffset.Value];
                 } else {
                     continue;

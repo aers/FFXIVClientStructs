@@ -3,7 +3,7 @@ using InteropGenerator.Helpers;
 
 namespace InteropGenerator.Models;
 
-internal sealed record SignatureInfo(string Signature, EquatableArray<byte> Offsets) {
+internal sealed record SignatureInfo(string Signature, EquatableArray<ushort> Offsets) {
     public string GetPaddedSignature() {
         int paddingNeeded = 8 - (Signature.Length / 3 + 1) % 8;
         if (paddingNeeded != 0) {
@@ -21,7 +21,7 @@ internal sealed record SignatureInfo(string Signature, EquatableArray<byte> Offs
         return Signature;
     }
 
-    public ImmutableArray<byte> GetRelCallAndJumpAdjustedOffset() {
+    public ImmutableArray<ushort> GetRelCallAndJumpAdjustedOffset() {
         // handle E8 and E9 jumps automatically
         if ((Offsets.Length == 0 &&
              Signature.StartsWith("E8")) ||

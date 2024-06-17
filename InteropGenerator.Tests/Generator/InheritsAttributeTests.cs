@@ -285,7 +285,7 @@ public class InheritsAttributeTests {
                                                {
                                                    public static class Addresses
                                                    {
-                                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new ushort[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                                    }
                                                    public static partial class Delegates
                                                    {
@@ -352,7 +352,7 @@ public class InheritsAttributeTests {
                                                {
                                                    public static class Addresses
                                                    {
-                                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new ushort[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                                    }
                                                    public static partial class Delegates
                                                    {
@@ -426,7 +426,7 @@ public class InheritsAttributeTests {
                                                {
                                                    public static class Addresses
                                                    {
-                                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new byte[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
+                                                       public static readonly global::InteropGenerator.Runtime.Address TestFunction = new global::InteropGenerator.Runtime.Address("BaseStruct.TestFunction", "AA BB CC DD ?? ?? ?? ?? AA BB ?? DD ?? ?? ?? ??", new ushort[] {}, new ulong[] {0x00000000DDCCBBAA, 0x00000000DD00BBAA}, new ulong[] {0x00000000FFFFFFFF, 0x00000000FF00FFFF}, 0);
                                                    }
                                                    public static partial class Delegates
                                                    {
@@ -1696,7 +1696,7 @@ public class InheritsAttributeTests {
                                  {
                                      public static class Addresses
                                      {
-                                         public static readonly global::InteropGenerator.Runtime.Address BaseA_mf = new global::InteropGenerator.Runtime.Address("BaseA_A.BaseA_mf", "E8 ?? ?? ?? ?? ?? ?? ??", new byte[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                         public static readonly global::InteropGenerator.Runtime.Address BaseA_mf = new global::InteropGenerator.Runtime.Address("BaseA_A.BaseA_mf", "E8 ?? ?? ?? ?? ?? ?? ??", new ushort[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
                                      }
                                      [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                      public unsafe partial struct BaseA_AVirtualTable
@@ -1771,7 +1771,7 @@ public class InheritsAttributeTests {
                                    {
                                        public static class Addresses
                                        {
-                                           public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("MiddleA.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", new byte[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                           public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("MiddleA.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", new ushort[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
                                        }
                                        [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                        public unsafe partial struct MiddleAVirtualTable
@@ -1795,7 +1795,7 @@ public class InheritsAttributeTests {
                                  {
                                      public static class Addresses
                                      {
-                                         public static readonly global::InteropGenerator.Runtime.Address BaseB_mf = new global::InteropGenerator.Runtime.Address("BaseB.BaseB_mf", "E8 ?? ?? ?? ?? ?? ?? ??", new byte[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                         public static readonly global::InteropGenerator.Runtime.Address BaseB_mf = new global::InteropGenerator.Runtime.Address("BaseB.BaseB_mf", "E8 ?? ?? ?? ?? ?? ?? ??", new ushort[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
                                      }
                                      public static partial class Delegates
                                      {
@@ -1822,7 +1822,7 @@ public class InheritsAttributeTests {
                                  {
                                      public static class Addresses
                                      {
-                                         public static readonly global::InteropGenerator.Runtime.Address BaseC_sa = new global::InteropGenerator.Runtime.Address("BaseC.BaseC_sa", "E8 ?? ?? ?? ?? ?? ?? ??", new byte[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                         public static readonly global::InteropGenerator.Runtime.Address BaseC_sa = new global::InteropGenerator.Runtime.Address("BaseC.BaseC_sa", "E8 ?? ?? ?? ?? ?? ?? ??", new ushort[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
                                      }
                                      [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                      public unsafe partial struct BaseCVirtualTable
@@ -1857,7 +1857,7 @@ public class InheritsAttributeTests {
                                    {
                                        public static class Addresses
                                        {
-                                           public static readonly global::InteropGenerator.Runtime.Address MiddleC_mf = new global::InteropGenerator.Runtime.Address("MiddleC.MiddleC_mf", "E8 ?? ?? ?? ?? ?? ?? ??", new byte[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                           public static readonly global::InteropGenerator.Runtime.Address MiddleC_mf = new global::InteropGenerator.Runtime.Address("MiddleC.MiddleC_mf", "E8 ?? ?? ?? ?? ?? ?? ??", new ushort[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
                                        }
                                        public static partial class Delegates
                                        {

@@ -17,11 +17,11 @@ namespace InteropGenerator.Runtime.Attributes;
 ///     avoid necessitating double pointer return values.
 /// </param>
 [AttributeUsage(AttributeTargets.Method)]
-public sealed class StaticAddressAttribute(string signature, byte[] relativeFollowOffsets, bool isPointer = false) : Attribute {
+public sealed class StaticAddressAttribute(string signature, ushort[] relativeFollowOffsets, bool isPointer = false) : Attribute {
 
-    public StaticAddressAttribute(string signature, byte relativeFollowOffset, bool isPointer = false) : this(signature, [relativeFollowOffset], isPointer) { }
+    public StaticAddressAttribute(string signature, ushort relativeFollowOffset, bool isPointer = false) : this(signature, [relativeFollowOffset], isPointer) { }
 
     public string Signature { get; } = signature;
-    public byte[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
+    public ushort[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
     public bool IsPointer { get; } = isPointer;
 }
