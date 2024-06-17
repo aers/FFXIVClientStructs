@@ -51,36 +51,30 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13")]
     public partial AtkResNode* CreateAtkNode(NodeType type);
 
-    // CreateAtkNode doesn't require an AtkUldManager object to actually be valid
     public static AtkResNode* CreateAtkNodeStatic(NodeType type) => MemberFunctionPointers.CreateAtkNode(null, type);
 
-    private static AtkResNode* CreateAtkNodeInternal(NodeType type) {
-        AtkUldManager* uldManager = stackalloc AtkUldManager[1];
-        return uldManager->CreateAtkNode(type);
-    }
-
     public static AtkResNode* CreateAtkResNode() {
-        return CreateAtkNodeInternal(NodeType.Res);
+        return CreateAtkNodeStatic(NodeType.Res);
     }
 
     public static AtkImageNode* CreateAtkImageNode() {
-        return (AtkImageNode*)CreateAtkNodeInternal(NodeType.Image);
+        return (AtkImageNode*)CreateAtkNodeStatic(NodeType.Image);
     }
 
     public static AtkTextNode* CreateAtkTextNode() {
-        return (AtkTextNode*)CreateAtkNodeInternal(NodeType.Text);
+        return (AtkTextNode*)CreateAtkNodeStatic(NodeType.Text);
     }
 
     public static AtkNineGridNode* CreateAtkNineGridNode() {
-        return (AtkNineGridNode*)CreateAtkNodeInternal(NodeType.NineGrid);
+        return (AtkNineGridNode*)CreateAtkNodeStatic(NodeType.NineGrid);
     }
 
     public static AtkCounterNode* CreateAtkCounterNode() {
-        return (AtkCounterNode*)CreateAtkNodeInternal(NodeType.Counter);
+        return (AtkCounterNode*)CreateAtkNodeStatic(NodeType.Counter);
     }
 
     public static AtkCollisionNode* CreateAtkCollisionNode() {
-        return (AtkCollisionNode*)CreateAtkNodeInternal(NodeType.Collision);
+        return (AtkCollisionNode*)CreateAtkNodeStatic(NodeType.Collision);
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 44 24 ?? 41 8B CF")]
