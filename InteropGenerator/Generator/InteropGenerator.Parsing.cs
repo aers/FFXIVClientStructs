@@ -319,7 +319,7 @@ public sealed partial class InteropGenerator {
         using ImmutableArrayBuilder<PropertyInfo> publicPropertiesBuilder = new();
 
         foreach (IPropertySymbol propertySymbol in structSymbol.GetMembers().OfType<IPropertySymbol>()) {
-            if(propertySymbol.DeclaredAccessibility != Accessibility.Public ||
+            if (propertySymbol.DeclaredAccessibility != Accessibility.Public ||
                propertySymbol.IsIndexer) {
                 continue;
             }
@@ -334,9 +334,9 @@ public sealed partial class InteropGenerator {
                 propertySymbol.SetMethod is not null,
                 obsoleteInfo
             );
-            
+
             publicPropertiesBuilder.Add(propertyInfo);
-            
+
             token.ThrowIfCancellationRequested();
         }
 

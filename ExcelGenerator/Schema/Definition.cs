@@ -1,4 +1,4 @@
-﻿namespace ExcelGenerator.Schema;
+namespace ExcelGenerator.Schema;
 
 public class Sheet(string name) {
     public string Name { get; set; } = name;

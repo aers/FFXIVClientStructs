@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using ExcelGenerator.Schema;
 using Lumina.Data.Structs.Excel;
 
@@ -16,7 +16,7 @@ public abstract class BaseGenerator(Field field, List<ExcelColumnDefinition> col
     public virtual void WriteFields(StringBuilder sb) { }
 
     public virtual void WriteStructs(StringBuilder sb) { }
-    
+
     public virtual int ConsumedColumnCount() => Util.GetFieldCount(Field);
 
     public virtual int ConsumedFieldCount() => 1;

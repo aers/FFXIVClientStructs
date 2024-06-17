@@ -1,4 +1,4 @@
-﻿using ExcelGenerator.Schema.ExdSchema;
+using ExcelGenerator.Schema.ExdSchema;
 using YamlDotNet.Serialization;
 
 namespace ExcelGenerator.Schema;
@@ -29,7 +29,7 @@ public class Deserializer {
             return scalar;
         }
 
-        if (field is { Type: YamlFieldType.Array, Fields.Count: 0 } or {Type: YamlFieldType.Array, Fields:[{Type: not YamlFieldType.Array}]}) {
+        if (field is { Type: YamlFieldType.Array, Fields.Count: 0 } or { Type: YamlFieldType.Array, Fields: [{ Type: not YamlFieldType.Array }] }) {
             var array = new ArrayField(field.Name, field.Count);
             if (field.Targets.Count > 0)
                 array.Remarks.AddRange(field.Targets);

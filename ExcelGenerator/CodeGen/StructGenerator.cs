@@ -36,7 +36,7 @@ public class StructGenerator : BaseGenerator {
             sb.AppendLine("[GenerateInterop]");
         sb.AppendLine($"[StructLayout(LayoutKind.Explicit, Size = 0x{_structSize:X2})]");
         sb.AppendLine($"public partial struct {FieldName}Struct {{");
-        
+
         var fieldsBuilder = new StringBuilder();
         var structsBuilder = new StringBuilder();
 
