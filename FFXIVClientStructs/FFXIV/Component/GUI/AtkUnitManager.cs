@@ -31,7 +31,7 @@ public unsafe partial struct AtkUnitManager {
     public partial bool SetAddonVisibility(ushort addonId, bool visible);
 
     [VirtualFunction(10)]
-    public partial void RefreshAddon(AtkUnitBase* addon, uint valueCount, AtkValue* values);
+    public partial bool RefreshAddon(AtkUnitBase* addon, uint valueCount, AtkValue* values);
 
     [VirtualFunction(11)]
     public partial void AddonRequestUpdateById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
