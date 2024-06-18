@@ -5388,7 +5388,7 @@ structs:
       name: visible
   - name: RefreshAddon
     offset: 80
-    return_type: void
+    return_type: byte
     parameters:
     - type: Component::GUI::AtkUnitManager*
       name: this
@@ -30024,7 +30024,7 @@ structs:
       name: a3
   - name: RefreshAddon
     offset: 80
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::RaptureAtkUnitManager*
       name: this
@@ -52764,7 +52764,7 @@ structs:
       name: values
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -53641,7 +53641,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionBarBase*
       name: this
@@ -53976,7 +53976,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionBarX*
       name: this
@@ -54373,7 +54373,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionCross*
       name: this
@@ -54709,7 +54709,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionCrossEditor*
       name: this
@@ -55063,7 +55063,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionDoubleCrossBase*
       name: this
@@ -55454,7 +55454,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionMenu*
       name: this
@@ -55770,7 +55770,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonAdventureNoteBook*
       name: this
@@ -56093,7 +56093,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonAetherCurrent*
       name: this
@@ -56428,7 +56428,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonAOZNotebook*
       name: this
@@ -56754,7 +56754,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonArmouryBoard*
       name: this
@@ -57083,7 +57083,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonBank*
       name: this
@@ -57477,7 +57477,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonBannerEditor*
       name: this
@@ -57800,7 +57800,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonBuddy*
       name: this
@@ -58130,7 +58130,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCastBar*
       name: this
@@ -58459,7 +58459,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCharacter*
       name: this
@@ -58806,7 +58806,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCharacterClass*
       name: this
@@ -59130,7 +59130,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCharacterInspect*
       name: this
@@ -59449,7 +59449,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCharacterRepute*
       name: this
@@ -59786,7 +59786,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonChatLogPanel*
       name: this
@@ -60105,7 +60105,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonChocoboBreedTraining*
       name: this
@@ -60522,7 +60522,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonContentsFinder*
       name: this
@@ -60859,7 +60859,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonContentsFinderConfirm*
       name: this
@@ -61211,7 +61211,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonContextIconMenu*
       name: this
@@ -61534,7 +61534,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonContextMenu*
       name: this
@@ -61853,7 +61853,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonCutSceneSelectString*
       name: this
@@ -62211,7 +62211,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonDtr*
       name: this
@@ -62536,7 +62536,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonEnemyList*
       name: this
@@ -62861,7 +62861,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonExp*
       name: this
@@ -63183,7 +63183,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFateProgress*
       name: this
@@ -63554,7 +63554,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFateReward*
       name: this
@@ -63880,7 +63880,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFieldMarker*
       name: this
@@ -64196,7 +64196,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFishGuide2*
       name: this
@@ -64530,7 +64530,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonFriendList*
       name: this
@@ -64942,7 +64942,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGathering*
       name: this
@@ -65258,7 +65258,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGatheringMasterpiece*
       name: this
@@ -65598,7 +65598,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGcArmyCapture*
       name: this
@@ -65959,7 +65959,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGcArmyExpedition*
       name: this
@@ -66275,7 +66275,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGcArmyExpeditionResult*
       name: this
@@ -66591,7 +66591,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGearSetList*
       name: this
@@ -66933,7 +66933,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGoldSaucerInfo*
       name: this
@@ -67288,7 +67288,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGrandCompanySupplyList*
       name: this
@@ -67607,7 +67607,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGrandCompanySupplyReward*
       name: this
@@ -67923,7 +67923,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoCardDeck*
       name: this
@@ -68295,7 +68295,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoCardList*
       name: this
@@ -68614,7 +68614,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoChocoboParam*
       name: this
@@ -68930,7 +68930,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoEditDeck*
       name: this
@@ -69264,7 +69264,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoEmj*
       name: this
@@ -69595,7 +69595,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoGeneral*
       name: this
@@ -69923,7 +69923,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGSInfoMinionBattle*
       name: this
@@ -70311,7 +70311,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonGuildLeve*
       name: this
@@ -70633,7 +70633,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonHudLayoutScreen*
       name: this
@@ -70949,7 +70949,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonHudLayoutWindow*
       name: this
@@ -71277,7 +71277,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonImage*
       name: this
@@ -71596,7 +71596,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventory*
       name: this
@@ -71928,7 +71928,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryBuddy*
       name: this
@@ -72259,7 +72259,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryEvent*
       name: this
@@ -72586,7 +72586,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryExpansion*
       name: this
@@ -72913,7 +72913,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryGrid*
       name: this
@@ -73232,7 +73232,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryLarge*
       name: this
@@ -73559,7 +73559,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryRetainer*
       name: this
@@ -73886,7 +73886,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonInventoryRetainerLarge*
       name: this
@@ -74207,7 +74207,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonItemInspectionList*
       name: this
@@ -74520,7 +74520,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonItemInspectionResult*
       name: this
@@ -74861,7 +74861,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonItemSearch*
       name: this
@@ -75213,7 +75213,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonItemSearchResult*
       name: this
@@ -75556,7 +75556,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHud*
       name: this
@@ -75881,7 +75881,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudACN0*
       name: this
@@ -76206,7 +76206,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSCH0*
       name: this
@@ -76531,7 +76531,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSMN0*
       name: this
@@ -76856,7 +76856,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSMN1*
       name: this
@@ -77181,7 +77181,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudAST0*
       name: this
@@ -77506,7 +77506,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudBLM0*
       name: this
@@ -77831,7 +77831,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudBRD0*
       name: this
@@ -78156,7 +78156,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudDNC0*
       name: this
@@ -78481,7 +78481,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudDNC1*
       name: this
@@ -78875,7 +78875,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudGNB0*
       name: this
@@ -79223,7 +79223,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudMNK0*
       name: this
@@ -79548,7 +79548,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudMNK1*
       name: this
@@ -79873,7 +79873,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudNIN0*
       name: this
@@ -80198,7 +80198,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudNIN1*
       name: this
@@ -80546,7 +80546,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudRDM0*
       name: this
@@ -80871,7 +80871,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudRRP0*
       name: this
@@ -81196,7 +81196,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudRRP1*
       name: this
@@ -81521,7 +81521,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSAM0*
       name: this
@@ -81846,7 +81846,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudSAM1*
       name: this
@@ -82171,7 +82171,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudGFF0*
       name: this
@@ -82496,7 +82496,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudGFF1*
       name: this
@@ -82841,7 +82841,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJobHudWHM0*
       name: this
@@ -83217,7 +83217,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJournalDetail*
       name: this
@@ -83560,7 +83560,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonJournalResult*
       name: this
@@ -83925,7 +83925,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonLookingForGroupDetail*
       name: this
@@ -84373,7 +84373,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonLotteryDaily*
       name: this
@@ -84689,7 +84689,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonLovmPaletteEdit*
       name: this
@@ -85027,7 +85027,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMacro*
       name: this
@@ -85355,7 +85355,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMaterializeDialog*
       name: this
@@ -85668,7 +85668,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMateriaRetrieveDialog*
       name: this
@@ -85987,7 +85987,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMinionMountBase*
       name: this
@@ -86318,7 +86318,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMiragePrismPrismBox*
       name: this
@@ -86634,7 +86634,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMJIMinionNoteBook*
       name: this
@@ -86959,7 +86959,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMobHunt*
       name: this
@@ -87284,7 +87284,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonMYCWarResultNotebook*
       name: this
@@ -87609,7 +87609,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonNamePlate*
       name: this
@@ -87932,7 +87932,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonNeedGreed*
       name: this
@@ -88248,7 +88248,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonOrnamentNoteBook*
       name: this
@@ -88641,7 +88641,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonPartyList*
       name: this
@@ -88957,7 +88957,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRaceChocoboResult*
       name: this
@@ -89316,7 +89316,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRaidFinder*
       name: this
@@ -89785,7 +89785,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRecipeNote*
       name: this
@@ -90105,7 +90105,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonReconstructionBox*
       name: this
@@ -90514,7 +90514,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRelicNoteBook*
       name: this
@@ -90860,7 +90860,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRepair*
       name: this
@@ -91245,7 +91245,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRequest*
       name: this
@@ -91571,7 +91571,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerItemTransferList*
       name: this
@@ -91896,7 +91896,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerItemTransferProgress*
       name: this
@@ -92209,7 +92209,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerList*
       name: this
@@ -92549,7 +92549,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerSell*
       name: this
@@ -92868,7 +92868,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerTaskAsk*
       name: this
@@ -93181,7 +93181,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerTaskList*
       name: this
@@ -93500,7 +93500,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonRetainerTaskResult*
       name: this
@@ -93825,7 +93825,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSalvageDialog*
       name: this
@@ -94148,7 +94148,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSalvageItemSelector*
       name: this
@@ -94468,7 +94468,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSatisfactionSupply*
       name: this
@@ -94784,7 +94784,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSelectIconString*
       name: this
@@ -95103,7 +95103,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSelectOk*
       name: this
@@ -95419,7 +95419,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSelectString*
       name: this
@@ -95780,7 +95780,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSelectYesno*
       name: this
@@ -96096,7 +96096,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonShopCardDialog*
       name: this
@@ -96427,7 +96427,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSocial*
       name: this
@@ -96854,7 +96854,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonSynthesis*
       name: this
@@ -97209,7 +97209,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonTalk*
       name: this
@@ -97597,7 +97597,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonTeleport*
       name: this
@@ -97922,7 +97922,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonWeeklyBingo*
       name: this
@@ -111184,7 +111184,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonActionBar*
       name: this
@@ -111556,7 +111556,7 @@ structs:
       name: a3
   - name: OnRefresh
     offset: 400
-    return_type: void
+    return_type: byte
     parameters:
     - type: Client::UI::AddonWeeklyPuzzle*
       name: this

@@ -18,11 +18,11 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
       - name: Install dependencies
         run: dotnet restore
       - name: Run CExporter
-        working-directory: ./ida
+        working-directory: ./
         run: dotnet run --project CExporter/CExporter.csproj -c Release
       - name: Check error txt file for content
         id: check_error

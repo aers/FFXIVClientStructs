@@ -13,7 +13,7 @@ public class Program {
             dir = dir.Parent!;
         }
         while (!dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
-            dir = dir.GetDirectories("ida/CExporter", SearchOption.AllDirectories).First().Parent!;
+            dir = dir.GetDirectories("ida", SearchOption.AllDirectories).FirstOrDefault() ?? dir.Parent!;
         }
 
         Exporter.ProcessTypes();

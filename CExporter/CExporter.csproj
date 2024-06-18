@@ -41,7 +41,7 @@
     <PackageReference Include="YamlDotNet" Version="15.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FFXIVClientStructs\FFXIVClientStructs.csproj" />
-    <ProjectReference Include="..\..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj" />
+    <ProjectReference Include="..\FFXIVClientStructs\FFXIVClientStructs.csproj" />
+    <ProjectReference Include="..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj" />
   </ItemGroup>
 </Project>
