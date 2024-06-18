@@ -101,7 +101,7 @@ public static class Util {
     public static int CalculateBitOffset(ExcelColumnDefinition def) {
         return CalculateBitOffset(def.Offset, def.Type);
     }
-	
+
     public static int CalculateBitOffset(int offset, ExcelColumnDataType type) {
         var bitOffset = offset * 8;
         return type switch {

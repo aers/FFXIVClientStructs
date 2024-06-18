@@ -49,7 +49,7 @@ public partial struct RaptureHotbarModule {
         /// Curiously, this value does not apply to macros as their substitution happens much earlier in the process.
         /// </remarks>
         [FieldOffset(0xBC)] public uint OriginalApparentActionId;
-        
+
         [Obsolete($"Renamed to {nameof(OriginalApparentActionId)}.", true)]
         [FieldOffset(0xBC)] public uint IconA;
 
@@ -61,7 +61,7 @@ public partial struct RaptureHotbarModule {
         /// where this field would be used.
         /// </summary>
         [FieldOffset(0xC0)] public uint ApparentActionId;
-        
+
         [Obsolete($"Renamed to {nameof(ApparentActionId)}.", true)]
         [FieldOffset(0xC0)] public uint IconB;
 
@@ -84,16 +84,16 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         /// <seealso cref="OriginalApparentActionId"/>
         [FieldOffset(0xC8)] public HotbarSlotType OriginalApparentSlotType;
-        
-        [Obsolete($"Renamed to {nameof(OriginalApparentSlotType)}.", true)] 
+
+        [Obsolete($"Renamed to {nameof(OriginalApparentSlotType)}.", true)]
         [FieldOffset(0xC8)] public uint IconTypeA;
-        
+
         /// <summary>
         /// The <see cref="HotbarSlotType"/> assigned to this hotbar slot for display purposes.
         /// </summary>
         /// <seealso cref="ApparentActionId"/>
         [FieldOffset(0xC9)] public HotbarSlotType ApparentSlotType;
-        
+
         [Obsolete($"Renamed to {nameof(ApparentSlotType)}.", true)]
         [FieldOffset(0xC9)] public uint IconTypeB;
 

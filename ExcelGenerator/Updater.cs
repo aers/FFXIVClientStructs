@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.IO.Compression;
 using System.Net.Http.Headers;
 using System.Text.Json.Nodes;
@@ -29,7 +29,7 @@ public class Updater : IDisposable {
     public string? TryUpdate() {
         if (!GetLatestRelease(out var release))
             return null;
-        
+
         var path = Path.Combine(_definitionRoot, release.Version);
         if (Directory.Exists(path) && Directory.GetFiles(path, "*.yml").Length > 0) {
             Console.WriteLine($"Lates Release Directory already exists: {path}");

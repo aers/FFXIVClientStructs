@@ -956,7 +956,7 @@ public class InheritsAttributeTests {
             code,
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task PublicPropertyInheritance() {
         const string code = """
@@ -998,7 +998,7 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
               code,
           ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
-    }    
+    }
 
     [Fact]
     public async Task PublicPropertyObsoleteInheritance() {
@@ -1041,8 +1041,8 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
               code,
           ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
-    }  
-    
+    }
+
     [Fact]
     public async Task PublicPropertyRefModifiersInheritance() {
         const string code = """
@@ -1081,8 +1081,8 @@ public class InheritsAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
               code,
           ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
-    }  
-    
+    }
+
     [Fact]
     public async Task StringOverloadsInheritance() {
         const string code = """

@@ -1,4 +1,4 @@
-﻿using YamlDotNet.Serialization;
+using YamlDotNet.Serialization;
 
 namespace ExcelGenerator.Schema.ExdSchema;
 

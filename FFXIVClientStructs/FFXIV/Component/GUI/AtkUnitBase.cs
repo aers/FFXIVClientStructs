@@ -301,7 +301,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void OnSetup(uint valueCount, AtkValue* values);
 
     [VirtualFunction(50)]
-    public partial void OnRefresh(uint valueCount, AtkValue* values);
+    public partial bool OnRefresh(uint valueCount, AtkValue* values);
 
     [VirtualFunction(51)]
     public partial void OnRequestedUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);

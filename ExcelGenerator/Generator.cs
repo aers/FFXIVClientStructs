@@ -1,8 +1,8 @@
+using System.Text;
 using ExcelGenerator.CodeGen;
 using ExcelGenerator.Schema;
 using Lumina;
 using Lumina.Data.Structs.Excel;
-using System.Text;
 
 namespace ExcelGenerator;
 
@@ -49,7 +49,7 @@ public sealed class Generator(string gamePath) : IDisposable {
 
         var columns = sheet.Columns.ToList();
         columns.Sort((c1, c2) => Util.CalculateBitOffset(c1).CompareTo(Util.CalculateBitOffset(c2)));
-        
+
         var generators = new List<BaseGenerator>();
         var colIndex = 0;
 
@@ -68,7 +68,7 @@ public sealed class Generator(string gamePath) : IDisposable {
 
         if (generators.Any(c => c is ArrayGenerator or StructGenerator))
             builder.AppendLine("[GenerateInterop]");
-        
+
         var structSize = columns[^1].Offset + Util.SizeOf(columns[^1].Type);
         structSize = (structSize + 3) & ~3; // align this up on 4
 

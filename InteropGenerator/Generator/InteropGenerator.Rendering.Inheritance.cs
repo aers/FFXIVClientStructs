@@ -78,7 +78,7 @@ public sealed partial class InteropGenerator {
         }
 
         token.ThrowIfCancellationRequested();
-        
+
         // inherited member functions
         foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
             if (!inheritedStruct.MemberFunctions.IsEmpty)
@@ -110,7 +110,7 @@ public sealed partial class InteropGenerator {
         }
 
         token.ThrowIfCancellationRequested();
-        
+
         // inherited public properties
         foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
             if (!inheritedStruct.ExtraInheritedStructInfo!.PublicProperties.IsEmpty)
@@ -136,7 +136,7 @@ public sealed partial class InteropGenerator {
 
         token.ThrowIfCancellationRequested();
     }
-    
+
     private static int ResolveInheritanceOrder(StructInfo structInfo, string path, int absoluteOffset, int curParentOffset, int index, ImmutableArray<StructInfo> inheritedStructs, ImmutableArrayBuilder<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, ref bool hasPrimaryVirtualFunctions) {
         var processed = 0;
         foreach (InheritanceInfo inheritanceInfo in structInfo.InheritedStructs) {
@@ -254,7 +254,7 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
         }
     }
-    
+
     private static void RenderInheritedPublicProperties(StructInfo inheritedStruct, string path, IndentedTextWriter writer) {
         foreach (PropertyInfo propertyInfo in inheritedStruct.ExtraInheritedStructInfo!.PublicProperties) {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{propertyInfo.Name}" />""");
