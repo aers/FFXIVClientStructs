@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Debug Generator": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\FFXIVClientStructs\\FFXIVClientStructs.csproj"
+    }
+  }
+}
