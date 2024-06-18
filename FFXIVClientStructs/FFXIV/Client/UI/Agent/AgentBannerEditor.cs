@@ -95,7 +95,7 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x2D0)] public int CloseDialogAddonId;
     [FieldOffset(0x2D4)] public bool HasDataChanged;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CE E8 ?? ?? ?? ?? 48 8B 8E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 48 8B 01 FF 50 58")]
     public partial void Save();
 
     [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 80 79 2C 00")]
