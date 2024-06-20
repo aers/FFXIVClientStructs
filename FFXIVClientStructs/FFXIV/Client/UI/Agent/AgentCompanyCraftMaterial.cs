@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-//Client::UI::Agent::AgentCompanyCraftMaterial
+// Client::UI::Agent::AgentCompanyCraftMaterial
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CompanyCraftMaterial)]
