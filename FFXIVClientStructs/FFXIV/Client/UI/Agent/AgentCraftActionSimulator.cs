@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-//Client::UI::Agent::AgentCraftActionSimulator
+// Client::UI::Agent::AgentCraftActionSimulator
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.CraftActionSimulator)]
