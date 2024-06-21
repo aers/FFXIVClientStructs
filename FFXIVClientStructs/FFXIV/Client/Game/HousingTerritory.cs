@@ -5,10 +5,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct HousingTerritory { // 6 vfuncs
     [VirtualFunction(6)]
-    public partial TerritoryType GetTerritoryType();
+    public partial HousingTerritoryType GetTerritoryType();
 }
 
-public enum TerritoryType {
+public enum HousingTerritoryType {
     Outdoor = 1,
     Indoor,
     Workshop
