@@ -44,10 +44,8 @@ public unsafe partial struct AddonPartyList {
     [FieldOffset(0x13DB)] public byte ChocoboCount; // or ChocoboSummoned?
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = Size)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
     public partial struct PartyListMemberStruct {
-        public const int Size = 0xF8;
-
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray10<Pointer<AtkComponentIconText>> _statusIcons;
         [FieldOffset(0x50)] public AtkComponentBase* PartyMemberComponent;
         [FieldOffset(0x58)] public AtkTextNode* IconBottomLeftText;
