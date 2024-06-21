@@ -16,4 +16,7 @@ public unsafe partial struct ExdModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 DD")]
     public static partial Item* GetItemRowById(uint itemId);
+
+    [MemberFunction("40 53 48 83 EC 20 0F B6 41 29")]
+    public static partial byte GetBannerConditionUnlockState(BannerCondition* row);
 }
