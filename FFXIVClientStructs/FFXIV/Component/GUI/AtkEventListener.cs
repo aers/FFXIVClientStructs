@@ -9,8 +9,8 @@ public unsafe partial struct AtkEventListener {
     public partial void Dtor(byte flags);
 
     [VirtualFunction(1)]
-    public partial void ReceiveGlobalEvent(AtkEventType eventType, int eventParam, AtkEvent* atkEvent, nint atkEventData = 0);
+    public partial void ReceiveGlobalEvent(AtkEventType eventType, int eventParam, AtkEvent* atkEvent, AtkEventData* atkEventData = null);
 
     [VirtualFunction(2)]
-    public partial void ReceiveEvent(AtkEventType eventType, int eventParam, AtkEvent* atkEvent, nint atkEventData = 0);
+    public partial void ReceiveEvent(AtkEventType eventType, int eventParam, AtkEvent* atkEvent, AtkEventData* atkEventData = null);
 }
