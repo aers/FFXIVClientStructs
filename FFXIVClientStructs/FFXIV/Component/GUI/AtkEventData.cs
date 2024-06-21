@@ -10,5 +10,5 @@ public struct AtkEventData {
 public unsafe struct AtkListItemData {
     [FieldOffset(0x00)] public AtkComponentListItemRenderer* ListItemRenderer;
     [FieldOffset(0x10)] public int SelectedIndex;
-    // [FieldOffset(0x16)] public int HoveredItemIndex3;
+    // [FieldOffset(0x16)] public ushort HoveredItemIndex3;
 }
