@@ -21,7 +21,7 @@ This script ingests the data.yml file in the same directory, and generates autom
 This support **Python3** and **IDA** only.
 
 #### Dependency installation:
-`pip install dacite pyyaml` or `python -m pip install dacite pyyaml` in whichever version of python you are currently using with IDA Pro.
+`pip install dacite pyyaml ruamel-yaml` or `python -m pip install dacite pyyaml ruamel-yaml` in whichever version of python you are currently using with IDA Pro.
 If you are familiar with Poetry, the `sigmaker` extras package will do the same.
 
 ## ffxiv_exdgetters.py
