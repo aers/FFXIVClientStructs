@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 // Common::Component::Excel::ExcelSheetInterface
 [GenerateInterop(isInherited: true)]
-[StructLayout(LayoutKind.Explicit, Size = 0x110)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public unsafe partial struct ExcelSheetInterface {
     [VirtualFunction(1)]
     public partial bool IsAnyPageBeingLoaded();
