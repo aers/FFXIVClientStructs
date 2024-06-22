@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.String;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentItemSearch
