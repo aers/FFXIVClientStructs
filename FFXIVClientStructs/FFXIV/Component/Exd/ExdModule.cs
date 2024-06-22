@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Component.Exd;
@@ -8,16 +9,16 @@ public unsafe partial struct ExdModule {
     [FieldOffset(0x20)] public ExcelModule* ExcelModule;
 
     [MemberFunction("40 53 48 83 EC 20 45 8B D0 4C 8B CA")]
-    public partial void* GetRowBySheetAndRowId(ExcelSheet* sheet, uint rowId);
+    public partial ExcelRow* GetRowBySheetAndRowId(ExcelSheet* sheet, uint rowId);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 40 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 41 8B F8")]
-    public partial void* GetRowBySheetAndRowIndex(ExcelSheet* sheet, uint rowIndex);
+    public partial ExcelRow* GetRowBySheetAndRowIndex(ExcelSheet* sheet, uint rowIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 11 33 C0")]
-    public partial void* GetRowBySheetIndexAndRowId(uint sheetIndex, uint rowId);
+    public partial ExcelRow* GetRowBySheetIndexAndRowId(uint sheetIndex, uint rowId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 57 F6 48 85 C0")]
-    public partial void* GetRowBySheetIndexAndRowIndex(uint sheetIndex, uint rowIndex);
+    public partial ExcelRow* GetRowBySheetIndexAndRowIndex(uint sheetIndex, uint rowIndex);
 
     [MemberFunction("48 85 D2 74 0D 48 8B 02 48 8B CA 48 FF A0 88 00 00 00")]
     public partial int GetRowCountBySheet(ExcelSheet* sheet);
