@@ -19,6 +19,10 @@ public unsafe partial struct AgentRecipeNote {
     [FieldOffset(0x3EC)] public bool RecipeSearchOpen;
     [FieldOffset(0x406)] public bool RecipeSearchProcessing;
     [FieldOffset(0x408)] public Utf8String RecipeSearch;
+
+    [FieldOffset(0x478)] public RecipeSearchContext* SearchContext;
+    [FieldOffset(0x480)] public StdVector<uint> SearchResults;
+
     [FieldOffset(0x498)] public byte RecipeSearchHistorySelected;
     [FieldOffset(0x4A0)] public StdDeque<Utf8String> RecipeSearchHistory;
 
@@ -42,4 +46,36 @@ public unsafe partial struct AgentRecipeNote {
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 80 B9 ?? ?? ?? ?? ??")]
     public partial void SearchRecipe(Utf8String* text, byte a3, bool pushHistory);
+}
+
+[GenerateInterop]
+[VirtualTable("E8 ?? ?? ?? ?? 48 8B F8 48 8B CE 48 89 BB", [1, 13])]
+[StructLayout(LayoutKind.Explicit, Size = 0x260)]
+public unsafe partial struct RecipeSearchContext
+{
+    [FieldOffset(0xE0)] public bool IsExact;
+    [FieldOffset(0xE1)] public bool IsComplete;
+    [FieldOffset(0xE2)] public bool CanIterate;
+    [FieldOffset(0xE4)] public uint RowEndIdx;
+    [FieldOffset(0xE8)] public uint RowStartIdx;
+    [FieldOffset(0xF0)] public RecipeSearchContextData CtxData;
+    [FieldOffset(0x190)] public RecipeSearchContextData CtxData2;
+    [FieldOffset(0x258)] public StdVector<uint>* VectorPtr;
+
+    [VirtualFunction(0)]
+    public partial void Dtor(byte freeFlags);
+
+    [VirtualFunction(1)]
+    public partial bool GetIsComplete();
+
+    [VirtualFunction(2)]
+    public partial void Iterate();
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xA0)]
+public struct RecipeSearchContextData
+{
+    [FieldOffset(0x30)] public StdDeque<StdPair<ulong, ulong>> Results;
+    // [FieldOffset(0x70)] public nint Callback2;
+    // [FieldOffset(0x78)] public nint Callback;
 }
