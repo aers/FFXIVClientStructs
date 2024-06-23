@@ -5,5 +5,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xC98)]
 public unsafe partial struct HousingObjectManager {
-    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray400<Pointer<GameObject>> _objects;
+    // [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray400<Pointer<GameObject>> _objects;
 }

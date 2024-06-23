@@ -17,8 +17,8 @@ public unsafe partial struct HousingManager {
     private partial byte GetInvertedBrightness();
     public byte GetBrightness() => (byte)(5 - GetInvertedBrightness());
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B ED")]
-    public partial bool HasHousePermissions();
+    // [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B ED")]
+    // public partial bool HasHousePermissions();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B D6")]
     public partial bool IsInside();
