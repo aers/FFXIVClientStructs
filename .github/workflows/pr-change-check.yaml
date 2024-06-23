@@ -1,0 +1,239 @@
+name: PR Check
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - 'FFXIVClientStructs/**/*.cs'
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Run CExporter
+        working-directory: ./
+        run: dotnet run --project CExporter/CExporter.csproj -c Release
+      - name: Check error txt file for content
+        id: check_error
+        run: |
+          if [ -s ./ida/errors.txt ]; then
+            echo "error=true" >> $GITHUB_OUTPUT
+          else
+            echo "error=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Upload error txt to comment
+        if: steps.check_error.outputs.error == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const content = fs.readFileSync('./ida/errors.txt', 'utf8');
+            const comments = (await github.rest.issues.listComments({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })).data
+            const comment = comments.filter(comment => comment.user.login === 'github-actions[bot]');
+            if (comment.length > 0) {
+              comment.forEach(comment => {
+                github.rest.issues.deleteComment({
+                  comment_id: comment.id,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo
+                });
+              });
+            }
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: content
+            });
+            github.rest.issues.addLabels({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["requested changes"]
+            })
+      - name: Exit with error
+        if: steps.check_error.outputs.error == 'true'
+        run: exit 1
+      - name: Cleanup issue
+        if: steps.check_error.outputs.error == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comments = (await github.rest.issues.listComments({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })).data
+            const comment = comments.filter(comment => comment.user.login === 'github-actions[bot]');
+            if (comment.length > 0) {
+              comment.forEach(comment => {
+                github.rest.issues.deleteComment({
+                  comment_id: comment.id,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo
+                });
+              });
+            }
+            const labels = (await github.rest.issues.listLabelsOnIssue({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })).data
+            const label = labels.find(label => label.name === 'requested changes');
+            if (label) {
+              github.rest.issues.removeLabel({
+                issue_number: context.payload.pull_request.number,
+                name: 'requested changes',
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+            }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: structs.yml
+          path: ./ida/ffxiv_structs.yml
+          retention-days: 7
+
+  build-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Install dependencies for PR branch
+        run: dotnet restore
+      - name: Build PR branch
+        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cs-pr
+          path: ida/cs/FFXIVClientStructs.dll
+          retention-days: 1
+  
+  build-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+      - name: Install dependencies for Main branch
+        run: dotnet restore
+      - name: Build Main branch
+        run: dotnet build FFXIVClientStructs/FFXIVClientStructs.csproj --output ida/cs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cs-main
+          path: ida/cs/FFXIVClientStructs.dll
+          retention-days: 1
+
+  check-breaking-changes:
+    runs-on: ubuntu-latest
+    needs: [build-pr, build-main, test]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      with:
+        name: cs-pr
+        path: ida/cs-pr
+    - uses: actions/download-artifact@v4
+      with:
+        name: cs-main
+        path: ida/cs-main
+    - name: Check for breaking changes
+      id: breaking_changes
+      run: |
+        dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
+        dotnet run --project CompatChecker/CompatChecker.csproj -c Release -- ida/cs-main/FFXIVClientStructs.dll ida/cs-pr/FFXIVClientStructs.dll ida/errors.txt
+        if [ -s ./ida/errors.txt ]; then
+          echo "breaking=true" >> $GITHUB_OUTPUT
+        else
+          echo "breaking=false" >> $GITHUB_OUTPUT
+        fi
+    - name: Process breaking change text
+      if: steps.breaking_changes.outputs.breaking == 'true'
+      run: node ./scripts/process-breaking-changes.js
+    - name: Handle breaking change
+      uses: actions/github-script@v7
+      if: steps.breaking_changes.outputs.breaking == 'true'
+      with:
+        script: |
+          const fs = require('fs');
+          const content = fs.readFileSync('./ida/errors.txt', 'utf8');
+          github.rest.issues.addLabels({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ["breaking change"]
+          })
+          const comments = (await github.rest.issues.listComments({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          })).data
+          const comment = comments.filter(comment => comment.user.login === 'github-actions[bot]');
+          if (comment.length > 0) {
+            comment.forEach(comment => {
+              github.rest.issues.deleteComment({
+                comment_id: comment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+            });
+          }
+          github.rest.issues.createComment({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: content
+          });
+          throw new Error('Breaking changes detected');
+    - name: Handle non breaking change
+      uses: actions/github-script@v7
+      if: steps.breaking_changes.outputs.breaking == 'false'
+      with:
+        script: |
+          const comments = (await github.rest.issues.listComments({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          })).data
+          const comment = comments.filter(comment => comment.user.login === 'github-actions[bot]');
+          if (comment.length > 0) {
+            comment.forEach(comment => {
+              github.rest.issues.deleteComment({
+                comment_id: comment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+            });
+          }
+          const labels = (await github.rest.issues.listLabelsOnIssue({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          })).data
+          const label = labels.find(label => label.name === 'breaking change');
+          if (label) {
+            github.rest.issues.removeLabel({
+              issue_number: context.payload.pull_request.number,
+              name: 'breaking change',
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+          }
+

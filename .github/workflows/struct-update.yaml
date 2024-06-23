@@ -16,11 +16,11 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '8.0.x'
       - name: Restore
         run: dotnet restore
       - name: Run CExporter
-        working-directory: ./ida
+        working-directory: ./
         run: dotnet run --project CExporter/CExporter.csproj -c Release
       - name: Check for changes
         id: git-check

@@ -139,4 +139,25 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
         Type = ValueType.Float;
         Float = value;
     }
+
+    public override string ToString() {
+        return $"Type: {Type}, Value: {GetValueAsString()}";
+    }
+
+    public string GetValueAsString() {
+        return Type switch {
+            ValueType.Undefined or ValueType.Null => string.Empty,
+            ValueType.Bool => Bool.ToString(),
+            ValueType.Int => Int.ToString(),
+            ValueType.UInt => UInt.ToString(),
+            ValueType.Float => Float.ToString(),
+            ValueType.String or ValueType.ManagedString => Marshal.PtrToStringUTF8((nint)String) ?? string.Empty,
+            ValueType.WideString => Marshal.PtrToStringUni((nint)WideString) ?? string.Empty,
+            ValueType.String8 => Marshal.PtrToStringUTF8((nint)String) ?? string.Empty,
+            ValueType.Vector or ValueType.ManagedVector => Vector != null ? Vector->ToString() : "null",
+            ValueType.Texture => $"0x{(nint)Texture:X}",
+            ValueType.AtkValues => $"0x{(nint)AtkValues:X}",
+            _ => BitConverter.ToString(BitConverter.GetBytes((ulong)String)).Replace("-", " ")
+        };
+    }
 }

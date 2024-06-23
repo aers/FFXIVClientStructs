@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "CompatChecker-pass": {
+      "commandName": "Project",
+      "commandLineArgs": "pass"
+    },
+    "CompatChecker-fail": {
+      "commandName": "Project",
+      "commandLineArgs": "fail"
+    }
+  }
+}
