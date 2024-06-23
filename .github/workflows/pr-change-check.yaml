@@ -164,9 +164,6 @@ jobs:
         else
           echo "breaking=false" >> $GITHUB_OUTPUT
         fi
-    - name: Process breaking change text
-      if: steps.breaking_changes.outputs.breaking == 'true'
-      run: node ./scripts/process-breaking-changes.js
     - name: Handle breaking change
       uses: actions/github-script@v7
       if: steps.breaking_changes.outputs.breaking == 'true'
