@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using InteropGenerator.Runtime.Attributes;
 
 namespace CExporter;
 

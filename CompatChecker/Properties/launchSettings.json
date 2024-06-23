@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "CompatChecker-pass": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\source\\repos\\dotnet-compat-checker\\test_files\\pass\\FFXIVClientStructs-main.dll\"\r\n\"D:\\source\\repos\\dotnet-compat-checker\\test_files\\pass\\FFXIVClientStructs-pr.dll\""
+    },
+    "CompatChecker-fail": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\source\\repos\\dotnet-compat-checker\\test_files\\fail\\FFXIVClientStructs-main.dll\"\r\n\"D:\\source\\repos\\dotnet-compat-checker\\test_files\\fail\\FFXIVClientStructs-pr.dll\""
+    }
+  }
+}
