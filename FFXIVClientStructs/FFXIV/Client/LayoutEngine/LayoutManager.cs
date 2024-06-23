@@ -35,6 +35,8 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x0DC)] public int ForceUpdateAllStreaming;
     [FieldOffset(0x0E2)] public bool SkipAddingTerrainCollider;
     //[FieldOffset(0x0E3)] public bool uE3;
+    [FieldOffset(0x0EA)] public byte LayerEntryType;
+    [FieldOffset(0x0EC)] public uint LevelId;
     [FieldOffset(0x0F0)] public int StreamingOriginType;
     [FieldOffset(0x100)] public Vector3 ForcedStreamingOrigin;
     //[FieldOffset(0x110)] public Vector3 u110_streamingType5Origin;

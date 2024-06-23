@@ -3818,7 +3818,14 @@ classes:
     vtbls:
       - ea: 0x1419CB780
     funcs:
-      0x140194540: ctor
+      0x140194520: ctor
+      0x140194540: ctor_FromBuffer
+      0x140194590: Finalize
+      0x1401945F0: GetDigest
+      0x14019A080: Calculate
+      0x1401945C0: Update
+    vfuncs:
+      0: dtor
   Client::Graphics::ReferencedClassBase:
     vtbls:
       - ea: 0x1419D38F0
@@ -6262,6 +6269,9 @@ classes:
     funcs:
       0x1405BADA0: ctor
       0x1405BB030: CreateSingleton
+      0x1405BBDB0: LoadPrefetchLayout
+      0x1405BC1B0: UnloadManagerLayout
+      0x1405F90A0: UnloadPrefetchLayout
   Client::LayoutEngine::LayoutManager:
     vtbls:
       - ea: 0x141A0C210
