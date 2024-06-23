@@ -6,20 +6,35 @@ using System.Text;
 namespace CompatChecker;
 
 class Program {
+
+    static string FallbackPath(string folderName) {
+        var dir = new DirectoryInfo(Environment.CurrentDirectory);
+        while (dir.FullName.Contains(folderName) && !dir.FullName.EndsWith(folderName)) {
+            dir = dir.Parent!;
+        }
+        while (!dir.FullName.Contains(folderName) && !dir.FullName.EndsWith(folderName)) {
+            dir = dir.GetDirectories(folderName, SearchOption.AllDirectories).FirstOrDefault() ?? dir.Parent!;
+        }
+        return dir.FullName;
+    }
+
     static void Main(string[] args) {
         if (args.Length == 0)
             throw new ArgumentException("Provide a left and right dll to compare");
+        string left, right;
 
-        var dir = new DirectoryInfo(Environment.CurrentDirectory);
-        while (dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
-            dir = dir.Parent!;
+        if (args.Length == 1) {
+            Console.WriteLine("Using debug testing");
+            var folder = FallbackPath("CompatChecker");
+            left = Path.Combine(folder, "tests", "FFXIVClientStructs-main.dll");
+            right = Path.Combine(folder, "tests", "FFXIVClientStructs-pr.dll");
+            if (args[0] == "pass")
+                right = left;
+        } else {
+            left = args[0];
+            right = args[1];
         }
-        while (!dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
-            dir = dir.GetDirectories("ida", SearchOption.AllDirectories).FirstOrDefault() ?? dir.Parent!;
-        }
-
-        var left = args[0];
-        var right = args[1];
+        var outputFile = args.Length > 2 ? args[2] : Path.Combine(FallbackPath("ida"), "errors.txt");
 
         var p = new Process();
         p.StartInfo.FileName = "apicompat";
@@ -33,7 +48,7 @@ class Program {
         p.WaitForExit();
         var isError = string.IsNullOrWhiteSpace(output);
 
-        if (!isError) 
+        if (!isError)
             return;
 
         var sb = new StringBuilder();
@@ -69,8 +84,9 @@ class Program {
                 foreach (var (@class, changes) in classes) {
                     sb.AppendLine($"##{(ns != null ? "#" : "")}{@class ?? "Global"}: {changes.Count}");
                     foreach (var change in changes) {
-                        sb.AppendLine($"###{(ns != null ? "#" : "")}{change.Change}");
+                        sb.AppendLine($"* {change.Change}");
                     }
+                    sb.AppendLine();
                 }
             }
         }
@@ -78,7 +94,7 @@ class Program {
 #if DEBUG
         Environment.Exit(isError ? 1 : 0);
 #else
-        new FileInfo(Path.Combine(dir.FullName, "errors.txt")).WriteFile(sb.ToString());
+        new FileInfo(outputFile).WriteFile(sb.ToString());
 #endif
 
 

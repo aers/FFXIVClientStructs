@@ -158,7 +158,7 @@ jobs:
       id: breaking_changes
       run: |
         dotnet tool install -g Microsoft.DotNet.ApiCompat.Tool
-        dotnet run --project CompatChecker/CompatChecker.csproj -c Release -- ida/cs-main/FFXIVClientStructs.dll ida/cs-pr/FFXIVClientStructs.dll
+        dotnet run --project CompatChecker/CompatChecker.csproj -c Release -- ida/cs-main/FFXIVClientStructs.dll ida/cs-pr/FFXIVClientStructs.dll ida/errors.txt
         if [ -s ./ida/errors.txt ]; then
           echo "breaking=true" >> $GITHUB_OUTPUT
         else

@@ -6,11 +6,11 @@
     },
     "CompatChecker-pass": {
       "commandName": "Project",
-      "commandLineArgs": "\"D:\\source\\repos\\dotnet-compat-checker\\test_files\\pass\\FFXIVClientStructs-main.dll\"\r\n\"D:\\source\\repos\\dotnet-compat-checker\\test_files\\pass\\FFXIVClientStructs-pr.dll\""
+      "commandLineArgs": "pass"
     },
     "CompatChecker-fail": {
       "commandName": "Project",
-      "commandLineArgs": "\"D:\\source\\repos\\dotnet-compat-checker\\test_files\\fail\\FFXIVClientStructs-main.dll\"\r\n\"D:\\source\\repos\\dotnet-compat-checker\\test_files\\fail\\FFXIVClientStructs-pr.dll\""
+      "commandLineArgs": "fail"
     }
   }
 }
