@@ -31,7 +31,7 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0x998)] public Utf8String ZoneName;
 
     [FieldOffset(0xA39)] public bool WinSockInitialized;
-    [FieldOffset(0xA40)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
+    // [FieldOffset(0xA40)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
 
     [FieldOffset(0xAEC)] public int CurrentDeviceTime; //Timestamp
     [FieldOffset(0xAF0)] public int CurrentDeviceTimeMillis; //Milliseconds for CurrentDeviceTime
