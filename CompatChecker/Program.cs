@@ -74,15 +74,20 @@ class Program {
                     .ToList())
             )
             .ToList();
+        if (errors.Count == 0) {
+            Console.WriteLine("No breaking changes found");
+            return;
+        }
+        sb.AppendLine("# Breaking Changes ");
         foreach (var (code, count) in errors) {
             // get Description attribute from enum value if it exists
             var description = code.GetType().GetField(code.ToString())?.GetCustomAttribute<DescriptionAttribute>()?.Description;
-            sb.AppendLine('#' + (string.IsNullOrWhiteSpace(description) ? code.ToString() : description));
+            sb.AppendLine("## " + (string.IsNullOrWhiteSpace(description) ? code.ToString() : description));
             foreach (var (ns, classes) in count) {
                 if (ns != null)
-                    sb.AppendLine($"##{ns}: {classes.Count}");
+                    sb.AppendLine($"### {ns}: {classes.Count}");
                 foreach (var (@class, changes) in classes) {
-                    sb.AppendLine($"##{(ns != null ? "#" : "")}{@class ?? "Global"}: {changes.Count}");
+                    sb.AppendLine($"###{(ns != null ? "#" : "")} {@class ?? "Global"}: {changes.Count}");
                     foreach (var change in changes) {
                         sb.AppendLine($"* {change.Change}");
                     }
