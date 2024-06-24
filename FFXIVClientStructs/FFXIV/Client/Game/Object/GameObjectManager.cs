@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 // Client::Game::Object::GameObjectManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x5FE8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3888)]
 public unsafe partial struct GameObjectManager {
     [FieldOffset(0x00)] public uint NextUpdateIndex; // rate limiting for updates per frame
     [FieldOffset(0x04)] public byte Active;
@@ -15,7 +15,7 @@ public unsafe partial struct GameObjectManager {
     public static partial GameObject* GetGameObjectByIndex(int index);
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x5F90)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3830)]
     public unsafe partial struct ObjectArrays {
         // sparse array containing all objects; some slots could be null
         // different ranges have different meaning:
@@ -34,15 +34,15 @@ public unsafe partial struct GameObjectManager {
         /// <summary>
         /// Pointers to active GameObjects, sorted by GameObject.GetGameObjectId().
         /// </summary>
-        [FieldOffset(0x1FD8), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _gameObjectIdSorted;
+        [FieldOffset(0x12B8), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _gameObjectIdSorted;
 
         /// <summary>
         /// Pointers to active GameObjects with a valid GameObject.EntityId (!= E0000000), sorted by EntityId.
         /// </summary>
-        [FieldOffset(0x3FB0), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _entityIdSorted;
+        [FieldOffset(0x2570), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _entityIdSorted;
 
-        [FieldOffset(0x5F88)] public int GameObjectIdSortedCount;
-        [FieldOffset(0x5F8C)] public int EntityIdSortedCount;
+        [FieldOffset(0x3828)] public int GameObjectIdSortedCount;
+        [FieldOffset(0x382C)] public int EntityIdSortedCount;
 
         /// <summary>
         /// Binary search for an object by GameObjectId, using the GameObjectId sorted list.
