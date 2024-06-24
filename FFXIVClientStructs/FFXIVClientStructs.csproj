@@ -23,17 +23,16 @@
     <Product>FFXIVClientStructs</Product>
     <AssemblyTitle>FFXIVClientStructs</AssemblyTitle>
 
-    <!-- The VersionGenerator generates these -->
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
-
     <!--
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
     -->
     
+    <!-- InteropGenerator -->
     <InteropGenerator_InteropNamespace>FFXIVClientStructs.Interop.Generated</InteropGenerator_InteropNamespace>
+    
+    <!-- GitInfo generator -->
+    <ThisAssemblyNamespace>FFXIVClientStructs</ThisAssemblyNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
@@ -47,10 +46,12 @@
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="GitInfo" Version="3.3.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
-    <ProjectReference
-      Include="..\FFXIVClientStructs.InteropSourceGenerators\FFXIVClientStructs.InteropSourceGenerators.csproj"
-      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\InteropGenerator\InteropGenerator.csproj"
                       OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     <ProjectReference Include="..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj" />
