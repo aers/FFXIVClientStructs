@@ -25,6 +25,8 @@ public unsafe partial struct AddonItemSearch {
 
     [FieldOffset(0x2DE0)] public AtkComponentList* ResultsList;
 
+    [FieldOffset(0x3210)] public AtkComponentCheckBox* PartialSearchCheckBox;
+
     [FieldOffset(0x3EDB)] public bool PartialMatch;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF 44 8D 42 FF")]
