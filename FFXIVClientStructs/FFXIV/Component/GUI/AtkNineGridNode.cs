@@ -5,11 +5,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkNineGridNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
-// common CreateAtkNode function "E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8B 51 08"
+// common CreateAtkNode function "E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13"
 // type 4
 [GenerateInterop]
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
+[VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13", [1, 213])]
 public unsafe partial struct AtkNineGridNode : ICreatable {
     [FieldOffset(0xB0)] public AtkUldPartsList* PartsList;
     [FieldOffset(0xB8)] public uint PartId;
@@ -22,6 +23,9 @@ public unsafe partial struct AtkNineGridNode : ICreatable {
     // bit 1 = parts type, bit 2 = render type
     [FieldOffset(0xC8)] public byte PartsTypeRenderType;
 
-    [MemberFunction("E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8 48 83 C4 20 5B E9 ?? ?? ?? ?? 45 33 C9 4C 8B C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 5D")]
-    public partial void Ctor();
+    // 7.0 inlines this ctor
+    public void Ctor() {
+        AtkResNode.Ctor();
+        VirtualTable = StaticVirtualTablePointer;
+    }
 }

@@ -51,14 +51,14 @@ public unsafe partial struct AgentContext {
     [MemberFunction("41 0F B6 C0 89 91")]
     public partial void OpenContextMenuForAddon(uint ownerAddonId, bool bindToOwner = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 39 A3 ?? ?? ?? ?? 0F 86")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 39 BB ?? ?? ?? ?? 0F 86 ?? ?? ?? ??")]
     public partial bool OpenSubMenu();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D E0 E9 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 0F B7 93")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 48 8D 8B ?? ?? ?? ??")]
     [GenerateStringOverloads]
     public partial void OpenYesNo(byte* text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool setOwner = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 40 80 F6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 6B CE 3C")]
     public partial void ClearMenu();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 8D 44 24 ?? 41 8B D7")]
@@ -69,14 +69,14 @@ public unsafe partial struct AgentContext {
     [GenerateStringOverloads]
     public partial void AddMenuItem(byte* text, AtkEventInterface* handler, long handlerParam, bool disabled = false, bool submenu = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 69 D6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 FD 0D")]
     public partial void AddMenuItem2(uint addonTextId, AtkEventInterface* handler, long handlerParam, bool disabled = false, bool submenu = false);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 99 ?? ?? ?? ?? 4C 8B D1")]
     [GenerateStringOverloads]
     public partial void AddContextMenuItem(int eventId, byte* text, bool disabled = false, bool submenu = false, bool copyText = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 85 F6 74 3F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 84 ED 79 0F")]
     public partial void AddContextMenuItem2(int eventId, uint addonTextId, bool disabled = false, bool submenu = false, bool copyText = true);
 
     public void SetPosition(int x, int y) {

@@ -25,10 +25,10 @@ public partial struct EnvironmentManager {
     /// <param name="channel">Indicates which volume to set</param>
     /// <param name="volume">Volume in range 0-100, -1 indicates to read the configuration value</param>
     /// <param name="saveToConfig">Wether the new volume should be written to system configuration</param>
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 41 8B F8 41 0F B6 F1")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 7F 45 33 C9")]
     public partial void SetVolume(uint channel, int volume, bool saveToConfig);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 41 B1 ?? 41 83 C8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 8F ?? ?? ?? ?? 41 B1 01 BA ?? ?? ?? ??")]
     public partial void SetMasterVolume(int volume, bool saveToConfig);
 
     ///<inheritdoc cref="SetVolume(uint,int,bool)"/>

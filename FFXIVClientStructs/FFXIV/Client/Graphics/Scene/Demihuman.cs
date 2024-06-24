@@ -26,6 +26,6 @@ public unsafe partial struct Demihuman {
     [FieldOffset(0x960)] public uint SlotFreeCompanyCrestBitfield; // Only relevant bit is & 0x1
 
     // Expects at least 24 bytes of data.
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 0F 10 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 0F 10 0F")]
     public partial bool SetupFromData(byte* data);
 }

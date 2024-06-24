@@ -36,7 +36,7 @@ public unsafe partial struct ResourceHandle {
     [MemberFunction("E8 ?? ?? ?? ?? 48 C7 03 ?? ?? ?? ?? C6 83")]
     public partial bool DecRef();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 46 30 C1 E0 05")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 43 1B")]
     public partial bool IncRef();
 
     [VirtualFunction(6u)]

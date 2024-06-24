@@ -23,16 +23,16 @@ public unsafe partial struct EventFramework {
     [StaticAddress("48 8B 35 ?? ?? ?? ?? 0F B6 EA 4C 8B F1", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 8D 43")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 0D 0F B6 CB")]
     public partial ContentDirector* GetContentDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 98")]
     public partial InstanceContentDirector* GetInstanceContentDirector();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 0F B6 88")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 19 83 B8 ?? ?? ?? ?? ??")]
     public partial PublicContentDirector* GetPublicContentDirector();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 32 C9 0F B6 D9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??")]
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
 
@@ -45,7 +45,7 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 3B C7 75 53")]
     public static partial ushort GetContentFinderCondition(ContentType contentType, uint contentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 18 48 8B 4F 10")]
+    [MemberFunction("48 83 EC 28 48 8B 05 ?? ?? ?? ?? 48 85 C0 74 2C")]
     public static partial bool CanLeaveCurrentContent();
 
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {

@@ -43,7 +43,7 @@ public unsafe partial struct CharaView : ICreatable {
     public static CharaView* Create()
         => IMemorySpace.GetUISpace()->Create<CharaView>();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 80 A6 ?? ?? ?? ?? ?? 48 8D 05")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 B3 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??")]
     public partial void Ctor();
 
     [VirtualFunction(0)]
@@ -61,7 +61,7 @@ public unsafe partial struct CharaView : ICreatable {
     [MemberFunction("0F 10 02 0F 11 41 48")]
     public partial void SetCustomizeData(CharaViewCharacterData* data);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 27 8B D6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4C 24 ?? 8B 51 04")]
     public partial void Render(uint frameIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 75 05 0F 57 C9")]
@@ -70,16 +70,16 @@ public unsafe partial struct CharaView : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 10 88 85")]
     public partial bool IsAnimationPaused();
 
-    [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 8B CE E8 ?? ?? ?? ?? 32 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 8B CF E8 ?? ?? ?? ?? 32 C0")]
     public partial void ToggleAnimationPlayback(bool paused);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 28 BA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 45 77 48 8D 4D 87")]
     public partial void UnequipGear(bool hasCharacterData = false, bool characterLoaded = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 DB FF C3")]
     public partial void SetItemSlotData(byte slotId, uint itemId, byte stainId, uint glamourItemId = 0, byte a6 = 1);
 
-    [MemberFunction("E8 ?? ?? ?? ?? B1 01 0F B6 86")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 8D ?? ?? ?? ?? B0 01")]
     public partial void ToggleDrawWeapon(bool drawn);
 }
 
@@ -107,10 +107,10 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
         return obj;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 45 10 48 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8D 4E 30")]
     public partial void Ctor();
 
-    [MemberFunction("E9 ?? ?? ?? ?? 41 0F B6 40 ?? 88 42 62")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 57 28 45 33 F6")]
     public partial void ImportLocalPlayerEquipment();
 }
 

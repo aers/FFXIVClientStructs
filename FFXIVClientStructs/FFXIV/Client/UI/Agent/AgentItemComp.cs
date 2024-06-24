@@ -8,6 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public partial struct AgentItemComp {
-    [MemberFunction("E8 ?? ?? ?? ?? EB 3F 83 F8 FE")]
-    public partial void CompareItem(ushort parentAddonId, uint itemId, byte stainId);
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 53 ?? 0F B7 4B")]
+    public partial void CompareItem(ushort parentAddonId, uint itemId, byte stainId, byte stain2Id);
 }

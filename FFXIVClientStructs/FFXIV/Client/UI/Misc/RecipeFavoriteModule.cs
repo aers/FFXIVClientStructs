@@ -26,15 +26,15 @@ public unsafe partial struct RecipeFavoriteModule {
         [FieldOffset(0x2)] public bool IsFavorite;
     }
 
-    [MemberFunction("48 63 C2 45 0F B7 C8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 B9 ?? ?? ?? ?? 0F 45 F9")]
     public partial RecipeEntry* GetEntry(byte craftType, ushort recipeId);
 
-    [MemberFunction("85 D2 78 32 48 63 C2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 04 41 83 CE 08")]
     public partial bool IsFavorited(byte craftType, ushort recipeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B CD 48 8B C5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 4C 24 ?? 48 8B 74 24 ??")]
     public partial uint RemoveFromFavorites(byte craftType, ushort recipeId); // returns LogMessage RowId
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 49 8B CE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 49 8B CE 49 8B 06")]
     public partial uint AddToFavorites(byte craftType, ushort recipeId); // returns LogMessage RowId
 }

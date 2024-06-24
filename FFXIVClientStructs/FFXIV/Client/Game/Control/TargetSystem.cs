@@ -29,7 +29,7 @@ public unsafe partial struct TargetSystem {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
     public static partial TargetSystem* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 EB 13")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 33 ED EB 16")]
     public partial GameObjectId GetCurrentTargetId();
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C0 ED")]
@@ -38,7 +38,7 @@ public unsafe partial struct TargetSystem {
     [MemberFunction("48 85 D2 74 2C 4C 63 89")]
     public partial bool IsObjectInViewRange(GameObject* obj);
 
-    [MemberFunction("40 53 48 81 EC ?? ?? ?? ?? 83 BA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 1E")]
     public partial bool IsObjectOnScreen(GameObject* obj);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 01 FF 50 08")]
@@ -47,7 +47,7 @@ public unsafe partial struct TargetSystem {
     [MemberFunction("E9 ?? ?? ?? ?? 8B C0 48 8D 0D")]
     public partial void OpenObjectInteraction(GameObject* obj);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 DB 74 ?? 48 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 50 48 8B CB")]
     public partial GameObject* GetMouseOverObject(int x, int y, GameObjectArray* objectArray, Camera* camera);
 
     public GameObject* GetMouseOverObject(int x, int y) {

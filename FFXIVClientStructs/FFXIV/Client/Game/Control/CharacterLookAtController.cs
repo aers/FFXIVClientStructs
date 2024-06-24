@@ -3,10 +3,10 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 // Client::Game::Control::CharacterLookAtController
-// ctor "48 89 5C 24 ?? 48 8D 05 ?? ?? ?? ?? BA"
+// ctor "48 8D 05 ?? ?? ?? ?? 48 8D 71 20"
 [GenerateInterop]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 71 20", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x5E0)]
-[VirtualTable("48 89 5C 24 ?? 48 8D 05 ?? ?? ?? ?? BA", 8)]
 public unsafe partial struct CharacterLookAtController {
     [FieldOffset(0x10)] public BattleChara* OwnerObject;
 

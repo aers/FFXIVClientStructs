@@ -25,16 +25,16 @@ public unsafe partial struct InfoProxyCommonList {
     public ReadOnlySpan<CharacterData> CharDataSpan => new(CharData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
     public ReadOnlySpan<CharacterIndex> CharIndexSpan => new(IndexData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8B CB E8 ?? ?? ?? ?? 41 C6 46")]
+    [MemberFunction("3B 51 10 73 12 8B C2 48 6B D0 70")]
     public partial ulong GetContentIdForEntry(uint idx);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 74 55")]
+    [MemberFunction("3B 51 10 73 0E")]
     public partial CharacterData* GetEntry(uint idx);
 
     [MemberFunction("E9 ?? ?? ?? ?? 3B 5F 10")]
     public partial CharacterData* GetEntryByContentId(ulong contentId, uint nameCrc32 = 0, byte a4 = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 3C 8D 45 EF"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 44 41 8D 46 EF"), GenerateStringOverloads]
     public partial CharacterData* GetEntryByName(byte* characterName, ushort worldId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]

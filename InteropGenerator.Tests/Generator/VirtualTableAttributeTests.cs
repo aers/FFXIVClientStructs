@@ -22,7 +22,7 @@ public class VirtualTableAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("TestStruct.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", new byte[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("TestStruct.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", new ushort[] {1}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
                                   }
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
@@ -56,7 +56,7 @@ public class VirtualTableAttributeTests {
                               {
                                   public static class Addresses
                                   {
-                                      public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("TestStruct.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", new byte[] {1, 5}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
+                                      public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("TestStruct.StaticVirtualTable", "E8 ?? ?? ?? ?? ?? ?? ??", new ushort[] {1, 5}, new ulong[] {0x00000000000000E8}, new ulong[] {0x00000000000000FF}, 0);
                                   }
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable

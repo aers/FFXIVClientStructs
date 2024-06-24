@@ -5,13 +5,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 40 * 0x10)]
 public unsafe partial struct CharaSelectCharacterList {
-    [StaticAddress("4C 8D 3D ?? ?? ?? ?? 48 8B DA", 3)]
+    [StaticAddress("48 8D 05 ?? ?? ?? ?? 48 89 7C 24 ?? 4C 8D 05 ?? ?? ?? ?? 33 FF 8B CF 66 0F 1F 44 00 ??", 3)]
     public static partial CharaSelectCharacterList* Instance();
 
-    [StaticAddress("48 89 2D ?? ?? ?? ?? 48 8B 6C 24", 3, true)]
+    [StaticAddress("75 39 48 8B 0D ?? ?? ?? ?? 48 85 C9", 5, true)]
     public static partial Character* GetCurrentCharacter();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 44 89 B6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 0F BF 8E ?? ?? ?? ??")]
     public static partial void CleanupCharacters();
 
     [FieldOffset(0), FixedSizeArray] internal FixedSizeArray40<CharaSelectCharacterMapping> _characterMapping;

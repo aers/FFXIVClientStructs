@@ -59,10 +59,10 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x1248)] public byte RequestCharaterIndex;
     [FieldOffset(0x1DA4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 41 8B D6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5")]
     public partial void UpdateLobbyUIStage();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 4D 2F")]
     public partial void UpdateCharaSelectDisplay(sbyte index, bool a2);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 4A 84 C0")]
@@ -85,10 +85,10 @@ public unsafe partial struct LobbyData {
     [FieldOffset(0x9BC)] public ushort CurrentWorldId;
     [FieldOffset(0x9BE)] public ushort HomeWorldId;
 
-    [MemberFunction("40 53 56 41 57 48 83 EC 20 33 DB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 19 C6 87 ?? ?? ?? ?? ??")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryFromServer(byte index, ulong contentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 2C 48 8D 48 2C")]
+    [MemberFunction("40 53 48 83 EC 20 49 63 D9 E8 ?? ?? ?? ??")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryByIndex(int a2, int worldIndex, int characterMappingIndex);
 }
 
@@ -114,7 +114,7 @@ public unsafe partial struct CharaSelectCharacterEntry {
     [MemberFunction("0F B6 41 ?? 84 05 ?? ?? ?? ?? 0F 94 C0")]
     public partial bool IsNotLocked();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0F 48 8B CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 56 48 8B CB")]
     public partial bool IsInDifferentRegion();
 }
 

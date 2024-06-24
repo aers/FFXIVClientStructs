@@ -21,7 +21,7 @@ public unsafe partial struct AddonConfig {
     /// <param name="unk1">Unknown, generally False</param>
     /// <param name="unk2">Unknown, generally True</param>
     /// <returns></returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 15")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 12")]
     public partial nint ChangeHudLayout(uint layoutIndex, bool unk1 = false, bool unk2 = true);
 }
 

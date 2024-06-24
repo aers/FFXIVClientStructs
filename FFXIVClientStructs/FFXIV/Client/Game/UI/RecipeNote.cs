@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xB18)]
 public unsafe partial struct RecipeNote {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 FE ?? ?? ?? ?? 75 0F", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 39 86 ?? ?? ?? ??", 3)]
     public static partial RecipeNote* Instance();
 
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<uint> _jobs;  // CraftType -> ClassJob
@@ -77,9 +77,9 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x4F6)] public ushort PatchNumber;
     }
 
-    [MemberFunction("4C 8B 81 ?? ?? ?? ?? 44 8B D2")]
+    [MemberFunction("4C 8B 81 ?? ?? ?? ?? 44 8B D2 4D 85 C0")]
     public partial bool IsRecipeUnlocked(ushort recipeId);
 
-    [MemberFunction("40 53 48 83 EC 20 83 FA 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 4E 09 8B 76 04")]
     public partial ushort GetCraftTypeLevel(byte craftType);
 }

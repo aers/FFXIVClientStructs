@@ -13,13 +13,13 @@ public unsafe partial struct AtkComponentBase {
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 BF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
     public partial AtkResNode* GetTextNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 9C")]
     public partial AtkResNode* GetImageNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 FC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 85 C0 74 61")]

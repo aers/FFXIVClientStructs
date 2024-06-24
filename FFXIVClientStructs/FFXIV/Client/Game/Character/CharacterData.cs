@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::CharacterData
-// ctor "E8 ?? ?? ?? ?? 4C 8D 4B 30"
+// ctor "0F 57 C0 33 C0 0F 11 01 48 89 41 ?? 66 89 41"
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public partial struct CharacterData {

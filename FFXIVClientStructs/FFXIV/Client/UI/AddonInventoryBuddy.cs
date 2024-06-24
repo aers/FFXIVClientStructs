@@ -14,6 +14,6 @@ public unsafe partial struct AddonInventoryBuddy {
     [FieldOffset(0x230), FixedSizeArray] internal FixedSizeArray70<Pointer<AtkComponentDragDrop>> _slots;
     [FieldOffset(0x488)] public byte TabIndex;
 
-    [MemberFunction("E9 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 20")]
+    [MemberFunction("4C 8B DC 53 57 41 56 48 83 EC 60")]
     public partial void SetTab(byte tab);
 }

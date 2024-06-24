@@ -16,7 +16,7 @@ public unsafe partial struct VfxContainer {
     [FieldOffset(0xA0), FixedSizeArray] internal FixedSizeArray2<Tether> _tethers;
     [FieldOffset(0xD0)] public ushort VoiceId;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 06 3C")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 6A 0F BE 83 ?? ?? ?? ??")]
     public partial nint LoadCharacterSound(int unk1, int unk2, nint unk3, ulong unk4, int unk5, int unk6, ulong unk7);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]

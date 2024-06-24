@@ -26,7 +26,7 @@ public unsafe partial struct AgentMJIMinionNoteBook {
     /// <inheritdoc cref="HandleCommand(int*)"/>
     public void HandleCommand(int flags) => HandleCommand(&flags);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 D8 85 DB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 8D ?? ?? ?? ?? 33 DB")]
     public partial ushort GetSelectedMinionId(byte* viewType, byte* currentTabIndex, byte* currentSlotIndex);
 
     public ushort GetSelectedMinionId() {

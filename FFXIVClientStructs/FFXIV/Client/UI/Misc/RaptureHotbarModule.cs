@@ -150,7 +150,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="macroSet">The macro set to scan for.</param>
     /// <param name="macroIndex">The macro index to scan for.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 1A FF 50 68 44 0F B6 83")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 13 FF 52 68 44 0F B6 C6")]
     public partial void DeleteMacroSlots(byte macroSet, byte macroIndex);
 
     /// <summary>
@@ -161,7 +161,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="macroSet">The macro set to scan for.</param>
     /// <param name="macroIndex">The macro index to scan for.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 83 ?? ?? ?? ?? 39 87")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 13 FF 52 68 44 0F B6 C3")]
     public partial void ReloadMacroSlots(byte macroSet, byte macroIndex);
 
     /// <summary>
@@ -227,7 +227,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="hotbarModule">A reference to the RaptureHotbarModule of the game.</param>
     /// <param name="slot">A reference to the hotbar slot to calculate the appearance for.</param>
     /// <returns>Returns the same value present in the actionId param.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 54 24 ?? 8B 44 24 30")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B DA 49 8B F0")]
     public static partial uint GetSlotAppearance(HotbarSlotType* actionType, uint* actionId, ushort* UNK_0xC4,
         RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
 
@@ -258,7 +258,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="commandId">The command ID to set.</param>
     /// <param name="ignoreSharedHotbars">Unclear use, appears to ignore writing to shared slots if set.</param>
     /// <param name="allowSaveToPvP">If in PVP mode, allow saving to PVP hotbars. No effect if not in PVP mode.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB B9")]
+    [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB BA")]
     public partial void SetAndSaveSlot(uint hotbarId, uint slotId, HotbarSlotType commandType, uint commandId,
         bool ignoreSharedHotbars = false, bool allowSaveToPvP = true);
 
@@ -309,7 +309,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="slotSource">The source slot to dump to disk.</param>
     /// <param name="ignoreSharedHotbars">Unclear use, default to false. </param>
     /// <param name="isPvpSlot">If true, will save to the classJob's PvP SavedHotBars slots.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 57 48 8D 9F ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 50 48 8B CF")]
     public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotBarSlot* slotSource,
         bool ignoreSharedHotbars, bool isPvpSlot);
 
@@ -318,7 +318,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="hotbarId">The saved hotbar ID to select.</param>
     /// <param name="slotId">The saved slot ID to clear.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 10 7C E3")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C3 83 FB 10 7C E3")]
     public partial void ClearSavedSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
@@ -327,7 +327,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="classJobId">The ClassJob ID to retrieve a hotbar from.</param>
     /// <param name="hotbarId">The hotbar ID to retrieve.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 12")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C7 83 FF 12 7C EA")]
     public partial void LoadSavedHotbar(uint classJobId, uint hotbarId);
 
     /// <summary>
@@ -345,7 +345,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="savedHotbarIndex">The saved hotbar index to check.</param>
     /// <returns>The EXD Row ID for the ClassJob this hotbar is intended for. If zero, this is a shared hotbar.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 CD BA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 23 77 7C")]
     public partial uint GetClassJobIdForSavedHotbarIndex(int savedHotbarIndex);
 
     /// <summary>
@@ -360,7 +360,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the slot (0 or 1) to retrieve.</param>
     /// <returns>Returns a pointer to the DutyActionSlot.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 42 8B 3C FB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4A 63 3C FB")]
     public partial DutyActionSlot* GetDutyActionSlot(uint index);
 
     /// <summary>

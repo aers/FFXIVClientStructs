@@ -24,7 +24,7 @@ public unsafe partial struct hkaAnimatedSkeleton {
     [FieldOffset(0x38)] public float ReferencePoseWeightThreshold;
     [FieldOffset(0x3C)] public int NumQuantizedAnimations;
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B C3 48 89 07 48 83 C7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 89 BB ?? ?? ?? ?? C7 43 ?? ?? ?? ?? ??")]
     public partial hkaAnimatedSkeleton* Ctor1(hkaSkeleton* skeleton);
 
     [MemberFunction("48 89 5C 24 ?? 41 56 48 83 EC 20 48 8D 05")]

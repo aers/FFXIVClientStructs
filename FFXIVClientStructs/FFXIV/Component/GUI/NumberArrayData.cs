@@ -17,6 +17,6 @@ public unsafe partial struct NumberArrayData {
     /// <param name="suppressUpdates">
     /// If <c>false</c> and the value was changed, <see cref="UpdateState"/> will be set to <c>1</c> to request an update on subscribed addons.
     /// </param>
-    [MemberFunction("3B 51 08 7D 28")]
+    [MemberFunction("3B 51 08 7D 20")]
     public partial void SetValue(int index, int value, bool force = false, bool suppressUpdates = false);
 }

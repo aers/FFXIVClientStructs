@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentArchiveItem {
     [FieldOffset(0x28)] public ArchiveItem* ArchiveItem;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? C7 06")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? C7 06 ?? ?? ?? ?? 48 8B C6 C6 46 08 01 48 8B 4C 24 ??")]
     public partial void ViewArchiveItem(uint itemId);
 }
 
