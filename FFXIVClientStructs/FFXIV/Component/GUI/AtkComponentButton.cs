@@ -27,6 +27,6 @@ public unsafe partial struct AtkComponentButton {
     }
 
     /// <remarks> Used by AtkComponentCheckBox and AtkComponentRadioButton. </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 DD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 46 12")]
     public partial void SetChecked(bool isChecked);
 }

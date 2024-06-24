@@ -38,6 +38,6 @@ public unsafe partial struct ExdModule {
     [MemberFunction("48 83 EC 38 48 8B 05 ?? ?? ?? ?? 48 8B 88")]
     public partial bool IsColumnRsv(uint sheetIndex, uint rowId, uint subRowId, uint columnIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 63 DD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 75 00")]
     public static partial void* GetItemRowById(uint itemId);
 }

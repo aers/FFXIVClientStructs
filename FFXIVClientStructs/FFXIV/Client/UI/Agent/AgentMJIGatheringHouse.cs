@@ -86,6 +86,6 @@ public unsafe partial struct AgentMJIGatheringHouse {
         [FieldOffset(0x8)] public uint IconId;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0A 66 FF C6")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B FA 48 8B F1 48 85 D2 74 31")]
     public partial bool IsExpeditionUnlocked(ExpeditionData* expedition);
 }

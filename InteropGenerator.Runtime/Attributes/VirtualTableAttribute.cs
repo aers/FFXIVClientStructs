@@ -11,8 +11,8 @@ namespace InteropGenerator.Runtime.Attributes;
 ///     address found there. Repeats for each entry.
 /// </param>
 [AttributeUsage(AttributeTargets.Struct)]
-public sealed class VirtualTableAttribute(string signature, byte[] relativeFollowOffsets) : Attribute {
-    public VirtualTableAttribute(string signature, byte relativeFollowOffset) : this(signature, [relativeFollowOffset]) { }
+public sealed class VirtualTableAttribute(string signature, ushort[] relativeFollowOffsets) : Attribute {
+    public VirtualTableAttribute(string signature, ushort relativeFollowOffset) : this(signature, [relativeFollowOffset]) { }
     public string Signature { get; } = signature;
-    public byte[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
+    public ushort[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
 }

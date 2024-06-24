@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x31F)]
 public unsafe partial struct SatisfactionSupplyManager {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 45 33 C0 66 89 43 60", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 48 8B 9C 24 ?? ?? ?? ??", 3)]
     public static partial SatisfactionSupplyManager* Instance();
 
     [FieldOffset(0x1)] public byte BonusGuaranteeRowId;

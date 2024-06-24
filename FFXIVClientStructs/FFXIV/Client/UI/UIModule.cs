@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<UIModuleInterface>, Inherits<AtkModuleEvent>, Inherits<ExcelLanguageEvent>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xEE030)]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 61 ?? 4C 8B F2", 3)]
+[VirtualTable("48 8D 0D ?? ?? ?? ?? 49 89 46 10", 3)]
 public unsafe partial struct UIModule {
     public static UIModule* Instance() => Framework.Instance()->GetUIModule();
 
@@ -101,10 +101,10 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xEDEF0)] internal UIInputModule UIInputModule;
     // [FieldOffset(0xEDFE0)] internal Vf67Struct;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 39 BE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 63 45 80")]
     public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 BF 4C 8B CB"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 B4 4C 8B CB"), GenerateStringOverloads]
     public static partial bool IsPlayerCharacterName(byte* name);
 
     public static void PlayChatSoundEffect(uint effectId) {

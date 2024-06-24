@@ -37,7 +37,7 @@ public unsafe partial struct InfoProxyDetail {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 53 16")]
     public partial void SetUpdateLanguageMask(InfoProxyCommonList.CharacterData.LanguageMask languageMask);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? 33 C0"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? C6 46 08 01"), GenerateStringOverloads]
     public partial void SetUpdateSearchComment(byte* searchComment);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B D9 BF ?? ?? ?? ?? 8B C7")]

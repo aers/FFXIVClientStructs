@@ -16,13 +16,13 @@ public unsafe partial struct InfoModule {
     [FieldOffset(0x1BC8)] public Utf8String UnkString3;
     [FieldOffset(0x1C30)] public ulong OnlineStatusFlags;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 55 68")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 85 E4 7E 5C")]
     public partial InfoProxyInterface* GetInfoProxyById(InfoProxyId id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 83 C9 FF 48 8D 8C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 C7 C1 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ??")]
     public partial byte* GetLocalCharacterName();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 39 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 39 07")]
     public partial ulong GetLocalContentId();
 
     /// <summary>

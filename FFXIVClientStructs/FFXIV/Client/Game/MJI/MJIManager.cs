@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 /// Manager for Island Sanctuary (internally MJI).
 /// </summary>
 // Client::Game::MJI::MJIManager
-// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 F6 48 C7 01"
+// ctor "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 33 F6 48 C7 01"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x440)]
 public unsafe partial struct MJIManager {
@@ -182,7 +182,7 @@ public unsafe partial struct MJIManager {
     /// </summary>
     /// <param name="functionId">The RowID of the MJIFunction to check</param>
     /// <returns>Returns <c>true</c> if the function is unlocked, <c>false</c> otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 3A F0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 88 77 30")]
     public partial bool IsFunctionUnlocked(byte functionId);
 
     /// <summary>
@@ -195,7 +195,7 @@ public unsafe partial struct MJIManager {
     /// <summary>
     /// Gets the total number of slots available in the Island Sanctuary pasture.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 C0 48 8D 9E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 E0 49 8D BD ?? ?? ?? ??")]
     public partial byte GetPastureSlotCount();
 
     /// <summary>

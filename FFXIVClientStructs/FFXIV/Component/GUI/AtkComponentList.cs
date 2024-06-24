@@ -48,18 +48,18 @@ public unsafe partial struct AtkComponentList {
     [VirtualFunction(36)]
     public partial int GetItemCount();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 FE 85")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 80 FF 04")]
     public partial void SetItemCount(int value);
 
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 45 38 A4 3E"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C5 48 8D 5B 70"), GenerateStringOverloads]
     public partial void SetItemLabel(int index, byte* text);
 
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 89 5C 24 28 48 8B 5C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 97 ?? ?? ?? ?? 89 5C 24 28")]
     public partial byte* GetItemLabel(int index);
 
-    [MemberFunction("83 FA FF 0F 8E")]
+    [MemberFunction("83 FA FF 0F 8E ?? ?? ?? ?? 53")]
     public partial void DispatchItemEvent(int index, AtkEventType eventType);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]

@@ -15,10 +15,10 @@ public unsafe partial struct AtkComponentTreeList {
     [FieldOffset(0x21C)] public bool LayoutRefreshPending;
 
     /// <remarks> Does not add it to the <see cref="Items"/> list automatically! </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 45 85 ED")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 8B CD")]
     public partial AtkComponentTreeListItem* CreateItem();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 38 60 45")]
+    [MemberFunction("48 83 EC 28 3B 91 ?? ?? ?? ??")]
     public partial AtkComponentTreeListItem* GetItem(uint index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 39 BD")]
@@ -36,7 +36,7 @@ public unsafe partial struct AtkComponentTreeList {
     /// Expands the given group and collapses all other groups.<br/>
     /// After calling this, you might also want to set <see cref="LayoutRefreshPending"/> to <c>true</c>.
     /// </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 88 AB ?? ?? ?? ?? 80 4F 42 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 88 BB ?? ?? ?? ?? 80 4F 42 10")]
     public partial void ExpandGroupExclusively(AtkComponentTreeListItem* groupHeaderItem, bool a3 = false);
 }
 

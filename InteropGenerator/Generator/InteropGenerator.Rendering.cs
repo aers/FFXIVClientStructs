@@ -98,8 +98,8 @@ public sealed partial class InteropGenerator {
 
     private static string GetAddressString(StructInfo structInfo, string signatureName, SignatureInfo signatureInfo) {
         string paddedSignature = signatureInfo.GetPaddedSignature();
-        ImmutableArray<byte> relativeOffsets = signatureInfo.GetRelCallAndJumpAdjustedOffset();
-        string offsets = "new byte[] {" + string.Join(", ", relativeOffsets) + "}";
+        ImmutableArray<ushort> relativeOffsets = signatureInfo.GetRelCallAndJumpAdjustedOffset();
+        string offsets = "new ushort[] {" + string.Join(", ", relativeOffsets) + "}";
 
         // get signature as ulong array
         IEnumerable<string> groupedSig = paddedSignature.Replace("??", "00").Split()

@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AtkModule>]
 [StructLayout(LayoutKind.Explicit, Size = 0x28F98)]
-[VirtualTable("33 C9 48 8D 05 ?? ?? ?? ?? 48 89 8F", 5)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() => UIModule.Instance()->GetRaptureAtkModule();
 
@@ -56,25 +56,25 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x28F90)] internal nint ShellCommands; // only 1 function "48 83 EC 38 4C 8B C2 C7 44 24" to open links?
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 44 24 ?? 48 89 9F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 89 5F 58")]
     public partial bool ChangeUiMode(uint uiMode);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 39 77 28 0F 84")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4E 30")]
     public partial bool IncRefNumberArrayData(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 75 28")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 57 4C")]
     public partial bool DecRefNumberArrayData(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 83 7E ?? ?? 74 0D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 ED 41 8B 47 44")]
     public partial bool IncRefStringArrayData(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 58 48 85 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6B 28")]
     public partial bool DecRefStringArrayData(int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 50")]
     public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong unk, ushort parentAddonId, int unk2);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C0 48 83 C4 60")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9")]
     public partial ushort OpenAddonByAgent(byte* addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
 
     [VirtualFunction(39)]

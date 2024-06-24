@@ -17,10 +17,10 @@ namespace InteropGenerator.Runtime.Attributes;
 ///     address found there. Repeats for each entry.
 /// </param>
 [AttributeUsage(AttributeTargets.Method)]
-public sealed class MemberFunctionAttribute(string signature, byte[] relativeFollowOffsets) : Attribute {
-    public MemberFunctionAttribute(string signature, byte relativeFollowOffset) : this(signature, [relativeFollowOffset]) { }
+public sealed class MemberFunctionAttribute(string signature, ushort[] relativeFollowOffsets) : Attribute {
+    public MemberFunctionAttribute(string signature, ushort relativeFollowOffset) : this(signature, [relativeFollowOffset]) { }
     public MemberFunctionAttribute(string signature) : this(signature, []) { }
 
     public string Signature { get; } = signature;
-    public byte[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
+    public ushort[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
 }

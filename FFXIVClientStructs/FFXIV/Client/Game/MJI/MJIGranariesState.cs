@@ -14,7 +14,7 @@ public unsafe partial struct MJIGranaryState {
 }
 
 // Client::Game::MJI::MJIGranariesState
-// ctor "48 89 7C 24 ?? 45 33 D2 48 8D 51 02"
+// ctor "48 89 5C 24 ?? 33 DB 4C 8D 41"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct MJIGranariesState {
@@ -26,6 +26,6 @@ public unsafe partial struct MJIGranariesState {
     [MemberFunction("E8 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 54 24")]
     public partial void CollectResources(byte granaryIndex);
 
-    [MemberFunction("48 83 EC 38 45 0F B6 C9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 74 24 ?? 48 8D 93 ?? ?? ?? ??")]
     public partial void SelectExpeditionCommit(byte granaryIndex, byte expeditionId, byte numDays);
 }

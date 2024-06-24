@@ -39,11 +39,11 @@ public unsafe partial struct RecommendEquipModule {
     [MemberFunction("41 54 41 55 41 56 41 57 48 83 EC 28 80 39 00")]
     public partial bool Setup(byte race, byte sex, ushort level, byte classJob, byte grandCompany, byte pvpRank);
 
-    [MemberFunction("E8 ?? ?? ?? ?? BB ?? ?? ?? ?? 41 C6 46")]
+    [MemberFunction("41 54 41 55 41 56 41 57 48 83 EC 38 4C 8B F1")]
     public partial bool SetupFromPlayerState();
 
     /// <remarks> Calls SetupFromPlayerState internally. </remarks>
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 0F B6 FA 48 8B D9 E8 ?? ?? ?? ?? 84 C0 75 0B")]
+    [MemberFunction("40 56 41 54 41 55 41 57 48 83 EC 48 48 8B F1")]
     public partial bool SetupForClassJob(byte classJobId);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 C7 43 ?? ?? ?? ?? ?? 48 8B 03")]

@@ -4,21 +4,22 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 // ctor "48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 C6 01 00 48 83 C1 04"
 // Note: Data is cleared when switching zones
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1478)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1888)]
 public unsafe partial struct MirageManager {
-    [StaticAddress("48 8B 1D ?? ?? ?? ?? 48 85 DB 74 48", 3, isPointer: true)]
+    [StaticAddress("74 2C 48 8B 0D ?? ?? ?? ?? 48 85 C9", 5, isPointer: true)]
     public static partial MirageManager* Instance();
 
     [FieldOffset(0)] public bool IsApplyingGlamourPlate;
 
     [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray800<uint> _prismBoxItemIds;
-    [FieldOffset(0xC84), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStainIds;
-    [FieldOffset(0xFA4)] public bool PrismBoxRequested;
-    [FieldOffset(0xFA5)] public bool PrismBoxLoaded;
+    [FieldOffset(0xC84), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain1Ids;
+    [FieldOffset(0xFA4), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain2Ids;
+    [FieldOffset(0x12C4)] public bool PrismBoxRequested;
+    [FieldOffset(0x12C5)] public bool PrismBoxLoaded;
 
-    [FieldOffset(0xFA8), FixedSizeArray] internal FixedSizeArray20<GlamourPlate> _glamourPlates;
-    [FieldOffset(0x1458)] public bool GlamourPlatesRequested;
-    [FieldOffset(0x1459)] public bool GlamourPlatesLoaded;
+    [FieldOffset(0x12C8), FixedSizeArray] internal FixedSizeArray20<GlamourPlate> _glamourPlates;
+    [FieldOffset(0x1868)] public bool GlamourPlatesRequested;
+    [FieldOffset(0x1869)] public bool GlamourPlatesLoaded;
 
     /// <summary>
     /// Restores an item from the Glamour Dresser and puts it back into the players inventory.
@@ -32,9 +33,10 @@ public unsafe partial struct MirageManager {
     public partial bool RestorePrismBoxItem(uint itemIndex);
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct GlamourPlate {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray12<uint> _itemIds;
-        [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray12<byte> _stainIds;
+        [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray12<byte> _stain1Ids;
+        [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray12<byte> _stain2Ids;
     }
 }

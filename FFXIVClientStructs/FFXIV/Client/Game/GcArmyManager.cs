@@ -4,11 +4,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::GcArmyManager
 // Squadron
-// ctor "48 83 EC 28 48 83 3D ?? ?? ?? ?? ?? 75 2E 33 D2"
+// ctor "48 83 EC ?? 48 83 3D ?? ?? ?? ?? ?? 75 ?? 33 D2 45 33 C0 8D 4A ?? E8 ?? ?? ?? ?? 33 C9 48 85 C0 74 ?? 48 89 08 48 89 48 ?? 48 89 05"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct GcArmyManager {
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 57 7C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D AC")]
     public static partial GcArmyManager* Instance();
 
     /// <remarks> Data is loaded on-demand inside GC Barracks </remarks>
@@ -16,39 +16,41 @@ public unsafe partial struct GcArmyManager {
     [FieldOffset(0x08)] public int LastMissionCompleteNotificationTimestamp;
     [FieldOffset(0x0C)] public int LastTrainingCompleteNotificationTimestamp;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 41 8B DF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 28 8B FB")]
     public partial uint GetMemberCount();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 63 3B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 48 13")]
     public partial GcArmyMember* GetMember(uint index);
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xB18)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF28)] // TODO: size changed, fix offsets
 public unsafe partial struct GcArmyData {
     [FieldOffset(0), FixedSizeArray] internal FixedSizeArray8<GcArmyMember> _members;
+    // Receive network packet: "0F 10 02 48 8B C2"
     /// <remarks> RowId of GcArmyProgress </remarks>
-    [FieldOffset(0x280)] public byte Progress;
+    [FieldOffset(0x2C0)] public byte Progress;
 
     /// <remarks> RowId of GcArmyExpedition </remarks>
-    [FieldOffset(0x282)] public ushort CurrentExpedition;
+    [FieldOffset(0x2C2)] public ushort CurrentExpedition;
 
-    [FieldOffset(0x288)] public ushort BonusPhysical;
-    [FieldOffset(0x28A)] public ushort BonusMental;
-    [FieldOffset(0x28C)] public ushort BonusTactical;
+    [FieldOffset(0x2C8)] public ushort BonusPhysical;
+    [FieldOffset(0x2CA)] public ushort BonusMental; 
+    [FieldOffset(0x2CC)] public ushort BonusTactical;
 
     [FieldOffset(0x2FC)] public uint MissionRewardExperience;
 
-    [FieldOffset(0x370)] public uint RecruitENpcResidentId;
+    // Recruit member network packet: "40 57 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 ? ? ? ? 48 8B FA"
+    [FieldOffset(0x33C)] public uint RecruitENpcResidentId;
 
-    [FieldOffset(0x378)] public CustomizeData RecruitCustomizeData;
+    [FieldOffset(0x3B8)] public CustomizeData RecruitCustomizeData; // maybe +0x40?
 
-    [FieldOffset(0x3C0)] public GcArmyMember RecruitMember;
+    [FieldOffset(0x408)] public GcArmyMember RecruitMember;
 
-    [FieldOffset(0x470)] public byte MemberCount;
+    [FieldOffset(0x4C0)] public byte MemberCount;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x50)]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct GcArmyMember {
     [FieldOffset(0x00)] public uint Face;
     [FieldOffset(0x04)] public uint ENpcResidentId;
@@ -93,10 +95,17 @@ public unsafe partial struct GcArmyMember {
     [FieldOffset(0x48)] public byte StainHands;
     [FieldOffset(0x49)] public byte StainLegs;
     [FieldOffset(0x4A)] public byte StainFeet;
-    [FieldOffset(0x4B)] public byte MasteryIndependent;
-    [FieldOffset(0x4C)] public byte MasteryOffensive;
-    [FieldOffset(0x4D)] public byte MasteryDefensive;
-    [FieldOffset(0x4E)] public byte MasteryBalanced;
+    [FieldOffset(0x4B)] public byte Stain2MainHand;
+    [FieldOffset(0x4C)] public byte Stain2OffHand;
+    [FieldOffset(0x4D)] public byte Stain2Head;
+    [FieldOffset(0x4E)] public byte Stain2Body;
+    [FieldOffset(0x4F)] public byte Stain2Hands;
+    [FieldOffset(0x50)] public byte Stain2Legs;
+    [FieldOffset(0x51)] public byte Stain2Feet;
+    [FieldOffset(0x52)] public byte MasteryIndependent;
+    [FieldOffset(0x53)] public byte MasteryOffensive;
+    [FieldOffset(0x54)] public byte MasteryDefensive;
+    [FieldOffset(0x55)] public byte MasteryBalanced;
 }
 
 [Flags]

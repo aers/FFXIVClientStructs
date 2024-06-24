@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x258)]
 public unsafe partial struct Device {
-    [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8D 54 24 ?? F3 0F 10 44 24", 3, isPointer: true)]
+    [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00", 3, isPointer: true)]
     public static partial Device* Instance();
 
     [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
@@ -32,9 +32,9 @@ public unsafe partial struct Device {
     [FieldOffset(0x240)] public void* D3D11DeviceContext; // ID3D11DeviceContext5
     [FieldOffset(0x250)] public void* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 89 06 8B C3")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 89 45 48")]
     public partial ConstantBuffer* CreateConstantBuffer(int byteSize, uint flags, uint unk);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 0F 48 8D 54 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 89 47 98")]
     public partial Texture* CreateTexture2D(int* size, byte mipLevel, uint textureFormat, uint flags, uint unk);
 }

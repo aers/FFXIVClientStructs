@@ -61,10 +61,10 @@ public unsafe partial struct LayoutManager {
     // 300: instance pools
     // B70: gfx bg object pool ptr
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 83 C4 38 C3 33 C0")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 4C 8B 91 ?? ?? ?? ?? 41 8B F9")]
     public partial void SetInteriorFixture(int floor, int part, int fixtureId, byte unk = 255);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B C5 EB 6A")]
+    [MemberFunction("8B 02 4C 8D 41 40")]
     public partial void SetActiveFestivals(GameMain.Festival* festivals); // Array of exactly 4 festivals. Use 0 for none.
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
@@ -90,7 +90,7 @@ public unsafe partial struct OutdoorAreaLayoutData {
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 0E 41 80 F9 FF")]
     public partial void SetFixture(uint plot, uint part, uint fixtureId);
 
-    [MemberFunction("40 55 48 83 EC 30 41 0F B6 E9")]
+    [MemberFunction("40 55 48 83 EC 20 41 0F B6 E9")]
     public partial void SetFixtureStain(uint plot, uint part, byte stain);
 }
 
@@ -102,7 +102,7 @@ public unsafe partial struct OutdoorPlotLayoutData {
     [MemberFunction("E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 8D 0C AD")]
     public partial void SetFixture(uint part, uint fixture, uint a4 = 0xFFFFFFFF);
 
-    [MemberFunction("E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 4A 8D 34 8D")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 27 48 81 C3 ?? ?? ?? ??")]
     public partial void SetFixtureStain(uint part, byte stain);
 }
 

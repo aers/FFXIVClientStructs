@@ -20,7 +20,7 @@ public unsafe partial struct AtkTimeline {
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 4B 10")]
     public partial void PlayAnimation(AtkTimelineJumpBehavior behavior, byte labelId, float startTime = 0, float endTime = 0);
 
-    [MemberFunction("E9 ?? ?? ?? ?? C3 48 83 EC 48")]
+    [MemberFunction("40 53 48 83 EC 30 0F B7 41 2A")]
     public partial void UpdateChildTimelines(float frameTime);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 7D 48 8B 43 20")]

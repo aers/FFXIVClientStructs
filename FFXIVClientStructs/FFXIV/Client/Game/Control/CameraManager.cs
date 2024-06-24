@@ -17,6 +17,6 @@ public unsafe partial struct CameraManager {
 
     [FieldOffset(0x60)] public CameraBase UnkCamera; //not a pointer
 
-    [MemberFunction("E8 ?? ?? ?? ?? F7 80")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 DF")]
     public partial Camera* GetActiveCamera();
 }

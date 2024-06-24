@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::Camera
 //   Client::Game::CameraBase
-// ctor "E8 ?? ?? ?? ?? EB 03 48 8B C7 45 33 C0 48 89 03"
+// ctor "40 53 48 83 EC ?? 48 8D 05 ?? ?? ?? ?? 48 8B D9 48 89 01 48 83 C1 ?? E8 ?? ?? ?? ?? 0F B6 83 ?? ?? ?? ?? 33 C9 24"
 [GenerateInterop(isInherited: true)]
 [Inherits<CameraBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]

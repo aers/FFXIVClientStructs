@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs", "FFXIVClientStructs\FFXIVClientStructs.csproj", "{3DBAEE68-9D94-4807-BCB1-E42EDD52B489}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs.InteropSourceGenerators", "FFXIVClientStructs.InteropSourceGenerators\FFXIVClientStructs.InteropSourceGenerators.csproj", "{76ECBEC7-1E42-4DA0-8706-3C6FF15A615D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs.Generators", "FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj", "{76ECBEC7-1E42-4DA0-8706-3C6FF15A615D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFXIVClientStructs.ResolverTester", "FFXIVClientStructs.ResolverTester\FFXIVClientStructs.ResolverTester.csproj", "{1830145F-E3E8-4A4F-A2C5-A773B3A583F0}"
 EndProject
@@ -25,6 +25,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteropGenerator.Tests", "InteropGenerator.Tests\InteropGenerator.Tests.csproj", "{527062AF-EDDF-41A3-80B7-F902445D8045}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelGenerator", "ExcelGenerator\ExcelGenerator.csproj", "{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompatChecker", "CompatChecker\CompatChecker.csproj", "{8371A8A4-A9E7-445A-A859-C10CF001A703}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,10 @@ Global
 		{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE42ACFF-6BEB-4FAD-98F6-251B82E8B633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8371A8A4-A9E7-445A-A859-C10CF001A703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8371A8A4-A9E7-445A-A859-C10CF001A703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8371A8A4-A9E7-445A-A859-C10CF001A703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8371A8A4-A9E7-445A-A859-C10CF001A703}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

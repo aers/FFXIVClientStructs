@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public unsafe partial struct ReconstructionBoxManager {
-    [StaticAddress("48 8B 15 ?? ?? ?? ?? 48 8B C8 48 8B 5C 24", 3, isPointer: true)]
+    [StaticAddress("48 8B 15 ?? ?? ?? ?? 48 8B C8 48 83 C4 28", 3, isPointer: true)]
     public static partial ReconstructionBoxManager* Instance();
 
     [FieldOffset(0x8)] public bool Loaded;

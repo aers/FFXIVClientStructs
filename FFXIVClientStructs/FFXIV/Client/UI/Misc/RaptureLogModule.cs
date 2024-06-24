@@ -42,16 +42,16 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x3478)] public LogMessageSource* MsgSourceArray;
     [FieldOffset(0x3480)] public int MsgSourceArrayLength;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 39 9E ?? ?? ?? ?? 7E 4B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 45 85 F6")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 03 FB")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB AA")]
     public partial void ShowLogMessage(uint logMessageId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 EB 17")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 5E 28")]
     public partial void ShowLogMessageUInt(uint logMessageId, uint value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 46 32")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4B 44")]
     public partial void ShowLogMessageUInt2(uint logMessageId, uint value1, uint value2);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 84 ED 74 0A 8B D7")]
@@ -63,16 +63,16 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? FE 44 24 50"), GenerateStringOverloads]
     public partial void PrintString(byte* str);
 
-    [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 17")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4D 50 44 0F B7 E0")]
     public partial ulong GetContentIdForLogMessage(int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8D 96 ?? ?? ?? ?? 48 8D 4C 24")]
     public partial bool GetLogMessage(int index, Utf8String* str);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F B6 85 ?? ?? ?? ?? 48 8D 8D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 51 44 0F B6 95 ?? ?? ?? ??")]
     public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, int* timestamp);
 
-    [MemberFunction("4C 8B D1 48 8B 89 ?? ?? ?? ?? 48 85 C9")]
+    [MemberFunction("4C 8B D9 48 8B 89 ?? ?? ?? ??")]
     public partial void AddMsgSourceEntry(ulong contentId, int messageIndex, ushort worldId, ushort chatType);
 
     public bool GetLogMessage(int index, out byte[] message) {

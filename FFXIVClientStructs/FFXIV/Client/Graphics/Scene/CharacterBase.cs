@@ -91,7 +91,7 @@ public unsafe partial struct CharacterBase {
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]
     public partial void Destroy();
 
-    [MemberFunction("40 55 56 41 56 48 83 EC ?? 80 BA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 89 04 3E")]
     public partial Texture* PrepareColorTable(MaterialResourceHandle* material, byte stainId); // aka PrepareColorSet
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B DF 48 8B 0D")]

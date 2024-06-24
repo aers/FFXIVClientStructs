@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 [Inherits<IManagerBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x228)]
 public unsafe partial struct LayoutWorld {
-    [StaticAddress("48 89 05 ?? ?? ?? ?? 48 8B 00", 3, isPointer: true)]
+    [StaticAddress("0F 84 ?? ?? ?? ?? 48 8B 49 18 48 8B D6", 3, isPointer: true)]
     public static partial LayoutWorld* Instance();
 
     [FieldOffset(0x018)] public LayoutManager* GlobalLayout;

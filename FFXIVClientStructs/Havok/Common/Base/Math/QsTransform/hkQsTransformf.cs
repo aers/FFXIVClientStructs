@@ -26,7 +26,7 @@ public unsafe partial struct hkQsTransformf {
     // [MemberFunction("")]
     // public partial void copyToTransform(hkTransformf* transformOut);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 5D F0 44 0F 28 55")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 5D 00")]
     public partial void get4x4ColumnMajor(float* p);
 
     [MemberFunction("E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC CC 0F 28 02")]

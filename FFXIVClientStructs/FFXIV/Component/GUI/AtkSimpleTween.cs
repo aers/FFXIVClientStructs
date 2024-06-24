@@ -24,13 +24,13 @@ public unsafe partial struct AtkSimpleTween : ICreatable {
     [FieldOffset(0x40)] public AtkEvent* Event;
     [FieldOffset(0x48)] public float EasingFactor;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 89 6B 58")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B C3 89 7B 58")]
     public partial void Ctor();
 
     [VirtualFunction(1)]
     public partial void Dtor();
 
-    [MemberFunction("E9 ?? ?? ?? ?? 48 83 B9 ?? ?? ?? ?? ?? 74 8E")]
+    [MemberFunction("E9 ?? ?? ?? ?? 48 83 BB ?? ?? ?? ?? ?? 74 8E")]
     public partial void Clear();
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B 87 ?? ?? ?? ?? 4C 8B CF")]
@@ -54,7 +54,7 @@ public unsafe partial struct AtkSimpleTween : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5B 08 48 85 DB 75 DF")]
     public partial void SetNodeValue(SimpleTweenValueType type, float value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 31 48 63 50 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 2C 48 63 50 38")]
     public partial void Update(float delta);
 }
 

@@ -1,4 +1,4 @@
-name: CExporter Check
+name: PR Check Patch Day / Prep
 
 on:
   pull_request_target:

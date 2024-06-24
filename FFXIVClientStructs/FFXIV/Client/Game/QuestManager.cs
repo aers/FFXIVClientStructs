@@ -20,7 +20,7 @@ public unsafe partial struct QuestManager {
     [FieldOffset(0xF40)] public byte NumAcceptedQuests;
     [FieldOffset(0xF50)] public byte NumAcceptedLeveQuests;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 88 84 2C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 43 88 84 3E ?? ?? ?? ??")]
     public static partial bool IsQuestComplete(ushort questId);
     public static bool IsQuestComplete(uint questId) => IsQuestComplete((ushort)(questId & 0xFFFF));
 
@@ -67,7 +67,7 @@ public unsafe partial struct QuestManager {
     /// </summary>
     /// <param name="levequestId">The RowId of the Leve Sheet.</param>
     /// <returns>Returns <c>true</c> if the levequest has been completed, <c>false</c> otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 88 45 80")]
+    [MemberFunction("44 0F B7 C2 4C 8B C9 49 C1 E8 03")]
     public partial bool IsLevequestComplete(ushort levequestId);
 
     /// <summary>
@@ -77,13 +77,13 @@ public unsafe partial struct QuestManager {
     /// Has to be multiplied by 60 for a unix timestamp.<br/>
     /// Use <see cref="GetNextLeveAllowancesUnixTimestamp"/> or <see cref="GetNextLeveAllowancesDateTime"/> instead.
     /// </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 75 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 74 24 ?? 8B D8")]
     private static partial int GetNextLeveAllowancesTimestamp();
 
     /// <summary>
     /// Get the time when the player will receive new leve allowances.
     /// </summary>
-    /// <returns>A unix timestamp as <see cref="uint"/>.</returns>
+    /// <returns>A unix timestamp as <see cref="int"/>.</returns>
     public static int GetNextLeveAllowancesUnixTimestamp() => GetNextLeveAllowancesTimestamp() * 60;
 
     /// <summary>
@@ -92,7 +92,7 @@ public unsafe partial struct QuestManager {
     /// <returns>A <see cref="DateTime"/> in the local time zone.</returns>
     public static DateTime GetNextLeveAllowancesDateTime() => DateTime.UnixEpoch.AddSeconds(GetNextLeveAllowancesUnixTimestamp()).ToLocalTime();
 
-    [MemberFunction("45 33 C9 48 81 C1 ?? ?? ?? ?? 45 8D 51 02")]
+    [MemberFunction("33 C0 4C 8B C1 66 39 81 ?? ?? ?? ?? 0F 94 C0")]
     public partial uint GetBeastTribeAllowance();
 
     public bool IsDailyQuestCompleted(ushort questId) {
