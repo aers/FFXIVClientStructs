@@ -12,33 +12,32 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 // has id >63000 in InstanceContent sheet
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1CA8 + 0x658)]
+[StructLayout(LayoutKind.Explicit, Size = 0x23E8)]
 public unsafe partial struct InstanceContentOceanFishing {
 
     // Most of the fields, if not specified, can be found in "83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05"
 
     // Row ID for IKDRoute sheet
     // Each zone (and their time of day) can be extracted from sheet
-    [FieldOffset(0x1CD0)] public uint CurrentRoute;
+    [FieldOffset(0x1DB8)] public uint CurrentRoute;
 
-    [FieldOffset(0x1CD4)] public OceanFishingStatus Status;
+    [FieldOffset(0x1DBC)] public OceanFishingStatus Status;
 
-    // this should be uint, byte should be fine too since it only has 3 zones
-    [FieldOffset(0x1CD8)] public byte CurrentZone; // 0, 1, 2
+    [FieldOffset(0x1DC0)] public uint CurrentZone; // 0, 1, 2
 
     // It always is 420
-    [FieldOffset(0x1CDC)] public uint Duration;
+    [FieldOffset(0x1DC4)] public uint Duration;
 
     // InstanceContentDirector.ContentDirector.ContentTimeLeft - TimeOffset = time left in current zone
     // After changing zones, seems to tick down independent of the UI and then jump up
-    [FieldOffset(0x1CE0)] public uint TimeOffset;
+    [FieldOffset(0x1DC8)] public uint TimeOffset;
 
-    [FieldOffset(0x1CE4)] public uint WeatherId;
+    [FieldOffset(0x1DCC)] public uint WeatherId;
 
-    [FieldOffset(0x1CE8)] public bool SpectralCurrentActive;
+    [FieldOffset(0x1DD0)] public bool SpectralCurrentActive;
 
     // Offest, struct size and array length can be found with this sig "45 8B 84 CF ?? ?? ?? ?? 48 8B CD"
-    [FieldOffset(0x1D3C), FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
+    [FieldOffset(0x1E24), FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
 
     // The first 10 of them are normal fish, the rest are spectral fish
     [UnscopedRef]
@@ -51,22 +50,22 @@ public unsafe partial struct InstanceContentOceanFishing {
     // the function that sets the data -> "48 8D 81 ?? ?? ?? ?? B9 ?? ?? ?? ?? 0F 1F 40 ?? 48 8D 80"
     // Offsets can be found with "48 89 5C 24 ? 48 89 74 24 ? 57 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 ? ? ? ? 48 8B F1 48 8D 4C 24"
     // these are only valid when Status is Finished
-    [FieldOffset(0x2100)] public byte AllResultSize;
-    [FieldOffset(0x2101)] public byte LocalIndexInAllResult;
-    [FieldOffset(0x2102)] public IndividualResultStruct IndividualResult;
-    [FieldOffset(0x2124)] public AllResultStruct LocalPlayerAllResult;
-    [FieldOffset(0x214C), FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResults;
+    [FieldOffset(0x21E8)] public byte AllResultSize;
+    [FieldOffset(0x21E9)] public byte LocalIndexInAllResult;
+    [FieldOffset(0x21EA)] public IndividualResultStruct IndividualResult;
+    [FieldOffset(0x220C)] public AllResultStruct LocalPlayerAllResult;
+    [FieldOffset(0x2234), FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResults;
 
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet
-    [FieldOffset(0x22E0)] public uint Mission1Type;
-    [FieldOffset(0x22E4)] public uint Mission2Type;
-    [FieldOffset(0x22E8)] public uint Mission3Type;
+    [FieldOffset(0x23C8)] public uint Mission1Type;
+    [FieldOffset(0x23CC)] public uint Mission2Type;
+    [FieldOffset(0x23D0)] public uint Mission3Type;
 
     // Progress can be larger than the mission's required amount
-    [FieldOffset(0x22EC)] public ushort Mission1Progress;
-    [FieldOffset(0x22EE)] public ushort Mission2Progress;
-    [FieldOffset(0x22F0)] public ushort Mission3Progress;
+    [FieldOffset(0x23D4)] public ushort Mission1Progress;
+    [FieldOffset(0x23D6)] public ushort Mission2Progress;
+    [FieldOffset(0x23D8)] public ushort Mission3Progress;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FishDataStruct {
