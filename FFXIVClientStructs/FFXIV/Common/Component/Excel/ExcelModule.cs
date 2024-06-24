@@ -1,5 +1,6 @@
-namespace FFXIVClientStructs.FFXIV.Component.Excel;
+namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
+// Common::Component::Excel::ExcelModule
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x818)]
 public unsafe partial struct ExcelModule {
