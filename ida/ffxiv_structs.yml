@@ -1524,8 +1524,8 @@ enums:
     "OnSquadronMission": 1
     "InTraining": 2
     "ReturnedFromMission": 4
-- type: Client::Game::TerritoryType
-  name: TerritoryType
+- type: Client::Game::HousingTerritoryType
+  name: HousingTerritoryType
   underlying: int
   namespace: Client.Game
   values:
@@ -3874,7 +3874,7 @@ structs:
       name: eventParam
     - type: Component::GUI::AtkEvent*
       name: atkEvent
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: atkEventData
   - name: ReceiveEvent
     offset: 16
@@ -3888,7 +3888,7 @@ structs:
       name: eventParam
     - type: Component::GUI::AtkEvent*
       name: atkEvent
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: atkEventData
   member_functions: []
 - type: Component::GUI::AtkEventManager
@@ -7685,7 +7685,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -7699,7 +7699,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   member_functions: []
 - type: Client::UI::RaptureAtkColorDataManager
@@ -7817,7 +7817,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -7831,7 +7831,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   member_functions: []
 - type: Client::UI::UIInputModule
@@ -12548,7 +12548,7 @@ structs:
   virtual_functions:
   - name: GetTerritoryType
     offset: 48
-    return_type: Client::Game::TerritoryType
+    return_type: Client::Game::HousingTerritoryType
     parameters:
     - type: Client::Game::HousingTerritory*
       name: this
@@ -12575,7 +12575,7 @@ structs:
   virtual_functions:
   - name: GetTerritoryType
     offset: 48
-    return_type: Client::Game::TerritoryType
+    return_type: Client::Game::HousingTerritoryType
     parameters:
     - type: Client::Game::IndoorTerritory*
       name: this
@@ -16241,6 +16241,20 @@ structs:
   - type: byte
     name: IsDisabled
     offset: 21
+  virtual_functions: []
+  member_functions: []
+- type: Component::GUI::AtkEventData::AtkListItemData
+  name: AtkListItemData
+  namespace: Component.GUI
+  union: False
+  size: 40
+  fields:
+  - type: Component::GUI::AtkComponentListItemRenderer*
+    name: ListItemRenderer
+    offset: 0
+  - type: int
+    name: SelectedIndex
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontManager::Font
@@ -26829,7 +26843,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -26843,7 +26857,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   member_functions: []
 - type: Component::GUI::AtkDragDropManager
@@ -26906,7 +26920,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -26920,8 +26934,19 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
+  member_functions: []
+- type: Component::GUI::AtkEventData
+  name: AtkEventData
+  namespace: Component.GUI
+  union: True
+  size: 40
+  fields:
+  - type: Component::GUI::AtkEventData::AtkListItemData
+    name: ListItemData
+    offset: 0
+  virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzer
   name: AtkFontAnalyzer
@@ -43261,7 +43286,7 @@ structs:
   virtual_functions:
   - name: GetTerritoryType
     offset: 48
-    return_type: Client::Game::TerritoryType
+    return_type: Client::Game::HousingTerritoryType
     parameters:
     - type: Client::Game::OutdoorTerritory*
       name: this
@@ -49894,7 +49919,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -49908,7 +49933,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B F0 BF
@@ -50000,7 +50025,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50014,7 +50039,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50069,7 +50094,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50083,7 +50108,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50136,7 +50161,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50150,7 +50175,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50215,7 +50240,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50229,7 +50254,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50340,7 +50365,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50354,7 +50379,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50427,7 +50452,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50441,7 +50466,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50488,7 +50513,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50502,7 +50527,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50582,7 +50607,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50596,7 +50621,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50643,7 +50668,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50657,7 +50682,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50713,7 +50738,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50727,7 +50752,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50774,7 +50799,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50788,7 +50813,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -50936,7 +50961,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -50950,7 +50975,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51039,7 +51064,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51053,7 +51078,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51134,7 +51159,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51148,7 +51173,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51215,7 +51240,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51229,7 +51254,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51276,7 +51301,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51290,7 +51315,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51337,7 +51362,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51351,7 +51376,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51410,7 +51435,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51424,7 +51449,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51521,7 +51546,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51535,7 +51560,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51602,7 +51627,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51616,7 +51641,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51683,7 +51708,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51697,7 +51722,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -51900,7 +51925,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -51914,7 +51939,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: OnUldUpdate
     offset: 40
@@ -52826,7 +52851,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -52840,7 +52865,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   member_functions:
   - signature: E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0
@@ -53401,7 +53426,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -53415,7 +53440,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -53736,7 +53761,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -53750,7 +53775,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -54133,7 +54158,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -54147,7 +54172,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -54469,7 +54494,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -54483,7 +54508,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -54823,7 +54848,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -54837,7 +54862,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -55214,7 +55239,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -55228,7 +55253,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -55530,7 +55555,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -55544,7 +55569,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -55853,7 +55878,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -55867,7 +55892,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -56188,7 +56213,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -56202,7 +56227,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -56514,7 +56539,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -56528,7 +56553,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -56843,7 +56868,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -56857,7 +56882,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -57237,7 +57262,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -57251,7 +57276,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -57560,7 +57585,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -57574,7 +57599,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -57890,7 +57915,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -57904,7 +57929,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -58219,7 +58244,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -58233,7 +58258,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -58566,7 +58591,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -58580,7 +58605,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -58890,7 +58915,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -58904,7 +58929,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -59209,7 +59234,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -59223,7 +59248,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -59546,7 +59571,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -59560,7 +59585,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -59865,7 +59890,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -59879,7 +59904,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -60282,7 +60307,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -60296,7 +60321,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -60619,7 +60644,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -60633,7 +60658,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -60971,7 +60996,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -60985,7 +61010,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -61294,7 +61319,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -61308,7 +61333,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -61613,7 +61638,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -61627,7 +61652,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -61971,7 +61996,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -61985,7 +62010,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -62296,7 +62321,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -62310,7 +62335,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -62621,7 +62646,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -62635,7 +62660,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -62943,7 +62968,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -62957,7 +62982,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -63314,7 +63339,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -63328,7 +63353,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -63640,7 +63665,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -63654,7 +63679,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -63956,7 +63981,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -63970,7 +63995,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -64290,7 +64315,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -64304,7 +64329,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -64702,7 +64727,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -64716,7 +64741,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -65018,7 +65043,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -65032,7 +65057,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -65358,7 +65383,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -65372,7 +65397,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -65719,7 +65744,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -65733,7 +65758,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -66035,7 +66060,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -66049,7 +66074,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -66351,7 +66376,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -66365,7 +66390,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -66693,7 +66718,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -66707,7 +66732,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -67048,7 +67073,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -67062,7 +67087,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -67367,7 +67392,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -67381,7 +67406,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -67683,7 +67708,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -67697,7 +67722,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -68055,7 +68080,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -68069,7 +68094,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -68374,7 +68399,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -68388,7 +68413,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -68690,7 +68715,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -68704,7 +68729,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -69024,7 +69049,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -69038,7 +69063,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -69355,7 +69380,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -69369,7 +69394,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -69683,7 +69708,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -69697,7 +69722,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -70071,7 +70096,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -70085,7 +70110,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -70393,7 +70418,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -70407,7 +70432,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -70709,7 +70734,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -70723,7 +70748,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -71037,7 +71062,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -71051,7 +71076,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -71356,7 +71381,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -71370,7 +71395,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -71688,7 +71713,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -71702,7 +71727,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -72019,7 +72044,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -72033,7 +72058,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -72346,7 +72371,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -72360,7 +72385,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -72673,7 +72698,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -72687,7 +72712,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -72992,7 +73017,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -73006,7 +73031,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -73319,7 +73344,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -73333,7 +73358,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -73646,7 +73671,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -73660,7 +73685,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -73967,7 +73992,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -73981,7 +74006,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -74280,7 +74305,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -74294,7 +74319,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -74621,7 +74646,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -74635,7 +74660,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -74973,7 +74998,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -74987,7 +75012,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -75316,7 +75341,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -75330,7 +75355,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -75641,7 +75666,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -75655,7 +75680,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -75966,7 +75991,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -75980,7 +76005,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -76291,7 +76316,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -76305,7 +76330,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -76616,7 +76641,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -76630,7 +76655,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -76941,7 +76966,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -76955,7 +76980,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -77266,7 +77291,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -77280,7 +77305,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -77591,7 +77616,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -77605,7 +77630,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -77916,7 +77941,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -77930,7 +77955,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -78241,7 +78266,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -78255,7 +78280,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -78635,7 +78660,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -78649,7 +78674,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -78983,7 +79008,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -78997,7 +79022,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -79308,7 +79333,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -79322,7 +79347,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -79633,7 +79658,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -79647,7 +79672,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -79958,7 +79983,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -79972,7 +79997,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -80306,7 +80331,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -80320,7 +80345,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -80631,7 +80656,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -80645,7 +80670,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -80956,7 +80981,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -80970,7 +80995,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -81281,7 +81306,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -81295,7 +81320,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -81606,7 +81631,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -81620,7 +81645,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -81931,7 +81956,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -81945,7 +81970,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -82256,7 +82281,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -82270,7 +82295,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -82601,7 +82626,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -82615,7 +82640,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -82977,7 +83002,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -82991,7 +83016,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -83320,7 +83345,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -83334,7 +83359,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -83685,7 +83710,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -83699,7 +83724,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -84133,7 +84158,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -84147,7 +84172,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -84449,7 +84474,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -84463,7 +84488,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -84787,7 +84812,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -84801,7 +84826,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -85115,7 +85140,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -85129,7 +85154,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -85428,7 +85453,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -85442,7 +85467,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -85747,7 +85772,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -85761,7 +85786,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -86078,7 +86103,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -86092,7 +86117,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -86394,7 +86419,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -86408,7 +86433,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -86719,7 +86744,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -86733,7 +86758,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -87044,7 +87069,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -87058,7 +87083,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -87369,7 +87394,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -87383,7 +87408,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -87692,7 +87717,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -87706,7 +87731,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -88008,7 +88033,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -88022,7 +88047,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -88401,7 +88426,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -88415,7 +88440,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -88717,7 +88742,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -88731,7 +88756,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -89076,7 +89101,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -89090,7 +89115,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -89545,7 +89570,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -89559,7 +89584,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -89865,7 +89890,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -89879,7 +89904,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -90274,7 +90299,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -90288,7 +90313,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -90620,7 +90645,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -90634,7 +90659,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -91005,7 +91030,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -91019,7 +91044,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -91331,7 +91356,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -91345,7 +91370,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -91656,7 +91681,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -91670,7 +91695,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -91969,7 +91994,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -91983,7 +92008,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -92309,7 +92334,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -92323,7 +92348,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -92628,7 +92653,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -92642,7 +92667,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -92941,7 +92966,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -92955,7 +92980,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -93260,7 +93285,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -93274,7 +93299,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -93585,7 +93610,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -93599,7 +93624,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -93908,7 +93933,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -93922,7 +93947,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -94228,7 +94253,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -94242,7 +94267,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -94544,7 +94569,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -94558,7 +94583,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -94863,7 +94888,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -94877,7 +94902,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -95179,7 +95204,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -95193,7 +95218,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -95540,7 +95565,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -95554,7 +95579,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -95856,7 +95881,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -95870,7 +95895,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -96187,7 +96212,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -96201,7 +96226,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -96614,7 +96639,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -96628,7 +96653,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -96969,7 +96994,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -96983,7 +97008,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -97357,7 +97382,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -97371,7 +97396,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -97682,7 +97707,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -97696,7 +97721,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -110827,7 +110852,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -110841,7 +110866,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   member_functions:
   - signature: E8 ?? ?? ?? ?? 43 88 34 26
@@ -110944,7 +110969,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -110958,7 +110983,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -111316,7 +111341,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: ReceiveEvent
     offset: 16
@@ -111330,7 +111355,7 @@ structs:
       name: a3
     - type: Component::GUI::AtkEvent*
       name: a4
-    - type: __int64
+    - type: Component::GUI::AtkEventData*
       name: a5
   - name: Open
     offset: 24
@@ -114535,7 +114560,7 @@ structs:
   virtual_functions:
   - name: GetTerritoryType
     offset: 48
-    return_type: Client::Game::TerritoryType
+    return_type: Client::Game::HousingTerritoryType
     parameters:
     - type: Client::Game::WorkshopTerritory*
       name: this
