@@ -314,7 +314,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [VirtualFunction(62)]
     public partial void OnMouseOut();
-    
+
     /// <summary>
     /// Check if all necessary resources are loaded and nodes/components are set up.
     /// </summary>

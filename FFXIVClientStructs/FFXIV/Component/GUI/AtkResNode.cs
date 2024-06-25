@@ -69,7 +69,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular
     /// </summary>
     [FieldOffset(0xA0)] public uint DrawFlags;
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 20")]
     public partial void Ctor();
 

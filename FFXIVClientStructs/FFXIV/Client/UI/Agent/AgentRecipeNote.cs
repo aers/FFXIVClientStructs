@@ -51,8 +51,7 @@ public unsafe partial struct AgentRecipeNote {
 [GenerateInterop]
 [VirtualTable("E8 ?? ?? ?? ?? 48 8B F8 48 8B CE 48 89 BB", [1, 13])]
 [StructLayout(LayoutKind.Explicit, Size = 0x260)]
-public unsafe partial struct RecipeSearchContext
-{
+public unsafe partial struct RecipeSearchContext {
     [FieldOffset(0xE0)] public bool IsExact;
     [FieldOffset(0xE1)] public bool IsComplete;
     [FieldOffset(0xE2)] public bool CanIterate;
@@ -73,8 +72,7 @@ public unsafe partial struct RecipeSearchContext
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-public struct RecipeSearchContextData
-{
+public struct RecipeSearchContextData {
     [FieldOffset(0x30)] public StdDeque<StdPair<ulong, ulong>> Results;
     // [FieldOffset(0x70)] public nint Callback2;
     // [FieldOffset(0x78)] public nint Callback;

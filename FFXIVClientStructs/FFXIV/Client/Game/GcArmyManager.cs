@@ -35,7 +35,7 @@ public unsafe partial struct GcArmyData {
     [FieldOffset(0x2C2)] public ushort CurrentExpedition;
 
     [FieldOffset(0x2C8)] public ushort BonusPhysical;
-    [FieldOffset(0x2CA)] public ushort BonusMental; 
+    [FieldOffset(0x2CA)] public ushort BonusMental;
     [FieldOffset(0x2CC)] public ushort BonusTactical;
 
     [FieldOffset(0x2FC)] public uint MissionRewardExperience;
