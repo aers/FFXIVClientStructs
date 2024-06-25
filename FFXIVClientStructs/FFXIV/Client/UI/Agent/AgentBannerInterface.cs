@@ -15,6 +15,7 @@ public unsafe partial struct AgentBannerInterface {
 
     // Client::UI::Agent::AgentBannerInterface::Storage
     // Destroyed in Client::UI::Agent::AgentBannerInterface::dtor
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x3B30)]
     public partial struct Storage {
         public const int CharacterDataSize = 0x760;
