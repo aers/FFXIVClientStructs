@@ -42,7 +42,7 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x3478)] public LogMessageSource* MsgSourceArray;
     [FieldOffset(0x3480)] public int MsgSourceArrayLength;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 45 85 F6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 48 8D 4D 00")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB AA")]
