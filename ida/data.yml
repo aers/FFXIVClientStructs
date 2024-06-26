@@ -1609,7 +1609,7 @@ classes:
       0x1406208D0: Cleanup # diaphora partial
   Component::GUI::AtkEventDispatcher:
     funcs:
-      0x1400620C20: DispatchEvent
+      0x140620C20: DispatchEvent
       0x140621090: RemoveEvent
   Component::GUI::AtkTooltipArgs:
     funcs:
