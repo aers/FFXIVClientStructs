@@ -84,7 +84,7 @@ functions:
 #fail   0x140058500: WinMain
 #fail   0x1400581B0: std::string::ctor_FromSubStr #(other, idx, len)
 #fail   0x1400582F0: std::string::ctor_FromCharArr #(arr, len)
-#fail   0x14165ADB0: std::_Xlength_error
+  0x141AFABEC: std::_Xlength_error
 #fail   0x140185660: std::deque::_Growmap
 #fail   0x140059700: GetStdOut
   0x140059B00: vsprintf_s
@@ -112,7 +112,7 @@ functions:
 #fail   0x140329430: GetGlobalTextParameter
 #fail   0x1403356E0: std::vector_SetSize
 #fail   0x140655400: GetGameObjectByIndex
-#fail   0x140655640: GetRandomInteger
+  0x140786B40: GetRandomInteger
   0x140786BA0: GetRandomFloat
   0x140500A10: UpdateAnimFactor
   0x1405791B0: GetActionTimelineKey
@@ -186,7 +186,7 @@ functions:
   0x141712980: lua_lessthan
   0x1417129D0: lua_load
   0x141712A20: lua_newthread
-#fail   0x1413B8B60: lua_newuserdata
+  0x141712A60: lua_newuserdata
   0x141712AD0: lua_next
   0x141712B10: lua_objlen
   0x141712B90: lua_pcall
@@ -225,7 +225,7 @@ functions:
   0x1417136E0: lua_tonumber
   0x141713720: lua_topointer
   0x141713790: lua_tothread
-#fail   0x1413B98B0: lua_touserdata
+  0x1417137B0: lua_touserdata
   0x1417137F0: lua_type
   0x141713820: lua_typename
   0x141713840: lua_xmove
@@ -284,7 +284,7 @@ functions:
   0x1419C02E0: luaopen_package
 #fail   0x1415F29E0: std::vector.dtor
   0x141A96880: crc
-#fail   0x14165ADD4: ThrowException
+  0x141AFAC10: ThrowException
   0x141B81490: rand
   0x141B814BC: srand
   0x141B25668: FreeMemory
@@ -409,8 +409,8 @@ functions:
   0x141DF7680: GetTrianglePlaneNormalY
   0x141DF7F00: IntersectCallbackNonHoriz
   0x141DF7F70: IntersectCallbackMoreOrthoNonHoriz
-#fail   0x14192E880: IntersectCallbackAny
-#fail   0x14192E8B0: IntersectCallbackMoreOrtho
+  0x141DF8050: IntersectCallbackAny
+  0x141DF8080: IntersectCallbackMoreOrtho
 #fail   0x14192F690: CollisionAlloc
 #fail   0x14192F6D0: CollisionFree
   0x141A957C0: ReadSqpkChunk
@@ -492,7 +492,7 @@ classes:
 #fail       0x1415F1660: Update
   Application::Network::ZoneConnection:
     funcs:
-#fail       0x1415F2F50: ctor
+      0x141A891D0: ctor
       0x141A89270: dtor
       0x141A89560: OpenChannel
       0x141A895B0: ReceivePacket
@@ -544,12 +544,12 @@ classes:
 #fail       0x140754A20: SetStatus
       0x1408A4280: AddStatus
 #fail       0x140754E60: RemoveStatus
-#fail       0x1407555D0: UpdateParam
+      0x1408A4AF0: UpdateParam
       0x1408A4B10: SetFirstHalf
 #fail       0x140755680: SetSecondHalf
-#fail       0x140755720: GetStatusIdByIndex
+      0x1408A4C40: GetStatusIdByIndex
       0x1408A4C60: GetRemainingTimeByIndex
-#fail       0x140755770: GetSourceIdByIndex
+      0x1408A4C90: GetSourceIdByIndex
       0x1408A4E50: GetStatusIndex
       0x1408A4EA0: GetParamForStatus
 #fail       0x140756160: ExecuteStatusOff
@@ -568,7 +568,7 @@ classes:
       0x140FC1A30: Initialize
       0x140FC1B80: Update
       0x140FC22F0: GetRetainerBySortedIndex
-#fail       0x140D7F660: GetRetainerByHiredIndex
+      0x140FC2320: GetRetainerByHiredIndex
 #fail       0x140D7F6C0: GetLastSelectedRetainer
 #fail       0x140D7F730: SetLastSelectedRetainerId
       0x140FC23E0: SetRetainerObjectId
@@ -804,7 +804,7 @@ classes:
 #fail       0x14077E590: OnReceiveCreatePlayerBattleCharaPacket
 #fail       0x14077E670: OnReceiveCreateNonPlayerBattleCharaPacket
 #fail       0x14077E890: ProcessBattleCharaCreationQueue
-#fail       0x140782010: AddBattleCharaToCreationQueue
+      0x1408FC350: AddBattleCharaToCreationQueue
   Component::GUI::AtkInputManager:
     funcs:
       0x140663400: HandleInput
@@ -1031,8 +1031,8 @@ classes:
 #fail       0x1414A64E0: Reset # this is near identical to Initialize but is called in update instead
 #fail       0x1414A6520: Update
 #fail       0x1414A6680: Terminate
-#fail       0x1414A66D0: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
-#fail       0x1414A6710: StartOtherMode # (Balloon* this, ushort id) id same as above
+      0x141830910: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
+      0x141830950: StartOtherMode # (Balloon* this, ushort id) id same as above
   Client::Game::Fate::FateManager:
     instances:
 #fail       - ea: 0x14222BD40
@@ -1059,7 +1059,7 @@ classes:
       0x1409BE240: GetQuestSequence # static (questId)
       0x1409BDC40: GetQuestIndex
       0x1409BE340: GetQuestClassJob
-#fail       0x140852DE0: IsQuestAccepted
+      0x1409BE000: IsQuestAccepted
 #fail       0x140853270: GetBeastTribeAllowance
       0x140A05040: IsRecipeComplete # static (uint recipeId)
 #fail       0x1408945C0: IsLevequestComplete
@@ -1222,14 +1222,14 @@ classes:
       0x140D0D140: IsOutside
       0x140D0D150: IsInside
       0x140D0D160: IsInWorkshop
-#fail       0x140B25D10: GetCurrentDivision
+      0x140D0D3A0: GetCurrentDivision
       0x140D0DE00: HasHousePermissions
       0x140D0D360: GetCurrentPlot
-#fail       0x140B25D80: GetCurrentWard
+      0x140D0D410: GetCurrentWard
 #fail       0x140B26590: GetCurrentHouseId
       0x140D0E270: GetCurrentRoom
-#fail       0x140B25DE0: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
-#fail       0x140B25E70: GetInvertedBrightness # 0-5, higher is darker
+      0x140D0D470: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
+      0x140D0D610: GetInvertedBrightness # 0-5, higher is darker
       0x140D392F0: IsSubmarineExplorationUnlocked # static
       0x140D39330: IsSubmarineExplorationExplored # static
 #fail       0x140B4CDF0: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
@@ -1440,23 +1440,23 @@ classes:
       0x140D7CA30: GetPastureExpectedCollectedLeavings
       0x140D7CA50: GetPastureCollectLeavingsWillOvercap
       0x140D7CA70: GetPastureNoLeavingsToCollect
-#fail       0x140B888E0: GetPastureAnimals
+      0x140D7CAD0: GetPastureAnimals
 #fail       0x140B88900: GetPastureCaptureState
 #fail       0x140B88920: GetPastureSlotCount
 #fail       0x140B88AB0: GetFarmSlotCount
 #fail       0x140B88B90: IsPastureEligibleForCare
 #fail       0x140B88BA0: IsFarmEligibleForCare
 #fail       0x140B88BD0: GetVisibleMinimapIcons
-#fail       0x140B88E40: GetFavorCraftObjectId
+      0x140D7D2C0: GetFavorCraftObjectId
 #fail       0x140B88E60: GetFavorNumDelivered
-#fail       0x140B88E80: GetFavorDeliveryComplete
-#fail       0x140B88EA0: GetFavorIsBonus
-#fail       0x140B88EC0: GetFavorNumScheduled
+      0x140D7D300: GetFavorDeliveryComplete
+      0x140D7D320: GetFavorIsBonus
+      0x140D7D340: GetFavorNumScheduled
 #fail       0x140B88EE0: GetFavorNumRequired
 #fail       0x140B88F00: GetFavorReward
-#fail       0x140B88F20: GetFavorFullBonus
+      0x140D7D3A0: GetFavorFullBonus
 #fail       0x140B88F40: RequestFavorData
-#fail       0x140B88F60: IsFavorDataAvailable
+      0x140D7D3E0: IsFavorDataAvailable
 #fail      0x140D7DA50: Initialize
       0x140D7DEC0: Finalize
   Client::Game::MJI::IslandState:
@@ -1530,8 +1530,8 @@ classes:
 #fail       0x1414DFE10: GetRemainingDays
 #fail       0x1414DFE30: GetRareResourcePouchId
 #fail       0x1414DFE50: GetRareResourceCount
-#fail       0x1414DFE70: GetNormalResourcePouchIds
-#fail       0x1414DFEB0: GetNormalResourceCounts
+      0x1418732E0: GetNormalResourcePouchIds
+      0x141873320: GetNormalResourceCounts
 #fail       0x1414DFEF0: GetFinishTime
   Client::System::String::Utf8String:
     funcs:
@@ -1552,7 +1552,7 @@ classes:
 #fail       0x14005A500: NotEqualTo
       0x14005A840: NotEqualToString
       0x14005B530: GetLength #count of character
-#fail       0x14005AF30: CalcLength #does not use saved value
+      0x14005B5D0: CalcLength #does not use saved value
       0x14005B650: GetSize
       0x14005B660: GetCharAt
       0x14005B670: AddChar
@@ -1628,7 +1628,7 @@ classes:
 #fail       0x140535DC0: CreateAtkComponent
 #fail       0x140536850: Update
 #fail       0x140537530: SortNodeListByPriority
-#fail       0x140537600: SwapNodeListIndex
+      0x14064D150: SwapNodeListIndex
       0x14064CF60: SetDuplicateNodeInfo
 #fail       0x1405376D0: ExpandNodeListSize
 #fail       0x140537D30: DuplicateComponentNode
@@ -1638,7 +1638,7 @@ classes:
 #fail       0x1405350C0: UpdateDrawNodeList
   Component::GUI::AtkTimeline:
     funcs:
-#fail       0x14056D7B0: GetStartFrameIdxForLabelId
+      0x14068D540: GetStartFrameIdxForLabelId
 #fail       0x14056D8E0: GetEndFrameIdxForLabelId
 #fail       0x14056D560: UpdateChildAnimationStates
 #fail       0x14056CD90: UpdateChildAnimationAndLabelStates
@@ -1668,7 +1668,7 @@ classes:
   Client::Game::UI::DirectorTodo:
     funcs:
 #fail       0x140964CC0: SetDirector
-#fail       0x140964F20: SetUpdatePending
+      0x140B089E0: SetUpdatePending
 #fail       0x140964F40: UnsetUpdatePending
       0x140B08A10: Show # lua function "ShowDirectorTodo"
       0x140B08A20: Hide # lua function "HideDirectorTodo"
@@ -1845,7 +1845,7 @@ classes:
 #fail       0x140975290: ReadPacket
   Client::Game::UI::Buddy::CompanionInfo:
     funcs:
-#fail       0x1409736F0: IsBuddyEquipUnlocked
+      0x140B18200: IsBuddyEquipUnlocked
   Client::Game::UI::PvPProfile:
     instances:
 #fail       - ea: 0x142207DD4
@@ -1885,7 +1885,7 @@ classes:
       0x140B258F0: ReadPacket
       0x140B25AB0: GetRelicID
       0x140B25AC0: GetRelicNoteID
-#fail       0x14097FC20: GetMonsterProgress
+      0x140B25AD0: GetMonsterProgress
 #fail       0x14097FCC0: IsDungeonComplete
 #fail       0x14097FD00: IsFateComplete
 #fail       0x14097FD40: IsLeveComplete
@@ -2223,7 +2223,7 @@ classes:
 #fail       0x1409C9170: UseAction
 #fail       0x1409C9C10: UseComboAction
       0x140B6FF10: StartForcedCast
-#fail       0x1409C9E80: OnActionRejected
+      0x140B70110: OnActionRejected
 #fail       0x1409C9EE0: OnCastCanceled
 #fail       0x1409CA0F0: IsCasting
       0x140B704F0: IsActionTargetInRange
@@ -2247,7 +2247,7 @@ classes:
 #fail       0x1409CAEB0: UpdateRecastFromNetwork
 #fail       0x1409CAEF0: AssignBlueMageActionToSlot
       0x140B71320: ForceSetBlueMageActionInSlot
-#fail       0x1409CB0E0: GetActiveBlueMageActionInSlot
+      0x140B713D0: GetActiveBlueMageActionInSlot
 #fail       0x1409CB100: SwapBlueMageActionSlots
 #fail       0x1409CB210: SetBlueMageActions
 #fail       0x1409CB700: CanAssignBlueMageAction
@@ -2256,7 +2256,7 @@ classes:
       0x140B721F0: IsAreaTargetingUnlockedFromCursor
       0x140B72250: IsAreaTargetingModeActiveAndUnlockedFromCursor
       0x140B722D0: StartAreaTargetingMode
-#fail       0x1409CBEF0: CancelAreaTargetingMode
+      0x140B723C0: CancelAreaTargetingMode
       0x140B723F0: RemoveAreaTargetingVfx
       0x140B72470: GetAreaTargetingCursorScreenPos
 #fail       0x1409CDE20: GetGroundPositionForObject
@@ -2275,7 +2275,7 @@ classes:
         pointer: False
     funcs:
 #fail       0x1409D9CB0: ctor
-#fail       0x1409D9CE0: dtor
+      0x140B815F0: dtor
 #fail       0x1409D9E20: Update
 #fail       0x1409D9F40: ChangeGauge
   Client::Game::Gauge::JobGauge:
@@ -2373,7 +2373,7 @@ classes:
 #fail       0x140068280: CopyFrom
 #fail       0x1400683E0: IsValueEqual
       0x140068F10: SetValueUInt
-#fail       0x1400684E0: SetValueFloat
+      0x140068FD0: SetValueFloat
 #fail       0x140068560: SetValueString # Destroys Utf8String
       0x140069190: SetToDefault
   Common::Configuration::ConfigBase:
@@ -2424,7 +2424,7 @@ classes:
       0x14009BA30: GetWindowMode #static
 #fail       0x14008E360: GetWindowRectFromConfig
 #fail       0x14008E490: OpenGameWindow
-#fail       0x14008E6E0: GetVirtualScreenResolution
+      0x14009CA00: GetVirtualScreenResolution
 #fail       0x14008E730: SetFpsCap
       0x14009CAA0: GetFpsCap #static
       0x14009CCE0: SetWindowSize
@@ -2496,7 +2496,7 @@ classes:
     funcs:
 #fail       0x1400965C0: TaskRunner_arg1 # these are used to run static tasks, vfuncs are for Task subclasses
 #fail       0x1400965D0: TaskRunner_arg2
-#fail       0x1400965E0: TaskRunner_arg3
+      0x1400A5550: TaskRunner_arg3
       0x1401F13A0: Finalize
   Client::System::Framework::TaskManager::RootTask:
     vtbls:
@@ -2513,7 +2513,7 @@ classes:
 #fail       0x140095D80: ctor
 #fail       0x14019C360: Finalize
       0x1401F2820: AddTask
-#fail       0x14019C490: ExecuteAllTasks
+      0x1401F2890: ExecuteAllTasks
   Common::Game::Time::GameTime:
     vtbls:
       - ea: 0x141E994A8
@@ -2800,9 +2800,9 @@ classes:
     funcs:
       0x141DEF9F0: ctor
       0x141DEFA30: Finalize
-#fail       0x141927C30: ClearScenes
+      0x141DEFAF0: ClearScenes
 #fail       0x141927C60: Init
-#fail       0x141927CD0: UpdateScenes
+      0x141DEFBE0: UpdateScenes
       0x141DEFC50: DeleteAllScenes
 #fail       0x141927DE0: CreateScene
 #fail       0x141927E40: DestroyScene
@@ -3093,7 +3093,7 @@ classes:
       0x141E070A0: Intersect
   Common::Component::BGCollision::BGCollisionModule:
     funcs:
-#fail       0x1404C74A0: TaskBGCollisionModule_OnEndOfFrame
+      0x1405D0040: TaskBGCollisionModule_OnEndOfFrame
       0x1405D0070: TaskBGCollisionModule_Update
       0x1405D0160: ctor
       0x1405D0210: dtor
@@ -3131,7 +3131,7 @@ classes:
 #fail       0x141923480: GetNormal
   Common::Component::BGCollision::ColliderList:
     funcs:
-#fail       0x1419235C0: Add
+      0x141DEECD0: Add
   Common::Component::BGCollision::ColliderUpdatePayload:
     funcs:
       0x141DEED60: ctor
@@ -3643,7 +3643,7 @@ classes:
 #fail       0x1401041E0: ProcessRequestResult
 #fail       0x1401044B0: ProcessItemHistory
 #fail       0x140104500: ProcessItemHistory_Internal
-#fail       0x140104BF0: SetLastPurchasedItem
+      0x140136450: SetLastPurchasedItem
       0x1401365C0: SendPurchaseRequestPacket
       0x140136750: ProcessPlayerRetainerInfo
   Client::UI::Info::InfoProxyPartyInvite:
@@ -3874,8 +3874,8 @@ classes:
       0x140219BF0: Dispose
 #fail       0x1401C03E0: CreateThread
 #fail       0x1401C04A0: Wait
-#fail       0x1401C04C0: HasFinished
-#fail       0x1401C0500: SetAffinity
+      0x140219DF0: HasFinished
+      0x140219E30: SetAffinity
   Client::System::Threading::ThreadManager:
     instances:
       - ea: 0x14259A358
@@ -3886,7 +3886,7 @@ classes:
       0x140219FF0: InitInstance
       0x14021A060: ctor
       0x14021A120: WaitAll
-#fail       0x1401C0850: AddThread
+      0x14021A230: AddThread
   Client::System::File::FileInterface:
     vtbls:
 #fail       - ea: 0x1419D42C0
@@ -4256,7 +4256,7 @@ classes:
       0x140283A90: IsInCrossWorldDuty
       0x140283B10: SetCurrentInstance
       0x140283B30: GetCurrentInstance
-#fail       0x14021B810: HasZoneConnection
+      0x140282700: HasZoneConnection
   Application::Network::PacketReceiverCallbackInterface:
     vtbls:
       - ea: 0x141EC4B00
@@ -4340,9 +4340,9 @@ classes:
       0x140295530: Update
       0x140295740: GetAgentByInternalId
       0x140295750: GetAgentByInternalId_2  # dupe?
-#fail       0x14022B4A0: HideAgent
-#fail       0x14022B4C0: HideAgentIfActive
-#fail       0x14022B510: IsAgentActive
+      0x1402957F0: HideAgent
+      0x140295810: HideAgentIfActive
+      0x140295860: IsAgentActive
       0x1402955D0: HideAll
 #fail       0x1402256B0: GetAgentScenarioTree
 #fail       0x1402256C0: GetAgentMateriaAttach
@@ -4406,8 +4406,8 @@ classes:
       0x1402A0B30: ClearMenu
       0x1402A0B80: SetMenuTitle
       0x1402A0C70: ResetMenu
-#fail       0x140236090: SetPositionX
-#fail       0x1402360B0: SetPositionY
+      0x1402A0D40: SetPositionX
+      0x1402A0D60: SetPositionY
       0x1402A4010: SetUpdateChecker
 #fail       0x140238FB0: CloseSubMenu
 #fail       0x1402360D0: OpenSubMenu
@@ -5258,14 +5258,14 @@ classes:
     funcs:
 #fail       0x1404CDC70: ctor
 #fail       0x1404CDD00: Finalize
-#fail       0x1404CDD90: Load
+      0x1405D2E10: Load
       0x1405D2E60: ChangeLanguage
       0x1405D3150: GetRowBySheetAndRowId  # (ExdModule* this, ExcelSheet* pSheet, int nRowId) -> ExcelRow*
       0x1405D32E0: GetRowBySheetAndRowIndex  # (ExdModule* this, ExcelSheet* pSheet, int nRowIndex) -> ExcelRow*
       0x1405D31A0: GetRowBySheetIndexAndRowId  # (ExdModule* this, int nSheetIndex, int nRowId) -> ExcelRow*
       0x1405D3080: GetRowBySheetIndexAndRowIdAndSubRowId  # (ExdModule* this, int nSheetIndex, int nRowId, short nSubRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
       0x1405D3360: GetRowBySheetIndexAndRowIndex  # (ExdModule* this, int nSheetIndex, int nRowIndex) -> ExcelRow*
-#fail       0x1404CDEB0: GetRowBySheetNameAndRowId  # (ExdModule* this, char* pcszSheetName, int nRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
+      0x1405D2F30: GetRowBySheetNameAndRowId  # (ExdModule* this, char* pcszSheetName, int nRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
       0x1405D2FB0: GetRowBySheetNameAndRowIdAndSubRowId  # (ExdModule* this, char* pcszSheetName, int nRowId, short nSubRowId, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
       0x1405D3200: GetRowBySheetNameAndRowIndex  # (ExdModule* this, char* pcszSheetName, int nRowIndex, ExcelSheet **ppOutSheet, IExcelRowWrapper **ppOutRowContainer) -> ExcelRow*
       0x1405D3570: GetRowCountBySheet  # (ExdModule* this, ExcelSheet* pShet) -> int
@@ -5476,7 +5476,7 @@ classes:
       0x1406BEF50: Finalize
 #fail       0x140599380: Update
       0x1406BEB00: Draw
-#fail       0x14059A510: GetChildAddonInfoByAtkUnitBase
+      0x1406BFA30: GetChildAddonInfoByAtkUnitBase
   Component::GUI::AtkSimpleTweenHolder:
 #    funcs:
       # 0x140516980: Update # INLINED IN 7.0 0x14068A88C
@@ -5689,9 +5689,9 @@ classes:
       0x1406B9350: GetAsComponentJournalCanvas
       0x1406BC500: GetAsComponentHoldButton
       0x1406BCC00: GetAsComponentPortrait
-#fail       0x14059D5D0: GetAsComponentDragDrop2
-#fail       0x14059D840: GetAsComponentIcon2
-#fail       0x14059DBC0: GetAsComponentListItemRenderer2
+      0x1406C29A0: GetAsComponentDragDrop2
+      0x1406C2C10: GetAsComponentIcon2
+      0x1406C3000: GetAsComponentListItemRenderer2
       0x14063F390: RegisterEvent
       0x14063F3D0: UnregisterEvent
       0x14063F410: DispatchEvent
@@ -5734,14 +5734,14 @@ classes:
       0x140640250: ToggleVisibility
       0x140640670: GetIsUsingDepthBasedDrawPriority
       0x140640690: SetUseDepthBasedDrawPriority
-#fail       0x14052C160: SetDepth
+      0x1406406E0: SetDepth
 #fail       0x14052C530: Initialize
       0x140640D80: SetScale0  # SetScale jumps to this
 #fail       0x140537110: SetSize
 #fail       0x14052ADE0: GetTimelineLabel
       0x14063EF20: SetTimelineLabel2
       0x14063EFA0: SetTimelineLabel3
-#fail       0x14052AD90: GetTimelineFrameIdx
+      0x14063F050: GetTimelineFrameIdx
       0x14063EEA0: EnableTimeline
       0x14063EEC0: DisableTimeline
   Component::GUI::AtkImageNode:
@@ -5776,7 +5776,7 @@ classes:
       0x1406437D0: ToggleGlare
       0x140643850: ToggleItalic
 #fail       0x14052F300: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
-#fail       0x14052F3C0: SetSelection
+      0x140643E60: SetSelection
       0x1406444C0: SetCharSpacing
       0x1406444E0: GetCharSpacing
       0x140644500: SetLineSpacing
@@ -5898,7 +5898,7 @@ classes:
       17: InitializeFromComponentData
     funcs:
       0x14066C1F0: ctor
-#fail       0x140551330: GetOwnerNodePosition
+      0x14066C470: GetOwnerNodePosition
       0x14066C790: GetScrollBarById
       0x14066C940: GetTextNodeById
       0x14066C9A0: GetImageNodeById
@@ -5953,7 +5953,7 @@ classes:
     funcs:
       0x14067E520: ctor
       0x140676A00: SetItemCount
-#fail       0x14055B220: SetItemLabel
+      0x140678010: SetItemLabel
       0x1406780D0: GetItemLabel
 #fail       0x140560540: DispatchItemEvent
   Component::GUI::ListComponentCallBackInterface:
@@ -6010,10 +6010,10 @@ classes:
       0x14068F980: SetMinValue
       0x14068F9C0: SetMaxValue
       0x14068FA00: SetGaugeValue
-#fail       0x14056F3A0: HaltTransitions
+      0x14068FAE0: HaltTransitions
 #fail       0x14056F3F0: SetGaugeRange
 #fail       0x14056F430: SetFillColor
-#fail       0x14056F4F0: SetBackdropColor
+      0x14068FC10: SetBackdropColor
 #fail       0x140570010: UpdateFloatValues
 #fail       0x140570190: UpdateBarFill1
 #fail       0x140570540: UpdateBarFill2
@@ -6028,7 +6028,7 @@ classes:
       8: InitializeFillNodes
   Component::GUI::AtkComponentGaugeBar::GaugeValueTransition:
     funcs:
-#fail       0x14056FE60: GetTransitioningValue
+      0x1406905E0: GetTransitioningValue
   Component::GUI::AtkComponentSlider:
     vtbls:
       - ea: 0x141EF6EA8
@@ -6036,8 +6036,8 @@ classes:
     funcs:
 #fail       0x1405717B0: ctor
 #fail       0x1405718A0: Finalize
-#fail       0x140571610: SetMinValue
-#fail       0x140571630: SetMaxValue
+      0x140691C40: SetMinValue
+      0x140691C60: SetMaxValue
 #fail       0x140571650: SetValue
   Component::GUI::AtkComponentInputBase:
     vtbls:
@@ -6071,7 +6071,7 @@ classes:
     funcs:
 #fail       0x14057C810: ctor
 #fail       0x14057C6A0: SelectItem
-#fail       0x14057C760: DeselectItem
+      0x14069E850: DeselectItem
       0x14069E870: GetSelectedItemIndex
 #fail       0x14057DB10: SetPreviewTextByIndex
   Component::GUI::AtkComponentRadioButton:
@@ -6174,7 +6174,7 @@ classes:
       0x1406AF110: AttachTooltip
       0x1406AF250: SetTimelineState
 #fail       0x14058B5F0: Finalize
-#fail       0x14058B2F0: GetTimelineActiveLabelId
+      0x1406AF330: GetTimelineActiveLabelId
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
 #fail       - ea: 0x141A0A3E8
@@ -6785,10 +6785,10 @@ classes:
     funcs:
       0x1407FE7F0: ctor
 #fail       0x1406C0240: AddToHistory
-#fail       0x1406C02C0: RemoveFromHistory
+      0x1407FED40: RemoveFromHistory
       0x1407FEE10: AddToFavorites
-#fail       0x1406C0410: SetFavorite
-#fail       0x1406C0460: SwapFavorites
+      0x1407FEE90: SetFavorite
+      0x1407FEEE0: SwapFavorites
       0x1407FF2E0: IsUnseen
       0x1407FF330: SetSeen
   Client::UI::Misc::MinionListModule:
@@ -6865,7 +6865,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140805DC0: ctor
-#fail       0x1406C4F20: SaveCameraSettings
+      0x140806050: SaveCameraSettings
 #fail       0x1406C4FA0: SaveLightingSettings
   Client::UI::Misc::MycNoteModule:
     vtbls:
@@ -7356,9 +7356,9 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407ECF10: ctor
-#fail       0x1406B18A0: IsFavorited
+      0x1407ED120: IsFavorited
 #fail       0x1406B1900: GetEntry
-#fail       0x1406B1AF0: RemoveFromFavorites
+      0x1407ED370: RemoveFromFavorites
 #fail       0x1406B1BA0: AddToFavorites
   Client::UI::Misc::RaptureTeleportHistory:
     vtbls:
@@ -7513,7 +7513,7 @@ classes:
       61: IsCharacter
       68: OnInitialize
     funcs:
-#fail       0x140748970: IsMountOrOrnament
+      0x140896290: IsMountOrOrnament
       0x1408967A0: SetDrawOffset
       0x140896ED0: GetPosition
       0x140896F20: SetPosition
@@ -7563,13 +7563,13 @@ classes:
   Client::Game::Character::Character::CastInfo:
     funcs:
 #fail       0x1409BDB70: Reset
-#fail       0x1409BDBE0: ClearInfo1
-#fail       0x1409BDC10: ClearInfo2
+      0x140B61990: ClearInfo1
+      0x140B619C0: ClearInfo2
 #fail       0x1409BDC40: ClearResponse
       0x140B61AE0: Start
       0x140B61B30: Finish
       0x140B61B80: UpdateTotal
-#fail       0x1409BDE00: SetResponseAction
+      0x140B61C50: SetResponseAction
   Client::Game::Control::CharacterLookAtController:
     vtbls:
       - ea: 0x141EF2310
@@ -7590,8 +7590,8 @@ classes:
     funcs:
 #fail       0x1404DDB30: ctor
       0x1405E7B40: PlayTimeline
-#fail       0x1404DE280: GetSlotTimeline
-#fail       0x1404DE670: SetSlotSpeed
+      0x1405E8110: GetSlotTimeline
+      0x1405E8580: SetSlotSpeed
       0x1405E8890: GetSlotSpeed
       0x1405E8AD0: GetCurrentActionTimelineTimestamp
 #fail       0x1404DF5A0: SetSlotTimeline
@@ -7604,7 +7604,7 @@ classes:
     vtbls:
 #fail       - ea: 0x141A22038
     funcs:
-#fail       0x1404E9440: Initialize
+      0x1405F5220: Initialize
   Client::Game::Character::DrawDataContainer:
     vtbls:
       - ea: 0x141F0F588
@@ -7622,7 +7622,7 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
 #       0x141313710: ctor # inlined at 0x1408CF5C4
-#fail       0x141313A30: GetCompanionDataID
+      0x1408A75C0: GetCompanionDataID
       0x1408A7400: SetupCompanion
   Client::Game::Character::ContainerInterface:
     vtbls:
@@ -8205,7 +8205,7 @@ classes:
       0x140B84980: Init
       0x140B849A0: Clear
       0x140B849C0: GetEmptyIncomingEntry
-#fail       0x1409DCD30: FindIncomingEntry
+      0x140B84C20: FindIncomingEntry
       0x140B84DA0: ApplyAllTargetEffects
       0x140B84FB0: ApplyEffectResult
 #fail       0x1409DD180: FinishCast # static
@@ -8313,7 +8313,7 @@ classes:
 #fail       0x140CB0280: Finalize
 #fail       0x140C401D0: OpenMacro
 #fail       0x140C42840: AddHistoryEvent
-#fail       0x140C42B60: GetPreviousHistoryEvent
+      0x140E58000: GetPreviousHistoryEvent
 #fail       0x140C42BA0: GetNextHistoryEvent
 #fail       0x140C42A30: DoHistoryEvent
   Client::UI::Agent::AgentFishingNote:
@@ -8458,7 +8458,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140315080: ctor
-#fail       0x14028E810: SendTell
+      0x140316D20: SendTell
       0x140316E50: OpenFriendEstateTeleportation
   Client::UI::Agent::AgentPartyMember:
     vtbls:
@@ -9650,7 +9650,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CC8A50: ctor
-#fail       0x140AEB720: OpenForGearset
+      0x140CCB2F0: OpenForGearset
   Client::UI::Agent::AgentPerformanceMode:
     vtbls:
       - ea: 0x141F60AF0
@@ -10524,7 +10524,7 @@ classes:
 #fail       0x141276C70: InitStartReadItems
 #fail       0x141276DC0: InitReadItemRow
 #fail       0x141276E50: InitStartReadCurrencyItems
-#fail       0x141276F90: InitReadCurrencyItemRow
+      0x141584AF0: InitReadCurrencyItemRow
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
       - ea: 0x14202E368
@@ -10617,7 +10617,7 @@ classes:
 #fail       0x14127A530: Reset
 #fail       0x14127A5A0: Update
 #fail       0x14127A730: InitSheets
-#fail       0x14127A7D0: SheetsReady
+      0x141588D10: SheetsReady
 #fail       0x14127A810: InitResources
 #fail       0x14127AB60: InitDerived
 #fail       0x14127B070: GetExpeditionEntry
@@ -11773,10 +11773,10 @@ classes:
       0x1409813A0: ToggleGazeCamera
 #fail       0x1407FF200: ToggleMotionFreeze
 #fail       0x1407FF630: EnableCameraLight
-#fail       0x1407FF8C0: DisableCameraLight
+      0x140981AC0: DisableCameraLight
       0x1409864C0: SetupDefaultTarget
       0x14098A920: AddCharacterToGPose
-#fail       0x140807770: RemoveCharacterFromGPose
+      0x14098AAA0: RemoveCharacterFromGPose
       0x14098C9B0: CycleIdleCamTargets
   Client::Game::Event::LeveDirector:
     vtbls:
@@ -14660,7 +14660,7 @@ classes:
     funcs:
 #fail       0x141175500: ctor
 #fail       0x141176960: UpdateExpandedHold
-#fail       0x1400A8C60: GetBarTarget # static (int mapValue, out bool useLeft) -> hotbarId
+      0x1400B7F50: GetBarTarget # static (int mapValue, out bool useLeft) -> hotbarId
   Client::UI::AddonActionCrossEditor:
     vtbls:
       - ea: 0x141FBE918
@@ -15884,7 +15884,7 @@ classes:
     funcs:
 #fail       0x1413B3050: ctor
 #fail       0x1413B30F0: Finalize
-#fail       0x1413B31D0: Initialize
+      0x14170ACB0: Initialize
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
 #fail       - ea: 0x141B52AB8
@@ -16259,7 +16259,7 @@ classes:
       0x141D71D60: load3 # hkStreamReader
   hkMatrix4f:
     funcs:
-#fail       0x141821CD0: ?set4x4ColumnMajor@hkMatrix4f@@QEAAXPEBM@Z
+      0x141CD25E0: ?set4x4ColumnMajor@hkMatrix4f@@QEAAXPEBM@Z
   hkMatrixDecompositionImpl:
     funcs:
       0x141CC9A50: ?decompose4x4ColTransform@?$hkMatrixDecompositionImpl@M@@SAXPEBMAEAUDecomposition@1@@Z
@@ -16303,11 +16303,11 @@ classes:
       0x141CC98F0: ?fastRenormalizeQuaternionBatch@hkQsTransformf@@SAXPEAV1@I@Z
       0x141CC9560: ?get4x4ColumnMajor@hkQsTransformf@@QEBAXPEIAM@Z
       0x141CC96F0: ?isOk@hkQsTransformf@@QEBA_NM@Z
-#fail       0x141808410: ?set@hkQsTransformf@@QEAA_NAEBVhkMatrix4f@@@Z
+      0x141CC9690: ?set@hkQsTransformf@@QEAA_NAEBVhkMatrix4f@@@Z
       0x141CC9630: ?set4x4ColumnMajor@hkQsTransformf@@QEAA_NPEBM@Z
-#fail       0x141807BA0: ?getAngleSr@hkQuaternionf@@QEBA?AVhkSimdFloat32@@XZ
-#fail       0x141807CC0: ?isOk@hkQuaternionf@@QEBAIM@Z
-#fail       0x1418062C0: ?setAxisAngle@hkQuaternionf@@QEAAXAEBVhkVector4f@@M@Z
+      0x141CC8E20: ?getAngleSr@hkQuaternionf@@QEBA?AVhkSimdFloat32@@XZ
+      0x141CC8F40: ?isOk@hkQuaternionf@@QEBAIM@Z
+      0x141CC7540: ?setAxisAngle@hkQuaternionf@@QEAAXAEBVhkVector4f@@M@Z
       0x141CC7580: ?setAxisAngle@hkQuaternionf@@QEAAXAEBVhkVector4f@@AEBVhkSimdFloat32@@@Z
       0x141CC77B0: ?setFromEulerAngles@hkQuaternionf@@QEAAXMMM@Z
       0x141CC7820: ?setFromEulerAngles@hkQuaternionf@@QEAAXAEBVhkSimdFloat32@@00@Z
@@ -16338,8 +16338,8 @@ classes:
       0x141CC2EF0: ??1hkStringPtr@@QEAA@XZ
   hkVector4f:
     funcs:
-#fail       0x141805F80: ?setRotatedDir@hkVector4f@@QEAAXAEBVhkQuaternionf@@AEBV1@@Z
-#fail       0x141806000: ?setRotatedInverseDir@hkVector4f@@QEAAXAEBVhkQuaternionf@@AEBV1@@Z
+      0x141CC7200: ?setRotatedDir@hkVector4f@@QEAAXAEBVhkQuaternionf@@AEBV1@@Z
+      0x141CC7280: ?setRotatedInverseDir@hkVector4f@@QEAAXAEBVhkQuaternionf@@AEBV1@@Z
   hkVersionUtil:
     funcs:
       0x141D99E10: hkVersionUtil_getCurrentVersion # returns c string
@@ -16400,7 +16400,7 @@ classes:
       0x141C82CC0: ??0hkaPose@@QEAA@W4PoseSpace@0@PEBVhkaSkeleton@@AEBV?$hkArrayBase@VhkQsTransformf@@@@@Z
       0x141C82D20: ??0hkaPose@@QEAA@W4PoseSpace@0@PEBVhkaSkeleton@@PEBVhkQsTransformf@@H@Z
       0x141C82DA0: ?getSyncedPoseLocalSpace@hkaPose@@QEBAAEBV?$hkArray@VhkQsTransformf@@UhkContainerHeapAllocator@@@@XZ
-#fail       0x1417C1B50: ?getSyncedPoseModelSpace@hkaPose@@QEBAAEBV?$hkArray@VhkQsTransformf@@UhkContainerHeapAllocator@@@@XZ
+      0x141C82DC0: ?getSyncedPoseModelSpace@hkaPose@@QEBAAEBV?$hkArray@VhkQsTransformf@@UhkContainerHeapAllocator@@@@XZ
       0x141C82DE0: ?setPoseLocalSpace@hkaPose@@QEAAXAEBV?$hkArrayBase@VhkQsTransformf@@@@@Z
       0x141C82E50: ?setPoseModelSpace@hkaPose@@QEAAXAEBV?$hkArrayBase@VhkQsTransformf@@@@@Z
       0x141C82EC0: ?syncLocalSpace@hkaPose@@QEBAXXZ
