@@ -57,6 +57,6 @@ public struct Status {
     // remains for compatibility
     [FieldOffset(0x2), CExportIgnore] public byte StackCount; // TODO: remove?
     [FieldOffset(0x4)] public float RemainingTime;
-    // objectID matching the entity that cast the effect - regens will be from the white mage ID etc
+    // ObjectId matching the entity that cast the effect - regens will be from the white mage ID etc
     [FieldOffset(0x8)] public uint SourceId;
 }

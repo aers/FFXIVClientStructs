@@ -27,7 +27,7 @@ public unsafe partial struct InfoProxyFreeCompany {
     [FieldOffset(0x178), FixedSizeArray] internal FixedSizeArray14<RankData> _ranks;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 2F E8")]
-    public partial void RequestDataForCharacter(uint objectId);
+    public partial void RequestDataForCharacter(uint entityId);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x58)]

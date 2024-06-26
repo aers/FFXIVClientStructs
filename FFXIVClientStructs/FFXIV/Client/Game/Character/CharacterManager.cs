@@ -15,7 +15,7 @@ public unsafe partial struct CharacterManager {
     public static partial CharacterManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 84 3D ?? ?? ?? ??")]
-    public partial BattleChara* LookupBattleCharaByObjectId(uint objectId);
+    public partial BattleChara* LookupBattleCharaByEntityId(uint entityId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 3A 0F B7 4C 24")]
     [GenerateStringOverloads]

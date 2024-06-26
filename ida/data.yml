@@ -882,7 +882,7 @@ classes:
       0x1407BBBF0: CreateCharacterAtIndex
       0x1407BBD50: DeleteCharacterAtIndex
       0x1407BBE00: DeleteAllCharacters
-      0x1407BBF00: LookupBattleCharaByObjectID
+      0x1407BBF00: LookupBattleCharaByEntityId
       0x1407BBF60: LookupBattleCharaByName
       0x1407BC050: LookupRetainerByName
       0x1407BC0F0: LookupBuddyByOwnerObject
@@ -1006,19 +1006,19 @@ classes:
       0x14092E530: UpdateAllianceSmallPositions
       0x14092EA60: GetAllianceMemberByGroupAndIndex  # (this, group, index)
       0x14092EAC0: GetAllianceMemberByIndex # (this, index)
-      0x14092EAE0: IsObjectIDInParty # (this, objectID)
+      0x14092EAE0: IsEntityIdInParty # (this, entityId)
       0x14092EB40: IsCharacterInPartyByName # (this, char*)
-      0x14092EBC0: IsObjectIDInAlliance
-      0x14092EC30: IsObjectIDPartyLeader
+      0x14092EBC0: IsEntityIdInAlliance
+      0x14092EC30: IsEntityIdPartyLeader
       0x14092EE40: SetPartyMemberExtraProperty
       0x14092EEA0: SetAllianceMemberExtraProperty
       0x14092EF00: UpdateAllianceMemberAtIndex
       0x14092F060: UpdateInAllianceFlagForAllCharacters
-      0x14092F1A0: GetPartyMemberByObjectId
+      0x14092F1A0: GetPartyMemberByEntityId
       0x14092F200: GetPartyMemberByIndex
       0x14092F280: GetPartyMemberByContentId
-      0x14092F2D0: GetAllianceMemberByObjectId
-      0x14092F330: GetPartyOrAllianceMemberByObjectId
+      0x14092F2D0: GetAllianceMemberByEntityId
+      0x14092F330: GetPartyOrAllianceMemberByEntityId
       0x140B8D6A0: Create
       0x140B8D5E0: GetGroupManager
       0x140B8D600: GetNextInstance
@@ -3600,7 +3600,7 @@ classes:
       0x1400F38B0: IsLocalPlayerInParty # Static
       0x1400F38F0: GetMember # Static
       0x1400F39A0: GetMemberByContentId # Static
-      0x1400F3A60: GetMemberByObjectId # Static
+      0x1400F3A60: GetMemberByEntityId # Static
       0x1400F3B10: IsContentIdInParty # Static
   Client::UI::Info::InfoProxyPartyMember:
     vtbls:

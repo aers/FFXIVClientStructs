@@ -39,7 +39,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     public static partial CrossRealmMember* GetMemberByContentId(ulong contentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FF 32")]
-    public static partial CrossRealmMember* GetMemberByObjectId(uint objectId);
+    public static partial CrossRealmMember* GetMemberByEntityId(uint entityId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 0F B6 5E")]
     public static partial bool IsContentIdInParty(ulong contentId);
