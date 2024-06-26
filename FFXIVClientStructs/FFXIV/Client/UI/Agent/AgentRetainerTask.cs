@@ -20,10 +20,10 @@ public unsafe partial struct AgentRetainerTask {
     [FieldOffset(0x44)] public uint RewardXP;
 
     // Set when venture is complete
-    [FieldOffset(0x50)] public unsafe fixed uint RewardItemIds[2];
+    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray2<uint> _rewardItemIds;
 
     // Set when venture is complete
-    [FieldOffset(0x58)] public unsafe fixed uint RewardItemCount[2];
+    [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray2<uint> _rewardItemCount;
 
     [FieldOffset(0x6C)] public uint RetainerTaskLvRange;
 

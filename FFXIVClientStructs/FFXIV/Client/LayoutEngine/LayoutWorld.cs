@@ -24,7 +24,7 @@ public unsafe partial struct LayoutWorld {
     [FieldOffset(0x068)] public long MillisecondsSinceLastUpdate;
     [FieldOffset(0x080)] public StdMap<ulong, Pointer<LayoutManager>> LoadedLayouts; // key = (LvbCrc << 32) | TerritoryTypeRowId
     //[FieldOffset(0x090)] public StdMap<ulong, Pointer<LayoutManager>> UnkLayouts90; // key = (LvbCrc << 32) | TerritoryTypeRowId
-    [FieldOffset(0x0A0)] public fixed float StreamingRadiusPerType[90];
+    [FieldOffset(0x0A0), FixedSizeArray] internal FixedSizeArray90<float> _streamingRadiusPerType;
     // 0x208 - some other map, value = Client::System::Resource::Handle::ResourceHandle*
     [FieldOffset(0x218)] public StdMap<Utf8String, Pointer<byte>>* RsvMap;
 

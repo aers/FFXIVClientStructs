@@ -29,13 +29,13 @@ public unsafe partial struct GroupManager {
     public partial GroupManager* GetNextInstance(bool getNextInstance = true); // if true, simply adds sizeof(GroupManager) to the `this` pointer
 
     [MemberFunction("E8 ?? ?? ?? ?? EB B8 E8")]
-    public partial bool IsObjectIdInParty(uint objectId);
+    public partial bool IsEntityIdInParty(uint entityId);
 
     [MemberFunction("33 C0 44 8B CA F6 81")]
-    public partial bool IsObjectIdInAlliance(uint objectId);
+    public partial bool IsEntityIdInAlliance(uint entityId);
 
     [MemberFunction("48 63 81 ?? ?? ?? ?? 85 C0 78 14")]
-    public partial bool IsObjectIdPartyLeader(uint objectId);
+    public partial bool IsEntityIdPartyLeader(uint entityId);
 
     [MemberFunction("E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 19")]
     public partial bool IsCharacterInPartyByName(byte* name);
@@ -53,5 +53,5 @@ public unsafe partial struct GroupManager {
     public partial PartyMember* GetPartyMemberByContentId(ulong contentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FF 32")]
-    public partial PartyMember* GetPartyMemberByObjectId(uint objectId);
+    public partial PartyMember* GetPartyMemberByEntityId(uint entityId);
 }

@@ -18,7 +18,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [FieldOffset(0x18)] public long StringLength;
     [FieldOffset(0x20)] public bool IsEmpty;
     [FieldOffset(0x21)] public bool IsUsingInlineBuffer;
-    [FieldOffset(0x22)] public fixed byte InlineBuffer[0x40]; // inline buffer used until strlen > 0x40
+    [FieldOffset(0x22), FixedSizeArray] internal FixedSizeArray64<byte> _inlineBuffer; // inline buffer used until strlen > 0x40
 
     public static bool HasDefault => true;
     public static bool IsDisposable => true;

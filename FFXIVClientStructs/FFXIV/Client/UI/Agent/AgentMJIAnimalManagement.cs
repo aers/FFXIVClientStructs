@@ -21,7 +21,7 @@ public unsafe partial struct AgentMJIAnimalManagement {
     [FieldOffset(0x148)] public StdVector<Pointer<ItemDesc>> EntrustAvailableFood; // filled and updated on entrust
     [FieldOffset(0x160)] public int NumPastureSlots;
     [FieldOffset(0x164)] public int CurContextMenuRow;
-    [FieldOffset(0x168)] public uint PendingReleaseObjectId;
+    [FieldOffset(0x168)] public uint PendingReleaseEntityId;
     [FieldOffset(0x170)] public Utf8String ProposedNickname;
     [FieldOffset(0x1D8)] public bool DuringCapture; // true if agent was opened to free up a slot for captured animal
     [FieldOffset(0x1D9)] public bool DataInitialized;
