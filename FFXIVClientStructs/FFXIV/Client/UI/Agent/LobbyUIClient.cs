@@ -14,8 +14,9 @@ public unsafe partial struct LobbyUIClient {
     [FieldOffset(0x48)] public LobbySubscriptionInfo* SubscriptionInfo;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x54)]
-public unsafe struct LobbyDataCenterWorldEntry {
+public unsafe partial struct LobbyDataCenterWorldEntry {
     [FieldOffset(0)] public ushort Id; // RowId in World sheet
     [FieldOffset(0x2)] public ushort Index;
 
