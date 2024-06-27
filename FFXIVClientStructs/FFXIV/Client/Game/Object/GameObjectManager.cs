@@ -11,10 +11,6 @@ public unsafe partial struct GameObjectManager {
     [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA", 3)]
     public static partial GameObjectManager* Instance();
 
-    // TODO: this is incorrect; the function is gone (inlined in only caller), and implementation is trivial (just look up in Objects.IndexSorted)
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 14 24 49 8B CC 8B D8 FF 52 ?? 45 33 C9")]
-    public static partial GameObject* GetGameObjectByIndex(int index);
-
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x3B00)]
     public unsafe partial struct ObjectArrays {
