@@ -8,8 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2"
 // this is a large object holding most of the other objects in the Client::Game::UI namespace
 // all data in here is used for UI display
-[StructLayout(LayoutKind.Explicit, Size = 0x17F10)] // its at least this big, may be a few bytes bigger
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x17F10)] // its at least this big, may be a few bytes bigger
 public unsafe partial struct UIState {
     [FieldOffset(0x00)] public Hotbar Hotbar;
     [FieldOffset(0x08)] public Hate Hate;
@@ -181,7 +181,7 @@ public unsafe partial struct UIState {
     /// </summary>
     /// <remarks>
     /// WARNING: This method is NOT BOUNDED on IDs. While *one* function seems to set an upper bound on this, this
-    /// method is a pain in the neck to find *and*, frustratingly, cannot be sigged. 
+    /// method is a pain in the neck to find *and*, frustratingly, cannot be sigged.
     /// </remarks>
     /// <param name="companionId">The ID of the companion/minion to check for.</param>
     /// <returns>Returns true if the specified minion is unlocked.</returns>

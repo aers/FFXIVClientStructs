@@ -25,6 +25,7 @@ public unsafe partial struct AddonConfig {
     public partial nint ChangeHudLayout(uint layoutIndex, bool unk1 = false, bool unk2 = true);
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x9E90)]
 public unsafe partial struct AddonConfigData {
     [FieldOffset(0x00)] public Utf8String DefaultString; // Literally says "Default"

@@ -54,8 +54,9 @@ public unsafe partial struct AozContentData {
     [FieldOffset(0x37C)] private float _UnkFloat;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x7A)]
-public unsafe struct AozArrangementData {
+public unsafe partial struct AozArrangementData {
     [FieldOffset(0x01)] public byte Count;
     [FieldOffset(0x02), FixedSizeArray] internal FixedSizeArray30<ushort> _enemies;
     [FieldOffset(0x3E), FixedSizeArray] internal FixedSizeArray30<ushort> _positions;

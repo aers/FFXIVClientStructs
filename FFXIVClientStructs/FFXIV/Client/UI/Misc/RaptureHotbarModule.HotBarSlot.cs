@@ -21,21 +21,18 @@ public partial struct RaptureHotbarModule {
         ///  <remarks>
         /// This is generally used for actions with a flexible MP cost (e.g. "All" for Flare), or "x 123" for items.
         /// </remarks>
-        [FieldOffset(0x68), FixedSizeArray(isString: true)]
-        internal FixedSizeArray32<byte> _costText;
+        [FieldOffset(0x68), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _costText;
 
         /// A human-friendly display of the keybind used for this hotbar slot.
         ///
         /// This text will generally lead with a space and have wrapping brackets, e.g. " [Ctrl-3]".
-        [FieldOffset(0x88), FixedSizeArray(isString: true)]
-        internal FixedSizeArray32<byte> _popUpKeybindHint;
+        [FieldOffset(0x88), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _popUpKeybindHint;
 
         /// A less-friendly version of the keybind used for this hotbar slot.
         ///
         /// The actual use of this field is unknown, but it appears to be related to the hint in the top-left of the hotbar
         /// UI.
-        [FieldOffset(0xA8), FixedSizeArray(isString: true)]
-        internal FixedSizeArray16<byte> _keybindHint;
+        [FieldOffset(0xA8), FixedSizeArray(isString: true)] internal FixedSizeArray16<byte> _keybindHint;
 
         /// The ID of the action that will be executed when this slot is triggered. Action type is determined by the
         /// <see cref="CommandType"/> field.
@@ -73,7 +70,7 @@ public partial struct RaptureHotbarModule {
         [FieldOffset(0xC4)] public ushort UNK_0xC4;
 
         // 0xC6 (198) does not appear to be referenced *anywhere*. Nothing ever reads or writes to it, save for a zero-out
-        // operation. 
+        // operation.
 
         /// The <see cref="HotbarSlotType"/> of the <see cref="CommandId"/> that will be executed when this hotbar slot
         /// is triggered.
@@ -111,7 +108,7 @@ public partial struct RaptureHotbarModule {
         /// - All others: Grey
         [FieldOffset(0xCA)] public byte CostType;
 
-        /// Appears to control display of the primary cost of the action (0xCA). 
+        /// Appears to control display of the primary cost of the action (0xCA).
         ///
         /// - 1: Displays action cost from 0xD0 in bottom left (e.g. for Actions or Craft Actions)
         /// - 2: Mode 1, but display a custom string from CostText instead (generally "All" on Actions with PrimaryCost = 4)
@@ -163,7 +160,7 @@ public partial struct RaptureHotbarModule {
 
         /// UNKNOWN. Appears to be Recipe specific.
         ///
-        /// Always set to 1, apparently? 
+        /// Always set to 1, apparently?
         [FieldOffset(0xDD)] public byte UNK_0xDD;
 
         /// UNKNOWN. Appears to control UI display mode (icon and displayed name) in some way
@@ -237,7 +234,7 @@ public partial struct RaptureHotbarModule {
         /// This method is virtually almost always called using the parameters from <see cref="ApparentSlotType"/> and <see cref="ApparentActionId"/>.
         ///
         /// When <see cref="UNK_0xDE"/> is set to 3, this method will instead override the passed in slotType and actionId with
-        /// the values present in <see cref="OriginalApparentSlotType"/> and <see cref="OriginalApparentActionId"/>. 
+        /// the values present in <see cref="OriginalApparentSlotType"/> and <see cref="OriginalApparentActionId"/>.
         /// </summary>
         /// <param name="slotType">The appearance slot type to use. Virtually almost always <see cref="ApparentSlotType"/>.</param>
         /// <param name="actionId">The appearance action ID to use. Virtually almost always <see cref="ApparentActionId"/>.</param>
@@ -291,7 +288,7 @@ public partial struct RaptureHotbarModule {
 
         /// <summary>
         /// Check whether the action contained in this slot is considered usable or not. When set to false, the respective
-        /// slot in the UI is greyed out (though is still interactable). 
+        /// slot in the UI is greyed out (though is still interactable).
         /// </summary>
         /// <param name="slotType">The slot type to check against - always <see cref="ApparentSlotType"/>.</param>
         /// <param name="actionId">The actionID to check against - always <see cref="ApparentActionId"/>.</param>
