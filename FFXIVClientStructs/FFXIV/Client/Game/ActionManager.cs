@@ -149,9 +149,8 @@ public unsafe partial struct ActionManager {
     /// </remarks>
     /// <param name="actionType">The type of action (generally, Spell) to trigger a cooldown for.</param>
     /// <param name="actionId">The ID of the action to trigger a cooldown for.</param>
-    /// <returns>Unknown.</returns>
     [MemberFunction("48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 41 8B F0")]
-    public partial nint StartCooldown(ActionType actionType, uint actionId);
+    public partial void StartCooldown(ActionType actionType, uint actionId);
 
     /// <summary>
     /// Check if a specific action is "off cooldown" and can be used again. This method will account for the slidecast
@@ -268,6 +267,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("48 8B C4 48 89 58 ?? 56 48 81 EC ?? ?? ?? ?? 48 8B 35")]
     public partial void Update();
 
+    // TODO: accurate as of 6.58, changed in 7.0, needs revision
     public enum CastTimeProc : byte {
         None = 0,
         Firestarter = 1, // THM/BLM
