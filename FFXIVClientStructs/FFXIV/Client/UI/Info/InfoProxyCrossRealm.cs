@@ -54,7 +54,7 @@ public unsafe partial struct CrossRealmGroup {
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-public unsafe struct CrossRealmMember {
+public unsafe partial struct CrossRealmMember {
     [FieldOffset(0x08)] public ulong ContentId;
     [FieldOffset(0x18)] public uint EntityId;
     [FieldOffset(0x20)] public byte Level;
