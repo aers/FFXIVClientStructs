@@ -2788,7 +2788,7 @@ classes:
       0x141DF06E0: Finalize
   Common::Component::BGCollision::Scene:
     vtbls:
-      - ea: 0x141D827C0
+      - ea: 0x14227B210
         base: Common::Component::BGCollision::Object
     funcs:
       0x141DFBE20: ctor
@@ -3659,8 +3659,8 @@ classes:
       0x140135190: ctor # inlined @ 0x1400BCC0C
       0x140135300: Finalize
       0x140135920: ProcessRequestResult
-#fail       0x140E3E8A0: ProcessItemHistory
-#fail       0x140104500: ProcessItemHistory_Internal
+      0x140135BB0: ProcessItemHistory
+      # 0x140104500: ProcessItemHistory_Internal # inlined in ProcessItemHistory
       0x140136450: SetLastPurchasedItem
       0x1401365C0: SendPurchaseRequestPacket
       0x140136750: ProcessPlayerRetainerInfo
@@ -7171,7 +7171,7 @@ classes:
       0x1407C39C0: ClearPetCrossHotbarSlot  # (this, slotId) -> nint
       0x1407C39E0: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
       0x1407C3A00: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
-      0x1407C35B0: PopulateIntermediateFromSlot  # (this, HotBarSlot*, HotBarUiIntermediate*)  - used for array population?
+#fail      0x1407C35B0: PopulateIntermediateFromSlot  # (this, HotBarSlot*, HotBarUiIntermediate*) # address in the middle of a function
       0x1407C5310: IsSavedSlotEmpty  # (this, classJobId, hotbarId, slotId) -> bool
       0x1407C7FA0: SetHotbarLocked
       0x1407C7FE0: IsHotbarLocked
@@ -7210,7 +7210,7 @@ classes:
       0x1407C0230: GetDisplayNameForSlot
       0x1407C0A90: GetCostTextForSlot
       0x1407C0080: GetCostTypeForSlot
-      0x1407BF590: GetCostDisplayModeForSlot
+#fail      0x1407BF590: GetCostDisplayModeForSlot # address in the middle of some other func
       0x1407C0820: GetAdjustedSlotTooltip    # loads in some adjustment things and then calls GetSlotTooltip
       0x1407C08E0: GetCostValueForSlot
       0x1407C1270: GetActionTypeForSlotType
@@ -7635,7 +7635,7 @@ classes:
       3: Update
   Client::Game::Character::CharacterSetupContainer:
     vtbls:
-      - ea: 0x1408C89B0
+      - ea: 0x141F0F710
         base: Client::Game::Character::ContainerInterface
     funcs:
       0x1408C89B0: ctor
@@ -11478,10 +11478,10 @@ classes:
     vtbls:
       - ea: 0x141F667E0
         base: Client::Game::Event::EventHandler
-  Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
-    vtbls:
-      - ea: 0x140D6B200
-        base: Client::Game::Event::GoldSaucerEventHandler
+#  Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
+#    vtbls:
+#fail      - ea: 0x140D6B200 <--- TODO: this is a function address
+#        base: Client::Game::Event::GoldSaucerEventHandler
   Client::Game::Event::LotteryDailyEventHandler: # 0x25
     vtbls:
       - ea: 0x141F678D8
