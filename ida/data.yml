@@ -3432,7 +3432,7 @@ classes:
     funcs:
       # 0x1400AE950: ctor # INLINED IN 7.0
       0x1401D1AD0: Finalize
-#fail       0x1405483E0: InitializeAddon # inlined @ 0x1406C0B93
+#       0x1405483E0: InitializeAddon # inlined @ 0x1406C0B93
   Client::UI::RaptureAtkColorDataManager:
     vtbls:
       - ea: 0x141EA5968
@@ -3915,7 +3915,7 @@ classes:
       - ea: 0x141EB9910
         base: Client::System::Threading::Thread
     funcs:
-     0x14021FFF0: ctor
+      0x14021FFF0: ctor
       0x1402200E0: Finalize
   Client::System::File::FileManager:
     instances:
@@ -4253,7 +4253,7 @@ classes:
     instances:
       - ea: 0x142593588
     vtbls:
-      - ea: 0x141E2EF0
+      - ea: 0x141EC2EF0
         base: Client::Graphics::Singleton
     funcs:
       0x140265650: ctor
@@ -4443,8 +4443,8 @@ classes:
     vtbls:
       - ea: 0x141EC65B0
         base: Application::Network::LobbyClient::LobbyRequestCallback
-#    funcs:
-#fail      0x1403D3DC0: ctor
+    funcs:
+     0x1402A7C60: ctor
   Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent:
     vtbls:
       - ea: 0x141EC6B80
@@ -4544,14 +4544,14 @@ classes:
     vtbls:
       - ea: 0x141EC9538
         base: Client::UI::Agent::AgentExplorationDetailInterface
-#    funcs:
-#fail       0x1402E50D0: Finalize
+    funcs:
+      0x14037B3F0: Finalize
   Client::UI::Agent::AgentAirShipExplorationDetail:
     vtbls:
       - ea: 0x141EC7EF8
         base: Client::UI::Agent::AgentExplorationDetailInterface
-#    funcs:
-#fail       0x14028A380: Finalize
+    funcs:
+      0x1403101C0: Finalize
   Client::UI::Agent::AgentExplorationDetailInterface:
     vtbls:
       - ea: 0x141EC7E18
@@ -5282,7 +5282,7 @@ classes:
       0x140ACC3B0: GetUnlockState
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
-      - ea: 0xoff_141EF0810
+      - ea: 0x141EF0810
         base: Client::System::Framework::Task
     funcs:
       0x1405D3CF0: CreateInstance
@@ -5790,14 +5790,14 @@ classes:
     vtbls:
       - ea: 0x141EF5528
         base: Component::GUI::AtkResNode
-    funcs:
+#    funcs:
 #     0x1405A04A0: ctor # INLINED IN 7.0 in CreateResNode
   Component::GUI::AtkCounterNode:
     vtbls:
       - ea: 0x141EF5540
         base: Component::GUI::AtkResNode
     funcs:
-#f    0x1405A0360: ctor # INLINED IN 7.0 in CreateResNode
+#     0x1405A0360: ctor # INLINED IN 7.0 in CreateResNode
       0x140645460: SetText
       0x1406454A0: SetNumber
       0x1406455F0: UpdateWidth
@@ -5812,7 +5812,7 @@ classes:
     vtbls:
       - ea: 0x141EF5588
         base: Component::GUI::AtkResNode
-    funcs:
+#    funcs:
 #     0x1405A0300: ctor # INLINED IN 7.0 in CreateResNode
   Component::GUI::AtkUnitBase:
     vtbls:
@@ -5911,7 +5911,7 @@ classes:
     funcs:
       0x14066DA50: ctor
       0x1406A0F90: Finalize
-#fail      0x1406CA030: GetOwnerNode # not sure, def got inlined in 0x1410E0F00, are they the same?
+#      0x1406CA030: GetOwnerNode # not sure, def got inlined in 0x1410E0F00, are they the same?
       0x14066D700: SetChecked
   Component::GUI::AtkComponentIcon:
     vtbls:
@@ -6139,12 +6139,12 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x1406A87E0: ctor
-      #fail 0x1406A89C0: Finalize # can't find it
+      # 0x1406A89C0: Finalize # can't find it
   Component::GUI::AtkComponentPreview:
     vtbls:
       - ea: 0x141EF6BA8
         base: Component::GUI::AtkComponentBase
-    funcs:
+    #funcs:
       # 0x140587820: ctor # inlined in AtkUldManager_CreateAtkComponent
   Component::GUI::AtkComponentScrollBar:
     vtbls:
@@ -6157,7 +6157,7 @@ classes:
       - ea: 0x141EF6CE8
         base: Component::GUI::AtkComponentBase
     funcs:
-#fail       0x140589E90: LoadIconByID # inlined
+#       0x140589E90: LoadIconByID # inlined
       0x1406AD9C0: LoadIcon # this takes a struct arg that includes the icon ID and some params
       0x1406ADBC0: SetText
       0x1406ADBE0: SetTextColor
@@ -6181,7 +6181,7 @@ classes:
     vtbls:
       - ea: 0x141EF6EA8
         base: Component::GUI::AtkComponentBase
-    funcs:
+    #funcs:
       # 0x14058D160: ctor # inlined in AtkUldManager_CreateAtkComponent
   Component::GUI::AtkComponentWindow:
     vtbls:
@@ -6564,7 +6564,7 @@ classes:
         base: Component::GUI::AtkInputData
       - ea: 0x141F0C898
         base: Client::UI::Misc::UserFileManager::UserFileEvent
-    funcs:
+    #funcs:
       # 0x140618AC0: ctor # inlined @ 0x14075CD19
   Client::UI::RaptureUiDataModule:
     vtbls:
@@ -7009,7 +7009,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407D4520: ctor
-#fail       0x14069BD80: Initialize
+      0x1407D4670: Initialize
   Client::UI::Misc::ConfigModule:
     vtbls:
       - ea: 0x141F0B5C0
@@ -7275,7 +7275,7 @@ classes:
       0x1407DC330: HasLinkedGlamourPlate
       0x1407DC500: GetClassJobIcon
       0x1407DCA70: GetBannerIndex
-#fail      0x1407DC530: SetBannerIndex
+      0x1407DCAD0: SetBannerIndex
       0x1407DCBD0: HasLinkedBanner
       0x1407DCFC0: FindGearsetIdByName
   Client::UI::Misc::ItemFinderModule:
@@ -7306,7 +7306,7 @@ classes:
       0: dtor
     funcs:
       0x1407EDC30: ctor
-#fail       0x1406B26A0: Finalize
+#       0x1406B26A0: Finalize # Inlined in dtor
       0x1407EDD10: Populate
       0x1407EE000: GetWorldById
       0x1407EE080: GetWorldNameById
@@ -7399,7 +7399,7 @@ classes:
       0x1407A3570: GetBannerById
       0x1407A35B0: GetBannerIdByBannerIndex
   Client::UI::Misc::BannerModuleData:
-    funcs:
+    #funcs:
       #0x1406DC330: ctor # inlined in Client::UI::Misc::BannerModule_vf8 (0x1407A40D0)
       #0x1407A32A0: CreateBanner # inlined in Client::UI::Misc::BannerModule.CreateBanner (0x1407A32A0)
       #0x1406DF940: DeleteBanner # inlined in Client::UI::Misc::BannerModule.DeleteBanner (0x1407A3430)
@@ -7595,7 +7595,7 @@ classes:
       0x1405E8580: SetSlotSpeed
       0x1405E8890: GetSlotSpeed
       0x1405E8AD0: GetCurrentActionTimelineTimestamp
-#fail       0x1404DF5A0: SetSlotTimeline # can't find it - hasel
+      0x1405E94E0: SetSlotTimeline
   Client::Game::Control::TimelineTransitController:
     vtbls:
       - ea: 0x141EF22D8
@@ -10325,7 +10325,7 @@ classes:
       0x140CD11C0: OpenCharaCardForObject
   Client::UI::Agent::AgentCharaCard::Storage:
     funcs:
-#fail       0x140B09250: ctor # inlined @ 140CD2EFC
+#       0x140B09250: ctor # inlined @ 140CD2EFC
       0x140CDC090: dtor
   Client::UI::Agent::AgentCharaCardDesignSetting:
     vtbls:
@@ -13163,7 +13163,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRetainerSell:
     vtbls:
-      - ea: 0x41FA3390
+      - ea: 0x141FA3390
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCharacter:
     vtbls:
@@ -13251,7 +13251,7 @@ classes:
     vtbls:
       - ea: 0x141FA5F50
         base: Component::GUI::AtkUnitBase
-    funcs:
+    #funcs:
       # 0x140EEC530: ReceiveEvent_ClickSynthesizeButton # inlined @ 0x1410DA6FC
       # 0x140EEC580: ReceiveEvent_ClickQuickSynthesisButton # inlined @ 0x1410DA732
       # 0x14107EEC0: ReceiveEvent_ClickTrialSynthesisButton # inlined @ 0x1410DA768
@@ -15204,9 +15204,9 @@ classes:
       0x14162C5F0: ctor
       0x14162C870: Finalize
       # The following 3 funcs seems to be inlined in CreateShaderPackage
-#fail       0x141309450: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
-#fail       0x141309540: VectorResize_ShaderNode
-#fail       0x141309630: VectorResize_VertexShader
+#       0x141309450: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
+#       0x141309540: VectorResize_ShaderNode
+#       0x141309630: VectorResize_VertexShader
   Client::Game::Character::Companion:
     vtbls:
       - ea: 0x141F0FF10
@@ -15333,7 +15333,7 @@ classes:
       - ea: 0x142057008
         base: Client::Game::Object::GameObject
 #    funcs:
-#fail       0x141426560: Create # Inlined @ 1417934A4 part of GameMain.Update
+#       0x141426560: Create # Inlined @ 1417934A4 part of GameMain.Update
   Component::Log::LogModuleInterface:
     vtbls:
       - ea: 0x14205A9E8
