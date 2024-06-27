@@ -396,7 +396,6 @@ functions:
   0x141BE3110: rrArithEncodeInit
   0x141BE56B0: rrRandStateMod
   0x141BE58C0: rrRandStateSeed
-#fail   0x1404C9F40: IntersectSweptSphereTriangleBroad
   0x141A99D50: IntersectRayTriangle
   0x141A99F80: IntersectSweptSphereTriangle
   0x141DF8FC0: IntersectRayAABB
@@ -857,15 +856,16 @@ classes:
         pointer: False
     funcs:
       0x1415FE1C0: Initialize
+      0x1415FE210: Destroy
       0x1415FE380: CreateBattleCharacter
-#fail       0x1412E30E0: CreateEventObject
+      0x1415FE4E0: CreateEventObject
       0x1415FE5B0: CreateAreaObject
       0x1415FE6A0: DeleteObjectByIndex
       0x1415FE800: DeleteAllObjects
       0x1415FE960: CalculateNextAvailableIndex
       0x1415FEA10: GetObjectByIndex
-#fail       0x1412E3710: IsValidClientObject
-#fail       0x1412E3730: IsValidClientObjectIndex
+      0x1415FEAF0: IsValidClientObject
+      0x1415FEB10: IsValidClientObjectIndex
       0x1415FEB30: GetIndexByObject
       0x1415FEB60: SetObjectAt #(idx, object)
       0x1415FEB90: RemoveObjectAt
@@ -876,7 +876,6 @@ classes:
         pointer: False
     funcs:
       0x140937B40: Initialize
-      0x1415FE210: Destroy
       0x1409381C0: Update
       0x140938220: UpdateCompanions
       0x1409382A0: CreateCharacterAtFirstEmptyIndex
@@ -1029,11 +1028,11 @@ classes:
         pointer: False
   Client::Game::Balloon:
     funcs:
-#fail       0x1414A6330: OpenBalloon
-#fail       0x1414A63A0: CloseBalloon
-#fail       0x1414A6490: Initialize
-#fail       0x1414A64D0: SetDefaultId
-#fail       0x1414A64E0: Reset # this is near identical to Initialize but is called in update instead
+      0x141830500: OpenBalloon
+      0x141830570: CloseBalloon
+      0x141830660: Initialize
+      0x1418306A0: SetDefaultId
+      0x1418306B0: Reset # this is near identical to Initialize but is called in update instead
       0x1418306F0: Update
       0x1418308C0: Terminate
       0x141830910: StartTimerMode # (Balloon* this, float timer, ushort id) if id == 1 use default id else use id
@@ -1074,15 +1073,15 @@ classes:
       - ea: 0x1427601D8
         pointer: False
     funcs:
-      0x140893D70: Initialize
-#fail       0x140745580: ctor
+      0x140893D70: Initialize # unused, inlined into ctor
+      0x1408924D0: ctor
       0x1408925B0: dtor
-#fail       0x140745640: HasInstance
+      0x140892620: HasInstance
       0x140892640: GetInstance
       0x140892650: Update
       0x1408926F0: Clear
       0x1408927B0: RequestPrismBox
-#fail       0x140745BA0: RestorePrismBoxItem
+      0x140892B50: RestorePrismBoxItem
       0x140893270: RequestGlamourPlates
       0x1408935E0: ApplyGlamourPlate
   Client::Game::CurrencyManager:
@@ -1100,9 +1099,9 @@ classes:
       0x140D821D0: GetItemCount
       0x140D822A0: GetItemMaxCount
       0x140D82370: GetItemCountRemaining
-#fail       0x140B8DE00: IsItemLimited
-#fail       0x140B8DED0: GetItemIdBySpecialId
-#fail       0x140B8DF50: SetItemData
+      0x140D82460: IsItemLimited
+      0x140D82530: GetItemIdBySpecialId
+      0x140D825C0: SetItemData
   Client::Game::ServerRequestCallbackInterface:
     vtbls:
       - ea: 0x141F355C0
@@ -1127,22 +1126,22 @@ classes:
       - ea: 0x142760200
         pointer: False
     funcs:
-#fail       0x1407476C0: ctor
+      0x140894550: ctor
       0x140866110: Update
       0x140867EB0: GetInventoryContainer  # (this, containerId)
       0x140881130: GetInventorySlot  # (this, containerId, slotId)
-#fail       0x14071F9F0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
-#fail       0x140726AF0: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
-#fail       0x140727260: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
+      0x1408695F0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
+      0x140870F80: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
+      0x140871810: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400DFCC0: GetSizeByIndex # static
       0x140872B80: GetEquippedItemIdForSlot
       0x140876060: GetPermittedGearsetCount
       0x1408814F0: GetLimitedTomestoneCount
-#fail       0x140725D20: GetEmptySlotsInBag
-#fail       0x14072FC00: SendTradeRequest
+      0x140870040: GetEmptySlotsInBag
+      0x14087AD50: SendTradeRequest
       0x14087D6B0: GetRetainerGil
       0x140880520: GetFreeCompanyGil
-#fail       0x140735100: GetGil
+      0x140881030: GetGil
       0x1408811D0: GetCompanySeals
       0x140881270: GetMaxCompanySeals
       0x1408813E0: GetTomestoneCount
@@ -1483,7 +1482,7 @@ classes:
       0x1418799C0: OpenUI
       0x141879B20: CalculateExpectedCollectedLeavings
       0x141879BD0: CollectAllLeavingsWillOvercap
-#fail       0x1414E4930: NoLeavingsToCollect
+      0x141879C90: NoLeavingsToCollect
       0x141879F50: UpdateAvailableLeavings
       0x14187A300: EntrustAnimal
       0x14187A530: CollectLeavingsSingle
@@ -1723,19 +1722,19 @@ classes:
       0x140AD2020: ResetPvPHotbarsForClassInner  # (self, uint) -> void
   Client::Game::UI::Hate:
     instances:
-#fail       - ea: 0x142204728
+      - ea: 0x14276E2D8
         pointer: False
   Client::Game::UI::Hater:
     instances:
-#fail       - ea: 0x142204830
+      - ea: 0x14276E3E0
         pointer: False
   Client::Game::UI::Chain:
     instances:
-#fail       - ea: 0x142205138
+      - ea: 0x14276ECE8
         pointer: False
   Client::Game::UI::WeaponState:
     instances:
-#fail       - ea: 0x142205140
+      - ea: 0x14276ECF0
         pointer: False
   Client::Game::UI::PlayerState:
     instances:
@@ -1786,7 +1785,7 @@ classes:
       0x140ADD700: GetAttributeByIndex # (this, index)
   Client::Game::UI::Revive:
     instances:
-#fail       - ea: 0x142205970
+      - ea: 0x14276F5A8
         pointer: False
     vtbls:
       - ea: 0x141F5A090
@@ -1905,7 +1904,7 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::PublicInstance:
     instances:
-      - ea: 0x142771C18  # UIState.AreaInstance
+      - ea: 0x142771C18
         pointer: False
     funcs:
       0x140B2A0F0: SetInstance
@@ -1945,14 +1944,14 @@ classes:
 #fail       0x140988780: ctor
   Client::Game::UI::GatheringNote:
     instances:
-#fail       - ea: 0x142208AD8
+      - ea: 0x142772780
         pointer: False
     funcs:
 #fail      0x1410E86C0: ctor
-#fail       0x14093EE20: Initialize
+     0x140ADFBC0: Initialize # unused, inlined
   Client::Game::UI::RecipeNote:
     instances:
-#fail       - ea: 0x142209100
+      - ea: 0x142772E20
         pointer: False
     funcs:
       0x140AE4ED0: ctor
@@ -1968,18 +1967,18 @@ classes:
       0x140AE8720: ClearFunctionPointers
   Client::Game::UI::FishingNote:
     instances:
-#fail       - ea: 0x142209C20
+      - ea: 0x142773938
         pointer: False
     funcs:
       0x140AE9370: ctor
       0x140AE9210: Initialize
   Client::Game::UI::FishRecord:
     instances:
-#fail       - ea: 0x142209CF0
+      - ea: 0x142773A18
         pointer: False
     funcs:
 #fail       0x14094A6A0: Initialize
-#fail       0x14094A8A0: Finalize
+      0x140AEC020: Finalize
   Client::Game::SheetWaiterBase:
 #    vtbls:
 #      - ea:
@@ -2043,7 +2042,7 @@ classes:
       0x140B47200: AddToScreenLogWithScreenLogKind
   Client::Game::UI::MarkingController:
     instances:
-#fail       - ea: 0x142213F10
+      - ea: 0x14277DD50 # note: it's actually a member of UIState instance
         pointer: False
     vtbls:
 #fail       - ea: 0x141A6ED10
@@ -2177,7 +2176,7 @@ classes:
       - ea: 0x142788430
         pointer: False
     vtbls:
-#fail       - ea: 0x141A702D8
+      - ea: 0x141F5B508
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x140049770: StaticInitializer
@@ -2715,10 +2714,10 @@ classes:
       10: Visit
   Common::Component::BGCollision::MeshSimple:
     funcs:
-#fail       0x141929A20: ctor
+      0x141DF2FF0: ctor
   Common::Component::BGCollision::MeshPCBLegacy:
     funcs:
-#fail       0x1419294A0: ctor
+      0x141DF2A60: ctor
   Common::Component::BGCollision::MeshPCB:
     vtbls:
       - ea: 0x14227B130
@@ -2771,7 +2770,6 @@ classes:
       20: Visit2
       21: Visit3
     funcs:
-#fail       0x141928790: ctor # inlined in multiple places sub_141DEFB20, sub_140251170
       0x141DF06E0: Finalize
   Common::Component::BGCollision::Scene:
     vtbls:
@@ -2862,12 +2860,9 @@ classes:
         base: Common::Component::BGCollision::QuadtreeNodeLink
   Common::Component::BGCollision::Quadtree::ColliderIterator:
     funcs:
-#fail       0x141DFF8F0: ctor
-#fail       0x141931AA0: ctorLevel
+      0x141DFFB80: ctor
+      0x141DFFC40: ctorLevel
       0x141DFFFF0: SkipEmptyCells
-  Common::Component::BGCollision::Quadtree::CellIterator:
-    funcs:
-#fail      0x140D8A230: Increment
   Common::Component::BGCollision::Collider:
     vtbls:
       - ea: 0x14227aca0
@@ -2959,10 +2954,10 @@ classes:
       - ea: 0x14227AE88
         base: Common::Component::Excel::ExcelResourceListener
     funcs:
-#fail       0x14192E940: ctor
-      0x141DF1E50: Finalize
-#fail       0x14192F1E0: LoadInProgressAroundPoint
-#fail       0x14192F2F0: AllLoadedAroundPoint
+      0x141DF0C90: ctor
+      0x141DF0E60: Finalize
+      0x141DF1720: LoadInProgressAroundPoint
+      0x141DF1820: AllLoadedAroundPoint
   Common::Component::BGCollision::ColliderBox:
     vtbls:
       - ea: 0x14227B230
@@ -2985,7 +2980,7 @@ classes:
       0x141E015F0: ctor
   Common::Component::BGCollision::ColliderBox::IIntersectFunctor:
     vtbls:
-#fail       - ea: 0x141D827D0
+      - ea: 0x14227B220
     vfuncs:
       0: dtor
       1: AcceptIntersection
@@ -2998,7 +2993,7 @@ classes:
       - ea: 0x14227B590
         base: Common::Component::BGCollision::ColliderBox::IIntersectFunctor
     funcs:
-#fail       0x1419321E0: Intersect
+      0x141E00420: Intersect
   Common::Component::BGCollision::ColliderBox::SphereNonHorizIntersectFunctor:
     vtbls:
       - ea: 0x14227B5A0
@@ -3081,10 +3076,9 @@ classes:
         base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
     funcs:
       0x141E08970: ctor
-
   Common::Component::BGCollision::ColliderPlane::IIntersectFunctor:
     vtbls:
-#fail       - ea: 0x141D82D88
+      - ea: 0x14227B7D8
     vfuncs:
       0: dtor
       1: AcceptIntersection
@@ -3107,8 +3101,8 @@ classes:
       0x1405D0160: ctor
       0x1405D0210: dtor
       0x1405D0280: Initialize
-      0x1405D04E0: UpdateTaskFuncImpl
-#fail       0x1404C7880: UpdateTaskFunc # inlined in BGCollisionModule.Initialize sub_1405D0280
+      0x1405D0450: UpdateTaskFuncImpl
+      0x1405D04E0: UpdateTaskFunc
       0x1405D0570: Shutdown
       0x1405D0600: IsLoadInProgress
       0x1405D06C0: RaycastSimple
@@ -3129,15 +3123,15 @@ classes:
       0x1405D1270: AddColliderSphere
       0x1405D1310: AddColliderPlane
       0x1405D13A0: AddColliderPlaneTwoSided
-#fail       0x1404C9D30: TaskBGCollisionModule_OnEndOfFrameRunner
-#fail       0x1404C9D40: TaskBGCollisionModule_UpdateTaskRunner
-#fail       0x1404C9D50: TaskBGCollisionModule_UpdateRunner
-#fail       0x141333D80: Raycast1 # not sure where else to put those two for now
-#fail       0x141333DD0: Raycast2
+      0x1405D2250: TaskBGCollisionModule_OnEndOfFrameRunner
+      0x1405D2260: TaskBGCollisionModule_UpdateTaskRunner
+      0x1405D2270: TaskBGCollisionModule_UpdateRunner
+      0x1416407D0: Raycast1 # not sure where else to put those two for now
+      0x141640820: Raycast2
   Common::Component::BGCollision::RaycastHit:
     funcs:
       0x141DEEA00: GetNormalComponents
-#fail       0x141923480: GetNormal
+      0x141DEEA80: GetNormal
   Common::Component::BGCollision::ColliderList:
     funcs:
       0x141DEECD0: Add
@@ -3146,7 +3140,7 @@ classes:
       0x141DEED60: ctor
   Common::Component::BGCollision::ColliderUpdateListeners:
     funcs:
-#fail       0x141923C10: ctor
+      0x141DEF380: ctor
       0x141DEF4D0: Notify
   Common::Component::Environment::ResourceInterface::ResourceHandleInterface:
     vtbls:
@@ -3390,7 +3384,7 @@ classes:
     vtbls:
       - ea: 0x141EA56A0
     funcs:
-#fail      0x1408CD820: Append
+      0x14065B4B0: Append
       0x14065B510: Remove
       0x14065B5B0: InsertAfter
   Component::GUI::AtkUnitManager:
@@ -3500,7 +3494,7 @@ classes:
       0x14011CD60: OnClipboardViewerChainChanged
   Common::Configuration::ConfigBase::ChangeEventInterface:
     vtbls:
-#fail      - ea: 0x142066C30 # thought I found it, but it didn't match up with old exe -midori
+      - ea: 0x141E8D1B0
     vfuncs:
       0: dtor
       1: OnConfigChange
@@ -3523,7 +3517,7 @@ classes:
       12: AddPage
   Client::UI::Info::InfoProxyInvitedInterface:
     vtbls:
-#fail       - ea: 0x1419BEA40
+      - ea: 0x141EA5650
   Client::UI::Info::InfoProxyCommonList:
     vtbls:
 #fail       - ea: 0x1419BF288
@@ -3540,7 +3534,7 @@ classes:
       0x14011B6C0: GetContentIDForEntry
       0x14011B6E0: GetEntryByName
       0x14011B7D0: GetEntry
-#fail       0x1400EE650: GetEntryByContentId
+      0x14011BF70: GetEntryByContentId
 #fail       0x1400EE8A0: SwapData
   Client::UI::Info::InfoProxyInvitedList:
     vtbls:
@@ -3565,14 +3559,14 @@ classes:
       0x1400BDDD0: IsInCrossWorldDuty
   Client::UI::Info::InfoProxyBlacklist:
     vtbls:
-#fail       - ea: 0x1419BED60
+#fail       - ea: 0x1419BED60 # 141EA5970 maybe?
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
 #fail       0x1400B2F20: ctor
 #fail       0x14017C440: Finalize
   Client::UI::Info::InfoProxyDetail:
     vtbls:
-#fail       - ea: 0x1419BFB10
+      - ea: 0x141EA6830
         base: Client::UI::Info::InfoProxyInterface
     funcs:
 #fail       0x1400F95D0: ctor
@@ -3589,7 +3583,7 @@ classes:
       0x14012A5E0: GetUpdateData
       0x14012A5F0: GetUpdateSearchComment
 #fail       0x1400FA5B0: PropagateUpdateData
-#fail       0x14017C7B0: Finalize
+      0x1401D1680: Finalize
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x1425951A0
@@ -3882,7 +3876,7 @@ classes:
       0x140219BA0: ctor
       0x140219BF0: Dispose
       0x140219C80: CreateThread
-#fail       0x1401C04A0: Wait
+      0x140219DD0: Wait
       0x140219DF0: HasFinished
       0x140219E30: SetAffinity
   Client::System::Threading::ThreadManager:
@@ -3946,7 +3940,7 @@ classes:
         base: Client::System::Resource::Handle::DefaultResourceHandle
     funcs:
       0x140228A80: ctor
-#fail       0x1401CE150: LoadTexFiles
+      0x140229490: LoadTexFiles
       0x1402292E0: LoadShpkFiles
   Client::System::Resource::Handle::ShaderPackageResourceHandle:
     vtbls:
@@ -4394,8 +4388,8 @@ classes:
 #fail       0x1402259D0: GetAgentContext
 #fail       0x1402259E0: GetAgentInventoryContext
       0x140295620: PropagateGameEvent
-      0x140295880: PropagateLevelChange # diaphora partial
-      0x1402958E0: PropagateClassJobChange # diaphora partial
+      0x140295880: PropagateLevelChange
+      0x1402958E0: PropagateClassJobChange
   Client::UI::Agent::AgentEventFade:
     vtbls:
       - ea: 0x141EC77B8
@@ -4410,7 +4404,7 @@ classes:
     funcs:
       0x1402A0050: ctor
       0x1402A04C0: OpenContextMenu
-#fail       0x140235570: OpenContextMenuForAddon
+      0x1402A0210: OpenContextMenuForAddon
       0x1402A0B20: GetOwnerAddonId
       0x1402A0B30: ClearMenu
       0x1402A0B80: SetMenuTitle
@@ -4418,18 +4412,18 @@ classes:
       0x1402A0D40: SetPositionX
       0x1402A0D60: SetPositionY
       0x1402A4010: SetUpdateChecker
-      0x1402A42E0: CloseSubMenu # diaphora partial
-      0x1402A0D80: OpenSubMenu # diaphora partial
+      0x1402A42E0: CloseSubMenu
+      0x1402A0D80: OpenSubMenu
       0x1402A55E0: OpenYesNo # (this, char* msgText, uint yesId, uint noId, uint checkboxId, bool setOwner)
-      0x1402A1D50: SetupButtonsForCharacterTarget # diaphora partial
+      0x1402A1D50: SetupButtonsForCharacterTarget
       0x1402A2720: SetupButtonsForGameObjectTarget # gameobjects that arent characters
-      0x1402A3B90: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu) # diaphora partial
-      0x1402A3C00: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu) # diaphora partial
+      0x1402A3B90: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x1402A3C00: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
       0x1402A4030: IsAllowedToOpenGameObjectTarget
-#fail       0x140238D60: IsAllowedToOpenCharacterTarget
+      0x1402A4090: IsAllowedToOpenCharacterTarget
       0x1402A5B80: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
       0x1402A5BF0: AddContextMenuItem # (this, int eventId, char* text, bool disabled, bool submenu, bool copyText)
-#fail       0x140328770: Finalize
+      #0x140328770: Finalize # inlined in 1403CD2C0
   Client::UI::Agent::LobbyUIClient:
     vtbls:
       - ea: 0x141EC65B0
@@ -4776,7 +4770,7 @@ classes:
     vtbls:
       - ea: 0x141EDA2F8
     funcs:
-      0x1404B24E0: Initialize # diaphora partial
+      0x1404B24E0: Initialize
   Client::Graphics::Render::Updater<Client::Graphics::Render::PostBoneDeformerBase>:
     vtbls:
       - ea: 0x141EDA300
@@ -5286,7 +5280,7 @@ classes:
       0x1408357A0: GetItemRowById
   Component::Exd::Sheets::BannerCondition:
     funcs:
-      0x140ACC3B0: GetUnlockState # diaphora partial
+      0x140ACC3B0: GetUnlockState
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
 #fail       - ea: 0x141A041B8
@@ -5341,9 +5335,9 @@ classes:
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
 #fail       0x1404EF250: ctor
-#fail       0x1404F53B0: ProcessMouseState
+      0x140602810: ProcessMouseState
       0x1406053E0: InteractWithObject
-#fail       0x1404FB5B0: OpenObjectInteraction
+      0x140609B60: OpenObjectInteraction
       0x140605EB0: Update
       0x1406073A0: GetHardTargetObjectId
       0x1406073C0: GetHardTargetId
@@ -5360,14 +5354,14 @@ classes:
       0x140607560: GetTargetObjectId2
       0x140607590: GetTargetPlayerId2
       0x1406075E0: GetTargetObject2
-#fail       0x1404F9720: ClearFocusTarget
+      0x1406079B0: ClearFocusTarget
       0x1406079D0: SetFocusTargetByObjectId
       0x1406084C0: IsObjectInViewRange
       0x140608620: GetMouseOverObject
-#fail       0x1404FB520: HandleRightClick
-#fail       0x1404FB730: HandleLeftClick
+      0x140609AD0: HandleRightClick # inlined @ 0x140602AB8
+      0x140609E20: HandleLeftClick # inlined @ 0x140602A35
       0x14060A220: RemoveObjectFromTargets
-#fail       0x1404F7F30: IsObjectOnScreen
+      0x1406059E0: IsObjectOnScreen
   Client::Game::Control::Control:
     instances:
       - ea: 0x142738730
@@ -5608,7 +5602,7 @@ classes:
       - ea: 0x141EF4E88
         base: Component::GUI::AtkFontAnalyzerRenderCount
     funcs:
-      0x1406359A0: ctor # diaphora partial
+      0x1406359A0: ctor # inlined in 0x140636E70
   Component::GUI::AtkFontAnalyzerRenderCount:
     vtbls:
       - ea: 0x141EF4DC8
@@ -5916,9 +5910,9 @@ classes:
       - ea: 0x141EF58F0
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x14066DA50: ctor # diaphora partial
+      0x14066DA50: ctor
       0x1406A0F90: Finalize
-      0x1406CA030: GetOwnerNode # diaphora partial
+      0x1406CA030: GetOwnerNode # diaphora partial not sure, def got inlined in 0x1410E0F00, are they the same?
       0x14066D700: SetChecked
   Component::GUI::AtkComponentIcon:
     vtbls:
@@ -5999,7 +5993,7 @@ classes:
       0x1406877E0: GetAddonIdByName
       0x140689620: ctor
       0x14068A040: Finalize
-#fail       0x14056B1A0: Initialize
+      0x14068A270: Initialize
       0x14068AF70: HandleInput
       0x14068B380: IsTextInputActive
       0x14068B200: SetUIScene
@@ -6007,33 +6001,33 @@ classes:
       0x1400DA7D0: ScdResourceHandler
   Component::GUI::AtkComponentCheckBox:
     vtbls:
-#fail       - ea: 0x141A09718
+      - ea: 0x141EF61D8
         base: Component::GUI::AtkComponentButton
     funcs:
-#fail       0x14056E750: ctor
+      0x14068E8E0: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
   Component::GUI::AtkComponentGaugeBar:
     vtbls:
       - ea: 0x141EF62A8
         base: Component::GUI::AtkComponentBase
     funcs:
-#fail       0x14056F680: ctor
+      0x14068FDA0: ctor
       0x14068F980: SetMinValue
       0x14068F9C0: SetMaxValue
       0x14068FA00: SetGaugeValue
       0x14068FAE0: HaltTransitions
-      0x14068FB30: SetGaugeRange # diaphora partial
-      0x14068FB60: SetFillColor # diaphora partial
+      0x14068FB30: SetGaugeRange
+      0x14068FB60: SetFillColor
       0x14068FC10: SetBackdropColor
-      0x140690790: UpdateFloatValues # diaphora partial
-      0x140690920: UpdateBarFill1 # diaphora partial
-      0x140690CE0: UpdateBarFill2 # diaphora partial
-      0x140691430: SetupGaugeTransitionSplit # handles situations where the value overflows to/from the secondary gauge (ie shield bar in party list) # diaphora partial
+      0x140690790: UpdateFloatValues
+      0x140690920: UpdateBarFill1
+      0x140690CE0: UpdateBarFill2
+      0x140691430: SetupGaugeTransitionSplit # handles situations where the value overflows to/from the secondary gauge (ie shield bar in party list)
       0x140691740: SetupGaugeTransition
       0x1406918B0: SetGaugeValueInstant # no transition animation
       0x1406919B0: SetParameterText
       0x140691A90: GetFillPosition1
-      0x140691B20: GetFillPosition2 # diaphora partial
-      0x140691BA0: InitializeFillMargin # diaphora partial
+      0x140691B20: GetFillPosition2
+      0x140691BA0: InitializeFillMargin # inlined in 0x140690350
     vfuncs:
       8: InitializeFillNodes
   Component::GUI::AtkComponentGaugeBar::GaugeValueTransition:
@@ -6041,14 +6035,14 @@ classes:
       0x1406905E0: GetTransitioningValue
   Component::GUI::AtkComponentSlider:
     vtbls:
-      - ea: 0x141EF6EA8
+      - ea: 0x141EF6348
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x140691EF0: ctor # diaphora partial
-#fail       0x1405718A0: Finalize
+      0x140691EF0: ctor
+      0x140691FE0: Finalize
       0x140691C40: SetMinValue
       0x140691C60: SetMaxValue
-#fail       0x140571650: SetValue
+      0x140691C80: SetValue
   Component::GUI::AtkComponentInputBase:
     vtbls:
       - ea: 0x141EF63E8
@@ -6070,20 +6064,20 @@ classes:
       0x140693D60: SetText
   Component::GUI::AtkComponentNumericInput:
     vtbls:
-      - ea: 0x141EF6488
+      - ea: 0x141EF6588
         base: Component::GUI::AtkComponentInputBase
     funcs:
-      0x14069A960: ctor # diaphora partial
+      0x14069A960: ctor
   Component::GUI::AtkComponentDropDownList:
     vtbls:
       - ea: 0x141EF6650
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x14069EA40: ctor # diaphora partial
-#fail       0x14057C6A0: SelectItem
+      0x14069EA40: ctor
+      0x14069E740: SelectItem
       0x14069E850: DeselectItem
       0x14069E870: GetSelectedItemIndex
-#fail       0x14057DB10: SetPreviewTextByIndex
+      0x1406A0A80: SetPreviewTextByIndex
   Component::GUI::AtkComponentRadioButton:
     vtbls:
       - ea: 0x141EF66F0
@@ -6095,19 +6089,19 @@ classes:
       - ea: 0x141EF6800
         base: Component::GUI::AtkComponentRadioButton
     funcs:
-      0x1406A19F0: ctor # diaphora partial
+      0x1406A19F0: ctor
   Component::GUI::AtkComponentGuildLeveCard:
     vtbls:
       - ea: 0x141EF6910
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x1406A2120: ctor # diaphora partial
+      0x1406A2120: ctor
   Component::GUI::AtkComponentTextNineGrid:
     vtbls:
       - ea: 0x141EF69B0
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x1406A24B0: ctor # diaphora partial
+      0x1406A24B0: ctor
   Component::GUI::AtkResourceRendererBase:
     vtbls:
       - ea: 0x141EF6A50
@@ -6147,7 +6141,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x1406A87E0: ctor
-      0x1406A89C0: Finalize # diaphora partial
+      #fail 0x1406A89C0: Finalize # can't find it
   Component::GUI::AtkComponentPreview:
     vtbls:
       - ea: 0x141EF6BA8
@@ -6166,11 +6160,11 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
 #fail       0x140589E90: LoadIconByID
-      0x1406AD9C0: LoadIcon # this takes a struct arg that includes the icon ID and some params # diaphora partial
+      0x1406AD9C0: LoadIcon # this takes a struct arg that includes the icon ID and some params
       0x1406ADBC0: SetText
       0x1406ADBE0: SetTextColor
       0x1406ADC00: SetTextEdgeColor
-      0x1406ADD80: ctor # diaphora partial
+      0x1406ADD80: ctor
   Component::GUI::AtkComponentDragDrop:
     vtbls:
       - ea: 0x141EF6D88
@@ -6179,11 +6173,11 @@ classes:
         base: Component::GUI::AtkDragDropInterface
     funcs:
       0x1406AF530: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
-      0x1406AEA50: LoadIconById # diaphora partial
-      0x1406AEA70: GetIconId # diaphora partial
+      0x1406AEA50: LoadIconById
+      0x1406AEA70: GetIconId
       0x1406AF110: AttachTooltip
       0x1406AF250: SetTimelineState
-      0x1406AF620: Finalize # diaphora partial
+      0x1406AF620: Finalize
       0x1406AF330: GetTimelineActiveLabelId
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
@@ -6196,7 +6190,7 @@ classes:
       - ea: 0x141EF7018
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x1406B23C0: ctor # diaphora partial
+      0x1406B23C0: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
     vfuncs:
       20: GetWindowCollisionNode
       21: GetTitleBarCollisionNode
@@ -6214,13 +6208,13 @@ classes:
       - ea: 0x141EF7188
         base: Component::GUI::AtkComponentButton
     funcs:
-      0x1406BABE0: ctor # diaphora partial
+      0x1406BABE0: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
   Component::GUI::AtkComponentPortrait:
     vtbls:
       - ea: 0x141EF7250
         base: Component::GUI::AtkComponentBase
     funcs:
-      0x1406BC830: ctor # diaphora partial
+      0x1406BC830: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
   Client::LayoutEngine::IManagerBase:
     vtbls:
       - ea: 0x141EF82F0
@@ -6294,27 +6288,27 @@ classes:
       0x1406EF240: SetActiveFestivals
   Client::LayoutEngine::OutdoorAreaLayoutData:
     funcs:
-      0x1406D1320: SetFixture # diaphora partial
-      0x1406D1490: SetFixtureStain # diaphora partial
+      0x1406D1320: SetFixture # inlined in 0x1406F4B60 (not 100% sure)
+      0x1406D1490: SetFixtureStain # inlined in 0x1406F4B60 (not 100% sure)
   Client::LayoutEngine::OutdoorPlotLayoutData:
     funcs:
       0x1406D0D10: SetFixture
       0x1406D0F00: SetFixtureStain
   Client::LayoutEngine::Streaming::StreamingManager:
     vtbls:
-#fail       - ea: 0x141A0C1F0
+      - ea: 0x141EF8B50
         base: Client::LayoutEngine::IManagerBase
     funcs:
-#fail       0x1405C1B40: ctor
+      0x1406EA230: ctor # no xrefs, inlined in LayoutManager_ctor
   Client::LayoutEngine::Streaming::InstanceGridTree:
     vtbls:
-#fail       - ea: 0x141A0C1E8
+      - ea: 0x141EF8B48
         base: Client::System::Common::NonCopyable
   Client::LayoutEngine::Environment::LayoutOBSetManager:
     vtbls:
       - ea: 0x141EF8BB8
     funcs:
-#fail       0x1405D0D90: ctor
+      0x1406FECA0: ctor # no xrefs, inlined in LayoutManager_ctor
   Client::LayoutEngine::Layer::LayerManager:
     vtbls:
       - ea: 0x141EF8BC0
@@ -6328,9 +6322,9 @@ classes:
       - ea: 0x141EF8BE0
   Client::LayoutEngine::CutScenePrefetchResource:
     vtbls:
-#fail       - ea: 0x141A0C230
+      - ea: 0x141EF8B90
     funcs:
-#fail       0x1405CFDD0: ctor
+      0x1406FD980: ctor # no xrefs, inlined in LayoutWorld_Initialize
   Client::LayoutEngine::Node::ChildNodeContainer:
     vtbls:
       - ea: 0x141EF8580
@@ -6369,7 +6363,7 @@ classes:
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::SoundPointLayoutInstanc:
     vtbls:
-#fail       - ea: 0x141A14848
+      - ea: 0x141F00CF0
         base: Client::LayoutEngine::Node::PointLayoutInstance
   Client::LayoutEngine::Layer::TriggerBoxLayoutInstance:
     vtbls:
@@ -6387,7 +6381,7 @@ classes:
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::GameObjectLayoutInstance:
     vtbls:
-#fail       - ea: 0x141A0CEC8
+      - ea: 0x141EF9828
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::RangeLayoutInstance:
     vtbls:
@@ -6579,7 +6573,7 @@ classes:
       - ea: 0x141F04F00
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-      0x1407662B0: Finalize # diaphora partial
+      0x140766110: Finalize
       0x1407F3FC0: ctor
       0x1407FA370: MjiCreateWorkshopPreset # diaphora partial
   Client::UI::Misc::InputTimerModule:
@@ -6616,7 +6610,7 @@ classes:
       - ea: 0x141F05098
     funcs:
       # 0x140621E10: ctor # inlined @ 0x14075CDAD
-#fail       0x140621F00: HandleInputUpdate
+      0x140754D90: HandleInputUpdate
       0x140756500: CheckCastCancel
       0x140759FB0: CheckScreenshotState
   Client::UI::UIModuleInterface:
@@ -6773,8 +6767,8 @@ classes:
       0x14075DC80: Update
       0x14075E100: HandleInputUpdate
       0x14075E1D0: ShouldLimitFps
-      0x140763B70: PropagateLevelChange # diaphora partial
-      0x140763BC0: PropagateClassJobChange # diaphora partial
+      0x140763B70: PropagateLevelChange
+      0x140763BC0: PropagateClassJobChange
   Client::UI::Misc::PvpSetModule:
     vtbls:
       - ea: 0x141F0C130
@@ -6966,8 +6960,8 @@ classes:
       - ea: 0x141F07368
     funcs:
       0x140772AD0: ctor
-#fail       0x14063D890: ReadExpression
-#fail       0x14063E120: ReadParameter
+      0x140773400: ReadExpression
+      0x1407739F0: ReadParameter
   Component::Text::MacroEncoder:
     vtbls:
       - ea: 0x141F07520
@@ -6984,13 +6978,13 @@ classes:
     funcs:
       0x14077A0F0: ctor
   Component::Text::ReferencedUtf8String:
-    funcs:
-      # 0x1403274A0: Create # INLINED IN 7.0 1407A8651
+    # funcs:
+    #   0x1403274A0: Create # INLINED IN 7.0 1407A8651
   Component::Text::TextParameter:
-    funcs: # these 3 got inlined inside another function that is already inlined
-      # 0x140131E90: SetReferencedUtf8String # INLINED IN 7.0 140903053 
-      # 0x140131E10: SetString
-      # 0x140131DA0: SetInteger
+    # funcs: # these 3 got inlined inside another function that is already inlined
+    #   0x140131E90: SetReferencedUtf8String # INLINED IN 7.0 140903053 
+    #   0x140131E10: SetString
+    #   0x140131DA0: SetInteger
   std::deque<Component::Text::TextParameter>:
     funcs:
       0x1403D4930: _Reset_map # diaphora partial
@@ -7293,8 +7287,8 @@ classes:
     funcs:
       0x1407E1890: ctor
       0x1407E2C70: Update
-      0x1407E1A60: Finalize # diaphora partial
-      0x1407E31D0: SearchForItem # diaphora partial
+      0x1407E1A60: Finalize
+      0x1407E31D0: SearchForItem
   Client::UI::Misc::DataCenterHelper:
     vtbls:
       - ea: 0x141F0BEA0
@@ -7333,8 +7327,8 @@ classes:
       0x1407EECC0: GetHotbarMinionArray # no xrefs
       0x1407EECD0: AddUnseenCard
       0x1407EEDC0: RemoveUnseenCard
-      0x1407EEE90: IsUnseenCard # diaphora partial
-#fail       0x1406B3AA0: GetUnseenCardsArray
+      0x1407EEE90: IsUnseenCard
+      0x1407EEED0: GetUnseenCardsArray
   Client::UI::Misc::ItemOrderModule:
     vtbls:
       - ea: 0x141F0BF28
@@ -7379,13 +7373,13 @@ classes:
       0x1407FB360: AddHistoryEntry # diaphora partial
   Client::UI::Misc::RecommendEquipModule:
     funcs:
-      0x1407FC8F0: Setup # (this, race, sex, level, classJob, grandCompany, pvpRank)
+      0x1407FC8F0: Setup # (this, race, sex, level, classJob, grandCompany, pvpRank) # no xrefs
       0x1407FCBF0: ctor
       0x1407FCCB0: Update
-#fail       0x1406BEF90: SetupFromPlayerState
+      # 0x1406BEF90: SetupFromPlayerState # inlined in SetupForClassJob
       0x1407FD1E0: SetupForClassJob
       0x1407FD3C0: Clear
-#fail       0x1406BF130: EquipRecommended
+      0x1407FD420: EquipRecommended
   Client::UI::Misc::RetainerCommentModule:
     vtbls:
       - ea: 0x141F04578
@@ -7437,8 +7431,8 @@ classes:
       0x14186B060: IsAnimationPaused # diaphora partial
   Client::UI::Misc::CharaView::CharacterData:
     funcs:
-#fail       0x1414D4630: ctor
-#fail       0x1414D4680: ImportLocalPlayerEquipment
+      0x141867B70: ctor
+      0x141867BB0: ImportLocalPlayerEquipment
   Client::UI::Misc::SupportModule:
     vtbls:
       - ea: 0x141F0CC90
@@ -7446,9 +7440,9 @@ classes:
       0x14080FE00: ctor
   Client::SupportDesk::SupportDesk:
     vtbls:
-#fail       - ea: 0x141B97238
+      - ea: 0x14208AE60
     funcs:
-#fail       0x141466020: ctor
+      0x1417DC6F0: ctor
   Client::UI::Misc::CharaViewPortrait:
     vtbls:
       - ea: 0x142142728
@@ -7459,30 +7453,30 @@ classes:
       6: SetCameraXAndY
       10: Update
     funcs:
-#fail       0x1414D4960: ctor
-      0x141869700: Initialize2 # diaphora partial
-#fail       0x1414D5530: ImportPortraitData
-#fail       0x1414D5A70: ExportPortraitData
-      0x14186A900: ToggleGearVisibility # diaphora partial
-#fail       0x1414D5E90: SetCameraZoom
-#fail       0x1414D5EF0: ResetCamera
-#fail       0x1414D6040: SetBackground
-      0x14186ABA0: SetHeadDirection # diaphora partial
-#fail       0x1414D60F0: ResetHeadDirection
-#fail       0x1414D6160: SetEyeDirection
-#fail       0x1414D61F0: ResetEyeDirection
-#fail       0x1414D6260: SetExpression
-      0x14186AE40: SetPoseTimed # diaphora partial
-      0x14186AEE0: SetPose # diaphora partial
-      0x14186AF80: GetAnimationTime # diaphora partial
-      0x14186B1B0: SetDirectionalLightingColor # diaphora partial
-#fail       0x1414D6700: SetDirectionalLightingBrightness
-      0x14186B260: SetDirectionalLightingAngle # diaphora partial
-#fail       0x1414D6770: SetAmbientLightingColor
-#fail       0x1414D67F0: SetAmbientLightingBrightness
-      0x14186B7B0: ToggleCharacterVisibility # diaphora partial
-      0x14186BA90: ApplyCameraPositions # diaphora partial
-      0x14119B2F0: SetCameraPosition # diaphora partial
+      0x1418694A0: ctor
+      0x141869700: Initialize2
+      0x14186A180: ImportPortraitData
+      0x14186A4F0: ExportPortraitData
+      0x14186A900: ToggleGearVisibility
+      0x14186A990: SetCameraZoom
+      0x14186A9E0: ResetCamera
+      0x14186AB80: SetBackground
+      0x14186ABA0: SetHeadDirection
+      0x14186AC30: ResetHeadDirection
+      0x14186ACA0: SetEyeDirection
+      0x14186AD30: ResetEyeDirection
+      0x14186ADA0: SetExpression
+      0x14186AE40: SetPoseTimed
+      0x14186AEE0: SetPose
+      0x14186AF80: GetAnimationTime
+      0x14186B1B0: SetDirectionalLightingColor
+      0x14186B230: SetDirectionalLightingBrightness
+      0x14186B260: SetDirectionalLightingAngle
+      0x14186B2A0: SetAmbientLightingColor
+      0x14186B320: SetAmbientLightingBrightness
+      0x14186B7B0: ToggleCharacterVisibility
+      0x14186BA90: ApplyCameraPositions
+      0x14186BF50: SetCameraPosition
   Client::Game::SavedAppearanceManager:
     vtbls:
       - ea: 0x141F0D528
@@ -7589,7 +7583,7 @@ classes:
     vtbls:
       - ea: 0x141EF2308
     funcs:
-#fail       0x1404E1B00: ctor
+      0x1405EBD80: ctor # no xref, inlined at 0x1405F1E71?
   Client::Game::Control::CharacterLookAtTargetParam:
     vtbls:
       - ea: 0x141EF22F0
@@ -7611,7 +7605,7 @@ classes:
       0x1405E9ED0: ctor # diaphora partial
   Client::Game::Control::EmoteController:
     vtbls:
-#fail       - ea: 0x141A22038
+      - ea: 0x141F0F918
     funcs:
       0x1405F5220: Initialize
   Client::Game::Character::DrawDataContainer:
@@ -7635,7 +7629,7 @@ classes:
       0x1408A7400: SetupCompanion
   Client::Game::Character::ContainerInterface:
     vtbls:
-#fail       - ea: 0x141A21E38
+      - ea: 0x141F0F510
     vfuncs:
       0: dtor
       1: Initialize
@@ -7668,9 +7662,9 @@ classes:
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
       0x1408C5340: ctor
-      0x1408C7170: SetTether # diaphora partial
-#fail       0x14132DD90: ClearTether
-#fail       0x14132E760: LoadCharacterSound
+      0x1408C7170: SetTether
+      0x1408C7290: ClearTether
+      0x1408C7E50: LoadCharacterSound
   Client::Game::Character::MountContainer:
     vtbls:
       - ea: 0x141F0F560
@@ -7687,10 +7681,10 @@ classes:
         base: Client::Graphics::Vfx::VfxDataListenner
   Client::Game::Character::CharacterData:
     vtbls:
-#fail       - ea: 0x141A21E08
+      - ea: 0x141F0F4D8
   Client::Game::Character::TimelineContainer:
     vtbls:
-#fail       - ea: 0x141A21E88
+      - ea: 0x141F0F610
         base: Client::Game::Character::ContainerInterface
     funcs:
 #fail       0x1407BC730: ctor
@@ -7705,16 +7699,16 @@ classes:
       0x140F44C90: GetCurrentBannerTimelineTimestamp # diaphora partial
   Client::Game::Character::LookAtContainer:
     vtbls:
-#fail       - ea: 0x141A21EB0
+      - ea: 0x141F0F638
         base: Client::Game::Character::ContainerInterface
     funcs:
-      0x1408BEEF0: ctor # diaphora partial
-#fail       0x1413279F0: UpdateLookAt
+      0x1408BEEF0: ctor
+      0x1408BF1A0: UpdateLookAt
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141EEF2E0
     funcs:
-      0x1405BBF30: ctor # diaphora partial
+      0x1405BBF30: ctor
   Component::Shell::ShellCommandInterface:
     vtbls:
       - ea: 0x141F21A28
@@ -7741,8 +7735,8 @@ classes:
       0x140901640: TryGetMacroIconCommand
       0x1409017C0: ChangeChatChannel
       0x140901CB0: SetContextTellTarget
-      0x1409022E0: SetContextTellTargetInForay # diaphora partial
-      0x140902640: SetChatChannel # diaphora partial
+      0x1409022E0: SetContextTellTargetInForay
+      0x140902640: SetChatChannel
       0x1409029A0: SetFlags
       0x140901F00: SetTellTargetInForay
       0x140EF8E70: ReplyInSelectedChatMode
@@ -8206,9 +8200,9 @@ classes:
   Client::Game::Character::ActionEffectHandler:
     funcs:
       0x141872EC0: ctor # diaphora partial
-#fail       0x1409DA940: ApplyOneTargetEffect
-      0x140B84020: ApplySelfEffects # diaphora partial
-      0x140B84290: PlaySoundEffect # diaphora partial
+      0x140B82BC0: ApplyOneTargetEffect
+      0x140B84020: ApplySelfEffects
+      0x140B84290: PlaySoundEffect
       0x140B84440: ApplyKnockback
       0x140B84610: ApplyAttract
       0x140B84980: Init
@@ -8217,8 +8211,8 @@ classes:
       0x140B84C20: FindIncomingEntry
       0x140B84DA0: ApplyAllTargetEffects
       0x140B84FB0: ApplyEffectResult
-      0x140B85080: FinishCast # static # diaphora partial
-      0x140B85210: ShowLogMessage # static # diaphora partial
+      0x140B85080: FinishCast # static
+      0x140B85210: ShowLogMessage # static
       0x140B85C30: ApplyAll # static
       0x140B85D60: Receive # static
       0x140B86650: ConvertQuantizedPosToFloat # static
@@ -8230,7 +8224,7 @@ classes:
         base: Client::Game::Character::CharacterData
   Client::UI::Misc::RaptureHotbarModule::ClearCallback:
     vtbls:
-#fail       - ea: 0x141A6ECE0
+      - ea: 0x141F5A000
     vfuncs:
       0: dtor
       1: ResetAllHotbars  # (self, RaptureHotbarModule*) -> bool
@@ -8241,14 +8235,14 @@ classes:
       - ea: 0x141F74F40
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C04250: ctor
+      0x140E104A0: ctor
       0x140E11410: Finalize
       0x140E13520: IsMainCommandEnabled
       0x140E13550: SetMainCommandEnabledState
       0x140E18B00: UpdateParty
-#fail       0x140C0BFA0: UpdateDTR
-#fail       0x140C0E7A0: UpdateHotBar
-      0x140E2C3C0: OpenContextMenuFromTarget # diaphora partial
+      0x140E1A600: UpdateDTR
+      0x140E1D5B0: UpdateHotBar
+      0x140E2C3C0: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
       0x140E2FC00: GetMainCommandString  # MainCommand exd
       0x140E2FF40: OpenSystemMenu
   Client::UI::Agent::AgentChatLog:
@@ -8256,10 +8250,10 @@ classes:
       - ea: 0x141F77B88
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1407B2260: ctor # diaphora partial
+      0x140EEE7B0: ctor
       0x140EEE9E0: Finalize # diaphora partial
       0x140EF7280: InsertTextCommandParam
-#fail       0x140CD09B0: LinkItem
+      0x140EF7BB0: LinkItem
       0x140EF9230: ChangeChannelName # diaphora partial
   Client::UI::Agent::AgentInventory:
     vtbls:
@@ -8283,7 +8277,7 @@ classes:
       0x140298930: UseItem
       0x140299260: UnblockItemSlot
       0x140297DA0: OpenForItemSlot
-#fail       0x14022D520: DiscardItem
+      0x140298100: DiscardItem
       0x140299D70: LowerItemQuality
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
@@ -8349,7 +8343,7 @@ classes:
       - ea: 0x141F5C6E0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409E5160: ctor
+      0x140B8E980: ctor
 #fail       0x1409E5340: OpenForQuest
       0x140B92570: ShowOnMap
   Client::UI::Agent::AgentActionMenu:
@@ -8411,7 +8405,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F54750: ctor
-      0x141221580: Finalize # diaphora partial
+#fail      0x141221580: Finalize
   Client::UI::Agent::AgentHowTo:
     vtbls:
       - ea: 0x141F75560
@@ -8851,10 +8845,10 @@ classes:
       0x140F31AC0: ctor
       0x140BC9EC0: SalvageItem # (this, InventoryItem* ushort, byte)
       0x140BCADD0: LoadCategoryNames
-#fail       0x140A15BE0: ItemListRefresh # Clears item list and signals agent to update it next frame
+      0x140BCA3A0: ItemListRefresh # Clears item list and signals agent to update it next frame
       0x140BCB7A0: ItemListPopulate # diaphora partial
       0x140BCB8D0: ItemListPopulateFromContainer
-#fail       0x140A171A0: ItemListPopulateEquipped
+      0x140BCBA80: ItemListPopulateEquipped
       0x140BCBDE0: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
   Client::UI::Agent::AgentHousingBuddyList:
     vtbls:
@@ -9038,7 +9032,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E49D90: ctor
-#fail       0x140C35580: CompareItem
+      0x140E49F40: CompareItem
   Client::UI::Agent::AgentDailyQuestSupply:
     vtbls:
       - ea: 0x141F79028
@@ -10072,10 +10066,10 @@ classes:
   Client::UI::Agent::AgentBannerEditor::State:
     funcs:
       0x1415E8070: Save # diaphora partial
-      0x1415E13F0: GetPresetIndex # diaphora partial
-      0x1415EBB10: SetFrame # diaphora partial
-      0x1415EB8C0: SetAccent # diaphora partial
-      0x1415E8B80: SetHasChanged # diaphora partial
+      0x1415E13F0: GetPresetIndex
+      0x1415EBB10: SetFrame
+      0x1415EB8C0: SetAccent
+      0x1415E8B80: SetHasChanged
   Client::UI::Agent::AgentBannerUpdateView:
     vtbls:
       - ea: 0x14202E080
@@ -10139,17 +10133,17 @@ classes:
       - ea: 0x141F74EC8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140BF5A50: ctor
+      0x140DFD500: ctor
       0x140DFE080: Finalize
-#fail       0x140BF1100: AddGatheringTempMapMarker
-#fail       0x140BF0020: OpenMap
-      0x140E06AB0: OpenMapByMapId # diaphora partial
+      0x140DF71A0: AddGatheringTempMapMarker
+      0x140DF5AA0: OpenMap
+      0x140E06AB0: OpenMapByMapId
       0x140DF7430: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
       0x140E031B0: AddMapMarker
       0x140E035B0: AddMiniMapMarker
-#fail       0x140C02010: CanUseTeleport # static
-#fail       0x140BFC160: ResetMapMarkers
-      0x140E05900: CreateMapMarkers # diaphora partial
+      0x140E0CCF0: CanUseTeleport # static
+      0x140E05880: ResetMapMarkers # no xrefs, inlined in AgentMap_Update
+      0x140E05900: CreateMapMarkers
       0x140E06150: ResetMiniMapMarkers
       0x140E06190: CreateMiniMapMarkers
       0x140E000F0: ShowMap
@@ -10158,11 +10152,11 @@ classes:
       - ea: 0x141F5CB78
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140ED90E0: ctor # diaphora partial
+      0x140BA5C10: ctor
       0x140BA60A0: Finalize # diaphora partial
       0x140BA7610: OpenRecipeByRecipeId
       0x140BA7730: OpenRecipeByItemId # diaphora partial
-#fail       0x1409FE310: SearchRecipe
+      0x140BADC90: SearchRecipe
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
       - ea: 0x141F5CB00
@@ -10175,7 +10169,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BA1DD0: ctor
-#fail       0x1409F3D40: OpenByRecipeId
+      0x140BA1EA0: OpenByRecipeId
       0x140BA2AC0: OpenRecipeResultItemContextMenu # diaphora partial
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
@@ -10306,7 +10300,7 @@ classes:
     funcs:
       0x140E738F0: ctor
 #fail       0x140C57610: Finalize
-#fail       0x140C58470: OnItemHovered
+      0x140E75F40: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
       - ea: 0x141F5D198
@@ -10394,76 +10388,76 @@ classes:
       - ea: 0x14202E5E0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1412677A0: ctor
-      0x141570C30: InitScheduleData # diaphora partial
-      0x141571060: OpenReviewMaterialsUIOnly # diaphora partial
-      0x141571100: UpdateScheduleData # diaphora partial
-      0x1415713E0: UpdateMaterialAllocation # diaphora partial
-      0x1415716E0: HaveDeficit # diaphora partial
+      0x14156FDF0: ctor
+      0x141570C30: InitScheduleData
+      0x141571060: OpenReviewMaterialsUIOnly
+      0x141571100: UpdateScheduleData
+      0x1415713E0: UpdateMaterialAllocation
+      0x1415716E0: HaveDeficit
       0x1415717D0: CopyMaterialAllocationFromPouchAgent
       0x1415718F0: SetPopularitySupplyDemand
-      0x141571A30: UpdateCurScheduleSettingPopularitySupplyDemand # diaphora partial
-      0x141571AF0: SetGroove # diaphora partial
-      0x141854940: HandleEventMain # diaphora partial
-      0x141572060: ClearSlot # diaphora partial
-      0x141572240: HandleEventClearSlotConfirm # diaphora partial
-      0x141572280: AskConfirmRegisterPreset # diaphora partial
-#fail       0x1412690E0: HandleEventRegisterPresetConfirm
-#fail       0x141269130: OpenRequisiteMaterialsForCurItem
-      0x1415727C0: CopyWorkshopAgenda # diaphora partial
-      0x141572870: AskConfirmClearWorkshop # diaphora partial
-      0x1415728F0: HandleEventClearWorkshopConfirm # diaphora partial
-      0x141572B80: AskAddScheduleUsingSupplyDemand # diaphora partial
-      0x141572C00: PasteWorkshopAgenda # diaphora partial
-      0x141573050: ShowImpl # diaphora partial
+      0x141571A30: UpdateCurScheduleSettingPopularitySupplyDemand
+      0x141571AF0: SetGroove
+      0x141571BD0: HandleEventMain
+      0x141572060: ClearSlot
+      0x141572240: HandleEventClearSlotConfirm
+      0x141572280: AskConfirmRegisterPreset
+      0x141572320: HandleEventRegisterPresetConfirm
+      0x141572480: OpenRequisiteMaterialsForCurItem
+      0x1415727C0: CopyWorkshopAgenda
+      0x141572870: AskConfirmClearWorkshop
+      0x1415728F0: HandleEventClearWorkshopConfirm
+      0x141572B80: AskAddScheduleUsingSupplyDemand
+      0x141572C00: PasteWorkshopAgenda
+      0x141573050: ShowImpl
       0x141573170: UpdateImpl
-      0x141573380: UpdateMainAddon # diaphora partial
-      0x141573A30: UpdateWorkshopDerivedData # diaphora partial
-      0x141573D80: AskAddSchedule # diaphora partial
-      0x141573EB0: FillScheduleItemsByTheme # diaphora partial
-      0x141574200: FillScheduleItemsByTime # diaphora partial
+      0x141573380: UpdateMainAddon
+      0x141573A30: UpdateWorkshopDerivedData
+      0x141573D80: AskAddSchedule
+      0x141573EB0: FillScheduleItemsByTheme
+      0x141574200: FillScheduleItemsByTime
       0x1415745B0: RequestDemandAndUpdateSelectedItem
-      0x141574620: UpdateScheduleSettingAddon # diaphora partial
-      0x141574C20: SetCurrentlySelectedItem # diaphora partial
-      0x141574D30: OnScheduleSettingOpened # diaphora partial
-      0x141574FA0: HandleEventScheduleSetting # diaphora partial
-      0x141575170: OpenScheduleFreeContextMenu # diaphora partial
+      0x141574620: UpdateScheduleSettingAddon
+      0x141574C20: SetCurrentlySelectedItem
+      0x141574D30: OnScheduleSettingOpened
+      0x141574FA0: HandleEventScheduleSetting
+      0x141575170: OpenScheduleFreeContextMenu
       0x141575260: OpenScheduleUsedContextMenu
-      0x141575400: AskSchedulePreset # diaphora partial
-      0x141575530: UpdatePresetAddon # diaphora partial
-      0x1415755F0: FillPresetItems # diaphora partial
-      0x141575780: HandleEventSchedulePreset # diaphora partial
-#fail       0x14126C340: AskDeletePreset
-      0x14013FAB0: HandleEventDeletePresetConfirm # diaphora partial
-      0x141575A10: RegisterPreset # diaphora partial
-      0x141575B40: SchedulePreset # diaphora partial
+      0x141575400: AskSchedulePreset
+      0x141575530: UpdatePresetAddon
+      0x1415755F0: FillPresetItems
+      0x141575780: HandleEventSchedulePreset
+      0x141575870: AskDeletePreset
+      0x1415758F0: HandleEventDeletePresetConfirm
+      0x141575A10: RegisterPreset
+      0x141575B40: SchedulePreset
       0x141575D80: OpenSetRest
-      0x141575F40: AskSetRestConfirm # diaphora partial
-      0x141576170: HandleEventSetRest # diaphora partial
-#fail       0x14126CBE0: HandleEventSetRestConfirm
-#fail       0x14126CE50: OpenReviewMaterials
-#fail       0x14126D100: HandleEventReviewMaterials
-#fail       0x14126D1C0: UpdateReviewMaterialsAddon
+      0x141575F40: AskSetRestConfirm
+      0x141576170: HandleEventSetRest
+      0x1415761D0: HandleEventSetRestConfirm
+      0x141576380: OpenReviewMaterials
+      0x141576630: HandleEventReviewMaterials
+      0x1415768C0: UpdateReviewMaterialsAddon
       0x141576F20: OpenSupplyDemand
-      0x141577240: UpdateSupplyDemandAddon # diaphora partial
+      0x141577240: UpdateSupplyDemandAddon
       0x1415777A0: HandleEventSupplyDemand
-      0x141577C00: AskClearCycleConfirm # diaphora partial
-#fail       0x14126E6A0: HandleEventClearCycleConfirm
-#fail       0x14126E860: HandleEventSupplyDemandContextMenu
-      0x1415780E0: UpdateRequisiteMaterialsAddon # diaphora partial
-      0x141578580: HandleEventRequisiteMaterials # diaphora partial
-#fail       0x14126EE70: OpenFavors
-#fail       0x14126EEB0: InitStartReadThemes
-      0x141581370: InitReadThemeRow # diaphora partial
-#fail       0x14126F110: InitStartReadCraftObjects
-#fail       0x14126F2B0: InitReadCraftObjectRow
-      0x141579020: InitFilterCraftsByTheme # diaphora partial
-      0x141579130: InitStartReadItems # diaphora partial
-#fail       0x14126F750: InitReadItemRow
-      0x1415794F0: InitAssignSortIndices # diaphora partial
-      0x141579550: InitAddCraftSortedByName # diaphora partial
-      0x141579670: SetDisplayedCycle # diaphora partial
-      0x141579810: GetHoursSinceCycleStart # diaphora partial
+      0x141577C00: AskClearCycleConfirm
+      0x141577CA0: HandleEventClearCycleConfirm
+      0x141577E00: HandleEventSupplyDemandContextMenu
+      0x1415780E0: UpdateRequisiteMaterialsAddon
+      0x141578580: HandleEventRequisiteMaterials
+      0x1415785E0: OpenFavors
+      0x141578680: InitStartReadThemes
+      0x141578900: InitReadThemeRow
+      0x141578B40: InitStartReadCraftObjects
+      0x141578E50: InitReadCraftObjectRow
+      0x141579020: InitFilterCraftsByTheme
+      0x141579130: InitStartReadItems
+      0x141579320: InitReadItemRow
+      0x1415794F0: InitAssignSortIndices
+      0x141579550: InitAddCraftSortedByName
+      0x141579670: SetDisplayedCycle
+      0x141579810: GetHoursSinceCycleStart
   Client::UI::Agent::AgentMJINekomimiRequest:
     vtbls:
       - ea: 0x14202E6D0
@@ -10471,13 +10465,13 @@ classes:
     funcs:
       0x14157D9F0: ctor
       0x14157DBC0: OpenUI
-      0x14157DC40: OpenUIFromCraftSchedule # diaphora partial
+      0x14157DC40: OpenUIFromCraftSchedule
       0x14157DCC0: ForceRequestFavorData
-      0x14157DD30: InitData # diaphora partial
-#fail       0x1412732A0: UpdateImpl
-#fail       0x141273390: UpdateAddon
-      0x14157E700: TryReceiveFetchedData # diaphora partial
-      0x14157E880: InitItemData # diaphora partial
+      0x14157DD30: InitData
+      0x14157DE60: UpdateImpl
+      0x14157E0B0: UpdateAddon
+      0x14157E700: TryReceiveFetchedData
+      0x14157E880: InitItemData
   Client::UI::Agent::AgentMJIGatheringNoteBook:
     vtbls:
       - ea: 0x14202E758
@@ -10650,7 +10644,7 @@ classes:
     funcs:
       0x140FAF4A0: ctor # diaphora partial
       0x14159ACE0: HandleCommand
-#fail       0x14128C740: GetSelectedMinionId
+      0x14159BB90: GetSelectedMinionId
   Client::UI::Agent::AgentMJISettings:
     vtbls:
       - ea: 0x14202EAF0
@@ -10731,7 +10725,7 @@ classes:
       0x140C00A70: ctor
   Client::UI::Agent::AgentMoogleCollection:
     vtbls:
-#fail       - ea: 0x141B3EE20
+      - ea: 0x14202F328
         base: Client::UI::Agent::AgentInterface
     funcs:
 #fail       0x14129F9D0: ctor
@@ -10988,91 +10982,96 @@ classes:
       151: PlayHandShake
       152: StopHandShake
       153: PlayBGM
-      154: StopBGM
-      155: InvisibleStandCharacter
-      156: InvisibleStandObject
-      157: RevisibleStandObject
-      158: DOF
-      159: DisableDOF
-      160: ColorFilter
-      161: DisableColorFilter
-      162: Vignetting
-      163: DisableVignetting
-      164: Weather
-      165: WorldTime
-      166: GetHouseSize
-      167: PlayHousingCamera
-      168: WaitForFeedBuddy
-      169: WaitForIdleCamera
-      170: GroupPose
-      171: PlayEventVfx
-      172: StopEventVfx
-      173: KickTriggerEventVfx
-      174: WhiteFadeIn
-      175: WhiteFadeOut
-      176: WaitForWhiteFade
-      177: PlayTargetAimingCamera
-      178: PlayDirectionalAimingCamera
-      179: StopAimingCamera
-      180: Position
-      181: PositionCamera
-      182: ResetPosition
-      183: Visible
-      184: Direction
-      185: Distance
-      186: PlayActionTimeline
-      187: CancelActionTimeline
-      188: CancelActionTimelineAll
-      189: WaitForActionTimeline
-      190: PlayEmote
-      191: CancelEmote
-      192: WaitForEmote
-      193: TurnTo
-      194: TurnToObject
-      195: TurnToLayout
-      196: TurnToCamera
-      197: TurnToDefault
-      198: WaitForTurn
-      199: Idle
-      200: LookAt
-      201: LookAtLayout
-      202: LookAtCamera
-      203: LookAtDefault
-      204: WaitForLookAt
-      205: EyeLookAt
-      206: EyeLookAtYawPitch
-      207: Move
-      208: WaitForMove
-      209: PathMove
-      210: WaitForPathMove
-      211: FootStep
-      212: EndEventRollback
-      213: PlayVfx
-      215: EnableVfx
-      216: DisableVfx
-      217: Transparency
-      218: WaitForTransparency
-      219: WalkIn
-      220: WalkOut
-      221: PathWalkIn
-      222: PathWalkOut
-      223: FlyIn # also "SwimIn"
-      224: FlyOut # also "SwimOut"
-      225: BattleMode
-      226: BattleModeEx
-      227: EquipWeapon
-      228: EquipArmor
-      229: Equip
-      230: EquipQuestModel
-      231: AutoShake
-      232: AutoShakeBugFix236127
-      233: SetMount
-      234: SetFlying
-      235: IsSwimming
-      236: SetLodHigh
-      237: IsItemObtainable
-      238: CheckItemsObtainable
-      239: CheckItemsObtainableRareCheck
+      154: PlayBGMWithVolume
+      155: StopBGM
+      156: InvisibleStandCharacter
+      157: InvisibleStandObject
+      158: RevisibleStandObject
+      159: DOF
+      160: DisableDOF
+      161: ColorFilter
+      162: DisableColorFilter
+      163: Vignetting
+      164: DisableVignetting
+      165: Weather
+      166: WorldTime
+      167: GetHouseSize
+      168: PlayHousingCamera
+      169: WaitForFeedBuddy
+      170: WaitForIdleCamera
+      171: GroupPose
+      172: PlayEventVfx
+      173: StopEventVfx
+      174: KickTriggerEventVfx
+      175: WhiteFadeIn
+      176: WhiteFadeOut
+      177: WaitForWhiteFade
+      178: PlayTargetAimingCamera
+      179: PlayDirectionalAimingCamera
+      180: StopAimingCamera
+      181: Position
+      182: PositionCamera
+      183: ResetPosition
+      184: Visible
+      185: Direction
+      186: Distance
+      187: PlayActionTimeline
+      188: CancelActionTimeline
+      189: CancelActionTimelineAll
+      190: WaitForActionTimeline
+      191: WaitForActionTimelineLoad
+      192: PlayEmote
+      193: CancelEmote
+      194: WaitForEmote
+      195: TurnTo
+      196: TurnToObject
+      197: TurnToLayout
+      198: TurnToCamera
+      199: TurnToDefault
+      200: WaitForTurn
+      201: Idle
+      202: LookAt
+      203: LookAtLayout
+      204: LookAtCamera
+      205: LookAtDefault
+      206: WaitForLookAt
+      207: EyeLookAt
+      208: EyeLookAtYawPitch
+      209: Move
+      210: WaitForMove
+      211: PathMove
+      212: WaitForPathMove
+      213: FootStep
+      214: EndEventRollback
+      215: PlayVfx
+      # 216: ???
+      217: EnableVfx
+      218: DisableVfx
+      219: Transparency
+      220: WaitForTransparency
+      221: WalkIn
+      222: WalkOut
+      223: PathWalkIn
+      224: PathWalkOut
+      225: PathCurveWalkOut
+      226: FlyIn # also "SwimIn"
+      227: FlyOut # also "SwimOut"
+      228: BattleMode
+      229: BattleModeEx
+      230: EquipWeapon
+      231: EquipArmor
+      232: Equip
+      233: EquipQuestModel
+      234: AutoShake
+      235: AutoShakeBugFix236127
+      236: SetMount
+      237: SetFlying
+      238: IsSwimming
+      239: SetLodHigh
+      240: SetGlassesAccessories
+      241: IsItemObtainable
+      242: CheckItemsObtainable
+      243: CheckItemsObtainableRareCheck
   Client::Game::Event::EventSceneModuleUsualImpl:
     vtbls:
       - ea: 0x141F33518
@@ -11118,7 +11117,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::PlayStaffRollTask:
     vtbls:
-#fail       - ea: 0x141A49D00
+      - ea: 0x141F34828
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::PlayToBeContinuedTask:
     vtbls:
@@ -11126,11 +11125,11 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::InitializeSceneTask:
     vtbls:
-#fail       - ea: 0x141A49D90
+      - ea: 0x141F348B8
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::FinalizeSceneTask:
     vtbls:
-#fail       - ea: 0x141A49DD8
+      - ea: 0x141F34900
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::SetPositionTask:
     vtbls:
@@ -11138,7 +11137,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::WaitForTimeTask:
     vtbls:
-#fail       - ea: 0x141A49E68
+      - ea: 0x141F34990
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::CancelEventSceneTask:
     vtbls:
@@ -11154,7 +11153,7 @@ classes:
         base: Client::Game::Event::CharacterTaskBase
   Client::Game::Event::WaitForActionTask:
     vtbls:
-#fail       - ea: 0x141A49F98
+      - ea: 0x141F34948
         base: Client::Game::Event::CharacterTaskBase
   Client::Game::Event::WaitForEmoteTask:
     vtbls:
@@ -11294,22 +11293,22 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::TalkCallback:
     vtbls:
-#fail       - ea: 0x141A47230
+      - ea: 0x141F32008
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-#fail       - ea: 0x141A47130
+      - ea: 0x141F31FF0
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback::TalkEventImpl:
     vtbls:
-#fail       - ea: 0x141A46FA0
+      - ea: 0x141F31FD0
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
-#fail       - ea: 0x141A47050
+      - ea: 0x141F31FE0
         base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::EventSceneModule:
     funcs:
-#fail       0x14080AE50: ctor
+      0x14098E310: ctor
       0x14098E9A0: dtor
   Client::Game::Event::EventSceneModule::UISkipListener:
     vtbls:
@@ -11318,7 +11317,7 @@ classes:
   Client::Game::Event::EventSceneModuleTaskManager:
     funcs:
       0x14097C260: ProcessTasks
-      0x14097C390: AddTask # diaphora partial
+      0x14097C390: AddTask
       0x14097C410: AddGroupPoseTask
   Client::Game::Event::Director:
     vtbls:
@@ -11329,7 +11328,7 @@ classes:
       286: SetSequence
       287: Synchronize
     funcs:
-#fail       0x14082A1C0: ctor
+      0x1409ADF10: ctor
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x141F5B2E8
@@ -11347,7 +11346,7 @@ classes:
       0x1409C3C00: GetTodoArgs
   Client::Game::Event::WarpEventHandler: # 0x02
     vtbls:
-#fail       - ea: 0x141A54128
+      - ea: 0x141F3ED20
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x140A27960: ctor
@@ -11356,49 +11355,43 @@ classes:
       - ea: 0x141F39620
         base: Client::Game::Event::EventHandler
     funcs:
-#fail       0x14087AEA0: ctor
+      0x140A02450: ctor
   Client::Game::Event::ShopEventHandler: # 0x04
     vtbls:
       - ea: 0x141F37C00
         base: Client::Game::Event::EventHandler
     funcs:
-#fail       0x140832AB0: ctor
+      0x1409E9E90: ctor
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
       - ea: 0x141F37380
         base: Client::Game::Event::LuaEventHandler
     funcs:
-#fail       0x140825CE0: ctor
+      0x1409E5850: ctor
   Client::Game::Event::GuildleveAssignmentEventHandler: # 0x06
     vtbls:
       - ea: 0x141F3C1F0
         base: Client::Game::Event::LuaEventHandler
     funcs:
-#fail       0x140888400: ctor
+      0x140A114F0: ctor
   Client::Game::Event::DefaultTalkEventHandler: # 0x09
     vtbls:
-#fail       - ea: 0x141A586F8
+      - ea: 0x141F43378
         base: Client::Game::Event::EventHandler
-    funcs:
-#fail       0x1408BD090: ctor
   Client::Game::Event::CraftEventHandler: # 0x0A
     vtbls:
       - ea: 0x141F39EF0
         base: Client::Game::Event::EventHandler
     funcs:
-      0x140A06350: ctor # diaphora partial
+      0x140A06350: ctor # no xrefs
   Client::Game::Event::CustomTalkEventHandler: # 0x0B
     vtbls:
-#fail       - ea: 0x141A4D900
+      - ea: 0x141F39EF0
         base: Client::Game::Event::LuaEventHandler
-    funcs:
-      0x1415DCB70: ctor # diaphora partial
   Client::Game::Event::CompanyLeveOfficerEventHandler: # 0x0C
     vtbls:
       - ea: 0x141F421F0
         base: Client::Game::Event::LuaEventHandler
-    funcs:
-      0x140A455F0: ctor
   Client::Game::Event::ArrayEventHandler: # 0x0D
     vtbls:
       - ea: 0x141F3A748
@@ -11417,32 +11410,28 @@ classes:
       0x14185F040: ctor # diaphora partial
   Client::Game::Gimmick::GimmickAccessor: # 0x0F
     vtbls:
-#fail       - ea: 0x141C46440
+      - ea: 0x14213C0D8
         base: Client::Game::Gimmick::GimmickEventHandler
     funcs:
-      0x14185FF30: ctor # diaphora partial
+      0x14185FF30: ctor
   Client::Game::Gimmick::GimmickBill: # 0x10
     vtbls:
       - ea: 0x141F49AE8
         base: Client::Game::Gimmick::GimmickEventHandler
   Client::Game::Gimmick::GimmickRect: # 0x11
     vtbls:
-#fail       - ea: 0x141C46CE8
+      - ea: 0x14213C990
         base: Client::Game::Gimmick::GimmickEventHandler
     funcs:
-      0x141860690: ctor # diaphora partial
+      0x141860690: ctor
   Client::Game::Event::ChocoboTaxiStandEventHandler: # 0x12
     vtbls:
       - ea: 0x141F49280
         base: Client::Game::Event::LuaEventHandler
-    funcs:
-#fail       0x1408D0B40: ctor
   Client::Game::Event::OpeningEventHandler: # 0x13
     vtbls:
-#fail       - ea: 0x141A5DCF8
+      - ea: 0x141F48A18
         base: Client::Game::Event::LuaEventHandler
-    funcs:
-      0x140A63B00: ctor
   Client::Game::Event::ExitRangeEventHandler: # 0x14
     vtbls:
       - ea: 0x141F3E4B8
@@ -11451,14 +11440,10 @@ classes:
     vtbls:
       - ea: 0x141F3D320
         base: Client::Game::Event::EventHandler
-    funcs:
-#fail       0x140894600: ctor
   Client::Game::Event::GCShopEventHandler: # 0x16
     vtbls:
-#fail       - ea: 0x141A5BA80
+      - ea: 0x141F46760
         base: Client::Game::Event::EventHandler
-    funcs:
-      0x140A5AC60: ctor # diaphora partial
   Client::Game::InstanceContent::ContentTalkEventHandler:
     vtbls:
       - ea: 0x1420F0B58
@@ -11481,38 +11466,26 @@ classes:
     vtbls:
       - ea: 0x1420F1428
         base: Client::Game::InstanceContent::ContentTalkEventHandler
-    funcs:
-      0x141AC0870: ctor # diaphora partial
   Client::Game::Event::StoryEventHandler: # 0x1A
     vtbls:
-#fail       - ea: 0x141A58FF8
+      - ea: 0x141F43C88
         base: Client::Game::Event::LuaEventHandler
-    funcs:
-      0x140A52E40: ctor
   Client::Game::Event::SpecialShopEventHandler: # 0x1B
     vtbls:
       - ea: 0x141F45ED0
         base: Client::Game::Event::EventHandler
-    funcs:
-#fail       0x1408C3A60: ctor
   Client::Game::InstanceContent::DeepDungeonEventHandler: # 0x1C
     vtbls:
       - ea: 0x1420F4A50
         base: Client::Game::InstanceContent::ContentTalkEventHandler
-    funcs:
-      0x14181C6D0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentGuideEventHandler: # 0x1D
     vtbls:
       - ea: 0x1420F2EA8
         base: Client::Game::Event::EventHandler
-    funcs:
-      0x14181B460: ctor
   Client::Game::Event::AethernetEventHandler: # 0x1E
     vtbls:
-#fail       - ea: 0x141A598C8
+      - ea: 0x141F44568
         base: Client::Game::Event::EventHandler
-    funcs:
-#fail       0x1408C1F20: ctor
   Client::Game::Event::SwitchTalkEventHandler: # 0x1F
     vtbls:
       - ea: 0x141F44DB8
@@ -11521,8 +11494,6 @@ classes:
     vtbls:
       - ea: 0x141F4ACC8
         base: Client::Game::Event::EventHandler
-    funcs:
-#fail       0x1408D3B10: ctor
   Client::Game::Event::DailyQuestSupplyEventHandler::UIListener:
     vtbls:
       - ea: 0x141F41890
@@ -11535,42 +11506,30 @@ classes:
     vtbls:
       - ea: 0x141F667E0
         base: Client::Game::Event::EventHandler
-    funcs:
-#fail       0x140B63F00: ctor
   Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
     vtbls:
-#fail       - ea: 0x141A82810
+      - ea: 0x140D6B200
         base: Client::Game::Event::GoldSaucerEventHandler
-    funcs:
-      0x140D69760: ctor # diaphora partial
   Client::Game::Event::LotteryDailyEventHandler: # 0x25
     vtbls:
       - ea: 0x141F678D8
         base: Client::Game::Event::GoldSaucerEventHandler
-    funcs:
-      0x140D5C2F0: ctor # diaphora partial
   Client::Game::Event::LotteryWeeklyEventHandler: # 0x26
     vtbls:
       - ea: 0x141F6E9A8
         base: Client::Game::Event::GoldSaucerEventHandler
-    funcs:
-      0x140D6C0F0: ctor # diaphora partial
   Client::Game::Event::RaceChocoboRegistrarEventHandler: # 0x27
     vtbls:
-#fail       - ea: 0x141A838F0
+      - ea: 0x141F6F220
         base: Client::Game::Event::GoldSaucerEventHandler
-    funcs:
-#fail       0x140B7B1F0: ctor
   Client::Game::Event::GoldSaucerTalkEventHandler: # 0x29
     vtbls:
       - ea: 0x141F702F8
         base: Client::Game::Event::GoldSaucerEventHandler
   Client::Game::Event::FreeCompanyCreditShopEventHandler: # 0x2A
     vtbls:
-#fail       - ea: 0x141A549D8
+      - ea: 0x141F3F5E0
         base: Client::Game::Event::EventHandler
-    funcs:
-#fail       0x1408A0980: ctor
   Client::Game::Event::AetherCurrentEventHandler: # 0x2B
     vtbls:
       - ea: 0x141F4B518
@@ -11583,8 +11542,6 @@ classes:
     vtbls:
       - ea: 0x141F6FA80
         base: Client::Game::Event::GoldSaucerEventHandler
-    funcs:
-      0x140D6F340: ctor # diaphora partial
   Client::Game::Event::SkyIslandEntranceEventHandler: # 0x2E
     vtbls:
       - ea: 0x141F64310
@@ -11599,8 +11556,6 @@ classes:
     vtbls:
       - ea: 0x1420F4080
         base: Client::Game::InstanceContent::ContentNpcEventHandler
-    funcs:
-#fail       0x141492EE0: ctor
   Client::Game::Event::RetainerBuybackEventHandler: # 0x31
     vtbls:
       - ea: 0x141F47018
@@ -11611,13 +11566,11 @@ classes:
         base: Client::Game::Event::EventHandler
   Client::Game::Event::LotteryExchangeShopEventHandler: # 0x34
     vtbls:
-#fail       - ea: 0x141A5CBD8
+      - ea: 0x141F478D8
         base: Client::Game::Event::LuaEventHandler
-    funcs:
-      0x140A5E240: ctor # diaphora partial
   Client::Game::Event::DisposalShopEventHandler: # 0x35
     vtbls:
-#fail       - ea: 0x141A5D460
+      - ea: 0x141F48170
         base: Client::Game::Event::EventHandler
     funcs:
       0x140A609D0: ctor
@@ -11627,16 +11580,16 @@ classes:
         base: Client::Game::Event::EventHandler
   Client::Game::Event::TripleTriadCompetitionEventHandler: # 0x37
     vtbls:
-#fail       - ea: 0x141A61840
+      - ea: 0x141F4C5D0
         base: Client::Game::Event::EventHandler
     funcs:
       0x140A6A220: ctor
   Client::Game::Event::SalvageEventHandler: # 0x39
     vtbls:
-#fail       - ea: 0x141C351C0
+      - ea: 0x14212A948
         base: Client::Game::Event::EventHandler
     funcs:
-#fail       0x1414B19C0: ctor
+      0x14183F3B0: ctor
   Client::Game::Event::DesynthesisEventHandler:
     vtbls:
       - ea: 0x14203AD88
@@ -11645,62 +11598,48 @@ classes:
       0x1416B1660: ctor
   Client::Game::Event::MateriaExtractionEventHandler:
     vtbls:
-#fail       - ea: 0x141C51210
+      - ea: 0x1421473D8
         base: Client::Game::Event::SalvageEventHandler
     funcs:
-#fail       0x1414FB0E0: ctor
+      0x141890420: ctor
   Client::Game::Event::AetherialReductionEventHandler:
     vtbls:
       - ea: 0x14203B788
         base: Client::Game::Event::SalvageEventHandler
     funcs:
-#fail       0x141399410: ctor
+      0x1416B2550: ctor
   Client::Game::Event::InclusionShopEventHandler: # 0x3A
     vtbls:
-#fail       - ea: 0x141C49A68
+      - ea: 0x14213F5F0
         base: Client::Game::Event::EventHandler
-    funcs:
-      0x141865750: ctor # diaphora partial
   Client::Game::Event::CollectablesShopEventHandler: # 0x3B
     vtbls:
-#fail       - ea: 0x141C4A4A8
+      - ea: 0x142140030
         base: Client::Game::Event::EventHandler
-    funcs:
-      0x1418662B0: ctor # diaphora partial
   Client::Game::Event::EventPathMoveEventHandler: # 0x3D
     vtbls:
-#fail       - ea: 0x141C4AE70
+      - ea: 0x1421413E8
         base: Client::Game::Event::EventHandler
-    funcs:
-#fail       0x1414D2230: ctor
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x141F36A38
         base: Client::Game::UI::GameEventCallback
   Client::Game::Event::QuestBattleDirector:
     vtbls:
-#fail       - ea: 0x141A4CFF8
+      - ea: 0x141F38470
         base: Client::Game::Event::Director
-    funcs:
-#fail       0x140838110: ctor
   Client::Game::Event::TreasureHuntDirector:
     vtbls:
       - ea: 0x141F4D7C0
         base: Client::Game::Event::Director
-    funcs:
-      0x140A6C6A0: ctor # diaphora partial
   Client::Game::Event::CompanyCraftDirector:
     vtbls:
       - ea: 0x141F63950
         base: Client::Game::Event::Director
-    funcs:
-#fail       0x140B4DB60: ctor
   Client::Game::Event::DpsChallengeDirector:
     vtbls:
-#fail       - ea: 0x141A63318
+      - ea: 0x141F4E0D8
         base: Client::Game::Event::Director
-    funcs:
-#fail       0x1408D8E00: ctor
   Client::Game::Event::GoldSaucerDirector:
     vtbls:
       - ea: 0x141F65520
@@ -11716,9 +11655,8 @@ classes:
     vfuncs:
       0: dtor
     funcs:
-#fail       0x1408E8660: ctor
       0x140A7F550: Destroy
-#fail       0x1408E8770: HasInstance
+      0x140A7F5B0: HasInstance
       0x140A7F5D0: GetInstance
   Client::Game::Event::EventFramework:
     instances:
@@ -11728,9 +11666,9 @@ classes:
       0x1409D00A0: ctor
       0x1409D00F0: dtor
       0x1409D0140: GetInstance
-#fail       0x140863F70: Initialize
+      0x1409D03E0: Initialize
 #fail       0x1408647C0: Finalize
-#fail       0x14086CFD0: ProcessDirectorUpdate
+      0x1409D9F30: ProcessDirectorUpdate
       0x1409DD270: GetDirectorByEventId
       0x1409DD2C0: GetCompanyLeveDirector
       0x1409DD320: GetInstanceContentDirector
@@ -11745,7 +11683,7 @@ classes:
       0x1409DD580: GetContentDirector
       0x1409DD590: GetQuestBattleDirector
       0x1409DD5E0: GetGoldSaucerDirector
-#fail       0x1408757A0: GetEventHandlerById
+      0x1409E2630: GetEventHandlerById
       0x140B1EFA0: GetCurrentContentType
       0x140B1F070: GetCurrentContentId # static
       0x140B1F0F0: CanLeaveCurrentContent # static
@@ -13268,7 +13206,7 @@ classes:
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
 #fail       0x1414B2BE0: ctor
-      0x14184CEA0: HandleEnterContentInfoPacket  # static # diaphora partial
+      0x14184CEA0: HandleEnterContentInfoPacket  # static
   Client::Game::InstanceContent::PublicContentBonding:
     vtbls:
       - ea: 0x142138448
@@ -15711,18 +15649,18 @@ Client::UI::AddonJobHudWHM0::HealingGaugeSimple:
   #        base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
-#fail       - ea: 0x141B41CD0
+      - ea: 0x142033210
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CallbackJobOpt>:
     vtbls:
-#fail       - ea: 0x141B41CD8
+      - ea: 0x142033218
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::RenderCallbackJob>:
     vtbls:
-#fail       - ea: 0x141B41CE0
+      - ea: 0x142033220
   Client::Graphics::Culling::CullingManager:
     instances:
       - ea: 0x142595290
     vtbls:
-#fail       - ea: 0x141B41CE8
+      - ea: 0x142033238
         base: Client::Graphics::Singleton
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
     vtbls:
@@ -16418,7 +16356,7 @@ Client::UI::AddonJobHudWHM0::HealingGaugeSimple:
       0x141C81DE0: ?getAncestors@hkaSkeletonUtils@@SAXAEBVhkaSkeleton@@FAEAV?$hkArray@FUhkContainerHeapAllocator@@@@@Z
       0x141C827A0: ?hasValidPartitions@hkaSkeletonUtils@@SA?AVhkBool@@AEBVhkaSkeleton@@@Z
       0x141C81E70: ?markDescendants@hkaSkeletonUtils@@SAXPEBVhkaSkeleton@@HPEA_N_N@Z
-#fail       0x1417BF110: ?transformLocalPoseToModelPose@hkaSkeletonUtils@@SAXHPEBFPEIBVhkQsTransformf@@PEIAV2@@Z
+      0x141C80380: ?transformLocalPoseToModelPose@hkaSkeletonUtils@@SAXHPEBFPEIBVhkQsTransformf@@PEIAV2@@Z
       0x141C808A0: ?transformLocalPoseToWorldPose@hkaSkeletonUtils@@SAXHPEBFAEBVhkQsTransformf@@PEIBV2@PEIAV2@@Z
       0x141C80530: ?transformModelPoseToLocalPose@hkaSkeletonUtils@@SAXHPEBFPEIBVhkQsTransformf@@PEIAV2@@Z
       0x141C80A00: ?transformWorldPoseToLocalPose@hkaSkeletonUtils@@SAXHPEBFAEBVhkQsTransformf@@PEIBV2@PEIAV2@@Z
@@ -16434,10 +16372,10 @@ Client::UI::AddonJobHudWHM0::HealingGaugeSimple:
       # these names are best guesses based on what things look like on a 1.2.5 version.
       0x141A92C70: uncompress
       0x141A91EF0: inflateInit2_
-#fail       0x1415F9760: inflate
+      0x141A8FD70: inflate
       0x141A91550: inflateEnd
-#fail       0x1415FB470: inflateReset2
-      0x141A93B60: deflateParams # diaphora partial
+      0x141A91A30: inflateReset2
+      0x141A93B60: deflateParams 
       0x141A941A0: deflateInit2_
-      0x141A92D50: deflate # diaphora partial
-      0x141A93630: deflateEnd # diaphora partial
+      0x141A92D50: deflate 
+      0x141A93630: deflateEnd 
