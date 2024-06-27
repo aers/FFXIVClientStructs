@@ -17,8 +17,7 @@ globals:
   0x142593608: g_FrameCountAccum # accumulates over a second to calc FPS
   0x14259360C: g_FrameTimeAccum # accumulates over a second to calc FPS
   0x142593720: g_OSVersion
-  0x14259A4A8: g_CurrentCharaSelectCharacter # Client::Game::Character::Character*
-  0x14254F640: g_CharaSelectCharacterList # see Client::UI::Agent::AgentLobby::CharaSelectCharacterList
+  0x14259A4A8: g_Client::UI::Agent::CharaSelectCharacterList_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x142730400: g_RenderSkeletonLinkedListStart
   0x142730408: g_RenderSkeletonLinkedListEnd
   0x142730458: g_RenderModelLinkedListStart
@@ -3544,9 +3543,10 @@ classes:
       0x140123280: ctor
       0x14011A730: Finalize
 #fail       0x1400ED760: ClearListDataImpl
-      0x14011B6C0: GetContentIDForEntry
+      0x14011B6C0: GetContentIdForEntry
       0x14011B6E0: GetEntryByName
       0x14011B7D0: GetEntry
+      0x14011BAD0: ApplyFilters
       0x14011BF70: GetEntryByContentId
 #fail       0x1400EE8A0: SwapData
   Client::UI::Info::InfoProxyInvitedList:
@@ -3616,7 +3616,7 @@ classes:
       0x140122560: GetPartyMemberCount_2 # Static
       0x1401225A0: GetGroupIndex # Static
       0x140122EF0: IsLocalPlayerInParty # Static
-      0x140122FA0: GetMember # Static
+      0x140122FA0: GetGroupMember # Static
       0x140123040: GetMemberByContentId # Static
       0x140123100: GetMemberByEntityId # Static
       0x1405E3A00: IsContentIdInParty # Static
@@ -4497,6 +4497,11 @@ classes:
   Client::UI::Agent::CharaSelectRetainerInfo:
     funcs:
       0x141AB3E40: IsNameChangeRequired
+  Client::UI::Agent::CharaSelectCharacterList:
+    instances:
+      - ea: 0x14254F640
+    funcs:
+      0x1403B8540: CleanupCharacters
   Client::UI::Agent::AgentCursor:
     vtbls:
       - ea: 0x141EC7380
@@ -4712,7 +4717,7 @@ classes:
       0x14042B9A0: Initialize
   Client::Graphics::Render::AmbientLight:
     vtbls:
-      - ea: 0x141EDA0C0
+      - ea: 0x141ED9DD0
 #    funcs:
 #fail       0x14037F8F0: ctor
   Client::Graphics::Render::Model:
@@ -4906,7 +4911,7 @@ classes:
       4: UpdateRender
   Client::Graphics::Scene::DrawObject:
     vtbls:
-      - ea: 0x141EEE858
+      - ea: 0x141EED270
         base: Client::Graphics::Scene::Object
     vfuncs:
       11: UpdateMaterials
@@ -5924,7 +5929,7 @@ classes:
       0x140670240: SetTimelineState
   Component::GUI::AtkDragDropInterface:
     vtbls:
-      - ea: 0x141EF5BA8
+      - ea: 0x141EF5A58
     vfuncs:
       7: GetDragComponent
   Component::GUI::AtkComponentListItemRenderer:
@@ -6446,7 +6451,7 @@ classes:
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::PopRangeLayoutInstance:
     vtbls:
-      - ea: 0x141EFD618
+      - ea: 0x141EFD3A8
         base: Client::LayoutEngine::Layer::RangeLayoutInstance
   Client::LayoutEngine::Layer::ExitRangeLayoutInstance:
     vtbls:
@@ -7379,7 +7384,7 @@ classes:
       0x1407FD420: EquipRecommended
   Client::UI::Misc::RetainerCommentModule:
     vtbls:
-      - ea: 0x141F04578
+      - ea: 0x141F0C6F8
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14080A080: ctor # (this, UserFileEvent*)
@@ -10110,20 +10115,20 @@ classes:
       - ea: 0x141F74EC8
         base: Client::UI::Agent::AgentInterface
     funcs:
+      0x140DF5AA0: OpenMap
+      0x140DF71A0: AddGatheringTempMarker
+      0x140DF7430: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
       0x140DFD500: ctor
       0x140DFE080: Finalize
-      0x140DF71A0: AddGatheringTempMapMarker
-      0x140DF5AA0: OpenMap
-      0x140E06AB0: OpenMapByMapId
-      0x140DF7430: SetFlagMapMarker # (this, territoryId, mapId, (float)x, (float)y, iconId)
+      0x140E000F0: ShowMap
       0x140E031B0: AddMapMarker
       0x140E035B0: AddMiniMapMarker
-      0x140E0CCF0: CanUseTeleport # static
       0x140E05880: ResetMapMarkers # no xrefs, inlined in AgentMap_Update
       0x140E05900: CreateMapMarkers
       0x140E06150: ResetMiniMapMarkers
       0x140E06190: CreateMiniMapMarkers
-      0x140E000F0: ShowMap
+      0x140E06AB0: OpenMapByMapId
+      0x140E0CCF0: CanUseTeleport # static
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x141F5CB78
@@ -10131,9 +10136,12 @@ classes:
     funcs:
       0x140BA5C10: ctor
       0x140BA60A0: Finalize
-      0x140BA7610: OpenRecipeByRecipeId
+      0x140BA7610: OpenRecipeByRecipeId # OpenRecipeByRecipeIdInternal in cs
       0x140BA7730: OpenRecipeByItemId
       0x140BADC90: SearchRecipe
+  Client::UI::Agent::RecipeSearchContext:
+    vtbls:
+      - ea: 0x141F5CCD0
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
       - ea: 0x141F5CB00
@@ -10147,7 +10155,7 @@ classes:
     funcs:
       0x140BA1DD0: ctor
       0x140BA1EA0: OpenByRecipeId
-      #0x140BA2AC0: OpenRecipeResultItemContextMenu # inlined @ 0x140BA2220
+      #0x140BA2AC0: OpenRecipeResultItemContextMenu # inlined @ ReceiveEvent
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
       - ea: 0x141F5CD10
@@ -11126,7 +11134,7 @@ classes:
         base: Client::Game::Event::CharacterTaskBase
   Client::Game::Event::WaitForActionTask:
     vtbls:
-      - ea: 0x141F34948
+      - ea: 0x141F34B10
         base: Client::Game::Event::CharacterTaskBase
   Client::Game::Event::WaitForEmoteTask:
     vtbls:
@@ -11154,7 +11162,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::WaitForFadeTask:
     vtbls:
-      - ea: 0x141F34990
+      - ea: 0x141F34D88
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::WaitForWhiteFadeTask:
     vtbls:
@@ -11359,7 +11367,7 @@ classes:
       0x140A06350: ctor # no xrefs
   Client::Game::Event::CustomTalkEventHandler: # 0x0B
     vtbls:
-      - ea: 0x141F39EF0
+      - ea: 0x141F38D88
         base: Client::Game::Event::LuaEventHandler
   Client::Game::Event::CompanyLeveOfficerEventHandler: # 0x0C
     vtbls:
