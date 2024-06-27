@@ -1,7 +1,6 @@
 version: 2024.06.18.0000.0000
 
 globals:
-#fail   0x1419B273C: g_PathSeparator
   0x141E9926C: g_ConfigFileName
   0x141EA51F0: g_UIColorTable
   0x141EF49C0: g_HUDScaleTable
@@ -30,33 +29,32 @@ globals:
   0x14273E5D8: g_Client::Game::Control::Control_LocalPlayerEntityId
   0x14273E5E0: g_Client::Game::Control::Control_LocalPlayer
   0x142764B00: g_LastTextCommand
-#fail   0x1421FB8C0: g_Client::Game::Character::CharacterManager_BattleCharaMemoryPtr
-#fail   0x1421FB8C8: g_Client::Game::Character::CharacterManager_CompanionMemoryPtr
+  0x142555C50: g_Client::Game::Character::CharacterManager_BattleCharaMemoryPtr
+  0x142555C60: g_Client::Game::Character::CharacterManager_CompanionMemoryPtr
   0x142764B98: g_Client::Game::Object::GameObjectManager_ObjectList
-#fail   0x1421FCBB0: g_Client::Game::Object::GameObjectManager_ObjectListEnd
-#fail   0x142205138: g_Client::Game::UI::Chain.RemainingTime # not a pointer
-#fail   0x14220513C: g_Client::Game::UI::Chain.MaxTime # not a pointer
-#fail   0x1422051BC: g_Client::Game::UI::PlayerState.ObjectId
-#fail   0x1422051C0: g_Client::Game::UI::PlayerState.ContentId
-#fail   0x142207D58: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining
-#fail   0x142207DA8: g_Client::Game::UI::Buddy.BattleBuddyListPtr
-#fail   0x14220FC80: g_Client::Game::UI::ActiveDirector
-#fail   0x14220FDC8: g_Client::Game::UI::FateDirector
-#fail   0x142216FA0: g_Client::Game::UI::ContentsFinder::LootRules
-#fail   0x142216FA1: g_Client::Game::UI::ContentsFinder::UnrestrictedParty
-#fail   0x142216FA2: g_Client::Game::UI::ContentsFinder::MinimalIL
-#fail   0x142216FA3: g_Client::Game::UI::ContentsFinder::SilenceEcho
-#fail   0x142216FA4: g_Client::Game::UI::ContentsFinder::ExplorerMode
-#fail   0x142216FA5: g_Client::Game::UI::ContentsFinder::LevelSync
-#fail   0x142216FA6: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
-#fail   0x14221C074: g_Client::Game::UI::UnlockLinkBitmask  # not a pointer
-#fail   0x14221C0B4: g_Client::Game::UI::UnlockedAetherytesBitmask  # not a pointer
-#fail   0x14221C0CE: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
-#fail   0x14221C0F2: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
-#fail   0x14221C132: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
-#fail   0x142208C2E: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
-#fail   0x14221C1DD: g_Client::Game::UI::UnlockedTripleTriadCardsBitmask  # not a pointer
-#fail   0x14221C210: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
+  0x142765F40: g_Client::Game::Object::GameObjectManager_ObjectListEnd
+  0x14276ECEC: g_Client::Game::UI::Chain.MaxTime # not a pointer
+  0x14276ED6C: g_Client::Game::UI::PlayerState.ObjectId
+  0x14276ED70: g_Client::Game::UI::PlayerState.ContentId
+  0x1427719F8: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining
+  0x142771A50: g_Client::Game::UI::Buddy.BattleBuddyListPtr
+  0x142779AC0: g_Client::Game::UI::ActiveDirector
+  0x142779C08: g_Client::Game::UI::FateDirector
+  0x142780DE8: g_Client::Game::UI::ContentsFinder::LootRules
+  0x142780DE9: g_Client::Game::UI::ContentsFinder::UnrestrictedParty
+  0x142780DEA: g_Client::Game::UI::ContentsFinder::MinimalIL
+  0x142780DEB: g_Client::Game::UI::ContentsFinder::SilenceEcho
+  0x142780DEC: g_Client::Game::UI::ContentsFinder::ExplorerMode
+  0x142780DED: g_Client::Game::UI::ContentsFinder::LevelSync
+  0x142780DEE: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
+  0x14278601C: g_Client::Game::UI::UnlockLinkBitmask  # not a pointer
+  0x14278605C: g_Client::Game::UI::UnlockedAetherytesBitmask  # not a pointer
+  0x14278607A: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
+  0x14278609E: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
+  0x1427860E1: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
+  0x1427860ED: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
+  0x142786192: g_Client::Game::UI::UnlockedTripleTriadCardsBitmask  # not a pointer
+  0x1427861C8: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
   0x142788C70: g_Conditions # bool array, size is Condition sheet row count
   0x142555018: g_Component::SteamApi::InterfaceContext::ISteamFriends
   0x142555000: g_Component::SteamApi::InterfaceContext::ISteamUser
@@ -85,7 +83,7 @@ functions:
 #fail   0x1400581B0: std::string::ctor_FromSubStr #(other, idx, len)
 #fail   0x1400582F0: std::string::ctor_FromCharArr #(arr, len)
   0x141AFABEC: std::_Xlength_error
-#fail   0x140185660: std::deque::_Growmap
+  0x1401DA8D0: std::deque::_Growmap
   0x140059AF0: GetStdOut
   0x140059B00: vsprintf_s
   0x140059B60: vswprintf_s
@@ -117,8 +115,8 @@ functions:
   0x140500A10: UpdateAnimFactor
   0x1405791B0: GetActionTimelineKey
   0x1405791E0: GetWeaponTimelineKey
-#fail   0x140499A70: PrepareColorSet
-#fail   0x140499D40: ReadStainingTemplate
+  0x140585480: PrepareColorSet
+  0x140585EB0: ReadStainingTemplate
   0x1405C5420: StartSpursJobEntityWorkerThread
   0x1405F5200: GetAvailablePoses
   0x140620A10: RemoveAtkEventFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
@@ -131,10 +129,10 @@ functions:
   0x1408354D0: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
   0x1408355C0: GetEventItemName
   0x140835750: GetItemIcon # (uint itemId, Component::Exd::Sheets::Item* itemRow) -> uint
-#fail   0x140735290: IsCompanySealItemId
+  0x140881190: IsCompanySealItemId
   0x1408812C0: GetTomestonesItem
   0x140881320: IsTomestonesItemItemId
-#fail   0x140735850: IsAlliedSealItemId
+  0x140881710: IsAlliedSealItemId
   0x140881CD0: IsItemStainConditionUnlocked
   0x1408829E0: IsEventItemItemId
   0x1408DDA20: ExecuteCommand
@@ -370,7 +368,7 @@ functions:
   0x1408F2DD0: ProcessPacketNPCYell
   0x14163E9D0: ProcessPacketUIModulePacket
   0x140D02000: IsInMordionGaol # if this returns true, i'm sorry for you
-#fail   0x140B71C20: WorldToScreenPoint
+  0x140D636E0: WorldToScreenPoint
   0x1417D2D50: GetInstanceContentCrystallineConflictDirector
   0x14183C400: GetInstanceContentMahjongDirector
   0x141BD42E0: OodleNew # oodle code starts here
@@ -437,13 +435,11 @@ classes:
       - ea: 0x142734608
         pointer: False
     funcs:
-#fail       0x140047C70: ctorStatic
-#fail       0x1419A08C0: dtorStatic
+      0x140047C30: ctorStatic
+      0x141E86570: dtorStatic
       0x1405E4500: Initialize
       0x1405E4930: Terminate
       0x1405E4D10: Update
-#fail       0x1404DD7C0: ctor
-      0x1417CCF20: dtor
       0x1405E5790: QueueActiveFestivals
       0x1405E6CE0: IsInGPose  # (probably) static
       0x1405E6D20: IsInIdleCam  # static
@@ -458,10 +454,10 @@ classes:
       - ea: 0x1427520E8
         pointer: False
     funcs:
-      0x140844B40: ctor
+      0x1408594A0: ctor
       0x140844B90: dtor
       0x140844BE0: Update
-#fail       0x140712300: Initialize
+      0x140844B40: Initialize
   Client::Game::Control::InputManager:
     instances:
       - ea: 0x142552690
@@ -500,7 +496,7 @@ classes:
       0x141A89610: CloseChannel
   Application::Network::ChatConnection:
     funcs:
-#fail       0x1415F35F0: dtor
+      0x141A898E0: dtor
   Application::Network::LobbyClient::LobbyClientMixin:
     vtbls:
       - ea: 0x1421990E0
@@ -571,7 +567,7 @@ classes:
       0x140FC22F0: GetRetainerBySortedIndex
       0x140FC2320: GetRetainerByHiredIndex
       0x140FC2380: GetLastSelectedRetainer
-#fail       0x140D7F730: SetLastSelectedRetainerId
+      0x140FC23D0: SetLastSelectedRetainerId
       0x140FC23E0: SetRetainerObjectId
       0x140FC23F0: IsRetainerSummoned
       0x140FC2410: GetRetainerCount
@@ -582,7 +578,7 @@ classes:
     funcs:
       0x140A51670: ReadPacket
       0x140A50B00: Initialize
-#fail       0x1408BEE60: GetUsedAllowances
+      0x140A50F90: GetUsedAllowances
       0x140A50FE0: GetResetTimestamp
   Client::Game::Control::TargetSystem::ListFeeder:
     vtbls:
@@ -711,7 +707,7 @@ classes:
       - ea: 0x141F07768
         base: Component::Excel::ExcelLanguageEvent
     funcs:
-#fail       0x1406462D0: ProcessNoun
+      0x14077C5D0: ProcessNoun
   Component::Text::Localize::Noun:
     vfuncs:
       0: dtor
@@ -727,7 +723,7 @@ classes:
       - ea: 0x141F079F0
         base: Component::Text::Localize::Noun
     funcs:
-#fail      0x140D52CA0: ctor
+     0x140780890: ctor # unused, inlined
   Component::Text::Localize::NounFr:
     vtbls:
       - ea: 0x141F07A00
@@ -976,14 +972,14 @@ classes:
       - ea: 0x142788E18
         pointer: False
     funcs:
-      0x140D3F5A0: Initialize
-#fail       0x140B529A0: dtor
+      0x140D3F5A0: ctor
+      0x140D3F5D0: dtor
       0x140D3FE60: GetAbility #(this,index)
       0x140D3FE80: GetNamePart
       0x140D3FED0: GetColor
       0x140D3FEE0: GetGear #(this,index)
-#fail       0x140B531D0: GetSessionsAvailable
-#fail       0x140B531F0: HasRank
+      0x140D3FF00: GetSessionsAvailable
+      0x140D3FF20: HasRank
       # Not 100 confident what these 2 do
       #0x140D406E0: GetAbilitySlotIfNotLearned
       #0x140D40710: GetAbilityIndexIfLearned
@@ -1153,13 +1149,13 @@ classes:
   Client::Game::InventoryItem:
     funcs:
       0x1401D6BA0: GetItemId
-#fail       0x1401819D0: GetCondition
+      0x1401D6C30: GetCondition
       0x1401D6CB0: GetGlamourId
       0x1401D6CF0: GetSpiritbond
-#fail       0x140181C60: GetStain
+      0x1408646D0: GetStain
       0x1403D1BF0: GetSpiritbond2
-#fail       0x14032EFD0: GetMateriaId
-#fail       0x1406E0670: GetMateriaGrade
+      0x1403D1C40: GetMateriaId
+      0x140823EA0: GetMateriaGrade
       0x140863D90: ctor
       0x140863DE0: Copy
       0x140863F70: EqualTo
@@ -1172,7 +1168,7 @@ classes:
       0x140864690: GetConditionPercentage
       0x140CA85C0: GetMateriaCount
       0x140887EB0: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
-#fail       0x140747E00: GetCrafterContentId
+      0x1408957E0: GetCrafterContentId
   Client::Game::InventoryContainer:
     funcs:
       0x1408650F0: GetInventorySlot  # (this, slotIndex)
@@ -1255,7 +1251,7 @@ classes:
       - ea: 0x141F637F8
         base: Client::Game::HousingTerritory
     funcs:
-#fail       0x140B37950: GetPlotIcon # (this, plotIndex)
+      0x140D21B60: GetPlotIcon # (this, plotIndex)  # inlined @ 140D1ECF0
       0x140D1F7A0: IsEstateShared # (this, plotIndex)
       0x140D1F680: IsEstateResident # (this, plotIndex)
   Client::Game::IndoorTerritory:
@@ -1284,8 +1280,8 @@ classes:
       - ea: 0x142557C40
         pointer: False
     funcs:
-      0x140D006C0: Initialize
-#fail      0x14121C810: GetIndividualWeather
+      0x140D006C0: ctor
+      0x140D00E90: GetIndividualWeather
       0x140D00F10: HasIndividualWeather
       0x140D00FF0: GetWeatherForHour
       0x140D011E0: GetWeatherForDaytime
@@ -1294,10 +1290,11 @@ classes:
       - ea: 0x142768AF8
         pointer: True
     funcs:
+      0x140A36450: Initialize
+      0x140A36520: Finalize
       0x140A36550: HasInstance
       0x140A36570: GetInstance
-#fail       0x1408A85F0: ctor
-#fail       0x1408A86D0: dtor
+      0x140A36A10: ctor  # inlined to Initialize (pre-7.0)
   Client::Game::CustomTodoManager: # Studium Deliveries
     vtbls:
       - ea: 0x142057FD0
@@ -1647,9 +1644,9 @@ classes:
   Component::GUI::AtkTimeline:
     funcs:
       0x14068D540: GetStartFrameIdxForLabelId
-#fail       0x14056D8E0: GetEndFrameIdxForLabelId
-#fail       0x14056D560: UpdateChildAnimationStates
-#fail       0x14056CD90: UpdateChildAnimationAndLabelStates
+      0x14068D660: GetEndFrameIdxForLabelId
+      0x14068D400: UpdateChildAnimationStates
+      0x14068CBF0: UpdateChildAnimationAndLabelStates
       0x14068CE30: SetTimelineState
   Component::GUI::AtkArrayDataHolder:
     funcs:
@@ -1699,6 +1696,9 @@ classes:
       0x140B448A0: Update
       0x140B45080: UpdateMainCommands
       0x140B51CC0: ctor
+      0x140B54930: dtor
+      0x140049720: staticCtor
+      0x141E88120: staticDtor
       0x140B40650: SetUnlockLinkValue
       0x140B406D0: IsUnlockLinkUnlocked
       0x140B40700: IsUnlockLinkUnlockedOrQuestCompleted
@@ -1895,7 +1895,7 @@ classes:
       0x140B25AB0: GetRelicID
       0x140B25AC0: GetRelicNoteID
       0x140B25AD0: GetMonsterProgress
-#fail       0x14097FCC0: IsDungeonComplete
+      0x140B25BF0: IsDungeonComplete
       0x140B25B70: IsFateComplete
       0x140B25BB0: IsLeveComplete
   Client::Game::UI::MateriaTrade:
@@ -1918,36 +1918,37 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::RelicSphereUpgrade:
     instances:
-#fail       - ea: 0x142207F98
+      - ea: 0x142771C40
         pointer: False
     vtbls:
       - ea: 0x141F5B0F8
   Client::Game::UI::DailyQuestSupply:
     instances:
-#fail       - ea: 0x142208010
+      - ea: 0x142771CB8
         pointer: False
     vtbls:
       - ea: 0x141F5B100
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::RidePillon:
     instances:
-#fail       - ea: 0x1422083F8
+      - ea: 0x1427720A0
         pointer: False
   Client::Game::UI::Loot:
     instances:
-#fail       - ea: 0x142208438
+      - ea: 0x1427720E0
         pointer: False
     vtbls:
       - ea: 0x141F5B128
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
-#fail       0x140988780: ctor
+      0x140B2F2A0: ctor # unused, inlined
   Client::Game::UI::GatheringNote:
     instances:
       - ea: 0x142772780
         pointer: False
     funcs:
-#fail      0x1410E86C0: ctor
+     0x140ADF9E0: ctor
+     0x140ADFB50: dtor
      0x140ADFBC0: Initialize # unused, inlined
   Client::Game::UI::RecipeNote:
     instances:
@@ -1957,7 +1958,7 @@ classes:
       0x140AE4ED0: ctor
       0x140AE2E20: CancelCrafting
       0x140AE4350: IsRecipeUnlocked # (this, recipeId)  # no xrefs
-#fail       0x140943430: GetCraftTypeLevel
+      0x140AE43C0: GetCraftTypeLevel
       0x140AE45F0: FirstRecipeIndex
       0x140AE45B0: GetRecipeByIndex # (this, index)
       0x140AE4630: GetSelectedRecipe
@@ -1977,7 +1978,7 @@ classes:
       - ea: 0x142773A18
         pointer: False
     funcs:
-#fail       0x14094A6A0: Initialize
+      0x140AEBB80: Initialize
       0x140AEC020: Finalize
   Client::Game::SheetWaiterBase:
 #    vtbls:
@@ -1996,7 +1997,7 @@ classes:
       - ea: 0x141F5A0A8
   Client::Game::UI::Journal:
     instances:
-#fail       - ea: 0x142209F50
+      - ea: 0x142773D50
         pointer: False
     vtbls:
       - ea: 0x141F5A0B8
@@ -2005,32 +2006,32 @@ classes:
       0x1404E2AA0: ctor
   Client::Game::UI::QuestUI:
     instances:
-#fail       - ea: 0x14220E698
+      - ea: 0x1427784B8
         pointer: False
     vtbls:
       - ea: 0x141F5A0C8
         base: Client::Game::UI::ScenarioTextReader
     funcs:
-#fail       0x140957C90: ctor
+      0x140AF9E00: ctor
   Client::Game::Event::ListenItemCallback<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x141F5A0D8
         base: Client::Game::Event::ListenItemCallbackInterface
   Client::Game::UI::QuestTodoList:
     instances:
-#fail       - ea: 0x14220F668
+      - ea: 0x1427794A8
         pointer: False
     vtbls:
-#fail       - ea: 0x141A6ED78
+      - ea: 0x141F5A0F0
         base: Client::Game::UI::ScenarioTextReader
     funcs:
-#fail       0x14095B8F0: ctor
+      0x140AFE460: ctor
   Client::Game::UI::Map:
     instances:
-#fail       - ea: 0x14220FF10
+      - ea: 0x142779D50
         pointer: False
     funcs:
-#fail       0x140965590: ctor
+      0x140B09070: ctor
   Client::Game::UI::Map::MapMarkerData:
     funcs:
       0x140B08D60: SetData
@@ -2045,11 +2046,11 @@ classes:
       - ea: 0x14277DD50 # note: it's actually a member of UIState instance
         pointer: False
     vtbls:
-#fail       - ea: 0x141A6ED10
+      - ea: 0x141F5A070
     vfuncs:
       0: dtor
     funcs:
-#fail       0x1409613C0: PlacePreset
+      0x140B04700: PlacePreset
       0x140B03D10: ClearFieldMarkers
   Client::Game::LimitBreakController:
     instances:
@@ -2060,8 +2061,10 @@ classes:
     vfuncs:
       0: dtor
   Client::Game::TitleController:
+    instances:
+      - ea: 0x14277E040  # UIState.TitleController
     vtbls:
-#fail       - ea: 0x141A6ED20
+      - ea: 0x141F5A080
     vfuncs:
       0: dtor
     funcs:
@@ -2070,26 +2073,26 @@ classes:
     instances:
       - ea: 0x14277E048  # UIState.TitleList
     vtbls:
-#fail       - ea: 0x141A6ED28
+      - ea: 0x141F5A088
     vfuncs:
       0: dtor
     funcs:
       0x140B05930: IsTitleUnlocked
   Client::Game::UI::GCSupply:
     instances:
-#fail       - ea: 0x142214290
+#fail       - ea: 0x142214290   # Inside UIState
         pointer: False
     funcs:
 #fail       0x1409A9D60: ctor
   Client::Game::UI::InstanceContent:
     instances:
-#fail       - ea: 0x142216EB8
+      - ea: 0x142780D00
         pointer: False
     vtbls:
       - ea: 0x141F5B0B0
     funcs:
       0x140B20980: GetPenaltyRemainingInMinutes
-      0x140D0E180: IsRouletteIncomplete
+      0x140B23560: IsRouletteIncomplete
   Client::Game::UI::GuildOrderReward:
     instances:
 #fail       - ea: 0x142216F28
@@ -2098,7 +2101,7 @@ classes:
       - ea: 0x141F5A148
   Client::Game::UI::ContentsFinder:
     instances:
-#fail       - ea: 0x142216F88
+      - ea: 0x142780DD0
         pointer: False
     vtbls:
       - ea: 0x141F5B120
@@ -2159,11 +2162,14 @@ classes:
         pointer: False
   Client::Game::UI::GoldSaucerYell:
     instances:
-#fail       - ea: 0x14221A6E0
+      - ea: 0x142784668
         pointer: False
+    vtbls:
+      - ea: 0x141F5B1A8
     funcs:
-#fail       0x1409932B0: ctor
-#fail      0x141122340: Initialize
+      0x140B3C0B0: ctor
+      0x140B3C130: dtor
+      0x140B3C1F0: Initialize
       0x140B3C840: Update
   Client::Game::UI::CharaCard:
     instances:
@@ -2283,93 +2289,102 @@ classes:
       - ea: 0x1427350E0
         pointer: False
     funcs:
-#fail       0x1409D9CB0: ctor
+      0x140B815C0: ctor
       0x140B815F0: dtor
       0x140B81740: Update
       0x140B81930: ChangeGauge
   Client::Game::Gauge::JobGauge:
     vtbls:
-#fail       - ea: 0x141A702E8
+      - ea: 0x141F5B518
     vfuncs:
       0: dtor
       1: Init
       3: RecievePacketValues
       4: SetValues
+      9: ProcessDeferredReplaceAction
   Client::Game::Gauge::PaladinGauge:
     vtbls:
-#fail       - ea: 0x141A70320
+      - ea: 0x141F5B578
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::MonkGauge:
     vtbls:
-#fail       - ea: 0x141A70358
+      - ea: 0x141F5B5D8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::WarriorGauge:
     vtbls:
-#fail       - ea: 0x141A70390
+      - ea: 0x141F5B638
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DragoonGauge:
     vtbls:
-#fail       - ea: 0x141A703C8
+      - ea: 0x141F5B698
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::BardGauge:
     vtbls:
-#fail       - ea: 0x141A70400
+      - ea: 0x141F5B6F8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::WhiteMageGauge:
     vtbls:
-#fail       - ea: 0x141A70438
+      - ea: 0x141F5B758
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::BlackMageGauge:
     vtbls:
-#fail       - ea: 0x141A70470
+      - ea: 0x141F5B7B8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SummonerGauge:
     vtbls:
-#fail       - ea: 0x141A704A8
+      - ea: 0x141F5B818
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::ScholarGauge:
     vtbls:
-#fail       - ea: 0x141A704E0
+      - ea: 0x141F5B878
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::NinjaGauge:
     vtbls:
-#fail       - ea: 0x141A70518
+      - ea: 0x141F5B8D8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::MachinistGauge:
     vtbls:
-#fail       - ea: 0x141A70550
+      - ea: 0x141F5B938
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DarkKnightGauge:
     vtbls:
-#fail       - ea: 0x141A70588
+      - ea: 0x141F5B998
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::AstrologianGauge:
     vtbls:
-#fail       - ea: 0x141A705C0
+      - ea: 0x141F5B9F8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SamuraiGauge:
     vtbls:
-#fail       - ea: 0x141A705F8
+      - ea: 0x141F5BA58
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::RedMageGauge:
     vtbls:
-#fail       - ea: 0x141A70630
+      - ea: 0x141F5BAB8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::DancerGauge:
     vtbls:
-#fail       - ea: 0x141A70668
+      - ea: 0x141F5BB18
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::GunbreakerGauge:
     vtbls:
-#fail       - ea: 0x141A706A0
+      - ea: 0x141F5BB78
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::ReaperGauge:
     vtbls:
-#fail       - ea: 0x141A706D8
+      - ea: 0x141F5BBD8
         base: Client::Game::Gauge::JobGauge
   Client::Game::Gauge::SageGauge:
     vtbls:
-#fail       - ea: 0x141A70710
+      - ea: 0x141F5BC38
+        base: Client::Game::Gauge::JobGauge
+  Client::Game::Gauge::ViperGauge:
+    vtbls:
+      - ea: 0x141F5BC98
+        base: Client::Game::Gauge::JobGauge
+  Client::Game::Gauge::PictomancerGauge:
+    vtbls:
+      - ea: 0x141F5BCF8
         base: Client::Game::Gauge::JobGauge
   Common::Configuration::ConfigEntry:
     funcs:
@@ -2467,18 +2482,18 @@ classes:
       0x1402779E0: GetActiveVolume
       0x1402779F0: SetEqualizerType
       0x140277DD0: SetMasterEnabled
-#fail       0x140212410: SetBgmEnabled
-#fail       0x140212530: SetSoundEffectsEnabled
-#fail       0x140212650: SetVoiceEnabled
-#fail       0x140212710: SetEnvironmentEnabled
-#fail       0x1402126B0: SetSystemEnabled
-#fail       0x140212810: SetPerformEnabled
-#fail       0x140212870: SetBgmAlways
-#fail       0x140212990: SetSoundEffectAlways
-#fail       0x140212AB0: SetVoiceAlways
-#fail       0x140212B10: SetSystemAlways
-#fail       0x140212B70: SetEnvironmentAlways
-#fail       0x140212C70: SetPerformAlways
+      0x140277E30: SetBgmEnabled
+      0x140277EA0: SetSoundEffectsEnabled
+      0x140277F10: SetVoiceEnabled
+      0x140277F50: SetEnvironmentEnabled
+      0x140277F30: SetSystemEnabled
+      0x140277FA0: SetPerformEnabled
+      0x140277FC0: SetBgmAlways
+      0x140278030: SetSoundEffectAlways
+      0x1402780A0: SetVoiceAlways
+      0x1402780C0: SetSystemAlways
+      0x1402780E0: SetEnvironmentAlways
+      0x140278130: SetPerformAlways
       0x140278180: SetMicPosition
 #fail       0x1402137F0: SetVolume #(this, type, float: volume
   Client::System::Framework::GameWindow:
@@ -3232,12 +3247,12 @@ classes:
       0x141E11F00: ctor  # (ExcelPage* this, ExcelDataPagination* exhPageInfo, ExcelSheetContainer* pOwner)
       0x141E126B0: ContainsRowId  # (ExcelPage* this, int* pnRowId) -> bool
       0x141E124B0: GetOrCreatePageLoader  # (ExcelPage* this, _, ExcelRowDescriptor* pRowDescriptor) -> ExcelPageLoader*
-#fail       0x141943FB0: FreeSheetResourceAndPageLoader  # (ExcelPage* this, SheetResource* pRes, ExcelPageLoader* pLoader)
-#fail       0x1419436D0: Load_0xFFFE  # (ExcelPage* this, int nRowId) -> SheetResource*
+      0x141E13420: FreeSheetResourceAndPageLoader  # (ExcelPage* this, SheetResource* pRes, ExcelPageLoader* pLoader)
+      0x141E12950: Load_0xFFFE  # (ExcelPage* this, int nRowId) -> SheetResource*
       0x141E126E0: Load_0xFFFF  # (ExcelPage* this, bool bAsync) -> SheetResource*
       0x141E12840: Load_Otherwise  # (ExcelPage* this, ExcelRowDescriptor* pRowDescriptor) -> SheetResource*
       0x141E13160: Parse_0xFFFE  # (ExcelPage* this, SheetResource* pResource, ExcelRowDescriptor* pRowDescriptor)
-#fail       0x141943720: Parse_0xFFFF  # (ExcelPage* this, SheetResource* pResource)
+      0x141E12B00: Parse_0xFFFF  # (ExcelPage* this, SheetResource* pResource)
       0x141E12E90: Parse_Otherwise  # (ExcelPage* this, SheetResource* pResource, ExcelRowDescriptor* pRowDescriptor)
   Component::Excel::ExcelPageLoader:
     vtbls:
@@ -3528,7 +3543,7 @@ classes:
       26: Compare #By IsOnline
       29: CompareHomeworld
     funcs:
-#fail       0x1400ECF90: ctor
+      0x140123280: ctor
 #fail       0x1400ED0B0: Finalize
 #fail       0x1400ED760: ClearListDataImpl
       0x14011B6C0: GetContentIDForEntry
@@ -3562,7 +3577,7 @@ classes:
 #fail       - ea: 0x1419BED60 # 141EA5970 maybe?
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
-#fail       0x1400B2F20: ctor
+      0x1400C36C0: ctor
 #fail       0x14017C440: Finalize
   Client::UI::Info::InfoProxyDetail:
     vtbls:
@@ -3662,13 +3677,13 @@ classes:
       0x140138030: InviteToPartyInInstance
   Client::UI::Info::InfoProxyLinkshell:
     vtbls:
-#fail       - ea: 0x1419C0998
+      - ea: 0x141EA76D8
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
-      0x140138540: ctor
+      # 0x140138540: ctor # inlined @ 1400BC762
       0x1401393E0: GetLinkshellInfo
       0x1401398B0: GetLinkshellName
-#fail       0x14017C920: Finalize
+      0x1401D17C0: Finalize
   Client::UI::Info::InfoProxyLinkshellMember:
     vtbls:
 #fail       - ea: 0x1419C0A18
@@ -3694,8 +3709,8 @@ classes:
       0x14013ED70: GetLetterBoxUsage
       0x14013ED90: GetNumLettersFromPurchases
       0x14013EDA0: GetNumLettersFromGameMasters
-#fail       0x14010CAA0: GetHasLettersFromGameMasters
-#fail       0x14010CAB0: GetHasLettersFromSupportDesk
+      0x14013EDC0: GetHasLettersFromGameMasters
+      0x14013EDB0: GetHasLettersFromSupportDesk
 #fail       0x14017C8E0: Finalize
   Client::UI::Info::InfoProxySearch:
     vtbls:
@@ -4249,9 +4264,9 @@ classes:
     funcs:
       0x140281C50: ctor
       0x140281CA0: Initialize
-#fail       0x14021B780: Update
-#fail       0x14021B790: Finalize
-#fail       0x14021B7D0: IsWinSockInitialized
+      0x140282680: Update
+      0x140282690: Finalize
+      0x140282720: IsWinSockInitialized
       0x140282960: SetLanguage
       0x140283090: GetCurrentDeviceTime
       0x1402830E0: GetCurrentDeviceTimeInMillis
@@ -4286,11 +4301,11 @@ classes:
       - ea: 0x142037408
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
-      0x141824D80: HandlePartyInvitePacket # diaphora partial
-      0x141824E50: HandleSocialPacket # diaphora partial
-      0x141828990: HandleMarketBoardOfferingsPacket # diaphora partial
-#fail       0x14149E770: HandleMarketBoardPurchasePacket
-#fail       0x14149F210: HandleMarketBoardHistoryPacket
+      0x141824D80: HandlePartyInvitePacket
+      0x141824E50: HandleSocialPacket
+      0x141828990: HandleMarketBoardOfferingsPacket
+      0x141828A50: HandleMarketBoardPurchasePacket
+      0x141829540: HandleMarketBoardHistoryPacket
       0x141828910: HandleMarketBoardItemRequestStartPacket
 #fail # wrong offset      0x14130DD20: ctor
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
@@ -4429,7 +4444,7 @@ classes:
       - ea: 0x141EC65B0
         base: Application::Network::LobbyClient::LobbyRequestCallback
     funcs:
-      0x1403D3DC0: ctor # diaphora partial
+#fail      0x1403D3DC0: ctor
   Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent:
     vtbls:
       - ea: 0x141EC6B80
@@ -4449,15 +4464,15 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402CAA50: ctor
-      0x140B149A0: Finalize # diaphora partial
-#fail       0x140259CB0: UpdateLobbyUIStage
-#fail       0x14025A6F0: UpdateCharaSelectDisplay
-#fail       0x14025BF40: SetDataCenter
+#fail      0x140B149A0: Finalize
+      0x1402D0CB0: UpdateLobbyUIStage
+      0x1402D1B50: UpdateCharaSelectDisplay
+      0x1402D3B60: SetDataCenter
       0x1402D7F10: OpenTitleDCWorldMap
       0x1402D9E80: OpenTitleConnectDialog
 #fail       0x1402627E0: OpenLoginWaitDialog
-      0x1402DAA10: OpenLobbyScreenText # diaphora partial
-#fail       0x140263670: CloseDialog
+      0x1402DAA10: OpenLobbyScreenText
+      0x1402DD960: CloseDialog
       0x1402DE610: ShowCharacterNotFoundWarning
       0x1402DE7F0: GetLobbyText
       0x1403BA560: SetupLobbyCamera
@@ -4472,14 +4487,14 @@ classes:
       0x141AB3CC0: GetTotalDaysSubscribed
   Client::UI::Agent::CharaSelectCharacterEntry:
     funcs:
-      0x1402A7790: IsAnyRetainerNameChangeRequired # diaphora partial
-#fail       0x14023C090: IsInDifferentRegion
+      0x1402A7790: IsAnyRetainerNameChangeRequired
+      0x1402A78F0: IsInDifferentRegion
       0x141AB3D50: IsNotLocked
       0x141AB3DA0: IsMissingExVersionForCharacterEdit
       0x141AB3DB0: IsDCTraveling
       0x141AB3DD0: IsUnk32
-#fail       0x14161A3D0: IsMissingExVersionForLogin
-#fail       0x14161A420: IsNameChangeRequired
+      0x141AB3DE0: IsMissingExVersionForLogin
+      0x141AB3E30: IsNameChangeRequired
   Client::UI::Agent::CharaSelectRetainerInfo:
     funcs:
       0x141AB3E40: IsNameChangeRequired
@@ -4500,15 +4515,15 @@ classes:
       - ea: 0x141EC85A0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140325E20: ctor # diaphora partial
-      0x140325F20: Finalize # diaphora partial
+      0x140325E20: ctor
+      0x140325F20: Finalize
   Client::UI::Agent::AgentFreeCompanyChest:
     vtbls:
       - ea: 0x141EC89B0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140343730: ctor # diaphora partial
-      0x1403438F0: Finalize # diaphora partial
+      0x140343730: ctor
+      0x1403438F0: Finalize # inlined @ 0x1403CD9F0
   Client::UI::Agent::AgentExplorationInterface:
     vtbls:
 #fail       - ea: 0x1419E1CA8
@@ -4518,13 +4533,13 @@ classes:
       - ea: 0x141EC9160
         base: Client::UI::Agent::AgentExplorationInterface
     funcs:
-      0x140374500: Finalize # diaphora partial
+      0x140374500: Finalize
   Client::UI::Agent::AgentSubmersibleExploration:
     vtbls:
       - ea: 0x141EC95C8
         base: Client::UI::Agent::AgentExplorationInterface
     funcs:
-      0x14037B880: Finalize # diaphora partial
+      0x14037B880: Finalize
   Client::UI::Agent::AgentSubmersibleExplorationDetail:
     vtbls:
       - ea: 0x141EC9538
@@ -4582,9 +4597,9 @@ classes:
         base: Client::Graphics::Kernel::Buffer
     funcs:
       0x1403F7A70: ctor
-      0x14123A9D0: LoadSourcePointer # diaphora partial
+      0x1403F77E0: LoadSourcePointer
 #fail       0x140365D00: LoadBuffer
-      0x140416850: Activate # diaphora partial
+      0x140416850: Activate
   Client::Graphics::Kernel::Device:
     vtbls:
       - ea: 0x141ED0E38
@@ -4603,7 +4618,7 @@ classes:
       0x1403FAEC0: ctor
 #fail       0x1403553F0: Initialize
 #fail       0x140356160: CreateTexture2D
-      0x1403FD870: CreateConstantBuffer # diaphora partial
+      0x1403FD870: CreateConstantBuffer
 #fail       0x1403570D0: PreTick
 #fail       0x140357340: PostTick
   Client::Graphics::Kernel::Context:
@@ -6159,7 +6174,7 @@ classes:
       - ea: 0x141EF6CE8
         base: Component::GUI::AtkComponentBase
     funcs:
-#fail       0x140589E90: LoadIconByID
+#fail       0x140589E90: LoadIconByID # inlined
       0x1406AD9C0: LoadIcon # this takes a struct arg that includes the icon ID and some params
       0x1406ADBC0: SetText
       0x1406ADBE0: SetTextColor
@@ -7047,7 +7062,7 @@ classes:
       0x1407A49C0: GetMacro
       0x1407A4A00: ReplaceMacroLines # replaces macro with lines stored in string
       0x1407A4A20: AppendMacroLines # appends lines stored in string to macro
-      0x1407A4C00: GetLineCount # diaphora partial
+      0x1407A4C00: GetLineCount
       0x1407A64B0: SetMacroLines # function called by replace/append
       0x1407A5FD0: SetSavePendingFlag
   Client::UI::Misc::RaptureMacroModule::Macro:
@@ -7055,7 +7070,7 @@ classes:
       0x1407A4750: Clear
       0x1407A47A0: IsEmpty
       0x1407A47E0: SetIcon
-#fail       0x14078BAB0: Copy
+      0x140ED6CD0: Copy
   Client::UI::Misc::RaptureTextModule:
     vtbls:
       - ea: 0x141F0B868
@@ -7297,10 +7312,10 @@ classes:
     funcs:
       0x1407ED530: ctor
       0x1407ED570: Finalize
-#fail       0x1406B1F00: PopulateForRegion # a2 is a pointer to the region id (byte)
-#fail       0x1406B22D0: GetDataCenterByIndex # unused
-#fail       0x1406B2350: GetDataCenterByRowId # unused
-#fail       0x1406B2430: GetDataCenterNameByRowId # unused
+      0x1407ED690: PopulateForRegion # a2 is a pointer to the region id (byte)
+      0x1407ED940: GetDataCenterByIndex # unused
+      0x1407ED9A0: GetDataCenterByRowId # unused
+      0x1407EDA10: GetDataCenterNameByRowId # unused
   Client::UI::Misc::WorldHelper:
     vtbls:
       - ea: 0x141F0BEB8
@@ -7310,9 +7325,9 @@ classes:
       0x1407EDC30: ctor
 #fail       0x1406B26A0: Finalize
       0x1407EDD10: Populate
-#fail       0x1406B2BC0: GetWorldById
-      0x1407EE080: GetWorldNameById # diaphora partial
-      0x1407EE0E0: GetWorldIdByName # diaphora partial
+      0x1407EE000: GetWorldById
+      0x1407EE080: GetWorldNameById
+      0x1407EE0E0: GetWorldIdByName
   Client::UI::Misc::GoldSaucerModule:
     vtbls:
       - ea: 0x141F0BEC0
@@ -7361,16 +7376,16 @@ classes:
     funcs:
       0x1407ECF10: ctor
       0x1407ED120: IsFavorited
-      0x1407ED180: GetEntry # diaphora partial
+      0x1407ED180: GetEntry
       0x1407ED370: RemoveFromFavorites
-#fail       0x1406B1BA0: AddToFavorites
+      0x1407ED420: AddToFavorites
   Client::UI::Misc::RaptureTeleportHistory:
     vtbls:
       - ea: 0x141F0C060
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407FAF30: ctor
-      0x1407FB360: AddHistoryEntry # diaphora partial
+      0x1407FB360: AddHistoryEntry
   Client::UI::Misc::RecommendEquipModule:
     funcs:
       0x1407FC8F0: Setup # (this, race, sex, level, classJob, grandCompany, pvpRank) # no xrefs
@@ -7428,7 +7443,7 @@ classes:
       0x14080E880: ToggleDrawWeapon
       0x14080E9A0: GetCharacter
       0x14186AFC0: ToggleAnimationPlayback
-      0x14186B060: IsAnimationPaused # diaphora partial
+      0x14186B060: IsAnimationPaused
   Client::UI::Misc::CharaView::CharacterData:
     funcs:
       0x141867B70: ctor
@@ -7525,7 +7540,7 @@ classes:
       0x140898AE0: SetEventState
       0x1408992E0: GetAsCharacter
       0x140899310: GetAsBattleCharaMaybe # might be some other cast, or even Character too?
-      0x14089B7E0: Initialize # diaphora partial
+      0x14089B7E0: Initialize
       0x14089B9D0: ctor
   Client::Game::Character::Character:
     vtbls:
@@ -7720,7 +7735,7 @@ classes:
       - ea: 0x141F21A40
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141A373B8
+      - ea: 0x141F21A50
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -8054,7 +8069,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141A3A208
+      - ea: 0x141F24930
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -8195,7 +8210,7 @@ classes:
       - ea: 0x141F256A8
         base: Client::Game::Character::CharacterData
     funcs:
-       # 0x1407BC4E0: ctor # inlined in 7.0 @ sub_1409396E0
+       0x1409396E0: ctor
        # 0x1407BC7A0: Finalize # inlined
   Client::Game::Character::ActionEffectHandler:
     funcs:
@@ -8313,24 +8328,24 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E55010: ctor
-      0x1414534C0: Finalize # diaphora partial
-#fail       0x140C401D0: OpenMacro
-#fail       0x140C42840: AddHistoryEvent
+      #0x1414534C0: Finalize # inlined in dtor
+      0x140E554D0: OpenMacro
+      0x140E57CD0: AddHistoryEvent
       0x140E58000: GetPreviousHistoryEvent
-      0x140E58040: GetNextHistoryEvent # diaphora partial
-#fail       0x140C42A30: DoHistoryEvent
+      0x140E58040: GetNextHistoryEvent # inlined @ 0x140E56D90
+      0x140E57ED0: DoHistoryEvent
   Client::UI::Agent::AgentFishingNote:
     vtbls:
       - ea: 0x141F79790
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140D45300: ctor
+      0x140F87EF0: ctor
   Client::UI::Agent::AgentFishGuide:
     vtbls:
       - ea: 0x141F789E8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140D12320: ctor
+      0x140F4CCD0: ctor
       0x140F4CDD0: OpenForItemId
   Client::UI::Agent::AgentFishRecord:
     vtbls:
@@ -8344,14 +8359,14 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140B8E980: ctor
-#fail       0x1409E5340: OpenForQuest
+      0x140B8EB20: OpenForQuest
       0x140B92570: ShowOnMap
   Client::UI::Agent::AgentActionMenu:
     vtbls:
       - ea: 0x141F77C88
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14069C660: ctor # diaphora partial
+      0x140F00820: ctor
       0x140EE4480: Finalize # diaphora partial
   Client::UI::Agent::AgentRequest:
     vtbls:
@@ -8418,7 +8433,7 @@ classes:
       - ea: 0x141F755E8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C3A5E0: ctor
+      0x140E4F230: ctor
   Client::UI::Agent::AgentContentsTutorial:
     vtbls:
       - ea: 0x141F790A0
@@ -8471,8 +8486,8 @@ classes:
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x14031A630: ctor
-#fail       0x140292500: Promote
-#fail       0x140292680: Kick
+      0x14031AFB0: Promote
+      0x14031B120: Kick
   Client::UI::Agent::AgentLinkshell:
     vtbls:
       - ea: 0x141EC8220
@@ -8487,7 +8502,7 @@ classes:
       - ea: 0x141EC8418
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140295A10: ctor
+      0x14031EAE0: ctor
       0x140637D40: Finalize # diaphora partial
   Client::UI::Agent::AgentDetail:
     vtbls:
@@ -8563,7 +8578,7 @@ classes:
       - ea: 0x141F795C8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140D3FF40: ctor
+      0x140F81050: ctor
   Client::UI::Agent::AgentCompanyCraftMaterial:
     vtbls:
       - ea: 0x141EC9FF0
@@ -8581,14 +8596,14 @@ classes:
       - ea: 0x141EC86C8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1415DD360: ctor # diaphora partial
+      0x14033E7B0: ctor
 #fail       0x1402B05C0: Finalize
   Client::UI::Agent::AgentFreeCompanyProfile:
     vtbls:
       - ea: 0x141EC87C8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140340390: ctor # diaphora partial
+      0x140340E10: ctor
       0x140340ED0: Finalize # diaphora partial
   Client::UI::Agent::AgentFreeCompanyProfileEdit:
     vtbls:
@@ -8607,13 +8622,13 @@ classes:
       - ea: 0x141EC8AC0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140349CB0: ctor # diaphora partial
+#fail     0x140349CB0: ctor
   Client::UI::Agent::AgentFreeCompanyCrestDecal:
     vtbls:
       - ea: 0x141EC8B40
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14034CC10: ctor # diaphora partial
+      0x14034CC10: ctor
       0x14034CCF0: Finalize # diaphora partial
   Client::UI::Agent::AgentArmouryBoard:
     vtbls:
@@ -8675,9 +8690,9 @@ classes:
       - ea: 0x141F75070
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C21290: ctor
+      0x140E327A0: ctor
       0x140E32A70: Finalize # diaphora partial
-#fail       0x140C21D90: OpenRegistGearSetList # (this, InventoryItem*, ushort)
+      0x140E33D40: OpenRegistGearSetList # (this, InventoryItem*, ushort)
   Client::UI::Agent::AgentSupportMain:
     vtbls:
       - ea: 0x141ECB8B0
@@ -8689,7 +8704,7 @@ classes:
       - ea: 0x141ECB928
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14030DE80: ctor
+      0x1403AB9E0: ctor
   Client::UI::Agent::AgentSupportSubView:
     vtbls:
       - ea: 0x141ECB9A8
@@ -8707,7 +8722,7 @@ classes:
       - ea: 0x141F77AF0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140CC2D90: ctor
+      0x140EE58D0: ctor
       0x140EE6050: Finalize
       0x140EE6430: OpenById
   Client::UI::Agent::AgentLicenseViewer:
@@ -8731,7 +8746,7 @@ classes:
       - ea: 0x141F5CE50
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140A06640: ctor
+      0x140BB73E0: ctor
 #fail       0x140A06730: Finalize
   Client::UI::Agent::AgentBuddy:
     vtbls:
@@ -8793,14 +8808,14 @@ classes:
       - ea: 0x14202D540
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1412284F0: ctor
+      0x141520960: ctor
       0x141521180: Finalize
   Client::UI::Agent::AgentHousingHarvest:
     vtbls:
       - ea: 0x14202D778
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x141242530: ctor
+      0x1415407E0: ctor
   Client::UI::Agent::AgentHousingSignboard:
     vtbls:
       - ea: 0x14202D5D8
@@ -8812,7 +8827,7 @@ classes:
       - ea: 0x14202D880
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x141542730: ctor # diaphora partial
+      0x141542730: ctor
   Client::UI::Agent::AgentHousingTravellersNote:
     vtbls:
       - ea: 0x14202D8F8
@@ -8846,7 +8861,7 @@ classes:
       0x140BC9EC0: SalvageItem # (this, InventoryItem* ushort, byte)
       0x140BCADD0: LoadCategoryNames
       0x140BCA3A0: ItemListRefresh # Clears item list and signals agent to update it next frame
-      0x140BCB7A0: ItemListPopulate # diaphora partial
+      0x140BCB7A0: ItemListPopulate # inlined @ 0x140BC9A00
       0x140BCB8D0: ItemListPopulateFromContainer
       0x140BCBA80: ItemListPopulateEquipped
       0x140BCBDE0: ItemListAdd # (this, meetLevel, containerId, slotIndex, itemId, exdRow, quantity)
@@ -8867,7 +8882,7 @@ classes:
       - ea: 0x141EC8C38
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x14034FE30: ctor # diaphora partial
+      0x14034FE30: ctor
       0x1403501D0: Finalize # diaphora partial
       0x1403561A0: OpenListing
   Client::UI::Agent::AgentContentsMvp:
@@ -8912,9 +8927,9 @@ classes:
       - ea: 0x141EC8CC0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1402D4760: ctor
+      0x140368E00: ctor
       0x1403698B0: InitiateReadyCheck
-#fail       0x1402D6E70: EndReadyCheck
+      0x14036B5E0: EndReadyCheck
   Client::UI::Agent::AgentFieldMarker:
     vtbls:
       - ea: 0x141F79718
@@ -8981,7 +8996,7 @@ classes:
 #fail       0x140A2D0D0: Finalize
       0x140BE8E70: UpdateTimeRemaining # (this, resetTimestamp) returns true if an update occurred
       0x140BE8F10: UpdateAddon # at least the TimeRemaining
-#fail       0x140A30050: UpdateClassJobLevel
+      #0x140A30050: UpdateClassJobLevel # inlined @ 140BE6850
   Client::UI::Agent::AgentSatisfactionSupplyResult:
     vtbls:
       - ea: 0x141F5D860
@@ -8993,7 +9008,7 @@ classes:
       - ea: 0x141ECBC38
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140313B00: ctor
+      0x1403B21F0: ctor
 #fail       0x140328830: Finalize
   Client::UI::Agent::AgentAdventureNoteBook:
     vtbls:
@@ -9013,7 +9028,7 @@ classes:
       - ea: 0x141F76698
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C760D0: ctor
+      0x140E998D0: ctor
   Client::UI::Agent::AgentMinionNoteBook:
     vtbls:
       - ea: 0x141F76810
@@ -9093,7 +9108,7 @@ classes:
       - ea: 0x141F79218
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140D30A90: ctor
+      0x140F71EE0: ctor
   Client::UI::Agent::AgentPuryfyItemSelector:
     vtbls:
       - ea: 0x141F77268
@@ -9180,7 +9195,7 @@ classes:
       - ea: 0x141F5C648
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409E1120: ctor
+      0x140B89DC0: ctor
 #fail       0x1409E11A0: Finalize
   Client::UI::Agent::AgentJournalResult:
     vtbls:
@@ -9194,28 +9209,28 @@ classes:
       - ea: 0x141F753E8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C31AA0: ctor
+      0x140E46150: ctor
       0x140E462C0: Finalize # diaphora partial
   Client::UI::Agent::AgentCompanyCraftRecipeNotebook:
     vtbls:
       - ea: 0x141EC9338
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1402E0690: ctor
+      0x1403760E0: ctor
       0x140376230: Finalize # diaphora partial
   Client::UI::Agent::AgentExplorationPartsInterface:
     vtbls:
       - ea: 0x141EC8E28
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1402D9F80: ctor
+      0x14036EB20: ctor
       0x14036ED20: Finalize
   Client::UI::Agent::AgentAirShipParts:
     vtbls:
       - ea: 0x141EC8F60
         base: Client::UI::Agent::AgentExplorationPartsInterface
     funcs:
-#fail       0x1402DB3D0: ctor
+      0x140370210: ctor
   Client::UI::Agent::AgentSubmersibleParts:
     vtbls:
       - ea: 0x141EC93B0
@@ -9510,7 +9525,7 @@ classes:
       - ea: 0x141F75DA8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C54F50: ctor
+      0x140E6FB10: ctor
   Client::UI::Agent::AgentItemInspection:
     vtbls:
       - ea: 0x141F75F90
@@ -9675,11 +9690,11 @@ classes:
       0x140C5FE80: ctor
   Client::UI::Agent::AgentHousingGuestBook:
     vtbls:
-#fail       - ea: 0x141B3D6B0
+      - ea: 0x14202DBA0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14154DDF0: ctor
-#fail       0x14124DAC0: Finalize
+      0x14154DE90: Finalize
   Client::UI::Agent::AgentReconstructionBox:
     vtbls:
       - ea: 0x141F61548
@@ -9817,11 +9832,11 @@ classes:
       0x140C93CE0: ctor
   Client::UI::Agent::AgentHousingCatalogPreview:
     vtbls:
-#fail       - ea: 0x141B3D198
+      - ea: 0x14202D660
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14153DED0: ctor
-      0x14153DFC0: Finalize # diaphora partial
+      0x14153DFC0: Finalize
   Client::UI::Agent::AgentSubmersibleExplorationMapSelect:
     vtbls:
       - ea: 0x141EC9728
@@ -10097,14 +10112,14 @@ classes:
       - ea: 0x141F5C7D0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1409EA3E0: ctor
+      0x140B943D0: ctor
       0x140B96CB0: TryOn # static
   Client::UI::Agent::AgentItemDetailBase:
     vtbls:
       - ea: 0x141F75460
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140C33B20: ctor
+      0x140E48480: ctor
   Client::UI::Agent::AgentContentsFinderSetting:
     vtbls:
       - ea: 0x141F78E38
@@ -10116,7 +10131,7 @@ classes:
       - ea: 0x141F77FD8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140CEF5D0: ctor
+      0x140F1CFC0: ctor
       0x140F1D210: Finalize # diaphora partial
       0x140F1DA10: OpenRegularDuty
       0x140F1DBF0: OpenRouletteDuty
@@ -10155,7 +10170,7 @@ classes:
       0x140BA5C10: ctor
       0x140BA60A0: Finalize # diaphora partial
       0x140BA7610: OpenRecipeByRecipeId
-      0x140BA7730: OpenRecipeByItemId # diaphora partial
+      0x140BA7730: OpenRecipeByItemId
       0x140BADC90: SearchRecipe
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
@@ -10170,14 +10185,14 @@ classes:
     funcs:
       0x140BA1DD0: ctor
       0x140BA1EA0: OpenByRecipeId
-      0x140BA2AC0: OpenRecipeResultItemContextMenu # diaphora partial
+      #0x140BA2AC0: OpenRecipeResultItemContextMenu # inlined @ 0x140BA2220
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
       - ea: 0x141F5CD10
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BB4AE0: ctor
-      0x140BB4D10: SearchForRecipesUsingItem # diaphora partial
+      0x140BB4D10: SearchForRecipesUsingItem
   Client::UI::Agent::AgentTeleport:
     vtbls:
       - ea: 0x141F5E8A0
@@ -10244,7 +10259,7 @@ classes:
       - ea: 0x141F71D70
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140BA1DF0: ctor
+      0x140D981A0: ctor
   Client::UI::Agent::TripleTriadTournamentMatchList:
     vtbls:
       - ea: 0x141F73078
@@ -10263,20 +10278,20 @@ classes:
       - ea: 0x141EC7138
         base: Client::UI::Agent::AgentConfigBase
     funcs:
-      0x140FEE9E0: ctor # diaphora partial
+      0x1402FA660: ctor
       0x1402FA8A0: Finalize # diaphora partial
   Client::UI::Agent::AgentConfigLog:
     vtbls:
       - ea: 0x141EC6EE0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14026B8D0: ctor
+      0x1402E96F0: ctor
   Client::UI::Agent::AgentConfigCharacter:
     vtbls:
       - ea: 0x141EC7218
         base: Client::UI::Agent::AgentConfigBase
     funcs:
-#fail       0x14027A2B0: ctor
+      0x1402FCC90: ctor
       0x1402FCE40: Finalize # diaphora partial
   Client::UI::Agent::AgentChatConfig:
     vtbls:
@@ -10478,7 +10493,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14157E970: ctor
-      0x14158F060: SelectItem # diaphora partial
+      0x14157F380: SelectItem
   Client::UI::Agent::AgentMJIRecipeNoteBook:
     vtbls:
       - ea: 0x14202EC80
@@ -10503,86 +10518,86 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1415816C0: ctor
-      0x141581E60: HandleEventMain # diaphora partial
+      0x141581E60: HandleEventMain
       0x141581F20: HandleEventShipItem
-      0x1415820E0: HandleEventShipItemConfirmOvercap # diaphora partial
-      0x141582260: HandleEventShipItemConfirmLeaveDeficit # diaphora partial
-      0x1415822B0: HandleEventShipBulk # diaphora partial
-      0x141582310: HandleEventShipBulkConfirmOvercap # diaphora partial
-      0x140DC2E80: UpdateImpl # diaphora partial
-      0x141582590: FirstUpdateAfterInit # diaphora partial
-      0x141582730: TryUpdateAddon # diaphora partial
+      0x1415820E0: HandleEventShipItemConfirmOvercap
+      0x141582260: HandleEventShipItemConfirmLeaveDeficit
+      0x1415822B0: HandleEventShipBulk
+      0x141582310: HandleEventShipBulkConfirmOvercap
+      0x141582380: UpdateImpl
+      0x141582590: FirstUpdateAfterInit
+      0x141582730: TryUpdateAddon
       0x141582B30: AskShipItem
       0x141582D30: ShipItem
       0x141582EB0: AskShipBulk
-      0x141583300: ShipBulk # diaphora partial
-      0x141583570: CheckBulkOvercap # diaphora partial
-#fail       0x141276470: InitStartReadUICategories
-#fail       0x1412765F0: InitReadUICategoryRow
-#fail       0x1412766C0: InitStartReadShopItems
-#fail       0x141276820: InitReadShopItemRow
-#fail       0x141276920: InitFillAndSortPerCategoryItems
-      0x141584460: InitStartReadItemPouch # diaphora partial
-      0x141584640: InitReadItemPouchRow # diaphora partial
-      0x1415846A0: InitStartReadItems # diaphora partial
-      0x141584880: InitReadItemRow # diaphora partial
-      0x141584910: InitStartReadCurrencyItems # diaphora partial
+      0x141583300: ShipBulk
+      0x141583570: CheckBulkOvercap
+      0x141583890: InitStartReadUICategories
+      0x141583B20: InitReadUICategoryRow
+      0x141583D60: InitStartReadShopItems
+      0x141583F90: InitReadShopItemRow
+      0x141584200: InitFillAndSortPerCategoryItems
+      0x141584460: InitStartReadItemPouch
+      0x141584640: InitReadItemPouchRow
+      0x1415846A0: InitStartReadItems
+      0x141584880: InitReadItemRow
+      0x141584910: InitStartReadCurrencyItems
       0x141584AF0: InitReadCurrencyItemRow
   Client::UI::Agent::AgentMJIAnimalManagement:
     vtbls:
       - ea: 0x14202E368
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14125B3A0: ctor
-#fail       0x14125B4B0: Finalize
-      0x141561220: ShowImpl # diaphora partial
-      0x141561340: OpenAddon # diaphora partial
-      0x141587390: PrepareForOp
-#fail       0x14125CA80: HandleContextMenuEvent
+      0x141560FB0: ctor
+      0x141561150: Finalize
+      0x141561220: ShowImpl
+      0x141561340: OpenAddon
+      0x141562AE0: PrepareForOp
+      0x141562BE0: HandleContextMenuEvent
       0x141562F30: HandleEventRelease
-      0x141563340: ConfirmReleaseCaptured # diaphora partial
-      0x140CAB740: AskCollect # diaphora partial
-      0x141BD5760: CalculateNumFilledSlots # diaphora partial
-#fail       0x14125D620: UpdateSlots
-#fail       0x14125DA50: UpdateAvailableFoods
-      0x141564160: GetNumItemsInInventory # diaphora partial
-      0x141564290: HandleEventConfirmCollectAll # diaphora partial
-      0x1415643E0: HandleEventConfirmCollectAllOvercap # diaphora partial
-#fail       0x14125DF00: Entrust
-#fail       0x14125E020: Dismiss
-      0x141564800: CollectSingle # diaphora partial
-      0x140BF2DA0: CollectAll # diaphora partial
-      0x140C677E0: Release # diaphora partial
-#fail       0x14125E470: DismissRelease
-#fail       0x14125E690: ChangeNickname
-#fail       0x14125E8B0: InitStartReadSheets
-#fail       0x14125EC10: InitReadAnimalRow
+      0x141563340: ConfirmReleaseCaptured
+      0x141563420: AskCollect
+      0x141563660: CalculateNumFilledSlots
+      0x1415638B0: UpdateSlots
+      0x141563E10: UpdateAvailableFoods
+      0x141564160: GetNumItemsInInventory
+      0x141564290: HandleEventConfirmCollectAll
+      0x1415643E0: HandleEventConfirmCollectAllOvercap
+      0x1415645E0: Entrust
+      0x141564700: Dismiss
+      0x141564800: CollectSingle
+      0x141564920: CollectAll
+      0x141564A20: Release
+      0x141564B20: DismissRelease
+      0x141564D20: ChangeNickname
+      0x141564F30: InitStartReadSheets
+      0x1415654B0: InitReadAnimalRow
       0x1415656F0: InitReadPouchItemRow
-      0x141A381E0: InitReadItemRow # diaphora partial
-      0x141797140: FindItemDescByItemId # diaphora partial
+      0x1415657F0: InitReadItemRow
+      0x141565930: FindItemDescByItemId
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
-#fail       - ea: 0x141B3E3C8
+      - ea: 0x14202E958
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141586150: ctor
-      0x141586250: Finalize # diaphora partial
-      0x1415862C0: OpenUI # diaphora partial
-#fail       0x1412782A0: ShowImpl
-      0x141587390: PrepareForOp # diaphora partial
-#fail       0x141279050: HandleContextMenuEvent
-      0x141587860: TryFinishInit # diaphora partial
+      0x141586250: Finalize
+      0x1415862C0: OpenUI
+      0x141586330: ShowImpl
+      0x141587390: PrepareForOp
+      0x141587490: HandleContextMenuEvent
+      0x141587860: TryFinishInit
       0x141587A20: ClearSeeds
       0x141587B50: UpdateEntrustSeeds
-      0x141587D70: FindSeedIndexByItemId # diaphora partial
-      0x141587DE0: GetNumItemsInInventory # diaphora partial
-      0x141587F10: HandleEventConfirmCollectAll # diaphora partial
-      0x141588010: HandleEventConfirmCollectAllOvercap # diaphora partial
-#fail       0x141279B50: Entrust
-      0x141588080: Dismiss # diaphora partial
-      0x141588290: CollectSingle # diaphora partial
-      0x1415883A0: CollectAll # diaphora partial
-      0x140C17690: StartCollectAll # diaphora partial
+      0x141587D70: FindSeedIndexByItemId
+      0x141587DE0: GetNumItemsInInventory
+      0x141587F10: HandleEventConfirmCollectAll
+      0x141588010: HandleEventConfirmCollectAllOvercap
+      0x141588080: Entrust
+      0x141588190: Dismiss
+      0x141588290: CollectSingle
+      0x1415883A0: CollectAll
+      0x1415884F0: StartCollectAll
   Client::UI::Agent::AgentMJIEntrance:
     vtbls:
       - ea: 0x14202E8E0
@@ -10591,52 +10606,52 @@ classes:
       0x141584B70: ctor
   Client::UI::Agent::AgentMJIGatheringHouse:
     vtbls:
-#fail       - ea: 0x141B3E440
+      - ea: 0x14202E9D0
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x14127BD10: ctor
-#fail       0x14127BDD0: Finalize
-#fail       0x14127BE50: OpenUI
+      0x14158A260: ctor
+      0x14158A380: Finalize
+      0x14158A400: OpenUI
       0x14158A890: RefreshUI
-#fail       0x14127C050: RefreshExpeditions
-      0x14158AAD0: NotifyExpeditionSelected # diaphora partial
+      0x14158A8D0: RefreshExpeditions
+      0x14158AAD0: NotifyExpeditionSelected
       0x14158B310: UpdateLoadCowrieItem
-      0x14158B360: HandleEventMain # diaphora partial
-#fail       0x14127CBA0: HandleEventSelectExpedition
-      0x14158BD60: IsExpeditionUnlocked # diaphora partial
-#fail       0x14127CFC0: CanNotGatherAnymore
-#fail       0x14127D190: CanNotGatherWithoutOvercap
-#fail       0x14127D380: OpenAddon
-      0x14158CC00: AskConfirmStart # diaphora partial
-      0x14158CD60: AskConfirmChangeExtend # diaphora partial
-      0x14158CEC0: AskConfirmChange # diaphora partial
-      0x14158D010: AskConfirmExtend # diaphora partial
-#fail       0x14127E140: RefreshExpeditionSelect
+      0x14158B360: HandleEventMain
+      0x14158B620: HandleEventSelectExpedition
+      0x14158BD60: IsExpeditionUnlocked
+      0x14158BE00: CanNotGatherAnymore
+      0x14158C060: CanNotGatherWithoutOvercap
+      0x14158C2E0: OpenAddon
+      0x14158CC00: AskConfirmStart
+      0x14158CD60: AskConfirmChangeExtend
+      0x14158CEC0: AskConfirmChange
+      0x14158D010: AskConfirmExtend
+      0x14158D190: RefreshExpeditionSelect
   Client::UI::Agent::AgentMJIGatheringHouse::AgentData:
     funcs:
-#fail       0x14127A260: ctor
-      0x1415887C0: dtor # diaphora partial
-      0x1415888F0: Init # diaphora partial
-      0x1415889F0: Reset # diaphora partial
-#fail       0x14127A5A0: Update
-      0x141588C70: InitSheets # diaphora partial
+      0x141588730: ctor
+      0x1415887C0: dtor
+      0x1415888F0: Init
+      0x1415889F0: Reset
+      0x141588A60: Update
+      0x141588C70: InitSheets
       0x141588D10: SheetsReady
-#fail       0x14127A810: InitResources
-#fail       0x14127AB60: InitDerived
-#fail       0x14127B070: GetExpeditionEntry
-#fail       0x14127B1F0: GetResourceEntryByItemId
-#fail       0x14127B300: GetResourceEntryByPouchId
-#fail       0x14127B410: ResetVectors
-#fail       0x14127B4F0: ResetExpeditions
-      0x1405D9B80: ResetExpeditionItems # diaphora partial
-      0x1403536C0: ResetResources # diaphora partial
+      0x141588D50: InitResources
+      0x141589070: InitDerived
+      0x141589560: GetExpeditionEntry
+      0x141589640: GetResourceEntryByItemId
+      0x1415896D0: GetResourceEntryByPouchId
+      0x141589760: ResetVectors
+      0x141589920: ResetExpeditions
+      0x141589AB0: ResetExpeditionItems
+      0x141589B50: ResetResources
   Client::UI::Agent::AgentMJIMinionManagement:
     vtbls:
       - ea: 0x14202EB68
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1415948B0: ctor # diaphora partial
-#fail       0x141285FB0: Finalize
+      0x1415948B0: ctor
+      0x141594B70: Finalize
   Client::UI::Agent::AgentMJIMinionNoteBook:
     vtbls:
       - ea: 0x14202EBE0
@@ -10692,7 +10707,7 @@ classes:
       0x14155D0E0: Finalize
   Client::UI::Agent::AgentBannerInterface::Storage:
     funcs:
-#fail       0x1412596E0: Update
+      0x14155EDE0: Update
   Client::UI::Agent::AgentBannerInterface::Storage::CharacterData:
     vtbls:
       - ea: 0x14202E118
@@ -10813,7 +10828,7 @@ classes:
       1: SetupClasses
       4: SetupClasses_2
     funcs:
-      0x1409463C0: ctor # diaphora partial
+      0x1409463C0: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>:
     vtbls:
       - ea: 0x141F33CB8
@@ -11663,11 +11678,11 @@ classes:
       - ea: 0x1427686A0
         pointer: True
     funcs:
-      0x1409D00A0: ctor
+      0x1409D03E0: ctor
       0x1409D00F0: dtor
       0x1409D0140: GetInstance
-      0x1409D03E0: Initialize
-#fail       0x1408647C0: Finalize
+      0x1409d00a0: Initialize
+      0x1409D0FD0: Finalize
       0x1409D9F30: ProcessDirectorUpdate
       0x1409DD270: GetDirectorByEventId
       0x1409DD2C0: GetCompanyLeveDirector
@@ -11688,26 +11703,26 @@ classes:
       0x140B1F070: GetCurrentContentId # static
       0x140B1F0F0: CanLeaveCurrentContent # static
       0x140B20CA0: GetContentFinderCondition
-#fail       0x1414B2240: GetPublicContentDirectorByType # static
+      0x141840110: GetPublicContentDirectorByType # static
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141F32CC0
         base: Client::Game::Event::ModuleBase
     funcs:
-#fail       0x140845EC0: ctor
-      0x140949C60: SetupLuaScriptLoader # diaphora partial
+      0x1409464F0: ctor
+      0x140949C60: SetupLuaScriptLoader
   Client::Game::Event::LuaActorModule:
     vtbls:
       - ea: 0x141F32D00
         base: Client::Game::Event::ModuleBase
     funcs:
-      0x141D8EB00: ctor # diaphora partial
+      0x14094A2A0: ctor # unused, inlined
   Client::Game::Event::DirectorModule:
     vtbls:
       - ea: 0x141F32D38
         base: Client::Game::Event::ModuleBase
     funcs:
-#fail       0x14084A760: ctor
+      0x14094AF10: ctor
   Client::Game::Event::EventState:
     vtbls:
       - ea: 0x141F32D70
@@ -11718,8 +11733,8 @@ classes:
       0x1409812D0: ToggleFaceCamera
       0x140981380: IsGazeCameraEnabled
       0x1409813A0: ToggleGazeCamera
-      0x140981420: ToggleMotionFreeze # diaphora partial
-      0x140981850: EnableCameraLight # diaphora partial
+      0x140981420: ToggleMotionFreeze
+      0x140981850: EnableCameraLight
       0x140981AC0: DisableCameraLight
       0x1409864C0: SetupDefaultTarget
       0x14098A920: AddCharacterToGPose
@@ -11730,25 +11745,19 @@ classes:
       - ea: 0x141F3AF98
         base: Client::Game::Event::Director
     funcs:
-      0x140A0A4C0: ctor # diaphora partial
+      0x140A0A4C0: ctor
   Client::Game::Event::GatheringLeveDirector:
     vtbls:
-#fail       - ea: 0x141A5F650
+      - ea: 0x141F4A3A0
         base: Client::Game::Event::LeveDirector
-    funcs:
-#fail       0x1408D1CB0: ctor
   Client::Game::Event::BattleLeveDirector:
     vtbls:
       - ea: 0x141F3B8C0
         base: Client::Game::Event::LeveDirector
-    funcs:
-#fail       0x140883C30: ctor
   Client::Game::Event::CompanyLeveDirector:
     vtbls:
-#fail       - ea: 0x141A620E0
+      - ea: 0x141F4CE80
         base: Client::Game::Event::LeveDirector
-    funcs:
-      0x140A6AAF0: ctor # diaphora partial
   Client::Game::InstanceContent::ContentDirector:
     vtbls:
       - ea: 0x141F35F10
@@ -11774,7 +11783,7 @@ classes:
       0x1418034B0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentPvpDirector:
     vtbls:
-#fail       - ea: 0x141B67CB8
+      - ea: 0x14205B1B8
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
 #fail       0x141454560: ctor
@@ -11806,362 +11815,242 @@ classes:
     vtbls:
       - ea: 0x1420B6A88
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147BAA0: ctor
   Client::Game::InstanceContent::InstanceContentRaidCrystalTower002: # Syrcus Tower
     vtbls:
       - ea: 0x1420B7698
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141800D60: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidWorldOfDarkness: # The World of Darkness
     vtbls:
       - ea: 0x1420B82A8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147BD90: ctor
   Client::Game::InstanceContent::InstanceContentRaidSeaBahamut001: # The Binding Coil of Bahamut - Turn 1
     vtbls:
       - ea: 0x1420B8EB8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147BF30: ctor
   Client::Game::InstanceContent::InstanceContentRaidSeaBahamut002: # The Binding Coil of Bahamut - Turn 2
     vtbls:
       - ea: 0x1420B9AC8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147BFA0: ctor
   Client::Game::InstanceContent::InstanceContentRaidSeaBahamut003: # The Binding Coil of Bahamut - Turn 3
     vtbls:
       - ea: 0x1420BA6D8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147C040: ctor
   Client::Game::InstanceContent::InstanceContentRaidSeaBahamut004: # The Binding Coil of Bahamut - Turn 4
     vtbls:
       - ea: 0x1420BB2E8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147C0C0: ctor
   Client::Game::InstanceContent::InstanceContentRaidSeaBahamut005: # The Binding Coil of Bahamut - Turn 5
     vtbls:
       - ea: 0x1420BBEF8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147C110: ctor
   Client::Game::InstanceContent::InstanceContentRaidForestBahamut001: # The Second Coil of Bahamut - Turn 1
     vtbls:
       - ea: 0x1420BCB08
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147C1A0: ctor
   Client::Game::InstanceContent::InstanceContentRaidForestBahamut002: # The Second Coil of Bahamut - Turn 2
     vtbls:
       - ea: 0x1420BD718
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147C240: ctor
   Client::Game::InstanceContent::InstanceContentRaidForestBahamut003: # The Second Coil of Bahamut - Turn 3
     vtbls:
       - ea: 0x1420BE328
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147C2A0: ctor
   Client::Game::InstanceContent::InstanceContentRaidForestBahamut004: # The Second Coil of Bahamut - Turn 4
     vtbls:
       - ea: 0x1420BEF38
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147C320: ctor
   Client::Game::InstanceContent::InstanceContentRaidFinalBahamut001: # The Final Coil of Bahamut - Turn 1
     vtbls:
       - ea: 0x1420D2BF8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141810D70: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidFinalBahamut002: # The Final Coil of Bahamut - Turn 2
     vtbls:
       - ea: 0x1420D3808
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141810DE0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidFinalBahamut003: # The Final Coil of Bahamut - Turn 3
     vtbls:
       - ea: 0x1420D4418
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141489660: ctor
   Client::Game::InstanceContent::InstanceContentRaidFinalBahamut004: # The Final Coil of Bahamut - Turn 4
     vtbls:
       - ea: 0x1420D5028
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141810EC0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidForestBahamut001Hard: # The Second Coil of Bahamut (Savage) - Turn 1
     vtbls:
       - ea: 0x1420CFBB8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414893A0: ctor
   Client::Game::InstanceContent::InstanceContentRaidForestBahamut002Hard: # The Second Coil of Bahamut (Savage) - Turn 2
     vtbls:
       - ea: 0x1420D07C8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141810C20: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidForestBahamut003Hard: # The Second Coil of Bahamut (Savage) - Turn 3
     vtbls:
       - ea: 0x1420D13D8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414894A0: ctor
   Client::Game::InstanceContent::InstanceContentRaidForestBahamut004Hard: # The Second Coil of Bahamut (Savage) - Turn 4
     vtbls:
       - ea: 0x1420D1FE8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141810D00: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidVoidArk: # The Void Ark
     vtbls:
       - ea: 0x1420DB0A8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811250: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidWeepingCityOfMhach: # The Weeping City of Mhach
     vtbls:
       - ea: 0x1420DBCB8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418113E0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidDunScaith: # Dun Scaith
     vtbls:
       - ea: 0x1420DC8C8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141489CB0: ctor
   Client::Game::InstanceContent::InstanceContentRaidAlexanderFather001: # Alexander - The Fist of the Father
     vtbls:
       - ea: 0x1420D5C38
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141810F30: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderFather002: # Alexander - The Cuff of the Father
     vtbls:
       - ea: 0x1420D7458
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811010: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderFather003: # Alexander - The Arm of the Father
     vtbls:
       - ea: 0x1420D8C78
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418110F0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderFather004: # Alexander - The Burden of the Father / Alexander - The Burden of the Father (Savage)
     vtbls:
       - ea: 0x1420DA498
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811200: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderSon001: # Alexander - The Fist of the Son
     vtbls:
       - ea: 0x1420DD4D8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811570: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderSon002: # Alexander - The Cuff of the Son
     vtbls:
       - ea: 0x1420DECF8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811650: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderSon003: # Alexander - The Arm of the Son
     vtbls:
       - ea: 0x1420E0518
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418117A0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderSon004: # Alexander - The Burden of the Son / Alexander - The Burden of the Son (Savage)
     vtbls:
       - ea: 0x1420E1D38
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811800: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator001: # Alexander - The Eyes of the Creator / Alexander - The Eyes of the Creator (Savage)
     vtbls:
       - ea: 0x1420E3558
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811890: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator002: # Alexander - The Breath of the Creator
     vtbls:
       - ea: 0x1420E4168
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418118F0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator003: # Alexander - The Heart of the Creator
     vtbls:
-#fail       - ea: 0x141BF0C58
+      - ea: 0x1420E5988
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14148A510: ctor
   Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator004: # Alexander - The Soul of the Creator / Alexander - The Soul of the Creator (Savage)
     vtbls:
-#fail       - ea: 0x141BF2478
+      - ea: 0x1420E71D8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14148AAB0: ctor
   Client::Game::InstanceContent::InstanceContentRaidAlexanderFather001Savage: # Alexander - The Fist of the Father (Savage)
     vtbls:
       - ea: 0x1420D6848
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141810FA0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderFather002Savage: # Alexander - The Cuff of the Father (Savage)
     vtbls:
       - ea: 0x1420D8068
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811080: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderFather003Savage: # Alexander - The Arm of the Father (Savage)
     vtbls:
       - ea: 0x1420D9888
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141811160: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderSon001Savage: # Alexander - The Fist of the Son (Savage)
     vtbls:
       - ea: 0x1420DE0E8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418115E0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderSon002Savage: # Alexander - The Cuff of the Son (Savage)
     vtbls:
       - ea: 0x1420DF908
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418116C0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlexanderSon003Savage: # Alexander - The Arm of the Son (Savage)
     vtbls:
       - ea: 0x1420E1128
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141489F40: ctor
   Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator002Savage: # Alexander - The Breath of the Creator (Savage)
     vtbls:
       - ea: 0x1420E4D78
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14148A1D0: ctor
   Client::Game::InstanceContent::InstanceContentRaidAlexanderCreator003Savage: # Alexander - The Heart of the Creator (Savage)
     vtbls:
-#fail       - ea: 0x141BF1868
+      - ea: 0x1420E65B0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14148A910: ctor
   Client::Game::InstanceContent::InstanceContentRaidRoyalCityOfRabanastre: # The Royal City of Rabanastre
     vtbls:
-#fail       - ea: 0x141C254B0
+      - ea: 0x14211AA20
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834F40: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidRidoranaLighthouse: # The Ridorana Lighthouse
     vtbls:
-#fail       - ea: 0x141C26208
+      - ea: 0x14211B788
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141835050: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidOrbonneMonastery: # The Orbonne Monastery
     vtbls:
-#fail       - ea: 0x141C26F08
+      - ea: 0x14211C4A8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414A9080: ctor
   Client::Game::InstanceContent::InstanceContentRaidDeltascape001: # Deltascape V1.0 / Deltascape V1.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C20C60
+      - ea: 0x142116138
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834B90: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidDeltascape002: # Deltascape V2.0 / Deltascape V2.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C21868
+      - ea: 0x142116D58
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834BE0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidDeltascape003: # Deltascape V3.0 / Deltascape V3.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C22470
+      - ea: 0x142117978
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834C60: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidDeltascape004: # Deltascape V4.0 / Deltascape V4.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C23078
+      - ea: 0x142118598
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834CE0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidSigmascape001: # Sigmascape V1.0 / Sigmascape V1.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C29488
+      - ea: 0x14211EA80
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141839310: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidSigmascape002: # Sigmascape V2.0 / Sigmascape V2.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C2A0A0
+      - ea: 0x14211F6B0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141839390: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidSigmascape003: # Sigmascape V3.0 / Sigmascape V3.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C2ACA8
+      - ea: 0x1421202D0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418394C0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidSigmascape004: # Sigmascape V4.0 / Sigmascape V4.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C2B9F0
+      - ea: 0x142121030
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141839580: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlphascape001: # Alphascape V1.0 / Alphascape V1.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C2C630
+      - ea: 0x142121C88
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141839600: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlphascape002: # Alphascape V2.0 / Alphascape V2.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C2D238
+      - ea: 0x1421228A8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418396A0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlphascape003: # Alphascape V3.0 / Alphascape V3.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C2DE58
+      - ea: 0x1421234E0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141839740: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidAlphascape004: # Alphascape V4.0 / Alphascape V4.0 (Savage)
     vtbls:
-#fail       - ea: 0x141C2EA70
+      - ea: 0x142124110
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141839800: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidUnendingCoilOfBahamut: # The Unending Coil of Bahamut (Ultimate)
     vtbls:
-#fail       - ea: 0x141C23C80
+      - ea: 0x1421191B8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834D70: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidWeaponsRefrain: # The Weapon's Refrain (Ultimate)
     vtbls:
-#fail       - ea: 0x141C24878
+      - ea: 0x142119DC8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834DF0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRaidEpicOfAlexander: # The Epic of Alexander (Ultimate)
     vtbls:
       - ea: 0x1420623B0
@@ -12196,8 +12085,6 @@ classes:
     vtbls:
       - ea: 0x142090F50
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FD340: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonResidence: # Haukke Manor
     vtbls:
       - ea: 0x142069530
@@ -12214,32 +12101,22 @@ classes:
     vtbls:
       - ea: 0x142092770
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141478910: ctor
   Client::Game::InstanceContent::InstanceContentDungeonCuttersCry: # Cutter's Cry
     vtbls:
       - ea: 0x142094BA0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141478FA0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonDzemael: # Dzemael Darkhold
     vtbls:
       - ea: 0x1420957B0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141479010: ctor
   Client::Game::InstanceContent::InstanceContentDungeonAurumVale: # The Aurum Vale
     vtbls:
       - ea: 0x14208EB20
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FD1B0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonWandererPalace: # The Wanderer's Palace
     vtbls:
       - ea: 0x142093380
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FDE40: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonCastrumMeridianum: # Castrum Meridianum
     vtbls:
       - ea: 0x14206C6D8
@@ -12256,80 +12133,54 @@ classes:
     vtbls:
       - ea: 0x1420963C0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141479140: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSirius: # Pharos Sirius
     vtbls:
       - ea: 0x142096FD0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414791B0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonCopperBellHard: # Copperbell Mines (Hard)
     vtbls:
       - ea: 0x14208DF10
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FD140: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonResidenceHard: # Haukke Manor (Hard)
     vtbls:
       - ea: 0x14208F730
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FD240: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonLostCityOfAmdapor: # The Lost City of Amdapor
     vtbls:
       - ea: 0x142097BE0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141479290: ctor
   Client::Game::InstanceContent::InstanceContentDungeonHalataliHard: # Halatali (Hard)
     vtbls:
       - ea: 0x142091B60
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FD3B0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonBrayfloxHard: # Brayflox's Longstop (Hard)
     vtbls:
       - ea: 0x142090340
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FD2D0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonTreasureIsland?: # Hullbreaker Isle
     vtbls:
       - ea: 0x1420987F0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FE340: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonTamtaraHard: # The Tam-Tara Deepcroft (Hard)
     vtbls:
       - ea: 0x142099400
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414793C0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonStoneVigilHard: # The Stone Vigil (Hard)
     vtbls:
       - ea: 0x142093F90
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141478F30: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSnowcloak: # Snowcloak
     vtbls:
       - ea: 0x1420710C8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417D0F80: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSastashaHard: # Sastasha (Hard)
     vtbls:
       - ea: 0x14209AC20
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FE4F0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonQarnHard: # The Sunken Temple of Qarn (Hard)
     vtbls:
       - ea: 0x14209A010
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FE480: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonKeeperOfTheLake: # The Keeper of the Lake
     vtbls:
       - ea: 0x142070480
@@ -12340,20 +12191,14 @@ classes:
     vtbls:
       - ea: 0x14209C440
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FE5B0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonRuinsOfAmdaporHard: # Amdapor Keep (Hard)
     vtbls:
       - ea: 0x14209B830
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FE560: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonDuskVigil: # The Dusk Vigil
     vtbls:
       - ea: 0x14209F480
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141479950: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSohmAl: # Sohm Al
     vtbls:
       - ea: 0x14206F848
@@ -12388,26 +12233,18 @@ classes:
     vtbls:
       - ea: 0x14209DC60
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FE8B0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonFractalContinuum: # The Fractal Continuum
     vtbls:
       - ea: 0x14209E870
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FE910: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonSaintMocianneArboretum: # Saint Mocianne's Arboretum
     vtbls:
       - ea: 0x1420A0CA0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141479AA0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonPharosSiriusHard: # Pharos Sirius (Hard)
     vtbls:
       - ea: 0x1420A0090
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141479A30: ctor
   Client::Game::InstanceContent::InstanceContentDungeonAntitower: # The Antitower
     vtbls:
       - ea: 0x142072A20
@@ -12418,8 +12255,6 @@ classes:
     vtbls:
       - ea: 0x1420A18B0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FED10: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonSohrKhai: # Sohr Khai
     vtbls:
       - ea: 0x142074420
@@ -12430,8 +12265,6 @@ classes:
     vtbls:
       - ea: 0x1420A24C0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FED80: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonXelphatol: # Xelphatol
     vtbls:
       - ea: 0x142071D28
@@ -12442,8 +12275,6 @@ classes:
     vtbls:
       - ea: 0x14209D050
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x141479620: ctor
   Client::Game::InstanceContent::InstanceContentDungeonBaelsarWall: # Baelsar's Wall
     vtbls:
       - ea: 0x142075060
@@ -12454,8 +12285,6 @@ classes:
     vtbls:
       - ea: 0x1420A30D0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FEEA0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonSirensongSea: # The Sirensong Sea
     vtbls:
       - ea: 0x1420769C0
@@ -12464,10 +12293,8 @@ classes:
       0x1417D1920: ctor
   Client::Game::InstanceContent::InstanceContentDungeonShisui: # Shisui of the Violet Tides
     vtbls:
-#fail       - ea: 0x141C00C98
+      - ea: 0x1420F5D58
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414A6ED0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonBardamMettle: # Bardam's Mettle
     vtbls:
       - ea: 0x142078F58
@@ -12494,16 +12321,12 @@ classes:
       0x1417D1CA0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonKuganeCastle: # Kugane Castle
     vtbls:
-#fail       - ea: 0x141C03258
+      - ea: 0x1420F8378
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141833430: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonTempleOfTheFist: # The Temple of the Fist
     vtbls:
-#fail       - ea: 0x141C018D8
+      - ea: 0x1420F69B8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418332C0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonDrownedCityOfSkalla: # The Drowned City of Skalla
     vtbls:
       - ea: 0x14207A858
@@ -12512,22 +12335,16 @@ classes:
       0x1417D1FC0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonHellsLid: # Hells' Lid
     vtbls:
-#fail       - ea: 0x141C03EB8
+      - ea: 0x1420F8FF8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418334D0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonFractalContinuumHard: # The Fractal Continuum (Hard)
     vtbls:
-#fail       - ea: 0x141C04B38
+      - ea: 0x1420F9C98
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141833520: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonSwallowCompass: # The Swallow's Compass
     vtbls:
-#fail       - ea: 0x141C05810
+      - ea: 0x1420FA990
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141833630: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonBurn: # The Burn
     vtbls:
       - ea: 0x14207B4C8
@@ -12536,10 +12353,8 @@ classes:
       0x1417D2040: ctor
   Client::Game::InstanceContent::InstanceContentDungeonSaintMocianneArboretumHard: # Saint Mocianne's Arboretum (Hard)
     vtbls:
-#fail       - ea: 0x141C06478
+      - ea: 0x1420FB608
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418336D0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonGhimlytDark: # The Ghimlyt Dark
     vtbls:
       - ea: 0x14207C128
@@ -12548,10 +12363,8 @@ classes:
       0x1417D2090: ctor
   Client::Game::InstanceContent::InstanceContentDungeonDohnMheg: # Dohn Mheg
     vtbls:
-#fail       - ea: 0x141C07140
+      - ea: 0x1420FC2F0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418337B0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDungeonTwinning: # The Twinning
     vtbls:
       - ea: 0x14205C188
@@ -12568,86 +12381,58 @@ classes:
     vtbls:
       - ea: 0x1420C1FC8
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x1414963A0: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder002: # Under the Armor
     vtbls:
       - ea: 0x1420C2BF8
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x1414963F0: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder003: # Basic Training: Enemy Strongholds
     vtbls:
       - ea: 0x1420C3828
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-      0x1418049E0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentGuildOrder004: # Hero on the Half Shell
     vtbls:
       - ea: 0x1420C4458
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x141496440: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder005: # Pulling Poison Posies
     vtbls:
       - ea: 0x1420C5088
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x141496490: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder006: # Stinging Back
     vtbls:
       - ea: 0x1420C5CB8
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x1414964D0: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder007: # All's Well that Ends in the Well
     vtbls:
       - ea: 0x1420C68E8
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x141496510: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder008: # Flicking Sticks and Taking Names
     vtbls:
       - ea: 0x1420C7518
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x141496550: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder009: # More than a Feeler
     vtbls:
       - ea: 0x1420C8148
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-      0x141806310: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentGuildOrder010: # Annoy the Void
     vtbls:
       - ea: 0x1420C8D78
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x141496590: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder011: # Shadow and Claw
     vtbls:
       - ea: 0x1420C99A8
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x1414965E0: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder012: # Long Live the Queen
     vtbls:
       - ea: 0x1420CA5D8
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x141496630: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder013: # Ward Up
     vtbls:
       - ea: 0x1420CB208
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x141496680: ctor
   Client::Game::InstanceContent::InstanceContentGuildOrder014: # Solemn Trinity
     vtbls:
       - ea: 0x1420CBE38
         base: Client::Game::InstanceContent::InstanceContentGuildOrderDirector
-    funcs:
-#fail       0x1414966D0: ctor
   Client::Game::InstanceContent::InstanceContentBattleNavel: # The Navel
     vtbls:
       - ea: 0x14207E630
@@ -12664,50 +12449,34 @@ classes:
     vtbls:
       - ea: 0x1420AFDF8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B450: ctor
   Client::Game::InstanceContent::InstanceContentBattleEpicDhormeChimera: # A Relic Reborn: The Chimera
     vtbls:
       - ea: 0x1420A9D78
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B180: ctor
   Client::Game::InstanceContent::InstanceContentBattleEpicHydra: # A Relic Reborn: the Hydra
     vtbls:
       - ea: 0x1420AA988
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B1D0: ctor
   Client::Game::InstanceContent::InstanceContentBattleGilgamesh: # Battle on the Big Bridge
     vtbls:
       - ea: 0x1420AB598
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B220: ctor
   Client::Game::InstanceContent::InstanceContentBattleUltrosTyphon: # The Dragon's Neck
     vtbls:
       - ea: 0x1420AD9C8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B310: ctor
   Client::Game::InstanceContent::InstanceContentBattleGilgameshEnkidu: # Battle in the Big Keep
     vtbls:
       - ea: 0x1420B0A08
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B4A0: ctor
   Client::Game::InstanceContent::InstanceContentBattleGaruda: # The Bowl of Embers (Hard) / The Bowl of Embers (Extreme)
     vtbls:
       - ea: 0x1420A4900
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1417FF4A0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleIfrit: # The Howling Eye (Hard) / The Howling Eye (Extreme)
     vtbls:
       - ea: 0x1420A6120
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418000C0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleTitan: # The Navel (Hard) / The Navel (Extreme)
     vtbls:
       - ea: 0x1420A5510
@@ -12718,134 +12487,90 @@ classes:
     vtbls:
       - ea: 0x1420A6D30
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141800150: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleLeviathan: # The Whorleater (Hard) / The Whorleater (Extreme)
     vtbls:
       - ea: 0x1420A9160
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B130: ctor
   Client::Game::InstanceContent::InstanceContentBattleRamuh: # The Striking Tree (Hard) / The Striking Tree (Extreme)
     vtbls:
       - ea: 0x1420AC1A8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B270: ctor
   Client::Game::InstanceContent::InstanceContentBattleShiva: # The Akh Afah Amphitheatre (Hard) / The Akh Afah Amphitheatre (Extreme)
     vtbls:
       - ea: 0x1420ACDB8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B2C0: ctor
   Client::Game::InstanceContent::InstanceContentBattleOdin: # Urth's Fount
     vtbls:
       - ea: 0x1420AE5D8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B360: ctor
   Client::Game::InstanceContent::InstanceContentBattleUltimaWeapon: # The Minstrel's Ballad: Ultima's Bane
     vtbls:
       - ea: 0x1420A7940
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418001E0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleRavana: # Thok ast Thok (Hard/Extreme)
     vtbls:
       - ea: 0x1420B1618
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418002F0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleBismarck: # The Limitless Blue (Hard/Extreme)
     vtbls:
       - ea: 0x1420B2228
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B640: ctor
   Client::Game::InstanceContent::InstanceContentBattleThordan: # The Singularity Reactor / The Minstrel's Ballad: Thordan's Reign
     vtbls:
       - ea: 0x1420B2E38
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B6E0: ctor
   Client::Game::InstanceContent::InstanceContentBattleNidhogg: # The Final Steps of Faith / The Minstrel's Ballad: Nidhogg's Rage
     vtbls:
-#fail       - ea: 0x141BBFF40
+      - ea: 0x1420B4658
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B7B0: ctor
   Client::Game::InstanceContent::InstanceContentBattleSephirot: # Containment Bay S1T7 / Containment Bay S1T7 (Extreme)
     vtbls:
       - ea: 0x1420B3A48
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B750: ctor
   Client::Game::InstanceContent::InstanceContentBattleSophia: # Containment Bay P1T6 / Containment Bay P1T6 (Extreme)
     vtbls:
-#fail       - ea: 0x141BC0B38
+      - ea: 0x1420B5268
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B810: ctor
   Client::Game::InstanceContent::InstanceContentBattleZurvan: # Containment Bay Z1T9 / Containment Bay Z1T9 (Extreme)
     vtbls:
-#fail       - ea: 0x141BC1730
+      - ea: 0x1420B5E78
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x14147B930: ctor
   Client::Game::InstanceContent::InstanceContentBattleSusano: # The Pool of Tribute / The Pool of Tribute (Extreme)
     vtbls:
-#fail       - ea: 0x141C1ABC0
+      - ea: 0x14210FFD8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418346A0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleLakshmi: # Emanation / Emanation (Extreme)
     vtbls:
-#fail       - ea: 0x141C1B7B8
+      - ea: 0x142110BE8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414A86C0: ctor
   Client::Game::InstanceContent::InstanceContentBattleShinryu: # The Royal Menagerie / The Minstrel's Ballad: Shinryu's Domain
     vtbls:
-#fail       - ea: 0x141C19FB0
+      - ea: 0x14210F3B0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834610: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleTsukuyomi: # Castrum Fluminis / The Minstrel's Ballad: Tsukuyomi's Pain
     vtbls:
-#fail       - ea: 0x141C1DBA0
+      - ea: 0x142113018
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x1418349F0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleYojimbo: # Kugane Ohashi
     vtbls:
-#fail       - ea: 0x141C1E878
+      - ea: 0x142113D08
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834A50: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleRathalos: # The Great Hunt / The Great Hunt (Extreme)
     vtbls:
-#fail       - ea: 0x141C1CFA8
+      - ea: 0x142112408
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414A87B0: ctor
   Client::Game::InstanceContent::InstanceContentBattleByakko: # The Jade Stoa / The Jade Stoa (Extreme)
     vtbls:
-#fail       - ea: 0x141C1C3B0
+      - ea: 0x1421117F8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834820: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleSuzaku: # Hells' Kier / Hells' Kier (Extreme)
     vtbls:
-#fail       - ea: 0x141C1F470
+      - ea: 0x142114918
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-#fail       0x1414A89E0: ctor
   Client::Game::InstanceContent::InstanceContentBattleSeiryu: # The Wreath of Snakes / The Wreath of Snakes (Extreme)
     vtbls:
-#fail       - ea: 0x141C20068
+      - ea: 0x142115528
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141834B00: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentBattleElidibus: # The Seat of Sacrifice / The Seat of Sacrifice (Extreme)
     vtbls:
       - ea: 0x142062FC0
@@ -12868,14 +12593,10 @@ classes:
     vtbls:
 #fail       - ea: 0x141BD98D0
         base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
-    funcs:
-#fail       0x141486300: ctor
   Client::Game::InstanceContent::InstanceContentFrontline03: # The Fields of Glory (Shatter)
     vtbls:
       - ea: 0x1420CEF68
         base: Client::Game::InstanceContent::InstanceContentFrontlineDirector
-    funcs:
-#fail       0x141487AA0: ctor
   Client::Game::InstanceContent::InstanceContentFrontline04: # Onsal Hakair (Danshig Naadam)
     vtbls:
       - ea: 0x1420616F8
@@ -12892,170 +12613,114 @@ classes:
     vtbls:
       - ea: 0x1420E7DE8
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141812390: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleABloodyReunion: # A Bloody Reunion
     vtbls:
       - ea: 0x1420E8A08
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141812440: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleOneLifeForOneWorld: # One Life for One World
     vtbls:
       - ea: 0x1420E9628
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x1418124E0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleCarteneauFlatsHeliodrome: # The Carteneau Flats: Heliodrome
     vtbls:
       - ea: 0x1420EA248
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141812590: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleItProbablyATrap: # It's Probably a Trap
     vtbls:
-#fail       - ea: 0x141C07D88
+      - ea: 0x1420FCF48
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833830: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleInThalName: # In Thal's Name
     vtbls:
-#fail       - ea: 0x141C0F708
+      - ea: 0x1421049B8
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833D90: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleWithHeartAndSteel: # With Heart and Steel
     vtbls:
-#fail       - ea: 0x141C0A248
+      - ea: 0x1420FF450
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x1418339F0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleNaadam: # Naadam
     vtbls:
-#fail       - ea: 0x141C08990
+      - ea: 0x1420FDB68
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x1418338C0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleBloodOnTheDeck: # Blood on the Deck
     vtbls:
-#fail       - ea: 0x141C0AE70
+      - ea: 0x142100090
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833AB0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleFaceOfTrueEvil: # The Face of True Evil
     vtbls:
-#fail       - ea: 0x141C0BA78
+      - ea: 0x142100CB0
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833B10: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleMatsubaMayhem: # Matsuba Mayhem
     vtbls:
 #fail       - ea: 0x141C0C680
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833B70: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleBattleOnBekko: # The Battle on Bekko
     vtbls:
 #fail       - ea: 0x141C0D288
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833BD0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleCuriousGorgeMeetsHisMatch: # Curious Gorge Meets His Match
     vtbls:
 #fail       - ea: 0x141C0DE90
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833C30: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleOurUnsungHeroes: # Our Unsung Heroes
     vtbls:
 #fail       - ea: 0x141C0EA98
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833CC0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleHeartOfTheProblem: # The Heart of the Problem
     vtbls:
 #fail       - ea: 0x141C10F18
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833EB0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleDarkAsTheNightSky: # Dark as the Night Sky
     vtbls:
 #fail       - ea: 0x141C11B20
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833F40: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleResonant: # The Resonant
     vtbls:
 #fail       - ea: 0x141C09630
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833940: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleRaisingTheSword: # Raising the Sword
     vtbls:
 #fail       - ea: 0x141C10310
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833E20: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleOrphansAndTheBrokenBlade: # The Orphans and the Broken Blade
     vtbls:
 #fail       - ea: 0x141C13330
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141834060: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleOurCompromise: # Our Compromise
     vtbls:
 #fail       - ea: 0x141C13F38
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x1418340F0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleDragonSound: # Dragon Sound
     vtbls:
 #fail       - ea: 0x141C12728
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141833FD0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleWhenClansCollide: # When Clans Collide
     vtbls:
 #fail       - ea: 0x141C14B40
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141834180: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleInterdimensionalRift: # Interdimensional Rift
     vtbls:
 #fail       - ea: 0x141C15748
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141834210: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleReturnOfTheBull: # Return of the Bull
     vtbls:
 #fail       - ea: 0x141C16370
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x1418342E0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleEmissaryOfTheDawn: # Emissary of the Dawn
     vtbls:
 #fail       - ea: 0x141C16F78
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141834370: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleWillOfTheMoon: # The Will of the Moon
     vtbls:
 #fail       - ea: 0x141C17B80
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141834400: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleMessengerOfTheWinds: # Messenger of the Winds
     vtbls:
 #fail       - ea: 0x141C18788
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x141834490: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleARequiemForHeroes: # A Requiem for Heroes
     vtbls:
 #fail       - ea: 0x141C19390
         base: Client::Game::InstanceContent::InstanceContentQuestBattle
-    funcs:
-      0x1418345C0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentQuestBattleHardenedHeart: # The Hardened Heart
     vtbls:
       - ea: 0x14205DA48
@@ -13102,8 +12767,6 @@ classes:
     vtbls:
       - ea: 0x1420EAE68
         base: Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise
-    funcs:
-      0x141812640: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentDeepDungeon:
     vtbls:
       - ea: 0x1420EBA80
@@ -13114,56 +12777,38 @@ classes:
     vtbls:
       - ea: 0x1421259A0
         base: Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector
-    funcs:
-#fail       0x1414ACCC0: ctor
   Client::Game::InstanceContent::InstanceContentTreasureHuntDungeon1:
     vtbls:
       - ea: 0x1420ED2C0
         base: Client::Game::InstanceContent::InstanceContentTreasureHuntDungeonDirector
-    funcs:
-      0x1418167C0: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentSeasonalDungeon1: # The Haunted Manor
     vtbls:
       - ea: 0x1420EDED8
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141817400: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentSeasonalDungeon2: # The Valentione's Ceremony
     vtbls:
 #fail       - ea: 0x141C2F690
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141839A60: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRivalWing1:
     vtbls:
 #fail       - ea: 0x141C28870
         base: Client::Game::InstanceContent::InstanceContentRivalWingDirector
-    funcs:
-      0x141839260: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentRivalWing2:
     vtbls:
 #fail       - ea: 0x141C30EE8
         base: Client::Game::InstanceContent::InstanceContentRivalWingDirector
-    funcs:
-      0x14183A850: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentMaskedCarnivale:
     vtbls:
 #fail       - ea: 0x141C31B00
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x14183AB60: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentMahjong:
     vtbls:
 #fail       - ea: 0x141C32750
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x14183AF10: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentAirForceOne: # Air Force One GATE in Gold Saucer
     vtbls:
 #fail       - ea: 0x141C333A0
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x14183C430: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentOceanFishing:
     vtbls:
       - ea: 0x1420647F8
@@ -13174,8 +12819,6 @@ classes:
     vtbls:
       - ea: 0x142066030
         base: Client::Game::InstanceContent::InstanceContentDirector
-    funcs:
-      0x141416400: ctor # diaphora partial
   Client::Game::InstanceContent::InstanceContentVariantDungeon1: # The Sil'dihn Subterrane
     vtbls:
       - ea: 0x1420877F0
@@ -13202,10 +12845,10 @@ classes:
       0x1417D8CC0: ctor
   Client::Game::InstanceContent::PublicContentDirector:
     vtbls:
-#fail       - ea: 0x141C35F50
+      - ea: 0x14212B6D8
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
-#fail       0x1414B2BE0: ctor
+      0x141840AA0: ctor
       0x14184CEA0: HandleEnterContentInfoPacket  # static
   Client::Game::InstanceContent::PublicContentBonding:
     vtbls:
@@ -13268,9 +12911,9 @@ classes:
 #fail       - ea: 0x141C3C750
         base: Client::Game::InstanceContent::PublicContentDirector
     funcs:
-      0x140B76D30: GetInstance # static # diaphora partial
-      0x141849670: GetState # static # diaphora partial
-      0x1418496C0: UseFromHolster # diaphora partial
+      0x141847870: GetInstance # static
+      0x141849670: GetState # static
+      0x1418496C0: UseFromHolster
 #fail       0x1414B9800: ctor
   Client::Game::InstanceContent::PublicContentSouthernFront:
     vtbls:
@@ -13521,12 +13164,12 @@ classes:
 #fail       0x140DF9BE0: ctor
   Client::UI::AddonItemSearch:
     vtbls:
-#fail       - ea: 0x141A99AE8
+      - ea: 0x1420104F0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140DBA740: ctor
-#fail       0x140DBD580: RunSearch
-#fail       0x140DBD300: SetModeFilter
+      0x141458120: ctor
+      0x14145B500: RunSearch
+      0x14145B280: SetModeFilter
   Client::UI::AddonItemSearchResult:
     vtbls:
 #fail       - ea: 0x141A99D28
@@ -13672,7 +13315,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141201A40: ctor
-      0x1412026E0: SetTab # diaphora partial
+      0x1412026E0: SetTab
   Client::UI::AddonFateProgress:
     vtbls:
 #fail       - ea: 0x141ADF628
@@ -14060,9 +13703,9 @@ classes:
       - ea: 0x141FBCDB8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140FBE880: ctor
-#    0x140FBEB60: SetCommonNamePlate  # x, y, scale, etc INLINED IN 7.0 in AddonNamePlate OnRequestedUpdate 1411CBBD5
-#    0x140FBED90: SetPlayerNamePlate # player specific nodes INLINED IN 7.0 ^ 1411CBEB6
+      0x1411C8B30: ctor
+      0x1411C8F00: SetCommonNamePlate  # x, y, scale, etc INLINED IN 7.0 in AddonNamePlate OnRequestedUpdate 1411CBBD5
+      0x1411C9130: SetPlayerNamePlate # player specific nodes INLINED IN 7.0 ^ 1411CBEB6
       0x1411CCEB0: ToggleTextRenderMode # diaphora partial
   Client::UI::AddonTeleport:
     vtbls:
@@ -14154,10 +13797,10 @@ classes:
       0x1412B1E40: Finalize2 # diaphora partial
   Client::UI::AddonWeeklyPuzzle:
     vtbls:
-#fail       - ea: 0x141AFC7F0
+      - ea: 0x141FA4850
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1402FCC90: ctor # diaphora partial
+      0x1410C4370: ctor
       0x1412B7A00: Finalize2 # diaphora partial
   Client::UI::AddonMYCItemBox:
     vtbls:
@@ -14287,13 +13930,13 @@ classes:
       - ea: 0x141FE5208
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410EFB30: ctor
+      0x1413266D0: ctor
   Client::UI::AddonMJIBuildingProgress:
     vtbls:
       - ea: 0x141FE5448
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410F0B20: ctor
+      0x141327640: ctor
   Client::UI::AddonMJIGatheringNoteBook:
     vtbls:
       - ea: 0x141FE5688
@@ -14305,7 +13948,7 @@ classes:
       - ea: 0x141FE58C8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410F1B90: ctor
+      0x141328D40: ctor
   Client::UI::AddonMJIDisposeShopShipping:
     vtbls:
       - ea: 0x141FE5B08
@@ -14323,37 +13966,37 @@ classes:
       - ea: 0x141FE5F88
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410F4450: ctor
+      0x14132BAC0: ctor
   Client::UI::AddonMJIMinionNoteBook:
     vtbls:
       - ea: 0x141FE61C8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410F7DB0: ctor
+      0x14132FA90: ctor
   Client::UI::AddonMJIBuildingMove:
     vtbls:
       - ea: 0x141FE6428
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410FABC0: ctor
+      0x1413336C0: ctor
   Client::UI::AddonMJIEntrance:
     vtbls:
       - ea: 0x141FE6668
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410FBDB0: ctor
+      0x141334990: ctor
   Client::UI::AddonMJISetting:
     vtbls:
       - ea: 0x141FE6AE8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1410FDF10: ctor
+      0x141336B80: ctor
   Client::UI::AddonMJIPadGuide:
     vtbls:
       - ea: 0x142009650
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1413368E0: ctor # diaphora partial
+      0x14142D390: ctor
   Client::UI::AddonMcGuffin:
     vtbls:
 #fail       - ea: 0x141AFBE80
@@ -14365,19 +14008,19 @@ classes:
       - ea: 0x141FA9458
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140F150A0: ctor
+      0x141109970: ctor
   Client::UI::AddonYKWNote:
     vtbls:
       - ea: 0x141FA85A8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140F0B020: ctor
+      0x1410FEA30: ctor
   Client::UI::AddonDescriptionYTC:
     vtbls:
       - ea: 0x141FC5E88
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1401EB9B0: ctor # diaphora partial
+      0x1412167A0: ctor # diaphora partial
   Client::UI::AddonMYCWarResultNotebook:
     vtbls:
 #fail       - ea: 0x141AFD7D0
@@ -14389,19 +14032,19 @@ classes:
       - ea: 0x141FED480
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1411395A0: ctor
+      0x141379D00: ctor
   Client::UI::AddonOrnamentNoteBook:
     vtbls:
       - ea: 0x141FA9218
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140F12F20: ctor
+      0x1411073A0: ctor
   Client::UI::AddonPvPCharacter:
     vtbls:
       - ea: 0x141FB8C38
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x140F9CE00: ctor
+      0x1411A0F20: ctor
   Client::UI::AddonPvpProfile:
     vtbls:
 #fail       - ea: 0x141ADA470
@@ -14437,13 +14080,13 @@ classes:
       - ea: 0x141FED6C0
         base: Client::UI::AddonTargetInfoBase
     funcs:
-#fail       0x14113A200: ctor
+      0x14137A970: ctor
   Client::UI::AddonTargetInfoBuffDebuff:
     vtbls:
       - ea: 0x141FED900
         base: Client::UI::AddonTargetInfoBase
     funcs:
-#fail       0x14113A960: ctor
+      0x14137B0C0: ctor
   Client::UI::AddonTargetInfoCastBar:
     vtbls:
       - ea: 0x141FEDB40
@@ -14473,14 +14116,14 @@ classes:
       - ea: 0x141FEE680
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14113D430: ctor
+      0x14137DC70: ctor
       0x14137DE10: Finalize2 # diaphora partial
   Client::UI::AddonMainCommand:
     vtbls:
       - ea: 0x141FF8C80
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x141155940: ctor
+      0x1413997D0: ctor
       0x141399950: Finalize2 # diaphora partial
   Client::UI::AddonParameterWidget:
     vtbls:
@@ -14505,7 +14148,7 @@ classes:
       - ea: 0x141FF9FA8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x141159F60: ctor
+      0x14139E7C0: ctor
   Client::UI::AddonMoney:
     vtbls:
       - ea: 0x141FFA1E8
@@ -14523,7 +14166,7 @@ classes:
       - ea: 0x142020EA0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1411E5BD0: ctor
+      0x1414D5290: ctor
   Client::UI::AddonDTR:
     vtbls:
       - ea: 0x141FFAA18
@@ -14541,7 +14184,7 @@ classes:
       - ea: 0x141FFAEC8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14115EAC0: ctor
+      0x1413A3C80: ctor
   Client::UI::AddonActionBarBase:
     vtbls:
       - ea: 0x141FFB110
@@ -14579,26 +14222,26 @@ classes:
       - ea: 0x141FFB718
         base: Client::UI::AddonActionBarX
     funcs:
-#fail       0x141164BA0: ctor
+      0x1413AA7E0: ctor
   Client::UI::AddonPartyList:
     vtbls:
       - ea: 0x141FFBD20
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1413ABC00: ctor # diaphora partial
+      0x1413ABC00: ctor
       0x1413ACF20: ResizeForPartySize # diaphora partial
   Client::UI::AddonAllianceListX:
     vtbls:
       - ea: 0x141FFBF68
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1413B02C0: ctor # diaphora partial
+      0x1413B02C0: ctor
   Client::UI::AddonToDoList:
     vtbls:
       - ea: 0x141FFC978
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1413B18A0: ctor # diaphora partial
+      0x1413B6850: ctor
       0x140F0BF10: Finalize2 # diaphora partial
   Client::UI::AddonActionCross:
     vtbls:
@@ -14619,7 +14262,7 @@ classes:
       - ea: 0x141FFD508
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1413C01E0: ctor # diaphora partial
+      0x1413C01E0: ctor
       0x1413C0300: Finalize2 # diaphora partial
   Client::UI::AddonActionDoubleCrossBase:
     vtbls:
@@ -14648,7 +14291,7 @@ classes:
       - ea: 0x141FFE098
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1413C34E0: ctor # diaphora partial
+      0x1413C34E0: ctor
   Client::UI::AddonLimitBreak:
     vtbls:
       - ea: 0x141FFE2D8
@@ -14660,7 +14303,7 @@ classes:
       - ea: 0x141FFE550
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x140F6A420: ctor # diaphora partial
+      0x1413C5510: ctor
       0x1413C5860: Finalize2 # diaphora partial
   Client::UI::AddonHudLayoutWindow:
     vtbls:
@@ -16109,22 +15752,20 @@ Client::UI::AddonJobHudWHM0::HealingGaugeSimple:
       0x14026A170: PerspectiveFovLH # (fieldOfViewY, aspectRatio, znearPlane, zfarPlane)
   Common::Component::BGCollision::Math::Vector3:
     funcs:
-#fail       0x1404C9DB0: Normalize
+      0x1405D2280: Normalize
       0x141E04CA0: ctorRotatedAroundAxis
   Common::Component::BGCollision::Math::Vector4:
     funcs:
       0x141DEF8C0: ctorMulMatrix
-#fail       0x14192E580: UnitW
-#fail       0x141936630: QuatMultiplyBy
+      0x141DF7CE0: UnitW
   Common::Component::BGCollision::Math::Matrix4x4:
     funcs:
-#fail       0x141924590: ctorRotX
-#fail       0x141924740: ctorRotY
-#fail       0x1419248E0: ctorRotZ
-#fail       0x141924AC0: ctorScale
-#fail       0x141924B90: ctorTranslation
+      0x141DF8420: ctorRotX
+      0x141DF8500: ctorRotY
+      0x141DF85C0: ctorRotZ
+      0x141DF86B0: ctorScale
+      0x141DF8720: ctorTranslation
       0x141DF87D0: Invert
-#fail       0x14192CFC0: TransformVector4
   Common::Component::BGCollision::Math::AABB:
     funcs:
       0x141DFB670: ctorTransformed
