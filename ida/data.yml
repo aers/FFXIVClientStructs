@@ -933,10 +933,8 @@ classes:
       0x140D5EC70: ctor
   Client::Game::GoldSaucer::GFateDanceDirector:
     vtbls:
-      - ea: 0x141F65E98
+      - ea: 0x141F6A7C0
         base: Client::Game::GoldSaucer::GFateDirector
-    funcs:
-      0x140D464D0: ctor
   Client::Game::GoldSaucer::GFateRouletteDirector: # Any Way the Wind Blows
     vtbls:
       - ea: 0x141F6B168
@@ -1584,9 +1582,9 @@ classes:
       0x140617790: GetInt
       0x1406177D0: GetUInt  # these two could be backwards
       0x140617810: GetFloat
-      0x140617830: GetString
-      0x140617850: GetString2
-      0x140617890: SetString
+      0x140617830: GetManagedString
+      0x140617850: GetString
+      0x140617890: SetManagedString
       0x140617920: Copy # = operator
       0x140617990: EqualTo # == operator
       0x140617B10: GetVectorValue2
@@ -1601,7 +1599,7 @@ classes:
       0x140618320: ReleaseManagedMemory # called by SetString, frees old strings
 #fail       0x1405A52B0: SetBool
 #fail       0x1405A5550: SetInt
-      0x1406CAA80: SetString2
+      0x1406CAA80: SetString
 #fail       0x1405A57D0: SetUInt
   Component::GUI::AtkEvent:
     funcs:
@@ -4470,7 +4468,7 @@ classes:
       0x1402D3B60: SetDataCenter
       0x1402D7F10: OpenTitleDCWorldMap
       0x1402D9E80: OpenTitleConnectDialog
-#fail       0x1402627E0: OpenLoginWaitDialog
+      0x1402DCAC0: OpenLoginWaitDialog
       0x1402DAA10: OpenLobbyScreenText
       0x1402DD960: CloseDialog
       0x1402DE610: ShowCharacterNotFoundWarning
@@ -4478,6 +4476,7 @@ classes:
       0x1403BA560: SetupLobbyCamera
   Client::UI::Agent::LobbyData:
     funcs:
+      0x1402AC8A0: GetCharacterEntryFromServer
       0x1402AF920: GetCharacterEntryByIndex
   Client::UI::Agent::LobbySubscriptionInfo:
     funcs:
@@ -5740,7 +5739,7 @@ classes:
       0x141C3E0F0: Initialize
       0x140640D80: SetScale0  # SetScale jumps to this
       0x14064CC60: SetSize
-      0x1416B7900: GetTimelineLabel
+      0x14063F0A0: GetTimelineLabel
       0x14063EF20: SetTimelineLabel2
       0x14063EFA0: SetTimelineLabel3
       0x14063F050: GetTimelineFrameIdx
@@ -8484,6 +8483,8 @@ classes:
     vtbls:
       - ea: 0x141EC83A0
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14031C490: OpenForCharacterData
   Client::UI::Agent::AgentLetter:
     vtbls:
       - ea: 0x141EC8498
@@ -10039,7 +10040,7 @@ classes:
     funcs:
       0x141556BA0: ctor
       0x141556F30: OpenForGearset
-  Client::UI::Agent::AgentBannerEditor::State:
+  Client::UI::Agent::AgentBannerEditorState:
     funcs:
       0x1415E8070: Save
       0x1415E13F0: GetPresetIndex
@@ -10321,7 +10322,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CD1000: ctor
-      0x140CD1140: OpenCharaCardByContentId
+      0x140CD1140: OpenCharaCardForContentId
       0x140CD11C0: OpenCharaCardForObject
   Client::UI::Agent::AgentCharaCard::Storage:
     funcs:
@@ -13141,10 +13142,10 @@ classes:
       0x14109A400: ctor
   Client::UI::AddonRetainerList:
     vtbls:
-      - ea: 0x141FBA738
+      - ea: 0x141FA5390
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1411AC630: ctor
+      0x1410CAE70: ctor
   Client::UI::AddonRetainerTaskList:
     vtbls:
       - ea: 0x141FA4A90
@@ -13167,10 +13168,10 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCharacter:
     vtbls:
-      - ea: 0x141FBABB8
+      - ea: 0x141FA43D0
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1411AD5F0: ctor
+      0x1410BF020: ctor
       0x1410C23A0: SetTab
   Client::UI::AddonCharacterStatus:
     vtbls:
@@ -13555,7 +13556,7 @@ classes:
       0x14135A7B0: ctor
   Client::UI::AddonNamePlate::BakePlateRenderer:
     vtbls:
-      - ea: 0x141FBCDB8
+      - ea: 0x141FBCD98
         base: Component::GUI::AtkTextNodeRenderer
   Client::UI::AddonNamePlate:
     vtbls:
@@ -13655,7 +13656,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410C4370: ctor
-      0x1412EB700: Finalize2
+#      0x1412EB700: Finalize2 # inlined in dtor
   Client::UI::AddonMYCItemBox:
     vtbls:
       - ea: 0x141FDBBA8
@@ -14281,7 +14282,7 @@ classes:
       0x1414DF7F0: ctor
   Client::UI::AddonGSInfoCardDeck:
     vtbls:
-      - ea: 0x142023BA0
+      - ea: 0x142023720
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGSInfoEditDeck:
     vtbls:
