@@ -52,6 +52,7 @@ public unsafe partial struct CrossRealmGroup {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray8<CrossRealmMember> _groupMembers;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe struct CrossRealmMember {
     [FieldOffset(0x08)] public ulong ContentId;
