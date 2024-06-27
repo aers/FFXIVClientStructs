@@ -12,4 +12,8 @@
       <ProjectReference Include="..\FFXIVClientStructs\FFXIVClientStructs.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="YamlDotNet" Version="15.3.0" />
+    </ItemGroup>
+
 </Project>
