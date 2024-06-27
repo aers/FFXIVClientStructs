@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x460)]
 public unsafe partial struct MonsterNoteManager {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 E9", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F B6 4B 22", 3)]
     public static partial MonsterNoteManager* Instance();
 
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray12<MonsterNoteRankInfo> _rankData;

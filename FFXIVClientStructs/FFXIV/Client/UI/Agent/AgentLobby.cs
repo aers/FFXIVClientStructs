@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1DF8)]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 71 18 48 89 01", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 ?? 48 89 01 4C 8B E1", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
     [FieldOffset(0xA00)] public UIModule* UIModule;
@@ -62,7 +62,7 @@ public unsafe partial struct AgentLobby {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5")]
     public partial void UpdateLobbyUIStage();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 4D 2F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24")]
     public partial void UpdateCharaSelectDisplay(sbyte index, bool a2);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 4A 84 C0")]

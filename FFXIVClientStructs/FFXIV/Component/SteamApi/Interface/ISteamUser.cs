@@ -12,6 +12,6 @@ public unsafe partial struct ISteamUser {
     /// <summary>
     /// Gets the instance of the context wrapper used for managing the <c>ISteamUser</c> API.
     /// </summary>
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 48 8B 10 48 89 93", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? FF 15 ?? ?? ?? ?? 48 8D 54 24 ?? 48 8B 08", 3)]
     public static partial ISteamUser* Instance();
 }

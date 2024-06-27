@@ -210,7 +210,7 @@ public unsafe partial struct CurrencyManager {
     /// <summary>
     /// Checks if the item is in any bucket.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B CD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 3B 84 C0")]
     public partial bool HasItem(uint itemId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 32 8B D7")]
@@ -229,7 +229,7 @@ public unsafe partial struct CurrencyManager {
     /// <param name="maxCount">The maximum amount of this currency a player can have.</param>
     /// <param name="count">The amount of this currency currently held by the player.</param>
     /// <param name="isUnlimited">Wether the currency has a limit or not.</param>
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 40 41 8B D8")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 7D 80 00 48 8D 0D ?? ?? ?? ?? 8B 74 24 70")]
     public partial void SetItemData(sbyte specialId, uint itemId, uint maxCount, uint count, bool isUnlimited);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]

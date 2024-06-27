@@ -21,7 +21,7 @@ public unsafe partial struct AtkComponentTreeList {
     [MemberFunction("48 83 EC 28 3B 91 ?? ?? ?? ??")]
     public partial AtkComponentTreeListItem* GetItem(uint index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 39 BD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 FF 75 22")]
     public partial void LoadAtkValues(
         uint atkValuesCount,
         AtkValue* atkValues,

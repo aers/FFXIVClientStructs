@@ -45,7 +45,7 @@ public unsafe partial struct AgentContext {
     [FieldOffset(0x1748)] public byte ContextMenuIndex;
     [FieldOffset(0x1749)] public byte OpenAtPosition; // if true menu opens at Position else at cursor location
 
-    [MemberFunction("E8 ?? ?? ?? ?? 45 88 7C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 88 74 24")]
     public partial void OpenContextMenu(bool bindToOwner = true, bool closeExisting = true);
 
     [MemberFunction("41 0F B6 C0 89 91")]
@@ -54,7 +54,7 @@ public unsafe partial struct AgentContext {
     [MemberFunction("E8 ?? ?? ?? ?? 44 39 BB ?? ?? ?? ?? 0F 86 ?? ?? ?? ??")]
     public partial bool OpenSubMenu();
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 48 8D 8B ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 48 8B 01 FF 90 ?? ?? ?? ?? B2 01")]
     [GenerateStringOverloads]
     public partial void OpenYesNo(byte* text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool setOwner = true);
 

@@ -34,7 +34,7 @@ public unsafe partial struct StatusManager {
     [MemberFunction("66 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 6C 24 ??")]
     public partial void AddStatus(ushort statusId, ushort param = 0, void* u3 = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 FF 3C")]
+    [MemberFunction("83 FA 3C 73 50")]
     public partial void RemoveStatus(int statusIndex, byte u2 = 0); // u2 always appears to be 0
 
     /// <summary>

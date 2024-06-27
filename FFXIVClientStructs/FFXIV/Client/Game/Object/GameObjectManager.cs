@@ -11,7 +11,7 @@ public unsafe partial struct GameObjectManager {
     [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA", 3)]
     public static partial GameObjectManager* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 75 12 48 FF C7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 14 24 49 8B CC 8B D8 FF 52 ?? 45 33 C9")]
     public static partial GameObject* GetGameObjectByIndex(int index);
 
     [GenerateInterop]

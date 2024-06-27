@@ -52,7 +52,7 @@ public unsafe partial struct MapMarkerData {
     [FieldOffset(0x3C)] public ushort RecommendedLevel;
     [FieldOffset(0x3E)] public ushort TerritoryTypeId;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 42 02 75 06")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 8B 86")]
     public partial MapMarkerData* SetData(
         uint levelId,
         Utf8String* tooltipString,

@@ -144,10 +144,10 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("48 85 C9 74 0B 8B 41 44")]
     public partial void GetPositionFloat(float* outX, float* outY);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C5 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 47 30")]
     public partial void SetPositionFloat(float X, float Y);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 03 4C 8D 44 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B FC 4C 8D B5")]
     public partial void GetPositionShort(short* outX, short* outY);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 B5")]
@@ -201,7 +201,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EE 01 75 D5 48 8B 4C 24 ??")]
     public partial void ToggleVisibility(bool enable);
 
-    [MemberFunction("F6 81 ?? ?? ?? ?? ?? 88 91 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 63 46 30")]
     public partial void SetAlpha(byte alpha);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 85 C0 75 55")]

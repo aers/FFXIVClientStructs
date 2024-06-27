@@ -42,7 +42,7 @@ public unsafe partial struct ConstantBuffer {
             return default;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7E F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 5C 24 40")]
     public partial void* LoadSourcePointer(int byteOffset, int byteSize, byte flags = DefaultLoadSourcePointerFlags);
 }
 

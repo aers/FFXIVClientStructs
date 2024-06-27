@@ -168,7 +168,7 @@ public unsafe partial struct CustomizeData {
 
     public byte this[int idx] => Data[idx];
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 48 8D 75 20")]
+    [MemberFunction("40 53 48 83 EC ?? 48 8B D9 48 8D 42")]
     public partial bool NormalizeCustomizeData(CustomizeData* source);
 }
 

@@ -89,7 +89,7 @@ public unsafe partial struct LayoutManager {
 public unsafe partial struct OutdoorAreaLayoutData {
     [FieldOffset(0x1F0), FixedSizeArray] internal FixedSizeArray60<OutdoorPlotLayoutData> _plots;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 0E 41 80 F9 FF")]
+    [MemberFunction("40 55 41 56 48 83 EC 38 49 63 E8")]
     public partial void SetFixture(uint plot, uint part, uint fixtureId);
 
     [MemberFunction("40 55 48 83 EC 20 41 0F B6 E9")]

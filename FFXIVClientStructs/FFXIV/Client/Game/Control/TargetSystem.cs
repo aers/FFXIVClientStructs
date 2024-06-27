@@ -32,7 +32,7 @@ public unsafe partial struct TargetSystem {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 33 ED EB 16")]
     public partial GameObjectId GetCurrentTargetId();
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 C0 ED")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 41 8B C4")]
     public partial GameObject* GetCurrentTarget();
 
     [MemberFunction("48 85 D2 74 2C 4C 63 89")]

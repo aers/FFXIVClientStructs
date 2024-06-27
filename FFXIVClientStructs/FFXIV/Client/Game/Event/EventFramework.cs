@@ -29,20 +29,20 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 98")]
     public partial InstanceContentDirector* GetInstanceContentDirector();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 19 83 B8 ?? ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 0B 0F B6 90")]
     public partial PublicContentDirector* GetPublicContentDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??")]
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 3B 86")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8")]
     public static partial uint GetCurrentContentId();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 38 44 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 38 46 66")]
     public static partial ContentType GetCurrentContentType();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3B C7 75 53")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 89 45 82")]
     public static partial ushort GetContentFinderCondition(ContentType contentType, uint contentId);
 
     [MemberFunction("48 83 EC 28 48 8B 05 ?? ?? ?? ?? 48 85 C0 74 2C")]

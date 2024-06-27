@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("CharacterClass")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D 83 ?? ?? ?? ?? 48 89 90", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 0F 57 C0 48 89 93 ?? ?? ?? ?? 48 8D 83 ?? ?? ?? ?? 48 89 93 ?? ?? ?? ?? 45 33 C0", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x830)]
 public unsafe partial struct AddonCharacterClass {
     [FieldOffset(0x220), FixedSizeArray] internal FixedSizeArray31<Pointer<AtkComponentButton>> _buttonNodes;

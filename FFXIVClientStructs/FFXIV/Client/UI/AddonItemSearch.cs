@@ -29,7 +29,7 @@ public unsafe partial struct AddonItemSearch {
 
     [FieldOffset(0x3EDB)] public bool PartialMatch;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF 44 8D 42 FF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B DE 48 8D 7D 30")]
     public partial void RunSearch(bool ignoreFilters = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 41 41 8D 40 FD")]

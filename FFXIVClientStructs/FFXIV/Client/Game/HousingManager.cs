@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 public unsafe partial struct HousingManager {
-    [MemberFunction("E8 ?? ?? ?? ?? EB 23 8D 42 FB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 94")]
     public static partial HousingManager* Instance();
 
     [FieldOffset(0x00)] public HousingTerritory* CurrentTerritory;
@@ -98,7 +98,7 @@ public unsafe partial struct HousingManager {
     /// <param name="point">The point to calculate</param>
     /// <param name="speed">Speed of the submarine to use</param>
     /// <returns>Survey Duration</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 01 43 10 8B CD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 7D 0F")]
     public static partial uint GetSubmarineSurveyDuration(byte point, short speed);
 
     /// <summary>

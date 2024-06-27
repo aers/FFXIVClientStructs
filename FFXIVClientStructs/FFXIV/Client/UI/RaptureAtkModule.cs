@@ -56,7 +56,7 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x28F90)] internal nint ShellCommands; // only 1 function "48 83 EC 38 4C 8B C2 C7 44 24" to open links?
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 89 5F 58")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 9E ?? ?? ?? ?? 48 89 5E 58")]
     public partial bool ChangeUiMode(uint uiMode);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4E 30")]

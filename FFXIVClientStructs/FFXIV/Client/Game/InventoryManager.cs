@@ -15,7 +15,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 40 38 78 10")]
     public partial InventoryContainer* GetInventoryContainer(InventoryType inventoryType);
 
-    [MemberFunction("E9 ?? ?? ?? ?? 33 C0 C3 0F B6 51 51")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 4E 80 3B 00")]
     public partial InventoryItem* GetInventorySlot(InventoryType inventoryType, int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F1")]
@@ -74,7 +74,7 @@ public unsafe partial struct InventoryManager {
     private static partial int GetSpecialItemId(byte switchCase);
 
     /// <summary>  Gets the current maximum weekly number of limited tomestones tha player can earn. </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B D8 E8 ?? ?? ?? ?? 42 8D 0C 3B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 42 8D 0C 3B")]
     public static partial int GetLimitedTomestoneWeeklyLimit();
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
@@ -161,19 +161,19 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial ushort GetSpiritbond();
 
     /// <summary>Gets the condition from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 66 89 47 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 04 0F B7 45 12")]
     public partial ushort GetCondition();
 
     /// <summary>Gets the crafter's content id from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 EB 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 04 49 8B 46 18")]
     public partial ulong GetCrafterContentId();
 
     /// <summary>Gets the stain from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("0F B6 41 7D 4C 8B CA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 47 01")]
     public partial byte GetStain(int index);
 
     /// <summary>Gets the glamour id from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 80 78 06 00 75 F2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 EB 33")]
     public partial uint GetGlamourId();
 
     /// <summary>Gets the materia id from the specified slot of the original InventoryItem or itself if not symbolic.</summary>
@@ -185,7 +185,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial byte GetMateriaGrade(byte materiaSlot);
 
     /// <summary>Gets the materia count from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? F6 47 14 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 1C 49 8B 4F 10")]
     public partial byte GetMateriaCount();
 }
 

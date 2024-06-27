@@ -92,7 +92,7 @@ public unsafe partial struct QuestManager {
     /// <returns>A <see cref="DateTime"/> in the local time zone.</returns>
     public static DateTime GetNextLeveAllowancesDateTime() => DateTime.UnixEpoch.AddSeconds(GetNextLeveAllowancesUnixTimestamp()).ToLocalTime();
 
-    [MemberFunction("33 C0 4C 8B C1 66 39 81 ?? ?? ?? ?? 0F 94 C0")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 50 48 8B D1 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ?? BA ?? ?? ?? ?? E8 ?? ?? ?? ?? BB")]
     public partial uint GetBeastTribeAllowance();
 
     public bool IsDailyQuestCompleted(ushort questId) {

@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 [Inherits<IManagerBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x228)]
 public unsafe partial struct LayoutWorld {
-    [StaticAddress("0F 84 ?? ?? ?? ?? 48 8B 49 18 48 8B D6", 3, isPointer: true)]
+    [StaticAddress("48 8B D1 48 8B 0D ?? ?? ?? ?? 48 85 C9 74 0A", 6, isPointer: true)]
     public static partial LayoutWorld* Instance();
 
     [FieldOffset(0x018)] public LayoutManager* GlobalLayout;
@@ -31,6 +31,6 @@ public unsafe partial struct LayoutWorld {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 44 89 B7")]
     public partial void UnloadPrefetchLayout();
 
-    [MemberFunction("48 89 6C 24 ?? 56 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 41 20"), GenerateStringOverloads]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 41 20"), GenerateStringOverloads]
     public partial void LoadPrefetchLayout(int type, byte* bgName, byte layerEntryType, uint levelId, uint territoryTypeId, GameMain* gameMain, uint cfcId);
 }

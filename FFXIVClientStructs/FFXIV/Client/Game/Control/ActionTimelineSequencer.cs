@@ -19,7 +19,7 @@ public unsafe partial struct ActionTimelineSequencer {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B BC 24 ?? ?? ?? ?? 4C 8D 9C 24 ?? ?? ?? ?? 49 8B 5B 40")]
     public partial void PlayTimeline(ushort actionTimelineId, void* a3 = null); // Determines which slot the timeline belongs in and then plays it on that slot
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7B 08 48 81 C7")]
+    [MemberFunction("83 FA 0E 73 22")]
     public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 08 0F 28 D0")]

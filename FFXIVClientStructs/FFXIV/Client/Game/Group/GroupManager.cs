@@ -28,7 +28,7 @@ public unsafe partial struct GroupManager {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 80")]
     public partial GroupManager* GetNextInstance(bool getNextInstance = true); // if true, simply adds sizeof(GroupManager) to the `this` pointer
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB B8 E8")]
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 84 C0")]
     public partial bool IsEntityIdInParty(uint entityId);
 
     [MemberFunction("33 C0 44 8B CA F6 81")]

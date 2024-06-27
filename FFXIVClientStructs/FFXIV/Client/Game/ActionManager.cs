@@ -91,10 +91,10 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 42")]
     public partial uint GetActionStatus(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, bool checkRecastActive = true, bool checkCastingActive = true, uint* outOptExtraInfo = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 3B DF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 03 8B 03")]
     public partial uint GetAdjustedActionId(uint actionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 4B 2C")]
+    [MemberFunction("40 53 48 83 EC ?? FF C9")]
     public static partial uint GetSpellIdForAction(ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7F 4C 01 44 0F 28 C8")]
@@ -160,7 +160,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The type of action to check.</param>
     /// <param name="actionId">The ID of the action to check.</param>
     /// <returns>Returns true if the action is off-cooldown or slidecastable.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 37 8B 84 24 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 8B 84 24 ?? ?? ?? ?? 89 46")]
     public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
 
     /// <summary>
@@ -214,7 +214,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B C8 83 E9 01 74 1E")]
     public partial uint GetCurrentCharges(uint actionId);
 
-    [MemberFunction("48 8B C4 48 89 68 ?? 48 89 70 ?? 41 56 48 83 EC")]
+    [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB D6")]
     public partial void AssignBlueMageActionToSlot(int slot, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 33 FF C3")]
@@ -243,7 +243,7 @@ public unsafe partial struct ActionManager {
     /// </summary>
     /// <param name="dutyActionSlot">The Duty Action slot number (0 or 1) to look up.</param>
     /// <returns>Returns an Action ID.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 17 33 C9")]
+    [MemberFunction("E9 ?? ?? ?? ?? 33 C9 E9")]
     public static partial uint GetDutyActionId(ushort dutyActionSlot);
 
     /// <summary>

@@ -32,6 +32,7 @@ public enum AgentId : uint {
     EventFade = 8,
     Context = 9,
     InventoryContext = 10,
+    // TODO new agent = 11,
     Config = 11, // ConfigSystem
     ConfigLog = 12,
     ConfigLogColor = 13,

@@ -132,7 +132,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </summary>
     public bool IsReady => (Flags189 & 0x01) != 0;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 8B ?? ?? ?? ?? ?? 33 C0")]
+    [MemberFunction("33 D2 C7 81 A4 01 00 00 64 00 00 00")]
     public partial void Ctor();
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 33 F6 48 8B 89")]
@@ -141,7 +141,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]
     public partial float GetScale();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 EC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 55 F3")]
     public partial void SetSize(ushort width, ushort height);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 2A C7")]
@@ -153,7 +153,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 66 45 2B E6")]
     public partial float GetGlobalUIScale();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 57 5B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 4B FC")]
     public partial AtkResNode* GetNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 1E")]
@@ -165,7 +165,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 1B")]
     public partial AtkComponentButton* GetButtonNodeById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 57 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 89 46 48")]
     public partial AtkComponentList* GetComponentListById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 55 9F")]
@@ -180,7 +180,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 88 45 67")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 5E 35")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 46 FC")]
     public partial bool SetFocusNode(AtkResNode* node, bool a3 = false, uint a4 = 0);
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>

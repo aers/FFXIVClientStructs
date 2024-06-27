@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Environment;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x910)]
 public unsafe partial struct EnvManager {
-    [StaticAddress("48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 26", 3, isPointer: true)]
+    [StaticAddress("0F 28 F2 48 8B 05", 6, isPointer: true)]
     public static partial EnvManager* Instance();
 
     [FieldOffset(0x08)] public EnvScene* EnvScene;

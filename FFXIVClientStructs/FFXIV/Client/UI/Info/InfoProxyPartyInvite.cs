@@ -22,6 +22,6 @@ public unsafe partial struct InfoProxyPartyInvite {
     [MemberFunction("48 83 EC 38 41 B1 09")]
     public partial bool InviteToPartyContentId(ulong contentId, ushort worldId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 83 ?? ?? ?? ?? 48 85 C0 74 65")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 71 48 8B 83")]
     public partial bool InviteToPartyInInstance(ulong contentId);
 }

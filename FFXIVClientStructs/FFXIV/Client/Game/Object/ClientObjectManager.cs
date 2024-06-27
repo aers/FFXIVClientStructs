@@ -10,7 +10,7 @@ public unsafe partial struct ClientObjectManager {
     [MemberFunction("E8 ?? ?? ?? ?? 41 89 44 FC ??")]
     public partial uint CreateBattleCharacter(uint index = 0xFFFFFFFF, byte param = 0);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 0F B7 EA")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 54 41 56 41 57 48 83 EC 20 0F B7 EA")]
     public partial GameObject* GetObjectByIndex(ushort id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5E 68")]

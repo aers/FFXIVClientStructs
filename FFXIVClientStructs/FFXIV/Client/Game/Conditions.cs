@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 104)]
 public unsafe partial struct Conditions {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D5 E8 ?? ?? ?? ?? 4C 8B B4 24 ?? ?? ?? ??", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 66 2B D8", 3)]
     public static partial Conditions* Instance();
 
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray104<bool> _flags;

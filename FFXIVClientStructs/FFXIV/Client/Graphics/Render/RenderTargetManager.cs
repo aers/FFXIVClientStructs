@@ -46,7 +46,7 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x474)] public ushort DynamicResolutionMaximumHeight;
     [FieldOffset(0x476)] public ushort DynamicResolutionMinimumHeight;
 
-    [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8B B1 ?? ?? ?? ??", 3, isPointer: true)]
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8B 70 70 48 85 F6 74 09 48 8B 06 48 8B CE FF 50 10", 3, isPointer: true)]
     public static partial RenderTargetManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 30 48 8B D0 FF 57 38")]

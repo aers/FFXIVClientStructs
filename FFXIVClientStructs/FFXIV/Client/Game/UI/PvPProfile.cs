@@ -91,6 +91,6 @@ public unsafe partial struct PvPProfile {
     public partial byte GetPreviousSeriesRank();
 
     /// <summary>Gets the previous PvP Series claimed rank.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F8 EB 02 33 FF BA ?? ?? ?? ?? 49 8D 4E 50")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 54 24 ?? 0F B6 D8 49 8D 4E 50")]
     public partial byte GetPreviousSeriesClaimedRank();
 }

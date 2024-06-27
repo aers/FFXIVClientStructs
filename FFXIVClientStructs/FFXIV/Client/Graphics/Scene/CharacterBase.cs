@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // base class for graphics objects representing characters (human, demihuman, monster, and weapons)
 [GenerateInterop(isInherited: true)]
 [Inherits<DrawObject>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 9F D0 00 00 00", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 48 89 07 48 8D 9F ?? ?? ?? ?? B8 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 66 89 87 ?? ?? ?? ?? 48 8B CB", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x8F0)]
 public unsafe partial struct CharacterBase {
     public const int PathBufferSize = 260;

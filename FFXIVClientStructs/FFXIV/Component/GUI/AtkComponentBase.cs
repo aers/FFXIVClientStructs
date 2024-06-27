@@ -16,7 +16,7 @@ public unsafe partial struct AtkComponentBase {
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
     public partial AtkResNode* GetTextNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 9C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 47")]
     public partial AtkResNode* GetImageNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]

@@ -17,7 +17,7 @@ public unsafe partial struct ExdModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB 11 33 C0")]
     public partial ExcelRow* GetRowBySheetIndexAndRowId(uint sheetIndex, uint rowId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 57 F6 48 85 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 1D FF C3")]
     public partial ExcelRow* GetRowBySheetIndexAndRowIndex(uint sheetIndex, uint rowIndex);
 
     [MemberFunction("48 85 D2 74 0D 48 8B 02 48 8B CA 48 FF A0 88 00 00 00")]
@@ -32,7 +32,7 @@ public unsafe partial struct ExdModule {
     [MemberFunction("E8 ?? ?? ?? ?? FE 47 30")]
     public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 89 46 70"), GenerateStringOverloads]
+    [MemberFunction("48 8B 49 20 48 8B 01 48 FF 60 10"), GenerateStringOverloads]
     public partial ExcelSheet* GetSheetByName(byte* sheetName);
 
     [MemberFunction("48 83 EC 38 48 8B 05 ?? ?? ?? ?? 48 8B 88")]

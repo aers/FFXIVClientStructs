@@ -16,6 +16,6 @@ public unsafe partial struct EmoteController {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 FF 0F 84 ?? ?? ?? ?? 8B CF")]
     public partial int GetPoseKind();
 
-    [MemberFunction("E8 ?? ?? ?? ?? FE C3 44 8B F0")]
+    [MemberFunction("E8 ?? ?? ?? ?? FE C3 89 45")]
     public static partial byte GetAvailablePoses(int poseKind);
 }
