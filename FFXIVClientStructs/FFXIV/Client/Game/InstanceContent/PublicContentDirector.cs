@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 // ctor "E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 33 C9"
 [GenerateInterop(isInherited: true)]
 [Inherits<ContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1208)] // TODO: size changed, fix offsets
+[StructLayout(LayoutKind.Explicit, Size = 0x1178)]
 public unsafe partial struct PublicContentDirector {
     // fields from PublicContent sheet
     [FieldOffset(0xD30)] public uint NameOffset; // quite useless here
