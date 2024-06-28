@@ -7147,7 +7147,7 @@ classes:
       0x1407B6C90: ShowLogMessage<uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2)
       0x1407B70E0: ShowLogMessage<uint,uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2, IntegerParameter3)
       0x1407B7590: ShowLogMessage<string> # (this, logMessageId, StringParameter1)
-      0x1407BA3D0: GetContentIdForLogMessage # maybe
+      0x1407BA3D0: GetChatTypeForLogMessage
       0x1407BA410: GetLogMessage
       0x1407BAEF0: GetLogMessageDetail
       0x1407BCE30: FormatLogMessage
