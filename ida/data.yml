@@ -116,7 +116,6 @@ functions:
   0x140585480: PrepareColorSet
   0x140585EB0: ReadStainingTemplate
   0x1405C5420: StartSpursJobEntityWorkerThread
-  0x1405F5200: GetAvailablePoses
   0x140620A10: RemoveAtkEventFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x14064F750: GetScaleListEntryFromScale
   0x140660F20: GetScaleForListOption
@@ -145,7 +144,6 @@ functions:
   0x1400B7BC0: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x1400BAF90: OpenWebURL
   0x140A00B10: IsGatheringTypeRare  # static, takes RowId of GatheringType
-  0x140B12D90: GetTeleportCost
   0x140D02610: SetCondition
   0x140D02E50: IsLocalPlayerLalafell
   0x140E5E010: CreateSelectYesno
@@ -1189,7 +1187,7 @@ classes:
       0x140AC9E60: Initialize
       0x140AC9FE0: ctor
       0x140ACA150: Finalize
-      0x140AC9FA0: dtor  # finalize/dtor may be swapped.
+      0x140ACB560: dtor
       0x140ACA370: RequestData
       0x140ACA3D0: GetSeedBasePtr
       0x140ACA3E0: GetSeasonTarget
@@ -1779,11 +1777,13 @@ classes:
       0x140AD9DA0: IsMeisterFlag
       0x140AD9E10: IsMeisterFlagMaxCount
       0x140ADC170: GetDesynthesisLevelForClassJob
+      0x140ADC3C0: IsGlassesUnlocked
       0x140ADC600: Initialize
       0x140ADDA20: IsCurrentJobCrafter
       0x140ADDA40: IsCurrentJobGatherer
       0x140ADDA60: IsCurrentJobLimited
       0x140ADDBE0: GetParentClassJobId
+      0x140AD9420: IsPlayerStaetFlagSet
       0x140B50F70: ctor
       0x140ADD700: GetAttributeByIndex # (this, index)
   Client::Game::UI::Revive:
@@ -1823,6 +1823,7 @@ classes:
       0x140B11EF0: Teleport
       0x140B13250: TeleportWithTickets
       0x140B132E0: InvokeSelectUseTicket
+      0x140B12D90: GetTeleportCost
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
       - ea: 0x141F5A108
@@ -7622,6 +7623,8 @@ classes:
       - ea: 0x141F0F918
     funcs:
       0x1405F5220: Initialize
+      0x1405F5200: GetAvailablePoses
+      0x1405F8A40: GetPoseKind
   Client::Game::Character::DrawDataContainer:
     vtbls:
       - ea: 0x141F0F588
