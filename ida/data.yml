@@ -105,7 +105,6 @@ functions:
   0x140219E10: j_SleepEx
 #fail   0x1401C04F0: j_Sleep
   0x140281BC0: GetLanguageCode
-  0x1403B8540: CleanupCharaSelectCharacters
 #fail   0x140329430: GetGlobalTextParameter
 #fail   0x1403356E0: std::vector_SetSize
   0x140F2E2A0: GetGameObjectByIndex
@@ -985,9 +984,22 @@ classes:
     instances:
       - ea: 0x142557DB0
         pointer: False
+    vtbls:
+      - ea: 0x141F71378 # it has some abstract base even!
+    funcs:
+      0x140D81880: Create
+      0x140D817B0: GetGroupWithCheck
+      0x140D817E0: GetGroup
+  Client::Game::Group::GroupManager::Group:
+    instances:
+      - ea: 0x142557DD0
+        pointer: False
+      - ea: 0x14255E380
+        name: ReplayInstance
+        pointer: False
     funcs:
       0x140AC3D50: SetPartySize
-      0x140AC3DB0: ctor
+      0x140AC3DB0: Initialize
       0x140AC3E40: SetPartyEmpty
       0x140AC3F00: UpdatePartyPositions
       0x140AC3FE0: UpdateAllianceNormal
@@ -1009,16 +1021,6 @@ classes:
       0x140AC51F0: GetPartyMemberByContentId
       0x140AC5240: GetAllianceMemberByEntityId
       0x140AC52A0: GetPartyOrAllianceMemberByEntityId
-      0x140D81880: Create # TODO: this and below are member functions of GroupManagerManager
-      0x140D817B0: GetInstance
-      0x140D817E0: GetNextInstance
-  Client::Game::Group::GroupManager::Party: # temporary put this here, its the 2 groupmanagers
-    instances:
-      - ea: 0x142557DD0
-        pointer: False
-      - ea: 0x14255E380
-        name: ReplayInstance
-        pointer: False
   Client::Game::Balloon:
     funcs:
       0x141830500: OpenBalloon
@@ -1589,13 +1591,15 @@ classes:
       0x140617B10: GetVectorValue2
       0x140617B30: GetVectorValue3
       0x140617B50: CreateVector
+      0x140617BD0: GetVectorSize
+      0x140617BF0: SetVectorSize
       0x140617C20: CopyVectorValue
       0x140617C50: GetVectorValue
       0x140617C70: SetVectorValue
       0x140617CA0: SetVectorString
       0x140617F40: ChangeType
       0x140617F80: CopyManagedMemory
-      0x140618320: ReleaseManagedMemory # called by SetString, frees old strings
+      0x140618320: ReleaseManagedMemory # ReleaseManagedMemoryInternal in cs
 #fail       0x1405A52B0: SetBool
 #fail       0x1405A5550: SetInt
       0x1406CAA80: SetString
@@ -1644,7 +1648,9 @@ classes:
       0x14068D660: GetEndFrameIdxForLabelId
       0x14068D400: UpdateChildAnimationStates
       0x14068CBF0: UpdateChildAnimationAndLabelStates
-      0x14068CE30: SetTimelineState
+      0x14068CE30: PlayAnimation
+      0x14068D6E0: GetInterpolatedValue
+      0x14068D400: UpdateChildTimelines
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x140618470: ctor
@@ -3537,10 +3543,10 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     vfuncs:
       15: GetCurrentLocationName
-      26: Compare #By IsOnline
+      26: Compare # by IsOnline
       29: CompareHomeworld
     funcs:
-      0x140123280: ctor
+      0x14011A4F0: ctor
       0x14011A730: Finalize
 #fail       0x1400ED760: ClearListDataImpl
       0x14011B6C0: GetContentIdForEntry
@@ -3576,7 +3582,6 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x1400C36C0: ctor
-      0x1401D32C0: Finalize
   Client::UI::Info::InfoProxyDetail:
     vtbls:
       - ea: 0x141EA6830
@@ -3795,7 +3800,7 @@ classes:
     funcs:
       0x140149880: ctor
       0x140149950: Finalize
-  Client::UI::Info::InfoProxyCrossWorldLinkShell:
+  Client::UI::Info::InfoProxyCrossWorldLinkshell:
     vtbls:
       - ea: 0x141EA8520
         base: Client::UI::Info::InfoProxyInterface
@@ -3803,7 +3808,7 @@ classes:
       0x14014A480: ctor
       0x14014B4D0: GetCrossworldLinkshellName
 #      0x14017C6E0: Finalize # inlined in dtor
-  Client::UI::Info::InfoProxyCrossWorldLinkShellMember:
+  Client::UI::Info::InfoProxyCrossWorldLinkshellMember:
     vtbls:
       - ea: 0x141EA8598
         base: Client::UI::Info::InfoProxyCommonList
@@ -5462,14 +5467,14 @@ classes:
       - ea: 0x141EF4B20
         base: Component::GUI::AtkEventListener
     funcs:
-#fail      0x141403A10: ctor
+      0x140622B90: ctor # no xrefs, inlined in AtkStage.ctor
       0x140622D40: Finalize
       0x140623120: AttachTooltip
-      0x14072D5A0: DetachTooltipNode
+      0x1406233B0: DetachTooltip
       0x1406237D0: ShowNodeTooltip  # takes node as argument
       0x140623860: ShowTooltip # similar args to attach tooltip
       0x1406240C0: HideTooltip # (this, addonId, unkBool)
-      0x140624440: DetachTooltipAddon
+      0x140624440: DetachTooltipByAddonId
   Component::GUI::AtkAddonControl:
     vtbls:
       - ea: 0x141EF7318
@@ -5485,7 +5490,7 @@ classes:
       0x1406BFA30: GetChildAddonInfoByAtkUnitBase
   Component::GUI::AtkSimpleTweenHolder:
 #    funcs:
-      # 0x140516980: Update # INLINED IN 7.0 0x14068A88C
+#       0x140516980: Update # INLINED IN 7.0 0x14068A88C
   Component::GUI::AtkSimpleTween:
     vtbls:
       - ea: 0x141EF4B68
@@ -5508,6 +5513,7 @@ classes:
     vtbls:
       - ea: 0x141EF4AE8
     funcs:
+      0x14061F5A0: ctor
       0x14061F640: LoadTexture # (this, texturePath, version)
       0x14061F810: LoadIconTexture
       0x14061FA30: GetLoadState
@@ -5543,8 +5549,8 @@ classes:
         base: Component::GUI::AtkTexture
   Component::GUI::AtkUIColorHolder:
     funcs:
-     # 0x1405286A0: ctor # INLINED IN 7.0
-     # 0x140528780: Update # inlined @ 0x14068A881
+      # 0x1405286A0: ctor # INLINED IN 7.0
+      # 0x140528780: Update # inlined @ 0x14068A881
       0x14063C7B0: GetColor
   Component::GUI::AtkStage:
     instances:
@@ -5558,14 +5564,14 @@ classes:
       0x14062ABF0: GetFocus
       0x14062AC20: SetFocus
       0x14062ACC0: ClearFocus
-      0x140620530: RemoveAllEvents # (this, AtkComponentBase)
+      # 0x140620530: RemoveAllEvents # gone, inlined (using AtkEventManager.RemoveAllEvents directly)
       0x14062B5E0: GetNumberArrayData
       0x14062B5F0: GetStringArrayData
       0x14062B600: GetExtendArrayData
       0x14062B710: ctor
       # 0x14051A310: Update INLINED IN 7.0 14068A6D6
       0x140652B60: Instance
-#fail       0x14053C510: GetSingleton2
+      0x140652B70: GetSingleton2
       0x140661A20: GetSingleton3
       0x1406C5EF0: Finalize
   Component::GUI::AtkFontCodeModule:
@@ -5637,14 +5643,12 @@ classes:
   Component::GUI::AtkFontAnalyzer:
     vtbls:
       - ea: 0x141EF5088
-#    funcs:
-#fail       0x140523630: ctor
+    funcs:
+      0x140636E70: ctor
   Component::GUI::AtkDragDropManager:
     vtbls:
       - ea: 0x141EF4B38
         base: Component::GUI::AtkEventListener
-#    funcs:
-#fail       0x140513830: ctor
   Component::GUI::AtkDialogue:
     vtbls:
       - ea: 0x141EF4B50
@@ -5739,7 +5743,7 @@ classes:
       0x140640220: IsVisible
       0x140640250: ToggleVisibility
       0x140640670: GetIsUsingDepthBasedDrawPriority
-      0x140640690: SetUseDepthBasedDrawPriority
+      0x140640690: SetUseDepthBasedPriority
       0x1406406E0: SetDepth
       0x141C3E0F0: Initialize
       0x140640D80: SetScale0  # SetScale jumps to this
@@ -5774,7 +5778,7 @@ classes:
       0x140643550: SetBackgroundColor
       0x140643570: GetText
       0x140643590: GetFontType
-      0x1406435B0: SetFontType
+      0x1406435B0: SetFont
       0x1406435D0: GetFontSize
       0x140643660: SetFontSize
       0x140643770: SetEdgeColor
@@ -5787,7 +5791,7 @@ classes:
       0x1406444E0: GetCharSpacing
       0x140644500: SetLineSpacing
       0x140644520: GetLineSpacing
-#fail       0x140530070: ToggleFontCache
+      0x140644C70: ToggleFontCache
       0x140644F50: ResizeNodeForCurrentText
 #     0x1405A05F0: ctor # INLINED IN 7.0 in CreateResNode
   Component::GUI::AtkNineGridNode:
@@ -5884,6 +5888,7 @@ classes:
       0x140652CE0: UnsubscribeAtkArrayData
       0x140652EF0: SetFocusNode
       0x1406535D0: GetNodeById
+      0x1406536F0: GetComponentNodeById
       0x140653780: GetButtonNodeById
       0x140653AC0: GetComponentListById
       0x140653D40: GetTextNodeById
@@ -6940,9 +6945,13 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14080B660: ctor
+  Client::UI::Misc::HelperInterface:
+    vtbls:
+      - ea: 0x141F598A0
   Client::UI::Misc::CurrencySettingHelper:
     vtbls:
       - ea: 0x141F598E0
+        base: Client::UI::Misc::HelperInterface
     funcs:
       0x140ACEB40: GetDefaultCurrencySetting
       0x140ACEA20: GetRotationArray
@@ -6950,6 +6959,7 @@ classes:
   Client::UI::Misc::BannerModuleHelper:
     vtbls:
       - ea: 0x141F598C0
+        base: Client::UI::Misc::HelperInterface
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141F059C0
@@ -7253,12 +7263,14 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407CC710: ctor
+      0x1407CD890: ChangeHudLayout
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x141F0BCE0
         base: Component::Text::TextChecker::ExecNonMacroFunc
     funcs:
       0x1407D5860: ctor
+      0x1407D5B10: ResolvePlaceholder
   Client::UI::Misc::RaptureGearsetModule:
     vtbls:
       - ea: 0x141F0BCF0
@@ -7277,7 +7289,7 @@ classes:
       0x1407DC120: LinkGlamourPlate
       0x1407DC240: RemoveGlamourPlateLink
       0x1407DC330: HasLinkedGlamourPlate
-      0x1407DC500: GetClassJobIcon
+      0x1407DC500: GetClassJobIconForGearset
       0x1407DCA70: GetBannerIndex
       0x1407DCAD0: SetBannerIndex
       0x1407DCBD0: HasLinkedBanner
@@ -7456,7 +7468,7 @@ classes:
       10: Update
     funcs:
       0x1418694A0: ctor
-      0x141869700: Initialize2
+      0x141869700: Setup
       0x14186A180: ImportPortraitData
       0x14186A4F0: ExportPortraitData
       0x14186A900: ToggleGearVisibility
@@ -8377,7 +8389,6 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BED330: ctor
-      0x140C2D2A0: Finalize
       0x140BEF930: OpenBalloon
       0x140BEFE00: CloseBalloon
       0x140A36030: ResetBalloon
@@ -8483,7 +8494,6 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14031EAE0: ctor
-      0x140637D40: Finalize
   Client::UI::Agent::AgentDetail:
     vtbls:
       - ea: 0x141EC83A0
@@ -9682,7 +9692,6 @@ classes:
         base: Component::GUI::AtkEventListener
     funcs:
       0x14038F1C0: ctor # unused, inlined
-      0x1403CD630: Finalize
   Client::UI::Agent::AgentMiragePrismENpcSatisfaction:
     vtbls:
       - ea: 0x141F62928
@@ -9803,7 +9812,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14153DED0: ctor
-      0x14153DFC0: Finalize
+      0x14153DFC0: Finalize # unused, inlined
   Client::UI::Agent::AgentSubmersibleExplorationMapSelect:
     vtbls:
       - ea: 0x141EC9728
@@ -9814,7 +9823,6 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140B9B040: ctor
-      0x140C2C460: Finalize
   Client::UI::Agent::AgentQuestRedoHud:
     vtbls:
       - ea: 0x141F5C980
@@ -9833,7 +9841,6 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14039E2C0: ctor
-      0x1403CC5D0: Finalize
   Client::UI::Agent::AgentCircleFinder:
     vtbls:
       - ea: 0x141ECB7B0
@@ -15232,7 +15239,7 @@ classes:
         base: Client::Game::Character::CharacterData
     funcs:
       0x1408CF080: ctor # unused, inlined
-      0x1408AFF50: SetupOrnament
+      0x1408CF200: SetupOrnament
   Client::Game::Character::CutsceneCharacter:
     vtbls:
       - ea: 0x142186468
