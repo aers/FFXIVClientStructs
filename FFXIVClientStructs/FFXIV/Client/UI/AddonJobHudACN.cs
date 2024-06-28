@@ -10,12 +10,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudACN0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x340)]
+[StructLayout(LayoutKind.Explicit, Size = 0x350)]
 public unsafe partial struct AddonJobHudACN0 {
-    [FieldOffset(0x260)] public AetherflowACNGaugeData DataPrevious;
-    [FieldOffset(0x270)] public AetherflowACNGaugeData DataCurrent;
-    [FieldOffset(0x280)] public AetherflowACNGauge GaugeStandard;
-    [FieldOffset(0x2E0)] public AetherflowACNGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public AetherflowACNGaugeData DataPrevious;
+    [FieldOffset(0x280)] public AetherflowACNGaugeData DataCurrent;
+    [FieldOffset(0x290)] public AetherflowACNGauge GaugeStandard;
+    [FieldOffset(0x2F0)] public AetherflowACNGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -63,12 +63,12 @@ public unsafe partial struct AddonJobHudACN0 {
 [Addon("JobHudSCH0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x388)]
+[StructLayout(LayoutKind.Explicit, Size = 0x398)]
 public unsafe partial struct AddonJobHudSCH0 {
-    [FieldOffset(0x260)] public FaerieGaugeData DataPrevious;
-    [FieldOffset(0x280)] public FaerieGaugeData DataCurrent;
-    [FieldOffset(0x2A0)] public FaerieGauge GaugeStandard;
-    [FieldOffset(0x330)] public FaerieGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public FaerieGaugeData DataPrevious;
+    [FieldOffset(0x290)] public FaerieGaugeData DataCurrent;
+    [FieldOffset(0x2B0)] public FaerieGauge GaugeStandard;
+    [FieldOffset(0x340)] public FaerieGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -125,12 +125,12 @@ public unsafe partial struct AddonJobHudSCH0 {
 [Addon("JobHudSMN0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x300)]
 public unsafe partial struct AddonJobHudSMN0 {
-    [FieldOffset(0x260)] public AetherflowSMNGaugeData DataPrevious;
-    [FieldOffset(0x270)] public AetherflowSMNGaugeData DataCurrent;
-    [FieldOffset(0x280)] public AetherflowSMNGauge GaugeStandard;
-    [FieldOffset(0x2B8)] public AetherflowSMNGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public AetherflowSMNGaugeData DataPrevious;
+    [FieldOffset(0x280)] public AetherflowSMNGaugeData DataCurrent;
+    [FieldOffset(0x290)] public AetherflowSMNGauge GaugeStandard;
+    [FieldOffset(0x2C8)] public AetherflowSMNGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -173,18 +173,18 @@ public unsafe partial struct AddonJobHudSMN0 {
 [Addon("JobHudSMN1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4B0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x508)]
 public unsafe partial struct AddonJobHudSMN1 {
-    [FieldOffset(0x260)] public TranceGaugeData DataPrevious;
-    [FieldOffset(0x298)] public TranceGaugeData DataCurrent;
-    [FieldOffset(0x2D0)] public TranceGauge GaugeStandard;
-    [FieldOffset(0x3D8)] public TranceGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public TranceGaugeData DataPrevious;
+    [FieldOffset(0x2A8)] public TranceGaugeData DataCurrent;
+    [FieldOffset(0x2E0)] public TranceGauge GaugeStandard;
+    [FieldOffset(0x430)] public TranceGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct TranceGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
+        /*[FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0C)] public int Phase;
         [FieldOffset(0x10)] public int SummonTimeLeft;
         [FieldOffset(0x14)] public int SummonTimeMax;
@@ -193,65 +193,66 @@ public unsafe partial struct AddonJobHudSMN1 {
         [FieldOffset(0x1E)] public byte GarudaReady;
         [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray3<int> _prerequisites2;
         [FieldOffset(0x2C)] public int CurrentEgi;
-        [FieldOffset(0x30)] public int Attunement;
+        [FieldOffset(0x30)] public int Attunement;*/
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x108)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x150)]
     public partial struct TranceGauge {
-        [FieldOffset(0x010)] public AtkResNode* Container;
-        [FieldOffset(0x018)] public AtkResNode* CarbunclePlate;
-        [FieldOffset(0x020)] public AtkImageNode* CarbuncleBar;
-        [FieldOffset(0x028)] public AtkTextNode* CarbuncleGaugeValue;
-        [FieldOffset(0x038)] public AtkResNode* SummonPlate;
-        [FieldOffset(0x040)] public AtkResNode* SummonHead;
-        [FieldOffset(0x048)] public AtkTextNode* TranceGaugeValue;
-        [FieldOffset(0x058)] public AtkImageNode* TranceBar;
-        [FieldOffset(0x068)] public AtkResNode* SummonWing;
-        [FieldOffset(0x070)] public AtkResNode* SummonBarMask;
-        [FieldOffset(0x078)] public AtkResNode* EgiGems;
-        [FieldOffset(0x080)] public AtkComponentTextNineGrid* EgiTimerDisplay;
-        [FieldOffset(0x088)] public EgiGauge IfritGauge;
-        [FieldOffset(0x0B0)] public EgiGauge TitanGauge;
-        [FieldOffset(0x0D8)] public EgiGauge GarudaGauge;
+        /* [FieldOffset(0x010)] public AtkResNode* Container;
+         [FieldOffset(0x018)] public AtkResNode* CarbunclePlate;
+         [FieldOffset(0x020)] public AtkImageNode* CarbuncleBar;
+         [FieldOffset(0x028)] public AtkTextNode* CarbuncleGaugeValue;
+         [FieldOffset(0x038)] public AtkResNode* SummonPlate;
+         [FieldOffset(0x040)] public AtkResNode* SummonHead;
+         [FieldOffset(0x048)] public AtkTextNode* TranceGaugeValue;
+         [FieldOffset(0x058)] public AtkImageNode* TranceBar;
+         [FieldOffset(0x068)] public AtkResNode* SummonWing;
+         [FieldOffset(0x070)] public AtkResNode* SummonBarMask;
+         [FieldOffset(0x078)] public AtkResNode* EgiGems;
+         [FieldOffset(0x080)] public AtkComponentTextNineGrid* EgiTimerDisplay;
+         [FieldOffset(0x088)] public EgiGauge IfritGauge;
+         [FieldOffset(0x0B0)] public EgiGauge TitanGauge;
+         [FieldOffset(0x0D8)] public EgiGauge GarudaGauge;
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-        public partial struct EgiGauge {
-            [FieldOffset(0x00)] public AtkComponentBase* Container;
-            [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
-            [FieldOffset(0x10)] public AtkResNode* Gem;
-            [FieldOffset(0x18)] public AtkResNode* Silhouette;
-            [FieldOffset(0x20)] public int Status; // 0 = Spent, 1 = Available, 2 = Active, 3 = Locked
-        }
+         [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+         public partial struct EgiGauge {
+             [FieldOffset(0x00)] public AtkComponentBase* Container;
+             [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
+             [FieldOffset(0x10)] public AtkResNode* Gem;
+             [FieldOffset(0x18)] public AtkResNode* Silhouette;
+             [FieldOffset(0x20)] public int Status; // 0 = Spent, 1 = Available, 2 = Active, 3 = Locked
+         }*/
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct TranceGaugeSimple {
-        [FieldOffset(0x10)] public AtkComponentGaugeBar* TranceGaugeBar;
-        [FieldOffset(0x18)] public AtkResNode* SummonIcon;
-        [FieldOffset(0x20)] public AtkComponentTextNineGrid* TranceTimerDisplay;
-        [FieldOffset(0x30)] public AtkResNode* EgiContainer;
-        [FieldOffset(0x38)] public AtkComponentTextNineGrid* EgiTimerDisplay;
-        [FieldOffset(0x40)] public EgiGaugeSimple IfritGauge;
-        [FieldOffset(0x60)] public EgiGaugeSimple TitanGauge;
-        [FieldOffset(0x80)] public EgiGaugeSimple GarudaGauge;
-        [FieldOffset(0xA0)] public AtkComponentBase* EgiIconContainer;
-        [FieldOffset(0xA8)] public AtkResNode* EgiIcons;
-        [FieldOffset(0xB0)] public AtkResNode* IfritIcon;
-        [FieldOffset(0xB8)] public AtkResNode* TitanIcon;
-        [FieldOffset(0xC0)] public AtkResNode* GarudaIcon;
-        [FieldOffset(0xC8)] public bool EgiActive;
-        [FieldOffset(0xD0)] public AtkResNode* TimelineFrameId;
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-        public struct EgiGaugeSimple {
-            [FieldOffset(0x00)] public AtkComponentBase* Gem;
-            [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
-            [FieldOffset(0x10)] public AtkResNode* GemGlow;
-            [FieldOffset(0x18)] public int Status;
-        }
+        /*  [FieldOffset(0x10)] public AtkComponentGaugeBar* TranceGaugeBar;
+          [FieldOffset(0x18)] public AtkResNode* SummonIcon;
+          [FieldOffset(0x20)] public AtkComponentTextNineGrid* TranceTimerDisplay;
+          [FieldOffset(0x30)] public AtkResNode* EgiContainer;
+          [FieldOffset(0x38)] public AtkComponentTextNineGrid* EgiTimerDisplay;
+          [FieldOffset(0x40)] public EgiGaugeSimple IfritGauge;
+          [FieldOffset(0x60)] public EgiGaugeSimple TitanGauge;
+          [FieldOffset(0x80)] public EgiGaugeSimple GarudaGauge;
+          [FieldOffset(0xA0)] public AtkComponentBase* EgiIconContainer;
+          [FieldOffset(0xA8)] public AtkResNode* EgiIcons;
+          [FieldOffset(0xB0)] public AtkResNode* IfritIcon;
+          [FieldOffset(0xB8)] public AtkResNode* TitanIcon;
+          [FieldOffset(0xC0)] public AtkResNode* GarudaIcon;
+          [FieldOffset(0xC8)] public bool EgiActive;
+          [FieldOffset(0xD0)] public AtkResNode* TimelineFrameId;
+
+          [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+          public struct EgiGaugeSimple {
+              [FieldOffset(0x00)] public AtkComponentBase* Gem;
+              [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
+              [FieldOffset(0x10)] public AtkResNode* GemGlow;
+              [FieldOffset(0x18)] public int Status;
+          }*/
     }
 }

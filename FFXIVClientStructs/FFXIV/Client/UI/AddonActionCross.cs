@@ -9,39 +9,39 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_ActionCross")]
 [GenerateInterop]
 [Inherits<AddonActionBarBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x710)]
+[StructLayout(LayoutKind.Explicit, Size = 0x720)]
 public unsafe partial struct AddonActionCross {
-    [FieldOffset(0x248)] public ChangeSetUI ChangeSet;
-    [FieldOffset(0x3A0)] public AtkComponentNode* PadlockNode;
-    [FieldOffset(0x3A8)] public AtkComponentCheckBox* PadlockCheckbox;
+    [FieldOffset(0x258)] public ChangeSetUI ChangeSet;
+    [FieldOffset(0x3B0)] public AtkComponentNode* PadlockNode;
+    [FieldOffset(0x3B8)] public AtkComponentCheckBox* PadlockCheckbox;
 
-    [FieldOffset(0x3B0), FixedSizeArray] internal FixedSizeArray4<SlotGroup> _slotGroups;
+    [FieldOffset(0x3C0), FixedSizeArray] internal FixedSizeArray4<SlotGroup> _slotGroups;
 
-    [FieldOffset(0x530)] public ControlGuide ControlGuideDpad;
-    [FieldOffset(0x578)] public ControlGuide ControlGuideActionButtons;
-    [FieldOffset(0x5C0)] public AtkTextNode* SetNumIconNode;
-    [FieldOffset(0x5C8)] public AtkComponentBase* ControlGuideEditComponent;
-    [FieldOffset(0x6C8)] public AtkResNode* AACRootNode;
-    [FieldOffset(0x6D0)] public AtkResNode* ContainerNode;
-    [FieldOffset(0x6E0)] public byte ButtonMask; // not raw input data; represents input state after keybinds/mappings
+    [FieldOffset(0x540)] public ControlGuide ControlGuideDpad;
+    [FieldOffset(0x588)] public ControlGuide ControlGuideActionButtons;
+    [FieldOffset(0x5D0)] public AtkTextNode* SetNumIconNode;
+    [FieldOffset(0x5D8)] public AtkComponentBase* ControlGuideEditComponent;
+    [FieldOffset(0x6D8)] public AtkResNode* AACRootNode;
+    [FieldOffset(0x6E0)] public AtkResNode* ContainerNode;
+    [FieldOffset(0x6F0)] public byte ButtonMask; // not raw input data; represents input state after keybinds/mappings
 
     // values from 1-20 can be converted to a hotbar ID and left/right bool using GetMappedHotbar()
-    [FieldOffset(0x6E8)] public uint ExpandedHoldMapValueLR;
-    [FieldOffset(0x6EC)] public uint ExpandedHoldMapValueRL;
+    [FieldOffset(0x6F8)] public uint ExpandedHoldMapValueLR;
+    [FieldOffset(0x6FC)] public uint ExpandedHoldMapValueRL;
 
-    [FieldOffset(0x6F0)] public bool SelectedDoubleCrossLeft;
-    [FieldOffset(0x6F4)] public bool SelectedDoubleCrossRight;
-    [FieldOffset(0x700)] public bool InEditMode;
-    [FieldOffset(0x701)] public bool SelectedLeft;
-    [FieldOffset(0x702)] public bool SelectedRight;
-    [FieldOffset(0x703)] public bool DisplayChangeSet;
-    [FieldOffset(0x704)] public bool DisplayPetBarCross;
-    [FieldOffset(0x706)] public bool AlternateDisplayType;
-    [FieldOffset(0x707)] public bool OverrideHidden; // if the XHB is hidden via HUD options, this field indicates whether it should be temporarily revealed
+    [FieldOffset(0x6A0)] public bool SelectedDoubleCrossLeft;
+    [FieldOffset(0x6A4)] public bool SelectedDoubleCrossRight;
+    [FieldOffset(0x710)] public bool InEditMode;
+    [FieldOffset(0x711)] public bool SelectedLeft;
+    [FieldOffset(0x712)] public bool SelectedRight;
+    [FieldOffset(0x713)] public bool DisplayChangeSet;
+    [FieldOffset(0x714)] public bool DisplayPetBarCross;
+    [FieldOffset(0x716)] public bool AlternateDisplayType;
+    [FieldOffset(0x717)] public bool OverrideHidden; // if the XHB is hidden via HUD options, this field indicates whether it should be temporarily revealed
 
-    [FieldOffset(0x708)] public byte AlphaStandard;
-    [FieldOffset(0x709)] public byte AlphaActive;
-    [FieldOffset(0x70A)] public byte AlphaInactive;
+    [FieldOffset(0x718)] public byte AlphaStandard;
+    [FieldOffset(0x719)] public byte AlphaActive;
+    [FieldOffset(0x71A)] public byte AlphaInactive;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x158)]

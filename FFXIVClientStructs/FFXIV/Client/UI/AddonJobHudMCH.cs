@@ -7,14 +7,20 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// MCH - Heat Gauge
 /// </summary>
 [Addon("JobHudMCH0")]
-[StructLayout(LayoutKind.Explicit, Size = 0x3B8)]
+[GenerateInterop]
+[Inherits<AddonJobHud>]
+[StructLayout(LayoutKind.Explicit, Size = 0x3C8)]
 public unsafe partial struct AddonJobHudMCH0 {
-    [FieldOffset(0x000)] public AddonJobHud JobHud;
+
+    [FieldOffset(0x270)] public HeatGaugeData DataPrevious;
+    [FieldOffset(0x2A8)] public HeatGaugeData DataCurrent;
+    [FieldOffset(0x2E0)] public HeatGauge GaugeStandard;
+    [FieldOffset(0x358)] public HeatGaugeSimple GaugeSimple;
 
     [GenerateInterop]
+    [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct HeatGaugeData {
-        [FieldOffset(0x00)] public AddonJobHudGaugeData GaugeData;
         [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
         [FieldOffset(0x0C)] public int HeatValue;
         [FieldOffset(0x10)] public int HeatMax;
@@ -28,9 +34,10 @@ public unsafe partial struct AddonJobHudMCH0 {
         [FieldOffset(0x34)] public int SummonTimeLeft;
     }
 
+    [GenerateInterop]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public partial struct HeatGauge {
-        [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
         [FieldOffset(0x10)] public AtkResNode* HeatContainer;
         [FieldOffset(0x18)] public AtkComponentGaugeBar* HeatGaugeBar;
         [FieldOffset(0x20)] public AtkComponentTextNineGrid* HeatValueDisplay;
@@ -46,9 +53,10 @@ public unsafe partial struct AddonJobHudMCH0 {
         [FieldOffset(0x70)] public int SummonState;
     }
 
+    [GenerateInterop]
+    [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct HeatGaugeSimple {
-        [FieldOffset(0x00)] public AddonJobHudGauge Gauge;
         [FieldOffset(0x10)] public AtkResNode* HeatContainer;
         [FieldOffset(0x18)] public AtkComponentGaugeBar* HeatGaugeBar;
         [FieldOffset(0x20)] public AtkComponentTextNineGrid* HeatValueDisplay;
@@ -61,9 +69,4 @@ public unsafe partial struct AddonJobHudMCH0 {
         [FieldOffset(0x58)] public AtkResNode* BatteryContainer2; // duplicate of 0x38
         [FieldOffset(0x60)] public AtkComponentTextNineGrid* SummonTimerDisplay;
     }
-
-    [FieldOffset(0x260)] public HeatGaugeData DataPrevious;
-    [FieldOffset(0x298)] public HeatGaugeData DataCurrent;
-    [FieldOffset(0x2D0)] public HeatGauge GaugeStandard;
-    [FieldOffset(0x348)] public HeatGaugeSimple GaugeSimple;
 }

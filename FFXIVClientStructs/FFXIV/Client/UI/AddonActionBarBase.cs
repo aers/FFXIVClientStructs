@@ -7,14 +7,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x248)]
+[StructLayout(LayoutKind.Explicit, Size = 0x258)]
 public unsafe partial struct AddonActionBarBase {
-    [FieldOffset(0x220)] public StdVector<ActionBarSlot> ActionBarSlotVector;
+    [FieldOffset(0x230)] public StdVector<ActionBarSlot> ActionBarSlotVector;
 
     /// <summary>
     /// Bitfield representing currently active pulses.
     /// </summary>
-    [FieldOffset(0x238)] public short CurrentPulsingSlots;
+    [FieldOffset(0x248)] public short CurrentPulsingSlots;
 
     /// <summary>
     /// The ID of the hotbar in RaptureHotbarModule that this ActionBar is currently referencing. Changes when cycling to other bars.
@@ -22,17 +22,17 @@ public unsafe partial struct AddonActionBarBase {
     /// <remarks>
     /// This field is ignored for WHXBs.
     /// </remarks>
-    [FieldOffset(0x23C)] public byte RaptureHotbarId;
+    [FieldOffset(0x24C)] public byte RaptureHotbarId;
 
-    [FieldOffset(0x23E)] public byte SlotCount;
-    [FieldOffset(0x23F)] public bool IsLocked;
+    [FieldOffset(0x24E)] public byte SlotCount;
+    [FieldOffset(0x24F)] public bool IsLocked;
     /// <summary>
     /// Whether the current hotbar is considered a "shared" hotbar or not.
     /// </summary>
-    [FieldOffset(0x240)] public bool IsSharedHotbar;
-    [FieldOffset(0x242)] public bool IsCrossHotbar;   // always true on XHB and WXHBs, false elsewhere
-    [FieldOffset(0x243)] public bool DragDropInProgress; // ignored by XHB and WXHBs
-    [FieldOffset(0x245)] public bool DisplayPetBar;
+    [FieldOffset(0x250)] public bool IsSharedHotbar;
+    [FieldOffset(0x252)] public bool IsCrossHotbar;   // always true on XHB and WXHBs, false elsewhere
+    [FieldOffset(0x253)] public bool DragDropInProgress; // ignored by XHB and WXHBs
+    [FieldOffset(0x255)] public bool DisplayPetBar;
 
     /// <summary>
     /// Trigger the "pulse" effect for the specified hotbar slot, similar to what happens on hotbar slot keypress.

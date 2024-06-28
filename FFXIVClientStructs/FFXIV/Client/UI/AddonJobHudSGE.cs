@@ -9,12 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudGFF0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
 public unsafe partial struct AddonJobHudGFF0 {
-    [FieldOffset(0x260)] public EukrasiaGaugeData DataPrevious;
-    [FieldOffset(0x270)] public EukrasiaGaugeData DataCurrent;
-    [FieldOffset(0x280)] public EukrasiaGauge GaugeStandard;
-    [FieldOffset(0x2A0)] public EukrasiaGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public EukrasiaGaugeData DataPrevious;
+    [FieldOffset(0x280)] public EukrasiaGaugeData DataCurrent;
+    [FieldOffset(0x290)] public EukrasiaGauge GaugeStandard;
+    [FieldOffset(0x2B0)] public EukrasiaGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -47,12 +47,12 @@ public unsafe partial struct AddonJobHudGFF0 {
 [Addon("JobHudGFF1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x370)]
+[StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public unsafe partial struct AddonJobHudGFF1 {
-    [FieldOffset(0x260)] public AddersgallGaugeData DataPrevious;
-    [FieldOffset(0x280)] public AddersgallGaugeData DataCurrent;
-    [FieldOffset(0x2A0)] public AddersgallGauge GaugeStandard;
-    [FieldOffset(0x310)] public AddersgallGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public AddersgallGaugeData DataPrevious;
+    [FieldOffset(0x290)] public AddersgallGaugeData DataCurrent;
+    [FieldOffset(0x2B0)] public AddersgallGauge GaugeStandard;
+    [FieldOffset(0x320)] public AddersgallGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
