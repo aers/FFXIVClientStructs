@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Reflection.PortableExecutable;
+using System.Text;
 using FFXIVClientStructs.Havok.Common.Base.System.IO.Reader;
 using FFXIVClientStructs.ResolverTester;
 using InteropGenerator.Runtime;
@@ -46,7 +47,6 @@ unsafe {
             Console.WriteLine($"{address.Name} {address.Value:X}");
     }
 }
-
 /*
 using StreamReader dataReader = new StreamReader(@"..\..\..\..\ida\data.yml");
 
@@ -79,7 +79,7 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
     }
 
     if (functionName == "Instance") {
-        if (theClass.Instances == null) {
+        if (!theClass.Instances.Any()) {
             notfoundOutputs.Add($"No instance found in data.yml for class {className} / signature {functionName} @ {addr.String}");
             notFoundSigs += 1;
             continue;
@@ -107,7 +107,7 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
     }
 
     if (functionName == "StaticVirtualTable") {
-        if (theClass.Vtbls == null) {
+        if (!theClass.Vtbls.Any()) {
             notfoundOutputs.Add($"No vtbl found in data.yml for class {className} / signature {functionName} @ {addr.String}");
             notFoundSigs += 1;
             continue;
@@ -141,7 +141,7 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
     if (functionName == "Dtor")
         functionName = "dtor";
     
-    if (theClass.Funcs == null || !theClass.Funcs.ContainsValue(functionName)) {
+    if (!theClass.Funcs.Any() || !theClass.Funcs.ContainsValue(functionName)) {
         notfoundOutputs.Add($"Function {functionName} of class {className} not found in data.yml for signature {addr.String}");
         notFoundSigs += 1;
         continue;
@@ -171,20 +171,26 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
 
 }
 
-Console.WriteLine($"Total Sigs {Resolver.GetInstance.Addresses.Count}");
-Console.WriteLine($"Skipped Havok Sig Count {havokSigs}");
-Console.WriteLine($"Sigs Not Found in data.yml Count {notFoundSigs}");
-Console.WriteLine($"Sigs Matching data.yml Count {matchedSigs}");
-Console.WriteLine($"Sigs Not Matching data.yml Count {failedSigs}");
+var sb = new StringBuilder();
 
-Console.WriteLine();
+sb.AppendLine($"Total Sigs {Resolver.GetInstance.Addresses.Count}");
+sb.AppendLine($"Skipped Havok Sig Count {havokSigs}");
+sb.AppendLine($"Sigs Not Found in data.yml Count {notFoundSigs}");
+sb.AppendLine($"Sigs Matching data.yml Count {matchedSigs}");
+sb.AppendLine($"Sigs Not Matching data.yml Count {failedSigs}");
 
-Console.WriteLine("Failed Matches");
+sb.AppendLine();
+
+sb.AppendLine("Failed Matches");
 foreach (string line in failedOutputs)
-    Console.WriteLine(line);
+    sb.AppendLine(line);
 
-Console.WriteLine();
+sb.AppendLine();
 
-Console.WriteLine("Not Found in data.yml");
+sb.AppendLine("Not Found in data.yml");
 foreach (string line in notfoundOutputs)
-    Console.WriteLine(line);*/
+    sb.AppendLine(line);
+
+Console.WriteLine(sb.ToString());
+File.WriteAllText(@"..\..\..\..\ida\data-missmatch2.txt", sb.ToString());
+*/
