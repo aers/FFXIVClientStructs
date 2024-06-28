@@ -1783,7 +1783,7 @@ classes:
       0x140ADDA40: IsCurrentJobGatherer
       0x140ADDA60: IsCurrentJobLimited
       0x140ADDBE0: GetParentClassJobId
-      0x140AD9420: IsPlayerStaetFlagSet
+      0x140AD9420: IsPlayerStateFlagSet
       0x140B50F70: ctor
       0x140ADD700: GetAttributeByIndex # (this, index)
   Client::Game::UI::Revive:
@@ -1988,7 +1988,7 @@ classes:
 #    vtbls:
 #      - ea:
 #        base: Common::Component::Excel::ExcelSheetWaiter
-#  Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>:
+  Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>:
 #    vtbls:
 #      - ea:
 #        base: Client::Game::SheetWaiterBase
@@ -3759,7 +3759,7 @@ classes:
       - ea: 0x141EA7F40
         base: Client::UI::Info::InfoProxyNoviceNetworkList
     funcs:
-      0x1401435A0: ctor
+      0x140143520: ctor
   Client::UI::Info::InfoProxyNoviceNetworkMentor:
     vtbls:
       - ea: 0x141EA8070
@@ -8214,7 +8214,6 @@ classes:
        0x1409396E0: ctor
   Client::Game::Character::ActionEffectHandler:
     funcs:
-      0x141872EC0: ctor
       0x140B82BC0: ApplyOneTargetEffect
       0x140B84020: ApplySelfEffects
       0x140B84290: PlaySoundEffect
@@ -8319,7 +8318,7 @@ classes:
       - ea: 0x141F794C8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C88010: ctor
+      0x140f7b510: ctor
       0x140F7BAB0: CanUseEmote
   Client::UI::Agent::AgentMacro:
     vtbls:
@@ -8956,10 +8955,10 @@ classes:
       0x140BC06E0: Finalize
   Client::UI::Agent::AgentTradeMultiple:
     vtbls:
-      - ea: 0x141F5EB08
+      - ea: 0x141f5eb08
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x141540F40: ctor
+      0x140c0eb60: ctor
   Client::UI::Agent::AgentRelicSphereUpgrade:
     vtbls:
       - ea: 0x141F5D0A8
@@ -12829,7 +12828,7 @@ classes:
   Client::Game::InstanceContent::PublicContentBonding:
     vtbls:
       - ea: 0x142138448
-        base: Client::Game::InstanceContent::PublicContentDirector
+        base: Client::Game::InstanceContent::ContentDirector
     funcs:
       0x141841E20: ctor
   Client::Game::InstanceContent::PublicContentTripleTriad:
@@ -15404,7 +15403,7 @@ classes:
       0x140768C50: IsRunningOnSteamDeck
       0x140768C90: ShowGamepadTextInput
       0x140768D10: ShowFloatingGamepadTextInput
-      0x140768DB0: DumpEnteredGamepadText
+      0x140768DB0: DumpEnteredGamepadText  # inlined in GamepadTextInputDismissedCallback
   Component::SteamApi::SteamCallbackBase:
     vtbls:
       - ea: 0x141F05DB0  # the true vtbl
@@ -15639,7 +15638,7 @@ classes:
         base: Client::System::Memory::IMemorySpace
   Common::Math::Vector3:
     funcs:
-      0x1405D2280: Normalize
+      0x140272320: Normalize
       0x1402668B0: TransformWithMatrix4x4
   Common::Math::Matrix4x4:
     funcs:
