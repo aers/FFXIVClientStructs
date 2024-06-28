@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8"
 [GenerateInterop]
 [Inherits<ContainerInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
 

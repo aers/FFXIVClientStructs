@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 05"
 [GenerateInterop]
 [Inherits<ContainerInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x340)]
+[StructLayout(LayoutKind.Explicit, Size = 0x350)]
 public unsafe partial struct TimelineContainer {
     [FieldOffset(0x10)] public ActionTimelineSequencer TimelineSequencer;
     [FieldOffset(0x200)] public TimelineTransitController TimelineTransit;

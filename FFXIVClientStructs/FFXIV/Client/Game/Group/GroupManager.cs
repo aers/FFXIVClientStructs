@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xCB80)]
 public unsafe partial struct GroupManager {
+    // TODO: implement baseclass, size 0x18, shared with CharacterManager
     [FieldOffset(0x0020)] public Group MainGroup;
     [FieldOffset(0x65D0)] public Group ReplayGroup;
 

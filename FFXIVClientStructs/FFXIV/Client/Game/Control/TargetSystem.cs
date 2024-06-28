@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 // Client::Game::Control::TargetSystem
 // ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C0"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x5370)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5730)]
 public unsafe partial struct TargetSystem {
     [FieldOffset(0x80)] public GameObject* Target;
     [FieldOffset(0x88)] public GameObject* SoftTarget;
@@ -17,14 +17,14 @@ public unsafe partial struct TargetSystem {
     [FieldOffset(0x140)] public GameObjectId TargetObjectId;
     [FieldOffset(0x148)] public GameObjectArray ObjectFilterArray0;
 
-    [FieldOffset(0x1A98)] public GameObjectArray ObjectFilterArray1;
-    [FieldOffset(0x2D58)] public GameObjectArray ObjectFilterArray2;
-    [FieldOffset(0x4018)] public GameObjectArray ObjectFilterArray3;
+    [FieldOffset(0x1B88)] public GameObjectArray ObjectFilterArray1;
+    [FieldOffset(0x2F38)] public GameObjectArray ObjectFilterArray2;
+    [FieldOffset(0x42E8)] public GameObjectArray ObjectFilterArray3;
 
     // Names might be inaccurate, these seem to be used to control what the player can interact with at any given time
     // For example, when interacting with the aethernet menu, these values change presumable to limit your ability to select an object other than the aetheryte.
-    [FieldOffset(0x52E0), FixedSizeArray] internal FixedSizeArray8<uint> _targetModes;
-    [FieldOffset(0x5300)] public uint TargetModeIndex;
+    [FieldOffset(0x56A0), FixedSizeArray] internal FixedSizeArray8<uint> _targetModes;
+    [FieldOffset(0x56C0)] public uint TargetModeIndex;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
     public static partial TargetSystem* Instance();
@@ -75,10 +75,10 @@ public unsafe partial struct TargetSystem {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x12C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x13B0)]
 public unsafe partial struct GameObjectArray {
     [FieldOffset(0x00)] public int Length;
-    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray599<Pointer<GameObject>> _objects;
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray629<Pointer<GameObject>> _objects;
 
     public GameObject* this[int index] {
         get {

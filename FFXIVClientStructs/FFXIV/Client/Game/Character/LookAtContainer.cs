@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Game::Character::ContainerInterface
 [GenerateInterop]
 [Inherits<ContainerInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x620)]
+[StructLayout(LayoutKind.Explicit, Size = 0xBE0)]
 public unsafe partial struct LookAtContainer {
     [FieldOffset(0x10)] public CharacterLookAtController Controller;
     /// <summary>

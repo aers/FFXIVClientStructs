@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // companion = minion
 [GenerateInterop]
 [Inherits<Character>]
-[StructLayout(LayoutKind.Explicit, Size = 0x23A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2340)]
 public partial struct Companion;
