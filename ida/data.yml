@@ -7525,15 +7525,15 @@ classes:
       7: GetRadius
       8: GetHeight
       11: GetSex
-      16: EnableDraw
-      17: DisableDraw
-      21: SetDrawObject
-      27: GetDrawObject
-      28: GetDrawObject_2
-      29: UpdateRadius
-      30: Highlight
-      38: SetReadyToDraw
-      39: Update
+      12: EnableDraw
+      13: DisableDraw
+      17: SetDrawObject
+      23: GetDrawObject
+      24: GetDrawObject_2
+      25: UpdateRadius
+      26: Highlight
+      34: SetReadyToDraw
+      35: Update
       47: GetNameId
       57: IsDead
       58: IsNotMounted
