@@ -49,7 +49,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x2934C)] public uint GilCap;
 
     [FieldOffset(0x29390)] public uint LocalPlayerClassJobId;
-    [FieldOffset(0x39394)] public uint LocalPlayerLevel;
+    [FieldOffset(0x29394)] public uint LocalPlayerLevel;
 
     [FieldOffset(0x29428)] internal ExcelSheet* AddonParamSheet;
     [FieldOffset(0x29430)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
