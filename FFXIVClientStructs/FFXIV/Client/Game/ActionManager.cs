@@ -88,7 +88,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 41 3A C5 0F 85 ?? ?? ?? ??")]
     public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint extraParam = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 42")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 85 C0")]
     public partial uint GetActionStatus(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, bool checkRecastActive = true, bool checkCastingActive = true, uint* outOptExtraInfo = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 89 03 8B 03")]
@@ -232,7 +232,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The action type to check.</param>
     /// <param name="actionId">The action ID to check.</param>
     /// <returns>Returns true if ants should be drawn, false otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 46 41")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 46 41 80 BF")]
     public partial bool IsActionHighlighted(ActionType actionType, uint actionId);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 8B F9 E8 ?? ?? ?? ?? 4C 8B C3")]

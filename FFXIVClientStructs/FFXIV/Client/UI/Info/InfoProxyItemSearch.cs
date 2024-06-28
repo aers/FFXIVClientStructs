@@ -56,9 +56,6 @@ public unsafe partial struct InfoProxyItemSearch {
     [MemberFunction("40 57 41 56 48 83 EC 48 83 3A 00")]
     public partial void ProcessItemHistory(nint a2, nint a3, nint a4);
 
-    [MemberFunction("44 88 4C 24 ?? 44 89 44 24 ?? 48 89 54 24 ?? 53")]
-    public partial nint ProcessItemHistory_Internal(nint a2, uint a3, char a4);
-
     [MemberFunction("E8 ?? ?? ?? ?? 8B 3F 85 FF")]
     public partial nint ProcessRequestResult(nint a2, nint a3, nint a4, int a5, byte a6, int a7);
 

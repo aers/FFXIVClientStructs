@@ -82,6 +82,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     /// <summary>
     /// Set this AtkValue to reference the specified pointer to a cstring.
     /// The pointer *must* remain valid for the lifetime of this AtkValue!
+    /// Type is set to ValueType.String.
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 41 83 4D")]
     public partial void SetString(byte* stringPtr);
@@ -89,6 +90,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     /// <summary>
     /// Set this AtkValue to hold the specified string. The string value
     /// is copied and stored locally for this object.
+    /// Type is set to ValueType.ManagedString.
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED"), GenerateStringOverloads]
     public partial void SetManagedString(byte* value);

@@ -26,7 +26,7 @@ public unsafe partial struct EmoteHistoryModule {
     public partial bool AddToFavorites(ushort emoteId);
 
     [MemberFunction("48 83 EC 28 83 FA 14 72 07")]
-    public partial bool SetFavoriteEmote(int favoriteSlotIndex, ushort emoteId);
+    public partial bool SetFavorite(int favoriteSlotIndex, ushort emoteId);
 
     [MemberFunction("48 83 EC 28 83 FA 14 73 3D")]
     public partial bool SwapFavorites(int favoriteSlotIndex1, int favoriteSlotIndex2);
@@ -40,7 +40,7 @@ public unsafe partial struct EmoteHistoryModule {
     public bool RemoveFromFavorites(ushort emoteId) {
         for (var i = 0; i < 20; i++)
             if (Favorites[i] == emoteId)
-                return SetFavoriteEmote(i, 0);
+                return SetFavorite(i, 0);
         return false;
     }
 }

@@ -18,7 +18,7 @@ public unsafe partial struct InfoProxyCrossWorldLinkshell {
     [FieldOffset(0x108), FixedSizeArray] internal FixedSizeArray8<CrossWorldLinkshellEntry> _crossWorldLinkshells;
     //530 after
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 45 8D 46 FB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 8D 4E 70")]
     public partial Utf8String* GetCrossworldLinkshellName(uint index);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]

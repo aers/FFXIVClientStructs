@@ -41,7 +41,7 @@ public unsafe partial struct AgentRecipeNote {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 06")]
     public partial void OpenRecipeByItemId(uint itemId);
 
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 83 B9 ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 85 ?? ?? ?? ??")]
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 83 B9 ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 85 ?? ?? ?? ?? 83 B9 ?? ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 83 B9 ?? ?? ?? ?? ??")]
     public partial void OpenRecipeByRecipeIdInternal(uint internalRecipeId); // Add 0x10_000 to the Recipe row ID
 
     [MemberFunction("40 55 56 57 48 83 EC 20 80 B9")]
@@ -49,7 +49,7 @@ public unsafe partial struct AgentRecipeNote {
 }
 
 [GenerateInterop]
-[VirtualTable("E8 ?? ?? ?? ?? 48 8B F8 48 8B CE 48 89 BB", [1, 13])]
+[VirtualTable("48 8B 47 10 48 8D 0D ?? ?? ?? ??", 7)]
 [StructLayout(LayoutKind.Explicit, Size = 0x260)]
 public unsafe partial struct RecipeSearchContext {
     [FieldOffset(0xE0)] public bool IsExact;

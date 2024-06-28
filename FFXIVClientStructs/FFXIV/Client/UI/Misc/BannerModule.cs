@@ -63,12 +63,6 @@ public unsafe partial struct BannerModuleData {
     [FieldOffset(0x3E4E)] public byte NextId;
 
     [FieldOffset(0x3E58)] public BannerModule* BannerModule;
-
-    [MemberFunction("40 56 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B F1 7C 08")]
-    public partial BannerModuleEntry* CreateBanner();
-
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0A F0 FF C3 48 FF C7 83 FB 6E 72 D6 48 8B 5C 24 ??")]
-    public partial bool DeleteBanner(int bannerIndex);
 }
 
 // ctor "E8 ?? ?? ?? ?? 0F B6 84 3E"

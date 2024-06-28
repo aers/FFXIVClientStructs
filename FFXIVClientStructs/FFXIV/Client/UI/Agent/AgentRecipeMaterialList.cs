@@ -21,9 +21,6 @@ public unsafe partial struct AgentRecipeMaterialList {
     [MemberFunction("E8 ?? ?? ?? ?? C6 47 08 00 EB 30")]
     public partial void OpenByRecipeId(ushort recipeId, uint amount = 1);
 
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 BA ?? ?? ?? ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 5A")]
-    public partial void OpenRecipeResultItemContextMenu();
-
     [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
     public struct RecipeData {
         [FieldOffset(0xB8)] public ushort RecipeId;

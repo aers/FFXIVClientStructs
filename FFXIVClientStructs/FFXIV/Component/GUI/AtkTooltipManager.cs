@@ -39,10 +39,13 @@ public unsafe partial struct AtkTooltipManager {
     [FieldOffset(0x18)] public AtkStage* AtkStage;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 F6")]
-    public partial void AddTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
+    public partial void AttachTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 39 75 CB")]
+    public partial void DetachTooltip(AtkResNode* targetNode);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 45 8D 44 24")]
-    public partial void RemoveTooltip(AtkResNode* targetNode);
+    public partial void DetachTooltipByAddonId(ushort addonId, bool removeEvents = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 EB 02")]
     public partial void ShowTooltip(
