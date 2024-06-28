@@ -861,10 +861,18 @@ classes:
       0x1415FEB60: SetObjectAt #(idx, object)
       0x1415FEB90: RemoveObjectAt
       0x1404BD7F0: HasObjectAt
+  Client::Game::Character::CharacterManagerInterface: # todo: needs a better name, interface for CharacterManager and GroupManager
+    vtbls:
+      - ea: 0x141EA5A00
+    vfuncs:
+      5: dtor
   Client::Game::Character::CharacterManager: # networked characters
     instances:
       - ea: 0x1425558E0
         pointer: False
+    vtbls:
+      - ea: 0x141F25390
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140937B40: Initialize
       0x1409381C0: Update
@@ -983,6 +991,7 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141F71378 # it has some abstract base even!
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140D81880: Create
       0x140D817B0: GetGroupWithCheck
