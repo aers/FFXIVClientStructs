@@ -70,18 +70,18 @@ public unsafe partial struct RaptureHotbarModule {
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
     /// (indices 0 to 9) and cross hotbars (indices 10 to 17).
     /// </summary>
-    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray18<HotBar> _hotBars;
+    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray18<Hotbar> _hotbars;
 
-    public Span<HotBar> StandardHotBars => new(Unsafe.AsPointer(ref HotBars[0]), 10);
-    public Span<HotBar> CrossHotBars => new(Unsafe.AsPointer(ref HotBars[10]), 8);
+    public Span<Hotbar> StandardHotbars => new(Unsafe.AsPointer(ref Hotbars[0]), 10);
+    public Span<Hotbar> CrossHotbars => new(Unsafe.AsPointer(ref Hotbars[10]), 8);
 
-    [FieldOffset(0xFC90)] public HotBar PetHotBar;
-    [FieldOffset(0x10A90)] public HotBar PetCrossHotBar;
+    [FieldOffset(0xFC90)] public Hotbar PetHotbar;
+    [FieldOffset(0x10A90)] public Hotbar PetCrossHotbar;
 
     /// <summary>
     /// A scratch hotbar slot used for temporary operations such as saving and temporary rewrites.
     /// </summary>
-    [FieldOffset(0x11890)] public HotBarSlot ScratchSlot;
+    [FieldOffset(0x11890)] public HotbarSlot ScratchSlot;
 
     // No idea how this field works. Observed so far:
     // 15 (0x0E) - Quest mount (?)
@@ -99,7 +99,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// To retrieve PvP hotbar information, pass in the result of the <see cref="GetPvPSavedHotbarIndexForClassJobId"/>
     /// method.
     /// </remarks>
-    [FieldOffset(0x11974), FixedSizeArray] internal FixedSizeArray65<SavedHotBarGroup> _savedHotBars;
+    [FieldOffset(0x11974), FixedSizeArray] internal FixedSizeArray65<SavedHotbarGroup> _savedHotbars;
 
     [FieldOffset(0x28714)] public CrossHotbarFlags CrossHotbarFlags;
 
@@ -139,7 +139,7 @@ public unsafe partial struct RaptureHotbarModule {
     [FieldOffset(0x288F0)] public bool DutyActionsPresent;
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
-    public partial byte ExecuteSlot(HotBarSlot* hotbarSlot);
+    public partial byte ExecuteSlot(HotbarSlot* hotbarSlot);
 
     [MemberFunction("83 FA 12 77 28 41 83 F8 10")]
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
@@ -157,7 +157,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// Search through the hotbar module and reloads all hotbar slots associated with the specified macro. Used when
     /// a user updates a specific macro in any way that would change its hotbar display (e.g. new icon or name). This
     /// method will reload data from the saved hotbar information, overwriting any prior manual (unsaved)
-    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// <see cref="HotbarSlot.Set(HotbarSlotType, uint)"/> operations.
     /// </summary>
     /// <param name="macroSet">The macro set to scan for.</param>
     /// <param name="macroIndex">The macro index to scan for.</param>
@@ -168,7 +168,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// Search through the hotbar module and reload all hotbar slots associated with a specific gearset. Used when
     /// a user updates a gearset in any a way that would change its hotbar display (e.g. new name). This
     /// method will reload data from the saved hotbar information, overwriting any prior manual (unsaved)
-    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// <see cref="HotbarSlot.Set(HotbarSlotType, uint)"/> operations.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to refresh.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4D 40 48 8B 01 FF 50 40")]
@@ -197,7 +197,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <summary>
     /// Search through the hotbar module and reload <em>all</em> macro hotbar slots. This method will reload data
     /// from the saved hotbar information, overwriting any prior manual (unsaved)
-    /// <see cref="HotBarSlot.Set(HotbarSlotType, uint)"/> operations.
+    /// <see cref="HotbarSlot.Set(HotbarSlotType, uint)"/> operations.
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 8B C5 48 8B 4C 24 ?? 48 33 CC E8 ?? ?? ?? ?? 48 8B 9C 24")]
     public partial void ReloadAllMacroSlots();
@@ -208,9 +208,9 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="hotbarId">The hotbar ID (0 to 17) to select.</param>
     /// <param name="slotId">The slot ID (0 to 15) to select.</param>
-    /// <returns>Returns a pointer to the specified HotBarSlot.</returns>
+    /// <returns>Returns a pointer to the specified HotbarSlot.</returns>
     [MemberFunction("83 FA 12 77 23")]
-    public partial HotBarSlot* GetSlotById(uint hotbarId, uint slotId);
+    public partial HotbarSlot* GetSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
     /// Retrieve's a hotbar slot's designated appearance (the slot type and slot ID) that will be used for icon display
@@ -229,7 +229,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <returns>Returns the same value present in the actionId param.</returns>
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B DA 49 8B F0")]
     public static partial uint GetSlotAppearance(HotbarSlotType* actionType, uint* actionId, ushort* UNK_0xC4,
-        RaptureHotbarModule* hotbarModule, HotBarSlot* slot);
+        RaptureHotbarModule* hotbarModule, HotbarSlot* slot);
 
     /// <summary>
     /// Helper method to check if a specific hotbar is to be shared between all classes or not.
@@ -299,7 +299,7 @@ public unsafe partial struct RaptureHotbarModule {
     public partial bool SetAndSaveFirstGloballyAvailableCrossSlot(HotbarSlotType commandType, uint commandId);
 
     /// <summary>
-    /// Dumps a hotbar slot into a specific save slot within <see cref="SavedHotBars"/> and prepares a file save. Used
+    /// Dumps a hotbar slot into a specific save slot within <see cref="SavedHotbars"/> and prepares a file save. Used
     /// to persist hotbar changes to disk. This method will attempt to resolve the proper index for saving depending on
     /// shared hotbar configuration and specified PvP state.
     /// </summary>
@@ -308,9 +308,9 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="slotId">The slot ID to modify.</param>
     /// <param name="slotSource">The source slot to dump to disk.</param>
     /// <param name="ignoreSharedHotbars">Unclear use, default to false. </param>
-    /// <param name="isPvpSlot">If true, will save to the classJob's PvP SavedHotBars slots.</param>
+    /// <param name="isPvpSlot">If true, will save to the classJob's PvP SavedHotbars slots.</param>
     [MemberFunction("E8 ?? ?? ?? ?? EB 50 48 8B CF")]
-    public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotBarSlot* slotSource,
+    public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotbarSlot* slotSource,
         bool ignoreSharedHotbars, bool isPvpSlot);
 
     /// <summary>
@@ -322,7 +322,7 @@ public unsafe partial struct RaptureHotbarModule {
     public partial void ClearSavedSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
-    /// Loads the specified saved hotbar from <see cref="SavedHotBars"/> into the live hotbar. Will automatically
+    /// Loads the specified saved hotbar from <see cref="SavedHotbars"/> into the live hotbar. Will automatically
     /// respect PVP mode. Will not reload from disk.
     /// </summary>
     /// <param name="classJobId">The ClassJob ID to retrieve a hotbar from.</param>
@@ -331,7 +331,7 @@ public unsafe partial struct RaptureHotbarModule {
     public partial void LoadSavedHotbar(uint classJobId, uint hotbarId);
 
     /// <summary>
-    /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotBars"/>. 
+    /// Get the Saved Hotbar Index for the PVP hotbar for a specific ClassJob, for use in <see cref="SavedHotbars"/>. 
     /// </summary>
     /// <param name="classJobId">The ClassJob to look up, or 0 for the shared PVP hotbar.</param>
     /// <param name="negOneOnInvalid">Return -1 if the ClassJob can't have a PVP variant.</param>

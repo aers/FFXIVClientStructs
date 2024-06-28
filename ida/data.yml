@@ -7185,7 +7185,7 @@ classes:
       0x1407C39C0: ClearPetCrossHotbarSlot  # (this, slotId) -> nint
       0x1407C39E0: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
       0x1407C3A00: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
-#fail      0x1407C35B0: PopulateIntermediateFromSlot  # (this, HotBarSlot*, HotBarUiIntermediate*) # address in the middle of a function
+#fail      0x1407C35B0: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUiIntermediate*) # address in the middle of a function
       0x1407C5310: IsSavedSlotEmpty  # (this, classJobId, hotbarId, slotId) -> bool
       0x1407C7FA0: SetHotbarLocked
       0x1407C7FE0: IsHotbarLocked
@@ -7247,7 +7247,7 @@ classes:
       0x1407C0D60: IsSlotActionTargetInRange2 # (this, HotbarSlotType, uint) -> bool
       0x1407C0CD0: IsActionHighlighted               # (this, commandType, commandId) -> bool
       0x1407C0EE0: GetIntermediateActionType # (this) -> IntermediateActionType - ultimately passed to the NumberArray
-      0x1407C13B0: PopulateIntermediateCooldownInfo # (this, HotBarUiIntermediate*)  - used for array population?
+      0x1407C13B0: PopulateIntermediateCooldownInfo # (this, HotbarUiIntermediate*)  - used for array population?
       0x1407C1250: GetAdjustedCommandId  # ???
       0x1407C2390: LoadMacroSlot
       0x1407C1550: GetSlotActionCooldownPercent  # (this, out int, int) -> int

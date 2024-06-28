@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public partial struct RaptureHotbarModule {
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    public unsafe partial struct HotBarSlot {
+    public unsafe partial struct HotbarSlot {
         public const int Size = 0xE0;
 
         /// The string that appears when a hotbar slot is hovered over.
@@ -250,7 +250,7 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         /// <param name="slotType">The slot type to look up and return information for.</param>
         /// <param name="actionId">The action ID to look up and return information for.</param>
-        /// <returns>Returns the cost value for this HotBarSlot.</returns>
+        /// <returns>Returns the cost value for this HotbarSlot.</returns>
         [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 0F B6 C2 41 8B D8")]
         public partial uint GetCostValueForSlot(HotbarSlotType slotType, uint actionId);
 
@@ -263,7 +263,7 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         /// <param name="slotType">The slot type to look up and return information for.</param>
         /// <param name="actionId">The action ID to look up and return information for.</param>
-        /// <returns>Returns the cost text for this HotBarSlot.</returns>
+        /// <returns>Returns the cost text for this HotbarSlot.</returns>
         [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 29 80 38 00")]
         public partial uint GetCostTextForSlot(HotbarSlotType slotType, uint actionId);
 
@@ -271,7 +271,7 @@ public partial struct RaptureHotbarModule {
         /// Retrieves a <see cref="ActionType"/> for the specified hotbar slot type.
         /// </summary>
         /// <remarks>
-        /// This method doesn't actually read any data from the HotBarSlot it's a member of.
+        /// This method doesn't actually read any data from the HotbarSlot it's a member of.
         /// </remarks>
         /// <param name="type">A <see cref="HotbarSlotType"/> to check against.</param>
         /// <returns>Returns an ActionType if found, else 0xFFFFFFFF.</returns>
@@ -342,12 +342,12 @@ public partial struct RaptureHotbarModule {
     }
 
     /// <summary>
-    /// A special extended <see cref="HotBarSlot"/> used for duty actions
+    /// A special extended <see cref="HotbarSlot"/> used for duty actions
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = Size)]
-    [Inherits<HotBarSlot>]
+    [Inherits<HotbarSlot>]
     public struct DutyActionSlot {
-        public const int Size = HotBarSlot.Size + 8;
+        public const int Size = HotbarSlot.Size + 8;
 
         /// <summary>
         /// The PrimaryCostType from the Action EXD (+0x29).
