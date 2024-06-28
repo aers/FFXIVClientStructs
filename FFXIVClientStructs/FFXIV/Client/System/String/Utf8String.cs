@@ -117,7 +117,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? 85 ED 79")]
     public partial void Clear();
 
-    [MemberFunction("E9 ?? ?? ?? ?? 48 2B D8")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 17 45 85 E4")]
     public partial bool EqualTo(Utf8String* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 25 83 F9 03"), GenerateStringOverloads]
@@ -132,7 +132,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public Utf8String* ToTitleCase() => ToUpper(true, true);
 
     [MemberFunction("40 53 48 83 EC ?? B8 ?? ?? ?? ?? 48 8B DA 4C 3B C8")]
-    public partial Utf8String* SubString(nint destinationAdress, ulong start, ulong length);
+    public partial Utf8String* SubStr(nint destinationAdress, ulong start, ulong length);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 48 3B C3")]
     public partial Utf8String* CopySubStrTo(Utf8String* destination, int start, int length);

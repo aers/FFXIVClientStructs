@@ -24,7 +24,7 @@ public unsafe partial struct AtkTooltipManager {
         [FieldOffset(0x14)] public short Unk_14;
         [FieldOffset(0x16)] public byte Unk_16;
 
-        [MemberFunction("E8 ?? ?? ?? ?? C1 FB 04")]
+        [MemberFunction("E8 ?? ?? ?? ?? 6B 87")]
         public partial void Ctor();
     }
 

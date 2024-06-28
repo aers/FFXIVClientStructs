@@ -1,4 +1,5 @@
 using System.Text;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
@@ -218,4 +219,10 @@ public unsafe partial struct MaterialResourceHandle {
 
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 44 0F B7 89")]
     public partial byte LoadShpkFiles();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 89 04 3E")]
+    public partial Texture* PrepareColorTable(byte stain1Id, byte stain2Id); // aka PrepareColorSet
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B FB EB 07")]
+    public partial void ReadStainingTemplate(byte stainId, Half* colorTable); // TODO: update arguments
 }

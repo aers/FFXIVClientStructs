@@ -63,8 +63,9 @@ public unsafe partial struct LayoutManager {
     // 300: instance pools
     // B70: gfx bg object pool ptr
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 4C 8B 91 ?? ?? ?? ?? 41 8B F9")]
-    public partial void SetInteriorFixture(int floor, int part, int fixtureId, byte unk = 255);
+    // 7.0: inlined in E8 ?? ?? ?? ?? 41 8B 4E 20
+    // [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 4C 8B 91 ?? ?? ?? ?? 41 8B F9")]
+    // public partial void SetInteriorFixture(int floor, int part, int fixtureId, byte unk = 255);
 
     [MemberFunction("8B 02 4C 8D 41 40")]
     public partial void SetActiveFestivals(GameMain.Festival* festivals); // Array of exactly 4 festivals. Use 0 for none.

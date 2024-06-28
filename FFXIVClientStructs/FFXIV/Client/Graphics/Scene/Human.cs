@@ -71,7 +71,7 @@ public unsafe partial struct Human {
     [FieldOffset(0xA38)] public byte* ChangedEquipData;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 E4")]
-    public partial byte SetupVisor(ushort modelId, byte visorState);
+    public partial byte SetupVisor(ushort modelId, bool visorState);
 
     // Updates the customize array and, if not skipEquipment the equip array.
     // data needs to be 26 bytes if not skipEquipment and 66 bytes otherwise.

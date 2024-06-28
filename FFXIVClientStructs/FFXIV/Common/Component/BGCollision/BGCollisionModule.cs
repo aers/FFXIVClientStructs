@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
@@ -42,19 +43,19 @@ public unsafe partial struct BGCollisionModule {
     [FieldOffset(0x88)] public int LoadInProgressCounter; // reset to 1 if any scene has loads in progress during update, otherwise ticks down to 0
     [FieldOffset(0x8C)] public Vector4 ForcedStreamingSphere; // w is radius; if w<0, the rest of the components are ignored and instead camera position is used as center with radius=120
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 0F B6 D6")] // ex to avoid generated name collision
-    public partial bool RaycastEx(RaycastHit* hitInfo, Vector3 origin, Vector3 direction, float maxDistance, int layerMask, int* flags);
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 0F B6 D6")]
+    public partial bool RaycastMaterialFilter(RaycastHit* hitInfo, Vector3 origin, Vector3 direction, float maxDistance, int layerMask, int* flags);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 84 C0 74 ?? 40 38 BD")]
-    public static partial bool Raycast(Vector3 origin, Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 84 C0 75 54")]
     public static partial bool Raycast2(Vector3 origin, Vector3 direction, float maxDistance, RaycastHit* hitInfo, int* flags);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 88 03 32 D2")]
+    public partial bool SweepSphereMaterialFilter(RaycastHit* hitInfo, Vector3 origin, Vector3 direction, float maxDistance, int layerMask, int* flags);
 
     public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
-        var result = Raycast(origin, direction, maxDistance, &hit, flags);
+        var result = Framework.Instance()->BGCollisionModule->RaycastMaterialFilter(&hit, origin, direction, maxDistance, 1, flags);
         hitInfo = hit;
         return result;
     }
@@ -62,12 +63,11 @@ public unsafe partial struct BGCollisionModule {
     public static bool Raycast2(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
-        var result = Raycast2(origin, direction, maxDistance, &hit, flags);
+        var result = Framework.Instance()->BGCollisionModule->SweepSphereMaterialFilter(&hit, origin, direction, maxDistance, 1, flags);
         hitInfo = hit;
         return result;
     }
 }
-
 
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct RaycastHit {

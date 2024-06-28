@@ -135,7 +135,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("33 D2 C7 81 A4 01 00 00 64 00 00 00")]
     public partial void Ctor();
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F9 48 89 01 33 F6 48 8B 89")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 40 F6 C5 01")]
     public partial void Destructor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF CB 0F 28 F8")]

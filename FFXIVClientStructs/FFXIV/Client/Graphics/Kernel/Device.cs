@@ -35,6 +35,6 @@ public unsafe partial struct Device {
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 45 48")]
     public partial ConstantBuffer* CreateConstantBuffer(int byteSize, uint flags, uint unk);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 89 47 98")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 48 8D 7F 20")]
     public partial Texture* CreateTexture2D(int* size, byte mipLevel, uint textureFormat, uint flags, uint unk);
 }

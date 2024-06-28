@@ -29,11 +29,25 @@ public unsafe partial struct TargetSystem {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
     public static partial TargetSystem* Instance();
 
+    /// <summary>
+    /// Method to get the player's current target's ObjectId. Will resolve the hard and soft targets, in
+    /// that order, returning the first one that's set.
+    /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 33 ED EB 16")]
-    public partial GameObjectId GetCurrentTargetId();
+    public partial GameObjectId GetTargetObjectId();
 
+    [Obsolete($"Renamed to {nameof(GetTargetObjectId)}", true)]
+    public GameObjectId GetCurrentTargetId() => GetTargetObjectId();
+
+    /// <summary>
+    /// Method to get the player's current target GameObject. Will resolve the hard and soft targets, in
+    /// that order, returning the first one that's set.
+    /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 41 8B C4")]
-    public partial GameObject* GetCurrentTarget();
+    public partial GameObject* GetTargetObject();
+
+    [Obsolete($"Renamed to {nameof(GetTargetObject)}", true)]
+    public GameObject* GetCurrentTarget() => GetTargetObject();
 
     [MemberFunction("48 85 D2 74 2C 4C 63 89")]
     public partial bool IsObjectInViewRange(GameObject* obj);

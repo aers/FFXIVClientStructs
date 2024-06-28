@@ -51,8 +51,9 @@ public unsafe partial struct TimelineContainer {
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 E8 45 85 ED")]
     public partial uint GetHeightAdjustActionTimelineRowId(GameObjectId target, uint emoteId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? F3 0F 10 B1")]
-    public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot on the target actor and any children (mounts, ornaments)
+    // 7.0: inlined
+    // [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? F3 0F 10 B1")]
+    // public partial void SetSlotSpeed(uint slot, float speed); // Sets the speed of the animation slot on the target actor and any children (mounts, ornaments)
 
     [MemberFunction("0F B7 C2 4C 8B C9 3D 72 02 00 00")]
     public partial void SetLipsOverrideTimeline(ushort actionTimelineId);

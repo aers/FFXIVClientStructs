@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
@@ -236,14 +237,7 @@ public unsafe partial struct PlayerState {
     /// <summary> Get the current state of a specific type of pose. </summary>
     /// <param name="pose"> The type of pose. </param>
     /// <returns> The 0-based value of the pose. </returns>
-    public byte CurrentPose(PoseType pose)
-        => !Enum.IsDefined(pose) ? (byte)0 : SelectedPoses[(int)pose];
-
-    /// <summary> Get the last valid value for a specific type of pose. </summary>
-    /// <param name="pose"> The type of pose. </param>
-    /// <remarks> The returned value represents the count of the type of pose - 1. </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? FE C3 44 8B F0")]
-    public static partial byte AvailablePoses(PoseType pose);
+    public byte CurrentPose(EmoteController.PoseType pose) => !Enum.IsDefined(pose) ? (byte)0 : SelectedPoses[(int)pose];
 
     #region Unlocks
 
@@ -412,7 +406,7 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether the player is a Battle Mentor.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 7C 24 ?? 84 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 04 C6 46 41 01")]
     public partial bool IsBattleMentor();
 
     /// <summary>
@@ -453,14 +447,4 @@ public enum PlayerStateFlag : uint {
     IsTradeMentorStatusActive = 10,
     IsPvPMentorStatusActive = 11,
     Unknown14 = 14,
-}
-
-public enum PoseType : byte {
-    Idle = 0,
-    WeaponDrawn = 1,
-    Sit = 2,
-    GroundSit = 3,
-    Doze = 4,
-    Umbrella = 5,
-    Accessory = 6,
 }

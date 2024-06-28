@@ -15,6 +15,7 @@ public unsafe partial struct VVDActionModule {
     [FieldOffset(0x40)] public byte Action1;
     [FieldOffset(0x41)] public byte Action2;
 
-    [MemberFunction("48 83 EC 28 48 8B 01 88 51 40")]
-    public partial bool SaveActions(byte action1, byte action2);
+    // 7.0: inlined
+    // [MemberFunction("48 83 EC 28 48 8B 01 88 51 40")]
+    // public partial bool SaveActions(byte action1, byte action2);
 }

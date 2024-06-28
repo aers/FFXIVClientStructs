@@ -16,6 +16,19 @@ public unsafe partial struct EmoteController {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 FF 0F 84 ?? ?? ?? ?? 8B CF")]
     public partial int GetPoseKind();
 
-    [MemberFunction("E8 ?? ?? ?? ?? FE C3 89 45")]
-    public static partial byte GetAvailablePoses(int poseKind);
+    /// <summary> Get the last valid value for a specific type of pose. </summary>
+    /// <param name="pose"> The type of pose. </param>
+    /// <remarks> The returned value represents the count of the type of pose - 1. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? FE C3 44 8B F0")]
+    public static partial byte GetAvailablePoses(PoseType pose);
+
+    public enum PoseType : byte {
+        Idle = 0,
+        WeaponDrawn = 1,
+        Sit = 2,
+        GroundSit = 3,
+        Doze = 4,
+        Umbrella = 5,
+        Accessory = 6,
+    }
 }

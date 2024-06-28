@@ -92,7 +92,7 @@ functions:
   0x140067EF0: GetMyDocumentsFolder #as UTF8String
   0x1400A52B0: GetPerformanceFrequency
   0x1400A6660: CreateDirectoryRecursive
-  0x1400B63C0: GetCurrentUnixTimestamp # in seconds
+  0x1400B5CA0: Client::UI::IsPlayerCharacterName
   0x1400B64F0: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400B7C40: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1400B7C80: Client::UI::GetNumberAsBoxedChar # (uint) accepts numbers 0-30
@@ -103,10 +103,10 @@ functions:
   0x1400BA3D0: GetCurrentWorldId
   0x1401D6F70: GetTime
   0x140219E10: j_SleepEx
-#fail   0x1401C04F0: j_Sleep
+  0x140219E20: j_Sleep
   0x140281BC0: GetLanguageCode
 #fail   0x140329430: GetGlobalTextParameter
-#fail   0x1403356E0: std::vector_SetSize
+  0x1406C4700: std::vector_SetSize
   0x140F2E2A0: GetGameObjectByIndex
   0x140786B40: GetRandomInteger
   0x140786BA0: GetRandomFloat
@@ -116,14 +116,13 @@ functions:
   0x140585480: PrepareColorSet
   0x140585EB0: ReadStainingTemplate
   0x1405C5420: StartSpursJobEntityWorkerThread
-  0x1405F5200: GetAvailablePoses
   0x140620A10: RemoveAtkEventFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x14064F750: GetScaleListEntryFromScale
   0x140660F20: GetScaleForListOption
   0x1406BCC70: Component::GUI::TextModuleInterface::GetTextLabelByID
 #fail   0x14064BB40: GetLocalTextParameter
   0x140785550: FormatNumber
-  0x1407B18F0: ConvertLogMessageIdToCharaLogKind
+  0x1407B18F0: ConvertLogMessageIdToScreenLogKind
   0x1408354D0: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
   0x1408355C0: GetEventItemName
   0x140835750: GetItemIcon # (uint itemId, Component::Exd::Sheets::Item* itemRow) -> uint
@@ -145,7 +144,6 @@ functions:
   0x1400B7BC0: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x1400BAF90: OpenWebURL
   0x140A00B10: IsGatheringTypeRare  # static, takes RowId of GatheringType
-  0x140B12D90: GetTeleportCost
   0x140D02610: SetCondition
   0x140D02E50: IsLocalPlayerLalafell
   0x140E5E010: CreateSelectYesno
@@ -268,6 +266,7 @@ functions:
   0x1417161E0: luaL_typerror
   0x141716240: luaL_unref
   0x1417162C0: luaL_where
+  0x1419B85A0: luaB_tostring
   0x1419AFF90: lua_getinfo
   0x1419B0080: lua_getlocal
   0x1419B00F0: lua_getstack
@@ -291,7 +290,6 @@ functions:
   0x141B3DBF0: _invalid_parameter_noinfo
   0x141B3DC10: _invalid_parameter_noinfo_noreturn
   0x141B2D920: MemCpy
-  0x141B2DFD0: MemSet
   0x140060910: StaticMalloc #uses MemoryManager if avail, but fail saves malloc
   0x140060C50: MemAlloc
   0x14026ADF0: MatrixMultiply
@@ -366,7 +364,6 @@ functions:
   0x1408F2DD0: ProcessPacketNPCYell
   0x14163E9D0: ProcessPacketUIModulePacket
   0x140D02000: IsInMordionGaol # if this returns true, i'm sorry for you
-  0x140D636E0: WorldToScreenPoint
   0x1417D2D50: GetInstanceContentCrystallineConflictDirector
   0x14183C400: GetInstanceContentMahjongDirector
   0x141BD42E0: OodleNew # oodle code starts here
@@ -425,7 +422,7 @@ classes:
       0x140062440: GetAnimationSpace
       0x140062460: GetUISpace
       0x1400624E0: GetFileSpace
-      0x140062480: GetSoundSpace_1
+      0x140062480: GetSoundSpace
       0x1400624A0: GetSoundSpace_2
       0x140060D20: SpaceAlloc
   Client::Game::GameMain:
@@ -541,9 +538,9 @@ classes:
       0x1408A4AF0: UpdateParam
       0x1408A4B10: SetFirstHalf
       0x1408A4BA0: SetSecondHalf
-      0x1408A4C40: GetStatusIdByIndex
-      0x1408A4C60: GetRemainingTimeByIndex
-      0x1408A4C90: GetSourceIdByIndex
+      0x1408A4C40: GetStatusId
+      0x1408A4C60: GetRemainingTime
+      0x1408A4C90: GetSourceId
       0x1408A4E50: GetStatusIndex
       0x1408A4EA0: GetParamForStatus
       0x1408A4F10: ProcessHotDot
@@ -564,8 +561,8 @@ classes:
       0x140FC1B80: Update
       0x140FC22F0: GetRetainerBySortedIndex
       0x140FC2320: GetRetainerByHiredIndex
-      0x140FC2380: GetLastSelectedRetainer
-      0x140FC23D0: SetLastSelectedRetainerId
+      0x140FC2380: GetActiveRetainer
+      0x140FC23D0: SetActiveRetainer
       0x140FC23E0: SetRetainerObjectId
       0x140FC23F0: IsRetainerSummoned
       0x140FC2410: GetRetainerCount
@@ -826,8 +823,8 @@ classes:
       0x1417BA480: ctor
   Client::Game::Object::GameObjectManager::ObjectArrays:
     funcs:
-      0x14093A9C0: GetFilteredObjectById
-      0x14093AA50: GetNetworkedObjectById
+      0x14093A9C0: GetObjectByGameObjectId
+      0x14093AA50: GetObjectByEntityId
       0x14093C570: SortNetworked
       0x14093C690: SortFiltered
   Client::Game::Object::GameObjectManager: # all game objects
@@ -1049,7 +1046,7 @@ classes:
       0x140B191F0: GetMemberBattleCharaByIndex
   Client::Game::QuestManager:
     instances:
-      - ea: 0x1408FB230
+      - ea: 0x1427639A0
         pointer: False
     funcs:
       0x1408FB230: GetSingleton
@@ -1081,7 +1078,7 @@ classes:
       0x1408935E0: ApplyGlamourPlate
   Client::Game::CurrencyManager:
     instances:
-      - ea: 0x140D81EC0
+      - ea: 0x142788ED0
         pointer: True
     funcs:
       0x140D81ED0: ctor
@@ -1189,7 +1186,7 @@ classes:
       0x140AC9E60: Initialize
       0x140AC9FE0: ctor
       0x140ACA150: Finalize
-      0x140AC9FA0: dtor  # finalize/dtor may be swapped.
+      0x140ACB560: dtor
       0x140ACA370: RequestData
       0x140ACA3D0: GetSeedBasePtr
       0x140ACA3E0: GetSeasonTarget
@@ -1280,6 +1277,7 @@ classes:
         pointer: False
     funcs:
       0x140D006C0: ctor
+      0x140D00E50: GetCurrentWeather
       0x140D00E90: GetIndividualWeather
       0x140D00F10: HasIndividualWeather
       0x140D00FF0: GetWeatherForHour
@@ -1600,10 +1598,10 @@ classes:
       0x140617F40: ChangeType
       0x140617F80: CopyManagedMemory
       0x140618320: ReleaseManagedMemory # ReleaseManagedMemoryInternal in cs
-#fail       0x1405A52B0: SetBool
-#fail       0x1405A5550: SetInt
+      # 0x1405A52B0: SetBool # inlined at 0x14068840E
+      0x1406CA930: SetInt
       0x1406CAA80: SetString
-#fail       0x1405A57D0: SetUInt
+      # 0x1405A57D0: SetUInt # inlined in AtkDialogue_ReceiveEvent
   Component::GUI::AtkEvent:
     funcs:
       0x1406203E0: SetEventIsHandled
@@ -1646,7 +1644,6 @@ classes:
     funcs:
       0x14068D540: GetStartFrameIdxForLabelId
       0x14068D660: GetEndFrameIdxForLabelId
-      0x14068D400: UpdateChildAnimationStates
       0x14068CBF0: UpdateChildAnimationAndLabelStates
       0x14068CE30: PlayAnimation
       0x14068D6E0: GetInterpolatedValue
@@ -1672,6 +1669,7 @@ classes:
       0x14023C750: Update # inlined in static since 7.0
       0x14023CE20: GetResourceAsync
       0x14023D0C0: GetResourceSync
+      0x140241930: FindResourceHandle
       0x1402426B0: Initialize
   Client::Game::UI::DirectorTodo:
     funcs:
@@ -1768,7 +1766,6 @@ classes:
       0x140ADA860: IsWeeklyBingoStickerPlaced
       0x140ADA880: GetWeeklyBingoTaskStatus
       0x140ADAAB0: GetWeeklyBingoExpMultiplier
-      0x140AD9420: IsNoviceNetworkFlagSet
       0x140AD9460: IsNovice
       0x140AD9480: IsReturner
       0x140AD94E0: IsMentor
@@ -1779,11 +1776,13 @@ classes:
       0x140AD9DA0: IsMeisterFlag
       0x140AD9E10: IsMeisterFlagMaxCount
       0x140ADC170: GetDesynthesisLevelForClassJob
+      0x140ADC3C0: IsGlassesUnlocked
       0x140ADC600: Initialize
       0x140ADDA20: IsCurrentJobCrafter
       0x140ADDA40: IsCurrentJobGatherer
       0x140ADDA60: IsCurrentJobLimited
       0x140ADDBE0: GetParentClassJobId
+      0x140AD9420: IsPlayerStateFlagSet
       0x140B50F70: ctor
       0x140ADD700: GetAttributeByIndex # (this, index)
   Client::Game::UI::Revive:
@@ -1821,14 +1820,16 @@ classes:
       0x140B11180: IsSelectUseTicketInactive
       0x140B11320: UpdateAetheryteList
       0x140B11EF0: Teleport
-      0x140B13250: TeleportWithTickets
       0x140B132E0: InvokeSelectUseTicket
+      0x140B12D90: GetTeleportCost
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
       - ea: 0x141F5A108
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     vfuncs:
       2: dtor
+    funcs:
+      0x140B13250: TeleportWithTickets
   Client::Game::UI::Cabinet:
     instances:
       - ea: 0x14276F8D0  # UIState.Cabinet
@@ -1854,7 +1855,7 @@ classes:
     funcs:
       0x140B19700: ctor
       0x140B19ED0: ReadPacket
-  Client::Game::UI::Buddy::CompanionInfo:
+  Client::Game::UI::CompanionInfo:
     funcs:
       0x140B18200: IsBuddyEquipUnlocked
   Client::Game::UI::PvPProfile:
@@ -1919,6 +1920,10 @@ classes:
     vtbls:
       - ea: 0x141F5B0E0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::UI::TerritoryInfo:
+    instances:
+      - ea: 0x142557CC0
+        pointer: False
   Client::Game::UI::RelicSphereUpgrade:
     instances:
       - ea: 0x142771C40
@@ -1987,7 +1992,7 @@ classes:
 #    vtbls:
 #      - ea:
 #        base: Common::Component::Excel::ExcelSheetWaiter
-#  Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>:
+  Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>:
 #    vtbls:
 #      - ea:
 #        base: Client::Game::SheetWaiterBase
@@ -2246,7 +2251,7 @@ classes:
       0x140B70450: IsCasting
       0x140B704F0: IsActionTargetInRange
       0x140B70750: ClearQueuedActionInCooldownGroup
-      0x140B707D0: CanQueueAction
+      0x140B707D0: IsActionOffCooldown
       0x140B708B0: IsRecastTimerActive
       0x140B70940: IsChargeExhausted    # (this, groupId, additionalGroupId, maxLevelMaxCharges) -> bool
       0x140B709D0: IsActionCharging     # (this, actionType, actionId) -> bool
@@ -2427,7 +2432,7 @@ classes:
         base: Common::Configuration::ConfigBase
     funcs:
       0x140080FC0: ctor
-      0x14180E860: GetLastWorldId
+      0x1400892D0: GetLastWorldId
   Common::Configuration::DevConfig:
     vtbls:
       - ea: 0x141E97DE0
@@ -2488,9 +2493,9 @@ classes:
       0x140277E30: SetBgmEnabled
       0x140277EA0: SetSoundEffectsEnabled
       0x140277F10: SetVoiceEnabled
-      0x140277F50: SetEnvironmentEnabled
       0x140277F30: SetSystemEnabled
-      0x140277FA0: SetPerformEnabled
+      0x140277F50: SetEnvironmentEnabled
+      0x140277FA0: SetPerfomEnabled
       0x140277FC0: SetBgmAlways
       0x140278030: SetSoundEffectAlways
       0x1402780A0: SetVoiceAlways
@@ -2498,7 +2503,7 @@ classes:
       0x1402780E0: SetEnvironmentAlways
       0x140278130: SetPerformAlways
       0x140278180: SetMicPosition
-#fail       0x1402137F0: SetVolume #(this, type, float: volume
+      0x140278F20: SetVolume #(this, type, float: volume
   Client::System::Framework::GameWindow:
     instances:
       - ea: 0x1425916F0
@@ -2585,7 +2590,7 @@ classes:
       0x1400A3620: TaskUpdateInputUI
       0x1400A3790: TaskInputDeviceApply
       0x1400A38F0: TaskUpdateCamera
-#fail       0x140094E20: TaskUpdateNetwork
+      0x1400A3910: TaskUpdateNetwork
       0x1400A3AA0: TaskIntervalFrameworkBegin
       0x1400A3C00: TaskIntervalEnd
       0x1400A3C60: TaskUpdateGraphicsScene
@@ -2609,6 +2614,7 @@ classes:
       0x1400A6250: GetSavePath
       0x1400A6600: SetDataPathType
       0x1400A6640: GetProgramName
+      0x1400B63C0: GetServerTime # in seconds
   Common::Component::Excel::ExcelSheetWaiter:
     vtbls:
       - ea: 0x14227BA78
@@ -3307,12 +3313,12 @@ classes:
     funcs:
       0x1406D5850: HasSubRowsBeginningFrom  # (ExcelRowDescriptor* this, short* nFirstSubRowIndex)
       0x141E0B1A0: Assign0xFFFF  # (ExcelRowDescriptor* this)
-#fail       0x14193CDF0: AssignIndividual  # (ExcelRowDescriptor* this, int nRowId, short* pSubRowIds, short nSubRowCount)
+      0x141E0B320: AssignIndividual  # (ExcelRowDescriptor* this, int nRowId, short* pSubRowIds, short nSubRowCount)
       0x1417290A0: AssignCopy  # (ExcelRowDescriptor* this, ExcelRowDescriptor* that)
-#fail       0x14193CAE0: AssignClearThenCopy  # (ExcelRowDescriptor* this, ExcelRowDescriptor* that)
-#fail       0x14193CB30: AssignByRowId  # (ExcelRowDescriptor* this, int nRowId)
+      0x141E0B060: AssignClearThenCopy  # (ExcelRowDescriptor* this, ExcelRowDescriptor* that)
+      0x141E0B100: AssignByRowId  # (ExcelRowDescriptor* this, int nRowId)
       0x141E0B250: Equals  # (ExcelRowDescriptor* this, ExcelRowDescriptor* that) -> bool
-#fail      0x141E0AE00: GetSubRowCount  # (ExcelRowDescriptor* this) -> int # inlined
+      # 0x141E0AE00: GetSubRowCount  # (ExcelRowDescriptor* this) -> int # inlined
   Component::Excel::IExcelRowWrapper:
     vtbls:
       - ea: 0x14227BEC0
@@ -3433,9 +3439,9 @@ classes:
       - ea: 0x141EA5800
         base: Component::GUI::AtkUnitManager
     funcs:
-      # 0x1400AE950: ctor # INLINED IN 7.0
+      0x1400BEDB0: ctor # INLINED IN 7.0
       0x1401D1AD0: Finalize
-#       0x1405483E0: InitializeAddon # inlined @ 0x1406C0B93
+      0x1406614C0: InitializeAddon # inlined @ 0x1406C0B93
   Client::UI::RaptureAtkColorDataManager:
     vtbls:
       - ea: 0x141EA5968
@@ -3758,7 +3764,7 @@ classes:
       - ea: 0x141EA7F40
         base: Client::UI::Info::InfoProxyNoviceNetworkList
     funcs:
-      0x1401435A0: ctor
+      0x140143520: ctor
   Client::UI::Info::InfoProxyNoviceNetworkMentor:
     vtbls:
       - ea: 0x141EA8070
@@ -3933,7 +3939,7 @@ classes:
       0x140223590: CreateFileThread
   Client::System::File::FileAccessPath:
     funcs:
-#fail       0x140066360: ctor
+      0x140066C80: ctor
       0x140066CA0: ctor_FromUtf8Str
       0x1400A4BE0: Copy
   Client::System::Resource::Handle::ResourceHandle:
@@ -4365,8 +4371,8 @@ classes:
       0x140295810: HideAgentIfActive
       0x140295860: IsAgentActive
       0x1402955D0: HideAll
-#fail       0x1402256B0: GetAgentScenarioTree
-#fail       0x1402256C0: GetAgentMateriaAttach
+      0x14028E230: GetAgentScenarioTree
+      0x14028E240: GetAgentMateriaAttach
       0x14028E250: GetAgentGoldSaucerReward
       0x14028E260: GetAgentCharacterTitleSelect
       0x14028E270: GetAgentReadyCheck
@@ -4386,7 +4392,7 @@ classes:
       0x14028E370: GetAgentTripleTriadRuleAnnounce
       0x14028E380: GetAgentTripleTriadRuleSetting
       0x14028E3A0: GetAgentTripleTriadTournamentMatchList
-#fail       0x140225840: GetAgentPerformanceMode
+      # 0x140225840: GetAgentPerformanceMode # no xrefs
       0x14028E3F0: GetAgentCutsceneReplay
       0x14028E400: GetAgentPvPHeader
       0x14028E420: GetAgentBannerList
@@ -4402,8 +4408,8 @@ classes:
       0x14028E500: GetAgentBannerParty
       0x14028E510: GetAgentBannerMIP
       0x14028E540: GetAgentSXTBattleLog
-#fail       0x1402259C0: GetAgentFGSHud
-#fail       0x1402259D0: GetAgentContext
+      0x14028E550: GetAgentFGSHud
+      # 0x1402259D0: GetAgentContext # no xrefs
       0x14028E570: GetAgentInventoryContext
       0x140295620: PropagateGameEvent
       0x140295880: PropagateLevelChange
@@ -4586,6 +4592,7 @@ classes:
         base: Client::Graphics::Kernel::Resource
     funcs:
       0x1403EEE00: ctor
+      0x1403EF360: InitializeContents
   Client::Graphics::Kernel::TextureDx11:
     vtbls:
       - ea: 0x141ED06F8
@@ -4625,8 +4632,8 @@ classes:
         base: Client::Graphics::Kernel::DeviceWin
     funcs:
       0x1403FAEC0: ctor
-#fail       0x1403553F0: Initialize
-#fail       0x140356160: CreateTexture2D
+      0x1403FAF70: Initialize
+      0x1403FC3B0: CreateTexture2D
       0x1403FD870: CreateConstantBuffer
 #fail       0x1403570D0: PreTick
       0x1403FDDE0: PostTick
@@ -4748,6 +4755,8 @@ classes:
     vtbls:
       - ea: 0x141ED9EA0
         base: Client::Graphics::Render::BaseRenderer
+    funcs:
+      0x140443EA0: OnRenderMaterial
   Client::Graphics::Render::GeometryInstancingRenderer:
     vtbls:
       - ea: 0x141ED9EC8
@@ -4942,10 +4951,11 @@ classes:
     funcs:
       0x14057A060: ctor
       0x14057AFD0: ViewportPointToRay
-#fail       0x140485AA0: ScreenPointToRay
-      0x14057b830: CalculateViewMatrix
+      0x14057B1D0: ScreenPointToRay
+      0x14057B830: CalculateViewMatrix
       0x14057C0F0: PrepareRenderCamera
       0x140767520: WorldToViewportPoint
+      0x140D636E0: WorldToScreenPoint # static
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
     vtbls:
       - ea: 0x141EED4A8
@@ -5017,9 +5027,9 @@ classes:
       0x140595550: LoadMDLSubFilesIntoStaging
       0x140595760: LoadMDLSubFilesForSlot
 #fail       0x14049C4C0: UpdateWetness
-      0x140DAE600: CreateSlotStorage
       0x1405BF440: Finalize
       0x1408CCCF0: Create
+      0x140DAE600: CreateSlotStorage
   Client::Graphics::Scene::Human:
     vtbls:
       - ea: 0x141EEDA78
@@ -5043,8 +5053,8 @@ classes:
       0x1405A1A50: SetupFaceModelAttributes
       0x1405A21D0: SetupConnectorModelAttributes
       0x1405A2530: SetupIdsAndVfxScale
-#fail       0x14049CFA0: UpdateDrawData
-#fail       0x1404A0BB0: SetupVisor
+      0x14059A470: UpdateDrawData
+      0x14059F460: SetupVisor
   Client::Graphics::Scene::Demihuman:
     vtbls:
       - ea: 0x141EEDDF0
@@ -5910,9 +5920,10 @@ classes:
     funcs:
       0x14066C1F0: ctor
       0x14066C470: GetOwnerNodePosition
-      0x14066C790: GetScrollBarById
+      0x14066C790: GetScrollBarNodeById
       0x14066C940: GetTextNodeById
       0x14066C9A0: GetImageNodeById
+      0x14063EEF0: IsAnimated
   Component::GUI::AtkComponentButton:
     vtbls:
       - ea: 0x141EF58F0
@@ -5927,7 +5938,6 @@ classes:
       - ea: 0x141EF59B8
         base: Component::GUI::AtkComponentBase
     funcs:
-#fail       0x140554D80: ctor
       #0x140554440: LoadIconById # doesn't exist anymore
       0x14066FEE0: LoadIcon
       0x1406AEE30: SetDisabledColor
@@ -6075,6 +6085,7 @@ classes:
         base: Component::GUI::AtkComponentInputBase
     funcs:
       0x14069A960: ctor
+      0x14069C990: SetValue
   Component::GUI::AtkComponentDropDownList:
     vtbls:
       - ea: 0x141EF6650
@@ -6109,6 +6120,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x1406A24B0: ctor
+      0x1406A26E0: SetText
   Component::GUI::AtkResourceRendererBase:
     vtbls:
       - ea: 0x141EF6A50
@@ -6932,7 +6944,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1417C2320: ctor
-#fail       0x14144F880: SaveActions
+      # 0x14144F880: SaveActions # inlined at 0x1415AC6C1
   Client::UI::Misc::TofuModule:
     vtbls:
       - ea: 0x141F0B5E8
@@ -7185,7 +7197,7 @@ classes:
       0x1407C39C0: ClearPetCrossHotbarSlot  # (this, slotId) -> nint
       0x1407C39E0: ExecutePetHotbarSlot       # (this, slotId) -> bool (?)
       0x1407C3A00: ExecutePetCrossHotbarSlot  # (this, slotId) -> bool (?)
-#fail      0x1407C35B0: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUiIntermediate*) # address in the middle of a function
+      0x1407C41B0: PopulateIntermediateFromSlot  # (this, HotbarSlot*, HotbarUiIntermediate*)
       0x1407C5310: IsSavedSlotEmpty  # (this, classJobId, hotbarId, slotId) -> bool
       0x1407C7FA0: SetHotbarLocked
       0x1407C7FE0: IsHotbarLocked
@@ -7224,7 +7236,7 @@ classes:
       0x1407C0230: GetDisplayNameForSlot
       0x1407C0A90: GetCostTextForSlot
       0x1407C0080: GetCostTypeForSlot
-#fail      0x1407BF590: GetCostDisplayModeForSlot # address in the middle of some other func
+      # 0x1407BF590: GetCostDisplayModeForSlot # inlined in LoadCostDisplayModeForSlot
       0x1407C0820: GetAdjustedSlotTooltip    # loads in some adjustment things and then calls GetSlotTooltip
       0x1407C08E0: GetCostValueForSlot
       0x1407C1270: GetActionTypeForSlotType
@@ -7250,7 +7262,7 @@ classes:
       0x1407C13B0: PopulateIntermediateCooldownInfo # (this, HotbarUiIntermediate*)  - used for array population?
       0x1407C1250: GetAdjustedCommandId  # ???
       0x1407C2390: LoadMacroSlot
-      0x1407C1550: GetSlotActionCooldownPercent  # (this, out int, int) -> int
+      0x1407C1550: GetSlotActionCooldownPercentage  # (this, out int, int) -> int
   Client::UI::Misc::RaptureHotbarModule::DutyActionSlot:
     funcs:
       0x1407C8A50: Initialize
@@ -7393,7 +7405,7 @@ classes:
       # 0x1406BEF90: SetupFromPlayerState # inlined in SetupForClassJob
       0x1407FD1E0: SetupForClassJob
       0x1407FD3C0: Clear
-      0x1407FD420: EquipRecommended
+      0x1407FD420: EquipRecommendedGear
   Client::UI::Misc::RetainerCommentModule:
     vtbls:
       - ea: 0x141F0C6F8
@@ -7443,7 +7455,7 @@ classes:
       0x14080E9A0: GetCharacter
       0x14186AFC0: ToggleAnimationPlayback
       0x14186B060: IsAnimationPaused
-  Client::UI::Misc::CharaView::CharacterData:
+  Client::UI::Misc::CharaViewCharacterData:
     funcs:
       0x141867B70: ctor
       0x141867BB0: ImportLocalPlayerEquipment
@@ -7622,6 +7634,8 @@ classes:
       - ea: 0x141F0F918
     funcs:
       0x1405F5220: Initialize
+      0x1405F5200: GetAvailablePoses
+      0x1405F8A40: GetPoseKind
   Client::Game::Character::DrawDataContainer:
     vtbls:
       - ea: 0x141F0F588
@@ -8211,7 +8225,6 @@ classes:
        0x1409396E0: ctor
   Client::Game::Character::ActionEffectHandler:
     funcs:
-      0x141872EC0: ctor
       0x140B82BC0: ApplyOneTargetEffect
       0x140B84020: ApplySelfEffects
       0x140B84290: PlaySoundEffect
@@ -8316,7 +8329,7 @@ classes:
       - ea: 0x141F794C8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140C88010: ctor
+      0x140f7b510: ctor
       0x140F7BAB0: CanUseEmote
   Client::UI::Agent::AgentMacro:
     vtbls:
@@ -8953,10 +8966,10 @@ classes:
       0x140BC06E0: Finalize
   Client::UI::Agent::AgentTradeMultiple:
     vtbls:
-      - ea: 0x141F5EB08
+      - ea: 0x141f5eb08
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x141540F40: ctor
+      0x140c0eb60: ctor
   Client::UI::Agent::AgentRelicSphereUpgrade:
     vtbls:
       - ea: 0x141F5D0A8
@@ -9531,12 +9544,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EA9090: ctor
-#  Client::UI::Agent::AgentHarpoonTip:
-#    vtbls:
-#fail       - ea: 0x141A89C00
-#        base: Client::UI::Agent::AgentInterface
-#    funcs:
-#fail       0x140C394A0: ctor
+  # Client::UI::Agent::AgentHarpoonTip:
+  #   vtbls:
+  #     - ea: 0x141F5D0A8
+  #       base: Client::UI::Agent::AgentInterface
+  #   funcs:
+  #     0x140BC2980: ctor
   Client::UI::Agent::AgentPvpScreenInformationHotBar:
     vtbls:
       - ea: 0x141F77410
@@ -9745,6 +9758,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C8A7D0: ctor
+      0x140C8C930: IsWeeklyChallengeComplete
   Client::UI::Agent::AgentAozContentResult:
     vtbls:
       - ea: 0x141F616C0
@@ -11494,10 +11508,10 @@ classes:
     vtbls:
       - ea: 0x141F667E0
         base: Client::Game::Event::EventHandler
-#  Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
-#    vtbls:
-#fail      - ea: 0x140D6B200 <--- TODO: this is a function address
-#        base: Client::Game::Event::GoldSaucerEventHandler
+  Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
+    vtbls:
+     - ea: 0x141F6E120
+       base: Client::Game::Event::GoldSaucerEventHandler
   Client::Game::Event::LotteryDailyEventHandler: # 0x25
     vtbls:
       - ea: 0x141F678D8
@@ -12826,7 +12840,7 @@ classes:
   Client::Game::InstanceContent::PublicContentBonding:
     vtbls:
       - ea: 0x142138448
-        base: Client::Game::InstanceContent::PublicContentDirector
+        base: Client::Game::InstanceContent::ContentDirector
     funcs:
       0x141841E20: ctor
   Client::Game::InstanceContent::PublicContentTripleTriad:
@@ -13343,8 +13357,8 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411CF3B0: ctor
-      # 0x140FC5240: NextTab # inlined in ReceiveEvent
-      # 0x140FC52F0: PreviousTab # inlined in ReceiveEvent
+      0x1411D1870: NextTab # inlined in ReceiveEvent
+      0x1411D1930: PreviousTab # inlined in ReceiveEvent
   Client::UI::AddonCabinetWithdraw:
     vtbls:
       - ea: 0x141FBE258
@@ -15401,7 +15415,7 @@ classes:
       0x140768C50: IsRunningOnSteamDeck
       0x140768C90: ShowGamepadTextInput
       0x140768D10: ShowFloatingGamepadTextInput
-      0x140768DB0: DumpEnteredGamepadText
+      0x140768DB0: DumpEnteredGamepadText  # inlined in GamepadTextInputDismissedCallback
   Component::SteamApi::SteamCallbackBase:
     vtbls:
       - ea: 0x141F05DB0  # the true vtbl
@@ -15611,6 +15625,9 @@ classes:
         name: SoundSpace
     vtbls:
       - ea: 0x141E90800
+    funcs:
+      0x140060990: Free
+      0x141B2DFD0: Memset
   Client::System::Memory::IMemoryModule:
     vtbls:
       - ea: 0x141E90908
@@ -15636,7 +15653,7 @@ classes:
         base: Client::System::Memory::IMemorySpace
   Common::Math::Vector3:
     funcs:
-      0x1405D2280: Normalize
+      0x140272320: Normalize
       0x1402668B0: TransformWithMatrix4x4
   Common::Math::Matrix4x4:
     funcs:

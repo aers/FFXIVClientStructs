@@ -48,16 +48,16 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB AA")]
     public partial void ShowLogMessage(uint logMessageId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 5E 28")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 5E 28")] // ShowLogMessage<uint>
     public partial void ShowLogMessageUInt(uint logMessageId, uint value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4B 44")]
-    public partial void ShowLogMessageUInt2(uint logMessageId, uint value1, uint value2);
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4B 44")] // ShowLogMessage<uint,uint>
+    public partial void ShowLogMessageUIntUInt(uint logMessageId, uint value1, uint value2);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 40 84 ED 74 0A 8B D7")]
-    public partial void ShowLogMessageUInt3(uint logMessageId, uint value1, uint value2, uint value3);
+    [MemberFunction("E8 ?? ?? ?? ?? 40 84 ED 0F 84 ?? ?? ?? ?? 83 7F 20 00")] // ShowLogMessage<uint,uint,uint>
+    public partial void ShowLogMessageUIntUIntUInt(uint logMessageId, uint value1, uint value2, uint value3);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 68 48 8B 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 68 48 8B 07")] // ShowLogMessage<string>
     public partial void ShowLogMessageString(uint logMessageId, Utf8String* value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 C6 41"), GenerateStringOverloads]
