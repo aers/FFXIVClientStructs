@@ -83,7 +83,7 @@ public unsafe partial struct UIState {
     //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     //      relative to uistate: "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" (case for 0x355)
     // Size: (CompanionSheet.RowCount + 7) / 8
-    [FieldOffset(0x17DCE), FixedSizeArray] internal FixedSizeArray64<byte> _unlockedCompanionsBitmask; // TODO: update size
+    [FieldOffset(0x17DCE), FixedSizeArray] internal FixedSizeArray68<byte> _unlockedCompanionsBitmask;
 
     // Ref: "42 0F B6 04 30 44 84 C0"
     // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
