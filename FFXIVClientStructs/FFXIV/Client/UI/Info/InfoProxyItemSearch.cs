@@ -54,7 +54,7 @@ public unsafe partial struct InfoProxyItemSearch {
     // [FieldOffset(0x5B96)] public byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
 
     [MemberFunction("40 57 41 56 48 83 EC 48 83 3A 00")]
-    public partial void ProcessItemHistory(nint a2, nint a3, nint a4);
+    public partial void ProcessItemHistory(nint packet);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 3F 85 FF")]
     public partial nint ProcessRequestResult(nint a2, nint a3, nint a4, int a5, byte a6, int a7);
