@@ -9,12 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudDNC0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x398)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3A8)]
 public unsafe partial struct AddonJobHudDNC0 {
-    [FieldOffset(0x260)] public StepGaugeData DataPrevious;
-    [FieldOffset(0x290)] public StepGaugeData DataCurrent;
-    [FieldOffset(0x2C0)] public StepGauge GaugeStandard;
-    [FieldOffset(0x330)] public StepGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public StepGaugeData DataPrevious;
+    [FieldOffset(0x2A0)] public StepGaugeData DataCurrent;
+    [FieldOffset(0x2D0)] public StepGauge GaugeStandard;
+    [FieldOffset(0x340)] public StepGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -30,7 +30,7 @@ public unsafe partial struct AddonJobHudDNC0 {
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct StepGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public int DanceStatus;
@@ -67,12 +67,12 @@ public unsafe partial struct AddonJobHudDNC0 {
 [Addon("JobHudDNC1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3B8)]
 public unsafe partial struct AddonJobHudDNC1 {
-    [FieldOffset(0x260)] public FeatherGaugeData DataPrevious;
-    [FieldOffset(0x280)] public FeatherGaugeData DataCurrent;
-    [FieldOffset(0x2A0)] public FeatherGauge GaugeStandard;
-    [FieldOffset(0x338)] public FeatherGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public FeatherGaugeData DataPrevious;
+    [FieldOffset(0x290)] public FeatherGaugeData DataCurrent;
+    [FieldOffset(0x2B0)] public FeatherGauge GaugeStandard;
+    [FieldOffset(0x348)] public FeatherGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

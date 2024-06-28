@@ -9,12 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudNIN0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x308)]
+[StructLayout(LayoutKind.Explicit, Size = 0x318)]
 public unsafe partial struct AddonJobHudNIN0 {
-    [FieldOffset(0x260)] public NinkiGaugeData DataPrevious;
-    [FieldOffset(0x278)] public NinkiGaugeData DataCurrent;
-    [FieldOffset(0x290)] public NinkiGauge GaugeStandard;
-    [FieldOffset(0x2D0)] public NinkiGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public NinkiGaugeData DataPrevious;
+    [FieldOffset(0x288)] public NinkiGaugeData DataCurrent;
+    [FieldOffset(0x2A0)] public NinkiGauge GaugeStandard;
+    [FieldOffset(0x2E0)] public NinkiGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -50,49 +50,36 @@ public unsafe partial struct AddonJobHudNIN0 {
 }
 
 /// <summary>
-/// NIN - Huton Gauge
+/// NIN - Kazematoi Gauge
 /// </summary>
 [Addon("JobHudNIN1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x320)]
+[StructLayout(LayoutKind.Explicit, Size = 0x330)]
 public unsafe partial struct AddonJobHudNIN1 {
-    [FieldOffset(0x260)] public HutonGaugeData DataPrevious;
-    [FieldOffset(0x278)] public HutonGaugeData DataCurrent;
-    [FieldOffset(0x290)] public HutonGauge GaugeStandard;
-    [FieldOffset(0x2F8)] public HutonGaugeSimple GaugeSimple;
+    [FieldOffset(0x270)] public KazematoiGaugeData DataPrevious;
+    [FieldOffset(0x280)] public KazematoiGaugeData DataCurrent;
+    [FieldOffset(0x290)] public KazematoiGauge GaugeStandard;
+    [FieldOffset(0x2F0)] public KazematoiGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public partial struct HutonGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
-        [FieldOffset(0x0C)] public int TimeLeft; // in ms
-        [FieldOffset(0x10)] public int MaxTime;  // in ms
-        [FieldOffset(0x14)] public int ManualCasts;
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public partial struct KazematoiGaugeData {
+
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-    public partial struct HutonGauge {
-        [FieldOffset(0x10)] public AtkResNode* Container;
-        [FieldOffset(0x18)] public AtkResNode* Pinwheel;
-        [FieldOffset(0x20)] public AtkTextNode* ValueText;
+    [StructLayout(LayoutKind.Explicit, Size = 0x60)]
+    public partial struct KazematoiGauge {
 
-        [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray6<Pointer<AtkComponentBase>> _blade;
-
-        [FieldOffset(0x5C)] public int BladesFallen;
-        [FieldOffset(0x58)] public int TimePerBlade; // in seconds
-        [FieldOffset(0x60)] public bool IsActive;
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public partial struct HutonGaugeSimple {
-        [FieldOffset(0x10)] public AtkResNode* Container;
-        [FieldOffset(0x18)] public AtkComponentTextNineGrid* ValueDisplay;
-        [FieldOffset(0x20)] public AtkComponentGaugeBar* GaugeBar;
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public partial struct KazematoiGaugeSimple {
+
     }
 }
