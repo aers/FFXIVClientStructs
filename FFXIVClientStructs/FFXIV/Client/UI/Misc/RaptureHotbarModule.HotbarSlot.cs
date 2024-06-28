@@ -283,7 +283,7 @@ public partial struct RaptureHotbarModule {
         /// <see cref="ApparentActionId"/>). If this hotbar slot references an action that does not use charges, this will return either 0 or 1.
         /// </summary>
         /// <returns>Returns a uint.</returns>
-        [MemberFunction("40 53 48 83 EC 40 8B 99 ?? ?? ?? ??")]
+        [MemberFunction("40 53 48 83 EC 40 8B 99")]
         public partial uint GetApparentIconRecastCharges();
 
         /// <summary>

@@ -12,9 +12,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public partial struct AddonArmouryBoard {
     [FieldOffset(0x690)] public int TabIndex;
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB E0 84 C9")]
-    public partial void NextTab(byte a2);
+    [MemberFunction("40 53 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B D9 75 10")]
+    public partial void NextTab(byte a2); // 7.0: inlined
 
-    [MemberFunction("40 53 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B D9 75 11")]
-    public partial void PreviousTab(byte a2);
+    [MemberFunction("40 53 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B D9 0F 85 ?? ?? ?? ?? 8B 81")]
+    public partial void PreviousTab(byte a2); // 7.0: inlined
 }

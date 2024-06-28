@@ -17,7 +17,7 @@ public unsafe partial struct RaptureUiDataModule {
     [FieldOffset(0x518), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListDpsOrder;
 
     [MemberFunction("4C 8B D1 41 83 F9 06")]
-    public partial void MJI_SetWorkshopPreset(uint presetIndex, uint* mjiCraftWorksObjectList, uint listCount);
+    public partial void MjiCreateWorkshopPreset(uint presetIndex, uint* mjiCraftWorksObjectList, uint listCount);
 
     public void MJI_SetWorkshopPreset(uint presetIndex, params uint[] mjiCraftWorksObjectList) {
         if (presetIndex is < 0 or > 9) return;
@@ -26,6 +26,6 @@ public unsafe partial struct RaptureUiDataModule {
         int i;
         for (i = 0; i < mjiCraftWorksObjectList.Length && i < 6; i++) list[i] = mjiCraftWorksObjectList[i];
         for (; i < 6; i++) list[i] = 0;
-        MJI_SetWorkshopPreset(presetIndex, list, (uint)mjiCraftWorksObjectList.Length);
+        MjiCreateWorkshopPreset(presetIndex, list, (uint)mjiCraftWorksObjectList.Length);
     }
 }

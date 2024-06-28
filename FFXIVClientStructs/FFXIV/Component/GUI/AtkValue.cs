@@ -116,7 +116,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 60 4E 8D 24 3E")]
     public partial bool CopyVectorValue(uint index, AtkValue* outValue);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 55 9C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 55 9C ?? ?? ?? ?? ?? ?? ?? ??")]
     private partial void ReleaseManagedMemoryInternal();
 
     // The game probably uses a macro for this, because it always

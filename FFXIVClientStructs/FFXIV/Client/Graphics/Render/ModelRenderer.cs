@@ -59,6 +59,6 @@ public unsafe partial struct ModelRenderer {
     [FieldOffset(0x168)] public JobSystem JobSystem; // Client::Graphics::JobSystem<Client::Graphics::Render::ModelRenderer>
 
     // This function, among other things, constructs an OnRenderMaterialParams struct with its params and calls CharacterBase.OnRenderMaterial with it (through some indirections - see Model.RenderMaterialCallback).
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 20")]
     public partial ushort* OnRenderMaterial(ushort* outFlags, OnRenderModelParams* param, Material* material, uint materialIndex);
 }

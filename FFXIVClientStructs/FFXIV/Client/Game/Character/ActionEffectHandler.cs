@@ -77,6 +77,6 @@ public unsafe partial struct ActionEffectHandler {
     /// <param name="header">Details of the action.</param>
     /// <param name="effects">Per-target effect list array. Contains header->NumTargets elements.</param>
     /// <param name="targetEntityIds">Per-target effect id array. Contains header->NumTargets elements.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 68 48 33 CC E8 ?? ?? ?? ?? 4C 8D 5C 24 70 49 8B 5B 20 49 8B 73 28 49 8B E3 5F C3")]
+    [MemberFunction("40 55 56 57 41 54 41 55 41 56 48 8D AC 24")]
     public static partial void Receive(uint casterEntityId, Character* casterPtr, Vector3* targetPos, Header* header, TargetEffects* effects, GameObjectId* targetEntityIds);
 }

@@ -42,11 +42,11 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 7D D7")]
-    public partial byte* FormatAddonText2(uint addonId, int intParam1, int intParam2);
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF")] // FormatAddonText1<int,int,uint>
+    public partial byte* FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 55 FF 50 30")]
-    public partial byte* FormatAddonText3(uint addonId, int intParam1, int intParam2, int intParam3);
+    [MemberFunction("E8 ?? ?? ?? ?? EB 51 0F B6 DB")] // FormatAddonText2<int,int>
+    public partial byte* FormatAddonText2IntInt(uint addonId, int intParam1, int intParam2);
 
     /// <summary>
     /// Display a timespan as hours, minutes or seconds with only the largest non zero unit.
