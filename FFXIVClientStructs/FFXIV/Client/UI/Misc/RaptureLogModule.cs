@@ -63,9 +63,6 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 C6 41"), GenerateStringOverloads]
     public partial void PrintString(byte* str);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4D 50 44 0F B7 E0")]
-    public partial ulong GetContentIdForLogMessage(int index);
-
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8D 96 ?? ?? ?? ?? 48 8D 4C 24")]
     public partial bool GetLogMessage(int index, Utf8String* str);
 
@@ -73,7 +70,7 @@ public unsafe partial struct RaptureLogModule {
     public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, int* timestamp);
 
     [MemberFunction("4C 8B D9 48 8B 89")]
-    public partial void AddMsgSourceEntry(ulong contentId, int messageIndex, ulong a3, ushort worldId, ushort chatType); // TODO: figure out what is a3
+    public partial void AddMsgSourceEntry(ulong contentId, ulong accountId, int messageIndex, ushort worldId, ushort chatType);
 
     public bool GetLogMessage(int index, out byte[] message) {
         using var pMsg = new Utf8String();
@@ -98,12 +95,13 @@ public unsafe partial struct RaptureLogModule {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public struct LogMessageSource {
     [FieldOffset(0x00)] public ulong ContentId;
-    [FieldOffset(0x08)] public int LogMessageIndex;
-    [FieldOffset(0x0C)] public short World;
-    [FieldOffset(0x0E)] public short ChatType;
+    [FieldOffset(0x08)] public ulong AccountId;
+    [FieldOffset(0x10)] public int LogMessageIndex;
+    [FieldOffset(0x14)] public short World;
+    [FieldOffset(0x16)] public short ChatType;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x928)]
