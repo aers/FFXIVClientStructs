@@ -51,29 +51,29 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     ///     2 = UldManager finished loading the uld
     /// </code>
     /// </summary>
-    [FieldOffset(0x190)] public uint Flags180;
+    [FieldOffset(0x190)] public uint Flags190;
 
     /// <summary>
     /// <code>
     /// 0b1000_0000 = Disable auto-focus (not adding it to Focused Units list)
     /// </code>
     /// </summary>
-    [FieldOffset(0x198)] public byte Flags188;
+    [FieldOffset(0x198)] public byte Flags198;
 
     /// <summary>
     /// <code>
     /// 0b0000_0001 = OnSetup was called (= IsReady)
     /// </code>
     /// </summary>
-    [FieldOffset(0x199)] public byte Flags189;
-    [FieldOffset(0x19A)] public byte Flags18A;
+    [FieldOffset(0x199)] public byte Flags199;
+    [FieldOffset(0x19A)] public byte Flags19A;
 
     /// <summary>
     /// <code>
     /// 0b0100_0000 = Don't show on open
     /// </code>
     /// </summary>
-    [FieldOffset(0x19D)] public byte Flags18D;
+    [FieldOffset(0x19D)] public byte Flags19D;
 
     [FieldOffset(0x1A4)] public uint OpenTransitionDuration;
     [FieldOffset(0x1A8)] public uint CloseTransitionDuration;
@@ -120,17 +120,17 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1E8)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1F0)] public uint CollisionNodeListCount;
 
-    public uint DepthLayer => (Flags180 >> 16) & 0xF;
+    public uint DepthLayer => (Flags190 >> 16) & 0xF;
 
     public bool IsVisible {
-        get => (Flags180 & 0x200000) != 0;
-        set => Flags180 = value ? Flags180 |= 0x200000 : Flags180 &= 0xFFDFFFFF;
+        get => (Flags190 & 0x200000) != 0;
+        set => Flags190 = value ? Flags190 |= 0x200000 : Flags190 &= 0xFFDFFFFF;
     }
 
     /// <summary>
     /// Check if OnSetup was called.
     /// </summary>
-    public bool IsReady => (Flags189 & 0x01) != 0;
+    public bool IsReady => (Flags199 & 0x01) != 0;
 
     [MemberFunction("33 D2 C7 81 A4 01 00 00 64 00 00 00")]
     public partial void Ctor();
