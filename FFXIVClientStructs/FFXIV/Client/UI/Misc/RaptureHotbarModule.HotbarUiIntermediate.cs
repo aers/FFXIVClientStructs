@@ -4,13 +4,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 public partial struct RaptureHotbarModule {
     /// <summary>
-    /// An intermediate struct used to translate from a <see cref="HotBarSlot"/> to the UI String/NumberArrays. 
+    /// An intermediate struct used to translate from a <see cref="HotbarSlot"/> to the UI String/NumberArrays. 
     /// </summary>
     /// <remarks>
     /// <b>Do not consider this struct stable (yet).</b>
     /// </remarks>
     [StructLayout(LayoutKind.Explicit, Size = 0x43)]
-    internal unsafe struct HotBarUiIntermediate {
+    internal unsafe struct HotbarUiIntermediate {
         // Converts to array in E8 ?? ?? ?? ?? EB 34 E8
 
         [FieldOffset(0x00)] public Utf8String* PopUpHelpText; // to StringArray idx slotBase + 14
