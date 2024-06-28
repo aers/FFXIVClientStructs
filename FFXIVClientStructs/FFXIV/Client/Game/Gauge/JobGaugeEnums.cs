@@ -89,3 +89,17 @@ public enum NadiFlags : byte {
     Lunar = 2,
     Solar = 4
 }
+
+[Flags]
+public enum CanvasFlags : byte {
+    Pom = 1,
+    Wing = 2,
+    Weapon = 16,
+    Landscape = 32,
+}
+
+[Flags]
+public enum CreatureFlags : byte {
+    Pom = 1,
+    Wings = 16
+}
