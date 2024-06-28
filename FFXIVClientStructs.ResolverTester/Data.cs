@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.ResolverTester;
+namespace FFXIVClientStructs.ResolverTester;
 
 public class Data {
     public string Version { get; set; }
