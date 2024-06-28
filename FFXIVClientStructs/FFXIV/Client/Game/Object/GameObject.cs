@@ -39,7 +39,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0xF8)] public uint FateId;
     [FieldOffset(0x100)] public DrawObject* DrawObject;
     [FieldOffset(0x110)] public uint NamePlateIconId;
-    [FieldOffset(0x114)] public int RenderFlags;
+    [FieldOffset(0x118)] public int RenderFlags;
     [FieldOffset(0x158)] public LuaActor* LuaActor;
     [FieldOffset(0x160)] public EventHandler* EventHandler;
 
@@ -61,19 +61,19 @@ public unsafe partial struct GameObject {
     [VirtualFunction(8)]
     public partial float GetHeight();
 
-    [VirtualFunction(16)]
+    [VirtualFunction(12)]
     public partial void EnableDraw();
 
-    [VirtualFunction(17)]
+    [VirtualFunction(13)]
     public partial void DisableDraw();
 
-    [VirtualFunction(27)]
+    [VirtualFunction(23)]
     public partial DrawObject* GetDrawObject();
 
-    [VirtualFunction(30)]
+    [VirtualFunction(26)]
     public partial void Highlight(ObjectHighlightColor color);
 
-    [VirtualFunction(38)]
+    [VirtualFunction(34)]
     public partial void SetReadyToDraw();
 
     [VirtualFunction(47)]
