@@ -7568,7 +7568,6 @@ classes:
       84: GetScreenLogManager
       85: GetForayInfo
       86: GetForayInfo_2
-      87: IsMount
     funcs:
       0x1408D8C40: IsCasting
       0x1408D1B20: GetCompanionOwnerID
