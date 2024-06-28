@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // characters that fight (players, monsters, etc)
 [GenerateInterop]
 [Inherits<Character>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3690)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3630)]
 public unsafe partial struct BattleChara {
     //[FieldOffset(0x1E60), FixedSizeArray] internal FixedSizeArray3840<byte> _unkBattleCharaStruct;
 }
