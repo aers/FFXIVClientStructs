@@ -9,6 +9,12 @@ public unsafe partial struct GroupManager {
     [FieldOffset(0x0020)] public Group MainGroup;
     [FieldOffset(0x65D0)] public Group ReplayGroup;
 
+    [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]
+    public static partial GroupManager* Instance();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 80")]
+    public partial Group* GetGroup(bool replayGroup = false);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x65B0)]
     public unsafe partial struct Group {
@@ -52,11 +58,4 @@ public unsafe partial struct GroupManager {
         [MemberFunction("E8 ?? ?? ?? ?? 83 FF 32")]
         public partial PartyMember* GetPartyMemberByEntityId(uint entityId);
     }
-
-    [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]
-    public static partial GroupManager* Instance();
-
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 80")]
-    public partial GroupManager* GetGroup(bool replayGroup);
-
 }
