@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::PlayerState
 // ctor "E8 ?? ?? ?? ?? 33 D2 45 33 E4"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x818)] // TODO: update size
+[StructLayout(LayoutKind.Explicit, Size = 0x8A0)]
 public unsafe partial struct PlayerState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02", 3)]
     public static partial PlayerState* Instance();
@@ -69,14 +69,14 @@ public unsafe partial struct PlayerState {
 
     // Size: (MountSheet.Max(row => row.Order) + 7) / 8
     /// <remarks> Use <see cref="IsMountUnlocked"/> </remarks>
-    [FieldOffset(0x2DD), FixedSizeArray] internal FixedSizeArray35<byte> _unlockedMountsBitmask; // TODO: offset is still correct, update count
+    [FieldOffset(0x2DD), FixedSizeArray] internal FixedSizeArray37<byte> _unlockedMountsBitmask;
     // Size: (OrnamentSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
     [FieldOffset(0x303), FixedSizeArray] internal FixedSizeArray7<byte> _unlockedOrnamentsBitmask;
-    [FieldOffset(0x30E)] public ushort NumOwnedMounts;
     // Size: (GlassesSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsGlassesUnlocked"/> </remarks>
     [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedGlassesBitmask;
+    [FieldOffset(0x30C)] public ushort NumOwnedMounts;
 
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 83 EC 50 48 8B 81"
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) / 8
@@ -117,7 +117,7 @@ public unsafe partial struct PlayerState {
     /// <remarks> Use <see cref="IsAdventureComplete"/> </remarks>
     [FieldOffset(0x550), FixedSizeArray] internal FixedSizeArray43<byte> _unlockedAdventureBitmask;
 
-    [FieldOffset(0x581), FixedSizeArray] internal FixedSizeArray44<byte> _unlockFlags; // TODO: update size
+    [FieldOffset(0x581), FixedSizeArray] internal FixedSizeArray56<byte> _unlockFlags;
 
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
     [FieldOffset(0x5BD)] public byte DeliveryLevel;

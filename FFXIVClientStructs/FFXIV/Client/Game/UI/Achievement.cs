@@ -2,18 +2,18 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Achievement
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x558)]
+[StructLayout(LayoutKind.Explicit, Size = 0x598)]
 public unsafe partial struct Achievement {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 04 30 FF C3", 3)]
     public static partial Achievement* Instance();
 
     [FieldOffset(0x08)] public AchievementState State;
-    [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray428<byte> _completedAchievements;
+    [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray452<byte> _completedAchievements;
 
-    [FieldOffset(0x1DC)] public AchievementState ProgressRequestState;
-    [FieldOffset(0x1E0)] public uint ProgressAchievementId;
-    [FieldOffset(0x1E4)] public uint ProgressCurrent;
-    [FieldOffset(0x1E8)] public uint ProgressMax;
+    [FieldOffset(0x1F4)] public AchievementState ProgressRequestState;
+    [FieldOffset(0x1F8)] public uint ProgressAchievementId;
+    [FieldOffset(0x1FC)] public uint ProgressCurrent;
+    [FieldOffset(0x200)] public uint ProgressMax;
 
     /// <summary> Requests Achievement Progress from the server. </summary>
     [MemberFunction("48 83 EC ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 45 33 C9")]
