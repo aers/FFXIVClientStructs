@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // base class for all AddonXXX classes (visible UI objects)
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventListener>]
-[StructLayout(LayoutKind.Explicit, Size = 0x220)]
+[StructLayout(LayoutKind.Explicit, Size = 0x230)]
 [VirtualTable("48 89 51 28 48 8D 05 ?? ?? ?? ?? 48 89 01", 7)]
 public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
