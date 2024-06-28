@@ -6,5 +6,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 //   Component::GUI::AtkModuleInterface::AtkEventInterface
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1510)]
+[StructLayout(LayoutKind.Explicit, Size = 0x15D8)]
 public partial struct TripleTriad;

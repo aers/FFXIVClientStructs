@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // this is a large object holding most of the other objects in the Client::Game::UI namespace
 // all data in here is used for UI display
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x17F10)] // its at least this big, may be a few bytes bigger
+[StructLayout(LayoutKind.Explicit, Size = 0x18348)] // unsure how big it really is
 public unsafe partial struct UIState {
     [FieldOffset(0x00)] public Hotbar Hotbar;
     [FieldOffset(0x08)] public Hate Hate;
@@ -17,85 +17,86 @@ public unsafe partial struct UIState {
     [FieldOffset(0xA18)] public Chain Chain;
     [FieldOffset(0xA20)] public WeaponState WeaponState;
     [FieldOffset(0xA38)] public PlayerState PlayerState;
-    [FieldOffset(0x1250)] public Revive Revive;
-    [FieldOffset(0x1280)] public Inspect Inspect;
-    [FieldOffset(0x14F8)] public Telepo Telepo;
-    [FieldOffset(0x1550)] public Cabinet Cabinet;
-    [FieldOffset(0x15D8)] public Achievement Achievement;
-    [FieldOffset(0x1B30)] public Buddy Buddy;
-    [FieldOffset(0x36B4)] public PvPProfile PvPProfile;
-    [FieldOffset(0x3730)] internal void* Unk3730; // some UI timer for PvP Results?!
-    [FieldOffset(0x3738)] public ContentsNote ContentsNote;
-    [FieldOffset(0x37F0)] public RelicNote RelicNote;
-    [FieldOffset(0x3808)] public MateriaTrade MateriaTrade;
-    [FieldOffset(0x3850)] public PublicInstance PublicInstance;
-    [FieldOffset(0x3878)] public RelicSphereUpgrade RelicSphereUpgrade;
-    [FieldOffset(0x38F0)] public DailyQuestSupply DailyQuestSupply;
-    [FieldOffset(0x3CD8)] public RidePillon RidePillon;
-    [FieldOffset(0x3D18)] public Loot Loot;
-    [FieldOffset(0x43B8)] public GatheringNote GatheringNote;
-    [FieldOffset(0x49E0)] public RecipeNote RecipeNote;
-    [FieldOffset(0x5500)] public FishingNote FishingNote;
-    [FieldOffset(0x5550)] public FishRecord FishRecord;
-    [FieldOffset(0x5830)] public Journal Journal;
-    [FieldOffset(0x9F78)] public QuestUI QuestUI;
-    [FieldOffset(0xAF48)] public QuestTodoList QuestTodoList;
-    [FieldOffset(0xB238)] public NpcTrade NpcTrade;
-    [FieldOffset(0xB560)] public DirectorTodo DirectorTodo;
-    [FieldOffset(0xB6A8)] public DirectorTodo FateDirectorTodo;
-    [FieldOffset(0xB7F0)] public Map Map;
-    [FieldOffset(0xF7F0)] public MarkingController MarkingController;
-    [FieldOffset(0xFAD0)] public LimitBreakController LimitBreakController;
-    [FieldOffset(0xFAE0)] public TitleController TitleController;
-    [FieldOffset(0xFAE8)] public TitleList TitleList;
+    [FieldOffset(0x12D8)] public Revive Revive;
+    [FieldOffset(0x1308)] public Inspect Inspect;
+    [FieldOffset(0x15A8)] public Telepo Telepo;
+    [FieldOffset(0x1600)] public Cabinet Cabinet;
+    [FieldOffset(0x1688)] public Achievement Achievement;
+    [FieldOffset(0x1C20)] public Buddy Buddy; // TODO: update struct
+    [FieldOffset(0x37AC)] public PvPProfile PvPProfile;
+    [FieldOffset(0x3828)] internal void* Unk3828; // some UI timer for PvP Results?!
+    [FieldOffset(0x3830)] public ContentsNote ContentsNote;
+    [FieldOffset(0x38E8)] public RelicNote RelicNote;
+    [FieldOffset(0x3900)] public MateriaTrade MateriaTrade;
+    [FieldOffset(0x3948)] public PublicInstance PublicInstance;
+    [FieldOffset(0x3970)] public RelicSphereUpgrade RelicSphereUpgrade;
+    [FieldOffset(0x39E8)] public DailyQuestSupply DailyQuestSupply;
+    [FieldOffset(0x3DD0)] public RidePillon RidePillon;
+    [FieldOffset(0x3E10)] public Loot Loot;
+    [FieldOffset(0x44B0)] public GatheringNote GatheringNote; // TODO: update struct and size
+    [FieldOffset(0x4B50)] public RecipeNote RecipeNote;
+    [FieldOffset(0x5668)] public FishingNote FishingNote; // TODO: update struct and size
+    [FieldOffset(0x5748)] public FishRecord FishRecord; // TODO: update struct and size
+    [FieldOffset(0x5A80)] public Journal Journal; // TODO: update struct and size
+    [FieldOffset(0xA1E8)] public QuestUI QuestUI; // TODO: update struct and size
+    [FieldOffset(0xB1D8)] public QuestTodoList QuestTodoList;
+    [FieldOffset(0xB4C8)] public NpcTrade NpcTrade;
+    [FieldOffset(0xB7F0)] public DirectorTodo DirectorTodo;
+    [FieldOffset(0xB938)] public DirectorTodo FateDirectorTodo;
+    [FieldOffset(0xBA80)] public Map Map;
+    [FieldOffset(0xFA80)] public MarkingController MarkingController;
+    [FieldOffset(0xFD60)] public LimitBreakController LimitBreakController;
+    [FieldOffset(0xFD70)] public TitleController TitleController;
+    [FieldOffset(0xFD78)] public TitleList TitleList;
 
-    [FieldOffset(0xFB70)] public GCSupply GCSupply;
-    [FieldOffset(0x12798)] public InstanceContent InstanceContent;
-    [FieldOffset(0x12808)] public GuildOrderReward GuildOrderReward;
-    [FieldOffset(0x12868)] public ContentsFinder ContentsFinder;
-    [FieldOffset(0x12918)] public Wedding Wedding;
-    [FieldOffset(0x12980)] public MobHunt MobHunt;
-    [FieldOffset(0x12B18)] public WeatherForecast WeatherForecast;
-    [FieldOffset(0x12B40)] public TripleTriad TripleTriad;
-    [FieldOffset(0x14050)] public EurekaElementalEdit EurekaElementalEdit;
-    [FieldOffset(0x14068)] public LovmRanking LovmRanking;
-    [FieldOffset(0x15CA8)] public CollectablesShop CollectablesShop;
-    [FieldOffset(0x15F60)] public QTE QTE;
-    [FieldOffset(0x15F88)] public Emj Emj;
-    [FieldOffset(0x15FC0)] public GoldSaucerYell GoldSaucerYell;
-    [FieldOffset(0x17710)] public CharaCard CharaCard;
+    [FieldOffset(0xFE08)] public GCSupply GCSupply;
+    [FieldOffset(0x12A30)] public InstanceContent InstanceContent;
+    [FieldOffset(0x12AA0)] public GuildOrderReward GuildOrderReward;
+    [FieldOffset(0x12B00)] public ContentsFinder ContentsFinder;
+    [FieldOffset(0x12BB0)] public Wedding Wedding;
+    [FieldOffset(0x12C18)] public MobHunt MobHunt; // TODO: update struct and size
+    [FieldOffset(0x12E08)] public WeatherForecast WeatherForecast;
+
+    [FieldOffset(0x12E30)] public TripleTriad TripleTriad;
+    [FieldOffset(0x14408)] public EurekaElementalEdit EurekaElementalEdit;
+    [FieldOffset(0x14420)] public LovmRanking LovmRanking;
+    [FieldOffset(0x16060)] public CollectablesShop CollectablesShop;
+    [FieldOffset(0x16338)] public QTE QTE;
+    [FieldOffset(0x16360)] public Emj Emj;
+    [FieldOffset(0x16398)] public GoldSaucerYell GoldSaucerYell;
+    [FieldOffset(0x17AE8)] public CharaCard CharaCard;
     // 0x178C8: unknown struct, size 0x58
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
-    [FieldOffset(0x17D5C), FixedSizeArray] internal FixedSizeArray64<byte> _unlockLinkBitmask; // TODO: update size
+    [FieldOffset(0x17D4C), FixedSizeArray] internal FixedSizeArray64<byte> _unlockLinkBitmask; // TODO: update size
 
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
     // Size: (AetheryteSheet.RowCount + 7) / 8
-    [FieldOffset(0x17D9C), FixedSizeArray] internal FixedSizeArray26<byte> _unlockedAetherytesBitmask; // TODO: update size
+    [FieldOffset(0x17D8C), FixedSizeArray] internal FixedSizeArray26<byte> _unlockedAetherytesBitmask; // TODO: update size
 
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
     // Size: (HowToSheet.RowCount + 7) / 8
-    [FieldOffset(0x17DBA), FixedSizeArray] internal FixedSizeArray36<byte> _unlockedHowtoBitmask; // TODO: update size
+    [FieldOffset(0x17DAA), FixedSizeArray] internal FixedSizeArray36<byte> _unlockedHowtoBitmask; // TODO: update size
 
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     //      relative to uistate: "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" (case for 0x355)
     // Size: (CompanionSheet.RowCount + 7) / 8
-    [FieldOffset(0x17DDE), FixedSizeArray] internal FixedSizeArray64<byte> _unlockedCompanionsBitmask; // TODO: update size
+    [FieldOffset(0x17DCE), FixedSizeArray] internal FixedSizeArray64<byte> _unlockedCompanionsBitmask; // TODO: update size
 
     // Ref: "42 0F B6 04 30 44 84 C0"
     // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
-    [FieldOffset(0x17E21), FixedSizeArray] internal FixedSizeArray11<byte> _chocoboTaxiStandsBitmask; // TODO: update size
+    [FieldOffset(0x17E11), FixedSizeArray] internal FixedSizeArray11<byte> _chocoboTaxiStandsBitmask; // TODO: update size
 
     // Ref: UIState#IsCutsceneSeen
     // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) / 8
-    [FieldOffset(0x17E2D), FixedSizeArray] internal FixedSizeArray165<byte> _cutsceneSeenBitmask;
+    [FieldOffset(0x17E1D), FixedSizeArray] internal FixedSizeArray165<byte> _cutsceneSeenBitmask;
 
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount / 8
-    [FieldOffset(0x17ED2), FixedSizeArray] internal FixedSizeArray54<byte> _unlockedTripleTriadCardsBitmask;
-    [FieldOffset(0x17F08)] public ulong UnlockedTripleTriadCardsCount;
+    [FieldOffset(0x17EC2), FixedSizeArray] internal FixedSizeArray54<byte> _unlockedTripleTriadCardsBitmask;
+    [FieldOffset(0x17EF8)] public ulong UnlockedTripleTriadCardsCount;
 
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();

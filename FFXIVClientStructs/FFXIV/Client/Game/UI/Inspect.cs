@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Inspect
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x278)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
 public unsafe partial struct Inspect {
     [FieldOffset(0xC)] public uint EntityId;
     [FieldOffset(0x10)] public byte Type;
@@ -27,19 +27,19 @@ public unsafe partial struct Inspect {
     [FieldOffset(0x9A)] public byte BuddyEquipBody; // only if Type == 3
     [FieldOffset(0x9B)] public byte BuddyEquipLegs; // only if Type == 3
 
-    [FieldOffset(0xD7), FixedSizeArray] internal FixedSizeArray74<uint> _baseParams;
+    [FieldOffset(0x104), FixedSizeArray] internal FixedSizeArray74<uint> _baseParams;
 
-    [FieldOffset(0x201)] public byte GearVisibilityFlag;
+    [FieldOffset(0x22E)] public byte GearVisibilityFlag;
 
-    [FieldOffset(0x210), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _buddyOwnerName;
-    [FieldOffset(0x250)] public byte BuddyRank;
-    [FieldOffset(0x251)] public byte BuddyStain;
-    [FieldOffset(0x252)] public byte BuddyDefenderLevel;
-    [FieldOffset(0x253)] public byte BuddyAttackerLevel;
-    [FieldOffset(0x254)] public byte BuddyHealerLevel;
+    [FieldOffset(0x239), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _buddyOwnerName;
+    [FieldOffset(0x279)] public byte BuddyRank;
+    [FieldOffset(0x27A)] public byte BuddyStain;
+    [FieldOffset(0x27B)] public byte BuddyDefenderLevel;
+    [FieldOffset(0x27C)] public byte BuddyAttackerLevel;
+    [FieldOffset(0x27D)] public byte BuddyHealerLevel;
 
     /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
-    [FieldOffset(0x25B), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
+    [FieldOffset(0x284), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
 
     /// <summary>
     /// Retrieves the value associated with the given key from ContentKeyValueData.<br/>

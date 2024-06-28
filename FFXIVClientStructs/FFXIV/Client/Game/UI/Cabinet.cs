@@ -3,10 +3,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::Cabinet
 // Armoire
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x84)]
+[StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct Cabinet {
     [FieldOffset(0x00)] public CabinetState State;
-    [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray128<byte> _unlockedItems;
+    [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray132<byte> _unlockedItems;
 
     /// <summary>
     /// Check if an item is stored in the player's armoire.
