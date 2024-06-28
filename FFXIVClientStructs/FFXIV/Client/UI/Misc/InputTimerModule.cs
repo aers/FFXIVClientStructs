@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::InputTimerModule
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x4F8)]
 public unsafe partial struct InputTimerModule {
     public static InputTimerModule* Instance() => Framework.Instance()->GetUIModule()->GetInputTimerModule();

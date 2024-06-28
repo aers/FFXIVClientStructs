@@ -13,6 +13,7 @@ public unsafe partial struct SavedAppearanceManager {
     [VirtualFunction(6)] public partial uint GetSlotCount();
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]
 public unsafe partial struct SavedAppearanceSlot {
     [FieldOffset(0x00)] public uint Magic; // Should be 0x2013_FF14

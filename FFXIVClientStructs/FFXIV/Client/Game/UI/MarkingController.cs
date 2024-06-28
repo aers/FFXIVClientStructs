@@ -28,6 +28,7 @@ public partial struct MarkerPresetPlacement {
     [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray8<int> _y;
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray8<int> _z;
 }
+
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public struct FieldMarker {
     [FieldOffset(0x00)] public Vector3 Position;
