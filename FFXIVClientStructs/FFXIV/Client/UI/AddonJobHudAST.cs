@@ -14,7 +14,7 @@ public unsafe partial struct AddonJobHudAST0 {
     [FieldOffset(0x270)] public ArcanaGaugeData DataPrevious;
     [FieldOffset(0x290)] public ArcanaGaugeData DataCurrent;
     [FieldOffset(0x2B0)] public ArcanaGauge GaugeStandard;
-    [FieldOffset(0x2B8)] public ArcanaGaugeSimple GaugeSimple;
+    [FieldOffset(0x358)] public ArcanaGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

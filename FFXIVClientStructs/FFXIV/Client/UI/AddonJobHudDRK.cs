@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudDRK0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x318)]
+[StructLayout(LayoutKind.Explicit, Size = 0x328)]
 public unsafe partial struct AddonJobHudDRK0 {
     [FieldOffset(0x270)] public BloodGaugeData DataPrevious;
     [FieldOffset(0x288)] public BloodGaugeData DataCurrent;

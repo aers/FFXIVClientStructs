@@ -133,7 +133,7 @@ public unsafe partial struct AddonJobHudBLM1 {
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x38)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct AstralGaugeData {
 
     }
