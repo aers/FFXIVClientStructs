@@ -157,8 +157,8 @@ public unsafe partial struct Character {
         [FieldOffset(0x20)] public Vector3 TargetLocation;
         [FieldOffset(0x30)] public float Rotation;
         [FieldOffset(0x34)] public float CurrentCastTime;
-        [FieldOffset(0x38)] public float TotalCastTime;
-        [FieldOffset(0x3C)] public float AdjustedTotalCastTime;
+        [FieldOffset(0x38)] public float BaseCastTime;
+        [FieldOffset(0x3C)] public float TotalCastTime;
 
         // fields below (Response*) are set when ActionEffect is received - at this point cast can't be cancelled - this is the start of the slidecast window
         [FieldOffset(0x40)] public uint ResponseSpellId;
