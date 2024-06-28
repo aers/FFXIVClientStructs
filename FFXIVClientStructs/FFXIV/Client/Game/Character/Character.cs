@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor "E8 ?? ?? ?? ?? 48 8B 53 08 45 33 C9"
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>, Inherits<CharacterData>]
-[StructLayout(LayoutKind.Explicit, Size = 0x22E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2280)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3)]
 public unsafe partial struct Character {
     [FieldOffset(0x640)] public EmoteController EmoteController;
@@ -21,22 +21,26 @@ public unsafe partial struct Character {
     [FieldOffset(0x960)] public ReaperShroudContainer ReaperShroud;
 
     [FieldOffset(0x9B0)] public TimelineContainer Timeline;
+
+    // 0x40 = WeaponDrawn
+    [FieldOffset(0xCF2)] public byte StatusFlags3;
+
     [FieldOffset(0xD00)] public LookAtContainer LookAt;
 
     [FieldOffset(0x1900)] public VfxContainer Vfx;
 
     // TODO: put this in its own struct
-    [FieldOffset(0x1A34)] public byte StatusFlags4;
+    //[FieldOffset(0x1A34)] public byte StatusFlags4; - TODO: update for 7.0
 
     [FieldOffset(0x1A58)] public CharacterSetupContainer CharacterSetup;
 
-    [FieldOffset(0x2020)] public Balloon Balloon;
+    [FieldOffset(0x1FC0)] public Balloon Balloon;
 
-    [FieldOffset(0x2228)] public float Alpha;
+    [FieldOffset(0x21C8)] public float Alpha;
 
-    [FieldOffset(0x2238)] public Companion* CompanionObject; // minion
+    [FieldOffset(0x21D8)] public Companion* CompanionObject; // minion
 
-    [FieldOffset(0x2248), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
+    [FieldOffset(0x21E8), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -45,7 +49,7 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the target for the local player.
     /// </remarks>
-    [FieldOffset(0x2260)] public GameObjectId TargetId;
+    [FieldOffset(0x2200)] public GameObjectId TargetId;
 
     /// <summary>
     /// The current soft target for this Character. This will not be set for the LocalPlayer.
@@ -54,30 +58,23 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the soft target for the local player.
     /// </remarks>
-    [FieldOffset(0x2268)] public GameObjectId SoftTargetId;
+    [FieldOffset(0x2208)] public GameObjectId SoftTargetId;
 
-    [FieldOffset(0x2274)] public float CastRotation;
+    [FieldOffset(0x2214)] public float CastRotation;
 
-    [FieldOffset(0x22A0)] public uint NameId;
+    [FieldOffset(0x2240)] public uint NameId;
 
-    [FieldOffset(0x22B0)] public uint CompanionOwnerId;
+    [FieldOffset(0x2250)] public uint CompanionOwnerId;
 
-    [FieldOffset(0x22C8)] public ushort CurrentWorld;
-    [FieldOffset(0x22CA)] public ushort HomeWorld;
+    [FieldOffset(0x2268)] public ushort CurrentWorld;
+    [FieldOffset(0x226A)] public ushort HomeWorld;
 
-    [FieldOffset(0x22CC)] public CharacterModes Mode;
-    [FieldOffset(0x22CD)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
+    [FieldOffset(0x226C)] public CharacterModes Mode;
+    [FieldOffset(0x226D)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
-    [FieldOffset(0x22D0)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
+    [FieldOffset(0x2270)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
-    // Note: These 2 status flags might be just an ushort instead of 2 separate bytes.
-
-    // 0x1 = WeaponDrawn
-    // 0x2 = Unknown (Appears to always be set)
-    [FieldOffset(0x22D5)] public byte StatusFlags3;
-    // 0x20 = GPose wetness toggled
-
-    public bool IsWeaponDrawn => (StatusFlags3 & 0x1) == 0x1;
+    public bool IsWeaponDrawn => (StatusFlags3 & 0x40) != 0;
     public bool IsOffhandDrawn => (CharacterData.Flags1 & 0x40) == 0x40;
     public bool InCombat => (CharacterData.Flags1 & 0x20) == 0x20;
     public bool IsHostile => (CharacterData.Flags1 & 0x10) == 0x10;
@@ -86,10 +83,11 @@ public unsafe partial struct Character {
     public bool IsAllianceMember => (CharacterData.Flags2 & 0x10) == 0x10;
     public bool IsFriend => (CharacterData.Flags2 & 0x20) == 0x20;
 
-    public bool IsGPoseWet {
-        get => (StatusFlags4 & 0x01) == 0x01;
-        set => StatusFlags4 = (byte)(value ? StatusFlags4 | 0x01 : StatusFlags4 & ~0x01);
-    }
+    // TODO: update for 7.0
+    //public bool IsGPoseWet {
+    //    get => (StatusFlags4 & 0x01) == 0x01;
+    //    set => StatusFlags4 = (byte)(value ? StatusFlags4 | 0x01 : StatusFlags4 & ~0x01);
+    //}
 
     /// <summary>
     /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the
@@ -143,8 +141,9 @@ public unsafe partial struct Character {
     [VirtualFunction(85)]
     public partial ForayInfo* GetForayInfo();
 
-    [VirtualFunction(87)]
-    public partial bool IsMount();
+    // TODO: seems to have been removed in 7.0
+    //[VirtualFunction(87)]
+    //public partial bool IsMount();
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x170)]
