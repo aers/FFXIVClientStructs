@@ -75,9 +75,9 @@ public unsafe partial struct UIInputData {
     // Same as 0x4F4 ?
     // [FieldOffset(0x4C4)] public byte IsGameWindowFocused;
 
-    [FieldOffset(0x4C8)] public int CursorXPosition;
-    [FieldOffset(0x4CC)] public int CursorYPosition;
-    [FieldOffset(0x4D0)] public int MouseWheel; // -1 for scroll down, 1 for scroll up
+    [FieldOffset(0x4D0)] public int CursorXPosition;
+    [FieldOffset(0x4D4)] public int CursorYPosition;
+    [FieldOffset(0x4D8)] public int MouseWheel; // -1 for scroll down, 1 for scroll up
     [FieldOffset(0x4D4)] public MouseButtonFlags MouseButtonHeldFlags;
     [FieldOffset(0x4D8)] public MouseButtonFlags MouseButtonPressedFlags;
     [FieldOffset(0x4E0)] public MouseButtonFlags MouseButtonReleasedFlags;
