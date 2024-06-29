@@ -26,7 +26,7 @@ public unsafe partial struct AddonConfig {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x9E90)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC8E8)]
 public unsafe partial struct AddonConfigData {
     [FieldOffset(0x00)] public Utf8String DefaultString; // Literally says "Default"
     // [FieldOffset(0x68)] public StdList<[SomeStruct Size 48]> SomeList; // Contains 300 elements
