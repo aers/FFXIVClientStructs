@@ -22,8 +22,9 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x9B0)] public TimelineContainer Timeline;
 
+    // TODO: this is a field inside TimeLineContainer, at offset 0x342 but it's also read directly with this offset
     // 0x40 = WeaponDrawn
-    [FieldOffset(0xCF2)] public byte StatusFlags3;
+    [FieldOffset(0xCF2), CExportIgnore] public byte StatusFlags3;
 
     [FieldOffset(0xD00)] public LookAtContainer LookAt;
 
