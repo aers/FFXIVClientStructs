@@ -8,11 +8,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("InventoryExpansion")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x330)]
+[StructLayout(LayoutKind.Explicit, Size = 0x340)]
 public partial struct AddonInventoryExpansion {
-    [FieldOffset(0x280)] public AtkAddonControl AddonControl;
+    [FieldOffset(0x290)] public AtkAddonControl AddonControl;
 
-    [FieldOffset(0x328)] public int TabIndex;
+    [FieldOffset(0x338)] public int TabIndex;
 
     [MemberFunction("E8 ?? ?? ?? ?? BB ?? ?? ?? ?? 83 EB 01")]
     public partial void SetTab(int tab, bool force);

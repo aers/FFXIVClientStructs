@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GcArmyExpeditionReport")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x228)]
+[StructLayout(LayoutKind.Explicit, Size = 0x238)]
 public unsafe partial struct AddonGcArmyExpeditionResult {
-    [FieldOffset(0x220)] public AtkComponentButton* CompleteButton;
+    [FieldOffset(0x230)] public AtkComponentButton* CompleteButton;
 }

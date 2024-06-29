@@ -8,12 +8,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("NeedGreed")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x510)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5A0)]
 public unsafe partial struct AddonNeedGreed {
-    [FieldOffset(0x220), FixedSizeArray] internal FixedSizeArray16<LootItemInfo> _items;
+    [FieldOffset(0x230), FixedSizeArray] internal FixedSizeArray16<LootItemInfo> _items;
 
-    [FieldOffset(0x4FC)] public int NumItems;
-    [FieldOffset(0x508)] public int SelectedItemIndex;
+    [FieldOffset(0x50C)] public int NumItems;
+    [FieldOffset(0x518)] public int SelectedItemIndex;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]

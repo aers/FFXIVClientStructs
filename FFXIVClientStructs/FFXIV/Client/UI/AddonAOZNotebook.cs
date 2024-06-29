@@ -8,13 +8,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("AOZNotebook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xCC8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xCD8)]
 public unsafe partial struct AddonAOZNotebook {
-    [FieldOffset(0x308), FixedSizeArray] internal FixedSizeArray16<SpellbookBlock> _spellbookBlocks;
-    [FieldOffset(0x820), FixedSizeArray] internal FixedSizeArray24<ActiveAction> _activeActions;
+    [FieldOffset(0x318), FixedSizeArray] internal FixedSizeArray16<SpellbookBlock> _spellbookBlocks;
+    [FieldOffset(0x830), FixedSizeArray] internal FixedSizeArray24<ActiveAction> _activeActions;
 
-    [FieldOffset(0xCB0)] public int TabIndex;
-    [FieldOffset(0xCB4)] public int TabCount;
+    [FieldOffset(0xCC0)] public int TabIndex;
+    [FieldOffset(0xCC4)] public int TabCount;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 41 B8 ?? ?? ?? ?? 48 8D 55 B7")]
     public partial void SetTab(int tab, bool a3);

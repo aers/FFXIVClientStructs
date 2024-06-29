@@ -9,39 +9,39 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("BannerEditor")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x328)]
 public unsafe partial struct AddonBannerEditor {
-    [FieldOffset(0x2D8)] public AtkComponentDropDownList* PresetDropdown;
-    [FieldOffset(0x2F8)] public AtkComponentDropDownList* BackgroundDropdown;
-    [FieldOffset(0x318)] public AtkComponentDropDownList* FrameDropdown;
-    [FieldOffset(0x338)] public AtkComponentDropDownList* AccentDropdown;
-    [FieldOffset(0x358)] public AtkComponentDropDownList* PoseDropdown;
-    [FieldOffset(0x378)] public AtkComponentDropDownList* ExpressionDropdown;
+    [FieldOffset(0x2E8)] public AtkComponentDropDownList* PresetDropdown;
+    [FieldOffset(0x308)] public AtkComponentDropDownList* BackgroundDropdown;
+    [FieldOffset(0x328)] public AtkComponentDropDownList* FrameDropdown;
+    [FieldOffset(0x348)] public AtkComponentDropDownList* AccentDropdown;
+    [FieldOffset(0x368)] public AtkComponentDropDownList* PoseDropdown;
+    [FieldOffset(0x388)] public AtkComponentDropDownList* ExpressionDropdown;
 
-    [FieldOffset(0x3B8)] public AtkComponentCheckBox* PlayAnimationCheckbox;
-    [FieldOffset(0x3C0)] public AtkComponentCheckBox* HeadFacingCameraCheckbox;
-    [FieldOffset(0x3C8)] public AtkComponentCheckBox* EyesFacingCameraCheckbox;
+    [FieldOffset(0x3C8)] public AtkComponentCheckBox* PlayAnimationCheckbox;
+    [FieldOffset(0x3D0)] public AtkComponentCheckBox* HeadFacingCameraCheckbox;
+    [FieldOffset(0x3D8)] public AtkComponentCheckBox* EyesFacingCameraCheckbox;
 
-    [FieldOffset(0x3F8)] public AtkComponentButton* ApplyEquipmentButton;
-    [FieldOffset(0x400)] public AtkComponentButton* SaveButton;
-    [FieldOffset(0x408)] public AtkComponentButton* CloseButton;
+    [FieldOffset(0x408)] public AtkComponentButton* ApplyEquipmentButton;
+    [FieldOffset(0x410)] public AtkComponentButton* SaveButton;
+    [FieldOffset(0x418)] public AtkComponentButton* CloseButton;
 
-    [FieldOffset(0x410)] public AtkComponentSlider* AmbientLightingColorRedSlider;
-    [FieldOffset(0x418)] public AtkComponentSlider* AmbientLightingColorGreenSlider;
-    [FieldOffset(0x420)] public AtkComponentSlider* AmbientLightingColorBlueSlider;
-    [FieldOffset(0x428)] public AtkComponentSlider* AmbientLightingBrightnessSlider;
-    [FieldOffset(0x430)] public AtkComponentSlider* DirectionalLightingColorRedSlider;
-    [FieldOffset(0x438)] public AtkComponentSlider* DirectionalLightingColorGreenSlider;
-    [FieldOffset(0x440)] public AtkComponentSlider* DirectionalLightingColorBlueSlider;
-    [FieldOffset(0x448)] public AtkComponentSlider* DirectionalLightingBrightnessSlider;
-    [FieldOffset(0x450)] public AtkComponentSlider* DirectionalLightingVerticalAngleSlider;
-    [FieldOffset(0x458)] public AtkComponentSlider* DirectionalLightingHorizontalAngleSlider;
-    [FieldOffset(0x460)] public AtkComponentSlider* CameraZoomSlider;
-    [FieldOffset(0x468)] public AtkComponentSlider* ImageRotation;
+    [FieldOffset(0x420)] public AtkComponentSlider* AmbientLightingColorRedSlider;
+    [FieldOffset(0x428)] public AtkComponentSlider* AmbientLightingColorGreenSlider;
+    [FieldOffset(0x430)] public AtkComponentSlider* AmbientLightingColorBlueSlider;
+    [FieldOffset(0x438)] public AtkComponentSlider* AmbientLightingBrightnessSlider;
+    [FieldOffset(0x440)] public AtkComponentSlider* DirectionalLightingColorRedSlider;
+    [FieldOffset(0x448)] public AtkComponentSlider* DirectionalLightingColorGreenSlider;
+    [FieldOffset(0x450)] public AtkComponentSlider* DirectionalLightingColorBlueSlider;
+    [FieldOffset(0x458)] public AtkComponentSlider* DirectionalLightingBrightnessSlider;
+    [FieldOffset(0x460)] public AtkComponentSlider* DirectionalLightingVerticalAngleSlider;
+    [FieldOffset(0x468)] public AtkComponentSlider* DirectionalLightingHorizontalAngleSlider;
+    [FieldOffset(0x470)] public AtkComponentSlider* CameraZoomSlider;
+    [FieldOffset(0x478)] public AtkComponentSlider* ImageRotation;
 
-    [FieldOffset(0x4C0)] public AtkResNode* WarningSymbol;
+    [FieldOffset(0x4D0)] public AtkResNode* WarningSymbol;
 
-    [FieldOffset(0x4CC)] public short NumPresets;
+    [FieldOffset(0x4DC)] public short NumPresets;
 
-    [FieldOffset(0x4E3)] public bool IsWarningSymbolShown;
+    [FieldOffset(0x4F3)] public bool IsWarningSymbolShown;
 }

@@ -8,11 +8,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ReconstructionBox")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x440)]
+[StructLayout(LayoutKind.Explicit, Size = 0x450)]
 public unsafe partial struct AddonReconstructionBox {
-    [FieldOffset(0x258), FixedSizeArray] internal FixedSizeArray10<AddonItemDonationInfo> _donationInfos;
+    [FieldOffset(0x268), FixedSizeArray] internal FixedSizeArray10<AddonItemDonationInfo> _donationInfos;
 
-    [FieldOffset(0x438)] public int ItemHovered; // 1 if hovering an item, 0 otherwise
+    [FieldOffset(0x448)] public int ItemHovered; // 1 if hovering an item, 0 otherwise
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]

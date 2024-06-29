@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GSInfoCardDeck")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x228)]
+[StructLayout(LayoutKind.Explicit, Size = 0x238)]
 public unsafe partial struct AddonGSInfoCardDeck {
-    [FieldOffset(0x220)] public AtkComponentList* DeckList;
+    [FieldOffset(0x230)] public AtkComponentList* DeckList;
 }

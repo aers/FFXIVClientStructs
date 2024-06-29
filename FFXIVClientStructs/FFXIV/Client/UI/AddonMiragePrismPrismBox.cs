@@ -8,12 +8,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("MiragePrismPrismBox")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xC28)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF78)]
 public unsafe partial struct AddonMiragePrismPrismBox {
-    [FieldOffset(0xA00)] public AtkComponentButton* PrevButton;
-    [FieldOffset(0xA08)] public AtkComponentButton* NextButton;
+    [FieldOffset(0xA10)] public AtkComponentButton* PrevButton;
+    [FieldOffset(0xA18)] public AtkComponentButton* NextButton;
 
-    [FieldOffset(0xA50)] public AtkComponentDropDownList* JobDropdown;
+    [FieldOffset(0xA60)] public AtkComponentDropDownList* JobDropdown;
 
-    [FieldOffset(0xA78)] public AtkComponentDropDownList* OrderDropdown;
+    [FieldOffset(0xA88)] public AtkComponentDropDownList* OrderDropdown;
 }
