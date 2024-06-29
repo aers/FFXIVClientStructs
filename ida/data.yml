@@ -7655,6 +7655,8 @@ classes:
       0x1408AE9D0: LoadEquipment
       0x1408AEC30: HideHeadgear
       0x1408AED90: SetVisor
+      0x1408AF490: EquipGlassesIds # sends it to the server
+      0x1408AF520: GetGlassesId
   Client::Game::Character::CompanionContainer:
     vtbls:
       - ea: 0x141F0F538

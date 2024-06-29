@@ -109,10 +109,11 @@ public unsafe partial struct BannerModuleEntry {
     public partial bool EqualTo(BannerModuleEntry* other);
 
     /// <param name="itemIds">A pointer to 14 Item Ids</param>
-    /// <param name="stainIds">A pointer to 14 Stain Ids</param>
+    /// <param name="stainIds">A pointer to 28 Stain Ids</param>
+    /// <param name="glassesIds">A pointer to 2 Glasses Ids</param>
     /// <param name="gearVisibilityFlag">Gear Visibility Flags</param>
     [MemberFunction("E8 ?? ?? ?? ?? 89 43 58 48 8B 4D F0")]
-    public static partial uint GenerateChecksum(uint* itemIds, byte* stainIds, BannerGearVisibilityFlag gearVisibilityFlag);
+    public static partial uint GenerateChecksum(uint* itemIds, byte* stainIds, ushort* glassesIds, BannerGearVisibilityFlag gearVisibilityFlag);
 }
 
 [Flags]

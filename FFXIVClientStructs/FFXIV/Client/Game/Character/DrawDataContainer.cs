@@ -33,6 +33,8 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x1A6)] public byte Flags1;
     [FieldOffset(0x1A7)] public byte Flags2;
 
+    [FieldOffset(0x1D0), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
+
     [MemberFunction("E8 ?? ?? ?? ?? B1 01 41 FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
 
