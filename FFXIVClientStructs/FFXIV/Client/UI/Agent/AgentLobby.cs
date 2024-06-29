@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Lobby)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1DF8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1E68)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 ?? 48 89 01 4C 8B E1", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name

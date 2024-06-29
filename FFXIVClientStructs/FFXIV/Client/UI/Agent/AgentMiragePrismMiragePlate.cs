@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.MiragePrismMiragePlate)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x350)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3A8)]
 public unsafe partial struct AgentMiragePrismMiragePlate {
     [FieldOffset(0x78)] public MiragePrismMiragePlateCharaView CharaView;
 
@@ -23,7 +23,7 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
     [Inherits<CharaView>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x328)]
     public unsafe partial struct MiragePrismMiragePlateCharaView {
         [FieldOffset(0x2C8)] public bool IsUpdatePending;
 

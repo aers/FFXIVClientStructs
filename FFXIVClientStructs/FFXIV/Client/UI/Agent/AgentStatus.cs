@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Status)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x358)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
 public partial struct AgentStatus {
 
     [FieldOffset(0x3C)] public byte TabIndex;
@@ -19,7 +19,7 @@ public partial struct AgentStatus {
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
     [Inherits<CharaView>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x320)]
     public partial struct StatusCharaView {
         [FieldOffset(0x2C8)] public uint MainhandItemId;
         [FieldOffset(0x2CC)] public bool DrawWeapon;

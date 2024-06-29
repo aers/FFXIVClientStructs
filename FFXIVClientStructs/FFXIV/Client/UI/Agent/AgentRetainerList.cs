@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.RetainerList)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x5B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x620)]
 public unsafe partial struct AgentRetainerList {
     [FieldOffset(0x30)] public uint RetainerListOpenedTime;
     [FieldOffset(0x34)] public uint RetainerListSortAddonId;

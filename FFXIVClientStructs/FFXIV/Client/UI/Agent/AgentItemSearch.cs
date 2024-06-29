@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ItemSearch)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x37F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3878)]
 public unsafe partial struct AgentItemSearch {
     [FieldOffset(0x98)] public StringHolder* StringData;
     [FieldOffset(0x3304)] public uint ResultItemId;

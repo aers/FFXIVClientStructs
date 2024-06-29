@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Context)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1750)]
+[StructLayout(LayoutKind.Explicit, Size = 0x17E0)]
 public unsafe partial struct AgentContext {
 
     [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray2<ContextMenu> _contextMenus;

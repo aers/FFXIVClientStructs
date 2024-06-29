@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Inspect)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x820)]
+[StructLayout(LayoutKind.Explicit, Size = 0x808)]
 public unsafe partial struct AgentInspect {
     [FieldOffset(0x028)] public uint RequestEntityId;
     [FieldOffset(0x02C)] public uint RequestSearchCommentEntityId;
@@ -45,7 +45,7 @@ public unsafe partial struct AgentInspect {
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
     [Inherits<CharaView>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x318)]
     public partial struct InspectCharaView;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x86)]

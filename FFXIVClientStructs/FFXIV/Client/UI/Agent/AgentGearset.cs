@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.GearSet)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB00)]
+[StructLayout(LayoutKind.Explicit, Size = 0xBC0)]
 public partial struct AgentGearSet {
     [FieldOffset(0x808)] public GearsetCharaView CharaView;
 
@@ -17,7 +17,7 @@ public partial struct AgentGearSet {
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
     [Inherits<CharaView>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x328)]
     public unsafe partial struct GearsetCharaView {
         [FieldOffset(0x2C8)] public bool UpdateVisibility;
         [FieldOffset(0x2C9)] public bool UpdateItems;

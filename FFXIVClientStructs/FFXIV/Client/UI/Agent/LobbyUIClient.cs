@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [GenerateInterop]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 4F 78", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x848)]
+[StructLayout(LayoutKind.Explicit, Size = 0x868)]
 public unsafe partial struct LobbyUIClient {
     [FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
     //[FieldOffset(0x18)] public ?* NetworConfig; // contains hosts and ports

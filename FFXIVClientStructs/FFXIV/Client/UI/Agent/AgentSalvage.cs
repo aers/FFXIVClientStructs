@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Salvage)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3D0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x438)]
 public unsafe partial struct AgentSalvage {
 
     [FieldOffset(0x30)] public SalvageItemCategory SelectedCategory;

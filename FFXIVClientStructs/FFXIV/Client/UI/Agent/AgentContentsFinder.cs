@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ContentsFinder)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x20E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2228)]
 public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x38)] public Utf8String Description;

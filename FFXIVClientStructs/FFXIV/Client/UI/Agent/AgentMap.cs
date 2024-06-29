@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Map)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x12AB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x144C8)]
 public unsafe partial struct AgentMap {
     /// <summary> Pointers to markers in <see cref="EventMarkers"/>. </summary>
     [FieldOffset(0x88)] public StdVector<Pointer<MapMarkerData>> EventMarkersPtrs;

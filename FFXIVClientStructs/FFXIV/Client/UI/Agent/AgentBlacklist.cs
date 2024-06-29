@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Blacklist)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x110)]
+[StructLayout(LayoutKind.Explicit, Size = 0x120)]
 public unsafe partial struct AgentBlacklist {
     [FieldOffset(0x28)] public InfoProxyBlacklist* InfoProxy;
     [FieldOffset(0x30)] public Utf8String SelectedPlayerName;

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Colorant)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x488)]
 public partial struct AgentColorant {
 
     [FieldOffset(0x108)] public ColorantCharaView CharaView;
@@ -17,7 +17,7 @@ public partial struct AgentColorant {
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
     [Inherits<CharaView>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x330)]
     public unsafe partial struct ColorantCharaView {
         //[FieldOffset(0x2C8)] public uint Unk2C8; // a3 passed to vf13
         [FieldOffset(0x2CC)] public uint EntityId; // of local player

@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Hud)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4BA0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4DA8)]
 public unsafe partial struct AgentHUD {
     [FieldOffset(0xAA8)] public uint CastBarAddonId;
 
