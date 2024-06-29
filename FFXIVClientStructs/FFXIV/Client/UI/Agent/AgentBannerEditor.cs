@@ -18,7 +18,7 @@ public unsafe partial struct AgentBannerEditor {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3F8)]
 public unsafe partial struct AgentBannerEditorState {
     public enum EditorOpenType : int {
         Portrait = 0,
@@ -65,7 +65,7 @@ public unsafe partial struct AgentBannerEditorState {
         // 3 unused bytes?!
     }
 
-    // Datasets are created here: "E8 ?? ?? ?? ?? 48 8B 4D 28 E8"
+    // Datasets are created here: "E8 ?? ?? ?? ?? 48 8B 4D 28 E8 ?? ?? ?? ?? 48 8B 45 28"
     [FieldOffset(0)] public Dataset Presets;
     [FieldOffset(0x30)] public Dataset Backgrounds;
     [FieldOffset(0x60)] public Dataset Frames;
@@ -73,27 +73,30 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0xC0)] public Dataset Poses;
     [FieldOffset(0xF0)] public Dataset Expressions;
 
-    [FieldOffset(0x120)] public BannerModuleEntry BannerEntry;
+    // 7.0: new filters here
 
-    [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
-    [FieldOffset(0x278), FixedSizeArray] internal FixedSizeArray14<byte> _stainIds;
+    [FieldOffset(0x230)] public BannerModuleEntry BannerEntry;
 
-    [FieldOffset(0x288)] public uint Checksum;
-    [FieldOffset(0x28C)] public BannerGearVisibilityFlag GearVisibilityFlag;
-    [FieldOffset(0x290)] public byte GearsetIndex;
-    [FieldOffset(0x291)] public byte ClassJobId;
+    [FieldOffset(0x350), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
+    [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray14<byte> _stain1Ids;
+    [FieldOffset(0x396), FixedSizeArray] internal FixedSizeArray14<byte> _stain2Ids;
 
-    [FieldOffset(0x298)] public AgentBannerEditor* AgentBannerEditor;
-    [FieldOffset(0x2A0)] public UIModule* UIModule;
-    [FieldOffset(0x2A8)] public CharaViewPortrait* CharaView;
+    [FieldOffset(0x3A8)] public uint Checksum;
+    [FieldOffset(0x3AC)] public BannerGearVisibilityFlag GearVisibilityFlag;
+    [FieldOffset(0x3B0)] public byte GearsetIndex;
+    [FieldOffset(0x3B1)] public byte ClassJobId;
 
-    [FieldOffset(0x2B8)] public EditorOpenType OpenType;
+    [FieldOffset(0x3B8)] public AgentBannerEditor* AgentBannerEditor;
+    [FieldOffset(0x3C0)] public UIModule* UIModule;
+    [FieldOffset(0x3C8)] public CharaViewPortrait* CharaView;
 
-    [FieldOffset(0x2C4)] public float FrameCountdown; // starting at 0.5s on open
-    [FieldOffset(0x2C8)] public int GearsetId;
+    [FieldOffset(0x3D8)] public EditorOpenType OpenType;
 
-    [FieldOffset(0x2D0)] public int CloseDialogAddonId;
-    [FieldOffset(0x2D4)] public bool HasDataChanged;
+    [FieldOffset(0x3E4)] public float FrameCountdown; // starting at 0.5s on open
+    [FieldOffset(0x3E8)] public int GearsetId;
+
+    [FieldOffset(0x3F0)] public int CloseDialogAddonId;
+    [FieldOffset(0x3F4)] public bool HasDataChanged;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 48 8B 01 FF 50 58")]
     public partial void Save();
