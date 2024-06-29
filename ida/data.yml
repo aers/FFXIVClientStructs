@@ -1065,7 +1065,7 @@ classes:
       0x1409BDC40: GetQuestIndex
       0x1409BE340: GetQuestClassJob
       0x1409BE000: IsQuestAccepted
-      0x1409C1D20: GetBeastTribeAllowance
+      0x1409BE500: GetBeastTribeAllowance
       0x140A05040: IsRecipeComplete # static (uint recipeId)
       0x140A1ECE0: IsLevequestComplete
       0x140AD88F0: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
