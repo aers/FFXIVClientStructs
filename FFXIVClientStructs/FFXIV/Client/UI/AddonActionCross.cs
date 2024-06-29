@@ -29,8 +29,8 @@ public unsafe partial struct AddonActionCross {
     [FieldOffset(0x6F8)] public uint ExpandedHoldMapValueLR;
     [FieldOffset(0x6FC)] public uint ExpandedHoldMapValueRL;
 
-    [FieldOffset(0x6A0)] public bool SelectedDoubleCrossLeft;
-    [FieldOffset(0x6A4)] public bool SelectedDoubleCrossRight;
+    [FieldOffset(0x700)] public bool SelectedDoubleCrossLeft;
+    [FieldOffset(0x704)] public bool SelectedDoubleCrossRight;
     [FieldOffset(0x710)] public bool InEditMode;
     [FieldOffset(0x711)] public bool SelectedLeft;
     [FieldOffset(0x712)] public bool SelectedRight;
