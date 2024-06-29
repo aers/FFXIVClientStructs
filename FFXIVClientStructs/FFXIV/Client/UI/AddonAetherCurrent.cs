@@ -10,10 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct AddonAetherCurrent {
-    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentRadioButton>> _tabPointers;
+    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentRadioButton>> _tabs;
 
-    [FieldOffset(0x264)] public int TabIndex;
-    [FieldOffset(0x268)] public int TabCount;
+    [FieldOffset(0x26C)] public int TabIndex;
+    [FieldOffset(0x270)] public int TabCount;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 64 8B 85 ?? ?? ?? ??")]
     public partial void SetTab(int tab);

@@ -10,12 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF28)]
 public unsafe partial struct AddonCharacter {
-    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentRadioButton>> _radioButtons;
+    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentRadioButton>> _tabs;
 
-    [FieldOffset(0x498)] public int TabIndex;
-    [FieldOffset(0x49C)] public int TabCount;
-
-    [FieldOffset(0x4A0)] public AtkAddonControl AddonControl;
+    [FieldOffset(0x4A8)] public int TabIndex;
+    [FieldOffset(0x4AC)] public int TabCount;
+    [FieldOffset(0x4B0)] public AtkAddonControl AddonControl;
 
     [FieldOffset(0xBB8)] public AtkCollisionNode* CharacterPreviewCollisionNode;
 
