@@ -15075,10 +15075,10 @@ classes:
       0x141244C90: ctor
   Client::UI::AddonBannerEditor:
     vtbls:
-      - ea: 0x14202A7C8
+      - ea: 0x141FE02D8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x141514D80: ctor
+      0x141302A90: ctor
   Client::UI::AddonMoogleCollection:
     vtbls:
       - ea: 0x141FEA070
