@@ -23,10 +23,8 @@
     <Product>FFXIVClientStructs</Product>
     <AssemblyTitle>FFXIVClientStructs</AssemblyTitle>
 
-    <!--
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
-    -->
     
     <!-- InteropGenerator -->
     <InteropGenerator_InteropNamespace>FFXIVClientStructs.Interop.Generated</InteropGenerator_InteropNamespace>
