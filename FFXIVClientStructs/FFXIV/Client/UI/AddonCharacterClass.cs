@@ -17,7 +17,7 @@ public unsafe partial struct AddonCharacterClass {
     [FieldOffset(0x348)] public AtkTextNode* MaxXPTextNode;
     [FieldOffset(0x350)] public AtkTextNode* CurrentDesynthesisLevelTextNode;
     [FieldOffset(0x358)] public AtkTextNode* MaxDesynthesisLevelTextNode;
-    [FieldOffset(0x350), FixedSizeArray] internal FixedSizeArray31<ClassEntry> _classEntries;
+    [FieldOffset(0x368), FixedSizeArray] internal FixedSizeArray31<ClassEntry> _classEntries;
 
     [FieldOffset(0x898)] public int TabIndex;
 
