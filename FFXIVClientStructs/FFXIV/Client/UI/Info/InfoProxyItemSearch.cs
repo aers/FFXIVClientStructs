@@ -87,6 +87,7 @@ public unsafe partial struct MarketBoardListing {
     [FieldOffset(0x68)] public ulong ListingId;
     [FieldOffset(0x70)] public ulong SellingRetainerContentId; // ??
     [FieldOffset(0x78)] public ulong SellingPlayerContentId;
+    [FieldOffset(0x80)] public ulong ArtisanId;
 
     [FieldOffset(0x88)] public uint UnitPrice;
     [FieldOffset(0x8C)] public uint TotalTax;
@@ -98,8 +99,8 @@ public unsafe partial struct MarketBoardListing {
     /// </summary>
     [FieldOffset(0x98)] public ushort ContainerIndex;
 
-    [FieldOffset(0x9A)] public ushort Durability; // unused (?)
-    [FieldOffset(0x9C)] public ushort Spiritbond; // unused (?)
+    [FieldOffset(0x9A)] public ushort Durability;
+    [FieldOffset(0x9C)] public ushort Spiritbond;
 
     /// <summary>
     /// List of materias associated with this item. Only valid up to the count specified in MateriaCount.
@@ -108,6 +109,7 @@ public unsafe partial struct MarketBoardListing {
 
     [FieldOffset(0xA8)] public bool IsHqItem;
     [FieldOffset(0xA9)] public byte MateriaCount;
+    [FieldOffset(0xAA)] public bool IsMannequin;
 
     // [FieldOffset(0xAC)] public ushort Unk_0xAC;
 
@@ -115,8 +117,8 @@ public unsafe partial struct MarketBoardListing {
     /// The Town (from EXD) that this marketboard entry is from.
     /// </summary>
     [FieldOffset(0xB0)] public byte TownId;
-
-    [FieldOffset(0xB1)] public byte StainId;
+    [FieldOffset(0xB1)] public byte Stain1Id;
+    [FieldOffset(0xB2)] public byte Stain2Id;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x24)]
