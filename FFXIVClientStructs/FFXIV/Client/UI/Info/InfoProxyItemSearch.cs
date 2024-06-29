@@ -108,6 +108,7 @@ public unsafe partial struct MarketBoardListing {
 
     [FieldOffset(0xA8)] public bool IsHqItem;
     [FieldOffset(0xA9)] public byte MateriaCount;
+    [FieldOffset(0xAA)] public bool IsMannequin;
 
     // [FieldOffset(0xAC)] public ushort Unk_0xAC;
 
@@ -116,7 +117,8 @@ public unsafe partial struct MarketBoardListing {
     /// </summary>
     [FieldOffset(0xB0)] public byte TownId;
 
-    [FieldOffset(0xB1)] public byte StainId;
+    [FieldOffset(0xB1)] public byte Stain1Id;
+    [FieldOffset(0xB2)] public byte Stain2Id;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x24)]
