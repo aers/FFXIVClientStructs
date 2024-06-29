@@ -21,7 +21,7 @@ public unsafe partial struct AgentMiragePrismPrismBox {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1BAE0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x22408)]
 public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray800<PrismBoxItem> _prismBoxItems;
     [FieldOffset(0x1A908)] public PrismBoxItem TempContextItem;
@@ -45,13 +45,14 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x1BA78)] public Utf8String SearchString;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
-public struct PrismBoxItem {
+public partial struct PrismBoxItem {
     [FieldOffset(0x00)] public Utf8String Name;
     [FieldOffset(0x6C)] public uint ItemId;
     [FieldOffset(0x70)] public uint IconId;
     //[FieldOffset(0x74)] public uint Unk_SheetColumn19;
-    [FieldOffset(0x7E)] public byte Stain;
+    [FieldOffset(0x7E), FixedSizeArray] internal FixedSizeArray2<byte> _stains;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
