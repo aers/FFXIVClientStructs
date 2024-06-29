@@ -24,12 +24,12 @@ public unsafe partial struct AddonJobHudDRG0 {
 
         // Reduced Size in 7.0
 
-       /* [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
-        [FieldOffset(0x0C)] public int LotDStatus; // set to 2 while LotD is active (may get set to 1 at a lower level range?)
-        [FieldOffset(0x10)] public int LotDTimer;
-        [FieldOffset(0x14)] public int LotDMax;
-        [FieldOffset(0x18)] public int EyeCount;
-        [FieldOffset(0x1C)] public int FirstMindsFocusCount;*/
+        /* [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
+         [FieldOffset(0x0C)] public int LotDStatus; // set to 2 while LotD is active (may get set to 1 at a lower level range?)
+         [FieldOffset(0x10)] public int LotDTimer;
+         [FieldOffset(0x14)] public int LotDMax;
+         [FieldOffset(0x18)] public int EyeCount;
+         [FieldOffset(0x1C)] public int FirstMindsFocusCount;*/
     }
 
     [GenerateInterop]

@@ -23,16 +23,16 @@ public unsafe partial struct AddonJobHudAST0 {
 
         // Reduced size in 7.0
 
-      /*  [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
-        [FieldOffset(0x0C)] public int DrawnCard;
-        [FieldOffset(0x10)] public int DrawnMinorArcanum;
-        [FieldOffset(0x14)] public int DrawnRoleBuff;
-        [FieldOffset(0x18)] public int DrawnAstrosign;
-        [FieldOffset(0x1C)] public int Astrosign1;
-        [FieldOffset(0x20)] public int Astrosign2;
-        [FieldOffset(0x24)] public int Astrosign3;
-        [FieldOffset(0x30)] public byte* CardName;
-        [FieldOffset(0x38)] public byte* MinorArcanaName;*/
+        /*  [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
+          [FieldOffset(0x0C)] public int DrawnCard;
+          [FieldOffset(0x10)] public int DrawnMinorArcanum;
+          [FieldOffset(0x14)] public int DrawnRoleBuff;
+          [FieldOffset(0x18)] public int DrawnAstrosign;
+          [FieldOffset(0x1C)] public int Astrosign1;
+          [FieldOffset(0x20)] public int Astrosign2;
+          [FieldOffset(0x24)] public int Astrosign3;
+          [FieldOffset(0x30)] public byte* CardName;
+          [FieldOffset(0x38)] public byte* MinorArcanaName;*/
     }
 
     [GenerateInterop]

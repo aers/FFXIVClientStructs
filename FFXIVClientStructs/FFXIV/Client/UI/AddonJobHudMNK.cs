@@ -83,7 +83,7 @@ public unsafe partial struct AddonJobHudMNK1 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct ChakraGaugeData {
-        
+
         /*[FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
         [FieldOffset(0x0C)] public int ChakraCount;*/
     }
@@ -92,7 +92,7 @@ public unsafe partial struct AddonJobHudMNK1 {
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public partial struct ChakraGauge {
-        
+
         /*    [FieldOffset(0x10)] public AtkResNode* Container;
             [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _chakra;*/
     }
@@ -101,10 +101,10 @@ public unsafe partial struct AddonJobHudMNK1 {
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
     public partial struct ChakraGaugeSimple {
-      /*  [FieldOffset(0x10)] public AtkResNode* Container;
+        /*  [FieldOffset(0x10)] public AtkResNode* Container;
 
-        [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _chakra;
+          [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _chakra;
 
-        [FieldOffset(0x40)] public bool ChakraCapped;*/
+          [FieldOffset(0x40)] public bool ChakraCapped;*/
     }
 }
