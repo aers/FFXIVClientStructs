@@ -8,8 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GSInfoChocoboParam")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x248)]
+[StructLayout(LayoutKind.Explicit, Size = 0x258)]
 public unsafe partial struct AddonGSInfoChocoboParam {
-    [FieldOffset(0x238)] public AtkComponentBase* RaceAbility1;
-    [FieldOffset(0x240)] public AtkComponentBase* RaceAbility2;
+    [FieldOffset(0x248)] public AtkComponentBase* RaceAbility1;
+    [FieldOffset(0x250)] public AtkComponentBase* RaceAbility2;
 }

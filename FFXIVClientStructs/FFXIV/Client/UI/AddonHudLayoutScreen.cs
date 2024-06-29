@@ -9,15 +9,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_HudLayoutScreen")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x8E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x948)]
 public unsafe partial struct AddonHudLayoutScreen {
-    [FieldOffset(0x2C8)] public AddonHudLayoutWindow* HudLayoutWindow;
+    [FieldOffset(0x2D8)] public AddonHudLayoutWindow* HudLayoutWindow;
 
-    [FieldOffset(0x540)]
+    [FieldOffset(0x550)]
     public AtkComponentNode*
         SelectedOverlayNode; // actually an array of active overlay nodes here, but this should be the selected one in theory
 
-    [FieldOffset(0x7B0)] public MoveableAddonInfoStruct* SelectedAddon;
+    [FieldOffset(0x7C0)] public MoveableAddonInfoStruct* SelectedAddon;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]

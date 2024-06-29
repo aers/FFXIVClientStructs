@@ -8,11 +8,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // AddonMinionNoteBook and AddonMountNoteBook inherit from this
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xBF0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC00)]
 public partial struct AddonMinionMountBase {
-    [FieldOffset(0x2A0)] public TabController TabController;
+    [FieldOffset(0x2B0)] public TabController TabController;
 
-    [FieldOffset(0x8C0)] public ViewType CurrentView;
+    [FieldOffset(0x8D0)] public ViewType CurrentView;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 42 D3 83 F8 08")]
     public partial void SwitchToFavorites();

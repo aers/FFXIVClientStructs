@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GearSetList")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3A90)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3AA0)]
 public partial struct AddonGearSetList {
-    [FieldOffset(0x3A8D)] public bool ShouldResetPosition;
+    [FieldOffset(0x3A9D)] public bool ShouldResetPosition;
 }

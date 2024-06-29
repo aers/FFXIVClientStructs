@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GatheringMasterpiece")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x7F8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
 public unsafe partial struct AddonGatheringMasterpiece {
-    [FieldOffset(0x388)] public AtkComponentDragDrop* CollectDragDrop;
+    [FieldOffset(0x398)] public AtkComponentDragDrop* CollectDragDrop;
 }

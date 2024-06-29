@@ -11,23 +11,23 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD00)]
 public unsafe partial struct AddonWeeklyPuzzle {
-    [FieldOffset(0x220)] public RewardPanelItem RewardPanelCommander;
-    [FieldOffset(0x248)] public RewardPanelItem RewardPanelCoffer;
-    [FieldOffset(0x270)] public RewardPanelItem RewardPanelGiftBox;
-    [FieldOffset(0x298)] public RewardPanelItem RewardPanelDualBlades;
-    [FieldOffset(0x2C0)] public AtkComponentButton* AtkComponentButton2C0;
-    [FieldOffset(0x2C8)] public AtkResNode* AtkResNode2C8;
-    [FieldOffset(0x2D0)] public AtkTextNode* AtkTextNode2D0;
-    [FieldOffset(0x2D8)] public AtkTextNode* AtkTextNode2D8;
-    [FieldOffset(0x2E0)] public AtkResNode* AtkResNode2E0;
-    [FieldOffset(0x2E8)] public AtkTextNode* AtkTextNode2E8;
-    [FieldOffset(0x2F0)] public AtkTextNode* AtkTextNode2F0;
-    [FieldOffset(0x2F8)] public GameTileBoard GameBoard;
-    [FieldOffset(0xA38)] public AtkResNode* AtkResNodeA38;
-    [FieldOffset(0xB48)] public Utf8String CommanderStr;
-    [FieldOffset(0xBB0)] public Utf8String CofferStr;
-    [FieldOffset(0xC18)] public Utf8String GiftBoxStr;
-    [FieldOffset(0xC80)] public Utf8String DualBladesStr;
+    [FieldOffset(0x230)] public RewardPanelItem RewardPanelCommander;
+    [FieldOffset(0x258)] public RewardPanelItem RewardPanelCoffer;
+    [FieldOffset(0x280)] public RewardPanelItem RewardPanelGiftBox;
+    [FieldOffset(0x2A8)] public RewardPanelItem RewardPanelDualBlades;
+    [FieldOffset(0x2D0)] public AtkComponentButton* AtkComponentButton2C0;
+    [FieldOffset(0x2D8)] public AtkResNode* AtkResNode2C8;
+    [FieldOffset(0x2E0)] public AtkTextNode* AtkTextNode2D0;
+    [FieldOffset(0x2E8)] public AtkTextNode* AtkTextNode2D8;
+    [FieldOffset(0x2F0)] public AtkResNode* AtkResNode2E0;
+    [FieldOffset(0x2F8)] public AtkTextNode* AtkTextNode2E8;
+    [FieldOffset(0x300)] public AtkTextNode* AtkTextNode2F0;
+    [FieldOffset(0x308)] public GameTileBoard GameBoard;
+    [FieldOffset(0xA48)] public AtkResNode* AtkResNodeA38;
+    [FieldOffset(0xB58)] public Utf8String CommanderStr;
+    [FieldOffset(0xBC0)] public Utf8String CofferStr;
+    [FieldOffset(0xC28)] public Utf8String GiftBoxStr;
+    [FieldOffset(0xC90)] public Utf8String DualBladesStr;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct RewardPanelItem {

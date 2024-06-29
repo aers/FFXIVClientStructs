@@ -8,11 +8,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("SatisfactionSupply")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x670)]
+[StructLayout(LayoutKind.Explicit, Size = 0x680)]
 public unsafe partial struct AddonSatisfactionSupply {
-    [FieldOffset(0x224)] public int HoveredElementIndex; // Index 0-2 of the last hovered turn in element
+    [FieldOffset(0x234)] public int HoveredElementIndex; // Index 0-2 of the last hovered turn in element
 
-    [FieldOffset(0x308), FixedSizeArray] internal FixedSizeArray3<AddonDeliveryItemInfo> _deliveryInfo;
+    [FieldOffset(0x318), FixedSizeArray] internal FixedSizeArray3<AddonDeliveryItemInfo> _deliveryInfo;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]

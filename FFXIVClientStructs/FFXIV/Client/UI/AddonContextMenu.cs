@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B CB 48 89 03 E8 ?? ?? ?? ?? 80 8B ?? ?? ?? ?? ?? 33 C9 48 89 83 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 8B C3", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
 public partial struct AddonContextMenu {
     [VirtualFunction(72)]
     public partial bool OnMenuSelected(int selectedIdx, byte a3);

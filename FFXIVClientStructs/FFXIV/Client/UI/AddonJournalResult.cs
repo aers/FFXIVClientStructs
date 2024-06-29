@@ -8,16 +8,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JournalResult")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x288)]
+[StructLayout(LayoutKind.Explicit, Size = 0x298)]
 public unsafe partial struct AddonJournalResult {
-    [FieldOffset(0x220)] public AtkImageNode* AtkImageNode220;
-    [FieldOffset(0x228)] public AtkImageNode* AtkImageNode228;
-    [FieldOffset(0x230)] public AtkImageNode* AtkImageNode230;
-    [FieldOffset(0x238)] public AtkComponentGuildLeveCard* AtkComponentGuildLeveCard238;
-    [FieldOffset(0x240)] public AtkComponentButton* CompleteButton;
-    [FieldOffset(0x248)] public AtkComponentButton* DeclineButton;
-    [FieldOffset(0x250)] public AtkTextNode* AtkTextNode250;
-    [FieldOffset(0x258)] public AtkTextNode* AtkTextNode258;
-    [FieldOffset(0x260)] public AtkImageNode* AtkImageNode260;
-    [FieldOffset(0x268)] public AtkComponentJournalCanvas* AtkComponentJournalCanvas268;
+    [FieldOffset(0x230)] public AtkImageNode* AtkImageNode220;
+    [FieldOffset(0x238)] public AtkImageNode* AtkImageNode228;
+    [FieldOffset(0x240)] public AtkImageNode* AtkImageNode230;
+    [FieldOffset(0x248)] public AtkComponentGuildLeveCard* AtkComponentGuildLeveCard238;
+    [FieldOffset(0x250)] public AtkComponentButton* CompleteButton;
+    [FieldOffset(0x258)] public AtkComponentButton* DeclineButton;
+    [FieldOffset(0x260)] public AtkTextNode* AtkTextNode250;
+    [FieldOffset(0x268)] public AtkTextNode* AtkTextNode258;
+    [FieldOffset(0x270)] public AtkImageNode* AtkImageNode260;
+    [FieldOffset(0x278)] public AtkComponentJournalCanvas* AtkComponentJournalCanvas268;
 }

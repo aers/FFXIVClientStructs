@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("AdventureNoteBook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x630)]
+[StructLayout(LayoutKind.Explicit, Size = 0x640)]
 public unsafe partial struct AddonAdventureNoteBook {
-    [FieldOffset(0x570)] public TabController TabController;
+    [FieldOffset(0x580)] public TabController TabController;
 }
