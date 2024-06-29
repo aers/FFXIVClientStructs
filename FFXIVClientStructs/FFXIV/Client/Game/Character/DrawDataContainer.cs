@@ -11,27 +11,21 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
+    [FieldOffset(0x160), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModelIds;
+    [FieldOffset(0x1B0)] public CustomizeData CustomizeData;
+
+    [FieldOffset(0x1CE)] public byte Flags1;
+    [FieldOffset(0x1CF)] public byte Flags2;
 
     [UnscopedRef]
-    public ref DrawObjectData Weapon(WeaponSlot which) {
-        return ref WeaponData[(int)which];
+    public ref DrawObjectData Weapon(WeaponSlot slot) {
+        return ref WeaponData[(int)slot];
     }
 
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x00)] public EquipmentModelId Head;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x04)] public EquipmentModelId Top;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x08)] public EquipmentModelId Arms;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x0C)] public EquipmentModelId Legs;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x10)] public EquipmentModelId Feet;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x14)] public EquipmentModelId Ear;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x18)] public EquipmentModelId Neck;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x1C)] public EquipmentModelId Wrist;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x20)] public EquipmentModelId RFinger;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x24)] public EquipmentModelId LFinger;
-
-    [FieldOffset(0x188)] public CustomizeData CustomizeData;
-
-    [FieldOffset(0x1A6)] public byte Flags1;
-    [FieldOffset(0x1A7)] public byte Flags2;
+    [UnscopedRef]
+    public ref EquipmentModelId Equipment(EquipmentSlot slot) {
+        return ref EquipmentModelIds[(int)slot];
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? B1 01 41 FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
@@ -177,16 +171,18 @@ public struct WeaponModelId {
     [FieldOffset(0)] public ushort Id;
     [FieldOffset(2)] public ushort Type;
     [FieldOffset(4)] public ushort Variant;
-    [FieldOffset(6)] public byte Stain;
+    [FieldOffset(6)] public byte Stain1;
+    [FieldOffset(7)] public byte Stain2;
 
     [FieldOffset(0), CExportIgnore] public ulong Value;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 4)]
+[StructLayout(LayoutKind.Explicit, Size = 8)]
 public struct EquipmentModelId {
     [FieldOffset(0)] public ushort Id;
     [FieldOffset(2)] public byte Variant;
-    [FieldOffset(3)] public byte Stain;
+    [FieldOffset(3)] public byte Stain1;
+    [FieldOffset(4)] public byte Stain2;
 
-    [FieldOffset(0), CExportIgnore] public uint Value;
+    [FieldOffset(0), CExportIgnore] public ulong Value;
 }
