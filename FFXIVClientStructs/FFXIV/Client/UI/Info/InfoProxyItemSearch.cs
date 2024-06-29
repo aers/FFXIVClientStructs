@@ -117,8 +117,8 @@ public unsafe partial struct MarketBoardListing {
     /// The Town (from EXD) that this marketboard entry is from.
     /// </summary>
     [FieldOffset(0xB0)] public byte TownId;
-    [FieldOffset(0xB1)] public byte StainId1;
-    [FieldOffset(0xB2)] public byte StainId2;
+    [FieldOffset(0xB1)] public byte Stain1Id;
+    [FieldOffset(0xB2)] public byte Stain2Id;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x24)]
