@@ -9,39 +9,39 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "E8 ?? ?? ?? ?? 48 8B F8 45 33 C0"
 [GenerateInterop]
 [Inherits<CharaView>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x420)]
 public unsafe partial struct CharaViewPortrait : ICreatable {
     // Spherical Camera?
-    [FieldOffset(0x2D0)] public Vector4 CameraPosition;
-    [FieldOffset(0x2E0)] public Vector4 CameraTarget;
-    [FieldOffset(0x2F0)] public float CameraYaw; // automatically calculated
-    [FieldOffset(0x2F4)] public float CameraPitch; // automatically calculated
-    [FieldOffset(0x2F8)] public float CameraDistance; // automatically calculated euclidean distance
-    [FieldOffset(0x2FC)] public short ImageRotation; // -90 to 90
-    [FieldOffset(0x2FE)] public byte CameraZoom; // 0 to 200
+    [FieldOffset(0x320)] public Vector4 CameraPosition;
+    [FieldOffset(0x330)] public Vector4 CameraTarget;
+    [FieldOffset(0x340)] public float CameraYaw; // automatically calculated
+    [FieldOffset(0x344)] public float CameraPitch; // automatically calculated
+    [FieldOffset(0x348)] public float CameraDistance; // automatically calculated euclidean distance
+    [FieldOffset(0x34C)] public short ImageRotation; // -90 to 90
+    [FieldOffset(0x34E)] public byte CameraZoom; // 0 to 200
 
-    [FieldOffset(0x300)] public float CameraZoomNormalized; // automatically calculated
-    [FieldOffset(0x304)] public byte DirectionalLightingColorRed;
-    [FieldOffset(0x305)] public byte DirectionalLightingColorGreen;
-    [FieldOffset(0x306)] public byte DirectionalLightingColorBlue;
-    [FieldOffset(0x307)] public byte DirectionalLightingBrightness;
-    [FieldOffset(0x308)] public short DirectionalLightingVerticalAngle; // -180 to 180
-    [FieldOffset(0x30A)] public short DirectionalLightingHorizontalAngle; // -180 to 180
-    [FieldOffset(0x30C)] public byte AmbientLightingColorRed;
-    [FieldOffset(0x30D)] public byte AmbientLightingColorGreen;
-    [FieldOffset(0x30E)] public byte AmbientLightingColorBlue;
-    [FieldOffset(0x30F)] public byte AmbientLightingBrightness;
+    [FieldOffset(0x350)] public float CameraZoomNormalized; // automatically calculated
+    [FieldOffset(0x354)] public byte DirectionalLightingColorRed;
+    [FieldOffset(0x355)] public byte DirectionalLightingColorGreen;
+    [FieldOffset(0x356)] public byte DirectionalLightingColorBlue;
+    [FieldOffset(0x357)] public byte DirectionalLightingBrightness;
+    [FieldOffset(0x358)] public short DirectionalLightingVerticalAngle; // -180 to 180
+    [FieldOffset(0x35A)] public short DirectionalLightingHorizontalAngle; // -180 to 180
+    [FieldOffset(0x35C)] public byte AmbientLightingColorRed;
+    [FieldOffset(0x35D)] public byte AmbientLightingColorGreen;
+    [FieldOffset(0x35E)] public byte AmbientLightingColorBlue;
+    [FieldOffset(0x35F)] public byte AmbientLightingBrightness;
 
-    [FieldOffset(0x314)] public short PoseClassJob;
-    [FieldOffset(0x316)] public short BannerBg;
-    [FieldOffset(0x318)] public byte BackgroundState; // 0 = do nothing, 1 = loads texture by icon from row, 2 = renders KernelTexture?, 3 = done
+    [FieldOffset(0x364)] public short PoseClassJob;
+    [FieldOffset(0x366)] public short BannerBg;
+    [FieldOffset(0x368)] public byte BackgroundState; // 0 = do nothing, 1 = loads texture by icon from row, 2 = renders KernelTexture?, 3 = done
 
-    [FieldOffset(0x320)] public AtkTexture BackgroundTexture;
+    [FieldOffset(0x370)] public AtkTexture BackgroundTexture;
 
-    [FieldOffset(0x338)] public CharaViewCharacterData PortraitCharacterData;
-    [FieldOffset(0x3A0)] public bool CharacterVisible;
-    [FieldOffset(0x3A1)] public bool CharaViewPortraitCharacterDataCopied;
-    [FieldOffset(0x3A2)] public bool CharaViewPortraitCharacterLoaded;
+    [FieldOffset(0x388)] public CharaViewCharacterData PortraitCharacterData;
+    [FieldOffset(0x3F0)] public bool CharacterVisible;
+    [FieldOffset(0x3F1)] public bool CharaViewPortraitCharacterDataCopied;
+    [FieldOffset(0x3F2)] public bool CharaViewPortraitCharacterLoaded;
 
     public static CharaViewPortrait* Create()
         => IMemorySpace.GetUISpace()->Create<CharaViewPortrait>();

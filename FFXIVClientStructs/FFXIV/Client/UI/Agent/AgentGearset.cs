@@ -19,14 +19,14 @@ public partial struct AgentGearSet {
     [Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x328)]
     public unsafe partial struct GearsetCharaView {
-        [FieldOffset(0x2C8)] public bool UpdateVisibility;
-        [FieldOffset(0x2C9)] public bool UpdateItems;
-        [FieldOffset(0x2CA)] public bool HideVisor;
-        [FieldOffset(0x2CB)] public bool HideWeapon;
-        [FieldOffset(0x2CC)] public bool CloseVisor;
-        [FieldOffset(0x2CD)] public bool DrawWeapon;
-        [FieldOffset(0x2CE)] public bool CharacterDisplayMode;
+        [FieldOffset(0x318)] public bool UpdateVisibility;
+        [FieldOffset(0x319)] public bool UpdateItems;
+        [FieldOffset(0x31A)] public bool HideVisor;
+        [FieldOffset(0x31B)] public bool HideWeapon;
+        [FieldOffset(0x31C)] public bool CloseVisor;
+        [FieldOffset(0x31D)] public bool DrawWeapon;
+        [FieldOffset(0x31E)] public bool CharacterDisplayMode;
 
-        [FieldOffset(0x2D0)] public GearsetEntry* Gearset;
+        [FieldOffset(0x320)] public GearsetEntry* Gearset;
     }
 }

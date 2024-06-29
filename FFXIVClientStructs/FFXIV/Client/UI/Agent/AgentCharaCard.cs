@@ -28,7 +28,7 @@ public unsafe partial struct AgentCharaCard {
     // Client::UI::Agent::AgentCharaCard::Storage
     // ctor "E8 ?? ?? ?? ?? 48 8B F0 48 89 73 ?? C6 06"
     // dtor "E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 48 89 73 ?? E8"
-    [StructLayout(LayoutKind.Explicit, Size = 0x950)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x9B0)]
     public unsafe partial struct Storage {
         [FieldOffset(0x4)] public uint EntityId;
         [FieldOffset(0x8)] public ulong ContentId;
@@ -60,6 +60,6 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x488)] public Utf8String Activity6Name;
 
         [FieldOffset(0x540)] public CharaViewPortrait CharaView;
-        [FieldOffset(0x900)] public Texture* PortraitTexture;
+        [FieldOffset(0x960)] public Texture* PortraitTexture;
     }
 }

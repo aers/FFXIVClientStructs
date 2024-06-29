@@ -16,7 +16,7 @@ public unsafe partial struct AgentBannerInterface {
     // Client::UI::Agent::AgentBannerInterface::Storage
     // Destroyed in Client::UI::Agent::AgentBannerInterface::dtor
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x3B30)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3E30)]
     public partial struct Storage {
         public const int CharacterDataSize = 0x7C0;
 
@@ -34,8 +34,8 @@ public unsafe partial struct AgentBannerInterface {
 
             [FieldOffset(0x2B0)] public CharaViewPortrait CharaView;
 
-            [FieldOffset(0x6E0)] public Utf8String Title;
-            [FieldOffset(0x750)] public void* SomePointer;
+            [FieldOffset(0x740)] public Utf8String Title;
+            [FieldOffset(0x7B0)] public void* SomePointer;
         }
 
         [FieldOffset(0x0000)] public AgentInterface* Agent; // AgentBannerParty, maybe other Banner agents

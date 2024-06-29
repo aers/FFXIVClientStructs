@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //  0 - 7 used in BannerParty
 //
 [GenerateInterop(isInherited: true)]
-[StructLayout(LayoutKind.Explicit, Size = 0x330)]
+[StructLayout(LayoutKind.Explicit, Size = 0x318)]
 public unsafe partial struct CharaView : ICreatable {
     [FieldOffset(0x8)] public uint State; // initialization state of KernelTexture, Camera etc. that happens in Render(), 6 = ready for use
     [FieldOffset(0xC)] public uint ClientObjectId; // ID of object in ClientObjectManager, basically ClientObjectIndex + 40

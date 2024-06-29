@@ -21,7 +21,7 @@ public partial struct AgentStatus {
     [Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x320)]
     public partial struct StatusCharaView {
-        [FieldOffset(0x2C8)] public uint MainhandItemId;
-        [FieldOffset(0x2CC)] public bool DrawWeapon;
+        [FieldOffset(0x318)] public uint MainhandItemId;
+        [FieldOffset(0x31C)] public bool DrawWeapon;
     }
 }
