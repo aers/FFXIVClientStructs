@@ -18,8 +18,13 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x1CF)] public byte Flags2;
 
     [UnscopedRef]
-    public ref DrawObjectData Weapon(WeaponSlot which) {
-        return ref WeaponData[(int)which];
+    public ref DrawObjectData Weapon(WeaponSlot slot) {
+        return ref WeaponData[(int)slot];
+    }
+
+    [UnscopedRef]
+    public ref EquipmentModelId Equipment(EquipmentSlot slot) {
+        return ref EquipmentModelIds[(int)slot];
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? B1 01 41 FF C6")]
