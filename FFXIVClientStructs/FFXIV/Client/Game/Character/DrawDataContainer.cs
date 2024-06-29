@@ -11,27 +11,16 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
+    [FieldOffset(0x160), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModelIds;
+    [FieldOffset(0x1B0)] public CustomizeData CustomizeData;
+
+    [FieldOffset(0x1CE)] public byte Flags1;
+    [FieldOffset(0x1CF)] public byte Flags2;
 
     [UnscopedRef]
     public ref DrawObjectData Weapon(WeaponSlot which) {
         return ref WeaponData[(int)which];
     }
-
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x00)] public EquipmentModelId Head;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x08)] public EquipmentModelId Top;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x10)] public EquipmentModelId Arms;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x18)] public EquipmentModelId Legs;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x20)] public EquipmentModelId Feet;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x28)] public EquipmentModelId Ear;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x30)] public EquipmentModelId Neck;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x38)] public EquipmentModelId Wrist;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x40)] public EquipmentModelId RFinger;
-    [FieldOffset(0x010 + 3 * DrawObjectData.Size + 0x48)] public EquipmentModelId LFinger;
-
-    [FieldOffset(0x1B0)] public CustomizeData CustomizeData;
-
-    [FieldOffset(0x1CE)] public byte Flags1;
-    [FieldOffset(0x1CF)] public byte Flags2;
 
     [MemberFunction("E8 ?? ?? ?? ?? B1 01 41 FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
