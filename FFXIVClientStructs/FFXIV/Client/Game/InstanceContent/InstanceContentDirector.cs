@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 80 E3 01"
 [GenerateInterop(isInherited: true)]
 [Inherits<ContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1CB0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1D98)]
 public unsafe partial struct InstanceContentDirector {
     //[FieldOffset(0x730), FixedSizeArray] internal FixedSizeArray168<byte> _instanceContentExcelRow;
 
