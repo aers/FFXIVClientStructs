@@ -294,154 +294,154 @@ public enum AgentId : uint {
     SatisfactionSupplyResult = 271,
     Snipe = 272,
     MountSpeed = 273,
-    HarpoonTip = 274,
-    PvpScreenInformationHotBar = 275,
-    PvpWelcome = 276,
-    JobHudNotice = 277,
 
-    UserPolicyPerformance = 281,
+    PvpScreenInformationHotBar = 274,
+    PvpWelcome = 275,
+    JobHudNotice = 276,
 
-    PvpTeamInputString = 283,
+    UserPolicyPerformance = 280,
 
-    PvpTeamCrestEditor = 288,
-    PvpTeam = 289,
+    PvpTeamInputString = 282,
 
-    EurekaElementalHud = 291,
-    EurekaElementalEdit = 292,
-    EurekaChainInfo = 293,
+    PvpTeamCrestEditor = 287,
+    PvpTeam = 288,
 
-    TeleportHousingFriend = 297,
-    ContentMemberList = 298,
-    InventoryBuddy = 299,
-    ContentsReplayPlayer = 300,
-    ContentsReplaySetting = 301,
-    MiragePrismPrismBox = 302, // Glamour Dresser
-    MiragePrismPrismItemDetail = 303,
-    MiragePrismMiragePlate = 304, // Glamour Plates
-    PerformanceMode = 305,
+    EurekaElementalHud = 290,
+    EurekaElementalEdit = 291,
+    EurekaChainInfo = 292,
 
-    Fashion = 308,
+    TeleportHousingFriend = 296,
+    ContentMemberList = 297,
+    InventoryBuddy = 298,
+    ContentsReplayPlayer = 299,
+    ContentsReplaySetting = 300,
+    MiragePrismPrismBox = 301, // Glamour Dresser
+    MiragePrismPrismItemDetail = 302,
+    MiragePrismMiragePlate = 303, // Glamour Plates
+    PerformanceMode = 304,
 
-    SelectYesno = 310,
-    HousingGuestBook = 311,
+    Fashion = 307,
 
-    ReconstructionBox = 314,
-    ReconstructionBuyback = 315,
-    CrossWorldLinkShell = 316,
-    MiragePrismENpcSatisfaction = 317,
-    Description = 318, // Frontline/Bozja Description
-    Alarm = 319,
+    SelectYesno = 309,
+    HousingGuestBook = 310,
 
-    FreeShop = 322,
-    AozNotebook = 323, // Bluemage Spells
-    RhythmAction = 324,
-    WeddingNotification = 325,
-    Emj = 326, //Mahjong
+    ReconstructionBox = 313,
+    ReconstructionBuyback = 314,
+    CrossWorldLinkShell = 315,
+    MiragePrismENpcSatisfaction = 316,
+    Description = 317, // Frontline/Bozja Description
+    Alarm = 318,
 
-    EmjIntro = 329,
-    AozContentBriefing = 330, // Masked Carnivale
-    AozContentResult = 331,
-    WorldTravel = 332,
-    RideShooting = 333, // Airforce One
-    RideShootingResult = 334,
-    Credit = 335,
-    EmjSetting = 336, // Mahjong Settings
-    RetainerList = 337,
-    QIBCStatus = 338,
+    FreeShop = 321,
+    AozNotebook = 322, // Bluemage Spells
+    RhythmAction = 323,
+    WeddingNotification = 324,
+    Emj = 325, //Mahjong
 
-    Dawn = 342, // Trust
-    DawnStory = 343, // Duty Support
-    HousingCatalogPreview = 344,
+    EmjIntro = 328,
+    AozContentBriefing = 329, // Masked Carnivale
+    AozContentResult = 330,
+    WorldTravel = 331,
+    RideShooting = 332, // Airforce One
+    RideShootingResult = 333,
+    Credit = 334,
+    EmjSetting = 335, // Mahjong Settings
+    RetainerList = 336,
+    QIBCStatus = 337,
 
-    SubmersibleExplorationMapSelect = 346,
-    QuestRedo = 347,
-    QuestRedoHud = 348,
+    Dawn = 341, // Trust
+    DawnStory = 342, // Duty Support
+    HousingCatalogPreview = 343,
 
-    CircleList = 350, // Fellowships
-    CircleBook = 351,
+    SubmersibleExplorationMapSelect = 345,
+    QuestRedo = 346,
+    QuestRedoHud = 347,
 
-    CircleFinder = 356,
+    CircleList = 349, // Fellowships
+    CircleBook = 350,
 
-    MentorCondition = 358,
-    PerformanceMetronome = 359,
-    PerformanceGamepadGuide = 360,
+    CircleFinder = 355,
 
-    PerformanceReadyCheck = 362,
+    MentorCondition = 357,
+    PerformanceMetronome = 358,
+    PerformanceGamepadGuide = 359,
 
-    HwdAetherGauge = 366,
-    HwdGathererInspection = 367,
-    HwdScore = 368,
+    PerformanceReadyCheck = 361,
 
-    HwdMonument = 370,
-    McGuffin = 371, // Collection
-    CraftActionSimulator = 372,
-    IKDSchedule = 373, //Ocean Fishing
-    IKDFishingLog = 374,
-    IKDResult = 375,
-    IKDMission = 376,
-    InclusionShop = 377, // Item Exchange
-    CollectablesShop = 378,
-    MycWarResultNotebook = 379,
-    MycInfo = 380, // Bozja Info
-    MycItemBox = 381, // Bozja Lost Finds Cache
-    MycItemBag = 382, // Bozja Lost Finds Holster
-    MycDuelRequest = 383,
-    MycBattleAreaInfo = 384, // Bozja Recruitment
+    HwdAetherGauge = 365,
+    HwdGathererInspection = 366,
+    HwdScore = 367,
 
-    OrnamentNoteBook = 386, //Accessories
+    HwdMonument = 369,
+    McGuffin = 370, // Collection
+    CraftActionSimulator = 371,
+    IKDSchedule = 372, //Ocean Fishing
+    IKDFishingLog = 373,
+    IKDResult = 374,
+    IKDMission = 375,
+    InclusionShop = 376, // Item Exchange
+    CollectablesShop = 377,
+    MycWarResultNotebook = 378,
+    MycInfo = 379, // Bozja Info
+    MycItemBox = 380, // Bozja Lost Finds Cache
+    MycItemBag = 381, // Bozja Lost Finds Holster
+    MycDuelRequest = 382,
+    MycBattleAreaInfo = 383, // Bozja Recruitment
 
-    TourismMenu = 388,
-    GatheringMasterpiece = 389,
-    StarlightGiftBox = 390,
-    SpearFishing = 391,
-    Omikuji = 392,
-    FittingShop = 393,
-    AkatsukiNote = 394, // Unending Codex
-    ExHotbarEditor = 395,
-    BannerList = 396, // Portraits
-    BannerEditor = 397, // Portrait Editor
-    BannerUpdateView = 398,
+    OrnamentNoteBook = 385, //Accessories
 
-    PvPMap = 400,
-    CharaCard = 401, // AdventurerPlate
-    CharaCardDesignSetting = 402,
-    CharaCardProfileSetting = 403,
+    TourismMenu = 387,
+    GatheringMasterpiece = 388,
+    StarlightGiftBox = 389,
+    SpearFishing = 390,
+    Omikuji = 391,
+    FittingShop = 392,
+    AkatsukiNote = 393, // Unending Codex
+    ExHotbarEditor = 394,
+    BannerList = 395, // Portraits
+    BannerEditor = 396, // Portrait Editor
+    BannerUpdateView = 397,
 
-    PvPMKSIntroduction = 405,
-    MJIHud = 406, // Island Sanctuary
-    MJIPouch = 407,
-    MJIRecipeNoteBook = 408,
-    MJICraftSchedule = 409,
-    MJICraftSales = 410,
-    MJIAnimalManagement = 411,
-    MJIFarmManagement = 412,
-    MJIGatheringHouse = 413,
-    MJIBuilding = 414,
-    MJIGatheringNoteBook = 415,
-    MJIDisposeShop = 416,
-    MJIMinionManagement = 417,
-    MJIMinionNoteBook = 418,
-    MJIBuildingMove = 419,
-    MJIEntrance = 420,
-    MJISettings = 421,
-    MJIHousingMenu = 422, // new in 6.40
+    PvPMap = 399,
+    CharaCard = 400, // AdventurerPlate
+    CharaCardDesignSetting = 401,
+    CharaCardProfileSetting = 402,
 
-    MJINekomimiRequest = 424, // favors
-    ArchiveItem = 425,
+    PvPMKSIntroduction = 404,
+    MJIHud = 405, // Island Sanctuary
+    MJIPouch = 406,
+    MJIRecipeNoteBook = 407,
+    MJICraftSchedule = 408,
+    MJICraftSales = 409,
+    MJIAnimalManagement = 410,
+    MJIFarmManagement = 411,
+    MJIGatheringHouse = 412,
+    MJIBuilding = 413,
+    MJIGatheringNoteBook = 414,
+    MJIDisposeShop = 415,
+    MJIMinionManagement = 416,
+    MJIMinionNoteBook = 417,
+    MJIBuildingMove = 418,
+    MJIEntrance = 419,
+    MJISettings = 420,
+    MJIHousingMenu = 421, // new in 6.40
 
-    VVDNotebook = 427,
-    VVDFinder = 428,
-    TofuList = 429,
+    MJINekomimiRequest = 423, // favors
+    ArchiveItem = 424,
 
-    BannerParty = 432,
-    BannerMIP = 433,
-    TurnBreak = 434,
+    VVDNotebook = 426,
+    VVDFinder = 427,
+    TofuList = 428,
 
-    SXTBattleLog = 436,
-    MoogleCollection = 437,
-    FGSEnterDialog = 438,
-    FGSStageIntro = 439,
-    FGSHud = 440,
-    FGSWinner = 441,
-    FGSResult = 442
+    BannerParty = 431,
+    BannerMIP = 432,
+    TurnBreak = 433,
+
+    SXTBattleLog = 435,
+    MoogleCollection = 436,
+    FGSEnterDialog = 437,
+    FGSStageIntro = 438,
+    FGSHud = 439,
+    FGSWinner = 440,
+    FGSResult = 441
 }
