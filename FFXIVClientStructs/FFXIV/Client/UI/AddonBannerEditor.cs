@@ -39,7 +39,7 @@ public unsafe partial struct AddonBannerEditor {
     [FieldOffset(0xA70)] public AtkComponentSlider* DirectionalLightingBrightnessSlider;
     [FieldOffset(0xA78)] public AtkComponentSlider* DirectionalLightingVerticalAngleSlider;
     [FieldOffset(0xA80)] public AtkComponentSlider* DirectionalLightingHorizontalAngleSlider;
-    [FieldOffset(0xA89)] public AtkComponentSlider* CameraZoomSlider;
+    [FieldOffset(0xA88)] public AtkComponentSlider* CameraZoomSlider;
     [FieldOffset(0xA90)] public AtkComponentSlider* ImageRotation;
 
     [FieldOffset(0xAE8)] public AtkResNode* WarningSymbol;
