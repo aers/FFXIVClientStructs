@@ -233,15 +233,15 @@ public unsafe partial struct RaptureGearsetModule {
 
         [FieldOffset(0x00)] public uint ItemId;
         [FieldOffset(0x04)] public uint GlamourId;
-        [FieldOffset(0x08)] public byte Stain1;
-        [FieldOffset(0x09)] public byte Stain2;
+        [FieldOffset(0x08)] public byte Stain1Id;
+        [FieldOffset(0x09)] public byte Stain2Id;
         [FieldOffset(0x0A), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
         [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
         [FieldOffset(0x19)] public GearsetItemFlag Flags;
     }
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C4)]
     public partial struct GearsetEntry {
         [FieldOffset(0x00)] public byte Id;    // This may actually be set number, which is not _quite_ ID.
         [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray48<byte> _name;
@@ -252,6 +252,7 @@ public unsafe partial struct RaptureGearsetModule {
         [FieldOffset(0x36)] public byte BannerIndex;
         [FieldOffset(0x37)] public GearsetFlag Flags;
         [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray14<GearsetItem> _items;
+        [FieldOffset(0x1C0)] public ushort GlassesId;
 
         [UnscopedRef] public ref GearsetItem GetItem(GearsetItemIndex index) => ref Items[(int)index];
 
