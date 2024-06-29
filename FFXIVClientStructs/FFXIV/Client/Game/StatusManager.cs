@@ -8,9 +8,8 @@ public unsafe partial struct StatusManager {
     [FieldOffset(0x0)] public Character.Character* Owner;
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray60<Status> _status;
 
-    // FlagsN is a bit vector; bit #i is set if any of the active statuses has column 30/31 in the sheet containing 'i'
-    [FieldOffset(0x2D8)] public uint Flags1;
-    [FieldOffset(0x2DC)] public ushort Flags2;
+    // Flags is a bit vector; bit #i is set if any of the active statuses has column 30/31 in the sheet containing 'i'
+    [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray7<byte> _flags;
 
     [FieldOffset(0x2E0)] public long Unk_178;
     //[FieldOffset(0x2E8)] public byte Unk_180;
