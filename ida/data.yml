@@ -13589,10 +13589,10 @@ classes:
       0x1413623D0: ReceiveEvent_Gather # no xrefs, inlined in ReceiveEvent
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
-      - ea: 0x141FE9DD8
+      - ea: 0x141FEA730
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x14135A7B0: ctor
+      0x141364590: ctor
   Client::UI::AddonNamePlate::BakePlateRenderer:
     vtbls:
       - ea: 0x141FBCD98
