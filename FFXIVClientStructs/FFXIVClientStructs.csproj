@@ -23,6 +23,7 @@
     <Product>FFXIVClientStructs</Product>
     <AssemblyTitle>FFXIVClientStructs</AssemblyTitle>
 
+    <!-- Required for documentation builds, docfx does not support generators directly -->
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
     
