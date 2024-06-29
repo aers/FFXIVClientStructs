@@ -27,6 +27,8 @@ public unsafe partial struct DrawDataContainer {
         return ref EquipmentModelIds[(int)slot];
     }
 
+    [FieldOffset(0x1D0), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
+
     [MemberFunction("E8 ?? ?? ?? ?? B1 01 41 FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
 
