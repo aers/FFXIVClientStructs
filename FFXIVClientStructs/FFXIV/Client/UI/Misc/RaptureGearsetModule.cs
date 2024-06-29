@@ -10,13 +10,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [Inherits<UserFileEvent>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 7B 40 48 8D 73 48", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0xB670)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB808)]
 public unsafe partial struct RaptureGearsetModule {
     public static RaptureGearsetModule* Instance() => UIModule.Instance()->GetRaptureGearsetModule();
 
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray100<GearsetEntry> _entries;
 
-    [FieldOffset(0xB434)] public int CurrentGearsetIndex;
+    [FieldOffset(0xB5C8)] public int CurrentGearsetIndex;
 
     /// <summary>
     /// Return a pointer to a <see cref="GearsetEntry"/> by index/ID.
@@ -233,8 +233,8 @@ public unsafe partial struct RaptureGearsetModule {
 
         [FieldOffset(0x00)] public uint ItemId;
         [FieldOffset(0x04)] public uint GlamourId;
-        [FieldOffset(0x08)] public byte Stain;
-
+        [FieldOffset(0x08)] public byte Stain1;
+        [FieldOffset(0x09)] public byte Stain2;
         [FieldOffset(0x0A), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
         [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
         [FieldOffset(0x19)] public GearsetItemFlag Flags;
