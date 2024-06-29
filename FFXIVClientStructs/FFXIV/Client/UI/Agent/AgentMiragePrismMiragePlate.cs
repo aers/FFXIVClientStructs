@@ -25,9 +25,9 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
     [Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x328)]
     public unsafe partial struct MiragePrismMiragePlateCharaView {
-        [FieldOffset(0x2C8)] public bool IsUpdatePending;
+        [FieldOffset(0x318)] public bool IsUpdatePending;
 
-        [FieldOffset(0x2CC)] public uint Flags;
+        [FieldOffset(0x31C)] public uint Flags;
 
         public bool IsOtherEquipmentHidden {
             get => (Flags & 0x01) == 0x01;
