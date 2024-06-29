@@ -14,10 +14,10 @@ public unsafe partial struct RecipeNote {
 
     [FieldOffset(0xB8)] public RecipeData* RecipeList;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x3D0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x420)]
     public struct RecipeData {
         [FieldOffset(0x000)] public RecipeEntry* Recipes;
-        [FieldOffset(0x3B8)] public ushort SelectedIndex;
+        [FieldOffset(0x408)] public ushort SelectedIndex;
         public RecipeEntry* SelectedRecipe => Recipes + SelectedIndex;
     }
 
@@ -38,43 +38,43 @@ public unsafe partial struct RecipeNote {
     }
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x500)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3F8)]
     public unsafe partial struct RecipeEntry {
-        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<RecipeIngredient> _ingredients;
-        [FieldOffset(0x440), FixedSizeArray] internal FixedSizeArray2<RecipeCrystal> _crystals;
-        [FieldOffset(0x448)] public Utf8String ItemName;
-        [FieldOffset(0x4B0)] public uint IconId;
-        [FieldOffset(0x4B4)] public uint ItemId;
-        [FieldOffset(0x4B8)] public uint StatusRequired;
-        [FieldOffset(0x4BC)] public uint ItemRequired;
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray6<RecipeIngredient> _ingredients;
+        [FieldOffset(0x330), FixedSizeArray] internal FixedSizeArray2<RecipeCrystal> _crystals;
+        [FieldOffset(0x338)] public Utf8String ItemName;
+        [FieldOffset(0x3A0)] public uint IconId;
+        [FieldOffset(0x3A4)] public uint ItemId;
+        [FieldOffset(0x3A8)] public uint StatusRequired;
+        [FieldOffset(0x3AC)] public uint ItemRequired;
 
-        [FieldOffset(0x4C2)] public ushort RecipeId;
-        [FieldOffset(0x4C4)] public ushort Difficulty; // recipeLevelTable->Difficulty * recipe->DifficultyFactor / 100
-        [FieldOffset(0x4C8)] public uint Quality;      // recipeLevelTable->Quality    * recipe->QualityFactor    / 100
-        [FieldOffset(0x4CC)] public ushort Durability; // recipeLevelTable->Durability * recipe->DurabilityFactor / 100
-        [FieldOffset(0x4CE)] public byte MaterialQualityFactor;
+        [FieldOffset(0x3B2)] public ushort RecipeId;
+        [FieldOffset(0x3B4)] public ushort Difficulty; // recipeLevelTable->Difficulty * recipe->DifficultyFactor / 100
+        [FieldOffset(0x3B8)] public uint Quality;      // recipeLevelTable->Quality    * recipe->QualityFactor    / 100
+        [FieldOffset(0x3BC)] public ushort Durability; // recipeLevelTable->Durability * recipe->DurabilityFactor / 100
+        [FieldOffset(0x3BE)] public byte MaterialQualityFactor;
 
-        [FieldOffset(0x4D0)] public ushort RequiredCraftsmanship;
-        [FieldOffset(0x4D2)] public ushort RequiredControl;
-        [FieldOffset(0x4D4)] public ushort QuickSynthCraftsmanship;
-        [FieldOffset(0x4D6)] public ushort QuickSynthControl;
-        [FieldOffset(0x4D8)] public ushort SecretRecipeBook;
+        [FieldOffset(0x3C0)] public ushort RequiredCraftsmanship;
+        [FieldOffset(0x3C2)] public ushort RequiredControl;
+        [FieldOffset(0x3C4)] public ushort QuickSynthCraftsmanship;
+        [FieldOffset(0x3C6)] public ushort QuickSynthControl;
+        [FieldOffset(0x3C8)] public ushort SecretRecipeBook;
 
-        [FieldOffset(0x4DC)] public uint RequiredQuality;
-        [FieldOffset(0x4E0)] public ushort SuggestedCraftsmanship;
-        [FieldOffset(0x4E2)] public ushort ConditionsFlag;
+        [FieldOffset(0x3CC)] public uint RequiredQuality;
+        [FieldOffset(0x3D0)] public ushort SuggestedCraftsmanship;
+        [FieldOffset(0x3D2)] public ushort ConditionsFlag;
 
-        [FieldOffset(0x4E6)] public byte AmountResult;
-        [FieldOffset(0x4E7)] public byte CraftType;
-        [FieldOffset(0x4E8)] public byte ClassJobLevel;
+        [FieldOffset(0x3D6)] public byte AmountResult;
+        [FieldOffset(0x3D7)] public byte CraftType;
+        [FieldOffset(0x3D8)] public byte ClassJobLevel;
 
-        [FieldOffset(0x4EA)] public byte Stars;
+        [FieldOffset(0x3DA)] public byte Stars;
 
-        [FieldOffset(0x4EE)] public byte Flags;
-        [FieldOffset(0x4EF)] public byte Flags2;
-        [FieldOffset(0x4F0)] public uint Number;
-        [FieldOffset(0x4F4)] public ushort RecipeLevelTableId;
-        [FieldOffset(0x4F6)] public ushort PatchNumber;
+        [FieldOffset(0x3DE)] public byte Flags;
+        [FieldOffset(0x3DF)] public byte Flags2;
+        [FieldOffset(0x3E0)] public uint Number;
+        [FieldOffset(0x3E4)] public ushort RecipeLevelTableId;
+        [FieldOffset(0x3E6)] public ushort PatchNumber;
     }
 
     [MemberFunction("4C 8B 81 ?? ?? ?? ?? 44 8B D2 4D 85 C0")]
