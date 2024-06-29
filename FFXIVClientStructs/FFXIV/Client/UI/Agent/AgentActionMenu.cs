@@ -24,26 +24,25 @@ public unsafe partial struct AgentActionMenu {
 
     [FieldOffset(0x60)] public uint OpenUpgradeActionId;
 
-    [FieldOffset(0x68)] public StdVector<ActionData> ClassActionList;
-    [FieldOffset(0x80)] public StdVector<ActionData> JobActionList;
-    [FieldOffset(0x98)] public StdVector<ActionData> TraitList;
-    [FieldOffset(0xB0)] public StdVector<ActionData> GeneralList;
-    [FieldOffset(0xC8)] public StdVector<ActionData> CompanionOrderList;
-    [FieldOffset(0xE0)] public StdVector<ActionData> SquadronOrderList;
-    [FieldOffset(0xF8)] public StdVector<ActionData> MainCommandList;
-    [FieldOffset(0x110)] public StdVector<ActionData> PetActionList;
-    [FieldOffset(0x128)] public StdVector<ActionData> PetOrderList;
-    [FieldOffset(0x140)] public StdVector<ActionData> PerformanceList;
-    [FieldOffset(0x158)] public StdVector<ActionData> ExtraList;
-    [FieldOffset(0x170)] public StdVector<ActionData> CombatRoleActionList;
-    [FieldOffset(0x188)] public StdVector<ActionData> GatheringRoleActionList;
+    [FieldOffset(0x68)] public StdVector<ActionData> ClassJobActionList;
+    [FieldOffset(0x80)] public StdVector<ActionData> TraitList;
+    [FieldOffset(0x98)] public StdVector<ActionData> GeneralList;
+    [FieldOffset(0xB0)] public StdVector<ActionData> CompanionOrderList;
+    [FieldOffset(0xC8)] public StdVector<ActionData> SquadronOrderList;
+    [FieldOffset(0xE0)] public StdVector<ActionData> MainCommandList;
+    [FieldOffset(0xF8)] public StdVector<ActionData> PetActionList;
+    [FieldOffset(0x110)] public StdVector<ActionData> PetOrderList;
+    [FieldOffset(0x128)] public StdVector<ActionData> PerformanceList;
+    [FieldOffset(0x140)] public StdVector<ActionData> ExtraList;
+    [FieldOffset(0x158)] public StdVector<ActionData> CombatRoleActionList;
+    [FieldOffset(0x170)] public StdVector<ActionData> GatheringRoleActionList;
 
-    [FieldOffset(0x1E0)] public Utf8String ClassJobTitle;
-    //[FieldOffset(0x248)] public Utf8String UnkString248;
+    [FieldOffset(0x1C8)] public Utf8String ClassJobTitle;
+    //[FieldOffset(0x230)] public Utf8String UnkString248;
 
-    [FieldOffset(0x2B8)] public StdVector<ExtraCommandData> ExtraCommandData;
-    [FieldOffset(0x2D0)] public ExcelSheet* ExtraCommandExcelSheet;
-    [FieldOffset(0x2E0)] public uint UpgradeAddonId;
+    [FieldOffset(0x2A0)] public StdVector<ExtraCommandData> ExtraCommandData;
+    [FieldOffset(0x2B8)] public ExcelSheet* ExtraCommandExcelSheet;
+    [FieldOffset(0x2D0)] public uint UpgradeAddonId;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
