@@ -73,9 +73,9 @@ public unsafe partial struct PlayerState {
     // Size: (OrnamentSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
     [FieldOffset(0x303), FixedSizeArray] internal FixedSizeArray7<byte> _unlockedOrnamentsBitmask;
-    // Size: (GlassesSheet.RowCount + 7) / 8
+    // Size: (GlassesStylesSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsGlassesUnlocked"/> </remarks>
-    [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedGlassesBitmask;
+    [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedGlassesStylesBitmask;
     [FieldOffset(0x30C)] public ushort NumOwnedMounts;
 
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 83 EC 50 48 8B 81"
@@ -333,6 +333,13 @@ public unsafe partial struct PlayerState {
     [MemberFunction("81 FA ?? ?? ?? ?? 73 1F 0F B6 C2")]
     public partial bool IsAdventureComplete(uint adventureId);
 
+    /// <summary>
+    /// Check if a specific set of Glasses are unlocked. Internally, this will look up the associated GlassesStyle
+    /// for the specified pair and check that it's valid and marked as unlocked in
+    /// <see cref="UnlockedGlassesStylesBitmask"/>.
+    /// </summary>
+    /// <param name="glassesId">The RowID of a set of glasses to check.</param>
+    /// <returns>Returns true if the specified glasses are unlocked, false otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3")]
     public partial bool IsGlassesUnlocked(ushort glassesId);
 
