@@ -6592,10 +6592,10 @@ classes:
     vtbls:
       - ea: 0x141F04698
         base: Component::GUI::AtkInputData
-      - ea: 0x141F0C898
+      - ea: 0x141F04730
         base: Client::UI::Misc::UserFileManager::UserFileEvent
-    #funcs:
-      # 0x140618AC0: ctor # inlined @ 0x14075CD19
+    funcs:
+      0x140749B80: ctor # unused, inlined @ 0x14075CD19
   Client::UI::RaptureUiDataModule:
     vtbls:
       - ea: 0x141F04F00
