@@ -10,10 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [Inherits<InfoProxyPageInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 public unsafe partial struct InfoProxyCommonList {
-    [FieldOffset(0x20)] public Utf8String Unk20;
-    // [FieldOffset(0x88)] public nint UnknownPointer1;
-    // [FieldOffset(0x90)] public nint UnknownPointer2;
-    // [FieldOffset(0x98)] public nint UnknownPointer3;
+    [FieldOffset(0x38)] public Utf8String Unk20;
     [FieldOffset(0xA0)] public byte NumberArrayIndex;
     [FieldOffset(0xA1)] public byte StringArrayIndex;
     [FieldOffset(0xA2)] public ushort DataSize;
