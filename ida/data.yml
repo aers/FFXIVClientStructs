@@ -754,6 +754,14 @@ classes:
   Application::Network::WorkDefinitions::Base_TypeInfoInterface:
     vtbls:
       - ea: 0x14219A1A0
+  Application::Network::WorkDefinitions::ClientSelectData_TypeInfo:
+    vtbls:
+      - ea: 0x14219A200
+        base: Application::Network::WorkDefinitions::Base_TypeInfoInterface
+  Application::Network::WorkDefinitions::ClientSelectData:
+    vtbls:
+      - ea: 0x141EC64D0
+        base: Application::Network::WorkDefinitions::Base
   Application::Network::WorkDefinitions::CharaMake:
     vtbls:
       - ea: 0x1421985D0

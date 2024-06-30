@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
@@ -111,7 +112,7 @@ public unsafe partial struct CharaSelectCharacterEntry {
 
     [FieldOffset(0x4A0)] public StdVector<Pointer<CharaSelectRetainerInfo>> RetainerInfo;
 
-    [FieldOffset(0x4C0)] public CharaSelectCharacterInfo CharacterInfo; // x2?
+    [FieldOffset(0x4C0)] public ClientSelectData ClientSelectData;
 
     [MemberFunction("0F B6 41 ?? 84 05 ?? ?? ?? ?? 0F 94 C0")]
     public partial bool IsNotLocked();
@@ -146,61 +147,4 @@ public enum CharaSelectRetainerInfoLoginFlags : ushort {
     None = 0,
 
     NameChangeRequired = 4 // Lobby#66: "Please change your retainer's name after retrieving your character's data./To log in with this character you must first change your retainer's name."
-}
-
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E2)]
-public unsafe partial struct CharaSelectCharacterInfo {
-    [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
-    [FieldOffset(0x28)] public byte CurrentClassJobId;
-
-    [FieldOffset(0x2A), FixedSizeArray] internal FixedSizeArray30<ushort> _classJobLevels;
-    [FieldOffset(0x66)] public byte Race;
-    [FieldOffset(0x67)] public byte Tribe;
-    [FieldOffset(0x68)] public byte Sex;
-    [FieldOffset(0x69)] public byte BirthMonth;
-    [FieldOffset(0x6A)] public byte BirthDay;
-    [FieldOffset(0x6B)] public byte GuardianDeity;
-    [FieldOffset(0x6C)] public byte FirstClass;
-
-    // [FieldOffset(0x6E)] public ushort ZoneId;
-    [FieldOffset(0x70)] public ushort TerritoryType;
-    [FieldOffset(0x72)] public ushort ContentFinderCondition;
-    [FieldOffset(0x74)] public CustomizeData CustomizeData;
-
-    [FieldOffset(0x90)] public WeaponModelId MainHandModel;
-    [FieldOffset(0x98)] public WeaponModelId OffHandModel;
-    [FieldOffset(0xA0)] public EquipmentModelId Head;
-    [FieldOffset(0xA4)] public EquipmentModelId Body;
-    [FieldOffset(0xA8)] public EquipmentModelId Hands;
-    [FieldOffset(0xAC)] public EquipmentModelId Legs;
-    [FieldOffset(0xB0)] public EquipmentModelId Feet;
-    [FieldOffset(0xB4)] public EquipmentModelId Ears;
-    [FieldOffset(0xB8)] public EquipmentModelId Neck;
-    [FieldOffset(0xBC)] public EquipmentModelId Wrists;
-    [FieldOffset(0xC0)] public EquipmentModelId RingRight;
-    [FieldOffset(0xC4)] public EquipmentModelId RingLeft;
-    [FieldOffset(0xC8)] public uint MainHandItemId;
-    [FieldOffset(0xCC)] public uint OffHandItemId;
-    [FieldOffset(0xD0)] public uint SoulstoneItemId;
-    // [FieldOffset(0xD4)] public uint RemakeFlag;
-    [FieldOffset(0xD8)] public CharaSelectCharacterConfigFlags ConfigFlags;
-    [FieldOffset(0xDA)] public byte VoiceId;
-    // [FieldOffset(0xDB), FixedSizeArray] internal FixedSizeArray32<byte> _worldName; // always empty?
-
-    // [FieldOffset(0x100)] public ulong LoginStatus;
-    // [FieldOffset(0x108)] public byte IsOutTerritory;
-}
-
-[Flags]
-public enum CharaSelectCharacterConfigFlags : ushort {
-    None = 0,
-    HideHead = 0x01,
-    HideWeapon = 0x02,
-    HideLegacyMark = 0x04,
-    // ? = 0x08,
-    StoreNewItemsInArmouryChest = 0x10,
-    StoreCraftedItemsInInventory = 0x20,
-    CloseVisor = 0x40
-    // ? = 0x80
 }
