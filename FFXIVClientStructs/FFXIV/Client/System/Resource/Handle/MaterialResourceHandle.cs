@@ -221,7 +221,7 @@ public unsafe partial struct MaterialResourceHandle {
     public partial byte LoadShpkFiles();
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 04 3E")]
-    public partial Texture* PrepareColorTable(byte stain1Id, byte stain2Id); // aka PrepareColorSet
+    public partial Texture* PrepareColorTable(byte stain0Id, byte stain1Id); // aka PrepareColorSet
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B FB EB 07")]
     public partial void ReadStainingTemplate(byte stainId, Half* colorTable); // TODO: update arguments
