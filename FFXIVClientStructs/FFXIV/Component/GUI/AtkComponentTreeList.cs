@@ -23,13 +23,13 @@ public unsafe partial struct AtkComponentTreeList {
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 FF 75 22")]
     public partial void LoadAtkValues(
-        uint atkValuesCount,
+        int atkValuesCount,
         AtkValue* atkValues,
-        uint uintValuesOffset,
-        uint stringValuesOffset,
-        uint uintValuesCountPerItem,
-        uint stringValuesCountPerItem,
-        uint itemCount,
+        int uintValuesOffset,
+        int stringValuesOffset,
+        int uintValuesCountPerItem,
+        int stringValuesCountPerItem,
+        int itemCount,
         nint a9);
 
     /// <remarks>
