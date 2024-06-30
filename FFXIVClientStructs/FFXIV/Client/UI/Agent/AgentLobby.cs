@@ -17,8 +17,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 ?? 48 89 01 4C 8B E1", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
-    [FieldOffset(0xA00)] public UIModule* UIModule;
-    [FieldOffset(0xA08)] internal nint TitleScreenMoviePtr;
+    
+    // TODO: everything below here is wrong
+    //[FieldOffset(0xA00)] public UIModule* UIModule;
+    //[FieldOffset(0xA08)] internal nint TitleScreenMoviePtr;
 
     [FieldOffset(0xA30)] public uint AccountExpansion;
     [FieldOffset(0xA34)] public bool ShowFreeTrialLogo;
@@ -70,20 +72,20 @@ public unsafe partial struct AgentLobby {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x9C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x9E0)]
 public unsafe partial struct LobbyData {
     [FieldOffset(0)] public AgentLobby* AgentLobby;
     [FieldOffset(0x8)] public LobbyUIClient LobbyUIClient;
 
-    [FieldOffset(0x858)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
+    [FieldOffset(0x878)] public StdVector<Pointer<CharaSelectCharacterEntry>> CharaSelectEntries;
 
-    [FieldOffset(0x878)] public ulong ContentId;
-    [FieldOffset(0x880)] public Utf8String HomeWorldName;
-    [FieldOffset(0x8E8)] public Utf8String HomeWorldName2;
-    [FieldOffset(0x950)] public Utf8String CurrentWorldName;
+    [FieldOffset(0x898)] public ulong ContentId;
+    [FieldOffset(0x8A0)] public Utf8String HomeWorldName;
+    [FieldOffset(0x908)] public Utf8String HomeWorldName2;
+    [FieldOffset(0x970)] public Utf8String CurrentWorldName;
 
-    [FieldOffset(0x9BC)] public ushort CurrentWorldId;
-    [FieldOffset(0x9BE)] public ushort HomeWorldId;
+    [FieldOffset(0x9DC)] public ushort CurrentWorldId;
+    [FieldOffset(0x9DE)] public ushort HomeWorldId;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 19 C6 87 ?? ?? ?? ?? ??")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryFromServer(byte index, ulong contentId);
