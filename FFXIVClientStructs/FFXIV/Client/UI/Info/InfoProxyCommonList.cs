@@ -8,18 +8,20 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 //     Client::UI::Info::InfoProxyInterface
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyPageInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 public unsafe partial struct InfoProxyCommonList {
-    [FieldOffset(0x20)] public Utf8String Unk20;
-    [FieldOffset(0x88)] public byte NumberArrayIndex;
-    [FieldOffset(0x89)] public byte StringArrayIndex;
-    [FieldOffset(0x8A)] public ushort DataSize;
-    [FieldOffset(0x8C)] public ushort DictSize;
-    [FieldOffset(0x8E)] public ushort Unk8E; //10 * DataSize
-    [FieldOffset(0x90)] public ushort Unk90; //10 * DataSize
-    [FieldOffset(0x98)] public CharacterData* CharData;
-    [FieldOffset(0xA0)] public CharacterIndex* IndexData;
-    [FieldOffset(0xA9)] public DisplayGroup FilterGroup;
+    [FieldOffset(0x38)] public Utf8String UnkString;
+    [FieldOffset(0xA0)] public byte NumberArrayIndex;
+    [FieldOffset(0xA1)] public byte StringArrayIndex;
+    [FieldOffset(0xA2)] public ushort DataSize;
+    [FieldOffset(0xA4)] public ushort DictSize;
+    [FieldOffset(0xA6)] public ushort UnkA6; //10 * DataSize
+    [FieldOffset(0xA8)] public ushort UnkA8; //10 * DataSize
+    [FieldOffset(0xB0)] public CharacterData* CharData;
+    [FieldOffset(0xB8)] public CharacterIndex* IndexData;
+    [FieldOffset(0xC0)] public Sorting SortGroup;
+    [FieldOffset(0xC1)] public DisplayGroup FilterGroup;
+    [FieldOffset(0xC4)] public byte MoveSelector; // 0x9 Not Selected or 0xB Selected
     //[FieldOffset(0xAC)] public uint UnkAC; // Some kind of flag mask for OnlineStatus check InfoProxyCommonlist_vf14
 
     public ReadOnlySpan<CharacterData> CharDataSpan => new(CharData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
@@ -41,7 +43,7 @@ public unsafe partial struct InfoProxyCommonList {
     public partial void ApplyFilters();
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x68)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public partial struct CharacterData {
         [FieldOffset(0x00)] public ulong ContentId;
         [FieldOffset(0x08)] public OnlineStatus State;
@@ -56,21 +58,23 @@ public unsafe partial struct InfoProxyCommonList {
         [FieldOffset(0x18)] public uint ExtraFlags;
         public DisplayGroup Group => (DisplayGroup)(ExtraFlags >> 16);
         public bool IsOtherServer => (ExtraFlags & 0x1000000) != 0;
-        [FieldOffset(0x1C)] public byte Sort;
-        // 1ul byte
-        [FieldOffset(0x1E)] public ushort CurrentWorld;
-        [FieldOffset(0x20)] public ushort HomeWorld;
-        [FieldOffset(0x22)] public ushort Location; //ZoneID
-        [FieldOffset(0x24)] public GrandCompany GrandCompany;
-        [FieldOffset(0x25)] public Language ClientLanguage;
-        [FieldOffset(0x26)] public LanguageMask Languages;
+        // 4 bytes empty
+        // 4 bytes unknown
+        [FieldOffset(0x24)] public byte Sort;
         // 1 byte
-        [FieldOffset(0x28)] public byte Sex;
-        [FieldOffset(0x29)] public byte Job;
-        [FieldOffset(0x2A), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
-        [FieldOffset(0x4A), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _FCTag;
+        [FieldOffset(0x26)] public ushort CurrentWorld;
+        [FieldOffset(0x28)] public ushort HomeWorld;
+        [FieldOffset(0x2A)] public ushort Location; //ZoneID
+        [FieldOffset(0x2C)] public GrandCompany GrandCompany;
+        [FieldOffset(0x2D)] public Language ClientLanguage;
+        [FieldOffset(0x2E)] public LanguageMask Languages;
+        // 1 byte
+        [FieldOffset(0x30)] public byte Sex;
+        [FieldOffset(0x31)] public byte Job;
+        [FieldOffset(0x32), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+        [FieldOffset(0x52), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _FCTag;
         // 8 bytes
-        [FieldOffset(0x58)] public CharacterIndex* Index;
+        [FieldOffset(0x60)] public CharacterIndex* Index;
 
         [Flags]
         public enum OnlineStatus : ulong {
@@ -159,5 +163,13 @@ public unsafe partial struct InfoProxyCommonList {
         Heart,
         Spade,
         Club,
+    }
+
+    public enum Sorting : byte {
+        FriendNumber,
+        Oldest,
+        Newest,
+        Alphabetical,
+        HomeWorld,
     }
 }
