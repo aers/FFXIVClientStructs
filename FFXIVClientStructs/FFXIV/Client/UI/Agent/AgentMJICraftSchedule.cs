@@ -11,8 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct AgentMJICraftSchedule {
     [FieldOffset(0x28)] public ScheduleData* Data;
-    [FieldOffset(0x30)] public int* CurReviewMaterialsSortOrder; // yeah, it's really a pointer to an int...
-    [FieldOffset(0x38)] public int CurReviewMaterialsTab;
+    [FieldOffset(0x30)] public int CurReviewMaterialsTab;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0xB60)]
