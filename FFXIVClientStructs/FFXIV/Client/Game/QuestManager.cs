@@ -11,14 +11,21 @@ public unsafe partial struct QuestManager {
     public static partial QuestManager* Instance();
 
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray30<QuestWork> _normalQuests;
-    [FieldOffset(0x5B8), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
-    [FieldOffset(0x6A8), FixedSizeArray] internal FixedSizeArray5<TrackingWork> _trackedQuests;
-    [FieldOffset(0xBC8), FixedSizeArray] internal FixedSizeArray17<BeastReputationWork> _beastReputation;
-    [FieldOffset(0xCD8), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
-    [FieldOffset(0xE58)] public byte NumLeveAllowances;
+    [FieldOffset(0x5D8), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
+    [FieldOffset(0x6C8), FixedSizeArray] internal FixedSizeArray5<TrackingWork> _trackedQuests;
+    [FieldOffset(0xC48), FixedSizeArray] internal FixedSizeArray17<BeastReputationWork> _beastReputation;
+    [FieldOffset(0xD58), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
+    [FieldOffset(0xED8)] public byte NumLeveAllowances;
 
-    [FieldOffset(0xF40)] public byte NumAcceptedQuests;
-    [FieldOffset(0xF50)] public byte NumAcceptedLeveQuests;
+    /// <remarks>
+    /// This behaves weirdly in that it does not reset but add on top when logging onto different characters,
+    /// but does correspond to the number of accepted quests + prior accepted quests of other characters.
+    /// </remarks>>
+    [FieldOffset(0xFC8)] public byte NumAcceptedQuests;
+
+    // Could not find this in 7.0
+    //[FieldOffset(0xF50)] public byte NumAcceptedLeveQuests;
+
 
     [MemberFunction("E8 ?? ?? ?? ?? 43 88 84 3E ?? ?? ?? ??")]
     public static partial bool IsQuestComplete(ushort questId);
