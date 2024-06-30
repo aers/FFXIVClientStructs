@@ -40,17 +40,17 @@ public unsafe partial struct MapMarkerData {
     [FieldOffset(0x08)] public Utf8String* TooltipString;
     [FieldOffset(0x10)] public uint IconId;
 
-    [FieldOffset(0x18)] public float X;
-    [FieldOffset(0x1C)] public float Y;
-    [FieldOffset(0x20)] public float Z;
-    [FieldOffset(0x24)] public float Radius;
+    [FieldOffset(0x1C)] public float X;
+    [FieldOffset(0x20)] public float Y;
+    [FieldOffset(0x24)] public float Z;
+    [FieldOffset(0x28)] public float Radius;
 
-    [FieldOffset(0x2C)] public uint MapId;
-    [FieldOffset(0x30)] public uint PlaceNameZoneId;
-    [FieldOffset(0x34)] public uint PlaceNameId;
+    [FieldOffset(0x30)] public uint MapId;
+    [FieldOffset(0x34)] public uint PlaceNameZoneId;
+    [FieldOffset(0x38)] public uint PlaceNameId;
 
-    [FieldOffset(0x3C)] public ushort RecommendedLevel;
-    [FieldOffset(0x3E)] public ushort TerritoryTypeId;
+    [FieldOffset(0x40)] public ushort RecommendedLevel;
+    [FieldOffset(0x42)] public ushort TerritoryTypeId;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 8B 86")]
     public partial MapMarkerData* SetData(
