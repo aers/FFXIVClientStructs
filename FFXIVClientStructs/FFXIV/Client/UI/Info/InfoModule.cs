@@ -4,17 +4,17 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
 // Client::UI::Info::InfoModule
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1C70)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C78)]
 public unsafe partial struct InfoModule {
     public static InfoModule* Instance() => UIModule.Instance()->GetInfoModule();
 
-    [FieldOffset(0x1978), FixedSizeArray] internal FixedSizeArray34<Pointer<InfoProxyInterface>> _infoProxies;
-    [FieldOffset(0x1A88)] public ulong LocalContentId;
-    [FieldOffset(0x1A90)] public Utf8String LocalCharName;
-    [FieldOffset(0x1AF8)] public Utf8String UnkString1;
-    [FieldOffset(0x1B60)] public Utf8String UnkString2;
-    [FieldOffset(0x1BC8)] public Utf8String UnkString3;
-    [FieldOffset(0x1C30)] public ulong OnlineStatusFlags;
+    [FieldOffset(0x1978), FixedSizeArray] internal FixedSizeArray35<Pointer<InfoProxyInterface>> _infoProxies;
+    [FieldOffset(0x1A90)] public ulong LocalContentId;
+    [FieldOffset(0x1A98)] public Utf8String LocalCharName;
+    [FieldOffset(0x1B00)] public Utf8String UnkString1;
+    [FieldOffset(0x1B68)] public Utf8String UnkString2;
+    [FieldOffset(0x1BD0)] public Utf8String UnkString3;
+    [FieldOffset(0x1C40)] public ulong OnlineStatusFlags;
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 85 E4 7E 5C")]
     public partial InfoProxyInterface* GetInfoProxyById(InfoProxyId id);
@@ -66,15 +66,16 @@ public enum InfoProxyId : uint {
     FreeCompanyInvite = 14,
     FreeCompanyMember = 15,
     FreeCompanyMemberMji = 16,
-    FreeCompanyCreate = 17,
-    Chat = 18,
-    CrossRealmParty = 19,
-    NoviceNetwork = 20,
-    NoviceNetworkMember = 21,
-    NoviceNetworkMentor = 22,
-    CrossWorldLinkshell = 29,
-    CrossWorldLinkshellMember = 30,
-    CircleList = 31,
-    Circle = 32,
-    CircleFinder = 33
+    // FreeCompanyMemberUnkown = 17,
+    FreeCompanyCreate = 18,
+    Chat = 19,
+    CrossRealmParty = 20,
+    NoviceNetwork = 21,
+    NoviceNetworkMember = 22,
+    NoviceNetworkMentor = 23,
+    CrossWorldLinkshell = 30,
+    CrossWorldLinkshellMember = 31,
+    CircleList = 32,
+    Circle = 33,
+    CircleFinder = 34
 }

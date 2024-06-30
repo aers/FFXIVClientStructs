@@ -3782,35 +3782,35 @@ classes:
         base: Client::UI::Info::InfoProxyNoviceNetworkList
     funcs:
       0x1401435A0: ctor
-  Client::UI::Info::InfoProxy23:
+  Client::UI::Info::InfoProxy24:
     vtbls:
       - ea: 0x141EA81A0
         base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x140143620: ctor
-  Client::UI::Info::InfoProxy24:
+  Client::UI::Info::InfoProxy25:
     vtbls:
       - ea: 0x141EA82D0
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140144490: ctor
       0x140144540: Finalize
-  Client::UI::Info::InfoProxy25:
+  Client::UI::Info::InfoProxy26:
     vtbls:
       - ea: 0x141EA8348
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x140146740: ctor
       0x140146850: Finalize
-  Client::UI::Info::InfoProxy26:
+  Client::UI::Info::InfoProxy27:
     vtbls:
       - ea: 0x141EA83D8
         base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxy27:
+  Client::UI::Info::InfoProxy28:
     vtbls:
       - ea: 0x141EA8440
         base: Client::UI::Info::InfoProxyInterface
-  Client::UI::Info::InfoProxy28:
+  Client::UI::Info::InfoProxy29:
     vtbls:
       - ea: 0x141EA84A8
         base: Client::UI::Info::InfoProxyInterface
