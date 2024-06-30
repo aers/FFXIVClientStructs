@@ -3556,6 +3556,8 @@ classes:
     vtbls:
       - ea: 0x141EA5EF8
         base: Client::UI::Info::InfoProxyPageInterface
+      - ea: 0x141EA5FF8
+        base: Client::Game::Character::CharacterManagerInterface
     vfuncs:
       15: GetCurrentLocationName
       26: Compare # by IsOnline
