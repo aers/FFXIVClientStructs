@@ -4690,7 +4690,7 @@ classes:
       - ea: 0x141ED9A90
   Client::Graphics::Render::GraphicsConfig:
     instances:
-      - ea: 0x14219D2B8
+      - ea: 0x142593538
     vtbls:
       - ea: 0x141ED9AA8
         base: Client::Graphics::Singleton
