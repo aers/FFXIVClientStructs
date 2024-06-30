@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct Camera {
     [FieldOffset(0x80)] public Vector3 LookAtVector;
     [FieldOffset(0x90)] public Vector3 Vector_1;
-    [FieldOffset(0xA0)] public Matrix4x4 ViewMatrix;
+    [FieldOffset(0xA0)] public Matrix4x4 ViewMatrix; // TODO: change to InverseViewMatrix
     [FieldOffset(0xE0)] public Render.Camera* RenderCamera;
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E0 48 8B EB")]
