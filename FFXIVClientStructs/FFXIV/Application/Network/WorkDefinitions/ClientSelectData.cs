@@ -36,7 +36,7 @@ public partial struct ClientSelectData {
     [FieldOffset(0xE8)] public ClientSelectDataConfigFlags ConfigFlags;
     [FieldOffset(0xEA)] public byte VoiceId;
     [FieldOffset(0xEB)] public bool IsNewGame; // presumably
-    [FieldOffset(0xEC), FixedSizeArray] internal FixedSizeArray32<byte> _worldName; // presumably
+    [FieldOffset(0xEC), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _worldName; // presumably
     [FieldOffset(0x110)] public ulong LoginStatus; // presumably
     [FieldOffset(0x118)] public bool IsOutTerritory; // presumably
 }
