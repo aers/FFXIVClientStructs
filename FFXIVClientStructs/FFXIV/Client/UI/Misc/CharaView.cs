@@ -77,7 +77,7 @@ public unsafe partial struct CharaView : ICreatable {
     public partial void UnequipGear(bool hasCharacterData = false, bool characterLoaded = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? FF C5 48 83 C3 1C")]
-    public partial void SetItemSlotData(byte slotId, uint itemId, byte stain1Id, byte stain2Id, uint glamourItemId = 0, bool applyCompanyCrest = true);
+    public partial void SetItemSlotData(byte slotId, uint itemId, byte stain0Id, byte stain1Id, uint glamourItemId = 0, bool applyCompanyCrest = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 8D ?? ?? ?? ?? B0 01")]
     public partial void ToggleDrawWeapon(bool drawn);

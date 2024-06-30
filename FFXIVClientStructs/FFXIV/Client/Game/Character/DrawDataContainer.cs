@@ -173,8 +173,8 @@ public struct WeaponModelId {
     [FieldOffset(0)] public ushort Id;
     [FieldOffset(2)] public ushort Type;
     [FieldOffset(4)] public ushort Variant;
-    [FieldOffset(6)] public byte Stain1;
-    [FieldOffset(7)] public byte Stain2;
+    [FieldOffset(6)] public byte Stain0;
+    [FieldOffset(7)] public byte Stain1;
 
     [FieldOffset(0), CExportIgnore] public ulong Value;
 }
@@ -183,8 +183,8 @@ public struct WeaponModelId {
 public struct EquipmentModelId {
     [FieldOffset(0)] public ushort Id;
     [FieldOffset(2)] public byte Variant;
-    [FieldOffset(3)] public byte Stain1;
-    [FieldOffset(4)] public byte Stain2;
+    [FieldOffset(3)] public byte Stain0;
+    [FieldOffset(4)] public byte Stain1;
 
     [FieldOffset(0), CExportIgnore] public ulong Value;
 }

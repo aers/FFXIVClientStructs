@@ -12,8 +12,8 @@ public unsafe partial struct MirageManager {
     [FieldOffset(0)] public bool IsApplyingGlamourPlate;
 
     [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray800<uint> _prismBoxItemIds;
-    [FieldOffset(0xC84), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain1Ids;
-    [FieldOffset(0xFA4), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain2Ids;
+    [FieldOffset(0xC84), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain0Ids;
+    [FieldOffset(0xFA4), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain1Ids;
     [FieldOffset(0x12C4)] public bool PrismBoxRequested;
     [FieldOffset(0x12C5)] public bool PrismBoxLoaded;
 
@@ -36,7 +36,7 @@ public unsafe partial struct MirageManager {
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct GlamourPlate {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray12<uint> _itemIds;
-        [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray12<byte> _stain1Ids;
-        [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray12<byte> _stain2Ids;
+        [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray12<byte> _stain0Ids;
+        [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray12<byte> _stain1Ids;
     }
 }

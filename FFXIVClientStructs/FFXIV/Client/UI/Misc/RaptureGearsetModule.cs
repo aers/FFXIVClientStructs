@@ -233,8 +233,8 @@ public unsafe partial struct RaptureGearsetModule {
 
         [FieldOffset(0x00)] public uint ItemId;
         [FieldOffset(0x04)] public uint GlamourId;
-        [FieldOffset(0x08)] public byte Stain1Id;
-        [FieldOffset(0x09)] public byte Stain2Id;
+        [FieldOffset(0x08)] public byte Stain0Id;
+        [FieldOffset(0x09)] public byte Stain1Id;
         [FieldOffset(0x0A), FixedSizeArray] internal FixedSizeArray5<ushort> _materia;
         [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
         [FieldOffset(0x19)] public GearsetItemFlag Flags;

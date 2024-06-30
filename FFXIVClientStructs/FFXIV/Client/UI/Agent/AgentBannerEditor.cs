@@ -78,8 +78,8 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x230)] public BannerModuleEntry BannerEntry;
 
     [FieldOffset(0x350), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
-    [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray14<byte> _stain1Ids;
-    [FieldOffset(0x396), FixedSizeArray] internal FixedSizeArray14<byte> _stain2Ids;
+    [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray14<byte> _stain0Ids;
+    [FieldOffset(0x396), FixedSizeArray] internal FixedSizeArray14<byte> _stain1Ids;
 
     [FieldOffset(0x3A8)] public uint Checksum;
     [FieldOffset(0x3AC)] public BannerGearVisibilityFlag GearVisibilityFlag;
