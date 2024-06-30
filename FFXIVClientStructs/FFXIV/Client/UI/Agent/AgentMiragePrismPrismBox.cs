@@ -49,6 +49,7 @@ public unsafe partial struct MiragePrismPrismBoxData {
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public partial struct PrismBoxItem {
     [FieldOffset(0x00)] public Utf8String Name;
+    [FieldOffset(0x68)] public uint Slot;
     [FieldOffset(0x6C)] public uint ItemId;
     [FieldOffset(0x70)] public uint IconId;
     //[FieldOffset(0x74)] public uint Unk_SheetColumn19;
