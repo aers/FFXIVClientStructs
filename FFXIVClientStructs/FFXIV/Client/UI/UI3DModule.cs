@@ -31,8 +31,9 @@ public unsafe partial struct UI3DModule {
     // there's more after this
 
     // Client::UI::UI3DModule::MapInfo
+    [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct MapInfo {
+    public partial struct MapInfo {
         [FieldOffset(0x8)] public uint MapId;
 
         [FieldOffset(0xC)] public uint IconId;
@@ -54,9 +55,10 @@ public unsafe partial struct UI3DModule {
     // Client::UI::UI3DModule::ObjectInfo
     //   Client::UI::UI3DModule::MapInfo
     // ctor inlined
+    [GenerateInterop]
+    [Inherits<MapInfo>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-    public struct ObjectInfo {
-        [FieldOffset(0x0)] public MapInfo MapInfo;
+    public partial struct ObjectInfo {
         [FieldOffset(0x18)] public GameObject* GameObject;
         [FieldOffset(0x20)] public Vector3 NamePlatePos;
         [FieldOffset(0x30)] public Vector3 ObjectPosProjectedScreenSpace; // maybe
@@ -76,9 +78,10 @@ public unsafe partial struct UI3DModule {
     // Client::UI::UI3DModule::MemberInfo
     //   Client::UI::UI3DModule::MapInfo
     // ctor inlined
+    [GenerateInterop]
+    [Inherits<MapInfo>]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public struct MemberInfo {
-        [FieldOffset(0x0)] public MapInfo MapInfo;
+    public partial struct MemberInfo {
         [FieldOffset(0x18)] public BattleChara* BattleChara;
 
         [FieldOffset(0x20)] public byte Unk_20;
@@ -88,9 +91,8 @@ public unsafe partial struct UI3DModule {
     // new since 2.3
     // Client::UI::UI3DModule::UnkInfo
     //   Client::UI::UI3DModule::MapInfo
+    [GenerateInterop]
+    [Inherits<MapInfo>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public struct UnkInfo {
-        [FieldOffset(0x0)] public MapInfo MapInfo;
-        // rest unknown
-    }
+    public partial struct UnkInfo;
 }
