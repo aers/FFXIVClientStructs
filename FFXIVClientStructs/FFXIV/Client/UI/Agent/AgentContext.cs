@@ -25,25 +25,28 @@ public unsafe partial struct AgentContext {
     [FieldOffset(0xD90)] public uint OwnerAddon;
 
     [FieldOffset(0xDA0)] public InfoProxyCommonList.CharacterData ContextMenuTarget;
-    [FieldOffset(0xE08)] public InfoProxyCommonList.CharacterData* CurrentContextMenuTarget;
-    [FieldOffset(0xE10)] public Utf8String TargetName;
-    [FieldOffset(0xE78)] public Utf8String YesNoTargetName;
+    [FieldOffset(0xE10)] public InfoProxyCommonList.CharacterData* CurrentContextMenuTarget;
 
-    [FieldOffset(0xEE8)] public ulong TargetContentId;
-    [FieldOffset(0xEF0)] public ulong YesNoTargetContentId;
-    [FieldOffset(0xEF8)] public GameObjectId TargetObjectId;
-    [FieldOffset(0xF00)] public GameObjectId YesNoTargetObjectId;
-    [FieldOffset(0xF08)] public short TargetHomeWorldId;
-    [FieldOffset(0xF0A)] public short YesNoTargetHomeWorldId;
-    [FieldOffset(0xF0C)] public byte YesNoEventId;
+    [FieldOffset(0xE80)] public Utf8String TargetName;
+    [FieldOffset(0xEE8)] public Utf8String YesNoTargetName;
 
-    [FieldOffset(0xF10)] public int TargetSex;
-    [FieldOffset(0xF14)] public uint TargetMountSeats;
+    [FieldOffset(0xF58)] public ulong TargetAccountId;
+    [FieldOffset(0xF60)] public ulong TargetContentId;
+    [FieldOffset(0xF68)] public ulong YesNoTargetAccountId;
+    [FieldOffset(0xF70)] public ulong YesNoTargetContentId;
+    [FieldOffset(0xE78)] public GameObjectId TargetObjectId;
+    [FieldOffset(0xF80)] public GameObjectId YesNoTargetObjectId;
+    [FieldOffset(0xF88)] public short TargetHomeWorldId;
+    [FieldOffset(0xF8A)] public short YesNoTargetHomeWorldId;
+    [FieldOffset(0xF8C)] public byte YesNoEventId;
 
-    [FieldOffset(0x1738)] public void* UpdateChecker; // AgentContextUpdateChecker*, if handler returns false the menu closes
-    [FieldOffset(0x1740)] public long UpdateCheckerParam; //objectid of the target or list index of an addon or other things
-    [FieldOffset(0x1748)] public byte ContextMenuIndex;
-    [FieldOffset(0x1749)] public byte OpenAtPosition; // if true menu opens at Position else at cursor location
+    [FieldOffset(0xF90)] public int TargetSex;
+    [FieldOffset(0xF94)] public uint TargetMountSeats;
+
+    [FieldOffset(0x17C8)] public void* UpdateChecker; // AgentContextUpdateChecker*, if handler returns false the menu closes
+    [FieldOffset(0x17D0)] public long UpdateCheckerParam; //objectid of the target or list index of an addon or other things
+    [FieldOffset(0x17D9)] public byte ContextMenuIndex;
+    [FieldOffset(0x17DA)] public byte OpenAtPosition; // if true menu opens at Position else at cursor location
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 88 74 24")]
     public partial void OpenContextMenu(bool bindToOwner = true, bool closeExisting = true);
