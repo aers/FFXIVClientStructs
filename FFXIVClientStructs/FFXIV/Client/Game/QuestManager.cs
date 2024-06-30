@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::QuestManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xF58)]
+[StructLayout(LayoutKind.Explicit, Size = 0xFD0)]
 public unsafe partial struct QuestManager {
     [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();
