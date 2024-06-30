@@ -1130,7 +1130,7 @@ classes:
       0x140894550: ctor
       0x140866110: Update
       0x140867EB0: GetInventoryContainer  # (this, containerId)
-      0x140881130: GetInventorySlot  # (this, containerId, slotId)
+      0x140867F00: GetInventorySlot  # (this, containerId, slotId)
       0x1408695F0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
       0x140870F80: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x140871810: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
