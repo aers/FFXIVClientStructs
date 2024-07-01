@@ -139,20 +139,20 @@ public unsafe partial struct Character {
     // TODO: seems to have been removed in 7.0
     //[VirtualFunction(87)]
     //public partial bool IsMount();
+}
 
-    // Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
-    public enum CharacterModes : byte {
-        None = 0, // Mode is never used
-        Normal = 1, // Param always 0
-        EmoteLoop = 3, // Param is an EmoteMode entry
-        Mounted = 4, // Param always 0
-        Crafting = 5, // Param always 0
-        AnimLock = 8, // Param always 0
-        Carrying = 9, // Param is a Carry entry
-        RidingPillion = 10, // Param is the pillion seat number
-        InPositionLoop = 11, // Param is an EmoteMode entry
-        Performance = 16, // Unknown
-    }
+// Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
+public enum CharacterModes : byte {
+    None = 0, // Mode is never used
+    Normal = 1, // Param always 0
+    EmoteLoop = 3, // Param is an EmoteMode entry
+    Mounted = 4, // Param always 0
+    Crafting = 5, // Param always 0
+    AnimLock = 8, // Param always 0
+    Carrying = 9, // Param is a Carry entry
+    RidingPillion = 10, // Param is the pillion seat number
+    InPositionLoop = 11, // Param is an EmoteMode entry
+    Performance = 16, // Unknown
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 2)]
