@@ -89,7 +89,7 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x250)]
-    public struct NamePlateInfo {   
+    public struct NamePlateInfo {
         [FieldOffset(0x00)] public GameObjectId ObjectId;
         [FieldOffset(0x30)] public Utf8String Name;
         [FieldOffset(0xA0)] public Utf8String FcName;
