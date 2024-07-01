@@ -70,7 +70,7 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x2270)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
-    public bool IsWeaponDrawn => (StatusFlags3 & 0x40) != 0;
+    public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;
     public bool IsOffhandDrawn => (CharacterData.Flags1 & 0x40) == 0x40;
     public bool InCombat => (CharacterData.Flags1 & 0x20) == 0x20;
     public bool IsHostile => (CharacterData.Flags1 & 0x10) == 0x10;
