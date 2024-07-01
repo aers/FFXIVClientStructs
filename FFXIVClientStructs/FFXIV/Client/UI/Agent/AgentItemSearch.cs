@@ -12,15 +12,16 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x3878)]
 public unsafe partial struct AgentItemSearch {
     [FieldOffset(0x98)] public StringHolder* StringData;
-    [FieldOffset(0x3304)] public uint ResultItemId;
-    [FieldOffset(0x330C)] public uint ResultSelectedIndex;
-    [FieldOffset(0x331C)] public uint ResultHoveredIndex;
-    [FieldOffset(0x3324)] public uint ResultHoveredCount;
-    [FieldOffset(0x332C)] public byte ResultHoveredHQ;
-    [FieldOffset(0x37D0)] public uint* ItemBuffer;
-    [FieldOffset(0x37D8)] public uint ItemCount;
-    [FieldOffset(0x37E4)] public bool IsPartialSearching;
-    [FieldOffset(0x37E5)] public bool IsItemPushPending;
+    [FieldOffset(0x3384)] public uint ResultItemId;
+    [FieldOffset(0x338C)] public uint ResultSelectedIndex;
+    [FieldOffset(0x339C)] public uint ResultHoveredIndex;
+    [FieldOffset(0x33A0)] public uint ResultHoveredItemId;
+    [FieldOffset(0x33A4)] public uint ResultHoveredCount;
+    [FieldOffset(0x33AC)] public byte ResultHoveredHQ;
+    [FieldOffset(0x3858)] public uint* ItemBuffer;
+    [FieldOffset(0x3860)] public uint ItemCount;
+    [FieldOffset(0x386C)] public bool IsPartialSearching;
+    [FieldOffset(0x386D)] public bool IsItemPushPending;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x98)]
     public struct StringHolder {
