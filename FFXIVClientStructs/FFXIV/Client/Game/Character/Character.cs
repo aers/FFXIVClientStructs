@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
@@ -19,13 +18,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x708)] public DrawDataContainer DrawData;
     [FieldOffset(0x8E8)] public OrnamentContainer OrnamentData;
     [FieldOffset(0x960)] public ReaperShroudContainer ReaperShroud;
-
     [FieldOffset(0x9B0)] public TimelineContainer Timeline;
-
-    // TODO: this is a field inside TimeLineContainer, at offset 0x342 but it's also read directly with this offset
-    // 0x40 = WeaponDrawn
-    [FieldOffset(0xCF2), CExportIgnore] public byte StatusFlags3;
-
     [FieldOffset(0xD00)] public LookAtContainer LookAt;
 
     [FieldOffset(0x1900)] public VfxContainer Vfx;
@@ -67,15 +60,16 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x2250)] public uint CompanionOwnerId;
 
+    [FieldOffset(0x2258)] public ulong AccountId;
+    [FieldOffset(0x2260)] public ulong ContentId;
     [FieldOffset(0x2268)] public ushort CurrentWorld;
     [FieldOffset(0x226A)] public ushort HomeWorld;
-
     [FieldOffset(0x226C)] public CharacterModes Mode;
     [FieldOffset(0x226D)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
     [FieldOffset(0x2270)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
-    public bool IsWeaponDrawn => (StatusFlags3 & 0x40) != 0;
+    public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;
     public bool IsOffhandDrawn => (CharacterData.Flags1 & 0x40) == 0x40;
     public bool InCombat => (CharacterData.Flags1 & 0x20) == 0x20;
     public bool IsHostile => (CharacterData.Flags1 & 0x10) == 0x10;
@@ -145,50 +139,24 @@ public unsafe partial struct Character {
     // TODO: seems to have been removed in 7.0
     //[VirtualFunction(87)]
     //public partial bool IsMount();
+}
 
-    [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x170)]
-    public partial struct CastInfo {
-        [FieldOffset(0x00)] public byte IsCasting;
-        [FieldOffset(0x01)] public byte Interruptible;
-        [FieldOffset(0x02)] public ActionType ActionType;
-        [FieldOffset(0x04)] public uint ActionId;
-        [FieldOffset(0x08)] public uint SourceSequence; // for player-initiated casts - monotonically increasing id of the cast
-        [FieldOffset(0x10)] public GameObjectId TargetId;
-        [FieldOffset(0x20)] public Vector3 TargetLocation;
-        [FieldOffset(0x30)] public float Rotation;
-        [FieldOffset(0x34)] public float CurrentCastTime;
-        [FieldOffset(0x38)] public float BaseCastTime;
-        [FieldOffset(0x3C)] public float TotalCastTime;
+// Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
+public enum CharacterModes : byte {
+    None = 0, // Mode is never used
+    Normal = 1, // Param always 0
+    EmoteLoop = 3, // Param is an EmoteMode entry
+    Mounted = 4, // Param always 0
+    Crafting = 5, // Param always 0
+    AnimLock = 8, // Param always 0
+    Carrying = 9, // Param is a Carry entry
+    RidingPillion = 10, // Param is the pillion seat number
+    InPositionLoop = 11, // Param is an EmoteMode entry
+    Performance = 16, // Unknown
+}
 
-        // fields below (Response*) are set when ActionEffect is received - at this point cast can't be cancelled - this is the start of the slidecast window
-        [FieldOffset(0x40)] public uint ResponseSpellId;
-        [FieldOffset(0x44)] public ActionType ResponseActionType;
-        [FieldOffset(0x48)] public uint ResponseActionId;
-        [FieldOffset(0x4C)] public uint ResponseGlobalSequence;
-        [FieldOffset(0x50)] public uint ResponseSourceSequence;
-        [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray32<GameObjectId> _responseTargetIds;
-        [FieldOffset(0x158)] public byte ResponseTargetCount;
-        [FieldOffset(0x159)] public byte ResponseFlags; // see ActionEffectHandler.Header.Flags
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 2)]
-    public struct ForayInfo {
-        [FieldOffset(0x00)] public byte Level;
-        [FieldOffset(0x01)] public byte Element;
-    }
-
-    // Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
-    public enum CharacterModes : byte {
-        None = 0, // Mode is never used
-        Normal = 1, // Param always 0
-        EmoteLoop = 3, // Param is an EmoteMode entry
-        Mounted = 4, // Param always 0
-        Crafting = 5, // Param always 0
-        AnimLock = 8, // Param always 0
-        Carrying = 9, // Param is a Carry entry
-        RidingPillion = 10, // Param is the pillion seat number
-        InPositionLoop = 11, // Param is an EmoteMode entry
-        Performance = 16, // Unknown
-    }
+[StructLayout(LayoutKind.Explicit, Size = 2)]
+public struct ForayInfo {
+    [FieldOffset(0x00)] public byte Level;
+    [FieldOffset(0x01)] public byte Element;
 }

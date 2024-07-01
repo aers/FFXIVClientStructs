@@ -7585,6 +7585,7 @@ classes:
       80: GetStatusManager_2
       81: GetCastInfo
       82: GetCastInfo_2
+      83: GetActionEffectHandler
       84: GetScreenLogManager
       85: GetForayInfo
       86: GetForayInfo_2
