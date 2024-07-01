@@ -12,16 +12,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x144C8)]
 public unsafe partial struct AgentMap {
-    // TODO: Update vectors, SymbolMap and everything after is already updated
     /// <summary> Pointers to markers in <see cref="EventMarkers"/>. </summary>
-    [FieldOffset(0x88)] public StdVector<Pointer<MapMarkerData>> EventMarkersPtrs;
+    [FieldOffset(0xD0)] public StdVector<Pointer<MapMarkerData>> EventMarkersPtrs;
     /// <summary> Includes markers from FateManager, EventFramework and SequentialEvent (whatever that is). </summary>
-    [FieldOffset(0xA0)] public StdVector<MapMarkerData> EventMarkers;
+    [FieldOffset(0xE8)] public StdVector<MapMarkerData> EventMarkers;
 
     // [MinimapLinkedMarkers] Name could be better, this contains the tooltips and linked locations of minimap MSQ markers that have arrows telling you where to go.
     // These do not contain any of the other arrow markers.
-    [FieldOffset(0xE8)] public StdVector<LinkedTooltipMarker> MinimapMSQLinkedTooltipMarkers;
-    [FieldOffset(0x100)] public StdVector<Pointer<LinkedTooltipMarker>> MinimapMSQLinkedTooltipMarkersList;
+    [FieldOffset(0x130)] public StdVector<LinkedTooltipMarker> MinimapMSQLinkedTooltipMarkers;
+    [FieldOffset(0x148)] public StdVector<Pointer<LinkedTooltipMarker>> MinimapMSQLinkedTooltipMarkersList;
 
     [FieldOffset(0x160)] public StdMap<uint, uint> SymbolMap; // Icon:MapSymbol
 
