@@ -24,14 +24,14 @@ public unsafe partial struct AgentSalvage {
     [FieldOffset(0x318)] public Utf8String TextCulinarian;
 
     [FieldOffset(0x380)] public uint ItemCount;
-    [FieldOffset(0x384)] public uint Unknown1; // 0x79 before desynth
-    [FieldOffset(0x38C)] public uint Unknown2; // 0x79 after desynth
+    // [FieldOffset(0x384)] public uint Unknown1; // 0x79 before desynth
+    // [FieldOffset(0x38C)] public uint Unknown2; // 0x79 after desynth
 
     [FieldOffset(0x390)] public InventoryItem* DesynthItemSlot;
     [FieldOffset(0x398)] public SalvageResult DesynthItem;
 
     [FieldOffset(0x3A0)] public Utf8String TextQuantity;
-    [FieldOffset(0x408)] public byte Unknown3; // 0xC8
+    // [FieldOffset(0x408)] public byte Unknown3; // 0xC8
     [FieldOffset(0x409)] public bool IsSalvageResultAddonOpen;
 
     [FieldOffset(0x40C)] public uint DesynthItemId;
