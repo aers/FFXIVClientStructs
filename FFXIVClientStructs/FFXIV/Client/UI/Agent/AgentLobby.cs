@@ -18,7 +18,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 ?? 48 89 01 4C 8B E1", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
-    
+
     // TODO: everything below here is wrong
     //[FieldOffset(0xA00)] public UIModule* UIModule;
     //[FieldOffset(0xA08)] internal nint TitleScreenMoviePtr;
