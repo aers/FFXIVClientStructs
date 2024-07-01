@@ -13,28 +13,28 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4DA8)]
 public unsafe partial struct AgentHUD {
-    [FieldOffset(0xAA8)] public uint CastBarAddonId;
+    [FieldOffset(0xB18)] public uint CastBarAddonId;
 
-    [FieldOffset(0xAB0)] public uint CurrentTargetId;
-    [FieldOffset(0xAB8)] public int TargetCounter;
-    [FieldOffset(0xAC0)] public uint TargetPartyMemberId;
-    [FieldOffset(0xAC8)] public int TargetSwitchToSelfCounter;
-    [FieldOffset(0x9DC)] public uint CurrentBattleCharaTargetLevel;
+    [FieldOffset(0xB38)] public uint CurrentTargetId;
+    [FieldOffset(0xB40)] public int TargetCounter;
+    [FieldOffset(0xB48)] public uint TargetPartyMemberId;
+    [FieldOffset(0xB50)] public int TargetSwitchToSelfCounter;
+    [FieldOffset(0xB54)] public uint CurrentBattleCharaTargetLevel;
 
-    [FieldOffset(0xCB8)] public int CompanionSummonTimer;
+    [FieldOffset(0xD40)] public int CompanionSummonTimer;
 
-    [FieldOffset(0xCC8), FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMembers;
+    [FieldOffset(0xD50), FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMembers;
 
-    [FieldOffset(0x12B8)] public short PartyMemberCount;
-    [FieldOffset(0x12C0)] public uint PartyTitleAddonId;
-    [FieldOffset(0x12C4), FixedSizeArray] internal FixedSizeArray40<uint> _raidMemberIds;
-    [FieldOffset(0x1364)] public int RaidGroupSize;
+    [FieldOffset(0x1340)] public short PartyMemberCount;
+    [FieldOffset(0x1348)] public uint PartyTitleAddonId;
+    [FieldOffset(0x134C), FixedSizeArray] internal FixedSizeArray40<uint> _raidMemberIds;
+    [FieldOffset(0x13EC)] public int RaidGroupSize;
 
-    [FieldOffset(0x1378), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
-    [FieldOffset(0x13F0), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
+    [FieldOffset(0x1400), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
+    [FieldOffset(0x1478), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
 
-    [FieldOffset(0x4808)] public StdVector<MapMarkerData> MapMarkers;
-    [FieldOffset(0x4820)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
+    [FieldOffset(0x4A10)] public StdVector<MapMarkerData> MapMarkers;
+    [FieldOffset(0x4A28)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
 
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 44 8B C2 83 E2 1F")]
     public partial bool IsMainCommandEnabled(uint mainCommandId);
