@@ -3545,7 +3545,6 @@ classes:
     vfuncs:
       0: dtor
       1: AddData
-      # 2: RemoveData # gone in 7.0?
       2: ClearData
       4: RequestData
       5: EndRequest
@@ -3729,6 +3728,8 @@ classes:
     vtbls:
       - ea: 0x141EA79D8
         base: Client::UI::Info::InfoProxyPageInterface
+    vfuncs:
+      13: RemoveData
     funcs:
       0x14013E010: ctor
       0x14013ED40: GetNumOfDeniedLetters
