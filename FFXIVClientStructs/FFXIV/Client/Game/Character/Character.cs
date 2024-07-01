@@ -19,13 +19,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x708)] public DrawDataContainer DrawData;
     [FieldOffset(0x8E8)] public OrnamentContainer OrnamentData;
     [FieldOffset(0x960)] public ReaperShroudContainer ReaperShroud;
-
     [FieldOffset(0x9B0)] public TimelineContainer Timeline;
-
-    // TODO: this is a field inside TimeLineContainer, at offset 0x342 but it's also read directly with this offset
-    // 0x40 = WeaponDrawn
-    [FieldOffset(0xCF2), CExportIgnore] public byte StatusFlags3;
-
     [FieldOffset(0xD00)] public LookAtContainer LookAt;
 
     [FieldOffset(0x1900)] public VfxContainer Vfx;
@@ -67,9 +61,10 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x2250)] public uint CompanionOwnerId;
 
+    [FieldOffset(0x2258)] public ulong AccountId;
+    [FieldOffset(0x2260)] public ulong ContentId;
     [FieldOffset(0x2268)] public ushort CurrentWorld;
     [FieldOffset(0x226A)] public ushort HomeWorld;
-
     [FieldOffset(0x226C)] public CharacterModes Mode;
     [FieldOffset(0x226D)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
