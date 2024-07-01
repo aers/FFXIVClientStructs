@@ -94,6 +94,8 @@ public enum NadiFlags : byte {
 public enum CanvasFlags : byte {
     Pom = 1,
     Wing = 2,
+    Claw = 4,
+    Maw = 8,
     Weapon = 16,
     Landscape = 32,
 }
@@ -101,5 +103,9 @@ public enum CanvasFlags : byte {
 [Flags]
 public enum CreatureFlags : byte {
     Pom = 1,
-    Wings = 16
+    Wings = 2,
+    Claw = 4,
+
+    MooglePortait = 16,
+    MadeenPortrait = 32,
 }
