@@ -89,15 +89,15 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x250)]
-    public struct NamePlateInfo {
+    public struct NamePlateInfo {   
         [FieldOffset(0x00)] public GameObjectId ObjectId;
         [FieldOffset(0x30)] public Utf8String Name;
-        [FieldOffset(0x98)] public Utf8String FcName;
-        [FieldOffset(0x100)] public Utf8String Title;
-        [FieldOffset(0x168)] public Utf8String DisplayTitle;
-        [FieldOffset(0x1D0)] public Utf8String LevelText;
-        [FieldOffset(0x240)] public int Flags;
-        [FieldOffset(0x244)] public bool IsDirty;
+        [FieldOffset(0xA0)] public Utf8String FcName;
+        [FieldOffset(0x108)] public Utf8String Title;
+        [FieldOffset(0x170)] public Utf8String DisplayTitle;
+        [FieldOffset(0x1D8)] public Utf8String LevelText;
+        [FieldOffset(0x248)] public int Flags;
+        [FieldOffset(0x24C)] public bool IsDirty;
 
         public bool IsPrefixTitle => ((Flags >> (8 * 3)) & 0xFF) == 1;
     }
