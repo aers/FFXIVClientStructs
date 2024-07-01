@@ -8,7 +8,7 @@ public partial struct RaptureHotbarModule {
     public partial struct SavedHotbarGroup {
         public const int Size = SavedHotbar.Size * 18;
 
-        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray18<SavedHotbar> _hotBars;
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray18<SavedHotbar> _hotbars;
     }
 
     [GenerateInterop]
