@@ -13246,6 +13246,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412041F0: ctor
+  Client::UI::AddonAdventureNotice:
+    vtbls:
+      - ea: 0x141FA78A0
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonAdventureNoteBook:
     vtbls:
       - ea: 0x141FA7660
