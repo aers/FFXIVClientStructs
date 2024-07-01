@@ -18,16 +18,16 @@ public unsafe partial struct AddonItemSearch {
     [FieldOffset(0x248)] public Utf8String SearchText;
     [FieldOffset(0x2B0)] public Utf8String SearchText2;
 
-    [FieldOffset(0x4B8), FixedSizeArray] internal FixedSizeArray96<Utf8String> _filterLabels;
+    [FieldOffset(0x4B8), FixedSizeArray] internal FixedSizeArray99<Utf8String> _filterLabels;
 
-    [FieldOffset(0x2DC0)] public AtkComponentTextInput* SearchTextInput;
-    [FieldOffset(0x2DC8)] public AtkComponentButton* SearchButton;
+    [FieldOffset(0x2EF8)] public AtkComponentTextInput* SearchTextInput;
+    [FieldOffset(0x2F00)] public AtkComponentButton* SearchButton;
 
-    [FieldOffset(0x2DF0)] public AtkComponentList* ResultsList;
+    [FieldOffset(0x2F28)] public AtkComponentList* ResultsList;
 
-    [FieldOffset(0x3220)] public AtkComponentCheckBox* PartialSearchCheckBox;
+    [FieldOffset(0x3378)] public AtkComponentCheckBox* PartialSearchCheckBox;
 
-    [FieldOffset(0x3EEB)] public bool PartialMatch;
+    [FieldOffset(0x4043)] public bool PartialMatch;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B DE 48 8D 7D 30")]
     public partial void RunSearch(bool ignoreFilters = false);
