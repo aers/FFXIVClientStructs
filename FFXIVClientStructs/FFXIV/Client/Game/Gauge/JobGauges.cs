@@ -87,14 +87,15 @@ public struct RedMageGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct PictomancerGauge {
     [FieldOffset(0x08)] public byte PalleteGauge;
-    [FieldOffset(0x0A)] public byte WhitePaint;
+    [FieldOffset(0x0A)] public byte Paint;
     [FieldOffset(0x0B)] public CanvasFlags CanvasFlags;
     [FieldOffset(0x0C)] public CreatureFlags CreatureFlags;
 
-    public bool CreatureMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Pom) || CanvasFlags.HasFlag(CanvasFlags.Wing); // Will require update at level 96 with Maw & Claw most likely
+    public bool CreatureMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Pom) || CanvasFlags.HasFlag(CanvasFlags.Wing) || CanvasFlags.HasFlag(CanvasFlags.Claw) || CanvasFlags.HasFlag(CanvasFlags.Maw);
     public bool WeaponMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Weapon);
     public bool LandscapeMotifDrawn => CanvasFlags.HasFlag(CanvasFlags.Landscape);
-    public bool MooglePortraitReady => CreatureFlags.HasFlag(CreatureFlags.Wings);
+    public bool MooglePortraitReady => CreatureFlags.HasFlag(CreatureFlags.MooglePortait);
+    public bool MadeenPortraitReady => CreatureFlags.HasFlag(CreatureFlags.MadeenPortrait);
 }
 
 #endregion
