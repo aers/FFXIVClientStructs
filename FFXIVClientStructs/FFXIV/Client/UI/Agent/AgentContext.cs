@@ -34,7 +34,7 @@ public unsafe partial struct AgentContext {
     [FieldOffset(0xF60)] public ulong TargetContentId;
     [FieldOffset(0xF68)] public ulong YesNoTargetAccountId;
     [FieldOffset(0xF70)] public ulong YesNoTargetContentId;
-    [FieldOffset(0xE78)] public GameObjectId TargetObjectId;
+    [FieldOffset(0xF78)] public GameObjectId TargetObjectId;
     [FieldOffset(0xF80)] public GameObjectId YesNoTargetObjectId;
     [FieldOffset(0xF88)] public short TargetHomeWorldId;
     [FieldOffset(0xF8A)] public short YesNoTargetHomeWorldId;
