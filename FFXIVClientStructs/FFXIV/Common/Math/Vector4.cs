@@ -16,6 +16,7 @@ public struct Vector4 : IEquatable<Vector4>, IFormattable {
     public float SqrMagnitude => X * X + Y * Y + Z * Z + W * W;
 
     public Vector4(float value) : this(value, value, value, value) { }
+    public Vector4(Vector3 value, float w) : this(value.X, value.Y, value.Z, w) { }
     public Vector4(float x, float y, float z, float w) {
         X = x;
         Y = y;

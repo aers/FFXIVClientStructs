@@ -6,13 +6,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::ReferencedClassBase
 [GenerateInterop(isInherited: true)]
 [Inherits<ReferencedClassBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x130)]
+[StructLayout(LayoutKind.Explicit, Size = 0x290)]
 public unsafe partial struct Camera {
 
-    [FieldOffset(0x50)] public Matrix4x4 ProjectionMatrix;
+    [FieldOffset(0x1A0)] public Matrix4x4 ProjectionMatrix;
 
-    [FieldOffset(0xA8)] public float FoV;
-    [FieldOffset(0xAC)] public float AspectRatio;
-    [FieldOffset(0xB0)] public float NearPlane;
-    [FieldOffset(0xB4)] public float FarPlane;
+    [FieldOffset(0x1E8)] public float FoV;
+    [FieldOffset(0x1EC)] public float AspectRatio;
+    [FieldOffset(0x1F0)] public float NearPlane;
+    [FieldOffset(0x1F4)] public float FarPlane;
 }

@@ -4974,7 +4974,6 @@ classes:
       0x14057B1D0: ScreenPointToRay
       0x14057B830: CalculateViewMatrix
       0x14057C0F0: PrepareRenderCamera
-      0x140767520: WorldToViewportPoint
       0x140D636E0: WorldToScreenPoint # static
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
     vtbls:
@@ -6640,6 +6639,7 @@ classes:
       # 0x14061F5F0: GetUIObjectKind # INLINED IN 7.0 140752672
       0x140750C70: CalculateNamePlateScale
       0x140750E70: ctor
+      0x140750D90: WorldToScreenPoint # static (&x, &y, &world, width, height)
       0x140751E80: Update
       0x1407523B0: UpdateGameObjects
       # 0x1406203C0: SetupNamePlateForObjectInfo # INLINED IN 7.0 14075275C
@@ -15300,6 +15300,7 @@ classes:
     funcs:
       0x14168DBF0: UpdateRotation
       0x141690BA0: ctor
+      0x140767520: WorldToViewportPoint
   Client::Game::LowCutCamera:
     vtbls:
       - ea: 0x14203A108

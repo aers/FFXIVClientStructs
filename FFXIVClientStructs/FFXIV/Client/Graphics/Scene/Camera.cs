@@ -12,34 +12,19 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 public unsafe partial struct Camera {
     [FieldOffset(0x80)] public Vector3 LookAtVector;
     [FieldOffset(0x90)] public Vector3 Vector_1;
-    [FieldOffset(0xA0)] public Matrix4x4 ViewMatrix; // TODO: change to InverseViewMatrix
+    [FieldOffset(0xA0)] public Matrix4x4 ViewMatrix;
     [FieldOffset(0xE0)] public Render.Camera* RenderCamera;
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E0 48 8B EB")]
     public partial void ScreenPointToRay(Ray* ray, int x, int y);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 C7 0F 28 CE")]
-    private static partial Vector2* WorldToScreenPoint(Vector2* screenPoint, Vector3* worldPoint);
+    public static partial Vector2* WorldToScreenPoint(Vector2* screenPoint, Vector3* worldPoint);
 
     public Ray ScreenPointToRay(Vector2 screenPoint) {
-        return ScreenPointToRay((int)screenPoint.X, (int)screenPoint.Y);
-    }
-
-    public Ray ScreenPointToRay(int x, int y) {
-        var pRay = stackalloc Ray[1];
-        ScreenPointToRay(pRay, x, y);
-        return *pRay;
-    }
-
-    public static Vector3 ScreenToWorldPoint(Vector2 screenPoint) {
-        var ray = CameraManager.Instance()->CurrentCamera->ScreenPointToRay(screenPoint);
-        BGCollisionModule.Raycast(ray.Origin, ray.Direction, out var hit);
-        return hit.Point;
-    }
-
-    public static Vector2 WorldToScreenPoint(Vector3 worldPoint) {
-        var screen = stackalloc Vector2[1];
-        return *WorldToScreenPoint(screen, &worldPoint);
+        var ray = new Ray();
+        ScreenPointToRay(&ray, (int)screenPoint.X, (int)screenPoint.Y);
+        return ray;
     }
 
     public bool ScreenToWorld(Vector2 screenPos, out Vector3 worldPos) {
@@ -53,10 +38,22 @@ public unsafe partial struct Camera {
         var device = Device.Instance();
         float width = device->Width;
         float height = device->Height;
-        var pCoords = Vector3.Transform(worldPos, ViewMatrix * RenderCamera->ProjectionMatrix);
-        screenPos = new Vector2(pCoords.X / MathF.Abs(pCoords.Z), pCoords.Y / MathF.Abs(pCoords.Z));
-        screenPos.X = 0.5f * width * (screenPos.X + 1.0f);
-        screenPos.Y = 0.5f * height * (1.0f - screenPos.Y);
-        return pCoords.Z > 0.0f;
+        var pCoords = Vector4.Transform(new Vector4(worldPos, 1f), ViewMatrix * RenderCamera->ProjectionMatrix);
+        if (Math.Abs(pCoords.W) < float.Epsilon) {
+            screenPos = Vector2.Zero;
+            return false;
+        }
+        
+        pCoords *= MathF.Abs(1.0f / pCoords.W);
+        screenPos = new Vector2 {
+            X = (pCoords.X + 1.0f) * width * 0.5f,
+            Y = (1.0f - pCoords.Y) * height * 0.5f
+        };
+
+        return IsOnScreen(new Vector3(pCoords.X, pCoords.Y, pCoords.Z));
+
+        static bool IsOnScreen(Vector3 pos) {
+            return -1.0 <= pos.X && pos.X <= 1.0 && -1.0 <= pos.Y && pos.Y <= 1.0 && pos.Z <= 1.0 && 0.0 <= pos.Z;
+        }
     }
 }
