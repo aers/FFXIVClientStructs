@@ -29,7 +29,7 @@ public unsafe partial struct Camera {
 
     public bool ScreenToWorld(Vector2 screenPos, out Vector3 worldPos) {
         var ray = ScreenPointToRay(screenPos);
-        var result = BGCollisionModule.Raycast(ray.Origin, ray.Direction, out var hit);
+        var result = BGCollisionModule.RaycastMaterialFilter(ray.Origin, ray.Direction, out var hit);
         worldPos = hit.Point;
         return result;
     }
