@@ -65,6 +65,7 @@ public struct BlackMageGauge {
     public int AstralStacks => ElementStance <= 0 ? 0 : ElementStance;
     public bool EnochianActive => EnochianFlags.HasFlag(EnochianFlags.Enochian);
     public bool ParadoxActive => EnochianFlags.HasFlag(EnochianFlags.Paradox);
+    public int AstralSoulStacks => (int)EnochianFlags >> 2;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
