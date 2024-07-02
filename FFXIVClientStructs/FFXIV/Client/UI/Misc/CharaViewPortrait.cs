@@ -39,9 +39,9 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
     [FieldOffset(0x370)] public AtkTexture BackgroundTexture;
 
     [FieldOffset(0x388)] public CharaViewCharacterData PortraitCharacterData;
-    [FieldOffset(0x3F0)] public bool CharacterVisible;
-    [FieldOffset(0x3F1)] public bool CharaViewPortraitCharacterDataCopied;
-    [FieldOffset(0x3F2)] public bool CharaViewPortraitCharacterLoaded;
+    [FieldOffset(0x400)] public bool CharacterVisible;
+    [FieldOffset(0x401)] public bool CharaViewPortraitCharacterDataCopied;
+    [FieldOffset(0x402)] public bool CharaViewPortraitCharacterLoaded;
 
     public static CharaViewPortrait* Create()
         => IMemorySpace.GetUISpace()->Create<CharaViewPortrait>();
