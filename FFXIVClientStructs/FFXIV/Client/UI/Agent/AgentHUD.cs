@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -33,6 +34,8 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0x1400), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
     [FieldOffset(0x1478), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
 
+    [FieldOffset(0x3530), FixedSizeArray] internal FixedSizeArray16<HudQueuedBattleTalk> _queuedBattleTalks;
+
     [FieldOffset(0x4A10)] public StdVector<MapMarkerData> MapMarkers;
     [FieldOffset(0x4A28)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
 
@@ -62,4 +65,17 @@ public unsafe struct HudPartyMember {
     [FieldOffset(0x8)] public byte* Name;
     [FieldOffset(0x10)] public ulong ContentId;
     [FieldOffset(0x18)] public uint EntityId;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xE8)]
+public unsafe struct HudQueuedBattleTalk {
+    [FieldOffset(0x0)] public bool IsPending;
+    //[FieldOffset(0x1)] public byte Unk1;
+    [FieldOffset(0x2)] public byte Style;
+
+    [FieldOffset(0x8)] public Utf8String Name;
+    [FieldOffset(0x70)] public Utf8String Text;
+    [FieldOffset(0xDC)] public uint Image;
+    [FieldOffset(0xE0)] public int Sound;
+    [FieldOffset(0xE4)] public uint EntityId;
 }

@@ -136,7 +136,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(187)] public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
     [VirtualFunction(188)] public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
     [VirtualFunction(189), GenerateStringOverloads] public partial void ShowBattleTalk(byte* name, byte* text, float duration, byte style);
-    [VirtualFunction(190), GenerateStringOverloads] public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style);
+    [VirtualFunction(190), GenerateStringOverloads] public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style, int sound = -1, uint entityId = 0xE0000000);
     // [VirtualFunction(191)] public partial ??? ShowBattleTalkUnknown(???);
     [VirtualFunction(192), GenerateStringOverloads] public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
     // [VirtualFunction(194)] public partial ??? OpenInventory(???);
