@@ -5049,7 +5049,7 @@ classes:
 #fail       0x14049C4C0: UpdateWetness
       0x1405BF440: Finalize
       0x1408CCCF0: Create
-      0x140DAE600: CreateSlotStorage
+      0x1405A2BA0: CreateSlotStorage
   Client::Graphics::Scene::Human:
     vtbls:
       - ea: 0x141EEDA78
