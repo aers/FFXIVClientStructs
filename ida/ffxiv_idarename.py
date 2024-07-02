@@ -390,9 +390,115 @@ if api is None:
         api = GhidraApi()
 
 # endregion
+# region Binja Api
 
 if api is None:
-    raise Exception("Unable to load IDA or Ghidra")
+    try:
+        import binaryninja  # noqa
+    except ImportError:
+        print("Warning: Unable to load Binary Ninja")
+    else:
+        # noinspection PyUnresolvedReferences
+        class BinjaApi(BaseApi):
+            @property
+            def data_file_path(self):
+                return os.path.join(os.path.dirname(__file__), "data.yml")
+
+            def get_image_base(self):
+                return bv.start
+
+            def is_offset(self, ea):
+                return bv.get_data_var_at(ea) is not None
+
+            def xrefs_to(self, ea):
+                return [xref.address for xref in bv.get_code_refs(ea)]
+
+            def get_qword(self, ea):
+                bytes = bv.read(ea, 8)
+                return int.from_bytes(bytes, byteorder='little')
+
+            def get_addr_name(self, ea):
+                func = bv.get_function_at(ea)
+                if func:
+                    return func.name
+
+                sym = bv.get_symbol_at(ea)
+                if sym:
+                    return sym.name
+
+                return ""
+
+            def set_addr_name(self, ea, name):
+                func = bv.get_function_at(ea)
+                if func:
+                    func.name = name
+                    return True
+
+                sym = bv.get_symbol_at(ea)
+                if sym:
+                    # No good way to clone a symbol (afaik), so remake it
+                    new_sym = binaryninja.types.Symbol(
+                        sym.type,
+                        ea,
+                        name,
+                        sym.full_name,
+                        sym.raw_name,
+                        sym.binding,
+                        sym.namespace,
+                        sym.ordinal
+                    )
+
+                    if sym.auto:
+                        bv.undefine_auto_symbol(sym)
+                    else:
+                        bv.undefine_user_symbol(sym)
+                    bv.define_user_symbol(new_sym)
+                    return True
+
+                data_var = bv.get_data_var_at(ea)
+                if data_var:
+                    new_sym = binaryninja.types.Symbol(
+                        binaryninja.types.SymbolType.DataSymbol,
+                        ea,
+                        name
+                    )
+                    bv.define_user_symbol(new_sym)
+                    return True
+
+                return False
+
+            def get_comment(self, ea):
+                return bv.get_comment_at(ea)
+
+            def set_comment(self, ea, comment):
+                bv.set_comment_at(ea, comment)
+
+            def format_vfunc_name(self, ea, current_func_name, proposed_func_name, class_name, base_class_names):
+                # Previously renamed as a vfunc
+                if current_func_name.startswith(class_name):
+                    # return the proposed func name in case it was updated since last run
+                    current_class_name = current_func_name.rsplit(".", 1)[0]
+                    return "{0}.{1}".format(current_class_name, proposed_func_name)
+
+                # This should have been handled in the base class
+                if any(current_func_name.startswith(name) for name in base_class_names):
+                    return ""
+
+                return "{0}.{1}".format(class_name, proposed_func_name)
+
+            def format_func_name(self, ea, current_func_name, proposed_func_name, class_name):
+                proposed_qualified_func_name = "{0}.{1}".format(class_name, proposed_func_name)
+                if current_func_name == proposed_qualified_func_name:
+                    return ""
+                return proposed_qualified_func_name
+
+
+        api = BinjaApi()
+
+# endregion
+
+if api is None:
+    raise Exception("Unable to load API (supported: IDA, Ghidra, Binary Ninja)")
 
 
 # endregion
