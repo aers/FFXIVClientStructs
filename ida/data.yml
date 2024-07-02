@@ -4708,7 +4708,7 @@ classes:
       0x14042EF40: MakeProjectionMatrix # unused, inlined in 7.0 around 14042EA2D (approx)
   Client::Graphics::Render::ShadowCamera:
     vtbls:
-      - ea: 0x141ED9F30
+      - ea: 0x141ED9AF0
         base: Client::Graphics::Render::Camera
   Client::Graphics::Render::Camera_CascadeShadow:
     vtbls:

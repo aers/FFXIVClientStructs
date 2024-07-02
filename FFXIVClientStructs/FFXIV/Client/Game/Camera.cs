@@ -10,9 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [Inherits<CameraBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
 public unsafe partial struct Camera {
-    [FieldOffset(0xB0)] public Matrix4x4 ViewMatrix;
-    [FieldOffset(0xF0)] public Graphics.Render.Camera* RenderCamera;
-
     [FieldOffset(0x114)] public float Distance;
     [FieldOffset(0x118)] public float MinDistance;
     [FieldOffset(0x11C)] public float MaxDistance;
