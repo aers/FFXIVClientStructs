@@ -405,6 +405,7 @@ public sealed partial class InteropGenerator {
                 if (generatedSizes.Contains(fixedSizeArrayInfo.Size))
                     continue;
 
+                writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 1)]");
                 writer.WriteLine($"[global::System.Runtime.CompilerServices.InlineArrayAttribute({fixedSizeArrayInfo.Size})]");
                 writer.WriteLine($"internal struct FixedSizeArray{fixedSizeArrayInfo.Size}<T> where T : unmanaged");
                 using (writer.WriteBlock()) {

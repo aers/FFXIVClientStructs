@@ -33,6 +33,7 @@ internal static class SourceGeneration {
         stringBuilder.Append("namespace InteropGeneratorTesting;");
         foreach (int size in sizes) {
             stringBuilder.Append("\r\n");
+            stringBuilder.AppendLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 1)]");
             stringBuilder.AppendLine($"[global::System.Runtime.CompilerServices.InlineArrayAttribute({size})]");
             stringBuilder.AppendLine($"internal struct FixedSizeArray{size}<T> where T : unmanaged");
             stringBuilder.AppendLine("{");
