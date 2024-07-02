@@ -37,6 +37,7 @@ public unsafe partial struct AtkTooltipManager {
 
     [FieldOffset(0x8)] public StdMap<Pointer<AtkResNode>, Pointer<AtkTooltipInfo>> TooltipMap;
     [FieldOffset(0x18)] public AtkStage* AtkStage;
+    [FieldOffset(0x14C)] public byte Flag1; // Allows AddonItemDetail to be shown with Flag1 |= 2.
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 F6")]
     public partial void AttachTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
