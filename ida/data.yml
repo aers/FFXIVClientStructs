@@ -14100,22 +14100,22 @@ classes:
       - ea: 0x141FFB110
         base: Component::GUI::AtkUnitBase
     vfuncs:
-      73: UpdateCycledBar # also calls 76 if needed
-      74: UpdateLockState
-      75: UpdateSlotVisibility
-      76: UpdateBarNumberText
-      77: UpdateControlHints
-      78: PulseActionBarSlot
-      79: OnDragDropCancel  # calls 84 or 85 depending on why the dragdrop was cancelled
-      80: OnDragDropInsert
-      81: OnDragDropBegin
-      82: OnDragDropDiscard
-      83: OnDragDropRollover
-      84: OnDragDropCancelLocked
-      85: OnDragDropCancelByMouseUp
-      86: IsExpandedHold # always false on everything but _ActionCross
-      87: IsNotExpandedHold # always true on everything but _ActionCross
-      88: IsCross # only true on _ActionCross
+      74: UpdateCycledBar # also calls 77 if needed
+      75: UpdateLockState
+      76: UpdateSlotVisibility
+      77: UpdateBarNumberText
+      78: UpdateControlHints
+      79: PulseActionBarSlot
+      80: OnDragDropCancel  # calls 85 or 86 depending on why the dragdrop was cancelled
+      81: OnDragDropInsert
+      82: OnDragDropBegin
+      83: OnDragDropDiscard
+      84: OnDragDropRollover
+      85: OnDragDropCancelLocked
+      86: OnDragDropCancelByMouseUp
+      87: IsExpandedHold # always false on everything but _ActionCross
+      88: IsNotExpandedHold # always true on everything but _ActionCross
+      89: IsCross # only true on _ActionCross
     funcs:
       0x1413A6AE0: ctor
       0x1413A7550: UpdatePulsingSlots # inlined @ 0x1413A6EA0
