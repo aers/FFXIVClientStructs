@@ -5009,26 +5009,35 @@ classes:
         base: Client::Graphics::Scene::DrawObject
     vfuncs:
       24: UpdateTint
-      51: ForceWetness
-      52: ResetWetness
-      67: FlagSlotForUpdate
-      68: GetDataForSlot
-      71: ResolveRootPath
-      72: ResolveSKLBPath
-      73: ResolveMDLPath
-      74: ResolveSKPPath
-      75: ResolvePHYBPath
-      76: ResolvePAPPath
-      77: ResolveTMBPath
-      79: ResolveMaterialPAPPath
-      81: ResolveIMCPath
-      82: ResolveMTRLPath
-      83: ResolveDecalPath
-      84: ResolveVFXPath
-      85: ResolveEIDPath
-      86: GetDyeForSlot
-      87: GetSkeletonCount
-      92: CreateRenderModelForMDL
+      52: ForceWetness
+      53: ResetWetness
+      58: SetupScaling
+      63: OnRenderModel
+      64: OnRenderMaterial
+      70: FlagSlotForUpdate
+      72: GetDataForSlot
+      75: ResolveRootPath
+      76: ResolveSKLBPath
+      77: ResolveMDLPath
+      78: ResolveSKPPath
+      79: ResolvePHYBPath
+      80: ResolveKDBPath
+      82: ResolveBNMBPath
+      84: ResolvePAPPath
+      85: ResolveTMBPath
+      87: ResolveMaterialPAPPath
+      89: ResolveIMCPath
+      90: ResolveMTRLPath
+      92: ResolveDecalPath
+      93: ResolveVFXPath
+      94: ResolveEIDPath
+      95: GetDyeFlorSlot
+      96: GetSkeletonCount
+      101: CreateDeformer
+      102: CreateRenderModelForMDL
+      108: IsFreeCompanyCrestVisibleOnSlot
+      109: SetFreeCompanyCrestVisibleOnSlot
+      110: SetFreeCompanyCrest
     funcs:
       0x14058B650: ctor
       0x14058BCA0: Initialize

@@ -101,55 +101,55 @@ public unsafe partial struct CharacterBase {
         Weapon = 4,
     }
 
-    [VirtualFunction(61)]
+    [VirtualFunction(63)]
     public partial nint OnRenderModel(Model* model);
 
-    [VirtualFunction(62)]
+    [VirtualFunction(64)]
     public partial nint OnRenderMaterial(ModelRenderer.OnRenderMaterialParams* param);
 
-    [VirtualFunction(67)]
+    [VirtualFunction(70)]
     public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotBytes);
 
-    [VirtualFunction(71)]
+    [VirtualFunction(75)]
     public partial byte* ResolveRootPath(byte* pathBuffer, nuint pathBufferSize);
 
-    [VirtualFunction(72)]
+    [VirtualFunction(76)]
     public partial byte* ResolveSklbPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
-    [VirtualFunction(73)]
+    [VirtualFunction(77)]
     public partial byte* ResolveMdlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
-    [VirtualFunction(74)]
+    [VirtualFunction(78)]
     public partial byte* ResolveSkpPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
-    [VirtualFunction(75)]
+    [VirtualFunction(79)]
     public partial byte* ResolvePhybPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
-    [VirtualFunction(76)]
+    [VirtualFunction(84)]
     public partial byte* ResolvePapPath(byte* pathBuffer, nuint pathBufferSize, uint unkAnimationIndex, byte* animationName);
 
-    [VirtualFunction(77)]
+    [VirtualFunction(85)]
     public partial byte* ResolveTmbPath(byte* pathBuffer, nuint pathBufferSize, byte* timelineName);
 
-    [VirtualFunction(79)]
+    [VirtualFunction(87)]
     public partial byte* ResolveMaterialPapPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint unkSId);
 
-    [VirtualFunction(81)]
+    [VirtualFunction(89)]
     public partial byte* ResolveImcPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
     /// <remarks>
     /// Caveat: this method will dereference a null pointer if determining the MTRL file path involves an IMC lookup and it is not called at the "right" moment.
     /// </remarks>
-    [VirtualFunction(82)]
+    [VirtualFunction(90)]
     public partial byte* ResolveMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, byte* mtrlFileName);
 
-    [VirtualFunction(83)]
+    [VirtualFunction(92)]
     public partial byte* ResolveDecalPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
-    [VirtualFunction(84)]
+    [VirtualFunction(93)]
     public partial byte* ResolveVfxPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint* unkOutParam);
 
-    [VirtualFunction(85)]
+    [VirtualFunction(94)]
     public partial byte* ResolveEidPath(byte* pathBuffer, nuint pathBufferSize);
 
     #region Resolve*Path(Span<byte>) overloads
@@ -337,12 +337,12 @@ public unsafe partial struct CharacterBase {
     }
     #endregion
 
-    [VirtualFunction(95)]
+    [VirtualFunction(108)]
     public partial byte IsFreeCompanyCrestVisibleOnSlot(byte slot);
 
-    [VirtualFunction(96)]
+    [VirtualFunction(109)]
     public partial void SetFreeCompanyCrestVisibleOnSlot(byte slot, byte isVisible);
 
-    [VirtualFunction(97)]
+    [VirtualFunction(110)]
     public partial void SetFreeCompanyCrest(Texture* freeCompanyCrest);
 }
