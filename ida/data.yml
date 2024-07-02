@@ -5012,6 +5012,7 @@ classes:
       24: UpdateTint
       52: ForceWetness
       53: ResetWetness
+      58: SetupScaling
       63: OnRenderModel
       64: OnRenderMaterial
       70: FlagSlotForUpdate
@@ -5033,6 +5034,7 @@ classes:
       94: ResolveEIDPath
       95: GetDyeFlorSlot
       96: GetSkeletonCount
+      101: CreateDeformer
       102: CreateRenderModelForMDL
       108: IsFreeCompanyCrestVisibleOnSlot
       109: SetFreeCompanyCrestVisibleOnSlot
