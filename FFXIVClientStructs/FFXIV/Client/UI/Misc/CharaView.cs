@@ -30,15 +30,12 @@ public unsafe partial struct CharaView : ICreatable {
     //[FieldOffset(0x40)] public nint AgentCallback; // not investigated, used inside vf7 and vf11
     [FieldOffset(0x48)] public CharaViewCharacterData CharacterData;
 
-    //[FieldOffset(0xB8)] public uint UnkB8;
-    //[FieldOffset(0xBC)] public uint UnkBC;
-    //[FieldOffset(0xC0)] public float UnkC0;
-    [FieldOffset(0xC4)] public float ZoomRatio;
+    [FieldOffset(0xEC)] public float ZoomRatio;
 
-    [FieldOffset(0xD0), FixedSizeArray] internal FixedSizeArray14<CharaViewItem> _items;
+    [FieldOffset(0xF8), FixedSizeArray] internal FixedSizeArray14<CharaViewItem> _items;
 
-    [FieldOffset(0x2B8)] public bool CharacterDataCopied;
-    [FieldOffset(0x2B9)] public bool CharacterLoaded;
+    [FieldOffset(0x308)] public bool CharacterDataCopied; // unsure if correct
+    [FieldOffset(0x309)] public bool CharacterLoaded; // unsure if correct
 
     public static CharaView* Create()
         => IMemorySpace.GetUISpace()->Create<CharaView>();
@@ -84,19 +81,19 @@ public unsafe partial struct CharaView : ICreatable {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x68)]
+[StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0)] public CustomizeData CustomizeData;
-    //[FieldOffset(0x1A)] public byte Unk1A;
-    //[FieldOffset(0x1B)] public byte Unk1B;
-    [FieldOffset(0x1C), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
-    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray14<byte> _itemStains;
-    [FieldOffset(0x62)] public byte ClassJobId;
-    [FieldOffset(0x63)] public bool VisorHidden;
-    [FieldOffset(0x64)] public bool WeaponHidden;
-    [FieldOffset(0x65)] public bool VisorClosed;
-    //[FieldOffset(0x66)] public byte Unk66;
-    //[FieldOffset(0x67)] public byte Unk67;
+    [FieldOffset(0x1A)] public ushort Glasses0Id;
+    [FieldOffset(0x1C)] public ushort Glasses1Id;
+    [FieldOffset(0x1E), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
+    [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain0Ids; // unsure if correct
+    [FieldOffset(0x64), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain1Ids; // unsure if correct
+
+    [FieldOffset(0x74)] public byte ClassJobId;
+    [FieldOffset(0x75)] public bool VisorHidden;
+    [FieldOffset(0x76)] public bool WeaponHidden;
+    [FieldOffset(0x77)] public bool VisorClosed;
 
     public static CharaViewCharacterData* Create()
         => IMemorySpace.GetUISpace()->Create<CharaViewCharacterData>();
@@ -115,14 +112,14 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public unsafe struct CharaViewItem {
+public struct CharaViewItem {
     [FieldOffset(0x0)] public byte SlotId;
     [FieldOffset(0x1)] public byte EquipSlotCategory;
     [FieldOffset(0x2)] public byte GlamourEquipSlotCategory;
-    [FieldOffset(0x3)] public byte StainId;
-    [FieldOffset(0x4)] public byte GlamourStainId;
-    //[FieldOffset(0x5)] public byte Unk5; // a6 of SetItemSlotData
-    //[FieldOffset(0x6)] public byte Unk6;
+    [FieldOffset(0x3)] public byte Stain0Id;
+    [FieldOffset(0x4)] public byte Stain1Id;
+    [FieldOffset(0x5)] public byte GlamourStain0Id;
+    [FieldOffset(0x6)] public byte GlamourStain1Id;
     //[FieldOffset(0x7)] public byte Unk7;
     [FieldOffset(0x8)] public uint ItemId;
     [FieldOffset(0xC)] public uint GlamourItemId;
