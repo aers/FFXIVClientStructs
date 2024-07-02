@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
-using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
@@ -19,48 +18,53 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
 
+    [FieldOffset(0xA20)] public ExcelSheet* ErrorSheet;
+    [FieldOffset(0xA28)] public ExcelSheet* LobbySheet;
+    [FieldOffset(0xA30)] public NetworkModuleProxy* NetworkModuleProxy;
+    [FieldOffset(0xA38)] public StdDeque<TextParameter> LobbyTextParameters;
+    [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray13<Utf8String> _tempUtf8Strings;
+
+    [FieldOffset(0x1118)] public ulong HoveredCharacterContentId;
+
+    [FieldOffset(0x1120)] public byte DataCenter;
+
+    [FieldOffset(0x1122)] public short WorldIndex; // index in CurrentDataCenterWorlds
+    [FieldOffset(0x1124)] public ushort WorldId;
+
+    [FieldOffset(0x1128)] public uint DialogAddonId;
+
+    [FieldOffset(0x1195)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+
+    [FieldOffset(0x1164)] public byte LobbyUpdateStage;
+
+    [FieldOffset(0x1167)] public byte LobbyUIStage;
+
+    [FieldOffset(0x1169)] public bool IsLoggedIn;
+
+    [FieldOffset(0x1170)] public uint IdleTime;
+
+    [FieldOffset(0x1190)] public int QueuePosition;
+
     // TODO: everything below here is wrong
-    //[FieldOffset(0xA00)] public UIModule* UIModule;
-    //[FieldOffset(0xA08)] internal nint TitleScreenMoviePtr;
 
-    [FieldOffset(0xA30)] public uint AccountExpansion;
-    [FieldOffset(0xA34)] public bool ShowFreeTrialLogo;
+    [FieldOffset(0xA30), Obsolete("Not updated. Expect invalid data.")] public uint AccountExpansion;
+    [FieldOffset(0xA34), Obsolete("Not updated. Expect invalid data.")] public bool ShowFreeTrialLogo;
 
-    [FieldOffset(0xA38)] public uint TitleScreenExpansion;
-    [FieldOffset(0xA3C)] public bool ShowOriginalLogo; // pre-relaunch
+    [FieldOffset(0xA38), Obsolete("Not updated. Expect invalid data.")] public uint TitleScreenExpansion;
+    [FieldOffset(0xA3C), Obsolete("Not updated. Expect invalid data.")] public bool ShowOriginalLogo; // pre-relaunch
 
-    [FieldOffset(0xA40)] public ExcelSheet* ErrorSheet;
-    [FieldOffset(0xA48)] public ExcelSheet* LobbySheet;
-    [FieldOffset(0xA50)] public NetworkModuleProxy* NetworkModuleProxy;
-    [FieldOffset(0xA58)] public StdDeque<TextParameter> LobbyTextParameters;
-    [FieldOffset(0xA80), FixedSizeArray] internal FixedSizeArray13<Utf8String> _tempUtf8Strings;
+    [FieldOffset(0x10E0), Obsolete("Not updated. Expect invalid data.")] public sbyte ServiceAccountIndex;
 
-    [FieldOffset(0x10E0)] public sbyte ServiceAccountIndex;
-    [FieldOffset(0x10E1)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
-    [FieldOffset(0x10E8)] public ulong HoveredCharacterContentId;
-    [FieldOffset(0x10F0)] public byte DataCenter;
+    [FieldOffset(0x10FC), Obsolete("Not updated. Expect invalid data.")] public uint DialogAddonId2;
+    [FieldOffset(0x1100), Obsolete("Not updated. Expect invalid data.")] public uint LobbyScreenTextAddonId;
 
-    [FieldOffset(0x10F2)] public short WorldIndex; // index in CurrentDataCenterWorlds
-    [FieldOffset(0x10F4)] public ushort WorldId;
+    [FieldOffset(0x1138), Obsolete("Not updated. Expect invalid data.")] public ulong SelectedCharacterContentId;
 
-    [FieldOffset(0x10F8)] public uint DialogAddonId;
-    [FieldOffset(0x10FC)] public uint DialogAddonId2;
-    [FieldOffset(0x1100)] public uint LobbyScreenTextAddonId;
+    [FieldOffset(0x1228), Obsolete("Not updated. Expect invalid data.")] public bool TemporaryLocked; // "Please wait and try logging in later."
 
-    [FieldOffset(0x1104)] public byte LobbyUpdateStage;
-
-    [FieldOffset(0x1107)] public byte LobbyUIStage;
-
-    [FieldOffset(0x1110)] public uint IdleTime;
-
-    [FieldOffset(0x1138)] public ulong SelectedCharacterContentId;
-    [FieldOffset(0x1140)] public bool IsLoggedIn;
-
-    [FieldOffset(0x1228)] public bool TemporaryLocked; // "Please wait and try logging in later."
-
-    [FieldOffset(0x1240)] public long RequestContentId;
-    [FieldOffset(0x1248)] public byte RequestCharaterIndex;
-    [FieldOffset(0x1DA4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
+    [FieldOffset(0x1240), Obsolete("Not updated. Expect invalid data.")] public long RequestContentId;
+    [FieldOffset(0x1248), Obsolete("Not updated. Expect invalid data.")] public byte RequestCharaterIndex;
+    [FieldOffset(0x1DA4), Obsolete("Not updated. Expect invalid data.")] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5")]
     public partial void UpdateLobbyUIStage();
