@@ -7,15 +7,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [Inherits<InfoProxyInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1620)]
 public unsafe partial struct InfoProxyCrossRealm {
-    [FieldOffset(0x38D)] public byte LocalPlayerGroupIndex;
-    [FieldOffset(0x38E)] public byte GroupCount;
+    [FieldOffset(0x46D)] public byte LocalPlayerGroupIndex;
+    [FieldOffset(0x46E)] public byte GroupCount;
 
-    [FieldOffset(0x390)] public byte IsCrossRealm; //i guess?
-    [FieldOffset(0x391)] public byte IsInAllianceRaid;
-    [FieldOffset(0x392)] public byte IsPartyLeader;
-    [FieldOffset(0x393)] public byte IsInCrossRealmParty;
+    [FieldOffset(0x470)] public byte IsCrossRealm; //i guess?
+    [FieldOffset(0x471)] public byte IsInAllianceRaid;
+    [FieldOffset(0x472)] public byte IsPartyLeader;
+    [FieldOffset(0x473)] public byte IsInCrossRealmParty;
 
-    [FieldOffset(0x3A0), FixedSizeArray] internal FixedSizeArray6<CrossRealmGroup> _crossRealmGroups;
+    [FieldOffset(0x480), FixedSizeArray] internal FixedSizeArray6<CrossRealmGroup> _crossRealmGroups;
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 D8 1A C0")]
     public static partial bool IsCrossRealmParty();
@@ -46,23 +46,30 @@ public unsafe partial struct InfoProxyCrossRealm {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x348)]
 public unsafe partial struct CrossRealmGroup {
     [FieldOffset(0x00)] public byte GroupMemberCount;
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray8<CrossRealmMember> _groupMembers;
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x58)]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct CrossRealmMember {
-    [FieldOffset(0x08)] public ulong ContentId;
-    [FieldOffset(0x18)] public uint EntityId;
-    [FieldOffset(0x20)] public byte Level;
-    [FieldOffset(0x22)] public short HomeWorld;
-    [FieldOffset(0x24)] public short CurrentWorld;
-    [FieldOffset(0x26)] public byte ClassJobId;
-    [FieldOffset(0x2B), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
-    [FieldOffset(0x50)] public byte MemberIndex;
-    [FieldOffset(0x51)] public byte GroupIndex;
-    [FieldOffset(0x53)] public byte IsPartyLeader;
+    [FieldOffset(0x10)] public ulong ContentId;
+
+    [FieldOffset(0x20)] public uint EntityId;
+
+    [FieldOffset(0x28)] public byte Level;
+
+    [FieldOffset(0x2A)] public short HomeWorld;
+    [FieldOffset(0x2C)] public short CurrentWorld;
+    [FieldOffset(0x2E)] public byte ClassJobId;
+
+    [FieldOffset(0x33), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+
+    [FieldOffset(0x58)] public byte* NameOverride;
+    [FieldOffset(0x60)] public byte MemberIndex;
+    [FieldOffset(0x61)] public byte GroupIndex;
+
+    [FieldOffset(0x63)] public byte IsPartyLeader;
 }
