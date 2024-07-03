@@ -43,7 +43,7 @@ public unsafe partial struct Camera {
             screenPos = Vector2.Zero;
             return false;
         }
-        
+
         pCoords *= MathF.Abs(1.0f / pCoords.W);
         screenPos = new Vector2 {
             X = (pCoords.X + 1.0f) * width * 0.5f,

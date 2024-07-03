@@ -22,7 +22,7 @@ public unsafe partial struct EnvManager {
     [FieldOffset(0x38)] public EnvSpace* EnvSpace;
 
     [FieldOffset(0x58)] public EnvState EnvState;
-    
+
     [FieldOffset(0x468)] public EnvSoundState EnvSoundState;
     [FieldOffset(0x4E0)] public EnvSimulator EnvSimulator;
 
