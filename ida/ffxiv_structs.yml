@@ -22694,7 +22694,7 @@ structs:
   name: KillCounts
   namespace: Client.Game.UI
   union: False
-  size: 20
+  size: 22
   fields:
   - type: int
     name: Counts
@@ -44078,23 +44078,23 @@ structs:
   name: MobHunt
   namespace: Client.Game.UI
   union: False
-  size: 408
+  size: 496
   fields:
   - type: byte
     name: AvailableMarkId
     offset: 8
-    size: 18
+    size: 22
   - type: byte
     name: ObtainedMarkId
-    offset: 26
-    size: 18
+    offset: 30
+    size: 22
   - type: Client::Game::UI::MobHunt::KillCounts
     name: CurrentKills
-    offset: 44
-    size: 18
+    offset: 52
+    size: 22
   - type: int
     name: ObtainedFlags
-    offset: 404
+    offset: 492
   virtual_functions: []
   member_functions:
   - signature: 80 FA 16 73 19
