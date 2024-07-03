@@ -187,6 +187,14 @@ public struct ReaperGauge {
     [FieldOffset(0x0D)] public byte VoidShroud;
 }
 
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public struct ViperGauge {
+    [FieldOffset(0x08)] public byte RattlingCoilStacks;
+    [FieldOffset(0x0A)] public byte SerpentOffering;
+    [FieldOffset(0x09)] public byte AnguineTribute;
+    [FieldOffset(0x0B)] public DreadCombo DreadCombo; //Shows the previously used action of the secondary combo(s) whilst it's active
+}
+
 #endregion
 
 #region Tanks

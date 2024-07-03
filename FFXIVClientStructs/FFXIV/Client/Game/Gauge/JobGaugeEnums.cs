@@ -109,3 +109,12 @@ public enum CreatureFlags : byte {
     MooglePortait = 16,
     MadeenPortrait = 32,
 }
+
+public enum DreadCombo : byte {
+    Dreadwinder = 1,
+    HuntersCoil = 2,
+    SwiftskinsCoil = 3,
+    PitOfDread = 4,
+    HuntersDen = 5,
+    SwiftskinsDen = 6,  
+}
