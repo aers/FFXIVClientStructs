@@ -71,7 +71,7 @@ public unsafe partial struct MobHunt {
         => (ObtainedFlags & 1 << index) != 0;
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = MaxMarkIndex)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
     public partial struct KillCounts {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray5<int> _counts;
 
