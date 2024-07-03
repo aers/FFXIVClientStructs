@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Shell;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF"
 [GenerateInterop]
 [Inherits<ShellCommandModule>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1208)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1218)]
 public unsafe partial struct RaptureShellModule {
     public static RaptureShellModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureShellModule();
 
@@ -33,16 +33,20 @@ public unsafe partial struct RaptureShellModule {
     [FieldOffset(0xFD0)] public int ChatType;
     [FieldOffset(0xFD8)] public Utf8String TellName;
     [FieldOffset(0x1040)] public Utf8String TellWorld;
-    [FieldOffset(0x10A8)] public ulong TellId;
-    [FieldOffset(0x10B0)] public ushort TellWorldId;
-    [FieldOffset(0x10B4)] public int TempChatType;
-    [FieldOffset(0x10B8)] public Utf8String TempChatCommand;
-    [FieldOffset(0x1120)] public Utf8String TempTellName;
-    [FieldOffset(0x1188)] public Utf8String TempTellWorld;
-    [FieldOffset(0x11F0)] public ulong TempTellId;
-    [FieldOffset(0x11F8)] public ushort TempTellWorldId;
+    [FieldOffset(0x10A8)] public ulong ContentId;
+    [FieldOffset(0x10B0)] public ulong AccountId;
+    [FieldOffset(0x10B8)] public ushort TellWorldId;
+    [FieldOffset(0x10BA)] public ushort TellReason;
+    [FieldOffset(0x10BC)] public int TempChatType;
+    [FieldOffset(0x10C0)] public Utf8String TempChatCommand;
+    [FieldOffset(0x1128)] public Utf8String TempTellName;
+    [FieldOffset(0x1190)] public Utf8String TempTellWorld;
+    [FieldOffset(0x11F8)] public ulong TempContentId;
+    [FieldOffset(0x1200)] public ulong TempAccountId;
+    [FieldOffset(0x1208)] public ushort TempTellWorldId;
+    [FieldOffset(0x120A)] public ushort TempTellReason;
 
-    [FieldOffset(0x1200)] public uint Flags;
+    [FieldOffset(0x1216)] public uint Flags;
 
     public bool IsTextCommandUnavailable => (Flags & 1) != 0;
 
@@ -56,13 +60,13 @@ public unsafe partial struct RaptureShellModule {
     public partial void ChangeChatChannel(int channel, uint linkshellIndex, Utf8String* target, bool setChatType);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? EB 34")]
-    public partial bool SetContextTellTarget(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong contentId, ushort reason, bool setChatType);
+    public partial bool SetContextTellTarget(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong accountId, ulong contentId, ushort reason, bool setChatType);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 66 83 F9 01")]
-    public partial void SetContextTellTargetInForay(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong contentId, ushort unknown);
+    public partial void SetContextTellTargetInForay(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong accountId, ulong contentId, ushort reason);
 
     [MemberFunction("48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 02 41 0F B7 E9")]
-    public partial bool SetTellTargetInForay(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong contentId, ushort unknown1, bool setChatType);
+    public partial bool SetTellTargetInForay(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong accountId, ulong contentId, ushort reason, bool setChatType);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 8B B9 ?? ?? ?? ?? 48 8B D9 83 FF FE")]
     public partial void ReplyInSelectedChatMode();
