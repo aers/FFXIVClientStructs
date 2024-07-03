@@ -18,6 +18,24 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0xB8)] public Utf8String TellPlayerName;
     [FieldOffset(0x120)] public ushort TellWorldId;
 
+    [FieldOffset(0x138)] public Utf8String ChannelSelectorFirstLSName;
+    [FieldOffset(0x1A0)] public Utf8String ChannelSelectorSecondLSName;
+    [FieldOffset(0x208)] public Utf8String ChannelSelectorThirdLSName;
+    [FieldOffset(0x270)] public Utf8String ChannelSelectorFourthLSName;
+    [FieldOffset(0x2D8)] public Utf8String ChannelSelectorFifthLSName;
+    [FieldOffset(0x340)] public Utf8String ChannelSelectorSixthLSName;
+    [FieldOffset(0x3A8)] public Utf8String ChannelSelectorSeventhLSName;
+    [FieldOffset(0x410)] public Utf8String ChannelSelectorEighthLSName;
+
+    [FieldOffset(0x478)] public Utf8String ChannelSelectorFirstCWLSName;
+    [FieldOffset(0x4E0)] public Utf8String ChannelSelectorSecondCWLSName;
+    [FieldOffset(0x548)] public Utf8String ChannelSelectorThirdCWLSName;
+    [FieldOffset(0x5B0)] public Utf8String ChannelSelectorFourthCWLSName;
+    [FieldOffset(0x618)] public Utf8String ChannelSelectorFifthCWLSName;
+    [FieldOffset(0x680)] public Utf8String ChannelSelectorSixthCWLSName;
+    [FieldOffset(0x6E8)] public Utf8String ChannelSelectorSeventhCWLSName;
+    [FieldOffset(0x750)] public Utf8String ChannelSelectorEighthCWLSName;
+
     [FieldOffset(0x8A0)] public InventoryItem LinkedItem;
     [FieldOffset(0x8E0)] public byte LinkedItemQuality;
     [FieldOffset(0x8E8)] public Utf8String LinkedItemName;
