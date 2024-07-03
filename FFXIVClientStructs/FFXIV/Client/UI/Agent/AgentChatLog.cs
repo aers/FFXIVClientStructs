@@ -15,21 +15,24 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0x40)] public ChatChannel CurrentChannel;
     [FieldOffset(0x48)] public Utf8String ChannelLabel; // ie, "Say", "Party" that displays above the text input
 
+    [FieldOffset(0xB8)] public Utf8String TellPlayerName;
+    [FieldOffset(0x120)] public ushort TellWorldId;
+
     [FieldOffset(0x8A0)] public InventoryItem LinkedItem;
+    [FieldOffset(0x8E0)] public byte LinkedItemQuality;
+    [FieldOffset(0x8E8)] public Utf8String LinkedItemName;
 
-    [FieldOffset(0x8E0)] public Utf8String LinkedItemName;
+    [FieldOffset(0x950)] public uint ContextItemId;
 
-    [FieldOffset(0x948)] public uint ContextItemId;
-
-    [FieldOffset(0x958)] public ulong LinkedPartyFinderId;
+    [FieldOffset(0x960)] public ulong LinkedPartyFinderId;
     // [FieldOffset(0x960)] public byte LinkedPartyFinderUnkByte;
+    [FieldOffset(0x970)] public Utf8String LinkedPartyFinderLeaderName;
 
-    [FieldOffset(0x968)] public Utf8String LinkedPartyFinderLeaderName;
+    [FieldOffset(0x9D8)] public uint LinkedQuestId;
+    [FieldOffset(0x9E0)] public Utf8String LinkedQuestName;
 
-    [FieldOffset(0x9D0)] public uint LinkedQuestId;
-
-    [FieldOffset(0x9D8)] public Utf8String LinkedQuestName;
-    [FieldOffset(0xA40)] public uint ContextStatusId; // also used for the <status> link?
+    [FieldOffset(0xA48)] public uint ContextStatusId; // also used for the <status> link?
+    [FieldOffset(0xA50)] public Utf8String ContextStatusName;
 
     [FieldOffset(0xB24)] public int ReplyChannel;
 
