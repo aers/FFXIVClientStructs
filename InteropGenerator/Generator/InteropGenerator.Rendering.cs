@@ -320,7 +320,7 @@ public sealed partial class InteropGenerator {
                             writer.WriteLine($"{fixedSizeArrayInfo.FieldName}[{fixedSizeArrayInfo.Size - 1}] = 0;");
                         }
                     } else if (fixedSizeArrayInfo.Type == "char") {
-                        writer.WriteLine($"get => new string({fixedSizeArrayInfo.FieldName});");
+                        writer.WriteLine($"get => new string({fixedSizeArrayInfo.GetPublicFieldName()}[..{fixedSizeArrayInfo.GetPublicFieldName()}.IndexOf('\\0')]);");
                         writer.WriteLine("set");
                         using (writer.WriteBlock()) {
                             writer.WriteLine($"if (value.Length > {fixedSizeArrayInfo.Size} - 1)");

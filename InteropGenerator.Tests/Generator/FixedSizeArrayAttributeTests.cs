@@ -238,7 +238,7 @@ public class FixedSizeArrayAttributeTests {
                                   /// <inheritdoc cref="_testField" />
                                   public string TestFieldString
                                   {
-                                      get => new string(_testField);
+                                      get => new string(TestField[..TestField.IndexOf('\0')]);
                                       set
                                       {
                                           if (value.Length > 10 - 1)
