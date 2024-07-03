@@ -238,7 +238,7 @@ public class FixedSizeArrayAttributeTests {
                                   /// <inheritdoc cref="_testField" />
                                   public string TestFieldString
                                   {
-                                      get => new string(TestField[..TestField.IndexOf('\0')]);
+                                      get => new string((char*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref _testField[0]));
                                       set
                                       {
                                           if (value.Length > 10 - 1)
