@@ -46,7 +46,7 @@ public unsafe partial struct RaptureShellModule {
     [FieldOffset(0x1208)] public ushort TempTellWorldId;
     [FieldOffset(0x120A)] public ushort TempTellReason;
 
-    [FieldOffset(0x1216)] public uint Flags;
+    [FieldOffset(0x1210)] public uint Flags;
 
     public bool IsTextCommandUnavailable => (Flags & 1) != 0;
 
