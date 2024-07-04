@@ -267,11 +267,16 @@ public unsafe partial struct ActionManager {
     [MemberFunction("48 8B C4 48 89 58 ?? 56 48 81 EC ?? ?? ?? ?? 48 8B 35")]
     public partial void Update();
 
-    // TODO: accurate as of 6.58, changed in 7.0, needs revision
+    /// <summary>
+    /// Determine character's category for action targeting purposes; this is used by the game to determine whether a spell can be used on that target.
+    /// </summary>
+    [MemberFunction("40 53 48 83 EC 20 48 8B 01 48 8B D9 FF 50 08 8B 15")]
+    public static partial TargetCategory ClassifyTarget(Character.Character* target);
+
     public enum CastTimeProc : byte {
         None = 0,
         Firestarter = 1, // THM/BLM
-        Thundercloud = 2, // THM/BLM
+        //Thundercloud = 2, // THM/BLM, gone in 7.0
         Swiftcast = 3,
         Lightspeed = 4, // AST
         Dualcast = 5, // RDM
@@ -284,6 +289,8 @@ public unsafe partial struct ActionManager {
         SoulsowOutOfCombat = 13, // RPR
         Acceleration = 14, // RDM
         DivineMight = 15, // PLD
+        MotifOutOfCombat = 18, // PCT
+        RainbowBright = 19, // PCT
     }
 
     public enum UseActionMode {
@@ -291,6 +298,17 @@ public unsafe partial struct ActionManager {
         Queue = 1, // previously queued action is now ready and is being executed (=> will ignore queue)
         Macro = 2, // action execution originating from a macro (=> won't be queued)
         Combo = 3, // action execution is from a single-button combo
+    }
+
+    public enum TargetCategory {
+        Self = 0,
+        Party = 1,
+        Alliance = 2,
+        Enemy = 3,
+        Friendly = 4,
+        OwnPet = 5,
+        PartyPet = 6,
+        UnkPVP = 7, // ??? something pvp related, can only happen in pvp lobby
     }
 }
 

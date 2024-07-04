@@ -176,6 +176,12 @@ public unsafe partial struct PlayerState {
 
     [FieldOffset(0x7D8), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
 
+    [FieldOffset(0x858)] public StdMap<uint, bool> TrackedStatuses;
+    [FieldOffset(0x868)] public StdMap<uint, bool> TrackedActionUnlocks;
+    [FieldOffset(0x878)] public StdMap<uint, bool> TrackedTraitUnlocks;
+    [FieldOffset(0x888)] public bool TrackedTraitUnlocksDirty;
+    [FieldOffset(0x889)] public bool TrackedActionUnlocksDirty;
+
     public bool IsLegacy => (QuestSpecialFlags & 1) != 0;
     public bool IsWarriorOfLight => (QuestSpecialFlags & 2) != 0;
 
