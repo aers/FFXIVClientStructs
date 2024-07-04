@@ -6,7 +6,7 @@ using FFXIVClientStructs.Havok.Animation.Rig;
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct PartialSkeleton {
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray2<hkaSampleBlendJob> _jobs;
     [FieldOffset(0x120)] public short ConnectedParentBoneIndex;
