@@ -62,7 +62,7 @@ public unsafe partial struct MapMarkerData {
         float x,
         float y,
         float z,
-        uint radius,
+        float radius,
         ushort territoryTypeId,
         uint mapId,
         uint placeNameZoneId,
