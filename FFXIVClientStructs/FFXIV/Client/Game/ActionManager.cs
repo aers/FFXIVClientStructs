@@ -276,7 +276,7 @@ public unsafe partial struct ActionManager {
     public enum CastTimeProc : byte {
         None = 0,
         Firestarter = 1, // THM/BLM
-        Thundercloud = 2, // THM/BLM, gone in 7.0
+        //Thundercloud = 2, // THM/BLM, gone in 7.0
         Swiftcast = 3,
         Lightspeed = 4, // AST
         Dualcast = 5, // RDM
