@@ -116,5 +116,5 @@ public enum DreadCombo : byte {
     SwiftskinsCoil = 3,
     PitOfDread = 4,
     HuntersDen = 5,
-    SwiftskinsDen = 6,  
+    SwiftskinsDen = 6,
 }
