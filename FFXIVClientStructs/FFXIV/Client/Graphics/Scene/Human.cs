@@ -36,18 +36,17 @@ public unsafe partial struct Human {
     [FieldOffset(0xA56)] public ushort TailEarId; // tXXXX/zXXXX(viera)
     [FieldOffset(0xA58)] public ushort FurId;
 
-    // TODO: these are MaterialResourceHandles
-    [FieldOffset(0xAF8), CExportIgnore] private nint _slotDecalBase;
-    [FieldOffset(0xAF8)] public TextureResourceHandle* HeadDecal;
-    [FieldOffset(0xB00)] public TextureResourceHandle* TopDecal;
-    [FieldOffset(0xB08)] public TextureResourceHandle* ArmsDecal;
-    [FieldOffset(0xB10)] public TextureResourceHandle* LegsDecal;
-    [FieldOffset(0xB18)] public TextureResourceHandle* FeetDecal;
-    [FieldOffset(0xB20)] public TextureResourceHandle* EarDecal;
-    [FieldOffset(0xB28)] public TextureResourceHandle* NeckDecal;
-    [FieldOffset(0xB30)] public TextureResourceHandle* WristDecal;
-    [FieldOffset(0xB38)] public TextureResourceHandle* RFingerDecal;
-    [FieldOffset(0xB40)] public TextureResourceHandle* LFingerDecal;
+    [FieldOffset(0xAA8), CExportIgnore] private nint _slotDecalBase;
+    [FieldOffset(0xAA8)] public TextureResourceHandle* HeadDecal;
+    [FieldOffset(0xAB0)] public TextureResourceHandle* TopDecal;
+    [FieldOffset(0xAB8)] public TextureResourceHandle* ArmsDecal;
+    [FieldOffset(0xAC0)] public TextureResourceHandle* LegsDecal;
+    [FieldOffset(0xAC8)] public TextureResourceHandle* FeetDecal;
+    [FieldOffset(0xAD0)] public TextureResourceHandle* EarDecal;
+    [FieldOffset(0xAD8)] public TextureResourceHandle* NeckDecal;
+    [FieldOffset(0xAE0)] public TextureResourceHandle* WristDecal;
+    [FieldOffset(0xAE8)] public TextureResourceHandle* RFingerDecal;
+    [FieldOffset(0xAF0)] public TextureResourceHandle* LFingerDecal;
 
     public ref TextureResourceHandle* SlotDecal(int slot) {
         if (slot is < 0 or > 9)
