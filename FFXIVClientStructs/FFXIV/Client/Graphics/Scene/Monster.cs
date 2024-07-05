@@ -11,11 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [Inherits<CharacterBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA00)]
 public unsafe partial struct Monster {
-    [FieldOffset(0x8F0)] public ushort ModelSetId;
-    [FieldOffset(0x8F2)] public ushort SecondaryId;
-    [FieldOffset(0x8F4)] public ushort Variant;
+    [FieldOffset(0x9D0)] public ushort ModelSetId;
+    [FieldOffset(0x9D2)] public ushort SecondaryId;
+    [FieldOffset(0x9D4)] public ushort Variant;
 
-    [FieldOffset(0x900)] public TextureResourceHandle* Decal;
+    [FieldOffset(0x9E0)] public TextureResourceHandle* Decal;
 
     // Expects at least 8 bytes of data.
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F 57 C0 48 8D 4C 24 ??")]
