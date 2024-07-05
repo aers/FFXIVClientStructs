@@ -4,15 +4,16 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Singleton<Client::Graphics::Render::Manager>
 // ctor "48 89 01 48 8D 59 08"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x2D750)]
+[StructLayout(LayoutKind.Explicit, Size = 0x51F10)]
 public unsafe partial struct Manager {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8D 4D 80", 3, true)]
     public static partial Manager* Instance();
 
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray32<View> _views;
 
-    [FieldOffset(0x13660)] public ModelRenderer ModelRenderer;
+    [FieldOffset(0x22990)] public ModelRenderer ModelRenderer;
 
+    // TODO check and update for 7.0
     public enum RenderViews : uint {
         OmniShadow0 = 0,
         OmniShadow1,
