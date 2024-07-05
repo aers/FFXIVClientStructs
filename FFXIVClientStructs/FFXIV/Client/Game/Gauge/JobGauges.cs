@@ -149,10 +149,17 @@ public struct MonkGauge {
     [FieldOffset(0x0B)]
     public BeastChakraType BeastChakra3; // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
 
-    [FieldOffset(0x0C)] public NadiFlags Nadi; // LunarNadi = 2, SolarNadi = 4 (If both then 2+4=6)
+    [FieldOffset(0x0C)]
+    public ushort BeastChakraStacks;
+
+    [FieldOffset(0x0D)] public NadiFlags Nadi; // LunarNadi = 1, SolarNadi = 2 (If both then 1+2=3)
     [FieldOffset(0x0E)] public ushort BlitzTimeRemaining; // 20 seconds
 
     public BeastChakraType[] BeastChakra => new[] { BeastChakra1, BeastChakra2, BeastChakra3 };
+
+    public int OpoOpoStacks => BeastChakraStacks & 1;
+    public int RaptorStacks => ((BeastChakraStacks >> 2) & 3);
+    public int CoeurlStacks => BeastChakraStacks >> 4;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
