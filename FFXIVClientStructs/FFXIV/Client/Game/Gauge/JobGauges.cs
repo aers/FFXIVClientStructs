@@ -159,7 +159,7 @@ public struct MonkGauge {
 
     public int OpoOpoStacks => BeastChakraStacks & 1;
     public int RaptorStacks => ((BeastChakraStacks >> 2) & 3);
-    public int CoeurlStacks => BeastChakraStacks >> 4;
+    public int CoeurlStacks => ((BeastChakraStacks >> 4) & 3);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
