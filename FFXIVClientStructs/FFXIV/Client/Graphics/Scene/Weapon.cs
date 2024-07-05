@@ -12,15 +12,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [Inherits<CharacterBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA10)]
 public unsafe partial struct Weapon {
-    [FieldOffset(0x8F0)] public ushort ModelSetId;
-    [FieldOffset(0x8F2)] public ushort SecondaryId;
-    [FieldOffset(0x8F4)] public ushort Variant;
-    [FieldOffset(0x8F6)] public ushort ModelUnknown;
-    [FieldOffset(0x8FA)] public byte MaterialId;
-    [FieldOffset(0x8FB)] public byte DecalId;
-    [FieldOffset(0x8FE)] public byte VfxId;
+    [FieldOffset(0x9D0)] public ushort ModelSetId;
+    [FieldOffset(0x9D2)] public ushort SecondaryId;
+    [FieldOffset(0x9D4)] public ushort Variant;
+    [FieldOffset(0x9D6)] public ushort ModelUnknown;
+    [FieldOffset(0x9DA)] public byte MaterialId;
+    [FieldOffset(0x9DB)] public byte DecalId;
+    [FieldOffset(0x9DE)] public byte VfxId;
 
-    [FieldOffset(0x900)] public TextureResourceHandle* Decal;
-    [FieldOffset(0x908)] public Texture* FreeCompanyCrest;
-    [FieldOffset(0x910)] public uint SlotFreeCompanyCrestBitfield; // Only relevant bit is & 0x1
+    [FieldOffset(0x9E8)] public TextureResourceHandle* Decal;
+    [FieldOffset(0x9F0)] public Texture* FreeCompanyCrest;
+    [FieldOffset(0x9F8)] public uint SlotFreeCompanyCrestBitfield; // Only relevant bit is & 0x1
 }
