@@ -14,13 +14,13 @@ public unsafe partial struct InfoProxyBlacklist {
     [FieldOffset(0x88)] public Utf8String LastBlockedNameChat; // Gets set with chat and contacts
     [FieldOffset(0xF0), FixedSizeArray] internal FixedSizeArray200<BlockedCharacter> _blockedCharacters; // does not clean up removed characters, read only until TotalBlocks
     [FieldOffset(0x13B0)] public ushort TotalBlocks;
-    [FieldOffset(0x13C8)] public ushort NewBlocks;
-    [FieldOffset(0x13D8)] public ushort OldBlocks;
+    [FieldOffset(0x13C0)] public StdMap<ulong, int> NewBlocks;
+    [FieldOffset(0x13D0)] public StdMap<ulong, int> OldBlocks;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct BlockedCharacter {
         [FieldOffset(0x0)] public byte* Name;
         [FieldOffset(0x8)] public ulong Id; // accountId for new, contentId for old
-        [FieldOffset(0x10)] public nint UnknownPtr;
+        [FieldOffset(0x10)] public byte Flag;
     }
 }
