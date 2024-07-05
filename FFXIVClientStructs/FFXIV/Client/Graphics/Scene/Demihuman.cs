@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // ctor "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 48 8D 55 BF"
 [GenerateInterop]
 [Inherits<CharacterBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x978)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA80)]
 public unsafe partial struct Demihuman {
     [FieldOffset(0x928), FixedSizeArray, CExportIgnore] internal FixedSizeArray5<Pointer<TextureResourceHandle>> _slotDecals;
     [FieldOffset(0x928)] public TextureResourceHandle* HeadDecal;
