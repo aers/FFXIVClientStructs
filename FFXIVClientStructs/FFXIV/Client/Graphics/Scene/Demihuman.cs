@@ -13,17 +13,17 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [Inherits<CharacterBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA80)]
 public unsafe partial struct Demihuman {
-    [FieldOffset(0x928), FixedSizeArray, CExportIgnore] internal FixedSizeArray5<Pointer<TextureResourceHandle>> _slotDecals;
-    [FieldOffset(0x928)] public TextureResourceHandle* HeadDecal;
-    [FieldOffset(0x930)] public TextureResourceHandle* TopDecal;
-    [FieldOffset(0x938)] public TextureResourceHandle* ArmsDecal;
-    [FieldOffset(0x940)] public TextureResourceHandle* LegsDecal;
-    [FieldOffset(0x948)] public TextureResourceHandle* FeetDecal;
+    [FieldOffset(0xA20), FixedSizeArray, CExportIgnore] internal FixedSizeArray5<Pointer<TextureResourceHandle>> _slotDecals;
+    [FieldOffset(0xA20)] public TextureResourceHandle* HeadDecal;
+    [FieldOffset(0xA28)] public TextureResourceHandle* TopDecal;
+    [FieldOffset(0xA30)] public TextureResourceHandle* ArmsDecal;
+    [FieldOffset(0xA38)] public TextureResourceHandle* LegsDecal;
+    [FieldOffset(0xA40)] public TextureResourceHandle* FeetDecal;
 
     public TextureResourceHandle* SlotDecal(int slot) => SlotDecals[slot].Value;
 
-    [FieldOffset(0x958)] public Texture* FreeCompanyCrest;
-    [FieldOffset(0x960)] public uint SlotFreeCompanyCrestBitfield; // Only relevant bit is & 0x1
+    [FieldOffset(0xA50)] public Texture* FreeCompanyCrest;
+    [FieldOffset(0xA58)] public uint SlotFreeCompanyCrestBitfield; // Only relevant bit is & 0x1
 
     // Expects at least 24 bytes of data.
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 0F 10 0F")]

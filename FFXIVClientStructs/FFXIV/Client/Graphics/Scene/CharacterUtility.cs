@@ -14,8 +14,8 @@ public unsafe partial struct CharacterUtility {
 
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray87<Pointer<ResourceHandle>> _resourceHandles;
 
-    [FieldOffset(0x2F8)] public ConstantBuffer* LegacyBodyDecalColorCBuffer;
-    [FieldOffset(0x300)] public ConstantBuffer* FreeCompanyCrestColorCBuffer;
+    [FieldOffset(0x3F0)] public ConstantBuffer* LegacyBodyDecalColorCBuffer;
+    [FieldOffset(0x3F8)] public ConstantBuffer* FreeCompanyCrestColorCBuffer;
 
     public ConstantBufferPointer<Vector4> LegacyBodyDecalColorTypedCBuffer => new(LegacyBodyDecalColorCBuffer);
     public ConstantBufferPointer<Vector4> FreeCompanyCrestColorTypedCBuffer => new(FreeCompanyCrestColorCBuffer);
