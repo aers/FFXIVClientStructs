@@ -85,8 +85,8 @@ public enum BeastChakraType : byte {
 
 [Flags]
 public enum NadiFlags : byte {
-    Lunar = 2,
-    Solar = 4
+    Lunar = 1,
+    Solar = 2
 }
 
 [Flags]
