@@ -25,7 +25,7 @@ public struct ScholarGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct AstrologianGauge {
     [FieldOffset(0x08)] public short Cards;
-    [FieldOffset(0x0A)] public byte Draw;
+    [FieldOffset(0x0A)] public AstrologianDraw CurrentDraw;
 
     public AstrologianCard[] CurrentCards => new[]
     {
@@ -35,7 +35,6 @@ public struct AstrologianGauge {
     };
 
     public AstrologianCard CurrentArcana => (AstrologianCard)(0xF & (this.Cards >> 12));
-    public AstrologianDraw CurrentDraw => (AstrologianDraw)this.Draw;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
