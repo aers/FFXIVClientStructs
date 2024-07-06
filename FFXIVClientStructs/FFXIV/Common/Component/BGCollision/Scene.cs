@@ -100,7 +100,7 @@ public unsafe partial struct SceneWrapper {
     }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct Scene {
     [FieldOffset(0x00)] public Object Object; // base class
     [FieldOffset(0x08)] public SceneManager* Manager;
@@ -109,6 +109,14 @@ public unsafe partial struct Scene {
     [FieldOffset(0x20)] public Vector4 StreamingSphere; // xyz = origin, w = radius
     [FieldOffset(0x30)] public int NumLoading;
     [FieldOffset(0x38)] public Quadtree* Quadtree;
+    [FieldOffset(0x40)] public MemoryPool PoolColliderStreamed; // 4 per page
+    [FieldOffset(0x50)] public MemoryPool PoolColliderMesh; // 32 per page
+    [FieldOffset(0x60)] public MemoryPool PoolColliderBox; // 32 per page
+    [FieldOffset(0x70)] public MemoryPool PoolColliderCylinder; // 32 per page
+    [FieldOffset(0x80)] public MemoryPool PoolColliderSphere; // 32 per page
+    [FieldOffset(0x90)] public MemoryPool PoolColliderPlane; // 32 per page
+    [FieldOffset(0xA0)] public MemoryPool PoolColliderPlaneTwoSided; // 32 per page
+    [FieldOffset(0xB0)] public MemoryPool PoolMeshPCB; // 32 per page
 
     /// <summary>
     /// Iterate over colliders in the scene.

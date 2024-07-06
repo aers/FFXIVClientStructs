@@ -404,8 +404,8 @@ functions:
   0x141DF8210: IntersectCallbackMoreOrthoNonHoriz
   0x141DF82F0: IntersectCallbackAny
   0x141DF8320: IntersectCallbackMoreOrtho
-  0x141DFBE00: CollisionAlloc
-  0x141DFBF40: CollisionFree
+  0x141DFBB70: CollisionAlloc
+  0x141DFBBB0: CollisionFree
   0x141A95920: ReadSqpkChunk
 
 classes:
@@ -2787,6 +2787,14 @@ classes:
       0x141DF6670: FillResult
       0x141DF6770: ctor
       0x141DF67A0: Finalize
+  Common::Component::BGCollision::MemoryPoolPageHeader:
+    funcs:
+      0x141DFBCC0: Alloc
+      0x141DFBD90: Free
+  Common::Component::BGCollision::MemoryPool:
+    funcs:
+      0x141DFBE00: Alloc
+      0x141DFBF40: Free
   Common::Component::BGCollision::SceneWrapperNode:
     vtbls:
       - ea: 0x1422713A0
@@ -2832,6 +2840,7 @@ classes:
       - ea: 0x142271AD0
         base: Common::Component::BGCollision::Object
     funcs:
+      0x141DFC000: DestroyCollider
       0x141DFC0C0: ctor
       0x141DFC1D0: dtor2
       0x141DFC2C0: Clear
@@ -2867,7 +2876,7 @@ classes:
       0x141DEFDC0: Init
       0x141DEFE80: UpdateScenes
       0x141DEFEF0: DeleteAllScenes
-      0x1402511D0: CreateScene
+      0x141DEFF90: CreateScene
       0x141DF0050: DestroyScene
       0x141DF00D0: HasLoadingColliders
       0x141DF00F0: AddColliderStreamed
@@ -2878,6 +2887,7 @@ classes:
       0x141DF01C0: AddColliderSphere
       0x141DF01E0: AddColliderPlane
       0x141DF0200: AddColliderPlaneTwoSided
+      0x141DF0220: RemoveCollider
       0x141DF0240: RaycastSimple
       0x141DF02D0: RaycastSimpleLayer
       0x141DF0360: RaycastSimpleMaterialFilter
