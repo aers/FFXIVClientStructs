@@ -1,16 +1,6 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
-// AddonNamePlate::OnUpdate notes
-// uses NumberArrayData index 5, StringArrayData index 4
-
-// NumberArrayData
-//  index 0 - int, active nameplate count
-//  index 1 - bool, force re-bake of nameplates
-//  index 2 - int, nameplate size config (100, 120, 140)
-//  index 3 - bool, toggle nameplate text render style (0 = new, 1 = old)
-//  index 4 - bool, do full update 
-//  index 5-24 repeated 50 times: nameplate specific data
 
 // Client::UI::AddonNamePlate
 //   Component::GUI::AtkUnitBase
@@ -51,31 +41,76 @@ public unsafe partial struct AddonNamePlate {
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public struct NamePlateObject {
         [FieldOffset(0x00)] public BakeData BakeData;
-        [FieldOffset(0x10)] public AtkComponentNode* RootNode;
-        [FieldOffset(0x18)] public AtkResNode* ResNode;
+        [FieldOffset(0x10)] public AtkComponentNode* RootComponentNode;
+        [FieldOffset(0x18)] public AtkResNode* NameContainer;
         [FieldOffset(0x20)] public AtkTextNode* NameText;
-        [FieldOffset(0x28)] public AtkImageNode* IconImageNode;
-        [FieldOffset(0x30)] public AtkImageNode* ImageNode2;
-        [FieldOffset(0x38)] public AtkImageNode* ImageNode3;
-        [FieldOffset(0x40)] public AtkImageNode* ImageNode4;
-        [FieldOffset(0x48)] public AtkImageNode* ImageNode5;
-        [FieldOffset(0x50)] public AtkCollisionNode* CollisionNode1;
-        [FieldOffset(0x58)] public AtkCollisionNode* CollisionNode2;
+        [FieldOffset(0x28)] public AtkImageNode* NameIcon;
+        [FieldOffset(0x30)] public AtkImageNode* MarkerIcon;
+        [FieldOffset(0x38)] public AtkImageNode* GaugeBackground;
+        [FieldOffset(0x40)] public AtkImageNode* GaugeFill;
+        [FieldOffset(0x48)] public AtkImageNode* GaugeContainer;
+        [FieldOffset(0x50)] public AtkCollisionNode* NameplateCollision;
+        [FieldOffset(0x58)] public AtkCollisionNode* MarkerCollision;
         [FieldOffset(0x60)] public int Priority;
         [FieldOffset(0x64)] public short TextW;
         [FieldOffset(0x66)] public short TextH;
         [FieldOffset(0x68)] public short IconXAdjust;
         [FieldOffset(0x6A)] public short IconYAdjust;
-        [FieldOffset(0x6C)] public byte NameplateKind; // not ObjectKind -> needs its own enum
-        [FieldOffset(0x6D)] public byte HasHPBar;
-        [FieldOffset(0x6E)] public byte ClickThrough;
-        [FieldOffset(0x6F)] public byte IsPvpEnemy;
-        [FieldOffset(0x70)] public byte NeedsToBeBaked;
+        [FieldOffset(0x6C)] public UIObjectKind NamePlateKind; 
+        [FieldOffset(0x6D)] public byte HPLabelState;
+        [FieldOffset(0x6E)] public bool ClickThrough;
+        [FieldOffset(0x6F)] public bool IsPvpEnemy;
+        // [FieldOffset(0x70)] public bool UnkBool;
+        [FieldOffset(0x71)] public bool NeedsToBeBaked;
+        // [FieldOffset(0x72)] public int UnkBakeState;
+        public bool IsVisible => RootComponentNode->IsVisible();
 
-        public bool IsVisible => BakeData.IsBaked == 1;
+        public bool IsPlayerCharacter => NamePlateKind == UIObjectKind.PlayerCharacter;
 
-        public bool IsPlayerCharacter => NameplateKind == 0;
+        public bool IsLocalPlayer => IsPlayerCharacter && ClickThrough;
+    }
+    
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
+    public partial struct NamePlateIntArrayData {
+        [FieldOffset(0x0)] public int ActiveNamePlateCount;
+        [FieldOffset(0x4)] public bool ForceNamePlateRebake;
+        [FieldOffset(0x8)] public int NamePlateSize;
+        [FieldOffset(0xC)] public bool DisableFixedFontResolution;
+        [FieldOffset(0x10)] public bool DoFullUpdate;
+        // [FieldOffset(0x14)] public int UnkInt;
+        [FieldOffset(0x18)] [FixedSizeArray] internal FixedSizeArray50<NamePlateObjectIntArrayData> _objectData;
 
-        public bool IsLocalPlayer => IsPlayerCharacter && ClickThrough == 1;
+        [StructLayout(LayoutKind.Explicit, Size = 20 * 4)]
+        public struct NamePlateObjectIntArrayData {
+            [FieldOffset(0x0)] public UIObjectKind NamePlateKind;
+            [FieldOffset(0x4)] public int HPLabelState;
+            /// <summary>
+            /// & 0x1 - Update
+            /// & 0x2 - Update Colors
+            /// </summary>
+            [FieldOffset(0x8)] public int UpdateFlags;
+            [FieldOffset(0xC)] public int X;
+            [FieldOffset(0x10)] public int Y;
+            [FieldOffset(0x14)] public float Depth;
+            [FieldOffset(0x18)] public int Scale;
+            [FieldOffset(0x1C)] public int GaugeFillPercentage;
+            [FieldOffset(0x20)] public int NameTextColor;
+            [FieldOffset(0x24)] public int NameEdgeColor;
+            [FieldOffset(0x28)] public int GaugeFillColor;
+            [FieldOffset(0x2C)] public int GaugeContainerColor; // unused if Disable Alternate Part Id true
+            [FieldOffset(0x30)] public int MarkerIconId;
+            [FieldOffset(0x34)] public int NameIconId;
+            // [FieldOffset(0x38)] public int UnkAdjust;
+            [FieldOffset(0x3C)] public int NamePlateObjectIndex;
+            // [FieldOffset(0x40)] public int Unk;
+            /// <summary>
+            /// & 0x8 - Use Depth-based Priority (terrain obstruction)
+            /// & 0x100 - Disable Alternate Part Id
+            /// </summary>
+            [FieldOffset(0x44)] public int DrawFlags;
+            // [FieldOffset(0x48)] public int Unk;
+            // [FieldOffset(0x4C)] public int UnkFlags;
+        }
     }
 }
