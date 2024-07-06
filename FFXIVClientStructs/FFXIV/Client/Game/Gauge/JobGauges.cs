@@ -23,22 +23,22 @@ public struct ScholarGauge {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe struct AstrologianGauge {
-    [FieldOffset(0x08)] public short Timer;
-    [FieldOffset(0x0D)] public byte Card;
-    [FieldOffset(0x0E)] public byte Seals; // 6 bits, 0,1-3,1-3,1-3 depending on astrosign
+public struct AstrologianGauge {
+    [FieldOffset(0x08)] public short Cards;
+    [FieldOffset(0x0A)] public byte Draw;
 
-    public AstrologianCard CurrentCard => (AstrologianCard)Card;
-
-    public AstrologianSeal[] CurrentSeals => new[]
+    public AstrologianCard[] CurrentCards => new[]
     {
-        (AstrologianSeal)(3 & (this.Seals >> 0)),
-        (AstrologianSeal)(3 & (this.Seals >> 2)),
-        (AstrologianSeal)(3 & (this.Seals >> 4)),
+        (AstrologianCard)(0xF & this.Cards),
+        (AstrologianCard)(0xF & (this.Cards >> 4)),
+        (AstrologianCard)(0xF & (this.Cards >> 8)),
     };
+
+    public AstrologianCard CurrentArcana => (AstrologianCard)(0xF & (this.Cards >> 12));
+    public AstrologianDraw CurrentDraw => (AstrologianDraw)this.Draw;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct SageGauge {
     [FieldOffset(0x08)] public short AddersgallTimer;
     [FieldOffset(0x0A)] public byte Addersgall;
