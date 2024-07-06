@@ -29,7 +29,7 @@ public struct AstrologianGauge {
 
     public AstrologianCard[] CurrentCards => new[]
     {
-        (AstrologianCard)(0xF & this.Cards),
+        (AstrologianCard)(0xF & (this.Cards >> 0)),
         (AstrologianCard)(0xF & (this.Cards >> 4)),
         (AstrologianCard)(0xF & (this.Cards >> 8)),
     };
