@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct IMesh;
 
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [Inherits<Object>, Inherits<IMesh>(8)]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct Mesh {
@@ -61,9 +61,10 @@ public unsafe partial struct Mesh {
     }
 }
 
+[GenerateInterop]
+[Inherits<Mesh>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct MeshPCB {
-    [FieldOffset(0x00)] public Mesh Mesh; // base class
     [FieldOffset(0x18)] public FileNode* RootNode;
 
     // pcb file header; it is always followed by the root node
