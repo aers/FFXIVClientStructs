@@ -38,7 +38,7 @@ public struct AstrologianGauge {
     public AstrologianDraw CurrentDraw => (AstrologianDraw)this.Draw;
 }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct SageGauge {
     [FieldOffset(0x08)] public short AddersgallTimer;
     [FieldOffset(0x0A)] public byte Addersgall;
