@@ -156,7 +156,7 @@ public struct MonkGauge {
 
     public BeastChakraType[] BeastChakra => new[] { BeastChakra1, BeastChakra2, BeastChakra3 };
 
-    public int OpoOpoStacks => BeastChakraStacks & 1;
+    public int OpoOpoStacks => BeastChakraStacks & 3;
     public int RaptorStacks => ((BeastChakraStacks >> 2) & 3);
     public int CoeurlStacks => ((BeastChakraStacks >> 4) & 3);
 }
