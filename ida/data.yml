@@ -5077,8 +5077,6 @@ classes:
     vtbls:
       - ea: 0x141EEDFB8
         base: Client::Graphics::Scene::CharacterBase
-    vfuncs:
-      58: OnModelLoadComplete
     funcs:
       0x140599B30: ctor
       0x140599EC0: SetupFromCharacterData
@@ -11345,7 +11343,7 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-      - ea: 0x14254CE80
+      - ea: 0x141F2A8A0
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback::TalkEventImpl:
     vtbls:
