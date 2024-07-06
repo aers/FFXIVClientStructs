@@ -12,7 +12,7 @@ public enum AstrologianCard {
     Lady = 8
 }
 
-public enum AstrologianDraw {
+public enum AstrologianDraw : byte {
     Astral = 0,
     Umbral = 1
 }
