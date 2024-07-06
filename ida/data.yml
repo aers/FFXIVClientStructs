@@ -879,7 +879,7 @@ classes:
       - ea: 0x14254C8E0
         pointer: False
     vtbls:
-#fail       - ea: 0x141F25390
+      - ea: 0x141F1DC40
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140937CA0: Initialize
@@ -1282,11 +1282,11 @@ classes:
       0: dtor
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
-#fail       - ea: 0x141F62D10
+      - ea: 0x141F5B300
         base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
     vtbls:
-#fail       - ea: 0x141F62D58
+      - ea: 0x141F5B348
         base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
@@ -2663,7 +2663,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x142272350
-#fail       - ea: 0x14227BB20
+      - ea: 0x1422723E0
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -2744,7 +2744,7 @@ classes:
     vtbls:
       - ea: 0x142271550
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x14227AC98
+      - ea: 0x142271558
         base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
@@ -2754,9 +2754,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x14227AF00
+      - ea: 0x1422717c0
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x14227AF58
+      - ea: 0x142271818
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -2795,7 +2795,7 @@ classes:
     vtbls:
       - ea: 0x1422713A8
         base: Common::Component::BGCollision::SceneWrapperNode
-#fail       - ea: 0x14227AB78
+      - ea: 0x142271438
         base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
@@ -3567,7 +3567,7 @@ classes:
       7: ClearListData
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x141EA55E8
+      - ea: 0x141EA55F8
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
@@ -4310,7 +4310,7 @@ classes:
       0x140281C80: Initialize
       0x140282660: Update
       0x140282670: Finalize
-#fail       0x140282720: IsWinSockInitialized
+      0x140282700: IsWinSockInitialized
       0x140282940: SetLanguage
       0x140283070: GetCurrentDeviceTime
       0x1402830C0: GetCurrentDeviceTimeInMillis
@@ -7793,7 +7793,7 @@ classes:
       - ea: 0x141F1A2E0
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141F21A50
+      - ea: 0x141F1A2F0
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -8127,7 +8127,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141F24930
+      - ea: 0x141F1D1D0
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -8450,7 +8450,7 @@ classes:
       0x140BED490: ctor
       0x140BEFA90: OpenBalloon
       0x140BEFF60: CloseBalloon
-#fail       0x140A36030: ResetBalloon
+      0x140BF00C0: ResetBalloon
   Client::UI::Agent::AgentLoot:
     vtbls:
       - ea: 0x141F6DB20
@@ -11341,18 +11341,18 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::TalkCallback:
     vtbls:
-#fail       - ea: 0x141F32008
+      - ea: 0x141F2A8B8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-#fail       - ea: 0x141F31FF0
+      - ea: 0x14254CE80
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback::TalkEventImpl:
     vtbls:
       - ea: 0x141F2A880
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
-#fail       - ea: 0x141F31FE0
+      - ea: 0x141F2A890
         base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::EventSceneModule:
     funcs:
@@ -15303,7 +15303,7 @@ classes:
         base: Client::Game::Character::CharacterData
     funcs:
       0x1408CEEF0: ctor # unused, inlined
-#fail       0x1408CF200: SetupOrnament
+#fail       0x1408CF200: SetupOrnament # inlined @ 1408b0a9c 7.00 hotfix
   Client::Game::Character::CutsceneCharacter:
     vtbls:
       - ea: 0x14217CA58
