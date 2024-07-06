@@ -15,7 +15,8 @@ public unsafe partial struct Weapon {
     [FieldOffset(0x9D0)] public ushort ModelSetId;
     [FieldOffset(0x9D2)] public ushort SecondaryId;
     [FieldOffset(0x9D4)] public ushort Variant;
-    [FieldOffset(0x9D6)] public ushort ModelUnknown;
+    [FieldOffset(0x9D6)] public byte Stain0;
+    [FieldOffset(0x9D7)] public byte Stain1;
     [FieldOffset(0x9DA)] public byte MaterialId;
     [FieldOffset(0x9DB)] public byte DecalId;
     [FieldOffset(0x9DE)] public byte VfxId;
