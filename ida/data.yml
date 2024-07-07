@@ -15311,7 +15311,7 @@ classes:
         base: Client::Game::Character::CharacterData
     funcs:
       0x1408CEEF0: ctor # unused, inlined
-#fail       0x1408CF200: SetupOrnament # inlined @ 1408b0a9c 7.00 hotfix
+      0x1408CF070: SetupOrnament # inlined @ 1408b0a9c 7.00 hotfix
   Client::Game::Character::CutsceneCharacter:
     vtbls:
       - ea: 0x14217CA58
