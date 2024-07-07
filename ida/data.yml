@@ -111,6 +111,7 @@ functions:
   0x140786890: GetRandomInteger
   0x1407868F0: GetRandomFloat
   0x1405007B0: UpdateAnimFactor
+  0x140501710: LoadCharacterVfx
   0x140578E00: GetActionTimelineKey
   0x140578E30: GetWeaponTimelineKey
   0x1405850D0: PrepareColorSet
@@ -126,6 +127,7 @@ functions:
   0x140835220: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
   0x140835310: GetEventItemName
   0x1408354A0: GetItemIcon # (uint itemId, Component::Exd::Sheets::Item* itemRow) -> uint
+  0x140855160: LoadAreaVfx
   0x140880E70: IsCompanySealItemId
   0x140880FA0: GetTomestonesItem
   0x140881000: IsTomestonesItemItemId
@@ -364,6 +366,7 @@ functions:
   0x1408F2F30: ProcessPacketNPCYell
   0x14163EB90: ProcessPacketUIModulePacket
   0x140D02150: IsInMordionGaol # if this returns true, i'm sorry for you
+  0x141759960: ScheduleClipUpdate
   0x1417D2C40: GetInstanceContentCrystallineConflictDirector
   0x14183C310: GetInstanceContentMahjongDirector
   0x141BD4580: OodleNew # oodle code starts here
@@ -7605,6 +7608,7 @@ classes:
       0x140898FF0: GetAsBattleCharaMaybe # might be some other cast, or even Character too?
       0x14089B4C0: Initialize
       0x14089B6B0: ctor
+      0x1418310C0: PlayFootStepSound
   Client::Game::Character::Character:
     vtbls:
       - ea: 0x141F0FA50
@@ -7754,6 +7758,7 @@ classes:
     funcs:
       0x1408A7380: ctor # inlined at 0x1408CF540
       0x1408A8150: CreateAndSetupMount
+      0x1408A8770: Dismount
       0x1408A9930: SetupMount
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
@@ -7769,6 +7774,7 @@ classes:
       - ea: 0x141F0F740
         base: Client::Game::Character::ContainerInterface
     funcs:
+      0x1408B8170: LoadSomeAction
       0x1408CFC20: Finalize
       0x1408B7DF0: CalculateAndApplyOverallSpeed
       0x1408B8300: SetModelState

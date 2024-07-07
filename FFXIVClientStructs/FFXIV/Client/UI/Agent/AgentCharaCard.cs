@@ -33,31 +33,31 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x4)] public uint EntityId;
         [FieldOffset(0x8)] public ulong ContentId;
 
-        [FieldOffset(0x58)] public Utf8String Name;
-        [FieldOffset(0xC0)] public ushort WorldId;
-        [FieldOffset(0xC2)] public byte ClassJobId;
+        [FieldOffset(0x60)] public Utf8String Name;
+        [FieldOffset(0xC8)] public ushort WorldId;
+        [FieldOffset(0xCA)] public byte ClassJobId;
 
-        [FieldOffset(0xC4)] public byte GcRank;
+        [FieldOffset(0xCC)] public byte GcRank;
 
-        [FieldOffset(0xC8)] public ushort Level;
-        [FieldOffset(0xCA)] public ushort TitleId;
+        [FieldOffset(0xD0)] public ushort Level;
+        [FieldOffset(0xD2)] public ushort TitleId;
 
-        [FieldOffset(0xD8)] public Utf8String FreeCompany;
-        [FieldOffset(0x140)] public Utf8String SearchComment;
-        [FieldOffset(0x1A8)] public Utf8String SearchCommentRaw; // contains unresolved AutoTranslatePayloads
+        [FieldOffset(0xE0)] public Utf8String FreeCompany;
+        [FieldOffset(0x148)] public Utf8String SearchComment;
+        [FieldOffset(0x1B0)] public Utf8String SearchCommentRaw; // contains unresolved AutoTranslatePayloads
 
-        [FieldOffset(0x250)] public uint Activity1IconId;
-        [FieldOffset(0x258)] public Utf8String Activity1Name;
-        [FieldOffset(0x2C0)] public uint Activity2IconId;
-        [FieldOffset(0x2C8)] public Utf8String Activity2Name;
-        [FieldOffset(0x330)] public uint Activity3IconId;
-        [FieldOffset(0x338)] public Utf8String Activity3Name;
-        [FieldOffset(0x3A0)] public uint Activity4IconId;
-        [FieldOffset(0x3A8)] public Utf8String Activity4Name;
-        [FieldOffset(0x410)] public uint Activity5IconId;
-        [FieldOffset(0x418)] public Utf8String Activity5Name;
-        [FieldOffset(0x480)] public uint Activity6IconId;
-        [FieldOffset(0x488)] public Utf8String Activity6Name;
+        [FieldOffset(0x258)] public uint Activity1IconId;
+        [FieldOffset(0x260)] public Utf8String Activity1Name;
+        [FieldOffset(0x2C8)] public uint Activity2IconId;
+        [FieldOffset(0x2D0)] public Utf8String Activity2Name;
+        [FieldOffset(0x338)] public uint Activity3IconId;
+        [FieldOffset(0x340)] public Utf8String Activity3Name;
+        [FieldOffset(0x3A8)] public uint Activity4IconId;
+        [FieldOffset(0x3B0)] public Utf8String Activity4Name;
+        [FieldOffset(0x418)] public uint Activity5IconId;
+        [FieldOffset(0x420)] public Utf8String Activity5Name;
+        [FieldOffset(0x488)] public uint Activity6IconId;
+        [FieldOffset(0x490)] public Utf8String Activity6Name;
 
         [FieldOffset(0x540)] public CharaViewPortrait CharaView;
         [FieldOffset(0x960)] public Texture* PortraitTexture;
