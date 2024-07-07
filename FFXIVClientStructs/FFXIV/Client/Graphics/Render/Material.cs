@@ -40,8 +40,8 @@ public unsafe partial struct Material {
     /// </summary>
     [FieldOffset(0x20)] public uint* ShaderKeyValues;
     [FieldOffset(0x28)] public ConstantBuffer* MaterialParameterCBuffer; // arbitrary size and contents, defined by the shader package
-    [FieldOffset(0x30)] public TextureEntry* Textures;
-    [FieldOffset(0x38)] public ushort TextureCount;
+    [FieldOffset(0x40)] public TextureEntry* Textures;
+    [FieldOffset(0x48)] public ushort TextureCount;
 
     public int ShaderKeyCount
         => (int)((uint*)Textures - ShaderKeyValues);
