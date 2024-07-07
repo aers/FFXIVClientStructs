@@ -48,38 +48,39 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x150)]
     public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
-    [FieldOffset(0x158)] public ModelRenderer.Callback RenderModelCallback;
-    [FieldOffset(0x178)] public ModelRenderer.Callback RenderMaterialCallback;
-    [FieldOffset(0x198)] public ModelRenderer.Callback UnkCallback3;
+    [FieldOffset(0x170)] public ModelRenderer.Callback RenderModelCallback;
+    [FieldOffset(0x190)] public ModelRenderer.Callback RenderMaterialCallback;
+    [FieldOffset(0x1B0)] public ModelRenderer.Callback UnkCallback3;
 
     [FieldOffset(0x224)] public float VfxScale;
-    [FieldOffset(0x240)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0x50, contents may be InstanceParameter
+    [FieldOffset(0x270)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0xB0, contents may be InstanceParameter
+    [FieldOffset(0x278)] public ConstantBuffer* UnkCBuffer; // Size is also 0xB0
 
-    [FieldOffset(0x258)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * 4
+    [FieldOffset(0x288)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * 10
 
-    [FieldOffset(0x260)] public Vector4 Tint;
+    [FieldOffset(0x290)] public Vector4 Tint;
 
-    [FieldOffset(0x2B0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
-    [FieldOffset(0x2B4)] public float SwimmingWetness; // Set to 1.0f when in water
-    [FieldOffset(0x2B8)] public float WetnessDepth;    // Set to ~character height in GPose and higher values when swimming or diving.
-    [FieldOffset(0x2BC)] public float ForcedWetness;   // Set by vfunc 51 when using GPose, gets set to 0 in UpdateWetness every frame.
+    [FieldOffset(0x2E0)] public float WeatherWetness;  // Set to 1.0f when raining and not covered or umbrella'd
+    [FieldOffset(0x2E4)] public float SwimmingWetness; // Set to 1.0f when in water
+    [FieldOffset(0x2E8)] public float WetnessDepth;    // Set to ~character height in GPose and higher values when swimming or diving.
+    [FieldOffset(0x2EC)] public float ForcedWetness;   // Set by vfunc 51 when using GPose, gets set to 0 in UpdateWetness every frame.
 
     // next few fields are used temporarily when loading the render object and cleared after load
-    [FieldOffset(0x2C8)] public uint HasModelInSlotLoaded; // tracks which slots have loaded models into staging
+    [FieldOffset(0x2F8)] public uint HasModelInSlotLoaded; // tracks which slots have loaded models into staging
 
-    [FieldOffset(0x2CC)] public uint HasModelFilesInSlotLoaded; // tracks which slots have loaded materials, etc into staging
+    [FieldOffset(0x2FC)] public uint HasModelFilesInSlotLoaded; // tracks which slots have loaded materials, etc into staging
 
-    [FieldOffset(0x2D0)] public void* TempData; // struct with temporary data (size = 0x88)
+    [FieldOffset(0x300)] public void* TempData; // struct with temporary data (size = 0x88)
 
-    [FieldOffset(0x2D8)] public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
+    [FieldOffset(0x308)] public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
 
-    [FieldOffset(0x2E8)] public Material** Materials; // size = SlotCount * 4 (4 material per model max)
+    [FieldOffset(0x318)] public Material** Materials; // size = SlotCount * 4 (4 material per model max)
 
-    [FieldOffset(0x2F0)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
+    [FieldOffset(0x320)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
-    [FieldOffset(0x2F8)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
+    [FieldOffset(0x328)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
 
-    [FieldOffset(0x8E8)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap"
+    [FieldOffset(0x918)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap"
 
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
     public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * 4);
