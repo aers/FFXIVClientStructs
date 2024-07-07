@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.CrossRealmParty)]
 [GenerateInterop]
 [Inherits<InfoProxyInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1620)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A40)]
 public unsafe partial struct InfoProxyCrossRealm {
     [FieldOffset(0x46D)] public byte LocalPlayerGroupIndex;
     [FieldOffset(0x46E)] public byte GroupCount;
