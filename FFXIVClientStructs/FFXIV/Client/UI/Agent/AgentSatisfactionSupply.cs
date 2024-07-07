@@ -35,17 +35,17 @@ public unsafe partial struct AgentSatisfactionSupply {
     [FieldOffset(0x490)] public void* Item2Reward2Row;
     [FieldOffset(0x498)] public void* Item3Reward2Row;
     [FieldOffset(0x4A0)] public void* GilRow;
-    [FieldOffset(0x4A8)] public void* WhiteCrafterScriptRow;
-    [FieldOffset(0x4B0)] public void* PurpleCrafterScriptRow;
-    [FieldOffset(0x4B8)] public void* WhiteGathererScriptRow;
-    [FieldOffset(0x4C0)] public void* PurpleGathererScriptRow;
+    [FieldOffset(0x4A8)] public void* CrafterScripRow1;
+    [FieldOffset(0x4B0)] public void* CrafterScripRow2;
+    [FieldOffset(0x4B8)] public void* GathererScripRow1;
+    [FieldOffset(0x4C0)] public void* GathererScripRow2;
     [FieldOffset(0x4C8)] public void* FishingSpotRow;
-    [FieldOffset(0x4D0)] public void* SpearFishingNotebookRow;
+    [FieldOffset(0x4D0)] public void* SpearfishingNotebookRow;
 
-    [FieldOffset(0x4D8)] public uint WhiteCrafterScrriptId;
-    [FieldOffset(0x4DC)] public uint PurpleCrafterScriptId;
-    [FieldOffset(0x4E0)] public uint WhiteGathererScriptId;
-    [FieldOffset(0x4E4)] public uint PurpleGathererScriptId;
+    [FieldOffset(0x4D8)] public uint CrafterScripId1;
+    [FieldOffset(0x4DC)] public uint CrafterScripId2;
+    [FieldOffset(0x4E0)] public uint GathererScripId1;
+    [FieldOffset(0x4E4)] public uint GathererScripId2;
     [FieldOffset(0x4E8)] public uint TimeRemainingHours;
     [FieldOffset(0x4EC)] public uint TimeRemainingMinutes;
 
