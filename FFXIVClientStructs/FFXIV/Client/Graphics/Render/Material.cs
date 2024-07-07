@@ -15,7 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 /// </remarks>
 [GenerateInterop]
 [Inherits<ReferencedClassBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct Material {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct TextureEntry {

@@ -44,7 +44,7 @@ public unsafe partial struct AgentCharaCard {
 
         [FieldOffset(0xE0)] public Utf8String FreeCompany;
         [FieldOffset(0x148)] public Utf8String SearchComment;
-        [FieldOffset(0x150)] public Utf8String SearchCommentRaw; // contains unresolved AutoTranslatePayloads
+        [FieldOffset(0x1B0)] public Utf8String SearchCommentRaw; // contains unresolved AutoTranslatePayloads
 
         [FieldOffset(0x258)] public uint Activity1IconId;
         [FieldOffset(0x260)] public Utf8String Activity1Name;
