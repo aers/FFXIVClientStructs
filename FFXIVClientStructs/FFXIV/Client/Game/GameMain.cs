@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Component.Excel.Sheets;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::GameMain
@@ -25,10 +27,10 @@ public unsafe partial struct GameMain {
     [FieldOffset(0x40C4)] public uint RuntimeSeconds;
     [FieldOffset(0x40C8)] public bool RuntimeSecondsChanged;
     [FieldOffset(0x40CC)] public float Runtime;
-    [FieldOffset(0x40D0)] public nint CurrentTerritoryTypeRow;
-    [FieldOffset(0x40D8)] public nint CurrentTerritoryIntendedUseRow;
-    [FieldOffset(0x40E0)] public nint NextTerritoryTypeRow;
-    [FieldOffset(0x40E8)] public nint NextTerritoryIntendedUseRow;
+    [FieldOffset(0x40D0)] public TerritoryType* CurrentTerritoryTypeRow;
+    [FieldOffset(0x40D8)] public TerritoryIntendedUse* CurrentTerritoryIntendedUseRow;
+    [FieldOffset(0x40E0)] public TerritoryType* NextTerritoryTypeRow;
+    [FieldOffset(0x40E8)] public TerritoryIntendedUse* NextTerritoryIntendedUseRow;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF")]
     public partial bool IsInInstanceArea();

@@ -1,5 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Event;
-using FFXIVClientStructs.FFXIV.Client.Game.Fate;
+using FFXIVClientStructs.FFXIV.Component.Excel.Sheets;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -125,7 +124,7 @@ public unsafe partial struct UIState {
     /// This method <b>will</b> call EXD, so the usual caveats there apply. Where possible, use a by-ID check as
     /// they're generally faster and/or rely less on EXD.
     /// </remarks>
-    /// <param name="itemExdPtr">A pointer to an EXD row for an item, generally retrieved from <see cref="ExdModule.GetItemRowById"/>.</param>
+    /// <param name="itemRow">A pointer to an EXD row for an item, generally retrieved from <see cref="ExdModule.GetItemRowById"/>.</param>
     /// <returns>Returns a value denoting this item's unlock status from the below table:
     /// <list type="table">
     /// <listheader><term>Value</term><description>Meaning</description></listheader>
@@ -136,7 +135,7 @@ public unsafe partial struct UIState {
     /// </list>
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B CD 89 86 ?? ?? ?? ??")]
-    public partial long IsItemActionUnlocked(void* itemExdPtr);
+    public partial long IsItemActionUnlocked(Item* itemRow);
 
     /// <summary>
     /// Check if a Triple Triad card is obtained by the character.
