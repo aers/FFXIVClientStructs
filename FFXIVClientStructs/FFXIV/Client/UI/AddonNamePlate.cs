@@ -56,7 +56,7 @@ public unsafe partial struct AddonNamePlate {
         [FieldOffset(0x66)] public short TextH;
         [FieldOffset(0x68)] public short IconXAdjust;
         [FieldOffset(0x6A)] public short IconYAdjust;
-        [FieldOffset(0x6C)] public UIObjectKind NamePlateKind; 
+        [FieldOffset(0x6C)] public UIObjectKind NamePlateKind;
         [FieldOffset(0x6D)] public byte HPLabelState;
         [FieldOffset(0x6E)] public bool ClickThrough;
         [FieldOffset(0x6F)] public bool IsPvpEnemy;
@@ -69,7 +69,7 @@ public unsafe partial struct AddonNamePlate {
 
         public bool IsLocalPlayer => IsPlayerCharacter && ClickThrough;
     }
-    
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
     public partial struct NamePlateIntArrayData {
@@ -79,7 +79,7 @@ public unsafe partial struct AddonNamePlate {
         [FieldOffset(0xC)] public bool DisableFixedFontResolution;
         [FieldOffset(0x10)] public bool DoFullUpdate;
         // [FieldOffset(0x14)] public int UnkInt;
-        [FieldOffset(0x18)] [FixedSizeArray] internal FixedSizeArray50<NamePlateObjectIntArrayData> _objectData;
+        [FieldOffset(0x18)][FixedSizeArray] internal FixedSizeArray50<NamePlateObjectIntArrayData> _objectData;
 
         [StructLayout(LayoutKind.Explicit, Size = 20 * 4)]
         public struct NamePlateObjectIntArrayData {
