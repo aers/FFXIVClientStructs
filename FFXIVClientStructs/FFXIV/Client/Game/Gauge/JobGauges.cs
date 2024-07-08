@@ -139,22 +139,14 @@ public unsafe partial struct DancerGauge {
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct MonkGauge {
     [FieldOffset(0x08)] public byte Chakra; // Chakra count
-
-    [FieldOffset(0x09)]
-    public BeastChakraType BeastChakra1; // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
-
-    [FieldOffset(0x0A)]
-    public BeastChakraType BeastChakra2; // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
-
-    [FieldOffset(0x0B)]
-    public BeastChakraType BeastChakra3; // CoeurlChakra = 1, RaptorChakra = 2, OpoopoChakra = 3 (only one value)
-
+    [FieldOffset(0x09)] public BeastChakraType BeastChakra1; // OpoOpoChakra = 1, RaptorChakra = 2, CoeurlChakra = 3 (only one value)
+    [FieldOffset(0x0A)] public BeastChakraType BeastChakra2; // OpoOpoChakra = 1, RaptorChakra = 2, CoeurlChakra = 3 (only one value)
+    [FieldOffset(0x0B)] public BeastChakraType BeastChakra3; // OpoOpoChakra = 1, RaptorChakra = 2, CoeurlChakra = 3 (only one value)
     [FieldOffset(0x0C)] public byte BeastChakraStacks;
-
-    [FieldOffset(0x0D)] public NadiFlags Nadi; // LunarNadi = 1, SolarNadi = 2 (If both then 1+2=3)
+    [FieldOffset(0x0D)] public NadiFlags Nadi; // LunarNadi = 1, SolarNadi = 2, Both = 3
     [FieldOffset(0x0E)] public ushort BlitzTimeRemaining; // 20 seconds
 
-    public BeastChakraType[] BeastChakra => new[] { BeastChakra1, BeastChakra2, BeastChakra3 };
+    public BeastChakraType[] BeastChakra => [BeastChakra1, BeastChakra2, BeastChakra3];
 
     public int OpoOpoStacks => BeastChakraStacks & 3;
     public int RaptorStacks => ((BeastChakraStacks >> 2) & 3);
