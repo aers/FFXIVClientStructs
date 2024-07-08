@@ -865,14 +865,6 @@ enums:
     "Healer": 1
     "Dps": 2
     "None": 3
-- type: Client::UI::Agent::ActionStatus
-  name: ActionStatus
-  underlying: byte
-  namespace: Client.UI.Agent
-  values:
-    "Available": 0
-    "NotYetAvailable": 1
-    "NotCurrentlyAvailable": 3
 - type: Client::UI::Agent::AgentId
   name: AgentId
   underlying: unsigned int
@@ -1249,6 +1241,14 @@ enums:
     "FGSHud": 440
     "FGSWinner": 441
     "FGSResult": 442
+- type: Client::UI::Agent::ItemDetailKind
+  name: ItemDetailKind
+  underlying: byte
+  namespace: Client.UI.Agent
+  values:
+    "ChatItem": 1
+    "InventoryItem": 2
+    "ChatEventItem": 8
 - type: Client::UI::Agent::CharaSelectCharacterEntryLoginFlags
   name: CharaSelectCharacterEntryLoginFlags
   underlying: byte
@@ -1865,6 +1865,13 @@ enums:
     "ChocoboRaceAllOpen": 32
     "Unk6": 64
     "Unk7": 128
+- type: Client::Game::Gauge::AstrologianDraw
+  name: AstrologianDraw
+  underlying: byte
+  namespace: Client.Game.Gauge
+  values:
+    "Astral": 0
+    "Umbral": 1
 - type: Client::Game::Gauge::EnochianFlags
   name: EnochianFlags
   underlying: byte
@@ -1896,6 +1903,8 @@ enums:
   values:
     "Pom": 1
     "Wing": 2
+    "Claw": 4
+    "Maw": 8
     "Weapon": 16
     "Landscape": 32
 - type: Client::Game::Gauge::CreatureFlags
@@ -1904,7 +1913,10 @@ enums:
   namespace: Client.Game.Gauge
   values:
     "Pom": 1
-    "Wings": 16
+    "Wings": 2
+    "Claw": 4
+    "MooglePortait": 16
+    "MadeenPortrait": 32
 - type: Client::Game::Gauge::SongFlags
   name: SongFlags
   underlying: byte
@@ -1934,8 +1946,8 @@ enums:
   underlying: byte
   namespace: Client.Game.Gauge
   values:
-    "Lunar": 2
-    "Solar": 4
+    "Lunar": 1
+    "Solar": 2
 - type: Client::Game::Gauge::KaeshiAction
   name: KaeshiAction
   underlying: byte
@@ -1954,6 +1966,17 @@ enums:
     "Setsu": 1
     "Getsu": 2
     "Ka": 4
+- type: Client::Game::Gauge::DreadCombo
+  name: DreadCombo
+  underlying: byte
+  namespace: Client.Game.Gauge
+  values:
+    "Dreadwinder": 1
+    "HuntersCoil": 2
+    "SwiftskinsCoil": 3
+    "PitOfDread": 4
+    "HuntersDen": 5
+    "SwiftskinsDen": 6
 - type: Client::Game::Event::CraftStateFlags
   name: CraftStateFlags
   underlying: unsigned int
@@ -2131,7 +2154,7 @@ enums:
     "GameObjectId": 1
     "Unk2": 2
     "Unk3": 3
-- type: Client::Game::Character::Character::CharacterModes
+- type: Client::Game::Character::CharacterModes
   name: CharacterModes
   underlying: byte
   namespace: Client.Game.Character
@@ -2214,6 +2237,21 @@ enums:
     "StoreNewItemsInArmouryChest": 16
     "StoreCraftedItemsInInventory": 32
     "CloseVisor": 64
+- type: Client::UI::UIObjectKind
+  name: UIObjectKind
+  underlying: byte
+  namespace: Client.UI
+  values:
+    "PlayerCharacter": 0
+    "EventNpcCompanion": 1
+    "Retainer": 2
+    "BattleNpcEnemy": 3
+    "BattleNpcFriendly": 4
+    "EventObject": 5
+    "Treasure": 6
+    "GatheringPoint": 7
+    "BattleNpcSubkind6": 8
+    "Other": 9
 - type: Client::UI::Misc::ConfigOption
   name: ConfigOption
   underlying: __int16
@@ -3153,6 +3191,14 @@ enums:
     "De": 2
     "Fr": 3
     "None": 255
+- type: Client::UI::Agent::SimulatorActionStatus
+  name: SimulatorActionStatus
+  underlying: byte
+  namespace: Client.UI.Agent
+  values:
+    "Available": 0
+    "NotYetAvailable": 1
+    "NotCurrentlyAvailable": 3
 - type: Client::UI::Agent::AgentFreeCompanyProfile::FCProfile::FocusType
   name: FocusType
   underlying: unsigned __int16
@@ -7117,6 +7163,69 @@ structs:
     offset: 56
   virtual_functions: []
   member_functions: []
+- type: Common::Component::BGCollision::MemoryPool
+  name: MemoryPool
+  namespace: Common.Component.BGCollision
+  union: False
+  size: 16
+  fields:
+  - type: Common::Component::BGCollision::MemoryPoolPageHeader*
+    name: FirstAllocatedPage
+    offset: 0
+  - type: Common::Component::BGCollision::MemoryPoolPageHeader*
+    name: FirstActivePage
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: Common::Component::BGCollision::MemoryPoolPageHeader
+  name: MemoryPoolPageHeader
+  namespace: Common.Component.BGCollision
+  union: False
+  size: 48
+  fields:
+  - type: Common::Component::BGCollision::MemoryPoolPageHeader*
+    name: NextAllocatedPage
+    offset: 0
+  - type: Common::Component::BGCollision::MemoryPoolPageHeader*
+    name: PrevAllocatedPage
+    offset: 8
+  - type: Common::Component::BGCollision::MemoryPoolPageHeader*
+    name: NextActivePage
+    offset: 16
+  - type: Common::Component::BGCollision::MemoryPoolPageHeader*
+    name: PrevActivePage
+    offset: 24
+  - type: unsigned int
+    name: FreeEntriesMask
+    offset: 32
+  - type: unsigned __int16
+    name: EntrySize
+    offset: 36
+  - type: byte
+    name: NumEntriesUsed
+    offset: 38
+  - type: byte
+    name: NumEntriesTotal
+    offset: 39
+  - type: byte
+    name: IsActive
+    offset: 40
+  virtual_functions: []
+  member_functions: []
+- type: Common::Component::BGCollision::MemoryPoolEntryHeader
+  name: MemoryPoolEntryHeader
+  namespace: Common.Component.BGCollision
+  union: False
+  size: 16
+  fields:
+  - type: Common::Component::BGCollision::MemoryPoolPageHeader*
+    name: Page
+    offset: 0
+  - type: unsigned int
+    name: Index
+    offset: 8
+  virtual_functions: []
+  member_functions: []
 - type: Common::Component::BGCollision::IMesh
   name: IMesh
   namespace: Common.Component.BGCollision
@@ -8714,6 +8823,10 @@ structs:
       name: image
     - type: byte
       name: style
+    - type: int
+      name: sound
+    - type: unsigned int
+      name: entityId
   - name: ShowBattleTalkSound
     offset: 1536
     return_type: void
@@ -8898,11 +9011,17 @@ structs:
     name: GlamourEquipSlotCategory
     offset: 2
   - type: byte
-    name: StainId
+    name: Stain0Id
     offset: 3
   - type: byte
-    name: GlamourStainId
+    name: Stain1Id
     offset: 4
+  - type: byte
+    name: GlamourStain0Id
+    offset: 5
+  - type: byte
+    name: GlamourStain1Id
+    offset: 6
   - type: unsigned int
     name: ItemId
     offset: 8
@@ -9403,39 +9522,42 @@ structs:
   name: CrossRealmMember
   namespace: Client.UI.Info
   union: False
-  size: 88
+  size: 104
   fields:
   - type: unsigned __int64
     name: ContentId
-    offset: 8
+    offset: 16
   - type: unsigned int
     name: EntityId
-    offset: 24
+    offset: 32
   - type: byte
     name: Level
-    offset: 32
+    offset: 40
   - type: __int16
     name: HomeWorld
-    offset: 34
+    offset: 42
   - type: __int16
     name: CurrentWorld
-    offset: 36
+    offset: 44
   - type: byte
     name: ClassJobId
-    offset: 38
+    offset: 46
   - type: byte
     name: Name
-    offset: 43
+    offset: 51
     size: 32
+  - type: byte*
+    name: NameOverride
+    offset: 88
   - type: byte
     name: MemberIndex
-    offset: 80
+    offset: 96
   - type: byte
     name: GroupIndex
-    offset: 81
+    offset: 97
   - type: byte
     name: IsPartyLeader
-    offset: 83
+    offset: 99
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Info::InfoProxyInterface
@@ -9461,32 +9583,26 @@ structs:
       name: packetPtr
     - type: unsigned int
       name: count
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyInterface*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyInterface*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyInterface*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyInterface*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyInterface*
@@ -9520,32 +9636,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyInvitedList*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyInvitedList*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyInvitedList*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyInvitedList*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyInvitedList*
@@ -9669,32 +9779,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetwork*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetwork*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetwork*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetwork*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetwork*
@@ -9740,32 +9844,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyPageInterface*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyPageInterface*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyPageInterface*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyPageInterface*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyPageInterface*
@@ -9879,72 +9977,6 @@ structs:
   - type: byte
     name: SelectedContextItemIndex
     offset: 1648
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::Agent::EfficiencyCalculation
-  name: EfficiencyCalculation
-  namespace: Client.UI.Agent
-  union: False
-  size: 24
-  fields:
-  - type: unsigned int
-    name: ActionId
-    offset: 0
-  - type: unsigned int
-    name: ProgressEfficiency
-    offset: 4
-  - type: unsigned int
-    name: ProgressIncrease
-    offset: 8
-  - type: unsigned int
-    name: QualityEfficiencyPercentage
-    offset: 12
-  - type: unsigned int
-    name: QualityIncrease
-    offset: 16
-  - type: Client::UI::Agent::ActionStatus
-    name: Status
-    offset: 22
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::Agent::ProgressEfficiencyCalculation
-  name: ProgressEfficiencyCalculation
-  namespace: Client.UI.Agent
-  union: False
-  size: 24
-  fields:
-  - type: unsigned int
-    name: ActionId
-    offset: 0
-  - type: unsigned int
-    name: ProgressEfficiency
-    offset: 4
-  - type: unsigned int
-    name: ProgressIncrease
-    offset: 8
-  - type: Client::UI::Agent::ActionStatus
-    name: Status
-    offset: 22
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::Agent::QualityEfficiencyCalculation
-  name: QualityEfficiencyCalculation
-  namespace: Client.UI.Agent
-  union: False
-  size: 24
-  fields:
-  - type: unsigned int
-    name: ActionId
-    offset: 0
-  - type: unsigned int
-    name: QualityEfficiencyPercentage
-    offset: 12
-  - type: unsigned int
-    name: QualityIncrease
-    offset: 16
-  - type: Client::UI::Agent::ActionStatus
-    name: Status
-    offset: 22
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentDeepDungeonMapData
@@ -11786,10 +11818,10 @@ structs:
     size: 87
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: LegacyBodyDecalColorCBuffer
-    offset: 760
+    offset: 1008
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: FreeCompanyCrestColorCBuffer
-    offset: 768
+    offset: 1016
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Scene::Object
@@ -11862,33 +11894,33 @@ structs:
   name: Camera
   namespace: Client.Graphics.Render
   union: False
-  size: 304
+  size: 656
   fields:
   - type: Client::Graphics::ReferencedClassBase
     name: ReferencedClassBase
     offset: 0
   - type: Common::Math::Matrix4x4
     name: ProjectionMatrix
-    offset: 80
+    offset: 416
   - type: float
     name: FoV
-    offset: 168
+    offset: 488
   - type: float
     name: AspectRatio
-    offset: 172
+    offset: 492
   - type: float
     name: NearPlane
-    offset: 176
+    offset: 496
   - type: float
     name: FarPlane
-    offset: 180
+    offset: 500
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Material
   name: Material
   namespace: Client.Graphics.Render
   union: False
-  size: 64
+  size: 80
   fields:
   - type: Client::Graphics::ReferencedClassBase
     name: ReferencedClassBase
@@ -11907,10 +11939,10 @@ structs:
     offset: 40
   - type: Client::Graphics::Render::Material::TextureEntry*
     name: Textures
-    offset: 48
+    offset: 64
   - type: unsigned __int16
     name: TextureCount
-    offset: 56
+    offset: 72
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Model
@@ -11973,7 +12005,7 @@ structs:
   name: ShadowCamera
   namespace: Client.Graphics.Render
   union: False
-  size: 336
+  size: 688
   fields:
   - type: Client::Graphics::Render::Camera
     name: Camera
@@ -12019,7 +12051,7 @@ structs:
   name: SubView
   namespace: Client.Graphics.Render
   union: False
-  size: 88
+  size: 96
   fields:
   - type: unsigned int
     name: Flags
@@ -12047,14 +12079,14 @@ structs:
     offset: 72
   - type: Client::Graphics::Kernel::Texture*
     name: DepthStencil
-    offset: 80
+    offset: 88
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::View
   name: View
   namespace: Client.Graphics.Render
   union: False
-  size: 1440
+  size: 1568
   fields:
   - type: unsigned int
     name: Flags
@@ -12427,7 +12459,7 @@ structs:
   name: EnvState
   namespace: Client.Graphics.Environment
   union: False
-  size: 600
+  size: 760
   fields:
   - type: float
     name: Rain
@@ -13918,7 +13950,17 @@ structs:
     name: IsPvP
     offset: 15
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 33 FF 85 C0 75 48
+    return_type: unsigned int
+    name: GetActionId
+    parameters:
+    - type: Client::Game::UI::LimitBreakController*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
+    - type: byte
+      name: level
 - type: Client::Game::UI::LootItem
   name: LootItem
   namespace: Client.Game.UI
@@ -14030,7 +14072,7 @@ structs:
       name: y
     - type: float
       name: z
-    - type: unsigned int
+    - type: float
       name: radius
     - type: unsigned __int16
       name: territoryTypeId
@@ -14936,14 +14978,11 @@ structs:
   size: 16
   fields:
   - type: __int16
-    name: Timer
+    name: Cards
     offset: 8
-  - type: byte
-    name: Card
-    offset: 13
-  - type: byte
-    name: Seals
-    offset: 14
+  - type: Client::Game::Gauge::AstrologianDraw
+    name: CurrentDraw
+    offset: 10
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::SageGauge
@@ -15045,7 +15084,7 @@ structs:
     name: PalleteGauge
     offset: 8
   - type: byte
-    name: WhitePaint
+    name: Paint
     offset: 10
   - type: Client::Game::Gauge::CanvasFlags
     name: CanvasFlags
@@ -15143,9 +15182,12 @@ structs:
   - type: Client::Game::Gauge::BeastChakraType
     name: BeastChakra3
     offset: 11
+  - type: byte
+    name: BeastChakraStacks
+    offset: 12
   - type: Client::Game::Gauge::NadiFlags
     name: Nadi
-    offset: 12
+    offset: 13
   - type: unsigned __int16
     name: BlitzTimeRemaining
     offset: 14
@@ -15177,15 +15219,12 @@ structs:
   union: False
   size: 16
   fields:
-  - type: unsigned __int16
-    name: HutonTimer
-    offset: 8
   - type: byte
     name: Ninki
-    offset: 10
+    offset: 8
   - type: byte
-    name: HutonManualCasts
-    offset: 11
+    name: Kazematoi
+    offset: 10
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::SamuraiGauge
@@ -15231,24 +15270,47 @@ structs:
     offset: 13
   virtual_functions: []
   member_functions: []
-- type: Client::Game::Gauge::DarkKnightGauge
-  name: DarkKnightGauge
+- type: Client::Game::Gauge::ViperGauge
+  name: ViperGauge
   namespace: Client.Game.Gauge
   union: False
   size: 16
   fields:
   - type: byte
+    name: RattlingCoilStacks
+    offset: 8
+  - type: byte
+    name: AnguineTribute
+    offset: 9
+  - type: byte
+    name: SerpentOffering
+    offset: 10
+  - type: Client::Game::Gauge::DreadCombo
+    name: DreadCombo
+    offset: 11
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Gauge::DarkKnightGauge
+  name: DarkKnightGauge
+  namespace: Client.Game.Gauge
+  union: False
+  size: 24
+  fields:
+  - type: byte
     name: Blood
     offset: 8
+  - type: byte
+    name: DarkArtsState
+    offset: 9
   - type: unsigned __int16
     name: DarksideTimer
     offset: 10
-  - type: byte
-    name: DarkArtsState
-    offset: 12
   - type: unsigned __int16
     name: ShadowTimer
-    offset: 14
+    offset: 12
+  - type: unsigned __int16
+    name: DeliriumStep
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::PaladinGauge
@@ -15260,6 +15322,12 @@ structs:
   - type: byte
     name: OathGauge
     offset: 8
+  - type: unsigned __int16
+    name: ConfiteorComboTimer
+    offset: 10
+  - type: unsigned __int16
+    name: ConfiteorComboStep
+    offset: 12
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::WarriorGauge
@@ -15635,6 +15703,86 @@ structs:
   union: False
   size: 192
   fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Character::CastInfo
+  name: CastInfo
+  namespace: Client.Game.Character
+  union: False
+  size: 368
+  fields:
+  - type: byte
+    name: IsCasting
+    offset: 0
+  - type: byte
+    name: Interruptible
+    offset: 1
+  - type: Client::Game::ActionType
+    name: ActionType
+    offset: 2
+  - type: unsigned int
+    name: ActionId
+    offset: 4
+  - type: unsigned int
+    name: SourceSequence
+    offset: 8
+  - type: Client::Game::Object::GameObjectId
+    name: TargetId
+    offset: 16
+  - type: Common::Math::Vector3
+    name: TargetLocation
+    offset: 32
+  - type: float
+    name: Rotation
+    offset: 48
+  - type: float
+    name: CurrentCastTime
+    offset: 52
+  - type: float
+    name: BaseCastTime
+    offset: 56
+  - type: float
+    name: TotalCastTime
+    offset: 60
+  - type: unsigned int
+    name: ResponseSpellId
+    offset: 64
+  - type: Client::Game::ActionType
+    name: ResponseActionType
+    offset: 68
+  - type: unsigned int
+    name: ResponseActionId
+    offset: 72
+  - type: unsigned int
+    name: ResponseGlobalSequence
+    offset: 76
+  - type: unsigned int
+    name: ResponseSourceSequence
+    offset: 80
+  - type: Client::Game::Object::GameObjectId
+    name: ResponseTargetIds
+    offset: 88
+    size: 32
+  - type: byte
+    name: ResponseTargetCount
+    offset: 344
+  - type: byte
+    name: ResponseFlags
+    offset: 345
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Character::ForayInfo
+  name: ForayInfo
+  namespace: Client.Game.Character
+  union: False
+  size: 2
+  fields:
+  - type: byte
+    name: Level
+    offset: 0
+  - type: byte
+    name: Element
+    offset: 1
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Character::CharacterData
@@ -19649,34 +19797,34 @@ structs:
     name: BakeData
     offset: 0
   - type: Component::GUI::AtkComponentNode*
-    name: RootNode
+    name: RootComponentNode
     offset: 16
   - type: Component::GUI::AtkResNode*
-    name: ResNode
+    name: NameContainer
     offset: 24
   - type: Component::GUI::AtkTextNode*
     name: NameText
     offset: 32
   - type: Component::GUI::AtkImageNode*
-    name: IconImageNode
+    name: NameIcon
     offset: 40
   - type: Component::GUI::AtkImageNode*
-    name: ImageNode2
+    name: MarkerIcon
     offset: 48
   - type: Component::GUI::AtkImageNode*
-    name: ImageNode3
+    name: GaugeBackground
     offset: 56
   - type: Component::GUI::AtkImageNode*
-    name: ImageNode4
+    name: GaugeFill
     offset: 64
   - type: Component::GUI::AtkImageNode*
-    name: ImageNode5
+    name: GaugeContainer
     offset: 72
   - type: Component::GUI::AtkCollisionNode*
-    name: CollisionNode1
+    name: NameplateCollision
     offset: 80
   - type: Component::GUI::AtkCollisionNode*
-    name: CollisionNode2
+    name: MarkerCollision
     offset: 88
   - type: int
     name: Priority
@@ -19693,11 +19841,11 @@ structs:
   - type: __int16
     name: IconYAdjust
     offset: 106
-  - type: byte
-    name: NameplateKind
+  - type: Client::UI::UIObjectKind
+    name: NamePlateKind
     offset: 108
   - type: byte
-    name: HasHPBar
+    name: HPLabelState
     offset: 109
   - type: byte
     name: ClickThrough
@@ -19707,7 +19855,7 @@ structs:
     offset: 111
   - type: byte
     name: NeedsToBeBaked
-    offset: 112
+    offset: 113
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonPartyList::PartyListMemberStruct
@@ -19939,22 +20087,22 @@ structs:
     offset: 48
   - type: Client::System::String::Utf8String
     name: FcName
-    offset: 152
+    offset: 160
   - type: Client::System::String::Utf8String
     name: Title
-    offset: 256
+    offset: 264
   - type: Client::System::String::Utf8String
     name: DisplayTitle
-    offset: 360
+    offset: 368
   - type: Client::System::String::Utf8String
     name: LevelText
-    offset: 464
+    offset: 472
   - type: int
     name: Flags
-    offset: 576
+    offset: 584
   - type: byte
     name: IsDirty
-    offset: 580
+    offset: 588
   virtual_functions: []
   member_functions: []
 - type: Client::UI::RaptureAtkModule::ItemCache
@@ -20061,10 +20209,10 @@ structs:
   - type: byte
     name: NamePlateScale
     offset: 76
-  - type: byte
+  - type: Client::UI::UIObjectKind
     name: NamePlateObjectKind
     offset: 77
-  - type: byte
+  - type: Client::UI::UIObjectKind
     name: NamePlateObjectKindAdjusted
     offset: 78
   - type: byte
@@ -20810,6 +20958,23 @@ structs:
     size: 32
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Info::InfoProxyBlacklist::BlockedCharacter
+  name: BlockedCharacter
+  namespace: Client.UI.Info
+  union: False
+  size: 24
+  fields:
+  - type: byte*
+    name: Name
+    offset: 0
+  - type: unsigned __int64
+    name: Id
+    offset: 8
+  - type: byte
+    name: Flag
+    offset: 16
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Info::InfoProxyCatalogSearch::Entry
   name: Entry
   namespace: Client.UI.Info
@@ -21044,6 +21209,35 @@ structs:
   - type: byte
     name: DatasetIndex
     offset: 44
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation
+  name: EfficiencyCalculation
+  namespace: Client.UI.Agent
+  union: False
+  size: 28
+  fields:
+  - type: unsigned int
+    name: BaseActionId
+    offset: 0
+  - type: unsigned int
+    name: ActionId
+    offset: 4
+  - type: unsigned __int16
+    name: ProgressEfficiency
+    offset: 8
+  - type: unsigned int
+    name: ProgressIncrease
+    offset: 12
+  - type: unsigned __int16
+    name: QualityEfficiency
+    offset: 16
+  - type: unsigned int
+    name: QualityIncrease
+    offset: 20
+  - type: Client::UI::Agent::SimulatorActionStatus
+    name: ActionStatus
+    offset: 26
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentDeepDungeonInspect::AgentDeepDungeonInspectData
@@ -22694,7 +22888,7 @@ structs:
   name: KillCounts
   namespace: Client.Game.UI
   union: False
-  size: 22
+  size: 20
   fields:
   - type: int
     name: Counts
@@ -23161,86 +23355,6 @@ structs:
     offset: 33
   virtual_functions: []
   member_functions: []
-- type: Client::Game::Character::Character::CastInfo
-  name: CastInfo
-  namespace: Client.Game.Character
-  union: False
-  size: 368
-  fields:
-  - type: byte
-    name: IsCasting
-    offset: 0
-  - type: byte
-    name: Interruptible
-    offset: 1
-  - type: Client::Game::ActionType
-    name: ActionType
-    offset: 2
-  - type: unsigned int
-    name: ActionId
-    offset: 4
-  - type: unsigned int
-    name: SourceSequence
-    offset: 8
-  - type: Client::Game::Object::GameObjectId
-    name: TargetId
-    offset: 16
-  - type: Common::Math::Vector3
-    name: TargetLocation
-    offset: 32
-  - type: float
-    name: Rotation
-    offset: 48
-  - type: float
-    name: CurrentCastTime
-    offset: 52
-  - type: float
-    name: BaseCastTime
-    offset: 56
-  - type: float
-    name: TotalCastTime
-    offset: 60
-  - type: unsigned int
-    name: ResponseSpellId
-    offset: 64
-  - type: Client::Game::ActionType
-    name: ResponseActionType
-    offset: 68
-  - type: unsigned int
-    name: ResponseActionId
-    offset: 72
-  - type: unsigned int
-    name: ResponseGlobalSequence
-    offset: 76
-  - type: unsigned int
-    name: ResponseSourceSequence
-    offset: 80
-  - type: Client::Game::Object::GameObjectId
-    name: ResponseTargetIds
-    offset: 88
-    size: 32
-  - type: byte
-    name: ResponseTargetCount
-    offset: 344
-  - type: byte
-    name: ResponseFlags
-    offset: 345
-  virtual_functions: []
-  member_functions: []
-- type: Client::Game::Character::Character::ForayInfo
-  name: ForayInfo
-  namespace: Client.Game.Character
-  union: False
-  size: 2
-  fields:
-  - type: byte
-    name: Level
-    offset: 0
-  - type: byte
-    name: Element
-    offset: 1
-  virtual_functions: []
-  member_functions: []
 - type: Client::Game::Character::VfxContainer::Tether
   name: Tether
   namespace: Client.Game.Character
@@ -23374,6 +23488,62 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: Glow
     offset: 20
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonNamePlate::NamePlateIntArrayData::NamePlateObjectIntArrayData
+  name: NamePlateObjectIntArrayData
+  namespace: Client.UI
+  union: False
+  size: 80
+  fields:
+  - type: Client::UI::UIObjectKind
+    name: NamePlateKind
+    offset: 0
+  - type: int
+    name: HPLabelState
+    offset: 4
+  - type: int
+    name: UpdateFlags
+    offset: 8
+  - type: int
+    name: X
+    offset: 12
+  - type: int
+    name: Y
+    offset: 16
+  - type: float
+    name: Depth
+    offset: 20
+  - type: int
+    name: Scale
+    offset: 24
+  - type: int
+    name: GaugeFillPercentage
+    offset: 28
+  - type: int
+    name: NameTextColor
+    offset: 32
+  - type: int
+    name: NameEdgeColor
+    offset: 36
+  - type: int
+    name: GaugeFillColor
+    offset: 40
+  - type: int
+    name: GaugeContainerColor
+    offset: 44
+  - type: int
+    name: MarkerIconId
+    offset: 48
+  - type: int
+    name: NameIconId
+    offset: 52
+  - type: int
+    name: NamePlateObjectIndex
+    offset: 60
+  - type: int
+    name: DrawFlags
+    offset: 68
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment
@@ -25187,6 +25357,22 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
+- type: StdVector<Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation*
+    name: End
+    offset: 16
+  virtual_functions: []
+  member_functions: []
 - type: StdVector<Client::Game::UI::MapMarkerData, Helper::IStaticMemorySpace::Default>
   name: StdVector`2
   namespace: ''
@@ -25916,6 +26102,19 @@ structs:
     offset: 8
   virtual_functions: []
   member_functions: []
+- type: Helper::RedBlackTree<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>
+  name: RedBlackTree`3
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  virtual_functions: []
+  member_functions: []
 - type: Helper::RedBlackTree<StdPair<unsigned int, unsigned int>, unsigned int, Helper::PairKeyExtractor<unsigned int, unsigned int>>
   name: RedBlackTree`3
   namespace: Helper
@@ -26152,6 +26351,19 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: Helper::RedBlackTree<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>
+  name: RedBlackTree`3
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>*
     name: Head
     offset: 0
   - type: __int64
@@ -26416,6 +26628,19 @@ structs:
     offset: 2
   virtual_functions: []
   member_functions: []
+- type: StdPair<unsigned __int64, int>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int64
+    name: Item1
+    offset: 0
+  - type: int
+    name: Item2
+    offset: 8
+  virtual_functions: []
+  member_functions: []
 - type: StdPair<byte*, __int16>
   name: StdPair`2
   namespace: ''
@@ -26581,6 +26806,19 @@ structs:
     name: Item1
     offset: 0
   - type: Client::Game::CurrencyManager::ContentCurrencyItem
+    name: Item2
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: StdPair<unsigned int, byte>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned int
+    name: Item1
+    offset: 0
+  - type: byte
     name: Item2
     offset: 4
   virtual_functions: []
@@ -28484,9 +28722,9 @@ structs:
       name: this
     - type: Common::Component::BGCollision::RaycastHit*
       name: hitInfo
-    - type: System::Numerics::Vector3
+    - type: System::Numerics::Vector3*
       name: origin
-    - type: System::Numerics::Vector3
+    - type: System::Numerics::Vector3*
       name: direction
     - type: float
       name: maxDistance
@@ -28502,9 +28740,9 @@ structs:
       name: this
     - type: Common::Component::BGCollision::RaycastHit*
       name: hitInfo
-    - type: System::Numerics::Vector3
+    - type: System::Numerics::Vector3*
       name: origin
-    - type: System::Numerics::Vector3
+    - type: System::Numerics::Vector3*
       name: direction
     - type: float
       name: maxDistance
@@ -28539,7 +28777,7 @@ structs:
   - type: float
     name: Distance
     offset: 72
-  - type: Common::Component::BGCollision::Object*
+  - type: Common::Component::BGCollision::Collider*
     name: Object
     offset: 80
   virtual_functions: []
@@ -29950,7 +30188,75 @@ structs:
   - type: Common::Component::BGCollision::MeshPCB::FileNode*
     name: RootNode
     offset: 24
-  virtual_functions: []
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+    - type: byte
+      name: a2
+  - name: GetBoundsMin
+    offset: 16
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+  - name: GetBoundsMax
+    offset: 24
+    return_type: System::Numerics::Vector3*
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+  - name: Intersect
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+    - type: System::Numerics::Matrix4x4*
+      name: a2
+    - type: Common::Component::BGCollision::RaycastHit*
+      name: a3
+    - type: Common::Component::BGCollision::RaycastParams*
+      name: a4
+  - name: GetNumPrimitives
+    offset: 40
+    return_type: unsigned __int16
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+  - name: GetNumVertices
+    offset: 48
+    return_type: unsigned int
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+  - name: GatherVertices
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+    - type: System::Numerics::Matrix4x4*
+      name: a2
+    - type: System::Numerics::Vector3*
+      name: a3
+  - name: GetPrimitives
+    offset: 64
+    return_type: Common::Component::BGCollision::Mesh::Primitive*
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+  - name: GetAABB
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Common::Component::BGCollision::MeshPCB*
+      name: this
+    - type: Common::Component::BGCollision::Math::AABB*
+      name: a2
   member_functions: []
 - type: Common::Component::BGCollision::SceneManager
   name: SceneManager
@@ -29984,7 +30290,7 @@ structs:
   name: Scene
   namespace: Common.Component.BGCollision
   union: False
-  size: 64
+  size: 192
   fields:
   - type: Common::Component::BGCollision::Object
     name: Object
@@ -30007,6 +30313,30 @@ structs:
   - type: Common::Component::BGCollision::Quadtree*
     name: Quadtree
     offset: 56
+  - type: Common::Component::BGCollision::MemoryPool
+    name: PoolColliderStreamed
+    offset: 64
+  - type: Common::Component::BGCollision::MemoryPool
+    name: PoolColliderMesh
+    offset: 80
+  - type: Common::Component::BGCollision::MemoryPool
+    name: PoolColliderBox
+    offset: 96
+  - type: Common::Component::BGCollision::MemoryPool
+    name: PoolColliderCylinder
+    offset: 112
+  - type: Common::Component::BGCollision::MemoryPool
+    name: PoolColliderSphere
+    offset: 128
+  - type: Common::Component::BGCollision::MemoryPool
+    name: PoolColliderPlane
+    offset: 144
+  - type: Common::Component::BGCollision::MemoryPool
+    name: PoolColliderPlaneTwoSided
+    offset: 160
+  - type: Common::Component::BGCollision::MemoryPool
+    name: PoolMeshPCB
+    offset: 176
   virtual_functions: []
   member_functions: []
 - type: Common::Component::BGCollision::Math::AABB
@@ -31038,31 +31368,41 @@ structs:
   name: CharaViewCharacterData
   namespace: Client.UI.Misc
   union: False
-  size: 104
+  size: 120
   fields:
   - type: Client::Game::Character::CustomizeData
     name: CustomizeData
     offset: 0
+  - type: unsigned __int16
+    name: Glasses0Id
+    offset: 26
+  - type: unsigned __int16
+    name: Glasses1Id
+    offset: 28
   - type: unsigned int
     name: ItemIds
-    offset: 28
+    offset: 30
     size: 14
   - type: byte
-    name: ItemStains
-    offset: 84
+    name: ItemStain0Ids
+    offset: 86
+    size: 14
+  - type: byte
+    name: ItemStain1Ids
+    offset: 100
     size: 14
   - type: byte
     name: ClassJobId
-    offset: 98
+    offset: 116
   - type: byte
     name: VisorHidden
-    offset: 99
+    offset: 117
   - type: byte
     name: WeaponHidden
-    offset: 100
+    offset: 118
   - type: byte
     name: VisorClosed
-    offset: 101
+    offset: 119
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4D 8D 4E 30
@@ -33831,32 +34171,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy25*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy25*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxy25*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy25*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxy25*
@@ -33894,32 +34228,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy26*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy26*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxy26*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy26*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxy26*
@@ -33945,32 +34273,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy27*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy27*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxy27*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy27*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxy27*
@@ -33996,32 +34318,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy28*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy28*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxy28*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy28*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxy28*
@@ -34053,105 +34369,30 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy29*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy29*
-      name: this
   - name: RequestData
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Info::InfoProxy29*
-      name: this
-  - name: EndRequest
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy29*
-      name: this
-  - name: GetEntryCount
-    offset: 56
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Info::InfoProxy29*
-      name: this
-  member_functions: []
-- type: Client::UI::Info::InfoProxyBlacklist
-  name: InfoProxyBlacklist
-  namespace: Client.UI.Info
-  union: False
-  size: 6656
-  fields:
-  - type: Client::UI::Info::InfoProxyPageInterface
-    name: InfoProxyPageInterface
-    offset: 0
-  - type: __int64
-    name: ContentIds
     offset: 32
-    size: 200
-  - type: Client::System::String::Utf8String
-    name: Unk660
-    offset: 1632
-  - type: Client::System::String::Utf8String
-    name: Unk6C8
-    offset: 1736
-  virtual_functions:
-  - name: AddData
-    offset: 8
-    return_type: __int64
-    parameters:
-    - type: Client::UI::Info::InfoProxyBlacklist*
-      name: this
-    - type: __int64
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: RemoveData
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyBlacklist*
-      name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyBlacklist*
-      name: this
-  - name: RequestData
-    offset: 40
     return_type: byte
     parameters:
-    - type: Client::UI::Info::InfoProxyBlacklist*
+    - type: Client::UI::Info::InfoProxy29*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyBlacklist*
+    - type: Client::UI::Info::InfoProxy29*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
-    - type: Client::UI::Info::InfoProxyBlacklist*
+    - type: Client::UI::Info::InfoProxy29*
       name: this
-  - name: AddPage
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyBlacklist*
-      name: this
-    - type: __int64
-      name: a2
   member_functions: []
 - type: Client::UI::Info::InfoProxyCatalogSearch
   name: InfoProxyCatalogSearch
@@ -34180,32 +34421,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCatalogSearch*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCatalogSearch*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyCatalogSearch*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCatalogSearch*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyCatalogSearch*
@@ -34239,32 +34474,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyChat*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyChat*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyChat*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyChat*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyChat*
@@ -34298,32 +34527,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCircle*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCircle*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyCircle*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCircle*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyCircle*
@@ -34355,32 +34578,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCircleFinder*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCircleFinder*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyCircleFinder*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCircleFinder*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyCircleFinder*
@@ -34406,32 +34623,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCircleList*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCircleList*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyCircleList*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCircleList*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyCircleList*
@@ -34493,32 +34704,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCommonList*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyCommonList*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCommonList*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyCommonList*
@@ -34580,7 +34785,7 @@ structs:
   name: CrossRealmGroup
   namespace: Client.UI.Info
   union: False
-  size: 712
+  size: 840
   fields:
   - type: byte
     name: GroupMemberCount
@@ -34646,32 +34851,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
@@ -34714,32 +34913,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyDetail*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyDetail*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyDetail*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyDetail*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyDetail*
@@ -34871,32 +35064,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompany*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompany*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompany*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompany*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompany*
@@ -34939,32 +35126,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyCreate*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyCreate*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyCreate*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyCreate*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyCreate*
@@ -34999,32 +35180,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyInvite*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyInvite*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyInvite*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyInvite*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyInvite*
@@ -35053,32 +35228,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyMember*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyMember*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyMember*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyFreeCompanyMember*
@@ -35128,32 +35297,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFriendList*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFriendList*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyFriendList*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyFriendList*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyFriendList*
@@ -35223,32 +35386,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshell*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshell*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshell*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshell*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshell*
@@ -35290,32 +35447,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshellMember*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshellMember*
@@ -35349,32 +35500,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkList*
@@ -35408,32 +35553,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
@@ -35467,32 +35606,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
@@ -35541,32 +35674,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyPartyInvite*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyInvite*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyPartyInvite*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyPartyInvite*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyPartyInvite*
@@ -35622,32 +35749,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyPartyMember*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyPartyMember*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyPartyMember*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyPartyMember*
@@ -35681,32 +35802,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxySearch*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxySearch*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxySearch*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxySearch*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxySearch*
@@ -35985,88 +36100,6 @@ structs:
     offset: 136
   virtual_functions: []
   member_functions: []
-- type: Client::UI::Agent::ProgressEfficiencyCalculations
-  name: ProgressEfficiencyCalculations
-  namespace: Client.UI.Agent
-  union: False
-  size: 264
-  fields:
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: BasicSynthesis
-    offset: 0
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: RapidSynthesis
-    offset: 24
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: MuscleMemory
-    offset: 48
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: CarefulSynthesis
-    offset: 72
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: FocusedSynthesis
-    offset: 96
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: Groundwork
-    offset: 120
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: DelicateSynthesis
-    offset: 144
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: IntensiveSynthesis
-    offset: 168
-  - type: Client::UI::Agent::ProgressEfficiencyCalculation
-    name: PrudentSynthesis
-    offset: 192
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::Agent::QualityEfficiencyCalculations
-  name: QualityEfficiencyCalculations
-  namespace: Client.UI.Agent
-  union: False
-  size: 312
-  fields:
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: BasicTouch
-    offset: 0
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: HastyTouch
-    offset: 24
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: StandardTouch
-    offset: 48
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: ByregotsBlessing
-    offset: 72
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: PreciseTouch
-    offset: 96
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: PrudentTouch
-    offset: 120
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: FocusedTouch
-    offset: 144
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: Reflect
-    offset: 168
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: PreparatoryTouch
-    offset: 192
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: DelicateSynthesis
-    offset: 216
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: TrainedEye
-    offset: 240
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: AdvancedTouch
-    offset: 264
-  - type: Client::UI::Agent::QualityEfficiencyCalculation
-    name: TrainedFinesse
-    offset: 288
-  virtual_functions: []
-  member_functions: []
 - type: Client::UI::Agent::DeepDungeonStatusItem
   name: DeepDungeonStatusItem
   namespace: Client.UI.Agent
@@ -36208,6 +36241,35 @@ structs:
   - type: byte
     name: Bonus
     offset: 155
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::HudQueuedBattleTalk
+  name: HudQueuedBattleTalk
+  namespace: Client.UI.Agent
+  union: False
+  size: 232
+  fields:
+  - type: byte
+    name: IsPending
+    offset: 0
+  - type: byte
+    name: Style
+    offset: 2
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 8
+  - type: Client::System::String::Utf8String
+    name: Text
+    offset: 112
+  - type: unsigned int
+    name: Image
+    offset: 220
+  - type: int
+    name: Sound
+    offset: 224
+  - type: unsigned int
+    name: EntityId
+    offset: 228
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentInterface
@@ -36447,9 +36509,30 @@ structs:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
     offset: 0
+  - type: Client::UI::Agent::ItemDetailKind
+    name: ItemKind
+    offset: 280
+  - type: unsigned int
+    name: TypeOrId
+    offset: 284
+  - type: unsigned int
+    name: Index
+    offset: 288
+  - type: byte
+    name: Flag1
+    offset: 296
   - type: unsigned int
     name: ItemId
     offset: 312
+  - type: Client::System::String::Utf8String
+    name: String1
+    offset: 328
+  - type: byte
+    name: Flag2
+    offset: 434
+  - type: byte
+    name: Flag3
+    offset: 438
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -36552,31 +36635,25 @@ structs:
     offset: 152
   - type: unsigned int
     name: ResultItemId
-    offset: 13060
+    offset: 13188
   - type: unsigned int
     name: ResultSelectedIndex
-    offset: 13068
-  - type: unsigned int
+    offset: 13196
+  - type: unsigned __int16
     name: ResultHoveredIndex
-    offset: 13084
+    offset: 13212
+  - type: unsigned int
+    name: ResultHoveredItemId
+    offset: 13216
   - type: unsigned int
     name: ResultHoveredCount
-    offset: 13092
+    offset: 13220
   - type: byte
     name: ResultHoveredHQ
-    offset: 13100
-  - type: unsigned int*
-    name: ItemBuffer
-    offset: 14288
-  - type: unsigned int
-    name: ItemCount
-    offset: 14296
+    offset: 13228
   - type: byte
     name: IsPartialSearching
-    offset: 14308
-  - type: byte
-    name: IsItemPushPending
-    offset: 14309
+    offset: 14442
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -39747,12 +39824,18 @@ structs:
   - type: Client::UI::Agent::SalvageResult
     name: DesynthItem
     offset: 920
+  - type: Client::System::String::Utf8String
+    name: TextQuantity
+    offset: 928
+  - type: byte
+    name: IsSalvageResultAddonOpen
+    offset: 1033
   - type: unsigned int
     name: DesynthItemId
-    offset: 932
+    offset: 1036
   - type: Client::UI::Agent::SalvageResult
     name: DesynthResults
-    offset: 936
+    offset: 1040
     size: 3
   virtual_functions:
   - name: ReceiveEvent
@@ -42251,55 +42334,50 @@ structs:
   name: ModelRenderer
   namespace: Client.Graphics.Render
   union: False
-  size: 552
+  size: 896
   fields:
   - type: unsigned int
-    name: LightDirectionId
+    name: ConstantSamplerIds
     offset: 8
-  - type: unsigned int
-    name: WorldViewMatrixId
-    offset: 12
-  - type: unsigned int
-    name: JointMatrixArrayId
-    offset: 16
-  - type: unsigned int
-    name: SelectionModelParameterId
-    offset: 20
-  - type: unsigned int
-    name: SamplerNormalId
-    offset: 24
-  - type: unsigned int
-    name: SamplerIndexId
-    offset: 28
-  - type: unsigned int
-    name: SamplerViewPositionId
-    offset: 32
+    size: 18
   - type: Client::Graphics::Kernel::ShaderSceneKey
     name: SceneKeys
-    offset: 40
-    size: 6
+    offset: 80
+    size: 18
   - type: Client::Graphics::Kernel::ShaderSubViewKey
     name: SubViewKeys
-    offset: 136
-    size: 3
+    offset: 368
+    size: 5
   - type: Client::System::Resource::Handle::ShaderCodeResourceHandle*
     name: CharacterSelectionModelVS
-    offset: 184
+    offset: 448
   - type: Client::System::Resource::Handle::ShaderCodeResourceHandle*
     name: CharacterSelectionModelPS
-    offset: 192
+    offset: 456
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: DitherTexture
-    offset: 200
+    offset: 464
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: IrisShaderPackage
+    offset: 472
   - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
     name: CharacterGlassShaderPackage
-    offset: 208
-  - type: Client::System::Resource::Handle::ShaderCodeResourceHandle*
-    name: CharacterMultiViewportGS
-    offset: 216
+    offset: 480
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: CharacterTransparencyShaderPackage
+    offset: 488
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: CharacterTattooShaderPackage
+    offset: 496
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: CharacterOcclusionShaderPackage
+    offset: 504
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: HairMaskShaderPackage
+    offset: 512
   - type: Client::Graphics::JobSystem
     name: JobSystem
-    offset: 360
+    offset: 704
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 0F B7 20
@@ -42444,7 +42522,7 @@ structs:
   name: EnvManager
   namespace: Client.Graphics.Environment
   union: False
-  size: 2320
+  size: 3056
   fields:
   - type: Client::Graphics::Scene::EnvScene*
     name: EnvScene
@@ -42469,22 +42547,19 @@ structs:
     offset: 40
   - type: Client::Graphics::Scene::EnvSpace*
     name: EnvSpace
-    offset: 48
+    offset: 56
   - type: Client::Graphics::Environment::EnvState
     name: EnvState
-    offset: 80
+    offset: 88
   - type: Client::Graphics::Environment::EnvSoundState
     name: EnvSoundState
-    offset: 904
+    offset: 1128
   - type: Client::Graphics::Environment::EnvSimulator
     name: EnvSimulator
-    offset: 1024
+    offset: 1248
   - type: Client::Graphics::Render::ShadowCamera
     name: ShadowCamera
-    offset: 1872
-  - type: unsigned int
-    name: UnkFlags
-    offset: 2292
+    offset: 2272
   virtual_functions: []
   member_functions: []
 - type: Client::Game::ActionManager
@@ -43052,8 +43127,8 @@ structs:
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
-- type: Client::Game::JobGaugeManager::Guage
-  name: Guage
+- type: Client::Game::JobGaugeManager::Gauge
+  name: Gauge
   namespace: Client::Game::JobGaugeManager
   union: True
   size: 80
@@ -43091,6 +43166,9 @@ structs:
   - type: Client::Game::Gauge::RedMageGauge
     name: RedMage
     offset: 0
+  - type: Client::Game::Gauge::PictomancerGauge
+    name: Pictomancer
+    offset: 0
   - type: Client::Game::Gauge::MonkGauge
     name: Monk
     offset: 0
@@ -43105,6 +43183,9 @@ structs:
     offset: 0
   - type: Client::Game::Gauge::ReaperGauge
     name: Reaper
+    offset: 0
+  - type: Client::Game::Gauge::ViperGauge
+    name: Viper
     offset: 0
   - type: Client::Game::Gauge::DarkKnightGauge
     name: DarkKnight
@@ -43129,8 +43210,8 @@ structs:
   - type: Client::Game::Gauge::JobGauge*
     name: CurrentGauge
     offset: 0
-  - type: Client::Game::JobGaugeManager::Guage
-    name: Guage
+  - type: Client::Game::JobGaugeManager::Gauge
+    name: Gauge
     offset: 8
   - type: byte
     name: ClassJobId
@@ -44139,504 +44220,6 @@ structs:
       name: this
     - type: byte
       name: markIndex
-- type: Client::Game::UI::PlayerState
-  name: PlayerState
-  namespace: Client.Game.UI
-  union: False
-  size: 2208
-  fields:
-  - type: byte
-    name: IsLoaded
-    offset: 0
-  - type: byte
-    name: CharacterName
-    offset: 1
-    size: 64
-  - type: byte
-    name: OnlineId
-    offset: 65
-    size: 17
-  - type: unsigned int
-    name: EntityId
-    offset: 100
-  - type: unsigned __int64
-    name: ContentId
-    offset: 104
-  - type: int
-    name: PenaltyTimestamps
-    offset: 112
-    size: 2
-  - type: byte
-    name: MaxLevel
-    offset: 121
-  - type: byte
-    name: MaxExpansion
-    offset: 122
-  - type: byte
-    name: Sex
-    offset: 123
-  - type: byte
-    name: Race
-    offset: 124
-  - type: byte
-    name: Tribe
-    offset: 125
-  - type: byte
-    name: CurrentClassJobId
-    offset: 126
-  - type: __int64
-    name: CurrentClassJobRow
-    offset: 128
-  - type: __int16
-    name: CurrentLevel
-    offset: 136
-  - type: __int16
-    name: ClassJobLevels
-    offset: 138
-    size: 32
-  - type: int
-    name: ClassJobExperience
-    offset: 204
-    size: 32
-  - type: __int16
-    name: SyncedLevel
-    offset: 332
-  - type: byte
-    name: IsLevelSynced
-    offset: 334
-  - type: byte
-    name: HasPremiumSaddlebag
-    offset: 335
-  - type: byte
-    name: GuardianDeity
-    offset: 338
-  - type: byte
-    name: BirthMonth
-    offset: 339
-  - type: byte
-    name: BirthDay
-    offset: 340
-  - type: byte
-    name: FirstClass
-    offset: 341
-  - type: byte
-    name: StartTown
-    offset: 342
-  - type: byte
-    name: QuestSpecialFlags
-    offset: 343
-  - type: unsigned __int16
-    name: ActiveFestivalIds
-    offset: 344
-    size: 4
-  - type: unsigned __int16
-    name: ActiveFestivalPhases
-    offset: 352
-    size: 4
-  - type: int
-    name: BaseStrength
-    offset: 368
-  - type: int
-    name: BaseDexterity
-    offset: 372
-  - type: int
-    name: BaseVitality
-    offset: 376
-  - type: int
-    name: BaseIntelligence
-    offset: 380
-  - type: int
-    name: BaseMind
-    offset: 384
-  - type: int
-    name: BasePiety
-    offset: 388
-  - type: int
-    name: Attributes
-    offset: 392
-    size: 74
-  - type: byte
-    name: GrandCompany
-    offset: 688
-  - type: byte
-    name: GCRankMaelstrom
-    offset: 689
-  - type: byte
-    name: GCRankTwinAdders
-    offset: 690
-  - type: byte
-    name: GCRankImmortalFlames
-    offset: 691
-  - type: unsigned __int16
-    name: HomeAetheryteId
-    offset: 692
-  - type: byte
-    name: FavouriteAetheryteCount
-    offset: 694
-  - type: unsigned __int16
-    name: FavouriteAetherytes
-    offset: 696
-    size: 4
-  - type: unsigned __int16
-    name: FreeAetheryteId
-    offset: 704
-  - type: unsigned __int16
-    name: FreeAetherytePlayStationPlus
-    offset: 706
-  - type: unsigned int
-    name: BaseRestedExperience
-    offset: 708
-  - type: byte
-    name: UnlockedMountsBitmask
-    offset: 733
-    size: 37
-  - type: byte
-    name: UnlockedOrnamentsBitmask
-    offset: 771
-    size: 7
-  - type: byte
-    name: UnlockedGlassesStylesBitmask
-    offset: 778
-    size: 2
-  - type: unsigned __int16
-    name: NumOwnedMounts
-    offset: 780
-  - type: byte
-    name: UnlockedSpearfishingNotebookBitmask
-    offset: 960
-    size: 7
-  - type: byte
-    name: CaughtFishBitmask
-    offset: 1002
-    size: 159
-  - type: unsigned int
-    name: NumFishCaught
-    offset: 1184
-  - type: unsigned int
-    name: FishingBait
-    offset: 1188
-  - type: byte
-    name: CaughtSpearfishBitmask
-    offset: 1200
-    size: 36
-  - type: unsigned int
-    name: NumSpearfishCaught
-    offset: 1240
-  - type: byte
-    name: ContentRouletteCompletion
-    offset: 1248
-    size: 12
-  - type: __int16
-    name: PlayerCommendations
-    offset: 1260
-  - type: byte
-    name: SelectedPoses
-    offset: 1262
-    size: 7
-  - type: byte
-    name: PlayerStateFlags1
-    offset: 1269
-  - type: byte
-    name: PlayerStateFlags2
-    offset: 1270
-  - type: byte
-    name: PlayerStateFlags3
-    offset: 1271
-  - type: byte
-    name: SightseeingLogUnlockState
-    offset: 1314
-  - type: byte
-    name: SightseeingLogUnlockStateEx
-    offset: 1315
-  - type: byte
-    name: UnlockedAdventureExPhaseBitmask
-    offset: 1316
-    size: 1
-  - type: byte
-    name: UnlockedAdventureBitmask
-    offset: 1360
-    size: 43
-  - type: byte
-    name: UnlockFlags
-    offset: 1409
-    size: 56
-  - type: byte
-    name: DeliveryLevel
-    offset: 1469
-  - type: byte
-    name: MeisterFlag
-    offset: 1471
-  - type: int
-    name: SquadronMissionCompletionTimestamp
-    offset: 1476
-  - type: int
-    name: SquadronTrainingCompletionTimestamp
-    offset: 1480
-  - type: unsigned __int16
-    name: ActiveGcArmyExpedition
-    offset: 1484
-  - type: unsigned __int16
-    name: ActiveGcArmyTraining
-    offset: 1486
-  - type: byte
-    name: HasNewGcArmyCandidate
-    offset: 1488
-  - type: byte
-    name: UnlockedMinerFolkloreTomeBitmask
-    offset: 1490
-    size: 2
-  - type: byte
-    name: UnlockedBotanistFolkloreTomeBitmask
-    offset: 1492
-    size: 2
-  - type: byte
-    name: UnlockedFishingFolkloreTomeBitmask
-    offset: 1494
-    size: 2
-  - type: byte
-    name: WeeklyBingoOrderData
-    offset: 1760
-    size: 16
-  - type: byte
-    name: WeeklyBingoRewardData
-    offset: 1776
-    size: 4
-  - type: unsigned __int16
-    name: _weeklyBingoStickers
-    offset: 1780
-  - type: unsigned int
-    name: _weeklyBingoFlags
-    offset: 1784
-  - type: byte
-    name: _weeklyBingoTaskStatus
-    offset: 1788
-    size: 4
-  - type: byte
-    name: WeeklyBingoRequestOpenBingoNo
-    offset: 1792
-  - type: byte
-    name: WeeklyBingoExpMultiplier
-    offset: 1852
-  - type: byte
-    name: WeeklyBingoUnk63
-    offset: 1853
-  - type: StdPair<unsigned int, unsigned int>
-    name: ContentKeyValueData
-    offset: 1860
-    size: 3
-  - type: byte
-    name: MentorVersion
-    offset: 2004
-  - type: unsigned int
-    name: DesynthesisLevels
-    offset: 2008
-    size: 8
-  virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 3A 43 01
-    return_type: byte
-    name: GetGrandCompanyRank
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C
-    return_type: byte
-    name: GetBeastTribeRank
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: byte
-      name: beastTribeIndex
-  - signature: 0F B6 81 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 89 44 24 08
-    return_type: byte
-    name: IsMeisterFlagMaxCount
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 04 41 0F AB F6
-    return_type: byte
-    name: IsMeisterFlag
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: classJobId
-  - signature: E8 ?? ?? ?? ?? 38 43 45
-    return_type: byte
-    name: IsMeisterFlagAndHasSoulStoneEquipped
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: classJobId
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 57 41 8B CF
-    return_type: byte
-    name: IsMountUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: mountId
-  - signature: E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE
-    return_type: byte
-    name: IsOrnamentUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: ornamentId
-  - signature: E8 ?? ?? ?? ?? 88 44 1F 08
-    return_type: byte
-    name: IsOrchestrionRollUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: rollId
-  - signature: E8 ?? ?? ?? ?? 0F B6 4D 9A
-    return_type: byte
-    name: IsSecretRecipeBookUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: tomeId
-  - signature: E9 ?? ?? ?? ?? 0F B7 57 70
-    return_type: byte
-    name: IsFolkloreBookUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: tomeId
-  - signature: 8D 42 ?? 3C ?? 77 ?? 4C 8B 89
-    return_type: byte
-    name: IsMcGuffinUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: mcGuffinId
-  - signature: E9 ?? ?? ?? ?? 33 FF 90
-    return_type: byte
-    name: IsFramersKitUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: kitId
-  - signature: 4C 8B C9 85 D2 74 1D
-    return_type: byte
-    name: IsAetherCurrentZoneComplete
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: territoryTypeColumn32
-  - signature: E8 ?? ?? ?? ?? 84 C0 75 90
-    return_type: byte
-    name: IsAdventureExPhaseComplete
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: adventureExPhaseId
-  - signature: 81 FA ?? ?? ?? ?? 73 1F 0F B6 C2
-    return_type: byte
-    name: IsAdventureComplete
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: adventureId
-  - signature: E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3
-    return_type: byte
-    name: IsGlassesUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned __int16
-      name: glassesId
-  - signature: E8 ?? ?? ?? ?? 3B C3 0F 93 C0
-    return_type: unsigned int
-    name: GetWeeklyBingoFlagsValue
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: mode
-  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 8D 90 ?? ?? ?? ??
-    return_type: byte
-    name: IsWeeklyBingoExpired
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: 8B 81 ?? ?? ?? ?? C1 E8 04 25
-    return_type: int
-    name: GetWeeklyBingoExpireUnixTimestamp
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 8B D3 41 88 06
-    return_type: byte
-    name: IsWeeklyBingoStickerPlaced
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: int
-      name: index
-  - signature: 48 8B C1 83 FA 10
-    return_type: Client::Game::UI::PlayerState::WeeklyBingoTaskStatus
-    name: GetWeeklyBingoTaskStatus
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: int
-      name: index
-  - signature: E8 ?? ?? ?? ?? 0F B6 C0 0F AF C3
-    return_type: unsigned int
-    name: GetWeeklyBingoExpMultiplier
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 0D B0 02
-    return_type: byte
-    name: IsMentor
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 04 C6 46 41 01
-    return_type: byte
-    name: IsBattleMentor
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B 53 28 F6 D8
-    return_type: byte
-    name: IsTradeMentor
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 66 C7 43 ?? ?? ??
-    return_type: byte
-    name: IsNovice
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 88 46 43
-    return_type: byte
-    name: IsReturner
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 3A D8 75 2E
-    return_type: byte
-    name: IsPlayerStateFlagSet
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: Client::Game::UI::PlayerStateFlag
-      name: flag
 - type: Client::Game::UI::PublicInstance
   name: PublicInstance
   namespace: Client.Game.UI
@@ -45961,6 +45544,33 @@ structs:
   - type: Component::GUI::AtkComponentTextNineGrid*
     name: EnshroudTimerDisplay
     offset: 208
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonNamePlate::NamePlateIntArrayData
+  name: NamePlateIntArrayData
+  namespace: Client.UI
+  union: False
+  size: 4024
+  fields:
+  - type: int
+    name: ActiveNamePlateCount
+    offset: 0
+  - type: byte
+    name: ForceNamePlateRebake
+    offset: 4
+  - type: int
+    name: NamePlateSize
+    offset: 8
+  - type: byte
+    name: DisableFixedFontResolution
+    offset: 12
+  - type: byte
+    name: DoFullUpdate
+    offset: 16
+  - type: Client::UI::AddonNamePlate::NamePlateIntArrayData::NamePlateObjectIntArrayData
+    name: ObjectData
+    offset: 24
+    size: 50
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonWeeklyPuzzle::GameTileRow
@@ -47938,6 +47548,16 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
+- type: StdVector<Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: StdVector<Client::Game::UI::MapMarkerData>
   name: StdVector`1
   namespace: ''
@@ -48368,6 +47988,16 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
+- type: StdMap<unsigned __int64, int, Helper::IStaticMemorySpace::Default>
+  name: StdMap`3
+  namespace: ''
+  union: False
+  fields:
+  - type: Helper::RedBlackTree<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>
+    name: Tree
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: StdMap<unsigned int, unsigned int, Helper::IStaticMemorySpace::Default>
   name: StdMap`3
   namespace: ''
@@ -48544,6 +48174,16 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree<StdPair<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>>
+    name: Tree
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: StdMap<unsigned int, byte, Helper::IStaticMemorySpace::Default>
+  name: StdMap`3
+  namespace: ''
+  union: False
+  fields:
+  - type: Helper::RedBlackTree<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>
     name: Tree
     offset: 0
   virtual_functions: []
@@ -48841,6 +48481,37 @@ structs:
     name: _19
     offset: 27
   - type: StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>
+    name: _Myval
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>*
+    name: _Left
+    offset: 0
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>*
+    name: _Parent
+    offset: 8
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned __int64, int>
     name: _Myval
     offset: 28
   virtual_functions: []
@@ -49244,6 +48915,37 @@ structs:
     name: _19
     offset: 27
   - type: StdPair<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>
+    name: _Myval
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: Helper::RedBlackTree::Node<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>*
+    name: _Left
+    offset: 0
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>*
+    name: _Parent
+    offset: 8
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned int, byte>
     name: _Myval
     offset: 28
   virtual_functions: []
@@ -53140,7 +52842,7 @@ structs:
     offset: 597
   virtual_functions:
   - name: PulseActionBarSlot
-    offset: 624
+    offset: 632
     return_type: void
     parameters:
     - type: Client::UI::AddonActionBarBase*
@@ -53785,7 +53487,7 @@ structs:
     - type: Client::UI::AddonActionBarX*
       name: this
   - name: PulseActionBarSlot
-    offset: 624
+    offset: 632
     return_type: void
     parameters:
     - type: Client::UI::AddonActionBarX*
@@ -54182,7 +53884,7 @@ structs:
     - type: Client::UI::AddonActionCross*
       name: this
   - name: PulseActionBarSlot
-    offset: 624
+    offset: 632
     return_type: void
     parameters:
     - type: Client::UI::AddonActionCross*
@@ -54872,7 +54574,7 @@ structs:
     - type: Client::UI::AddonActionDoubleCrossBase*
       name: this
   - name: PulseActionBarSlot
-    offset: 624
+    offset: 632
     return_type: void
     parameters:
     - type: Client::UI::AddonActionDoubleCrossBase*
@@ -57976,7 +57678,7 @@ structs:
     offset: 1200
   - type: Component::GUI::AtkCollisionNode*
     name: CharacterPreviewCollisionNode
-    offset: 3000
+    offset: 3024
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -64366,7 +64068,7 @@ structs:
     name: AtkUnitBase
     offset: 0
   - type: Component::GUI::AtkResNode*
-    name: UnkResNode220
+    name: UnkResNode230
     offset: 560
   - type: Component::GUI::AtkComponentCheckBox*
     name: GatheredItemComponentCheckBox1
@@ -64392,78 +64094,53 @@ structs:
   - type: Component::GUI::AtkComponentCheckBox*
     name: GatheredItemComponentCheckBox8
     offset: 624
-  - type: Component::GUI::AtkTextNode*
-    name: InventoryQuantityTextNode
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: IntegrityGaugeBar
     offset: 632
   - type: Component::GUI::AtkResNode*
-    name: UnkResNode270
+    name: UnkResNode280
     offset: 640
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: QuickGatheringComponentCheckBox
+  - type: Component::GUI::AtkTextNode*
+    name: IntegrityLeftover
     offset: 648
   - type: Component::GUI::AtkResNode*
-    name: UnkResNode
+    name: UnkResNode290
     offset: 656
-  - type: unsigned __int64
-    name: unk288
+  - type: Component::GUI::AtkTextNode*
+    name: IntegrityTotal
     offset: 664
-  - type: unsigned __int64
-    name: unk290
+  - type: Component::GUI::AtkResNode*
+    name: UnkResNode2A0
     offset: 672
-  - type: unsigned __int64
-    name: unk298
+  - type: Component::GUI::AtkTextNode*
+    name: InventoryQuantityTextNode
     offset: 680
-  - type: unsigned __int64
-    name: unk2A0
+  - type: Component::GUI::AtkResNode*
+    name: UnkResNode2B0
     offset: 688
-  - type: unsigned __int64
-    name: unk2A8
+  - type: Component::GUI::AtkComponentCheckBox*
+    name: QuickGatheringComponentCheckBox
     offset: 696
-  - type: unsigned __int64
-    name: unk2B0
+  - type: Component::GUI::AtkResNode*
+    name: UnkResNode2C0
     offset: 704
-  - type: unsigned __int64
-    name: unk2B8
-    offset: 712
-  - type: unsigned __int64
-    name: unk2C0
-    offset: 720
   - type: unsigned int
-    name: GatheredItemId1
-    offset: 728
-  - type: unsigned int
-    name: GatheredItemId2
-    offset: 732
-  - type: unsigned int
-    name: GatheredItemId3
-    offset: 736
-  - type: unsigned int
-    name: GatheredItemId4
-    offset: 740
-  - type: unsigned int
-    name: GatheredItemId5
+    name: ItemFlags
     offset: 744
+    size: 8
   - type: unsigned int
-    name: GatheredItemId6
-    offset: 748
-  - type: unsigned int
-    name: GatheredItemId7
-    offset: 752
-  - type: unsigned int
-    name: GatheredItemId8
-    offset: 756
-  - type: unsigned __int64
-    name: unk2E8
-    offset: 760
-  - type: unsigned __int64
-    name: unk2F0
-    offset: 768
-  - type: int
-    name: unk2F8
+    name: ItemIds
     offset: 776
-  - type: __int16
-    name: unk2FC
-    offset: 780
+    size: 8
+  - type: byte
+    name: TooltipActive
+    offset: 816
+  - type: byte
+    name: ItemListHovered
+    offset: 817
+  - type: byte
+    name: GatherStatus
+    offset: 821
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -64777,9 +64454,72 @@ structs:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
     offset: 0
+  - type: Component::GUI::AtkComponentIcon*
+    name: ItemIcon
+    offset: 560
+  - type: Component::GUI::AtkTextNode*
+    name: ItemName
+    offset: 568
+  - type: Component::GUI::AtkTextNode*
+    name: ObtainChance
+    offset: 584
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: ScourDragDrop
+    offset: 672
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: BrazenDragDrop
+    offset: 856
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: MeticulousDragDrop
+    offset: 1040
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: ScrutinyDragDrop
+    offset: 1248
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: CollectorsFocusDragDrop
+    offset: 1440
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: PrimingTouchDragDrop
+    offset: 1680
   - type: Component::GUI::AtkComponentDragDrop*
     name: CollectDragDrop
-    offset: 920
+    offset: 1864
+  - type: Component::GUI::AtkTextNode*
+    name: GPLeftover
+    offset: 2120
+  - type: Component::GUI::AtkTextNode*
+    name: GPTotal
+    offset: 2128
+  - type: Component::GUI::AtkTextNode*
+    name: IntegrityLeftover
+    offset: 2152
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: IntegrityGauge
+    offset: 2160
+  - type: Component::GUI::AtkTextNode*
+    name: IntegrityTotal
+    offset: 2176
+  - type: Client::System::String::Utf8String
+    name: ScrutinyCheckboxTooltip
+    offset: 2312
+  - type: Client::System::String::Utf8String
+    name: CollectorsIntuitionTooltip
+    offset: 2416
+  - type: Client::System::String::Utf8String
+    name: CollectorsIntuitionCheckboxTooltip
+    offset: 2520
+  - type: Client::System::String::Utf8String
+    name: CollectorsStandardTooltip
+    offset: 2624
+  - type: Client::System::String::Utf8String
+    name: CollectorsHighStandardTooltip
+    offset: 2728
+  - type: Client::System::String::Utf8String
+    name: MeticulousEffectTooltip
+    offset: 2832
+  - type: Client::System::String::Utf8String
+    name: QuestionMarkTooltip
+    offset: 2936
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -74370,22 +74110,22 @@ structs:
   - type: Client::System::String::Utf8String
     name: FilterLabels
     offset: 1208
-    size: 96
+    size: 99
   - type: Component::GUI::AtkComponentTextInput*
     name: SearchTextInput
-    offset: 11712
+    offset: 12024
   - type: Component::GUI::AtkComponentButton*
     name: SearchButton
-    offset: 11720
+    offset: 12032
   - type: Component::GUI::AtkComponentList*
     name: ResultsList
-    offset: 11760
+    offset: 12072
   - type: Component::GUI::AtkComponentCheckBox*
     name: PartialSearchCheckBox
-    offset: 12832
+    offset: 13176
   - type: byte
     name: PartialMatch
-    offset: 16107
+    offset: 16451
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -101344,17 +101084,17 @@ structs:
     offset: 72
   - type: float
     name: ZoomRatio
-    offset: 196
+    offset: 236
   - type: Client::UI::Misc::CharaViewItem
     name: Items
-    offset: 208
+    offset: 248
     size: 14
   - type: byte
     name: CharacterDataCopied
-    offset: 696
+    offset: 776
   - type: byte
     name: CharacterLoaded
-    offset: 697
+    offset: 777
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -101547,13 +101287,13 @@ structs:
     offset: 904
   - type: byte
     name: CharacterVisible
-    offset: 1008
+    offset: 1024
   - type: byte
     name: CharaViewPortraitCharacterDataCopied
-    offset: 1009
+    offset: 1025
   - type: byte
     name: CharaViewPortraitCharacterLoaded
-    offset: 1010
+    offset: 1026
   virtual_functions:
   - name: SetCameraDistance
     offset: 32
@@ -102262,32 +102002,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy24*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy24*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxy24*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxy24*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxy24*
@@ -102305,32 +102039,32 @@ structs:
   name: InfoProxyCrossRealm
   namespace: Client.UI.Info
   union: False
-  size: 5664
+  size: 6720
   fields:
   - type: Client::UI::Info::InfoProxyInterface
     name: InfoProxyInterface
     offset: 0
   - type: byte
     name: LocalPlayerGroupIndex
-    offset: 909
+    offset: 1133
   - type: byte
     name: GroupCount
-    offset: 910
+    offset: 1134
   - type: byte
     name: IsCrossRealm
-    offset: 912
+    offset: 1136
   - type: byte
     name: IsInAllianceRaid
-    offset: 913
+    offset: 1137
   - type: byte
     name: IsPartyLeader
-    offset: 914
+    offset: 1138
   - type: byte
     name: IsInCrossRealmParty
-    offset: 915
+    offset: 1139
   - type: Client::UI::Info::CrossRealmGroup
     name: CrossRealmGroups
-    offset: 928
+    offset: 1152
     size: 6
   virtual_functions:
   - name: AddData
@@ -102343,32 +102077,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCrossRealm*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCrossRealm*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyCrossRealm*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyCrossRealm*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyCrossRealm*
@@ -102428,32 +102156,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyItemSearch*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyItemSearch*
@@ -102565,32 +102287,26 @@ structs:
       name: a2
     - type: unsigned int
       name: a3
-  - name: RemoveData
+  - name: ClearData
     offset: 16
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyLetter*
       name: this
-  - name: ClearData
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyLetter*
-      name: this
   - name: RequestData
-    offset: 40
+    offset: 32
     return_type: byte
     parameters:
     - type: Client::UI::Info::InfoProxyLetter*
       name: this
   - name: EndRequest
-    offset: 48
+    offset: 40
     return_type: void
     parameters:
     - type: Client::UI::Info::InfoProxyLetter*
       name: this
   - name: GetEntryCount
-    offset: 56
+    offset: 48
     return_type: unsigned int
     parameters:
     - type: Client::UI::Info::InfoProxyLetter*
@@ -104083,30 +103799,50 @@ structs:
   - type: Client::System::String::Utf8String
     name: ChannelLabel
     offset: 72
+  - type: Client::System::String::Utf8String
+    name: TellPlayerName
+    offset: 184
+  - type: unsigned __int16
+    name: TellWorldId
+    offset: 288
+  - type: Client::System::String::Utf8String
+    name: ChannelSelectorLSNames
+    offset: 312
+    size: 8
+  - type: Client::System::String::Utf8String
+    name: ChannelSelectorCWLSNames
+    offset: 1144
+    size: 8
   - type: Client::Game::InventoryItem
     name: LinkedItem
     offset: 2208
+  - type: byte
+    name: LinkedItemQuality
+    offset: 2272
   - type: Client::System::String::Utf8String
     name: LinkedItemName
-    offset: 2272
+    offset: 2280
   - type: unsigned int
     name: ContextItemId
-    offset: 2376
+    offset: 2384
   - type: unsigned __int64
     name: LinkedPartyFinderId
-    offset: 2392
+    offset: 2400
   - type: Client::System::String::Utf8String
     name: LinkedPartyFinderLeaderName
-    offset: 2408
+    offset: 2416
   - type: unsigned int
     name: LinkedQuestId
-    offset: 2512
+    offset: 2520
   - type: Client::System::String::Utf8String
     name: LinkedQuestName
-    offset: 2520
+    offset: 2528
   - type: unsigned int
     name: ContextStatusId
-    offset: 2624
+    offset: 2632
+  - type: Client::System::String::Utf8String
+    name: ContextStatusName
+    offset: 2640
   - type: int
     name: ReplyChannel
     offset: 2852
@@ -104610,9 +104346,6 @@ structs:
   - type: Client::UI::Info::InfoProxyCommonList::CharacterData*
     name: CurrentContextMenuTarget
     offset: 3600
-  - type: Client::Game::Object::GameObjectId
-    name: TargetObjectId
-    offset: 3704
   - type: Client::System::String::Utf8String
     name: TargetName
     offset: 3712
@@ -104631,6 +104364,9 @@ structs:
   - type: unsigned __int64
     name: YesNoTargetContentId
     offset: 3952
+  - type: Client::Game::Object::GameObjectId
+    name: TargetObjectId
+    offset: 3960
   - type: Client::Game::Object::GameObjectId
     name: YesNoTargetObjectId
     offset: 3968
@@ -104991,17 +104727,26 @@ structs:
   name: AgentCraftActionSimulator
   namespace: Client.UI.Agent
   union: False
-  size: 144
+  size: 104
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
     offset: 0
-  - type: Client::UI::Agent::ProgressEfficiencyCalculations*
+  - type: StdVector<Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation>
     name: Progress
     offset: 40
-  - type: Client::UI::Agent::QualityEfficiencyCalculations*
+  - type: StdVector<Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation>
     name: Quality
     offset: 64
+  - type: int
+    name: SelectedTabIndex
+    offset: 88
+  - type: int
+    name: ContextSelectIndex
+    offset: 92
+  - type: unsigned int
+    name: ContextSelectedActionId
+    offset: 96
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -107371,57 +107116,61 @@ structs:
     name: AgentInterface
     offset: 0
   - type: unsigned int
-    name: CurrentBattleCharaTargetLevel
-    offset: 2524
-  - type: unsigned int
     name: CastBarAddonId
-    offset: 2728
+    offset: 2840
   - type: unsigned int
     name: CurrentTargetId
-    offset: 2736
+    offset: 2872
   - type: int
     name: TargetCounter
-    offset: 2744
+    offset: 2880
   - type: unsigned int
     name: TargetPartyMemberId
-    offset: 2752
+    offset: 2888
   - type: int
     name: TargetSwitchToSelfCounter
-    offset: 2760
+    offset: 2896
+  - type: unsigned int
+    name: CurrentBattleCharaTargetLevel
+    offset: 2900
   - type: int
     name: CompanionSummonTimer
-    offset: 3256
+    offset: 3392
   - type: Client::UI::Agent::HudPartyMember
     name: PartyMembers
-    offset: 3272
+    offset: 3408
     size: 10
   - type: __int16
     name: PartyMemberCount
-    offset: 4792
+    offset: 4928
   - type: unsigned int
     name: PartyTitleAddonId
-    offset: 4800
+    offset: 4936
   - type: unsigned int
     name: RaidMemberIds
-    offset: 4804
+    offset: 4940
     size: 40
   - type: int
     name: RaidGroupSize
-    offset: 4964
+    offset: 5100
   - type: Client::UI::Agent::HudPartyMemberEnmity
     name: HudPartyMemberEnmity
-    offset: 4984
+    offset: 5120
     size: 10
   - type: Client::UI::Agent::HudPartyMemberEnmity*
     name: HudPartyMemberEnmityPtrs
-    offset: 5104
+    offset: 5240
     size: 10
+  - type: Client::UI::Agent::HudQueuedBattleTalk
+    name: QueuedBattleTalks
+    offset: 13616
+    size: 16
   - type: StdVector<Client::Game::UI::MapMarkerData>
     name: MapMarkers
-    offset: 18440
+    offset: 18960
   - type: StdVector<Client::Game::UI::MapMarkerData*>
     name: MapMarkerPtrs
-    offset: 18464
+    offset: 18984
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -109226,34 +108975,34 @@ structs:
     name: GilRow
     offset: 1184
   - type: __int64
-    name: WhiteCrafterScriptRow
+    name: CrafterScripRow1
     offset: 1192
   - type: __int64
-    name: PurpleCrafterScriptRow
+    name: CrafterScripRow2
     offset: 1200
   - type: __int64
-    name: WhiteGathererScriptRow
+    name: GathererScripRow1
     offset: 1208
   - type: __int64
-    name: PurpleGathererScriptRow
+    name: GathererScripRow2
     offset: 1216
   - type: __int64
     name: FishingSpotRow
     offset: 1224
   - type: __int64
-    name: SpearFishingNotebookRow
+    name: SpearfishingNotebookRow
     offset: 1232
   - type: unsigned int
-    name: WhiteCrafterScrriptId
+    name: CrafterScripId1
     offset: 1240
   - type: unsigned int
-    name: PurpleCrafterScriptId
+    name: CrafterScripId2
     offset: 1244
   - type: unsigned int
-    name: WhiteGathererScriptId
+    name: GathererScripId1
     offset: 1248
   - type: unsigned int
-    name: PurpleGathererScriptId
+    name: GathererScripId2
     offset: 1252
   - type: unsigned int
     name: TimeRemainingHours
@@ -110074,7 +109823,7 @@ structs:
   name: CharacterBase
   namespace: Client.Graphics.Scene
   union: False
-  size: 2288
+  size: 2512
   fields:
   - type: Client::Graphics::Scene::DrawObject
     name: DrawObject
@@ -110105,61 +109854,64 @@ structs:
     offset: 336
   - type: Client::Graphics::Render::ModelRenderer::Callback
     name: RenderModelCallback
-    offset: 344
+    offset: 368
   - type: Client::Graphics::Render::ModelRenderer::Callback
     name: RenderMaterialCallback
-    offset: 376
+    offset: 400
   - type: Client::Graphics::Render::ModelRenderer::Callback
     name: UnkCallback3
-    offset: 408
+    offset: 432
   - type: float
     name: VfxScale
     offset: 548
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: CharacterDataCBuffer
-    offset: 576
+    offset: 624
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: UnkCBuffer
+    offset: 632
   - type: Client::Graphics::Kernel::Texture**
     name: ColorTableTextures
-    offset: 600
+    offset: 648
   - type: Common::Math::Vector4
     name: Tint
-    offset: 608
+    offset: 656
   - type: float
     name: WeatherWetness
-    offset: 688
+    offset: 736
   - type: float
     name: SwimmingWetness
-    offset: 692
+    offset: 740
   - type: float
     name: WetnessDepth
-    offset: 696
+    offset: 744
   - type: float
     name: ForcedWetness
-    offset: 700
+    offset: 748
   - type: unsigned int
     name: HasModelInSlotLoaded
-    offset: 712
+    offset: 760
   - type: unsigned int
     name: HasModelFilesInSlotLoaded
-    offset: 716
+    offset: 764
   - type: __int64
     name: TempData
-    offset: 720
+    offset: 768
   - type: __int64
     name: TempSlotData
-    offset: 728
+    offset: 776
   - type: Client::Graphics::Render::Material**
     name: Materials
-    offset: 744
+    offset: 792
   - type: __int64
     name: EID
-    offset: 752
+    offset: 800
   - type: __int64*
     name: IMCArray
-    offset: 760
+    offset: 808
   - type: byte
     name: AnimationVariant
-    offset: 2280
+    offset: 2328
   virtual_functions:
   - name: GetModelType
     offset: 400
@@ -110168,7 +109920,7 @@ structs:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
   - name: OnRenderModel
-    offset: 488
+    offset: 504
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110176,7 +109928,7 @@ structs:
     - type: Client::Graphics::Render::Model*
       name: model
   - name: OnRenderMaterial
-    offset: 496
+    offset: 512
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110184,7 +109936,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: param
   - name: FlagSlotForUpdate
-    offset: 536
+    offset: 560
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110194,7 +109946,7 @@ structs:
     - type: Client::Game::Character::EquipmentModelId*
       name: slotBytes
   - name: ResolveRootPath
-    offset: 568
+    offset: 600
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110204,7 +109956,7 @@ structs:
     - type: unsigned __int64
       name: pathBufferSize
   - name: ResolveSklbPath
-    offset: 576
+    offset: 608
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110216,7 +109968,7 @@ structs:
     - type: unsigned int
       name: partialSkeletonIndex
   - name: ResolveMdlPath
-    offset: 584
+    offset: 616
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110228,7 +109980,7 @@ structs:
     - type: unsigned int
       name: slotIndex
   - name: ResolveSkpPath
-    offset: 592
+    offset: 624
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110240,7 +109992,7 @@ structs:
     - type: unsigned int
       name: partialSkeletonIndex
   - name: ResolvePhybPath
-    offset: 600
+    offset: 632
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110252,7 +110004,7 @@ structs:
     - type: unsigned int
       name: partialSkeletonIndex
   - name: ResolvePapPath
-    offset: 608
+    offset: 672
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110266,7 +110018,7 @@ structs:
     - type: byte*
       name: animationName
   - name: ResolveTmbPath
-    offset: 616
+    offset: 680
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110278,7 +110030,7 @@ structs:
     - type: byte*
       name: timelineName
   - name: ResolveMaterialPapPath
-    offset: 632
+    offset: 696
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110292,7 +110044,7 @@ structs:
     - type: unsigned int
       name: unkSId
   - name: ResolveImcPath
-    offset: 648
+    offset: 712
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110304,7 +110056,7 @@ structs:
     - type: unsigned int
       name: slotIndex
   - name: ResolveMtrlPath
-    offset: 656
+    offset: 720
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110318,7 +110070,7 @@ structs:
     - type: byte*
       name: mtrlFileName
   - name: ResolveDecalPath
-    offset: 664
+    offset: 736
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110330,7 +110082,7 @@ structs:
     - type: unsigned int
       name: slotIndex
   - name: ResolveVfxPath
-    offset: 672
+    offset: 744
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110344,7 +110096,7 @@ structs:
     - type: unsigned int*
       name: unkOutParam
   - name: ResolveEidPath
-    offset: 680
+    offset: 752
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110354,7 +110106,7 @@ structs:
     - type: unsigned __int64
       name: pathBufferSize
   - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 760
+    offset: 864
     return_type: byte
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110362,7 +110114,7 @@ structs:
     - type: byte
       name: slot
   - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 768
+    offset: 872
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110372,7 +110124,7 @@ structs:
     - type: byte
       name: isVisible
   - name: SetFreeCompanyCrest
-    offset: 776
+    offset: 880
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110396,32 +110148,32 @@ structs:
   name: Demihuman
   namespace: Client.Graphics.Scene
   union: False
-  size: 2424
+  size: 2688
   fields:
   - type: Client::Graphics::Scene::CharacterBase
     name: CharacterBase
     offset: 0
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: HeadDecal
-    offset: 2344
+    offset: 2592
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: TopDecal
-    offset: 2352
+    offset: 2600
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: ArmsDecal
-    offset: 2360
+    offset: 2608
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: LegsDecal
-    offset: 2368
+    offset: 2616
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: FeetDecal
-    offset: 2376
+    offset: 2624
   - type: Client::Graphics::Kernel::Texture*
     name: FreeCompanyCrest
-    offset: 2392
+    offset: 2640
   - type: unsigned int
     name: SlotFreeCompanyCrestBitfield
-    offset: 2400
+    offset: 2648
   virtual_functions:
   - name: GetObjectType
     offset: 16
@@ -110436,7 +110188,7 @@ structs:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
   - name: OnRenderModel
-    offset: 488
+    offset: 504
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110444,7 +110196,7 @@ structs:
     - type: Client::Graphics::Render::Model*
       name: a2
   - name: OnRenderMaterial
-    offset: 496
+    offset: 512
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110452,7 +110204,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
-    offset: 536
+    offset: 560
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110462,7 +110214,7 @@ structs:
     - type: Client::Game::Character::EquipmentModelId*
       name: a3
   - name: ResolveRootPath
-    offset: 568
+    offset: 600
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110472,7 +110224,7 @@ structs:
     - type: unsigned __int64
       name: a3
   - name: ResolveSklbPath
-    offset: 576
+    offset: 608
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110484,7 +110236,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveMdlPath
-    offset: 584
+    offset: 616
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110496,7 +110248,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveSkpPath
-    offset: 592
+    offset: 624
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110508,7 +110260,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolvePhybPath
-    offset: 600
+    offset: 632
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110520,7 +110272,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolvePapPath
-    offset: 608
+    offset: 672
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110534,7 +110286,7 @@ structs:
     - type: byte*
       name: a5
   - name: ResolveTmbPath
-    offset: 616
+    offset: 680
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110546,7 +110298,7 @@ structs:
     - type: byte*
       name: a4
   - name: ResolveMaterialPapPath
-    offset: 632
+    offset: 696
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110560,7 +110312,7 @@ structs:
     - type: unsigned int
       name: a5
   - name: ResolveImcPath
-    offset: 648
+    offset: 712
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110572,7 +110324,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveMtrlPath
-    offset: 656
+    offset: 720
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110586,7 +110338,7 @@ structs:
     - type: byte*
       name: a5
   - name: ResolveDecalPath
-    offset: 664
+    offset: 736
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110598,7 +110350,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveVfxPath
-    offset: 672
+    offset: 744
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110612,7 +110364,7 @@ structs:
     - type: unsigned int*
       name: a5
   - name: ResolveEidPath
-    offset: 680
+    offset: 752
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110622,7 +110374,7 @@ structs:
     - type: unsigned __int64
       name: a3
   - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 760
+    offset: 864
     return_type: byte
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110630,7 +110382,7 @@ structs:
     - type: byte
       name: a2
   - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 768
+    offset: 872
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110640,7 +110392,7 @@ structs:
     - type: byte
       name: a3
   - name: SetFreeCompanyCrest
-    offset: 776
+    offset: 880
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110676,113 +110428,119 @@ structs:
   name: Human
   namespace: Client.Graphics.Scene
   union: False
-  size: 2688
+  size: 3168
   fields:
   - type: Client::Graphics::Scene::CharacterBase
     name: CharacterBase
     offset: 0
   - type: Client::Game::Character::CustomizeData
     name: Customize
-    offset: 2288
+    offset: 2512
   - type: unsigned int
     name: SlotNeedsUpdateBitfield
-    offset: 2316
+    offset: 2540
   - type: Client::Game::Character::EquipmentModelId
     name: Head
-    offset: 2320
+    offset: 2544
   - type: Client::Game::Character::EquipmentModelId
     name: Top
-    offset: 2324
+    offset: 2552
   - type: Client::Game::Character::EquipmentModelId
     name: Arms
-    offset: 2328
+    offset: 2560
   - type: Client::Game::Character::EquipmentModelId
     name: Legs
-    offset: 2332
+    offset: 2568
   - type: Client::Game::Character::EquipmentModelId
     name: Feet
-    offset: 2336
+    offset: 2576
   - type: Client::Game::Character::EquipmentModelId
     name: Ear
-    offset: 2340
+    offset: 2584
   - type: Client::Game::Character::EquipmentModelId
     name: Neck
-    offset: 2344
+    offset: 2592
   - type: Client::Game::Character::EquipmentModelId
     name: Wrist
-    offset: 2348
+    offset: 2600
   - type: Client::Game::Character::EquipmentModelId
     name: RFinger
-    offset: 2352
+    offset: 2608
   - type: Client::Game::Character::EquipmentModelId
     name: LFinger
-    offset: 2356
+    offset: 2616
+  - type: Client::Game::Character::EquipmentModelId
+    name: Glasses0
+    offset: 2624
+  - type: Client::Game::Character::EquipmentModelId
+    name: Glasses1
+    offset: 2632
   - type: unsigned __int16
     name: RaceSexId
-    offset: 2360
+    offset: 2640
   - type: unsigned __int16
     name: HairId
-    offset: 2362
+    offset: 2642
   - type: unsigned __int16
     name: FaceId
-    offset: 2364
+    offset: 2644
   - type: unsigned __int16
     name: TailEarId
-    offset: 2366
+    offset: 2646
   - type: unsigned __int16
     name: FurId
-    offset: 2368
+    offset: 2648
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: HeadDecal
-    offset: 2432
+    offset: 2728
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: TopDecal
-    offset: 2440
+    offset: 2736
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: ArmsDecal
-    offset: 2448
+    offset: 2744
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: LegsDecal
-    offset: 2456
+    offset: 2752
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: FeetDecal
-    offset: 2464
+    offset: 2760
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: EarDecal
-    offset: 2472
+    offset: 2768
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: NeckDecal
-    offset: 2480
+    offset: 2776
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: WristDecal
-    offset: 2488
+    offset: 2784
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: RFingerDecal
-    offset: 2496
+    offset: 2792
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: LFingerDecal
-    offset: 2504
+    offset: 2800
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: CustomizeParameterCBuffer
-    offset: 2520
+    offset: 2976
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: DecalColorCBuffer
-    offset: 2528
+    offset: 2984
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: Decal
-    offset: 2536
+    offset: 2992
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: LegacyBodyDecal
-    offset: 2544
+    offset: 3000
   - type: Client::Graphics::Kernel::Texture*
     name: FreeCompanyCrest
-    offset: 2552
+    offset: 3008
   - type: unsigned int
     name: SlotFreeCompanyCrestBitfield
-    offset: 2560
+    offset: 3016
   - type: byte*
     name: ChangedEquipData
-    offset: 2616
+    offset: 3072
   virtual_functions:
   - name: GetObjectType
     offset: 16
@@ -110797,7 +110555,7 @@ structs:
     - type: Client::Graphics::Scene::Human*
       name: this
   - name: OnRenderModel
-    offset: 488
+    offset: 504
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110805,7 +110563,7 @@ structs:
     - type: Client::Graphics::Render::Model*
       name: a2
   - name: OnRenderMaterial
-    offset: 496
+    offset: 512
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110813,7 +110571,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
-    offset: 536
+    offset: 560
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110823,7 +110581,7 @@ structs:
     - type: Client::Game::Character::EquipmentModelId*
       name: a3
   - name: ResolveRootPath
-    offset: 568
+    offset: 600
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110833,7 +110591,7 @@ structs:
     - type: unsigned __int64
       name: a3
   - name: ResolveSklbPath
-    offset: 576
+    offset: 608
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110845,7 +110603,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveMdlPath
-    offset: 584
+    offset: 616
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110857,7 +110615,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveSkpPath
-    offset: 592
+    offset: 624
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110869,7 +110627,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolvePhybPath
-    offset: 600
+    offset: 632
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110881,7 +110639,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolvePapPath
-    offset: 608
+    offset: 672
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110895,7 +110653,7 @@ structs:
     - type: byte*
       name: a5
   - name: ResolveTmbPath
-    offset: 616
+    offset: 680
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110907,7 +110665,7 @@ structs:
     - type: byte*
       name: a4
   - name: ResolveMaterialPapPath
-    offset: 632
+    offset: 696
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110921,7 +110679,7 @@ structs:
     - type: unsigned int
       name: a5
   - name: ResolveImcPath
-    offset: 648
+    offset: 712
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110933,7 +110691,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveMtrlPath
-    offset: 656
+    offset: 720
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110947,7 +110705,7 @@ structs:
     - type: byte*
       name: a5
   - name: ResolveDecalPath
-    offset: 664
+    offset: 736
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110959,7 +110717,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveVfxPath
-    offset: 672
+    offset: 744
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110973,7 +110731,7 @@ structs:
     - type: unsigned int*
       name: a5
   - name: ResolveEidPath
-    offset: 680
+    offset: 752
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110983,7 +110741,7 @@ structs:
     - type: unsigned __int64
       name: a3
   - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 760
+    offset: 864
     return_type: byte
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110991,7 +110749,7 @@ structs:
     - type: byte
       name: a2
   - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 768
+    offset: 872
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -111001,7 +110759,7 @@ structs:
     - type: byte
       name: a3
   - name: SetFreeCompanyCrest
-    offset: 776
+    offset: 880
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -111041,23 +110799,23 @@ structs:
   name: Monster
   namespace: Client.Graphics.Scene
   union: False
-  size: 2336
+  size: 2560
   fields:
   - type: Client::Graphics::Scene::CharacterBase
     name: CharacterBase
     offset: 0
   - type: unsigned __int16
     name: ModelSetId
-    offset: 2288
+    offset: 2512
   - type: unsigned __int16
     name: SecondaryId
-    offset: 2290
+    offset: 2514
   - type: unsigned __int16
     name: Variant
-    offset: 2292
+    offset: 2516
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: Decal
-    offset: 2304
+    offset: 2528
   virtual_functions:
   - name: GetObjectType
     offset: 16
@@ -111072,7 +110830,7 @@ structs:
     - type: Client::Graphics::Scene::Monster*
       name: this
   - name: OnRenderModel
-    offset: 488
+    offset: 504
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111080,7 +110838,7 @@ structs:
     - type: Client::Graphics::Render::Model*
       name: a2
   - name: OnRenderMaterial
-    offset: 496
+    offset: 512
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111088,7 +110846,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
-    offset: 536
+    offset: 560
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111098,7 +110856,7 @@ structs:
     - type: Client::Game::Character::EquipmentModelId*
       name: a3
   - name: ResolveRootPath
-    offset: 568
+    offset: 600
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111108,7 +110866,7 @@ structs:
     - type: unsigned __int64
       name: a3
   - name: ResolveSklbPath
-    offset: 576
+    offset: 608
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111120,7 +110878,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveMdlPath
-    offset: 584
+    offset: 616
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111132,7 +110890,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveSkpPath
-    offset: 592
+    offset: 624
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111144,7 +110902,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolvePhybPath
-    offset: 600
+    offset: 632
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111156,7 +110914,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolvePapPath
-    offset: 608
+    offset: 672
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111170,7 +110928,7 @@ structs:
     - type: byte*
       name: a5
   - name: ResolveTmbPath
-    offset: 616
+    offset: 680
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111182,7 +110940,7 @@ structs:
     - type: byte*
       name: a4
   - name: ResolveMaterialPapPath
-    offset: 632
+    offset: 696
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111196,7 +110954,7 @@ structs:
     - type: unsigned int
       name: a5
   - name: ResolveImcPath
-    offset: 648
+    offset: 712
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111208,7 +110966,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveMtrlPath
-    offset: 656
+    offset: 720
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111222,7 +110980,7 @@ structs:
     - type: byte*
       name: a5
   - name: ResolveDecalPath
-    offset: 664
+    offset: 736
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111234,7 +110992,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveVfxPath
-    offset: 672
+    offset: 744
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111248,7 +111006,7 @@ structs:
     - type: unsigned int*
       name: a5
   - name: ResolveEidPath
-    offset: 680
+    offset: 752
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111258,7 +111016,7 @@ structs:
     - type: unsigned __int64
       name: a3
   - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 760
+    offset: 864
     return_type: byte
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111266,7 +111024,7 @@ structs:
     - type: byte
       name: a2
   - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 768
+    offset: 872
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111276,7 +111034,7 @@ structs:
     - type: byte
       name: a3
   - name: SetFreeCompanyCrest
-    offset: 776
+    offset: 880
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111296,41 +111054,44 @@ structs:
   name: Weapon
   namespace: Client.Graphics.Scene
   union: False
-  size: 2336
+  size: 2576
   fields:
   - type: Client::Graphics::Scene::CharacterBase
     name: CharacterBase
     offset: 0
   - type: unsigned __int16
     name: ModelSetId
-    offset: 2288
+    offset: 2512
   - type: unsigned __int16
     name: SecondaryId
-    offset: 2290
+    offset: 2514
   - type: unsigned __int16
     name: Variant
-    offset: 2292
-  - type: unsigned __int16
-    name: ModelUnknown
-    offset: 2294
+    offset: 2516
+  - type: byte
+    name: Stain0
+    offset: 2518
+  - type: byte
+    name: Stain1
+    offset: 2519
   - type: byte
     name: MaterialId
-    offset: 2298
+    offset: 2522
   - type: byte
     name: DecalId
-    offset: 2299
+    offset: 2523
   - type: byte
     name: VfxId
-    offset: 2302
+    offset: 2526
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: Decal
-    offset: 2304
+    offset: 2536
   - type: Client::Graphics::Kernel::Texture*
     name: FreeCompanyCrest
-    offset: 2312
+    offset: 2544
   - type: unsigned int
     name: SlotFreeCompanyCrestBitfield
-    offset: 2320
+    offset: 2552
   virtual_functions:
   - name: GetObjectType
     offset: 16
@@ -111345,7 +111106,7 @@ structs:
     - type: Client::Graphics::Scene::Weapon*
       name: this
   - name: OnRenderModel
-    offset: 488
+    offset: 504
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111353,7 +111114,7 @@ structs:
     - type: Client::Graphics::Render::Model*
       name: a2
   - name: OnRenderMaterial
-    offset: 496
+    offset: 512
     return_type: __int64
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111361,7 +111122,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
-    offset: 536
+    offset: 560
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111371,7 +111132,7 @@ structs:
     - type: Client::Game::Character::EquipmentModelId*
       name: a3
   - name: ResolveRootPath
-    offset: 568
+    offset: 600
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111381,7 +111142,7 @@ structs:
     - type: unsigned __int64
       name: a3
   - name: ResolveSklbPath
-    offset: 576
+    offset: 608
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111393,7 +111154,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveMdlPath
-    offset: 584
+    offset: 616
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111405,7 +111166,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveSkpPath
-    offset: 592
+    offset: 624
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111417,7 +111178,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolvePhybPath
-    offset: 600
+    offset: 632
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111429,7 +111190,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolvePapPath
-    offset: 608
+    offset: 672
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111443,7 +111204,7 @@ structs:
     - type: byte*
       name: a5
   - name: ResolveTmbPath
-    offset: 616
+    offset: 680
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111455,7 +111216,7 @@ structs:
     - type: byte*
       name: a4
   - name: ResolveMaterialPapPath
-    offset: 632
+    offset: 696
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111469,7 +111230,7 @@ structs:
     - type: unsigned int
       name: a5
   - name: ResolveImcPath
-    offset: 648
+    offset: 712
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111481,7 +111242,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveMtrlPath
-    offset: 656
+    offset: 720
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111495,7 +111256,7 @@ structs:
     - type: byte*
       name: a5
   - name: ResolveDecalPath
-    offset: 664
+    offset: 736
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111507,7 +111268,7 @@ structs:
     - type: unsigned int
       name: a4
   - name: ResolveVfxPath
-    offset: 672
+    offset: 744
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111521,7 +111282,7 @@ structs:
     - type: unsigned int*
       name: a5
   - name: ResolveEidPath
-    offset: 680
+    offset: 752
     return_type: byte*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111531,7 +111292,7 @@ structs:
     - type: unsigned __int64
       name: a3
   - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 760
+    offset: 864
     return_type: byte
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111539,7 +111300,7 @@ structs:
     - type: byte
       name: a2
   - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 768
+    offset: 872
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111549,7 +111310,7 @@ structs:
     - type: byte
       name: a3
   - name: SetFreeCompanyCrest
-    offset: 776
+    offset: 880
     return_type: void
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -111561,7 +111322,7 @@ structs:
   name: Manager
   namespace: Client.Graphics.Render
   union: False
-  size: 186192
+  size: 335632
   fields:
   - type: Client::Graphics::Render::View
     name: Views
@@ -111569,14 +111330,14 @@ structs:
     size: 32
   - type: Client::Graphics::Render::ModelRenderer
     name: ModelRenderer
-    offset: 79456
+    offset: 141712
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::PartialSkeleton
   name: PartialSkeleton
   namespace: Client.Graphics.Render
   union: False
-  size: 448
+  size: 544
   fields:
   - type: Animation::Playback::SampleAndBlend::hkaSampleBlendJob
     name: Jobs
@@ -112293,6 +112054,9 @@ structs:
   - type: Client::Game::Character::BattleChara*
     name: LocalPlayer
     offset: 24240
+  - type: Common::Math::Matrix4x4
+    name: ViewProjectionMatrix
+    offset: 24256
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Character::ActionEffectHandler
@@ -112457,7 +112221,7 @@ structs:
   size: 1440
   fields:
   - type: Client::UI::Misc::RaptureHotbarModule::SavedHotbar
-    name: HotBars
+    name: Hotbars
     offset: 0
     size: 18
   virtual_functions: []
@@ -112476,67 +112240,67 @@ structs:
     offset: 8
   - type: Client::System::String::Utf8String
     name: Name
-    offset: 88
+    offset: 96
   - type: unsigned __int16
     name: WorldId
-    offset: 192
+    offset: 200
   - type: byte
     name: ClassJobId
-    offset: 194
+    offset: 202
   - type: byte
     name: GcRank
-    offset: 196
+    offset: 204
   - type: unsigned __int16
     name: Level
-    offset: 200
+    offset: 208
   - type: unsigned __int16
     name: TitleId
-    offset: 202
+    offset: 210
   - type: Client::System::String::Utf8String
     name: FreeCompany
-    offset: 216
+    offset: 224
   - type: Client::System::String::Utf8String
     name: SearchComment
-    offset: 320
+    offset: 328
   - type: Client::System::String::Utf8String
     name: SearchCommentRaw
-    offset: 424
+    offset: 432
   - type: unsigned int
     name: Activity1IconId
-    offset: 592
+    offset: 600
   - type: Client::System::String::Utf8String
     name: Activity1Name
-    offset: 600
+    offset: 608
   - type: unsigned int
     name: Activity2IconId
-    offset: 704
+    offset: 712
   - type: Client::System::String::Utf8String
     name: Activity2Name
-    offset: 712
+    offset: 720
   - type: unsigned int
     name: Activity3IconId
-    offset: 816
+    offset: 824
   - type: Client::System::String::Utf8String
     name: Activity3Name
-    offset: 824
+    offset: 832
   - type: unsigned int
     name: Activity4IconId
-    offset: 928
+    offset: 936
   - type: Client::System::String::Utf8String
     name: Activity4Name
-    offset: 936
+    offset: 944
   - type: unsigned int
     name: Activity5IconId
-    offset: 1040
+    offset: 1048
   - type: Client::System::String::Utf8String
     name: Activity5Name
-    offset: 1048
+    offset: 1056
   - type: unsigned int
     name: Activity6IconId
-    offset: 1152
+    offset: 1160
   - type: Client::System::String::Utf8String
     name: Activity6Name
-    offset: 1160
+    offset: 1168
   - type: Client::UI::Misc::CharaViewPortrait
     name: CharaView
     offset: 1344
@@ -113296,6 +113060,16 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
+- type: StdMap<unsigned __int64, int>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap<unsigned __int64, int, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: StdMap<unsigned int, unsigned int>
   name: StdMap`2
   namespace: ''
@@ -113472,6 +113246,16 @@ structs:
   union: False
   fields:
   - type: StdMap<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: StdMap<unsigned int, byte>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap<unsigned int, byte, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   virtual_functions: []
@@ -114079,6 +113863,9 @@ structs:
   - type: Component::GUI::AtkStage*
     name: AtkStage
     offset: 24
+  - type: byte
+    name: Flag1
+    offset: 332
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -114510,7 +114297,7 @@ structs:
     - type: Client::UI::AddonActionBar*
       name: this
   - name: PulseActionBarSlot
-    offset: 624
+    offset: 632
     return_type: void
     parameters:
     - type: Client::UI::AddonActionBar*
@@ -115864,6 +115651,78 @@ structs:
     offset: 56
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Info::InfoProxyBlacklist
+  name: InfoProxyBlacklist
+  namespace: Client.UI.Info
+  union: False
+  size: 5088
+  fields:
+  - type: Client::UI::Info::InfoProxyPageInterface
+    name: InfoProxyPageInterface
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: LastBlockedNameContacts
+    offset: 32
+  - type: Client::System::String::Utf8String
+    name: LastBlockedNameChat
+    offset: 136
+  - type: Client::UI::Info::InfoProxyBlacklist::BlockedCharacter
+    name: BlockedCharacters
+    offset: 240
+    size: 200
+  - type: int
+    name: BlockedCharactersCount
+    offset: 5040
+  - type: StdMap<unsigned __int64, int>
+    name: AccountIdMap
+    offset: 5056
+  - type: StdMap<unsigned __int64, int>
+    name: ContentIdMap
+    offset: 5072
+  virtual_functions:
+  - name: AddData
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Info::InfoProxyBlacklist*
+      name: this
+    - type: __int64
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: ClearData
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyBlacklist*
+      name: this
+  - name: RequestData
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::Info::InfoProxyBlacklist*
+      name: this
+  - name: EndRequest
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyBlacklist*
+      name: this
+  - name: GetEntryCount
+    offset: 48
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Info::InfoProxyBlacklist*
+      name: this
+  - name: AddPage
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyBlacklist*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions: []
 - type: Client::UI::Agent::AgentColorant
   name: AgentColorant
   namespace: Client.UI.Agent
@@ -116296,16 +116155,16 @@ structs:
     offset: 0
   - type: StdVector<Client::Game::UI::MapMarkerData*>
     name: EventMarkersPtrs
-    offset: 136
+    offset: 208
   - type: StdVector<Client::Game::UI::MapMarkerData>
     name: EventMarkers
-    offset: 160
+    offset: 232
   - type: StdVector<Client::UI::Agent::LinkedTooltipMarker>
     name: MinimapMSQLinkedTooltipMarkers
-    offset: 232
+    offset: 304
   - type: StdVector<Client::UI::Agent::LinkedTooltipMarker*>
     name: MinimapMSQLinkedTooltipMarkersList
-    offset: 256
+    offset: 328
   - type: StdMap<unsigned int, unsigned int>
     name: SymbolMap
     offset: 352
@@ -117885,6 +117744,519 @@ structs:
     offset: 16208
   virtual_functions: []
   member_functions: []
+- type: Client::Game::UI::PlayerState
+  name: PlayerState
+  namespace: Client.Game.UI
+  union: False
+  size: 2208
+  fields:
+  - type: byte
+    name: IsLoaded
+    offset: 0
+  - type: byte
+    name: CharacterName
+    offset: 1
+    size: 64
+  - type: byte
+    name: OnlineId
+    offset: 65
+    size: 17
+  - type: unsigned int
+    name: EntityId
+    offset: 100
+  - type: unsigned __int64
+    name: ContentId
+    offset: 104
+  - type: int
+    name: PenaltyTimestamps
+    offset: 112
+    size: 2
+  - type: byte
+    name: MaxLevel
+    offset: 121
+  - type: byte
+    name: MaxExpansion
+    offset: 122
+  - type: byte
+    name: Sex
+    offset: 123
+  - type: byte
+    name: Race
+    offset: 124
+  - type: byte
+    name: Tribe
+    offset: 125
+  - type: byte
+    name: CurrentClassJobId
+    offset: 126
+  - type: __int64
+    name: CurrentClassJobRow
+    offset: 128
+  - type: __int16
+    name: CurrentLevel
+    offset: 136
+  - type: __int16
+    name: ClassJobLevels
+    offset: 138
+    size: 32
+  - type: int
+    name: ClassJobExperience
+    offset: 204
+    size: 32
+  - type: __int16
+    name: SyncedLevel
+    offset: 332
+  - type: byte
+    name: IsLevelSynced
+    offset: 334
+  - type: byte
+    name: HasPremiumSaddlebag
+    offset: 335
+  - type: byte
+    name: GuardianDeity
+    offset: 338
+  - type: byte
+    name: BirthMonth
+    offset: 339
+  - type: byte
+    name: BirthDay
+    offset: 340
+  - type: byte
+    name: FirstClass
+    offset: 341
+  - type: byte
+    name: StartTown
+    offset: 342
+  - type: byte
+    name: QuestSpecialFlags
+    offset: 343
+  - type: unsigned __int16
+    name: ActiveFestivalIds
+    offset: 344
+    size: 4
+  - type: unsigned __int16
+    name: ActiveFestivalPhases
+    offset: 352
+    size: 4
+  - type: int
+    name: BaseStrength
+    offset: 368
+  - type: int
+    name: BaseDexterity
+    offset: 372
+  - type: int
+    name: BaseVitality
+    offset: 376
+  - type: int
+    name: BaseIntelligence
+    offset: 380
+  - type: int
+    name: BaseMind
+    offset: 384
+  - type: int
+    name: BasePiety
+    offset: 388
+  - type: int
+    name: Attributes
+    offset: 392
+    size: 74
+  - type: byte
+    name: GrandCompany
+    offset: 688
+  - type: byte
+    name: GCRankMaelstrom
+    offset: 689
+  - type: byte
+    name: GCRankTwinAdders
+    offset: 690
+  - type: byte
+    name: GCRankImmortalFlames
+    offset: 691
+  - type: unsigned __int16
+    name: HomeAetheryteId
+    offset: 692
+  - type: byte
+    name: FavouriteAetheryteCount
+    offset: 694
+  - type: unsigned __int16
+    name: FavouriteAetherytes
+    offset: 696
+    size: 4
+  - type: unsigned __int16
+    name: FreeAetheryteId
+    offset: 704
+  - type: unsigned __int16
+    name: FreeAetherytePlayStationPlus
+    offset: 706
+  - type: unsigned int
+    name: BaseRestedExperience
+    offset: 708
+  - type: byte
+    name: UnlockedMountsBitmask
+    offset: 733
+    size: 37
+  - type: byte
+    name: UnlockedOrnamentsBitmask
+    offset: 771
+    size: 7
+  - type: byte
+    name: UnlockedGlassesStylesBitmask
+    offset: 778
+    size: 2
+  - type: unsigned __int16
+    name: NumOwnedMounts
+    offset: 780
+  - type: byte
+    name: UnlockedSpearfishingNotebookBitmask
+    offset: 960
+    size: 7
+  - type: byte
+    name: CaughtFishBitmask
+    offset: 1002
+    size: 159
+  - type: unsigned int
+    name: NumFishCaught
+    offset: 1184
+  - type: unsigned int
+    name: FishingBait
+    offset: 1188
+  - type: byte
+    name: CaughtSpearfishBitmask
+    offset: 1200
+    size: 36
+  - type: unsigned int
+    name: NumSpearfishCaught
+    offset: 1240
+  - type: byte
+    name: ContentRouletteCompletion
+    offset: 1248
+    size: 12
+  - type: __int16
+    name: PlayerCommendations
+    offset: 1260
+  - type: byte
+    name: SelectedPoses
+    offset: 1262
+    size: 7
+  - type: byte
+    name: PlayerStateFlags1
+    offset: 1269
+  - type: byte
+    name: PlayerStateFlags2
+    offset: 1270
+  - type: byte
+    name: PlayerStateFlags3
+    offset: 1271
+  - type: byte
+    name: SightseeingLogUnlockState
+    offset: 1314
+  - type: byte
+    name: SightseeingLogUnlockStateEx
+    offset: 1315
+  - type: byte
+    name: UnlockedAdventureExPhaseBitmask
+    offset: 1316
+    size: 1
+  - type: byte
+    name: UnlockedAdventureBitmask
+    offset: 1360
+    size: 43
+  - type: byte
+    name: UnlockFlags
+    offset: 1409
+    size: 56
+  - type: byte
+    name: DeliveryLevel
+    offset: 1469
+  - type: byte
+    name: MeisterFlag
+    offset: 1471
+  - type: int
+    name: SquadronMissionCompletionTimestamp
+    offset: 1476
+  - type: int
+    name: SquadronTrainingCompletionTimestamp
+    offset: 1480
+  - type: unsigned __int16
+    name: ActiveGcArmyExpedition
+    offset: 1484
+  - type: unsigned __int16
+    name: ActiveGcArmyTraining
+    offset: 1486
+  - type: byte
+    name: HasNewGcArmyCandidate
+    offset: 1488
+  - type: byte
+    name: UnlockedMinerFolkloreTomeBitmask
+    offset: 1490
+    size: 2
+  - type: byte
+    name: UnlockedBotanistFolkloreTomeBitmask
+    offset: 1492
+    size: 2
+  - type: byte
+    name: UnlockedFishingFolkloreTomeBitmask
+    offset: 1494
+    size: 2
+  - type: byte
+    name: WeeklyBingoOrderData
+    offset: 1760
+    size: 16
+  - type: byte
+    name: WeeklyBingoRewardData
+    offset: 1776
+    size: 4
+  - type: unsigned __int16
+    name: _weeklyBingoStickers
+    offset: 1780
+  - type: unsigned int
+    name: _weeklyBingoFlags
+    offset: 1784
+  - type: byte
+    name: _weeklyBingoTaskStatus
+    offset: 1788
+    size: 4
+  - type: byte
+    name: WeeklyBingoRequestOpenBingoNo
+    offset: 1792
+  - type: byte
+    name: WeeklyBingoExpMultiplier
+    offset: 1852
+  - type: byte
+    name: WeeklyBingoUnk63
+    offset: 1853
+  - type: StdPair<unsigned int, unsigned int>
+    name: ContentKeyValueData
+    offset: 1860
+    size: 3
+  - type: byte
+    name: MentorVersion
+    offset: 2004
+  - type: unsigned int
+    name: DesynthesisLevels
+    offset: 2008
+    size: 8
+  - type: StdMap<unsigned int, byte>
+    name: TrackedStatuses
+    offset: 2136
+  - type: StdMap<unsigned int, byte>
+    name: TrackedActionUnlocks
+    offset: 2152
+  - type: StdMap<unsigned int, byte>
+    name: TrackedTraitUnlocks
+    offset: 2168
+  - type: byte
+    name: TrackedTraitUnlocksDirty
+    offset: 2184
+  - type: byte
+    name: TrackedActionUnlocksDirty
+    offset: 2185
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 3A 43 01
+    return_type: byte
+    name: GetGrandCompanyRank
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C
+    return_type: byte
+    name: GetBeastTribeRank
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: byte
+      name: beastTribeIndex
+  - signature: 0F B6 81 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 89 44 24 08
+    return_type: byte
+    name: IsMeisterFlagMaxCount
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 04 41 0F AB F6
+    return_type: byte
+    name: IsMeisterFlag
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: classJobId
+  - signature: E8 ?? ?? ?? ?? 38 43 45
+    return_type: byte
+    name: IsMeisterFlagAndHasSoulStoneEquipped
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: classJobId
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 57 41 8B CF
+    return_type: byte
+    name: IsMountUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: mountId
+  - signature: E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE
+    return_type: byte
+    name: IsOrnamentUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: ornamentId
+  - signature: E8 ?? ?? ?? ?? 88 44 1F 08
+    return_type: byte
+    name: IsOrchestrionRollUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: rollId
+  - signature: E8 ?? ?? ?? ?? 0F B6 4D 9A
+    return_type: byte
+    name: IsSecretRecipeBookUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: tomeId
+  - signature: E9 ?? ?? ?? ?? 0F B7 57 70
+    return_type: byte
+    name: IsFolkloreBookUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: tomeId
+  - signature: 8D 42 ?? 3C ?? 77 ?? 4C 8B 89
+    return_type: byte
+    name: IsMcGuffinUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: mcGuffinId
+  - signature: E9 ?? ?? ?? ?? 33 FF 90
+    return_type: byte
+    name: IsFramersKitUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: kitId
+  - signature: 4C 8B C9 85 D2 74 1D
+    return_type: byte
+    name: IsAetherCurrentZoneComplete
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: territoryTypeColumn32
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 90
+    return_type: byte
+    name: IsAdventureExPhaseComplete
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: adventureExPhaseId
+  - signature: 81 FA ?? ?? ?? ?? 73 1F 0F B6 C2
+    return_type: byte
+    name: IsAdventureComplete
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: adventureId
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3
+    return_type: byte
+    name: IsGlassesUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned __int16
+      name: glassesId
+  - signature: E8 ?? ?? ?? ?? 3B C3 0F 93 C0
+    return_type: unsigned int
+    name: GetWeeklyBingoFlagsValue
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: mode
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 8D 90 ?? ?? ?? ??
+    return_type: byte
+    name: IsWeeklyBingoExpired
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: 8B 81 ?? ?? ?? ?? C1 E8 04 25
+    return_type: int
+    name: GetWeeklyBingoExpireUnixTimestamp
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8B D3 41 88 06
+    return_type: byte
+    name: IsWeeklyBingoStickerPlaced
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: int
+      name: index
+  - signature: 48 8B C1 83 FA 10
+    return_type: Client::Game::UI::PlayerState::WeeklyBingoTaskStatus
+    name: GetWeeklyBingoTaskStatus
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 0F B6 C0 0F AF C3
+    return_type: unsigned int
+    name: GetWeeklyBingoExpMultiplier
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 0D B0 02
+    return_type: byte
+    name: IsMentor
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 04 C6 46 41 01
+    return_type: byte
+    name: IsBattleMentor
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 53 28 F6 D8
+    return_type: byte
+    name: IsTradeMentor
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 66 C7 43 ?? ?? ??
+    return_type: byte
+    name: IsNovice
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 88 46 43
+    return_type: byte
+    name: IsReturner
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 3A D8 75 2E
+    return_type: byte
+    name: IsPlayerStateFlagSet
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: Client::Game::UI::PlayerStateFlag
+      name: flag
 - type: Client::Game::UI::UIState
   name: UIState
   namespace: Client.Game.UI
@@ -118313,13 +118685,19 @@ structs:
   - type: unsigned int
     name: CompanionOwnerId
     offset: 8784
+  - type: unsigned __int64
+    name: AccountId
+    offset: 8792
+  - type: unsigned __int64
+    name: ContentId
+    offset: 8800
   - type: unsigned __int16
     name: CurrentWorld
     offset: 8808
   - type: unsigned __int16
     name: HomeWorld
     offset: 8810
-  - type: Client::Game::Character::Character::CharacterModes
+  - type: Client::Game::Character::CharacterModes
     name: Mode
     offset: 8812
   - type: byte
@@ -118337,7 +118715,7 @@ structs:
       name: this
   - name: GetCastInfo
     offset: 648
-    return_type: Client::Game::Character::Character::CastInfo*
+    return_type: Client::Game::Character::CastInfo*
     parameters:
     - type: Client::Game::Character::Character*
       name: this
@@ -118349,7 +118727,7 @@ structs:
       name: this
   - name: GetForayInfo
     offset: 680
-    return_type: Client::Game::Character::Character::ForayInfo*
+    return_type: Client::Game::Character::ForayInfo*
     parameters:
     - type: Client::Game::Character::Character*
       name: this
@@ -118480,7 +118858,7 @@ structs:
     parameters:
     - type: Client::Game::Character::Character*
       name: this
-    - type: Client::Game::Character::Character::CharacterModes
+    - type: Client::Game::Character::CharacterModes
       name: mode
     - type: byte
       name: modeParam
@@ -118606,7 +118984,7 @@ structs:
       name: this
   - name: GetCastInfo
     offset: 648
-    return_type: Client::Game::Character::Character::CastInfo*
+    return_type: Client::Game::Character::CastInfo*
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
@@ -118618,7 +118996,7 @@ structs:
       name: this
   - name: GetForayInfo
     offset: 680
-    return_type: Client::Game::Character::Character::ForayInfo*
+    return_type: Client::Game::Character::ForayInfo*
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
@@ -118739,7 +119117,7 @@ structs:
       name: this
   - name: GetCastInfo
     offset: 648
-    return_type: Client::Game::Character::Character::CastInfo*
+    return_type: Client::Game::Character::CastInfo*
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
@@ -118751,7 +119129,7 @@ structs:
       name: this
   - name: GetForayInfo
     offset: 680
-    return_type: Client::Game::Character::Character::ForayInfo*
+    return_type: Client::Game::Character::ForayInfo*
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
@@ -118977,7 +119355,7 @@ structs:
   name: RaptureShellModule
   namespace: Client.UI.Shell
   union: False
-  size: 4616
+  size: 4632
   fields:
   - type: Component::Shell::ShellCommandModule
     name: ShellCommandModule
@@ -119042,32 +119420,44 @@ structs:
     name: TellWorld
     offset: 4160
   - type: unsigned __int64
-    name: TellId
+    name: ContentId
     offset: 4264
+  - type: unsigned __int64
+    name: AccountId
+    offset: 4272
   - type: unsigned __int16
     name: TellWorldId
-    offset: 4272
+    offset: 4280
+  - type: unsigned __int16
+    name: TellReason
+    offset: 4282
   - type: int
     name: TempChatType
-    offset: 4276
+    offset: 4284
   - type: Client::System::String::Utf8String
     name: TempChatCommand
-    offset: 4280
+    offset: 4288
   - type: Client::System::String::Utf8String
     name: TempTellName
-    offset: 4384
+    offset: 4392
   - type: Client::System::String::Utf8String
     name: TempTellWorld
-    offset: 4488
+    offset: 4496
   - type: unsigned __int64
-    name: TempTellId
-    offset: 4592
+    name: TempContentId
+    offset: 4600
+  - type: unsigned __int64
+    name: TempAccountId
+    offset: 4608
   - type: unsigned __int16
     name: TempTellWorldId
-    offset: 4600
+    offset: 4616
+  - type: unsigned __int16
+    name: TempTellReason
+    offset: 4618
   - type: unsigned int
     name: Flags
-    offset: 4608
+    offset: 4624
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4D 28
@@ -119115,6 +119505,8 @@ structs:
     - type: unsigned __int16
       name: worldId
     - type: unsigned __int64
+      name: accountId
+    - type: unsigned __int64
       name: contentId
     - type: unsigned __int16
       name: reason
@@ -119133,9 +119525,11 @@ structs:
     - type: unsigned __int16
       name: worldId
     - type: unsigned __int64
+      name: accountId
+    - type: unsigned __int64
       name: contentId
     - type: unsigned __int16
-      name: unknown
+      name: reason
   - signature: 48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 02 41 0F B7 E9
     return_type: byte
     name: SetTellTargetInForay
@@ -119149,9 +119543,11 @@ structs:
     - type: unsigned __int16
       name: worldId
     - type: unsigned __int64
+      name: accountId
+    - type: unsigned __int64
       name: contentId
     - type: unsigned __int16
-      name: unknown1
+      name: reason
     - type: byte
       name: setChatType
   - signature: 48 89 5C 24 ?? 57 48 83 EC 30 8B B9 ?? ?? ?? ?? 48 8B D9 83 FF FE
@@ -119172,88 +119568,55 @@ structs:
   - type: Client::UI::Agent::LobbyData
     name: LobbyData
     offset: 64
-  - type: unsigned int
-    name: AccountExpansion
-    offset: 2608
-  - type: byte
-    name: ShowFreeTrialLogo
-    offset: 2612
-  - type: unsigned int
-    name: TitleScreenExpansion
-    offset: 2616
-  - type: byte
-    name: ShowOriginalLogo
-    offset: 2620
   - type: Common::Component::Excel::ExcelSheet*
     name: ErrorSheet
-    offset: 2624
+    offset: 2592
   - type: Common::Component::Excel::ExcelSheet*
     name: LobbySheet
-    offset: 2632
+    offset: 2600
   - type: Client::Network::NetworkModuleProxy*
     name: NetworkModuleProxy
-    offset: 2640
+    offset: 2608
   - type: StdDeque<Component::Text::TextParameter>
     name: LobbyTextParameters
-    offset: 2648
+    offset: 2616
   - type: Client::System::String::Utf8String
     name: TempUtf8Strings
-    offset: 2688
+    offset: 2656
     size: 13
-  - type: __int8
-    name: ServiceAccountIndex
-    offset: 4320
-  - type: __int8
-    name: HoveredCharacterIndex
-    offset: 4321
   - type: unsigned __int64
     name: HoveredCharacterContentId
-    offset: 4328
+    offset: 4376
   - type: byte
     name: DataCenter
-    offset: 4336
+    offset: 4384
   - type: __int16
     name: WorldIndex
-    offset: 4338
+    offset: 4386
   - type: unsigned __int16
     name: WorldId
-    offset: 4340
+    offset: 4388
   - type: unsigned int
     name: DialogAddonId
-    offset: 4344
-  - type: unsigned int
-    name: DialogAddonId2
-    offset: 4348
-  - type: unsigned int
-    name: LobbyScreenTextAddonId
-    offset: 4352
+    offset: 4392
   - type: byte
     name: LobbyUpdateStage
-    offset: 4356
+    offset: 4452
   - type: byte
     name: LobbyUIStage
-    offset: 4359
-  - type: unsigned int
-    name: IdleTime
-    offset: 4368
-  - type: unsigned __int64
-    name: SelectedCharacterContentId
-    offset: 4408
+    offset: 4455
   - type: byte
     name: IsLoggedIn
-    offset: 4416
-  - type: byte
-    name: TemporaryLocked
-    offset: 4648
-  - type: __int64
-    name: RequestContentId
-    offset: 4672
-  - type: byte
-    name: RequestCharaterIndex
-    offset: 4680
-  - type: byte
-    name: HasShownCharacterNotFound
-    offset: 7588
+    offset: 4457
+  - type: unsigned int
+    name: IdleTime
+    offset: 4464
+  - type: int
+    name: QueuePosition
+    offset: 4496
+  - type: __int8
+    name: HoveredCharacterIndex
+    offset: 4501
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -119769,6 +120132,12 @@ structs:
   - type: Client::Game::Character::Character
     name: Character
     offset: 0
+  - type: Client::Game::StatusManager
+    name: StatusManager
+    offset: 8896
+  - type: Client::Game::Character::CastInfo
+    name: CastInfo
+    offset: 9648
   virtual_functions:
   - name: GetGameObjectId
     offset: 8
@@ -119870,7 +120239,7 @@ structs:
       name: this
   - name: GetCastInfo
     offset: 648
-    return_type: Client::Game::Character::Character::CastInfo*
+    return_type: Client::Game::Character::CastInfo*
     parameters:
     - type: Client::Game::Character::BattleChara*
       name: this
@@ -119882,7 +120251,7 @@ structs:
       name: this
   - name: GetForayInfo
     offset: 680
-    return_type: Client::Game::Character::Character::ForayInfo*
+    return_type: Client::Game::Character::ForayInfo*
     parameters:
     - type: Client::Game::Character::BattleChara*
       name: this
@@ -120684,6 +121053,10 @@ structs:
       name: a5
     - type: byte
       name: a6
+    - type: int
+      name: a7
+    - type: unsigned int
+      name: a8
   - name: ShowBattleTalkSound
     offset: 1536
     return_type: void
