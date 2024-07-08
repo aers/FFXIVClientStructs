@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Component.Excel.Sheets;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -21,26 +22,26 @@ public unsafe partial struct AgentSatisfactionSupply {
 
     [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray3<ItemInfo> _items;
 
-    [FieldOffset(0x138)] public void* ENpcResidentRow;
-    [FieldOffset(0x140)] public void* Item1Row;
-    [FieldOffset(0x148)] public void* Item2Row;
-    [FieldOffset(0x150)] public void* Item3Row;
+    [FieldOffset(0x138)] public ENpcResident* ENpcResidentRow;
+    [FieldOffset(0x140)] public Item* Item1Row;
+    [FieldOffset(0x148)] public Item* Item2Row;
+    [FieldOffset(0x150)] public Item* Item3Row;
 
     [FieldOffset(0x158), FixedSizeArray] internal FixedSizeArray3<AgentDeliveryItemInfo> _deliveryInfo;
 
-    [FieldOffset(0x470)] public void* Item1Reward1Row;
-    [FieldOffset(0x478)] public void* Item2Reward1Row;
-    [FieldOffset(0x480)] public void* Item3Reward1Row;
-    [FieldOffset(0x488)] public void* Item1Reward2Row;
-    [FieldOffset(0x490)] public void* Item2Reward2Row;
-    [FieldOffset(0x498)] public void* Item3Reward2Row;
-    [FieldOffset(0x4A0)] public void* GilRow;
-    [FieldOffset(0x4A8)] public void* CrafterScripRow1;
-    [FieldOffset(0x4B0)] public void* CrafterScripRow2;
-    [FieldOffset(0x4B8)] public void* GathererScripRow1;
-    [FieldOffset(0x4C0)] public void* GathererScripRow2;
-    [FieldOffset(0x4C8)] public void* FishingSpotRow;
-    [FieldOffset(0x4D0)] public void* SpearfishingNotebookRow;
+    [FieldOffset(0x470)] public Item* Item1Reward1Row;
+    [FieldOffset(0x478)] public Item* Item2Reward1Row;
+    [FieldOffset(0x480)] public Item* Item3Reward1Row;
+    [FieldOffset(0x488)] public Item* Item1Reward2Row;
+    [FieldOffset(0x490)] public Item* Item2Reward2Row;
+    [FieldOffset(0x498)] public Item* Item3Reward2Row;
+    [FieldOffset(0x4A0)] public Item* GilRow;
+    [FieldOffset(0x4A8)] public Item* CrafterScripRow1;
+    [FieldOffset(0x4B0)] public Item* CrafterScripRow2;
+    [FieldOffset(0x4B8)] public Item* GathererScripRow1;
+    [FieldOffset(0x4C0)] public Item* GathererScripRow2;
+    [FieldOffset(0x4C8)] public FishingSpot* FishingSpotRow;
+    [FieldOffset(0x4D0)] public SpearfishingNotebook* SpearfishingNotebookRow;
 
     [FieldOffset(0x4D8)] public uint CrafterScripId1;
     [FieldOffset(0x4DC)] public uint CrafterScripId2;
