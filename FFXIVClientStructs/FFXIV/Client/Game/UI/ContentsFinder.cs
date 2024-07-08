@@ -26,11 +26,11 @@ public unsafe partial struct ContentsFinder {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public struct ContentsFinderQueueInfo {
-    [FieldOffset(0x04)] public byte QueuedContentFinderConditionId1;
-    [FieldOffset(0x0C)] public byte QueuedContentFinderConditionId2;
-    [FieldOffset(0x14)] public byte QueuedContentFinderConditionId3;
-    [FieldOffset(0x1C)] public byte QueuedContentFinderConditionId4;
-    [FieldOffset(0x24)] public byte QueuedContentFinderConditionId5;
+    [FieldOffset(0x04)] public uint QueuedContentFinderConditionId1;
+    [FieldOffset(0x0C)] public uint QueuedContentFinderConditionId2;
+    [FieldOffset(0x14)] public uint QueuedContentFinderConditionId3;
+    [FieldOffset(0x1C)] public uint QueuedContentFinderConditionId4;
+    [FieldOffset(0x24)] public uint QueuedContentFinderConditionId5;
 
     [FieldOffset(0x28)] public uint QueuedClassJobId;
 
