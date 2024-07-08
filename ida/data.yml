@@ -366,6 +366,18 @@ functions:
   0x1408F2F30: ProcessPacketNPCYell
   0x14163EB90: ProcessPacketUIModulePacket
   0x140D02150: IsInMordionGaol # if this returns true, i'm sorry for you
+  0x140AC5CD0: GetCharacterEffectiveBattalion # returns either battalion from character data or 0, depending on current territory properties
+  0x140AC5D90: GetCurrentTerritoryBattalionMode
+  0x140AC5DF0: AreCharactersEnemies
+  0x140AC5F60: IsCharacterEnemyToPlayer
+  0x140AC5FD0: IsCharacterNonNullAndEnemyToPlayer
+  0x140AC5FF0: IsGameObjectEnemyToPlayer
+  0x140AC6020: IsBNpcBaseEnemyToPlayer
+  0x140AC6090: IsCharacterNullOrFriendlyToPlayer
+  0x140AC60C0: IsGameObjectNullOrFriendlyToPlayer
+  0x140AC60F0: IsCharacterPartyMemberOrPartyBuddy
+  0x140AC61E0: IsCharacterPartyPet
+  0x140AC62A0: IsCharacterBattalionFriendlyToPlayer
   0x141759960: ScheduleClipUpdate
   0x1417D2C40: GetInstanceContentCrystallineConflictDirector
   0x14183C310: GetInstanceContentMahjongDirector

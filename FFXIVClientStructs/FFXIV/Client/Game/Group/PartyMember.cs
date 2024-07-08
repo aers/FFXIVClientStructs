@@ -12,9 +12,8 @@ public unsafe partial struct PartyMember {
     [FieldOffset(0x300)] public ulong Unk300; // content id for anonymous players?
     [FieldOffset(0x308)] public ulong ContentId;
     [FieldOffset(0x310)] public uint EntityId;
-    // [FieldOffset(0x300)] public ulong ContentId; // content id for anonymous players?
-    //[FieldOffset(0x30C)] public uint Unk_EntityId_1;
-    //[FieldOffset(0x310)] public uint Unk_EntityId_2;
+    [FieldOffset(0x314)] public uint PetEntityId; // carbuncle, etc
+    [FieldOffset(0x318)] public uint CompanionEntityId; // chocobo
     [FieldOffset(0x31C)] public uint CurrentHP;
     [FieldOffset(0x320)] public uint MaxHP;
     [FieldOffset(0x324)] public ushort CurrentMP;
