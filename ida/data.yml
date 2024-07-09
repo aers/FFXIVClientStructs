@@ -5964,7 +5964,7 @@ classes:
       0x140652930: UnsubscribeAtkArrayData
       0x140652B40: SetFocusNode
       0x140653220: GetNodeById
-      0x140653340: GetComponentNodeById
+      0x140653340: GetComponentByNodeId
       0x1406533D0: GetButtonNodeById
       0x140653710: GetComponentListById
       0x140653990: GetTextNodeById
