@@ -7772,6 +7772,10 @@ classes:
       0x1408A8150: CreateAndSetupMount
       0x1408A8770: Dismount
       0x1408A9930: SetupMount
+  Client::Game::Character::EffectContainer:
+    vtbls:
+      - ea: 0x141F0F7E0
+        base: Client::Game::Character::ContainerInterface
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
       - ea: 0x141F0F708

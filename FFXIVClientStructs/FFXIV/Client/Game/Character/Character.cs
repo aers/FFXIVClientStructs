@@ -23,9 +23,7 @@ public unsafe partial struct Character {
 
     [FieldOffset(0x1900)] public VfxContainer Vfx;
 
-    // TODO: put this in its own struct
-    //[FieldOffset(0x1A34)] public byte StatusFlags4; - TODO: update for 7.0
-
+    [FieldOffset(0x1A08)] public EffectContainer Effects;
     [FieldOffset(0x1A58)] public CharacterSetupContainer CharacterSetup;
 
     [FieldOffset(0x1FC0)] public Balloon Balloon;
@@ -77,12 +75,6 @@ public unsafe partial struct Character {
     public bool IsPartyMember => (CharacterData.Flags2 & 0x8) == 0x8;
     public bool IsAllianceMember => (CharacterData.Flags2 & 0x10) == 0x10;
     public bool IsFriend => (CharacterData.Flags2 & 0x20) == 0x20;
-
-    // TODO: update for 7.0
-    //public bool IsGPoseWet {
-    //    get => (StatusFlags4 & 0x01) == 0x01;
-    //    set => StatusFlags4 = (byte)(value ? StatusFlags4 | 0x01 : StatusFlags4 & ~0x01);
-    //}
 
     /// <summary>
     /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the
