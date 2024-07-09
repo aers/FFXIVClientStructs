@@ -8,7 +8,7 @@ public unsafe partial struct EffectContainer {
     [FieldOffset(0x30)] public StatusEffect StatusEffects;
 
     [Flags]
-    public enum StatusEffect : ushort {
-        IsGPoseWet = 0x00_01,
+    public enum StatusEffect : byte {
+        IsGPoseWet = 0x01,
     }
 }
