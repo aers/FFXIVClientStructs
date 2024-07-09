@@ -108,7 +108,7 @@ public unsafe partial struct CharacterBase {
     [VirtualFunction(64)]
     public partial nint OnRenderMaterial(ModelRenderer.OnRenderMaterialParams* param);
 
-    [VirtualFunction(70)]
+    [VirtualFunction(69)]
     public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotBytes);
 
     [VirtualFunction(75)]
