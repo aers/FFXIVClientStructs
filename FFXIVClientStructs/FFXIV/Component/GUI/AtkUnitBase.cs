@@ -169,7 +169,14 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial AtkComponentList* GetComponentListById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 55 9F")]
-    public partial AtkComponentNode* GetComponentNodeById(uint nodeId);
+    public partial AtkComponentBase* GetComponentByNodeId(uint nodeId);
+
+    public AtkComponentNode* GetComponentNodeById(uint nodeId) {
+        // Added to avoid API breaking
+        var component = GetComponentByNodeId(nodeId);
+        if (component == null) return null;
+        return component->OwnerNode;
+    }
 
     [MemberFunction("E9 ?? ?? ?? ?? 83 C3 F9")]
     public partial byte FireCallbackInt(int callbackValue);
