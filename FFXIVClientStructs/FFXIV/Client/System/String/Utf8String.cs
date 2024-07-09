@@ -160,7 +160,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 FF 03")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6B 20")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6B 20"), GenerateStringOverloads]
     public partial Utf8String* ConcatCStr(byte* buffer);
 
     public static implicit operator ReadOnlySpan<byte>(in Utf8String value)
