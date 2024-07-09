@@ -5054,7 +5054,7 @@ classes:
       58: SetupScaling
       63: OnRenderModel
       64: OnRenderMaterial
-      70: FlagSlotForUpdate
+      69: FlagSlotForUpdate
       72: GetDataForSlot
       75: ResolveRootPath
       76: ResolveSKLBPath
