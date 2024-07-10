@@ -17,8 +17,6 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x1CE)] public byte Flags1;
     [FieldOffset(0x1CF)] public byte Flags2;
 
-    [FieldOffset(0x1D0)] public ushort Glasses;
-
     [UnscopedRef]
     public ref DrawObjectData Weapon(WeaponSlot slot) {
         return ref WeaponData[(int)slot];
