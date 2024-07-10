@@ -249,7 +249,7 @@ public enum NodeType : ushort {
     Counter = 5,
 
     Collision = 8,
-    UnknownNode10 = 10 // new 6.5
+    ClippingMask = 10
     // Component: >=1000
 }
 
