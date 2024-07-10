@@ -17,6 +17,8 @@ public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x1CE)] public byte Flags1;
     [FieldOffset(0x1CF)] public byte Flags2;
 
+    [FieldOffset(0x1D0)] public ushort Glasses;
+
     [UnscopedRef]
     public ref DrawObjectData Weapon(WeaponSlot slot) {
         return ref WeaponData[(int)slot];
@@ -57,6 +59,14 @@ public unsafe partial struct DrawDataContainer {
     /// <param name="state">When true, visor will be toggled on, when false it will be toggled off.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA")]
     public partial void SetVisor(bool state);
+
+    /// <summary>
+    /// Called when equipping facewear.
+    /// </summary>
+    /// <param name="unk">Usually 0.</param>
+    /// <param name="id">Row ID from the Glasses sheet.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 50 44 8B 03")]
+    public partial void SetGlasses(uint unk, ushort id);
 
     public enum EquipmentSlot : uint {
         Head = 0,
