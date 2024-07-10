@@ -58,6 +58,14 @@ public unsafe partial struct DrawDataContainer {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA")]
     public partial void SetVisor(bool state);
 
+    /// <summary>
+    /// Called when equipping facewear.
+    /// </summary>
+    /// <param name="index">The index of the glasses slot, usually 0.</param>
+    /// <param name="id">Row ID from the Glasses sheet.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 50 44 8B 03")]
+    public partial void SetGlasses(int index, ushort id);
+
     public enum EquipmentSlot : uint {
         Head = 0,
         Body = 1,
