@@ -61,10 +61,10 @@ public unsafe partial struct DrawDataContainer {
     /// <summary>
     /// Called when equipping facewear.
     /// </summary>
-    /// <param name="unk">Usually 0.</param>
+    /// <param name="index">The index of the glasses slot, usually 0.</param>
     /// <param name="id">Row ID from the Glasses sheet.</param>
     [MemberFunction("E8 ?? ?? ?? ?? EB 50 44 8B 03")]
-    public partial void SetGlasses(uint unk, ushort id);
+    public partial void SetGlasses(int index, ushort id);
 
     public enum EquipmentSlot : uint {
         Head = 0,
