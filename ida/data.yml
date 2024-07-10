@@ -7717,6 +7717,7 @@ classes:
       0x1408AEA70: SetVisor
       0x1408AF170: EquipGlassesIds # sends it to the server
       0x1408AF200: GetGlassesId
+      0x1408AF220: SetGlasses
   Client::Game::Character::CompanionContainer:
     vtbls:
       - ea: 0x141F0F668
