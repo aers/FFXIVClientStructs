@@ -3521,6 +3521,7 @@ classes:
       0x1400C8470: OpenYesNo
       0x1400C8820: OpenSelectOk
       0x1400C86D0: OpenSelectOk2
+      0x1400CEF70: ShowTextGimmickHint
       0x1400DD010: OnUpdate_Nameplates
       0x1400DE870: IncRefNumberArrayData
       0x1400DE8C0: IncRefStringArrayData

@@ -77,6 +77,9 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9")]
     public partial ushort OpenAddonByAgent(byte* addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
 
+    [MemberFunction("48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73"), GenerateStringOverloads]
+    public partial void ShowTextGimmickHint(byte* text, TextGimmickHintStyle style, int duration);
+
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
 
@@ -137,5 +140,10 @@ public unsafe partial struct RaptureAtkModule {
         UnlocksUpdate = 0x10, // Triggered by Mounts, Minions, Orchestrion Rolls, Sightseeing Log, UnlockLinks...
         MainCommandEnabledStateUpdate = 0x20,
         HousingInventoryUpdate = 0x40,
+    }
+
+    public enum TextGimmickHintStyle : byte {
+        Warning = 0,
+        Info = 1,
     }
 }
