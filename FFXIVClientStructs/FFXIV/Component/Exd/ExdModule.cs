@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Excel;
-using FFXIVClientStructs.FFXIV.Component.Excel.Sheets;
 
 namespace FFXIVClientStructs.FFXIV.Component.Exd;
 
@@ -40,8 +39,5 @@ public unsafe partial struct ExdModule {
     public partial bool IsColumnRsv(uint sheetIndex, uint rowId, uint subRowId, uint columnIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 75 00")]
-    public static partial Item* GetItemRowById(uint itemId);
-
-    [MemberFunction("40 53 48 83 EC 20 0F B6 41 29")]
-    public static partial byte GetBannerConditionUnlockState(BannerCondition* row);
+    public static partial void* GetItemRowById(uint itemId);
 }
