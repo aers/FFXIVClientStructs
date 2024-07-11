@@ -24,16 +24,29 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xA38)] public StdDeque<TextParameter> LobbyTextParameters;
     [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray13<Utf8String> _tempUtf8Strings;
 
-    [FieldOffset(0x1118)] public ulong HoveredCharacterContentId;
+    [FieldOffset(0x1110)] public sbyte ServiceAccountIndex;
 
+    [FieldOffset(0x1118)] public ulong HoveredCharacterContentId;
     [FieldOffset(0x1120)] public byte DataCenter;
 
     [FieldOffset(0x1122)] public short WorldIndex; // index in CurrentDataCenterWorlds
     [FieldOffset(0x1124)] public ushort WorldId;
 
     [FieldOffset(0x1128)] public uint DialogAddonId;
-
-    [FieldOffset(0x1195)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    [FieldOffset(0x112C)] public uint DialogAddonId2;
+    [FieldOffset(0x1130)] public uint LobbyScreenTextAddonId;
+    // [FieldOffset(0x1134)] public uint LogoAddonId; // not used?
+    [FieldOffset(0x1138)] public uint TitleDCWorldMapAddonId;
+    [FieldOffset(0x113C)] public uint TitleMovieSelectorAddonId;
+    [FieldOffset(0x1140)] public uint TitleGameVersionAddonId;
+    [FieldOffset(0x1144)] public uint TitleConnectAddonId;
+    [FieldOffset(0x1148)] public uint CharaSelectAddonId;
+    [FieldOffset(0x114C)] public uint CharaMakeDataImportAddonId;
+    [FieldOffset(0x1150)] public uint LoadPreviouslySavedAppearanceDataDialogAddonId; // SelectYesno
+    [FieldOffset(0x1154)] public uint LoadSavedCharacterCreationDataDialogAddonId; // SelectYesno
+    [FieldOffset(0x1158)] public uint CreateNewCharacterDialogAddonId; // SelectYesno
+    [FieldOffset(0x115C)] public uint LobbyWKTAddonId;
+    [FieldOffset(0x1160)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [FieldOffset(0x1164)] public byte LobbyUpdateStage;
 
@@ -41,30 +54,27 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x1169)] public bool IsLoggedIn;
 
-    [FieldOffset(0x1170)] public uint IdleTime;
+    [FieldOffset(0x1170)] public long IdleTime;
 
     [FieldOffset(0x1190)] public int QueuePosition;
 
+    [FieldOffset(0x1195)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+
+    [FieldOffset(0x1198)] public ulong SelectedCharacterContentId;
+
+    [FieldOffset(0x12A0)] public bool TemporaryLocked; // "Please wait and try logging in later."
+
+    [FieldOffset(0x12B8)] public ulong RequestContentId;
+
     // TODO: everything below here is wrong
 
+    // title movie stuff is seemingly no longer part of AgentLobby
     [FieldOffset(0xA30), Obsolete("Not updated. Expect invalid data.")] public uint AccountExpansion;
     [FieldOffset(0xA34), Obsolete("Not updated. Expect invalid data.")] public bool ShowFreeTrialLogo;
-
     [FieldOffset(0xA38), Obsolete("Not updated. Expect invalid data.")] public uint TitleScreenExpansion;
     [FieldOffset(0xA3C), Obsolete("Not updated. Expect invalid data.")] public bool ShowOriginalLogo; // pre-relaunch
 
-    [FieldOffset(0x10E0), Obsolete("Not updated. Expect invalid data.")] public sbyte ServiceAccountIndex;
-
-    [FieldOffset(0x10FC), Obsolete("Not updated. Expect invalid data.")] public uint DialogAddonId2;
-    [FieldOffset(0x1100), Obsolete("Not updated. Expect invalid data.")] public uint LobbyScreenTextAddonId;
-
-    [FieldOffset(0x1138), Obsolete("Not updated. Expect invalid data.")] public ulong SelectedCharacterContentId;
-
-    [FieldOffset(0x1228), Obsolete("Not updated. Expect invalid data.")] public bool TemporaryLocked; // "Please wait and try logging in later."
-
-    [FieldOffset(0x1240), Obsolete("Not updated. Expect invalid data.")] public long RequestContentId;
     [FieldOffset(0x1248), Obsolete("Not updated. Expect invalid data.")] public byte RequestCharaterIndex;
-    [FieldOffset(0x1DA4), Obsolete("Not updated. Expect invalid data.")] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5")]
     public partial void UpdateLobbyUIStage();
