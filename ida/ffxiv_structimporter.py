@@ -423,11 +423,12 @@ if api is None:
                 self.get_named_type(type_tinfo, type)
 
                 if ptr_count > 0:
-                    ptr_tinfo = idaapi.tinfo_t()
                     for i in range(ptr_count):
+                        ptr_tinfo = idaapi.tinfo_t()
                         if not ptr_tinfo.create_ptr(type_tinfo):
                             print("! failed to create pointer")
                             return None
+                        type_tinfo = ptr_tinfo
                 else:
                     ptr_tinfo = type_tinfo
 
