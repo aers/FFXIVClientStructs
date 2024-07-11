@@ -177,7 +177,7 @@ public unsafe partial struct AddonJobHudRDB1 {
             [FieldOffset(0x10)] public AtkComponentGaugeBar* GaugeBar;
             [FieldOffset(0x18)] public AtkComponentTextNineGrid* ValueDisplay;
             [FieldOffset(0x28)] public AtkResNode* BarContainer;
-            [FieldOffset(0x28)] public AtkResNode* GaugeFill;
+            [FieldOffset(0x30)] public AtkResNode* GaugeFill;
         }
         
         [StructLayout(LayoutKind.Explicit, Size = 0x48)]

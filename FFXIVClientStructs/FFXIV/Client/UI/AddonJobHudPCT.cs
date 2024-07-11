@@ -19,7 +19,7 @@ public unsafe partial struct AddonJobHudRPM0 {
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct CanvasGaugeData {
         [FieldOffset(0x08)] public bool Enabled;
         [FieldOffset(0x09)] public bool WeaponEnabled;

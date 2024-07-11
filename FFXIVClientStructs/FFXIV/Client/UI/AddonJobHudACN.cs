@@ -21,8 +21,8 @@ public unsafe partial struct AddonJobHudACN0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct AetherflowACNGaugeData {
-        [FieldOffset(0x08)] public int AetherflowStacks;
-        [FieldOffset(0x09)] public bool Enabled;
+        [FieldOffset(0x08)] public byte AetherflowStacks;
+        [FieldOffset(0x09)] public byte Enabled;
     }
 
     [GenerateInterop]

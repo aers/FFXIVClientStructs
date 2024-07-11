@@ -93,7 +93,7 @@ public unsafe partial struct AddonJobHudSAM1 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct SenGaugeData {
-        [FieldOffset(0x09)] public bool Enabled;
+        [FieldOffset(0x08)] public bool Enabled;
         [FieldOffset(0x09)] public bool HasSetsu;
         [FieldOffset(0x0A)] public bool HasGetsu;
         [FieldOffset(0x0B)] public bool HasKa;
