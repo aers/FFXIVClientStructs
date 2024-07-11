@@ -4538,10 +4538,16 @@ classes:
       0x1402D0C90: UpdateLobbyUIStage
       0x1402D1B30: UpdateCharaSelectDisplay
       0x1402D3B40: SetDataCenter
+      0x1402D7B80: OpenTitle
       0x1402D7EF0: OpenTitleDCWorldMap
+      0x1402D80C0: OpenTitleMovieSelector
+      0x1402D9200: OpenTitleGameVersion
       0x1402D9E60: OpenTitleConnectDialog
+      0x1402DA0B0: OpenCharaSelect
+      0x1402DA9F0: OpenCharaMakeDataImport
+      0x1402DB900: OpenCreateNewCharacterDialog
       0x1402DCAA0: OpenLoginWaitDialog
-      0x1402DA9F0: OpenLobbyScreenText
+      0x1402DCC90: OpenLobbyScreenText
       0x1402DD940: CloseDialog
       0x1402DE5F0: ShowCharacterNotFoundWarning
       0x1402DE7D0: GetLobbyText
