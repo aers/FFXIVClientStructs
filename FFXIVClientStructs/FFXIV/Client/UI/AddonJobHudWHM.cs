@@ -20,7 +20,8 @@ public unsafe partial struct AddonJobHudWHM0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public partial struct HealingGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x09)] public bool BloodLilyEnabled;
         [FieldOffset(0x0C)] public int LilyCount;
         [FieldOffset(0x10)] public int LiliesSpent;
         [FieldOffset(0x14)] public int LilyTimer;

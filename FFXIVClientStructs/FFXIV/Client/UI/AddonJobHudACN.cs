@@ -21,8 +21,8 @@ public unsafe partial struct AddonJobHudACN0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct AetherflowACNGaugeData {
-        [FieldOffset(0x08)] public byte AetherflowStacks;
-        [FieldOffset(0x09), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
+        [FieldOffset(0x08)] public int AetherflowStacks;
+        [FieldOffset(0x09)] public bool Enabled;
     }
 
     [GenerateInterop]
@@ -76,7 +76,10 @@ public unsafe partial struct AddonJobHudSCH0 {
     public partial struct FaerieGaugeData {
         [FieldOffset(0x08)] public int FaeValue;
         [FieldOffset(0x0C)] public int FaeMax;
-        [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
+        [FieldOffset(0x10)] public bool Aetherpact;
+        [FieldOffset(0x11)] public bool Enabled;
+        [FieldOffset(0x12)] public bool FaerieSummoned;
+        [FieldOffset(0x14)] public int FaeMilestone;
         [FieldOffset(0x18)] public int SeraphTimeLeft;
         [FieldOffset(0x1C)] public int SeraphMaxTime;
     }
@@ -184,46 +187,67 @@ public unsafe partial struct AddonJobHudSMN1 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct TranceGaugeData {
-        /*[FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x09)] public bool BahamutPlateEnabled;
+        [FieldOffset(0x0A)] public bool SolarBahamutEnabled;
         [FieldOffset(0x0C)] public int Phase;
         [FieldOffset(0x10)] public int SummonTimeLeft;
         [FieldOffset(0x14)] public int SummonTimeMax;
-        [FieldOffset(0x1C)] public byte IfritReady;
-        [FieldOffset(0x1D)] public byte TitanReady;
-        [FieldOffset(0x1E)] public byte GarudaReady;
-        [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray3<int> _prerequisites2;
+        [FieldOffset(0x18)] public int EgiCount;
+        [FieldOffset(0x1C)] public bool IfritReady;
+        [FieldOffset(0x1D)] public bool TitanReady;
+        [FieldOffset(0x1E)] public bool GarudaReady;
+        [FieldOffset(0x20)] public int int30;
+        [FieldOffset(0x24)] public int int34;
+        [FieldOffset(0x28)] public int int38;
         [FieldOffset(0x2C)] public int CurrentEgi;
-        [FieldOffset(0x30)] public int Attunement;*/
+        [FieldOffset(0x30)] public int Attunement;
+        [FieldOffset(0x34)] public int EgiTimeLeft;
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x150)]
     public partial struct TranceGauge {
-        /* [FieldOffset(0x010)] public AtkResNode* Container;
-         [FieldOffset(0x018)] public AtkResNode* CarbunclePlate;
-         [FieldOffset(0x020)] public AtkImageNode* CarbuncleBar;
-         [FieldOffset(0x028)] public AtkTextNode* CarbuncleGaugeValue;
-         [FieldOffset(0x038)] public AtkResNode* SummonPlate;
-         [FieldOffset(0x040)] public AtkResNode* SummonHead;
-         [FieldOffset(0x048)] public AtkTextNode* TranceGaugeValue;
-         [FieldOffset(0x058)] public AtkImageNode* TranceBar;
-         [FieldOffset(0x068)] public AtkResNode* SummonWing;
-         [FieldOffset(0x070)] public AtkResNode* SummonBarMask;
-         [FieldOffset(0x078)] public AtkResNode* EgiGems;
-         [FieldOffset(0x080)] public AtkComponentTextNineGrid* EgiTimerDisplay;
-         [FieldOffset(0x088)] public EgiGauge IfritGauge;
-         [FieldOffset(0x0B0)] public EgiGauge TitanGauge;
-         [FieldOffset(0x0D8)] public EgiGauge GarudaGauge;
 
-         [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-         public partial struct EgiGauge {
-             [FieldOffset(0x00)] public AtkComponentBase* Container;
-             [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
-             [FieldOffset(0x10)] public AtkResNode* Gem;
-             [FieldOffset(0x18)] public AtkResNode* Silhouette;
-             [FieldOffset(0x20)] public int Status; // 0 = Spent, 1 = Available, 2 = Active, 3 = Locked
-         }*/
+        [FieldOffset(0x010)] public AtkResNode* Container;
+        [FieldOffset(0x018)] public AtkResNode* CarbunclePlate;
+        [FieldOffset(0x020)] public AtkImageNode* CarbuncleBar;
+        [FieldOffset(0x028)] public AtkTextNode* CarbuncleGaugeValue;
+
+        [FieldOffset(0x038)] public AtkResNode* SummonPlate;
+        [FieldOffset(0x040)] public AtkResNode* SummonHead;
+        [FieldOffset(0x048)] public AtkTextNode* TranceGaugeValue;
+        [FieldOffset(0x058)] public AtkImageNode* TranceBarFill;
+        [FieldOffset(0x068)] public AtkResNode* WingContainer;
+        [FieldOffset(0x070)] public AtkResNode* Wing;
+
+        // At level 100, the main portion of the gauge is hidden and replaced with a duplicate that includes Solar Bahamut
+        [FieldOffset(0x078)] public AtkResNode* Lv100SummonPlate;
+        [FieldOffset(0x080)] public AtkResNode* Lv100SummonHead;
+        [FieldOffset(0x088)] public AtkTextNode* Lv100TranceGaugeValue;
+        [FieldOffset(0x090)] public AtkImageNode* Lv100TranceBarFill;
+        [FieldOffset(0x0A0)] public AtkResNode* Lv100WingContainer;
+        [FieldOffset(0x0A8)] public AtkResNode* Lv100Wing;
+        [FieldOffset(0x0B0)] public AtkResNode* Lv100BladeContainer;
+        [FieldOffset(0x0B8)] public AtkResNode* Lv100Blade;
+
+        [FieldOffset(0x0C0)] public AtkResNode* EgiGems;
+        [FieldOffset(0x0C8)] public AtkResNode* EgiTimerDisplay;
+
+        [FieldOffset(0x0D0)] public EgiGauge IfritGauge;
+        [FieldOffset(0x0F8)] public EgiGauge TitanGauge;
+        [FieldOffset(0x120)] public EgiGauge GarudaGauge;
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+        public partial struct EgiGauge
+        {
+            [FieldOffset(0x00)] public AtkComponentBase* Container;
+            [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
+            [FieldOffset(0x10)] public AtkResNode* Gem;
+            [FieldOffset(0x18)] public AtkResNode* Silhouette;
+            [FieldOffset(0x20)] public int Status; // 0 = Spent, 1 = Available, 2 = Active, 3 = Locked
+        }
     }
 
     [GenerateInterop]
@@ -231,21 +255,25 @@ public unsafe partial struct AddonJobHudSMN1 {
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct TranceGaugeSimple {
 
-        /*  [FieldOffset(0x10)] public AtkComponentGaugeBar* TranceGaugeBar;
+          [FieldOffset(0x10)] public AtkComponentGaugeBar* TranceGaugeBar;
           [FieldOffset(0x18)] public AtkResNode* SummonIcon;
           [FieldOffset(0x20)] public AtkComponentTextNineGrid* TranceTimerDisplay;
+
           [FieldOffset(0x30)] public AtkResNode* EgiContainer;
           [FieldOffset(0x38)] public AtkComponentTextNineGrid* EgiTimerDisplay;
+
           [FieldOffset(0x40)] public EgiGaugeSimple IfritGauge;
           [FieldOffset(0x60)] public EgiGaugeSimple TitanGauge;
           [FieldOffset(0x80)] public EgiGaugeSimple GarudaGauge;
+
           [FieldOffset(0xA0)] public AtkComponentBase* EgiIconContainer;
           [FieldOffset(0xA8)] public AtkResNode* EgiIcons;
           [FieldOffset(0xB0)] public AtkResNode* IfritIcon;
           [FieldOffset(0xB8)] public AtkResNode* TitanIcon;
           [FieldOffset(0xC0)] public AtkResNode* GarudaIcon;
+
           [FieldOffset(0xC8)] public bool EgiActive;
-          [FieldOffset(0xD0)] public AtkResNode* TimelineFrameId;
+          [FieldOffset(0xD0)] public int TimelineFrameId;
 
           [StructLayout(LayoutKind.Explicit, Size = 0x20)]
           public struct EgiGaugeSimple {
@@ -253,6 +281,7 @@ public unsafe partial struct AddonJobHudSMN1 {
               [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
               [FieldOffset(0x10)] public AtkResNode* GemGlow;
               [FieldOffset(0x18)] public int Status;
-          }*/
+          }
+
     }
 }

@@ -20,7 +20,8 @@ public unsafe partial struct AddonJobHudSAM0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct KenkiGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x0A)] public bool MeditationEnabled;
         [FieldOffset(0x0C)] public int MeditationStackCount;
         [FieldOffset(0x10)] public int KenkiValue;
         [FieldOffset(0x14)] public int KenkiMax;
@@ -92,7 +93,7 @@ public unsafe partial struct AddonJobHudSAM1 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct SenGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
+        [FieldOffset(0x09)] public bool Enabled;
         [FieldOffset(0x09)] public bool HasSetsu;
         [FieldOffset(0x0A)] public bool HasGetsu;
         [FieldOffset(0x0B)] public bool HasKa;

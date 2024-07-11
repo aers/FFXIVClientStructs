@@ -20,7 +20,7 @@ public unsafe partial struct AddonJobHudNIN0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct NinkiGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray1<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool Enabled;
         [FieldOffset(0x0C)] public int NinkiValue;
         [FieldOffset(0x10)] public int Max;
         [FieldOffset(0x14)] public int Mid;
@@ -50,9 +50,9 @@ public unsafe partial struct AddonJobHudNIN0 {
 }
 
 /// <summary>
-/// NIN - Kazematoi Gauge
+/// NIN - Kazematoi
 /// </summary>
-[Addon("JobHudNIN1")]
+[Addon("JobHudNIN1v70")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x330)]
@@ -66,20 +66,28 @@ public unsafe partial struct AddonJobHudNIN1 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct KazematoiGaugeData {
-
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x0C)] public int StackCount;
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct KazematoiGauge {
+        
+        [FieldOffset(0x18)] public AtkComponentBase* SwipeEffect;
+        [FieldOffset(0x10)] public AtkResNode* Container;
+        [FieldOffset(0x20)] public AtkComponentBase* ScrollingClouds;
 
+        [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _stackIcons;
+
+        [FieldOffset(0x58)] public int StackCount;
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public partial struct KazematoiGaugeSimple {
-
+        [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _stackIcons;
     }
 }

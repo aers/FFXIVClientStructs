@@ -20,8 +20,9 @@ public unsafe partial struct AddonJobHudDRK0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct BloodGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
-        [FieldOffset(0x0A)] public byte TankStance;
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x09)] public bool BarEnabled;
+        [FieldOffset(0x0A)] public bool TankStance;
         [FieldOffset(0x0C)] public int BloodValue;
         [FieldOffset(0x10)] public int BloodMax;
         [FieldOffset(0x14)] public int BloodMid;
@@ -69,7 +70,9 @@ public unsafe partial struct AddonJobHudDRK1 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct DarksideGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x09)] public bool DarkArtsEnabled;
+        [FieldOffset(0x0A)] public bool DarkArtsActive;
         [FieldOffset(0x0C)] public int DarksideTimeLeft;
         [FieldOffset(0x10)] public int DarksideTimeMax;
         [FieldOffset(0x14)] public int LivingShadowTimeLeft;

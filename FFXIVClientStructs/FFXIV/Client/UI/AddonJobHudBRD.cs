@@ -19,8 +19,14 @@ public unsafe partial struct AddonJobHudBRD0 {
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public partial struct SongGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray6<byte> _prerequisites;
+    public partial struct SongGaugeData
+    {
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x09)] public bool SongPlaying;
+        [FieldOffset(0x0A)] public bool StaffHighlight;
+        [FieldOffset(0x0B)] public bool SoulVoiceEnabled;
+        [FieldOffset(0x0C)] public bool SongIconsEnabled;
+        [FieldOffset(0x0D)] public bool BlastArrowTick;
         [FieldOffset(0x10)] public int SoulVoiceValue;
         [FieldOffset(0x14)] public int SoulVoiceMinimumNeeded;
         [FieldOffset(0x1C)] public int SoulVoiceMax;
@@ -28,9 +34,9 @@ public unsafe partial struct AddonJobHudBRD0 {
         [FieldOffset(0x24)] public int SongTimeLeft;
         [FieldOffset(0x28)] public int SongTimerMax;
         [FieldOffset(0x2C)] public int Repertoire;
-        [FieldOffset(0x34)] public byte HasPlayedMage;
-        [FieldOffset(0x35)] public byte HasPlayedArmy;
-        [FieldOffset(0x36)] public byte HasPlayedWanderer;
+        [FieldOffset(0x34)] public bool HasPlayedMage;
+        [FieldOffset(0x35)] public bool HasPlayedArmy;
+        [FieldOffset(0x36)] public bool HasPlayedWanderer;
         [FieldOffset(0x38)] public byte* SongTitle;
     }
 
