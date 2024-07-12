@@ -5899,6 +5899,10 @@ classes:
     funcs:
 #     0x1405A02A0: ctor # INLINED IN 7.0 in CreateResNode
       0x14063E610: CheckCollisionAtCoords
+  Component::GUI::AtkClippingMaskNode:
+    vtbls:
+      - ea: 0x141EF5EC0
+        base: Component::GUI::AtkResNode
   Component::GUI::AtkComponentNode:
     vtbls:
       - ea: 0x141EF5ED8
