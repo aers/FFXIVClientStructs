@@ -14246,22 +14246,20 @@ classes:
         base: Client::UI::AddonActionBarX
     funcs:
       0x1413C1930: ctor
+    vfuncs:
+      92: LoadUldResourceHandleImpl
   Client::UI::AddonActionDoubleCrossL:
     vtbls:
       - ea: 0x141FF5C38
         base: Client::UI::AddonActionDoubleCrossBase
     funcs:
       0x1413C23B0: ctor
-    vfuncs:
-      91: LoadUldResourceHandle
   Client::UI::AddonActionDoubleCrossR:
     vtbls:
       - ea: 0x141FF5F58
         base: Client::UI::AddonActionDoubleCrossBase
     funcs:
       0x1413C2D00: ctor
-    vfuncs:
-      91: LoadUldResourceHandle
   Client::UI::AddonFocusTargetInfo:
     vtbls:
       - ea: 0x141FF6268
