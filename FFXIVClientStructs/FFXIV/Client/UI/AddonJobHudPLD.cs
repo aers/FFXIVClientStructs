@@ -20,7 +20,9 @@ public unsafe partial struct AddonJobHudPLD0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct OathGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool TankStance;
+        [FieldOffset(0x09)] public bool BarEnabled;
+        [FieldOffset(0x0A)] public bool Enabled;
         [FieldOffset(0x0C)] public int OathValue;
         [FieldOffset(0x10)] public int OathMax;
     }

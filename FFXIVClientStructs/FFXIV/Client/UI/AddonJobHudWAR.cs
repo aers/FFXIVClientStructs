@@ -20,7 +20,9 @@ public unsafe partial struct AddonJobHudWAR0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct BeastGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x09)] public bool BarEnabled;
+        [FieldOffset(0x0A)] public bool TankStance;
         [FieldOffset(0x0C)] public int BeastValue;
         [FieldOffset(0x10)] public int BeastMax;
     }

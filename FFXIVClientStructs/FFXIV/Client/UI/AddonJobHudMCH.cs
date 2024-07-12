@@ -21,7 +21,8 @@ public unsafe partial struct AddonJobHudMCH0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
     public partial struct HeatGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool HeatEnabled;
+        [FieldOffset(0x09)] public bool BatteryEnabled;
         [FieldOffset(0x0C)] public int HeatValue;
         [FieldOffset(0x10)] public int HeatMax;
         [FieldOffset(0x14)] public int HeatMid;

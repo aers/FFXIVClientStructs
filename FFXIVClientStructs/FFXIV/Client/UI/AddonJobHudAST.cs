@@ -19,71 +19,48 @@ public unsafe partial struct AddonJobHudAST0 {
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public partial struct ArcanaGaugeData {
-
-        // Reduced size in 7.0
-
-        /*  [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<byte> _prerequisites;
-          [FieldOffset(0x0C)] public int DrawnCard;
-          [FieldOffset(0x10)] public int DrawnMinorArcanum;
-          [FieldOffset(0x14)] public int DrawnRoleBuff;
-          [FieldOffset(0x18)] public int DrawnAstrosign;
-          [FieldOffset(0x1C)] public int Astrosign1;
-          [FieldOffset(0x20)] public int Astrosign2;
-          [FieldOffset(0x24)] public int Astrosign3;
-          [FieldOffset(0x30)] public byte* CardName;
-          [FieldOffset(0x38)] public byte* MinorArcanaName;*/
+    public partial struct ArcanaGaugeData
+    {
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x09)] public bool MinorArcanaEnabled;
+        [FieldOffset(0x0C)] public int ArcanumIdI;
+        [FieldOffset(0x10)] public int ArcanumIdII;
+        [FieldOffset(0x14)] public int ArcanumIdIII;
+        [FieldOffset(0x18)] public int MinorArcanumId;
+        [FieldOffset(0x1C)] public int FrameColor;
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
     public partial struct ArcanaGauge {
+        [FieldOffset(0x18)] public AtkResNode* Container;
+        [FieldOffset(0x20)] public AtkResNode* GaugePlate;
 
-        // Reduced size in 7.0
-
-        /* [FieldOffset(0x10)] public AtkResNode* Container;
-         [FieldOffset(0x18)] public AtkComponentBase* CardContainer;
-         [FieldOffset(0x20)] public AtkTextNode* CardName;
-         [FieldOffset(0x28)] public AtkResNode* CardAstrosign;
-         [FieldOffset(0x30)] public AtkResNode* CardSymbol;
-         [FieldOffset(0x38)] public AtkResNode* CardBorder;
-         [FieldOffset(0x40)] public AtkResNode* GaugePlate;
-         [FieldOffset(0x48)] public AtkResNode* MinorArcanaContainer;
-         [FieldOffset(0x50)] public AtkTextNode* MinorArcanaName;
-         [FieldOffset(0x58)] public AtkResNode* MinorArcanaSymbol;
-         [FieldOffset(0x60)] public AtkResNode* AstrosignContainer;
-
-         [FieldOffset(0x78), FixedSizeArray] internal FixedSizeArray3<Astrosign> _astrosigns;
-     */
+        [FieldOffset(0x28)] public ArcanaCard CardI;
+        [FieldOffset(0x48)] public ArcanaCard CardII;
+        [FieldOffset(0x68)] public ArcanaCard CardIII;
+        [FieldOffset(0x88)] public ArcanaCard MinorArcanaCard;
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
     public partial struct ArcanaGaugeSimple {
+        [FieldOffset(0x18)] public AtkResNode* Container;
 
-        // Reduced size in 7.0
-
-        /* [FieldOffset(0x10)] public AtkComponentBase* CardContainer;
-         [FieldOffset(0x18)] public AtkComponentTextNineGrid* CardName;
-         [FieldOffset(0x20)] public AtkResNode* CardAstrosign;
-         [FieldOffset(0x28)] public AtkResNode* CardSymbol;
-         [FieldOffset(0x30)] public AtkResNode* CardBorder;
-         [FieldOffset(0x38)] public AtkResNode* Container;
-         [FieldOffset(0x40)] public AtkComponentBase* MinorArcanaContainer;
-         [FieldOffset(0x48)] public AtkComponentTextNineGrid* MinorArcanaName; // seemingly unused
-         [FieldOffset(0x50)] public AtkResNode* MinorArcanaSymbol;
-         [FieldOffset(0x58)] public AtkResNode* AstrosignContainer;
-
-         [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray3<Astrosign> _astrosigns;
-    */
+        [FieldOffset(0x20)] public ArcanaCard CardI;
+        [FieldOffset(0x40)] public ArcanaCard CardII;
+        [FieldOffset(0x60)] public ArcanaCard CardIII;
+        [FieldOffset(0x80)] public ArcanaCard MinorArcanaCard;
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public struct Astrosign {
-        [FieldOffset(0x00)] public AtkComponentBase* Container;
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public partial struct ArcanaCard
+    {
+        [FieldOffset(0x00)] public AtkComponentBase* CardComponent;
         [FieldOffset(0x08)] public AtkResNode* Symbol;
-        [FieldOffset(0x10)] public int Type;
+        [FieldOffset(0x10)] public AtkResNode* Frame;
+        [FieldOffset(0x18)] public int ArcanumId;
     }
 }

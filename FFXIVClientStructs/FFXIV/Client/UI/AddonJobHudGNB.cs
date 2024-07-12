@@ -20,7 +20,10 @@ public unsafe partial struct AddonJobHudGNB0 {
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct PowderGaugeData {
-        [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray4<byte> _prerequisites;
+        [FieldOffset(0x08)] public bool Enabled;
+        [FieldOffset(0x09)] public bool CartridgesEnabled;
+        [FieldOffset(0x0A)] public bool TankStance;
+        [FieldOffset(0x0B)] public bool Cartridge3Enabled;
         [FieldOffset(0x0C)] public int Ammo;
     }
 
