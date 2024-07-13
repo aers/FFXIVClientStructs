@@ -19,8 +19,7 @@ public unsafe partial struct AddonJobHudAST0 {
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public partial struct ArcanaGaugeData
-    {
+    public partial struct ArcanaGaugeData {
         [FieldOffset(0x08)] public bool Enabled;
         [FieldOffset(0x09)] public bool MinorArcanaEnabled;
         [FieldOffset(0x0C)] public int ArcanumIdI;
@@ -56,8 +55,7 @@ public unsafe partial struct AddonJobHudAST0 {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public partial struct ArcanaCard
-    {
+    public partial struct ArcanaCard {
         [FieldOffset(0x00)] public AtkComponentBase* CardComponent;
         [FieldOffset(0x08)] public AtkResNode* Symbol;
         [FieldOffset(0x10)] public AtkResNode* Frame;

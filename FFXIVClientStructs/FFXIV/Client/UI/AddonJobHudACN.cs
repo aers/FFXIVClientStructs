@@ -240,8 +240,7 @@ public unsafe partial struct AddonJobHudSMN1 {
         [FieldOffset(0x120)] public EgiGauge GarudaGauge;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-        public partial struct EgiGauge
-        {
+        public partial struct EgiGauge {
             [FieldOffset(0x00)] public AtkComponentBase* Container;
             [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
             [FieldOffset(0x10)] public AtkResNode* Gem;
@@ -255,33 +254,33 @@ public unsafe partial struct AddonJobHudSMN1 {
     [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct TranceGaugeSimple {
 
-          [FieldOffset(0x10)] public AtkComponentGaugeBar* TranceGaugeBar;
-          [FieldOffset(0x18)] public AtkResNode* SummonIcon;
-          [FieldOffset(0x20)] public AtkComponentTextNineGrid* TranceTimerDisplay;
+        [FieldOffset(0x10)] public AtkComponentGaugeBar* TranceGaugeBar;
+        [FieldOffset(0x18)] public AtkResNode* SummonIcon;
+        [FieldOffset(0x20)] public AtkComponentTextNineGrid* TranceTimerDisplay;
 
-          [FieldOffset(0x30)] public AtkResNode* EgiContainer;
-          [FieldOffset(0x38)] public AtkComponentTextNineGrid* EgiTimerDisplay;
+        [FieldOffset(0x30)] public AtkResNode* EgiContainer;
+        [FieldOffset(0x38)] public AtkComponentTextNineGrid* EgiTimerDisplay;
 
-          [FieldOffset(0x40)] public EgiGaugeSimple IfritGauge;
-          [FieldOffset(0x60)] public EgiGaugeSimple TitanGauge;
-          [FieldOffset(0x80)] public EgiGaugeSimple GarudaGauge;
+        [FieldOffset(0x40)] public EgiGaugeSimple IfritGauge;
+        [FieldOffset(0x60)] public EgiGaugeSimple TitanGauge;
+        [FieldOffset(0x80)] public EgiGaugeSimple GarudaGauge;
 
-          [FieldOffset(0xA0)] public AtkComponentBase* EgiIconContainer;
-          [FieldOffset(0xA8)] public AtkResNode* EgiIcons;
-          [FieldOffset(0xB0)] public AtkResNode* IfritIcon;
-          [FieldOffset(0xB8)] public AtkResNode* TitanIcon;
-          [FieldOffset(0xC0)] public AtkResNode* GarudaIcon;
+        [FieldOffset(0xA0)] public AtkComponentBase* EgiIconContainer;
+        [FieldOffset(0xA8)] public AtkResNode* EgiIcons;
+        [FieldOffset(0xB0)] public AtkResNode* IfritIcon;
+        [FieldOffset(0xB8)] public AtkResNode* TitanIcon;
+        [FieldOffset(0xC0)] public AtkResNode* GarudaIcon;
 
-          [FieldOffset(0xC8)] public bool EgiActive;
-          [FieldOffset(0xD0)] public int TimelineFrameId;
+        [FieldOffset(0xC8)] public bool EgiActive;
+        [FieldOffset(0xD0)] public int TimelineFrameId;
 
-          [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-          public struct EgiGaugeSimple {
-              [FieldOffset(0x00)] public AtkComponentBase* Gem;
-              [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
-              [FieldOffset(0x10)] public AtkResNode* GemGlow;
-              [FieldOffset(0x18)] public int Status;
-          }
+        [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+        public struct EgiGaugeSimple {
+            [FieldOffset(0x00)] public AtkComponentBase* Gem;
+            [FieldOffset(0x08)] public AtkTextNode* AttunementStackText;
+            [FieldOffset(0x10)] public AtkResNode* GemGlow;
+            [FieldOffset(0x18)] public int Status;
+        }
 
     }
 }

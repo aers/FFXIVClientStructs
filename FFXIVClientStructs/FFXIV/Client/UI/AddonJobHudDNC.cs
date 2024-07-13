@@ -19,8 +19,7 @@ public unsafe partial struct AddonJobHudDNC0 {
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-    public partial struct StepGaugeData
-    {
+    public partial struct StepGaugeData {
         [FieldOffset(0x08)] public bool Enabled;
         [FieldOffset(0x09)] public bool Dancing;
         [FieldOffset(0x0C)] public int DanceStatus;

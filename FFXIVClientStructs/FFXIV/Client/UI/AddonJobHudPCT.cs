@@ -110,8 +110,7 @@ public unsafe partial struct AddonJobHudRPM1 {
         [FieldOffset(0x18)] public PaintStacksStandard* PaintStacks;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-        public partial struct PaletteBarStandard
-        {
+        public partial struct PaletteBarStandard {
             [FieldOffset(0x10)] public AtkTextNode* ValueText;
             [FieldOffset(0x18)] public AtkResNode* ValueDisplay;
             [FieldOffset(0x20)] public AtkResNode* GaugeBarContainer;
@@ -124,8 +123,7 @@ public unsafe partial struct AddonJobHudRPM1 {
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-        public partial struct PaintStacksStandard
-        {
+        public partial struct PaintStacksStandard {
             [FieldOffset(0x10)] public AtkResNode* Container;
             [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _stacks;
         }
@@ -139,8 +137,7 @@ public unsafe partial struct AddonJobHudRPM1 {
         [FieldOffset(0x18)] public PaintStacksSimple* PaintStacks;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-        public partial struct PaletteBarSimple
-        {
+        public partial struct PaletteBarSimple {
             [FieldOffset(0x10)] public AtkTextNode* BarTextNode;
             [FieldOffset(0x18)] public AtkResNode* ValueDisplay;
             [FieldOffset(0x20)] public AtkComponentGaugeBar* GaugeBarComponent;
@@ -148,8 +145,7 @@ public unsafe partial struct AddonJobHudRPM1 {
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-        public partial struct PaintStacksSimple
-        {
+        public partial struct PaintStacksSimple {
             [FieldOffset(0x10)] public AtkResNode* Container;
             [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _stacks;
         }

@@ -41,8 +41,7 @@ public unsafe partial struct AddonJobHudMNK0 {
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
-    public partial struct BeastChakraGauge
-    {
+    public partial struct BeastChakraGauge {
         [FieldOffset(0x10)] public AtkResNode* NadiContainer;
         [FieldOffset(0x18)] public AtkComponentBase* BeastChakra1;
         [FieldOffset(0x20)] public AtkResNode* BeastChakraIcon1;
@@ -74,8 +73,7 @@ public unsafe partial struct AddonJobHudMNK0 {
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
-    public partial struct BeastChakraGaugeSimple
-    {
+    public partial struct BeastChakraGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* NadiContainer;
         [FieldOffset(0x18)] public AtkComponentBase* BeastChakra1;
         [FieldOffset(0x20)] public AtkResNode* BeastChakraIconContainer1;
@@ -135,8 +133,7 @@ public unsafe partial struct AddonJobHudMNK1 {
         [FieldOffset(0x10)] public AtkResNode* Container;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-        public partial struct Chakra
-        {
+        public partial struct Chakra {
             //7FF716828A28
             [FieldOffset(0x08)] public AtkComponentBase* Icon;
             [FieldOffset(0x10)] public bool Active;
@@ -152,13 +149,11 @@ public unsafe partial struct AddonJobHudMNK1 {
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
-    public partial struct ChakraGaugeSimple
-    {
+    public partial struct ChakraGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-        public partial struct ChakraSimple
-        {
+        public partial struct ChakraSimple {
             //7FF716828A88
             [FieldOffset(0x08)] public AtkComponentBase* Icon;
             [FieldOffset(0x10)] public bool Active;

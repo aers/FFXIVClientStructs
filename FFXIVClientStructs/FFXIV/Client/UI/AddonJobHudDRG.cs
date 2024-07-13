@@ -10,8 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x358)]
-public unsafe partial struct AddonJobHudDRG0
-{
+public unsafe partial struct AddonJobHudDRG0 {
     [FieldOffset(0x270)] public DragonGaugeData DataPrevious;
     [FieldOffset(0x290)] public DragonGaugeData DataCurrent;
     [FieldOffset(0x2B0)] public DragonGauge GaugeStandard;
@@ -20,8 +19,7 @@ public unsafe partial struct AddonJobHudDRG0
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public partial struct DragonGaugeData
-    {
+    public partial struct DragonGaugeData {
         [FieldOffset(0x08)] public bool Enabled;
         [FieldOffset(0x09)] public bool FirstMindsFocusEnabled;
         [FieldOffset(0x0C)] public int LotDStatus;
@@ -33,8 +31,7 @@ public unsafe partial struct AddonJobHudDRG0
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
-    public partial struct DragonGauge
-    {
+    public partial struct DragonGauge {
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* Container2;
         [FieldOffset(0x20)] public int LotDStatus;
@@ -47,8 +44,7 @@ public unsafe partial struct AddonJobHudDRG0
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-    public partial struct DragonGaugeSimple
-    {
+    public partial struct DragonGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkComponentTextNineGrid* LotDTimerDisplay;
         [FieldOffset(0x20)] public AtkComponentGaugeBar* LotDTimerGaugeBar;

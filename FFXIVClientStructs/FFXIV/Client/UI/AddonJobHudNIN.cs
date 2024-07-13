@@ -74,7 +74,7 @@ public unsafe partial struct AddonJobHudNIN1 {
     [Inherits<AddonJobHudGauge>]
     [StructLayout(LayoutKind.Explicit, Size = 0x60)]
     public partial struct KazematoiGauge {
-        
+
         [FieldOffset(0x18)] public AtkComponentBase* SwipeEffect;
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x20)] public AtkComponentBase* ScrollingClouds;

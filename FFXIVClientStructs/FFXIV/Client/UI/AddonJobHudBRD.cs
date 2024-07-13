@@ -19,8 +19,7 @@ public unsafe partial struct AddonJobHudBRD0 {
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public partial struct SongGaugeData
-    {
+    public partial struct SongGaugeData {
         [FieldOffset(0x08)] public bool Enabled;
         [FieldOffset(0x09)] public bool SongPlaying;
         [FieldOffset(0x0A)] public bool StaffHighlight;
