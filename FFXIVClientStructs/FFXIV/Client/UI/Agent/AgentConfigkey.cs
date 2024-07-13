@@ -1,4 +1,5 @@
 ﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -8,6 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x21E8)]
 public unsafe partial struct AgentConfigkey {
+    [FieldOffset(0x40)] public ConfigModule* ConfigModule;
     [FieldOffset(0x78)] public UIInputData* UIInputData;
 
     [FieldOffset(0x84)] public int SelectedTab; // 1 - 7
