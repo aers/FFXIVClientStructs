@@ -19,7 +19,8 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xB4)] public ByteColor TextColor;
     [FieldOffset(0xB8)] public ByteColor EdgeColor;
     [FieldOffset(0xBC)] public ByteColor BackgroundColor;
-    [FieldOffset(0xC0)] public Utf8String NodeText;
+    [FieldOffset(0xC0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
+    [FieldOffset(0x128)] public byte* OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
 
     [FieldOffset(0x130)] public void* UnkPtr_1;
 
