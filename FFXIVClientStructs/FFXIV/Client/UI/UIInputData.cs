@@ -1,6 +1,7 @@
-// Suppress Inconsistent Naming due to VirtualKeyCode Names 
+// Suppress Inconsistent Naming due to VirtualKeyCode Names
 // ReSharper disable InconsistentNaming
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -127,6 +128,18 @@ public unsafe partial struct UIInputData {
     public bool IsKeyDown(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Down);
     public bool IsKeyReleased(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Released);
     public bool IsKeyHeld(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Held);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8")]
+    public partial uint GetKeybind(Utf8String* name, Keybind* keybind);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xB)]
+    public struct Keybind {
+        [FieldOffset(0x0)] public SeVirtualKey Key;
+        [FieldOffset(0x1)] public ModifierFlag Modifier;
+
+        [FieldOffset(0x2)] public SeVirtualKey AltKey;
+        [FieldOffset(0x3)] public ModifierFlag AltModifier;
+    }
 }
 
 [Flags]
@@ -171,7 +184,14 @@ public enum KeyStateFlags {
     Held = 8, // like Down but fires first after about 250ms and then only about every 50 ms
 }
 
-public enum SeVirtualKey {
+[Flags]
+public enum ModifierFlag : byte {
+    Shift = 1 << 0,
+    Ctrl = 1 << 1,
+    Alt = 1 << 2,
+}
+
+public enum SeVirtualKey : byte {
     /// <summary>
     /// This is an addendum to use on functions in which you have to pass a zero value to represent no key code.
     /// </summary>
