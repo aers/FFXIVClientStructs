@@ -34,6 +34,19 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0x1400), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
     [FieldOffset(0x1478), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
 
+    [FieldOffset(0x3500)] public uint ExpCurrentExperience;
+    [FieldOffset(0x3504)] public uint ExpNeededExperience;
+    [FieldOffset(0x3508)] public uint ExpRestedExperience;
+    [FieldOffset(0x350C)] public uint CharacterClassJobId;
+
+    [FieldOffset(0x351C)] public uint ExpClassJobId;
+    [FieldOffset(0x3520)] public ushort ExpLevel;
+    [FieldOffset(0x3522)] public ushort ExpContentLevel; // level in eureka and bozja for example
+    [FieldOffset(0x3524)] public bool ExpIsLevelSynced;
+    [FieldOffset(0x3525)] public bool ExpUnkBool2;
+    [FieldOffset(0x3526)] public bool ExpIsMaxLevel;
+    [FieldOffset(0x3527)] public bool ExpIsInEureka;
+
     [FieldOffset(0x3530), FixedSizeArray] internal FixedSizeArray16<HudQueuedBattleTalk> _queuedBattleTalks;
 
     [FieldOffset(0x4A10)] public StdVector<MapMarkerData> MapMarkers;

@@ -138,6 +138,7 @@ functions:
   0x1400B7420: IsBoundByDuty56
   0x1400B75A0: IsDutyRecorderPlayback
   0x1400B7600: IsInDeepDungeon
+  0x1400B7650: IsInEureka
   0x1400B7860: IsUnconscious
   0x1400B7870: IsRolePlaying
   0x1400B79F0: IsClassJobACrafter   # static, (classJobId) -> bool
@@ -8352,9 +8353,16 @@ classes:
       0x140E11580: Finalize
       0x140E13690: IsMainCommandEnabled
       0x140E136C0: SetMainCommandEnabledState
+      0x140E18680: UpdateCharacter
       0x140E18C70: UpdateParty
       0x140E1A770: UpdateDTR
+      0x140E1B8D0: UpdateContentGauge
+      0x140E1BBF0: UpdateMainCommands
+      0x140E1BE90: UpdateNaviMap
+      0x140E1CEE0: UpdateEnemyList
       0x140E1D720: UpdateHotBar
+      0x140E1E6D0: UpdateExp
+      0x140E30B60: UpdateBattleTalk
       0x140E2C530: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
       0x140E2FD70: GetMainCommandString  # MainCommand exd
       0x140E300B0: OpenSystemMenu
