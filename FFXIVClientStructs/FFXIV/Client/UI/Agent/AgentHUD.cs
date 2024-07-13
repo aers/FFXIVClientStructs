@@ -37,9 +37,9 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0x3500)] public uint ExpCurrentExperience;
     [FieldOffset(0x3504)] public uint ExpNeededExperience;
     [FieldOffset(0x3508)] public uint ExpRestedExperience;
-    [FieldOffset(0x350C)] public uint ExpClassJobId;
+    [FieldOffset(0x350C)] public uint CharacterClassJobId;
 
-    [FieldOffset(0x351C)] public uint ExpClassJobId2; // probably for a different use case
+    [FieldOffset(0x351C)] public uint ExpClassJobId;
     [FieldOffset(0x3520)] public ushort ExpLevel;
     [FieldOffset(0x3522)] public ushort ExpContentLevel; // level in eureka and bozja for example
     [FieldOffset(0x3524)] public bool ExpIsLevelSynced;
