@@ -8,8 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Base;
 [GenerateInterop]
 [Inherits<SchedulerState>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 33 FF 48 89 01 48 89 79 08 48 8B D9 40 88 79 10", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x208)]
+[StructLayout(LayoutKind.Explicit, Size = 0x210)]
 public unsafe partial struct CutSceneController {
     [FieldOffset(0x30)] public SchedulerResource* SchedulerResource;
-    [FieldOffset(0x160)] public uint CutsceneId;
+    [FieldOffset(0x168)] public uint CutsceneId;
 }
