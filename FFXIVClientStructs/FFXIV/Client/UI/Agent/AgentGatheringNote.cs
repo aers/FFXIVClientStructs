@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct AgentGatheringNote {
+    [FieldOffset(0xA0)] public uint ContextMenuItemId;
 
     [FieldOffset(0xB8)] public GatheringAreaInfo* GatheringAreaInfo; // Represents the currently set gathering area
 
