@@ -18,6 +18,9 @@ public unsafe partial struct RaptureGearsetModule {
 
     [FieldOffset(0xB5C8)] public int CurrentGearsetIndex;
 
+    [FieldOffset(0xB79C), FixedSizeArray] internal FixedSizeArray100<byte> _enabledGearsetIndex2EntryIndex;
+    [FieldOffset(0xB801)] public byte NumGearsets;
+
     /// <summary>
     /// Return a pointer to a <see cref="GearsetEntry"/> by index/ID.
     /// </summary>
@@ -139,6 +142,14 @@ public unsafe partial struct RaptureGearsetModule {
     /// <remarks>Equivalent to Flags.HasFlag(GearsetFlag.Exists) &amp;&amp; BannerIndex != 0.</remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 4F 0F B6 D3")]
     public partial bool HasLinkedBanner(byte gearsetId);
+
+    /// <summary>
+    /// Resolves the index of a GearsetEntry array that only contains enabled gearsets to the index in the actual <see cref="Entries"/> array.
+    /// </summary>
+    /// <param name="enabledGearsetIndex">The position in the list.</param>
+    /// <returns>The ID of the <see cref="GearsetEntry"/>.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C9 83 F8 64")]
+    public partial int ResolveIdFromEnabledIndex(byte enabledGearsetIndex);
 
     [Flags]
     public enum GearsetFlag : byte {

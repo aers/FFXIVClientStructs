@@ -7384,6 +7384,7 @@ classes:
       0x1407DC7C0: GetBannerIndex
       0x1407DC820: SetBannerIndex
       0x1407DC920: HasLinkedBanner
+      0x1407DC950: ResolveIdFromEnabledIndex
       0x1407DCD10: FindGearsetIdByName
   Client::UI::Misc::ItemFinderModule:
     vtbls:
@@ -8789,6 +8790,7 @@ classes:
       0x140E32910: ctor
       0x140E32BE0: Finalize
       0x140E33EB0: OpenRegistGearSetList # (this, InventoryItem*, ushort)
+      0x140E37700: OpenBannerEditorForGearset
   Client::UI::Agent::AgentSupportMain:
     vtbls:
       - ea: 0x141ECBB70
