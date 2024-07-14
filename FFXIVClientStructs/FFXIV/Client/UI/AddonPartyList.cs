@@ -22,6 +22,7 @@ public unsafe partial struct AddonPartyList {
 
     [FieldOffset(0x1370), FixedSizeArray] internal FixedSizeArray17<short> _edited; // 0X11 if edited? Need comfirm
 
+    [FieldOffset(0x1398)] public AtkResNode* PartyListAtkResNode;
     [FieldOffset(0x13A0)] public AtkNineGridNode* BackgroundNineGridNode;
     [FieldOffset(0x13A8)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
     [FieldOffset(0x13B0)] public AtkResNode* LeaderMarkResNode;
@@ -66,6 +67,6 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(0xD0)] public AtkResNode* TargetGlowContainer;
         [FieldOffset(0xD8)] public AtkNineGridNode* ClickFlash;
         [FieldOffset(0xE0)] public AtkNineGridNode* TargetGlow;
-        [FieldOffset(0xF0)] public byte EmnityByte; //01 or 02 or FF 
+        [FieldOffset(0xF0)] public byte EmnityByte; //01 or 02 or FF
     }
 }
