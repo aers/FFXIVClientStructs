@@ -1009,6 +1009,16 @@ classes:
       #0x140D40830: GetAbilitySlotIfNotLearned
       #0x140D40860: GetAbilityIndexIfLearned
       0x140D40890: GetRank
+  Client::Game::Group::PartyMember:
+    funcs:
+      0x140AC3B40: Reset
+      0x140AC3BE0: GetName
+      0x140AC3C10: SetName
+      0x140AC3C30: SetNameOverride
+      0x140AC3C40: SetIsValid
+      0x140AC3C60: IsInCurrentTerritory
+      0x140AC3C80: SetCutsceneFlags
+      0x140AC3CB0: GetBattleChara
   Client::Game::Group::GroupManager:
     instances:
       - ea: 0x14254EDB0
@@ -1028,6 +1038,7 @@ classes:
         name: ReplayInstance
         pointer: False
     funcs:
+      0x140AC3CD0: ResetAlliance
       0x140AC3EB0: SetPartySize
       0x140AC3F10: Initialize
       0x140AC3FA0: SetPartyEmpty
@@ -1044,6 +1055,7 @@ classes:
       0x140AC4CC0: IsEntityIdPartyLeader
       0x140AC4EC0: SetPartyMemberExtraProperty
       0x140AC4F10: SetAllianceMemberExtraProperty
+      0x140AC4F60: SetAllianceMemberNameOverride
       0x140AC4F80: UpdateAllianceMemberAtIndex
       0x140AC5120: UpdateInAllianceFlagForAllCharacters
       0x140AC5280: GetPartyMemberByEntityId
