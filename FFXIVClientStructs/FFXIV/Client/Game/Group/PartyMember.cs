@@ -9,7 +9,11 @@ public unsafe partial struct PartyMember {
     [FieldOffset(0x2F0)] public float X;
     [FieldOffset(0x2F4)] public float Y;
     [FieldOffset(0x2F8)] public float Z;
+
+    [Obsolete("Renamed to AccountId", true)]
     [FieldOffset(0x300)] public ulong Unk300; // content id for anonymous players?
+    [FieldOffset(0x300)] public ulong AccountId;
+
     [FieldOffset(0x308)] public ulong ContentId;
     [FieldOffset(0x310)] public uint EntityId;
     [FieldOffset(0x314)] public uint PetEntityId; // carbuncle, etc
