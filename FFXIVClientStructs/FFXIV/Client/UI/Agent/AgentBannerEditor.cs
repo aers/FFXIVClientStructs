@@ -13,8 +13,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentBannerEditor {
     [FieldOffset(0x28)] public AgentBannerEditorState* EditorState;
 
+    /// <param name="enabledGearsetIndex">
+    /// The index of the gearset in a filtered <see cref="RaptureGearsetModule.Entries"/> list of only enabled gearsets.
+    /// </param>
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 48 83 3D ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 84")]
-    public partial void OpenForGearset(int gearsetId);
+    public partial void OpenForGearset(int enabledGearsetIndex);
 }
 
 [GenerateInterop]
@@ -77,15 +80,18 @@ public unsafe partial struct AgentBannerEditorState {
 
     [FieldOffset(0x230)] public BannerModuleEntry BannerEntry;
 
+    // presumably a struct of size 0x64
     [FieldOffset(0x350), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
     [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray14<byte> _stain0Ids;
     [FieldOffset(0x396), FixedSizeArray] internal FixedSizeArray14<byte> _stain1Ids;
-
+    [FieldOffset(0x3A4), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
     [FieldOffset(0x3A8)] public uint Checksum;
     [FieldOffset(0x3AC)] public BannerGearVisibilityFlag GearVisibilityFlag;
-    [FieldOffset(0x3B0)] public byte GearsetIndex;
+    [FieldOffset(0x3B0), Obsolete("Renamed to EnabledGearsetIndex. This is the index of a RaptureGearsetModule.Entries list, which only contains enabled entries.")] public byte GearsetIndex;
+    [FieldOffset(0x3B0)] public byte EnabledGearsetIndex;
     [FieldOffset(0x3B1)] public byte ClassJobId;
-
+    //[FieldOffset(0x3B2)] public byte UnkByteOrBool;
+    //[FieldOffset(0x3B3)] public byte UnkByteOrBool;
     [FieldOffset(0x3B8)] public AgentBannerEditor* AgentBannerEditor;
     [FieldOffset(0x3C0)] public UIModule* UIModule;
     [FieldOffset(0x3C8)] public CharaViewPortrait* CharaView;
@@ -93,7 +99,8 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x3D8)] public EditorOpenType OpenType;
 
     [FieldOffset(0x3E4)] public float FrameCountdown; // starting at 0.5s on open
-    [FieldOffset(0x3E8)] public int GearsetId;
+    [FieldOffset(0x3E8), Obsolete("Renamed to OpenerEnabledGearsetIndex")] public int GearsetId;
+    [FieldOffset(0x3E8)] public int OpenerEnabledGearsetIndex; // not exactly sure why there is a second field for this
 
     [FieldOffset(0x3F0)] public int CloseDialogAddonId;
     [FieldOffset(0x3F4)] public bool HasDataChanged;
