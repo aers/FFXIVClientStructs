@@ -45,7 +45,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
         VirtualTable = StaticVirtualTablePointer;
         NodeText.Ctor();
     }
-    
+
     /// <summary>
     /// Set the text of the node.
     /// The game assumes the pointer passed to this function will stay alive. See <see href="https://github.com/aers/FFXIVClientStructs/issues/1040">here</see> for more information.
