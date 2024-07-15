@@ -4765,6 +4765,7 @@ classes:
       5: UpdateConstantBuffer
     funcs:
       0x1419EF160: LoadMatrix
+      0x1404230C0: SetMatrices
       0x14042ED70: MakeProjectionMatrix # unused, inlined in 7.0 around 14042EA2D (approx)
   Client::Graphics::Render::ShadowCamera:
     vtbls:
@@ -15875,7 +15876,11 @@ classes:
       0x140269210: Inverse
       0x140268380: InverseAndReturn
       0x140269DE0: OrthoOffCenterRH # (width, height, nearPlane, farPlane, topBottom, leftRight)
-      0x14026A1D0: PerspectiveFovLH # (fieldOfViewY, aspectRatio, znearPlane, zfarPlane)
+      0x140269E90: OrthoOffCenterRHReverseZ
+      0x14026A130: PerspectiveFovRHInfiniteFar
+      0x14026A1D0: PerspectiveFovRH # (fieldOfViewY, aspectRatio, znearPlane, zfarPlane)
+      0x14026A2A0: PerspectiveFovRHInfiniteFarReverseZ
+      0x14026A330: PerspectiveFovRHReverseZ
   Common::Component::BGCollision::Math::Vector3:
     funcs:
       0x1405D1ED0: Normalize
