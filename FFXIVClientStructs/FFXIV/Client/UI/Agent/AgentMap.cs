@@ -84,6 +84,9 @@ public unsafe partial struct AgentMap {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 45 28 48 8D 8C 24")]
     public partial void OpenMap(OpenMapInfo* data);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 B0 01 44 89 76 20")]
+    public partial void CloseMap();
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D 70 E8 ?? ?? ?? ?? 48 8D 54 24 ??")]
     public partial void AddGatheringTempMarker(uint styleFlags, int mapX, int mapY, uint iconId, int radius, Utf8String* tooltip);
 
