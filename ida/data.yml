@@ -14224,7 +14224,7 @@ classes:
       0x1413B0430: ctor
   Client::UI::AddonAlliance48:
     vtbls:
-      - ea: 141FC0958
+      - ea: 0x141FC0958
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14122E060: ctor
