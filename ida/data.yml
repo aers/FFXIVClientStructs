@@ -4670,7 +4670,7 @@ classes:
       - ea: 0x141ED0BC0
         base: Client::Graphics::Kernel::Resource
     funcs:
-      0x1403F38D0: Present 
+      0x1403F38D0: Present
   Client::Graphics::Kernel::Buffer:
     vtbls:
       - ea: 0x141ED0C00
@@ -13727,7 +13727,7 @@ classes:
       - ea: 0x141FC5038
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x14124ACA0: ctor 
+      0x14124ACA0: ctor
   Client::UI::AddonItemInspectionList:
     vtbls:
       - ea: 0x141FC8818
@@ -14222,6 +14222,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B0430: ctor
+  Client::UI::AddonAlliance48:
+    vtbls:
+      - ea: 141FC0958
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14122E060: ctor
   Client::UI::AddonToDoList:
     vtbls:
       - ea: 0x141FF4B48
