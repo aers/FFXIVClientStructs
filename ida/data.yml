@@ -11445,6 +11445,10 @@ classes:
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x141F53A38
+  Client::Game::Event::GatheringPointEventHandler:
+    vtbls:
+      - ea: 0x141F3B308
+        base: Client::Game::Event::GatheringEventHandler
   Client::Game::Event::GoldSaucerEventHandler:
     vtbls:
       - ea: 0x141F5F500
