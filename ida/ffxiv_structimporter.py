@@ -873,7 +873,7 @@ if api is None:
                 tif.create_func(func_data)
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
-            def update_virt_func(self, virt_func, struct) -> None:
+            def update_virt_func(self, virt_func, struct):
                 # type: (DefinedVFunc, DefinedStruct) -> None
                 func_name = "{0}.{1}".format(
                     self.clean_name(struct.type), virt_func.name
