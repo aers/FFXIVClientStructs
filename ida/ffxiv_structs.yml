@@ -103,7 +103,7 @@ enums:
     "NineGrid": 4
     "Counter": 5
     "Collision": 8
-    "UnknownNode10": 10
+    "ClippingMask": 10
 - type: Component::GUI::NodeFlags
   name: NodeFlags
   underlying: unsigned __int16
@@ -442,6 +442,13 @@ enums:
     "ArmouryNeckEars": 5
     "ArmouryWristsRings": 6
     "Equipped": 7
+- type: Client::UI::RaptureAtkModule::TextGimmickHintStyle
+  name: TextGimmickHintStyle
+  underlying: byte
+  namespace: Client.UI
+  values:
+    "Warning": 0
+    "Info": 1
 - type: Client::UI::RaptureAtkModule::AgentUpdateFlags
   name: AgentUpdateFlags
   underlying: byte
@@ -1938,9 +1945,9 @@ enums:
   namespace: Client.Game.Gauge
   values:
     "None": 0
-    "Coeurl": 1
-    "OpoOpo": 2
-    "Raptor": 3
+    "OpoOpo": 1
+    "Raptor": 2
+    "Coeurl": 3
 - type: Client::Game::Gauge::NadiFlags
   name: NadiFlags
   underlying: byte
@@ -2209,6 +2216,12 @@ enums:
     "MainHand": 0
     "OffHand": 1
     "Unk": 2
+- type: Client::Game::Character::EffectContainer::StatusEffect
+  name: StatusEffect
+  underlying: byte
+  namespace: Client.Game.Character
+  values:
+    "IsGPoseWet": 1
 - type: Client::Game::Character::LookAtContainer::BannerCameraFollowFlags
   name: BannerCameraFollowFlags
   underlying: byte
@@ -2252,6 +2265,143 @@ enums:
     "GatheringPoint": 7
     "BattleNpcSubkind6": 8
     "Other": 9
+- type: Client::UI::SeVirtualKey
+  name: SeVirtualKey
+  underlying: byte
+  namespace: Client.UI
+  values:
+    "NO_KEY": 0
+    "LBUTTON": 1
+    "RBUTTON": 2
+    "CANCEL": 3
+    "MBUTTON": 4
+    "XBUTTON1": 5
+    "XBUTTON2": 6
+    "BACK": 8
+    "TAB": 9
+    "CLEAR": 12
+    "RETURN": 13
+    "SHIFT": 16
+    "CONTROL": 17
+    "MENU": 18
+    "PAUSE": 19
+    "CAPITAL": 20
+    "KANA": 21
+    "HANGEUL": 21
+    "HANGUL": 21
+    "JUNJA": 23
+    "FINAL": 24
+    "HANJA": 25
+    "KANJI": 25
+    "ESCAPE": 27
+    "CONVERT": 28
+    "NONCONVERT": 29
+    "ACCEPT": 30
+    "MODECHANGE": 31
+    "SPACE": 32
+    "PRIOR": 33
+    "NEXT": 34
+    "END": 35
+    "HOME": 36
+    "LEFT": 37
+    "UP": 38
+    "RIGHT": 39
+    "DOWN": 40
+    "SELECT": 41
+    "PRINT": 42
+    "EXECUTE": 43
+    "SNAPSHOT": 44
+    "INSERT": 45
+    "DELETE": 46
+    "HELP": 47
+    "KEY_0": 48
+    "KEY_1": 49
+    "KEY_2": 50
+    "KEY_3": 51
+    "KEY_4": 52
+    "KEY_5": 53
+    "KEY_6": 54
+    "KEY_7": 55
+    "KEY_8": 56
+    "KEY_9": 57
+    "A": 65
+    "B": 66
+    "C": 67
+    "D": 68
+    "E": 69
+    "F": 70
+    "G": 71
+    "H": 72
+    "I": 73
+    "J": 74
+    "K": 75
+    "L": 76
+    "M": 77
+    "N": 78
+    "O": 79
+    "P": 80
+    "Q": 81
+    "R": 82
+    "S": 83
+    "T": 84
+    "U": 85
+    "V": 86
+    "W": 87
+    "X": 88
+    "Y": 89
+    "Z": 90
+    "LWIN": 91
+    "RWIN": 92
+    "APPS": 93
+    "SLEEP": 95
+    "NUMPAD0": 96
+    "NUMPAD1": 97
+    "NUMPAD2": 98
+    "NUMPAD3": 99
+    "NUMPAD4": 100
+    "NUMPAD5": 101
+    "NUMPAD6": 102
+    "NUMPAD7": 103
+    "NUMPAD8": 104
+    "NUMPAD9": 105
+    "MULTIPLY": 106
+    "ADD": 107
+    "SEPARATOR": 108
+    "SUBTRACT": 109
+    "DECIMAL": 110
+    "DIVIDE": 111
+    "F1": 112
+    "F2": 113
+    "F3": 114
+    "F4": 115
+    "F5": 116
+    "F6": 117
+    "F7": 118
+    "F8": 119
+    "F9": 120
+    "F10": 121
+    "F11": 122
+    "F12": 123
+    "F13": 124
+    "F14": 125
+    "F15": 126
+    "F16": 127
+    "NUMLOCK": 128
+    "SCROLL": 129
+    "F19": 130
+    "F20": 131
+    "F21": 132
+    "F22": 133
+    "F23": 134
+    "F24": 135
+- type: Client::UI::ModifierFlag
+  name: ModifierFlag
+  underlying: byte
+  namespace: Client.UI
+  values:
+    "Shift": 1
+    "Ctrl": 2
+    "Alt": 4
 - type: Client::UI::Misc::ConfigOption
   name: ConfigOption
   underlying: __int16
@@ -10626,6 +10776,14 @@ structs:
       name: flags
     - type: Client::System::String::Utf8String*
       name: characterList
+  - signature: E8 ?? ?? ?? ?? 48 8B 6B 20
+    return_type: Client::System::String::Utf8String*
+    name: ConcatCStr
+    parameters:
+    - type: Client::System::String::Utf8String*
+      name: this
+    - type: byte*
+      name: buffer
 - type: Client::System::Scheduler::ActionTimelineManager
   name: ActionTimelineManager
   namespace: Client.System.Scheduler
@@ -13692,19 +13850,19 @@ structs:
   union: False
   size: 144
   fields:
-  - type: byte
+  - type: unsigned int
     name: QueuedContentFinderConditionId1
     offset: 4
-  - type: byte
+  - type: unsigned int
     name: QueuedContentFinderConditionId2
     offset: 12
-  - type: byte
+  - type: unsigned int
     name: QueuedContentFinderConditionId3
     offset: 20
-  - type: byte
+  - type: unsigned int
     name: QueuedContentFinderConditionId4
     offset: 28
-  - type: byte
+  - type: unsigned int
     name: QueuedContentFinderConditionId5
     offset: 36
   - type: unsigned int
@@ -16058,6 +16216,20 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Character::EffectContainer
+  name: EffectContainer
+  namespace: Client.Game.Character
+  union: False
+  size: 80
+  fields:
+  - type: Client::Game::Character::ContainerInterface
+    name: ContainerInterface
+    offset: 0
+  - type: Client::Game::Character::EffectContainer::StatusEffect
+    name: StatusEffects
+    offset: 48
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Character::MountContainer
   name: MountContainer
   namespace: Client.Game.Character
@@ -17317,9 +17489,8 @@ structs:
     name: AetherflowStacks
     offset: 8
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 9
-    size: 1
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudSCH0::FaerieGaugeData
@@ -17338,9 +17509,17 @@ structs:
     name: FaeMax
     offset: 12
   - type: byte
-    name: Prerequisites
+    name: Aetherpact
     offset: 16
-    size: 3
+  - type: byte
+    name: Enabled
+    offset: 17
+  - type: byte
+    name: FaerieSummoned
+    offset: 18
+  - type: int
+    name: FaeMilestone
+    offset: 20
   - type: int
     name: SeraphTimeLeft
     offset: 24
@@ -17537,28 +17716,54 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
     name: AddonJobHudGaugeData
     offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudSMN1::TranceGauge
-  name: TranceGauge
-  namespace: Client.UI
-  union: False
-  size: 336
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudSMN1::TranceGaugeSimple
-  name: TranceGaugeSimple
-  namespace: Client.UI
-  union: False
-  size: 216
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: byte
+    name: BahamutPlateEnabled
+    offset: 9
+  - type: byte
+    name: SolarBahamutEnabled
+    offset: 10
+  - type: int
+    name: Phase
+    offset: 12
+  - type: int
+    name: SummonTimeLeft
+    offset: 16
+  - type: int
+    name: SummonTimeMax
+    offset: 20
+  - type: int
+    name: EgiCount
+    offset: 24
+  - type: byte
+    name: IfritReady
+    offset: 28
+  - type: byte
+    name: TitanReady
+    offset: 29
+  - type: byte
+    name: GarudaReady
+    offset: 30
+  - type: int
+    name: int30
+    offset: 32
+  - type: int
+    name: int34
+    offset: 36
+  - type: int
+    name: int38
+    offset: 40
+  - type: int
+    name: CurrentEgi
+    offset: 44
+  - type: int
+    name: Attunement
+    offset: 48
+  - type: int
+    name: EgiTimeLeft
+    offset: 52
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudAST0::ArcanaGaugeData
@@ -17570,45 +17775,47 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
     name: AddonJobHudGaugeData
     offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: byte
+    name: MinorArcanaEnabled
+    offset: 9
+  - type: int
+    name: ArcanumIdI
+    offset: 12
+  - type: int
+    name: ArcanumIdII
+    offset: 16
+  - type: int
+    name: ArcanumIdIII
+    offset: 20
+  - type: int
+    name: MinorArcanumId
+    offset: 24
+  - type: int
+    name: FrameColor
+    offset: 28
   virtual_functions: []
   member_functions: []
-- type: Client::UI::AddonJobHudAST0::ArcanaGauge
-  name: ArcanaGauge
+- type: Client::UI::AddonJobHudAST0::ArcanaCard
+  name: ArcanaCard
   namespace: Client.UI
   union: False
-  size: 168
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudAST0::ArcanaGaugeSimple
-  name: ArcanaGaugeSimple
-  namespace: Client.UI
-  union: False
-  size: 160
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudAST0::Astrosign
-  name: Astrosign
-  namespace: Client.UI
-  union: False
-  size: 24
+  size: 32
   fields:
   - type: Component::GUI::AtkComponentBase*
-    name: Container
+    name: CardComponent
     offset: 0
   - type: Component::GUI::AtkResNode*
     name: Symbol
     offset: 8
-  - type: int
-    name: Type
+  - type: Component::GUI::AtkResNode*
+    name: Frame
     offset: 16
+  - type: int
+    name: ArcanumId
+    offset: 24
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM0::ElementalGaugeData
@@ -17621,9 +17828,20 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 5
+  - type: byte
+    name: ElementActive
+    offset: 9
+  - type: byte
+    name: EnochianActive
+    offset: 10
+  - type: byte
+    name: PolyglotEnabled
+    offset: 11
+  - type: byte
+    name: ParadoxEnabled
+    offset: 12
   - type: int
     name: ElementStacks
     offset: 16
@@ -17656,17 +17874,6 @@ structs:
     offset: 52
   virtual_functions: []
   member_functions: []
-- type: Client::UI::AddonJobHudBLM0::ElementalGauge
-  name: ElementalGauge
-  namespace: Client.UI
-  union: False
-  size: 384
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
-  virtual_functions: []
-  member_functions: []
 - type: Client::UI::AddonJobHudBLM0::ElementalGaugeSimple
   name: ElementalGaugeSimple
   namespace: Client.UI
@@ -17676,6 +17883,57 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
     offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: Container2
+    offset: 24
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: ElementalTimerDisplay
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: ElementStack
+    offset: 40
+    size: 3
+  - type: Component::GUI::AtkComponentBase*
+    name: UmbralHearts
+    offset: 64
+    size: 3
+  - type: Component::GUI::AtkComponentBase*
+    name: ElementalIcon
+    offset: 88
+  - type: Component::GUI::AtkResNode*
+    name: EnochianGauge
+    offset: 96
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: EnochianGaugeBar
+    offset: 104
+  - type: Component::GUI::AtkComponentBase*
+    name: PolyglotGems
+    offset: 112
+    size: 3
+  - type: Component::GUI::AtkComponentBase*
+    name: ParadoxGem
+    offset: 136
+  - type: int
+    name: ElementStacks
+    offset: 144
+  - type: int
+    name: ElementStackMax
+    offset: 148
+  - type: int
+    name: UmbralHeartCount
+    offset: 152
+  - type: byte
+    name: ParadoxReady
+    offset: 160
+  - type: int
+    name: PolyglotStacks
+    offset: 164
+  - type: int
+    name: TimelineFrameId
+    offset: 168
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM1::AstralGaugeData
@@ -17687,28 +17945,15 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
     name: AddonJobHudGaugeData
     offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudBLM1::AstralGauge
-  name: AstralGauge
-  namespace: Client.UI
-  union: False
-  size: 128
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudBLM1::AstralGaugeSimple
-  name: AstralGaugeSimple
-  namespace: Client.UI
-  union: False
-  size: 176
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: byte
+    name: Active
+    offset: 9
+  - type: int
+    name: StackCount
+    offset: 12
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBRD0::SongGaugeData
@@ -17721,9 +17966,23 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 6
+  - type: byte
+    name: SongPlaying
+    offset: 9
+  - type: byte
+    name: StaffHighlight
+    offset: 10
+  - type: byte
+    name: SoulVoiceEnabled
+    offset: 11
+  - type: byte
+    name: SongIconsEnabled
+    offset: 12
+  - type: byte
+    name: BlastArrowTick
+    offset: 13
   - type: int
     name: SoulVoiceValue
     offset: 16
@@ -17908,9 +18167,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 2
+  - type: byte
+    name: Dancing
+    offset: 9
   - type: int
     name: DanceStatus
     offset: 12
@@ -17927,6 +18188,9 @@ structs:
   - type: int
     name: StandardFinishTimeLeft
     offset: 40
+  - type: byte
+    name: FinishEffect
+    offset: 44
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDNC0::StepGauge
@@ -18011,9 +18275,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 2
+  - type: byte
+    name: EspritEnabled
+    offset: 9
   - type: int
     name: FeatherCount
     offset: 12
@@ -18124,6 +18390,24 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
     name: AddonJobHudGaugeData
     offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: byte
+    name: FirstMindsFocusEnabled
+    offset: 9
+  - type: int
+    name: LotDStatus
+    offset: 12
+  - type: int
+    name: LotDTimer
+    offset: 16
+  - type: int
+    name: LotDMax
+    offset: 20
+  - type: int
+    name: FirstMindsFocusCount
+    offset: 24
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRG0::DragonGauge
@@ -18135,6 +18419,27 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
     offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: Container2
+    offset: 24
+  - type: int
+    name: LotDStatus
+    offset: 32
+  - type: Component::GUI::AtkTextNode*
+    name: LotDTimerText
+    offset: 40
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: LotDTimerGaugeBar
+    offset: 48
+  - type: Component::GUI::AtkResNode*
+    name: FirstMindsFocusContainer
+    offset: 56
+  - type: Component::GUI::AtkResNode*
+    name: FirstMindsFocusContainer2
+    offset: 64
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRG0::DragonGaugeSimple
@@ -18146,6 +18451,36 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
     offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: LotDTimerDisplay
+    offset: 24
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: LotDTimerGaugeBar
+    offset: 32
+  - type: Component::GUI::AtkResNode*
+    name: FirstMindsFocusContainer
+    offset: 40
+  - type: Component::GUI::AtkResNode*
+    name: FirstMindsFocusContainer2
+    offset: 48
+  - type: byte
+    name: FirstMindsFocusReady
+    offset: 56
+  - type: Component::GUI::AtkComponentBase*
+    name: FirstMindsFocus1
+    offset: 64
+  - type: Component::GUI::AtkResNode*
+    name: FirstMindsFocusGlow1
+    offset: 72
+  - type: Component::GUI::AtkComponentBase*
+    name: FirstMindsFocus2
+    offset: 80
+  - type: Component::GUI::AtkResNode*
+    name: FirstMindsFocusGlow2
+    offset: 88
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudDRK0::BloodGaugeData
@@ -18158,9 +18493,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 2
+  - type: byte
+    name: BarEnabled
+    offset: 9
   - type: byte
     name: TankStance
     offset: 10
@@ -18240,9 +18577,14 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 3
+  - type: byte
+    name: DarkArtsEnabled
+    offset: 9
+  - type: byte
+    name: DarkArtsActive
+    offset: 10
   - type: int
     name: DarksideTimeLeft
     offset: 12
@@ -18322,9 +18664,17 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 4
+  - type: byte
+    name: CartridgesEnabled
+    offset: 9
+  - type: byte
+    name: TankStance
+    offset: 10
+  - type: byte
+    name: Cartridge3Enabled
+    offset: 11
   - type: int
     name: Ammo
     offset: 12
@@ -18396,9 +18746,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: HeatEnabled
     offset: 8
-    size: 2
+  - type: byte
+    name: BatteryEnabled
+    offset: 9
   - type: int
     name: HeatValue
     offset: 12
@@ -18525,8 +18877,8 @@ structs:
     offset: 96
   virtual_functions: []
   member_functions: []
-- type: Client::UI::AddonJobHudMNK0::MastersGaugeData
-  name: MastersGaugeData
+- type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeData
+  name: BeastChakraGaugeData
   namespace: Client.UI
   union: False
   size: 56
@@ -18534,10 +18886,58 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
     name: AddonJobHudGaugeData
     offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: byte
+    name: BeastChakraEnabled
+    offset: 9
+  - type: byte
+    name: NadiEnabled
+    offset: 10
+  - type: int
+    name: BeastChakra1
+    offset: 12
+  - type: int
+    name: BeastChakra2
+    offset: 16
+  - type: int
+    name: BeastChakra3
+    offset: 20
+  - type: byte
+    name: LunarNadi
+    offset: 24
+  - type: byte
+    name: SolarNadi
+    offset: 25
+  - type: int
+    name: BlitzTimeRemaining
+    offset: 28
+  - type: int
+    name: BlitzType
+    offset: 32
+  - type: byte
+    name: OpoOpoEnabled
+    offset: 37
+  - type: byte
+    name: RaptorEnabled
+    offset: 38
+  - type: byte
+    name: CoeurlEnabled
+    offset: 39
+  - type: int
+    name: OpoOpoCount
+    offset: 40
+  - type: int
+    name: RaptorCount
+    offset: 44
+  - type: int
+    name: CoeurlCount
+    offset: 48
   virtual_functions: []
   member_functions: []
-- type: Client::UI::AddonJobHudMNK0::MastersGauge
-  name: MastersGauge
+- type: Client::UI::AddonJobHudMNK0::BeastChakraGauge
+  name: BeastChakraGauge
   namespace: Client.UI
   union: False
   size: 232
@@ -18545,10 +18945,88 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
     offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: NadiContainer
+    offset: 16
+  - type: Component::GUI::AtkComponentBase*
+    name: BeastChakra1
+    offset: 24
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIcon1
+    offset: 32
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraId1
+    offset: 40
+  - type: Component::GUI::AtkComponentBase*
+    name: BeastChakra2
+    offset: 48
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIcon2
+    offset: 56
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraId2
+    offset: 64
+  - type: Component::GUI::AtkComponentBase*
+    name: BeastChakra3
+    offset: 72
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIcon3
+    offset: 80
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraId3
+    offset: 88
+  - type: Component::GUI::AtkComponentBase*
+    name: LunarNadi
+    offset: 96
+  - type: Component::GUI::AtkComponentBase*
+    name: SolarNadi
+    offset: 104
+  - type: Component::GUI::AtkResNode*
+    name: NadiIcons
+    offset: 112
+  - type: Component::GUI::AtkResNode*
+    name: BlitzTimer
+    offset: 128
+  - type: Component::GUI::AtkTextNode*
+    name: BlitzTimerText
+    offset: 136
+  - type: byte
+    name: BlitzActive
+    offset: 144
+  - type: int
+    name: BlitzType
+    offset: 148
+  - type: Component::GUI::AtkResNode*
+    name: Nadi
+    offset: 160
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraSlots
+    offset: 168
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 176
+  - type: Component::GUI::AtkComponentBase*
+    name: OpoOpoStack1
+    offset: 184
+  - type: Component::GUI::AtkComponentBase*
+    name: RaptorStack1
+    offset: 192
+  - type: Component::GUI::AtkComponentBase*
+    name: RaptorStack2
+    offset: 200
+  - type: Component::GUI::AtkComponentBase*
+    name: CoeurlStack1
+    offset: 208
+  - type: Component::GUI::AtkComponentBase*
+    name: CoeurlStack2
+    offset: 216
+  - type: Component::GUI::AtkComponentBase*
+    name: CoeurlStack3
+    offset: 224
   virtual_functions: []
   member_functions: []
-- type: Client::UI::AddonJobHudMNK0::MastersGaugeSimple
-  name: MastersGaugeSimple
+- type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeSimple
+  name: BeastChakraGaugeSimple
   namespace: Client.UI
   union: False
   size: 248
@@ -18556,6 +19034,84 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
     offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: NadiContainer
+    offset: 16
+  - type: Component::GUI::AtkComponentBase*
+    name: BeastChakra1
+    offset: 24
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIconContainer1
+    offset: 32
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIcon1
+    offset: 40
+  - type: int
+    name: BeastChakraId1
+    offset: 48
+  - type: Component::GUI::AtkComponentBase*
+    name: BeastChakra2
+    offset: 56
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIconContainer2
+    offset: 64
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIcon2
+    offset: 72
+  - type: int
+    name: BeastChakraId2
+    offset: 80
+  - type: Component::GUI::AtkComponentBase*
+    name: BeastChakra3
+    offset: 88
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIconContainer3
+    offset: 96
+  - type: Component::GUI::AtkResNode*
+    name: BeastChakraIcon3
+    offset: 104
+  - type: int
+    name: BeastChakraId3
+    offset: 112
+  - type: Component::GUI::AtkComponentBase*
+    name: LunarNadi
+    offset: 120
+  - type: Component::GUI::AtkComponentBase*
+    name: SolarNadi
+    offset: 128
+  - type: Component::GUI::AtkResNode*
+    name: BlitzTimer
+    offset: 144
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: BlitzTimerDisplay
+    offset: 152
+  - type: Component::GUI::AtkResNode*
+    name: LunarNadiFlash
+    offset: 168
+  - type: Component::GUI::AtkResNode*
+    name: SolarNadiFlash
+    offset: 176
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 192
+  - type: Component::GUI::AtkComponentBase*
+    name: OpoOpoStack1
+    offset: 200
+  - type: Component::GUI::AtkComponentBase*
+    name: RaptorStack1
+    offset: 208
+  - type: Component::GUI::AtkComponentBase*
+    name: RaptorStack2
+    offset: 216
+  - type: Component::GUI::AtkComponentBase*
+    name: CoeurlStack1
+    offset: 224
+  - type: Component::GUI::AtkComponentBase*
+    name: CoeurlStack2
+    offset: 232
+  - type: Component::GUI::AtkComponentBase*
+    name: CoeurlStack3
+    offset: 240
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK1::ChakraGaugeData
@@ -18567,28 +19123,15 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
     name: AddonJobHudGaugeData
     offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudMNK1::ChakraGauge
-  name: ChakraGauge
-  namespace: Client.UI
-  union: False
-  size: 160
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonJobHudMNK1::ChakraGaugeSimple
-  name: ChakraGaugeSimple
-  namespace: Client.UI
-  union: False
-  size: 208
-  fields:
-  - type: Client::UI::AddonJobHud::AddonJobHudGauge
-    name: AddonJobHudGauge
-    offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: int
+    name: ChakraCount
+    offset: 12
+  - type: byte
+    name: CounterGlowActive
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudNIN0::NinkiGaugeData
@@ -18601,9 +19144,8 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 1
   - type: int
     name: NinkiValue
     offset: 12
@@ -18676,6 +19218,12 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
     name: AddonJobHudGaugeData
     offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: int
+    name: StackCount
+    offset: 12
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudNIN1::KazematoiGauge
@@ -18687,6 +19235,22 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
     offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkComponentBase*
+    name: SwipeEffect
+    offset: 24
+  - type: Component::GUI::AtkComponentBase*
+    name: ScrollingClouds
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: StackIcons
+    offset: 48
+    size: 5
+  - type: int
+    name: StackCount
+    offset: 88
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudNIN1::KazematoiGaugeSimple
@@ -18698,6 +19262,220 @@ structs:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
     offset: 0
+  - type: Component::GUI::AtkComponentBase*
+    name: StackIcons
+    offset: 16
+    size: 5
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM0::CanvasGaugeData
+  name: CanvasGaugeData
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
+    name: AddonJobHudGaugeData
+    offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: byte
+    name: WeaponEnabled
+    offset: 9
+  - type: byte
+    name: LandscapeEnabled
+    offset: 10
+  - type: byte
+    name: MadeenEnabled
+    offset: 11
+  - type: byte
+    name: CreaturePortrait
+    offset: 12
+  - type: int
+    name: CreaturePartFlags
+    offset: 16
+  - type: int
+    name: CreatureMotif
+    offset: 20
+  - type: byte
+    name: WeaponMotif
+    offset: 24
+  - type: byte
+    name: LandscapeMotif
+    offset: 25
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM0::CanvasGauge
+  name: CanvasGauge
+  namespace: Client.UI
+  union: False
+  size: 160
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: CreaturePartBox
+    offset: 24
+  - type: Component::GUI::AtkComponentBase*
+    name: CreaturePartPom
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: CreaturePartWing
+    offset: 40
+  - type: Component::GUI::AtkComponentBase*
+    name: CreaturePartClaw
+    offset: 48
+  - type: Component::GUI::AtkResNode*
+    name: CreaturePortrait
+    offset: 56
+  - type: Component::GUI::AtkComponentBase*
+    name: MooglePortrait
+    offset: 64
+  - type: Component::GUI::AtkComponentBase*
+    name: MadeenPortrait
+    offset: 72
+  - type: Component::GUI::AtkResNode*
+    name: CreatureCanvas
+    offset: 80
+  - type: Component::GUI::AtkComponentBase*
+    name: CreaturePomPainting
+    offset: 88
+  - type: Component::GUI::AtkComponentBase*
+    name: CreatureWingPainting
+    offset: 96
+  - type: Component::GUI::AtkComponentBase*
+    name: CreatureClawPainting
+    offset: 104
+  - type: Component::GUI::AtkComponentBase*
+    name: WeaponPaintingHammer
+    offset: 120
+  - type: Component::GUI::AtkComponentBase*
+    name: LandscapePaintingStarrySky
+    offset: 128
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM0::CanvasGaugeSimple
+  name: CanvasGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 112
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: CreaturePartBox
+    offset: 24
+  - type: Component::GUI::AtkComponentBase*
+    name: CreaturePartPom
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: CreaturePartWing
+    offset: 40
+  - type: Component::GUI::AtkComponentBase*
+    name: CreaturePartClaw
+    offset: 48
+  - type: Component::GUI::AtkComponentBase*
+    name: CreaturePortrait
+    offset: 56
+  - type: Component::GUI::AtkComponentBase*
+    name: CreatureCanvas
+    offset: 64
+  - type: Component::GUI::AtkComponentBase*
+    name: WeaponCanvas
+    offset: 72
+  - type: Component::GUI::AtkComponentBase*
+    name: LandscapeCanvas
+    offset: 80
+  - type: int
+    name: CreaturePartFlags
+    offset: 88
+  - type: int
+    name: CreatureMotif
+    offset: 96
+  - type: int
+    name: WeaponMotif
+    offset: 104
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM1::PaletteGaugeData
+  name: PaletteGaugeData
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
+    name: AddonJobHudGaugeData
+    offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: byte
+    name: SubtractiveActive
+    offset: 9
+  - type: byte
+    name: WhitePaintEnabled
+    offset: 10
+  - type: byte
+    name: BlackPaintEnabled
+    offset: 11
+  - type: int
+    name: PaletteValue
+    offset: 12
+  - type: int
+    name: PaletteMax
+    offset: 16
+  - type: int
+    name: PaletteMid
+    offset: 20
+  - type: int
+    name: WhitePaint
+    offset: 24
+  - type: int
+    name: BlackPaint
+    offset: 28
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM1::PaletteGauge
+  name: PaletteGauge
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Client::UI::AddonJobHudRPM1::PaletteGauge::PaletteBarStandard*
+    name: PaletteBar
+    offset: 16
+  - type: Client::UI::AddonJobHudRPM1::PaletteGauge::PaintStacksStandard*
+    name: PaintStacks
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple
+  name: PaletteGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaletteBarSimple*
+    name: PaletteBar
+    offset: 16
+  - type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaintStacksSimple*
+    name: PaintStacks
+    offset: 24
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudPLD0::OathGaugeData
@@ -18710,9 +19488,14 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: TankStance
     offset: 8
-    size: 3
+  - type: byte
+    name: BarEnabled
+    offset: 9
+  - type: byte
+    name: Enabled
+    offset: 10
   - type: int
     name: OathValue
     offset: 12
@@ -18792,9 +19575,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 3
+  - type: byte
+    name: ManaStacksEnabled
+    offset: 10
   - type: int
     name: BlackMana
     offset: 12
@@ -18885,9 +19670,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 2
+  - type: byte
+    name: ShroudEnabled
+    offset: 9
   - type: int
     name: SoulValue
     offset: 12
@@ -19012,9 +19799,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 2
+  - type: byte
+    name: Enshrouded
+    offset: 9
   - type: int
     name: LemureShroudStacks
     offset: 12
@@ -19036,9 +19825,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 3
+  - type: byte
+    name: MeditationEnabled
+    offset: 10
   - type: int
     name: MeditationStackCount
     offset: 12
@@ -19182,9 +19973,8 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 1
   - type: byte
     name: HasSetsu
     offset: 9
@@ -19297,9 +20087,8 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 1
   - type: byte
     name: EukrasiaActive
     offset: 9
@@ -19349,9 +20138,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 2
+  - type: byte
+    name: AdderstingEnabled
+    offset: 9
   - type: int
     name: Addersgall
     offset: 12
@@ -19446,6 +20237,144 @@ structs:
     offset: 92
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonJobHudRDB0::VipersightGaugeData
+  name: VipersightGaugeData
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
+    name: AddonJobHudGaugeData
+    offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: byte
+    name: RattlingCoilsEnabled
+    offset: 9
+  - type: byte
+    name: LeftGlow
+    offset: 10
+  - type: byte
+    name: RightGlow
+    offset: 11
+  - type: int
+    name: ComboStep
+    offset: 12
+  - type: int
+    name: CoilStacks
+    offset: 16
+  - type: int
+    name: CoilMax
+    offset: 20
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB0::VipersightGauge
+  name: VipersightGauge
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Client::UI::AddonJobHudRDB0::VipersightGauge::ViperBladesStandard*
+    name: ViperBlades
+    offset: 16
+  - type: Client::UI::AddonJobHudRDB0::VipersightGauge::RattlingCoilStandard*
+    name: RattlingCoil
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple
+  name: VipersightGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple::ViperBladesSimple*
+    name: ViperBlades
+    offset: 16
+  - type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple::RattlingCoilSimple*
+    name: RattlingCoil
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeData
+  name: SerpentOfferingsGaugeData
+  namespace: Client.UI
+  union: False
+  size: 48
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGaugeData
+    name: AddonJobHudGaugeData
+    offset: 0
+  - type: byte
+    name: Enabled
+    offset: 8
+  - type: int
+    name: GaugeValue
+    offset: 12
+  - type: int
+    name: GaugeMid
+    offset: 16
+  - type: int
+    name: GaugeMax
+    offset: 20
+  - type: byte
+    name: TributesUnlocked
+    offset: 24
+  - type: int
+    name: TributeStacks
+    offset: 28
+  - type: int
+    name: TributeMax
+    offset: 32
+  - type: int
+    name: TributeTimeLeft
+    offset: 36
+  - type: int
+    name: TributeMaxTime
+    offset: 40
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge
+  name: SerpentOfferingsGauge
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge::OfferingsBar*
+    name: _offeringsBar
+    offset: 16
+  - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge::TributeCounter*
+    name: _tributeCounter
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple
+  name: SerpentOfferingsGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple::OfferingsBarSimple*
+    name: _offeringsBar
+    offset: 16
+  - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple::TributeCounterSimple*
+    name: _tributeCounter
+    offset: 24
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonJobHudWAR0::BeastGaugeData
   name: BeastGaugeData
   namespace: Client.UI
@@ -19456,9 +20385,14 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 3
+  - type: byte
+    name: BarEnabled
+    offset: 9
+  - type: byte
+    name: TankStance
+    offset: 10
   - type: int
     name: BeastValue
     offset: 12
@@ -19538,9 +20472,11 @@ structs:
     name: AddonJobHudGaugeData
     offset: 0
   - type: byte
-    name: Prerequisites
+    name: Enabled
     offset: 8
-    size: 2
+  - type: byte
+    name: BloodLilyEnabled
+    offset: 9
   - type: int
     name: LilyCount
     offset: 12
@@ -20252,6 +21188,26 @@ structs:
   - type: Client::UI::UI3DModule::MapInfo
     name: MapInfo
     offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::UIInputData::Keybind
+  name: Keybind
+  namespace: Client.UI
+  union: False
+  size: 11
+  fields:
+  - type: Client::UI::SeVirtualKey
+    name: Key
+    offset: 0
+  - type: Client::UI::ModifierFlag
+    name: Modifier
+    offset: 1
+  - type: Client::UI::SeVirtualKey
+    name: AltKey
+    offset: 2
+  - type: Client::UI::ModifierFlag
+    name: AltModifier
+    offset: 3
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Misc::AcquaintanceModule::Acquaintance
@@ -23406,6 +24362,218 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge
+  name: EgiGauge
+  namespace: Client.UI
+  union: False
+  size: 40
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: Container
+    offset: 0
+  - type: Component::GUI::AtkTextNode*
+    name: AttunementStackText
+    offset: 8
+  - type: Component::GUI::AtkResNode*
+    name: Gem
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: Silhouette
+    offset: 24
+  - type: int
+    name: Status
+    offset: 32
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple
+  name: EgiGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: Gem
+    offset: 0
+  - type: Component::GUI::AtkTextNode*
+    name: AttunementStackText
+    offset: 8
+  - type: Component::GUI::AtkResNode*
+    name: GemGlow
+    offset: 16
+  - type: int
+    name: Status
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudBLM0::ElementalGauge::UmbralHeart
+  name: UmbralHeart
+  namespace: Client.UI
+  union: False
+  size: 16
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: Container
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Glow
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudBLM0::ElementalGauge::PolyglotStack
+  name: PolyglotStack
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: Container
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Gem
+    offset: 8
+  - type: Component::GUI::AtkResNode*
+    name: Slot
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudBLM1::AstralGauge::AstralSoulStack
+  name: AstralSoulStack
+  namespace: Client.UI
+  union: False
+  size: 16
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: StackComponent
+    offset: 0
+  - type: byte
+    name: Active
+    offset: 8
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudBLM1::AstralGaugeSimple::AstralStackSimple
+  name: AstralStackSimple
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: StackComponent
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: GlowNode
+    offset: 8
+  - type: byte
+    name: Byte10
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudMNK1::ChakraGauge::Chakra
+  name: Chakra
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: Icon
+    offset: 8
+  - type: byte
+    name: Active
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudMNK1::ChakraGaugeSimple::ChakraSimple
+  name: ChakraSimple
+  namespace: Client.UI
+  union: False
+  size: 32
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: Icon
+    offset: 8
+  - type: byte
+    name: Active
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM1::PaletteGauge::PaletteBarStandard
+  name: PaletteBarStandard
+  namespace: Client.UI
+  union: False
+  size: 96
+  fields:
+  - type: Component::GUI::AtkTextNode*
+    name: ValueText
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: ValueDisplay
+    offset: 24
+  - type: Component::GUI::AtkResNode*
+    name: GaugeBarContainer
+    offset: 32
+  - type: byte
+    name: CanSpend
+    offset: 40
+  - type: Component::GUI::AtkResNode*
+    name: MainFillNode
+    offset: 48
+  - type: Component::GUI::AtkImageNode*
+    name: IncreaseFillNode
+    offset: 56
+  - type: Component::GUI::AtkImageNode*
+    name: DecreaseFillNode
+    offset: 64
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM1::PaletteGauge::PaintStacksStandard
+  name: PaintStacksStandard
+  namespace: Client.UI
+  union: False
+  size: 88
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkComponentBase*
+    name: Stacks
+    offset: 24
+    size: 5
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaletteBarSimple
+  name: PaletteBarSimple
+  namespace: Client.UI
+  union: False
+  size: 64
+  fields:
+  - type: Component::GUI::AtkTextNode*
+    name: BarTextNode
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: ValueDisplay
+    offset: 24
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: GaugeBarComponent
+    offset: 32
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 40
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaintStacksSimple
+  name: PaintStacksSimple
+  namespace: Client.UI
+  union: False
+  size: 72
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkComponentBase*
+    name: Stacks
+    offset: 24
+    size: 5
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonJobHudRDM0::BalanceGauge::ManaBar
   name: ManaBar
   namespace: Client.UI
@@ -23490,6 +24658,219 @@ structs:
     offset: 20
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonJobHudRDB0::VipersightGauge::ViperBladesStandard
+  name: ViperBladesStandard
+  namespace: Client.UI
+  union: False
+  size: 40
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: LeftBlade
+    offset: 8
+  - type: Component::GUI::AtkComponentBase*
+    name: RightBlade
+    offset: 16
+  - type: byte
+    name: LeftGlow
+    offset: 24
+  - type: byte
+    name: RightGlow
+    offset: 25
+  - type: int
+    name: LeftTimelineFrameId
+    offset: 28
+  - type: int
+    name: RightTimelineFrameId
+    offset: 32
+  - type: int
+    name: ComboStep
+    offset: 36
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB0::VipersightGauge::RattlingCoilStandard
+  name: RattlingCoilStandard
+  namespace: Client.UI
+  union: False
+  size: 72
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: VipersightContainer
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: RattlingCoilContainer
+    offset: 24
+  - type: Component::GUI::AtkComponentBase*
+    name: CoilStack1
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: CoilStack2
+    offset: 40
+  - type: Component::GUI::AtkComponentBase*
+    name: CoilStack3
+    offset: 48
+  - type: byte
+    name: Enabled
+    offset: 56
+  - type: int
+    name: CoilStacks
+    offset: 60
+  - type: int
+    name: CoilMax
+    offset: 64
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple::ViperBladesSimple
+  name: ViperBladesSimple
+  namespace: Client.UI
+  union: False
+  size: 64
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: LeftBar
+    offset: 8
+  - type: Component::GUI::AtkComponentBase*
+    name: RightBar
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: LeftContainer
+    offset: 24
+  - type: Component::GUI::AtkResNode*
+    name: RightContainer
+    offset: 32
+  - type: byte
+    name: LeftGlow
+    offset: 48
+  - type: byte
+    name: RightGlow
+    offset: 49
+  - type: int
+    name: LeftTimelineFrameId
+    offset: 52
+  - type: int
+    name: RightTimelineFrameId
+    offset: 56
+  - type: int
+    name: ComboStep
+    offset: 60
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple::RattlingCoilSimple
+  name: RattlingCoilSimple
+  namespace: Client.UI
+  union: False
+  size: 64
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: VipersightContainer
+    offset: 16
+  - type: Component::GUI::AtkComponentBase*
+    name: CoilStack1
+    offset: 24
+  - type: Component::GUI::AtkComponentBase*
+    name: CoilStack2
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: CoilStack3
+    offset: 40
+  - type: byte
+    name: Enabled
+    offset: 48
+  - type: int
+    name: CoilStacks
+    offset: 52
+  - type: int
+    name: CoilMax
+    offset: 56
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge::OfferingsBar
+  name: OfferingsBar
+  namespace: Client.UI
+  union: False
+  size: 128
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: SOContainer
+    offset: 24
+  - type: Component::GUI::AtkResNode*
+    name: GaugeMarker
+    offset: 32
+  - type: Component::GUI::AtkResNode*
+    name: GaugeFill
+    offset: 40
+  - type: Component::GUI::AtkTextNode*
+    name: GaugeValueText
+    offset: 56
+  - type: Component::GUI::AtkResNode*
+    name: GaugeFillContainer
+    offset: 72
+  - type: Component::GUI::AtkImageNode*
+    name: MainFillNode
+    offset: 88
+  - type: Component::GUI::AtkImageNode*
+    name: IncreaseFillNode
+    offset: 96
+  - type: Component::GUI::AtkImageNode*
+    name: DecreaseFillNode
+    offset: 104
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge::TributeCounter
+  name: TributeCounter
+  namespace: Client.UI
+  union: False
+  size: 80
+  fields:
+  - type: int
+    name: GlowTimelineFrameId
+    offset: 16
+  - type: Component::GUI::AtkTextNode*
+    name: TributeTimerText
+    offset: 32
+  - type: Component::GUI::AtkComponentBase*
+    name: Stacks
+    offset: 40
+    size: 5
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple::OfferingsBarSimple
+  name: OfferingsBarSimple
+  namespace: Client.UI
+  union: False
+  size: 64
+  fields:
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: GaugeBar
+    offset: 16
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: ValueDisplay
+    offset: 24
+  - type: Component::GUI::AtkResNode*
+    name: BarContainer
+    offset: 40
+  - type: Component::GUI::AtkResNode*
+    name: GaugeFill
+    offset: 48
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple::TributeCounterSimple
+  name: TributeCounterSimple
+  namespace: Client.UI
+  union: False
+  size: 72
+  fields:
+  - type: int
+    name: GlowTimelineFrameId
+    offset: 16
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: TimerDisplay
+    offset: 24
+  - type: Component::GUI::AtkComponentBase*
+    name: Stacks
+    offset: 32
+    size: 5
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonNamePlate::NamePlateIntArrayData::NamePlateObjectIntArrayData
   name: NamePlateObjectIntArrayData
   namespace: Client.UI
@@ -23520,16 +24901,16 @@ structs:
   - type: int
     name: GaugeFillPercentage
     offset: 28
-  - type: int
+  - type: unsigned int
     name: NameTextColor
     offset: 32
-  - type: int
+  - type: unsigned int
     name: NameEdgeColor
     offset: 36
-  - type: int
+  - type: unsigned int
     name: GaugeFillColor
     offset: 40
-  - type: int
+  - type: unsigned int
     name: GaugeContainerColor
     offset: 44
   - type: int
@@ -23544,6 +24925,9 @@ structs:
   - type: int
     name: DrawFlags
     offset: 68
+  - type: int
+    name: VisibilityFlags
+    offset: 76
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment
@@ -27919,6 +29303,9 @@ structs:
   - type: Client::System::String::Utf8String
     name: NodeText
     offset: 192
+  - type: byte*
+    name: OriginalTextPointer
+    offset: 296
   - type: __int64
     name: UnkPtr_1
     offset: 304
@@ -30859,7 +32246,17 @@ structs:
     name: UserFileEvent
     offset: 2512
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8
+    return_type: unsigned int
+    name: GetKeybind
+    parameters:
+    - type: Client::UI::UIInputData*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: name
+    - type: Client::UI::UIInputData::Keybind*
+      name: keybind
 - type: Client::UI::Misc::AchievementListModule
   name: AchievementListModule
   namespace: Client.UI.Misc
@@ -33120,6 +34517,13 @@ structs:
   - type: int
     name: CurrentGearsetIndex
     offset: 46536
+  - type: byte
+    name: EnabledGearsetIndex2EntryIndex
+    offset: 47004
+    size: 100
+  - type: byte
+    name: NumGearsets
+    offset: 47105
   virtual_functions:
   - name: ReadFile
     offset: 8
@@ -33316,6 +34720,14 @@ structs:
       name: this
     - type: byte
       name: gearsetId
+  - signature: E8 ?? ?? ?? ?? 33 C9 83 F8 64
+    return_type: int
+    name: ResolveIdFromEnabledIndex
+    parameters:
+    - type: Client::UI::Misc::RaptureGearsetModule*
+      name: this
+    - type: byte
+      name: enabledGearsetIndex
 - type: Client::UI::Misc::RaptureLogModuleTab
   name: RaptureLogModuleTab
   namespace: Client.UI.Misc
@@ -35997,6 +37409,10 @@ structs:
     name: Stain1Ids
     offset: 918
     size: 14
+  - type: unsigned __int16
+    name: GlassesIds
+    offset: 932
+    size: 2
   - type: unsigned int
     name: Checksum
     offset: 936
@@ -36004,7 +37420,7 @@ structs:
     name: GearVisibilityFlag
     offset: 940
   - type: byte
-    name: GearsetIndex
+    name: EnabledGearsetIndex
     offset: 944
   - type: byte
     name: ClassJobId
@@ -36025,7 +37441,7 @@ structs:
     name: FrameCountdown
     offset: 996
   - type: int
-    name: GearsetId
+    name: OpenerEnabledGearsetIndex
     offset: 1000
   - type: int
     name: CloseDialogAddonId
@@ -40584,7 +42000,7 @@ structs:
   name: CutSceneController
   namespace: Client.System.Scheduler.Base
   union: False
-  size: 520
+  size: 528
   fields:
   - type: Client::System::Scheduler::Base::SchedulerState
     name: SchedulerState
@@ -40594,7 +42010,7 @@ structs:
     offset: 48
   - type: unsigned int
     name: CutsceneId
-    offset: 352
+    offset: 360
   virtual_functions: []
   member_functions: []
 - type: Client::System::Scheduler::Base::SchedulerTimeline
@@ -44872,7 +46288,7 @@ structs:
     name: Z
     offset: 760
   - type: unsigned __int64
-    name: Unk300
+    name: AccountId
     offset: 768
   - type: unsigned __int64
     name: ContentId
@@ -44880,6 +46296,12 @@ structs:
   - type: unsigned int
     name: EntityId
     offset: 784
+  - type: unsigned int
+    name: PetEntityId
+    offset: 788
+  - type: unsigned int
+    name: CompanionEntityId
+    offset: 792
   - type: unsigned int
     name: CurrentHP
     offset: 796
@@ -44935,6 +46357,9 @@ structs:
   - type: unsigned __int16
     name: FateId
     offset: 24
+  - type: byte
+    name: EurekaFate
+    offset: 26
   - type: int
     name: StartTimeEpoch
     offset: 32
@@ -44962,27 +46387,64 @@ structs:
   - type: byte
     name: IsExpBonus
     offset: 964
+  - type: unsigned __int16
+    name: ObjectiveIcons
+    offset: 966
+    size: 8
   - type: unsigned int
     name: IconId
     offset: 984
+  - type: unsigned int
+    name: MapIconId
+    offset: 988
+  - type: unsigned int
+    name: InactiveMapIcon
+    offset: 992
+  - type: unsigned int
+    name: EventItem
+    offset: 996
+  - type: int
+    name: Music
+    offset: 1004
+  - type: unsigned __int16
+    name: GivenStatus
+    offset: 1008
+  - type: byte
+    name: Rule
+    offset: 1012
+  - type: byte
+    name: FateRuleEx
+    offset: 1014
   - type: byte
     name: Level
     offset: 1017
   - type: byte
     name: MaxLevel
     offset: 1018
+  - type: unsigned __int16
+    name: ScreenImageAccept
+    offset: 1020
+  - type: unsigned __int16
+    name: ScreenImageComplete
+    offset: 1022
+  - type: unsigned __int16
+    name: ScreenImageFailed
+    offset: 1024
+  - type: unsigned __int16
+    name: FATEChain
+    offset: 1034
+  - type: unsigned int
+    name: RequiredQuest
+    offset: 1072
   - type: System::Numerics::Vector3
     name: Location
     offset: 1104
   - type: float
     name: Radius
     offset: 1124
-  - type: unsigned int
-    name: MapIconId
-    offset: 1888
   - type: unsigned __int16
     name: TerritoryId
-    offset: 1934
+    offset: 1946
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Event::EventHandlerInfo
@@ -45442,6 +46904,379 @@ structs:
   - type: int
     name: TimelineFrameId
     offset: 88
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudSMN1::TranceGauge
+  name: TranceGauge
+  namespace: Client.UI
+  union: False
+  size: 336
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: CarbunclePlate
+    offset: 24
+  - type: Component::GUI::AtkImageNode*
+    name: CarbuncleBar
+    offset: 32
+  - type: Component::GUI::AtkTextNode*
+    name: CarbuncleGaugeValue
+    offset: 40
+  - type: Component::GUI::AtkResNode*
+    name: SummonPlate
+    offset: 56
+  - type: Component::GUI::AtkResNode*
+    name: SummonHead
+    offset: 64
+  - type: Component::GUI::AtkTextNode*
+    name: TranceGaugeValue
+    offset: 72
+  - type: Component::GUI::AtkImageNode*
+    name: TranceBarFill
+    offset: 88
+  - type: Component::GUI::AtkResNode*
+    name: WingContainer
+    offset: 104
+  - type: Component::GUI::AtkResNode*
+    name: Wing
+    offset: 112
+  - type: Component::GUI::AtkResNode*
+    name: Lv100SummonPlate
+    offset: 120
+  - type: Component::GUI::AtkResNode*
+    name: Lv100SummonHead
+    offset: 128
+  - type: Component::GUI::AtkTextNode*
+    name: Lv100TranceGaugeValue
+    offset: 136
+  - type: Component::GUI::AtkImageNode*
+    name: Lv100TranceBarFill
+    offset: 144
+  - type: Component::GUI::AtkResNode*
+    name: Lv100WingContainer
+    offset: 160
+  - type: Component::GUI::AtkResNode*
+    name: Lv100Wing
+    offset: 168
+  - type: Component::GUI::AtkResNode*
+    name: Lv100BladeContainer
+    offset: 176
+  - type: Component::GUI::AtkResNode*
+    name: Lv100Blade
+    offset: 184
+  - type: Component::GUI::AtkResNode*
+    name: EgiGems
+    offset: 192
+  - type: Component::GUI::AtkResNode*
+    name: EgiTimerDisplay
+    offset: 200
+  - type: Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge
+    name: IfritGauge
+    offset: 208
+  - type: Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge
+    name: TitanGauge
+    offset: 248
+  - type: Client::UI::AddonJobHudSMN1::TranceGauge::EgiGauge
+    name: GarudaGauge
+    offset: 288
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudSMN1::TranceGaugeSimple
+  name: TranceGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 216
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: TranceGaugeBar
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: SummonIcon
+    offset: 24
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: TranceTimerDisplay
+    offset: 32
+  - type: Component::GUI::AtkResNode*
+    name: EgiContainer
+    offset: 48
+  - type: Component::GUI::AtkComponentTextNineGrid*
+    name: EgiTimerDisplay
+    offset: 56
+  - type: Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple
+    name: IfritGauge
+    offset: 64
+  - type: Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple
+    name: TitanGauge
+    offset: 96
+  - type: Client::UI::AddonJobHudSMN1::TranceGaugeSimple::EgiGaugeSimple
+    name: GarudaGauge
+    offset: 128
+  - type: Component::GUI::AtkComponentBase*
+    name: EgiIconContainer
+    offset: 160
+  - type: Component::GUI::AtkResNode*
+    name: EgiIcons
+    offset: 168
+  - type: Component::GUI::AtkResNode*
+    name: IfritIcon
+    offset: 176
+  - type: Component::GUI::AtkResNode*
+    name: TitanIcon
+    offset: 184
+  - type: Component::GUI::AtkResNode*
+    name: GarudaIcon
+    offset: 192
+  - type: byte
+    name: EgiActive
+    offset: 200
+  - type: int
+    name: TimelineFrameId
+    offset: 208
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudAST0::ArcanaGauge
+  name: ArcanaGauge
+  namespace: Client.UI
+  union: False
+  size: 168
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 24
+  - type: Component::GUI::AtkResNode*
+    name: GaugePlate
+    offset: 32
+  - type: Client::UI::AddonJobHudAST0::ArcanaCard
+    name: CardI
+    offset: 40
+  - type: Client::UI::AddonJobHudAST0::ArcanaCard
+    name: CardII
+    offset: 72
+  - type: Client::UI::AddonJobHudAST0::ArcanaCard
+    name: CardIII
+    offset: 104
+  - type: Client::UI::AddonJobHudAST0::ArcanaCard
+    name: MinorArcanaCard
+    offset: 136
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudAST0::ArcanaGaugeSimple
+  name: ArcanaGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 160
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 24
+  - type: Client::UI::AddonJobHudAST0::ArcanaCard
+    name: CardI
+    offset: 32
+  - type: Client::UI::AddonJobHudAST0::ArcanaCard
+    name: CardII
+    offset: 64
+  - type: Client::UI::AddonJobHudAST0::ArcanaCard
+    name: CardIII
+    offset: 96
+  - type: Client::UI::AddonJobHudAST0::ArcanaCard
+    name: MinorArcanaCard
+    offset: 128
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudBLM0::ElementalGauge
+  name: ElementalGauge
+  namespace: Client.UI
+  union: False
+  size: 384
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Component::GUI::AtkResNode*
+    name: ElementalCrescent
+    offset: 24
+  - type: byte
+    name: ElementActive
+    offset: 32
+  - type: Component::GUI::AtkResNode*
+    name: ElementStacks
+    offset: 40
+  - type: Component::GUI::AtkComponentBase*
+    name: ElementStack
+    offset: 48
+    size: 3
+  - type: int
+    name: TimelineStartFrameId
+    offset: 72
+  - type: Component::GUI::AtkTextNode*
+    name: ElementTimerText
+    offset: 80
+  - type: Component::GUI::AtkComponentBase*
+    name: ElementOrbContainer
+    offset: 88
+  - type: Component::GUI::AtkResNode*
+    name: FireOrb
+    offset: 96
+  - type: Component::GUI::AtkResNode*
+    name: IceOrb
+    offset: 104
+  - type: Client::UI::AddonJobHudBLM0::ElementalGauge::UmbralHeart
+    name: UmbralHearts
+    offset: 112
+    size: 3
+  - type: Component::GUI::AtkResNode*
+    name: UmbralHeartContainer
+    offset: 160
+  - type: int
+    name: UmbralHeartTimelineFrameId
+    offset: 168
+  - type: Component::GUI::AtkResNode*
+    name: EnochianBar
+    offset: 184
+  - type: Component::GUI::AtkComponentBase*
+    name: EnochianBarFill
+    offset: 192
+  - type: Component::GUI::AtkResNode*
+    name: EnochianDialContainer
+    offset: 200
+  - type: Component::GUI::AtkComponentBase*
+    name: EnochianDial
+    offset: 208
+  - type: byte
+    name: EnochianActive
+    offset: 216
+  - type: int
+    name: EnochianTimePassed
+    offset: 220
+  - type: Component::GUI::AtkResNode*
+    name: PolyglotContainer
+    offset: 232
+  - type: Client::UI::AddonJobHudBLM0::ElementalGauge::PolyglotStack
+    name: Polyglot
+    offset: 240
+    size: 3
+  - type: int
+    name: PolyglotTimelineFrameId
+    offset: 312
+  - type: int
+    name: PolyglotStacks
+    offset: 316
+  - type: int
+    name: PolyglotMax
+    offset: 320
+  - type: Component::GUI::AtkResNode*
+    name: ParadoxContainer
+    offset: 328
+  - type: Component::GUI::AtkImageNode*
+    name: ParadoxNeedle
+    offset: 336
+  - type: Component::GUI::AtkComponentBase*
+    name: ParadoxGem
+    offset: 352
+  - type: Component::GUI::AtkResNode*
+    name: ParadoxGemGlow
+    offset: 360
+  - type: Component::GUI::AtkResNode*
+    name: ParadoxGemBase
+    offset: 368
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudBLM1::AstralGauge
+  name: AstralGauge
+  namespace: Client.UI
+  union: False
+  size: 128
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 24
+  - type: Client::UI::AddonJobHudBLM1::AstralGauge::AstralSoulStack
+    name: AstralSoulStacks
+    offset: 40
+    size: 6
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudBLM1::AstralGaugeSimple
+  name: AstralGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 176
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Client::UI::AddonJobHudBLM1::AstralGaugeSimple::AstralStackSimple
+    name: AstralSoulStacks
+    offset: 40
+    size: 6
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudMNK1::ChakraGauge
+  name: ChakraGauge
+  namespace: Client.UI
+  union: False
+  size: 160
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Client::UI::AddonJobHudMNK1::ChakraGauge::Chakra
+    name: Chakras
+    offset: 24
+    size: 5
+  - type: Component::GUI::AtkResNode*
+    name: CounterGlow
+    offset: 144
+  - type: byte
+    name: CounterGlowActive
+    offset: 152
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonJobHudMNK1::ChakraGaugeSimple
+  name: ChakraGaugeSimple
+  namespace: Client.UI
+  union: False
+  size: 208
+  fields:
+  - type: Client::UI::AddonJobHud::AddonJobHudGauge
+    name: AddonJobHudGauge
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: Container
+    offset: 16
+  - type: Client::UI::AddonJobHudMNK1::ChakraGaugeSimple::ChakraSimple
+    name: Chakras
+    offset: 24
+    size: 5
+  - type: Component::GUI::AtkResNode*
+    name: CounterGlow
+    offset: 192
+  - type: byte
+    name: CounterGlowActive
+    offset: 200
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudRDM0::BalanceGauge
@@ -49289,6 +51124,37 @@ structs:
     offset: 93
   virtual_functions: []
   member_functions: []
+- type: Component::GUI::AtkClippingMaskNode
+  name: AtkClippingMaskNode
+  namespace: Component.GUI
+  union: False
+  size: 192
+  fields:
+  - type: Component::GUI::AtkResNode
+    name: AtkResNode
+    offset: 0
+  - type: Component::GUI::AtkUldPartsList*
+    name: PartsList
+    offset: 176
+  - type: unsigned __int16
+    name: PartId
+    offset: 184
+  virtual_functions:
+  - name: Destroy
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkClippingMaskNode*
+      name: this
+    - type: byte
+      name: a2
+  - name: UpdateFromTimeline
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkClippingMaskNode*
+      name: this
+  member_functions: []
 - type: Component::GUI::AtkCollisionNode
   name: AtkCollisionNode
   namespace: Component.GUI
@@ -52402,8 +54268,8 @@ structs:
     - type: unsigned int
       name: nodeId
   - signature: E8 ?? ?? ?? ?? 8D 55 9F
-    return_type: Component::GUI::AtkComponentNode*
-    name: GetComponentNodeById
+    return_type: Component::GUI::AtkComponentBase*
+    name: GetComponentByNodeId
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -58021,8 +59887,8 @@ structs:
     offset: 856
   - type: Client::UI::AddonCharacterClass::ClassEntry
     name: ClassEntries
-    offset: 872
-    size: 31
+    offset: 864
+    size: 33
   - type: int
     name: TabIndex
     offset: 2200
@@ -58349,7 +60215,7 @@ structs:
     offset: 0
   - type: Component::GUI::AtkComponentBase*
     name: PreviewComponent
-    offset: 1088
+    offset: 1112
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -80009,16 +81875,16 @@ structs:
   - type: Client::UI::AddonJobHud
     name: AddonJobHud
     offset: 0
-  - type: Client::UI::AddonJobHudMNK0::MastersGaugeData
+  - type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeData
     name: DataPrevious
     offset: 624
-  - type: Client::UI::AddonJobHudMNK0::MastersGaugeData
+  - type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeData
     name: DataCurrent
     offset: 680
-  - type: Client::UI::AddonJobHudMNK0::MastersGauge
+  - type: Client::UI::AddonJobHudMNK0::BeastChakraGauge
     name: GaugeStandard
     offset: 736
-  - type: Client::UI::AddonJobHudMNK0::MastersGaugeSimple
+  - type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeSimple
     name: GaugeSimple
     offset: 968
   virtual_functions:
@@ -81309,6 +83175,18 @@ structs:
   - type: Client::UI::AddonJobHud
     name: AddonJobHud
     offset: 0
+  - type: Client::UI::AddonJobHudRPM0::CanvasGaugeData
+    name: DataPrevious
+    offset: 624
+  - type: Client::UI::AddonJobHudRPM0::CanvasGaugeData
+    name: DataCurrent
+    offset: 656
+  - type: Client::UI::AddonJobHudRPM0::CanvasGauge
+    name: GaugeStandard
+    offset: 688
+  - type: Client::UI::AddonJobHudRPM0::CanvasGaugeSimple
+    name: GaugeSimple
+    offset: 848
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -81622,6 +83500,18 @@ structs:
   - type: Client::UI::AddonJobHud
     name: AddonJobHud
     offset: 0
+  - type: Client::UI::AddonJobHudRPM1::PaletteGaugeData
+    name: DataPrevious
+    offset: 624
+  - type: Client::UI::AddonJobHudRPM1::PaletteGaugeData
+    name: DataCurrent
+    offset: 656
+  - type: Client::UI::AddonJobHudRPM1::PaletteGauge
+    name: GaugeStandard
+    offset: 688
+  - type: Client::UI::AddonJobHudRPM1::PaletteGaugeSimple
+    name: GaugeSimple
+    offset: 720
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -84535,6 +86425,18 @@ structs:
   - type: Client::UI::AddonJobHud
     name: AddonJobHud
     offset: 0
+  - type: Client::UI::AddonJobHudRDB0::VipersightGaugeData
+    name: DataPrevious
+    offset: 624
+  - type: Client::UI::AddonJobHudRDB0::VipersightGaugeData
+    name: DataCurrent
+    offset: 648
+  - type: Client::UI::AddonJobHudRDB0::VipersightGauge
+    name: GaugeStandard
+    offset: 672
+  - type: Client::UI::AddonJobHudRDB0::VipersightGaugeSimple
+    name: GaugeSimple
+    offset: 704
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -84848,6 +86750,18 @@ structs:
   - type: Client::UI::AddonJobHud
     name: AddonJobHud
     offset: 0
+  - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeData
+    name: DataPrevious
+    offset: 624
+  - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeData
+    name: DataCurrent
+    offset: 672
+  - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge
+    name: GaugeStandard
+    offset: 720
+  - type: Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeSimple
+    name: GaugeSimple
+    offset: 752
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -91250,6 +93164,9 @@ structs:
     name: Edited
     offset: 4976
     size: 17
+  - type: Component::GUI::AtkResNode*
+    name: PartyListAtkResNode
+    offset: 5016
   - type: Component::GUI::AtkNineGridNode*
     name: BackgroundNineGridNode
     offset: 5024
@@ -103164,7 +105081,7 @@ structs:
     - type: Client::UI::Agent::AgentBannerEditor*
       name: this
     - type: int
-      name: gearsetId
+      name: enabledGearsetIndex
 - type: Client::UI::Agent::AgentBannerInterface
   name: AgentBannerInterface
   namespace: Client.UI.Agent
@@ -104061,6 +105978,130 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Agent::AgentCompanyCraftMaterial*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
+- type: Client::UI::Agent::AgentConfigkey
+  name: AgentConfigkey
+  namespace: Client.UI.Agent
+  union: False
+  size: 8680
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: Client::UI::Misc::ConfigModule*
+    name: ConfigModule
+    offset: 64
+  - type: Client::UI::UIInputData*
+    name: UIInputData
+    offset: 120
+  - type: int
+    name: SelectedTab
+    offset: 132
+  - type: byte
+    name: HasChanges
+    offset: 136
+  - type: byte
+    name: IsUserEditing
+    offset: 137
+  - type: byte
+    name: DirectChatChecked1
+    offset: 139
+  - type: byte
+    name: DirectChatChecked2
+    offset: 140
+  - type: Component::Text::TextChecker
+    name: TextChecker
+    offset: 192
+  - type: Client::System::String::Utf8String
+    name: LastFilledKeybind
+    offset: 440
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
       name: this
     - type: byte
       name: a2
@@ -106523,6 +108564,9 @@ structs:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
     offset: 0
+  - type: unsigned int
+    name: ContextMenuItemId
+    offset: 160
   - type: Client::UI::Agent::GatheringAreaInfo*
     name: GatheringAreaInfo
     offset: 184
@@ -107161,6 +109205,39 @@ structs:
     name: HudPartyMemberEnmityPtrs
     offset: 5240
     size: 10
+  - type: unsigned int
+    name: ExpCurrentExperience
+    offset: 13568
+  - type: unsigned int
+    name: ExpNeededExperience
+    offset: 13572
+  - type: unsigned int
+    name: ExpRestedExperience
+    offset: 13576
+  - type: unsigned int
+    name: CharacterClassJobId
+    offset: 13580
+  - type: unsigned int
+    name: ExpClassJobId
+    offset: 13596
+  - type: unsigned __int16
+    name: ExpLevel
+    offset: 13600
+  - type: unsigned __int16
+    name: ExpContentLevel
+    offset: 13602
+  - type: byte
+    name: ExpIsLevelSynced
+    offset: 13604
+  - type: byte
+    name: ExpUnkBool2
+    offset: 13605
+  - type: byte
+    name: ExpIsMaxLevel
+    offset: 13606
+  - type: byte
+    name: ExpIsInEureka
+    offset: 13607
   - type: Client::UI::Agent::HudQueuedBattleTalk
     name: QueuedBattleTalks
     offset: 13616
@@ -109936,7 +112013,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: param
   - name: FlagSlotForUpdate
-    offset: 560
+    offset: 552
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
@@ -110204,7 +112281,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
-    offset: 560
+    offset: 552
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
@@ -110571,7 +112648,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
-    offset: 560
+    offset: 552
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::Human*
@@ -110846,7 +112923,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
-    offset: 560
+    offset: 552
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::Monster*
@@ -111122,7 +113199,7 @@ structs:
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
       name: a2
   - name: FlagSlotForUpdate
-    offset: 560
+    offset: 552
     return_type: unsigned __int64
     parameters:
     - type: Client::Graphics::Scene::Weapon*
@@ -112159,6 +114236,16 @@ structs:
       name: this
     - type: byte
       name: state
+  - signature: E8 ?? ?? ?? ?? EB 50 44 8B 03
+    return_type: void
+    name: SetGlasses
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: int
+      name: index
+    - type: unsigned __int16
+      name: id
 - type: Client::Game::Character::LookAtContainer
   name: LookAtContainer
   namespace: Client.Game.Character
@@ -114989,6 +117076,18 @@ structs:
       name: a7
     - type: unsigned __int16
       name: parentAddonId
+  - signature: 48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73
+    return_type: void
+    name: ShowTextGimmickHint
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: byte*
+      name: text
+    - type: Client::UI::RaptureAtkModule::TextGimmickHintStyle
+      name: style
+    - type: int
+      name: duration
 - type: Client::UI::Misc::ItemOrderModule
   name: ItemOrderModule
   namespace: Client.UI.Misc
@@ -115922,7 +118021,15 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24
+    return_type: void
+    name: OpenBannerEditorForGearset
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
 - type: Client::UI::Agent::AgentInspect
   name: AgentInspect
   namespace: Client.UI.Agent
@@ -118654,6 +120761,9 @@ structs:
   - type: Client::Game::Character::VfxContainer
     name: Vfx
     offset: 6400
+  - type: Client::Game::Character::EffectContainer
+    name: Effects
+    offset: 6664
   - type: Client::Game::Character::CharacterSetupContainer
     name: CharacterSetup
     offset: 6744
@@ -119584,6 +121694,9 @@ structs:
     name: TempUtf8Strings
     offset: 2656
     size: 13
+  - type: __int8
+    name: ServiceAccountIndex
+    offset: 4368
   - type: unsigned __int64
     name: HoveredCharacterContentId
     offset: 4376
@@ -119599,6 +121712,45 @@ structs:
   - type: unsigned int
     name: DialogAddonId
     offset: 4392
+  - type: unsigned int
+    name: DialogAddonId2
+    offset: 4396
+  - type: unsigned int
+    name: LobbyScreenTextAddonId
+    offset: 4400
+  - type: unsigned int
+    name: TitleDCWorldMapAddonId
+    offset: 4408
+  - type: unsigned int
+    name: TitleMovieSelectorAddonId
+    offset: 4412
+  - type: unsigned int
+    name: TitleGameVersionAddonId
+    offset: 4416
+  - type: unsigned int
+    name: TitleConnectAddonId
+    offset: 4420
+  - type: unsigned int
+    name: CharaSelectAddonId
+    offset: 4424
+  - type: unsigned int
+    name: CharaMakeDataImportAddonId
+    offset: 4428
+  - type: unsigned int
+    name: LoadPreviouslySavedAppearanceDataDialogAddonId
+    offset: 4432
+  - type: unsigned int
+    name: LoadSavedCharacterCreationDataDialogAddonId
+    offset: 4436
+  - type: unsigned int
+    name: CreateNewCharacterDialogAddonId
+    offset: 4440
+  - type: unsigned int
+    name: LobbyWKTAddonId
+    offset: 4444
+  - type: byte
+    name: HasShownCharacterNotFound
+    offset: 4448
   - type: byte
     name: LobbyUpdateStage
     offset: 4452
@@ -119608,7 +121760,7 @@ structs:
   - type: byte
     name: IsLoggedIn
     offset: 4457
-  - type: unsigned int
+  - type: __int64
     name: IdleTime
     offset: 4464
   - type: int
@@ -119617,6 +121769,15 @@ structs:
   - type: __int8
     name: HoveredCharacterIndex
     offset: 4501
+  - type: unsigned __int64
+    name: SelectedCharacterContentId
+    offset: 4504
+  - type: byte
+    name: TemporaryLocked
+    offset: 4768
+  - type: unsigned __int64
+    name: RequestContentId
+    offset: 4792
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
