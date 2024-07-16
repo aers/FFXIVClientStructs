@@ -47,7 +47,7 @@ public unsafe partial struct AgentBannerInterface {
 
         [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray8<CharacterData> _characters;
 
-        [FieldOffset(0x3B20)] public long Unk3;
-        [FieldOffset(0x3B28)] public long Unk4;
+        [FieldOffset(0x3B20), Obsolete("Do not use maps to numbers inside of Characters array")] public long Unk3;
+        [FieldOffset(0x3B28), Obsolete("Do not use maps to numbers inside of Characters array")] public long Unk4;
     }
 }
