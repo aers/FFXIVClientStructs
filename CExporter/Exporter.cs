@@ -94,7 +94,7 @@ public class Exporter {
 
     public static void VerifyNoOverlap() {
         foreach (var processedStruct in _structs.Where(t => !t.IsUnion)) {
-            var sizes = processedStruct.Fields.Select(t => new { StartOffset = t.FieldOffset, EndOffset = t.FieldOffset + t.FieldType.SizeOf(), Field = t.FieldName }).ToArray();
+            var sizes = processedStruct.Fields.Select(t => new { StartOffset = t.FieldOffset, EndOffset = t.FieldOffset + t.FieldSize, Field = t.FieldName }).ToArray();
             foreach (var size in sizes) {
                 var checks = sizes.Where(t => t != size && t.StartOffset <= size.StartOffset).ToArray();
                 if (checks.Any(t => t.EndOffset > size.StartOffset && t.StartOffset != size.StartOffset))
@@ -413,10 +413,14 @@ public class ProcessedField {
     public required Type FieldType;
     public required string FieldName;
     public required int FieldOffset;
+
+    public virtual int FieldSize => FieldType.SizeOf();
 }
 
 public class ProcessedFixedField : ProcessedField {
     public required int FixedSize;
+
+    public override int FieldSize => FixedSize * FieldType.SizeOf();
 }
 
 public class ProcessedFunctionField : ProcessedField {
