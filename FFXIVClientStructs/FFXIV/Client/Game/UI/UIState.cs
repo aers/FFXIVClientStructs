@@ -73,17 +73,17 @@ public unsafe partial struct UIState {
 
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
     // Size: (AetheryteSheet.RowCount + 7) / 8
-    [FieldOffset(0x17D8C), FixedSizeArray] internal FixedSizeArray31<byte> _unlockedAetherytesBitmask;
+    [FieldOffset(0x17D8C), FixedSizeArray] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
 
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
     // Size: (HowToSheet.RowCount + 7) / 8
-    [FieldOffset(0x17DAA), FixedSizeArray] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
+    [FieldOffset(0x17DAA), FixedSizeArray] internal FixedSizeArray36<byte> _unlockedHowtoBitmask;
 
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     //      relative to uistate: "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" (case for 0x355)
     // Size: (CompanionSheet.RowCount + 7) / 8
-    [FieldOffset(0x17DCE), FixedSizeArray] internal FixedSizeArray68<byte> _unlockedCompanionsBitmask;
+    [FieldOffset(0x17DCE), FixedSizeArray] internal FixedSizeArray67<byte> _unlockedCompanionsBitmask;
 
     // Ref: "42 0F B6 04 30 44 84 C0"
     // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
