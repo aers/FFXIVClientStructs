@@ -183,12 +183,12 @@ class ExcelHeaderFile:
                 else:
                     mapped[self.column_definitions[i].offset] = (
                         column_data_type_to_c_type(self.column_definitions[i].type),
-                        f"{name}_{names[i].name}",
+                        f"{name}_{names[i].name}" if i < len(names) else f"{name}_outofrange{i}",
                     )
             else:
                 mapped[self.column_definitions[i].offset] = (
                     column_data_type_to_c_type(self.column_definitions[i].type),
-                    names[i].name,
+                    names[i].name if i < len(names) else f"outofrange{i}",
                 )
         mapped = dict(sorted(mapped.items()))
         return [mapped, size]
