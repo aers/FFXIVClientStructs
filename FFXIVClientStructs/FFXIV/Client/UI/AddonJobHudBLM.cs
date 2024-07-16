@@ -147,14 +147,13 @@ public unsafe partial struct AddonJobHudBLM1 {
 
         [FieldOffset(0x18)] public AtkResNode* Container;
 
-        [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray6<AstralSoulStack> _astralSoulStacks;
+        [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray6<AstralSoulStack> _astralSoulStacks;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x10)]
         public partial struct AstralSoulStack {
-            [FieldOffset(0x0)] public AtkComponentBase* StackComponent;
-            [FieldOffset(0x8)] public bool Active;
+            [FieldOffset(0x0)] public bool Active;
+            [FieldOffset(0x8)] public AtkComponentBase* StackComponent;
         }
-
     }
 
     [GenerateInterop]
@@ -162,13 +161,13 @@ public unsafe partial struct AddonJobHudBLM1 {
     [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
     public partial struct AstralGaugeSimple {
 
-        [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray6<AstralStackSimple> _astralSoulStacks;
+        [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray6<AstralStackSimple> _astralSoulStacks;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x18)]
         public partial struct AstralStackSimple {
-            [FieldOffset(0x0)] public AtkComponentBase* StackComponent;
-            [FieldOffset(0x8)] public AtkResNode* GlowNode;
-            [FieldOffset(0x10)] public byte Byte10;
+            [FieldOffset(0x00)] public bool Active;
+            [FieldOffset(0x08)] public AtkComponentBase* StackComponent;
+            [FieldOffset(0x10)] public AtkResNode* GlowNode;
         }
     }
 }
