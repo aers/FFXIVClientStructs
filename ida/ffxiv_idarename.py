@@ -260,6 +260,9 @@ if api is None:
                 if current_func_name.startswith("sub_"):
                     return "{0}.{1}".format(class_name, proposed_func_name)
 
+                if current_func_name.startswith("unknown_libname_"):
+                    return "{0}.{1}".format(class_name, proposed_func_name)
+
                 if current_func_name.startswith("nullsub_"):
                     return "{0}.{1}_nullsub".format(class_name, proposed_func_name)
 
@@ -291,7 +294,7 @@ if api is None:
                 if current_func_name == proposed_qualified_func_name:
                     return ""
 
-                if any(current_func_name.startswith(prefix) for prefix in ("sub_", "nullsub_", "loc_", "qword_")):
+                if any(current_func_name.startswith(prefix) for prefix in ("sub_", "nullsub_", "loc_", "qword_", "unknown_libname_")):
                     return proposed_qualified_func_name
 
                 return None
