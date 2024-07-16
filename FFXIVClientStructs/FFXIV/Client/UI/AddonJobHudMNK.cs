@@ -9,12 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudMNK0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 public unsafe partial struct AddonJobHudMNK0 {
     [FieldOffset(0x270)] public BeastChakraGaugeData DataPrevious;
     [FieldOffset(0x2A8)] public BeastChakraGaugeData DataCurrent;
     [FieldOffset(0x2E0)] public BeastChakraGauge GaugeStandard;
-    [FieldOffset(0x3C8)] public BeastChakraGaugeSimple GaugeSimple;
+    [FieldOffset(0x3B8)] public BeastChakraGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -40,7 +40,7 @@ public unsafe partial struct AddonJobHudMNK0 {
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
-    [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xD8)]
     public partial struct BeastChakraGauge {
         [FieldOffset(0x10)] public AtkResNode* NadiContainer;
         [FieldOffset(0x18)] public AtkComponentBase* BeastChakra1;
@@ -64,15 +64,13 @@ public unsafe partial struct AddonJobHudMNK0 {
         [FieldOffset(0xB0)] public AtkResNode* Container;
         [FieldOffset(0xB8)] public AtkComponentBase* OpoOpoStack1;
         [FieldOffset(0xC0)] public AtkComponentBase* RaptorStack1;
-        [FieldOffset(0xC8)] public AtkComponentBase* RaptorStack2;
-        [FieldOffset(0xD0)] public AtkComponentBase* CoeurlStack1;
-        [FieldOffset(0xD8)] public AtkComponentBase* CoeurlStack2;
-        [FieldOffset(0xE0)] public AtkComponentBase* CoeurlStack3;
+        [FieldOffset(0xC8)] public AtkComponentBase* CoeurlStack1;
+        [FieldOffset(0xD0)] public AtkComponentBase* CoeurlStack2;
     }
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
-    [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
     public partial struct BeastChakraGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* NadiContainer;
         [FieldOffset(0x18)] public AtkComponentBase* BeastChakra1;
@@ -96,10 +94,8 @@ public unsafe partial struct AddonJobHudMNK0 {
         [FieldOffset(0xC0)] public AtkResNode* Container;
         [FieldOffset(0xC8)] public AtkComponentBase* OpoOpoStack1;
         [FieldOffset(0xD0)] public AtkComponentBase* RaptorStack1;
-        [FieldOffset(0xD8)] public AtkComponentBase* RaptorStack2;
-        [FieldOffset(0xE0)] public AtkComponentBase* CoeurlStack1;
-        [FieldOffset(0xE8)] public AtkComponentBase* CoeurlStack2;
-        [FieldOffset(0xF0)] public AtkComponentBase* CoeurlStack3;
+        [FieldOffset(0xD8)] public AtkComponentBase* CoeurlStack1;
+        [FieldOffset(0xE0)] public AtkComponentBase* CoeurlStack2;
     }
 }
 
