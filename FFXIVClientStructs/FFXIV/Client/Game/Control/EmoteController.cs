@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
@@ -30,5 +31,17 @@ public unsafe partial struct EmoteController {
         Doze = 4,
         Umbrella = 5,
         Accessory = 6,
+    }
+
+    // Client::Game::Control::EmoteController::PlayEmoteOption
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 89 44 24", 3)]
+    public partial struct PlayEmoteOption {
+        [FieldOffset(0x08)] public GameObjectId TargetId;
+        /// <remarks> If bit 1 is set it does not display a log message. </remarks>
+        [FieldOffset(0x10)] public byte Flags;
+        [FieldOffset(0x11)] public bool Unk11;
+        [FieldOffset(0x18)] public ILayoutInstance* Layout;
     }
 }

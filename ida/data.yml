@@ -7730,6 +7730,11 @@ classes:
       0x1405F5110: Initialize
       0x1405F50F0: GetAvailablePoses
       0x1405F8930: GetPoseKind
+  Client::Game::Control::EmoteController::PlayEmoteOption:
+    vtbls:
+      - ea: 0x141EF2AC8
+    vfuncs:
+      0: dtor
   Client::Game::Character::DrawDataContainer:
     vtbls:
       - ea: 0x141F0F938
@@ -8441,6 +8446,7 @@ classes:
     funcs:
       0x140F7BC70: ctor
       0x140F7C210: CanUseEmote
+      0x140F7C100: ExecuteEmote
   Client::UI::Agent::AgentMacro:
     vtbls:
       - ea: 0x141F6F458
