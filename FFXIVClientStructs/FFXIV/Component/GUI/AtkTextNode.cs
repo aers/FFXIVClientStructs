@@ -62,14 +62,14 @@ public unsafe partial struct AtkTextNode : ICreatable {
         strBytes[strUtf8Len] = 0;
         fixed (byte* strPtr = strBytes) {
             NodeText.SetString(strPtr);
-            SetText(strPtr);
+            SetText(NodeText.StringPtr);
         }
     }
 
     public void SetText(ReadOnlySpan<byte> str) {
         fixed (byte* strPtr = str) {
             NodeText.SetString(strPtr);
-            SetText(strPtr);
+            SetText(NodeText.StringPtr);
         }
     }
 
