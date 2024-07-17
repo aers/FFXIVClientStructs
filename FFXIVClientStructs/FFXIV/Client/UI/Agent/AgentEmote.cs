@@ -14,5 +14,5 @@ public unsafe partial struct AgentEmote {
     public partial bool CanUseEmote(ushort emoteId);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 8A ?? ?? ?? ?? 8B C1 C1 E8 08")]
-    public partial void ExecuteEmote(ushort emoteId, EmoteController.PlayEmoteOption* playEmoteOption = null, bool addToHistory = true, bool unkBool = true);
+    public partial void ExecuteEmote(ushort emoteId, EmoteController.PlayEmoteOption* playEmoteOption = null, bool addToHistory = true, bool liveUpdateHistory = true);
 }
