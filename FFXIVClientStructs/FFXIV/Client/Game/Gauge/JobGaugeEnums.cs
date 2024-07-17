@@ -116,4 +116,8 @@ public enum DreadCombo : byte {
     PitOfDread = 4,
     HuntersDen = 5,
     SwiftskinsDen = 6,
+    //Reawakened = 7,
+    //FirstGeneration = 8,
+    //SecondGeneration = 9,
+    //ThirdGeneration = 10,
 }

@@ -13,7 +13,7 @@ public unsafe partial struct LuaState {
     public string?[] DoString(string code, string? name = null) {
         var top = State->lua_gettop();
         try {
-            if (State->luaL_loadbuffer(code, code.Length, name) != 0)
+            if (State->luaL_loadbuffer(code, code.Length, name ?? "chunk") != 0)
                 throw new Exception($"{State->lua_tostring(-1)}");
 
             if (State->lua_pcall(0, -1, 0) != 0)
