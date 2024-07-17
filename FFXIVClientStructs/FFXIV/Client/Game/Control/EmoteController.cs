@@ -39,6 +39,7 @@ public unsafe partial struct EmoteController {
     [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 89 44 24", 3)]
     public partial struct PlayEmoteOption {
         [FieldOffset(0x08)] public GameObjectId TargetId;
+        /// <remarks> If bit 1 is set it does not display a log message. </remarks>
         [FieldOffset(0x10)] public byte Flags;
         [FieldOffset(0x11)] public bool Unk11;
         [FieldOffset(0x18)] public ILayoutInstance* Layout;
