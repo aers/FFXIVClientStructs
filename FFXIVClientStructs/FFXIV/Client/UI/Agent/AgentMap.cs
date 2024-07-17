@@ -209,14 +209,20 @@ public struct TempMapMarker {
     [FieldOffset(0xAC)] public uint Type;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8E)]
 public struct OpenMapInfo {
     [FieldOffset(0x00)] public MapType Type;
+    [FieldOffset(0x04)] public uint AddonId;
     [FieldOffset(0x08)] public uint TerritoryId;
     [FieldOffset(0x0C)] public uint MapId;
-
+    [FieldOffset(0x10)] public uint PlaceNameId;
+    [FieldOffset(0x14)] public uint AetheryteId;
+    [FieldOffset(0x18)] public uint FateId;
+    [FieldOffset(0x1C)] public uint Unk1C;
     [FieldOffset(0x20)] public Utf8String TitleString;
-    // there is a lot more stuff in here depending on what type of map it's used for
+    [FieldOffset(0x88)] public uint Unk88;
+    [FieldOffset(0x8C)] public byte Unk8C;
+    [FieldOffset(0x8D)] public bool Unk8D; // something for QuestRedoMapMarker
 }
 
 [GenerateInterop]
