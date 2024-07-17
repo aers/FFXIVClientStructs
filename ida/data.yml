@@ -9224,6 +9224,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x141862150: ctor
+      0x140EB8670: ReduceItem
   Client::UI::Agent::AgentLovmParty:
     vtbls:
       - ea: 0x141F6C4B8
