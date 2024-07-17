@@ -10268,6 +10268,11 @@ classes:
       0x140E06950: CreateMiniMapMarkers
       0x140E07270: OpenMapByMapId
       0x140E0D4B0: CanUseTeleport # static
+  Client::UI::Agent::OpenMapInfo:
+    funcs:
+      0x140DF5E20: ctor
+      0x140DF5E90: Clear
+      0x140DF5EE0: EqualTo
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x141F56B08
