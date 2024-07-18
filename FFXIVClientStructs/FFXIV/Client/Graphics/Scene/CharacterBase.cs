@@ -19,6 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [StructLayout(LayoutKind.Explicit, Size = 0x9D0)]
 public unsafe partial struct CharacterBase {
     public const int PathBufferSize = 260;
+    public const int MaterialsPerSlot = 10;
 
     [FieldOffset(0x90)] public byte UnkFlags_01;
     [FieldOffset(0x91)] public byte UnkFlags_02;
@@ -56,7 +57,7 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x270)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0xB0, contents may be InstanceParameter
     [FieldOffset(0x278)] public ConstantBuffer* UnkCBuffer; // Size is also 0xB0
 
-    [FieldOffset(0x288)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * 10
+    [FieldOffset(0x288)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * MaterialsPerSlot
 
     [FieldOffset(0x290)] public Vector4 Tint;
 
@@ -74,7 +75,7 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x308)] public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
 
-    [FieldOffset(0x318)] public Material** Materials; // size = SlotCount * 4 (4 material per model max)
+    [FieldOffset(0x318)] public Material** Materials; // size = SlotCount * MaterialsPerSlot
 
     [FieldOffset(0x320)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
@@ -83,11 +84,11 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x918)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap"
 
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
-    public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * 4);
-    public Span<Pointer<Material>> MaterialsSpan => new(Materials, SlotCount * 4);
+    public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * MaterialsPerSlot);
+    public Span<Pointer<Material>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 08 48 8B D0 4C 8B 01")]
-    public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 40 byte */, byte unk);
+    public static partial CharacterBase* Create(uint modelId, CustomizeData* customize, EquipmentModelId* equipData /* 10 times, 80 byte */, byte unk);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30")]
     public partial void Destroy();
