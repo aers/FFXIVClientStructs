@@ -104,6 +104,8 @@ class GameData:
 
     def get_exd_schema(self, key):
         # type: (str) -> list[Definition]
+        if key not in self.schema:
+            return []
         return self.schema[key]
 
     def __repr__(self):

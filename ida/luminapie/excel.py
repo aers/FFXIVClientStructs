@@ -167,29 +167,36 @@ class ExcelHeaderFile:
             self.column_definitions[largest_offset_index].type
         )
 
-        for i in range(self.header.column_count):
-            if (
-                self.column_definitions[i].offset in mapped
-                and mapped[self.column_definitions[i].offset] is not None
-            ):
-                [_, name] = mapped[self.column_definitions[i].offset]
-                if name.split("_")[0] == "Unknown":
-                    continue
+        if self.header.column_count != len(names):
+            for i in range(self.header.column_count):
+                mapped[self.column_definitions[i].offset] = (
+                    column_data_type_to_c_type(self.column_definitions[i].type),
+                    "field_{0}".format(i),
+                )
+        else:
+            for i in range(self.header.column_count):
                 if (
-                    column_data_type_to_c_type(self.column_definitions[i].type)
-                    != "unsigned __int8"
+                    self.column_definitions[i].offset in mapped
+                    and mapped[self.column_definitions[i].offset] is not None
                 ):
-                    continue
+                    [_, name] = mapped[self.column_definitions[i].offset]
+                    if name.split("_")[0] == "Unknown":
+                        continue
+                    if (
+                        column_data_type_to_c_type(self.column_definitions[i].type)
+                        != "unsigned __int8"
+                    ):
+                        continue
+                    else:
+                        mapped[self.column_definitions[i].offset] = (
+                            column_data_type_to_c_type(self.column_definitions[i].type),
+                            "{0}_{1}".format(name, names[i].name),
+                        )
                 else:
                     mapped[self.column_definitions[i].offset] = (
                         column_data_type_to_c_type(self.column_definitions[i].type),
-                        f"{name}_{names[i].name}",
+                        names[i].name,
                     )
-            else:
-                mapped[self.column_definitions[i].offset] = (
-                    column_data_type_to_c_type(self.column_definitions[i].type),
-                    names[i].name,
-                )
         mapped = dict(sorted(mapped.items()))
         return [mapped, size]
 
