@@ -54,7 +54,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     /// <param name="str">Null-terminated UTF-8 string buffer to set the text to.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 32")]
     public partial void SetText(byte* str);
-    
+
     public void SetText(string str) {
         int strUtf8Len = Encoding.UTF8.GetByteCount(str);
         Span<byte> strBytes = strUtf8Len <= 512 ? stackalloc byte[strUtf8Len + 1] : new byte[strUtf8Len + 1];
