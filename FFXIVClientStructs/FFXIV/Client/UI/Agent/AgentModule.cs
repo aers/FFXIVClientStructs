@@ -227,7 +227,7 @@ public enum AgentId : uint {
     AetherCurrent = 201,
     FreeCompanyCreditShop = 202,
     Currency = 203,
-    PuryfyItemSelector = 204, // Aetherial Reduction
+    Purify = 204, // Aetherial Reduction
 
     LovmParty = 206,
     LovmRanking = 207,

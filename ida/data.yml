@@ -9218,7 +9218,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F72640: ctor
-  Client::UI::Agent::AgentPuryfyItemSelector:
+  Client::UI::Agent::AgentPurify:
     vtbls:
       - ea: 0x141F70F48
         base: Client::UI::Agent::AgentInterface

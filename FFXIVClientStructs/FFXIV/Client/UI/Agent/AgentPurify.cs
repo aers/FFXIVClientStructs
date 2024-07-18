@@ -4,13 +4,13 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [GenerateInterop]
-[Agent(AgentId.PuryfyItemSelector)]
+[Agent(AgentId.Purify)]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x128)]
-public unsafe partial struct AgentPuryfyItemSelector {
+public unsafe partial struct AgentPurify {
 
-    [FieldOffset(0x38)] public StdVector<PuryfyItem> ReducibleItems;
-    //[FieldOffset(0x50)] public PuryfyItem NextItem; ???
+    [FieldOffset(0x38)] public StdVector<PurifyItem> ReducibleItems;
+    //[FieldOffset(0x50)] public PurifyItem NextItem; ???
     [FieldOffset(0xD0)] public int ReducibleItemsCount;
     [FieldOffset(0xD4)] public uint ResultAddonId;
     [FieldOffset(0xD8)] public uint ResultItemId;
@@ -32,7 +32,7 @@ public unsafe partial struct AgentPuryfyItemSelector {
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-    public struct PuryfyItem {
+    public struct PurifyItem {
         [FieldOffset(0x00)] public InventoryType Inventory;
         [FieldOffset(0x04)] public int Slot;
         [FieldOffset(0x08)] public uint ItemId;
