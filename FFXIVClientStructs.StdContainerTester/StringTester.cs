@@ -1,9 +1,16 @@
+using System.Text;
 using FFXIVClientStructs.STD;
+using FFXIVClientStructs.STD.Helper;
 
 namespace FFXIVClientStructs.StdContainerTester;
 
 public static class StringTester {
     public static void Test() {
+        using var testcse = new StdBasicString<byte, IStaticEncoding.CustomSystem, IStaticMemorySpace.Default>();
+        testcse.AddString("Test");
+        testcse.AddString("●＠〓♧￣〔±‰╋℃가ー");
+        Console.WriteLine(testcse.ToString());
+        
         using var test1 = new StdString();
         test1.AddString("12345");
         Console.WriteLine(test1);
