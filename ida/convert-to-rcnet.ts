@@ -22,8 +22,8 @@ import { ZipWriter } from "jsr:@zip-js/zip-js/";
 // #region Input
 
 const flags = parseArgs(Deno.args, {
-  boolean: ["plugin"],
-  default: { plugin: true },
+  boolean: ["plugin", "vtables"],
+  default: { plugin: true, vtables: true },
 });
 
 const data = parse(Deno.readTextFileSync("data.yml")) as DataFile;
@@ -457,6 +457,7 @@ for (const struct of ffxiv_structs.structs) {
   console.log(`Processing ${struct.type}`);
 
   const hasVTable =
+    flags.vtables &&
     struct.virtual_functions !== undefined &&
     struct.virtual_functions.length > 0;
 
