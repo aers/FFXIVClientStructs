@@ -23,7 +23,7 @@ import { ZipWriter } from "jsr:@zip-js/zip-js/";
 
 const flags = parseArgs(Deno.args, {
   boolean: ["plugin"],
-  default: { plugin: true }
+  default: { plugin: true },
 });
 
 const data = parse(Deno.readTextFileSync("data.yml")) as DataFile;
@@ -559,8 +559,7 @@ for (const struct of ffxiv_structs.structs) {
     // best I could do here...
     const isUtf8TextPtr =
       field.type == "byte*" &&
-      (field.name.toLowerCase().includes("string") ||
-        field.name.toLowerCase().includes("name"));
+      (field.name.includes("String") || field.name.includes("Name"));
 
     // find out if it's a char* used for a string
     const isUtf16TextPtr = field.type == "wchar_t*";
@@ -599,7 +598,10 @@ for (const struct of ffxiv_structs.structs) {
         comment: "",
         hidden: "false",
       });
-    } else if (flags.plugin && fieldType == "Client::System::String::Utf8String") {
+    } else if (
+      flags.plugin &&
+      fieldType == "Client::System::String::Utf8String"
+    ) {
       writeNode("node", {
         type: "FFXIV::Utf8String",
         name: field.name,
