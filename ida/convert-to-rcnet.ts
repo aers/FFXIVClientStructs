@@ -16,9 +16,15 @@ import * as uuid from "jsr:@std/uuid";
 import { escape } from "jsr:@std/html/entities";
 import { Buffer } from "jsr:@std/io/buffer";
 import { toReadableStream } from "jsr:@std/io/to-readable-stream";
+import { parseArgs } from "jsr:@std/cli/parse-args";
 import { ZipWriter } from "jsr:@zip-js/zip-js/";
 
 // #region Input
+
+const flags = parseArgs(Deno.args, {
+  boolean: ["plugin"],
+  default: { plugin: true }
+});
 
 const data = parse(Deno.readTextFileSync("data.yml")) as DataFile;
 const ffxiv_structs = parse(
@@ -592,6 +598,22 @@ for (const struct of ffxiv_structs.structs) {
         name: field.name,
         comment: "",
         hidden: "false",
+      });
+    } else if (flags.plugin && fieldType == "Client::System::String::Utf8String") {
+      writeNode("node", {
+        type: "FFXIV::Utf8String",
+        name: field.name,
+        comment: "",
+        hidden: "false",
+        reference: fieldType,
+      });
+    } else if (flags.plugin && fieldType == "Component::GUI::AtkValue") {
+      writeNode("node", {
+        type: "FFXIV::AtkValue",
+        name: field.name,
+        comment: "",
+        hidden: "false",
+        reference: fieldType,
       });
     } else if (fieldType in enumTypes) {
       writeNode("node", {
