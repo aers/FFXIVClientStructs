@@ -43,6 +43,7 @@ internal class Parse {
     }
 
     public static Location GetLocation(string location) {
+        if (string.IsNullOrWhiteSpace(location)) return new Location("", "");
         var count = location.IndexOf('(');
         string @namespace;
         string @class;
@@ -61,6 +62,8 @@ internal class Parse {
     public static ChangeType ParseMember(Code code, Type type, string change, string message) {
         var count = change.IndexOf('(');
         var lastSpace = count == -1 ? change.LastIndexOf(' ') : change[..count].LastIndexOf(' ');
+        if (lastSpace == -1)
+            lastSpace = change.Length;
         var location = change[lastSpace..].Trim().Replace(".get", "");
         return new ChangeType(code, type, new Change(change[..lastSpace].Trim(), GetLocation(location)), message);
     }
@@ -84,6 +87,7 @@ public enum Code {
     [Description("Type does not inherit from base type")]
     CP0007,
     CP0008,
+    [Description("Type has changed sealed/non-sealed status")]
     CP0009,
     CP0010,
     CP0011,
