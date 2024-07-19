@@ -7,10 +7,17 @@ namespace FFXIVClientStructs.STD.Helper;
 public partial interface IStaticEncoding {
     public abstract static Encoding Encoding { get; }
 
-    public sealed class System : IStaticEncoding {
+    public sealed partial class System : IStaticEncoding {
         private System() { }
 
-        public static Encoding Encoding => CodePagesEncodingProvider.Instance.GetEncoding(0) ?? CustomSystem.Encoding;
+        public static Encoding Encoding => GetAcp() switch {
+            var x and (0 or 1200 or 1201 or 12000 or 12001 or 20127 or 28591 or 65000 or 65001) =>
+                Encoding.GetEncoding(x),
+            var x => CodePagesEncodingProvider.Instance.GetEncoding(x) ?? CustomSystem.Encoding,
+        };
+
+        [LibraryImport("kernel32", EntryPoint = "GetACP", SetLastError = true)]
+        private static unsafe partial int GetAcp();
     }
 
     public sealed class Unicode : IStaticEncoding {
@@ -136,7 +143,6 @@ public partial interface IStaticEncoding {
                 int cbMultiByte,
                 char* lpWideCharStr,
                 int cchWideChar);
-
         }
     }
 }

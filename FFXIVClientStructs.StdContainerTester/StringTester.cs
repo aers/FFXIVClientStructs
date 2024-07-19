@@ -1,3 +1,4 @@
+using System.Text;
 using FFXIVClientStructs.STD;
 using FFXIVClientStructs.STD.Helper;
 
