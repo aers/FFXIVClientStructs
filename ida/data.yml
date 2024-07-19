@@ -2628,8 +2628,10 @@ classes:
   Client::System::Framework::Framework:
     instances:
       - ea: 0x14258A798
+        pointer: True
       - ea: 0x14258C548
         name: InstancePointer2
+        pointer: True
     vtbls:
       - ea: 0x141E99658
     vfuncs:

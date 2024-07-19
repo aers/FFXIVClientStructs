@@ -380,7 +380,7 @@ function getAddress(struct: Struct): string {
   // use Instance resolver, if possible
   if (data.classes[struct.type]?.instances?.length) {
     const instance = data.classes[struct.type].instances![0];
-    const isPointer = instance.pointer || true;
+    const isPointer = instance.pointer || false;
     return (
       (isPointer ? "[" : "") +
       "<" +
