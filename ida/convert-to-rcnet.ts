@@ -549,8 +549,18 @@ for (const struct of ffxiv_structs.structs) {
       );
     }
 
-    const pointerDepth = getPointerDepth(field.type);
+    // find out if it's a byte* used for a string
+    // best I could do here...
+    const isUtf8TextPtr =
+      field.type == "byte*" &&
+      (field.name.toLowerCase().includes("string") ||
+        field.name.toLowerCase().includes("name"));
 
+    // find out if it's a char* used for a string
+    const isUtf16TextPtr = field.type == "wchar_t*";
+
+    const pointerDepth =
+      isUtf8TextPtr || isUtf16TextPtr ? 0 : getPointerDepth(field.type);
     for (let i = pointerDepth; i > 0; i--) {
       writeNode(
         "node",
@@ -569,7 +579,21 @@ for (const struct of ffxiv_structs.structs) {
         ? field.type.substring(0, field.type.length - pointerDepth)
         : field.type;
 
-    if (fieldType in enumTypes) {
+    if (isUtf8TextPtr) {
+      writeNode("node", {
+        type: "Utf8TextPtrNode",
+        name: field.name,
+        comment: "",
+        hidden: "false",
+      });
+    } else if (isUtf16TextPtr) {
+      writeNode("node", {
+        type: "Utf16TextPtrNode",
+        name: field.name,
+        comment: "",
+        hidden: "false",
+      });
+    } else if (fieldType in enumTypes) {
       writeNode("node", {
         type: "EnumNode",
         name: field.name,
