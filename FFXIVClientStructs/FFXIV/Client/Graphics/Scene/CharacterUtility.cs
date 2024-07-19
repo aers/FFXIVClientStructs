@@ -7,12 +7,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::CharacterUtility
 //   Client::Graphics::Singleton
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x410)]
+[StructLayout(LayoutKind.Explicit, Size = 0x570)]
 public unsafe partial struct CharacterUtility {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 83 B9", 3, true)]
     public static partial CharacterUtility* Instance();
 
-    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray87<Pointer<ResourceHandle>> _resourceHandles;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray113<Pointer<ResourceHandle>> _resourceHandles;
 
     [FieldOffset(0x3F0)] public ConstantBuffer* LegacyBodyDecalColorCBuffer;
     [FieldOffset(0x3F8)] public ConstantBuffer* FreeCompanyCrestColorCBuffer;
