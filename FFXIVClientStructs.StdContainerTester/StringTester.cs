@@ -10,7 +10,7 @@ public static class StringTester {
         testcse.AddString("Test");
         testcse.AddString("●＠〓♧￣〔±‰╋℃가ー");
         Console.WriteLine(testcse.ToString());
-        
+
         using var test1 = new StdString();
         test1.AddString("12345");
         Console.WriteLine(test1);
