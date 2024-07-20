@@ -16,7 +16,7 @@ public unsafe partial struct AddonNeedGreed {
     [FieldOffset(0x598)] public int SelectedItemIndex;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x28)]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe struct LootItemInfo {
     [FieldOffset(0x00)] public byte* ItemName; // Pointer to a SeString
     [FieldOffset(0x08)] public uint ItemId;
