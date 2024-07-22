@@ -1065,7 +1065,7 @@ enums:
     "AetherCurrent": 201
     "FreeCompanyCreditShop": 202
     "Currency": 203
-    "PuryfyItemSelector": 204
+    "Purify": 204
     "LovmParty": 206
     "LovmRanking": 207
     "LovmNamePlate": 208
@@ -8000,7 +8000,7 @@ structs:
   name: LootItemInfo
   namespace: Client.UI
   union: False
-  size: 40
+  size: 48
   fields:
   - type: byte*
     name: ItemName
@@ -11968,12 +11968,12 @@ structs:
   name: CharacterUtility
   namespace: Client.Graphics.Scene
   union: False
-  size: 1040
+  size: 1392
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle*
     name: ResourceHandles
     offset: 8
-    size: 87
+    size: 114
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: LegacyBodyDecalColorCBuffer
     offset: 1008
@@ -12058,6 +12058,15 @@ structs:
     name: ReferencedClassBase
     offset: 0
   - type: Common::Math::Matrix4x4
+    name: ViewMatrix
+    offset: 16
+  - type: Common::Math::Matrix4x4
+    name: ProjectionMatrix2
+    offset: 80
+  - type: Common::Math::Vector3
+    name: Origin
+    offset: 144
+  - type: Common::Math::Matrix4x4
     name: ProjectionMatrix
     offset: 416
   - type: float
@@ -12072,6 +12081,18 @@ structs:
   - type: float
     name: FarPlane
     offset: 500
+  - type: float
+    name: OrthoHeight
+    offset: 504
+  - type: byte
+    name: IsOrtho
+    offset: 508
+  - type: byte
+    name: StandardZ
+    offset: 511
+  - type: byte
+    name: FiniteFarPlane
+    offset: 512
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Material
@@ -14619,6 +14640,14 @@ structs:
   fields: []
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Object::AreaObject
+  name: AreaObject
+  namespace: Client.Game.Object
+  union: False
+  size: 448
+  fields: []
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Object::ClientObjectManager
   name: ClientObjectManager
   namespace: Client.Game.Object
@@ -15432,7 +15461,7 @@ structs:
   name: ViperGauge
   namespace: Client.Game.Gauge
   union: False
-  size: 16
+  size: 24
   fields:
   - type: byte
     name: RattlingCoilStacks
@@ -15446,6 +15475,9 @@ structs:
   - type: Client::Game::Gauge::DreadCombo
     name: DreadCombo
     offset: 11
+  - type: unsigned __int16
+    name: ReawakenedTimer
+    offset: 14
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::DarkKnightGauge
@@ -17376,6 +17408,52 @@ structs:
     size: 4
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonAlliance48::Alliance48MemberStruct
+  name: Alliance48MemberStruct
+  namespace: Client.UI
+  union: False
+  size: 40
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: AtkComponentBase
+    offset: 0
+  - type: Component::GUI::AtkImageNode*
+    name: ClassJobImageNode
+    offset: 8
+  - type: Component::GUI::AtkResNode*
+    name: AtkResNode
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonAllianceListX::AllianceMemberStruct
+  name: AllianceMemberStruct
+  namespace: Client.UI
+  union: False
+  size: 64
+  fields:
+  - type: Component::GUI::AtkComponentBase*
+    name: ComponentBase
+    offset: 0
+  - type: Component::GUI::AtkResNode*
+    name: DebuffContainer
+    offset: 8
+  - type: Component::GUI::AtkImageNode*
+    name: ClassJobImageNode
+    offset: 16
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: HealthBar
+    offset: 32
+  - type: Component::GUI::AtkResNode*
+    name: AggroContainer
+    offset: 40
+  - type: Component::GUI::AtkResNode*
+    name: TargetGlowContainer
+    offset: 48
+  - type: Component::GUI::AtkCollisionNode*
+    name: AtkCollisionNode
+    offset: 56
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonAOZNotebook::SpellbookBlock
   name: SpellbookBlock
   namespace: Client.UI
@@ -18940,7 +19018,7 @@ structs:
   name: BeastChakraGauge
   namespace: Client.UI
   union: False
-  size: 232
+  size: 216
   fields:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
@@ -19012,24 +19090,18 @@ structs:
     name: RaptorStack1
     offset: 192
   - type: Component::GUI::AtkComponentBase*
-    name: RaptorStack2
+    name: CoeurlStack1
     offset: 200
   - type: Component::GUI::AtkComponentBase*
-    name: CoeurlStack1
-    offset: 208
-  - type: Component::GUI::AtkComponentBase*
     name: CoeurlStack2
-    offset: 216
-  - type: Component::GUI::AtkComponentBase*
-    name: CoeurlStack3
-    offset: 224
+    offset: 208
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeSimple
   name: BeastChakraGaugeSimple
   namespace: Client.UI
   union: False
-  size: 248
+  size: 232
   fields:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
@@ -19101,17 +19173,11 @@ structs:
     name: RaptorStack1
     offset: 208
   - type: Component::GUI::AtkComponentBase*
-    name: RaptorStack2
+    name: CoeurlStack1
     offset: 216
   - type: Component::GUI::AtkComponentBase*
-    name: CoeurlStack1
-    offset: 224
-  - type: Component::GUI::AtkComponentBase*
     name: CoeurlStack2
-    offset: 232
-  - type: Component::GUI::AtkComponentBase*
-    name: CoeurlStack3
-    offset: 240
+    offset: 224
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudMNK1::ChakraGaugeData
@@ -23066,6 +23132,46 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentPurify::ItemResult
+  name: ItemResult
+  namespace: Client.UI.Agent
+  union: False
+  size: 8
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: int
+    name: Count
+    offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentPurify::PurifyItem
+  name: PurifyItem
+  namespace: Client.UI.Agent
+  union: False
+  size: 128
+  fields:
+  - type: Client::Game::InventoryType
+    name: Inventory
+    offset: 0
+  - type: int
+    name: Slot
+    offset: 4
+  - type: unsigned int
+    name: ItemId
+    offset: 8
+  - type: unsigned int
+    name: IconId
+    offset: 12
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 16
+  - type: unsigned __int16
+    name: Collectability
+    offset: 120
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Agent::AgentRecipeMaterialList::RecipeData
   name: RecipeData
   namespace: Client.UI.Agent
@@ -24088,6 +24194,31 @@ structs:
       name: this
     - type: unsigned int
       name: entityId
+- type: Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase
+  name: GatheringPointObjectImplBase
+  namespace: Client.Game.Object
+  union: False
+  size: 32
+  fields:
+  - type: Client::Game::Event::GatheringPointEventHandler*
+    name: EventHandler
+    offset: 8
+  - type: Client::Game::Object::GatheringPointObject*
+    name: Object
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Object::GatheringPointObject::GatheringPointObjectImpl
+  name: GatheringPointObjectImpl
+  namespace: Client.Game.Object
+  union: False
+  size: 32
+  fields:
+  - type: Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase
+    name: GatheringPointObjectImplBase
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo
   name: DeepDungeonPartyInfo
   namespace: Client.Game.InstanceContent
@@ -24227,6 +24358,26 @@ structs:
   - type: int
     name: Value
     offset: 4
+  virtual_functions: []
+  member_functions: []
+- type: Client::Game::Control::EmoteController::PlayEmoteOption
+  name: PlayEmoteOption
+  namespace: Client.Game.Control
+  union: False
+  size: 32
+  fields:
+  - type: Client::Game::Object::GameObjectId
+    name: TargetId
+    offset: 8
+  - type: byte
+    name: Flags
+    offset: 16
+  - type: byte
+    name: Unk11
+    offset: 17
+  - type: Client::LayoutEngine::ILayoutInstance*
+    name: Layout
+    offset: 24
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Character::ActionEffectHandler::Effect
@@ -24442,11 +24593,11 @@ structs:
   union: False
   size: 16
   fields:
-  - type: Component::GUI::AtkComponentBase*
-    name: StackComponent
-    offset: 0
   - type: byte
     name: Active
+    offset: 0
+  - type: Component::GUI::AtkComponentBase*
+    name: StackComponent
     offset: 8
   virtual_functions: []
   member_functions: []
@@ -24456,14 +24607,14 @@ structs:
   union: False
   size: 24
   fields:
+  - type: byte
+    name: Active
+    offset: 0
   - type: Component::GUI::AtkComponentBase*
     name: StackComponent
-    offset: 0
+    offset: 8
   - type: Component::GUI::AtkResNode*
     name: GlowNode
-    offset: 8
-  - type: byte
-    name: Byte10
     offset: 16
   virtual_functions: []
   member_functions: []
@@ -26961,6 +27112,22 @@ structs:
     name: Last
     offset: 8
   - type: Client::UI::Agent::AgentMJIGatheringNoteBookData::GatherItem**
+    name: End
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdVector<Client::UI::Agent::AgentPurify::PurifyItem, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::AgentPurify::PurifyItem*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::AgentPurify::PurifyItem*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::AgentPurify::PurifyItem*
     name: End
     offset: 16
   virtual_functions: []
@@ -38516,20 +38683,44 @@ structs:
   name: OpenMapInfo
   namespace: Client.UI.Agent
   union: False
-  size: 184
+  size: 142
   fields:
   - type: Client::UI::Agent::MapType
     name: Type
     offset: 0
+  - type: unsigned int
+    name: AddonId
+    offset: 4
   - type: unsigned int
     name: TerritoryId
     offset: 8
   - type: unsigned int
     name: MapId
     offset: 12
+  - type: unsigned int
+    name: PlaceNameId
+    offset: 16
+  - type: unsigned int
+    name: AetheryteId
+    offset: 20
+  - type: unsigned int
+    name: FateId
+    offset: 24
+  - type: unsigned int
+    name: Unk1C
+    offset: 28
   - type: Client::System::String::Utf8String
     name: TitleString
     offset: 32
+  - type: unsigned int
+    name: Unk88
+    offset: 136
+  - type: byte
+    name: Unk8C
+    offset: 140
+  - type: byte
+    name: Unk8D
+    offset: 141
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::QuestLinkMarker
@@ -46011,6 +46202,433 @@ structs:
     offset: 24
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Object::GatheringPointObject
+  name: GatheringPointObject
+  namespace: Client.Game.Object
+  union: False
+  size: 496
+  fields:
+  - type: Client::Game::Object::GameObject
+    name: GameObject
+    offset: 0
+  - type: Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase
+    name: ObjectImplBase
+    offset: 416
+  - type: Client::Game::Object::GatheringPointObject::GatheringPointObjectImpl
+    name: ObjectImpl
+    offset: 448
+  - type: Client::Game::Object::GatheringPointObject::GatheringPointObjectImplBase*
+    name: Impl
+    offset: 480
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: byte*
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: GetNameId
+    offset: 376
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: IsDead
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: IsNotMounted
+    offset: 464
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: IsCharacter
+    offset: 488
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  member_functions: []
+- type: Client::Game::Object::HousingObject
+  name: HousingObject
+  namespace: Client.Game.Object
+  union: False
+  size: 464
+  fields:
+  - type: Client::Game::Object::GameObject
+    name: GameObject
+    offset: 0
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: byte*
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: GetNameId
+    offset: 376
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: IsDead
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: IsNotMounted
+    offset: 464
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  - name: IsCharacter
+    offset: 488
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+  member_functions: []
+- type: Client::Game::Object::MJIObject
+  name: MJIObject
+  namespace: Client.Game.Object
+  union: False
+  size: 576
+  fields:
+  - type: Client::Game::Object::GameObject
+    name: GameObject
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: SgbPath
+    offset: 440
+  - type: unsigned int
+    name: EObjNameId
+    offset: 572
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: byte*
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: GetNameId
+    offset: 376
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: IsDead
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: IsNotMounted
+    offset: 464
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  - name: IsCharacter
+    offset: 488
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+  member_functions: []
+- type: Client::Game::Object::Treasure
+  name: Treasure
+  namespace: Client.Game.Object
+  union: False
+  size: 528
+  fields:
+  - type: Client::Game::Object::GameObject
+    name: GameObject
+    offset: 0
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: byte*
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: GetNameId
+    offset: 376
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: IsDead
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: IsNotMounted
+    offset: 464
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  - name: IsCharacter
+    offset: 488
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+  member_functions: []
 - type: Client::Game::MJI::IslandState
   name: IslandState
   namespace: Client.Game.MJI
@@ -46325,7 +46943,7 @@ structs:
     offset: 812
     size: 64
   - type: Client::System::String::Utf8String*
-    name: UnkName
+    name: NameOverride
     offset: 880
   - type: byte
     name: Sex
@@ -46870,6 +47488,24 @@ structs:
     offset: 72
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonAlliance48::Alliance48Struct
+  name: Alliance48Struct
+  namespace: Client.UI
+  union: False
+  size: 336
+  fields:
+  - type: Client::UI::AddonAlliance48::Alliance48MemberStruct
+    name: Members
+    offset: 0
+    size: 8
+  - type: Component::GUI::AtkComponentBase*
+    name: ComponentBase
+    offset: 320
+  - type: Component::GUI::AtkTextNode*
+    name: HeaderText
+    offset: 328
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonJobHudACN0::AetherflowACNGauge
   name: AetherflowACNGauge
   namespace: Client.UI
@@ -47212,7 +47848,7 @@ structs:
     offset: 24
   - type: Client::UI::AddonJobHudBLM1::AstralGauge::AstralSoulStack
     name: AstralSoulStacks
-    offset: 40
+    offset: 32
     size: 6
   virtual_functions: []
   member_functions: []
@@ -47227,7 +47863,7 @@ structs:
     offset: 0
   - type: Client::UI::AddonJobHudBLM1::AstralGaugeSimple::AstralStackSimple
     name: AstralSoulStacks
-    offset: 40
+    offset: 32
     size: 6
   virtual_functions: []
   member_functions: []
@@ -49519,6 +50155,16 @@ structs:
   union: False
   fields:
   - type: StdVector<Client::UI::Agent::AgentMJIGatheringNoteBookData::GatherItem*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: StdVector<Client::UI::Agent::AgentPurify::PurifyItem>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Client::UI::Agent::AgentPurify::PurifyItem, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   virtual_functions: []
@@ -57478,6 +58124,663 @@ structs:
       name: this
     - type: int
       name: tab
+- type: Client::UI::AddonAlliance48
+  name: AddonAlliance48
+  namespace: Client.UI
+  union: False
+  size: 2240
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Client::UI::AddonAlliance48::Alliance48Struct
+    name: Alliances
+    offset: 560
+    size: 5
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonAllianceListX
+  name: AddonAllianceListX
+  namespace: Client.UI
+  union: False
+  size: 1136
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkTextNode*
+    name: HeaderText
+    offset: 560
+  - type: Client::UI::AddonAllianceListX::AllianceMemberStruct
+    name: AllianceMembers
+    offset: 568
+    size: 8
+  - type: unsigned __int16
+    name: UIFlags
+    offset: 1080
+    size: 8
+  - type: unsigned int
+    name: AllianceClassJobIconIds
+    offset: 1096
+    size: 8
+  - type: __int8
+    name: HoveredSlot
+    offset: 1128
+  - type: __int8
+    name: TargetedSlot
+    offset: 1129
+  - type: byte
+    name: Slots
+    offset: 1130
+  - type: byte
+    name: SlotsFilled
+    offset: 1131
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  member_functions: []
 - type: Client::UI::AddonAOZNotebook
   name: AddonAOZNotebook
   namespace: Client.UI
@@ -81870,7 +83173,7 @@ structs:
   name: AddonJobHudMNK0
   namespace: Client.UI
   union: False
-  size: 1216
+  size: 1184
   fields:
   - type: Client::UI::AddonJobHud
     name: AddonJobHud
@@ -81886,7 +83189,7 @@ structs:
     offset: 736
   - type: Client::UI::AddonJobHudMNK0::BeastChakraGaugeSimple
     name: GaugeSimple
-    offset: 968
+    offset: 952
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -92499,10 +93802,10 @@ structs:
     size: 16
   - type: int
     name: NumItems
-    offset: 1292
+    offset: 1420
   - type: int
     name: SelectedItemIndex
-    offset: 1304
+    offset: 1432
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -93121,6 +94424,349 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonParameterWidget
+  name: AddonParameterWidget
+  namespace: Client.UI
+  union: False
+  size: 632
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: HealthGaugeBar
+    offset: 560
+  - type: Component::GUI::AtkComponentGaugeBar*
+    name: ManaGaugeBar
+    offset: 568
+  - type: Component::GUI::AtkTextNode*
+    name: HealthText
+    offset: 576
+  - type: Component::GUI::AtkTextNode*
+    name: ManaText
+    offset: 584
+  - type: Component::GUI::AtkTextNode*
+    name: HealthAmount
+    offset: 592
+  - type: Component::GUI::AtkTextNode*
+    name: ManaAmount
+    offset: 600
+  - type: Component::GUI::AtkTextNode*
+    name: WeaponSheatedText
+    offset: 608
+  - type: unsigned int
+    name: EntityId
+    offset: 616
+  - type: unsigned int
+    name: ClassJobId
+    offset: 620
+  - type: unsigned int
+    name: ClassJobLevel
+    offset: 624
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
       name: this
   member_functions: []
 - type: Client::UI::AddonPartyList
@@ -107522,6 +109168,125 @@ structs:
       name: updateDataPacket
     - type: int
       name: ownerAddonId
+- type: Client::UI::Agent::AgentEmote
+  name: AgentEmote
+  namespace: Client.UI.Agent
+  union: False
+  size: 264
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: E9 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B 10 48 8B C8 FF 52 70
+    return_type: byte
+    name: CanUseEmote
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: unsigned __int16
+      name: emoteId
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 8A ?? ?? ?? ?? 8B C1 C1 E8 08
+    return_type: void
+    name: ExecuteEmote
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: unsigned __int16
+      name: emoteId
+    - type: Client::Game::Control::EmoteController::PlayEmoteOption*
+      name: playEmoteOption
+    - type: byte
+      name: addToHistory
+    - type: byte
+      name: liveUpdateHistory
 - type: Client::UI::Agent::AgentExplorationResultInterface
   name: AgentExplorationResultInterface
   namespace: Client.UI.Agent
@@ -110770,6 +112535,142 @@ structs:
     offset: 5464
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentPurify
+  name: AgentPurify
+  namespace: Client.UI.Agent
+  union: False
+  size: 296
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: StdVector<Client::UI::Agent::AgentPurify::PurifyItem>
+    name: ReducibleItems
+    offset: 56
+  - type: int
+    name: ReducibleItemsCount
+    offset: 208
+  - type: unsigned int
+    name: ResultAddonId
+    offset: 212
+  - type: unsigned int
+    name: ResultItemId
+    offset: 216
+  - type: byte
+    name: ResultBonus
+    offset: 220
+  - type: Client::UI::Agent::AgentPurify::ItemResult
+    name: Results
+    offset: 224
+    size: 3
+  - type: unsigned int
+    name: AutoAddonId
+    offset: 248
+  - type: unsigned int
+    name: AutoItemId
+    offset: 252
+  - type: unsigned __int16
+    name: AutoItemsLeft
+    offset: 256
+  - type: unsigned __int16
+    name: AutoItemCount
+    offset: 258
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 83 ?? ?? ?? ?? 48 8B CB
+    return_type: void
+    name: ReduceItem
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: item
 - type: Client::UI::Agent::AgentRecipeNote
   name: AgentRecipeNote
   namespace: Client.UI.Agent
@@ -113895,6 +115796,318 @@ structs:
       name: favored
     - type: byte
       name: residentArea
+- type: Client::Game::Object::Aetheryte
+  name: Aetheryte
+  namespace: Client.Game.Object
+  union: False
+  size: 432
+  fields:
+  - type: Client::Game::Object::GameObject
+    name: GameObject
+    offset: 0
+  - type: Client::Game::Event::AetheryteEventHandler*
+    name: AetheryteEventHandler
+    offset: 416
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: byte*
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: GetNameId
+    offset: 376
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: IsDead
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: IsNotMounted
+    offset: 464
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  - name: IsCharacter
+    offset: 488
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+  member_functions: []
+- type: Client::Game::Object::EventObject
+  name: EventObject
+  namespace: Client.Game.Object
+  union: False
+  size: 448
+  fields:
+  - type: Client::Game::Object::GameObject
+    name: GameObject
+    offset: 0
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: byte*
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: GetNameId
+    offset: 376
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: IsDead
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: IsNotMounted
+    offset: 464
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: IsCharacter
+    offset: 488
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  member_functions: []
+- type: Client::Game::Object::HousingCombinedObject
+  name: HousingCombinedObject
+  namespace: Client.Game.Object
+  union: False
+  size: 480
+  fields:
+  - type: Client::Game::Object::HousingObject
+    name: HousingObject
+    offset: 0
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: byte*
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: GetNameId
+    offset: 376
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: IsDead
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: IsNotMounted
+    offset: 464
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: IsCharacter
+    offset: 488
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  member_functions: []
 - type: Client::Game::MJI::MJIFarmState
   name: MJIFarmState
   namespace: Client.Game.MJI
@@ -120533,15 +122746,15 @@ structs:
   - type: byte
     name: UnlockedAetherytesBitmask
     offset: 97676
-    size: 31
+    size: 30
   - type: byte
     name: UnlockedHowtoBitmask
     offset: 97706
-    size: 37
+    size: 36
   - type: byte
     name: UnlockedCompanionsBitmask
     offset: 97742
-    size: 68
+    size: 67
   - type: byte
     name: ChocoboTaxiStandsBitmask
     offset: 97809
@@ -120721,6 +122934,140 @@ structs:
     name: EventGPoseController
     offset: 496
   virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::GatheringEventHandler
+  name: GatheringEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1104
+  fields:
+  - type: Client::Game::Event::EventHandler
+    name: EventHandler
+    offset: 0
+  virtual_functions:
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+  member_functions: []
+- type: Client::Game::Event::GatheringPointEventHandler
+  name: GatheringPointEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1136
+  fields:
+  - type: Client::Game::Event::GatheringEventHandler
+    name: GatheringEventHandler
+    offset: 0
+  virtual_functions:
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
   member_functions: []
 - type: Client::Game::Character::Character
   name: Character
@@ -121111,6 +123458,133 @@ structs:
     - type: Client::Game::Character::Companion*
       name: this
   member_functions: []
+- type: Client::Game::Character::MJILivelyActor
+  name: MJILivelyActor
+  namespace: Client.Game.Character
+  union: False
+  size: 8832
+  fields:
+  - type: Client::Game::Character::Character
+    name: Character
+    offset: 0
+  virtual_functions:
+  - name: GetGameObjectId
+    offset: 8
+    return_type: Client::Game::Object::GameObjectId
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetObjectKind
+    offset: 16
+    return_type: Client::Game::Object::ObjectKind
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetIsTargetable
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetName
+    offset: 48
+    return_type: byte*
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetRadius
+    offset: 56
+    return_type: float
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetHeight
+    offset: 64
+    return_type: float
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: EnableDraw
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: DisableDraw
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetDrawObject
+    offset: 184
+    return_type: Client::Graphics::Scene::DrawObject*
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: Highlight
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+    - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: SetReadyToDraw
+    offset: 272
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetNameId
+    offset: 376
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: IsDead
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: IsNotMounted
+    offset: 464
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: IsCharacter
+    offset: 488
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetStatusManager
+    offset: 632
+    return_type: Client::Game::StatusManager*
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetCastInfo
+    offset: 648
+    return_type: Client::Game::Character::CastInfo*
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetActionEffectHandler
+    offset: 664
+    return_type: Client::Game::Character::ActionEffectHandler*
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  - name: GetForayInfo
+    offset: 680
+    return_type: Client::Game::Character::ForayInfo*
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+  member_functions: []
 - type: Client::Game::Character::Ornament
   name: Ornament
   namespace: Client.Game.Character
@@ -121270,12 +123744,6 @@ structs:
     name: Characters
     offset: 32
     size: 8
-  - type: __int64
-    name: Unk3
-    offset: 15136
-  - type: __int64
-    name: Unk4
-    offset: 15144
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>
@@ -123266,6 +125734,73 @@ structs:
       name: this
     - type: int
       name: a2
+  member_functions: []
+- type: Client::Game::Event::AetheryteEventHandler
+  name: AetheryteEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1144
+  fields:
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
+    offset: 0
+  virtual_functions:
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
   member_functions: []
 - type: Client::Game::Event::Director
   name: Director
