@@ -428,7 +428,13 @@ public unsafe partial struct Conditions {
     /// <summary>
     /// Unable to execute command while bound by duty.
     /// </summary>
+    [Obsolete("Use IsInDutyQueue")]
     public static bool IsBoundToDuty97 => Instance()->Flags[91];
+
+    /// <summary>
+    /// Unable to execute command while bound by duty.
+    /// </summary>
+    public static bool IsInDutyQueue => Instance()->Flags[91];
 
     /// <summary>
     /// Unable to execute command while readying to visit another World.
