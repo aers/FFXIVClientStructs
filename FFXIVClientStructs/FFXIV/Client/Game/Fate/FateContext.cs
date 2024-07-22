@@ -20,7 +20,11 @@ public partial struct FateContext {
     [FieldOffset(0x3AC)] public byte State;
     [FieldOffset(0x3AF)] public byte HandInCount;
     [FieldOffset(0x3B8)] public byte Progress;
-    [FieldOffset(0x3C4)] public bool IsExpBonus;
+    /// <summary>
+    /// If true grants extra experience and bicolor gemstones (ShB and up)
+    /// </summary>
+    [FieldOffset(0x3C4)] public bool IsBonus;
+    [FieldOffset(0x3C4), Obsolete("Use IsBonus instead")] public bool IsExpBonus; // Since Shadowbringers the bonus fates have granted extra gemstones when this was true
     [FieldOffset(0x3C6), FixedSizeArray] internal FixedSizeArray8<ushort> _objectiveIcons;
     [FieldOffset(0x3D8)] public uint IconId;
     [FieldOffset(0x3DC)] public uint MapIconId;
