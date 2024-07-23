@@ -62,18 +62,23 @@ public enum SongFlags : byte {
 }
 
 [Flags]
-public enum AetherFlags : byte {
+public enum AetherFlags : ushort {
     None = 0,
-    Aetherflow1 = 1 << 0,
-    Aetherflow2 = 1 << 1,
-    Aetherflow = Aetherflow1 | Aetherflow2,
-    IfritAttuned = 1 << 2,
-    TitanAttuned = 1 << 3,
+    IfritAttuned = 1 << 0,
+    TitanAttuned = 1 << 1,
     GarudaAttuned = TitanAttuned | IfritAttuned,
-    PhoenixReady = 1 << 4,
-    IfritReady = 1 << 5,
-    TitanReady = 1 << 6,
-    GarudaReady = 1 << 7
+    Attunement1 = 1 << 2,
+    Attunement2 = 1 << 3,
+    Attunement4 = 1 << 4,
+    Attunement = Attunement1 | Attunement2 | Attunement4,
+    Aetherflow1 = 1 << 8,
+    Aetherflow2 = 1 << 9,
+    Aetherflow = Aetherflow1 | Aetherflow2,
+    PhoenixReady = 1 << 10,
+    SolarBahamutReady = 1 << 11,
+    IfritReady = 1 << 13,
+    TitanReady = 1 << 14,
+    GarudaReady = 1 << 15
 }
 
 public enum BeastChakraType : byte {

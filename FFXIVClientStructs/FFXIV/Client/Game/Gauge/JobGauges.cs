@@ -73,10 +73,11 @@ public struct SummonerGauge {
     [FieldOffset(0xA)] public ushort AttunementTimer; // millis counting down
     [FieldOffset(0xC)] public byte ReturnSummon; // Pet sheet (23=Carbuncle, the only option now)
     [FieldOffset(0xD)] public byte ReturnSummonGlam; // PetMirage sheet
-    [FieldOffset(0xE)] public byte Attunement; // Count of "Attunement cost" resource
-    [FieldOffset(0xF)] public AetherFlags AetherFlags; // bitfield
-    public byte AttunementCount => (byte)(Attunement >> 2);//new in 7.01,Attunement may be Bit Field
-    public byte AttunementType => (byte)(Attunement & 0x3);//new in 7.01
+    [FieldOffset(0xE)] public AetherFlags AetherFlags; // bitfield
+    public bool SolarBahamutReady => (AetherFlags & AetherFlags.SolarBahamutReady) == AetherFlags.SolarBahamutReady;
+    public bool PhoenixReady => (AetherFlags & (AetherFlags.SolarBahamutReady | AetherFlags.PhoenixReady)) == AetherFlags.PhoenixReady; // Special
+    public int AttunementStack => ((ushort)(AetherFlags & AetherFlags.Attunement)) >> 2;
+    public int AetherStack => ((ushort)(AetherFlags & AetherFlags.Aetherflow)) >> 8;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
