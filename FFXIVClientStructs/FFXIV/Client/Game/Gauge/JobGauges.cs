@@ -196,8 +196,8 @@ public struct ViperGauge {
     [FieldOffset(0x0A)] public byte SerpentOffering;
     [FieldOffset(0x0B)] public DreadCombo DreadCombo;
     [FieldOffset(0x0E)] public ushort ReawakenedTimer;
-    //[FieldOffset(0x10)] public byte ComboFlags;
-    //public int Combo => ComboFlags >> 2;
+    [FieldOffset(0x10)] public byte SerpentComboState;
+    public SerpentCombo SerpentCombo => (SerpentCombo)(SerpentComboState >> 2);
 }
 
 #endregion

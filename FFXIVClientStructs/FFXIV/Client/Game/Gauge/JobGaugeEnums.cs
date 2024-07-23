@@ -126,3 +126,12 @@ public enum DreadCombo : byte {
     //SecondGeneration = 9,
     //ThirdGeneration = 10,
 }
+
+public enum SerpentCombo : byte {
+    DeathRattle = 1,
+    LastLash = 2,
+    FirstLegacy = 3,
+    SecondLegacy = 4,
+    ThirdLegacy = 5,
+    FourthLegacy = 6,
+}
