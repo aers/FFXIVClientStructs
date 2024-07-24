@@ -11,14 +11,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x350)]
 public unsafe partial struct AddonGathering {
     [FieldOffset(0x230)] public AtkResNode* UnkResNode230;
-    [FieldOffset(0x238)] public AtkComponentCheckBox* GatheredItemComponentCheckBox1;
-    [FieldOffset(0x240)] public AtkComponentCheckBox* GatheredItemComponentCheckBox2;
-    [FieldOffset(0x248)] public AtkComponentCheckBox* GatheredItemComponentCheckBox3;
-    [FieldOffset(0x250)] public AtkComponentCheckBox* GatheredItemComponentCheckBox4;
-    [FieldOffset(0x258)] public AtkComponentCheckBox* GatheredItemComponentCheckBox5;
-    [FieldOffset(0x260)] public AtkComponentCheckBox* GatheredItemComponentCheckBox6;
-    [FieldOffset(0x268)] public AtkComponentCheckBox* GatheredItemComponentCheckBox7;
-    [FieldOffset(0x270)] public AtkComponentCheckBox* GatheredItemComponentCheckBox8;
+    [FieldOffset(0x238), Obsolete("Use GatheredItemComponentCheckbox[0]")] public AtkComponentCheckBox* GatheredItemComponentCheckBox1;
+    [FieldOffset(0x240), Obsolete("Use GatheredItemComponentCheckbox[1]")] public AtkComponentCheckBox* GatheredItemComponentCheckBox2;
+    [FieldOffset(0x248), Obsolete("Use GatheredItemComponentCheckbox[2]")] public AtkComponentCheckBox* GatheredItemComponentCheckBox3;
+    [FieldOffset(0x250), Obsolete("Use GatheredItemComponentCheckbox[3]")] public AtkComponentCheckBox* GatheredItemComponentCheckBox4;
+    [FieldOffset(0x258), Obsolete("Use GatheredItemComponentCheckbox[4]")] public AtkComponentCheckBox* GatheredItemComponentCheckBox5;
+    [FieldOffset(0x260), Obsolete("Use GatheredItemComponentCheckbox[5]")] public AtkComponentCheckBox* GatheredItemComponentCheckBox6;
+    [FieldOffset(0x268), Obsolete("Use GatheredItemComponentCheckbox[6]")] public AtkComponentCheckBox* GatheredItemComponentCheckBox7;
+    [FieldOffset(0x270), Obsolete("Use GatheredItemComponentCheckbox[7]")] public AtkComponentCheckBox* GatheredItemComponentCheckBox8;
+    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray8<Pointer<AtkComponentCheckBox>> _gatheredItemComponentCheckbox;
     [FieldOffset(0x278)] public AtkComponentGaugeBar* IntegrityGaugeBar;
     [FieldOffset(0x280)] public AtkResNode* UnkResNode280;
     [FieldOffset(0x288)] public AtkTextNode* IntegrityLeftover;
