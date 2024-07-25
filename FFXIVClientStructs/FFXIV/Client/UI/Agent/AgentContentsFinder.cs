@@ -13,21 +13,28 @@ public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x38)] public Utf8String Description;
 
-    // TODO split into 3 separate arrays, (8F0, EE0, 14D0), each with 5 entries, 8F0 seems to be the top row of rewards while 14D0 is the bottom row, EE0 is unknown
-    [FieldOffset(0x8F0), FixedSizeArray] internal FixedSizeArray15<ItemReward> _itemRewards;
+    [FieldOffset(0x264), FixedSizeArray] internal FixedSizeArray8<int> _rewardsQuantity;
+    [FieldOffset(0x99C), FixedSizeArray] internal FixedSizeArray8<int> _rewardsQuantityDup;
 
-    [FieldOffset(0x1B6C)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
-    [FieldOffset(0x1B78)] public byte NumCollectedRewards; // Value used for "Reward already received"
+    [FieldOffset(0xF38), FixedSizeArray] internal FixedSizeArray5<ItemReward> _upperRewards;
+    [FieldOffset(0x1800)] public byte HasInNeedGilReward;
+    [FieldOffset(0x1804)] public uint InNeedGilQuantity;
+    [FieldOffset(0x1838), FixedSizeArray] internal FixedSizeArray5<ItemReward> _lowerRewards;
 
-    [FieldOffset(0x1BC8), FixedSizeArray] internal FixedSizeArray10<Utf8String> _strings; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
+    [FieldOffset(0x1CA4)] public uint SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
+    [FieldOffset(0x1CB0)] public byte NumCollectedRewards; // Value used for "Reward already received"
+    [FieldOffset(0x1CB1)] public byte HasRouletteSelected;
 
-    [FieldOffset(0x2007), FixedSizeArray] internal FixedSizeArray11<ContentsRouletteRole> _contentRouletteRoleBonuses;
+    [FieldOffset(0x1D00), FixedSizeArray] internal FixedSizeArray10<Utf8String> _strings; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
 
-    [FieldOffset(0x2034)] public uint DutyPenaltyMinutes;
-    [FieldOffset(0x2038)] public uint UnkPenaltyMinutes;
+    [FieldOffset(0x2169), FixedSizeArray] internal FixedSizeArray11<ContentsRouletteRole> _contentRouletteRoleBonuses;
 
-    [FieldOffset(0x206C)] public int CurrentTimestamp;
-    [FieldOffset(0x2078)] public byte SelectedTab;
+    [FieldOffset(0x2174)] public uint DutyPenaltyMinutes;
+    [FieldOffset(0x2178)] public uint UnkPenaltyMinutes;
+
+    [FieldOffset(0x21AC)] public int CurrentTimestamp;
+    [FieldOffset(0x21B8)] public byte SelectedTab;
+
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8")]
     public partial void OpenRegularDuty(uint contentsFinderCondition, bool hideIfShown = false);
@@ -49,13 +56,13 @@ public struct ContentsFinderRewards {
     [FieldOffset(0x00)] public int WolfMarkReward;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x130)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public struct ItemReward {
+    [FieldOffset(0x00)] public uint IsValid; // 0x0 not valid, 0x2 valid
     [FieldOffset(0x04)] public uint ItemId;
-    [FieldOffset(0x08)] public int Quantity; // -1 seems to be arrow up
-    [FieldOffset(0x10)] public uint IconId;
-    [FieldOffset(0x18)] public Utf8String TooltipString;
-    [FieldOffset(0x88)] public Utf8String UnkString; // This string seems to be unused?
+    [FieldOffset(0x08)] public int Quantity;
+    [FieldOffset(0x0C)] public uint IconId;
+    [FieldOffset(0x10)] public Utf8String TooltipString;
 }
 
 public enum ContentsRouletteRole : byte {
