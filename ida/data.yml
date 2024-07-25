@@ -11079,7 +11079,7 @@ classes:
       123: StopScreenShake
       124: PlaySE
       125: MakeRetainer
-      126: HairMake
+      126: HairMake # name based on lua function, creates CharaMakeInGameTask
       127: WaitForBuildHouse
       128: Logout
       129: Shutdown
