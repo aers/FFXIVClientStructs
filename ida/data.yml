@@ -11356,7 +11356,7 @@ classes:
     vtbls:
       - ea: 0x141F2F1D8
         base: Client::Game::Event::EventSceneTaskInterface
-  Client::Game::Event::HairMakeTask:
+  Client::Game::Event::CharaMakeInGameTask:
     vtbls:
       - ea: 0x141F2F220
         base: Client::Game::Event::EventSceneTaskInterface
