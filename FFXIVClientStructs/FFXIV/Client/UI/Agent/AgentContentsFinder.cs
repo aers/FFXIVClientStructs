@@ -21,9 +21,12 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x1804)] public uint InNeedGilQuantity;
     [FieldOffset(0x1838), FixedSizeArray] internal FixedSizeArray5<ItemReward> _lowerRewards;
 
-    [FieldOffset(0x1CA4)] public uint SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
+    [FieldOffset(0x1CA4)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1CB0)] public byte NumCollectedRewards; // Value used for "Reward already received"
-    [FieldOffset(0x1CB1)] public byte HasRouletteSelected;
+    [FieldOffset(0x1CB1)] public byte HasRouletteSelected; // Prevents more roulettes from being selected
+
+
+    [FieldOffset(0x1CF0)] public UIModule* UIModule;
 
     [FieldOffset(0x1D00), FixedSizeArray] internal FixedSizeArray10<Utf8String> _strings; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
 
