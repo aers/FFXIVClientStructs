@@ -49,36 +49,36 @@ public enum ContentsRouletteRole : byte {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1470)]
 public unsafe partial struct AgentContentsFinderReward {
-    [FieldOffset(0x00)] public AgentContentsFinderRewardWrap NormalItems; // Actual items, e.g "Cracked Cluster"
+    [FieldOffset(0x00)] public RewardWrap NormalItems; // Actual items, e.g "Cracked Cluster"
     [FieldOffset(0x1E8), FixedSizeArray] internal FixedSizeArray5<InventoryItem> _unkItems;
-    [FieldOffset(0x328)] public AgentContentsFinderRewardWrap BonusItems; // Actual items, e.g "Cracked Cluster"
-    [FieldOffset(0x510)] public AgentContentsFinderRewardWrap UnkItemsWrap;
+    [FieldOffset(0x328)] public RewardWrap BonusItems; // Actual items, e.g "Cracked Cluster"
+    [FieldOffset(0x510)] public RewardWrap UnkItemsWrap;
 
     [FieldOffset(0x700)] public ExcelSheet* ItemSheet;
 
     [FieldOffset(0x720), FixedSizeArray] internal FixedSizeArray7<ItemWrap> _normalRewards;
     [FieldOffset(0xC60), FixedSizeArray] internal FixedSizeArray5<ItemWrap> _unkRewards;
-    [FieldOffset(0x1020), FixedSizeArray] internal FixedSizeArray5<ItemWrap> _bonusRewards;
+    [FieldOffset(0x1020), FixedSizeArray] internal FixedSizeArray5<ItemWrap> _bonusRewards; // "In Need" and "Completion Bonus"
 
     [FieldOffset(0x13E0), FixedSizeArray] internal FixedSizeArray16<Pointer<InventoryItem>> _itemRewards;
     [FieldOffset(0x1468)] public uint ItemRewardCount; // Actual items, not EXP
-}
 
-[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public unsafe partial struct ItemWrap {
-    [FieldOffset(0x00)] public InventoryItem Item;
-    [FieldOffset(0x40)] public uint IsValid; // 0x0 not valid, 0x2 valid
-    [FieldOffset(0x44)] public uint ItemId;
-    [FieldOffset(0x48)] public int Quantity;
-    [FieldOffset(0x4C)] public uint IconId;
-    [FieldOffset(0x50)] public Utf8String String;
-}
+    [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
+    public unsafe partial struct ItemWrap {
+        [FieldOffset(0x00)] public InventoryItem Item;
+        [FieldOffset(0x40)] public uint IsValid; // 0x0 not valid, 0x2 valid
+        [FieldOffset(0x44)] public uint ItemId;
+        [FieldOffset(0x48)] public int Quantity;
+        [FieldOffset(0x4C)] public uint IconId;
+        [FieldOffset(0x50)] public Utf8String String;
+    }
 
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
-public unsafe partial struct AgentContentsFinderRewardWrap {
-    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray7<InventoryItem> _items;
-    [FieldOffset(0x1C0), FixedSizeArray] internal FixedSizeArray9<int> _rewards;
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
+    public unsafe partial struct RewardWrap {
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray7<InventoryItem> _items;
+        [FieldOffset(0x1C0), FixedSizeArray] internal FixedSizeArray9<int> _rewards;
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x7B0)]
@@ -87,16 +87,16 @@ public unsafe partial struct AgentContentsFinderInterface {
     [FieldOffset(0x10)] public Utf8String Description;
     [FieldOffset(0x78)] public AgentContentsFinderUnkItemsSub UnkSub;
 
-    [FieldOffset(0x770)] public ExcelSheet* InstanceContent;
-    [FieldOffset(0x778)] public ExcelSheet* ContentFinderConditionTransient;
-    [FieldOffset(0x780)] public ExcelSheet* InstanceContentRewardItem;
+    [FieldOffset(0x770)] public ExcelSheet* InstanceContentSheet;
+    [FieldOffset(0x778)] public ExcelSheet* ContentFinderConditionTransientSheet;
+    [FieldOffset(0x780)] public ExcelSheet* InstanceContentRewardItemSheet;
     [FieldOffset(0x788)] public nint ExcelSheetWaiterInstanceContent;
     [FieldOffset(0x790)] public nint ExcelSheetWaiterContentFinderConditionTransient;
     [FieldOffset(0x798)] public nint ExcelSheetWaiterInstanceContentRewardItem;
 
     [FieldOffset(0x7A0)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
-}
 
-[StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
-public unsafe partial struct AgentContentsFinderUnkItemsSub {
+    [StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
+    public unsafe partial struct AgentContentsFinderUnkItemsSub {
+    }
 }
