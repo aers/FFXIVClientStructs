@@ -2145,6 +2145,7 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+      0x140B05CC0: ReadPacket
       0x140B05FA0: IsTitleUnlocked
   Client::Game::UI::GCSupply:
     instances:
