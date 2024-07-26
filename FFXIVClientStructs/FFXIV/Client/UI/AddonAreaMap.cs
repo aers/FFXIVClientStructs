@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -8,10 +8,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x7D8)]
 public unsafe partial struct AddonAreaMap {
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 6 * 4)] 
-    public partial struct AreaMapIntArrayData {
-        public static AreaMapIntArrayData* Instance = (AreaMapIntArrayData*) AtkStage.Instance()->GetNumberArrayData(NumberArrayType.AreaMap);
-    
+    [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
+    public unsafe partial struct AddonAreaMapNumberArray {
+        public static AddonAreaMapNumberArray* Instance() => (AddonAreaMapNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.AreaMap);
+
         [FieldOffset(0x0)] public int X;
         [FieldOffset(0x4)] public int Y;
         [FieldOffset(0x8)] public int PlayerRotation; // 0 is South, -90 is West, -180/+180 is North, 90 is East

@@ -15,7 +15,7 @@ public unsafe partial struct AgentGrandCompanySupply {
     [FieldOffset(0x68)] public GrandCompanyItem* ItemArray;
 
     [FieldOffset(0x78)] public int NumItems;
-    [FieldOffset(0x90)] public int SelectedTab;
+    [FieldOffset(0x90)] public int SelectedTab; // TODO: this is a short
 }
 
 [GenerateInterop]

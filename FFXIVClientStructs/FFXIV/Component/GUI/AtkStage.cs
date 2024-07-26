@@ -62,17 +62,7 @@ public unsafe partial struct AtkStage {
 
     [MemberFunction("48 8B 41 38 48 8B 40 48")]
     public partial ExtendArrayData** GetExtendArrayData();
-}
 
-public enum NumberArrayType {
-    Nameplate = 5,
-    AreaMap = 24,
-    AreaMap2 = 56, 
+    public ExtendArrayData* GetExtendArrayData(ExtendArrayType type)
+        => GetExtendArrayData()[(int)type];
 }
-
-public enum StringArrayType {
-    Nameplate = 4,
-    AreaMap = 21,
-    AreaMap2 = 52,
-}
-
