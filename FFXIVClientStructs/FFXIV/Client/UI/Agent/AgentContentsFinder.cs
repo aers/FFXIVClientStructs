@@ -85,7 +85,7 @@ public unsafe partial struct AgentContentsFinderReward {
 public unsafe partial struct AgentContentsFinderInterface {
     [FieldOffset(0x00)] public AgentContentsFinder* AgentContentsFinder;
     [FieldOffset(0x10)] public Utf8String Description;
-    [FieldOffset(0x78)] public AgentContentsFinderUnkItemsSub UnkSub;
+    [FieldOffset(0x78)] public UnkItemsSub UnkSub;
 
     [FieldOffset(0x770)] public ExcelSheet* InstanceContentSheet;
     [FieldOffset(0x778)] public ExcelSheet* ContentFinderConditionTransientSheet;
@@ -97,6 +97,6 @@ public unsafe partial struct AgentContentsFinderInterface {
     [FieldOffset(0x7A0)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
 
     [StructLayout(LayoutKind.Explicit, Size = 0x6F8)]
-    public unsafe partial struct AgentContentsFinderUnkItemsSub {
+    public unsafe partial struct UnkItemsSub {
     }
 }
