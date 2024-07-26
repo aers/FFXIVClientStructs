@@ -73,6 +73,8 @@ public unsafe partial struct AddonNamePlate {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
     public partial struct NamePlateIntArrayData {
+        public static NamePlateIntArrayData* Instance = (NamePlateIntArrayData*) AtkStage.Instance()->GetNumberArrayData(NumberArrayType.Nameplate);
+        
         [FieldOffset(0x0)] public int ActiveNamePlateCount;
         [FieldOffset(0x4)] public bool ForceNamePlateRebake;
         [FieldOffset(0x8)] public int NamePlateSize;
