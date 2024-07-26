@@ -44,7 +44,9 @@ public enum EventSceneTaskType : uint {
     IsItemObtainable = 33,
     CheckItemsObtainable = 34,
     CheckItemsObtainableRareCheck = 35,
+    [Obsolete("Renamed to CharaMakeInGame")]
     HairMake = 36,
+    CharaMakeInGame = 36, // created by the lua function HairMake
     WaitForBuildHouse = 37,
     WaitForFeedBuddy = 38,
     RequestRacingChocoboParam = 39,
