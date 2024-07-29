@@ -2145,6 +2145,7 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+      0x140B05CC0: ReadPacket
       0x140B05FA0: IsTitleUnlocked
   Client::Game::UI::GCSupply:
     instances:
@@ -11079,7 +11080,7 @@ classes:
       123: StopScreenShake
       124: PlaySE
       125: MakeRetainer
-      126: HairMake
+      126: HairMake # name based on lua function, creates CharaMakeInGameTask
       127: WaitForBuildHouse
       128: Logout
       129: Shutdown
@@ -11356,7 +11357,7 @@ classes:
     vtbls:
       - ea: 0x141F2F1D8
         base: Client::Game::Event::EventSceneTaskInterface
-  Client::Game::Event::HairMakeTask:
+  Client::Game::Event::CharaMakeInGameTask:
     vtbls:
       - ea: 0x141F2F220
         base: Client::Game::Event::EventSceneTaskInterface

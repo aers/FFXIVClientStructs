@@ -75,6 +75,8 @@ public struct SummonerGauge {
     [FieldOffset(0xD)] public byte ReturnSummonGlam; // PetMirage sheet
     [FieldOffset(0xE)] public byte Attunement; // Count of "Attunement cost" resource
     [FieldOffset(0xF)] public AetherFlags AetherFlags; // bitfield
+    public byte AttunementCount => (byte)(Attunement >> 2);//new in 7.01,Attunement may be Bit Field
+    public byte AttunementType => (byte)(Attunement & 0x3);//new in 7.01
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
@@ -193,8 +195,8 @@ public struct ViperGauge {
     [FieldOffset(0x0A)] public byte SerpentOffering;
     [FieldOffset(0x0B)] public DreadCombo DreadCombo;
     [FieldOffset(0x0E)] public ushort ReawakenedTimer;
-    //[FieldOffset(0x10)] public byte ComboFlags;
-    //public int Combo => ComboFlags >> 2;
+    [FieldOffset(0x10)] public byte SerpentComboState;
+    public SerpentCombo SerpentCombo => (SerpentCombo)(SerpentComboState >> 2);
 }
 
 #endregion
