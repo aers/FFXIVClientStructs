@@ -360,3 +360,4 @@ MigrationBackup/
 # VSCode
 .vscode/
 ida/errors.txt
+ida/uld_names.txt
