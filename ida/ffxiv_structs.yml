@@ -2133,7 +2133,7 @@ enums:
     "IsItemObtainable": 33
     "CheckItemsObtainable": 34
     "CheckItemsObtainableRareCheck": 35
-    "HairMake": 36
+    "CharaMakeInGame": 36
     "WaitForBuildHouse": 37
     "WaitForFeedBuddy": 38
     "RequestRacingChocoboParam": 39
@@ -10055,38 +10055,6 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
-- type: Client::UI::Agent::ContentsFinderRewards
-  name: ContentsFinderRewards
-  namespace: Client.UI.Agent
-  union: True
-  size: 32
-  fields:
-  - type: int
-    name: ExpReward
-    offset: 0
-  - type: int
-    name: GilReward
-    offset: 0
-  - type: int
-    name: SealReward
-    offset: 0
-  - type: int
-    name: PoeticReward
-    offset: 0
-  - type: int
-    name: NonLimitedTomestoneReward
-    offset: 0
-  - type: int
-    name: LimitedTomestoneRward
-    offset: 0
-  - type: int
-    name: PvPExpReward
-    offset: 0
-  - type: int
-    name: WolfMarkReward
-    offset: 0
-  virtual_functions: []
-  member_functions: []
 - type: Client::UI::Agent::ContextMenu
   name: ContextMenu
   namespace: Client.UI.Agent
@@ -13501,21 +13469,21 @@ structs:
   name: TitleList
   namespace: Client.Game
   union: False
-  size: 104
+  size: 112
   fields:
   - type: byte
     name: TitlesUnlockBitmask
     offset: 8
-    size: 92
+    size: 96
   - type: byte
     name: DataPending
-    offset: 100
+    offset: 104
   - type: byte
     name: DataReceived
-    offset: 101
+    offset: 105
   - type: byte
     name: DataRequested
-    offset: 102
+    offset: 106
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 84 C0 74 1A 8B CB
@@ -15478,6 +15446,9 @@ structs:
   - type: unsigned __int16
     name: ReawakenedTimer
     offset: 14
+  - type: byte
+    name: SerpentComboState
+    offset: 16
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Gauge::DarkKnightGauge
@@ -22231,6 +22202,14 @@ structs:
   - type: byte
     name: DatasetIndex
     offset: 44
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentContentsFinderInterface::UnkItemsSub
+  name: UnkItemsSub
+  namespace: Client.UI.Agent
+  union: False
+  size: 1784
+  fields: []
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentCraftActionSimulator::EfficiencyCalculation
@@ -37660,27 +37639,42 @@ structs:
       name: this
     - type: byte
       name: hasDataChanged
-- type: Client::UI::Agent::ItemReward
-  name: ItemReward
+- type: Client::UI::Agent::AgentContentsFinderInterface
+  name: AgentContentsFinderInterface
   namespace: Client.UI.Agent
   union: False
-  size: 304
+  size: 1968
   fields:
-  - type: unsigned int
-    name: ItemId
-    offset: 4
-  - type: int
-    name: Quantity
-    offset: 8
-  - type: unsigned int
-    name: IconId
+  - type: Client::UI::Agent::AgentContentsFinder*
+    name: AgentContentsFinder
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: Description
     offset: 16
-  - type: Client::System::String::Utf8String
-    name: TooltipString
-    offset: 24
-  - type: Client::System::String::Utf8String
-    name: UnkString
-    offset: 136
+  - type: Client::UI::Agent::AgentContentsFinderInterface::UnkItemsSub
+    name: UnkSub
+    offset: 120
+  - type: Common::Component::Excel::ExcelSheet*
+    name: InstanceContentSheet
+    offset: 1904
+  - type: Common::Component::Excel::ExcelSheet*
+    name: ContentFinderConditionTransientSheet
+    offset: 1912
+  - type: Common::Component::Excel::ExcelSheet*
+    name: InstanceContentRewardItemSheet
+    offset: 1920
+  - type: __int64
+    name: ExcelSheetWaiterInstanceContent
+    offset: 1928
+  - type: __int64
+    name: ExcelSheetWaiterContentFinderConditionTransient
+    offset: 1936
+  - type: __int64
+    name: ExcelSheetWaiterInstanceContentRewardItem
+    offset: 1944
+  - type: int
+    name: SelectedDutyId
+    offset: 1952
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::DeepDungeonStatusItem
@@ -47003,7 +46997,7 @@ structs:
     name: Progress
     offset: 952
   - type: byte
-    name: IsExpBonus
+    name: IsBonus
     offset: 964
   - type: unsigned __int16
     name: ObjectiveIcons
@@ -48168,6 +48162,48 @@ structs:
     name: MessagePreview
     offset: 95
     size: 64
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentContentsFinderReward::ItemWrap
+  name: ItemWrap
+  namespace: Client.UI.Agent
+  union: False
+  size: 192
+  fields:
+  - type: Client::Game::InventoryItem
+    name: Item
+    offset: 0
+  - type: unsigned int
+    name: IsValid
+    offset: 64
+  - type: unsigned int
+    name: ItemId
+    offset: 68
+  - type: int
+    name: Quantity
+    offset: 72
+  - type: unsigned int
+    name: IconId
+    offset: 76
+  - type: Client::System::String::Utf8String
+    name: String
+    offset: 80
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentContentsFinderReward::RewardWrap
+  name: RewardWrap
+  namespace: Client.UI.Agent
+  union: False
+  size: 488
+  fields:
+  - type: Client::Game::InventoryItem
+    name: Items
+    offset: 0
+    size: 7
+  - type: int
+    name: Rewards
+    offset: 448
+    size: 9
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Agent::AgentIKDResult::ResultData
@@ -62904,13 +62940,13 @@ structs:
     size: 8
   - type: unsigned int
     name: SelectedRadioButton
-    offset: 5816
+    offset: 6456
   - type: unsigned int
     name: SelectedRow
-    offset: 5828
+    offset: 6468
   - type: unsigned int
     name: NumEntries
-    offset: 5832
+    offset: 6472
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -67240,29 +67276,9 @@ structs:
     name: UnkResNode230
     offset: 560
   - type: Component::GUI::AtkComponentCheckBox*
-    name: GatheredItemComponentCheckBox1
+    name: GatheredItemComponentCheckbox
     offset: 568
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: GatheredItemComponentCheckBox2
-    offset: 576
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: GatheredItemComponentCheckBox3
-    offset: 584
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: GatheredItemComponentCheckBox4
-    offset: 592
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: GatheredItemComponentCheckBox5
-    offset: 600
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: GatheredItemComponentCheckBox6
-    offset: 608
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: GatheredItemComponentCheckBox7
-    offset: 616
-  - type: Component::GUI::AtkComponentCheckBox*
-    name: GatheredItemComponentCheckBox8
-    offset: 624
+    size: 8
   - type: Component::GUI::AtkComponentGaugeBar*
     name: IntegrityGaugeBar
     offset: 632
@@ -100033,18 +100049,24 @@ structs:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
     offset: 0
-  - type: Component::GUI::AtkComponentButton*
-    name: DesynthesizeButton
+  - type: Component::GUI::AtkComponentIcon*
+    name: ItemIconNode
     offset: 568
   - type: Component::GUI::AtkComponentCheckBox*
-    name: CheckBox
+    name: BulkDesynthCheckboxNode
     offset: 576
   - type: Component::GUI::AtkComponentCheckBox*
-    name: CheckBox2
-    offset: 592
+    name: UnkCheckboxNode
+    offset: 584
   - type: byte
     name: BulkDesynthEnabled
+    offset: 592
+  - type: Component::GUI::AtkComponentButton*
+    name: DesynthesizeButton
     offset: 600
+  - type: Component::GUI::AtkComponentButton*
+    name: CancelButtonNode
+    offset: 608
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -107752,156 +107774,49 @@ structs:
     - type: byte
       name: a2
   member_functions: []
-- type: Client::UI::Agent::AgentContentsFinder
-  name: AgentContentsFinder
+- type: Client::UI::Agent::AgentContentsFinderReward
+  name: AgentContentsFinderReward
   namespace: Client.UI.Agent
   union: False
-  size: 8744
+  size: 5232
   fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
+  - type: Client::UI::Agent::AgentContentsFinderReward::RewardWrap
+    name: NormalItems
     offset: 0
-  - type: Client::System::String::Utf8String
-    name: Description
-    offset: 56
-  - type: Client::UI::Agent::ItemReward
+  - type: Client::Game::InventoryItem
+    name: UnkItems
+    offset: 488
+    size: 5
+  - type: Client::UI::Agent::AgentContentsFinderReward::RewardWrap
+    name: BonusItems
+    offset: 808
+  - type: Client::UI::Agent::AgentContentsFinderReward::RewardWrap
+    name: UnkItemsWrap
+    offset: 1296
+  - type: Common::Component::Excel::ExcelSheet*
+    name: ItemSheet
+    offset: 1792
+  - type: Client::UI::Agent::AgentContentsFinderReward::ItemWrap
+    name: NormalRewards
+    offset: 1824
+    size: 7
+  - type: Client::UI::Agent::AgentContentsFinderReward::ItemWrap
+    name: UnkRewards
+    offset: 3168
+    size: 5
+  - type: Client::UI::Agent::AgentContentsFinderReward::ItemWrap
+    name: BonusRewards
+    offset: 4128
+    size: 5
+  - type: Client::Game::InventoryItem*
     name: ItemRewards
-    offset: 2288
-    size: 15
-  - type: int
-    name: SelectedDutyId
-    offset: 7020
-  - type: byte
-    name: NumCollectedRewards
-    offset: 7032
-  - type: Client::System::String::Utf8String
-    name: Strings
-    offset: 7112
-    size: 10
-  - type: Client::UI::Agent::ContentsRouletteRole
-    name: ContentRouletteRoleBonuses
-    offset: 8199
-    size: 11
+    offset: 5088
+    size: 16
   - type: unsigned int
-    name: DutyPenaltyMinutes
-    offset: 8244
-  - type: unsigned int
-    name: UnkPenaltyMinutes
-    offset: 8248
-  - type: int
-    name: CurrentTimestamp
-    offset: 8300
-  - type: byte
-    name: SelectedTab
-    offset: 8312
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8
-    return_type: void
-    name: OpenRegularDuty
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: unsigned int
-      name: contentsFinderCondition
-    - type: byte
-      name: hideIfShown
-  - signature: E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20
-    return_type: void
-    name: OpenRouletteDuty
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: roulette
-    - type: byte
-      name: hideIfShown
+    name: ItemRewardCount
+    offset: 5224
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Agent::AgentContentsTimer
   name: AgentContentsTimer
   namespace: Client.UI.Agent
@@ -120135,6 +120050,161 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentContentsFinder
+  name: AgentContentsFinder
+  namespace: Client.UI.Agent
+  union: False
+  size: 8744
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: Client::UI::Agent::AgentContentsFinderInterface
+    name: InterfaceSub
+    offset: 40
+  - type: Client::UI::Agent::AgentContentsFinderReward
+    name: RewardSub
+    offset: 2008
+  - type: int
+    name: SelectedDutyId
+    offset: 7332
+  - type: byte
+    name: NumCollectedRewards
+    offset: 7344
+  - type: byte
+    name: HasRouletteSelected
+    offset: 7345
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 7408
+  - type: Client::System::String::Utf8String
+    name: Strings
+    offset: 7424
+    size: 10
+  - type: Client::UI::Agent::ContentsRouletteRole
+    name: ContentRouletteRoleBonuses
+    offset: 8553
+    size: 11
+  - type: unsigned int
+    name: DutyPenaltyMinutes
+    offset: 8564
+  - type: unsigned int
+    name: UnkPenaltyMinutes
+    offset: 8568
+  - type: int
+    name: CurrentTimestamp
+    offset: 8620
+  - type: byte
+    name: SelectedTab
+    offset: 8632
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8
+    return_type: void
+    name: OpenRegularDuty
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: unsigned int
+      name: contentsFinderCondition
+    - type: byte
+      name: hideIfShown
+  - signature: E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20
+    return_type: void
+    name: OpenRouletteDuty
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: roulette
+    - type: byte
+      name: hideIfShown
 - type: Client::UI::Agent::AgentGearSet
   name: AgentGearSet
   namespace: Client.UI.Agent
