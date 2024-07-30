@@ -13813,10 +13813,10 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonWeeklyPuzzle:
     vtbls:
-      - ea: 0x141F9D4C0
+      - ea: 0x141FD30C0
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1410C4120: ctor
+      0x1412B7750: ctor
 #      0x1412EB610: Finalize2 # inlined in dtor
   Client::UI::AddonMYCItemBox:
     vtbls:
