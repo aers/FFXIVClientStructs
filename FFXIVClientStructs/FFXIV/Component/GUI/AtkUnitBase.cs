@@ -192,7 +192,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
     /// <param name="arrayIndex">The index in AtkArrayDataHolder</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 45 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 06 41 B9")]
     public partial void SubscribeAtkArrayData(byte arrayType, byte arrayIndex);
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
