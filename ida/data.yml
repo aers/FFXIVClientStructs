@@ -15495,8 +15495,9 @@ classes:
         base: Client::Game::Character::Character
       - ea: 0x141F10578
         base: Client::Game::Character::CharacterData
-      #funcs:
-        # 0x141333190: ctor # inlined @ 1408a74e5
+    funcs:
+      0x1415FA500: PlaceCompanion
+      # 0x141333190: ctor # inlined @ 1408a74e5
   Client::Game::Character::Ornament:
     vtbls:
       - ea: 0x141F0FFC0
