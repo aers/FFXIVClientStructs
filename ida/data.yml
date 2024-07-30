@@ -1799,9 +1799,10 @@ classes:
       0x140AD90E0: IsSecretRecipeBookUnlocked # DoH unlockable books
       0x140AD9250: SetSightseeingLogUnlockState
       0x140AD92A0: SetSightseeingLogUnlockStateEx
-      0x140AD92F0: SetAdventureExPhaseComplete
-      0x140AD9340: IsAdventureExPhaseComplete
-      0x140AD9570: IsAdventureComplete
+      0x140AD92F0: SetAdventureComplete
+      0x140AD9340: IsAdventureComplete
+      0x140AD9520: SetAdventureUnlocked # maybe?
+      0x140AD9570: IsAdventureUnlocked # maybe?
       0x140AD9ED0: IsFolkloreBookUnlocked     # DoL unlockable books
       0x140ADBB90: IsMcGuffinUnlocked
       0x140ADC000: IsFramersKitUnlocked

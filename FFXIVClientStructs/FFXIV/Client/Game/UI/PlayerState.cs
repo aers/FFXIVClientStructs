@@ -107,15 +107,10 @@ public unsafe partial struct PlayerState {
 
     [FieldOffset(0x522)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
     [FieldOffset(0x523)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
-    // Ref: PlayerState.IsAdventureExPhaseComplete
-    // Size: (AdventureExPhaseSheet.RowCount + 7) / 8
-    /// <remarks> Use <see cref="IsAdventureExPhaseComplete"/> </remarks>
-    [FieldOffset(0x524), FixedSizeArray] internal FixedSizeArray1<byte> _unlockedAdventureExPhaseBitmask; // TODO: update size
-
+    [FieldOffset(0x524), FixedSizeArray] internal FixedSizeArray44<byte> _unlockedAdventureBitmask; // maybe?
     // Ref: PlayerState.IsAdventureComplete
-    // Size: (AdventureSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsAdventureComplete"/> </remarks>
-    [FieldOffset(0x550), FixedSizeArray] internal FixedSizeArray43<byte> _unlockedAdventureBitmask;
+    [FieldOffset(0x550), FixedSizeArray] internal FixedSizeArray44<byte> _completedAdventureBitmask;
 
     [FieldOffset(0x581), FixedSizeArray] internal FixedSizeArray56<byte> _unlockFlags;
 
@@ -329,15 +324,16 @@ public unsafe partial struct PlayerState {
     /// Check if all vistas of an expansion in the Sightseeing Log have been discovered.
     /// </summary>
     /// <param name="adventureExPhaseId">AdventureExPhase RowId</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 90")]
+    [Obsolete("The signature is wrong. There is currently no alternative to this function.")]
+    [MemberFunction("81 FA ?? ?? ?? ?? 73 1F 0F B6 C2")]
     public partial bool IsAdventureExPhaseComplete(uint adventureExPhaseId);
 
     /// <summary>
     /// Check if a Sightseeing Log vista has been discovered.
     /// </summary>
-    /// <param name="adventureId">Index of Row (= RowId - 2162688)</param>
-    [MemberFunction("81 FA ?? ?? ?? ?? 73 1F 0F B6 C2")]
-    public partial bool IsAdventureComplete(uint adventureId);
+    /// <param name="adventureIndex">Index of the Adventure Row</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 90")]
+    public partial bool IsAdventureComplete(uint adventureIndex);
 
     /// <summary>
     /// Check if a specific set of Glasses are unlocked. Internally, this will look up the associated GlassesStyle
