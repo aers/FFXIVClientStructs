@@ -6381,6 +6381,7 @@ classes:
   Client::LayoutEngine::LayoutWorld:
     instances:
       - ea: 0x142736CA8
+        pointer: true
     vtbls:
       - ea: 0x141EF9638
         base: Client::LayoutEngine::IManagerBase
@@ -6389,6 +6390,7 @@ classes:
       0x1406E18F0: CreateSingleton
       0x1406E2920: LoadPrefetchLayout
       0x1406E2CD0: UnloadManagerLayout
+      0x1406E66F0: ResolveRsvString
       0x14072C930: UnloadPrefetchLayout
   Client::LayoutEngine::LayoutManager:
     vtbls:
