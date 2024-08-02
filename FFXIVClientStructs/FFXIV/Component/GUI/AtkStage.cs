@@ -45,6 +45,9 @@ public unsafe partial struct AtkStage {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 85 C0 74 06")]
     public partial NumberArrayData** GetNumberArrayData();
 
+    public NumberArrayData* GetNumberArrayData(NumberArrayType type)
+        => GetNumberArrayData()[(int)type];
+
     // Top 5 Signatures out of 215 xrefs for 14062B5F0:
     // XREF Signature #1 @ 14122E36C: E8 ?? ?? ?? ?? 41 6B CE
     // XREF Signature #2 @ 1410EC295: E8 ?? ?? ?? ?? 42 8D 1C AD
@@ -54,6 +57,12 @@ public unsafe partial struct AtkStage {
     [MemberFunction("E8 ?? ?? ?? ?? 42 8D 1C AD")]
     public partial StringArrayData** GetStringArrayData();
 
+    public StringArrayData* GetStringArrayData(StringArrayType type)
+        => GetStringArrayData()[(int)type];
+
     [MemberFunction("48 8B 41 38 48 8B 40 48")]
     public partial ExtendArrayData** GetExtendArrayData();
+
+    public ExtendArrayData* GetExtendArrayData(ExtendArrayType type)
+        => GetExtendArrayData()[(int)type];
 }
