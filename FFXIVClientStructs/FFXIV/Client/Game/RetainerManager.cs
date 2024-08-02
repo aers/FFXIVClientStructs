@@ -33,6 +33,9 @@ public unsafe partial struct RetainerManager {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 DB 45 8D 73 01")]
     public partial Retainer* GetActiveRetainer();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 C6 47 34 01")]
+    public partial void RequestVenturesTimers(nint target = 0);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct Retainer {
