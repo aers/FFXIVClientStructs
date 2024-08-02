@@ -460,6 +460,7 @@ classes:
       0x140AC68A0: IsInPvPInstance
       0x140AC6950: IsInPvPArea
       0x1400B7880: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
+      0x1405E3DE0: GetEventGPoseController
   Client::Game::BGMSystem:
     instances:
       - ea: 0x14274A0E8
@@ -575,6 +576,7 @@ classes:
     funcs:
       0x140FC15E0: Initialize
       0x140FC1730: Update
+      0x140FC17C0: RequestVenturesTimers
       0x140FC1EA0: GetRetainerBySortedIndex
       0x140FC1ED0: GetRetainerByHiredIndex
       0x140FC1F30: GetActiveRetainer
@@ -1185,6 +1187,7 @@ classes:
       0x140880EA0: GetWolfMarks
       0x140880FA0: GetAlliedSeals
       0x1408810A0: GetGoldSaucerCoin
+      0x140885DE0: GetUIModule # don't ask
       0x140ACD8D0: GetSpecialItemId #static
       0x140880DE0: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::InventoryItem:
@@ -1752,7 +1755,10 @@ classes:
       0x140B42AC0: IsEmoteUnlocked
       0x140B42C30: IsItemActionUnlocked
       0x140B40A30: IsTripleTriadCardUnlocked
+      0x140B42160: RequestResetTimestamps # MapAllowance, ChallengeLogReset
+      0x140B421A0: HasNextMapAllowanceTimestamp
       0x140B421C0: GetNextMapAllowanceTimestamp
+      0x140B421D0: GetNextChallengeLogResetTimestamp
       0x1417F5BF0: IsInstanceContentUnlocked   # static
       0x1417F60B0: IsInstanceContentCompleted  # static
       0x141840210: IsPublicContentUnlocked   # static
@@ -7670,6 +7676,7 @@ classes:
     funcs:
       0x1408D8510: IsCasting
       0x1408D13F0: GetCompanionOwnerID
+      0x1408D1580: IsNotOnHomeWorld
       0x1408CDEB0: FreezeMotion
       0x1408CE1E0: ResumeMotion
       0x1408D1B40: SetTargetId
