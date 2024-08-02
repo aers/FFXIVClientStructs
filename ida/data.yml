@@ -1099,6 +1099,7 @@ classes:
       0x1408FAB00: GetSingleton
       0x1400BB060: IsQuestComplete # static (questId)
       0x1409BE610: IsQuestComplete1 # (this, questId)
+      0x1409BE6A0: IsDailyQuestComplete
       0x1409BE920: GetQuestSequence # static (questId)
       0x1409BE320: GetQuestIndex
       0x1409BEA20: GetQuestClassJob
