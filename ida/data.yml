@@ -1160,7 +1160,7 @@ classes:
       0x141792260: GetInstance
       0x141792270: ctor
       0x141792310: dtor
-      0x1405D4600: Request # (this, callbackInterface, commandId, arg1, arg2)
+      0x141792380: Request # (this, callbackInterface, commandId, arg1, arg2)
   Client::Game::InventoryManager:
     instances:
       - ea: 0x1427581F0
@@ -3543,6 +3543,7 @@ classes:
       0x1400C8490: OpenYesNo
       0x1400C8840: OpenSelectOk
       0x1400C86F0: OpenSelectOk2
+      0x1400CBED0: ShowScreenImage
       0x1400CEF90: ShowTextGimmickHint
       0x1400DD030: OnUpdate_Nameplates
       0x1400DE890: IncRefNumberArrayData
