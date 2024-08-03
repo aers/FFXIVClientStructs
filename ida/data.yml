@@ -7743,6 +7743,11 @@ classes:
       0x1405F4B80: Initialize
       0x1405F4B60: GetAvailablePoses
       0x1405F83A0: GetPoseKind
+  Client::Game::Control::EmoteController::FindChairInfo:
+    vtbls:
+      - ea: 0x141EF2CD8
+    vfuncs:
+      0: dtor
   Client::Game::Control::EmoteController::PlayEmoteOption:
     vtbls:
       - ea: 0x141EF2CE0
