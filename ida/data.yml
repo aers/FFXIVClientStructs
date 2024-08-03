@@ -1111,7 +1111,7 @@ classes:
   Client::Game::MirageManager:
     instances:
       - ea: 0x1427581D8
-        pointer: False
+        pointer: True
     funcs:
       0x140893620: Initialize # unused, inlined into ctor
       0x140891D80: ctor
@@ -15735,6 +15735,8 @@ classes:
     vtbls:
       - ea: 0x142122458
         base: Client::Game::Object::GameObject
+    funcs:
+      0x1417DA050: GetUsageType
   Client::Game::Object::HousingCombinedObject:
     vtbls:
       - ea: 0x14213B538
