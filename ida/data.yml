@@ -5657,7 +5657,7 @@ classes:
   Component::GUI::AtkUIColorHolder:
     funcs:
       # 0x1405286A0: ctor # INLINED IN 7.0
-      # 0x140528780: Update # inlined @ 0x14068A881
+      0x14068BFA0: Update
       0x14063C110: GetColor
   Component::GUI::AtkStage:
     instances:
