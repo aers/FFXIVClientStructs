@@ -5031,12 +5031,13 @@ classes:
     vtbls:
       - ea: 0x141EED858
         base: Client::Graphics::Scene::Object
+    vfuncs:
+      10: PrepareRenderCamera
     funcs:
       0x140579790: ctor
       0x14057A700: ViewportPointToRay
       0x14057A900: ScreenPointToRay
       0x14057AF60: CalculateViewMatrix
-      0x14057B820: PrepareRenderCamera
       0x140D63580: WorldToScreenPoint # static
   Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>:
     vtbls:

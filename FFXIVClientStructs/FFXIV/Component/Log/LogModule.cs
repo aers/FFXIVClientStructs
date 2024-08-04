@@ -1,4 +1,4 @@
-namespace FFXIVClientStructs.FFXIV.Common.Log;
+namespace FFXIVClientStructs.FFXIV.Component.Log;
 
 //Component::Log::LogModule
 //  Component::Log::LogModuleInterface
