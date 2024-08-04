@@ -460,6 +460,7 @@ classes:
       0x140AC68A0: IsInPvPInstance
       0x140AC6950: IsInPvPArea
       0x1400B7880: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
+      0x1405E3DE0: GetEventGPoseController
   Client::Game::BGMSystem:
     instances:
       - ea: 0x14274A0E8
@@ -575,6 +576,7 @@ classes:
     funcs:
       0x140FC15E0: Initialize
       0x140FC1730: Update
+      0x140FC17C0: RequestVenturesTimers
       0x140FC1EA0: GetRetainerBySortedIndex
       0x140FC1ED0: GetRetainerByHiredIndex
       0x140FC1F30: GetActiveRetainer
@@ -1097,6 +1099,7 @@ classes:
       0x1408FAB00: GetSingleton
       0x1400BB060: IsQuestComplete # static (questId)
       0x1409BE610: IsQuestComplete1 # (this, questId)
+      0x1409BE6A0: IsDailyQuestComplete
       0x1409BE920: GetQuestSequence # static (questId)
       0x1409BE320: GetQuestIndex
       0x1409BEA20: GetQuestClassJob
@@ -1108,7 +1111,7 @@ classes:
   Client::Game::MirageManager:
     instances:
       - ea: 0x1427581D8
-        pointer: False
+        pointer: True
     funcs:
       0x140893620: Initialize # unused, inlined into ctor
       0x140891D80: ctor
@@ -1157,7 +1160,7 @@ classes:
       0x141792260: GetInstance
       0x141792270: ctor
       0x141792310: dtor
-      0x1405D4600: Request # (this, callbackInterface, commandId, arg1, arg2)
+      0x141792380: Request # (this, callbackInterface, commandId, arg1, arg2)
   Client::Game::InventoryManager:
     instances:
       - ea: 0x1427581F0
@@ -1185,6 +1188,7 @@ classes:
       0x140880EA0: GetWolfMarks
       0x140880FA0: GetAlliedSeals
       0x1408810A0: GetGoldSaucerCoin
+      0x140885DE0: GetUIModule # don't ask
       0x140ACD8D0: GetSpecialItemId #static
       0x140880DE0: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::InventoryItem:
@@ -1752,7 +1756,10 @@ classes:
       0x140B42AC0: IsEmoteUnlocked
       0x140B42C30: IsItemActionUnlocked
       0x140B40A30: IsTripleTriadCardUnlocked
+      0x140B42160: RequestResetTimestamps # MapAllowance, ChallengeLogReset
+      0x140B421A0: HasNextMapAllowanceTimestamp
       0x140B421C0: GetNextMapAllowanceTimestamp
+      0x140B421D0: GetNextChallengeLogResetTimestamp
       0x1417F5BF0: IsInstanceContentUnlocked   # static
       0x1417F60B0: IsInstanceContentCompleted  # static
       0x141840210: IsPublicContentUnlocked   # static
@@ -3536,6 +3543,7 @@ classes:
       0x1400C8490: OpenYesNo
       0x1400C8840: OpenSelectOk
       0x1400C86F0: OpenSelectOk2
+      0x1400CBED0: ShowScreenImage
       0x1400CEF90: ShowTextGimmickHint
       0x1400DD030: OnUpdate_Nameplates
       0x1400DE890: IncRefNumberArrayData
@@ -5650,7 +5658,7 @@ classes:
   Component::GUI::AtkUIColorHolder:
     funcs:
       # 0x1405286A0: ctor # INLINED IN 7.0
-      # 0x140528780: Update # inlined @ 0x14068A881
+      0x14068BFA0: Update
       0x14063C110: GetColor
   Component::GUI::AtkStage:
     instances:
@@ -7671,6 +7679,7 @@ classes:
     funcs:
       0x1408D8510: IsCasting
       0x1408D13F0: GetCompanionOwnerID
+      0x1408D1580: IsNotOnHomeWorld
       0x1408CDEB0: FreezeMotion
       0x1408CE1E0: ResumeMotion
       0x1408D1B40: SetTargetId
@@ -7735,6 +7744,11 @@ classes:
       0x1405F4B80: Initialize
       0x1405F4B60: GetAvailablePoses
       0x1405F83A0: GetPoseKind
+  Client::Game::Control::EmoteController::FindChairInfo:
+    vtbls:
+      - ea: 0x141EF2CD8
+    vfuncs:
+      0: dtor
   Client::Game::Control::EmoteController::PlayEmoteOption:
     vtbls:
       - ea: 0x141EF2CE0
@@ -15722,6 +15736,8 @@ classes:
     vtbls:
       - ea: 0x142122458
         base: Client::Game::Object::GameObject
+    funcs:
+      0x1417DA050: GetUsageType
   Client::Game::Object::HousingCombinedObject:
     vtbls:
       - ea: 0x14213B538
