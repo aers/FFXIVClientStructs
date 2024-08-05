@@ -1762,6 +1762,13 @@ enums:
     "IsTargetable": 2
     "Unk1": 4
     "ReadyToDraw": 64
+- type: Client::Game::Object::HousingObjectType
+  name: HousingObjectType
+  underlying: unsigned __int16
+  namespace: Client.Game.Object
+  values:
+    "YardObject": 2
+    "Furniture": 3
 - type: Client::Game::MJI::FarmSlotFlags
   name: FarmSlotFlags
   underlying: byte
@@ -14679,6 +14686,20 @@ structs:
     offset: 4
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Object::HousingObjectId
+  name: HousingObjectId
+  namespace: Client.Game.Object
+  union: False
+  size: 4
+  fields:
+  - type: unsigned __int16
+    name: EntryId
+    offset: 0
+  - type: Client::Game::Object::HousingObjectType
+    name: Type
+    offset: 2
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::MJI::MJIWorkshops
   name: MJIWorkshops
   namespace: Client.Game.MJI
@@ -17480,6 +17501,26 @@ structs:
     offset: 24
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonAreaMap::AddonAreaMapNumberArray
+  name: AddonAreaMapNumberArray
+  namespace: Client.UI
+  union: False
+  size: 24
+  fields:
+  - type: int
+    name: X
+    offset: 0
+  - type: int
+    name: Y
+    offset: 4
+  - type: int
+    name: PlayerRotation
+    offset: 8
+  - type: int
+    name: ConeRotation
+    offset: 12
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::AddonCharacterClass::ClassEntry
   name: ClassEntry
   namespace: Client.UI
@@ -17927,7 +17968,7 @@ structs:
   name: ElementalGaugeSimple
   namespace: Client.UI
   union: False
-  size: 176
+  size: 184
   fields:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
@@ -17938,51 +17979,54 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: Container2
     offset: 24
-  - type: Component::GUI::AtkComponentTextNineGrid*
-    name: ElementalTimerDisplay
+  - type: Component::GUI::AtkResNode*
+    name: ElementTimerContainer
     offset: 32
+  - type: Component::GUI::AtkTextNode*
+    name: ElementTimerText
+    offset: 40
   - type: Component::GUI::AtkComponentBase*
     name: ElementStack
-    offset: 40
+    offset: 48
     size: 3
   - type: Component::GUI::AtkComponentBase*
     name: UmbralHearts
-    offset: 64
+    offset: 72
     size: 3
   - type: Component::GUI::AtkComponentBase*
     name: ElementalIcon
-    offset: 88
+    offset: 96
   - type: Component::GUI::AtkResNode*
     name: EnochianGauge
-    offset: 96
+    offset: 104
   - type: Component::GUI::AtkComponentGaugeBar*
     name: EnochianGaugeBar
-    offset: 104
+    offset: 112
   - type: Component::GUI::AtkComponentBase*
     name: PolyglotGems
-    offset: 112
+    offset: 120
     size: 3
   - type: Component::GUI::AtkComponentBase*
     name: ParadoxGem
-    offset: 136
-  - type: int
-    name: ElementStacks
     offset: 144
   - type: int
+    name: ElementStacks
+    offset: 152
+  - type: int
     name: ElementStackMax
-    offset: 148
+    offset: 156
   - type: int
     name: UmbralHeartCount
-    offset: 152
+    offset: 160
   - type: byte
     name: ParadoxReady
-    offset: 160
+    offset: 169
   - type: int
     name: PolyglotStacks
-    offset: 164
+    offset: 172
   - type: int
     name: TimelineFrameId
-    offset: 168
+    offset: 176
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM1::AstralGaugeData
@@ -25060,6 +25104,65 @@ structs:
     offset: 76
   virtual_functions: []
   member_functions: []
+- type: Client::UI::AddonNamePlate::AddonNamePlateNumberArray::NamePlateObjectIntArrayData
+  name: NamePlateObjectIntArrayData
+  namespace: Client.UI
+  union: False
+  size: 80
+  fields:
+  - type: Client::UI::UIObjectKind
+    name: NamePlateKind
+    offset: 0
+  - type: int
+    name: HPLabelState
+    offset: 4
+  - type: int
+    name: UpdateFlags
+    offset: 8
+  - type: int
+    name: X
+    offset: 12
+  - type: int
+    name: Y
+    offset: 16
+  - type: float
+    name: Depth
+    offset: 20
+  - type: int
+    name: Scale
+    offset: 24
+  - type: int
+    name: GaugeFillPercentage
+    offset: 28
+  - type: unsigned int
+    name: NameTextColor
+    offset: 32
+  - type: unsigned int
+    name: NameEdgeColor
+    offset: 36
+  - type: unsigned int
+    name: GaugeFillColor
+    offset: 40
+  - type: unsigned int
+    name: GaugeContainerColor
+    offset: 44
+  - type: int
+    name: MarkerIconId
+    offset: 48
+  - type: int
+    name: NameIconId
+    offset: 52
+  - type: int
+    name: NamePlateObjectIndex
+    offset: 60
+  - type: int
+    name: DrawFlags
+    offset: 68
+  - type: int
+    name: VisibilityFlags
+    offset: 76
+  virtual_functions: []
+  member_functions: []
 - type: Client::UI::Info::InfoProxyLetter::Letter::ItemAttachment
   name: ItemAttachment
   namespace: Client.UI.Info
@@ -26557,6 +26660,38 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
+- type: StdVector<int, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: int*
+    name: First
+    offset: 0
+  - type: int*
+    name: Last
+    offset: 8
+  - type: int*
+    name: End
+    offset: 16
+  virtual_functions: []
+  member_functions: []
+- type: StdVector<byte, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: byte*
+    name: First
+    offset: 0
+  - type: byte*
+    name: Last
+    offset: 8
+  - type: byte*
+    name: End
+    offset: 16
+  virtual_functions: []
+  member_functions: []
 - type: StdList<Component::GUI::AtkAddonControl::ChildAddonInfo*, Helper::IStaticMemorySpace::Default>
   name: StdList`2
   namespace: ''
@@ -26739,38 +26874,6 @@ structs:
     name: Last
     offset: 8
   - type: Component::GUI::AtkValue*
-    name: End
-    offset: 16
-  virtual_functions: []
-  member_functions: []
-- type: StdVector<int, Helper::IStaticMemorySpace::Default>
-  name: StdVector`2
-  namespace: ''
-  union: False
-  fields:
-  - type: int*
-    name: First
-    offset: 0
-  - type: int*
-    name: Last
-    offset: 8
-  - type: int*
-    name: End
-    offset: 16
-  virtual_functions: []
-  member_functions: []
-- type: StdVector<byte, Helper::IStaticMemorySpace::Default>
-  name: StdVector`2
-  namespace: ''
-  union: False
-  fields:
-  - type: byte*
-    name: First
-    offset: 0
-  - type: byte*
-    name: Last
-    offset: 8
-  - type: byte*
     name: End
     offset: 16
   virtual_functions: []
@@ -37279,7 +37382,7 @@ structs:
       name: contentId
     - type: unsigned __int16
       name: worldId
-  - signature: E8 ?? ?? ?? ?? EB 71 48 8B 83
+  - signature: 40 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 48 85 C0 74 ?? 80 3D
     return_type: byte
     name: InviteToPartyInInstance
     parameters:
@@ -45049,6 +45152,14 @@ structs:
     parameters:
     - type: Client::Game::RetainerManager*
       name: this
+  - signature: E8 ?? ?? ?? ?? 32 C0 C6 47 34 01
+    return_type: void
+    name: RequestVenturesTimers
+    parameters:
+    - type: Client::Game::RetainerManager*
+      name: this
+    - type: __int64
+      name: target
 - type: Client::Game::SavedAppearanceSlot
   name: SavedAppearanceSlot
   namespace: Client.Game
@@ -46035,6 +46146,9 @@ structs:
   - type: Client::Graphics::Scene::DrawObject*
     name: DrawObject
     offset: 256
+  - type: Client::LayoutEngine::ILayoutInstance*
+    name: LayoutInstance
+    offset: 264
   - type: unsigned int
     name: NamePlateIconId
     offset: 272
@@ -46317,6 +46431,12 @@ structs:
   - type: Client::Game::Object::GameObject
     name: GameObject
     offset: 0
+  - type: Client::Game::Object::HousingObjectId
+    name: HousingObjectId
+    offset: 424
+  - type: __int16
+    name: HousingFurnitureIndex
+    offset: 430
   virtual_functions:
   - name: GetGameObjectId
     offset: 8
@@ -47731,7 +47851,7 @@ structs:
   name: ElementalGauge
   namespace: Client.UI
   union: False
-  size: 384
+  size: 392
   fields:
   - type: Client::UI::AddonJobHud::AddonJobHudGauge
     name: AddonJobHudGauge
@@ -47755,77 +47875,80 @@ structs:
   - type: int
     name: TimelineStartFrameId
     offset: 72
-  - type: Component::GUI::AtkTextNode*
-    name: ElementTimerText
+  - type: Component::GUI::AtkResNode*
+    name: ElementTimerContainer
     offset: 80
+  - type: Component::GUI::AtkResNode*
+    name: ElementTimerText
+    offset: 88
   - type: Component::GUI::AtkComponentBase*
     name: ElementOrbContainer
-    offset: 88
-  - type: Component::GUI::AtkResNode*
-    name: FireOrb
     offset: 96
   - type: Component::GUI::AtkResNode*
-    name: IceOrb
+    name: FireOrb
     offset: 104
+  - type: Component::GUI::AtkResNode*
+    name: IceOrb
+    offset: 112
   - type: Client::UI::AddonJobHudBLM0::ElementalGauge::UmbralHeart
     name: UmbralHearts
-    offset: 112
+    offset: 120
     size: 3
   - type: Component::GUI::AtkResNode*
     name: UmbralHeartContainer
-    offset: 160
+    offset: 168
   - type: int
     name: UmbralHeartTimelineFrameId
-    offset: 168
+    offset: 176
   - type: Component::GUI::AtkResNode*
     name: EnochianBar
-    offset: 184
+    offset: 192
   - type: Component::GUI::AtkComponentBase*
     name: EnochianBarFill
-    offset: 192
+    offset: 200
   - type: Component::GUI::AtkResNode*
     name: EnochianDialContainer
-    offset: 200
+    offset: 208
   - type: Component::GUI::AtkComponentBase*
     name: EnochianDial
-    offset: 208
+    offset: 216
   - type: byte
     name: EnochianActive
-    offset: 216
+    offset: 224
   - type: int
     name: EnochianTimePassed
-    offset: 220
+    offset: 228
   - type: Component::GUI::AtkResNode*
     name: PolyglotContainer
-    offset: 232
+    offset: 240
   - type: Client::UI::AddonJobHudBLM0::ElementalGauge::PolyglotStack
     name: Polyglot
-    offset: 240
+    offset: 248
     size: 3
   - type: int
     name: PolyglotTimelineFrameId
-    offset: 312
+    offset: 320
   - type: int
     name: PolyglotStacks
-    offset: 316
+    offset: 324
   - type: int
     name: PolyglotMax
-    offset: 320
+    offset: 328
   - type: Component::GUI::AtkResNode*
     name: ParadoxContainer
-    offset: 328
+    offset: 336
   - type: Component::GUI::AtkImageNode*
     name: ParadoxNeedle
-    offset: 336
+    offset: 344
   - type: Component::GUI::AtkComponentBase*
     name: ParadoxGem
-    offset: 352
-  - type: Component::GUI::AtkResNode*
-    name: ParadoxGemGlow
     offset: 360
   - type: Component::GUI::AtkResNode*
-    name: ParadoxGemBase
+    name: ParadoxGemGlow
     offset: 368
+  - type: Component::GUI::AtkResNode*
+    name: ParadoxGemBase
+    offset: 376
   virtual_functions: []
   member_functions: []
 - type: Client::UI::AddonJobHudBLM1::AstralGauge
@@ -48033,6 +48156,33 @@ structs:
     name: DoFullUpdate
     offset: 16
   - type: Client::UI::AddonNamePlate::NamePlateIntArrayData::NamePlateObjectIntArrayData
+    name: ObjectData
+    offset: 24
+    size: 50
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::AddonNamePlate::AddonNamePlateNumberArray
+  name: AddonNamePlateNumberArray
+  namespace: Client.UI
+  union: False
+  size: 4024
+  fields:
+  - type: int
+    name: ActiveNamePlateCount
+    offset: 0
+  - type: byte
+    name: ForceNamePlateRebake
+    offset: 4
+  - type: int
+    name: NamePlateSize
+    offset: 8
+  - type: byte
+    name: DisableFixedFontResolution
+    offset: 12
+  - type: byte
+    name: DoFullUpdate
+    offset: 16
+  - type: Client::UI::AddonNamePlate::AddonNamePlateNumberArray::NamePlateObjectIntArrayData
     name: ObjectData
     offset: 24
     size: 50
@@ -49875,6 +50025,26 @@ structs:
     offset: 0
   virtual_functions: []
   member_functions: []
+- type: StdVector<int>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<int, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  virtual_functions: []
+  member_functions: []
+- type: StdVector<byte>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<byte, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  virtual_functions: []
+  member_functions: []
 - type: StdList<Component::GUI::AtkAddonControl::ChildAddonInfo*>
   name: StdList`1
   namespace: ''
@@ -49971,26 +50141,6 @@ structs:
   union: False
   fields:
   - type: StdVector<Component::GUI::AtkValue, Helper::IStaticMemorySpace::Default>
-    name: WithOps
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: StdVector<int>
-  name: StdVector`1
-  namespace: ''
-  union: False
-  fields:
-  - type: StdVector<int, Helper::IStaticMemorySpace::Default>
-    name: WithOps
-    offset: 0
-  virtual_functions: []
-  member_functions: []
-- type: StdVector<byte>
-  name: StdVector`1
-  namespace: ''
-  union: False
-  fields:
-  - type: StdVector<byte, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   virtual_functions: []
@@ -51766,6 +51916,26 @@ structs:
   - type: Client::System::String::Utf8String
     name: Unk90
     offset: 144
+  virtual_functions: []
+  member_functions: []
+- type: Component::Log::LogModule
+  name: LogModule
+  namespace: Component.Log
+  union: False
+  size: 128
+  fields:
+  - type: unsigned __int64
+    name: LocalPlayerContentId
+    offset: 8
+  - type: int
+    name: LogMessageCount
+    offset: 20
+  - type: StdVector<int>
+    name: LogMessageIndex
+    offset: 72
+  - type: StdVector<byte>
+    name: LogMessageData
+    offset: 96
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkAddonControl
@@ -54997,7 +55167,7 @@ structs:
       name: a3
     - type: unsigned int
       name: a4
-  - signature: E8 ?? ?? ?? ?? 41 8B 45 30
+  - signature: E8 ?? ?? ?? ?? 49 8B 06 41 B9
     return_type: void
     name: SubscribeAtkArrayData
     parameters:
@@ -55087,26 +55257,6 @@ structs:
       name: this
     - type: Component::GUI::AtkResNode*
       name: node
-- type: Common::Log::LogModule
-  name: LogModule
-  namespace: Common.Log
-  union: False
-  size: 128
-  fields:
-  - type: unsigned __int64
-    name: LocalPlayerContentId
-    offset: 8
-  - type: int
-    name: LogMessageCount
-    offset: 20
-  - type: StdVector<int>
-    name: LogMessageIndex
-    offset: 72
-  - type: StdVector<byte>
-    name: LogMessageData
-    offset: 96
-  virtual_functions: []
-  member_functions: []
 - type: Common::Component::BGCollision::ColliderMesh
   name: ColliderMesh
   namespace: Common.Component.BGCollision
@@ -59154,6 +59304,319 @@ structs:
       name: tab
     - type: byte
       name: a3
+- type: Client::UI::AddonAreaMap
+  name: AddonAreaMap
+  namespace: Client.UI
+  union: False
+  size: 2008
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
+  member_functions: []
 - type: Client::UI::AddonArmouryBoard
   name: AddonArmouryBoard
   namespace: Client.UI
@@ -60223,7 +60686,7 @@ structs:
     offset: 568
   - type: Component::GUI::AtkComponentRadioButton*
     name: RadioButtons
-    offset: 7144
+    offset: 7768
     size: 3
   virtual_functions:
   - name: Dtor
@@ -79939,7 +80402,7 @@ structs:
   name: AddonJobHudBLM0
   namespace: Client.UI
   union: False
-  size: 1296
+  size: 1312
   fields:
   - type: Client::UI::AddonJobHud
     name: AddonJobHud
@@ -79955,7 +80418,7 @@ structs:
     offset: 736
   - type: Client::UI::AddonJobHudBLM0::ElementalGaugeSimple
     name: GaugeSimple
-    offset: 1120
+    offset: 1128
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -105262,7 +105725,7 @@ structs:
   union: False
   size: 13448
   fields:
-  - type: Common::Log::LogModule
+  - type: Component::Log::LogModule
     name: LogModule
     offset: 0
   - type: Client::System::String::Utf8String
@@ -110605,7 +111068,7 @@ structs:
   - type: int
     name: NumItems
     offset: 120
-  - type: int
+  - type: __int16
     name: SelectedTab
     offset: 144
   virtual_functions:
@@ -116176,7 +116639,7 @@ structs:
     offset: 172
   virtual_functions: []
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 2D 80 78 1A 00
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 48 8D 4C 24 ?? 0F 95 C2
     return_type: Client::Game::Fate::FateContext*
     name: GetFateById
     parameters:
@@ -119882,7 +120345,7 @@ structs:
   name: InfoProxyBlacklist
   namespace: Client.UI.Info
   union: False
-  size: 5088
+  size: 5080
   fields:
   - type: Client::UI::Info::InfoProxyPageInterface
     name: InfoProxyPageInterface
@@ -119902,10 +120365,10 @@ structs:
     offset: 5040
   - type: StdMap<unsigned __int64, int>
     name: AccountIdMap
-    offset: 5056
+    offset: 5048
   - type: StdMap<unsigned __int64, int>
     name: ContentIdMap
-    offset: 5072
+    offset: 5064
   virtual_functions:
   - name: AddData
     offset: 8
@@ -121458,7 +121921,7 @@ structs:
   name: LayoutWorld
   namespace: Client.LayoutEngine
   union: False
-  size: 552
+  size: 560
   fields:
   - type: Client::LayoutEngine::IManagerBase
     name: IManagerBase
@@ -121487,7 +121950,7 @@ structs:
     size: 90
   - type: StdMap<Client::System::String::Utf8String, byte*>*
     name: RsvMap
-    offset: 536
+    offset: 544
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -121544,6 +122007,14 @@ structs:
       name: gameMain
     - type: unsigned int
       name: cfcId
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 83 B9 ?? ?? ?? ?? ?? 48 8B F1
+    return_type: byte*
+    name: ResolveRsvString
+    parameters:
+    - type: Client::LayoutEngine::LayoutWorld*
+      name: this
+    - type: byte*
+      name: rsvString
 - type: Client::LayoutEngine::Layer::LayerManager
   name: LayerManager
   namespace: Client.LayoutEngine.Layer
@@ -122344,13 +122815,13 @@ structs:
     name: SightseeingLogUnlockStateEx
     offset: 1315
   - type: byte
-    name: UnlockedAdventureExPhaseBitmask
-    offset: 1316
-    size: 1
-  - type: byte
     name: UnlockedAdventureBitmask
+    offset: 1316
+    size: 44
+  - type: byte
+    name: CompletedAdventureBitmask
     offset: 1360
-    size: 43
+    size: 44
   - type: byte
     name: UnlockFlags
     offset: 1409
@@ -122543,7 +123014,7 @@ structs:
       name: this
     - type: unsigned int
       name: territoryTypeColumn32
-  - signature: E8 ?? ?? ?? ?? 84 C0 75 90
+  - signature: 81 FA ?? ?? ?? ?? 73 1F 0F B6 C2
     return_type: byte
     name: IsAdventureExPhaseComplete
     parameters:
@@ -122551,14 +123022,14 @@ structs:
       name: this
     - type: unsigned int
       name: adventureExPhaseId
-  - signature: 81 FA ?? ?? ?? ?? 73 1F 0F B6 C2
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 90
     return_type: byte
     name: IsAdventureComplete
     parameters:
     - type: Client::Game::UI::PlayerState*
       name: this
     - type: unsigned int
-      name: adventureId
+      name: adventureIndex
   - signature: E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3
     return_type: byte
     name: IsGlassesUnlocked
@@ -122809,6 +123280,12 @@ structs:
   - type: Client::Game::UI::CharaCard
     name: CharaCard
     offset: 97000
+  - type: __int64
+    name: NextMapAllowanceTimestamp
+    offset: 97592
+  - type: __int64
+    name: NextChallengeLogResetTimestamp
+    offset: 97600
   - type: byte
     name: UnlockLinkBitmask
     offset: 97612
@@ -122894,9 +123371,21 @@ structs:
       name: this
     - type: unsigned int
       name: cutsceneId
+  - signature: 48 83 EC 38 48 C7 81
+    return_type: byte
+    name: RequestResetTimestamps
+    parameters:
+    - type: Client::Game::UI::UIState*
+      name: this
   - signature: E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 8D 48 05
     return_type: int
     name: GetNextMapAllowanceTimestamp
+    parameters:
+    - type: Client::Game::UI::UIState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B D8 E8 ?? ?? ?? ?? 44 8B C8
+    return_type: __int64
+    name: GetNextChallengeLogResetTimestamp
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
@@ -123410,6 +123899,9 @@ structs:
   - type: Client::Game::Character::Character
     name: Character
     offset: 0
+  - type: Client::Game::Character::BattleChara*
+    name: Owner
+    offset: 8928
   virtual_functions:
   - name: GetGameObjectId
     offset: 8
@@ -123527,7 +124019,13 @@ structs:
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
-  member_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 55 57 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B F9
+    return_type: void
+    name: PlaceCompanion
+    parameters:
+    - type: Client::Game::Character::Companion*
+      name: this
 - type: Client::Game::Character::MJILivelyActor
   name: MJILivelyActor
   namespace: Client.Game.Character
