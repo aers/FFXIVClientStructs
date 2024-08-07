@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3A8)]
 public unsafe partial struct AgentMiragePrismMiragePlate {
-    [FieldOffset(0x78)] public MiragePrismMiragePlateCharaView CharaView;
+    [FieldOffset(0x80)] public MiragePrismMiragePlateCharaView CharaView;
 
     /// <remarks>
     /// The game checks <see cref="GameMain.IsInSanctuary"/> before calling this, and if false, it prints LogMessage 4316: "Unable to apply glamour plates here.".

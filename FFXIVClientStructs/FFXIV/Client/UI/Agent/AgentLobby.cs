@@ -22,7 +22,11 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xA28)] public ExcelSheet* LobbySheet;
     [FieldOffset(0xA30)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0xA38)] public StdDeque<TextParameter> LobbyTextParameters;
-    [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray13<Utf8String> _tempUtf8Strings;
+    [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray4<Utf8String> _tempUtf8Strings;
+    [FieldOffset(0xC00)] public StdVector<Utf8String> VersionStrings;
+    [FieldOffset(0xC18)] public Utf8String DisplayedVersionString;
+
+    [FieldOffset(0xC98), FixedSizeArray] internal FixedSizeArray8<Utf8String> _tempUtf8Strings2;
 
     [FieldOffset(0x1110)] public sbyte ServiceAccountIndex;
 

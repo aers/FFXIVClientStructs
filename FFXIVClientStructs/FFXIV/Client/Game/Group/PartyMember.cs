@@ -40,6 +40,7 @@ public unsafe partial struct PartyMember {
 
     public bool IsValidAllianceMember => (Flags & 1) != 0;
 
+    // TODO: check if the same as PlayerState.ContentKeyValueData
     [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct ExtraProperty {
         [FieldOffset(0)] public byte Key; // 1 = ?, 2/3 = something eureka related, 5 = bozja rank
