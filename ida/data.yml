@@ -7184,7 +7184,7 @@ classes:
   Client::UI::Misc::RaptureMacroModule::Macro:
     funcs:
       0x1407A41C0: Clear
-      0x1407A4210: IsEmpty
+      0x1407A4210: IsNotEmpty
       0x1407A4250: SetIcon
       0x140ED6B90: Copy
   Client::UI::Misc::RaptureTextModule:
