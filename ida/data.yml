@@ -1798,8 +1798,8 @@ classes:
       0x140AD7390: SetCharacterName   # inlined
       0x140AD8190: GetGrandCompanyRank
       0x140AD8CD0: GetBeastTribeRank
-      0x140AD8D50: GetBeastTribeCurrentRep
-      0x140AD8D90: GetBeastTribeNeededRep
+      0x140AD8D50: GetBeastTribeCurrentReputation
+      0x140AD8D90: GetBeastTribeNeededReputation
       0x140AD8450: IsMountUnlocked
       0x140ADBD90: IsOrnamentUnlocked
       0x140AD9F90: IsOrchestrionRollUnlocked
