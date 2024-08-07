@@ -26,7 +26,7 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xC00)] public StdVector<Utf8String> VersionStrings;
     [FieldOffset(0xC18)] public Utf8String DisplayedVersionString;
 
-    [FieldOffset(0xC98), FixedSizeArray] internal FixedSizeArray8<Utf8String> _tempUtf8Strings2;
+    [FieldOffset(0xC98), FixedSizeArray] internal FixedSizeArray8<Utf8String> _unkUtf8Strings;
 
     [FieldOffset(0x1110)] public sbyte ServiceAccountIndex;
 

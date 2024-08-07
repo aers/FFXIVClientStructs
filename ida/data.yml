@@ -7679,6 +7679,7 @@ classes:
       85: GetForayInfo
       86: GetForayInfo_2
     funcs:
+      0x140895BD0: IsValidClientObject
       0x1408D8510: IsCasting
       0x1408D13F0: GetCompanionOwnerID
       0x1408D1580: IsNotOnHomeWorld
