@@ -1798,8 +1798,8 @@ classes:
       0x140AD7390: SetCharacterName   # inlined
       0x140AD8190: GetGrandCompanyRank
       0x140AD8CD0: GetBeastTribeRank
-      0x140AD8D50: GetBeastTribeCurrentRep
-      0x140AD8D90: GetBeastTribeNeededRep
+      0x140AD8D50: GetBeastTribeCurrentReputation
+      0x140AD8D90: GetBeastTribeNeededReputation
       0x140AD8450: IsMountUnlocked
       0x140ADBD90: IsOrnamentUnlocked
       0x140AD9F90: IsOrchestrionRollUnlocked
@@ -3658,6 +3658,7 @@ classes:
       0x1400BC380: ctor
       0x1400BDAE0: Finalize
       0x1400BDB90: GetInfoProxyById
+      0x1400BDBB0: GetInfoProxyById2
       0x1400BDBD0: GetLocalCharacterName
       0x1400BDC50: GetLocalContentId
       0x1400BDC90: GetOnlineStatusFlags
@@ -6772,6 +6773,7 @@ classes:
       31: GetItemContextCustomizeModule
       32: GetRecommendEquipModule
       33: GetPvpSetModule
+      34: GetInfoModule2 # new in 7.0
       35: GetInfoModule
       36: GetUIModuleHelpers
       37: GetAgentModule
@@ -7182,7 +7184,7 @@ classes:
   Client::UI::Misc::RaptureMacroModule::Macro:
     funcs:
       0x1407A41C0: Clear
-      0x1407A4210: IsEmpty
+      0x1407A4210: IsNotEmpty
       0x1407A4250: SetIcon
       0x140ED6B90: Copy
   Client::UI::Misc::RaptureTextModule:
@@ -7677,18 +7679,16 @@ classes:
       85: GetForayInfo
       86: GetForayInfo_2
     funcs:
+      0x140895BD0: IsValidClientObject
       0x1408D8510: IsCasting
       0x1408D13F0: GetCompanionOwnerID
       0x1408D1580: IsNotOnHomeWorld
-      0x1408CDEB0: FreezeMotion
-      0x1408CE1E0: ResumeMotion
       0x1408D1B40: SetTargetId
       0x1408D1BB0: GetTargetId
       0x1408D27F0: GetParentCharacter
       0x1408D1BF0: SetSoftTargetId
       0x1408D1C70: GetSoftTargetId
       0x1408D2170: CalculateHeight
-      0x1408CE7A0: SendTitleIdUpdate
       0x1408D2910: SetMode
       0x1408D4640: Finalize
       0x1408D8570: StartCast
@@ -7776,6 +7776,14 @@ classes:
       # 0x141313710: ctor # inlined at 0x1408CF5C4
       0x1408A6E70: GetCompanionDataID
       0x1408A6CB0: SetupCompanion
+  Client::Game::Character::BlacklistProxyContainer: # actually no clue
+    vtbls:
+      - ea: 0x141F103D0
+        base: Client::Game::Character::ContainerInterface
+    funcs:
+      0x1408CDEB0: FreezeMotion
+      0x1408CE1E0: ResumeMotion
+      0x1408CE7A0: SendTitleIdUpdate
   Client::Game::Character::ContainerInterface:
     vtbls:
       - ea: 0x141F10180

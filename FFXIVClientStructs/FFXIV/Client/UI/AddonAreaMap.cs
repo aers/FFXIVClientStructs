@@ -10,7 +10,7 @@ public unsafe partial struct AddonAreaMap {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
     public unsafe partial struct AddonAreaMapNumberArray {
-        public static AddonAreaMapNumberArray* Instance() => (AddonAreaMapNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.AreaMap);
+        public static AddonAreaMapNumberArray* Instance() => (AddonAreaMapNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.AreaMap)->IntArray;
 
         [FieldOffset(0x0)] public int X;
         [FieldOffset(0x4)] public int Y;

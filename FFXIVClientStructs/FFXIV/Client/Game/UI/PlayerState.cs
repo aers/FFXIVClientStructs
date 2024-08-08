@@ -212,8 +212,19 @@ public unsafe partial struct PlayerState {
     [MemberFunction("E8 ?? ?? ?? ?? 3A 43 01")]
     public partial byte GetGrandCompanyRank();
 
-    [MemberFunction("E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 84 C0 75 0C")]
-    public partial byte GetBeastTribeRank(byte beastTribeIndex);
+    #region Beast Tribes (Allied Societies)
+    // For allowance use QuestManager.GetBeastTribeAllowance
+
+    [MemberFunction("E8 ?? ?? ?? ?? 3A 43 29 72 08")]
+    public partial byte GetBeastTribeRank(byte beastTribeId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A DE")]
+    public partial ushort GetBeastTribeCurrentReputation(byte beastTribeId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 3B D8 8B CE")]
+    public partial ushort GetBeastTribeNeededReputation(byte beastTribeId);
+
+    #endregion
 
     /// <summary>
     /// Returns whether the player is possessing the maximum amount of specialized souls.
