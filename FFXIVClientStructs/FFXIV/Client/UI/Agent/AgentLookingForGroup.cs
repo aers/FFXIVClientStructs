@@ -85,7 +85,7 @@ public unsafe partial struct AgentLookingForGroup {
 
         [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray48<ulong> _memberContentIds;
         [FieldOffset(0x1B0), FixedSizeArray] internal FixedSizeArray48<ulong> _slotFlags;
-        [FieldOffset(0x330), FixedSizeArray(isString: true)] internal FixedSizeArray192<byte> __comment;
+        [FieldOffset(0x330), FixedSizeArray(isString: true)] internal FixedSizeArray192<byte> _comment;
     }
 
     [GenerateInterop]
