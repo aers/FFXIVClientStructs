@@ -129,8 +129,8 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray48<ulong> _slotFlags;
         [FieldOffset(0x360), FixedSizeArray] internal FixedSizeArray48<byte> _jobs;
 
-        [FieldOffset(0x390), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> __leader;
-        [FieldOffset(0x3B0), FixedSizeArray(isString: true)] internal FixedSizeArray192<byte> __comment;
+        [FieldOffset(0x390), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _leader;
+        [FieldOffset(0x3B0), FixedSizeArray(isString: true)] internal FixedSizeArray192<byte> _comment;
     }
 
     public enum Objective : byte {
