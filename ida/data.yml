@@ -5541,6 +5541,8 @@ classes:
     vtbls:
       - ea: 0x141EF4EB0
         base: Component::GUI::AtkArrayData
+    funcs:
+      0x140EC25F0: SetValue # (this, int index, Client::UI::Agent::MapMarkerBase *marker)
   Component::GUI::AtkServer:
     vtbls:
       - ea: 0x141EF4EC0
