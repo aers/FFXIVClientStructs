@@ -109,7 +109,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x08), CExporterUnion("Id", "Linked", true)] public ushort LinkedItemSlot;
     /// <remarks> Only used if <see cref="IsSymbolic"/> is <c>true</c>. </remarks>
     [FieldOffset(0x0A), CExporterUnion("Id", "Linked", true)] public ushort LinkedInventoryType;
-    [FieldOffset(0x0C)] public uint Quantity;
+    [FieldOffset(0x0C)] public int Quantity;
     [FieldOffset(0x10)] public ushort Spiritbond; // TODO: This field is also used for the collectability value. Not sure if it's the same data type. See also: GetSpiritbond()
     [FieldOffset(0x12)] public ushort Condition;
     [FieldOffset(0x14)] public ItemFlags Flags;
@@ -154,7 +154,7 @@ public unsafe partial struct InventoryItem : ICreatable {
 
     /// <summary>Gets the quantity from the original InventoryItem or itself if not symbolic.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 2B C6 89 43 0C")]
-    public partial uint GetQuantity();
+    public partial int GetQuantity();
 
     /// <summary>Gets the spiritbond value from the original InventoryItem or itself if not symbolic.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 66 89 47 0C")]
