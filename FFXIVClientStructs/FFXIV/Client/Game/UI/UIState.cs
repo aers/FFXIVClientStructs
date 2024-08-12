@@ -243,7 +243,7 @@ public unsafe partial struct UIState {
     public partial bool RequestResetTimestamps();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 8D 48 05")]
-    public partial int GetNextMapAllowanceTimestamp(); // TODO: returns long
+    public partial long GetNextMapAllowanceTimestamp();
 
     public DateTime GetNextMapAllowanceDateTime() {
         var timeStamp = GetNextMapAllowanceTimestamp();
