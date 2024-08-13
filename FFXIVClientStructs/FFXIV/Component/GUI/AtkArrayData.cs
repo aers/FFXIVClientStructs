@@ -136,7 +136,7 @@ public enum NumberArrayType {
     PvPFrontline = 119,
     LFGRecruiterNameSearch = 120,
     Snipe = 121,
-
+    // TreasureHunt = 122, // unsure
     PVPSimulationHeader = 123,
     PVPSimulationAlliance = 124,
     PVPSimulationHeader2 = 125,

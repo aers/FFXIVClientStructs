@@ -8993,8 +8993,8 @@ classes:
     vtbls:
       - ea: 0x141F6E9B0
         base: Client::UI::Agent::AgentPersonalRoomPortal
-#    funcs:
-#       0x140C72F70: ctor # inlined (I think)
+    funcs:
+      0x140E96270: ctor
   Client::UI::Agent::AgentSalvage:
     vtbls:
       - ea: 0x141F55B48
@@ -9452,7 +9452,7 @@ classes:
       - ea: 0x141F6F460
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140EAB670: ctor
+      0x140EB35A0: ctor
       0x140EAB830: Finalize
   Client::UI::Agent::AgentBeginnerChatList:
     vtbls:
@@ -9460,6 +9460,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140381D20: ctor
+  Client::UI::Agent::AgentBeginnerChatInvite:
+    vtbls:
+      - ea: 0x141ECAB68
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentReturnerDialog:
     vtbls:
       - ea: 0x141ECAD48
@@ -9616,7 +9620,7 @@ classes:
       - ea: 0x141F6D888
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140CEE360: ctor
+      0x140E3C170: ctor
       0x140E3C880: Finalize
   Client::UI::Agent::AgentPvPDuelRequest:
     vtbls:
@@ -9689,12 +9693,6 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EA9230: ctor
-  # Client::UI::Agent::AgentHarpoonTip:
-  #   vtbls:
-  #     - ea: 0x141F55978
-  #       base: Client::UI::Agent::AgentInterface
-  #   funcs:
-  #     0x140BC2A50: ctor
   Client::UI::Agent::AgentPvpScreenInformationHotBar:
     vtbls:
       - ea: 0x141F6FA30
@@ -9719,9 +9717,21 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C13A80: ctor
+  Client::UI::Agent::AgentPvpTeam:
+    vtbls:
+      - ea: 0x141ECAE40
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvpTeamInputString:
     vtbls:
       - ea: 0x141ECAEB8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPvpTeamMember:
+    vtbls:
+      - ea: 0x141ECAF30
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPvpTeamResult:
+    vtbls:
+      - ea: 0x141ECAFB0
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvpTeamCrestEditor:
     vtbls:
@@ -9729,7 +9739,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
 #    funcs:
 #       0x1402F21F0: ctor # inlined
-  Client::UI::Agent::AgentPvPTeam:
+  Client::UI::Agent::AgentPvPTeamOrganization:
     vtbls:
       - ea: 0x141ECB230
         base: Client::UI::Agent::AgentInterface
@@ -9751,6 +9761,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C5DF30: ctor
+  Client::UI::Agent::AgentEurekaMagiaActionNotebook: # unconfirmed
+    vtbls:
+      - ea: 0x141F58FF0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C5E180: ctor
+  Client::UI::Agent::AgentEurekaWeaponAdjust:
+    vtbls:
+      - ea: 0x141F59068
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C5EAD0: ctor
   Client::UI::Agent::AgentTeleportHousingFriend:
     vtbls:
       - ea: 0x141F571E8
@@ -9810,6 +9832,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C66630: ctor
+  Client::UI::Agent::AgentPerformanceModeSettings:
+    vtbls:
+      - ea: 0x141F59448
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C6C7D0: ctor
+  Client::UI::Agent::AgentRecordReadyCheck:
+    vtbls:
+      - ea: 0x141EC8E78
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x14036BD10: ctor
   Client::UI::Agent::AgentFashion:
     vtbls:
       - ea: 0x141F6AF10
@@ -9868,6 +9902,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F0EDF0: ctor
+  Client::UI::Agent::AgentMerchantSetting:
+    vtbls:
+      - ea: 0x141F6E630
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140E8C360: ctor
   Client::UI::Agent::AgentFreeShop:
     vtbls:
       - ea: 0x141F721D8
@@ -9930,6 +9970,12 @@ classes:
     funcs:
       0x140DCEBF0: ctor
       0x140DCECE0: Finalize
+  Client::UI::Agent::AgentRideShootingResult:
+    vtbls:
+      - ea: 0x141F6B420
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140DCF6B0: ctor
   Client::UI::Agent::AgentCredit:
     vtbls:
       - ea: 0x141EC7E80
@@ -9988,6 +10034,34 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140B9D3A0: ctor
+  Client::UI::Agent::AgentHugeCraftworksSupply:
+    vtbls:
+      - ea: 0x141F6E0E0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140E636F0: ctor
+  Client::UI::Agent::AgentHugeCraftworksSupplyResult:
+    vtbls:
+      - ea: 0x141F6E1B0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140E663B0: ctor
+  Client::UI::Agent::AgentSharlayanCraftworksSupply:
+    vtbls:
+      - ea: 0x141F56340
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BF0690: ctor
+  Client::UI::Agent::AgentBankaCraftworksSupply:
+    vtbls:
+      - ea: 0x141F70B38
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F3C8D0: ctor
+  Client::UI::Agent::AgentCircleInvite:
+    vtbls:
+      - ea: 0x141ECB4B0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCircleList:
     vtbls:
       - ea: 0x141ECB530
@@ -10000,6 +10074,22 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14039E290: ctor
+  Client::UI::Agent::AgentCircleBookSetting:
+    vtbls:
+      - ea: 0x141ECB6F0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentCircleBookBlackList:
+    vtbls:
+      - ea: 0x141ECB770
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentCircleBookQuestion:
+    vtbls:
+      - ea: 0x141ECB7F0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentCircleBookGroupSetting:
+    vtbls:
+      - ea: 0x141ECB870
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentCircleFinder:
     vtbls:
       - ea: 0x141ECB8F0
@@ -10007,6 +10097,10 @@ classes:
     funcs:
       0x1403A4F80: ctor
       0x1403A5100: Finalize
+  Client::UI::Agent::AgentCircleFinderSetting:
+    vtbls:
+      - ea: 0x141ECB968
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMentorCondition:
     vtbls:
       - ea: 0x141F6DE88
@@ -10025,12 +10119,36 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C72C30: ctor
+  Client::UI::Agent::AgentPerformancePlayGuide:
+    vtbls:
+      - ea: 0x141F595C0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C76A80: ctor
   Client::UI::Agent::AgentPerformanceReadyCheck:
     vtbls:
       - ea: 0x141F59638
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C77510: ctor
+  Client::UI::Agent::AgentHwdInfoBoard:
+    vtbls:
+      - ea: 0x141F5A320
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C9B340: ctor
+  Client::UI::Agent::AgentHwdLottery:
+    vtbls:
+      - ea: 0x141F5A420
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C9C5C0: ctor
+  Client::UI::Agent::AgentHwdSupply:
+    vtbls:
+      - ea: 0x141F5A4B8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C9DD10: ctor
   Client::UI::Agent::AgentHwdAetherGauge:
     vtbls:
       - ea: 0x141F5A540
@@ -10141,6 +10259,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CBB2F0: ctor
+  Client::UI::Agent::AgentResistanceWeaponAdjust:
+    vtbls:
+      - ea: 0x141F57080
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C00DA0: ctor
   Client::UI::Agent::AgentOrnamentNoteBook:
     vtbls:
       - ea: 0x141F6F690
@@ -10230,6 +10354,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C81060: ctor
+  Client::UI::Agent::AgentPvPMKSRankRating:
+    vtbls:
+      - ea: 0x141F586F8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140C37EF0: ctor
   Client::UI::Agent::AgentPvPMKSIntroduction:
     vtbls:
       - ea: 0x141F59D80
@@ -10796,7 +10926,7 @@ classes:
       - ea: 0x1420270A0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140FAF330: ctor
+      0x141598A50: ctor
       0x14159AE60: HandleCommand
       0x14159BD10: GetSelectedMinionId
   Client::UI::Agent::AgentMJISettings:
@@ -10819,6 +10949,12 @@ classes:
       0x140F2BE50: ctor
       0x140F2BE80: Finalize
       0x140F2BEE0: ViewArchiveItem
+  Client::UI::Agent::AgentClass2JobHotbar:
+    vtbls:
+      - ea: 0x1420267A0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1415609A0: ctor
   Client::UI::Agent::AgentVVDNotebook:
     vtbls:
       - ea: 0x142027398
@@ -10867,10 +11003,28 @@ classes:
     funcs:
       0x14155FEF0: ctor
       0x141560010: Finalize
+  Client::UI::Agent::AgentTofuPreview:
+    vtbls:
+      - ea: 0x1420272A8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1415AB190: ctor
+  Client::UI::Agent::AgentTofuPreset:
+    vtbls:
+      - ea: 0x1420271B8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1415A0580: ctor
   Client::UI::Agent::AgentTurnBreak:
     vtbls:
       - ea: 0x141ECBE68
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMandervilleWeapon:
+    vtbls:
+      - ea: 0x142027440
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1415B4500: ctor
   Client::UI::Agent::AgentSXTBattleLog:
     vtbls:
       - ea: 0x141F57008
@@ -10913,6 +11067,28 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140DD9570: ctor
+  Client::UI::Agent::AgentPointMenu:
+    vtbls:
+      - ea: 0x1420278C0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1415C3DB0: ctor
+  Client::UI::Agent::AgentTradeScreenImage:
+    vtbls:
+      - ea: 0x142027960
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1415C5640: ctor
+  Client::UI::Agent::AgentGlasses:
+    vtbls:
+      - ea: 0x1420279F0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1415C5F30: ctor
+  Client::UI::Agent::AgentTermFilter:
+    vtbls:
+      - ea: 0x141ECB428
+        base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x141F2AC18
@@ -14068,7 +14244,7 @@ classes:
       - ea: 0x141FD3A60
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1412C2440: ctor
+      0x140CA7180: ctor
   Client::UI::AddonTargetInfoBase:
     vtbls:
       - ea: 0x141FE5A98
