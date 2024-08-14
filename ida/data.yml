@@ -5775,22 +5775,30 @@ classes:
       2: UpdateAnimation
     funcs:
       0x14063E260: ctor
+      0x14063E320: Finalize
+      0x14063E370: Initialize
       0x14063E490: GetAsAtkImageNode
       0x14063E4B0: GetAsAtkTextNode
       0x14063E4D0: GetAsAtkNineGridNode
       0x14063E4F0: GetAsAtkCounterNode
       0x14063E510: GetAsAtkCollisionNode
+      0x14063E530: GetAsAtkClippingMaskNode
       0x14063E550: GetAsAtkComponentNode
       0x14063E570: GetComponent
       0x14063EA80: EnableTimeline
       0x14063EAA0: DisableTimeline
-      0x14063EB00: SetTimelineLabel2
-      0x14063EB80: SetTimelineLabel3
+      0x14063EB00: LoopTimeline
+      0x14063EB80: InitializeTimeline
+      0x14063EBC0: UpdateChildTimelines
       0x14063EC30: GetTimelineFrameIdx
+      0x14063EC60: GetTimelineLabelFrameIdxDuration
       0x14063EC80: GetTimelineLabel
+      0x14063ED60: GetTimelineActiveLabelId
       0x14063EF70: RegisterEvent
       0x14063EFB0: UnregisterEvent
       0x14063F100: DispatchEvent
+      0x14063F1E0: IsEventRegistered
+      0x14063F210: GetEventParam
       0x14063F240: GetBounds
       0x14063F470: GetPositionFloat
       0x14063F490: SetPositionFloat
@@ -5802,7 +5810,8 @@ classes:
       0x14063F5D0: SetScale
       0x14063F5E0: SetScaleX
       0x14063F650: SetScaleY
-      0x14063F6F0: SetSize0
+      0x14063F6C0: GetSize
+      0x14063F6F0: SetSize
       0x14063F710: GetXFloat
       0x14063F730: GetYFloat
       0x14063F750: GetXShort
@@ -5811,6 +5820,12 @@ classes:
       0x14063F7C0: SetYFloat
       0x14063F7F0: SetXShort
       0x14063F830: SetYShort
+      0x14063F870: GetScreenPos
+      0x14063F890: SetScreenPos
+      0x14063F8C0: GetScreenX
+      0x14063F8E0: GetScreenY
+      0x14063F900: GetScreenXInt
+      0x14063F920: GetScreenYInt
       0x14063F940: GetWidth
       0x14063F960: GetHeight
       0x14063FC20: SetWidth
@@ -5821,8 +5836,11 @@ classes:
       0x14063FD50: SetRotationDegrees
       0x14063FDD0: GetColor
       0x14063FDF0: SetColor
+      0x14063FE00: GetAddRGB
       0x14063FE30: SetAddRGB
+      0x14063FE50: GetMultiplyRGB
       0x14063FE80: SetMultiplyRGB
+      0x14063FEA0: GetAlpha
       0x14063FEC0: SetAlpha
       0x14063FED0: GetPriority
       0x14063FEF0: SetPriority
@@ -5830,9 +5848,27 @@ classes:
       0x14063FF40: ToggleVisibility
       0x140640360: GetIsUsingDepthBasedDrawPriority
       0x140640380: SetUseDepthBasedPriority
+      0x1406403B0: GetDepth
       0x1406403D0: SetDepth
-      0x140640A70: SetScale0  # SetScale jumps to this
-      0x14064C950: SetSize
+      0x1406403F0: GetOriginPos
+      0x140640410: GetOriginX
+      0x140640430: GetOriginY
+      0x140640450: SetOrigin
+      0x1406404C0: SetOriginX
+      0x140640510: SetOriginY
+      0x140640700: GetBaseNodeId
+      0x140640730: IsDuplicatedNode
+      0x140640960: SetPositionUnsafe
+      0x1406409A0: SetXFloatUnsafe
+      0x1406409D0: SetYFloatUnsafe
+      0x140640A00: SetRotationUnsafe
+      0x140640A70: SetScaleUnsafe
+      0x140640AF0: SetScaleXUnsafe
+      0x140640B60: SetScaleYUnsafe
+      0x140640C30: SetOriginUnsafe
+      0x140640CA0: SetOriginXUnsafe
+      0x140640CF0: SetOriginYUnsafe
+      0x14064C950: SetComponentSize
       0x14066C130: GetComponent_2
       0x14066F230: GetAsComponentButton
       0x140671010: GetAsComponentIcon
@@ -5862,12 +5898,12 @@ classes:
       0x1406C2690: GetAsComponentDragDrop2
       0x1406C2900: GetAsComponentIcon2
       0x1406C2CF0: GetAsComponentListItemRenderer2
-      0x141C3E620: Initialize
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x141EF5958
         base: Component::GUI::AtkResNode
     funcs:
+      0x140640E90: LoadTextureWithDefaultVersion # (this, texturePath)
       0x140640F00: LoadTexture # (this, texturePath, version)
       0x140641070: LoadIconTexture
       0x140641280: UnloadTexture
