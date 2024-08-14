@@ -5782,35 +5782,12 @@ classes:
       0x14063E510: GetAsAtkCollisionNode
       0x14063E550: GetAsAtkComponentNode
       0x14063E570: GetComponent
-      0x14066C130: GetComponent_2
-      0x14066F230: GetAsComponentButton
-      0x140671010: GetAsComponentIcon
-      0x140673570: GetAsComponentListItemRenderer
-      0x1406805F0: GetAsComponentList
-      0x140684E80: GetAsComponentTreeList
-      0x14068F270: GetAsComponentCheckBox
-      0x140690250: GetAsComponentGaugeBar
-      0x140692180: GetAsComponentSlider
-      0x140697630: GetAsComponentTextInput
-      0x14069BCB0: GetAsComponentNumericInput
-      0x1406A06B0: GetAsComponentDropDownList
-      0x1406A1240: GetAsComponentRadioButton
-      0x1406A1B20: GetAsComponentTab
-      0x1406A2150: GetAsComponentGuildLeveCard
-      0x1406A2660: GetAsComponentTextNineGrid
-      0x1406A9750: GetAsComponentMap
-      0x1406AAFB0: GetAsComponentPreview
-      0x1406AC550: GetAsComponentScrollBar
-      0x1406AE080: GetAsComponentIconText
-      0x1406B0370: GetAsComponentDragDrop
-      0x1406B18D0: GetAsComponentMultipurpose
-      0x1406B2920: GetAsComponentWindow
-      0x1406B9040: GetAsComponentJournalCanvas
-      0x1406BC1F0: GetAsComponentHoldButton
-      0x1406BC8F0: GetAsComponentPortrait
-      0x1406C2690: GetAsComponentDragDrop2
-      0x1406C2900: GetAsComponentIcon2
-      0x1406C2CF0: GetAsComponentListItemRenderer2
+      0x14063EA80: EnableTimeline
+      0x14063EAA0: DisableTimeline
+      0x14063EB00: SetTimelineLabel2
+      0x14063EB80: SetTimelineLabel3
+      0x14063EC30: GetTimelineFrameIdx
+      0x14063EC80: GetTimelineLabel
       0x14063EF70: RegisterEvent
       0x14063EFB0: UnregisterEvent
       0x14063F100: DispatchEvent
@@ -5854,15 +5831,38 @@ classes:
       0x140640360: GetIsUsingDepthBasedDrawPriority
       0x140640380: SetUseDepthBasedPriority
       0x1406403D0: SetDepth
-      0x141C3E620: Initialize
       0x140640A70: SetScale0  # SetScale jumps to this
       0x14064C950: SetSize
-      0x14063EC80: GetTimelineLabel
-      0x14063EB00: SetTimelineLabel2
-      0x14063EB80: SetTimelineLabel3
-      0x14063EC30: GetTimelineFrameIdx
-      0x14063EA80: EnableTimeline
-      0x14063EAA0: DisableTimeline
+      0x14066C130: GetComponent_2
+      0x14066F230: GetAsComponentButton
+      0x140671010: GetAsComponentIcon
+      0x140673570: GetAsComponentListItemRenderer
+      0x1406805F0: GetAsComponentList
+      0x140684E80: GetAsComponentTreeList
+      0x14068F270: GetAsComponentCheckBox
+      0x140690250: GetAsComponentGaugeBar
+      0x140692180: GetAsComponentSlider
+      0x140697630: GetAsComponentTextInput
+      0x14069BCB0: GetAsComponentNumericInput
+      0x1406A06B0: GetAsComponentDropDownList
+      0x1406A1240: GetAsComponentRadioButton
+      0x1406A1B20: GetAsComponentTab
+      0x1406A2150: GetAsComponentGuildLeveCard
+      0x1406A2660: GetAsComponentTextNineGrid
+      0x1406A9750: GetAsComponentMap
+      0x1406AAFB0: GetAsComponentPreview
+      0x1406AC550: GetAsComponentScrollBar
+      0x1406AE080: GetAsComponentIconText
+      0x1406B0370: GetAsComponentDragDrop
+      0x1406B18D0: GetAsComponentMultipurpose
+      0x1406B2920: GetAsComponentWindow
+      0x1406B9040: GetAsComponentJournalCanvas
+      0x1406BC1F0: GetAsComponentHoldButton
+      0x1406BC8F0: GetAsComponentPortrait
+      0x1406C2690: GetAsComponentDragDrop2
+      0x1406C2900: GetAsComponentIcon2
+      0x1406C2CF0: GetAsComponentListItemRenderer2
+      0x141C3E620: Initialize
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x141EF5958
