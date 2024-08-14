@@ -125,7 +125,7 @@ public unsafe partial struct AddonNamePlate {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
     public partial struct AddonNamePlateNumberArray {
-        public static AddonNamePlateNumberArray* Instance() => (AddonNamePlateNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.NamePlate);
+        public static AddonNamePlateNumberArray* Instance() => (AddonNamePlateNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.NamePlate)->IntArray;
 
         [FieldOffset(0x0)] public int ActiveNamePlateCount;
         [FieldOffset(0x4)] public bool ForceNamePlateRebake;

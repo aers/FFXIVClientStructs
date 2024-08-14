@@ -33,6 +33,13 @@ public unsafe partial struct RetainerManager {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 DB 45 8D 73 01")]
     public partial Retainer* GetActiveRetainer();
 
+    /// <param name="target">
+    /// The address where <c>ServerRequestCallbackManager</c> will write the response data to.<br/>
+    /// <see cref="RetainerManager"/> will handle the packet if you leave it at 0.
+    /// </param>
+    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 C6 47 34 01")]
+    public partial void RequestVenturesTimers(nint target = 0);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public partial struct Retainer {
@@ -46,7 +53,7 @@ public unsafe partial struct RetainerManager {
         [FieldOffset(0x30)] public RetainerTown Town;
         [FieldOffset(0x31)] public byte MarketItemCount;
         [FieldOffset(0x34)] public uint MarketExpire; // 7 Days after last opened retainer
-        [FieldOffset(0x38)] public uint VentureId;
+        [FieldOffset(0x38)] public uint VentureId; // TODO: this is a ushort ("66 41 89 54 CB")
         [FieldOffset(0x3C)] public uint VentureComplete;
     }
 
