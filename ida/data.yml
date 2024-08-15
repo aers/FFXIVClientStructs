@@ -6400,6 +6400,8 @@ classes:
       0x1406E1C80: CreateSingleton
       0x1406E2CB0: LoadPrefetchLayout
       0x1406E3060: UnloadManagerLayout
+      0x1406E6690: AddRsvString
+      0x1406E6930: UnloadRsvMap
       0x1406E6A80: ResolveRsvString
       0x14072CCC0: UnloadPrefetchLayout
   Client::LayoutEngine::LayoutManager:
