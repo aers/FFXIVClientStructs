@@ -67,7 +67,7 @@ public unsafe partial struct RaptureLogModule {
     public partial bool GetLogMessage(int index, Utf8String* str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 51 44 0F B6 95")]
-    public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, int* timestamp);
+    public partial bool GetLogMessageDetail(int index, short* outLogInfo, Utf8String* outSender, Utf8String* outMessage, int* outTimestamp);
 
     [MemberFunction("4C 8B D9 48 8B 89")]
     public partial void AddMsgSourceEntry(ulong contentId, ulong accountId, int messageIndex, ushort worldId, ushort chatType);
@@ -79,6 +79,39 @@ public unsafe partial struct RaptureLogModule {
         return result;
     }
 
+    /// <remarks>
+    /// For <paramref name="casterKind"/> and <paramref name="targetKind"/> the values are:<br/>
+    /// 0 = You<br/>
+    /// 1 = Party Member<br/>
+    /// 2 = Alliance Member<br/>
+    /// 3 = Other PC<br/>
+    /// 4 = Engaged Enemy<br/>
+    /// 5 = Unengaged Enemy<br/>
+    /// 6 = Friendly NPCs<br/>
+    /// 7 = Pets/Companions<br/>
+    /// 8 = Pets/Companions (Party)<br/>
+    /// 9 = Pets/Companions (Alliance)<br/>
+    /// 10 = Pets/Companions (Other PC)
+    /// </remarks>
+    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out sbyte casterKind, out sbyte targetKind, out int timestamp) {
+        using var pSender = new Utf8String();
+        using var pMessage = new Utf8String();
+        short pLogInfo;
+        int pTimestamp;
+
+        var result = GetLogMessageDetail(index, &pLogInfo, &pSender, &pMessage, &pTimestamp);
+
+        logKind = (short)(pLogInfo & 0x7F);
+        casterKind = (sbyte)(((pLogInfo >> 11) & 0xF) - 1);
+        targetKind = (sbyte)(((pLogInfo >> 7) & 0xF) - 1);
+        timestamp = pTimestamp;
+        sender = pSender.AsSpan().ToArray();
+        message = pMessage.AsSpan().ToArray();
+
+        return result;
+    }
+
+    [Obsolete("The logKind parameter is incorrect. It contains the LogKind RowId in the first 7 bits, then 4 bits of casterKind and 4 bits of targetKind. Use the GetLogMessageDetail overload with casterKind and targetKind params instead.")]
     public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out int time) {
         using var pMessage = new Utf8String();
         using var pSender = new Utf8String();
