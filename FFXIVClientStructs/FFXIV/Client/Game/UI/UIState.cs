@@ -65,7 +65,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x16360)] public Emj Emj;
     [FieldOffset(0x16398)] public GoldSaucerYell GoldSaucerYell;
     [FieldOffset(0x17AE8)] public CharaCard CharaCard;
-    // 0x178C8: unknown struct, size 0x58
+    // 0x17CD0: ItemAction Unlocks
 
     [FieldOffset(0x17D38)] public long NextMapAllowanceTimestamp;
     [FieldOffset(0x17D40)] public long NextChallengeLogResetTimestamp;

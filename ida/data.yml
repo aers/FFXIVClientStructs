@@ -5541,6 +5541,8 @@ classes:
     vtbls:
       - ea: 0x141EF4EB0
         base: Component::GUI::AtkArrayData
+    funcs:
+      0x140EC25F0: SetValue # (this, int index, Client::UI::Agent::MapMarkerBase *marker)
   Component::GUI::AtkServer:
     vtbls:
       - ea: 0x141EF4EC0
@@ -7682,7 +7684,9 @@ classes:
       0x140896090: IsValidClientObject
       0x1408D89D0: IsCasting
       0x1408D18B0: GetCompanionOwnerID
-      0x1408D1A40: IsNotOnHomeWorld
+      0x1408D1A40: IsWanderer # World Visit
+      0x1408D1A90: IsTraveler # Data Center Travel
+      0x1408D1AE0: IsVoyager  # Cross-region Data Center Travel
       0x1408D2000: SetTargetId
       0x1408D2070: GetTargetId
       0x1408D2CB0: GetParentCharacter
@@ -7697,6 +7701,8 @@ classes:
       0x1408DA190: StartOmen
       0x1408DA530: StartOmenDirectional
       0x1408CF250: ctor
+      0x140896E20: GetScale
+      0x14089ACF0: GetFrameDeltaTime
   Client::Game::Character::Character::CastInfo:
     funcs:
       0x140B61900: Reset

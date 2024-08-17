@@ -76,6 +76,7 @@ public enum NameFormatterIdConverter : uint {
     None = 0,
 
     // ObjStr
+    // TODO: this is equivalent to ObjectKind, see Character.GetName()
     BNpcName = 2,
     ENpcResident = 3,
     Treasure = 4,

@@ -10,13 +10,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [Inherits<UserFileEvent>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 89 06", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x10F8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1190)]
 public unsafe partial struct AcquaintanceModule {
     public static AcquaintanceModule* Instance() => Framework.Instance()->GetUIModule()->GetAcquaintanceModule();
     [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray16<Acquaintance> _tellHistory;
-    [FieldOffset(0xE40)] public uint NumTellHistoryEntries;
+    [FieldOffset(0xEC0)] public uint NumTellHistoryEntries;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
     public struct Acquaintance {
         [FieldOffset(0x00)] public Utf8String Name;
         [FieldOffset(0x68)] public Utf8String WorldName;
@@ -24,6 +24,7 @@ public unsafe partial struct AcquaintanceModule {
         // [FieldOffset(0xD2)] public ushort Flags;
 
         [FieldOffset(0xD8)] public ulong ContentId;
+        [FieldOffset(0xE0)] public ulong AccountId;
     }
 
     [MemberFunction("4C 8B C1 8B 89 ?? ?? ?? ?? 85 C9")]
