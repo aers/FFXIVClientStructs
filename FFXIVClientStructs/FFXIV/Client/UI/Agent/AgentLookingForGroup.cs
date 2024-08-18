@@ -38,6 +38,7 @@ public unsafe partial struct AgentLookingForGroup {
 
     [FieldOffset(0x3101)] public byte SearchAreaTab; // 0 Data Center, 1 World, 2 Private
     [FieldOffset(0x3103)] public byte CategoryTab; // 0 All - 16 Other
+    [FieldOffset(0x3104)] public byte GroupTypeTab; // Normal, Alliance, Custom Match
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B FA 48 8B D9 E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9")]
     public partial bool OpenListing(ulong listingId);
