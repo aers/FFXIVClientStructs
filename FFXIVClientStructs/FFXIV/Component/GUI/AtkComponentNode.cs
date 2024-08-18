@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkComponentNode
@@ -10,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13", [1, 457])]
-public unsafe partial struct AtkComponentNode {
+public unsafe partial struct AtkComponentNode : ICreatable {
     [FieldOffset(0xB0)] public AtkComponentBase* Component;
 
     // 7.0 inlines this ctor
