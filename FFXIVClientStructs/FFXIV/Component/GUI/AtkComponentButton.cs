@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkComponentButton
@@ -8,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
-public unsafe partial struct AtkComponentButton {
+public unsafe partial struct AtkComponentButton : ICreatable {
     // based on the text size
     [FieldOffset(0xC0)] public short Left;
     [FieldOffset(0xC2)] public short Top;
@@ -25,6 +27,9 @@ public unsafe partial struct AtkComponentButton {
         get => (Flags & (1 << 18)) != 0;
         set => SetChecked(value);
     }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 88 9F ?? ?? ?? ??")]
+    public partial void Ctor();
 
     /// <remarks> Used by AtkComponentCheckBox and AtkComponentRadioButton. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 8D 46 12")]
