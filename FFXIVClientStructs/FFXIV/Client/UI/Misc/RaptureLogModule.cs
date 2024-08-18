@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "E8 ?? ?? ?? ?? 4C 8D A7 ?? ?? ?? ?? 49 8B CC E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??"
 [GenerateInterop]
 [Inherits<LogModule>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3488)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3710)]
 public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureLogModule();
 
