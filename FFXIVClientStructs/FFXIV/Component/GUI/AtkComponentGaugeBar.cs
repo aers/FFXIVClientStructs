@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkComponentGaugeBar
@@ -8,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
-public unsafe partial struct AtkComponentGaugeBar {
+public unsafe partial struct AtkComponentGaugeBar : ICreatable {
     /// <summary>
     /// Data describing a value transition. Informs the fields in <see cref="GaugeValue"/>. These fields aren't overwritten until the next transition of the same type occurs.
     /// </summary>

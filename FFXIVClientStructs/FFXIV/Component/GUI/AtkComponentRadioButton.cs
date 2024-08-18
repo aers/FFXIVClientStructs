@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkComponentRadioButton
@@ -9,9 +11,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentButton>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
-public partial struct AtkComponentRadioButton {
+public partial struct AtkComponentRadioButton : ICreatable {
     public bool IsSelected {
         get => AtkComponentButton.IsChecked;
         set => AtkComponentButton.IsChecked = value;
     }
+
+    [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 33 C0 89 83 ?? ?? ?? ?? 48 8B C3")]
+    public partial void Ctor();
 }

@@ -6043,6 +6043,7 @@ classes:
       - ea: 0x141EF5E18
         base: Component::GUI::AtkComponentBase
     funcs:
+      0x1406706D0: ctor
       #0x140554440: LoadIconById # doesn't exist anymore
       0x14066FBD0: LoadIcon
       0x1406AEB20: SetDisabledColor

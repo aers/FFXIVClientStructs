@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkComponentList
@@ -8,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A8)]
-public unsafe partial struct AtkComponentList {
+public unsafe partial struct AtkComponentList : ICreatable {
     [FieldOffset(0xC0)] public AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     [FieldOffset(0xC8)] public AtkComponentScrollBar* AtkComponentScrollBarC8;
     [FieldOffset(0xF0)] public ListItem* ItemRendererList;
@@ -24,6 +26,9 @@ public unsafe partial struct AtkComponentList {
     [FieldOffset(0x158)] public int HoveredItemIndex3; // Repeat?
     [FieldOffset(0x193)] public bool IsUpdatePending;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0")]
+    public partial void Ctor();
+    
     [VirtualFunction(25)]
     public partial AtkComponentListItemRenderer* GetItemRenderer(int index);
 
