@@ -24,10 +24,7 @@ public unsafe partial struct ScreenShot {
     [FieldOffset(0x48)] private void* CallbackFirstArg;
     [FieldOffset(0x50)] private nint EventHandle; // CreateEventA(0LL, 0, 0, 0LL)
     
-    /// <summary>
-    /// An int representing the result of the last screenshot. 0 is success, 1 is out of disk space, 2+ are error codes.
-    /// </summary>
-    [FieldOffset(0x5C)] public int ScreenshotResult;
+    [FieldOffset(0x5C)] public ScreenShotResult ScreenshotResult;
 
     /// <summary>
     /// The timestamp of the last screenshot.
@@ -41,6 +38,12 @@ public unsafe partial struct ScreenShot {
     [FieldOffset(0x68)] public delegate* unmanaged<void*, int, byte> ScreenshotCallbackFunc;
     
     /// <summary>
+    /// The file format that screenshots should be taken in.
+    /// Set by config key ScreenShotImageType on scheduling.
+    /// </summary>
+    [FieldOffset(0x70)] public ScreenShotFileFormat ScreenshotFileFormat;
+    
+    /// <summary>
     /// The location that the last screenshot was written to.
     /// </summary>
     [FieldOffset(0x78)] private FileAccessPath ScreenshotLocation;
@@ -49,4 +52,17 @@ public unsafe partial struct ScreenShot {
     public partial bool ScheduleScreenshot(delegate* unmanaged<void*, int, byte> callback, void* initialArg);
 
     public bool ScheduleScreenshot() => ScheduleScreenshot(null, null);
+
+    public enum ScreenShotFileFormat : int {
+        Bmp = 0,
+        Jpg = 1,
+        Png = 3,
+        Dds = 4
+    }
+
+    public enum ScreenShotResult : int {
+        Success = 0,
+        NoDiskSpace = 1,
+        // 2+ are errors
+    }
 }
