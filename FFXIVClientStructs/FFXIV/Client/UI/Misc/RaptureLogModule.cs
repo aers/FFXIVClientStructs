@@ -42,6 +42,16 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x3478)] public LogMessageSource* MsgSourceArray;
     [FieldOffset(0x3480)] public int MsgSourceArrayLength;
 
+    [FieldOffset(0x34E8)] public ulong AccountId;
+    [FieldOffset(0x34F0)] public ulong ContentId;
+    [FieldOffset(0x34F8)] public byte* Name;
+    [FieldOffset(0x3500)] public Utf8String* MessageText;
+    [FieldOffset(0x3508)] public uint EntityId;
+    [FieldOffset(0x350C)] public ushort ChatType;
+    [FieldOffset(0x350E)] public ushort WorldId;
+    [FieldOffset(0x3510)] public sbyte PartyOrAllianceMemberIdent;
+    [FieldOffset(0x3511)] public byte Flags;
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 48 8D 4D 00")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
