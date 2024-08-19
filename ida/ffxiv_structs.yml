@@ -1085,6 +1085,7 @@ enums:
     "WebGuidance": 222
     "Orchestrion": 223
     "BeginnerChatList": 224
+    "BeginnerChatInvite": 226
     "ReturnerDialog": 227
     "OrchestrionInn": 228
     "HousingEditContainer": 229
@@ -1129,12 +1130,17 @@ enums:
     "PvpWelcome": 275
     "JobHudNotice": 276
     "UserPolicyPerformance": 280
+    "PvpTeam": 281
     "PvpTeamInputString": 282
+    "PvpTeamMember": 283
+    "PvPTeamResult": 284
     "PvpTeamCrestEditor": 287
-    "PvpTeam": 288
+    "PvPTeamOrganization": 288
     "EurekaElementalHud": 290
     "EurekaElementalEdit": 291
     "EurekaChainInfo": 292
+    "EurekaMagiaActionNotebook": 294
+    "EurekaWeaponAdjust": 295
     "TeleportHousingFriend": 296
     "ContentMemberList": 297
     "InventoryBuddy": 298
@@ -1144,6 +1150,8 @@ enums:
     "MiragePrismPrismItemDetail": 302
     "MiragePrismMiragePlate": 303
     "PerformanceMode": 304
+    "PerformanceModeSettings": 305
+    "RecordReadyCheck": 306
     "Fashion": 307
     "SelectYesno": 309
     "HousingGuestBook": 310
@@ -1153,6 +1161,7 @@ enums:
     "MiragePrismENpcSatisfaction": 316
     "Description": 317
     "Alarm": 318
+    "MerchantSetting": 320
     "FreeShop": 321
     "AozNotebook": 322
     "RhythmAction": 323
@@ -1168,19 +1177,33 @@ enums:
     "EmjSetting": 335
     "RetainerList": 336
     "QIBCStatus": 337
+    "HugeCraftworksSupply": 338
+    "HugeCraftworksSupplyResult": 339
+    "SharlayanCraftworksSupply": 340
+    "BankaCraftworksSupply": 341
     "Dawn": 342
     "DawnStory": 343
     "HousingCatalogPreview": 344
     "SubmersibleExplorationMapSelect": 346
     "QuestRedo": 347
     "QuestRedoHud": 348
+    "CircleInvite": 349
     "CircleList": 350
     "CircleBook": 351
+    "CircleBookSetting": 352
+    "CircleBookBlackList": 353
+    "CircleBookQuestion": 354
+    "CircleBookGroupSetting": 355
     "CircleFinder": 356
+    "CircleFinderSetting": 357
     "MentorCondition": 358
     "PerformanceMetronome": 359
     "PerformanceGamepadGuide": 360
+    "PerformancePlayGuide": 361
     "PerformanceReadyCheck": 362
+    "HwdInfoBoard": 363
+    "HwdLottery": 364
+    "HwdSupply": 365
     "HwdAetherGauge": 366
     "HwdGathererInspection": 367
     "HwdScore": 368
@@ -1215,6 +1238,7 @@ enums:
     "CharaCard": 401
     "CharaCardDesignSetting": 402
     "CharaCardProfileSetting": 403
+    "PvPMKSRankRating": 404
     "PvPMKSIntroduction": 405
     "MJIHud": 406
     "MJIPouch": 407
@@ -1235,12 +1259,16 @@ enums:
     "MJIHousingMenu": 422
     "MJINekomimiRequest": 424
     "ArchiveItem": 425
+    "Class2JobHotbar": 426
     "VVDNotebook": 427
     "VVDFinder": 428
     "TofuList": 429
+    "TofuPreview": 430
+    "TofuPreset": 431
     "BannerParty": 432
     "BannerMIP": 433
     "TurnBreak": 434
+    "MandervilleWeapon": 435
     "SXTBattleLog": 436
     "MoogleCollection": 437
     "FGSEnterDialog": 438
@@ -1248,6 +1276,10 @@ enums:
     "FGSHud": 440
     "FGSWinner": 441
     "FGSResult": 442
+    "PointMenu": 443
+    "TradeScreenImage": 444
+    "Glasses": 445
+    "TermFilter": 446
 - type: Client::UI::Agent::ItemDetailKind
   name: ItemDetailKind
   underlying: byte
@@ -2175,6 +2207,7 @@ enums:
   values:
     "None": 0
     "Normal": 1
+    "Dead": 2
     "EmoteLoop": 3
     "Mounted": 4
     "Crafting": 5
@@ -10780,7 +10813,10 @@ structs:
   namespace: Client.System.Scheduler
   union: False
   size: 224
-  fields: []
+  fields:
+  - type: Client::System::Scheduler::Base::CutSceneController*
+    name: CutSceneController
+    offset: 56
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B D8 48 8B 03 48 8B CB
@@ -21309,7 +21345,7 @@ structs:
   name: Acquaintance
   namespace: Client.UI.Misc
   union: False
-  size: 224
+  size: 232
   fields:
   - type: Client::System::String::Utf8String
     name: Name
@@ -21323,6 +21359,9 @@ structs:
   - type: unsigned __int64
     name: ContentId
     offset: 216
+  - type: unsigned __int64
+    name: AccountId
+    offset: 224
   virtual_functions: []
   member_functions: []
 - type: Client::UI::Misc::AozNoteModule::AozHotBar
@@ -26009,6 +26048,19 @@ structs:
   - type: unsigned __int64
     name: MySize
     offset: 32
+  virtual_functions: []
+  member_functions: []
+- type: Client::System::Scheduler::Base::LinkedList<Client::System::Scheduler::Base::CutSceneController>
+  name: LinkedList`1
+  namespace: Client.System.Scheduler.Base
+  union: False
+  fields:
+  - type: Client::System::Scheduler::Base::CutSceneController*
+    name: First
+    offset: 0
+  - type: Client::System::Scheduler::Base::CutSceneController*
+    name: Last
+    offset: 8
   virtual_functions: []
   member_functions: []
 - type: StdString::Buffer
@@ -32660,7 +32712,7 @@ structs:
   name: AcquaintanceModule
   namespace: Client.UI.Misc
   union: False
-  size: 4344
+  size: 4496
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -32671,7 +32723,7 @@ structs:
     size: 16
   - type: unsigned int
     name: NumTellHistoryEntries
-    offset: 3648
+    offset: 3776
   virtual_functions:
   - name: ReadFile
     offset: 8
@@ -42313,6 +42365,9 @@ structs:
   - type: Client::System::Scheduler::Base::SchedulerState
     name: SchedulerState
     offset: 0
+  - type: Client::System::Scheduler::Base::LinkedList<Client::System::Scheduler::Base::CutSceneController>
+    name: LinkedList
+    offset: 24
   - type: Client::System::Scheduler::Resource::SchedulerResource*
     name: SchedulerResource
     offset: 48
@@ -105896,13 +105951,13 @@ structs:
     - type: int
       name: index
     - type: __int16*
-      name: logKind
+      name: outLogInfo
     - type: Client::System::String::Utf8String*
-      name: sender
+      name: outSender
     - type: Client::System::String::Utf8String*
-      name: message
+      name: outMessage
     - type: int*
-      name: timestamp
+      name: outTimestamp
   - signature: 4C 8B D9 48 8B 89
     return_type: void
     name: AddMsgSourceEntry
@@ -121451,7 +121506,7 @@ structs:
     offset: 60
   - type: Client::UI::Agent::AgentStatus::StatusCharaView
     name: CharaView
-    offset: 128
+    offset: 136
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -122035,6 +122090,18 @@ structs:
       name: this
     - type: byte*
       name: rsvString
+  - signature: 40 53 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4D 8B E8
+    return_type: byte
+    name: AddRsvString
+    parameters:
+    - type: Client::LayoutEngine::LayoutWorld*
+      name: this
+    - type: byte*
+      name: rsvString
+    - type: byte*
+      name: resolvedString
+    - type: unsigned __int64
+      name: resolvedStringSize
 - type: Client::LayoutEngine::Layer::LayerManager
   name: LayerManager
   namespace: Client.LayoutEngine.Layer
@@ -123926,6 +123993,24 @@ structs:
     parameters:
     - type: Client::Game::Character::Character*
       name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 8B CF
+    return_type: byte
+    name: IsWanderer
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 B1
+    return_type: byte
+    name: IsTraveler
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 3A 48 8B 4B 08
+    return_type: byte
+    name: IsVoyager
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
 - type: Client::Game::Character::Companion
   name: Companion
   namespace: Client.Game.Character
@@ -124322,7 +124407,7 @@ structs:
     - type: Client::Game::Character::Ornament*
       name: this
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8D 7B 24
+  - signature: E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24
     return_type: void
     name: SetupOrnament
     parameters:
