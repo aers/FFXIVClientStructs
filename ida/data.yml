@@ -3766,7 +3766,8 @@ classes:
       # 0x1401061D0: ctor # inlined @ 1400bc629
       0x140137E70: InviteToParty
       0x140138050: InviteToPartyContentId
-      0x140138110: InviteToPartyInInstance
+      0x140138070: InviteToPartyInInstanceByEntityId
+      0x140138110: InviteToPartyInInstanceByContentId
   Client::UI::Info::InfoProxyLinkshell:
     vtbls:
       - ea: 0x141EA7708
@@ -15273,7 +15274,7 @@ classes:
   Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaintStacksSimple:
     vtbls:
       - ea: 0x141FFF550
-  
+
 
   Client::UI::AddonJobHudRRP0:
     vtbls:
