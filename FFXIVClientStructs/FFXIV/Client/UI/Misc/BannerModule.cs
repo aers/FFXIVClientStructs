@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
-using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
 using FFXIVClientStructs.FFXIV.Common.Math;
+using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
