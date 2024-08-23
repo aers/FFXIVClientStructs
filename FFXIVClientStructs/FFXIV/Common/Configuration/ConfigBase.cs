@@ -75,14 +75,6 @@ public unsafe partial struct ConfigEntry {
     public bool SetValue(string value) => SetValueString(value);
 }
 
-// implemented by objects that want to listen for config changes - rapture atk module, etc
-[GenerateInterop(isInherited: true)]
-[StructLayout(LayoutKind.Explicit, Size = 0x18)]
-public unsafe partial struct ChangeEventInterface {
-    [FieldOffset(0x8)] public ChangeEventInterface* NextInterface;
-    [FieldOffset(0x10)] public ConfigBase* Owner;
-}
-
 // Common::Configuration::ConfigBase
 //  Client::System::Common::NonCopyable
 // ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 86 ?? ?? ?? ?? ?? 4C 8D B6"
@@ -96,4 +88,13 @@ public unsafe partial struct ConfigBase {
 
     [MemberFunction("E8 ?? ?? ?? ?? 39 58 20 0F 94 C0")]
     public partial ConfigEntry* GetConfigOption(uint index);
+
+    // Common::Configuration::ConfigBase::ChangeEventInterface
+    // implemented by objects that want to listen for config changes - rapture atk module, etc
+    [GenerateInterop(isInherited: true)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public unsafe partial struct ChangeEventInterface {
+        [FieldOffset(0x8)] public ChangeEventInterface* NextInterface;
+        [FieldOffset(0x10)] public ConfigBase* Owner;
+    }
 }
