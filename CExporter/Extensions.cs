@@ -167,7 +167,7 @@ public static class TypeExtensions {
         return name;
     }
 
-    public static StringBuilder FullSanitizeNameBuilder = new(500); // 500 is a random number that should be enough for most cases
+    public static readonly StringBuilder FullSanitizeNameBuilder = new(500); // 500 is a random number that should be enough for most cases
 
     public static string FullSanitizeName(this Type type) {
         FullSanitizeNameBuilder.Clear();
