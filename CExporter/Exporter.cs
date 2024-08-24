@@ -125,7 +125,7 @@ public class Exporter {
 
 ReExport:
         foreach (var @struct in _structs.Where(t => !structsOrdered.Contains(t))) {
-            var types = structsOrdered.Select(t => t.StructTypeOverride ?? t.StructType.FullSanitizeName()).ToArray();
+            var types = structsOrdered.Select(t => t.GetStructName()).ToArray();
             if (!@struct.DependencyNames.All(t => types.Contains(t))) continue;
             structsOrdered = [.. structsOrdered, @struct];
         }
@@ -250,7 +250,7 @@ ReExport:
                 }
             }
             if (!type.IsStruct() || type.IsEnum) return null;
-            if (_structs.Any(t => t.StructType.FullSanitizeName() == type.FullSanitizeName())) return null;
+            if (type.IsInStructList(_structs)) return null;
             var vtable = type.GetField("VirtualTable", ExporterStatics.BindingFlags)?.FieldType;
             ProcessedVirtualFunction[] virtualFunctions = [];
             if (vtable != null) {
@@ -432,6 +432,7 @@ public class ProcessedStruct {
     public string? StructTypeOverride;
     public bool IsUnion;
     public required Type StructType;
+    private string? _structTypeName;
     public required string StructName;
     public required string StructNamespace;
     public required int StructSize;
@@ -455,6 +456,7 @@ public class ProcessedStruct {
         Fields = [.. Fields.OrderBy(t => t.FieldOffset)];
         return this;
     }
+    public string GetStructName() => _structTypeName ??= StructTypeOverride ?? StructType.FullSanitizeName();
 }
 
 public class ProcessedEnum {
