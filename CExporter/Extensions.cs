@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using InteropGenerator.Runtime.Attributes;
 // ReSharper disable LoopCanBeConvertedToQuery
@@ -72,7 +71,7 @@ public static partial class TypeExtensions {
         return type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == name && f.FieldType == field.FieldType) || type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == field.Name && f.FieldType == field.FieldType);
     }
 
-    public static string FixTypeName(this Type type, Func<Type, string> unhandled, bool shouldLower = true) {
+    public static string FixTypeName(this Type type, bool shouldLower = true) {
         using var builderPooled = StringBuilderPool.Get(500);
         var builder = builderPooled.Builder;
         var name = type switch {
@@ -99,7 +98,7 @@ public static partial class TypeExtensions {
             _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
             _ when type == typeof(void*) => "__int64",
             _ when type == typeof(void**) => "__int64*",
-            _ => unhandled(type)
+            _ => type.SanitizeName()
         };
         return builder.Append(name).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).ToString();
     }
@@ -157,10 +156,8 @@ public static partial class TypeExtensions {
         return (type.Name == "Pointer`1" && type.Namespace ==ExporterStatics.InteropNamespacePrefix) || (type.Name == "hkRefPtr`1" && type.Namespace == ExporterStatics.HavokNamespacePrefix);
     }
 
-    private static readonly StringBuilder TypeNameBuilder = new(500); // 500 is a random number that should be enough for most cases
-
     public static string SanitizeName(this Type type) {
-        if (type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return type.GetElementType()!.FixTypeName(SanitizeName) + "*";
+        if (type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return type.GetElementType()!.FixTypeName() + "*";
         var name = (type.FullName ?? type.GetFullname()).AsSpan();
         if (type.IsHavokStdXivOrInterop()) {
             name = name[(name.IndexOf('.') + 1)..];
@@ -169,9 +166,9 @@ public static partial class TypeExtensions {
         if (!type.IsGenericType) return name.ToString();
         switch (type.Name) {
             case "Pointer`1" when type.Namespace == ExporterStatics.InteropNamespacePrefix:
-                return type.GenericTypeArguments[0].FixTypeName(SanitizeName) + "*";
+                return type.GenericTypeArguments[0].FixTypeName() + "*";
             case "hkRefPtr`1" when type.Namespace == ExporterStatics.HavokNamespacePrefix:
-                return type.GenericTypeArguments[0].FixTypeName(SanitizeName) + "*";
+                return type.GenericTypeArguments[0].FixTypeName() + "*";
         }
 
         var afterBacktick = name[name.IndexOf('`')..];
@@ -189,14 +186,14 @@ public static partial class TypeExtensions {
         for (var i = 0; i < gta.Length; i++) {
             if (i != 0)
                 builder.Append(", ");
-            builder.Append(gta[i].FixTypeName(SanitizeName));
+            builder.Append(gta[i].FixTypeName());
         }
 
         builder.Append('>');
         return builder.ToString();
     }
 
-    public static string FullSanitizeName(this Type type) => type.FixTypeName(SanitizeName);
+    public static string FullSanitizeName(this Type type) => type.FixTypeName();
 
     public static int PackSize(this Type type) {
         if (type.GetCustomAttribute<FixedSizeArrayAttribute>() != null) return 1; // FixedSizeArrayAttribute is always packed to 1 as the generated struct gets generated with Pack = 1
