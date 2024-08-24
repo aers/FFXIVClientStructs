@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -120,17 +121,34 @@ public class Exporter {
     }
 
     public static void Write(DirectoryInfo dir) {
-        var structsOrdered = Array.Empty<ProcessedStruct>();
-// make sure we have all the dependencies for each struct before we write them
+        // make sure we have all the dependencies for each struct before we write them
+        {
+            var structs = _structs.ToFrozenDictionary(x => x.StructTypeName, x => x);
+            var structToFullDeps = new Dictionary<string, HashSet<string>>();
+            _structs.Sort((a, b) => {
+                var cmp = ResolveFullDependencies(a).Count.CompareTo(ResolveFullDependencies(b).Count);
+                return cmp != 0 ? cmp : string.Compare(a.StructTypeName, b.StructTypeName, StringComparison.Ordinal);
+            });
 
-ReExport:
-        foreach (var @struct in _structs.Where(t => !structsOrdered.Contains(t))) {
-            var types = structsOrdered.Select(t => t.GetStructName()).ToArray();
-            if (!@struct.DependencyNames.All(t => types.Contains(t))) continue;
-            structsOrdered = [.. structsOrdered, @struct];
+#if DEBUG
+            for (var i = 0; i < _structs.Count; i++) {
+                foreach (var dep in _structs[i].DependencyNames) {
+                    if (_structs.FindIndex(0, i, x => x.StructTypeName == dep) == -1)
+                        throw new InvalidOperationException();
+                }
+            }
+#endif
+        
+            HashSet<string> ResolveFullDependencies(ProcessedStruct s) {
+                if (structToFullDeps.TryGetValue(s.StructTypeName, out var deps))
+                    return deps;
+
+                var fullDeps = s.DependencyNames.ToHashSet();
+                foreach (var dn in s.DependencyNames)
+                    fullDeps.UnionWith(ResolveFullDependencies(structs[dn]));
+                return structToFullDeps[s.StructTypeName] = fullDeps;
+            }
         }
-
-        if (structsOrdered.Length != _structs.Count) goto ReExport;
 
         var serializer = new SerializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)
@@ -142,7 +160,7 @@ ReExport:
             .Build();
         var yaml = serializer.Serialize(new YamlExport {
             Enums = [.. _enums],
-            Structs = structsOrdered.Select(t => t.FixOrder()).ToArray()
+            Structs = _structs.Select(t => t.FixOrder()).ToArray()
         });
 
         new FileInfo(Path.Join(dir.FullName, "ffxiv_structs.yml")).WriteFile(yaml);
@@ -334,6 +352,7 @@ ReExport:
                             IsUnion = !attr.IsStruct,
                             StructName = attr.IsStruct ? attr.Struct : attr.Union,
                             StructNamespace = type.FullSanitizeName() + (attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Union}" : ""),
+                            StructTypeName = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}",
                             StructSize = 0,
                             Fields = [
                                 ProcessField(unionField, unionStartField.GetFieldOffset())
@@ -377,6 +396,7 @@ ReExport:
                 IsUnion = type.GetCustomAttribute<CExporterStructUnionAttribute>() != null,
                 StructName = type.Name,
                 StructNamespace = type.GetNamespace(),
+                StructTypeName = type.FullSanitizeName(),
                 StructSize = type.SizeOf(),
                 Fields = fields.Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() == null)
                     .Select(f => ProcessField(f, 0)).ToArray(),
@@ -432,7 +452,6 @@ public class ProcessedStruct {
     public string? StructTypeOverride;
     public bool IsUnion;
     public required Type StructType;
-    private string? _structTypeName;
     public required string StructName;
     public required string StructNamespace;
     public required int StructSize;
@@ -440,7 +459,7 @@ public class ProcessedStruct {
     public required ProcessedVirtualFunction[] VirtualFunctions;
     public required ProcessedMemberFunction[] MemberFunctions;
     [YamlIgnore]
-    public Type[] Dependencies => Fields.Select(t => t.FieldType).Where(t => !(t.IsPointer() || t.IsPrimitive || t.IsFixedBuffer() || t.IsEnum || t.IsBaseType())).ToHashSet().ToArray();
+    public required string StructTypeName;
     [YamlIgnore]
     private string[] _dependencyNames = [];
     [YamlIgnore]
@@ -456,7 +475,6 @@ public class ProcessedStruct {
         Fields = [.. Fields.OrderBy(t => t.FieldOffset)];
         return this;
     }
-    public string GetStructName() => _structTypeName ??= StructTypeOverride ?? StructType.FullSanitizeName();
 }
 
 public class ProcessedEnum {

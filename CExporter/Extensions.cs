@@ -72,8 +72,10 @@ public static partial class TypeExtensions {
         return type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == name && f.FieldType == field.FieldType) || type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == field.Name && f.FieldType == field.FieldType);
     }
 
-    public static string FixTypeName(this Type type, Func<Type, string> unhandled, bool shouldLower = true) =>
-        type switch {
+    public static string FixTypeName(this Type type, Func<Type, string> unhandled, bool shouldLower = true) {
+        using var builderPooled = StringBuilderPool.Get(500);
+        var builder = builderPooled.Builder;
+        var name = type switch {
             _ when type == typeof(void) || type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
             _ when type == typeof(char) => "wchar_t",
             _ when type == typeof(bool) => "byte",
@@ -99,6 +101,8 @@ public static partial class TypeExtensions {
             _ when type == typeof(void**) => "__int64*",
             _ => unhandled(type)
         };
+        return builder.Append(name).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).ToString();
+    }
 
     public static int SizeOf(this Type type) {
         return type switch {
@@ -172,37 +176,27 @@ public static partial class TypeExtensions {
 
         var afterBacktick = name[name.IndexOf('`')..];
         name = name[..^afterBacktick.Length];
-        TypeNameBuilder.Clear().Append(name);
+        using var builderPooled = StringBuilderPool.Get(500);
+        var builder = builderPooled.Builder;
+        builder.Append(name);
 
         var me = StdNodeRegex().EnumerateMatches(afterBacktick);
         if (me.MoveNext())
-            TypeNameBuilder.Append('.').Append(afterBacktick.Slice(me.Current.Index + 3, me.Current.Length - 3));
+            builder.Append('.').Append(afterBacktick.Slice(me.Current.Index + 3, me.Current.Length - 3));
 
-        TypeNameBuilder.Append('<');
+        builder.Append('<');
         var gta = type.GenericTypeArguments;
         for (var i = 0; i < gta.Length; i++) {
             if (i != 0)
-                TypeNameBuilder.Append(", ");
-            TypeNameBuilder.Append(gta[i].FixTypeName(SanitizeName));
+                builder.Append(", ");
+            builder.Append(gta[i].FixTypeName(SanitizeName));
         }
 
-        TypeNameBuilder.Append('>');
-        return TypeNameBuilder.ToString();
+        builder.Append('>');
+        return builder.ToString();
     }
 
-    public static readonly StringBuilder FullSanitizeNameBuilder = new(500); // 500 is a random number that should be enough for most cases
-
-    public static string FullSanitizeName(this Type type) {
-        FullSanitizeNameBuilder.Clear();
-        var typeName = type.FixTypeName(SanitizeName);
-        foreach (var c in typeName) {
-            if (c is '+' or '.')
-                FullSanitizeNameBuilder.Append(ExporterStatics.Separator);
-            else
-                FullSanitizeNameBuilder.Append(c);
-        }
-        return FullSanitizeNameBuilder.ToString();
-    }
+    public static string FullSanitizeName(this Type type) => type.FixTypeName(SanitizeName);
 
     public static int PackSize(this Type type) {
         if (type.GetCustomAttribute<FixedSizeArrayAttribute>() != null) return 1; // FixedSizeArrayAttribute is always packed to 1 as the generated struct gets generated with Pack = 1
@@ -216,7 +210,7 @@ public static partial class TypeExtensions {
     public static bool IsInStructList(this Type type, List<ProcessedStruct> structs) {
         var name = type.FullSanitizeName();
         foreach (var str in structs) {
-            if (str.GetStructName() == name) return true;
+            if (str.StructTypeName == name) return true;
         }
         return false;
     }
