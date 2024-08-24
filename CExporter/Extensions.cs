@@ -172,23 +172,8 @@ public static class TypeExtensions {
 }
 
 public static class FieldInfoExtensions {
-    public static int GetFieldOffset(this FieldInfo info) {
-        var attrs = info.GetCustomAttributes(typeof(FieldOffsetAttribute), false);
-        return attrs.Length != 0 ? attrs.Cast<FieldOffsetAttribute>().Single().Value : GetFieldOffsetSequential(info);
-    }
-
-    public static int GetFieldOffsetSequential(this FieldInfo info) {
-        if (info.DeclaringType is null)
-            throw new Exception($"Unable to access declaring type of field {info.Name}");
-        var fields = info.DeclaringType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        var offset = 0;
-        foreach (var field in fields) {
-            if (field == info)
-                return offset;
-            offset += field.FieldType.SizeOf();
-        }
-        throw new Exception("Field not found");
-    }
+    // see https://stackoverflow.com/questions/30817924/obtain-non-explicit-field-offset for explanation
+    public static int GetFieldOffset(this FieldInfo info) => Marshal.ReadInt32(info.FieldHandle.Value + (4 + IntPtr.Size)) & 0xFFFFFF;
 }
 public static class Extensions {
     public static void WriteFile(this FileInfo file, string content) {
