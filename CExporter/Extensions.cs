@@ -8,7 +8,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using InteropGenerator.Runtime.Attributes;
-
+// ReSharper disable LoopCanBeConvertedToQuery
+// Linq can be a performance hit in most cases
 namespace CExporter;
 
 public static partial class TypeExtensions {
@@ -42,8 +43,19 @@ public static partial class TypeExtensions {
         }
     }
 
+    public static Type[] GetInheritsTypes(this Type type) {
+        const string inheritsAttribute = "InheritsAttribute`1";
+        Type[] inheritances = [];
+        foreach (var attr in type.GetCustomAttributes()) {
+            if (attr.GetType().Name.Contains(inheritsAttribute)) {
+                inheritances = [..inheritances,attr.GetType().GetGenericArguments()[0]];
+            }
+        }
+        return inheritances;
+    }
+
     public static bool IsInheritance(this Type type, FieldInfo field) {
-        var inheritances = type.GetCustomAttributes().Where(t => t.GetType().Name.Contains("InheritsAttribute`1")).Select(t => t.GetType().GetGenericArguments()[0]).ToArray();
+        var inheritances = type.GetInheritsTypes();
         if (inheritances.Length == 0) return false;
         foreach (var inheritance in inheritances) {
             if (inheritance.IsFieldInType(field)) return true;
@@ -138,7 +150,7 @@ public static partial class TypeExtensions {
     }
 
     public static bool IsGenericPointer(this Type type) {
-        return (type.Name == "Pointer`1" && type.Namespace.AsSpan().SequenceEqual(ExporterStatics.InteropNamespacePrefix)) || (type.Name == "hkRefPtr`1" && type.Namespace.AsSpan().SequenceEqual(ExporterStatics.HavokNamespacePrefix));
+        return (type.Name == "Pointer`1" && type.Namespace ==ExporterStatics.InteropNamespacePrefix) || (type.Name == "hkRefPtr`1" && type.Namespace == ExporterStatics.HavokNamespacePrefix);
     }
 
     private static readonly StringBuilder TypeNameBuilder = new(500); // 500 is a random number that should be enough for most cases

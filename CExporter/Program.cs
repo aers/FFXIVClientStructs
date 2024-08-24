@@ -8,6 +8,7 @@ namespace CExporter;
 
 public class Program {
     public static void Main(string[] _) {
+        var timeStart = DateTime.Now;
         var dir = new DirectoryInfo(Environment.CurrentDirectory);
         while (dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
             dir = dir.Parent!;
@@ -32,6 +33,9 @@ public class Program {
 
         Exporter.VerifyNoNameOverlap(dataCheck);
 
+        Console.WriteLine($"Processed all types in: {DateTime.Now - timeStart}");
+        timeStart = DateTime.Now;
+
         foreach (var warning in ExporterStatics.WarningList) {
             Console.WriteLine(warning);
         }
@@ -48,5 +52,6 @@ public class Program {
 #endif
 
         Exporter.Write(dir);
+        Console.WriteLine($"Files written in: {DateTime.Now - timeStart}");
     }
 }

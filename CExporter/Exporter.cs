@@ -231,7 +231,7 @@ ReExport:
         while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
 
         if (type.IsEnum) {
-            if (_enums.Any(t => t.EnumType.FullSanitizeName() == type.FullSanitizeName())) return null;
+            if (_enums.Any(t => t.EnumType == type)) return null;
             var processedEnum = new ProcessedEnum {
                 EnumType = type,
                 EnumName = type.Name,
