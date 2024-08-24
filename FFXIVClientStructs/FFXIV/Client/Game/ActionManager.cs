@@ -46,6 +46,14 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0xB8)] public bool AreaTargetingExecuteAtCursor; // if true, on the next update area-targeted action will be executed at cursor
     // 0xBC: uint related to area targeting, can be 0/1/2
 
+    // the fields below are related to 'ballista' mode (eg. cannons on second boss of Stone Vigil Hard)
+    [FieldOffset(0xE0)] public bool BallistaActive; // note that it is not cleared when exiting area-target mode until new area-targeting starts
+    [FieldOffset(0xE1)] public byte BallistaRowId; // row of Ballista sheet
+    [FieldOffset(0xF0)] public Vector3 BallistaOrigin; // position of the cannon that is being aimed
+    [FieldOffset(0x100)] public float BallistaRefAngle; // initial angle; Ballista.Angle is centered around this orientation
+    [FieldOffset(0x104)] public float BallistaRadius;
+    [FieldOffset(0x108)] public uint BallistaEntityId;
+
     [FieldOffset(0x110)] public ushort LastUsedActionSequence;
     [FieldOffset(0x112)] public ushort LastHandledActionSequence;
     [FieldOffset(0x114), FixedSizeArray] internal FixedSizeArray24<uint> _blueMageActions;
@@ -272,6 +280,12 @@ public unsafe partial struct ActionManager {
     /// </summary>
     [MemberFunction("40 53 48 83 EC 20 48 8B 01 48 8B D9 FF 50 08 8B 15")]
     public static partial TargetCategory ClassifyTarget(Character.Character* target);
+
+    /// <summary>
+    /// Determine the extraParam argument to be used for UseActionLocation for various summon actions (carbuncle, eos, etc.)
+    /// </summary>
+    [MemberFunction("48 83 EC 28 81 E9")]
+    public static partial byte GetExtraParamForSummonAction(uint actionId);
 
     public enum CastTimeProc : byte {
         None = 0,

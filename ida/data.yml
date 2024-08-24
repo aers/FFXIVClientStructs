@@ -2264,6 +2264,7 @@ classes:
     funcs:
       0x140049770: StaticInitializer
       0x1400BAD40: GetCurrentComboActionId
+      0x140AC73D0: GetExtraParamForSummonAction # this is probably a free function or a static member function of some unknown class, but it's used only by ActionManager
       0x140B5E5F0: ClassifyTarget # (Character*) -> uint enum
       0x140B5E710: AdjustRecastTimeByStatusesAndStats # (Exd::Sheets::Action*, int recastMs, int actionCategoryId) -> int ms
       0x140B5E950: GetFlankType # (vec3* pos, GameObject* obj) -> uint enum
@@ -2271,11 +2272,21 @@ classes:
       0x140B5EB80: CanUseActionOnTarget
       0x140B5EBC0: CanUseActionOnTarget2
       0x140B5EEC0: GetActionInRangeOrLoS
+      0x140B5F300: CheckAreaTargetRangeAndLoS
       0x140B5F5A0: GetAdjustedCastTime
       0x140B5FF80: GetAdjustedRecastTime
       0x140B60820: GetAdjustedAdditionalRecastTime
       0x140B60A00: GetActionCost
+      0x140B61140: GetCraftActionCost
       0x140B61220: GetSpellIdForAction
+      0x140B61390: IsSameClassJobParent
+      0x140B61430: IsMovingSlowlyWhileCasting
+      0x140B61450: IsComboPreservingAction
+      0x140B614A0: AdjustActionIdToClassEquivalent
+      0x140B61620: GetActionIdForCraftAction
+      0x140B616F0: GetActionEffectRange
+      0x140B61760: GetActionParamValue
+      0x140B617B0: GetParamGrowData
       0x140B61CE0: NextActionSequence
       0x140B61D10: UpdateAreaTargetingMode
       0x140B62C50: ShouldLimitAreaTargetingToRange
@@ -2351,6 +2362,12 @@ classes:
       0x140B72300: CancelAreaTargetingMode
       0x140B72330: RemoveAreaTargetingVfx
       0x140B723B0: GetAreaTargetingCursorScreenPos
+      0x140B72570: CalculateAreaTargetingTargetState
+      0x140B726C0: CalculateAreaTargetingSourceState
+      0x140B72A70: CalculateAreaTargetingTargetStateImpl
+      0x140B73210: AdjustAreaTargetingTarget
+      0x140B734F0: CalculatePointSlightlyAbove
+      0x140B73660: CalculateAreaTargetingError
       0x140B74470: GetGroundPositionForObject
       0x140B74870: GetGroundPositionForCursor
       0x140B74990: GetCurrentCharges          # (this, actionId) -> uint
