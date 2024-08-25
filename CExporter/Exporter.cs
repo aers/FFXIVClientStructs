@@ -138,7 +138,7 @@ public class Exporter {
                 }
             }
 #endif
-        
+
             HashSet<string> ResolveFullDependencies(ProcessedStruct s) {
                 if (structToFullDeps.TryGetValue(s.StructTypeName, out var deps))
                     return deps;

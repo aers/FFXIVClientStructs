@@ -47,7 +47,7 @@ public static partial class TypeExtensions {
         Type[] inheritances = [];
         foreach (var attr in type.GetCustomAttributes()) {
             if (attr.GetType().Name.Contains(inheritsAttribute)) {
-                inheritances = [..inheritances,attr.GetType().GetGenericArguments()[0]];
+                inheritances = [.. inheritances, attr.GetType().GetGenericArguments()[0]];
             }
         }
         return inheritances;
@@ -153,7 +153,7 @@ public static partial class TypeExtensions {
     }
 
     public static bool IsGenericPointer(this Type type) {
-        return (type.Name == "Pointer`1" && type.Namespace ==ExporterStatics.InteropNamespacePrefix) || (type.Name == "hkRefPtr`1" && type.Namespace == ExporterStatics.HavokNamespacePrefix);
+        return (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix) || (type.Name == "hkRefPtr`1" && type.Namespace == ExporterStatics.HavokNamespacePrefix);
     }
 
     public static string SanitizeName(this Type type) {
@@ -220,7 +220,7 @@ public static class FieldInfoExtensions {
     }
 
     public static int GetFieldOffsetSequential(this FieldInfo info) {
-        if (info.DeclaringType is not {} declaring)
+        if (info.DeclaringType is not { } declaring)
             throw new Exception($"Unable to access declaring type of field {info.Name}");
         var pack = declaring.StructLayoutAttribute?.Pack ?? 0; // Default to 0 if no pack is specified
         var fields = declaring.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
