@@ -2368,6 +2368,7 @@ classes:
       0x140B73210: AdjustAreaTargetingTarget
       0x140B734F0: CalculatePointSlightlyAbove
       0x140B73660: CalculateAreaTargetingError
+      0x140B74370: OnBallistaCast
       0x140B74470: GetGroundPositionForObject
       0x140B74870: GetGroundPositionForCursor
       0x140B74990: GetCurrentCharges          # (this, actionId) -> uint
