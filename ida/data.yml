@@ -589,10 +589,31 @@ classes:
       - ea: 0x14275FBE0
         pointer: False
     funcs:
-      0x140A521C0: ReadPacket
       0x140A51650: Initialize
+      0x140A51680: Finalize
+      0x140A516C0: FindSatisfactionRowIdByNpcId
+      0x140A51710: IsNpcUnlocked
+      0x140A51790: GetNpcData
       0x140A51AE0: GetUsedAllowances
       0x140A51B30: GetResetTimestamp
+      0x140A51B90: IsCurrentNpcDataReady
+      0x140A51BA0: SetCurrentNpc
+      0x140A51CA0: ClearCurrentNpc
+      0x140A51E80: GetItemData
+      0x140A52100: GetRankRewards
+      0x140A521C0: ReadPacket
+      0x140A52360: SetSupplySeed
+      0x140A52370: SetSatisfactionValues
+      0x140A52400: SetFixedRandom
+      0x140A52D00: GetTimeAdjustmentForBonus
+      0x140A52D10: SetTimeAdjustmentForBonus
+      0x140A53150: InitReadSatisfactionBonusGuaranteeRow
+      0x140A53240: InitReadSatisfactionSupplyRow
+      0x140A53550: InitReadSatisfactionSupplyRewardRow
+      0x140A536E0: InitReadSatisfactionSupplyRewardExpRow
+      0x141867D80: GetAdjustedTimestamp # static
+      0x141867DA0: GetBonusGuaranteeForTimestamp # static
+      0x141867DE0: GetSatisfactionBonusesForNpc # static
   Client::Game::Control::TargetSystem::ListFeeder:
     vtbls:
       - ea: 0x141EF2830
@@ -9224,6 +9245,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BE5DD0: ctor
+      0x140BE77B0: InitCurrentNpcData
+      0x140BE7B20: InitAtkValuesForAddon
       0x140BE8F40: UpdateTimeRemaining # (this, resetTimestamp) returns true if an update occurred
       0x140BE8FE0: UpdateAddon # at least the TimeRemaining
       #0x140A30050: UpdateClassJobLevel # inlined @ 140BE6850
