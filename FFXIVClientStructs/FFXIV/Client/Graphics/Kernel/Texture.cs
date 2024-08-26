@@ -63,8 +63,8 @@ public enum TextureFormat : uint {
     R16_UINT = 0x1140,
     R32_UINT = 0x1150,
     R8G8_UNORM = 0x1240,
-    B8G8R8A8_UNORM_2 = 0x1440,
-    B8G8R8A8_UNORM_3 = 0x1441,
+    B4G4R4A4_UNORM = 0x1440,
+    B5G5R5A1_UNORM = 0x1441,
     B8G8R8A8_UNORM = 0x1450,
     [Obsolete($"Use {nameof(B8G8R8A8_UNORM)}")]
     R8G8B8A8 = 0x1450,
