@@ -4027,6 +4027,7 @@ classes:
       0x140066C80: ctor
       0x140066CA0: ctor_FromUtf8Str
       0x1400A4BB0: Copy
+      0x140066DB0: dtor
   Client::System::Resource::Handle::ResourceHandle:
     vtbls:
       - ea: 0x141EBB2A8
@@ -5253,7 +5254,7 @@ classes:
     instances:
       - ea: 0x14272AB60
     vtbls:
-      - ea: 0x141EF1330
+      - ea: 0x141EEFB68
         base: Client::System::Threading::Thread
     funcs:
       0x1405C4B20: ctor
@@ -5408,6 +5409,27 @@ classes:
       0x1405D5390: CreateCutSceneController
     instances:
       - ea: 0x14272B340
+  Client::System::Photo::ScreenShot:
+    instances:
+      - ea: 0x14272B370
+    vtbls:
+      - ea: 0x141EF1330
+        base: Client::System::Framework::Task
+    funcs:
+      0x1405D7280: Setup  # static
+      0x1405D72E0: Destroy  # static
+      0x1405D6FD0: ctor
+      0x1405D7420: ScheduleScreenshot
+      0x1405D7210: Finalize
+  Client::System::Photo::ScreenShot::ScreenShotThread:
+    vtbls:
+      - ea: 0x141EEFB68
+        base: Client::System::Threading::Thread
+    funcs:
+      0x1405D6950: ctor
+      0x1405D69C0: Dispose
+      0x1405D6A90: SetNewStorageDirectory
+      0x1405D6B80: WriteScreenshot
   Client::System::Scheduler::Control::UIControl:
     vtbls:
       - ea: 0x1421477A0
@@ -6935,6 +6957,7 @@ classes:
       0x14075DF90: ShouldLimitFps
       0x140763950: PropagateLevelChange
       0x1407639A0: PropagateClassJobChange
+      0x14075C470: ScreenShotCallback
   Client::UI::Misc::PvpSetModule:
     vtbls:
       - ea: 0x141F0C430
