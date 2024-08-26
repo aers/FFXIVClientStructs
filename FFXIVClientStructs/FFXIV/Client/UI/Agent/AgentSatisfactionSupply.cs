@@ -73,7 +73,8 @@ public unsafe partial struct AgentSatisfactionSupply {
         [FieldOffset(0x04)] public ushort Collectability1;
         [FieldOffset(0x06)] public ushort Collectability2;
         [FieldOffset(0x08)] public ushort Collectability3;
-        [FieldOffset(0x0A)] public bool Bonus;
+        [FieldOffset(0x0A)] public bool IsBonus;
+        [FieldOffset(0x0A), Obsolete("Use IsBonus")] public ushort Bonus;
         [FieldOffset(0x0C)] public uint Reward1Id;
         [FieldOffset(0x10)] public uint Reward2Id;
         [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray3<ushort> _reward1Quantity; // per quality level
