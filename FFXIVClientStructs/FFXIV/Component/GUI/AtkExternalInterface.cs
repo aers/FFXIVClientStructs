@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkExternalInterface
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public unsafe partial struct AtkExternalInterface {
     [VirtualFunction(1)]

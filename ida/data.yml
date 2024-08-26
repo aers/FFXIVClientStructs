@@ -644,6 +644,8 @@ classes:
   Component::GUI::AtkModuleEvent:
     vtbls:
       - ea: 0x141F049D0
+    vfuncs:
+      0: CallHandler
   Component::GUI::AtkMessageBoxManager:
     vtbls:
       - ea: 0x141EF57D0
