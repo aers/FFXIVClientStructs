@@ -5432,7 +5432,7 @@ classes:
     instances:
       - ea: 0x14272B370
     vtbls:
-      - ea: 0x141EF1330
+      - ea: 0x141EF1360
         base: Client::System::Framework::Task
     funcs:
       0x1405D7280: Setup  # static
@@ -5442,7 +5442,7 @@ classes:
       0x1405D7210: Finalize
   Client::System::Photo::ScreenShot::ScreenShotThread:
     vtbls:
-      - ea: 0x141EEFB68
+      - ea: 0x141EF1330
         base: Client::System::Threading::Thread
     funcs:
       0x1405D6950: ctor
