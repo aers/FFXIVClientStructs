@@ -56,7 +56,7 @@ public unsafe partial struct Texture {
 
 // See also DXGI_FORMATs that end with the same names.
 public enum TextureFormat : uint {
-    B8G8R8A8_UNORM_4 = 0x1130,
+    L8_UNORM = 0x1130,
     A8_UNORM = 0x1131,
     R8_UNORM = 0x1132,
     R8_UINT = 0x1133,
