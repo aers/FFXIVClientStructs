@@ -65,7 +65,10 @@ public unsafe partial struct UIState {
     [FieldOffset(0x16360)] public Emj Emj;
     [FieldOffset(0x16398)] public GoldSaucerYell GoldSaucerYell;
     [FieldOffset(0x17AE8)] public CharaCard CharaCard;
-    // 0x178C8: unknown struct, size 0x58
+    // 0x17CD0: ItemAction Unlocks
+
+    [FieldOffset(0x17D38)] public long NextMapAllowanceTimestamp;
+    [FieldOffset(0x17D40)] public long NextChallengeLogResetTimestamp;
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
@@ -222,13 +225,23 @@ public unsafe partial struct UIState {
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 0F B6 CB 3A C3")]
     public partial bool IsCutsceneSeen(uint cutsceneId);
 
-    // Only valid after the timers window has been opened, returns -1 otherwise.
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 8D 48 05")]
-    public partial int GetNextMapAllowanceTimestamp();
+    /// <remarks>Requests timestamps for <see cref="NextMapAllowanceTimestamp"/> and <see cref="NextChallengeLogResetTimestamp"/>.</remarks>
+    [MemberFunction("48 83 EC 38 48 C7 81")]
+    public partial bool RequestResetTimestamps();
 
-    // Only valid after the timers window has been opened, returns DateTime.MinValue otherwise.
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 8D 48 05")]
+    public partial int GetNextMapAllowanceTimestamp(); // TODO: returns long
+
     public DateTime GetNextMapAllowanceDateTime() {
         var timeStamp = GetNextMapAllowanceTimestamp();
+        return timeStamp > 0 ? DateTime.UnixEpoch.AddSeconds(timeStamp) : DateTime.MinValue;
+    }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 E8 ?? ?? ?? ?? 44 8B C8")]
+    public partial long GetNextChallengeLogResetTimestamp();
+
+    public DateTime GetNextChallengeLogResetDateTime() {
+        var timeStamp = GetNextChallengeLogResetTimestamp();
         return timeStamp > 0 ? DateTime.UnixEpoch.AddSeconds(timeStamp) : DateTime.MinValue;
     }
 }

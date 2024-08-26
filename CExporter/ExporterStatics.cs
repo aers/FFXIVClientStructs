@@ -9,17 +9,17 @@ namespace CExporter;
 public static class ExporterStatics {
 #pragma warning disable CA2211
     // ReSharper disable once InconsistentNaming
-    public static string FFXIVNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.FFXIV), "");
-    public static string StdNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.STD), "");
-    public static string InteropNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Interop), "");
-    public static string HavokNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Havok), "");
-    public static BindingFlags BindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+    public static readonly string FFXIVNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.FFXIV));
+    public static readonly string StdNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.STD));
+    public static readonly string InteropNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Interop));
+    public static readonly string HavokNamespacePrefix = string.Join(".", nameof(FFXIVClientStructs), nameof(FFXIVClientStructs.Havok));
+    public static readonly BindingFlags BindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
-    public static string[] IgnoredTypeNames = { "MemberFunctionPointers", "StaticAddressPointers", "Addresses", "VirtualTable" };
-    public static List<string> WarningList = [];
-    public static List<string> ErrorList = [];
+    public static readonly string[] IgnoredTypeNames = ["MemberFunctionPointers", "StaticAddressPointers", "Addresses", "VirtualTable"];
+    public static readonly List<string> WarningList = [];
+    public static readonly List<string> ErrorList = [];
 
-    public static string Separator = "::";
+    public static readonly string Separator = "::";
 #pragma warning restore CA2211
 
     public static Type[] GetXIVTypes() {

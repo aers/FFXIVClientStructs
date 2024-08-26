@@ -1,15 +1,19 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-
+using InteropGenerator.Runtime.Attributes;
+// ReSharper disable LoopCanBeConvertedToQuery
+// Linq can be a performance hit in most cases
 namespace CExporter;
 
-public static class TypeExtensions {
-    public static Regex StdNodeRegex = new(@"^`[1-9]\+Node", RegexOptions.Compiled);
+public static partial class TypeExtensions {
+    [GeneratedRegex(@"^`[1-9]\+Node", RegexOptions.Compiled)]
+    public static partial Regex StdNodeRegex();
 
     public static bool IsFixedBuffer(this Type type) {
         return type.Name.EndsWith("e__FixedBuffer");
@@ -38,8 +42,19 @@ public static class TypeExtensions {
         }
     }
 
+    public static Type[] GetInheritsTypes(this Type type) {
+        const string inheritsAttribute = "InheritsAttribute`1";
+        Type[] inheritances = [];
+        foreach (var attr in type.GetCustomAttributes()) {
+            if (attr.GetType().Name.Contains(inheritsAttribute)) {
+                inheritances = [.. inheritances, attr.GetType().GetGenericArguments()[0]];
+            }
+        }
+        return inheritances;
+    }
+
     public static bool IsInheritance(this Type type, FieldInfo field) {
-        var inheritances = type.GetCustomAttributes().Where(t => t.GetType().Name.Contains("InheritsAttribute`1")).Select(t => t.GetType().GetGenericArguments()[0]).ToArray();
+        var inheritances = type.GetInheritsTypes();
         if (inheritances.Length == 0) return false;
         foreach (var inheritance in inheritances) {
             if (inheritance.IsFieldInType(field)) return true;
@@ -56,8 +71,10 @@ public static class TypeExtensions {
         return type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == name && f.FieldType == field.FieldType) || type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == field.Name && f.FieldType == field.FieldType);
     }
 
-    public static string FixTypeName(this Type type, Func<Type, bool, string> unhandled, bool shouldLower = true) =>
-        type switch {
+    public static string FixTypeName(this Type type, bool shouldLower = true) {
+        using var builderPooled = StringBuilderPool.Get(500);
+        var builder = builderPooled.Builder;
+        var name = type switch {
             _ when type == typeof(void) || type == typeof(byte) || type == typeof(byte*) || type == typeof(byte**) => shouldLower ? type.Name.ToLower() : type.Name,
             _ when type == typeof(char) => "wchar_t",
             _ when type == typeof(bool) => "byte",
@@ -81,15 +98,17 @@ public static class TypeExtensions {
             _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
             _ when type == typeof(void*) => "__int64",
             _ when type == typeof(void**) => "__int64*",
-            _ => unhandled(type, shouldLower)
+            _ => type.SanitizeName()
         };
+        return builder.Append(name).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).ToString();
+    }
 
     public static int SizeOf(this Type type) {
         return type switch {
             _ when type == typeof(sbyte) || type == typeof(byte) || type == typeof(bool) => 1,
             _ when type == typeof(char) || type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
-            _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]) => 8,
+            _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace.AsSpan().SequenceEqual(ExporterStatics.InteropNamespacePrefix)) => 8,
             _ when type.Name.StartsWith("FixedSizeArray") => type.GetGenericArguments()[0].SizeOf() * int.Parse(type.Name[14..type.Name.IndexOf('`')]),
             _ when type.GetCustomAttribute<InlineArrayAttribute>() is { Length: var length } => type.GetGenericArguments()[0].SizeOf() * length,
             _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
@@ -116,21 +135,17 @@ public static class TypeExtensions {
     public static string GetFullname(this Type type) {
         return type.Namespace + "." + type.Name;
     }
+    private static bool IsHavokStdXivOrInterop(this Type type) {
+        var ns = type.Namespace.AsSpan();
+        const string cs = "FFXIVClientStructs.";
+        if (!ns.StartsWith(cs))
+            return false;
+        ns = ns[cs.Length..];
 
-    public static bool IsHavok(this Type type) {
-        return type.GetFullname().StartsWith(ExporterStatics.HavokNamespacePrefix);
-    }
-
-    public static bool IsStd(this Type type) {
-        return type.GetFullname().StartsWith(ExporterStatics.StdNamespacePrefix);
-    }
-
-    public static bool IsXiv(this Type type) {
-        return type.GetFullname().StartsWith(ExporterStatics.FFXIVNamespacePrefix);
-    }
-
-    public static bool IsInterop(this Type type) {
-        return type.GetFullname().StartsWith(ExporterStatics.InteropNamespacePrefix);
+        return ns.StartsWith("FFXIV")
+               || ns.StartsWith("STD")
+               || ns.StartsWith("Interop")
+               || ns.StartsWith("Havok");
     }
 
     public static bool IsPointer(this Type type) {
@@ -138,36 +153,63 @@ public static class TypeExtensions {
     }
 
     public static bool IsGenericPointer(this Type type) {
-        return (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]) || (type.Name == "hkRefPtr`1" && type.Namespace == ExporterStatics.HavokNamespacePrefix[..^1]);
+        return (type.Name == "Pointer`1" && type.Namespace == ExporterStatics.InteropNamespacePrefix) || (type.Name == "hkRefPtr`1" && type.Namespace == ExporterStatics.HavokNamespacePrefix);
     }
 
     public static string SanitizeName(this Type type) {
-        if (type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return type.GetElementType()!.FixTypeName((t, _) => t.SanitizeName()) + "*";
-        var name = type.FullName ?? type.Namespace! + "." + type.Name;
-        if (type.IsHavok() || type.IsStd() || type.IsXiv() | type.IsInterop()) {
-            var offset = name.IndexOf('.', name.IndexOf('.') + 1) + 1;
-            name = name[offset..];
+        if (type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) return type.GetElementType()!.FixTypeName() + "*";
+        var name = (type.FullName ?? type.GetFullname()).AsSpan();
+        if (type.IsHavokStdXivOrInterop()) {
+            name = name[(name.IndexOf('.') + 1)..];
+            name = name[(name.IndexOf('.') + 1)..];
         }
-        if (!type.IsGenericType) return name;
+        if (!type.IsGenericType) return name.ToString();
         switch (type.Name) {
-            case "Pointer`1" when type.Namespace == ExporterStatics.InteropNamespacePrefix[..^1]:
-                return type.GenericTypeArguments[0].FixTypeName((t, _) => t.SanitizeName()) + "*";
-            case "hkRefPtr`1" when type.Namespace == ExporterStatics.HavokNamespacePrefix[..^1]:
-                return type.GenericTypeArguments[0].FixTypeName((t, _) => t.SanitizeName()) + "*";
+            case "Pointer`1" when type.Namespace == ExporterStatics.InteropNamespacePrefix:
+                return type.GenericTypeArguments[0].FixTypeName() + "*";
+            case "hkRefPtr`1" when type.Namespace == ExporterStatics.HavokNamespacePrefix:
+                return type.GenericTypeArguments[0].FixTypeName() + "*";
         }
-        var tmp = name[name.IndexOf('`')..];
-        if (StdNodeRegex.IsMatch(tmp)) {
-            name = name[..name.IndexOf('`')] + "." + StdNodeRegex.Match(tmp).Value[3..];
-        } else {
-            name = name[..name.IndexOf('`')];
+
+        var afterBacktick = name[name.IndexOf('`')..];
+        name = name[..^afterBacktick.Length];
+        using var builderPooled = StringBuilderPool.Get(500);
+        var builder = builderPooled.Builder;
+        builder.Append(name);
+
+        var me = StdNodeRegex().EnumerateMatches(afterBacktick);
+        if (me.MoveNext())
+            builder.Append('.').Append(afterBacktick.Slice(me.Current.Index + 3, me.Current.Length - 3));
+
+        builder.Append('<');
+        var gta = type.GenericTypeArguments;
+        for (var i = 0; i < gta.Length; i++) {
+            if (i != 0)
+                builder.Append(", ");
+            builder.Append(gta[i].FixTypeName());
         }
-        name += "<" + string.Join(", ", type.GenericTypeArguments.Select(t => t.FixTypeName((t, _) => t.SanitizeName()))) + ">";
-        return name;
+
+        builder.Append('>');
+        return builder.ToString();
     }
 
-    public static string FullSanitizeName(this Type type) {
-        var name = type.FixTypeName((t, _) => t.SanitizeName()).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator);
-        return name;
+    public static string FullSanitizeName(this Type type) => type.FixTypeName();
+
+    public static int PackSize(this Type type) {
+        if (type.GetCustomAttribute<FixedSizeArrayAttribute>() != null) return 1; // FixedSizeArrayAttribute is always packed to 1 as the generated struct gets generated with Pack = 1
+        if (!type.IsStruct()) return type.SizeOf();
+        var pack = type.StructLayoutAttribute?.Pack ?? 8;
+        if (pack == 0) pack = 8;
+        var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        return fields.Max(t => Math.Min(pack, t.FieldType.PackSize()));
+    }
+
+    public static bool IsInStructList(this Type type, List<ProcessedStruct> structs) {
+        var name = type.FullSanitizeName();
+        foreach (var str in structs) {
+            if (str.StructTypeName == name) return true;
+        }
+        return false;
     }
 }
 
@@ -178,13 +220,19 @@ public static class FieldInfoExtensions {
     }
 
     public static int GetFieldOffsetSequential(this FieldInfo info) {
-        if (info.DeclaringType is null)
+        if (info.DeclaringType is not { } declaring)
             throw new Exception($"Unable to access declaring type of field {info.Name}");
-        var fields = info.DeclaringType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        var pack = declaring.StructLayoutAttribute?.Pack ?? 0; // Default to 0 if no pack is specified
+        var fields = declaring.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         var offset = 0;
         foreach (var field in fields) {
-            if (field == info)
+            if (pack != 0) {
+                var actualPack = Math.Min(pack, field.FieldType.PackSize());
+                offset = (offset + actualPack - 1) / actualPack * actualPack;
+            }
+            if (field == info) {
                 return offset;
+            }
             offset += field.FieldType.SizeOf();
         }
         throw new Exception("Field not found");

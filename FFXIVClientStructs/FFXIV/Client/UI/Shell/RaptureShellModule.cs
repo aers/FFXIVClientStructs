@@ -24,6 +24,7 @@ public unsafe partial struct RaptureShellModule {
     [FieldOffset(0x288)] public ShellCommandInterface* ShellCommandAgent;
     [FieldOffset(0x290)] public TimePoint WaitStartTime;
     [FieldOffset(0x2A8)] public uint WaitTimeMs;
+    [FieldOffset(0x2AD)] public bool ShowCommandErrors; 
     [FieldOffset(0x2B3)] public bool MacroLocked;
     [FieldOffset(0x2C0)] public int MacroCurrentLine;
     [FieldOffset(0x2C8)] public Utf8String MacroLineText;
@@ -47,6 +48,7 @@ public unsafe partial struct RaptureShellModule {
     [FieldOffset(0x120A)] public ushort TempTellReason;
 
     [FieldOffset(0x1210)] public uint Flags;
+    [FieldOffset(0x1214)] public uint ErrorData; // ??? seems to be a byte + flags
 
     public bool IsTextCommandUnavailable => (Flags & 1) != 0;
 

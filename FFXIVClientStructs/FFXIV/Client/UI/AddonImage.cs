@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonImage
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-[Addon("_Image, _Image3")]
+[Addon("_Image", "_Image3")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A0)]

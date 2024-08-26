@@ -68,6 +68,7 @@ public unsafe partial struct MacroDecoder {
 // |    67 | Integer              | Player ClassJobId                                        |
 // |    68 | Integer              | Player Level                                             |
 // |    70 | Integer              | Player Race                                              |
+// |    71 | Integer              | Player Synced Level                                      |
 // |    77 | Integer              | Client/Plattform?                                        |
 // |    82 | Integer              | Datacenter Region (see WorldDCGroupType sheet)           |
 // |    83 | Integer              | Log Text Colors - Chat 2 - CWLS2                         |
@@ -77,4 +78,9 @@ public unsafe partial struct MacroDecoder {
 // |    87 | Integer              | Log Text Colors - Chat 2 - CWLS6                         |
 // |    88 | Integer              | Log Text Colors - Chat 2 - CWLS7                         |
 // |    89 | Integer              | Log Text Colors - Chat 2 - CWLS8                         |
+// |    92 | Integer              | TerritoryType Id                                         |
+// |    95 | Integer              | Log Role Color - Tank (LogColorRoleTank)                 |
+// |    97 | Integer              | Log Role Color - Healer (LogColorRoleHealer)             |
+// |    99 | Integer              | Log Role Color - DPS (LogColorRoleDPS)                   |
+// |   101 | Integer              | Log Role Color - Other (LogColorOtherClass)              |
 // |-------|----------------------|----------------------------------------------------------|

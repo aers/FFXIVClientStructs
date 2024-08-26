@@ -62,7 +62,11 @@ public unsafe partial struct RaptureMacroModule {
         [MemberFunction("E8 ?? ?? ?? ?? 49 63 97 ?? ?? ?? ?? 83 FA 11")]
         public partial void Clear();
 
+        [Obsolete("This function returns the opposite. Use IsNotEmpty.")]
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D 10 0F B6 9D ?? ?? ?? ??")]
         public partial bool IsEmpty();
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D 10 0F B6 9D ?? ?? ?? ??")]
+        public partial bool IsNotEmpty();
     }
 }

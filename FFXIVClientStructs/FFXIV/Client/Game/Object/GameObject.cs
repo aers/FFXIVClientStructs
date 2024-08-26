@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+using FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using EventHandler = FFXIVClientStructs.FFXIV.Client.Game.Event.EventHandler;
 
@@ -38,6 +39,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0xF4)] public EventId EventId;
     [FieldOffset(0xF8)] public uint FateId;
     [FieldOffset(0x100)] public DrawObject* DrawObject;
+    [FieldOffset(0x108)] public ILayoutInstance* LayoutInstance;
     [FieldOffset(0x110)] public uint NamePlateIconId;
     [FieldOffset(0x118)] public int RenderFlags;
     [FieldOffset(0x158)] public LuaActor* LuaActor;

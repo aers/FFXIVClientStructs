@@ -169,7 +169,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial ulong GetCrafterContentId();
 
     /// <summary>Gets the stain from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 47 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 06 FF C7")]
     public partial byte GetStain(int index);
 
     /// <summary>Gets the glamour id from the original InventoryItem or itself if not symbolic.</summary>

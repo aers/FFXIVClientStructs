@@ -111,6 +111,18 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 0F 2F C6 76 1F")]
     public partial float CalculateHeight();
 
+    /// <summary> Check if the character is using the World Visit system. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 8B CF")]
+    public partial bool IsWanderer();
+
+    /// <summary> Check if the character is using the Data Center Travel system. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 B1")]
+    public partial bool IsTraveler();
+
+    /// <summary> Check if the character is using the Cross-region Data Center Travel system. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 3A 48 8B 4B 08")]
+    public partial bool IsVoyager();
+
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
 
@@ -137,6 +149,7 @@ public unsafe partial struct Character {
 public enum CharacterModes : byte {
     None = 0, // Mode is never used
     Normal = 1, // Param always 0
+    Dead = 2,
     EmoteLoop = 3, // Param is an EmoteMode entry
     Mounted = 4, // Param always 0
     Crafting = 5, // Param always 0

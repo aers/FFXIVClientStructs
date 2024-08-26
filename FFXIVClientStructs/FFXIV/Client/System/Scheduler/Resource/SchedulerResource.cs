@@ -19,7 +19,7 @@ public unsafe partial struct SchedulerResource {
     public partial struct ResourceName {
         [FieldOffset(0x08)] public byte* DataPointer;
         [FieldOffset(0x10)] public ushort Unk1;
-        [FieldOffset(0x12), FixedSizeArray] internal FixedSizeArray46<byte> _buffer; // TODO: string?
+        [FieldOffset(0x12), FixedSizeArray(isString: true)] internal FixedSizeArray46<byte> _buffer;
     }
 
     /// <summary>

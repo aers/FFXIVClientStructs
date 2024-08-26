@@ -13,6 +13,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UIModule
 //   Client::UI::UIModuleInterface
+//   Component::GUI::AtkModuleEvent
+//   Component::Excel::ExcelLanguageEvent
+//   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
 [Inherits<UIModuleInterface>, Inherits<AtkModuleEvent>, Inherits<ExcelLanguageEvent>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xEE030)]
@@ -20,6 +23,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct UIModule {
     public static UIModule* Instance() => Framework.Instance()->GetUIModule();
 
+    [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray57<UIModuleHandler> _uIModuleHandlers;
     [FieldOffset(0x3C0), FixedSizeArray] internal FixedSizeArray19<RaptureAtkHistory> _atkHistory;
     [FieldOffset(0x7E8)] public int LinkshellCycle;
     [FieldOffset(0x7EC)] public int CrossWorldLinkshellCycle;
@@ -108,6 +112,9 @@ public unsafe partial struct UIModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 B4 4C 8B CB"), GenerateStringOverloads]
     public static partial bool IsPlayerCharacterName(byte* name);
+    
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B FA 48 8B D9 45 84 C9")]
+    public static partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
 
     public static void PlayChatSoundEffect(uint effectId) {
         if (effectId is < 1 or > 16)
@@ -125,5 +132,12 @@ public unsafe partial struct UIModule {
         ActionBars = 16,
         Unk32 = 32, //same as 1 ?
         TargetInfo = 64 //+disable system menu / ESC key
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct UIModuleHandler {
+        // called via AtkModuleEvent.CallHandler()
+        [FieldOffset(0x0)] public delegate* unmanaged<void*, AtkValue*, AtkValue*, uint, AtkValue*> FunctionPtr; // (mostLikelyUIModule, result, values, valueCount) -> result
+        [FieldOffset(0x8)] public uint UIModuleOffset;
     }
 }
