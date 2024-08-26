@@ -7879,6 +7879,8 @@ classes:
     vtbls:
       - ea: 0x141F0FB00
         base: Client::Game::Character::ContainerInterface
+    funcs:
+      0x1408C3A80: CalculateFloatHeight
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
       - ea: 0x141F0FA28
@@ -7888,6 +7890,8 @@ classes:
   Client::Game::Character::CharacterData:
     vtbls:
       - ea: 0x141F0F928
+    funcs:
+      0x14089C750: GetModelCharaId
   Client::Game::Character::TimelineContainer:
     vtbls:
       - ea: 0x141F0FA60
