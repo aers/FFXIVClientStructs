@@ -16,16 +16,32 @@ public unsafe partial struct AgentActionDetail {
 
 public enum ActionKind {
     Action = 28,
+    CraftingAction = 29,
     GeneralAction = 30,
-    CompanionOrder = 31,
+    BuddyOrder = 31,
     MainCommand = 32,
     ExtraCommand = 33,
-    Minion = 34,
+    Companion = 34,
     PetOrder = 35,
     Trait = 36,
-    CompanionAction = 37,
+    BuddyAction = 37,
+    CompanyAction = 38,
     Mount = 39,
+    ChocoboRaceAction = 40,
+    ChocoboRaceItem = 41,
+    DeepDungeonEquipment = 42, // with extra param 0x2A
+    DeepDungeonEquipment2 = 43, // with extra param 0x2B
+    DeepDungeonItem = 44,
+    QuickChat = 45,
+    ActionComboRoute = 46,
+    PvPSelectTrait = 47,
     SquadronAction = 48,
     Performance = 49,
+    DeepDungeonMagicStone = 50,
+    DeepDungeonDemiclone = 51,
+    EurekaMagiaAction = 52,
+    MYCTemporaryItem = 53,
+    Ornament = 54,
+    Glasses = 55,
 }
 
