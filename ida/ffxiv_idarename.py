@@ -338,6 +338,10 @@ if api is None:
 
             def get_addr_name(self, ea):
                 sym = getSymbolAt(toAddr(ea))
+                if not sym and getByte(toAddr(ea).subtract(1)) & 0xFF == 0xCC:
+                    disassemble(toAddr(ea))
+                    createFunction(toAddr(ea), None)
+                    sym = getSymbolAt(toAddr(ea))
                 if not sym:
                     return ""
                 return sym.getName(True)
