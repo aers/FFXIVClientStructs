@@ -29,8 +29,8 @@ public enum ActionKind {
     Mount = 39,
     ChocoboRaceAction = 40,
     ChocoboRaceItem = 41,
-    DeepDungeonEquipment = 42, // with extra param 0x2A
-    DeepDungeonEquipment2 = 43, // with extra param 0x2B
+    DeepDungeonEquipment = 42,
+    DeepDungeonEquipment2 = 43,
     DeepDungeonItem = 44,
     QuickChat = 45,
     ActionComboRoute = 46,
