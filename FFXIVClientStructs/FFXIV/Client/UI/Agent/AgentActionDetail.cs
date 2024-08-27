@@ -9,6 +9,9 @@ public unsafe partial struct AgentActionDetail {
     [FieldOffset(0x3C)] public uint ActionId;
     [FieldOffset(0x40)] public uint OriginalId; // Example: Summon Topaz
     [FieldOffset(0x44)] public uint AdjustedId; // Example: Summon Titan II
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 F8 0F")]
+    public partial void HandleActionHover(ActionKind actionKind, uint actionId, int flag, byte unk);
 }
 
 public enum ActionKind {

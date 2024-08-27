@@ -8783,6 +8783,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EFB060: ctor
+      0x140EFB150: HandleActionHover
   Client::UI::Agent::AgentRetainer:
     vtbls:
       - ea: 0x141F57700
