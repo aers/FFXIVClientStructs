@@ -36,7 +36,7 @@ public enum ActionKind {
     ActionComboRoute = 46,
     PvPSelectTrait = 47,
     BgcArmyAction = 48,
-    Performance = 49,
+    Perform = 49,
     DeepDungeonMagicStone = 50,
     DeepDungeonDemiclone = 51,
     EurekaMagiaAction = 52,
