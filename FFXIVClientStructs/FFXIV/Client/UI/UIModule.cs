@@ -112,7 +112,7 @@ public unsafe partial struct UIModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 B4 4C 8B CB"), GenerateStringOverloads]
     public static partial bool IsPlayerCharacterName(byte* name);
-    
+
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B FA 48 8B D9 45 84 C9")]
     public static partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
 
