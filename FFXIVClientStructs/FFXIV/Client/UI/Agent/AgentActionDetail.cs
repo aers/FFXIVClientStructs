@@ -35,7 +35,7 @@ public enum ActionKind {
     QuickChat = 45,
     ActionComboRoute = 46,
     PvPSelectTrait = 47,
-    SquadronAction = 48,
+    BgcArmyAction = 48,
     Performance = 49,
     DeepDungeonMagicStone = 50,
     DeepDungeonDemiclone = 51,
