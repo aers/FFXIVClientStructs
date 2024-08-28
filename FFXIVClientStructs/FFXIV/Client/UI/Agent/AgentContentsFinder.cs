@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -37,6 +38,16 @@ public unsafe partial struct AgentContentsFinder {
 
     [MemberFunction("E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20")]
     public partial void OpenRouletteDuty(byte roulette, bool hideIfShown = false);
+
+    // Unchecks all selected duties, this is the same command that "Clear Selection" sends.
+    public void ClearSelectedDuties() {
+        var returnValue = stackalloc AtkValue[1];
+        var command = stackalloc AtkValue[2];
+        command[0].SetInt(12);
+        command[1].SetInt(1);
+
+        ReceiveEvent(returnValue, command, 2, 0);
+    }
 }
 
 public enum ContentsRouletteRole : byte {
