@@ -1,7 +1,7 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [GenerateInterop(isInherited: true)]
-[Inherits<AgentExplorationResultInterface>]
+[Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct AgentExplorationInterface {
 }
@@ -13,7 +13,7 @@ public unsafe partial struct AgentExplorationInterface {
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public partial struct AgentSubmersibleExploration {
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray5<byte> _selectedPoints;
-    [FieldOffset(0x55)] public byte NumOfSelectedPoints;
+    [FieldOffset(0x55)] public byte SelectedPointsCount;
 
     [FieldOffset(0x5C)] public uint VoyageDistance;
     [FieldOffset(0x60)] public uint CeruleumTanks;
