@@ -72,10 +72,11 @@ public unsafe partial struct Framework {
     [FieldOffset(0x1770)] public ClientTime ClientTime;
     [FieldOffset(0x17B8)] public float GameSpeedMultiplier; // usually 1, but during recording replay could be different
     [FieldOffset(0x17CC)] public float FrameRate;
+    [FieldOffset(0x17D0)] public int PauseFrameTicksCounter; // if non-zero, FrameDeltaTime is forced to 0 during ticks; used while displaying message boxes
     /// <summary>
     /// If true <see cref="FrameDeltaTime"/> is set to 0.
     /// </summary>
-    [FieldOffset(0x17D0)] public bool DiscardFrame;
+    [FieldOffset(0x17D0), Obsolete("Use PauseFrameTicksCounter != 0")] public bool DiscardFrame;
     /// <summary>
     /// If set to anything non-zero, overrides <see cref="FrameDeltaTime"/>. If negative <see cref="FrameDeltaTimeOverride"/> is used and 60fps as a fallback.
     /// Unlike <see cref="FrameDeltaTimeOverride"/>, this applies only to the next frame, and is reset to zero on next tick.

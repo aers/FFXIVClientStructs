@@ -15,6 +15,11 @@ public unsafe partial struct StatusManager {
     //[FieldOffset(0x2E8)] public byte Unk_180;
     [FieldOffset(0x2E8)] public byte NumValidStatuses;
 
+    /// <summary>
+    /// 0x01: lose control (set if any active status has IsGaze flag set in sheet)
+    /// </summary>
+    [FieldOffset(0x2E9)] public byte ExtraFlags;
+
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 2D 00")]
     public partial bool HasStatus(uint statusId, uint sourceId = 0xE0000000);
 

@@ -13,4 +13,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 public unsafe partial struct BattleChara {
     [FieldOffset(0x22C0)] public StatusManager StatusManager;
     [FieldOffset(0x25B0)] public CastInfo CastInfo;
+    [FieldOffset(0x2720)] public ActionEffectHandler ActionEffectHandler;
+    [FieldOffset(0x3620)] public ForayInfo ForayInfo;
 }
