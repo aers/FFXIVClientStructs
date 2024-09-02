@@ -58,7 +58,7 @@ public unsafe partial struct GameObject {
     public partial byte* GetName();
 
     [VirtualFunction(7)]
-    public partial float GetRadius(bool adjustByTransformation = true);
+    public partial float GetRadius();
 
     [VirtualFunction(8)]
     public partial float GetHeight();
