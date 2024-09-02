@@ -1401,6 +1401,22 @@ enums:
     "SqpackTest": 18
     "Debug": 19
     "MaxCount": 20
+- type: Client::System::Photo::ScreenShot::ScreenShotResultCode
+  name: ScreenShotResultCode
+  underlying: int
+  namespace: Client.System.Photo
+  values:
+    "Success": 0
+    "NoDiskSpace": 1
+- type: Client::System::Photo::ScreenShot::TargetFileFormat
+  name: TargetFileFormat
+  underlying: int
+  namespace: Client.System.Photo
+  values:
+    "Bmp": 0
+    "Jpg": 1
+    "Png": 3
+    "Dds": 4
 - type: Client::System::File::FileMode
   name: FileMode
   underlying: unsigned int
@@ -1537,8 +1553,40 @@ enums:
   underlying: unsigned int
   namespace: Client.Graphics.Kernel
   values:
-    "R8G8B8A8": 5200
-    "D24S8": 16976
+    "L8_UNORM": 4400
+    "A8_UNORM": 4401
+    "R8_UNORM": 4402
+    "R8_UINT": 4403
+    "R16_UINT": 4416
+    "R32_UINT": 4432
+    "R8G8_UNORM": 4672
+    "B4G4R4A4_UNORM": 5184
+    "B5G5R5A1_UNORM": 5185
+    "B8G8R8A8_UNORM": 5200
+    "B8G8R8X8_UNORM": 5201
+    "R16_FLOAT": 8512
+    "R32_FLOAT": 8528
+    "R16G16_FLOAT": 8784
+    "R32G32_FLOAT": 8800
+    "R11G11B10_FLOAT": 9040
+    "R16G16B16A16_FLOAT": 9312
+    "R32G32B32A32_FLOAT": 9328
+    "BC1_UNORM": 13344
+    "BC2_UNORM": 13360
+    "BC3_UNORM": 13361
+    "D16_UNORM": 16704
+    "D24_UNORM_S8_UINT": 16976
+    "D16_UNORM_2": 20800
+    "D24_UNORM_S8_UINT_2": 20816
+    "BC4_UNORM": 24864
+    "BC5_UNORM": 25136
+    "BC6H_SF16": 25392
+    "BC7_UNORM": 25650
+    "R16_UNORM": 28992
+    "R16G16_UNORM": 29264
+    "R10G10B10A2_UNORM_2": 29520
+    "R10G10B10A2_UNORM": 29776
+    "D24_UNORM_S8_UINT_3": 33360
 - type: Client::Graphics::Kernel::VertexShader::Input
   name: Input
   underlying: unsigned int
@@ -6051,6 +6099,9 @@ structs:
   size: 799
   fields:
   - type: byte
+    name: SupplySeed
+    offset: 0
+  - type: byte
     name: BonusGuaranteeRowId
     offset: 1
   - type: unsigned __int16
@@ -6079,6 +6130,18 @@ structs:
     name: CurrentSupplyRewardRowIds
     offset: 54
     size: 4
+  - type: byte
+    name: CurrentNpcInitInProgress
+    offset: 62
+  - type: byte
+    name: CurrentNpcInitDone
+    offset: 63
+  - type: unsigned int
+    name: FixedRandom
+    offset: 104
+  - type: int
+    name: TimeAdjustmentForBonusGuarantee
+    offset: 108
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 2B F0 E8 ?? ?? ?? ?? 8B CB
@@ -6093,6 +6156,50 @@ structs:
     parameters:
     - type: Client::Game::SatisfactionSupplyManager*
       name: this
+- type: Client::Game::SatisfactionSupplyManager::NpcInfo
+  name: NpcInfo
+  namespace: Client.Game
+  union: False
+  size: 28
+  fields:
+  - type: unsigned int
+    name: NpcId
+    offset: 0
+  - type: unsigned int
+    name: ImageId
+    offset: 4
+  - type: unsigned __int16
+    name: SatisfactionCur
+    offset: 12
+  - type: unsigned __int16
+    name: SatisfactionMax
+    offset: 14
+  - type: byte
+    name: RankCur
+    offset: 16
+  - type: byte
+    name: RankMax
+    offset: 17
+  - type: byte
+    name: UsedAllowances
+    offset: 18
+  - type: byte
+    name: MaxAllowances
+    offset: 19
+  - type: unsigned __int16
+    name: RemainingAllowances
+    offset: 20
+  - type: __int16
+    name: LevelUnlocked
+    offset: 22
+  - type: byte
+    name: CanGlamour
+    offset: 24
+  - type: byte
+    name: RankQuestComplete
+    offset: 25
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Status
   name: Status
   namespace: Client.Game
@@ -10832,8 +10939,8 @@ structs:
   - type: unsigned __int16
     name: Collectability3
     offset: 8
-  - type: unsigned __int16
-    name: Bonus
+  - type: byte
+    name: IsBonus
     offset: 10
   - type: unsigned int
     name: Reward1Id
@@ -10841,6 +10948,26 @@ structs:
   - type: unsigned int
     name: Reward2Id
     offset: 16
+  - type: unsigned __int16
+    name: Reward1Quantity
+    offset: 20
+    size: 3
+  - type: unsigned __int16
+    name: Reward2Quantity
+    offset: 26
+    size: 3
+  - type: unsigned __int16
+    name: SatisfactionQuantity
+    offset: 32
+    size: 3
+  - type: unsigned __int16
+    name: GilQuantity
+    offset: 38
+    size: 3
+  - type: int
+    name: ExpQuantity
+    offset: 44
+    size: 3
   - type: unsigned __int16
     name: FishingSpotId
     offset: 56
@@ -10853,7 +10980,7 @@ structs:
   name: SatisfactionSupplyNpcInfo
   namespace: Client.UI.Agent
   union: False
-  size: 26
+  size: 28
   fields:
   - type: unsigned int
     name: Id
@@ -10861,6 +10988,18 @@ structs:
   - type: unsigned int
     name: SatisfactionRank
     offset: 4
+  - type: byte
+    name: Valid
+    offset: 16
+  - type: byte
+    name: Initialized
+    offset: 17
+  - type: byte
+    name: AddonUpdated
+    offset: 18
+  - type: byte
+    name: ForceRefresh
+    offset: 19
   - type: unsigned __int16
     name: SelectedItemIndex
     offset: 20
@@ -12651,6 +12790,30 @@ structs:
   union: False
   size: 240
   fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::UIModule::UIModuleHandler
+  name: UIModuleHandler
+  namespace: Client.UI
+  union: False
+  size: 16
+  fields:
+  - type: __fastcall
+    name: FunctionPtr
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: __int64
+      name: a1
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+  - type: unsigned int
+    name: UIModuleOffset
+    offset: 8
   virtual_functions: []
   member_functions: []
 - type: Client::UI::UIModuleInterface
@@ -16031,7 +16194,21 @@ structs:
   union: False
   size: 8
   fields: []
-  virtual_functions: []
+  virtual_functions:
+  - name: CallHandler
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkModuleEvent*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: result
+    - type: unsigned int
+      name: handlerIndex
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
   member_functions: []
 - type: Component::GUI::AtkModuleInterface
   name: AtkModuleInterface
@@ -19317,6 +19494,9 @@ structs:
   - type: float
     name: AnimationLock
     offset: 16
+  - type: unsigned int
+    name: BallistaEntityId
+    offset: 20
   - type: unsigned __int16
     name: SourceSequence
     offset: 24
@@ -19522,9 +19702,36 @@ structs:
   - type: Client::Game::Character::ContainerInterface
     name: ContainerInterface
     offset: 0
+  - type: float
+    name: CurrentFloatHeight
+    offset: 16
+  - type: float
+    name: TargetFloatHeight
+    offset: 20
+  - type: float
+    name: FloatHeightChangeSpeed
+    offset: 24
   - type: Client::Game::Character::EffectContainer::StatusEffect
     name: StatusEffects
     offset: 48
+  - type: int
+    name: MountTiltSetupState1
+    offset: 52
+  - type: int
+    name: MountTiltSetupState2
+    offset: 56
+  - type: byte
+    name: TiltParam1Type
+    offset: 64
+  - type: float
+    name: TiltParam1Value
+    offset: 68
+  - type: byte
+    name: TiltParam2Type
+    offset: 72
+  - type: float
+    name: TiltParam2Value
+    offset: 76
   virtual_functions: []
   member_functions: []
 - type: Client::Game::Character::MountContainer
@@ -20822,16 +21029,16 @@ structs:
     name: Notifier
     offset: 32
   - type: unsigned int
-    name: Width
+    name: ActualWidth
     offset: 56
   - type: unsigned int
-    name: Height
+    name: ActualHeight
     offset: 60
   - type: unsigned int
-    name: Width2
+    name: AllocatedWidth
     offset: 64
   - type: unsigned int
-    name: Height2
+    name: AllocatedHeight
     offset: 68
   - type: unsigned int
     name: Width3
@@ -21708,6 +21915,27 @@ structs:
     parameters:
     - type: Client::System::Input::SoftKeyboards::SteamGamepadSoftKeyboard*
       name: this
+  member_functions: []
+- type: Client::System::Photo::ScreenShot::ScreenShotThread
+  name: ScreenShotThread
+  namespace: Client.System.Photo
+  union: False
+  size: 648
+  fields:
+  - type: Client::System::Photo::ScreenShot::TargetFileFormat
+    name: TargetFileFormat
+    offset: 40
+  - type: Client::System::Photo::ScreenShot*
+    name: Parent
+    offset: 56
+  - type: byte
+    name: CriticalSection
+    offset: 80
+    size: 40
+  - type: Client::System::File::FileAccessPath
+    name: ScreenShotStorageDirectory
+    offset: 120
+  virtual_functions: []
   member_functions: []
 - type: Client::System::Resource::ResourceGraph
   name: ResourceGraph
@@ -36089,6 +36317,71 @@ structs:
     - type: Client::System::Input::ClipBoard*
       name: this
   member_functions: []
+- type: Client::System::Photo::ScreenShot
+  name: ScreenShot
+  namespace: Client.System.Photo
+  union: False
+  size: 648
+  fields:
+  - type: Client::System::Framework::Task
+    name: Task
+    offset: 0
+  - type: Client::System::Photo::ScreenShot::ScreenShotThread*
+    name: ThreadPtr
+    offset: 56
+  - type: byte
+    name: CanTakeScreenShot
+    offset: 64
+  - type: byte
+    name: ScreenShotRequested
+    offset: 65
+  - type: __int64
+    name: CallbackFirstArg
+    offset: 72
+  - type: __int64
+    name: EventHandle
+    offset: 80
+  - type: Client::System::Photo::ScreenShot::ScreenShotResultCode
+    name: ScreenShotResult
+    offset: 92
+  - type: __int64
+    name: ScreenShotTimestamp
+    offset: 96
+  - type: __fastcall
+    name: ScreenShotCallbackFunc
+    offset: 104
+    return_type: byte
+    parameters:
+    - type: __int64
+      name: a1
+    - type: int
+      name: a2
+  - type: Client::System::Photo::ScreenShot::TargetFileFormat
+    name: ScreenShotFileFormat
+    offset: 112
+  - type: Client::System::File::FileAccessPath
+    name: ScreenShotLocation
+    offset: 120
+  virtual_functions:
+  - name: Execute
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::System::Photo::ScreenShot*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? F3 0F 10 05 ?? ?? ?? ?? F3 0F 11 05
+    return_type: byte
+    name: ScheduleScreenShot
+    parameters:
+    - type: Client::System::Photo::ScreenShot*
+      name: this
+    - type: __fastcall
+      name: callback
+    - type: __int64
+      name: initialArg
 - type: Client::System::Scheduler::Base::CutSceneController
   name: CutSceneController
   namespace: Client.System.Scheduler.Base
@@ -51506,6 +51799,24 @@ structs:
   - type: byte
     name: AreaTargetingExecuteAtCursor
     offset: 184
+  - type: byte
+    name: BallistaActive
+    offset: 224
+  - type: byte
+    name: BallistaRowId
+    offset: 225
+  - type: System::Numerics::Vector3
+    name: BallistaOrigin
+    offset: 240
+  - type: float
+    name: BallistaRefAngle
+    offset: 256
+  - type: float
+    name: BallistaRadius
+    offset: 260
+  - type: unsigned int
+    name: BallistaEntityId
+    offset: 264
   - type: unsigned __int16
     name: LastUsedActionSequence
     offset: 272
@@ -55575,6 +55886,22 @@ structs:
       name: contentId
     - type: unsigned __int16
       name: worldId
+  - signature: E8 ?? ?? ?? ?? 4C 8B 65 ?? E9 ?? ?? ?? ?? 48 8B 83
+    return_type: byte
+    name: InviteToPartyInInstanceByContentId
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyInvite*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+  - signature: E8 ?? ?? ?? ?? 4C 8B 65 ?? E9 ?? ?? ?? ?? 48 8B 93 ?? ?? ?? ?? 48 8B CE E8
+    return_type: byte
+    name: InviteToPartyInInstanceByEntityId
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyInvite*
+      name: this
+    - type: unsigned int
+      name: entityId
   - signature: 40 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 48 85 C0 74 ?? 80 3D
     return_type: byte
     name: InviteToPartyInInstance
@@ -62272,201 +62599,6 @@ structs:
       name: a3
     - type: byte
       name: pushHistory
-- type: Client::UI::Agent::AgentSatisfactionSupply
-  name: AgentSatisfactionSupply
-  namespace: Client.UI.Agent
-  union: False
-  size: 1280
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-  - type: Client::UI::Agent::AgentSatisfactionSupply::SatisfactionSupplyNpcInfo
-    name: NpcInfo
-    offset: 64
-  - type: unsigned __int16
-    name: ClassJobId
-    offset: 94
-  - type: unsigned __int16
-    name: ClassJobLevel
-    offset: 96
-  - type: unsigned int
-    name: NpcId
-    offset: 100
-  - type: unsigned __int16
-    name: RemainingAllowances
-    offset: 120
-  - type: __int16
-    name: LevelUnlocked
-    offset: 122
-  - type: byte
-    name: CanGlamour
-    offset: 124
-  - type: Client::UI::Agent::AgentSatisfactionSupply::ItemInfo
-    name: Items
-    offset: 128
-    size: 3
-  - type: __int64
-    name: ENpcResidentRow
-    offset: 312
-  - type: __int64
-    name: Item1Row
-    offset: 320
-  - type: __int64
-    name: Item2Row
-    offset: 328
-  - type: __int64
-    name: Item3Row
-    offset: 336
-  - type: Client::UI::Agent::AgentDeliveryItemInfo
-    name: DeliveryInfo
-    offset: 344
-    size: 3
-  - type: __int64
-    name: Item1Reward1Row
-    offset: 1136
-  - type: __int64
-    name: Item2Reward1Row
-    offset: 1144
-  - type: __int64
-    name: Item3Reward1Row
-    offset: 1152
-  - type: __int64
-    name: Item1Reward2Row
-    offset: 1160
-  - type: __int64
-    name: Item2Reward2Row
-    offset: 1168
-  - type: __int64
-    name: Item3Reward2Row
-    offset: 1176
-  - type: __int64
-    name: GilRow
-    offset: 1184
-  - type: __int64
-    name: CrafterScripRow1
-    offset: 1192
-  - type: __int64
-    name: CrafterScripRow2
-    offset: 1200
-  - type: __int64
-    name: GathererScripRow1
-    offset: 1208
-  - type: __int64
-    name: GathererScripRow2
-    offset: 1216
-  - type: __int64
-    name: FishingSpotRow
-    offset: 1224
-  - type: __int64
-    name: SpearfishingNotebookRow
-    offset: 1232
-  - type: unsigned int
-    name: CrafterScripId1
-    offset: 1240
-  - type: unsigned int
-    name: CrafterScripId2
-    offset: 1244
-  - type: unsigned int
-    name: GathererScripId1
-    offset: 1248
-  - type: unsigned int
-    name: GathererScripId2
-    offset: 1252
-  - type: unsigned int
-    name: TimeRemainingHours
-    offset: 1256
-  - type: unsigned int
-    name: TimeRemainingMinutes
-    offset: 1260
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentSatisfactionSupply*
-      name: this
-    - type: byte
-      name: a2
-  member_functions: []
 - type: Client::UI::Agent::LobbyData
   name: LobbyData
   namespace: Client.UI.Agent
@@ -63216,7 +63348,17 @@ structs:
     name: DebugCommands
     offset: 24
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 83 F8 ?? 74 ?? 83 F8 ?? 0F 85 ?? ?? ?? ?? 48 8B 07
+    return_type: int
+    name: TryInvokeDebugCommand
+    parameters:
+    - type: Component::Shell::ShellCommands*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: message
+    - type: Client::UI::UIModule*
+      name: uiModule
 - type: Component::Text::MacroEncoder
   name: MacroEncoder
   namespace: Component.Text
@@ -65457,6 +65599,195 @@ structs:
       name: glamourSetLink
     - type: unsigned __int16
       name: openerAddonId
+- type: Client::UI::Agent::AgentSatisfactionSupply
+  name: AgentSatisfactionSupply
+  namespace: Client.UI.Agent
+  union: False
+  size: 1280
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+  - type: Client::UI::Agent::AgentSatisfactionSupply::SatisfactionSupplyNpcInfo
+    name: NpcInfo
+    offset: 64
+  - type: byte
+    name: HaveExpRewards
+    offset: 92
+  - type: unsigned __int16
+    name: ClassJobId
+    offset: 94
+  - type: unsigned __int16
+    name: ClassJobLevel
+    offset: 96
+  - type: Client::Game::SatisfactionSupplyManager::NpcInfo
+    name: NpcData
+    offset: 100
+  - type: Client::UI::Agent::AgentSatisfactionSupply::ItemInfo
+    name: Items
+    offset: 128
+    size: 3
+  - type: __int64
+    name: ENpcResidentRow
+    offset: 312
+  - type: __int64
+    name: Item1Row
+    offset: 320
+  - type: __int64
+    name: Item2Row
+    offset: 328
+  - type: __int64
+    name: Item3Row
+    offset: 336
+  - type: Client::UI::Agent::AgentDeliveryItemInfo
+    name: DeliveryInfo
+    offset: 344
+    size: 3
+  - type: __int64
+    name: Item1Reward1Row
+    offset: 1136
+  - type: __int64
+    name: Item2Reward1Row
+    offset: 1144
+  - type: __int64
+    name: Item3Reward1Row
+    offset: 1152
+  - type: __int64
+    name: Item1Reward2Row
+    offset: 1160
+  - type: __int64
+    name: Item2Reward2Row
+    offset: 1168
+  - type: __int64
+    name: Item3Reward2Row
+    offset: 1176
+  - type: __int64
+    name: GilRow
+    offset: 1184
+  - type: __int64
+    name: CrafterScripRow1
+    offset: 1192
+  - type: __int64
+    name: CrafterScripRow2
+    offset: 1200
+  - type: __int64
+    name: GathererScripRow1
+    offset: 1208
+  - type: __int64
+    name: GathererScripRow2
+    offset: 1216
+  - type: __int64
+    name: FishingSpotRow
+    offset: 1224
+  - type: __int64
+    name: SpearfishingNotebookRow
+    offset: 1232
+  - type: unsigned int
+    name: CrafterScripId1
+    offset: 1240
+  - type: unsigned int
+    name: CrafterScripId2
+    offset: 1244
+  - type: unsigned int
+    name: GathererScripId1
+    offset: 1248
+  - type: unsigned int
+    name: GathererScripId2
+    offset: 1252
+  - type: unsigned int
+    name: TimeRemainingHours
+    offset: 1256
+  - type: unsigned int
+    name: TimeRemainingMinutes
+    offset: 1260
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
 - type: Client::UI::Agent::AgentStatus
   name: AgentStatus
   namespace: Client.UI.Agent
@@ -119763,6 +120094,9 @@ structs:
     name: WaitTimeMs
     offset: 680
   - type: byte
+    name: ShowCommandErrors
+    offset: 685
+  - type: byte
     name: MacroLocked
     offset: 691
   - type: int
@@ -119830,6 +120164,9 @@ structs:
   - type: unsigned int
     name: Flags
     offset: 4624
+  - type: unsigned int
+    name: ErrorData
+    offset: 4628
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4D 28
@@ -127003,6 +127340,10 @@ structs:
   - type: Common::Configuration::ChangeEventInterface
     name: ChangeEventInterface
     offset: 24
+  - type: Client::UI::UIModule::UIModuleHandler
+    name: UIModuleHandlers
+    offset: 48
+    size: 57
   - type: Client::UI::RaptureAtkHistory
     name: AtkHistory
     offset: 960
