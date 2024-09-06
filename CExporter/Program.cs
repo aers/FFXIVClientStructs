@@ -32,6 +32,7 @@ public class Program {
             .GroupBy(t => t.Key).ToDictionary(t => t.Key, t => t.Select(f => f.Value).ToList());
 
         Exporter.VerifyNoNameOverlap(dataCheck);
+        Exporter.ProcessDefinedVTables(data);
 
         Console.WriteLine($"Processed all types in: {DateTime.Now - timeStart}");
         timeStart = DateTime.Now;
