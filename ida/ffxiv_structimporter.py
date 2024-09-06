@@ -389,8 +389,9 @@ if api is None:
                 else:
                     return ida_struct.get_struc_size(ida_struct.get_struc_id(type))
 
-            def get_named_type(self, tinfo, name):
-                # type: (idaapi.tinfo_t, str) -> None
+            def get_named_type(self, name):
+                # type: (str) -> idaapi.tinfo_t
+                tinfo = ida_typeinf.tinfo_t()
                 if (
                     ida_struct.get_struc_id(self.clean_struct_name(name))
                     != idaapi.BADADDR
@@ -399,22 +400,22 @@ if api is None:
                         tinfo.get_named_type(
                             idaapi.get_idati(), self.clean_struct_name(name)
                         )
-                        return
+                        return tinfo
                     
                 if name == "void":
                     idaapi.parse_decl(tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL)
-                    tinfo = tinfo.get_rettype()
-                    return
+                    return tinfo.get_rettype()
 
                 terminated = name + ";"
                 idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
 
                 tinfo_str = tinfo.dstr()
                 if tinfo_str == name or tinfo_str == self.clean_struct_name(name):
-                    return
+                    return tinfo
 
                 terminated = self.clean_struct_name(name) + ";"
                 idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+                return tinfo
 
             def get_tinfo_from_type(self, raw_type, array_size=0):
                 # type: (str, int) -> idaapi.tinfo_t
@@ -422,14 +423,12 @@ if api is None:
                 Retrieve a tinfo_t from a raw type string.
                 """
 
-                type_tinfo = ida_typeinf.tinfo_t()
-                ptr_tinfo = None
-
                 type = raw_type.rstrip("*")
                 ptr_count = len(raw_type) - len(type)
 
-                self.get_named_type(type_tinfo, type)
+                type_tinfo = self.get_named_type(type)
 
+                ptr_tinfo = None
                 if ptr_count > 0:
                     for i in range(ptr_count):
                         ptr_tinfo = idaapi.tinfo_t()
