@@ -8730,6 +8730,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140311E50: ctor
+  Client::UI::Agent::AgentMutelist:
+    vtbls:
+      - ea: 0x141EC8FD0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFriendlist:
     vtbls:
       - ea: 0x141EC9078
