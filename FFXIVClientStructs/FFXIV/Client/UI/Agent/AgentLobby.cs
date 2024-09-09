@@ -50,7 +50,6 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x1154)] public uint LoadSavedCharacterCreationDataDialogAddonId; // SelectYesno
     [FieldOffset(0x1158)] public uint CreateNewCharacterDialogAddonId; // SelectYesno
     [FieldOffset(0x115C)] public uint LobbyWKTAddonId;
-    [FieldOffset(0x1160)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     [FieldOffset(0x1164)] public byte LobbyUpdateStage;
 
@@ -69,6 +68,8 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x12A0)] public bool TemporaryLocked; // "Please wait and try logging in later."
 
     [FieldOffset(0x12B8)] public ulong RequestContentId;
+
+    [FieldOffset(0x1E14)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     // TODO: everything below here is wrong
 
