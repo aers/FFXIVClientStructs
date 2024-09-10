@@ -2401,7 +2401,30 @@ classes:
       0x140B75400: IsActionUnlocked
       0x140B758D0: GetMaxCharges              # static
       0x140B75FC0: OnCastStarted
+  Client::Game::DutyActionManager:
+    funcs:
+      0x140B76870: ctor
+      0x140B768C0: dtor
+      0x140B76980: Tick
+      0x140B76A50: HasAction
+      0x140B76D00: IsPrimaryCostTypeDutyAction
+      0x140B76D10: GetCurChargesByPrimaryCostType
+      0x140B76D60: GetNumChargesByPrimaryCostType
+      0x140B76EE0: GetPrimaryCostTypeByActionId
       0x140B76F60: GetDutyActionId            # (byte dutyActionSlot) -> uint
+      0x140B77000: ReadRowData
+      0x140B77050: GetInstanceIfReady
+      0x140B77080: ProcessActorControlStatic
+      0x140B77100: SetRecastTimes
+      0x140B771A0: GetActionInSlot
+      0x140B77360: SetContentExRow
+      0x140B773B0: Clear
+      0x140B774A0: SetActions
+      0x140B775A0: IsActionActive
+      0x140B777D0: GetSlotForAction
+      0x140B77A70: SetActionsPresent
+      0x140B77AF0: SetActionActive
+      0x140B77B50: ProcessActorControl
   Client::Game::JobGaugeManager:
     instances:
       - ea: 0x14272E0E0
