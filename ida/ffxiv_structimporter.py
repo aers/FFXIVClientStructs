@@ -52,7 +52,7 @@ class DefinedMemFunc:
 
 class DefinedField(DefinedFuncParam, object):
     def __init__(self, name, type, offset, base):
-        # type: (str, str, int, str | None) -> None
+        # type: (str, str, int, bool) -> None
         super(DefinedField, self).__init__(name, type)
         self.offset = offset
         self.base = base
@@ -60,7 +60,7 @@ class DefinedField(DefinedFuncParam, object):
 
 class DefinedFuncField(DefinedField, object):
     def __init__(self, name, type, offset, base, return_type, params):
-        # type: (str, str, int, str | None, list[DefinedFuncParam] | None) -> None
+        # type: (str, str, int, bool, str | None, list[DefinedFuncParam] | None) -> None
         super(DefinedFuncField, self).__init__(name, type, offset, base)
         self.return_type = return_type
         self.parameters = params
@@ -68,7 +68,7 @@ class DefinedFuncField(DefinedField, object):
 
 class DefinedFixedField(DefinedField, object):
     def __init__(self, name, type, offset, base, size):
-        # type: (str, str, int, str | None) -> None
+        # type: (str, str, int, bool, str | None) -> None
         super(DefinedFixedField, self).__init__(name, type, offset, base)
         self.size = size
 
