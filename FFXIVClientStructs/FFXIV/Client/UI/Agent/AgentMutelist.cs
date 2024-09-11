@@ -10,6 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 public unsafe partial struct AgentMutelist {
-    [FieldOffset(0x68)] public Utf8String SelectedPlayerFullName; // includes cross world icon
     [FieldOffset(0x58)] public ulong SelectedPlayerAccountId;
+    [FieldOffset(0x68)] public Utf8String SelectedPlayerFullName; // includes cross world icon
 }
