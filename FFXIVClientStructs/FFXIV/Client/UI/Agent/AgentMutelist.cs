@@ -2,7 +2,7 @@
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-// Client::UI::Agent::AgentMustlist
+// Client::UI::Agent::AgentMutelist
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [Agent(AgentId.Mutelist)]
