@@ -83,4 +83,5 @@ public unsafe partial struct MacroDecoder {
 // |    97 | Integer              | Log Role Color - Healer (LogColorRoleHealer)             |
 // |    99 | Integer              | Log Role Color - DPS (LogColorRoleDPS)                   |
 // |   101 | Integer              | Log Role Color - Other (LogColorOtherClass)              |
+// | ? 102 | Integer              | Has Login Security Token (set in UIModule.HandlePacket case 0) |
 // |-------|----------------------|----------------------------------------------------------|

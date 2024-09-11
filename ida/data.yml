@@ -6948,6 +6948,7 @@ classes:
       158: HideGoldSaucerReward
       159: ShowTextRelicAtma
       161: HideGoldSaucerReward_2
+      165: HideGoldSaucerReward_3
       167: ShowHousingHarvest
       169: OpenMiniGame
       170: HideHousingHarvest
@@ -6961,7 +6962,7 @@ classes:
       178: ShowGetAction
       179: ShowLocationTitle
       180: HideLocationTitle
-      183: ShowGrandCompany1
+      183: ShowGrandCompanyRankUp
       186: ShowStreak
       187: ShowAddonKillStreakForManeuvers
       188: ShowBaloonMessage
@@ -6976,7 +6977,9 @@ classes:
       198: IsMainCommandUnlocked
       201: ShowRaceCountdownEnd
       205: IsDutyRaidFinderOpen
+      211: ShowAdventureNotice
       215: RotateLinkshellHistory
+      216: SetLinkshellCycle
       217: RotateCrossLinkshellHistory
       233: ShowRaceCountdownStart
       234: ShowRaceCountdownEnd_2
@@ -15837,6 +15840,7 @@ classes:
       - ea: 0x142033C00
     funcs:
       0x141686C60: ctor
+      0x141686F40: ShouldDrawGameObject
   Client::Game::Camera:
     vtbls:
       - ea: 0x142033C68
