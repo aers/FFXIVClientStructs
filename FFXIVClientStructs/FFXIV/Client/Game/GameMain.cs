@@ -23,7 +23,7 @@ public unsafe partial struct GameMain {
     [FieldOffset(0x409C)] public uint CurrentTerritoryIntendedUseId;
     [FieldOffset(0x40A0)] public uint CurrentTerritoryFilterKey;
     [FieldOffset(0x40A4)] public ushort CurrentContentFinderConditionId;
-    [FieldOffset(0x40A8)] public uint TransitionTerritotyTypeId;
+    [FieldOffset(0x40A8)] public uint TransitionTerritoryTypeId;
     [FieldOffset(0x40AC)] public uint TransitionTerritoryFilterKey;
 
     [FieldOffset(0x40B0)] public uint CurrentMapId;
