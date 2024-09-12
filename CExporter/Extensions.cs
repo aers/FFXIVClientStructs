@@ -71,6 +71,11 @@ public static partial class TypeExtensions {
         return type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == name && f.FieldType == field.FieldType) || type.GetFields(ExporterStatics.BindingFlags).Any(f => f.Name == field.Name && f.FieldType == field.FieldType);
     }
 
+    public static bool IsDirectBase(this FieldInfo field) {
+        var bases = field.DeclaringType?.GetInheritsTypes() ?? [];
+        return bases.Any(b => field.FieldType == b && field.Name == (b.Name == field.DeclaringType?.Name ? b.Name + "Base" : b.Name));
+    }
+
     public static string FixTypeName(this Type type, bool shouldLower = true) {
         using var builderPooled = StringBuilderPool.Get(500);
         var builder = builderPooled.Builder;
