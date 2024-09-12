@@ -131,7 +131,9 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(178)] public partial void ShowGetAction(ActionType actionType, uint actionId);
     [VirtualFunction(179)] public partial void ShowLocationTitle(uint territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
     // [VirtualFunction(180)] public partial ??? HideLocationTitle(???);
+    [Obsolete("Renamed to ShowGrandCompanyRankUp")]
     [VirtualFunction(183)] public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
+    [VirtualFunction(183)] public partial void ShowGrandCompanyRankUp(uint gc, uint gcRank, bool playSound = true);
     [VirtualFunction(186)] public partial void ShowStreak(int streak, int streakType);
     [VirtualFunction(187)] public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
     [VirtualFunction(188)] public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
@@ -146,8 +148,10 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(198)] public partial bool IsMainCommandUnlocked(uint command);
     // [VirtualFunction(201)] public partial ??? ShowRaceCountdownEnd(???);
     // [VirtualFunction(205)] public partial ??? IsDutyRaidFinderOpen(???);
-    [VirtualFunction(215)] public partial int RotateLinkshellHistory(int offset);
-    [VirtualFunction(217)] public partial int RotateCrossLinkshellHistory(int offset);
+    [VirtualFunction(211)] public partial void ShowAdventureNotice(int index);
+    [VirtualFunction(215)] public partial int RotateLinkshellHistory(int offset); // TODO: return void
+    [VirtualFunction(216)] public partial void SetLinkshellCycle(int linkshellCycle);
+    [VirtualFunction(217)] public partial int RotateCrossLinkshellHistory(int offset); // TODO: return void
     // [VirtualFunction(233)] public partial ??? ShowRaceCountdownStart(???);
     // [VirtualFunction(234)] public partial ??? ShowRaceCountdownEnd_2(???);
 }
