@@ -13,6 +13,11 @@ globals:
   0x14256E990: g_InverseStackCookie
   0x14258AB68: g_stdout
   0x14258A600: g_ffxiv_dx11_module
+  0x14258C4B8: g_XInputWrapper_Library
+  0x14258C4C0: g_XInputWrapper_GetVersion
+  0x14258C4C8: g_XInputWrapper_Enable
+  0x14258C4D0: g_XInputWrapper_GetState
+  0x14258C4D8: g_XInputWrapper_SetState
   0x14258C5F0: g_ThreadLocalPerformanceFrequency
   0x14258C608: g_FrameCountAccum # accumulates over a second to calc FPS
   0x14258C60C: g_FrameTimeAccum # accumulates over a second to calc FPS
@@ -101,6 +106,8 @@ functions:
   0x1400BA600: IsCurrentWorldId
   0x1400BA690: GetHomeWorldId
   0x1400BA6E0: GetCurrentWorldId
+  0x1400BA9D0: AreWorldsFromSameDC
+  0x1400BAAB0: AreWorldsFromSameRegion
   0x1401D7480: GetTime
   0x14021A440: j_SleepEx
   0x14021A450: j_Sleep
@@ -304,6 +311,8 @@ functions:
   0x1400B9F60: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400BA120: GetPartyMemberClassJobByContentId
   0x1408963F0: ObjectIdToEntityId # returns invalid id if objectid is not a player
+  0x1408DBFB0: ProcessPacketEventPlay
+  0x1408DC490: ProcessPacketSystemLogMessage
   0x1408DFFC0: ProcessPacketSpawnPlayer
   0x1408E00B0: ProcessPacketSpawnNPC
   0x1408E01B0: ProcessPacketSpawnBoss
@@ -365,7 +374,12 @@ functions:
   0x1408F2E10: ProcessPacketRSFData
   0x1408F2E70: ProcessPacketHuntingLogEntry
   0x1408F2EB0: ProcessPacketNPCYell
+  0x1408F5CC0: ProcessPacketMapEffect
   0x14163F170: ProcessPacketUIModulePacket
+  0x141826FA0: ProcessPacketCountdown
+  0x141827010: ProcessPacketCountdownCancel
+  0x1408F4DF0: CreatePacketTargetIfQueued
+  0x1408F69D0: InitIdScramble
   0x140D024D0: IsInMordionGaol # if this returns true, i'm sorry for you
   0x140AC5CF0: GetCharacterEffectiveBattalion # returns either battalion from character data or 0, depending on current territory properties
   0x140AC5DB0: GetCurrentTerritoryBattalionMode
@@ -379,6 +393,7 @@ functions:
   0x140AC6110: IsCharacterPartyMemberOrPartyBuddy
   0x140AC6200: IsCharacterPartyPet
   0x140AC62C0: IsCharacterBattalionFriendlyToPlayer
+  0x140CFD000: UseBozjaActionFromHolster
   0x141759F90: ScheduleClipUpdate
   0x1417D35C0: GetInstanceContentCrystallineConflictDirector
   0x14183CE30: GetInstanceContentMahjongDirector
@@ -427,6 +442,7 @@ functions:
 classes:
   Common::TimePoint:
     funcs:
+      0x1400A5880: Now2
       0x1403D3E10: Now
       0x1405C47A0: ctor
   MemoryManager:
@@ -451,11 +467,13 @@ classes:
       0x1405E4360: Initialize
       0x1405E4790: Terminate
       0x1405E4B70: Update
+      0x1405E5220: StartTerritoryTransition
       0x1405E55F0: QueueActiveFestivals
       0x1405E6B40: IsInGPose  # (probably) static
       0x1405E6B80: IsInIdleCam  # static
       0x1405E6D70: IsInInstanceArea
       0x1405E6EB0: GetTourismDirector
+      0x1405E7330: UpdateGameSpeedMultiplier
       0x1405E7420: SetActiveFestivals
       0x140AC7190: IsInPvPInstance
       0x140AC7240: IsInPvPArea
@@ -538,6 +556,9 @@ classes:
       0x141AB3660: ctor
   Client::Game::StatusManager:
     funcs:
+      0x14089D5D0: OnGainStatus
+      0x14089F190: OnLoseStatus
+      0x1408A1380: RefreshLoseControlFlag
       0x1408A1410: ctor
       0x1408A1810: Reset
       0x1408A1A50: CopyFrom
@@ -569,6 +590,7 @@ classes:
       0x1408A65F0: FindStatusById
       0x1408A6630: GetStatusByIndex
       0x1408A6A80: RefreshFlags
+      0x1408A6D70: FindCharacterByObjectId
   Client::Game::RetainerManager:
     instances:
       - ea: 0x142781F70
@@ -885,6 +907,7 @@ classes:
       0x14093AF10: UpdateObjectArraysWrapper
       0x14093AF20: UpdateObjectArraysWrapper2
       0x14093AF40: ctor
+      0x14093AFB0: LookupAreaObjectByOwnerId
       0x14093B160: Update
       0x14093B700: UpdateMountAndCompanionMovement # maybe?
       0x14093B970: UpdateLookAt
@@ -924,7 +947,10 @@ classes:
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140937CC0: Initialize
-      0x140938340: Update
+      0x1409381A0: Finalize
+      0x140938240: Tick
+      0x140938300: UpdateAnimations
+      0x140938340: UpdateMovement
       0x1409383A0: UpdateCompanions
       0x140938420: CreateCharacterAtFirstEmptyIndex
       0x140938570: CreateCharacterAtIndex
@@ -1779,6 +1805,7 @@ classes:
       0x140B43310: IsEmoteUnlocked
       0x140B43480: IsItemActionUnlocked
       0x140B41280: IsTripleTriadCardUnlocked
+      0x140B42370: Dismount
       0x140B429B0: RequestResetTimestamps # MapAllowance, ChallengeLogReset
       0x140B429F0: HasNextMapAllowanceTimestamp
       0x140B42A10: GetNextMapAllowanceTimestamp
@@ -1804,6 +1831,10 @@ classes:
     instances:
       - ea: 0x142767450
         pointer: False
+    funcs:
+      0x140AD2DF0: UpdateAllNames
+      0x140AD2E80: IsEntityInList
+      0x140AD2EB0: UpdateEntityName
   Client::Game::UI::Chain:
     instances:
       - ea: 0x142767D58
@@ -1819,6 +1850,9 @@ classes:
     funcs:
       0x140AD3960: ReadPacket
       0x140AD7BE0: SetCharacterName   # inlined
+      0x140AD7CE0: SetClassJobId
+      0x140AD7DB0: GetClassJobId
+      0x140AD84D0: SetSyncedLevel
       0x140AD89E0: GetGrandCompanyRank
       0x140AD9520: GetBeastTribeRank
       0x140AD95A0: GetBeastTribeCurrentReputation
@@ -1860,7 +1894,15 @@ classes:
       0x140ADDF40: GetParentClassJobId
       0x140AD9780: IsPlayerStateFlagSet
       0x140B51320: ctor
+      0x140ADD200: GetClassJobLevel
+      0x140ADD380: SetCurrentLevel
+      0x140ADD3A0: SetClassJobLevel
+      0x140ADD500: GetMaxLevel
+      0x140ADD760: IsCurrentJobCombat
+      0x140ADD7C0: SetClassJobExp
       0x140ADDA60: GetAttributeByIndex # (this, index)
+      0x140ADB120: SetEurekaRank
+      0x140ADB220: SetBozjaRank
       0x140ADB620: TrackTraitUnlock
       0x140ADB6B0: TrackTraitUnlocks
       0x140ADB860: TrackStatus
@@ -2147,9 +2189,27 @@ classes:
     vfuncs:
       0: dtor
     funcs:
-      0x140B04AB0: PlacePreset
+      0x140B03830: Reset
+      0x140B03D80: PlaceFieldMarker
+      0x140B03F40: ClearFieldMarker
       0x140B040C0: ClearFieldMarkers
-  Client::Game::LimitBreakController:
+      0x140B042D0: ClearObjectMarker
+      0x140B04380: SetObjectMarkers
+      0x140B043E0: ShowError
+      0x140B04800: SetLetterMarker
+      0x140B04820: GetMarkerForObject
+      0x140B04850: GetLetterMarkerForObject
+      0x140B04880: GetMarkerIconForObject
+      0x140B048E0: IsFieldMarkerActive
+      0x140B04900: GetFieldMarker
+      0x140B04920: GetMarkedObject
+      0x140B04930: GetLetterMarkedObject
+      0x140B04960: GetFieldMarkersPreset
+      0x140B04AB0: PlacePreset
+      0x140B04DC0: GetFieldMarkerActionStatus
+      0x140B04EB0: SetObjectMarker
+      0x140B05710: AddPendingFieldMarker
+  Client::Game::UI::LimitBreakController:
     instances:
       - ea: 0x1427770A0
         pointer: False
@@ -2158,7 +2218,9 @@ classes:
     vfuncs:
       0: dtor
     funcs:
+      0x140B057E0: SetValues
       0x140B05810: GetActionId
+      0x140B05870: IsValidLBActionForClass
   Client::Game::TitleController:
     instances:
       - ea: 0x1427770B0  # UIState.TitleController
@@ -2432,7 +2494,11 @@ classes:
     funcs:
       0x140B81A60: ctor
       0x140B81A90: dtor
-      0x140B81BE0: Update
+      0x140B81AD0: Tick
+      0x140B81AF0: OverrideStatusRemaining
+      0x140B81B50: GetStatusManager
+      0x140B81BE0: ReceivePacket
+      0x140B81C80: SetValues
       0x140B81DD0: ChangeGauge
   Client::Game::Gauge::JobGauge:
     vtbls:
@@ -2440,6 +2506,7 @@ classes:
     vfuncs:
       0: dtor
       1: Init
+      2: Tick
       3: RecievePacketValues
       4: SetValues
       9: ProcessDeferredReplaceAction
@@ -2581,12 +2648,18 @@ classes:
     funcs:
       0x14009B250: ctor
       0x14009B370: Destroy
-      0x14009BA50: Initialize
+      0x14009BA50: StartFade
+      0x14009BB70: IsFadeActive
       0x14009BB80: SetLanguage
       0x14009BBF0: GetCutsceneLanguage
       0x14009BCD0: SetCutsceneLanguage
       0x14009BCE0: GetClientLanguage #static
       0x14009BE60: GetWindowMode #static
+      0x14009BF20: SetWindowMode
+      0x14009C840: IsWindowModeActive
+      0x14009C920: IsWindowModeSwitchInProgress
+      0x14009C940: SetWindowModeWindowed
+      0x14009C9B0: SetWindowModeFullscreen
       0x14009CA20: GetWindowRectFromConfig
       0x14009CB50: OpenGameWindow
       0x14009CE30: GetVirtualScreenResolution
@@ -2643,7 +2716,7 @@ classes:
         pointer: false
     funcs:
       0x140065D90: SetWindowRect
-      0x140066050: Show # (bool maximized)
+      0x140066050: SetBorderless # (bool maximized)
       0x140066150: SetWindowSize
       0x1400662A0: GetWindowPos
       0x140066300: SetWindowPos
@@ -2713,10 +2786,14 @@ classes:
       4: Tick
     funcs:
       0x14009EAD0: ctor
+      0x1400A2330: SetInactive
+      0x1400A23F0: UpdateClipCursor
+      0x1400A24E0: PauseResumeFrameTicks
       0x1400A27D0: GetNetworkModuleProxy
       0x1400A27F0: GetUIModule
       0x1400A2810: GetUIClipboard
       0x1400A2820: GetUIInputData
+      0x1400A29E0: GetBuildRevision # static
       0x1400A3410: TaskBegin
       0x1400A3690: TaskDraw2DBegin
       0x1400A36D0: TaskUpdateInputDevice
@@ -3784,6 +3861,8 @@ classes:
         base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x140123630: ctor
+      0x140126ED0: ModifyCountdown
+      0x140126F90: CancelCountdown
       0x1401D1D50: Finalize
   Client::UI::Info::InfoProxyNoviceNetwork:
     vtbls:
@@ -5539,9 +5618,11 @@ classes:
         base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x1405FB760: ctor
+      0x1405FB870: OnObjectDestroyed
       0x140602670: ProcessMouseState
       0x140605240: InteractWithObject
       0x1406099C0: OpenObjectInteraction
+      0x140605AB0: Initialize
       0x140605D10: Update
       0x140607200: GetHardTargetObjectId
       0x140607220: GetHardTargetId
@@ -6529,6 +6610,9 @@ classes:
       0x1406E6CC0: UnloadRsvMap
       0x1406E6E10: ResolveRsvString
       0x14072D050: UnloadPrefetchLayout
+      0x14072D0C0: ActiveLayoutReady
+      0x14072D0F0: ActiveLayoutStreamed
+      0x14072D520: ActiveLayoutHousingReady
   Client::LayoutEngine::LayoutManager:
     vtbls:
       - ea: 0x141EF94F0
@@ -6832,6 +6916,10 @@ classes:
       - ea: 0x141F05950
     funcs:
       0x1407D0890: ctor
+      0x1407D0CB0: Update
+  Client::UI::Misc::InputTimerModule::InputTimerData:
+    funcs:
+      0x1407D0A70: Update
   Client::UI::UI3DModule::MapInfo:
     vtbls:
       - ea: 0x141F05958
@@ -7518,6 +7606,7 @@ classes:
     funcs:
       0x1407D5A00: ctor
       0x1407D5CB0: ResolvePlaceholder
+      0x1407D62E0: SetUiMouseoverTarget
   Client::UI::Misc::RaptureGearsetModule:
     vtbls:
       - ea: 0x141F0C520
@@ -7779,14 +7868,29 @@ classes:
       68: OnInitialize
     funcs:
       0x140896240: IsMountOrOrnament
+      0x1408965F0: SetName
       0x140896750: SetDrawOffset
       0x140896E80: GetPosition
       0x140896ED0: SetPosition
+      0x140896F20: GetPositionRaw
+      0x140896F30: SetPositionRaw
+      0x140896F60: GetRotationVector
       0x140896F80: SetRotation
+      0x140896FD0: SetRotationVector
+      0x140897320: UpdateVisualPosition
+      0x140897570: UpdateVisualRotation
+      0x140897700: UpdateVisualScale
       0x1408980F0: IsReadyToDraw
+      0x140898A00: SetEventId
+      0x140898A70: SetFateId
       0x140898A90: SetEventState
       0x140899290: GetAsCharacter
       0x1408992C0: GetAsBattleCharaMaybe # might be some other cast, or even Character too?
+      0x140899480: DistanceBetweenHitboxesXZ # static
+      0x140899740: DistanceBetweenHitboxesXYZ # static
+      0x14089AF30: GetFrameDeltaTime
+      0x14089AF80: GetFrameDeltaMultiplier
+      0x14089AFC0: GetFrameDeltaMultiplier2
       0x14089B790: Initialize
       0x14089B980: ctor
       0x141831BE0: PlayFootStepSound
@@ -7808,8 +7912,15 @@ classes:
       86: GetForayInfo_2
     funcs:
       0x1408962D0: IsValidClientObject
-      0x1408D8CE0: IsCasting
+      0x1408CEFB0: CalculateMovementSpeedMultiplier
+      0x1408D1640: GetVfxDuration
+      0x1408D1670: GetGMRank
+      0x1408D1B90: GetPartMasterId
       0x1408D1BC0: GetCompanionOwnerID
+      0x1408D1C10: IsPartOwnedBy
+      0x1408D1C50: GetEventNpcOwnerId
+      0x1408D1CD0: SetAccountId
+      0x1408D1D10: SetContentId
       0x1408D1D50: IsWanderer # World Visit
       0x1408D1DA0: IsTraveler # Data Center Travel
       0x1408D1DF0: IsVoyager  # Cross-region Data Center Travel
@@ -7819,16 +7930,25 @@ classes:
       0x1408D23C0: SetSoftTargetId
       0x1408D2440: GetSoftTargetId
       0x1408D2940: CalculateHeight
+      0x1408D2AC0: UpdateHitboxRadius
+      0x1408D2B20: CalculateUnscaledRadius
+      0x1408D2CA0: UpdateUnscaledRadius
+      0x1408D2CD0: ClearOmenVfx
       0x1408D30E0: SetMode
       0x1408D4E10: Finalize
+      0x1408D55C0: ForceMovementTo
+      0x1408D5680: ForceMovement
+      0x1408D7650: UpdateMovement
+      0x1408D81D0: CompleteCast
+      0x1408D8CE0: IsCastingSpell
       0x1408D8D40: StartCast
       0x1408D8E60: CancelCast
-      0x1408CEFB0: CalculateMovementSpeedMultiplier
+      0x1408D90C0: IsCastInProgress
+      0x1408D92F0: CalculateOmenSize
       0x1408DA4A0: StartOmen
       0x1408DA840: StartOmenDirectional
       0x1408CF560: ctor
       0x140897060: GetScale
-      0x14089AF30: GetFrameDeltaTime
   Client::Game::Character::Character::CastInfo:
     funcs:
       0x140B61CE0: Reset
@@ -7839,6 +7959,13 @@ classes:
       0x140B61EF0: Finish
       0x140B61F40: UpdateTotal
       0x140B62010: SetResponseAction
+  Client::Game::Character::ForayInfo:
+    funcs:
+      0x141830E60: ctor
+      0x141830E70: dtor
+      0x141830E80: SetEurekaRank
+      0x141830EB0: SetEurekaElement
+      0x141830EE0: SetBozjaRank
   Client::Game::Control::CharacterLookAtController:
     vtbls:
       - ea: 0x141EF2DC8
@@ -7930,6 +8057,11 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
       0x1408C8980: ctor
+      0x1408C8A80: InitPlayer
+      0x1408C8BA0: InitNPC
+      0x1408C8BB0: InitBoss
+      0x1408C8C00: InitCommon
+      0x1408CA030: InitNPCCommon
       0x1408CA1B0: SetupRaw
       0x1408CB3B0: SetupPlayer
       0x1408CB450: SetupBNpc
@@ -7978,8 +8110,38 @@ classes:
   Client::Game::Character::CharacterData:
     vtbls:
       - ea: 0x141F0FE58
+    vfuncs:
+      0: dtor
+      1: ClassJobChanged
     funcs:
+      0x14089C8C0: Reset
       0x14089C990: GetModelCharaId
+      0x14089C9B0: GetModelSkeletonId
+      0x14089CBA0: GetRPParameterId
+      0x14089CBD0: GetClassJobForbidRP
+      0x14089CC10: GetClassJobAllowRP
+      0x14089CC60: GetRole
+      0x14089CCC0: SetClassJob
+      0x14089CCF0: IsClassJob
+      0x14089CDA0: IsClassJobCategory
+      0x14089CE00: IsDOWorDOM
+      0x14089CE50: IsDOW
+      0x14089CEA0: IsDOM
+      0x14089CEF0: IsDOL
+      0x14089CF40: IsDOH
+      0x14089CF90: GetJobIndex
+      0x14089CFE0: IsTank
+      0x14089D030: IsDD
+      0x14089D090: IsMelee
+      0x14089D0E0: IsRanged
+      0x14089D130: IsHealer
+      0x14089D180: IsPureHealer
+      0x14089D1D0: IsShieldHealer
+      0x14089D220: IsMelee2
+      0x14089D2D0: IsHealerOrCaster
+      0x14089D380: IsLimitedJob
+      0x14089D520: IsTaggedByNoneOrSelf
+      0x14089D580: IsTaggedByNoneOrOther
   Client::Game::Character::TimelineContainer:
     vtbls:
       - ea: 0x141F0FF90
@@ -9938,6 +10100,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140C60750: ctor
+      0x140C60D10: IsPaused
+      0x140C60D40: GetTimeSpeedMultiplier
   Client::UI::Agent::AgentContentsReplaySetting:
     vtbls:
       - ea: 0x141F5ADA8
@@ -10581,6 +10745,7 @@ classes:
       0x140BA6550: Finalize
       0x140BA7AC0: OpenRecipeByRecipeId # OpenRecipeByRecipeIdInternal in cs
       0x140BA7BE0: OpenRecipeByItemId
+      0x140BAC6C0: CanCraft
       0x140BAE140: SearchRecipe
   Client::UI::Agent::RecipeSearchContext:
     vtbls:
@@ -12142,7 +12307,11 @@ classes:
       0x1409D0350: GetInstance
       0x1409D02B0: Initialize
       0x1409D11E0: Finalize
+      0x1409D75F0: ProcessEventPlay
+      0x1409D8500: ProcessSystemLogMessage
+      0x1409D9DC0: SetTerritoryTypeId
       0x1409DA140: ProcessDirectorUpdate
+      0x1409DB360: ProcessMapEffect
       0x1409DD480: GetDirectorByEventId
       0x1409DD4D0: GetCompanyLeveDirector
       0x1409DD530: GetInstanceContentDirector
@@ -12228,6 +12397,7 @@ classes:
       319: SetExperience
     funcs:
       0x1409B3B80: ctor
+      0x1409B5420: ApplyMapEffect
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
       - ea: 0x1420858C8

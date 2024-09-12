@@ -53,6 +53,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x2208)] public GameObjectId SoftTargetId;
 
     [FieldOffset(0x2214)] public float CastRotation;
+    [FieldOffset(0x221C)] public float UnscaledRadius; // if character is unmounted, it's hitbox radius is calculated to be this value multiplied by scale
 
     [FieldOffset(0x2240)] public uint NameId;
 
@@ -65,6 +66,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x226C)] public CharacterModes Mode;
     [FieldOffset(0x226D)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
+    [FieldOffset(0x226F)] public byte GMRank;
     [FieldOffset(0x2270)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
     public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;

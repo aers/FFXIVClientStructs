@@ -81,6 +81,12 @@ public unsafe partial struct GameObject {
     [VirtualFunction(47)]
     public partial uint GetNameId();
 
+    [VirtualFunction(54)]
+    public partial void PositionModified();
+
+    [VirtualFunction(55)]
+    public partial void RotationModified();
+
     [VirtualFunction(57)]
     public partial bool IsDead();
 
