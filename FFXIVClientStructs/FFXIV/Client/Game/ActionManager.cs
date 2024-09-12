@@ -247,6 +247,7 @@ public unsafe partial struct ActionManager {
 
     /// <summary>
     /// Returns the ID of the action present at the specified Duty Action slot.
+    /// TODO: this is actually a static member function of the DutyActionManager class, move it there.
     /// </summary>
     /// <param name="dutyActionSlot">The Duty Action slot number (0 or 1) to look up.</param>
     /// <returns>Returns an Action ID.</returns>
