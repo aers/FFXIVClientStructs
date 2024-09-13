@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
+namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [GenerateInterop(isInherited: true)]
 [Inherits<AgentInterface>]
