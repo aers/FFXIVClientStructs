@@ -131,7 +131,7 @@ public class Exporter {
                 var offset = (int)index * 8;
                 var vf = s.VirtualFunctions.FirstOrDefault(vf => vf.Offset == offset);
                 if (vf == null)
-                    s.VirtualFunctions = [..s.VirtualFunctions, new() { VirtualFunctionName = name, Offset = offset }];
+                    s.VirtualFunctions = [.. s.VirtualFunctions, new() { VirtualFunctionName = name, Offset = offset }];
                 else if (vf.VirtualFunctionName != name)
                     ExporterStatics.WarningList.Add($"Virtual function name mismatch: {c.Key} vf#{index}, '{vf.VirtualFunctionName}' in CS, '{name}' in data.yml");
             }
