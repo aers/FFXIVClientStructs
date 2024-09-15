@@ -12002,8 +12002,52 @@ classes:
     vtbls:
       - ea: 0x141F320A0
         base: Client::Game::Event::EventHandler
+      - ea: 0x141F328F0
+      - ea: 0x141F32900
     funcs:
       0x1409EA0A0: ctor
+      0x1409EA430: CreateInstance
+      0x1409EB210: ExecuteAgentOperation
+      0x1409EB950: SellStackStatic
+      0x1409EBB20: SellStack
+      0x1409EBCA0: ExecuteTransaction
+      0x1409EBDA0: SetIsTradingWithRetainer
+      0x1409EBDD0: IsWaiting
+      0x1409EBDF0: GetBuybackItemPrice
+      0x1409EC070: GetBuybackItemDataStatic
+      0x1409EC5D0: HandleItemMoved
+      0x1409EC6B0: UpdateOwnedItemCounts
+      0x1409EC8A0: OnItemsRead
+      0x1409ED020: OnGilShopRead
+      0x1409ED0F0: OnGilShopItemRead
+      0x1409ED3E0: OpenOrRefreshAddon
+      0x1409ED9E0: OpenOrRefreshAddonBuyback
+      0x1409EE010: AskConfirmBuy
+      0x1409EE450: AskConfirmSell
+      0x1409EE840: OpenConfirmation
+      0x1409EEBC0: CloseAddons
+      0x1409EECE0: GetBuybackItemData
+      0x1409EEE30: GetBuybackItem
+      0x1409EF350: ExecuteBuy
+      0x1409EF3B0: ExecuteSell
+      0x1409EF460: ExecuteBuyback
+      0x1409EF7F0: SetBuyback
+      0x1409EF960: RequestBuybackUpdate
+      0x1409EFC00: StartReadGilShopItems
+  Client::Game::Event::ShopEventHandler::AgentProxy:
+    instances:
+      - ea: 0x142550558
+        pointer: False
+    vtbls:
+      - ea: 0x141F2ACD0
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::Event::ShopEventHandler::YesNoProxy:
+    instances:
+      - ea: 0x142550588
+        pointer: False
+    vtbls:
+      - ea: 0x141F2AD30
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
       - ea: 0x141F31820
