@@ -7883,6 +7883,7 @@ classes:
       0x140897320: UpdateVisualPosition
       0x140897570: UpdateVisualRotation
       0x140897700: UpdateVisualScale
+      0x140897980: GetEventHandlers
       0x1408980F0: IsReadyToDraw
       0x140898A00: SetEventId
       0x140898A70: SetFateId
@@ -11431,7 +11432,9 @@ classes:
     vfuncs:
       0: dtor
       6: Terminate
+      7: IsUnlocked
       197: GetTitle # lua function "GetEventHandlerTitle"
+      221: GetIconId
       249: GetDescription
       250: GetReliefText
       251: GetTimeRemaining # pass current unix timestamp as a2
@@ -11440,6 +11443,15 @@ classes:
       256: GetObjectives
       259: GetRecommendedLevel
       263: Initialize
+  Client::Game::Event::EventHandlerSelector:
+    instances:
+      - ea: 0x142761B30
+        pointer: False
+    vtbls:
+      - ea: 0x141F2BD78
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x140AA4FF4: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141F2D100
@@ -12354,6 +12366,7 @@ classes:
       0x1409D0350: GetInstance
       0x1409D02B0: Initialize
       0x1409D11E0: Finalize
+      0x1409D2050: InteractWithObject
       0x1409D75F0: ProcessEventPlay
       0x1409D8500: ProcessSystemLogMessage
       0x1409D9DC0: SetTerritoryTypeId
@@ -12373,7 +12386,10 @@ classes:
       0x1409DD790: GetContentDirector
       0x1409DD7A0: GetQuestBattleDirector
       0x1409DD7F0: GetGoldSaucerDirector
+      0x1409E10A0: InteractWithHandlerFromSelector
+      0x1409E21F0: InteractWithSelectorOptions
       0x1409E2840: GetEventHandlerById
+      0x1409E3D40: CheckInteractRange
       0x140B1F350: GetCurrentContentType
       0x140B1F420: GetCurrentContentId # static
       0x140B1F4A0: CanLeaveCurrentContent # static

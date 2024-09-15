@@ -78,6 +78,11 @@ public unsafe partial struct GameObject {
     [VirtualFunction(26)]
     public partial void Highlight(ObjectHighlightColor color);
 
+    /// <param name="outHandlers">Should point to array that can fit up to 32 pointers.</param>
+    /// <returns>Num elements filled.</returns>
+    [VirtualFunction(30)]
+    public partial int GetEventHandlersImpl(EventHandler** outHandlers);
+
     [VirtualFunction(34)]
     public partial void SetReadyToDraw();
 
