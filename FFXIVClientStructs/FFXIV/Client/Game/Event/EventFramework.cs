@@ -33,6 +33,13 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 0B 0F B6 90")]
     public partial PublicContentDirector* GetPublicContentDirector();
 
+    /// <summary>
+    /// When EventHandlerSelector is active, this function is used to select specific event handler to interact with.
+    /// </summary>
+    /// <param name="index">Index of the option in EventHandlerSelector singleton.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 44 89 A7 ?? ?? ?? ?? 44 38 A7")]
+    public partial void InteractWithHandlerFromSelector(int index);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??")]
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
