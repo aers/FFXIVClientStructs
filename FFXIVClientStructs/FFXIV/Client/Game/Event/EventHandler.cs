@@ -16,6 +16,9 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0xC8)] public Utf8String UnkString0;
     [FieldOffset(0x168)] public Utf8String UnkString1;
 
+    [VirtualFunction(154)]
+    public partial void CancelInteraction();
+
     [VirtualFunction(197)]
     public partial void GetTitle(Utf8String* outTitle);
 
