@@ -12131,6 +12131,7 @@ classes:
       0x1409DD7A0: GetQuestBattleDirector
       0x1409DD7F0: GetGoldSaucerDirector
       0x1409E2840: GetEventHandlerById
+      0x1409E3D40: CheckInteractRange
       0x140B1F350: GetCurrentContentType
       0x140B1F420: GetCurrentContentId # static
       0x140B1F4A0: CanLeaveCurrentContent # static

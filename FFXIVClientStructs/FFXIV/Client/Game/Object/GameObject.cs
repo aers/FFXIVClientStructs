@@ -101,6 +101,9 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 17 45 33 C9")]
     public partial bool IsReadyToDraw();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 5A C7")]
+    public partial Vector3* GetPosition();
 }
 
 // if (EntityId == 0xE0000000)
