@@ -51,24 +51,25 @@ class DefinedMemFunc:
 
 
 class DefinedField(DefinedFuncParam, object):
-    def __init__(self, name, type, offset):
-        # type: (str, str, int, str | None) -> None
+    def __init__(self, name, type, offset, base):
+        # type: (str, str, int, bool) -> None
         super(DefinedField, self).__init__(name, type)
         self.offset = offset
+        self.base = base
 
 
 class DefinedFuncField(DefinedField, object):
-    def __init__(self, name, type, offset, return_type, params):
-        # type: (str, str, int, str | None, list[DefinedFuncParam] | None) -> None
-        super(DefinedFuncField, self).__init__(name, type, offset)
+    def __init__(self, name, type, offset, base, return_type, params):
+        # type: (str, str, int, bool, str | None, list[DefinedFuncParam] | None) -> None
+        super(DefinedFuncField, self).__init__(name, type, offset, base)
         self.return_type = return_type
         self.parameters = params
 
 
 class DefinedFixedField(DefinedField, object):
-    def __init__(self, name, type, offset, size):
-        # type: (str, str, int, str | None) -> None
-        super(DefinedFixedField, self).__init__(name, type, offset)
+    def __init__(self, name, type, offset, base, size):
+        # type: (str, str, int, bool, str | None) -> None
+        super(DefinedFixedField, self).__init__(name, type, offset, base)
         self.size = size
 
 
@@ -204,13 +205,14 @@ class BaseApi:
             )
         for struct in dic["structs"]:
             fields = []
-            virtual_functions = []
+            virtual_functions = None
             member_functions = []
             for field in struct["fields"]:
+                base = field["base"] if "base" in field else False
                 if "size" in field:
                     fields.append(
                         DefinedFixedField(
-                            field["name"], field["type"], field["offset"], field["size"]
+                            field["name"], field["type"], field["offset"], base, field["size"]
                         )
                     )
                 elif "return_type" in field:
@@ -224,23 +226,24 @@ class BaseApi:
                             field["name"],
                             field["type"],
                             field["offset"],
+                            base,
                             field["return_type"],
                             parameters,
                         )
                     )
                 else:
                     fields.append(
-                        DefinedField(field["name"], field["type"], field["offset"])
+                        DefinedField(field["name"], field["type"], field["offset"], base)
                     )
-            for vfunc in struct["virtual_functions"]:
-                parameters = []
-                for param in vfunc["parameters"]:
-                    parameters.append(DefinedFuncParam(param["name"], param["type"]))
-                virtual_functions.append(
-                    DefinedVFunc(
-                        vfunc["name"], vfunc["return_type"], vfunc["offset"], parameters
+            if "virtual_functions" in struct:
+                virtual_functions = []
+                for vfunc in struct["virtual_functions"]:
+                    parameters = [DefinedFuncParam(param["name"], param["type"]) for param in vfunc["parameters"]] if "parameters" in vfunc else None
+                    virtual_functions.append(
+                        DefinedVFunc(
+                            vfunc["name"], vfunc["return_type"] if "return_type" in vfunc else None, vfunc["offset"], parameters
+                        )
                     )
-                )
             for memfunc in struct["member_functions"]:
                 parameters = []
                 for param in memfunc["parameters"]:
@@ -386,8 +389,9 @@ if api is None:
                 else:
                     return ida_struct.get_struc_size(ida_struct.get_struc_id(type))
 
-            def get_named_type(self, tinfo, name):
-                # type: (idaapi.tinfo_t, str) -> None
+            def get_named_type(self, name):
+                # type: (str) -> idaapi.tinfo_t
+                tinfo = ida_typeinf.tinfo_t()
                 if (
                     ida_struct.get_struc_id(self.clean_struct_name(name))
                     != idaapi.BADADDR
@@ -396,17 +400,22 @@ if api is None:
                         tinfo.get_named_type(
                             idaapi.get_idati(), self.clean_struct_name(name)
                         )
-                        return
+                        return tinfo
+                    
+                if name == "void":
+                    idaapi.parse_decl(tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL)
+                    return tinfo.get_rettype()
 
                 terminated = name + ";"
                 idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
 
                 tinfo_str = tinfo.dstr()
                 if tinfo_str == name or tinfo_str == self.clean_struct_name(name):
-                    return
+                    return tinfo
 
                 terminated = self.clean_struct_name(name) + ";"
                 idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+                return tinfo
 
             def get_tinfo_from_type(self, raw_type, array_size=0):
                 # type: (str, int) -> idaapi.tinfo_t
@@ -414,14 +423,12 @@ if api is None:
                 Retrieve a tinfo_t from a raw type string.
                 """
 
-                type_tinfo = ida_typeinf.tinfo_t()
-                ptr_tinfo = None
-
                 type = raw_type.rstrip("*")
                 ptr_count = len(raw_type) - len(type)
 
-                self.get_named_type(type_tinfo, type)
+                type_tinfo = self.get_named_type(type)
 
+                ptr_tinfo = None
                 if ptr_count > 0:
                     for i in range(ptr_count):
                         ptr_tinfo = idaapi.tinfo_t()
@@ -442,20 +449,12 @@ if api is None:
 
                 return ptr_tinfo
 
-            def get_void_tinfo(self):
-                # type: () -> idaapi.tinfo_t
-                tinfo = self.get_tinfo_from_type("void (__fastcall)()")
-                return tinfo.get_rettype()
-
             def get_tinfo_from_func_data(self, data):
                 # type: (DefinedFuncField) -> idaapi.tinfo_t
                 tinfo = ida_typeinf.tinfo_t()
                 func_data = ida_typeinf.func_type_data_t()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
-                if data.return_type != "void":
-                    func_data.rettype = self.get_tinfo_from_type(data.return_type)
-                else:
-                    func_data.rettype = self.get_void_tinfo()
+                func_data.rettype = self.get_tinfo_from_type(data.return_type)
                 for param in data.parameters:
                     arg = ida_typeinf.funcarg_t()
                     arg.type = self.get_tinfo_from_type(param.type)
@@ -592,29 +591,46 @@ if api is None:
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_struct_name(struct.type)
                 self.delete_struct_members(fullname)
-                self.delete_struct_members(fullname + "Union")
-                self.delete_struct_members(fullname + "VTable")
+                self.delete_struct_members(fullname + "_vtbl")
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_struct_name(struct.type)
                 if ida_struct.get_struc_id(fullname) == idaapi.BADADDR:
                     ida_struct.add_struc(-1, fullname, struct.union)
-                s = 0
-                if struct.virtual_functions != []:
-                    s = ida_struct.add_struc(-1, fullname + "VTable")
-                if s != 0 and struct.fields != [] and struct.fields[0].offset == 0:
-                    ida_struct.add_struc(-1, fullname + "Union", True)
+                if struct.virtual_functions:
+                    ida_struct.add_struc(-1, fullname + "_vtbl")
 
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_struct_name(struct.type)
                 s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
+
+                if struct.virtual_functions != None and (struct.fields == [] or struct.fields[0].offset > 0):
+                    ida_struct.add_struc_member(s, "__vftable", 0, ida_bytes.qword_flag(), None, 8)
+                    type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
+                    meminfo = ida_struct.get_member(s, 0)
+                    ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(type), 0)
+
+                contiguous_fields = True
                 for field in struct.fields:
                     offset = field.offset
-                    if offset == 0 and struct.virtual_functions != []:
-                        continue
-                    field_name = field.name
+
+                    # add padding between previous field and current
+                    prev_size = ida_struct.get_struc_size(s)
+                    if offset > prev_size:
+                        contiguous_fields = False
+                        ida_struct.add_struc_member(
+                            s,
+                            f"field_{prev_size:X}",
+                            prev_size,
+                            ida_bytes.byte_flag(),
+                            None,
+                            offset - prev_size
+                        )
+
+                    field_is_base = field.base and contiguous_fields
+                    field_name = field.name if not field_is_base else f'baseclass_{offset:X}'
                     field_type = self.clean_name(field.type)
                     if field_type == "__fastcall":
                         ida_struct.add_struc_member(
@@ -668,46 +684,27 @@ if api is None:
                             self.get_size_from_ida_type(field_type),
                         )
                     meminfo = ida_struct.get_member_by_name(s, field_name)
-                    ida_struct.set_member_tinfo(
-                        s, meminfo, 0, self.get_tinfo_from_type(field_type), 0
-                    )
-                for field in struct.fields:
-                    meminfo = ida_struct.get_member_by_name(s, field.name)
-                    field_type = self.clean_name(field.type)
-                    if hasattr(field, "size") and field.size != 0:
-                        ida_struct.set_member_tinfo(
-                            s,
-                            meminfo,
-                            0,
-                            self.get_tinfo_from_type(field_type, field.size),
-                            0,
-                        )
+                    if field_is_base:
+                        meminfo.props |= ida_struct.MF_BASECLASS
+                    array_size = field.size if hasattr(field, "size") else 0
+                    ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(field_type, array_size), 0)
+
                 if struct.size is not None and struct.size != 0:
-                    if struct.virtual_functions != [] and struct.size == 8:
+                    prev_size = ida_struct.get_struc_size(s)
+                    if struct.size > prev_size:
                         ida_struct.add_struc_member(
                             s,
-                            "field_0",
-                            0,
-                            self.get_idc_type_from_ida_type("__int64"),
+                            f"field_{prev_size:X}",
+                            prev_size,
+                            ida_bytes.byte_flag(),
                             None,
-                            self.get_size_from_ida_type("__int64"),
-                        )
-                        return
-                    size = struct.size - 1
-                    if struct.size != ida_struct.get_struc_size(s):
-                        ida_struct.add_struc_member(
-                            s,
-                            "field_{0}".format(hex(size)[2:]),
-                            size,
-                            self.get_idc_type_from_ida_type("__int8"),
-                            None,
-                            self.get_size_from_ida_type("__int8"),
+                            struct.size - prev_size
                         )
 
             def create_vtable(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_name(struct.type)
-                s = ida_struct.get_struc(ida_struct.get_struc_id(fullname + "VTable"))
+                s = ida_struct.get_struc(ida_struct.get_struc_id(fullname + "_vtbl"))
                 for virt_func in struct.virtual_functions:
                     offset = virt_func.offset
                     field_name = virt_func.name
@@ -719,6 +716,9 @@ if api is None:
                         None,
                         self.get_size_from_ida_type("__int64"),
                     )
+                    if virt_func.return_type == None or virt_func.parameters == None:
+                        continue
+
                     meminfo = ida_struct.get_member_by_name(s, field_name)
                     field_type = self.clean_name(virt_func.return_type)
                     field_type = field_type + "(__fastcall* " + field_name + ")("
@@ -748,100 +748,7 @@ if api is None:
 
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
-                fullname = self.clean_name(struct.type)
-                union_struc = ida_struct.get_struc(
-                    ida_struct.get_struc_id(fullname + "Union")
-                )
-                if (
-                    union_struc != None
-                    and struct.fields != []
-                    and struct.fields[0].offset == 0
-                ):
-                    ida_struct.add_struc_member(
-                        union_struc,
-                        "vtable",
-                        0,
-                        self.get_idc_type_from_ida_type("__int64"),
-                        None,
-                        self.get_size_from_ida_type("__int64"),
-                    )
-                    meminfo = ida_struct.get_member_by_name(union_struc, "vtable")
-                    ida_struct.set_member_tinfo(
-                        union_struc,
-                        meminfo,
-                        0,
-                        self.get_tinfo_from_type(fullname + "VTable*"),
-                        0,
-                    )
-                    field = struct.fields[0]
-                    field_type = self.clean_name(field.type)
-                    field_name = field.name
-                    if (
-                        self.get_idc_type_from_ida_type(field_type)
-                        == ida_bytes.stru_flag()
-                    ):
-                        ida_struct.add_struc_member(
-                            union_struc,
-                            field_name,
-                            idaapi.BADADDR,
-                            self.get_idc_type_from_ida_type(field_type),
-                            self.get_struct_opinfo_from_type(field_type),
-                            self.get_size_from_ida_type(field_type),
-                        )
-                    else:
-                        ida_struct.add_struc_member(
-                            union_struc,
-                            field_name,
-                            idaapi.BADADDR,
-                            self.get_idc_type_from_ida_type(field_type),
-                            None,
-                            self.get_size_from_ida_type(field_type),
-                        )
-                    meminfo = ida_struct.get_member_by_name(union_struc, field_name)
-                    ida_struct.set_member_tinfo(
-                        union_struc, meminfo, 0, self.get_tinfo_from_type(field_type), 0
-                    )
-                    s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
-                    ida_struct.add_struc_member(
-                        s,
-                        "union",
-                        0,
-                        self.get_idc_type_from_ida_type(fullname + "Union"),
-                        self.get_struct_opinfo_from_type(fullname + "Union"),
-                        self.get_size_from_ida_type(fullname + "Union"),
-                    )
-                    meminfo = ida_struct.get_member(s, 0)
-                    ida_struct.set_member_name(s, 0, "union")
-                    ida_struct.set_member_tinfo(
-                        s, meminfo, 0, self.get_tinfo_from_type(fullname + "Union"), 0
-                    )
-                elif struct.virtual_functions != []:
-                    s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
-                    if (
-                        ida_struct.add_struc_member(
-                            s,
-                            "vtable",
-                            0,
-                            self.get_idc_type_from_ida_type("__int64"),
-                            None,
-                            self.get_size_from_ida_type("__int64"),
-                        )
-                        == -0x2
-                    ):
-                        ida_struct.del_struc_members(s, 0, 8)
-                        ida_struct.add_struc_member(
-                            s,
-                            "vtable",
-                            0,
-                            self.get_idc_type_from_ida_type("__int64"),
-                            None,
-                            self.get_size_from_ida_type("__int64"),
-                        )
-                    meminfo = ida_struct.get_member(s, 0)
-                    ida_struct.set_member_name(s, 0, "vtable")
-                    ida_struct.set_member_tinfo(
-                        s, meminfo, 0, self.get_tinfo_from_type(fullname + "VTable*"), 0
-                    )
+                pass
 
             def update_member_func(self, member_func, struct):
                 # type: (DefinedMemFunc, DefinedStruct) -> None
@@ -859,12 +766,7 @@ if api is None:
                 tif.get_func_details(func_data)
                 func_data.clear()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
-                if member_func.return_type != "void":
-                    func_data.rettype = self.get_tinfo_from_type(
-                        member_func.return_type
-                    )
-                else:
-                    func_data.rettype = self.get_void_tinfo()
+                func_data.rettype = self.get_tinfo_from_type(member_func.return_type)
                 for param in member_func.parameters:
                     arg = ida_typeinf.funcarg_t()
                     arg.type = self.get_tinfo_from_type(param.type)
@@ -888,10 +790,7 @@ if api is None:
                 tif.get_func_details(func_data)
                 func_data.clear()
                 func_data.cc = ida_typeinf.CM_CC_FASTCALL
-                if virt_func.return_type != "void":
-                    func_data.rettype = self.get_tinfo_from_type(virt_func.return_type)
-                else:
-                    func_data.rettype = self.get_void_tinfo()
+                func_data.rettype = self.get_tinfo_from_type(virt_func.return_type)
                 for param in virt_func.parameters:
                     arg = ida_typeinf.funcarg_t()
                     arg.type = self.get_tinfo_from_type(param.type)
@@ -1098,7 +997,7 @@ if api is None:
                     return
 
                 dtsize = dt.getLength() if not dt.isZeroLength() else 0
-                if dtsize == 0 and struct.virtual_functions != [] and not struct.union:
+                if dtsize == 0 and struct.virtual_functions != None and not struct.union:
                     dt.growStructure(8)
 
                 for field in struct.fields:
@@ -1522,7 +1421,7 @@ def run():
     print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
 
-    print("{0} Deleting old enums".format(get_time()))
+    print("{0} Deleting old structs".format(get_time()))
     for struct in yaml.structs[::-1]:
         api.delete_struct(struct)
 
@@ -1541,7 +1440,7 @@ def run():
 
     print("{0} Creating vtables for structs".format(get_time()))
     for struct in yaml.structs:
-        if struct.virtual_functions != []:
+        if struct.virtual_functions:
             api.create_vtable(struct)
 
     print("{0} Mapping unions/vtables for structs".format(get_time()))
@@ -1550,14 +1449,15 @@ def run():
 
     if api.should_update_virt_func():
         for struct in yaml.structs:
-            if struct.virtual_functions != []:
+            if struct.virtual_functions:
                 print(
                     "{0} Updating virtual functions for {1}".format(
                         get_time(), struct.type
                     )
                 )
                 for virt_func in struct.virtual_functions:
-                    api.update_virt_func(virt_func, struct)
+                    if virt_func.return_type != None and virt_func.parameters != None:
+                        api.update_virt_func(virt_func, struct)
 
     if api.should_update_member_func():
         for struct in yaml.structs:

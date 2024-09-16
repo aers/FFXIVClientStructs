@@ -120,6 +120,24 @@ public class Exporter {
         }
     }
 
+    public static void ProcessDefinedVTables(DataDefinition def) {
+        foreach (var c in def.classes) {
+            if (c.Value == null || (c.Value.vfuncs == null || c.Value.vfuncs.Count == 0) && (c.Value.vtbls == null || c.Value.vtbls.Count == 0)) continue;
+            var s = _structs.Find(s => s.StructTypeName == c.Key);
+            if (s == null) continue;
+            s.VirtualFunctions ??= [];
+            if (c.Value.vfuncs == null) continue;
+            foreach (var (index, name) in c.Value.vfuncs) {
+                var offset = (int)index * 8;
+                var vf = s.VirtualFunctions.FirstOrDefault(vf => vf.Offset == offset);
+                if (vf == null)
+                    s.VirtualFunctions = [.. s.VirtualFunctions, new() { VirtualFunctionName = name, Offset = offset }];
+                else if (vf.VirtualFunctionName != name)
+                    ExporterStatics.WarningList.Add($"Virtual function name mismatch: {c.Key} vf#{index}, '{vf.VirtualFunctionName}' in CS, '{name}' in data.yml");
+            }
+        }
+    }
+
     public static void Write(DirectoryInfo dir) {
         // make sure we have all the dependencies for each struct before we write them
         {
@@ -239,7 +257,8 @@ public class Exporter {
         return new ProcessedField {
             FieldType = field.FieldType,
             FieldOffset = field.GetFieldOffset() - offset,
-            FieldName = field.Name
+            FieldName = field.Name,
+            IsBase = field.IsDirectBase()
         };
     }
 
@@ -270,7 +289,7 @@ public class Exporter {
             if (!type.IsStruct() || type.IsEnum) return null;
             if (type.IsInStructList(_structs)) return null;
             var vtable = type.GetField("VirtualTable", ExporterStatics.BindingFlags)?.FieldType;
-            ProcessedVirtualFunction[] virtualFunctions = [];
+            ProcessedVirtualFunction[]? virtualFunctions = null;
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
                 var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => new { Name = t.Name, Parameters = t.GetParameters(), ReturnType = t.ReturnType }).ToArray();
@@ -357,7 +376,6 @@ public class Exporter {
                             Fields = [
                                 ProcessField(unionField, unionStartField.GetFieldOffset())
                             ],
-                            VirtualFunctions = [],
                             MemberFunctions = [],
                             StructTypeOverride = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}"
                         });
@@ -433,6 +451,7 @@ public class ProcessedField {
     public required Type FieldType;
     public required string FieldName;
     public required int FieldOffset;
+    public bool IsBase;
 
     public virtual int FieldSize => FieldType.SizeOf();
 }
@@ -456,7 +475,7 @@ public class ProcessedStruct {
     public required string StructNamespace;
     public required int StructSize;
     public required ProcessedField[] Fields;
-    public required ProcessedVirtualFunction[] VirtualFunctions;
+    public ProcessedVirtualFunction[]? VirtualFunctions; // null if there are no virtual functions, empty if there's a vtable with unknown contents
     public required ProcessedMemberFunction[] MemberFunctions;
     [YamlIgnore]
     public required string StructTypeName;
@@ -487,8 +506,8 @@ public class ProcessedEnum {
 public class ProcessedVirtualFunction {
     public required string VirtualFunctionName;
     public required int Offset;
-    public required Type VirtualFunctionReturnType;
-    public required ProcessedField[] VirtualFunctionParameters;
+    public Type? VirtualFunctionReturnType;
+    public ProcessedField[]? VirtualFunctionParameters;
 }
 
 public class ProcessedMemberFunction {
@@ -542,6 +561,10 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
             emitter.Emit(new Scalar("offset"));
             emitter.Emit(new Scalar(f.FieldOffset.ToString()));
         }
+        if (f.IsBase) {
+            emitter.Emit(new Scalar("base"));
+            emitter.Emit(new Scalar("true"));
+        }
         switch (f) {
             case ProcessedFunctionField func: {
                     emitter.Emit(new Scalar("return_type"));
@@ -593,12 +616,14 @@ public class ProcessedStructConverter : IYamlTypeConverter {
             ProcessedFieldConverter.Instance.WriteYaml(emitter, field, field.GetType());
         }
         emitter.Emit(new SequenceEnd());
-        emitter.Emit(new Scalar("virtual_functions"));
-        emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-        foreach (var virtualFunction in s.VirtualFunctions) {
-            ProcessedVirtualFunctionConverter.Instance.WriteYaml(emitter, virtualFunction, virtualFunction.GetType());
+        if (s.VirtualFunctions != null) {
+            emitter.Emit(new Scalar("virtual_functions"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+            foreach (var virtualFunction in s.VirtualFunctions) {
+                ProcessedVirtualFunctionConverter.Instance.WriteYaml(emitter, virtualFunction, virtualFunction.GetType());
+            }
+            emitter.Emit(new SequenceEnd());
         }
-        emitter.Emit(new SequenceEnd());
         emitter.Emit(new Scalar("member_functions"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var memberFunction in s.MemberFunctions) {
@@ -645,14 +670,18 @@ public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar(v.VirtualFunctionName));
         emitter.Emit(new Scalar("offset"));
         emitter.Emit(new Scalar(v.Offset.ToString()));
-        emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FullSanitizeName()));
-        emitter.Emit(new Scalar("parameters"));
-        emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
-        foreach (var parameter in v.VirtualFunctionParameters) {
-            ProcessedFieldConverter.Instance.WriteYaml(emitter, parameter, parameter.GetType());
+        if (v.VirtualFunctionReturnType != null) {
+            emitter.Emit(new Scalar("return_type"));
+            emitter.Emit(new Scalar(v.VirtualFunctionReturnType.FullSanitizeName()));
         }
-        emitter.Emit(new SequenceEnd());
+        if (v.VirtualFunctionParameters != null) {
+            emitter.Emit(new Scalar("parameters"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+            foreach (var parameter in v.VirtualFunctionParameters) {
+                ProcessedFieldConverter.Instance.WriteYaml(emitter, parameter, parameter.GetType());
+            }
+            emitter.Emit(new SequenceEnd());
+        }
         emitter.Emit(new MappingEnd());
     }
 

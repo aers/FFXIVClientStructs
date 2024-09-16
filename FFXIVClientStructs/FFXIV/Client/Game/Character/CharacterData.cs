@@ -66,4 +66,10 @@ public partial struct CharacterData {
     /// has died, at which point it will reset.
     /// </remarks>
     [FieldOffset(0x50)] public GameObjectId CombatTaggerId;
+
+    [VirtualFunction(0)]
+    public partial void Dtor(byte freeFlags);
+
+    [VirtualFunction(1)]
+    public partial void ClassJobChanged(byte from, byte to);
 }
