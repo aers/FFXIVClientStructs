@@ -1938,6 +1938,12 @@ classes:
       - ea: 0x141F542F0
     funcs:
       0x140B06BA0: ctor
+      0x140B06CA0: Finalize
+      0x140B06DB0: SetRequest
+      0x140B070D0: GetRequests
+      0x140B07100: Clear
+      0x140B07DD0: CanSatisfyRequests
+      0x140B07DF0: Finish
   Client::Game::UI::Telepo:
     instances:
       - ea: 0x1427688E8
@@ -8839,6 +8845,8 @@ classes:
     funcs:
       0x140DEFD60: ctor
       0x140DEFE90: Finalize
+      0x140DF0F30: SelectTurnInSlot
+      0x140DF13D0: CancelTurnIn
   Client::UI::Agent::AgentMarker:
     vtbls:
       - ea: 0x141F709C8
