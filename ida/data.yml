@@ -7473,6 +7473,8 @@ classes:
       0x1407B6E30: ShowLogMessage<uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2)
       0x1407B7280: ShowLogMessage<uint,uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2, IntegerParameter3)
       0x1407B7730: ShowLogMessage<string> # (this, logMessageId, StringParameter1)
+      0x1407B9610: SetTabName
+      0x1407B97C0: GetTabName
       0x1407BA570: GetChatTypeForLogMessage
       0x1407BA5B0: GetLogMessage
       0x1407BB090: GetLogMessageDetail
@@ -8720,6 +8722,7 @@ classes:
     funcs:
       0x140EEED90: ctor
       0x140EEEFC0: Finalize
+      0x140EF5270: SetTabName
       0x140EF7860: InsertTextCommandParam
       0x140EF8200: LinkItem
       0x140EF9880: ChangeChannelName

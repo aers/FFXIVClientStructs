@@ -74,6 +74,12 @@ public unsafe partial struct RaptureLogModule {
 
     [MemberFunction("4C 8B D9 48 8B 89")]
     public partial void AddMsgSourceEntry(ulong contentId, ulong accountId, int messageIndex, ushort worldId, ushort chatType);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 44 24 ?? 41 8B D7")]
+    public partial void SetTabName(int tabIndex, Utf8String* tabName);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 73 01")]
+    public partial Utf8String* GetTabName(int tabIndex);
 
     public bool GetLogMessage(int index, out byte[] message) {
         using var pMsg = new Utf8String();
