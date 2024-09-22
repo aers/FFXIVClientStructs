@@ -2055,6 +2055,10 @@ classes:
     instances:
       - ea: 0x142550CC0
         pointer: False
+    funcs:
+      0x140D02620: Initialize
+      0x140D02670: Finalize
+      0x140D02790: Update
   Client::Game::UI::RelicSphereUpgrade:
     instances:
       - ea: 0x14276ACB0
