@@ -63301,6 +63301,16 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentChatLog*
       name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 48 81 C4 ?? ?? ?? ?? 41 5F 41 5D 41 5C 5F
+    return_type: void
+    name: SetTabName
+    parameters:
+    - type: Client::UI::Agent::AgentChatLog*
+      name: this
+    - type: int
+      name: tabIndex
+    - type: Client::System::String::Utf8String*
+      name: tabName
 - type: Client::UI::Agent::AgentContentsFinderReward
   name: AgentContentsFinderReward
   namespace: Client.UI.Agent
@@ -70016,6 +70026,24 @@ structs:
       name: worldId
     - type: unsigned __int16
       name: chatType
+  - signature: E8 ?? ?? ?? ?? 4D 8B 44 24 ?? 41 8B D7
+    return_type: void
+    name: SetTabName
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: int
+      name: tabIndex
+    - type: Client::System::String::Utf8String*
+      name: tabName
+  - signature: E8 ?? ?? ?? ?? 44 8D 73 01
+    return_type: Client::System::String::Utf8String*
+    name: GetTabName
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: int
+      name: tabIndex
 - type: Common::Lua::global_State
   name: global_State
   namespace: Common.Lua
