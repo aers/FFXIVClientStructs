@@ -1,5 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Event;
-using FFXIVClientStructs.FFXIV.Client.Game.Fate;
+using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -69,7 +68,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x16398)] public GoldSaucerYell GoldSaucerYell;
     [FieldOffset(0x17AE8)] public CharaCard CharaCard;
     // 0x17CD0: ItemAction Unlocks
-    [FieldOffset(0x17D28)] public ushort CharaViewDrawDataFlags; // & 1 = HideHeadgear, & 2 = HideWeapons, & 4 = HideLegacyTattoo, & 0x40 = HideVisor
+    [FieldOffset(0x17D28)] public ClientSelectDataConfigFlags ClientSelectDataConfigFlags;
     //[FieldOffset(0x17D2A)] public ushort CharaViewGlamourIdFlag(s);
     [FieldOffset(0x17D2C)] public ushort CurrentItemLevel; // as shown in the Character window
     // [FieldOffset(0x17D30)] public long ?; // something regarding FreeCompanyCrest?
