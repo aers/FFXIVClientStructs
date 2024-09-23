@@ -7864,6 +7864,7 @@ classes:
       26: Highlight
       34: SetReadyToDraw
       35: Update
+      46: GetCenterPosition
       47: GetNameId
       57: IsDead
       58: IsNotMounted
@@ -7871,6 +7872,7 @@ classes:
       60: Destroy # dtor
       61: IsCharacter
       68: OnInitialize
+      69: IntersectsRay
     funcs:
       0x140896240: IsMountOrOrnament
       0x1408965F0: SetName
