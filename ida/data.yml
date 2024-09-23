@@ -8030,6 +8030,7 @@ classes:
       0x1408ADFA0: HideWeapons
       0x1408AE980: LoadEquipment
       0x1408AEBE0: HideHeadgear
+      0x1408AF2A0: HideLegacyTattoo
       0x1408AED40: SetVisor
       0x1408AF440: EquipGlassesIds # sends it to the server
       0x1408AF4D0: GetGlassesId
