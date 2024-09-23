@@ -51,6 +51,9 @@ public unsafe partial struct DrawDataContainer {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 C9")]
     public partial void HideHeadgear(uint unk, bool hide);
 
+    [MemberFunction("44 0F B6 81 ?? ?? ?? ?? 41 0F B6 C0 41 80 E0 7F")]
+    public partial void HideLegacyTattoo(bool hide);
+
     /// <summary>
     /// Called when Manually Adjust Visor is toggled or /visor is used.
     /// </summary>
