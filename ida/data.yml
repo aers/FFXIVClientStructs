@@ -313,6 +313,7 @@ functions:
   0x1408963F0: ObjectIdToEntityId # returns invalid id if objectid is not a player
   0x1408DBFB0: ProcessPacketEventPlay
   0x1408DC490: ProcessPacketSystemLogMessage
+  0x1408DF690: SendClientSelectDataConfigFlagsUpdate
   0x1408DFFC0: ProcessPacketSpawnPlayer
   0x1408E00B0: ProcessPacketSpawnNPC
   0x1408E01B0: ProcessPacketSpawnBoss
