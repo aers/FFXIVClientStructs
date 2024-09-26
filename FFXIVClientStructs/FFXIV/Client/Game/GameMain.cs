@@ -47,6 +47,7 @@ public unsafe partial struct GameMain {
     public static partial bool IsInPvPInstance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10")]
+    [Obsolete("Use TerritoryInfo.Instance()->InSanctuary instead.")]
     public static partial bool IsInSanctuary();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 83 7F ?? ?? 4C 8D 2D")]
