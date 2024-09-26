@@ -148,9 +148,10 @@ functions:
   0x1400B7990: IsInEureka
   0x1400B7BA0: IsUnconscious
   0x1400B7BB0: IsRolePlaying
+  0x1400B7BC0: CanApplyGlamourPlates
+  0x1400B7D00: IsClassJobAJob       # static, (classJobId, ClassJobExd*?) -> bool
   0x1400B7D30: IsClassJobACrafter   # static, (classJobId) -> bool
   0x1400B7D40: IsClassJobAGatherer  # static, (classJobId) -> bool
-  0x1400B7D00: IsClassJobAJob       # static, (classJobId, ClassJobExd*?) -> bool
   0x1400B7ED0: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x1400BB2A0: OpenWebURL
   0x140A00D30: IsGatheringTypeRare  # static, takes RowId of GatheringType
@@ -477,7 +478,6 @@ classes:
       0x1405E7420: SetActiveFestivals
       0x140AC7190: IsInPvPInstance
       0x140AC7240: IsInPvPArea
-      0x1400B7BC0: IsInSanctuary # static, more likely Client::UI::IsInSanctuary but it fits here just fine
       0x1405E42E0: GetEventGPoseController
   Client::Game::BGMSystem:
     instances:
