@@ -1,5 +1,4 @@
-using FFXIVClientStructs.FFXIV.Client.Game.Event;
-using FFXIVClientStructs.FFXIV.Client.Game.Fate;
+using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -11,6 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18348)] // unsure how big it really is
 public unsafe partial struct UIState {
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
+    public static partial UIState* Instance();
+
     [FieldOffset(0x00)] public Hotbar Hotbar;
     [FieldOffset(0x08)] public Hate Hate;
     [FieldOffset(0x110)] public Hater Hater;
@@ -22,7 +24,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x15A8)] public Telepo Telepo;
     [FieldOffset(0x1600)] public Cabinet Cabinet;
     [FieldOffset(0x1688)] public Achievement Achievement;
-    [FieldOffset(0x1C20)] public Buddy Buddy; // TODO: update struct
+    [FieldOffset(0x1C20)] public Buddy Buddy;
     [FieldOffset(0x37AC)] public PvPProfile PvPProfile;
     [FieldOffset(0x3828)] internal void* Unk3828; // some UI timer for PvP Results?!
     [FieldOffset(0x3830)] public ContentsNote ContentsNote;
@@ -33,12 +35,12 @@ public unsafe partial struct UIState {
     [FieldOffset(0x39E8)] public DailyQuestSupply DailyQuestSupply;
     [FieldOffset(0x3DD0)] public RidePillon RidePillon;
     [FieldOffset(0x3E10)] public Loot Loot;
-    [FieldOffset(0x44B0)] public GatheringNote GatheringNote; // TODO: update struct and size
+    [FieldOffset(0x44B0)] public GatheringNote GatheringNote;
     [FieldOffset(0x4B50)] public RecipeNote RecipeNote;
-    [FieldOffset(0x5668)] public FishingNote FishingNote; // TODO: update struct and size
-    [FieldOffset(0x5748)] public FishRecord FishRecord; // TODO: update struct and size
-    [FieldOffset(0x5A80)] public Journal Journal; // TODO: update struct and size
-    [FieldOffset(0xA1E8)] public QuestUI QuestUI; // TODO: update struct and size
+    [FieldOffset(0x5668)] public FishingNote FishingNote;
+    [FieldOffset(0x5748)] public FishRecord FishRecord;
+    [FieldOffset(0x5A80)] public Journal Journal;
+    [FieldOffset(0xA1E8)] public QuestUI QuestUI;
     [FieldOffset(0xB1D8)] public QuestTodoList QuestTodoList;
     [FieldOffset(0xB4C8)] public NpcTrade NpcTrade;
     [FieldOffset(0xB7F0)] public DirectorTodo DirectorTodo;
@@ -48,15 +50,15 @@ public unsafe partial struct UIState {
     [FieldOffset(0xFD60)] public LimitBreakController LimitBreakController;
     [FieldOffset(0xFD70)] public TitleController TitleController;
     [FieldOffset(0xFD78)] public TitleList TitleList;
-
+    // 0xFDE8: some GM Call stuff
     [FieldOffset(0xFE08)] public GCSupply GCSupply;
     [FieldOffset(0x12A30)] public InstanceContent InstanceContent;
     [FieldOffset(0x12AA0)] public GuildOrderReward GuildOrderReward;
     [FieldOffset(0x12B00)] public ContentsFinder ContentsFinder;
     [FieldOffset(0x12BB0)] public Wedding Wedding;
-    [FieldOffset(0x12C18)] public MobHunt MobHunt; // TODO: update struct and size
+    [FieldOffset(0x12C18)] public MobHunt MobHunt;
     [FieldOffset(0x12E08)] public WeatherForecast WeatherForecast;
-
+    // 0x12E28: an int to control AgentRecommendList
     [FieldOffset(0x12E30)] public TripleTriad TripleTriad;
     [FieldOffset(0x14408)] public EurekaElementalEdit EurekaElementalEdit;
     [FieldOffset(0x14420)] public LovmRanking LovmRanking;
@@ -66,7 +68,10 @@ public unsafe partial struct UIState {
     [FieldOffset(0x16398)] public GoldSaucerYell GoldSaucerYell;
     [FieldOffset(0x17AE8)] public CharaCard CharaCard;
     // 0x17CD0: ItemAction Unlocks
-
+    [FieldOffset(0x17D28)] public ClientSelectDataConfigFlags ClientSelectDataConfigFlags;
+    //[FieldOffset(0x17D2A)] public ushort CharaViewGlamourIdFlag(s);
+    [FieldOffset(0x17D2C)] public ushort CurrentItemLevel; // as shown in the Character window
+    // [FieldOffset(0x17D30)] public long ?; // something regarding FreeCompanyCrest?
     [FieldOffset(0x17D38)] public long NextMapAllowanceTimestamp;
     [FieldOffset(0x17D40)] public long NextChallengeLogResetTimestamp;
 
@@ -101,8 +106,16 @@ public unsafe partial struct UIState {
     [FieldOffset(0x17EC2), FixedSizeArray] internal FixedSizeArray54<byte> _unlockedTripleTriadCardsBitmask;
     [FieldOffset(0x17EF8)] public ulong UnlockedTripleTriadCardsCount;
 
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
-    public static partial UIState* Instance();
+    [FieldOffset(0x17F12)] public float TerritoryTypeTransientOffsetZ;
+    [FieldOffset(0x17F16)] public byte BeginnerGuideFlags;
+    [FieldOffset(0x17F17)] public byte BattleEffectSelf;
+    [FieldOffset(0x17F18)] public byte BattleEffectParty;
+    [FieldOffset(0x17F19)] public byte BattleEffectOther;
+    [FieldOffset(0x17F1B)] public byte BattleEffectPvPEnemyPc;
+
+    [FieldOffset(0x18111)] public bool TerritoryTypeTransientRowLoaded;
+
+    [FieldOffset(0x18113)] public byte GMRank;
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 23")]
     public partial bool IsUnlockLinkUnlocked(uint unlockLink);
