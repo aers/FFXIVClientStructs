@@ -872,6 +872,14 @@ enums:
     "Healer": 1
     "Dps": 2
     "None": 3
+- type: Client::UI::Agent::ContentsId::ContentsType
+  name: ContentsType
+  underlying: byte
+  namespace: Client.UI.Agent
+  values:
+    "None": 0
+    "Roulette": 1
+    "Regular": 2
 - type: Client::UI::Agent::AgentId
   name: AgentId
   underlying: unsigned int
@@ -1799,6 +1807,18 @@ enums:
     "IsTradeMentorStatusActive": 10
     "IsPvPMentorStatusActive": 11
     "Unknown14": 14
+- type: Application::Network::WorkDefinitions::ClientSelectDataConfigFlags
+  name: ClientSelectDataConfigFlags
+  underlying: unsigned __int16
+  namespace: Application.Network.WorkDefinitions
+  values:
+    "None": 0
+    "HideHead": 1
+    "HideWeapon": 2
+    "HideLegacyMark": 4
+    "StoreNewItemsInArmouryChest": 16
+    "StoreCraftedItemsInInventory": 32
+    "CloseVisor": 64
 - type: Client::Game::Object::ObjectKind
   name: ObjectKind
   underlying: byte
@@ -2331,18 +2351,6 @@ enums:
     "ShroudAttacking": 1
     "ShroudActive": 2
     "ShroudLoading": 256
-- type: Application::Network::WorkDefinitions::ClientSelectDataConfigFlags
-  name: ClientSelectDataConfigFlags
-  underlying: unsigned __int16
-  namespace: Application.Network.WorkDefinitions
-  values:
-    "None": 0
-    "HideHead": 1
-    "HideWeapon": 2
-    "HideLegacyMark": 4
-    "StoreNewItemsInArmouryChest": 16
-    "StoreCraftedItemsInInventory": 32
-    "CloseVisor": 64
 - type: Client::UI::UIObjectKind
   name: UIObjectKind
   underlying: byte
@@ -6889,7 +6897,7 @@ structs:
   name: CharaCard
   namespace: Client.Game.UI
   union: False
-  size: 456
+  size: 488
   fields: []
   member_functions: []
 - type: Client::Game::UI::CollectablesShop
@@ -7095,14 +7103,14 @@ structs:
   name: FishRecord
   namespace: Client.Game.UI
   union: False
-  size: 736
+  size: 824
   fields: []
   member_functions: []
 - type: Client::Game::UI::FishingNote
   name: FishingNote
   namespace: Client.Game.UI
   union: False
-  size: 80
+  size: 224
   fields: []
   member_functions: []
 - type: Client::Game::UI::GCSupply
@@ -7116,7 +7124,7 @@ structs:
   name: GatheringNote
   namespace: Client.Game.UI
   union: False
-  size: 1576
+  size: 1696
   fields: []
   member_functions: []
 - type: Client::Game::UI::GoldSaucerYell
@@ -7193,7 +7201,7 @@ structs:
   name: Journal
   namespace: Client.Game.UI
   union: False
-  size: 18248
+  size: 18280
   fields: []
   virtual_functions: []
   member_functions: []
@@ -7602,7 +7610,7 @@ structs:
   name: QuestUI
   namespace: Client.Game.UI
   union: False
-  size: 4048
+  size: 4080
   fields: []
   virtual_functions: []
   member_functions: []
@@ -7747,6 +7755,12 @@ structs:
   union: False
   size: 96
   fields:
+  - type: unsigned int
+    name: MapIdOverride
+    offset: 20
+  - type: unsigned int
+    name: ChatLinkMapIdOverride
+    offset: 24
   - type: byte
     name: InSanctuary
     offset: 28
@@ -11772,6 +11786,19 @@ structs:
     name: Name
     offset: 24
     size: 32
+  member_functions: []
+- type: Client::UI::Agent::ContentsId
+  name: ContentsId
+  namespace: Client.UI.Agent
+  union: False
+  size: 8
+  fields:
+  - type: Client::UI::Agent::ContentsId::ContentsType
+    name: ContentType
+    offset: 0
+  - type: unsigned int
+    name: Id
+    offset: 4
   member_functions: []
 - type: Client::UI::Agent::CrestData
   name: CrestData
@@ -19257,6 +19284,36 @@ structs:
     name: Last
     offset: 8
   - type: Client::UI::Agent::CharaSelectRetainerInfo**
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::UI::Agent::Contents*, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::Contents**
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::Contents**
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::Contents**
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::UI::Agent::ContentsId, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::ContentsId*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::ContentsId*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::ContentsId*
     name: End
     offset: 16
   member_functions: []
@@ -34475,6 +34532,24 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
+- type: StdVector<Client::UI::Agent::Contents*>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Client::UI::Agent::Contents*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdVector<Client::UI::Agent::ContentsId>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Client::UI::Agent::ContentsId, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
 - type: StdVector<Client::UI::Agent::ExtraCommandData>
   name: StdVector`1
   namespace: ''
@@ -35767,6 +35842,14 @@ structs:
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::GameObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: outCenter
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -35803,6 +35886,18 @@ structs:
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::GameObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: ray
+    - type: Common::Math::Vector3*
+      name: outHitPosition
+    - type: byte*
+      name: outModelChecked
   - name: GetObjectType
     offset: 24
   - name: GetSex
@@ -43060,6 +43155,22 @@ structs:
     name: ParentBone
     offset: 232
   member_functions: []
+- type: Client::UI::Agent::Contents
+  name: Contents
+  namespace: Client.UI.Agent
+  union: False
+  size: 240
+  fields:
+  - type: Client::System::String::Utf8String
+    name: RequiredLevel
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 104
+  - type: Client::UI::Agent::ContentsId
+    name: Id
+    offset: 208
+  member_functions: []
 - type: Client::UI::Agent::ContextMenu
   name: ContextMenu
   namespace: Client.UI.Agent
@@ -46328,6 +46439,14 @@ structs:
     parameters:
     - type: Client::Game::Object::Aetheryte*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -46364,6 +46483,18 @@ structs:
     parameters:
     - type: Client::Game::Object::Aetheryte*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   member_functions: []
 - type: Client::Game::Object::EventObject
   name: EventObject
@@ -46444,6 +46575,14 @@ structs:
     parameters:
     - type: Client::Game::Object::EventObject*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -46480,6 +46619,18 @@ structs:
     parameters:
     - type: Client::Game::Object::EventObject*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   member_functions: []
 - type: Client::Game::Object::Treasure
   name: Treasure
@@ -46560,6 +46711,14 @@ structs:
     parameters:
     - type: Client::Game::Object::Treasure*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -46596,6 +46755,18 @@ structs:
     parameters:
     - type: Client::Game::Object::Treasure*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   member_functions: []
 - type: Client::Game::UI::MarkerInfo
   name: MarkerInfo
@@ -53178,6 +53349,14 @@ structs:
     parameters:
     - type: Client::Game::Object::HousingObject*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -53214,6 +53393,18 @@ structs:
     parameters:
     - type: Client::Game::Object::HousingObject*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   member_functions: []
 - type: Client::Game::Object::MJIObject
   name: MJIObject
@@ -53300,6 +53491,14 @@ structs:
     parameters:
     - type: Client::Game::Object::MJIObject*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -53336,6 +53535,18 @@ structs:
     parameters:
     - type: Client::Game::Object::MJIObject*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   member_functions: []
 - type: Client::Game::UI::PlayerState
   name: PlayerState
@@ -59485,6 +59696,14 @@ structs:
       name: unk
     - type: byte
       name: hide
+  - signature: 44 0F B6 81 ?? ?? ?? ?? 41 0F B6 C0 41 80 E0 7F
+    return_type: void
+    name: HideLegacyTattoo
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: byte
+      name: hide
   - signature: E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA
     return_type: void
     name: SetVisor
@@ -59705,6 +59924,14 @@ structs:
     parameters:
     - type: Client::Game::Object::GatheringPointObject*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -59741,6 +59968,18 @@ structs:
     parameters:
     - type: Client::Game::Object::GatheringPointObject*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   member_functions: []
 - type: Client::Game::Object::HousingCombinedObject
   name: HousingCombinedObject
@@ -59821,6 +60060,14 @@ structs:
     parameters:
     - type: Client::Game::Object::HousingCombinedObject*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -59857,6 +60104,18 @@ structs:
     parameters:
     - type: Client::Game::Object::HousingCombinedObject*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   member_functions: []
 - type: Client::Game::OutdoorTerritory
   name: OutdoorTerritory
@@ -102969,162 +103228,6 @@ structs:
     - type: Client::UI::AddonSatisfactionSupply*
       name: this
   member_functions: []
-- type: Client::UI::Agent::AgentContentsFinder
-  name: AgentContentsFinder
-  namespace: Client.UI.Agent
-  union: False
-  size: 8744
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: Client::UI::Agent::AgentContentsFinderInterface
-    name: InterfaceSub
-    offset: 40
-  - type: Client::UI::Agent::AgentContentsFinderReward
-    name: RewardSub
-    offset: 2008
-  - type: int
-    name: SelectedDutyId
-    offset: 7332
-  - type: byte
-    name: NumCollectedRewards
-    offset: 7344
-  - type: byte
-    name: HasRouletteSelected
-    offset: 7345
-  - type: Client::UI::UIModule*
-    name: UIModule
-    offset: 7408
-  - type: Client::System::String::Utf8String
-    name: Strings
-    offset: 7424
-    size: 10
-  - type: Client::UI::Agent::ContentsRouletteRole
-    name: ContentRouletteRoleBonuses
-    offset: 8553
-    size: 11
-  - type: unsigned int
-    name: DutyPenaltyMinutes
-    offset: 8564
-  - type: unsigned int
-    name: UnkPenaltyMinutes
-    offset: 8568
-  - type: int
-    name: CurrentTimestamp
-    offset: 8620
-  - type: byte
-    name: SelectedTab
-    offset: 8632
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8
-    return_type: void
-    name: OpenRegularDuty
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: unsigned int
-      name: contentsFinderCondition
-    - type: byte
-      name: hideIfShown
-  - signature: E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20
-    return_type: void
-    name: OpenRouletteDuty
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: roulette
-    - type: byte
-      name: hideIfShown
 - type: Client::UI::Agent::AgentMJIAnimalManagement
   name: AgentMJIAnimalManagement
   namespace: Client.UI.Agent
@@ -113047,6 +113150,168 @@ structs:
     - type: Client::UI::AddonWeeklyPuzzle*
       name: this
   member_functions: []
+- type: Client::UI::Agent::AgentContentsFinder
+  name: AgentContentsFinder
+  namespace: Client.UI.Agent
+  union: False
+  size: 8744
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentContentsFinderInterface
+    name: InterfaceSub
+    offset: 40
+  - type: Client::UI::Agent::AgentContentsFinderReward
+    name: RewardSub
+    offset: 2008
+  - type: StdVector<Client::UI::Agent::Contents*>
+    name: ContentList
+    offset: 7280
+  - type: StdVector<Client::UI::Agent::ContentsId>
+    name: SelectedContent
+    offset: 7304
+  - type: int
+    name: SelectedDutyId
+    offset: 7332
+  - type: byte
+    name: NumCollectedRewards
+    offset: 7344
+  - type: byte
+    name: HasRouletteSelected
+    offset: 7345
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 7408
+  - type: Client::System::String::Utf8String
+    name: Strings
+    offset: 7424
+    size: 10
+  - type: Client::UI::Agent::ContentsRouletteRole
+    name: ContentRouletteRoleBonuses
+    offset: 8553
+    size: 11
+  - type: unsigned int
+    name: DutyPenaltyMinutes
+    offset: 8564
+  - type: unsigned int
+    name: UnkPenaltyMinutes
+    offset: 8568
+  - type: int
+    name: CurrentTimestamp
+    offset: 8620
+  - type: byte
+    name: SelectedTab
+    offset: 8632
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8
+    return_type: void
+    name: OpenRegularDuty
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: unsigned int
+      name: contentsFinderCondition
+    - type: byte
+      name: hideIfShown
+  - signature: E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20
+    return_type: void
+    name: OpenRouletteDuty
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: roulette
+    - type: byte
+      name: hideIfShown
 - type: Client::Game::Event::Director
   name: Director
   namespace: Client.Game.Event
@@ -127484,6 +127749,14 @@ structs:
     parameters:
     - type: Client::Game::Character::Character*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -127520,6 +127793,18 @@ structs:
     parameters:
     - type: Client::Game::Character::Character*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   - name: GetModelChara
     offset: 608
   - name: GetStatusManager_2
@@ -127681,6 +127966,14 @@ structs:
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::Companion*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -127717,6 +128010,18 @@ structs:
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::Companion*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   - name: GetStatusManager
     offset: 632
     return_type: Client::Game::StatusManager*
@@ -127827,6 +128132,14 @@ structs:
     parameters:
     - type: Client::Game::Character::MJILivelyActor*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -127863,6 +128176,18 @@ structs:
     parameters:
     - type: Client::Game::Character::MJILivelyActor*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   - name: GetStatusManager
     offset: 632
     return_type: Client::Game::StatusManager*
@@ -127973,6 +128298,14 @@ structs:
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::Ornament*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -128009,6 +128342,18 @@ structs:
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::Ornament*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   - name: GetStatusManager
     offset: 632
     return_type: Client::Game::StatusManager*
@@ -128428,6 +128773,14 @@ structs:
     parameters:
     - type: Client::Game::Character::BattleChara*
       name: this
+  - name: GetCenterPosition
+    offset: 368
+    return_type: void
+    parameters:
+    - type: Client::Game::Character::BattleChara*
+      name: this
+    - type: Common::Math::Vector3*
+      name: a2
   - name: GetNameId
     offset: 376
     return_type: unsigned int
@@ -128464,6 +128817,18 @@ structs:
     parameters:
     - type: Client::Game::Character::BattleChara*
       name: this
+  - name: IntersectsRay
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::BattleChara*
+      name: this
+    - type: Client::Graphics::Ray*
+      name: a2
+    - type: Common::Math::Vector3*
+      name: a3
+    - type: byte*
+      name: a4
   - name: GetStatusManager
     offset: 632
     return_type: Client::Game::StatusManager*
@@ -128987,6 +129352,12 @@ structs:
   - type: Client::Game::UI::CharaCard
     name: CharaCard
     offset: 97000
+  - type: Application::Network::WorkDefinitions::ClientSelectDataConfigFlags
+    name: ClientSelectDataConfigFlags
+    offset: 97576
+  - type: unsigned __int16
+    name: CurrentItemLevel
+    offset: 97580
   - type: __int64
     name: NextMapAllowanceTimestamp
     offset: 97592
@@ -129024,6 +129395,30 @@ structs:
   - type: unsigned __int64
     name: UnlockedTripleTriadCardsCount
     offset: 98040
+  - type: float
+    name: TerritoryTypeTransientOffsetZ
+    offset: 98066
+  - type: byte
+    name: BeginnerGuideFlags
+    offset: 98070
+  - type: byte
+    name: BattleEffectSelf
+    offset: 98071
+  - type: byte
+    name: BattleEffectParty
+    offset: 98072
+  - type: byte
+    name: BattleEffectOther
+    offset: 98073
+  - type: byte
+    name: BattleEffectPvPEnemyPc
+    offset: 98075
+  - type: byte
+    name: TerritoryTypeTransientRowLoaded
+    offset: 98577
+  - type: byte
+    name: GMRank
+    offset: 98579
   member_functions:
   - signature: E8 ?? ?? ?? ?? 3C 01 74 23
     return_type: byte
