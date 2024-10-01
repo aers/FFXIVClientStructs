@@ -16377,7 +16377,7 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::ActualBank:
     vtbls:
       - ea: 0x142221620
-        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+        base: SQEX::CDev::Engine::Sd::Driver::Bank
   SQEX::CDev::Engine::Common::Threading::Thread:
     vtbls:
       - ea: 0x1422217D8
@@ -16414,11 +16414,11 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::RandomSound:
     vtbls:
       - ea: 0x1422223D0
-        base: SQEX::CDev::Engine::Sd::Driver::ISound
+        base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::CycleSound:
     vtbls:
       - ea: 0x1422227C8
-        base: SQEX::CDev::Engine::Sd::Driver::ISound
+        base: SQEX::CDev::Engine::Sd::Driver::RandomSound
   SQEX::CDev::Engine::Sd::Driver::StreamSoundEx:
     vtbls:
       - ea: 0x142222BC0
@@ -16430,7 +16430,7 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::OrderSound:
     vtbls:
       - ea: 0x1422233B0
-        base: SQEX::CDev::Engine::Sd::Driver::RootSound
+        base: SQEX::CDev::Engine::Sd::Driver::RandomSound
   SQEX::CDev::Engine::Sd::Driver::Surround4chSound:
     vtbls:
       - ea: 0x1422237A8
