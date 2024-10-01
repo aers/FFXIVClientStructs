@@ -33,8 +33,10 @@ public unsafe partial struct PlayerState {
 
     [FieldOffset(0x80)] public nint CurrentClassJobRow;
     [FieldOffset(0x88)] public short CurrentLevel;
+    /// <remarks> Index is ExpArrayIndex from the ClassJob sheet. </remarks>
     [FieldOffset(0x8A), FixedSizeArray] internal FixedSizeArray32<short> _classJobLevels;
 
+    /// <remarks> Index is ExpArrayIndex from the ClassJob sheet. </remarks>
     [FieldOffset(0xCC), FixedSizeArray] internal FixedSizeArray32<int> _classJobExperience;
     [FieldOffset(0x14C)] public short SyncedLevel;
     [FieldOffset(0x14E)] public byte IsLevelSynced;
@@ -169,6 +171,7 @@ public unsafe partial struct PlayerState {
     /// </remarks>
     [FieldOffset(0x7D4)] public byte MentorVersion;
 
+    /// <remarks> Index is DohDolJobIndex from the ClassJob sheet. </remarks>
     [FieldOffset(0x7D8), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
 
     [FieldOffset(0x858)] public StdMap<uint, bool> TrackedStatuses;

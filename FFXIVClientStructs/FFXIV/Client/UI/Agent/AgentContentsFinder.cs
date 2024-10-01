@@ -16,6 +16,9 @@ public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x7D8)] public AgentContentsFinderReward RewardSub;
 
+    [FieldOffset(0x1C70)] public StdVector<Pointer<Contents>> ContentList;
+    [FieldOffset(0x1C88)] public StdVector<ContentsId> SelectedContent;
+
     [FieldOffset(0x1CA4)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1CB0)] public byte NumCollectedRewards; // Value used for "Reward already received"
     [FieldOffset(0x1CB1)] public byte HasRouletteSelected; // Prevents more roulettes from being selected
@@ -44,6 +47,25 @@ public enum ContentsRouletteRole : byte {
     Healer = 1,
     Dps = 2,
     None = 3,
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+public struct Contents {
+    [FieldOffset(0x00)] public Utf8String RequiredLevel;
+    [FieldOffset(0x68)] public Utf8String Name;
+    [FieldOffset(0xD0)] public ContentsId Id;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+public struct ContentsId {
+    public enum ContentsType : byte {
+        None,
+        Roulette, // Id refers to ContentRoulette sheet
+        Regular, // Id refers to ContentFinderCondition sheet
+    }
+
+    [FieldOffset(0x0)] public ContentsType ContentType;
+    [FieldOffset(0x4)] public uint Id;
 }
 
 [GenerateInterop]

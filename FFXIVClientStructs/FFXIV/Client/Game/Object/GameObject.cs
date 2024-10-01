@@ -1,6 +1,8 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Event;
+using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Client.LayoutEngine;
+using FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using EventHandler = FFXIVClientStructs.FFXIV.Client.Game.Event.EventHandler;
 
@@ -39,7 +41,9 @@ public unsafe partial struct GameObject {
     [FieldOffset(0xF4)] public EventId EventId;
     [FieldOffset(0xF8)] public uint FateId;
     [FieldOffset(0x100)] public DrawObject* DrawObject;
+    [Obsolete("Use SharedGroupLayoutInstance")]
     [FieldOffset(0x108)] public ILayoutInstance* LayoutInstance;
+    [FieldOffset(0x108)] public SharedGroupLayoutInstance* SharedGroupLayoutInstance;
     [FieldOffset(0x110)] public uint NamePlateIconId;
     [FieldOffset(0x118)] public int RenderFlags;
     [FieldOffset(0x158)] public LuaActor* LuaActor;
@@ -78,8 +82,17 @@ public unsafe partial struct GameObject {
     [VirtualFunction(34)]
     public partial void SetReadyToDraw();
 
+    [VirtualFunction(46)]
+    public partial void GetCenterPosition(Vector3* outCenter);
+
     [VirtualFunction(47)]
     public partial uint GetNameId();
+
+    [VirtualFunction(54)]
+    public partial void PositionModified();
+
+    [VirtualFunction(55)]
+    public partial void RotationModified();
 
     [VirtualFunction(57)]
     public partial bool IsDead();
@@ -89,6 +102,16 @@ public unsafe partial struct GameObject {
 
     [VirtualFunction(61)]
     public partial bool IsCharacter();
+
+    /// <summary>
+    /// Determines whether a ray intersects with the game object, either by checking the model's geometry or the object's approximate center position.
+    /// </summary>
+    /// <param name="ray">The ray to test for intersection, containing both origin and direction.</param>
+    /// <param name="outHitPosition">The output position where the intersection occurs, if any.</param>
+    /// <param name="outModelChecked">A boolean output that indicates whether the intersection was checked against the model (<c>true</c>) or approximated via the object's center (<c>false</c>).</param>
+    /// <returns><c>true</c> if the ray intersects with the game object; otherwise, <c>false</c>.</returns>
+    [VirtualFunction(69)]
+    public partial bool IntersectsRay(Ray* ray, Vector3* outHitPosition, bool* outModelChecked);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D")]
     public partial void SetDrawOffset(float x, float y, float z);

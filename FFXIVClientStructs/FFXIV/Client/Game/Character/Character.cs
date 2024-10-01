@@ -53,6 +53,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x2208)] public GameObjectId SoftTargetId;
 
     [FieldOffset(0x2214)] public float CastRotation;
+    [FieldOffset(0x221C)] public float UnscaledRadius; // if character is unmounted, it's hitbox radius is calculated to be this value multiplied by scale
 
     [FieldOffset(0x2240)] public uint NameId;
 
@@ -65,6 +66,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x226C)] public CharacterModes Mode;
     [FieldOffset(0x226D)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
 
+    [FieldOffset(0x226F)] public byte GMRank;
     [FieldOffset(0x2270)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
     public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;
@@ -111,6 +113,18 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 0F 2F C6 76 1F")]
     public partial float CalculateHeight();
 
+    /// <summary> Check if the character is using the World Visit system. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 8B CF")]
+    public partial bool IsWanderer();
+
+    /// <summary> Check if the character is using the Data Center Travel system. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 B1")]
+    public partial bool IsTraveler();
+
+    /// <summary> Check if the character is using the Cross-region Data Center Travel system. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 3A 48 8B 4B 08")]
+    public partial bool IsVoyager();
+
     [VirtualFunction(79)]
     public partial StatusManager* GetStatusManager();
 
@@ -133,18 +147,25 @@ public unsafe partial struct Character {
     //public partial bool IsMount();
 }
 
-// Seems similar to ConditionFlag in Dalamud but not all flags are valid on the character
+// LogMessages for errors starting at 7700
 public enum CharacterModes : byte {
     None = 0, // Mode is never used
     Normal = 1, // Param always 0
+    Dead = 2,
     EmoteLoop = 3, // Param is an EmoteMode entry
     Mounted = 4, // Param always 0
     Crafting = 5, // Param always 0
+    Gathering = 6,
+    MateriaAttach = 7,
     AnimLock = 8, // Param always 0
     Carrying = 9, // Param is a Carry entry
     RidingPillion = 10, // Param is the pillion seat number
     InPositionLoop = 11, // Param is an EmoteMode entry
-    Performance = 16, // Unknown
+    RaceChocobo = 12,
+    TripleTriad = 13,
+    Lovm = 14, // Lord of Verminion
+    // CustomMatch = 15, // PvP, untested
+    Performance = 16, // Param is Perform row id (the instrument)
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 2)]

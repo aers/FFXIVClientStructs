@@ -55,7 +55,7 @@ public unsafe partial struct ActionEffectHandler {
         [FieldOffset(0x08)] public uint ActionId;
         [FieldOffset(0x0C)] public uint GlobalSequence; // unique id of the action, monotonously increasing as the server is running
         [FieldOffset(0x10)] public float AnimationLock; // caster's animation lock is set to this value, unless this action was not caster-initiated and force-set flag is not set
-        // 0x14: some entity id, related to ActionCategory 17 (Artillery) and used for some animations
+        [FieldOffset(0x14)] public uint BallistaEntityId; // for Artillery actions - id of the cannon that was used for the action
         [FieldOffset(0x18)] public ushort SourceSequence; // 0 if action was not initiated by a client, otherwise monotonously increasing as the client initiates actions
         [FieldOffset(0x1A)] public ushort RotationInt; // quantized rotation: 0 -> -pi, 65535 -> pi
         [FieldOffset(0x1C)] public ushort SpellId;

@@ -248,7 +248,8 @@ public enum AgentId : uint {
     WebGuidance = 222,
     Orchestrion = 223,
     BeginnerChatList = 224, // Novice Network
-
+    // BeginnerChatSomething = 225,
+    BeginnerChatInvite = 226,
     ReturnerDialog = 227,
     OrchestrionInn = 228,
     HousingEditContainer = 229,
@@ -298,18 +299,24 @@ public enum AgentId : uint {
     PvpScreenInformationHotBar = 274,
     PvpWelcome = 275,
     JobHudNotice = 276,
-
+    // TreasureHunt = 277, // unsure
+    // Maneuvers1 = 278, // Rival Wings
+    // Maneuvers2 = 279, // Rival Wings
     UserPolicyPerformance = 280,
-
+    PvpTeam = 281,
     PvpTeamInputString = 282,
+    PvpTeamMember = 283,
+    PvPTeamResult = 284,
 
     PvpTeamCrestEditor = 287,
-    PvpTeam = 288,
+    PvPTeamOrganization = 288,
 
     EurekaElementalHud = 290,
     EurekaElementalEdit = 291,
     EurekaChainInfo = 292,
-
+    // EurekaLogos = 293,
+    EurekaMagiaActionNotebook = 294, // unconfirmed
+    EurekaWeaponAdjust = 295,
     TeleportHousingFriend = 296,
     ContentMemberList = 297,
     InventoryBuddy = 298,
@@ -319,7 +326,8 @@ public enum AgentId : uint {
     MiragePrismPrismItemDetail = 302,
     MiragePrismMiragePlate = 303, // Glamour Plates
     PerformanceMode = 304,
-
+    PerformanceModeSettings = 305,
+    RecordReadyCheck = 306,
     Fashion = 307,
 
     SelectYesno = 309,
@@ -331,12 +339,12 @@ public enum AgentId : uint {
     MiragePrismENpcSatisfaction = 316,
     Description = 317, // Frontline/Bozja Description
     Alarm = 318,
-
+    MerchantSetting = 320, // Mannequins
     FreeShop = 321,
     AozNotebook = 322, // Bluemage Spells
     RhythmAction = 323,
     WeddingNotification = 324,
-    Emj = 325, //Mahjong
+    Emj = 325, // Mahjong
 
     EmjIntro = 328,
     AozContentBriefing = 329, // Masked Carnivale
@@ -348,26 +356,33 @@ public enum AgentId : uint {
     EmjSetting = 335, // Mahjong Settings
     RetainerList = 336,
     QIBCStatus = 337,
-
+    HugeCraftworksSupply = 338, // Crystarium Deliveries
+    HugeCraftworksSupplyResult = 339,
+    SharlayanCraftworksSupply = 340, // Studium Deliveries
+    BankaCraftworksSupply = 341, // Wachumeqimeqi Deliveries
     Dawn = 342, // Trust
     DawnStory = 343, // Duty Support
     HousingCatalogPreview = 344,
-
     SubmersibleExplorationMapSelect = 346,
     QuestRedo = 347,
     QuestRedoHud = 348,
-
-    CircleList = 350, // Fellowships
+    CircleInvite = 349, // Fellowships
+    CircleList = 350,
     CircleBook = 351,
-
+    CircleBookSetting = 352,
+    CircleBookBlackList = 353,
+    CircleBookQuestion = 354,
+    CircleBookGroupSetting = 355,
     CircleFinder = 356,
-
+    CircleFinderSetting = 357,
     MentorCondition = 358,
     PerformanceMetronome = 359,
     PerformanceGamepadGuide = 360,
-
+    PerformancePlayGuide = 361,
     PerformanceReadyCheck = 362,
-
+    HwdInfoBoard = 363,
+    HwdLottery = 364,
+    HwdSupply = 365,
     HwdAetherGauge = 366,
     HwdGathererInspection = 367,
     HwdScore = 368,
@@ -375,7 +390,7 @@ public enum AgentId : uint {
     HwdMonument = 370,
     McGuffin = 371, // Collection
     CraftActionSimulator = 372,
-    IKDSchedule = 373, //Ocean Fishing
+    IKDSchedule = 373, // Ocean Fishing
     IKDFishingLog = 374,
     IKDResult = 375,
     IKDMission = 376,
@@ -388,7 +403,7 @@ public enum AgentId : uint {
     MycDuelRequest = 383,
     MycBattleAreaInfo = 384, // Bozja Recruitment
 
-    OrnamentNoteBook = 386, //Accessories
+    OrnamentNoteBook = 386, // Accessories
 
     TourismMenu = 388,
     GatheringMasterpiece = 389,
@@ -406,7 +421,7 @@ public enum AgentId : uint {
     CharaCard = 401, // AdventurerPlate
     CharaCardDesignSetting = 402,
     CharaCardProfileSetting = 403,
-
+    PvPMKSRankRating = 404,
     PvPMKSIntroduction = 405,
     MJIHud = 406, // Island Sanctuary
     MJIPouch = 407,
@@ -428,20 +443,25 @@ public enum AgentId : uint {
 
     MJINekomimiRequest = 424, // favors
     ArchiveItem = 425,
-
+    Class2JobHotbar = 426,
     VVDNotebook = 427,
     VVDFinder = 428,
     TofuList = 429,
-
+    TofuPreview = 430,
+    TofuPreset = 431,
     BannerParty = 432,
     BannerMIP = 433,
     TurnBreak = 434,
-
+    MandervilleWeapon = 435,
     SXTBattleLog = 436,
     MoogleCollection = 437,
     FGSEnterDialog = 438,
     FGSStageIntro = 439,
     FGSHud = 440,
     FGSWinner = 441,
-    FGSResult = 442
+    FGSResult = 442,
+    PointMenu = 443,
+    TradeScreenImage = 444,
+    Glasses = 445,
+    TermFilter = 446
 }

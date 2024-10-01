@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "E8 ?? ?? ?? ?? 4C 8D A7 ?? ?? ?? ?? 49 8B CC E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??"
 [GenerateInterop]
 [Inherits<LogModule>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3488)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3710)]
 public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureLogModule();
 
@@ -42,6 +42,9 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x3478)] public LogMessageSource* MsgSourceArray;
     [FieldOffset(0x3480)] public int MsgSourceArrayLength;
 
+    [FieldOffset(0x3488)] public AddonMessageSub AddonMessageSub3488;
+
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 48 8D 4D 00")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
@@ -67,10 +70,16 @@ public unsafe partial struct RaptureLogModule {
     public partial bool GetLogMessage(int index, Utf8String* str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 51 44 0F B6 95")]
-    public partial bool GetLogMessageDetail(int index, short* logKind, Utf8String* sender, Utf8String* message, int* timestamp);
+    public partial bool GetLogMessageDetail(int index, short* outLogInfo, Utf8String* outSender, Utf8String* outMessage, int* outTimestamp);
 
     [MemberFunction("4C 8B D9 48 8B 89")]
     public partial void AddMsgSourceEntry(ulong contentId, ulong accountId, int messageIndex, ushort worldId, ushort chatType);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 44 24 ?? 41 8B D7")]
+    public partial void SetTabName(int tabIndex, Utf8String* tabName);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 73 01")]
+    public partial Utf8String* GetTabName(int tabIndex);
 
     public bool GetLogMessage(int index, out byte[] message) {
         using var pMsg = new Utf8String();
@@ -79,6 +88,39 @@ public unsafe partial struct RaptureLogModule {
         return result;
     }
 
+    /// <remarks>
+    /// For <paramref name="casterKind"/> and <paramref name="targetKind"/> the values are:<br/>
+    /// 0 = You<br/>
+    /// 1 = Party Member<br/>
+    /// 2 = Alliance Member<br/>
+    /// 3 = Other PC<br/>
+    /// 4 = Engaged Enemy<br/>
+    /// 5 = Unengaged Enemy<br/>
+    /// 6 = Friendly NPCs<br/>
+    /// 7 = Pets/Companions<br/>
+    /// 8 = Pets/Companions (Party)<br/>
+    /// 9 = Pets/Companions (Alliance)<br/>
+    /// 10 = Pets/Companions (Other PC)
+    /// </remarks>
+    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out sbyte casterKind, out sbyte targetKind, out int timestamp) {
+        using var pSender = new Utf8String();
+        using var pMessage = new Utf8String();
+        short pLogInfo;
+        int pTimestamp;
+
+        var result = GetLogMessageDetail(index, &pLogInfo, &pSender, &pMessage, &pTimestamp);
+
+        logKind = (short)(pLogInfo & 0x7F);
+        casterKind = (sbyte)(((pLogInfo >> 11) & 0xF) - 1);
+        targetKind = (sbyte)(((pLogInfo >> 7) & 0xF) - 1);
+        timestamp = pTimestamp;
+        sender = pSender.AsSpan().ToArray();
+        message = pMessage.AsSpan().ToArray();
+
+        return result;
+    }
+
+    [Obsolete("The logKind parameter is incorrect. It contains the LogKind RowId in the first 7 bits, then 4 bits of casterKind and 4 bits of targetKind. Use the GetLogMessageDetail overload with casterKind and targetKind params instead.")]
     public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out int time) {
         using var pMessage = new Utf8String();
         using var pSender = new Utf8String();
@@ -92,6 +134,20 @@ public unsafe partial struct RaptureLogModule {
         sender = pSender.AsSpan().ToArray();
         message = pMessage.AsSpan().ToArray();
         return result;
+    }
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x2A)]
+    public unsafe partial struct AddonMessageSub {
+        [FieldOffset(0x00)] public ulong AccountId;
+        [FieldOffset(0x08)] public ulong ContentId;
+        [FieldOffset(0x10)] public byte* Name;
+        [FieldOffset(0x18)] public Utf8String* MessageText;
+        [FieldOffset(0x20)] public uint EntityId;
+        [FieldOffset(0x24)] public ushort ChatType;
+        [FieldOffset(0x26)] public ushort WorldId;
+        [FieldOffset(0x28)] public sbyte PartyOrAllianceMemberIdent;
+        [FieldOffset(0x29)] public byte Flags;
     }
 }
 

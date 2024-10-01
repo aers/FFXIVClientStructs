@@ -12,6 +12,7 @@ public unsafe partial struct GameWindow {
     [FieldOffset(0x24)] public int WindowHeight; // Only used and correct if in Windowed Mode
     [FieldOffset(0x28)] public int LastWindowPosX;
     [FieldOffset(0x2C)] public int LastWindowPosY;
+    [FieldOffset(0x31)] public bool Borderless;
 
     [FieldOffset(0x58)] public int MinWidth;
     [FieldOffset(0x5C)] public int MinHeight;
