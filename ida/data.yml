@@ -814,8 +814,6 @@ classes:
         base: Component::Text::Localize::Noun
     funcs:
       0x140780500: ctor
-  SQEX::CDev::Engine::Sd::SdMemoryAllocator:
-  SQEX::CDev::Engine::Sd::Driver::BankController:
   Client::System::Scheduler::Base::LinkList:
   Application::Network::WorkDefinitions::Base:
     vtbls:
@@ -16454,14 +16452,56 @@ classes:
     vtbls:
       - ea: 0x142149308
         base: Client::System::Scheduler::Base::SchedulerState
-  SQEX::CDev::Engine::Sd::Driver::IEffect:
+  SQEX::CDev::Engine::Sd::SdMemoryAllocator:
+  SQEX::CDev::Engine::Sd::Driver::ReverbController:
     vtbls:
-      - ea: 0x142223D48
+      - ea: 0x142221068
         base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
-  SQEX::CDev::Engine::Sd::Driver::FilterBase:
+  SQEX::CDev::Engine::Sd::Driver::BankController:
     vtbls:
-      - ea: 0x142223D78
-        base: SQEX::CDev::Engine::Sd::Driver::IEffect
+      - ea: 0x142221078
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::BusController:
+    vtbls:
+      - ea: 0x142221088
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::SoundController:
+    vtbls:
+      - ea: 0x1422210D8
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::EffectController:
+    vtbls:
+      - ea: 0x142221498
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::Bank:
+    vtbls:
+      - ea: 0x1422214A8
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::ActualBank:
+    vtbls:
+      - ea: 0x142221620
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Common::Threading::Thread:
+    vtbls:
+      - ea: 0x1422217D8
+        base: Client::System::Threading::Thread
+  SQEX::CDev::Engine::Sd::Driver::StreamReadThread:
+    vtbls:
+      - ea: 0x142221810
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::IStreamReadThreadEventReceiver:
+    vtbls:
+      - ea: 0x142221828
+  SQEX::CDev::Engine::Sd::Driver::StreamBankEx:
+    vtbls:
+      - ea: 0x142221838
+        base: SQEX::CDev::Engine::Sd::Driver::ActualBank
+      - ea: 0x1422219B0
+        base: SQEX::CDev::Engine::Sd::Driver::IStreamReadThreadEventReceiver
+  SQEX::CDev::Engine::Sd::Driver::ToolBank:
+    vtbls:
+      - ea: 0x142221838
+        base: SQEX::CDev::Engine::Sd::Driver::Bank
   SQEX::CDev::Engine::Sd::Driver::DynamicValue:
     vtbls:
       - ea: 0x142221BD0
@@ -16469,9 +16509,18 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::ISound:
     vtbls:
       - ea: 0x142221C10
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::RootSound:
     vtbls:
       - ea: 0x142221FD8
+        base: SQEX::CDev::Engine::Sd::Driver::ISound
+  SQEX::CDev::Engine::Sd::Driver::RandomSound:
+    vtbls:
+      - ea: 0x1422223D0
+        base: SQEX::CDev::Engine::Sd::Driver::ISound
+  SQEX::CDev::Engine::Sd::Driver::CycleSound:
+    vtbls:
+      - ea: 0x1422227C8
         base: SQEX::CDev::Engine::Sd::Driver::ISound
   SQEX::CDev::Engine::Sd::Driver::StreamSoundEx:
     vtbls:
@@ -16481,10 +16530,174 @@ classes:
     vtbls:
       - ea: 0x142222FB8
         base: SQEX::CDev::Engine::Sd::Driver::RootSound
+  SQEX::CDev::Engine::Sd::Driver::OrderSound:
+    vtbls:
+      - ea: 0x1422233B0
+        base: SQEX::CDev::Engine::Sd::Driver::RootSound
   SQEX::CDev::Engine::Sd::Driver::Surround4chSound:
     vtbls:
       - ea: 0x1422237A8
         base: SQEX::CDev::Engine::Sd::Driver::RootSound
+  SQEX::CDev::Engine::Sd::Driver::Bus:
+    vtbls:
+      - ea: 0x142223BC0
+        base: SQEX::CDev::Engine::Sd::Driver::Bank
+  SQEX::CDev::Engine::Sd::Driver::IEffect:
+    vtbls:
+      - ea: 0x142223D48
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::FilterBase:
+    vtbls:
+      - ea: 0x142223D78
+        base: SQEX::CDev::Engine::Sd::Driver::IEffect
+  SQEX::CDev::Engine::Sd::Driver::Sead::LowpassFilterSead:
+    vtbls:
+      - ea: 0x142223DE0
+        base: SQEX::CDev::Engine::Sd::Driver::FilterBase
+  SQEX::CDev::Engine::Sd::Driver::Sead::MasterBusSead:
+    vtbls:
+      - ea: 0x142223E98
+        base: SQEX::CDev::Engine::Sd::Driver::MasterBus
+  SQEX::CDev::Engine::Sd::Driver::Reverb:
+    vtbls:
+      - ea: 0x142223EE0
+        base: SQEX::CDev::Engine::Sd::Driver::IEffect
+  SQEX::CDev::Engine::Sd::Driver::Sead::ReverbSead:
+    vtbls:
+      - ea: 0x142223F68
+        base: SQEX::CDev::Engine::Sd::Driver::Reverb
+  SQEX::CDev::Engine::Sd::Driver::ConfigReader:
+    vtbls:
+      - ea: 0x1422242F8
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::Sd::FixedList<1,SQEX::Sd::Driver::Core::CoreSourceVoice*>:
+    vtbls:
+      - ea: 0x1422245F8
+        base: SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::FixedList<1,SQEX::Sd::Driver::Core::CoreSubmixVoice*>:
+    vtbls:
+      - ea: 0x142224600
+        base: SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::List<1,SQEX::Sd::Driver::Core::CoreSourceVoice*>:
+    vtbls:
+      - ea: 0x142224608
+        base: SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::SeadObject<1,8>:
+    vtbls:
+      - ea: 0x142224610
+  SQEX::Sd::FixedQueue<1,SQEX::Sd::Driver::Core::ICoreVoice*>:
+    vtbls:
+      - ea: 0x142224618
+        base: SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::FixedList<1,SQEX::Sd::Driver::Core::CoreSubmixVoice*>::NODE:
+    vtbls:
+      - ea: 0x142224620
+        base: SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::List<1,SQEX::Sd::Driver::Core::CoreSourceVoice*>::NODE:
+    vtbls:
+      - ea: 0x142224628
+        base: SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::FixedList<1,SQEX::Sd::Driver::Core::CoreSourceVoice*>::NODE:
+    vtbls:
+      - ea: 0x142224630
+        base: SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::FixedQueue<1,SQEX::Sd::Driver::Core::ICoreVoice*>::NODE:
+    vtbls:
+      - ea: 0x142224638
+        base: SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::Driver::Core::ICoreEffect:
+    vtbls:
+      - ea: 0x142224A00
+  SQEX::Sd::SeadObject<2,16>:
+    vtbls:
+      - ea: 0x142224A28
+  SQEX::Sd::Driver::Effect:
+    vtbls:
+      - ea: 0x142224A30
+        base: SQEX::Sd::SeadObject<2,16>
+      - ea: 0x142224A70
+        base: SQEX::Sd::Driver::Core::ICoreEffect
+  SQEX::Sd::SeadObject<2,8>:
+    vtbls:
+      - ea: 0x142224A98
+  SQEX::Sd::DynamicValue<2>:
+    vtbls:
+      - ea: 0x142224AA0
+        base: SQEX::Sd::SeadObject<2,8>
+  SQEX::Sd::Driver::FaithReverb:
+    vtbls:
+      - ea: 0x142224AA8
+        base: SQEX::Sd::Driver::Effect
+      - ea: 0x142224AE8
+        base: SQEX::Sd::Driver::Core::ICoreEffect
+  SQEX::CDev::Engine::Sd::Driver::WahWahBase:
+    vtbls:
+      - ea: 0x142224BB0
+        base: SQEX::CDev::Engine::Sd::Driver::IEffect
+  SQEX::CDev::Engine::Sd::Driver::Sead::WahWahSead:
+    vtbls:
+      - ea: 0x142224C28
+        base: SQEX::CDev::Engine::Sd::Driver::WahWahBase
+  SQEX::CDev::Engine::Sd::Driver::Sead::FilterSead: # SQEX::CDev::Engine::Sd::Driver::FilterBase, SQEX::CDev::Engine::Sd::Driver::IEffect, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+    vtbls:
+      - ea: 0x142224CB8
+        base: SQEX::CDev::Engine::Sd::Driver::FilterBase
+  SQEX::Sd::Driver::Equalizer:
+    vtbls:
+      - ea: 0x142224D28
+        base: SQEX::Sd::Driver::Effect
+  SQEX::Sd::Driver::Stringendo: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+  SQEX::CDev::Engine::Sd::Driver::Sead::EqualizerSead: # SQEX::CDev::Engine::Sd::Driver::EqualizerBase, SQEX::CDev::Engine::Sd::Driver::IEffect, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::MasterBus:
+    vtbls:
+      - ea: 0x142224EF0
+        base: SQEX::CDev::Engine::Sd::Driver::Bus
+  SQEX::Sd::Driver::Core::ICoreSourceVoiceCallback:
+  SQEX::CDev::Engine::Sd::Driver::IVoice: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Driver::Sead::VoiceSead: # SQEX::CDev::Engine::Sd::Driver::IVoice, SQEX::CDev::Engine::Sd::SdMemoryAllocator, SQEX::Sd::Driver::Core::ICoreSourceVoiceCallback
+  SQEX::Sd::Driver::WASAPI::DeviceEventHandler: # SQEX::Sd::SeadObject<1,8>, struct IMMNotificationClient, struct IUnknown
+  SQEX::Sd::Driver::WASAPI::WASAPIDevice: # SQEX::Sd::Driver::WASAPI::AudioDevice, SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::Driver::WASAPI::MockDevice: # SQEX::Sd::Driver::WASAPI::AudioDevice, SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::Driver::WASAPI::AudioRenderer: # SQEX::Sd::SeadObject<1,8>
+  SQEX::Sd::SeadObject<1,16>:
+  SQEX::Sd::Driver::Core::CoreMasterVoice: # SQEX::Sd::Driver::Core::ICoreMasterVoice, SQEX::Sd::Driver::Core::ICoreSubmixVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>
+  SQEX::Sd::Driver::Core::CoreSubmixVoice: # SQEX::Sd::Driver::Core::ICoreSubmixVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>
+  SQEX::Sd::Driver::Core::CoreSourceVoice: # SQEX::Sd::Driver::Core::ICoreSourceVoice, SQEX::Sd::Driver::Core::ICoreVoice, SQEX::Sd::SeadObject<1,16>
+  SQEX::Sd::Driver::SeadFilter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+  SQEX::Sd::Driver::WahWah: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+  SQEX::Sd::Driver::Filter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+  SQEX::CDev::Engine::Sd::Driver::EqualizerBase: # SQEX::CDev::Engine::Sd::Driver::IEffect, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::Sd::Driver::Equalizer4Band: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+  SQEX::Sd::Driver::SimpleFilter: # SQEX::Sd::Driver::Effect, SQEX::Sd::SeadObject<2,16>, SQEX::Sd::Driver::Core::ICoreEffect
+  SQEX::CDev::Engine::Sd::Layout::ILayoutManager: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::LayoutManager: # SQEX::CDev::Engine::Sd::Layout::ILayoutManager, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::PageController: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::ListenerController:
+    vtbls:
+      - ea: 0x14222B878
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::SoundPage: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::IListenerManager: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::ListenerManager: # SQEX::CDev::Engine::Sd::Layout::IListenerManager, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::SoundObject: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::AmbientSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::DirectionSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::PointSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::PointDirSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::LineSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::PolyLineSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::SurfaceSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::BoardObstruction: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::BoxObstruction: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::PolygonObstruction: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::PolyLineObstruction: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::PolygonSound: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::BoxExtController: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::LineExtController: # SQEX::CDev::Engine::Sd::Layout::SoundObject, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::IListener: # SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::Listener: # SQEX::CDev::Engine::Sd::Layout::IListener, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::PointListener: # SQEX::CDev::Engine::Sd::Layout::Listener, SQEX::CDev::Engine::Sd::Layout::IListener, SQEX::CDev::Engine::Sd::SdMemoryAllocator
+  SQEX::CDev::Engine::Sd::Layout::LineListener: # SQEX::CDev::Engine::Sd::Layout::Listener, SQEX::CDev::Engine::Sd::Layout::IListener, SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::ISoundDriver:
     vtbls:
       - ea: 0x14227AD48
