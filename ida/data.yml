@@ -2092,6 +2092,13 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x140B2F650: ctor # unused, inlined
+      0x140B30C50: GetItem
+      0x140B30DF0: SetSelectedIndex
+  Client::Game::UI::LootItem:
+    funcs:
+      0x140B2F220: ctor_FromData
+      0x140B2F2E0: ctor
+      0x140B2F330: GetMateria
   Client::Game::UI::GatheringNote:
     instances:
       - ea: 0x14276B7F0

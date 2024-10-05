@@ -20,25 +20,36 @@ public unsafe partial struct Loot {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe struct LootItem {
+public struct LootItem {
     [FieldOffset(0x00)] public uint ChestObjectId;
     [FieldOffset(0x04)] public uint ChestItemIndex; // This loot item's index in the chest it came from
     [FieldOffset(0x08)] public uint ItemId;
     [FieldOffset(0x0C)] public ushort ItemCount;
+    [FieldOffset(0x0E), FixedSizeArray] internal FixedSizeArray2<LootItemMateria> _materia;
+    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray2<byte> _glamourStainIds;
+
+    [FieldOffset(0x1C)] public uint GlamourItemId;
     [FieldOffset(0x20)] public RollState RollState;
     [FieldOffset(0x24)] public RollResult RollResult;
     [FieldOffset(0x28)] public uint RollValue;
     [FieldOffset(0x2C)] public float Time;
     [FieldOffset(0x30)] public float MaxTime;
+    
     [FieldOffset(0x38)] public LootMode LootMode;
 }
 
-public enum RollState {
-    UpToNeed = 0, //Can roll up to Need
-    UpToGreed = 1,//Can roll up to Gree
-    UpToPass = 2, //Can only pass
+[StructLayout(LayoutKind.Explicit, Size = 2)]
+public struct LootItemMateria {
+    [FieldOffset(0x00)] public byte MateriaId;
+    [FieldOffset(0x01)] public byte MateriaGrade;
+}
+
+public enum RollState { // TODO: underlying type should be byte
+    UpToNeed = 0, // Can roll up to Need
+    UpToGreed = 1,// Can roll up to Gree
+    UpToPass = 2, // Can only pass
     Rolled = 17,
-    Unavailable = 21, //Lootmaster undecided?
+    Unavailable = 21, // Lootmaster undecided?
     Unknown = 28, // Default value
 }
 

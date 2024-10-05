@@ -39,7 +39,7 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x1128)] public uint DialogAddonId;
     [FieldOffset(0x112C)] public uint DialogAddonId2;
     [FieldOffset(0x1130)] public uint LobbyScreenTextAddonId;
-    // [FieldOffset(0x1134)] public uint LogoAddonId; // not used?
+    [FieldOffset(0x1134)] public uint LogoAddonId;
     [FieldOffset(0x1138)] public uint TitleDCWorldMapAddonId;
     [FieldOffset(0x113C)] public uint TitleMovieSelectorAddonId;
     [FieldOffset(0x1140)] public uint TitleGameVersionAddonId;
