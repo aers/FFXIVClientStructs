@@ -151,9 +151,9 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(201)] public partial ??? ShowRaceCountdownEnd(???);
     // [VirtualFunction(205)] public partial ??? IsDutyRaidFinderOpen(???);
     [VirtualFunction(211)] public partial void ShowAdventureNotice(int index);
-    [VirtualFunction(215)] public partial int RotateLinkshellHistory(int offset); // TODO: return void
+    [VirtualFunction(215)] public partial void RotateLinkshellHistory(int offset);
     [VirtualFunction(216)] public partial void SetLinkshellCycle(int linkshellCycle);
-    [VirtualFunction(217)] public partial int RotateCrossLinkshellHistory(int offset); // TODO: return void
+    [VirtualFunction(217)] public partial void RotateCrossLinkshellHistory(int offset);
     // [VirtualFunction(233)] public partial ??? ShowRaceCountdownStart(???);
     // [VirtualFunction(234)] public partial ??? ShowRaceCountdownEnd_2(???);
 }
