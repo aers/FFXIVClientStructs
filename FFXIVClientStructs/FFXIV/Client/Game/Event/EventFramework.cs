@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
@@ -35,6 +36,9 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??")]
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
+
+    [MemberFunction("40 53 57 41 56 48 83 EC 70 48 8B 02")]
+    public partial bool CheckInteractRange(GameObject* source, GameObject* target, byte interactionType, bool logErrorsToUser);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8")]
     public static partial uint GetCurrentContentId();
