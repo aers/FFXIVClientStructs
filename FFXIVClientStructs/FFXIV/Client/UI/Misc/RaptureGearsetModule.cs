@@ -80,7 +80,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </summary>
     /// <param name="gearsetId">The gearset ID to delete.</param>
     [MemberFunction("48 89 6C 24 ?? 57 48 83 EC 20 48 8B F9 48 63 EA")]
-    public partial void UpdateGearset(int gearsetId);
+    public partial int UpdateGearset(int gearsetId);
 
     /// <summary>
     /// Reassigns the ID of a gearset, effectively swapping the positions of two gearsets.

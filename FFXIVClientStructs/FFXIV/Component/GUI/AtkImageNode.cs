@@ -27,7 +27,7 @@ public unsafe partial struct AtkImageNode : ICreatable {
     public partial void LoadTexture(byte* texturePath, uint version = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 E7 0F")]
-    public partial void LoadIconTexture(uint iconId, int version);
+    public partial void LoadIconTexture(uint iconId, int language);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 FF 78 1E")]
     public partial void UnloadTexture();
