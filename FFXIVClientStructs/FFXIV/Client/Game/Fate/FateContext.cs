@@ -17,7 +17,7 @@ public partial struct FateContext {
     [FieldOffset(0x128)] public Utf8String Description;
     [FieldOffset(0x190)] public Utf8String Objective;
 
-    [FieldOffset(0x3AC)] public byte State;
+    [FieldOffset(0x3AC)] public FateState State;
     [FieldOffset(0x3AF)] public byte HandInCount;
     [FieldOffset(0x3B8)] public byte Progress;
     /// <summary>
@@ -45,4 +45,12 @@ public partial struct FateContext {
     [FieldOffset(0x464)] public float Radius;
 
     [FieldOffset(0x79A)] public ushort TerritoryId;
+}
+
+public enum FateState : byte {
+    Running = 2,
+    Ended = 4,
+    Failed = 5,
+    Preparing = 7,
+    Ending = 8,
 }
