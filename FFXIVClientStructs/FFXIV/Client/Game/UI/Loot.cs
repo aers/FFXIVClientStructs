@@ -34,7 +34,7 @@ public struct LootItem {
     [FieldOffset(0x28)] public uint RollValue;
     [FieldOffset(0x2C)] public float Time;
     [FieldOffset(0x30)] public float MaxTime;
-    
+
     [FieldOffset(0x38)] public LootMode LootMode;
 }
 
