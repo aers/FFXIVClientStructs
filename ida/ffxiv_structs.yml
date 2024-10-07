@@ -828,6 +828,39 @@ enums:
     "Unk6": 6
     "Unk7": 7
     "Unk8": 8
+- type: Client::UI::Agent::ActionKind
+  name: ActionKind
+  underlying: int
+  namespace: Client.UI.Agent
+  values:
+    "Action": 28
+    "CraftingAction": 29
+    "GeneralAction": 30
+    "BuddyOrder": 31
+    "MainCommand": 32
+    "ExtraCommand": 33
+    "Companion": 34
+    "PetOrder": 35
+    "Trait": 36
+    "BuddyAction": 37
+    "CompanyAction": 38
+    "Mount": 39
+    "ChocoboRaceAction": 40
+    "ChocoboRaceItem": 41
+    "DeepDungeonEquipment": 42
+    "DeepDungeonEquipment2": 43
+    "DeepDungeonItem": 44
+    "QuickChat": 45
+    "ActionComboRoute": 46
+    "PvPSelectTrait": 47
+    "BgcArmyAction": 48
+    "Perform": 49
+    "DeepDungeonMagicStone": 50
+    "DeepDungeonDemiclone": 51
+    "EurekaMagiaAction": 52
+    "MYCTemporaryItem": 53
+    "Ornament": 54
+    "Glasses": 55
 - type: Client::UI::Agent::AozWeeklyFlags
   name: AozWeeklyFlags
   underlying: byte
@@ -4304,6 +4337,25 @@ structs:
       name: this
     - type: unsigned int
       name: index
+- type: Client::Game::Event::EventHandlerSelector::Option
+  name: Option
+  namespace: Client.Game.Event
+  union: False
+  size: 32
+  fields:
+  - type: int
+    name: GlobalIndex
+    offset: 0
+  - type: Client::Game::Event::EventHandler*
+    name: Handler
+    offset: 8
+  - type: unsigned __int16
+    name: IconId
+    offset: 24
+  - type: int
+    name: LocalIndex
+    offset: 28
+  member_functions: []
 - type: Client::Game::Event::EventId
   name: EventId
   namespace: Client.Game.Event
@@ -7237,42 +7289,18 @@ structs:
       name: character
     - type: byte
       name: level
-- type: Client::Game::UI::LootItem
-  name: LootItem
+- type: Client::Game::UI::LootItemMateria
+  name: LootItemMateria
   namespace: Client.Game.UI
   union: False
-  size: 64
+  size: 2
   fields:
-  - type: unsigned int
-    name: ChestObjectId
+  - type: byte
+    name: MateriaId
     offset: 0
-  - type: unsigned int
-    name: ChestItemIndex
-    offset: 4
-  - type: unsigned int
-    name: ItemId
-    offset: 8
-  - type: unsigned __int16
-    name: ItemCount
-    offset: 12
-  - type: Client::Game::UI::RollState
-    name: RollState
-    offset: 32
-  - type: Client::Game::UI::RollResult
-    name: RollResult
-    offset: 36
-  - type: unsigned int
-    name: RollValue
-    offset: 40
-  - type: float
-    name: Time
-    offset: 44
-  - type: float
-    name: MaxTime
-    offset: 48
-  - type: Client::Game::UI::LootMode
-    name: LootMode
-    offset: 56
+  - type: byte
+    name: MateriaGrade
+    offset: 1
   member_functions: []
 - type: Client::Game::UI::LovmRanking
   name: LovmRanking
@@ -7392,14 +7420,6 @@ structs:
     name: Counts
     offset: 0
     size: 5
-  member_functions: []
-- type: Client::Game::UI::NpcTrade
-  name: NpcTrade
-  namespace: Client.Game.UI
-  union: False
-  size: 808
-  fields: []
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::UI::PetInfo
   name: PetInfo
@@ -20704,6 +20724,183 @@ structs:
     - type: Client::Game::Event::LuaScriptLoader*
       name: this
   member_functions: []
+- type: Client::Game::Event::ShopEventHandler::AgentProxy
+  name: AgentProxy
+  namespace: Client.Game.Event
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+    base: true
+  - type: Client::Game::Event::ShopEventHandler*
+    name: Handler
+    offset: 16
+  - type: unsigned int
+    name: AddonId
+    offset: 24
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler::AgentProxy*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  member_functions: []
+- type: Client::Game::Event::ShopEventHandler::BuybackItem
+  name: BuybackItem
+  namespace: Client.Game.Event
+  union: False
+  size: 184
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: int
+    name: Quantity
+    offset: 4
+  - type: int
+    name: Price
+    offset: 8
+  - type: int
+    name: NumOwned
+    offset: 12
+  - type: Client::Game::InventoryItem::ItemFlags
+    name: Flags
+    offset: 16
+  - type: Client::System::String::Utf8String
+    name: ItemName
+    offset: 24
+  - type: unsigned int
+    name: CategoryIcon
+    offset: 132
+  - type: unsigned int
+    name: ShopId
+    offset: 136
+  - type: unsigned __int64
+    name: CrafterContentId
+    offset: 144
+  - type: unsigned __int16
+    name: Materia
+    offset: 152
+    size: 5
+  - type: byte
+    name: MateriaGrades
+    offset: 162
+    size: 5
+  - type: unsigned __int16
+    name: Condition
+    offset: 168
+  - type: unsigned __int16
+    name: Spiritbond
+    offset: 170
+  - type: byte
+    name: Stains
+    offset: 172
+    size: 2
+  - type: unsigned int
+    name: GlamourId
+    offset: 176
+  - type: byte
+    name: IsUnique
+    offset: 180
+  member_functions: []
+- type: Client::Game::Event::ShopEventHandler::ShopItem
+  name: ShopItem
+  namespace: Client.Game.Event
+  union: False
+  size: 168
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: int
+    name: PriceBuy
+    offset: 4
+  - type: int
+    name: PriceSell
+    offset: 8
+  - type: int
+    name: NumOwned
+    offset: 12
+  - type: int
+    name: StackSize
+    offset: 16
+  - type: byte
+    name: IsUnique
+    offset: 20
+  - type: unsigned int
+    name: CategoryIcon
+    offset: 24
+  - type: Client::System::String::Utf8String
+    name: ItemName
+    offset: 32
+  - type: byte
+    name: IsHQ
+    offset: 136
+  - type: unsigned int
+    name: QuestRequired1
+    offset: 140
+  - type: unsigned int
+    name: QuestRequired2
+    offset: 144
+  - type: unsigned int
+    name: SubRowId
+    offset: 152
+  - type: byte
+    name: CategoryOrderMajor
+    offset: 156
+  - type: byte
+    name: CategoryOrderMinor
+    offset: 157
+  - type: unsigned __int16
+    name: StateRequired
+    offset: 164
+  - type: unsigned __int16
+    name: PatchAdded
+    offset: 166
+  member_functions: []
+- type: Client::Game::Event::ShopEventHandler::YesNoProxy
+  name: YesNoProxy
+  namespace: Client.Game.Event
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+    base: true
+  - type: Client::Game::Event::ShopEventHandler*
+    name: Handler
+    offset: 16
+  - type: unsigned int
+    name: AddonId
+    offset: 24
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler::YesNoProxy*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  member_functions: []
 - type: Client::Game::HousingFurniture
   name: HousingFurniture
   namespace: Client.Game
@@ -21312,6 +21509,54 @@ structs:
       name: this
     - type: unsigned int
       name: classJobId
+- type: Client::Game::UI::LootItem
+  name: LootItem
+  namespace: Client.Game.UI
+  union: False
+  size: 64
+  fields:
+  - type: unsigned int
+    name: ChestObjectId
+    offset: 0
+  - type: unsigned int
+    name: ChestItemIndex
+    offset: 4
+  - type: unsigned int
+    name: ItemId
+    offset: 8
+  - type: unsigned __int16
+    name: ItemCount
+    offset: 12
+  - type: Client::Game::UI::LootItemMateria
+    name: Materia
+    offset: 14
+    size: 2
+  - type: byte
+    name: GlamourStainIds
+    offset: 24
+    size: 2
+  - type: unsigned int
+    name: GlamourItemId
+    offset: 28
+  - type: Client::Game::UI::RollState
+    name: RollState
+    offset: 32
+  - type: Client::Game::UI::RollResult
+    name: RollResult
+    offset: 36
+  - type: unsigned int
+    name: RollValue
+    offset: 40
+  - type: float
+    name: Time
+    offset: 44
+  - type: float
+    name: MaxTime
+    offset: 48
+  - type: Client::Game::UI::LootMode
+    name: LootMode
+    offset: 56
+  member_functions: []
 - type: Client::Game::UI::MateriaTrade
   name: MateriaTrade
   namespace: Client.Game.UI
@@ -21433,6 +21678,48 @@ structs:
       name: this
     - type: byte
       name: markIndex
+- type: Client::Game::UI::NpcTrade::Item
+  name: Item
+  namespace: Client.Game.UI
+  union: False
+  size: 144
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: int
+    name: RequiredQuantity
+    offset: 4
+  - type: unsigned int
+    name: IconId
+    offset: 8
+  - type: Client::System::String::Utf8String
+    name: ItemName
+    offset: 16
+  - type: byte
+    name: WantHQ
+    offset: 120
+  - type: unsigned __int16
+    name: WantMateriaIds
+    offset: 122
+    size: 5
+  - type: byte
+    name: WantMateriaGrades
+    offset: 132
+    size: 5
+  - type: byte
+    name: WantMateriaFilledSlots
+    offset: 137
+  - type: unsigned __int16
+    name: MinCollectibility
+    offset: 138
+  - type: byte
+    name: WantCollectible
+    offset: 140
+  - type: byte
+    name: Stackable
+    offset: 141
+  member_functions: []
 - type: Client::Game::UI::PublicInstance::Listener
   name: Listener
   namespace: Client.Game.UI
@@ -35071,6 +35358,42 @@ structs:
       name: objectArray
     - type: Client::Game::Camera*
       name: camera
+- type: Client::Game::Event::EventHandlerSelector
+  name: EventHandlerSelector
+  namespace: Client.Game.Event
+  union: False
+  size: 1064
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+    base: true
+  - type: Client::Game::Object::GameObject*
+    name: Target
+    offset: 16
+  - type: Client::Game::Event::EventHandlerSelector::Option
+    name: Options
+    offset: 24
+    size: 32
+  - type: int
+    name: OptionsCount
+    offset: 1048
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::Event::EventHandlerSelector*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  member_functions: []
 - type: Client::Game::Event::EventSceneModuleTaskManager
   name: EventSceneModuleTaskManager
   namespace: Client.Game.Event
@@ -35836,6 +36159,14 @@ structs:
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: color
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::GameObject*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: outHandlers
   - name: SetReadyToDraw
     offset: 272
     return_type: void
@@ -35952,6 +36283,12 @@ structs:
   - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 17 45 33 C9
     return_type: byte
     name: IsReadyToDraw
+    parameters:
+    - type: Client::Game::Object::GameObject*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F 5A C7
+    return_type: Common::Math::Vector3*
+    name: GetPosition
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
@@ -36103,44 +36440,19 @@ structs:
     offset: 644
     size: 3
   member_functions: []
-- type: Client::Game::UI::Loot
-  name: Loot
+- type: Client::Game::UI::NpcTrade::ItemRequests
+  name: ItemRequests
   namespace: Client.Game.UI
   union: False
-  size: 1696
+  size: 728
   fields:
-  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
-    name: AtkEventInterface
+  - type: byte
+    name: Count
     offset: 0
-    base: true
-  - type: Client::Game::UI::LootItem
+  - type: Client::Game::UI::NpcTrade::Item
     name: Items
-    offset: 16
-    size: 16
-  - type: int
-    name: SelectedIndex
-    offset: 1040
-  - type: unsigned int
-    name: UnkObjectId
-    offset: 1048
-  - type: unsigned int
-    name: UnkObjectId2
-    offset: 1656
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::Game::UI::Loot*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
+    offset: 8
+    size: 5
   member_functions: []
 - type: Client::Game::UI::PublicInstance
   name: PublicInstance
@@ -37654,6 +37966,130 @@ structs:
       name: this
     - type: unsigned int
       name: achievementId
+- type: Client::UI::Agent::AgentActionDetail
+  name: AgentActionDetail
+  namespace: Client.UI.Agent
+  union: False
+  size: 96
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::ActionKind
+    name: ActionKind
+    offset: 56
+  - type: unsigned int
+    name: ActionId
+    offset: 60
+  - type: unsigned int
+    name: OriginalId
+    offset: 64
+  - type: unsigned int
+    name: AdjustedId
+    offset: 68
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 F8 0F
+    return_type: void
+    name: HandleActionHover
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+    - type: Client::UI::Agent::ActionKind
+      name: actionKind
+    - type: unsigned int
+      name: actionId
+    - type: int
+      name: flag
+    - type: byte
+      name: unk
 - type: Client::UI::Agent::AgentAetherCurrent
   name: AgentAetherCurrent
   namespace: Client.UI.Agent
@@ -42346,7 +42782,7 @@ structs:
   name: AgentRequest
   namespace: Client.UI.Agent
   union: False
-  size: 1120
+  size: 2128
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -42358,6 +42794,10 @@ structs:
   - type: __int16
     name: SelectedTurnInSlotItemOptions
     offset: 292
+  - type: Client::Game::InventoryItem*
+    name: SelectedTurnInSlotItemOptionValues
+    offset: 304
+    size: 140
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -46433,6 +46873,14 @@ structs:
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: a2
   - name: SetReadyToDraw
     offset: 272
     return_type: void
@@ -46568,6 +47016,14 @@ structs:
     - type: Client::Game::Object::EventObject*
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+    - type: Client::Game::Event::EventHandler**
       name: a2
   - name: SetReadyToDraw
     offset: 272
@@ -46705,6 +47161,14 @@ structs:
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: a2
   - name: SetReadyToDraw
     offset: 272
     return_type: void
@@ -46768,6 +47232,45 @@ structs:
     - type: byte*
       name: a4
   member_functions: []
+- type: Client::Game::UI::Loot
+  name: Loot
+  namespace: Client.Game.UI
+  union: False
+  size: 1696
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+    base: true
+  - type: Client::Game::UI::LootItem
+    name: Items
+    offset: 16
+    size: 16
+  - type: int
+    name: SelectedIndex
+    offset: 1040
+  - type: unsigned int
+    name: UnkObjectId
+    offset: 1048
+  - type: unsigned int
+    name: UnkObjectId2
+    offset: 1656
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::Loot*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  member_functions: []
 - type: Client::Game::UI::MarkerInfo
   name: MarkerInfo
   namespace: Client.Game.UI
@@ -46824,6 +47327,25 @@ structs:
       name: this
     - type: Client::Game::UI::MarkerPresetPlacement*
       name: placement
+- type: Client::Game::UI::NpcTrade
+  name: NpcTrade
+  namespace: Client.Game.UI
+  union: False
+  size: 808
+  fields:
+  - type: Client::Game::UI::NpcTrade::ItemRequests
+    name: Requests
+    offset: 8
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::Game::UI::NpcTrade*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions: []
 - type: Client::Game::UI::RecipeNote::RecipeEntry
   name: RecipeEntry
   namespace: Client.Game.UI
@@ -53343,6 +53865,14 @@ structs:
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: a2
   - name: SetReadyToDraw
     offset: 272
     return_type: void
@@ -53484,6 +54014,14 @@ structs:
     - type: Client::Game::Object::MJIObject*
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
+    - type: Client::Game::Event::EventHandler**
       name: a2
   - name: SetReadyToDraw
     offset: 272
@@ -59918,6 +60456,14 @@ structs:
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: a2
   - name: SetReadyToDraw
     offset: 272
     return_type: void
@@ -60053,6 +60599,14 @@ structs:
     - type: Client::Game::Object::HousingCombinedObject*
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+    - type: Client::Game::Event::EventHandler**
       name: a2
   - name: SetReadyToDraw
     offset: 272
@@ -62492,6 +63046,12 @@ structs:
     name: UnkString1
     offset: 360
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -62552,6 +63112,10 @@ structs:
     offset: 0
   - name: Terminate
     offset: 48
+  - name: IsUnlocked
+    offset: 56
+  - name: GetIconId
+    offset: 1768
   - name: Initialize
     offset: 2104
   member_functions: []
@@ -64976,6 +65540,12 @@ structs:
     name: CraftFlags
     offset: 1128
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -65044,6 +65614,12 @@ structs:
     offset: 0
     base: true
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -69227,6 +69803,12 @@ structs:
     name: QuickGatheringEnabled
     offset: 1133
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -72738,6 +73320,202 @@ structs:
     offset: 64
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Event::ShopEventHandler
+  name: ShopEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 13040
+  fields:
+  - type: Client::Game::Event::EventHandler
+    name: EventHandler
+    offset: 0
+    base: true
+  - type: Client::System::String::Utf8String
+    name: ShopName
+    offset: 544
+  - type: unsigned int
+    name: ShopIcon
+    offset: 648
+  - type: Client::Game::GameMain::Festival
+    name: Festival
+    offset: 652
+  - type: unsigned int
+    name: UnlockQuestId
+    offset: 656
+  - type: Client::Game::Event::ShopEventHandler::ShopItem
+    name: Items
+    offset: 664
+    size: 60
+  - type: int
+    name: ItemsCount
+    offset: 10744
+  - type: int
+    name: VisibleItems
+    offset: 10748
+    size: 60
+  - type: int
+    name: VisibleItemsCount
+    offset: 10988
+  - type: byte
+    name: NeedSorting
+    offset: 10992
+  - type: int
+    name: SellPriceBuy
+    offset: 11004
+  - type: int
+    name: SellPrice
+    offset: 11008
+  - type: int
+    name: SellStackMax
+    offset: 11012
+  - type: byte
+    name: SellIsUnique
+    offset: 11016
+  - type: byte
+    name: SellIsUntradeable
+    offset: 11017
+  - type: byte
+    name: SellIsWithMateria
+    offset: 11018
+  - type: byte
+    name: SellIsFullySpiritbound
+    offset: 11019
+  - type: byte
+    name: SellIsCollectible
+    offset: 11020
+  - type: Client::System::String::Utf8String
+    name: SellItemName
+    offset: 11024
+  - type: int
+    name: SellRarity
+    offset: 11128
+  - type: Client::Game::Event::ShopEventHandler::BuybackItem
+    name: Buyback
+    offset: 11136
+    size: 10
+  - type: int
+    name: BuybackCount
+    offset: 12976
+  - type: byte
+    name: StartingSell
+    offset: 12980
+  - type: byte
+    name: StartingBuy
+    offset: 12981
+  - type: byte
+    name: UpdatingBuybackItems
+    offset: 12982
+  - type: byte
+    name: BuybackTabActive
+    offset: 12983
+  - type: byte
+    name: WaitingForSellConfirm
+    offset: 12984
+  - type: byte
+    name: WaitingForTransactionToFinish
+    offset: 12985
+  - type: byte
+    name: IsTradingWithRetainer
+    offset: 12986
+  - type: int
+    name: CurrentMode
+    offset: 12988
+  - type: int
+    name: TransactionType
+    offset: 12992
+  - type: int
+    name: BuyItemIndex
+    offset: 12996
+  - type: unsigned int
+    name: TransactionItemId
+    offset: 13000
+  - type: int
+    name: SellInventorySlot
+    offset: 13004
+  - type: int
+    name: TransactionItemCount
+    offset: 13008
+  - type: Client::Game::InventoryType
+    name: SellInventoryType
+    offset: 13012
+  - type: __int64
+    name: SheetReader
+    offset: 13024
+  - type: Common::Component::Excel::ExcelSheet*
+    name: CurrentSheet
+    offset: 13032
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+  member_functions:
+  - signature: 48 83 EC 38 80 B9 ?? ?? ?? ?? ?? C7 44 24
+    return_type: void
+    name: ExecuteBuy
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: int
+      name: count
 - type: Client::Graphics::Kernel::ShaderPackage
   name: ShaderPackage
   namespace: Client.Graphics.Kernel
@@ -105992,6 +106770,9 @@ structs:
     name: LobbyScreenTextAddonId
     offset: 4400
   - type: unsigned int
+    name: LogoAddonId
+    offset: 4404
+  - type: unsigned int
     name: TitleDCWorldMapAddonId
     offset: 4408
   - type: unsigned int
@@ -106367,6 +107148,12 @@ structs:
     name: LuaKey
     offset: 680
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -106477,6 +107264,12 @@ structs:
     offset: 0
     base: true
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -106551,6 +107344,12 @@ structs:
     name: Title
     offset: 832
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -110913,6 +111712,12 @@ structs:
     offset: 2296
     size: 50
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -113364,6 +114169,12 @@ structs:
       name: territoryTypeId
     - type: StdVector<Client::Game::UI::MapMarkerData>*
       name: markerVector
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -122226,6 +123037,12 @@ structs:
     offset: 0
     base: true
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -122313,6 +123130,12 @@ structs:
     name: FateId
     offset: 1228
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -123487,6 +124310,12 @@ structs:
   - name: IsAcceptingGate
     offset: 2352
     return_type: byte
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
@@ -125539,6 +126368,12 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
       name: this
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -125775,6 +126610,12 @@ structs:
     name: InstanceContentType
     offset: 3534
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -125910,6 +126751,12 @@ structs:
     name: Unknown4
     offset: 3423
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -126043,6 +126890,12 @@ structs:
     name: Unk1250
     offset: 4920
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -126947,6 +127800,12 @@ structs:
     name: HoardCount
     offset: 7866
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -127090,6 +127949,12 @@ structs:
     name: Mission3Progress
     offset: 9176
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -127298,6 +128163,12 @@ structs:
     name: StateInitialized
     offset: 11800
   virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
   - name: GetTitle
     offset: 1576
     return_type: void
@@ -127743,6 +128614,14 @@ structs:
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: a2
   - name: SetReadyToDraw
     offset: 272
     return_type: void
@@ -127960,6 +128839,14 @@ structs:
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Character::Companion*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: a2
   - name: SetReadyToDraw
     offset: 272
     return_type: void
@@ -128125,6 +129012,14 @@ structs:
     - type: Client::Game::Character::MJILivelyActor*
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
+    - type: Client::Game::Event::EventHandler**
       name: a2
   - name: SetReadyToDraw
     offset: 272
@@ -128292,6 +129187,14 @@ structs:
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
       name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Character::Ornament*
+      name: this
+    - type: Client::Game::Event::EventHandler**
+      name: a2
   - name: SetReadyToDraw
     offset: 272
     return_type: void
@@ -128441,6 +129344,14 @@ structs:
     parameters:
     - type: Client::Game::Event::EventFramework*
       name: this
+  - signature: E8 ?? ?? ?? ?? 44 89 A7 ?? ?? ?? ?? 44 38 A7
+    return_type: void
+    name: InteractWithHandlerFromSelector
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: int
+      name: index
   - signature: E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??
     return_type: Client::Game::Event::EventHandler*
     name: GetEventHandlerById
@@ -128449,6 +129360,20 @@ structs:
       name: this
     - type: unsigned int
       name: id
+  - signature: 40 53 57 41 56 48 83 EC 70 48 8B 02
+    return_type: byte
+    name: CheckInteractRange
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: source
+    - type: Client::Game::Object::GameObject*
+      name: target
+    - type: byte
+      name: interactionType
+    - type: byte
+      name: logErrorsToUser
 - type: Component::GUI::AtkModule
   name: AtkModule
   namespace: Component.GUI
@@ -128766,6 +129691,14 @@ structs:
     - type: Client::Game::Character::BattleChara*
       name: this
     - type: Client::Game::Object::ObjectHighlightColor
+      name: a2
+  - name: GetEventHandlersImpl
+    offset: 240
+    return_type: int
+    parameters:
+    - type: Client::Game::Character::BattleChara*
+      name: this
+    - type: Client::Game::Event::EventHandler**
       name: a2
   - name: SetReadyToDraw
     offset: 272
