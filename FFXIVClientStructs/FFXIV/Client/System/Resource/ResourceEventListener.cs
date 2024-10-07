@@ -16,5 +16,4 @@ public unsafe partial struct ResourceEventListener {
     // looks similar to vf3 but seems to be a different function
     // [VirtualFunction(4)]
     // public partial void vf4(ResourceHandle* handle);
-
 }
