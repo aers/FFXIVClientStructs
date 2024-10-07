@@ -26,8 +26,8 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0xA8), CExportIgnore] public nint Retainer;
     [FieldOffset(0xB0), CExportIgnore] public long RetainerCount;
     [FieldOffset(0xB8)] public StdMap<ulong, Pointer<ItemFinderRetainerInventory>> RetainerInventories;
-    [FieldOffset(0xB8), CExportIgnore] public nint RetainerInventory;
-    [FieldOffset(0xC0), CExportIgnore] public long RetainerInventoryCount;
+    [FieldOffset(0xB8), Obsolete("Use RetainerInventories instead")] public nint RetainerInventory;
+    [FieldOffset(0xC0), Obsolete("Use RetainerInventories.LongCount instead")] public long RetainerInventoryCount;
     [FieldOffset(0xC8), FixedSizeArray] internal FixedSizeArray70<uint> _saddleBagItemIds;
     [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray70<uint> _premiumSaddleBagItemIds;
     [FieldOffset(0x2F8), FixedSizeArray] internal FixedSizeArray70<ushort> _saddleBagItemCount;
