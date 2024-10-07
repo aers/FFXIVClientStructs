@@ -23,8 +23,8 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0xA6)] public byte UnkA6;
     [FieldOffset(0xA7)] public byte UnkA7;
     [FieldOffset(0xA8)] public StdList<ulong> UpdatedRetainerIds;
-    [FieldOffset(0xA8), CExportIgnore] public nint Retainer;
-    [FieldOffset(0xB0), CExportIgnore] public long RetainerCount;
+    [FieldOffset(0xA8), Obsolete("Use UpdatedRetainerIds instead")] public nint Retainer;
+    [FieldOffset(0xB0), Obsolete("Use UpdatedRetainerIds.LongCount instead")] public long RetainerCount;
     [FieldOffset(0xB8)] public StdMap<ulong, Pointer<ItemFinderRetainerInventory>> RetainerInventories;
     [FieldOffset(0xB8), Obsolete("Use RetainerInventories instead")] public nint RetainerInventory;
     [FieldOffset(0xC0), Obsolete("Use RetainerInventories.LongCount instead")] public long RetainerInventoryCount;
