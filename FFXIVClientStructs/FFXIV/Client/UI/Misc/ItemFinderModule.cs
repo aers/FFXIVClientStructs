@@ -22,8 +22,9 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0xA5)] public bool ShouldResetInvalid; // only clears data if player does not meet criteria (for example: has glamour dresser NOT unlocked)
     [FieldOffset(0xA6)] public byte UnkA6;
     [FieldOffset(0xA7)] public byte UnkA7;
-    [FieldOffset(0xA8)] public nint Retainer;
-    [FieldOffset(0xB0)] public long RetainerCount;
+    [FieldOffset(0xA8)] public StdList<ulong> UpdatedRetainerIds;
+    [FieldOffset(0xA8), CExportIgnore] public nint Retainer;
+    [FieldOffset(0xB0), CExportIgnore] public long RetainerCount;
     [FieldOffset(0xB8)] public StdMap<ulong, Pointer<ItemFinderRetainerInventory>> RetainerInventories;
     [FieldOffset(0xB8), CExportIgnore] public nint RetainerInventory;
     [FieldOffset(0xC0), CExportIgnore] public long RetainerInventoryCount;
@@ -42,6 +43,14 @@ public unsafe partial struct ItemFinderModule {
     /// <param name="includeHQAndCollectibles">If <c>true</c>, it also searches for the item id as HQ and collectible versions.</param>
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 08 01 EB 59")]
     public partial void SearchForItem(uint itemId, bool includeHQAndCollectibles = true);
+
+    /// <summary>
+    /// Checks if a retainer has been summoned within the current game session, indicating weather the data within the <c>RetainerInventory</c> is loaded from the server or from local cache.
+    /// </summary>
+    /// <param name="retainerId">The Id of the retainer to check.</param>
+    /// <returns>If <c>true</c>, the retainer has been summoned in the current session. Otherwise, the retainer inventory is from a client side cache.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 45 8D 46 EC")]
+    public partial bool IsRetainerCurrent(ulong retainerId);
 }
 
 [GenerateInterop]
