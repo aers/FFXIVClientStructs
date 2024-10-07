@@ -7662,6 +7662,7 @@ classes:
       0x1407E1A30: ctor
       0x1407E2E10: Update
       0x1407E1C00: Finalize
+      0x1407E3340: IsRetainerCurrent
       0x1407E3370: SearchForItem
   Client::UI::Misc::DataCenterHelper:
     vtbls:
