@@ -34,6 +34,7 @@ public unsafe partial struct Texture {
     [FieldOffset(0x68)] public void* D3D11Texture2D; // ID3D11Texture2D1
     [FieldOffset(0x70)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
 
+    // TODO: use TextureFormat enum for textureFormat
     public static Texture* CreateTexture2D(int width, int height, byte mipLevel, uint textureFormat, uint flags, uint unk) {
         var size = stackalloc int[2];
         size[0] = width;
@@ -41,6 +42,7 @@ public unsafe partial struct Texture {
         return CreateTexture2D(size, mipLevel, textureFormat, flags, unk);
     }
 
+    // TODO: use TextureFormat enum for textureFormat
     public static Texture* CreateTexture2D(int* size, byte mipLevel, uint textureFormat, uint flags, uint unk)
         => Device.Instance()->CreateTexture2D(size, mipLevel, textureFormat, flags, unk);
 

@@ -4943,6 +4943,7 @@ classes:
         base: Client::Graphics::Singleton
     funcs:
         0x140420620: ctor
+        0x14009E990: SetShadowVisibilityType
   Client::Graphics::Render::Camera:
     vtbls:
       - ea: 0x141EDA9C0
@@ -4989,6 +4990,7 @@ classes:
   Client::Graphics::Render::OffscreenRenderingManager:
     instances:
       - ea: 0x142729450
+        pointer: True
     vtbls:
       - ea: 0x141EDAC10
     funcs:
@@ -5107,6 +5109,7 @@ classes:
   Client::Graphics::Render::LightingManager:
     instances:
       - ea: 0x14258C5A8
+        pointer: True
     vtbls:
       - ea: 0x141EDB258
         base: Client::Graphics::Singleton
@@ -5123,8 +5126,8 @@ classes:
       - ea: 0x141EDB288
         base: Client::Graphics::Kernel::Notifier
     funcs:
-#fail       0x1403CDB40: ctor
-#fail       0x1403CD8E0: Initialize
+      0x14049B410: ctor
+      0x14049B7E0: Initialize
       0x14042CDB0: GetCharaViewTexture
   Client::Graphics::PostEffect::PostEffectChain:
     vtbls:
