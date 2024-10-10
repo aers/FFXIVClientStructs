@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkComponentDropDownList
 //   Component::GUI::AtkComponentBase
@@ -6,12 +8,14 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
-public unsafe partial struct AtkComponentDropDownList {
+[VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13", [1, 970])]
+public unsafe partial struct AtkComponentDropDownList : ICreatable {
     [FieldOffset(0xC0)] public AtkComponentCheckBox* Checkbox;
     [FieldOffset(0xC8)] public AtkComponentList* List;
 
     [FieldOffset(0xD8)] public bool IsOpen;
     [FieldOffset(0xD9)] public bool OpenStateChangePending;
+    [FieldOffset(0xDA)] public bool ShowPreview;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 03 FE")]
     public partial void SelectItem(int index);
@@ -21,4 +25,10 @@ public unsafe partial struct AtkComponentDropDownList {
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 C0 41")]
     public partial int GetSelectedItemIndex();
+    
+    public void Ctor() {
+        AtkComponentBase.Ctor();
+        VirtualTable = StaticVirtualTablePointer;
+        ShowPreview = true;
+    }
 }
