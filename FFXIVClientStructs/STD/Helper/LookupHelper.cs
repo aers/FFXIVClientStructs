@@ -63,12 +63,12 @@ internal static class LookupHelper<T, TOwner>
                 throw new ArgumentOutOfRangeException(nameof(startIndex), startIndex, null);
         }
 
-        if (count < 0 || startIndex > owner.LongCount - count)
+        if (count < 0 || startIndex + 1 < count)
             throw new ArgumentOutOfRangeException(nameof(count), count, null);
 
-        var end = startIndex - count;
-        for (var i = startIndex; i >= end; i--, startIndex--) {
-            if (match(owner[i]))
+        var endIndex = startIndex - count + 1;
+        for (var currentIndex = startIndex; currentIndex >= endIndex; currentIndex--, startIndex--) {
+            if (match(owner[currentIndex]))
                 return startIndex;
         }
 
