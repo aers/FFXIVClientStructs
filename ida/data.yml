@@ -1938,6 +1938,12 @@ classes:
       - ea: 0x141F542F0
     funcs:
       0x140B06BA0: ctor
+      0x140B06CA0: Finalize
+      0x140B06DB0: SetRequest
+      0x140B070D0: GetRequests
+      0x140B07100: Clear
+      0x140B07DD0: CanSatisfyRequests
+      0x140B07DF0: Finish
   Client::Game::UI::Telepo:
     instances:
       - ea: 0x1427688E8
@@ -2086,6 +2092,13 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x140B2F650: ctor # unused, inlined
+      0x140B30C50: GetItem
+      0x140B30DF0: SetSelectedIndex
+  Client::Game::UI::LootItem:
+    funcs:
+      0x140B2F220: ctor_FromData
+      0x140B2F2E0: ctor
+      0x140B2F330: GetMateria
   Client::Game::UI::GatheringNote:
     instances:
       - ea: 0x14276B7F0
@@ -7649,6 +7662,7 @@ classes:
       0x1407E1A30: ctor
       0x1407E2E10: Update
       0x1407E1C00: Finalize
+      0x1407E3340: IsRetainerCurrent
       0x1407E3370: SearchForItem
   Client::UI::Misc::DataCenterHelper:
     vtbls:
@@ -7892,6 +7906,7 @@ classes:
       0x140897320: UpdateVisualPosition
       0x140897570: UpdateVisualRotation
       0x140897700: UpdateVisualScale
+      0x140897980: GetEventHandlers
       0x1408980F0: IsReadyToDraw
       0x140898A00: SetEventId
       0x140898A70: SetFateId
@@ -8838,6 +8853,8 @@ classes:
     funcs:
       0x140DEFD60: ctor
       0x140DEFE90: Finalize
+      0x140DF0F30: SelectTurnInSlot
+      0x140DF13D0: CancelTurnIn
   Client::UI::Agent::AgentMarker:
     vtbls:
       - ea: 0x141F709C8
@@ -8986,6 +9003,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EFB060: ctor
+      0x140EFB150: HandleActionHover
   Client::UI::Agent::AgentRetainer:
     vtbls:
       - ea: 0x141F57700
@@ -11442,7 +11460,9 @@ classes:
     vfuncs:
       0: dtor
       6: Terminate
+      7: IsUnlocked
       197: GetTitle # lua function "GetEventHandlerTitle"
+      221: GetIconId
       249: GetDescription
       250: GetReliefText
       251: GetTimeRemaining # pass current unix timestamp as a2
@@ -11451,6 +11471,15 @@ classes:
       256: GetObjectives
       259: GetRecommendedLevel
       263: Initialize
+  Client::Game::Event::EventHandlerSelector:
+    instances:
+      - ea: 0x142761B30
+        pointer: False
+    vtbls:
+      - ea: 0x141F2BD78
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+    funcs:
+      0x140AA4FF4: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141F2D100
@@ -12013,8 +12042,52 @@ classes:
     vtbls:
       - ea: 0x141F320A0
         base: Client::Game::Event::EventHandler
+      - ea: 0x141F328F0
+      - ea: 0x141F32900
     funcs:
       0x1409EA0A0: ctor
+      0x1409EA430: CreateInstance
+      0x1409EB210: ExecuteAgentOperation
+      0x1409EB950: SellStackStatic
+      0x1409EBB20: SellStack
+      0x1409EBCA0: ExecuteTransaction
+      0x1409EBDA0: SetIsTradingWithRetainer
+      0x1409EBDD0: IsWaiting
+      0x1409EBDF0: GetBuybackItemPrice
+      0x1409EC070: GetBuybackItemDataStatic
+      0x1409EC5D0: HandleItemMoved
+      0x1409EC6B0: UpdateOwnedItemCounts
+      0x1409EC8A0: OnItemsRead
+      0x1409ED020: OnGilShopRead
+      0x1409ED0F0: OnGilShopItemRead
+      0x1409ED3E0: OpenOrRefreshAddon
+      0x1409ED9E0: OpenOrRefreshAddonBuyback
+      0x1409EE010: AskConfirmBuy
+      0x1409EE450: AskConfirmSell
+      0x1409EE840: OpenConfirmation
+      0x1409EEBC0: CloseAddons
+      0x1409EECE0: GetBuybackItemData
+      0x1409EEE30: GetBuybackItem
+      0x1409EF350: ExecuteBuy
+      0x1409EF3B0: ExecuteSell
+      0x1409EF460: ExecuteBuyback
+      0x1409EF7F0: SetBuyback
+      0x1409EF960: RequestBuybackUpdate
+      0x1409EFC00: StartReadGilShopItems
+  Client::Game::Event::ShopEventHandler::AgentProxy:
+    instances:
+      - ea: 0x142550558
+        pointer: False
+    vtbls:
+      - ea: 0x141F2ACD0
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+  Client::Game::Event::ShopEventHandler::YesNoProxy:
+    instances:
+      - ea: 0x142550588
+        pointer: False
+    vtbls:
+      - ea: 0x141F2AD30
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
       - ea: 0x141F31820
@@ -12321,6 +12394,7 @@ classes:
       0x1409D0350: GetInstance
       0x1409D02B0: Initialize
       0x1409D11E0: Finalize
+      0x1409D2050: InteractWithObject
       0x1409D75F0: ProcessEventPlay
       0x1409D8500: ProcessSystemLogMessage
       0x1409D9DC0: SetTerritoryTypeId
@@ -12340,7 +12414,10 @@ classes:
       0x1409DD790: GetContentDirector
       0x1409DD7A0: GetQuestBattleDirector
       0x1409DD7F0: GetGoldSaucerDirector
+      0x1409E10A0: InteractWithHandlerFromSelector
+      0x1409E21F0: InteractWithSelectorOptions
       0x1409E2840: GetEventHandlerById
+      0x1409E3D40: CheckInteractRange
       0x140B1F350: GetCurrentContentType
       0x140B1F420: GetCurrentContentId # static
       0x140B1F4A0: CanLeaveCurrentContent # static

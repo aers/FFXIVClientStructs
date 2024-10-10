@@ -22,10 +22,12 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0xA5)] public bool ShouldResetInvalid; // only clears data if player does not meet criteria (for example: has glamour dresser NOT unlocked)
     [FieldOffset(0xA6)] public byte UnkA6;
     [FieldOffset(0xA7)] public byte UnkA7;
-    [FieldOffset(0xA8)] public nint Retainer;
-    [FieldOffset(0xB0)] public long RetainerCount;
-    [FieldOffset(0xB8)] public nint RetainerInventory;
-    [FieldOffset(0xC0)] public long RetainerInventoryCount;
+    [FieldOffset(0xA8)] public StdList<ulong> UpdatedRetainerIds;
+    [FieldOffset(0xA8), Obsolete("Use UpdatedRetainerIds instead")] public nint Retainer;
+    [FieldOffset(0xB0), Obsolete("Use UpdatedRetainerIds.LongCount instead")] public long RetainerCount;
+    [FieldOffset(0xB8)] public StdMap<ulong, Pointer<ItemFinderRetainerInventory>> RetainerInventories;
+    [FieldOffset(0xB8), Obsolete("Use RetainerInventories instead")] public nint RetainerInventory;
+    [FieldOffset(0xC0), Obsolete("Use RetainerInventories.LongCount instead")] public long RetainerInventoryCount;
     [FieldOffset(0xC8), FixedSizeArray] internal FixedSizeArray70<uint> _saddleBagItemIds;
     [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray70<uint> _premiumSaddleBagItemIds;
     [FieldOffset(0x2F8), FixedSizeArray] internal FixedSizeArray70<ushort> _saddleBagItemCount;
@@ -41,6 +43,23 @@ public unsafe partial struct ItemFinderModule {
     /// <param name="includeHQAndCollectibles">If <c>true</c>, it also searches for the item id as HQ and collectible versions.</param>
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 08 01 EB 59")]
     public partial void SearchForItem(uint itemId, bool includeHQAndCollectibles = true);
+
+    /// <summary>
+    /// Checks if a retainer has been summoned within the current game session, indicating weather the data within the <c>RetainerInventory</c> is loaded from the server or from local cache.
+    /// </summary>
+    /// <param name="retainerId">The Id of the retainer to check.</param>
+    /// <returns>If <c>true</c>, the retainer has been summoned in the current session. Otherwise, the retainer inventory is from a client side cache.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 45 8D 46 EC")]
+    public partial bool IsRetainerCurrent(ulong retainerId);
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x478)]
+public unsafe partial struct ItemFinderRetainerInventory {
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray14<uint> _equippedItemIds;
+    [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray175<uint> _itemIds;
+    [FieldOffset(0x2F4), FixedSizeArray] internal FixedSizeArray175<ushort> _itemCount;
+    [FieldOffset(0x452), FixedSizeArray] internal FixedSizeArray18<ushort> _crystalQuantities;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1F8)]
