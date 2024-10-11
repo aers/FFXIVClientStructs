@@ -1,5 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
-using FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager;
+using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -33,8 +33,8 @@ public unsafe partial struct MountListModule {
         if (favoriteSlotIndex1 >= 30 || favoriteSlotIndex2 >= 30)
             return false;
         (Favorites[favoriteSlotIndex1], Favorites[favoriteSlotIndex2]) = (Favorites[favoriteSlotIndex2], Favorites[favoriteSlotIndex1]);
-        UserFileEvent.IsSavePending = true;
-        UserFileEvent.SaveFile(false);
+        IsSavePending = true;
+        SaveFile(false);
         return true;
     }
 
