@@ -12732,6 +12732,29 @@ structs:
     name: Page5CountCollectible
     offset: 120
   member_functions: []
+- type: Client::UI::Misc::ItemFinderRetainerInventory
+  name: ItemFinderRetainerInventory
+  namespace: Client.UI.Misc
+  union: False
+  size: 1144
+  fields:
+  - type: unsigned int
+    name: EquippedItemIds
+    offset: 0
+    size: 14
+  - type: unsigned int
+    name: ItemIds
+    offset: 56
+    size: 175
+  - type: unsigned __int16
+    name: ItemCount
+    offset: 756
+    size: 175
+  - type: unsigned __int16
+    name: CrystalQuantities
+    offset: 1106
+    size: 18
+  member_functions: []
 - type: Client::UI::Misc::ItemOrderModuleSorterItemEntry
   name: ItemOrderModuleSorterItemEntry
   namespace: Client.UI.Misc
@@ -17841,6 +17864,21 @@ structs:
     name: Value
     offset: 16
   member_functions: []
+- type: ContainerInterface::IStdList::Node<unsigned __int64>
+  name: Node
+  namespace: ContainerInterface
+  union: False
+  fields:
+  - type: ContainerInterface::IStdList::Node<unsigned __int64>*
+    name: Next
+    offset: 0
+  - type: ContainerInterface::IStdList::Node<unsigned __int64>*
+    name: Previous
+    offset: 8
+  - type: unsigned __int64
+    name: Value
+    offset: 16
+  member_functions: []
 - type: Helper::RedBlackTree::Node<Client::Game::Object::GameObject*, Client::Game::Object::GameObject*, Helper::DefaultKeyExtractor<Client::Game::Object::GameObject*>>
   name: Node
   namespace: Helper
@@ -18045,6 +18083,18 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::LayoutEngine::LayoutManager*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::LayoutManager*>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
+- type: Helper::RedBlackTree<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>
+  name: RedBlackTree`3
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>*
     name: Head
     offset: 0
   - type: __int64
@@ -18447,6 +18497,18 @@ structs:
     name: Size
     offset: 8
   member_functions: []
+- type: StdList<unsigned __int64, Helper::IStaticMemorySpace::Default>
+  name: StdList`2
+  namespace: ''
+  union: False
+  fields:
+  - type: ContainerInterface::IStdList::Node<unsigned __int64>*
+    name: Head
+    offset: 0
+  - type: unsigned __int64
+    name: Size
+    offset: 8
+  member_functions: []
 - type: StdPair<Client::LayoutEngine::InstanceType, StdMap<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>*>
   name: StdPair`2
   namespace: ''
@@ -18540,6 +18602,18 @@ structs:
     name: Item1
     offset: 0
   - type: Client::LayoutEngine::LayoutManager*
+    name: Item2
+    offset: 8
+  member_functions: []
+- type: StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int64
+    name: Item1
+    offset: 0
+  - type: Client::UI::Misc::ItemFinderRetainerInventory*
     name: Item2
     offset: 8
   member_functions: []
@@ -29281,167 +29355,6 @@ structs:
     parameters:
     - type: Client::UI::Misc::ItemContextCustomizeModule*
       name: this
-- type: Client::UI::Misc::ItemFinderModule
-  name: ItemFinderModule
-  namespace: Client.UI.Misc
-  union: False
-  size: 4560
-  fields:
-  - type: Client::UI::Misc::UserFileManager::UserFileEvent
-    name: UserFileEvent
-    offset: 0
-    base: true
-  - type: unsigned int
-    name: RequestItemIds
-    offset: 64
-    size: 24
-  - type: byte
-    name: IsRequestUnfulfilled
-    offset: 160
-  - type: byte
-    name: IsCabinetCached
-    offset: 161
-  - type: byte
-    name: IsRetainerManagerReady
-    offset: 162
-  - type: byte
-    name: IsSaddleBagCached
-    offset: 163
-  - type: byte
-    name: IsGlamourDresserCached
-    offset: 164
-  - type: byte
-    name: ShouldResetInvalid
-    offset: 165
-  - type: byte
-    name: UnkA6
-    offset: 166
-  - type: byte
-    name: UnkA7
-    offset: 167
-  - type: __int64
-    name: Retainer
-    offset: 168
-  - type: __int64
-    name: RetainerCount
-    offset: 176
-  - type: __int64
-    name: RetainerInventory
-    offset: 184
-  - type: __int64
-    name: RetainerInventoryCount
-    offset: 192
-  - type: unsigned int
-    name: SaddleBagItemIds
-    offset: 200
-    size: 70
-  - type: unsigned int
-    name: PremiumSaddleBagItemIds
-    offset: 480
-    size: 70
-  - type: unsigned __int16
-    name: SaddleBagItemCount
-    offset: 760
-    size: 70
-  - type: unsigned __int16
-    name: PremiumSaddleBagItemCount
-    offset: 900
-    size: 70
-  - type: unsigned int
-    name: GlamourDresserItemIds
-    offset: 1040
-    size: 800
-  - type: Client::UI::Misc::ItemFinderModuleResult*
-    name: Result
-    offset: 4256
-  virtual_functions:
-  - name: ReadFile
-    offset: 8
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte*
-      name: a3
-    - type: unsigned __int16
-      name: a4
-    - type: unsigned int
-      name: a5
-  - name: WriteFile
-    offset: 16
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: GetFileSize
-    offset: 32
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-  - name: GetDataSize
-    offset: 40
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-  - name: GetFileVersion
-    offset: 48
-    return_type: unsigned __int16
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-  - name: GetFileType
-    offset: 56
-    return_type: unsigned __int16
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-  - name: GetHasChanges
-    offset: 72
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-  - name: GetIsSavePending
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-  - name: SetCharacterContentId
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-    - type: unsigned __int64
-      name: a2
-  - name: SaveFile
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? C6 43 08 01 EB 59
-    return_type: void
-    name: SearchForItem
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-    - type: unsigned int
-      name: itemId
-    - type: byte
-      name: includeHQAndCollectibles
 - type: Client::UI::Misc::ItemFinderModuleResult
   name: ItemFinderModuleResult
   namespace: Client.UI.Misc
@@ -33554,6 +33467,36 @@ structs:
     name: _Myval
     offset: 28
   member_functions: []
+- type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>*
+    name: _Left
+    offset: 0
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>*
+    name: _Parent
+    offset: 8
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>
+    name: _Myval
+    offset: 28
+  member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>>
   name: Node
   namespace: Helper
@@ -34056,6 +33999,15 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
+- type: StdList<unsigned __int64>
+  name: StdList`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdList<unsigned __int64, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
 - type: StdMap<Client::LayoutEngine::InstanceType, StdMap<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>*, Helper::IStaticMemorySpace::Default>
   name: StdMap`3
   namespace: ''
@@ -34179,6 +34131,15 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree<StdPair<unsigned __int64, Client::LayoutEngine::LayoutManager*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::LayoutManager*>>
+    name: Tree
+    offset: 0
+  member_functions: []
+- type: StdMap<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*, Helper::IStaticMemorySpace::Default>
+  name: StdMap`3
+  namespace: ''
+  union: False
+  fields:
+  - type: Helper::RedBlackTree<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>
     name: Tree
     offset: 0
   member_functions: []
@@ -45927,6 +45888,15 @@ structs:
   union: False
   fields:
   - type: StdMap<unsigned __int64, Client::LayoutEngine::LayoutManager*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdMap<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -64877,6 +64847,169 @@ structs:
       name: this
     - type: int
       name: activeSetIndex
+- type: Client::UI::Misc::ItemFinderModule
+  name: ItemFinderModule
+  namespace: Client.UI.Misc
+  union: False
+  size: 4560
+  fields:
+  - type: Client::UI::Misc::UserFileManager::UserFileEvent
+    name: UserFileEvent
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: RequestItemIds
+    offset: 64
+    size: 24
+  - type: byte
+    name: IsRequestUnfulfilled
+    offset: 160
+  - type: byte
+    name: IsCabinetCached
+    offset: 161
+  - type: byte
+    name: IsRetainerManagerReady
+    offset: 162
+  - type: byte
+    name: IsSaddleBagCached
+    offset: 163
+  - type: byte
+    name: IsGlamourDresserCached
+    offset: 164
+  - type: byte
+    name: ShouldResetInvalid
+    offset: 165
+  - type: byte
+    name: UnkA6
+    offset: 166
+  - type: byte
+    name: UnkA7
+    offset: 167
+  - type: StdList<unsigned __int64>
+    name: UpdatedRetainerIds
+    offset: 168
+  - type: StdMap<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>
+    name: RetainerInventories
+    offset: 184
+  - type: unsigned int
+    name: SaddleBagItemIds
+    offset: 200
+    size: 70
+  - type: unsigned int
+    name: PremiumSaddleBagItemIds
+    offset: 480
+    size: 70
+  - type: unsigned __int16
+    name: SaddleBagItemCount
+    offset: 760
+    size: 70
+  - type: unsigned __int16
+    name: PremiumSaddleBagItemCount
+    offset: 900
+    size: 70
+  - type: unsigned int
+    name: GlamourDresserItemIds
+    offset: 1040
+    size: 800
+  - type: Client::UI::Misc::ItemFinderModuleResult*
+    name: Result
+    offset: 4256
+  virtual_functions:
+  - name: ReadFile
+    offset: 8
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte*
+      name: a3
+    - type: unsigned __int16
+      name: a4
+    - type: unsigned int
+      name: a5
+  - name: WriteFile
+    offset: 16
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: GetFileSize
+    offset: 32
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+  - name: GetDataSize
+    offset: 40
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+  - name: GetFileVersion
+    offset: 48
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+  - name: GetFileType
+    offset: 56
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+  - name: GetHasChanges
+    offset: 72
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+  - name: GetIsSavePending
+    offset: 80
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+    - type: unsigned __int64
+      name: a2
+  - name: SaveFile
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? C6 43 08 01 EB 59
+    return_type: void
+    name: SearchForItem
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+    - type: unsigned int
+      name: itemId
+    - type: byte
+      name: includeHQAndCollectibles
+  - signature: E8 ?? ?? ?? ?? 45 8D 46 EC
+    return_type: byte
+    name: IsRetainerCurrent
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+    - type: unsigned __int64
+      name: retainerId
 - type: Client::UI::Misc::PronounModule
   name: PronounModule
   namespace: Client.UI.Misc
