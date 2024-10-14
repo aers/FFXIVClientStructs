@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
+
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkComponentBase
@@ -8,10 +10,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public unsafe partial struct AtkComponentBase {
+public unsafe partial struct AtkComponentBase : ICreatable {
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
+
+    [MemberFunction("48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08")]
+    public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
     public partial AtkResNode* GetTextNodeById(uint id);
