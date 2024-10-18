@@ -97,7 +97,7 @@ functions:
   0x1400681C0: GetMyDocumentsFolder #as UTF8String
   0x1400A55C0: GetPerformanceFrequency
   0x1400A6970: CreateDirectoryRecursive
-  0x1400B5FB0: Client::UI::IsPlayerCharacterName
+  0x1400B5FB0: Client::UI::IsValidPlayerCharacterName
   0x1400B6800: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400B7F50: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1400B7F90: Client::UI::GetNumberAsBoxedChar # (uint) accepts numbers 0-30
@@ -154,7 +154,7 @@ functions:
   0x1400B7D40: IsClassJobAGatherer  # static, (classJobId) -> bool
   0x1400B7ED0: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x1400BB2A0: OpenWebURL
-  0x140A00D30: IsGatheringTypeRare  # static, takes RowId of GatheringType
+  0x140A00D30: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
   0x140D02AE0: SetCondition
   0x140D03320: IsLocalPlayerLalafell
   0x140E5E5E0: CreateSelectYesno

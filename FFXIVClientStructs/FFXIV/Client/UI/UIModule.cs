@@ -107,15 +107,18 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xEDB88)] internal UIInputModule UIInputModule;
     // [FieldOffset(0xEDFE0)] internal Vf70Struct;
 
+    [Obsolete("Moved to UIGlobals.PlaySoundEffect")]
     [MemberFunction("E8 ?? ?? ?? ?? 48 63 45 80")]
     public static partial bool PlaySound(uint effectId, long a2 = 0, long a3 = 0, byte a4 = 0);
 
+    [Obsolete("Moved to UIGlobals.IsValidPlayerCharacterName")]
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 B4 4C 8B CB"), GenerateStringOverloads]
     public static partial bool IsPlayerCharacterName(byte* name);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B FA 48 8B D9 45 84 C9")]
     public static partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
 
+    [Obsolete("Moved to UIGlobals.PlayChatSoundEffect")]
     public static void PlayChatSoundEffect(uint effectId) {
         if (effectId is < 1 or > 16)
             throw new ArgumentException("Valid chat sfx values are 1 through 16.");
