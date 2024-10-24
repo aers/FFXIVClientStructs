@@ -3,11 +3,11 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
-using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Common.Configuration;
 using FFXIVClientStructs.FFXIV.Component.Completion;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using ExcelModuleInterface = FFXIVClientStructs.FFXIV.Component.Excel.ExcelModuleInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -29,7 +29,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x7EC)] public int CrossWorldLinkshellCycle;
 
     [FieldOffset(0x7F4)] public uint FrameCount;
-    [FieldOffset(0x7F8)] internal ExcelModule* ExcelModule;
+    [FieldOffset(0x7F8)] internal ExcelModuleInterface* ExcelModuleInterface; // this is Component::Excel::ExcelModuleInterface, not Common::Component::Excel::ExcelModuleInterface!
     [FieldOffset(0x800)] internal RaptureTextModule RaptureTextModule;
     [FieldOffset(0x1660)] internal CompletionModule CompletionModule;
     [FieldOffset(0x19D8)] internal RaptureLogModule RaptureLogModule;

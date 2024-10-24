@@ -11,7 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct UIModuleInterface {
+    [Obsolete("Use GetExcelModuleInterface(). The interface is different from the actual ExcelModule class, so we're renaming it to avoid confusion.")]
     [VirtualFunction(5)] public partial ExcelModuleInterface* GetExcelModule();
+    [VirtualFunction(5)] public partial ExcelModuleInterface* GetExcelModuleInterface();
     [VirtualFunction(6)] public partial RaptureTextModule* GetRaptureTextModule();
     [VirtualFunction(7)] public partial RaptureAtkModule* GetRaptureAtkModule();
     [VirtualFunction(8)] internal partial RaptureAtkModule* GetRaptureAtkModule2();
