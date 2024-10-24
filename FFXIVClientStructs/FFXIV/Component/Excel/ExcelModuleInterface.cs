@@ -14,4 +14,17 @@ public unsafe partial struct ExcelModuleInterface {
 
     [VirtualFunction(2), GenerateStringOverloads]
     public partial ExcelSheet* GetSheetByName(byte* sheetName);
+
+    [VirtualFunction(3)]
+    public partial ExcelLanguage* GetLanguage(); // returns a pointer to ExcelModule->GetLanguage() - 1
+
+    public enum ExcelLanguage {
+        Japanese,
+        English,
+        German,
+        French,
+        ChineseSimplified,
+        ChineseTraditional,
+        Korean
+    }
 }
