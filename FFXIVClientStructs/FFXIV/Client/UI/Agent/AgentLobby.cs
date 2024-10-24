@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Application.Network;
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
@@ -12,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 20"
 [Agent(AgentId.Lobby)]
 [GenerateInterop]
-[Inherits<AgentInterface>]
+[Inherits<AgentInterface>, Inherits<LogoutCallbackInterface>(0x30)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1E68)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 ?? 48 89 01 4C 8B E1", 3)]
 public unsafe partial struct AgentLobby {
@@ -65,11 +66,15 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x1198)] public ulong SelectedCharacterContentId;
 
+    [FieldOffset(0x11A3)] public bool LogoutShouldCloseGame;
+
     [FieldOffset(0x12A0)] public bool TemporaryLocked; // "Please wait and try logging in later."
 
     [FieldOffset(0x12B8)] public ulong RequestContentId;
 
     [FieldOffset(0x1E14)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
+
+    [FieldOffset(0x12D8)] public LogoutCallbackInterface.LogoutParams LogoutParams;
 
     // TODO: everything below here is wrong
 
@@ -89,6 +94,9 @@ public unsafe partial struct AgentLobby {
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 87 ?? ?? ?? ?? ?? 66 C7 87 ?? ?? ?? ?? ?? ??")]
     public partial void OpenLoginWaitDialog(int position);
+
+    [MemberFunction("40 56 41 56 41 57 48 83 EC 40 80 B9")]
+    public partial void HandleLogout(bool isExiting, byte a3); // a3 is some kind of frame-based countdown for the lobby
 }
 
 [GenerateInterop]

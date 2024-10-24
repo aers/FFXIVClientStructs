@@ -1,6 +1,11 @@
 version: 2024.08.21.0000.0000
 
 globals:
+  0x141E98A7C: g_FloatHalf # 0.5f
+  0x141E98A94: g_FloatOne # 1f
+  0x141E98A98: g_FloatOneAndAHalf # 1.5f
+  0x141E98A9C: g_FloatSix # 6f
+  0x141E98AA0: g_FloatTwenty # 20f
   0x141E99B6C: g_ConfigFileName
   0x141EA5DF0: g_UIColorTable
   0x141EF5330: g_HUDScaleTable
@@ -70,7 +75,8 @@ globals:
   0x14256FD30: g_OodleDelete
   0x14256FD40: g_OodlePrintf
   0x14272CB08: g_MacroTime
-  0x142BE6868: g_SQEX::CDev::Engine::Sd::Driver::SoundDriver
+  0x142791070: g_LogoutCountdownAddonId
+  0x142791076: g_LogoutShouldCloseGame
   0x142BE6900: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x142BE6980: ?hkaAnimationContainerClass@@3VhkClass@@B
   0x142BE79E0: ?hkReferencedObjectClass@@3VhkClass@@B
@@ -3713,6 +3719,8 @@ classes:
       0x1400F2360: IsUIVisible
       0x140686F20: DecRefNumberArrayData
       0x140686F80: DecRefStringArrayData
+      0x140687AF0: SetupAtkMessageBoxManager
+      0x140687C30: SetAtkMessageBoxManagerTexts
       0x14068B3C0: GetAtkFontCodeModule
   Client::UI::ExdSheetWaiter:
     vtbls:
@@ -4721,6 +4729,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1402CAD30: ctor
+      0x1402CD260: HandleLogout
 #fail      0x140B14D50: Finalize
       0x1402D1010: UpdateLobbyUIStage
       0x1402D1EB0: UpdateCharaSelectDisplay
@@ -16467,6 +16476,9 @@ classes:
     vtbls:
       - ea: 0x14227AF90
         base: SQEX::CDev::Engine::Sd::Driver::ISoundDriver
+    instances:
+      - ea: 0x142BE6868
+        pointer: True
   SQEX::CDev::Engine::Sd::Driver::ToolBankController:
     vtbls:
       - ea: 0x14227B1E0
