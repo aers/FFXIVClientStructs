@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Application.Network;
 
 [GenerateInterop(isInherited: true)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 66 89 69 ?? 48 89 41 ?? 48 8D 05", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct LogoutCallbackInterface {
     [VirtualFunction(1)] public partial void OnLogout(LogoutParams* logoutParams);
