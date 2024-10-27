@@ -23,7 +23,7 @@ public partial struct CharacterData {
     [FieldOffset(0x32)] public ushort MaxCraftingPoints;
     [FieldOffset(0x34)] public short TransformationId;
     [FieldOffset(0x36)] public ushort TitleId;
-
+    [FieldOffset(0x38)] public ushort StatusLoopVfxId;
     [FieldOffset(0x3A)] public byte ClassJob;
     [FieldOffset(0x3B)] public byte Level;
 
