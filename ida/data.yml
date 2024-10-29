@@ -3830,6 +3830,8 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x1400C39C0: ctor
+      0x1400C56A0: GetBlockResult
+      0x1400C4B10: GetBlockResultType
   Client::UI::Info::InfoProxyDetail:
     vtbls:
       - ea: 0x141EA7460
