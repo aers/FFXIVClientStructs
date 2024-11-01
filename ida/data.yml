@@ -5,6 +5,7 @@ globals:
   0x141EA5DF0: g_UIColorTable
   0x141EF5330: g_HUDScaleTable
   0x142540380: g_ClientInstanceLimit
+  0x142540390: g_EmptyUtf8String # empty Utf8String with just the null terminator
   0x142540400: g_WindowStyle
   0x142541468: g_FPS
   0x142547308: g_LanguageCharArr # byte[] no pointer
@@ -3830,6 +3831,8 @@ classes:
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x1400C39C0: ctor
+      0x1400C56A0: GetBlockResult
+      0x1400C4B10: GetBlockResultType
   Client::UI::Info::InfoProxyDetail:
     vtbls:
       - ea: 0x141EA7460
@@ -7507,6 +7510,16 @@ classes:
         base: Component::Prohibit::ProhibitModuleInterface
     funcs:
       0x140935430: ctor
+  Client::System::BlacklistManager: # real name is unknown
+    instances:
+      - ea: 0x14258E230
+    vtbls:
+      - ea: 0x141F1F4B0 # maybe platform-specific implementation?
+    funcs:
+      0x140936460: GetBlockResultType
+      0x1409364D0: IsCharacterBlocked
+      0x140936630: GetReplacementName # returns a Utf8String* to the set name that should be displayed instead of the character name
+      0x140936BE0: GetUnknownName # returns a Utf8String* to "Unknown"
   Client::UI::Misc::RaptureHotbarModule:
     vtbls:
       - ea: 0x141F0C360
@@ -8063,7 +8076,7 @@ classes:
       # 0x141313710: ctor # inlined at 0x1408CF5C4
       0x1408A7570: GetCompanionDataID
       0x1408A73B0: SetupCompanion
-  Client::Game::Character::BlacklistProxyContainer: # actually no clue
+  Client::Game::Character::BlacklistProxyContainer: # real name is unknown, probably has nothing to do with blacklist
     vtbls:
       - ea: 0x141F100E0
         base: Client::Game::Character::ContainerInterface

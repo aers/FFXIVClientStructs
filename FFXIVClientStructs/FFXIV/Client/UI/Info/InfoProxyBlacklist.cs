@@ -17,10 +17,29 @@ public unsafe partial struct InfoProxyBlacklist {
     [FieldOffset(0x13B8)] public StdMap<ulong, int> AccountIdMap;
     [FieldOffset(0x13C8)] public StdMap<ulong, int> ContentIdMap;
 
+    [MemberFunction("48 89 5C 24 ?? 4C 8B 91 ?? ?? ?? ?? 33 C0")]
+    public partial void GetBlockResult(BlockResult* outBlockResult, ulong accountId, ulong contentId);
+
+    [MemberFunction("48 83 EC 48 F6 81 ?? ?? ?? ?? ?? 75 ?? 33 C0 48 83 C4 48")]
+    public partial BlockResultType GetBlockResultType(ulong accountId, ulong contentId);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct BlockedCharacter {
         [FieldOffset(0x0)] public byte* Name;
         [FieldOffset(0x8)] public ulong Id; // accountId for new, contentId for old
         [FieldOffset(0x10)] public byte Flag;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x14)]
+    public struct BlockResult {
+        [FieldOffset(0x0)] public BlockResultType Type;
+        [FieldOffset(0x8)] public BlockedCharacter* BlockedCharacterPtr;
+        [FieldOffset(0x10)] public int BlockedCharacterIndex;
+    }
+
+    public enum BlockResultType {
+        NotBlocked = 1,
+        BlockedByAccountId = 2,
+        BlockedByContentId = 3,
     }
 }
