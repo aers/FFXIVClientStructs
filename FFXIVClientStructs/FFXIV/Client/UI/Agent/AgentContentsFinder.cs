@@ -39,7 +39,9 @@ public unsafe partial struct AgentContentsFinder {
     [MemberFunction("E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20")]
     public partial void OpenRouletteDuty(byte roulette, bool hideIfShown = false);
 
-    // Unchecks all selected duties, this is the same command that "Clear Selection" sends.
+    /// <summary>
+    /// Unchecks all selected duties, this is the same command that "Clear Selection" sends.
+    /// </summary>
     public void ClearSelectedDuties() {
         var returnValue = stackalloc AtkValue[1];
         var command = stackalloc AtkValue[2];
