@@ -45,6 +45,7 @@ public unsafe partial struct AgentContentsFinder {
     public void ClearSelectedDuties() {
         var returnValue = stackalloc AtkValue[1];
         var command = stackalloc AtkValue[2];
+        // "E8 ?? ?? ?? ?? 0F B6 8E ?? ?? ?? ?? 3B C8"
         command[0].SetInt(12);
         command[1].SetInt(1);
 
