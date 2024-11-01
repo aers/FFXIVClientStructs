@@ -103,6 +103,9 @@ public unsafe partial struct ShopEventHandler {
     [Inherits<AtkModuleInterface.AtkEventInterface>]
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public unsafe partial struct AgentProxy {
+        [StaticAddress("48 8D 15 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 45 33 C9", 3)]
+        public static partial AgentProxy* Instance();
+
         [FieldOffset(0x10)] public ShopEventHandler* Handler;
         [FieldOffset(0x18)] public uint AddonId;
     }

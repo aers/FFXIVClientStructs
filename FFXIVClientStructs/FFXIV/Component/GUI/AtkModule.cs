@@ -32,6 +32,7 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x7280)] internal StdVector<nint> CallbackHandlerFunctions;
     //[FieldOffset(0x72A0)] internal StdMap<?,?> AgentAddonMapping; // maybe?
 
+    [FieldOffset(0x72B0)] public AtkMessageBoxManager* AtkMessageBoxManager;
     [FieldOffset(0x72B8)] public TextService TextService;
     [FieldOffset(0x72E8)] public AtkTextInput TextInput;
     [FieldOffset(0x7FA8)] internal Utf8String Unk7FA8;
