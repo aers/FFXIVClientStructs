@@ -28,7 +28,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0")]
     public partial void Ctor();
-    
+
     [VirtualFunction(25)]
     public partial AtkComponentListItemRenderer* GetItemRenderer(int index);
 

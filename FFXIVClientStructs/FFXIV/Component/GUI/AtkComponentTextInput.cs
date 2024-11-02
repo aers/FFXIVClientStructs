@@ -27,10 +27,10 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x350)] public Utf8String UnkText03;
     [FieldOffset(0x450)] public Utf8String UnkText04;
     [FieldOffset(0x4B8)] public Utf8String UnkText05;
-        
+
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0")]
     public partial void Ctor();
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 45 32 C0 33 D2"), GenerateStringOverloads]
     public partial void SetText(byte* text);
 }

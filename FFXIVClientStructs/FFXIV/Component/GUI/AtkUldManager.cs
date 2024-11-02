@@ -44,7 +44,7 @@ public unsafe partial struct AtkUldManager {
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 45 33 C9 4C 8B C0")]
     public partial void InitializeResourceRendererManager();
-    
+
     [MemberFunction("F6 81 ?? ?? ?? ?? ?? 44 8B CA 74 42")]
     public partial AtkResNode* SearchNodeById(uint id);
 

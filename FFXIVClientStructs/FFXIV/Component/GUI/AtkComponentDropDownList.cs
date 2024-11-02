@@ -25,7 +25,7 @@ public unsafe partial struct AtkComponentDropDownList : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 C0 41")]
     public partial int GetSelectedItemIndex();
-    
+
     public void Ctor() {
         AtkComponentBase.Ctor();
         VirtualTable = StaticVirtualTablePointer;
