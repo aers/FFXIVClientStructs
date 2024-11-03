@@ -32,7 +32,17 @@ public unsafe partial struct AgentCharaCard {
     public unsafe partial struct Storage {
         [FieldOffset(0x4)] public uint EntityId;
         [FieldOffset(0x8)] public ulong ContentId;
-
+        
+        [FieldOffset(0x1B)] public bool InvertPortraitPlacement;
+        [FieldOffset(0x1C)] public byte BasePlate; // CharaCardBase sheet
+        [FieldOffset(0x22)] public byte Backing; // CharaCardDecoration sheet
+        [FieldOffset(0x1E)] public byte TopBorder; // CharaCardHeader sheet
+        [FieldOffset(0x1F)] public byte BottomBorder; // CharaCardHeader sheet
+        [FieldOffset(0x24)] public byte PatternOverlay; // CharaCardDecoration sheet
+        [FieldOffset(0x26)] public byte PortraitFrame; // CharaCardDecoration sheet
+        [FieldOffset(0x28)] public byte PlateFrame; // CharaCardDecoration sheet
+        [FieldOffset(0x2A)] public byte Accent; // CharaCardDecoration sheet
+        
         [FieldOffset(0x60)] public Utf8String Name;
         [FieldOffset(0xC8)] public ushort WorldId;
         [FieldOffset(0xCA)] public byte ClassJobId;
