@@ -1,3 +1,4 @@
+using System.Text;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -38,6 +39,26 @@ public unsafe partial struct AtkComponentButton : ICreatable {
     /// <param name="str">Null-terminated UTF-8 string buffer to set the text to.</param>
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 48 8B FA 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 84 ?? ?? ?? ?? 48 85 D2 74 ?? 0F B6 81")]
     public partial void SetText(byte* text);
+
+    public void SetText(string str) {
+        int strUtf8Len = Encoding.UTF8.GetByteCount(str);
+        Span<byte> strBytes = strUtf8Len <= 512 ? stackalloc byte[strUtf8Len + 1] : new byte[strUtf8Len + 1];
+        Encoding.UTF8.GetBytes(str, strBytes);
+        strBytes[strUtf8Len] = 0;
+        fixed (byte* strPtr = strBytes) {
+            SetText(strPtr);
+        }
+        if(ButtonTextNode != null)
+            ButtonTextNode->OriginalTextPointer = ButtonTextNode->NodeText.StringPtr;
+    }
+
+    public void SetText(ReadOnlySpan<byte> str) {
+        fixed (byte* strPtr = str) {
+            SetText(strPtr);
+        }
+        if(ButtonTextNode != null)
+            ButtonTextNode->OriginalTextPointer = ButtonTextNode->NodeText.StringPtr;
+    }
 
     /// <remarks> Used by AtkComponentCheckBox and AtkComponentRadioButton. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 8D 46 12")]
