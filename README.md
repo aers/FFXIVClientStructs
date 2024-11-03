@@ -269,15 +269,15 @@ If a struct is both annotated with `[VTableAddress(...)]` and has functions anno
 this.onSetupHook = Hook<OnSetupDelegate>.FromAddress((nint)AddonRetainerTaskAsk.StaticVTable.OnSetup, this.OnSetupDetour);
 ```
 
-#### [GenerateCStrOverloads]
+#### [GenerateStringOverloads]
 
 ```csharp
-public GenerateCStrOverloadsAttribute(string? ignoreArgument = null)
+public GenerateStringOverloadsAttribute(string? ignoreArgument = null)
 ```
 
 ```csharp
 [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01")]
-[GenerateCStrOverloads]
+[GenerateStringOverloads]
 public partial AtkUnitBase* GetAddonByName(byte* name, int index = 1);
 ```
 

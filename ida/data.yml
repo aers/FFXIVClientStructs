@@ -38,6 +38,11 @@ globals:
   0x14272CB00: g_PerformanceFrequency
   0x1427375C8: g_Client::Game::Control::Control_LocalPlayerEntityId
   0x1427375D0: g_Client::Game::Control::Control_LocalPlayer
+  0x142746350: g_NounPlaceholder_n
+  0x1427463C0: g_NounPlaceholder_a
+  0x142746430: g_NounPlaceholder_p
+  0x1427464A0: g_NounPlaceholder_pa
+  0x142746510: g_NounPlaceholder_t
   0x14275DB00: g_LastTextCommand
   0x14254EC50: g_Client::Game::Character::CharacterManager_BattleCharaMemoryPtr
   0x14254EC60: g_Client::Game::Character::CharacterManager_CompanionMemoryPtr
@@ -93,6 +98,7 @@ functions:
   0x140058430: WinMain
 #fail   0x1400581B0: std::string::ctor_FromSubStr #(other, idx, len)
 #fail   0x1400582F0: std::string::ctor_FromCharArr #(arr, len)
+  0x1401DC000: std::_Throw_tree_length_error
   0x141AFB93C: std::_Xlength_error
   0x1401DADE0: std::deque::_Growmap
   0x140059AF0: GetStdOut
@@ -166,6 +172,8 @@ functions:
   0x140D03320: IsLocalPlayerLalafell
   0x140E5E5E0: CreateSelectYesno
   0x1413F9160: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
+  0x14162B640: Client::Graphics::crc32
+  0x14202DDF0: crc32_tab # for Client::Graphics::crc32
   0x14162B920: Client::Graphics::Kernel::CreateShader # static function
   0x14163F480: FilterCustomizeData # ensures NPC specific faces etc aren't on players
   0x14163FA40: NormalizeCustomizeData
@@ -297,7 +305,7 @@ functions:
   0x1419C0380: luaopen_debug
   0x1419C0E70: luaopen_package
 #fail   0x1415F29E0: std::vector.dtor
-  0x141A97490: crc
+  0x141A97490: z_crc32 # zlibs crc32 function
   0x141AFB960: ThrowException
   0x141B821E0: rand
   0x141B8220C: srand
@@ -1669,6 +1677,7 @@ classes:
       0x14005BD20: SubStr
       0x14005BD60: CopySubStrTo
       0x14005C0A0: Append
+      0x14005C130: AppendCStr
       0x14005CC30: Replace
       0x14005D540: Compare
       0x14005DA00: SetSize
@@ -2813,6 +2822,10 @@ classes:
       0x1400A23F0: UpdateClipCursor
       0x1400A24E0: PauseResumeFrameTicks
       0x1400A27D0: GetNetworkModuleProxy
+      0x1400A1DD0: FpsPercentileStart
+      0x1400A1F20: FpsPercentileStop
+      0x1400A20B0: FpsPercentileInit
+      0x1400A2100: FpsPercentileWrite
       0x1400A27F0: GetUIModule
       0x1400A2810: GetUIClipboard
       0x1400A2820: GetUIInputData
@@ -2853,6 +2866,7 @@ classes:
       - ea: 0x142274798
     funcs:
       0x141E0C220: ctor
+      0x141E0C130: ctor_From
       0x141E0C250: Finalize
   Component::Excel::ExcelModuleInterface:
     vtbls:
@@ -3713,6 +3727,7 @@ classes:
       0x1400DEBE0: IncRefNumberArrayData
       0x1400DEC30: IncRefStringArrayData
       0x1400E2500: GetStaticAddonName
+      0x1400E3510: RegisterAddonAllocators
       0x1400EEA90: UpdateBattleCharaNameplates
       0x1400EFDB0: UpdateNpcNameplates
       0x1400F2360: IsUIVisible
@@ -4602,6 +4617,7 @@ classes:
     funcs:
       0x140284040: ctor
       0x140284070: Finalize
+      0x140284500: CloseAddon
       0x1402845F0: GetAgentByInternalId
       0x140284670: GetAgentInventoryContext
       0x140284650: GetAgentContext
@@ -6217,6 +6233,8 @@ classes:
       0x14064EBA0: Destructor
       0x14064F050: FireCallbackAndHideOrClose
       0x14064F060: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
+      0x14064F310: RegisterEvent
+      0x14064F350: UnregisterEvent
       0x14064F3A0: SetPosition
       0x14064F500: SetAlpha
       0x14064F530: GetScale
@@ -6238,6 +6256,9 @@ classes:
       0x140652D60: UnsubscribeAtkArrayData
       0x140652F70: SetFocusNode
       0x140653650: GetNodeById
+      0x1406536B0: GetNodeByIndex
+      0x140653720: GetNodeCount
+      0x140653740: GetWindowComponent
       0x140653770: GetComponentByNodeId
       0x140653800: GetButtonNodeById
       0x140653B40: GetComponentListById
@@ -6269,6 +6290,7 @@ classes:
       - ea: 0x141EF6260
         base: Component::GUI::AtkComponentBase
     funcs:
+      0x14066D350: SetText
       0x14066DAD0: ctor
       0x1406A1010: Finalize
 #      0x1406CA160: GetOwnerNode # not sure, def got inlined in 0x1410E0F00, are they the same?
@@ -7363,13 +7385,12 @@ classes:
     # funcs:
     #   0x1403274A0: Create # INLINED IN 7.0 1407A8651
   Component::Text::TextParameter:
-    # funcs: # these 3 got inlined inside another function that is already inlined
-    #   0x140132250: SetReferencedUtf8String # INLINED IN 7.0 140903053
-    #   0x140131E10: SetString
-    #   0x140132250: SetInteger
+    funcs:
+      0x1401D0C70: Finalize
   std::deque<Component::Text::TextParameter>:
     funcs:
       0x1403D4CB0: _Reset_map
+      0x1401DE900: push_back
   Client::System::Data::Bit:
     vtbls:
       - ea: 0x141F08B50
@@ -12519,6 +12540,7 @@ classes:
         base: Client::Game::InstanceContent::ContentDirector
     funcs:
       0x1417F9B10: ctor
+      0x1417F9D90: Finalize
   Client::Game::InstanceContent::InstanceContentGuildOrderDirector:
     vtbls:
       - ea: 0x1420BA728
@@ -16755,6 +16777,9 @@ classes:
     vtbls:
       - ea: 0x141E91C28
         base: Client::System::Memory::IMemorySpace
+  Common::Math::Half:
+    funcs:
+      0x140257BC0: FromFloat
   Common::Math::Vector3:
     funcs:
       0x140272950: Normalize
