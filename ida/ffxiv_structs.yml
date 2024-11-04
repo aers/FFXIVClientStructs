@@ -312,12 +312,24 @@ enums:
     "WideString": 9
     "String8": 10
     "Vector": 11
-    "Texture": 12
+    "Pointer": 12
     "AtkValues": 13
     "TypeMask": 15
     "Managed": 32
     "ManagedString": 40
     "ManagedVector": 43
+- type: Component::Excel::ExcelModuleInterface::ExcelLanguage
+  name: ExcelLanguage
+  underlying: int
+  namespace: Component.Excel
+  values:
+    "Japanese": 0
+    "English": 1
+    "German": 2
+    "French": 3
+    "ChineseSimplified": 4
+    "ChineseTraditional": 5
+    "Korean": 6
 - type: Common::Lua::LuaType
   name: LuaType
   underlying: int
@@ -335,6 +347,19 @@ enums:
     "Thread": 8
     "Proto": 9
     "Upval": 10
+- type: Common::Component::Excel::ExcelModuleInterface::ExcelLanguage
+  name: ExcelLanguage
+  underlying: int
+  namespace: Common.Component.Excel
+  values:
+    "None": 0
+    "Japanese": 1
+    "English": 2
+    "German": 3
+    "French": 4
+    "ChineseSimplified": 5
+    "ChineseTraditional": 6
+    "Korean": 7
 - type: Common::Component::Excel::ExcelColumnType
   name: ExcelColumnType
   underlying: unsigned __int16
@@ -718,6 +743,14 @@ enums:
     "CircleList": 32
     "Circle": 33
     "CircleFinder": 34
+- type: Client::UI::Info::InfoProxyBlacklist::BlockResultType
+  name: BlockResultType
+  underlying: int
+  namespace: Client.UI.Info
+  values:
+    "NotBlocked": 1
+    "BlockedByAccountId": 2
+    "BlockedByContentId": 3
 - type: Client::UI::Info::InfoProxyCommonList::Sorting
   name: Sorting
   underlying: byte
@@ -3785,6 +3818,35 @@ structs:
   namespace: Animation.Rig
   union: False
   fields: []
+  member_functions: []
+- type: Application::Network::LogoutCallbackInterface
+  name: LogoutCallbackInterface
+  namespace: Application.Network
+  union: False
+  size: 8
+  fields: []
+  virtual_functions:
+  - name: OnLogout
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Application::Network::LogoutCallbackInterface*
+      name: this
+    - type: Application::Network::LogoutCallbackInterface::LogoutParams*
+      name: logoutParams
+  member_functions: []
+- type: Application::Network::LogoutCallbackInterface::LogoutParams
+  name: LogoutParams
+  namespace: Application.Network
+  union: False
+  size: 8
+  fields:
+  - type: int
+    name: Type
+    offset: 0
+  - type: int
+    name: Code
+    offset: 4
   member_functions: []
 - type: Application::Network::WorkDefinitions::Base
   name: Base
@@ -8227,6 +8289,119 @@ structs:
   - name: DecRef
     offset: 24
   member_functions: []
+- type: Client::Graphics::Render::GraphicsConfig
+  name: GraphicsConfig
+  namespace: Client.Graphics.Render
+  union: False
+  size: 184
+  fields:
+  - type: unsigned int
+    name: UpdateFlags
+    offset: 8
+  - type: byte
+    name: Gamma
+    offset: 12
+  - type: byte
+    name: LodType
+    offset: 16
+  - type: byte
+    name: ShadowLOD
+    offset: 18
+  - type: byte
+    name: ShadowBgLOD
+    offset: 19
+  - type: byte
+    name: ParallaxOcclusion
+    offset: 23
+  - type: byte
+    name: Tessellation
+    offset: 24
+  - type: byte
+    name: ReflectionType
+    offset: 32
+  - type: byte
+    name: GlareRepresentation
+    offset: 33
+  - type: byte
+    name: GrassQuality
+    offset: 34
+  - type: byte
+    name: SSAO
+    offset: 35
+  - type: byte
+    name: Glare
+    offset: 36
+  - type: byte
+    name: GlareStrong
+    offset: 37
+  - type: byte
+    name: DepthOfField
+    offset: 38
+  - type: byte
+    name: RadialBlur
+    offset: 40
+  - type: byte
+    name: Vignetting
+    offset: 41
+  - type: unsigned int
+    name: AntiAliasing
+    offset: 44
+  - type: byte
+    name: TextureFilterQuality
+    offset: 48
+  - type: byte
+    name: TextureAnisotropicQuality
+    offset: 49
+  - type: byte
+    name: TranslucentQuality
+    offset: 51
+  - type: byte
+    name: ShadowVisibilityTypeFlags
+    offset: 52
+  - type: byte
+    name: ShadowSoftShadowType
+    offset: 53
+  - type: byte
+    name: ShadowTextureSizeType
+    offset: 54
+  - type: byte
+    name: ShadowCascadeCountType
+    offset: 55
+  - type: byte
+    name: TargetCircleType
+    offset: 57
+  - type: byte
+    name: TargetLineType
+    offset: 58
+  - type: byte
+    name: LinkLineType
+    offset: 59
+  - type: byte
+    name: CharaLight
+    offset: 64
+  - type: byte
+    name: ShadowLightValidType
+    offset: 65
+  - type: byte
+    name: DynamicRezoEnable
+    offset: 68
+  - type: byte
+    name: DynamicRezoEnableCutScene
+    offset: 70
+  - type: byte
+    name: DynamicRezoThreshold
+    offset: 73
+  - type: float
+    name: GraphicsRezoScale
+    offset: 76
+  - type: byte
+    name: GraphicsRezoUpscaleType
+    offset: 84
+  - type: byte
+    name: GrassEnableDynamicInterference
+    offset: 86
+  virtual_functions: []
+  member_functions: []
 - type: Client::Graphics::Render::Material::TextureEntry
   name: TextureEntry
   namespace: Client.Graphics.Render
@@ -8295,6 +8470,18 @@ structs:
     name: Cameras
     offset: 200
     size: 4
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: PrimitiveVSHandle
+    offset: 328
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: PrimitivePSHandle
+    offset: 336
+  - type: Client::Graphics::Kernel::ShaderPackage*
+    name: PrimitiveVSPackage
+    offset: 344
+  - type: Client::Graphics::Kernel::ShaderPackage*
+    name: PrimitivePSPackage
+    offset: 352
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Scene::CameraManager
@@ -12091,6 +12278,22 @@ structs:
     name: IsPartyLeader
     offset: 99
   member_functions: []
+- type: Client::UI::Info::InfoProxyBlacklist::BlockResult
+  name: BlockResult
+  namespace: Client.UI.Info
+  union: False
+  size: 20
+  fields:
+  - type: Client::UI::Info::InfoProxyBlacklist::BlockResultType
+    name: Type
+    offset: 0
+  - type: Client::UI::Info::InfoProxyBlacklist::BlockedCharacter*
+    name: BlockedCharacterPtr
+    offset: 8
+  - type: int
+    name: BlockedCharacterIndex
+    offset: 16
+  member_functions: []
 - type: Client::UI::Info::InfoProxyBlacklist::BlockedCharacter
   name: BlockedCharacter
   namespace: Client.UI.Info
@@ -13463,6 +13666,12 @@ structs:
     offset: 18
   virtual_functions: []
   member_functions: []
+- type: Client::UI::UIGlobals
+  name: UIGlobals
+  namespace: Client.UI
+  union: False
+  fields: []
+  member_functions: []
 - type: Client::UI::UIInputData::Keybind
   name: Keybind
   namespace: Client.UI
@@ -13521,6 +13730,12 @@ structs:
   fields: []
   virtual_functions:
   - name: GetExcelModule
+    offset: 40
+    return_type: Component::Excel::ExcelModuleInterface*
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+  - name: GetExcelModuleInterface
     offset: 40
     return_type: Component::Excel::ExcelModuleInterface*
     parameters:
@@ -15453,18 +15668,18 @@ structs:
     name: Count
     offset: 128
   member_functions: []
-- type: Common::Component::Excel::ExcelModule
-  name: ExcelModule
+- type: Common::Component::Excel::ExcelModuleInterface
+  name: ExcelModuleInterface
   namespace: Common.Component.Excel
   union: False
-  size: 2072
+  size: 8
   fields: []
   virtual_functions:
   - name: GetSheetByIndex
     offset: 8
     return_type: Common::Component::Excel::ExcelSheet*
     parameters:
-    - type: Common::Component::Excel::ExcelModule*
+    - type: Common::Component::Excel::ExcelModuleInterface*
       name: this
     - type: unsigned int
       name: sheetIndex
@@ -15472,7 +15687,7 @@ structs:
     offset: 16
     return_type: Common::Component::Excel::ExcelSheet*
     parameters:
-    - type: Common::Component::Excel::ExcelModule*
+    - type: Common::Component::Excel::ExcelModuleInterface*
       name: this
     - type: byte*
       name: sheetName
@@ -15480,7 +15695,7 @@ structs:
     offset: 24
     return_type: void
     parameters:
-    - type: Common::Component::Excel::ExcelModule*
+    - type: Common::Component::Excel::ExcelModuleInterface*
       name: this
     - type: byte*
       name: sheetName
@@ -15488,6 +15703,14 @@ structs:
       name: a3
     - type: byte
       name: a4
+  - name: GetLanguage
+    offset: 48
+    return_type: Common::Component::Excel::ExcelModuleInterface::ExcelLanguage
+    parameters:
+    - type: Common::Component::Excel::ExcelModuleInterface*
+      name: this
+  - name: ChangeLanguage
+    offset: 40
   member_functions: []
 - type: Common::Component::Excel::ExcelSheet::ColumnInfo
   name: ColumnInfo
@@ -16130,6 +16353,10 @@ structs:
       name: sheetName
   - name: GetLanguage
     offset: 24
+    return_type: Component::Excel::ExcelModuleInterface::ExcelLanguage*
+    parameters:
+    - type: Component::Excel::ExcelModuleInterface*
+      name: this
   member_functions: []
 - type: Component::Excel::ExcelRow
   name: ExcelRow
@@ -16965,6 +17192,38 @@ structs:
     name: Unk10
     offset: 16
   member_functions: []
+- type: Component::GUI::AtkMessageBoxManager
+  name: AtkMessageBoxManager
+  namespace: Component.GUI
+  union: False
+  size: 144
+  fields:
+  - type: Common::Component::Excel::ExcelSheet*
+    name: ErrorSheet
+    offset: 96
+  - type: byte*
+    name: OkText
+    offset: 104
+  - type: byte*
+    name: CancelText
+    offset: 112
+  - type: byte*
+    name: YesText
+    offset: 120
+  - type: byte*
+    name: NoText
+    offset: 128
+  - type: byte
+    name: Unk88
+    offset: 136
+  - type: byte
+    name: Unk89
+    offset: 137
+  - type: byte
+    name: Unk8A
+    offset: 138
+  virtual_functions: []
+  member_functions: []
 - type: Component::GUI::AtkModuleEvent
   name: AtkModuleEvent
   namespace: Component.GUI
@@ -17617,8 +17876,8 @@ structs:
   - type: StdVector<Component::GUI::AtkValue>*
     name: Vector
     offset: 0
-  - type: Client::Graphics::Kernel::Texture*
-    name: Texture
+  - type: __int64
+    name: Pointer
     offset: 0
   - type: Component::GUI::AtkValue*
     name: AtkValues
@@ -20290,6 +20549,9 @@ structs:
   - type: unsigned __int16
     name: TitleId
     offset: 54
+  - type: unsigned __int16
+    name: StatusLoopVfxId
+    offset: 56
   - type: byte
     name: ClassJob
     offset: 58
@@ -22265,59 +22527,436 @@ structs:
   name: RenderTargetManager
   namespace: Client.Graphics.Render
   union: False
-  size: 1184
+  size: 1808
   fields:
   - type: Client::Graphics::Kernel::Notifier
     name: Notifier
     offset: 0
     base: true
   - type: Client::Graphics::Kernel::Texture*
-    name: RenderTargets
+    name: Unk20
     offset: 32
-    size: 64
-  - type: unsigned int
-    name: Resolution_Width
-    offset: 584
-  - type: unsigned int
-    name: Resolution_Height
-    offset: 588
-  - type: unsigned int
-    name: ShadowMap_Width
+    size: 5
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk48
+    offset: 72
+    size: 5
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk70
+    offset: 112
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk78
+    offset: 120
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk80
+    offset: 128
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk88
+    offset: 136
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk90
+    offset: 144
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk98
+    offset: 152
+    size: 5
+  - type: Client::Graphics::Kernel::Texture*
+    name: UnkC0
+    offset: 192
+    size: 5
+  - type: Client::Graphics::Kernel::Texture*
+    name: UnkE8
+    offset: 232
+  - type: Client::Graphics::Kernel::Texture*
+    name: UnkF0
+    offset: 240
+  - type: Client::Graphics::Kernel::Texture*
+    name: UnkF8
+    offset: 248
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk100
+    offset: 256
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk108
+    offset: 264
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk110
+    offset: 272
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk118
+    offset: 280
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk120
+    offset: 288
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk128
+    offset: 296
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk130
+    offset: 304
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk138
+    offset: 312
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk140
+    offset: 320
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk148
+    offset: 328
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk150
+    offset: 336
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk158
+    offset: 344
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk160
+    offset: 352
+    size: 4
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk180
+    offset: 384
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk188
+    offset: 392
+    size: 20
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk228
+    offset: 552
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk230
+    offset: 560
+    size: 4
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk250
     offset: 592
-  - type: unsigned int
-    name: ShadowMap_Height
-    offset: 596
-  - type: unsigned int
-    name: NearShadowMap_Width
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk258
     offset: 600
-  - type: unsigned int
-    name: NearShadowMap_Height
-    offset: 604
-  - type: unsigned int
-    name: FarShadowMap_Width
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk260
     offset: 608
-  - type: unsigned int
-    name: FarShadowMap_Height
-    offset: 612
-  - type: byte
-    name: UnkBool_1
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk268
     offset: 616
   - type: Client::Graphics::Kernel::Texture*
-    name: RenderTargets2
+    name: Unk270
     offset: 624
-    size: 49
-  - type: unsigned __int16
-    name: DynamicResolutionActualTargetHeight
-    offset: 1136
-  - type: unsigned __int16
-    name: DynamicResolutionTargetHeight
-    offset: 1138
-  - type: unsigned __int16
-    name: DynamicResolutionMaximumHeight
-    offset: 1140
-  - type: unsigned __int16
-    name: DynamicResolutionMinimumHeight
-    offset: 1142
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk278
+    offset: 632
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk280
+    offset: 640
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk288
+    offset: 648
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk290
+    offset: 656
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk298
+    offset: 664
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk2A0
+    offset: 672
+    size: 3
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk2B8
+    offset: 696
+    size: 2
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk2C8
+    offset: 712
+  - type: Client::Graphics::Kernel::Texture*
+    name: CharaViewTextures
+    offset: 720
+    size: 8
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk310
+    offset: 784
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk318
+    offset: 792
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk320
+    offset: 800
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk328
+    offset: 808
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk330
+    offset: 816
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk338
+    offset: 824
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk340
+    offset: 832
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk348
+    offset: 840
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk350
+    offset: 848
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk358
+    offset: 856
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk360
+    offset: 864
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk368
+    offset: 872
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk370
+    offset: 880
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk378
+    offset: 888
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk380
+    offset: 896
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk388
+    offset: 904
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk390
+    offset: 912
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk398
+    offset: 920
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3A0
+    offset: 928
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3A8
+    offset: 936
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3B0
+    offset: 944
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3B8
+    offset: 952
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3C0
+    offset: 960
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3C8
+    offset: 968
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3D0
+    offset: 976
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3D8
+    offset: 984
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3E0
+    offset: 992
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3E8
+    offset: 1000
+    size: 2
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk3F8
+    offset: 1016
+    size: 2
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk408
+    offset: 1032
+    size: 3
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk420
+    offset: 1056
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk428
+    offset: 1064
+  - type: unsigned int
+    name: Resolution_Width
+    offset: 1072
+  - type: unsigned int
+    name: Resolution_Height
+    offset: 1076
+  - type: unsigned int
+    name: ShadowMap_Width
+    offset: 1080
+  - type: unsigned int
+    name: ShadowMap_Height
+    offset: 1084
+  - type: unsigned int
+    name: NearShadowMap_Width
+    offset: 1088
+  - type: unsigned int
+    name: NearShadowMap_Height
+    offset: 1092
+  - type: unsigned int
+    name: FarShadowMap_Width
+    offset: 1096
+  - type: unsigned int
+    name: FarShadowMap_Height
+    offset: 1100
+  - type: byte
+    name: UnkBool_1
+    offset: 1104
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk4A8
+    offset: 1192
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk4B0
+    offset: 1200
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk4C0
+    offset: 1216
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk4C8
+    offset: 1224
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk4D0
+    offset: 1232
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk4D8
+    offset: 1240
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk4E0
+    offset: 1248
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk4E8
+    offset: 1256
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk528
+    offset: 1320
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk530
+    offset: 1328
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk540
+    offset: 1344
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk548
+    offset: 1352
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk550
+    offset: 1360
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk558
+    offset: 1368
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk560
+    offset: 1376
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk568
+    offset: 1384
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk570
+    offset: 1392
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk578
+    offset: 1400
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk580
+    offset: 1408
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk588
+    offset: 1416
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk590
+    offset: 1424
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk598
+    offset: 1432
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5A0
+    offset: 1440
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5A8
+    offset: 1448
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5B0
+    offset: 1456
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5B8
+    offset: 1464
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5C0
+    offset: 1472
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5C8
+    offset: 1480
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5D0
+    offset: 1488
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5D8
+    offset: 1496
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5E0
+    offset: 1504
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5E8
+    offset: 1512
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5F0
+    offset: 1520
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk5F8
+    offset: 1528
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk600
+    offset: 1536
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk608
+    offset: 1544
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk610
+    offset: 1552
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk618
+    offset: 1560
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk620
+    offset: 1568
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk628
+    offset: 1576
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk630
+    offset: 1584
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk638
+    offset: 1592
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk640
+    offset: 1600
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk648
+    offset: 1608
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk650
+    offset: 1616
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk658
+    offset: 1624
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk660
+    offset: 1632
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk668
+    offset: 1640
+  - type: Client::Graphics::Kernel::Texture*
+    name: Unk670
+    offset: 1648
+  - type: __int64
+    name: Unk678
+    offset: 1656
+  - type: __int64
+    name: Unk680
+    offset: 1664
+  - type: float
+    name: FrametimeAverage
+    offset: 1760
+  - type: float
+    name: GraphicsRezoScale
+    offset: 1772
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B 4F 30 48 8B D0 FF 57 38
@@ -31436,6 +32075,52 @@ structs:
     - type: byte
       name: freeFlags
   member_functions: []
+- type: Common::Component::Excel::ExcelModule
+  name: ExcelModule
+  namespace: Common.Component.Excel
+  union: False
+  size: 2072
+  fields:
+  - type: Common::Component::Excel::ExcelModuleInterface
+    name: ExcelModuleInterface
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: GetSheetByIndex
+    offset: 8
+    return_type: Common::Component::Excel::ExcelSheet*
+    parameters:
+    - type: Common::Component::Excel::ExcelModule*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: GetSheetByName
+    offset: 16
+    return_type: Common::Component::Excel::ExcelSheet*
+    parameters:
+    - type: Common::Component::Excel::ExcelModule*
+      name: this
+    - type: byte*
+      name: a2
+  - name: LoadSheet
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Common::Component::Excel::ExcelModule*
+      name: this
+    - type: byte*
+      name: a2
+    - type: byte
+      name: a3
+    - type: byte
+      name: a4
+  - name: GetLanguage
+    offset: 48
+    return_type: Common::Component::Excel::ExcelModuleInterface::ExcelLanguage
+    parameters:
+    - type: Common::Component::Excel::ExcelModule*
+      name: this
+  member_functions: []
 - type: Common::Component::Excel::ExcelSheet
   name: ExcelSheet
   namespace: Common.Component.Excel
@@ -32788,6 +33473,12 @@ structs:
     name: LoadedState
     offset: 137
   member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 45 33 C9 4C 8B C0
+    return_type: void
+    name: InitializeResourceRendererManager
+    parameters:
+    - type: Component::GUI::AtkUldManager*
+      name: this
   - signature: F6 81 ?? ?? ?? ?? ?? 44 8B CA 74 42
     return_type: Component::GUI::AtkResNode*
     name: SearchNodeById
@@ -52569,6 +53260,12 @@ structs:
   - name: InitializeFromComponentData
     offset: 136
   member_functions:
+  - signature: 48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentBase*
+      name: this
   - signature: E8 ?? ?? ?? ?? 49 63 D7
     return_type: Component::GUI::AtkResNode*
     name: GetTextNodeById
@@ -58282,6 +58979,20 @@ structs:
     - type: byte
       name: a2
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 88 9F ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentButton*
+      name: this
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 48 8B FA 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 84 ?? ?? ?? ?? 48 85 D2 74 ?? 0F B6 81
+    return_type: void
+    name: SetText
+    parameters:
+    - type: Component::GUI::AtkComponentButton*
+      name: this
+    - type: byte*
+      name: text
   - signature: E8 ?? ?? ?? ?? 8D 46 12
     return_type: void
     name: SetChecked
@@ -58312,6 +59023,9 @@ structs:
   - type: byte
     name: OpenStateChangePending
     offset: 217
+  - type: byte
+    name: ShowPreview
+    offset: 218
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -58445,7 +59159,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? C3
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentGuildLeveCard*
+      name: this
 - type: Component::GUI::AtkComponentIcon
   name: AtkComponentIcon
   namespace: Component.GUI
@@ -58540,7 +59260,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 51 08 48 8D 05 ?? ?? ?? ?? 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 01 48 8B C1 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
 - type: Component::GUI::AtkComponentIconText
   name: AtkComponentIconText
   namespace: Component.GUI
@@ -58602,7 +59328,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 C7 81 ?? ?? ?? ?? ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentIconText*
+      name: this
 - type: Component::GUI::AtkComponentJournalCanvas
   name: AtkComponentJournalCanvas
   namespace: Component.GUI
@@ -58664,7 +59396,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B D9 48 8D 05 ?? ?? ?? ?? 33 C9 33 D2 41 B8 ?? ?? ?? ?? 48 89 4B 08
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentJournalCanvas*
+      name: this
 - type: Component::GUI::AtkComponentList
   name: AtkComponentList
   namespace: Component.GUI
@@ -58830,6 +59568,12 @@ structs:
   - name: GetSelectedItemAtkResNode
     offset: 360
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentList*
+      name: this
   - signature: E8 ?? ?? ?? ?? 41 80 FF 04
     return_type: void
     name: SetItemCount
@@ -58939,7 +59683,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentPortrait*
+      name: this
 - type: Component::GUI::AtkComponentScrollBar
   name: AtkComponentScrollBar
   namespace: Component.GUI
@@ -59001,7 +59751,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentScrollBar*
+      name: this
 - type: Component::GUI::AtkComponentSlider
   name: AtkComponentSlider
   namespace: Component.GUI
@@ -59102,6 +59858,12 @@ structs:
       name: value
     - type: byte
       name: dispatchEvent29
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8B C1 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 89 91 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentSlider*
+      name: this
 - type: Component::GUI::AtkComponentTextNineGrid
   name: AtkComponentTextNineGrid
   namespace: Component.GUI
@@ -59302,7 +60064,13 @@ structs:
     offset: 184
   - name: ToggleTitleBarVisibility
     offset: 200
-  member_functions: []
+  member_functions:
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 0F 57 C0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentWindow*
+      name: this
 - type: Component::GUI::AtkFontCodeModule
   name: AtkFontCodeModule
   namespace: Component.GUI
@@ -62417,6 +63185,12 @@ structs:
     - type: byte
       name: a2
   member_functions:
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 48 8D 05 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
   - signature: E8 ?? ?? ?? ?? 83 F8 FF 74 40
     return_type: int
     name: GetIconId
@@ -62484,7 +63258,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 03 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 66 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
 - type: Component::GUI::AtkComponentInputBase
   name: AtkComponentInputBase
   namespace: Component.GUI
@@ -62646,7 +63426,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 33 C0 89 83 ?? ?? ?? ?? 48 8B C3
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentRadioButton*
+      name: this
 - type: Component::GUI::AtkImageNode
   name: AtkImageNode
   namespace: Component.GUI
@@ -65209,7 +65995,13 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
 - type: Component::GUI::AtkCounterNode
   name: AtkCounterNode
   namespace: Component.GUI
@@ -68184,7 +68976,29 @@ structs:
       name: this
     - type: __int64
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 4C 8B 91 ?? ?? ?? ?? 33 C0
+    return_type: void
+    name: GetBlockResult
+    parameters:
+    - type: Client::UI::Info::InfoProxyBlacklist*
+      name: this
+    - type: Client::UI::Info::InfoProxyBlacklist::BlockResult*
+      name: outBlockResult
+    - type: unsigned __int64
+      name: accountId
+    - type: unsigned __int64
+      name: contentId
+  - signature: 48 83 EC 48 F6 81 ?? ?? ?? ?? ?? 75 ?? 33 C0 48 83 C4 48
+    return_type: Client::UI::Info::InfoProxyBlacklist::BlockResultType
+    name: GetBlockResultType
+    parameters:
+    - type: Client::UI::Info::InfoProxyBlacklist*
+      name: this
+    - type: unsigned __int64
+      name: accountId
+    - type: unsigned __int64
+      name: contentId
 - type: Client::UI::Misc::CharaViewPortrait
   name: CharaViewPortrait
   namespace: Client.UI.Misc
@@ -69552,6 +70366,12 @@ structs:
     - type: byte
       name: a2
   member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
   - signature: E8 ?? ?? ?? ?? 45 32 C0 33 D2
     return_type: void
     name: SetText
@@ -69696,6 +70516,12 @@ structs:
     - type: Component::GUI::AtkComponentTreeList*
       name: this
   member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 0F 57 C0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentTreeList*
+      name: this
   - signature: E8 ?? ?? ?? ?? 48 8B F8 8B CD
     return_type: Component::GUI::AtkComponentTreeListItem*
     name: CreateItem
@@ -72099,6 +72925,33 @@ structs:
   - type: unsigned __int64
     name: ContentId
     offset: 8
+  - type: byte
+    name: InvertPortraitPlacement
+    offset: 27
+  - type: byte
+    name: BasePlate
+    offset: 28
+  - type: byte
+    name: TopBorder
+    offset: 30
+  - type: byte
+    name: BottomBorder
+    offset: 31
+  - type: byte
+    name: Backing
+    offset: 34
+  - type: byte
+    name: PatternOverlay
+    offset: 36
+  - type: byte
+    name: PortraitFrame
+    offset: 38
+  - type: byte
+    name: PlateFrame
+    offset: 40
+  - type: byte
+    name: Accent
+    offset: 42
   - type: Client::System::String::Utf8String
     name: Name
     offset: 96
@@ -95169,6 +96022,12 @@ structs:
     - type: byte
       name: a2
   member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B F1 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 86 ?? ?? ?? ?? ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentNumericInput*
+      name: this
   - signature: E8 ?? ?? ?? ?? 81 4F ?? ?? ?? ?? ?? EB 07
     return_type: void
     name: SetValue
@@ -106839,244 +107698,6 @@ structs:
       name: entityId
     - type: byte
       name: isChocobo
-- type: Client::UI::Agent::AgentLobby
-  name: AgentLobby
-  namespace: Client.UI.Agent
-  union: False
-  size: 7784
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: Client::UI::Agent::LobbyData
-    name: LobbyData
-    offset: 64
-  - type: Common::Component::Excel::ExcelSheet*
-    name: ErrorSheet
-    offset: 2592
-  - type: Common::Component::Excel::ExcelSheet*
-    name: LobbySheet
-    offset: 2600
-  - type: Client::Network::NetworkModuleProxy*
-    name: NetworkModuleProxy
-    offset: 2608
-  - type: StdDeque<Component::Text::TextParameter>
-    name: LobbyTextParameters
-    offset: 2616
-  - type: Client::System::String::Utf8String
-    name: TempUtf8Strings
-    offset: 2656
-    size: 4
-  - type: StdVector<Client::System::String::Utf8String>
-    name: VersionStrings
-    offset: 3072
-  - type: Client::System::String::Utf8String
-    name: DisplayedVersionString
-    offset: 3096
-  - type: Client::System::String::Utf8String
-    name: UnkUtf8Strings
-    offset: 3224
-    size: 8
-  - type: __int8
-    name: ServiceAccountIndex
-    offset: 4368
-  - type: unsigned __int64
-    name: HoveredCharacterContentId
-    offset: 4376
-  - type: byte
-    name: DataCenter
-    offset: 4384
-  - type: __int16
-    name: WorldIndex
-    offset: 4386
-  - type: unsigned __int16
-    name: WorldId
-    offset: 4388
-  - type: unsigned int
-    name: DialogAddonId
-    offset: 4392
-  - type: unsigned int
-    name: DialogAddonId2
-    offset: 4396
-  - type: unsigned int
-    name: LobbyScreenTextAddonId
-    offset: 4400
-  - type: unsigned int
-    name: LogoAddonId
-    offset: 4404
-  - type: unsigned int
-    name: TitleDCWorldMapAddonId
-    offset: 4408
-  - type: unsigned int
-    name: TitleMovieSelectorAddonId
-    offset: 4412
-  - type: unsigned int
-    name: TitleGameVersionAddonId
-    offset: 4416
-  - type: unsigned int
-    name: TitleConnectAddonId
-    offset: 4420
-  - type: unsigned int
-    name: CharaSelectAddonId
-    offset: 4424
-  - type: unsigned int
-    name: CharaMakeDataImportAddonId
-    offset: 4428
-  - type: unsigned int
-    name: LoadPreviouslySavedAppearanceDataDialogAddonId
-    offset: 4432
-  - type: unsigned int
-    name: LoadSavedCharacterCreationDataDialogAddonId
-    offset: 4436
-  - type: unsigned int
-    name: CreateNewCharacterDialogAddonId
-    offset: 4440
-  - type: unsigned int
-    name: LobbyWKTAddonId
-    offset: 4444
-  - type: byte
-    name: LobbyUpdateStage
-    offset: 4452
-  - type: byte
-    name: LobbyUIStage
-    offset: 4455
-  - type: byte
-    name: IsLoggedIn
-    offset: 4457
-  - type: __int64
-    name: IdleTime
-    offset: 4464
-  - type: int
-    name: QueuePosition
-    offset: 4496
-  - type: __int8
-    name: HoveredCharacterIndex
-    offset: 4501
-  - type: unsigned __int64
-    name: SelectedCharacterContentId
-    offset: 4504
-  - type: byte
-    name: TemporaryLocked
-    offset: 4768
-  - type: unsigned __int64
-    name: RequestContentId
-    offset: 4792
-  - type: byte
-    name: HasShownCharacterNotFound
-    offset: 7700
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5
-    return_type: void
-    name: UpdateLobbyUIStage
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24
-    return_type: void
-    name: UpdateCharaSelectDisplay
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-    - type: __int8
-      name: index
-    - type: byte
-      name: a2
-  - signature: E8 ?? ?? ?? ?? C6 87 ?? ?? ?? ?? ?? 66 C7 87 ?? ?? ?? ?? ?? ??
-    return_type: void
-    name: OpenLoginWaitDialog
-    parameters:
-    - type: Client::UI::Agent::AgentLobby*
-      name: this
-    - type: int
-      name: position
 - type: Client::UI::Agent::AgentMJICraftSchedule::ScheduleData
   name: ScheduleData
   namespace: Client.UI.Agent
@@ -111680,6 +112301,264 @@ structs:
       name: this
     - type: int
       name: tab
+- type: Client::UI::Agent::AgentLobby
+  name: AgentLobby
+  namespace: Client.UI.Agent
+  union: False
+  size: 7784
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Application::Network::LogoutCallbackInterface
+    name: LogoutCallbackInterface
+    offset: 48
+    base: true
+  - type: Client::UI::Agent::LobbyData
+    name: LobbyData
+    offset: 64
+  - type: Common::Component::Excel::ExcelSheet*
+    name: ErrorSheet
+    offset: 2592
+  - type: Common::Component::Excel::ExcelSheet*
+    name: LobbySheet
+    offset: 2600
+  - type: Client::Network::NetworkModuleProxy*
+    name: NetworkModuleProxy
+    offset: 2608
+  - type: StdDeque<Component::Text::TextParameter>
+    name: LobbyTextParameters
+    offset: 2616
+  - type: Client::System::String::Utf8String
+    name: TempUtf8Strings
+    offset: 2656
+    size: 4
+  - type: StdVector<Client::System::String::Utf8String>
+    name: VersionStrings
+    offset: 3072
+  - type: Client::System::String::Utf8String
+    name: DisplayedVersionString
+    offset: 3096
+  - type: Client::System::String::Utf8String
+    name: UnkUtf8Strings
+    offset: 3224
+    size: 8
+  - type: __int8
+    name: ServiceAccountIndex
+    offset: 4368
+  - type: unsigned __int64
+    name: HoveredCharacterContentId
+    offset: 4376
+  - type: byte
+    name: DataCenter
+    offset: 4384
+  - type: __int16
+    name: WorldIndex
+    offset: 4386
+  - type: unsigned __int16
+    name: WorldId
+    offset: 4388
+  - type: unsigned int
+    name: DialogAddonId
+    offset: 4392
+  - type: unsigned int
+    name: DialogAddonId2
+    offset: 4396
+  - type: unsigned int
+    name: LobbyScreenTextAddonId
+    offset: 4400
+  - type: unsigned int
+    name: LogoAddonId
+    offset: 4404
+  - type: unsigned int
+    name: TitleDCWorldMapAddonId
+    offset: 4408
+  - type: unsigned int
+    name: TitleMovieSelectorAddonId
+    offset: 4412
+  - type: unsigned int
+    name: TitleGameVersionAddonId
+    offset: 4416
+  - type: unsigned int
+    name: TitleConnectAddonId
+    offset: 4420
+  - type: unsigned int
+    name: CharaSelectAddonId
+    offset: 4424
+  - type: unsigned int
+    name: CharaMakeDataImportAddonId
+    offset: 4428
+  - type: unsigned int
+    name: LoadPreviouslySavedAppearanceDataDialogAddonId
+    offset: 4432
+  - type: unsigned int
+    name: LoadSavedCharacterCreationDataDialogAddonId
+    offset: 4436
+  - type: unsigned int
+    name: CreateNewCharacterDialogAddonId
+    offset: 4440
+  - type: unsigned int
+    name: LobbyWKTAddonId
+    offset: 4444
+  - type: byte
+    name: LobbyUpdateStage
+    offset: 4452
+  - type: byte
+    name: LobbyUIStage
+    offset: 4455
+  - type: byte
+    name: IsLoggedIn
+    offset: 4457
+  - type: __int64
+    name: IdleTime
+    offset: 4464
+  - type: int
+    name: QueuePosition
+    offset: 4496
+  - type: __int8
+    name: HoveredCharacterIndex
+    offset: 4501
+  - type: unsigned __int64
+    name: SelectedCharacterContentId
+    offset: 4504
+  - type: byte
+    name: LogoutShouldCloseGame
+    offset: 4515
+  - type: byte
+    name: TemporaryLocked
+    offset: 4768
+  - type: unsigned __int64
+    name: RequestContentId
+    offset: 4792
+  - type: Application::Network::LogoutCallbackInterface::LogoutParams
+    name: LogoutParams
+    offset: 4824
+  - type: byte
+    name: HasShownCharacterNotFound
+    offset: 7700
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5
+    return_type: void
+    name: UpdateLobbyUIStage
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24
+    return_type: void
+    name: UpdateCharaSelectDisplay
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: __int8
+      name: index
+    - type: byte
+      name: a2
+  - signature: E8 ?? ?? ?? ?? C6 87 ?? ?? ?? ?? ?? 66 C7 87 ?? ?? ?? ?? ?? ??
+    return_type: void
+    name: OpenLoginWaitDialog
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: int
+      name: position
+  - signature: 40 56 41 56 41 57 48 83 EC 40 80 B9
+    return_type: void
+    name: HandleLogout
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: byte
+      name: isExiting
+    - type: byte
+      name: a3
 - type: Common::Lua::GCObject
   name: GCObject
   namespace: Common.Lua
@@ -129565,6 +130444,9 @@ structs:
   - type: StdVector<__int64>
     name: CallbackHandlerFunctions
     offset: 29312
+  - type: Component::GUI::AtkMessageBoxManager*
+    name: AtkMessageBoxManager
+    offset: 29360
   - type: Client::System::Input::TextService
     name: TextService
     offset: 29368
@@ -130595,8 +131477,8 @@ structs:
   - type: unsigned int
     name: FrameCount
     offset: 2036
-  - type: Common::Component::Excel::ExcelModule*
-    name: ExcelModule
+  - type: Component::Excel::ExcelModuleInterface*
+    name: ExcelModuleInterface
     offset: 2040
   - type: Client::UI::Misc::RaptureTextModule
     name: RaptureTextModule
@@ -130756,6 +131638,12 @@ structs:
     offset: 973704
   virtual_functions:
   - name: GetExcelModule
+    offset: 40
+    return_type: Component::Excel::ExcelModuleInterface*
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+  - name: GetExcelModuleInterface
     offset: 40
     return_type: Component::Excel::ExcelModuleInterface*
     parameters:
