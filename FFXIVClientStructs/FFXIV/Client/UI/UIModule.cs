@@ -3,10 +3,10 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Client.UI.Shell;
-using FFXIVClientStructs.FFXIV.Common.Configuration;
 using FFXIVClientStructs.FFXIV.Component.Completion;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using ChangeEventInterface = FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase.ChangeEventInterface;
 using ExcelModuleInterface = FFXIVClientStructs.FFXIV.Component.Excel.ExcelModuleInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -33,7 +33,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x800)] internal RaptureTextModule RaptureTextModule;
     [FieldOffset(0x1660)] internal CompletionModule CompletionModule;
     [FieldOffset(0x19D8)] internal RaptureLogModule RaptureLogModule;
-    // [FieldOffset(0x50E8)] internal UserFileManager UserFileManager;
+    [FieldOffset(0x50E8)] internal UserFileManager UserFileManager;
     [FieldOffset(0x5108)] internal RaptureMacroModule RaptureMacroModule;
     [FieldOffset(0x56BB0)] internal RaptureHotbarModule RaptureHotbarModule;
     [FieldOffset(0x7F4A8)] internal RaptureGearsetModule RaptureGearsetModule;

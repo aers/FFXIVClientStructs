@@ -1,4 +1,4 @@
-using FFXIVClientStructs.FFXIV.Common.Configuration;
+using ChangeEventInterface = FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase.ChangeEventInterface;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
@@ -32,7 +32,7 @@ public partial struct EnvironmentManager {
     [FieldOffset(0x074)] public Vector4 FadeColor;
 
     /// <summary>
-    ///Cutscene Audio Language (-1 indicates to use ClientLanguage) 
+    /// Cutscene Audio Language (-1 indicates to use ClientLanguage) 
     /// </summary>
     [FieldOffset(0x084)] public int CutsceneMovieVoice;
 
