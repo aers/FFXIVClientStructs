@@ -413,7 +413,13 @@ public unsafe partial struct Conditions {
     /// <summary>
     /// Unable to execute command in this state.
     /// </summary>
+    [Obsolete("Use IsMountImmobile")]
     public static bool IsInThisState88 => Instance()->Flags[88];
+
+    /// <summary>
+    /// Unable to execute command in this state.
+    /// </summary>
+    public static bool IsMountImmobile => Instance()->Flags[88];
 
     /// <summary>
     /// Unable to execute command in this state.

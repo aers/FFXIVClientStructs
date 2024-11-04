@@ -53,7 +53,7 @@ public unsafe partial struct RetainerManager {
         [FieldOffset(0x30)] public RetainerTown Town;
         [FieldOffset(0x31)] public byte MarketItemCount;
         [FieldOffset(0x34)] public uint MarketExpire; // 7 Days after last opened retainer
-        [FieldOffset(0x38)] public uint VentureId; // TODO: this is a ushort ("66 41 89 54 CB")
+        [FieldOffset(0x38)] public ushort VentureId;
         [FieldOffset(0x3C)] public uint VentureComplete;
     }
 

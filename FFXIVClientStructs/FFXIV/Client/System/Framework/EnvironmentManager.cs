@@ -1,5 +1,5 @@
-using ChangeEventInterface = FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase.ChangeEventInterface;
 using FFXIVClientStructs.FFXIV.Common.Math;
+using ChangeEventInterface = FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase.ChangeEventInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
