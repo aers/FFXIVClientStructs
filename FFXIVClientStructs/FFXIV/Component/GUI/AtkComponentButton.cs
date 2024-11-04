@@ -48,7 +48,7 @@ public unsafe partial struct AtkComponentButton : ICreatable {
         fixed (byte* strPtr = strBytes) {
             SetText(strPtr);
         }
-        if(ButtonTextNode != null)
+        if (ButtonTextNode != null)
             ButtonTextNode->OriginalTextPointer = ButtonTextNode->NodeText.StringPtr;
     }
 
@@ -56,7 +56,7 @@ public unsafe partial struct AtkComponentButton : ICreatable {
         fixed (byte* strPtr = str) {
             SetText(strPtr);
         }
-        if(ButtonTextNode != null)
+        if (ButtonTextNode != null)
             ButtonTextNode->OriginalTextPointer = ButtonTextNode->NodeText.StringPtr;
     }
 
