@@ -38,8 +38,8 @@ public static class StringBuilderPool {
 }
 
 public class StringBuilderPooled : IDisposable {
-    public StringBuilder Builder;
-    public Action OnDispose;
+    public StringBuilder Builder = null!;
+    public Action OnDispose = null!;
     public void Dispose() {
         Builder.Clear();
         OnDispose();

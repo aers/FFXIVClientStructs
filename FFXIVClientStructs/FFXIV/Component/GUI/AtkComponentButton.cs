@@ -36,7 +36,7 @@ public unsafe partial struct AtkComponentButton : ICreatable {
     /// Set the text of the component button node.
     /// The game assumes the pointer passed to this function will stay alive. See <see href="https://github.com/aers/FFXIVClientStructs/issues/1040">here</see> for more information.
     /// </summary>
-    /// <param name="str">Null-terminated UTF-8 string buffer to set the text to.</param>
+    /// <param name="text">Null-terminated UTF-8 string buffer to set the text to.</param>
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 48 8B FA 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 84 ?? ?? ?? ?? 48 85 D2 74 ?? 0F B6 81")]
     public partial void SetText(byte* text);
 
