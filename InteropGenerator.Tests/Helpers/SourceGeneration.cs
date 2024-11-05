@@ -24,7 +24,7 @@ internal static class SourceGeneration {
                 }
             }
         }
-        
+
         return ("InteropGeneratorTesting.Addresses.g.cs", writer.ToString());
     }
 
