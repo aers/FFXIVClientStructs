@@ -56,8 +56,6 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x1167)] public byte LobbyUIStage;
 
-    [FieldOffset(0x1169)] public bool IsLoggedIn;
-
     [FieldOffset(0x1170)] public long IdleTime;
 
     [FieldOffset(0x1190)] public int QueuePosition;
@@ -65,6 +63,9 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x1195)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
     [FieldOffset(0x1198)] public ulong SelectedCharacterContentId;
+
+    [FieldOffset(0x11A0)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
+    [FieldOffset(0x11A1)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin
 
     [FieldOffset(0x11A3)] public bool LogoutShouldCloseGame;
 
