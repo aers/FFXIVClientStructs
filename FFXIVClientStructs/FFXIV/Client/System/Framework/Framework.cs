@@ -19,6 +19,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 // Client::System::Framework::Framework
 // ctor "E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? EB 0A 48 8B CE"
 [GenerateInterop]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 66 C7 41 ?? ?? ?? 48 89 01 48 8B F1", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x35D0)]
 public unsafe partial struct Framework {
     [StaticAddress("49 8B DC 48 89 1D ?? ?? ?? ??", 6, true)]
@@ -128,6 +129,18 @@ public unsafe partial struct Framework {
     /// Handle (type HMODULE) of steam_api64.dll
     /// </summary>
     [FieldOffset(0x35C8)] public nint SteamApiLibraryHandle;
+
+    [VirtualFunction(1)]
+    public partial bool Setup();
+    
+    [VirtualFunction(2)]
+    public partial bool Destroy();
+    
+    [VirtualFunction(3)]
+    public partial void Free();
+    
+    [VirtualFunction(4)]
+    public partial bool Tick();
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
     public partial UIModule* GetUIModule();
