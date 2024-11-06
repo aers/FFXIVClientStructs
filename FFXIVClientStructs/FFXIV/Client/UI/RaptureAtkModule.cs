@@ -88,6 +88,9 @@ public unsafe partial struct RaptureAtkModule {
     [VirtualFunction(58)]
     public partial void Update(float delta);
 
+    [VirtualFunction(63), GenerateStringOverloads]
+    public partial bool OpenMapWithMapLink(byte* mapLink);
+
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.AtkUnitManager.Flags.HasFlag(AtkUnitManagerFlags.UiHidden);
         set => SetUiVisibility(value);
