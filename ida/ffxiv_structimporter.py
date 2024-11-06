@@ -212,7 +212,11 @@ class BaseApi:
                 if "size" in field:
                     fields.append(
                         DefinedFixedField(
-                            field["name"], field["type"], field["offset"], base, field["size"]
+                            field["name"],
+                            field["type"],
+                            field["offset"],
+                            base,
+                            field["size"],
                         )
                     )
                 elif "return_type" in field:
@@ -233,15 +237,27 @@ class BaseApi:
                     )
                 else:
                     fields.append(
-                        DefinedField(field["name"], field["type"], field["offset"], base)
+                        DefinedField(
+                            field["name"], field["type"], field["offset"], base
+                        )
                     )
             if "virtual_functions" in struct:
                 virtual_functions = []
                 for vfunc in struct["virtual_functions"]:
-                    parameters = [DefinedFuncParam(param["name"], param["type"]) for param in vfunc["parameters"]] if "parameters" in vfunc else None
+                    parameters = (
+                        [
+                            DefinedFuncParam(param["name"], param["type"])
+                            for param in vfunc["parameters"]
+                        ]
+                        if "parameters" in vfunc
+                        else None
+                    )
                     virtual_functions.append(
                         DefinedVFunc(
-                            vfunc["name"], vfunc["return_type"] if "return_type" in vfunc else None, vfunc["offset"], parameters
+                            vfunc["name"],
+                            vfunc["return_type"] if "return_type" in vfunc else None,
+                            vfunc["offset"],
+                            parameters,
                         )
                     )
             for memfunc in struct["member_functions"]:
@@ -306,6 +322,10 @@ if api is None:
     else:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi):
+            def __init__(self, full_padding):
+                # type: (bool) -> None
+                self.full_padding = full_padding
+
             def get_idc_type_from_ida_type(self, type):
                 # type: (str) -> int
                 if (
@@ -340,6 +360,41 @@ if api is None:
                     return ida_bytes.enum_flag()
                 else:
                     return ida_bytes.stru_flag()
+
+            def get_idc_type_from_size(self, size):
+                if size == 1:
+                    return ida_bytes.byte_flag()
+                elif size >= 2 and size < 4:
+                    return ida_bytes.word_flag()
+                elif size >= 4 and size < 8:
+                    return ida_bytes.dword_flag()
+                else:
+                    return ida_bytes.qword_flag()
+
+            def get_idc_type_from_size(self, size, offset=0):
+                if offset % 8 == 0 and size >= 8:
+                    return ida_bytes.qword_flag()
+                elif offset % 4 == 0 and size >= 4:
+                    return ida_bytes.dword_flag()
+                elif offset % 2 == 0 and size >= 2:
+                    return ida_bytes.word_flag()
+                else:
+                    return ida_bytes.byte_flag()
+
+            def get_size_from_idc_type(self, type):
+                # type: (int) -> int
+                if type == ida_bytes.byte_flag():
+                    return 1
+                elif type == ida_bytes.word_flag():
+                    return 2
+                elif type == ida_bytes.dword_flag():
+                    return 4
+                elif type == ida_bytes.qword_flag():
+                    return 8
+                elif type == ida_bytes.float_flag():
+                    return 4
+                else:
+                    return 0
 
             def is_signed(self, type):
                 # type: (str) -> bool
@@ -401,9 +456,11 @@ if api is None:
                             idaapi.get_idati(), self.clean_struct_name(name)
                         )
                         return tinfo
-                    
+
                 if name == "void":
-                    idaapi.parse_decl(tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL)
+                    idaapi.parse_decl(
+                        tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL
+                    )
                     return tinfo.get_rettype()
 
                 terminated = name + ";"
@@ -601,36 +658,64 @@ if api is None:
                 if struct.virtual_functions:
                     ida_struct.add_struc(-1, fullname + "_vtbl")
 
+            def create_struct_member_fill(self, struct_name, offset):
+                # type: (str, int) -> None
+                s = ida_struct.get_struc(ida_struct.get_struc_id(struct_name))
+                prev_size = ida_struct.get_struc_size(s)
+                if self.full_padding:
+                    flag = self.get_idc_type_from_size(prev_size)
+                    size = self.get_size_from_idc_type(flag)
+                    if size > offset - prev_size:
+                        flag = self.get_idc_type_from_size(
+                            offset - prev_size, prev_size
+                        )
+                        size = self.get_size_from_idc_type(flag)
+
+                    ida_struct.add_struc_member(
+                        s, f"field_{prev_size:X}", prev_size, flag, None, size
+                    )
+                else:
+                    ida_struct.add_struc_member(
+                        s,
+                        f"field_{prev_size:X}",
+                        prev_size,
+                        ida_bytes.byte_flag(),
+                        None,
+                        offset - prev_size,
+                    )
+
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
+                idaapi.begin_type_updating(idaapi.UTP_STRUCT)
                 fullname = self.clean_struct_name(struct.type)
                 s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
 
-                if struct.virtual_functions != None and (struct.fields == [] or struct.fields[0].offset > 0):
-                    ida_struct.add_struc_member(s, "__vftable", 0, ida_bytes.qword_flag(), None, 8)
+                if struct.virtual_functions != None and (
+                    struct.fields == [] or struct.fields[0].offset > 0
+                ):
+                    ida_struct.add_struc_member(
+                        s, "__vftable", 0, ida_bytes.qword_flag(), None, 8
+                    )
                     type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
                     meminfo = ida_struct.get_member(s, 0)
-                    ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(type), 0)
+                    ida_struct.set_member_tinfo(
+                        s, meminfo, 0, self.get_tinfo_from_type(type), 0
+                    )
 
                 contiguous_fields = True
                 for field in struct.fields:
                     offset = field.offset
 
-                    # add padding between previous field and current
                     prev_size = ida_struct.get_struc_size(s)
-                    if offset > prev_size:
+                    while offset > prev_size:
                         contiguous_fields = False
-                        ida_struct.add_struc_member(
-                            s,
-                            f"field_{prev_size:X}",
-                            prev_size,
-                            ida_bytes.byte_flag(),
-                            None,
-                            offset - prev_size
-                        )
+                        self.create_struct_member_fill(fullname, offset)
+                        prev_size = ida_struct.get_struc_size(s)
 
                     field_is_base = field.base and contiguous_fields
-                    field_name = field.name if not field_is_base else f'baseclass_{offset:X}'
+                    field_name = (
+                        field.name if not field_is_base else f"baseclass_{offset:X}"
+                    )
                     field_type = self.clean_name(field.type)
                     if field_type == "__fastcall":
                         ida_struct.add_struc_member(
@@ -687,19 +772,21 @@ if api is None:
                     if field_is_base:
                         meminfo.props |= ida_struct.MF_BASECLASS
                     array_size = field.size if hasattr(field, "size") else 0
-                    ida_struct.set_member_tinfo(s, meminfo, 0, self.get_tinfo_from_type(field_type, array_size), 0)
+                    ida_struct.set_member_tinfo(
+                        s,
+                        meminfo,
+                        0,
+                        self.get_tinfo_from_type(field_type, array_size),
+                        0,
+                    )
 
                 if struct.size is not None and struct.size != 0:
                     prev_size = ida_struct.get_struc_size(s)
-                    if struct.size > prev_size:
-                        ida_struct.add_struc_member(
-                            s,
-                            f"field_{prev_size:X}",
-                            prev_size,
-                            ida_bytes.byte_flag(),
-                            None,
-                            struct.size - prev_size
-                        )
+                    while struct.size > prev_size:
+                        self.create_struct_member_fill(fullname, struct.size)
+                        prev_size = ida_struct.get_struc_size(s)
+
+                idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def create_vtable(self, struct):
                 # type: (DefinedStruct) -> None
@@ -815,7 +902,18 @@ if api is None:
                     == ida_kernwin.ASKBTN_YES
                 )
 
-        api = IdaApi()
+        full_padding = (
+            ida_kernwin.ask_buttons(
+                "Full Padding",
+                "Array Padding",
+                "",
+                ida_kernwin.ASKBTN_YES,
+                "HIDECANCEL\nWhat padding style to use?\n\nFull Padding: Adds padding based on allignment of 1,2,4,8\nArray Padding: Adds padding based on the size between fields with byte arrays\n\nFull Padding will take longer to add padding between fields but is recommended for quick struct modifications.",
+            )
+            == ida_kernwin.ASKBTN_YES
+        )
+        api = IdaApi(full_padding)
+
 
 if api is None:
     try:
@@ -997,7 +1095,11 @@ if api is None:
                     return
 
                 dtsize = dt.getLength() if not dt.isZeroLength() else 0
-                if dtsize == 0 and struct.virtual_functions != None and not struct.union:
+                if (
+                    dtsize == 0
+                    and struct.virtual_functions != None
+                    and not struct.union
+                ):
                     dt.growStructure(8)
 
                 for field in struct.fields:

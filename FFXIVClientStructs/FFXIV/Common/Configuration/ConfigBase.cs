@@ -11,7 +11,7 @@ public enum ConfigType {
 }
 
 // union type for uint/float/string
-[StructLayout(LayoutKind.Explicit, Size = 0x10), CExporterStructUnion]
+[StructLayout(LayoutKind.Explicit, Size = 0xC), CExporterStructUnion]
 public unsafe struct ConfigProperties {
     [FieldOffset(0x0)] public UIntProperties UInt;
     [FieldOffset(0x0)] public FloatProperties Float;

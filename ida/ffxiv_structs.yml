@@ -2157,6 +2157,16 @@ enums:
     "PitOfDread": 4
     "HuntersDen": 5
     "SwiftskinsDen": 6
+- type: Client::Game::Fate::FateState
+  name: FateState
+  underlying: byte
+  namespace: Client.Game.Fate
+  values:
+    "Running": 2
+    "Ended": 4
+    "Failed": 5
+    "Preparing": 7
+    "Ending": 8
 - type: Client::Game::Event::CraftStateFlags
   name: CraftStateFlags
   underlying: unsigned int
@@ -6730,7 +6740,7 @@ structs:
   - type: unsigned int
     name: MarketExpire
     offset: 52
-  - type: unsigned int
+  - type: unsigned __int16
     name: VentureId
     offset: 56
   - type: unsigned int
@@ -9265,6 +9275,24 @@ structs:
   namespace: Client.System.Input
   union: False
   size: 48
+  fields: []
+  virtual_functions: []
+  member_functions: []
+- type: Client::System::Input::TextServiceInterface
+  name: TextServiceInterface
+  namespace: Client.System.Input
+  union: False
+  size: 8
+  fields: []
+  virtual_functions:
+  - name: dtor
+    offset: 0
+  member_functions: []
+- type: Client::System::Input::TextServiceInterface::TextServiceEvent
+  name: TextServiceEvent
+  namespace: Client.System.Input
+  union: False
+  size: 8
   fields: []
   virtual_functions: []
   member_functions: []
@@ -13360,7 +13388,7 @@ structs:
   member_functions: []
 - type: Client::UI::Misc::UserFileManager::UserFileEvent
   name: UserFileEvent
-  namespace: Client.UI.Misc.UserFileManager
+  namespace: Client.UI.Misc
   union: False
   size: 64
   fields:
@@ -14399,7 +14427,7 @@ structs:
       name: index
   - name: RotateLinkshellHistory
     offset: 1720
-    return_type: int
+    return_type: void
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
@@ -14415,7 +14443,7 @@ structs:
       name: linkshellCycle
   - name: RotateCrossLinkshellHistory
     offset: 1736
-    return_type: int
+    return_type: void
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
@@ -15833,18 +15861,23 @@ structs:
   - name: SetLanguage
     offset: 216
   member_functions: []
-- type: Common::Configuration::ChangeEventInterface
+- type: Common::Configuration::ConfigBase::ChangeEventInterface
   name: ChangeEventInterface
   namespace: Common.Configuration
   union: False
   size: 24
   fields:
-  - type: Common::Configuration::ChangeEventInterface*
+  - type: Common::Configuration::ConfigBase::ChangeEventInterface*
     name: NextInterface
     offset: 8
   - type: Common::Configuration::ConfigBase*
     name: Owner
     offset: 16
+  virtual_functions:
+  - name: dtor
+    offset: 0
+  - name: OnConfigChange
+    offset: 8
   member_functions: []
 - type: Common::Configuration::ConfigProperties::FloatProperties
   name: FloatProperties
@@ -20825,7 +20858,7 @@ structs:
     name: ContainerInterface
     offset: 0
     base: true
-  - type: unsigned __int16
+  - type: byte
     name: StanceChangeId
     offset: 24
   - type: unsigned int
@@ -31324,6 +31357,24 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Misc::UserFileManager
+  name: UserFileManager
+  namespace: Client.UI.Misc
+  union: False
+  size: 32
+  fields:
+  - type: Client::System::Resource::ResourceEventListener
+    name: ResourceEventListener
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::UserFileManager*
+      name: this
+  member_functions: []
 - type: Client::UI::Misc::VVDActionModule
   name: VVDActionModule
   namespace: Client.UI.Misc
@@ -32162,7 +32213,7 @@ structs:
   union: False
   size: 272
   fields:
-  - type: Common::Configuration::ChangeEventInterface*
+  - type: Common::Configuration::ConfigBase::ChangeEventInterface*
     name: Listener
     offset: 8
   - type: unsigned int
@@ -36108,7 +36159,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: Objective
     offset: 400
-  - type: byte
+  - type: Client::Game::Fate::FateState
     name: State
     offset: 940
   - type: byte
@@ -36410,7 +36461,7 @@ structs:
   - type: Client::Game::InventoryItem::Id
     name: Id
     offset: 8
-  - type: unsigned int
+  - type: int
     name: Quantity
     offset: 12
   - type: unsigned __int16
@@ -36476,7 +36527,7 @@ structs:
     - type: Client::Game::InventoryItem*
       name: this
   - signature: E8 ?? ?? ?? ?? 2B C6 89 43 0C
-    return_type: unsigned int
+    return_type: int
     name: GetQuantity
     parameters:
     - type: Client::Game::InventoryItem*
@@ -36727,7 +36778,7 @@ structs:
   - type: Client::Game::Event::EventId
     name: EventId
     offset: 244
-  - type: unsigned int
+  - type: unsigned __int16
     name: FateId
     offset: 248
   - type: Client::Graphics::Scene::DrawObject*
@@ -36779,6 +36830,8 @@ structs:
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
+    - type: byte
+      name: adjustByTransformation
   - name: GetHeight
     offset: 64
     return_type: float
@@ -47502,6 +47555,8 @@ structs:
     parameters:
     - type: Client::Game::Object::Aetheryte*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -47646,6 +47701,8 @@ structs:
     parameters:
     - type: Client::Game::Object::EventObject*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -47790,6 +47847,8 @@ structs:
     parameters:
     - type: Client::Game::Object::Treasure*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -51908,7 +51967,7 @@ structs:
     - type: int
       name: gearsetId
   - signature: 48 89 6C 24 ?? 57 48 83 EC 20 48 8B F9 48 63 EA
-    return_type: void
+    return_type: int
     name: UpdateGearset
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
@@ -52836,7 +52895,7 @@ structs:
   name: ConfigProperties
   namespace: Common.Configuration
   union: True
-  size: 16
+  size: 12
   fields:
   - type: Common::Configuration::ConfigProperties::UIntProperties
     name: UInt
@@ -54500,6 +54559,8 @@ structs:
     parameters:
     - type: Client::Game::Object::HousingObject*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -54650,6 +54711,8 @@ structs:
     parameters:
     - type: Client::Game::Object::MJIObject*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -55589,12 +55652,6 @@ structs:
     - type: float*
       name: a2
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 45 33 F6 44 89 B7
-    return_type: void
-    name: UnloadPrefetchLayout
-    parameters:
-    - type: Client::LayoutEngine::LayoutWorld*
-      name: this
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 41 20
     return_type: void
     name: LoadPrefetchLayout
@@ -55645,7 +55702,7 @@ structs:
     name: Task
     offset: 0
     base: true
-  - type: Common::Configuration::ChangeEventInterface
+  - type: Common::Configuration::ConfigBase::ChangeEventInterface
     name: ChangeEventInterface
     offset: 56
     base: true
@@ -61162,6 +61219,8 @@ structs:
     parameters:
     - type: Client::Game::Object::GatheringPointObject*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -61306,6 +61365,8 @@ structs:
     parameters:
     - type: Client::Game::Object::HousingCombinedObject*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -63490,7 +63551,7 @@ structs:
     - type: unsigned int
       name: iconId
     - type: int
-      name: version
+      name: language
   - signature: E8 ?? ?? ?? ?? 85 FF 78 1E
     return_type: void
     name: UnloadTexture
@@ -129594,6 +129655,8 @@ structs:
     parameters:
     - type: Client::Game::Character::Character*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -129819,6 +129882,8 @@ structs:
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -129993,6 +130058,8 @@ structs:
     parameters:
     - type: Client::Game::Character::MJILivelyActor*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -130167,6 +130234,8 @@ structs:
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -130399,6 +130468,11 @@ structs:
   - type: Component::GUI::AtkExternalInterface
     name: AtkExternalInterface
     offset: 8
+    base: true
+  - type: Client::System::Input::TextServiceInterface::TextServiceEvent
+    name: TextServiceEvent
+    offset: 16
+    base: true
   - type: Common::Component::Excel::ExcelSheet*
     name: AddonSheet
     offset: 32
@@ -130675,6 +130749,8 @@ structs:
     parameters:
     - type: Client::Game::Character::BattleChara*
       name: this
+    - type: byte
+      name: a2
   - name: GetHeight
     offset: 64
     return_type: float
@@ -131427,7 +131503,7 @@ structs:
     - type: Client::Game::UI::UIState*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 8D 48 05
-    return_type: int
+    return_type: __int64
     name: GetNextMapAllowanceTimestamp
     parameters:
     - type: Client::Game::UI::UIState*
@@ -131456,7 +131532,7 @@ structs:
     name: ExcelLanguageEvent
     offset: 16
     base: true
-  - type: Common::Configuration::ChangeEventInterface
+  - type: Common::Configuration::ConfigBase::ChangeEventInterface
     name: ChangeEventInterface
     offset: 24
     base: true
@@ -131489,6 +131565,9 @@ structs:
   - type: Client::UI::Misc::RaptureLogModule
     name: RaptureLogModule
     offset: 6616
+  - type: Client::UI::Misc::UserFileManager
+    name: UserFileManager
+    offset: 20712
   - type: Client::UI::Misc::RaptureMacroModule
     name: RaptureMacroModule
     offset: 20744
@@ -132307,7 +132386,7 @@ structs:
       name: a2
   - name: RotateLinkshellHistory
     offset: 1720
-    return_type: int
+    return_type: void
     parameters:
     - type: Client::UI::UIModule*
       name: this
@@ -132323,7 +132402,7 @@ structs:
       name: a2
   - name: RotateCrossLinkshellHistory
     offset: 1736
-    return_type: int
+    return_type: void
     parameters:
     - type: Client::UI::UIModule*
       name: this
