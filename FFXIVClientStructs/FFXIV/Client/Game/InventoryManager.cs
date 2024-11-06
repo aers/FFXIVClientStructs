@@ -136,7 +136,7 @@ public unsafe partial struct InventoryItem : ICreatable {
 
     /// <summary>Copies the values from the other InventoryItem and, if it's symbolic, resolves its linked item.</summary>
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 4B 48")]
-    public partial bool Copy(InventoryItem* other);
+    public partial void Copy(InventoryItem* other);
 
     /// <summary>
     /// Resolves a symbolic InventoryItem, returning a pointer to the linked InventoryItem or to itself if not symbolic.
