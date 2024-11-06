@@ -12087,8 +12087,6 @@ classes:
     vtbls:
       - ea: 0x141F320A0
         base: Client::Game::Event::EventHandler
-      - ea: 0x141F328F0
-      - ea: 0x141F32900
     funcs:
       0x1409EA0A0: ctor
       0x1409EA430: CreateInstance
@@ -16522,7 +16520,7 @@ classes:
         base: SQEX::CDev::Engine::Sd::Driver::IStreamReadThreadEventReceiver
   SQEX::CDev::Engine::Sd::Driver::ToolBank:
     vtbls:
-      - ea: 0x142221838
+      - ea: 0x142221A40
         base: SQEX::CDev::Engine::Sd::Driver::Bank
   SQEX::CDev::Engine::Sd::Driver::DynamicValue:
     vtbls:
@@ -16572,6 +16570,10 @@ classes:
     vtbls:
       - ea: 0x142223D78
         base: SQEX::CDev::Engine::Sd::Driver::IEffect
+  SQEX::CDev::Engine::Sd::Driver::Sead::FilterSead:
+    vtbls:
+      - ea: 0x142224CB8
+        base: SQEX::CDev::Engine::Sd::Driver::FilterBase
   SQEX::CDev::Engine::Sd::Driver::Sead::LowpassFilterSead:
     vtbls:
       - ea: 0x142223DE0
@@ -16660,10 +16662,6 @@ classes:
     vtbls:
       - ea: 0x142224C28
         base: SQEX::CDev::Engine::Sd::Driver::WahWahBase
-  SQEX::CDev::Engine::Sd::Driver::Sead::FilterSead: # SQEX::CDev::Engine::Sd::Driver::FilterBase, SQEX::CDev::Engine::Sd::Driver::IEffect, SQEX::CDev::Engine::Sd::SdMemoryAllocator
-    vtbls:
-      - ea: 0x142224CB8
-        base: SQEX::CDev::Engine::Sd::Driver::FilterBase
   SQEX::Sd::Driver::Equalizer:
     vtbls:
       - ea: 0x142224D28
@@ -16753,7 +16751,6 @@ classes:
       - ea: 0x141E91800
     funcs:
       0x140060990: Free
-      0x141B2ED20: Memset
   Client::System::Memory::IMemoryModule:
     vtbls:
       - ea: 0x141E91908
