@@ -122,21 +122,10 @@ public unsafe partial struct AtkResNode : ICreatable {
     public partial AtkComponentHoldButton* GetAsAtkHoldButton();
 
     [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]
-    public partial void AddEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
-        AtkResNode* nodeParam, bool isSystemEvent);
-
-    public void AddEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam,
-        bool isSystemEvent) {
-        AddEvent((ushort)eventType, eventParam, listener, nodeParam, isSystemEvent);
-    }
+    public partial void AddEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam, bool isSystemEvent);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 38 75 67")]
-    public partial void RemoveEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
-        bool isSystemEvent);
-
-    public void RemoveEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isSystemEvent) {
-        RemoveEvent((ushort)eventType, eventParam, listener, isSystemEvent);
-    }
+    public partial void RemoveEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isSystemEvent);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 5C 24 2C")]
     public partial void GetBounds(Bounds* outBounds);
