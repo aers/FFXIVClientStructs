@@ -62,6 +62,7 @@ public enum AtkEventType : byte {
     LinkMouseOut = 74,
 }
 
+// Component::GUI::AtkEvent
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AtkEvent {
@@ -70,10 +71,47 @@ public unsafe partial struct AtkEvent {
     [FieldOffset(0x10)] public AtkEventListener* Listener; // listener of event
     [FieldOffset(0x18)] public uint Param; // arg3 of ReceiveEvent
     [FieldOffset(0x20)] public AtkEvent* NextEvent;
-    [FieldOffset(0x28)] public AtkEventType Type;
-    [FieldOffset(0x29)] public byte Unk29;
-    [FieldOffset(0x2A)] public byte Flags; // 0: handled, 5: force handled (see AtkEvent::SetEventIsHandled)
+    [FieldOffset(0x28)] public AtkEventState State;
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 9C")]
     public partial void SetEventIsHandled(bool forced = false);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x4)]
+public struct AtkEventState {
+    [FieldOffset(0x0)] public AtkEventType EventType;
+    // AtkInputManager_HandleInput reads these flags (at the very end) and writes them as 3 bools to AtkCollisionManager, which
+    // are used in AtkModule_HandleInput to clear Gamepad inputs from UIInputData??
+    [FieldOffset(0x1)] public byte UnkFlags1;
+    [FieldOffset(0x2)] public AtkEventStateFlags StateFlags;
+    [FieldOffset(0x3)] public byte UnkFlags3; // for cleanup maybe?
+}
+
+[Flags]
+public enum AtkEventStateFlags : byte {
+    None = 0,
+
+    Handled = 0b0000_0001, // set in SetEventIsHandled
+
+    /// <summary>
+    /// Specifies whether the event is dispatched again using another <see cref="AtkEventType"/>.
+    /// </summary>
+    Forwarded = 0b0000_0010,
+
+    Unk3 = 0b0000_0100,
+    Unk4 = 0b0000_1000,
+
+    /// <summary>
+    /// Specifies whether the event is a global event.<br/>
+    /// When this is set, <see cref="AtkEventListener.ReceiveGlobalEvent(AtkEventType, int, AtkEvent*, AtkEventData*)"/> is called.
+    /// </summary>
+    IsGlobalEvent = 0b0001_0000,
+
+    Unk6 = 0b0010_0000, // set in SetEventIsHandled, depending on a2. maybe prevents propagation/bubbling?
+    Unk7 = 0b0100_0000,
+
+    /// <summary>
+    /// Specifies whether the <see cref="AtkEvent"/> should be freed.
+    /// </summary>
+    Completed = 0b1000_0000
 }
