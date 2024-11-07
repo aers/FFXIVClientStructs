@@ -140,8 +140,8 @@ public MemberFunctionAttribute(string signature)
 ```
 ```csharp
 [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]
-public partial void AddEvent(ushort eventType, uint eventParam, AtkEventListener* listener,
-        AtkResNode* nodeParam, bool isSystemEvent);
+public partial void AddEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener,
+        AtkResNode* nodeParam, bool isGlobalEvent);
 ```
 
 Used for functions that are non-virtual members of native classes. This includes static functions.
@@ -149,14 +149,14 @@ Used for functions that are non-virtual members of native classes. This includes
 This will generate the following wrapper:
 
 ```csharp
-public partial void AddEvent(ushort eventType, uint eventParam, global::FFXIVClientStructs.FFXIV.Component.GUI.AtkEventListener* listener, global::FFXIVClientStructs.FFXIV.Component.GUI.AtkResNode* nodeParam, bool isSystemEvent)
+public partial void AddEvent(AtkEventType eventType, uint eventParam, global::FFXIVClientStructs.FFXIV.Component.GUI.AtkEventListener* listener, global::FFXIVClientStructs.FFXIV.Component.GUI.AtkResNode* nodeParam, bool isGlobalEvent)
 {
     if (MemberFunctionPointers.AddEvent is null)
         throw new InvalidOperationException("Function pointer for AtkResNode.AddEvent is null. The resolver was either uninitialized or failed to resolve address with signature E8 ?? ?? ?? ?? C1 E7 0C ?? ?? ?? ?? ?? ?? ?? ??.");
 
      fixed(AtkResNode* thisPtr = &this)
     {
-        MemberFunctionPointers.AddEvent(thisPtr, eventType, eventParam, listener, nodeParam, isSystemEvent);
+        MemberFunctionPointers.AddEvent(thisPtr, eventType, eventParam, listener, nodeParam, isGlobalEvent);
     }
 }
 ```
