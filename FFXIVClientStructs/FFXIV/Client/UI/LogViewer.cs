@@ -19,7 +19,6 @@ public unsafe partial struct LogViewer {
     [FieldOffset(0x4C)] public uint FirstLineVisible;
     [FieldOffset(0x50)] public uint LastLineVisible;
 
-    [FieldOffset(0x58)] public uint Unknown2C0;
     [FieldOffset(0x5C)] public uint TotalLineCount;
     [FieldOffset(0x60)] public ushort ChatTextWidth; // ChatText->GetWidth()
     [FieldOffset(0x62)] public ushort DisplayableLineCount; // ChatText->GetHeight() / LineSpacing
