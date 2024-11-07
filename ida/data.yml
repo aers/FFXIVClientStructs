@@ -5782,6 +5782,8 @@ classes:
     funcs:
       0x1406210A0: ctor
       0x1406210E0: Finalize
+      0x1406212E0: Stop
+      0x1406212F0: StopAndReset
 #fail       0x140510930: Update
   Component::GUI::AtkGroupManager:
     vtbls:
