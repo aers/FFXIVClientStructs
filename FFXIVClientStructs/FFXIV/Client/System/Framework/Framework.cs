@@ -132,13 +132,13 @@ public unsafe partial struct Framework {
 
     [VirtualFunction(1)]
     public partial bool Setup();
-    
+
     [VirtualFunction(2)]
     public partial bool Destroy();
-    
+
     [VirtualFunction(3)]
     public partial void Free();
-    
+
     [VirtualFunction(4)]
     public partial bool Tick();
 
