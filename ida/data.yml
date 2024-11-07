@@ -1728,6 +1728,9 @@ classes:
     funcs:
       0x140620B90: DispatchEvent
       0x140621000: RemoveEvent
+  Component::GUI::AtkEventDispatcher::Event:
+    funcs:
+      0x140620190: ctor
   Component::GUI::AtkTooltipArgs:
     funcs:
       0x140622AC0: ctor
