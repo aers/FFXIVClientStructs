@@ -1728,6 +1728,9 @@ classes:
     funcs:
       0x140620B90: DispatchEvent
       0x140621000: RemoveEvent
+  Component::GUI::AtkEventDispatcher::Event:
+    funcs:
+      0x140620190: ctor
   Component::GUI::AtkTooltipArgs:
     funcs:
       0x140622AC0: ctor
@@ -5779,6 +5782,8 @@ classes:
     funcs:
       0x1406210A0: ctor
       0x1406210E0: Finalize
+      0x1406212E0: Stop
+      0x1406212F0: StopAndReset
 #fail       0x140510930: Update
   Component::GUI::AtkGroupManager:
     vtbls:
@@ -13707,6 +13712,7 @@ classes:
         base: Component::GUI::AtkEventListener
     funcs:
       0x140FC4650: ctor
+      0x140FC4CF0: OnRequestedUpdate
   Client::UI::TabController:
     vtbls:
       - ea: 0x141F770E8
