@@ -13707,6 +13707,7 @@ classes:
         base: Component::GUI::AtkEventListener
     funcs:
       0x140FC4650: ctor
+      0x140FC4CF0: OnRequestedUpdate
   Client::UI::TabController:
     vtbls:
       - ea: 0x141F770E8
