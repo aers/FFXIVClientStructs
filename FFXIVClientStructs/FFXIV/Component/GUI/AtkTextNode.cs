@@ -22,9 +22,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xBC)] public ByteColor BackgroundColor;
     [FieldOffset(0xC0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
     [FieldOffset(0x128)] public byte* OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
-
-    [FieldOffset(0x130)] public void* UnkPtr_1;
-
+    [FieldOffset(0x130)] public StdList<Pointer<LinkData>>* LinkData;
     // if text is "asdf" and you selected "sd" this is 2, 3
     [FieldOffset(0x138)] public uint SelectStart;
     [FieldOffset(0x13C)] public uint SelectEnd;
@@ -127,4 +125,30 @@ public enum FontType : byte {
     TrumpGothic = 0x3,
     Jupiter = 0x4,
     JupiterLarge = 0x5,
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+public unsafe struct LinkData {
+    [FieldOffset(0x00)] public int Unk0;
+    [FieldOffset(0x04)] public int Unk4;
+    [FieldOffset(0x08)] public int Unk8;
+    [FieldOffset(0x0C)] public int UnkC;
+    /// <remarks> To be read until link terminator. </remarks>
+    [FieldOffset(0x10)] public byte* Payload;
+    /// <remarks> First 3 bytes are PayloadEnd(?) and last byte is <see cref="LinkType"/> </remarks>
+    [FieldOffset(0x18), CExportIgnore] public uint PayloadEndAndLinkType;
+    /// <remarks> The type of the Link payload. See LinkMacroPayloadType in Lumina. </remarks>
+    [FieldOffset(0x1B)] public byte LinkType;
+    [FieldOffset(0x1C)] public ushort Unk1C;
+    [FieldOffset(0x1E)] public ushort Unk1E;
+    [FieldOffset(0x20)] public uint Unk20;
+    [FieldOffset(0x24)] public uint UIntValue1;
+    [FieldOffset(0x28)] public uint UIntValue2;
+    [FieldOffset(0x2C)] public uint UIntValue3;
+    [FieldOffset(0x30)] public ulong UnkAndBackgroundColor;
+
+    // length from the start of the text in AtkTextNode or so. not sure
+    // public uint PayloadEnd => PayloadEndAndLinkType & 0xFFFFFF;
+
+    public uint BackgroundColor => (uint)(UnkAndBackgroundColor & 0xFFFFFF | 0x40000000);
 }
