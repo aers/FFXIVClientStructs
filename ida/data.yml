@@ -6383,6 +6383,7 @@ classes:
       0x14068B400: IsTextInputActive
       0x14068B280: SetUIScene
       0x1400D8C70: PlaySoundEffectHandler
+      0x1406895B0: OpenMapWithMapLinkHandler
       0x1400DAB10: ScdResourceHandler
   Component::GUI::AtkComponentCheckBox:
     vtbls:
@@ -13713,6 +13714,7 @@ classes:
     funcs:
       0x140FC4650: ctor
       0x140FC4CF0: OnRequestedUpdate
+      0x140FC5BC0: HandleLinkClick
   Client::UI::TabController:
     vtbls:
       - ea: 0x141F770E8

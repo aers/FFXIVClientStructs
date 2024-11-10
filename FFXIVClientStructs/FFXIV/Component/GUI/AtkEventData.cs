@@ -2,8 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [CExporterStructUnion]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public partial struct AtkEventData {
+public unsafe partial struct AtkEventData {
     [FieldOffset(0x00)] public AtkListItemData ListItemData;
+    [FieldOffset(0x00)] public LinkData* LinkData;
 }
 
 public partial struct AtkEventData {

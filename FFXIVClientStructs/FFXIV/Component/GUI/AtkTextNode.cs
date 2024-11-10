@@ -22,9 +22,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xBC)] public ByteColor BackgroundColor;
     [FieldOffset(0xC0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
     [FieldOffset(0x128)] public byte* OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
-
-    [FieldOffset(0x130)] public void* UnkPtr_1;
-
+    [FieldOffset(0x130)] public StdList<Pointer<LinkData>>* LinkData;
     // if text is "asdf" and you selected "sd" this is 2, 3
     [FieldOffset(0x138)] public uint SelectStart;
     [FieldOffset(0x13C)] public uint SelectEnd;
@@ -127,4 +125,32 @@ public enum FontType : byte {
     TrumpGothic = 0x3,
     Jupiter = 0x4,
     JupiterLarge = 0x5,
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
+public unsafe struct LinkData {
+    [FieldOffset(0x00)] public int MinX;
+    [FieldOffset(0x04)] public int MinY;
+    [FieldOffset(0x08)] public int MaxX;
+    [FieldOffset(0x0C)] public int MaxY;
+    /// <remarks> To be read until link terminator. </remarks>
+    [FieldOffset(0x10)] public byte* Payload;
+    /// <remarks> Length from the start of the text in the AtkTextNode. </remarks>
+    [FieldOffset(0x18)] public ushort PayloadEnd;
+
+    /// <remarks> The type of the Link payload. See LinkMacroPayloadType in Lumina. </remarks>
+    [FieldOffset(0x1B)] public byte LinkType;
+    [FieldOffset(0x1C)] public ushort Unk1C;
+    [FieldOffset(0x1E)] public ushort Unk1E;
+    [FieldOffset(0x20)] public uint Unk20;
+    // These are the 3 link payload parameters. Usually SeStrings have int expressions.
+    [FieldOffset(0x24), CExporterUnion("Value1")] public int IntValue1;
+    [FieldOffset(0x24), CExporterUnion("Value1")] public uint UIntValue1;
+    [FieldOffset(0x28), CExporterUnion("Value2")] public int IntValue2;
+    [FieldOffset(0x28), CExporterUnion("Value2")] public uint UIntValue2;
+    [FieldOffset(0x2C), CExporterUnion("Value3")] public int IntValue3;
+    [FieldOffset(0x2C), CExporterUnion("Value3")] public uint UIntValue3;
+    [FieldOffset(0x30)] public uint LinkColor;
+
+    public uint BackgroundColor => (uint)(LinkColor & 0xFFFFFF | 0x40000000);
 }
