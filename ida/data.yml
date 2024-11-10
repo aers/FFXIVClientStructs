@@ -13719,6 +13719,16 @@ classes:
         base: Component::GUI::AtkEventListener
     funcs:
       0x140FC97A0: ctor
+      0x140FC9B20: Setup
+      0x140FC9C50: RegisterInputReceivedEvent
+      0x140FC9CA0: RegisterCallback
+      0x140FC9CC0: SetTabCount
+      0x140FC9CE0: SetTabIndex
+      0x140FC9D20: GetTabIndex
+      0x140FC9D40: GetFirstButton
+      0x140FC9D60: GetLastButton
+      0x140FC9D90: UpdateButtons
+      0x140FCA040: SetTabIndexAndCallBack
   Client::UI::AddonFadeMiddleBack:
     vtbls:
       - ea: 0x141F77810
