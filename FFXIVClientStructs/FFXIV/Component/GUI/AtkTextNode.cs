@@ -129,10 +129,10 @@ public enum FontType : byte {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe struct LinkData {
-    [FieldOffset(0x00)] public int Unk0;
-    [FieldOffset(0x04)] public int Unk4;
-    [FieldOffset(0x08)] public int Unk8;
-    [FieldOffset(0x0C)] public int UnkC;
+    [FieldOffset(0x00)] public int MinX;
+    [FieldOffset(0x04)] public int MinY;
+    [FieldOffset(0x08)] public int MaxX;
+    [FieldOffset(0x0C)] public int MaxY;
     /// <remarks> To be read until link terminator. </remarks>
     [FieldOffset(0x10)] public byte* Payload;
     /// <remarks> Length from the start of the text in the AtkTextNode. </remarks>
