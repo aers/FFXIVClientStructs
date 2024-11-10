@@ -143,12 +143,12 @@ public unsafe struct LinkData {
     [FieldOffset(0x1E)] public ushort Unk1E;
     [FieldOffset(0x20)] public uint Unk20;
     // These are the 3 link payload parameters. Usually SeStrings have int expressions.
-    [FieldOffset(0x24)] public int IntValue1;
-    [FieldOffset(0x24), CExportIgnore] public uint UIntValue1;
-    [FieldOffset(0x28)] public int IntValue2;
-    [FieldOffset(0x28), CExportIgnore] public uint UIntValue2;
-    [FieldOffset(0x2C)] public int IntValue3;
-    [FieldOffset(0x2C), CExportIgnore] public uint UIntValue3;
+    [FieldOffset(0x24), CExporterUnion("Value1")] public int IntValue1;
+    [FieldOffset(0x24), CExporterUnion("Value1")] public uint UIntValue1;
+    [FieldOffset(0x28), CExporterUnion("Value2")] public int IntValue2;
+    [FieldOffset(0x28), CExporterUnion("Value2")] public uint UIntValue2;
+    [FieldOffset(0x2C), CExporterUnion("Value3")] public int IntValue3;
+    [FieldOffset(0x2C), CExporterUnion("Value3")] public uint UIntValue3;
     [FieldOffset(0x30)] public ulong UnkAndBackgroundColor;
 
     // length from the start of the text in AtkTextNode or so. not sure
