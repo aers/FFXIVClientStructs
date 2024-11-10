@@ -6383,6 +6383,7 @@ classes:
       0x14068B400: IsTextInputActive
       0x14068B280: SetUIScene
       0x1400D8C70: PlaySoundEffectHandler
+      0x1406895B0: OpenMapWithMapLinkHandler
       0x1400DAB10: ScdResourceHandler
   Component::GUI::AtkComponentCheckBox:
     vtbls:
