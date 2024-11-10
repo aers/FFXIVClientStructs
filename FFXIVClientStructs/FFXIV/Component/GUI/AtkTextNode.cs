@@ -135,8 +135,9 @@ public unsafe struct LinkData {
     [FieldOffset(0x0C)] public int UnkC;
     /// <remarks> To be read until link terminator. </remarks>
     [FieldOffset(0x10)] public byte* Payload;
-    /// <remarks> First 3 bytes are PayloadEnd(?) and last byte is <see cref="LinkType"/> </remarks>
-    [FieldOffset(0x18), CExportIgnore] public uint PayloadEndAndLinkType;
+    /// <remarks> Length from the start of the text in the AtkTextNode. </remarks>
+    [FieldOffset(0x18)] public ushort PayloadEnd;
+
     /// <remarks> The type of the Link payload. See LinkMacroPayloadType in Lumina. </remarks>
     [FieldOffset(0x1B)] public byte LinkType;
     [FieldOffset(0x1C)] public ushort Unk1C;
@@ -149,10 +150,7 @@ public unsafe struct LinkData {
     [FieldOffset(0x28), CExporterUnion("Value2")] public uint UIntValue2;
     [FieldOffset(0x2C), CExporterUnion("Value3")] public int IntValue3;
     [FieldOffset(0x2C), CExporterUnion("Value3")] public uint UIntValue3;
-    [FieldOffset(0x30)] public ulong UnkAndBackgroundColor;
+    [FieldOffset(0x30)] public uint LinkColor;
 
-    // length from the start of the text in AtkTextNode or so. not sure
-    // public uint PayloadEnd => PayloadEndAndLinkType & 0xFFFFFF;
-
-    public uint BackgroundColor => (uint)(UnkAndBackgroundColor & 0xFFFFFF | 0x40000000);
+    public uint BackgroundColor => (uint)(LinkColor & 0xFFFFFF | 0x40000000);
 }
