@@ -14,48 +14,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0xA28)]
 public unsafe partial struct UIInputData {
     public static UIInputData* Instance() => Framework.Instance()->UIModule->GetUIInputData();
-    // TODO: check gamepad things
-    [FieldOffset(0x8)] public int GamepadLeftStickX; // from -99 (Right) to 99 (Left)
-    [FieldOffset(0xC)] public int GamepadLeftStickY; // from -99 (Down) to 99 (Up)
-    [FieldOffset(0x10)] public int GamepadRightStickX; // from -99 (Right) to 99 (Left)
-    [FieldOffset(0x14)] public int GamepadRightStickY; // from -99 (Down) to 99 (Up)
-    [FieldOffset(0x18)] public GamepadButtonsFlags GamepadButtons; // Not always set if UI is focused
 
-    // These fields are only correct for actual physical Playstation Controllers
-    // Tested with Sony DualSense Controller Model: CFI-ZCT1W
-    [FieldOffset(0x2C)] public float Square;
-    [FieldOffset(0x30)] public float Cross;
-    [FieldOffset(0x34)] public float Circle;
-    [FieldOffset(0x38)] public float Triangle;
-    [FieldOffset(0x3C)] public float L1;
-    [FieldOffset(0x40)] public float R1;
-    [FieldOffset(0x44)] public float L2;
-    [FieldOffset(0x48)] public float R2;
-    [FieldOffset(0x50)] public float Start;
-    [FieldOffset(0x54)] public float L3;
-    [FieldOffset(0x58)] public float R3;
-    [FieldOffset(0x5C)] public float PSButton;
-    [FieldOffset(0x60)] public float Select;
-    [FieldOffset(0x64)] public float MuteButton;
-
-    [FieldOffset(0xAC)] public float GamepadLeftStickLeft;
-    [FieldOffset(0xB0)] public float GamepadLeftStickRight;
-
-    [FieldOffset(0xCC)] public float GamepadLeftStickUp;
-    [FieldOffset(0xD0)] public float GamepadLeftStickDown;
-
-    [FieldOffset(0xEC)] public float GamepadRightStickLeft;
-    [FieldOffset(0xF0)] public float GamepadRightStickRight;
-
-    [FieldOffset(0x14C)] public float GamepadRightStickUp;
-    [FieldOffset(0x150)] public float GamepadRightStickDown;
-
-    // These values are weird... When DPadLeft is pressed it'll have value 1.0f, but DPadUp will have value 8.74278E-08
-    [FieldOffset(0x18C)] public float DPadLeft;
-    [FieldOffset(0x190)] public float DPadRight;
-    [FieldOffset(0x194)] public float DPadUp;
-    [FieldOffset(0x198)] public float DPadDown;
-
+    [FieldOffset(0x8)] public GamepadInputData GamepadInputs;
+    [FieldOffset(0x254)] public GamepadInputData GamepadInputs2;
     /*
      * UIFiltered means those are not set if
      * - the game window is focused and
@@ -63,61 +24,14 @@ public unsafe partial struct UIInputData {
      *
      * For mouse buttons, only Left and Right buttons are filtered out, extra buttons are not
      */
-    // TODO: these 2 are structs
-    [FieldOffset(0x4A0)] public int UIFilteredCursorXPosition;
-    [FieldOffset(0x4A4)] public int UIFilteredCursorYPosition;
-    [FieldOffset(0x4A8)] public int UIFilteredMouseWheel; // -1 for scroll down, 1 for scroll up
-    [FieldOffset(0x4AC)] public MouseButtonFlags UIFilteredMouseButtonHeldFlags;
-    [FieldOffset(0x4B0)] public MouseButtonFlags UIFilteredMouseButtonPressedFlags;
-    [FieldOffset(0x4B4)] public MouseButtonFlags UIFilteredMouseButtonReleasedFlags;
-    [FieldOffset(0x4B8)] public MouseButtonFlags UIFilteredMouseButtonHeldThrottledFlags;
-
-    [FieldOffset(0x4C0)] public int UIFilteredCursorXDelta; // Delta since last frame
-    [FieldOffset(0x4C4)] public int UIFilteredCursorYDelta; // Delta since last frame
-
-    // Same as 0x4FC
-    // [FieldOffset(0x4CC)] public byte IsGameWindowFocused;
-
-    [FieldOffset(0x4D0)] public int CursorXPosition;
-    [FieldOffset(0x4D4)] public int CursorYPosition;
-    [FieldOffset(0x4D8)] public int MouseWheel; // -1 for scroll down, 1 for scroll up
-    [FieldOffset(0x4DC)] public MouseButtonFlags MouseButtonHeldFlags;
-    [FieldOffset(0x4E0)] public MouseButtonFlags MouseButtonPressedFlags;
-    [FieldOffset(0x4E4)] public MouseButtonFlags MouseButtonReleasedFlags;
-    [FieldOffset(0x4E8)] public MouseButtonFlags MouseButtonHeldThrottledFlags;
-
-    [FieldOffset(0x4F0)] public int CursorXDelta; // Delta since last frame
-    [FieldOffset(0x4F4)] public int CursorYDelta; // Delta since last frame
-
-    // At least this is what it seems to be
-    [FieldOffset(0x4FC)] public bool IsGameWindowFocused;
-
+    [FieldOffset(0x4A0)] public CursorInputData UIFilteredCursorInputs;
+    [FieldOffset(0x4D0)] public CursorInputData CursorInputs;
     /*
      * All the following keyboard keys states are not triggered if the chat input is active
      */
+    [FieldOffset(0x500)] public KeyboardInputData KeyboardInputs;
 
-    /*
-     * This one is weird. Seems to fire as long as the last key pressed is still held
-     * Except modifiers (ctrl, shift, alt) where it only fires once
-     * If fires less often than the "Down" flag in the array below but more often than the "Held" one
-     * So Im not sure what to make of this or if this is even useful
-     */
-    //[FieldOffset(0x500)] public int IsLastKeyboardKeyDownThrottled;
-
-    [FieldOffset(0x504), FixedSizeArray] internal FixedSizeArray159<KeyStateFlags> _keyState;
-
-    //[FieldOffset(0x784)] public byte UnkFlag;
-    [FieldOffset(0x785)] public byte KeyHeldKeycode;
-
-    /*
-     * Those two seem unreliable in how they're set. They work well on keypress
-     * but one or the other will get nulled after a few ms when the key is held
-     * or won't have their value changed on release.
-     */
-    [FieldOffset(0x788)] public byte LastKeyCharKeyCode; // (key code of the character just below, ie `97` for a lowercase `a`)
-    [FieldOffset(0x790)] public char LastKeyChar; // (actual character made by key combination, ie `a` or `A`)
-
-    public KeyStateFlags GetKeyState(int key) => KeyState[key];
+    public KeyStateFlags GetKeyState(int key) => KeyboardInputs.KeyState[key];
     public KeyStateFlags GetKeyState(SeVirtualKey key) => GetKeyState((int)key);
 
     public bool IsKeyPressed(SeVirtualKey key) => IsKeyPressed((int)key);
@@ -140,6 +54,92 @@ public unsafe partial struct UIInputData {
         [FieldOffset(0x2)] public SeVirtualKey AltKey;
         [FieldOffset(0x3)] public ModifierFlag AltModifier;
     }
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x24C)]
+public struct GamepadInputData {
+    [FieldOffset(0x0)] public int LeftStickX; // from -99 (Right) to 99 (Left)
+    [FieldOffset(0x4)] public int LeftStickY; // from -99 (Down) to 99 (Up)
+    [FieldOffset(0x8)] public int RightStickX; // from -99 (Right) to 99 (Left)
+    [FieldOffset(0xC)] public int RightStickY; // from -99 (Down) to 99 (Up)
+    [FieldOffset(0x10)] public GamepadButtonsFlags Buttons; // Not always set if UI is focused
+
+    // These fields are only correct for actual physical Playstation Controllers
+    // Tested with Sony DualSense Controller Model: CFI-ZCT1W
+    [FieldOffset(0x24)] public float Square;
+    [FieldOffset(0x28)] public float Cross;
+    [FieldOffset(0x2C)] public float Circle;
+    [FieldOffset(0x30)] public float Triangle;
+    [FieldOffset(0x34)] public float L1;
+    [FieldOffset(0x38)] public float R1;
+    [FieldOffset(0x3C)] public float L2;
+    [FieldOffset(0x40)] public float R2;
+    [FieldOffset(0x48)] public float Start;
+    [FieldOffset(0x4C)] public float L3;
+    [FieldOffset(0x50)] public float R3;
+    [FieldOffset(0x54)] public float PSButton;
+    [FieldOffset(0x58)] public float Select;
+    [FieldOffset(0x5C)] public float MuteButton;
+
+    [FieldOffset(0xA4)] public float LeftStickLeft;
+    [FieldOffset(0xA8)] public float LeftStickRight;
+
+    [FieldOffset(0xC4)] public float LeftStickUp;
+    [FieldOffset(0xC8)] public float LeftStickDown;
+
+    [FieldOffset(0xE4)] public float RightStickLeft;
+    [FieldOffset(0xE8)] public float RightStickRight;
+
+    [FieldOffset(0x144)] public float RightStickUp;
+    [FieldOffset(0x148)] public float RightStickDown;
+
+    // These values are weird... When DPadLeft is pressed it'll have value 1.0f, but DPadUp will have value 8.74278E-08
+    [FieldOffset(0x184)] public float DPadLeft;
+    [FieldOffset(0x188)] public float DPadRight;
+    [FieldOffset(0x18C)] public float DPadUp;
+    [FieldOffset(0x190)] public float DPadDown;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
+public struct CursorInputData {
+    [FieldOffset(0x0)] public int PositionX;
+    [FieldOffset(0x4)] public int PositionY;
+    [FieldOffset(0x8)] public int MouseWheel; // -1 for scroll down, 1 for scroll up
+    [FieldOffset(0xC)] public MouseButtonFlags MouseButtonHeldFlags;
+    [FieldOffset(0x10)] public MouseButtonFlags MouseButtonPressedFlags;
+    [FieldOffset(0x14)] public MouseButtonFlags MouseButtonReleasedFlags;
+    [FieldOffset(0x18)] public MouseButtonFlags MouseButtonHeldThrottledFlags;
+
+    [FieldOffset(0x20)] public int DeltaX; // Delta since last frame
+    [FieldOffset(0x24)] public int DeltaY; // Delta since last frame
+
+    // At least this is what it seems to be
+    [FieldOffset(0x2C)] public bool IsGameWindowFocused;
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x494)]
+public partial struct KeyboardInputData {
+    /*
+     * This one is weird. Seems to fire as long as the last key pressed is still held
+     * Except modifiers (ctrl, shift, alt) where it only fires once
+     * If fires less often than the "Down" flag in the array below but more often than the "Held" one
+     * So Im not sure what to make of this or if this is even useful
+     */
+    //[FieldOffset(0x0)] public int IsLastKeyboardKeyDownThrottled;
+
+    [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray159<KeyStateFlags> _keyState;
+
+    //[FieldOffset(0x284)] public byte UnkFlag;
+    [FieldOffset(0x285)] public byte KeyHeldKeycode;
+
+    /*
+     * Those two seem unreliable in how they're set. They work well on keypress
+     * but one or the other will get nulled after a few ms when the key is held
+     * or won't have their value changed on release.
+     */
+    [FieldOffset(0x288)] public byte LastKeyCharKeyCode; // (key code of the character just below, ie `97` for a lowercase `a`)
+    [FieldOffset(0x290)] public char LastKeyChar; // (actual character made by key combination, ie `a` or `A`)
 }
 
 [Flags]
