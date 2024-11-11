@@ -92,6 +92,20 @@ enums:
     "ChatBubble": 15
     "NoAccess": 16
     "Hidden": 17
+- type: Component::GUI::AtkEventStateFlags
+  name: AtkEventStateFlags
+  underlying: byte
+  namespace: Component.GUI
+  values:
+    "None": 0
+    "Handled": 1
+    "Forwarded": 2
+    "Unk3": 4
+    "Unk4": 8
+    "IsGlobalEvent": 16
+    "Unk6": 32
+    "Unk7": 64
+    "Completed": 128
 - type: Component::GUI::NodeType
   name: NodeType
   underlying: unsigned __int16
@@ -13677,6 +13691,35 @@ structs:
     name: TextNode
     offset: 72
   member_functions: []
+- type: Client::UI::TabController::NodeInfoContainer
+  name: NodeInfoContainer
+  namespace: Client.UI
+  union: False
+  size: 112
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: ContainerNode
+    offset: 0
+  - type: Component::GUI::AtkComponentButton*
+    name: TabButtons
+    offset: 8
+    size: 9
+  - type: Component::GUI::AtkComponentButton*
+    name: BackButton
+    offset: 80
+  - type: Component::GUI::AtkComponentButton*
+    name: ForwardButton
+    offset: 88
+  - type: Component::GUI::AtkComponentButton*
+    name: SearchButton
+    offset: 96
+  - type: int
+    name: UnkTimelineId1
+    offset: 104
+  - type: int
+    name: UnkTimelineId2
+    offset: 108
+  member_functions: []
 - type: Client::UI::UI3DModule::MapInfo
   name: MapInfo
   namespace: Client.UI
@@ -16928,45 +16971,6 @@ structs:
     - type: Component::GUI::AtkDragDropInterface*
       name: this
   member_functions: []
-- type: Component::GUI::AtkEvent
-  name: AtkEvent
-  namespace: Component.GUI
-  union: False
-  size: 48
-  fields:
-  - type: Component::GUI::AtkResNode*
-    name: Node
-    offset: 0
-  - type: Component::GUI::AtkEventTarget*
-    name: Target
-    offset: 8
-  - type: Component::GUI::AtkEventListener*
-    name: Listener
-    offset: 16
-  - type: unsigned int
-    name: Param
-    offset: 24
-  - type: Component::GUI::AtkEvent*
-    name: NextEvent
-    offset: 32
-  - type: Component::GUI::AtkEventType
-    name: Type
-    offset: 40
-  - type: byte
-    name: Unk29
-    offset: 41
-  - type: byte
-    name: Flags
-    offset: 42
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 8D 53 9C
-    return_type: void
-    name: SetEventIsHandled
-    parameters:
-    - type: Component::GUI::AtkEvent*
-      name: this
-    - type: byte
-      name: forced
 - type: Component::GUI::AtkEventData::AtkListItemData
   name: AtkListItemData
   namespace: Component.GUI
@@ -17035,7 +17039,7 @@ structs:
     offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? F6 45 0C 20 75 22
-    return_type: void
+    return_type: Component::GUI::AtkEvent*
     name: RegisterEvent
     parameters:
     - type: Component::GUI::AtkEventManager*
@@ -17051,9 +17055,9 @@ structs:
     - type: Component::GUI::AtkEventListener*
       name: listener
     - type: byte
-      name: systemEvent
+      name: isGlobalEvent
   - signature: E8 ?? ?? ?? ?? F6 43 0C 20
-    return_type: void
+    return_type: byte
     name: UnregisterEvent
     parameters:
     - type: Component::GUI::AtkEventManager*
@@ -17065,7 +17069,26 @@ structs:
     - type: Component::GUI::AtkEventListener*
       name: listener
     - type: byte
-      name: systemEvent
+      name: isGlobalEvent
+- type: Component::GUI::AtkEventState
+  name: AtkEventState
+  namespace: Component.GUI
+  union: False
+  size: 4
+  fields:
+  - type: Component::GUI::AtkEventType
+    name: EventType
+    offset: 0
+  - type: byte
+    name: UnkFlags1
+    offset: 1
+  - type: Component::GUI::AtkEventStateFlags
+    name: StateFlags
+    offset: 2
+  - type: byte
+    name: UnkFlags3
+    offset: 3
+  member_functions: []
 - type: Component::GUI::AtkEventTarget
   name: AtkEventTarget
   namespace: Component.GUI
@@ -17916,6 +17939,45 @@ structs:
     name: AtkValues
     offset: 0
   member_functions: []
+- type: Component::GUI::LinkData::Value1
+  name: Value1
+  namespace: Component::GUI::LinkData
+  union: True
+  size: 4
+  fields:
+  - type: int
+    name: IntValue1
+    offset: 0
+  - type: unsigned int
+    name: UIntValue1
+    offset: 0
+  member_functions: []
+- type: Component::GUI::LinkData::Value2
+  name: Value2
+  namespace: Component::GUI::LinkData
+  union: True
+  size: 4
+  fields:
+  - type: int
+    name: IntValue2
+    offset: 0
+  - type: unsigned int
+    name: UIntValue2
+    offset: 0
+  member_functions: []
+- type: Component::GUI::LinkData::Value3
+  name: Value3
+  namespace: Component::GUI::LinkData
+  union: True
+  size: 4
+  fields:
+  - type: int
+    name: IntValue3
+    offset: 0
+  - type: unsigned int
+    name: UIntValue3
+    offset: 0
+  member_functions: []
 - type: Component::GUI::SimpleTweenAnimation
   name: SimpleTweenAnimation
   namespace: Component.GUI
@@ -18153,6 +18215,21 @@ structs:
     name: Previous
     offset: 8
   - type: Component::GUI::AtkAddonControl::ChildAddonInfo*
+    name: Value
+    offset: 16
+  member_functions: []
+- type: ContainerInterface::IStdList::Node<Component::GUI::LinkData*>
+  name: Node
+  namespace: ContainerInterface
+  union: False
+  fields:
+  - type: ContainerInterface::IStdList::Node<Component::GUI::LinkData*>*
+    name: Next
+    offset: 0
+  - type: ContainerInterface::IStdList::Node<Component::GUI::LinkData*>*
+    name: Previous
+    offset: 8
+  - type: Component::GUI::LinkData*
     name: Value
     offset: 16
   member_functions: []
@@ -18783,6 +18860,18 @@ structs:
   union: False
   fields:
   - type: ContainerInterface::IStdList::Node<Component::GUI::AtkUIColorHolder::UIColorGroup>*
+    name: Head
+    offset: 0
+  - type: unsigned __int64
+    name: Size
+    offset: 8
+  member_functions: []
+- type: StdList<Component::GUI::LinkData*, Helper::IStaticMemorySpace::Default>
+  name: StdList`2
+  namespace: ''
+  union: False
+  fields:
+  - type: ContainerInterface::IStdList::Node<Component::GUI::LinkData*>*
     name: Head
     offset: 0
   - type: unsigned __int64
@@ -31649,78 +31738,6 @@ structs:
     name: StickerSlot16
     offset: 1336
   member_functions: []
-- type: Client::UI::TabController
-  name: TabController
-  namespace: Client.UI
-  union: False
-  size: 176
-  fields:
-  - type: Component::GUI::AtkEventListener
-    name: AtkEventListener
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkStage*
-    name: AtkStage
-    offset: 8
-  - type: int
-    name: TabIndex
-    offset: 128
-  - type: int
-    name: TabCount
-    offset: 132
-  - type: __fastcall
-    name: CallbackFunction
-    offset: 144
-    return_type: void
-    parameters:
-    - type: int
-      name: a1
-    - type: Component::GUI::AtkUnitBase*
-      name: a2
-  - type: Component::GUI::AtkUnitBase*
-    name: Addon
-    offset: 152
-  - type: byte
-    name: Enabled
-    offset: 168
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::TabController*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::TabController*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::TabController*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  member_functions: []
 - type: Client::UI::UI3DModule::MemberInfo
   name: MemberInfo
   namespace: Client.UI
@@ -32667,6 +32684,39 @@ structs:
     - type: Component::GUI::AtkEventData*
       name: a5
   member_functions: []
+- type: Component::GUI::AtkEvent
+  name: AtkEvent
+  namespace: Component.GUI
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: Node
+    offset: 0
+  - type: Component::GUI::AtkEventTarget*
+    name: Target
+    offset: 8
+  - type: Component::GUI::AtkEventListener*
+    name: Listener
+    offset: 16
+  - type: unsigned int
+    name: Param
+    offset: 24
+  - type: Component::GUI::AtkEvent*
+    name: NextEvent
+    offset: 32
+  - type: Component::GUI::AtkEventState
+    name: State
+    offset: 40
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 8D 53 9C
+    return_type: void
+    name: SetEventIsHandled
+    parameters:
+    - type: Component::GUI::AtkEvent*
+      name: this
+    - type: byte
+      name: forced
 - type: Component::GUI::AtkEventData
   name: AtkEventData
   namespace: Component.GUI
@@ -32675,6 +32725,9 @@ structs:
   fields:
   - type: Component::GUI::AtkEventData::AtkListItemData
     name: ListItemData
+    offset: 0
+  - type: Component::GUI::LinkData*
+    name: LinkData
     offset: 0
   member_functions: []
 - type: Component::GUI::AtkFontAnalyzerBuildLink
@@ -34741,6 +34794,15 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
+- type: StdList<Component::GUI::LinkData*>
+  name: StdList`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdList<Component::GUI::LinkData*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
 - type: StdList<unsigned __int64>
   name: StdList`1
   namespace: ''
@@ -36507,7 +36569,7 @@ structs:
     - type: Client::Game::InventoryItem*
       name: other
   - signature: E9 ?? ?? ?? ?? 48 8D 4B 48
-    return_type: byte
+    return_type: void
     name: Copy
     parameters:
     - type: Client::Game::InventoryItem*
@@ -44735,6 +44797,70 @@ structs:
     - type: Client::UI::Info::InfoProxyCircleFinder*
       name: this
   member_functions: []
+- type: Client::UI::LogViewer
+  name: LogViewer
+  namespace: Client.UI
+  union: False
+  size: 296
+  fields:
+  - type: Client::UI::AddonChatLogPanel*
+    name: ChatLogPanel
+    offset: 16
+  - type: Component::GUI::AtkTextNode*
+    name: ChatText
+    offset: 24
+  - type: Component::GUI::AtkComponentNode*
+    name: ScrollBarNode
+    offset: 32
+  - type: Component::GUI::AtkComponentScrollBar*
+    name: ScrollBarComponent
+    offset: 40
+  - type: Component::GUI::AtkStage*
+    name: AtkStage
+    offset: 56
+  - type: byte
+    name: FontSize
+    offset: 72
+  - type: unsigned int
+    name: FirstLineVisible
+    offset: 76
+  - type: unsigned int
+    name: LastLineVisible
+    offset: 80
+  - type: unsigned int
+    name: TotalLineCount
+    offset: 92
+  - type: unsigned __int16
+    name: ChatTextWidth
+    offset: 96
+  - type: unsigned __int16
+    name: DisplayableLineCount
+    offset: 98
+  - type: Component::GUI::NumberArrayData*
+    name: NumberArrayData
+    offset: 136
+  - type: unsigned int
+    name: MessagesAboveCurrent
+    offset: 144
+  - type: Component::GUI::AtkTimer
+    name: AtkTimer
+    offset: 168
+  - type: byte
+    name: IsScrolledBottom
+    offset: 217
+  - type: byte
+    name: IsContextMenuShown
+    offset: 249
+  virtual_functions: []
+  member_functions:
+  - signature: 48 85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 55 56 41 55 49 8D AB
+    return_type: void
+    name: HandleLinkClick
+    parameters:
+    - type: Client::UI::LogViewer*
+      name: this
+    - type: Component::GUI::LinkData*
+      name: linkData
 - type: Client::UI::Misc::BannerModuleEntry
   name: BannerModuleEntry
   namespace: Client.UI.Misc
@@ -45406,6 +45532,161 @@ structs:
     name: IsDirty
     offset: 588
   member_functions: []
+- type: Client::UI::TabController
+  name: TabController
+  namespace: Client.UI
+  union: False
+  size: 176
+  fields:
+  - type: Component::GUI::AtkEventListener
+    name: AtkEventListener
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkStage*
+    name: AtkStage
+    offset: 8
+  - type: Client::UI::TabController::NodeInfoContainer
+    name: NodeInfo
+    offset: 16
+  - type: int
+    name: TabIndex
+    offset: 128
+  - type: int
+    name: TabCount
+    offset: 132
+  - type: byte
+    name: IsInSearchTab
+    offset: 136
+  - type: __fastcall
+    name: CallbackFunction
+    offset: 144
+    return_type: void
+    parameters:
+    - type: int
+      name: a1
+    - type: Component::GUI::AtkUnitBase*
+      name: a2
+  - type: Component::GUI::AtkUnitBase*
+    name: Addon
+    offset: 152
+  - type: Component::GUI::AtkUnitBase*
+    name: InputReceivedEventAddon
+    offset: 160
+  - type: byte
+    name: Enabled
+    offset: 168
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 0F 10 02 48 8B F1
+    return_type: void
+    name: Setup
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: Client::UI::TabController::NodeInfoContainer*
+      name: nodeInfo
+  - signature: 48 83 EC 38 48 89 91 ?? ?? ?? ?? 4C 8B C9
+    return_type: void
+    name: RegisterInputReceivedEvent
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+  - signature: E8 ?? ?? ?? ?? BB 72 00 00 00
+    return_type: void
+    name: RegisterCallback
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: __fastcall
+      name: callbackFunction
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+  - signature: E8 ?? ?? ?? ?? 0F B6 83 ?? ?? ?? ?? 84 C0 74 ?? 39 B3
+    return_type: void
+    name: SetTabCount
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: int
+      name: tabCount
+  - signature: 48 83 79 ?? ?? 74 ?? 3B 91
+    return_type: void
+    name: SetTabIndex
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: int
+      name: tabIndex
+  - signature: E8 ?? ?? ?? ?? 3B C7 7C ?? 8D 47
+    return_type: int
+    name: GetTabIndex
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+  - signature: 83 B9 ?? ?? ?? ?? ?? 7E ?? 48 8B 41
+    return_type: Component::GUI::AtkComponentButton*
+    name: GetFirstButton
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+  - signature: 48 8B 41 ?? 48 85 C0 75 ?? 48 63 81
+    return_type: Component::GUI::AtkComponentButton*
+    name: GetLastButton
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+  - signature: 40 56 48 83 EC 30 48 8B F1 48 8B 49
+    return_type: void
+    name: UpdateButtons
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 83 79 ?? ?? 8B FA 48 8B D9 74 ?? 3B 91
+    return_type: void
+    name: SetTabIndexAndCallBack
+    parameters:
+    - type: Client::UI::TabController*
+      name: this
+    - type: int
+      name: tabIndex
 - type: Client::UI::UI3DModule::ObjectInfo
   name: ObjectInfo
   namespace: Client.UI
@@ -45973,7 +46254,26 @@ structs:
   - type: StdVector<Component::GUI::AtkEvent*>
     name: Events
     offset: 8
-  member_functions: []
+  - type: byte
+    name: Unk20
+    offset: 32
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 4C 8B 74 24
+    return_type: byte
+    name: DispatchEvent
+    parameters:
+    - type: Component::GUI::AtkEventDispatcher*
+      name: this
+    - type: Component::GUI::AtkEventDispatcher::Event*
+      name: evt
+  - signature: E8 ?? ?? ?? ?? 48 8B 5B 20 41 B2 01
+    return_type: void
+    name: RemoveEvent
+    parameters:
+    - type: Component::GUI::AtkEventDispatcher*
+      name: this
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
 - type: Component::GUI::AtkFontAnalyzerRenderer
   name: AtkFontAnalyzerRenderer
   namespace: Component.GUI
@@ -53355,6 +53655,22 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
+- type: Component::GUI::AtkEventDispatcher::Event
+  name: Event
+  namespace: Component.GUI
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AtkEventState
+    name: State
+    offset: 0
+  - type: unsigned int
+    name: UnkFlags
+    offset: 4
+  - type: Component::GUI::AtkEventData
+    name: EventData
+    offset: 8
+  member_functions: []
 - type: Component::GUI::AtkSimpleTween
   name: AtkSimpleTween
   namespace: Component.GUI
@@ -53432,7 +53748,7 @@ structs:
     - type: Component::GUI::AtkSimpleTween*
       name: this
   - signature: 48 83 EC 48 0F B6 44 24 ?? 4C 8B D1
-    return_type: void
+    return_type: Component::GUI::AtkValue*
     name: RegisterEvent
     parameters:
     - type: Component::GUI::AtkSimpleTween*
@@ -53446,9 +53762,9 @@ structs:
     - type: Component::GUI::AtkResNode*
       name: nodeParam
     - type: byte
-      name: systemEvent
+      name: isGlobalEvent
   - signature: 0F B6 44 24 ?? 48 83 C1 40
-    return_type: void
+    return_type: byte
     name: UnregisterEvent
     parameters:
     - type: Component::GUI::AtkSimpleTween*
@@ -53460,7 +53776,7 @@ structs:
     - type: Component::GUI::AtkEventListener*
       name: listener
     - type: byte
-      name: systemEvent
+      name: isGlobalEvent
   - signature: 48 83 EC 28 0F 57 C0 83 FA 08
     return_type: float
     name: GetNodeValue
@@ -53598,6 +53914,55 @@ structs:
     name: CharSetExtras
     offset: 108
     size: 16
+  member_functions: []
+- type: Component::GUI::LinkData
+  name: LinkData
+  namespace: Component.GUI
+  union: False
+  size: 56
+  fields:
+  - type: int
+    name: MinX
+    offset: 0
+  - type: int
+    name: MinY
+    offset: 4
+  - type: int
+    name: MaxX
+    offset: 8
+  - type: int
+    name: MaxY
+    offset: 12
+  - type: byte*
+    name: Payload
+    offset: 16
+  - type: unsigned __int16
+    name: PayloadEnd
+    offset: 24
+  - type: byte
+    name: LinkType
+    offset: 27
+  - type: unsigned __int16
+    name: Unk1C
+    offset: 28
+  - type: unsigned __int16
+    name: Unk1E
+    offset: 30
+  - type: unsigned int
+    name: Unk20
+    offset: 32
+  - type: Component::GUI::LinkData::Value1
+    name: Value1
+    offset: 36
+  - type: Component::GUI::LinkData::Value2
+    name: Value2
+    offset: 40
+  - type: Component::GUI::LinkData::Value3
+    name: Value3
+    offset: 44
+  - type: unsigned int
+    name: LinkColor
+    offset: 48
   member_functions: []
 - type: Component::Text::MacroDecoder
   name: MacroDecoder
@@ -60400,7 +60765,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
-    - type: unsigned __int16
+    - type: Component::GUI::AtkEventType
       name: eventType
     - type: unsigned int
       name: eventParam
@@ -60409,21 +60774,21 @@ structs:
     - type: Component::GUI::AtkResNode*
       name: nodeParam
     - type: byte
-      name: isSystemEvent
+      name: isGlobalEvent
   - signature: E8 ?? ?? ?? ?? 40 38 75 67
     return_type: void
     name: RemoveEvent
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
-    - type: unsigned __int16
+    - type: Component::GUI::AtkEventType
       name: eventType
     - type: unsigned int
       name: eventParam
     - type: Component::GUI::AtkEventListener*
       name: listener
     - type: byte
-      name: isSystemEvent
+      name: isGlobalEvent
   - signature: E8 ?? ?? ?? ?? 8B 5C 24 2C
     return_type: void
     name: GetBounds
@@ -66163,8 +66528,8 @@ structs:
   - type: byte*
     name: OriginalTextPointer
     offset: 296
-  - type: __int64
-    name: UnkPtr_1
+  - type: StdList<Component::GUI::LinkData*>*
+    name: LinkData
     offset: 304
   - type: unsigned int
     name: SelectStart
@@ -76906,344 +77271,6 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::AddonCharacterRepute*
-      name: this
-  member_functions: []
-- type: Client::UI::AddonChatLogPanel
-  name: AddonChatLogPanel
-  namespace: Client.UI
-  union: False
-  size: 992
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkTextNode*
-    name: ChatText
-    offset: 656
-  - type: byte
-    name: FontSize
-    offset: 704
-  - type: unsigned int
-    name: FirstLineVisible
-    offset: 708
-  - type: unsigned int
-    name: LastLineVisible
-    offset: 712
-  - type: unsigned int
-    name: Unknown2C0
-    offset: 720
-  - type: unsigned int
-    name: TotalLineCount
-    offset: 724
-  - type: unsigned int
-    name: MessagesAboveCurrent
-    offset: 776
-  - type: byte
-    name: IsScrolledBottom
-    offset: 849
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
       name: this
   member_functions: []
 - type: Client::UI::AddonChocoboBreedTraining
@@ -96481,323 +96508,6 @@ structs:
     - type: Client::UI::AddonActionMenu*
       name: this
   member_functions: []
-- type: Client::UI::AddonAdventureNoteBook
-  name: AddonAdventureNoteBook
-  namespace: Client.UI
-  union: False
-  size: 1600
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Client::UI::TabController
-    name: TabController
-    offset: 1408
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonAdventureNoteBook*
-      name: this
-  member_functions: []
 - type: Client::UI::AddonAllianceListX
   name: AddonAllianceListX
   namespace: Client.UI
@@ -98904,1013 +98614,6 @@ structs:
     - type: Client::UI::AddonFieldMarker*
       name: this
   member_functions: []
-- type: Client::UI::AddonFishGuide2
-  name: AddonFishGuide2
-  namespace: Client.UI
-  union: False
-  size: 2736
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Client::UI::TabController
-    name: TabController
-    offset: 672
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonFishGuide2*
-      name: this
-  member_functions: []
-- type: Client::UI::AddonGSInfoCardList
-  name: AddonGSInfoCardList
-  namespace: Client.UI
-  union: False
-  size: 1360
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Client::UI::TabController
-    name: TabController
-    offset: 680
-  - type: Component::GUI::AtkResNode*
-    name: PageSelection
-    offset: 856
-  - type: Component::GUI::AtkComponentButton*
-    name: PageButtons
-    offset: 864
-    size: 9
-  - type: Component::GUI::AtkComponentButton*
-    name: GotoFirstPageButton
-    offset: 936
-  - type: Component::GUI::AtkComponentButton*
-    name: GotoLastPageButton
-    offset: 944
-  - type: Component::GUI::AtkComponentButton*
-    name: CardButtons
-    offset: 968
-    size: 30
-  - type: Component::GUI::AtkTextNode*
-    name: TotalTextNode
-    offset: 1208
-  - type: Component::GUI::AtkImageNode*
-    name: SelectedButtonBorderImage
-    offset: 1216
-  - type: Component::GUI::AtkComponentDropDownList*
-    name: CardDisplayFilter
-    offset: 1224
-  - type: Component::GUI::AtkTextNode*
-    name: SelectedCardName
-    offset: 1248
-  - type: Component::GUI::AtkTextNode*
-    name: SelectedCardTribeName
-    offset: 1256
-  - type: Component::GUI::AtkTextNode*
-    name: SelectedCardDescription
-    offset: 1264
-  - type: Component::GUI::AtkTextNode*
-    name: PreviewedCardNumber
-    offset: 1272
-  - type: Component::GUI::AtkTextNode*
-    name: SelectedCardNumber
-    offset: 1280
-  - type: Component::GUI::AtkTextNode*
-    name: SelectedCardAcquisitionName
-    offset: 1288
-  - type: Component::GUI::AtkImageNode*
-    name: SelectedCardAcquisitionIcon
-    offset: 1296
-  - type: Client::UI::GSInfoCardListFilterMode
-    name: FilterMode
-    offset: 1304
-  - type: int
-    name: SelectedPage
-    offset: 1312
-  - type: int
-    name: SelectedCardIndex
-    offset: 1316
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoCardList*
-      name: this
-  member_functions: []
-- type: Client::UI::AddonGSInfoEditDeck
-  name: AddonGSInfoEditDeck
-  namespace: Client.UI
-  union: False
-  size: 3472
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Client::UI::TabController
-    name: TabController
-    offset: 560
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonGSInfoEditDeck*
-      name: this
-  member_functions: []
 - type: Client::UI::AddonGatheringMasterpiece
   name: AddonGatheringMasterpiece
   namespace: Client.UI
@@ -101020,640 +99723,6 @@ structs:
     - type: Client::UI::AddonLookingForGroupDetail*
       name: this
   member_functions: []
-- type: Client::UI::AddonLovmPaletteEdit
-  name: AddonLovmPaletteEdit
-  namespace: Client.UI
-  union: False
-  size: 2592
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Client::UI::TabController
-    name: TabController
-    offset: 2128
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonLovmPaletteEdit*
-      name: this
-  member_functions: []
-- type: Client::UI::AddonMJIMinionNoteBook
-  name: AddonMJIMinionNoteBook
-  namespace: Client.UI
-  union: False
-  size: 1600
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Client::UI::TabController
-    name: TabController
-    offset: 688
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMJIMinionNoteBook*
-      name: this
-  member_functions: []
 - type: Client::UI::AddonMacro
   name: AddonMacro
   namespace: Client.UI
@@ -101993,332 +100062,6 @@ structs:
     - type: Client::UI::AddonMacro*
       name: this
   member_functions: []
-- type: Client::UI::AddonMinionMountBase
-  name: AddonMinionMountBase
-  namespace: Client.UI
-  union: False
-  size: 3072
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Client::UI::TabController
-    name: TabController
-    offset: 688
-  - type: Client::UI::AddonMinionMountBase::ViewType
-    name: CurrentView
-    offset: 2256
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 42 D3 83 F8 08
-    return_type: void
-    name: SwitchToFavorites
-    parameters:
-    - type: Client::UI::AddonMinionMountBase*
-      name: this
 - type: Client::UI::AddonNamePlate
   name: AddonNamePlate
   namespace: Client.UI
@@ -102967,323 +100710,6 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::AddonNeedGreed*
-      name: this
-  member_functions: []
-- type: Client::UI::AddonOrnamentNoteBook
-  name: AddonOrnamentNoteBook
-  namespace: Client.UI
-  union: False
-  size: 1360
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Client::UI::TabController
-    name: TabController
-    offset: 672
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: ShouldIgnoreInputs
-    offset: 176
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: GetRootNode
-    offset: 184
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: GetWindowBounds
-    offset: 208
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 232
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: Focus
-    offset: 288
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: Initialize
-    offset: 320
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: Finalizer
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: Update
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 360
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 384
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 400
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 408
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 424
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: OnMouseOver
-    offset: 488
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: OnMouseOut
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
-      name: this
-  - name: IsFullyLoaded
-    offset: 520
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonOrnamentNoteBook*
       name: this
   member_functions: []
 - type: Client::UI::AddonPartyList
@@ -105462,16 +102888,32 @@ structs:
     name: SteamApiLibraryHandle
     offset: 13768
   virtual_functions:
-  - name: dtor
-    offset: 0
   - name: Setup
     offset: 8
+    return_type: byte
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
   - name: Destroy
     offset: 16
+    return_type: byte
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
   - name: Free
     offset: 24
+    return_type: void
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
   - name: Tick
     offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
+  - name: dtor
+    offset: 0
   member_functions:
   - signature: E8 ?? ?? ?? ?? 80 7B 1D 01
     return_type: Client::UI::UIModule*
@@ -106214,6 +103656,323 @@ structs:
   - name: IsCross
     offset: 712
   member_functions: []
+- type: Client::UI::AddonAdventureNoteBook
+  name: AddonAdventureNoteBook
+  namespace: Client.UI
+  union: False
+  size: 1600
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 1408
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
+  member_functions: []
 - type: Client::UI::AddonAlliance48
   name: AddonAlliance48
   namespace: Client.UI
@@ -106530,6 +104289,2610 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::AddonAlliance48*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonChatLogPanel
+  name: AddonChatLogPanel
+  namespace: Client.UI
+  union: False
+  size: 992
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkTextNode*
+    name: ChatText
+    offset: 616
+  - type: Client::UI::LogViewer
+    name: LogViewer
+    offset: 632
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonFishGuide2
+  name: AddonFishGuide2
+  namespace: Client.UI
+  union: False
+  size: 2736
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 672
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonGSInfoCardList
+  name: AddonGSInfoCardList
+  namespace: Client.UI
+  union: False
+  size: 1360
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 680
+  - type: Component::GUI::AtkResNode*
+    name: PageSelection
+    offset: 856
+  - type: Component::GUI::AtkComponentButton*
+    name: PageButtons
+    offset: 864
+    size: 9
+  - type: Component::GUI::AtkComponentButton*
+    name: GotoFirstPageButton
+    offset: 936
+  - type: Component::GUI::AtkComponentButton*
+    name: GotoLastPageButton
+    offset: 944
+  - type: Component::GUI::AtkComponentButton*
+    name: CardButtons
+    offset: 968
+    size: 30
+  - type: Component::GUI::AtkTextNode*
+    name: TotalTextNode
+    offset: 1208
+  - type: Component::GUI::AtkImageNode*
+    name: SelectedButtonBorderImage
+    offset: 1216
+  - type: Component::GUI::AtkComponentDropDownList*
+    name: CardDisplayFilter
+    offset: 1224
+  - type: Component::GUI::AtkTextNode*
+    name: SelectedCardName
+    offset: 1248
+  - type: Component::GUI::AtkTextNode*
+    name: SelectedCardTribeName
+    offset: 1256
+  - type: Component::GUI::AtkTextNode*
+    name: SelectedCardDescription
+    offset: 1264
+  - type: Component::GUI::AtkTextNode*
+    name: PreviewedCardNumber
+    offset: 1272
+  - type: Component::GUI::AtkTextNode*
+    name: SelectedCardNumber
+    offset: 1280
+  - type: Component::GUI::AtkTextNode*
+    name: SelectedCardAcquisitionName
+    offset: 1288
+  - type: Component::GUI::AtkImageNode*
+    name: SelectedCardAcquisitionIcon
+    offset: 1296
+  - type: Client::UI::GSInfoCardListFilterMode
+    name: FilterMode
+    offset: 1304
+  - type: int
+    name: SelectedPage
+    offset: 1312
+  - type: int
+    name: SelectedCardIndex
+    offset: 1316
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonGSInfoEditDeck
+  name: AddonGSInfoEditDeck
+  namespace: Client.UI
+  union: False
+  size: 3472
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 560
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonLovmPaletteEdit
+  name: AddonLovmPaletteEdit
+  namespace: Client.UI
+  union: False
+  size: 2592
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 2128
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonMJIMinionNoteBook
+  name: AddonMJIMinionNoteBook
+  namespace: Client.UI
+  union: False
+  size: 1600
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 688
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  member_functions: []
+- type: Client::UI::AddonMinionMountBase
+  name: AddonMinionMountBase
+  namespace: Client.UI
+  union: False
+  size: 3072
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 688
+  - type: Client::UI::AddonMinionMountBase::ViewType
+    name: CurrentView
+    offset: 2256
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 42 D3 83 F8 08
+    return_type: void
+    name: SwitchToFavorites
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+- type: Client::UI::AddonOrnamentNoteBook
+  name: AddonOrnamentNoteBook
+  namespace: Client.UI
+  union: False
+  size: 1360
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::TabController
+    name: TabController
+    offset: 672
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
       name: this
   member_functions: []
 - type: Client::UI::AddonSelectIconString
@@ -112468,9 +112831,6 @@ structs:
   - type: byte
     name: LobbyUIStage
     offset: 4455
-  - type: byte
-    name: IsLoggedIn
-    offset: 4457
   - type: __int64
     name: IdleTime
     offset: 4464
@@ -112483,6 +112843,12 @@ structs:
   - type: unsigned __int64
     name: SelectedCharacterContentId
     offset: 4504
+  - type: byte
+    name: IsLoggedIn
+    offset: 4512
+  - type: byte
+    name: IsLoggedIntoZone
+    offset: 4513
   - type: byte
     name: LogoutShouldCloseGame
     offset: 4515
@@ -112651,111 +113017,6 @@ structs:
     name: th
     offset: 0
   member_functions: []
-- type: Component::GUI::AtkStage
-  name: AtkStage
-  namespace: Component.GUI
-  union: False
-  size: 482816
-  fields:
-  - type: Component::GUI::AtkEventTarget
-    name: AtkEventTarget
-    offset: 0
-  - type: Component::GUI::AtkTextureResourceManager*
-    name: AtkTextureResourceManager
-    offset: 24
-  - type: Client::UI::RaptureAtkUnitManager*
-    name: RaptureAtkUnitManager
-    offset: 32
-  - type: Component::GUI::AtkInputManager*
-    name: AtkInputManager
-    offset: 40
-  - type: Component::GUI::AtkCollisionManager*
-    name: AtkCollisionManager
-    offset: 48
-  - type: Component::GUI::AtkArrayDataHolder*
-    name: AtkArrayDataHolder
-    offset: 56
-  - type: Component::GUI::AtkTimerHolder*
-    name: AtkTimerHolder
-    offset: 64
-  - type: Component::GUI::AtkSimpleTweenHolder*
-    name: AtkSimpleTweenHolder
-    offset: 72
-  - type: Component::GUI::AtkCrestManager*
-    name: AtkCrestManager
-    offset: 80
-  - type: Component::GUI::AtkUIColorHolder*
-    name: AtkUIColorHolder
-    offset: 88
-  - type: Client::UI::Misc::RaptureTextModule*
-    name: RaptureTextModule
-    offset: 96
-  - type: Client::System::Input::SoftKeyboardDeviceInterface*
-    name: SoftKeyboardDevice
-    offset: 104
-  - type: Component::GUI::AtkExternalInterface*
-    name: AtkExternalInterface
-    offset: 112
-  - type: Component::GUI::AtkDragDropManager
-    name: DragDropManager
-    offset: 120
-  - type: Component::GUI::AtkGroupManager
-    name: AtkGroupManager
-    offset: 320
-  - type: Component::GUI::AtkTooltipManager
-    name: TooltipManager
-    offset: 360
-  - type: Component::GUI::AtkDialogue
-    name: AtkDialogue
-    offset: 704
-  - type: Component::GUI::AtkCursor
-    name: AtkCursor
-    offset: 824
-  - type: Component::GUI::AtkEventDispatcher
-    name: AtkEventDispatcher
-    offset: 856
-    size: 32
-  - type: unsigned int
-    name: NextEventDispatcherIndex
-    offset: 2136
-  - type: Component::GUI::AtkEvent
-    name: RegisteredEvents
-    offset: 2168
-    size: 10000
-  virtual_functions:
-  - name: dtor
-    offset: 8
-  member_functions:
-  - signature: 48 8B 51 ?? 48 0F BF 82
-    return_type: Component::GUI::AtkResNode*
-    name: GetFocus
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: 48 8B 49 ?? 45 33 C9 45 33 C0 33 D2 E9
-    return_type: void
-    name: ClearFocus
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 45 33 F6 48 85 C0 74 06
-    return_type: Component::GUI::NumberArrayData**
-    name: GetNumberArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 42 8D 1C AD
-    return_type: Component::GUI::StringArrayData**
-    name: GetStringArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: 48 8B 41 38 48 8B 40 48
-    return_type: Component::GUI::ExtendArrayData**
-    name: GetExtendArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
 - type: Client::Game::MJI::MJIPastureHandler
   name: MJIPastureHandler
   namespace: Client.Game.MJI
@@ -115190,6 +115451,111 @@ structs:
       name: roulette
     - type: byte
       name: hideIfShown
+- type: Component::GUI::AtkStage
+  name: AtkStage
+  namespace: Component.GUI
+  union: False
+  size: 482816
+  fields:
+  - type: Component::GUI::AtkEventTarget
+    name: AtkEventTarget
+    offset: 0
+  - type: Component::GUI::AtkTextureResourceManager*
+    name: AtkTextureResourceManager
+    offset: 24
+  - type: Client::UI::RaptureAtkUnitManager*
+    name: RaptureAtkUnitManager
+    offset: 32
+  - type: Component::GUI::AtkInputManager*
+    name: AtkInputManager
+    offset: 40
+  - type: Component::GUI::AtkCollisionManager*
+    name: AtkCollisionManager
+    offset: 48
+  - type: Component::GUI::AtkArrayDataHolder*
+    name: AtkArrayDataHolder
+    offset: 56
+  - type: Component::GUI::AtkTimerHolder*
+    name: AtkTimerHolder
+    offset: 64
+  - type: Component::GUI::AtkSimpleTweenHolder*
+    name: AtkSimpleTweenHolder
+    offset: 72
+  - type: Component::GUI::AtkCrestManager*
+    name: AtkCrestManager
+    offset: 80
+  - type: Component::GUI::AtkUIColorHolder*
+    name: AtkUIColorHolder
+    offset: 88
+  - type: Client::UI::Misc::RaptureTextModule*
+    name: RaptureTextModule
+    offset: 96
+  - type: Client::System::Input::SoftKeyboardDeviceInterface*
+    name: SoftKeyboardDevice
+    offset: 104
+  - type: Component::GUI::AtkExternalInterface*
+    name: AtkExternalInterface
+    offset: 112
+  - type: Component::GUI::AtkDragDropManager
+    name: DragDropManager
+    offset: 120
+  - type: Component::GUI::AtkGroupManager
+    name: AtkGroupManager
+    offset: 320
+  - type: Component::GUI::AtkTooltipManager
+    name: TooltipManager
+    offset: 360
+  - type: Component::GUI::AtkDialogue
+    name: AtkDialogue
+    offset: 704
+  - type: Component::GUI::AtkCursor
+    name: AtkCursor
+    offset: 824
+  - type: Component::GUI::AtkEventDispatcher
+    name: AtkEventDispatcher
+    offset: 856
+    size: 32
+  - type: unsigned int
+    name: NextEventDispatcherIndex
+    offset: 2136
+  - type: Component::GUI::AtkEvent
+    name: RegisteredEvents
+    offset: 2168
+    size: 10000
+  virtual_functions:
+  - name: dtor
+    offset: 8
+  member_functions:
+  - signature: 48 8B 51 ?? 48 0F BF 82
+    return_type: Component::GUI::AtkResNode*
+    name: GetFocus
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: 48 8B 49 ?? 45 33 C9 45 33 C0 33 D2 E9
+    return_type: void
+    name: ClearFocus
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 45 33 F6 48 85 C0 74 06
+    return_type: Component::GUI::NumberArrayData**
+    name: GetNumberArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 42 8D 1C AD
+    return_type: Component::GUI::StringArrayData**
+    name: GetStringArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: 48 8B 41 38 48 8B 40 48
+    return_type: Component::GUI::ExtendArrayData**
+    name: GetExtendArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
 - type: Client::Game::Event::Director
   name: Director
   namespace: Client.Game.Event
@@ -131003,6 +131369,14 @@ structs:
       name: this
     - type: float
       name: delta
+  - name: OpenMapWithMapLink
+    offset: 504
+    return_type: byte
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: byte*
+      name: mapLink
   - name: Dtor
     offset: 0
     return_type: void
