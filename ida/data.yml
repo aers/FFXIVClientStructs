@@ -5732,6 +5732,15 @@ classes:
       0x140615340: IsInputIdKeyPress
       0x140615450: IsInputIdClicked
       0x140615D70: IsMouseCombinationDragged
+  Client::System::Input::GamepadInputData:
+    funcs:
+      0x140272D70: ctor
+  Client::System::Input::CursorInputData:
+    funcs:
+      0x1405C6690: ctor
+  Client::System::Input::KeyboardInputData:
+    funcs:
+      0x1405C67D0: ctor
   Component::GUI::AtkArrayData:
     vtbls:
       - ea: 0x141EF5390
@@ -6963,15 +6972,6 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140749CD0: ctor # unused, inlined @ 0x14075CD19
-  Client::UI::GamepadInputData:
-    funcs:
-      0x140272D70: ctor
-  Client::UI::CursorInputData:
-    funcs:
-      0x1405C6690: ctor
-  Client::UI::KeyboardInputData:
-    funcs:
-      0x1405C67D0: ctor
   Client::UI::RaptureUiDataModule:
     vtbls:
       - ea: 0x141F05880
