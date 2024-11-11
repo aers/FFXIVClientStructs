@@ -34,12 +34,12 @@ public unsafe partial struct Framework {
     [FieldOffset(0x0590)] public nint CallerWindow;
     [FieldOffset(0x0598)] public FileAccessPath ConfigPath;
     [FieldOffset(0x07A8)] public GameWindow* GameWindow;
-    //584 byte
-    [FieldOffset(0x09FC)] public int CursorPosX;
-    [FieldOffset(0x0A00)] public int CursorPosY;
-
-    [FieldOffset(0x110C)] public int CursorPosX2;
-    [FieldOffset(0x1110)] public int CursorPosY2;
+    [FieldOffset(0x07B0)] public GamepadInputData GamepadInputs;
+    [FieldOffset(0x09FC)] public CursorInputData CursorInputs;
+    [FieldOffset(0x0A2C)] public KeyboardInputData KeyboardInputs;
+    [FieldOffset(0x0EC0)] public GamepadInputData GamepadInputs2;
+    [FieldOffset(0x110C)] public CursorInputData CursorInputs2;
+    [FieldOffset(0x113C)] public KeyboardInputData KeyboardInputs2;
 
     [FieldOffset(0x1678)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0x1680)] public bool IsNetworkModuleInitialized;

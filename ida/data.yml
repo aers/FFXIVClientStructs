@@ -5729,9 +5729,18 @@ classes:
       - ea: 0x141EF3160
     funcs:
       0x140614D40: ctor
-      0x140615340: IsInputIDKeyPress
-      0x140615450: IsInputIDClicked
+      0x140615340: IsInputIdKeyPress
+      0x140615450: IsInputIdClicked
       0x140615D70: IsMouseCombinationDragged
+  Client::System::Input::GamepadInputData:
+    funcs:
+      0x140272D70: ctor
+  Client::System::Input::CursorInputData:
+    funcs:
+      0x1405C6690: ctor
+  Client::System::Input::KeyboardInputData:
+    funcs:
+      0x1405C67D0: ctor
   Component::GUI::AtkArrayData:
     vtbls:
       - ea: 0x141EF5390
