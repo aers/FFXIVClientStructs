@@ -102,7 +102,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? B2 E8")]
     public static partial int ToInteger(Utf8String* value, int fromBase = 0); // base 0 = detect format (0x hex, 0b bin, 0o oct)
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 03 1F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 40")]
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 6E ?? ?? 75 08")]
