@@ -75,10 +75,10 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x5F00)] public QuestLinkContainer MapQuestLinkContainer;
     [FieldOffset(0x6A58)] public QuestLinkContainer MiniMapQuestLinkContainer;
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 85 C9")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4F 10 48 85 C9")]
     public partial void SetFlagMapMarker(uint territoryId, uint mapId, float x, float y, uint iconId = 0xEC91);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 44 24 ?? 0F B6 48 1D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B B4 24 ?? ?? ?? ?? EB 64")]
     public partial void OpenMapByMapId(uint mapId, uint territoryId = 0, bool a4 = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 45 28 48 8D 8C 24")]

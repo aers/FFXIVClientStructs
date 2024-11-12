@@ -360,7 +360,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the slot (0 or 1) to retrieve.</param>
     /// <returns>Returns a pointer to the DutyActionSlot.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 4A 63 3C FB")]
+    [MemberFunction("85 D2 78 1A 83 FA 02")]
     public partial DutyActionSlot* GetDutyActionSlot(uint index);
 
     /// <summary>
@@ -368,7 +368,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the DutyAction slot to edit.</param>
     /// <param name="actionId">The ID of the action to set in this slot.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04")] // TODO: 7.1: was this split into two functions? @ 0x140AF45A7
     public partial void SetDutyActionSlot(uint index, uint actionId);
 
     /// <summary>
@@ -376,7 +376,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the slot to execute. If greater than 1, slot 0 is executed.</param>
     /// <returns>Returns true always (?)</returns>
-    [MemberFunction("48 83 EC 28 85 D2 78 25")]
+    [MemberFunction("48 83 EC 28 85 D2 78 25 83 FA 02")]
     public partial bool ExecuteDutyActionSlot(uint index);
 }
 

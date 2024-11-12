@@ -19,7 +19,7 @@ public unsafe partial struct BannerModule {
     /// Create a new Banner entry.
     /// </summary>
     /// <returns>BannerModuleEntry* of the newly created Banner, or null if out of Ids.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 8F")]
+    [MemberFunction("48 89 6C 24 ?? 56 48 83 EC 20 48 8B 71 48")]
     public partial BannerModuleEntry* CreateBanner();
 
     /// <summary>
@@ -34,7 +34,7 @@ public unsafe partial struct BannerModule {
     /// Get the next free BannerId.
     /// </summary>
     /// <returns>Data->NextId</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 6E 7C 15")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 6E 7D 58")]
     public partial byte GetNextId();
 
     /// <summary>
@@ -105,7 +105,7 @@ public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x8C)] public byte AmbientLightingBrightness;
     [FieldOffset(0x8D)] public byte HasBannerTimelineCustomName;
 
-    [MemberFunction("0F B7 42 7C 66 39 41 7C")]
+    [MemberFunction("0F B7 42 7C 4C 8B C1")]
     public partial bool EqualTo(BannerModuleEntry* other);
 
     /// <param name="itemIds">A pointer to 14 Item Ids</param>

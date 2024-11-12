@@ -37,7 +37,7 @@ public unsafe partial struct InfoModule {
     /// Sent by the server; devs should not call this manually. May be called multiple times.
     /// </summary>
     /// <param name="flags">A bitfield representing set flags.</param>
-    [MemberFunction("48 89 91 ?? ?? ?? ?? 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 85")]
+    [MemberFunction("48 8B C4 48 89 68 20 57 48 81 EC ?? ?? ?? ?? 48 8B B9")]
     public partial void SetOnlineStatusFlags(ulong flags);
 
     /// <summary>

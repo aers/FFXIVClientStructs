@@ -123,7 +123,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 5C F0 33 F6")]
     public partial float GetRecastTimeElapsed(ActionType actionType, uint actionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 19 FF C3")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 1E FF C3")]
     public partial bool IsRecastTimerActive(ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CD 8B F0")]
@@ -185,7 +185,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0")]
     public static partial uint GetActionInRangeOrLoS(uint actionId, GameObject* sourceObject, GameObject* targetObject);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3B F0 0F 83")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B C8 0F BE 43 0C")]
     public static partial int GetActionCost(ActionType actionType, uint actionId, byte a3, byte a4, byte a5, byte a6);
 
     /// <summary>
@@ -195,7 +195,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionId">The ID of the action to check.</param>
     /// <param name="applyClassMechanics">If true, applies various class mechanics (traits, etc).</param>
     /// <returns></returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D6 8B CD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 7E 1C")]
     public static partial int GetAdjustedRecastTime(ActionType actionType, uint actionId, bool applyClassMechanics = true);
 
     /// <summary>
@@ -209,7 +209,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 33 D2 48 8B CF 66 0F 6E F8")]
     public static partial int GetAdjustedCastTime(ActionType actionType, uint actionId, bool applyProcs = true, CastTimeProc* outOptProc = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B C8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 01 7E 58")]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
 
     /// <summary>

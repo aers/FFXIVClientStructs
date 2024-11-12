@@ -1,9 +1,5 @@
-[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing E8 ?? ?? ?? ?? 3C 01 74 19 FF C3
-[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 40 53 48 83 EC 20 48 63 DA 85 D2 78 50
-[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 41 8B F0
-[W] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Multiple matches for E8 ?? ?? ?? ?? 3B F0 0F 83
-[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing E8 ?? ?? ?? ?? 8B D6 8B CD
-[W] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Multiple matches for E8 ?? ?? ?? ?? 33 DB 8B C8
+[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 40 53 48 83 EC 20 48 63 DA 85 D2 78 50 - no xrefs
+[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 41 8B F0 - no xrefs
 [E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing E8 ?? ?? ?? ?? 8B C8 83 E9 01 74 1E
 [W] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Multiple matches for E9 ?? ?? ?? ?? 33 C9 E9
 [E] FFXIVClientStructs\FFXIV\Client\Game\HousingManager.cs: Missing E8 ?? ?? ?? ?? 0F B6 55 94
@@ -30,21 +26,8 @@
 [E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventGPoseController.cs: Missing 48 8B 05 ?? ?? ?? ?? 4C 8B C1 48 85 C0 74 64
 [E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventSceneModuleTaskManager.cs: Missing 48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 83 EC 20 48 8B 2D
 [E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventSceneModuleTaskManager.cs: Missing E8 ?? ?? ?? ?? 0F 28 74 24 ?? B0 01 48 8B 74 24 ??
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Missing E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Missing E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Missing E8 ?? ?? ?? ?? C6 87 ?? ?? ?? ?? ?? 66 C7 87 ?? ?? ?? ?? ?? ??
-[W] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Multiple matches for E8 ?? ?? ?? ?? 84 C0 74 19 C6 87 ?? ?? ?? ?? ??
-[W] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Multiple matches for E8 ?? ?? ?? ?? 84 C0 75 56 48 8B CB
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Missing E8 ?? ?? ?? ?? 44 0F B6 43 ?? 8D 57 7E
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentMap.cs: Missing E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 85 C9
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentMap.cs: Missing E8 ?? ?? ?? ?? 48 8B 44 24 ?? 0F B6 48 1D
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentModule.cs: Missing E8 ?? ?? ?? ?? 0F B7 A8
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentPartyMember.cs: Missing E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 0F 48 B8 ?? ?? ?? ?? ?? ?? ?? ??
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentPartyMember.cs: Missing E8 ?? ?? ?? ?? EB 6A 48 8B 07 49 8B 4F 20
 [E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentSalvage.cs: Missing E8 ?? ?? ?? ?? 48 8D 55 F0 C7 87 ?? ?? ?? ?? ?? ?? ?? ??
 [E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentSalvage.cs: Missing E8 ?? ?? ?? ?? 41 81 BD ?? ?? ?? ?? ?? ?? ?? ?? 7D 1A
-[W] FFXIVClientStructs\FFXIV\Client\UI\Agent\LobbyUIClient.cs: Multiple matches for 48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 4F 78
-[E] FFXIVClientStructs\FFXIV\Client\UI\Info\InfoModule.cs: Missing 48 89 91 ?? ?? ?? ?? 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 85
 [E] FFXIVClientStructs\FFXIV\Client\UI\Info\InfoProxyCommonList.cs: Missing 3B 51 10 73 0E
 [E] FFXIVClientStructs\FFXIV\Client\UI\Info\InfoProxyCommonList.cs: Missing E9 ?? ?? ?? ?? 3B 5F 10
 [E] FFXIVClientStructs\FFXIV\Client\UI\Info\InfoProxyCrossRealm.cs: Missing 48 83 EC 28 80 3D ?? ?? ?? ?? ?? 75 2F
@@ -52,23 +35,6 @@
 [E] FFXIVClientStructs\FFXIV\Client\UI\Info\InfoProxyPartyInvite.cs: Missing E8 ?? ?? ?? ?? 4C 8B 65 ?? E9 ?? ?? ?? ?? 48 8B 83
 [E] FFXIVClientStructs\FFXIV\Client\UI\Info\InfoProxyPartyInvite.cs: Missing E8 ?? ?? ?? ?? 4C 8B 65 ?? E9 ?? ?? ?? ?? 48 8B 93 ?? ?? ?? ?? 48 8B CE E8
 [E] FFXIVClientStructs\FFXIV\Client\UI\Info\InfoProxyPartyInvite.cs: Missing 40 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 48 8B DA E8 ?? ?? ?? ?? 48 85 C0 74 ?? 80 3D
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\AchievementListModule.cs: Missing C6 81 ?? ?? ?? ?? ?? 48 8D 41 42
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\AchievementListModule.cs: Missing 48 83 EC 28 33 C0 4C 8D 41 42
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\AchievementListModule.cs: Missing 33 D2 48 8D 41 42
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\BannerModule.cs: Multiple matches for E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 8F
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\BannerModule.cs: Multiple matches for E8 ?? ?? ?? ?? 83 F8 6E 7C 15
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\BannerModule.cs: Missing 0F B7 42 7C 66 39 41 7C
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\CharaView.cs: Multiple matches for 0F 10 02 0F 11 41 48
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\CharaView.cs: Missing E8 ?? ?? ?? ?? 44 0F B6 8D ?? ?? ?? ?? B0 01
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\CharaView.cs: Multiple matches for E8 ?? ?? ?? ?? 4D 8D 4E 30
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\CharaViewPortrait.cs: Multiple matches for E8 ?? ?? ?? ?? 48 8B 4D 18 48 8B 01
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\ConfigModule.cs: Missing 48 8B CB E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 C0 48 8B 5C 24
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\CurrencySettingsHelper.cs: Missing 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 C0 48 8B FA
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\EmoteHistoryModule.cs: Missing 48 83 EC 28 48 89 5C 24 ?? 4C 8D 41 42
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\EmoteHistoryModule.cs: Missing 40 53 48 83 EC 20 45 33 C9 4C 8D 41 4E
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureGearsetModule.cs: Missing 48 8D 05 ?? ?? ?? ?? 48 89 7B 40 48 8D 73 48
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureGearsetModule.cs: Multiple matches for E8 ?? ?? ?? ?? 0F B6 C0 41 3B C4
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureGearsetModule.cs: Multiple matches for E8 ?? ?? ?? ?? EB 70 41 0F B6 D7
 [E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Missing E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9
 [E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Missing 83 FA 12 77 28 41 83 F8 10
 [E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Missing E8 ?? ?? ?? ?? 49 8B 4D 40 48 8B 01 FF 50 40
@@ -76,6 +42,3 @@
 [E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Missing E8 ?? ?? ?? ?? EB 50 48 8B CF
 [E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Missing E8 ?? ?? ?? ?? 23 77 7C
 [E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Missing E8 ?? ?? ?? ?? 80 7B 28 01 75 1C
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Multiple matches for E8 ?? ?? ?? ?? 4A 63 3C FB
-[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Missing E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04
-[W] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Multiple matches for 48 83 EC 28 85 D2 78 25
