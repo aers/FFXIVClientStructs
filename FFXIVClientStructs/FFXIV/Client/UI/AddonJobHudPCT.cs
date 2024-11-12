@@ -12,10 +12,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
 public unsafe partial struct AddonJobHudRPM0 {
 
-    [FieldOffset(0x270)] public CanvasGaugeData DataPrevious;
-    [FieldOffset(0x290)] public CanvasGaugeData DataCurrent;
-    [FieldOffset(0x2B0)] public CanvasGauge GaugeStandard;
-    [FieldOffset(0x350)] public CanvasGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public CanvasGaugeData DataPrevious;
+    [FieldOffset(0x298)] public CanvasGaugeData DataCurrent;
+    [FieldOffset(0x2B8)] public CanvasGauge GaugeStandard;
+    [FieldOffset(0x358)] public CanvasGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -82,10 +82,10 @@ public unsafe partial struct AddonJobHudRPM0 {
 [StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
 public unsafe partial struct AddonJobHudRPM1 {
 
-    [FieldOffset(0x270)] public PaletteGaugeData DataPrevious;
-    [FieldOffset(0x290)] public PaletteGaugeData DataCurrent;
-    [FieldOffset(0x2B0)] public PaletteGauge GaugeStandard;
-    [FieldOffset(0x2D0)] public PaletteGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public PaletteGaugeData DataPrevious;
+    [FieldOffset(0x298)] public PaletteGaugeData DataCurrent;
+    [FieldOffset(0x2B8)] public PaletteGauge GaugeStandard;
+    [FieldOffset(0x2D8)] public PaletteGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

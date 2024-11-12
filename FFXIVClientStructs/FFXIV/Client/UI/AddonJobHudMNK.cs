@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 public unsafe partial struct AddonJobHudMNK0 {
-    [FieldOffset(0x270)] public BeastChakraGaugeData DataPrevious;
-    [FieldOffset(0x2A8)] public BeastChakraGaugeData DataCurrent;
-    [FieldOffset(0x2E0)] public BeastChakraGauge GaugeStandard;
-    [FieldOffset(0x3B8)] public BeastChakraGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public BeastChakraGaugeData DataPrevious;
+    [FieldOffset(0x2B0)] public BeastChakraGaugeData DataCurrent;
+    [FieldOffset(0x2E8)] public BeastChakraGauge GaugeStandard;
+    [FieldOffset(0x3C0)] public BeastChakraGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -107,10 +107,10 @@ public unsafe partial struct AddonJobHudMNK0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x410)]
 public unsafe partial struct AddonJobHudMNK1 {
-    [FieldOffset(0x270)] public ChakraGaugeData DataPrevious;
-    [FieldOffset(0x288)] public ChakraGaugeData DataCurrent;
-    [FieldOffset(0x2A0)] public ChakraGauge GaugeStandard;
-    [FieldOffset(0x340)] public ChakraGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public ChakraGaugeData DataPrevious;
+    [FieldOffset(0x290)] public ChakraGaugeData DataCurrent;
+    [FieldOffset(0x2A8)] public ChakraGauge GaugeStandard;
+    [FieldOffset(0x348)] public ChakraGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

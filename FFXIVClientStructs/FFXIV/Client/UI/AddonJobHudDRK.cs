@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x328)]
 public unsafe partial struct AddonJobHudDRK0 {
-    [FieldOffset(0x270)] public BloodGaugeData DataPrevious;
-    [FieldOffset(0x288)] public BloodGaugeData DataCurrent;
-    [FieldOffset(0x2A0)] public BloodGauge GaugeStandard;
-    [FieldOffset(0x2E8)] public BloodGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public BloodGaugeData DataPrevious;
+    [FieldOffset(0x290)] public BloodGaugeData DataCurrent;
+    [FieldOffset(0x2A8)] public BloodGauge GaugeStandard;
+    [FieldOffset(0x2F0)] public BloodGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -61,10 +61,10 @@ public unsafe partial struct AddonJobHudDRK0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x348)]
 public unsafe partial struct AddonJobHudDRK1 {
-    [FieldOffset(0x270)] public DarksideGaugeData DataPrevious;
-    [FieldOffset(0x288)] public DarksideGaugeData DataCurrent;
-    [FieldOffset(0x2A0)] public DarksideGauge GaugeStandard;
-    [FieldOffset(0x300)] public DarksideGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public DarksideGaugeData DataPrevious;
+    [FieldOffset(0x290)] public DarksideGaugeData DataCurrent;
+    [FieldOffset(0x2A8)] public DarksideGauge GaugeStandard;
+    [FieldOffset(0x308)] public DarksideGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

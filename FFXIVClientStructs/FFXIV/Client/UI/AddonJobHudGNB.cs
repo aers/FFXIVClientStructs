@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x368)]
 public unsafe partial struct AddonJobHudGNB0 {
-    [FieldOffset(0x270)] public PowderGaugeData DataPrevious;
-    [FieldOffset(0x280)] public PowderGaugeData DataCurrent;
-    [FieldOffset(0x290)] public PowderGauge GaugeStandard;
-    [FieldOffset(0x300)] public PowderGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public PowderGaugeData DataPrevious;
+    [FieldOffset(0x288)] public PowderGaugeData DataCurrent;
+    [FieldOffset(0x298)] public PowderGauge GaugeStandard;
+    [FieldOffset(0x308)] public PowderGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

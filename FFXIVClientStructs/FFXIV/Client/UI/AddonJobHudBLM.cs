@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x520)]
 public unsafe partial struct AddonJobHudBLM0 {
-    [FieldOffset(0x270)] public ElementalGaugeData DataPrevious;
-    [FieldOffset(0x2A8)] public ElementalGaugeData DataCurrent;
-    [FieldOffset(0x2E0)] public ElementalGauge GaugeStandard;
-    [FieldOffset(0x468)] public ElementalGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public ElementalGaugeData DataPrevious;
+    [FieldOffset(0x2B0)] public ElementalGaugeData DataCurrent;
+    [FieldOffset(0x2E8)] public ElementalGauge GaugeStandard;
+    [FieldOffset(0x470)] public ElementalGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -128,10 +128,10 @@ public unsafe partial struct AddonJobHudBLM0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
 public unsafe partial struct AddonJobHudBLM1 {
-    [FieldOffset(0x270)] public AstralGaugeData DataPrevious;
-    [FieldOffset(0x280)] public AstralGaugeData DataCurrent;
-    [FieldOffset(0x290)] public AstralGauge GaugeStandard;
-    [FieldOffset(0x310)] public AstralGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public AstralGaugeData DataPrevious;
+    [FieldOffset(0x288)] public AstralGaugeData DataCurrent;
+    [FieldOffset(0x298)] public AstralGauge GaugeStandard;
+    [FieldOffset(0x318)] public AstralGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

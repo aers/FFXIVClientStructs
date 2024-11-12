@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x390)]
 public unsafe partial struct AddonJobHudSAM0 {
-    [FieldOffset(0x270)] public KenkiGaugeData DataPrevious;
-    [FieldOffset(0x288)] public KenkiGaugeData DataCurrent;
-    [FieldOffset(0x2A0)] public KenkiGauge GaugeStandard;
-    [FieldOffset(0x330)] public KenkiGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public KenkiGaugeData DataPrevious;
+    [FieldOffset(0x290)] public KenkiGaugeData DataCurrent;
+    [FieldOffset(0x2A8)] public KenkiGauge GaugeStandard;
+    [FieldOffset(0x338)] public KenkiGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -84,10 +84,10 @@ public unsafe partial struct AddonJobHudSAM0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct AddonJobHudSAM1 {
-    [FieldOffset(0x270)] public SenGaugeData DataPrevious;
-    [FieldOffset(0x280)] public SenGaugeData DataCurrent;
-    [FieldOffset(0x290)] public SenGauge GaugeStandard;
-    [FieldOffset(0x2E0)] public SenGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public SenGaugeData DataPrevious;
+    [FieldOffset(0x288)] public SenGaugeData DataCurrent;
+    [FieldOffset(0x298)] public SenGauge GaugeStandard;
+    [FieldOffset(0x2E8)] public SenGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

@@ -11,37 +11,37 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonActionBarBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x720)]
 public unsafe partial struct AddonActionCross {
-    [FieldOffset(0x258)] public ChangeSetUI ChangeSet;
-    [FieldOffset(0x3B0)] public AtkComponentNode* PadlockNode;
-    [FieldOffset(0x3B8)] public AtkComponentCheckBox* PadlockCheckbox;
+    [FieldOffset(0x260)] public ChangeSetUI ChangeSet;
+    [FieldOffset(0x3B8)] public AtkComponentNode* PadlockNode;
+    [FieldOffset(0x3C0)] public AtkComponentCheckBox* PadlockCheckbox;
 
-    [FieldOffset(0x3C0), FixedSizeArray] internal FixedSizeArray4<SlotGroup> _slotGroups;
+    [FieldOffset(0x3C8), FixedSizeArray] internal FixedSizeArray4<SlotGroup> _slotGroups;
 
-    [FieldOffset(0x540)] public ControlGuide ControlGuideDpad;
-    [FieldOffset(0x588)] public ControlGuide ControlGuideActionButtons;
-    [FieldOffset(0x5D0)] public AtkTextNode* SetNumIconNode;
-    [FieldOffset(0x5D8)] public AtkComponentBase* ControlGuideEditComponent;
-    [FieldOffset(0x6D8)] public AtkResNode* AACRootNode;
-    [FieldOffset(0x6E0)] public AtkResNode* ContainerNode;
-    [FieldOffset(0x6F0)] public byte ButtonMask; // not raw input data; represents input state after keybinds/mappings
+    [FieldOffset(0x548)] public ControlGuide ControlGuideDpad;
+    [FieldOffset(0x590)] public ControlGuide ControlGuideActionButtons;
+    [FieldOffset(0x5D8)] public AtkTextNode* SetNumIconNode;
+    [FieldOffset(0x5E0)] public AtkComponentBase* ControlGuideEditComponent;
+    [FieldOffset(0x6E0)] public AtkResNode* AACRootNode;
+    [FieldOffset(0x6E8)] public AtkResNode* ContainerNode;
+    [FieldOffset(0x6F8)] public byte ButtonMask; // not raw input data; represents input state after keybinds/mappings
 
     // values from 1-20 can be converted to a hotbar ID and left/right bool using GetMappedHotbar()
-    [FieldOffset(0x6F8)] public uint ExpandedHoldMapValueLR;
-    [FieldOffset(0x6FC)] public uint ExpandedHoldMapValueRL;
+    [FieldOffset(0x700)] public uint ExpandedHoldMapValueLR;
+    [FieldOffset(0x704)] public uint ExpandedHoldMapValueRL;
 
-    [FieldOffset(0x700)] public bool SelectedDoubleCrossLeft;
-    [FieldOffset(0x704)] public bool SelectedDoubleCrossRight;
-    [FieldOffset(0x710)] public bool InEditMode;
-    [FieldOffset(0x711)] public bool SelectedLeft;
-    [FieldOffset(0x712)] public bool SelectedRight;
-    [FieldOffset(0x713)] public bool DisplayChangeSet;
-    [FieldOffset(0x714)] public bool DisplayPetBarCross;
-    [FieldOffset(0x716)] public bool AlternateDisplayType;
-    [FieldOffset(0x717)] public bool OverrideHidden; // if the XHB is hidden via HUD options, this field indicates whether it should be temporarily revealed
+    [FieldOffset(0x708)] public bool SelectedDoubleCrossLeft;
+    [FieldOffset(0x70C)] public bool SelectedDoubleCrossRight;
+    [FieldOffset(0x718)] public bool InEditMode;
+    [FieldOffset(0x719)] public bool SelectedLeft;
+    [FieldOffset(0x71A)] public bool SelectedRight;
+    [FieldOffset(0x71B)] public bool DisplayChangeSet;
+    [FieldOffset(0x71C)] public bool DisplayPetBarCross;
+    [FieldOffset(0x71E)] public bool AlternateDisplayType;
+    [FieldOffset(0x71F)] public bool OverrideHidden; // if the XHB is hidden via HUD options, this field indicates whether it should be temporarily revealed
 
-    [FieldOffset(0x718)] public byte AlphaStandard;
-    [FieldOffset(0x719)] public byte AlphaActive;
-    [FieldOffset(0x71A)] public byte AlphaInactive;
+    [FieldOffset(0x720)] public byte AlphaStandard;
+    [FieldOffset(0x721)] public byte AlphaActive;
+    [FieldOffset(0x722)] public byte AlphaInactive;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x158)]
@@ -83,13 +83,13 @@ public unsafe partial struct AddonActionCross {
     public ActionCrossSelect Selected =>
         SelectedLeft ? ActionCrossSelect.Left :
         SelectedRight ? ActionCrossSelect.Right :
-        ExpandedHoldMapValueLR > 0 ? ActionCrossSelect.LR :
-        ExpandedHoldMapValueRL > 0 ? ActionCrossSelect.RL :
+        ExpandedHoldMapValueLR > 0x0 ? ActionCrossSelect.LR :
+        ExpandedHoldMapValueRL > 0x0 ? ActionCrossSelect.RL :
         SelectedDoubleCrossLeft ? ActionCrossSelect.DoubleCrossLeft :
         SelectedDoubleCrossRight ? ActionCrossSelect.DoubleCrossRight :
         ActionCrossSelect.None;
 
-    public uint ExpandedHoldMapValue => ExpandedHoldMapValueLR > 0 ? ExpandedHoldMapValueLR : ExpandedHoldMapValueRL;
+    public uint ExpandedHoldMapValue => ExpandedHoldMapValueLR > 0x0 ? ExpandedHoldMapValueLR : ExpandedHoldMapValueRL;
 
     public uint GetExpandedHoldBarTarget(bool* useLeftSide) => GetAdjustedBarTarget(ExpandedHoldMapValue, useLeftSide);
 
@@ -97,10 +97,10 @@ public unsafe partial struct AddonActionCross {
     /// <remarks>Anytime the client calls GetBarTarget(), it always adjusts the result in this way before actually using it.</remarks>
     public uint GetAdjustedBarTarget(uint mapValue, bool* useLeftSide) {
         var target = GetBarTarget(mapValue, useLeftSide);
-        if (target == 19) target = (uint)(AddonActionBarBase.RaptureHotbarId - 1);
-        if (target == 18) target = (uint)(AddonActionBarBase.RaptureHotbarId + 1);
-        return target >= 18 ? 10 :
-               target < 10 ? 17 :
+        if (target == 0x13) target = (uint)(AddonActionBarBase.RaptureHotbarId - 0x1);
+        if (target == 0x12) target = (uint)(AddonActionBarBase.RaptureHotbarId + 0x1);
+        return target >= 0x12 ? 0xA :
+               target < 0xA ? 0x11 :
                target;
     }
 

@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
 public unsafe partial struct AddonJobHudWHM0 {
-    [FieldOffset(0x270)] public HealingGaugeData DataPrevious;
-    [FieldOffset(0x290)] public HealingGaugeData DataCurrent;
-    [FieldOffset(0x2B0)] public HealingGauge GaugeStandard;
-    [FieldOffset(0x320)] public HealingGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public HealingGaugeData DataPrevious;
+    [FieldOffset(0x298)] public HealingGaugeData DataCurrent;
+    [FieldOffset(0x2B8)] public HealingGauge GaugeStandard;
+    [FieldOffset(0x328)] public HealingGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

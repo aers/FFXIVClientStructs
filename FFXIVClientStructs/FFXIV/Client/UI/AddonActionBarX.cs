@@ -11,20 +11,20 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonActionBarBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
 public unsafe partial struct AddonActionBarX {
-    [FieldOffset(0x258)] public AtkTextNode* HotbarNumIconTextNode;
-    [FieldOffset(0x260)] public AtkCollisionNode* HotbarNumIconCollisionNode;
-    [FieldOffset(0x268)] public AtkResNode* ContainerNode;
-    [FieldOffset(0x270)] public AtkResNode* HotbarNumIconNode;
-    [FieldOffset(0x278)] public AtkResNode* PadlockNode;
+    [FieldOffset(0x260)] public AtkTextNode* HotbarNumIconTextNode;
+    [FieldOffset(0x268)] public AtkCollisionNode* HotbarNumIconCollisionNode;
+    [FieldOffset(0x270)] public AtkResNode* ContainerNode;
+    [FieldOffset(0x278)] public AtkResNode* HotbarNumIconNode;
+    [FieldOffset(0x280)] public AtkResNode* PadlockNode;
 
     /// <summary>
     /// The current layout (columns x rows) of this specific hotbar.
     /// </summary>
-    [FieldOffset(0x280)] public ActionBarLayout ActionBarLayout;
+    [FieldOffset(0x288)] public ActionBarLayout ActionBarLayout;
 
-    [FieldOffset(0x28C), FixedSizeArray] internal FixedSizeArray6<Dimensions> _layoutDimensions; // every hotbar stores the same pre-baked dimensions for each of the 6 layout options
+    [FieldOffset(0x294), FixedSizeArray] internal FixedSizeArray6<Dimensions> _layoutDimensions; // every hotbar stores the same pre-baked dimensions for each of the 6 layout options
 
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x4)]
     public struct Dimensions {
         [FieldOffset(0x0)] public short Width;
         [FieldOffset(0x2)] public short Height;

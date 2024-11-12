@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3A8)]
 public unsafe partial struct AddonJobHudDNC0 {
-    [FieldOffset(0x270)] public StepGaugeData DataPrevious;
-    [FieldOffset(0x2A0)] public StepGaugeData DataCurrent;
-    [FieldOffset(0x2D0)] public StepGauge GaugeStandard;
-    [FieldOffset(0x340)] public StepGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public StepGaugeData DataPrevious;
+    [FieldOffset(0x2A8)] public StepGaugeData DataCurrent;
+    [FieldOffset(0x2D8)] public StepGauge GaugeStandard;
+    [FieldOffset(0x348)] public StepGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -71,10 +71,10 @@ public unsafe partial struct AddonJobHudDNC0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3B8)]
 public unsafe partial struct AddonJobHudDNC1 {
-    [FieldOffset(0x270)] public FeatherGaugeData DataPrevious;
-    [FieldOffset(0x290)] public FeatherGaugeData DataCurrent;
-    [FieldOffset(0x2B0)] public FeatherGauge GaugeStandard;
-    [FieldOffset(0x348)] public FeatherGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public FeatherGaugeData DataPrevious;
+    [FieldOffset(0x298)] public FeatherGaugeData DataCurrent;
+    [FieldOffset(0x2B8)] public FeatherGauge GaugeStandard;
+    [FieldOffset(0x350)] public FeatherGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
