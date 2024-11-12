@@ -14,14 +14,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct RaptureHotbarModule {
     public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureHotbarModule();
 
-    [FieldOffset(0x48)] public UIModule* UIModule;
+    [FieldOffset(0x50)] public UIModule* UIModule;
 
     /// <summary>
     /// Set in RaptureHotbarModule's ReadFile after all processing/loading appears to have been completed.
     /// Might also (probably does?) signify all migrations and version checks have been completed and everything
     /// is stable.
     /// </summary>
-    [FieldOffset(0x50)] public bool ModuleReady;
+    [FieldOffset(0x58)] public bool ModuleReady;
 
     /// <summary>
     /// The ID of the ClassJob associated with the currently-active hotbars.
@@ -29,66 +29,66 @@ public unsafe partial struct RaptureHotbarModule {
     /// <remarks>
     /// Can have a bit set at 0x80 if <see cref="ModuleReady"/> is false, though the meaning of this flag is unclear.
     /// </remarks>
-    [FieldOffset(0x51)] public byte ActiveHotbarClassJobId;
+    [FieldOffset(0x59)] public byte ActiveHotbarClassJobId;
 
     /// <summary>
     /// Appears to be set if <c>HOTBAR.DAT</c> was loaded from disk successfully. Set to 0 if decryption fails or
     /// the file read errors out. Does not appear to track migration state. Set in ReadFile.
     /// </summary>
-    [FieldOffset(0x52)] public bool DatFileLoadedSuccessfully;
+    [FieldOffset(0x5A)] public bool DatFileLoadedSuccessfully;
 
     // PvE hotbars starting from MCH onwards, appears to track whether a hotbar was initialized?
-    [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray12<bool> _expacJobHotbarsCreated;
+    [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray12<bool> _expacJobHotbarsCreated;
 
     // PvP hotbars for all jobs, appears to track if it's been initialized. 
-    [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray22<bool> _pvPHotbarsCreated;
+    [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray22<bool> _pvPHotbarsCreated;
 
     // ????? maybe AllowResets?
-    [FieldOffset(0x76)] internal bool ClearCallbackPresent;
+    [FieldOffset(0x7E)] internal bool ClearCallbackPresent;
 
     /// <summary>
     /// A state field to track the current materia melding state (locked - 1 / standard - 2 / advanced - 3), and whether
     /// the hotbars were migrated to replace actions or not.
     /// </summary>
-    [FieldOffset(0x78)] internal uint MateriaMeldState;
+    [FieldOffset(0x80)] internal uint MateriaMeldState;
 
     /// <summary>
     /// A bitfield representing whether a specific hotbar is to be considered "shared" or not.
     /// </summary>
-    [FieldOffset(0x7C), FixedSizeArray] internal FixedSizeArray4<byte> _hotbarShareStateBitmask;
+    [FieldOffset(0x84), FixedSizeArray] internal FixedSizeArray4<byte> _hotbarShareStateBitmask;
 
     /// <summary>
     /// Another bitmask that appears to be related to hotbar sharing state.
     /// Initialized to 0x3E3F8 (default share state) on game start, but doesn't ever appear to be updated or read elsewhere.
     /// Dead field?
     /// </summary>
-    [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray4<byte> _hotbarShareStateBitmask2;
+    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray4<byte> _hotbarShareStateBitmask2;
 
-    [FieldOffset(0x88)] public ClearCallback* ClearCallbackPtr;
+    [FieldOffset(0x90)] public ClearCallback* ClearCallbackPtr;
 
     /// <summary>
     /// An array of all active hotbars loaded and available to the player. This field tracks both normal hotbars
     /// (indices 0 to 9) and cross hotbars (indices 10 to 17).
     /// </summary>
-    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray18<Hotbar> _hotbars;
+    [FieldOffset(0x98), FixedSizeArray] internal FixedSizeArray18<Hotbar> _hotbars;
 
     public Span<Hotbar> StandardHotbars => new(Unsafe.AsPointer(ref Hotbars[0]), 10);
     public Span<Hotbar> CrossHotbars => new(Unsafe.AsPointer(ref Hotbars[10]), 8);
 
-    [FieldOffset(0xFC90)] public Hotbar PetHotbar;
-    [FieldOffset(0x10A90)] public Hotbar PetCrossHotbar;
+    [FieldOffset(0xFC98)] public Hotbar PetHotbar;
+    [FieldOffset(0x10A98)] public Hotbar PetCrossHotbar;
 
     /// <summary>
     /// A scratch hotbar slot used for temporary operations such as saving and temporary rewrites.
     /// </summary>
-    [FieldOffset(0x11890)] public HotbarSlot ScratchSlot;
+    [FieldOffset(0x11898)] public HotbarSlot ScratchSlot;
 
     // No idea how this field works. Observed so far:
     // 15 (0x0E) - Quest mount (?)
     // 18 (0x12) - Mount/FashionAccessory
     // 34 (0x22) - Carbuncle up
     // Seems to control something with overriding the main bar too?
-    [FieldOffset(0x11970)] public uint PetHotbarMode;
+    [FieldOffset(0x11978)] public uint PetHotbarMode;
 
     /// <summary>
     /// A field containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
@@ -99,9 +99,9 @@ public unsafe partial struct RaptureHotbarModule {
     /// To retrieve PvP hotbar information, pass in the result of the <see cref="GetPvPSavedHotbarIndexForClassJobId"/>
     /// method.
     /// </remarks>
-    [FieldOffset(0x11974), FixedSizeArray] internal FixedSizeArray65<SavedHotbarGroup> _savedHotbars;
+    [FieldOffset(0x1197C), FixedSizeArray] internal FixedSizeArray65<SavedHotbarGroup> _savedHotbars;
 
-    [FieldOffset(0x28714)] public CrossHotbarFlags CrossHotbarFlags;
+    [FieldOffset(0x2871C)] public CrossHotbarFlags CrossHotbarFlags;
 
     /// <summary>
     /// Field to track the player's current Grand Company. Used for emote refresh/update purposes.
@@ -110,7 +110,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// If this field is out of sync with game state, it will be updated on the next frame. Setting
     /// this field manually appears to have no effect (?).
     /// </remarks>
-    [FieldOffset(0x28718)] public uint GrandCompanyId;
+    [FieldOffset(0x28720)] public uint GrandCompanyId;
 
     /// <summary>
     /// Field to indicate whether the PvP hotbar is currently active or not.
@@ -119,24 +119,24 @@ public unsafe partial struct RaptureHotbarModule {
     /// If this field is out of sync with the game's PVP state, it will be updated on the next frame. Setting
     /// this field manually will not enable the PvP hotbars.
     /// </remarks>
-    [FieldOffset(0x2871C)] public bool PvPHotbarsActive;
+    [FieldOffset(0x28724)] public bool PvPHotbarsActive;
 
     /// <summary>
     /// Field to indicate that the PvP hotbar swap notification (AgentPvpScreenInformation) needs to be shown.
     /// This field is set to <c>false</c> after the agent has been shown.
     /// </summary>
-    [FieldOffset(0x2871D)] public bool ShowPvPHotbarSwapNotification;
+    [FieldOffset(0x28725)] public bool ShowPvPHotbarSwapNotification;
 
     /// <summary>
     /// Hotbar slots representing available Duty Actions (see also <see cref="ActionManager.GetDutyActionId"/>).
     /// </summary>
-    [FieldOffset(0x28720), FixedSizeArray] internal FixedSizeArray2<DutyActionSlot> _dutyActionSlots;
+    [FieldOffset(0x28728), FixedSizeArray] internal FixedSizeArray2<DutyActionSlot> _dutyActionSlots;
 
     /// <summary>
     /// Sets whether Duty Actions are present or not. Controls whether to show the appropriate UI element and whether
     /// to rewrite the special DutyAction General Actions.
     /// </summary>
-    [FieldOffset(0x288F0)] public bool DutyActionsPresent;
+    [FieldOffset(0x288F8)] public bool DutyActionsPresent;
 
     [MemberFunction("E9 ?? ?? ?? ?? 73 25")]
     public partial byte ExecuteSlot(HotbarSlot* hotbarSlot);

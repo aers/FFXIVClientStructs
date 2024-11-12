@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct BannerModule {
     public static BannerModule* Instance() => Framework.Instance()->GetUIModule()->GetBannerModule();
 
-    [FieldOffset(0x40)] public BannerModuleData* Data;
+    [FieldOffset(0x48)] public BannerModuleData* Data;
 
     /// <summary>
     /// Create a new Banner entry.

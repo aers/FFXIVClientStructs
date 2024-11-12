@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct FieldMarkerModule {
     public static FieldMarkerModule* Instance() => Framework.Instance()->GetUIModule()->GetFieldMarkerModule();
 
-    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray30<FieldMarkerPreset> _presets;
+    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray30<FieldMarkerPreset> _presets;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0C)]

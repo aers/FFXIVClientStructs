@@ -12,11 +12,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct RaptureMacroModule {
     public static RaptureMacroModule* Instance() => UIModule.Instance()->GetRaptureMacroModule();
 
-    [FieldOffset(0x40)] public RaptureTextModule* RaptureTextModule;
-    //[FieldOffset(0x48)] public TextChecker* TextChecker;
+    [FieldOffset(0x48)] public RaptureTextModule* RaptureTextModule;
+    //[FieldOffset(0x50)] public TextChecker* TextChecker;
 
-    [FieldOffset(0x58), FixedSizeArray] internal FixedSizeArray100<Macro> _individual;
-    [FieldOffset(0x28D78), FixedSizeArray] internal FixedSizeArray100<Macro> _shared;
+    [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray100<Macro> _individual;
+    [FieldOffset(0x28D80), FixedSizeArray] internal FixedSizeArray100<Macro> _shared;
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 DB 83 C6 F9")]
     public partial Macro* GetMacro(uint set, uint index);

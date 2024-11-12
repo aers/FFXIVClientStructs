@@ -13,27 +13,27 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct GroupPoseModule {
     public static GroupPoseModule* Instance() => Framework.Instance()->GetUIModule()->GetGroupPoseModule();
 
-    // [FieldOffset(0x40)] public byte Unk40;
-    // [FieldOffset(0x41)] public byte Unk41;
+    // [FieldOffset(0x48)] public byte Unk40;
+    // [FieldOffset(0x49)] public byte Unk41;
 
-    // [FieldOffset(0x44)] public float Unk44;
-    // [FieldOffset(0x48)] public float Unk48;
-    [FieldOffset(0x4C)] public float CameraAngle; // 0.5 to -0.5
-    // [FieldOffset(0x50)] public float Unk50;
-    // [FieldOffset(0x54)] public float Unk54;
+    // [FieldOffset(0x4C)] public float Unk44;
+    // [FieldOffset(0x50)] public float Unk48;
+    [FieldOffset(0x54)] public float CameraAngle; // 0.5 to -0.5
+    // [FieldOffset(0x58)] public float Unk50;
+    // [FieldOffset(0x5C)] public float Unk54;
 
-    [FieldOffset(0x60)] public float CameraRotation; // -PI to PI
+    [FieldOffset(0x68)] public float CameraRotation; // -PI to PI
 
-    [FieldOffset(0x70)] public Vector4 CameraPosition; // maybe?
-    [FieldOffset(0x80)] public bool IsCharacterOrientedCamera;
+    [FieldOffset(0x78)] public Vector4 CameraPosition; // maybe?
+    [FieldOffset(0x88)] public bool IsCharacterOrientedCamera;
 
-    [FieldOffset(0x90), FixedSizeArray] internal FixedSizeArray3<Light> _lights;
+    [FieldOffset(0x98), FixedSizeArray] internal FixedSizeArray3<Light> _lights;
 
-    [FieldOffset(0x120)] public bool IsCharacterOrientedLight;
-    [FieldOffset(0x121)] public bool IsManualBrightnessEnabled;
+    [FieldOffset(0x128)] public bool IsCharacterOrientedLight;
+    [FieldOffset(0x129)] public bool IsManualBrightnessEnabled;
 
-    [FieldOffset(0x124)] public float ManualBrightness;
-    [FieldOffset(0x128)] public byte CharacterLighting;
+    [FieldOffset(0x12C)] public float ManualBrightness;
+    [FieldOffset(0x130)] public byte CharacterLighting;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public struct Light {

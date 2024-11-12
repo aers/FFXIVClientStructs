@@ -15,5 +15,5 @@ public unsafe partial struct FlagStatusModule {
     /// <remarks>
     /// 13 = Default Currency Setting (Index of Rotation array in UIModule.UIModuleHelpers.CurrencySettings)
     /// </remarks>
-    [FieldOffset(0x1A4), FixedSizeArray] internal FixedSizeArray64<byte> _flags;
+    [FieldOffset(0x1AC), FixedSizeArray] internal FixedSizeArray64<byte> _flags;
 }

@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct AchievementListModule {
     public static AchievementListModule* Instance() => Framework.Instance()->GetUIModule()->GetAchievementListModule();
-    // [FieldOffset(0x40)] public byte Unk40;
-    [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray30<ushort> _watchList;
-    // [FieldOffset(0x7E)] public byte Unk7E;
-    [FieldOffset(0x80)] public byte WatchlistCount; // 30 max
+    // [FieldOffset(0x48)] public byte Unk40;
+    [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray30<ushort> _watchList;
+    // [FieldOffset(0x86)] public byte Unk7E;
+    [FieldOffset(0x88)] public byte WatchlistCount; // 30 max
 
     [MemberFunction("C6 81 ?? ?? ?? ?? ?? 48 8D 41 4A")]
     public partial void UpdateWatchlistCount();

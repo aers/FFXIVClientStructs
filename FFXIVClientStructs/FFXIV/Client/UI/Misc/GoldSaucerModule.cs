@@ -12,9 +12,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct GoldSaucerModule {
     public static GoldSaucerModule* Instance() => Framework.Instance()->GetUIModule()->GetGoldSaucerModule();
 
-    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray10<TripleTriadDeck> _decks;
-    [FieldOffset(0x284), FixedSizeArray] internal FixedSizeArray23<ushort> _hotbarMinions; // Companion RowIds
-    [FieldOffset(0x2B4), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenCards; // TripleTriadCard RowIds, the ones indicated with a green dot
+    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray10<TripleTriadDeck> _decks;
+    [FieldOffset(0x28C), FixedSizeArray] internal FixedSizeArray23<ushort> _hotbarMinions; // Companion RowIds
+    [FieldOffset(0x2BC), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenCards; // TripleTriadCard RowIds, the ones indicated with a green dot
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x3A)]

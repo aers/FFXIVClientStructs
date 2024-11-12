@@ -12,8 +12,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct ItemContextCustomizeModule {
     public static ItemContextCustomizeModule* Instance() => Framework.Instance()->GetUIModule()->GetItemContextCustomizeModule();
 
-    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray128<byte> _firstTier;
-    [FieldOffset(0xC0), FixedSizeArray] internal FixedSizeArray128<byte> _secondTier;
+    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray128<byte> _firstTier;
+    [FieldOffset(0xC8), FixedSizeArray] internal FixedSizeArray128<byte> _secondTier;
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 73 02 0F 1F 80 ?? ?? ?? ??")]
     public partial void ResetAll();
