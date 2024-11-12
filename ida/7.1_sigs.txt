@@ -2,22 +2,15 @@
 [E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 41 8B F0 - no xrefs
 [E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing E8 ?? ?? ?? ?? 8B C8 83 E9 01 74 1E - can't find
 [E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 40 38 78 10
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 8B 4B 0C 66 FF C7
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 44 0F B6 C0 84 C0 74 23
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 44 8B E8 44 3B F8
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 8B F0 39 43 78
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 03 C7 EB 19
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B D8 E8 ?? ?? ?? ?? 42 8D 0C 3B
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 42 8D 0C 3B
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 8B 7B 06
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing 33 D2 C7 01 ?? ?? ?? ?? 33 C0
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing 8B 42 08 4C 8B C9 39 41 08
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 80 78 06 00 75 F2
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 89 45 8B
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 2B C6 89 43 0C
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 66 89 47 0C
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? EB 04 0F B7 45 12
-[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? EB 04 49 8B 46 18
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 44 8B E8 44 3B F8 - unsure E8 ?? ?? ?? ?? 3B C3 72 11
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 8B 7B 06 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing 8B 42 08 4C 8B C9 39 41 08 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 80 78 06 00 75 F2 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 89 45 8B - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 2B C6 89 43 0C - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 66 89 47 0C - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? EB 04 0F B7 45 12 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? EB 04 49 8B 46 18 - not checking, probably vf now
 [E] FFXIVClientStructs\FFXIV\Client\Game\Character\Ornament.cs: Missing E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24 - inlined
 [E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventGPoseController.cs: Missing 48 8B 05 ?? ?? ?? ?? 4C 8B C1 48 85 C0 74 64
 [E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventSceneModuleTaskManager.cs: Missing 48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 83 EC 20 48 8B 2D - inlined in 7.0

@@ -12,7 +12,7 @@ public unsafe partial struct InventoryManager {
 
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 40 38 78 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 58 18")]
     public partial InventoryContainer* GetInventoryContainer(InventoryType inventoryType);
 
     [MemberFunction("E9 ?? ?? ?? ?? 33 C0 C3 0F B6 51 51")]
@@ -24,7 +24,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 03 F8 BB")]
     public partial int GetItemCountInContainer(uint itemId, InventoryType inventoryType, bool isHq = false, short minCollectability = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 4B 0C 66 FF C7")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 7A 83 F8 04")]
     public partial int MoveItemSlot(InventoryType srcContainer, ushort srcSlot, InventoryType dstContainer, ushort dstSlot, byte unk = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 7F 66")]
@@ -34,7 +34,7 @@ public unsafe partial struct InventoryManager {
     /// Get the number of gearsets the player is permitted to have/use.
     /// </summary>
     /// <returns>Returns the number of gearsets the player can use.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 C0 84 C0 74 23")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 84 24 ?? ?? ?? ?? 3D")]
     public partial byte GetPermittedGearsetCount();
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B E8 44 3B F8")]
@@ -43,7 +43,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 3B 44 24 58")]
     public partial uint GetGil();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 39 43 78")]
+    [MemberFunction("E8 ?? ?? ?? ?? 03 86")]
     public partial uint GetRetainerGil();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 BB ?? ?? ?? ?? 74 58 44 8B C7 BA ?? ?? ?? ?? 49 8B CF")]
@@ -64,17 +64,17 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 4C 24 48 03 CF")]
     public partial uint GetMaxCompanySeals(byte grandcompanyId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 03 C7 EB 19")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 8D 4F FE")]
     public partial uint GetTomestoneCount(uint tomestoneItemId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B D8 E8 ?? ?? ?? ?? 42 8D 0C 3B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B D8 E8 ?? ?? ?? ?? 42 8D 0C 23")]
     private partial int GetLimitedTomestoneCount(int a1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4F DD")]
     private static partial int GetSpecialItemId(byte switchCase);
 
     /// <summary>  Gets the current maximum weekly number of limited tomestones tha player can earn. </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 42 8D 0C 3B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 42 8D 0C 2B")]
     public static partial int GetLimitedTomestoneWeeklyLimit();
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
@@ -128,7 +128,7 @@ public unsafe partial struct InventoryItem : ICreatable {
         Collectable = 8
     }
 
-    [MemberFunction("33 D2 C7 01 ?? ?? ?? ?? 33 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 8D 4B 58")]
     public partial void Ctor();
 
     [MemberFunction("8B 42 08 4C 8B C9 39 41 08")]
