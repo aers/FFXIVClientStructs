@@ -135,7 +135,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial bool EqualTo(InventoryItem* other);
 
     /// <summary>Copies the values from the other InventoryItem and, if it's symbolic, resolves its linked item.</summary>
-    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 4B 48")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 07 49 8B D6")] // TODO: vfunc now.
     public partial void Copy(InventoryItem* other);
 
     /// <summary>
