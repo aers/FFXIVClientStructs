@@ -11,25 +11,25 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF10)]
 public unsafe partial struct AddonRaidFinder {
-    [FieldOffset(0x230)] public AtkAddonControl AddonControl;
+    [FieldOffset(0x238)] public AtkAddonControl AddonControl;
 
-    [FieldOffset(0x298)] public AtkComponentList* DutyList;
-    [FieldOffset(0x2A0)] public AtkComponentNode* CategoryDescriptionComponent;
-    [FieldOffset(0x2A8)] public AtkComponentScrollBar* CategoryDescriptionScrollBar;
-    [FieldOffset(0x2B0)] public AtkTextNode* ItemLevelText;
-    [FieldOffset(0x2B8)] public AtkComponentButton* UnselectButton;
-    [FieldOffset(0x2C0)] public AtkComponentDropDownList* OrderByDropDownList;
-    [FieldOffset(0x2C8)] public AtkComponentButton* DutyTypeButton;
+    [FieldOffset(0x2A0)] public AtkComponentList* DutyList;
+    [FieldOffset(0x2A8)] public AtkComponentNode* CategoryDescriptionComponent;
+    [FieldOffset(0x2B0)] public AtkComponentScrollBar* CategoryDescriptionScrollBar;
+    [FieldOffset(0x2B8)] public AtkTextNode* ItemLevelText;
+    [FieldOffset(0x2C0)] public AtkComponentButton* UnselectButton;
+    [FieldOffset(0x2C8)] public AtkComponentDropDownList* OrderByDropDownList;
+    [FieldOffset(0x2D0)] public AtkComponentButton* DutyTypeButton;
 
-    [FieldOffset(0x388)] public Utf8String RaidsTooltipString;
-    [FieldOffset(0x3F0)] public Utf8String TrialsTooltipString;
-    [FieldOffset(0x458)] public Utf8String UltimatesTooltipString;
+    [FieldOffset(0x390)] public Utf8String RaidsTooltipString;
+    [FieldOffset(0x3F8)] public Utf8String TrialsTooltipString;
+    [FieldOffset(0x460)] public Utf8String UltimatesTooltipString;
 
-    [FieldOffset(0x4E4)] public int HighlightedRow;
-    [FieldOffset(0x4EC)] public int NumDisplayedEntries; // Use to index into EntryInfoArray
-    [FieldOffset(0x4F0)] public int SelectedTab;
+    [FieldOffset(0x4EC)] public int HighlightedRow;
+    [FieldOffset(0x4F4)] public int NumDisplayedEntries; // Use to index into EntryInfoArray
+    [FieldOffset(0x4F8)] public int SelectedTab;
 
-    [FieldOffset(0x4F8), FixedSizeArray] internal FixedSizeArray8<RaidFinderDutyEntry> _entries;
+    [FieldOffset(0x500), FixedSizeArray] internal FixedSizeArray8<RaidFinderDutyEntry> _entries;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x140)]

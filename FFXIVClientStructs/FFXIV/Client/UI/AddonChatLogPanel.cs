@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3E0)]
 public unsafe partial struct AddonChatLogPanel {
-    [FieldOffset(0x268)] public AtkTextNode* ChatText;
+    [FieldOffset(0x270)] public AtkTextNode* ChatText;
 
-    [FieldOffset(0x278)] public LogViewer LogViewer;
+    [FieldOffset(0x280)] public LogViewer LogViewer;
 }

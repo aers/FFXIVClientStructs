@@ -10,6 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x240)]
 public unsafe partial struct AddonGrandCompanySupplyReward {
-    [FieldOffset(0x230)] public AtkComponentButton* DeliverButton;
-    [FieldOffset(0x238)] public AtkComponentButton* CancelButton;
+    [FieldOffset(0x238)] public AtkComponentButton* DeliverButton;
+    [FieldOffset(0x240)] public AtkComponentButton* CancelButton;
 }

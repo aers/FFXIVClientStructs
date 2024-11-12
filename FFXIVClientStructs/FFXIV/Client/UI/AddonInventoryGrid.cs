@@ -10,5 +10,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x350)]
 public unsafe partial struct AddonInventoryGrid {
-    [FieldOffset(0x230), FixedSizeArray] internal FixedSizeArray35<Pointer<AtkComponentDragDrop>> _slots;
+    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray35<Pointer<AtkComponentDragDrop>> _slots;
 }

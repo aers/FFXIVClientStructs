@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x6D0)]
 public partial struct AddonArmouryBoard {
-    [FieldOffset(0x6A0)] public int TabIndex;
+    [FieldOffset(0x6A8)] public int TabIndex;
 
     [MemberFunction("40 53 48 83 EC 20 80 B9 ?? ?? ?? ?? ?? 48 8B D9 75 10")]
     public partial void NextTab(byte a2); // 7.0: inlined

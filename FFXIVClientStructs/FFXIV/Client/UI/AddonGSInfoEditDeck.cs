@@ -10,5 +10,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD90)]
 public partial struct AddonGSInfoEditDeck {
-    [FieldOffset(0x230)] public TabController TabController;
+    [FieldOffset(0x238)] public TabController TabController;
 }

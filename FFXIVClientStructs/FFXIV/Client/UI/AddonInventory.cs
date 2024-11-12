@@ -10,9 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x330)]
 public partial struct AddonInventory {
-    [FieldOffset(0x2B8)] public AtkAddonControl AddonControl;
+    [FieldOffset(0x2C0)] public AtkAddonControl AddonControl;
 
-    [FieldOffset(0x32C)] public int TabIndex;
+    [FieldOffset(0x334)] public int TabIndex;
 
     [MemberFunction("E9 ?? ?? ?? ?? 83 FD 11")]
     public partial void SetTab(int tab);

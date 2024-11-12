@@ -10,14 +10,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x470)]
 public unsafe partial struct AddonAllianceListX {
-    [FieldOffset(0x230)] public AtkTextNode* HeaderText;
-    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray8<AllianceMemberStruct> _allianceMembers;
-    [FieldOffset(0x438), FixedSizeArray] internal FixedSizeArray8<ushort> _uIFlags;
-    [FieldOffset(0x448), FixedSizeArray] internal FixedSizeArray8<uint> _allianceClassJobIconIds;
-    [FieldOffset(0x468)] public sbyte HoveredSlot;
-    [FieldOffset(0x469)] public sbyte TargetedSlot;
-    [FieldOffset(0x46A)] public byte Slots;
-    [FieldOffset(0x46B)] public byte SlotsFilled;
+    [FieldOffset(0x238)] public AtkTextNode* HeaderText;
+    [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray8<AllianceMemberStruct> _allianceMembers;
+    [FieldOffset(0x440), FixedSizeArray] internal FixedSizeArray8<ushort> _uIFlags;
+    [FieldOffset(0x450), FixedSizeArray] internal FixedSizeArray8<uint> _allianceClassJobIconIds;
+    [FieldOffset(0x470)] public sbyte HoveredSlot;
+    [FieldOffset(0x471)] public sbyte TargetedSlot;
+    [FieldOffset(0x472)] public byte Slots;
+    [FieldOffset(0x473)] public byte SlotsFilled;
 
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]

@@ -10,9 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC00)]
 public partial struct AddonMinionMountBase {
-    [FieldOffset(0x2B0)] public TabController TabController;
+    [FieldOffset(0x2B8)] public TabController TabController;
 
-    [FieldOffset(0x8D0)] public ViewType CurrentView;
+    [FieldOffset(0x8D8)] public ViewType CurrentView;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 42 D3 83 F8 08")]
     public partial void SwitchToFavorites();

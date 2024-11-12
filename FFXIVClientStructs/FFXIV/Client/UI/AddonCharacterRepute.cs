@@ -10,6 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
 public partial struct AddonCharacterRepute {
-    [FieldOffset(0x2A4)] public int SelectedExpansion;
-    [FieldOffset(0x2A8)] public int ExpansionsCount;
+    [FieldOffset(0x2AC)] public int SelectedExpansion;
+    [FieldOffset(0x2B0)] public int ExpansionsCount;
 }
