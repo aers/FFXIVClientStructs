@@ -146,8 +146,8 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(194)] public partial ??? OpenInventory(???);
     // [VirtualFunction(195)] public partial ??? CloseInventory(???);
     // [VirtualFunction(196)] public partial ??? IsInventoryOpen(???);
-    [VirtualFunction(197)] public partial void ExecuteMainCommand(uint command);
-    [VirtualFunction(198)] public partial bool IsMainCommandUnlocked(uint command);
+    [VirtualFunction(203)] public partial void ExecuteMainCommand(uint command); // already updated for 7.1
+    [VirtualFunction(204)] public partial bool IsMainCommandUnlocked(uint command); // already updated for 7.1
     // [VirtualFunction(201)] public partial ??? ShowRaceCountdownEnd(???);
     // [VirtualFunction(205)] public partial ??? IsDutyRaidFinderOpen(???);
     [VirtualFunction(211)] public partial void ShowAdventureNotice(int index);
