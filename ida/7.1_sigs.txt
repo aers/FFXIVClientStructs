@@ -1,6 +1,3 @@
-[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 40 53 48 83 EC 20 48 63 DA 85 D2 78 50 - no xrefs
-[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 41 8B F0 - no xrefs
-[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing E8 ?? ?? ?? ?? 8B C8 83 E9 01 74 1E - can't find
 [E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 40 38 78 10
 [E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 44 8B E8 44 3B F8 - unsure E8 ?? ?? ?? ?? 3B C3 72 11
 [E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 8B 7B 06 - not checking, probably vf now

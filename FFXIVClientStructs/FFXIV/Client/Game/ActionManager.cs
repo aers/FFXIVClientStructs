@@ -141,7 +141,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 4F 44 33 D2")]
     public partial int GetAdditionalRecastGroup(ActionType actionType, uint actionId);
 
-    [MemberFunction("40 53 48 83 EC 20 48 63 DA 85 D2 78 50")]
+    [MemberFunction("40 53 48 83 EC 20 48 63 DA 85 D2")]
     public partial RecastDetail* GetRecastGroupDetail(int recastGroup);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 15 4C 8B C6")]
@@ -157,7 +157,7 @@ public unsafe partial struct ActionManager {
     /// </remarks>
     /// <param name="actionType">The type of action (generally, Spell) to trigger a cooldown for.</param>
     /// <param name="actionId">The ID of the action to trigger a cooldown for.</param>
-    [MemberFunction("48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 41 8B F0")]
+    [MemberFunction("48 89 6C 24 ?? 56 57 41 54 48 83 EC 30 44 8B E2")]
     public partial void StartCooldown(ActionType actionType, uint actionId);
 
     /// <summary>
@@ -218,7 +218,7 @@ public unsafe partial struct ActionManager {
     /// </summary>
     /// <param name="actionId">The Action ID to check against.</param>
     /// <returns>Returns a uint.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B C8 83 E9 01 74 1E")]
+    [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC 50 8B EA")]
     public partial uint GetCurrentCharges(uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB D6")]
