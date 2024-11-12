@@ -14,12 +14,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct RaptureGearsetModule {
     public static RaptureGearsetModule* Instance() => UIModule.Instance()->GetRaptureGearsetModule();
 
-    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray100<GearsetEntry> _entries;
+    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray100<GearsetEntry> _entries;
 
-    [FieldOffset(0xB5C8)] public int CurrentGearsetIndex;
+    [FieldOffset(0xB5D0)] public int CurrentGearsetIndex;
 
-    [FieldOffset(0xB79C), FixedSizeArray] internal FixedSizeArray100<byte> _enabledGearsetIndex2EntryIndex;
-    [FieldOffset(0xB801)] public byte NumGearsets;
+    [FieldOffset(0xB7A4), FixedSizeArray] internal FixedSizeArray100<byte> _enabledGearsetIndex2EntryIndex;
+    [FieldOffset(0xB809)] public byte NumGearsets;
 
     /// <summary>
     /// Return a pointer to a <see cref="GearsetEntry"/> by index/ID.

@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct RetainerCommentModule {
     public static RetainerCommentModule* Instance() => UIModule.Instance()->GetRetainerCommentModule();
 
-    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray10<RetainerComment> _retainers;
+    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray10<RetainerComment> _retainers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B BC 24 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 58"), GenerateStringOverloads]
     public partial void SetComment(ulong retainerId, byte* comment);

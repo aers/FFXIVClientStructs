@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct RecipeFavoriteModule {
     public static RecipeFavoriteModule* Instance() => Framework.Instance()->GetUIModule()->GetRecipeFavoriteModule();
 
-    [FieldOffset(0x42), FixedSizeArray] internal FixedSizeArray8<CraftingTypeEntry> _craftingTypes;
+    [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray8<CraftingTypeEntry> _craftingTypes;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]

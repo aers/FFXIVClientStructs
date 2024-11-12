@@ -10,7 +10,7 @@ public partial struct UserFileManager {
     // Client::UI::Misc::UserFileManager::UserFileEvent
     // ctor inlined
     [GenerateInterop(isInherited: true)]
-    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public unsafe partial struct UserFileEvent {
         [FieldOffset(0x08)] public ulong CharacterContentId;
         [FieldOffset(0x10)] public nint UserFileManager;

@@ -13,25 +13,25 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct ItemOrderModule {
     public static ItemOrderModule* Instance() => Framework.Instance()->GetUIModule()->GetItemOrderModule();
 
-    [FieldOffset(0x40)] public ItemOrderModuleSorter* InventorySorter;
-    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray12<Pointer<ItemOrderModuleSorter>> _armourySorter;
-    [FieldOffset(0x48), CExportIgnore] public ItemOrderModuleSorter* ArmouryMainHandSorter;
-    [FieldOffset(0x50), CExportIgnore] public ItemOrderModuleSorter* ArmouryHeadSorter;
-    [FieldOffset(0x58), CExportIgnore] public ItemOrderModuleSorter* ArmouryBodySorter;
-    [FieldOffset(0x60), CExportIgnore] public ItemOrderModuleSorter* ArmouryHandsSorter;
-    [FieldOffset(0x68), CExportIgnore] public ItemOrderModuleSorter* ArmouryLegsSorter;
-    [FieldOffset(0x70), CExportIgnore] public ItemOrderModuleSorter* ArmouryFeetSorter;
-    [FieldOffset(0x78), CExportIgnore] public ItemOrderModuleSorter* ArmouryOffHandSorter;
-    [FieldOffset(0x80), CExportIgnore] public ItemOrderModuleSorter* ArmouryEarsSorter;
-    [FieldOffset(0x88), CExportIgnore] public ItemOrderModuleSorter* ArmouryNeckSorter;
-    [FieldOffset(0x90), CExportIgnore] public ItemOrderModuleSorter* ArmouryWristsSorter;
-    [FieldOffset(0x98), CExportIgnore] public ItemOrderModuleSorter* ArmouryRingsSorter;
-    [FieldOffset(0xA0), CExportIgnore] public ItemOrderModuleSorter* ArmourySoulCrystalSorter;
-    [FieldOffset(0xA8)] public ItemOrderModuleSorter* ArmouryWaistSorter; // no longer used
-    [FieldOffset(0xB0)] public ulong ActiveRetainerId;
-    [FieldOffset(0xB8)] public StdMap<ulong, Pointer<ItemOrderModuleSorter>> RetainerSorter;
-    [FieldOffset(0xC8)] public ItemOrderModuleSorter* SaddleBagSorter;
-    [FieldOffset(0xD0)] public ItemOrderModuleSorter* PremiumSaddleBagSorter;
+    [FieldOffset(0x48)] public ItemOrderModuleSorter* InventorySorter;
+    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray12<Pointer<ItemOrderModuleSorter>> _armourySorter;
+    [FieldOffset(0x50), CExportIgnore] public ItemOrderModuleSorter* ArmouryMainHandSorter;
+    [FieldOffset(0x58), CExportIgnore] public ItemOrderModuleSorter* ArmouryHeadSorter;
+    [FieldOffset(0x60), CExportIgnore] public ItemOrderModuleSorter* ArmouryBodySorter;
+    [FieldOffset(0x68), CExportIgnore] public ItemOrderModuleSorter* ArmouryHandsSorter;
+    [FieldOffset(0x70), CExportIgnore] public ItemOrderModuleSorter* ArmouryLegsSorter;
+    [FieldOffset(0x78), CExportIgnore] public ItemOrderModuleSorter* ArmouryFeetSorter;
+    [FieldOffset(0x80), CExportIgnore] public ItemOrderModuleSorter* ArmouryOffHandSorter;
+    [FieldOffset(0x88), CExportIgnore] public ItemOrderModuleSorter* ArmouryEarsSorter;
+    [FieldOffset(0x90), CExportIgnore] public ItemOrderModuleSorter* ArmouryNeckSorter;
+    [FieldOffset(0x98), CExportIgnore] public ItemOrderModuleSorter* ArmouryWristsSorter;
+    [FieldOffset(0xA0), CExportIgnore] public ItemOrderModuleSorter* ArmouryRingsSorter;
+    [FieldOffset(0xA8), CExportIgnore] public ItemOrderModuleSorter* ArmourySoulCrystalSorter;
+    [FieldOffset(0xB0)] public ItemOrderModuleSorter* ArmouryWaistSorter; // no longer used
+    [FieldOffset(0xB8)] public ulong ActiveRetainerId;
+    [FieldOffset(0xC0)] public StdMap<ulong, Pointer<ItemOrderModuleSorter>> RetainerSorter;
+    [FieldOffset(0xD0)] public ItemOrderModuleSorter* SaddleBagSorter;
+    [FieldOffset(0xD8)] public ItemOrderModuleSorter* PremiumSaddleBagSorter;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]

@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 public unsafe partial struct AddonConfig {
     public static AddonConfig* Instance() => Framework.Instance()->GetUIModule()->GetAddonConfig();
 
-    [FieldOffset(0x50)] public AddonConfigData* ModuleData;
+    [FieldOffset(0x58)] public AddonConfigData* ModuleData;
 
     /// <summary>
     /// Changes the current HUD Layout to the specific value
