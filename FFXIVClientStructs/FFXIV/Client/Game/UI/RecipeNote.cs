@@ -77,9 +77,9 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x3E6)] public ushort PatchNumber;
     }
 
-    [MemberFunction("4C 8B 81 ?? ?? ?? ?? 44 8B D2 4D 85 C0")]
+    [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 2E")]
     public partial bool IsRecipeUnlocked(ushort recipeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 4E 09 8B 76 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 32 FF 44 0F B7 F0")]
     public partial ushort GetCraftTypeLevel(byte craftType);
 }

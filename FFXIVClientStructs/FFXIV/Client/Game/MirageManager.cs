@@ -29,7 +29,7 @@ public unsafe partial struct MirageManager {
     /// Returns <c>true</c> if the command was sent to the server, or <c>false</c>
     /// if the player already possess a unique item or if inventory space is insufficient.
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0F 41 B0 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 B0 01 48 8B CF")]
     public partial bool RestorePrismBoxItem(uint itemIndex);
 
     [GenerateInterop]

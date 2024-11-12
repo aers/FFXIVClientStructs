@@ -55,7 +55,7 @@ public unsafe partial struct CharaView : ICreatable {
     [VirtualFunction(3)]
     public partial void ResetPositions();
 
-    [MemberFunction("0F 10 02 0F 11 41 48")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4")]
     public partial void SetCustomizeData(CharaViewCharacterData* data);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4C 24 ?? 8B 51 04")]
@@ -76,7 +76,7 @@ public unsafe partial struct CharaView : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? FF C5 48 83 C3 1C")]
     public partial void SetItemSlotData(byte slotId, uint itemId, byte stain0Id, byte stain1Id, uint glamourItemId = 0, bool applyCompanyCrest = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 8D ?? ?? ?? ?? B0 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 8E ?? ?? ?? ?? B0 01")]
     public partial void ToggleDrawWeapon(bool drawn);
 }
 
@@ -104,7 +104,7 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
         return obj;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8D 4E 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8D 4E 30 49 8B D6")]
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 57 28 45 33 F6")]

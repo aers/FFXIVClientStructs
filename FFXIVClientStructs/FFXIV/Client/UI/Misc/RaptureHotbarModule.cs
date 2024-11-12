@@ -138,10 +138,10 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     [FieldOffset(0x288F0)] public bool DutyActionsPresent;
 
-    [MemberFunction("E9 ?? ?? ?? ?? 48 8D 91 ?? ?? ?? ?? E9")]
+    [MemberFunction("E9 ?? ?? ?? ?? 73 25")]
     public partial byte ExecuteSlot(HotbarSlot* hotbarSlot);
 
-    [MemberFunction("83 FA 12 77 28 41 83 F8 10")]
+    [MemberFunction("4C 8B C9 41 83 F8 10 73 45")]
     public partial byte ExecuteSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
@@ -171,7 +171,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <see cref="HotbarSlot.Set(HotbarSlotType, uint)"/> operations.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to refresh.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4D 40 48 8B 01 FF 50 40")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F 48 48 8B 01")]
     public partial void ReloadGearsetSlots(int gearsetId);
 
     /// <summary>
@@ -209,7 +209,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="hotbarId">The hotbar ID (0 to 17) to select.</param>
     /// <param name="slotId">The slot ID (0 to 15) to select.</param>
     /// <returns>Returns a pointer to the specified HotbarSlot.</returns>
-    [MemberFunction("83 FA 12 77 23")]
+    [MemberFunction("4C 8B C9 41 83 F8 10 73 39")]
     public partial HotbarSlot* GetSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
@@ -309,7 +309,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="slotSource">The source slot to dump to disk.</param>
     /// <param name="ignoreSharedHotbars">Unclear use, default to false. </param>
     /// <param name="isPvpSlot">If true, will save to the classJob's PvP SavedHotbars slots.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 50 48 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 57 48 8D 9F")]
     public partial void WriteSavedSlot(uint classJobId, uint hotbarId, uint slotId, HotbarSlot* slotSource,
         bool ignoreSharedHotbars, bool isPvpSlot);
 
@@ -345,7 +345,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="savedHotbarIndex">The saved hotbar index to check.</param>
     /// <returns>The EXD Row ID for the ClassJob this hotbar is intended for. If zero, this is a shared hotbar.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 23 77 7C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 23 B7")]
     public partial uint GetClassJobIdForSavedHotbarIndex(int savedHotbarIndex);
 
     /// <summary>
@@ -360,7 +360,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the slot (0 or 1) to retrieve.</param>
     /// <returns>Returns a pointer to the DutyActionSlot.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 4A 63 3C FB")]
+    [MemberFunction("85 D2 78 1A 83 FA 02")]
     public partial DutyActionSlot* GetDutyActionSlot(uint index);
 
     /// <summary>
@@ -368,7 +368,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the DutyAction slot to edit.</param>
     /// <param name="actionId">The ID of the action to set in this slot.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04")] // TODO: 7.1: was this split into two functions? @ 0x140AF45A7
     public partial void SetDutyActionSlot(uint index, uint actionId);
 
     /// <summary>
@@ -376,7 +376,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the slot to execute. If greater than 1, slot 0 is executed.</param>
     /// <returns>Returns true always (?)</returns>
-    [MemberFunction("48 83 EC 28 85 D2 78 25")]
+    [MemberFunction("48 83 EC 28 85 D2 78 25 83 FA 02")]
     public partial bool ExecuteDutyActionSlot(uint index);
 }
 

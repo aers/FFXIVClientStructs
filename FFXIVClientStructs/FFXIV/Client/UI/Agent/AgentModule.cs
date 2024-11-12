@@ -16,7 +16,7 @@ public unsafe partial struct AgentModule {
 
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray447<Pointer<AgentInterface>> _agents;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 A8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
 }
 

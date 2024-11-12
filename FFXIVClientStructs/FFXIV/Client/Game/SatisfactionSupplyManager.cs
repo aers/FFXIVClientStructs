@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x31F)]
 public unsafe partial struct SatisfactionSupplyManager {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 48 8B 9C 24 ?? ?? ?? ??", 3)]
+    [StaticAddress("8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 1E", 5)]
     public static partial SatisfactionSupplyManager* Instance();
 
     [FieldOffset(0x0)] public byte SupplySeed; // seed for pseudorandom transform that selects requested crafts for the week

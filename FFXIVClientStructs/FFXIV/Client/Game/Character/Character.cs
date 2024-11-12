@@ -83,7 +83,7 @@ public unsafe partial struct Character {
     /// target ID from the <see cref="TargetSystem"/>. Used for calculating ToT via /assist.
     /// </summary>
     /// <returns>Returns the object ID of this character's target.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? EB BA 83 FF 12")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C5 74 27")]
     public partial GameObjectId GetTargetId();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B FD 74 36")]
@@ -102,15 +102,15 @@ public unsafe partial struct Character {
 
     public bool IsMounted() => Mount.MountId != 0;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? E8 ?? ?? ?? ?? 48 8B 4C 24 ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 84 FF 75 40")]
     public partial void SetMode(CharacterModes mode, byte modeParam);
 
     /// <summary> Can only be used for Mounts, Minions, and Ornaments. Literally just checks if the game object at index - 1 is a character and returns that. </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 0F 45 F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 11 4D 8B 07")]
     public partial Character* GetParentCharacter();
 
     /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height.  </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 2F C6 76 1F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 57 DB 0F 2F C3")]
     public partial float CalculateHeight();
 
     /// <summary> Check if the character is using the World Visit system. </summary>
@@ -118,7 +118,7 @@ public unsafe partial struct Character {
     public partial bool IsWanderer();
 
     /// <summary> Check if the character is using the Data Center Travel system. </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 B1")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 8B FD")]
     public partial bool IsTraveler();
 
     /// <summary> Check if the character is using the Cross-region Data Center Travel system. </summary>

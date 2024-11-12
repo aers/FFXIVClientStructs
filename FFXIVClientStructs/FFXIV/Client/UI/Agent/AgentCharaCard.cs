@@ -16,7 +16,7 @@ public unsafe partial struct AgentCharaCard {
 
     [FieldOffset(0x28)] public Storage* Data;
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 8B 01 FF 90 ?? ?? ?? ?? 44 0F B7 8B ?? ?? ?? ??")]
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 80 79 30 00 48 8B FA 48 8B D9 75 4B")]
     private partial void OpenCharaCardForContentId(ulong contentId);
 
     public void OpenCharaCard(ulong contentId) => OpenCharaCardForContentId(contentId);

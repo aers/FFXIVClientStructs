@@ -315,7 +315,7 @@ public unsafe partial struct PlayerState {
     /// </remarks>
     /// <param name="kitId">The kit ID to check for.</param>
     /// <returns>Returns true if the framer's kit is unlocked.</returns>
-    [MemberFunction("E9 ?? ?? ?? ?? 33 FF 90")]
+    [MemberFunction("E9 ?? ?? ?? ?? 33 FF 8B 03")]
     public partial bool IsFramersKitUnlocked(uint kitId);
 
     public bool IsAetherCurrentUnlocked(uint aetherCurrentId) {
@@ -346,7 +346,7 @@ public unsafe partial struct PlayerState {
     /// Check if a Sightseeing Log vista has been discovered.
     /// </summary>
     /// <param name="adventureIndex">Index of the Adventure Row</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 90")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 AA")]
     public partial bool IsAdventureComplete(uint adventureIndex);
 
     /// <summary>

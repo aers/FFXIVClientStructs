@@ -1,0 +1,18 @@
+[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 40 53 48 83 EC 20 48 63 DA 85 D2 78 50 - no xrefs
+[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing 48 89 6C 24 ?? 56 57 41 56 48 83 EC 30 41 8B F0 - no xrefs
+[E] FFXIVClientStructs\FFXIV\Client\Game\ActionManager.cs: Missing E8 ?? ?? ?? ?? 8B C8 83 E9 01 74 1E - can't find
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 40 38 78 10
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 44 8B E8 44 3B F8 - unsure E8 ?? ?? ?? ?? 3B C3 72 11
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 8B 7B 06 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing 8B 42 08 4C 8B C9 39 41 08 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 80 78 06 00 75 F2 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 89 45 8B - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 2B C6 89 43 0C - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 66 89 47 0C - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? EB 04 0F B7 45 12 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? EB 04 49 8B 46 18 - not checking, probably vf now
+[E] FFXIVClientStructs\FFXIV\Client\Game\Character\Ornament.cs: Missing E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24 - inlined
+[E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventGPoseController.cs: Missing 48 8B 05 ?? ?? ?? ?? 4C 8B C1 48 85 C0 74 64
+[E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventSceneModuleTaskManager.cs: Missing 48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 83 EC 20 48 8B 2D - inlined in 7.0
+[E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventSceneModuleTaskManager.cs: Missing E8 ?? ?? ?? ?? 0F 28 74 24 ?? B0 01 48 8B 74 24 ?? - split into 2 functions?
+[E] FFXIVClientStructs\FFXIV\Client\UI\Misc\RaptureHotbarModule.cs: Missing E8 ?? ?? ?? ?? 80 7B 28 01 75 1C - reworked?

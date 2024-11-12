@@ -14,9 +14,9 @@ public unsafe partial struct QuestEventHandler {
 
     [FieldOffset(0x340)] public Utf8String Title;
 
-    [MemberFunction("4C 8B DC 55 57 41 54 41 55 48 81 EC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 75 D0")]
     public partial void GetTodoArgs(BattleChara* localPlayer, byte idx, uint* arg0, uint* arg1, uint* arg2);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 48 8B 46 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 88 07 45 33 D2")]
     public partial bool IsTodoChecked(BattleChara* localPlayer, byte idx);
 }

@@ -151,7 +151,7 @@ public unsafe partial struct UIState {
     /// <item><term>4</term><description>The item does not have an unlock status.</description></item>
     /// </list>
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CD 89 86 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CE 89 86")]
     public partial long IsItemActionUnlocked(void* itemExdPtr);
 
     /// <summary>
@@ -217,7 +217,7 @@ public unsafe partial struct UIState {
         return ((1 << ((ushort)chocoboTaxiStandId & 7)) & ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId / 8]) > 0;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 FF 08 74 52")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 46 02 B0 01")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 38")]

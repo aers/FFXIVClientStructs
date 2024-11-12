@@ -16,10 +16,10 @@ public unsafe partial struct AchievementListModule {
     // [FieldOffset(0x7E)] public byte Unk7E;
     [FieldOffset(0x80)] public byte WatchlistCount; // 30 max
 
-    [MemberFunction("C6 81 ?? ?? ?? ?? ?? 48 8D 41 42")]
+    [MemberFunction("C6 81 ?? ?? ?? ?? ?? 48 8D 41 4A")]
     public partial void UpdateWatchlistCount();
 
-    [MemberFunction("48 83 EC 28 33 C0 4C 8D 41 42")]
+    [MemberFunction("48 83 EC 28 33 C0 4C 8D 41 4A")]
     public partial bool AddToWatchlist(ushort achievementId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 FF FF C7")]
@@ -28,6 +28,6 @@ public unsafe partial struct AchievementListModule {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 B9 ?? ?? ?? ??")]
     public partial bool IsOnWatchlist(ushort achievementId);
 
-    [MemberFunction("33 D2 48 8D 41 42")]
+    [MemberFunction("33 D2 48 8D 41 4A")]
     public partial bool IsWatchlistFull();
 }

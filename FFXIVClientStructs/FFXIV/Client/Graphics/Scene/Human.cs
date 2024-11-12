@@ -72,7 +72,7 @@ public unsafe partial struct Human {
 
     [FieldOffset(0xC00)] public byte* ChangedEquipData;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 E4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF")]
     public partial byte SetupVisor(ushort modelId, bool visorState);
 
     // Updates the customize array and, if not skipEquipment the equip array.

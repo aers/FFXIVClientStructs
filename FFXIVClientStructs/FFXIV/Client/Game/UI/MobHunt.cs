@@ -53,7 +53,7 @@ public unsafe partial struct MobHunt {
 
     /// <param name="markIndex">Mark Bill Index 0-22</param>
     /// <returns>MobHuntOrder Primary Row Id</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 89 44 24 38 45 8B FE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 44 24 68 45 33 F6")]
     public partial int GetObtainedHuntOrderRowId(byte markIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 57 28 48 8D 0D")]
@@ -61,7 +61,7 @@ public unsafe partial struct MobHunt {
 
     /// <param name="itemId">Mark Bill ItemId</param>
     /// <returns>MaxMarkIndex Value Indicates Not Found</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D0 48 8D 0D ?? ?? ?? ?? 44 0F B6 E0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D0 48 8D 0D ?? ?? ?? ?? 44 0F B6 E8")]
     public partial int GetMarkIndexFromItemId(uint itemId);
 
     [MemberFunction("48 89 5C 24 ?? 56 48 83 EC 20 0F B6 DA 40 32 F6")]

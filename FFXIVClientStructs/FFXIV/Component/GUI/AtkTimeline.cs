@@ -17,7 +17,7 @@ public unsafe partial struct AtkTimeline {
     [FieldOffset(0x2E)] public AtkTimelineMask Mask;
     [FieldOffset(0x2F)] public AtkTimelineFlags Flags;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 4B 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 43 10")]
     public partial void PlayAnimation(AtkTimelineJumpBehavior behavior, byte labelId, float startTime = 0, float endTime = 0);
 
     [MemberFunction("40 53 48 83 EC 30 0F B7 41 2A")]

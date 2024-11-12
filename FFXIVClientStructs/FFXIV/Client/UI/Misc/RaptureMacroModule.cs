@@ -30,7 +30,7 @@ public unsafe partial struct RaptureMacroModule {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 85 C0 7E 35")]
     public partial uint GetLineCount(Macro* macro);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 FE C5")]
+    [MemberFunction("40 53 55 41 54 41 55 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4C 8B E9")]
     public partial void SetMacroLines(Macro* macro, int lineStartIndex, Utf8String* lines);
 
     /// <summary>
@@ -38,7 +38,7 @@ public unsafe partial struct RaptureMacroModule {
     /// </summary>
     /// <param name="needsSave">A boolean denoting if the specified set needs to be saved.</param>
     /// <param name="set">The macro page ID that needs saving.</param>
-    [MemberFunction("45 85 C0 75 04 88 51 3D")]
+    [MemberFunction("45 85 C0 75 04 88 51 44")]
     public partial void SetSavePendingFlag(bool needsSave, uint set);
 
     [GenerateInterop]

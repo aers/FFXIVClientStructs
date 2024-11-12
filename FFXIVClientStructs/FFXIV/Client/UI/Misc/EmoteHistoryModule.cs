@@ -19,10 +19,10 @@ public unsafe partial struct EmoteHistoryModule {
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 20 00 74 18")]
     public partial bool AddToHistory(ushort emoteId);
 
-    [MemberFunction("48 83 EC 28 48 89 5C 24 ?? 4C 8D 41 42")]
+    [MemberFunction("48 83 EC 28 48 89 5C 24 ?? 4C 8D 41 4A")]
     public partial bool RemoveFromHistory(ushort emoteId);
 
-    [MemberFunction("40 53 48 83 EC 20 45 33 C9 4C 8D 41 4E")]
+    [MemberFunction("40 53 48 83 EC 20 45 33 C9 4C 8D 41 56")]
     public partial bool AddToFavorites(ushort emoteId);
 
     [MemberFunction("48 83 EC 28 83 FA 14 72 07")]

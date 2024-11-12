@@ -42,7 +42,7 @@ public unsafe partial struct AtkStage {
     [MemberFunction("48 8B 49 ?? 45 33 C9 45 33 C0 33 D2 E9")]
     public partial void ClearFocus();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 85 C0 74 06")]
+    [MemberFunction("48 8B 41 38 48 8B 40 18")]
     public partial NumberArrayData** GetNumberArrayData();
 
     public NumberArrayData* GetNumberArrayData(NumberArrayType type)
