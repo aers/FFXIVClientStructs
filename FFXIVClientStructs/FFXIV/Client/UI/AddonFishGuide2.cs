@@ -10,5 +10,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xAB0)]
 public partial struct AddonFishGuide2 {
-    [FieldOffset(0x2A0)] public TabController TabController;
+    [FieldOffset(0x2A8)] public TabController TabController;
 }

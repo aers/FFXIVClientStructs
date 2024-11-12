@@ -10,11 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x23D8)]
 public partial struct AddonWeeklyBingo {
-    [FieldOffset(0x230)] public DutySlotList DutySlotList;
+    [FieldOffset(0x238)] public DutySlotList DutySlotList;
 
-    [FieldOffset(0x18F8)] public StringThing StringThing;
-    [FieldOffset(0x1948)] public StickerSlotList StickerSlotList;
-    [FieldOffset(0x1F30)] public uint NumStickersPlaced;
+    [FieldOffset(0x1900)] public StringThing StringThing;
+    [FieldOffset(0x1950)] public StickerSlotList StickerSlotList;
+    [FieldOffset(0x1F38)] public uint NumStickersPlaced;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x16C8)]

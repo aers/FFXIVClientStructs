@@ -10,5 +10,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3AA0)]
 public partial struct AddonGearSetList {
-    [FieldOffset(0x3A9D)] public bool ShouldResetPosition;
+    [FieldOffset(0x3AA5)] public bool ShouldResetPosition;
 }

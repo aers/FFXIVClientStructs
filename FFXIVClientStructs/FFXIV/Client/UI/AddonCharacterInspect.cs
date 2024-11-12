@@ -10,5 +10,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x510)]
 public unsafe partial struct AddonCharacterInspect {
-    [FieldOffset(0x458)] public AtkComponentBase* PreviewComponent;
+    [FieldOffset(0x460)] public AtkComponentBase* PreviewComponent;
 }

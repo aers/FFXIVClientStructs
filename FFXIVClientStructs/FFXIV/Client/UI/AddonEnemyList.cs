@@ -11,9 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x288)]
 public unsafe partial struct AddonEnemyList {
     public const byte MaxEnemyCount = 8;
-    [FieldOffset(0x230)] public AtkComponentButton** EnemyOneComponent;
+    [FieldOffset(0x238)] public AtkComponentButton** EnemyOneComponent;
 
-    [FieldOffset(0x282)] public byte EnemyCount;
-    [FieldOffset(0x283)] public byte HoveredIndex;
-    [FieldOffset(0x284)] public byte SelectedIndex;
+    [FieldOffset(0x28A)] public byte EnemyCount;
+    [FieldOffset(0x28B)] public byte HoveredIndex;
+    [FieldOffset(0x28C)] public byte SelectedIndex;
 }

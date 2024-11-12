@@ -12,22 +12,22 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4048)]
 public unsafe partial struct AddonItemSearch {
-    [FieldOffset(0x240)] public SearchMode Mode;
-    [FieldOffset(0x244)] public int SelectedFilter;
+    [FieldOffset(0x248)] public SearchMode Mode;
+    [FieldOffset(0x24C)] public int SelectedFilter;
 
-    [FieldOffset(0x248)] public Utf8String SearchText;
-    [FieldOffset(0x2B0)] public Utf8String SearchText2;
+    [FieldOffset(0x250)] public Utf8String SearchText;
+    [FieldOffset(0x2B8)] public Utf8String SearchText2;
 
-    [FieldOffset(0x4B8), FixedSizeArray] internal FixedSizeArray99<Utf8String> _filterLabels;
+    [FieldOffset(0x4C0), FixedSizeArray] internal FixedSizeArray99<Utf8String> _filterLabels;
 
-    [FieldOffset(0x2EF8)] public AtkComponentTextInput* SearchTextInput;
-    [FieldOffset(0x2F00)] public AtkComponentButton* SearchButton;
+    [FieldOffset(0x2F00)] public AtkComponentTextInput* SearchTextInput;
+    [FieldOffset(0x2F08)] public AtkComponentButton* SearchButton;
 
-    [FieldOffset(0x2F28)] public AtkComponentList* ResultsList;
+    [FieldOffset(0x2F30)] public AtkComponentList* ResultsList;
 
-    [FieldOffset(0x3378)] public AtkComponentCheckBox* PartialSearchCheckBox;
+    [FieldOffset(0x3380)] public AtkComponentCheckBox* PartialSearchCheckBox;
 
-    [FieldOffset(0x4043)] public bool PartialMatch;
+    [FieldOffset(0x404B)] public bool PartialMatch;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B DE 48 8D 7D 30")]
     public partial void RunSearch(bool ignoreFilters = false);

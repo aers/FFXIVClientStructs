@@ -10,39 +10,39 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x13F0)]
 public unsafe partial struct AddonPartyList {
-    [FieldOffset(0x230), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _partyMembers;
-    [FieldOffset(0x9F0), FixedSizeArray] internal FixedSizeArray7<PartyListMemberStruct> _trustMembers;
-    [FieldOffset(0x10B8)] public PartyListMemberStruct Chocobo;
-    [FieldOffset(0x11B0)] public PartyListMemberStruct Pet;
+    [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _partyMembers;
+    [FieldOffset(0x9F8), FixedSizeArray] internal FixedSizeArray7<PartyListMemberStruct> _trustMembers;
+    [FieldOffset(0x10C0)] public PartyListMemberStruct Chocobo;
+    [FieldOffset(0x11B8)] public PartyListMemberStruct Pet;
 
-    [FieldOffset(0x12A8), FixedSizeArray] internal FixedSizeArray8<uint> _partyClassJobIconId;
-    [FieldOffset(0x12C8), FixedSizeArray] internal FixedSizeArray7<uint> _trustClassJobIconId;
-    [FieldOffset(0x12E4)] public uint ChocoboIconId;
-    [FieldOffset(0x12E8)] public uint PetIconId;
+    [FieldOffset(0x12B0), FixedSizeArray] internal FixedSizeArray8<uint> _partyClassJobIconId;
+    [FieldOffset(0x12D0), FixedSizeArray] internal FixedSizeArray7<uint> _trustClassJobIconId;
+    [FieldOffset(0x12EC)] public uint ChocoboIconId;
+    [FieldOffset(0x12F0)] public uint PetIconId;
 
-    [FieldOffset(0x1370), FixedSizeArray] internal FixedSizeArray17<short> _edited; // 0X11 if edited? Need comfirm
+    [FieldOffset(0x1378), FixedSizeArray] internal FixedSizeArray17<short> _edited; // 0X11 if edited? Need comfirm
 
-    [FieldOffset(0x1398)] public AtkResNode* PartyListAtkResNode;
-    [FieldOffset(0x13A0)] public AtkNineGridNode* BackgroundNineGridNode;
-    [FieldOffset(0x13A8)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
-    [FieldOffset(0x13B0)] public AtkResNode* LeaderMarkResNode;
-    [FieldOffset(0x13B8)] public AtkResNode* MpBarSpecialResNode;
-    [FieldOffset(0x13C0)] public AtkTextNode* MpBarSpecialTextNode;
+    [FieldOffset(0x13A0)] public AtkResNode* PartyListAtkResNode;
+    [FieldOffset(0x13A8)] public AtkNineGridNode* BackgroundNineGridNode;
+    [FieldOffset(0x13B0)] public AtkTextNode* PartyTypeTextNode; // Solo Light/Full Party
+    [FieldOffset(0x13B8)] public AtkResNode* LeaderMarkResNode;
+    [FieldOffset(0x13C0)] public AtkResNode* MpBarSpecialResNode;
+    [FieldOffset(0x13C8)] public AtkTextNode* MpBarSpecialTextNode;
 
-    [FieldOffset(0x13C8)] public int MemberCount;
-    [FieldOffset(0x13CC)] public int TrustCount;
-    [FieldOffset(0x13D0)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
-    [FieldOffset(0x13D4)] public int HideWhenSolo;
+    [FieldOffset(0x13D0)] public int MemberCount;
+    [FieldOffset(0x13D4)] public int TrustCount;
+    [FieldOffset(0x13D8)] public int EnmityLeaderIndex; // Starts from 0 (-1 if no leader)
+    [FieldOffset(0x13DC)] public int HideWhenSolo;
 
-    [FieldOffset(0x13D8)] public int HoveredIndex;
-    [FieldOffset(0x13DC)] public int TargetedIndex;
+    [FieldOffset(0x13E0)] public int HoveredIndex;
+    [FieldOffset(0x13E4)] public int TargetedIndex;
 
-    [FieldOffset(0x13E0)] public int Unknown1410;
-    [FieldOffset(0x13E4)] public int Unknown1414;
-    [FieldOffset(0x13E8)] public byte Unknown1418;
+    [FieldOffset(0x13E8)] public int Unknown1410;
+    [FieldOffset(0x13EC)] public int Unknown1414;
+    [FieldOffset(0x13F0)] public byte Unknown1418;
 
-    [FieldOffset(0x13EA)] public byte PetCount; // or PetSummoned?
-    [FieldOffset(0x13EB)] public byte ChocoboCount; // or ChocoboSummoned?
+    [FieldOffset(0x13F2)] public byte PetCount; // or PetSummoned?
+    [FieldOffset(0x13F3)] public byte ChocoboCount; // or ChocoboSummoned?
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0xF8)]

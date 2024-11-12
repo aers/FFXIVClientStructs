@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x550)]
 public partial struct AddonOrnamentNoteBook {
-    [FieldOffset(0x2A0)] public TabController TabController;
+    [FieldOffset(0x2A8)] public TabController TabController;
 }
