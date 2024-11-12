@@ -30,10 +30,10 @@ public unsafe partial struct InfoProxyCommonList {
     [MemberFunction("3B 51 10 73 12 8B C2 48 6B D0 70")]
     public partial ulong GetContentIdForEntry(uint idx);
 
-    [MemberFunction("3B 51 10 73 0E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 39 03")]
     public partial CharacterData* GetEntry(uint idx);
 
-    [MemberFunction("E9 ?? ?? ?? ?? 3B 5F 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 76 08")]
     public partial CharacterData* GetEntryByContentId(ulong contentId, uint nameCrc32 = 0, byte a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 44 41 8D 46 EF"), GenerateStringOverloads]

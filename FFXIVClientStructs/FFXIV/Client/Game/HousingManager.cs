@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 public unsafe partial struct HousingManager {
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 94")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 7E 5A")]
     public static partial HousingManager* Instance();
 
     [FieldOffset(0x00)] public HousingTerritory* CurrentTerritory;
@@ -13,11 +13,11 @@ public unsafe partial struct HousingManager {
     [FieldOffset(0x10)] public IndoorTerritory* IndoorTerritory;
     [FieldOffset(0x18)] public WorkshopTerritory* WorkshopTerritory;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 BC ?? ?? ?? ?? 48 8D 4D A0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 48 8D 4C 24")]
     private partial byte GetInvertedBrightness();
     public byte GetBrightness() => (byte)(5 - GetInvertedBrightness());
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B ED")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B F5")]
     public partial bool HasHousePermissions();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B D6")]

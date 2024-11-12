@@ -20,7 +20,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     [MemberFunction("E8 ?? ?? ?? ?? F6 D8 1A C0")]
     public static partial bool IsCrossRealmParty();
 
-    [MemberFunction("48 83 EC 28 80 3D ?? ?? ?? ?? ?? 75 2F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 5C 24 ?? 84 C0")]
     public static partial bool IsAllianceRaid();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 8B CB")]

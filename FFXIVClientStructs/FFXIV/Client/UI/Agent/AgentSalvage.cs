@@ -37,10 +37,10 @@ public unsafe partial struct AgentSalvage {
     [FieldOffset(0x40C)] public uint DesynthItemId;
     [FieldOffset(0x410), FixedSizeArray] internal FixedSizeArray3<SalvageResult> _desynthResults;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 55 F0 C7 87 ?? ?? ?? ?? ?? ?? ?? ??")]
-    public partial void ItemListRefresh();
+    [MemberFunction("E8 ?? ?? ?? ?? EB 2A 48 8B 06")]
+    public partial void ItemListRefresh(); // TODO: missing bool parameter
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 81 BD ?? ?? ?? ?? ?? ?? ?? ?? 7D 1A")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 81 BF ?? ?? ?? ?? ?? ?? ?? ?? 7D 1B")]
     public partial void ItemListAdd(bool meetsLevelRequirement, InventoryType containerId, int containerSlot, uint itemId, void* exdRow, uint quantity);
 
     public enum SalvageItemCategory {
