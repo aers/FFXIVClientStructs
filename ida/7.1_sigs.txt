@@ -26,41 +26,10 @@
 [E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? 66 89 47 0C
 [E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? EB 04 0F B7 45 12
 [E] FFXIVClientStructs\FFXIV\Client\Game\InventoryManager.cs: Missing E8 ?? ?? ?? ?? EB 04 49 8B 46 18
-[E] FFXIVClientStructs\FFXIV\Client\Game\Character\CharacterManager.cs: Missing E8 ?? ?? ?? ?? 48 3B F0 74 31
-[E] FFXIVClientStructs\FFXIV\Client\Game\Character\DrawDataContainer.cs: Missing E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB
-[E] FFXIVClientStructs\FFXIV\Client\Game\Character\Ornament.cs: Missing E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24
+[E] FFXIVClientStructs\FFXIV\Client\Game\Character\Ornament.cs: Missing E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24 - inlined
 [E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventGPoseController.cs: Missing 48 8B 05 ?? ?? ?? ?? 4C 8B C1 48 85 C0 74 64
 [E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventSceneModuleTaskManager.cs: Missing 48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 83 EC 20 48 8B 2D
 [E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventSceneModuleTaskManager.cs: Missing E8 ?? ?? ?? ?? 0F 28 74 24 ?? B0 01 48 8B 74 24 ??
-[E] FFXIVClientStructs\FFXIV\Client\Game\UI\InstanceContent.cs: Missing 45 32 FF 48 8D 0D ?? ?? ?? ?? F3 0F 7F 44 24 ??
-[E] FFXIVClientStructs\FFXIV\Client\Game\UI\PlayerState.cs: Missing 48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 83 EC 50 48 8B 81
-[E] FFXIVClientStructs\FFXIV\Client\Game\UI\UIState.cs: Missing E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0
-[W] FFXIVClientStructs\FFXIV\Client\Game\UI\UIState.cs: Multiple matches for 42 0F B6 04 30 44 84 C0
-[E] FFXIVClientStructs\FFXIV\Client\Game\UI\UIState.cs: Missing E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0
-[E] FFXIVClientStructs\FFXIV\Client\System\String\Utf8String.cs: Missing E8 ?? ?? ?? ?? 44 2B F7
-[E] FFXIVClientStructs\FFXIV\Client\System\String\Utf8String.cs: Missing E8 ?? ?? ?? ?? EB 30 40 84 F6
-[E] FFXIVClientStructs\FFXIV\Client\System\String\Utf8String.cs: Missing 44 88 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 53 41 54
-[W] FFXIVClientStructs\FFXIV\Client\System\String\Utf8String.cs: Multiple matches for E8 ?? ?? ?? ?? 40 80 FF 03
-[W] FFXIVClientStructs\FFXIV\Client\UI\AddonFateProgress.cs: Multiple matches for 83 FA 02 0F 87 ?? ?? ?? ?? 48 89 5C 24 ??
-[E] FFXIVClientStructs\FFXIV\Client\UI\RaptureAtkModule.cs: Missing 48 83 EC 38 4C 8B C2 C7 44 24
-[E] FFXIVClientStructs\FFXIV\Client\UI\RaptureAtkModule.cs: Missing E8 ?? ?? ?? ?? 48 89 9E ?? ?? ?? ?? 48 89 5E 58
-[W] FFXIVClientStructs\FFXIV\Client\UI\RaptureAtkModule.cs: Multiple matches for E8 ?? ?? ?? ?? 48 8D 57 4C
-[E] FFXIVClientStructs\FFXIV\Client\UI\UIGlobals.cs: Missing E8 ?? ?? ?? ?? 84 C0 74 B4 4C 8B CB
-[E] FFXIVClientStructs\FFXIV\Client\UI\UIGlobals.cs: Missing E8 ?? ?? ?? ?? 48 63 45 80
-[E] FFXIVClientStructs\FFXIV\Client\UI\UIModule.cs: Missing 48 8D 0D ?? ?? ?? ?? 49 89 46 10
-[E] FFXIVClientStructs\FFXIV\Client\UI\UIModule.cs: Missing E8 ?? ?? ?? ?? 48 63 45 80
-[E] FFXIVClientStructs\FFXIV\Client\UI\UIModule.cs: Missing E8 ?? ?? ?? ?? 84 C0 74 B4 4C 8B CB
-[E] FFXIVClientStructs\FFXIV\Client\UI\UIModule.cs: Missing 48 89 5C 24 ?? 57 48 83 EC 20 48 8B FA 48 8B D9 45 84 C9
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentArchiveItem.cs: Missing E8 ?? ?? ?? ?? 48 8B 9C 24 ?? ?? ?? ?? C7 06 ?? ?? ?? ?? 48 8B C6 C6 46 08 01 48 8B 4C 24 ??
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentBannerEditor.cs: Missing 48 89 5C 24 ?? 57 48 83 EC 30 48 83 3D ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 84
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentBannerInterface.cs: Missing 48 89 5C 24 ?? 57 48 83 EC 20 83 B9 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 01 48 8B F9
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentCharaCard.cs: Missing E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 10 48 8B 01 FF 90 ?? ?? ?? ?? 44 0F B7 8B ?? ?? ?? ??
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentCharaCard.cs: Missing E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 48 89 73 ?? E8
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentChatLog.cs: Missing E8 ?? ?? ?? ?? EB ?? 89 77
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentDeepDungeonInspect.cs: Missing 48 89 5C 24 08 57 48 83 EC 20 48 83 79 28 00 8B FA 48 8B D9 ?? ?? ?? ?? ?? ?? ?? 4C 8B C0 45 33 C9 33 D2 B9 60 01
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentDetail.cs: Missing E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 41 BE ?? ?? ?? ??
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentGatheringNote.cs: Missing E8 ?? ?? ?? ?? EB 63 48 83 F8
-[E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentInventoryContext.cs: Missing E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 ?? 0F B7 48
 [E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Missing E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D5
 [E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Missing E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 48 8B 8C 24
 [E] FFXIVClientStructs\FFXIV\Client\UI\Agent\AgentLobby.cs: Missing E8 ?? ?? ?? ?? C6 87 ?? ?? ?? ?? ?? 66 C7 87 ?? ?? ?? ?? ?? ??

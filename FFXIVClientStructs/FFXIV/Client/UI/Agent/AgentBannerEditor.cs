@@ -16,7 +16,7 @@ public unsafe partial struct AgentBannerEditor {
     /// <param name="enabledGearsetIndex">
     /// The index of the gearset in a filtered <see cref="RaptureGearsetModule.Entries"/> list of only enabled gearsets.
     /// </param>
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 48 83 3D ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 84")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 32 FF EB 1A")]
     public partial void OpenForGearset(int enabledGearsetIndex);
 }
 

@@ -14,6 +14,7 @@ public unsafe partial struct Ornament {
     [FieldOffset(0x2280)] public uint OrnamentId;
     [FieldOffset(0x2284)] public byte AttachmentPoint;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24")]
-    public partial void SetupOrnament(uint* unk1, float* unk2);
+    // Inlined in E8 ?? ?? ?? ?? F3 0F 10 4D ?? 0F 57 D2 with 7.1
+    // [MemberFunction("E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24")]
+    // public partial void SetupOrnament(uint* unk1, float* unk2);
 }

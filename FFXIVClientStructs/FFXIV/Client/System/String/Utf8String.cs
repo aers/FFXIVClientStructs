@@ -6,7 +6,7 @@ using FFXIVClientStructs.STD.Helper;
 namespace FFXIVClientStructs.FFXIV.Client.System.String;
 
 // Client::System::String::Utf8String
-// ctor "E8 ?? ?? ?? ?? 44 2B F7"
+// ctor "E8 ?? ?? ?? ?? 48 03 1F"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {
@@ -102,13 +102,13 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? B2 E8")]
     public static partial int ToInteger(Utf8String* value, int fromBase = 0); // base 0 = detect format (0x hex, 0b bin, 0o oct)
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 2B F7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 03 1F")]
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 6E ?? ?? 75 08")]
     public partial void Dtor();
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 30 40 84 F6"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 39 2E"), GenerateStringOverloads]
     public partial void SetString(byte* cStr);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 87 ?? ?? ?? ?? 48 83 EE 80")]
@@ -143,7 +143,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? B9 ?? ?? ?? ?? 45 84 ED")]
     public partial int IndexOf(Utf8String* toFind, int startIdx = 0);
 
-    [MemberFunction("44 88 4C 24 ?? 48 89 54 24 ?? 48 89 4C 24 ?? 53 41 54")]
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 17 45 33 ED 41 BA")]
     public partial int FindFirstOf(Utf8String* charsToFind, int startIdx, bool exclude = false);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 48 8B F9 45 0F B6 E9")]
@@ -157,7 +157,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
 
     public byte GetCharAt(int idx) => idx < 0 ? byte.MinValue : GetCharAt((ulong)idx);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 40 80 FF 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 80 FF 03 73 18")]
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6B 20"), GenerateStringOverloads]

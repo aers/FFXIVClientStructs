@@ -104,7 +104,7 @@ public unsafe partial struct DrawDataContainer {
     }
 }
 
-// ctor: "E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB"
+// ctor E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct DrawObjectData {
     public const int Size = 0x70;

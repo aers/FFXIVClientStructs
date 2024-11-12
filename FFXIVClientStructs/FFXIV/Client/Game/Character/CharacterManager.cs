@@ -25,6 +25,6 @@ public unsafe partial struct CharacterManager {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 20 48 89 44 24")]
     public partial BattleChara* LookupBuddyByOwnerObject(BattleChara* owner);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 3B F0 74 31")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 41 83 FF 1C")]
     public partial BattleChara* LookupPetByOwnerObject(BattleChara* owner);
 }
