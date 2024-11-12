@@ -24,7 +24,7 @@ public unsafe partial struct RetainerManager {
     /// <summary>
     /// Counts the number of Retainers that have an assigned ID.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 8B E8 E8 ?? ?? ?? FF 8B")]
+    [MemberFunction("48 83 39 00 4C 8B C9")]
     public partial byte GetRetainerCount();
 
     /// <summary>

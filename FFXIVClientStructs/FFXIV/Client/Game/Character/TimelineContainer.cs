@@ -61,6 +61,6 @@ public unsafe partial struct TimelineContainer {
     [MemberFunction("0F B7 C2 4C 8B C9 3D 72 02 00 00")]
     public partial void SetLipsOverrideTimeline(ushort actionTimelineId);
 
-    [MemberFunction("40 53 48 83 EC 30 48 8B D9 0F 29 74 24 20 48 8B 49 08 E8 ?? ?? ?? ?? 0F 28 F0 0F 57 C9 0F 2F F1 0F 86 ?? ?? ?? ?? 48 8B 4B 08 48 8B 01 FF 50 10 83 F8 08 75 60 48 8B 4B 08 48 89 7C 24 40 E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 45 66 83 B8 98 06 00 00 00 74 3B 48 8D 88 10 02 00 00 E8 ?? ?? ?? ?? 84 C0 74 2B 0F B7 8F 98 06 00 00 E8 ?? ?? ?? ?? 48 85 C0 74 1A 0F B6 40 4C 66 0F 6E C0 0F 5B C0 F3 0F 59 C6 0F 28 F0 F3 0F 5E 35 ?? ?? ?? ?? 48 8B 7C 24 40 F6 83 42 03 00 00 02")]
+    [MemberFunction("40 53 48 83 EC 30 48 8B D9 0F 29 74 24 ?? 48 8B 49 08 E8 ?? ?? ?? ?? 0F 28 F0 0F 57 C9 0F 2F F1 0F 86 ?? ?? ?? ?? 48 8B 4B 08 48 8B 01 FF 50 10 83 F8 08 75 60 48 8B 4B 08 48 89 7C 24 ?? E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 45 66 83 B8 ?? ?? ?? ?? ?? 74 3B 48 8D 88 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 2B 0F B7 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 1A 0F B6 40 50 66 0F 6E C0 0F 5B C0 F3 0F 59 C6 0F 28 F0 F3 0F 5E 35 ?? ?? ?? ?? 48 8B 7C 24 ?? F6 83")]
     public partial bool CalculateAndApplyOverallSpeed(); // Calculates the current overall speed and applies it, returns true if the speed changed
 }

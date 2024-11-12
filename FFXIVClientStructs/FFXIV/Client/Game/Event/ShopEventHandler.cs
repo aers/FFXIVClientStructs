@@ -124,6 +124,6 @@ public unsafe partial struct ShopEventHandler {
     /// Note: BuyItemIndex field must be set before calling this function!
     /// </summary>
     /// <param name="count">Number of items to buy.</param>
-    [MemberFunction("48 83 EC 38 80 B9 ?? ?? ?? ?? ?? C7 44 24")]
+    [MemberFunction("48 83 EC 48 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 80 B9)]
     public partial void ExecuteBuy(int count);
 }

@@ -14,7 +14,7 @@ public unsafe partial struct Telepo {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 84 C0 48 8B 01 74 2C")]
     public partial bool Teleport(uint aetheryteId, byte subIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 89 47 68")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 46 68 4C 8B E0")]
     public partial StdVector<TeleportInfo>* UpdateAetheryteList();
 
     /// Territories have aetherstream coordinates X and Y, an associated ExpansionValue and an associated Plane in TerritoryTypeTelepo.

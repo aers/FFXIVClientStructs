@@ -22,9 +22,9 @@ public unsafe partial struct CharacterManager {
     [GenerateStringOverloads]
     public partial BattleChara* LookupBattleCharaByName(byte* name, bool onlyPlayers = false, short world = -1);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 E9 ?? ?? ?? ?? 83 FA 40")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 20 48 89 44 24")]
     public partial BattleChara* LookupBuddyByOwnerObject(BattleChara* owner);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 EB ?? 83 FA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 3B F0 74 31")]
     public partial BattleChara* LookupPetByOwnerObject(BattleChara* owner);
 }

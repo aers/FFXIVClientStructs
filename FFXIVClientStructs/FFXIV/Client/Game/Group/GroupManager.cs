@@ -56,7 +56,7 @@ public unsafe partial struct GroupManager {
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 4C 8B 07")]
         public partial PartyMember* GetPartyMemberByContentId(ulong contentId);
 
-        [MemberFunction("E8 ?? ?? ?? ?? 83 FF 32")]
+        [MemberFunction("E8 ?? ?? ?? ?? 83 FF 68")]
         public partial PartyMember* GetPartyMemberByEntityId(uint entityId);
     }
 }

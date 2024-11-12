@@ -43,7 +43,7 @@ public unsafe partial struct GameMain {
     [MemberFunction("E8 ?? ?? ?? ?? 88 45 F1")]
     public static partial bool IsInPvPArea();
 
-    [MemberFunction("40 53 48 83 EC 20 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 1E")]
+    [MemberFunction("40 53 48 83 EC 20 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 1E 48 8D 0D")]
     public static partial bool IsInPvPInstance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10")]

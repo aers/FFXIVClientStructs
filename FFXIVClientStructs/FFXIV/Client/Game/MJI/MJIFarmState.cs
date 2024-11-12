@@ -59,7 +59,7 @@ public unsafe partial struct MJIFarmState {
     /// </summary>
     /// <param name="allowOvercap">If this is false, does not perform the collection if any materials would overcap.</param>
     /// <returns>False if allowOvercap is false and overcap would happen, true otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? C7 03 ?? ?? ?? ?? 84 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? C7 03 ?? ?? ?? ?? 84 C0 74 1A")]
     public partial bool CollectAll(bool allowOvercap);
 }
 
