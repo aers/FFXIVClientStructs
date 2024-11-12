@@ -1255,31 +1255,52 @@ classes:
 #fail       0x140ACE1C0: GetSpecialItemId #static
 #fail       0x1408814E0: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::InventoryItem:
+    vtbls:
+       - ea: 0x141F7CEC8
+    vfuncs:
+      0: dtor
+      1: Copy
+      2: EqualTo
+      3: IsNotLinked
+      4: Clear
+      5: GetBaseItemId
+      6: GetItemId
+      7: SetItemId
+      8: GetInventoryType
+      9: SetInventoryType
+      10: GetSlot
+      11: SetSlot
+      12: GetSize
+      13: SetSize
+      14: GetSpiritbondOrQuantity
+      15: SetSpiritbondOrQuantity
+      16: GetFlags
+      17: SetFlags
+      18: IsHighQuality
+      19: SetIsHighQuality
+      20: IsHighQuality2
+      21: SetIsHighQuality2
     funcs:
-#fail       0x1401D70B0: GetItemId
       0x140194720: GetCondition
-#fail       0x1401D71C0: GetGlamourId
-#fail       0x1401D7200: GetSpiritbond
-#fail       0x140864640: GetStain
-#fail       0x1403D1F70: GetSpiritbond2
-#fail       0x1403D1FC0: GetMateriaId
-#fail       0x140824040: GetMateriaGrade
-#fail       0x140863D00: ctor
-#fail       0x140863D50: Copy
-#fail       0x140863EE0: EqualTo
-#fail       0x140863FA0: Clear
-#fail       0x140863FE0: SetItemId
-#fail       0x140864150: GetLinkedItem
-#fail       0x1408644E0: GetQuantity
-#fail       0x140864580: SetQuantity
-#fail       0x1408645B0: GetSpiritbond3
-#fail       0x140864600: GetConditionPercentage
-#fail       0x140CA8A70: GetMateriaCount
+      0x1401947A0: GetGlamourId
+      0x140390B50: GetMateriaId
+      0x1407BE9D0: GetMateriaGrade
+      0x1407FE4E0: ctor
+      0x1407FE8A0: GetLinkedItem
+      0x1407FEDC0: GetConditionPercentage
+      0x1407FEE00: GetStain
+      0x1407FEED0: GetMateriaCount
+      0x14082B5C0: GetCrafterContentId
 #fail       0x140887E30: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
-#fail       0x140895790: GetCrafterContentId
   Client::Game::InventoryContainer:
-    funcs:
-#fail       0x140865060: GetInventorySlot  # (this, slotIndex)
+    vtbls:
+       - ea: 0x141F7CF78
+    vfuncs:
+      0: dtor
+      1: SetInventoryType
+      2: Clear
+      4: GetSize
+      5: GetInventorySlot
   Client::Game::MonsterNoteManager:
     instances:
 #fail       - ea: 0x142766E20
