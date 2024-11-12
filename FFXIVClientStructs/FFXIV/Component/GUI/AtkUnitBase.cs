@@ -18,8 +18,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
     [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
     [FieldOffset(0xF0)] public AtkResNode* CursorTarget; // Likely always AtkCollisionNode
-    [FieldOffset(0x110)] public AtkComponentNode* CurrentDropDownOwnerNode;
-    [FieldOffset(0x118)] public AtkComponentNode* WindowNode;
+    [FieldOffset(0x118)] public AtkComponentNode* CurrentDropDownOwnerNode;
+    [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
     [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
     [FieldOffset(0x180)] public StdVector<Pointer<byte>> CachedAtkValueStrings; // set here: "48 8D 54 24 ?? E8 ?? ?? ?? ?? 48 83 C4 20 41 5E"
