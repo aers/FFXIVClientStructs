@@ -13,6 +13,6 @@ public unsafe partial struct EventSceneModuleTaskManager {
     [MemberFunction("E8 ?? ?? ?? ?? EB 2E 48 85 C0")]
     public partial void AddTask(EventSceneTaskInterface* task);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? B0 01 48 8B 74 24 ??")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 54 24 ?? 57 48 83 EC 20 48 8B 02")]
     public partial void AddGroupPoseTask(EventSceneTaskInterface* task);
 }

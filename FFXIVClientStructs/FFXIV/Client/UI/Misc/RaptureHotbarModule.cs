@@ -352,7 +352,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// Sets the value of <see cref="DutyActionsPresent"/>.
     /// </summary>
     /// <param name="present">Whether to show/enable duty actions or not.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 80 7B 28 01 75 1C")]
+    [MemberFunction("E9 ?? ?? ?? ?? FF D2 48 8B C8 33 D2")]
     public partial void SetDutyActionsPresent(bool present);
 
     /// <summary>
