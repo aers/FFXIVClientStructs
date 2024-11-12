@@ -12,10 +12,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x350)]
 public unsafe partial struct AddonJobHudACN0 {
-    [FieldOffset(0x270)] public AetherflowACNGaugeData DataPrevious;
-    [FieldOffset(0x280)] public AetherflowACNGaugeData DataCurrent;
-    [FieldOffset(0x290)] public AetherflowACNGauge GaugeStandard;
-    [FieldOffset(0x2F0)] public AetherflowACNGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public AetherflowACNGaugeData DataPrevious;
+    [FieldOffset(0x288)] public AetherflowACNGaugeData DataCurrent;
+    [FieldOffset(0x298)] public AetherflowACNGauge GaugeStandard;
+    [FieldOffset(0x2F8)] public AetherflowACNGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -65,10 +65,10 @@ public unsafe partial struct AddonJobHudACN0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x398)]
 public unsafe partial struct AddonJobHudSCH0 {
-    [FieldOffset(0x270)] public FaerieGaugeData DataPrevious;
-    [FieldOffset(0x290)] public FaerieGaugeData DataCurrent;
-    [FieldOffset(0x2B0)] public FaerieGauge GaugeStandard;
-    [FieldOffset(0x340)] public FaerieGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public FaerieGaugeData DataPrevious;
+    [FieldOffset(0x298)] public FaerieGaugeData DataCurrent;
+    [FieldOffset(0x2B8)] public FaerieGauge GaugeStandard;
+    [FieldOffset(0x348)] public FaerieGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -130,10 +130,10 @@ public unsafe partial struct AddonJobHudSCH0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x300)]
 public unsafe partial struct AddonJobHudSMN0 {
-    [FieldOffset(0x270)] public AetherflowSMNGaugeData DataPrevious;
-    [FieldOffset(0x280)] public AetherflowSMNGaugeData DataCurrent;
-    [FieldOffset(0x290)] public AetherflowSMNGauge GaugeStandard;
-    [FieldOffset(0x2C8)] public AetherflowSMNGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public AetherflowSMNGaugeData DataPrevious;
+    [FieldOffset(0x288)] public AetherflowSMNGaugeData DataCurrent;
+    [FieldOffset(0x298)] public AetherflowSMNGauge GaugeStandard;
+    [FieldOffset(0x2D0)] public AetherflowSMNGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -178,10 +178,10 @@ public unsafe partial struct AddonJobHudSMN0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x508)]
 public unsafe partial struct AddonJobHudSMN1 {
-    [FieldOffset(0x270)] public TranceGaugeData DataPrevious;
-    [FieldOffset(0x2A8)] public TranceGaugeData DataCurrent;
-    [FieldOffset(0x2E0)] public TranceGauge GaugeStandard;
-    [FieldOffset(0x430)] public TranceGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public TranceGaugeData DataPrevious;
+    [FieldOffset(0x2B0)] public TranceGaugeData DataCurrent;
+    [FieldOffset(0x2E8)] public TranceGauge GaugeStandard;
+    [FieldOffset(0x438)] public TranceGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]

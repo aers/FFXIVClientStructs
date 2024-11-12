@@ -11,10 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x408)]
 public unsafe partial struct AddonJobHudRRP0 {
-    [FieldOffset(0x270)] public SoulGaugeData DataPrevious;
-    [FieldOffset(0x298)] public SoulGaugeData DataCurrent;
-    [FieldOffset(0x2C0)] public SoulGauge GaugeStandard;
-    [FieldOffset(0x3B8)] public SoulGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public SoulGaugeData DataPrevious;
+    [FieldOffset(0x2A0)] public SoulGaugeData DataCurrent;
+    [FieldOffset(0x2C8)] public SoulGauge GaugeStandard;
+    [FieldOffset(0x3C0)] public SoulGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
@@ -75,10 +75,10 @@ public unsafe partial struct AddonJobHudRRP0 {
 [Inherits<AddonJobHud>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 public unsafe partial struct AddonJobHudRRP1 {
-    [FieldOffset(0x270)] public DeathGaugeData DataPrevious;
-    [FieldOffset(0x290)] public DeathGaugeData DataCurrent;
-    [FieldOffset(0x2B0)] public DeathGauge GaugeStandard;
-    [FieldOffset(0x3C8)] public DeathGaugeSimple GaugeSimple;
+    [FieldOffset(0x278)] public DeathGaugeData DataPrevious;
+    [FieldOffset(0x298)] public DeathGaugeData DataCurrent;
+    [FieldOffset(0x2B8)] public DeathGauge GaugeStandard;
+    [FieldOffset(0x3D0)] public DeathGaugeSimple GaugeSimple;
 
     [GenerateInterop]
     [Inherits<AddonJobHudGaugeData>]
