@@ -24,7 +24,7 @@ public unsafe partial struct AtkTooltipManager {
         [FieldOffset(0x14)] public short Unk_14;
         [FieldOffset(0x16)] public byte Unk_16;
 
-        [MemberFunction("E8 ?? ?? ?? ?? 6B 87")]
+        [MemberFunction("E8 ?? ?? ?? ?? C1 FB 04")]
         public partial void Ctor();
     }
 
@@ -42,7 +42,7 @@ public unsafe partial struct AtkTooltipManager {
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 F6")]
     public partial void AttachTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 39 75 CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 75 DF")]
     public partial void DetachTooltip(AtkResNode* targetNode);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 45 8D 44 24")]

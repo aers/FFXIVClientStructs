@@ -58,7 +58,7 @@ public unsafe partial struct ConfigEntry {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 5E 73")]
     public partial bool SetValueUInt(uint value, uint unk = 1);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? 33 DB 38 9F")]
+    [MemberFunction("48 83 EC 28 0F 2F 49 04")]
     public partial bool SetValueFloat(float value);
 
     // This will destroy the Utf8String

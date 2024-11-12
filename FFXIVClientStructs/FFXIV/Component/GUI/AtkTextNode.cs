@@ -8,13 +8,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkTextNode
 //   Component::GUI::AtkResNode
 //     Component::GUI::AtkEventTarget
-// common CreateAtkNode function "E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13"
+// common CreateAtkNode function "E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 17"
 // type 3
 // simple text node
 [GenerateInterop]
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
-[VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 13", [1, 144])]
+[VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 17", [1, 144])]
 public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xB0)] public uint TextId;
     [FieldOffset(0xB4)] public ByteColor TextColor;

@@ -85,7 +85,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 0C BF 03 C9")]
     public partial AtkCounterNode* GetAsAtkCounterNode();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 1C 76")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 6B CE 68")]
     public partial AtkCollisionNode* GetAsAtkCollisionNode();
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8D 4F 30")]
@@ -124,7 +124,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]
     public partial void AddEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam, bool isGlobalEvent);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 40 38 75 67")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 38 7D 67")]
     public partial void RemoveEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isGlobalEvent);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 5C 24 2C")]
@@ -193,7 +193,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 0F BF C6")]
     public partial void SetWidth(ushort width);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5D 87")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 55 AF")]
     public partial void SetHeight(ushort height);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 7F")]

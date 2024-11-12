@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkComponentList
 //   Component::GUI::AtkComponentBase
 //     Component::GUI::AtkEventListener
-// common CreateAtkComponent function "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 0F"
+// common CreateAtkComponent function "E8 ?? ?? ?? ?? 4C 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 4D 08"
 // type 1
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkComponentBase>]
@@ -61,7 +61,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     public partial void SetItemLabel(int index, byte* text);
 
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 97 ?? ?? ?? ?? 89 5C 24 28")]
+    [MemberFunction("3B 91 ?? ?? ?? ?? 7C 03 33 C0 C3 4C 8B 81")]
     public partial byte* GetItemLabel(int index);
 
     [MemberFunction("83 FA FF 0F 8E ?? ?? ?? ?? 53")]

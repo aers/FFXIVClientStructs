@@ -132,7 +132,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </summary>
     public bool IsReady => (Flags199 & 0x01) != 0;
 
-    [MemberFunction("33 D2 C7 81 A4 01 00 00 64 00 00 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 9F")]
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 40 F6 C5 01")]
@@ -162,7 +162,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 16")]
     public partial AtkImageNode* GetImageNodeById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 1B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36")]
     public partial AtkComponentButton* GetButtonNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 46 48")]

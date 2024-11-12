@@ -28,7 +28,7 @@ public unsafe partial struct StringArrayData {
     /// <param name="suppressUpdates">
     /// If <c>false</c> and the value was changed, <see cref="UpdateState"/> will be set to <c>1</c> to request an update on subscribed addons.
     /// </param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 63 45 2C"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 38 63 0E"), GenerateStringOverloads]
     public partial void SetValue(int index, byte* value, bool readBeforeWrite = true, bool managed = true, bool suppressUpdates = false);
 
     /// <summary>

@@ -190,7 +190,7 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         public bool IsEmpty => CommandId == 0;
 
-        [MemberFunction("E8 ?? ?? ?? ?? 48 39 7E 08")]
+        [MemberFunction("E8 ?? ?? ?? ?? EB 07 44 88 2F")]
         public partial void Set(UIModule* uiModule, HotbarSlotType type, uint id);
 
         /// <summary>

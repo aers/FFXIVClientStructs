@@ -1,6 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-// ctor inlined "E8 ?? ?? ?? ?? 48 8B CD E8 ?? ?? ?? ?? 48 8B CF"
+// ctor inlined "E8 ?? ?? ?? ?? B0 01 89 9F"
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe struct AtkTimelineManager {
     [FieldOffset(0x00)] public AtkTimelineResource* Resources;
