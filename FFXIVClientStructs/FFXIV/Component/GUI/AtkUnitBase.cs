@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // base class for all AddonXXX classes (visible UI objects)
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventListener>]
-[StructLayout(LayoutKind.Explicit, Size = 0x230)]
+[StructLayout(LayoutKind.Explicit, Size = 0x238)]
 [VirtualTable("48 89 51 28 48 8D 05 ?? ?? ?? ?? 48 89 01", 7)]
 public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
@@ -18,11 +18,11 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
     [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
     [FieldOffset(0xF0)] public AtkResNode* CursorTarget; // Likely always AtkCollisionNode
-    [FieldOffset(0x110)] public AtkComponentNode* CurrentDropDownOwnerNode;
-    [FieldOffset(0x118)] public AtkComponentNode* WindowNode;
-    [FieldOffset(0x120)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
-    [FieldOffset(0x170)] public AtkValue* AtkValues;
-    [FieldOffset(0x178)] public StdVector<Pointer<byte>> CachedAtkValueStrings; // set here: "48 8D 54 24 ?? E8 ?? ?? ?? ?? 48 83 C4 20 41 5E"
+    [FieldOffset(0x118)] public AtkComponentNode* CurrentDropDownOwnerNode;
+    [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
+    [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
+    [FieldOffset(0x178)] public AtkValue* AtkValues;
+    [FieldOffset(0x180)] public StdVector<Pointer<byte>> CachedAtkValueStrings; // set here: "48 8D 54 24 ?? E8 ?? ?? ?? ?? 48 83 C4 20 41 5E"
 
     /// <summary>
     /// <code>
@@ -51,38 +51,38 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     ///     2 = UldManager finished loading the uld
     /// </code>
     /// </summary>
-    [FieldOffset(0x190)] public uint Flags190;
+    [FieldOffset(0x198)] public uint Flags198;
 
     /// <summary>
     /// <code>
     /// 0b1000_0000 = Disable auto-focus (not adding it to Focused Units list)
     /// </code>
     /// </summary>
-    [FieldOffset(0x198)] public byte Flags198;
+    [FieldOffset(0x1A0)] public byte Flags1A0;
 
     /// <summary>
     /// <code>
     /// 0b0000_0001 = OnSetup was called (= IsReady)
     /// </code>
     /// </summary>
-    [FieldOffset(0x199)] public byte Flags199;
-    [FieldOffset(0x19A)] public byte Flags19A;
+    [FieldOffset(0x1A1)] public byte Flags1A1;
+    [FieldOffset(0x192)] public byte Flags192;
 
     /// <summary>
     /// <code>
     /// 0b0100_0000 = Don't show on open
     /// </code>
     /// </summary>
-    [FieldOffset(0x19D)] public byte Flags19D;
+    [FieldOffset(0x1A5)] public byte Flags1A5;
 
-    [FieldOffset(0x1A4)] public uint OpenTransitionDuration;
-    [FieldOffset(0x1A8)] public uint CloseTransitionDuration;
+    [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
+    [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
 
-    [FieldOffset(0x1B1)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
+    [FieldOffset(0x1B9)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
 
-    [FieldOffset(0x1B4)] public float OpenTransitionScale;
-    [FieldOffset(0x1B8)] public float CloseTransitionScale;
-    [FieldOffset(0x1BC)] public float Scale;
+    [FieldOffset(0x1BC)] public float OpenTransitionScale;
+    [FieldOffset(0x1C0)] public float CloseTransitionScale;
+    [FieldOffset(0x1C4)] public float Scale;
 
     /// <summary>
     /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>
@@ -95,42 +95,42 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// 4 = sound/system/SE_10thMG.scd
     /// </code>
     /// </summary>
-    [FieldOffset(0x1C4)] public byte ScdResourceIndex;
+    [FieldOffset(0x1CC)] public byte ScdResourceIndex;
 
-    [FieldOffset(0x1C6)] public byte VisibilityFlags;
+    [FieldOffset(0x1CE)] public byte VisibilityFlags;
 
-    [FieldOffset(0x1C8)] public ushort DrawOrderIndex;
+    [FieldOffset(0x1D0)] public ushort DrawOrderIndex;
 
-    [FieldOffset(0x1CC)] public short X;
-    [FieldOffset(0x1CE)] public short Y;
-    [FieldOffset(0x1D0)] public short OpenTransitionOffsetX;
-    [FieldOffset(0x1D2)] public short OpenTransitionOffsetY;
-    [FieldOffset(0x1D4)] public short CloseTransitionOffsetX;
-    [FieldOffset(0x1D6)] public short CloseTransitionOffsetY;
-    [FieldOffset(0x1D8)] public short OpenSoundEffectId;
-    [FieldOffset(0x1DA)] public ushort AtkValuesCount;
-    [FieldOffset(0x1DC)] public ushort Id;
-    [FieldOffset(0x1DE)] public ushort ParentId;
-    [FieldOffset(0x1E0)] public ushort HostId; // for example, in CharacterProfile this holds the ID of the Character addon
-    [FieldOffset(0x1E2)] public ushort ContextMenuParentId;
+    [FieldOffset(0x1D4)] public short X;
+    [FieldOffset(0x1D6)] public short Y;
+    [FieldOffset(0x1D8)] public short OpenTransitionOffsetX;
+    [FieldOffset(0x1DA)] public short OpenTransitionOffsetY;
+    [FieldOffset(0x1DC)] public short CloseTransitionOffsetX;
+    [FieldOffset(0x1DE)] public short CloseTransitionOffsetY;
+    [FieldOffset(0x1E0)] public short OpenSoundEffectId;
+    [FieldOffset(0x1E2)] public ushort AtkValuesCount;
+    [FieldOffset(0x1E4)] public ushort Id;
+    [FieldOffset(0x1E6)] public ushort ParentId;
+    [FieldOffset(0x1E8)] public ushort HostId; // for example, in CharacterProfile this holds the ID of the Character addon
+    [FieldOffset(0x1EA)] public ushort ContextMenuParentId;
 
-    [FieldOffset(0x1E5)] public byte Alpha;
-    [FieldOffset(0x1E6)] public byte ShowHideFlags;
+    [FieldOffset(0x1ED)] public byte Alpha;
+    [FieldOffset(0x1EE)] public byte ShowHideFlags;
 
-    [FieldOffset(0x1E8)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
-    [FieldOffset(0x1F0)] public uint CollisionNodeListCount;
+    [FieldOffset(0x1F0)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
+    [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
 
-    public uint DepthLayer => (Flags190 >> 16) & 0xF;
+    public uint DepthLayer => (Flags198 >> 16) & 0xF;
 
     public bool IsVisible {
-        get => (Flags190 & 0x200000) != 0;
-        set => Flags190 = value ? Flags190 |= 0x200000 : Flags190 &= 0xFFDFFFFF;
+        get => (Flags198 & 0x200000) != 0;
+        set => Flags198 = value ? Flags198 |= 0x200000 : Flags198 &= 0xFFDFFFFF;
     }
 
     /// <summary>
     /// Check if OnSetup was called.
     /// </summary>
-    public bool IsReady => (Flags199 & 0x01) != 0;
+    public bool IsReady => (Flags1A1 & 0x01) != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 9F")]
     public partial void Ctor();
