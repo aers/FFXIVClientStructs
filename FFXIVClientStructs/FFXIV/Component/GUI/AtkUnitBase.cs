@@ -20,7 +20,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0xF0)] public AtkResNode* CursorTarget; // Likely always AtkCollisionNode
     [FieldOffset(0x110)] public AtkComponentNode* CurrentDropDownOwnerNode;
     [FieldOffset(0x118)] public AtkComponentNode* WindowNode;
-    [FieldOffset(0x120)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
+    [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
     [FieldOffset(0x180)] public StdVector<Pointer<byte>> CachedAtkValueStrings; // set here: "48 8D 54 24 ?? E8 ?? ?? ?? ?? 48 83 C4 20 41 5E"
 
@@ -51,29 +51,29 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     ///     2 = UldManager finished loading the uld
     /// </code>
     /// </summary>
-    [FieldOffset(0x198)] public uint Flags190;
+    [FieldOffset(0x198)] public uint Flags198;
 
     /// <summary>
     /// <code>
     /// 0b1000_0000 = Disable auto-focus (not adding it to Focused Units list)
     /// </code>
     /// </summary>
-    [FieldOffset(0x1A0)] public byte Flags198;
+    [FieldOffset(0x1A0)] public byte Flags1A0;
 
     /// <summary>
     /// <code>
     /// 0b0000_0001 = OnSetup was called (= IsReady)
     /// </code>
     /// </summary>
-    [FieldOffset(0x1A1)] public byte Flags199;
-    [FieldOffset(0x192)] public byte Flags19A;
+    [FieldOffset(0x1A1)] public byte Flags1A1;
+    [FieldOffset(0x192)] public byte Flags192;
 
     /// <summary>
     /// <code>
     /// 0b0100_0000 = Don't show on open
     /// </code>
     /// </summary>
-    [FieldOffset(0x1A5)] public byte Flags19D;
+    [FieldOffset(0x1A5)] public byte Flags1A5;
 
     [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
     [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
@@ -120,17 +120,17 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1F0)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
 
-    public uint DepthLayer => (Flags190 >> 16) & 0xF;
+    public uint DepthLayer => (Flags198 >> 16) & 0xF;
 
     public bool IsVisible {
-        get => (Flags190 & 0x200000) != 0;
-        set => Flags190 = value ? Flags190 |= 0x200000 : Flags190 &= 0xFFDFFFFF;
+        get => (Flags198 & 0x200000) != 0;
+        set => Flags198 = value ? Flags198 |= 0x200000 : Flags198 &= 0xFFDFFFFF;
     }
 
     /// <summary>
     /// Check if OnSetup was called.
     /// </summary>
-    public bool IsReady => (Flags199 & 0x01) != 0;
+    public bool IsReady => (Flags1A1 & 0x01) != 0;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 9F")]
     public partial void Ctor();
