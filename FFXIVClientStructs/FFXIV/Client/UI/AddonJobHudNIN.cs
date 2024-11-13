@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudNIN0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x318)]
+[StructLayout(LayoutKind.Explicit, Size = 0x320)]
 public unsafe partial struct AddonJobHudNIN0 {
     [FieldOffset(0x278)] public NinkiGaugeData DataPrevious;
     [FieldOffset(0x290)] public NinkiGaugeData DataCurrent;
@@ -55,7 +55,7 @@ public unsafe partial struct AddonJobHudNIN0 {
 [Addon("JobHudNIN1v70")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x330)]
+[StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct AddonJobHudNIN1 {
     [FieldOffset(0x278)] public KazematoiGaugeData DataPrevious;
     [FieldOffset(0x288)] public KazematoiGaugeData DataCurrent;

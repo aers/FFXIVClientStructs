@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ReconstructionBox")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x450)]
+[StructLayout(LayoutKind.Explicit, Size = 0x458)]
 public unsafe partial struct AddonReconstructionBox {
     [FieldOffset(0x270), FixedSizeArray] internal FixedSizeArray10<AddonItemDonationInfo> _donationInfos;
 

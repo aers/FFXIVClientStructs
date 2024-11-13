@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudMNK0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4A8)]
 public unsafe partial struct AddonJobHudMNK0 {
     [FieldOffset(0x278)] public BeastChakraGaugeData DataPrevious;
     [FieldOffset(0x2B0)] public BeastChakraGaugeData DataCurrent;
@@ -105,7 +105,7 @@ public unsafe partial struct AddonJobHudMNK0 {
 [Addon("JobHudMNK1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x410)]
+[StructLayout(LayoutKind.Explicit, Size = 0x418)]
 public unsafe partial struct AddonJobHudMNK1 {
     [FieldOffset(0x278)] public ChakraGaugeData DataPrevious;
     [FieldOffset(0x290)] public ChakraGaugeData DataCurrent;

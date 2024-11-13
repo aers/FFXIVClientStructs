@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ItemSearch")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4048)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4050)]
 public unsafe partial struct AddonItemSearch {
     [FieldOffset(0x248)] public SearchMode Mode;
     [FieldOffset(0x24C)] public int SelectedFilter;

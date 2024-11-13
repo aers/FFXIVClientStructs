@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GrandCompanySupplyList")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x308)]
+[StructLayout(LayoutKind.Explicit, Size = 0x310)]
 public unsafe partial struct AddonGrandCompanySupplyList {
     [FieldOffset(0x298)] public AtkComponentList* SupplyProvisioningList;
     [FieldOffset(0x2A0)] public AtkComponentList* ExpertDeliveryList;

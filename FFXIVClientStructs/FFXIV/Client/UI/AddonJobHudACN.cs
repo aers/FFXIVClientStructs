@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudACN0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x350)]
+[StructLayout(LayoutKind.Explicit, Size = 0x358)]
 public unsafe partial struct AddonJobHudACN0 {
     [FieldOffset(0x278)] public AetherflowACNGaugeData DataPrevious;
     [FieldOffset(0x288)] public AetherflowACNGaugeData DataCurrent;
@@ -63,7 +63,7 @@ public unsafe partial struct AddonJobHudACN0 {
 [Addon("JobHudSCH0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x398)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3A0)]
 public unsafe partial struct AddonJobHudSCH0 {
     [FieldOffset(0x278)] public FaerieGaugeData DataPrevious;
     [FieldOffset(0x298)] public FaerieGaugeData DataCurrent;
@@ -128,7 +128,7 @@ public unsafe partial struct AddonJobHudSCH0 {
 [Addon("JobHudSMN0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x300)]
+[StructLayout(LayoutKind.Explicit, Size = 0x308)]
 public unsafe partial struct AddonJobHudSMN0 {
     [FieldOffset(0x278)] public AetherflowSMNGaugeData DataPrevious;
     [FieldOffset(0x288)] public AetherflowSMNGaugeData DataCurrent;
@@ -176,7 +176,7 @@ public unsafe partial struct AddonJobHudSMN0 {
 [Addon("JobHudSMN1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x508)]
+[StructLayout(LayoutKind.Explicit, Size = 0x510)]
 public unsafe partial struct AddonJobHudSMN1 {
     [FieldOffset(0x278)] public TranceGaugeData DataPrevious;
     [FieldOffset(0x2B0)] public TranceGaugeData DataCurrent;

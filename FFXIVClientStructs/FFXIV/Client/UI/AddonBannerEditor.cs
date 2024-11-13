@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("BannerEditor")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB40)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB48)]
 public unsafe partial struct AddonBannerEditor {
     [FieldOffset(0x2F0)] public AtkComponentDropDownList* PresetDropdown;
     [FieldOffset(0x310)] public AtkComponentDropDownList* BackgroundDropdown;

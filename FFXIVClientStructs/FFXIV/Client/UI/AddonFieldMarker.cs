@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("FieldMarker")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x5A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5B0)]
 public unsafe partial struct AddonFieldMarker {
     [FieldOffset(0x248)] public int HoveredButtonIndex; // Index 0-8 of the currently moused over button (A-D, 1-4, Clear)
 

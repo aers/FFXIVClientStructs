@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudDNC0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
 public unsafe partial struct AddonJobHudDNC0 {
     [FieldOffset(0x278)] public StepGaugeData DataPrevious;
     [FieldOffset(0x2A8)] public StepGaugeData DataCurrent;
@@ -69,7 +69,7 @@ public unsafe partial struct AddonJobHudDNC0 {
 [Addon("JobHudDNC1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
 public unsafe partial struct AddonJobHudDNC1 {
     [FieldOffset(0x278)] public FeatherGaugeData DataPrevious;
     [FieldOffset(0x298)] public FeatherGaugeData DataCurrent;

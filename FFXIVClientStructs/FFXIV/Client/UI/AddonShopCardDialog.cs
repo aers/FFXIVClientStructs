@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x240)]
+[StructLayout(LayoutKind.Explicit, Size = 0x248)]
 public unsafe partial struct AddonShopCardDialog {
     [FieldOffset(0x238)] public AtkComponentNumericInput* CardQuantityInput;
 }

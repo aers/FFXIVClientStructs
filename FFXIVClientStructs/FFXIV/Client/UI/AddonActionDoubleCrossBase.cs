@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_ActionDoubleCrossL", "_ActionDoubleCrossR")]
 [GenerateInterop]
 [Inherits<AddonActionBarBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x308)]
+[StructLayout(LayoutKind.Explicit, Size = 0x318)]
 public unsafe partial struct AddonActionDoubleCrossBase {
     [FieldOffset(0x260)] public AtkResNode* ContainerNode;
     [FieldOffset(0x268)] public AtkComponentNode* SlotContainerL;

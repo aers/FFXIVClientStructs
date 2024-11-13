@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("RelicNoteBook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xAB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xAC0)]
 public unsafe partial struct AddonRelicNoteBook {
     [FieldOffset(0x238)] public AtkImageNode* CornerImage;
     [FieldOffset(0x240)] public AtkComponentBase* WeaponImageContainer;

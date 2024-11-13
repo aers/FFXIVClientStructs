@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GSInfoGeneral")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x260)]
+[StructLayout(LayoutKind.Explicit, Size = 0x268)]
 public unsafe partial struct AddonGSInfoGeneral {
     [FieldOffset(0x238)] public AtkComponentBase* MGPAmountDisplay;
     [FieldOffset(0x240)] public AtkComponentBase* TournamentMatches;

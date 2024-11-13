@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_DTR")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x378)]
+[StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public unsafe partial struct AddonDtr {
     [FieldOffset(0x238)] public Utf8String TimeModeTooltip; // Example: "Eorzea Time/Local Time"
     [FieldOffset(0x2A0)] public Utf8String NetworkInfoTooltip;

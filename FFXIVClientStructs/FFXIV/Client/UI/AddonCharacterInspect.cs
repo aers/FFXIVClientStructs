@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("CharacterInspect")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x510)]
+[StructLayout(LayoutKind.Explicit, Size = 0x518)]
 public unsafe partial struct AddonCharacterInspect {
     [FieldOffset(0x460)] public AtkComponentBase* PreviewComponent;
 }

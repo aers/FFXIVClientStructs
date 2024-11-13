@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_HudLayoutWindow")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x278)]
+[StructLayout(LayoutKind.Explicit, Size = 0x280)]
 public unsafe partial struct AddonHudLayoutWindow {
     [FieldOffset(0x250)] public AtkComponentButton* SaveButton;
 }

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("MobHunt")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x258)]
+[StructLayout(LayoutKind.Explicit, Size = 0x260)]
 public unsafe partial struct AddonMobHunt {
     [FieldOffset(0x238)] public AtkComponentButton* NextPageButton;
     [FieldOffset(0x240)] public AtkComponentButton* PreviousPageButton;

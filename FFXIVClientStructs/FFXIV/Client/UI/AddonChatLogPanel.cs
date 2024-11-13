@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ChatLogPanel_0", "ChatLogPanel_1", "ChatLogPanel_2", "ChatLogPanel_3")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
 public unsafe partial struct AddonChatLogPanel {
     [FieldOffset(0x270)] public AtkTextNode* ChatText;
 

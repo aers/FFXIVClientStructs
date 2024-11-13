@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 /// </summary>
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x270)]
+[StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct AddonJobHud {
     [FieldOffset(0x238)] public byte Unk220;
     [FieldOffset(0x239)] public bool UseSimpleGauge;

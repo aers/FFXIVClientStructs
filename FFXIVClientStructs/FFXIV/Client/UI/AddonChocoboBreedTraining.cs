@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x260)]
+[StructLayout(LayoutKind.Explicit, Size = 0x268)]
 public unsafe partial struct AddonChocoboBreedTraining {
     [FieldOffset(0x238)] public AtkComponentButton* CommenceButton;
     [FieldOffset(0x240)] public AtkComponentButton* CancelButton;

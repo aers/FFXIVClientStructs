@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GoldSaucerInfo")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x320)]
+[StructLayout(LayoutKind.Explicit, Size = 0x328)]
 public unsafe partial struct AddonGoldSaucerInfo {
     [FieldOffset(0x238)] public int SelectedCategory;
     [FieldOffset(0x23C)] public int SelectedSubCategory;
