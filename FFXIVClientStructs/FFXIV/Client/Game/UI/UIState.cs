@@ -77,33 +77,33 @@ public unsafe partial struct UIState {
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
-    [FieldOffset(0x17D4C), FixedSizeArray] internal FixedSizeArray64<byte> _unlockLinkBitmask;
+    [FieldOffset(0x180E4), FixedSizeArray] internal FixedSizeArray92<byte> _unlockLinkBitmask; // TODO: this size cant be right, can it? - fixed for 7.1
 
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
     // Size: (AetheryteSheet.RowCount + 7) / 8
-    [FieldOffset(0x17D8C), FixedSizeArray] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
+    [FieldOffset(0x18140), FixedSizeArray] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask; // fixed for 7.1
 
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
     // Size: (HowToSheet.RowCount + 7) / 8
-    [FieldOffset(0x17DAA), FixedSizeArray] internal FixedSizeArray36<byte> _unlockedHowtoBitmask;
+    [FieldOffset(0x1815E), FixedSizeArray] internal FixedSizeArray36<byte> _unlockedHowtoBitmask;  // fixed for 7.1
 
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     //      relative to uistate: "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" (case for 0x355)
     // Size: (CompanionSheet.RowCount + 7) / 8
-    [FieldOffset(0x17DCE), FixedSizeArray] internal FixedSizeArray67<byte> _unlockedCompanionsBitmask;
+    [FieldOffset(0x18182), FixedSizeArray] internal FixedSizeArray68<byte> _unlockedCompanionsBitmask;  // fixed for 7.1
 
     // Ref: "42 0F B6 04 30 44 84 C0"
     // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
-    [FieldOffset(0x17E11), FixedSizeArray] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
+    [FieldOffset(0x181C6), FixedSizeArray] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;  // fixed for 7.1
 
     // Ref: UIState#IsCutsceneSeen
     // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) / 8
-    [FieldOffset(0x17E1D), FixedSizeArray] internal FixedSizeArray165<byte> _cutsceneSeenBitmask;
+    [FieldOffset(0x181D2), FixedSizeArray] internal FixedSizeArray166<byte> _cutsceneSeenBitmask;  // fixed for 7.1
 
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount / 8
-    [FieldOffset(0x17EC2), FixedSizeArray] internal FixedSizeArray54<byte> _unlockedTripleTriadCardsBitmask;
+    [FieldOffset(0x18279), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;  // fixed for 7.1
     [FieldOffset(0x17EF8)] public ulong UnlockedTripleTriadCardsCount;
 
     [FieldOffset(0x17F12)] public float TerritoryTypeTransientOffsetZ;
@@ -196,20 +196,10 @@ public unsafe partial struct UIState {
     /// <summary>
     /// Check if a companion (minion) is unlocked for the current character.
     /// </summary>
-    /// <remarks>
-    /// WARNING: This method is NOT BOUNDED on IDs. While *one* function seems to set an upper bound on this, this
-    /// method is a pain in the neck to find *and*, frustratingly, cannot be sigged.
-    /// </remarks>
     /// <param name="companionId">The ID of the companion/minion to check for.</param>
     /// <returns>Returns true if the specified minion is unlocked.</returns>
     public bool IsCompanionUnlocked(uint companionId) {
         // Logic borrowed from "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" and others.
-
-        // This, for some reason, does not exist as a siggable method in the game code normally. Virtually everyone and
-        // everything that does minion checks will have this snippet (or one like it) in place. One does exist in the
-        // crossref for the bitmask, but it's over in what I suspect is in the UI module and is bounded. I don't want to
-        // replicate this upper bound here as that'll just be something we need to change with alarming regularity.
-
         return ((1 << ((int)companionId & 7)) & UnlockedCompanionsBitmask[(int)companionId / 8]) > 0;
     }
 
