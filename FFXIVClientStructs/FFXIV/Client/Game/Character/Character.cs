@@ -16,7 +16,6 @@ public unsafe partial struct Character {
     [FieldOffset(0x660)] public MountContainer Mount;
     [FieldOffset(0x6C8)] public CompanionContainer CompanionData;
     [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
-    [FieldOffset(0x8D8)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
     [FieldOffset(0x8E0)] public OrnamentContainer OrnamentData;
     [FieldOffset(0x958)] public ReaperShroudContainer ReaperShroud;
     [FieldOffset(0x9B0)] public TimelineContainer Timeline;

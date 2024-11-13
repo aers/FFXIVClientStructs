@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 59 ?? 48 89 01 E8"
 [GenerateInterop]
 [Inherits<ContainerInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1F8)]
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
     [FieldOffset(0x160), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModelIds;
@@ -16,6 +16,7 @@ public unsafe partial struct DrawDataContainer {
 
     [FieldOffset(0x1CE)] public byte Flags1;
     [FieldOffset(0x1CF)] public byte Flags2;
+    [FieldOffset(0x1F0)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
     [UnscopedRef]
     public ref DrawObjectData Weapon(WeaponSlot slot) {
