@@ -9,30 +9,41 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor "E8 ?? ?? ?? ?? 48 8B 53 08 45 33 C9"
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>, Inherits<CharacterData>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2280)]
+[StructLayout(LayoutKind.Explicit, Size = 0x22F0)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3)]
 public unsafe partial struct Character {
-    [FieldOffset(0x640)] public EmoteController EmoteController;
-    [FieldOffset(0x680)] public MountContainer Mount;
-    [FieldOffset(0x6E8)] public CompanionContainer CompanionData;
-    [FieldOffset(0x708)] public DrawDataContainer DrawData;
-    [FieldOffset(0x8E8)] public OrnamentContainer OrnamentData;
-    [FieldOffset(0x960)] public ReaperShroudContainer ReaperShroud;
+    [FieldOffset(0x620)] public EmoteController EmoteController;
+    [FieldOffset(0x660)] public MountContainer Mount;
+    [FieldOffset(0x6C8)] public CompanionContainer CompanionData;
+    [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
+    [FieldOffset(0x8D8)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
+    [FieldOffset(0x8E0)] public OrnamentContainer OrnamentData;
+    [FieldOffset(0x958)] public ReaperShroudContainer ReaperShroud;
     [FieldOffset(0x9B0)] public TimelineContainer Timeline;
     [FieldOffset(0xD00)] public LookAtContainer LookAt;
 
-    [FieldOffset(0x1900)] public VfxContainer Vfx;
+    // 0x01 = OffhandDrawn
+    [FieldOffset(0x1900)] public byte WeaponFlags;
+    [FieldOffset(0x1908)] public VfxContainer Vfx;
 
-    [FieldOffset(0x1A08)] public EffectContainer Effects;
-    [FieldOffset(0x1A58)] public CharacterSetupContainer CharacterSetup;
+    [FieldOffset(0x1A10)] public EffectContainer Effects;
+    [FieldOffset(0x1A90)] public CharacterSetupContainer CharacterSetup;
 
-    [FieldOffset(0x1FC0)] public Balloon Balloon;
+    // 0x1AA8: start of some substructure
+    [FieldOffset(0x1AB8)] public int ModelCharaId; // +0x10 in substructure
+    [FieldOffset(0x1ACC)] public float UnscaledRadius; // if character is unmounted, it's hitbox radius is calculated to be this value multiplied by scale
 
-    [FieldOffset(0x21C8)] public float Alpha;
+    // 0x01 = PartyMember
+    // 0x02 = AllianceMember
+    // 0x04 = Friend
+    [FieldOffset(0x1C62)] public byte RelationFlags;
 
-    [FieldOffset(0x21D8)] public Companion* CompanionObject; // minion
+    [FieldOffset(0x2160)] public Balloon Balloon;
 
-    [FieldOffset(0x21E8), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
+    [FieldOffset(0x2268)] public float Alpha;
+
+    [FieldOffset(0x2278)] public Companion* CompanionObject; // minion
+    [FieldOffset(0x2280), FixedSizeArray(isString: true)] internal FixedSizeArray7<byte> _freeCompanyTag;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -41,7 +52,7 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the target for the local player.
     /// </remarks>
-    [FieldOffset(0x2200)] public GameObjectId TargetId;
+    [FieldOffset(0x2288)] public GameObjectId TargetId;
 
     /// <summary>
     /// The current soft target for this Character. This will not be set for the LocalPlayer.
@@ -50,33 +61,30 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the soft target for the local player.
     /// </remarks>
-    [FieldOffset(0x2208)] public GameObjectId SoftTargetId;
+    [FieldOffset(0x2290)] public GameObjectId SoftTargetId;
 
-    [FieldOffset(0x2214)] public float CastRotation;
-    [FieldOffset(0x221C)] public float UnscaledRadius; // if character is unmounted, it's hitbox radius is calculated to be this value multiplied by scale
+    [FieldOffset(0x229C)] public float CastRotation;
 
-    [FieldOffset(0x2240)] public uint NameId;
+    [FieldOffset(0x22B4)] public uint NameId;
 
-    [FieldOffset(0x2250)] public uint CompanionOwnerId;
+    [FieldOffset(0x22C0)] public uint CompanionOwnerId;
 
-    [FieldOffset(0x2258)] public ulong AccountId;
-    [FieldOffset(0x2260)] public ulong ContentId;
-    [FieldOffset(0x2268)] public ushort CurrentWorld;
-    [FieldOffset(0x226A)] public ushort HomeWorld;
-    [FieldOffset(0x226C)] public CharacterModes Mode;
-    [FieldOffset(0x226D)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-
-    [FieldOffset(0x226F)] public byte GMRank;
-    [FieldOffset(0x2270)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
+    [FieldOffset(0x22C8)] public ulong AccountId;
+    [FieldOffset(0x22D0)] public ulong ContentId;
+    [FieldOffset(0x22D8)] public ushort CurrentWorld;
+    [FieldOffset(0x22DA)] public ushort HomeWorld;
+    [FieldOffset(0x22DC)] public CharacterModes Mode;
+    [FieldOffset(0x22DD)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
+    [FieldOffset(0x22DE)] public byte GMRank;
 
     public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;
-    public bool IsOffhandDrawn => (CharacterData.Flags1 & 0x40) == 0x40;
-    public bool InCombat => (CharacterData.Flags1 & 0x20) == 0x20;
-    public bool IsHostile => (CharacterData.Flags1 & 0x10) == 0x10;
+    public bool IsOffhandDrawn => (WeaponFlags & 0x1) != 0;
+    public bool InCombat => (CharacterData.Flags & 0x2) != 0;
+    public bool IsHostile => (CharacterData.Flags & 0x1) != 0;
     public bool IsCasting => GetCastInfo() != null && (GetCastInfo()->IsCasting & 0x1) == 0x1;
-    public bool IsPartyMember => (CharacterData.Flags2 & 0x8) == 0x8;
-    public bool IsAllianceMember => (CharacterData.Flags2 & 0x10) == 0x10;
-    public bool IsFriend => (CharacterData.Flags2 & 0x20) == 0x20;
+    public bool IsPartyMember => (RelationFlags & 0x1) != 0;
+    public bool IsAllianceMember => (RelationFlags & 0x2) != 0;
+    public bool IsFriend => (RelationFlags & 0x4) != 0;
 
     /// <summary>
     /// Gets the (hard) target ID for this character. If this character is the LocalPlayer, this will instead read the
@@ -125,7 +133,7 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 3A 48 8B 4B 08")]
     public partial bool IsVoyager();
 
-    [VirtualFunction(79)]
+    [VirtualFunction(77)]
     public partial StatusManager* GetStatusManager();
 
     /// <summary>
@@ -133,18 +141,14 @@ public unsafe partial struct Character {
     /// May be null for certain Character subclasses, e.g. <see cref="Companion"/>.
     /// </summary>
     /// <returns>Returns a pointer to a CastInfo struct, or <c>null</c>.</returns>
-    [VirtualFunction(81)]
+    [VirtualFunction(79)]
     public partial CastInfo* GetCastInfo();
 
-    [VirtualFunction(83)]
+    [VirtualFunction(81)]
     public partial ActionEffectHandler* GetActionEffectHandler();
 
-    [VirtualFunction(85)]
+    [VirtualFunction(83)]
     public partial ForayInfo* GetForayInfo();
-
-    // TODO: seems to have been removed in 7.0
-    //[VirtualFunction(87)]
-    //public partial bool IsMount();
 }
 
 // LogMessages for errors starting at 7700
