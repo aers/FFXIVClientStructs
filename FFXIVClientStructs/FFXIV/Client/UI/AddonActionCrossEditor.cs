@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ActionCrossEditor")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x260)]
+[StructLayout(LayoutKind.Explicit, Size = 0x268)]
 public unsafe partial struct AddonActionCrossEditor {
     [FieldOffset(0x238)] public AtkTextNode* HeadingText;
     [FieldOffset(0x240)] public AtkTextNode* InstructionText;

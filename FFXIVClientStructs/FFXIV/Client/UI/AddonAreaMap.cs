@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("AreaMap")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x7D8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7E0)]
 public unsafe partial struct AddonAreaMap {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]

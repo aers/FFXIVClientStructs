@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_Image", "_Image3")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
 public unsafe partial struct AddonImage {
     [FieldOffset(0x278)] public AtkResNode* ResNode1; // Both AtkResNode's appear to be the same node
     [FieldOffset(0x280)] public AtkResNode* ResNode2;

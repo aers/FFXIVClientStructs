@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudRDB0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
 public unsafe partial struct AddonJobHudRDB0 {
 
     [FieldOffset(0x278)] public VipersightGaugeData DataPrevious;
@@ -100,7 +100,7 @@ public unsafe partial struct AddonJobHudRDB0 {
 [Addon("JobHudRDB1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x310)]
+[StructLayout(LayoutKind.Explicit, Size = 0x318)]
 public unsafe partial struct AddonJobHudRDB1 {
 
     [FieldOffset(0x278)] public SerpentOfferingsGaugeData DataPrevious;

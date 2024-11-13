@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("Talk")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xE90)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE98)]
 public unsafe partial struct AddonTalk {
     [FieldOffset(0x238)] public AtkTextNode* AtkTextNode220;
     [FieldOffset(0x240)] public AtkTextNode* AtkTextNode228;

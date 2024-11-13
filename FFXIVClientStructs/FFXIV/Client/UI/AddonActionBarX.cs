@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_ActionBar01", "_ActionBar02", "_ActionBar03", "_ActionBar04", "_ActionBar05", "_ActionBar06", "_ActionBar07", "_ActionBar08", "_ActionBar09")]
 [GenerateInterop(isInherited: true)]
 [Inherits<AddonActionBarBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2B0)]
 public unsafe partial struct AddonActionBarX {
     [FieldOffset(0x260)] public AtkTextNode* HotbarNumIconTextNode;
     [FieldOffset(0x268)] public AtkCollisionNode* HotbarNumIconCollisionNode;

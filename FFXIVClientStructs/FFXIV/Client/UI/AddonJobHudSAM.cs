@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudSAM0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x390)]
+[StructLayout(LayoutKind.Explicit, Size = 0x398)]
 public unsafe partial struct AddonJobHudSAM0 {
     [FieldOffset(0x278)] public KenkiGaugeData DataPrevious;
     [FieldOffset(0x290)] public KenkiGaugeData DataCurrent;
@@ -82,7 +82,7 @@ public unsafe partial struct AddonJobHudSAM0 {
 [Addon("JobHudSAM1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x338)]
+[StructLayout(LayoutKind.Explicit, Size = 0x340)]
 public unsafe partial struct AddonJobHudSAM1 {
     [FieldOffset(0x278)] public SenGaugeData DataPrevious;
     [FieldOffset(0x288)] public SenGaugeData DataCurrent;

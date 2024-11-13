@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JournalResult")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x298)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
 public unsafe partial struct AddonJournalResult {
     [FieldOffset(0x238)] public AtkImageNode* AtkImageNode220;
     [FieldOffset(0x240)] public AtkImageNode* AtkImageNode228;

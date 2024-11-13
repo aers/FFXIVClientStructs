@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_ActionCross")]
 [GenerateInterop]
 [Inherits<AddonActionBarBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x720)]
+[StructLayout(LayoutKind.Explicit, Size = 0x728)]
 public unsafe partial struct AddonActionCross {
     [FieldOffset(0x260)] public ChangeSetUI ChangeSet;
     [FieldOffset(0x3B8)] public AtkComponentNode* PadlockNode;

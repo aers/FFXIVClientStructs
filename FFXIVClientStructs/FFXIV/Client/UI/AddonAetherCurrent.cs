@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("AetherCurrent")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x278)]
+[StructLayout(LayoutKind.Explicit, Size = 0x280)]
 public unsafe partial struct AddonAetherCurrent {
     [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentRadioButton>> _tabs;
 

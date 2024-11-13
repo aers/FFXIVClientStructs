@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x8B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8C0)]
 public unsafe partial struct AddonSynthesis {
     [FieldOffset(0x250)] public AtkComponentButton* QuitButton;
     [FieldOffset(0x258)] public AtkComponentButton* CalculationsButton;

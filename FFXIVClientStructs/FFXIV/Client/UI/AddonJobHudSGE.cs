@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudGFF0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D8)]
 public unsafe partial struct AddonJobHudGFF0 {
     [FieldOffset(0x278)] public EukrasiaGaugeData DataPrevious;
     [FieldOffset(0x288)] public EukrasiaGaugeData DataCurrent;
@@ -47,7 +47,7 @@ public unsafe partial struct AddonJobHudGFF0 {
 [Addon("JobHudGFF1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x380)]
+[StructLayout(LayoutKind.Explicit, Size = 0x388)]
 public unsafe partial struct AddonJobHudGFF1 {
     [FieldOffset(0x278)] public AddersgallGaugeData DataPrevious;
     [FieldOffset(0x298)] public AddersgallGaugeData DataCurrent;

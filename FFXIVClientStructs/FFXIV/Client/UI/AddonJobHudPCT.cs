@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudRPM0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3C8)]
 public unsafe partial struct AddonJobHudRPM0 {
 
     [FieldOffset(0x278)] public CanvasGaugeData DataPrevious;
@@ -79,7 +79,7 @@ public unsafe partial struct AddonJobHudRPM0 {
 [Addon("JobHudRPM1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 public unsafe partial struct AddonJobHudRPM1 {
 
     [FieldOffset(0x278)] public PaletteGaugeData DataPrevious;

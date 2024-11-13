@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("InventoryEvent")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x320)]
+[StructLayout(LayoutKind.Explicit, Size = 0x328)]
 public unsafe partial struct AddonInventoryEvent {
     [FieldOffset(0x270), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentRadioButton>> _buttons;
 

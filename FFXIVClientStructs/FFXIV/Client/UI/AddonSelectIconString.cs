@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2C0)]
 public partial struct AddonSelectIconString {
     [FieldOffset(0x250)] public PopupMenuDerive PopupMenu;
 

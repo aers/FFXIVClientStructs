@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F8)]
 public unsafe partial struct AddonRequest {
     [FieldOffset(0x238)] public AtkCollisionNode* AtkCollisionNode220;
     [FieldOffset(0x240)] public AtkComponentIcon* AtkComponentIcon228;

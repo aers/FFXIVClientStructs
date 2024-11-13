@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("LookingForGroupDetail")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3F8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x400)]
 public unsafe partial struct AddonLookingForGroupDetail {
     [FieldOffset(0x260)] public AtkComponentButton* JoinPartyButton;
 

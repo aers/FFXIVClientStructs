@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("Buddy")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E80)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1E88)]
 public unsafe partial struct AddonBuddy {
     [FieldOffset(0x238)] public int TabIndex;
 

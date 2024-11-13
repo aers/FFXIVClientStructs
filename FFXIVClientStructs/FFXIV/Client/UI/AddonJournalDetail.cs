@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JournalDetail")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x370)]
+[StructLayout(LayoutKind.Explicit, Size = 0x378)]
 public unsafe partial struct AddonJournalDetail {
     [FieldOffset(0x248)] public AtkComponentScrollBar* ScrollBarNode;
     [FieldOffset(0x250)] public AtkComponentGuildLeveCard* GuildLeveCardNode;

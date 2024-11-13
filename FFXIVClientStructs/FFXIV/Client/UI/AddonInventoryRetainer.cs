@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("InventoryRetainer")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x300)]
+[StructLayout(LayoutKind.Explicit, Size = 0x308)]
 public partial struct AddonInventoryRetainer {
     [FieldOffset(0x288)] public AtkAddonControl AddonControl;
 

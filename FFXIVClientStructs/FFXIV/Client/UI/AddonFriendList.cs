@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("FriendList")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x380)]
+[StructLayout(LayoutKind.Explicit, Size = 0x388)]
 public unsafe partial struct AddonFriendList {
     [FieldOffset(0x308)] public AtkComponentList* FriendList;
     [FieldOffset(0x310)] public AtkComponentButton* AddButton;

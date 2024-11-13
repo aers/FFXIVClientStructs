@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("MJIMinionNoteBook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x640)]
+[StructLayout(LayoutKind.Explicit, Size = 0x648)]
 public partial struct AddonMJIMinionNoteBook {
     [FieldOffset(0x2B8)] public TabController TabController;
 }

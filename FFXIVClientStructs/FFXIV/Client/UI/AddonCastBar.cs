@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_CastBar")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
 public partial struct AddonCastBar {
     [FieldOffset(0x238)] public Utf8String CastName;
     [FieldOffset(0x2D4)] public ushort CastTime;

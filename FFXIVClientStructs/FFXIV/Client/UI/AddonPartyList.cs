@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_PartyList")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x13F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x13F8)]
 public unsafe partial struct AddonPartyList {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _partyMembers;
     [FieldOffset(0x9F8), FixedSizeArray] internal FixedSizeArray7<PartyListMemberStruct> _trustMembers;

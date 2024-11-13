@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GatheringMasterpiece")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xBF8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC00)]
 public unsafe partial struct AddonGatheringMasterpiece {
     [FieldOffset(0x238)] public AtkComponentIcon* ItemIcon;
     [FieldOffset(0x240)] public AtkTextNode* ItemName;

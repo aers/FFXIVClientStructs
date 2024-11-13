@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x258)]
+[StructLayout(LayoutKind.Explicit, Size = 0x260)]
 public unsafe partial struct AddonMaterializeDialog {
     [FieldOffset(0x238)] public AtkTextNode* Text;
     [FieldOffset(0x240)] public AtkComponentIcon* ItemIcon;

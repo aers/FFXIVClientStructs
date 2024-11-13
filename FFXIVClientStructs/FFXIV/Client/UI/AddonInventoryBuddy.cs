@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("InventoryBuddy")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4B0)]
 public unsafe partial struct AddonInventoryBuddy {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray2<Pointer<AtkComponentRadioButton>> _tabs;
     [FieldOffset(0x248), FixedSizeArray] internal FixedSizeArray70<Pointer<AtkComponentDragDrop>> _slots;
