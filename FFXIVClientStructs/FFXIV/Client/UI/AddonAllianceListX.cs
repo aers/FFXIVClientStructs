@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_AllianceList1", "_AllianceList2")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x470)]
+[StructLayout(LayoutKind.Explicit, Size = 0x478)]
 public unsafe partial struct AddonAllianceListX {
     [FieldOffset(0x238)] public AtkTextNode* HeaderText;
     [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray8<AllianceMemberStruct> _allianceMembers;

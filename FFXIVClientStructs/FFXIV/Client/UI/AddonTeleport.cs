@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("Teleport")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3D0)]
 public unsafe partial struct AddonTeleport {
     [FieldOffset(0x238)] public AtkComponentRadioButton* TabHeaderAll;
     [FieldOffset(0x240)] public AtkComponentRadioButton* TabHeaderLaNoscea;

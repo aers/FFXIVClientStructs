@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("AOZNotebook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xCD8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xCE0)]
 public unsafe partial struct AddonAOZNotebook {
     [FieldOffset(0x320), FixedSizeArray] internal FixedSizeArray16<SpellbookBlock> _spellbookBlocks;
     [FieldOffset(0x838), FixedSizeArray] internal FixedSizeArray24<ActiveAction> _activeActions;

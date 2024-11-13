@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("FateReward")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x580)]
+[StructLayout(LayoutKind.Explicit, Size = 0x588)]
 public unsafe partial struct AddonFateReward {
     [FieldOffset(0x238)] public AtkResNode* AtkResNode220;
     [FieldOffset(0x240)] public AtkImageNode* AtkImageNode228;

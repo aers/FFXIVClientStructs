@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("Alliance48")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x8C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8C8)]
 public unsafe partial struct AddonAlliance48 {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray5<Alliance48Struct> _alliances;
 

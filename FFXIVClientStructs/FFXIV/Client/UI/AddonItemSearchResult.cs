@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ItemSearchResult")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3E8)]
 public unsafe partial struct AddonItemSearchResult {
     [FieldOffset(0x240)] public AtkTextNode* ItemName;
     [FieldOffset(0x238)] public AtkComponentIcon* ItemIcon;

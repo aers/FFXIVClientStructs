@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GSInfoCardList")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x550)]
+[StructLayout(LayoutKind.Explicit, Size = 0x558)]
 public unsafe partial struct AddonGSInfoCardList {
     [FieldOffset(0x2B0)] public TabController TabController;
 

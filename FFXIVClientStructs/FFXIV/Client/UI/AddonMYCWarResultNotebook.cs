@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("MYCWarResultNotebook")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
 public unsafe partial struct AddonMYCWarResultNotebook {
     [FieldOffset(0x258)] public AtkCollisionNode* DescriptionCollisionNode;
 

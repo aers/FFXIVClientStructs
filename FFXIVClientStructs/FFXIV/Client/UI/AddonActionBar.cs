@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_ActionBar")]
 [GenerateInterop]
 [Inherits<AddonActionBarX>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D0)]
 public unsafe partial struct AddonActionBar {
     [FieldOffset(0x2B0)] public AtkComponentBase* CycleUpArrow;
     [FieldOffset(0x2B8)] public AtkComponentBase* CycleDownArrow;

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("NamePlate")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x480)]
+[StructLayout(LayoutKind.Explicit, Size = 0x488)]
 public unsafe partial struct AddonNamePlate {
     [FieldOffset(0x238)] public BakePlateRenderer BakePlate;
     [FieldOffset(0x478)] public NamePlateObject* NamePlateObjectArray; // 0 - 50

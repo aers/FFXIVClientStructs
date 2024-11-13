@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("CutSceneSelectString")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x258)]
+[StructLayout(LayoutKind.Explicit, Size = 0x260)]
 public unsafe partial struct AddonCutSceneSelectString {
     [FieldOffset(0x248)] public AtkComponentList* OptionList;
     [FieldOffset(0x250)] public AtkComponentTextNineGrid* TextLabel;

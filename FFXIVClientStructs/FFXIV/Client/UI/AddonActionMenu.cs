@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ActionMenu")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1880)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1888)]
 public unsafe partial struct AddonActionMenu {
     [FieldOffset(0x238)] public AtkComponentList* ActionList;
     [FieldOffset(0x240)] public AtkComponentList* TraitList;

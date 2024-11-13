@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudRRP0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x408)]
+[StructLayout(LayoutKind.Explicit, Size = 0x410)]
 public unsafe partial struct AddonJobHudRRP0 {
     [FieldOffset(0x278)] public SoulGaugeData DataPrevious;
     [FieldOffset(0x2A0)] public SoulGaugeData DataCurrent;
@@ -73,7 +73,7 @@ public unsafe partial struct AddonJobHudRRP0 {
 [Addon("JobHudRRP1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4A8)]
 public unsafe partial struct AddonJobHudRRP1 {
     [FieldOffset(0x278)] public DeathGaugeData DataPrevious;
     [FieldOffset(0x298)] public DeathGaugeData DataCurrent;

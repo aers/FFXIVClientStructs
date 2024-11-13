@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ArmouryBoard")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x6D0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x6D8)]
 public partial struct AddonArmouryBoard {
     [FieldOffset(0x6A8)] public int TabIndex;
 

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_ParameterWidget")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x278)]
+[StructLayout(LayoutKind.Explicit, Size = 0x280)]
 public unsafe partial struct AddonParameterWidget {
     [FieldOffset(0x238)] public AtkComponentGaugeBar* HealthGaugeBar;
     [FieldOffset(0x240)] public AtkComponentGaugeBar* ManaGaugeBar;
