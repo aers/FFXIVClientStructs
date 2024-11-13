@@ -27,36 +27,36 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x8748)] public Utf8String BoldOff; // <bold(0)>
 
     [FieldOffset(0x87F7)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
-    [FieldOffset(0x87F8)] internal fixed byte AddonAllocators[0x28 * 873];
-    [FieldOffset(0x11060)] public StdVector<Utf8String> AddonNames;
-    [FieldOffset(0x11078)] public AddonConfig* AddonConfigPtr;
+    [FieldOffset(0x87F8)] internal fixed byte AddonAllocators[0x28 * 889];
+    [FieldOffset(0x112E0)] public StdVector<Utf8String> AddonNames;
+    [FieldOffset(0x112F8)] public AddonConfig* AddonConfigPtr;
 
-    [FieldOffset(0x11130)] public UIModule* UIModulePtr;
-    [FieldOffset(0x11138)] public RaptureLogModule* RaptureLogModulePtr;
-    [FieldOffset(0x11140)] public AgentModule AgentModule;
-    [FieldOffset(0x11F68)] public RaptureHotbarModule* RaptureHotbarModulePtr;
-    [FieldOffset(0x11F70)] public RaptureAtkUnitManager RaptureAtkUnitManager;
-    [FieldOffset(0x1BC88)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
+    [FieldOffset(0x113B0)] public UIModule* UIModulePtr;
+    [FieldOffset(0x113B8)] public RaptureLogModule* RaptureLogModulePtr;
+    [FieldOffset(0x113C0)] public AgentModule AgentModule;
+    [FieldOffset(0x12210)] public RaptureHotbarModule* RaptureHotbarModulePtr;
+    [FieldOffset(0x12218)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+    [FieldOffset(0x1BF30)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
 
-    [FieldOffset(0x1BF08)] public int NameplateInfoCount;
-    [FieldOffset(0x1BF10), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
+    [FieldOffset(0x1C1B0)] public int NameplateInfoCount;
+    [FieldOffset(0x1C1B8), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
 
-    [FieldOffset(0x23388), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
-    [FieldOffset(0x23E38)] public ItemCache* KeyItemCache; // ptr to 120 entries
-    [FieldOffset(0x23E40)] public ItemCache* EquippedItemCache; // ptr to 14 entries
-    [FieldOffset(0x23E48), FixedSizeArray] internal FixedSizeArray160<InventoryCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
-    [FieldOffset(0x29348)] public uint InventoryItemCacheSlotCount;
-    [FieldOffset(0x2934C)] public uint GilCap;
+    [FieldOffset(0x23630), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
+    [FieldOffset(0x240E0)] public ItemCache* KeyItemCache; // ptr to 120 entries
+    [FieldOffset(0x240E8)] public ItemCache* EquippedItemCache; // ptr to 14 entries
+    [FieldOffset(0x240F0), FixedSizeArray] internal FixedSizeArray160<InventoryCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
+    [FieldOffset(0x295F0)] public uint InventoryItemCacheSlotCount;
+    [FieldOffset(0x295F4)] public uint GilCap;
 
-    [FieldOffset(0x29390)] public uint LocalPlayerClassJobId;
-    [FieldOffset(0x29394)] public uint LocalPlayerLevel;
+    [FieldOffset(0x29638)] public uint LocalPlayerClassJobId;
+    [FieldOffset(0x2963C)] public uint LocalPlayerLevel;
 
-    [FieldOffset(0x2939D)] public bool QuickGatheringEnabled;
+    [FieldOffset(0x29645)] public bool QuickGatheringEnabled;
 
-    [FieldOffset(0x29428)] internal ExcelSheet* AddonParamSheet;
-    [FieldOffset(0x29430)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
+    [FieldOffset(0x296D0)] internal ExcelSheet* AddonParamSheet;
+    [FieldOffset(0x296D8)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
 
-    [FieldOffset(0x29470)] internal nint ShellCommands; // only 1 function "48 83 EC 38 4C 8B C2 C7 44 24" to open links?
+    [FieldOffset(0x29718)] internal nint ShellCommands; // only 1 function "48 83 EC 38 4C 8B C2 C7 44 24" to open links?
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 89 5F 58")]
     public partial bool ChangeUiMode(uint uiMode);
