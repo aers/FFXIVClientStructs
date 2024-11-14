@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 public unsafe partial struct HousingManager {
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 7E 5A")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 60 60")]
     public static partial HousingManager* Instance();
 
     [FieldOffset(0x00)] public HousingTerritory* CurrentTerritory;
