@@ -2,9 +2,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [GenerateInterop]
 [Inherits<AtkArrayData>]
-[StructLayout(LayoutKind.Explicit, Size = 0x28)]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct NumberArrayData {
-    [FieldOffset(0x20)] public int* IntArray;
+    [FieldOffset(0x28)] public int* IntArray;
 
     /// <summary>
     /// Set a value at the specified index of the IntArray.
