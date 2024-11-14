@@ -160,7 +160,7 @@ public sealed partial class InteropGenerator {
             if (absoluteOffset == 0 && !currentStruct.VirtualFunctions.IsEmpty)
                 hasPrimaryVirtualFunctions = true;
 
-            absoluteOffset += currentStruct.ExtraInheritedStructInfo!.Size;
+            absoluteOffset += currentStruct.Size!.Value;
         }
         return processed;
     }
