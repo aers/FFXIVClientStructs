@@ -104,7 +104,7 @@ public unsafe partial struct UIState {
 
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount / 8
-    [FieldOffset(0x18611), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;  // fixed for 7.1
+    [FieldOffset(0x18279), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;  // fixed for 7.1
     [FieldOffset(0x18290)] public ulong UnlockedTripleTriadCardsCount;
 
     [FieldOffset(0x182AA)] public float TerritoryTypeTransientOffsetZ;
