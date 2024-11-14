@@ -64,8 +64,8 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x1198)] public ulong SelectedCharacterContentId;
 
-    [FieldOffset(0x11A0)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
-    [FieldOffset(0x11A1)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin
+    [FieldOffset(0x1210)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
+    [FieldOffset(0x1211)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin (+0x38)
 
     [FieldOffset(0x11A3)] public bool LogoutShouldCloseGame;
 
