@@ -25,6 +25,9 @@ public unsafe partial struct Model {
     [FieldOffset(0x98)] public Material** Materials;
     [FieldOffset(0xA0)] public int MaterialCount;
 
+    [FieldOffset(0xAC)] public uint EnabledAttributeIndexMask;
+    [FieldOffset(0xC8)] public uint EnabledShapeKeyIndexMask;
+    
     [FieldOffset(0xE8)] public uint SlotIndex;
 
     public ReadOnlySpan<Pointer<Material>> MaterialsSpan

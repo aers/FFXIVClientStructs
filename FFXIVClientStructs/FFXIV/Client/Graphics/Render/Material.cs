@@ -24,10 +24,10 @@ public unsafe partial struct Material {
         /// </summary>
         [FieldOffset(0x0)]
         public uint Id;
-        [FieldOffset(0x8)]
-        public TextureResourceHandle* Texture;
-        [FieldOffset(0x10)]
+        [FieldOffset(0x08)]
         public uint SamplerFlags;
+        [FieldOffset(0x10)]
+        public TextureResourceHandle* Texture;
     }
 
     /// <summary>

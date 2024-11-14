@@ -16,61 +16,62 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [Inherits<CharacterBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC60)]
 public unsafe partial struct Human {
-    [FieldOffset(0x9D0)] public CustomizeData Customize;
-    [FieldOffset(0x9EC)] public uint SlotNeedsUpdateBitfield;
-    [FieldOffset(0x9F0)] public EquipmentModelId Head;
-    [FieldOffset(0x9F8)] public EquipmentModelId Top;
-    [FieldOffset(0xA00)] public EquipmentModelId Arms;
-    [FieldOffset(0xA08)] public EquipmentModelId Legs;
-    [FieldOffset(0xA10)] public EquipmentModelId Feet;
-    [FieldOffset(0xA18)] public EquipmentModelId Ear;
-    [FieldOffset(0xA20)] public EquipmentModelId Neck;
-    [FieldOffset(0xA28)] public EquipmentModelId Wrist;
-    [FieldOffset(0xA30)] public EquipmentModelId RFinger;
-    [FieldOffset(0xA38)] public EquipmentModelId LFinger;
-    [FieldOffset(0xA40)] public EquipmentModelId Glasses0;
-    [FieldOffset(0xA48)] public EquipmentModelId Glasses1;
-    [FieldOffset(0xA50)] public ushort RaceSexId; // cXXXX ID (0101, 0201, etc)
-    [FieldOffset(0xA52)] public ushort HairId; // hXXXX 
-    [FieldOffset(0xA54)] public ushort FaceId; // fXXXX ID
-    [FieldOffset(0xA56)] public ushort TailEarId; // tXXXX/zXXXX(viera)
-    [FieldOffset(0xA58)] public ushort FurId;
-
-    [FieldOffset(0xAA8), CExportIgnore] private nint _slotDecalBase;
-    [FieldOffset(0xAA8)] public TextureResourceHandle* HeadDecal;
-    [FieldOffset(0xAB0)] public TextureResourceHandle* TopDecal;
-    [FieldOffset(0xAB8)] public TextureResourceHandle* ArmsDecal;
-    [FieldOffset(0xAC0)] public TextureResourceHandle* LegsDecal;
-    [FieldOffset(0xAC8)] public TextureResourceHandle* FeetDecal;
-    [FieldOffset(0xAD0)] public TextureResourceHandle* EarDecal;
-    [FieldOffset(0xAD8)] public TextureResourceHandle* NeckDecal;
-    [FieldOffset(0xAE0)] public TextureResourceHandle* WristDecal;
-    [FieldOffset(0xAE8)] public TextureResourceHandle* RFingerDecal;
-    [FieldOffset(0xAF0)] public TextureResourceHandle* LFingerDecal;
-
+    [FieldOffset(0xA10)] public CustomizeData Customize;
+    [FieldOffset(0xA2C)] public uint SlotNeedsUpdateBitfield;
+    [FieldOffset(0xA30)] public EquipmentModelId Head;
+    [FieldOffset(0xA38)] public EquipmentModelId Top;
+    [FieldOffset(0xA40)] public EquipmentModelId Arms;
+    [FieldOffset(0xA48)] public EquipmentModelId Legs;
+    [FieldOffset(0xA50)] public EquipmentModelId Feet;
+    [FieldOffset(0xA58)] public EquipmentModelId Ear;
+    [FieldOffset(0xA60)] public EquipmentModelId Neck;
+    [FieldOffset(0xA68)] public EquipmentModelId Wrist;
+    [FieldOffset(0xA70)] public EquipmentModelId RFinger;
+    [FieldOffset(0xA78)] public EquipmentModelId LFinger;
+    [FieldOffset(0xA80)] public EquipmentModelId Glasses0;
+    [FieldOffset(0xA88)] public EquipmentModelId Glasses1;
+    [FieldOffset(0xA90)] public ushort RaceSexId; // cXXXX ID (0101, 0201, etc)
+    [FieldOffset(0xA92)] public ushort HairId; // hXXXX
+    [FieldOffset(0xA94)] public ushort FaceId; // fXXXX ID
+    [FieldOffset(0xA96)] public ushort TailEarId; // tXXXX/zXXXX(viera)
+    [FieldOffset(0xA98)] public ushort FurId;
+    
+    [FieldOffset(0xAE8), CExportIgnore] private nint _slotDecalBase;
+    [FieldOffset(0xAE8)] public TextureResourceHandle* HeadDecal;
+    [FieldOffset(0xAF0)] public TextureResourceHandle* TopDecal;
+    [FieldOffset(0xAF8)] public TextureResourceHandle* ArmsDecal;
+    [FieldOffset(0xB00)] public TextureResourceHandle* LegsDecal;
+    [FieldOffset(0xB08)] public TextureResourceHandle* FeetDecal;
+    [FieldOffset(0xB10)] public TextureResourceHandle* EarDecal;
+    [FieldOffset(0xB18)] public TextureResourceHandle* NeckDecal;
+    [FieldOffset(0xB20)] public TextureResourceHandle* WristDecal;
+    [FieldOffset(0xB28)] public TextureResourceHandle* RFingerDecal;
+    [FieldOffset(0xB30)] public TextureResourceHandle* LFingerDecal;
+    
+    
     public ref TextureResourceHandle* SlotDecal(int slot) {
         if (slot is < 0 or > 9)
             throw new ArgumentOutOfRangeException(nameof(slot));
         return ref ((TextureResourceHandle**)Unsafe.AsPointer(ref _slotDecalBase))[slot];
     }
-
+    
     public Span<Pointer<TextureResourceHandle>> SlotDecalsSpan
         => new(Unsafe.AsPointer(ref _slotDecalBase), 10);
 
-    [FieldOffset(0xBA0)] public ConstantBuffer* CustomizeParameterCBuffer;
-    [FieldOffset(0xBA8)] public ConstantBuffer* DecalColorCBuffer;
+    [FieldOffset(0xBE0)] public ConstantBuffer* CustomizeParameterCBuffer;
+    [FieldOffset(0xBE8)] public ConstantBuffer* DecalColorCBuffer;
 
     public ConstantBufferPointer<CustomizeParameter> CustomizeParameterTypedCBuffer
         => new(CustomizeParameterCBuffer);
     public ConstantBufferPointer<Vector4> DecalColorTypedCBuffer
         => new(DecalColorCBuffer);
 
-    [FieldOffset(0xBB0)] public TextureResourceHandle* Decal;
-    [FieldOffset(0xBB8)] public TextureResourceHandle* LegacyBodyDecal;
-    [FieldOffset(0xBC0)] public Texture* FreeCompanyCrest;
-    [FieldOffset(0xBC8)] public uint SlotFreeCompanyCrestBitfield; // & 0x001 for slot 0, up to & 0x200 for slot 9
-
-    [FieldOffset(0xC00)] public byte* ChangedEquipData;
+    [FieldOffset(0xBF0)] public TextureResourceHandle* Decal;
+    [FieldOffset(0xBF8)] public TextureResourceHandle* LegacyBodyDecal;
+    [FieldOffset(0xC00)] public Texture* FreeCompanyCrest;
+    [FieldOffset(0xC08)] public uint SlotFreeCompanyCrestBitfield; // & 0x001 for slot 0, up to & 0x200 for slot 9
+    
+    [FieldOffset(0xC40)] public byte* ChangedEquipData;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF")]
     public partial byte SetupVisor(ushort modelId, bool visorState);
