@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -12,7 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x288F8)]
 public unsafe partial struct RaptureHotbarModule {
-    public static RaptureHotbarModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureHotbarModule();
+    public static RaptureHotbarModule* Instance() {
+        var uiModule = UI.UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRaptureHotbarModule();
+    }
 
     [FieldOffset(0x50)] public UIModule* UIModule;
 

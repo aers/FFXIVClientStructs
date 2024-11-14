@@ -38,7 +38,11 @@ internal sealed class AgentGetterGenerator : IIncrementalGenerator {
 
         agentGetterInfo.StructInfo.RenderStart(writer);
 
-        writer.WriteLine($"public static {agentGetterInfo.StructInfo.Name}* Instance() => ({agentGetterInfo.StructInfo.Name}*)AgentModule.Instance()->GetAgentByInternalId((AgentId){agentGetterInfo.AgentId});");
+        writer.WriteLine($"public static {agentGetterInfo.StructInfo.Name}* Instance()");
+        using (writer.WriteBlock()) {
+            writer.WriteLine("var agentModule = AgentModule.Instance();");
+            writer.WriteLine($"return agentModule == null ? null : ({agentGetterInfo.StructInfo.Name}*)agentModule->GetAgentByInternalId((AgentId){agentGetterInfo.AgentId});");
+        }
 
         agentGetterInfo.StructInfo.RenderEnd(writer);
 

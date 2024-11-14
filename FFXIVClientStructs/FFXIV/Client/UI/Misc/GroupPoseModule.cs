@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
@@ -11,7 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public unsafe partial struct GroupPoseModule {
-    public static GroupPoseModule* Instance() => Framework.Instance()->GetUIModule()->GetGroupPoseModule();
+    public static GroupPoseModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetGroupPoseModule();
+    }
 
     // [FieldOffset(0x48)] public byte Unk40;
     // [FieldOffset(0x49)] public byte Unk41;

@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD28)]
 public unsafe partial struct AozNoteModule {
-    public static AozNoteModule* Instance() => Framework.Instance()->GetUIModule()->GetAozNoteModule();
+    public static AozNoteModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetAozNoteModule();
+    }
 
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray5<ActiveSet> _activeSets;
 

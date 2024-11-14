@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Text;
@@ -12,7 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
 public unsafe partial struct PronounModule {
-    public static PronounModule* Instance() => Framework.Instance()->GetUIModule()->GetPronounModule();
+    public static PronounModule* Instance() {
+        var uiModule = UI.UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetPronounModule();
+    }
 
     [FieldOffset(0x08)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x10)] public RaptureTextModule* RaptureTextModule;

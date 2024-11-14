@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentModule
@@ -7,7 +5,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE28)]
 public unsafe partial struct AgentModule {
-    public static AgentModule* Instance() => Framework.Instance()->GetUIModule()->GetAgentModule();
+    public static AgentModule* Instance() {
+        var uiModule = UI.UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetAgentModule();
+    }
 
     [FieldOffset(0x8)] public UIModule* UIModule;
     [FieldOffset(0x10)] public byte Initialized;

@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1C78)]
 public unsafe partial struct InfoModule {
-    public static InfoModule* Instance() => UIModule.Instance()->GetInfoModule();
+    public static InfoModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetInfoModule();
+    }
 
     [FieldOffset(0x1978), FixedSizeArray] internal FixedSizeArray35<Pointer<InfoProxyInterface>> _infoProxies;
     [FieldOffset(0x1A90)] public ulong LocalContentId;

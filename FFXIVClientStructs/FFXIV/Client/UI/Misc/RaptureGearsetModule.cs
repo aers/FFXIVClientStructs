@@ -12,7 +12,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 79 08 49 8B F8", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB808)]
 public unsafe partial struct RaptureGearsetModule {
-    public static RaptureGearsetModule* Instance() => UIModule.Instance()->GetRaptureGearsetModule();
+    public static RaptureGearsetModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRaptureGearsetModule();
+    }
 
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray100<GearsetEntry> _entries;
 

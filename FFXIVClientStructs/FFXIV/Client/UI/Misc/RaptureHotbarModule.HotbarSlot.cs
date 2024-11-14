@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -201,7 +200,11 @@ public partial struct RaptureHotbarModule {
         /// </summary>
         /// <param name="type">The <see cref="HotbarSlotType"/> that this slot should trigger.</param>
         /// <param name="id">The ID of the command that this slot should trigger.</param>
-        public void Set(HotbarSlotType type, uint id) => Set(Framework.Instance()->GetUIModule(), type, id);
+        public void Set(HotbarSlotType type, uint id) {
+            var uiModule = UI.UIModule.Instance();
+            if (uiModule != null)
+                Set(uiModule, type, id);
+        }
 
         /// <summary>
         /// Populates <see cref="IconId"/> with the apparent information in <see cref="ApparentActionId"/> and <see cref="ApparentSlotType"/>.

@@ -13,7 +13,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<InputData>, Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA28)]
 public unsafe partial struct UIInputData {
-    public static UIInputData* Instance() => UIModule.Instance()->GetUIInputData();
+    public static UIInputData* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetUIInputData();
+    }
 
     public KeyStateFlags GetKeyState(int key) => KeyboardInputs.KeyState[key];
     public KeyStateFlags GetKeyState(SeVirtualKey key) => GetKeyState((int)key);

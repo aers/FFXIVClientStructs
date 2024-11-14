@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
@@ -12,7 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 89 06", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x1190)]
 public unsafe partial struct AcquaintanceModule {
-    public static AcquaintanceModule* Instance() => Framework.Instance()->GetUIModule()->GetAcquaintanceModule();
+    public static AcquaintanceModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetAcquaintanceModule();
+    }
+
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray16<Acquaintance> _tellHistory;
     [FieldOffset(0xEC8)] public uint NumTellHistoryEntries;
 

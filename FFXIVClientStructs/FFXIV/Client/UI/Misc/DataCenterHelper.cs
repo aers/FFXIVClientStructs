@@ -1,11 +1,12 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::DataCenterHelper
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct DataCenterHelper {
-    public static DataCenterHelper* Instance() => Framework.Instance()->GetUIModule()->GetDataCenterHelper();
+    public static DataCenterHelper* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetDataCenterHelper();
+    }
 
     /// <summary>
     /// Contains all data centers of the current region.

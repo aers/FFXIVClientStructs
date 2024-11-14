@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3BD0)]
 public unsafe partial struct RaptureUiDataModule {
-    public static RaptureUiDataModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureUiDataModule();
+    public static RaptureUiDataModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRaptureUiDataModule();
+    }
 
     [FieldOffset(0x4E0), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListTankOrder;
     [FieldOffset(0x500), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListHealerOrder;

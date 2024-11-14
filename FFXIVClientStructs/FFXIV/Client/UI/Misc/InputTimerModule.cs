@@ -1,12 +1,13 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::InputTimerModule
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x4F8)]
 public unsafe partial struct InputTimerModule {
-    public static InputTimerModule* Instance() => Framework.Instance()->GetUIModule()->GetInputTimerModule();
+    public static InputTimerModule* Instance() {
+        var uiModule = UI.UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetInputTimerModule();
+    }
 
     [FieldOffset(0x08)] public UIModule* UIModule;
     [FieldOffset(0x10)] public float AfkTimer; // counts up if AutoAfk is enabled and negative if afk

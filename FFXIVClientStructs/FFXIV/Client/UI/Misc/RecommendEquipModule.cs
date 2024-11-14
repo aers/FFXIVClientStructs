@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
@@ -8,7 +7,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct RecommendEquipModule {
-    public static RecommendEquipModule* Instance() => Framework.Instance()->GetUIModule()->GetRecommendEquipModule();
+    public static RecommendEquipModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRecommendEquipModule();
+    }
 
     [FieldOffset(0x00)] public bool IsUpdating;
     [FieldOffset(0x01)] public bool IsSetupForDifferentClassJob;
