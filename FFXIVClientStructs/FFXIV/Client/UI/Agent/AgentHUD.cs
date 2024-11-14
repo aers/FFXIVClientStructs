@@ -25,6 +25,7 @@ public unsafe partial struct AgentHUD {
 
     [FieldOffset(0xD2C)] public int CompanionSummonTimer;
 
+    /// <remarks> The local player is always first in the array, their actual position in the UI can be retrieved using Index </remarks>
     [FieldOffset(0xD38), FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMembers;
 
     [FieldOffset(0x1384)] public short PartyMemberCount;
@@ -82,6 +83,7 @@ public unsafe struct HudPartyMember {
     [FieldOffset(0x8)] public byte* Name;
     [FieldOffset(0x10)] public ulong ContentId;
     [FieldOffset(0x18)] public uint EntityId;
+    [FieldOffset(0x20)] public byte Index;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
