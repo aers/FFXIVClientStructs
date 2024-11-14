@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Hud)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4DA8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4DF0)]
 public unsafe partial struct AgentHUD {
     [FieldOffset(0xB18)] public uint CastBarAddonId;
 
@@ -23,35 +23,35 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0xB50)] public int TargetSwitchToSelfCounter;
     [FieldOffset(0xB54)] public uint CurrentBattleCharaTargetLevel;
 
-    [FieldOffset(0xD40)] public int CompanionSummonTimer;
+    [FieldOffset(0xD2C)] public int CompanionSummonTimer;
 
-    [FieldOffset(0xD50), FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMembers;
+    [FieldOffset(0xD38), FixedSizeArray] internal FixedSizeArray10<HudPartyMember> _partyMembers;
 
-    [FieldOffset(0x1340)] public short PartyMemberCount;
-    [FieldOffset(0x1348)] public uint PartyTitleAddonId;
-    [FieldOffset(0x134C), FixedSizeArray] internal FixedSizeArray40<uint> _raidMemberIds;
-    [FieldOffset(0x13EC)] public int RaidGroupSize;
+    [FieldOffset(0x1384)] public short PartyMemberCount;
+    [FieldOffset(0x138C)] public uint PartyTitleAddonId;
+    [FieldOffset(0x1390), FixedSizeArray] internal FixedSizeArray40<uint> _raidMemberIds;
+    [FieldOffset(0x1430)] public int RaidGroupSize;
 
-    [FieldOffset(0x1400), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
-    [FieldOffset(0x1478), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
+    [FieldOffset(0x1444), FixedSizeArray] internal FixedSizeArray10<HudPartyMemberEnmity> _hudPartyMemberEnmity;
+    [FieldOffset(0x14C0), FixedSizeArray] internal FixedSizeArray10<Pointer<HudPartyMemberEnmity>> _hudPartyMemberEnmityPtrs;
 
-    [FieldOffset(0x3500)] public uint ExpCurrentExperience;
-    [FieldOffset(0x3504)] public uint ExpNeededExperience;
-    [FieldOffset(0x3508)] public uint ExpRestedExperience;
-    [FieldOffset(0x350C)] public uint CharacterClassJobId;
+    [FieldOffset(0x3548)] public uint ExpCurrentExperience;
+    [FieldOffset(0x354C)] public uint ExpNeededExperience;
+    [FieldOffset(0x3550)] public uint ExpRestedExperience;
+    [FieldOffset(0x3554)] public uint CharacterClassJobId;
 
-    [FieldOffset(0x351C)] public uint ExpClassJobId;
-    [FieldOffset(0x3520)] public ushort ExpLevel;
-    [FieldOffset(0x3522)] public ushort ExpContentLevel; // level in eureka and bozja for example
-    [FieldOffset(0x3524)] public bool ExpIsLevelSynced;
-    [FieldOffset(0x3525)] public bool ExpUnkBool2;
-    [FieldOffset(0x3526)] public bool ExpIsMaxLevel;
-    [FieldOffset(0x3527)] public bool ExpIsInEureka;
+    [FieldOffset(0x3564)] public uint ExpClassJobId;
+    [FieldOffset(0x3568)] public ushort ExpLevel;
+    [FieldOffset(0x356A)] public ushort ExpContentLevel; // level in eureka and bozja for example
+    [FieldOffset(0x356C)] public bool ExpIsLevelSynced;
+    [FieldOffset(0x356D)] public bool ExpUnkBool2;
+    [FieldOffset(0x356E)] public bool ExpIsMaxLevel;
+    [FieldOffset(0x356F)] public bool ExpIsInEureka;
 
-    [FieldOffset(0x3530), FixedSizeArray] internal FixedSizeArray16<HudQueuedBattleTalk> _queuedBattleTalks;
+    [FieldOffset(0x3578), FixedSizeArray] internal FixedSizeArray16<HudQueuedBattleTalk> _queuedBattleTalks;
 
-    [FieldOffset(0x4A10)] public StdVector<MapMarkerData> MapMarkers;
-    [FieldOffset(0x4A28)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
+    [FieldOffset(0x4A58)] public StdVector<MapMarkerData> MapMarkers;
+    [FieldOffset(0x4A70)] public StdVector<Pointer<MapMarkerData>> MapMarkerPtrs;
 
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 44 8B C2 83 E2 1F")]
     public partial bool IsMainCommandEnabled(uint mainCommandId);
@@ -76,7 +76,7 @@ public struct HudPartyMemberEnmity {
     [FieldOffset(0x08)] public short Index;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe struct HudPartyMember {
     [FieldOffset(0x0)] public BattleChara* Object;
     [FieldOffset(0x8)] public byte* Name;
