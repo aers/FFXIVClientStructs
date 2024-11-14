@@ -3,6 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ActionDetail)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 81 8B ?? ?? ?? ?? ?? ?? ?? ?? 33 FF", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe partial struct AgentActionDetail {
     [FieldOffset(0x38)] public ActionKind ActionKind;
