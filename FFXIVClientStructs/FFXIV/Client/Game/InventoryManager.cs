@@ -111,7 +111,7 @@ public unsafe partial struct InventoryContainer {
 
 [GenerateInterop]
 [VirtualTable("66 89 51 0C 48 8D 05", 7)]
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x08)] public InventoryType Container;
     [FieldOffset(0x0C)] public short Slot;
