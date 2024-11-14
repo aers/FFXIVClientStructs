@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct EmoteHistoryModule {
-    public static EmoteHistoryModule* Instance() => Framework.Instance()->GetUIModule()->GetEmoteHistoryModule();
+    public static EmoteHistoryModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetEmoteHistoryModule();
+    }
 
     [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray6<ushort> _history;
     [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray20<ushort> _favorites;

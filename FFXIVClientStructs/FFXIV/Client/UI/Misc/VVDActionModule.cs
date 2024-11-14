@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct VVDActionModule {
-    public static VVDActionModule* Instance() => Framework.Instance()->GetUIModule()->GetVVDActionModule();
+    public static VVDActionModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetVVDActionModule();
+    }
 
     [FieldOffset(0x48)] public byte Action1;
     [FieldOffset(0x49)] public byte Action2;

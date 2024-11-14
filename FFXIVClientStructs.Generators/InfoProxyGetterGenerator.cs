@@ -38,7 +38,11 @@ internal sealed class InfoProxyGetterGenerator : IIncrementalGenerator {
 
         infoProxyGetterInfo.StructInfo.RenderStart(writer);
 
-        writer.WriteLine($"public static {infoProxyGetterInfo.StructInfo.Name}* Instance() => ({infoProxyGetterInfo.StructInfo.Name}*)InfoModule.Instance()->GetInfoProxyById((InfoProxyId){infoProxyGetterInfo.InfoProxyId});");
+        writer.WriteLine($"public static {infoProxyGetterInfo.StructInfo.Name}* Instance()");
+        using (writer.WriteBlock()) {
+            writer.WriteLine("var infoModule = InfoModule.Instance();");
+            writer.WriteLine($"return infoModule == null ? null : ({infoProxyGetterInfo.StructInfo.Name}*)infoModule->GetInfoProxyById((InfoProxyId){infoProxyGetterInfo.InfoProxyId});");
+        }
 
         infoProxyGetterInfo.StructInfo.RenderEnd(writer);
 

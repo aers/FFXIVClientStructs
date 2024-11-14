@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
 public unsafe partial struct ItemContextCustomizeModule {
-    public static ItemContextCustomizeModule* Instance() => Framework.Instance()->GetUIModule()->GetItemContextCustomizeModule();
+    public static ItemContextCustomizeModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetItemContextCustomizeModule();
+    }
 
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray128<byte> _firstTier;
     [FieldOffset(0xC8), FixedSizeArray] internal FixedSizeArray128<byte> _secondTier;

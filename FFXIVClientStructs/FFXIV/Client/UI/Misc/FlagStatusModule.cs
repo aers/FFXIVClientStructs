@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
 public unsafe partial struct FlagStatusModule {
-    public static FlagStatusModule* Instance() => Framework.Instance()->GetUIModule()->GetFlagStatusModule();
+    public static FlagStatusModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetFlagStatusModule();
+    }
 
     /// <remarks>
     /// 13 = Default Currency Setting (Index of Rotation array in UIModule.UIModuleHelpers.CurrencySettings)

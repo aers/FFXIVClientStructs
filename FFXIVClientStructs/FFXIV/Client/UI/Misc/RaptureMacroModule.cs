@@ -10,7 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x51AA8)]
 public unsafe partial struct RaptureMacroModule {
-    public static RaptureMacroModule* Instance() => UIModule.Instance()->GetRaptureMacroModule();
+    public static RaptureMacroModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRaptureMacroModule();
+    }
 
     [FieldOffset(0x48)] public RaptureTextModule* RaptureTextModule;
     //[FieldOffset(0x50)] public TextChecker* TextChecker;

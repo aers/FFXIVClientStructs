@@ -12,7 +12,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [VirtualTable("C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 83", 10)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9D18)]
 public unsafe partial struct RaptureAtkUnitManager {
-    public static RaptureAtkUnitManager* Instance() => &RaptureAtkModule.Instance()->RaptureAtkUnitManager;
+    public static RaptureAtkUnitManager* Instance() {
+        var raptureAtkModule = RaptureAtkModule.Instance();
+        return raptureAtkModule == null ? null : &raptureAtkModule->RaptureAtkUnitManager;
+    }
 
     [FieldOffset(0x9C90)] public AtkEventInterface WindowContextMenuHandler;
 

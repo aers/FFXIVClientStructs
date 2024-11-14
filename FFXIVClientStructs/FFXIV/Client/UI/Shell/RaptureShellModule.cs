@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Common;
@@ -12,7 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Shell;
 [Inherits<ShellCommandModule>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1218)]
 public unsafe partial struct RaptureShellModule {
-    public static RaptureShellModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureShellModule();
+    public static RaptureShellModule* Instance() {
+        var uiModule = UI.UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRaptureShellModule();
+    }
 
     [FieldOffset(0x250)] public ShellCommandInterface ShellCommandInterface;
     [FieldOffset(0x258)] public UIModule* UIModule;

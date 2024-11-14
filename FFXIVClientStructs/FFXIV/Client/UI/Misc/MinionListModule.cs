@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct MinionListModule {
-    public static MinionListModule* Instance() => Framework.Instance()->GetUIModule()->GetMinionListModule();
+    public static MinionListModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetMinionListModule();
+    }
 
     // [FieldOffset(0x48)] public byte Unk40; // set to 1 in ReadFile
     [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenCompanions;

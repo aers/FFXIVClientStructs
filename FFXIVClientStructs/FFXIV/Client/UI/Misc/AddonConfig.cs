@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct AddonConfig {
-    public static AddonConfig* Instance() => Framework.Instance()->GetUIModule()->GetAddonConfig();
+    public static AddonConfig* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetAddonConfig();
+    }
 
     [FieldOffset(0x58)] public AddonConfigData* ModuleData;
 

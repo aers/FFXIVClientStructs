@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,5 +9,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct RetainerTaskDataModule {
-    public static RetainerTaskDataModule* Instance() => Framework.Instance()->GetUIModule()->GetRetainerTaskDataModule();
+    public static RetainerTaskDataModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRetainerTaskDataModule();
+    }
 }

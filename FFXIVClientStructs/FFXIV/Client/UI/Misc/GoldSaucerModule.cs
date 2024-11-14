@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2C8)]
 public unsafe partial struct GoldSaucerModule {
-    public static GoldSaucerModule* Instance() => Framework.Instance()->GetUIModule()->GetGoldSaucerModule();
+    public static GoldSaucerModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetGoldSaucerModule();
+    }
 
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray10<TripleTriadDeck> _decks;
     [FieldOffset(0x28C), FixedSizeArray] internal FixedSizeArray23<ushort> _hotbarMinions; // Companion RowIds

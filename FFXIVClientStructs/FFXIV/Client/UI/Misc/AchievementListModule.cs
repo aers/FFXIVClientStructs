@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -10,7 +9,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct AchievementListModule {
-    public static AchievementListModule* Instance() => Framework.Instance()->GetUIModule()->GetAchievementListModule();
+    public static AchievementListModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetAchievementListModule();
+    }
+
     // [FieldOffset(0x48)] public byte Unk40;
     [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray30<ushort> _watchList;
     // [FieldOffset(0x86)] public byte Unk7E;

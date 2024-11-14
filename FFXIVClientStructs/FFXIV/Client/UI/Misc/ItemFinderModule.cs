@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
@@ -11,7 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x11D0)]
 public unsafe partial struct ItemFinderModule {
-    public static ItemFinderModule* Instance() => Framework.Instance()->GetUIModule()->GetItemFinderModule();
+    public static ItemFinderModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetItemFinderModule();
+    }
 
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray24<uint> _requestItemIds;
     [FieldOffset(0xA8)] public bool IsRequestUnfulfilled;

@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -12,7 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct PvpSetModule {
-    public static PvpSetModule* Instance() => Framework.Instance()->GetUIModule()->GetPvpSetModule();
+    public static PvpSetModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetPvpSetModule();
+    }
 
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray20<AdditionalPvpActions> _additionalActions;
     [FieldOffset(0x98)] internal byte Unk90;

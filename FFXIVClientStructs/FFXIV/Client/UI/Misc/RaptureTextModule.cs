@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.Excel;
@@ -17,7 +16,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<TextModule>, Inherits<TextChecker.ExecNonMacroFunc>, Inherits<ExcelLanguageEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE60)]
 public unsafe partial struct RaptureTextModule {
-    public static RaptureTextModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureTextModule();
+    public static RaptureTextModule* Instance() {
+        var uiModule = UI.UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRaptureTextModule();
+    }
 
     [FieldOffset(0x520)] public UIModule* UIModule;
     [FieldOffset(0x528)] public TextChecker TextChecker;

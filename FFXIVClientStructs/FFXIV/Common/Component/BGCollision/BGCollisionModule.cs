@@ -50,17 +50,37 @@ public unsafe partial struct BGCollisionModule {
     public partial bool SweepSphereMaterialFilter(RaycastHit* hitInfo, Vector3* origin, Vector3* direction, float maxDistance, int layerMask, int* flags);
 
     public static bool RaycastMaterialFilter(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
+        var framework = Framework.Instance();
+        if (framework == null) {
+            hitInfo = default;
+            return false;
+        }
+        var bgCollisionModule = framework->BGCollisionModule;
+        if (bgCollisionModule == null) {
+            hitInfo = default;
+            return false;
+        }
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
-        var result = Framework.Instance()->BGCollisionModule->RaycastMaterialFilter(&hit, &origin, &direction, maxDistance, 1, flags);
+        var result = bgCollisionModule->RaycastMaterialFilter(&hit, &origin, &direction, maxDistance, 1, flags);
         hitInfo = hit;
         return result;
     }
 
     public static bool SweepSphereMaterialFilter(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
+        var framework = Framework.Instance();
+        if (framework == null) {
+            hitInfo = default;
+            return false;
+        }
+        var bgCollisionModule = framework->BGCollisionModule;
+        if (bgCollisionModule == null) {
+            hitInfo = default;
+            return false;
+        }
         var flags = stackalloc int[] { 0x4000, 0, 0x4000, 0 };
         var hit = new RaycastHit();
-        var result = Framework.Instance()->BGCollisionModule->SweepSphereMaterialFilter(&hit, &origin, &direction, maxDistance, 1, flags);
+        var result = bgCollisionModule->SweepSphereMaterialFilter(&hit, &origin, &direction, maxDistance, 1, flags);
         hitInfo = hit;
         return result;
     }

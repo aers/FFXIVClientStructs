@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -14,7 +13,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<LogModule>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3710)]
 public unsafe partial struct RaptureLogModule {
-    public static RaptureLogModule* Instance() => Framework.Instance()->GetUIModule()->GetRaptureLogModule();
+    public static RaptureLogModule* Instance() {
+        var uiModule = UI.UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetRaptureLogModule();
+    }
 
     /// <remarks> Always <c>0x1F</c>, used as column terminator in <see cref="LogModule.LogMessageData"/>. </remarks>
     [FieldOffset(0x80)] internal Utf8String LogMessageDataTerminator;

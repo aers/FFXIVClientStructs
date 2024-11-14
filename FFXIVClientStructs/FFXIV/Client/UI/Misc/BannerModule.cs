@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
@@ -11,7 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct BannerModule {
-    public static BannerModule* Instance() => Framework.Instance()->GetUIModule()->GetBannerModule();
+    public static BannerModule* Instance() {
+        var uiModule = UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetBannerModule();
+    }
 
     [FieldOffset(0x48)] public BannerModuleData* Data;
 

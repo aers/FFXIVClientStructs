@@ -21,7 +21,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0xEE030)]
 [VirtualTable("4C 89 79 28 48 8D 0D", 7)]
 public unsafe partial struct UIModule {
-    public static UIModule* Instance() => Framework.Instance()->GetUIModule();
+    public static UIModule* Instance() {
+        var framework = Framework.Instance();
+        return framework == null ? null : framework->GetUIModule();
+    }
 
     [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray57<UIModuleHandler> _uIModuleHandlers;
     [FieldOffset(0x3C0), FixedSizeArray] internal FixedSizeArray19<RaptureAtkHistory> _atkHistory;

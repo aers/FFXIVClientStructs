@@ -11,7 +11,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE5C8)]
 public unsafe partial struct ConfigModule {
-    public static ConfigModule* Instance() => Framework.Instance()->GetUIModule()->GetConfigModule();
+    public static ConfigModule* Instance() {
+        var uiModule = UI.UIModule.Instance();
+        return uiModule == null ? null : uiModule->GetConfigModule();
+    }
 
     public const int ConfigOptionCount = 715;
     [FieldOffset(0x28)] public UIModule* UIModule;
@@ -30,7 +33,9 @@ public unsafe partial struct ConfigModule {
 
         public string GetName() {
             if ((short)OptionId < 0) return string.Empty;
-            var sysConfig = Framework.Instance()->SystemConfig;
+            var framework = Framework.Instance();
+            if (framework == null) return string.Empty;
+            var sysConfig = framework->SystemConfig;
             var id = (uint)OptionId;
             byte* namePtr = null;
             if (sysConfig.ConfigCount > id) namePtr = (sysConfig.ConfigEntry + id)->Name;
