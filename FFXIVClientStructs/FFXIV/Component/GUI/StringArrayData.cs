@@ -2,10 +2,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 [GenerateInterop]
 [Inherits<AtkArrayData>]
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct StringArrayData {
-    [FieldOffset(0x20)] public byte** StringArray;
-    [FieldOffset(0x28)] public byte** ManagedStringArray;
+    [FieldOffset(0x28)] public byte** StringArray;
+    [FieldOffset(0x30)] public byte** ManagedStringArray;
 
     /// <summary>
     /// Set a value at the specified index of the StringArray.
