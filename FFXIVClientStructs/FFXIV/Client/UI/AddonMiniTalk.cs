@@ -9,10 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 A3 ?? ?? ?? ?? 48 8D 8B", 3)]
 public unsafe partial struct AddonMiniTalk {
 
-    [FieldOffset(0x248), FixedSizeArray] public FixedSizeArray10<TalkBubbleEntry> TalkBubbles;
+    [FieldOffset(0x248), FixedSizeArray] internal FixedSizeArray10<TalkBubbleEntry> _talkBubbles;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x38)]
-    public unsafe partial struct TalkBubbleEntry {
+    public struct TalkBubbleEntry {
         [FieldOffset(0x08)] public AtkComponentNode* ComponentNode;
         [FieldOffset(0x10)] public AtkComponentNode* ComponentNode2; // same as above?
         [FieldOffset(0x18)] public AtkResNode* BubbleResNode; // inside component node
