@@ -45,7 +45,7 @@ public unsafe partial struct TimelineContainer {
     [FieldOffset(0x33F)] public byte Flags2; // bit 2 makes it load the requested banner animation
 
     // 0x40 = WeaponDrawn
-    [FieldOffset(0x342)] public byte Flags3;
+    [FieldOffset(0x34A)] public byte Flags3;
 
     /// <summary> Computes height difference between the player the action timeline belongs to and target to height adjust emotes. </summary>
     /// <param name="target"> The object id of the target of the emote. </param>

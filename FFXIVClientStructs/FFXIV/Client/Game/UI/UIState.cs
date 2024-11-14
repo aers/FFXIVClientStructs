@@ -24,7 +24,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x15A8)] public Telepo Telepo;
     [FieldOffset(0x1600)] public Cabinet Cabinet;
     [FieldOffset(0x1688)] public Achievement Achievement;
-    [FieldOffset(0x1C20)] public Buddy Buddy;
+    [FieldOffset(0x1C98)] public Buddy Buddy;
     [FieldOffset(0x37AC)] public PvPProfile PvPProfile;
     [FieldOffset(0x3828)] internal void* Unk3828; // some UI timer for PvP Results?!
     [FieldOffset(0x3830)] public ContentsNote ContentsNote;

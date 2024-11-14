@@ -9,10 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // characters that fight (players, monsters, etc)
 [GenerateInterop]
 [Inherits<Character>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3630)]
+[StructLayout(LayoutKind.Explicit, Size = 0x36A0)]
 public unsafe partial struct BattleChara {
-    [FieldOffset(0x22C0)] public StatusManager StatusManager;
-    [FieldOffset(0x25B0)] public CastInfo CastInfo;
-    [FieldOffset(0x2720)] public ActionEffectHandler ActionEffectHandler;
-    [FieldOffset(0x3620)] public ForayInfo ForayInfo;
+    [FieldOffset(0x2330)] public StatusManager StatusManager;
+    [FieldOffset(0x2620)] public CastInfo CastInfo;
+    [FieldOffset(0x2790)] public ActionEffectHandler ActionEffectHandler;
+    [FieldOffset(0x3690)] public ForayInfo ForayInfo;
 }
