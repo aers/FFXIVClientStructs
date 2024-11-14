@@ -44,7 +44,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 0F B6 5E")]
     public static partial bool IsContentIdInParty(ulong contentId);
 
-    [MemberFunction("40 53 41 57 48 83 EC ?? 48 8B D9 4C 8B FA")]
+    [MemberFunction("40 53 41 57 48 83 EC 28 48 8B D9 4C 8B FA 48 8B 0D")]
     public partial void ReceiveListing(nint packet);
 }
 

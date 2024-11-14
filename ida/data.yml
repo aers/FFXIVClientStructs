@@ -1705,7 +1705,7 @@ classes:
       0x14005DF50: IndexOf
       0x14005E810: FindLastOfImpl
       0x14005ECB0: FindFirstOfImpl
-#fail       0x1407854E0: ToInteger # strtoi for utf8string (str, base)
+      0x1407535B0: ToInteger # strtoi for utf8string (str, base)
 #fail       0x1417BBA60: SanitizeString
   Component::GUI::AtkValue:
     funcs:
@@ -3921,6 +3921,7 @@ classes:
 #fail       0x1401233F0: GetMemberByContentId # Static
 #fail       0x1401234B0: GetMemberByEntityId # Static
 #fail       0x1405E3860: IsContentIdInParty # Static
+      0x1408D8570: ReceiveListing
   Client::UI::Info::InfoProxyPartyMember:
     vtbls:
 #fail       - ea: 0x141EA6CF8
@@ -3963,7 +3964,7 @@ classes:
 #fail       0x140135F70: ProcessItemHistory
       # 0x140104500: ProcessItemHistory_Internal # inlined in ProcessItemHistory
 #fail       0x140136810: SetLastPurchasedItem
-#fail       0x140136980: SendPurchaseRequestPacket
+      0x1408CABE0: SendPurchaseRequestPacket
 #fail       0x140136B10: ProcessPlayerRetainerInfo
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
@@ -4609,9 +4610,9 @@ classes:
 #fail       0x1418255F0: HandlePartyInvitePacket
 #fail       0x1418256C0: HandleSocialPacket
 #fail       0x1418293C0: HandleMarketBoardOfferingsPacket
-#fail       0x141829480: HandleMarketBoardPurchasePacket
+      0x1418107E0: HandleMarketBoardPurchasePacket
 #fail       0x141829F70: HandleMarketBoardHistoryPacket
-#fail       0x141829340: HandleMarketBoardItemRequestStartPacket
+      0x1418106A0: HandleMarketBoardItemRequestStartPacket
 #fail # wrong offset      0x14130DD20: ctor
   Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
     vtbls:
@@ -8018,14 +8019,14 @@ classes:
         base: Client::Game::Character::CharacterData
     vfuncs:
       76: GetModelChara
-      79: GetStatusManager
-      80: GetStatusManager_2
-      81: GetCastInfo
-      82: GetCastInfo_2
-      83: GetActionEffectHandler
-      84: GetScreenLogManager
-      85: GetForayInfo
-      86: GetForayInfo_2
+      77: GetStatusManager
+      78: GetStatusManager_2
+      79: GetCastInfo
+      80: GetCastInfo_2
+      81: GetActionEffectHandler
+      82: GetScreenLogManager
+      83: GetForayInfo
+      84: GetForayInfo_2
     funcs:
 #fail       0x1408962D0: IsValidClientObject
 #fail       0x1408CEFB0: CalculateMovementSpeedMultiplier
@@ -8826,7 +8827,7 @@ classes:
 #fail       0x140E30FC0: UpdateBattleTalk
 #fail       0x140E2C990: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
 #fail       0x140E301D0: GetMainCommandString  # MainCommand exd
-#fail       0x140E30510: OpenSystemMenu
+      0x140D94AA0: OpenSystemMenu
   Client::UI::Agent::AgentChatLog:
     vtbls:
 #fail       - ea: 0x141F72058
@@ -12510,6 +12511,7 @@ classes:
 #fail       0x140B1F4A0: CanLeaveCurrentContent # static
 #fail       0x140B21050: GetContentFinderCondition
 #fail       0x141840B40: GetPublicContentDirectorByType # static
+      0x140B22F40: SetTerritoryTypeId
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141FA33B8
@@ -14403,6 +14405,9 @@ classes:
     vtbls:
       - ea: 0x142036390
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1412AFC30: AddFlyText
+      0x1412AFF90: CreateFlyText
   Client::UI::AddonMiniTalk:
     vtbls:
       - ea: 0x1420365D0
