@@ -47,6 +47,9 @@ public unsafe partial struct EventFramework {
     [MemberFunction("40 53 57 41 56 48 83 EC 70 48 8B 02")]
     public partial bool CheckInteractRange(GameObject* source, GameObject* target, byte interactionType, bool logErrorsToUser);
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B D9 48 89 6C 24")]
+    public partial void SetTerritoryTypeId(ushort territoryType);
+
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8")]
     public static partial uint GetCurrentContentId();
 
