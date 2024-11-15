@@ -35,7 +35,7 @@ public unsafe partial struct Human {
     [FieldOffset(0xA94)] public ushort FaceId; // fXXXX ID
     [FieldOffset(0xA96)] public ushort TailEarId; // tXXXX/zXXXX(viera)
     [FieldOffset(0xA98)] public ushort FurId;
-    
+
     [FieldOffset(0xAE8), CExportIgnore] private nint _slotDecalBase;
     [FieldOffset(0xAE8)] public TextureResourceHandle* HeadDecal;
     [FieldOffset(0xAF0)] public TextureResourceHandle* TopDecal;
@@ -47,14 +47,14 @@ public unsafe partial struct Human {
     [FieldOffset(0xB20)] public TextureResourceHandle* WristDecal;
     [FieldOffset(0xB28)] public TextureResourceHandle* RFingerDecal;
     [FieldOffset(0xB30)] public TextureResourceHandle* LFingerDecal;
-    
-    
+
+
     public ref TextureResourceHandle* SlotDecal(int slot) {
         if (slot is < 0 or > 9)
             throw new ArgumentOutOfRangeException(nameof(slot));
         return ref ((TextureResourceHandle**)Unsafe.AsPointer(ref _slotDecalBase))[slot];
     }
-    
+
     public Span<Pointer<TextureResourceHandle>> SlotDecalsSpan
         => new(Unsafe.AsPointer(ref _slotDecalBase), 10);
 
@@ -70,7 +70,7 @@ public unsafe partial struct Human {
     [FieldOffset(0xBF8)] public TextureResourceHandle* LegacyBodyDecal;
     [FieldOffset(0xC00)] public Texture* FreeCompanyCrest;
     [FieldOffset(0xC08)] public uint SlotFreeCompanyCrestBitfield; // & 0x001 for slot 0, up to & 0x200 for slot 9
-    
+
     [FieldOffset(0xC40)] public byte* ChangedEquipData;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF")]

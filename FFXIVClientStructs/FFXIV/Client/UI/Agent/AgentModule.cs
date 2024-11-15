@@ -321,7 +321,7 @@ public enum AgentId : uint {
     EurekaWeaponAdjust = 296,
     TeleportHousingFriend = 297,
     ContentMemberList = 298,
-    InventoryBuddy = 299,  
+    InventoryBuddy = 299,
     ContentsReplayPlayer = 300,
     ContentsReplaySetting = 301,
     MiragePrismPrismBox = 301, // Glamour Dresser
@@ -371,7 +371,7 @@ public enum AgentId : uint {
     QuestRedo = 350,
     QuestRedoHud = 351,
     CircleInvite = 352, // Fellowships
-    CircleList = 353, 
+    CircleList = 353,
     CircleBook = 354,
     CircleBookSetting = 355,
     CircleBookBlackList = 356,

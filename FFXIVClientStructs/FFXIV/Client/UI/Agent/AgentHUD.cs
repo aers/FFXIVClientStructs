@@ -65,7 +65,7 @@ public unsafe partial struct AgentHUD {
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 08 48 8B CB E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 45 85 F6")]
     public partial byte* GetMainCommandString(uint commandId, bool includeKeybind = true, bool includeNewIndicator = false);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CF 4C 89 B4 24 B8 08 00 00")]
     public partial void OpenSystemMenu(AtkValue* atkValueArgs, uint menuSize);
 }

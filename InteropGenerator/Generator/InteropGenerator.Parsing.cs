@@ -68,14 +68,14 @@ public sealed partial class InteropGenerator {
              parent = parent.ContainingType) {
             hierarchy.Add(parent.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
         }
-        
+
         // get struct size, if available
         int? structSize = null;
-        
+
         if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName("System.Runtime.InteropServices.StructLayoutAttribute", out AttributeData? structLayoutAttributeData)) {
             structLayoutAttributeData.TryGetNamedArgument("Size", out structSize);
         }
-        
+
         // collect extra data for an inherited struct
         if (isInherited) {
             ParseProperties(structSymbol, token, out EquatableArray<PropertyInfo> publicProperties);
