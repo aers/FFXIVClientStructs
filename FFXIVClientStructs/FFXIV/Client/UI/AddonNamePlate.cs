@@ -8,12 +8,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("NamePlate")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x488)]
+[StructLayout(LayoutKind.Explicit, Size = 0x490)]
 public unsafe partial struct AddonNamePlate {
-    [FieldOffset(0x238)] public BakePlateRenderer BakePlate;
-    [FieldOffset(0x478)] public NamePlateObject* NamePlateObjectArray; // 0 - 50
-    [FieldOffset(0x480)] public byte DoFullUpdate;
-    [FieldOffset(0x482)] public ushort AlternatePartId;
+    [FieldOffset(0x240)] public BakePlateRenderer BakePlate;
+    [FieldOffset(0x480)] public NamePlateObject* NamePlateObjectArray; // 0 - 50
+    [FieldOffset(0x488)] public byte DoFullUpdate;
+    [FieldOffset(0x48A)] public ushort AlternatePartId;
 
     // Client::UI::AddonNamePlate::BakePlateRenderer
     //   Component::GUI::AtkTextNodeRenderer
