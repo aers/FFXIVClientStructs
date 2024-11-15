@@ -17,7 +17,7 @@ public unsafe partial struct InstanceContentDirector {
     /// </summary>
     [FieldOffset(0xDB4)] public ushort ContentTimeMax;
 
-    [FieldOffset(0xDCE)] public InstanceContentType InstanceContentType;
+    [FieldOffset(0xE1E)] public InstanceContentType InstanceContentType;
 }
 
 public enum InstanceContentType : byte {
