@@ -9,7 +9,7 @@ public unsafe partial struct JobGaugeManager {
     [StaticAddress("48 8B 3D ?? ?? ?? ?? 33 ED", 3)]
     public static partial JobGaugeManager* Instance();
 
-    [FieldOffset(0x00)] public JobGauge* CurrentGauge;
+    [FieldOffset(0x08)] public JobGauge* CurrentGauge;
 
     [FieldOffset(0x08), CExporterUnion("Gauge")] public JobGauge EmptyGauge;
 
