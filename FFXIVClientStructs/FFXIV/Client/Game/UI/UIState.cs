@@ -30,7 +30,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x38A8)] public ContentsNote ContentsNote;
     [FieldOffset(0x3960)] public RelicNote RelicNote;
     [FieldOffset(0x3978)] public MateriaTrade MateriaTrade;
-    [FieldOffset(0x39D0)] public PublicInstance PublicInstance;
+    [FieldOffset(0x39C0)] public PublicInstance PublicInstance;
     [FieldOffset(0x39E8)] public RelicSphereUpgrade RelicSphereUpgrade;
     [FieldOffset(0x3A60)] public DailyQuestSupply DailyQuestSupply;
     [FieldOffset(0x3E48)] public RidePillon RidePillon;
