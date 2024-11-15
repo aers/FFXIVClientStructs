@@ -324,10 +324,10 @@ public enum AgentId : uint {
     InventoryBuddy = 299,
     ContentsReplayPlayer = 300,
     ContentsReplaySetting = 301,
-    MiragePrismPrismBox = 301, // Glamour Dresser
-    MiragePrismPrismItemDetail = 302,
-    // Unk303 = 303, NEW 7.1
-    MiragePrismMiragePlate = 304, // Glamour Plates
+    MiragePrismPrismBox = 302, // Glamour Dresser
+    MiragePrismPrismItemDetail = 303,
+    // Unk304 = 304, NEW 7.1
+    MiragePrismMiragePlate = 305, // Glamour Plates
     PerformanceMode = 306,
     PerformanceModeSettings = 307,
     RecordReadyCheck = 308,
