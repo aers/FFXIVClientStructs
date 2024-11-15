@@ -14,7 +14,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [FieldOffset(0xC0)] public AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     [FieldOffset(0xC8)] public AtkComponentScrollBar* AtkComponentScrollBarC8;
     [FieldOffset(0xF0)] public ListItem* ItemRendererList;
-    [FieldOffset(0x118)] public int ListLength;
+    [FieldOffset(0x120)] public int ListLength;
     [FieldOffset(0x12C)] public int SelectedItemIndex; // 0-N, -1 when none.
     [FieldOffset(0x130)] public int HeldItemIndex; // 0-N, -1 when none. While mouse is held down.
 

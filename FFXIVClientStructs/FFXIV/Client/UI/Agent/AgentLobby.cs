@@ -31,7 +31,7 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x1110)] public sbyte ServiceAccountIndex;
 
-    [FieldOffset(0x1118)] public ulong HoveredCharacterContentId;
+    [FieldOffset(0x1180)] public ulong HoveredCharacterContentId;
     [FieldOffset(0x1120)] public byte DataCenter;
 
     [FieldOffset(0x1122)] public short WorldIndex; // index in CurrentDataCenterWorlds
@@ -54,9 +54,9 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x1164)] public byte LobbyUpdateStage;
 
-    [FieldOffset(0x1167)] public byte LobbyUIStage;
+    [FieldOffset(0x11D7)] public byte LobbyUIStage;
 
-    [FieldOffset(0x1170)] public long IdleTime;
+    [FieldOffset(0x11E0)] public long IdleTime;
 
     [FieldOffset(0x1190)] public int QueuePosition;
 
