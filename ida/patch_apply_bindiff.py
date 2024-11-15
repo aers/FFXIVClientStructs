@@ -6,15 +6,20 @@
 # 5. run this script, passing path to BinDiff file - it will create data.yml.new to correspond to *new*
 import sqlite3
 import sys
-import yaml
 import re
+
+THRESHOLD_SIMILARITY = 0
+THRESHOLD_CONFIDENCE = 0
 
 def run(bindiff_path):
     remap = {}
     with sqlite3.connect(bindiff_path) as db:
-        for addr_new, addr_old in db.execute('SELECT address1, address2 FROM function'):
-            remap[addr_old] = addr_new
+        for addr_new, addr_old, similarity, confidence in db.execute('SELECT address1, address2, similarity, confidence FROM function'):
+            if similarity >= THRESHOLD_SIMILARITY and confidence >= THRESHOLD_CONFIDENCE:
+                remap[addr_old] = addr_new
 
+    matches = 0
+    fails = 0
     regex = re.compile('^(.*)0x([0-9a-fA-F]{9})(.*)\n')
     with open('data.yml', 'r') as old:
         with open('data.yml.new', 'w') as new:
@@ -25,9 +30,12 @@ def run(bindiff_path):
                         old_addr = int(match.group(2), 16)
                         if old_addr in remap:
                             line = f'{match.group(1)}0x{remap[old_addr]:X}{match.group(3)}\n'
+                            matches = matches + 1
                         else:
                             line = '#fail' + line
+                            fails = fails + 1
                 new.write(line)
+    print(f'done: {matches} matches, {fails} fails')
 
 if len(sys.argv) < 2:
     print(f'usage: {sys.argv[0]} path_to_bindiff')
