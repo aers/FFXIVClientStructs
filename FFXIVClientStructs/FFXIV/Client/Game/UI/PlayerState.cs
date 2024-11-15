@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::PlayerState
 // ctor "E8 ?? ?? ?? ?? 33 D2 45 33 E4"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x8A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8B0)]
 public unsafe partial struct PlayerState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02", 3)]
     public static partial PlayerState* Instance();
@@ -144,41 +144,41 @@ public unsafe partial struct PlayerState {
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
-    [FieldOffset(0x6E0), FixedSizeArray] internal FixedSizeArray16<byte> _weeklyBingoOrderData;
+    [FieldOffset(0x6E8), FixedSizeArray] internal FixedSizeArray16<byte> _weeklyBingoOrderData;
     /// <summary>RowIds of WeeklyBingoRewardData sheet</summary>
-    [FieldOffset(0x6F0), FixedSizeArray] internal FixedSizeArray4<byte> _weeklyBingoRewardData;
+    [FieldOffset(0x6F8), FixedSizeArray] internal FixedSizeArray4<byte> _weeklyBingoRewardData;
     /// <summary>Bitflags of placed stickers.</summary>
     /// <remarks>Use IsWeeklyBingoStickerPlaced(index) and WeeklyBingoNumPlacedStickers instead.</remarks>
-    [FieldOffset(0x6F4)] private ushort _weeklyBingoStickers;
+    [FieldOffset(0x6FC)] private ushort _weeklyBingoStickers;
 
     /// <remarks>Use GetWeeklyBingoExpireUnixTimestamp(), WeeklyBingoNumSecondChancePoints and HasWeeklyBingoJournal instead</remarks>
-    [FieldOffset(0x6F8)] private uint _weeklyBingoFlags;
-    [FieldOffset(0x6FC), FixedSizeArray] internal FixedSizeArray4<byte> __weeklyBingoTaskStatus;
-    [FieldOffset(0x700)] public byte WeeklyBingoRequestOpenBingoNo;
+    [FieldOffset(0x700)] private uint _weeklyBingoFlags;
+    [FieldOffset(0x704), FixedSizeArray] internal FixedSizeArray4<byte> __weeklyBingoTaskStatus;
+    [FieldOffset(0x708)] public byte WeeklyBingoRequestOpenBingoNo;
 
-    [FieldOffset(0x73C)] public byte WeeklyBingoExpMultiplier;
-    [FieldOffset(0x73D)] public bool WeeklyBingoUnk63;
+    [FieldOffset(0x744)] public byte WeeklyBingoExpMultiplier;
+    [FieldOffset(0x745)] public bool WeeklyBingoUnk63;
 
     #endregion
 
     /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
-    [FieldOffset(0x744), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
+    [FieldOffset(0x74C), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
 
     /// <remarks>
     /// 1 = Shadowbringers
     /// 2 = Endwalker
     /// 3 = Dawntrail
     /// </remarks>
-    [FieldOffset(0x7D4)] public byte MentorVersion;
+    [FieldOffset(0x7DC)] public byte MentorVersion;
 
     /// <remarks> Index is DohDolJobIndex from the ClassJob sheet. </remarks>
-    [FieldOffset(0x7D8), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
+    [FieldOffset(0x7E0), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
 
-    [FieldOffset(0x858)] public StdMap<uint, bool> TrackedStatuses;
-    [FieldOffset(0x868)] public StdMap<uint, bool> TrackedActionUnlocks;
-    [FieldOffset(0x878)] public StdMap<uint, bool> TrackedTraitUnlocks;
-    [FieldOffset(0x888)] public bool TrackedTraitUnlocksDirty;
-    [FieldOffset(0x889)] public bool TrackedActionUnlocksDirty;
+    [FieldOffset(0x868)] public StdMap<uint, bool> TrackedStatuses;
+    [FieldOffset(0x878)] public StdMap<uint, bool> TrackedActionUnlocks;
+    [FieldOffset(0x888)] public StdMap<uint, bool> TrackedTraitUnlocks;
+    [FieldOffset(0x898)] public bool TrackedTraitUnlocksDirty;
+    [FieldOffset(0x899)] public bool TrackedActionUnlocksDirty;
 
     public bool IsLegacy => (QuestSpecialFlags & 1) != 0;
     public bool IsWarriorOfLight => (QuestSpecialFlags & 2) != 0;
