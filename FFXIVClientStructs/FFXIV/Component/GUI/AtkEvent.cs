@@ -25,7 +25,7 @@ public enum AtkEventType : byte {
 
     // AtkComponentDragDrop
     DragDropBegin = 50, // sent on MouseDown over a draggable icon (will NOT send for a locked icon)
-    DragDropInsert = 51, // sent when dropping an icon into a hotbar/inventory slot or similar
+    DragDropInsert = 53, // sent when dropping an icon into a hotbar/inventory slot or similar
     DragDropRollOver = 55,
     DragDropRollOut = 56,
     DragDropDiscard = 57, // sent when dropping an icon into empty screenspace, eg to remove an action from a hotbar
