@@ -36,5 +36,5 @@ public unsafe partial struct AddonConfigData {
     // [FixedSizeArray<[SomeStruct Size 36]>(400)] public byte SomeArray[400 * 36]; // Contains 400 elements
     // There's a LOT more data here
 
-    [FieldOffset(0xC8E0)] public int CurrentHudLayout;
+    [FieldOffset(0xCBD0)] public int CurrentHudLayout;
 }
