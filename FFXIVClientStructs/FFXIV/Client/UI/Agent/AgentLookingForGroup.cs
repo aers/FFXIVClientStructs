@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.LookingForGroup)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3120)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3198)]
 public unsafe partial struct AgentLookingForGroup {
     [FieldOffset(0xE0)] public InfoProxyCrossRealm* InfoProxyCrossRealm;
 
@@ -21,24 +21,26 @@ public unsafe partial struct AgentLookingForGroup {
 
     [FieldOffset(0x14F0), FixedSizeArray] internal FixedSizeArray29<TreasureMapDetail> _treasureMaps;
 
-    [FieldOffset(0x22A0)] public RecruitmentSub StoredRecruitmentInfo; // Holds infos for LookingForGroupCondition
+    // 7.1 - 0x78 more bytes here
 
-    [FieldOffset(0x26E8)] public Detailed LastViewedListing; // Holds infos about the last viewed LookingForGroupDetailed
+    [FieldOffset(0x2318)] public RecruitmentSub StoredRecruitmentInfo; // Holds infos for LookingForGroupCondition
 
-    [FieldOffset(0x2B60)] public Utf8String LastLeader;
-    [FieldOffset(0x2BC8)] public Utf8String LastComment;
-    [FieldOffset(0x2C40)] public Utf8String UnkString;
+    [FieldOffset(0x2760)] public Detailed LastViewedListing; // Holds infos about the last viewed LookingForGroupDetailed
 
-    [FieldOffset(0x3060)] public uint OwnListingId;
+    [FieldOffset(0x2BD8)] public Utf8String LastLeader;
+    [FieldOffset(0x2C40)] public Utf8String LastComment;
+    [FieldOffset(0x2CB8)] public Utf8String UnkString;
 
-    [FieldOffset(0x3068)] public ulong ListingContentId; // Only populated while a Detailed listing is opened
-    [FieldOffset(0x3070)] public uint ListingAccountId; // Only populated while a Detailed listing is opened
+    [FieldOffset(0x30B0)] public uint OwnListingId;
 
-    [FieldOffset(0x30FA)] public ushort NumberOfListingsDisplayed;
+    [FieldOffset(0x30E0)] public ulong ListingContentId; // Only populated while a Detailed listing is opened
+    [FieldOffset(0x30E8)] public uint ListingAccountId; // Only populated while a Detailed listing is opened
 
-    [FieldOffset(0x3101)] public byte SearchAreaTab; // 0 Data Center, 1 World, 2 Private
-    [FieldOffset(0x3103)] public byte CategoryTab; // 0 All - 16 Other
-    [FieldOffset(0x3104)] public byte GroupTypeTab; // Normal, Alliance, Custom Match
+    [FieldOffset(0x3172)] public ushort NumberOfListingsDisplayed;
+
+    [FieldOffset(0x3179)] public byte SearchAreaTab; // 0 Data Center, 1 World, 2 Private
+    [FieldOffset(0x317B)] public byte CategoryTab; // 0 All - 16 Other
+    [FieldOffset(0x317C)] public byte GroupTypeTab; // Normal, Alliance, Custom Match
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B FA 48 8B D9 E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9")]
     public partial bool OpenListing(ulong listingId);
