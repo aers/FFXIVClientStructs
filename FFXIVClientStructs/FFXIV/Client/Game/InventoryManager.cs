@@ -34,7 +34,7 @@ public unsafe partial struct InventoryManager {
     /// Get the number of gearsets the player is permitted to have/use.
     /// </summary>
     /// <returns>Returns the number of gearsets the player can use.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 89 84 24 ?? ?? ?? ?? 3D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 85 F6")]
     public partial byte GetPermittedGearsetCount();
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B E8 44 3B F8")]
