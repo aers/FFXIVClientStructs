@@ -18,24 +18,21 @@ public unsafe partial struct InfoProxyInterface {
     public partial nint AddData(nint packetPtr, uint count = 10);
 
     /// <summary>
-    /// Sets the value of <see cref="InfoProxyInterface.EntryCount"/> to 0 for this proxy. Does not actually delete any data from any arrays. 
-    /// </summary>
-    [VirtualFunction(2)]
-    public partial void ClearData();
-
-    /// <summary>
     /// Generates an info proxy specific network request for data.
     /// </summary>
     /// <returns>Returns true if the packet was sent (?), false otherwise.</returns>
-    [VirtualFunction(4)]
+    [VirtualFunction(3)]
     public partial bool RequestData();
 
+    [VirtualFunction(4)]
+    public partial uint GetEntryCount();
+
+    [VirtualFunction(5)]
+    public partial void ClearListData();
+    
     /// <summary>
     /// Gets called after all data is received from the server.
     /// </summary>
-    [VirtualFunction(5)]
+    [VirtualFunction(10)]
     public partial void EndRequest();
-
-    [VirtualFunction(6)]
-    public partial uint GetEntryCount();
 }

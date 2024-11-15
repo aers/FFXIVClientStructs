@@ -11,6 +11,6 @@ public unsafe partial struct InfoProxyPageInterface {
     /// packets to the server for pagination/fetch purposes. Calls <see cref="EndRequest"/> when all data is loaded.
     /// </summary>
     /// <param name="packetPtr">A pointer to the packet data to load in.</param>
-    [VirtualFunction(12)]
+    [VirtualFunction(11)]
     public partial void AddPage(nint packetPtr);
 }

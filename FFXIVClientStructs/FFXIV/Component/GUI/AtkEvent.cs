@@ -24,42 +24,42 @@ public enum AtkEventType : byte {
     ListItemToggle = 35,
 
     // AtkComponentDragDrop
-    DragDropBegin = 47, // sent on MouseDown over a draggable icon (will NOT send for a locked icon)
-    DragDropInsert = 50, // sent when dropping an icon into a hotbar/inventory slot or similar
-    DragDropRollOver = 52,
-    DragDropRollOut = 53,
-    DragDropDiscard = 54, // sent when dropping an icon into empty screenspace, eg to remove an action from a hotbar
-    DragDropCancel = 55, // sent on MouseUp if the cursor has not moved since DragDropBegin, OR on MouseDown over a locked icon
+    DragDropBegin = 50, // sent on MouseDown over a draggable icon (will NOT send for a locked icon)
+    DragDropInsert = 51, // sent when dropping an icon into a hotbar/inventory slot or similar
+    DragDropRollOver = 55,
+    DragDropRollOut = 56,
+    DragDropDiscard = 57, // sent when dropping an icon into empty screenspace, eg to remove an action from a hotbar
+    DragDropCancel = 58, // sent on MouseUp if the cursor has not moved since DragDropBegin, OR on MouseDown over a locked icon
 
     // AtkComponentIconText
-    IconTextRollOver = 56,
-    IconTextRollOut = 57,
-    IconTextClick = 58,
+    IconTextRollOver = 59,
+    IconTextRollOut = 60,
+    IconTextClick = 61,
 
     // AtkDialogue
-    UnkAtkDialogue59 = 59, // found in "40 53 48 83 EC 40 80 79 34 00"
-    UnkAtkDialogue60 = 60,
+    UnkAtkDialogue59 = 62, // found in "40 53 48 83 EC 40 80 79 34 00"
+    UnkAtkDialogue60 = 63,
 
     // AtkTimer
-    TimerTick = 61,
-    TimerEnd = 62,
+    TimerTick = 64,
+    TimerEnd = 65,
 
     // AtkSimpleTween
-    TweenProgress = 64,
-    TweenComplete = 65,
+    TweenProgress = 67,
+    TweenComplete = 68,
 
     // AtkAddonControl
-    ChildAddonAttached = 66, // found inside AtkAddonControl_Update at "E8 ?? ?? ?? ?? 49 8B 4D 00 33 C0"
+    ChildAddonAttached = 69, // found inside AtkAddonControl_Update at "E8 ?? ?? ?? ?? 49 8B 4D 00 33 C0"
 
     // AtkComponentWindow
-    WindowRollOver = 67,
-    WindowRollOut = 68,
-    WindowChangeScale = 69,
+    WindowRollOver = 70,
+    WindowRollOut = 71,
+    WindowChangeScale = 72,
 
     // AtkTextNode
-    LinkMouseClick = 72,
-    LinkMouseOver = 73,
-    LinkMouseOut = 74,
+    LinkMouseClick = 75,
+    LinkMouseOver = 76,
+    LinkMouseOut = 77,
 }
 
 // Component::GUI::AtkEvent

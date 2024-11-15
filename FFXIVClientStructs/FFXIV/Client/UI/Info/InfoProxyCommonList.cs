@@ -41,6 +41,12 @@ public unsafe partial struct InfoProxyCommonList {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]
     public partial void ApplyFilters();
+    
+    /// <summary>
+    /// Sets the value of <see cref="InfoProxyInterface.EntryCount"/> to 0 for this proxy. Does not actually delete any data from any arrays. 
+    /// </summary>
+    [VirtualFunction(20)]
+    public partial void ClearData();
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
