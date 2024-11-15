@@ -3,22 +3,22 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 // Client::Game::SatisfactionSupplyManager
 // Custom Deliveries
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x31F)]
+[StructLayout(LayoutKind.Explicit, Size = 0x323)]
 public unsafe partial struct SatisfactionSupplyManager {
     [StaticAddress("8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 1E", 5)]
     public static partial SatisfactionSupplyManager* Instance();
 
     [FieldOffset(0x0)] public byte SupplySeed; // seed for pseudorandom transform that selects requested crafts for the week
     [FieldOffset(0x1)] public byte BonusGuaranteeRowId; // determines which two npcs per category will have bonus items, in addition to pseudo-random ones
-    [FieldOffset(0x2), FixedSizeArray] internal FixedSizeArray10<ushort> _satisfaction; // Satisfaction of the current Rank
-    [FieldOffset(0x16), FixedSizeArray] internal FixedSizeArray10<byte> _satisfactionRanks; // 1-5 indicating each NPC's "Satisfaction" value (the hearts in the UI)
-    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray10<byte> _usedAllowances;
-    [FieldOffset(0x2A)] public short CurrentNpc; // current NPC being shown in AddonSatisfactionSupply
-    [FieldOffset(0x2C)] public short CurrentSupplyRowId;
-    [FieldOffset(0x2E), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplySubRowIds; // unsure what the first entry is supposed to be
-    [FieldOffset(0x36), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplyRewardRowIds; // unsure what the first entry is supposed to be
-    [FieldOffset(0x3E)] public bool CurrentNpcInitInProgress;
-    [FieldOffset(0x3F)] public bool CurrentNpcInitDone;
+    [FieldOffset(0x2), FixedSizeArray] internal FixedSizeArray11<ushort> _satisfaction; // Satisfaction of the current Rank
+    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray11<byte> _satisfactionRanks; // 1-5 indicating each NPC's "Satisfaction" value (the hearts in the UI)
+    [FieldOffset(0x23), FixedSizeArray] internal FixedSizeArray11<byte> _usedAllowances;
+    [FieldOffset(0x2E)] public short CurrentNpc; // current NPC being shown in AddonSatisfactionSupply
+    [FieldOffset(0x30)] public short CurrentSupplyRowId;
+    [FieldOffset(0x32), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplySubRowIds; // unsure what the first entry is supposed to be
+    [FieldOffset(0x3A), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplyRewardRowIds; // unsure what the first entry is supposed to be
+    [FieldOffset(0x42)] public bool CurrentNpcInitInProgress;
+    [FieldOffset(0x43)] public bool CurrentNpcInitDone;
     // 0x40: ulong set together with CurrentNpc, all callers pass zero
     // 0x48: ExcelSheetWaiter* for SatisfactionSupply
     // 0x50: ExcelSheetWaiter* for SatisfactionSupplyReward
