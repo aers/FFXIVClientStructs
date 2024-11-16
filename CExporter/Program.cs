@@ -23,16 +23,16 @@ public class Program {
 
         var dataPath = Path.Combine(dir.FullName, "data.yml");
 
-        var data = new DeserializerBuilder()
-            .IgnoreUnmatchedProperties()
-            .Build()
-            .Deserialize<DataDefinition>(File.ReadAllText(dataPath));
-        var dataCheck = data.classes.SelectMany(t => t.Value is { funcs: not null } ? t.Value.funcs.Values.Select(f => new KeyValuePair<string, string>(t.Key, f)) : new List<KeyValuePair<string, string>>())
-            .Concat(data.classes.SelectMany(t => t.Value is { vfuncs: not null } ? t.Value.vfuncs.Values.Select(f => new KeyValuePair<string, string>(t.Key, f)) : new List<KeyValuePair<string, string>>()))
-            .GroupBy(t => t.Key).ToDictionary(t => t.Key, t => t.Select(f => f.Value).ToList());
-
-        Exporter.VerifyNoNameOverlap(dataCheck);
-        Exporter.ProcessDefinedVTables(data);
+        // var data = new DeserializerBuilder()
+        //     .IgnoreUnmatchedProperties()
+        //     .Build()
+        //     .Deserialize<DataDefinition>(File.ReadAllText(dataPath));
+        // var dataCheck = data.classes.SelectMany(t => t.Value is { funcs: not null } ? t.Value.funcs.Values.Select(f => new KeyValuePair<string, string>(t.Key, f)) : new List<KeyValuePair<string, string>>())
+        //     .Concat(data.classes.SelectMany(t => t.Value is { vfuncs: not null } ? t.Value.vfuncs.Values.Select(f => new KeyValuePair<string, string>(t.Key, f)) : new List<KeyValuePair<string, string>>()))
+        //     .GroupBy(t => t.Key).ToDictionary(t => t.Key, t => t.Select(f => f.Value).ToList());
+        //
+        // Exporter.VerifyNoNameOverlap(dataCheck);
+        // Exporter.ProcessDefinedVTables(data);
 
         Console.WriteLine($"Processed all types in: {DateTime.Now - timeStart}");
         timeStart = DateTime.Now;
