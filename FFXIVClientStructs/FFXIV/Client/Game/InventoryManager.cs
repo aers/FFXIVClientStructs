@@ -21,7 +21,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F1")]
     public partial int GetInventoryItemCount(uint itemId, bool isHq = false, bool checkEquipped = true, bool checkArmory = true, short minCollectability = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 03 F8 BB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 8D 4F FE")]
     public partial int GetItemCountInContainer(uint itemId, InventoryType inventoryType, bool isHq = false, short minCollectability = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 7A 83 F8 04")]
