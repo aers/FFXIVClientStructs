@@ -124,7 +124,7 @@ public unsafe partial struct UIModule {
     public static partial bool IsPlayerCharacterName(byte* name);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 45 84 C9")]
-    public static partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
+    public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
 
     [Obsolete("Moved to UIGlobals.PlayChatSoundEffect")]
     public static void PlayChatSoundEffect(uint effectId) {
