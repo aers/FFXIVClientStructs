@@ -1270,10 +1270,10 @@ classes:
       9: SetInventoryType
       10: GetSlot
       11: SetSlot
-      12: GetSize
-      13: SetSize
-      14: GetSpiritbondOrQuantity
-      15: SetSpiritbondOrQuantity
+      12: GetQuantity
+      13: SetQuantity
+      14: GetSpiritbondOrCollectability
+      15: SetSpiritbondOrCollectability
       16: GetFlags
       17: SetFlags
       18: IsHighQuality

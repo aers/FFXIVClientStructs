@@ -186,21 +186,21 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial void SetSlot(ushort slot);
 
     [VirtualFunction(12)]
-    public partial uint GetSize();
-
-    [VirtualFunction(11)]
-    public partial void SetSize(uint size);
-
-    [VirtualFunction(12)]
-    public partial ushort GetSpiritbondOrQuantity();
+    public partial uint GetQuantity();
 
     [VirtualFunction(13)]
-    public partial void SetSpiritbondOrQuantity(ushort value);
+    public partial void SetQuantity(uint quantity);
 
     [VirtualFunction(14)]
-    public partial ItemFlags GetFlags();
+    public partial ushort GetSpiritbondOrCollectability();
 
     [VirtualFunction(15)]
+    public partial void SetSpiritbondOrCollectability(ushort value);
+
+    [VirtualFunction(16)]
+    public partial ItemFlags GetFlags();
+
+    [VirtualFunction(17)]
     public partial void SetFlags(ItemFlags flags);
 
     [VirtualFunction(16)]
