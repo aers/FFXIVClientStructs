@@ -30,10 +30,10 @@ public unsafe partial struct InfoProxyCommonList {
     [MemberFunction("3B 51 10 73 12 8B C2 48 6B D0 70")]
     public partial ulong GetContentIdForEntry(uint idx);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 39 03")]
+    [MemberFunction("8B 41 10 48 3B D0 73 0C")]
     public partial CharacterData* GetEntry(uint idx);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 76 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 12 8B 40 20")]
     public partial CharacterData* GetEntryByContentId(ulong contentId, uint nameCrc32 = 0, byte a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 44 41 8D 46 EF"), GenerateStringOverloads]
@@ -41,7 +41,7 @@ public unsafe partial struct InfoProxyCommonList {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]
     public partial void ApplyFilters();
-
+    
     /// <summary>
     /// Sets the value of <see cref="InfoProxyInterface.EntryCount"/> to 0 for this proxy. Does not actually delete any data from any arrays. 
     /// </summary>
