@@ -10,11 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // type 12
 [GenerateInterop]
 [Inherits<AtkComponentList>]
-[StructLayout(LayoutKind.Explicit, Size = 0x228)]
+[StructLayout(LayoutKind.Explicit, Size = 0x230)]
 public unsafe partial struct AtkComponentTreeList : ICreatable {
-    [FieldOffset(0x1A8)] public StdVector<Pointer<AtkComponentTreeListItem>> Items;
+    [FieldOffset(0x1B0)] public StdVector<Pointer<AtkComponentTreeListItem>> Items;
 
-    [FieldOffset(0x21C)] public bool LayoutRefreshPending;
+    [FieldOffset(0x224)] public bool LayoutRefreshPending;
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 03 0F 57 C0")]
     public partial void Ctor();
