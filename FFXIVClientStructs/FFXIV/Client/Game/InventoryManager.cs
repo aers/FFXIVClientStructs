@@ -37,7 +37,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 85 F6")]
     public partial byte GetPermittedGearsetCount();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B E8 44 3B F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 39 48 8B 06")]
     public partial uint GetEmptySlotsInBag();
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B 44 24 58")]
