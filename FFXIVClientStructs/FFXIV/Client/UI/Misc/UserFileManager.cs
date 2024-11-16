@@ -19,9 +19,10 @@ public partial struct UserFileManager {
 
         [FieldOffset(0x30), FixedSizeArray(isString: true)] internal FixedSizeArray12<byte> _fileName;
         [FieldOffset(0x3C)] public bool Unk3C;
-        [FieldOffset(0x3D)] public bool IsSavePending;
-        [FieldOffset(0x3E)] public bool HasChanges;
-        [FieldOffset(0x3F)] public bool IsVirtual; // if true this won't be written to disk, because it's part of another file (for example ADDON.DAT)
+        [FieldOffset(0x40)] private int Unk40; // new 7.1, defaults to 1
+        [FieldOffset(0x44)] public bool HasChanges;
+        [FieldOffset(0x45)] public bool IsSavePending;
+        [FieldOffset(0x46)] public bool IsVirtual; // if true this won't be written to disk, because it's part of another file (for example ADDON.DAT)
 
         [VirtualFunction(1)]
         public partial bool ReadFile(bool decrypt, byte* ptr, ushort version, uint length);
@@ -30,31 +31,34 @@ public partial struct UserFileManager {
         public partial uint WriteFile(byte* ptr, uint length);
 
         // vf3 calls vf1
-
-        [VirtualFunction(4)]
-        public partial uint GetFileSize();
+        
+        // vf4 new patch 7.1
+        // if new field Unk40 is 1, calls vf9 and vf3
 
         [VirtualFunction(5)]
-        public partial uint GetDataSize(); // + 0x20 = file size
+        public partial uint GetFileSize();
 
         [VirtualFunction(6)]
-        public partial ushort GetFileVersion();
+        public partial uint GetDataSize(); // + 0x20 = file size
 
         [VirtualFunction(7)]
+        public partial ushort GetFileVersion();
+
+        [VirtualFunction(8)]
         public partial ushort GetFileType();
 
-        // vf8?
-
-        [VirtualFunction(9)]
-        public partial bool GetHasChanges();
+        // vf9?
 
         [VirtualFunction(10)]
-        public partial byte GetIsSavePending();
-
+        public partial bool GetHasChanges();
+        
         [VirtualFunction(11)]
-        public partial void SetCharacterContentId(ulong contentId);
+        public partial bool GetIsSavePending();
 
         [VirtualFunction(12)]
+        public partial void SetCharacterContentId(ulong contentId);
+
+        [VirtualFunction(13)]
         public partial void SaveFile(bool force);
     }
 }
