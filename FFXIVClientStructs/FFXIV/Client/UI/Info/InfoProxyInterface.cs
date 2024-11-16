@@ -29,7 +29,7 @@ public unsafe partial struct InfoProxyInterface {
 
     [VirtualFunction(5)]
     public partial void ClearListData();
-    
+
     /// <summary>
     /// Gets called after all data is received from the server.
     /// </summary>
