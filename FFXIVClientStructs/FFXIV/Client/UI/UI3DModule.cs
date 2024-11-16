@@ -16,7 +16,7 @@ public unsafe partial struct UI3DModule {
     [FieldOffset(0x14CE0), FixedSizeArray] internal FixedSizeArray50<Pointer<ObjectInfo>> _namePlateObjectInfoPointers; // array of Client::UI::UI3DModule::ObjectInfo* for current nameplates
     [FieldOffset(0x14E70)] public int NamePlateObjectInfoCount;
     // [FieldOffset(0x14E78)] public Bit NamePlateBits; // Client::System::Data::Bit
-    [FieldOffset(0x15348), FixedSizeArray] internal FixedSizeArray50<GameObjectId> _namePlateObjectIds; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
+    [FieldOffset(0x14E98), FixedSizeArray] internal FixedSizeArray50<GameObjectId> _namePlateObjectIds; // array of GameObjectID (see GameObject.cs), ObjectId = E0000000 means it is empty, matches the order of nameplate addon objects
     [FieldOffset(0x15028), FixedSizeArray] internal FixedSizeArray50<GameObjectId> _namePlateObjectIds_2; // seems to contain same data as above, but may be for working data
     [FieldOffset(0x151B8), FixedSizeArray] internal FixedSizeArray50<Pointer<ObjectInfo>> _characterObjectInfoPointers; // array of Client::UI::UI3DModule::ObjectInfo* for Characters on screen (players, attackable NPCs, etc)
     [FieldOffset(0x15348)] public int CharacterObjectInfoCount;

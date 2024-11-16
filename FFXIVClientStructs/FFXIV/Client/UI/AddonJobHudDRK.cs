@@ -59,7 +59,7 @@ public unsafe partial struct AddonJobHudDRK0 {
 [Addon("JobHudDRK1")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x348)]
+[StructLayout(LayoutKind.Explicit, Size = 0x350)]
 public unsafe partial struct AddonJobHudDRK1 {
     [FieldOffset(0x278)] public DarksideGaugeData DataPrevious;
     [FieldOffset(0x290)] public DarksideGaugeData DataCurrent;

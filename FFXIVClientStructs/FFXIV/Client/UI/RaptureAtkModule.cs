@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkModuleInterface
 [GenerateInterop]
 [Inherits<AtkModule>]
-[StructLayout(LayoutKind.Explicit, Size = 0x29478)]
+[StructLayout(LayoutKind.Explicit, Size = 0x29720)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() {

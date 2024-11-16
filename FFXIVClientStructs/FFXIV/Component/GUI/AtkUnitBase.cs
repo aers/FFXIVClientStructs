@@ -66,7 +66,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x1A1)] public byte Flags1A1;
-    [FieldOffset(0x192)] public byte Flags192;
+    [FieldOffset(0x1A2)] public byte Flags1A2;
 
     /// <summary>
     /// <code>

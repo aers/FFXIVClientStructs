@@ -18,7 +18,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
 [Inherits<UIModuleInterface>, Inherits<AtkModuleEvent>, Inherits<ExcelLanguageEvent>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xEE030)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF4610)]
 [VirtualTable("4C 89 79 28 48 8D 0D", 7)]
 public unsafe partial struct UIModule {
     public static UIModule* Instance() {
