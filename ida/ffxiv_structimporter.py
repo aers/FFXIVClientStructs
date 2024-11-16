@@ -572,6 +572,9 @@ if api is None:
                     finf.end_ea = idc.BADADDR
                     ida_funcs.add_func_ex(finf)
 
+                if ida_funcs.get_func(ea) is None:
+                    return idc.BADADDR
+
                 if ida_funcs.get_func(ea).start_ea == ea:
                     return ea
                 mnem = idc.print_insn_mnem(ea)
@@ -646,9 +649,11 @@ if api is None:
 
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
+                idaapi.begin_type_updating(idaapi.UTP_STRUCT)
                 fullname = self.clean_struct_name(struct.type)
                 self.delete_struct_members(fullname)
                 self.delete_struct_members(fullname + "_vtbl")
+                idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
@@ -845,6 +850,13 @@ if api is None:
                 ea = self.get_func_ea_by_name(func_name)
                 if ea == idc.BADADDR:
                     ea = self.get_func_ea_by_sig(member_func.signature)
+                if ea == idc.BADADDR:
+                    print(
+                        "Error: {0} not found bad sig? {1}".format(
+                            func_name, member_func.signature
+                        )
+                    )
+                    return
                 if ida_funcs.get_func_name(ea) == "sub_{0:X}".format(ea):
                     idc.set_name(ea, func_name)
                 tif = ida_typeinf.tinfo_t()
