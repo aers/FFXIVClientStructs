@@ -185,12 +185,12 @@ public unsafe struct StdString
     public void Resize(long newSize, in byte defaultValue) => BasicString.Resize(newSize, in defaultValue);
     public long SetCapacity(long newCapacity) => BasicString.SetCapacity(newCapacity);
 
-    [Obsolete($"Use {nameof(AsSpan)} instead.")]
+    [Obsolete($"Use {nameof(AsSpan)} instead.", true)]
     public readonly ReadOnlySpan<byte> Slice(int start) => AsSpan(start);
 
-    [Obsolete($"Use {nameof(AsSpan)} instead.")]
+    [Obsolete($"Use {nameof(AsSpan)} instead.", true)]
     public readonly ReadOnlySpan<byte> Slice(int start, int length) => AsSpan(start, length);
 
-    [Obsolete($"Use {nameof(ToArray)} or {nameof(AsSpan)} instead.")]
+    [Obsolete($"Use {nameof(ToArray)} or {nameof(AsSpan)} instead.", true)]
     public readonly byte[] GetBytes() => ToArray();
 }

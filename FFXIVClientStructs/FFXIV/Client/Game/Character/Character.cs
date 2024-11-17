@@ -117,7 +117,7 @@ public unsafe partial struct Character {
     public partial Character* GetParentCharacter();
 
     /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height.  </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 57 DB 0F 2F C3")]
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 58 F0 F3 41 0F 5C F0")]
     public partial float CalculateHeight();
 
     /// <summary> Check if the character is using the World Visit system. </summary>

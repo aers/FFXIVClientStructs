@@ -150,7 +150,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public readonly override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
     public readonly override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}>({LongCount}/{LongCapacity})";
 
-    [Obsolete($"Use {nameof(AsSpan)} instead.")]
+    [Obsolete($"Use {nameof(AsSpan)} instead.", true)]
     public ReadOnlySpan<T> Span {
         get {
             var size = Size();
@@ -160,7 +160,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
         }
     }
 
-    [Obsolete($"Use {nameof(LongCount)} instead.")]
+    [Obsolete($"Use {nameof(LongCount)} instead.", true)]
     public ulong Size() {
         if (First == null || Last == null)
             return 0;
@@ -168,7 +168,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
         return ((ulong)Last - (ulong)First) / (ulong)sizeof(T);
     }
 
-    [Obsolete($"Use {nameof(LongCapacity)} instead.")]
+    [Obsolete($"Use {nameof(LongCapacity)} instead.", true)]
     public ulong Capacity() {
         if (End == null || First == null)
             return 0;
@@ -176,7 +176,7 @@ public unsafe struct StdVector<T> : IStdVector<T>
         return ((ulong)End - (ulong)First) / (ulong)sizeof(T);
     }
 
-    [Obsolete("Use index accessor instead.")]
+    [Obsolete("Use index accessor instead.", true)]
     public T Get(ulong index) {
         if (index >= (ulong)LongCount)
             throw new IndexOutOfRangeException($"Index out of Range: {index}");

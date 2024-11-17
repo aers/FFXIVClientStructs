@@ -338,7 +338,7 @@ public unsafe partial struct PlayerState {
     /// Check if all vistas of an expansion in the Sightseeing Log have been discovered.
     /// </summary>
     /// <param name="adventureExPhaseId">AdventureExPhase RowId</param>
-    [Obsolete("The signature is wrong. There is currently no alternative to this function.")]
+    [Obsolete("The signature is wrong. There is currently no alternative to this function.", true)]
     [MemberFunction("81 FA ?? ?? ?? ?? 73 1F 0F B6 C2")]
     public partial bool IsAdventureExPhaseComplete(uint adventureExPhaseId);
 

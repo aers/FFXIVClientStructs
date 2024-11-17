@@ -413,7 +413,7 @@ public unsafe partial struct Conditions {
     /// <summary>
     /// Unable to execute command in this state.
     /// </summary>
-    [Obsolete("Use IsMountImmobile")]
+    [Obsolete("Use IsMountImmobile", true)]
     public static bool IsInThisState88 => Instance()->Flags[88];
 
     /// <summary>
@@ -434,7 +434,7 @@ public unsafe partial struct Conditions {
     /// <summary>
     /// Unable to execute command while bound by duty.
     /// </summary>
-    [Obsolete("Use IsInDutyQueue")]
+    [Obsolete("Use IsInDutyQueue", true)]
     public static bool IsBoundToDuty97 => Instance()->Flags[91];
 
     /// <summary>

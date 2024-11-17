@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonSalvageDialog {
     [FieldOffset(0x240)] public AtkComponentIcon* ItemIconNode;
 
-    [Obsolete("Use BulkDesynthCheckboxNode", false)]
+    [Obsolete("Use BulkDesynthCheckboxNode", true)]
     [FieldOffset(0x248)] public AtkComponentCheckBox* CheckBox;
     [FieldOffset(0x248)] public AtkComponentCheckBox* BulkDesynthCheckboxNode;
     [FieldOffset(0x250)] public AtkComponentCheckBox* UnkCheckboxNode; // Unused

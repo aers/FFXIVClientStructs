@@ -68,7 +68,7 @@ public enum TextureFormat : uint {
     B4G4R4A4_UNORM = 0x1440,
     B5G5R5A1_UNORM = 0x1441,
     B8G8R8A8_UNORM = 0x1450,
-    [Obsolete($"Use {nameof(B8G8R8A8_UNORM)}")]
+    [Obsolete($"Use {nameof(B8G8R8A8_UNORM)}", true)]
     R8G8B8A8 = 0x1450,
     B8G8R8X8_UNORM = 0x1451,
     R16_FLOAT = 0x2140,
@@ -85,7 +85,7 @@ public enum TextureFormat : uint {
     D16_UNORM = 0x4140,
     /// <remarks> Can also be R24G8_TYPELESS or R24_UNORM_X8_TYPELESS depending on context. </remarks>
     D24_UNORM_S8_UINT = 0x4250, // depth 28 stencil 8, see MS texture formats on google if you really care :)
-    [Obsolete($"Use {nameof(D24_UNORM_S8_UINT)}")]
+    [Obsolete($"Use {nameof(D24_UNORM_S8_UINT)}", true)]
     D24S8 = 0x4250,
     /// <remarks> Can also be R16_TYPELESS or R16_UNORM depending on context. </remarks>
     D16_UNORM_2 = 0x5140,

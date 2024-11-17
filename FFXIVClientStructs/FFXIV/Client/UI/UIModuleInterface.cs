@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct UIModuleInterface {
-    [Obsolete("Use GetExcelModuleInterface(). The interface is different from the actual ExcelModule class, so we're renaming it to avoid confusion.")]
+    [Obsolete("Use GetExcelModuleInterface(). The interface is different from the actual ExcelModule class, so we're renaming it to avoid confusion.", true)]
     [VirtualFunction(5)] public partial ExcelModuleInterface* GetExcelModule();
     [VirtualFunction(5)] public partial ExcelModuleInterface* GetExcelModuleInterface();
     [VirtualFunction(6)] public partial RaptureTextModule* GetRaptureTextModule();
@@ -140,7 +140,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(184)] public partial void ShowGetAction(ActionType actionType, uint actionId);
     [VirtualFunction(185)] public partial void ShowLocationTitle(uint territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
     // [VirtualFunction(186)] public partial ??? HideLocationTitle(???);
-    [Obsolete("Renamed to ShowGrandCompanyRankUp")]
+    [Obsolete("Renamed to ShowGrandCompanyRankUp", true)]
     [VirtualFunction(189)] public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
     [VirtualFunction(189)] public partial void ShowGrandCompanyRankUp(uint gc, uint gcRank, bool playSound = true);
     [VirtualFunction(192)] public partial void ShowStreak(int streak, int streakType);

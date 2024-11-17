@@ -122,7 +122,7 @@ public unsafe partial struct RaptureLogModule {
         return result;
     }
 
-    [Obsolete("The logKind parameter is incorrect. It contains the LogKind RowId in the first 7 bits, then 4 bits of casterKind and 4 bits of targetKind. Use the GetLogMessageDetail overload with casterKind and targetKind params instead.")]
+    [Obsolete("The logKind parameter is incorrect. It contains the LogKind RowId in the first 7 bits, then 4 bits of casterKind and 4 bits of targetKind. Use the GetLogMessageDetail overload with casterKind and targetKind params instead.", true)]
     public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out int time) {
         using var pMessage = new Utf8String();
         using var pSender = new Utf8String();

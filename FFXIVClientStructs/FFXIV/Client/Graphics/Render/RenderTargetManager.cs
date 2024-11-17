@@ -165,21 +165,21 @@ public unsafe partial struct RenderTargetManager {
     // obsoletes
 
     // in array _charaViewTextures:
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal. Use GetCharaViewTexture instead.")][FieldOffset(0x1E0)] public Texture* OffscreenRenderTarget_1;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal. Use GetCharaViewTexture instead.")][FieldOffset(0x1E8)] public Texture* OffscreenRenderTarget_2;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal. Use GetCharaViewTexture instead.")][FieldOffset(0x1F0)] public Texture* OffscreenRenderTarget_3;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal. Use GetCharaViewTexture instead.")][FieldOffset(0x1F8)] public Texture* OffscreenRenderTarget_4;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal. Use GetCharaViewTexture instead.", true)][FieldOffset(0x1E0)] public Texture* OffscreenRenderTarget_1;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal. Use GetCharaViewTexture instead.", true)][FieldOffset(0x1E8)] public Texture* OffscreenRenderTarget_2;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal. Use GetCharaViewTexture instead.", true)][FieldOffset(0x1F0)] public Texture* OffscreenRenderTarget_3;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal. Use GetCharaViewTexture instead.", true)][FieldOffset(0x1F8)] public Texture* OffscreenRenderTarget_4;
     // stuff nobody needs:
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray64<Pointer<Texture>> _renderTargets;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x200)] public Texture* OffscreenGBuffer;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x208)] public Texture* OffscreenDepthStencil;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x210)] public Texture* OffscreenRenderTarget_Unk1;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x218)] public Texture* OffscreenRenderTarget_Unk2;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x220)] public Texture* OffscreenRenderTarget_Unk3;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x270), FixedSizeArray] internal FixedSizeArray49<Pointer<Texture>> _renderTargets2;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray64<Pointer<Texture>> _renderTargets;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x200)] public Texture* OffscreenGBuffer;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x208)] public Texture* OffscreenDepthStencil;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x210)] public Texture* OffscreenRenderTarget_Unk1;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x218)] public Texture* OffscreenRenderTarget_Unk2;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x220)] public Texture* OffscreenRenderTarget_Unk3;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x270), FixedSizeArray] internal FixedSizeArray49<Pointer<Texture>> _renderTargets2;
     // couldn't find these:
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x470)] public ushort DynamicResolutionActualTargetHeight; // seems to copy TargetHeight into ActualTargetHeight?
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x472)] public ushort DynamicResolutionTargetHeight;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x474)] public ushort DynamicResolutionMaximumHeight;
-    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.")][FieldOffset(0x476)] public ushort DynamicResolutionMinimumHeight;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x470)] public ushort DynamicResolutionActualTargetHeight; // seems to copy TargetHeight into ActualTargetHeight?
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x472)] public ushort DynamicResolutionTargetHeight;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x474)] public ushort DynamicResolutionMaximumHeight;
+    [Obsolete("RenderTargetManager was not updated since Dawntrail release. This field is scheduled for removal.", true)][FieldOffset(0x476)] public ushort DynamicResolutionMinimumHeight;
 }

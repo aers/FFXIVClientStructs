@@ -70,7 +70,7 @@ public unsafe partial struct AddonNamePlate {
         public bool IsLocalPlayer => IsPlayerCharacter && ClickThrough;
     }
 
-    [Obsolete("Renamed to AddonNamePlateNumberArray")]
+    [Obsolete("Renamed to AddonNamePlateNumberArray", true)]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
     public partial struct NamePlateIntArrayData {
