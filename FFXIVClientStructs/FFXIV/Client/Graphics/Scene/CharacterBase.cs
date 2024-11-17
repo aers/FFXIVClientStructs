@@ -75,13 +75,15 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x308)] public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
 
-    [FieldOffset(0x318)] public Material** Materials; // size = SlotCount * MaterialsPerSlot
+    [FieldOffset(0x350)] public Material** Materials; // size = SlotCount * MaterialsPerSlot
 
-    [FieldOffset(0x320)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
+    [FieldOffset(0x358)] public void* EID; // Client::System::Resource::Handle::ElementIdResourceHandle - EID file for base skeleton
 
-    [FieldOffset(0x328)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
+    [FieldOffset(0x360)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
 
-    [FieldOffset(0x918)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap"
+    [FieldOffset(0x958)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap" in LoadAnimation
+
+    [FieldOffset(0xA90)] public ushort RaceCode; // The c%04d for racial things.
 
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
     public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * MaterialsPerSlot);
