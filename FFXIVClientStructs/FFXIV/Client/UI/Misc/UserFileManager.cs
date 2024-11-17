@@ -31,7 +31,7 @@ public partial struct UserFileManager {
         public partial uint WriteFile(byte* ptr, uint length);
 
         // vf3 calls vf1
-        
+
         // vf4 new patch 7.1
         // if new field Unk40 is 1, calls vf9 and vf3
 
@@ -51,7 +51,7 @@ public partial struct UserFileManager {
 
         [VirtualFunction(10)]
         public partial bool GetHasChanges();
-        
+
         [VirtualFunction(11)]
         public partial bool GetIsSavePending();
 
