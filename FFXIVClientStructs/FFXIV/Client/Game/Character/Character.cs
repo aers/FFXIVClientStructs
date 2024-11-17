@@ -29,7 +29,10 @@ public unsafe partial struct Character {
     [FieldOffset(0x1A90)] public CharacterSetupContainer CharacterSetup;
 
     // 0x1AA8: start of some substructure
+    [FieldOffset(0x1AA8)] public ModelContainer ModelContainer;
+    [Obsolete($"Use {nameof(ModelContainer)}.{nameof(ModelContainer.ModelCharaId)} instead.")]
     [FieldOffset(0x1AB8)] public int ModelCharaId; // +0x10 in substructure
+    [Obsolete($"Use {nameof(ModelContainer)}.{nameof(ModelContainer.UnscaledRadius)} instead.")]
     [FieldOffset(0x1ACC)] public float UnscaledRadius; // if character is unmounted, it's hitbox radius is calculated to be this value multiplied by scale
 
     // 0x01 = PartyMember
