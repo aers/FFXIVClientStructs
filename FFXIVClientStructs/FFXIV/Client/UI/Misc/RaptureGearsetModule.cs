@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [Inherits<UserFileEvent>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 79 08 49 8B F8", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0xB808)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB810)]
 public unsafe partial struct RaptureGearsetModule {
     public static RaptureGearsetModule* Instance() {
         var uiModule = UIModule.Instance();

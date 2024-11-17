@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8B D7 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8B D7 E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4"
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x98)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe partial struct PvpSetModule {
     public static PvpSetModule* Instance() {
         var uiModule = UIModule.Instance();

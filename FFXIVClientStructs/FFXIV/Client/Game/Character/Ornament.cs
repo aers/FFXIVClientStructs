@@ -9,10 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ornament = accessory
 [GenerateInterop]
 [Inherits<Character>]
-[StructLayout(LayoutKind.Explicit, Size = 0x22A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2310)]
 public unsafe partial struct Ornament {
-    [FieldOffset(0x2280)] public uint OrnamentId;
-    [FieldOffset(0x2284)] public byte AttachmentPoint;
+    [FieldOffset(0x22F0)] public uint OrnamentId;
+    [FieldOffset(0x22F4)] public byte AttachmentPoint;
 
     // Inlined in E8 ?? ?? ?? ?? F3 0F 10 4D ?? 0F 57 D2 with 7.1
     // [MemberFunction("E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24")]

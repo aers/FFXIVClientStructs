@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // this is a large object holding most of the other objects in the Client::Game::UI namespace
 // all data in here is used for UI display
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x18348)] // unsure how big it really is
+[StructLayout(LayoutKind.Explicit, Size = 0x18722)] // unsure how big it really is
 public unsafe partial struct UIState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
@@ -26,7 +26,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x1698)] public Achievement Achievement;
     [FieldOffset(0x1C98)] public Buddy Buddy;
     [FieldOffset(0x3824)] public PvPProfile PvPProfile;
-    [FieldOffset(0x3898)] internal void* Unk3898; // some UI timer for PvP Results?!
+    [FieldOffset(0x38A0)] internal void* Unk38A0; // some UI timer for PvP Results?!
     [FieldOffset(0x38A8)] public ContentsNote ContentsNote;
     [FieldOffset(0x3960)] public RelicNote RelicNote;
     [FieldOffset(0x3978)] public MateriaTrade MateriaTrade;
@@ -105,18 +105,19 @@ public unsafe partial struct UIState {
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount / 8
     [FieldOffset(0x18279), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;  // fixed for 7.1
-    [FieldOffset(0x18290)] public ulong UnlockedTripleTriadCardsCount;
+    [FieldOffset(0x182B8)] public ulong UnlockedTripleTriadCardsCount;
 
-    [FieldOffset(0x182AA)] public float TerritoryTypeTransientOffsetZ;
-    [FieldOffset(0x182AE)] public byte BeginnerGuideFlags;
-    [FieldOffset(0x182AF)] public byte BattleEffectSelf;
-    [FieldOffset(0x182B0)] public byte BattleEffectParty;
-    [FieldOffset(0x182B1)] public byte BattleEffectOther;
-    [FieldOffset(0x182B3)] public byte BattleEffectPvPEnemyPc;
+    // updated for 7.1 based on previous relative offsets, may not be correct
+    [FieldOffset(0x182D2)] public float TerritoryTypeTransientOffsetZ;
+    [FieldOffset(0x182D6)] public byte BeginnerGuideFlags;
+    [FieldOffset(0x182D7)] public byte BattleEffectSelf;
+    [FieldOffset(0x182D8)] public byte BattleEffectParty;
+    [FieldOffset(0x182D9)] public byte BattleEffectOther;
+    [FieldOffset(0x182DB)] public byte BattleEffectPvPEnemyPc;
 
-    [FieldOffset(0x184A9)] public bool TerritoryTypeTransientRowLoaded;
+    [FieldOffset(0x184D1)] public bool TerritoryTypeTransientRowLoaded;
 
-    [FieldOffset(0x184AB)] public byte GMRank;
+    [FieldOffset(0x184D3)] public byte GMRank;
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 23")]
     public partial bool IsUnlockLinkUnlocked(uint unlockLink);

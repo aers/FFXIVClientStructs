@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.InventoryContext)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x788)]
+[StructLayout(LayoutKind.Explicit, Size = 0x798)]
 public unsafe partial struct AgentInventoryContext {
     [FieldOffset(0x28)] public uint BlockingAddonId;
     [FieldOffset(0x2C)] public int ContexItemStartIndex;
@@ -35,11 +35,11 @@ public unsafe partial struct AgentInventoryContext {
 
     [FieldOffset(0x6E8)] public InventoryItem* TargetInventorySlot;
     [FieldOffset(0x6F0)] public InventoryItem TargetDummyItem;
-    [FieldOffset(0x730)] public InventoryType BlockedInventoryId;
-    [FieldOffset(0x734)] public int BlockedInventorySlotId;
+    [FieldOffset(0x738)] public InventoryType BlockedInventoryId;
+    [FieldOffset(0x73C)] public int BlockedInventorySlotId;
 
-    [FieldOffset(0x740)] public InventoryItem DiscardDummyItem;
-    [FieldOffset(0x780)] public int DialogType; // ?? 1 = Discard, 2 = LowerQuality
+    [FieldOffset(0x748)] public InventoryItem DiscardDummyItem;
+    [FieldOffset(0x790)] public int DialogType; // ?? 1 = Discard, 2 = LowerQuality
 
     [MemberFunction("83 B9 ?? ?? ?? ?? ?? 7E ?? 39 91")]
     public partial void OpenForItemSlot(uint inventory, int slot, int a4, uint addonId);

@@ -17,10 +17,10 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0x3BE8)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
 
     [FieldOffset(0x3BF0)] public LuaState* LuaState;
-    [FieldOffset(0x33F8)] public LuaThread LuaThread;
+    [FieldOffset(0x3BF8)] public LuaThread LuaThread;
 
-    [FieldOffset(0x3BE8)] public EventState EventState1;
-    [FieldOffset(0x3C38)] public EventState EventState2;
+    [FieldOffset(0x3C50)] public EventState EventState1;
+    [FieldOffset(0x3CB0)] public EventState EventState2;
 
     [StaticAddress("4C 39 2D ?? ?? ?? ?? 74 14", 3, isPointer: true)]
     public static partial EventFramework* Instance();

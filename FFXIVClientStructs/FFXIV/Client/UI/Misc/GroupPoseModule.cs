@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 49 8B D4 E8 ?? ?? ?? ?? 33 C0"
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x130)]
+[StructLayout(LayoutKind.Explicit, Size = 0x140)]
 public unsafe partial struct GroupPoseModule {
     public static GroupPoseModule* Instance() {
         var uiModule = UIModule.Instance();

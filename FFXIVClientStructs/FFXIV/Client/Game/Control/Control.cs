@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 // Client::Game::Control::Control
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x7655)]
+[StructLayout(LayoutKind.Explicit, Size = 0x76C0)]
 public unsafe partial struct Control {
     [FieldOffset(0x00)] public CameraManager CameraManager;
     [FieldOffset(0x180)] public TargetSystem TargetSystem;

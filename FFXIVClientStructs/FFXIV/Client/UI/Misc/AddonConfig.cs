@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x68)]
+[StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct AddonConfig {
     public static AddonConfig* Instance() {
         var uiModule = UIModule.Instance();
@@ -28,7 +28,7 @@ public unsafe partial struct AddonConfig {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xC8E8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xCBD8)]
 public unsafe partial struct AddonConfigData {
     [FieldOffset(0x00)] public Utf8String DefaultString; // Literally says "Default"
     // [FieldOffset(0x68)] public StdList<[SomeStruct Size 48]> SomeList; // Contains 300 elements

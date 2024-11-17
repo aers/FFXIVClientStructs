@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ChatLog)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB30)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB38)]
 public unsafe partial struct AgentChatLog {
 
     [FieldOffset(0x40)] public ChatChannel CurrentChannel;
@@ -22,22 +22,22 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0x478), FixedSizeArray] internal FixedSizeArray8<Utf8String> _channelSelectorCWLSNames;
 
     [FieldOffset(0x8A0)] public InventoryItem LinkedItem;
-    [FieldOffset(0x8E0)] public byte LinkedItemQuality;
-    [FieldOffset(0x8E8)] public Utf8String LinkedItemName;
+    [FieldOffset(0x8E8)] public byte LinkedItemQuality;
+    [FieldOffset(0x8F0)] public Utf8String LinkedItemName;
 
-    [FieldOffset(0x950)] public uint ContextItemId;
+    [FieldOffset(0x958)] public uint ContextItemId;
 
-    [FieldOffset(0x960)] public ulong LinkedPartyFinderId;
+    [FieldOffset(0x968)] public ulong LinkedPartyFinderId;
     // [FieldOffset(0x960)] public byte LinkedPartyFinderUnkByte;
-    [FieldOffset(0x970)] public Utf8String LinkedPartyFinderLeaderName;
+    [FieldOffset(0x978)] public Utf8String LinkedPartyFinderLeaderName;
 
-    [FieldOffset(0x9D8)] public uint LinkedQuestId;
-    [FieldOffset(0x9E0)] public Utf8String LinkedQuestName;
+    [FieldOffset(0x9E0)] public uint LinkedQuestId;
+    [FieldOffset(0x9E8)] public Utf8String LinkedQuestName;
 
-    [FieldOffset(0xA48)] public uint ContextStatusId; // also used for the <status> link?
-    [FieldOffset(0xA50)] public Utf8String ContextStatusName;
+    [FieldOffset(0xA50)] public uint ContextStatusId; // also used for the <status> link?
+    [FieldOffset(0xA58)] public Utf8String ContextStatusName;
 
-    [FieldOffset(0xB24)] public int ReplyChannel;
+    [FieldOffset(0xB2C)] public int ReplyChannel;
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0")]
     public partial bool InsertTextCommandParam(uint textParamId, bool unk);
