@@ -16,7 +16,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 [GenerateInterop(isInherited: true)]
 [Inherits<DrawObject>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 48 89 07 48 8D 9F ?? ?? ?? ?? B8 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 66 89 87 ?? ?? ?? ?? 48 8B CB", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x9D0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA10)]
 public unsafe partial struct CharacterBase {
     public const int PathBufferSize = 260;
     public const int MaterialsPerSlot = 10;
@@ -82,8 +82,6 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x360)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
 
     [FieldOffset(0x958)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap" in LoadAnimation
-
-    [FieldOffset(0xA90)] public ushort RaceCode; // The c%04d for racial things.
 
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
     public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * MaterialsPerSlot);

@@ -9,13 +9,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // ctor "E8 ?? ?? ?? ?? 4C 8B F0 4C 89 B7"
 [GenerateInterop]
 [Inherits<CharacterBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xA00)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA40)]
 public unsafe partial struct Monster {
-    [FieldOffset(0x9D0)] public ushort ModelSetId;
-    [FieldOffset(0x9D2)] public ushort SecondaryId;
-    [FieldOffset(0x9D4)] public ushort Variant;
+    [FieldOffset(0xA10)] public ushort ModelSetId;
+    [FieldOffset(0xA12)] public ushort SecondaryId;
+    [FieldOffset(0xA14)] public ushort Variant;
 
-    [FieldOffset(0x9E0)] public TextureResourceHandle* Decal;
+    [FieldOffset(0xA20)] public TextureResourceHandle* Decal;
 
     // Expects at least 8 bytes of data.
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F 57 C0 48 8D 4C 24 ??")]
