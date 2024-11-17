@@ -294,7 +294,7 @@ public enum AgentId : uint {
 
     SatisfactionSupply = 270,
     SatisfactionSupplyResult = 271,
-    // Unk272 = 272,  NEW 7.1
+    SatisfactionList = 272, // new in 7.1
     Snipe = 273,
     MountSpeed = 274,
 
@@ -326,7 +326,7 @@ public enum AgentId : uint {
     ContentsReplaySetting = 301,
     MiragePrismPrismBox = 302, // Glamour Dresser
     MiragePrismPrismItemDetail = 303,
-    // Unk304 = 304, NEW 7.1
+    MiragePrismPrismSetConvert = 304, // new in 7.1
     MiragePrismMiragePlate = 305, // Glamour Plates
     PerformanceMode = 306,
     PerformanceModeSettings = 307,
@@ -350,7 +350,7 @@ public enum AgentId : uint {
     Emj = 327, // Mahjong
 
     EmjIntro = 330,
-    // Unk331 = 331, NEW 7.1
+    EmjVoiceCharacter = 331, // new in 7.1
     AozContentBriefing = 332, // Masked Carnivale
     AozContentResult = 333,
     WorldTravel = 334,
@@ -421,7 +421,7 @@ public enum AgentId : uint {
     BannerEditor = 400, // Portrait Editor
     BannerUpdateView = 401,
 
-    // Unk403 = 403, NEW 7.1
+    BannerPreview = 403, // new in 7.1
     PvPMap = 404,
     CharaCard = 405, // AdventurerPlate
     CharaCardDesignSetting = 406,
@@ -470,5 +470,5 @@ public enum AgentId : uint {
     TradeScreenImage = 448,
     Glasses = 449,
     TermFilter = 450,
-    // Unk451 = 451, NEW 7.1
+    HousingInteriorPattern = 451, // new in 7.1
 }
