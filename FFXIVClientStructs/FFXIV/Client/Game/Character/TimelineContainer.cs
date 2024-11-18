@@ -15,34 +15,32 @@ public unsafe partial struct TimelineContainer {
     [FieldOffset(0x2C0)] public byte ModelState;
     [FieldOffset(0x2C1), FixedSizeArray] internal FixedSizeArray2<byte> _animationState;
 
-    [FieldOffset(0x2C4)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
+    [FieldOffset(0x2C8)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
 
-    [FieldOffset(0x2E0)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state
+    [FieldOffset(0x2E4)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state
+    [FieldOffset(0x2E6)] public ushort LipsOverride; // Forces the character lips to play timeline
 
-    [FieldOffset(0x2E2)] public ushort LipsOverride; // Forces the character lips to play timeline
-
-    [FieldOffset(0x300)] public nint BannerTimelineSheet; // only set when loading data
-    [FieldOffset(0x308)] public nint BannerTimelineRowDescriptor; // only set when loading data
-    [FieldOffset(0x310)] public ushort BannerTimelineRowId;
-    [FieldOffset(0x312)] public byte BannerFacialRowId;
+    [FieldOffset(0x308)] public nint BannerTimelineSheet; // only set when loading data
+    [FieldOffset(0x310)] public nint BannerTimelineRowDescriptor; // only set when loading data
+    [FieldOffset(0x318)] public ushort BannerTimelineRowId;
+    [FieldOffset(0x31A)] public byte BannerFacialRowId;
 
     // contained in a small 0x10 struct
-    [FieldOffset(0x318 + 0x0)] public float BannerRequestStartTimestamp;
-    // [FieldOffset(0x318 + 0x8)] public GameObjectID BannerRequestObjectId; // ?
+    [FieldOffset(0x320 + 0x0)] public float BannerRequestStartTimestamp;
 
-    #region Starting at 0x328 is a copy of the BannerTimeline row (Component::Exd::Sheets::BannerTimeline)
-    [FieldOffset(0x328 + 0x00)] public uint BannerTimelineNameOffset; // not very useful here
-    [FieldOffset(0x328 + 0x04)] public uint BannerTimelineAdditionalData;
-    [FieldOffset(0x328 + 0x08)] public uint BannerTimelineIcon;
-    [FieldOffset(0x328 + 0x0C)] public ushort BannerTimelineUnlockCondition;
-    [FieldOffset(0x328 + 0x0E)] public ushort BannerTimelineSortKey;
-    [FieldOffset(0x328 + 0x10)] public byte BannerTimelineType;
-    [FieldOffset(0x328 + 0x11)] public byte BannerTimelineAcceptClassJobCategory;
-    [FieldOffset(0x328 + 0x12)] public byte BannerTimelineCategory;
+    #region Starting at 0x320 is a copy of the BannerTimeline row (Component::Exd::Sheets::BannerTimeline)
+    [FieldOffset(0x330 + 0x00)] public uint BannerTimelineNameOffset; // not very useful here
+    [FieldOffset(0x330 + 0x04)] public uint BannerTimelineAdditionalData;
+    [FieldOffset(0x330 + 0x08)] public uint BannerTimelineIcon;
+    [FieldOffset(0x330 + 0x0C)] public ushort BannerTimelineUnlockCondition;
+    [FieldOffset(0x330 + 0x0E)] public ushort BannerTimelineSortKey;
+    [FieldOffset(0x330 + 0x10)] public byte BannerTimelineType;
+    [FieldOffset(0x330 + 0x11)] public byte BannerTimelineAcceptClassJobCategory;
+    [FieldOffset(0x330 + 0x12)] public byte BannerTimelineCategory;
     #endregion
 
-    [FieldOffset(0x33E)] public byte Flags1;
-    [FieldOffset(0x33F)] public byte Flags2; // bit 2 makes it load the requested banner animation
+    [FieldOffset(0x346)] public byte Flags1;
+    [FieldOffset(0x347)] public byte Flags2; // bit 2 makes it load the requested banner animation
 
     // 0x40 = WeaponDrawn
     [FieldOffset(0x34A)] public byte Flags3;
