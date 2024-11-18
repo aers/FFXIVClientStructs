@@ -40,6 +40,9 @@ public unsafe partial struct Character {
     // 0x04 = Friend
     [FieldOffset(0x1C62)] public byte RelationFlags;
 
+    // 0x40 = All attacks will be cancelled, character is doing the the 'winded' emote, used in e.g. 'Strange Bedfellows' and 'Combat Evolved' when quest expects an item to be used on the character
+    [FieldOffset(0x1C68)] public byte ActorControlFlags;
+
     [FieldOffset(0x2160)] public Balloon Balloon;
 
     [FieldOffset(0x2268)] public float Alpha;
