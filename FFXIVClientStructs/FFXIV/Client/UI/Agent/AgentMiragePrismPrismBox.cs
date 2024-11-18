@@ -48,9 +48,8 @@ public unsafe partial struct MiragePrismPrismBoxData {
     [FieldOffset(0x113EB8)] public Utf8String FilterString; // Inline buffer only
     [FieldOffset(0x113F20)] public Utf8String SearchString; // Inline buffer only
 
-    // The following pointers exist but shouldn't be used over AgentX.Instance():
-    // OnShow: AgentCabinet* is stored at +0x113EA0
-    // OnShow: AgentMiragePrismMiragePlate* is stored at +0x113EA8
+    [FieldOffset(0x113EA0)] internal AgentCabinet* AgentCabinet;
+    [FieldOffset(0x113EA8)] internal AgentMiragePrismMiragePlate* AgentMiragePrismMiragePlate;
 }
 
 [GenerateInterop]
