@@ -16,6 +16,12 @@ public unsafe partial struct PacketDispatcher {
     [MemberFunction("40 55 56 41 56 48 8B EC 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 48 8B 0D ?? ?? ?? ?? 4C 8B F2")]
     public partial void HandleMarketBoardPurchasePacket(nint packet);
 
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 0F B6 4B ?? 4C 8D 43 18 0F B7 53 14")]
+    public static partial void HandleEventPlayPacket(ulong objectId, uint eventId, ushort stage, ulong a4, uint* payload, byte payloadSize);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 10 48 8B 0D")]
+    public static partial void SendEventCompletePacket(uint eventId, ushort stage, byte a3, uint* payload, byte payloadSize, void* a6);
+
     [VirtualFunction(1)]
     public partial void OnReceivePacket(uint targetId, nint packet);
 }
