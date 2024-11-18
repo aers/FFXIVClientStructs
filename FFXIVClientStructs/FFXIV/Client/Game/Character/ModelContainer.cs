@@ -14,7 +14,7 @@ public unsafe partial struct ModelContainer {
     [FieldOffset(0x18)] public int ModelCharaId_2;
 
     /// <remarks> If this is 0, returns <seealso cref="ModelSkeletonId"/>. </remarks>
-    [FieldOffset(0x1C)] public int ModelSkeletonId_2; 
+    [FieldOffset(0x1C)] public int ModelSkeletonId_2;
 
     /// <remarks> If character is unmounted, it's hitbox radius is calculated to be this value multiplied by scale. </remarks>>
     [FieldOffset(0x24)] public float UnscaledRadius;
