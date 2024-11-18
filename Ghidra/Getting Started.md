@@ -44,9 +44,9 @@ We use [..\ida\ffxiv_idarename.py](../ida/ffxiv_idarename.py) to apply data.yml.
 Note: it has to be major version 2, so something like [Python 2.7.18](https://www.python.org/downloads/release/python-2718/) works.<br>
 
 - Execute the following:<br>
-`python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.3\Lib\site-packages pyyaml==5.4.1 anytree`<br>
+`python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.3\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`<br>
 Note: this must be run from Python 2.  If you have multiple versions installed, you may need to qualify the path like:<br>
-`c:\Python27\python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.3\Lib\site-packages pyyaml==5.4.1 anytree`
+`c:\Python27\python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.3\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`
 
 - Open the Script Manager <p align="center"><img src=".\images\Open Script Manager.png"></p>
 
