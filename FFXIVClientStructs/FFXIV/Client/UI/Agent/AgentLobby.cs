@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Lobby)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<LogoutCallbackInterface>(0x30)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E68)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2308)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 ?? 48 89 01 4C 8B E1", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
@@ -23,69 +23,69 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0xA28)] public ExcelSheet* LobbySheet;
     [FieldOffset(0xA30)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0xA38)] public StdDeque<TextParameter> LobbyTextParameters;
-    [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray4<Utf8String> _tempUtf8Strings;
-    [FieldOffset(0xC00)] public StdVector<Utf8String> VersionStrings;
-    [FieldOffset(0xC18)] public Utf8String DisplayedVersionString;
+    [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray5<Utf8String> _tempUtf8Strings;
+    [FieldOffset(0xC68)] public StdVector<Utf8String> VersionStrings;
+    [FieldOffset(0xC80)] public Utf8String DisplayedVersionString;
 
-    [FieldOffset(0xC98), FixedSizeArray] internal FixedSizeArray8<Utf8String> _unkUtf8Strings;
+    [FieldOffset(0xD00), FixedSizeArray] internal FixedSizeArray8<Utf8String> _unkUtf8Strings;
 
-    [FieldOffset(0x1110)] public sbyte ServiceAccountIndex;
+    [FieldOffset(0x1178)] public sbyte ServiceAccountIndex;
 
     [FieldOffset(0x1180)] public ulong HoveredCharacterContentId;
-    [FieldOffset(0x1120)] public byte DataCenter;
+    [FieldOffset(0x1188)] public byte DataCenter;
 
-    [FieldOffset(0x1122)] public short WorldIndex; // index in CurrentDataCenterWorlds
-    [FieldOffset(0x1124)] public ushort WorldId;
+    [FieldOffset(0x118A)] public short WorldIndex; // index in CurrentDataCenterWorlds
+    [FieldOffset(0x118C)] public ushort WorldId;
 
-    [FieldOffset(0x1128)] public uint DialogAddonId;
-    [FieldOffset(0x112C)] public uint DialogAddonId2;
-    [FieldOffset(0x1130)] public uint LobbyScreenTextAddonId;
-    [FieldOffset(0x1134)] public uint LogoAddonId;
-    [FieldOffset(0x1138)] public uint TitleDCWorldMapAddonId;
-    [FieldOffset(0x113C)] public uint TitleMovieSelectorAddonId;
-    [FieldOffset(0x1140)] public uint TitleGameVersionAddonId;
-    [FieldOffset(0x1144)] public uint TitleConnectAddonId;
-    [FieldOffset(0x1148)] public uint CharaSelectAddonId;
-    [FieldOffset(0x114C)] public uint CharaMakeDataImportAddonId;
-    [FieldOffset(0x1150)] public uint LoadPreviouslySavedAppearanceDataDialogAddonId; // SelectYesno
-    [FieldOffset(0x1154)] public uint LoadSavedCharacterCreationDataDialogAddonId; // SelectYesno
-    [FieldOffset(0x1158)] public uint CreateNewCharacterDialogAddonId; // SelectYesno
-    [FieldOffset(0x115C)] public uint LobbyWKTAddonId;
+    [FieldOffset(0x1190)] public uint DialogAddonId;
+    [FieldOffset(0x1194)] public uint DialogAddonId2;
+    [FieldOffset(0x1198)] public uint LobbyScreenTextAddonId;
+    [FieldOffset(0x119C)] public uint LogoAddonId;
+    [FieldOffset(0x11A0)] public uint TitleDCWorldMapAddonId;
+    [FieldOffset(0x11A4)] public uint TitleMovieSelectorAddonId;
+    [FieldOffset(0x11A8)] public uint TitleGameVersionAddonId;
+    [FieldOffset(0x11AC)] public uint TitleConnectAddonId;
+    [FieldOffset(0x11B0)] public uint CharaSelectAddonId;
+    [FieldOffset(0x11B4)] public uint CharaMakeDataImportAddonId;
+    [FieldOffset(0x11B8)] public uint LoadPreviouslySavedAppearanceDataDialogAddonId; // SelectYesno
+    [FieldOffset(0x11BC)] public uint LoadSavedCharacterCreationDataDialogAddonId; // SelectYesno
+    [FieldOffset(0x11C0)] public uint CreateNewCharacterDialogAddonId; // SelectYesno
+    [FieldOffset(0x11C4)] public uint LobbyWKTAddonId;
 
-    [FieldOffset(0x1164)] public byte LobbyUpdateStage;
+    [FieldOffset(0x11D4)] public byte LobbyUpdateStage;
 
     [FieldOffset(0x11D7)] public byte LobbyUIStage;
 
     [FieldOffset(0x11E0)] public long IdleTime;
 
-    [FieldOffset(0x1190)] public int QueuePosition;
+    [FieldOffset(0x1200)] public int QueuePosition;
 
-    [FieldOffset(0x1195)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    [FieldOffset(0x1205)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
-    [FieldOffset(0x1198)] public ulong SelectedCharacterContentId;
+    [FieldOffset(0x1208)] public ulong SelectedCharacterContentId;
 
     [FieldOffset(0x1210)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
     [FieldOffset(0x1211)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin (+0x38)
 
-    [FieldOffset(0x11A3)] public bool LogoutShouldCloseGame;
+    [FieldOffset(0x1213)] public bool LogoutShouldCloseGame;
 
-    [FieldOffset(0x12A0)] public bool TemporaryLocked; // "Please wait and try logging in later."
+    [FieldOffset(0x1310)] public bool TemporaryLocked; // "Please wait and try logging in later."
 
-    [FieldOffset(0x12B8)] public ulong RequestContentId;
+    [FieldOffset(0x1328)] public ulong RequestContentId;
 
-    [FieldOffset(0x1E14)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
+    [FieldOffset(0x1348)] public LogoutCallbackInterface.LogoutParams LogoutParams;
 
-    [FieldOffset(0x12D8)] public LogoutCallbackInterface.LogoutParams LogoutParams;
+    [FieldOffset(0x22B4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
     // TODO: everything below here is wrong
 
     // title movie stuff is seemingly no longer part of AgentLobby
-    [FieldOffset(0xA30), Obsolete("Not updated. Expect invalid data.")] public uint AccountExpansion;
-    [FieldOffset(0xA34), Obsolete("Not updated. Expect invalid data.")] public bool ShowFreeTrialLogo;
-    [FieldOffset(0xA38), Obsolete("Not updated. Expect invalid data.")] public uint TitleScreenExpansion;
-    [FieldOffset(0xA3C), Obsolete("Not updated. Expect invalid data.")] public bool ShowOriginalLogo; // pre-relaunch
+    [FieldOffset(0xA98), Obsolete("Title movie data no longer part of AgentLobby.", true)] public uint AccountExpansion;
+    [FieldOffset(0xA9C), Obsolete("Title movie data no longer part of AgentLobby.", true)] public bool ShowFreeTrialLogo;
+    [FieldOffset(0xAA0), Obsolete("Title movie data no longer part of AgentLobby.", true)] public uint TitleScreenExpansion;
+    [FieldOffset(0xAA4), Obsolete("Title movie data no longer part of AgentLobby.", true)] public bool ShowOriginalLogo; // pre-relaunch
 
-    [FieldOffset(0x1248), Obsolete("Not updated. Expect invalid data.")] public byte RequestCharaterIndex;
+    [FieldOffset(0x12B0), Obsolete("Not updated since before Dawntrail.")] public byte RequestCharaterIndex;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D7")]
     public partial void UpdateLobbyUIStage();
