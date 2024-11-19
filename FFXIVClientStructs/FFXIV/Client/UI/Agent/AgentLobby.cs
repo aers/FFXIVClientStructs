@@ -91,7 +91,7 @@ public unsafe partial struct AgentLobby {
     public partial void UpdateLobbyUIStage();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 80 BE")]
-    public partial void UpdateCharaSelectDisplay(sbyte index, bool a2);
+    public partial bool UpdateCharaSelectDisplay(sbyte index, bool a2);
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 66 C7 83")]
     public partial void OpenLoginWaitDialog(int position);
