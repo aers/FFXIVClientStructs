@@ -27,8 +27,7 @@ public unsafe partial struct Weapon {
     [FieldOffset(0xA40)] public ChangedWeaponData* ChangedData;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x06)] // Size unknown
-    public struct ChangedWeaponData
-    {
+    public struct ChangedWeaponData {
         // No primary ID since this requires a new model to be setup.
         [FieldOffset(0x00)] public ushort SecondaryId;
         [FieldOffset(0x02)] public byte Variant;
