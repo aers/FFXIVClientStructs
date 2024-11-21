@@ -15,7 +15,7 @@ public partial struct ContentDirector {
 
     [FieldOffset(0x578)] public DutyActionManager DutyActionManager;
 
-    [FieldOffset(0xCF0)] public float ContentTimeLeft;
+    [FieldOffset(0xD40)] public float ContentTimeLeft;
 
     /// <summary>
     /// Gets the max time for the content in seconds
