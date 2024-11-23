@@ -41,6 +41,9 @@ public unsafe partial struct StatusManager {
     [MemberFunction("83 FA 3C 73 50")]
     public partial void RemoveStatus(int statusIndex, byte u2 = 0); // u2 always appears to be 0
 
+    [MemberFunction("E8 ?? ?? ?? ?? FF C6 48 8D 5B 0C")]
+    public partial bool SetStatus(int statusIndex, ushort statusId, float remaining, ushort param, uint sourceId, bool refreshFlags);
+
     /// <summary>
     /// Remove specified status, if it is possible to be removed by user interaction.
     /// Does all the sanity checks (that status is on player, is a buff that can be canceled, etc); on success status is removed from manager immediately.
