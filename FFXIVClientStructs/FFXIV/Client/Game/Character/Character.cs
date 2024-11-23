@@ -123,9 +123,8 @@ public unsafe partial struct Character {
     public partial Character* GetParentCharacter();
 
     /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height.  </summary>
-    [Obsolete($"This is wrong, it is a function on {nameof(ModelContainer)} now, not on {nameof(Character)}.")]
-    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 58 F0 F3 41 0F 5C F0")]
-    public partial float CalculateHeight();
+    [Obsolete($"Function moved to {nameof(ModelContainer)}.")]
+    public float CalculateHeight() => ModelContainer.CalculateHeight();
 
     /// <summary> Check if the character is using the World Visit system. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 8B CF")]
