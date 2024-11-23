@@ -19,7 +19,7 @@ public unsafe partial struct AgentHousingInteriorPattern {
     /// <remarks> HousingRenovation row id </remarks>
     [FieldOffset(0x8B8)] public ushort CurrentRenovationRowId;
     /// <remarks> HousingRenovation row ids </remarks>
-    [FieldOffset(0x8BA), FixedSizeArray] internal FixedSizeArray19<Utf8String> _availableRenovationRowIds;
+    [FieldOffset(0x8BA), FixedSizeArray] internal FixedSizeArray19<ushort> _availableRenovationRowIds;
     [FieldOffset(0x8E0)] internal byte Unk8E0;
 
     /// <remarks> Addon Id of HousingWareHouseStatus, MultipleHelpWindow or SelectYesno </remarks>
