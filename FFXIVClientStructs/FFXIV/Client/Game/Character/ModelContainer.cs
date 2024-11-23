@@ -19,7 +19,7 @@ public unsafe partial struct ModelContainer {
     /// <remarks> If character is unmounted, it's hitbox radius is calculated to be this value multiplied by scale. </remarks>>
     [FieldOffset(0x24)] public float UnscaledRadius;
 
-    /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height, called by <seealso cref="Character.CalculateHeight"/>  </summary>
+    /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height of the owner character. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 F8 0F 57 C9")]
     public partial float CalculateHeight();
 }
