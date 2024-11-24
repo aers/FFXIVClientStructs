@@ -8839,6 +8839,7 @@ classes:
 #fail       0x140EF7860: InsertTextCommandParam
 #fail       0x140EF8200: LinkItem
 #fail       0x140EF9880: ChangeChannelName
+      0x140E5EA40: HideLogWindow
   Client::UI::Agent::AgentInventory:
     vtbls:
 #fail       - ea: 0x141F6FBD0
