@@ -11518,6 +11518,10 @@ classes:
     vtbls:
       - ea: 0x141F3AEB0
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentHousingInteriorPattern:
+    vtbls:
+      - ea: 0x14207CEF8
+        base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
 #fail       - ea: 0x141F2C800
