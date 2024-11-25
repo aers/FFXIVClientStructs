@@ -7244,14 +7244,14 @@ structs:
   name: RecipeData
   namespace: Client.Game.UI
   union: False
-  size: 1056
+  size: 1088
   fields:
   - type: Client::Game::UI::RecipeNote::RecipeEntry*
     name: Recipes
     offset: 0
   - type: unsigned __int16
     name: SelectedIndex
-    offset: 1032
+    offset: 1064
   member_functions: []
 - type: Client::Game::UI::RelicNote
   name: RelicNote
@@ -8012,6 +8012,25 @@ structs:
   - type: Client::System::Resource::Handle::ResourceHandle**
     name: ResourceList
     offset: 24
+  member_functions: []
+- type: Client::Graphics::Scene::Weapon::ChangedWeaponData
+  name: ChangedWeaponData
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 6
+  fields:
+  - type: unsigned __int16
+    name: SecondaryId
+    offset: 0
+  - type: byte
+    name: Variant
+    offset: 2
+  - type: byte
+    name: Stain0
+    offset: 3
+  - type: byte
+    name: Stain1
+    offset: 4
   member_functions: []
 - type: Client::Graphics::Vfx::VfxData
   name: VfxData
@@ -11076,6 +11095,25 @@ structs:
   - type: byte
     name: R
     offset: 2
+  member_functions: []
+- type: Client::UI::Agent::AgentItemSearch::ListingItem
+  name: ListingItem
+  namespace: Client.UI.Agent
+  union: False
+  size: 32
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 8
+  - type: unsigned __int16
+    name: Index
+    offset: 24
+  - type: unsigned __int16
+    name: OfferCount
+    offset: 26
+  - type: unsigned __int16
+    name: Demand
+    offset: 28
   member_functions: []
 - type: Client::UI::Agent::AgentLookingForGroup::Detailed
   name: Detailed
@@ -21133,6 +21171,24 @@ structs:
       name: statusIndex
     - type: byte
       name: u2
+  - signature: E8 ?? ?? ?? ?? FF C6 48 8D 5B 0C
+    return_type: byte
+    name: SetStatus
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: int
+      name: statusIndex
+    - type: unsigned __int16
+      name: statusId
+    - type: float
+      name: remaining
+    - type: unsigned __int16
+      name: param
+    - type: unsigned int
+      name: sourceId
+    - type: byte
+      name: refreshFlags
 - type: Client::Game::UI::ContentsFinder
   name: ContentsFinder
   namespace: Client.Game.UI
@@ -35487,7 +35543,7 @@ structs:
   name: DynamicEvent
   namespace: Client.Game.InstanceContent
   union: False
-  size: 432
+  size: 456
   fields:
   - type: unsigned int
     name: LGBEventObject
@@ -35510,57 +35566,63 @@ structs:
   - type: unsigned __int16
     name: Unknown2
     offset: 76
-  - type: byte
-    name: EventType
+  - type: unsigned __int16
+    name: Unknown6
     offset: 78
-  - type: byte
-    name: EnemyType
-    offset: 79
-  - type: byte
-    name: MaxParticipants
+  - type: unsigned __int16
+    name: Unknown7
     offset: 80
   - type: byte
+    name: EventType
+    offset: 83
+  - type: byte
+    name: EnemyType
+    offset: 84
+  - type: byte
+    name: MaxParticipants
+    offset: 85
+  - type: byte
     name: Unknown4
-    offset: 81
+    offset: 86
   - type: byte
     name: Unknown5
-    offset: 82
+    offset: 87
   - type: byte
     name: SingleBattle
-    offset: 83
+    offset: 88
   - type: int
     name: StartTimestamp
-    offset: 84
+    offset: 92
   - type: unsigned int
     name: SecondsLeft
-    offset: 88
+    offset: 96
   - type: unsigned int
     name: SecondsDuration
-    offset: 92
+    offset: 100
   - type: Client::Game::InstanceContent::DynamicEventState
     name: State
-    offset: 99
+    offset: 106
   - type: byte
     name: Participants
-    offset: 101
+    offset: 109
   - type: byte
     name: Progress
-    offset: 102
+    offset: 110
   - type: Client::System::String::Utf8String
     name: Name
-    offset: 104
+    offset: 120
   - type: Client::System::String::Utf8String
     name: Description
-    offset: 208
+    offset: 224
   - type: unsigned int
     name: IconObjective0
-    offset: 312
+    offset: 328
   - type: byte
     name: MaxParticipants2
-    offset: 316
+    offset: 332
   - type: Client::Game::UI::MapMarkerData
     name: MapMarker
-    offset: 344
+    offset: 360
   member_functions: []
 - type: Client::Game::InventoryItem
   name: InventoryItem
@@ -35978,7 +36040,7 @@ structs:
     offset: 146
   - type: Client::Game::Object::ObjectTargetableFlags
     name: TargetableStatus
-    offset: 149
+    offset: 150
   - type: Common::Math::Vector3
     name: Position
     offset: 176
@@ -40911,128 +40973,6 @@ structs:
       name: stain0Id
     - type: byte
       name: stain1Id
-- type: Client::UI::Agent::AgentItemSearch
-  name: AgentItemSearch
-  namespace: Client.UI.Agent
-  union: False
-  size: 14456
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: Client::UI::Agent::AgentItemSearch::StringHolder*
-    name: StringData
-    offset: 152
-  - type: unsigned int
-    name: ResultItemId
-    offset: 13188
-  - type: unsigned int
-    name: ResultSelectedIndex
-    offset: 13196
-  - type: unsigned __int16
-    name: ResultHoveredIndex
-    offset: 13212
-  - type: unsigned int
-    name: ResultHoveredItemId
-    offset: 13216
-  - type: unsigned int
-    name: ResultHoveredCount
-    offset: 13220
-  - type: byte
-    name: ResultHoveredHQ
-    offset: 13228
-  - type: byte
-    name: IsPartialSearching
-    offset: 14442
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentItemSearch*
-      name: this
-    - type: byte
-      name: a2
-  member_functions: []
 - type: Client::UI::Agent::AgentLinkshell
   name: AgentLinkshell
   namespace: Client.UI.Agent
@@ -46552,58 +46492,58 @@ structs:
     size: 2
   - type: float
     name: OverallSpeed
-    offset: 708
+    offset: 712
   - type: unsigned __int16
     name: BaseOverride
-    offset: 736
+    offset: 740
   - type: unsigned __int16
     name: LipsOverride
-    offset: 738
+    offset: 742
   - type: __int64
     name: BannerTimelineSheet
-    offset: 768
+    offset: 776
   - type: __int64
     name: BannerTimelineRowDescriptor
-    offset: 776
+    offset: 784
   - type: unsigned __int16
     name: BannerTimelineRowId
-    offset: 784
+    offset: 792
   - type: byte
     name: BannerFacialRowId
-    offset: 786
+    offset: 794
   - type: float
     name: BannerRequestStartTimestamp
-    offset: 792
+    offset: 800
   - type: unsigned int
     name: BannerTimelineNameOffset
-    offset: 808
+    offset: 816
   - type: unsigned int
     name: BannerTimelineAdditionalData
-    offset: 812
+    offset: 820
   - type: unsigned int
     name: BannerTimelineIcon
-    offset: 816
+    offset: 824
   - type: unsigned __int16
     name: BannerTimelineUnlockCondition
-    offset: 820
+    offset: 828
   - type: unsigned __int16
     name: BannerTimelineSortKey
-    offset: 822
-  - type: byte
-    name: BannerTimelineType
-    offset: 824
-  - type: byte
-    name: BannerTimelineAcceptClassJobCategory
-    offset: 825
-  - type: byte
-    name: BannerTimelineCategory
-    offset: 826
-  - type: byte
-    name: Flags1
     offset: 830
   - type: byte
+    name: BannerTimelineType
+    offset: 832
+  - type: byte
+    name: BannerTimelineAcceptClassJobCategory
+    offset: 833
+  - type: byte
+    name: BannerTimelineCategory
+    offset: 834
+  - type: byte
+    name: Flags1
+    offset: 838
+  - type: byte
     name: Flags2
-    offset: 831
+    offset: 839
   - type: byte
     name: Flags3
     offset: 842
@@ -46814,7 +46754,7 @@ structs:
   name: DynamicEventContainer
   namespace: Client.Game.InstanceContent
   union: False
-  size: 6952
+  size: 7336
   fields:
   - type: Client::Game::InstanceContent::DynamicEvent
     name: Events
@@ -47463,7 +47403,7 @@ structs:
   name: RecipeEntry
   namespace: Client.Game.UI
   union: False
-  size: 1016
+  size: 1024
   fields:
   - type: Client::Game::UI::RecipeNote::RecipeIngredient
     name: Ingredients
@@ -49043,6 +48983,148 @@ structs:
       name: this
     - type: unsigned __int64
       name: contentId
+- type: Client::UI::Agent::AgentHousingInteriorPattern
+  name: AgentHousingInteriorPattern
+  namespace: Client.UI.Agent
+  union: False
+  size: 2296
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: byte
+    name: Unk28
+    offset: 40
+  - type: byte
+    name: Unk29
+    offset: 41
+  - type: Client::System::String::Utf8String
+    name: CurrentString
+    offset: 48
+  - type: Client::System::String::Utf8String
+    name: AvailableRenovationNames
+    offset: 152
+    size: 19
+  - type: Client::System::String::Utf8String
+    name: UnkString
+    offset: 2128
+  - type: unsigned __int16
+    name: CurrentRenovationRowId
+    offset: 2232
+  - type: unsigned __int16
+    name: AvailableRenovationRowIds
+    offset: 2234
+    size: 19
+  - type: byte
+    name: Unk8E0
+    offset: 2272
+  - type: unsigned int
+    name: PopupAddonId
+    offset: 2276
+  - type: unsigned int
+    name: RenovationConfirmIndex
+    offset: 2280
+  - type: byte
+    name: Unk8EC
+    offset: 2284
+  - type: byte
+    name: Unk8ED
+    offset: 2285
+  - type: unsigned int
+    name: Unk8F0
+    offset: 2288
+  - type: byte
+    name: Unk8F5
+    offset: 2293
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
 - type: Client::UI::Agent::AgentItemDetail
   name: AgentItemDetail
   namespace: Client.UI.Agent
@@ -50176,65 +50258,68 @@ structs:
   name: MiragePrismPrismBoxData
   namespace: Client.UI.Agent
   union: False
-  size: 140296
+  size: 1130376
   fields:
   - type: Client::UI::Agent::PrismBoxItem
     name: PrismBoxItems
     offset: 8
-    size: 800
+    size: 8000
   - type: Client::UI::Agent::PrismBoxItem
     name: TempContextItem
-    offset: 108808
+    offset: 1088008
   - type: int
     name: PageItemIndexes
-    offset: 108944
+    offset: 1094544
     size: 50
   - type: int
     name: TempContextItemIndex
-    offset: 109144
+    offset: 1094744
   - type: int
     name: SelectedPageIndex
-    offset: 109148
+    offset: 1094748
   - type: int
     name: UsedSlots
-    offset: 109152
+    offset: 1094752
   - type: int
     name: CrystallizeCategory
-    offset: 109168
-  - type: int
+    offset: 1094776
+  - type: unsigned __int16
     name: CrystallizeItemIndex
-    offset: 109172
-  - type: int
+    offset: 1094780
+  - type: unsigned __int16
     name: CrystallizeItemCount
-    offset: 109176
+    offset: 1094782
   - type: Client::UI::Agent::PrismBoxCrystallizeItem
     name: CrystallizeItems
-    offset: 109180
+    offset: 1094788
     size: 140
   - type: Client::UI::Agent::PrismBoxCrystallizeItem
     name: CrystallizeSelectedItem
-    offset: 113100
-  - type: unsigned int
-    name: FilterFlags
-    offset: 113140
+    offset: 1098708
+  - type: byte
+    name: CrystallizeFilterFlags
+    offset: 1130140
+  - type: byte
+    name: SortType
+    offset: 1130141
   - type: Client::UI::Agent::AgentCabinet*
     name: AgentCabinet
-    offset: 113144
+    offset: 1130144
   - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
     name: AgentMiragePrismMiragePlate
-    offset: 113152
+    offset: 1130152
   - type: byte
     name: FilterLevel
-    offset: 113160
+    offset: 1130160
   - type: byte
     name: FilterSex
-    offset: 113162
+    offset: 1130162
   - type: Client::System::String::Utf8String
     name: FilterString
-    offset: 113168
+    offset: 1130168
   - type: Client::System::String::Utf8String
     name: SearchString
-    offset: 113272
+    offset: 1130272
   member_functions: []
 - type: Client::UI::Info::InfoProxyCommonList
   name: InfoProxyCommonList
@@ -64393,6 +64478,12 @@ structs:
     - type: byte
       name: a2
   member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8D 4D 20
+    return_type: void
+    name: HideLogWindow
+    parameters:
+    - type: Client::UI::Agent::AgentChatLog*
+      name: this
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0
     return_type: byte
     name: InsertTextCommandParam
@@ -64468,6 +64559,139 @@ structs:
   - type: unsigned int
     name: ItemRewardCount
     offset: 5568
+  member_functions: []
+- type: Client::UI::Agent::AgentItemSearch
+  name: AgentItemSearch
+  namespace: Client.UI.Agent
+  union: False
+  size: 14464
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentItemSearch::StringHolder*
+    name: StringData
+    offset: 152
+  - type: byte
+    name: ListingPageLoaded
+    offset: 2601
+  - type: unsigned int
+    name: ListingPageItemIds
+    offset: 3004
+    size: 100
+  - type: unsigned int
+    name: ListingPageItemCount
+    offset: 3408
+  - type: Client::UI::Agent::AgentItemSearch::ListingItem
+    name: ListingPageItems
+    offset: 3416
+    size: 100
+  - type: byte
+    name: ListingCurrentPage
+    offset: 12576
+  - type: byte
+    name: ListingPageCount
+    offset: 12577
+  - type: unsigned int
+    name: ResultItemId
+    offset: 13188
+  - type: unsigned int
+    name: ResultSelectedIndex
+    offset: 13196
+  - type: Client::Game::InventoryItem
+    name: ResultHoveredItem
+    offset: 13208
+  - type: byte
+    name: IsPartialSearching
+    offset: 14449
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+    - type: byte
+      name: a2
   member_functions: []
 - type: Client::UI::Agent::AgentMJIDisposeShop::AgentData
   name: AgentData
@@ -66891,6 +67115,9 @@ structs:
   - type: unsigned int
     name: SlotFreeCompanyCrestBitfield
     offset: 2616
+  - type: Client::Graphics::Scene::Weapon::ChangedWeaponData*
+    name: ChangedData
+    offset: 2624
   virtual_functions:
   - name: GetObjectType
     offset: 16
@@ -112178,7 +112405,7 @@ structs:
   name: AgentLobby
   namespace: Client.UI.Agent
   union: False
-  size: 7784
+  size: 8968
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -112206,95 +112433,92 @@ structs:
   - type: Client::System::String::Utf8String
     name: TempUtf8Strings
     offset: 2656
-    size: 4
+    size: 5
   - type: StdVector<Client::System::String::Utf8String>
     name: VersionStrings
-    offset: 3072
+    offset: 3176
   - type: Client::System::String::Utf8String
     name: DisplayedVersionString
-    offset: 3096
+    offset: 3200
   - type: Client::System::String::Utf8String
     name: UnkUtf8Strings
-    offset: 3224
+    offset: 3328
     size: 8
   - type: __int8
     name: ServiceAccountIndex
-    offset: 4368
-  - type: byte
-    name: DataCenter
-    offset: 4384
-  - type: __int16
-    name: WorldIndex
-    offset: 4386
-  - type: unsigned __int16
-    name: WorldId
-    offset: 4388
-  - type: unsigned int
-    name: DialogAddonId
-    offset: 4392
-  - type: unsigned int
-    name: DialogAddonId2
-    offset: 4396
-  - type: unsigned int
-    name: LobbyScreenTextAddonId
-    offset: 4400
-  - type: unsigned int
-    name: LogoAddonId
-    offset: 4404
-  - type: unsigned int
-    name: TitleDCWorldMapAddonId
-    offset: 4408
-  - type: unsigned int
-    name: TitleMovieSelectorAddonId
-    offset: 4412
-  - type: unsigned int
-    name: TitleGameVersionAddonId
-    offset: 4416
-  - type: unsigned int
-    name: TitleConnectAddonId
-    offset: 4420
-  - type: unsigned int
-    name: CharaSelectAddonId
-    offset: 4424
-  - type: unsigned int
-    name: CharaMakeDataImportAddonId
-    offset: 4428
-  - type: unsigned int
-    name: LoadPreviouslySavedAppearanceDataDialogAddonId
-    offset: 4432
-  - type: unsigned int
-    name: LoadSavedCharacterCreationDataDialogAddonId
-    offset: 4436
-  - type: unsigned int
-    name: CreateNewCharacterDialogAddonId
-    offset: 4440
-  - type: unsigned int
-    name: LobbyWKTAddonId
-    offset: 4444
-  - type: byte
-    name: LobbyUpdateStage
-    offset: 4452
+    offset: 4472
   - type: unsigned __int64
     name: HoveredCharacterContentId
     offset: 4480
-  - type: int
-    name: QueuePosition
-    offset: 4496
-  - type: __int8
-    name: HoveredCharacterIndex
-    offset: 4501
-  - type: unsigned __int64
-    name: SelectedCharacterContentId
-    offset: 4504
   - type: byte
-    name: LogoutShouldCloseGame
-    offset: 4515
+    name: DataCenter
+    offset: 4488
+  - type: __int16
+    name: WorldIndex
+    offset: 4490
+  - type: unsigned __int16
+    name: WorldId
+    offset: 4492
+  - type: unsigned int
+    name: DialogAddonId
+    offset: 4496
+  - type: unsigned int
+    name: DialogAddonId2
+    offset: 4500
+  - type: unsigned int
+    name: LobbyScreenTextAddonId
+    offset: 4504
+  - type: unsigned int
+    name: LogoAddonId
+    offset: 4508
+  - type: unsigned int
+    name: TitleDCWorldMapAddonId
+    offset: 4512
+  - type: unsigned int
+    name: TitleMovieSelectorAddonId
+    offset: 4516
+  - type: unsigned int
+    name: TitleGameVersionAddonId
+    offset: 4520
+  - type: unsigned int
+    name: TitleConnectAddonId
+    offset: 4524
+  - type: unsigned int
+    name: CharaSelectAddonId
+    offset: 4528
+  - type: unsigned int
+    name: CharaMakeDataImportAddonId
+    offset: 4532
+  - type: unsigned int
+    name: LoadPreviouslySavedAppearanceDataDialogAddonId
+    offset: 4536
+  - type: unsigned int
+    name: LoadSavedCharacterCreationDataDialogAddonId
+    offset: 4540
+  - type: unsigned int
+    name: CreateNewCharacterDialogAddonId
+    offset: 4544
+  - type: unsigned int
+    name: LobbyWKTAddonId
+    offset: 4548
+  - type: byte
+    name: LobbyUpdateStage
+    offset: 4564
   - type: byte
     name: LobbyUIStage
     offset: 4567
   - type: __int64
     name: IdleTime
     offset: 4576
+  - type: int
+    name: QueuePosition
+    offset: 4608
+  - type: __int8
+    name: HoveredCharacterIndex
+    offset: 4613
+  - type: unsigned __int64
+    name: SelectedCharacterContentId
+    offset: 4616
   - type: byte
     name: IsLoggedIn
     offset: 4624
@@ -112302,17 +112526,20 @@ structs:
     name: IsLoggedIntoZone
     offset: 4625
   - type: byte
+    name: LogoutShouldCloseGame
+    offset: 4627
+  - type: byte
     name: TemporaryLocked
-    offset: 4768
+    offset: 4880
   - type: unsigned __int64
     name: RequestContentId
-    offset: 4792
+    offset: 4904
   - type: Application::Network::LogoutCallbackInterface::LogoutParams
     name: LogoutParams
-    offset: 4824
+    offset: 4936
   - type: byte
     name: HasShownCharacterNotFound
-    offset: 7700
+    offset: 8884
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -112408,7 +112635,7 @@ structs:
     - type: Client::UI::Agent::AgentLobby*
       name: this
   - signature: E8 ?? ?? ?? ?? 84 C0 74 07 C6 86 ?? ?? ?? ?? ?? 80 BE
-    return_type: void
+    return_type: byte
     name: UpdateCharaSelectDisplay
     parameters:
     - type: Client::UI::Agent::AgentLobby*
@@ -127472,7 +127699,7 @@ structs:
   name: ContentDirector
   namespace: Client.Game.InstanceContent
   union: False
-  size: 3376
+  size: 3456
   fields:
   - type: Client::Game::Event::Director
     name: Director
@@ -127486,7 +127713,7 @@ structs:
     offset: 1400
   - type: float
     name: ContentTimeLeft
-    offset: 3312
+    offset: 3392
   virtual_functions:
   - name: GetContentTimeMax
     offset: 2504
@@ -127715,7 +127942,7 @@ structs:
   name: InstanceContentDirector
   namespace: Client.Game.InstanceContent
   union: False
-  size: 7576
+  size: 7656
   fields:
   - type: Client::Game::InstanceContent::ContentDirector
     name: ContentDirector
@@ -127811,7 +128038,7 @@ structs:
   name: PublicContentDirector
   namespace: Client.Game.InstanceContent
   union: False
-  size: 4472
+  size: 4560
   fields:
   - type: Client::Game::InstanceContent::ContentDirector
     name: ContentDirector
@@ -127819,55 +128046,58 @@ structs:
     base: true
   - type: unsigned int
     name: NameOffset
-    offset: 3376
+    offset: 3456
   - type: unsigned int
     name: MapIcon
-    offset: 3380
+    offset: 3460
   - type: unsigned int
     name: TextDataStart
-    offset: 3384
+    offset: 3464
   - type: unsigned int
     name: TextDataEnd
-    offset: 3388
+    offset: 3468
   - type: unsigned int
     name: StartCutscene
-    offset: 3392
+    offset: 3472
   - type: unsigned int
     name: LGBEventRange
-    offset: 3396
+    offset: 3476
   - type: unsigned int
     name: LGBPopRange
-    offset: 3400
+    offset: 3480
   - type: unsigned int
     name: EndCutscene
-    offset: 3404
+    offset: 3484
   - type: unsigned __int16
     name: Timelimit
-    offset: 3408
+    offset: 3488
   - type: unsigned __int16
     name: ContentFinderCondition
-    offset: 3410
+    offset: 3490
   - type: unsigned __int16
     name: AdditionalData
-    offset: 3412
+    offset: 3492
   - type: unsigned __int16
     name: Unknown0
-    offset: 3414
+    offset: 3494
   - type: unsigned __int16
     name: Unknown1
-    offset: 3416
+    offset: 3496
   - type: unsigned __int16
     name: Unknown2
-    offset: 3418
+    offset: 3498
   - type: unsigned __int16
     name: Unknown3
-    offset: 3420
+    offset: 3500
+  - type: unsigned __int16
+    name: Unknown5
+    offset: 3504
   - type: Client::Game::InstanceContent::PublicContentDirectorType
     name: Type
-    offset: 3422
+    offset: 3506
   - type: byte
     name: Unknown4
-    offset: 3423
+    offset: 3507
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
@@ -127952,7 +128182,7 @@ structs:
   name: PublicContentEureka
   namespace: Client.Game.InstanceContent
   union: False
-  size: 5456
+  size: 5544
   fields:
   - type: Client::Game::InstanceContent::PublicContentDirector
     name: PublicContentDirector
@@ -127960,53 +128190,53 @@ structs:
     base: true
   - type: unsigned __int16
     name: Unk1090
-    offset: 4472
+    offset: 4560
   - type: unsigned __int16
     name: Unk1092
-    offset: 4474
+    offset: 4562
   - type: byte
     name: MaxElementalLevel
-    offset: 4476
+    offset: 4564
   - type: unsigned int
     name: CurrentExperience
-    offset: 4480
+    offset: 4568
   - type: unsigned int
     name: NeededExperience
-    offset: 4484
+    offset: 4572
   - type: unsigned __int16
     name: MagiaAetherCharge
-    offset: 4488
+    offset: 4576
   - type: byte
     name: Fire
-    offset: 4490
+    offset: 4578
   - type: byte
     name: Ice
-    offset: 4491
+    offset: 4579
   - type: byte
     name: Wind
-    offset: 4492
+    offset: 4580
   - type: byte
     name: Earth
-    offset: 4493
+    offset: 4581
   - type: byte
     name: Lightning
-    offset: 4494
+    offset: 4582
   - type: byte
     name: Water
-    offset: 4495
+    offset: 4583
   - type: byte
     name: Magicite
-    offset: 4496
+    offset: 4584
   - type: byte
     name: MagiaAether
-    offset: 4497
+    offset: 4585
   - type: Client::System::String::Utf8String
     name: PublicContentTextDataStrings
-    offset: 4504
+    offset: 4592
     size: 4
   - type: Client::System::String::Utf8String
     name: Unk1250
-    offset: 4920
+    offset: 5008
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
@@ -128878,7 +129108,7 @@ structs:
   name: InstanceContentDeepDungeon
   namespace: Client.Game.InstanceContent
   union: False
-  size: 10448
+  size: 10528
   fields:
   - type: Client::Game::InstanceContent::InstanceContentDirector
     name: InstanceContentDirector
@@ -129273,7 +129503,7 @@ structs:
     base: true
   - type: Client::Game::InstanceContent::DynamicEventContainer
     name: DynamicEventContainer
-    offset: 4480
+    offset: 4568
   - type: Client::Game::InstanceContent::BozjaState
     name: State
     offset: 11904
@@ -129599,6 +129829,9 @@ structs:
   - type: byte
     name: RelationFlags
     offset: 7266
+  - type: byte
+    name: ActorControlFlags
+    offset: 7272
   - type: Client::Game::Balloon
     name: Balloon
     offset: 8544
@@ -129849,12 +130082,6 @@ structs:
   - signature: E8 ?? ?? ?? ?? 48 85 C0 74 11 4D 8B 07
     return_type: Client::Game::Character::Character*
     name: GetParentCharacter
-    parameters:
-    - type: Client::Game::Character::Character*
-      name: this
-  - signature: E8 ?? ?? ?? ?? F3 0F 58 F0 F3 41 0F 5C F0
-    return_type: float
-    name: CalculateHeight
     parameters:
     - type: Client::Game::Character::Character*
       name: this
