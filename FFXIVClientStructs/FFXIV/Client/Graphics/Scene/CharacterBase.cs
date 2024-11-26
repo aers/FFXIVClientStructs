@@ -11,7 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::CharacterBase
 //   Client::Graphics::Scene::DrawObject
 //     Client::Graphics::Scene::Object
-// ctor "E8 ?? ?? ?? ?? 33 C9 48 8D 05 ?? ?? ?? ?? 48 89 03 48 B8"
 // base class for graphics objects representing characters (human, demihuman, monster, and weapons)
 [GenerateInterop(isInherited: true)]
 [Inherits<DrawObject>]

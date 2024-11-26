@@ -11,7 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //   Client::Graphics::Scene::CharacterBase
 //     Client::Graphics::Scene::DrawObject
 //       Client::Graphics::Scene::Object
-// ctor "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 28 48 8D 55 D7"
 [GenerateInterop]
 [Inherits<CharacterBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xCA0)]

@@ -22,7 +22,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
     [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
-    [FieldOffset(0x180)] public StdVector<Pointer<byte>> CachedAtkValueStrings; // set here: "48 8D 54 24 ?? E8 ?? ?? ?? ?? 48 83 C4 20 41 5E"
+    [FieldOffset(0x180)] public StdVector<Pointer<byte>> CachedAtkValueStrings;
 
     /// <summary>
     /// <code>
@@ -187,7 +187,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 88 45 67")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 46 FC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BA E7 14")]
     public partial bool SetFocusNode(AtkResNode* node, bool a3 = false, uint a4 = 0);
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>

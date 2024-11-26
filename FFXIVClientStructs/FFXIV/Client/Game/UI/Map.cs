@@ -3,7 +3,6 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Map
-// ctor "E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 01 E8 ?? ?? ?? ?? 40 88 AB"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x4000)]
 public unsafe partial struct Map {

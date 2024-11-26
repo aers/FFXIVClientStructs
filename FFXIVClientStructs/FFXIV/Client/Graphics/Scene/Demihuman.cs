@@ -8,7 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //   Client::Graphics::Scene::CharacterBase
 //     Client::Graphics::Scene::DrawObject
 //       Client::Graphics::Scene::Object
-// ctor "E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 48 8D 55 BF"
 [GenerateInterop]
 [Inherits<CharacterBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xAC0)]

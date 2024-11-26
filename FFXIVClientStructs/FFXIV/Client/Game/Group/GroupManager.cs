@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 
 // Client::Game::Group::GroupManager
-// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 33 ED C7 81"
 // group manager has two copies of the state - the normal one and a separate used when viewing recordings
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xCB80)]

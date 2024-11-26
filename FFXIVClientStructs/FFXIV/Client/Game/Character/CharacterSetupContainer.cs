@@ -2,7 +2,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::CharacterSetupContainer
 //   Client::Game::Character::ContainerInterface
-// ctor "80 61 10 FC 48 8D 05"
 [GenerateInterop]
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]

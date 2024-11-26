@@ -11,7 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //     Component::Text::MacroDecoder
 //   Component::Text::TextChecker::ExecNonMacroFunc
 //   Component::Excel::ExcelLanguageEvent
-// ctor "E8 ?? ?? ?? ?? 48 8D 9F ?? ?? ?? ?? 4D 8B C5"
 [GenerateInterop]
 [Inherits<TextModule>, Inherits<TextChecker.ExecNonMacroFunc>, Inherits<ExcelLanguageEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE60)]

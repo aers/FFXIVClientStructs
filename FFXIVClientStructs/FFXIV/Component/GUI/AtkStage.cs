@@ -6,7 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkStage
 //   Component::GUI::AtkEventTarget
-// ctor "E8 ?? ?? ?? ?? 48 8B F8 48 89 BE ?? ?? ?? ?? 48 8B 43 10"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x75E00)]
 public unsafe partial struct AtkStage {

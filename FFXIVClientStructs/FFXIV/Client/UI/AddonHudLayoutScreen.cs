@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::AddonHudLayoutScreen
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
-// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 89 03 E8 ?? ?? ?? ?? 48 8D 8B"
 [Addon("_HudLayoutScreen")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]

@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Buddy
-// ctor "E8 ?? ?? ?? ?? 48 89 AB ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 AB"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1B8C)]
 public unsafe partial struct Buddy {

@@ -49,7 +49,7 @@ public enum AtkEventType : byte {
     TweenComplete = 68,
 
     // AtkAddonControl
-    ChildAddonAttached = 69, // found inside AtkAddonControl_Update at "E8 ?? ?? ?? ?? 49 8B 4D 00 33 C0"
+    ChildAddonAttached = 69, // found inside AtkAddonControl_Update
 
     // AtkComponentWindow
     WindowRollOver = 70,

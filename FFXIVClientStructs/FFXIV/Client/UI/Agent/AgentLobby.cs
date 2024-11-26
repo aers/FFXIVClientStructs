@@ -10,7 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentLobby
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
-// ctor "E8 ?? ?? ?? ?? EB 03 48 8B C5 45 33 C9 48 89 47 20"
 [Agent(AgentId.Lobby)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<LogoutCallbackInterface>(0x30)]
@@ -149,7 +148,6 @@ public unsafe partial struct CharaSelectCharacterEntry {
     public partial bool IsInDifferentRegion();
 }
 
-// see "E8 ?? ?? ?? ?? 44 0F B6 43 ?? 8D 57 7E"
 public enum CharaSelectCharacterEntryLoginFlags : byte {
     None = 0,
     Locked = 1, // Lobby#64: "You cannot select this character with your current account."

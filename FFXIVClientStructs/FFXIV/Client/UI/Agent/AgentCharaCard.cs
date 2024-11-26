@@ -26,8 +26,6 @@ public unsafe partial struct AgentCharaCard {
     public void OpenCharaCard(GameObject* gameObject) => OpenCharaCardForObject(gameObject);
 
     // Client::UI::Agent::AgentCharaCard::Storage
-    // ctor "E8 ?? ?? ?? ?? 48 8B F0 48 89 73 ?? C6 06"
-    // dtor "E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 48 89 73 ?? E8"
     [StructLayout(LayoutKind.Explicit, Size = 0x9B0)]
     public unsafe partial struct Storage {
         [FieldOffset(0x4)] public uint EntityId;

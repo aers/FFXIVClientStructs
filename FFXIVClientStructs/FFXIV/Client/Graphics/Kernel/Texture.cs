@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 //     Client::Graphics::Kernel::DelayedReleaseClassBase
 //       Client::Graphics::ReferencedClassBase
 //   Client::Graphics::Kernel::Notifier
-// ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 41 B9 ?? ?? ?? ?? 48 89 07 48 8B CF"
 // renderer texture object, contains platform specific render objects (DX9/DX11/PS3/PS4)
 [GenerateInterop]
 [Inherits<Notifier>(parentOffset: 0x20)]

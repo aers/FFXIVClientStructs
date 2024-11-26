@@ -80,7 +80,6 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedGlassesStylesBitmask;
     [FieldOffset(0x30C)] public ushort NumOwnedMounts;
 
-    // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 83 EC 50 48 8B 81"
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) / 8
     [FieldOffset(0x3EA), FixedSizeArray] internal FixedSizeArray159<byte> _caughtFishBitmask; // TODO: update size
 

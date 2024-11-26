@@ -1,6 +1,5 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
-// ctor inlined in "48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 33 C0 48 8B FA"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct CurrencySettingsHelper {
