@@ -7,7 +7,6 @@ using ExcelModuleInterface = FFXIVClientStructs.FFXIV.Component.Excel.ExcelModul
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::PronounModule
-// ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 8B D7 E8 ?? ?? ?? ?? 48 8B 44 24"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
 public unsafe partial struct PronounModule {

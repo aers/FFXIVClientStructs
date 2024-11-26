@@ -5,7 +5,6 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UI3DModule
-// ctor "E8 ?? ?? ?? ?? 48 8B 44 24 ?? 4C 8D B7"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x17540)]
 public unsafe partial struct UI3DModule {

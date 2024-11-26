@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Telepo
-// ctor "E8 ?? ?? ?? ?? BE ?? ?? ?? ?? 89 AB"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct Telepo {

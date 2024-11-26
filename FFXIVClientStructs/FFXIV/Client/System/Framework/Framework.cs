@@ -17,7 +17,6 @@ using FFXIVClientStructs.FFXIV.Component.SteamApi;
 namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 // Client::System::Framework::Framework
-// ctor "E8 ?? ?? ?? ?? 48 8B C8 48 89 05 ?? ?? ?? ?? EB 0A 48 8B CE"
 [GenerateInterop]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 66 C7 41 ?? ?? ?? 48 89 01 48 8B F1", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x35D0)]

@@ -3,7 +3,6 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::RecommendEquipModule
-// ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 33 ED 48 8D 59 08 4C 8B F1"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct RecommendEquipModule {

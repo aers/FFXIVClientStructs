@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::EventGPoseController
-// ctor "E8 ?? ?? ?? ?? 80 A3 ?? ?? ?? ?? ?? B8 ?? ?? ?? ?? 48 89 83"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x2F80)]
 public unsafe partial struct EventGPoseController {

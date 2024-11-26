@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Base;
 // Client::System::Scheduler::Base::SchedulerTimeline
 //   Client::System::Scheduler::Base::TimelineController
 //     Client::System::Scheduler::Base::SchedulerState
-// ctor "E8 ?? ?? ?? ?? 48 89 43 ?? 48 89 98"
 [GenerateInterop]
 [Inherits<TimelineController>]
 [StructLayout(LayoutKind.Explicit, Size = 0x280)]

@@ -1,7 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
 // Component::GUI::AtkArrayDataHolder
-// ctor "E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 48 89 BE ?? ?? ?? ?? 48 8B C7"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct AtkArrayDataHolder {

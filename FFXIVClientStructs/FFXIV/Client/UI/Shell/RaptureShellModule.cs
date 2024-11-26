@@ -6,7 +6,6 @@ using FFXIVClientStructs.FFXIV.Component.Shell;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Shell;
 
 // Client::UI::Shell::RaptureShellModule
-// ctor "E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 4C 8B CF"
 [GenerateInterop]
 [Inherits<ShellCommandModule>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1218)]

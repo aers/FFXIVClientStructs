@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::LuaEventHandler
 //   Client::Game::Event::EventHandler
-// ctor "E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 44 8B CB"
 [GenerateInterop(isInherited: true)]
 [Inherits<EventHandler>]
 [StructLayout(LayoutKind.Explicit, Size = 0x330)]

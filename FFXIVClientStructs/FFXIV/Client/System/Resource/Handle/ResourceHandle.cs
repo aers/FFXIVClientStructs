@@ -2,7 +2,6 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 // Client::System::Resource::Handle::ResourceHandle
 //   Client::System::Common::NonCopyable
-// ctor "E8 ?? ?? ?? ?? 81 A3 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05"
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
 public unsafe partial struct ResourceHandle {

@@ -4,7 +4,6 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Fate;
 
 // Client::Game::Fate::FateManager
-// ctor "48 89 5C 24 ?? 57 48 83 EC 20 33 FF 48 8B D9 48 89 39 48 89 79 08 48 89 79 10 48 83 C1 18 E8 ?? ?? ?? ?? 48 89 BB"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct FateManager {
