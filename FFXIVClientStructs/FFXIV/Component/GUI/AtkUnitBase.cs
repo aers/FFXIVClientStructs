@@ -187,7 +187,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 88 45 67")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 46 FC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BA E7 14")]
     public partial bool SetFocusNode(AtkResNode* node, bool a3 = false, uint a4 = 0);
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
