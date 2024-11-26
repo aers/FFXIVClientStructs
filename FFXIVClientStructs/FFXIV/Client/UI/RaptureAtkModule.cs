@@ -59,7 +59,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x296D0)] internal ExcelSheet* AddonParamSheet;
     [FieldOffset(0x296D8)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
 
-    [FieldOffset(0x29718)] internal nint ShellCommands; // only 1 function "48 83 EC 38 4C 8B C2 C7 44 24" to open links?
+    [FieldOffset(0x29718)] internal nint ShellCommands; // only 1 function to open links?
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 89 5F 58")]
     public partial bool ChangeUiMode(uint uiMode);

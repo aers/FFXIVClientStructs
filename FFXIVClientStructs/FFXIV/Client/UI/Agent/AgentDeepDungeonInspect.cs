@@ -12,11 +12,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentDeepDungeonInspect {
     [FieldOffset(0x28)] public AgentDeepDungeonInspectData* Data;
-    /*
-    //Seems to be Show, but needs more investigation
-    [MemberFunction("48 89 5C 24 08 57 48 83 EC 20 48 83 79 28 00 8B FA 48 8B D9 ?? ?? ?? ?? ?? ?? ?? 4C 8B C0 45 33 C9 33 D2 B9 60 01")]
-    public partial void FUN_140a65850(uint entityId);
-    */
 
     //Size taken from Alloc in disassembly
     [StructLayout(LayoutKind.Explicit, Size = 0x160)]

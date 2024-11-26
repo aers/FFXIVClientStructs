@@ -91,11 +91,9 @@ public unsafe partial struct UIState {
 
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
-    //      relative to uistate: "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" (case for 0x355)
     // Size: (CompanionSheet.RowCount + 7) / 8
     [FieldOffset(0x18182), FixedSizeArray] internal FixedSizeArray68<byte> _unlockedCompanionsBitmask;  // fixed for 7.1
 
-    // Ref: "42 0F B6 04 30 44 84 C0"
     // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
     [FieldOffset(0x181C6), FixedSizeArray] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;  // fixed for 7.1
 
@@ -207,7 +205,6 @@ public unsafe partial struct UIState {
     /// <param name="companionId">The ID of the companion/minion to check for.</param>
     /// <returns>Returns true if the specified minion is unlocked.</returns>
     public bool IsCompanionUnlocked(uint companionId) {
-        // Logic borrowed from "E8 ?? ?? ?? ?? 84 C0 75 A6 32 C0" and others.
         return ((1 << ((int)companionId & 7)) & UnlockedCompanionsBitmask[(int)companionId / 8]) > 0;
     }
 
