@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -105,19 +106,24 @@ public unsafe partial struct UIState {
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount / 8
     [FieldOffset(0x18279), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;  // fixed for 7.1
-    [FieldOffset(0x182B8)] public ulong UnlockedTripleTriadCardsCount;
+    [FieldOffset(0x182B0)] public ulong UnlockedTripleTriadCardsCount;
 
-    // updated for 7.1 based on previous relative offsets, may not be correct
-    [FieldOffset(0x182D2)] public float TerritoryTypeTransientOffsetZ;
-    [FieldOffset(0x182D6)] public byte BeginnerGuideFlags;
-    [FieldOffset(0x182D7)] public byte BattleEffectSelf;
-    [FieldOffset(0x182D8)] public byte BattleEffectParty;
-    [FieldOffset(0x182D9)] public byte BattleEffectOther;
-    [FieldOffset(0x182DB)] public byte BattleEffectPvPEnemyPc;
+    [FieldOffset(0x182CA)] public float TerritoryTypeTransientOffsetZ; // TODO: this is a short in the sheet and copied with a 4 byte register??
 
-    [FieldOffset(0x184D1)] public bool TerritoryTypeTransientRowLoaded;
+    [FieldOffset(0x182CE)] public byte BeginnerGuideFlags;
+    [FieldOffset(0x182CF)] public byte BattleEffectSelf;
+    [FieldOffset(0x182D0)] public byte BattleEffectParty;
+    [FieldOffset(0x182D1)] public byte BattleEffectOther;
 
-    [FieldOffset(0x184D3)] public byte GMRank;
+    [FieldOffset(0x182D3)] public byte BattleEffectPvPEnemyPc;
+
+    [FieldOffset(0x182D8)] public uint UnlockedCompanionsCount;
+
+    [FieldOffset(0x184C9)] public bool TerritoryTypeTransientRowLoaded;
+
+    [FieldOffset(0x184CB)] public byte GMRank;
+
+    [FieldOffset(0x18540)] public Utf8String JournalDetailDescription;
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 23")]
     public partial bool IsUnlockLinkUnlocked(uint unlockLink);
