@@ -1357,10 +1357,12 @@ classes:
       0x140C4FDC0: HasHousePermissions
       0x140C4F390: GetCurrentPlot
       0x140C4F440: GetCurrentWard
-      0x140C4FEC0: GetCurrentHouseId
+      0x140C4FEC0: GetCurrentIndoorHouseId
       0x140C50230: GetCurrentRoom
       0x140C4F4A0: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
       0x140C4F5D0: GetInvertedBrightness # 0-5, higher is darker
+      0x140C52EE0: GetOwnedHouseId
+      0x140C55B30: GetOriginalHouseTerritoryTypeId
       0x140C7BCE0: IsSubmarineExplorationUnlocked # static
       0x140C7BD20: IsSubmarineExplorationExplored # static
       0x140C7DEF0: GetSubmarineSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)

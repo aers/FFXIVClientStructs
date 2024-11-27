@@ -39,8 +39,27 @@ public unsafe partial struct HousingManager {
     public partial sbyte GetCurrentPlot();
 
     // Unique Identifier
+    [Obsolete("Renamed to GetCurrentIndoorHouseId, as this only returns the HouseId of IndoorTerritory")]
+    public long GetCurrentHouseId() => GetCurrentIndoorHouseId();
+
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B F8 8D 4A 02")]
-    public partial long GetCurrentHouseId();
+    public partial long GetCurrentIndoorHouseId();
+
+    /// <summary>
+    /// Gets the TerritoryTypeId of the house the player is currently standing at.<br/>
+    /// For indoor territories that were renovated, this returns the original location.
+    /// </summary>
+    /// <returns></returns>
+    [MemberFunction("48 8B 05 ?? ?? ?? ?? 48 8B 50 08 48 85 D2 74 10")]
+    public static partial uint GetOriginalHouseTerritoryTypeId();
+
+    /// <summary>
+    /// Gets the player owned house ids.
+    /// </summary>
+    /// <param name="type">The type of the estate.</param>
+    /// <param name="sharedEstateIndex">For type <see cref="EstateType.SharedEstate"/> an index must be specified (currently either 0 or 1).</param>
+    [MemberFunction("83 F9 06 77 64")]
+    public static partial long GetOwnedHouseId(EstateType type, int sharedEstateIndex = -1);
 
     /// <summary>
     /// Gets the airship voyage distance and time in pointers
@@ -116,4 +135,17 @@ public unsafe partial struct HousingManager {
     /// <returns>True or False</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 88 45 38")]
     public static partial bool IsSubmarineExplorationExplored(byte point);
+
+    public HousingTerritoryType GetCurrentHousingTerritoryType()
+        => CurrentTerritory != null ? CurrentTerritory->GetTerritoryType() : HousingTerritoryType.None;
+}
+
+public enum EstateType {
+    FreeCompanyEstate = 0,
+    PersonalChambers = 1,
+    PersonalEstate = 2,
+    Unknown3 = 3,
+    SharedEstate = 4,
+    ApartmentBuilding = 5,
+    ApartmentRoom = 6
 }

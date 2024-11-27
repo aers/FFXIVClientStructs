@@ -11,6 +11,8 @@ public unsafe partial struct WorkshopTerritory {
     [FieldOffset(0x68)] public HousingWorkshopAirshipData Airship;
 
     [FieldOffset(0x2960)] public HousingWorkshopSubmersibleData Submersible;
+
+    [FieldOffset(0xB8B0)] public long HouseId;
 }
 
 [GenerateInterop]
