@@ -8228,7 +8228,7 @@ classes:
         base: Client::Graphics::Vfx::VfxDataListenner
   Client::Game::Character::CharacterData:
     vtbls:
-      - ea: 0x0x141F7E9B8
+      - ea: 0x141F7E9B8
     vfuncs:
       0: dtor
       1: ClassJobChanged
@@ -12023,7 +12023,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::RacingChocoboNameTask:
     vtbls:
-      - ea: 014209A610
+      - ea: 0x14209A610
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::RequestAirshipsInfoTask:
     vtbls:
