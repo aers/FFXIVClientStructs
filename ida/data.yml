@@ -13576,10 +13576,10 @@ classes:
       0x141862910: ctor
   Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise:
     vtbls:
-      - ea: 0x142141D60
+      - ea: 0x14211AEF8
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
-#fail       0x1417FD7E0: ctor
+      0x1417FA330: ctor
   Client::Game::InstanceContent::InstanceContentBeginnerTrainingFinalExercise: # Final Exercise
     vtbls:
       - ea: 0x14211C778
