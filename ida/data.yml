@@ -1256,7 +1256,7 @@ classes:
       0x1408192B0: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::InventoryItem:
     vtbls:
-       - ea: 0x141F7D6E8
+      - ea: 0x141F7D6E8
     vfuncs:
       0: dtor
       1: Copy
@@ -1294,7 +1294,7 @@ classes:
 #fail       0x140887E30: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
   Client::Game::InventoryContainer:
     vtbls:
-       - ea: 0x141F7D798
+      - ea: 0x141F7D798
     vfuncs:
       0: dtor
       1: SetInventoryType
@@ -2913,7 +2913,7 @@ classes:
       6: GetLanguage
   Common::Component::Excel::ExcelResourceListener:
     vtbls:
-     - ea: 0x1422FC5A0
+      - ea: 0x1422FC5A0
     vfuncs:
       0: dtor
       1: OnResourceLoad
@@ -5451,7 +5451,7 @@ classes:
       - ea: 0x141F603F8
   Client::Graphics::Scene::ResidentResourceManager:
     instances:
-     - ea: 0x142621E78
+      - ea: 0x142621E78
     vtbls:
       - ea: 0x141F60408
         base: Client::Graphics::Singleton
@@ -12328,8 +12328,8 @@ classes:
         base: Client::Game::Event::EventHandler
   Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
     vtbls:
-     - ea: 0x141FC0D90
-       base: Client::Game::Event::GoldSaucerEventHandler
+      - ea: 0x141FC0D90
+        base: Client::Game::Event::GoldSaucerEventHandler
   Client::Game::Event::LotteryDailyEventHandler: # 0x25
     vtbls:
       - ea: 0x141FBA440
@@ -14328,8 +14328,8 @@ classes:
       0x1410E0CB0: ctor
   Client::UI::AddonChatLog:
     vtbls:
-       - ea: 0x14200C078
-         base: Component::GUI::AtkUnitBase
+      - ea: 0x14200C078
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x1410E4240: ctor
       0x1410E44D0: Finalize2
@@ -15656,8 +15656,8 @@ classes:
         base: Client::UI::AddonJobHudPLD0::OathGauge
   Client::UI::AddonJobHudRDB0: # Viper
     vtbls:
-        - ea: 0x14205CB90
-          base: Client::UI::AddonJobHud
+      - ea: 0x14205CB90
+        base: Client::UI::AddonJobHud
     funcs:
         0x14136DC80: ctor
   Client::UI::AddonJobHudRDB0::VipersightGaugeData:
@@ -15733,11 +15733,11 @@ classes:
       - ea: 0x142059948
         base: Client::UI::AddonJobHudRDM0::BalanceGauge
   Client::UI::AddonJobHudRPM0: # Pictomancer
-        vtbls:
-          - ea: 0x14205D3B8
-            base: Client::UI::AddonJobHud
-        funcs:
-          0x141370D40: ctor
+    vtbls:
+      - ea: 0x14205D3B8
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141370D40: ctor
   Client::UI::AddonJobHudRPM0::CanvasGaugeData:
     vtbls:
       - ea: 0x14205D258
@@ -15751,11 +15751,11 @@ classes:
       - ea: 0x14205D348
         base: Client::UI::AddonJobHudRPM0::CanvasGauge
   Client::UI::AddonJobHudRPM1: # Pictomancer
-        vtbls:
-          - ea: 0x14205D820
-            base: Client::UI::AddonJobHud
-        funcs:
-          0x141372B20: ctor
+    vtbls:
+      - ea: 0x14205D820
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141372B20: ctor
   Client::UI::AddonJobHudRPM1::PaletteGaugeData:
     vtbls:
       - ea: 0x14205D688
@@ -16312,7 +16312,7 @@ classes:
       0x1416C62E0: Update
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
-     - ea: 0x1420A0B40
+      - ea: 0x1420A0B40
     vfuncs:
       0: dtor
     funcs:
