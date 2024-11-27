@@ -18,62 +18,60 @@ try {
     const doc = yaml.load(fs.readFileSync('./ida/data.yml', 'utf8'));
     if (versionRegex.test(doc.version) === false)
         errors.push('Invalid version format');
-    Object.keys(doc.globals).forEach(key => {
-        if (!isNumeric(key) || typeof doc.globals[key] !== 'string') {
-            errors.push(`Invalid value for globals.${toHex(key)}: !isNumeric:${!isNumeric(key)}; typeof:${typeof doc.globals[key]}`);
-        }
-    });
-    Object.keys(doc.functions).forEach(key => {
-        if (!isNumeric(key) || typeof doc.functions[key] !== 'string') {
-            errors.push(`Invalid value for functions.${toHex(key)}: !isNumeric:${!isNumeric(key)}; typeof:${typeof doc.functions[key]}`);
-        }
-    });
-    Object.keys(doc.classes).forEach(key => {
-        if (typeof key !== 'string')
-            errors.push(`Invalid key for classes: ${key}`);
-        const classI = doc.classes[key];
-        if (classI === null)
-            return;
-        if (typeof classI !== 'object') {
-            errors.push(`Invalid value for classes.${key}: ${typeof classI}`);
-        }
-        if (classI.hasOwnProperty('funcs'))
-            Object.keys(classI.funcs).forEach(subkey => {
-                if (!isNumeric(subkey) || typeof classI.funcs[subkey] !== 'string') {
-                    errors.push(`Invalid value for classes.${key}.funcs.${toHex(subkey)}: !isNumeric:${!isNumeric(subkey)}; typeof:${typeof classI.funcs[subkey]}`);
-                }
-            });
-        if (classI.hasOwnProperty('instances'))
-            classI.instances.forEach((instance, i) => {
-                if (instance.hasOwnProperty('ea') && !isNumeric(instance.ea))
-                    errors.push(`Invalid value for classes.${key}.instances.${i}.ea: ${instance.ea}`);
-                else if (!instance.hasOwnProperty('ea'))
-                    errors.push(`Missing value for classes.${key}.instances.${i}.ea`);
-                if (instance.hasOwnProperty('pointer') && typeof instance.pointer !== 'boolean')
-                    errors.push(`Invalid value for classes.${key}.instances.${i}.pointer: ${instance.pointer}`);
-            });
-        if (classI.hasOwnProperty('vtbls'))
-            classI.vtbls.forEach((vtbl, i) => {
-                if (vtbl.hasOwnProperty('ea') && !isNumeric(vtbl.ea))
-                    errors.push(`Invalid value for classes.${key}.vtbls.${i}.ea: ${vtbl.ea}`);
-                else if (!vtbl.hasOwnProperty('ea'))
-                    errors.push(`Missing value for classes.${key}.vtbls.${i}.ea`);
-                if (vtbl.hasOwnProperty('base') && typeof vtbl.base !== 'string')
-                    errors.push(`Invalid value for classes.${key}.vtbls.${i}.base: ${vtbl.base}`);
-                else if (!vtbl.hasOwnProperty('base') && i !== 0)
-                    errors.push(`Missing value for classes.${key}.vtbls.${i}.base`);
-            });
-        if (classI.hasOwnProperty('vfuncs'))
-            Object.keys(classI.vfuncs).forEach(subkey => {
-                if (!isNumeric(subkey) || typeof classI.vfuncs[subkey] !== 'string')
-                    errors.push(`Invalid value for classes.${key}.vfuncs.${toHex(subkey)}: !isNumeric:${!isNumeric(subkey)}; typeof:${typeof classI.vfuncs[subkey]}`);
-            });
-        if (classI.hasOwnProperty('funcs'))
-            Object.keys(classI.funcs).forEach(subkey => {
-                if (!isNumeric(subkey) || typeof classI.funcs[subkey] !== 'string')
-                    errors.push(`Invalid value for classes.${key}.funcs.${toHex(subkey)}: !isNumeric:${!isNumeric(subkey)}; typeof:${typeof classI.funcs[subkey]}`);
-            });
-    });
+    if (typeof doc.globals == "object")
+        Object.keys(doc.globals).forEach(key => {
+            if (!isNumeric(key) || typeof doc.globals[key] !== 'string') {
+                errors.push(`Invalid value for globals.${toHex(key)}: !isNumeric:${!isNumeric(key)}; typeof:${typeof doc.globals[key]}`);
+            }
+        });
+    if (typeof doc.functions == "object")
+        Object.keys(doc.functions).forEach(key => {
+            if (!isNumeric(key) || typeof doc.functions[key] !== 'string') {
+                errors.push(`Invalid value for functions.${toHex(key)}: !isNumeric:${!isNumeric(key)}; typeof:${typeof doc.functions[key]}`);
+            }
+        });
+    if (typeof doc.classes == "object")
+        Object.keys(doc.classes).forEach(key => {
+            if (typeof key !== 'string')
+                errors.push(`Invalid key for classes: ${key}`);
+            const classI = doc.classes[key];
+            if (classI === null)
+                return;
+            if (typeof classI !== 'object') {
+                errors.push(`Invalid value for classes.${key}: ${typeof classI}`);
+            }
+            if (classI.hasOwnProperty('funcs') && typeof classI["funcs"] == "object")
+                Object.keys(classI.funcs).forEach(subkey => {
+                    if (!isNumeric(subkey) || typeof classI.funcs[subkey] !== 'string') {
+                        errors.push(`Invalid value for classes.${key}.funcs.${toHex(subkey)}: !isNumeric:${!isNumeric(subkey)}; typeof:${typeof classI.funcs[subkey]}`);
+                    }
+                });
+            if (classI.hasOwnProperty('instances') && typeof classI["instances"] == "object")
+                classI.instances.forEach((instance, i) => {
+                    if (instance.hasOwnProperty('ea') && !isNumeric(instance.ea))
+                        errors.push(`Invalid value for classes.${key}.instances.${i}.ea: ${instance.ea}`);
+                    else if (!instance.hasOwnProperty('ea'))
+                        errors.push(`Missing value for classes.${key}.instances.${i}.ea`);
+                    if (instance.hasOwnProperty('pointer') && typeof instance.pointer !== 'boolean')
+                        errors.push(`Invalid value for classes.${key}.instances.${i}.pointer: ${instance.pointer}`);
+                });
+            if (classI.hasOwnProperty('vtbls') && typeof classI["vtbls"] == "object")
+                classI.vtbls.forEach((vtbl, i) => {
+                    if (vtbl.hasOwnProperty('ea') && !isNumeric(vtbl.ea))
+                        errors.push(`Invalid value for classes.${key}.vtbls.${i}.ea: ${vtbl.ea}`);
+                    else if (!vtbl.hasOwnProperty('ea'))
+                        errors.push(`Missing value for classes.${key}.vtbls.${i}.ea`);
+                    if (vtbl.hasOwnProperty('base') && typeof vtbl.base !== 'string')
+                        errors.push(`Invalid value for classes.${key}.vtbls.${i}.base: ${vtbl.base}`);
+                    else if (!vtbl.hasOwnProperty('base') && i !== 0)
+                        errors.push(`Missing value for classes.${key}.vtbls.${i}.base`);
+                });
+            if (classI.hasOwnProperty('vfuncs') && typeof classI["vfuncs"] == "object")
+                Object.keys(classI.vfuncs).forEach(subkey => {
+                    if (!isNumeric(subkey) || typeof classI.vfuncs[subkey] !== 'string')
+                        errors.push(`Invalid value for classes.${key}.vfuncs.${toHex(subkey)}: !isNumeric:${!isNumeric(subkey)}; typeof:${typeof classI.vfuncs[subkey]}`);
+                });
+        });
 }
 catch (e) {
     console.log(e);
