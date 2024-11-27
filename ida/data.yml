@@ -624,7 +624,7 @@ classes:
       0x140F28900: GetRetainerCount
   Client::Game::SatisfactionSupplyManager:
     instances:
-#fail       - ea: 0x142766650
+      - ea: 0x1427F8F00
         pointer: False
     funcs:
       0x140957060: Initialize
@@ -957,7 +957,7 @@ classes:
       - ea: 0x1425E3930
         pointer: False
     vtbls:
-#fail       - ea: 0x141F1F830
+      - ea: 0x141F87240
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140935A90: Initialize
@@ -1086,10 +1086,10 @@ classes:
       0x14095D670: GetBattleChara
   Client::Game::Group::GroupManager:
     instances:
-#fail       - ea: 0x142550DB0
+      - ea: 0x1425E44E0
         pointer: False
     vtbls:
-#fail       - ea: 0x141F6B6E8 # it has some abstract base even!
+      - ea: 0x141FC74A0 # it has some abstract base even!
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140CE13F0: Create
@@ -1207,7 +1207,7 @@ classes:
       0x140CE2250: SetItemData
   Client::Game::ServerRequestCallbackInterface:
     vtbls:
-#fail       - ea: 0x141F2FA60
+      - ea: 0x141F7D108
     vfuncs:
       0: dtor
       1: OnReceivePacket
@@ -1215,7 +1215,7 @@ classes:
       0x1407DB420: Finalize
   Client::Game::ServerRequestCallbackManager:
     instances:
-#fail       - ea: 0x1427902F8
+      - ea: 0x1427E25C8
         pointer: True
     funcs:
       0x1407DB460: Initialize
@@ -1256,7 +1256,7 @@ classes:
       0x1408192B0: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::InventoryItem:
     vtbls:
-       - ea: 0x141F7D6E8
+      - ea: 0x141F7D6E8
     vfuncs:
       0: dtor
       1: Copy
@@ -1294,7 +1294,7 @@ classes:
 #fail       0x140887E30: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
   Client::Game::InventoryContainer:
     vtbls:
-       - ea: 0x141F7D798
+      - ea: 0x141F7D798
     vfuncs:
       0: dtor
       1: SetInventoryType
@@ -1328,7 +1328,7 @@ classes:
       0x140964080: PrintDebugInfo
   Client::Game::GcArmyManager:
     instances:
-#fail       - ea: 0x1427616A8
+      - ea: 0x1427F8ED0
         pointer: True
     funcs:
       0x140954E30: ctor
@@ -1398,11 +1398,11 @@ classes:
       0: dtor
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
-#fail       - ea: 0x141F5D080
+      - ea: 0x141FB57B8
         base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
     vtbls:
-#fail       - ea: 0x141F5D0C8
+      - ea: 0x141FB5800
         base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
@@ -1417,13 +1417,13 @@ classes:
       0x140C42FA0: GetWeatherForDaytime
   Client::Game::FashionCheckManager: # Fashion Report
     instances:
-#fail       - ea: 0x142761AF8
+      - ea: 0x1427F8EF0
         pointer: True
     funcs:
       0x140955D10: Initialize
       0x140955DE0: Finalize
-#fail       0x140A36770: HasInstance
-#fail       0x140A36790: GetInstance
+      0x140955E10: HasInstance
+      0x140955E30: GetInstance
 #fail       0x140A36C30: ctor  # inlined to Initialize (pre-7.0)
   Client::Game::CustomTodoManager: # Studium Deliveries
     vtbls:
@@ -1842,26 +1842,27 @@ classes:
       0x1409DDE40: IsUnlockLinkUnlockedOrQuestCompleted
       0x1409DE0E0: IsCutsceneSeen
       0x1409E0650: IsEmoteUnlocked
-#fail       0x140B43480: IsItemActionUnlocked
+      0x1409E07C0: IsItemActionUnlocked
       0x1409DE4D0: IsTripleTriadCardUnlocked
       0x1409DF5C0: Dismount
       0x1409DFC00: RequestResetTimestamps # MapAllowance, ChallengeLogReset
       0x1409DFC40: HasNextMapAllowanceTimestamp
       0x1409DFC60: GetNextMapAllowanceTimestamp
       0x1409DFC70: GetNextChallengeLogResetTimestamp
-#fail       0x1417F6530: IsInstanceContentUnlocked   # static
-#fail       0x1417F69F0: IsInstanceContentCompleted  # static
+      0x1417DD600: IsInstanceContentUnlocked   # static
+      0x1417DDB30: IsInstanceContentCompleted  # static
       0x14184BE20: IsPublicContentUnlocked   # static
       0x14184BEA0: IsPublicContentCompleted  # static
       0x1409E1860: Terminate
   Client::Game::UI::Hotbar: # located at 0x0 of UIState
     vtbls:
-#fail       - ea: 0x141F54220
+      - ea: 0x141F8AF08
         base: Client::UI::Misc::RaptureHotbarModule::ClearCallback
     funcs:
       0x1409DFB90: CancelCast
       0x14096D990: ResetPvEHotbarsForClassAtLevel # (self, int, uint) -> void
-#fail       0x140AD2380: ResetPvPHotbarsForClassInner  # (self, uint) -> void
+      0x140AD0D30: ResetPvPHotbarsForClass
+      0x14096E030: ResetPvPHotbarsForClassInner  # (self, uint) -> void
   Client::Game::UI::Hate:
     instances:
       - ea: 0x1427F9818
@@ -1893,7 +1894,7 @@ classes:
       0x140973B80: GetClassJobId
       0x1409742A0: SetSyncedLevel
       0x1409747B0: GetGrandCompanyRank
-#fail       0x140AD9520: GetBeastTribeRank
+      0x1409752F0: GetBeastTribeRank
       0x140975370: GetBeastTribeCurrentReputation
       0x1409753B0: GetBeastTribeNeededReputation
       0x140974A70: IsMountUnlocked
@@ -1950,7 +1951,7 @@ classes:
       0x140977A60: TrackActionUnlocks
       0x140977C20: ClearTracked
       0x140977C60: IsTrackedTraitUnlocked
-#fail       0x140ADBEC0: HasTrackedStatus
+      0x140977DA0: HasTrackedStatus
       0x140977DF0: IsTrackedActionUnlocked
       0x140977F10: UpdateTrackedStatus
       0x140977F60: InvalidateTrackedUnlocks
@@ -1960,7 +1961,7 @@ classes:
       - ea: 0x1427FAAF8
         pointer: False
     vtbls:
-      - ea: 0x141FABAE8
+      - ea: 0x141F8AEA0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Inspect:
     instances:
@@ -1997,7 +1998,7 @@ classes:
       0x1409AD550: UpdateAetheryteList
       0x1409AE120: Teleport
       0x1409AF540: InvokeSelectUseTicket
-#fail       0x140B13140: GetTeleportCost
+      0x1409AEFC0: GetTeleportCost
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
       - ea: 0x141F8AFA0
@@ -2429,9 +2430,9 @@ classes:
       0x140AD16E0: GetActionParamValue
       0x140AD1730: GetParamGrowData
       0x140AD1C60: NextActionSequence
-#fail       0x140B620F0: UpdateAreaTargetingMode
+      0x140AD1C90: UpdateAreaTargetingMode
       0x140AD2D00: ShouldLimitAreaTargetingToRange
-#fail       0x140B630F0: GetRecastGroup
+      0x140AD2DC0: GetRecastGroup
       0x140AD3050: UseActionLocation
       0x140AD3FF0: UseGeneralAction
       0x140AD4A40: UseBuddyAction
@@ -2444,7 +2445,7 @@ classes:
       0x140AD4F90: UseBgcArmyAction
       0x140AD5160: RouletteCanUseMinion
       0x140AD5210: RouletteCanUseMount
-#fail       0x140B65620: UseMinionRoulette
+      0x140AD5350: UseMinionRoulette
       0x140AD54B0: UseMountRoulette
       0x140AD5710: CanUseMountRoulette
       0x140AD5970: HasMonkForm
@@ -2452,7 +2453,7 @@ classes:
       0x140AD9540: AutoFaceTarget
       0x140AD95A0: AutoFaceTargetPosition
       0x140AD9690: IsQueuedActionReady
-#fail       0x140B69960: GetRecastGroupDetail
+      0x140AD9750: GetRecastGroupDetail
 #fail       0x140B699D0: GetRecastGroupDetailForAction
       0x140AD9830: Update
       0x140ADA1C0: Initialize
@@ -2483,12 +2484,12 @@ classes:
       0x140ADFE60: SkewCooldownForGroup # (this, groupId, skew) -> *RecastDetail
       0x140ADFEB0: ResetCooldownForGroup
       0x140ADFFC0: GetAdditionalRecastGroup
-#fail       0x140B71360: GetRecastTimeElapsed
+      0x140AE00A0: GetRecastTimeElapsed
       0x140AE00E0: GetRecastTimeElapsedForGroup # (this, groupId) -> float
 #fail       0x140B713C0: SetRecastTimeElapsed # (this, actionType, actionId, newElapsed) -> *RecastDetail
-#fail       0x140B713F0: GetRecastTime
+      0x140AE0150: GetRecastTime
       0x140AE01E0: GetRecastTimeForGroup  # (this, groupId) -> float
-#fail       0x140B714F0: UpdateRecastFromNetwork
+      0x140AE0260: UpdateRecastFromNetwork
       0x140AE0340: AssignBlueMageActionToSlot
       0x140AE0450: ForceSetBlueMageActionInSlot
       0x140AE0500: GetActiveBlueMageActionInSlot
@@ -2498,7 +2499,7 @@ classes:
       0x140AE1170: UseActionFromShell
       0x140AE1320: IsAreaTargetingModeActive
       0x140AE1340: IsAreaTargetingUnlockedFromCursor
-#fail       0x140B72570: IsAreaTargetingModeActiveAndUnlockedFromCursor
+      0x140AE13A0: IsAreaTargetingModeActiveAndUnlockedFromCursor
       0x140AE1420: StartAreaTargetingMode
       0x140AE1510: CancelAreaTargetingMode
       0x140AE1540: RemoveAreaTargetingVfx
@@ -2510,9 +2511,9 @@ classes:
       0x140AE2700: CalculatePointSlightlyAbove
       0x140AE2870: CalculateAreaTargetingError
       0x140AE3580: OnBallistaCast
-#fail       0x140B74850: GetGroundPositionForObject
+      0x140AE3680: GetGroundPositionForObject
       0x140AE3C00: GetGroundPositionForCursor
-#fail       0x140B74D70: GetCurrentCharges          # (this, actionId) -> uint
+      0x140AE3E30: GetCurrentCharges          # (this, actionId) -> uint
       0x140AE3F60: GetMaxCharges2             # not static - calls static
       0x140AE42B0: ResolveTarget
       0x140AE44A0: StartAnimationLock
@@ -2733,7 +2734,7 @@ classes:
       0x14009D400: InitSpatialAudio #static
       0x14009D490: InitCursor #static
       0x14009E3E0: GetConfigOptionForSoundType #static
-#fail      0x141279BF0: SetVolumeUnchecked #static
+      0x1411EBB20: SetVolumeUnchecked #static
   Client::Sound::SoundManager: #base: Client::System::Common::NonCopyable
     instances:
       - ea: 0x142628C20
@@ -2902,7 +2903,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x1422FD3D0
-#fail       - ea: 0x142274840
+      - ea: 0x1422FD460
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -2912,7 +2913,7 @@ classes:
       6: GetLanguage
   Common::Component::Excel::ExcelResourceListener:
     vtbls:
-     - ea: 0x1422FC5A0
+      - ea: 0x1422FC5A0
     vfuncs:
       0: dtor
       1: OnResourceLoad
@@ -2983,7 +2984,7 @@ classes:
     vtbls:
       - ea: 0x1422FC5D0
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x1422739B8
+      - ea: 0x1422FC5D8
         base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
@@ -2993,9 +2994,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x142273C20
+      - ea: 0x1422FC8A8
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x142273C78
+      - ea: 0x1422FC830
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -3042,7 +3043,7 @@ classes:
     vtbls:
       - ea: 0x1422FC428
         base: Common::Component::BGCollision::SceneWrapperNode
-#fail       - ea: 0x142273898
+      - ea: 0x1422FC4B8
         base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
@@ -3821,7 +3822,7 @@ classes:
       7: ClearListData
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x141EA6210
+      - ea: 0x141F83AE8
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
@@ -3863,21 +3864,21 @@ classes:
       0x1408B07F0: ctor
       0x1408B1F90: Finalize
       0x1408B2040: GetInfoProxyById
-#fail       0x1400BDEF0: GetInfoProxyById2
-#fail       0x1400BDF10: GetLocalCharacterName
-#fail       0x1400BDF90: GetLocalContentId
+      0x1408B2060: GetInfoProxyById2
+      0x1408B2080: GetLocalCharacterName
+      0x1408B2140: GetLocalContentId
       0x1408B2170: GetOnlineStatusFlags
-#fail       0x1400BE030: SetOnlineStatusFlags
+      0x1408B2190: SetOnlineStatusFlags
       0x1408B23C0: IsOnlineStatusSet
       0x1408B2440: IsInCrossWorldDuty
   Client::UI::Info::InfoProxyBlacklist:
     vtbls:
-#fail       - ea: 0x141EA6598
+      - ea: 0x141F83B78
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
       0x1408B34D0: ctor
-#fail       0x1400C56A0: GetBlockResult
-#fail       0x1400C4B10: GetBlockResultType
+      0x1408B5080: GetBlockResult
+      0x1408B4250: GetBlockResultType
   Client::UI::Info::InfoProxyDetail:
     vtbls:
       - ea: 0x141F843F0
@@ -3885,7 +3886,7 @@ classes:
     funcs:
       0x1408C8410: ctor
       0x1408C9A30: RequestData
-#fail       0x14012A270: SendUpdateData
+      0x1408C8C60: SendUpdateData
       0x1408C8E00: SetUpdateClassJobId
       0x1408C8E20: SetUpdateLookingForPartyClassJobIdMask
       0x1408C8E40: SetUpdateOnlineStatus
@@ -3900,26 +3901,26 @@ classes:
       0x1408F6190: Finalize
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
-#fail       - ea: 0x14258E1A0
+      - ea: 0x1427F4040
     vtbls:
       - ea: 0x141F84840
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x1408D87F0: ctor # unused, inlined @ 1400bd068
       0x1408D8960: GetPtr  # Static
-#fail       0x1401226A0: IsCrossRealmParty # Static
+      0x1408DB710: IsCrossRealmParty # Static
       0x1408DB790: IsCrossRealmPartyLeader # Static
       0x1408DB7B0: IsAllianceRaid # Static
       0x1408DB800: GetPartyMemberCount # Static
-#fail       0x1401227F0: GetTotalMemberCount # Static
-#fail       0x140122850: GetGroupMemberCount # Static
+      0x1408DB860: GetTotalMemberCount # Static
+      0x1408DB900: GetGroupMemberCount # Static
       0x1408DB990: GetAllianceGroupCount # Static
       0x1408DB9C0: GetPartyMemberCount_2 # Static
       0x1408DBA00: GetGroupIndex # Static
       0x1408DC6B0: IsLocalPlayerInParty # Static
       0x1408DC760: GetGroupMember # Static
       0x1408DC800: GetMemberByContentId # Static
-#fail       0x1401234B0: GetMemberByEntityId # Static
+      0x1408DC8C0: GetMemberByEntityId # Static
       0x1405AE690: IsContentIdInParty # Static
       0x1408D8970: ReceiveListing
   Client::UI::Info::InfoProxyPartyMember:
@@ -4288,7 +4289,7 @@ classes:
         base: Client::System::Resource::Handle::DefaultResourceHandle
   Client::System::Resource::Handle::SoundResourceHandle:
     vtbls:
-#fail       - ea: 0x141EBC990
+      - ea: 0x141F2C180
         base: Client::System::Resource::Handle::ResourceHandle
   Client::System::Resource::Handle::EquipmentParameterResourceHandle:
     vtbls:
@@ -5450,7 +5451,7 @@ classes:
       - ea: 0x141F603F8
   Client::Graphics::Scene::ResidentResourceManager:
     instances:
-     - ea: 0x142621E78
+      - ea: 0x142621E78
     vtbls:
       - ea: 0x141F60408
         base: Client::Graphics::Singleton
@@ -6963,7 +6964,7 @@ classes:
         base: Client::LayoutEngine::ILayoutInstance
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbls:
-#fail       - ea: 0x141F04EF8
+      - ea: 0x141F753D8
     vfuncs:
       0: dtor
       1: ReadFile
@@ -8013,9 +8014,9 @@ classes:
       0x14182B400: PlayFootStepSound
   Client::Game::Character::Character:
     vtbls:
-#fail       - ea: 0x141F102A0
+      - ea: 0x141F7EE30
         base: Client::Game::Object::GameObject
-#fail       - ea: 0x141F10558
+      - ea: 0x141F10558
         base: Client::Game::Character::CharacterData
     vfuncs:
       76: GetModelChara
@@ -8115,7 +8116,7 @@ classes:
 #fail       0x1405E9D30: ctor
   Client::Game::Control::EmoteController:
     vtbls:
-#fail       - ea: 0x141F10298
+      - ea: 0x141F7EE28
     funcs:
 #fail       0x1405F5080: Initialize
       0x1405C02D0: GetAvailablePoses
@@ -8188,7 +8189,7 @@ classes:
       0x140864230: CopyFromCharacter
   Client::Game::Character::OrnamentContainer:
     vtbls:
-#fail       - ea: 0x141F0FF30
+      - ea: 0x141F7EA70
         base: Client::Game::Character::ContainerInterface
     funcs:
       0x140847160: HasOrnament
@@ -8215,19 +8216,19 @@ classes:
       0x1408406C0: SetupMount
   Client::Game::Character::EffectContainer:
     vtbls:
-#fail       - ea: 0x141F10030
+      - ea: 0x141F7EB70
         base: Client::Game::Character::ContainerInterface
     funcs:
       0x14085B1F0: CalculateFloatHeight
   Client::Game::Character::ReaperShroudContainer:
     vtbls:
-#fail       - ea: 0x141F0FF58
+      - ea: 0x141F7EA98
         base: Client::Game::Character::ContainerInterface
-#fail       - ea: 0x141F0FF80
+      - ea: 0x141F7EAC0
         base: Client::Graphics::Vfx::VfxDataListenner
   Client::Game::Character::CharacterData:
     vtbls:
-#fail       - ea: 0x141F0FE58
+      - ea: 0x141F7E9B8
     vfuncs:
       0: dtor
       1: ClassJobChanged
@@ -8262,7 +8263,7 @@ classes:
       0x140833690: IsTaggedByNoneOrOther
   Client::Game::Character::TimelineContainer:
     vtbls:
-#fail       - ea: 0x141F0FF90
+      - ea: 0x141F7EAD0
         base: Client::Game::Character::ContainerInterface
     funcs:
       0x14084F830: LoadSomeAction
@@ -8298,7 +8299,7 @@ classes:
       - ea: 0x141F80208
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141F1BD90
+      - ea: 0x141F80220
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -8632,7 +8633,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141F1EC70
+      - ea: 0x141F83400
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -8800,7 +8801,7 @@ classes:
         base: Client::Game::Character::CharacterData
   Client::UI::Misc::RaptureHotbarModule::ClearCallback:
     vtbls:
-#fail       - ea: 0x141F541F0
+      - ea: 0x141F8AED8
     vfuncs:
       0: dtor
       1: ResetAllHotbars  # (self, RaptureHotbarModule*) -> bool
@@ -9813,7 +9814,7 @@ classes:
         base: Client::UI::Agent::AgentExplorationResultInterface
   Client::UI::Agent::AgentLovmPaletteEdit:
     vtbls:
-#fail       - ea: 0x141F6C4D8
+      - ea: 0x141FC84A8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D086B0: ctor
@@ -9969,7 +9970,7 @@ classes:
       0x140B58750: ctor
   Client::UI::Agent::AgentDeepDungeonSaveData:
     vtbls:
-      - ea: 0x141FC84A8
+      - ea: 0x141FAFCF0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140B5A180: ctor
@@ -10275,7 +10276,7 @@ classes:
       0x140328FB0: ctor
   Client::UI::Agent::AgentFashion:
     vtbls:
-      - ea: 0x141FCE2D8
+      - ea: 0x141FC8E08
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D22050: ctor
@@ -10740,7 +10741,7 @@ classes:
       0x140EF76E0: ctor
   Client::UI::Agent::AgentAkatsukiNote:
     vtbls:
-#fail       - ea: 0x141F722E8
+      - ea: 0x141FCE2D8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E72130: ctor
@@ -11525,16 +11526,16 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
-#fail       - ea: 0x141F2C800
+      - ea: 0x141FA2428
   Client::Game::Event::FormatStringCallbackInterface:
     vtbls:
-#fail       - ea: 0x141F2C810
+      - ea: 0x141F8AF28
   Client::Game::Event::ActionTimelineCallbackInterface:
     vtbls:
       - ea: 0x141FABB00
   Client::Game::Event::ListenItemCallbackInterface:
     vtbls:
-#fail       - ea: 0x141F2C840
+      - ea: 0x141F87A08
   Client::Game::Event::FormatStringCallback<Client::Game::Event::EventHandler>:
     vtbls:
       - ea: 0x141FABB18
@@ -11571,10 +11572,10 @@ classes:
       - ea: 0x142815A20
         pointer: False
     vtbls:
-#fail       - ea: 0x141F2BD78
+      - ea: 0x141FABAE8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
-#fail       0x140AA4FF4: ctor
+      0x140B492E0: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
     vtbls:
       - ea: 0x141FAC3C8
@@ -11902,7 +11903,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::FinalizeSceneTask:
     vtbls:
-#fail       - ea: 0x141F2EDA0
+      - ea: 0x142099BC0
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::SetPositionTask:
     vtbls:
@@ -11914,7 +11915,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::CancelEventSceneTask:
     vtbls:
-      - ea: 0x14209A610
+      - ea: 0x142099CB0
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::CharacterTaskBase:
     vtbls:
@@ -12002,7 +12003,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::IsQuestSetCompletedTask:
     vtbls:
-      - ea: 0x142099CB0
+      - ea: 0x14209A480
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::CharaMakeInGameTask:
     vtbls:
@@ -12022,7 +12023,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::RacingChocoboNameTask:
     vtbls:
-#fail       - ea: 0x141F2F6F0
+      - ea: 0x14209A610
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::RequestAirshipsInfoTask:
     vtbls:
@@ -12046,7 +12047,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::WaitForCutSceneReplayDataLoadedTask:
     vtbls:
-      - ea: 0x14209A980
+      - ea: 0x14209A7F0
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::WaitForIdleCameraTask:
     vtbls:
@@ -12062,22 +12063,22 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::FashionCheckTask:
     vtbls:
-#fail       - ea: 0x141F2F9C0
+      - ea: 0x14209A930
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::TalkCallback:
     vtbls:
-#fail       - ea: 0x141F2C4A8
+      - ea: 0x142098598
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-#fail       - ea: 0x141F2C490
+      - ea: 0x142098580
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback::TalkEventImpl:
     vtbls:
-#fail       - ea: 0x141F2C470
+      - ea: 0x142098560
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
-#fail       - ea: 0x141F2C480
+      - ea: 0x142098570
         base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::EventSceneModule:
     funcs:
@@ -12094,7 +12095,7 @@ classes:
       0x141688F00: AddGroupPoseTask
   Client::Game::Event::Director:
     vtbls:
-#fail       - ea: 0x141F2FA70
+      - ea: 0x141FACD88
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
       267: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
@@ -12172,14 +12173,14 @@ classes:
       - ea: 0x1425F16B0
         pointer: False
     vtbls:
-#fail       - ea: 0x141F2ACD0
+      - ea: 0x142089D40
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
       - ea: 0x1425F16E0
         pointer: False
     vtbls:
-#fail       - ea: 0x141F2AD30
+      - ea: 0x142089D70
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
@@ -12199,7 +12200,7 @@ classes:
         base: Client::Game::Event::EventHandler
   Client::Game::Event::CraftEventHandler: # 0x0A
     vtbls:
-      - ea: 0x141FACD88
+      - ea: 0x141FC67E0
         base: Client::Game::Event::EventHandler
     funcs:
       0x140CD3F10: ctor # no xrefs
@@ -12327,8 +12328,8 @@ classes:
         base: Client::Game::Event::EventHandler
   Client::Game::Event::GoldSaucerArcadeMachineEventHandler: # 0x24
     vtbls:
-     - ea: 0x141FC0D90
-       base: Client::Game::Event::GoldSaucerEventHandler
+      - ea: 0x141FC0D90
+        base: Client::Game::Event::GoldSaucerEventHandler
   Client::Game::Event::LotteryDailyEventHandler: # 0x25
     vtbls:
       - ea: 0x141FBA440
@@ -12467,7 +12468,7 @@ classes:
       0x140C86A80: ctor
   Client::Game::ReconstructionBoxManager:
     instances:
-#fail       - ea: 0x142761AC0
+      - ea: 0x1427F8EE8
         pointer: False
     vtbls:
       - ea: 0x141F89708
@@ -12475,22 +12476,22 @@ classes:
       0: dtor
     funcs:
       0x140959F10: Destroy
-#fail       0x140A7F7C0: HasInstance
-#fail       0x140A7F7E0: GetInstance
+      0x1417A7020: HasInstance
+      0x1417A7040: GetInstance
   Client::Game::Event::EventFramework:
     instances:
-#fail       - ea: 0x1427616A0
+      - ea: 0x142815618
         pointer: True
     funcs:
       0x140B1A350: ctor
-#fail       0x1409D0300: dtor
-#fail       0x1409D0350: GetInstance
+      0x140B1A060: dtor
+      0x140B1A0B0: GetInstance
       0x140B1A010: Initialize
       0x140B1B060: Finalize
       0x140B1BDC0: InteractWithObject
       0x140B20C70: ProcessEventPlay
       0x140B21BC0: ProcessSystemLogMessage
-#fail       0x1409D9DC0: SetTerritoryTypeId
+      0x140B234C0: SetTerritoryTypeId
       0x140B23720: ProcessDirectorUpdate
       0x140B24660: ProcessMapEffect
       0x140B26830: GetDirectorByEventId
@@ -12503,7 +12504,7 @@ classes:
       0x140B269D0: GetTourismDirector
       0x140B26A00: GetTripleTriadDirector
       0x140B26A80: GetSkyIslandDirector
-#fail       0x1409DD700: GetPublicContentDirector
+      0x140B26AB0: GetPublicContentDirector
       0x140B26B40: GetContentDirector
       0x140B26B50: GetQuestBattleDirector
       0x140B26BA0: GetGoldSaucerDirector
@@ -12516,7 +12517,6 @@ classes:
       0x1409BB8D0: CanLeaveCurrentContent # static
       0x1409BD810: GetContentFinderCondition
       0x14184BDE0: GetPublicContentDirectorByType # static
-      0x140B234C0: SetTerritoryTypeId
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141FAC428
@@ -12542,17 +12542,17 @@ classes:
   Client::Game::Event::EventGPoseController:
     funcs:
       0x14093F8D0: ctor
-#fail       0x1409814C0: IsFaceCameraEnabled
-#fail       0x1409814E0: ToggleFaceCamera
-#fail       0x140981590: IsGazeCameraEnabled
-#fail       0x1409815B0: ToggleGazeCamera
+      0x140943850: IsFaceCameraEnabled
+      0x140943870: ToggleFaceCamera
+      0x1409438F0: IsGazeCameraEnabled
+      0x140943910: ToggleGazeCamera
       0x140943970: ToggleMotionFreeze
       0x140943D70: EnableCameraLight
       0x140943FB0: DisableCameraLight
-#fail       0x1409866D0: SetupDefaultTarget
-#fail       0x14098AB30: AddCharacterToGPose
-#fail       0x14098ACB0: RemoveCharacterFromGPose
-#fail       0x14098CBC0: CycleIdleCamTargets
+#fail       0x1409866D0: SetupDefaultTarget # inlined at 0x140942529
+      0x14094C3F0: AddCharacterToGPose
+      0x14094C570: RemoveCharacterFromGPose
+      0x14094E310: CycleIdleCamTargets
   Client::Game::Event::LeveDirector:
     vtbls:
       - ea: 0x142132038
@@ -12898,8 +12898,10 @@ classes:
       0x141861120: ctor
   Client::Game::InstanceContent::InstanceContentDungeonHalatali: # Halatali
     vtbls:
-#fail       - ea: 0x14208A2E0
+      - ea: 0x1421D3988
         base: Client::Game::InstanceContent::InstanceContentDirector
+    funcs:
+      0x141A55D60: ctor
   Client::Game::InstanceContent::InstanceContentDungeonResidence: # Haukke Manor
     vtbls:
       - ea: 0x1421500C0
@@ -12966,7 +12968,7 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
   Client::Game::InstanceContent::InstanceContentDungeonHalataliHard: # Halatali (Hard)
     vtbls:
-#fail       - ea: 0x14208AEF0
+      - ea: 0x1420C0970
         base: Client::Game::InstanceContent::InstanceContentDirector
   Client::Game::InstanceContent::InstanceContentDungeonBrayfloxHard: # Brayflox's Longstop (Hard)
     vtbls:
@@ -13574,10 +13576,10 @@ classes:
       0x141862910: ctor
   Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise:
     vtbls:
-      - ea: 0x142141D60
+      - ea: 0x14211AEF8
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
-#fail       0x1417FD7E0: ctor
+      0x1417FA330: ctor
   Client::Game::InstanceContent::InstanceContentBeginnerTrainingFinalExercise: # Final Exercise
     vtbls:
       - ea: 0x14211C778
@@ -13807,7 +13809,7 @@ classes:
       0x14111F270: ctor
   Client::UI::AddonFateReward:
     vtbls:
-      - ea: 0x14203AD10
+      - ea: 0x1420145B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141138850: ctor
@@ -13921,7 +13923,7 @@ classes:
       0x140F417D0: ctor
   Client::UI::AddonSocialList:
     vtbls:
-#fail       - ea: 0x142008710
+      - ea: 0x142066E20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413BBD00: ctor
@@ -14326,8 +14328,8 @@ classes:
       0x1410E0CB0: ctor
   Client::UI::AddonChatLog:
     vtbls:
-       - ea: 0x14200C078
-         base: Component::GUI::AtkUnitBase
+      - ea: 0x14200C078
+        base: Component::GUI::AtkUnitBase
     funcs:
       0x1410E4240: ctor
       0x1410E44D0: Finalize2
@@ -14560,7 +14562,7 @@ classes:
       0x1412853E0: ctor
   Client::UI::AddonMJIMissionComplete:
     vtbls:
-#fail       - ea: 0x141FDD280
+      - ea: 0x14203AD10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141286B30: ctor
@@ -14584,10 +14586,10 @@ classes:
       0x14128A5B0: ctor
   Client::UI::AddonMJICraftSchedule:
     vtbls:
-#fail       - ea: 0x141FDDB80
+      - ea: 0x14203B610
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x141318380: ctor
+      0x14128B060: ctor
   Client::UI::AddonMJICraftScheduleMaintenance:
     vtbls:
       - ea: 0x14203B850
@@ -15654,13 +15656,13 @@ classes:
         base: Client::UI::AddonJobHudPLD0::OathGauge
   Client::UI::AddonJobHudRDB0: # Viper
     vtbls:
-#fail         - ea: 0x142000798
-          base: Client::UI::AddonJobHud
+      - ea: 0x14205CB90
+        base: Client::UI::AddonJobHud
     funcs:
-#fail         0x14141AAE0: ctor
+        0x14136DC80: ctor
   Client::UI::AddonJobHudRDB0::VipersightGaugeData:
     vtbls:
-#fail       - ea: 0x142000618
+      - ea: 0x14205CA10
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRDB0::VipersightGauge:
     vtbls:
@@ -15684,13 +15686,13 @@ classes:
       - ea: 0x14205CB20
   Client::UI::AddonJobHudRDB1: # Viper
     vtbls:
-#fail       - ea: 0x142000C08
+      - ea: 0x14205CFE0
         base: Client::UI::AddonJobHud
     funcs:
-#fail         0x14141C970: ctor
+        0x14136F830: ctor
   Client::UI::AddonJobHudRDB1::SerpentOfferingsGaugeData:
     vtbls:
-#fail       - ea: 0x142000A88
+      - ea: 0x14205CE60
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRDB1::SerpentOfferingsGauge:
     vtbls:
@@ -15731,32 +15733,32 @@ classes:
       - ea: 0x142059948
         base: Client::UI::AddonJobHudRDM0::BalanceGauge
   Client::UI::AddonJobHudRPM0: # Pictomancer
-        vtbls:
-#fail           - ea: 0x142000FF0
-            base: Client::UI::AddonJobHud
-        funcs:
-#fail           0x14141E170: ctor
+    vtbls:
+      - ea: 0x14205D3B8
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141370D40: ctor
   Client::UI::AddonJobHudRPM0::CanvasGaugeData:
     vtbls:
-#fail       - ea: 0x142000E90
+      - ea: 0x14205D258
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRPM0::CanvasGauge:
     vtbls:
-#fail       - ea: 0x142000F10
+      - ea: 0x14205D2D8
         base: Client::UI::AddonJobHud::AddonJobHudGauge
   Client::UI::AddonJobHudRPM0::CanvasGaugeSimple:
     vtbls:
       - ea: 0x14205D348
         base: Client::UI::AddonJobHudRPM0::CanvasGauge
   Client::UI::AddonJobHudRPM1: # Pictomancer
-        vtbls:
-#fail           - ea: 0x1420015D0
-            base: Client::UI::AddonJobHud
-        funcs:
-#fail           0x1414200A0: ctor
+    vtbls:
+      - ea: 0x14205D820
+        base: Client::UI::AddonJobHud
+    funcs:
+      0x141372B20: ctor
   Client::UI::AddonJobHudRPM1::PaletteGaugeData:
     vtbls:
-#fail       - ea: 0x142001438
+      - ea: 0x14205D688
         base: Client::UI::AddonJobHud::AddonJobHudGaugeData
   Client::UI::AddonJobHudRPM1::PaletteGauge:
     vtbls:
@@ -16310,7 +16312,7 @@ classes:
       0x1416C62E0: Update
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
-     - ea: 0x1420A0B40
+      - ea: 0x1420A0B40
     vfuncs:
       0: dtor
     funcs:
