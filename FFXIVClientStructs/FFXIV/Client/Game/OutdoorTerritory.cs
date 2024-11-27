@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 public unsafe partial struct OutdoorTerritory {
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture;
     [FieldOffset(0x8968)] public HousingObjectManager HousingObjectManager;
-    [FieldOffset(0x96A0)] public uint HouseId; // Combines Ward, Plot, and Room
+    [FieldOffset(0x96A0)] public long HouseId; // Combines Ward, Plot, and Room
     [FieldOffset(0x96A8)] public sbyte StandingInPlot;
     [FieldOffset(0x96AA)] public sbyte EditingFixturesOfPlot;
     [FieldOffset(0x96B0)] public sbyte EditingFurnishingsOfPlot;

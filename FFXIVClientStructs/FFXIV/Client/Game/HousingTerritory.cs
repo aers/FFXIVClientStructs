@@ -9,7 +9,8 @@ public unsafe partial struct HousingTerritory { // 6 vfuncs
 }
 
 public enum HousingTerritoryType {
-    Outdoor = 1,
+    None,
+    Outdoor,
     Indoor,
     Workshop
 }
