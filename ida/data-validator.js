@@ -40,13 +40,13 @@ try {
             if (typeof classI !== 'object') {
                 errors.push(`Invalid value for classes.${key}: ${typeof classI}`);
             }
-            if (classI.hasOwnProperty('funcs') && typeof classI["funcs"] == "object")
+            if (classI.hasOwnProperty('funcs') && classI["funcs"])
                 Object.keys(classI.funcs).forEach(subkey => {
                     if (!isNumeric(subkey) || typeof classI.funcs[subkey] !== 'string') {
                         errors.push(`Invalid value for classes.${key}.funcs.${toHex(subkey)}: !isNumeric:${!isNumeric(subkey)}; typeof:${typeof classI.funcs[subkey]}`);
                     }
                 });
-            if (classI.hasOwnProperty('instances') && typeof classI["instances"] == "object")
+            if (classI.hasOwnProperty('instances') && classI["instances"])
                 classI.instances.forEach((instance, i) => {
                     if (instance.hasOwnProperty('ea') && !isNumeric(instance.ea))
                         errors.push(`Invalid value for classes.${key}.instances.${i}.ea: ${instance.ea}`);
@@ -55,7 +55,7 @@ try {
                     if (instance.hasOwnProperty('pointer') && typeof instance.pointer !== 'boolean')
                         errors.push(`Invalid value for classes.${key}.instances.${i}.pointer: ${instance.pointer}`);
                 });
-            if (classI.hasOwnProperty('vtbls') && typeof classI["vtbls"] == "object")
+            if (classI.hasOwnProperty('vtbls') && classI["vtbls"])
                 classI.vtbls.forEach((vtbl, i) => {
                     if (vtbl.hasOwnProperty('ea') && !isNumeric(vtbl.ea))
                         errors.push(`Invalid value for classes.${key}.vtbls.${i}.ea: ${vtbl.ea}`);
@@ -66,7 +66,7 @@ try {
                     else if (!vtbl.hasOwnProperty('base') && i !== 0)
                         errors.push(`Missing value for classes.${key}.vtbls.${i}.base`);
                 });
-            if (classI.hasOwnProperty('vfuncs') && typeof classI["vfuncs"] == "object")
+            if (classI.hasOwnProperty('vfuncs') && classI["vfuncs"])
                 Object.keys(classI.vfuncs).forEach(subkey => {
                     if (!isNumeric(subkey) || typeof classI.vfuncs[subkey] !== 'string')
                         errors.push(`Invalid value for classes.${key}.vfuncs.${toHex(subkey)}: !isNumeric:${!isNumeric(subkey)}; typeof:${typeof classI.vfuncs[subkey]}`);
