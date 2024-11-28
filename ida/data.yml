@@ -2540,7 +2540,7 @@ classes:
       0x140AF4710: GetActionInSlot
 #fail       0x140B77360: SetContentExRow
 #fail       0x140B773B0: Clear
-#fail       0x140B774A0: SetActions
+      0x140AF49F0: SetActions
       0x140AF4B40: IsActionActive
       0x140AF4D70: GetSlotForAction
 #fail       0x140B77A70: SetActionsPresent
@@ -7649,7 +7649,7 @@ classes:
 #fail       0x1407C8A90: GetDutyActionCount
 #fail       0x1407C8AC0: GetDutyActionId                   # (this, slotId) -> uint  - identical to ActionManager's version.
 #fail       0x1407C8AE0: GetDutyActionIdForGeneralActionId # (this, generalActionId) -> uint
-#fail       0x1407C8B10: SetDutyActionSlot                 # (this, slotId, actionId)
+      0x140779E10: SetDutyActionSlot                 # (this, slotId, actionId)
 #fail       0x1407C8C40: GetDutyActionSlot                 # (this, slotId) -> DutyActionSlot*
       0x140779B80: ExecuteDutyActionSlot             # (this, slotId)
 #fail       0x1407C8D40: IsGeneralActionDutyAction         # (this, generalActionId) -> bool  - utility function?

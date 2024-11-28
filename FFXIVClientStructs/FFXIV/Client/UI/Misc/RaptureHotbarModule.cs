@@ -369,7 +369,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="index">The index of the DutyAction slot to edit.</param>
     /// <param name="actionId">The ID of the action to set in this slot.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 40 FE C5 4D 8D 76 04")] // TODO: 7.1: was this split into two functions? @ 0x140AF45A7
+    [MemberFunction("E8 ?? ?? ?? ?? FF C3 83 FB 05 72 C2")]
     public partial void SetDutyActionSlot(uint index, uint actionId);
 
     /// <summary>
