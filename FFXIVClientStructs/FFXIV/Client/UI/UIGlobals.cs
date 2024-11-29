@@ -29,7 +29,7 @@ public unsafe partial struct UIGlobals {
     /// <remarks>
     /// If it is a timed node, the icon ID from the IconOff field in the GatheringType sheet should be used; otherwise, IconMain.
     /// </remarks>
-    [MemberFunction("80 F9 07 77")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 8B CF 83 E9")]
     public static partial bool IsExportedGatheringPointTimed(byte gatheringPointType);
 
     /// <summary>
