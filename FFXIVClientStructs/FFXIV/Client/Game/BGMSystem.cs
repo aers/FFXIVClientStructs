@@ -21,7 +21,17 @@ public unsafe partial struct BGMSystem {
     [FieldOffset(0xF9)] public bool ContinueBGMUntilWarp;
 
     [MemberFunction("4C 8B 1D ?? ?? ?? ?? 4D 85 DB 0F 84")]
-    public static partial void SetBGM(ushort bgmId, uint sceneId, byte a3 = 0, byte a4 = 0, int a5 = 0, int a6 = 0, uint a7 = 0, byte a8 = 0, byte a9 = 0, float initialVolume = 1f);
+    public static partial void SetBGM(
+        ushort bgmId,
+        uint sceneId,
+        byte a3 = 0,
+        bool enableCustomFade = false,
+        uint fadeOutMs = 0,
+        uint fadeInMs = 0,
+        uint fadeInStartMs = 0,
+        byte a8 = 0,
+        byte a9 = 0,
+        float initialVolume = 1f);
 
     // [MemberFunction("4C 8B 05 ?? ?? ?? ?? 4D 85 C0 74 1B")]
     // public static partial void SetBGMPlayState(uint sceneId, PlayState playstate);
@@ -57,11 +67,12 @@ public unsafe partial struct BGMSystem {
         [FieldOffset(0x14)] private float Unk14;
         [FieldOffset(0x18)] public StdVector<SceneIntermission> Intermissions;
 
-        [FieldOffset(0x30)] private byte Unk30;
-
-        [FieldOffset(0x38)] private uint Unk38;
-        [FieldOffset(0x3C)] private uint Unk3C;
-        [FieldOffset(0x40)] private uint Unk40;
+        // fade times in ms
+        [FieldOffset(0x30)] public bool EnableCustomFade;
+        [FieldOffset(0x38)] public uint FadeOutTime;
+        [FieldOffset(0x3C)] public uint FadeInTime;
+        [FieldOffset(0x40)] public uint FadeInStartTime;
+        [FieldOffset(0x44)] public uint ResumeFadeInTime; // unused? it's present in the BGMFadeType sheet
 
         [FieldOffset(0x50)] public PlayState PlayState;
         [FieldOffset(0x55)] private byte Unk55;
