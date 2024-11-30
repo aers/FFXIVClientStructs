@@ -31,8 +31,11 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 98")]
     public partial InstanceContentDirector* GetInstanceContentDirector();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? 00 00 83 B8 38 03 00 00 02")]
     public partial PublicContentDirector* GetPublicContentDirector();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40")]
+    public partial PublicContentDirector* GetPublicContentDirectorByType(PublicContentDirectorType publicContentDirectorType);
 
     /// <summary>
     /// When EventHandlerSelector is active, this function is used to select specific event handler to interact with.
