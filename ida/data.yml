@@ -1900,7 +1900,7 @@ classes:
     funcs:
       0x1409DFB90: CancelCast
       0x14096D990: ResetPvEHotbarsForClassAtLevel # (self, int, uint) -> void
-      0x140AD0D30: ResetPvPHotbarsForClass
+      0x14096C9E0: ResetPvPHotbarsForClass
       0x14096E030: ResetPvPHotbarsForClassInner  # (self, uint) -> void
   Client::Game::UI::Hate:
     instances:
@@ -3033,9 +3033,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-      - ea: 0x1422FC8A8
+      - ea: 0x1422FC840
         base: Common::Component::BGCollision::Object
-      - ea: 0x1422FC830
+      - ea: 0x1422FC898
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -3861,7 +3861,7 @@ classes:
       7: ClearListData
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-      - ea: 0x141F83AE8
+      - ea: 0x141F83AE0
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
@@ -8344,7 +8344,7 @@ classes:
       - ea: 0x141F80208
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-      - ea: 0x141F80220
+      - ea: 0x141F80218
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -10286,7 +10286,7 @@ classes:
       0x140BE5AD0: UpdateItems
   Client::UI::Agent::AgentMiragePrismItemDetail:
     vtbls:
-      - ea: 0x141FC8118
+      - ea: 0x141FB24E0
         base: Client::UI::Agent::AgentItemDetailBase
     funcs:
 #fail       0x140CC85A0: ctor
@@ -12213,20 +12213,24 @@ classes:
       0x141597260: SetBuyback
 #fail       0x1409EF960: RequestBuybackUpdate
       0x1415975B0: StartReadGilShopItems
+  Client::Game::Event::ShopEventHandler::ProxyInterface:
+    vtbls:
+      - ea: 0x142089D10
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::ShopEventHandler::AgentProxy:
     instances:
       - ea: 0x1425F16B0
         pointer: False
     vtbls:
       - ea: 0x142089D40
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+        base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
       - ea: 0x1425F16E0
         pointer: False
     vtbls:
       - ea: 0x142089D70
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+        base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
       - ea: 0x14212A4E0
