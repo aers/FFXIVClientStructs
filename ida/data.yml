@@ -498,12 +498,49 @@ classes:
   Client::Game::BGMSystem:
     instances:
       - ea: 0x1427E2660
-        pointer: False
+        pointer: True
     funcs:
-      0x1407F3530: ctor
+      0x1407F1D10: Initialize
       0x1407F1D60: dtor
       0x1407F1DB0: Update
-      0x1407F1D10: Initialize
+      0x1407F1EE0: SetTerritoryBGM # static
+      0x1407F1F50: ResetTerritoryBGM # static
+      0x1407F1FC0: SetTownBGM # static
+      0x1407F2030: ResetTownBGM # static
+      0x1407F20A0: SetGFateBGM # static
+      0x1407F2110: ResetGFateBGM # static
+      0x1407F21A0: SetScene8 # static
+      0x1407F2230: ResetScene8 # static
+      0x1407F22E0: SetMountBGM # static
+      0x1407F2350: ResetMountBGM # static
+      0x1407F23C0: SetContentBGM # static
+      0x1407F2450: ResetContentBGM # static
+      0x1407F2560: SetDuelBGM # static
+      0x1407F25F0: ResetDuelBGM # static
+      0x1407F26A0: SetScene7 # static
+      0x1407F2710: ResetScene7 # static
+      0x1407F27A0: SetBattleBGM # static
+      0x1407F2830: ResetBattleBGM # static
+      0x1407F2890: PauseBattleBGM # static
+      0x1407F28C0: ContinueBattleBGM # static
+      0x1407F28F0: SetEventBGM # static
+      0x1407F2970: ResetEventBGM # static
+      0x1407F29C0: PauseEventBGM # static
+      0x1407F29F0: ContinueEventBGM # static
+      0x1407F2A30: SetEventBGMSimple # static
+      0x1407F2A80: SetWeddingBGM # static
+      0x1407F2B20: ResetWeddingBGM # static
+      0x1407F2B90: SetMiniGameBGM # static
+      0x1407F2C30: ResetMiniGameBGM # static
+      0x1407F2CC0: SetMiniGameBGMSimple # static
+      0x1407F3230: IsBgmIdPlaying # static; sceneStartIndex, bgmId
+      0x1407F3330: ContinueBGMUntilWarp # static
+      0x1407F3350: SetLastingBGM # static; Reset = 0, Lasting = 1
+      0x1407F33E0: HasInstance # static
+      0x1407F3400: SetBGM # static
+      0x1407F34B0: ResetBGM
+      0x1407F3500: SetBGMPlayState # static
+      0x1407F3530: ctor
   Client::Game::Control::InputManager:
     instances:
       - ea: 0x1425E06D0
