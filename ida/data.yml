@@ -7151,7 +7151,7 @@ classes:
       66: GetACTION
       67: GetTFILTER
       68: GetREADYC
-      69: GetPTRLST
+      69: GetPartyRoleListModule
       70: GetCATSBM
       71: GetDESCRI
       72: GetMJICWSP
@@ -7422,6 +7422,12 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407B19B0: ctor
+  Client::UI::Misc::PartyRoleListModule:
+    vtbls:
+      - ea: 0x141F7C520
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407B53C0: ctor
   Client::UI::Misc::HelperInterface:
     vtbls:
       - ea: 0x141F8A720
