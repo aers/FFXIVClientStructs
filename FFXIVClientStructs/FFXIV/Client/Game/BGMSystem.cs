@@ -15,7 +15,7 @@ public unsafe partial struct BGMSystem {
     [FieldOffset(0xDC)] public bool PlayBattleBGM; // is set in update loop, based on combat
 
     [FieldOffset(0xE0)] private float UnkBattleBGMDuration0;
-    [FieldOffset(0xe4)] private float UnkBattleBGMDuration1;
+    [FieldOffset(0xE4)] private float UnkBattleBGMDuration1;
 
     [FieldOffset(0xF8)] public bool LastingBGM;
     [FieldOffset(0xF9)] public bool ContinueBGMUntilWarp;
