@@ -8061,7 +8061,7 @@ classes:
     vtbls:
       - ea: 0x141F7EE30
         base: Client::Game::Object::GameObject
-      - ea: 0x141F10558
+      - ea: 0x141F7F0E8
         base: Client::Game::Character::CharacterData
     vfuncs:
       76: GetModelChara
@@ -8074,6 +8074,7 @@ classes:
       83: GetForayInfo
       84: GetForayInfo_2
     funcs:
+      0x140869680: ctor
       0x14082C630: IsValidClientObject
       0x140867BC0: CalculateMovementSpeedMultiplier
       0x1408737E0: GetVfxDuration
@@ -8110,7 +8111,6 @@ classes:
       0x140872230: CalculateOmenSize
       0x140872680: StartOmen
       0x140872A20: StartOmenDirectional
-#fail       0x1408CF560: ctor
       0x14082D3C0: GetScale
   Client::Game::Character::Character::CastInfo:
     funcs:
