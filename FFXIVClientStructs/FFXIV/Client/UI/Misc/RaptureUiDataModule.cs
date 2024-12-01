@@ -13,9 +13,9 @@ public unsafe partial struct RaptureUiDataModule {
         return uiModule == null ? null : uiModule->GetRaptureUiDataModule();
     }
 
-    [FieldOffset(0x4E0), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListTankOrder;
-    [FieldOffset(0x500), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListHealerOrder;
-    [FieldOffset(0x520), FixedSizeArray] internal FixedSizeArray16<ushort> _partyListDpsOrder;
+    [FieldOffset(0x4E0), FixedSizeArray, Obsolete("Moved to PartyRoleListModule", true)] internal FixedSizeArray16<ushort> _partyListTankOrder;
+    [FieldOffset(0x500), FixedSizeArray, Obsolete("Moved to PartyRoleListModule", true)] internal FixedSizeArray16<ushort> _partyListHealerOrder;
+    [FieldOffset(0x520), FixedSizeArray, Obsolete("Moved to PartyRoleListModule", true)] internal FixedSizeArray16<ushort> _partyListDpsOrder;
 
     [MemberFunction("4C 8B D1 41 83 F9 06")]
     public partial void MjiCreateWorkshopPreset(uint presetIndex, uint* mjiCraftWorksObjectList, uint listCount);
