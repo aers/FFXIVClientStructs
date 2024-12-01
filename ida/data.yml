@@ -534,7 +534,7 @@ classes:
       0x1407F2C30: ResetMiniGameBGM # static
       0x1407F2CC0: SetMiniGameBGMSimple # static
       0x1407F3230: IsBgmIdPlaying # static; sceneStartIndex, bgmId
-      0x1407F3330: ContinueBGMUntilWarp # static
+      0x1407F3330: EnableContinueBGMUntilWarp # static
       0x1407F3350: SetLastingBGM # static; Reset = 0, Lasting = 1
       0x1407F33E0: HasInstance # static
       0x1407F3400: SetBGM # static
