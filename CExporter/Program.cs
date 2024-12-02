@@ -30,7 +30,7 @@ public class Program {
         var dataCheck = data.classes.SelectMany(t => t.Value is { funcs: not null } ? t.Value.funcs.Values.Select(f => new KeyValuePair<string, string>(t.Key, f)) : new List<KeyValuePair<string, string>>())
             .Concat(data.classes.SelectMany(t => t.Value is { vfuncs: not null } ? t.Value.vfuncs.Values.Select(f => new KeyValuePair<string, string>(t.Key, f)) : new List<KeyValuePair<string, string>>()))
             .GroupBy(t => t.Key).ToDictionary(t => t.Key, t => t.Select(f => f.Value).ToList());
-        
+
         Exporter.VerifyNoNameOverlap(dataCheck);
         Exporter.ProcessDefinedVTables(data);
 
