@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Shell;
 // Client::UI::Shell::RaptureShellModule
 [GenerateInterop]
 [Inherits<ShellCommandModule>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1218)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1250)]
 public unsafe partial struct RaptureShellModule {
     public static RaptureShellModule* Instance() {
         var uiModule = UI.UIModule.Instance();
