@@ -13,8 +13,8 @@ public unsafe partial struct InfoProxyPartyMember {
     /// Changes the order of the party members in the party list.
     /// </summary>
     /// <param name="selectedIndex">The person you want to change order of. Has to be lower than <paramref name="targetIndex"/></param>
-    /// <param name="targetIndex">Where you want them to end up</param>
-    /// <param name="unk1">Default true from PartySort command handler</param>
+    /// <param name="targetIndex">Where you want them to end up.</param>
+    /// <param name="doUpdate">Runs some update function.</param>
     [MemberFunction("E8 ?? ?? ?? ?? B3 01 88 5C 24 60")]
-    public partial void ChangeOrder(int selectedIndex, int targetIndex, bool unk1 = true);
+    public partial void ChangeOrder(int selectedIndex, int targetIndex, bool doUpdate = true);
 }
