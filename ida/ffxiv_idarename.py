@@ -1,6 +1,7 @@
 # current exe version: 2020.12.29.0000.0000
 # @category __UserScripts
 # @menupath Tools.Scripts.ffxiv_idarename
+# @runtime Jython
 
 from __future__ import print_function
 import os

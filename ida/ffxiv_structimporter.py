@@ -1,5 +1,6 @@
 # @category __UserScripts
 # @menupath Tools.Scripts.ffxiv_structimport
+# @runtime Jython
 
 from yaml import safe_load
 import os
@@ -677,12 +678,12 @@ if api is None:
                         size = self.get_size_from_idc_type(flag)
 
                     ida_struct.add_struc_member(
-                        s, f"field_{prev_size:X}", prev_size, flag, None, size
+                        s, "field_{0:X}".format(prev_size), prev_size, flag, None, size
                     )
                 else:
                     ida_struct.add_struc_member(
                         s,
-                        f"field_{prev_size:X}",
+                        "field_{0:X}".format(prev_size),
                         prev_size,
                         ida_bytes.byte_flag(),
                         None,
@@ -719,7 +720,7 @@ if api is None:
 
                     field_is_base = field.base and contiguous_fields
                     field_name = (
-                        field.name if not field_is_base else f"baseclass_{offset:X}"
+                        field.name if not field_is_base else "baseclass_{0:X}".format(offset)
                     )
                     field_type = self.clean_name(field.type)
                     if field_type == "__fastcall":
@@ -1007,6 +1008,8 @@ if api is None:
             def get_datatype(self, typename):
                 # type: (str) -> DataType
                 raw_type = self.get_ghidra_type(typename)
+                if not raw_type:
+                    return raw_type
                 typename = raw_type.rstrip("*")
                 pointer_count = len(raw_type) - len(typename)
 
@@ -1176,21 +1179,30 @@ if api is None:
                         )
                     self.create_datatype(u_type)
 
+                void_ptr = dtm.getPointer(VoidDataType.dataType)
                 last_offset = int(struct.virtual_functions[-1].offset)
                 for func in struct.virtual_functions:
-                    func_def = self.create_function_def(func)
-                    func_def.setCategoryPath(
-                        CategoryPath(vt_type.getCategoryPath(), [vt_type.getName()])
-                    )
-                    vt_type.insertAtOffset(
-                        int(func.offset),
-                        dtm.getPointer(func_def),
-                        -1,
-                        func.name,
-                        "vf{0}".format(int(func.offset) / 8),
-                    )
+                    if func.return_type and func.parameters:
+                        func_def = self.create_function_def(func)
+                        func_def.setCategoryPath(
+                            CategoryPath(vt_type.getCategoryPath(), [vt_type.getName()])
+                        )
+                        vt_type.insertAtOffset(
+                            int(func.offset),
+                            dtm.getPointer(func_def),
+                            -1,
+                            func.name,
+                            "vf{0}".format(int(func.offset) / 8),
+                        )
+                    else:
+                        vt_type.insertAtOffset(
+                            int(func.offset),
+                            void_ptr,
+                            -1,
+                            func.name,
+                            "vf{0}".format(int(func.offset) / 8),
+                        )
 
-                void_ptr = dtm.getPointer(VoidDataType.dataType)
                 for offset in range(last_offset):
                     dtc = vt_type.getComponentContaining(offset)
                     if not dtc or Undefined.isUndefined(dtc.getDataType()):
@@ -1250,6 +1262,8 @@ if api is None:
             def update_member_func(self, member_func, struct):
                 # type: (DefinedMemFunc, DefinedStruct) -> None
                 if monitor.isCancelled():
+                    return
+                if not member_func.parameters:
                     return
                 func_name = "{0}.{1}".format(struct.type, member_func.name)
                 func = self.get_func_by_name(func_name)
