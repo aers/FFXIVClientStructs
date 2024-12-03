@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0xD28)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD30)]
 public unsafe partial struct AozNoteModule {
     public static AozNoteModule* Instance() {
         var uiModule = UIModule.Instance();

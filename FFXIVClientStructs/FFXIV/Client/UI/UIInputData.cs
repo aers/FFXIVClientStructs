@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<InputData>, Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0xA28)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA30)]
 public unsafe partial struct UIInputData {
     public static UIInputData* Instance() {
         var uiModule = UIModule.Instance();

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 // Client::Graphics::Scene::CharacterUtility
 //   Client::Graphics::Singleton
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x570)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5A0)]
 public unsafe partial struct CharacterUtility {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 83 B9", 3, true)]
     public static partial CharacterUtility* Instance();

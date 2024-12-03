@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0xC78)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC80)]
 public unsafe partial struct FieldMarkerModule {
     public static FieldMarkerModule* Instance() {
         var uiModule = UIModule.Instance();

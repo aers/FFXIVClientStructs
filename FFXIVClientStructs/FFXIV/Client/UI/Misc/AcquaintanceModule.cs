@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [Inherits<UserFileEvent>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 89 06", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1190)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1198)]
 public unsafe partial struct AcquaintanceModule {
     public static AcquaintanceModule* Instance() {
         var uiModule = UIModule.Instance();

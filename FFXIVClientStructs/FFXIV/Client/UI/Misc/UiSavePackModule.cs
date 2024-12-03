@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x50)]
+[StructLayout(LayoutKind.Explicit, Size = 0x58)]
 public unsafe partial struct UiSavePackModule {
     public static UiSavePackModule* Instance() {
         var uiModule = UIModule.Instance();

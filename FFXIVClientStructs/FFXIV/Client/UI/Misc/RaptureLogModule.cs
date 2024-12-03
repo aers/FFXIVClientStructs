@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Component::Log::LogModule
 [GenerateInterop]
 [Inherits<LogModule>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3710)]
+[StructLayout(LayoutKind.Explicit, Size = 0x46D0)]
 public unsafe partial struct RaptureLogModule {
     public static RaptureLogModule* Instance() {
         var uiModule = UI.UIModule.Instance();

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 48 89 07 48 89 AF", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x2D58)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2D60)]
 public unsafe partial struct AddonFlyText {
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 41 D1 C7")]
     public partial nint AddFlyText(uint actorIndex, uint messageMax, NumberArrayData* numberArrayData,

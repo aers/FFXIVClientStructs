@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.TelepotTown)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct AgentTelepotTown {
     [FieldOffset(0x28)] public AgentTelepotTownData* Data;
 

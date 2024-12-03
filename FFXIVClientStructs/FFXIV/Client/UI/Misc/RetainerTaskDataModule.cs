@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
 public unsafe partial struct RetainerTaskDataModule {
     public static RetainerTaskDataModule* Instance() {
         var uiModule = UIModule.Instance();

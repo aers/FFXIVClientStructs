@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 [GenerateInterop]
 [Inherits<ContainerInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x50)]
+[StructLayout(LayoutKind.Explicit, Size = 0x80)]
 public unsafe partial struct EffectContainer {
     [FieldOffset(0x10)] public float CurrentFloatHeight;
     [FieldOffset(0x14)] public float TargetFloatHeight;

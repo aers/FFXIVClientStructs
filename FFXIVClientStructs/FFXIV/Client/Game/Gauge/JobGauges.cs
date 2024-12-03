@@ -22,7 +22,7 @@ public struct ScholarGauge {
     [FieldOffset(0x0C)] public byte DismissedFairy;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct AstrologianGauge {
     [FieldOffset(0x08)] public short Cards;
     [FieldOffset(0x0A)] public AstrologianDraw CurrentDraw;

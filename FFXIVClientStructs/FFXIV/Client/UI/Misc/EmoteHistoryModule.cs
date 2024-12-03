@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x178)]
+[StructLayout(LayoutKind.Explicit, Size = 0x180)]
 public unsafe partial struct EmoteHistoryModule {
     public static EmoteHistoryModule* Instance() {
         var uiModule = UIModule.Instance();

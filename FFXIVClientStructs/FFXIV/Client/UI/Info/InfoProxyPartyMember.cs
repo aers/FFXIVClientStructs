@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.PartyMember)]
 [GenerateInterop]
 [Inherits<InfoProxyCommonList>]
-[StructLayout(LayoutKind.Explicit, Size = 0x360)]
+[StructLayout(LayoutKind.Explicit, Size = 0x340)]
 public unsafe partial struct InfoProxyPartyMember {
     /// <summary>
     /// Changes the order of the party members in the party list.

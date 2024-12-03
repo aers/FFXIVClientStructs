@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.GatheringNote)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x178)]
+[StructLayout(LayoutKind.Explicit, Size = 0x180)]
 public unsafe partial struct AgentGatheringNote {
     [FieldOffset(0xA0)] public uint ContextMenuItemId;
 

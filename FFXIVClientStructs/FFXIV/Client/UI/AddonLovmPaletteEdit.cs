@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("LovmPaletteEdit")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xA28)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA30)]
 public partial struct AddonLovmPaletteEdit {
     [FieldOffset(0x858)] public TabController TabController;
 }

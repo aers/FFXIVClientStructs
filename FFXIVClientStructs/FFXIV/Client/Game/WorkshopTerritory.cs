@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 //   Client::Game::HousingTerritory
 [GenerateInterop]
 [Inherits<HousingTerritory>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB8C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB8D0)]
 public unsafe partial struct WorkshopTerritory {
     [FieldOffset(0x68)] public HousingWorkshopAirshipData Airship;
 

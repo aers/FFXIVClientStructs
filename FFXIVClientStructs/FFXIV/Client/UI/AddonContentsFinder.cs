@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ContentsFinder")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1960)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1910)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 03 48 8D BB ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 AB ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 8D 75 02 48 89 AB ?? ?? ?? ?? 66 90 48 8B CF E8 ?? ?? ?? ?? 48 83 C7 09 48 83 EE 01 75 EE 48 8D 8B", 3)]
 public unsafe partial struct AddonContentsFinder {
     [FieldOffset(0x268)] public AtkAddonControl AddonControl;

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x528)]
+[StructLayout(LayoutKind.Explicit, Size = 0x530)]
 public unsafe partial struct LogFilterConfig {
     public static LogFilterConfig* Instance() {
         var uiModule = UIModule.Instance();

@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //       Client::Graphics::Scene::Object
 [GenerateInterop]
 [Inherits<CharacterBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xCA0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xCC0)]
 public unsafe partial struct Human {
     [FieldOffset(0xA10)] public CustomizeData Customize;
     [FieldOffset(0xA2C)] public uint SlotNeedsUpdateBitfield;

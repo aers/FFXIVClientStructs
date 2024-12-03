@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Singleton<Client::Graphics::Render::Manager>
 // ctor "48 89 01 48 8D 59 08"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x51F10)]
+[StructLayout(LayoutKind.Explicit, Size = 0x51F80)]
 public unsafe partial struct Manager {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8D 4D 80", 3, true)]
     public static partial Manager* Instance();

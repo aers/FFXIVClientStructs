@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.QuestJournal)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x280)]
+[StructLayout(LayoutKind.Explicit, Size = 0x270)]
 public unsafe partial struct AgentQuestJournal {
 
     [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray52<byte> _journalCategoryIds;

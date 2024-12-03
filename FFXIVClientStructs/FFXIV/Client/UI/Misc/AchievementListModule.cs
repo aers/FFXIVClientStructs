@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x98)]
+[StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct AchievementListModule {
     public static AchievementListModule* Instance() {
         var uiModule = UIModule.Instance();

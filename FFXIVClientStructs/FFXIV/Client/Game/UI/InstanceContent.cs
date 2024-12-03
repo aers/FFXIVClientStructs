@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::InstanceContent
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x70)]
+[StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public unsafe partial struct InstanceContent {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F 57 C0 4C 89 B4 24", 3)]
     public static partial InstanceContent* Instance();

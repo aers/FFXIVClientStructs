@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.PartyMember)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
 public unsafe partial struct AgentPartyMember {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 0B 48 B8"), GenerateStringOverloads]
     public partial void Promote(byte* name, ushort parentAddonId, ulong contentId);

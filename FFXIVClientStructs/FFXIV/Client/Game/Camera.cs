@@ -25,7 +25,7 @@ public unsafe partial struct Camera {
 //     Client::Game::CameraBase
 [GenerateInterop]
 [Inherits<Camera>]
-[StructLayout(LayoutKind.Explicit, Size = 0x300)]
+[StructLayout(LayoutKind.Explicit, Size = 0x310)]
 public unsafe partial struct LobbyCamera {
     [FieldOffset(0x2F8)] public ExcelSheet* LobbyExcelSheet;
 }
