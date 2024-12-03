@@ -995,7 +995,7 @@ classes:
       - ea: 0x1425E3930
         pointer: False
     vtbls:
-      - ea: 0x141F87240
+      - ea: 0x141F87270
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140935A90: Initialize
@@ -5086,7 +5086,7 @@ classes:
       - ea: 0x141F4A720
         base: Client::Graphics::Render::RenderObject
     funcs:
-#fail       0x140434ED0: ctor
+      0x1403F47F0: ctor
       0x1403F4990: SetupFromModelResourceHandle
 #fail       0x140383720: GetAttributeIndex
 #fail       0x1403837B0: GetShapeIndex
@@ -5201,9 +5201,9 @@ classes:
     instances:
       - ea: 0x142621E40
     vtbls:
-      - ea: 0x141F534A8
+      - ea: 0x141F4ACB0
         base: Client::Graphics::Singleton
-      - ea: 0x141F534B0
+      - ea: 0x141F4ACB8
         base: Client::Graphics::Kernel::Notifier
     funcs:
       0x14045A470: ctor
@@ -7529,7 +7529,7 @@ classes:
       - ea: 0x141F7BA28
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     vfuncs:
-      13: GetSegment
+      14: GetSegment
     funcs:
       0x1407A2FB0: ctor
   Client::UI::Misc::RaptureMacroModule:
@@ -14009,7 +14009,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonItemSearch:
     vtbls:
-      - ea: 0x142004700
+      - ea: 0x142068DE0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413D35F0: ctor
@@ -14130,7 +14130,7 @@ classes:
       0x14105DA60: ctor
   Client::UI::AddonAetherCurrent:
     vtbls:
-      - ea: 0x1420408B8
+      - ea: 0x14201A5C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141172570: ctor
@@ -14232,7 +14232,7 @@ classes:
       0x141071AD0: ctor
   Client::UI::AddonRepair:
     vtbls:
-      - ea: 0x1420682A0
+      - ea: 0x142040AF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B9100: ctor
@@ -14346,7 +14346,7 @@ classes:
       0x14108B0D0: ctor
   Client::UI::AddonMiragePrismPrismBoxCrystallize:
     vtbls:
-      - ea: 0x14203E390
+      - ea: 0x1420036F8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMobHunt:
     vtbls:
@@ -14685,11 +14685,11 @@ classes:
       0x1412931F0: ctor
   Client::UI::AddonMJIFarmManagement:
     vtbls:
-      - ea: 0x14206C458
+      - ea: 0x14203C830
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141293820: ctor
-      0x1413ED320: Finalize2
+      0x141293A40: Finalize2
   Client::UI::AddonMJIFarmAutomatic:
     vtbls:
       - ea: 0x14203CA70
@@ -14758,7 +14758,7 @@ classes:
       0x1412A2E60: ctor
   Client::UI::AddonMJIBuildingMove:
     vtbls:
-      - ea: 0x142017A28
+      - ea: 0x14203E390
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A6A90: ctor
@@ -16368,7 +16368,7 @@ classes:
     funcs:
       0x141716AD0: ctor
       0x141716CB0: Finalizer
-#fail       0x14170B460: Initialize
+      0x141716D90: Initialize
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x1420A4EF0
