@@ -9598,6 +9598,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A61260: ctor
+  Client::UI::Agent::AgentSatisfactionList:
+    vtbls:
+      - ea: 0x14209AE30
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSatisfactionSupply:
     vtbls:
       - ea: 0x141FA3668
@@ -10289,8 +10293,10 @@ classes:
     vtbls:
       - ea: 0x141FB24E0
         base: Client::UI::Agent::AgentItemDetailBase
-    funcs:
-#fail       0x140CC85A0: ctor
+  Client::UI::Agent::AgentMiragePrismPrismSetConvert:
+    vtbls:
+      - ea: 0x141FB2560
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
     vtbls:
       - ea: 0x141FC8D98
@@ -10432,6 +10438,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BA13C0: ctor
+  Client::UI::Agent::AgentEmjVoiceCharacter:
+    vtbls:
+      - ea: 0x141FC8598
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140D0AE10: ctor
   Client::UI::Agent::AgentWorldTravel:
     vtbls:
       - ea: 0x141FB1670
@@ -10633,10 +10645,16 @@ classes:
       0x140BBF270: ctor
   Client::UI::Agent::AgentHwdGathererInspection:
     vtbls:
-      - ea: 0x141FC8F98
+      - ea: 0x141FB1A88
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140D2EB00: ctor
+      0x140BBF890: ctor
+  Client::UI::Agent::AgentHwdGathererInspectionItemCount:
+    vtbls:
+      - ea: 0x141FB1B98
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BC4860: ctor
   Client::UI::Agent::AgentHwdScore:
     vtbls:
       - ea: 0x141FB1B10
@@ -10735,9 +10753,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BD9C50: ctor
-  Client::UI::Agent::AgentResistanceWeaponAdjust:
+  Client::UI::Agent::AgentMycWeaponAdjust:
     vtbls:
-      - ea: 0x141FA4658
+      - ea: 0x141FB2378
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A995F0: ctor
@@ -10824,6 +10842,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1414DC0B0: ctor
+  Client::UI::Agent::AgentBannerPreview:
+    vtbls:
+      - ea: 0x142086FB0
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPMap:
     vtbls:
       - ea: 0x141FB1130
@@ -10967,7 +10989,7 @@ classes:
       0x140D10C90: ctor
   Client::UI::Agent::AgentGoldSaucerMiniGame:
     vtbls:
-      - ea: 0x141FCF670
+      - ea: 0x141FC8118
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CEA0B0: ctor
@@ -11254,7 +11276,7 @@ classes:
       0x141502570: ctor
   Client::UI::Agent::AgentMJIBuilding:
     vtbls:
-      - ea: 0x14209AE30
+      - ea: 0x142087378
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1416AF310: ctor
@@ -11491,7 +11513,7 @@ classes:
       - ea: 0x142087C48
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1415A0B50: ctor
+      0x141529D80: ctor
   Client::UI::Agent::AgentTurnBreak:
     vtbls:
       - ea: 0x141F3C240

@@ -389,7 +389,7 @@ public enum AgentId : uint {
     HwdAetherGauge = 369,
     HwdGathererInspection = 370,
     HwdScore = 371,
-
+    HwdGathererInspectionItemCount = 372,
     HwdMonument = 373,
     McGuffin = 374, // Collection
     CraftActionSimulator = 375,
@@ -405,7 +405,7 @@ public enum AgentId : uint {
     MycItemBag = 385, // Bozja Lost Finds Holster
     MycDuelRequest = 386,
     MycBattleAreaInfo = 387, // Bozja Recruitment
-
+    MycWeaponAdjust = 388,
     OrnamentNoteBook = 389, // Accessories
 
     TourismMenu = 391,
