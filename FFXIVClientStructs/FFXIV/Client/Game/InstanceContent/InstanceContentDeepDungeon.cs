@@ -11,9 +11,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [Inherits<InstanceContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2920)]
 public unsafe partial struct InstanceContentDeepDungeon {
-    [FieldOffset(0x1E80), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
-    [FieldOffset(0x1EA0), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
-    [FieldOffset(0x1ED0), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
+    [FieldOffset(0x1E88), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
+    [FieldOffset(0x1EA8), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
+    [FieldOffset(0x1ED8), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
 
     [FieldOffset(0x1F00)] public uint BonusLootItemId;
     [FieldOffset(0x1F04)] public byte Floor;
@@ -22,7 +22,8 @@ public unsafe partial struct InstanceContentDeepDungeon {
 
     [FieldOffset(0x1F08)] public byte WeaponLevel;
     [FieldOffset(0x1F09)] public byte ArmorLevel;
-    [FieldOffset(0x1F0A)] public byte HoardCount;
+    [FieldOffset(0x1F0A)] public byte SyncedGearLevel;
+    [FieldOffset(0x1F0B)] public byte HoardCount;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DeepDungeonPartyInfo {
