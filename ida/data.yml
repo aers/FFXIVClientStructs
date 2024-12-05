@@ -10758,7 +10758,7 @@ classes:
       - ea: 0x141FB2378
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140A995F0: ctor
+      0x140BE07E0: ctor
   Client::UI::Agent::AgentOrnamentNoteBook:
     vtbls:
       - ea: 0x141FCD550
