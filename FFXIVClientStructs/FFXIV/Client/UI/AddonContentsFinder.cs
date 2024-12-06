@@ -51,7 +51,7 @@ public unsafe partial struct AddonContentsFinder {
     [FieldOffset(0x3D0)] public AtkImageNode* RoleIconImageNode;
     [FieldOffset(0x3D8)] public AtkResNode* NumOtherPartiesRecruitingResNode;
 
-    [FieldOffset(0x1940)] public uint SelectedRadioButton; // Index of the selected radio button
-    [FieldOffset(0x194C)] public uint SelectedRow; // Index of the currently highlighted row, index does include headers that can't be clicked on, and collapsible headers
-    [FieldOffset(0x1950)] public uint NumEntries; // Number of entries the selected tab has, includes headers such as "High-end Trials (Endwalker)"
+    [FieldOffset(0x18F0)] public uint SelectedRadioButton; // Index of the selected radio button
+    [FieldOffset(0x18FC)] public uint SelectedRow; // Index of the currently highlighted row, index does include headers that can't be clicked on, and collapsible headers
+    [FieldOffset(0x1900)] public uint NumEntries; // Number of entries the selected tab has, includes headers such as "High-end Trials (Endwalker)"
 }
