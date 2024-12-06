@@ -1937,6 +1937,7 @@ classes:
       0x1409752F0: GetBeastTribeRank
       0x140975370: GetBeastTribeCurrentReputation
       0x1409753B0: GetBeastTribeNeededReputation
+      0x140975430: IsBeastTribeRankedUpToday
       0x140974A70: IsMountUnlocked
       0x1409784C0: IsOrnamentUnlocked
       0x1409765B0: IsOrchestrionRollUnlocked
@@ -12176,6 +12177,17 @@ classes:
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x141F8C298
+  Client::Game::Event::DailyQuestMap:
+    funcs:
+      0x140C39E10: ctor
+      0x140C39E60: dtor
+      0x140C39EA0: AddHandler
+      0x140C3A1B0: RemoveHandler
+      0x140C3A280: GetQuestIfAvailable
+      0x140C3A750: Update
+      0x140C3A870: DebugDump
+      0x140C3ABD0: QuestComparator # static
+      0x140C3ABF0: CalculateAvailableQuests
   Client::Game::Event::GatheringPointEventHandler:
     vtbls:
       - ea: 0x141FC4C80
@@ -12190,8 +12202,42 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     funcs:
       0x140C22C20: ctor
-#fail       0x1409C3D40: IsTodoChecked
-#fail       0x1409C3E10: GetTodoArgs
+      0x140C22E90: dtor
+      0x140C29920: LuaGetQuestId
+      0x140C29980: LuaIsExistFate
+      0x140C2A370: LuaIsBattleNpcOwner
+      0x140C2A750: LuaIsBattleNpcTriggerOwner
+      0x140C2AA90: LuaIsGuardNpcOwner
+      0x140C2ADE0: LuaIsOwnersGuardNpcNear
+      0x140C2B190: LuaGetQuestGuardBNpcEventHandlerId
+      0x140C2B340: LuaRemoveQuestGuardBNpc
+      0x140C2B670: LuaIsBattleNpcAlive
+      0x140C2B980: LuaQuestOffer
+      0x140C2BC00: LuaQuestReward
+      0x140C2C5E0: LuaQuestUnqualified
+      0x140C2D140: LuaGetQuestBattleProgress
+      0x140C2D5F0: LuaYesNoQuestBattle
+      0x140C2D880: LuaSetWeddingFestivalParam
+      0x140C2D9A0: LuaGetWeddingReservedFlag
+      0x140C2DA20: LuaGetGsWeeklyLotOffsetTime
+      0x140C2DA80: LuaGetQuestAcceptClassJob
+      0x140C2DB20: LuaGetEventItemTargetByLayoutId
+      0x140C2DBE0: LuaSaveAnimaWeaponQuestGender
+      0x140C2DCB0: LuaGetAnimaWeaponQuestGender
+      0x140C2DD60: LuaOpenAnimaWeapon5TradeItem
+      0x140C2DE20: LuaOpenAnimaWeapon5StatusAllocation
+      0x140C2DED0: LuaOpenAnimaWeapon5StatusReallocation
+      0x140C2DF80: LuaResetAnimaWeapon5Status
+      0x140C2E010: LuaCloseUIAnimaWeapon5
+      0x140C2E040: LuaIsInEventRange
+      0x140C2E1C0: LuaStartFreeMove
+      0x140C2E260: LuaEndFreeMove
+      0x140C2E330: LuaCheckFreeMove
+      0x140C2E3E0: LuaCheckAction
+      0x140C2E880: InitLua
+      0x140C2F810: IsTodoChecked
+      0x140C2F8D0: GetTodoArgs
+      0x140C32280: OnQuestRowRead
   Client::Game::Event::WarpEventHandler: # 0x02
     vtbls:
       - ea: 0x14212AD60
@@ -12583,6 +12629,9 @@ classes:
       0x140B26B50: GetQuestBattleDirector
       0x140B26BA0: GetGoldSaucerDirector
       0x140B2A500: InteractWithHandlerFromSelector
+      0x140B2AEF0: AddDailyHandler
+      0x140B2AF10: RemoveDailyHandler
+      0x140B2AF30: IsDailyQuestAvailable
       0x140B2B000: InteractWithSelectorOptions
       0x140B2B570: GetEventHandlerById
       0x140B2CBE0: CheckInteractRange

@@ -12,6 +12,7 @@ public unsafe partial struct QuestManager {
 
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray30<QuestWork> _normalQuests;
     [FieldOffset(0x5D8), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
+    [FieldOffset(0x698)] public byte DailyQuestSeed;
     [FieldOffset(0x6C8), FixedSizeArray] internal FixedSizeArray10<TrackingWork> _trackedQuests;
     [FieldOffset(0xCA8), FixedSizeArray] internal FixedSizeArray18<BeastReputationWork> _beastReputation;
     [FieldOffset(0xDC8), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
