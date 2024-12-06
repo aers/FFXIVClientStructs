@@ -22,6 +22,8 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0x3C50)] public EventState EventState1;
     [FieldOffset(0x3CB0)] public EventState EventState2;
 
+    [FieldOffset(0x42A8)] public DailyQuestMap DailyQuests;
+
     [StaticAddress("4C 39 2D ?? ?? ?? ?? 74 14", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
