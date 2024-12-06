@@ -8164,8 +8164,10 @@ classes:
     vtbls:
       - ea: 0x141F7EE28
     funcs:
-#fail       0x1405F5080: Initialize
       0x1405C02D0: GetAvailablePoses
+      0x1405C0320: Initialize
+      0x1405C0B50: SetPose
+      0x1405C2CD0: GetPoseState
       0x1405C4040: GetPoseKind
   Client::Game::Control::EmoteController::FindChairInfo:
     vtbls:

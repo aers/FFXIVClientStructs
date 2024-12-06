@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::GameMain
@@ -11,6 +13,8 @@ public unsafe partial struct GameMain {
     [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray4<Festival> _queuedFestivals;
 
     [FieldOffset(0xAD8)] public JobGaugeManager JobGaugeManager;
+
+    [FieldOffset(0x3FD0)] public EmoteManager EmoteManager;
 
     [FieldOffset(0x4088)] public void* CurrentContentFinderConditionRow;
     [FieldOffset(0x4090)] public float TerritoryTransitionDelay; // in seconds
