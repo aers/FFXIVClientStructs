@@ -335,9 +335,9 @@ functions:
   0x140A01650: ProcessPacketSpawnBoss
   0x140A01780: ProcessPacketDespawnCharacter
   0x140A018F0: ProcessPacketStatusEffectListPlayer
-#fail   0x1408E04B0: ProcessPacketStatusEffectListPlayerDouble
+  0x140A01950: ProcessPacketStatusEffectListPlayerDouble
   0x140A019C0: ProcessPacketUpdateHpMpTp
-#fail   0x1408E0CE0: ProcessPacketStatusEffectList
+  0x140A02180: ProcessPacketStatusEffectList
   0x140A02190: ProcessPacketStatusEffectListEureka
   0x140A022F0: ProcessPacketStatusEffectListBozja
   0x140A02550: ProcessPacketStatusEffectListDouble
@@ -666,22 +666,25 @@ classes:
     funcs:
       0x140957060: Initialize
       0x140957090: Finalizer
-#fail       0x140A50D80: FindSatisfactionRowIdByNpcId
-#fail       0x140A50DD0: IsNpcUnlocked
+      0x1409570D0: FindSatisfactionRowIdByNpcId
+      0x140957120: IsNpcUnlocked
       0x140957180: GetNpcData
-#fail       0x140A511A0: GetUsedAllowances
+      0x1409574C0: GetNpcRank
+      0x1409574E0: GetUsedAllowances
       0x140957530: GetResetTimestamp
-#fail       0x140A51250: IsCurrentNpcDataReady
+      0x140957590: IsCurrentNpcDataReady
       0x1409575A0: SetCurrentNpc
       0x1409576A0: ClearCurrentNpc
-#fail       0x140A51540: GetItemData
+      0x140957880: GetItemData
+      0x140957AF0: GetCurrentSupplySubRowId
       0x140957B00: GetRankRewards
-#fail       0x140A51880: ReadPacket
-#fail       0x140A51A20: SetSupplySeed
-#fail       0x140A51A30: SetSatisfactionValues
+      0x140957BC0: ReadPacket
+      0x140957D80: SetSupplySeed
+      0x140957D90: SetSatisfactionValues
+      0x140957DF0: GetSatisfactionRandom
       0x140957E30: SetFixedRandom
-#fail       0x140A523C0: GetTimeAdjustmentForBonus
-#fail       0x140A523D0: SetTimeAdjustmentForBonus
+      0x140958680: GetTimeAdjustmentForBonus
+      0x140958690: SetTimeAdjustmentForBonus
       0x140958AD0: InitReadSatisfactionBonusGuaranteeRow
       0x140958BC0: InitReadSatisfactionSupplyRow
       0x140958ED0: InitReadSatisfactionSupplyRewardRow
@@ -1165,7 +1168,7 @@ classes:
       0x14095ECF0: GetPartyMemberByIndex
       0x14095ED70: GetPartyMemberByContentId
       0x14095EDC0: GetAllianceMemberByEntityId
-#fail       0x140AC5420: GetPartyOrAllianceMemberByEntityId
+      0x14095EE80: GetPartyOrAllianceMemberByEntityId
   Client::Game::Balloon:
     funcs:
       0x141786090: OpenBalloon
@@ -2495,7 +2498,7 @@ classes:
       0x140AD95A0: AutoFaceTargetPosition
       0x140AD9690: IsQueuedActionReady
       0x140AD9750: GetRecastGroupDetail
-#fail       0x140B699D0: GetRecastGroupDetailForAction
+      0x140AD97E0: GetRecastGroupDetailForAction
       0x140AD9830: Update
       0x140ADA1C0: Initialize
       0x140ADA780: CanUseAction2
@@ -2527,7 +2530,7 @@ classes:
       0x140ADFFC0: GetAdditionalRecastGroup
       0x140AE00A0: GetRecastTimeElapsed
       0x140AE00E0: GetRecastTimeElapsedForGroup # (this, groupId) -> float
-#fail       0x140B713C0: SetRecastTimeElapsed # (this, actionType, actionId, newElapsed) -> *RecastDetail
+      0x140AE0110: SetRecastTimeElapsed # (this, actionType, actionId, newElapsed) -> *RecastDetail
       0x140AE0150: GetRecastTime
       0x140AE01E0: GetRecastTimeForGroup  # (this, groupId) -> float
       0x140AE0260: UpdateRecastFromNetwork
@@ -2563,28 +2566,30 @@ classes:
       0x140AE5080: OnCastStarted
   Client::Game::DutyActionManager:
     funcs:
-#fail       0x140B76870: ctor
-      0x140C43C30: Dtor
-      0x140C46D10: Tick
+      0x140AF38D0: ctor
+      0x140AF3950: Dtor
+      0x140AF3A70: Tick
       0x140AF3B40: HasAction
-#fail       0x140B76D00: IsPrimaryCostTypeDutyAction
-#fail       0x140B76D10: GetCurChargesByPrimaryCostType
-#fail       0x140B76D60: GetNumChargesByPrimaryCostType
-#fail       0x140B76EE0: GetPrimaryCostTypeByActionId
-#fail       0x140B76F60: GetDutyActionId            # (byte dutyActionSlot) -> uint
-#fail       0x140B77000: ReadRowData
-#fail       0x140B77050: GetInstanceIfReady
-#fail       0x140B77080: ProcessActorControlStatic
-#fail       0x140B77100: SetRecastTimes
+      0x140AF3DF0: IsPrimaryCostTypeDutyAction
+      0x140AF3E00: GetCurChargesByPrimaryCostType
+      0x140AF3E80: GetNumChargesByPrimaryCostType
+      0x140AF40C0: GetPrimaryCostTypeByActionId
+      0x140AF4160: GetDutyActionId            # (byte dutyActionSlot) -> uint
+      0x140AF41E0: GetRecastDetail
+      0x140AF4250: ReadRowData
+      0x140AF42D0: GetInstanceIfReady
+      0x140AF4330: ProcessActorControlStatic
+      0x140AF4570: SetRecastTimes1
+      0x140AF4620: SetRecastTimes2
       0x140AF4710: GetActionInSlot
-#fail       0x140B77360: SetContentExRow
-#fail       0x140B773B0: Clear
+      0x140AF4940: SetContentExRow
+      0x140AF4960: Clear
       0x140AF49F0: SetActions
       0x140AF4B40: IsActionActive
       0x140AF4D70: GetSlotForAction
-#fail       0x140B77A70: SetActionsPresent
-#fail       0x140B77AF0: SetActionActive
-#fail       0x140B77B50: ProcessActorControl
+      0x140AF5010: SetActionsPresent
+      0x140AF5070: SetActionActive
+      0x140AF5150: ProcessActorControl
   Client::Game::JobGaugeManager:
     instances:
       - ea: 0x1427C38E8
@@ -3970,9 +3975,9 @@ classes:
         base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x1408B8BA0: ctor
-#fail       0x140126ED0: ModifyCountdown
-#fail       0x140126F90: CancelCountdown
-#fail       0x1401D1D50: Finalizer
+      0x1408BD500: ModifyCountdown
+      0x1408BD5E0: CancelCountdown
+      0x1408F6370: Finalizer
   Client::UI::Info::InfoProxyNoviceNetwork:
     vtbls:
       - ea: 0x141F848D0
@@ -6739,7 +6744,7 @@ classes:
       0x1406AFB20: CreateSingleton
       0x1406B0B50: LoadPrefetchLayout
       0x1406B0F00: UnloadManagerLayout
-#fail       0x1406E6A20: AddRsvString
+      0x1406B4530: AddRsvString
       0x1406B47D0: UnloadRsvMap
       0x1406B4920: ResolveRsvString
       0x1406FB050: UnloadPrefetchLayout
@@ -8081,7 +8086,7 @@ classes:
       0x140867BC0: CalculateMovementSpeedMultiplier
       0x1408737E0: GetVfxDuration
       0x14086EB50: GetGMRank
-#fail       0x1408D1B90: GetPartMasterId
+      0x14086F820: GetPartMasterId
       0x14086F850: GetCompanionOwnerID
       0x14086F8A0: IsPartOwnedBy
       0x14086F8E0: GetEventNpcOwnerId
@@ -8095,10 +8100,6 @@ classes:
       0x14086F6C0: GetParentCharacter
       0x1408736F0: SetSoftTargetId
       0x140873770: GetSoftTargetId
-#fail       0x1408D2940: CalculateHeight
-#fail       0x1408D2AC0: UpdateHitboxRadius
-#fail       0x1408D2B20: CalculateUnscaledRadius
-#fail       0x1408D2CA0: UpdateUnscaledRadius
       0x140871160: ClearOmenVfx
       0x14086E6A0: SetMode
       0x14086B510: Finalizer
@@ -8126,7 +8127,7 @@ classes:
       0x140AD1BB0: SetResponseAction
   Client::Game::Character::ForayInfo:
     funcs:
-#fail       0x141830E60: ctor
+      0x14182B290: ctor
       0x14182B2A0: Dtor
       0x14182B2B0: SetEurekaRank
       0x14182B2E0: SetEurekaElement
@@ -8224,11 +8225,11 @@ classes:
       - ea: 0x141F7EBD0
         base: Client::Game::Character::ContainerInterface
     funcs:
-#fail       0x1408C8980: ctor
+      0x1408608D0: ctor
       0x1408609D0: InitPlayer
-#fail       0x1408C8BA0: InitNPC
+      0x140860B00: InitNPC
       0x140860B10: InitBoss
-#fail       0x1408C8C00: InitCommon
+      0x140860B60: InitCommon
       0x140862030: InitNPCCommon
       0x1408621C0: SetupRaw
       0x1408633F0: SetupPlayer
@@ -8236,6 +8237,14 @@ classes:
       0x140862800: SetupEventNpc
       0x140863A30: SetupBuddyMount
       0x140864230: CopyFromCharacter
+  Client::Game::Character::ModelContainer:
+    vtbls:
+      - ea: 0x141F7EBF8
+        base: Client::Game::Character::ContainerInterface
+    funcs:
+      0x140865CE0: CalculateHeight
+      0x140865E20: CalculateUnscaledRadius
+      0x140866020: UpdateHitboxRadius
   Client::Game::Character::OrnamentContainer:
     vtbls:
       - ea: 0x141F7EA70
@@ -8250,9 +8259,10 @@ classes:
       - ea: 0x141F7EBC0
         base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
-#fail       0x1408C5310: ctor
-#fail       0x1408C7140: SetTether
-#fail       0x1408C7260: ClearTether
+      0x14085D010: ctor
+      0x14085E3A0: SetLockonIcon
+      0x14085EFB0: SetTether
+      0x14085F0D0: ClearTether
       0x14085FD50: LoadCharacterSound
   Client::Game::Character::MountContainer:
     vtbls:
@@ -8994,8 +9004,8 @@ classes:
     funcs:
       0x140D53D30: ctor
       0x140D53E60: Finalizer
-#fail       0x140DF0F30: SelectTurnInSlot
-#fail       0x140DF13D0: CancelTurnIn
+      0x140D54EB0: SelectTurnInSlot
+      0x140D55350: CancelTurnIn
   Client::UI::Agent::AgentMarker:
     vtbls:
       - ea: 0x141FCC9D8
@@ -10084,8 +10094,8 @@ classes:
       - ea: 0x141F3AFB8
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x1403837F0: Modify
-#fail       0x140383CB0: Cancel
+      0x1403837F0: Modify
+      0x140340970: Cancel
       0x140341070: DeactivateIfPartyDissolved
       0x140341140: UpdateTick
       0x140341210: UpdateCountdownDisplay
@@ -11306,7 +11316,7 @@ classes:
       0x141505870: InitStartReadUICategories
       0x141505B00: InitReadUICategoryRow
       0x141505D40: InitStartReadShopItems
-#fail       0x1415846E0: InitReadShopItemRow
+      0x141505F70: InitReadShopItemRow
       0x1415061E0: InitFillAndSortPerCategoryItems
       0x141506440: InitStartReadItemPouch
       0x141506620: InitReadItemPouchRow
@@ -11358,7 +11368,7 @@ classes:
       0x141509360: PrepareForOp
       0x141509460: HandleContextMenuEvent
       0x141509830: TryFinishInit
-#fail       0x141588170: ClearSeeds
+      0x1415099F0: ClearSeeds
       0x141509B20: UpdateEntrustSeeds
       0x141509D40: FindSeedIndexByItemId
       0x141509DB0: GetNumItemsInInventory
@@ -11668,7 +11678,7 @@ classes:
       - ea: 0x141FAC508
         base: Client::Game::Event::EventHandler
     funcs:
-#fail       0x140968060: ctor
+      0x140B03AB0: ctor
   Client::Game::Event::EventSceneModuleImplBase:
     vtbls:
       - ea: 0x142098830
@@ -12258,17 +12268,16 @@ classes:
       0x141591A90: ctor
       0x141591E20: CreateInstance
       0x141592B40: ExecuteAgentOperation
-#fail       0x1409EB950: SellStackStatic
-#fail       0x1409EBB20: SellStack
+      0x141593280: SellStackStatic
+      0x141593420: SellStack
       0x1415935A0: ExecuteTransaction
-#fail       0x1409EBDA0: SetIsTradingWithRetainer
+      0x141593820: SetIsTradingWithRetainer
       0x141593840: IsWaiting
-      0x140A46070: GetBuybackItemPrice
-#fail       0x1409EC070: GetBuybackItemDataStatic
-#fail       0x1409EC5D0: HandleItemMoved
-#fail       0x1409EC6B0: UpdateOwnedItemCounts
-#fail       0x1409EC8A0: OnItemsRead
-      0x140A6EE10: OnGilShopRead
+      0x141593860: GetBuybackItemPrice
+      0x141593A80: GetBuybackItemDataStatic
+      0x141593FA0: HandleItemMoved
+      0x141594050: UpdateOwnedItemCounts
+      0x141594AA0: OnGilShopRead
       0x141594B70: OnGilShopItemRead
       0x141594E30: OpenOrRefreshAddon
       0x141595430: OpenOrRefreshAddonBuyback
@@ -12282,7 +12291,7 @@ classes:
       0x141596DF0: ExecuteSell
       0x141596ED0: ExecuteBuyback
       0x141597260: SetBuyback
-#fail       0x1409EF960: RequestBuybackUpdate
+      0x1415973D0: RequestBuybackUpdate
       0x1415975B0: StartReadGilShopItems
   Client::Game::Event::ShopEventHandler::ProxyInterface:
     vtbls:
