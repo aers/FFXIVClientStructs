@@ -145,7 +145,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 8D 4B 58")]
-    public partial InventoryItem* Ctor();
+    public partial void Ctor();
 
     [VirtualFunction(0)]
     public partial void Dtor();
