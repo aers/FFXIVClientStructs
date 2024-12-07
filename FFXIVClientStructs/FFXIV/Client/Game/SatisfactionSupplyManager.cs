@@ -19,13 +19,13 @@ public unsafe partial struct SatisfactionSupplyManager {
     [FieldOffset(0x3A), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplyRewardRowIds; // unsure what the first entry is supposed to be
     [FieldOffset(0x42)] public bool CurrentNpcInitInProgress;
     [FieldOffset(0x43)] public bool CurrentNpcInitDone;
-    // 0x40: ulong set together with CurrentNpc, all callers pass zero
-    // 0x48: ExcelSheetWaiter* for SatisfactionSupply
-    // 0x50: ExcelSheetWaiter* for SatisfactionSupplyReward
-    // 0x58: ExcelSheetWaiter* for SatisfactionSupplyRewardExp
-    // 0x60: ExcelSheetWaiter* for SatisfactionBonusGuarantee
-    [FieldOffset(0x68)] public uint FixedRandom; // seems to be a debug thing, set by gm command, not actually used?
-    [FieldOffset(0x6C)] public int TimeAdjustmentForBonusGuarantee; // seems to be a debug thing, set by gm command, this is added to server time (in seconds) and used to calculate bonus guarantee row
+    // 0x48: ulong set together with CurrentNpc, all callers pass zero
+    // 0x50: ExcelSheetWaiter* for SatisfactionSupply
+    // 0x58: ExcelSheetWaiter* for SatisfactionSupplyReward
+    // 0x60: ExcelSheetWaiter* for SatisfactionSupplyRewardExp
+    // 0x68: ExcelSheetWaiter* for SatisfactionBonusGuarantee
+    [FieldOffset(0x70)] public uint FixedRandom; // seems to be a debug thing, set by gm command, not actually used?
+    [FieldOffset(0x74)] public int TimeAdjustmentForBonusGuarantee; // seems to be a debug thing, set by gm command, this is added to server time (in seconds) and used to calculate bonus guarantee row
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct NpcInfo {
