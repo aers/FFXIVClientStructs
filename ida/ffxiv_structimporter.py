@@ -2,7 +2,12 @@
 # @menupath Tools.Scripts.ffxiv_structimport
 # @runtime Jython
 
-from yaml import safe_load
+from yaml import load
+try:
+    from yaml import CSafeLoader as Loader
+except ImportError:
+    from yaml import SafeLoader as Loader
+
 import os
 from abc import abstractmethod
 from time import time
@@ -189,9 +194,7 @@ class BaseApi:
 
     def get_yaml(self):
         # type: () -> DefinedExport
-        dic = safe_load(
-            open(self.get_file_path)
-        )  # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
+        dic = load(open(self.get_file_path), Loader=Loader) # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
         enums = []
         structs = []
         for enum in dic["enums"]:
