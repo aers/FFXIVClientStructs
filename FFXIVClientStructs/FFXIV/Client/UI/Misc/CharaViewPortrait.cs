@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [Inherits<CharaView>]
 [StructLayout(LayoutKind.Explicit, Size = 0x420)]
-public unsafe partial struct CharaViewPortrait : ICreatable {
+public unsafe partial struct CharaViewPortrait {
     // Spherical Camera?
     [FieldOffset(0x320)] public Vector4 CameraPosition;
     [FieldOffset(0x330)] public Vector4 CameraTarget;
@@ -42,9 +42,6 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
     [FieldOffset(0x400)] public bool CharacterVisible;
     [FieldOffset(0x401)] public bool CharaViewPortraitCharacterDataCopied;
     [FieldOffset(0x402)] public bool CharaViewPortraitCharacterLoaded;
-
-    public static CharaViewPortrait* Create()
-        => IMemorySpace.GetUISpace()->Create<CharaViewPortrait>();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 45 33 C0")]
     public partial CharaViewPortrait* Ctor();
