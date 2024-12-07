@@ -6739,9 +6739,11 @@ classes:
       0x1406AFB20: CreateSingleton
       0x1406B0B50: LoadPrefetchLayout
       0x1406B0F00: UnloadManagerLayout
-#fail       0x1406E6A20: AddRsvString
+      0x1406B4530: AddRsvString
       0x1406B47D0: UnloadRsvMap
       0x1406B4920: ResolveRsvString
+      0x1406B4A20: AddRsfEntry
+      0x1406B4D50: ResolveRsfEntry
       0x1406FB050: UnloadPrefetchLayout
       0x1406FB0C0: ActiveLayoutReady
       0x1406FB0F0: ActiveLayoutStreamed
