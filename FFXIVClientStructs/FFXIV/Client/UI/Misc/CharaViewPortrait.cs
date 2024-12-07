@@ -47,7 +47,7 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
         => IMemorySpace.GetUISpace()->Create<CharaViewPortrait>();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 45 33 C0")]
-    public partial void Ctor();
+    public partial CharaViewPortrait* Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10")]
     public partial void Setup(uint clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6); // a4 is set to +0x3A8, a5 is set to +0x3B0, a6 is set to +0x3B8
