@@ -156,7 +156,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public partial byte GetCharAt(ulong idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F0 E8 ?? ?? ?? ?? 48 8D 4D C0")]
-    public partial void SanitizeString(ushort flags, Utf8String* characterList);
+    public partial bool SanitizeString(ushort flags, Utf8String* characterList);
 
     public byte GetCharAt(int idx) => idx < 0 ? byte.MinValue : GetCharAt((ulong)idx);
 
