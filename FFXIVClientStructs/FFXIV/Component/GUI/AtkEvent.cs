@@ -9,6 +9,7 @@ public enum AtkEventType : byte {
     MouseMove = 5,
     MouseOver = 6,
     MouseOut = 7,
+    MouseWheel = 8,
     MouseClick = 9,
     InputReceived = 12,
     FocusStart = 18,
@@ -19,6 +20,12 @@ public enum AtkEventType : byte {
     ButtonRelease = 24, // sent on MouseUp and MouseOut
     ButtonClick = 25, // sent on MouseUp and MouseClick on button
 
+    // NumericInputUpdate = 27, // also fired when ScrollBar is scrolled (with 2 values)??
+
+    // AtkComponentSlider
+    SliderValueUpdate = 29,
+
+    // AtkComponentList & children
     ListItemRollOver = 33,
     ListItemRollOut = 34,
     ListItemToggle = 35,
