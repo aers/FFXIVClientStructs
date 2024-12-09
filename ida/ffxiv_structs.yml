@@ -1257,6 +1257,7 @@ enums:
     "HwdAetherGauge": 369
     "HwdGathererInspection": 370
     "HwdScore": 371
+    "HwdGathererInspectionItemCount": 372
     "HwdMonument": 373
     "McGuffin": 374
     "CraftActionSimulator": 375
@@ -1272,6 +1273,7 @@ enums:
     "MycItemBag": 385
     "MycDuelRequest": 386
     "MycBattleAreaInfo": 387
+    "MycWeaponAdjust": 388
     "OrnamentNoteBook": 389
     "TourismMenu": 391
     "GatheringMasterpiece": 392
@@ -2375,6 +2377,18 @@ enums:
     "GameObjectId": 1
     "Unk2": 2
     "Unk3": 3
+- type: Client::Game::Control::EmoteController::PoseType
+  name: PoseType
+  underlying: byte
+  namespace: Client.Game.Control
+  values:
+    "Idle": 0
+    "WeaponDrawn": 1
+    "Sit": 2
+    "GroundSit": 3
+    "Doze": 4
+    "Umbrella": 5
+    "Accessory": 6
 - type: Client::Game::Character::CharacterModes
   name: CharacterModes
   underlying: byte
@@ -4331,6 +4345,20 @@ structs:
       name: slot
     - type: unsigned __int16
       name: actionTimelineId
+- type: Client::Game::Control::EmoteManager
+  name: EmoteManager
+  namespace: Client.Game.Control
+  union: False
+  size: 64
+  fields:
+  - type: float
+    name: IdlePoseCountdown
+    offset: 48
+  - type: Client::Game::Control::EmoteController::PoseType
+    name: IdlePoseType
+    offset: 60
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::Control::GameObjectArray
   name: GameObjectArray
   namespace: Client.Game.Control
@@ -5043,7 +5071,7 @@ structs:
   name: AstrologianGauge
   namespace: Client.Game.Gauge
   union: False
-  size: 16
+  size: 48
   fields:
   - type: __int16
     name: Cards
@@ -6892,10 +6920,10 @@ structs:
     offset: 67
   - type: unsigned int
     name: FixedRandom
-    offset: 104
+    offset: 112
   - type: int
     name: TimeAdjustmentForBonusGuarantee
-    offset: 108
+    offset: 116
   member_functions:
   - signature: E8 ?? ?? ?? ?? 2B F0 E8 ?? ?? ?? ?? 8B CB
     return_type: int
@@ -7400,7 +7428,7 @@ structs:
   name: InstanceContent
   namespace: Client.Game.UI
   union: False
-  size: 112
+  size: 120
   fields: []
   virtual_functions: []
   member_functions:
@@ -7793,7 +7821,7 @@ structs:
   name: QuestTodoList
   namespace: Client.Game.UI
   union: False
-  size: 752
+  size: 1088
   fields: []
   virtual_functions: []
   member_functions: []
@@ -8402,7 +8430,7 @@ structs:
   name: GraphicsConfig
   namespace: Client.Graphics.Render
   union: False
-  size: 184
+  size: 192
   fields:
   - type: unsigned int
     name: UpdateFlags
@@ -8612,7 +8640,7 @@ structs:
   name: CharacterUtility
   namespace: Client.Graphics.Scene
   union: False
-  size: 1392
+  size: 1440
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle*
     name: ResourceHandles
@@ -18855,6 +18883,18 @@ structs:
     name: LongCount
     offset: 8
   member_functions: []
+- type: Helper::RedBlackTree<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>
+  name: RedBlackTree`3
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
 - type: Helper::RedBlackTree<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>
   name: RedBlackTree`3
   namespace: Helper
@@ -18909,6 +18949,18 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
+- type: Helper::RedBlackTree<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>
+  name: RedBlackTree`3
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
     name: Head
     offset: 0
   - type: __int64
@@ -19383,6 +19435,18 @@ structs:
     name: Item2
     offset: 8
   member_functions: []
+- type: StdPair<unsigned __int64, byte*>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int64
+    name: Item1
+    offset: 0
+  - type: byte*
+    name: Item2
+    offset: 8
+  member_functions: []
 - type: StdPair<unsigned __int64, int>
   name: StdPair`2
   namespace: ''
@@ -19637,6 +19701,21 @@ structs:
     name: Last
     offset: 8
   - type: Client::Game::Event::EventSceneTaskInterface**
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::Game::Event::QuestEventHandler*, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::Game::Event::QuestEventHandler**
+    name: First
+    offset: 0
+  - type: Client::Game::Event::QuestEventHandler**
+    name: Last
+    offset: 8
+  - type: Client::Game::Event::QuestEventHandler**
     name: End
     offset: 16
   member_functions: []
@@ -21195,7 +21274,7 @@ structs:
   name: EffectContainer
   namespace: Client.Game.Character
   union: False
-  size: 80
+  size: 128
   fields:
   - type: Client::Game::Character::ContainerInterface
     name: ContainerInterface
@@ -22753,7 +22832,7 @@ structs:
   name: TripleTriad
   namespace: Client.Game.UI
   union: False
-  size: 5592
+  size: 5712
   fields:
   - type: Component::GUI::AtkModuleInterface::AtkEventInterface
     name: AtkEventInterface
@@ -22965,7 +23044,7 @@ structs:
   name: BoneSimulator
   namespace: Client.Graphics.Physics
   union: False
-  size: 256
+  size: 1104
   fields:
   - type: Client::Graphics::Physics::BoneSimulator::PhysicsGroup
     name: Group
@@ -23043,7 +23122,7 @@ structs:
   name: Model
   namespace: Client.Graphics.Render
   union: False
-  size: 240
+  size: 320
   fields:
   - type: Client::Graphics::ReferencedClassBase
     name: ReferencedClassBase
@@ -29687,7 +29766,7 @@ structs:
   name: AchievementListModule
   namespace: Client.UI.Misc
   union: False
-  size: 152
+  size: 144
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -30135,7 +30214,7 @@ structs:
   name: EmoteHistoryModule
   namespace: Client.UI.Misc
   union: False
-  size: 376
+  size: 384
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -30315,7 +30394,7 @@ structs:
   name: FlagStatusModule
   namespace: Client.UI.Misc
   union: False
-  size: 680
+  size: 688
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -30499,7 +30578,7 @@ structs:
   name: ItemContextCustomizeModule
   namespace: Client.UI.Misc
   union: False
-  size: 400
+  size: 408
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -30761,7 +30840,7 @@ structs:
   name: LetterDataModule
   namespace: Client.UI.Misc
   union: False
-  size: 2632
+  size: 2640
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -30849,7 +30928,7 @@ structs:
   name: LogFilterConfig
   namespace: Client.UI.Misc
   union: False
-  size: 1320
+  size: 1328
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -31636,7 +31715,7 @@ structs:
   name: RaptureTeleportHistory
   namespace: Client.UI.Misc
   union: False
-  size: 192
+  size: 200
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -31835,7 +31914,7 @@ structs:
   name: RetainerTaskDataModule
   namespace: Client.UI.Misc
   union: False
-  size: 176
+  size: 184
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -31923,7 +32002,7 @@ structs:
   name: UiSavePackModule
   namespace: Client.UI.Misc
   union: False
-  size: 80
+  size: 88
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -32014,6 +32093,8 @@ structs:
       name: this
     - type: byte
       name: a2
+  - name: GetSegment
+    offset: 112
   member_functions: []
 - type: Client::UI::Misc::UserFileManager
   name: UserFileManager
@@ -34706,6 +34787,36 @@ structs:
     name: _Myval
     offset: 28
   member_functions: []
+- type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>*
+    name: _Left
+    offset: 0
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>*
+    name: _Parent
+    offset: 8
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned __int64, byte*>
+    name: _Myval
+    offset: 28
+  member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>
   name: Node
   namespace: Helper
@@ -35340,6 +35451,15 @@ structs:
     name: Tree
     offset: 0
   member_functions: []
+- type: StdMap<unsigned __int64, byte*, Helper::IStaticMemorySpace::Default>
+  name: StdMap`3
+  namespace: ''
+  union: False
+  fields:
+  - type: Helper::RedBlackTree<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>
+    name: Tree
+    offset: 0
+  member_functions: []
 - type: StdMap<unsigned __int64, int, Helper::IStaticMemorySpace::Default>
   name: StdMap`3
   namespace: ''
@@ -35382,6 +35502,15 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree<StdPair<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>>
+    name: Tree
+    offset: 0
+  member_functions: []
+- type: StdMap<unsigned int, Client::Game::Event::DailyQuestMap::Entry, Helper::IStaticMemorySpace::Default>
+  name: StdMap`3
+  namespace: ''
+  union: False
+  fields:
+  - type: Helper::RedBlackTree<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>
     name: Tree
     offset: 0
   member_functions: []
@@ -35668,6 +35797,15 @@ structs:
   union: False
   fields:
   - type: StdVector<Client::Game::Event::EventSceneTaskInterface*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdVector<Client::Game::Event::QuestEventHandler*>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Client::Game::Event::QuestEventHandler*, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -36619,6 +36757,31 @@ structs:
       name: objectArray
     - type: Client::Game::Camera*
       name: camera
+- type: Client::Game::Event::DailyQuestMap::Entry
+  name: Entry
+  namespace: Client.Game.Event
+  union: False
+  size: 64
+  fields:
+  - type: byte
+    name: TribeId
+    offset: 0
+  - type: byte
+    name: RankRequirementMin
+    offset: 1
+  - type: byte
+    name: RankRequirementMax
+    offset: 2
+  - type: StdVector<Client::Game::Event::QuestEventHandler*>
+    name: HandlersExclusive
+    offset: 8
+  - type: StdVector<Client::Game::Event::QuestEventHandler*>
+    name: HandlersNormal
+    offset: 32
+  - type: byte
+    name: Dirty
+    offset: 56
+  member_functions: []
 - type: Client::Game::Event::EventHandlerSelector
   name: EventHandlerSelector
   namespace: Client.Game.Event
@@ -39248,7 +39411,7 @@ structs:
   name: AgentAchievement
   namespace: Client.UI.Agent
   union: False
-  size: 75552
+  size: 75584
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -41636,7 +41799,7 @@ structs:
   name: AgentGatheringNote
   namespace: Client.UI.Agent
   union: False
-  size: 376
+  size: 384
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -41855,7 +42018,7 @@ structs:
   name: AgentGoldSaucer
   namespace: Client.UI.Agent
   union: False
-  size: 528
+  size: 536
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -43583,7 +43746,7 @@ structs:
   name: AgentPartyMember
   namespace: Client.UI.Agent
   union: False
-  size: 184
+  size: 496
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -44724,7 +44887,7 @@ structs:
   name: AgentTelepotTown
   namespace: Client.UI.Agent
   union: False
-  size: 48
+  size: 144
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -45489,7 +45652,7 @@ structs:
   name: ConfigModule
   namespace: Client.UI.Misc
   union: False
-  size: 58824
+  size: 60208
   fields:
   - type: Client::UI::UIModule*
     name: UIModule
@@ -45877,7 +46040,7 @@ structs:
   name: RetainerCommentModule
   namespace: Client.UI.Misc
   union: False
-  size: 1440
+  size: 1448
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -47459,6 +47622,15 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
+- type: StdMap<unsigned __int64, byte*>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap<unsigned __int64, byte*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
 - type: StdMap<unsigned __int64, int>
   name: StdMap`2
   namespace: ''
@@ -47501,6 +47673,15 @@ structs:
   union: False
   fields:
   - type: StdMap<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdMap<unsigned int, Client::Game::Event::DailyQuestMap::Entry>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap<unsigned int, Client::Game::Event::DailyQuestMap::Entry, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -48105,6 +48286,36 @@ structs:
     offset: 32
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Event::DailyQuestMap
+  name: DailyQuestMap
+  namespace: Client.Game.Event
+  union: False
+  size: 16
+  fields:
+  - type: StdMap<unsigned int, Client::Game::Event::DailyQuestMap::Entry>
+    name: Entries
+    offset: 0
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 40 88 7D 90 48 8B D8
+    return_type: __int64
+    name: CalculateAvailableQuests
+    parameters:
+    - type: Client::Game::Event::DailyQuestMap*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: player
+    - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
+      name: iterator
+    - type: byte
+      name: seed
+    - type: byte
+      name: rankInRange
+    - type: byte
+      name: rank
+    - type: byte
+      name: rankExactMatch
+    - type: Client::Game::Event::QuestEventHandler**
+      name: outResult
 - type: Client::Game::Group::PartyMember
   name: PartyMember
   namespace: Client.Game.Group
@@ -50974,7 +51185,7 @@ structs:
   name: AgentQuestJournal
   namespace: Client.UI.Agent
   union: False
-  size: 640
+  size: 624
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -51134,7 +51345,7 @@ structs:
   name: AgentReadyCheck
   namespace: Client.UI.Agent
   union: False
-  size: 944
+  size: 968
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -52316,7 +52527,7 @@ structs:
   name: AcquaintanceModule
   namespace: Client.UI.Misc
   union: False
-  size: 4496
+  size: 4504
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -52603,7 +52814,7 @@ structs:
   name: FieldMarkerModule
   namespace: Client.UI.Misc
   union: False
-  size: 3192
+  size: 3200
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -54775,6 +54986,18 @@ structs:
     name: LookAtVector
     offset: 432
   member_functions: []
+- type: StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned int
+    name: Item1
+    offset: 0
+  - type: Client::Game::Event::DailyQuestMap::Entry
+    name: Item2
+    offset: 8
+  member_functions: []
 - type: Animation::Animation::hkaAnimation
   name: hkaAnimation
   namespace: Animation.Animation
@@ -56404,7 +56627,7 @@ structs:
   name: BonePhysicsModule
   namespace: Client.Graphics.Physics
   union: False
-  size: 448
+  size: 1424
   fields:
   - type: Common::Math::Matrix4x4
     name: SkeletonWorldMatrix
@@ -56678,6 +56901,9 @@ structs:
   - type: StdMap<Client::System::String::Utf8String, byte*>*
     name: RsvMap
     offset: 544
+  - type: StdMap<unsigned __int64, byte*>*
+    name: RsfMap
+    offset: 552
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -56748,6 +56974,24 @@ structs:
       name: resolvedString
     - type: unsigned __int64
       name: resolvedStringSize
+  - signature: 4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 45
+    return_type: byte*
+    name: ResolveRsfEntry
+    parameters:
+    - type: Client::LayoutEngine::LayoutWorld*
+      name: this
+    - type: unsigned __int64
+      name: indexHash
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 50 48 8B 99
+    return_type: byte
+    name: AddRsfEntry
+    parameters:
+    - type: Client::LayoutEngine::LayoutWorld*
+      name: this
+    - type: unsigned __int64
+      name: indexHash
+    - type: byte*
+      name: rsfData
 - type: Client::System::Framework::EnvironmentManager
   name: EnvironmentManager
   namespace: Client.System.Framework
@@ -59483,7 +59727,7 @@ structs:
   name: InfoProxyPartyMember
   namespace: Client.UI.Info
   union: False
-  size: 864
+  size: 832
   fields:
   - type: Client::UI::Info::InfoProxyCommonList
     name: InfoProxyCommonList
@@ -59538,7 +59782,19 @@ structs:
     parameters:
     - type: Client::UI::Info::InfoProxyPartyMember*
       name: this
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? B3 01 88 5C 24 60
+    return_type: void
+    name: ChangeOrder
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+    - type: int
+      name: selectedIndex
+    - type: int
+      name: targetIndex
+    - type: byte
+      name: doUpdate
 - type: Client::UI::Info::InfoProxySearch
   name: InfoProxySearch
   namespace: Client.UI.Info
@@ -61969,6 +62225,36 @@ structs:
     name: Value
     offset: 16
   member_functions: []
+- type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
+    name: _Left
+    offset: 0
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
+    name: _Parent
+    offset: 8
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>
+    name: _Myval
+    offset: 28
+  member_functions: []
 - type: Animation::Playback::Control::hkaAnimationControl
   name: hkaAnimationControl
   namespace: Animation.Playback.Control
@@ -63916,7 +64202,7 @@ structs:
   name: UIInputData
   namespace: Client.UI
   union: False
-  size: 2600
+  size: 2608
   fields:
   - type: Client::System::Input::InputData
     name: InputData
@@ -65252,6 +65538,9 @@ structs:
     name: DailyQuests
     offset: 1496
     size: 12
+  - type: byte
+    name: DailyQuestSeed
+    offset: 1688
   - type: Application::Network::WorkDefinitions::TrackingWork
     name: TrackedQuests
     offset: 1736
@@ -66962,7 +67251,7 @@ structs:
   name: AozNoteModule
   namespace: Client.UI.Misc
   union: False
-  size: 3368
+  size: 3376
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -67096,7 +67385,7 @@ structs:
   name: ItemFinderModule
   namespace: Client.UI.Misc
   union: False
-  size: 4560
+  size: 4568
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -67991,7 +68280,7 @@ structs:
   name: GatheringEventHandler
   namespace: Client.Game.Event
   union: False
-  size: 1104
+  size: 1112
   fields:
   - type: Client::Game::Event::EventHandler
     name: EventHandler
@@ -68065,7 +68354,7 @@ structs:
   name: LobbyCamera
   namespace: Client.Game
   union: False
-  size: 768
+  size: 784
   fields:
   - type: Client::Game::Camera
     name: Camera
@@ -68238,7 +68527,7 @@ structs:
   name: Manager
   namespace: Client.Graphics.Render
   union: False
-  size: 335632
+  size: 335744
   fields:
   - type: Client::Graphics::Render::View
     name: Views
@@ -69046,7 +69335,7 @@ structs:
   name: ModelResourceHandle
   namespace: Client.System.Resource.Handle
   union: False
-  size: 608
+  size: 640
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle
     name: ResourceHandle
@@ -69279,7 +69568,7 @@ structs:
   name: AgentColorant
   namespace: Client.UI.Agent
   union: False
-  size: 1160
+  size: 1168
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -69862,7 +70151,7 @@ structs:
   name: AgentMiragePrismMiragePlate
   namespace: Client.UI.Agent
   union: False
-  size: 936
+  size: 944
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -70165,7 +70454,7 @@ structs:
   name: AgentStatus
   namespace: Client.UI.Agent
   union: False
-  size: 944
+  size: 1024
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -70269,7 +70558,7 @@ structs:
   name: AgentTryon
   namespace: Client.UI.Agent
   union: False
-  size: 1744
+  size: 1752
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -72214,7 +72503,7 @@ structs:
   name: GatheringPointEventHandler
   namespace: Client.Game.Event
   union: False
-  size: 1136
+  size: 1144
   fields:
   - type: Client::Game::Event::GatheringEventHandler
     name: GatheringEventHandler
@@ -72291,7 +72580,7 @@ structs:
   name: WorkshopTerritory
   namespace: Client.Game
   union: False
-  size: 47296
+  size: 47312
   fields:
   - type: Client::Game::HousingTerritory
     name: HousingTerritory
@@ -73111,7 +73400,7 @@ structs:
   name: RaptureLogModule
   namespace: Client.UI.Misc
   union: False
-  size: 14096
+  size: 18128
   fields:
   - type: Component::Log::LogModule
     name: LogModule
@@ -73665,7 +73954,7 @@ structs:
   name: Human
   namespace: Client.Graphics.Scene
   union: False
-  size: 3232
+  size: 3264
   fields:
   - type: Client::Graphics::Scene::CharacterBase
     name: CharacterBase
@@ -81324,7 +81613,7 @@ structs:
   name: AddonFlyText
   namespace: Client.UI
   union: False
-  size: 11608
+  size: 11616
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -82658,7 +82947,7 @@ structs:
   name: AddonGSInfoEmj
   namespace: Client.UI
   union: False
-  size: 624
+  size: 680
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -90666,7 +90955,7 @@ structs:
   name: AddonMiragePrismPrismBox
   namespace: Client.UI
   union: False
-  size: 3968
+  size: 3976
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -91979,7 +92268,7 @@ structs:
   name: AddonRecipeNote
   namespace: Client.UI
   union: False
-  size: 15280
+  size: 13280
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -101138,7 +101427,7 @@ structs:
   name: AddonMacro
   namespace: Client.UI
   union: False
-  size: 12488
+  size: 12496
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -106417,7 +106706,7 @@ structs:
   name: AddonGSInfoCardList
   namespace: Client.UI
   union: False
-  size: 1368
+  size: 1376
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -106790,7 +107079,7 @@ structs:
   name: AddonGSInfoEditDeck
   namespace: Client.UI
   union: False
-  size: 3480
+  size: 3488
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -107107,7 +107396,7 @@ structs:
   name: AddonLovmPaletteEdit
   namespace: Client.UI
   union: False
-  size: 2600
+  size: 2608
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -107741,7 +108030,7 @@ structs:
   name: AddonMinionMountBase
   namespace: Client.UI
   union: False
-  size: 3080
+  size: 3088
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -110006,6 +110295,87 @@ structs:
   - type: Client::System::String::Utf8String
     name: Title
     offset: 832
+  - type: Client::System::String::Utf8String
+    name: ScriptId
+    offset: 936
+  - type: Client::System::String::Utf8String
+    name: ScriptPath
+    offset: 1040
+  - type: byte
+    name: PreviousQuestJoin
+    offset: 1144
+  - type: unsigned __int16
+    name: PreviousQuests
+    offset: 1146
+    size: 3
+  - type: byte
+    name: QuestLockJoin
+    offset: 1153
+  - type: unsigned __int16
+    name: QuestLocks
+    offset: 1154
+    size: 2
+  - type: byte
+    name: InstanceContentJoin
+    offset: 1212
+  - type: unsigned int
+    name: InstanceContents
+    offset: 1216
+    size: 3
+  - type: unsigned __int16
+    name: Festival
+    offset: 1228
+  - type: unsigned __int16
+    name: FestivalBegin
+    offset: 1230
+  - type: unsigned __int16
+    name: FestivalEnd
+    offset: 1232
+  - type: byte
+    name: RepeatIntervalType
+    offset: 1234
+  - type: byte
+    name: QuestRepeatFlag
+    offset: 1235
+  - type: unsigned __int16
+    name: BellStart
+    offset: 1236
+  - type: unsigned __int16
+    name: BellEnd
+    offset: 1238
+  - type: byte
+    name: BeastTribeId
+    offset: 1240
+  - type: byte
+    name: BeastTribeRank
+    offset: 1241
+  - type: unsigned __int16
+    name: BeastReputationValue
+    offset: 1242
+  - type: unsigned __int16
+    name: MountRequired
+    offset: 1244
+  - type: byte
+    name: SatisfactionNpc
+    offset: 1246
+  - type: byte
+    name: SatisfactionLevel
+    offset: 1247
+  - type: unsigned int
+    name: IssuerStart
+    offset: 1248
+  - type: unsigned int
+    name: TargetEnd
+    offset: 1252
+  - type: unsigned int
+    name: JournalGenre
+    offset: 1256
+  - type: unsigned int
+    name: IconSpecial
+    offset: 1260
+  - type: byte
+    name: DailyQuestPool
+    offset: 1264
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
@@ -110444,7 +110814,7 @@ structs:
   name: AddonActionDoubleCrossBase
   namespace: Client.UI
   union: False
-  size: 792
+  size: 784
   fields:
   - type: Client::UI::AddonActionBarBase
     name: AddonActionBarBase
@@ -111479,7 +111849,7 @@ structs:
   name: AddonContentsFinder
   namespace: Client.UI
   union: False
-  size: 6496
+  size: 6416
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -111582,13 +111952,13 @@ structs:
     size: 8
   - type: unsigned int
     name: SelectedRadioButton
-    offset: 6464
+    offset: 6384
   - type: unsigned int
     name: SelectedRow
-    offset: 6476
+    offset: 6396
   - type: unsigned int
     name: NumEntries
-    offset: 6480
+    offset: 6400
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -114506,7 +114876,7 @@ structs:
   name: MJIPastureHandler
   namespace: Client.Game.MJI
   union: False
-  size: 2936
+  size: 2968
   fields:
   - type: Client::Game::Event::EventHandler
     name: EventHandler
@@ -116663,7 +117033,7 @@ structs:
   name: AddonWeeklyPuzzle
   namespace: Client.UI
   union: False
-  size: 3336
+  size: 3352
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -125564,7 +125934,7 @@ structs:
   name: AddonRaidFinder
   namespace: Client.UI
   union: False
-  size: 3864
+  size: 3976
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -125924,7 +126294,7 @@ structs:
   name: RaptureShellModule
   namespace: Client.UI.Shell
   union: False
-  size: 4632
+  size: 4688
   fields:
   - type: Component::Shell::ShellCommandModule
     name: ShellCommandModule
@@ -130011,7 +130381,7 @@ structs:
   name: PublicContentEureka
   namespace: Client.Game.InstanceContent
   union: False
-  size: 5544
+  size: 5128
   fields:
   - type: Client::Game::InstanceContent::PublicContentDirector
     name: PublicContentDirector
@@ -130150,7 +130520,7 @@ structs:
   name: AddonGuildLeve
   namespace: Client.UI
   union: False
-  size: 7064
+  size: 6984
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -130945,15 +131315,15 @@ structs:
     base: true
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo
     name: Party
-    offset: 7808
+    offset: 7816
     size: 4
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo
     name: Items
-    offset: 7840
+    offset: 7848
     size: 16
   - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo
     name: Chests
-    offset: 7888
+    offset: 7896
     size: 16
   - type: unsigned int
     name: BonusLootItemId
@@ -130974,8 +131344,11 @@ structs:
     name: ArmorLevel
     offset: 7945
   - type: byte
-    name: HoardCount
+    name: SyncedGearLevel
     offset: 7946
+  - type: byte
+    name: HoardCount
+    offset: 7947
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
@@ -131205,121 +131578,6 @@ structs:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
       name: this
   member_functions: []
-- type: Client::Game::GameMain
-  name: GameMain
-  namespace: Client.Game
-  union: False
-  size: 16640
-  fields:
-  - type: Client::Game::GameMain::Festival
-    name: ActiveFestivals
-    offset: 0
-    size: 4
-  - type: Client::Game::GameMain::Festival
-    name: QueuedFestivals
-    offset: 64
-    size: 4
-  - type: Client::Game::JobGaugeManager
-    name: JobGaugeManager
-    offset: 2776
-  - type: __int64
-    name: CurrentContentFinderConditionRow
-    offset: 16520
-  - type: float
-    name: TerritoryTransitionDelay
-    offset: 16528
-  - type: byte
-    name: TerritoryTransitionState
-    offset: 16532
-  - type: byte
-    name: ConnectedToZone
-    offset: 16534
-  - type: unsigned int
-    name: TerritoryLoadState
-    offset: 16536
-  - type: unsigned int
-    name: NextTerritoryTypeId
-    offset: 16540
-  - type: unsigned int
-    name: CurrentTerritoryTypeId
-    offset: 16544
-  - type: unsigned int
-    name: CurrentTerritoryIntendedUseId
-    offset: 16548
-  - type: unsigned int
-    name: CurrentTerritoryFilterKey
-    offset: 16552
-  - type: unsigned __int16
-    name: CurrentContentFinderConditionId
-    offset: 16556
-  - type: unsigned int
-    name: TransitionTerritoryTypeId
-    offset: 16560
-  - type: unsigned int
-    name: TransitionTerritoryFilterKey
-    offset: 16564
-  - type: unsigned int
-    name: CurrentMapId
-    offset: 16568
-  - type: float
-    name: MilisecondCounter
-    offset: 16584
-  - type: unsigned int
-    name: RuntimeSeconds
-    offset: 16588
-  - type: byte
-    name: RuntimeSecondsChanged
-    offset: 16592
-  - type: float
-    name: Runtime
-    offset: 16596
-  - type: __int64
-    name: CurrentTerritoryTypeRow
-    offset: 16600
-  - type: __int64
-    name: CurrentTerritoryIntendedUseRow
-    offset: 16608
-  - type: __int64
-    name: NextTerritoryTypeRow
-    offset: 16616
-  - type: __int64
-    name: NextTerritoryIntendedUseRow
-    offset: 16624
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF
-    return_type: byte
-    name: IsInInstanceArea
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??
-    return_type: void
-    name: QueueActiveFestivals
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-    - type: unsigned int
-      name: festival1
-    - type: unsigned int
-      name: festival2
-    - type: unsigned int
-      name: festival3
-    - type: unsigned int
-      name: festival4
-  - signature: E8 ?? ?? ?? ?? 80 63 50 FE
-    return_type: void
-    name: SetActiveFestivals
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-    - type: unsigned int
-      name: festival1
-    - type: unsigned int
-      name: festival2
-    - type: unsigned int
-      name: festival3
-    - type: unsigned int
-      name: festival4
 - type: Client::Game::InstanceContent::PublicContentBozja
   name: PublicContentBozja
   namespace: Client.Game.InstanceContent
@@ -131429,6 +131687,124 @@ structs:
       name: holsterIndex
     - type: unsigned int
       name: slot
+- type: Client::Game::GameMain
+  name: GameMain
+  namespace: Client.Game
+  union: False
+  size: 16640
+  fields:
+  - type: Client::Game::GameMain::Festival
+    name: ActiveFestivals
+    offset: 0
+    size: 4
+  - type: Client::Game::GameMain::Festival
+    name: QueuedFestivals
+    offset: 64
+    size: 4
+  - type: Client::Game::JobGaugeManager
+    name: JobGaugeManager
+    offset: 2776
+  - type: Client::Game::Control::EmoteManager
+    name: EmoteManager
+    offset: 16336
+  - type: __int64
+    name: CurrentContentFinderConditionRow
+    offset: 16520
+  - type: float
+    name: TerritoryTransitionDelay
+    offset: 16528
+  - type: byte
+    name: TerritoryTransitionState
+    offset: 16532
+  - type: byte
+    name: ConnectedToZone
+    offset: 16534
+  - type: unsigned int
+    name: TerritoryLoadState
+    offset: 16536
+  - type: unsigned int
+    name: NextTerritoryTypeId
+    offset: 16540
+  - type: unsigned int
+    name: CurrentTerritoryTypeId
+    offset: 16544
+  - type: unsigned int
+    name: CurrentTerritoryIntendedUseId
+    offset: 16548
+  - type: unsigned int
+    name: CurrentTerritoryFilterKey
+    offset: 16552
+  - type: unsigned __int16
+    name: CurrentContentFinderConditionId
+    offset: 16556
+  - type: unsigned int
+    name: TransitionTerritoryTypeId
+    offset: 16560
+  - type: unsigned int
+    name: TransitionTerritoryFilterKey
+    offset: 16564
+  - type: unsigned int
+    name: CurrentMapId
+    offset: 16568
+  - type: float
+    name: MilisecondCounter
+    offset: 16584
+  - type: unsigned int
+    name: RuntimeSeconds
+    offset: 16588
+  - type: byte
+    name: RuntimeSecondsChanged
+    offset: 16592
+  - type: float
+    name: Runtime
+    offset: 16596
+  - type: __int64
+    name: CurrentTerritoryTypeRow
+    offset: 16600
+  - type: __int64
+    name: CurrentTerritoryIntendedUseRow
+    offset: 16608
+  - type: __int64
+    name: NextTerritoryTypeRow
+    offset: 16616
+  - type: __int64
+    name: NextTerritoryIntendedUseRow
+    offset: 16624
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF
+    return_type: byte
+    name: IsInInstanceArea
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??
+    return_type: void
+    name: QueueActiveFestivals
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+    - type: unsigned int
+      name: festival1
+    - type: unsigned int
+      name: festival2
+    - type: unsigned int
+      name: festival3
+    - type: unsigned int
+      name: festival4
+  - signature: E8 ?? ?? ?? ?? 80 63 50 FE
+    return_type: void
+    name: SetActiveFestivals
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+    - type: unsigned int
+      name: festival1
+    - type: unsigned int
+      name: festival2
+    - type: unsigned int
+      name: festival3
+    - type: unsigned int
+      name: festival4
 - type: Client::LayoutEngine::LayoutManager
   name: LayoutManager
   namespace: Client.LayoutEngine
@@ -131942,104 +132318,6 @@ structs:
     parameters:
     - type: Client::Game::Character::Character*
       name: this
-- type: Client::Game::Event::EventFramework
-  name: EventFramework
-  namespace: Client.Game.Event
-  union: False
-  size: 17568
-  fields:
-  - type: Client::Game::Event::EventHandlerModule
-    name: EventHandlerModule
-    offset: 0
-  - type: Client::Game::Event::DirectorModule
-    name: DirectorModule
-    offset: 192
-  - type: Client::Game::Event::LuaActorModule
-    name: LuaActorModule
-    offset: 352
-  - type: Client::Game::Event::EventSceneModule
-    name: EventSceneModule
-    offset: 432
-  - type: int
-    name: LoadState
-    offset: 15336
-  - type: Common::Lua::LuaState*
-    name: LuaState
-    offset: 15344
-  - type: Common::Lua::LuaThread
-    name: LuaThread
-    offset: 15352
-  - type: Client::Game::Event::EventState
-    name: EventState1
-    offset: 15440
-  - type: Client::Game::Event::EventState
-    name: EventState2
-    offset: 15536
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 0D 0F B6 CB
-    return_type: Client::Game::InstanceContent::ContentDirector*
-    name: GetContentDirector
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 0F B6 98
-    return_type: Client::Game::InstanceContent::InstanceContentDirector*
-    name: GetInstanceContentDirector
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? 00 00 83 B8 38 03 00 00 02
-    return_type: Client::Game::InstanceContent::PublicContentDirector*
-    name: GetPublicContentDirector
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40
-    return_type: Client::Game::InstanceContent::PublicContentDirector*
-    name: GetPublicContentDirectorByType
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-    - type: Client::Game::InstanceContent::PublicContentDirectorType
-      name: publicContentDirectorType
-  - signature: E8 ?? ?? ?? ?? 44 89 B7 ?? ?? ?? ?? 80 BF
-    return_type: void
-    name: InteractWithHandlerFromSelector
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-    - type: int
-      name: index
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??
-    return_type: Client::Game::Event::EventHandler*
-    name: GetEventHandlerById
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-    - type: unsigned int
-      name: id
-  - signature: 40 53 57 41 56 48 83 EC 70 48 8B 02
-    return_type: byte
-    name: CheckInteractRange
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-    - type: Client::Game::Object::GameObject*
-      name: source
-    - type: Client::Game::Object::GameObject*
-      name: target
-    - type: byte
-      name: interactionType
-    - type: byte
-      name: logErrorsToUser
-  - signature: 48 89 5C 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B D9 48 89 6C 24
-    return_type: void
-    name: SetTerritoryTypeId
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-    - type: unsigned __int16
-      name: territoryType
 - type: Client::Game::Character::Companion
   name: Companion
   namespace: Client.Game.Character
@@ -132806,6 +133084,107 @@ structs:
     parameters:
     - type: Component::GUI::AtkModule*
       name: this
+- type: Client::Game::Event::EventFramework
+  name: EventFramework
+  namespace: Client.Game.Event
+  union: False
+  size: 17568
+  fields:
+  - type: Client::Game::Event::EventHandlerModule
+    name: EventHandlerModule
+    offset: 0
+  - type: Client::Game::Event::DirectorModule
+    name: DirectorModule
+    offset: 192
+  - type: Client::Game::Event::LuaActorModule
+    name: LuaActorModule
+    offset: 352
+  - type: Client::Game::Event::EventSceneModule
+    name: EventSceneModule
+    offset: 432
+  - type: int
+    name: LoadState
+    offset: 15336
+  - type: Common::Lua::LuaState*
+    name: LuaState
+    offset: 15344
+  - type: Common::Lua::LuaThread
+    name: LuaThread
+    offset: 15352
+  - type: Client::Game::Event::EventState
+    name: EventState1
+    offset: 15440
+  - type: Client::Game::Event::EventState
+    name: EventState2
+    offset: 15536
+  - type: Client::Game::Event::DailyQuestMap
+    name: DailyQuests
+    offset: 17064
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 0D 0F B6 CB
+    return_type: Client::Game::InstanceContent::ContentDirector*
+    name: GetContentDirector
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B6 98
+    return_type: Client::Game::InstanceContent::InstanceContentDirector*
+    name: GetInstanceContentDirector
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? 00 00 83 B8 38 03 00 00 02
+    return_type: Client::Game::InstanceContent::PublicContentDirector*
+    name: GetPublicContentDirector
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40
+    return_type: Client::Game::InstanceContent::PublicContentDirector*
+    name: GetPublicContentDirectorByType
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: Client::Game::InstanceContent::PublicContentDirectorType
+      name: publicContentDirectorType
+  - signature: E8 ?? ?? ?? ?? 44 89 B7 ?? ?? ?? ?? 80 BF
+    return_type: void
+    name: InteractWithHandlerFromSelector
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??
+    return_type: Client::Game::Event::EventHandler*
+    name: GetEventHandlerById
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: unsigned int
+      name: id
+  - signature: 40 53 57 41 56 48 83 EC 70 48 8B 02
+    return_type: byte
+    name: CheckInteractRange
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: source
+    - type: Client::Game::Object::GameObject*
+      name: target
+    - type: byte
+      name: interactionType
+    - type: byte
+      name: logErrorsToUser
+  - signature: 48 89 5C 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B D9 48 89 6C 24
+    return_type: void
+    name: SetTerritoryTypeId
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: unsigned __int16
+      name: territoryType
 - type: Client::Game::Character::BattleChara
   name: BattleChara
   namespace: Client.Game.Character
