@@ -22,6 +22,8 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x250)] public uint MaxTextLength;
     [FieldOffset(0x254)] public uint MaxTextLength2; // no idea when one of these are used over the other
 
+    [FieldOffset(0x26C)] public ushort InputSanitizationFlags; // passed to SanitizeString
+
     [FieldOffset(0x280)] public Utf8String UnkText01;
     [FieldOffset(0x2E8)] public Utf8String UnkText02;
     [FieldOffset(0x350)] public Utf8String UnkText03;
