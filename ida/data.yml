@@ -117,8 +117,8 @@ functions:
   0x1400B7B10: Client::UI::GetNumberAsDigitChars # (uint) accepts numbers 0-999
   0x1400B9E60: IsHomeWorldId
   0x1400B9EC0: IsCurrentWorldId
-#fail   0x1400BA690: GetHomeWorldId
-#fail   0x1400BA6E0: GetCurrentWorldId
+  0x1400B9F50: GetHomeWorldId
+  0x1400B9FA0: GetCurrentWorldId
   0x1400BA210: AreWorldsFromSameDC
   0x1400BA2F0: AreWorldsFromSameRegion
   0x140194A10: GetTime
@@ -126,7 +126,7 @@ functions:
   0x1401D3250: j_Sleep
   0x14023AE00: GetLanguageCode
 #fail   0x1403297E0: GetGlobalTextParameter
-  0x1406E5360: std::vector_SetSize
+  0x140691F20: std::vector<Component::GUI::AtkValue>_SetSize
   0x140E92BB0: GetGameObjectByIndex
   0x1408FB180: GetRandomInteger
   0x1408FB1E0: GetRandomFloat
@@ -155,13 +155,13 @@ functions:
   0x1408197D0: IsItemStainConditionUnlocked
   0x14081A230: IsEventItemItemId
   0x1409FEF60: ExecuteCommand
-#fail   0x1400B7760: IsBoundByDuty56
+  0x1400B7240: IsBoundByDuty56
   0x1400B73C0: IsDutyRecorderPlayback
   0x1400B7420: IsInDeepDungeon
   0x1400B7470: IsInEureka
   0x1400B76A0: IsUnconscious
   0x1400B76B0: IsRolePlaying
-#fail   0x1400B7BC0: CanApplyGlamourPlates
+  0x1400B76C0: CanApplyGlamourPlates
   0x1400B77D0: IsClassJobAJob       # static, (classJobId, ClassJobExd*?) -> bool
   0x1400B7800: IsClassJobACrafter   # static, (classJobId) -> bool
   0x1400B7810: IsClassJobAGatherer  # static, (classJobId) -> bool
@@ -975,7 +975,7 @@ classes:
     funcs:
       0x14158C1A0: Initialize
       0x14158C1F0: Destroy
-#fail       0x1415FEAD0: CreateBattleCharacter
+      0x1415FEAD0: CreateBattleCharacter
       0x14158C4E0: CreateEventObject
       0x14158C5B0: CreateAreaObject
       0x14158C6A0: DeleteObjectByIndex
@@ -984,7 +984,7 @@ classes:
       0x14158CA20: GetObjectByIndex
       0x14158CB00: IsValidClientObject
       0x14158CB30: IsValidClientObjectIndex
-#fail       0x1415FF280: GetIndexByObject
+      0x1415FF280: GetIndexByObject
       0x14158CB80: SetObjectAt #(idx, object)
       0x14158CBC0: RemoveObjectAt
       0x140482630: HasObjectAt
@@ -1191,7 +1191,7 @@ classes:
       0x1415B5850: Dtor
       0x1415B6830: Initialize
       0x1415B68B0: Finalizer
-#fail       0x14160C460: GetFateById
+      0x1415B8E80: GetFateById
   Client::Game::BattleBuddyList:
     funcs:
       0x1409B57E0: GetMemberBattleCharaByIndex
@@ -1200,12 +1200,12 @@ classes:
       - ea: 0x142811F90
         pointer: False
     funcs:
-#fail       0x1408FB350: GetSingleton
+      0x140A1DF80: GetSingleton
       0x1400BAC80: IsQuestComplete # static (questId)
       0x140C29BC0: IsQuestComplete1 # (this, questId)
       0x140C29C50: IsDailyQuestComplete
       0x140C29F10: GetQuestSequence # static (questId)
-#fail       0x1409BDE50: GetQuestIndex
+      0x140C298D0: GetQuestIndex
       0x140C2A010: GetQuestClassJob
       0x140C29C90: IsQuestAccepted
       0x140C2A1D0: GetBeastTribeAllowance
@@ -1225,7 +1225,7 @@ classes:
       0x140828380: Update
       0x140828420: Clear
       0x1408284E0: RequestPrismBox
-#fail       0x140892B00: RestorePrismBoxItem
+      0x140828A70: RestorePrismBoxItem
       0x1408292D0: RequestGlamourPlates
       0x140829640: ApplyGlamourPlate
   Client::Game::CurrencyManager:
@@ -1271,27 +1271,27 @@ classes:
         pointer: False
     funcs:
       0x14082A4C0: ctor
-#fail       0x140866080: Update
-#fail       0x140867E20: GetInventoryContainer  # (this, containerId)
-#fail       0x140867E70: GetInventorySlot  # (this, containerId, slotId)
-#fail       0x140869560: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
-#fail       0x140870EF0: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
-#fail       0x140871780: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
+      0x140800A80: Update
+      0x1408028C0: GetInventoryContainer  # (this, containerId)
+      0x140802970: GetInventorySlot  # (this, containerId, slotId)
+      0x140803BF0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
+      0x14080AE00: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
+      0x14080B550: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400DA150: GetSizeByIndex # static
-#fail       0x140872AF0: GetEquippedItemIdForSlot
+      0x14080C230: GetEquippedItemIdForSlot
       0x14080F5C0: GetPermittedGearsetCount
       0x140819240: GetLimitedTomestoneCount
-#fail       0x14086FFB0: GetEmptySlotsInBag
+      0x14086FFB0: GetEmptySlotsInBag
       0x1408139F0: SendTradeRequest
-#fail       0x14087D630: GetRetainerGil
-#fail       0x1408804A0: GetFreeCompanyGil
-#fail       0x140880FB0: GetGil
-#fail       0x140881150: GetCompanySeals
+      0x140815EC0: GetRetainerGil
+      0x140818420: GetFreeCompanyGil
+      0x140818E90: GetGil
+      0x140818F80: GetCompanySeals
       0x140819000: GetMaxCompanySeals
-#fail       0x140881360: GetTomestoneCount
-#fail       0x1408815A0: GetWolfMarks
-#fail       0x1408816A0: GetAlliedSeals
-#fail       0x1408817A0: GetGoldSaucerCoin
+      0x140881360: GetTomestoneCount
+      0x140819370: GetWolfMarks
+      0x1408193E0: GetAlliedSeals
+      0x140819450: GetGoldSaucerCoin
       0x14081D040: GetUIModule # don't ask
       0x140967F20: GetSpecialItemId #static
       0x1408192B0: GetLimitedTomestoneWeeklyLimit #static
@@ -1332,7 +1332,7 @@ classes:
       0x1407FF1C0: GetStain
       0x1407FF290: GetMateriaCount
       0x14082B980: GetCrafterContentId
-#fail       0x140887E30: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
+      0x140887E30: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
   Client::Game::InventoryContainer:
     vtbls:
       - ea: 0x141F7D798
@@ -2877,8 +2877,10 @@ classes:
   Client::System::Framework::Framework:
     instances:
       - ea: 0x142620018
+        pointer: True
       - ea: 0x142621DD8
         name: InstancePointer2
+        pointer: True
     vtbls:
       - ea: 0x141F0B3F8
     vfuncs:
@@ -4820,8 +4822,8 @@ classes:
       0x140285E60: ctor
       0x140288530: HandleLogout
 #fail      0x140B14D50: Finalizer
-#fail       0x1402D1010: UpdateLobbyUIStage
-#fail       0x1402D1EB0: UpdateCharaSelectDisplay
+      0x14028C680: UpdateLobbyUIStage
+      0x14028D770: UpdateCharaSelectDisplay
       0x14028F780: SetDataCenter
       0x1402937D0: OpenTitle
 #fail       0x1402D8270: OpenTitleDCWorldMap
@@ -4831,7 +4833,7 @@ classes:
       0x1402961D0: OpenCharaSelect
       0x140296B10: OpenCharaMakeDataImport
       0x1402978D0: OpenCreateNewCharacterDialog
-      0x140339E40: OpenLoginWaitDialog
+#      0x140339E40: OpenLoginWaitDialog
 #fail       0x1402DD020: OpenLobbyScreenText
       0x140299AA0: CloseDialog
       0x14029A7B0: ShowCharacterNotFoundWarning
@@ -5913,7 +5915,7 @@ classes:
       0x1405F2930: Clear
       0x1405F2A10: RegisterEvent
       0x1405F2A50: UnregisterEvent
-#fail       0x140627830: SetValues
+      0x1405F2AA0: SetValues
       0x1405F2C30: AddAnimation
       0x1405F2E10: GetNodeValue
       0x1405F2FA0: SetNodeValue
@@ -7035,6 +7037,9 @@ classes:
     vtbls:
       - ea: 0x141F75488
         base: Client::System::Input::InputData
+    funcs:
+      0x1405E0F20: GetKeyboardInputs
+      0x1405E0F30: GetUIFilteredCursorInputs
   Client::UI::UIInputData:
     vtbls:
       - ea: 0x141F75518
@@ -7648,7 +7653,7 @@ classes:
     vtbls:
       - ea: 0x142096D18 # maybe platform-specific implementation?
     funcs:
-#fail       0x140936460: GetBlockResultType
+      0x1408B4250: GetBlockResultType
       0x14164FC30: IsCharacterBlocked
 #fail       0x140936630: GetReplacementName # returns a Utf8String* to the set name that should be displayed instead of the character name
 #fail       0x140936BE0: GetUnknownName # returns a Utf8String* to "Unknown"
@@ -7893,13 +7898,13 @@ classes:
       0x1407A16A0: AddHistoryEntry
   Client::UI::Misc::RecommendEquipModule:
     funcs:
-#fail       0x1407FCA90: Setup # (this, race, sex, level, classJob, grandCompany, pvpRank) # no xrefs
-#fail       0x1407FCD90: ctor
-#fail       0x1407FCE50: Update
+      0x14091EB60: Setup # (this, race, sex, level, classJob, grandCompany, pvpRank) # no xrefs
+      0x14091EDF0: ctor
+      0x14091EEB0: Update
       # 0x1406BEF90: SetupFromPlayerState # inlined in SetupForClassJob
-#fail       0x1407FD380: SetupForClassJob
-#fail       0x1407FD560: Clear
-#fail       0x1407FD5C0: EquipRecommendedGear
+      0x14091F480: SetupForClassJob
+      0x14091F670: Clear
+      0x14091F6D0: EquipRecommendedGear
   Client::UI::Misc::RetainerCommentModule:
     vtbls:
       - ea: 0x141F7C0C0
@@ -7928,7 +7933,7 @@ classes:
   Client::UI::Misc::BannerModuleEntry:
     funcs:
       0x1407993B0: ctor
-#fail       0x1407A3180: EqualTo
+      0x1407994D0: EqualTo
       0x1409AC010: GenerateChecksum # static
   Client::UI::Misc::CharaView:
     vtbls:
@@ -7952,7 +7957,7 @@ classes:
   Client::UI::Misc::CharaViewCharacterData:
     funcs:
       0x1418AC3A0: ctor
-#fail       0x141868690: ImportLocalPlayerEquipment
+      0x1418AC3E0: ImportLocalPlayerEquipment
   Client::UI::Misc::SupportModule:
     vtbls:
       - ea: 0x141F86B20
@@ -8899,7 +8904,7 @@ classes:
       0x140E53630: Finalizer
       0x140E59960: SetTabName
       0x140E5BF50: InsertTextCommandParam
-#fail       0x140EF8200: LinkItem
+      0x140E5C8B0: LinkItem
       0x140E5DF20: ChangeChannelName
       0x140E5F010: HideLogWindow
   Client::UI::Agent::AgentInventory:
@@ -8924,7 +8929,7 @@ classes:
       0x140251120: UseItem
       0x140251AF0: UnblockItemSlot
       0x1402506A0: OpenForItemSlot
-#fail       0x1402984E0: DiscardItem
+      0x1402509E0: DiscardItem
       0x1402525A0: LowerItemQuality
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
@@ -11098,7 +11103,7 @@ classes:
     funcs:
       0x140DD8550: ctor
       0x140DD8640: Finalizer
-#fail       0x140E76520: OnItemHovered
+      0x140DDABB0: OnItemHovered
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
       - ea: 0x141FA3028
