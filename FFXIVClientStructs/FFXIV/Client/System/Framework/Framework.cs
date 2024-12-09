@@ -169,5 +169,5 @@ public unsafe partial struct Framework {
     /// </summary>
     /// <returns>Returns <c>true</c> if the API was initialized successfully, false otherwise.</returns>
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC 40 02 00 00 48 8B 05")]
-    public partial byte SetupSteamApi();
+    public partial bool SetupSteamApi();
 }
