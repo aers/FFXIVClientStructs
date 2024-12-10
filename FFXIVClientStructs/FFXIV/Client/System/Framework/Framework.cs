@@ -160,4 +160,14 @@ public unsafe partial struct Framework {
     /// <returns>Returns true if the API is ready, false otherwise.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 88 43 08 84 C0 74 16")]
     public partial bool IsSteamApiInitialized();
+
+    /// <summary>
+    /// Set up the Steam API for the current game instance. This is automatically called when `IsSteam=1` is passed to the game,
+    /// but can be called manually in certain cases. Note that this function *will* re-initialize the Steam API, so ensure that
+    /// the state is checked via <see cref="IsSteamApiInitialized"/> before calling it. This method will also set
+    /// <see cref="IsSteamGame"/> to true, though this seemingly has no effect (??).
+    /// </summary>
+    /// <returns>Returns <c>true</c> if the API was initialized successfully, false otherwise.</returns>
+    [MemberFunction("48 89 5C 24 ?? 57 48 81 EC 40 02 00 00 48 8B 05")]
+    public partial bool SetupSteamApi();
 }
