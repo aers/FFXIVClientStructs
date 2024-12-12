@@ -42,7 +42,7 @@ public unsafe partial struct SteamApi {
     [FieldOffset(0x4C0)] public GamepadTextInputDismissedCallback GamepadTextInputDismissedCallback;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 8B CB 48 89 9F")]
-    public partial void Ctor();
+    public partial SteamApi* Ctor();
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 FF 15 ?? ?? ?? ?? 48 8D 8B")]
     public partial void Dtor();
