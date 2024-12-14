@@ -7056,7 +7056,7 @@ classes:
       0x1407345F0: Finalizer
       0x14079C3C0: ctor
       0x1407B5DE0: MjiCreateWorkshopPreset
-  Client::UI::Misc::RaptureUiDataModuleMuteList:
+  Client::UI::Misc::RaptureUiDataModule::MuteList:
     funcs:
       0x1407A07A0: GetByAccountId
       0x1407A07D0: Add # creates an entry by accountId, name, worldId and adds it to the vector
