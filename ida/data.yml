@@ -7436,6 +7436,24 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407B19B0: ctor
+  Client::UI::Misc::TermFilterModule:
+    vtbls:
+      - ea: 0x141F7C440
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407B31A0: ctor
+      0x1407B3690: IsEntryNotEmpty
+      0x1407B36D0: IsEntryEmpty
+      0x1407B3700: IsValidIndex
+      0x1407B3720: SetEntry
+      0x1407B3770: ClearEntry
+      0x1407B37B0: GetEntry
+      0x1407B37E0: ClearAllEntries
+      0x1407B3970: IsMessageFiltered
+  Client::UI::Misc::TermFilterModule::TermFilterEntry:
+    funcs:
+      0x1407B3170: ctor
+      0x1407B36C0: HasTerm
   Client::UI::Misc::PartyRoleListModule:
     vtbls:
       - ea: 0x141F7C520
@@ -11608,6 +11626,8 @@ classes:
     vtbls:
       - ea: 0x141F3B800
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140350750: UpdateAddon
   Client::UI::Agent::AgentHousingInteriorPattern:
     vtbls:
       - ea: 0x1420864C8
@@ -15919,8 +15939,6 @@ classes:
   Client::UI::AddonJobHudRPM1::PaletteGaugeSimple::PaintStacksSimple:
     vtbls:
       - ea: 0x14205D7A8
-
-
   Client::UI::AddonJobHudRRP0:
     vtbls:
       - ea: 0x14205BE28
