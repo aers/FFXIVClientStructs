@@ -13,7 +13,8 @@ public unsafe partial struct TermFilterModule {
         return uiModule == null ? null : uiModule->GetTermFilterModule();
     }
 
-    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray10<TermFilterEntry> _termFilters;
+    [FieldOffset(0x49)] public TermFilterSetting Setting;
+    [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray10<TermFilterEntry> _termFilters;
     [FieldOffset(0x18A)] public bool TermFiltersEnabled;
 
     [MemberFunction("45 84 C9 74 16 45 85 C0")]
@@ -37,5 +38,10 @@ public unsafe partial struct TermFilterModule {
         Shout = 1 << 2,
         Tell = 1 << 3,
         CustomEmotes = 1 << 4,
+    }
+
+    public enum TermFilterSetting : byte {
+        DisplayFilterNumber = 0,
+        HideMessageEntirety = 1,
     }
 }
