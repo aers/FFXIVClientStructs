@@ -9118,6 +9118,9 @@ classes:
     funcs:
       0x1402D07A0: HandleCommentUpdate
       0x1402CFD90: HandleRemove
+      0x1402CFC10: Add
+      0x1402CFD90: Remove
+      0x1402CFF50: IsMuted
   Client::UI::Agent::AgentFriendlist:
     vtbls:
       - ea: 0x141F38690
