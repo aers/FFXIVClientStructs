@@ -11627,6 +11627,7 @@ classes:
       - ea: 0x141F3B800
         base: Client::UI::Agent::AgentInterface
     funcs:
+      0x140350340: OpenNewFilterWindow
       0x140350750: UpdateAddon
   Client::UI::Agent::AgentHousingInteriorPattern:
     vtbls:
