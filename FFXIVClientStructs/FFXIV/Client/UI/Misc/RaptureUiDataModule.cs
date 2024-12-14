@@ -1,8 +1,9 @@
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
-// Client::UI::RaptureUiDataModule
+// Client::UI::Misc::RaptureUiDataModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
@@ -17,6 +18,8 @@ public unsafe partial struct RaptureUiDataModule {
     [FieldOffset(0x500), FixedSizeArray, Obsolete("Moved to PartyRoleListModule", true)] internal FixedSizeArray16<ushort> _partyListHealerOrder;
     [FieldOffset(0x520), FixedSizeArray, Obsolete("Moved to PartyRoleListModule", true)] internal FixedSizeArray16<ushort> _partyListDpsOrder;
 
+    [FieldOffset(0x38C0)] public RaptureUiDataModuleMuteList MuteList;
+
     [MemberFunction("4C 8B D1 41 83 F9 06")]
     public partial void MjiCreateWorkshopPreset(uint presetIndex, uint* mjiCraftWorksObjectList, uint listCount);
 
@@ -28,5 +31,40 @@ public unsafe partial struct RaptureUiDataModule {
         for (i = 0; i < mjiCraftWorksObjectList.Length && i < 6; i++) list[i] = mjiCraftWorksObjectList[i];
         for (; i < 6; i++) list[i] = 0;
         MjiCreateWorkshopPreset(presetIndex, list, (uint)mjiCraftWorksObjectList.Length);
+    }
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+public unsafe partial struct RaptureUiDataModuleMuteList {
+    public static RaptureUiDataModuleMuteList* Instance() {
+        var module = RaptureUiDataModule.Instance();
+        return module == null ? null : &module->MuteList;
+    }
+
+    [FieldOffset(0x00)] public StdVector<MuteListEntry> Entries;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 75 1F")]
+    public partial MuteListEntry* GetByAccountId(ulong accountId);
+
+    /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B 11 48 85 C0"), GenerateStringOverloads]
+    public partial MuteListEntry* Add(ulong accountId, byte* name, short worldId);
+
+    /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1B 49 8B 4E 10")]
+    public partial bool Remove(ulong accountId);
+
+    /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>
+    [MemberFunction("40 53 48 83 EC 20 48 8B 19 48 8B 41 08"), GenerateStringOverloads]
+    public partial MuteListEntry* UpdateComment(ulong accountId, byte* comment);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
+    public struct MuteListEntry {
+        [FieldOffset(0x00)] public ulong AccountId;
+        [FieldOffset(0x08)] public short WorldId;
+
+        [FieldOffset(0x10)] public Utf8String CharacterName;
+        [FieldOffset(0x78)] public Utf8String Comment;
     }
 }
