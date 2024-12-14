@@ -45,6 +45,7 @@ public unsafe partial struct AgentContext {
 
     [FieldOffset(0x17C8)] public void* UpdateChecker; // AgentContextUpdateChecker*, if handler returns false the menu closes
     [FieldOffset(0x17D0)] public long UpdateCheckerParam; //objectid of the target or list index of an addon or other things
+    [FieldOffset(0x17D8)] public BlockFunctionsFlag ContextMenuBlockFunctionsFlags;
     [FieldOffset(0x17D9)] public byte ContextMenuIndex;
     [FieldOffset(0x17DA)] public byte OpenAtPosition; // if true menu opens at Position else at cursor location
 
@@ -86,6 +87,14 @@ public unsafe partial struct AgentContext {
         Position.X = x;
         Position.Y = y;
         OpenAtPosition = 1;
+    }
+
+    [Flags]
+    public enum BlockFunctionsFlag : byte {
+        None = 0,
+        Blacklisted = 1 << 0,
+        Muted = 1 << 1,
+        TermFiltered = 1 << 2
     }
 }
 
