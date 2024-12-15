@@ -49,4 +49,13 @@ public enum DataSegment : byte {
     VVDNOTE = 0x1A,
     VVDACT = 0x1B,
     TOFU = 0x1C,
+    FISHING = 0x1D,
+    ACTION = 0x1E,
+    TFILTER = 0x1F,
+    READYC = 0x20,
+    PTRLST = 0x21,
+    CATSBM = 0x22,
+    DESCRI = 0x23,
+    MJICWSP = 0x24,
+    PERFORM = 0x25,
 }
