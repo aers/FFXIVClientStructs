@@ -7048,14 +7048,21 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x140717CF0: ctor # unused, inlined @ 0x14075CD19
-  Client::UI::RaptureUiDataModule:
+  Client::UI::Misc::RaptureUiDataModule:
     vtbls:
       - ea: 0x141F75DB8
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407345F0: Finalizer
-#fail       0x1407F4160: ctor
+      0x14079C3C0: ctor
       0x1407B5DE0: MjiCreateWorkshopPreset
+  Client::UI::Misc::RaptureUiDataModule::MuteList:
+    funcs:
+      0x1407A07A0: GetByAccountId
+      0x1407A07D0: Add # creates an entry by accountId, name, worldId and adds it to the vector
+      0x1407B9DF0: AddEntry # adds an existing entry to the vector
+      0x1407A08B0: Remove
+      0x1407A09A0: UpdateComment
   Client::UI::Misc::InputTimerModule:
     vtbls:
       - ea: 0x141F75E98
@@ -9126,6 +9133,10 @@ classes:
     vtbls:
       - ea: 0x141F385E8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1402CFC10: Add
+      0x1402CFD90: Remove
+      0x1402CFF50: IsMuted
   Client::UI::Agent::AgentFriendlist:
     vtbls:
       - ea: 0x141F38690
