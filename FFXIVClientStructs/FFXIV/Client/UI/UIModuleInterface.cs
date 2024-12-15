@@ -75,7 +75,7 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(64)] public partial TofuModule* GetTofuModule();
     // [VirtualFunction(65)] public partial FishingModule* GetFishingModule();
     // [VirtualFunction(66)] public partial ACTION* GetACTION();
-    // [VirtualFunction(67)] public partial TFILTER* GetTFILTER();
+    [VirtualFunction(67)] public partial TermFilterModule* GetTermFilterModule();
     // [VirtualFunction(68)] public partial READYC* GetREADYC();
     [VirtualFunction(69)] public partial PartyRoleListModule* GetPartyRoleListModule();
     // [VirtualFunction(70)] public partial CATSBM* GetCATSBM();
