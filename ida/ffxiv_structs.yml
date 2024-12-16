@@ -25,6 +25,7 @@ enums:
     "MouseMove": 5
     "MouseOver": 6
     "MouseOut": 7
+    "MouseWheel": 8
     "MouseClick": 9
     "InputReceived": 12
     "FocusStart": 18
@@ -32,6 +33,7 @@ enums:
     "ButtonPress": 23
     "ButtonRelease": 24
     "ButtonClick": 25
+    "SliderValueUpdate": 29
     "ListItemRollOver": 33
     "ListItemRollOut": 34
     "ListItemToggle": 35
@@ -683,6 +685,13 @@ enums:
     "EditMode": 32768
     "LeftSideFocus": 20
     "RightSideFocus": 40
+- type: Client::UI::Misc::TermFilterModule::TermFilterSetting
+  name: TermFilterSetting
+  underlying: byte
+  namespace: Client.UI.Misc
+  values:
+    "DisplayFilterNumber": 0
+    "HideMessageEntirety": 1
 - type: Client::UI::Info::InfoProxyId
   name: InfoProxyId
   underlying: unsigned int
@@ -919,6 +928,15 @@ enums:
     "None": 0
     "Roulette": 1
     "Regular": 2
+- type: Client::UI::Agent::AgentContext::BlockFunctionsFlag
+  name: BlockFunctionsFlag
+  underlying: byte
+  namespace: Client.UI.Agent
+  values:
+    "None": 0
+    "Blacklisted": 1
+    "Muted": 2
+    "TermFiltered": 4
 - type: Client::UI::Agent::AgentId
   name: AgentId
   underlying: unsigned int
@@ -2472,6 +2490,14 @@ enums:
     "ShroudAttacking": 1
     "ShroudActive": 2
     "ShroudLoading": 256
+- type: Component::GUI::AtkEventData::AtkMouseData::ModifierFlag
+  name: ModifierFlag
+  underlying: byte
+  namespace: Component.GUI
+  values:
+    "Ctrl": 1
+    "Alt": 2
+    "Shift": 4
 - type: Client::UI::UIObjectKind
   name: UIObjectKind
   underlying: byte
@@ -3562,6 +3588,17 @@ enums:
     "VisorEnabled": 32
     "Unknown40": 64
     "Unknown80": 128
+- type: Client::UI::Misc::TermFilterModule::TermFilterChannelFlag
+  name: TermFilterChannelFlag
+  underlying: byte
+  namespace: Client.UI.Misc
+  values:
+    "None": 0
+    "Say": 1
+    "Yell": 2
+    "Shout": 4
+    "Tell": 8
+    "CustomEmotes": 16
 - type: Client::UI::Info::InfoProxyCommonList::CharacterData::Language
   name: Language
   underlying: byte
@@ -13765,6 +13802,20 @@ structs:
   union: False
   fields: []
   member_functions: []
+- type: Client::UI::Misc::TermFilterModule::TermFilterEntry
+  name: TermFilterEntry
+  namespace: Client.UI.Misc
+  union: False
+  size: 32
+  fields:
+  - type: byte
+    name: Term
+    offset: 0
+    size: 31
+  - type: Client::UI::Misc::TermFilterModule::TermFilterChannelFlag
+    name: ChannelFlag
+    offset: 31
+  member_functions: []
 - type: Client::UI::Misc::UIModuleHelpers
   name: UIModuleHelpers
   namespace: Client.UI.Misc
@@ -14442,6 +14493,12 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
+  - name: GetTermFilterModule
+    offset: 536
+    return_type: Client::UI::Misc::TermFilterModule*
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
   - name: GetPartyRoleListModule
     offset: 552
     return_type: Client::UI::Misc::PartyRoleListModule*
@@ -14912,8 +14969,6 @@ structs:
     offset: 520
   - name: GetACTION
     offset: 528
-  - name: GetTFILTER
-    offset: 536
   - name: GetREADYC
     offset: 544
   - name: GetCATSBM
@@ -17372,6 +17427,73 @@ structs:
     - type: Component::GUI::AtkDragDropInterface*
       name: this
   member_functions: []
+- type: Component::GUI::AtkEventData::AtkAddonControlData
+  name: AtkAddonControlData
+  namespace: Component.GUI
+  union: False
+  size: 40
+  fields:
+  - type: Component::GUI::AtkUnitBase*
+    name: UnitBase
+    offset: 0
+  member_functions: []
+- type: Component::GUI::AtkEventData::AtkDragDropData
+  name: AtkDragDropData
+  namespace: Component.GUI
+  union: False
+  size: 40
+  fields:
+  - type: Component::GUI::AtkDragDropInterface*
+    name: DragDropInterface
+    offset: 0
+  - type: Component::GUI::AtkComponentNode*
+    name: ComponentNode
+    offset: 8
+  - type: byte
+    name: Unk10
+    offset: 16
+  - type: byte
+    name: Unk11
+    offset: 17
+  - type: int
+    name: Unk12
+    offset: 18
+  - type: __int16
+    name: Unk16
+    offset: 22
+  - type: __int64
+    name: Unk18
+    offset: 24
+  - type: __int64
+    name: Unk20
+    offset: 32
+  member_functions: []
+- type: Component::GUI::AtkEventData::AtkFocusData
+  name: AtkFocusData
+  namespace: Component.GUI
+  union: False
+  size: 40
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: ResNode
+    offset: 0
+  - type: Component::GUI::AtkCollisionNode*
+    name: CollisionNode
+    offset: 8
+  member_functions: []
+- type: Component::GUI::AtkEventData::AtkInputData
+  name: AtkInputData
+  namespace: Component.GUI
+  union: False
+  size: 40
+  fields:
+  - type: int
+    name: InputId
+    offset: 0
+  - type: byte
+    name: Unk4
+    offset: 4
+  member_functions: []
 - type: Component::GUI::AtkEventData::AtkListItemData
   name: AtkListItemData
   namespace: Component.GUI
@@ -17383,6 +17505,40 @@ structs:
     offset: 0
   - type: int
     name: SelectedIndex
+    offset: 16
+  member_functions: []
+- type: Component::GUI::AtkEventData::AtkMouseData
+  name: AtkMouseData
+  namespace: Component.GUI
+  union: False
+  size: 40
+  fields:
+  - type: __int16
+    name: PosX
+    offset: 0
+  - type: __int16
+    name: PosY
+    offset: 2
+  - type: __int16
+    name: WheelDirection
+    offset: 4
+  - type: byte
+    name: IsRightClick
+    offset: 6
+  - type: Component::GUI::AtkEventData::AtkMouseData::ModifierFlag
+    name: Modifier
+    offset: 7
+  - type: int
+    name: Unk8
+    offset: 8
+  - type: __int16
+    name: UnkC
+    offset: 12
+  - type: __int16
+    name: Unk0E
+    offset: 14
+  - type: __int16
+    name: Unk10
     offset: 16
   member_functions: []
 - type: Component::GUI::AtkEventListener
@@ -20406,6 +20562,21 @@ structs:
     name: Last
     offset: 8
   - type: Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry*
+    name: First
+    offset: 0
+  - type: Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry*
+    name: Last
+    offset: 8
+  - type: Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry*
     name: End
     offset: 16
   member_functions: []
@@ -31799,106 +31970,25 @@ structs:
     - type: byte
       name: a2
   member_functions: []
-- type: Client::UI::Misc::RaptureUiDataModule
-  name: RaptureUiDataModule
+- type: Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry
+  name: MuteListEntry
   namespace: Client.UI.Misc
   union: False
-  size: 14552
+  size: 224
   fields:
-  - type: Client::UI::Misc::UserFileManager::UserFileEvent
-    name: UserFileEvent
+  - type: unsigned __int64
+    name: AccountId
     offset: 0
-    base: true
-  virtual_functions:
-  - name: ReadFile
+  - type: __int16
+    name: WorldId
     offset: 8
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte*
-      name: a3
-    - type: unsigned __int16
-      name: a4
-    - type: unsigned int
-      name: a5
-  - name: WriteFile
+  - type: Client::System::String::Utf8String
+    name: CharacterName
     offset: 16
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: GetFileSize
-    offset: 40
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-  - name: GetDataSize
-    offset: 48
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-  - name: GetFileVersion
-    offset: 56
-    return_type: unsigned __int16
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-  - name: GetFileType
-    offset: 64
-    return_type: unsigned __int16
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-  - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-  - name: GetIsSavePending
-    offset: 88
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-  - name: SetCharacterContentId
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-    - type: unsigned __int64
-      name: a2
-  - name: SaveFile
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 4C 8B D1 41 83 F9 06
-    return_type: void
-    name: MjiCreateWorkshopPreset
-    parameters:
-    - type: Client::UI::Misc::RaptureUiDataModule*
-      name: this
-    - type: unsigned int
-      name: presetIndex
-    - type: unsigned int*
-      name: mjiCraftWorksObjectList
-    - type: unsigned int
-      name: listCount
+  - type: Client::System::String::Utf8String
+    name: Comment
+    offset: 120
+  member_functions: []
 - type: Client::UI::Misc::RecipeFavoriteModule::CraftingTypeEntry
   name: CraftingTypeEntry
   namespace: Client.UI.Misc
@@ -33182,19 +33272,6 @@ structs:
       name: this
     - type: byte
       name: forced
-- type: Component::GUI::AtkEventData
-  name: AtkEventData
-  namespace: Component.GUI
-  union: True
-  size: 40
-  fields:
-  - type: Component::GUI::AtkEventData::AtkListItemData
-    name: ListItemData
-    offset: 0
-  - type: Component::GUI::LinkData*
-    name: LinkData
-    offset: 0
-  member_functions: []
 - type: Component::GUI::AtkFontAnalyzerBuildLink
   name: AtkFontAnalyzerBuildLink
   namespace: Component.GUI
@@ -36220,6 +36297,15 @@ structs:
   union: False
   fields:
   - type: StdVector<Client::UI::Misc::ItemOrderModuleSorterSortFunctionEntry, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdVector<Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -44992,6 +45078,112 @@ structs:
       name: this
     - type: byte
       name: index
+- type: Client::UI::Agent::AgentTermFilter
+  name: AgentTermFilter
+  namespace: Client.UI.Agent
+  union: False
+  size: 160
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4B 8B 8C C8
+    return_type: void
+    name: OpenNewFilterWindow
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+    - type: byte*
+      name: message
 - type: Client::UI::Agent::BalloonInfo
   name: BalloonInfo
   namespace: Client.UI.Agent
@@ -46036,6 +46228,54 @@ structs:
     offset: 0
     size: 18
   member_functions: []
+- type: Client::UI::Misc::RaptureUiDataModule::MuteList
+  name: MuteList
+  namespace: Client.UI.Misc
+  union: False
+  size: 24
+  fields:
+  - type: StdVector<Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry>
+    name: Entries
+    offset: 0
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8D 75 1F
+    return_type: Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry*
+    name: GetByAccountId
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule::MuteList*
+      name: this
+    - type: unsigned __int64
+      name: accountId
+  - signature: E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B 11 48 85 C0
+    return_type: Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry*
+    name: Add
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule::MuteList*
+      name: this
+    - type: unsigned __int64
+      name: accountId
+    - type: byte*
+      name: name
+    - type: __int16
+      name: worldId
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 1B 49 8B 4E 10
+    return_type: byte
+    name: Remove
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule::MuteList*
+      name: this
+    - type: unsigned __int64
+      name: accountId
+  - signature: 40 53 48 83 EC 20 48 8B 19 48 8B 41 08
+    return_type: Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry*
+    name: UpdateComment
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule::MuteList*
+      name: this
+    - type: unsigned __int64
+      name: accountId
+    - type: byte*
+      name: comment
 - type: Client::UI::Misc::RetainerCommentModule
   name: RetainerCommentModule
   namespace: Client.UI.Misc
@@ -46146,6 +46386,124 @@ structs:
       name: this
     - type: unsigned __int64
       name: retainerId
+- type: Client::UI::Misc::TermFilterModule
+  name: TermFilterModule
+  namespace: Client.UI.Misc
+  union: False
+  size: 400
+  fields:
+  - type: Client::UI::Misc::UserFileManager::UserFileEvent
+    name: UserFileEvent
+    offset: 0
+    base: true
+  - type: Client::UI::Misc::TermFilterModule::TermFilterSetting
+    name: Setting
+    offset: 73
+  - type: Client::UI::Misc::TermFilterModule::TermFilterEntry
+    name: TermFilters
+    offset: 74
+    size: 10
+  - type: byte
+    name: TermFiltersEnabled
+    offset: 394
+  virtual_functions:
+  - name: ReadFile
+    offset: 8
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte*
+      name: a3
+    - type: unsigned __int16
+      name: a4
+    - type: unsigned int
+      name: a5
+  - name: WriteFile
+    offset: 16
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: GetFileSize
+    offset: 40
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+  - name: GetDataSize
+    offset: 48
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+  - name: GetFileVersion
+    offset: 56
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+  - name: GetFileType
+    offset: 64
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+  - name: GetHasChanges
+    offset: 80
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+  - name: GetIsSavePending
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+    - type: unsigned __int64
+      name: a2
+  - name: SaveFile
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 45 84 C9 74 16 45 85 C0
+    return_type: int
+    name: SetEntry
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+    - type: Client::UI::Misc::TermFilterModule::TermFilterEntry*
+      name: entry
+    - type: int
+      name: index
+    - type: byte
+      name: skipIfNotEmpty
+  - signature: 85 D2 78 2D 83 FA 0A
+    return_type: int
+    name: ClearEntry
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+    - type: int
+      name: index
 - type: Client::UI::RaptureAtkModule::CrystalCache
   name: CrystalCache
   namespace: Client.UI
@@ -51180,7 +51538,37 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? EB 32 E8 ?? ?? ?? ?? 84 C0
+    return_type: byte
+    name: Add
+    parameters:
+    - type: Client::UI::Agent::AgentMutelist*
+      name: this
+    - type: unsigned __int64
+      name: accountId
+    - type: unsigned __int64
+      name: contentId
+    - type: byte*
+      name: name
+    - type: __int16
+      name: worldId
+  - signature: E8 ?? ?? ?? ?? 8B 54 24 50 48 8B CB E8
+    return_type: byte
+    name: Remove
+    parameters:
+    - type: Client::UI::Agent::AgentMutelist*
+      name: this
+    - type: unsigned __int64
+      name: accountId
+  - signature: E8 ?? ?? ?? ?? 44 0F B6 4E ?? 4C 8D 66 32
+    return_type: byte
+    name: IsMuted
+    parameters:
+    - type: Client::UI::Agent::AgentMutelist*
+      name: this
+    - type: unsigned __int64
+      name: accountId
 - type: Client::UI::Agent::AgentQuestJournal
   name: AgentQuestJournal
   namespace: Client.UI.Agent
@@ -54557,22 +54945,6 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
-- type: Component::GUI::AtkEventDispatcher::Event
-  name: Event
-  namespace: Component.GUI
-  union: False
-  size: 48
-  fields:
-  - type: Component::GUI::AtkEventState
-    name: State
-    offset: 0
-  - type: unsigned int
-    name: UnkFlags
-    offset: 4
-  - type: Component::GUI::AtkEventData
-    name: EventData
-    offset: 8
-  member_functions: []
 - type: Component::GUI::AtkSimpleTween
   name: AtkSimpleTween
   namespace: Component.GUI
@@ -60024,6 +60396,109 @@ structs:
     name: PreviousOrderArray
     offset: 88
   member_functions: []
+- type: Client::UI::Misc::RaptureUiDataModule
+  name: RaptureUiDataModule
+  namespace: Client.UI.Misc
+  union: False
+  size: 14552
+  fields:
+  - type: Client::UI::Misc::UserFileManager::UserFileEvent
+    name: UserFileEvent
+    offset: 0
+    base: true
+  - type: Client::UI::Misc::RaptureUiDataModule::MuteList
+    name: Mutelist
+    offset: 14528
+  virtual_functions:
+  - name: ReadFile
+    offset: 8
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte*
+      name: a3
+    - type: unsigned __int16
+      name: a4
+    - type: unsigned int
+      name: a5
+  - name: WriteFile
+    offset: 16
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: GetFileSize
+    offset: 40
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+  - name: GetDataSize
+    offset: 48
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+  - name: GetFileVersion
+    offset: 56
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+  - name: GetFileType
+    offset: 64
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+  - name: GetHasChanges
+    offset: 80
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+  - name: GetIsSavePending
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+    - type: unsigned __int64
+      name: a2
+  - name: SaveFile
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 4C 8B D1 41 83 F9 06
+    return_type: void
+    name: MjiCreateWorkshopPreset
+    parameters:
+    - type: Client::UI::Misc::RaptureUiDataModule*
+      name: this
+    - type: unsigned int
+      name: presetIndex
+    - type: unsigned int*
+      name: mjiCraftWorksObjectList
+    - type: unsigned int
+      name: listCount
 - type: Client::UI::RaptureAtkUnitManager
   name: RaptureAtkUnitManager
   namespace: Client.UI
@@ -67822,6 +68297,34 @@ structs:
     parameters:
     - type: Component::GUI::AtkCounterNode*
       name: this
+- type: Component::GUI::AtkEventData
+  name: AtkEventData
+  namespace: Component.GUI
+  union: True
+  size: 40
+  fields:
+  - type: Component::GUI::AtkEventData::AtkMouseData
+    name: MouseData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkInputData
+    name: InputData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkFocusData
+    name: FocusData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkListItemData
+    name: ListItemData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkDragDropData
+    name: DragDropData
+    offset: 0
+  - type: Component::GUI::LinkData*
+    name: LinkData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkAddonControlData
+    name: AddonControlData
+    offset: 0
+  member_functions: []
 - type: Component::GUI::AtkTextNode
   name: AtkTextNode
   namespace: Component.GUI
@@ -72050,6 +72553,9 @@ structs:
   - type: unsigned int
     name: MaxTextLength2
     offset: 596
+  - type: unsigned __int16
+    name: InputSanitizationFlags
+    offset: 620
   - type: Client::System::String::Utf8String
     name: UnkText01
     offset: 640
@@ -73830,6 +74336,22 @@ structs:
       name: this
     - type: int
       name: value
+- type: Component::GUI::AtkEventDispatcher::Event
+  name: Event
+  namespace: Component.GUI
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AtkEventState
+    name: State
+    offset: 0
+  - type: unsigned int
+    name: UnkFlags
+    offset: 4
+  - type: Component::GUI::AtkEventData
+    name: EventData
+    offset: 8
+  member_functions: []
 - type: Animation::Mapper::hkaSkeletonMapperData
   name: hkaSkeletonMapperData
   namespace: Animation.Mapper
@@ -74853,6 +75375,9 @@ structs:
   - type: __int64
     name: UpdateCheckerParam
     offset: 6096
+  - type: Client::UI::Agent::AgentContext::BlockFunctionsFlag
+    name: ContextMenuBlockFunctionsFlags
+    offset: 6104
   - type: byte
     name: ContextMenuIndex
     offset: 6105
@@ -99628,6 +100153,330 @@ structs:
       name: this
     - type: int
       name: tab
+- type: Client::UI::AddonChatLog
+  name: AddonChatLog
+  namespace: Client.UI
+  union: False
+  size: 2872
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: byte
+    name: TabIndex
+    offset: 684
+  - type: byte
+    name: TabCount
+    offset: 685
+  - type: Client::System::String::Utf8String
+    name: TabNames
+    offset: 688
+    size: 5
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: ShouldIgnoreInputs
+    offset: 176
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: GetRootNode
+    offset: 184
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: GetWindowBounds
+    offset: 208
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 232
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: Focus
+    offset: 288
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: Initialize
+    offset: 320
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: Finalizer
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: Update
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 360
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 384
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 400
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 408
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 424
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: OnMouseOver
+    offset: 488
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: OnMouseOut
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  - name: IsFullyLoaded
+    offset: 520
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
+  member_functions: []
 - type: Client::UI::AddonDtr
   name: AddonDtr
   namespace: Client.UI
@@ -115223,6 +116072,12 @@ structs:
   - signature: E8 ?? ?? ?? ?? 88 43 08 84 C0 74 16
     return_type: byte
     name: IsSteamApiInitialized
+    parameters:
+    - type: Client::System::Framework::Framework*
+      name: this
+  - signature: 48 89 5C 24 ?? 57 48 81 EC 40 02 00 00 48 8B 05
+    return_type: byte
+    name: SetupSteamApi
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
@@ -134483,6 +135338,12 @@ structs:
   - name: GetVVDActionModule
     offset: 504
     return_type: Client::UI::Misc::VVDActionModule*
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+  - name: GetTermFilterModule
+    offset: 536
+    return_type: Client::UI::Misc::TermFilterModule*
     parameters:
     - type: Client::UI::UIModule*
       name: this
