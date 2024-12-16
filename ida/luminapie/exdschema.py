@@ -58,7 +58,7 @@ def get_latest_schema_url(ver):
     if ver in latest_release:
         return latest_release[ver]
     # grab the version before the current version if it can't be retrieved
-    for version in latest_release:
+    for version in reversed(list(latest_release)):
         if version < ver:
             return latest_release[version]
 
