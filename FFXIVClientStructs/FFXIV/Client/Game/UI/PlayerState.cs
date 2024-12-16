@@ -71,29 +71,28 @@ public unsafe partial struct PlayerState {
 
     // Size: (MountSheet.Max(row => row.Order) + 7) / 8
     /// <remarks> Use <see cref="IsMountUnlocked"/> </remarks>
-    [FieldOffset(0x2DD), FixedSizeArray] internal FixedSizeArray37<byte> _unlockedMountsBitmask;
+    [FieldOffset(0x2DD), FixedSizeArray] internal FixedSizeArray38<byte> _unlockedMountsBitmask;
     // Size: (OrnamentSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
     [FieldOffset(0x303), FixedSizeArray] internal FixedSizeArray7<byte> _unlockedOrnamentsBitmask;
     // Size: (GlassesStylesSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsGlassesUnlocked"/> </remarks>
-    [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedGlassesStylesBitmask;
-    [FieldOffset(0x30C)] public ushort NumOwnedMounts;
+    [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray4<byte> _unlockedGlassesStylesBitmask;
+    [FieldOffset(0x30E)] public ushort NumOwnedMounts;
 
-    // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) / 8
-    [FieldOffset(0x3EA), FixedSizeArray] internal FixedSizeArray159<byte> _caughtFishBitmask; // TODO: update size
-
-    [FieldOffset(0x4A0)] public uint NumFishCaught;
-    [FieldOffset(0x4A4)] public uint FishingBait;
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 49 8B D8"
     // Size: (SpearfishingNotebookSheet.RowCount + 7) / 8
-    [FieldOffset(0x3C0), FixedSizeArray] internal FixedSizeArray7<byte> _unlockedSpearfishingNotebookBitmask; // TODO: update size
+    [FieldOffset(0x3C2), FixedSizeArray] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebookBitmask;
+
+    // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) / 8
+    [FieldOffset(0x3EC), FixedSizeArray] internal FixedSizeArray180<byte> _caughtFishBitmask;
+    [FieldOffset(0x4A0)] public uint NumFishCaught;
+    [FieldOffset(0x4A4)] public uint FishingBait;
     // Ref: "40 53 55 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 4C 8B 12"
     // Size: (SpearfishingItemSheet.RowCount + 7) / 8
-    [FieldOffset(0x4B0), FixedSizeArray] internal FixedSizeArray36<byte> _caughtSpearfishBitmask; // TODO: update size
-
+    [FieldOffset(0x4B0), FixedSizeArray] internal FixedSizeArray40<byte> _caughtSpearfishBitmask;
     [FieldOffset(0x4D8)] public uint NumSpearfishCaught;
-
+    [FieldOffset(0x4DC)] internal int UnknownUnixTimestamp; // could be an array of size 1?!
     /// <remarks>
     /// Index is column 27 of ContentRoulette sheet.<br/>
     /// See also: <see cref="InstanceContent.IsRouletteComplete" />
@@ -102,9 +101,10 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x4EC)] public short PlayerCommendations;
 
     [FieldOffset(0x4EE), FixedSizeArray] internal FixedSizeArray7<byte> _selectedPoses;
-    [FieldOffset(0x4F5)] public byte PlayerStateFlags1;
-    [FieldOffset(0x4F6)] public byte PlayerStateFlags2;
-    [FieldOffset(0x4F7)] public byte PlayerStateFlags3;
+    [FieldOffset(0x4F5), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
+    [FieldOffset(0x4F5), Obsolete("Use PlayerStateFlags[0]")] public byte PlayerStateFlags1;
+    [FieldOffset(0x4F6), Obsolete("Use PlayerStateFlags[1]")] public byte PlayerStateFlags2;
+    [FieldOffset(0x4F7), Obsolete("Use PlayerStateFlags[2]")] public byte PlayerStateFlags3;
 
     [FieldOffset(0x522)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
     [FieldOffset(0x523)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
@@ -128,6 +128,7 @@ public unsafe partial struct PlayerState {
     /// <see cref="IsMeisterFlagAndHasSoulStoneEquipped" />
     /// </remarks>
     [FieldOffset(0x5BF)] public byte MeisterFlag;
+    [FieldOffset(0x5C0)] internal byte WeeklyLockoutInfo; // unsure how exactly it's processed
 
     [FieldOffset(0x5C4)] public int SquadronMissionCompletionTimestamp;
     [FieldOffset(0x5C8)] public int SquadronTrainingCompletionTimestamp;
@@ -139,6 +140,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x5D2), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedMinerFolkloreTomeBitmask;
     [FieldOffset(0x5D4), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedBotanistFolkloreTomeBitmask;
     [FieldOffset(0x5D6), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedFishingFolkloreTomeBitmask;
+    [FieldOffset(0x5D8), FixedSizeArray] internal FixedSizeArray92<byte> _unlockedOrchestrionRollBitmask;
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 

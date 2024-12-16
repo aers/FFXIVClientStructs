@@ -1937,9 +1937,16 @@ classes:
       0x140973B80: GetClassJobId
       0x1409742A0: SetSyncedLevel
       0x1409747B0: GetGrandCompanyRank
+      0x1409752B0: SetBeastTribeRank
       0x1409752F0: GetBeastTribeRank
+      0x140975330: SetBeastTribeCurrentReputation
       0x140975370: GetBeastTribeCurrentReputation
       0x1409753B0: GetBeastTribeNeededReputation
+      0x1409754D0: SetDailyQuestSeed
+      0x1409754F0: GetDailyQuestSeed
+      0x140975510: SetPlayerStateFlag
+      0x140975530: GetPlayerStateFlag
+      0x140976730: UpdateSquadronData
       0x140975430: IsBeastTribeRankedUpToday
       0x140974A70: IsMountUnlocked
       0x1409784C0: IsOrnamentUnlocked
@@ -1965,11 +1972,20 @@ classes:
       0x140975610: IsMentor
       0x140975630: IsBattleMentor
       0x140975650: IsTradeMentor
+      0x140975660: IsMentorQualified # name based on lua function
+      0x140975680: IsBecameMentor # name based on lua function
+      0x140975740: GetClassJobLevelForIdOrCurrent
       0x140975CF0: IsAetherCurrentZoneComplete
+      0x140975D50: SetUnlockFlag
       0x140975E30: IsMeisterFlagAndHasSoulStoneEquipped
       0x140975ED0: IsMeisterFlag
       0x140975F40: IsMeisterFlagMaxCount
+      0x140976440: IsMinerFolkloreTomeUnlocked
+      0x140976480: IsBotanistFolkloreTomeUnlocked
+      0x1409764C0: IsFishingFolkloreTomeUnlocked
+      0x1409765F0: SetOrchestrionRollUnlocked
       0x1409783B0: GetDesynthesisLevelForClassJob
+      0x140A19190: SetDesynthesisLevels
       0x140978600: IsGlassesUnlocked
       0x140978840: Initialize
       0x140979C60: IsCurrentJobCrafter
