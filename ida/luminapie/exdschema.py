@@ -30,16 +30,25 @@ def get_url(url, supress=False):
 
 def get_latest_schema():
     # type: () -> dict[SemanticVersion, str]
-    json = loads(
-        get_url("https://api.github.com/repos/xivdev/EXDSchema/releases/latest")
-    )
-    assetsJson = json["assets"]
-    assets = {}
-    for asset in assetsJson:
-        version = SemanticVersion(*(int(x) for x in asset["name"].split(".")[0:5]))
-        assets[version] = asset["browser_download_url"]
-    assets = dict(sorted(assets.items()))
-    return assets
+    versions = {}
+    with TemporaryFile() as f:
+        f.write(
+            get_url(
+                "https://github.com/xivdev/EXDSchema/archive/refs/heads/main.zip", True
+            )
+        )
+        f.seek(0)
+        schema_zip = ZipFile(f)
+
+        for file in schema_zip.namelist():
+            if file.startswith("EXDSchema-main/Schemas"):
+                strs = file.split("/")
+                if strs[2] != "":
+                    versions[
+                        SemanticVersion(*(int(x) for x in strs[2].split(".")[0:5]))
+                    ] = ("EXDSchema-main/Schemas/" + strs[2])
+
+    return versions
 
 
 def get_latest_schema_url(ver):
@@ -57,13 +66,18 @@ def get_latest_schema_url(ver):
 def get_definitions(schema):
     # type: (SemanticVersion) -> dict[str, list[Definition]]
     exd_schema_map = {}
+    subFolder = get_latest_schema_url(schema)
     with TemporaryFile() as f:
-        f.write(get_url(get_latest_schema_url(schema), True))
+        f.write(
+            get_url(
+                "https://github.com/xivdev/EXDSchema/archive/refs/heads/main.zip", True
+            )
+        )
         f.seek(0)
         schema_zip = ZipFile(f)
 
         for file in schema_zip.namelist():
-            if file.endswith(".yml"):
+            if file.startswith(subFolder) and file.endswith(".yml"):
                 schema_yml = load(schema_zip.read(file), Loader=Loader)
                 exd_schema_map[file.rsplit(".", 1)[0].rsplit("/", 1)[1]] = schema_yml[
                     "fields"
