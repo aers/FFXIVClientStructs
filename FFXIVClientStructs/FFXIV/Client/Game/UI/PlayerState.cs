@@ -299,6 +299,15 @@ public unsafe partial struct PlayerState {
     [MemberFunction("E9 ?? ?? ?? ?? 0F B7 57 70")]
     public partial bool IsFolkloreBookUnlocked(uint tomeId);
 
+    public bool IsFishCaught(uint fishParameterId) {
+        return ((CaughtFishBitmask[(int)fishParameterId / 8] >> (byte)(fishParameterId % 8)) & 1) == 1;
+    }
+
+    public bool IsSpearfishCaught(uint spearfishingItemId) {
+        var id = spearfishingItemId - 20000;
+        return ((CaughtSpearfishBitmask[(int)id / 8] >> (byte)(id % 8)) & 1) == 1;
+    }
+
     /// <summary>
     /// Check if a specific McGuffin (Collectible/Curiosity) has been unlocked by the player.
     /// </summary>
