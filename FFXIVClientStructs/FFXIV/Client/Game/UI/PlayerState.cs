@@ -85,11 +85,13 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x3C2), FixedSizeArray] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebookBitmask;
 
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) / 8
+    /// <remarks> Use <see cref="IsFishCaught(uint)"/> </remarks>
     [FieldOffset(0x3EC), FixedSizeArray] internal FixedSizeArray180<byte> _caughtFishBitmask;
     [FieldOffset(0x4A0)] public uint NumFishCaught;
     [FieldOffset(0x4A4)] public uint FishingBait;
     // Ref: "40 53 55 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 4C 8B 12"
     // Size: (SpearfishingItemSheet.RowCount + 7) / 8
+    /// <remarks> Use <see cref="IsSpearfishCaught(uint)"/> </remarks>
     [FieldOffset(0x4B1), FixedSizeArray] internal FixedSizeArray39<byte> _caughtSpearfishBitmask;
     [FieldOffset(0x4D8)] public uint NumSpearfishCaught;
     [FieldOffset(0x4DC)] internal int UnknownUnixTimestamp; // could be an array of size 1?!
@@ -299,6 +301,7 @@ public unsafe partial struct PlayerState {
     [MemberFunction("E9 ?? ?? ?? ?? 0F B7 57 70")]
     public partial bool IsFolkloreBookUnlocked(uint tomeId);
 
+    /// <remarks>Only call this for FishParameter rows where IsInLog is true.</remarks>
     public bool IsFishCaught(uint fishParameterId) {
         return ((CaughtFishBitmask[(int)fishParameterId / 8] >> (byte)(fishParameterId % 8)) & 1) == 1;
     }
