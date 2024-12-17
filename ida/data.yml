@@ -975,7 +975,7 @@ classes:
     funcs:
       0x14158C1A0: Initialize
       0x14158C1F0: Destroy
-      0x1415FEAD0: CreateBattleCharacter
+#fail       0x1415FEAD0: CreateBattleCharacter
       0x14158C4E0: CreateEventObject
       0x14158C5B0: CreateAreaObject
       0x14158C6A0: DeleteObjectByIndex
@@ -984,7 +984,7 @@ classes:
       0x14158CA20: GetObjectByIndex
       0x14158CB00: IsValidClientObject
       0x14158CB30: IsValidClientObjectIndex
-      0x1415FF280: GetIndexByObject
+#fail       0x1415FF280: GetIndexByObject
       0x14158CB80: SetObjectAt #(idx, object)
       0x14158CBC0: RemoveObjectAt
       0x140482630: HasObjectAt
@@ -1281,14 +1281,14 @@ classes:
       0x14080C230: GetEquippedItemIdForSlot
       0x14080F5C0: GetPermittedGearsetCount
       0x140819240: GetLimitedTomestoneCount
-      0x14086FFB0: GetEmptySlotsInBag
+#fail       0x14086FFB0: GetEmptySlotsInBag
       0x1408139F0: SendTradeRequest
       0x140815EC0: GetRetainerGil
       0x140818420: GetFreeCompanyGil
       0x140818E90: GetGil
       0x140818F80: GetCompanySeals
       0x140819000: GetMaxCompanySeals
-      0x140881360: GetTomestoneCount
+#fail       0x140881360: GetTomestoneCount
       0x140819370: GetWolfMarks
       0x1408193E0: GetAlliedSeals
       0x140819450: GetGoldSaucerCoin
@@ -1332,7 +1332,7 @@ classes:
       0x1407FF1C0: GetStain
       0x1407FF290: GetMateriaCount
       0x14082B980: GetCrafterContentId
-      0x140887E30: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
+#fail       0x140887E30: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
   Client::Game::InventoryContainer:
     vtbls:
       - ea: 0x141F7D798
