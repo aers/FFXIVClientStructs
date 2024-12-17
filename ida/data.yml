@@ -7186,7 +7186,7 @@ classes:
       64: GetTofuModule
       65: GetFishingModule
       66: GetACTION
-      67: GetTFILTER
+      67: GetTermFilterModule
       68: GetREADYC
       69: GetPartyRoleListModule
       70: GetCATSBM
