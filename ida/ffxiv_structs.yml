@@ -10049,7 +10049,7 @@ structs:
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
-  - signature: E8 ?? ?? ?? ?? 41 8B CF EB
+  - signature: E8 ?? ?? ?? ?? 41 8B CF EB 15
     return_type: Client::System::String::Utf8String*
     name: Ctor_FromSequence
     parameters:
@@ -29422,7 +29422,7 @@ structs:
     offset: 7120
   - type: unsigned __int64
     name: OnlineStatusFlags
-    offset: 7232
+    offset: 7224
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -29453,7 +29453,7 @@ structs:
     parameters:
     - type: Client::UI::Info::InfoModule*
       name: this
-    - type: unsigned int
+    - type: byte
       name: id
   - signature: 48 8B C4 48 89 68 20 57 48 81 EC ?? ?? ?? ?? 48 8B B9
     return_type: void
@@ -44051,7 +44051,7 @@ structs:
     - type: byte
       name: a2
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 45 8B C4 41 8B D7
+  - signature: E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 48 8B CF
     return_type: void
     name: AddItemContextMenuEntries
     parameters:
@@ -44063,6 +44063,10 @@ structs:
       name: flags
     - type: byte*
       name: itemName
+    - type: byte
+      name: unk5
+    - type: byte
+      name: unk6
 - type: Client::UI::Agent::AgentRecipeMaterialList
   name: AgentRecipeMaterialList
   namespace: Client.UI.Agent
@@ -56617,7 +56621,7 @@ structs:
   - type: byte
     name: UnlockedMountsBitmask
     offset: 733
-    size: 37
+    size: 38
   - type: byte
     name: UnlockedOrnamentsBitmask
     offset: 771
@@ -56625,18 +56629,18 @@ structs:
   - type: byte
     name: UnlockedGlassesStylesBitmask
     offset: 778
-    size: 2
+    size: 4
   - type: unsigned __int16
     name: NumOwnedMounts
-    offset: 780
+    offset: 782
   - type: byte
     name: UnlockedSpearfishingNotebookBitmask
-    offset: 960
-    size: 7
+    offset: 962
+    size: 8
   - type: byte
     name: CaughtFishBitmask
-    offset: 1002
-    size: 159
+    offset: 1004
+    size: 180
   - type: unsigned int
     name: NumFishCaught
     offset: 1184
@@ -56646,10 +56650,13 @@ structs:
   - type: byte
     name: CaughtSpearfishBitmask
     offset: 1200
-    size: 36
+    size: 40
   - type: unsigned int
     name: NumSpearfishCaught
     offset: 1240
+  - type: int
+    name: UnknownUnixTimestamp
+    offset: 1244
   - type: byte
     name: ContentRouletteCompletion
     offset: 1248
@@ -56662,14 +56669,9 @@ structs:
     offset: 1262
     size: 7
   - type: byte
-    name: PlayerStateFlags1
+    name: PlayerStateFlags
     offset: 1269
-  - type: byte
-    name: PlayerStateFlags2
-    offset: 1270
-  - type: byte
-    name: PlayerStateFlags3
-    offset: 1271
+    size: 3
   - type: byte
     name: SightseeingLogUnlockState
     offset: 1314
@@ -56694,6 +56696,9 @@ structs:
   - type: byte
     name: MeisterFlag
     offset: 1471
+  - type: byte
+    name: WeeklyLockoutInfo
+    offset: 1472
   - type: int
     name: SquadronMissionCompletionTimestamp
     offset: 1476
@@ -56721,6 +56726,10 @@ structs:
     name: UnlockedFishingFolkloreTomeBitmask
     offset: 1494
     size: 2
+  - type: byte
+    name: UnlockedOrchestrionRollBitmask
+    offset: 1496
+    size: 92
   - type: byte
     name: WeeklyBingoOrderData
     offset: 1768
