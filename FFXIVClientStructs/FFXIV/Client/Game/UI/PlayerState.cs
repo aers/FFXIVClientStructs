@@ -90,7 +90,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x4A4)] public uint FishingBait;
     // Ref: "40 53 55 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 4C 8B 12"
     // Size: (SpearfishingItemSheet.RowCount + 7) / 8
-    [FieldOffset(0x4B0), FixedSizeArray] internal FixedSizeArray40<byte> _caughtSpearfishBitmask;
+    [FieldOffset(0x4B1), FixedSizeArray] internal FixedSizeArray39<byte> _caughtSpearfishBitmask;
     [FieldOffset(0x4D8)] public uint NumSpearfishCaught;
     [FieldOffset(0x4DC)] internal int UnknownUnixTimestamp; // could be an array of size 1?!
     /// <remarks>
