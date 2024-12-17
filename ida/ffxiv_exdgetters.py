@@ -281,8 +281,6 @@ if api is None:
                     )
                 struct_type = ida_struct.get_struc(struct_id)
                 for [index, [type, name]] in fields.items():
-                    if struct_name.endswith("InstanceContent"):
-                        print(index, type, name)
                     ida_struct.add_struc_member(
                         struct_type,
                         name,
