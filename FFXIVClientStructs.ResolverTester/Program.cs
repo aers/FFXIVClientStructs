@@ -30,7 +30,7 @@ unsafe {
         Resolver.GetInstance.Resolve();
         watch.Stop();
 
-        foreach (Address addr in Resolver.GetInstance.Addresses)
+        foreach (var addr in Resolver.GetInstance.Addresses.Where(addr => addr.Value != 0)) {
             addr.Value = addr.Value - new IntPtr(bytes);
         //Console.WriteLine($"Resolved in {watch.ElapsedMilliseconds}ms");
 
