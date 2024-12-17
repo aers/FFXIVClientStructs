@@ -34,9 +34,9 @@ public unsafe partial struct InfoModule {
     /// <param name="id">The RowId in the OnlineStatus sheet.</param>
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 0F B6 CA 48 D3 E8")]
     public partial bool IsOnlineStatusSet(byte id);
-    
+
     [Obsolete("Use param type of byte instead")]
-    public bool IsOnlineStatusSet(uint id) => IsOnlineStatusSet((byte) id);
+    public bool IsOnlineStatusSet(uint id) => IsOnlineStatusSet((byte)id);
 
     /// <summary>
     /// Sets the local player's online status to the specified flag bitmask.
