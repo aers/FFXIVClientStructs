@@ -141,7 +141,7 @@ public unsafe partial struct MJIManager {
     /// Retrieve an instance of IslandSanctuaryManager for consumption.
     /// </summary>
     /// <returns>Returns a pointer to the game's IslandSanctuaryManager instance.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 50 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 78 1C")]
     public static partial MJIManager* Instance();
 
     /// <summary>
