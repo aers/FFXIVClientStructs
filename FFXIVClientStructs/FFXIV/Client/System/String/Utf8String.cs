@@ -105,7 +105,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 40")]
     public partial void Ctor();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B CF EB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B CF EB 15")]
     public partial Utf8String* Ctor_FromSequence(byte* str, nuint length);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 6E ?? ?? 75 08")]
