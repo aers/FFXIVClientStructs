@@ -11,6 +11,7 @@ public enum AtkEventType : byte {
     MouseOut = 7,
     MouseWheel = 8,
     MouseClick = 9,
+    MouseDoubleClick = 10,
     InputReceived = 12,
     FocusStart = 18,
     FocusStop = 19,
