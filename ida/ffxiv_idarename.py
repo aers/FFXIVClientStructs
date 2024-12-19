@@ -200,7 +200,6 @@ if api is None:
         import idaapi  # noqa
         import idc  # noqa
         import idautils  # noqa
-        import ida_funcs  # noqa
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
@@ -224,14 +223,7 @@ if api is None:
                 return idc.get_qword(ea)
 
             def get_addr_name(self, ea):
-                name = idc.get_name(ea)
-                if name is '':
-                    finf = ida_funcs.func_t()
-                    finf.start_ea = ea
-                    finf.end_ea = idc.BADADDR
-                    ida_funcs.add_func_ex(finf)
-                    name = idc.get_name(ea)
-                return name
+                return idc.get_name(ea)
 
             def set_addr_name(self, ea, name):
                 # print("{0} {1}".format(ea, name))
@@ -303,7 +295,7 @@ if api is None:
                 if current_func_name == proposed_qualified_func_name:
                     return ""
 
-                if any(current_func_name.startswith(prefix) for prefix in ("sub_", "nullsub_", "loc_", "qword_", "unknown_libname_", "?", "_")):
+                if any(current_func_name.startswith(prefix) for prefix in ("sub_", "nullsub_", "loc_", "qword_", "unknown_libname_")):
                     return proposed_qualified_func_name
 
                 return None
