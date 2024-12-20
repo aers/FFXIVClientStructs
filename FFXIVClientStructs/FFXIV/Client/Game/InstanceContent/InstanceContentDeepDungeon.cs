@@ -25,7 +25,7 @@ public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x1F0A)] public byte SyncedGearLevel;
     [FieldOffset(0x1F0B)] public byte HoardCount;
 
-    [FieldOffset(0x2900), FixedSizeArray] internal FixedSizeArray25<RoomFlags> _mapData;
+    [FieldOffset(0x2900), FixedSizeArray] internal FixedSizeArray25<byte> _mapData; // list of RoomFlags
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DeepDungeonPartyInfo {
