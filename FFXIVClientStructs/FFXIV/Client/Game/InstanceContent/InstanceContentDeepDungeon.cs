@@ -25,6 +25,8 @@ public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x1F0A)] public byte SyncedGearLevel;
     [FieldOffset(0x1F0B)] public byte HoardCount;
 
+    [FieldOffset(0x2900), FixedSizeArray] internal FixedSizeArray25<RoomFlags> _mapData;
+
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DeepDungeonPartyInfo {
         [FieldOffset(0x00)] public uint EntityId;
@@ -46,4 +48,18 @@ public unsafe partial struct InstanceContentDeepDungeon {
         [FieldOffset(0x00)] public byte ChestType;
         [FieldOffset(0x01)] public sbyte RoomIndex;
     }
+
+    [Flags]
+    public enum RoomFlags : byte {
+        None = 0,
+        ConnectionN = 1,
+        ConnectionS = 1 << 1,
+        ConnectionW = 1 << 2,
+        ConnectionE = 1 << 3,
+        Return = 1 << 4,
+        Passage = 1 << 5,
+        Home = 1 << 6,
+        Revealed = 1 << 7
+    }
 }
+
