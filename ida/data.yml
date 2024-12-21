@@ -5693,6 +5693,7 @@ classes:
   Client::System::Photo::ScreenShot:
     instances:
       - ea: 0x1427BFB70
+        pointer: true
     vtbls:
       - ea: 0x141F62440
         base: Client::System::Framework::Task
