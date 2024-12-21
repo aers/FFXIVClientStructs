@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Application.Network;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xBD8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC50)]
 public unsafe partial struct NetworkModule {
     [FieldOffset(0x028)] public byte LobbyCount;
     [FieldOffset(0x02C), FixedSizeArray] internal FixedSizeArray14<uint> _lobbyPorts;
@@ -30,18 +30,18 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0x930)] public Utf8String World;
     [FieldOffset(0x998)] public Utf8String ZoneName;
 
-    [FieldOffset(0xA39)] public bool WinSockInitialized;
-    [FieldOffset(0xA40)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
+    [FieldOffset(0xAA1)] public bool WinSockInitialized;
+    [FieldOffset(0xAA8)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
 
-    [FieldOffset(0xAEC)] public int CurrentDeviceTime; //Timestamp
-    [FieldOffset(0xAF0)] public int CurrentDeviceTimeMillis; //Milliseconds for CurrentDeviceTime
+    [FieldOffset(0xB54)] public int CurrentDeviceTime; //Timestamp
+    [FieldOffset(0xB58)] public int CurrentDeviceTimeMillis; //Milliseconds for CurrentDeviceTime
 
-    [FieldOffset(0xB9E)] public short CurrentInstance;
+    [FieldOffset(0xC06)] public short CurrentInstance;
 
-    [FieldOffset(0xBA8)] public int KeepAliveZone;
-    [FieldOffset(0xBAC)] public int KeepAliveIntervalZone;
-    [FieldOffset(0xBB0)] public int KeepAliveChat;
-    [FieldOffset(0xBB4)] public int KeepAliveIntervalChat;
+    [FieldOffset(0xC10)] public int KeepAliveZone;
+    [FieldOffset(0xC14)] public int KeepAliveIntervalZone;
+    [FieldOffset(0xC18)] public int KeepAliveChat;
+    [FieldOffset(0xC1C)] public int KeepAliveIntervalChat;
 
-    [FieldOffset(0xBD0)] public bool IsInCrossWorldDuty;
+    [FieldOffset(0xC38)] public bool IsInCrossWorldDuty;
 }

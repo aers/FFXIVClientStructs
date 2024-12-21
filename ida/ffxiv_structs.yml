@@ -20979,7 +20979,7 @@ structs:
   name: NetworkModule
   namespace: Application.Network
   union: False
-  size: 3032
+  size: 3152
   fields:
   - type: byte
     name: LobbyCount
@@ -21054,34 +21054,34 @@ structs:
     offset: 2456
   - type: byte
     name: WinSockInitialized
-    offset: 2617
+    offset: 2721
   - type: Client::Network::NetworkModulePacketReceiverCallback*
     name: PacketReceiverCallback
-    offset: 2624
+    offset: 2728
   - type: int
     name: CurrentDeviceTime
-    offset: 2796
+    offset: 2900
   - type: int
     name: CurrentDeviceTimeMillis
-    offset: 2800
+    offset: 2904
   - type: __int16
     name: CurrentInstance
-    offset: 2974
+    offset: 3078
   - type: int
     name: KeepAliveZone
-    offset: 2984
+    offset: 3088
   - type: int
     name: KeepAliveIntervalZone
-    offset: 2988
+    offset: 3092
   - type: int
     name: KeepAliveChat
-    offset: 2992
+    offset: 3096
   - type: int
     name: KeepAliveIntervalChat
-    offset: 2996
+    offset: 3100
   - type: byte
     name: IsInCrossWorldDuty
-    offset: 3024
+    offset: 3128
   member_functions: []
 - type: Application::Network::WorkDefinitions::BeastReputationWork
   name: BeastReputationWork
@@ -65360,6 +65360,9 @@ structs:
   - type: Component::GUI::AtkTextNode*
     name: AtkTextNode
     offset: 200
+  - type: Component::GUI::AtkResNode*
+    name: CursorContainer
+    offset: 208
   - type: Client::System::String::Utf8String
     name: UnkText1
     offset: 224
@@ -72647,6 +72650,16 @@ structs:
       name: this
     - type: byte*
       name: text
+  - signature: E8 ?? ?? ?? ?? EB 5D E8
+    return_type: void
+    name: InsertText
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: byte*
+      name: text
+    - type: byte
+      name: unique
 - type: Component::GUI::AtkComponentTreeList
   name: AtkComponentTreeList
   namespace: Component.GUI
