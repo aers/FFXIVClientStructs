@@ -20975,114 +20975,6 @@ structs:
     name: NumBones
     offset: 10
   member_functions: []
-- type: Application::Network::NetworkModule
-  name: NetworkModule
-  namespace: Application.Network
-  union: False
-  size: 3152
-  fields:
-  - type: byte
-    name: LobbyCount
-    offset: 40
-  - type: unsigned int
-    name: LobbyPorts
-    offset: 44
-    size: 14
-  - type: Client::System::String::Utf8String
-    name: LobbyHosts
-    offset: 104
-    size: 14
-  - type: __int16
-    name: OperatingSystemTypeAndVersion
-    offset: 1564
-  - type: unsigned int
-    name: SaveDataBankPort
-    offset: 1568
-  - type: Client::System::String::Utf8String
-    name: SaveDataBankHost
-    offset: 1576
-  - type: unsigned int
-    name: SaveDataBankMode
-    offset: 1680
-  - type: unsigned int
-    name: DktWebPort
-    offset: 1684
-  - type: Client::System::String::Utf8String
-    name: DktWebHost
-    offset: 1688
-  - type: unsigned int
-    name: ActiveLobbyPort
-    offset: 1792
-  - type: Client::System::String::Utf8String
-    name: ActiveLobbyHost
-    offset: 1800
-  - type: unsigned int
-    name: AlternateLobbyPort
-    offset: 1904
-  - type: Client::System::String::Utf8String
-    name: AlternateLobbyHost
-    offset: 1912
-  - type: unsigned int
-    name: LobbyRetryCount
-    offset: 2016
-  - type: unsigned int
-    name: LobbyRetryInterval
-    offset: 2020
-  - type: unsigned int
-    name: LobbyPing
-    offset: 2024
-  - type: unsigned int
-    name: FrontPort
-    offset: 2028
-  - type: Client::System::String::Utf8String
-    name: FrontHost
-    offset: 2032
-  - type: Client::System::String::Utf8String
-    name: FrontProtocol
-    offset: 2136
-  - type: byte
-    name: UseCfgFrontend
-    offset: 2240
-  - type: Client::System::String::Utf8String
-    name: Ticket
-    offset: 2248
-  - type: Client::System::String::Utf8String
-    name: World
-    offset: 2352
-  - type: Client::System::String::Utf8String
-    name: ZoneName
-    offset: 2456
-  - type: byte
-    name: WinSockInitialized
-    offset: 2721
-  - type: Client::Network::NetworkModulePacketReceiverCallback*
-    name: PacketReceiverCallback
-    offset: 2728
-  - type: int
-    name: CurrentDeviceTime
-    offset: 2900
-  - type: int
-    name: CurrentDeviceTimeMillis
-    offset: 2904
-  - type: __int16
-    name: CurrentInstance
-    offset: 3078
-  - type: int
-    name: KeepAliveZone
-    offset: 3088
-  - type: int
-    name: KeepAliveIntervalZone
-    offset: 3092
-  - type: int
-    name: KeepAliveChat
-    offset: 3096
-  - type: int
-    name: KeepAliveIntervalChat
-    offset: 3100
-  - type: byte
-    name: IsInCrossWorldDuty
-    offset: 3128
-  member_functions: []
 - type: Application::Network::WorkDefinitions::BeastReputationWork
   name: BeastReputationWork
   namespace: Application.Network.WorkDefinitions
@@ -36461,6 +36353,144 @@ structs:
   - type: Animation::Animation::hkaAnnotationTrack::Annotation
     name: Annotation
     offset: 8
+  member_functions: []
+- type: Application::Network::NetworkModule
+  name: NetworkModule
+  namespace: Application.Network
+  union: False
+  size: 3152
+  fields:
+  - type: byte
+    name: LobbyCount
+    offset: 40
+  - type: unsigned int
+    name: LobbyPorts
+    offset: 44
+    size: 14
+  - type: Client::System::String::Utf8String
+    name: LobbyHosts
+    offset: 104
+    size: 14
+  - type: __int16
+    name: OperatingSystemTypeAndVersion
+    offset: 1564
+  - type: unsigned int
+    name: SaveDataBankPort
+    offset: 1568
+  - type: Client::System::String::Utf8String
+    name: SaveDataBankHost
+    offset: 1576
+  - type: unsigned int
+    name: SaveDataBankMode
+    offset: 1680
+  - type: unsigned int
+    name: DktWebPort
+    offset: 1684
+  - type: Client::System::String::Utf8String
+    name: DktWebHost
+    offset: 1688
+  - type: unsigned int
+    name: ActiveLobbyPort
+    offset: 1792
+  - type: Client::System::String::Utf8String
+    name: ActiveLobbyHost
+    offset: 1800
+  - type: unsigned int
+    name: AlternateLobbyPort
+    offset: 1904
+  - type: Client::System::String::Utf8String
+    name: AlternateLobbyHost
+    offset: 1912
+  - type: unsigned int
+    name: LobbyRetryCount
+    offset: 2016
+  - type: unsigned int
+    name: LobbyRetryInterval
+    offset: 2020
+  - type: unsigned int
+    name: LobbyPing
+    offset: 2024
+  - type: unsigned int
+    name: FrontPort
+    offset: 2028
+  - type: Client::System::String::Utf8String
+    name: FrontHost
+    offset: 2032
+  - type: Client::System::String::Utf8String
+    name: FrontProtocol
+    offset: 2136
+  - type: byte
+    name: UseCfgFrontend
+    offset: 2240
+  - type: Client::System::String::Utf8String
+    name: Ticket
+    offset: 2248
+  - type: Client::System::String::Utf8String
+    name: World
+    offset: 2352
+  - type: Client::System::String::Utf8String
+    name: ZoneName
+    offset: 2456
+  - type: Client::System::String::Utf8String
+    name: UnkA00
+    offset: 2560
+  - type: byte
+    name: WinSockInitialized
+    offset: 2721
+  - type: Client::Network::NetworkModulePacketReceiverCallback*
+    name: PacketReceiverCallback
+    offset: 2728
+  - type: Common::TimePoint
+    name: UnkTimeAD0
+    offset: 2768
+  - type: Common::TimePoint
+    name: UnkTimeB28
+    offset: 2856
+  - type: int
+    name: CurrentDeviceTime
+    offset: 2900
+  - type: int
+    name: CurrentDeviceTimeMillis
+    offset: 2904
+  - type: Common::TimePoint
+    name: UnkTimeB68
+    offset: 2920
+  - type: Common::TimePoint
+    name: UnkTimeB88
+    offset: 2952
+  - type: Common::TimePoint
+    name: UnkTimeBB0
+    offset: 2992
+  - type: unsigned int
+    name: UnkTimeBB0_UpdateFrequency
+    offset: 3016
+  - type: Common::TimePoint
+    name: UnkTimeBD0
+    offset: 3024
+  - type: Common::TimePoint
+    name: UnkTimeBE8
+    offset: 3048
+  - type: __int16
+    name: CurrentInstance
+    offset: 3078
+  - type: int
+    name: KeepAliveZone
+    offset: 3088
+  - type: int
+    name: KeepAliveIntervalZone
+    offset: 3092
+  - type: int
+    name: KeepAliveChat
+    offset: 3096
+  - type: int
+    name: KeepAliveIntervalChat
+    offset: 3100
+  - type: Common::TimePoint
+    name: UnkTimeC20
+    offset: 3104
+  - type: byte
+    name: IsInCrossWorldDuty
+    offset: 3128
   member_functions: []
 - type: Application::Network::WorkDefinitions::ClientSelectData
   name: ClientSelectData
