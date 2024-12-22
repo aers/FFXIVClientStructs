@@ -18,7 +18,7 @@ public unsafe partial struct WorldHelper {
     [StructLayout(LayoutKind.Explicit, Size = 0x22)]
     public partial struct World {
         [FieldOffset(0x00)] public byte DataCenter;
-        [FieldOffset(0x01)] public bool IsPublic;
-        [FieldOffset(0x02), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+        [FieldOffset(0x00), Obsolete("This field was removed", true)] public bool IsPublic;
+        [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     }
 }
