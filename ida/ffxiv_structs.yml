@@ -27,6 +27,7 @@ enums:
     "MouseOut": 7
     "MouseWheel": 8
     "MouseClick": 9
+    "MouseDoubleClick": 10
     "InputReceived": 12
     "FocusStart": 18
     "FocusStop": 19
@@ -56649,8 +56650,8 @@ structs:
     offset: 1188
   - type: byte
     name: CaughtSpearfishBitmask
-    offset: 1200
-    size: 40
+    offset: 1201
+    size: 39
   - type: unsigned int
     name: NumSpearfishCaught
     offset: 1240
