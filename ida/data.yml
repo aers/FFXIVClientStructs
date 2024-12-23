@@ -1200,18 +1200,40 @@ classes:
       - ea: 0x14280EFA0
         pointer: False
     funcs:
-      0x140A1E300: GetSingleton
       0x1400BA980: IsQuestComplete # static (questId)
-      0x140C29F00: IsQuestComplete1 # (this, questId)
-      0x140C29F90: IsDailyQuestComplete
-      0x140C2A250: GetQuestSequence # static (questId)
-      0x140C29C10: GetQuestIndex
-      0x140C2A350: GetQuestClassJob
-      0x140C29FD0: IsQuestAccepted
-      0x140C2A510: GetBeastTribeAllowance
-      0x140CD2FE0: IsRecipeComplete # static (uint recipeId)
-      0x14183CBC0: IsLevequestComplete
       0x1409742B0: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
+      0x140A18FE0: SetUnkBitmask3
+      0x140A19030: SetUnkBitmask2Bit2
+      0x140A1CCD0: SetGatheringSuccessfulChainCount
+      0x140A1CCE0: SetUnkBitmask2
+      0x140A1CD50: SetUnkBitmask2Bit
+      0x140A1CD70: SetSeenNotebookDivisionLevelRangeBitmask
+      0x140A1CDA0: SetGatheredGatheringItemBitmask
+      0x140A1CE00: SetGatheredGatheringItemBitmaskBit
+      0x140A1CE20: SetSeenCraftingNotebookDivisionLevelRangeBitmask
+      0x140A1CE60: SetCompletedRecipesBitmask
+      0x140A1D3D0: SetCompletedQuestsBitmask
+      0x140A1D4F0: SetUnlockedMapMarkersBitmask
+      0x140A1D6D0: SetUnkBitmask1
+      0x140A1DC90: SetCompletedLeveQuestsBitmask
+      0x140A1E300: GetSingleton
+      0x140C29C10: GetQuestIndex
+      0x140C29F00: IsQuestComplete1 # (this, questId)
+      0x140C29F40: IsMapMarkerUnlocked # static (BattleChara* localPlayer, byte mapMarkerUnknown1)
+      0x140C29F90: IsDailyQuestComplete
+      0x140C29FD0: IsQuestAccepted
+      0x140C2A250: GetQuestSequence # static (questId)
+      0x140C2A350: GetQuestClassJob
+      0x140C2A410: IsQuestRepeatFlagSet # (byte, questRepeatFlag)
+      0x140C2A510: GetBeastTribeAllowance
+      0x140C2B7F0: IsUnkBitmask1Set
+      0x140CC11D0: IsGatheringItemGathered # static (ushort gatheringItemId)
+      0x140CC1230: IsGatheringNotebookDivisionLevelRangeSeen # static (uint gatheringTypeId, uint notebookDivisionId)
+      0x140CC12C0: SetSeenGatheringNotebookDivisionLevelRangeBitmaskBit
+      0x140CD2FE0: IsRecipeComplete # static (uint recipeId)
+      0x140CD3080: IsCraftingNotebookDivisionLevelRangeSeen # static (int craftingType, uint notebookDivisionId)
+      0x140CD3120: SetSeenCraftingNotebookDivisionLevelRangeBitmaskBit
+      0x14183CBC0: IsLevequestComplete
   Client::Game::MirageManager:
     instances:
       - ea: 0x1427ED6C0
