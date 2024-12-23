@@ -11,6 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe partial struct AtkComponentInputBase {
     [FieldOffset(0xC8)] public AtkTextNode* AtkTextNode;
+    [FieldOffset(0xD0)] public AtkResNode* CursorContainer;
     [FieldOffset(0xE0)] public Utf8String UnkText1;
     [FieldOffset(0x148)] public Utf8String UnkText2;
 }

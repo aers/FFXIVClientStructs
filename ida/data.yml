@@ -6544,6 +6544,8 @@ classes:
       0x140661FF0: ctor
       0x140662210: Finalizer
       0x140660520: SetText
+      0x140660DA0: InsertText
+      0x140661FD0: SetFontSize
   Component::GUI::AtkComponentNumericInput:
     vtbls:
       - ea: 0x141F677C8
