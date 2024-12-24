@@ -10365,7 +10365,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
     vtbls:
-      - ea: 0x141FC3078
+      - ea: 0x141FAC9F8
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentMiragePrismMiragePlate:
     vtbls:
@@ -10392,6 +10392,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140328F40: ctor
+  Client::UI::Agent::AgentFashion::FashionCharaView:
+    vtbls:
+      - ea: 0x141FC3078
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentFashion:
     vtbls:
       - ea: 0x141FC30E8
