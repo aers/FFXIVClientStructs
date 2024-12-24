@@ -17,15 +17,14 @@ public unsafe partial struct Inspect {
     [FieldOffset(0x75)] public byte ClassJobId;
     [FieldOffset(0x76)] public byte Level;
     [FieldOffset(0x77)] public byte SyncedLevel;
-
-    [FieldOffset(0x79)] public ushort AverageItemLevel;
-    [FieldOffset(0x7B)] public ushort TitleId;
-    [FieldOffset(0x7D)] public byte GrandCompanyIndex;
-    [FieldOffset(0x7E)] public byte GrandCompanyRank;
-    [FieldOffset(0x7F)] public CustomizeData CustomizeData;
-    [FieldOffset(0x99)] public byte BuddyEquipTop; // only if Type == 3
-    [FieldOffset(0x9A)] public byte BuddyEquipBody; // only if Type == 3
-    [FieldOffset(0x9B)] public byte BuddyEquipLegs; // only if Type == 3
+    [FieldOffset(0x78)] public ushort AverageItemLevel;
+    [FieldOffset(0x7A)] public ushort TitleId;
+    [FieldOffset(0x7C)] public byte GrandCompanyIndex;
+    [FieldOffset(0x7D)] public byte GrandCompanyRank;
+    [FieldOffset(0x7E)] public CustomizeData CustomizeData;
+    [FieldOffset(0x98)] public byte BuddyEquipTop; // only if Type == 3
+    [FieldOffset(0x99)] public byte BuddyEquipBody; // only if Type == 3
+    [FieldOffset(0x9A)] public byte BuddyEquipLegs; // only if Type == 3
 
     [FieldOffset(0x104), FixedSizeArray] internal FixedSizeArray74<uint> _baseParams;
 
