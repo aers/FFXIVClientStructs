@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Photo;
 [Inherits<Client.System.Framework.Task>]
 [StructLayout(LayoutKind.Explicit, Size = 0x288)]
 public unsafe partial struct ScreenShot {
-    [StaticAddress("48 8B 1D ?? ?? ?? ?? 48 85 DB 74 ?? 41 B0", 3)]
+    [StaticAddress("48 8B 1D ?? ?? ?? ?? 48 85 DB 74 ?? 41 B0", 3, isPointer: true)]
     public static partial ScreenShot* Instance();
 
     [FieldOffset(0x38)] public ScreenShotThread* ThreadPtr;
