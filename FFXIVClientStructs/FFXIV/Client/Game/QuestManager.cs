@@ -10,13 +10,49 @@ public unsafe partial struct QuestManager {
     [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();
 
+    [FieldOffset(0x00)] private ushort Unk0;
+    [FieldOffset(0x02)] private ushort Unk2;
+    [FieldOffset(0x04)] private ushort Unk4;
+    [FieldOffset(0x06)] private ushort Unk6;
+    [FieldOffset(0x08)] private ushort Unk8;
+    // [FieldOffset(0x0A)] array of 6 bytes?
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray30<QuestWork> _normalQuests;
+    [FieldOffset(0x2E0), FixedSizeArray] internal FixedSizeArray691<byte> _completedQuestsBitmask;
+    [FieldOffset(0x593), FixedSizeArray] internal FixedSizeArray64<byte> _unlockedMapMarkersBitmask;
+    [FieldOffset(0x5D3), FixedSizeArray] internal FixedSizeArray2<byte> _questRepeatFlagsBitmask;
+
     [FieldOffset(0x5D8), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
     [FieldOffset(0x698)] public byte DailyQuestSeed;
+
+    [FieldOffset(0x69A), FixedSizeArray] internal FixedSizeArray40<byte> _unkBitmask1;
+
     [FieldOffset(0x6C8), FixedSizeArray] internal FixedSizeArray10<TrackingWork> _trackedQuests;
+    [FieldOffset(0x768)] private byte UnkJournalByte;
+    [FieldOffset(0x76A)] private byte UnkJournalWord; // QuestId?!
+
+    [FieldOffset(0x76C), FixedSizeArray] internal FixedSizeArray158<byte> _unkBitmask2;
+
+    [FieldOffset(0x80C), FixedSizeArray] internal FixedSizeArray94<byte> _unkBitmask3;
+
+    [FieldOffset(0x86C), FixedSizeArray] internal FixedSizeArray40<byte> _seenGatheringNotebookDivisionLevelRangesBitmask;
+    [FieldOffset(0x894), FixedSizeArray] internal FixedSizeArray102<byte> _gatheredGatheringItemsBitmask;
+    /// <remarks>Used for Actions with SecondaryCostType 9 (Brunt Force and Deep Vigor).</remarks>
+    [FieldOffset(0x8FA)] public byte SuccessfulGatheringChainCount;
+
+    [FieldOffset(0x8FC), FixedSizeArray] internal FixedSizeArray72<byte> _seenCraftingNotebookDivisionLevelRangesBitmask;
+    [FieldOffset(0x94C), FixedSizeArray] internal FixedSizeArray800<byte> _completedRecipesBitmask;
+
+    [FieldOffset(0xC70)] private uint UnkC70;
+    [FieldOffset(0xC74)] private uint UnkC74;
+    [FieldOffset(0xC78)] private uint UnkC78;
+
     [FieldOffset(0xCA8), FixedSizeArray] internal FixedSizeArray18<BeastReputationWork> _beastReputation;
     [FieldOffset(0xDC8), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
+
     [FieldOffset(0xF48)] public byte NumLeveAllowances;
+    [FieldOffset(0xF49)] private ushort UnkF49;
+    [FieldOffset(0xF4C)] private uint UnkF4C;
+    [FieldOffset(0xF50), FixedSizeArray] internal FixedSizeArray226<byte> _completedLeveQuestsBitmask;
 
     /// <remarks>
     /// This behaves weirdly in that it does not reset but add on top when logging onto different characters,
@@ -24,8 +60,7 @@ public unsafe partial struct QuestManager {
     /// </remarks>>
     [FieldOffset(0x1038)] public byte NumAcceptedQuests;
 
-    [FieldOffset(0x10D8)] public byte NumAcceptedLeveQuests;
-
+    [FieldOffset(0x10D8)] public byte NumAcceptedLeveQuests; // most likely not part of QuestManager anymore
 
     [MemberFunction("E8 ?? ?? ?? ?? 43 88 84 3E ?? ?? ?? ??")]
     public static partial bool IsQuestComplete(ushort questId);
@@ -61,6 +96,10 @@ public unsafe partial struct QuestManager {
      */
     public bool IsQuestAccepted(uint questId) => IsQuestAccepted((ushort)(questId & 0xFFFF));
 
+    /// <param name="questRepeatFlag">QuestRepeatFlag RowId / field from Quest sheet.</param>
+    [MemberFunction("0F B6 C2 4C 8B C9")]
+    public partial bool IsQuestRepeatFlagSet(byte questRepeatFlag);
+
     /// <summary>
     /// Check if a recipe has been crafted (= completed) before.
     /// </summary>
@@ -68,6 +107,14 @@ public unsafe partial struct QuestManager {
     /// <returns>Returns <c>true</c> if the recipe has been completed, <c>false</c> otherwise.</returns>
     [MemberFunction("40 53 48 83 EC 20 8B D9 81 F9")]
     public static partial bool IsRecipeComplete(uint recipeId);
+
+    /// <summary>
+    /// Check if a GatheringItem has been gathered before.
+    /// </summary>
+    /// <param name="gatheringItemId">The RowId of the GatheringItem sheet.</param>
+    /// <returns>Returns <c>true</c> if the item has been gathered before, <c>false</c> otherwise.</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 88 87 ?? ?? ?? ?? B8")]
+    public static partial bool IsGatheringItemGathered(ushort gatheringItemId);
 
     /// <summary>
     /// Check if a specific levequest has been completed.
