@@ -34,8 +34,9 @@ public unsafe partial struct CharaView : ICreatable {
 
     [FieldOffset(0xF8), FixedSizeArray] internal FixedSizeArray14<CharaViewItem> _items;
 
-    [FieldOffset(0x308)] public bool CharacterDataCopied; // unsure if correct
-    [FieldOffset(0x309)] public bool CharacterLoaded; // unsure if correct
+    [FieldOffset(0x308)] public byte FreeCompanyCrestBitfield;
+    [FieldOffset(0x309)] public bool CharacterDataCopied;
+    [FieldOffset(0x30A)] public bool CharacterLoaded;
 
     public static CharaView* Create()
         => IMemorySpace.GetUISpace()->Create<CharaView>();
