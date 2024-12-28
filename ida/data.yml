@@ -7898,8 +7898,7 @@ classes:
       0: Dtor
     funcs:
       0x14091DF60: ctor
-#       0x1406B26A0: Finalizer # Inlined in dtor
-      0x14091E040: Populate
+      0x14091E000: Finalizer
       0x14091E1D0: GetWorldById
       0x14091E250: GetWorldNameById
       0x14091E2B0: GetWorldIdByName
