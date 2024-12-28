@@ -1350,7 +1350,7 @@ classes:
       0x140390D00: GetMateriaId
       0x1407BEBC0: GetMateriaGrade
       0x1407FE580: ctor
-      0x1407FE5D0: Dtor
+      0x1407FE5D0: Finalize
       0x1407FE940: GetLinkedItem
       0x1407FEE60: GetConditionPercentage
       0x1407FEEA0: GetStain
