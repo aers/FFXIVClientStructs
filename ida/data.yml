@@ -128,6 +128,7 @@ functions:
 #fail   0x1403297E0: GetGlobalTextParameter
   0x140691E20: std::vector<Component::GUI::AtkValue>_SetSize
   0x140E92FD0: GetGameObjectByIndex
+  0x1406FB690: GetLayoutInstance
   0x1408FA950: GetRandomInteger
   0x1408FA9B0: GetRandomFloat
   0x1404C95D0: UpdateAnimFactor
@@ -1349,6 +1350,7 @@ classes:
       0x140390D00: GetMateriaId
       0x1407BEBC0: GetMateriaGrade
       0x1407FE580: ctor
+      0x1407FE5D0: Dtor
       0x1407FE940: GetLinkedItem
       0x1407FEE60: GetConditionPercentage
       0x1407FEEA0: GetStain
@@ -6787,6 +6789,7 @@ classes:
       0x1406AF970: CreateSingleton
       0x1406B09A0: LoadPrefetchLayout
       0x1406B0D50: UnloadManagerLayout
+      0x1406B38C0: GetLayoutInstance
       0x1406B4380: AddRsvString
       0x1406B4620: UnloadRsvMap
       0x1406B4770: ResolveRsvString
@@ -6804,6 +6807,7 @@ classes:
       0x1406B93B0: ctor
       # 0x1405C9C00: SetInteriorFixture # inlined @ 1406CDF00
       0x1406BCCD0: SetActiveFestivals
+      0x1406C5400: GetLayoutInstance
   Client::LayoutEngine::OutdoorAreaLayoutData:
     funcs:
       0x14069EA70: SetFixture # inlined in 0x1406F4B60 (not 100% sure)

@@ -30,6 +30,10 @@ public unsafe partial struct LayoutWorld {
     [FieldOffset(0x220)] public StdMap<Utf8String, Pointer<byte>>* RsvMap;
     [FieldOffset(0x228)] public StdMap<ulong, Pointer<byte>>* RsfMap; // Key is v0 index hash, value is always 64 bytes in size
 
+    /// <remarks> Tries to get it from <see cref="ActiveLayout"/> first, then from <see cref="GlobalLayout"/>. </remarks>
+    [MemberFunction("E9 ?? ?? ?? ?? 8B 43 78")]
+    public static partial ILayoutInstance* GetLayoutInstance(InstanceType instanceType, uint instanceId, uint subId = 0);
+
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 44 89 B7")]
     public static partial void UnloadPrefetchLayout();
 
