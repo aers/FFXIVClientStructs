@@ -13107,6 +13107,52 @@ structs:
     name: ItemCount
     offset: 36
   member_functions: []
+- type: Client::UI::Misc::AddonConfigEntry
+  name: AddonConfigEntry
+  namespace: Client.UI.Misc
+  union: False
+  size: 36
+  fields:
+  - type: unsigned int
+    name: AddonNameHash
+    offset: 0
+  - type: float
+    name: X
+    offset: 4
+  - type: float
+    name: Y
+    offset: 8
+  - type: float
+    name: Scale
+    offset: 12
+  - type: unsigned int
+    name: ElementFlags
+    offset: 16
+  - type: unsigned __int16
+    name: Width
+    offset: 20
+  - type: unsigned __int16
+    name: Height
+    offset: 22
+  - type: byte
+    name: ByteValue1
+    offset: 24
+  - type: byte
+    name: ByteValue2
+    offset: 25
+  - type: byte
+    name: ByteValue3
+    offset: 26
+  - type: byte
+    name: Alpha
+    offset: 27
+  - type: byte
+    name: HasValue
+    offset: 32
+  - type: byte
+    name: IsOpen
+    offset: 33
+  member_functions: []
 - type: Client::UI::Misc::AozNoteModule::AozCrossHotBar
   name: AozCrossHotBar
   namespace: Client.UI.Misc
@@ -13954,11 +14000,8 @@ structs:
     name: DataCenter
     offset: 0
   - type: byte
-    name: IsPublic
-    offset: 1
-  - type: byte
     name: Name
-    offset: 2
+    offset: 1
     size: 32
   member_functions: []
 - type: Client::UI::MoveableAddonInfoStruct
@@ -30082,19 +30125,6 @@ structs:
       name: unk1
     - type: byte
       name: unk2
-- type: Client::UI::Misc::AddonConfigData
-  name: AddonConfigData
-  namespace: Client.UI.Misc
-  union: False
-  size: 52184
-  fields:
-  - type: Client::System::String::Utf8String
-    name: DefaultString
-    offset: 0
-  - type: int
-    name: CurrentHudLayout
-    offset: 52176
-  member_functions: []
 - type: Client::UI::Misc::BannerModule
   name: BannerModule
   namespace: Client.UI.Misc
@@ -38051,28 +38081,28 @@ structs:
     offset: 119
   - type: unsigned __int16
     name: AverageItemLevel
-    offset: 121
+    offset: 120
   - type: unsigned __int16
     name: TitleId
-    offset: 123
+    offset: 122
   - type: byte
     name: GrandCompanyIndex
-    offset: 125
+    offset: 124
   - type: byte
     name: GrandCompanyRank
-    offset: 126
+    offset: 125
   - type: Client::Game::Character::CustomizeData
     name: CustomizeData
-    offset: 127
+    offset: 126
   - type: byte
     name: BuddyEquipTop
-    offset: 153
+    offset: 152
   - type: byte
     name: BuddyEquipBody
-    offset: 154
+    offset: 153
   - type: byte
     name: BuddyEquipLegs
-    offset: 155
+    offset: 154
   - type: unsigned int
     name: BaseParams
     offset: 260
@@ -45757,6 +45787,31 @@ structs:
       name: this
     - type: Component::GUI::LinkData*
       name: linkData
+- type: Client::UI::Misc::AddonConfigData
+  name: AddonConfigData
+  namespace: Client.UI.Misc
+  union: False
+  size: 52184
+  fields:
+  - type: Client::System::String::Utf8String
+    name: DefaultString
+    offset: 0
+  - type: Client::UI::Misc::AddonConfigEntry
+    name: ConfigEntries
+    offset: 136
+    size: 998
+  - type: Client::System::String::Utf8String
+    name: HudLayoutNames
+    offset: 36064
+    size: 4
+  - type: Client::UI::Misc::AddonConfigEntry
+    name: HudLayoutConfigEntries
+    offset: 36480
+    size: 436
+  - type: int
+    name: CurrentHudLayout
+    offset: 52176
+  member_functions: []
 - type: Client::UI::Misc::BannerModuleEntry
   name: BannerModuleEntry
   namespace: Client.UI.Misc
@@ -53116,11 +53171,14 @@ structs:
     offset: 248
     size: 14
   - type: byte
-    name: CharacterDataCopied
+    name: FreeCompanyCrestBitfield
     offset: 776
   - type: byte
-    name: CharacterLoaded
+    name: CharacterDataCopied
     offset: 777
+  - type: byte
+    name: CharacterLoaded
+    offset: 778
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -57362,8 +57420,8 @@ structs:
       name: levelId
     - type: unsigned int
       name: territoryTypeId
-    - type: Client::Game::GameMain*
-      name: gameMain
+    - type: Client::Game::GameMain::Festival*
+      name: festivals
     - type: unsigned int
       name: cfcId
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 83 B9 ?? ?? ?? ?? ?? 48 8B F1
@@ -66048,10 +66106,37 @@ structs:
   union: False
   size: 4313
   fields:
+  - type: unsigned __int16
+    name: Unk0
+    offset: 0
+  - type: unsigned __int16
+    name: Unk2
+    offset: 2
+  - type: unsigned __int16
+    name: Unk4
+    offset: 4
+  - type: unsigned __int16
+    name: Unk6
+    offset: 6
+  - type: unsigned __int16
+    name: Unk8
+    offset: 8
   - type: Application::Network::WorkDefinitions::QuestWork
     name: NormalQuests
     offset: 16
     size: 30
+  - type: byte
+    name: CompletedQuestsBitmask
+    offset: 736
+    size: 691
+  - type: byte
+    name: UnlockedMapMarkersBitmask
+    offset: 1427
+    size: 64
+  - type: byte
+    name: QuestRepeatFlagsBitmask
+    offset: 1491
+    size: 2
   - type: Application::Network::WorkDefinitions::DailyQuestWork
     name: DailyQuests
     offset: 1496
@@ -66059,10 +66144,56 @@ structs:
   - type: byte
     name: DailyQuestSeed
     offset: 1688
+  - type: byte
+    name: UnkBitmask1
+    offset: 1690
+    size: 40
   - type: Application::Network::WorkDefinitions::TrackingWork
     name: TrackedQuests
     offset: 1736
     size: 10
+  - type: byte
+    name: UnkJournalByte
+    offset: 1896
+  - type: byte
+    name: UnkJournalWord
+    offset: 1898
+  - type: byte
+    name: UnkBitmask2
+    offset: 1900
+    size: 158
+  - type: byte
+    name: UnkBitmask3
+    offset: 2060
+    size: 94
+  - type: byte
+    name: SeenGatheringNotebookDivisionLevelRangesBitmask
+    offset: 2156
+    size: 40
+  - type: byte
+    name: GatheredGatheringItemsBitmask
+    offset: 2196
+    size: 102
+  - type: byte
+    name: SuccessfulGatheringChainCount
+    offset: 2298
+  - type: byte
+    name: SeenCraftingNotebookDivisionLevelRangesBitmask
+    offset: 2300
+    size: 72
+  - type: byte
+    name: CompletedRecipesBitmask
+    offset: 2380
+    size: 800
+  - type: unsigned int
+    name: UnkC70
+    offset: 3184
+  - type: unsigned int
+    name: UnkC74
+    offset: 3188
+  - type: unsigned int
+    name: UnkC78
+    offset: 3192
   - type: Application::Network::WorkDefinitions::BeastReputationWork
     name: BeastReputation
     offset: 3240
@@ -66074,6 +66205,16 @@ structs:
   - type: byte
     name: NumLeveAllowances
     offset: 3912
+  - type: unsigned __int16
+    name: UnkF49
+    offset: 3913
+  - type: unsigned int
+    name: UnkF4C
+    offset: 3916
+  - type: byte
+    name: CompletedLeveQuestsBitmask
+    offset: 3920
+    size: 226
   - type: byte
     name: NumAcceptedQuests
     offset: 4152
@@ -66089,6 +66230,14 @@ structs:
       name: this
     - type: unsigned __int16
       name: questId
+  - signature: 0F B6 C2 4C 8B C9
+    return_type: byte
+    name: IsQuestRepeatFlagSet
+    parameters:
+    - type: Client::Game::QuestManager*
+      name: this
+    - type: byte
+      name: questRepeatFlag
   - signature: 44 0F B7 C2 4C 8B C9 49 C1 E8 03
     return_type: byte
     name: IsLevequestComplete
@@ -70122,7 +70271,7 @@ structs:
     base: true
   - type: Client::UI::Agent::AgentColorant::ColorantCharaView
     name: CharaView
-    offset: 264
+    offset: 336
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -70223,7 +70372,7 @@ structs:
     base: true
   - type: Client::UI::Agent::AgentGearSet::GearsetCharaView
     name: CharaView
-    offset: 2056
+    offset: 2168
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -71011,7 +71160,7 @@ structs:
     offset: 60
   - type: Client::UI::Agent::AgentStatus::StatusCharaView
     name: CharaView
-    offset: 136
+    offset: 216
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -131055,12 +131204,207 @@ structs:
     name: ContentDirector
     offset: 0
     base: true
+  - type: unsigned int
+    name: NewPlayerBonusGil
+    offset: 3456
+  - type: unsigned int
+    name: NewPlayerBonusExp
+    offset: 3460
+  - type: unsigned int
+    name: FinalBossExp
+    offset: 3464
+  - type: unsigned int
+    name: Unknown0
+    offset: 3468
+  - type: unsigned int
+    name: BossExp0
+    offset: 3472
+  - type: unsigned int
+    name: BossExp1
+    offset: 3476
+  - type: unsigned int
+    name: BossExp2
+    offset: 3480
+  - type: unsigned int
+    name: BossExp3
+    offset: 3484
+  - type: unsigned int
+    name: BossExp4
+    offset: 3488
+  - type: unsigned int
+    name: InstanceClearExp
+    offset: 3492
+  - type: unsigned int
+    name: InstanceClearGil
+    offset: 3496
+  - type: unsigned int
+    name: InstanceContentRewardItem
+    offset: 3500
+  - type: unsigned __int16
+    name: NewPlayerBonusA
+    offset: 3504
+  - type: unsigned __int16
+    name: NewPlayerBonusB
+    offset: 3506
+  - type: unsigned __int16
+    name: FinalBossCurrencyA
+    offset: 3508
+  - type: unsigned __int16
+    name: FinalBossCurrencyB
+    offset: 3510
+  - type: unsigned __int16
+    name: FinalBossCurrencyC
+    offset: 3512
+  - type: unsigned __int16
+    name: BossCurrencyA0
+    offset: 3514
+  - type: unsigned __int16
+    name: BossCurrencyA1
+    offset: 3516
+  - type: unsigned __int16
+    name: BossCurrencyA2
+    offset: 3518
+  - type: unsigned __int16
+    name: BossCurrencyA3
+    offset: 3520
+  - type: unsigned __int16
+    name: BossCurrencyA4
+    offset: 3522
+  - type: unsigned __int16
+    name: BossCurrencyB0
+    offset: 3524
+  - type: unsigned __int16
+    name: BossCurrencyB1
+    offset: 3526
+  - type: unsigned __int16
+    name: BossCurrencyB2
+    offset: 3528
+  - type: unsigned __int16
+    name: BossCurrencyB3
+    offset: 3530
+  - type: unsigned __int16
+    name: BossCurrencyB4
+    offset: 3532
+  - type: unsigned __int16
+    name: BossCurrencyC0
+    offset: 3534
+  - type: unsigned __int16
+    name: BossCurrencyC1
+    offset: 3536
+  - type: unsigned __int16
+    name: BossCurrencyC2
+    offset: 3538
+  - type: unsigned __int16
+    name: BossCurrencyC3
+    offset: 3540
+  - type: unsigned __int16
+    name: BossCurrencyC4
+    offset: 3542
+  - type: unsigned __int16
+    name: Unknown1
+    offset: 3544
+  - type: byte
+    name: Unknown20
+    offset: 3546
+  - type: unsigned int
+    name: Cutscene
+    offset: 3548
+  - type: unsigned int
+    name: LGBEventRange
+    offset: 3552
+  - type: unsigned int
+    name: InstanceContentTextDataBossStart
+    offset: 3556
+  - type: unsigned int
+    name: InstanceContentTextDataBossEnd
+    offset: 3560
+  - type: unsigned int
+    name: BNpcBaseBoss
+    offset: 3564
+  - type: unsigned int
+    name: InstanceContentTextDataObjectiveStart
+    offset: 3568
+  - type: unsigned int
+    name: InstanceContentTextDataObjectiveEnd
+    offset: 3572
+  - type: unsigned int
+    name: Unknown2
+    offset: 3576
+  - type: unsigned int
+    name: ReqInstance
+    offset: 3580
+  - type: int
+    name: InstanceContentBuff
+    offset: 3584
   - type: unsigned __int16
     name: ContentTimeMax
     offset: 3588
+  - type: unsigned __int16
+    name: BGM
+    offset: 3590
+  - type: unsigned __int16
+    name: WinBGM
+    offset: 3592
+  - type: unsigned __int16
+    name: Order
+    offset: 3594
+  - type: unsigned __int16
+    name: SortKey
+    offset: 3596
+  - type: unsigned __int16
+    name: Unknown3
+    offset: 3598
+  - type: unsigned __int16
+    name: Unknown4
+    offset: 3600
+  - type: unsigned __int16
+    name: Unknown5
+    offset: 3602
+  - type: unsigned __int16
+    name: Unknown6
+    offset: 3604
+  - type: unsigned __int16
+    name: Unknown7
+    offset: 3606
+  - type: unsigned __int16
+    name: Unknown8
+    offset: 3608
+  - type: unsigned __int16
+    name: Unknown_70
+    offset: 3610
+  - type: __int16
+    name: PartyCondition
+    offset: 3612
   - type: Client::Game::InstanceContent::InstanceContentType
     name: InstanceContentType
     offset: 3614
+  - type: byte
+    name: WeekRestriction
+    offset: 3615
+  - type: byte
+    name: Colosseum
+    offset: 3616
+  - type: byte
+    name: Unknown9
+    offset: 3617
+  - type: byte
+    name: Unknown10
+    offset: 3618
+  - type: byte
+    name: Unknown11
+    offset: 3619
+  - type: byte
+    name: Unknown12
+    offset: 3620
+  - type: byte
+    name: Unknown19
+    offset: 3621
+  - type: byte
+    name: Unknown13
+    offset: 3622
+  - type: byte
+    name: Unknown14_Unknown15_Unknown16_Unknown17_Unknown18
+    offset: 3623
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
@@ -131198,13 +131542,13 @@ structs:
     offset: 3500
   - type: unsigned __int16
     name: Unknown5
-    offset: 3504
+    offset: 3502
   - type: Client::Game::InstanceContent::PublicContentDirectorType
     name: Type
-    offset: 3506
+    offset: 3504
   - type: byte
     name: Unknown4
-    offset: 3507
+    offset: 3505
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
