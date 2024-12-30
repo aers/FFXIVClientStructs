@@ -71,6 +71,13 @@ class DefinedFuncField(DefinedField, object):
         self.return_type = return_type
         self.parameters = params
 
+class DefinedStaticMember:
+    def __init__(self, signature, relative_offsets, return_type, is_pointer):
+        # type: (str, list[int], str, bool) -> None
+        self.signature = signature
+        self.relative_offsets = relative_offsets
+        self.return_type = return_type
+        self.is_pointer = is_pointer
 
 class DefinedFixedField(DefinedField, object):
     def __init__(self, name, type, offset, base, size):
@@ -90,14 +97,18 @@ class DefinedStruct(DefinedBase, object):
         virtual_functions,
         member_functions,
         union,
+        static_member_functions,
+        static_members
     ):
-        # type: (str, str, str, list[DefinedField], int | None, list[DefinedVFunc], list[DefinedMemFunc], str) -> None
+        # type: (str, str, str, list[DefinedField], int | None, list[DefinedVFunc] | None, list[DefinedMemFunc], str, list[DefinedMemFunc] | None, list[DefinedStaticMember] | None) -> None
         super(DefinedStruct, self).__init__(name, type, namespace)
         self.fields = fields
         self.size = size
         self.virtual_functions = virtual_functions
         self.member_functions = member_functions
         self.union = bool(union)
+        self.static_member_functions = static_member_functions
+        self.static_members = static_members
 
 
 class DefinedExport:
@@ -170,7 +181,14 @@ class BaseApi:
         """
         Updates a virtual function in the database.
         """
-
+        
+    @abstractmethod
+    def update_static_member(self, static_member, struct):
+        # type: (DefinedStaticMember, DefinedStruct) -> None
+        """
+        Updates a static member in the database.
+        """
+    
     @abstractmethod
     def should_update_member_func(self):
         # type: () -> bool
@@ -211,6 +229,8 @@ class BaseApi:
             fields = []
             virtual_functions = None
             member_functions = []
+            static_member_functions = None
+            static_members = None
             for field in struct["fields"]:
                 base = field["base"] if "base" in field else False
                 if "size" in field:
@@ -276,6 +296,28 @@ class BaseApi:
                         memfunc["name"],
                     )
                 )
+            if "static_member_functions" in struct:
+                static_member_functions = []
+                for smemfunc in struct["static_member_functions"]:
+                    parameters = []
+                    for param in smemfunc["parameters"]:
+                        parameters.append(
+                            DefinedFuncParam(param["name"], param["type"])
+                        )
+                    static_member_functions.append(
+                        DefinedMemFunc(
+                            smemfunc["signature"],
+                            smemfunc["return_type"],
+                            parameters,
+                            smemfunc["name"],
+                        )
+                    )
+            if "static_members" in struct:
+                static_members = []
+                for sm in struct["static_members"]:
+                    static_members.append(
+                        DefinedStaticMember(sm["signature"], sm["relative_follow_offsets"], sm["return_type"], sm["is_pointer"] if "is_pointer" in sm else False)
+                    )
             if "size" in struct:
                 structs.append(
                     DefinedStruct(
@@ -287,6 +329,8 @@ class BaseApi:
                         virtual_functions,
                         member_functions,
                         struct["union"],
+                        static_member_functions,
+                        static_members
                     )
                 )
             else:
@@ -300,6 +344,8 @@ class BaseApi:
                         virtual_functions,
                         member_functions,
                         struct["union"],
+                        static_member_functions,
+                        static_members
                     )
                 )
         return DefinedExport(enums, structs)
@@ -460,6 +506,8 @@ if api is None:
                             idaapi.get_idati(), self.clean_struct_name(name)
                         )
                         return tinfo
+                
+                # TODO implement enum handling
 
                 if name == "void":
                     idaapi.parse_decl(
@@ -561,6 +609,9 @@ if api is None:
                     16,
                     flag,
                 )
+                
+            def get_dword(self, ea):
+                return ida_bytes.get_original_dword(ea)
 
             def get_func_ea_by_name(self, name):
                 # type: (str) -> int
@@ -901,6 +952,26 @@ if api is None:
                     func_data.push_back(arg)
                 tif.create_func(func_data)
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+            
+            def update_static_member(self, static_member, struct):
+                # type: (DefinedStaticMember, DefinedStruct) -> None
+                ea = self.search_binary(0, static_member.signature, ida_search.SEARCH_DOWN)
+                if ea == idc.BADADDR:
+                    print("Error: {0} not found something is wrong".format(static_member.signature))
+                    return
+                for follows in static_member.relative_offsets:
+                    ea = ea + follows
+                    ea = ea + 4 + self.get_dword(ea)
+                tif = ida_typeinf.tinfo_t()
+                ida_typeinf.guess_tinfo(tif, ea)
+                return_type = static_member.return_type
+                if static_member.is_pointer:
+                    return_type = return_type + "*"
+                ida_typeinf.apply_tinfo(ea, self.get_tinfo_from_type(return_type), ida_typeinf.TINFO_DEFINITE)
+                if static_member.is_pointer:
+                    ida_name.set_name(ea, "g_{0}_{1}".format(self.clean_name(struct.type), "PtrInstance"))
+                else:
+                    ida_name.set_name(ea, "g_{0}_{1}".format(self.clean_name(struct.type), "Instance"))
 
             def should_update_member_func(self):
                 return (
@@ -1309,6 +1380,10 @@ if api is None:
                     False,
                     SourceType.USER_DEFINED,
                 )
+            
+            def update_static_member(self, static_member, struct):
+                # type: (DefinedStaticMember, DefinedStruct) -> None
+                pass
 
             def should_update_member_func(self):
                 # type: () -> bool
@@ -1509,6 +1584,10 @@ if api is None:
                         if new_param_type is not None:
                             param_var.type = new_param_type
                         param_var.name = param.name
+            
+            def update_static_member(self, static_member, struct):
+                # type: (DefinedStaticMember, DefinedStruct) -> None
+                pass
 
             def should_update_member_func(self):
                 # type: () -> bool
@@ -1600,6 +1679,25 @@ def run():
                 )
                 for member_func in struct.member_functions:
                     api.update_member_func(member_func, struct)
+            
+            if struct.static_member_functions:
+                print(
+                    "{0} Updating static member functions for {1}".format(
+                        get_time(), struct.type
+                    )
+                )
+                for member_func in struct.static_member_functions:
+                    print("{0} {1}".format(get_time(), member_func.name))
+                    api.update_member_func(member_func, struct)
+            
+            if struct.static_members:
+                print(
+                    "{0} Updating static members for {1}".format(
+                        get_time(), struct.type
+                    )
+                )
+                for member in struct.static_members:
+                    api.update_static_member(member, struct)
 
 
 run()
