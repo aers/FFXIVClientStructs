@@ -18,6 +18,7 @@ public class Program {
         }
 
         Exporter.ProcessTypes();
+        Exporter.ProcessStaticFunctions();
 
         Exporter.VerifyNoOverlap();
 

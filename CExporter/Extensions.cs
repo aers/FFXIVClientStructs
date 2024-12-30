@@ -153,6 +153,16 @@ public static partial class TypeExtensions {
                || ns.StartsWith("Havok");
     }
 
+    public static Type GetPointerType(this Type type) {
+        while (type.IsPointer()) {
+            if (type.IsPointer) type = type.GetElementType()!;
+            else if (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
+            else if (type.IsFunctionPointer) type = type.GetFunctionPointerReturnType();
+            else if (type.IsUnmanagedFunctionPointer) type = type.GetFunctionPointerReturnType();
+        }
+        return type;
+    }
+
     public static bool IsPointer(this Type type) {
         return type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || type.IsGenericPointer();
     }

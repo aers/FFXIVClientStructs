@@ -93,6 +93,50 @@ public class Exporter {
         Console.WriteLine($"Processed {_enums.Count} enums and {_structs.Count} structs");
     }
 
+    public static void ProcessStaticFunctions() {
+        Type[] types = [.. ExporterStatics.GetHavokTypes(), .. ExporterStatics.GetXIVTypes()];
+        types = types.Where(t => t.IsStruct()).Where(type => type.GetMethods(ExporterStatics.StaticBindingFlags).Length != 0).ToArray();
+        Console.WriteLine("::group::Processed Struct Static Members");
+        var typeAndMembers = types.Select(t => (t, t.GetMethods(ExporterStatics.StaticBindingFlags))).ToArray();
+        foreach (var (type, methods) in typeAndMembers) {
+            Console.WriteLine($"Processing {type} with {methods.Length} methods");
+            var currentStructIndex = _structs.FindIndex(s => s.StructTypeName == type.FullSanitizeName());
+            if (currentStructIndex == -1) {
+                Console.WriteLine($"Error in struct {type} please fix");
+                continue;
+            }
+            var currentStruct = _structs[currentStructIndex];
+            foreach (var methodInfo in methods) {
+                var staticAddress = methodInfo.GetCustomAttribute<StaticAddressAttribute>();
+                if (staticAddress != null) {
+                    currentStruct.StaticMembers ??= [];
+                    currentStruct.StaticMembers = [.. currentStruct.StaticMembers, new ProcessedStaticMembers {
+                        Signature = staticAddress.Signature,
+                        RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
+                        IsPointer = staticAddress.IsPointer,
+                        ReturnType = methodInfo.ReturnType.GetPointerType()
+                    }];
+                }
+                var memberFunction = methodInfo.GetCustomAttribute<MemberFunctionAttribute>();
+                if (memberFunction == null) continue;
+                currentStruct.StaticMemberFunctions ??= [];
+                currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions, new ProcessedMemberFunction {
+                    MemberFunctionSignature = memberFunction.Signature,
+                    MemberFunctionName = methodInfo.Name,
+                    MemberFunctionReturnType = methodInfo.ReturnType,
+                    MemberFunctionParameters = methodInfo.GetParameters().Select(p => new ProcessedField {
+                        FieldType = p.ParameterType,
+                        FieldOffset = -1,
+                        FieldName = p.Name!
+                    }).ToArray()
+                }];
+            }
+            _structs[currentStructIndex] = currentStruct;
+        }
+        Console.WriteLine("::endgroup::");
+        Console.WriteLine($"Processed {typeAndMembers.Length} structs with {typeAndMembers.Sum(t => t.Item2.Length)} members");
+    }
+
     public static void VerifyNoOverlap() {
         foreach (var processedStruct in _structs.Where(t => !t.IsUnion)) {
             var sizes = processedStruct.Fields.Select(t => new { StartOffset = t.FieldOffset, EndOffset = t.FieldOffset + t.FieldSize, Field = t.FieldName }).ToArray();
@@ -467,6 +511,13 @@ public class ProcessedFunctionField : ProcessedField {
     public required ProcessedField[] FunctionParameters;
 }
 
+public class ProcessedStaticMembers {
+    public required string Signature;
+    public required ushort[] RelativeFollowOffsets;
+    public bool IsPointer;
+    public required Type ReturnType;
+}
+
 public class ProcessedStruct {
     public string? StructTypeOverride;
     public bool IsUnion;
@@ -477,6 +528,8 @@ public class ProcessedStruct {
     public required ProcessedField[] Fields;
     public ProcessedVirtualFunction[]? VirtualFunctions; // null if there are no virtual functions, empty if there's a vtable with unknown contents
     public required ProcessedMemberFunction[] MemberFunctions;
+    public ProcessedMemberFunction[]? StaticMemberFunctions;
+    public ProcessedStaticMembers[]? StaticMembers;
     [YamlIgnore]
     public required string StructTypeName;
     [YamlIgnore]
@@ -630,6 +683,22 @@ public class ProcessedStructConverter : IYamlTypeConverter {
             ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, memberFunction, memberFunction.GetType());
         }
         emitter.Emit(new SequenceEnd());
+        if (s.StaticMembers != null) {
+            emitter.Emit(new Scalar("static_members"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+            foreach (var staticMember in s.StaticMembers) {
+                ProcessedStaticMembersConverter.Instance.WriteYaml(emitter, staticMember, staticMember.GetType());
+            }
+            emitter.Emit(new SequenceEnd());
+        }
+        if (s.StaticMemberFunctions != null) {
+            emitter.Emit(new Scalar("static_member_functions"));
+            emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+            foreach (var staticMemberFunction in s.StaticMemberFunctions) {
+                ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, staticMemberFunction, staticMemberFunction.GetType());
+            }
+            emitter.Emit(new SequenceEnd());
+        }
         emitter.Emit(new MappingEnd());
     }
     public static readonly IYamlTypeConverter Instance = new ProcessedStructConverter();
@@ -686,4 +755,28 @@ public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
     }
 
     public static readonly IYamlTypeConverter Instance = new ProcessedVirtualFunctionConverter();
+}
+
+public class ProcessedStaticMembersConverter : IYamlTypeConverter {
+    public bool Accepts(Type type) => type == typeof(ProcessedStaticMembers);
+    public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
+    public void WriteYaml(IEmitter emitter, object? value, Type type) {
+        if (value is not ProcessedStaticMembers s) return;
+        emitter.Emit(new MappingStart());
+        emitter.Emit(new Scalar("signature"));
+        emitter.Emit(new Scalar(s.Signature));
+        emitter.Emit(new Scalar("relative_follow_offsets"));
+        emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
+        foreach (var offset in s.RelativeFollowOffsets) {
+            emitter.Emit(new Scalar(offset.ToString()));
+        }
+        emitter.Emit(new SequenceEnd());
+        emitter.Emit(new Scalar("is_pointer"));
+        emitter.Emit(new Scalar(s.IsPointer.ToString()));
+        emitter.Emit(new Scalar("return_type"));
+        emitter.Emit(new Scalar(s.ReturnType.FullSanitizeName()));
+        emitter.Emit(new MappingEnd());
+    }
+
+    public static readonly IYamlTypeConverter Instance = new ProcessedStaticMembersConverter();
 }
