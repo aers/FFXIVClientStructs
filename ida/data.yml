@@ -5638,7 +5638,9 @@ classes:
       0x140598F30: ctor_FromState
       0x140598F80: ctor
       0x140598F60: Finalizer
+      0x140598FB0: Resume
       0x140599850: Yield
+      0x140599860: GetStatus
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x141FA8718
@@ -8244,6 +8246,8 @@ classes:
       0x1405C0140: GetAvailablePoses
       0x1405C0190: Initialize
       0x1405C09C0: SetPose
+      0x1405C0E70: IsEmoting
+      0x1405C0EB0: IsInEmoteLoop
       0x1405C2B40: GetPoseState
       0x1405C3EB0: GetPoseKind
   Client::Game::Control::EmoteController::FindChairInfo:
@@ -8445,6 +8449,7 @@ classes:
       0x140874800: ctor
       0x140877440: Finalizer
       0x140878500: ExecuteMacro
+      0x1408786D0: CancelMacro
       0x140878700: TryGetMacroIconCommand
       0x140878880: ChangeChatChannel
       0x140878D70: SetContextTellTarget
@@ -12313,6 +12318,7 @@ classes:
       0x140C2C920: LuaQuestUnqualified
       0x140C2D480: LuaGetQuestBattleProgress
       0x140C2D930: LuaYesNoQuestBattle
+      0x140C2DB00: GetFestivals
       0x140C2DBC0: LuaSetWeddingFestivalParam
       0x140C2DCE0: LuaGetWeddingReservedFlag
       0x140C2DD60: LuaGetGsWeeklyLotOffsetTime
