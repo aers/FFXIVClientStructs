@@ -30,6 +30,8 @@ public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x1F10)] public char* MapDataPtr;
     [FieldOffset(0x1F20), FixedSizeArray] internal FixedSizeArray3<LayoutInfo> _layoutInfos;
 
+    [FieldOffset(0x28CE)] public byte DeepDungeonId; // 1-3
+
     [FieldOffset(0x28F4)] public int Unk_28F4;
 
     [FieldOffset(0x2900), FixedSizeArray] internal FixedSizeArray25<byte> _mapData; // list of RoomFlags
