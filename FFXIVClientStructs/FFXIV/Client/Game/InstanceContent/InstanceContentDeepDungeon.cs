@@ -14,6 +14,8 @@ public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x1E88), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
     [FieldOffset(0x1EA8), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
     [FieldOffset(0x1ED8), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
+    [FieldOffset(0x1EF8), FixedSizeArray] internal FixedSizeArray3<byte> _magicite;
+    [FieldOffset(0x1EFC)] public byte Unk_1EFC;
 
     [FieldOffset(0x1F00)] public uint BonusLootItemId;
     [FieldOffset(0x1F04)] public byte Floor;
@@ -25,7 +27,33 @@ public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x1F0A)] public byte SyncedGearLevel;
     [FieldOffset(0x1F0B)] public byte HoardCount;
 
+    [FieldOffset(0x1F10)] public char* MapDataPtr;
+    [FieldOffset(0x1F20), FixedSizeArray] internal FixedSizeArray3<LayoutInfo> _layoutInfos;
+
+    [FieldOffset(0x28F4)] public int Unk_28F4;
+
     [FieldOffset(0x2900), FixedSizeArray] internal FixedSizeArray25<byte> _mapData; // list of RoomFlags
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x338)]
+    public partial struct LayoutInfo {
+        // row ID from DeepDungeonRoom sheet
+        // layout consists of 21 possible rooms - the floorset is a 5x5 grid but the corners are never accessible and have no terrain
+        // each row contains an array of 5 IDs:
+        //   0 = ID of a SharedGroup corresponding to the whole room
+        //   1-4 have 3 possible values:
+        //     - 0: this wall is ordinary terrain and cannot be open
+        //     - 1: this wall is the room's only entrance so there is no collider blocking it
+        //     - otherwise: integer ID of a CollisionBox instance; whether the box is active or not depends on the contents of the MapData array on the parent struct
+        [FieldOffset(0x332)] public ushort RoomStartIndex;
+    }
+
+    // each DD floor map actually contains two mirrored copies of the same layout; this is usually either 0 or 1, but LayoutInfos[2] *is* referenced in the code - needs more investigation
+    [FieldOffset(0x291A)] public byte ActiveLayoutIndex;
+    // seen values:
+    // 1 - normal
+    // 6 - in boss arena
+    [FieldOffset(0x291B)] public byte LayoutInitializationType;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DeepDungeonPartyInfo {

@@ -27,6 +27,7 @@ enums:
     "MouseOut": 7
     "MouseWheel": 8
     "MouseClick": 9
+    "MouseDoubleClick": 10
     "InputReceived": 12
     "FocusStart": 18
     "FocusStop": 19
@@ -6014,6 +6015,16 @@ structs:
   - type: __int8
     name: RoomIndex
     offset: 4
+  member_functions: []
+- type: Client::Game::InstanceContent::InstanceContentDeepDungeon::LayoutInfo
+  name: LayoutInfo
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 824
+  fields:
+  - type: unsigned __int16
+    name: RoomStartIndex
+    offset: 818
   member_functions: []
 - type: Client::Game::InstanceContent::InstanceContentOceanFishing::AllResultStruct
   name: AllResultStruct
@@ -56649,8 +56660,8 @@ structs:
     offset: 1188
   - type: byte
     name: CaughtSpearfishBitmask
-    offset: 1200
-    size: 40
+    offset: 1201
+    size: 39
   - type: unsigned int
     name: NumSpearfishCaught
     offset: 1240
@@ -132167,132 +132178,6 @@ structs:
     name: ClassJobId
     offset: 88
   member_functions: []
-- type: Client::Game::InstanceContent::InstanceContentDeepDungeon
-  name: InstanceContentDeepDungeon
-  namespace: Client.Game.InstanceContent
-  union: False
-  size: 10528
-  fields:
-  - type: Client::Game::InstanceContent::InstanceContentDirector
-    name: InstanceContentDirector
-    offset: 0
-    base: true
-  - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo
-    name: Party
-    offset: 7816
-    size: 4
-  - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo
-    name: Items
-    offset: 7848
-    size: 16
-  - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo
-    name: Chests
-    offset: 7896
-    size: 16
-  - type: unsigned int
-    name: BonusLootItemId
-    offset: 7936
-  - type: byte
-    name: Floor
-    offset: 7940
-  - type: byte
-    name: ReturnProgress
-    offset: 7941
-  - type: byte
-    name: PassageProgress
-    offset: 7942
-  - type: byte
-    name: WeaponLevel
-    offset: 7944
-  - type: byte
-    name: ArmorLevel
-    offset: 7945
-  - type: byte
-    name: SyncedGearLevel
-    offset: 7946
-  - type: byte
-    name: HoardCount
-    offset: 7947
-  virtual_functions:
-  - name: CancelInteraction
-    offset: 1232
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-  - name: GetTitle
-    offset: 1576
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetDescription
-    offset: 1992
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2000
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2008
-    return_type: int
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2016
-    return_type: byte
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-  - name: GetEventItemId
-    offset: 2032
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-  - name: GetObjectives
-    offset: 2048
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-  - name: PopulateMapMarkers
-    offset: 2136
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-    - type: unsigned __int16
-      name: a2
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: a3
-  - name: GetContentTimeMax
-    offset: 2504
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-  member_functions: []
 - type: Client::Game::InstanceContent::InstanceContentOceanFishing
   name: InstanceContentOceanFishing
   namespace: Client.Game.InstanceContent
@@ -132440,6 +132325,159 @@ structs:
     return_type: unsigned int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+  member_functions: []
+- type: Client::Game::InstanceContent::InstanceContentDeepDungeon
+  name: InstanceContentDeepDungeon
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 10528
+  fields:
+  - type: Client::Game::InstanceContent::InstanceContentDirector
+    name: InstanceContentDirector
+    offset: 0
+    base: true
+  - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonPartyInfo
+    name: Party
+    offset: 7816
+    size: 4
+  - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonItemInfo
+    name: Items
+    offset: 7848
+    size: 16
+  - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo
+    name: Chests
+    offset: 7896
+    size: 16
+  - type: byte
+    name: Magicite
+    offset: 7928
+    size: 3
+  - type: byte
+    name: Unk_1EFC
+    offset: 7932
+  - type: unsigned int
+    name: BonusLootItemId
+    offset: 7936
+  - type: byte
+    name: Floor
+    offset: 7940
+  - type: byte
+    name: ReturnProgress
+    offset: 7941
+  - type: byte
+    name: PassageProgress
+    offset: 7942
+  - type: byte
+    name: WeaponLevel
+    offset: 7944
+  - type: byte
+    name: ArmorLevel
+    offset: 7945
+  - type: byte
+    name: SyncedGearLevel
+    offset: 7946
+  - type: byte
+    name: HoardCount
+    offset: 7947
+  - type: wchar_t*
+    name: MapDataPtr
+    offset: 7952
+  - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::LayoutInfo
+    name: LayoutInfos
+    offset: 7968
+    size: 3
+  - type: int
+    name: Unk_28F4
+    offset: 10484
+  - type: byte
+    name: MapData
+    offset: 10496
+    size: 25
+  - type: byte
+    name: ActiveLayoutIndex
+    offset: 10522
+  - type: byte
+    name: LayoutInitializationType
+    offset: 10523
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: a3
+  - name: GetContentTimeMax
+    offset: 2504
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
   member_functions: []
 - type: Client::Game::InstanceContent::PublicContentBozja
