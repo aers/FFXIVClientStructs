@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
@@ -40,7 +41,7 @@ public unsafe partial struct Inspect {
     [FieldOffset(0x104), FixedSizeArray] internal FixedSizeArray74<uint> _baseParams;
     [FieldOffset(0x22C)] private byte UnkWord22C;
     [FieldOffset(0x22E)] public byte GearVisibilityFlag; // TODO: use InspectGearVisibilityFlag
-    [FieldOffset(0x230)] private ulong UnkLong230; // -1 if not set - crest data? (see CharaViewModelData)
+    [FieldOffset(0x230)] public CrestData FreeCompanyCrestData;
     [FieldOffset(0x238)] public byte FreeCompanyCrestBitfield;
     [FieldOffset(0x239), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _buddyOwnerName;
     [FieldOffset(0x279)] public byte BuddyRank;

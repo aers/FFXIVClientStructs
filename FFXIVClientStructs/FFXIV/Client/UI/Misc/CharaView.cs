@@ -99,7 +99,7 @@ public unsafe partial struct CharaViewModelData {
     [FieldOffset(0x89)] public bool WeaponHidden;
     [FieldOffset(0x8A)] public bool VisorClosed;
     [FieldOffset(0x8B)] public byte FreeCompanyCrestBitfield;
-    [FieldOffset(0x90)] private long Unk90; // -1 if not set - crest data? (see Inspect)
+    [FieldOffset(0x90)] public CrestData FreeCompanyCrestData;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 55 87")]
     public partial void CopyFromCharacter(Character* character);

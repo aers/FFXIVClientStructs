@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
@@ -15,6 +16,9 @@ public unsafe partial struct DrawDataContainer {
 
     [FieldOffset(0x1CE)] public byte Flags1;
     [FieldOffset(0x1CF)] public byte Flags2;
+    [FieldOffset(0x1D0), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
+
+    [FieldOffset(0x1E8)] public CrestData FreeCompanyCrestData;
     [FieldOffset(0x1F0)] public byte FreeCompanyCrestBitfield; // & 0x01 for offhand weapon, & 0x02 for head, & 0x04 for top, ..., & 0x20 for feet
 
     [UnscopedRef]
@@ -27,11 +31,8 @@ public unsafe partial struct DrawDataContainer {
         return ref EquipmentModelIds[(int)slot];
     }
 
-    [FieldOffset(0x1D0), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
-
     [MemberFunction("E8 ?? ?? ?? ?? B1 01 41 FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
-
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 45 7F")]
     public partial void LoadWeapon(WeaponSlot slot, WeaponModelId weaponData, byte redrawOnEquality, byte unk2, byte skipGameObject, byte unk4);
