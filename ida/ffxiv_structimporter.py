@@ -497,17 +497,18 @@ if api is None:
             def get_named_type(self, name):
                 # type: (str) -> idaapi.tinfo_t
                 tinfo = ida_typeinf.tinfo_t()
+                clean_name = self.clean_struct_name(name)
                 if (
-                    ida_struct.get_struc_id(self.clean_struct_name(name))
+                    ida_struct.get_struc_id(clean_name)
+                    != idaapi.BADADDR
+                    or 
+                    ida_enum.get_enum(clean_name)
                     != idaapi.BADADDR
                 ):
-                    if not tinfo.get_named_type(idaapi.get_idati(), name):
-                        tinfo.get_named_type(
-                            idaapi.get_idati(), self.clean_struct_name(name)
-                        )
-                        return tinfo
-                
-                # TODO implement enum handling
+                    if not tinfo.get_named_type(idaapi.get_idati(), clean_name):
+                        raise ValueError("{0} not found in IDA database".format(clean_name))
+                        
+                    return tinfo
 
                 if name == "void":
                     idaapi.parse_decl(
@@ -519,10 +520,10 @@ if api is None:
                 idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
 
                 tinfo_str = tinfo.dstr()
-                if tinfo_str == name or tinfo_str == self.clean_struct_name(name):
+                if tinfo_str == name or tinfo_str == clean_name:
                     return tinfo
 
-                terminated = self.clean_struct_name(name) + ";"
+                terminated = clean_name + ";"
                 idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
                 return tinfo
 
@@ -591,6 +592,8 @@ if api is None:
 
             def clean_struct_name(self, name):
                 # type: (str) -> str
+                if name == "Tm":
+                    return "tm" # tm is a keyword in IDA for the time struct but C# exports it as Tm
                 return (
                     name.replace(" ", "")
                     .replace("unsigned", "u")
@@ -1687,7 +1690,6 @@ def run():
                     )
                 )
                 for member_func in struct.static_member_functions:
-                    print("{0} {1}".format(get_time(), member_func.name))
                     api.update_member_func(member_func, struct)
             
             if struct.static_members:
