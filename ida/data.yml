@@ -2053,6 +2053,7 @@ classes:
         pointer: False
     funcs:
       0x1409ABF80: HandleExaminePacket
+      0x1409AC810: RequestByEntityId
   Client::Game::UI::NpcTrade:
     instances:
       - ea: 0x142801EB0
@@ -8014,7 +8015,7 @@ classes:
     funcs:
       0x140926C50: ctor
       0x140926F90: Finalize2
-      0x140927050: SetCustomizeData
+      0x140927050: SetModelData
       0x1409271B0: Render
       0x140927D70: UnequipGear
       0x1409281D0: SetItemSlotData
@@ -8022,6 +8023,10 @@ classes:
       0x1409285F0: GetCharacter
       0x1418C94E0: ToggleAnimationPlayback
       0x1418C9580: IsAnimationPaused
+  Client::UI::Misc::CharaViewModelData:
+    funcs:
+      0x1409269B0: ctor
+      0x140926A00: CopyFromCharacter
   Client::UI::Misc::CharaViewCharacterData:
     funcs:
       0x1418AC7B0: ctor
@@ -9643,6 +9648,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EEAC40: ctor
+  Client::UI::Agent::AgentRetainerStatus::RetainerStatusCharaView:
+    vtbls:
+      - ea: 0x141F9D6D8
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentRetainerStatus:
     vtbls:
       - ea: 0x141F9D740

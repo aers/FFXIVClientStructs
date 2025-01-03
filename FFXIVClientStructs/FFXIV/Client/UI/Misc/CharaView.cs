@@ -28,8 +28,12 @@ public unsafe partial struct CharaView : ICreatable {
     [FieldOffset(0x30)] public AgentInterface* Agent; // for example: AgentTryOn
     //[FieldOffset(0x38)] public nint AgentCallbackReady; // if set, called when State changes to Ready
     //[FieldOffset(0x40)] public nint AgentCallback; // not investigated, used inside vf7 and vf11
+    [FieldOffset(0x48)] public CharaViewModelData ModelData;
+    [Obsolete("Completely wrong. Use ModelData", true)]
     [FieldOffset(0x48)] public CharaViewCharacterData CharacterData;
-
+    [FieldOffset(0xE0)] public uint Race; // used to check EquipRestriction
+    [FieldOffset(0xE4)] public uint Sex; // used to check EquipRestriction
+    [FieldOffset(0xE8)] private uint UnkE8;
     [FieldOffset(0xEC)] public float ZoomRatio;
 
     [FieldOffset(0xF8), FixedSizeArray] internal FixedSizeArray14<CharaViewItem> _items;
@@ -56,8 +60,11 @@ public unsafe partial struct CharaView : ICreatable {
     [VirtualFunction(3)]
     public partial void ResetPositions();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4"), Obsolete("Completely wrong. Use SetModelData", true)]
     public partial void SetCustomizeData(CharaViewCharacterData* data);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4")]
+    public partial void SetModelData(CharaViewModelData* data);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4C 24 ?? 8B 51 04")]
     public partial void Render(uint frameIndex);
@@ -82,16 +89,38 @@ public unsafe partial struct CharaView : ICreatable {
 }
 
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x98)]
+public unsafe partial struct CharaViewModelData {
+    [FieldOffset(0)] public CustomizeData CustomizeData;
+    [FieldOffset(0x1A), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModelIds;
+    [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray3<WeaponModelId> _weaponModelIds;
+    [FieldOffset(0x88)] public bool HeadgearHidden;
+    [FieldOffset(0x89)] public bool WeaponHidden;
+    [FieldOffset(0x8A)] public bool VisorClosed;
+    [FieldOffset(0x8B)] public byte FreeCompanyCrestBitfield;
+    [FieldOffset(0x90)] private long Unk90; // -1 if not set - crest data? (see Inspect)
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 55 87")]
+    public partial void CopyFromCharacter(Character* character);
+}
+
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0)] public CustomizeData CustomizeData;
+    [FieldOffset(0x1A), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
+    [Obsolete("Use GlassesIds[0]")]
     [FieldOffset(0x1A)] public ushort Glasses0Id;
+    [Obsolete("Use GlassesIds[1]")]
     [FieldOffset(0x1C)] public ushort Glasses1Id;
     [FieldOffset(0x1E), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
     [FieldOffset(0x56), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain0Ids; // unsure if correct
     [FieldOffset(0x64), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain1Ids; // unsure if correct
 
     [FieldOffset(0x74)] public byte ClassJobId;
+    [FieldOffset(0x75)] public bool HeadgearHidden;
+    [Obsolete("Renamed to HeadgearHidden")]
     [FieldOffset(0x75)] public bool VisorHidden;
     [FieldOffset(0x76)] public bool WeaponHidden;
     [FieldOffset(0x77)] public bool VisorClosed;
