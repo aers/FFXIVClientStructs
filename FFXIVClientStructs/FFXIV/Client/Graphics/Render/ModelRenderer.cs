@@ -6,6 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 // Client::Graphics::Render::ModelRenderer
 //   Client::Graphics::Render::BaseRenderer
 [GenerateInterop]
+[Inherits<BaseRenderer>]
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public unsafe partial struct ModelRenderer {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
