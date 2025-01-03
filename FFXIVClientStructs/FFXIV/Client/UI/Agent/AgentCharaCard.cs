@@ -25,22 +25,48 @@ public unsafe partial struct AgentCharaCard {
     private partial void OpenCharaCardForObject(GameObject* gameObject);
     public void OpenCharaCard(GameObject* gameObject) => OpenCharaCardForObject(gameObject);
 
+    public enum DecorationType
+    {
+        /// This does not correspond to a real decoration and should be ignored.
+        Invald = 0x0,
+        Backing = 0x1,
+        PatternOverlay = 0x2,
+        PortraitFrame = 0x3,
+        PlateFrame = 0x4,
+        Accent = 0x5,
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public unsafe struct Decoration
+    {
+        [FieldOffset(0x0)] public DecorationType Type;
+    }
+
     // Client::UI::Agent::AgentCharaCard::Storage
     [StructLayout(LayoutKind.Explicit, Size = 0x9B0)]
     public unsafe partial struct Storage {
+        /// If the player has the "Edit Plate" window open.
+        [FieldOffset(0x2)] public bool Editing;
         [FieldOffset(0x4)] public uint EntityId;
         [FieldOffset(0x8)] public ulong ContentId;
 
         [FieldOffset(0x1B)] public bool InvertPortraitPlacement;
-        [FieldOffset(0x1C)] public byte BasePlate; // CharaCardBase sheet
-        [FieldOffset(0x22)] public byte Backing; // CharaCardDecoration sheet
-        [FieldOffset(0x1E)] public byte TopBorder; // CharaCardHeader sheet
-        [FieldOffset(0x1F)] public byte BottomBorder; // CharaCardHeader sheet
-        [FieldOffset(0x24)] public byte PatternOverlay; // CharaCardDecoration sheet
-        [FieldOffset(0x26)] public byte PortraitFrame; // CharaCardDecoration sheet
-        [FieldOffset(0x28)] public byte PlateFrame; // CharaCardDecoration sheet
-        [FieldOffset(0x2A)] public byte Accent; // CharaCardDecoration sheet
+        /// Row index into the CharaCardBase sheet
+        [FieldOffset(0x1C)] public byte BasePlate;
+        /// Row index into the CharaCardHeader sheet
+        [FieldOffset(0x1E)] public byte TopBorder;
+        /// Row index into the CharaCardHeader sheet
+        [FieldOffset(0x1F)] public byte BottomBorder;
 
+        /// The number of decorations.
+        /// This is any Pattern Overlay, Backing, Portrait Frame, Plate Frame and Accents.
+        /// It won't update to it's true value until the "Edit Plate" window is closed, and the game clears out the unused entries.
+        [FieldOffset(0x20)] public ushort DecorationCount;
+        
+        /// The size of this array is NumDecorations.
+        /// All of these index into the CharaCardDecoration sheet.
+        [FieldOffset(0x22)] internal FixedSizeArray5<ushort> _decorationRowIndices;
+        
         [FieldOffset(0x60)] public Utf8String Name;
         [FieldOffset(0xC8)] public ushort WorldId;
         [FieldOffset(0xCA)] public byte ClassJobId;
@@ -68,6 +94,10 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x490)] public Utf8String Activity6Name;
 
         [FieldOffset(0x540)] public CharaViewPortrait CharaView;
+
+        /// The size of this array is NumDecorations.
+        [FieldOffset(0x22C), FixedSizeArray] internal FixedSizeArray5<Decoration> _decorations;
+        
         [FieldOffset(0x960)] public Texture* PortraitTexture;
     }
 }
