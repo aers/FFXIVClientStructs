@@ -3855,6 +3855,104 @@ enums:
   values:
     "Red": 0
     "Black": 1
+- type: Client::UI::Misc::NameFormatterPlaceholder
+  name: NameFormatterPlaceholder
+  underlying: int
+  namespace: Client.UI.Misc
+  values:
+    "ObjStr": 0
+    "Item": 1
+    "ActStr": 2
+- type: Client::UI::Misc::NameFormatterIdConverter
+  name: NameFormatterIdConverter
+  underlying: unsigned int
+  namespace: Client.UI.Misc
+  values:
+    "None": 0
+    "BNpcName": 2
+    "ENpcResident": 3
+    "Treasure": 4
+    "Aetheryte": 5
+    "GatheringPointName": 6
+    "EObjName": 7
+    "Companion": 9
+    "Trait": 0
+    "Action": 1
+    "EventAction": 4
+    "GeneralAction": 5
+    "BuddyAction": 6
+    "MainCommand": 7
+    "CraftAction": 9
+    "Action2": 10
+    "PetAction": 11
+    "CompanyAction": 12
+    "Mount": 13
+    "BgcArmyAction": 19
+    "Ornament": 20
+- type: Client::Game::ActionManager::CastTimeProc
+  name: CastTimeProc
+  underlying: byte
+  namespace: Client.Game
+  values:
+    "None": 0
+    "Firestarter": 1
+    "Swiftcast": 3
+    "Lightspeed": 4
+    "Dualcast": 5
+    "Abridged": 6
+    "Triplecast": 7
+    "DemiBahamut": 8
+    "Requiescat": 9
+    "DemiPhoenix": 11
+    "EnhancedHarpe": 12
+    "SoulsowOutOfCombat": 13
+    "Acceleration": 14
+    "DivineMight": 15
+    "MotifOutOfCombat": 18
+    "RainbowBright": 19
+- type: Client::Game::ActionManager::TargetCategory
+  name: TargetCategory
+  underlying: int
+  namespace: Client.Game
+  values:
+    "Self": 0
+    "Party": 1
+    "Alliance": 2
+    "Enemy": 3
+    "Friendly": 4
+    "OwnPet": 5
+    "PartyPet": 6
+    "UnkPVP": 7
+- type: Client::Game::EstateType
+  name: EstateType
+  underlying: int
+  namespace: Client.Game
+  values:
+    "FreeCompanyEstate": 0
+    "PersonalChambers": 1
+    "PersonalEstate": 2
+    "Unknown3": 3
+    "SharedEstate": 4
+    "ApartmentBuilding": 5
+    "ApartmentRoom": 6
+- type: Client::Game::Event::ContentType
+  name: ContentType
+  underlying: byte
+  namespace: Client.Game.Event
+  values:
+    "None": 0
+    "Instance": 1
+    "Party": 2
+    "Public": 3
+    "GoldSaucer": 4
+- type: Client::Game::Control::InputManager::MouseButtonHoldState
+  name: MouseButtonHoldState
+  underlying: byte
+  namespace: Client.Game.Control
+  values:
+    "None": 0
+    "Left": 1
+    "Right": 2
 structs:
 - type: Animation::Animation::hkaAnimation::DataChunk
   name: DataChunk
@@ -3928,6 +4026,111 @@ structs:
   union: False
   fields: []
   member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 8B FF 85 DB
+    return_type: void
+    name: transformLocalPoseToModelPose
+    parameters:
+    - type: int
+      name: numTransforms
+    - type: __int16*
+      name: parentIndices
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseLocal
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseModelOut
+  - signature: 48 83 EC 38 4C 89 4C 24 ?? 4D 8B C8 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 83 C4 38 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 83 EC 18
+    return_type: void
+    name: transformModelPoseToLocalPose
+    parameters:
+    - type: int
+      name: numTransforms
+    - type: __int16*
+      name: parentIndices
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseModel
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseLocalOut
+  - signature: 40 57 48 83 EC 10 48 63 F9
+    return_type: void
+    name: transformLocalPoseToWorldPose
+    parameters:
+    - type: int
+      name: numTransforms
+    - type: __int16*
+      name: parentIndices
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: worldFromModel
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseLocal
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseWorldOut
+  - signature: 85 C9 0F 8E ?? ?? ?? ?? 48 8B C4 55
+    return_type: void
+    name: transformWorldPoseToLocalPose
+    parameters:
+    - type: int
+      name: numTransforms
+    - type: __int16*
+      name: parentIndices
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: worldFromModel
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseWorld
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseLocalOut
+  - signature: 40 57 48 83 EC 10 48 63 79 30
+    return_type: void
+    name: enforcePoseConstraintsModelSpace
+    parameters:
+    - type: Animation::Rig::hkaSkeleton*
+      name: skeleton
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: constraintsLocal
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseModelInOut
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B 41 18 49 8B D8
+    return_type: void
+    name: getAncestors
+    parameters:
+    - type: Animation::Rig::hkaSkeleton*
+      name: skeleton
+    - type: __int16
+      name: startPoint
+    - type: Common::Base::Container::Array::hkArray<__int16>*
+      name: bonesOut
+  - signature: 48 89 7C 24 ?? 45 0F B6 D9
+    return_type: void
+    name: markDescendants
+    parameters:
+    - type: Animation::Rig::hkaSkeleton*
+      name: skeleton
+    - type: int
+      name: startBone
+    - type: byte*
+      name: boolOut
+    - type: byte
+      name: includeStart
+  - signature: 4C 8B DC 49 89 5B 10 49 89 6B 18 49 89 73 20 57 41 56 41 57 48 83 EC 40
+    return_type: void
+    name: calcAabb
+    parameters:
+    - type: unsigned int
+      name: numBones
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseLocal
+    - type: __int16*
+      name: parentIndices
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: worldFromModel
+    - type: Common::Base::Types::Geometry::hkAabb*
+      name: aabbOut
+  - signature: E8 ?? ?? ?? ?? 80 38 00 0F 84 ?? ?? ?? ?? 4C 8B 4B 08
+    return_type: byte
+    name: hasValidPartitions
+    parameters:
+    - type: Animation::Rig::hkaSkeleton*
+      name: skeleton
 - type: Application::Network::LogoutCallbackInterface
   name: LogoutCallbackInterface
   namespace: Application.Network
@@ -4051,6 +4254,12 @@ structs:
     offset: 190
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::CSBonusManager
 - type: Client::Game::Character::ActionEffectHandler::Effect
   name: Effect
   namespace: Client.Game.Character
@@ -4139,6 +4348,12 @@ structs:
       name: this
     - type: Client::Game::Character::BattleChara*
       name: owner
+  static_members:
+  - signature: 8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B D0
+    relative_follow_offsets:
+    - 5
+    is_pointer: False
+    return_type: Client::Game::Character::CharacterManager
 - type: Client::Game::Character::ContainerInterface
   name: ContainerInterface
   namespace: Client.Game.Character
@@ -4314,6 +4529,12 @@ structs:
     offset: 0
     size: 104
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 66 2B D8
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Conditions
 - type: Client::Game::Control::ActionTimelineSequencer
   name: ActionTimelineSequencer
   namespace: Client.Game.Control
@@ -4418,6 +4639,22 @@ structs:
   size: 96
   fields: []
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F 28 F0 45 0F 57 C0
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Control::InputManager
+  - signature: 75 09 83 3D ?? ?? ?? ?? ?? 75 12
+    relative_follow_offsets:
+    - 4
+    is_pointer: False
+    return_type: Client::Game::Control::InputManager::MouseButtonHoldState
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 0F B6 C8 4C 8B C7
+    return_type: byte
+    name: IsAutoRunning
+    parameters: []
 - type: Client::Game::Control::TimelineTransitController
   name: TimelineTransitController
   namespace: Client.Game.Control
@@ -5585,6 +5822,11 @@ structs:
       name: this
     - type: unsigned int
       name: index
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8D 4D AC
+    return_type: Client::Game::GcArmyManager*
+    name: Instance
+    parameters: []
 - type: Client::Game::GcArmyMember
   name: GcArmyMember
   namespace: Client.Game
@@ -5728,6 +5970,12 @@ structs:
     name: Flags
     offset: 88
   member_functions: []
+  static_members:
+  - signature: 89 43 64 48 89 1D
+    relative_follow_offsets:
+    - 6
+    is_pointer: True
+    return_type: Client::Game::GoldSaucer::GoldSaucerManager
 - type: Client::Game::Group::PartyMember::ExtraProperty
   name: ExtraProperty
   namespace: Client.Game.Group
@@ -5808,6 +6056,83 @@ structs:
     parameters:
     - type: Client::Game::HousingManager*
       name: this
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 4C 8D 60 60
+    return_type: Client::Game::HousingManager*
+    name: Instance
+    parameters: []
+  - signature: 48 8B 05 ?? ?? ?? ?? 48 8B 50 08 48 85 D2 74 10
+    return_type: unsigned int
+    name: GetOriginalHouseTerritoryTypeId
+    parameters: []
+  - signature: 83 F9 06 77 64
+    return_type: __int64
+    name: GetOwnedHouseId
+    parameters:
+    - type: Client::Game::EstateType
+      name: type
+    - type: int
+      name: sharedEstateIndex
+  - signature: E8 ?? ?? ?? ?? 8B 44 24 50 0F B7 D5
+    return_type: int
+    name: GetAirshipVoyageTimeAndDistance
+    parameters:
+    - type: byte
+      name: pointA
+    - type: byte
+      name: pointB
+    - type: __int16
+      name: speed
+    - type: unsigned int*
+      name: time
+    - type: unsigned int*
+      name: distance
+  - signature: E8 ?? ?? ?? ?? 01 43 10 8B CE
+    return_type: unsigned int
+    name: GetAirshipSurveyDuration
+    parameters:
+    - type: byte
+      name: point
+    - type: __int16
+      name: speed
+  - signature: E8 ?? ?? ?? ?? 49 8B 8C 24 ?? ?? ?? ?? 03 F8
+    return_type: unsigned int
+    name: GetSubmarineVoyageTime
+    parameters:
+    - type: byte
+      name: pointA
+    - type: byte
+      name: pointB
+    - type: __int16
+      name: speed
+  - signature: E8 ?? ?? ?? ?? 01 7B 10
+    return_type: unsigned int
+    name: GetSubmarineVoyageDistance
+    parameters:
+    - type: byte
+      name: pointA
+    - type: byte
+      name: pointB
+  - signature: E8 ?? ?? ?? ?? 8B 7D 0F
+    return_type: unsigned int
+    name: GetSubmarineSurveyDuration
+    parameters:
+    - type: byte
+      name: point
+    - type: __int16
+      name: speed
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 4F 49 8B 57 38
+    return_type: byte
+    name: IsSubmarineExplorationUnlocked
+    parameters:
+    - type: byte
+      name: point
+  - signature: E8 ?? ?? ?? ?? 88 45 38
+    return_type: byte
+    name: IsSubmarineExplorationExplored
+    parameters:
+    - type: byte
+      name: point
 - type: Client::Game::HousingObjectManager
   name: HousingObjectManager
   namespace: Client.Game
@@ -6323,6 +6648,23 @@ structs:
       name: this
     - type: int
       name: a1
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 81 C2
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::InventoryManager
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 8D 4F DD
+    return_type: int
+    name: GetSpecialItemId
+    parameters:
+    - type: byte
+      name: switchCase
+  - signature: E8 ?? ?? ?? ?? 42 8D 0C 2B
+    return_type: int
+    name: GetLimitedTomestoneWeeklyLimit
+    parameters: []
 - type: Client::Game::MJI::MJIAnimal
   name: MJIAnimal
   namespace: Client.Game.MJI
@@ -6643,6 +6985,12 @@ structs:
     parameters:
     - type: Client::Game::Object::ClientObjectManager*
       name: this
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C7 43 60 FF FF FF FF
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Object::ClientObjectManager
 - type: Client::Game::Object::GameObjectId
   name: GameObjectId
   namespace: Client.Game.Object
@@ -6813,6 +7161,12 @@ structs:
     name: SessionsAvailable
     offset: 36
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 F8 02 75 08
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::RaceChocoboManager
 - type: Client::Game::RankData
   name: RankData
   namespace: Client.Game
@@ -6868,6 +7222,12 @@ structs:
   - name: Dtor
     offset: 0
   member_functions: []
+  static_members:
+  - signature: 48 8B 15 ?? ?? ?? ?? 48 8B C8 48 83 C4 28
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::ReconstructionBoxManager
 - type: Client::Game::RetainerManager::Retainer
   name: Retainer
   namespace: Client.Game
@@ -6975,6 +7335,12 @@ structs:
     parameters:
     - type: Client::Game::SatisfactionSupplyManager*
       name: this
+  static_members:
+  - signature: 8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 1E
+    relative_follow_offsets:
+    - 5
+    is_pointer: False
+    return_type: Client::Game::SatisfactionSupplyManager
 - type: Client::Game::SatisfactionSupplyManager::NpcInfo
   name: NpcInfo
   namespace: Client.Game
@@ -7147,6 +7513,12 @@ structs:
       name: this
     - type: int
       name: achievementId
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 04 30 FF C3
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::Achievement
 - type: Client::Game::UI::Cabinet
   name: Cabinet
   namespace: Client.Game.UI
@@ -7357,6 +7729,12 @@ structs:
     size: 19
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 F8 02 75 16
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::ContentsNote
 - type: Client::Game::UI::DutyHelperInfo
   name: DutyHelperInfo
   namespace: Client.Game.UI
@@ -7486,6 +7864,12 @@ structs:
       name: this
     - type: byte
       name: roulette
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 0F 57 C0 4C 89 B4 24
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::InstanceContent
 - type: Client::Game::UI::Journal
   name: Journal
   namespace: Client.Game.UI
@@ -7526,6 +7910,12 @@ structs:
       name: character
     - type: byte
       name: level
+  static_members:
+  - signature: 44 8B C7 48 8D 0D ?? ?? ?? ?? 48 8B D3
+    relative_follow_offsets:
+    - 6
+    is_pointer: False
+    return_type: Client::Game::UI::LimitBreakController
 - type: Client::Game::UI::LootItemMateria
   name: LootItemMateria
   namespace: Client.Game.UI
@@ -7855,6 +8245,12 @@ structs:
     parameters:
     - type: Client::Game::UI::PvPProfile*
       name: this
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 0F B6 78 31
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::PvPProfile
 - type: Client::Game::UI::QuestTodoList
   name: QuestTodoList
   namespace: Client.Game.UI
@@ -7901,6 +8297,12 @@ structs:
       name: this
     - type: byte
       name: craftType
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 39 86 ?? ?? ?? ??
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::RecipeNote
 - type: Client::Game::UI::RecipeNote::RecipeCrystal
   name: RecipeCrystal
   namespace: Client.Game.UI
@@ -7948,6 +8350,12 @@ structs:
     offset: 20
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 7E
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::RelicNote
 - type: Client::Game::UI::RidePillon
   name: RidePillon
   namespace: Client.Game.UI
@@ -8028,6 +8436,12 @@ structs:
     name: SubAreaPlaceNameId
     offset: 40
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? BA ?? ?? ?? ?? F3 0F 5C 05
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::TerritoryInfo
 - type: Client::Game::UI::WeaponState
   name: WeaponState
   namespace: Client.Game.UI
@@ -8285,6 +8699,12 @@ structs:
       name: flags
     - type: unsigned int
       name: unk
+  static_members:
+  - signature: 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::Kernel::Device
 - type: Client::Graphics::Kernel::Notifier
   name: Notifier
   namespace: Client.Graphics.Kernel
@@ -8577,6 +8997,12 @@ structs:
     offset: 86
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 0F B6 8B ?? ?? ?? ?? 88 48
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::Render::GraphicsConfig
 - type: Client::Graphics::Render::Material::TextureEntry
   name: TextureEntry
   namespace: Client.Graphics.Render
@@ -8674,6 +9100,12 @@ structs:
     size: 14
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 48 83 C1 10 48 C7 40 ?? ?? ?? ?? ??
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::Scene::CameraManager
 - type: Client::Graphics::Scene::CharacterUtility
   name: CharacterUtility
   namespace: Client.Graphics.Scene
@@ -8692,6 +9124,12 @@ structs:
     offset: 1016
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 83 B9
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::Scene::CharacterUtility
 - type: Client::Graphics::Scene::Object::SiblingEnumerator
   name: SiblingEnumerator
   namespace: Client.Graphics.Scene
@@ -8718,6 +9156,12 @@ structs:
     offset: 24
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 0F 44 FE 48 8B 0D ?? ?? ?? ?? 48 85 C9 74 05
+    relative_follow_offsets:
+    - 6
+    is_pointer: True
+    return_type: Client::Graphics::Scene::ResidentResourceManager
 - type: Client::Graphics::Scene::Weapon::ChangedWeaponData
   name: ChangedWeaponData
   namespace: Client.Graphics.Scene
@@ -9098,6 +9542,39 @@ structs:
       name: this
     - type: __int64
       name: packet
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 0F B6 4B ?? 4C 8D 43 18 0F B7 53 14
+    return_type: void
+    name: HandleEventPlayPacket
+    parameters:
+    - type: unsigned __int64
+      name: objectId
+    - type: unsigned int
+      name: eventId
+    - type: unsigned __int16
+      name: stage
+    - type: unsigned __int64
+      name: a4
+    - type: unsigned int*
+      name: payload
+    - type: byte
+      name: payloadSize
+  - signature: E8 ?? ?? ?? ?? EB 10 48 8B 0D
+    return_type: void
+    name: SendEventCompletePacket
+    parameters:
+    - type: unsigned int
+      name: eventId
+    - type: unsigned __int16
+      name: stage
+    - type: byte
+      name: a3
+    - type: unsigned int*
+      name: payload
+    - type: byte
+      name: payloadSize
+    - type: __int64
+      name: a6
 - type: Client::System::File::FileAccessPath
   name: FileAccessPath
   namespace: Client.System.File
@@ -9681,6 +10158,45 @@ structs:
     - type: unsigned __int64
       name: alignment
   member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 4C 8B 4C 24 ?? 4C 8B C0
+    return_type: Client::System::Memory::IMemorySpace*
+    name: GetDefaultSpace
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 41 8D 55 50
+    return_type: Client::System::Memory::IMemorySpace*
+    name: GetApricotSpace
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 89 44 24 ?? E8 ?? ?? ?? ?? 48 89 44 24 ?? E8 ?? ?? ?? ?? 48 89 44 24 ?? E8 ?? ?? ?? ?? 48 89 44 24 ?? E8 ?? ?? ?? ?? 48 89 44 24 ?? E8 ?? ?? ?? ?? 48 89 44 24 ?? 48 8D B3 ?? ?? ?? ??
+    return_type: Client::System::Memory::IMemorySpace*
+    name: GetAnimationSpace
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 8B 75 08
+    return_type: Client::System::Memory::IMemorySpace*
+    name: GetUISpace
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 4C 8B C0 8B CB
+    return_type: Client::System::Memory::IMemorySpace*
+    name: GetSoundSpace
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? FF 4B 78
+    return_type: void
+    name: Free
+    parameters:
+    - type: __int64
+      name: ptr
+    - type: unsigned __int64
+      name: size
+  - signature: 4C 8B D9 0F B6 D2
+    return_type: void
+    name: Memset
+    parameters:
+    - type: __int64
+      name: ptr
+    - type: int
+      name: value
+    - type: unsigned __int64
+      name: size
 - type: Client::System::Resource::Handle::MaterialResourceHandle::AttributeSetEntry
   name: AttributeSetEntry
   namespace: Client.System.Resource.Handle
@@ -9908,6 +10424,12 @@ structs:
       name: unknown
     - type: byte
       name: isUnknown
+  static_members:
+  - signature: 48 89 05 ?? ?? ?? ?? 48 8B 08
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::System::Resource::ResourceManager
 - type: Client::System::Scheduler::ActionTimelineManager
   name: ActionTimelineManager
   namespace: Client.System.Scheduler
@@ -9924,6 +10446,12 @@ structs:
       name: this
     - type: Client::System::Scheduler::ActionTimelineManager::PreloadActionTmbInfo*
       name: info
+  static_members:
+  - signature: 4C 8B 43 48 48 8B 0D ?? ?? ?? ??
+    relative_follow_offsets:
+    - 7
+    is_pointer: False
+    return_type: Client::System::Scheduler::ActionTimelineManager
 - type: Client::System::Scheduler::ActionTimelineManager::PreloadActionTmbInfo
   name: PreloadActionTmbInfo
   namespace: Client.System.Scheduler
@@ -10015,6 +10543,12 @@ structs:
       name: id
     - type: byte
       name: a4
+  static_members:
+  - signature: 48 8B 0D ?? ?? ?? ?? 48 85 C9 74 0E E8 ?? ?? ?? ?? 84 C0 40 0F B6 FF 0F 44 FE 48 8B 8B ?? ?? ?? ??
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::System::Scheduler::ScheduleManagement
 - type: Client::System::String::Utf8String
   name: Utf8String
   namespace: Client.System.String
@@ -10218,6 +10752,25 @@ structs:
       name: this
     - type: byte*
       name: buffer
+  static_member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 33 C0 48 C7 44 24
+    return_type: int
+    name: ToInteger
+    parameters:
+    - type: Client::System::String::Utf8String*
+      name: value
+    - type: int
+      name: fromBase
+  - signature: E8 ?? ?? ?? ?? 40 80 FF 03 73 18
+    return_type: Client::System::String::Utf8String*
+    name: Concat
+    parameters:
+    - type: Client::System::String::Utf8String*
+      name: str
+    - type: Client::System::String::Utf8String*
+      name: buffer
+    - type: Client::System::String::Utf8String*
+      name: other
 - type: Client::System::Threading::Thread
   name: Thread
   namespace: Client.System.Threading
@@ -13849,6 +14402,15 @@ structs:
   union: False
   fields: []
   member_functions: []
+  static_member_functions:
+  - signature: C7 02 ?? ?? ?? ?? 81 F9 ?? ?? ?? ??
+    return_type: int
+    name: ConvertLogMessageIdToScreenLogKind
+    parameters:
+    - type: int
+      name: logMessageId
+    - type: int*
+      name: unkOption
 - type: Client::UI::Misc::TermFilterModule::TermFilterEntry
   name: TermFilterEntry
   namespace: Client.UI.Misc
@@ -14216,6 +14778,37 @@ structs:
   union: False
   fields: []
   member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10
+    return_type: byte
+    name: CanApplyGlamourPlates
+    parameters:
+    - type: byte
+      name: checkCastGlamourUnlocked
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 8B CF 83 E9
+    return_type: byte
+    name: IsExportedGatheringPointTimed
+    parameters:
+    - type: byte
+      name: gatheringPointType
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 C7 4C 8B CB
+    return_type: byte
+    name: IsValidPlayerCharacterName
+    parameters:
+    - type: byte*
+      name: characterName
+  - signature: E8 ?? ?? ?? ?? 45 0F B7 C5
+    return_type: void
+    name: PlaySoundEffect
+    parameters:
+    - type: unsigned int
+      name: effectId
+    - type: __int64
+      name: a2
+    - type: __int64
+      name: a3
+    - type: byte
+      name: a4
 - type: Client::UI::UIInputData::Keybind
   name: Keybind
   namespace: Client.UI
@@ -16874,6 +17467,43 @@ structs:
   union: False
   fields: []
   member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 51 48 8B 18
+    return_type: Common::Serialize::Resource::hkResource*
+    name: Load
+    parameters:
+    - type: Common::Base::System::IO::Reader::hkStreamReader*
+      name: streamReader
+    - type: Common::Serialize::Util::hkSerializeUtil::ErrorDetails*
+      name: errorResult
+    - type: Common::Serialize::Util::hkSerializeUtil::LoadOptions*
+      name: loadOptions
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 49 8B E8
+    return_type: Common::Serialize::Resource::hkResource*
+    name: LoadFromBuffer
+    parameters:
+    - type: __int64
+      name: buf
+    - type: int
+      name: bufLen
+    - type: Common::Serialize::Util::hkSerializeUtil::ErrorDetails*
+      name: errorResult
+    - type: Common::Serialize::Util::hkSerializeUtil::LoadOptions*
+      name: loadOptions
+  - signature: 40 53 48 83 EC 30 8B 44 24 60 48 8B D9 89 44 24 28
+    return_type: Common::Base::Types::hkResult*
+    name: Save
+    parameters:
+    - type: Common::Base::Types::hkResult*
+      name: result
+    - type: __int64
+      name: hkObject
+    - type: Common::Base::Reflection::hkClass*
+      name: klass
+    - type: Common::Base::System::IO::Writer::hkStreamWriter*
+      name: writer
+    - type: Common::Serialize::Util::hkSerializeUtil::SaveOptions
+      name: options
 - type: Common::TimePoint
   name: TimePoint
   namespace: Common
@@ -16957,6 +17587,13 @@ structs:
       name: this
     - type: unsigned int
       name: columnIndex
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 8D 2C 5B
+    return_type: __int64
+    name: ResolveStringColumnIndirection
+    parameters:
+    - type: __int64
+      name: columnPtr
 - type: Component::Excel::ExcelRowDescriptor
   name: ExcelRowDescriptor
   namespace: Component.Excel
@@ -17133,6 +17770,19 @@ structs:
       name: subRowId
     - type: unsigned int
       name: columnIndex
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B 75 00
+    return_type: __int64
+    name: GetItemRowById
+    parameters:
+    - type: unsigned int
+      name: itemId
+  - signature: 40 53 48 83 EC 20 0F B6 41 29
+    return_type: byte
+    name: GetBannerConditionUnlockState
+    parameters:
+    - type: __int64
+      name: row
 - type: Component::GUI::AtkAddonControl::ChildAddonInfo
   name: ChildAddonInfo
   namespace: Component.GUI
@@ -20906,6 +21556,39 @@ structs:
     name: W
     offset: 12
   member_functions: []
+- type: Tm
+  name: Tm
+  namespace: ''
+  union: False
+  fields:
+  - type: int
+    name: tm_sec
+    offset: 0
+  - type: int
+    name: tm_min
+    offset: 4
+  - type: int
+    name: tm_hour
+    offset: 8
+  - type: int
+    name: tm_mday
+    offset: 12
+  - type: int
+    name: tm_mon
+    offset: 16
+  - type: int
+    name: tm_year
+    offset: 20
+  - type: int
+    name: tm_wday
+    offset: 24
+  - type: int
+    name: tm_yday
+    offset: 28
+  - type: int
+    name: tm_isdst
+    offset: 32
+  member_functions: []
 - type: Animation::Animation::hkaAnnotationTrack::Annotation
   name: Annotation
   namespace: Animation.Animation
@@ -21622,6 +22305,13 @@ structs:
     parameters:
     - type: Client::Game::Control::EmoteController*
       name: this
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? FE C3 44 8B F0
+    return_type: byte
+    name: GetAvailablePoses
+    parameters:
+    - type: Client::Game::Control::EmoteController::PoseType
+      name: pose
 - type: Client::Game::Control::EmoteController::PlayEmoteOption
   name: PlayEmoteOption
   namespace: Client.Game.Control
@@ -21689,6 +22379,11 @@ structs:
     offset: 154
     size: 2
   member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 41 8B D5
+    return_type: Client::Game::DutyActionManager*
+    name: GetInstanceIfReady
+    parameters: []
 - type: Client::Game::Event::EventHandlerInfo
   name: EventHandlerInfo
   namespace: Client.Game.Event
@@ -21821,6 +22516,12 @@ structs:
     - type: unsigned __int64
       name: a5
   member_functions: []
+  static_members:
+  - signature: 48 8D 15 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 45 33 C9
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Event::ShopEventHandler::AgentProxy
 - type: Client::Game::Event::ShopEventHandler::BuybackItem
   name: BuybackItem
   namespace: Client.Game.Event
@@ -22138,6 +22839,12 @@ structs:
       name: this
     - type: unsigned int
       name: itemIndex
+  static_members:
+  - signature: 74 2C 48 8B 0D ?? ?? ?? ?? 48 85 C9
+    relative_follow_offsets:
+    - 5
+    is_pointer: True
+    return_type: Client::Game::MirageManager
 - type: Client::Game::MonsterNoteRankInfo
   name: MonsterNoteRankInfo
   namespace: Client.Game
@@ -22180,6 +22887,12 @@ structs:
     name: Objects
     offset: 24
   member_functions: []
+  static_members:
+  - signature: 48 8D 35 ?? ?? ?? ?? 81 FA
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Object::GameObjectManager
 - type: Client::Game::Object::GatheringPointObject::GatheringPointObjectImpl
   name: GatheringPointObjectImpl
   namespace: Client.Game.Object
@@ -22247,6 +22960,12 @@ structs:
       name: this
     - type: __int64
       name: target
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 48 8B 18
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::RetainerManager
 - type: Client::Game::SavedAppearanceSlot
   name: SavedAppearanceSlot
   namespace: Client.Game
@@ -22384,6 +23103,15 @@ structs:
       name: sourceId
     - type: byte
       name: refreshFlags
+  static_member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 41 56 48 83 EC ?? 4C 8B 35
+    return_type: byte
+    name: ExecuteStatusOff
+    parameters:
+    - type: unsigned int
+      name: statusId
+    - type: unsigned int
+      name: sourceId
 - type: Client::Game::UI::ContentsFinder
   name: ContentsFinder
   namespace: Client.Game.UI
@@ -22416,6 +23144,12 @@ structs:
     offset: 32
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02
+    relative_follow_offsets:
+    - 6
+    is_pointer: False
+    return_type: Client::Game::UI::ContentsFinder
 - type: Client::Game::UI::DailyQuestSupply
   name: DailyQuestSupply
   namespace: Client.Game.UI
@@ -22761,6 +23495,12 @@ structs:
       name: this
     - type: byte
       name: markIndex
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 0F B6 50 08 E8 ?? ?? ?? ?? 84 C0 48 8B 47 28
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::MobHunt
 - type: Client::Game::UI::NpcTrade::Item
   name: Item
   namespace: Client.Game.UI
@@ -23033,6 +23773,12 @@ structs:
       name: territoryTypeId
     - type: int
       name: daytimeOffset
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 44 0F B7 45
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::WeatherManager
 - type: Client::Graphics::Kernel::PVShader
   name: PVShader
   namespace: Client.Graphics.Kernel
@@ -23720,6 +24466,12 @@ structs:
       name: this
     - type: unsigned int
       name: clientObjectIndex
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 48 8B 70 70 48 85 F6 74 09 48 8B 06 48 8B CE FF 50 10
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::Render::RenderTargetManager
 - type: Client::Graphics::Render::SubView
   name: SubView
   namespace: Client.Graphics.Render
@@ -28813,6 +29565,22 @@ structs:
     offset: 0
     size: 40
   member_functions: []
+  static_members:
+  - signature: 48 8D 05 ?? ?? ?? ?? 48 89 7C 24 ?? 4C 8D 05 ?? ?? ?? ?? 33 FF 8B CF 66 0F 1F 44 00 ??
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::UI::Agent::CharaSelectCharacterList
+  - signature: 75 39 48 8B 0D ?? ?? ?? ?? 48 85 C9
+    relative_follow_offsets:
+    - 5
+    is_pointer: True
+    return_type: Client::Game::Character::Character
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 4D 0F BF 8E ?? ?? ?? ??
+    return_type: void
+    name: CleanupCharacters
+    parameters: []
 - type: Client::UI::Agent::DeepDungeonStatusItem
   name: DeepDungeonStatusItem
   namespace: Client.UI.Agent
@@ -34470,6 +35238,12 @@ structs:
     offset: 0
     base: true
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? FF 15 ?? ?? ?? ?? C7 44 24
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Component::SteamApi::Interface::ISteamApps
 - type: Component::SteamApi::Interface::ISteamFriends
   name: ISteamFriends
   namespace: Component.SteamApi.Interface
@@ -34481,6 +35255,12 @@ structs:
     offset: 0
     base: true
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 48 8B 10 48 89 93
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Component::SteamApi::Interface::ISteamFriends
 - type: Component::SteamApi::Interface::ISteamUser
   name: ISteamUser
   namespace: Component.SteamApi.Interface
@@ -34492,6 +35272,12 @@ structs:
     offset: 0
     base: true
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? FF 15 ?? ?? ?? ?? 48 8D 54 24 ?? 48 8B 08
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Component::SteamApi::Interface::ISteamUser
 - type: Component::SteamApi::Interface::ISteamUtils
   name: ISteamUtils
   namespace: Component.SteamApi.Interface
@@ -34503,6 +35289,12 @@ structs:
     offset: 0
     base: true
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? FF 15 ?? ?? ?? ?? 48 8B 08 48 8B 01 48 83 C4 28 48 FF A0 10 01 00 00
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Component::SteamApi::Interface::ISteamUtils
 - type: Component::Text::ReferencedUtf8String
   name: ReferencedUtf8String
   namespace: Component.Text
@@ -36660,6 +37452,37 @@ structs:
       name: this
     - type: unsigned int
       name: sceneId
+  static_members:
+  - signature: 4C 8B 15 ?? ?? ?? ?? 4D 85 D2 74 77 41 83 7A
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::BGMSystem
+  static_member_functions:
+  - signature: 4C 8B 1D ?? ?? ?? ?? 4D 85 DB 0F 84
+    return_type: void
+    name: SetBGM
+    parameters:
+    - type: unsigned __int16
+      name: bgmId
+    - type: unsigned int
+      name: sceneId
+    - type: byte
+      name: a3
+    - type: byte
+      name: enableCustomFade
+    - type: unsigned int
+      name: fadeOutMs
+    - type: unsigned int
+      name: fadeInMs
+    - type: unsigned int
+      name: fadeInStartMs
+    - type: byte
+      name: a8
+    - type: byte
+      name: a9
+    - type: float
+      name: initialVolume
 - type: Client::Game::BGMSystem::Scene
   name: Scene
   namespace: Client.Game
@@ -36904,6 +37727,12 @@ structs:
       name: objectArray
     - type: Client::Game::Camera*
       name: camera
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Control::TargetSystem
 - type: Client::Game::Event::DailyQuestMap::Entry
   name: Entry
   namespace: Client.Game.Event
@@ -36965,6 +37794,12 @@ structs:
     - type: unsigned __int64
       name: a5
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 48 63 C2 48 C1 E0 05
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Event::EventHandlerSelector
 - type: Client::Game::Event::EventSceneModuleTaskManager
   name: EventSceneModuleTaskManager
   namespace: Client.Game.Event
@@ -37688,6 +38523,12 @@ structs:
     offset: 0
     size: 12
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F B6 4B 22
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::MonsterNoteManager
 - type: Client::Game::Object::GameObject
   name: GameObject
   namespace: Client.Game.Object
@@ -39017,6 +39858,12 @@ structs:
       name: callback
     - type: __int64
       name: initialArg
+  static_members:
+  - signature: 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 ?? 41 B0
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::System::Photo::ScreenShot
 - type: Client::System::Scheduler::Base::CutSceneController
   name: CutSceneController
   namespace: Client.System.Scheduler.Base
@@ -45930,6 +46777,19 @@ structs:
       name: this
     - type: Client::UI::Misc::BannerModuleEntry*
       name: other
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 89 43 58 48 8B 4D F0
+    return_type: unsigned int
+    name: GenerateChecksum
+    parameters:
+    - type: unsigned int*
+      name: itemIds
+    - type: byte*
+      name: stainIds
+    - type: unsigned __int16*
+      name: glassesIds
+    - type: Client::UI::Misc::BannerGearVisibilityFlag
+      name: gearVisibilityFlag
 - type: Client::UI::Misc::ConfigModule
   name: ConfigModule
   namespace: Client.UI.Misc
@@ -46900,6 +47760,35 @@ structs:
       name: this
     - type: float
       name: epsilon
+  static_member_functions:
+  - signature: 45 85 C0 74 4B 48 8B C1
+    return_type: void
+    name: fastRenormalizeBatch1
+    parameters:
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseOut
+    - type: float*
+      name: weight
+    - type: unsigned int
+      name: numTransforms
+  - signature: F3 0F 11 4C 24 ?? 48 83 EC 28 F3 0F 10 44 24
+    return_type: void
+    name: fastRenormalizeBatch2
+    parameters:
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseOut
+    - type: float
+      name: weight
+    - type: unsigned int
+      name: numTransforms
+  - signature: 48 83 EC 28 8B C2 C1 E8 02
+    return_type: void
+    name: fastRenormalizeQuaternionBatch
+    parameters:
+    - type: Common::Base::Math::QsTransform::hkQsTransformf*
+      name: poseOut
+    - type: unsigned int
+      name: numTransforms
 - type: Common::Base::Reflection::Registry::hkClassNameRegistry
   name: hkClassNameRegistry
   namespace: Common.Base.Reflection.Registry
@@ -47330,6 +48219,12 @@ structs:
     - type: Common::Serialize::Util::hkBuiltinTypeRegistry*
       name: this
   member_functions: []
+  static_members:
+  - signature: 8B DA 48 8B 0D ?? ?? ?? ?? 48 8B 01 FF 50 28
+    relative_follow_offsets:
+    - 5
+    is_pointer: True
+    return_type: Common::Serialize::Util::hkBuiltinTypeRegistry
 - type: Common::Serialize::Util::hkRootLevelContainer::NamedVariant
   name: NamedVariant
   namespace: Common.Serialize.Util
@@ -49456,6 +50351,12 @@ structs:
     - type: unsigned __int64
       name: a5
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 44 24 60
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::Loot
 - type: Client::Game::UI::MarkerInfo
   name: MarkerInfo
   namespace: Client.Game.UI
@@ -49512,6 +50413,12 @@ structs:
       name: this
     - type: Client::Game::UI::MarkerPresetPlacement*
       name: placement
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 4C 8B 85
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::MarkingController
 - type: Client::Game::UI::NpcTrade
   name: NpcTrade
   namespace: Client.Game.UI
@@ -49673,6 +50580,12 @@ structs:
       name: favored
     - type: byte
       name: residentArea
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 48 8B 12
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::Telepo
 - type: Client::Graphics::Render::Camera
   name: Camera
   namespace: Client.Graphics.Render
@@ -49828,6 +50741,12 @@ structs:
     - type: Client::Graphics::Scene::World*
       name: this
   member_functions: []
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 48 8B 50 40
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::Scene::World
 - type: Client::LayoutEngine::AnalyticShapeData
   name: AnalyticShapeData
   namespace: Client.LayoutEngine
@@ -52718,6 +53637,57 @@ structs:
       name: this
     - type: __int64
       name: packet
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? F6 D8 1A C0
+    return_type: byte
+    name: IsCrossRealmParty
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 0F B6 5C 24 ?? 84 C0
+    return_type: byte
+    name: IsAllianceRaid
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 0F B6 D8 8B CB
+    return_type: byte
+    name: GetGroupIndex
+    parameters:
+    - type: byte
+      name: group
+  - signature: E8 ?? ?? ?? ?? 3C ?? 77 ?? C7 43
+    return_type: byte
+    name: GetPartyMemberCount
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 0F B6 C0 EB 08
+    return_type: byte
+    name: GetGroupMemberCount
+    parameters:
+    - type: int
+      name: groupIndex
+  - signature: E8 ?? ?? ?? ?? 49 8B 5E 10 48 8B C8
+    return_type: Client::UI::Info::CrossRealmMember*
+    name: GetGroupMember
+    parameters:
+    - type: unsigned int
+      name: memberIndex
+    - type: int
+      name: groupIndex
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 0C 0F B6 40 2E
+    return_type: Client::UI::Info::CrossRealmMember*
+    name: GetMemberByContentId
+    parameters:
+    - type: unsigned __int64
+      name: contentId
+  - signature: 48 89 5C 24 ?? 48 89 7C 24 ?? 4C 8B 15
+    return_type: Client::UI::Info::CrossRealmMember*
+    name: GetMemberByEntityId
+    parameters:
+    - type: unsigned int
+      name: entityId
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 0F B6 5E
+    return_type: byte
+    name: IsContentIdInParty
+    parameters:
+    - type: unsigned __int64
+      name: contentId
 - type: Client::UI::Info::InfoProxyCrossWorldLinkshell
   name: InfoProxyCrossWorldLinkshell
   namespace: Client.UI.Info
@@ -55345,6 +56315,12 @@ structs:
     offset: 56
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8D 1D ?? ?? ?? ?? 8B 43 20
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Tm
 - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>>
   name: Node
   namespace: Helper
@@ -56102,6 +57078,109 @@ structs:
     parameters:
     - type: Client::Game::ActionManager*
       name: this
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? F3 0F 10 13
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::ActionManager
+  static_member_functions:
+  - signature: 40 53 48 83 EC ?? FF C9
+    return_type: unsigned int
+    name: GetSpellIdForAction
+    parameters:
+    - type: Client::Game::ActionType
+      name: actionType
+    - type: unsigned int
+      name: actionId
+  - signature: E8 ?? ?? ?? ?? F3 41 0F 11 07 80 3B 00
+    return_type: float
+    name: GetActionRange
+    parameters:
+    - type: unsigned int
+      name: actionId
+  - signature: E8 ?? ?? ?? ?? 85 C0 75 02 33 C0
+    return_type: unsigned int
+    name: GetActionInRangeOrLoS
+    parameters:
+    - type: unsigned int
+      name: actionId
+    - type: Client::Game::Object::GameObject*
+      name: sourceObject
+    - type: Client::Game::Object::GameObject*
+      name: targetObject
+  - signature: E8 ?? ?? ?? ?? 8B C8 0F BE 43 0C
+    return_type: int
+    name: GetActionCost
+    parameters:
+    - type: Client::Game::ActionType
+      name: actionType
+    - type: unsigned int
+      name: actionId
+    - type: byte
+      name: a3
+    - type: byte
+      name: a4
+    - type: byte
+      name: a5
+    - type: byte
+      name: a6
+  - signature: E8 ?? ?? ?? ?? 85 C0 7E 1C
+    return_type: int
+    name: GetAdjustedRecastTime
+    parameters:
+    - type: Client::Game::ActionType
+      name: actionType
+    - type: unsigned int
+      name: actionId
+    - type: byte
+      name: applyClassMechanics
+  - signature: E8 ?? ?? ?? ?? 45 33 C0 33 D2 48 8B CF 66 0F 6E F8
+    return_type: int
+    name: GetAdjustedCastTime
+    parameters:
+    - type: Client::Game::ActionType
+      name: actionType
+    - type: unsigned int
+      name: actionId
+    - type: byte
+      name: applyProcs
+    - type: Client::Game::ActionManager::CastTimeProc*
+      name: outOptProc
+  - signature: E8 ?? ?? ?? ?? 83 F8 01 7E 58
+    return_type: unsigned __int16
+    name: GetMaxCharges
+    parameters:
+    - type: unsigned int
+      name: actionId
+    - type: unsigned int
+      name: level
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 8B F9 E8 ?? ?? ?? ?? 4C 8B C3
+    return_type: byte
+    name: CanUseActionOnTarget
+    parameters:
+    - type: unsigned int
+      name: actionId
+    - type: Client::Game::Object::GameObject*
+      name: target
+  - signature: E9 ?? ?? ?? ?? B1 02
+    return_type: unsigned int
+    name: GetDutyActionId
+    parameters:
+    - type: unsigned __int16
+      name: dutyActionSlot
+  - signature: 40 53 48 83 EC 20 48 8B 01 48 8B D9 FF 50 08 8B 15
+    return_type: Client::Game::ActionManager::TargetCategory
+    name: ClassifyTarget
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: target
+  - signature: 48 83 EC 28 81 E9
+    return_type: byte
+    name: GetExtraParamForSummonAction
+    parameters:
+    - type: unsigned int
+      name: actionId
 - type: Client::Game::Character::ActionEffectHandler
   name: ActionEffectHandler
   namespace: Client.Game.Character
@@ -56113,6 +57192,23 @@ structs:
     offset: 0
     size: 32
   member_functions: []
+  static_member_functions:
+  - signature: 40 55 56 57 41 54 41 55 41 56 48 8D AC 24
+    return_type: void
+    name: Receive
+    parameters:
+    - type: unsigned int
+      name: casterEntityId
+    - type: Client::Game::Character::Character*
+      name: casterPtr
+    - type: System::Numerics::Vector3*
+      name: targetPos
+    - type: Client::Game::Character::ActionEffectHandler::Header*
+      name: header
+    - type: Client::Game::Character::ActionEffectHandler::TargetEffects*
+      name: effects
+    - type: Client::Game::Object::GameObjectId*
+      name: targetEntityIds
 - type: Client::Game::Control::CharacterLookAtControlParam
   name: CharacterLookAtControlParam
   namespace: Client.Game.Control
@@ -57093,6 +58189,12 @@ structs:
       name: this
     - type: Client::Game::UI::PlayerStateFlag
       name: flag
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::PlayerState
 - type: Client::Graphics::Physics::BonePhysicsModule
   name: BonePhysicsModule
   namespace: Client.Graphics.Physics
@@ -57213,6 +58315,15 @@ structs:
       name: x
     - type: int
       name: y
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 0F 28 C7 0F 28 CE
+    return_type: Common::Math::Vector2*
+    name: WorldToScreenPoint
+    parameters:
+    - type: Common::Math::Vector2*
+      name: screenPoint
+    - type: Common::Math::Vector3*
+      name: worldPoint
 - type: Client::Graphics::Scene::EnvLocation
   name: EnvLocation
   namespace: Client.Graphics.Scene
@@ -57462,6 +58573,27 @@ structs:
       name: indexHash
     - type: byte*
       name: rsfData
+  static_members:
+  - signature: 48 8B D1 48 8B 0D ?? ?? ?? ?? 48 85 C9 74 0A
+    relative_follow_offsets:
+    - 6
+    is_pointer: True
+    return_type: Client::LayoutEngine::LayoutWorld
+  static_member_functions:
+  - signature: E9 ?? ?? ?? ?? 8B 43 78
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    name: GetLayoutInstance
+    parameters:
+    - type: Client::LayoutEngine::InstanceType
+      name: instanceType
+    - type: unsigned int
+      name: instanceId
+    - type: unsigned int
+      name: subId
+  - signature: E8 ?? ?? ?? ?? 45 33 F6 44 89 B7
+    return_type: void
+    name: UnloadPrefetchLayout
+    parameters: []
 - type: Client::System::Framework::EnvironmentManager
   name: EnvironmentManager
   namespace: Client.System.Framework
@@ -63107,6 +64239,12 @@ structs:
       name: this
     - type: unsigned __int16
       name: fateId
+  static_members:
+  - signature: 48 89 01 48 8B 3D ?? ?? ?? ?? 48 8B 87
+    relative_follow_offsets:
+    - 6
+    is_pointer: True
+    return_type: Client::Game::Fate::FateManager
 - type: Client::Game::Group::GroupManager
   name: GroupManager
   namespace: Client.Game.Group
@@ -63129,6 +64267,12 @@ structs:
       name: this
     - type: byte
       name: replayGroup
+  static_members:
+  - signature: 33 D2 48 8D 0D ?? ?? ?? ?? 33 DB
+    relative_follow_offsets:
+    - 5
+    is_pointer: False
+    return_type: Client::Game::Group::GroupManager
 - type: Client::Game::Object::GatheringPointObject
   name: GatheringPointObject
   namespace: Client.Game.Object
@@ -66252,6 +67396,39 @@ structs:
     parameters:
     - type: Client::Game::QuestManager*
       name: this
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 66 BA 10 0C
+    return_type: Client::Game::QuestManager*
+    name: Instance
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 43 88 84 3E ?? ?? ?? ??
+    return_type: byte
+    name: IsQuestComplete
+    parameters:
+    - type: unsigned __int16
+      name: questId
+  - signature: E8 ?? ?? ?? ?? 3A 43 06
+    return_type: byte
+    name: GetQuestSequence
+    parameters:
+    - type: unsigned __int16
+      name: questId
+  - signature: 40 53 48 83 EC 20 8B D9 81 F9
+    return_type: byte
+    name: IsRecipeComplete
+    parameters:
+    - type: unsigned int
+      name: recipeId
+  - signature: E8 ?? ?? ?? ?? 88 87 ?? ?? ?? ?? B8
+    return_type: byte
+    name: IsGatheringItemGathered
+    parameters:
+    - type: unsigned __int16
+      name: gatheringItemId
+  - signature: E8 ?? ?? ?? ?? 41 8D 74 24 ?? 8B D8
+    return_type: int
+    name: GetNextLeveAllowancesTimestamp
+    parameters: []
 - type: Client::Game::UI::Buddy
   name: Buddy
   namespace: Client.Game.UI
@@ -66312,6 +67489,12 @@ structs:
     name: GemstoneTraderMarkers
     offset: 16216
   member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::Map
 - type: Client::Graphics::Scene::CharacterBase
   name: CharacterBase
   namespace: Client.Graphics.Scene
@@ -66660,6 +67843,19 @@ structs:
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 4F 08 48 8B D0 4C 8B 01
+    return_type: Client::Graphics::Scene::CharacterBase*
+    name: Create
+    parameters:
+    - type: unsigned int
+      name: modelId
+    - type: Client::Game::Character::CustomizeData*
+      name: customize
+    - type: Client::Game::Character::EquipmentModelId*
+      name: equipData
+    - type: byte
+      name: unk
 - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance
   name: CollisionBoxLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -69218,6 +70414,11 @@ structs:
     parameters:
     - type: Client::Game::MJI::MJIManager*
       name: this
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B 78 1C
+    return_type: Client::Game::MJI::MJIManager*
+    name: Instance
+    parameters: []
 - type: Client::Graphics::Render::Manager
   name: Manager
   namespace: Client.Graphics.Render
@@ -69233,6 +70434,12 @@ structs:
     offset: 141712
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 48 8D 4D 80
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::Render::Manager
 - type: Client::Graphics::Scene::Demihuman
   name: Demihuman
   namespace: Client.Graphics.Scene
@@ -71350,6 +72557,23 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? EB 5B 48 8B 49 10
+    return_type: byte
+    name: TryOn
+    parameters:
+    - type: unsigned int
+      name: openerAddonId
+    - type: unsigned int
+      name: itemId
+    - type: byte
+      name: stain0Id
+    - type: byte
+      name: stain1Id
+    - type: unsigned int
+      name: glamourItemId
+    - type: byte
+      name: applyCompanyCrest
 - type: Client::UI::Info::InfoProxyBlacklist
   name: InfoProxyBlacklist
   namespace: Client.UI.Info
@@ -73355,6 +74579,12 @@ structs:
     offset: 2272
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 0F 28 F2 48 8B 05
+    relative_follow_offsets:
+    - 6
+    is_pointer: True
+    return_type: Client::Graphics::Environment::EnvManager
 - type: Client::System::Resource::Handle::SkeletonResourceHandle
   name: SkeletonResourceHandle
   namespace: Client.System.Resource.Handle
@@ -74104,6 +75334,21 @@ structs:
       name: this
     - type: unsigned int
       name: index
+  static_member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B DA 49 8B F0
+    return_type: unsigned int
+    name: GetSlotAppearance
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType*
+      name: actionType
+    - type: unsigned int*
+      name: actionId
+    - type: unsigned __int16*
+      name: UNK_0xC4
+    - type: Client::UI::Misc::RaptureHotbarModule*
+      name: hotbarModule
+    - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
+      name: slot
 - type: Client::UI::Misc::RaptureLogModule
   name: RaptureLogModule
   namespace: Client.UI.Misc
@@ -74674,6 +75919,12 @@ structs:
       name: count
     - type: byte
       name: isUnlimited
+  static_members:
+  - signature: 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 27 48 8D 4B 20 E8 ?? ?? ?? ?? 48 8D 4B 10 E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 D2
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::CurrencyManager
 - type: Client::Graphics::Scene::Human
   name: Human
   namespace: Client.Graphics.Scene
@@ -76772,6 +78023,17 @@ structs:
     name: ViewProjectionMatrix
     offset: 30336
   member_functions: []
+  static_members:
+  - signature: 4C 8D 35 ?? ?? ?? ?? 48 8B 09
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Control::Control
+  - signature: 48 8B 2D ?? ?? ?? ?? 75
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::Character::BattleChara
 - type: Client::Game::Event::LuaActorModule
   name: LuaActorModule
   namespace: Client.Game.Event
@@ -116283,6 +117545,17 @@ structs:
     parameters:
     - type: Client::System::Framework::Framework*
       name: this
+  static_members:
+  - signature: 49 8B DC 48 89 1D ?? ?? ?? ??
+    relative_follow_offsets:
+    - 6
+    is_pointer: True
+    return_type: Client::System::Framework::Framework
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 03 07
+    return_type: __int64
+    name: GetServerTime
+    parameters: []
 - type: Client::UI::AddonActionBar
   name: AddonActionBar
   namespace: Client.UI
@@ -118718,6 +119991,11 @@ structs:
     parameters:
     - type: Component::GUI::AtkStage*
       name: this
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 3B 98
+    return_type: Component::GUI::AtkStage*
+    name: Instance
+    parameters: []
 - type: Client::Game::Event::Director
   name: Director
   namespace: Client.Game.Event
@@ -128202,6 +129480,15 @@ structs:
     - type: int
       name: a2
   member_functions: []
+  static_member_functions:
+  - signature: 8D 41 FF 83 F8 13
+    return_type: unsigned int
+    name: GetBarTarget
+    parameters:
+    - type: unsigned int
+      name: mapValue
+    - type: byte*
+      name: useLeftSide
 - type: Client::UI::AddonJobHudAST0
   name: AddonJobHudAST0
   namespace: Client.UI
@@ -131194,6 +132481,19 @@ structs:
       name: seconds
     - type: byte
       name: alternativeMinutesGlyph
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B CE 48 8B D0
+    return_type: byte*
+    name: FormatName
+    parameters:
+    - type: Client::UI::Misc::NameFormatterPlaceholder
+      name: placeholder
+    - type: int
+      name: id
+    - type: Client::UI::Misc::NameFormatterIdConverter
+      name: idConverter
+    - type: int
+      name: intParam2
 - type: Client::Game::InstanceContent::InstanceContentDirector
   name: InstanceContentDirector
   namespace: Client.Game.InstanceContent
@@ -131629,6 +132929,13 @@ structs:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
   member_functions: []
+  static_member_functions:
+  - signature: 40 53 57 48 83 EC 78 48 8B D9 48 8D 0D
+    return_type: __int64
+    name: HandleEnterContentInfoPacket
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector::EnterContentInfoPacket*
+      name: packet
 - type: Client::Game::InstanceContent::PublicContentEureka
   name: PublicContentEureka
   namespace: Client.Game.InstanceContent
@@ -132555,6 +133862,12 @@ structs:
     name: ClassJobId
     offset: 88
   member_functions: []
+  static_members:
+  - signature: 48 8B 3D ?? ?? ?? ?? 33 ED
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::JobGaugeManager
 - type: Client::Game::InstanceContent::InstanceContentDeepDungeon
   name: InstanceContentDeepDungeon
   namespace: Client.Game.InstanceContent
@@ -132939,6 +134252,15 @@ structs:
       name: holsterIndex
     - type: unsigned int
       name: slot
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 48 85 FF 74 1D
+    return_type: Client::Game::InstanceContent::PublicContentBozja*
+    name: GetInstance
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 85 FF 74 1D
+    return_type: Client::Game::InstanceContent::BozjaState*
+    name: GetState
+    parameters: []
 - type: Client::Game::GameMain
   name: GameMain
   namespace: Client.Game
@@ -133057,6 +134379,33 @@ structs:
       name: festival3
     - type: unsigned int
       name: festival4
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 0F 28 F2 48 89 44 24 ??
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::GameMain
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 88 45 F1
+    return_type: byte
+    name: IsInPvPArea
+    parameters: []
+  - signature: 40 53 48 83 EC 20 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 1E 48 8D 0D
+    return_type: byte
+    name: IsInPvPInstance
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10
+    return_type: byte
+    name: IsInSanctuary
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 41 83 7F ?? ?? 4C 8D 2D
+    return_type: byte
+    name: IsInGPose
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 0F 57 FF 84 C0
+    return_type: byte
+    name: IsInIdleCam
+    parameters: []
 - type: Client::LayoutEngine::LayoutManager
   name: LayoutManager
   namespace: Client.LayoutEngine
@@ -134437,6 +135786,33 @@ structs:
       name: this
     - type: unsigned __int16
       name: territoryType
+  static_members:
+  - signature: 4C 39 2D ?? ?? ?? ?? 74 14
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::Event::EventFramework
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8
+    return_type: unsigned int
+    name: GetCurrentContentId
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 41 38 46 66
+    return_type: Client::Game::Event::ContentType
+    name: GetCurrentContentType
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 66 89 45 82
+    return_type: unsigned __int16
+    name: GetContentFinderCondition
+    parameters:
+    - type: Client::Game::Event::ContentType
+      name: contentType
+    - type: unsigned int
+      name: contentId
+  - signature: 48 83 EC 28 48 8B 05 ?? ?? ?? ?? 48 85 C0 74 2C
+    return_type: byte
+    name: CanLeaveCurrentContent
+    parameters: []
 - type: Client::Game::Character::BattleChara
   name: BattleChara
   namespace: Client.Game.Character
@@ -135272,6 +136648,37 @@ structs:
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::UIState
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 88 46 02 B0 01
+    return_type: byte
+    name: IsInstanceContentCompleted
+    parameters:
+    - type: unsigned int
+      name: instanceContentId
+  - signature: E8 ?? ?? ?? ?? 3C 01 75 38
+    return_type: byte
+    name: IsInstanceContentUnlocked
+    parameters:
+    - type: unsigned int
+      name: instanceContentId
+  - signature: 48 83 EC 28 E8 ?? ?? ?? ?? 48 85 C0 74 14 0F B7 40 2A
+    return_type: byte
+    name: IsPublicContentCompleted
+    parameters:
+    - type: unsigned int
+      name: publicContentId
+  - signature: E9 ?? ?? ?? ?? 0F B6 05 ?? ?? ?? ?? 24 01
+    return_type: byte
+    name: IsPublicContentUnlocked
+    parameters:
+    - type: unsigned int
+      name: publicContentId
 - type: Client::UI::UIModule
   name: UIModule
   namespace: Client.UI
@@ -136191,3 +137598,22 @@ structs:
       name: a4
     - type: byte
       name: saveToHistory
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 45 0F B7 C5
+    return_type: byte
+    name: PlaySound
+    parameters:
+    - type: unsigned int
+      name: effectId
+    - type: __int64
+      name: a2
+    - type: __int64
+      name: a3
+    - type: byte
+      name: a4
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 C7 4C 8B CB
+    return_type: byte
+    name: IsPlayerCharacterName
+    parameters:
+    - type: byte*
+      name: name
