@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -90,7 +91,9 @@ public class Exporter {
         }
 
         Console.WriteLine("::endgroup::");
+        Console.WriteLine();
         Console.WriteLine($"Processed {_enums.Count} enums and {_structs.Count} structs");
+        Console.WriteLine();
     }
 
     public static void ProcessStaticFunctions() {
@@ -118,23 +121,54 @@ public class Exporter {
                     }];
                 }
                 var memberFunction = methodInfo.GetCustomAttribute<MemberFunctionAttribute>();
+                if (memberFunction != null || staticAddress != null)
+                    _processType.Add(methodInfo.ReturnType);
                 if (memberFunction == null) continue;
                 currentStruct.StaticMemberFunctions ??= [];
                 currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions, new ProcessedMemberFunction {
                     MemberFunctionSignature = memberFunction.Signature,
                     MemberFunctionName = methodInfo.Name,
                     MemberFunctionReturnType = methodInfo.ReturnType,
-                    MemberFunctionParameters = methodInfo.GetParameters().Select(p => new ProcessedField {
-                        FieldType = p.ParameterType,
-                        FieldOffset = -1,
-                        FieldName = p.Name!
+                    MemberFunctionParameters = methodInfo.GetParameters().Select(p => {
+                        _processType.Add(p.ParameterType);
+                        return new ProcessedField {
+                            FieldType = p.ParameterType,
+                            FieldOffset = -1,
+                            FieldName = p.Name!
+                        };
                     }).ToArray()
                 }];
             }
             _structs[currentStructIndex] = currentStruct;
         }
+
         Console.WriteLine("::endgroup::");
+        Console.WriteLine("::group::Processed Struct 2nd pass");
+        var now = DateTime.UtcNow;
+        var count = 1;
+        var structsCount = _structs.Count;
+        var enumsCount = _enums.Count;
+
+        while (_processType.Count > 0) {
+            Console.WriteLine($"{PassString(count)} with {_processType.Count} structs and enum types");
+            var tmp = _processType
+                .Where(t => t is { IsUnmanagedFunctionPointer: false, IsFunctionPointer: false })
+                .ToArray();
+            _processType.Clear();
+            foreach (var @struct in tmp) {
+                ProcessType(@struct);
+            }
+
+            Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
+
+            now = DateTime.UtcNow;
+        }
+        Console.WriteLine("::endgroup::");
+        Console.WriteLine();
+        Console.WriteLine($"Processed {_enums.Count - enumsCount} enums and {_structs.Count - structsCount} structs");
         Console.WriteLine($"Processed {typeAndMembers.Length} structs with {typeAndMembers.Sum(t => t.Item2.Length)} members");
+        Console.WriteLine();
+        Console.WriteLine($"Processed total {_enums.Count} enums and {_structs.Count} structs");
     }
 
     public static void VerifyNoOverlap() {
