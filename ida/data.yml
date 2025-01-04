@@ -493,6 +493,7 @@ classes:
       0x1405B1B90: GetTourismDirector
       0x1405B2070: UpdateGameSpeedMultiplier
       0x1405B2160: SetActiveFestivals
+      0x1400B71B0: IsInSaveTheQueenInstance # static, IsInSaveTheQueenInstance(bool includeDelubrumReginae)
       0x140960500: IsInPvPInstance
       0x1409605B0: IsInPvPArea
       0x1405AEF80: GetEventGPoseController
@@ -4830,6 +4831,15 @@ classes:
       0x14025ABC0: SetupButtonsForGameObjectTarget # gameobjects that arent characters
       0x14025BF40: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
       0x14025BFB0: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x140259D60: AddBlacklistMenuItem
+      0x140259F50: AddLocalPlayerMenuItems
+      0x14025BB50: AddSendFriendRequestMenuItem
+      0x14025D0D0: AddInviteToCrossWorldLinkshellMenuItem
+      0x14025D510: AddInviteToFellowshipMenuItem
+      0x14025C550: AddInviteToPvPTeamEntryMenuItem
+      0x14025CEC0: AddInviteToLinkshellMenuItem
+      0x14025D300: AddInviteToFreeCompanyMenuItem
+      0x14025D3B0: AddViewFreeCompanyProfileMenuItem
       0x14025C3E0: IsAllowedToOpenGameObjectTarget
       0x14025C440: IsAllowedToOpenCharacterTarget
       0x14025DED0: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
