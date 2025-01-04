@@ -113,31 +113,33 @@ public class Exporter {
                 var staticAddress = methodInfo.GetCustomAttribute<StaticAddressAttribute>();
                 if (staticAddress != null) {
                     currentStruct.StaticMembers ??= [];
-                    currentStruct.StaticMembers = [.. currentStruct.StaticMembers, new ProcessedStaticMembers {
-                        Signature = staticAddress.Signature,
-                        RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
-                        IsPointer = staticAddress.IsPointer,
-                        ReturnType = methodInfo.ReturnType.GetPointerType()
-                    }];
+                    currentStruct.StaticMembers = [.. currentStruct.StaticMembers,
+                        new ProcessedStaticMembers {
+                            Signature = staticAddress.Signature,
+                            RelativeFollowOffsets = staticAddress.RelativeFollowOffsets,
+                            IsPointer = staticAddress.IsPointer,
+                            ReturnType = methodInfo.ReturnType.GetPointerType()
+                        }];
                 }
                 var memberFunction = methodInfo.GetCustomAttribute<MemberFunctionAttribute>();
                 if (memberFunction != null || staticAddress != null)
                     _processType.Add(methodInfo.ReturnType);
                 if (memberFunction == null) continue;
                 currentStruct.StaticMemberFunctions ??= [];
-                currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions, new ProcessedMemberFunction {
-                    MemberFunctionSignature = memberFunction.Signature,
-                    MemberFunctionName = methodInfo.Name,
-                    MemberFunctionReturnType = methodInfo.ReturnType,
-                    MemberFunctionParameters = methodInfo.GetParameters().Select(p => {
-                        _processType.Add(p.ParameterType);
-                        return new ProcessedField {
-                            FieldType = p.ParameterType,
-                            FieldOffset = -1,
-                            FieldName = p.Name!
-                        };
-                    }).ToArray()
-                }];
+                currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions,
+                    new ProcessedMemberFunction {
+                        MemberFunctionSignature = memberFunction.Signature,
+                        MemberFunctionName = methodInfo.Name,
+                        MemberFunctionReturnType = methodInfo.ReturnType,
+                        MemberFunctionParameters = methodInfo.GetParameters().Select(p => {
+                            _processType.Add(p.ParameterType);
+                            return new ProcessedField {
+                                FieldType = p.ParameterType,
+                                FieldOffset = -1,
+                                FieldName = p.Name!
+                            };
+                        }).ToArray()
+                    }];
             }
             _structs[currentStructIndex] = currentStruct;
         }
