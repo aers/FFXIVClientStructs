@@ -8276,6 +8276,8 @@ classes:
       0x140845F70: EquipGlassesIds # sends it to the server
       0x140846000: GetGlassesId
       0x140846020: SetGlasses
+      0x140846600: SetFreeCompanyCrestData
+      0x140846650: SetFreeCompanyCrestBitfield
   Client::Game::Character::CompanionContainer:
     vtbls:
       - ea: 0x141F7F600
