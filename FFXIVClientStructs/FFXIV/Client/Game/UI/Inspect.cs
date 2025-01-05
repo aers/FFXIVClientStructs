@@ -39,7 +39,7 @@ public unsafe partial struct Inspect {
     [FieldOffset(0xB0), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModelIds;
     [FieldOffset(0x100), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
     [FieldOffset(0x104), FixedSizeArray] internal FixedSizeArray74<uint> _baseParams;
-    [FieldOffset(0x22C)] private byte UnkWord22C;
+    [FieldOffset(0x22C)] private short UnkWord22C;
     [FieldOffset(0x22E)] public byte GearVisibilityFlag; // TODO: use InspectGearVisibilityFlag
     [FieldOffset(0x230)] public CrestData FreeCompanyCrestData;
     [FieldOffset(0x238)] public byte FreeCompanyCrestBitfield;
