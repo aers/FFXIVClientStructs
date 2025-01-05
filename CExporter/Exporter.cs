@@ -333,6 +333,15 @@ public class Exporter {
                 FixedSize = arrLength
             };
         }
+        if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
+            var sheetName = field.GetCustomAttribute<CExporterExcelBeginAttribute>()!.SheetName;
+            return new ProcessedField {
+                FieldType = field.FieldType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = $"{sheetName}Sheet",
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}"
+            };
+        }
         _processType.Add(field.FieldType);
         return new ProcessedField {
             FieldType = field.FieldType,
@@ -496,8 +505,7 @@ public class Exporter {
                 StructNamespace = type.GetNamespace(),
                 StructTypeName = type.FullSanitizeName(),
                 StructSize = type.SizeOf(),
-                Fields = fields.Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() == null)
-                    .Select(f => ProcessField(f, 0)).ToArray(),
+                Fields = ProcessFields(fields),
                 VirtualFunctions = virtualFunctions,
                 MemberFunctions = memberFunctionsArray
             };
@@ -518,6 +526,33 @@ public class Exporter {
             _structs.Add(processedStruct);
         }
         return null;
+    }
+
+    public static ProcessedField[] ProcessFields(FieldInfo[] fields) {
+        FieldInfo[] fieldsToProcess = fields.Where(t => !ExporterStatics.IgnoredTypeNames.Contains(t.Name) && t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() == null).ToArray();
+        int[][] fieldsToUse = [];
+        bool isExcel = false;
+        int currentField = 0;
+        for (var i = 0; i < fieldsToProcess.Length; i++) {
+            var field = fieldsToProcess[i];
+            if (field.GetCustomAttribute<CExporterForceAttribute>() != null)
+                _processType.Add(field.FieldType);
+            if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
+                isExcel = true;
+                fieldsToUse = [.. fieldsToUse, [currentField, i+1]];
+                continue;
+            }
+            if (field.GetCustomAttribute<CExporterExcelEndAttribute>() != null) {
+                if (isExcel)
+                    currentField = i + 1;
+
+                isExcel = false;
+                continue;
+            }
+        }
+        if (fieldsToUse.Length == 0) return fieldsToProcess.Select(f => ProcessField(f, 0)).ToArray();
+        fieldsToUse = [.. fieldsToUse, [currentField, fieldsToProcess.Length]];
+        return fieldsToUse.SelectMany(t => fieldsToProcess[t[0]..t[1]].Select(f => ProcessField(f, 0))).ToArray();
     }
 }
 
@@ -574,7 +609,7 @@ public class ProcessedStruct {
     public string[] DependencyNames {
         get {
             if (_dependencyNames.Length == 0) {
-                _dependencyNames = Fields.Where(t => (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && (!(t.FieldType.IsPointer() || t.FieldType.IsPrimitive || t.FieldType.IsFixedBuffer() || t.FieldType.IsEnum || t.FieldType.IsBaseType()) || t.FieldTypeOverride != null)).Select(t => t.FieldTypeOverride ?? t.FieldType.FullSanitizeName()).Distinct().ToArray();
+                _dependencyNames = Fields.Where(t => (t.GetType() == typeof(ProcessedField) || t.GetType() == typeof(ProcessedFixedField)) && (!(t.FieldType.IsPointer() || t.FieldType.IsPrimitive || t.FieldType.IsFixedBuffer() || t.FieldType.IsEnum || t.FieldType.IsBaseType()) || (t.FieldTypeOverride != null && !t.FieldTypeOverride.StartsWith("Component::Exd::Sheets::")))).Select(t => t.FieldTypeOverride ?? t.FieldType.FullSanitizeName()).Distinct().ToArray();
             }
             return _dependencyNames;
         }
