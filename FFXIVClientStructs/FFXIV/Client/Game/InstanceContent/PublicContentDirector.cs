@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [StructLayout(LayoutKind.Explicit, Size = 0x11D0)]
 public unsafe partial struct PublicContentDirector {
     // fields from PublicContent sheet
-    [FieldOffset(0xD80 + 0x00)] public uint NameOffset;
+    [FieldOffset(0xD80 + 0x00), CExporterExcelBegin("PublicContent")] public uint NameOffset;
     [FieldOffset(0xD80 + 0x04)] public uint MapIcon;
     [FieldOffset(0xD80 + 0x08)] public uint TextDataStart;
     [FieldOffset(0xD80 + 0x0C)] public uint TextDataEnd;
@@ -29,8 +29,8 @@ public unsafe partial struct PublicContentDirector {
     [FieldOffset(0xD80 + 0x2A)] public ushort Unknown2;
     [FieldOffset(0xD80 + 0x2C)] public ushort Unknown3;
     [FieldOffset(0xD80 + 0x2E)] public ushort Unknown5;
-    [FieldOffset(0xD80 + 0x30)] public PublicContentDirectorType Type;
-    [FieldOffset(0xD80 + 0x31)] public byte Unknown4;
+    [FieldOffset(0xD80 + 0x30), CExporterForce] public PublicContentDirectorType Type;
+    [FieldOffset(0xD80 + 0x31), CExporterExcelEnd] public byte Unknown4;
 
     [MemberFunction("40 53 57 48 83 EC 78 48 8B D9 48 8D 0D")]
     public static partial nint HandleEnterContentInfoPacket(EnterContentInfoPacket* packet);

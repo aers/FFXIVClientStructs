@@ -12,7 +12,7 @@ public unsafe partial struct InstanceContentDirector {
     //[FieldOffset(0x730), FixedSizeArray] internal FixedSizeArray168<byte> _instanceContentExcelRow;
 
     // fields from InstanceContent sheet
-    [FieldOffset(0xD80 + 0x00)] public uint NewPlayerBonusGil;
+    [FieldOffset(0xD80 + 0x00), CExporterExcelBegin("InstanceContent")] public uint NewPlayerBonusGil;
     [FieldOffset(0xD80 + 0x04)] public uint NewPlayerBonusExp;
     [FieldOffset(0xD80 + 0x08)] public uint FinalBossExp;
     [FieldOffset(0xD80 + 0x0C)] public uint Unknown0;
@@ -72,7 +72,7 @@ public unsafe partial struct InstanceContentDirector {
     [FieldOffset(0xD80 + 0x98)] public ushort Unknown8;
     [FieldOffset(0xD80 + 0x9A)] public ushort Unknown_70;
     [FieldOffset(0xD80 + 0x9C)] public short PartyCondition;
-    [FieldOffset(0xD80 + 0x9E)] public InstanceContentType InstanceContentType;
+    [FieldOffset(0xD80 + 0x9E), CExporterForce] public InstanceContentType InstanceContentType;
     [FieldOffset(0xD80 + 0x9F)] public byte WeekRestriction;
     [FieldOffset(0xD80 + 0xA0)] public byte Colosseum;
     [FieldOffset(0xD80 + 0xA1)] public byte Unknown9;
@@ -81,7 +81,7 @@ public unsafe partial struct InstanceContentDirector {
     [FieldOffset(0xD80 + 0xA4)] public byte Unknown12;
     [FieldOffset(0xD80 + 0xA5)] public byte Unknown19;
     [FieldOffset(0xD80 + 0xA6)] public byte Unknown13;
-    [FieldOffset(0xD80 + 0xA7)] public byte Unknown14_Unknown15_Unknown16_Unknown17_Unknown18;
+    [FieldOffset(0xD80 + 0xA7), CExporterExcelEnd] public byte Unknown14_Unknown15_Unknown16_Unknown17_Unknown18;
 }
 
 public enum InstanceContentType : byte {
