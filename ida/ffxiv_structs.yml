@@ -18499,6 +18499,22 @@ structs:
     name: Unk10
     offset: 16
   member_functions: []
+- type: Component::GUI::AtkInputManager::SavedMouseClick
+  name: SavedMouseClick
+  namespace: Component.GUI
+  union: False
+  size: 8
+  fields:
+  - type: int
+    name: Timestamp
+    offset: 0
+  - type: __int16
+    name: X
+    offset: 4
+  - type: __int16
+    name: Y
+    offset: 6
+  member_functions: []
 - type: Component::GUI::AtkMessageBoxManager
   name: AtkMessageBoxManager
   namespace: Component.GUI
@@ -31030,11 +31046,9 @@ structs:
     name: CustomizeData
     offset: 0
   - type: unsigned __int16
-    name: Glasses0Id
+    name: GlassesIds
     offset: 26
-  - type: unsigned __int16
-    name: Glasses1Id
-    offset: 28
+    size: 2
   - type: unsigned int
     name: ItemIds
     offset: 30
@@ -31051,7 +31065,7 @@ structs:
     name: ClassJobId
     offset: 116
   - type: byte
-    name: VisorHidden
+    name: HeadgearHidden
     offset: 117
   - type: byte
     name: WeaponHidden
@@ -34070,20 +34084,6 @@ structs:
     offset: 0
     base: true
   virtual_functions: []
-  member_functions: []
-- type: Component::GUI::AtkInputManager
-  name: AtkInputManager
-  namespace: Component.GUI
-  union: False
-  size: 6304
-  fields:
-  - type: Component::GUI::AtkTextInput*
-    name: TextInput
-    offset: 0
-  - type: Component::GUI::AtkInputManager::FocusEntry
-    name: FocusList
-    offset: 128
-    size: 256
   member_functions: []
 - type: Component::GUI::AtkTexture
   name: AtkTexture
@@ -38887,93 +38887,6 @@ structs:
   - type: Client::Game::StatusManager
     name: StatusManager
     offset: 16
-  member_functions: []
-- type: Client::Game::UI::Inspect
-  name: Inspect
-  namespace: Client.Game.UI
-  union: False
-  size: 672
-  fields:
-  - type: unsigned int
-    name: EntityId
-    offset: 12
-  - type: byte
-    name: Type
-    offset: 16
-  - type: __int16
-    name: WorldId
-    offset: 18
-  - type: byte
-    name: Name
-    offset: 20
-    size: 64
-  - type: byte
-    name: OnlineId
-    offset: 84
-    size: 17
-  - type: byte
-    name: ClassJobId
-    offset: 117
-  - type: byte
-    name: Level
-    offset: 118
-  - type: byte
-    name: SyncedLevel
-    offset: 119
-  - type: unsigned __int16
-    name: AverageItemLevel
-    offset: 120
-  - type: unsigned __int16
-    name: TitleId
-    offset: 122
-  - type: byte
-    name: GrandCompanyIndex
-    offset: 124
-  - type: byte
-    name: GrandCompanyRank
-    offset: 125
-  - type: Client::Game::Character::CustomizeData
-    name: CustomizeData
-    offset: 126
-  - type: byte
-    name: BuddyEquipTop
-    offset: 152
-  - type: byte
-    name: BuddyEquipBody
-    offset: 153
-  - type: byte
-    name: BuddyEquipLegs
-    offset: 154
-  - type: unsigned int
-    name: BaseParams
-    offset: 260
-    size: 74
-  - type: byte
-    name: GearVisibilityFlag
-    offset: 558
-  - type: byte
-    name: BuddyOwnerName
-    offset: 569
-    size: 64
-  - type: byte
-    name: BuddyRank
-    offset: 633
-  - type: byte
-    name: BuddyStain
-    offset: 634
-  - type: byte
-    name: BuddyDefenderLevel
-    offset: 635
-  - type: byte
-    name: BuddyAttackerLevel
-    offset: 636
-  - type: byte
-    name: BuddyHealerLevel
-    offset: 637
-  - type: StdPair<unsigned int, unsigned int>
-    name: ContentKeyValueData
-    offset: 644
-    size: 3
   member_functions: []
 - type: Client::Game::UI::NpcTrade::ItemRequests
   name: ItemRequests
@@ -48301,6 +48214,28 @@ structs:
     offset: 304
   virtual_functions: []
   member_functions: []
+- type: Component::GUI::AtkInputManager
+  name: AtkInputManager
+  namespace: Component.GUI
+  union: False
+  size: 6304
+  fields:
+  - type: Component::GUI::AtkTextInput*
+    name: TextInput
+    offset: 0
+  - type: Component::GUI::AtkCollisionNode*
+    name: SavedMouseClicksCollisionNodes
+    offset: 8
+    size: 2
+  - type: Component::GUI::AtkInputManager::SavedMouseClick
+    name: SavedMouseClicks
+    offset: 64
+    size: 2
+  - type: Component::GUI::AtkInputManager::FocusEntry
+    name: FocusList
+    offset: 128
+    size: 256
+  member_functions: []
 - type: Component::GUI::AtkTextureResourceManager
   name: AtkTextureResourceManager
   namespace: Component.GUI
@@ -54103,164 +54038,6 @@ structs:
     name: BannerModule
     offset: 15960
   member_functions: []
-- type: Client::UI::Misc::CharaView
-  name: CharaView
-  namespace: Client.UI.Misc
-  union: False
-  size: 792
-  fields:
-  - type: unsigned int
-    name: State
-    offset: 8
-  - type: unsigned int
-    name: ClientObjectId
-    offset: 12
-  - type: unsigned int
-    name: ClientObjectIndex
-    offset: 16
-  - type: unsigned int
-    name: CameraType
-    offset: 20
-  - type: __int64
-    name: CameraManager
-    offset: 24
-  - type: Client::Game::Camera*
-    name: Camera
-    offset: 32
-  - type: Client::UI::Agent::AgentInterface*
-    name: Agent
-    offset: 48
-  - type: Client::UI::Misc::CharaViewCharacterData
-    name: CharacterData
-    offset: 72
-  - type: float
-    name: ZoomRatio
-    offset: 236
-  - type: Client::UI::Misc::CharaViewItem
-    name: Items
-    offset: 248
-    size: 14
-  - type: byte
-    name: FreeCompanyCrestBitfield
-    offset: 776
-  - type: byte
-    name: CharacterDataCopied
-    offset: 777
-  - type: byte
-    name: CharacterLoaded
-    offset: 778
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-    - type: byte
-      name: freeMemory
-  - name: Initialize
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-    - type: Client::UI::Agent::AgentInterface*
-      name: agent
-    - type: unsigned int
-      name: clientObjectId
-    - type: __int64
-      name: agentCallbackReady
-  - name: Release
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-  - name: ResetPositions
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 89 B3 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4
-    return_type: void
-    name: SetCustomizeData
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-    - type: Client::UI::Misc::CharaViewCharacterData*
-      name: data
-  - signature: E8 ?? ?? ?? ?? 49 8B 4C 24 ?? 8B 51 04
-    return_type: void
-    name: Render
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-    - type: unsigned int
-      name: frameIndex
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 75 05 0F 57 C9
-    return_type: Client::Game::Character::Character*
-    name: GetCharacter
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 49 8D 4F 10 88 85
-    return_type: byte
-    name: IsAnimationPaused
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-  - signature: E8 ?? ?? ?? ?? B2 01 48 8B CF E8 ?? ?? ?? ?? 32 C0
-    return_type: void
-    name: ToggleAnimationPlayback
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-    - type: byte
-      name: paused
-  - signature: E8 ?? ?? ?? ?? 48 8B 45 77 48 8D 4D 87
-    return_type: void
-    name: UnequipGear
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-    - type: byte
-      name: hasCharacterData
-    - type: byte
-      name: characterLoaded
-  - signature: E8 ?? ?? ?? ?? FF C5 48 83 C3 1C
-    return_type: void
-    name: SetItemSlotData
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-    - type: byte
-      name: slotId
-    - type: unsigned int
-      name: itemId
-    - type: byte
-      name: stain0Id
-    - type: byte
-      name: stain1Id
-    - type: unsigned int
-      name: glamourItemId
-    - type: byte
-      name: applyCompanyCrest
-  - signature: E8 ?? ?? ?? ?? 45 0F B6 8E ?? ?? ?? ?? B0 01
-    return_type: void
-    name: ToggleDrawWeapon
-    parameters:
-    - type: Client::UI::Misc::CharaView*
-      name: this
-    - type: byte
-      name: drawn
 - type: Client::UI::Misc::FieldMarkerModule
   name: FieldMarkerModule
   namespace: Client.UI.Misc
@@ -59078,77 +58855,6 @@ structs:
       name: this
     - type: byte
       name: hasDataChanged
-- type: Client::UI::Agent::AgentColorant::ColorantCharaView
-  name: ColorantCharaView
-  namespace: Client.UI.Agent
-  union: False
-  size: 816
-  fields:
-  - type: Client::UI::Misc::CharaView
-    name: CharaView
-    offset: 0
-    base: true
-  - type: unsigned int
-    name: EntityId
-    offset: 796
-  - type: byte
-    name: DoUpdate
-    offset: 800
-  - type: byte
-    name: HideOtherEquipment
-    offset: 801
-  - type: byte
-    name: GearPreview
-    offset: 802
-  - type: byte
-    name: HideVisor
-    offset: 803
-  - type: byte
-    name: HideWeapon
-    offset: 804
-  - type: byte
-    name: CloseVisor
-    offset: 805
-  - type: byte
-    name: DrawWeapon
-    offset: 806
-  - type: byte
-    name: SelectedStain
-    offset: 807
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
-      name: this
-    - type: byte
-      name: a2
-  - name: Initialize
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
-      name: this
-    - type: Client::UI::Agent::AgentInterface*
-      name: a2
-    - type: unsigned int
-      name: a3
-    - type: __int64
-      name: a4
-  - name: Release
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
-      name: this
-  - name: ResetPositions
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
-      name: this
-  member_functions: []
 - type: Client::UI::Agent::AgentContentsFinderReward::ItemWrap
   name: ItemWrap
   namespace: Client.UI.Agent
@@ -59418,74 +59124,6 @@ structs:
     - type: byte
       name: a2
   member_functions: []
-- type: Client::UI::Agent::AgentGearSet::GearsetCharaView
-  name: GearsetCharaView
-  namespace: Client.UI.Agent
-  union: False
-  size: 808
-  fields:
-  - type: Client::UI::Misc::CharaView
-    name: CharaView
-    offset: 0
-    base: true
-  - type: byte
-    name: UpdateVisibility
-    offset: 792
-  - type: byte
-    name: UpdateItems
-    offset: 793
-  - type: byte
-    name: HideVisor
-    offset: 794
-  - type: byte
-    name: HideWeapon
-    offset: 795
-  - type: byte
-    name: CloseVisor
-    offset: 796
-  - type: byte
-    name: DrawWeapon
-    offset: 797
-  - type: byte
-    name: CharacterDisplayMode
-    offset: 798
-  - type: Client::UI::Misc::RaptureGearsetModule::GearsetEntry*
-    name: Gearset
-    offset: 800
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
-      name: this
-    - type: byte
-      name: a2
-  - name: Initialize
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
-      name: this
-    - type: Client::UI::Agent::AgentInterface*
-      name: a2
-    - type: unsigned int
-      name: a3
-    - type: __int64
-      name: a4
-  - name: Release
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
-      name: this
-  - name: ResetPositions
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
-      name: this
-  member_functions: []
 - type: Client::UI::Agent::AgentHousingPlant
   name: AgentHousingPlant
   namespace: Client.UI.Agent
@@ -59733,50 +59371,6 @@ structs:
     - type: byte
       name: a2
   member_functions: []
-- type: Client::UI::Agent::AgentInspect::InspectCharaView
-  name: InspectCharaView
-  namespace: Client.UI.Agent
-  union: False
-  size: 792
-  fields:
-  - type: Client::UI::Misc::CharaView
-    name: CharaView
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
-      name: this
-    - type: byte
-      name: a2
-  - name: Initialize
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
-      name: this
-    - type: Client::UI::Agent::AgentInterface*
-      name: a2
-    - type: unsigned int
-      name: a3
-    - type: __int64
-      name: a4
-  - name: Release
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
-      name: this
-  - name: ResetPositions
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
-      name: this
-  member_functions: []
 - type: Client::UI::Agent::AgentMJIGatheringHouse
   name: AgentMJIGatheringHouse
   namespace: Client.UI.Agent
@@ -59925,56 +59519,6 @@ structs:
       name: this
     - type: Client::UI::Agent::AgentMJIGatheringHouse::ExpeditionData*
       name: expedition
-- type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
-  name: MiragePrismMiragePlateCharaView
-  namespace: Client.UI.Agent
-  union: False
-  size: 808
-  fields:
-  - type: Client::UI::Misc::CharaView
-    name: CharaView
-    offset: 0
-    base: true
-  - type: byte
-    name: IsUpdatePending
-    offset: 792
-  - type: unsigned int
-    name: Flags
-    offset: 796
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
-      name: this
-    - type: byte
-      name: a2
-  - name: Initialize
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
-      name: this
-    - type: Client::UI::Agent::AgentInterface*
-      name: a2
-    - type: unsigned int
-      name: a3
-    - type: __int64
-      name: a4
-  - name: Release
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
-      name: this
-  - name: ResetPositions
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
-      name: this
-  member_functions: []
 - type: Client::UI::Agent::AgentMonsterNote
   name: AgentMonsterNote
   namespace: Client.UI.Agent
@@ -60492,118 +60036,6 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
-- type: Client::UI::Agent::AgentStatus::StatusCharaView
-  name: StatusCharaView
-  namespace: Client.UI.Agent
-  union: False
-  size: 800
-  fields:
-  - type: Client::UI::Misc::CharaView
-    name: CharaView
-    offset: 0
-    base: true
-  - type: unsigned int
-    name: MainhandItemId
-    offset: 792
-  - type: byte
-    name: DrawWeapon
-    offset: 796
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
-      name: this
-    - type: byte
-      name: a2
-  - name: Initialize
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
-      name: this
-    - type: Client::UI::Agent::AgentInterface*
-      name: a2
-    - type: unsigned int
-      name: a3
-    - type: __int64
-      name: a4
-  - name: Release
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
-      name: this
-  - name: ResetPositions
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
-      name: this
-  member_functions: []
-- type: Client::UI::Agent::AgentTryon::TryonCharaView
-  name: TryonCharaView
-  namespace: Client.UI.Agent
-  union: False
-  size: 800
-  fields:
-  - type: Client::UI::Misc::CharaView
-    name: CharaView
-    offset: 0
-    base: true
-  - type: byte
-    name: DoUpdate
-    offset: 792
-  - type: byte
-    name: HideOtherEquipment
-    offset: 793
-  - type: byte
-    name: HideVisor
-    offset: 794
-  - type: byte
-    name: HideWeapon
-    offset: 795
-  - type: byte
-    name: CloseVisor
-    offset: 796
-  - type: byte
-    name: DrawWeapon
-    offset: 797
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
-      name: this
-    - type: byte
-      name: a2
-  - name: Initialize
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
-      name: this
-    - type: Client::UI::Agent::AgentInterface*
-      name: a2
-    - type: unsigned int
-      name: a3
-    - type: __int64
-      name: a4
-  - name: Release
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
-      name: this
-  - name: ResetPositions
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
-      name: this
   member_functions: []
 - type: Client::UI::Agent::ExplorationResultData
   name: ExplorationResultData
@@ -61488,6 +60920,51 @@ structs:
     offset: 525
     size: 8
   member_functions: []
+- type: Client::UI::Misc::CharaViewModelData
+  name: CharaViewModelData
+  namespace: Client.UI.Misc
+  union: False
+  size: 152
+  fields:
+  - type: Client::Game::Character::CustomizeData
+    name: CustomizeData
+    offset: 0
+  - type: unsigned __int16
+    name: GlassesIds
+    offset: 26
+    size: 2
+  - type: Client::Game::Character::EquipmentModelId
+    name: EquipmentModelIds
+    offset: 32
+    size: 10
+  - type: Client::Game::Character::WeaponModelId
+    name: WeaponModelIds
+    offset: 112
+    size: 3
+  - type: byte
+    name: HeadgearHidden
+    offset: 136
+  - type: byte
+    name: WeaponHidden
+    offset: 137
+  - type: byte
+    name: VisorClosed
+    offset: 138
+  - type: byte
+    name: FreeCompanyCrestBitfield
+    offset: 139
+  - type: Client::UI::Agent::CrestData
+    name: FreeCompanyCrestData
+    offset: 144
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 0F 28 55 87
+    return_type: void
+    name: CopyFromCharacter
+    parameters:
+    - type: Client::UI::Misc::CharaViewModelData*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: character
 - type: Client::UI::Misc::ItemOrderModule
   name: ItemOrderModule
   namespace: Client.UI.Misc
@@ -64037,116 +63514,6 @@ structs:
       name: sceneCameraPos
     - type: Common::Math::Vector3*
       name: lookAtVector
-- type: Client::Game::Character::DrawDataContainer
-  name: DrawDataContainer
-  namespace: Client.Game.Character
-  union: False
-  size: 504
-  fields:
-  - type: Client::Game::Character::ContainerInterface
-    name: ContainerInterface
-    offset: 0
-    base: true
-  - type: Client::Game::Character::DrawObjectData
-    name: WeaponData
-    offset: 16
-    size: 3
-  - type: Client::Game::Character::EquipmentModelId
-    name: EquipmentModelIds
-    offset: 352
-    size: 10
-  - type: Client::Game::Character::CustomizeData
-    name: CustomizeData
-    offset: 432
-  - type: byte
-    name: Flags1
-    offset: 462
-  - type: byte
-    name: Flags2
-    offset: 463
-  - type: unsigned __int16
-    name: GlassesIds
-    offset: 464
-    size: 2
-  - type: byte
-    name: FreeCompanyCrestBitfield
-    offset: 496
-  virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? B1 01 41 FF C6
-    return_type: void
-    name: LoadEquipment
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: Client::Game::Character::DrawDataContainer::EquipmentSlot
-      name: slot
-    - type: Client::Game::Character::EquipmentModelId*
-      name: modelId
-    - type: byte
-      name: force
-  - signature: E8 ?? ?? ?? ?? 4C 8B 45 7F
-    return_type: void
-    name: LoadWeapon
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: Client::Game::Character::DrawDataContainer::WeaponSlot
-      name: slot
-    - type: Client::Game::Character::WeaponModelId
-      name: weaponData
-    - type: byte
-      name: redrawOnEquality
-    - type: byte
-      name: unk2
-    - type: byte
-      name: skipGameObject
-    - type: byte
-      name: unk4
-  - signature: E8 ?? ?? ?? ?? 8B 46 54 0F BA E0 08
-    return_type: void
-    name: HideWeapons
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: byte
-      name: hide
-  - signature: E8 ?? ?? ?? ?? 0F B6 55 C9
-    return_type: void
-    name: HideHeadgear
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: unsigned int
-      name: unk
-    - type: byte
-      name: hide
-  - signature: 44 0F B6 81 ?? ?? ?? ?? 41 0F B6 C0 41 80 E0 7F
-    return_type: void
-    name: HideLegacyTattoo
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: byte
-      name: hide
-  - signature: E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA
-    return_type: void
-    name: SetVisor
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: byte
-      name: state
-  - signature: E8 ?? ?? ?? ?? EB 50 44 8B 03
-    return_type: void
-    name: SetGlasses
-    parameters:
-    - type: Client::Game::Character::DrawDataContainer*
-      name: this
-    - type: int
-      name: index
-    - type: unsigned __int16
-      name: id
 - type: Client::Game::Control::CharacterLookAtController
   name: CharacterLookAtController
   namespace: Client.Game.Control
@@ -64627,6 +63994,123 @@ structs:
       name: this
     - type: byte
       name: plot
+- type: Client::Game::UI::Inspect
+  name: Inspect
+  namespace: Client.Game.UI
+  union: False
+  size: 672
+  fields:
+  - type: byte
+    name: IsInspectRequested
+    offset: 0
+  - type: float
+    name: RequestCooldown
+    offset: 4
+  - type: unsigned int
+    name: EntityId
+    offset: 12
+  - type: byte
+    name: Type
+    offset: 16
+  - type: __int16
+    name: WorldId
+    offset: 18
+  - type: byte
+    name: Name
+    offset: 20
+    size: 64
+  - type: byte
+    name: OnlineId
+    offset: 84
+    size: 17
+  - type: byte
+    name: Sex
+    offset: 116
+  - type: byte
+    name: ClassJobId
+    offset: 117
+  - type: byte
+    name: Level
+    offset: 118
+  - type: byte
+    name: SyncedLevel
+    offset: 119
+  - type: unsigned __int16
+    name: AverageItemLevel
+    offset: 120
+  - type: unsigned __int16
+    name: TitleId
+    offset: 122
+  - type: byte
+    name: GrandCompanyIndex
+    offset: 124
+  - type: byte
+    name: GrandCompanyRank
+    offset: 125
+  - type: Client::Game::Character::CustomizeData
+    name: CustomizeData
+    offset: 126
+  - type: byte
+    name: BuddyEquipTop
+    offset: 152
+  - type: byte
+    name: BuddyEquipBody
+    offset: 153
+  - type: byte
+    name: BuddyEquipLegs
+    offset: 154
+  - type: Client::Game::Character::WeaponModelId
+    name: WeaponModelIds
+    offset: 160
+    size: 2
+  - type: Client::Game::Character::EquipmentModelId
+    name: EquipmentModelIds
+    offset: 176
+    size: 10
+  - type: unsigned __int16
+    name: GlassesIds
+    offset: 256
+    size: 2
+  - type: unsigned int
+    name: BaseParams
+    offset: 260
+    size: 74
+  - type: __int16
+    name: UnkWord22C
+    offset: 556
+  - type: byte
+    name: GearVisibilityFlag
+    offset: 558
+  - type: Client::UI::Agent::CrestData
+    name: FreeCompanyCrestData
+    offset: 560
+  - type: byte
+    name: FreeCompanyCrestBitfield
+    offset: 568
+  - type: byte
+    name: BuddyOwnerName
+    offset: 569
+    size: 64
+  - type: byte
+    name: BuddyRank
+    offset: 633
+  - type: byte
+    name: BuddyStain
+    offset: 634
+  - type: byte
+    name: BuddyDefenderLevel
+    offset: 635
+  - type: byte
+    name: BuddyAttackerLevel
+    offset: 636
+  - type: byte
+    name: BuddyHealerLevel
+    offset: 637
+  - type: StdPair<unsigned int, unsigned int>
+    name: ContentKeyValueData
+    offset: 644
+    size: 3
+  member_functions: []
 - type: Client::Graphics::Render::PartialSkeleton
   name: PartialSkeleton
   namespace: Client.Graphics.Render
@@ -67057,6 +66541,119 @@ structs:
     offset: 512
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Character::DrawDataContainer
+  name: DrawDataContainer
+  namespace: Client.Game.Character
+  union: False
+  size: 504
+  fields:
+  - type: Client::Game::Character::ContainerInterface
+    name: ContainerInterface
+    offset: 0
+    base: true
+  - type: Client::Game::Character::DrawObjectData
+    name: WeaponData
+    offset: 16
+    size: 3
+  - type: Client::Game::Character::EquipmentModelId
+    name: EquipmentModelIds
+    offset: 352
+    size: 10
+  - type: Client::Game::Character::CustomizeData
+    name: CustomizeData
+    offset: 432
+  - type: byte
+    name: Flags1
+    offset: 462
+  - type: byte
+    name: Flags2
+    offset: 463
+  - type: unsigned __int16
+    name: GlassesIds
+    offset: 464
+    size: 2
+  - type: Client::UI::Agent::CrestData
+    name: FreeCompanyCrestData
+    offset: 488
+  - type: byte
+    name: FreeCompanyCrestBitfield
+    offset: 496
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? B1 01 41 FF C6
+    return_type: void
+    name: LoadEquipment
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: Client::Game::Character::DrawDataContainer::EquipmentSlot
+      name: slot
+    - type: Client::Game::Character::EquipmentModelId*
+      name: modelId
+    - type: byte
+      name: force
+  - signature: E8 ?? ?? ?? ?? 4C 8B 45 7F
+    return_type: void
+    name: LoadWeapon
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: Client::Game::Character::DrawDataContainer::WeaponSlot
+      name: slot
+    - type: Client::Game::Character::WeaponModelId
+      name: weaponData
+    - type: byte
+      name: redrawOnEquality
+    - type: byte
+      name: unk2
+    - type: byte
+      name: skipGameObject
+    - type: byte
+      name: unk4
+  - signature: E8 ?? ?? ?? ?? 8B 46 54 0F BA E0 08
+    return_type: void
+    name: HideWeapons
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: byte
+      name: hide
+  - signature: E8 ?? ?? ?? ?? 0F B6 55 C9
+    return_type: void
+    name: HideHeadgear
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: unsigned int
+      name: unk
+    - type: byte
+      name: hide
+  - signature: 44 0F B6 81 ?? ?? ?? ?? 41 0F B6 C0 41 80 E0 7F
+    return_type: void
+    name: HideLegacyTattoo
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: byte
+      name: hide
+  - signature: E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA
+    return_type: void
+    name: SetVisor
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: byte
+      name: state
+  - signature: E8 ?? ?? ?? ?? EB 50 44 8B 03
+    return_type: void
+    name: SetGlasses
+    parameters:
+    - type: Client::Game::Character::DrawDataContainer*
+      name: this
+    - type: int
+      name: index
+    - type: unsigned __int16
+      name: id
 - type: Client::Game::Control::CameraManager
   name: CameraManager
   namespace: Client.Game.Control
@@ -69244,6 +68841,181 @@ structs:
       name: this
     - type: int
       name: activeSetIndex
+- type: Client::UI::Misc::CharaView
+  name: CharaView
+  namespace: Client.UI.Misc
+  union: False
+  size: 792
+  fields:
+  - type: unsigned int
+    name: State
+    offset: 8
+  - type: unsigned int
+    name: ClientObjectId
+    offset: 12
+  - type: unsigned int
+    name: ClientObjectIndex
+    offset: 16
+  - type: unsigned int
+    name: CameraType
+    offset: 20
+  - type: __int64
+    name: CameraManager
+    offset: 24
+  - type: Client::Game::Camera*
+    name: Camera
+    offset: 32
+  - type: Client::UI::Agent::AgentInterface*
+    name: Agent
+    offset: 48
+  - type: Client::UI::Misc::CharaViewModelData
+    name: ModelData
+    offset: 72
+  - type: unsigned int
+    name: Race
+    offset: 224
+  - type: unsigned int
+    name: Sex
+    offset: 228
+  - type: unsigned int
+    name: UnkE8
+    offset: 232
+  - type: float
+    name: ZoomRatio
+    offset: 236
+  - type: Client::UI::Misc::CharaViewItem
+    name: Items
+    offset: 248
+    size: 14
+  - type: byte
+    name: FreeCompanyCrestBitfield
+    offset: 776
+  - type: byte
+    name: CharacterDataCopied
+    offset: 777
+  - type: byte
+    name: CharacterLoaded
+    offset: 778
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: byte
+      name: freeMemory
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: agent
+    - type: unsigned int
+      name: clientObjectId
+    - type: __int64
+      name: agentCallbackReady
+  - name: Release
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+  - name: ResetPositions
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 89 B3 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4
+    return_type: void
+    name: SetCustomizeData
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: Client::UI::Misc::CharaViewCharacterData*
+      name: data
+  - signature: E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4
+    return_type: void
+    name: SetModelData
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: Client::UI::Misc::CharaViewModelData*
+      name: data
+  - signature: E8 ?? ?? ?? ?? 49 8B 4C 24 ?? 8B 51 04
+    return_type: void
+    name: Render
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: unsigned int
+      name: frameIndex
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 75 05 0F 57 C9
+    return_type: Client::Game::Character::Character*
+    name: GetCharacter
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 49 8D 4F 10 88 85
+    return_type: byte
+    name: IsAnimationPaused
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+  - signature: E8 ?? ?? ?? ?? B2 01 48 8B CF E8 ?? ?? ?? ?? 32 C0
+    return_type: void
+    name: ToggleAnimationPlayback
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: byte
+      name: paused
+  - signature: E8 ?? ?? ?? ?? 48 8B 45 77 48 8D 4D 87
+    return_type: void
+    name: UnequipGear
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: byte
+      name: hasCharacterData
+    - type: byte
+      name: characterLoaded
+  - signature: E8 ?? ?? ?? ?? FF C5 48 83 C3 1C
+    return_type: void
+    name: SetItemSlotData
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: byte
+      name: slotId
+    - type: unsigned int
+      name: itemId
+    - type: byte
+      name: stain0Id
+    - type: byte
+      name: stain1Id
+    - type: unsigned int
+      name: glamourItemId
+    - type: byte
+      name: applyCompanyCrest
+  - signature: E8 ?? ?? ?? ?? 45 0F B6 8E ?? ?? ?? ?? B0 01
+    return_type: void
+    name: ToggleDrawWeapon
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: byte
+      name: drawn
 - type: Client::UI::Misc::ItemFinderModule
   name: ItemFinderModule
   namespace: Client.UI.Misc
@@ -71466,216 +71238,189 @@ structs:
     - type: byte
       name: a2
   member_functions: []
-- type: Client::UI::Agent::AgentColorant
-  name: AgentColorant
+- type: Client::UI::Agent::AgentColorant::ColorantCharaView
+  name: ColorantCharaView
   namespace: Client.UI.Agent
   union: False
-  size: 1168
+  size: 816
   fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
+  - type: Client::UI::Misc::CharaView
+    name: CharaView
     offset: 0
     base: true
-  - type: Client::UI::Agent::AgentColorant::ColorantCharaView
-    name: CharaView
-    offset: 336
+  - type: unsigned int
+    name: EntityId
+    offset: 796
+  - type: byte
+    name: DoUpdate
+    offset: 800
+  - type: byte
+    name: HideOtherEquipment
+    offset: 801
+  - type: byte
+    name: GearPreview
+    offset: 802
+  - type: byte
+    name: HideVisor
+    offset: 803
+  - type: byte
+    name: HideWeapon
+    offset: 804
+  - type: byte
+    name: CloseVisor
+    offset: 805
+  - type: byte
+    name: DrawWeapon
+    offset: 806
+  - type: byte
+    name: SelectedStain
+    offset: 807
   virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
   - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
+      name: this
+    - type: byte
+      name: a2
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: __int64
+      name: a4
+  - name: Release
     offset: 16
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentColorant*
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
       name: this
-    - type: byte
-      name: a2
-  - name: Show
+  - name: ResetPositions
     offset: 24
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentColorant*
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
       name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentColorant*
-      name: this
-    - type: byte
-      name: a2
   member_functions: []
-- type: Client::UI::Agent::AgentGearSet
-  name: AgentGearSet
+- type: Client::UI::Agent::AgentGearSet::GearsetCharaView
+  name: GearsetCharaView
   namespace: Client.UI.Agent
   union: False
-  size: 3008
+  size: 808
   fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
+  - type: Client::UI::Misc::CharaView
+    name: CharaView
     offset: 0
     base: true
-  - type: Client::UI::Agent::AgentGearSet::GearsetCharaView
-    name: CharaView
-    offset: 2168
+  - type: byte
+    name: UpdateVisibility
+    offset: 792
+  - type: byte
+    name: UpdateItems
+    offset: 793
+  - type: byte
+    name: HideVisor
+    offset: 794
+  - type: byte
+    name: HideWeapon
+    offset: 795
+  - type: byte
+    name: CloseVisor
+    offset: 796
+  - type: byte
+    name: DrawWeapon
+    offset: 797
+  - type: byte
+    name: CharacterDisplayMode
+    offset: 798
+  - type: Client::UI::Misc::RaptureGearsetModule::GearsetEntry*
+    name: Gearset
+    offset: 800
   virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
   - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
+      name: this
+    - type: byte
+      name: a2
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: __int64
+      name: a4
+  - name: Release
     offset: 16
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentGearSet*
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
       name: this
-    - type: byte
-      name: a2
-  - name: Show
+  - name: ResetPositions
     offset: 24
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentGearSet*
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
       name: this
-  - name: Hide
-    offset: 32
+  member_functions: []
+- type: Client::UI::Agent::AgentInspect::InspectCharaView
+  name: InspectCharaView
+  namespace: Client.UI.Agent
+  union: False
+  size: 792
+  fields:
+  - type: Client::UI::Misc::CharaView
+    name: CharaView
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: Dtor
+    offset: 0
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentGearSet*
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
       name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: Update
-    offset: 48
+    - type: byte
+      name: a2
+  - name: Initialize
+    offset: 8
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentGearSet*
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
       name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: a2
     - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
       name: a3
-  - name: OnClassJobChange
-    offset: 88
+    - type: __int64
+      name: a4
+  - name: Release
+    offset: 16
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentGearSet*
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
       name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24
+  - name: ResetPositions
+    offset: 24
     return_type: void
-    name: OpenBannerEditorForGearset
     parameters:
-    - type: Client::UI::Agent::AgentGearSet*
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
       name: this
-    - type: int
-      name: gearsetId
+  member_functions: []
 - type: Client::UI::Agent::AgentInventoryContext
   name: AgentInventoryContext
   namespace: Client.UI.Agent
@@ -72049,119 +71794,56 @@ structs:
       name: macroSet
     - type: unsigned int
       name: macroIndex
-- type: Client::UI::Agent::AgentMiragePrismMiragePlate
-  name: AgentMiragePrismMiragePlate
+- type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
+  name: MiragePrismMiragePlateCharaView
   namespace: Client.UI.Agent
   union: False
-  size: 944
+  size: 808
   fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
+  - type: Client::UI::Misc::CharaView
+    name: CharaView
     offset: 0
     base: true
-  - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
-    name: CharaView
-    offset: 128
+  - type: byte
+    name: IsUpdatePending
+    offset: 792
+  - type: unsigned int
+    name: Flags
+    offset: 796
   virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
   - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
+      name: this
+    - type: byte
+      name: a2
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: __int64
+      name: a4
+  - name: Release
     offset: 16
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
       name: this
-    - type: byte
-      name: a2
-  - name: Show
+  - name: ResetPositions
     offset: 24
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
       name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 48 89 5C 24 ?? 57 48 83 EC 30 8B FA 66 44 89 4C 24
-    return_type: void
-    name: OpenForGearset
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: int
-      name: gearsetId
-    - type: int
-      name: glamourSetLink
-    - type: unsigned __int16
-      name: openerAddonId
+  member_functions: []
 - type: Client::UI::Agent::AgentSatisfactionSupply
   name: AgentSatisfactionSupply
   namespace: Client.UI.Agent
@@ -72352,228 +72034,118 @@ structs:
     - type: byte
       name: a2
   member_functions: []
-- type: Client::UI::Agent::AgentStatus
-  name: AgentStatus
+- type: Client::UI::Agent::AgentStatus::StatusCharaView
+  name: StatusCharaView
   namespace: Client.UI.Agent
   union: False
-  size: 1024
+  size: 800
   fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
+  - type: Client::UI::Misc::CharaView
+    name: CharaView
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: MainhandItemId
+    offset: 792
+  - type: byte
+    name: DrawWeapon
+    offset: 796
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
+    - type: byte
+      name: a2
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: __int64
+      name: a4
+  - name: Release
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
+  - name: ResetPositions
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
+  member_functions: []
+- type: Client::UI::Agent::AgentTryon::TryonCharaView
+  name: TryonCharaView
+  namespace: Client.UI.Agent
+  union: False
+  size: 800
+  fields:
+  - type: Client::UI::Misc::CharaView
+    name: CharaView
     offset: 0
     base: true
   - type: byte
-    name: TabIndex
-    offset: 60
-  - type: Client::UI::Agent::AgentStatus::StatusCharaView
-    name: CharaView
-    offset: 216
+    name: DoUpdate
+    offset: 792
+  - type: byte
+    name: HideOtherEquipment
+    offset: 793
+  - type: byte
+    name: HideVisor
+    offset: 794
+  - type: byte
+    name: HideWeapon
+    offset: 795
+  - type: byte
+    name: CloseVisor
+    offset: 796
+  - type: byte
+    name: DrawWeapon
+    offset: 797
   virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
   - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
+      name: this
+    - type: byte
+      name: a2
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: __int64
+      name: a4
+  - name: Release
     offset: 16
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentStatus*
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
       name: this
-    - type: byte
-      name: a2
-  - name: Show
+  - name: ResetPositions
     offset: 24
     return_type: void
     parameters:
-    - type: Client::UI::Agent::AgentStatus*
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
       name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentStatus*
-      name: this
-    - type: byte
-      name: a2
   member_functions: []
-- type: Client::UI::Agent::AgentTryon
-  name: AgentTryon
-  namespace: Client.UI.Agent
-  union: False
-  size: 1752
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: Client::UI::Agent::AgentTryon::TryonCharaView
-    name: CharaView
-    offset: 40
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentTryon*
-      name: this
-    - type: byte
-      name: a2
-  member_functions: []
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? EB 5B 48 8B 49 10
-    return_type: byte
-    name: TryOn
-    parameters:
-    - type: unsigned int
-      name: openerAddonId
-    - type: unsigned int
-      name: itemId
-    - type: byte
-      name: stain0Id
-    - type: byte
-      name: stain1Id
-    - type: unsigned int
-      name: glamourItemId
-    - type: byte
-      name: applyCompanyCrest
 - type: Client::UI::Info::InfoProxyBlacklist
   name: InfoProxyBlacklist
   namespace: Client.UI.Info
@@ -72669,372 +72241,6 @@ structs:
       name: accountId
     - type: unsigned __int64
       name: contentId
-- type: Client::UI::Misc::CharaViewPortrait
-  name: CharaViewPortrait
-  namespace: Client.UI.Misc
-  union: False
-  size: 1056
-  fields:
-  - type: Client::UI::Misc::CharaView
-    name: CharaView
-    offset: 0
-    base: true
-  - type: Common::Math::Vector4
-    name: CameraPosition
-    offset: 800
-  - type: Common::Math::Vector4
-    name: CameraTarget
-    offset: 816
-  - type: float
-    name: CameraYaw
-    offset: 832
-  - type: float
-    name: CameraPitch
-    offset: 836
-  - type: float
-    name: CameraDistance
-    offset: 840
-  - type: __int16
-    name: ImageRotation
-    offset: 844
-  - type: byte
-    name: CameraZoom
-    offset: 846
-  - type: float
-    name: CameraZoomNormalized
-    offset: 848
-  - type: byte
-    name: DirectionalLightingColorRed
-    offset: 852
-  - type: byte
-    name: DirectionalLightingColorGreen
-    offset: 853
-  - type: byte
-    name: DirectionalLightingColorBlue
-    offset: 854
-  - type: byte
-    name: DirectionalLightingBrightness
-    offset: 855
-  - type: __int16
-    name: DirectionalLightingVerticalAngle
-    offset: 856
-  - type: __int16
-    name: DirectionalLightingHorizontalAngle
-    offset: 858
-  - type: byte
-    name: AmbientLightingColorRed
-    offset: 860
-  - type: byte
-    name: AmbientLightingColorGreen
-    offset: 861
-  - type: byte
-    name: AmbientLightingColorBlue
-    offset: 862
-  - type: byte
-    name: AmbientLightingBrightness
-    offset: 863
-  - type: __int16
-    name: PoseClassJob
-    offset: 868
-  - type: __int16
-    name: BannerBg
-    offset: 870
-  - type: byte
-    name: BackgroundState
-    offset: 872
-  - type: Component::GUI::AtkTexture
-    name: BackgroundTexture
-    offset: 880
-  - type: Client::UI::Misc::CharaViewCharacterData
-    name: PortraitCharacterData
-    offset: 904
-  - type: byte
-    name: CharacterVisible
-    offset: 1024
-  - type: byte
-    name: CharaViewPortraitCharacterDataCopied
-    offset: 1025
-  - type: byte
-    name: CharaViewPortraitCharacterLoaded
-    offset: 1026
-  virtual_functions:
-  - name: SetCameraDistance
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: float
-      name: deltaDistance
-  - name: SetCameraYawAndPitch
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: float
-      name: deltaRotation
-    - type: float
-      name: deltaPitch
-  - name: SetCameraXAndY
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: float
-      name: deltaX
-    - type: float
-      name: deltaY
-  - name: Update
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  - name: Dtor
-    offset: 0
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: byte
-      name: a2
-  - name: Initialize
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: Client::UI::Agent::AgentInterface*
-      name: a2
-    - type: unsigned int
-      name: a3
-    - type: __int64
-      name: a4
-  - name: Release
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  - name: ResetPositions
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B F8 45 33 C0
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10
-    return_type: void
-    name: Setup
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: unsigned int
-      name: clientObjectId
-    - type: Client::UI::Misc::CharaViewCharacterData*
-      name: characterData
-    - type: __int64
-      name: a4
-    - type: int
-      name: a5
-    - type: __int64
-      name: a6
-  - signature: E8 ?? ?? ?? ?? EB 89 48 8B 8F
-    return_type: void
-    name: ResetCamera
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 0F B7 47 10
-    return_type: void
-    name: SetCameraPosition
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: Common::Math::HalfVector4*
-      name: cam
-    - type: Common::Math::HalfVector4*
-      name: target
-  - signature: E8 ?? ?? ?? ?? 0F B7 97 ?? ?? ?? ?? 0F 28 D0
-    return_type: float
-    name: GetAnimationTime
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C0
-    return_type: void
-    name: SetAmbientLightingColor
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: unsigned int
-      name: red
-    - type: unsigned int
-      name: green
-    - type: unsigned int
-      name: blue
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4F 20 E8 ?? ?? ?? ?? 44 0F B6 8B ?? ?? ?? ?? 0F B6 D0
-    return_type: void
-    name: SetAmbientLightingBrightness
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: byte
-      name: brightness
-  - signature: E8 ?? ?? ?? ?? 48 8B 4B 18 0F B6 47 29 F3 0F 10 35 ?? ?? ?? ?? 48 8B 74 24 ??
-    return_type: void
-    name: SetDirectionalLightingColor
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: unsigned int
-      name: red
-    - type: unsigned int
-      name: green
-    - type: unsigned int
-      name: blue
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4F 20 E8 ?? ?? ?? ?? 44 0F B7 83
-    return_type: void
-    name: SetDirectionalLightingBrightness
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: byte
-      name: brightness
-  - signature: E8 ?? ?? ?? ?? EB 5A 48 8D 4F 20
-    return_type: void
-    name: SetDirectionalLightingAngle
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: __int16
-      name: vertical
-    - type: __int16
-      name: horizontal
-  - signature: E8 ?? ?? ?? ?? EB 17 48 8D 4F 20
-    return_type: void
-    name: SetCameraZoom
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: byte
-      name: zoom
-  - signature: E8 ?? ?? ?? ?? 41 B7 01 48 63 47 48
-    return_type: void
-    name: SetBackground
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: unsigned __int16
-      name: id
-  - signature: E8 ?? ?? ?? ?? 40 84 FF 74 53
-    return_type: void
-    name: SetPose
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: unsigned __int16
-      name: id
-  - signature: E8 ?? ?? ?? ?? 40 84 ED 74 56
-    return_type: void
-    name: SetPoseTimed
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: unsigned __int16
-      name: id
-    - type: float
-      name: time
-  - signature: E8 ?? ?? ?? ?? 40 84 F6 74 4F 48 63 83 ?? ?? ?? ??
-    return_type: void
-    name: SetExpression
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: byte
-      name: id
-  - signature: E8 ?? ?? ?? ?? 0F B7 44 24 ?? 66 89 43 7C
-    return_type: __int64
-    name: ExportPortraitData
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: Client::UI::Misc::ExportedPortraitData*
-      name: output
-  - signature: E8 ?? ?? ?? ?? 83 BE ?? ?? ?? ?? ?? 4C 8B B4 24 ?? ?? ?? ?? 74 2D
-    return_type: __int64
-    name: ImportPortraitData
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: Client::UI::Misc::ExportedPortraitData*
-      name: input
-  - signature: E8 ?? ?? ?? ?? F3 0F 10 57 ?? 48 8B CB
-    return_type: void
-    name: ApplyCameraPositions
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 0F B7 4F 24 E8 ?? ?? ?? ?? 0F B7 4F 22 0F 28 F0 E8 ?? ?? ?? ?? 0F 28 C8 0F 28 D6 48 8B CB E8 ?? ?? ?? ?? 44 0F B6 4F ?? 48 8B CB 44 0F B6 47 ?? 0F B6 57 26 E8 ?? ?? ?? ?? 48 8B 4B 18 0F B6 47 29 F3 0F 10 35 ?? ?? ?? ?? 48 8B 74 24 ??
-    return_type: void
-    name: SetHeadDirection
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: float
-      name: a2
-    - type: float
-      name: a3
-  - signature: E8 ?? ?? ?? ?? 44 0F B6 4F ?? 48 8B CB 44 0F B6 47 ?? 0F B6 57 26 E8 ?? ?? ?? ?? 48 8B 4B 18 0F B6 47 29 F3 0F 10 35 ?? ?? ?? ?? 48 8B 74 24 ??
-    return_type: void
-    name: SetEyeDirection
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: float
-      name: a2
-    - type: float
-      name: a3
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 48 8B 01 FF 90 ?? ?? ?? ?? 48 8B 48 08
-    return_type: void
-    name: ResetEyeDirection
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? E9 ?? ?? ?? ??
-    return_type: void
-    name: ResetHeadDirection
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B DF BA ?? ?? ?? ??
-    return_type: void
-    name: ToggleCharacterVisibility
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: byte
-      name: visible
-  - signature: E8 ?? ?? ?? ?? 0F B6 45 A4
-    return_type: void
-    name: ToggleGearVisibility
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: byte
-      name: hideVisor
-    - type: byte
-      name: hideWeapon
-    - type: byte
-      name: closeVisor
 - type: Common::Component::BGCollision::ColliderBox
   name: ColliderBox
   namespace: Common.Component.BGCollision
@@ -76603,153 +75809,6 @@ structs:
       name: this
     - type: System::Numerics::Vector4*
       name: a2
-  member_functions: []
-- type: Client::UI::Agent::AgentBannerInterface::Storage::CharacterData
-  name: CharacterData
-  namespace: Client.UI.Agent
-  union: False
-  size: 1984
-  fields:
-  - type: Client::System::String::Utf8String
-    name: Name1
-    offset: 24
-  - type: Client::System::String::Utf8String
-    name: Name2
-    offset: 128
-  - type: Client::System::String::Utf8String
-    name: UnkString1
-    offset: 232
-  - type: Client::System::String::Utf8String
-    name: UnkString2
-    offset: 336
-  - type: Client::System::String::Utf8String
-    name: Job
-    offset: 448
-  - type: unsigned int
-    name: WorldId
-    offset: 568
-  - type: Client::System::String::Utf8String
-    name: UnkString3
-    offset: 576
-  - type: Client::UI::Misc::CharaViewPortrait
-    name: CharaView
-    offset: 688
-  - type: Client::System::String::Utf8String
-    name: Title
-    offset: 1856
-  - type: __int64
-    name: SomePointer
-    offset: 1968
-  virtual_functions: []
-  member_functions: []
-- type: Client::UI::Agent::AgentCharaCard::Storage
-  name: Storage
-  namespace: Client.UI.Agent
-  union: False
-  size: 2480
-  fields:
-  - type: unsigned int
-    name: EntityId
-    offset: 4
-  - type: unsigned __int64
-    name: ContentId
-    offset: 8
-  - type: byte
-    name: InvertPortraitPlacement
-    offset: 27
-  - type: byte
-    name: BasePlate
-    offset: 28
-  - type: byte
-    name: TopBorder
-    offset: 30
-  - type: byte
-    name: BottomBorder
-    offset: 31
-  - type: byte
-    name: Backing
-    offset: 34
-  - type: byte
-    name: PatternOverlay
-    offset: 36
-  - type: byte
-    name: PortraitFrame
-    offset: 38
-  - type: byte
-    name: PlateFrame
-    offset: 40
-  - type: byte
-    name: Accent
-    offset: 42
-  - type: Client::System::String::Utf8String
-    name: Name
-    offset: 96
-  - type: unsigned __int16
-    name: WorldId
-    offset: 200
-  - type: byte
-    name: ClassJobId
-    offset: 202
-  - type: byte
-    name: GcRank
-    offset: 204
-  - type: unsigned __int16
-    name: Level
-    offset: 208
-  - type: unsigned __int16
-    name: TitleId
-    offset: 210
-  - type: Client::System::String::Utf8String
-    name: FreeCompany
-    offset: 224
-  - type: Client::System::String::Utf8String
-    name: SearchComment
-    offset: 328
-  - type: Client::System::String::Utf8String
-    name: SearchCommentRaw
-    offset: 432
-  - type: unsigned int
-    name: Activity1IconId
-    offset: 600
-  - type: Client::System::String::Utf8String
-    name: Activity1Name
-    offset: 608
-  - type: unsigned int
-    name: Activity2IconId
-    offset: 712
-  - type: Client::System::String::Utf8String
-    name: Activity2Name
-    offset: 720
-  - type: unsigned int
-    name: Activity3IconId
-    offset: 824
-  - type: Client::System::String::Utf8String
-    name: Activity3Name
-    offset: 832
-  - type: unsigned int
-    name: Activity4IconId
-    offset: 936
-  - type: Client::System::String::Utf8String
-    name: Activity4Name
-    offset: 944
-  - type: unsigned int
-    name: Activity5IconId
-    offset: 1048
-  - type: Client::System::String::Utf8String
-    name: Activity5Name
-    offset: 1056
-  - type: unsigned int
-    name: Activity6IconId
-    offset: 1160
-  - type: Client::System::String::Utf8String
-    name: Activity6Name
-    offset: 1168
-  - type: Client::UI::Misc::CharaViewPortrait
-    name: CharaView
-    offset: 1344
-  - type: Client::Graphics::Kernel::Texture*
-    name: PortraitTexture
-    offset: 2400
   member_functions: []
 - type: Client::UI::Agent::AgentContext
   name: AgentContext
@@ -99438,23 +98497,216 @@ structs:
     - type: Client::UI::AddonTeleport*
       name: this
   member_functions: []
-- type: Client::UI::Agent::AgentBannerInterface::Storage
-  name: Storage
+- type: Client::UI::Agent::AgentColorant
+  name: AgentColorant
   namespace: Client.UI.Agent
   union: False
-  size: 15920
+  size: 1168
   fields:
-  - type: Client::UI::Agent::AgentInterface*
-    name: Agent
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
     offset: 0
-  - type: Client::UI::UIModule*
-    name: UIModule
-    offset: 8
-  - type: Client::UI::Agent::AgentBannerInterface::Storage::CharacterData
-    name: Characters
+    base: true
+  - type: Client::UI::Agent::AgentColorant::ColorantCharaView
+    name: CharaView
+    offset: 336
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+  - name: Hide
     offset: 32
-    size: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+    - type: byte
+      name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentGearSet
+  name: AgentGearSet
+  namespace: Client.UI.Agent
+  union: False
+  size: 3008
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentGearSet::GearsetCharaView
+    name: CharaView
+    offset: 2168
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24
+    return_type: void
+    name: OpenBannerEditorForGearset
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
 - type: Client::UI::Agent::AgentHUD
   name: AgentHUD
   namespace: Client.UI.Agent
@@ -99718,6 +98970,341 @@ structs:
     name: Initialized
     offset: 176
   member_functions: []
+- type: Client::UI::Agent::AgentMiragePrismMiragePlate
+  name: AgentMiragePrismMiragePlate
+  namespace: Client.UI.Agent
+  union: False
+  size: 944
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
+    name: CharaView
+    offset: 128
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 30 8B FA 66 44 89 4C 24
+    return_type: void
+    name: OpenForGearset
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: int
+      name: gearsetId
+    - type: int
+      name: glamourSetLink
+    - type: unsigned __int16
+      name: openerAddonId
+- type: Client::UI::Agent::AgentStatus
+  name: AgentStatus
+  namespace: Client.UI.Agent
+  union: False
+  size: 1024
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: byte
+    name: TabIndex
+    offset: 60
+  - type: Client::UI::Agent::AgentStatus::StatusCharaView
+    name: CharaView
+    offset: 216
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
+- type: Client::UI::Agent::AgentTryon
+  name: AgentTryon
+  namespace: Client.UI.Agent
+  union: False
+  size: 1752
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentTryon::TryonCharaView
+    name: CharaView
+    offset: 40
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? EB 5B 48 8B 49 10
+    return_type: byte
+    name: TryOn
+    parameters:
+    - type: unsigned int
+      name: openerAddonId
+    - type: unsigned int
+      name: itemId
+    - type: byte
+      name: stain0Id
+    - type: byte
+      name: stain1Id
+    - type: unsigned int
+      name: glamourItemId
+    - type: byte
+      name: applyCompanyCrest
 - type: Common::Lua::LG
   name: LG
   namespace: Common.Lua
@@ -106953,6 +106540,372 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Misc::CharaViewPortrait
+  name: CharaViewPortrait
+  namespace: Client.UI.Misc
+  union: False
+  size: 1056
+  fields:
+  - type: Client::UI::Misc::CharaView
+    name: CharaView
+    offset: 0
+    base: true
+  - type: Common::Math::Vector4
+    name: CameraPosition
+    offset: 800
+  - type: Common::Math::Vector4
+    name: CameraTarget
+    offset: 816
+  - type: float
+    name: CameraYaw
+    offset: 832
+  - type: float
+    name: CameraPitch
+    offset: 836
+  - type: float
+    name: CameraDistance
+    offset: 840
+  - type: __int16
+    name: ImageRotation
+    offset: 844
+  - type: byte
+    name: CameraZoom
+    offset: 846
+  - type: float
+    name: CameraZoomNormalized
+    offset: 848
+  - type: byte
+    name: DirectionalLightingColorRed
+    offset: 852
+  - type: byte
+    name: DirectionalLightingColorGreen
+    offset: 853
+  - type: byte
+    name: DirectionalLightingColorBlue
+    offset: 854
+  - type: byte
+    name: DirectionalLightingBrightness
+    offset: 855
+  - type: __int16
+    name: DirectionalLightingVerticalAngle
+    offset: 856
+  - type: __int16
+    name: DirectionalLightingHorizontalAngle
+    offset: 858
+  - type: byte
+    name: AmbientLightingColorRed
+    offset: 860
+  - type: byte
+    name: AmbientLightingColorGreen
+    offset: 861
+  - type: byte
+    name: AmbientLightingColorBlue
+    offset: 862
+  - type: byte
+    name: AmbientLightingBrightness
+    offset: 863
+  - type: __int16
+    name: PoseClassJob
+    offset: 868
+  - type: __int16
+    name: BannerBg
+    offset: 870
+  - type: byte
+    name: BackgroundState
+    offset: 872
+  - type: Component::GUI::AtkTexture
+    name: BackgroundTexture
+    offset: 880
+  - type: Client::UI::Misc::CharaViewCharacterData
+    name: PortraitCharacterData
+    offset: 904
+  - type: byte
+    name: CharacterVisible
+    offset: 1024
+  - type: byte
+    name: CharaViewPortraitCharacterDataCopied
+    offset: 1025
+  - type: byte
+    name: CharaViewPortraitCharacterLoaded
+    offset: 1026
+  virtual_functions:
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: float
+      name: deltaDistance
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: float
+      name: deltaRotation
+    - type: float
+      name: deltaPitch
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: float
+      name: deltaX
+    - type: float
+      name: deltaY
+  - name: Update
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - name: Dtor
+    offset: 0
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: byte
+      name: a2
+  - name: Initialize
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: Client::UI::Agent::AgentInterface*
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: __int64
+      name: a4
+  - name: Release
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - name: ResetPositions
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F8 45 33 C0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10
+    return_type: void
+    name: Setup
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: unsigned int
+      name: clientObjectId
+    - type: Client::UI::Misc::CharaViewCharacterData*
+      name: characterData
+    - type: __int64
+      name: a4
+    - type: int
+      name: a5
+    - type: __int64
+      name: a6
+  - signature: E8 ?? ?? ?? ?? EB 89 48 8B 8F
+    return_type: void
+    name: ResetCamera
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B7 47 10
+    return_type: void
+    name: SetCameraPosition
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: Common::Math::HalfVector4*
+      name: cam
+    - type: Common::Math::HalfVector4*
+      name: target
+  - signature: E8 ?? ?? ?? ?? 0F B7 97 ?? ?? ?? ?? 0F 28 D0
+    return_type: float
+    name: GetAnimationTime
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C0
+    return_type: void
+    name: SetAmbientLightingColor
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: unsigned int
+      name: red
+    - type: unsigned int
+      name: green
+    - type: unsigned int
+      name: blue
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4F 20 E8 ?? ?? ?? ?? 44 0F B6 8B ?? ?? ?? ?? 0F B6 D0
+    return_type: void
+    name: SetAmbientLightingBrightness
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: byte
+      name: brightness
+  - signature: E8 ?? ?? ?? ?? 48 8B 4B 18 0F B6 47 29 F3 0F 10 35 ?? ?? ?? ?? 48 8B 74 24 ??
+    return_type: void
+    name: SetDirectionalLightingColor
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: unsigned int
+      name: red
+    - type: unsigned int
+      name: green
+    - type: unsigned int
+      name: blue
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4F 20 E8 ?? ?? ?? ?? 44 0F B7 83
+    return_type: void
+    name: SetDirectionalLightingBrightness
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: byte
+      name: brightness
+  - signature: E8 ?? ?? ?? ?? EB 5A 48 8D 4F 20
+    return_type: void
+    name: SetDirectionalLightingAngle
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: __int16
+      name: vertical
+    - type: __int16
+      name: horizontal
+  - signature: E8 ?? ?? ?? ?? EB 17 48 8D 4F 20
+    return_type: void
+    name: SetCameraZoom
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: byte
+      name: zoom
+  - signature: E8 ?? ?? ?? ?? 41 B7 01 48 63 47 48
+    return_type: void
+    name: SetBackground
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: unsigned __int16
+      name: id
+  - signature: E8 ?? ?? ?? ?? 40 84 FF 74 53
+    return_type: void
+    name: SetPose
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: unsigned __int16
+      name: id
+  - signature: E8 ?? ?? ?? ?? 40 84 ED 74 56
+    return_type: void
+    name: SetPoseTimed
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: unsigned __int16
+      name: id
+    - type: float
+      name: time
+  - signature: E8 ?? ?? ?? ?? 40 84 F6 74 4F 48 63 83 ?? ?? ?? ??
+    return_type: void
+    name: SetExpression
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: byte
+      name: id
+  - signature: E8 ?? ?? ?? ?? 0F B7 44 24 ?? 66 89 43 7C
+    return_type: __int64
+    name: ExportPortraitData
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: Client::UI::Misc::ExportedPortraitData*
+      name: output
+  - signature: E8 ?? ?? ?? ?? 83 BE ?? ?? ?? ?? ?? 4C 8B B4 24 ?? ?? ?? ?? 74 2D
+    return_type: __int64
+    name: ImportPortraitData
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: Client::UI::Misc::ExportedPortraitData*
+      name: input
+  - signature: E8 ?? ?? ?? ?? F3 0F 10 57 ?? 48 8B CB
+    return_type: void
+    name: ApplyCameraPositions
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B7 4F 24 E8 ?? ?? ?? ?? 0F B7 4F 22 0F 28 F0 E8 ?? ?? ?? ?? 0F 28 C8 0F 28 D6 48 8B CB E8 ?? ?? ?? ?? 44 0F B6 4F ?? 48 8B CB 44 0F B6 47 ?? 0F B6 57 26 E8 ?? ?? ?? ?? 48 8B 4B 18 0F B6 47 29 F3 0F 10 35 ?? ?? ?? ?? 48 8B 74 24 ??
+    return_type: void
+    name: SetHeadDirection
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - signature: E8 ?? ?? ?? ?? 44 0F B6 4F ?? 48 8B CB 44 0F B6 47 ?? 0F B6 57 26 E8 ?? ?? ?? ?? 48 8B 4B 18 0F B6 47 29 F3 0F 10 35 ?? ?? ?? ?? 48 8B 74 24 ??
+    return_type: void
+    name: SetEyeDirection
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 48 8B 01 FF 90 ?? ?? ?? ?? 48 8B 48 08
+    return_type: void
+    name: ResetEyeDirection
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? E9 ?? ?? ?? ??
+    return_type: void
+    name: ResetHeadDirection
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B DF BA ?? ?? ?? ??
+    return_type: void
+    name: ToggleCharacterVisibility
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: byte
+      name: visible
+  - signature: E8 ?? ?? ?? ?? 0F B6 45 A4
+    return_type: void
+    name: ToggleGearVisibility
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: byte
+      name: hideVisor
+    - type: byte
+      name: hideWeapon
+    - type: byte
+      name: closeVisor
 - type: Component::GUI::AtkFontAnalyzer
   name: AtkFontAnalyzer
   namespace: Component.GUI
@@ -112044,171 +111997,6 @@ structs:
     - type: Client::UI::AddonSynthesis*
       name: this
   member_functions: []
-- type: Client::UI::Agent::AgentInspect
-  name: AgentInspect
-  namespace: Client.UI.Agent
-  union: False
-  size: 2056
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: unsigned int
-    name: RequestEntityId
-    offset: 40
-  - type: unsigned int
-    name: RequestSearchCommentEntityId
-    offset: 44
-  - type: unsigned int
-    name: RequestFreeCompanyEntityId
-    offset: 48
-  - type: unsigned int
-    name: CurrentEntityId
-    offset: 52
-  - type: Client::System::String::Utf8String
-    name: SearchComment
-    offset: 56
-  - type: Client::System::String::Utf8String
-    name: PsnName
-    offset: 264
-  - type: Client::System::String::Utf8String
-    name: ChocoboBarding
-    offset: 368
-    size: 3
-  - type: Client::UI::Agent::AgentInspect::ItemData
-    name: Items
-    offset: 680
-    size: 13
-  - type: Client::UI::Agent::AgentInspect::FreeCompanyData
-    name: FreeCompany
-    offset: 1096
-  - type: unsigned int
-    name: FetchCharacterDataStatus
-    offset: 1232
-  - type: unsigned int
-    name: FetchSearchCommentStatus
-    offset: 1236
-  - type: unsigned int
-    name: FetchFreeCompanyStatus
-    offset: 1240
-  - type: Client::UI::Info::InfoProxyDetail*
-    name: InfoProxyDetail
-    offset: 1248
-  - type: Client::UI::Info::InfoProxyFreeCompany*
-    name: InfoProxyFreeCompany
-    offset: 1256
-  - type: Client::UI::Agent::AgentInspect::InspectCharaView
-    name: CharaView
-    offset: 1264
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-  - name: Hide
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-  - name: IsAgentActive
-    offset: 40
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-  - name: Update
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 56
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-  - name: GetAddonId
-    offset: 64
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-  - name: OnGameEvent
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 49 8B E8 8B DA
-    return_type: void
-    name: ReceiveSearchComment
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-    - type: unsigned int
-      name: entityId
-    - type: byte*
-      name: searchComment
-  - signature: 48 8B 01 44 88 81 ?? ?? ?? ?? 89 51
-    return_type: void
-    name: ExamineCharacter
-    parameters:
-    - type: Client::UI::Agent::AgentInspect*
-      name: this
-    - type: unsigned int
-      name: entityId
-    - type: byte
-      name: isChocobo
 - type: Client::UI::Agent::AgentMJICraftSchedule::ScheduleData
   name: ScheduleData
   namespace: Client.UI.Agent
@@ -112475,6 +112263,153 @@ structs:
     parameters:
     - type: Client::Game::Event::LuaEventHandler*
       name: this
+  member_functions: []
+- type: Client::UI::Agent::AgentBannerInterface::Storage::CharacterData
+  name: CharacterData
+  namespace: Client.UI.Agent
+  union: False
+  size: 1984
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Name1
+    offset: 24
+  - type: Client::System::String::Utf8String
+    name: Name2
+    offset: 128
+  - type: Client::System::String::Utf8String
+    name: UnkString1
+    offset: 232
+  - type: Client::System::String::Utf8String
+    name: UnkString2
+    offset: 336
+  - type: Client::System::String::Utf8String
+    name: Job
+    offset: 448
+  - type: unsigned int
+    name: WorldId
+    offset: 568
+  - type: Client::System::String::Utf8String
+    name: UnkString3
+    offset: 576
+  - type: Client::UI::Misc::CharaViewPortrait
+    name: CharaView
+    offset: 688
+  - type: Client::System::String::Utf8String
+    name: Title
+    offset: 1856
+  - type: __int64
+    name: SomePointer
+    offset: 1968
+  virtual_functions: []
+  member_functions: []
+- type: Client::UI::Agent::AgentCharaCard::Storage
+  name: Storage
+  namespace: Client.UI.Agent
+  union: False
+  size: 2480
+  fields:
+  - type: unsigned int
+    name: EntityId
+    offset: 4
+  - type: unsigned __int64
+    name: ContentId
+    offset: 8
+  - type: byte
+    name: InvertPortraitPlacement
+    offset: 27
+  - type: byte
+    name: BasePlate
+    offset: 28
+  - type: byte
+    name: TopBorder
+    offset: 30
+  - type: byte
+    name: BottomBorder
+    offset: 31
+  - type: byte
+    name: Backing
+    offset: 34
+  - type: byte
+    name: PatternOverlay
+    offset: 36
+  - type: byte
+    name: PortraitFrame
+    offset: 38
+  - type: byte
+    name: PlateFrame
+    offset: 40
+  - type: byte
+    name: Accent
+    offset: 42
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 96
+  - type: unsigned __int16
+    name: WorldId
+    offset: 200
+  - type: byte
+    name: ClassJobId
+    offset: 202
+  - type: byte
+    name: GcRank
+    offset: 204
+  - type: unsigned __int16
+    name: Level
+    offset: 208
+  - type: unsigned __int16
+    name: TitleId
+    offset: 210
+  - type: Client::System::String::Utf8String
+    name: FreeCompany
+    offset: 224
+  - type: Client::System::String::Utf8String
+    name: SearchComment
+    offset: 328
+  - type: Client::System::String::Utf8String
+    name: SearchCommentRaw
+    offset: 432
+  - type: unsigned int
+    name: Activity1IconId
+    offset: 600
+  - type: Client::System::String::Utf8String
+    name: Activity1Name
+    offset: 608
+  - type: unsigned int
+    name: Activity2IconId
+    offset: 712
+  - type: Client::System::String::Utf8String
+    name: Activity2Name
+    offset: 720
+  - type: unsigned int
+    name: Activity3IconId
+    offset: 824
+  - type: Client::System::String::Utf8String
+    name: Activity3Name
+    offset: 832
+  - type: unsigned int
+    name: Activity4IconId
+    offset: 936
+  - type: Client::System::String::Utf8String
+    name: Activity4Name
+    offset: 944
+  - type: unsigned int
+    name: Activity5IconId
+    offset: 1048
+  - type: Client::System::String::Utf8String
+    name: Activity5Name
+    offset: 1056
+  - type: unsigned int
+    name: Activity6IconId
+    offset: 1160
+  - type: Client::System::String::Utf8String
+    name: Activity6Name
+    offset: 1168
+  - type: Client::UI::Misc::CharaViewPortrait
+    name: CharaView
+    offset: 1344
+  - type: Client::Graphics::Kernel::Texture*
+    name: PortraitTexture
+    offset: 2400
   member_functions: []
 - type: Component::Shell::ShellCommandModule
   name: ShellCommandModule
@@ -116893,6 +116828,188 @@ structs:
       name: this
     - type: int
       name: tab
+- type: Client::UI::Agent::AgentBannerInterface::Storage
+  name: Storage
+  namespace: Client.UI.Agent
+  union: False
+  size: 15920
+  fields:
+  - type: Client::UI::Agent::AgentInterface*
+    name: Agent
+    offset: 0
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 8
+  - type: Client::UI::Agent::AgentBannerInterface::Storage::CharacterData
+    name: Characters
+    offset: 32
+    size: 8
+  member_functions: []
+- type: Client::UI::Agent::AgentInspect
+  name: AgentInspect
+  namespace: Client.UI.Agent
+  union: False
+  size: 2056
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: RequestEntityId
+    offset: 40
+  - type: unsigned int
+    name: RequestSearchCommentEntityId
+    offset: 44
+  - type: unsigned int
+    name: RequestFreeCompanyEntityId
+    offset: 48
+  - type: unsigned int
+    name: CurrentEntityId
+    offset: 52
+  - type: Client::System::String::Utf8String
+    name: SearchComment
+    offset: 56
+  - type: Client::System::String::Utf8String
+    name: OnlineId
+    offset: 264
+  - type: Client::System::String::Utf8String
+    name: ChocoboBarding
+    offset: 368
+    size: 3
+  - type: Client::UI::Agent::AgentInspect::ItemData
+    name: Items
+    offset: 680
+    size: 13
+  - type: Client::UI::Agent::AgentInspect::FreeCompanyData
+    name: FreeCompany
+    offset: 1096
+  - type: unsigned int
+    name: FetchCharacterDataStatus
+    offset: 1232
+  - type: unsigned int
+    name: FetchSearchCommentStatus
+    offset: 1236
+  - type: unsigned int
+    name: FetchFreeCompanyStatus
+    offset: 1240
+  - type: Client::UI::Info::InfoProxyDetail*
+    name: InfoProxyDetail
+    offset: 1248
+  - type: Client::UI::Info::InfoProxyFreeCompany*
+    name: InfoProxyFreeCompany
+    offset: 1256
+  - type: Client::UI::Agent::AgentInspect::InspectCharaView
+    name: CharaView
+    offset: 1264
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 49 8B E8 8B DA
+    return_type: void
+    name: ReceiveSearchComment
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: unsigned int
+      name: entityId
+    - type: byte*
+      name: searchComment
+  - signature: 48 8B 01 44 88 81 ?? ?? ?? ?? 89 51
+    return_type: void
+    name: ExamineCharacter
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: unsigned int
+      name: entityId
+    - type: byte
+      name: isChocobo
 - type: Client::UI::Agent::AgentLobby
   name: AgentLobby
   namespace: Client.UI.Agent
@@ -128749,6 +128866,12 @@ structs:
       name: this
     - type: Client::UI::Misc::RaptureMacroModule::Macro*
       name: macro
+  - signature: E8 ?? ?? ?? ?? EB 42 4C 8B C6
+    return_type: void
+    name: CancelMacro
+    parameters:
+    - type: Client::UI::Shell::RaptureShellModule*
+      name: this
   - signature: E8 ?? ?? ?? ?? 48 BA ?? ?? ?? ?? ?? ?? ?? ?? 84 C0
     return_type: byte
     name: TryGetMacroIconCommand
@@ -132393,6 +132516,12 @@ structs:
   - type: int
     name: IsJingle
     offset: 3644
+  - type: unsigned __int16*
+    name: WeatherReportReplaceIds
+    offset: 3656
+  - type: unsigned __int16*
+    name: AkatsukiNoteTitleIds
+    offset: 3672
   virtual_functions:
   - name: EncodeString
     offset: 56
@@ -132504,207 +132633,9 @@ structs:
     name: ContentDirector
     offset: 0
     base: true
-  - type: unsigned int
-    name: NewPlayerBonusGil
+  - type: Component::Exd::Sheets::InstanceContent
+    name: InstanceContentSheet
     offset: 3456
-  - type: unsigned int
-    name: NewPlayerBonusExp
-    offset: 3460
-  - type: unsigned int
-    name: FinalBossExp
-    offset: 3464
-  - type: unsigned int
-    name: Unknown0
-    offset: 3468
-  - type: unsigned int
-    name: BossExp0
-    offset: 3472
-  - type: unsigned int
-    name: BossExp1
-    offset: 3476
-  - type: unsigned int
-    name: BossExp2
-    offset: 3480
-  - type: unsigned int
-    name: BossExp3
-    offset: 3484
-  - type: unsigned int
-    name: BossExp4
-    offset: 3488
-  - type: unsigned int
-    name: InstanceClearExp
-    offset: 3492
-  - type: unsigned int
-    name: InstanceClearGil
-    offset: 3496
-  - type: unsigned int
-    name: InstanceContentRewardItem
-    offset: 3500
-  - type: unsigned __int16
-    name: NewPlayerBonusA
-    offset: 3504
-  - type: unsigned __int16
-    name: NewPlayerBonusB
-    offset: 3506
-  - type: unsigned __int16
-    name: FinalBossCurrencyA
-    offset: 3508
-  - type: unsigned __int16
-    name: FinalBossCurrencyB
-    offset: 3510
-  - type: unsigned __int16
-    name: FinalBossCurrencyC
-    offset: 3512
-  - type: unsigned __int16
-    name: BossCurrencyA0
-    offset: 3514
-  - type: unsigned __int16
-    name: BossCurrencyA1
-    offset: 3516
-  - type: unsigned __int16
-    name: BossCurrencyA2
-    offset: 3518
-  - type: unsigned __int16
-    name: BossCurrencyA3
-    offset: 3520
-  - type: unsigned __int16
-    name: BossCurrencyA4
-    offset: 3522
-  - type: unsigned __int16
-    name: BossCurrencyB0
-    offset: 3524
-  - type: unsigned __int16
-    name: BossCurrencyB1
-    offset: 3526
-  - type: unsigned __int16
-    name: BossCurrencyB2
-    offset: 3528
-  - type: unsigned __int16
-    name: BossCurrencyB3
-    offset: 3530
-  - type: unsigned __int16
-    name: BossCurrencyB4
-    offset: 3532
-  - type: unsigned __int16
-    name: BossCurrencyC0
-    offset: 3534
-  - type: unsigned __int16
-    name: BossCurrencyC1
-    offset: 3536
-  - type: unsigned __int16
-    name: BossCurrencyC2
-    offset: 3538
-  - type: unsigned __int16
-    name: BossCurrencyC3
-    offset: 3540
-  - type: unsigned __int16
-    name: BossCurrencyC4
-    offset: 3542
-  - type: unsigned __int16
-    name: Unknown1
-    offset: 3544
-  - type: byte
-    name: Unknown20
-    offset: 3546
-  - type: unsigned int
-    name: Cutscene
-    offset: 3548
-  - type: unsigned int
-    name: LGBEventRange
-    offset: 3552
-  - type: unsigned int
-    name: InstanceContentTextDataBossStart
-    offset: 3556
-  - type: unsigned int
-    name: InstanceContentTextDataBossEnd
-    offset: 3560
-  - type: unsigned int
-    name: BNpcBaseBoss
-    offset: 3564
-  - type: unsigned int
-    name: InstanceContentTextDataObjectiveStart
-    offset: 3568
-  - type: unsigned int
-    name: InstanceContentTextDataObjectiveEnd
-    offset: 3572
-  - type: unsigned int
-    name: Unknown2
-    offset: 3576
-  - type: unsigned int
-    name: ReqInstance
-    offset: 3580
-  - type: int
-    name: InstanceContentBuff
-    offset: 3584
-  - type: unsigned __int16
-    name: ContentTimeMax
-    offset: 3588
-  - type: unsigned __int16
-    name: BGM
-    offset: 3590
-  - type: unsigned __int16
-    name: WinBGM
-    offset: 3592
-  - type: unsigned __int16
-    name: Order
-    offset: 3594
-  - type: unsigned __int16
-    name: SortKey
-    offset: 3596
-  - type: unsigned __int16
-    name: Unknown3
-    offset: 3598
-  - type: unsigned __int16
-    name: Unknown4
-    offset: 3600
-  - type: unsigned __int16
-    name: Unknown5
-    offset: 3602
-  - type: unsigned __int16
-    name: Unknown6
-    offset: 3604
-  - type: unsigned __int16
-    name: Unknown7
-    offset: 3606
-  - type: unsigned __int16
-    name: Unknown8
-    offset: 3608
-  - type: unsigned __int16
-    name: Unknown_70
-    offset: 3610
-  - type: __int16
-    name: PartyCondition
-    offset: 3612
-  - type: Client::Game::InstanceContent::InstanceContentType
-    name: InstanceContentType
-    offset: 3614
-  - type: byte
-    name: WeekRestriction
-    offset: 3615
-  - type: byte
-    name: Colosseum
-    offset: 3616
-  - type: byte
-    name: Unknown9
-    offset: 3617
-  - type: byte
-    name: Unknown10
-    offset: 3618
-  - type: byte
-    name: Unknown11
-    offset: 3619
-  - type: byte
-    name: Unknown12
-    offset: 3620
-  - type: byte
-    name: Unknown19
-    offset: 3621
-  - type: byte
-    name: Unknown13
-    offset: 3622
-  - type: byte
-    name: Unknown14_Unknown15_Unknown16_Unknown17_Unknown18
-    offset: 3623
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
@@ -132795,60 +132726,9 @@ structs:
     name: ContentDirector
     offset: 0
     base: true
-  - type: unsigned int
-    name: NameOffset
+  - type: Component::Exd::Sheets::PublicContent
+    name: PublicContentSheet
     offset: 3456
-  - type: unsigned int
-    name: MapIcon
-    offset: 3460
-  - type: unsigned int
-    name: TextDataStart
-    offset: 3464
-  - type: unsigned int
-    name: TextDataEnd
-    offset: 3468
-  - type: unsigned int
-    name: StartCutscene
-    offset: 3472
-  - type: unsigned int
-    name: LGBEventRange
-    offset: 3476
-  - type: unsigned int
-    name: LGBPopRange
-    offset: 3480
-  - type: unsigned int
-    name: EndCutscene
-    offset: 3484
-  - type: unsigned __int16
-    name: Timelimit
-    offset: 3488
-  - type: unsigned __int16
-    name: ContentFinderCondition
-    offset: 3490
-  - type: unsigned __int16
-    name: AdditionalData
-    offset: 3492
-  - type: unsigned __int16
-    name: Unknown0
-    offset: 3494
-  - type: unsigned __int16
-    name: Unknown1
-    offset: 3496
-  - type: unsigned __int16
-    name: Unknown2
-    offset: 3498
-  - type: unsigned __int16
-    name: Unknown3
-    offset: 3500
-  - type: unsigned __int16
-    name: Unknown5
-    offset: 3502
-  - type: Client::Game::InstanceContent::PublicContentDirectorType
-    name: Type
-    offset: 3504
-  - type: byte
-    name: Unknown4
-    offset: 3505
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
