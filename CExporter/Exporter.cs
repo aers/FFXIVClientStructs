@@ -539,7 +539,7 @@ public class Exporter {
                 _processType.Add(field.FieldType);
             if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
                 isExcel = true;
-                fieldsToUse = [.. fieldsToUse, [currentField, i+1]];
+                fieldsToUse = [.. fieldsToUse, [currentField, i + 1]];
                 continue;
             }
             if (field.GetCustomAttribute<CExporterExcelEndAttribute>() != null) {
