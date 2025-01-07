@@ -26,6 +26,7 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x140)] public AtkGroupManager AtkGroupManager;
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
     [FieldOffset(0x2C0)] public AtkDialogue AtkDialogue;
+    [FieldOffset(0x2F8)] public FilterStruct Filter;
     [FieldOffset(0x308)] public AtkOperationGuide AtkOperationGuide;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
     [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray32<AtkEventDispatcher> _atkEventDispatcher;
@@ -65,4 +66,13 @@ public unsafe partial struct AtkStage {
 
     public ExtendArrayData* GetExtendArrayData(ExtendArrayType type)
         => GetExtendArrayData()[(int)type];
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct FilterStruct {
+        [FieldOffset(0x00)] public AtkStage* AtkStage;
+        [FieldOffset(0x08)] public short NumActiveSystemFilters;
+        [FieldOffset(0x0A)] public short NumActiveFilters;
+        [FieldOffset(0x0C)] public short SomeOtherNum;
+        [FieldOffset(0x0E)] public short SomeAddonId;
+    }
 }
