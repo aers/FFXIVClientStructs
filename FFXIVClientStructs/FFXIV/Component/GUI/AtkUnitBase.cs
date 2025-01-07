@@ -119,6 +119,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [FieldOffset(0x1F0)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
+    [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
 
     public uint DepthLayer => (Flags198 >> 16) & 0xF;
 
@@ -330,4 +331,40 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </remarks>
     [VirtualFunction(65)]
     public partial bool IsFullyLoaded();
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xC)]
+public struct OperationGuide {
+    [FieldOffset(0x00)] public byte Index; // 0xFF = Disabled
+    [FieldOffset(0x01)] public byte PositionFlags;
+    [FieldOffset(0x02)] public short OffsetX;
+    [FieldOffset(0x04)] public short OffsetY;
+
+    [FieldOffset(0x08)] public uint AddonTransientId;
+
+    /// <summary> The point of the node to anchor to. </summary>
+    /// <remarks> <see cref="PositionFlags"/> mask: 0b0000_1111 </remarks>
+    public OperationGuidePoint RelativePoint {
+        get => (OperationGuidePoint)(PositionFlags & 0x0F);
+        set => PositionFlags = (byte)((PositionFlags & 0xF0) | ((byte)value & 0x0F));
+    }
+
+    /// <summary> The point of this OperationGuide. </summary>
+    /// <remarks> <see cref="PositionFlags"/> mask: 0b1111_0000 </remarks>
+    public OperationGuidePoint Point {
+        get => (OperationGuidePoint)((PositionFlags & 0xF0) >> 4);
+        set => PositionFlags = (byte)((PositionFlags & 0x0F) | (((byte)value & 0x0F) << 4));
+    }
+}
+
+public enum OperationGuidePoint : byte {
+    TopLeft,
+    Top,
+    TopRight,
+    Left,
+    Center,
+    Right,
+    BottomLeft,
+    Bottom,
+    BottomRight,
 }
