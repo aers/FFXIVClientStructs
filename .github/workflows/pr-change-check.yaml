@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: ./github/composites/update-dotnet
+      - uses: ./.github/composites/update-dotnet
       - name: Install dependencies
         run: dotnet restore
       - name: Run CExporter
@@ -117,7 +117,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: ./github/composites/update-dotnet
+      - uses: ./.github/composites/update-dotnet
       - name: Install dependencies for PR branch
         run: dotnet restore
       - name: Build PR branch
@@ -134,7 +134,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
-      - uses: ./github/composites/update-dotnet
+      - uses: ./.github/composites/update-dotnet
       - name: Install dependencies for Main branch
         run: dotnet restore
       - name: Build Main branch
