@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkStage
 //   Component::GUI::AtkEventTarget
 [GenerateInterop]
+[Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0x75E00)]
 public unsafe partial struct AtkStage {
-    [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
     [FieldOffset(0x10)] public AtkFontManager* AtkFontManager;
     [FieldOffset(0x18)] public AtkTextureResourceManager* AtkTextureResourceManager;
     [FieldOffset(0x20)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
