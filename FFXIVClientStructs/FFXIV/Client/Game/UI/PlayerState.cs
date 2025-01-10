@@ -25,10 +25,15 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<int> _penaltyTimestamps;
 
     [FieldOffset(0x79)] public byte MaxLevel;
+    /// <remarks> Row Id of ExVersion sheet </remarks>
     [FieldOffset(0x7A)] public byte MaxExpansion;
+    /// <remarks> 0 = Male, 1 = Female </remarks>
     [FieldOffset(0x7B)] public byte Sex;
+    /// <remarks> Row Id of Race sheet </remarks>
     [FieldOffset(0x7C)] public byte Race;
+    /// <remarks> Row Id of Tribe sheet </remarks>
     [FieldOffset(0x7D)] public byte Tribe;
+    /// <remarks> Row Id of ClassJob sheet </remarks>
     [FieldOffset(0x7E)] public byte CurrentClassJobId;
 
     [FieldOffset(0x80)] public nint CurrentClassJobRow;

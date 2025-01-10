@@ -30,11 +30,16 @@ public unsafe partial struct LayoutWorld {
     [FieldOffset(0x220)] public StdMap<Utf8String, Pointer<byte>>* RsvMap;
     [FieldOffset(0x228)] public StdMap<ulong, Pointer<byte>>* RsfMap; // Key is v0 index hash, value is always 64 bytes in size
 
+    /// <remarks> Tries to get it from <see cref="ActiveLayout"/> first, then from <see cref="GlobalLayout"/>. </remarks>
+    [MemberFunction("E9 ?? ?? ?? ?? 8B 43 78")]
+    public static partial ILayoutInstance* GetLayoutInstance(InstanceType instanceType, uint instanceId, uint subId = 0);
+
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 44 89 B7")]
     public static partial void UnloadPrefetchLayout();
 
+    /// <remarks> <paramref name="festivals"/> is a pointer to an array of 4 <see cref="GameMain.Festival"/>s. </remarks>
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 41 20"), GenerateStringOverloads]
-    public partial void LoadPrefetchLayout(int type, byte* bgName, byte layerEntryType, uint levelId, uint territoryTypeId, GameMain* gameMain, uint cfcId);
+    public partial void LoadPrefetchLayout(int type, byte* bgName, byte layerEntryType, uint levelId, uint territoryTypeId, GameMain.Festival* festivals, uint cfcId);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 83 B9 ?? ?? ?? ?? ?? 48 8B F1"), GenerateStringOverloads]
     public partial byte* ResolveRsvString(byte* rsvString);

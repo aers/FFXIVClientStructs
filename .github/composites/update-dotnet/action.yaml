@@ -1,0 +1,9 @@
+name: "Update Dotnet SDK"
+description: "Updates the Dotnet SDK to the latest version"
+runs:
+  using: "composite"
+  steps:
+    - name: "Update Dotnet SDK"
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x

@@ -35,4 +35,12 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 32 C0 33 D2"), GenerateStringOverloads]
     public partial void SetText(byte* text);
+
+    /// <summary>
+    /// Insert text at the current cursor position.
+    /// </summary>
+    /// <param name="text">Text to insert.</param>
+    /// <param name="unique">If true, only insert if the text is not already in the input.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 5D E8"), GenerateStringOverloads]
+    public partial void InsertText(byte* text, bool unique = false);
 }

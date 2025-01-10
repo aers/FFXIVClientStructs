@@ -128,6 +128,7 @@ functions:
 #fail   0x1403297E0: GetGlobalTextParameter
   0x140691E20: std::vector<Component::GUI::AtkValue>_SetSize
   0x140E92FD0: GetGameObjectByIndex
+  0x1406FB690: GetLayoutInstance
   0x1408FA950: GetRandomInteger
   0x1408FA9B0: GetRandomFloat
   0x1404C95D0: UpdateAnimFactor
@@ -492,6 +493,7 @@ classes:
       0x1405B1B90: GetTourismDirector
       0x1405B2070: UpdateGameSpeedMultiplier
       0x1405B2160: SetActiveFestivals
+      0x1400B71B0: IsInSaveTheQueenInstance # static, IsInSaveTheQueenInstance(bool includeDelubrumReginae)
       0x140960500: IsInPvPInstance
       0x1409605B0: IsInPvPArea
       0x1405AEF80: GetEventGPoseController
@@ -1200,18 +1202,40 @@ classes:
       - ea: 0x14280EFA0
         pointer: False
     funcs:
-      0x140A1E300: GetSingleton
       0x1400BA980: IsQuestComplete # static (questId)
-      0x140C29F00: IsQuestComplete1 # (this, questId)
-      0x140C29F90: IsDailyQuestComplete
-      0x140C2A250: GetQuestSequence # static (questId)
-      0x140C29C10: GetQuestIndex
-      0x140C2A350: GetQuestClassJob
-      0x140C29FD0: IsQuestAccepted
-      0x140C2A510: GetBeastTribeAllowance
-      0x140CD2FE0: IsRecipeComplete # static (uint recipeId)
-      0x14183CBC0: IsLevequestComplete
       0x1409742B0: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
+      0x140A18FE0: SetUnkBitmask3
+      0x140A19030: SetUnkBitmask2Bit2
+      0x140A1CCD0: SetGatheringSuccessfulChainCount
+      0x140A1CCE0: SetUnkBitmask2
+      0x140A1CD50: SetUnkBitmask2Bit
+      0x140A1CD70: SetSeenNotebookDivisionLevelRangeBitmask
+      0x140A1CDA0: SetGatheredGatheringItemBitmask
+      0x140A1CE00: SetGatheredGatheringItemBitmaskBit
+      0x140A1CE20: SetSeenCraftingNotebookDivisionLevelRangeBitmask
+      0x140A1CE60: SetCompletedRecipesBitmask
+      0x140A1D3D0: SetCompletedQuestsBitmask
+      0x140A1D4F0: SetUnlockedMapMarkersBitmask
+      0x140A1D6D0: SetUnkBitmask1
+      0x140A1DC90: SetCompletedLeveQuestsBitmask
+      0x140A1E300: GetSingleton
+      0x140C29C10: GetQuestIndex
+      0x140C29F00: IsQuestComplete1 # (this, questId)
+      0x140C29F40: IsMapMarkerUnlocked # static (BattleChara* localPlayer, byte mapMarkerUnknown1)
+      0x140C29F90: IsDailyQuestComplete
+      0x140C29FD0: IsQuestAccepted
+      0x140C2A250: GetQuestSequence # static (questId)
+      0x140C2A350: GetQuestClassJob
+      0x140C2A410: IsQuestRepeatFlagSet # (byte, questRepeatFlag)
+      0x140C2A510: GetBeastTribeAllowance
+      0x140C2B7F0: IsUnkBitmask1Set
+      0x140CC11D0: IsGatheringItemGathered # static (ushort gatheringItemId)
+      0x140CC1230: IsGatheringNotebookDivisionLevelRangeSeen # static (uint gatheringTypeId, uint notebookDivisionId)
+      0x140CC12C0: SetSeenGatheringNotebookDivisionLevelRangeBitmaskBit
+      0x140CD2FE0: IsRecipeComplete # static (uint recipeId)
+      0x140CD3080: IsCraftingNotebookDivisionLevelRangeSeen # static (int craftingType, uint notebookDivisionId)
+      0x140CD3120: SetSeenCraftingNotebookDivisionLevelRangeBitmaskBit
+      0x14183CBC0: IsLevequestComplete
   Client::Game::MirageManager:
     instances:
       - ea: 0x1427ED6C0
@@ -1327,6 +1351,7 @@ classes:
       0x140390D00: GetMateriaId
       0x1407BEBC0: GetMateriaGrade
       0x1407FE580: ctor
+      0x1407FE5D0: Finalize
       0x1407FE940: GetLinkedItem
       0x1407FEE60: GetConditionPercentage
       0x1407FEEA0: GetStain
@@ -2029,6 +2054,7 @@ classes:
         pointer: False
     funcs:
       0x1409ABF80: HandleExaminePacket
+      0x1409AC810: RequestByEntityId
   Client::Game::UI::NpcTrade:
     instances:
       - ea: 0x142801EB0
@@ -4806,6 +4832,15 @@ classes:
       0x14025ABC0: SetupButtonsForGameObjectTarget # gameobjects that arent characters
       0x14025BF40: AddMenuItem2 # (this, uint textId, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
       0x14025BFB0: AddMenuItem # (this, char* text, AtkEventInterface* handler, long handlerParam, bool disabled, bool submenu)
+      0x140259D60: AddBlacklistMenuItem
+      0x140259F50: AddLocalPlayerMenuItems
+      0x14025BB50: AddSendFriendRequestMenuItem
+      0x14025D0D0: AddInviteToCrossWorldLinkshellMenuItem
+      0x14025D510: AddInviteToFellowshipMenuItem
+      0x14025C550: AddInviteToPvPTeamEntryMenuItem
+      0x14025CEC0: AddInviteToLinkshellMenuItem
+      0x14025D300: AddInviteToFreeCompanyMenuItem
+      0x14025D3B0: AddViewFreeCompanyProfileMenuItem
       0x14025C3E0: IsAllowedToOpenGameObjectTarget
       0x14025C440: IsAllowedToOpenCharacterTarget
       0x14025DED0: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
@@ -5614,7 +5649,9 @@ classes:
       0x140598F30: ctor_FromState
       0x140598F80: ctor
       0x140598F60: Finalizer
+      0x140598FB0: Resume
       0x140599850: Yield
+      0x140599860: GetStatus
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x141FA8718
@@ -5693,6 +5730,7 @@ classes:
   Client::System::Photo::ScreenShot:
     instances:
       - ea: 0x1427BFB70
+        pointer: true
     vtbls:
       - ea: 0x141F62440
         base: Client::System::Framework::Task
@@ -6544,6 +6582,8 @@ classes:
       0x140661FF0: ctor
       0x140662210: Finalizer
       0x140660520: SetText
+      0x140660DA0: InsertText
+      0x140661FD0: SetFontSize
   Component::GUI::AtkComponentNumericInput:
     vtbls:
       - ea: 0x141F677C8
@@ -6762,6 +6802,7 @@ classes:
       0x1406AF970: CreateSingleton
       0x1406B09A0: LoadPrefetchLayout
       0x1406B0D50: UnloadManagerLayout
+      0x1406B38C0: GetLayoutInstance
       0x1406B4380: AddRsvString
       0x1406B4620: UnloadRsvMap
       0x1406B4770: ResolveRsvString
@@ -6779,6 +6820,7 @@ classes:
       0x1406B93B0: ctor
       # 0x1405C9C00: SetInteriorFixture # inlined @ 1406CDF00
       0x1406BCCD0: SetActiveFestivals
+      0x1406C5400: GetLayoutInstance
   Client::LayoutEngine::OutdoorAreaLayoutData:
     funcs:
       0x14069EA70: SetFixture # inlined in 0x1406F4B60 (not 100% sure)
@@ -7873,8 +7915,7 @@ classes:
       0: Dtor
     funcs:
       0x14091DF60: ctor
-#       0x1406B26A0: Finalizer # Inlined in dtor
-      0x14091E040: Populate
+      0x14091E000: Finalizer
       0x14091E1D0: GetWorldById
       0x14091E250: GetWorldNameById
       0x14091E2B0: GetWorldIdByName
@@ -7986,7 +8027,7 @@ classes:
     funcs:
       0x140926C50: ctor
       0x140926F90: Finalize2
-      0x140927050: SetCustomizeData
+      0x140927050: SetModelData
       0x1409271B0: Render
       0x140927D70: UnequipGear
       0x1409281D0: SetItemSlotData
@@ -7994,6 +8035,10 @@ classes:
       0x1409285F0: GetCharacter
       0x1418C94E0: ToggleAnimationPlayback
       0x1418C9580: IsAnimationPaused
+  Client::UI::Misc::CharaViewModelData:
+    funcs:
+      0x1409269B0: ctor
+      0x140926A00: CopyFromCharacter
   Client::UI::Misc::CharaViewCharacterData:
     funcs:
       0x1418AC7B0: ctor
@@ -8216,6 +8261,8 @@ classes:
       0x1405C0140: GetAvailablePoses
       0x1405C0190: Initialize
       0x1405C09C0: SetPose
+      0x1405C0E70: IsEmoting
+      0x1405C0EB0: IsInEmoteLoop
       0x1405C2B40: GetPoseState
       0x1405C3EB0: GetPoseKind
   Client::Game::Control::EmoteController::FindChairInfo:
@@ -8243,6 +8290,8 @@ classes:
       0x140845F70: EquipGlassesIds # sends it to the server
       0x140846000: GetGlassesId
       0x140846020: SetGlasses
+      0x140846600: SetFreeCompanyCrestData
+      0x140846650: SetFreeCompanyCrestBitfield
   Client::Game::Character::CompanionContainer:
     vtbls:
       - ea: 0x141F7F600
@@ -8417,6 +8466,7 @@ classes:
       0x140874800: ctor
       0x140877440: Finalizer
       0x140878500: ExecuteMacro
+      0x1408786D0: CancelMacro
       0x140878700: TryGetMacroIconCommand
       0x140878880: ChangeChatChannel
       0x140878D70: SetContextTellTarget
@@ -9615,6 +9665,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EEAC40: ctor
+  Client::UI::Agent::AgentRetainerStatus::RetainerStatusCharaView:
+    vtbls:
+      - ea: 0x141F9D6D8
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentRetainerStatus:
     vtbls:
       - ea: 0x141F9D740
@@ -10363,7 +10417,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
     vtbls:
-      - ea: 0x141FC3078
+      - ea: 0x141FAC9F8
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentMiragePrismMiragePlate:
     vtbls:
@@ -10390,6 +10444,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140328F40: ctor
+  Client::UI::Agent::AgentFashion::FashionCharaView:
+    vtbls:
+      - ea: 0x141FC3078
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentFashion:
     vtbls:
       - ea: 0x141FC30E8
@@ -12281,6 +12339,7 @@ classes:
       0x140C2C920: LuaQuestUnqualified
       0x140C2D480: LuaGetQuestBattleProgress
       0x140C2D930: LuaYesNoQuestBattle
+      0x140C2DB00: GetFestivals
       0x140C2DBC0: LuaSetWeddingFestivalParam
       0x140C2DCE0: LuaGetWeddingReservedFlag
       0x140C2DD60: LuaGetGsWeeklyLotOffsetTime

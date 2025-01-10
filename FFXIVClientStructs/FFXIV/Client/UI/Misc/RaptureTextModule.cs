@@ -39,6 +39,12 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0xE30)] internal ExcelSheet* AkatsukiNoteStringSheet;
     [FieldOffset(0xE38)] public int SoundId;
     [FieldOffset(0xE3C)] public int IsJingle;
+    // [FieldOffset(0xE40)] public ExcelSheetWaiter* WeatherReportReplaceIdsLoader;
+    /// <remarks> Array of 4 (WeatherReportReplace row count - 1) * 2 ushorts (PlaceNameSub, PlaceNameParent). </remarks>
+    [FieldOffset(0xE48)] public ushort* WeatherReportReplaceIds;
+    // [FieldOffset(0xE50)] public ExcelSheetWaiter* AkatsukiNoteTitleIdsLoader;
+    /// <remarks> Array of 51 (AkatsukiNote row count) ushorts. Mapping AkatsukiNote RowId to AkatsukiNoteString RowId. </remarks>
+    [FieldOffset(0xE58)] public ushort* AkatsukiNoteTitleIds;
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial byte* GetAddonText(uint addonId);

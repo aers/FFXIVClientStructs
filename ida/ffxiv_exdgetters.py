@@ -77,6 +77,7 @@ if api is None:
         import ida_typeinf
         import ida_hexrays
         import ida_name
+        import idc
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
@@ -166,14 +167,35 @@ if api is None:
                     if ea == 0xFFFFFFFFFFFFFFFF:
                         break
 
-                    # this is mega retarded but it works rofl
-                    ins = self.search_binary(
-                        ea, "44 8B C1 BA ? ? ? ?", ida_search.SEARCH_DOWN
-                    )
-                    sheetIdx = self.get_dword(ins + 4)
+                    funcEa = ea
 
+                    # This gets the first instance of EDX register followed by the RCX register, we need the value that is sent to the EDX register
+                    ins = idc.get_operand_value(ea, 0)
+                    while ins != 0x2:
+                        if ins == 0x0:
+                            ea = ea + 7
+                        elif ins == 0x4:
+                            ea = ea + 4
+                        elif ins == 0x8 or ins == 0x9:
+                            ins = idc.get_operand_type(ea, 1)
+                            if ins == 0x1:
+                                ea = ea + 3
+                            elif ins == 0x4:
+                                ea = ea + 7
+                            else:
+                                raise Exception("Unknown instruction {0} on function {1}".format(hex(ins), hex(funcEa)))
+                        elif ins == 0x1:
+                            ea = ea + 4
+                        elif ins == 0x28:
+                            ea = ea + 9
+                        else:
+                            raise Exception("Unknown instruction {0} on function {1}".format(hex(ins), hex(funcEa)))
+                        ins = idc.get_operand_value(ea, 0)
+                    
+                    sheetIdx = self.get_dword(ea + 1)
+                    ea = funcEa
                     origName = idc.get_func_name(ea)
-
+                    
                     # don't rename any funcs that are already named
                     if origName[0:4] == "sub_":
                         if exd_map.get(sheetIdx) == None:
@@ -212,57 +234,57 @@ if api is None:
                             ea, fnName, "Sheet: {0} ({1})".format(sheetName, sheetIdx)
                         )
 
-                    if struct_parsed:
-                        tif, funcdata = (
-                            ida_typeinf.tinfo_t(),
-                            ida_typeinf.func_type_data_t(),
-                        )
+                        if struct_parsed:
+                            tif, funcdata = (
+                                ida_typeinf.tinfo_t(),
+                                ida_typeinf.func_type_data_t(),
+                            )
 
-                        ida_typeinf.guess_tinfo(tif, ea)
-                        if not tif.get_func_details(funcdata):
-                            ida_hexrays.decompile(ea)
                             ida_typeinf.guess_tinfo(tif, ea)
                             if not tif.get_func_details(funcdata):
+                                ida_hexrays.decompile(ea)
+                                ida_typeinf.guess_tinfo(tif, ea)
+                                if not tif.get_func_details(funcdata):
+                                    print(
+                                        "Failed to get func details for %s @ %X"
+                                        % (fnName, ea)
+                                    )
+                                    continue
+
+                            # func_info = ida_typeinf.tinfo_t()
+                            # funcdata = ida_typeinf.func_type_data_t()
+                            # if not ida_nalt.get_tinfo(func_info, ea):
+                            #     print(func_info.is_funcptr() or func_info.is_func())
+                            #     print("Failed to get tinfo for %s @ %X" % (fnName, ea))
+                            #     continue
+
+                            # if not func_info.get_func_details(funcdata):
+                            #     print("Failed to get func details for %s @ %X" % (fnName, ea))
+                            #     continue
+
+                            rettype = self.get_tinfo_from_type(
+                                f"{exd_struct_map[sheetIdx]} *"
+                            )
+
+                            if rettype == None:
                                 print(
-                                    "Failed to get func details for %s @ %X"
-                                    % (fnName, ea)
+                                    "Failed to get rettype for %s"
+                                    % exd_struct_map[sheetIdx]
                                 )
                                 continue
 
-                        # func_info = ida_typeinf.tinfo_t()
-                        # funcdata = ida_typeinf.func_type_data_t()
-                        # if not ida_nalt.get_tinfo(func_info, ea):
-                        #     print(func_info.is_funcptr() or func_info.is_func())
-                        #     print("Failed to get tinfo for %s @ %X" % (fnName, ea))
-                        #     continue
+                            funcdata.push_back(row_id_arg)
 
-                        # if not func_info.get_func_details(funcdata):
-                        #     print("Failed to get func details for %s @ %X" % (fnName, ea))
-                        #     continue
+                            if suffix == "RowAndSubRowId":
+                                funcdata.push_back(sub_row_id_arg)
 
-                        rettype = self.get_tinfo_from_type(
-                            f"{exd_struct_map[sheetIdx]} *"
-                        )
+                            funcdata.rettype = rettype
 
-                        if rettype == None:
-                            print(
-                                "Failed to get rettype for %s"
-                                % exd_struct_map[sheetIdx]
-                            )
-                            continue
+                            if not tif.create_func(funcdata):
+                                print("! failed to create function type for", fnName)
+                                return
 
-                        funcdata.push_back(row_id_arg)
-
-                        if suffix == "RowAndSubRowId":
-                            funcdata.push_back(sub_row_id_arg)
-
-                        funcdata.rettype = rettype
-
-                        if not tif.create_func(funcdata):
-                            print("! failed to create function type for", fnName)
-                            return
-
-                        ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+                            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
             def create_enum(self, name, values):
                 enum_id = ida_enum.add_enum(idaapi.BADADDR, name, 0)
@@ -386,7 +408,7 @@ f.close()
 
 game_data = GameData(join(config["GamePath"], "game"))
 
-# nb: "pattern": "func suffix" OR None
+# nb: "pattern": ("func suffix", "instance pointer sig") OR None
 exd_func_patterns = {
     "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "Row",
     "48 83 EC 28 85 C9 74 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 07 33 C0 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "Row",

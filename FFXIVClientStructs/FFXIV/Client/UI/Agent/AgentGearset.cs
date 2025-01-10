@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xBC0)]
 public unsafe partial struct AgentGearSet {
-    [FieldOffset(0x808)] public GearsetCharaView CharaView;
+    [FieldOffset(0x878)] public GearsetCharaView CharaView;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24")]
     public partial void OpenBannerEditorForGearset(int gearsetId);
