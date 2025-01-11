@@ -9344,6 +9344,10 @@ classes:
     vtbls:
       - ea: 0x141F38BB0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F38C28
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+      - ea: 0x141F38C30
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x1402FB620: ctor
   Client::UI::Agent::AgentFreeCompanyProfile:
@@ -9365,14 +9369,20 @@ classes:
     vtbls:
       - ea: 0x141F38F28
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F38FA0
+        base: Client::UI::Info::InfoEventHandlerInterface
   Client::UI::Agent::AgentFreeCompanyCrestEditor:
     vtbls:
       - ea: 0x141F38FA8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F39020
+        base: Client::UI::Info::InfoEventHandlerInterface
   Client::UI::Agent::AgentFreeCompanyCrestDecal:
     vtbls:
       - ea: 0x141F39028
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F390A0
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x140309B30: ctor
       0x140309C10: Finalizer
@@ -9557,7 +9567,7 @@ classes:
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
       - ea: 0x142080270
         base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
-      - ea: 0x141F382A8
+      - ea: 0x142080280
         base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x14149F440: ctor
@@ -9864,6 +9874,8 @@ classes:
     vtbls:
       - ea: 0x141F3ADD0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F3AE48
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x14033D9E0: ctor
   Client::UI::Agent::AgentCurrency:
@@ -10220,6 +10232,8 @@ classes:
     vtbls:
       - ea: 0x141FC76C0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC7738
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x140E131C0: ctor
       0x140E13300: Finalizer
@@ -10368,6 +10382,8 @@ classes:
     vtbls:
       - ea: 0x141F3B508
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F3B580
+        base: Client::UI::Info::InfoEventHandlerInterface
 #    funcs:
 #       0x1402AF1F0: ctor # inlined
   Client::UI::Agent::AgentPvPTeamOrganization:
@@ -10502,6 +10518,8 @@ classes:
     vtbls:
       - ea: 0x1420808C8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142080940
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x1414CEED0: ctor
       0x1414CEF70: Finalizer
@@ -10629,6 +10647,9 @@ classes:
     vtbls:
       - ea: 0x141F38228
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Info::InfoEventHandlerInterface:
+    vtbls:
+      - ea: 0x141F382A8
   Client::UI::Agent::AgentEmjSetting:
     vtbls:
       - ea: 0x141FC2800
