@@ -60,4 +60,8 @@ public unsafe partial struct AgentInventoryContext {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 8B 83")]
     public partial void LowerItemQuality(InventoryItem* itemSlot, InventoryType inventory, int slot, uint addonId);
+
+    [GenerateInterop(isInherited: true)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public partial struct InventoryContextEvent; // contains 2 vfs
 }

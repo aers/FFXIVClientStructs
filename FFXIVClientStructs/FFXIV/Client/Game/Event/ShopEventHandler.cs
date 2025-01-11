@@ -1,11 +1,15 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::ShopEventHandler
+//   Client::Game::Event::EventHandler
+//   Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
 [GenerateInterop]
-[Inherits<EventHandler>]
+[Inherits<EventHandler>, Inherits<AgentInventoryContext.InventoryContextEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x32F0)]
 public unsafe partial struct ShopEventHandler {
     // 0x210: second base class, related to context menu integration for selling items
