@@ -9107,6 +9107,10 @@ classes:
     vtbls:
       - ea: 0x141FC5410
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC5490
+        base: Client::Game::UI::GameEventCallback
+      - ea: 0x141FC54A0
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140D54060: ctor
       0x140D54190: Finalizer
@@ -9922,6 +9926,8 @@ classes:
     vtbls:
       - ea: 0x142080798
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142080810
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x1414CA850: ctor
       0x1414CA9D0: Finalizer
@@ -9980,6 +9986,8 @@ classes:
     vtbls:
       - ea: 0x141F39310
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F39438
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x14032BC90: ctor
       0x14032BE90: Finalizer
@@ -10410,6 +10418,8 @@ classes:
     vtbls:
       - ea: 0x141FC8998
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC8A10
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140E94D90: ctor
       0x140E94E50: Finalizer
@@ -10499,6 +10509,8 @@ classes:
     vtbls:
       - ea: 0x141FAB6F8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FAB770
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140BA38D0: ctor
   Client::UI::Agent::AgentReconstructionBuyback:
@@ -10675,6 +10687,8 @@ classes:
     vtbls:
       - ea: 0x141FC6240
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC62D8
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140DC85F0: ctor
   Client::UI::Agent::AgentHugeCraftworksSupplyResult:
@@ -10687,12 +10701,16 @@ classes:
     vtbls:
       - ea: 0x141F9DD30
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F9DDA8
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140A88E90: ctor
   Client::UI::Agent::AgentBankaCraftworksSupply:
     vtbls:
       - ea: 0x141FC8CB8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC8D30
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140EA13F0: ctor
   Client::UI::Agent::AgentCircleInvite:
@@ -10796,6 +10814,8 @@ classes:
     vtbls:
       - ea: 0x141FABEA8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FABF20
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140BBFBD0: ctor
   Client::UI::Agent::AgentHwdGathererInspectionItemCount:
@@ -11587,6 +11607,10 @@ classes:
     vtbls:
       - ea: 0x142081830
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1420818A8
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+      - ea: 0x1420818B0
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x1415102A0: ctor
   Client::UI::Agent::AgentArchiveItem:
@@ -12653,6 +12677,10 @@ classes:
     vtbls:
       - ea: 0x142085F40
         base: Client::Game::Event::EventHandler
+      - ea: 0x1420867A8
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+      - ea: 0x142085F28
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::TopicSelectEventHandler: # 0x32
     vtbls:
       - ea: 0x142123850
