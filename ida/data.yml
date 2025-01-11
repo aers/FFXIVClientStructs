@@ -2762,7 +2762,7 @@ classes:
       0x14006AA30: GetConfigOption
       0x14006A9E0: SetConfigOption
       0x14006AF20: RegisterChangeEvent
-      0x14006AF90: UnRegisterChangeEvent
+      0x14006AF90: UnregisterChangeEvent
   Common::Configuration::UIConfig:
     vtbls:
       - ea: 0x141F0A080
@@ -8973,6 +8973,8 @@ classes:
     vtbls:
       - ea: 0x141FC56B0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC5728
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140D756C0: ctor
       0x140D76610: Finalizer
@@ -9166,6 +9168,8 @@ classes:
     vtbls:
       - ea: 0x141FC5CD0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC5D48
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140DB3590: ctor
   Client::UI::Agent::AgentHowToNotice:
@@ -9314,6 +9318,10 @@ classes:
     vtbls:
       - ea: 0x141F38B10
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F38B88
+        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
+      - ea: 0x141F38B98
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x1402E5E00: Finalizer
   Client::UI::Agent::AgentGoldSaucerReward:
@@ -9397,6 +9405,8 @@ classes:
     vtbls:
       - ea: 0x141FC5DD0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC5E48
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140DB4A50: ctor
       0x140DB4AC0: Finalizer
@@ -9478,6 +9488,8 @@ classes:
     vtbls:
       - ea: 0x141FC81E0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC8258
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140E4A980: ctor
       0x140E4B100: Finalizer
@@ -11230,6 +11242,8 @@ classes:
     vtbls:
       - ea: 0x141F37548
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F37618
+        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
     funcs:
       0x1402B0420: ctor
   Client::UI::Agent::AgentConfigSystem:
@@ -11260,6 +11274,8 @@ classes:
     vtbls:
       - ea: 0x141F37D18
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC83A0
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
   Client::UI::Agent::AgentHudLayout:
     vtbls:
       - ea: 0x141FC6070
