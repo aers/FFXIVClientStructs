@@ -2410,6 +2410,8 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141F8CF58
+    funcs:
+      0x1409CADF0: GetQueueInfo
   Client::Game::UI::Wedding:
     instances:
       - ea: 0x1428096F0
