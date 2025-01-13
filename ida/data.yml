@@ -5889,6 +5889,7 @@ classes:
       0x1405E2400: SetValueForced
       0x1405E2440: SetValueForcedUtf8
       0x1405E24C0: SetValueAndUpdate # calls SetValue with silent = false
+      0x1405E24F0: SetValueAndUpdateUtf8 # calls SetValue with silent = false
   Component::GUI::ExtendArrayData:
     vtbls:
       - ea: 0x141F65C98
