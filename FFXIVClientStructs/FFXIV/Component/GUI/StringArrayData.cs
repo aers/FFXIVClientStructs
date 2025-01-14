@@ -32,7 +32,7 @@ public unsafe partial struct StringArrayData {
     /// </param>
     [MemberFunction("E8 ?? ?? ?? ?? 44 38 63 0E"), GenerateStringOverloads]
     public partial void SetValue(int index, byte* value, bool readBeforeWrite = true, bool managed = true, bool suppressUpdates = false);
-    
+
     /// <summary>
     /// Set a value at the specified index of the StringArray.
     /// </summary>
@@ -99,7 +99,7 @@ public unsafe partial struct StringArrayData {
     /// </param>
     [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 50 8B 54 24 68")]
     public partial void SetValueForcedUtf8(int index, Utf8String* value, bool readBeforeWrite = true);
-    
+
     /// <summary>
     /// Set a value at the specified index of the StringArray.
     /// </summary>
