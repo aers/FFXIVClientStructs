@@ -79,31 +79,31 @@ public unsafe partial struct UIState {
 
     // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
-    [FieldOffset(0x180E4), FixedSizeArray] internal FixedSizeArray92<byte> _unlockLinkBitmask; // TODO: this size cant be right, can it? - fixed for 7.1
+    [FieldOffset(0x180E4), FixedSizeArray] internal FixedSizeArray92<byte> _unlockLinkBitmask;
 
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
     // Size: (AetheryteSheet.RowCount + 7) / 8
-    [FieldOffset(0x18140), FixedSizeArray] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask; // fixed for 7.1
+    [FieldOffset(0x18140), FixedSizeArray] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
 
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
     // Size: (HowToSheet.RowCount + 7) / 8
-    [FieldOffset(0x1815E), FixedSizeArray] internal FixedSizeArray36<byte> _unlockedHowtoBitmask;  // fixed for 7.1
+    [FieldOffset(0x1815E), FixedSizeArray] internal FixedSizeArray36<byte> _unlockedHowtoBitmask;
 
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     // Size: (CompanionSheet.RowCount + 7) / 8
-    [FieldOffset(0x18182), FixedSizeArray] internal FixedSizeArray68<byte> _unlockedCompanionsBitmask;  // fixed for 7.1
+    [FieldOffset(0x18182), FixedSizeArray] internal FixedSizeArray68<byte> _unlockedCompanionsBitmask;
 
     // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
-    [FieldOffset(0x181C6), FixedSizeArray] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;  // fixed for 7.1
+    [FieldOffset(0x181C6), FixedSizeArray] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
 
     // Ref: UIState#IsCutsceneSeen
     // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) / 8
-    [FieldOffset(0x181D2), FixedSizeArray] internal FixedSizeArray166<byte> _cutsceneSeenBitmask;  // fixed for 7.1
+    [FieldOffset(0x181D2), FixedSizeArray] internal FixedSizeArray166<byte> _cutsceneSeenBitmask;
 
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount / 8
-    [FieldOffset(0x18279), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;  // fixed for 7.1
+    [FieldOffset(0x18279), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;
     [FieldOffset(0x182B0)] public ulong UnlockedTripleTriadCardsCount;
 
     [FieldOffset(0x182CA)] public float TerritoryTypeTransientOffsetZ; // TODO: this is a short in the sheet and copied with a 4 byte register??
