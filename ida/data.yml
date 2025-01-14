@@ -5220,6 +5220,7 @@ classes:
   Client::Graphics::Render::Manager:
     instances:
       - ea: 0x14261EE28
+        pointer: True
     vtbls:
       - ea: 0x141F4ADA8
         base: Client::Graphics::Singleton
