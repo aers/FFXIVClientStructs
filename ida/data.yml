@@ -727,8 +727,74 @@ classes:
     instances:
       - ea: 0x142620A80
     funcs:
-      0x1401A9D80: ctor # static
       0x1400A1D40: GetInstance
+      0x1401A9D80: ctor # static
+      0x1401A9DE0: Setup
+  Client::System::Input::InputDevice:
+    vtbls:
+      - ea: 0x141F33508
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x14022BB00: ctor
+      0x14022BB90: Finalizer
+  Client::System::Input::RepeatCounter:
+    vtbls:
+      - ea: 0x141F334D0
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x14022B860: ctor
+      0x14022B920: Finalizer
+  Client::System::Input::PadDeviceInterface:
+    vtbls:
+      - ea: 0x141F0AF08
+    vfuncs:
+      0: Dtor
+      13: SetVibration
+  Client::System::Input::PadDevice:
+    vtbls:
+      - ea: 0x141F0AFE0
+        base: Client::System::Input::PadDeviceInterface
+      - ea: 0x141F0B0B8
+        base: Client::System::Input::InputDevice
+      - ea: 0x141F0B0C0
+        base: Client::System::Input::RepeatCounter
+    funcs:
+      0x1400933A0: ctor
+  Client::System::Input::MouseDeviceInterface:
+    vtbls:
+      - ea: 0x14208A468
+    vfuncs:
+      0: Dtor
+  Client::System::Input::MouseDevice:
+    vtbls:
+      - ea: 0x14208A4B0
+        base: Client::System::Input::MouseDeviceInterface
+      - ea: 0x14208A4F8
+        base: Client::System::Input::RepeatCounter
+      - ea: 0x14208A500
+        base: Client::System::Input::InputDevice
+    funcs:
+      0x1415C3F70: ctor
+  Client::System::Input::KeyboardDeviceInterface:
+    vtbls:
+      - ea: 0x141F60D18
+  Client::System::Input::KeyboardDevice:
+    vtbls:
+      - ea: 0x141F60D50
+        base: Client::System::Input::KeyboardDeviceInterface
+      - ea: 0x141F60D88
+        base: Client::System::Input::RepeatCounter
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x140591690: ctor
+  Client::System::Input::VibrationControl:
+    vtbls:
+      - ea: 0x141F79B50
+    funcs:
+      0x140759540: ctor
   Client::System::Resource::Handle::ResourceHandleFactory:
   Client::UI::Agent::AgentMap::MapMarkerStructSearch:
   Client::UI::Atk2DMap:
@@ -2410,6 +2476,8 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141F8CF58
+    funcs:
+      0x1409CADF0: GetQueueInfo
   Client::Game::UI::Wedding:
     instances:
       - ea: 0x1428096F0
@@ -5218,6 +5286,7 @@ classes:
   Client::Graphics::Render::Manager:
     instances:
       - ea: 0x14261EE28
+        pointer: True
     vtbls:
       - ea: 0x141F4ADA8
         base: Client::Graphics::Singleton
@@ -5889,6 +5958,7 @@ classes:
       0x1405E2400: SetValueForced
       0x1405E2440: SetValueForcedUtf8
       0x1405E24C0: SetValueAndUpdate # calls SetValue with silent = false
+      0x1405E24F0: SetValueAndUpdateUtf8 # calls SetValue with silent = false
   Component::GUI::ExtendArrayData:
     vtbls:
       - ea: 0x141F65C98
