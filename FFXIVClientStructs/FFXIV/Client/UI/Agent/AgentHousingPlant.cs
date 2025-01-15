@@ -5,9 +5,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentHousingPlant
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
 [Agent(AgentId.HousingPlant)]
 [GenerateInterop]
-[Inherits<AgentInterface>]
+[Inherits<AgentInterface>, Inherits<AgentInventoryContext.InventoryContextEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x950)]
 public unsafe partial struct AgentHousingPlant {
     [FieldOffset(0x40)] public uint ContextAddonId;

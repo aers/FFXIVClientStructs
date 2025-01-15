@@ -2830,7 +2830,7 @@ classes:
       0x14006AA30: GetConfigOption
       0x14006A9E0: SetConfigOption
       0x14006AF20: RegisterChangeEvent
-      0x14006AF90: UnRegisterChangeEvent
+      0x14006AF90: UnregisterChangeEvent
   Common::Configuration::UIConfig:
     vtbls:
       - ea: 0x141F0A080
@@ -5002,6 +5002,8 @@ classes:
     vtbls:
       - ea: 0x141F38A88
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F38B00
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x1402E2BF0: ctor
       0x1402E2CF0: Finalizer
@@ -5009,6 +5011,10 @@ classes:
     vtbls:
       - ea: 0x141F38E98
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F38F10
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
+      - ea: 0x141F38F20
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x1403005B0: ctor
       0x140300770: Finalizer # inlined @ 0x1403CD9F0
@@ -9037,6 +9043,8 @@ classes:
     vtbls:
       - ea: 0x141FC56B0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC5728
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140D756C0: ctor
       0x140D76610: Finalizer
@@ -9079,6 +9087,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A828F0: ctor
+  Client::UI::Agent::AgentInventoryContext::InventoryContextEvent:
+    vtbls:
+      - ea: 0x141F36778
   Client::UI::Agent::AgentInventoryContext:
     vtbls:
       - ea: 0x141F36788
@@ -9168,6 +9179,10 @@ classes:
     vtbls:
       - ea: 0x141FC5410
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC5490
+        base: Client::Game::UI::GameEventCallback
+      - ea: 0x141FC54A0
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140D54060: ctor
       0x140D54190: Finalizer
@@ -9183,6 +9198,8 @@ classes:
     vtbls:
       - ea: 0x141F9ED58
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F9EDD0
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140AA69B0: ctor
       0x140AA6A80: Finalizer
@@ -9221,6 +9238,8 @@ classes:
     vtbls:
       - ea: 0x141FC5CD0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC5D48
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140DB3590: ctor
   Client::UI::Agent::AgentHowToNotice:
@@ -9330,6 +9349,8 @@ classes:
     vtbls:
       - ea: 0x141F9D650
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F9D6C8
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140A68450: ctor
       0x140A68650: Finalizer
@@ -9367,6 +9388,10 @@ classes:
     vtbls:
       - ea: 0x141F38B10
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F38B88
+        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
+      - ea: 0x141F38B98
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
       0x1402E5E00: Finalizer
   Client::UI::Agent::AgentGoldSaucerReward:
@@ -9397,6 +9422,10 @@ classes:
     vtbls:
       - ea: 0x141F38BB0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F38C28
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+      - ea: 0x141F38C30
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x1402FB620: ctor
   Client::UI::Agent::AgentFreeCompanyProfile:
@@ -9418,14 +9447,20 @@ classes:
     vtbls:
       - ea: 0x141F38F28
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F38FA0
+        base: Client::UI::Info::InfoEventHandlerInterface
   Client::UI::Agent::AgentFreeCompanyCrestEditor:
     vtbls:
       - ea: 0x141F38FA8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F39020
+        base: Client::UI::Info::InfoEventHandlerInterface
   Client::UI::Agent::AgentFreeCompanyCrestDecal:
     vtbls:
       - ea: 0x141F39028
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F390A0
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x140309B30: ctor
       0x140309C10: Finalizer
@@ -9440,6 +9475,8 @@ classes:
     vtbls:
       - ea: 0x141FC5DD0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC5E48
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140DB4A50: ctor
       0x140DB4AC0: Finalizer
@@ -9521,6 +9558,8 @@ classes:
     vtbls:
       - ea: 0x141FC81E0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC8258
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140E4A980: ctor
       0x140E4B100: Finalizer
@@ -9606,6 +9645,12 @@ classes:
     vtbls:
       - ea: 0x1420801F0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142080268
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+      - ea: 0x142080270
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
+      - ea: 0x142080280
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x14149F440: ctor
       0x14149FC60: Finalizer
@@ -9637,6 +9682,8 @@ classes:
     vtbls:
       - ea: 0x142080518
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142080590
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x1414C1F80: ctor
   Client::UI::Agent::AgentPersonalRoomPortal:
@@ -9668,6 +9715,8 @@ classes:
     vtbls:
       - ea: 0x142080698
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142080710
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x1414C65A0: ctor
   Client::UI::Agent::AgentTreasureHunt:
@@ -9743,6 +9792,8 @@ classes:
     vtbls:
       - ea: 0x141F9D740
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F9D7B8
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140A6FF30: ctor
       0x140A70040: Finalizer
@@ -9772,6 +9823,8 @@ classes:
     vtbls:
       - ea: 0x141F9EDE0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F9EE58
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140AA7BB0: ctor
   Client::UI::Agent::AgentRelicSphereUpgrade:
@@ -9903,6 +9956,8 @@ classes:
     vtbls:
       - ea: 0x141F3ADD0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F3AE48
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x14033D9E0: ctor
   Client::UI::Agent::AgentCurrency:
@@ -9965,6 +10020,8 @@ classes:
     vtbls:
       - ea: 0x142080798
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142080810
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x1414CA850: ctor
       0x1414CA9D0: Finalizer
@@ -10023,6 +10080,8 @@ classes:
     vtbls:
       - ea: 0x141F39310
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F39438
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x14032BC90: ctor
       0x14032BE90: Finalizer
@@ -10255,6 +10314,8 @@ classes:
     vtbls:
       - ea: 0x141FC76C0
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC7738
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x140E131C0: ctor
       0x140E13300: Finalizer
@@ -10403,6 +10464,8 @@ classes:
     vtbls:
       - ea: 0x141F3B508
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F3B580
+        base: Client::UI::Info::InfoEventHandlerInterface
 #    funcs:
 #       0x1402AF1F0: ctor # inlined
   Client::UI::Agent::AgentPvPTeamOrganization:
@@ -10453,6 +10516,8 @@ classes:
     vtbls:
       - ea: 0x141FC8998
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC8A10
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140E94D90: ctor
       0x140E94E50: Finalizer
@@ -10535,6 +10600,8 @@ classes:
     vtbls:
       - ea: 0x1420808C8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142080940
+        base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x1414CEED0: ctor
       0x1414CEF70: Finalizer
@@ -10542,6 +10609,8 @@ classes:
     vtbls:
       - ea: 0x141FAB6F8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FAB770
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140BA38D0: ctor
   Client::UI::Agent::AgentReconstructionBuyback:
@@ -10660,6 +10729,9 @@ classes:
     vtbls:
       - ea: 0x141F38228
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Info::InfoEventHandlerInterface:
+    vtbls:
+      - ea: 0x141F382A8
   Client::UI::Agent::AgentEmjSetting:
     vtbls:
       - ea: 0x141FC2800
@@ -10718,6 +10790,8 @@ classes:
     vtbls:
       - ea: 0x141FC6240
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC62D8
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140DC85F0: ctor
   Client::UI::Agent::AgentHugeCraftworksSupplyResult:
@@ -10730,12 +10804,16 @@ classes:
     vtbls:
       - ea: 0x141F9DD30
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F9DDA8
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140A88E90: ctor
   Client::UI::Agent::AgentBankaCraftworksSupply:
     vtbls:
       - ea: 0x141FC8CB8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC8D30
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140EA13F0: ctor
   Client::UI::Agent::AgentCircleInvite:
@@ -10839,6 +10917,8 @@ classes:
     vtbls:
       - ea: 0x141FABEA8
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FABF20
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140BBFBD0: ctor
   Client::UI::Agent::AgentHwdGathererInspectionItemCount:
@@ -11232,6 +11312,8 @@ classes:
     vtbls:
       - ea: 0x141F37548
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F37618
+        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
     funcs:
       0x1402B0420: ctor
   Client::UI::Agent::AgentConfigSystem:
@@ -11262,6 +11344,8 @@ classes:
     vtbls:
       - ea: 0x141F37D18
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC83A0
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
   Client::UI::Agent::AgentHudLayout:
     vtbls:
       - ea: 0x141FC6070
@@ -11630,6 +11714,10 @@ classes:
     vtbls:
       - ea: 0x142081830
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1420818A8
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+      - ea: 0x1420818B0
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x1415102A0: ctor
   Client::UI::Agent::AgentArchiveItem:
@@ -12447,6 +12535,8 @@ classes:
     vtbls:
       - ea: 0x142083C78
         base: Client::Game::Event::EventHandler
+      - ea: 0x1420844E0
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x141591F80: ctor
       0x141592310: CreateInstance
@@ -12576,6 +12666,8 @@ classes:
     vtbls:
       - ea: 0x142085670
         base: Client::Game::Event::EventHandler
+      - ea: 0x142085ED8
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
   Client::Game::InstanceContent::ContentTalkEventHandler:
     vtbls:
       - ea: 0x14211D2A8
@@ -12692,6 +12784,10 @@ classes:
     vtbls:
       - ea: 0x142085F40
         base: Client::Game::Event::EventHandler
+      - ea: 0x1420867A8
+        base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
+      - ea: 0x142085F28
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::TopicSelectEventHandler: # 0x32
     vtbls:
       - ea: 0x142123850
