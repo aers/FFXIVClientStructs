@@ -7,9 +7,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkStage
 //   Component::GUI::AtkEventTarget
 [GenerateInterop]
+[Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0x75E00)]
 public unsafe partial struct AtkStage {
-    [FieldOffset(0x0)] public AtkEventTarget AtkEventTarget;
+    [FieldOffset(0x10)] public AtkFontManager* AtkFontManager;
     [FieldOffset(0x18)] public AtkTextureResourceManager* AtkTextureResourceManager;
     [FieldOffset(0x20)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
     [FieldOffset(0x28)] public AtkInputManager* AtkInputManager;
@@ -25,7 +26,10 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x78)] public AtkDragDropManager DragDropManager;
     [FieldOffset(0x140)] public AtkGroupManager AtkGroupManager;
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
-    [FieldOffset(0x2C0)] public AtkDialogue AtkDialogue;
+    [FieldOffset(0x2B8)] public DialogueStruct Dialogue;
+    [FieldOffset(0x2C0), Obsolete("Use Dialogue.AtkDialogue")] public AtkDialogue AtkDialogue;
+    [FieldOffset(0x2F8)] public FilterStruct Filter;
+    [FieldOffset(0x308)] public OperationGuideStruct OperationGuide;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
     [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray32<AtkEventDispatcher> _atkEventDispatcher;
     [FieldOffset(0x858)] public uint NextEventDispatcherIndex;
@@ -64,4 +68,36 @@ public unsafe partial struct AtkStage {
 
     public ExtendArrayData* GetExtendArrayData(ExtendArrayType type)
         => GetExtendArrayData()[(int)type];
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public struct DialogueStruct {
+        [FieldOffset(0x0)] public AtkStage* AtkStage;
+        [FieldOffset(0x8)] public AtkDialogue AtkDialogue;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct FilterStruct {
+        [FieldOffset(0x00)] public AtkStage* AtkStage;
+        [FieldOffset(0x08)] public short NumActiveSystemFilters;
+        [FieldOffset(0x0A)] public short NumActiveFilters;
+        [FieldOffset(0x0C)] private short SomeOtherNum;
+        [FieldOffset(0x0E)] private short SomeAddonId;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    public unsafe struct OperationGuideStruct {
+        [FieldOffset(0x00)] public AtkStage* AtkStage;
+        [FieldOffset(0x08)] private AtkUnitBase* UnkUnitBase1;
+        [FieldOffset(0x10)] private AtkUnitBase* UnkUnitBase2;
+        [FieldOffset(0x18)] private byte Unk18;
+        [FieldOffset(0x19)] private byte Unk19;
+        [FieldOffset(0x1A)] private byte Unk1A;
+        [FieldOffset(0x1B)] private byte Unk1B;
+        [FieldOffset(0x1C)] private short X;
+        [FieldOffset(0x1E)] private short Y;
+        [FieldOffset(0x20)] private short Width;
+        [FieldOffset(0x22)] private short Height;
+        [FieldOffset(0x24)] private float ScaleX; // result of ScaleX / Scale
+        [FieldOffset(0x28)] private float Scale;
+    }
 }

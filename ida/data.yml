@@ -6482,6 +6482,7 @@ classes:
       0x14061F050: FireCallback
       0x14061FE10: MoveDelta
       0x140622050: UpdateCollisionNodeList
+      0x1406229D0: SetOperationGuide
       0x1406236E0: SetAtkValues
   Component::GUI::AtkComponentBase:
     vtbls:
@@ -14189,6 +14190,12 @@ classes:
       0x140F303A0: GetLastButton
       0x140F303D0: UpdateButtons
       0x140F30680: SetTabIndexAndCallBack
+  Client::UI::AddonCursor:
+    vtbls:
+      - ea: 0x141FCD470
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x140F31E10: ctor
   Client::UI::AddonFadeMiddleBack:
     vtbls:
       - ea: 0x141FCDB30
@@ -14198,6 +14205,10 @@ classes:
   Component::GUI::AtkManagedInterface:
     vtbls:
       - ea: 0x141FCDD70
+    vfuncs:
+      0: ManagedVf0
+      1: ManagedHide
+      2: GetManagedUnitBase
   Client::UI::AddonDialogue:
     vtbls:
       - ea: 0x141FCDD88
@@ -14210,6 +14221,8 @@ classes:
     vtbls:
       - ea: 0x141FCE220
         base: Component::GUI::AtkUnitBase
+      - ea: 0x141FCE460
+        base: Component::GUI::AtkManagedInterface
     funcs:
       0x140F34B50: ctor
   Client::UI::AddonActionMenu:
@@ -14234,6 +14247,8 @@ classes:
     vtbls:
       - ea: 0x141FCE478
         base: Component::GUI::AtkUnitBase
+      - ea: 0x141FCE6B8
+        base: Component::GUI::AtkManagedInterface
     funcs:
       0x140F34FE0: ctor
   Client::UI::AddonBuddy:
@@ -14265,6 +14280,14 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x140F356A0: ctor
+  Client::UI::AddonScreenFrame:
+    vtbls:
+      - ea: 0x141FCE910
+        base: Component::GUI::AtkUnitBase
+      - ea: 0x140F35950
+        base: Component::GUI::AtkManagedInterface
+    funcs:
+      0x140F35950: ctor
   Client::UI::AddonSelectOk:
     vtbls:
       - ea: 0x141FCEDA8
@@ -14312,6 +14335,8 @@ classes:
     vtbls:
       - ea: 0x141FCFDF0
         base: Component::GUI::AtkUnitBase
+      - ea: 0x141FD0030
+        base: Component::GUI::AtkManagedInterface
     funcs:
       0x140F3AF80: ctor
   Client::UI::AddonInputNumeric:

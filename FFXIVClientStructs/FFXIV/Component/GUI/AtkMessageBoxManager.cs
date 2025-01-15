@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct AtkMessageBoxManager {
+    [FieldOffset(0x58)] public AtkStage.DialogueStruct* DialogueWrapper;
     [FieldOffset(0x60)] public ExcelSheet* ErrorSheet;
     [FieldOffset(0x68)] public byte* OkText;
     [FieldOffset(0x70)] public byte* CancelText;
