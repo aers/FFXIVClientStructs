@@ -86,6 +86,7 @@ public enum Code {
     CP0006,
     [Description("Type does not inherit from base type")]
     CP0007,
+    [Description("Type has changed inheritance")]
     CP0008,
     [Description("Type has changed sealed/non-sealed status")]
     CP0009,
