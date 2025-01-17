@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using FFXIVClientStructs.FFXIV.Client.Game.Network;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
