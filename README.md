@@ -20,10 +20,15 @@ This project would not be possible without significant work from many members of
 * [pohky](https://github.com/Pohky)
 * [Caraxi](https://github.com/Caraxi)
 * [daemitus](https://github.com/daemitus)
+* [wolfcomp](https://github.com/wolfcomp)
 
 #### Contributors
 
 [Too many](https://github.com/aers/FFXIVClientStructs/graphs/contributors) to list.
+
+> [!IMPORTANT]
+> The following information will have slight inaccuracies due to generator changes introduced to the project with Dawntrail
+> This will be updated soon
 
 ## For Library Users
 
