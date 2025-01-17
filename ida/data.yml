@@ -353,6 +353,7 @@ functions:
   0x140A03370: ProcessPacketPlayerStateFlags
   0x140A03390: ProcessPacketPlayerClassInfo
   0x140A034C0: ProcessPacketPlayerBlueMageActions
+  0x140A034E0: ProcessPacketPlayerGearsetData
   0x140A03520: ProcessPacketUpdateRecastTimes
   0x140A03570: ProcessPacketActorSetPos
   0x140A03590: ProcessPacketActorMove
@@ -8358,6 +8359,7 @@ classes:
         base: Client::Game::Character::ContainerInterface
     funcs:
       # 0x1413171F0: ctor # inlined at 0x1408CF5D2
+      0x140842F50: LoadGearsetData
       0x140843E20: LoadWeapon
       0x140844AE0: HideWeapons
       0x1408454C0: LoadEquipment

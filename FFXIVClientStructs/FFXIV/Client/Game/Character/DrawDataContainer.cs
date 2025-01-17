@@ -70,6 +70,9 @@ public unsafe partial struct DrawDataContainer {
     [MemberFunction("E8 ?? ?? ?? ?? EB 50 44 8B 03")]
     public partial void SetGlasses(int index, ushort id);
 
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 44 0F B6 B9")]
+    public partial void LoadGearsetData(PacketPlayerGearsetData* gearsetData);
+
     public enum EquipmentSlot : uint {
         Head = 0,
         Body = 1,
@@ -199,4 +202,12 @@ public struct EquipmentModelId {
     [FieldOffset(4)] public byte Stain1;
 
     [FieldOffset(0), CExportIgnore] public ulong Value;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 4)]
+public struct LegacyEquipmentModelId {
+    [FieldOffset(0)] public ushort Id;
+    [FieldOffset(2)] public byte Variant;
+    [FieldOffset(3)] public byte Stain;
+    // Second Stain id is stored separately
 }
