@@ -8190,7 +8190,7 @@ classes:
         base: Client::System::Configuration::CharamakeAvatarSaveDataContainer::ContainerInterface
   Client::System::Configuration::CharamakeAvatarSaveDataContainer::SavedAppearanceSlot:
     funcs:
-        0x1407CA330: CalculateCustomizeDataHash
+      0x1407CA330: CalculateCustomizeDataHash
   Client::Game::Object::GameObject:
     vtbls:
       - ea: 0x141F7E5A0
