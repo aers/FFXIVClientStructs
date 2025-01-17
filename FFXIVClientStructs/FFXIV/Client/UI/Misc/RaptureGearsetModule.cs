@@ -64,6 +64,9 @@ public unsafe partial struct RaptureGearsetModule {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9 41 0F B6 F0 48 8D 0D")]
     public partial int EquipGearset(int gearsetId, byte glamourPlateId = 0);
 
+    [MemberFunction("40 55 53 56 57 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 63 FA")]
+    public partial int EquipGearsetInternal(int gearsetId, byte glamourPlateId = 0);
+
     /// <summary>
     /// Save the player's current inventory to a new gearset at the next possible ID.
     /// </summary>
