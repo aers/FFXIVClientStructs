@@ -10580,6 +10580,9 @@ classes:
     vtbls:
       - ea: 0x141FAC980
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BE8850: Open
+      0x140BE8DB0: OpenPreview
   Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
     vtbls:
       - ea: 0x141FAC9F8
