@@ -4819,6 +4819,7 @@ classes:
     funcs:
       0x14023CE40: ctor
       0x14023CE70: Finalizer
+      0x14023D180: CloseContextAddons
       0x14023D300: CloseAddon
       0x14023D3F0: GetAgentByInternalId
       0x14023D470: GetAgentInventoryContext
@@ -9108,8 +9109,6 @@ classes:
       0x140DB6BD0: Open
       0x140DB6E70: CloseByTitleIndex
       0x140DB7B70: IsOpen
-      0x14023D180: CloseContext
-      0x14023D180: CloseAddons
   Client::UI::Agent::AgentScenarioTree:
     vtbls:
       - ea: 0x141F9DB98
