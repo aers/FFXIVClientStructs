@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentMiragePrismPrismSetConvert
