@@ -2017,6 +2017,19 @@ classes:
     instances:
       - ea: 0x1427F7240
         pointer: False
+    funcs:
+      0x14096E620: CanAutoSheathe
+      0x14096E660: ExtendAutoSheatheTimer
+      0x14096E6C0: OnActorControlWeaponDrawn
+      0x14096E770: Tick
+      0x14096E9A0: SetUnsheathed
+      0x14096EA60: SetUnsheathed2
+  Client::Game::UI::AutoAttackState:
+    funcs:
+      0x14096EBC0: Get
+      0x14096EC10: OnActorControl
+      0x14096EC80: SetImpl
+      0x14096EDC0: Set
   Client::Game::UI::PlayerState:
     instances:
       - ea: 0x1427F7258
