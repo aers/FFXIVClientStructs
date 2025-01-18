@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkUnitManager
 //   Component::GUI::AtkEventListener
 [GenerateInterop(isInherited: true)]
-[Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x9C90)]
 public unsafe partial struct AtkUnitManager {
+    [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
     [FieldOffset(0x30), FixedSizeArray, CExportIgnore] internal FixedSizeArray13<AtkUnitList> _depthLayers;
     [FieldOffset(0x30)] public AtkUnitList DepthLayerOneList;
     [FieldOffset(0x840)] public AtkUnitList DepthLayerTwoList;
