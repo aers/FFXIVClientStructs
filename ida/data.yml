@@ -1318,6 +1318,17 @@ classes:
       0x140828750: RestorePrismBoxItem
       0x140828FB0: RequestGlamourPlates
       0x140829320: ApplyGlamourPlate
+  Client::Game::MateriaRequestManager:
+    instances:
+      - ea: 0x142823260
+        pointer: True
+    funcs:
+      0x1416B6F60: HasInstance
+      0x1416B6F87: GetInstance
+      0x1416B702E: Initialize
+      0x1416B7040: Destroy
+      0x1416B7090: Clear
+      0x1416B70E0: Finalize
   Client::Game::CurrencyManager:
     instances:
       - ea: 0x142813458
@@ -1392,7 +1403,7 @@ classes:
       0: Dtor
       1: Copy
       2: EqualTo
-      3: IsNotLinked
+      3: IsEmpty
       4: Clear
       5: GetBaseItemId
       6: GetItemId
@@ -1433,6 +1444,11 @@ classes:
       2: Clear
       4: GetSize
       5: GetInventorySlot
+  Client::Game::InventoryType:
+    funcs:
+      0x1408024B0: IsCrystals
+      0x1408024E0: IsArmory
+      0x14080BC00: IsEquippedItems
   Client::Game::MonsterNoteManager:
     instances:
       - ea: 0x1427F6370
@@ -1567,10 +1583,10 @@ classes:
       - ea: 0x1428278E8
         pointer: True
     funcs:
-      0x1417AF6C0: HasInstance
       0x1417AF6B0: GetInstance
-#fail       0x1417A0230: ctor
-#fail       0x1417A0290: Destroy
+      0x1417AF6C0: HasInstance
+      0x1417AF6E0: Initialize
+      0x1417AF740: Destroy
   Client::Game::QuestRecompleteManager: # Seasonal Event Replay
     instances:
       - ea: 0x1428278D8
@@ -3870,6 +3886,7 @@ classes:
         base: Component::GUI::AtkEventListener
     vfuncs:
       8: SetAddonVisibility
+      9: GetAddonStatus
       10: RefreshAddon
       11: AddonRequestUpdateById
       19: IsScdResourceLoaded
@@ -4042,6 +4059,7 @@ classes:
       0x1408B1A20: SetOnlineStatusFlags
       0x1408B1C50: IsOnlineStatusSet
       0x1408B1CD0: IsInCrossWorldDuty
+      0x1408B1D10: IsPlayerBlocked
   Client::UI::Info::InfoProxyBlacklist:
     vtbls:
       - ea: 0x141F84778
@@ -4814,6 +4832,7 @@ classes:
     funcs:
       0x14023CE40: ctor
       0x14023CE70: Finalizer
+      0x14023D180: CloseContextAddons
       0x14023D300: CloseAddon
       0x14023D3F0: GetAgentByInternalId
       0x14023D470: GetAgentInventoryContext
@@ -7292,6 +7311,7 @@ classes:
       35: GetInfoModule
       36: GetUIModuleHelpers
       37: GetAgentModule
+      38: GetUIModuleAgentModulePtr
       39: GetUI3DModule
       42: GetEmoteHistoryModule
       43: GetMinionListModule
@@ -8032,6 +8052,9 @@ classes:
     funcs:
       0x140785A10: ctor
       0x140785C60: Finalizer
+  Client::UI::Misc::ItemOrderModuleSorter:
+    funcs:
+      0x140783A10: FreePreviousOrderArray
   Client::UI::Misc::LetterDataModule:
     vtbls:
       - ea: 0x141F7C1C0
@@ -8564,6 +8587,7 @@ classes:
       0x1408797A0: SetChatChannel
       0x140879B00: SetFlags
       0x140878FC0: SetTellTargetInForay
+      0x140879F80: PrintLogMessage
       0x140E5DF40: ReplyInSelectedChatMode
   Client::UI::Shell::ShellCommandBlueAction:
     vtbls:
@@ -9095,6 +9119,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140DB6AC0: ctor
+      0x140DB6BD0: Open
+      0x140DB6E70: CloseByTitleIndex
+      0x140DB7B70: IsOpen
   Client::UI::Agent::AgentScenarioTree:
     vtbls:
       - ea: 0x141F9DB98
@@ -9111,6 +9138,7 @@ classes:
     funcs:
       0x14024FCB0: ctor
       0x140250560: Finalizer
+      0x1402508E0: GetOwnerAddonId
       0x140251090: UseItem
       0x140251A60: UnblockItemSlot
       0x140250610: OpenForItemSlot
@@ -10564,6 +10592,9 @@ classes:
     vtbls:
       - ea: 0x141FAC980
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BE8850: Open
+      0x140BE8DB0: OpenPreview
   Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
     vtbls:
       - ea: 0x141FAC9F8
@@ -12891,15 +12922,16 @@ classes:
   Client::Game::ReconstructionBoxManager:
     instances:
       - ea: 0x1427F5EE8
-        pointer: False
+        pointer: True
     vtbls:
       - ea: 0x141F8A2F8
     vfuncs:
       0: Dtor
     funcs:
+      0x1409596E0: Initialize
       0x1409597A0: Destroy
-      0x1417A7550: HasInstance
-      0x1417A7570: GetInstance
+      0x140959800: HasInstance
+      0x140959820: GetInstance
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x142812628

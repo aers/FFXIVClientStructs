@@ -46,7 +46,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(35)] public partial InfoModule* GetInfoModule();
     [VirtualFunction(36)] public partial UIModuleHelpers* GetUIModuleHelpers();
     [VirtualFunction(37)] public partial AgentModule* GetAgentModule();
-    // [VirtualFunction(37)] public partial UIModule* GetAfterAgentsPtr(); // points to the field right after the last Agent in AgentModule
+    [VirtualFunction(38)] public partial AgentModule.UIModuleAgentModulePtrStruct* GetUIModuleAgentModulePtr();
     [VirtualFunction(39)] public partial UI3DModule* GetUI3DModule();
     // [VirtualFunction(40)] public partial Vf40Struct* GetVf40Struct();
     // [VirtualFunction(41)] public partial Vf41Struct* GetVf40Struct();
@@ -150,9 +150,10 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(196), GenerateStringOverloads] public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style, int sound = -1, uint entityId = 0xE0000000);
     // [VirtualFunction(197)] public partial ??? ShowBattleTalkUnknown(???);
     [VirtualFunction(198), GenerateStringOverloads] public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
-    // [VirtualFunction(200)] public partial ??? OpenInventory(???);
-    // [VirtualFunction(201)] public partial ??? CloseInventory(???);
-    // [VirtualFunction(202)] public partial ??? IsInventoryOpen(???);
+    /// <param name="type">0 = Inventory, 1 = Key Items</param>
+    [VirtualFunction(200)] public partial void OpenInventory(byte type = 0);
+    [VirtualFunction(201)] public partial void CloseInventory();
+    [VirtualFunction(202)] public partial bool IsInventoryOpen();
     [VirtualFunction(203)] public partial void ExecuteMainCommand(uint command);
     [VirtualFunction(204)] public partial bool IsMainCommandUnlocked(uint command);
     // [VirtualFunction(207)] public partial ??? ShowRaceCountdownEnd(???);

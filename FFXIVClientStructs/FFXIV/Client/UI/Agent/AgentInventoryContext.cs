@@ -49,7 +49,7 @@ public unsafe partial struct AgentInventoryContext {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 89 74 24 ??")]
-    public partial long UseItem(uint itemId, uint inventoryType = 9999, uint itemSlot = 0, short a5 = 0);
+    public partial long UseItem(uint itemId, uint inventoryType = 9999, uint itemSlot = 0, short a5 = 0); // TODO: use InventoryType.Invalid
 
     public bool IsContextItemDisabled(int index) {
         return index >= 0 && (ContextItemDisabledMask & (1 << index)) != 0;

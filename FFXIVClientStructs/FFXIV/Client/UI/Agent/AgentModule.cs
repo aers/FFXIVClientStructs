@@ -15,9 +15,16 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x18)] public float FrameDelta;
 
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray452<Pointer<AgentInterface>> _agents;
+    [FieldOffset(0xE40)] public UIModuleAgentModulePtrStruct UIModuleAgentModulePtr;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public unsafe struct UIModuleAgentModulePtrStruct {
+        [FieldOffset(0x0)] public UIModule* UIModule;
+        [FieldOffset(0x8)] public AgentModule* AgentModule;
+    }
 }
 
 public enum AgentId : uint {
