@@ -8201,16 +8201,33 @@ classes:
       0x1418C9CD0: ToggleCharacterVisibility
       0x1418C9FB0: ApplyCameraPositions
       0x1418CA470: SetCameraPosition
-  Client::Game::SavedAppearanceManager:
+  Client::System::Configuration::CharamakeAvatarSaveDataContainer::ContainerInterface:
     vtbls:
-      - ea: 0x141F7D640
+      - ea: 0x141F7D5E0
     vfuncs:
       0: Dtor
-      1: IsSlotCreated
+      1: IsSlotValid
       2: GetSlot
+      4: GetValidSlotCount
+      5: UpdateValidSlotCount
       6: GetSlotCount
+  Client::System::Configuration::CharamakeAvatarSaveDataContainer::FixedContainer:
+    vtbls:
+      - ea: 0x141F7D640
+        base: Client::System::Configuration::CharamakeAvatarSaveDataContainer::ContainerInterface
     funcs:
-      0x1407C84A0: ctor
+      0x1407C9720: ctor
+  Client::System::Configuration::CharamakeAvatarSaveDataContainer::FreeTrialContainer:
+    vtbls:
+      - ea: 0x141F7D6A0
+        base: Client::System::Configuration::CharamakeAvatarSaveDataContainer::ContainerInterface
+  Client::System::Configuration::CharamakeAvatarSaveDataContainer::VariableContainer:
+    vtbls:
+      - ea: 0x141F7D700
+        base: Client::System::Configuration::CharamakeAvatarSaveDataContainer::ContainerInterface
+  Client::System::Configuration::CharamakeAvatarSaveDataContainer::SavedAppearanceSlot:
+    funcs:
+      0x1407CA330: CalculateCustomizeDataHash
   Client::Game::Object::GameObject:
     vtbls:
       - ea: 0x141F7E5A0
