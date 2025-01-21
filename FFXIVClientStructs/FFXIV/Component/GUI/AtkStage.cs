@@ -36,7 +36,7 @@ public unsafe partial struct AtkStage {
     //[FieldOffset(0x85C)] public bool DispatchEvents;
     [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3B 98")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 48 8B C8 4C 8B CB 41 8D 50 03")]
     public static partial AtkStage* Instance();
 
     [MemberFunction("48 8B 51 ?? 48 0F BF 82")]
