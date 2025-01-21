@@ -11,7 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 public unsafe partial struct InstanceContentDirector {
     //[FieldOffset(0x730), FixedSizeArray] internal FixedSizeArray168<byte> _instanceContentExcelRow;
 
-    // fields from InstanceContent sheet
     [FieldOffset(0xD80 + 0x00), CExporterExcelBegin("InstanceContent")] public uint NewPlayerBonusGil;
     [FieldOffset(0xD80 + 0x04)] public uint NewPlayerBonusExp;
     [FieldOffset(0xD80 + 0x08)] public uint FinalBossExp;

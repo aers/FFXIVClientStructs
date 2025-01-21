@@ -27,16 +27,16 @@ public unsafe partial struct TimelineContainer {
     // contained in a small 0x10 struct
     [FieldOffset(0x320 + 0x0)] public float BannerRequestStartTimestamp;
 
-    #region Starting at 0x320 is a copy of the BannerTimeline row (Component::Exd::Sheets::BannerTimeline)
-    [FieldOffset(0x330 + 0x00)] public uint BannerTimelineNameOffset; // not very useful here
+    [FieldOffset(0x330 + 0x00), CExporterExcelBegin("BannerTimeline")] public uint BannerTimelineNameOffset;
     [FieldOffset(0x330 + 0x04)] public uint BannerTimelineAdditionalData;
-    [FieldOffset(0x330 + 0x08)] public uint BannerTimelineIcon;
+    [FieldOffset(0x330 + 0x08)] public int BannerTimelineIcon;
     [FieldOffset(0x330 + 0x0C)] public ushort BannerTimelineUnlockCondition;
-    [FieldOffset(0x330 + 0x0E)] public ushort BannerTimelineSortKey;
-    [FieldOffset(0x330 + 0x10)] public byte BannerTimelineType;
-    [FieldOffset(0x330 + 0x11)] public byte BannerTimelineAcceptClassJobCategory;
-    [FieldOffset(0x330 + 0x12)] public byte BannerTimelineCategory;
-    #endregion
+    [FieldOffset(0x330 + 0x0E)] public ushort BannerTimelineUnknown_70_1;
+    [FieldOffset(0x330 + 0x10)] public ushort BannerTimelineUnknown_70_2;
+    [FieldOffset(0x330 + 0x12)] public ushort BannerTimelineSortKey;
+    [FieldOffset(0x330 + 0x14)] public byte BannerTimelineType;
+    [FieldOffset(0x330 + 0x15)] public byte BannerTimelineAcceptClassJobCategory;
+    [FieldOffset(0x330 + 0x16), CExporterExcelEnd] public byte BannerTimelineCategory;
 
     [FieldOffset(0x346)] public byte Flags1;
     [FieldOffset(0x347)] public byte Flags2; // bit 2 makes it load the requested banner animation
