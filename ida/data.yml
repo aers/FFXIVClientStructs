@@ -1481,7 +1481,7 @@ classes:
         pointer: True
     funcs:
       0x1409546C0: ctor
-      0x141733B60: Dtor
+      0x140954710: Dtor
       0x140954760: HasInstance
       0x140954780: GetInstance
       0x140954900: GetMemberCount
@@ -14180,8 +14180,7 @@ classes:
       - ea: 0x142088688
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     funcs:
-#fail       0x141610210: ctor
-#fail       0x141610290: Finalizer
+      0x1415BD2E0: ctor
   Client::Game::InstanceContent::DynamicEvent:
     vtbls:
       - ea: 0x1421BB260
