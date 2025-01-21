@@ -1325,8 +1325,8 @@ classes:
         pointer: True
     funcs:
       0x1416B7B40: HasInstance
-#fail       0x1416B6F87: GetInstance
-#fail       0x1416B702E: Initialize
+      0x1416B7B60: GetInstance
+      0x1416B7B70: Initialize
       0x1416B7C20: Destroy
       0x1416B7C70: Clear
       0x1416B7CC0: Finalize
