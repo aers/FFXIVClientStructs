@@ -14347,7 +14347,7 @@ classes:
     vtbls:
       - ea: 0x141FD2820
         base: Component::GUI::AtkUnitBase
-      - ea: 0x140F36340
+      - ea: 0x141FD2A60
         base: Component::GUI::AtkManagedInterface
     funcs:
       0x140F36340: ctor
