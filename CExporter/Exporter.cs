@@ -347,7 +347,7 @@ public class Exporter {
             return new ProcessedField {
                 FieldType = field.FieldType,
                 FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = $"{sheetName}SheetPtr",
+                FieldName = field.Name,
                 FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
             };
         }
