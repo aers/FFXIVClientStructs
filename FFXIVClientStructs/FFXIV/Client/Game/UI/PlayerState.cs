@@ -36,7 +36,7 @@ public unsafe partial struct PlayerState {
     /// <remarks> Row Id of ClassJob sheet </remarks>
     [FieldOffset(0x7E)] public byte CurrentClassJobId;
 
-    [FieldOffset(0x80)] public nint CurrentClassJobRow;
+    [FieldOffset(0x80), CExporterExcel("ClassJob")] public nint CurrentClassJobRow;
     [FieldOffset(0x88)] public short CurrentLevel;
     /// <remarks> Index is ExpArrayIndex from the ClassJob sheet. </remarks>
     [FieldOffset(0x8A), FixedSizeArray] internal FixedSizeArray32<short> _classJobLevels;

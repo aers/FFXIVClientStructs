@@ -35,10 +35,10 @@ public unsafe partial struct GameMain {
     [FieldOffset(0x40CC)] public uint RuntimeSeconds;
     [FieldOffset(0x40D0)] public bool RuntimeSecondsChanged;
     [FieldOffset(0x40D4)] public float Runtime;
-    [FieldOffset(0x40D8)] public nint CurrentTerritoryTypeRow;
-    [FieldOffset(0x40E0)] public nint CurrentTerritoryIntendedUseRow;
-    [FieldOffset(0x40E8)] public nint NextTerritoryTypeRow;
-    [FieldOffset(0x40F0)] public nint NextTerritoryIntendedUseRow;
+    [FieldOffset(0x40D8), CExporterExcel("TerritoryType")] public nint CurrentTerritoryTypeRow;
+    [FieldOffset(0x40E0), CExporterExcel("TerritoryIntendedUse")] public nint CurrentTerritoryIntendedUseRow;
+    [FieldOffset(0x40E8), CExporterExcel("TerritoryType")] public nint NextTerritoryTypeRow;
+    [FieldOffset(0x40F0), CExporterExcel("TerritoryIntendedUse")] public nint NextTerritoryIntendedUseRow;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF")]
     public partial bool IsInInstanceArea();
