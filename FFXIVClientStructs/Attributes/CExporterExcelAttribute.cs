@@ -15,4 +15,10 @@ internal class CExporterExcelBeginAttribute(string SheetName) : Attribute {
 /// Represents the end of a sheet struct group.
 /// Must be used after <see cref="CExporterExcelBeginAttribute"/> to have an effect.
 /// </summary>
+[AttributeUsage(AttributeTargets.Field)]
 internal class CExporterExcelEndAttribute : Attribute;
+
+[AttributeUsage(AttributeTargets.Field)]
+internal class CExporterExcelAttribute(string SheetName) : Attribute {
+    public string SheetName { get; } = SheetName;
+}

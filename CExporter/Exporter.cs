@@ -342,6 +342,15 @@ public class Exporter {
                 FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}"
             };
         }
+        if (field.GetCustomAttribute<CExporterExcelAttribute>() != null) {
+            var sheetName = field.GetCustomAttribute<CExporterExcelAttribute>()!.SheetName;
+            return new ProcessedField {
+                FieldType = field.FieldType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = $"{sheetName}SheetPtr",
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
+            };
+        }
         _processType.Add(field.FieldType);
         return new ProcessedField {
             FieldType = field.FieldType,
