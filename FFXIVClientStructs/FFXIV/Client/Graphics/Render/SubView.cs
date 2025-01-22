@@ -9,7 +9,7 @@ public unsafe struct SubView {
     // TODO check and update for 7.0
     [FieldOffset(0x8)] public uint Flags;
     [FieldOffset(0x10)] public Rectangle ViewportRegion;
-    [FieldOffset(0x20)] public void* Camera; // Client::Graphics::Render::Camera
+    [FieldOffset(0x20)] public Camera* Camera;
     [FieldOffset(0x28)] public Texture* RenderTarget_1;
     [FieldOffset(0x30)] public Texture* RenderTarget_2;
     [FieldOffset(0x38)] public Texture* RenderTarget_3;
