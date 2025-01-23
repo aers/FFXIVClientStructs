@@ -155,8 +155,23 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("48 8B 01 0F B6 04")]
     public partial byte GetCharAt(ulong idx);
 
+    /// <summary>
+    /// Sanitizes the <see cref="Utf8String"/>.
+    /// </summary>
+    /// <param name="flags">
+    /// Flags that define which characters or character groups are allowed in the sanitized string.
+    /// </param>
+    /// <param name="characterList">
+    /// An optional list of ASCII characters that are explicitly allowed in the sanitized string when the <see cref="AllowedEntities.CharacterList"/> flag is set in the <paramref name="flags"/> argument.
+    /// </param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F0 E8 ?? ?? ?? ?? 48 8D 4D C0")]
-    public partial void SanitizeString(ushort flags, Utf8String* characterList);
+    public partial void SanitizeString(AllowedEntities flags, Utf8String* characterList = null);
+
+    [Obsolete("Use SanitizeString with AllowedEntities enum")]
+    public void SanitizeString(ushort flags, Utf8String* characterList) => SanitizeString((AllowedEntities)flags, characterList);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 48 8B 74 24 ?? 48 89 5C 24 ?? 48 89 5D 80 49 8B DE 48 C7 45 ?? ?? ?? ?? ?? 4C 3B F6 0F 84 ?? ?? ?? ?? 48 8B 03 80 38 00 74 1F 41 8B C4")]
+    public partial void GetParts(StdVector<Utf8StringPart>* vector);
 
     public byte GetCharAt(int idx) => idx < 0 ? byte.MinValue : GetCharAt((ulong)idx);
 
@@ -198,4 +213,46 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
         if (item2.IsUsingInlineBuffer)
             item2.StringPtr = (byte*)Unsafe.AsPointer(ref item2.InlineBuffer[0]);
     }
+}
+
+[Flags]
+public enum AllowedEntities : ushort {
+    /// <summary> Uppercase letters (A-Z) </summary>
+    UppercaseLetters = 1 << 0,
+
+    /// <summary> Lowercase letters (a-z) </summary>
+    LowercaseLetters = 1 << 1,
+
+    /// <summary> Numbers (0-9) </summary>
+    Numbers = 1 << 2,
+
+    /// <summary> Whitespace and special characters </summary>
+    /// <remarks> For example: !&quot;#$%&amp;&apos;()*+,-./:;\&lt;=&gt;?@[\]^_`{|}~¡¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ </remarks>
+    SpecialCharacters = 1 << 3,
+
+    /// <summary> Includes characters from a list passed to <see cref="Utf8String.SanitizeString(AllowedEntities, Utf8String*)"/>. </summary>
+    CharacterList = 1 << 4,
+
+    /// <summary> Anything that's not handled in the alphanumerical filters (presumably). </summary>
+    OtherCharacters = 1 << 5,
+
+    /// <summary> SeString payloads </summary>
+    Payloads = 1 << 6,
+
+    Unknown7 = 1 << 7,
+    Unknown8 = 1 << 8,
+    Unknown9 = 1 << 9, // Only used in Chinese/Korean clients?!
+
+    /// <summary> Hiragana, Katakana, CJK Unified Ideographs </summary>
+    CJK = 1 << 10,
+
+    Unknown11 = 1 << 11,
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xE0)]
+public unsafe struct Utf8StringPart {
+    [FieldOffset(0x00)] public Utf8String Payload;
+    [FieldOffset(0x68)] public Utf8String Text;
+    [FieldOffset(0xD0)] private long UnkD0;
+    [FieldOffset(0xD8)] private long UnkD8;
 }
