@@ -170,6 +170,9 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [Obsolete("Use SanitizeString with AllowedEntities enum")]
     public void SanitizeString(ushort flags, Utf8String* characterList) => SanitizeString((AllowedEntities)flags, characterList);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 48 8B 74 24 ?? 48 89 5C 24 ?? 48 89 5D 80 49 8B DE 48 C7 45 ?? ?? ?? ?? ?? 4C 3B F6 0F 84 ?? ?? ?? ?? 48 8B 03 80 38 00 74 1F 41 8B C4")]
+    public partial void GetParts(StdVector<Utf8StringPart>* vector);
+
     public byte GetCharAt(int idx) => idx < 0 ? byte.MinValue : GetCharAt((ulong)idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 FF 03 73 18")]
@@ -245,4 +248,12 @@ public enum AllowedEntities : ushort {
     CJK = 1 << 10,
 
     Unknown11 = 1 << 11,
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0xE0)]
+public unsafe struct Utf8StringPart {
+    [FieldOffset(0x00)] public Utf8String Payload;
+    [FieldOffset(0x68)] public Utf8String Text;
+    [FieldOffset(0xD0)] private long UnkD0;
+    [FieldOffset(0xD8)] private long UnkD8;
 }

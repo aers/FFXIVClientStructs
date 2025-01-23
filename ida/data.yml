@@ -1860,6 +1860,7 @@ classes:
       0x1417CCAD0: SanitizeString
       0x1417CD170: SanitizeStringCh
       0x1417CD690: SanitizeStringKo
+      0x1417CDB40: GetParts
   Component::GUI::AtkValue:
     funcs:
       0x1405E2E20: ctor_copy # copy constructor
