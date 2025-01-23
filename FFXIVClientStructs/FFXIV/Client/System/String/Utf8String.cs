@@ -227,14 +227,14 @@ public enum AllowedEntities : ushort {
     Numbers = 1 << 2,
 
     /// <summary> Whitespace and special characters </summary>
-    /// <remarks> !&quot;#$%&amp;&apos;()*+,-./:;\&lt;=&gt;?@[\]^_`{|}~¡¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ </remarks>
+    /// <remarks> For example: !&quot;#$%&amp;&apos;()*+,-./:;\&lt;=&gt;?@[\]^_`{|}~¡¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ </remarks>
     SpecialCharacters = 1 << 3,
 
     /// <summary> Includes characters from a list passed to <see cref="Utf8String.SanitizeString(AllowedEntities, Utf8String*)"/>. </summary>
     CharacterList = 1 << 4,
 
-    /// <summary> New line </summary>
-    NewLines = 1 << 5,
+    /// <summary> Anything that's not handled in the alphanumerical filters (presumably). </summary>
+    OtherCharacters = 1 << 5,
 
     /// <summary> SeString payloads </summary>
     Payloads = 1 << 6,
@@ -243,8 +243,7 @@ public enum AllowedEntities : ushort {
     Unknown8 = 1 << 8,
     Unknown9 = 1 << 9, // Only used in Chinese/Korean clients?!
 
-    /// <summary> CJK Unified Ideographs and Hiragana </summary>
-    /// <remarks> Also seems to allow special characters. </remarks>
+    /// <summary> Hiragana, Katakana, CJK Unified Ideographs </summary>
     CJK = 1 << 10,
 
     Unknown11 = 1 << 11,
