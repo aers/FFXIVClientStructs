@@ -391,7 +391,7 @@ public class Exporter {
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
                 var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => new { Name = t.Name, Parameters = t.GetParameters(), ReturnType = t.ReturnType }).ToArray();
-                virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Select(f => {
+                virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() != null).Select(f => {
                     var memberFunction = memberFunctions.FirstOrDefault(t => t.Name == f.Name);
                     var returnType = f.FieldType.GetFunctionPointerReturnType();
                     if (memberFunction?.ReturnType != returnType) memberFunction = null;
@@ -415,7 +415,7 @@ public class Exporter {
             var memberFunctionClass = type.GetMember("MemberFunctionPointers", ExporterStatics.BindingFlags).FirstOrDefault()?.DeclaringType;
             ProcessedMemberFunction[] memberFunctionsArray = [];
             if (memberFunctionClass != null) {
-                var memberFunctions = memberFunctionClass.GetMethods(ExporterStatics.BindingFlags);
+                var memberFunctions = memberFunctionClass.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).ToArray();
                 foreach (var memberFunction in memberFunctions) {
                     var memberFunctionAddress = memberFunction.GetCustomAttribute<MemberFunctionAttribute>();
                     if (memberFunctionAddress == null) continue;
@@ -450,7 +450,7 @@ public class Exporter {
             }
 
             var fields = type.GetFields(ExporterStatics.BindingFlags).Where(t => !type.IsInheritance(t)).ToArray();
-            var unionFields = fields.Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() != null).ToArray();
+            var unionFields = fields.Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).ToArray();
 
             var unionOffsets = new Dictionary<CExporterUnionAttribute, FieldInfo>(new CExporterUnionCompare());
 
