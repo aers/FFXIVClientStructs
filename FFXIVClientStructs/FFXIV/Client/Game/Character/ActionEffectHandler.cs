@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xF00)]
 public unsafe partial struct ActionEffectHandler {
-    [FieldOffset(0)] internal FixedSizeArray32<EffectEntry> _incomingEffects;
+    [FieldOffset(0), FixedSizeArray] internal FixedSizeArray32<EffectEntry> _incomingEffects;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
