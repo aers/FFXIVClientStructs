@@ -391,7 +391,7 @@ public class Exporter {
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
                 var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => new { Name = t.Name, Parameters = t.GetParameters(), ReturnType = t.ReturnType }).ToArray();
-                virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null && t.GetCustomAttribute<CExporterUnionAttribute>() != null).Select(f => {
+                virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => {
                     var memberFunction = memberFunctions.FirstOrDefault(t => t.Name == f.Name);
                     var returnType = f.FieldType.GetFunctionPointerReturnType();
                     if (memberFunction?.ReturnType != returnType) memberFunction = null;

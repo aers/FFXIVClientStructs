@@ -1404,7 +1404,7 @@ classes:
       0: Dtor
       1: Copy
       2: EqualTo
-      3: IsEmpty
+      3: IsNotLinked
       4: Clear
       5: GetBaseItemId
       6: GetItemId
