@@ -111,6 +111,7 @@ functions:
   0x1400A4FC0: GetPerformanceFrequency
   0x1400A63B0: CreateDirectoryRecursive
   0x1400B5BF0: Client::UI::IsValidPlayerCharacterName
+  0x1400B6220: Client::UI::RoundFloatToUInt
   0x1400B6560: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
   0x1400B7A10: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1400B7A50: Client::UI::GetNumberAsBoxedChar # (uint) accepts numbers 0-30
@@ -121,6 +122,7 @@ functions:
   0x1400B9F90: GetCurrentWorldId
   0x1400BA200: AreWorldsFromSameDC
   0x1400BA2E0: AreWorldsFromSameRegion
+  0x1400DB430: GetStainColor
   0x140194AC0: GetTime
   0x1401D32F0: j_SleepEx
   0x1401D3300: j_Sleep
@@ -168,7 +170,10 @@ functions:
   0x1400B7800: IsClassJobAGatherer  # static, (classJobId) -> bool
   0x1400B7990: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x1400BAB70: OpenWebURL
+  0x140906AA0: ToObjStrId
   0x140CBDC20: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
+  0x140D61370: ConvertRawToMapPosX
+  0x140D61400: ConvertRawToMapPosY
   0x140C45020: SetCondition
   0x140C45860: IsLocalPlayerLalafell
   0x140DC3AB0: CreateSelectYesno
@@ -1435,6 +1440,8 @@ classes:
       0x1407FF800: GetStain
       0x1407FF8D0: GetMateriaCount
       0x14082BFC0: GetCrafterContentId
+      0x1407FFA80: GetGlamourItemStainConditionUnlockQuestId
+      0x1407FFAE0: IsGlamourItemStainConditionUnlockQuestComplete
 #fail       0x140887E30: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
   Client::Game::InventoryContainer:
     vtbls:
@@ -1850,12 +1857,14 @@ classes:
       0x14005BE70: CopySubStrTo
       0x14005C1B0: Append
       0x14005C240: AppendCStr
+      0x14005CB40: ReplaceSubString
       0x14005CD40: Replace
       0x14005D650: Compare
       0x14005DB10: SetSize
       0x14005DF50: IndexOf
       0x14005E810: FindLastOfImpl
       0x14005ECB0: FindFirstOfImpl
+      0x14005F2A0: FormatString2
       0x140753FF0: ToInteger # strtoi for utf8string (str, base)
       0x1417CCAD0: SanitizeString
       0x1417CD170: SanitizeStringCh
@@ -2385,6 +2394,7 @@ classes:
         base: Client::Game::UI::ScenarioTextReader
     funcs:
       0x1404AAF20: ctor
+      0x140995850: IsQuestAccepted
   Client::Game::UI::QuestUI:
     instances:
       - ea: 0x142802A00
@@ -3953,6 +3963,7 @@ classes:
       0x140654A20: SetupAtkMessageBoxManager
       0x140654B60: SetAtkMessageBoxManagerTexts
       0x1406582F0: GetAtkFontCodeModule
+      0x1406595F0: UpdateAtkUIColorHolder
   Client::UI::ExdSheetWaiter:
     vtbls:
       - ea: 0x141F18B78
@@ -6127,7 +6138,6 @@ classes:
   Component::GUI::AtkUIColorHolder:
     funcs:
       # 0x1405286A0: ctor # INLINED IN 7.0
-      0x1406595F0: Update
       0x140608010: GetColor
   Component::GUI::AtkStage:
     instances:
@@ -6157,6 +6167,8 @@ classes:
         base: Component::Text::MacroDecoder
     funcs:
       0x1406035A0: ctor
+      0x140604000: ReadIntExpression
+      0x140604030: ReadStringExpression
   Component::GUI::AtkCursor:
     funcs:
       0x1405ED030: Show
@@ -7796,7 +7808,7 @@ classes:
       0x1409029C0: FormatAddonText2<string,string>
       0x140902B90: FormatAddonText2<string,string,string>
       0x140902E00: FormatAddonText2<string,string,uint>
-#fail       0x1407AAD80: FormatAddonText2<string,string,uint,uint>
+      0x140903030: FormatAddonText2<string,string,uint,uint>
       0x140903290: FormatAddonText2<string,string,uint,uint,uint>
       0x140903540: FormatAddonText2<string,string,string,uint,uint>
       0x140903840: FormatAddonText2<int>
@@ -7809,10 +7821,20 @@ classes:
       0x140904590: FormatAddonText2<int,string>
       0x140904720: FormatAddonText2<int,int,string>
       0x140904910: FormatAddonText2<int,string,uint>
+      0x140904BD0: FormatAddonTransient
+      0x140904D50: FormatSecondsRemaining
       0x1409050F0: FormatTimeSpan
+      0x1409055C0: FormatGlassesName
+      0x1409054D0: FormatItemName
+      0x140905730: FormatItemIconSuffix
       0x140905A90: GetTextChecker
       0x140906470: Update
+      0x140906710: AppendUnseenIcon
+      0x1409067B0: AppendCrossWorldIcon
+      0x1409068E0: AppendIcon
       0x140906CB0: FormatAddonTextApply
+      0x140906F80: ResolveSheetRedirect
+      0x140931B50: TempStartWithCurrentColors
   Client::UI::Misc::RaptureLogModule:
     vtbls:
       - ea: 0x141F87F88
@@ -7830,6 +7852,8 @@ classes:
       0x14090EB20: ShowLogMessage<string> # (this, logMessageId, StringParameter1)
       0x140910B90: SetTabName
       0x140910D40: GetTabName
+      0x140910DB0: FormatPlayerLink
+      0x1409118E0: GetLinkTerminator
       0x140911AF0: GetChatTypeForLogMessage
       0x140911B30: GetLogMessage
       0x140912630: GetLogMessageDetail
@@ -7976,6 +8000,15 @@ classes:
       0x140918BA0: ctor
       0x140918E50: ResolvePlaceholder
       0x1409194B0: SetUiMouseoverTarget
+      0x14091D540: AppendFixedPlayerLink
+      0x14091D640: AppendFixedClassJobLevel
+      0x14091D6F0: AppendFixedMapLink
+      0x14091D7D0: AppendFixedChatSoundEffect
+      0x14091D890: AppendFixedObjStr
+      0x14091D950: AppendFixedString
+      0x14091DA50: AppendFixedTimeRemaining
+      0x14091DB10: EscapeString
+      0x14091E050: AppendPercentage
   Client::UI::Misc::RaptureGearsetModule:
     vtbls:
       - ea: 0x141F7CAD0
@@ -8289,6 +8322,7 @@ classes:
       0x140831A50: GetFrameDeltaMultiplier2
       0x140832220: Initialize
       0x140832410: ctor
+      0x140906990: GetObjStrId
       0x14182C510: PlayFootStepSound
   Client::Game::Character::Character:
     vtbls:
@@ -8600,6 +8634,7 @@ classes:
     funcs:
       0x140875160: ctor
       0x140877DA0: Finalizer
+      0x140878870: Update
       0x140878E60: ExecuteMacro
       0x140879030: CancelMacro
       0x140879060: TryGetMacroIconCommand
@@ -16874,6 +16909,7 @@ classes:
     funcs:
       0x1417D3600: ctor
       0x1417D3760: Finalizer
+      0x1417D3960: Update
   Component::SteamApi::SteamApi:
     funcs:
       0x140737380: ctor
