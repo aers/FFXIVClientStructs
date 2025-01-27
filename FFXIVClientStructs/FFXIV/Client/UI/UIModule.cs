@@ -106,9 +106,9 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xF37B8)] internal Utf8String UIColorSheetName;
 
     [FieldOffset(0xF3830)] internal Utf8String CompletionSheetName;
-    [FieldOffset(0xF3898)] internal Utf8String UnkECF58;
-    [FieldOffset(0xF3900)] internal Utf8String UnkECFC0;
-    [FieldOffset(0xF3968)] internal Utf8String UnkED028;
+    [FieldOffset(0xF3898)] internal Utf8String CompletionOpenIconMacro;
+    [FieldOffset(0xF3900)] internal Utf8String CompletionCloseIconMacro;
+    [FieldOffset(0xF3968)] internal Utf8String NewLineMacro;
     [FieldOffset(0xF39D0)] public Utf8String LastTalkName;
     [FieldOffset(0xF3A38)] public Utf8String LastTalkText;
     [FieldOffset(0xF3AA0)] internal UIInputData UIInputData;
