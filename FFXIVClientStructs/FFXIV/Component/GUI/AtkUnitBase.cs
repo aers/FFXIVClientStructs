@@ -133,6 +133,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </summary>
     public bool IsReady => (Flags1A1 & 0x01) != 0;
 
+    public Span<AtkValue> AtkValuesSpan => new Span<AtkValue>(AtkValues, AtkValuesCount);
+
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 9F")]
     public partial void Ctor();
 
