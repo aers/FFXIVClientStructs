@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Component.Completion;
 using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Component.Text;
@@ -13,6 +14,8 @@ public unsafe partial struct TextModule {
 
     //[FieldOffset(0x3A8)] public Utf8String UnkStr; // DecoderResult?
     [FieldOffset(0x410)] public Utf8String MacroEncoderResult;
+
+    [FieldOffset(0x478)] public CompletionModule* CompletionModule;
 
     [VirtualFunction(7)]
     public partial Utf8String* EncodeString(Utf8String* ouput, Utf8String* input);
