@@ -67,7 +67,7 @@ public enum AgentId : uint {
     Marker = 35,
     Trade = 36,
     ScreenLog = 37,
-    Request = 38, // NPCTrade
+    Request = 38, // TODO: rename to NpcTrade (Agent struct too)
     Status = 39,
     Map = 40,
     Loot = 41, // NeedGreed
