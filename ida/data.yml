@@ -16918,6 +16918,8 @@ classes:
       0x1417D3600: ctor
       0x1417D3760: Finalizer
       0x1417D3960: Update
+      0x1417D52F0: AddCategoryData
+      0x1417D4D60: ParseLookupTable
   Client::System::Data::BlockMemory:
     vtbls:
       - ea: 0x1421D0EB8
