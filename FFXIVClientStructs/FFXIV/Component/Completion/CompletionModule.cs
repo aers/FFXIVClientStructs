@@ -26,6 +26,6 @@ public unsafe partial struct CompletionModule {
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct SheetName {
         [FieldOffset(0x00)] public Utf8String Name;
-        [FieldOffset(0x68)] private byte IsCompanionSheet; // idk, it's the only entry where this is 1
+        [FieldOffset(0x68)] public bool IsNoun;
     }
 }
