@@ -9209,6 +9209,10 @@ classes:
       0x140250860: OpenForItemSlot
       0x140250BA0: DiscardItem
       0x140252760: LowerItemQuality
+  Client::UI::Agent::AgentGlassesContext:
+    vtbls:
+      - ea: 0x141F38620
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentConfigLogColor:
     vtbls:
       - ea: 0x141F38710
@@ -9413,9 +9417,13 @@ classes:
       - ea: 0x141F39B50
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
-#fail       0x14031A9B0: ctor
+      0x1402D7E90: ctor
       0x1402D87C0: Promote
       0x1402D8930: Kick
+  Client::UI::Agent::AgentPartyInvite:
+    vtbls:
+      - ea: 0x141F39A58
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLinkshell:
     vtbls:
       - ea: 0x141F399D8
@@ -9535,6 +9543,10 @@ classes:
         base: Client::UI::Info::InfoEventHandlerInterface
     funcs:
       0x1402FB990: ctor
+  Client::UI::Agent::AgentFreeCompanyOrganizeSheet:
+    vtbls:
+      - ea: 0x141F39F08
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFreeCompanyProfile:
     vtbls:
       - ea: 0x141F39F80
@@ -9545,6 +9557,10 @@ classes:
   Client::UI::Agent::AgentFreeCompanyProfileEdit:
     vtbls:
       - ea: 0x141F39FF8
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentFreeCompanyInvite:
+    vtbls:
+      - ea: 0x141F3A070
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentFreeCompanyInputString:
     vtbls:
@@ -9571,6 +9587,10 @@ classes:
     funcs:
       0x140309EA0: ctor
       0x140309F80: Finalizer
+  Client::UI::Agent::AgentFreeCompanyPetition:
+    vtbls:
+      - ea: 0x141F3A378
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentArmouryBoard:
     vtbls:
       - ea: 0x141FCC830
@@ -9671,6 +9691,10 @@ classes:
       0x140E4B370: ctor
       0x140E4BAF0: Finalizer
       0x140E4BED0: OpenById
+  Client::UI::Agent::AgentCrossEditor:
+    vtbls:
+      - ea: 0x141FCD860
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLicenseViewer:
     vtbls:
       - ea: 0x141F38358
@@ -9842,7 +9866,7 @@ classes:
       0x1403136B0: OpenListing
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
-      - ea: 0x141FC7100
+      - ea: 0x141FCD570
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1414EB470: ctor
@@ -9911,6 +9935,10 @@ classes:
   Client::UI::Agent::AgentRetainerTaskSupply:
     vtbls:
       - ea: 0x141FA1990
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentRelicGlass:
+    vtbls:
+      - ea: 0x141FA11E8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentRelicNoteBook:
     vtbls:
@@ -10080,6 +10108,12 @@ classes:
     funcs:
       0x141887670: ctor
       0x140E1D280: ReduceItem
+  Client::UI::Agent::AgentSkyIslandExchange:
+    vtbls:
+      - ea: 0x141FA29E8
+        base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FA2A60
+        base: Client::Game::UI::GameEventCallback
   Client::UI::Agent::AgentLovmParty:
     vtbls:
       - ea: 0x141FC6D80
@@ -10786,7 +10820,7 @@ classes:
       0x140AB1C70: ctor
   Client::UI::Agent::AgentEmj:
     vtbls:
-      - ea: 0x141FCD570
+      - ea: 0x141FC7100
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140ECD570: ctor
@@ -11147,6 +11181,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E19920: ctor
+  Client::UI::Agent::AgentTalkSubtitle:
+    vtbls:
+      - ea: 0x141FA2AE8
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentTourismMenu:
     vtbls:
       - ea: 0x141FA2D40
@@ -11369,6 +11407,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D118D0: ctor
+  Client::UI::Agent::AgentChocoboBreed:
+    vtbls:
+      - ea: 0x141FC6CF8
+        base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC6D70
+        base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
   Client::UI::Agent::AgentGoldSaucerMiniGame:
     vtbls:
       - ea: 0x141FC6308

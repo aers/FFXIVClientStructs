@@ -158,6 +158,8 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(205)] public partial bool IsMainCommandUnlocked(uint command);
     // [VirtualFunction(208)] public partial ??? ShowRaceCountdownEnd(???);
     // [VirtualFunction(212)] public partial ??? IsDutyRaidFinderOpen(???);
+    [VirtualFunction(214)] public partial void ShowTalkSubtitle(Utf8String* text, float duration);
+    [VirtualFunction(215)] public partial void HideTalkSubtitle();
     [VirtualFunction(218)] public partial void ShowAdventureNotice(int index);
     [VirtualFunction(222)] public partial int RotateLinkshellHistory(int offset);
     [VirtualFunction(223)] public partial void SetLinkshellCycle(int linkshellCycle);

@@ -39,7 +39,7 @@ public enum AgentId : uint {
     EventFade = 8,
     Context = 9,
     InventoryContext = 10,
-    // TODO new 7.00 agent = 11,
+    GlassesContext = 11, // new in 7.00
     Config = 12, // ConfigSystem
     ConfigLog = 13,
     ConfigLogColor = 14,
@@ -72,7 +72,7 @@ public enum AgentId : uint {
     Map = 40,
     Loot = 41, // NeedGreed
     Repair = 42,
-
+    // 43 repair request?
     Materialize = 44,
     MateriaAttach = 45,
     MiragePrism = 46,
@@ -91,7 +91,7 @@ public enum AgentId : uint {
     Friendlist = 59,
     Linkshell = 60,
     PartyMember = 61,
-    // PartyInvite,
+    PartyInvite = 62,
     Search = 63,
     Detail = 64,
     LetterList = 65,
@@ -109,18 +109,16 @@ public enum AgentId : uint {
     FateProgress = 77, // Shared FATE
     Catch = 78,
     FreeCompany = 79,
-    // FreeCompanyOrganizeSheet,
+    FreeCompanyOrganizeSheet = 80,
     FreeCompanyProfile = 81,
     FreeCompanyProfileEdit = 82,
-    // FreeCompanyInvite,
+    FreeCompanyInvite = 83,
     FreeCompanyInputString = 84,
     FreeCompanyChest = 85,
     FreeCompanyExchange = 86,
     FreeCompanyCrestEditor = 87,
     FreeCompanyCrestDecal = 88,
-
-    // FreeCompanyPetition = ?,
-
+    FreeCompanyPetition = 89,
     ArmouryBoard = 90,
     HowtoList = 91,
     Cabinet = 92,
@@ -135,7 +133,7 @@ public enum AgentId : uint {
     SupportView = 101,
     SupportEdit = 102,
     Achievement = 103,
-    // CrossEditor,
+    CrossEditor = 104,
     LicenseViewer = 105,
     ContentsTimer = 106,
     MovieSubtitle = 107,
@@ -177,7 +175,7 @@ public enum AgentId : uint {
     RetainerTaskSupply = 143,
 
     RetainerItemTransfer = 145,
-
+    RelicGlass = 146,
     RelicNotebook = 147,
     RelicSphere = 148,
     TradeMultiple = 149,
@@ -197,12 +195,12 @@ public enum AgentId : uint {
     PatchMark = 164, // SelectOk?
     HousingWithdrawStorage = 165,
     WeatherReport = 166,
-
+    // 167 wedding stuff?
     LoadingTips = 168,
     Revive = 169,
 
     ChocoboRace = 171,
-
+    ChocoboBreed = 172,
     GoldSaucerMiniGame = 173,
     TrippleTriad = 174,
     TripleTriadRuleAnnounce = 175,
@@ -235,7 +233,7 @@ public enum AgentId : uint {
     FreeCompanyCreditShop = 202,
     Currency = 203,
     Purify = 204, // Aetherial Reduction
-
+    SkyIslandExchange = 205,
     LovmParty = 206,
     LovmRanking = 207,
     LovmNamePlate = 208,
@@ -414,7 +412,7 @@ public enum AgentId : uint {
     MycBattleAreaInfo = 387, // Bozja Recruitment
     MycWeaponAdjust = 388,
     OrnamentNoteBook = 389, // Accessories
-
+    TalkSubtitle = 390,
     TourismMenu = 391,
     GatheringMasterpiece = 392,
     StarlightGiftBox = 393,
