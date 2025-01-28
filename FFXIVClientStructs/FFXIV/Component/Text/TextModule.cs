@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Component.Excel;
 namespace FFXIVClientStructs.FFXIV.Component.Text;
 
 [GenerateInterop(isInherited: true)]
-[Inherits<MacroDecoder>(parentOffset: 8)]
+[Inherits<TextModuleInterface>, Inherits<MacroDecoder>(parentOffset: 8)]
 [StructLayout(LayoutKind.Explicit, Size = 0x510)]
 public unsafe partial struct TextModule {
     [FieldOffset(0x68)] public ExcelModuleInterface* ExcelModuleInterface;
@@ -16,15 +16,6 @@ public unsafe partial struct TextModule {
     [FieldOffset(0x410)] public Utf8String MacroEncoderResult;
 
     [FieldOffset(0x478)] public CompletionModule* CompletionModule;
-
-    [VirtualFunction(7)]
-    public partial Utf8String* EncodeString(Utf8String* ouput, Utf8String* input);
-
-    [VirtualFunction(8), GenerateStringOverloads]
-    public partial int EncodeMacro(byte* input, Utf8String* output);
-
-    [VirtualFunction(9), GenerateStringOverloads]
-    public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
 
     [VirtualFunction(16), GenerateStringOverloads]
     public partial bool FormatString(byte* input, StdDeque<TextParameter>* localParameters, Utf8String* output);

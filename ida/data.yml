@@ -170,6 +170,7 @@ functions:
   0x1400B7800: IsClassJobAGatherer  # static, (classJobId) -> bool
   0x1400B7990: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x1400BAB70: OpenWebURL
+  0x14081D680: GetUIModule
   0x140906AA0: ToObjStrId
   0x140CBDC20: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
   0x140D61370: ConvertRawToMapPosX
@@ -891,6 +892,7 @@ classes:
       7: EncodeString
       8: EncodeMacro
       9: ProcessMacroCode
+      13: SetCompletionModule
   Component::Text::Localize::Localize:
     vtbls:
       - ea: 0x141F793E8
@@ -1399,7 +1401,6 @@ classes:
       0x1408199B0: GetWolfMarks
       0x140819A20: GetAlliedSeals
       0x140819A90: GetGoldSaucerCoin
-      0x14081D680: GetUIModule # don't ask
       0x140968060: GetSpecialItemId #static
       0x1408198F0: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::InventoryItem:
@@ -2094,6 +2095,7 @@ classes:
       0x140976630: IsFolkloreBookUnlocked     # DoL unlockable books
       0x140978400: IsMcGuffinUnlocked
       0x140978870: IsFramersKitUnlocked
+      0x1409788B0: SetFramersKitUnlocked
       0x140976B10: GetWeeklyBingoFlagsValue
       0x140976A30: IsWeeklyBingoExpired
       0x140976A80: GetWeeklyBingoExpireUnixTimestamp
@@ -2118,6 +2120,12 @@ classes:
       0x140976600: IsFishingFolkloreTomeUnlocked
       0x140976730: SetOrchestrionRollUnlocked
       0x1409784F0: GetDesynthesisLevelForClassJob
+      0x140978520: SetFauxHollowsData
+      0x140978540: GetFauxHollowsState
+      0x1409785E0: GetPenaltyTimestamp
+      0x1409785F0: SetPenaltyTimestamp
+      0x140978660: SetOrnamentUnlocked
+      0x140978700: IsGlassesStylesUnlocked
       0x140A19DC0: SetDesynthesisLevels
       0x140978740: IsGlassesUnlocked
       0x140978980: Initialize
@@ -16910,6 +16918,24 @@ classes:
       0x1417D3600: ctor
       0x1417D3760: Finalizer
       0x1417D3960: Update
+      0x1417D52F0: AddCategoryData
+      0x1417D4D60: ParseLookupTable
+  Client::System::Data::BlockMemory:
+    vtbls:
+      - ea: 0x1421D0EB8
+  Component::Completion::CategoryData:
+    vtbls:
+      - ea: 0x1421D0EC0
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x141A55970: ctor
+  Component::Completion::CategoryDataCache:
+    vtbls:
+      - ea: 0x1421D0EE8
+        base: Component::Completion::CategoryData
+    funcs:
+      0x141A56400: ctor
   Component::SteamApi::SteamApi:
     funcs:
       0x140737380: ctor
