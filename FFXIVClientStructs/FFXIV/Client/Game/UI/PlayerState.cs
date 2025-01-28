@@ -181,6 +181,10 @@ public unsafe partial struct PlayerState {
 
     /// <remarks> Index is DohDolJobIndex from the ClassJob sheet. </remarks>
     [FieldOffset(0x7E0), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
+    // 0x800 (int): some Faux Hollows timestamp?
+    // 0x804 (int): some Faux Hollows state?
+
+    [FieldOffset(0x830), FixedSizeArray] internal FixedSizeArray26<byte> _unlockedFramersKitsBitmask;
 
     [FieldOffset(0x868)] public StdMap<uint, bool> TrackedStatuses;
     [FieldOffset(0x878)] public StdMap<uint, bool> TrackedActionUnlocks;
@@ -348,9 +352,9 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether all aether currents of a zone were discovered.
     /// </summary>
-    /// <param name="territoryTypeColumn32">Column 32 of TerritoryType</param>
+    /// <param name="aetherCurrentCompFlgSetId">RowId of AetherCurrentCompFlgSet</param>
     [MemberFunction("4C 8B C9 85 D2 74 1D")]
-    public partial bool IsAetherCurrentZoneComplete(uint territoryTypeColumn32);
+    public partial bool IsAetherCurrentZoneComplete(uint aetherCurrentCompFlgSetId);
 
     /// <summary>
     /// Check if all vistas of an expansion in the Sightseeing Log have been discovered.
