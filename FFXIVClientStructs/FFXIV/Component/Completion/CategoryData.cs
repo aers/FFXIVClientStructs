@@ -11,7 +11,8 @@ public struct CategoryData {
     [FieldOffset(0x50)] private Utf8String Unk50;
     /// <remarks> Zero-indexed (Group - 1) </remarks>
     [FieldOffset(0xB8)] public byte Group;
-    [FieldOffset(0xB9)] private byte UnkB9;
+    /// <remarks> Index of <see cref="CompletionModule.SheetNames"/> </remarks>
+    [FieldOffset(0xB9)] public byte SheetNameIndex;
     [FieldOffset(0xBA)] private short UnkBA;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]

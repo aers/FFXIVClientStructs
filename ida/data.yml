@@ -892,7 +892,7 @@ classes:
       7: EncodeString
       8: EncodeMacro
       9: ProcessMacroCode
-      13: SetCompletionModule
+      13: SetFixedSheetInterface
   Component::Text::Localize::Localize:
     vtbls:
       - ea: 0x141F793E8
@@ -16974,6 +16974,8 @@ classes:
       0: Dtor
     funcs:
       0x141A55970: ctor
+      0x141A55AC0: GetGroup
+      0x141A55AD0: GetSheetNameIndex
   Component::Completion::CategoryDataCache:
     vtbls:
       - ea: 0x1421D0EE8
