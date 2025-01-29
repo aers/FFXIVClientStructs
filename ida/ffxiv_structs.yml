@@ -963,6 +963,7 @@ enums:
     "EventFade": 8
     "Context": 9
     "InventoryContext": 10
+    "GlassesContext": 11
     "Config": 12
     "ConfigLog": 13
     "ConfigLogColor": 14
@@ -1011,6 +1012,7 @@ enums:
     "Friendlist": 59
     "Linkshell": 60
     "PartyMember": 61
+    "PartyInvite": 62
     "Search": 63
     "Detail": 64
     "LetterList": 65
@@ -1028,13 +1030,16 @@ enums:
     "FateProgress": 77
     "Catch": 78
     "FreeCompany": 79
+    "FreeCompanyOrganizeSheet": 80
     "FreeCompanyProfile": 81
     "FreeCompanyProfileEdit": 82
+    "FreeCompanyInvite": 83
     "FreeCompanyInputString": 84
     "FreeCompanyChest": 85
     "FreeCompanyExchange": 86
     "FreeCompanyCrestEditor": 87
     "FreeCompanyCrestDecal": 88
+    "FreeCompanyPetition": 89
     "ArmouryBoard": 90
     "HowtoList": 91
     "Cabinet": 92
@@ -1049,6 +1054,7 @@ enums:
     "SupportView": 101
     "SupportEdit": 102
     "Achievement": 103
+    "CrossEditor": 104
     "LicenseViewer": 105
     "ContentsTimer": 106
     "MovieSubtitle": 107
@@ -1089,6 +1095,7 @@ enums:
     "RetainerTask": 142
     "RetainerTaskSupply": 143
     "RetainerItemTransfer": 145
+    "RelicGlass": 146
     "RelicNotebook": 147
     "RelicSphere": 148
     "TradeMultiple": 149
@@ -1110,6 +1117,7 @@ enums:
     "LoadingTips": 168
     "Revive": 169
     "ChocoboRace": 171
+    "ChocoboBreed": 172
     "GoldSaucerMiniGame": 173
     "TrippleTriad": 174
     "TripleTriadRuleAnnounce": 175
@@ -1141,6 +1149,7 @@ enums:
     "FreeCompanyCreditShop": 202
     "Currency": 203
     "Purify": 204
+    "SkyIslandExchange": 205
     "LovmParty": 206
     "LovmRanking": 207
     "LovmNamePlate": 208
@@ -1303,6 +1312,7 @@ enums:
     "MycBattleAreaInfo": 387
     "MycWeaponAdjust": 388
     "OrnamentNoteBook": 389
+    "TalkSubtitle": 390
     "TourismMenu": 391
     "GatheringMasterpiece": 392
     "StarlightGiftBox": 393
@@ -7974,7 +7984,10 @@ structs:
   namespace: Client.Game.UI
   union: False
   size: 120
-  fields: []
+  fields:
+  - type: byte
+    name: IsLimitedTimeBonusActive
+    offset: 112
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? 8B 0E 3B C8
@@ -13566,7 +13579,7 @@ structs:
     offset: 8
   - type: unsigned int
     name: ExtraFlags
-    offset: 24
+    offset: 32
   - type: byte
     name: Sort
     offset: 36
@@ -15785,6 +15798,22 @@ structs:
       name: this
     - type: unsigned int
       name: command
+  - name: ShowTalkSubtitle
+    offset: 1712
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: text
+    - type: float
+      name: duration
+  - name: HideTalkSubtitle
+    offset: 1720
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
   - name: ShowAdventureNotice
     offset: 1744
     return_type: void
@@ -17760,6 +17789,30 @@ structs:
   - type: unsigned __int64
     name: CpuMicroSeconds
     offset: 16
+  member_functions: []
+- type: Component::Completion::CategoryData::CompletionDataStruct
+  name: CompletionDataStruct
+  namespace: Component.Completion
+  union: False
+  size: 8
+  fields:
+  - type: unsigned __int16
+    name: Group
+    offset: 0
+  - type: unsigned __int16
+    name: Key
+    offset: 2
+  - type: byte
+    name: RowId
+    offset: 4
+  member_functions: []
+- type: Component::Completion::CompletionModuleInterface
+  name: CompletionModuleInterface
+  namespace: Component.Completion
+  union: False
+  size: 8
+  fields: []
+  virtual_functions: []
   member_functions: []
 - type: Component::Excel::ExcelLanguageEvent
   name: ExcelLanguageEvent
@@ -19810,6 +19863,80 @@ structs:
   - name: Dtor
     offset: 0
   member_functions: []
+- type: Component::Text::TextModuleInterface
+  name: TextModuleInterface
+  namespace: Component.Text
+  union: False
+  size: 8
+  fields: []
+  virtual_functions:
+  - name: GetGlobalParameters
+    offset: 8
+    return_type: StdDeque<Component::Text::TextParameter>*
+    parameters:
+    - type: Component::Text::TextModuleInterface*
+      name: this
+  - name: FormatUtf8String
+    offset: 24
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Component::Text::TextModuleInterface*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: input
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: localParameters
+    - type: Client::System::String::Utf8String*
+      name: output
+  - name: EncodeString
+    offset: 56
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Component::Text::TextModuleInterface*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: ouput
+    - type: Client::System::String::Utf8String*
+      name: input
+  - name: EncodeMacro
+    offset: 64
+    return_type: int
+    parameters:
+    - type: Component::Text::TextModuleInterface*
+      name: this
+    - type: byte*
+      name: input
+    - type: Client::System::String::Utf8String*
+      name: output
+  - name: ProcessMacroCode
+    offset: 72
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Component::Text::TextModuleInterface*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: output
+    - type: byte*
+      name: input
+  - name: SetFixedSheetInterface
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::Text::TextModuleInterface*
+      name: this
+    - type: Component::Text::TextModuleInterface::FixedSheetInterface*
+      name: fixedSheetInterface
+  - name: Dtor
+    offset: 0
+  member_functions: []
+- type: Component::Text::TextModuleInterface::FixedSheetInterface
+  name: FixedSheetInterface
+  namespace: Component.Text
+  union: False
+  size: 8
+  fields: []
+  virtual_functions: []
+  member_functions: []
 - type: Component::Text::TextParameter::Value
   name: Value
   namespace: Component::Text::TextParameter
@@ -21658,6 +21785,51 @@ structs:
     name: Last
     offset: 8
   - type: Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Component::Completion::CategoryData*, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Component::Completion::CategoryData**
+    name: First
+    offset: 0
+  - type: Component::Completion::CategoryData**
+    name: Last
+    offset: 8
+  - type: Component::Completion::CategoryData**
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Component::Completion::CategoryData::CompletionDataStruct, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Component::Completion::CategoryData::CompletionDataStruct*
+    name: First
+    offset: 0
+  - type: Component::Completion::CategoryData::CompletionDataStruct*
+    name: Last
+    offset: 8
+  - type: Component::Completion::CategoryData::CompletionDataStruct*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Component::Completion::CompletionModule::SheetName, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Component::Completion::CompletionModule::SheetName*
+    name: First
+    offset: 0
+  - type: Component::Completion::CompletionModule::SheetName*
+    name: Last
+    offset: 8
+  - type: Component::Completion::CompletionModule::SheetName*
     name: End
     offset: 16
   member_functions: []
@@ -34406,17 +34578,18 @@ structs:
     name: Flags
     offset: 0
   member_functions: []
-- type: Component::Completion::CompletionModule
-  name: CompletionModule
+- type: Component::Completion::CompletionModule::SheetName
+  name: SheetName
   namespace: Component.Completion
   union: False
-  size: 888
+  size: 112
   fields:
-  - type: Component::Excel::ExcelLanguageEvent
-    name: ExcelLanguageEvent
-    offset: 16
-    base: true
-  virtual_functions: []
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 0
+  - type: byte
+    name: IsNoun
+    offset: 104
   member_functions: []
 - type: Component::GUI::AtkComponentGaugeBar::GaugeValueTransitionData
   name: GaugeValueTransitionData
@@ -37671,6 +37844,33 @@ structs:
   union: False
   fields:
   - type: StdVector<Client::UI::Misc::RaptureUiDataModule::MuteList::MuteListEntry, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdVector<Component::Completion::CategoryData*>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Component::Completion::CategoryData*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdVector<Component::Completion::CategoryData::CompletionDataStruct>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Component::Completion::CategoryData::CompletionDataStruct, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdVector<Component::Completion::CompletionModule::SheetName>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Component::Completion::CompletionModule::SheetName, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -58692,6 +58892,10 @@ structs:
     name: DesynthesisLevels
     offset: 2016
     size: 8
+  - type: byte
+    name: UnlockedFramersKitsBitmask
+    offset: 2096
+    size: 26
   - type: StdMap<unsigned int, byte>
     name: TrackedStatuses
     offset: 2152
@@ -58823,7 +59027,7 @@ structs:
     - type: Client::Game::UI::PlayerState*
       name: this
     - type: unsigned int
-      name: territoryTypeColumn32
+      name: aetherCurrentCompFlgSetId
   - signature: E8 ?? ?? ?? ?? 84 C0 75 AA
     return_type: byte
     name: IsAdventureComplete
@@ -66806,6 +67010,34 @@ structs:
     name: u
     offset: 24
   member_functions: []
+- type: Component::Completion::CategoryData
+  name: CategoryData
+  namespace: Component.Completion
+  union: False
+  size: 192
+  fields:
+  - type: StdVector<byte*>
+    name: CompletionTexts
+    offset: 8
+  - type: StdVector<Component::Completion::CategoryData::CompletionDataStruct>
+    name: CompletionData
+    offset: 32
+  - type: Client::System::String::Utf8String
+    name: Unk50
+    offset: 80
+  - type: byte
+    name: Group
+    offset: 184
+  - type: byte
+    name: SheetNameIndex
+    offset: 185
+  - type: __int16
+    name: UnkBA
+    offset: 186
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+  member_functions: []
 - type: Component::GUI::AtkAddonControl
   name: AtkAddonControl
   namespace: Component.GUI
@@ -71120,6 +71352,21 @@ structs:
   union: False
   size: 1088
   fields:
+  - type: unsigned __int16
+    name: TerritoryId
+    offset: 0
+  - type: byte
+    name: Unk2
+    offset: 2
+  - type: byte
+    name: Unk3
+    offset: 3
+  - type: byte
+    name: Unk4
+    offset: 4
+  - type: byte
+    name: Unk5
+    offset: 5
   - type: byte
     name: IsPlayerInSanctuary
     offset: 6
@@ -116521,6 +116768,65 @@ structs:
     name: th
     offset: 0
   member_functions: []
+- type: Component::Completion::CompletionModule
+  name: CompletionModule
+  namespace: Component.Completion
+  union: False
+  size: 888
+  fields:
+  - type: Component::Completion::CompletionModuleInterface
+    name: CompletionModuleInterface
+    offset: 0
+    base: true
+  - type: Component::Text::TextModuleInterface::FixedSheetInterface
+    name: FixedSheetInterface
+    offset: 8
+    base: true
+  - type: Component::Excel::ExcelLanguageEvent
+    name: ExcelLanguageEvent
+    offset: 16
+    base: true
+  - type: Component::Excel::ExcelModuleInterface*
+    name: ExcelModuleInterface
+    offset: 24
+  - type: Client::UI::Misc::RaptureTextModule*
+    name: RaptureTextModule
+    offset: 32
+  - type: StdVector<Component::Completion::CategoryData*>
+    name: CategoryData
+    offset: 48
+  - type: StdVector<byte*>
+    name: CategoryNames
+    offset: 72
+  - type: StdVector<byte>
+    name: Unk78
+    offset: 120
+  - type: Client::System::String::Utf8String
+    name: UnkD0
+    offset: 208
+  - type: Client::System::String::Utf8String
+    name: Unk138
+    offset: 312
+  - type: Client::System::String::Utf8String
+    name: Unk1A0
+    offset: 416
+  - type: Client::System::String::Utf8String
+    name: Unk208
+    offset: 520
+  - type: StdVector<Client::System::String::Utf8String>
+    name: CompanionNames
+    offset: 632
+  - type: StdVector<Component::Completion::CompletionModule::SheetName>
+    name: SheetNames
+    offset: 656
+  - type: Client::System::String::Utf8String
+    name: Unk2A8
+    offset: 680
+  - type: Client::System::String::Utf8String
+    name: Unk310
+    offset: 784
+  virtual_functions: []
+  member_functions: []
 - type: Client::Game::MJI::MJIPastureHandler
   name: MJIPastureHandler
   namespace: Client.Game.MJI
@@ -123673,77 +123979,6 @@ structs:
     parameters:
     - type: Client::UI::Shell::RaptureShellModule*
       name: this
-- type: Component::Text::TextModule
-  name: TextModule
-  namespace: Component.Text
-  union: False
-  size: 1296
-  fields:
-  - type: Component::Text::MacroDecoder
-    name: MacroDecoder
-    offset: 8
-    base: true
-  - type: Component::Excel::ExcelModuleInterface*
-    name: ExcelModuleInterface
-    offset: 104
-  - type: Component::Text::Localize
-    name: Localize
-    offset: 112
-  - type: Component::Text::MacroEncoder
-    name: MacroEncoder
-    offset: 152
-  - type: Client::System::String::Utf8String
-    name: MacroEncoderResult
-    offset: 1040
-  - type: Component::Completion::CompletionModule*
-    name: CompletionModule
-    offset: 1144
-  virtual_functions:
-  - name: EncodeString
-    offset: 56
-    return_type: Client::System::String::Utf8String*
-    parameters:
-    - type: Component::Text::TextModule*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: ouput
-    - type: Client::System::String::Utf8String*
-      name: input
-  - name: EncodeMacro
-    offset: 64
-    return_type: int
-    parameters:
-    - type: Component::Text::TextModule*
-      name: this
-    - type: byte*
-      name: input
-    - type: Client::System::String::Utf8String*
-      name: output
-  - name: ProcessMacroCode
-    offset: 72
-    return_type: Client::System::String::Utf8String*
-    parameters:
-    - type: Component::Text::TextModule*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: output
-    - type: byte*
-      name: input
-  - name: FormatString
-    offset: 128
-    return_type: byte
-    parameters:
-    - type: Component::Text::TextModule*
-      name: this
-    - type: byte*
-      name: input
-    - type: StdDeque<Component::Text::TextParameter>*
-      name: localParameters
-    - type: Client::System::String::Utf8String*
-      name: output
-  - name: ProcessNoun
-    offset: 136
-  member_functions: []
 - type: Client::Game::Event::GoldSaucerDirector
   name: GoldSaucerDirector
   namespace: Client.Game.Event
@@ -132431,6 +132666,107 @@ structs:
     - type: Client::UI::AddonRaidFinder*
       name: this
   member_functions: []
+- type: Component::Text::TextModule
+  name: TextModule
+  namespace: Component.Text
+  union: False
+  size: 1296
+  fields:
+  - type: Component::Text::TextModuleInterface
+    name: TextModuleInterface
+    offset: 0
+    base: true
+  - type: Component::Text::MacroDecoder
+    name: MacroDecoder
+    offset: 8
+    base: true
+  - type: Component::Excel::ExcelModuleInterface*
+    name: ExcelModuleInterface
+    offset: 104
+  - type: Component::Text::Localize
+    name: Localize
+    offset: 112
+  - type: Component::Text::MacroEncoder
+    name: MacroEncoder
+    offset: 152
+  - type: Client::System::String::Utf8String
+    name: MacroEncoderResult
+    offset: 1040
+  - type: Component::Text::TextModuleInterface::FixedSheetInterface*
+    name: FixedSheetInterface
+    offset: 1144
+  virtual_functions:
+  - name: FormatString
+    offset: 128
+    return_type: byte
+    parameters:
+    - type: Component::Text::TextModule*
+      name: this
+    - type: byte*
+      name: input
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: localParameters
+    - type: Client::System::String::Utf8String*
+      name: output
+  - name: GetGlobalParameters
+    offset: 8
+    return_type: StdDeque<Component::Text::TextParameter>*
+    parameters:
+    - type: Component::Text::TextModule*
+      name: this
+  - name: FormatUtf8String
+    offset: 24
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Component::Text::TextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: a3
+    - type: Client::System::String::Utf8String*
+      name: a4
+  - name: EncodeString
+    offset: 56
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Component::Text::TextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+    - type: Client::System::String::Utf8String*
+      name: a3
+  - name: EncodeMacro
+    offset: 64
+    return_type: int
+    parameters:
+    - type: Component::Text::TextModule*
+      name: this
+    - type: byte*
+      name: a2
+    - type: Client::System::String::Utf8String*
+      name: a3
+  - name: ProcessMacroCode
+    offset: 72
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Component::Text::TextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+    - type: byte*
+      name: a3
+  - name: SetFixedSheetInterface
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::Text::TextModule*
+      name: this
+    - type: Component::Text::TextModuleInterface::FixedSheetInterface*
+      name: a2
+  - name: ProcessNoun
+    offset: 136
+  member_functions: []
 - type: Client::Game::GoldSaucer::GFateDirector
   name: GFateDirector
   namespace: Client.Game.GoldSaucer
@@ -135686,169 +136022,6 @@ structs:
     - type: Client::UI::AddonJobHudSMN1*
       name: this
   member_functions: []
-- type: Client::UI::Misc::RaptureTextModule
-  name: RaptureTextModule
-  namespace: Client.UI.Misc
-  union: False
-  size: 3680
-  fields:
-  - type: Component::Text::TextModule
-    name: TextModule
-    offset: 0
-    base: true
-  - type: Component::Text::TextChecker::ExecNonMacroFunc
-    name: ExecNonMacroFunc
-    offset: 1296
-    base: true
-  - type: Component::Excel::ExcelLanguageEvent
-    name: ExcelLanguageEvent
-    offset: 1304
-    base: true
-  - type: Client::UI::UIModule*
-    name: UIModule
-    offset: 1312
-  - type: Component::Text::TextChecker
-    name: TextChecker
-    offset: 1320
-  - type: Common::Component::Excel::ExcelSheet*
-    name: AddonSheet
-    offset: 1568
-  - type: Client::System::String::Utf8String
-    name: UnkStrings0
-    offset: 1584
-    size: 7
-  - type: StdDeque<Component::Text::TextParameter>
-    name: LocalTextParameters
-    offset: 2312
-  - type: Client::System::String::Utf8String
-    name: UnkStrings1
-    offset: 2392
-    size: 9
-  - type: Common::Component::Excel::ExcelSheet*
-    name: AchievementSheet
-    offset: 3608
-  - type: Common::Component::Excel::ExcelSheet*
-    name: StatusSheet
-    offset: 3616
-  - type: Common::Component::Excel::ExcelSheet*
-    name: HowToSheet
-    offset: 3624
-  - type: Common::Component::Excel::ExcelSheet*
-    name: AkatsukiNoteStringSheet
-    offset: 3632
-  - type: int
-    name: SoundId
-    offset: 3640
-  - type: int
-    name: IsJingle
-    offset: 3644
-  - type: unsigned __int16*
-    name: WeatherReportReplaceIds
-    offset: 3656
-  - type: unsigned __int16*
-    name: AkatsukiNoteTitleIds
-    offset: 3672
-  virtual_functions:
-  - name: EncodeString
-    offset: 56
-    return_type: Client::System::String::Utf8String*
-    parameters:
-    - type: Client::UI::Misc::RaptureTextModule*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-    - type: Client::System::String::Utf8String*
-      name: a3
-  - name: EncodeMacro
-    offset: 64
-    return_type: int
-    parameters:
-    - type: Client::UI::Misc::RaptureTextModule*
-      name: this
-    - type: byte*
-      name: a2
-    - type: Client::System::String::Utf8String*
-      name: a3
-  - name: ProcessMacroCode
-    offset: 72
-    return_type: Client::System::String::Utf8String*
-    parameters:
-    - type: Client::UI::Misc::RaptureTextModule*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-    - type: byte*
-      name: a3
-  - name: FormatString
-    offset: 128
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RaptureTextModule*
-      name: this
-    - type: byte*
-      name: a2
-    - type: StdDeque<Component::Text::TextParameter>*
-      name: a3
-    - type: Client::System::String::Utf8String*
-      name: a4
-  member_functions:
-  - signature: E9 ?? ?? ?? ?? 80 EA 20
-    return_type: byte*
-    name: GetAddonText
-    parameters:
-    - type: Client::UI::Misc::RaptureTextModule*
-      name: this
-    - type: unsigned int
-      name: addonId
-  - signature: E8 ?? ?? ?? ?? 8B 7D FF
-    return_type: byte*
-    name: FormatAddonText1IntIntUInt
-    parameters:
-    - type: Client::UI::Misc::RaptureTextModule*
-      name: this
-    - type: unsigned int
-      name: addonId
-    - type: int
-      name: intParam1
-    - type: int
-      name: intParam2
-    - type: unsigned int
-      name: uintParam
-  - signature: E8 ?? ?? ?? ?? EB 51 0F B6 DB
-    return_type: byte*
-    name: FormatAddonText2IntInt
-    parameters:
-    - type: Client::UI::Misc::RaptureTextModule*
-      name: this
-    - type: unsigned int
-      name: addonId
-    - type: int
-      name: intParam1
-    - type: int
-      name: intParam2
-  - signature: 48 83 EC 28 45 0F B6 C8 85 D2
-    return_type: byte*
-    name: FormatTimeSpan
-    parameters:
-    - type: Client::UI::Misc::RaptureTextModule*
-      name: this
-    - type: unsigned int
-      name: seconds
-    - type: byte
-      name: alternativeMinutesGlyph
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B CE 48 8B D0
-    return_type: byte*
-    name: FormatName
-    parameters:
-    - type: Client::UI::Misc::NameFormatterPlaceholder
-      name: placeholder
-    - type: int
-      name: id
-    - type: Client::UI::Misc::NameFormatterIdConverter
-      name: idConverter
-    - type: int
-      name: intParam2
 - type: Client::Game::InstanceContent::InstanceContentDirector
   name: InstanceContentDirector
   namespace: Client.Game.InstanceContent
@@ -136042,6 +136215,195 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector::EnterContentInfoPacket*
       name: packet
+- type: Client::UI::Misc::RaptureTextModule
+  name: RaptureTextModule
+  namespace: Client.UI.Misc
+  union: False
+  size: 3680
+  fields:
+  - type: Component::Text::TextModule
+    name: TextModule
+    offset: 0
+    base: true
+  - type: Component::Text::TextChecker::ExecNonMacroFunc
+    name: ExecNonMacroFunc
+    offset: 1296
+    base: true
+  - type: Component::Excel::ExcelLanguageEvent
+    name: ExcelLanguageEvent
+    offset: 1304
+    base: true
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 1312
+  - type: Component::Text::TextChecker
+    name: TextChecker
+    offset: 1320
+  - type: Common::Component::Excel::ExcelSheet*
+    name: AddonSheet
+    offset: 1568
+  - type: Client::System::String::Utf8String
+    name: UnkStrings0
+    offset: 1584
+    size: 7
+  - type: StdDeque<Component::Text::TextParameter>
+    name: LocalTextParameters
+    offset: 2312
+  - type: Client::System::String::Utf8String
+    name: UnkStrings1
+    offset: 2392
+    size: 9
+  - type: Common::Component::Excel::ExcelSheet*
+    name: AchievementSheet
+    offset: 3608
+  - type: Common::Component::Excel::ExcelSheet*
+    name: StatusSheet
+    offset: 3616
+  - type: Common::Component::Excel::ExcelSheet*
+    name: HowToSheet
+    offset: 3624
+  - type: Common::Component::Excel::ExcelSheet*
+    name: AkatsukiNoteStringSheet
+    offset: 3632
+  - type: int
+    name: SoundId
+    offset: 3640
+  - type: int
+    name: IsJingle
+    offset: 3644
+  - type: unsigned __int16*
+    name: WeatherReportReplaceIds
+    offset: 3656
+  - type: unsigned __int16*
+    name: AkatsukiNoteTitleIds
+    offset: 3672
+  virtual_functions:
+  - name: GetGlobalParameters
+    offset: 8
+    return_type: StdDeque<Component::Text::TextParameter>*
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+  - name: FormatUtf8String
+    offset: 24
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: a3
+    - type: Client::System::String::Utf8String*
+      name: a4
+  - name: EncodeString
+    offset: 56
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+    - type: Client::System::String::Utf8String*
+      name: a3
+  - name: EncodeMacro
+    offset: 64
+    return_type: int
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: byte*
+      name: a2
+    - type: Client::System::String::Utf8String*
+      name: a3
+  - name: ProcessMacroCode
+    offset: 72
+    return_type: Client::System::String::Utf8String*
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+    - type: byte*
+      name: a3
+  - name: SetFixedSheetInterface
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Component::Text::TextModuleInterface::FixedSheetInterface*
+      name: a2
+  - name: FormatString
+    offset: 128
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: byte*
+      name: a2
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: a3
+    - type: Client::System::String::Utf8String*
+      name: a4
+  member_functions:
+  - signature: E9 ?? ?? ?? ?? 80 EA 20
+    return_type: byte*
+    name: GetAddonText
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: unsigned int
+      name: addonId
+  - signature: E8 ?? ?? ?? ?? 8B 7D FF
+    return_type: byte*
+    name: FormatAddonText1IntIntUInt
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: unsigned int
+      name: addonId
+    - type: int
+      name: intParam1
+    - type: int
+      name: intParam2
+    - type: unsigned int
+      name: uintParam
+  - signature: E8 ?? ?? ?? ?? EB 51 0F B6 DB
+    return_type: byte*
+    name: FormatAddonText2IntInt
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: unsigned int
+      name: addonId
+    - type: int
+      name: intParam1
+    - type: int
+      name: intParam2
+  - signature: 48 83 EC 28 45 0F B6 C8 85 D2
+    return_type: byte*
+    name: FormatTimeSpan
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: unsigned int
+      name: seconds
+    - type: byte
+      name: alternativeMinutesGlyph
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B CE 48 8B D0
+    return_type: byte*
+    name: FormatName
+    parameters:
+    - type: Client::UI::Misc::NameFormatterPlaceholder
+      name: placeholder
+    - type: int
+      name: id
+    - type: Client::UI::Misc::NameFormatterIdConverter
+      name: idConverter
+    - type: int
+      name: intParam2
 - type: Component::GUI::AtkStage
   name: AtkStage
   namespace: Component.GUI
@@ -140822,6 +141184,22 @@ structs:
       name: this
     - type: unsigned int
       name: a2
+  - name: ShowTalkSubtitle
+    offset: 1712
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+    - type: float
+      name: a3
+  - name: HideTalkSubtitle
+    offset: 1720
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
   - name: ShowAdventureNotice
     offset: 1744
     return_type: void
