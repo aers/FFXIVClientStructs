@@ -8,6 +8,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x440)]
 public unsafe partial struct MJIManager {
+    [FieldOffset(0x0)] public ushort TerritoryId;
+
+    // these control some form of loading state but not sure what exactly check Load and Update to figure these out
+    [FieldOffset(0x2)] internal bool Unk2;
+    [FieldOffset(0x3)] internal bool Unk3;
+    [FieldOffset(0x4)] internal bool Unk4;
+    [FieldOffset(0x5)] internal bool Unk5;
     /// <summary>
     /// Reports if the player is currently on the Island Sanctuary.
     /// </summary>
