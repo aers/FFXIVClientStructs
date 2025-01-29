@@ -21,7 +21,7 @@ public unsafe partial struct TextModuleInterface {
     public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
 
     [VirtualFunction(13)]
-    public partial void SetCompletionFixedSheetInterface(FixedSheetInterface* fixedSheetInterface);
+    public partial void SetFixedSheetInterface(FixedSheetInterface* fixedSheetInterface);
 
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]

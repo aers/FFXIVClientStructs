@@ -15,7 +15,7 @@ public unsafe partial struct TextModule {
     //[FieldOffset(0x3A8)] public Utf8String UnkStr; // DecoderResult?
     [FieldOffset(0x410)] public Utf8String MacroEncoderResult;
 
-    [FieldOffset(0x478)] public FixedSheetInterface* CompletionFixedSheetInterface;
+    [FieldOffset(0x478)] public FixedSheetInterface* FixedSheetInterface;
 
     [VirtualFunction(16), GenerateStringOverloads]
     public partial bool FormatString(byte* input, StdDeque<TextParameter>* localParameters, Utf8String* output);

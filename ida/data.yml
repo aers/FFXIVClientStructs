@@ -892,7 +892,7 @@ classes:
       7: EncodeString
       8: EncodeMacro
       9: ProcessMacroCode
-      13: SetCompletionFixedSheetInterface
+      13: SetFixedSheetInterface
   Component::Text::Localize::Localize:
     vtbls:
       - ea: 0x141F793E8
