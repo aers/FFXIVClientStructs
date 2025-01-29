@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -63,14 +62,15 @@ public class Exporter {
 
         var structs = xivStructs.Concat(havokStructs).ToArray();
         var now = DateTime.UtcNow;
+        var count = 1;
+
+        Console.WriteLine("::group::Processed Struct");
+        Console.WriteLine($"{PassString(count)} with {structs.Length} structs and enum types");
 
         foreach (var sStruct in structs) {
             ProcessType(sStruct);
         }
 
-        var count = 1;
-
-        Console.WriteLine("::group::Processed Struct");
         Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
 
         now = DateTime.UtcNow;
@@ -374,6 +374,7 @@ public class Exporter {
                 EnumValues = type.GetFields().Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.FieldType == type).ToDictionary(f => f.Name, f => f.GetRawConstantValue()!.ToString()!)
             };
 
+            Console.WriteLine($"Processed {processedEnum.EnumNamespace}::{processedEnum.EnumName} with {processedEnum.EnumValues.Count} fields");
             _enums.Add(processedEnum);
         } else if (type.IsStruct()) {
             while (type.IsPointer) type = type.GetElementType()!;
@@ -502,6 +503,7 @@ public class Exporter {
                             FieldName = subStruct.StructName
                         }
                     ];
+                    Console.WriteLine($"Processed {unionStruct.StructTypeOverride} with {unionStruct.Fields.Length} fields and methods");
                     unions[unionStructIndex] = unionStruct;
                 }
                 _structs.AddRange(unions);
@@ -532,6 +534,7 @@ public class Exporter {
                 processedStruct.Fields = [.. processedStruct.Fields.OrderBy(t => t.FieldOffset)];
             }
 
+            Console.WriteLine($"Processed {processedStruct.StructTypeName} with {processedStruct.Fields.Length + (processedStruct.VirtualFunctions?.Length ?? 0) + processedStruct.MemberFunctions.Length} fields and methods");
             _structs.Add(processedStruct);
         }
         return null;
