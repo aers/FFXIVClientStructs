@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
-using FFXIVClientStructs.FFXIV.Component.Completion;
 
 namespace FFXIVClientStructs.FFXIV.Component.Text;
 
@@ -22,5 +21,9 @@ public unsafe partial struct TextModuleInterface {
     public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
 
     [VirtualFunction(13)]
-    public partial void SetCompletionModule(CompletionModule* completionModule);
+    public partial void SetCompletionFixedSheetInterface(FixedSheetInterface* fixedSheetInterface);
+
+    [GenerateInterop(isInherited: true)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public partial struct FixedSheetInterface;
 }
