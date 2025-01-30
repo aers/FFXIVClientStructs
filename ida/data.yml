@@ -7440,6 +7440,8 @@ classes:
       205: IsMainCommandUnlocked
       208: ShowRaceCountdownEnd
       212: IsDutyRaidFinderOpen
+      214: ShowTalkSubtitle
+      215: HideTalkSubtitle
       218: ShowAdventureNotice
       222: RotateLinkshellHistory
       223: SetLinkshellCycle
@@ -11185,6 +11187,10 @@ classes:
     vtbls:
       - ea: 0x141F97FB8
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A9A640: ctor
+      0x140A9A6D0: ShowSubtitle
+      0x140A9A840: OpenSubtitleAddon
   Client::UI::Agent::AgentTourismMenu:
     vtbls:
       - ea: 0x141F98210
