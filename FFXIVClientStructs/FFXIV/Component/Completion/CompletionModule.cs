@@ -18,7 +18,7 @@ public unsafe partial struct CompletionModule {
     [FieldOffset(0x20)] public RaptureTextModule* RaptureTextModule;
 
     [FieldOffset(0x30)] public StdVector<Pointer<CategoryData>> CategoryData;
-    [FieldOffset(0x48)] public StdVector<CString> CategoryNames;
+    [FieldOffset(0x48)] public StdVector<StringPointer> CategoryNames;
     // [FieldOffset(0x60)] public StdVector<{ 8 bytes }> Unk60;
     [FieldOffset(0x78)] private StdVector<byte> Unk78;
 

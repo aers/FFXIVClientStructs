@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Completion;
 // Component::Completion::CategoryData
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public struct CategoryData {
-    [FieldOffset(0x08)] public StdVector<CString> CompletionTexts;
+    [FieldOffset(0x08)] public StdVector<StringPointer> CompletionTexts;
     [FieldOffset(0x20)] public StdVector<CompletionDataStruct> CompletionData;
     // [FieldOffset(0x38)] private StdVector<{ 4 bytes }> Unk38;
     [FieldOffset(0x50)] private Utf8String Unk50;
