@@ -14156,6 +14156,8 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
       0x1417FCE60: ctor
+      0x1417FB690: UsePomander
+      0x1417FB700: UseStone
   Client::Game::InstanceContent::InstanceContentTreasureHuntDungeon0:
     vtbls:
       - ea: 0x1421B0210
