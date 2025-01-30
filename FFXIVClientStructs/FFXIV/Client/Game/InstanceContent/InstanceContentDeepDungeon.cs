@@ -71,4 +71,21 @@ public unsafe partial struct InstanceContentDeepDungeon {
         Home = 1 << 6,
         Revealed = 1 << 7
     }
+
+    /// <summary>
+    /// Uses a pomander.
+    /// </summary>
+    /// <remarks>Returns an error if the player's animation lock is greater than 0.</remarks>
+    /// <param name="slot">Slot number in the range 0-15. This is an index into the PomanderSlot field of the DeepDungeon sheet.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4F 10 E8 ?? ?? ?? ?? 48 63 F8")]
+    public partial void UsePomander(uint slot);
+
+    /// <summary>
+    /// Uses a magicite (Heaven-on-High) or a demiclone (Eureka Orthos).
+    /// </summary>
+    /// <remarks>Returns an error if the player's animation lock is greater than 0.</remarks>
+    /// <param name="slot">Slot number in the range 0-2.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? EB 70 48 8D 4F 10")]
+    public partial void UseStone(uint slot);
+
 }
