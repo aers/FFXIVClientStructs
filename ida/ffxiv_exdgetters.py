@@ -65,6 +65,221 @@ class BaseApi:
 api = None
 
 if api is None:
+    class IDAVersionException(Exception):
+        pass
+    try:
+        import idaapi
+        if idaapi.IDA_SDK_VERSION < 900:
+            raise IDAVersionException
+        import ida_bytes
+        import ida_search
+        import ida_ida
+        import ida_typeinf
+        import ida_hexrays
+        import ida_name
+        import idc
+        import ctypes
+        import ida_helpers
+    except ImportError:
+        print("Warning: Unable to load IDA")
+    except IDAVersionException:
+        pass
+    else:
+        # noinspection PyUnresolvedReferences
+        class Ida9Api(BaseApi):
+            def do_pattern(self, pattern, suffix, struct_parsed):
+                ea = 0
+
+                if suffix != None:
+                    print(f"Finding exd funcs of {suffix}... please wait.")
+                    row_id_arg = ida_typeinf.funcarg_t()
+                    row_id_arg.type = ida_helpers.get_tinfo_from_type("unsigned int")
+                    row_id_arg.name = "rowId"
+                    sub_row_id_arg = ida_typeinf.funcarg_t()
+                    sub_row_id_arg.type = ida_helpers.get_tinfo_from_type("__int16")
+                    sub_row_id_arg.name = "subRowId"
+
+                while True:
+                    ea = ida_helpers.search_binary(ea + 1, pattern, flag=ida_search.SEARCH_DOWN)
+
+                    if ea == 0xFFFFFFFFFFFFFFFF:
+                        break
+
+                    funcEa = ea
+
+                    # This gets the first instance of EDX register followed by the RCX register, we need the value that is sent to the EDX register
+                    ins = idc.get_operand_value(ea, 0)
+                    while ins != 0x2:
+                        if ins == 0x0:
+                            ea = ea + 7
+                        elif ins == 0x4:
+                            ea = ea + 4
+                        elif ins == 0x8 or ins == 0x9:
+                            ins = idc.get_operand_type(ea, 1)
+                            if ins == 0x1:
+                                ea = ea + 3
+                            elif ins == 0x4:
+                                ea = ea + 7
+                            else:
+                                raise Exception("Unknown instruction {0} on function {1}".format(hex(ins), hex(funcEa)))
+                        elif ins == 0x1:
+                            ea = ea + 4
+                        elif ins == 0x28:
+                            ea = ea + 9
+                        else:
+                            raise Exception("Unknown instruction {0} on function {1}".format(hex(ins), hex(funcEa)))
+                        ins = idc.get_operand_value(ea, 0)
+                    
+                    sheetIdx = self.get_dword(ea + 1)
+                    ea = funcEa
+                    origName = idc.get_func_name(ea)
+                    
+                    # don't rename any funcs that are already named
+                    if origName[0:4] == "sub_":
+                        if exd_map.get(sheetIdx) == None:
+                            print(
+                                f"Func @ 0x{ea:X} references unknown sheet {sheetIdx}!"
+                            )
+                            continue
+
+                        sheetName = exd_map[sheetIdx]
+
+                        if suffix == None:
+                            suffix = ""
+
+                        fnName = "Component::Exd::ExdModule_Get%s%s" % (
+                            exd_map[sheetIdx],
+                            suffix,
+                        )
+
+                        uniquifier = 0
+                        while True:
+                            uniqueName = fnName + (
+                                f"_{uniquifier}" if uniquifier > 0 else ""
+                            )
+
+                            # check if this name is unique now
+                            if (
+                                idc.get_name_ea_simple(uniqueName) == idc.BADADDR
+                                and uniquifier > 0
+                            ):
+                                fnName = uniqueName
+                                break
+
+                            uniquifier += 1
+
+                        self.set_func_name(
+                            ea, fnName, "Sheet: {0} ({1})".format(sheetName, sheetIdx)
+                        )
+
+                        if struct_parsed:
+                            tif, funcdata = (
+                                ida_typeinf.tinfo_t(),
+                                ida_typeinf.func_type_data_t(),
+                            )
+
+                            ida_typeinf.guess_tinfo(tif, ea)
+                            if not tif.get_func_details(funcdata):
+                                ida_hexrays.decompile(ea)
+                                ida_typeinf.guess_tinfo(tif, ea)
+                                if not tif.get_func_details(funcdata):
+                                    print(
+                                        "Failed to get func details for %s @ %X"
+                                        % (fnName, ea)
+                                    )
+                                    continue
+
+                            # func_info = ida_typeinf.tinfo_t()
+                            # funcdata = ida_typeinf.func_type_data_t()
+                            # if not ida_nalt.get_tinfo(func_info, ea):
+                            #     print(func_info.is_funcptr() or func_info.is_func())
+                            #     print("Failed to get tinfo for %s @ %X" % (fnName, ea))
+                            #     continue
+
+                            # if not func_info.get_func_details(funcdata):
+                            #     print("Failed to get func details for %s @ %X" % (fnName, ea))
+                            #     continue
+
+                            rettype = ida_helpers.get_tinfo_from_type(f"{exd_struct_map[sheetIdx]} *")
+
+                            if rettype is None:
+                                print(
+                                    "Failed to get rettype for %s"
+                                    % exd_struct_map[sheetIdx]
+                                )
+                                continue
+
+                            funcdata.push_back(row_id_arg)
+
+                            if suffix == "RowAndSubRowId":
+                                funcdata.push_back(sub_row_id_arg)
+
+                            funcdata.rettype = rettype
+
+                            if not tif.create_func(funcdata):
+                                print("! failed to create function type for", fnName)
+                                return
+
+                            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+
+            def create_enum(self, name, values):
+                enum_id = idc.add_enum(idaapi.BADADDR, name, 0)
+                if enum_id == idaapi.BADADDR:
+                    tif = ida_helpers.get_named_type(name)
+                    tif.del_edms(0, ctypes.c_size_t(-1).value)
+                else:
+                    tif = ida_helpers.get_tinfo_by_tid(enum_id)
+                for key in values:
+                    edm = ida_typeinf.edm_t()
+                    edm.name = values[key]
+                    edm.value = key
+                    tif.add_edm(edm)
+
+            def create_struct(self, name, fields):
+                idaapi.begin_type_updating(idaapi.UTP_STRUCT)
+                struct_id = idc.add_struc(-1, name, 0)
+                if struct_id == idaapi.BADADDR:
+                    ida_helpers.delete_struct_members(name)
+                idaapi.end_type_updating(idaapi.UTP_STRUCT)
+            
+            def create_struct_members(self, name, fields):
+                idaapi.begin_type_updating(idaapi.UTP_STRUCT)
+                tif = ida_helpers.get_tinfo_from_type(name)
+                for [index, [type, name]] in fields.items():
+                    udm = ida_helpers.create_udm(name, index, ida_helpers.get_tinfo_from_type(type))
+                    tif.add_udm(udm)
+                idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                
+            def parse_name(self, name):
+                return name
+
+            def get_next_func(self, ea, pattern, flag):
+                return ida_search.find_binary(
+                    ea,
+                    flag & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea,
+                    pattern,
+                    16,
+                    flag,
+                )
+
+            def get_dword(self, ea):
+                return ida_bytes.get_original_dword(ea)
+
+            def set_func_name(self, ea, name, cmt):
+                ida_name.set_name(ea, name)
+                ida_bytes.set_cmt(ea, cmt, 0)
+
+            def process_pattern(self, pattern):
+                suffix = exd_func_patterns[pattern]
+                if suffix == None or suffix == "RowCount" or suffix == "SheetIndex":
+                    self.do_pattern(pattern, suffix, False)
+                else:
+                    self.do_pattern(pattern, suffix, True)
+                pass
+
+        api = Ida9Api()
+
+if api is None:
     try:
         import idaapi
         import ida_bytes
@@ -82,7 +297,7 @@ if api is None:
         print("Warning: Unable to load IDA")
     else:
         # noinspection PyUnresolvedReferences
-        class IdaApi(BaseApi):
+        class Ida7Api(BaseApi):
             def get_tinfo_from_type(self, raw_type):
                 """
                 Retrieve a tinfo_t from a raw type string.
@@ -344,7 +559,7 @@ if api is None:
                     self.do_pattern(pattern, suffix, True)
                 pass
 
-        api = IdaApi()
+        api = Ida7Api()
 
 if api is None:
     try:
@@ -366,6 +581,10 @@ if api is None:
                 pass
 
             def create_struct(self, name, fields):
+                # type: (str, dict[str, str]) -> None
+                pass
+
+            def create_struct_members(self, name, fields):
                 # type: (str, dict[str, str]) -> None
                 pass
 
@@ -438,6 +657,10 @@ for key in exd_headers:
     struct_name = f"Component::Exd::Sheets::{exd_map[key]}"
     exd_struct_map[key] = struct_name
     api.create_struct(api.parse_name(struct_name), exd_header)
+
+for (key, struct_name) in exd_struct_map.items():
+    [exd_header, exd_header_count] = exd_headers[key]
+    api.create_struct_members(api.parse_name(struct_name), exd_header)
 
 # if a new pattern is found, add it to the exd_func_patterns dict
 for pattern in exd_func_patterns:
