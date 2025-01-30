@@ -7425,7 +7425,7 @@ classes:
       185: ShowGetAction
       186: ShowLocationTitle
       187: HideLocationTitle
-      190: ShowGrandCompany1
+      190: ShowGrandCompanyRankUp
       193: ShowStreak
       194: ShowAddonKillStreakForManeuvers
       195: ShowBalloonMessage
