@@ -17,18 +17,21 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 ?? 48 89 01 4C 8B E1", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
+    [FieldOffset(0x48)] public LobbySubscriptionInfo* SubscriptionInfo;
 
     [FieldOffset(0xA20)] public ExcelSheet* ErrorSheet;
     [FieldOffset(0xA28)] public ExcelSheet* LobbySheet;
     [FieldOffset(0xA30)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0xA38)] public StdDeque<TextParameter> LobbyTextParameters;
-    [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray5<Utf8String> _tempUtf8Strings;
+    [FieldOffset(0xA60), FixedSizeArray] internal FixedSizeArray4<Utf8String> _tempUtf8Strings;
+    [FieldOffset(0xC00)] public Utf8String ConnectingToDatacenterString;
     [FieldOffset(0xC68)] public StdVector<Utf8String> VersionStrings;
     [FieldOffset(0xC80)] public Utf8String DisplayedVersionString;
 
     [FieldOffset(0xD00), FixedSizeArray] internal FixedSizeArray8<Utf8String> _unkUtf8Strings;
 
     [FieldOffset(0x1178)] public sbyte ServiceAccountIndex;
+    [FieldOffset(0x1179)] public byte SelectedCharacterIndex;
 
     [FieldOffset(0x1180)] public ulong HoveredCharacterContentId;
     [FieldOffset(0x1188)] public byte DataCenter;
@@ -57,11 +60,12 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x11E0)] public long IdleTime;
 
-    [FieldOffset(0x1200)] public int QueuePosition;
+    [FieldOffset(0x11F0)] public long QueueTimeSinceLastUpdate;
+    [FieldOffset(0x11F8)] public int QueuePosition;
 
-    [FieldOffset(0x1205)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    [FieldOffset(0x11FD)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
-    [FieldOffset(0x1208)] public ulong SelectedCharacterContentId;
+    [FieldOffset(0x1200)] public ulong SelectedCharacterContentId;
 
     [FieldOffset(0x1210)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
     [FieldOffset(0x1211)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin (+0x38)
