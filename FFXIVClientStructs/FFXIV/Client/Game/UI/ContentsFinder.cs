@@ -37,13 +37,16 @@ public struct ContentsFinderQueueInfo {
     [FieldOffset(0x40)] public int EnteredQueueTimestamp;
     [FieldOffset(0x44)] public int QueueReadyTimestamp;
 
+    [FieldOffset(0x4C)] public int NextQueueUpdateTimestamp;
+
     [FieldOffset(0x55)] public QueueStates QueueState;
 
     [FieldOffset(0x5A)] public byte QueuedContentRouletteId;
-
+    [FieldOffset(0x5B)] public sbyte ClampedPositionInQueue;
     [FieldOffset(0x5C)] public sbyte PositionInQueue;
 
-    [FieldOffset(0x67)] public byte AverageWaitTime; // In minutes
+    [FieldOffset(0x62)] public QueueInfoState StateInfo;
+    [FieldOffset(0x67), Obsolete("Use StateInfo.AverageWaitTime")] public byte AverageWaitTime; // In minutes
 
     [FieldOffset(0x7C)] public PoppedContentTypes PoppedContentType;
 
@@ -77,3 +80,38 @@ public struct ContentsFinderQueueInfo {
         Duty = 2
     }
 }
+
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public struct QueueInfoState {
+    [FieldOffset(0x2)] public QueueContentType ContentType;
+    [FieldOffset(0x3)] public bool IsReservingServer;
+    
+    // ContentType: 0
+    [FieldOffset(0x4)] public byte PositionInQueue;
+
+    // ContentType: 0-3
+    [FieldOffset(0x5)] public bool AverageWaitTime;
+
+    // ContentType: 1
+    [FieldOffset(0x8)] public byte TanksFound;
+    [FieldOffset(0x9)] public byte TanksNeeded;
+    [FieldOffset(0xA)] public byte HealersFound;
+    [FieldOffset(0xB)] public byte HealersNeeded;
+    [FieldOffset(0xC)] public byte DPSFound;
+    [FieldOffset(0xD)] public byte DPSNeeded;
+
+    // ContentType: 2
+    [FieldOffset(0xE)] public byte PlayersFound;
+    [FieldOffset(0xF)] public byte PlayersNeeded;
+
+    public enum QueueContentType : byte {
+        PositionAndWaitTime = 0, // Roulette
+        THDAndWaitTime = 1,
+        PlayersAndWaitTime = 2,
+        WaitTime = 3,
+        None4 = 4,
+        None5 = 5
+    }
+}
+
