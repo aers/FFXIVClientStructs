@@ -61,11 +61,11 @@ public unsafe partial struct AgentLobby {
     [FieldOffset(0x11E0)] public long IdleTime;
 
     [FieldOffset(0x11F0)] public long QueueTimeSinceLastUpdate;
-    [FieldOffset(0x11F8)] public int QueuePosition;
+    [FieldOffset(0x1200)] public int QueuePosition;
 
-    [FieldOffset(0x11FD)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
+    [FieldOffset(0x1205)] public sbyte HoveredCharacterIndex; // index in CharaSelectCharacterList
 
-    [FieldOffset(0x1200)] public ulong SelectedCharacterContentId;
+    [FieldOffset(0x1208)] public ulong SelectedCharacterContentId;
 
     [FieldOffset(0x1210)] public bool IsLoggedIn; // set in ProcessPacketPlayerSetup, unset in LogoutCallbackInterface_OnLogout
     [FieldOffset(0x1211)] public bool IsLoggedIntoZone; // set in ZoneLoginCallbackInterface_OnZoneLogin (+0x38)
