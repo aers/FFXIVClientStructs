@@ -273,6 +273,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(18)]
     public partial bool ShouldCollideWithWindow(AtkCollisionNode* collisionNode);
 
+    [VirtualFunction(20)]
+    public partial void OnMove();
+
     [VirtualFunction(23)]
     public partial bool ShouldIgnoreInputs();
 
@@ -284,6 +287,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [VirtualFunction(30)]
     public partial void GetRootBounds(Bounds* outBounds);
+
+    [VirtualFunction(32)]
+    public partial bool ShouldAllowCursorFocus();
 
     [VirtualFunction(37)]
     public partial void Focus();
@@ -321,6 +327,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [VirtualFunction(54)]
     public partial void FireCloseCallback();
+
+    [VirtualFunction(56)]
+    public partial void OnShow(float width, float height);
 
     [VirtualFunction(57)]
     public partial bool HandleCustomInput(AtkInputData* inputData);
