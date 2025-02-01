@@ -1310,7 +1310,7 @@ classes:
       0x140CD3C00: IsCraftingNotebookDivisionLevelRangeSeen # static (int craftingType, uint notebookDivisionId)
       0x140CD3CA0: SetSeenCraftingNotebookDivisionLevelRangeBitmaskBit
       0x14183D5C0: IsLevequestComplete
-  Client::Game::TreasureHuntManager:
+  Client::Game::EventItemManager:
     instances:
       - ea: 0x1427E3638
     funcs:
