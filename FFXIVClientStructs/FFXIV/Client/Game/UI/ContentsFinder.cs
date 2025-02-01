@@ -25,7 +25,7 @@ public unsafe partial struct ContentsFinder {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
-public struct ContentsFinderQueueInfo {
+public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x04)] public uint QueuedContentFinderConditionId1;
     [FieldOffset(0x0C)] public uint QueuedContentFinderConditionId2;
     [FieldOffset(0x14)] public uint QueuedContentFinderConditionId3;
