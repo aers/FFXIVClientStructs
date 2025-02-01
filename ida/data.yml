@@ -6658,6 +6658,7 @@ classes:
       0x1400D2EA0: PlaySoundEffectHandler
       0x140656430: OpenMapWithMapLinkHandler
       0x1400D4DA0: ScdResourceHandler
+      0x1400DC1E0: SetRemappedIconId
   Component::GUI::AtkComponentCheckBox:
     vtbls:
       - ea: 0x141F68578
