@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::EventItemManager
 [GenerateInterop]
