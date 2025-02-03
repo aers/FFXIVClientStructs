@@ -8391,6 +8391,7 @@ classes:
       0x140872AB0: StartOmen
       0x140872E50: StartOmenDirectional
       0x14082D7F0: GetScale
+      0x14086B280: IsJumping
   Client::Game::Character::Character::CastInfo:
     funcs:
       0x140AD28D0: Reset
