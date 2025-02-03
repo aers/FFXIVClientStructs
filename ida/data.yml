@@ -4474,6 +4474,10 @@ classes:
     vtbls:
       - ea: 0x141F2CC38
         base: Client::System::Resource::Handle::ResourceHandle
+  Client::System::Resource::Handle::DefaultResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2CDA0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::MaterialResourceHandle:
     vtbls:
       - ea: 0x141F2CDB8
@@ -4482,18 +4486,30 @@ classes:
       0x1401E2050: ctor
       0x1401E2A60: LoadTexFiles
       0x1401E28B0: LoadShpkFiles
+  Client::System::Resource::Handle::MaterialResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2CF20
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ShaderPackageResourceHandle:
     vtbls:
       - ea: 0x141F2CF38
         base: Client::System::Resource::Handle::DefaultResourceHandle
     funcs:
       0x1401E33B0: ctor
+  Client::System::Resource::Handle::ShaderPackageResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D0A0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::TextureResourceHandle:
     vtbls:
       - ea: 0x141F2D0B8
         base: Client::System::Resource::Handle::ResourceHandle
     funcs:
       0x1401E36E0: ctor
+  Client::System::Resource::Handle::TextureResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D220
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::ResourceEventListener:
     vtbls:
       - ea: 0x141F2D3F8
@@ -4505,74 +4521,146 @@ classes:
     vtbls:
       - ea: 0x141F2D238
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::GrassGridDataResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D3E0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::SoundResourceHandle:
     vtbls:
       - ea: 0x141F2D420
         base: Client::System::Resource::Handle::ResourceHandle
+  Client::System::Resource::Handle::SoundResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D588
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::EquipmentParameterResourceHandle:
     vtbls:
       - ea: 0x141F2D5B8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::EquipmentParameterResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D720
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::PreBoneDeformerResourceHandle:
     vtbls:
       - ea: 0x141F30410
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PreBoneDeformerResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F30578
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::CharaMakeParameterResourceHandle:
     vtbls:
       - ea: 0x141F2D798
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CharaMakeParameterResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D900
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ExSkeletonTableResourceHandle:
     vtbls:
       - ea: 0x141F2D918
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExSkeletonTableResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2DA80
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::PartialAnimationPackResourceHandle:
     vtbls:
       - ea: 0x141F2DAC8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PartialAnimationPackResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2DC30
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::PapLoadTableResourceHandle:
     vtbls:
       - ea: 0x141F2DC58
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PapLoadTableResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2DDC0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::AnimationExchangeTableResourceHandle:
     vtbls:
       - ea: 0x141F2DDD8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AnimationExchangeTableResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2DF40
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::MotionLineTableResourceHandle:
     vtbls:
       - ea: 0x141F2DF58
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::MotionLineTableResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E0C0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::SkeletonResourceHandle:
     vtbls:
       - ea: 0x141F2E0D8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SkeletonResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E240
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::AnimationWorkTableResourceHandle:
     vtbls:
       - ea: 0x141F2E258
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AnimationWorkTableResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E3C0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::StainingTemplateResourceHandle:
     vtbls:
       - ea: 0x141F2E3D8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::StainingTemplateResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E540
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ImageChangeDataResourceHandle:
     vtbls:
       - ea: 0x141F2E5D0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ImageChangeDataResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E738
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ElementIdResourceHandle:
     vtbls:
       - ea: 0x141F2E750
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ElementIdResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E8B8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::GrassZoneDataResourceHandle:
     vtbls:
       - ea: 0x141F2E8D0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::GrassZoneDataResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2EA78
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ApricotResourceHandle:
     vtbls:
       - ea: 0x141F2EA90
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ApricotResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2EBF8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ApricotTextureResourceHandle:
     vtbls:
       - ea: 0x141F2EC10
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ApricotTextureResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2ED78
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ModelResourceHandle:
     vtbls:
       - ea: 0x141F2ED90
@@ -4581,122 +4669,242 @@ classes:
       0x1401FFD70: GetMaterialFileNameBySlot
 #fail       0x1403E05A0: GetAttributeIndex
 #fail       0x1403E0710: GetShapeIndex
+  Client::System::Resource::Handle::ModelResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2EEF8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ShaderCodeResourceHandle:
     vtbls:
       - ea: 0x141F2EF10
         base: Client::System::Resource::Handle::ResourceHandle
+  Client::System::Resource::Handle::ShaderCodeResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2F078
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::TerrainResourceHandle:
     vtbls:
       - ea: 0x141F2F090
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::TerrainResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2F1F8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::EnvSetResourceHandle:
     vtbls:
       - ea: 0x141F2F210
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::EnvSetResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2F378
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::SoundSetResourceHandle:
     vtbls:
       - ea: 0x141F2F390
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SoundSetResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2F4F8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::AmbientSetResourceHandle:
     vtbls:
       - ea: 0x141F2F510
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AmbientSetResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2F678
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ObjectBehaviorSetResourceHandle:
     vtbls:
       - ea: 0x141F2F690
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ObjectBehaviorSetResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2F7F8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::SkyVisibilityResourceHandle:
     vtbls:
       - ea: 0x141F2F810
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SkyVisibilityResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2F978
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ClipAABBResourceHandle:
     vtbls:
       - ea: 0x141F2F990
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ClipAABBResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2FAF8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::AttachOffsetResourceHandle:
     vtbls:
       - ea: 0x141F2FB10
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AttachOffsetResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2FC78
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::UdwResourceHandle:
     vtbls:
       - ea: 0x141F2FC90
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::UdwResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2FDF8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::SpmResourceHandle:
     vtbls:
       - ea: 0x141F2FE10
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SpmResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2FF78
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::LookAtIkResourceHandle:
     vtbls:
       - ea: 0x141F2FF90
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LookAtIkResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F300F8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::AutoShakeIkResourceHandle:
     vtbls:
       - ea: 0x141F30110
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::AutoShakeIkResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F30278
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::SkeletonParamResourceHandle:
     vtbls:
       - ea: 0x141F30290
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SkeletonParamResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F303F8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::MsbResourceHandle:
     vtbls:
       - ea: 0x141F30710
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::MsbResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F30878
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::CollisionMeshResourceHandle:
     vtbls:
       - ea: 0x141F30890
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CollisionMeshResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F309F8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::CutSceneResourceHandle:
     vtbls:
       - ea: 0x141F30A10
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CutSceneResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F30B78
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::TimeLineResourceHandle:
     vtbls:
       - ea: 0x141F30B90
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::TimeLineResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F30CF8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::LevelSceneResourceHandle:
     vtbls:
       - ea: 0x141F30D40
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LevelSceneResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F30EA8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::LayerGroupResourceHandle:
     vtbls:
       - ea: 0x141F30EC0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LayerGroupResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F31028
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::SharedGroupResourceHandle:
     vtbls:
       - ea: 0x141F31040
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::SharedGroupResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F311A8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::NaviMeshResourceHandle:
     vtbls:
       - ea: 0x141F311C0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::NaviMeshResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F31328
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ExlResourceHandle:
     vtbls:
       - ea: 0x141F31340
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExlResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F314A8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ExhResourceHandle:
     vtbls:
       - ea: 0x141F314C0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExhResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F31628
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ExdResourceHandle:
     vtbls:
       - ea: 0x141F31640
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExdResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F317A8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::HardwareCursorResourceHandle:
     vtbls:
       - ea: 0x141F317C0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::HardwareCursorResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F31928
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::CursorResourceHandle:
     vtbls:
       - ea: 0x141F31940
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CursorResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F31AA8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::PNGResourceHandle:
     vtbls:
       - ea: 0x141F31AC0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PNGResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F31C28
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::UgdResourceHandle:
     vtbls:
       - ea: 0x141F31C40
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::UgdResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F31DA8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::UldResourceHandle:
     vtbls:
       - ea: 0x141F31DC0
@@ -4709,50 +4917,98 @@ classes:
     vtbls:
       - ea: 0x141F31F40
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LuaResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F320A8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::LuabResourceHandle:
     vtbls:
       - ea: 0x141F320C0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::LuabResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F32228
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::BonePhysicsResourceHandle:
     vtbls:
       - ea: 0x142084CE8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::BonePhysicsResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D5A0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::EquipmentVfxParameterResourceHandle:
     vtbls:
       - ea: 0x142084EA8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::EquipmentVfxParameterResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D738
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::GimmickParameterResourceHandle:
     vtbls:
       - ea: 0x1420851A8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::GimmickParameterResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D750
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::EquipmentDeformerParameterResourceHandle:
     vtbls:
       - ea: 0x1420854B0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::EquipmentDeformerParameterResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D768
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::WeaponAttachOffsetExistResourceHandle:
     vtbls:
       - ea: 0x142085808
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::WeaponAttachOffsetExistResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2DA98
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::WeaponTypeDataResourceHandle:
     vtbls:
       - ea: 0x1420859B0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::WeaponTypeDataResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2DAB0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ControlPointResourceHandle:
     vtbls:
       - ea: 0x142086AC8
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ControlPointResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F30D10
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::CameraShakeResourceHandle:
     vtbls:
       - ea: 0x142086DC0
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::CameraShakeResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F30D28
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::FontdataResourceHandle:
     vtbls:
       - ea: 0x142086F60
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::FontdataResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F32240
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::GaijiFontdataResourceHandle:
     vtbls:
       - ea: 0x142087268
         base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::GaijiFontdataResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F32258
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::Graphics::Primitive::Manager:
     instances:
       - ea: 0x142614DA0
