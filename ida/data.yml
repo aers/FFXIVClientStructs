@@ -9537,6 +9537,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EF1D00: ctor
+  Client::UI::Agent::AgentFishRelease:
+    vtbls:
+      - ea: 0x141F96B08
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A66130: ctor
   Client::UI::Agent::AgentQuestJournal:
     vtbls:
       - ea: 0x141F95ED0
@@ -9601,6 +9607,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A5CC50: ctor
+  Client::UI::Agent::AgentRepairRequest:
+    vtbls:
+      - ea: 0x141F96B08
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A66130: ctor
   Client::UI::Agent::AgentColorant::ColorantCharaView:
     vtbls:
       - ea: 0x141FC2708
@@ -10234,6 +10246,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A5B8C0: ctor
+  Client::UI::Agent::AgentAWGrowthFragTrade:
+    vtbls:
+      - ea: 0x141FC1F08
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140E98EA0: ctor
+  Client::UI::Agent::AgentAWMakingSpiritGrow:
+    vtbls:
+      - ea: 0x141FC1F90
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140E9C1E0: ctor
   Client::UI::Agent::AgentRelic2Glass:
     vtbls:
       - ea: 0x141FC1E78
@@ -10334,6 +10358,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AAEA40: ctor
+  Client::UI::Agent::AgentWedding:
+    vtbls:
+      - ea: 0x141F986E0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AAFB90: ctor
   Client::UI::Agent::AgentMateriaAttach:
     vtbls:
       - ea: 0x141FBFA78
@@ -10774,12 +10804,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140B9C220: ctor
-  Client::UI::Agent::AgentAquariumSetting:
+  Client::UI::Agent::AgentAquarium:
     vtbls:
       - ea: 0x141FC1BE0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E8EA50: ctor
+  Client::UI::Agent::AgentQTE:
+    vtbls:
+      - ea: 0x141F95DA8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A20B40: ctor
   Client::UI::Agent::AgentDeepDungeonMenu:
     vtbls:
       - ea: 0x141FA3828
@@ -10787,6 +10823,10 @@ classes:
     funcs:
       0x140B5DEA0: ctor
       0x140B5DEF0: Finalizer
+  Client::UI::Agent::AgentContextIconMenu:
+    vtbls:
+      - ea: 0x141F38D70
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentDeepDungeonResult:
     vtbls:
       - ea: 0x141FA3558
@@ -10814,6 +10854,16 @@ classes:
   Client::UI::Agent::AgentContactList:
     vtbls:
       - ea: 0x141F3C2E0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPicturePreview:
+    vtbls:
+      - ea: 0x141FC0D78
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140E1C370: ctor
+  Client::UI::Agent::AgentMcAggre:
+    vtbls:
+      - ea: 0x141F3C358
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentSnipe:
     vtbls:
@@ -10845,6 +10895,24 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140DF6C90: ctor
+  Client::UI::Agent::AgentTreasureHighLow:
+    vtbls:
+      - ea: 0x141F98398
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140AAA700: ctor
+  Client::UI::Agent::AgentManeuversArmorBoarding:
+    vtbls:
+      - ea: 0x141FBFDE0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140DF9930: ctor
+  Client::UI::Agent::AgentManeuversHud:
+    vtbls:
+      - ea: 0x141FBFD68
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140DF8130: ctor
   Client::UI::Agent::AgentUserPolicyPerformance:
     vtbls:
       - ea: 0x141F98488
