@@ -6914,6 +6914,7 @@ classes:
       0x1400D2EA0: PlaySoundEffectHandler
       0x140656430: OpenMapWithMapLinkHandler
       0x1400D4DA0: ScdResourceHandler
+      0x1400DC1E0: SetRemappedIconId
   Component::GUI::AtkComponentCheckBox:
     vtbls:
       - ea: 0x141F68578
@@ -14598,6 +14599,21 @@ classes:
       0x140F2B8F0: ctor
       0x140F2BF90: OnRequestedUpdate
       0x140F2CE60: HandleLinkClick
+  Client::UI::ListPanel:
+    vtbls:
+      - ea: 0x141FC67C8
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x140F2F900: ctor
+      0x140F2F930: Finalize
+  Client::UI::PreviewController:
+    vtbls:
+      - ea: 0x141FC67D0
+        base: Component::GUI::AtkEventListener
+    funcs:
+      0x140F2F980: ctor
+      0x140F2F9D0: Finalize
   Client::UI::TabController:
     vtbls:
       - ea: 0x141FC67E8
