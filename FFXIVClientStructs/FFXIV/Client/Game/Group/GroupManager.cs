@@ -15,6 +15,9 @@ public unsafe partial struct GroupManager {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 80")]
     public partial Group* GetGroup(bool replayGroup = false);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 57 DD")]
+    public partial Group* GetGroupWithCheck(bool replayGroup = false);
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x65B0)]
     public unsafe partial struct Group {
