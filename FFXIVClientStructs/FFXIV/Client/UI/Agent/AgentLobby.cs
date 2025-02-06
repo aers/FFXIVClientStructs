@@ -17,7 +17,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 ?? 48 89 01 4C 8B E1", 3)]
 public unsafe partial struct AgentLobby {
     [FieldOffset(0x40)] public LobbyData LobbyData; // for lack of a better name
-    [FieldOffset(0x48)] public LobbySubscriptionInfo* SubscriptionInfo;
 
     [FieldOffset(0xA20)] public ExcelSheet* ErrorSheet;
     [FieldOffset(0xA28)] public ExcelSheet* LobbySheet;
