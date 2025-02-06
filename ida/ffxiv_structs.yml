@@ -5446,6 +5446,31 @@ structs:
   - name: Dtor
     offset: 0
   member_functions: []
+- type: Client::Game::EventItemManager
+  name: EventItemManager
+  namespace: Client.Game
+  union: False
+  size: 8
+  fields: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 0F B7 C0 45 33 C9 0F B7 D3
+    return_type: unsigned __int16
+    name: GetTreasureSpotSubKey
+    parameters:
+    - type: Client::Game::EventItemManager*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B6 D0 45 0F B6 CE
+    return_type: unsigned int
+    name: GetTreasureHuntRank
+    parameters:
+    - type: Client::Game::EventItemManager*
+      name: this
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 E4
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::EventItemManager
 - type: Client::Game::GameMain::Festival
   name: Festival
   namespace: Client.Game
@@ -137598,7 +137623,23 @@ structs:
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4F 10 E8 ?? ?? ?? ?? 48 63 F8
+    return_type: void
+    name: UsePomander
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: unsigned int
+      name: slot
+  - signature: E8 ?? ?? ?? ?? EB 70 48 8D 4F 10
+    return_type: void
+    name: UseStone
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: unsigned int
+      name: slot
 - type: Client::Game::InstanceContent::InstanceContentOceanFishing
   name: InstanceContentOceanFishing
   namespace: Client.Game.InstanceContent
@@ -139345,14 +139386,6 @@ structs:
     parameters:
     - type: Client::Game::Event::EventFramework*
       name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40
-    return_type: Client::Game::InstanceContent::PublicContentDirector*
-    name: GetPublicContentDirectorByType
-    parameters:
-    - type: Client::Game::Event::EventFramework*
-      name: this
-    - type: Client::Game::InstanceContent::PublicContentDirectorType
-      name: publicContentDirectorType
   - signature: E8 ?? ?? ?? ?? 44 89 B7 ?? ?? ?? ?? 80 BF
     return_type: void
     name: InteractWithHandlerFromSelector
@@ -139398,6 +139431,12 @@ structs:
     is_pointer: True
     return_type: Client::Game::Event::EventFramework
   static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40
+    return_type: Client::Game::InstanceContent::PublicContentDirector*
+    name: GetPublicContentDirectorByType
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirectorType
+      name: publicContentDirectorType
   - signature: E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8
     return_type: unsigned int
     name: GetCurrentContentId
