@@ -4467,6 +4467,7 @@ classes:
         base: Client::System::Common::NonCopyable
     vfuncs:
       6: GetUserData
+      16: GetClassName
       23: GetData
       33: Load
     funcs:
@@ -4477,6 +4478,8 @@ classes:
     vtbls:
       - ea: 0x141F2CC38
         base: Client::System::Resource::Handle::ResourceHandle
+    funcs:
+      0x1401E1B60: ctor
   Client::System::Resource::Handle::DefaultResourceHandleFactory:
     vtbls:
       - ea: 0x141F2CDA0
@@ -4544,11 +4547,11 @@ classes:
     vtbls:
       - ea: 0x141F2D720
         base: Client::System::Resource::Handle::ResourceHandleFactory
-  Client::System::Resource::Handle::PreBoneDeformerResourceHandle:
+  Client::System::Resource::Handle::KineDriverResourceHandle:
     vtbls:
       - ea: 0x141F30410
         base: Client::System::Resource::Handle::DefaultResourceHandle
-  Client::System::Resource::Handle::PreBoneDeformerResourceHandleFactory:
+  Client::System::Resource::Handle::KineDriverResourceHandleFactory:
     vtbls:
       - ea: 0x141F30578
         base: Client::System::Resource::Handle::ResourceHandleFactory
@@ -4559,6 +4562,14 @@ classes:
   Client::System::Resource::Handle::CharaMakeParameterResourceHandleFactory:
     vtbls:
       - ea: 0x141F2D900
+        base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::PreBoneDeformerResourceHandle:
+    vtbls:
+      - ea: 0x142085658
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::PreBoneDeformerResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2D780
         base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::ExSkeletonTableResourceHandle:
     vtbls:
@@ -4616,6 +4627,54 @@ classes:
     vtbls:
       - ea: 0x141F2E3C0
         base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::ExtraSkeletonLoadResourceHandle:
+    vtbls:
+      - ea: 0x142085E38
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::ExtraSkeletonLoadResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E558
+        base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::FacialParameterEditResourceHandle:
+    vtbls:
+      - ea: 0x142085FF8
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::FacialParameterEditResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E570
+        base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::EyeAnimationResourceHandle:
+    vtbls:
+      - ea: 0x142086300
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::EyeAnimationResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E588
+        base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::KineDriverLoadResourceHandle:
+    vtbls:
+      - ea: 0x1420864B0
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::KineDriverLoadResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E5A0
+        base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::BonamikResourceHandle:
+    vtbls:
+      - ea: 0x141F30590
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::BonamikResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F306F8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
+  Client::System::Resource::Handle::BonamikLoadResourceHandle:
+    vtbls:
+      - ea: 0x1420867B8
+        base: Client::System::Resource::Handle::DefaultResourceHandle
+  Client::System::Resource::Handle::BonamikLoadResourceHandleFactory:
+    vtbls:
+      - ea: 0x141F2E5B8
+        base: Client::System::Resource::Handle::ResourceHandleFactory
   Client::System::Resource::Handle::StainingTemplateResourceHandle:
     vtbls:
       - ea: 0x141F2E3D8
@@ -4669,6 +4728,7 @@ classes:
       - ea: 0x141F2ED90
         base: Client::System::Resource::Handle::ResourceHandle
     funcs:
+      0x1401FF010: ctor
       0x1401FFD70: GetMaterialFileNameBySlot
 #fail       0x1403E05A0: GetAttributeIndex
 #fail       0x1403E0710: GetShapeIndex
