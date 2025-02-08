@@ -9602,10 +9602,10 @@ classes:
       0x140EF1D00: ctor
   Client::UI::Agent::AgentFishRelease:
     vtbls:
-      - ea: 0x141F96B08
+      - ea: 0x141FC35B0
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140A66130: ctor
+      0x140EF7930: ctor
   Client::UI::Agent::AgentQuestJournal:
     vtbls:
       - ea: 0x141F95ED0
