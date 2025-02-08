@@ -61,7 +61,7 @@ public enum AgentId : uint {
     FishingNote = 29,
     FishGuide = 30,
     FishRecord = 31,
-
+    FishRelease = 32,
     QuestJournal = 33,
     ActionMenu = 34,
     Marker = 35,
@@ -72,7 +72,7 @@ public enum AgentId : uint {
     Map = 40,
     Loot = 41, // NeedGreed
     Repair = 42,
-    // 43 repair request?
+    RepairRequest = 43,
     Materialize = 44,
     MateriaAttach = 45,
     MiragePrism = 46,
@@ -173,14 +173,15 @@ public enum AgentId : uint {
     RetainerStatus = 141,
     RetainerTask = 142,
     RetainerTaskSupply = 143,
-
+    Unk144 = 144,
     RetainerItemTransfer = 145,
     RelicGlass = 146,
     RelicNotebook = 147,
     RelicSphere = 148,
     TradeMultiple = 149,
     RelicSphereUpgrade = 150,
-
+    AWGrowthFragTrade = 151, // AnimaWeapon5TradeItem
+    AWMakingSpiritGrow = 152, // AnimaWeapon5SpiritTalk
     Relic2Glass = 153,
     Minigame = 154,
     Tryon = 155,
@@ -195,17 +196,17 @@ public enum AgentId : uint {
     PatchMark = 164, // SelectOk?
     HousingWithdrawStorage = 165,
     WeatherReport = 166,
-    // 167 wedding stuff?
+    Wedding = 167,
     LoadingTips = 168,
     Revive = 169,
-
+    Unk170 = 170, // something with RaceChocobo director/todo
     ChocoboRace = 171,
     ChocoboBreed = 172,
     GoldSaucerMiniGame = 173,
     TrippleTriad = 174,
     TripleTriadRuleAnnounce = 175,
     TripleTriadRuleSetting = 176,
-
+    Unk177 = 177,
     TripleTriadSchedule = 178,
     TripleTriadRanking = 179,
     TripleTriadTournamentResult = 180,
@@ -253,7 +254,7 @@ public enum AgentId : uint {
     WebGuidance = 222,
     Orchestrion = 223,
     BeginnerChatList = 224, // Novice Network
-    // BeginnerChatSomething = 225,
+    Unk225 = 225, // BeginnerChatKick?
     BeginnerChatInvite = 226,
     ReturnerDialog = 227,
     OrchestrionInn = 228,
@@ -265,7 +266,7 @@ public enum AgentId : uint {
     RaidFinder = 234,
     GcArmyExpedition = 235,
     GcArmyMemberList = 236,
-
+    Unk237 = 237,
     DeepDungeonInspect = 238,
     DeepDungeonMap = 239,
     DeepDungeonStatus = 240,
@@ -285,42 +286,46 @@ public enum AgentId : uint {
     PvPDuelRequest = 254,
     PvPHeader = 255,
     PvPGauge = 256, // PvPFrontlineGauge
-
+    Unk257 = 257, // PvPMKSHeaderSpec, PvPSpectatorCameraList, PvPSpectatorList
+    Unk258 = 258,
+    Aquarium = 259,
+    [Obsolete("Renamed to just Aquarium since it also handles the AquariumFishlist addon")]
     AquariumSetting = 259,
-
+    QTE = 260,
     DeepDungeonMenu = 261,
-
+    ContextIconMenu = 262,
     DeepDungeonResult = 263,
     ItemAppraisal = 264, // DeepDungeon Appraisal
     ItemInspection = 265, // Lockbox
     RecipeItemContext = 266, // context menus for RecipeTree and RecipeList, constructor inlined
     ContactList = 267,
-
+    PicturePreview = 268, // Preview for Sightseeing Log, Landscapes, Portraits
+    McAggre = 269,
     SatisfactionSupply = 270,
     SatisfactionSupplyResult = 271,
     SatisfactionList = 272, // new in 7.1
     Snipe = 273,
     MountSpeed = 274,
-
     PvpScreenInformationHotBar = 275,
     PvpWelcome = 276,
     JobHudNotice = 277,
-    // TreasureHunt = 278, // unsure
-    // Maneuvers1 = 279, // Rival Wings
-    // Maneuvers2 = 280, // Rival Wings
+    TreasureHighLow = 278, // Gambler's Lure
+    ManeuversArmorBoarding = 279, // Rival Wings
+    ManeuversHud = 280, // Rival Wings
     UserPolicyPerformance = 281,
     PvpTeam = 282,
     PvpTeamInputString = 283,
     PvpTeamMember = 284,
     PvPTeamResult = 285,
-
+    Unk286 = 286,
+    Unk287 = 287,
     PvpTeamCrestEditor = 288,
     PvPTeamOrganization = 289,
-
+    Unk290 = 290,
     EurekaElementalHud = 291,
     EurekaElementalEdit = 292,
     EurekaChainInfo = 293,
-    // EurekaLogos = 294,
+    Unk294 = 294, // EurekaLogos?
     EurekaMagiaActionNotebook = 295, // unconfirmed
     EurekaWeaponAdjust = 296,
     TeleportHousingFriend = 297,
@@ -336,10 +341,11 @@ public enum AgentId : uint {
     PerformanceModeSettings = 307,
     RecordReadyCheck = 308,
     Fashion = 309,
-
+    Unk310 = 310, // PvPTeamOrganization again?
     SelectYesno = 311,
     HousingGuestBook = 312,
-
+    Unk313 = 313, // GridMenu? SelectCustomString?
+    Unk314 = 314, // SelectStringEventGimmick? for some QuestEventHandler
     ReconstructionBox = 315,
     ReconstructionBuyback = 316,
     CrossWorldLinkShell = 317,
@@ -352,7 +358,8 @@ public enum AgentId : uint {
     RhythmAction = 325,
     WeddingNotification = 326,
     Emj = 327, // Mahjong
-
+    Unk328 = 328,
+    Unk329 = 329,
     EmjIntro = 330,
     EmjVoiceCharacter = 331, // new in 7.1
     AozContentBriefing = 332, // Masked Carnivale
@@ -424,13 +431,12 @@ public enum AgentId : uint {
     BannerList = 399, // Portraits
     BannerEditor = 400, // Portrait Editor
     BannerUpdateView = 401,
-
+    Unk402 = 402,
     BannerPreview = 403, // new in 7.1
     PvPMap = 404,
     CharaCard = 405, // AdventurerPlate
     CharaCardDesignSetting = 406,
     CharaCardProfileSetting = 407,
-
     PvPMKSRankRating = 408,
     PvPMKSIntroduction = 409,
     MJIHud = 410, // Island Sanctuary
@@ -450,7 +456,7 @@ public enum AgentId : uint {
     MJIEntrance = 424,
     MJISettings = 425,
     MJIHousingMenu = 426, // new in 6.40
-
+    Unk427 = 427,
     MJINekomimiRequest = 428, // favors
     ArchiveItem = 429,
     Class2JobHotbar = 430,
