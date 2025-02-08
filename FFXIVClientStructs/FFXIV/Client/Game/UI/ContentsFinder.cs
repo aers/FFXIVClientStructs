@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::ContentsFinder
@@ -85,7 +87,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct QueueEntry {
-        [FieldOffset(0x0)] public UI.Agent.ContentsId.ContentsType ContentsType;
+        [FieldOffset(0x0)] public ContentsId.ContentsType ContentsType;
         [FieldOffset(0x4)] public uint ConditionId;
         [FieldOffset(0x4)] public byte RouletteId;
     }
