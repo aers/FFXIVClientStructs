@@ -3943,6 +3943,9 @@ classes:
   Client::UI::RaptureAtkColorDataManager:
     vtbls:
       - ea: 0x141F18B60
+    funcs:
+      0x1400BF200: Initialize
+      0x1400BF3D0: Deinitialize
   Client::UI::RaptureAtkModule:
     vtbls:
       - ea: 0x141F18BF8
