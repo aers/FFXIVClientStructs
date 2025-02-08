@@ -27,11 +27,13 @@ public unsafe partial struct ContentsFinder {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct ContentsFinderQueueInfo {
-    [FieldOffset(0x04)] public uint QueuedContentFinderConditionId1;
-    [FieldOffset(0x0C)] public uint QueuedContentFinderConditionId2;
-    [FieldOffset(0x14)] public uint QueuedContentFinderConditionId3;
-    [FieldOffset(0x1C)] public uint QueuedContentFinderConditionId4;
-    [FieldOffset(0x24)] public uint QueuedContentFinderConditionId5;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray5<QueueEntry> _queuedEntries;
+    
+    [FieldOffset(0x04), Obsolete("Use QueuedEntries[0].ConditionId")] public uint QueuedContentFinderConditionId1;
+    [FieldOffset(0x0C), Obsolete("Use QueuedEntries[1].ConditionId")] public uint QueuedContentFinderConditionId2;
+    [FieldOffset(0x14), Obsolete("Use QueuedEntries[2].ConditionId")] public uint QueuedContentFinderConditionId3;
+    [FieldOffset(0x1C), Obsolete("Use QueuedEntries[3].ConditionId")] public uint QueuedContentFinderConditionId4;
+    [FieldOffset(0x24), Obsolete("Use QueuedEntries[4].ConditionId")] public uint QueuedContentFinderConditionId5;
 
     [FieldOffset(0x28)] public uint QueuedClassJobId;
 
@@ -49,7 +51,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x62)] public QueueInfoState InfoState;
     [FieldOffset(0x67), Obsolete("Use StateInfo.AverageWaitTime")] public byte AverageWaitTime; // In minutes
 
-    [FieldOffset(0x7C)] public PoppedContentTypes PoppedContentType;
+    [FieldOffset(0x7C)] public QueueEntry PoppedQueueEntry;
 
     /// <remarks>
     /// Based on <see cref="PoppedContentType"/>, either a row id of the ContentRoulette
@@ -81,6 +83,13 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B FA 48 8B D9 45 84 C0")]
     public partial void UpdateQueueState(QueueStates newState, bool beganQueue);
 
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public struct QueueEntry {
+        [FieldOffset(0x0)] public UI.Agent.ContentsId.ContentsType ContentsType;
+        [FieldOffset(0x4)] public uint ConditionId;
+        [FieldOffset(0x4)] public byte RouletteId;
+    }
+
     public enum QueueStates : byte {
         None = 0,
         Pending = 1,
@@ -88,12 +97,6 @@ public unsafe partial struct ContentsFinderQueueInfo {
         Ready = 3,
         Accepted = 4,
         InContent = 5
-    }
-
-    public enum PoppedContentTypes : byte {
-        None = 0,
-        Roulette = 1,
-        Duty = 2
     }
 }
 
