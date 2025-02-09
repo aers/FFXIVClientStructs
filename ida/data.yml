@@ -11236,10 +11236,10 @@ classes:
       0x140BAD350: ctor
   Client::UI::Agent::AgentEmjIntro:
     vtbls:
-      - ea: 0x141FA4D00
+      - ea: 0x141FBC860
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140BA2280: ctor
+      0x140D31370: ctor
   Client::UI::Agent::AgentEmjVoiceCharacter:
     vtbls:
       - ea: 0x141FBBC58
@@ -11681,10 +11681,10 @@ classes:
       0x140B57580: ctor
   Client::UI::Agent::AgentPvPMKSIntroduction:
     vtbls:
-      - ea: 0x141FBC860
+      - ea: 0x141FA4D00
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140D31370: ctor
+      0x140BA2280: ctor
   Client::UI::Agent::AgentTryon::TryonCharaView:
     vtbls:
       - ea: 0x141F95F58
