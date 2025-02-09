@@ -5187,6 +5187,9 @@ classes:
       0x14023D710: GetAgentContext
       0x14023D780: GetAddonTextById
       0x14023D600: IsAddonReady
+  Client::UI::Misc::ConfigModule::ConfigEventInterface:
+    vtbls:
+      - ea: 0x141F37720
   Client::UI::Agent::AgentCharaMake:
     vtbls:
       - ea: 0x141F37728
@@ -5195,6 +5198,9 @@ classes:
     vtbls:
       - ea: 0x141F38588
         base: Client::UI::Agent::AgentInterface
+  Client::UI::UIInputData::KeyLoadInterface:
+    vtbls:
+      - ea: 0x141F379C0
   Client::UI::Agent::AgentModule:
     vtbls:
       - ea: 0x141F379C8
@@ -9552,6 +9558,10 @@ classes:
     vtbls:
       - ea: 0x141F38770
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141F387E8
+        base: Client::UI::UIInputData::KeyLoadInterface
+      - ea: 0x141F387F0
+        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
     funcs:
       0x1402AE3B0: ctor
       0x1402AE5B0: Finalizer
@@ -9845,7 +9855,7 @@ classes:
       - ea: 0x141F39DC0
         base: Client::UI::Agent::AgentInterface
       - ea: 0x141F39E38
-        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
       - ea: 0x141F39E48
         base: Client::UI::Agent::AgentContext::AgentContextUpdateChecker
     funcs:
@@ -10990,14 +11000,18 @@ classes:
     vtbls:
       - ea: 0x141F3C540
         base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentPvpTeamInterface:
+    vtbls:
+      - ea: 0x141F3C448
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvpTeamMember:
     vtbls:
       - ea: 0x141F3C5B8
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentPvpTeamInterface
   Client::UI::Agent::AgentPvpTeamResult:
     vtbls:
       - ea: 0x141F3C638
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentPvpTeamInterface
   Client::UI::Agent::AgentPvpTeamCrestEditor:
     vtbls:
       - ea: 0x141F3C7B8
@@ -11875,6 +11889,8 @@ classes:
     vtbls:
       - ea: 0x141F388D0
         base: Client::UI::Agent::AgentConfigBase
+      - ea: 0x141F389A8
+        base: Client::UI::Misc::ConfigModule::ConfigEventInterface
     funcs:
       0x1402B7B00: ctor
       0x1402B7D40: Finalizer
@@ -17655,7 +17671,7 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::Bus:
     vtbls:
       - ea: 0x14229F518
-        base: SQEX::CDev::Engine::Sd::Driver::Bank
+        base: SQEX::CDev::Engine::Sd::SdMemoryAllocator
   SQEX::CDev::Engine::Sd::Driver::IEffect:
     vtbls:
       - ea: 0x14229F740
@@ -17667,7 +17683,7 @@ classes:
   SQEX::CDev::Engine::Sd::Driver::Sead::FilterSead:
     vtbls:
       - ea: 0x1422A06A8
-        base: SQEX::CDev::Engine::Sd::Driver::FilterBase
+        base: SQEX::CDev::Engine::Sd::Driver::Sead::LowpassFilterSead
   SQEX::CDev::Engine::Sd::Driver::Sead::LowpassFilterSead:
     vtbls:
       - ea: 0x14229F7D8
