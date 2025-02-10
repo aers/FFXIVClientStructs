@@ -984,6 +984,7 @@ enums:
     "FishingNote": 29
     "FishGuide": 30
     "FishRecord": 31
+    "FishRelease": 32
     "QuestJournal": 33
     "ActionMenu": 34
     "Marker": 35
@@ -994,6 +995,7 @@ enums:
     "Map": 40
     "Loot": 41
     "Repair": 42
+    "RepairRequest": 43
     "Materialize": 44
     "MateriaAttach": 45
     "MiragePrism": 46
@@ -1094,12 +1096,15 @@ enums:
     "RetainerStatus": 141
     "RetainerTask": 142
     "RetainerTaskSupply": 143
+    "Unk144": 144
     "RetainerItemTransfer": 145
     "RelicGlass": 146
     "RelicNotebook": 147
     "RelicSphere": 148
     "TradeMultiple": 149
     "RelicSphereUpgrade": 150
+    "AWGrowthFragTrade": 151
+    "AWMakingSpiritGrow": 152
     "Relic2Glass": 153
     "Minigame": 154
     "Tryon": 155
@@ -1114,14 +1119,17 @@ enums:
     "PatchMark": 164
     "HousingWithdrawStorage": 165
     "WeatherReport": 166
+    "Wedding": 167
     "LoadingTips": 168
     "Revive": 169
+    "Unk170": 170
     "ChocoboRace": 171
     "ChocoboBreed": 172
     "GoldSaucerMiniGame": 173
     "TrippleTriad": 174
     "TripleTriadRuleAnnounce": 175
     "TripleTriadRuleSetting": 176
+    "Unk177": 177
     "TripleTriadSchedule": 178
     "TripleTriadRanking": 179
     "TripleTriadTournamentResult": 180
@@ -1169,6 +1177,7 @@ enums:
     "WebGuidance": 222
     "Orchestrion": 223
     "BeginnerChatList": 224
+    "Unk225": 225
     "BeginnerChatInvite": 226
     "ReturnerDialog": 227
     "OrchestrionInn": 228
@@ -1180,6 +1189,7 @@ enums:
     "RaidFinder": 234
     "GcArmyExpedition": 235
     "GcArmyMemberList": 236
+    "Unk237": 237
     "DeepDungeonInspect": 238
     "DeepDungeonMap": 239
     "DeepDungeonStatus": 240
@@ -1199,13 +1209,19 @@ enums:
     "PvPDuelRequest": 254
     "PvPHeader": 255
     "PvPGauge": 256
-    "AquariumSetting": 259
+    "Unk257": 257
+    "Unk258": 258
+    "Aquarium": 259
+    "QTE": 260
     "DeepDungeonMenu": 261
+    "ContextIconMenu": 262
     "DeepDungeonResult": 263
     "ItemAppraisal": 264
     "ItemInspection": 265
     "RecipeItemContext": 266
     "ContactList": 267
+    "PicturePreview": 268
+    "McAggre": 269
     "SatisfactionSupply": 270
     "SatisfactionSupplyResult": 271
     "SatisfactionList": 272
@@ -1214,16 +1230,23 @@ enums:
     "PvpScreenInformationHotBar": 275
     "PvpWelcome": 276
     "JobHudNotice": 277
+    "TreasureHighLow": 278
+    "ManeuversArmorBoarding": 279
+    "ManeuversHud": 280
     "UserPolicyPerformance": 281
     "PvpTeam": 282
     "PvpTeamInputString": 283
     "PvpTeamMember": 284
     "PvPTeamResult": 285
+    "Unk286": 286
+    "Unk287": 287
     "PvpTeamCrestEditor": 288
     "PvPTeamOrganization": 289
+    "Unk290": 290
     "EurekaElementalHud": 291
     "EurekaElementalEdit": 292
     "EurekaChainInfo": 293
+    "Unk294": 294
     "EurekaMagiaActionNotebook": 295
     "EurekaWeaponAdjust": 296
     "TeleportHousingFriend": 297
@@ -1239,8 +1262,11 @@ enums:
     "PerformanceModeSettings": 307
     "RecordReadyCheck": 308
     "Fashion": 309
+    "Unk310": 310
     "SelectYesno": 311
     "HousingGuestBook": 312
+    "Unk313": 313
+    "Unk314": 314
     "ReconstructionBox": 315
     "ReconstructionBuyback": 316
     "CrossWorldLinkShell": 317
@@ -1253,6 +1279,8 @@ enums:
     "RhythmAction": 325
     "WeddingNotification": 326
     "Emj": 327
+    "Unk328": 328
+    "Unk329": 329
     "EmjIntro": 330
     "EmjVoiceCharacter": 331
     "AozContentBriefing": 332
@@ -1324,6 +1352,7 @@ enums:
     "BannerList": 399
     "BannerEditor": 400
     "BannerUpdateView": 401
+    "Unk402": 402
     "BannerPreview": 403
     "PvPMap": 404
     "CharaCard": 405
@@ -1348,6 +1377,7 @@ enums:
     "MJIEntrance": 424
     "MJISettings": 425
     "MJIHousingMenu": 426
+    "Unk427": 427
     "MJINekomimiRequest": 428
     "ArchiveItem": 429
     "Class2JobHotbar": 430
@@ -4639,12 +4669,323 @@ structs:
   name: Conditions
   namespace: Client.Game
   union: False
-  size: 104
+  size: 108
   fields:
   - type: byte
-    name: Flags
+    name: None
     offset: 0
-    size: 104
+  - type: byte
+    name: Normal
+    offset: 1
+  - type: byte
+    name: Dead
+    offset: 2
+  - type: byte
+    name: Emoting
+    offset: 3
+  - type: byte
+    name: Mounted
+    offset: 4
+  - type: byte
+    name: Crafting
+    offset: 5
+  - type: byte
+    name: Gathering
+    offset: 6
+  - type: byte
+    name: MeldingMateria
+    offset: 7
+  - type: byte
+    name: AnimLock
+    offset: 8
+  - type: byte
+    name: Carrying
+    offset: 9
+  - type: byte
+    name: RidingPillion
+    offset: 10
+  - type: byte
+    name: InThatPosition
+    offset: 11
+  - type: byte
+    name: ChocoboRacing
+    offset: 12
+  - type: byte
+    name: PlayingMiniGame
+    offset: 13
+  - type: byte
+    name: PlayingLordOfVerminion
+    offset: 14
+  - type: byte
+    name: ParticipatingInCustomMatch
+    offset: 15
+  - type: byte
+    name: Performing
+    offset: 16
+  - type: byte
+    name: Unknown17
+    offset: 17
+  - type: byte
+    name: Unknown18
+    offset: 18
+  - type: byte
+    name: Unknown19
+    offset: 19
+  - type: byte
+    name: Unknown20
+    offset: 20
+  - type: byte
+    name: Unknown21
+    offset: 21
+  - type: byte
+    name: Unknown22
+    offset: 22
+  - type: byte
+    name: Unknown23
+    offset: 23
+  - type: byte
+    name: Unknown24
+    offset: 24
+  - type: byte
+    name: Occupied
+    offset: 25
+  - type: byte
+    name: InCombat
+    offset: 26
+  - type: byte
+    name: Casting
+    offset: 27
+  - type: byte
+    name: SufferingStatusAffliction
+    offset: 28
+  - type: byte
+    name: SufferingStatusAffliction2
+    offset: 29
+  - type: byte
+    name: Occupied30
+    offset: 30
+  - type: byte
+    name: OccupiedInEvent
+    offset: 31
+  - type: byte
+    name: OccupiedInQuestEvent
+    offset: 32
+  - type: byte
+    name: Occupied33
+    offset: 33
+  - type: byte
+    name: BoundByDuty
+    offset: 34
+  - type: byte
+    name: OccupiedInCutSceneEvent
+    offset: 35
+  - type: byte
+    name: InDuelingArea
+    offset: 36
+  - type: byte
+    name: TradeOpen
+    offset: 37
+  - type: byte
+    name: Occupied38
+    offset: 38
+  - type: byte
+    name: Occupied39
+    offset: 39
+  - type: byte
+    name: Crafting40
+    offset: 40
+  - type: byte
+    name: PreparingToCraft
+    offset: 41
+  - type: byte
+    name: Gathering42
+    offset: 42
+  - type: byte
+    name: Fishing
+    offset: 43
+  - type: byte
+    name: Unknown44
+    offset: 44
+  - type: byte
+    name: BetweenAreas
+    offset: 45
+  - type: byte
+    name: Stealthed
+    offset: 46
+  - type: byte
+    name: Unknown47
+    offset: 47
+  - type: byte
+    name: Jumping
+    offset: 48
+  - type: byte
+    name: AutorunActive
+    offset: 49
+  - type: byte
+    name: OccupiedSummoningBell
+    offset: 50
+  - type: byte
+    name: BetweenAreas51
+    offset: 51
+  - type: byte
+    name: SystemError
+    offset: 52
+  - type: byte
+    name: LoggingOut
+    offset: 53
+  - type: byte
+    name: ConditionLocation
+    offset: 54
+  - type: byte
+    name: WaitingForDuty
+    offset: 55
+  - type: byte
+    name: BoundByDuty56
+    offset: 56
+  - type: byte
+    name: Unknown57
+    offset: 57
+  - type: byte
+    name: WatchingCutscene
+    offset: 58
+  - type: byte
+    name: WaitingForDutyFinder
+    offset: 59
+  - type: byte
+    name: CreatingCharacter
+    offset: 60
+  - type: byte
+    name: Jumping61
+    offset: 61
+  - type: byte
+    name: PvPDisplayActive
+    offset: 62
+  - type: byte
+    name: SufferingStatusAffliction63
+    offset: 63
+  - type: byte
+    name: Mounting
+    offset: 64
+  - type: byte
+    name: CarryingItem
+    offset: 65
+  - type: byte
+    name: UsingPartyFinder
+    offset: 66
+  - type: byte
+    name: UsingHousingFunctions
+    offset: 67
+  - type: byte
+    name: Transformed
+    offset: 68
+  - type: byte
+    name: OnFreeTrial
+    offset: 69
+  - type: byte
+    name: BeingMoved
+    offset: 70
+  - type: byte
+    name: Mounting71
+    offset: 71
+  - type: byte
+    name: SufferingStatusAffliction72
+    offset: 72
+  - type: byte
+    name: SufferingStatusAffliction73
+    offset: 73
+  - type: byte
+    name: RegisteringForRaceOrMatch
+    offset: 74
+  - type: byte
+    name: WaitingForRaceOrMatch
+    offset: 75
+  - type: byte
+    name: WaitingForTripleTriadMatch
+    offset: 76
+  - type: byte
+    name: InFlight
+    offset: 77
+  - type: byte
+    name: WatchingCutscene78
+    offset: 78
+  - type: byte
+    name: InDeepDungeon
+    offset: 79
+  - type: byte
+    name: Swimming
+    offset: 80
+  - type: byte
+    name: Diving
+    offset: 81
+  - type: byte
+    name: RegisteringForTripleTriadMatch
+    offset: 82
+  - type: byte
+    name: WaitingForTripleTriadMatch83
+    offset: 83
+  - type: byte
+    name: ParticipatingInCrossWorldPartyOrAlliance
+    offset: 84
+  - type: byte
+    name: Unknown85
+    offset: 85
+  - type: byte
+    name: DutyRecorderPlayback
+    offset: 86
+  - type: byte
+    name: Casting87
+    offset: 87
+  - type: byte
+    name: MountImmobile
+    offset: 88
+  - type: byte
+    name: InThisState89
+    offset: 89
+  - type: byte
+    name: RolePlaying
+    offset: 90
+  - type: byte
+    name: InDutyQueue
+    offset: 91
+  - type: byte
+    name: ReadyingVisitOtherWorld
+    offset: 92
+  - type: byte
+    name: WaitingToVisitOtherWorld
+    offset: 93
+  - type: byte
+    name: UsingParasol
+    offset: 94
+  - type: byte
+    name: BoundByDuty95
+    offset: 95
+  - type: byte
+    name: Unknown96
+    offset: 96
+  - type: byte
+    name: Disguised
+    offset: 97
+  - type: byte
+    name: RecruitingWorldOnly
+    offset: 98
+  - type: byte
+    name: Unknown99
+    offset: 99
+  - type: byte
+    name: EditingPortrait
+    offset: 100
+  - type: byte
+    name: Unknown101
+    offset: 101
+  - type: byte
+    name: Unknown102
+    offset: 102
+  - type: byte
+    name: Unknown103
+    offset: 103
+  - type: float
+    name: UnkTimer
+    offset: 104
   member_functions: []
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? 66 2B D8
@@ -14864,8 +15205,36 @@ structs:
   namespace: Client.UI
   union: False
   size: 24
-  fields: []
+  fields:
+  - type: Client::UI::RaptureAtkColorDataManager::ColorSet*
+    name: ColorSets
+    offset: 8
+  - type: int
+    name: NumColorSets
+    offset: 16
+  - type: byte
+    name: IsLoaded
+    offset: 20
   virtual_functions: []
+  member_functions: []
+- type: Client::UI::RaptureAtkColorDataManager::ColorSet
+  name: ColorSet
+  namespace: Client.UI
+  union: False
+  size: 16
+  fields:
+  - type: unsigned int
+    name: Id
+    offset: 0
+  - type: __int16
+    name: NumColors
+    offset: 4
+  - type: byte
+    name: UnkBool
+    offset: 6
+  - type: unsigned int*
+    name: Colors
+    offset: 8
   member_functions: []
 - type: Client::UI::RaptureAtkHistory
   name: RaptureAtkHistory
@@ -18754,6 +19123,9 @@ structs:
   - type: Component::GUI::AtkFontAnalyzer*
     name: AtkFontAnalyzer
     offset: 56
+  - type: Component::GUI::AtkFontManager::Icon2RemapEntry*
+    name: Icon2RemapTable
+    offset: 64
   - type: unsigned int
     name: SetupState
     offset: 80
@@ -18791,6 +19163,19 @@ structs:
   - type: Client::Graphics::Kernel::Texture*
     name: Texture
     offset: 16
+  member_functions: []
+- type: Component::GUI::AtkFontManager::Icon2RemapEntry
+  name: Icon2RemapEntry
+  namespace: Component.GUI
+  union: False
+  size: 8
+  fields:
+  - type: unsigned int
+    name: IconId
+    offset: 0
+  - type: unsigned int
+    name: RemappedIconId
+    offset: 4
   member_functions: []
 - type: Component::GUI::AtkGroupManager
   name: AtkGroupManager
@@ -20347,6 +20732,18 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::EventHandler*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::EventHandler*>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
+- type: Helper::RedBlackTree<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>
+  name: RedBlackTree`3
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>*
     name: Head
     offset: 0
   - type: __int64
@@ -23173,6 +23570,19 @@ structs:
   virtual_functions:
   - name: Dtor
     offset: 0
+  member_functions: []
+- type: Client::Game::Event::LuaEventHandlerLuaText
+  name: LuaEventHandlerLuaText
+  namespace: Client.Game.Event
+  union: False
+  size: 208
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Key
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: Value
+    offset: 104
   member_functions: []
 - type: Client::Game::Event::LuaScriptLoader
   name: LuaScriptLoader
@@ -37154,6 +37564,15 @@ structs:
     name: Tree
     offset: 0
   member_functions: []
+- type: StdMap<unsigned int, Client::Game::Event::LuaEventHandlerLuaText, Helper::IStaticMemorySpace::Default>
+  name: StdMap`3
+  namespace: ''
+  union: False
+  fields:
+  - type: Helper::RedBlackTree<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>
+    name: Tree
+    offset: 0
+  member_functions: []
 - type: StdMap<unsigned int, Client::LayoutEngine::ILayoutInstance*, Helper::IStaticMemorySpace::Default>
   name: StdMap`3
   namespace: ''
@@ -50101,6 +50520,15 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
+- type: StdMap<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: StdMap<unsigned int, Client::Game::Event::LuaEventHandlerLuaText, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
 - type: StdMap<unsigned int, Client::LayoutEngine::ILayoutInstance*>
   name: StdMap`2
   namespace: ''
@@ -50221,6 +50649,18 @@ structs:
     name: Item1
     offset: 0
   - type: Client::Game::Event::LuaActor
+    name: Item2
+    offset: 8
+  member_functions: []
+- type: StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned int
+    name: Item1
+    offset: 0
+  - type: Client::Game::Event::LuaEventHandlerLuaText
     name: Item2
     offset: 8
   member_functions: []
@@ -52058,6 +52498,8 @@ structs:
       name: contents
     - type: byte
       name: flag
+  - name: GetClassName
+    offset: 128
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 C7 03 ?? ?? ?? ?? C6 83
     return_type: byte
@@ -57342,6 +57784,36 @@ structs:
     name: _19
     offset: 27
   - type: StdPair<__int64, Client::Game::Event::LuaActor>
+    name: _Myval
+    offset: 28
+  member_functions: []
+- type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>*
+    name: _Left
+    offset: 0
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>*
+    name: _Parent
+    offset: 8
+  - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: byte
+    name: _18
+    offset: 26
+  - type: byte
+    name: _19
+    offset: 27
+  - type: StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>
     name: _Myval
     offset: 28
   member_functions: []
@@ -110723,92 +111195,6 @@ structs:
     offset: 144
   virtual_functions: []
   member_functions: []
-- type: Client::Game::Event::LuaEventHandler
-  name: LuaEventHandler
-  namespace: Client.Game.Event
-  union: False
-  size: 816
-  fields:
-  - type: Client::Game::Event::EventHandler
-    name: EventHandler
-    offset: 0
-    base: true
-  - type: Common::Lua::LuaState*
-    name: LuaState
-    offset: 528
-  - type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>
-    name: LuaScriptLoader
-    offset: 536
-  - type: Client::System::String::Utf8String
-    name: LuaClass
-    offset: 576
-  - type: Client::System::String::Utf8String
-    name: LuaKey
-    offset: 680
-  virtual_functions:
-  - name: CancelInteraction
-    offset: 1232
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  - name: GetTitle
-    offset: 1576
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetDescription
-    offset: 1992
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2000
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2008
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2016
-    return_type: byte
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  - name: GetEventItemId
-    offset: 2032
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  - name: GetObjectives
-    offset: 2048
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-  member_functions: []
 - type: Client::UI::AddonAOZNotebook
   name: AddonAOZNotebook
   namespace: Client.UI
@@ -116016,267 +116402,6 @@ structs:
       name: command
     - type: Client::UI::UIModule*
       name: uiModule
-- type: Client::Game::Event::AetheryteEventHandler
-  name: AetheryteEventHandler
-  namespace: Client.Game.Event
-  union: False
-  size: 1144
-  fields:
-  - type: Client::Game::Event::LuaEventHandler
-    name: LuaEventHandler
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: CancelInteraction
-    offset: 1232
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-  - name: GetTitle
-    offset: 1576
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetDescription
-    offset: 1992
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2000
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2008
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2016
-    return_type: byte
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-  - name: GetEventItemId
-    offset: 2032
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-  - name: GetObjectives
-    offset: 2048
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-  member_functions: []
-- type: Client::Game::Event::QuestEventHandler
-  name: QuestEventHandler
-  namespace: Client.Game.Event
-  union: False
-  size: 1552
-  fields:
-  - type: Client::Game::Event::LuaEventHandler
-    name: LuaEventHandler
-    offset: 0
-    base: true
-  - type: unsigned __int16
-    name: QuestId
-    offset: 824
-  - type: Client::System::String::Utf8String
-    name: Title
-    offset: 832
-  - type: Client::System::String::Utf8String
-    name: ScriptId
-    offset: 936
-  - type: Client::System::String::Utf8String
-    name: ScriptPath
-    offset: 1040
-  - type: byte
-    name: PreviousQuestJoin
-    offset: 1144
-  - type: unsigned __int16
-    name: PreviousQuests
-    offset: 1146
-    size: 3
-  - type: byte
-    name: QuestLockJoin
-    offset: 1153
-  - type: unsigned __int16
-    name: QuestLocks
-    offset: 1154
-    size: 2
-  - type: byte
-    name: InstanceContentJoin
-    offset: 1212
-  - type: unsigned int
-    name: InstanceContents
-    offset: 1216
-    size: 3
-  - type: unsigned __int16
-    name: Festival
-    offset: 1228
-  - type: unsigned __int16
-    name: FestivalBegin
-    offset: 1230
-  - type: unsigned __int16
-    name: FestivalEnd
-    offset: 1232
-  - type: byte
-    name: RepeatIntervalType
-    offset: 1234
-  - type: byte
-    name: QuestRepeatFlag
-    offset: 1235
-  - type: unsigned __int16
-    name: BellStart
-    offset: 1236
-  - type: unsigned __int16
-    name: BellEnd
-    offset: 1238
-  - type: byte
-    name: BeastTribeId
-    offset: 1240
-  - type: byte
-    name: BeastTribeRank
-    offset: 1241
-  - type: unsigned __int16
-    name: BeastReputationValue
-    offset: 1242
-  - type: unsigned __int16
-    name: MountRequired
-    offset: 1244
-  - type: byte
-    name: SatisfactionNpc
-    offset: 1246
-  - type: byte
-    name: SatisfactionLevel
-    offset: 1247
-  - type: unsigned int
-    name: IssuerStart
-    offset: 1248
-  - type: unsigned int
-    name: TargetEnd
-    offset: 1252
-  - type: unsigned int
-    name: JournalGenre
-    offset: 1256
-  - type: unsigned int
-    name: IconSpecial
-    offset: 1260
-  - type: byte
-    name: DailyQuestPool
-    offset: 1264
-  virtual_functions:
-  - name: CancelInteraction
-    offset: 1232
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  - name: GetTitle
-    offset: 1576
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetDescription
-    offset: 1992
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2000
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2008
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2016
-    return_type: byte
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  - name: GetEventItemId
-    offset: 2032
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  - name: GetObjectives
-    offset: 2048
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 8B 75 D0
-    return_type: void
-    name: GetTodoArgs
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::Game::Character::BattleChara*
-      name: localPlayer
-    - type: byte
-      name: idx
-    - type: unsigned int*
-      name: arg0
-    - type: unsigned int*
-      name: arg1
-    - type: unsigned int*
-      name: arg2
-  - signature: E8 ?? ?? ?? ?? 41 88 07 45 33 D2
-    return_type: byte
-    name: IsTodoChecked
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::Game::Character::BattleChara*
-      name: localPlayer
-    - type: byte
-      name: idx
 - type: Client::Graphics::Render::Manager
   name: Manager
   namespace: Client.Graphics.Render
@@ -121499,69 +121624,43 @@ structs:
       name: roulette
     - type: byte
       name: hideIfShown
-- type: Client::Game::Event::Director
-  name: Director
+- type: Client::Game::Event::LuaEventHandler
+  name: LuaEventHandler
   namespace: Client.Game.Event
   union: False
-  size: 1208
+  size: 816
   fields:
-  - type: Client::Game::Event::LuaEventHandler
-    name: LuaEventHandler
+  - type: Client::Game::Event::EventHandler
+    name: EventHandler
     offset: 0
     base: true
-  - type: Client::Game::Event::EventHandlerInfo*
-    name: EventHandlerInfo
-    offset: 816
-  - type: unsigned int
-    name: ContentId
-    offset: 824
-  - type: byte
-    name: ContentFlags
-    offset: 828
-  - type: byte
-    name: Sequence
-    offset: 832
-  - type: byte
-    name: UnionData
-    offset: 834
-    size: 10
+  - type: Common::Lua::LuaState*
+    name: LuaState
+    offset: 528
+  - type: Client::Game::Event::LuaScriptLoader<Client::Game::Event::LuaEventHandler>
+    name: LuaScriptLoader
+    offset: 536
   - type: Client::System::String::Utf8String
-    name: Title
-    offset: 848
+    name: LuaClass
+    offset: 576
   - type: Client::System::String::Utf8String
-    name: Description
-    offset: 952
-  - type: Client::System::String::Utf8String
-    name: ReliefText
-    offset: 1056
-  - type: StdVector<Client::Game::Event::EventHandlerObjective>
-    name: Objectives
-    offset: 1176
-  - type: unsigned int
-    name: EventItemId
-    offset: 1200
+    name: LuaKey
+    offset: 680
+  - type: StdMap<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>
+    name: LuaTexts
+    offset: 784
   virtual_functions:
-  - name: PopulateMapMarkers
-    offset: 2136
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::Director*
-      name: this
-    - type: unsigned __int16
-      name: territoryTypeId
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: markerVector
   - name: CancelInteraction
     offset: 1232
     return_type: void
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
   - name: GetTitle
     offset: 1576
     return_type: void
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -121569,7 +121668,7 @@ structs:
     offset: 1992
     return_type: void
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -121577,7 +121676,7 @@ structs:
     offset: 2000
     return_type: void
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -121585,7 +121684,7 @@ structs:
     offset: 2008
     return_type: int
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
     - type: int
       name: a2
@@ -121593,30 +121692,26 @@ structs:
     offset: 2016
     return_type: byte
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
   - name: GetEventItemId
     offset: 2032
     return_type: unsigned int
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
   - name: GetObjectives
     offset: 2048
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
   - name: GetRecommendedLevel
     offset: 2072
     return_type: int
     parameters:
-    - type: Client::Game::Event::Director*
+    - type: Client::Game::Event::LuaEventHandler*
       name: this
-  - name: SetSequence
-    offset: 2288
-  - name: Synchronize
-    offset: 2296
   member_functions: []
 - type: Client::UI::AddonActionBar
   name: AddonActionBar
@@ -124004,14 +124099,14 @@ structs:
     parameters:
     - type: Client::UI::Shell::RaptureShellModule*
       name: this
-- type: Client::Game::Event::GoldSaucerDirector
-  name: GoldSaucerDirector
+- type: Client::Game::Event::AetheryteEventHandler
+  name: AetheryteEventHandler
   namespace: Client.Game.Event
   union: False
-  size: 1656
+  size: 1144
   fields:
-  - type: Client::Game::Event::Director
-    name: Director
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
     offset: 0
     base: true
   virtual_functions:
@@ -124019,13 +124114,13 @@ structs:
     offset: 1232
     return_type: void
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
   - name: GetTitle
     offset: 1576
     return_type: void
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -124033,7 +124128,7 @@ structs:
     offset: 1992
     return_type: void
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -124041,7 +124136,7 @@ structs:
     offset: 2000
     return_type: void
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -124049,7 +124144,7 @@ structs:
     offset: 2008
     return_type: int
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
     - type: int
       name: a2
@@ -124057,68 +124152,49 @@ structs:
     offset: 2016
     return_type: byte
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
   - name: GetEventItemId
     offset: 2032
     return_type: unsigned int
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
   - name: GetObjectives
     offset: 2048
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
   - name: GetRecommendedLevel
     offset: 2072
     return_type: int
     parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
+    - type: Client::Game::Event::AetheryteEventHandler*
       name: this
-  - name: PopulateMapMarkers
-    offset: 2136
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-    - type: unsigned __int16
-      name: a2
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: a3
   member_functions: []
-- type: Client::Game::Fate::FateDirector
-  name: FateDirector
-  namespace: Client.Game.Fate
+- type: Client::Game::Event::CustomTalkEventHandler
+  name: CustomTalkEventHandler
+  namespace: Client.Game.Event
   union: False
-  size: 1272
+  size: 1216
   fields:
-  - type: Client::Game::Event::Director
-    name: Director
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
     offset: 0
     base: true
-  - type: byte
-    name: FateLevel
-    offset: 1208
-  - type: unsigned int
-    name: FateNpcObjectId
-    offset: 1216
-  - type: unsigned __int16
-    name: FateId
-    offset: 1228
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
     return_type: void
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
   - name: GetTitle
     offset: 1576
     return_type: void
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -124126,7 +124202,7 @@ structs:
     offset: 1992
     return_type: void
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -124134,7 +124210,7 @@ structs:
     offset: 2000
     return_type: void
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -124142,7 +124218,7 @@ structs:
     offset: 2008
     return_type: int
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
     - type: int
       name: a2
@@ -124150,37 +124226,214 @@ structs:
     offset: 2016
     return_type: byte
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
   - name: GetEventItemId
     offset: 2032
     return_type: unsigned int
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
   - name: GetObjectives
     offset: 2048
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
   - name: GetRecommendedLevel
     offset: 2072
     return_type: int
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
-  - name: PopulateMapMarkers
-    offset: 2136
+  member_functions: []
+- type: Client::Game::Event::QuestEventHandler
+  name: QuestEventHandler
+  namespace: Client.Game.Event
+  union: False
+  size: 1552
+  fields:
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: QuestId
+    offset: 824
+  - type: Client::System::String::Utf8String
+    name: Title
+    offset: 832
+  - type: Client::System::String::Utf8String
+    name: ScriptId
+    offset: 936
+  - type: Client::System::String::Utf8String
+    name: ScriptPath
+    offset: 1040
+  - type: byte
+    name: PreviousQuestJoin
+    offset: 1144
+  - type: unsigned __int16
+    name: PreviousQuests
+    offset: 1146
+    size: 3
+  - type: byte
+    name: QuestLockJoin
+    offset: 1153
+  - type: unsigned __int16
+    name: QuestLocks
+    offset: 1154
+    size: 2
+  - type: byte
+    name: InstanceContentJoin
+    offset: 1212
+  - type: unsigned int
+    name: InstanceContents
+    offset: 1216
+    size: 3
+  - type: unsigned __int16
+    name: Festival
+    offset: 1228
+  - type: unsigned __int16
+    name: FestivalBegin
+    offset: 1230
+  - type: unsigned __int16
+    name: FestivalEnd
+    offset: 1232
+  - type: byte
+    name: RepeatIntervalType
+    offset: 1234
+  - type: byte
+    name: QuestRepeatFlag
+    offset: 1235
+  - type: unsigned __int16
+    name: BellStart
+    offset: 1236
+  - type: unsigned __int16
+    name: BellEnd
+    offset: 1238
+  - type: byte
+    name: BeastTribeId
+    offset: 1240
+  - type: byte
+    name: BeastTribeRank
+    offset: 1241
+  - type: unsigned __int16
+    name: BeastReputationValue
+    offset: 1242
+  - type: unsigned __int16
+    name: MountRequired
+    offset: 1244
+  - type: byte
+    name: SatisfactionNpc
+    offset: 1246
+  - type: byte
+    name: SatisfactionLevel
+    offset: 1247
+  - type: unsigned int
+    name: IssuerStart
+    offset: 1248
+  - type: unsigned int
+    name: TargetEnd
+    offset: 1252
+  - type: unsigned int
+    name: JournalGenre
+    offset: 1256
+  - type: unsigned int
+    name: IconSpecial
+    offset: 1260
+  - type: byte
+    name: DailyQuestPool
+    offset: 1264
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
     return_type: void
     parameters:
-    - type: Client::Game::Fate::FateDirector*
+    - type: Client::Game::Event::QuestEventHandler*
       name: this
-    - type: unsigned __int16
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
       name: a2
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: a3
-  member_functions: []
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B 75 D0
+    return_type: void
+    name: GetTodoArgs
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::Game::Character::BattleChara*
+      name: localPlayer
+    - type: byte
+      name: idx
+    - type: unsigned int*
+      name: arg0
+    - type: unsigned int*
+      name: arg1
+    - type: unsigned int*
+      name: arg2
+  - signature: E8 ?? ?? ?? ?? 41 88 07 45 33 D2
+    return_type: byte
+    name: IsTodoChecked
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::Game::Character::BattleChara*
+      name: localPlayer
+    - type: byte
+      name: idx
 - type: Client::UI::AddonJobHudBRD0
   name: AddonJobHudBRD0
   namespace: Client.UI
@@ -132792,139 +133045,6 @@ structs:
   - name: ProcessNoun
     offset: 136
   member_functions: []
-- type: Client::Game::GoldSaucer::GFateDirector
-  name: GFateDirector
-  namespace: Client.Game.GoldSaucer
-  union: False
-  size: 2056
-  fields:
-  - type: Client::Game::Event::GoldSaucerDirector
-    name: GoldSaucerDirector
-    offset: 0
-    base: true
-  - type: Client::System::String::Utf8String
-    name: MapMarkerTooltipText
-    offset: 1656
-  - type: unsigned int
-    name: MapMarkerLevelId
-    offset: 1760
-  - type: unsigned int
-    name: MapMarkerIconId
-    offset: 1768
-  - type: unsigned int
-    name: ObjectIds
-    offset: 1888
-    size: 32
-  - type: int
-    name: EndTimestamp
-    offset: 2016
-  - type: unsigned __int16
-    name: BgmId
-    offset: 2028
-  - type: unsigned __int16
-    name: ScreenImageId1
-    offset: 2032
-  - type: unsigned __int16
-    name: ScreenImageId2
-    offset: 2034
-  - type: unsigned __int16
-    name: ScreenImageId3
-    offset: 2036
-  - type: byte
-    name: GateType
-    offset: 2038
-  - type: byte
-    name: GatePositionType
-    offset: 2039
-  - type: Client::Game::GoldSaucer::GFateDirectorFlag
-    name: Flags
-    offset: 2044
-  virtual_functions:
-  - name: IsRunningGate
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-  - name: IsAcceptingGate
-    offset: 2352
-    return_type: byte
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-  - name: CancelInteraction
-    offset: 1232
-    return_type: void
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-  - name: GetTitle
-    offset: 1576
-    return_type: void
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetDescription
-    offset: 1992
-    return_type: void
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2000
-    return_type: void
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2008
-    return_type: int
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2016
-    return_type: byte
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-  - name: GetEventItemId
-    offset: 2032
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-  - name: GetObjectives
-    offset: 2048
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-  - name: PopulateMapMarkers
-    offset: 2136
-    return_type: void
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-    - type: unsigned __int16
-      name: a2
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: a3
-  member_functions: []
 - type: Client::UI::AddonActionCross
   name: AddonActionCross
   namespace: Client.UI
@@ -133984,43 +134104,69 @@ structs:
     - type: Client::UI::AddonJobHudRDM0*
       name: this
   member_functions: []
-- type: Client::Game::InstanceContent::ContentDirector
-  name: ContentDirector
-  namespace: Client.Game.InstanceContent
+- type: Client::Game::Event::Director
+  name: Director
+  namespace: Client.Game.Event
   union: False
-  size: 3456
+  size: 1208
   fields:
-  - type: Client::Game::Event::Director
-    name: Director
+  - type: Client::Game::Event::LuaEventHandler
+    name: LuaEventHandler
     offset: 0
     base: true
+  - type: Client::Game::Event::EventHandlerInfo*
+    name: EventHandlerInfo
+    offset: 816
+  - type: unsigned int
+    name: ContentId
+    offset: 824
   - type: byte
-    name: ContentTypeRowId
-    offset: 1338
-  - type: Client::Game::DutyActionManager
-    name: DutyActionManager
-    offset: 1400
-  - type: float
-    name: ContentTimeLeft
-    offset: 3392
+    name: ContentFlags
+    offset: 828
+  - type: byte
+    name: Sequence
+    offset: 832
+  - type: byte
+    name: UnionData
+    offset: 834
+    size: 10
+  - type: Client::System::String::Utf8String
+    name: Title
+    offset: 848
+  - type: Client::System::String::Utf8String
+    name: Description
+    offset: 952
+  - type: Client::System::String::Utf8String
+    name: ReliefText
+    offset: 1056
+  - type: StdVector<Client::Game::Event::EventHandlerObjective>
+    name: Objectives
+    offset: 1176
+  - type: unsigned int
+    name: EventItemId
+    offset: 1200
   virtual_functions:
-  - name: GetContentTimeMax
-    offset: 2504
-    return_type: unsigned int
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: markerVector
   - name: CancelInteraction
     offset: 1232
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
   - name: GetTitle
     offset: 1576
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -134028,7 +134174,7 @@ structs:
     offset: 1992
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -134036,7 +134182,7 @@ structs:
     offset: 2000
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -134044,7 +134190,7 @@ structs:
     offset: 2008
     return_type: int
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
     - type: int
       name: a2
@@ -134052,44 +134198,30 @@ structs:
     offset: 2016
     return_type: byte
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
   - name: GetEventItemId
     offset: 2032
     return_type: unsigned int
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
   - name: GetObjectives
     offset: 2048
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
   - name: GetRecommendedLevel
     offset: 2072
     return_type: int
     parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
+    - type: Client::Game::Event::Director*
       name: this
-  - name: PopulateMapMarkers
-    offset: 2136
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
-      name: this
-    - type: unsigned __int16
-      name: a2
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: a3
-  - name: GetCurrentLevel
-    offset: 2336
-  - name: GetMaxLevel
-    offset: 2344
-  - name: GetContentTypeIconId
-    offset: 2472
-  - name: SetExperience
-    offset: 2552
+  - name: SetSequence
+    offset: 2288
+  - name: Synchronize
+    offset: 2296
   member_functions: []
 - type: Client::UI::AddonJobHudACN0
   name: AddonJobHudACN0
@@ -136047,31 +136179,28 @@ structs:
     - type: Client::UI::AddonJobHudSMN1*
       name: this
   member_functions: []
-- type: Client::Game::InstanceContent::InstanceContentDirector
-  name: InstanceContentDirector
-  namespace: Client.Game.InstanceContent
+- type: Client::Game::Event::GoldSaucerDirector
+  name: GoldSaucerDirector
+  namespace: Client.Game.Event
   union: False
-  size: 7656
+  size: 1656
   fields:
-  - type: Client::Game::InstanceContent::ContentDirector
-    name: ContentDirector
+  - type: Client::Game::Event::Director
+    name: Director
     offset: 0
     base: true
-  - type: Component::Exd::Sheets::InstanceContent
-    name: InstanceContentSheet
-    offset: 3456
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: GetTitle
     offset: 1576
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136079,7 +136208,7 @@ structs:
     offset: 1992
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136087,7 +136216,7 @@ structs:
     offset: 2000
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136095,7 +136224,7 @@ structs:
     offset: 2008
     return_type: int
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
     - type: int
       name: a2
@@ -136103,68 +136232,68 @@ structs:
     offset: 2016
     return_type: byte
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: GetEventItemId
     offset: 2032
     return_type: unsigned int
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: GetObjectives
     offset: 2048
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: GetRecommendedLevel
     offset: 2072
     return_type: int
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: PopulateMapMarkers
     offset: 2136
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
+    - type: Client::Game::Event::GoldSaucerDirector*
       name: this
     - type: unsigned __int16
       name: a2
     - type: StdVector<Client::Game::UI::MapMarkerData>*
       name: a3
-  - name: GetContentTimeMax
-    offset: 2504
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
-      name: this
   member_functions: []
-- type: Client::Game::InstanceContent::PublicContentDirector
-  name: PublicContentDirector
-  namespace: Client.Game.InstanceContent
+- type: Client::Game::Fate::FateDirector
+  name: FateDirector
+  namespace: Client.Game.Fate
   union: False
-  size: 4560
+  size: 1272
   fields:
-  - type: Client::Game::InstanceContent::ContentDirector
-    name: ContentDirector
+  - type: Client::Game::Event::Director
+    name: Director
     offset: 0
     base: true
-  - type: Component::Exd::Sheets::PublicContent
-    name: PublicContentSheet
-    offset: 3456
+  - type: byte
+    name: FateLevel
+    offset: 1208
+  - type: unsigned int
+    name: FateNpcObjectId
+    offset: 1216
+  - type: unsigned __int16
+    name: FateId
+    offset: 1228
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
   - name: GetTitle
     offset: 1576
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136172,7 +136301,7 @@ structs:
     offset: 1992
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136180,7 +136309,7 @@ structs:
     offset: 2000
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136188,7 +136317,7 @@ structs:
     offset: 2008
     return_type: int
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
     - type: int
       name: a2
@@ -136196,50 +136325,37 @@ structs:
     offset: 2016
     return_type: byte
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
   - name: GetEventItemId
     offset: 2032
     return_type: unsigned int
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
   - name: GetObjectives
     offset: 2048
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
   - name: GetRecommendedLevel
     offset: 2072
     return_type: int
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
   - name: PopulateMapMarkers
     offset: 2136
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
+    - type: Client::Game::Fate::FateDirector*
       name: this
     - type: unsigned __int16
       name: a2
     - type: StdVector<Client::Game::UI::MapMarkerData>*
       name: a3
-  - name: GetContentTimeMax
-    offset: 2504
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
-      name: this
   member_functions: []
-  static_member_functions:
-  - signature: 40 53 57 48 83 EC 78 48 8B D9 48 8D 0D
-    return_type: __int64
-    name: HandleEnterContentInfoPacket
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector::EnterContentInfoPacket*
-      name: packet
 - type: Client::UI::Misc::RaptureTextModule
   name: RaptureTextModule
   namespace: Client.UI.Misc
@@ -136549,77 +136665,77 @@ structs:
     return_type: Component::GUI::AtkStage*
     name: Instance
     parameters: []
-- type: Client::Game::InstanceContent::PublicContentEureka
-  name: PublicContentEureka
-  namespace: Client.Game.InstanceContent
+- type: Client::Game::GoldSaucer::GFateDirector
+  name: GFateDirector
+  namespace: Client.Game.GoldSaucer
   union: False
-  size: 5128
+  size: 2056
   fields:
-  - type: Client::Game::InstanceContent::PublicContentDirector
-    name: PublicContentDirector
+  - type: Client::Game::Event::GoldSaucerDirector
+    name: GoldSaucerDirector
     offset: 0
     base: true
-  - type: unsigned __int16
-    name: Unk1090
-    offset: 4560
-  - type: unsigned __int16
-    name: Unk1092
-    offset: 4562
-  - type: byte
-    name: MaxElementalLevel
-    offset: 4564
-  - type: unsigned int
-    name: CurrentExperience
-    offset: 4568
-  - type: unsigned int
-    name: NeededExperience
-    offset: 4572
-  - type: unsigned __int16
-    name: MagiaAetherCharge
-    offset: 4576
-  - type: byte
-    name: Fire
-    offset: 4578
-  - type: byte
-    name: Ice
-    offset: 4579
-  - type: byte
-    name: Wind
-    offset: 4580
-  - type: byte
-    name: Earth
-    offset: 4581
-  - type: byte
-    name: Lightning
-    offset: 4582
-  - type: byte
-    name: Water
-    offset: 4583
-  - type: byte
-    name: Magicite
-    offset: 4584
-  - type: byte
-    name: MagiaAether
-    offset: 4585
   - type: Client::System::String::Utf8String
-    name: PublicContentTextDataStrings
-    offset: 4592
-    size: 4
-  - type: Client::System::String::Utf8String
-    name: Unk1250
-    offset: 5008
+    name: MapMarkerTooltipText
+    offset: 1656
+  - type: unsigned int
+    name: MapMarkerLevelId
+    offset: 1760
+  - type: unsigned int
+    name: MapMarkerIconId
+    offset: 1768
+  - type: unsigned int
+    name: ObjectIds
+    offset: 1888
+    size: 32
+  - type: int
+    name: EndTimestamp
+    offset: 2016
+  - type: unsigned __int16
+    name: BgmId
+    offset: 2028
+  - type: unsigned __int16
+    name: ScreenImageId1
+    offset: 2032
+  - type: unsigned __int16
+    name: ScreenImageId2
+    offset: 2034
+  - type: unsigned __int16
+    name: ScreenImageId3
+    offset: 2036
+  - type: byte
+    name: GateType
+    offset: 2038
+  - type: byte
+    name: GatePositionType
+    offset: 2039
+  - type: Client::Game::GoldSaucer::GFateDirectorFlag
+    name: Flags
+    offset: 2044
   virtual_functions:
+  - name: IsRunningGate
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+  - name: IsAcceptingGate
+    offset: 2352
+    return_type: byte
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
   - name: CancelInteraction
     offset: 1232
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: GetTitle
     offset: 1576
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136627,7 +136743,7 @@ structs:
     offset: 1992
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136635,7 +136751,7 @@ structs:
     offset: 2000
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
@@ -136643,7 +136759,7 @@ structs:
     offset: 2008
     return_type: int
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
     - type: int
       name: a2
@@ -136651,42 +136767,143 @@ structs:
     offset: 2016
     return_type: byte
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: GetEventItemId
     offset: 2032
     return_type: unsigned int
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: GetObjectives
     offset: 2048
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: GetRecommendedLevel
     offset: 2072
     return_type: int
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: PopulateMapMarkers
     offset: 2136
     return_type: void
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
     - type: unsigned __int16
       name: a2
     - type: StdVector<Client::Game::UI::MapMarkerData>*
       name: a3
+  member_functions: []
+- type: Client::Game::InstanceContent::ContentDirector
+  name: ContentDirector
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 3456
+  fields:
+  - type: Client::Game::Event::Director
+    name: Director
+    offset: 0
+    base: true
+  - type: byte
+    name: ContentTypeRowId
+    offset: 1338
+  - type: Client::Game::DutyActionManager
+    name: DutyActionManager
+    offset: 1400
+  - type: float
+    name: ContentTimeLeft
+    offset: 3392
+  virtual_functions:
   - name: GetContentTimeMax
     offset: 2504
     return_type: unsigned int
     parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
+    - type: Client::Game::InstanceContent::ContentDirector*
       name: this
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: a3
+  - name: GetCurrentLevel
+    offset: 2336
+  - name: GetMaxLevel
+    offset: 2344
+  - name: GetContentTypeIconId
+    offset: 2472
+  - name: SetExperience
+    offset: 2552
   member_functions: []
 - type: Client::Game::JobGaugeManager::Gauge
   name: Gauge
@@ -137459,6 +137676,199 @@ structs:
       name: a1
     - type: byte
       name: a2
+- type: Client::Game::InstanceContent::InstanceContentDirector
+  name: InstanceContentDirector
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 7656
+  fields:
+  - type: Client::Game::InstanceContent::ContentDirector
+    name: ContentDirector
+    offset: 0
+    base: true
+  - type: Component::Exd::Sheets::InstanceContent
+    name: InstanceContentSheet
+    offset: 3456
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: a3
+  - name: GetContentTimeMax
+    offset: 2504
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+  member_functions: []
+- type: Client::Game::InstanceContent::PublicContentDirector
+  name: PublicContentDirector
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 4560
+  fields:
+  - type: Client::Game::InstanceContent::ContentDirector
+    name: ContentDirector
+    offset: 0
+    base: true
+  - type: Component::Exd::Sheets::PublicContent
+    name: PublicContentSheet
+    offset: 3456
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: a3
+  - name: GetContentTimeMax
+    offset: 2504
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+  member_functions: []
+  static_member_functions:
+  - signature: 40 53 57 48 83 EC 78 48 8B D9 48 8D 0D
+    return_type: __int64
+    name: HandleEnterContentInfoPacket
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector::EnterContentInfoPacket*
+      name: packet
 - type: Client::Game::JobGaugeManager
   name: JobGaugeManager
   namespace: Client.Game
@@ -137481,6 +137891,290 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::JobGaugeManager
+- type: Client::Game::InstanceContent::PublicContentEureka
+  name: PublicContentEureka
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 5128
+  fields:
+  - type: Client::Game::InstanceContent::PublicContentDirector
+    name: PublicContentDirector
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: Unk1090
+    offset: 4560
+  - type: unsigned __int16
+    name: Unk1092
+    offset: 4562
+  - type: byte
+    name: MaxElementalLevel
+    offset: 4564
+  - type: unsigned int
+    name: CurrentExperience
+    offset: 4568
+  - type: unsigned int
+    name: NeededExperience
+    offset: 4572
+  - type: unsigned __int16
+    name: MagiaAetherCharge
+    offset: 4576
+  - type: byte
+    name: Fire
+    offset: 4578
+  - type: byte
+    name: Ice
+    offset: 4579
+  - type: byte
+    name: Wind
+    offset: 4580
+  - type: byte
+    name: Earth
+    offset: 4581
+  - type: byte
+    name: Lightning
+    offset: 4582
+  - type: byte
+    name: Water
+    offset: 4583
+  - type: byte
+    name: Magicite
+    offset: 4584
+  - type: byte
+    name: MagiaAether
+    offset: 4585
+  - type: Client::System::String::Utf8String
+    name: PublicContentTextDataStrings
+    offset: 4592
+    size: 4
+  - type: Client::System::String::Utf8String
+    name: Unk1250
+    offset: 5008
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+  - name: GetTitle
+    offset: 1576
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetDescription
+    offset: 1992
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2000
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2008
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2016
+    return_type: byte
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+  - name: GetEventItemId
+    offset: 2032
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+  - name: GetObjectives
+    offset: 2048
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2136
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: a3
+  - name: GetContentTimeMax
+    offset: 2504
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+  member_functions: []
+- type: Client::Game::GameMain
+  name: GameMain
+  namespace: Client.Game
+  union: False
+  size: 16640
+  fields:
+  - type: Client::Game::GameMain::Festival
+    name: ActiveFestivals
+    offset: 0
+    size: 4
+  - type: Client::Game::GameMain::Festival
+    name: QueuedFestivals
+    offset: 64
+    size: 4
+  - type: Client::Game::JobGaugeManager
+    name: JobGaugeManager
+    offset: 2776
+  - type: Client::Game::Control::EmoteManager
+    name: EmoteManager
+    offset: 16336
+  - type: __int64
+    name: CurrentContentFinderConditionRow
+    offset: 16520
+  - type: float
+    name: TerritoryTransitionDelay
+    offset: 16528
+  - type: byte
+    name: TerritoryTransitionState
+    offset: 16532
+  - type: byte
+    name: ConnectedToZone
+    offset: 16534
+  - type: unsigned int
+    name: TerritoryLoadState
+    offset: 16536
+  - type: unsigned int
+    name: NextTerritoryTypeId
+    offset: 16540
+  - type: unsigned int
+    name: CurrentTerritoryTypeId
+    offset: 16544
+  - type: unsigned int
+    name: CurrentTerritoryIntendedUseId
+    offset: 16548
+  - type: unsigned int
+    name: CurrentTerritoryFilterKey
+    offset: 16552
+  - type: unsigned __int16
+    name: CurrentContentFinderConditionId
+    offset: 16556
+  - type: unsigned int
+    name: TransitionTerritoryTypeId
+    offset: 16560
+  - type: unsigned int
+    name: TransitionTerritoryFilterKey
+    offset: 16564
+  - type: unsigned int
+    name: CurrentMapId
+    offset: 16568
+  - type: float
+    name: MilisecondCounter
+    offset: 16584
+  - type: unsigned int
+    name: RuntimeSeconds
+    offset: 16588
+  - type: byte
+    name: RuntimeSecondsChanged
+    offset: 16592
+  - type: float
+    name: Runtime
+    offset: 16596
+  - type: Component::Exd::Sheets::TerritoryType*
+    name: CurrentTerritoryTypeRow
+    offset: 16600
+  - type: Component::Exd::Sheets::TerritoryIntendedUse*
+    name: CurrentTerritoryIntendedUseRow
+    offset: 16608
+  - type: Component::Exd::Sheets::TerritoryType*
+    name: NextTerritoryTypeRow
+    offset: 16616
+  - type: Component::Exd::Sheets::TerritoryIntendedUse*
+    name: NextTerritoryIntendedUseRow
+    offset: 16624
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF
+    return_type: byte
+    name: IsInInstanceArea
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??
+    return_type: void
+    name: QueueActiveFestivals
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+    - type: unsigned int
+      name: festival1
+    - type: unsigned int
+      name: festival2
+    - type: unsigned int
+      name: festival3
+    - type: unsigned int
+      name: festival4
+  - signature: E8 ?? ?? ?? ?? 80 63 50 FE
+    return_type: void
+    name: SetActiveFestivals
+    parameters:
+    - type: Client::Game::GameMain*
+      name: this
+    - type: unsigned int
+      name: festival1
+    - type: unsigned int
+      name: festival2
+    - type: unsigned int
+      name: festival3
+    - type: unsigned int
+      name: festival4
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 0F 28 F2 48 89 44 24 ??
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::GameMain
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 88 45 F1
+    return_type: byte
+    name: IsInPvPArea
+    parameters: []
+  - signature: 40 53 48 83 EC 20 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 1E 48 8D 0D
+    return_type: byte
+    name: IsInPvPInstance
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10
+    return_type: byte
+    name: IsInSanctuary
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 41 83 7F ?? ?? 4C 8D 2D
+    return_type: byte
+    name: IsInGPose
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 0F 57 FF 84 C0
+    return_type: byte
+    name: IsInIdleCam
+    parameters: []
 - type: Client::Game::InstanceContent::InstanceContentDeepDungeon
   name: InstanceContentDeepDungeon
   namespace: Client.Game.InstanceContent
@@ -137906,151 +138600,6 @@ structs:
   - signature: E8 ?? ?? ?? ?? 48 85 FF 74 1D
     return_type: Client::Game::InstanceContent::BozjaState*
     name: GetState
-    parameters: []
-- type: Client::Game::GameMain
-  name: GameMain
-  namespace: Client.Game
-  union: False
-  size: 16640
-  fields:
-  - type: Client::Game::GameMain::Festival
-    name: ActiveFestivals
-    offset: 0
-    size: 4
-  - type: Client::Game::GameMain::Festival
-    name: QueuedFestivals
-    offset: 64
-    size: 4
-  - type: Client::Game::JobGaugeManager
-    name: JobGaugeManager
-    offset: 2776
-  - type: Client::Game::Control::EmoteManager
-    name: EmoteManager
-    offset: 16336
-  - type: __int64
-    name: CurrentContentFinderConditionRow
-    offset: 16520
-  - type: float
-    name: TerritoryTransitionDelay
-    offset: 16528
-  - type: byte
-    name: TerritoryTransitionState
-    offset: 16532
-  - type: byte
-    name: ConnectedToZone
-    offset: 16534
-  - type: unsigned int
-    name: TerritoryLoadState
-    offset: 16536
-  - type: unsigned int
-    name: NextTerritoryTypeId
-    offset: 16540
-  - type: unsigned int
-    name: CurrentTerritoryTypeId
-    offset: 16544
-  - type: unsigned int
-    name: CurrentTerritoryIntendedUseId
-    offset: 16548
-  - type: unsigned int
-    name: CurrentTerritoryFilterKey
-    offset: 16552
-  - type: unsigned __int16
-    name: CurrentContentFinderConditionId
-    offset: 16556
-  - type: unsigned int
-    name: TransitionTerritoryTypeId
-    offset: 16560
-  - type: unsigned int
-    name: TransitionTerritoryFilterKey
-    offset: 16564
-  - type: unsigned int
-    name: CurrentMapId
-    offset: 16568
-  - type: float
-    name: MilisecondCounter
-    offset: 16584
-  - type: unsigned int
-    name: RuntimeSeconds
-    offset: 16588
-  - type: byte
-    name: RuntimeSecondsChanged
-    offset: 16592
-  - type: float
-    name: Runtime
-    offset: 16596
-  - type: Component::Exd::Sheets::TerritoryType*
-    name: CurrentTerritoryTypeRow
-    offset: 16600
-  - type: Component::Exd::Sheets::TerritoryIntendedUse*
-    name: CurrentTerritoryIntendedUseRow
-    offset: 16608
-  - type: Component::Exd::Sheets::TerritoryType*
-    name: NextTerritoryTypeRow
-    offset: 16616
-  - type: Component::Exd::Sheets::TerritoryIntendedUse*
-    name: NextTerritoryIntendedUseRow
-    offset: 16624
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF
-    return_type: byte
-    name: IsInInstanceArea
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??
-    return_type: void
-    name: QueueActiveFestivals
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-    - type: unsigned int
-      name: festival1
-    - type: unsigned int
-      name: festival2
-    - type: unsigned int
-      name: festival3
-    - type: unsigned int
-      name: festival4
-  - signature: E8 ?? ?? ?? ?? 80 63 50 FE
-    return_type: void
-    name: SetActiveFestivals
-    parameters:
-    - type: Client::Game::GameMain*
-      name: this
-    - type: unsigned int
-      name: festival1
-    - type: unsigned int
-      name: festival2
-    - type: unsigned int
-      name: festival3
-    - type: unsigned int
-      name: festival4
-  static_members:
-  - signature: 48 8D 0D ?? ?? ?? ?? 0F 28 F2 48 89 44 24 ??
-    relative_follow_offsets:
-    - 3
-    is_pointer: False
-    return_type: Client::Game::GameMain
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 88 45 F1
-    return_type: byte
-    name: IsInPvPArea
-    parameters: []
-  - signature: 40 53 48 83 EC 20 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 1E 48 8D 0D
-    return_type: byte
-    name: IsInPvPInstance
-    parameters: []
-  - signature: E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10
-    return_type: byte
-    name: IsInSanctuary
-    parameters: []
-  - signature: E8 ?? ?? ?? ?? 41 83 7F ?? ?? 4C 8D 2D
-    return_type: byte
-    name: IsInGPose
-    parameters: []
-  - signature: E8 ?? ?? ?? ?? 0F 57 FF 84 C0
-    return_type: byte
-    name: IsInIdleCam
     parameters: []
 - type: Client::LayoutEngine::LayoutManager
   name: LayoutManager
@@ -138544,6 +139093,12 @@ structs:
   - signature: E8 ?? ?? ?? ?? 48 85 C0 74 11 4D 8B 07
     return_type: Client::Game::Character::Character*
     name: GetParentCharacter
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
+  - signature: 40 53 48 83 EC 20 48 8D 99 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 75 12
+    return_type: byte
+    name: IsJumping
     parameters:
     - type: Client::Game::Character::Character*
       name: this
