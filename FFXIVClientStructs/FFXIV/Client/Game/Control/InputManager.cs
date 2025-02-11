@@ -10,7 +10,7 @@ public unsafe partial struct InputManager {
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 C8 4C 8B C7")]
     public static partial bool IsAutoRunning();
 
-    [StaticAddress("75 09 83 3D ?? ?? ?? ?? ?? 75 12", 4)]
+    [StaticAddress("8B 05 ?? ?? ?? ?? 41 8B DF", 2)]
     public static partial MouseButtonHoldState* GetMouseButtonHoldState();
 
     public static bool IsLeftMouseDown() => GetMouseButtonHoldState()->HasFlag(MouseButtonHoldState.Left);
