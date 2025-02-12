@@ -11234,6 +11234,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AB2030: ctor
+  Client::UI::Agent::AgentEmj::EmjCharaView:
+    vtbls:
+      - ea: 0x141F884F0
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentEmj:
     vtbls:
       - ea: 0x141FBC5D0
