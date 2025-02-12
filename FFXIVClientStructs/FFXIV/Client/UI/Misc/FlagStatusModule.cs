@@ -22,6 +22,7 @@ public unsafe partial struct FlagStatusModule {
     [FieldOffset(0x1AC), FixedSizeArray] internal FixedSizeArray64<byte> _flags;
 
     /// <remarks>
+    /// 1 = Summoned Companion Id<br/>
     /// 10 = Last seen MentorRenewDialogue MentorVersion<br/>
     /// 11 = Do not show MentorRenewDialogue again<br/>
     /// 13 = Default Currency Setting (Index of Rotation array in UIModule.UIModuleHelpers.CurrencySettings)<br/>
