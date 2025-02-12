@@ -9,10 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //
 // ClientObjectIndex:
 //  0 used in Character, PvPCharacter
-//  1 used in Inspect, CharaCard
+//  1 used in Inspect, CharaCard, Fashion, RetainerStatus
 //  2 used in TryOn, GearSetPreview
 //  3 used in Colorant
-//  4 used in BannerList, BannerEdit
+//  4 used in BannerList, BannerEdit, BannerUpdateView, FittingShop
 //  0 - 7 used in BannerParty
 //
 [GenerateInterop(isInherited: true)]

@@ -11637,6 +11637,10 @@ classes:
     funcs:
       0x140E0F910: ctor
       0x140E0FA10: Finalizer
+  Client::UI::Agent::AgentFittingShop::FittingShopCharaView:
+    vtbls:
+      - ea: 0x141FC36C8
+        base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentFittingShop:
     vtbls:
       - ea: 0x141FC3650
