@@ -13,8 +13,28 @@ public unsafe partial struct FlagStatusModule {
         return uiModule == null ? null : uiModule->GetFlagStatusModule();
     }
 
-    /// <remarks>
-    /// 13 = Default Currency Setting (Index of Rotation array in UIModule.UIModuleHelpers.CurrencySettings)
-    /// </remarks>
+    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray32<ushort> _patchMarkVersions;
+    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray32<ushort> _patchMarkStates;
+    [FieldOffset(0xA8), FixedSizeArray] internal FixedSizeArray32<PatchMark> _patchMarks;
+    // 4 bytes
+
+    [Obsolete("Wrong data type, use UIFlags")]
     [FieldOffset(0x1AC), FixedSizeArray] internal FixedSizeArray64<byte> _flags;
+
+    /// <remarks>
+    /// 10 = Last seen MentorRenewDialogue MentorVersion<br/>
+    /// 11 = Do not show MentorRenewDialogue again<br/>
+    /// 13 = Default Currency Setting (Index of Rotation array in UIModule.UIModuleHelpers.CurrencySettings)<br/>
+    /// 14 = Currency Setting Ids (bytes) for Rotation index 0 - 3<br/>
+    /// 15 = Currency Setting Id (byte) for Rotation 5<br/>
+    /// 16 = Actions &amp; Traits Display Mode (AgentActionMenu.CompactView)<br/>
+    /// 21 = Hide Portrait Update Preview
+    /// </remarks>
+    [FieldOffset(0x1AC), FixedSizeArray] internal FixedSizeArray64<uint> _uIFlags;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public struct PatchMark {
+        [FieldOffset(0)] public uint MarkId;
+        [FieldOffset(4)] public uint RowId;
+    }
 }

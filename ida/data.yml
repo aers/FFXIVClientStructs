@@ -8360,6 +8360,7 @@ classes:
       0x140792900: Update
       0x140792A80: GetGearset
       0x140792AA0: IsValidGearset
+      0x140792B00: GetCurrentGearsetIndex
       0x140792C00: EquipGearset
       0x140792CA0: EquipGearsetInternal
       0x1407936E0: CreateGearset
@@ -8370,10 +8371,12 @@ classes:
       0x140793F10: RemoveGlamourPlateLink
       0x140794010: HasLinkedGlamourPlate
       0x140794200: GetClassJobIconForGearset
+      0x140794600: GetNumGearsets
       0x140794770: GetBannerIndex
       0x1407947D0: SetBannerIndex
       0x1407948E0: HasLinkedBanner
       0x140794910: ResolveIdFromEnabledIndex
+      0x1407949B0: TryGetIdFromIndex
       0x140794CE0: FindGearsetIdByName
   Client::UI::Misc::ItemFinderModule:
     vtbls:
@@ -8452,6 +8455,8 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14079AF50: ctor
+      0x14079BE20: GetUIFlag
+      0x14079BE40: SetUIFlag
   Client::UI::Misc::RecipeFavoriteModule:
     vtbls:
       - ea: 0x141F7D2A0
