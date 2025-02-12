@@ -14,7 +14,7 @@ public unsafe partial struct FlagStatusModule {
     }
 
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray32<ushort> _patchMarkVersions;
-    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray32<ushort> _patchMarkStates;
+    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray32<byte> _patchMarkStates;
     [FieldOffset(0xA8), FixedSizeArray] internal FixedSizeArray32<PatchMark> _patchMarks;
     // 4 bytes
 
