@@ -422,6 +422,8 @@ if api is None:
                     return ida_bytes.qword_flag()
 
             def get_idc_type_from_size(self, size, offset=0):
+                if offset == 0:
+                    offset = size
                 if offset % 8 == 0 and size >= 8:
                     return ida_bytes.qword_flag()
                 elif offset % 4 == 0 and size >= 4:
