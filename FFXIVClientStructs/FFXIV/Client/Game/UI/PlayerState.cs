@@ -26,7 +26,7 @@ public unsafe partial struct PlayerState {
 
     /// <remarks> Causes LogMessage 906 when queueing into content. Seems to be unused. </remarks>
     [FieldOffset(0x78)] public bool HasAddictionRestrictions;
-    
+
     [FieldOffset(0x79)] public byte MaxLevel;
     /// <remarks> Row Id of ExVersion sheet </remarks>
     [FieldOffset(0x7A)] public byte MaxExpansion;

@@ -30,7 +30,7 @@ public unsafe partial struct ContentsFinder {
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray5<QueueEntry> _queuedEntries;
-    
+
     [FieldOffset(0x04), Obsolete("Use QueuedEntries[0].ConditionId")] public uint QueuedContentFinderConditionId1;
     [FieldOffset(0x0C), Obsolete("Use QueuedEntries[1].ConditionId")] public uint QueuedContentFinderConditionId2;
     [FieldOffset(0x14), Obsolete("Use QueuedEntries[2].ConditionId")] public uint QueuedContentFinderConditionId3;
@@ -73,16 +73,16 @@ public unsafe partial struct ContentsFinderQueueInfo {
 
     [MemberFunction("40 53 57 41 57 48 83 EC 30 0F B6 41 55")]
     public partial void ProcessInfoState(QueueStates newState, QueueInfoState* newInfoState);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 13 44 0F B6 C7")]
     public partial void SetQueuedLanguages(byte languageFlags);
-    
+
     [MemberFunction("C6 01 00 44 8B CA")]
     public partial void SetQueuedContentFinderConditions(uint conditionCount, int* conditionIds);
-    
+
     [MemberFunction("41 0F B6 C0 89 51 28")]
     public partial void SetQueuedJobAndRoulette(uint classJobId, byte a3, byte a4, byte contentRouletteId);
-    
+
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B FA 48 8B D9 45 84 C0")]
     public partial void UpdateQueueState(QueueStates newState, bool beganQueue);
 
@@ -116,7 +116,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
 public struct QueueInfoState {
     [FieldOffset(0x2)] public QueueContentType ContentType;
     [FieldOffset(0x3)] public bool IsReservingServer;
-    
+
     // ContentType: 0
     [FieldOffset(0x4)] public byte PositionInQueue;
 
