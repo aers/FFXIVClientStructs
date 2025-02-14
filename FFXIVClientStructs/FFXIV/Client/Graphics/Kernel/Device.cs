@@ -24,6 +24,9 @@ public unsafe partial struct Device {
     [FieldOffset(0xAC)] public short FrameRateLimit;
     // [FieldOffset(0xAE)] public short FrameRateLimit2; ?
 
+    // offset 0x758 contains render commands buffer
+    [FieldOffset(0x760)] public uint RenderCommandBufferCount;
+
     [FieldOffset(0x820)] public void* hWnd;
     [FieldOffset(0x830)] public uint NewWidth;
     [FieldOffset(0x834)] public uint NewHeight;
@@ -35,6 +38,7 @@ public unsafe partial struct Device {
     [FieldOffset(0x8A8)] public void* D3D11Forwarder; // CID3D11Forwarder (ID3D11Device vtbl present here)
     [FieldOffset(0x8B0)] public void* D3D11DeviceContext; // ID3D11DeviceContext5
 
+    // TODO: 7.2 change this to ImmediateContext
     [FieldOffset(0x8C0)] public void* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 45 48")]
