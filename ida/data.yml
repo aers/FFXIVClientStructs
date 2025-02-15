@@ -5280,6 +5280,16 @@ classes:
       0x14024E0B0: PropagateGameEvent
       0x14024E310: PropagateLevelChange
       0x14024E370: PropagateClassJobChange
+  Client::UI::Agent::AgentHelpers:
+    funcs:
+      0x140246840: SearchForRecipesUsingItem
+      0x140246860: ShowDescription
+      0x140246880: HideDescription
+      0x1402468A0: ViewArchiveItem
+      0x1402468C0: OpenMiragePrismPrismSetPreviewForItemId
+      0x1402468E0: IsItemPartOfMirageStoreSet
+      0x1402468F0: HandleFittingShopUpdatePacket
+      0x140246910: HideBlockingCharaViewAgents
   Client::UI::Agent::AgentEventFade:
     vtbls:
       - ea: 0x141F38F50
@@ -7708,7 +7718,7 @@ classes:
       35: GetInfoModule
       36: GetUIModuleHelpers
       37: GetAgentModule
-      38: GetUIModuleAgentModulePtr
+      38: GetAgentHelpers
       39: GetUI3DModule
       42: GetEmoteHistoryModule
       43: GetMinionListModule
