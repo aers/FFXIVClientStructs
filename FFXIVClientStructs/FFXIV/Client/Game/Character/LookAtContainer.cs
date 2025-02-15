@@ -18,7 +18,7 @@ public unsafe partial struct LookAtContainer {
 
     [FieldOffset(0xBB0)] public byte FaceCameraFlag; // looks like a bitfield but only with one bit used
 
-    [FieldOffset(0xBB4)] public Vector2 BannerHeadDirection;
+    [FieldOffset(0xBB4)] public Vector2 BannerHeadDirection; // TODO: these are of type Client::Game::Control::MoveControl::SplineVector2
     [FieldOffset(0xBBC)] public Vector2 BannerEyeDirection;
     [FieldOffset(0xBC4)] public BannerCameraFollowFlags BannerCameraFollowFlag;
 

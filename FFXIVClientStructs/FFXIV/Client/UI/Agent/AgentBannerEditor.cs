@@ -74,23 +74,21 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x90)] public Dataset Accents;
     [FieldOffset(0xC0)] public Dataset Poses;
     [FieldOffset(0xF0)] public Dataset Expressions;
-
-    // 7.0: new filters here
-
+    [FieldOffset(0x120)] internal FixedSizeArray11<CharaCardDesignCategoryEntry> _charaCardDesignCategoryEntries;
+    [FieldOffset(0x1D0)] internal FixedSizeArray11<Pointer<CharaCardDesignCategoryEntry>> _charaCardDesignCategoryEntryPointers;
+    [FieldOffset(0x228)] public int NumCharaCardDesignCategoryEntries;
     [FieldOffset(0x230)] public BannerModuleEntry BannerEntry;
-
-    // presumably a struct of size 0x64
-    [FieldOffset(0x350), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
-    [FieldOffset(0x388), FixedSizeArray] internal FixedSizeArray14<byte> _stain0Ids;
-    [FieldOffset(0x396), FixedSizeArray] internal FixedSizeArray14<byte> _stain1Ids;
-    [FieldOffset(0x3A4), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
-    [FieldOffset(0x3A8)] public uint Checksum;
-    [FieldOffset(0x3AC)] public BannerGearVisibilityFlag GearVisibilityFlag;
+    [FieldOffset(0x2C0)] public BannerModuleEntry BannerEntryBackup; // BannerEntry is saved here when opening one of those Lists (e.g. "Display Backgrounds List"), and is restored when cancelling out.
+    [FieldOffset(0x350)] public BannerGearData GearData;
+    [FieldOffset(0x350), FixedSizeArray, Obsolete("Use GearData.ItemIds")] internal FixedSizeArray14<uint> _itemIds;
+    [FieldOffset(0x388), FixedSizeArray, Obsolete("Use GearData.Stain1Ids")] internal FixedSizeArray14<byte> _stain0Ids;
+    [FieldOffset(0x396), FixedSizeArray, Obsolete("Use GearData.Stain2Ids")] internal FixedSizeArray14<byte> _stain1Ids;
+    [FieldOffset(0x3A4), FixedSizeArray, Obsolete("Use GearData.GlassesIds")] internal FixedSizeArray2<ushort> _glassesIds;
+    [FieldOffset(0x3A8), Obsolete("Use GearData.Checksum")] public uint Checksum;
+    [FieldOffset(0x3AC), Obsolete("Use GearData.GearVisibilityFlag")] public BannerGearVisibilityFlag GearVisibilityFlag;
     [FieldOffset(0x3B0), Obsolete("Renamed to EnabledGearsetIndex. This is the index of a RaptureGearsetModule.Entries list, which only contains enabled entries.")] public byte GearsetIndex;
-    [FieldOffset(0x3B0)] public byte EnabledGearsetIndex;
-    [FieldOffset(0x3B1)] public byte ClassJobId;
-    //[FieldOffset(0x3B2)] public byte UnkByteOrBool;
-    //[FieldOffset(0x3B3)] public byte UnkByteOrBool;
+    [FieldOffset(0x3B0), Obsolete("Use GearData.EnabledGearsetIndex")] public byte EnabledGearsetIndex;
+    [FieldOffset(0x3B1), Obsolete("Use GearData.ClassJobId")] public byte ClassJobId;
     [FieldOffset(0x3B8)] public AgentBannerEditor* AgentBannerEditor;
     [FieldOffset(0x3C0)] public UIModule* UIModule;
     [FieldOffset(0x3C8)] public CharaViewPortrait* CharaView;
@@ -118,4 +116,10 @@ public unsafe partial struct AgentBannerEditorState {
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 EB 3F")]
     public partial void SetHasChanged(bool hasDataChanged);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct CharaCardDesignCategoryEntry {
+        [FieldOffset(0x00), CExporterExcel("CharaCardDesignCategory")] public void* Row;
+        [FieldOffset(0x08)] public byte RowId;
+    }
 }

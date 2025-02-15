@@ -110,6 +110,7 @@ functions:
   0x1400682D0: GetMyDocumentsFolder #as UTF8String
   0x1400A4F90: GetPerformanceFrequency
   0x1400A6380: CreateDirectoryRecursive
+  0x1400B5AE0: Client::UI::GetUIConst
   0x1400B5BC0: Client::UI::IsValidPlayerCharacterName
   0x1400B61F0: Client::UI::RoundFloatToUInt
   0x1400B6530: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
@@ -172,6 +173,8 @@ functions:
   0x1400BAB40: OpenWebURL
   0x14081D470: GetUIModule
   0x140906E40: ToObjStrId
+  0x1409AC4F0: GenerateItemsChecksum # for Banners
+  0x1409AC640: GenerateEquippedItemsChecksum # for Banners; unused
   0x140CBDEC0: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
   0x140D61610: ConvertRawToMapPosX
   0x140D616A0: ConvertRawToMapPosY
@@ -403,6 +406,8 @@ functions:
   0x1415F1B00: ProcessPacketUIModulePacket
   0x14180F920: ProcessPacketCountdown
   0x14180F990: ProcessPacketCountdownCancel
+  0x140A1A5D0: ProcessPacketCurrentBannerData
+  0x140A1A5F0: ProcessPacketCurrentCharaCardData
   0x140A18770: CreatePacketTargetIfQueued
   0x140A1A370: InitIdScramble
   0x140C44CB0: IsInMordionGaol # if this returns true, i'm sorry for you
@@ -2176,6 +2181,7 @@ classes:
         pointer: False
     funcs:
       0x1409ACBD0: HandleExaminePacket
+      0x1409AD200: Clear
       0x1409AD460: RequestByEntityId
   Client::Game::UI::NpcTrade:
     instances:
@@ -2607,6 +2613,20 @@ classes:
         pointer: False
     funcs:
       0x1409DAB20: ctor
+      0x1409DACC0: RequestCurrentBannerData
+      0x1409DACF0: SendBannerData
+      0x1409DAE70: SetTempBannerData
+      0x1409DAEB0: RequestCharaCardForGameObject
+      0x1409DAF30: RequestCharaCardForContentId
+      0x1409DB0B0: RequestCharaCardForLocalPlayer
+      0x1409DB130: SendCharaCardData
+      0x1409DB560: HandleCurrentBannerDataPacket
+      0x1409DB590: HandleCurrentCharaCardDataPacket
+      0x1409DBBC0: HandleBannerDataUpdatePacket
+      0x1409DBCA0: HandleCharaCardUpdatePacket
+      0x1409DBF10: HandleClearCurrentBannerDataPacket
+      0x1409DBF40: HandleCharaCardTimestampPacket
+      0x1409DC060: Initialize
   Client::Game::ActionManager:
     instances:
       - ea: 0x142806000
@@ -5182,11 +5202,14 @@ classes:
       0x14023D130: Finalizer
       0x14023D440: CloseContextAddons
       0x14023D5C0: CloseAddon
-      0x14023D6B0: GetAgentByInternalId
-      0x14023D730: GetAgentInventoryContext
-      0x14023D710: GetAgentContext
-      0x14023D780: GetAddonTextById
       0x14023D600: IsAddonReady
+      0x14023D6B0: GetAgentByInternalId
+      0x14023D6E0: GetAgentByInternalId_2
+      0x14023D710: GetAgentContext
+      0x14023D730: GetAgentInventoryContext
+      0x14023D780: GetAddonTextById
+      0x14023D7B0: FormatAddonTextInt
+      0x14023D7F0: FormatAddonTextString
   Client::UI::Misc::ConfigModule::ConfigEventInterface:
     vtbls:
       - ea: 0x141F37720
@@ -6980,8 +7003,10 @@ classes:
       0x140657E70: HandleInput
       0x140658280: IsTextInputActive
       0x140658100: SetUIScene
-      0x1400D2EA0: PlaySoundEffectHandler
-      0x140656430: OpenMapWithMapLinkHandler
+      0x140655660: SubscribeAtkArrayDataHandler # 5
+      0x140655700: UnsubscribeAtkArrayDataHandler # 6
+      0x1400D2EA0: PlaySoundEffectHandler # 21
+      0x140656430: OpenMapWithMapLinkHandler # 14
       0x1400D4DA0: ScdResourceHandler
       0x1400DC1E0: SetRemappedIconId
   Component::GUI::AtkComponentCheckBox:
@@ -7678,7 +7703,7 @@ classes:
       48: GetAchievementListModule
       49: GetGroupPoseModule
       50: GetFieldMarkerModule
-      51: GetUnkFieldMarkerModuleMap # FieldMarkerModule+0xC78
+      51: GetExcelSheetPreloader # ?
       52: GetMycNoteModule
       53: GetOrnamentListModule
       54: GetMycItemModule
@@ -7996,6 +8021,18 @@ classes:
   Client::UI::Misc::HelperInterface:
     vtbls:
       - ea: 0x141F8C4A0
+    vfuncs:
+      0: Dtor
+      1: OnLogin
+      2: OnLogout
+      3: Update
+  Client::UI::Misc::UIModuleHelpers:
+    funcs:
+      0x140966280: ctor
+      0x1409663C0: Finalizer
+      0x140966420: PropagateOnLogin
+      0x140966460: PropagateOnLogout
+      0x1409664A0: PropagateUpdate
   Client::UI::Misc::CurrencySettingHelper:
     vtbls:
       - ea: 0x141F8C4E0
@@ -8004,10 +8041,63 @@ classes:
       0x140968E20: GetDefaultCurrencySetting
       0x140968D00: GetRotationArray
       0x140968D10: GetRotationCount
-  Client::UI::Misc::BannerModuleHelper:
+  Client::UI::Misc::BannerHelper:
     vtbls:
       - ea: 0x141F8C4C0
         base: Client::UI::Misc::HelperInterface
+    funcs:
+      0x140966590: ctor
+      0x1409665D0: Finalizer
+      0x1409665F0: CreatePortraitClientObject
+      0x140966690: DestroyPortraitClientObject
+      0x140966710: GetIsPortraitClientObjectSetUp
+      0x140966720: TryCopyCurrentBannerData
+      0x140966770: BannerData_ApplyBannerModuleEntry
+      0x140966900: BannerData_ApplyBannerModuleEntryIfNotDefault
+      0x140966B00: SendBannerData
+      0x140966B20: RequestCurrentBannerData
+      0x140966B40: HasCurrentBannerData
+      0x140966B90: TryCopyCurrentCharaCard
+      0x140966CD0: CharaCardData_ApplyCharaViewCharacterDataAndBannerModuleEntry
+      0x140966E00: CharaCardData_ApplyCharaViewCharacterData
+      0x140967160: SendCharaCardData
+      0x140967180: RequestCurrentCharaCard
+      0x1409671A0: HasCurrentCharaCard
+      0x1409671C0: HasCharaCardCreated
+      0x140967210: LogBannerDataUpdateResponse
+      0x140967270: LogCharaCardUpdateResponse
+      0x140967340: OpenCharaCardForPacket
+      0x140967400: ExportedPortraitData_ApplyBannerModuleEntry
+      0x140967570: CharaViewCharacterData_ApplyCharaCardData
+      0x1409677D0: BannerModuleEntry_ApplyDefaultBannerPreset
+      0x140967910: BannerModuleEntry_ApplyBannerData
+      0x140967A30: BannerModuleEntry_ApplyCharaCardData
+      0x140967B50: BannerModuleEntry_ApplyRaceGenderHeightTribe
+      0x140967B90: CanApplyGlamourPlates
+      0x140967BA0: BannerGearData_ApplyClassJobIdAndGearVisibilityFromGearset
+      0x140967C20: BannerGearData_ApplyGearFromGearset
+      0x140967D30: BannerGearData_UpdateGearsetChecksum
+      0x14156D090: BannerModuleEntry_IsOutdated
+      0x140967E70: BannerModuleEntry_IsCurrentCharaCardBannerOutdated
+      0x140967EC0: BannerModuleEntry_IsCharacterDataOutdated
+      0x140967F50: GetDefaultBannerPreset
+      0x140967F60: SetIsEditingBanner
+      0x140967F90: SetIsEditingCharaCard
+      0x140967FC0: TryGetItemDataFromEquippedItems
+  Client::UI::Misc::BannerGearData:
+    funcs:
+      0x1409664E0: ctor
+  Client::UI::Misc::BannerHelper::BannerData: # Instant Portrait
+    funcs:
+      0x1409ABE00: Initialize
+      0x1409ABE30: ImportData
+      0x1409ABF00: ExportData
+      0x1409ABFD0: IsChecksumValid
+  Client::UI::Misc::BannerHelper::CharaCardData: # Adventurer Plate
+    funcs:
+      0x1409AC040: Initialize
+      0x1409AC0C0: ImportData
+      0x1409AC2F0: ExportData
   Client::System::Crypt::SimpleString:
     vtbls:
       - ea: 0x141F77E40
@@ -8370,11 +8460,15 @@ classes:
       0x140793DF0: LinkGlamourPlate
       0x140793F10: RemoveGlamourPlateLink
       0x140794010: HasLinkedGlamourPlate
+      0x140794180: HasLinkedBanner
       0x140794200: GetClassJobIconForGearset
+      0x140794450: ExtractItemData
+      0x1407945E0: ExtractGlassesIds
       0x140794600: GetNumGearsets
+      0x140794640: GetGearsetByEnabledIndex
       0x140794770: GetBannerIndex
       0x1407947D0: SetBannerIndex
-      0x1407948E0: HasLinkedBanner
+      0x1407948E0: HasLinkedBannerByEnabledIndex
       0x140794910: ResolveIdFromEnabledIndex
       0x1407949B0: TryGetIdFromIndex
       0x140794CE0: FindGearsetIdByName
@@ -8499,10 +8593,12 @@ classes:
     funcs:
       0x140799C80: ctor
       0x140799D70: CreateBanner
+      0x140799E50: CreateBannerAtBannerIndex
       0x140799F00: DeleteBanner
       0x14079A020: GetNextId
       0x14079A040: GetBannerById
       0x14079A080: GetBannerIdByBannerIndex
+      0x14079AB50: SetBannerChecksum
   Client::UI::Misc::BannerModuleData:
     #funcs:
       #0x1406AA780: ctor # inlined in Client::UI::Misc::BannerModule_vf8 (0x1407A40D0)
@@ -8510,9 +8606,13 @@ classes:
       #0x1406DF940: DeleteBanner # inlined in Client::UI::Misc::BannerModule.DeleteBanner (0x1407A3430)
   Client::UI::Misc::BannerModuleEntry:
     funcs:
+      0x140799920: ctorRetrurn
       0x140799940: ctor
       0x140799A60: EqualTo
-      0x1409AC4F0: GenerateChecksum # static
+      0x140799BB0: SetBannerTimelineCustomName
+      0x140799BF0: GetFlag
+      0x140799C30: SetFlag
+      0x1407BC0D0: CopyFrom
   Client::UI::Misc::CharaView:
     vtbls:
       - ea: 0x141F88488
@@ -8521,6 +8621,11 @@ classes:
       1: Initialize
       2: Release
       3: ResetPositions
+      4: SetCameraDistance
+      5: SetCameraYawAndPitch
+      6: SetCameraXAndY
+      8: OnReady
+      10: Update
     funcs:
       0x140927920: ctor
       0x140927C60: Finalize2
@@ -8530,8 +8635,6 @@ classes:
       0x140928EA0: SetItemSlotData
       0x1409291A0: ToggleDrawWeapon
       0x1409292C0: GetCharacter
-      0x1418C9EE0: ToggleAnimationPlayback
-      0x1418C9F80: IsAnimationPaused
   Client::UI::Misc::CharaViewModelData:
     funcs:
       0x140927680: ctor
@@ -8554,16 +8657,12 @@ classes:
     vtbls:
       - ea: 0x1421B25F8
         base: Client::UI::Misc::CharaView
-    vfuncs:
-      4: SetCameraDistance
-      5: SetCameraYawAndPitch
-      6: SetCameraXAndY
-      10: Update
     funcs:
       0x1418C83C0: ctor
       0x1418C8620: Setup
       0x1418C90A0: ImportPortraitData
       0x1418C9410: ExportPortraitData
+      0x1418C96C0: GetPortraitCharacterData
       0x1418C9820: ToggleGearVisibility
       0x1418C98B0: SetCameraZoom
       0x1418C9900: ResetCamera
@@ -8576,6 +8675,12 @@ classes:
       0x1418C9D60: SetPoseTimed
       0x1418C9E00: SetPose
       0x1418C9EA0: GetAnimationTime
+      0x1418C9EE0: ToggleAnimationPlayback
+      0x1418C9F80: IsAnimationPaused
+      0x1418C9FB0: SetBannerHeadFollowingCamera
+      0x1418CA010: IsBannerHeadFollowingCamera
+      0x1418CA040: SetBannerEyesFollowingCamera
+      0x1418CA0A0: IsBannerEyesFollowingCamera
       0x1418CA0D0: SetDirectionalLightingColor
       0x1418CA150: SetDirectionalLightingBrightness
       0x1418CA180: SetDirectionalLightingAngle
@@ -8746,6 +8851,7 @@ classes:
     funcs:
       0x1405BD300: ctor
       0x1405DF1A0: Dtor
+      0x1405BF310: GetParamCount
   Client::Game::Control::CharacterLookAtControlParam:
     vtbls:
       - ea: 0x141F647F0
@@ -8953,8 +9059,12 @@ classes:
       - ea: 0x141F805A8
         base: Client::Game::Character::ContainerInterface
     funcs:
-#fail       0x1408BEEA0: ctor
+      0x1408569C0: ctor # inlined in Client::Game::Character::Character_ctor
       0x140856C70: UpdateLookAt
+      0x140858480: SetBannerHeadFollowingCamera
+      0x1408584D0: UpdateBannerHeadDirection
+      0x1408585A0: SetBannerEyesFollowingCamera
+      0x1408585F0: UpdateBannerEyeDirection
   Client::Game::Character::DrawData:
     vtbls:
       - ea: 0x141F61698
@@ -11679,11 +11789,12 @@ classes:
       0x1414D8DB0: OpenForGearset
   Client::UI::Agent::AgentBannerEditorState:
     funcs:
-      0x141576870: Save
       0x14156EF20: GetPresetIndex
-      0x14157A3D0: SetFrame
-      0x14157A180: SetAccent
+      0x141576870: Save
       0x1415774D0: SetHasChanged
+      0x141579A30: ToBannerModuleEntry
+      0x14157A180: SetAccent
+      0x14157A3D0: SetFrame
   Client::UI::Agent::AgentBannerUpdateView:
     vtbls:
       - ea: 0x14207A328
@@ -11992,6 +12103,9 @@ classes:
       0x140BF4020: ctor
       0x140BF4160: OpenCharaCardForContentId
       0x140BF41E0: OpenCharaCardForObject
+      0x140BF4E60: ExportToCharaCardData
+      0x140BF52B0: OpenCharaCardForPacket
+      0x140BF5E90: CreateNewStorage
   Client::UI::Agent::AgentCharaCard::Storage:
     funcs:
 #       0x1409A5330: ctor # inlined @ 140CD2EFC
