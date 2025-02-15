@@ -15,16 +15,27 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x18)] public float FrameDelta;
 
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray452<Pointer<AgentInterface>> _agents;
-    [FieldOffset(0xE40)] public UIModuleAgentModulePtrStruct UIModuleAgentModulePtr;
+    [FieldOffset(0xE40), Obsolete("Renamed to AgentHelpers")] public UIModuleAgentModulePtrStruct UIModuleAgentModulePtr;
+    [FieldOffset(0xE40)] public AgentHelpers AgentHelpers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public unsafe struct UIModuleAgentModulePtrStruct {
+    public unsafe struct UIModuleAgentModulePtrStruct { // TODO: remove
         [FieldOffset(0x0)] public UIModule* UIModule;
         [FieldOffset(0x8)] public AgentModule* AgentModule;
     }
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public unsafe partial struct AgentHelpers {
+    [FieldOffset(0x0)] public UIModule* UIModule;
+    [FieldOffset(0x8)] public AgentModule* AgentModule;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B B7 ?? ?? ?? ?? 45 33 FF")]
+    public partial void HideBlockingCharaViewAgents(uint clientObjectIndex, AgentId allowedAgent);
 }
 
 public enum AgentId : uint {
