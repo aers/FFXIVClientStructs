@@ -36,7 +36,7 @@ public unsafe partial struct BannerModule {
     /// </summary>
     /// <returns>Data->NextId</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 83 F8 6E 7D 58")]
-    public partial byte GetNextId();
+    public partial byte GetNextId(); // TODO: returns int
 
     /// <summary>
     /// Get the Banner entry by Id.
@@ -115,12 +115,4 @@ public unsafe partial struct BannerModuleEntry {
     /// <param name="gearVisibilityFlag">Gear Visibility Flags</param>
     [MemberFunction("E8 ?? ?? ?? ?? 89 43 58 48 8B 4D F0")]
     public static partial uint GenerateChecksum(uint* itemIds, byte* stainIds, ushort* glassesIds, BannerGearVisibilityFlag gearVisibilityFlag);
-}
-
-[Flags]
-public enum BannerGearVisibilityFlag : uint {
-    None = 0,
-    HeadgearHidden = 1 << 0,
-    WeaponHidden = 1 << 1,
-    VisorClosed = 1 << 2,
 }

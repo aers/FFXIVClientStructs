@@ -21,6 +21,7 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     [FieldOffset(0x82C0)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
+    [FieldOffset(0x82C2)] public ushort UISetupStage; // unsure
 
     [FieldOffset(0x8338)] internal Utf8String Unk8338;
     [FieldOffset(0x83A0), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;
@@ -58,6 +59,13 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x296D0)] internal ExcelSheet* AddonParamSheet;
     [FieldOffset(0x296D8)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
+
+    [FieldOffset(0x296F4)] public uint LoginSummonCompanionId;
+    [FieldOffset(0x296F8)] public float LoginSummonCompanionCountdown;
+    /// <remarks> Only for Region 5 </remarks>
+    [FieldOffset(0x296FC)] public float HourTimer;
+    /// <remarks> Only for Region 5 </remarks>
+    [FieldOffset(0x29700)] public int HoursPlayed;
 
     [FieldOffset(0x29718)] internal nint ShellCommands; // only 1 function to open links?
 
