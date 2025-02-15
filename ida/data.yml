@@ -157,6 +157,7 @@ functions:
   0x140819800: IsAlliedSealItemId
   0x140819C00: IsItemStainConditionUnlocked
   0x14081A660: IsEventItemItemId
+  0x14081AD90: IsWeddingRelatedItemId
   0x1409FFF30: ExecuteCommand
   0x1400B7200: IsBoundByDuty56
   0x1400B7380: IsDutyRecorderPlayback
@@ -1191,6 +1192,13 @@ classes:
       #0x140C83F90: GetAbilitySlotIfNotLearned
       #0x140C83FC0: GetAbilityIndexIfLearned
       0x140C83FF0: GetRank
+      0x140C84390: GetAdoptionDateFromItem # For Item#9560 (Proof of Covering)
+      0x140C843B0: GetNameIdFromItem
+      0x140C843E0: GetGradeFromItem
+      0x140C84490: GetParentagePedigreeStatsFromItem
+      0x140C84510: GetAbilityIdFromItem
+      0x140C84530: GetStainFromItem
+      0x140C84550: GetBeedingCapacityFromItem
   Client::Game::Group::PartyMember:
     funcs:
       0x14095D9E0: Reset
@@ -1407,6 +1415,16 @@ classes:
       0x1408197A0: GetWolfMarks
       0x140819810: GetAlliedSeals
       0x140819880: GetGoldSaucerCoin
+      0x14081AE50: GetWeddingDateFromItem
+      0x14081AEF0: GetRemainingWeddingInvitationCopiesFromItem
+      0x14081B170: GetRacingChocoboAdoptionDateFromItem # For Item#9560 (Proof of Covering)
+      0x14081B210: GetRacingChocoboFirstNameIdFromItem
+      0x14081B290: GetRacingChocoboLastNameIdFromItem
+      0x14081B310: GetRacingChocoboGradeMaleFromItem
+      0x14081B3C0: GetRacingChocoboGradeFemaleFromItem
+      0x14081B470: GetRacingChocoboAbilityIdFromItem
+      0x14081B520: GetRacingChocoboStainFromItem
+      0x14081B620: GetRacingChocoboBeedingCapacityFromItem
       0x140968400: GetSpecialItemId #static
       0x1408196E0: GetLimitedTomestoneWeeklyLimit #static
   Client::Game::InventoryItem:
@@ -1446,6 +1464,7 @@ classes:
       0x1407FF5B0: GetConditionPercentage
       0x1407FF5F0: GetStain
       0x1407FF6C0: GetMateriaCount
+      0x1407FF7C0: IsMarketable
       0x14082BDB0: GetCrafterContentId
       0x1407FF870: GetGlamourItemStainConditionUnlockQuestId
       0x1407FF8D0: IsGlamourItemStainConditionUnlockQuestComplete
@@ -1556,6 +1575,19 @@ classes:
     vtbls:
       - ea: 0x141FA9CE0
         base: Client::Game::HousingTerritory
+  Client::Game::NameCache:
+    instances:
+      - ea: 0x1427D65C0
+        pointer: False
+    funcs:
+      0x1407DB470: Initialize
+      0x1407DB4F0: Update
+      0x1407DB540: Clear
+      0x1407DB580: GetNameByEntityId
+      0x1407DB5D0: TryGetCharacterInfoByEntityId
+      0x1407DB790: GetNameByContentId
+      0x1407DB840: SaveCharacterInfoForEntityId
+      0x1407DB900: SetNameForContentId
   Client::Game::WeatherManager::WeatherInterface:
     vtbls:
       - ea: 0x141FA90F0
@@ -8018,6 +8050,13 @@ classes:
   Component::Text::MacroDecoder:
     vtbls:
       - ea: 0x141F79518
+    vfuncs:
+      49: DecodePcName
+      50: DecodeIfPcGender
+      51: DecodeIfPcName
+      52: DecodeIfSelf
+      53: DecodeSound
+      54: DecodeLevelPos
     funcs:
       0x140741710: ctor
       0x140742040: ReadExpression
