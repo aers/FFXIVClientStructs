@@ -28,24 +28,24 @@ public struct BannerData {
     [FieldOffset(0x0A)] public byte AmbientLightingBrightness;
     [FieldOffset(0x0B)] public byte Flags;
     [FieldOffset(0x0C)] public ushort BannerTimeline;
-    [FieldOffset(0x0D)] public ushort AnimationProgress;
-    [FieldOffset(0x0F)] public ushort HeadDirectionY;
-    [FieldOffset(0x11)] public ushort HeadDirectionX;
-    [FieldOffset(0x13)] public ushort EyeDirectionY;
-    [FieldOffset(0x15)] public ushort EyeDirectionX;
-    [FieldOffset(0x17)] public ushort CameraPositionX;
-    [FieldOffset(0x19)] public ushort CameraPositionY;
-    [FieldOffset(0x1B)] public ushort CameraPositionZ;
-    [FieldOffset(0x1D)] public ushort CameraTargetX;
-    [FieldOffset(0x1F)] public ushort CameraTargetY;
-    [FieldOffset(0x21)] public ushort CameraTargetZ;
-    [FieldOffset(0x23)] public ushort ImageRotation;
-    [FieldOffset(0x25)] public ushort DirectionalLightingVerticalAngle;
-    [FieldOffset(0x27)] public ushort DirectionalLightingHorizontalAngle;
-    [FieldOffset(0x29)] public ushort BannerDecoration;
-    [FieldOffset(0x2B)] public ushort BannerBg;
-    [FieldOffset(0x2D)] public ushort BannerFrame;
-    [FieldOffset(0x2F)] public uint Checksum;
+    [FieldOffset(0x0E)] public ushort AnimationProgress;
+    [FieldOffset(0x10)] public ushort HeadDirectionY;
+    [FieldOffset(0x12)] public ushort HeadDirectionX;
+    [FieldOffset(0x14)] public ushort EyeDirectionY;
+    [FieldOffset(0x16)] public ushort EyeDirectionX;
+    [FieldOffset(0x18)] public ushort CameraPositionX;
+    [FieldOffset(0x1A)] public ushort CameraPositionY;
+    [FieldOffset(0x1C)] public ushort CameraPositionZ;
+    [FieldOffset(0x1E)] public ushort CameraTargetX;
+    [FieldOffset(0x20)] public ushort CameraTargetY;
+    [FieldOffset(0x22)] public ushort CameraTargetZ;
+    [FieldOffset(0x24)] public ushort ImageRotation;
+    [FieldOffset(0x26)] public ushort DirectionalLightingVerticalAngle;
+    [FieldOffset(0x28)] public ushort DirectionalLightingHorizontalAngle;
+    [FieldOffset(0x2A)] public ushort BannerDecoration;
+    [FieldOffset(0x2C)] public ushort BannerBg;
+    [FieldOffset(0x2E)] public ushort BannerFrame;
+    [FieldOffset(0x30)] public uint Checksum;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xBC)]
