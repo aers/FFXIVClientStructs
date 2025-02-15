@@ -6353,19 +6353,34 @@ classes:
   Component::GUI::AtkArrayData:
     vtbls:
       - ea: 0x141F66DC8
+    vfuncs:
+      0: Dtor
+      1: FreeManagedData
+    funcs:
+      0x1405E23A0: SortSubscribedAddons
+      0x1405E2420: HasRefs
+      0x1405E2430: IsUnused
+      0x1405E2450: IncRef
+      0x1405E2480: DecRef
   Component::GUI::NumberArrayData:
     vtbls:
       - ea: 0x141F66DD8
         base: Component::GUI::AtkArrayData
     funcs:
-      0x1405E25F0: SetValue
+      0x1405E24A0: ctor
+      0x1405E24E0: Finalizer
+      0x1405E2520: Initialize
       0x1405E2590: SetValueIfDifferent
+      0x1405E25C0: SetValueUnsuppressable
+      0x1405E25F0: SetValue
       0x1405E2620: SetValueForced
   Component::GUI::StringArrayData:
     vtbls:
       - ea: 0x141F66DE8
         base: Component::GUI::AtkArrayData
     funcs:
+      0x1405E2640: Finalizer
+      0x1405E2710: Initialize
       0x1405E28C0: SetValue
       0x1405E2A90: SetValueUtf8
       0x1405E2AF0: SetValueIfDifferent
@@ -6380,6 +6395,7 @@ classes:
         base: Component::GUI::AtkArrayData
     funcs:
       0x140E277E0: SetValue # (this, int index, Client::UI::Agent::MapMarkerBase *marker)
+      0x1405E2D40: HasValueAtIndex
   Component::GUI::AtkServer:
     vtbls:
       - ea: 0x141F66E08
