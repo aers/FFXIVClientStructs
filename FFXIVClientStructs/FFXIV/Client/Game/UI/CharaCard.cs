@@ -73,7 +73,7 @@ public partial struct CharaCardData {
         [FieldOffset(0x0B)] public byte ClassJobId;
         [FieldOffset(0x0C)] public CustomizeData CustomizeData;
         [FieldOffset(0x26), FixedSizeArray] internal FixedSizeArray12<byte> _itemStain0Ids;
-        [FieldOffset(0x32)] public BannerGearVisibilityFlag GearVisibilityFlag;
+        [FieldOffset(0x32)] public byte GearVisibilityFlag;
         [FieldOffset(0x33)] public byte TopBorder;
         [FieldOffset(0x34)] public byte BottomBorder;
         [FieldOffset(0x35)] public byte PreferredClassJobId;
