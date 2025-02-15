@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::NameCache
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1888)]
+[StructLayout(LayoutKind.Explicit, Size = 0x73B4)]
 public unsafe partial struct NameCache {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 75 0D", 3)]
     public static partial NameCache* Instance();
