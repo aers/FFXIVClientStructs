@@ -45,14 +45,14 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x1A)] public bool CanEdit;
         [FieldOffset(0x1B)] public bool InvertPortraitPlacement;
         [FieldOffset(0x1C)] public PlateDesign PlateDesign;
-        [FieldOffset(0x1C), Obsolete("Use PlateDesign.BasePlate")] public ushort BasePlate; // CharaCardBase RowId
+        [FieldOffset(0x1C), Obsolete("Use PlateDesign.BasePlate")] public byte BasePlate; // CharaCardBase RowId
         [FieldOffset(0x1E), Obsolete("Use PlateDesign.TopBorder")] public byte TopBorder; // CharaCardHeader RowId
         [FieldOffset(0x1F), Obsolete("Use PlateDesign.BottomBorder")] public byte BottomBorder; // CharaCardHeader RowId
-        [FieldOffset(0x22), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public ushort Backing; // CharaCardDecoration RowId
-        [FieldOffset(0x24), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public ushort PatternOverlay; // CharaCardDecoration RowId
-        [FieldOffset(0x26), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public ushort PortraitFrame; // CharaCardDecoration RowId
-        [FieldOffset(0x28), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public ushort PlateFrame; // CharaCardDecoration RowId
-        [FieldOffset(0x2A), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public ushort Accent; // CharaCardDecoration RowId
+        [FieldOffset(0x22), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public byte Backing; // CharaCardDecoration RowId
+        [FieldOffset(0x24), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public byte PatternOverlay; // CharaCardDecoration RowId
+        [FieldOffset(0x26), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public byte PortraitFrame; // CharaCardDecoration RowId
+        [FieldOffset(0x28), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public byte PlateFrame; // CharaCardDecoration RowId
+        [FieldOffset(0x2A), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations")] public byte Accent; // CharaCardDecoration RowId
         [FieldOffset(0x2C)] public byte NumPlayStyles;
         /// <remarks> CharaCardPlayStyle RowIds </remarks>
         [FieldOffset(0x2D), FixedSizeArray] internal FixedSizeArray6<byte> _playStyles;
