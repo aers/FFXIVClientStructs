@@ -13,7 +13,7 @@ public struct CharaCard {
     [FieldOffset(0x1E0)] public CharaCardFlags Flags;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x34)]
 public struct BannerData {
     [FieldOffset(0x00)] public byte HasData;
     [FieldOffset(0x01)] public byte Expression;
