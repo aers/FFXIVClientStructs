@@ -9685,6 +9685,8 @@ classes:
     vtbls:
       - ea: 0x141FC1708
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC1780
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140E54460: ctor
       0x140E546A0: Finalizer
@@ -12104,8 +12106,6 @@ classes:
     vtbls:
       - ea: 0x141F38FC8
         base: Client::UI::Agent::AgentInterface
-      - ea: 0x141FC1780
-        base: Common::Configuration::ConfigBase::ChangeEventInterface
   Client::UI::Agent::AgentHudLayout:
     vtbls:
       - ea: 0x141FBF450
