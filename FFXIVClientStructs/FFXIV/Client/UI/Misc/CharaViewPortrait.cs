@@ -66,7 +66,7 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
     /// <param name="agentEventKind">The eventKind parameter passed to agent->ReceiveEvent.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10")]
     public partial void Setup(uint clientObjectId, CharaViewCharacterData* characterData, AgentInterface* agent, int agentEventId, ulong agentEventKind);
-    
+
     [Obsolete("Use Setup with correct types.")]
     public void Setup(uint clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6)
         => Setup(clientObjectId, characterData, (AgentInterface*)a4, a5, (ulong)a6);
