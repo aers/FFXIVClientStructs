@@ -3,15 +3,17 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using static FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentHUD
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Common::Configuration::ConfigBase::ChangeEventInterface
 [Agent(AgentId.Hud)]
 [GenerateInterop]
-[Inherits<AgentInterface>]
+[Inherits<AgentInterface>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4DF0)]
 public unsafe partial struct AgentHUD {
     [FieldOffset(0xB18)] public uint CastBarAddonId;
