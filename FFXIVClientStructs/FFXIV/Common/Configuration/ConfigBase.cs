@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 namespace FFXIVClientStructs.FFXIV.Common.Configuration;
 
@@ -96,5 +97,8 @@ public unsafe partial struct ConfigBase {
     public unsafe partial struct ChangeEventInterface {
         [FieldOffset(0x8)] public ChangeEventInterface* NextInterface;
         [FieldOffset(0x10)] public ConfigBase* Owner;
+
+        [VirtualFunction(1)]
+        public partial void OnConfigChange(ConfigOption configOption, ConfigEntry* configEntry);
     }
 }

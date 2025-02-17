@@ -86,7 +86,7 @@ public unsafe partial struct PlayerState {
     // Size: (GlassesStylesSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsGlassesUnlocked"/> </remarks>
     [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray4<byte> _unlockedGlassesStylesBitmask;
-    [FieldOffset(0x30E)] public ushort NumOwnedMounts;
+    [FieldOffset(0x310)] public ushort NumOwnedMounts;
 
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 49 8B D8"
     // Size: (SpearfishingNotebookSheet.RowCount + 7) / 8

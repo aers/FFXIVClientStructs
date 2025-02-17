@@ -4,14 +4,16 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using static FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::RaptureAtkModule
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
+//   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
-[Inherits<AtkModule>]
+[Inherits<AtkModule>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x29720)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
