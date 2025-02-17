@@ -8215,6 +8215,8 @@ classes:
       0x14092D410: SetString
   std::deque<Component::Text::TextParameter>:
     funcs:
+      0x1403882D0: ctor
+      0x1407509D0: dtor
       0x140394190: _Reset_map
       0x140197AF0: push_back
       0x140736410: resize
