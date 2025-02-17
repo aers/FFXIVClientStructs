@@ -2113,7 +2113,15 @@ classes:
       0x140973F90: SetClassJobId
       0x140974060: GetClassJobId
       0x140974780: SetSyncedLevel
+      0x140974A10: SetBirthdate
+      0x140974AD0: SetGrandCompany
+      0x140974B90: SetGrandCompanyRank
+      0x140974C70: GetGrandCompanyRankForGc
       0x140974C90: GetGrandCompanyRank
+      0x140974D70: SetFavouriteAetheryte
+      0x140974DE0: IsSetAsFavouriteAetheryte
+      0x140974E20: IsSetAsFreeAetheryteId
+      0x140974E40: IsSetAsFreeAetherytePlayStationPlus
       0x140975790: SetBeastTribeRank
       0x1409757D0: GetBeastTribeRank
       0x140975810: SetBeastTribeCurrentReputation
@@ -2280,7 +2288,13 @@ classes:
       0x1409B69A0: ReadPacket
   Client::Game::UI::CompanionInfo:
     funcs:
+      0x1409B4B60: SetName
+      0x1409B4C40: SetSkillLevel
+      0x1409B4C60: GetSkillLevel
+      0x1409B4CA0: SetBuddyEquipUnlockd
       0x1409B4CD0: IsBuddyEquipUnlocked
+      0x1409B4D10: SetBarding
+      0x1409B4D30: GetBarding
   Client::Game::UI::PvPProfile:
     instances:
       - ea: 0x1427EFFB4
@@ -8198,10 +8212,12 @@ classes:
   Component::Text::TextParameter:
     funcs:
       0x140190E30: Finalizer
+      0x14092D410: SetString
   std::deque<Component::Text::TextParameter>:
     funcs:
       0x140394190: _Reset_map
       0x140197AF0: push_back
+      0x140736410: resize
   Client::System::Data::Bit:
     vtbls:
       - ea: 0x141F87108
@@ -8325,6 +8341,12 @@ classes:
       0x140905870: FormatItemName
       0x140905AD0: FormatItemIconSuffix
       0x140905E30: GetTextChecker
+      0x140905EC0: SetGlobalTempPlayer1Utf8
+      0x140906070: SetGlobalTempPlayer1
+      0x140906290: SetGlobalTempPlayer2Utf8
+      0x140906440: SetGlobalTempPlayer2
+      0x140906660: UpdateGlobalColors
+      0x140906750: SetGlobalColorByConfigOption
       0x140906810: Update
       0x140906AB0: AppendUnseenIcon
       0x140906B50: AppendCrossWorldIcon
@@ -8350,6 +8372,11 @@ classes:
       0x140910F30: SetTabName
       0x1409110E0: GetTabName
       0x140911150: FormatPlayerLink
+      0x1409113E0: SetChatTabShouldDisplayTime
+      0x140911410: SetUseServerTime
+      0x140911440: SetUse12HourClock
+      0x140911470: SetLogNameType
+      0x140911490: SetGlobalLogRoleColors
       0x140911C80: GetLinkTerminator
       0x140911E90: GetChatTypeForLogMessage
       0x140911ED0: GetLogMessage
