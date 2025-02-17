@@ -532,6 +532,7 @@ enums:
     "ClassJobChange": 2
     "LevelChange": 3
     "ShowLogMessage": 4
+    "Login": 6
     "Logout": 7
     "CloseLogoutDialog": 8
     "StartLogoutCountdown": 9
@@ -562,6 +563,25 @@ enums:
     "Unk_18": 18
     "BgcArmyAction": 19
     "Ornament": 20
+- type: Client::UI::Misc::CharaCardDataChangeReason
+  name: CharaCardDataChangeReason
+  underlying: int
+  namespace: Client.UI.Misc
+  values:
+    "Banner": 1
+    "Design": 2
+    "Profile": 3
+    "Permissions": 4
+    "SearchComment": 5
+- type: Client::UI::Misc::BannerGearVisibilityFlag
+  name: BannerGearVisibilityFlag
+  underlying: unsigned int
+  namespace: Client.UI.Misc
+  values:
+    "None": 0
+    "HeadgearHidden": 1
+    "WeaponHidden": 2
+    "VisorClosed": 4
 - type: Client::Game::InventoryType
   name: InventoryType
   underlying: unsigned int
@@ -896,15 +916,6 @@ enums:
     "Novice": 2
     "Moderate": 4
     "Advanced": 8
-- type: Client::UI::Misc::BannerGearVisibilityFlag
-  name: BannerGearVisibilityFlag
-  underlying: unsigned int
-  namespace: Client.UI.Misc
-  values:
-    "None": 0
-    "HeadgearHidden": 1
-    "WeaponHidden": 2
-    "VisorClosed": 4
 - type: Client::UI::Agent::AgentBannerEditorState::EditorOpenType
   name: EditorOpenType
   underlying: int
@@ -1911,6 +1922,15 @@ enums:
     "Invalid": 0
     "Requested": 1
     "Loaded": 2
+- type: Client::Game::UI::CharaCardFlags
+  name: CharaCardFlags
+  underlying: int
+  namespace: Client.Game.UI
+  values:
+    "None": 0
+    "HasCurrentBannerData": 1
+    "HasCurrentCharaCardData": 2
+    "HasCurrentCharaCardDataTimestamp": 4
 - type: Client::Game::UI::ContentsFinder::LootRule
   name: LootRule
   underlying: byte
@@ -1930,14 +1950,17 @@ enums:
     "Ready": 3
     "Accepted": 4
     "InContent": 5
-- type: Client::Game::UI::ContentsFinderQueueInfo::PoppedContentTypes
-  name: PoppedContentTypes
+- type: Client::Game::UI::QueueInfoState::QueueContentType
+  name: QueueContentType
   underlying: byte
   namespace: Client.Game.UI
   values:
-    "None": 0
-    "Roulette": 1
-    "Duty": 2
+    "PositionAndWaitTime": 0
+    "THDAndWaitTime": 1
+    "PlayersAndWaitTime": 2
+    "WaitTime": 3
+    "None4": 4
+    "None5": 5
 - type: Client::Game::UI::RollState
   name: RollState
   underlying: int
@@ -5103,9 +5126,9 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::Control::InputManager
-  - signature: 75 09 83 3D ?? ?? ?? ?? ?? 75 12
+  - signature: 8B 05 ?? ?? ?? ?? 41 8B DF
     relative_follow_offsets:
-    - 4
+    - 2
     is_pointer: False
     return_type: Client::Game::Control::InputManager::MouseButtonHoldState
   static_member_functions:
@@ -7412,6 +7435,40 @@ structs:
     offset: 60
     size: 12
   member_functions: []
+- type: Client::Game::NameCache::ContentIdCacheEntry
+  name: ContentIdCacheEntry
+  namespace: Client.Game
+  union: False
+  size: 72
+  fields:
+  - type: byte
+    name: Name
+    offset: 0
+    size: 64
+  - type: unsigned __int64
+    name: ContentId
+    offset: 64
+  member_functions: []
+- type: Client::Game::NameCache::EntityCacheEntry
+  name: EntityCacheEntry
+  namespace: Client.Game
+  union: False
+  size: 76
+  fields:
+  - type: byte
+    name: Name
+    offset: 0
+    size: 64
+  - type: byte
+    name: Sex
+    offset: 64
+  - type: unsigned int
+    name: EntityId
+    offset: 68
+  - type: __int16
+    name: HomeWorldId
+    offset: 72
+  member_functions: []
 - type: Client::Game::Object::AreaObject
   name: AreaObject
   namespace: Client.Game.Object
@@ -8024,6 +8081,106 @@ structs:
       name: sendPacket
     - type: byte
       name: isInstant
+- type: Client::Game::UI::BannerData
+  name: BannerData
+  namespace: Client.Game.UI
+  union: False
+  size: 52
+  fields:
+  - type: byte
+    name: HasData
+    offset: 0
+  - type: byte
+    name: Expression
+    offset: 1
+  - type: byte
+    name: CameraZoom
+    offset: 2
+  - type: byte
+    name: DirectionalLightingColorRed
+    offset: 3
+  - type: byte
+    name: DirectionalLightingColorGreen
+    offset: 4
+  - type: byte
+    name: DirectionalLightingColorBlue
+    offset: 5
+  - type: byte
+    name: DirectionalLightingBrightness
+    offset: 6
+  - type: byte
+    name: AmbientLightingColorRed
+    offset: 7
+  - type: byte
+    name: AmbientLightingColorGreen
+    offset: 8
+  - type: byte
+    name: AmbientLightingColorBlue
+    offset: 9
+  - type: byte
+    name: AmbientLightingBrightness
+    offset: 10
+  - type: byte
+    name: Flags
+    offset: 11
+  - type: unsigned __int16
+    name: BannerTimeline
+    offset: 12
+  - type: unsigned __int16
+    name: AnimationProgress
+    offset: 14
+  - type: unsigned __int16
+    name: HeadDirectionY
+    offset: 16
+  - type: unsigned __int16
+    name: HeadDirectionX
+    offset: 18
+  - type: unsigned __int16
+    name: EyeDirectionY
+    offset: 20
+  - type: unsigned __int16
+    name: EyeDirectionX
+    offset: 22
+  - type: unsigned __int16
+    name: CameraPositionX
+    offset: 24
+  - type: unsigned __int16
+    name: CameraPositionY
+    offset: 26
+  - type: unsigned __int16
+    name: CameraPositionZ
+    offset: 28
+  - type: unsigned __int16
+    name: CameraTargetX
+    offset: 30
+  - type: unsigned __int16
+    name: CameraTargetY
+    offset: 32
+  - type: unsigned __int16
+    name: CameraTargetZ
+    offset: 34
+  - type: unsigned __int16
+    name: ImageRotation
+    offset: 36
+  - type: unsigned __int16
+    name: DirectionalLightingVerticalAngle
+    offset: 38
+  - type: unsigned __int16
+    name: DirectionalLightingHorizontalAngle
+    offset: 40
+  - type: unsigned __int16
+    name: BannerDecoration
+    offset: 42
+  - type: unsigned __int16
+    name: BannerBg
+    offset: 44
+  - type: unsigned __int16
+    name: BannerFrame
+    offset: 46
+  - type: unsigned int
+    name: Checksum
+    offset: 48
+  member_functions: []
 - type: Client::Game::UI::Cabinet
   name: Cabinet
   namespace: Client.Game.UI
@@ -8059,12 +8216,94 @@ structs:
     name: MaxTime
     offset: 4
   member_functions: []
-- type: Client::Game::UI::CharaCard
-  name: CharaCard
+- type: Client::Game::UI::CharaCardData::Data16Struct
+  name: Data16Struct
   namespace: Client.Game.UI
   union: False
-  size: 488
-  fields: []
+  size: 54
+  fields:
+  - type: unsigned __int16
+    name: BannerTimeline
+    offset: 0
+  - type: unsigned __int16
+    name: AnimationProgress
+    offset: 2
+  - type: unsigned __int16
+    name: HeadDirectionY
+    offset: 4
+  - type: unsigned __int16
+    name: HeadDirectionX
+    offset: 6
+  - type: unsigned __int16
+    name: EyeDirectionY
+    offset: 8
+  - type: unsigned __int16
+    name: EyeDirectionX
+    offset: 10
+  - type: unsigned __int16
+    name: CameraPositionX
+    offset: 12
+  - type: unsigned __int16
+    name: CameraPositionY
+    offset: 14
+  - type: unsigned __int16
+    name: CameraPositionZ
+    offset: 16
+  - type: unsigned __int16
+    name: CameraTargetX
+    offset: 18
+  - type: unsigned __int16
+    name: CameraTargetY
+    offset: 20
+  - type: unsigned __int16
+    name: CameraTargetZ
+    offset: 22
+  - type: unsigned __int16
+    name: ImageRotation
+    offset: 24
+  - type: unsigned __int16
+    name: DirectionalLightingVerticalAngle
+    offset: 26
+  - type: unsigned __int16
+    name: DirectionalLightingHorizontalAngle
+    offset: 28
+  - type: unsigned __int16
+    name: BannerDecoration
+    offset: 30
+  - type: unsigned __int16
+    name: BannerBg
+    offset: 32
+  - type: unsigned __int16
+    name: BannerFrame
+    offset: 34
+  - type: unsigned __int16
+    name: TitleId
+    offset: 36
+  - type: unsigned __int16
+    name: BasePlate
+    offset: 38
+  - type: unsigned __int16
+    name: Decorations
+    offset: 40
+    size: 5
+  - type: unsigned __int16
+    name: GlassesIds
+    offset: 50
+    size: 2
+  member_functions: []
+- type: Client::Game::UI::CharaCardData::Data32Struct
+  name: Data32Struct
+  namespace: Client.Game.UI
+  union: False
+  size: 52
+  fields:
+  - type: unsigned int
+    name: Timestamp
+    offset: 0
+  - type: unsigned int
+    name: ItemIds
+    offset: 4
+    size: 12
   member_functions: []
 - type: Client::Game::UI::CollectablesShop
   name: CollectablesShop
@@ -8144,69 +8383,21 @@ structs:
       name: this
     - type: unsigned int
       name: buddyEquipId
-- type: Client::Game::UI::ContentsFinderQueueInfo
-  name: ContentsFinderQueueInfo
+- type: Client::Game::UI::ContentsFinderQueueInfo::QueueEntry
+  name: QueueEntry
   namespace: Client.Game.UI
-  union: False
-  size: 144
+  union: True
+  size: 8
   fields:
+  - type: Client::UI::Agent::ContentsId::ContentsType
+    name: ContentType
+    offset: 0
   - type: unsigned int
-    name: QueuedContentFinderConditionId1
+    name: ConditionId
     offset: 4
-  - type: unsigned int
-    name: QueuedContentFinderConditionId2
-    offset: 12
-  - type: unsigned int
-    name: QueuedContentFinderConditionId3
-    offset: 20
-  - type: unsigned int
-    name: QueuedContentFinderConditionId4
-    offset: 28
-  - type: unsigned int
-    name: QueuedContentFinderConditionId5
-    offset: 36
-  - type: unsigned int
-    name: QueuedClassJobId
-    offset: 40
-  - type: int
-    name: EnteredQueueTimestamp
-    offset: 64
-  - type: int
-    name: QueueReadyTimestamp
-    offset: 68
-  - type: Client::Game::UI::ContentsFinderQueueInfo::QueueStates
-    name: QueueState
-    offset: 85
   - type: byte
-    name: QueuedContentRouletteId
-    offset: 90
-  - type: __int8
-    name: PositionInQueue
-    offset: 92
-  - type: byte
-    name: AverageWaitTime
-    offset: 103
-  - type: Client::Game::UI::ContentsFinderQueueInfo::PoppedContentTypes
-    name: PoppedContentType
-    offset: 124
-  - type: unsigned int
-    name: PoppedContentId
-    offset: 128
-  - type: byte
-    name: PoppedContentIsUnrestrictedParty
-    offset: 136
-  - type: byte
-    name: PoppedContentIsMinimalIL
-    offset: 137
-  - type: byte
-    name: PoppedContentIsLevelSync
-    offset: 138
-  - type: byte
-    name: PoppedContentIsSilenceEcho
-    offset: 139
-  - type: byte
-    name: PoppedContentIsExplorerMode
-    offset: 140
+    name: RouletteId
+    offset: 4
   member_functions: []
 - type: Client::Game::UI::ContentsNote
   name: ContentsNote
@@ -8775,6 +8966,49 @@ structs:
   fields: []
   virtual_functions: []
   member_functions: []
+- type: Client::Game::UI::QueueInfoState
+  name: QueueInfoState
+  namespace: Client.Game.UI
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::UI::QueueInfoState::QueueContentType
+    name: ContentType
+    offset: 2
+  - type: byte
+    name: IsReservingServer
+    offset: 3
+  - type: byte
+    name: PositionInQueue
+    offset: 4
+  - type: byte
+    name: AverageWaitTime
+    offset: 5
+  - type: byte
+    name: TanksFound
+    offset: 8
+  - type: byte
+    name: TanksNeeded
+    offset: 9
+  - type: byte
+    name: HealersFound
+    offset: 10
+  - type: byte
+    name: HealersNeeded
+    offset: 11
+  - type: byte
+    name: DPSFound
+    offset: 12
+  - type: byte
+    name: DPSNeeded
+    offset: 13
+  - type: byte
+    name: PlayersFound
+    offset: 14
+  - type: byte
+    name: PlayersNeeded
+    offset: 15
+  member_functions: []
 - type: Client::Game::UI::RecipeNote
   name: RecipeNote
   namespace: Client.Game.UI
@@ -9125,6 +9359,9 @@ structs:
   - type: __int16
     name: FrameRateLimit
     offset: 172
+  - type: unsigned int
+    name: RenderCommandBufferCount
+    offset: 1888
   - type: __int64
     name: hWnd
     offset: 2080
@@ -9191,6 +9428,16 @@ structs:
     - 3
     is_pointer: True
     return_type: Client::Graphics::Kernel::Device
+- type: Client::Graphics::Kernel::ImmediateContext
+  name: ImmediateContext
+  namespace: Client.Graphics.Kernel
+  union: False
+  size: 6232
+  fields:
+  - type: Client::Graphics::Kernel::Texture*
+    name: BackBufferReference
+    offset: 40
+  member_functions: []
 - type: Client::Graphics::Kernel::Notifier
   name: Notifier
   namespace: Client.Graphics.Kernel
@@ -12802,6 +13049,19 @@ structs:
     name: Unk20
     offset: 32
   member_functions: []
+- type: Client::UI::Agent::AgentBannerEditorState::CharaCardDesignCategoryEntry
+  name: CharaCardDesignCategoryEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 16
+  fields:
+  - type: Component::Exd::Sheets::CharaCardDesignCategory*
+    name: Row
+    offset: 0
+  - type: byte
+    name: RowId
+    offset: 8
+  member_functions: []
 - type: Client::UI::Agent::AgentBannerEditorState::Dataset
   name: Dataset
   namespace: Client.UI.Agent
@@ -12860,6 +13120,45 @@ structs:
   - type: byte
     name: ClassJobMatches
     offset: 21
+  member_functions: []
+- type: Client::UI::Agent::AgentCharaCard::Decoration
+  name: Decoration
+  namespace: Client.UI.Agent
+  union: False
+  size: 8
+  fields:
+  - type: byte
+    name: Index
+    offset: 0
+  - type: byte
+    name: Unk1
+    offset: 1
+  - type: unsigned int
+    name: IconId
+    offset: 4
+  member_functions: []
+- type: Client::UI::Agent::AgentCharaCard::PlateDesign
+  name: PlateDesign
+  namespace: Client.UI.Agent
+  union: False
+  size: 16
+  fields:
+  - type: unsigned __int16
+    name: BasePlate
+    offset: 0
+  - type: byte
+    name: TopBorder
+    offset: 2
+  - type: byte
+    name: BottomBorder
+    offset: 3
+  - type: byte
+    name: NumDecorations
+    offset: 4
+  - type: unsigned __int16
+    name: Decorations
+    offset: 6
+    size: 5
   member_functions: []
 - type: Client::UI::Agent::AgentContentsFinderInterface::UnkItemsSub
   name: UnkItemsSub
@@ -12953,6 +13252,29 @@ structs:
     name: Recruitment
     offset: 5
   member_functions: []
+- type: Client::UI::Agent::AgentHelpers
+  name: AgentHelpers
+  namespace: Client.UI.Agent
+  union: False
+  size: 16
+  fields:
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 0
+  - type: Client::UI::Agent::AgentModule*
+    name: AgentModule
+    offset: 8
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 8B B7 ?? ?? ?? ?? 45 33 FF
+    return_type: void
+    name: HideBlockingCharaViewAgents
+    parameters:
+    - type: Client::UI::Agent::AgentHelpers*
+      name: this
+    - type: unsigned int
+      name: clientObjectIndex
+    - type: Client::UI::Agent::AgentId
+      name: allowedAgent
 - type: Client::UI::Agent::AgentHousingPlant::SelectableItem
   name: SelectableItem
   namespace: Client.UI.Agent
@@ -14350,6 +14672,41 @@ structs:
     offset: 0
     size: 12
   member_functions: []
+- type: Client::UI::Misc::BannerGearData
+  name: BannerGearData
+  namespace: Client.UI.Misc
+  union: False
+  size: 100
+  fields:
+  - type: unsigned int
+    name: ItemIds
+    offset: 0
+    size: 14
+  - type: byte
+    name: Stain0Ids
+    offset: 56
+    size: 14
+  - type: byte
+    name: Stain1Ids
+    offset: 70
+    size: 14
+  - type: unsigned __int16
+    name: GlassesIds
+    offset: 84
+    size: 2
+  - type: unsigned int
+    name: Checksum
+    offset: 88
+  - type: Client::UI::Misc::BannerGearVisibilityFlag
+    name: GearVisibilityFlag
+    offset: 92
+  - type: byte
+    name: EnabledGearsetIndex
+    offset: 96
+  - type: byte
+    name: ClassJobId
+    offset: 97
+  member_functions: []
 - type: Client::UI::Misc::CharaViewItem
   name: CharaViewItem
   namespace: Client.UI.Misc
@@ -14422,26 +14779,6 @@ structs:
   size: 16
   fields: []
   member_functions: []
-- type: Client::UI::Misc::CurrencySettingsHelper
-  name: CurrencySettingsHelper
-  namespace: Client.UI.Misc
-  union: False
-  size: 24
-  fields:
-  - type: Client::UI::UIModule*
-    name: UIModule
-    offset: 8
-  - type: byte
-    name: Rotation
-    offset: 16
-    size: 5
-  - type: byte
-    name: NumEntries
-    offset: 21
-  - type: byte
-    name: HasEntries
-    offset: 22
-  member_functions: []
 - type: Client::UI::Misc::DataCenterHelper::DataCenter
   name: DataCenter
   namespace: Client.UI.Misc
@@ -14461,6 +14798,19 @@ structs:
     name: Name
     offset: 6
     size: 32
+  member_functions: []
+- type: Client::UI::Misc::FlagStatusModule::PatchMarkIdEntry
+  name: PatchMarkIdEntry
+  namespace: Client.UI.Misc
+  union: False
+  size: 8
+  fields:
+  - type: unsigned int
+    name: MarkId
+    offset: 0
+  - type: unsigned int
+    name: RowId
+    offset: 4
   member_functions: []
 - type: Client::UI::Misc::GamePresetPoint
   name: GamePresetPoint
@@ -14492,6 +14842,37 @@ structs:
     name: Cards
     offset: 48
     size: 5
+  member_functions: []
+- type: Client::UI::Misc::HelperInterface
+  name: HelperInterface
+  namespace: Client.UI.Misc
+  union: False
+  size: 16
+  fields:
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 8
+  virtual_functions:
+  - name: OnLogin
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::HelperInterface*
+      name: this
+  - name: OnLogout
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::HelperInterface*
+      name: this
+  - name: Update
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::HelperInterface*
+      name: this
+  - name: Dtor
+    offset: 0
   member_functions: []
 - type: Client::UI::Misc::InputTimerModule::InputTimerData
   name: InputTimerData
@@ -15029,11 +15410,14 @@ structs:
   name: UIModuleHelpers
   namespace: Client.UI.Misc
   union: False
-  size: 16
+  size: 32
   fields:
   - type: Client::UI::Misc::CurrencySettingsHelper*
     name: CurrencySettingsHelper
     offset: 0
+  - type: Client::UI::Misc::BannerHelper*
+    name: BannerHelper
+    offset: 8
   member_functions: []
 - type: Client::UI::Misc::UserFileManager::UserFileEvent
   name: UserFileEvent
@@ -15461,7 +15845,10 @@ structs:
   namespace: Client.UI
   union: False
   size: 240
-  fields: []
+  fields:
+  - type: Client::UI::UIModule*
+    name: UIModulePtr
+    offset: 8
   virtual_functions: []
   member_functions: []
 - type: Client::UI::UIModule::UIModuleHandler
@@ -15689,6 +16076,12 @@ structs:
   - name: GetUIModuleAgentModulePtr
     offset: 304
     return_type: Client::UI::Agent::AgentModule::UIModuleAgentModulePtrStruct*
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+  - name: GetAgentHelpers
+    offset: 304
+    return_type: Client::UI::Agent::AgentHelpers*
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
@@ -16252,7 +16645,7 @@ structs:
     offset: 360
   - name: GetCrossWorldLinkShellModule
     offset: 376
-  - name: GetUnkFieldMarkerModuleMap
+  - name: GetExcelSheetPreloader
     offset: 408
   - name: GetMycNoteModule
     offset: 416
@@ -18519,10 +18912,10 @@ structs:
     name: Unk1C
     offset: 28
   - type: byte
-    name: SubscribedAddonsCount
+    name: Unk1D
     offset: 29
   - type: byte
-    name: Unk1E
+    name: SubscribedAddonsCount
     offset: 30
   - type: byte
     name: UpdateState
@@ -18530,7 +18923,11 @@ structs:
   - type: __int8
     name: RefCount
     offset: 32
-  virtual_functions: []
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+  - name: FreeManagedData
+    offset: 8
   member_functions: []
 - type: Component::GUI::AtkArrayDataHolder
   name: AtkArrayDataHolder
@@ -20114,10 +20511,18 @@ structs:
   size: 8
   fields: []
   virtual_functions:
-  - name: Dtor
-    offset: 0
   - name: ExecuteCommand
     offset: 8
+    return_type: int
+    parameters:
+    - type: Component::Shell::ShellCommandInterface*
+      name: this
+    - type: Component::Shell::ShellCommandInterface::CommandContext*
+      name: context
+    - type: __int64
+      name: source
+  - name: Dtor
+    offset: 0
   member_functions: []
 - type: Component::SteamApi::SteamCallbackBase
   name: SteamCallbackBase
@@ -22570,6 +22975,16 @@ structs:
     name: tm_isdst
     offset: 32
   member_functions: []
+- type: byte*
+  name: StringPointer
+  namespace: ''
+  union: False
+  size: 8
+  fields:
+  - type: byte*
+    name: Value
+    offset: 0
+  member_functions: []
 - type: Animation::Animation::hkaAnnotationTrack::Annotation
   name: Annotation
   namespace: Animation.Animation
@@ -23989,6 +24404,22 @@ structs:
     name: Unknown3
     offset: 60
   member_functions: []
+- type: Client::Game::NameCache::CharacterInfo
+  name: CharacterInfo
+  namespace: Client.Game
+  union: False
+  size: 11
+  fields:
+  - type: byte*
+    name: Name
+    offset: 0
+  - type: __int16
+    name: HomeWorldId
+    offset: 8
+  - type: byte
+    name: Sex
+    offset: 10
+  member_functions: []
 - type: Client::Game::Object::GameObjectManager
   name: GameObjectManager
   namespace: Client.Game.Object
@@ -24230,44 +24661,96 @@ structs:
       name: statusId
     - type: unsigned int
       name: sourceId
-- type: Client::Game::UI::ContentsFinder
-  name: ContentsFinder
+- type: Client::Game::UI::CharaCardData::Data8Struct
+  name: Data8Struct
   namespace: Client.Game.UI
   union: False
-  size: 176
+  size: 82
   fields:
-  - type: Client::Game::UI::ContentsFinder::LootRule
-    name: LootRules
-    offset: 24
   - type: byte
-    name: IsUnrestrictedParty
-    offset: 25
+    name: Version
+    offset: 0
   - type: byte
-    name: IsMinimalIL
-    offset: 26
+    name: Expression
+    offset: 1
   - type: byte
-    name: IsSilenceEcho
-    offset: 27
+    name: CameraZoom
+    offset: 2
   - type: byte
-    name: IsExplorerMode
-    offset: 28
+    name: DirectionalLightingColorRed
+    offset: 3
   - type: byte
-    name: IsLevelSync
-    offset: 29
+    name: DirectionalLightingColorGreen
+    offset: 4
   - type: byte
-    name: IsLimitedLevelingRoulette
-    offset: 30
-  - type: Client::Game::UI::ContentsFinderQueueInfo
-    name: QueueInfo
-    offset: 32
-  virtual_functions: []
+    name: DirectionalLightingColorBlue
+    offset: 5
+  - type: byte
+    name: DirectionalLightingBrightness
+    offset: 6
+  - type: byte
+    name: AmbientLightingColorRed
+    offset: 7
+  - type: byte
+    name: AmbientLightingColorGreen
+    offset: 8
+  - type: byte
+    name: AmbientLightingColorBlue
+    offset: 9
+  - type: byte
+    name: AmbientLightingBrightness
+    offset: 10
+  - type: byte
+    name: ClassJobId
+    offset: 11
+  - type: Client::Game::Character::CustomizeData
+    name: CustomizeData
+    offset: 12
+  - type: byte
+    name: ItemStain0Ids
+    offset: 38
+    size: 12
+  - type: byte
+    name: GearVisibilityFlag
+    offset: 50
+  - type: byte
+    name: TopBorder
+    offset: 51
+  - type: byte
+    name: BottomBorder
+    offset: 52
+  - type: byte
+    name: PreferredClassJobId
+    offset: 53
+  - type: byte
+    name: ActiveHoursWeekdays
+    offset: 54
+    size: 3
+  - type: byte
+    name: ActiveHoursWeekends
+    offset: 57
+    size: 3
+  - type: byte
+    name: PlayStyles
+    offset: 60
+    size: 6
+  - type: byte
+    name: Flags
+    offset: 66
+  - type: byte
+    name: Unk43
+    offset: 67
+  - type: byte
+    name: PrivacyFlags
+    offset: 68
+  - type: byte
+    name: ItemStain1Ids
+    offset: 69
+    size: 12
+  - type: byte
+    name: Unk51
+    offset: 81
   member_functions: []
-  static_members:
-  - signature: 0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02
-    relative_follow_offsets:
-    - 6
-    is_pointer: False
-    return_type: Client::Game::UI::ContentsFinder
 - type: Client::Game::UI::DailyQuestSupply
   name: DailyQuestSupply
   namespace: Client.Game.UI
@@ -29873,6 +30356,19 @@ structs:
     name: IsSlotable
     offset: 129
   member_functions: []
+- type: Client::UI::Agent::AgentCharaCard::Activity
+  name: Activity
+  namespace: Client.UI.Agent
+  union: False
+  size: 112
+  fields:
+  - type: unsigned int
+    name: IconId
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 8
+  member_functions: []
 - type: Client::UI::Agent::AgentDeepDungeonInspect::AgentDeepDungeonInspectData
   name: AgentDeepDungeonInspectData
   namespace: Client.UI.Agent
@@ -30604,8 +31100,8 @@ structs:
     name: Agents
     offset: 32
     size: 452
-  - type: Client::UI::Agent::AgentModule::UIModuleAgentModulePtrStruct
-    name: UIModuleAgentModulePtr
+  - type: Client::UI::Agent::AgentHelpers
+    name: AgentHelpers
     offset: 3648
   virtual_functions: []
   member_functions:
@@ -32271,22 +32767,22 @@ structs:
   - type: Client::Game::Character::CustomizeData
     name: CustomizeData
     offset: 0
-  - type: unsigned __int16
-    name: GlassesIds
-    offset: 26
-    size: 2
   - type: unsigned int
     name: ItemIds
-    offset: 30
+    offset: 28
     size: 14
   - type: byte
     name: ItemStain0Ids
-    offset: 86
+    offset: 84
     size: 14
   - type: byte
     name: ItemStain1Ids
-    offset: 100
+    offset: 98
     size: 14
+  - type: unsigned __int16
+    name: GlassesIds
+    offset: 112
+    size: 2
   - type: byte
     name: ClassJobId
     offset: 116
@@ -32312,6 +32808,46 @@ structs:
     parameters:
     - type: Client::UI::Misc::CharaViewCharacterData*
       name: this
+- type: Client::UI::Misc::CurrencySettingsHelper
+  name: CurrencySettingsHelper
+  namespace: Client.UI.Misc
+  union: False
+  size: 24
+  fields:
+  - type: Client::UI::Misc::HelperInterface
+    name: HelperInterface
+    offset: 0
+    base: true
+  - type: byte
+    name: Rotation
+    offset: 16
+    size: 5
+  - type: byte
+    name: NumEntries
+    offset: 21
+  - type: byte
+    name: HasEntries
+    offset: 22
+  virtual_functions:
+  - name: OnLogin
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CurrencySettingsHelper*
+      name: this
+  - name: OnLogout
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CurrencySettingsHelper*
+      name: this
+  - name: Update
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CurrencySettingsHelper*
+      name: this
+  member_functions: []
 - type: Client::UI::Misc::EmoteHistoryModule
   name: EmoteHistoryModule
   namespace: Client.UI.Misc
@@ -32491,98 +33027,6 @@ structs:
   - type: int
     name: Timestamp
     offset: 100
-  member_functions: []
-- type: Client::UI::Misc::FlagStatusModule
-  name: FlagStatusModule
-  namespace: Client.UI.Misc
-  union: False
-  size: 688
-  fields:
-  - type: Client::UI::Misc::UserFileManager::UserFileEvent
-    name: UserFileEvent
-    offset: 0
-    base: true
-  - type: byte
-    name: Flags
-    offset: 428
-    size: 64
-  virtual_functions:
-  - name: ReadFile
-    offset: 8
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte*
-      name: a3
-    - type: unsigned __int16
-      name: a4
-    - type: unsigned int
-      name: a5
-  - name: WriteFile
-    offset: 16
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: GetFileSize
-    offset: 40
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-  - name: GetDataSize
-    offset: 48
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-  - name: GetFileVersion
-    offset: 56
-    return_type: unsigned __int16
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-  - name: GetFileType
-    offset: 64
-    return_type: unsigned __int16
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-  - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-  - name: GetIsSavePending
-    offset: 88
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-  - name: SetCharacterContentId
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-    - type: unsigned __int64
-      name: a2
-  - name: SaveFile
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-    - type: byte
-      name: a2
   member_functions: []
 - type: Client::UI::Misc::GroupPoseModule::Light
   name: Light
@@ -33533,8 +33977,9 @@ structs:
     offset: 56
     size: 14
   - type: unsigned __int16
-    name: GlassesId
+    name: GlassesIds
     offset: 448
+    size: 2
   member_functions: []
 - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot
   name: HotbarSlot
@@ -39775,6 +40220,87 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::MonsterNoteManager
+- type: Client::Game::NameCache
+  name: NameCache
+  namespace: Client.Game
+  union: False
+  size: 29620
+  fields:
+  - type: Client::Game::NameCache::EntityCacheEntry
+    name: EntityCache
+    offset: 0
+    size: 200
+  - type: int
+    name: NextEntityCacheIndex
+    offset: 15200
+  - type: Client::Game::NameCache::ContentIdCacheEntry
+    name: ContentIdCache
+    offset: 15208
+    size: 200
+  - type: int
+    name: NextContentIdCacheIndex
+    offset: 29608
+  - type: byte
+    name: IsRequestingName
+    offset: 29612
+  - type: float
+    name: RequestTimeoutTimer
+    offset: 29616
+  member_functions:
+  - signature: 40 53 48 83 EC 30 49 8B D8 4C 8D 44 24
+    return_type: byte*
+    name: GetNameByEntityId
+    parameters:
+    - type: Client::Game::NameCache*
+      name: this
+    - type: unsigned int
+      name: entityId
+    - type: byte*
+      name: outSex
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 0D 48 8D 05
+    return_type: byte
+    name: TryGetCharacterInfoByEntityId
+    parameters:
+    - type: Client::Game::NameCache*
+      name: this
+    - type: unsigned int
+      name: entityId
+    - type: Client::Game::NameCache::CharacterInfo*
+      name: outCharacterInfo
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 45 33 D2 48 8D 41 44
+    return_type: void
+    name: SaveCharacterInfoForEntityId
+    parameters:
+    - type: Client::Game::NameCache*
+      name: this
+    - type: unsigned int
+      name: entityId
+    - type: Client::Game::NameCache::CharacterInfo*
+      name: characterInfo
+  - signature: 40 53 48 83 EC 30 4C 8B D2 48 8B D9
+    return_type: byte*
+    name: GetNameByContentId
+    parameters:
+    - type: Client::Game::NameCache*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+  - signature: 40 53 48 83 EC 20 48 8B D9 33 C9 45 33 C9
+    return_type: void
+    name: SetNameForContentId
+    parameters:
+    - type: Client::Game::NameCache*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+    - type: byte*
+      name: name
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 75 0D
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::NameCache
 - type: Client::Game::Network::PacketPlayerGearsetData
   name: PacketPlayerGearsetData
   namespace: Client.Game.Network
@@ -39947,6 +40473,12 @@ structs:
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::GameObject*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -40045,8 +40577,6 @@ structs:
       name: outModelChecked
   - name: GetObjectType
     offset: 24
-  - name: GetSex
-    offset: 88
   - name: SetDrawObject
     offset: 136
   - name: GetDrawObject_2
@@ -40165,6 +40695,114 @@ structs:
     name: StatusManager
     offset: 16
   member_functions: []
+- type: Client::Game::UI::ContentsFinderQueueInfo
+  name: ContentsFinderQueueInfo
+  namespace: Client.Game.UI
+  union: False
+  size: 144
+  fields:
+  - type: Client::Game::UI::ContentsFinderQueueInfo::QueueEntry
+    name: QueuedEntries
+    offset: 0
+    size: 5
+  - type: unsigned int
+    name: QueuedClassJobId
+    offset: 40
+  - type: int
+    name: EnteredQueueTimestamp
+    offset: 64
+  - type: int
+    name: QueueReadyTimestamp
+    offset: 68
+  - type: int
+    name: NextQueueUpdateTimestamp
+    offset: 76
+  - type: Client::Game::UI::ContentsFinderQueueInfo::QueueStates
+    name: QueueState
+    offset: 85
+  - type: byte
+    name: QueuedContentRouletteId
+    offset: 90
+  - type: __int8
+    name: ClampedPositionInQueue
+    offset: 91
+  - type: __int8
+    name: PositionInQueue
+    offset: 92
+  - type: Client::Game::UI::QueueInfoState
+    name: InfoState
+    offset: 98
+  - type: Client::Game::UI::ContentsFinderQueueInfo::QueueEntry
+    name: PoppedQueueEntry
+    offset: 124
+  - type: byte
+    name: PoppedContentIsUnrestrictedParty
+    offset: 136
+  - type: byte
+    name: PoppedContentIsMinimalIL
+    offset: 137
+  - type: byte
+    name: PoppedContentIsLevelSync
+    offset: 138
+  - type: byte
+    name: PoppedContentIsSilenceEcho
+    offset: 139
+  - type: byte
+    name: PoppedContentIsExplorerMode
+    offset: 140
+  member_functions:
+  - signature: 40 53 57 41 57 48 83 EC 30 0F B6 41 55
+    return_type: void
+    name: ProcessInfoState
+    parameters:
+    - type: Client::Game::UI::ContentsFinderQueueInfo*
+      name: this
+    - type: Client::Game::UI::ContentsFinderQueueInfo::QueueStates
+      name: newState
+    - type: Client::Game::UI::QueueInfoState*
+      name: newInfoState
+  - signature: E8 ?? ?? ?? ?? 0F B6 13 44 0F B6 C7
+    return_type: void
+    name: SetQueuedLanguages
+    parameters:
+    - type: Client::Game::UI::ContentsFinderQueueInfo*
+      name: this
+    - type: byte
+      name: languageFlags
+  - signature: C6 01 00 44 8B CA
+    return_type: void
+    name: SetQueuedContentFinderConditions
+    parameters:
+    - type: Client::Game::UI::ContentsFinderQueueInfo*
+      name: this
+    - type: unsigned int
+      name: conditionCount
+    - type: int*
+      name: conditionIds
+  - signature: 41 0F B6 C0 89 51 28
+    return_type: void
+    name: SetQueuedJobAndRoulette
+    parameters:
+    - type: Client::Game::UI::ContentsFinderQueueInfo*
+      name: this
+    - type: unsigned int
+      name: classJobId
+    - type: byte
+      name: a3
+    - type: byte
+      name: a4
+    - type: byte
+      name: contentRouletteId
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B FA 48 8B D9 45 84 C0
+    return_type: void
+    name: UpdateQueueState
+    parameters:
+    - type: Client::Game::UI::ContentsFinderQueueInfo*
+      name: this
+    - type: Client::Game::UI::ContentsFinderQueueInfo::QueueStates
+      name: newState
+    - type: byte
+      name: beganQueue
 - type: Client::Game::UI::NpcTrade::ItemRequests
   name: ItemRequests
   namespace: Client.Game.UI
@@ -42360,6 +42998,107 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentBannerPreview
+  name: AgentBannerPreview
+  namespace: Client.UI.Agent
+  union: False
+  size: 48
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentBannerPreviewState*
+    name: State
+    offset: 40
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
 - type: Client::UI::Agent::AgentCabinet
   name: AgentCabinet
   namespace: Client.UI.Agent
@@ -42575,6 +43314,14 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: gameObject
+  - signature: 40 55 53 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 48 83 79
+    return_type: void
+    name: OpenCharaCardForPacket
+    parameters:
+    - type: Client::UI::Agent::AgentCharaCard*
+      name: this
+    - type: Client::UI::Agent::AgentCharaCard::CharaCardPacket*
+      name: packet
 - type: Client::UI::Agent::AgentCompanyCraftMaterial
   name: AgentCompanyCraftMaterial
   namespace: Client.UI.Agent
@@ -48318,6 +49065,110 @@ structs:
     name: BannerBg
     offset: 50
   member_functions: []
+- type: Client::UI::Misc::FlagStatusModule
+  name: FlagStatusModule
+  namespace: Client.UI.Misc
+  union: False
+  size: 688
+  fields:
+  - type: Client::UI::Misc::UserFileManager::UserFileEvent
+    name: UserFileEvent
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: PatchMarkVersions
+    offset: 72
+    size: 32
+  - type: byte
+    name: PatchMarkStates
+    offset: 136
+    size: 32
+  - type: Client::UI::Misc::FlagStatusModule::PatchMarkIdEntry
+    name: PatchMarkIds
+    offset: 168
+    size: 32
+  - type: unsigned int
+    name: UIFlags
+    offset: 428
+    size: 64
+  virtual_functions:
+  - name: ReadFile
+    offset: 8
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte*
+      name: a3
+    - type: unsigned __int16
+      name: a4
+    - type: unsigned int
+      name: a5
+  - name: WriteFile
+    offset: 16
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: GetFileSize
+    offset: 40
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+  - name: GetDataSize
+    offset: 48
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+  - name: GetFileVersion
+    offset: 56
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+  - name: GetFileType
+    offset: 64
+    return_type: unsigned __int16
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+  - name: GetHasChanges
+    offset: 80
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+  - name: GetIsSavePending
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+    - type: unsigned __int64
+      name: a2
+  - name: SaveFile
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
 - type: Client::UI::Misc::GoldSaucerModule
   name: GoldSaucerModule
   namespace: Client.UI.Misc
@@ -49981,6 +50832,19 @@ structs:
       name: this
     - type: unsigned __int16
       name: id
+- type: Component::Shell::ShellCommandInterface::CommandContext
+  name: CommandContext
+  namespace: Component.Shell
+  union: False
+  size: 48
+  fields:
+  - type: unsigned __int16
+    name: TextCommandId
+    offset: 0
+  - type: StdVector<Client::System::String::Utf8String>
+    name: StringArgs
+    offset: 24
+  member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>>
   name: Node
   namespace: Helper
@@ -51456,6 +52320,12 @@ structs:
     parameters:
     - type: Client::Game::Object::Aetheryte*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Aetheryte*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -51599,6 +52469,12 @@ structs:
   - name: GetHeight
     offset: 64
     return_type: float
+    parameters:
+    - type: Client::Game::Object::EventObject*
+      name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
     parameters:
     - type: Client::Game::Object::EventObject*
       name: this
@@ -51748,6 +52624,12 @@ structs:
     parameters:
     - type: Client::Game::Object::Treasure*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::Treasure*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -51845,6 +52727,44 @@ structs:
     - type: byte*
       name: a4
   member_functions: []
+- type: Client::Game::UI::ContentsFinder
+  name: ContentsFinder
+  namespace: Client.Game.UI
+  union: False
+  size: 176
+  fields:
+  - type: Client::Game::UI::ContentsFinder::LootRule
+    name: LootRules
+    offset: 24
+  - type: byte
+    name: IsUnrestrictedParty
+    offset: 25
+  - type: byte
+    name: IsMinimalIL
+    offset: 26
+  - type: byte
+    name: IsSilenceEcho
+    offset: 27
+  - type: byte
+    name: IsExplorerMode
+    offset: 28
+  - type: byte
+    name: IsLevelSync
+    offset: 29
+  - type: byte
+    name: IsLimitedLevelingRoulette
+    offset: 30
+  - type: Client::Game::UI::ContentsFinderQueueInfo
+    name: QueueInfo
+    offset: 32
+  virtual_functions: []
+  member_functions: []
+  static_members:
+  - signature: 0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02
+    relative_follow_offsets:
+    - 6
+    is_pointer: False
+    return_type: Client::Game::UI::ContentsFinder
 - type: Client::Game::UI::Loot
   name: Loot
   namespace: Client.Game.UI
@@ -55594,6 +56514,23 @@ structs:
     name: BannerModule
     offset: 15960
   member_functions: []
+- type: Client::UI::Misc::DefaultBannerPreset
+  name: DefaultBannerPreset
+  namespace: Client.UI.Misc
+  union: False
+  size: 56
+  fields:
+  - type: Client::UI::Misc::ExportedPortraitData
+    name: ExportedPortraitData
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: BannerFrame
+    offset: 52
+  - type: unsigned __int16
+    name: BannerDecoration
+    offset: 54
+  member_functions: []
 - type: Client::UI::Misc::FieldMarkerModule
   name: FieldMarkerModule
   namespace: Client.UI.Misc
@@ -55812,6 +56749,9 @@ structs:
     name: UserFileEvent
     offset: 0
     base: true
+  - type: Client::UI::UIModule*
+    name: UIModulePtr
+    offset: 72
   - type: Client::UI::Misc::RaptureGearsetModule::GearsetEntry
     name: Entries
     offset: 80
@@ -56024,7 +56964,7 @@ structs:
       name: gearsetId
     - type: __int8
       name: bannerIndex
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 4F 0F B6 D3
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 68 48 8B 4F 48
     return_type: byte
     name: HasLinkedBanner
     parameters:
@@ -56032,6 +56972,14 @@ structs:
       name: this
     - type: byte
       name: gearsetId
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 4F 0F B6 D3
+    return_type: byte
+    name: HasLinkedBannerByEnabledIndex
+    parameters:
+    - type: Client::UI::Misc::RaptureGearsetModule*
+      name: this
+    - type: byte
+      name: enabledGearsetIndex
   - signature: E8 ?? ?? ?? ?? 33 C9 83 F8 64
     return_type: int
     name: ResolveIdFromEnabledIndex
@@ -57719,7 +58667,19 @@ structs:
   - type: StdDeque<Component::Text::TextParameter>
     name: GlobalParameters
     offset: 56
-  virtual_functions: []
+  virtual_functions:
+  - name: DecodePcName
+    offset: 392
+  - name: DecodeIfPcGender
+    offset: 400
+  - name: DecodeIfPcName
+    offset: 408
+  - name: DecodeIfSelf
+    offset: 416
+  - name: DecodeSound
+    offset: 424
+  - name: DecodeLevelPos
+    offset: 432
   member_functions: []
   static_members:
   - signature: 48 8D 1D ?? ?? ?? ?? 8B 43 20
@@ -58843,6 +59803,12 @@ structs:
     parameters:
     - type: Client::Game::Object::HousingObject*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::HousingObject*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -58995,6 +59961,12 @@ structs:
     parameters:
     - type: Client::Game::Object::MJIObject*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Object::MJIObject*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -59092,6 +60064,22 @@ structs:
     - type: byte*
       name: a4
   member_functions: []
+- type: Client::Game::UI::CharaCardData
+  name: CharaCardData
+  namespace: Client.Game.UI
+  union: False
+  size: 188
+  fields:
+  - type: Client::Game::UI::CharaCardData::Data8Struct
+    name: Data8
+    offset: 0
+  - type: Client::Game::UI::CharaCardData::Data16Struct
+    name: Data16
+    offset: 82
+  - type: Client::Game::UI::CharaCardData::Data32Struct
+    name: Data32
+    offset: 136
+  member_functions: []
 - type: Client::Game::UI::PlayerState
   name: PlayerState
   namespace: Client.Game.UI
@@ -59119,6 +60107,9 @@ structs:
     name: PenaltyTimestamps
     offset: 112
     size: 2
+  - type: byte
+    name: HasAddictionRestrictions
+    offset: 120
   - type: byte
     name: MaxLevel
     offset: 121
@@ -60489,128 +61480,28 @@ structs:
     - type: byte
       name: a3
   member_functions: []
-- type: Client::UI::Agent::AgentBannerEditorState
-  name: AgentBannerEditorState
+- type: Client::UI::Agent::AgentBannerPreviewState
+  name: AgentBannerPreviewState
   namespace: Client.UI.Agent
   union: False
   size: 1016
   fields:
-  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
-    name: Presets
+  - type: Client::UI::Misc::BannerGearData
+    name: GearData
     offset: 0
-  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
-    name: Backgrounds
-    offset: 48
-  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
-    name: Frames
-    offset: 96
-  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
-    name: Accents
-    offset: 144
-  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
-    name: Poses
-    offset: 192
-  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
-    name: Expressions
-    offset: 240
   - type: Client::UI::Misc::BannerModuleEntry
-    name: BannerEntry
-    offset: 560
-  - type: unsigned int
-    name: ItemIds
-    offset: 848
-    size: 14
-  - type: byte
-    name: Stain0Ids
-    offset: 904
-    size: 14
-  - type: byte
-    name: Stain1Ids
-    offset: 918
-    size: 14
-  - type: unsigned __int16
-    name: GlassesIds
-    offset: 932
-    size: 2
-  - type: unsigned int
-    name: Checksum
-    offset: 936
-  - type: Client::UI::Misc::BannerGearVisibilityFlag
-    name: GearVisibilityFlag
-    offset: 940
-  - type: byte
-    name: EnabledGearsetIndex
-    offset: 944
-  - type: byte
-    name: ClassJobId
-    offset: 945
-  - type: Client::UI::Agent::AgentBannerEditor*
-    name: AgentBannerEditor
-    offset: 952
+    name: BannerModuleEntry
+    offset: 100
+  - type: Client::UI::Agent::AgentBannerPreview*
+    name: AgentPtr
+    offset: 248
   - type: Client::UI::UIModule*
-    name: UIModule
-    offset: 960
+    name: UIModulePtr
+    offset: 256
   - type: Client::UI::Misc::CharaViewPortrait*
-    name: CharaView
-    offset: 968
-  - type: Client::UI::Agent::AgentBannerEditorState::EditorOpenType
-    name: OpenType
-    offset: 984
-  - type: float
-    name: FrameCountdown
-    offset: 996
-  - type: int
-    name: OpenerEnabledGearsetIndex
-    offset: 1000
-  - type: int
-    name: CloseDialogAddonId
-    offset: 1008
-  - type: byte
-    name: HasDataChanged
-    offset: 1012
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 48 8B 01 FF 50 58
-    return_type: void
-    name: Save
-    parameters:
-    - type: Client::UI::Agent::AgentBannerEditorState*
-      name: this
-  - signature: 48 89 5C 24 ?? 48 89 7C 24 ?? 80 79 2C 00
-    return_type: int
-    name: GetPresetIndex
-    parameters:
-    - type: Client::UI::Agent::AgentBannerEditorState*
-      name: this
-    - type: unsigned __int16
-      name: backgroundIndex
-    - type: unsigned __int16
-      name: frameIndex
-    - type: unsigned __int16
-      name: accentIndex
-  - signature: E8 ?? ?? ?? ?? 48 8B 74 24 ?? 44 0A F8
-    return_type: void
-    name: SetFrame
-    parameters:
-    - type: Client::UI::Agent::AgentBannerEditorState*
-      name: this
-    - type: int
-      name: frameId
-  - signature: E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 44 0A F8
-    return_type: void
-    name: SetAccent
-    parameters:
-    - type: Client::UI::Agent::AgentBannerEditorState*
-      name: this
-    - type: int
-      name: accentId
-  - signature: E8 ?? ?? ?? ?? 32 C0 EB 3F
-    return_type: void
-    name: SetHasChanged
-    parameters:
-    - type: Client::UI::Agent::AgentBannerEditorState*
-      name: this
-    - type: byte
-      name: hasDataChanged
+    name: CharaViewPortraitPtr
+    offset: 264
+  member_functions: []
 - type: Client::UI::Agent::AgentContentsFinderReward::ItemWrap
   name: ItemWrap
   namespace: Client.UI.Agent
@@ -65284,6 +66175,14 @@ structs:
       name: this
     - type: byte
       name: replayGroup
+  - signature: E8 ?? ?? ?? ?? 8D 57 DD
+    return_type: Client::Game::Group::GroupManager::Group*
+    name: GetGroupWithCheck
+    parameters:
+    - type: Client::Game::Group::GroupManager*
+      name: this
+    - type: byte
+      name: replayGroup
   static_members:
   - signature: 33 D2 48 8D 0D ?? ?? ?? ?? 33 DB
     relative_follow_offsets:
@@ -65345,6 +66244,12 @@ structs:
   - name: GetHeight
     offset: 64
     return_type: float
+    parameters:
+    - type: Client::Game::Object::GatheringPointObject*
+      name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
     parameters:
     - type: Client::Game::Object::GatheringPointObject*
       name: this
@@ -65491,6 +66396,12 @@ structs:
   - name: GetHeight
     offset: 64
     return_type: float
+    parameters:
+    - type: Client::Game::Object::HousingCombinedObject*
+      name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
     parameters:
     - type: Client::Game::Object::HousingCombinedObject*
       name: this
@@ -67172,6 +68083,235 @@ structs:
     - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
       name: this
   member_functions: []
+- type: Client::UI::Misc::BannerHelper
+  name: BannerHelper
+  namespace: Client.UI.Misc
+  union: False
+  size: 80
+  fields:
+  - type: Client::UI::Misc::HelperInterface
+    name: HelperInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Misc::DefaultBannerPreset
+    name: DefaultBannerPreset
+    offset: 16
+  - type: byte
+    name: IsDefaultPresetLoaded
+    offset: 72
+  - type: byte
+    name: IsPortraitClientObjectSetUp
+    offset: 73
+  - type: byte
+    name: IsEditingBanner
+    offset: 74
+  - type: byte
+    name: IsEditingCharaCard
+    offset: 75
+  virtual_functions:
+  - name: OnLogin
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+  - name: OnLogout
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+  - name: Update
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 30 41 0F B7 40
+    return_type: void
+    name: ExportedPortraitData_ApplyBannerModuleEntry
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::ExportedPortraitData*
+      name: to
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: from
+  - signature: 41 80 38 00 75 08
+    return_type: void
+    name: CharaViewCharacterData_ApplyCharaCardData
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::CharaViewCharacterData*
+      name: to
+    - type: Client::Game::UI::CharaCardData*
+      name: from
+  - signature: E8 ?? ?? ?? ?? 4C 8B 75 28 49 8B 8E
+    return_type: void
+    name: RequestCurrentBannerData
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 49 8B 4F 28 4C 89 6C 24
+    return_type: byte
+    name: HasCurrentBannerData
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8D 55 B0 48 8B CF E8 ?? ?? ?? ?? 48 8B BC 24
+    return_type: void
+    name: BannerData_ApplyBannerModuleEntry
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::Game::UI::BannerData*
+      name: to
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: from
+  - signature: E8 ?? ?? ?? ?? 48 8B AC 24 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 33 CC E8 ?? ?? ?? ?? 48 83 C4 60
+    return_type: byte
+    name: SendBannerData
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::Game::UI::BannerData*
+      name: bannerData
+  - signature: E8 ?? ?? ?? ?? 49 8B 6E 28
+    return_type: void
+    name: RequestCurrentCharaCard
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 17 48 8B 4F 28
+    return_type: byte
+    name: HasCurrentCharaCard
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 4C 48 8D 54 24
+    return_type: byte
+    name: HasCharaCardCreated
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+  - signature: C6 02 03 41 0F B7 41
+    return_type: void
+    name: CharaCardData_ApplyCharaViewCharacterDataAndBannerModuleEntry
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::Game::UI::CharaCardData*
+      name: to
+    - type: Client::UI::Misc::CharaViewCharacterData*
+      name: from1
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: from2
+  - signature: 48 89 5C 24 ?? 41 80 78
+    return_type: void
+    name: CharaCardData_ApplyCharaViewCharacterData
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::Game::UI::CharaCardData*
+      name: to
+    - type: Client::UI::Misc::CharaViewCharacterData*
+      name: from
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4B 28 41 B8
+    return_type: byte
+    name: SendCharaCardData
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::Game::UI::CharaCardData*
+      name: charaCardData
+    - type: Client::UI::Misc::CharaCardDataChangeReason
+      name: reason
+  - signature: E8 ?? ?? ?? ?? 48 8D 43 54
+    return_type: void
+    name: BannerGearData_ApplyClassJobIdAndGearVisibilityFromGearset
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerGearData*
+      name: bannerGearData
+  - signature: 40 53 48 83 EC 40 0F B6 42 63
+    return_type: byte
+    name: BannerGearData_ApplyGearFromGearset
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerGearData*
+      name: bannerGearData
+  - signature: E8 ?? ?? ?? ?? FE C3 41 3A DE
+    return_type: void
+    name: BannerGearData_UpdateGearsetChecksum
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerGearData*
+      name: bannerGearData
+  - signature: 41 0F B7 40 ?? 4C 8B D2
+    return_type: void
+    name: BannerModuleEntry_ApplyDefaultBannerPreset
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: to
+    - type: Client::UI::Misc::DefaultBannerPreset*
+      name: from
+  - signature: E8 ?? ?? ?? ?? 48 8D 4B 64 48 8D 54 24
+    return_type: void
+    name: BannerModuleEntry_ApplyBannerData
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: to
+    - type: Client::Game::UI::BannerData*
+      name: from
+  - signature: E8 ?? ?? ?? ?? EB 12 4D 8B C6
+    return_type: void
+    name: BannerModuleEntry_ApplyCharaCardData
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: to
+    - type: Client::Game::UI::CharaCardData*
+      name: from
+  - signature: 41 0F B6 80 ?? ?? ?? ?? 88 42 60
+    return_type: void
+    name: BannerModuleEntry_ApplyRaceGenderHeightTribe
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: bannerModuleEntry
+    - type: Client::Game::Character::Character*
+      name: character
+  - signature: E8 ?? ?? ?? ?? 88 44 24 22 40 84 ED
+    return_type: byte
+    name: BannerModuleEntry_IsCurrentCharaCardBannerOutdated
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: bannerModuleEntry
+    - type: byte
+      name: logError
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 1D 4C 8D 44 24
+    return_type: byte
+    name: BannerModuleEntry_IsCharacterDataOutdated
+    parameters:
+    - type: Client::UI::Misc::BannerHelper*
+      name: this
+    - type: Client::UI::Misc::BannerModuleEntry*
+      name: bannerModuleEntry
+    - type: byte
+      name: logError
 - type: Client::UI::UIInputData
   name: UIInputData
   namespace: Client.UI
@@ -68877,6 +70017,28 @@ structs:
     name: DutyHelperInfo
     offset: 7008
   member_functions: []
+- type: Client::Game::UI::CharaCard
+  name: CharaCard
+  namespace: Client.Game.UI
+  union: False
+  size: 488
+  fields:
+  - type: Client::Game::UI::BannerData
+    name: TempBannerData
+    offset: 0
+  - type: Client::Game::UI::BannerData
+    name: CurrentBannerData
+    offset: 52
+  - type: Client::Game::UI::CharaCardData
+    name: TempCharaCardData
+    offset: 104
+  - type: Client::Game::UI::CharaCardData
+    name: CurrentCharaCardData
+    offset: 292
+  - type: Client::Game::UI::CharaCardFlags
+    name: Flags
+    offset: 480
+  member_functions: []
 - type: Client::Game::UI::Map
   name: Map
   namespace: Client.Game.UI
@@ -69598,6 +70760,172 @@ structs:
     parameters:
     - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
       name: this
+  member_functions: []
+- type: Client::UI::Agent::AgentBannerEditorState
+  name: AgentBannerEditorState
+  namespace: Client.UI.Agent
+  union: False
+  size: 1016
+  fields:
+  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
+    name: Presets
+    offset: 0
+  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
+    name: Backgrounds
+    offset: 48
+  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
+    name: Frames
+    offset: 96
+  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
+    name: Accents
+    offset: 144
+  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
+    name: Poses
+    offset: 192
+  - type: Client::UI::Agent::AgentBannerEditorState::Dataset
+    name: Expressions
+    offset: 240
+  - type: Client::UI::Agent::AgentBannerEditorState::CharaCardDesignCategoryEntry
+    name: CharaCardDesignCategoryEntries
+    offset: 288
+    size: 11
+  - type: Client::UI::Agent::AgentBannerEditorState::CharaCardDesignCategoryEntry*
+    name: CharaCardDesignCategoryEntryPointers
+    offset: 464
+    size: 11
+  - type: int
+    name: NumCharaCardDesignCategoryEntries
+    offset: 552
+  - type: Client::UI::Misc::BannerModuleEntry
+    name: BannerEntry
+    offset: 560
+  - type: Client::UI::Misc::BannerModuleEntry
+    name: BannerEntryBackup
+    offset: 704
+  - type: Client::UI::Misc::BannerGearData
+    name: GearData
+    offset: 848
+  - type: Client::UI::Agent::AgentBannerEditor*
+    name: AgentBannerEditor
+    offset: 952
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 960
+  - type: Client::UI::Misc::CharaViewPortrait*
+    name: CharaView
+    offset: 968
+  - type: Client::UI::Agent::AgentBannerEditorState::EditorOpenType
+    name: OpenType
+    offset: 984
+  - type: float
+    name: FrameCountdown
+    offset: 996
+  - type: int
+    name: OpenerEnabledGearsetIndex
+    offset: 1000
+  - type: int
+    name: CloseDialogAddonId
+    offset: 1008
+  - type: byte
+    name: HasDataChanged
+    offset: 1012
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? 48 8B 01 FF 50 58
+    return_type: void
+    name: Save
+    parameters:
+    - type: Client::UI::Agent::AgentBannerEditorState*
+      name: this
+  - signature: 48 89 5C 24 ?? 48 89 7C 24 ?? 80 79 2C 00
+    return_type: int
+    name: GetPresetIndex
+    parameters:
+    - type: Client::UI::Agent::AgentBannerEditorState*
+      name: this
+    - type: unsigned __int16
+      name: backgroundIndex
+    - type: unsigned __int16
+      name: frameIndex
+    - type: unsigned __int16
+      name: accentIndex
+  - signature: E8 ?? ?? ?? ?? 48 8B 74 24 ?? 44 0A F8
+    return_type: void
+    name: SetFrame
+    parameters:
+    - type: Client::UI::Agent::AgentBannerEditorState*
+      name: this
+    - type: int
+      name: frameId
+  - signature: E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 44 0A F8
+    return_type: void
+    name: SetAccent
+    parameters:
+    - type: Client::UI::Agent::AgentBannerEditorState*
+      name: this
+    - type: int
+      name: accentId
+  - signature: E8 ?? ?? ?? ?? 32 C0 EB 3F
+    return_type: void
+    name: SetHasChanged
+    parameters:
+    - type: Client::UI::Agent::AgentBannerEditorState*
+      name: this
+    - type: byte
+      name: hasDataChanged
+- type: Client::UI::Agent::AgentCharaCard::CharaCardPacket
+  name: CharaCardPacket
+  namespace: Client.UI.Agent
+  union: False
+  size: 486
+  fields:
+  - type: Client::UI::Agent::CrestData
+    name: FreeCompanyCrestData
+    offset: 0
+  - type: unsigned __int64
+    name: AccountId
+    offset: 8
+  - type: unsigned __int64
+    name: ContentId
+    offset: 16
+  - type: unsigned int
+    name: EntityId
+    offset: 24
+  - type: unsigned int
+    name: SomeState
+    offset: 28
+  - type: unsigned __int16
+    name: WorldId
+    offset: 32
+  - type: unsigned __int16
+    name: Level
+    offset: 34
+  - type: byte
+    name: ClassJobId
+    offset: 36
+  - type: byte
+    name: Sex
+    offset: 37
+  - type: byte
+    name: GrandCompany
+    offset: 38
+  - type: byte
+    name: GcRank
+    offset: 39
+  - type: Client::Game::UI::CharaCardData
+    name: CharaCardData
+    offset: 40
+  - type: byte
+    name: SearchComment
+    offset: 228
+    size: 193
+  - type: byte
+    name: Name
+    offset: 421
+    size: 32
+  - type: byte
+    name: FreeCompany
+    offset: 453
+    size: 22
   member_functions: []
 - type: Client::UI::Agent::AgentChatLog
   name: AgentChatLog
@@ -70691,6 +72019,12 @@ structs:
   - type: Client::UI::Agent::AgentInterface*
     name: Agent
     offset: 48
+  - type: __int64
+    name: AgentCallbackReady
+    offset: 56
+  - type: __int64
+    name: AgentCallbackGetCharacter
+    offset: 64
   - type: Client::UI::Misc::CharaViewModelData
     name: ModelData
     offset: 72
@@ -70748,6 +72082,46 @@ structs:
       name: this
   - name: ResetPositions
     offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: float
+      name: deltaDistance
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: float
+      name: deltaRotation
+    - type: float
+      name: deltaPitch
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+    - type: float
+      name: deltaX
+    - type: float
+      name: deltaY
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaView*
+      name: this
+  - name: Update
+    offset: 80
     return_type: void
     parameters:
     - type: Client::UI::Misc::CharaView*
@@ -73117,6 +74491,46 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
       name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
+      name: this
+    - type: float
+      name: a2
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
+      name: this
+  - name: Update
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentColorant::ColorantCharaView*
+      name: this
   member_functions: []
 - type: Client::UI::Agent::AgentGearSet::GearsetCharaView
   name: GearsetCharaView
@@ -73185,6 +74599,46 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
       name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
+      name: this
+    - type: float
+      name: a2
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
+      name: this
+  - name: Update
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet::GearsetCharaView*
+      name: this
   member_functions: []
 - type: Client::UI::Agent::AgentInspect::InspectCharaView
   name: InspectCharaView
@@ -73225,6 +74679,46 @@ structs:
       name: this
   - name: ResetPositions
     offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
+      name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
+      name: this
+    - type: float
+      name: a2
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentInspect::InspectCharaView*
+      name: this
+  - name: Update
+    offset: 80
     return_type: void
     parameters:
     - type: Client::UI::Agent::AgentInspect::InspectCharaView*
@@ -73652,6 +75146,46 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
       name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
+      name: this
+    - type: float
+      name: a2
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
+      name: this
+  - name: Update
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView*
+      name: this
   member_functions: []
 - type: Client::UI::Agent::AgentSatisfactionSupply
   name: AgentSatisfactionSupply
@@ -73892,6 +75426,46 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentStatus::StatusCharaView*
       name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
+    - type: float
+      name: a2
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
+  - name: Update
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentStatus::StatusCharaView*
+      name: this
   member_functions: []
 - type: Client::UI::Agent::AgentTryon::TryonCharaView
   name: TryonCharaView
@@ -73950,6 +75524,46 @@ structs:
       name: this
   - name: ResetPositions
     offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
+      name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
+      name: this
+    - type: float
+      name: a2
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTryon::TryonCharaView*
+      name: this
+  - name: Update
+    offset: 80
     return_type: void
     parameters:
     - type: Client::UI::Agent::AgentTryon::TryonCharaView*
@@ -102070,41 +103684,22 @@ structs:
   - type: byte
     name: CharaViewPortraitCharacterLoaded
     offset: 1026
+  - type: byte
+    name: IsAnimationPauseStatePending
+    offset: 1027
+  - type: byte
+    name: PendingAnimationPauseState
+    offset: 1028
+  - type: Client::UI::Agent::AgentInterface*
+    name: EventAgent
+    offset: 1032
+  - type: int
+    name: AgentEventId
+    offset: 1040
+  - type: unsigned __int64
+    name: AgentEventKind
+    offset: 1048
   virtual_functions:
-  - name: SetCameraDistance
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: float
-      name: deltaDistance
-  - name: SetCameraYawAndPitch
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: float
-      name: deltaRotation
-    - type: float
-      name: deltaPitch
-  - name: SetCameraXAndY
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
-    - type: float
-      name: deltaX
-    - type: float
-      name: deltaY
-  - name: Update
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Misc::CharaViewPortrait*
-      name: this
   - name: Dtor
     offset: 0
     return_type: void
@@ -102137,6 +103732,46 @@ structs:
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
+  - name: SetCameraDistance
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: float
+      name: a2
+  - name: SetCameraYawAndPitch
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: SetCameraXAndY
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+    - type: float
+      name: a2
+    - type: float
+      name: a3
+  - name: OnReady
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
+  - name: Update
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Misc::CharaViewPortrait*
+      name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 48 8B F8 45 33 C0
     return_type: void
@@ -102154,12 +103789,12 @@ structs:
       name: clientObjectId
     - type: Client::UI::Misc::CharaViewCharacterData*
       name: characterData
-    - type: __int64
-      name: a4
+    - type: Client::UI::Agent::AgentInterface*
+      name: agent
     - type: int
-      name: a5
-    - type: __int64
-      name: a6
+      name: agentEventId
+    - type: unsigned __int64
+      name: agentEventKind
   - signature: E8 ?? ?? ?? ?? EB 89 48 8B 8F
     return_type: void
     name: ResetCamera
@@ -116251,115 +117886,6 @@ structs:
     offset: 1968
   virtual_functions: []
   member_functions: []
-- type: Client::UI::Agent::AgentCharaCard::Storage
-  name: Storage
-  namespace: Client.UI.Agent
-  union: False
-  size: 2480
-  fields:
-  - type: unsigned int
-    name: EntityId
-    offset: 4
-  - type: unsigned __int64
-    name: ContentId
-    offset: 8
-  - type: byte
-    name: InvertPortraitPlacement
-    offset: 27
-  - type: byte
-    name: BasePlate
-    offset: 28
-  - type: byte
-    name: TopBorder
-    offset: 30
-  - type: byte
-    name: BottomBorder
-    offset: 31
-  - type: byte
-    name: Backing
-    offset: 34
-  - type: byte
-    name: PatternOverlay
-    offset: 36
-  - type: byte
-    name: PortraitFrame
-    offset: 38
-  - type: byte
-    name: PlateFrame
-    offset: 40
-  - type: byte
-    name: Accent
-    offset: 42
-  - type: Client::System::String::Utf8String
-    name: Name
-    offset: 96
-  - type: unsigned __int16
-    name: WorldId
-    offset: 200
-  - type: byte
-    name: ClassJobId
-    offset: 202
-  - type: byte
-    name: GcRank
-    offset: 204
-  - type: unsigned __int16
-    name: Level
-    offset: 208
-  - type: unsigned __int16
-    name: TitleId
-    offset: 210
-  - type: Client::System::String::Utf8String
-    name: FreeCompany
-    offset: 224
-  - type: Client::System::String::Utf8String
-    name: SearchComment
-    offset: 328
-  - type: Client::System::String::Utf8String
-    name: SearchCommentRaw
-    offset: 432
-  - type: unsigned int
-    name: Activity1IconId
-    offset: 600
-  - type: Client::System::String::Utf8String
-    name: Activity1Name
-    offset: 608
-  - type: unsigned int
-    name: Activity2IconId
-    offset: 712
-  - type: Client::System::String::Utf8String
-    name: Activity2Name
-    offset: 720
-  - type: unsigned int
-    name: Activity3IconId
-    offset: 824
-  - type: Client::System::String::Utf8String
-    name: Activity3Name
-    offset: 832
-  - type: unsigned int
-    name: Activity4IconId
-    offset: 936
-  - type: Client::System::String::Utf8String
-    name: Activity4Name
-    offset: 944
-  - type: unsigned int
-    name: Activity5IconId
-    offset: 1048
-  - type: Client::System::String::Utf8String
-    name: Activity5Name
-    offset: 1056
-  - type: unsigned int
-    name: Activity6IconId
-    offset: 1160
-  - type: Client::System::String::Utf8String
-    name: Activity6Name
-    offset: 1168
-  - type: Client::UI::Misc::CharaViewPortrait
-    name: CharaView
-    offset: 1344
-  - type: Client::Graphics::Kernel::Texture*
-    name: PortraitTexture
-    offset: 2400
-  member_functions: []
 - type: Component::Shell::ShellCommandModule
   name: ShellCommandModule
   namespace: Component.Shell
@@ -116658,7 +118184,10 @@ structs:
   - type: Client::System::String::Utf8String
     name: TempUtf8Strings
     offset: 2656
-    size: 5
+    size: 4
+  - type: Client::System::String::Utf8String
+    name: ConnectingToDatacenterString
+    offset: 3072
   - type: StdVector<Client::System::String::Utf8String>
     name: VersionStrings
     offset: 3176
@@ -116672,6 +118201,9 @@ structs:
   - type: __int8
     name: ServiceAccountIndex
     offset: 4472
+  - type: byte
+    name: SelectedCharacterIndex
+    offset: 4473
   - type: unsigned __int64
     name: HoveredCharacterContentId
     offset: 4480
@@ -116735,6 +118267,9 @@ structs:
   - type: __int64
     name: IdleTime
     offset: 4576
+  - type: __int64
+    name: QueueTimeSinceLastUpdate
+    offset: 4592
   - type: int
     name: QueuePosition
     offset: 4608
@@ -136179,6 +137714,187 @@ structs:
     - type: Client::UI::AddonJobHudSMN1*
       name: this
   member_functions: []
+- type: Client::UI::Agent::AgentCharaCard::Storage
+  name: Storage
+  namespace: Client.UI.Agent
+  union: False
+  size: 2480
+  fields:
+  - type: byte
+    name: Flag0
+    offset: 0
+  - type: byte
+    name: Flag1
+    offset: 1
+  - type: byte
+    name: Flag2
+    offset: 2
+  - type: byte
+    name: Flag3
+    offset: 3
+  - type: unsigned int
+    name: EntityId
+    offset: 4
+  - type: unsigned __int64
+    name: AccountId
+    offset: 8
+  - type: unsigned __int64
+    name: ContentId
+    offset: 16
+  - type: byte
+    name: IsNotCreated
+    offset: 24
+  - type: byte
+    name: WasResetDueToFantasia
+    offset: 25
+  - type: byte
+    name: CanEdit
+    offset: 26
+  - type: byte
+    name: InvertPortraitPlacement
+    offset: 27
+  - type: Client::UI::Agent::AgentCharaCard::PlateDesign
+    name: PlateDesign
+    offset: 28
+  - type: byte
+    name: NumPlayStyles
+    offset: 44
+  - type: byte
+    name: PlayStyles
+    offset: 45
+    size: 6
+  - type: __int64
+    name: Unk38
+    offset: 56
+  - type: int
+    name: Unk40
+    offset: 64
+  - type: int
+    name: Unk44
+    offset: 68
+  - type: int
+    name: Unk48
+    offset: 72
+  - type: int
+    name: Unk4C
+    offset: 76
+  - type: unsigned int
+    name: ActiveHoursWeekdays
+    offset: 80
+  - type: unsigned int
+    name: ActiveHoursWeekends
+    offset: 84
+  - type: unsigned __int16
+    name: BannerBg
+    offset: 88
+  - type: unsigned __int16
+    name: BannerFrame
+    offset: 90
+  - type: unsigned __int16
+    name: BannerDecoration
+    offset: 92
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 96
+  - type: unsigned __int16
+    name: WorldId
+    offset: 200
+  - type: byte
+    name: ClassJobId
+    offset: 202
+  - type: byte
+    name: GrandCompany
+    offset: 203
+  - type: byte
+    name: GcRank
+    offset: 204
+  - type: byte
+    name: Sex
+    offset: 205
+  - type: byte
+    name: PreferredClassJobId
+    offset: 206
+  - type: unsigned __int16
+    name: Level
+    offset: 208
+  - type: unsigned __int16
+    name: TitleId
+    offset: 210
+  - type: Client::UI::Agent::CrestData
+    name: FreeCompanyCrestData
+    offset: 216
+  - type: Client::System::String::Utf8String
+    name: FreeCompany
+    offset: 224
+  - type: Client::System::String::Utf8String
+    name: SearchComment
+    offset: 328
+  - type: Client::System::String::Utf8String
+    name: SearchCommentRaw
+    offset: 432
+  - type: unsigned int
+    name: BannerBgIconId
+    offset: 536
+  - type: unsigned int
+    name: TopBorderIconId
+    offset: 540
+  - type: unsigned int
+    name: BottomBorderIconId
+    offset: 544
+  - type: byte
+    name: Unk224
+    offset: 548
+  - type: byte
+    name: Unk225
+    offset: 549
+  - type: byte
+    name: Unk226
+    offset: 550
+  - type: byte
+    name: Unk227
+    offset: 551
+  - type: Client::UI::Agent::AgentCharaCard::Decoration
+    name: Decorations
+    offset: 556
+    size: 5
+  - type: Client::UI::Agent::AgentCharaCard::Activity
+    name: Activities
+    offset: 600
+    size: 6
+  - type: unsigned int
+    name: BannerFrameIconId
+    offset: 1272
+  - type: unsigned int
+    name: BannerDecorationIconId
+    offset: 1276
+  - type: Client::UI::Agent::AgentCharaCard::PlateDesign
+    name: BackupPlateDesign
+    offset: 1280
+  - type: byte
+    name: BackupInvertPortraitPlacement
+    offset: 1296
+  - type: Client::UI::Misc::CharaViewPortrait
+    name: CharaView
+    offset: 1344
+  - type: Client::Graphics::Kernel::Texture*
+    name: PortraitTexture
+    offset: 2400
+  - type: Client::UI::Misc::ExportedPortraitData
+    name: PortraitData
+    offset: 2408
+  - type: unsigned int
+    name: EditAddonId
+    offset: 2460
+  - type: unsigned int
+    name: SelectOkAddonId
+    offset: 2464
+  - type: unsigned int
+    name: InputSearchCommentAddonId
+    offset: 2468
+  - type: unsigned int
+    name: PermissionSettingAddonId
+    offset: 2472
+  member_functions: []
 - type: Client::Game::Event::GoldSaucerDirector
   name: GoldSaucerDirector
   namespace: Client.Game.Event
@@ -138945,6 +140661,12 @@ structs:
     parameters:
     - type: Client::Game::Character::Character*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -139172,6 +140894,12 @@ structs:
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::Companion*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -139348,6 +141076,12 @@ structs:
     parameters:
     - type: Client::Game::Character::MJILivelyActor*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::MJILivelyActor*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -139521,6 +141255,12 @@ structs:
   - name: GetHeight
     offset: 64
     return_type: float
+    parameters:
+    - type: Client::Game::Character::Ornament*
+      name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
@@ -140073,6 +141813,12 @@ structs:
     parameters:
     - type: Client::Game::Character::BattleChara*
       name: this
+  - name: GetSex
+    offset: 88
+    return_type: byte
+    parameters:
+    - type: Client::Game::Character::BattleChara*
+      name: this
   - name: EnableDraw
     offset: 96
     return_type: void
@@ -140207,6 +141953,9 @@ structs:
   - type: unsigned __int16
     name: UiMode
     offset: 33472
+  - type: unsigned __int16
+    name: UISetupStage
+    offset: 33474
   - type: Client::System::String::Utf8String
     name: Unk8338
     offset: 33592
@@ -140299,6 +142048,18 @@ structs:
   - type: Component::GUI::AtkTexture
     name: CharaViewDefaultBackgroundTexture
     offset: 169688
+  - type: unsigned int
+    name: LoginSummonCompanionId
+    offset: 169716
+  - type: float
+    name: LoginSummonCompanionCountdown
+    offset: 169720
+  - type: float
+    name: HourTimer
+    offset: 169724
+  - type: int
+    name: HoursPlayed
+    offset: 169728
   - type: __int64
     name: ShellCommands
     offset: 169752
@@ -140641,7 +142402,7 @@ structs:
     name: FateDirectorTodo
     offset: 47872
   - type: Client::Game::UI::DirectorTodo
-    name: UnkThirdTodo
+    name: MassivePcContentTodo
     offset: 48200
   - type: Client::Game::UI::Map
     name: Map
@@ -140706,6 +142467,9 @@ structs:
   - type: Application::Network::WorkDefinitions::ClientSelectDataConfigFlags
     name: ClientSelectDataConfigFlags
     offset: 98496
+  - type: unsigned __int16
+    name: CurrentGlamourErrorsBitmask
+    offset: 98498
   - type: unsigned __int16
     name: CurrentItemLevel
     offset: 98500
@@ -141275,6 +143039,12 @@ structs:
   - name: GetUIModuleAgentModulePtr
     offset: 304
     return_type: Client::UI::Agent::AgentModule::UIModuleAgentModulePtrStruct*
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+  - name: GetAgentHelpers
+    offset: 304
+    return_type: Client::UI::Agent::AgentHelpers*
     parameters:
     - type: Client::UI::UIModule*
       name: this
