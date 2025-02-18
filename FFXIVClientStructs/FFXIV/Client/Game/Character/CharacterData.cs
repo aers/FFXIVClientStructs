@@ -21,7 +21,8 @@ public partial struct CharacterData {
     [FieldOffset(0x28)] public ushort StatusLoopVfxId; // TODO: 7.1: not sure
     [FieldOffset(0x2A)] public byte ClassJob;
     [FieldOffset(0x2B)] public byte Level;
-
+    [FieldOffset(0x2C)] public byte Icon;
+    [FieldOffset(0x2D)] public byte SEPack;
     [FieldOffset(0x2E)] public byte ShieldValue;
 
     [FieldOffset(0x30)] public byte OnlineStatus;

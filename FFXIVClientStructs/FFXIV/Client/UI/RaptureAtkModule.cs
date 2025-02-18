@@ -112,6 +112,9 @@ public unsafe partial struct RaptureAtkModule {
     [StructLayout(LayoutKind.Explicit, Size = 0x250)]
     public struct NamePlateInfo {
         [FieldOffset(0x00)] public GameObjectId ObjectId;
+        [FieldOffset(0x20)] public uint Level;
+        [FieldOffset(0x24)] public uint ClassJobId;
+        [FieldOffset(0x2C)] public uint Icon;
         [FieldOffset(0x30)] public Utf8String Name;
         [FieldOffset(0xA0)] public Utf8String FcName;
         [FieldOffset(0x108)] public Utf8String Title;
