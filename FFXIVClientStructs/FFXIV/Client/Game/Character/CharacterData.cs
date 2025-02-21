@@ -18,13 +18,13 @@ public partial struct CharacterData {
     [FieldOffset(0x22)] public ushort MaxCraftingPoints;
     [FieldOffset(0x24)] public short TransformationId;
     [FieldOffset(0x26)] public ushort TitleId;
-    [FieldOffset(0x28)] public ushort StatusLoopVfxId; // TODO: 7.1: not sure
+    [FieldOffset(0x28)] public ushort StatusLoopVfxId;
     [FieldOffset(0x2A)] public byte ClassJob;
     [FieldOffset(0x2B)] public byte Level;
-    [FieldOffset(0x2C)] public byte Icon;
+    [FieldOffset(0x2C)] public byte Icon; // for nameplates
     [FieldOffset(0x2D)] public byte SEPack;
     [FieldOffset(0x2E)] public byte ShieldValue;
-
+    [FieldOffset(0x2F)] public byte Map; // ENpcResident.Map
     [FieldOffset(0x30)] public byte OnlineStatus;
     [FieldOffset(0x31)] public byte Battalion; // used for determining friend/enemy state
 
