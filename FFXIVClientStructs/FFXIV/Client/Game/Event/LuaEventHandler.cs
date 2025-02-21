@@ -15,6 +15,8 @@ public unsafe partial struct LuaEventHandler {
     [FieldOffset(0x2A8)] public Utf8String LuaKey;
 
     [FieldOffset(0x310)] public StdMap<uint, LuaEventHandlerLuaText> LuaTexts;
+    [FieldOffset(0x320)] public LuaThread* LuaThread;
+    [FieldOffset(0x328)] public uint LuaScriptVersion;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]

@@ -1121,7 +1121,7 @@ classes:
       0x140CA06D0: ctor
     vfuncs:
       3: IsRunningGate
-      294: IsAcceptingGate
+      299: IsAcceptingGate
   Client::Game::GoldSaucer::RaceChocoboDirector: # Chocobo Race
     vtbls:
       - ea: 0x141FAC338
@@ -6190,8 +6190,17 @@ classes:
       0x1405996E0: ctor
       0x1405996C0: Finalizer
       0x140599710: Resume
+      0x140599900: PushBoolAndResume
+      0x1405999C0: PushIntegerAndResume
+      0x140599A80: PushIntegersAndResume
+      0x140599B50: PushStringAndResume
+      0x140599C20: PushStringStringAndResume
+      0x140599D00: PushStringIntegersAndResume
+      0x140599DF0: GetStringAndResume
+      0x140599EC0: PushBoolIntegersAndResume
       0x140599FB0: Yield
       0x140599FC0: GetStatus
+      0x140599FA0: IsError
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x141FA1DB8
@@ -12700,16 +12709,17 @@ classes:
       0: Dtor
       6: Terminate
       7: IsUnlocked
-      197: GetTitle # lua function "GetEventHandlerTitle"
+      199: GetTitle # lua function "GetEventHandlerTitle"
       221: GetIconId
-      249: GetDescription
-      250: GetReliefText
-      251: GetTimeRemaining # pass current unix timestamp as a2
-      252: HasTimer
-      254: GetEventItemId
-      256: GetObjectives
-      259: GetRecommendedLevel
-      263: Initialize
+      245: GetScriptVersion
+      252: GetDescription
+      253: GetReliefText
+      254: GetTimeRemaining # pass current unix timestamp as a2
+      255: HasTimer
+      257: GetEventItemId
+      260: GetObjectives
+      264: GetRecommendedLevel
+      268: Initialize
   Client::Game::Event::EventHandlerSelector:
     instances:
       - ea: 0x142808990
@@ -13780,10 +13790,10 @@ classes:
       - ea: 0x141FA1190
         base: Client::Game::Event::Director
     vfuncs:
-      292: GetCurrentLevel
-      293: GetMaxLevel
-      309: GetContentTypeIconId
-      319: SetExperience
+      297: GetCurrentLevel
+      298: GetMaxLevel
+      314: GetContentTypeIconId
+      324: SetExperience
     funcs:
 #fail       0x1409B3B80: ctor
       0x140B168B0: ApplyMapEffect

@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
@@ -13,6 +14,8 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
+    [FieldOffset(0x94)] public LuaStatus LuaStatus;
+    
     [FieldOffset(0xC8)] public Utf8String UnkString0;
     [FieldOffset(0x168)] public Utf8String UnkString1;
 
