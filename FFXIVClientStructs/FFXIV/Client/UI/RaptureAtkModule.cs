@@ -4,14 +4,16 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using static FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::RaptureAtkModule
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
+//   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
-[Inherits<AtkModule>]
+[Inherits<AtkModule>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x29720)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
@@ -110,6 +112,9 @@ public unsafe partial struct RaptureAtkModule {
     [StructLayout(LayoutKind.Explicit, Size = 0x250)]
     public struct NamePlateInfo {
         [FieldOffset(0x00)] public GameObjectId ObjectId;
+        [FieldOffset(0x20)] public uint Level;
+        [FieldOffset(0x24)] public uint ClassJobId;
+        [FieldOffset(0x2C)] public uint Icon;
         [FieldOffset(0x30)] public Utf8String Name;
         [FieldOffset(0xA0)] public Utf8String FcName;
         [FieldOffset(0x108)] public Utf8String Title;

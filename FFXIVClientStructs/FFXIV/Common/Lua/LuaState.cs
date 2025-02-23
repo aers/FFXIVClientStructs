@@ -48,3 +48,23 @@ public enum LuaType {
     Proto,
     Upval
 }
+
+public enum LuaStatus : uint {
+    /// <summary> No errors. </summary>
+    Ok = 0,
+
+    /// <summary> The thread (coroutine) yields. </summary>
+    Yield = 1,
+
+    /// <summary> A runtime error. </summary>
+    ErrRun = 2,
+
+    /// <summary> A syntax error during precompilation. </summary>
+    ErrSyntax = 3,
+
+    /// <summary> A memory allocation error. For such errors, Lua does not call the message handler. </summary>
+    ErrMem = 4,
+
+    /// <summary> An error while running the message handler. </summary>
+    ErrErr = 5,
+}
