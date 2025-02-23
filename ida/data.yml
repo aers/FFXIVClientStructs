@@ -10832,7 +10832,7 @@ classes:
       - ea: 0x141F96038
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1418D4710: ctor
+      0x140A321D0: ctor
   Client::UI::Agent::AgentLeveQuest:
     vtbls:
       - ea: 0x141FBEF38
@@ -13601,10 +13601,6 @@ classes:
     vtbls:
       - ea: 0x142121CD8
         base: Client::Game::Event::EventHandler
-  Client::Game::Event::ContentEntryEventHandler: # 0x2C
-    vtbls:
-      - ea: 0x1421B4ED0
-        base: Client::Game::Event::EventHandler
   Client::Game::Event::VerminionEventHandler: # 0x2D
     vtbls:
       - ea: 0x141FB60B8
@@ -13655,6 +13651,12 @@ classes:
         base: Client::Game::Event::EventHandler
     funcs:
       0x141829090: ctor
+  Client::Game::Event::HwdDevEventHandler: # 0x38
+    vtbls:
+      - ea: 0x1421B4ED0
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1418D3A20: ctor
   Client::Game::Event::SalvageEventHandler: # 0x39
     vtbls:
       - ea: 0x1421A9D50
