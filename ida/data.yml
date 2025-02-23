@@ -885,6 +885,8 @@ classes:
         base: Component::Text::TextModuleInterface
       - ea: 0x141F799C8
         base: Component::Text::MacroDecoder
+    funcs:
+      0x14074B850: ctor
     vfuncs:
       16: FormatString # using byte* as input
       17: ProcessNoun
@@ -8190,6 +8192,45 @@ classes:
     vtbls:
       - ea: 0x141F79518
     vfuncs:
+      1: DecodeSetResetTime
+      2: DecodeSetTime
+      3: DecodeIf
+      4: DecodeSwitch
+      5: DecodeBr
+      6: DecodeWait
+      7: DecodeIcon
+      8: DecodeIcon2
+      9: DecodeColor
+      10: DecodeColorType
+      11: DecodeEdgeColor
+      12: DecodeEdgeColorType
+      13: DecodeShadowColor
+      16: DecodeScale
+      23: DecodeNum
+      24: DecodeHex
+      25: DecodeKilo
+      26: DecodeByte
+      27: DecodeSec
+      28: DecodeTime
+      29: DecodeFloat
+      30: DecodeDigit
+      31: DecodeOrdinal
+      32: DecodeSheet
+      33: DecodeString
+      34: DecodeCaps
+      35: DecodeHead
+      36: DecodeSplit
+      37: DecodeHeadAll
+      38: DecodeFixed
+      39: DecodeLower
+      40: DecodeLowerHead
+      41: DecodeJaNoun
+      42: DecodeEnNoun
+      43: DecodeDeNoun
+      44: DecodeFrNoun
+      45: DecodeChNoun
+      47: DecodeJosa
+      48: DecodeJosaro
       49: DecodePcName
       50: DecodeIfPcGender
       51: DecodeIfPcName
