@@ -508,6 +508,9 @@ classes:
       0x1405B28C0: SetActiveFestivals
       0x1400B7470: IsInSaveTheQueenInstance # static, IsInSaveTheQueenInstance(bool includeDelubrumReginae)
       0x140961150: IsInPvPInstance
+      0x140961190: IsInFrontlineArea
+      0x1409611B0: IsInCrystallineConflictArea
+      0x1409611E0: IsInRivalWingsArea
       0x140961200: IsInPvPArea
       0x1405AF6E0: GetEventGPoseController
   Client::Game::BGMSystem:
