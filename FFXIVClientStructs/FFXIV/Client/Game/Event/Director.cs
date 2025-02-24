@@ -22,6 +22,6 @@ public unsafe partial struct Director {
     [FieldOffset(0x498)] public StdVector<EventHandlerObjective> Objectives; // 10 objectives max
     [FieldOffset(0x4B0)] public uint EventItemId;
 
-    [VirtualFunction(267)]
+    [VirtualFunction(272)]
     public partial void PopulateMapMarkers(ushort territoryTypeId, StdVector<MapMarkerData>* markerVector);
 }

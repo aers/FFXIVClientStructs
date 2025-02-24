@@ -12750,6 +12750,7 @@ classes:
       0: Dtor
       6: Terminate
       7: IsUnlocked
+      154: CancelInteraction
       199: GetTitle # lua function "GetEventHandlerTitle"
       221: GetIconId
       245: GetScriptVersion
@@ -13292,9 +13293,9 @@ classes:
       - ea: 0x141FA0850
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
-      267: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
-      286: SetSequence
-      287: Synchronize
+      272: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
+      291: SetSequence
+      292: Synchronize
     funcs:
       0x140B0F210: ctor
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
