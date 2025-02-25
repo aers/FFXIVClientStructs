@@ -36,7 +36,7 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 03 F8")]
     public partial int lua_gettop();
 
-    [MemberFunction("E8 ?? ?? ?? ?? FE CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 FB 30")]
     public partial void lua_settop(int idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 38 23")]
