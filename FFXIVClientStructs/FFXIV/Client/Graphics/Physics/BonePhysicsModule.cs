@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
@@ -21,4 +22,5 @@ public unsafe struct BonePhysicsModule {
     [FieldOffset(0x94)] public float WindVariation;
     [FieldOffset(0x98)] public Skeleton* Skeleton;
     [FieldOffset(0xA0)] public BoneSimulators BoneSimulators;
+    [FieldOffset(0x190)] internal FixedSizeArray5<Pointer<ResourceHandle>> _bonePhysicsResourceHandles;
 }
