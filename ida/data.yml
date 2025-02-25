@@ -13319,6 +13319,10 @@ classes:
     vtbls:
       - ea: 0x141FC3910
         base: Client::Game::Event::GatheringEventHandler
+  Client::Game::Event::SpearFishingEventHandler:
+    vtbls:
+      - ea: 0x141FC4260
+        base: Client::Game::Event::GatheringEventHandler
   Client::Game::Event::GoldSaucerEventHandler:
     vtbls:
       - ea: 0x141FB8850
