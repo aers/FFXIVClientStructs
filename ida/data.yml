@@ -508,6 +508,9 @@ classes:
       0x1405B28C0: SetActiveFestivals
       0x1400B7470: IsInSaveTheQueenInstance # static, IsInSaveTheQueenInstance(bool includeDelubrumReginae)
       0x140961150: IsInPvPInstance
+      0x140961190: IsInFrontlineArea
+      0x1409611B0: IsInCrystallineConflictArea
+      0x1409611E0: IsInRivalWingsArea
       0x140961200: IsInPvPArea
       0x1405AF6E0: GetEventGPoseController
   Client::Game::BGMSystem:
@@ -885,6 +888,8 @@ classes:
         base: Component::Text::TextModuleInterface
       - ea: 0x141F799C8
         base: Component::Text::MacroDecoder
+    funcs:
+      0x14074B850: ctor
     vfuncs:
       16: FormatString # using byte* as input
       17: ProcessNoun
@@ -1121,7 +1126,7 @@ classes:
       0x140CA06D0: ctor
     vfuncs:
       3: IsRunningGate
-      294: IsAcceptingGate
+      299: IsAcceptingGate
   Client::Game::GoldSaucer::RaceChocoboDirector: # Chocobo Race
     vtbls:
       - ea: 0x141FAC338
@@ -2113,7 +2118,15 @@ classes:
       0x140973F90: SetClassJobId
       0x140974060: GetClassJobId
       0x140974780: SetSyncedLevel
+      0x140974A10: SetBirthdate
+      0x140974AD0: SetGrandCompany
+      0x140974B90: SetGrandCompanyRank
+      0x140974C70: GetGrandCompanyRankForGc
       0x140974C90: GetGrandCompanyRank
+      0x140974D70: SetFavouriteAetheryte
+      0x140974DE0: IsSetAsFavouriteAetheryte
+      0x140974E20: IsSetAsFreeAetheryteId
+      0x140974E40: IsSetAsFreeAetherytePlayStationPlus
       0x140975790: SetBeastTribeRank
       0x1409757D0: GetBeastTribeRank
       0x140975810: SetBeastTribeCurrentReputation
@@ -2280,7 +2293,13 @@ classes:
       0x1409B69A0: ReadPacket
   Client::Game::UI::CompanionInfo:
     funcs:
+      0x1409B4B60: SetName
+      0x1409B4C40: SetSkillLevel
+      0x1409B4C60: GetSkillLevel
+      0x1409B4CA0: SetBuddyEquipUnlockd
       0x1409B4CD0: IsBuddyEquipUnlocked
+      0x1409B4D10: SetBarding
+      0x1409B4D30: GetBarding
   Client::Game::UI::PvPProfile:
     instances:
       - ea: 0x1427EFFB4
@@ -6176,8 +6195,17 @@ classes:
       0x1405996E0: ctor
       0x1405996C0: Finalizer
       0x140599710: Resume
+      0x140599900: PushBoolAndResume
+      0x1405999C0: PushIntegerAndResume
+      0x140599A80: PushIntegersAndResume
+      0x140599B50: PushStringAndResume
+      0x140599C20: PushStringStringAndResume
+      0x140599D00: PushStringIntegersAndResume
+      0x140599DF0: GetStringAndResume
+      0x140599EC0: PushBoolIntegersAndResume
       0x140599FB0: Yield
       0x140599FC0: GetStatus
+      0x140599FA0: IsError
   Client::Game::Event::LuaActor:
     vtbls:
       - ea: 0x141FA1DB8
@@ -8167,6 +8195,45 @@ classes:
     vtbls:
       - ea: 0x141F79518
     vfuncs:
+      1: DecodeSetResetTime
+      2: DecodeSetTime
+      3: DecodeIf
+      4: DecodeSwitch
+      5: DecodeBr
+      6: DecodeWait
+      7: DecodeIcon
+      8: DecodeIcon2
+      9: DecodeColor
+      10: DecodeColorType
+      11: DecodeEdgeColor
+      12: DecodeEdgeColorType
+      13: DecodeShadowColor
+      16: DecodeScale
+      23: DecodeNum
+      24: DecodeHex
+      25: DecodeKilo
+      26: DecodeByte
+      27: DecodeSec
+      28: DecodeTime
+      29: DecodeFloat
+      30: DecodeDigit
+      31: DecodeOrdinal
+      32: DecodeSheet
+      33: DecodeString
+      34: DecodeCaps
+      35: DecodeHead
+      36: DecodeSplit
+      37: DecodeHeadAll
+      38: DecodeFixed
+      39: DecodeLower
+      40: DecodeLowerHead
+      41: DecodeJaNoun
+      42: DecodeEnNoun
+      43: DecodeDeNoun
+      44: DecodeFrNoun
+      45: DecodeChNoun
+      47: DecodeJosa
+      48: DecodeJosaro
       49: DecodePcName
       50: DecodeIfPcGender
       51: DecodeIfPcName
@@ -8198,10 +8265,14 @@ classes:
   Component::Text::TextParameter:
     funcs:
       0x140190E30: Finalizer
+      0x14092D410: SetString
   std::deque<Component::Text::TextParameter>:
     funcs:
+      0x1403882D0: ctor
+      0x1407509D0: dtor
       0x140394190: _Reset_map
       0x140197AF0: push_back
+      0x140736410: resize
   Client::System::Data::Bit:
     vtbls:
       - ea: 0x141F87108
@@ -8325,6 +8396,12 @@ classes:
       0x140905870: FormatItemName
       0x140905AD0: FormatItemIconSuffix
       0x140905E30: GetTextChecker
+      0x140905EC0: SetGlobalTempPlayer1Utf8
+      0x140906070: SetGlobalTempPlayer1
+      0x140906290: SetGlobalTempPlayer2Utf8
+      0x140906440: SetGlobalTempPlayer2
+      0x140906660: UpdateGlobalColors
+      0x140906750: SetGlobalColorByConfigOption
       0x140906810: Update
       0x140906AB0: AppendUnseenIcon
       0x140906B50: AppendCrossWorldIcon
@@ -8350,6 +8427,11 @@ classes:
       0x140910F30: SetTabName
       0x1409110E0: GetTabName
       0x140911150: FormatPlayerLink
+      0x1409113E0: SetChatTabShouldDisplayTime
+      0x140911410: SetUseServerTime
+      0x140911440: SetUse12HourClock
+      0x140911470: SetLogNameType
+      0x140911490: SetGlobalLogRoleColors
       0x140911C80: GetLinkTerminator
       0x140911E90: GetChatTypeForLogMessage
       0x140911ED0: GetLogMessage
@@ -9685,6 +9767,8 @@ classes:
     vtbls:
       - ea: 0x141FC1708
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x141FC1780
+        base: Common::Configuration::ConfigBase::ChangeEventInterface
     funcs:
       0x140E54460: ctor
       0x140E546A0: Finalizer
@@ -10751,7 +10835,7 @@ classes:
       - ea: 0x141F96038
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1418D4710: ctor
+      0x140A321D0: ctor
   Client::UI::Agent::AgentLeveQuest:
     vtbls:
       - ea: 0x141FBEF38
@@ -12104,8 +12188,6 @@ classes:
     vtbls:
       - ea: 0x141F38FC8
         base: Client::UI::Agent::AgentInterface
-      - ea: 0x141FC1780
-        base: Common::Configuration::ConfigBase::ChangeEventInterface
   Client::UI::Agent::AgentHudLayout:
     vtbls:
       - ea: 0x141FBF450
@@ -12671,16 +12753,18 @@ classes:
       0: Dtor
       6: Terminate
       7: IsUnlocked
-      197: GetTitle # lua function "GetEventHandlerTitle"
+      154: CancelInteraction
+      199: GetTitle # lua function "GetEventHandlerTitle"
       221: GetIconId
-      249: GetDescription
-      250: GetReliefText
-      251: GetTimeRemaining # pass current unix timestamp as a2
-      252: HasTimer
-      254: GetEventItemId
-      256: GetObjectives
-      259: GetRecommendedLevel
-      263: Initialize
+      245: GetScriptVersion
+      252: GetDescription
+      253: GetReliefText
+      254: GetTimeRemaining # pass current unix timestamp as a2
+      255: HasTimer
+      257: GetEventItemId
+      260: GetObjectives
+      264: GetRecommendedLevel
+      268: Initialize
   Client::Game::Event::EventHandlerSelector:
     instances:
       - ea: 0x142808990
@@ -13212,9 +13296,9 @@ classes:
       - ea: 0x141FA0850
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
-      267: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
-      286: SetSequence
-      287: Synchronize
+      272: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
+      291: SetSequence
+      292: Synchronize
     funcs:
       0x140B0F210: ctor
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
@@ -13521,10 +13605,6 @@ classes:
     vtbls:
       - ea: 0x142121CD8
         base: Client::Game::Event::EventHandler
-  Client::Game::Event::ContentEntryEventHandler: # 0x2C
-    vtbls:
-      - ea: 0x1421B4ED0
-        base: Client::Game::Event::EventHandler
   Client::Game::Event::VerminionEventHandler: # 0x2D
     vtbls:
       - ea: 0x141FB60B8
@@ -13575,6 +13655,12 @@ classes:
         base: Client::Game::Event::EventHandler
     funcs:
       0x141829090: ctor
+  Client::Game::Event::HwdDevEventHandler: # 0x38
+    vtbls:
+      - ea: 0x1421B4ED0
+        base: Client::Game::Event::EventHandler
+    funcs:
+      0x1418D3A20: ctor
   Client::Game::Event::SalvageEventHandler: # 0x39
     vtbls:
       - ea: 0x1421A9D50
@@ -13751,10 +13837,10 @@ classes:
       - ea: 0x141FA1190
         base: Client::Game::Event::Director
     vfuncs:
-      292: GetCurrentLevel
-      293: GetMaxLevel
-      309: GetContentTypeIconId
-      319: SetExperience
+      297: GetCurrentLevel
+      298: GetMaxLevel
+      314: GetContentTypeIconId
+      324: SetExperience
     funcs:
 #fail       0x1409B3B80: ctor
       0x140B168B0: ApplyMapEffect

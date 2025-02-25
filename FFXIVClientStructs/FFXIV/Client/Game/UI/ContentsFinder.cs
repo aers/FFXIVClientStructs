@@ -86,12 +86,11 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B FA 48 8B D9 45 84 C0")]
     public partial void UpdateQueueState(QueueStates newState, bool beganQueue);
 
-    [CExporterStructUnion]
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct QueueEntry {
         [FieldOffset(0x0)] public ContentsId.ContentsType ContentType;
-        [FieldOffset(0x4)] public uint ConditionId;
-        [FieldOffset(0x4)] public byte RouletteId;
+        [FieldOffset(0x4), CExporterUnion("Id")] public uint ConditionId;
+        [FieldOffset(0x4), CExporterUnion("Id")] public byte RouletteId;
     }
 
     public enum QueueStates : byte {

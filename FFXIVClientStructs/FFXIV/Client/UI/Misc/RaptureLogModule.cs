@@ -39,6 +39,7 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x33F2)] public bool UseServerTime;
     /// <remarks> Controlled by config option <c>LogTimeDispType</c>. </remarks>
     [FieldOffset(0x33F3)] public bool Use12HourClock;
+    [FieldOffset(0x33F4)] public byte LogNameType;
 
     [FieldOffset(0x3478)] public LogMessageSource* MsgSourceArray;
     [FieldOffset(0x3480)] public int MsgSourceArrayLength;

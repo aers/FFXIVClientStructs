@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
@@ -13,34 +14,36 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
+    [FieldOffset(0x94)] public LuaStatus LuaStatus;
+    
     [FieldOffset(0xC8)] public Utf8String UnkString0;
     [FieldOffset(0x168)] public Utf8String UnkString1;
 
     [VirtualFunction(154)]
     public partial void CancelInteraction();
 
-    [VirtualFunction(197)]
+    [VirtualFunction(199)]
     public partial void GetTitle(Utf8String* outTitle);
 
-    [VirtualFunction(249)]
+    [VirtualFunction(252)]
     public partial void GetDescription(Utf8String* outDescription);
 
-    [VirtualFunction(250)]
+    [VirtualFunction(253)]
     public partial void GetReliefText(Utf8String* outReliefText);
 
-    [VirtualFunction(251)]
+    [VirtualFunction(254)]
     public partial int GetTimeRemaining(int currentTimestamp);
 
-    [VirtualFunction(252)]
+    [VirtualFunction(255)]
     public partial bool HasTimer();
 
-    [VirtualFunction(254)]
+    [VirtualFunction(257)]
     public partial uint GetEventItemId();
 
-    [VirtualFunction(256)]
+    [VirtualFunction(260)]
     public partial StdVector<EventHandlerObjective>* GetObjectives();
 
-    [VirtualFunction(259)]
+    [VirtualFunction(264)]
     public partial int GetRecommendedLevel();
 }
 
@@ -125,6 +128,7 @@ public enum EventHandlerType : ushort {
     DisposalShop = 0x0035,
     PreHandler = 0x0036, // checks quest completion before handling something, for example opening the Scrip Exchange
     TripleTriadCompetition = 0x0037,
+    HwdDev = 0x0038, // Ishgardian Restoration (Firmament / Heavensward Development?!)
     Salvage = 0x0039, // Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002)
     InclusionShop = 0x003A,
     CollectablesShop = 0x003B,

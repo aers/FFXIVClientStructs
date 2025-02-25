@@ -325,12 +325,14 @@ public class Exporter {
         if (field.FieldType.GetCustomAttribute<InlineArrayAttribute>() != null) {
             var arrLength = field.FieldType.GetCustomAttribute<InlineArrayAttribute>()!.Length;
             var elementType = field.FieldType.GetGenericArguments()[0];
+            var isString = field.GetCustomAttribute<FixedSizeArrayAttribute>()?.IsString ?? false;
             _processType.Add(elementType);
             return new ProcessedFixedField {
                 FieldType = elementType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name[1].ToString().ToUpper() + field.Name[2..],
-                FixedSize = arrLength
+                FixedSize = arrLength,
+                FixedString = isString
             };
         }
         if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
@@ -585,6 +587,7 @@ public class ProcessedField {
 
 public class ProcessedFixedField : ProcessedField {
     public required int FixedSize;
+    public bool FixedString;
 
     public override int FieldSize => FixedSize * FieldType.SizeOf();
 }
@@ -721,6 +724,8 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
             case ProcessedFixedField fix:
                 emitter.Emit(new Scalar("size"));
                 emitter.Emit(new Scalar(fix.FixedSize.ToString()));
+                emitter.Emit(new Scalar("is_string"));
+                emitter.Emit(new Scalar(fix.FixedString.ToString()));
                 break;
         }
         emitter.Emit(new MappingEnd());
