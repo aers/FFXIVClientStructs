@@ -1513,7 +1513,8 @@ classes:
       0x140963760: Finalizer
       0x140964B70: Dtor
       0x140963980: RequestData
-      0x1409639E0: GetSeedBasePtr
+      0x1409639D0: GetEventInfo
+      0x1409639E0: GetMissionInfo
       0x1409639F0: GetSeasonTarget
       0x140963A10: GetIsOpenMission
       0x140963A20: GetSeedBase
