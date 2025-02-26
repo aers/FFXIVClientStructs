@@ -15,7 +15,7 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x5C)] public uint IconId;
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
-    
+
     [FieldOffset(0xC8)] public Utf8String UnkString0;
     [FieldOffset(0x168)] public Utf8String UnkString1;
 
