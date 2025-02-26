@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 //   Client::Game::HousingTerritory
 [GenerateInterop]
 [Inherits<HousingTerritory>]
-[StructLayout(LayoutKind.Explicit, Size = 0xAE60)]
+[StructLayout(LayoutKind.Explicit, Size = 0xAE70)]
 public unsafe partial struct OutdoorTerritory {
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture;
     [FieldOffset(0x8968)] public HousingObjectManager HousingObjectManager;

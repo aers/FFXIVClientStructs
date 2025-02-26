@@ -179,7 +179,7 @@ public struct SamuraiGauge {
     [FieldOffset(0x0D)] public SenFlags SenFlags;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct ReaperGauge {
     [FieldOffset(0x08)] public byte Soul;
     [FieldOffset(0x09)] public byte Shroud;

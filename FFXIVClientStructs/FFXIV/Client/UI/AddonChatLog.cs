@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ChatLog")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB38)]
+[StructLayout(LayoutKind.Explicit, Size = 0x638)]
 public unsafe partial struct AddonChatLog {
     [FieldOffset(0x2AC)] public byte TabIndex;
     [FieldOffset(0x2AD)] public byte TabCount;

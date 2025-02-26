@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // type 15
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x118)]
+[StructLayout(LayoutKind.Explicit, Size = 0x138)]
 public unsafe partial struct AtkComponentIcon : ICreatable {
     [FieldOffset(0xC0)] public long IconId;
     [FieldOffset(0xC8)] public AtkUldAsset* Texture;

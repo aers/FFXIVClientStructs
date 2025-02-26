@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x51AA8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x51AB0)]
 public unsafe partial struct RaptureMacroModule {
     public static RaptureMacroModule* Instance() {
         var uiModule = UIModule.Instance();

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 //     Client::System::Common::NonCopyable
 [GenerateInterop]
 [Inherits<ResourceHandle>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct ShaderPackageResourceHandle {
     [FieldOffset(0xB0)] public ShaderPackage* ShaderPackage;
 }

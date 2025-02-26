@@ -141,6 +141,7 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x80)] public short LevelItem;
     }
 
+    // TODO: correct size to 0x90, change _inventoryItemCache array to use ItemCache
     // Client::UI::RaptureAtkModule::InventoryCache
     [GenerateInterop, Inherits<ItemCache>]
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]

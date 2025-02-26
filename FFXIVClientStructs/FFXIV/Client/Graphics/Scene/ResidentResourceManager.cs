@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 // Client::Graphics::Scene::ResidentResourceManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x20)]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct ResidentResourceManager {
     [StaticAddress("0F 44 FE 48 8B 0D ?? ?? ?? ?? 48 85 C9 74 05", 6, isPointer: true)]
     public static partial ResidentResourceManager* Instance();

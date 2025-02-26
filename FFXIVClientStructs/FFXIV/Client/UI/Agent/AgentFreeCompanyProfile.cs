@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.FreeCompanyProfile)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x27C)]
+[StructLayout(LayoutKind.Explicit, Size = 0x280)]
 public unsafe partial struct AgentFreeCompanyProfile {
     //First = 0xe0 00 00 00 00 00 00 00
     //Next were the same as AgentINspect GuildStruct 0x08

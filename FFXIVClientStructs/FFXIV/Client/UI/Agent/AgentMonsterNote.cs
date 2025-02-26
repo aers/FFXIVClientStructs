@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.MonsterNote)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x68)]
+[StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe partial struct AgentMonsterNote {
     [FieldOffset(0x28)] public StdVector<Utf8String> StringVector;
     [FieldOffset(0x40)] public uint BaseId;

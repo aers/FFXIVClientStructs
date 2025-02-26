@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.Letter)]
 [GenerateInterop]
 [Inherits<InfoProxyPageInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x5250)]
+[StructLayout(LayoutKind.Explicit, Size = 0x76E0)]
 public unsafe partial struct InfoProxyLetter {
     [FieldOffset(0x20)] public uint NumOfDeniedLetters;
     [FieldOffset(0x24)] public ushort NumAttachments;
