@@ -4320,77 +4320,98 @@ structs:
     name: IsEnabled
     offset: 12
   member_functions: []
-- type: Client::Game::CSBonusManager
-  name: CSBonusManager
+- type: Client::Game::CSBonusEventInfo
+  name: CSBonusEventInfo
   namespace: Client.Game
   union: False
-  size: 376
+  size: 16
   fields:
   - type: unsigned __int16
-    name: State
-    offset: 8
+    name: Season
+    offset: 0
   - type: unsigned int
     name: BaseTime
-    offset: 12
+    offset: 4
   - type: unsigned int
     name: SeasonTarget
-    offset: 16
+    offset: 8
   - type: byte
     name: IsOpenShop
-    offset: 20
+    offset: 12
   - type: byte
     name: IsOpenMission
-    offset: 21
+    offset: 13
+  member_functions: []
+- type: Client::Game::CSBonusMissionInfo
+  name: CSBonusMissionInfo
+  namespace: Client.Game
+  union: False
+  size: 176
+  fields:
   - type: unsigned int
     name: SeedBase
-    offset: 24
+    offset: 0
+  - type: byte
+    name: UnkAchieveFlag
+    offset: 4
+    size: 20
+    is_string: False
   - type: byte
     name: WBAchieveFlag
-    offset: 44
+    offset: 24
     size: 20
     is_string: False
   - type: byte
     name: PMAchieveFlag
-    offset: 64
+    offset: 44
     size: 20
     is_string: False
   - type: byte
     name: MMAchieveFlag
+    offset: 64
+    size: 20
+    is_string: False
+  - type: byte
+    name: UnkReceiveFlag
     offset: 84
-    size: 4
+    size: 20
     is_string: False
   - type: byte
     name: WBReceiveFlag
-    offset: 124
+    offset: 104
     size: 20
     is_string: False
   - type: byte
     name: PMReceiveFlag
-    offset: 144
+    offset: 124
     size: 20
     is_string: False
   - type: byte
     name: MMReceiveFlag
+    offset: 144
+    size: 20
+    is_string: False
+  - type: byte
+    name: UnkCount
     offset: 164
-    size: 4
+    size: 2
     is_string: False
   - type: byte
     name: WBCount
-    offset: 186
+    offset: 166
+    size: 2
+    is_string: False
   - type: byte
     name: PMCount
-    offset: 188
+    offset: 168
+    size: 2
+    is_string: False
   - type: byte
     name: MMCount
-    offset: 190
-  virtual_functions: []
+    offset: 170
+    size: 2
+    is_string: False
   member_functions: []
-  static_members:
-  - signature: 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0
-    relative_follow_offsets:
-    - 3
-    is_pointer: True
-    return_type: Client::Game::CSBonusManager
 - type: Client::Game::Character::ActionEffectHandler::Effect
   name: Effect
   namespace: Client.Game.Character
@@ -6133,7 +6154,7 @@ structs:
   name: ReaperGauge
   namespace: Client.Game.Gauge
   union: False
-  size: 16
+  size: 48
   fields:
   - type: byte
     name: Soul
@@ -7492,6 +7513,22 @@ structs:
     offset: 60
     size: 12
     is_string: False
+  member_functions: []
+- type: Client::Game::NameCache::CharacterInfo
+  name: CharacterInfo
+  namespace: Client.Game
+  union: False
+  size: 11
+  fields:
+  - type: byte*
+    name: Name
+    offset: 0
+  - type: __int16
+    name: HomeWorldId
+    offset: 8
+  - type: byte
+    name: Sex
+    offset: 10
   member_functions: []
 - type: Client::Game::NameCache::ContentIdCacheEntry
   name: ContentIdCacheEntry
@@ -9336,7 +9373,7 @@ structs:
   name: EnvSimulator
   namespace: Client.Graphics.Environment
   union: False
-  size: 784
+  size: 960
   fields: []
   virtual_functions: []
   member_functions: []
@@ -9667,7 +9704,7 @@ structs:
   name: SwapChain
   namespace: Client.Graphics.Kernel
   union: False
-  size: 112
+  size: 120
   fields:
   - type: unsigned int
     name: Width
@@ -9993,7 +10030,7 @@ structs:
   name: ResidentResourceManager
   namespace: Client.Graphics.Scene
   union: False
-  size: 32
+  size: 40
   fields:
   - type: unsigned int
     name: ResourceCount
@@ -10032,7 +10069,7 @@ structs:
   name: VfxData
   namespace: Client.Graphics.Vfx
   union: False
-  size: 464
+  size: 480
   fields: []
   virtual_functions: []
   member_functions: []
@@ -18895,7 +18932,7 @@ structs:
   name: IExcelRowWrapper
   namespace: Component.Excel
   union: False
-  size: 16
+  size: 8
   fields: []
   virtual_functions:
   - name: Dtor
@@ -23165,16 +23202,6 @@ structs:
     name: tm_isdst
     offset: 32
   member_functions: []
-- type: byte*
-  name: StringPointer
-  namespace: ''
-  union: False
-  size: 8
-  fields:
-  - type: byte*
-    name: Value
-    offset: 0
-  member_functions: []
 - type: Animation::Animation::hkaAnnotationTrack::Annotation
   name: Annotation
   namespace: Animation.Animation
@@ -24676,22 +24703,6 @@ structs:
     name: Unknown3
     offset: 60
   member_functions: []
-- type: Client::Game::NameCache::CharacterInfo
-  name: CharacterInfo
-  namespace: Client.Game
-  union: False
-  size: 11
-  fields:
-  - type: byte*
-    name: Name
-    offset: 0
-  - type: __int16
-    name: HomeWorldId
-    offset: 8
-  - type: byte
-    name: Sex
-    offset: 10
-  member_functions: []
 - type: Client::Game::Object::GameObjectManager
   name: GameObjectManager
   namespace: Client.Game.Object
@@ -25746,7 +25757,7 @@ structs:
   name: Texture
   namespace: Client.Graphics.Kernel
   union: False
-  size: 192
+  size: 200
   fields:
   - type: Client::Graphics::Kernel::Notifier
     name: Notifier
@@ -39727,6 +39738,26 @@ structs:
     name: InitialVolume
     offset: 88
   member_functions: []
+- type: Client::Game::CSBonusManager
+  name: CSBonusManager
+  namespace: Client.Game
+  union: False
+  size: 376
+  fields:
+  - type: Client::Game::CSBonusEventInfo
+    name: EventInfo
+    offset: 8
+  - type: Client::Game::CSBonusMissionInfo
+    name: MissionInfo
+    offset: 24
+  virtual_functions: []
+  member_functions: []
+  static_members:
+  - signature: 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::CSBonusManager
 - type: Client::Game::Character::CastInfo
   name: CastInfo
   namespace: Client.Game.Character
@@ -41314,6 +41345,28 @@ structs:
     is_string: False
   virtual_functions: []
   member_functions: []
+- type: Client::Graphics::Scene::CharacterBase::SkeletonAnimationContainer
+  name: SkeletonAnimationContainer
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 256
+  fields:
+  - type: Client::System::Resource::Handle::SkeletonResourceHandle*
+    name: PartialSkeleton
+    offset: 0
+  - type: StdVector<Client::System::Resource::Handle::ResourceHandle*>
+    name: PapVector1
+    offset: 8
+  - type: StdVector<Client::System::Resource::Handle::ResourceHandle*>
+    name: PapVector2
+    offset: 32
+  - type: StdVector<Client::System::Resource::Handle::ResourceHandle*>
+    name: PapVector3
+    offset: 56
+  - type: Client::System::Resource::Handle::ResourceHandle*
+    name: AnimationExchangeTable
+    offset: 248
+  member_functions: []
 - type: Client::Graphics::Scene::Object
   name: Object
   namespace: Client.Graphics.Scene
@@ -41799,7 +41852,7 @@ structs:
   name: SoundManager
   namespace: Client.Sound
   union: False
-  size: 7304
+  size: 7432
   fields:
   - type: Client::System::Resource::ResourceEventListener
     name: ResourceEventListener
@@ -46996,7 +47049,7 @@ structs:
   name: AgentMycBattleAreaInfo
   namespace: Client.UI.Agent
   union: False
-  size: 72
+  size: 48
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -47320,7 +47373,7 @@ structs:
   name: AgentRecipeItemContext
   namespace: Client.UI.Agent
   union: False
-  size: 64
+  size: 72
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -54778,7 +54831,7 @@ structs:
   name: AgentFreeCompanyCrestEditor
   namespace: Client.UI.Agent
   union: False
-  size: 112
+  size: 152
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -57560,7 +57613,7 @@ structs:
   name: RaptureMacroModule
   namespace: Client.UI.Misc
   union: False
-  size: 334504
+  size: 334512
   fields:
   - type: Client::UI::Misc::UserFileManager::UserFileEvent
     name: UserFileEvent
@@ -60382,7 +60435,7 @@ structs:
   name: IndoorTerritory
   namespace: Client.Game
   union: False
-  size: 41376
+  size: 41504
   fields:
   - type: Client::Game::HousingTerritory
     name: HousingTerritory
@@ -61370,6 +61423,11 @@ structs:
   - type: Client::Graphics::Physics::BoneSimulators
     name: BoneSimulators
     offset: 160
+  - type: Client::System::Resource::Handle::ResourceHandle*
+    name: BonePhysicsResourceHandles
+    offset: 400
+    size: 5
+    is_string: False
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -61568,7 +61626,7 @@ structs:
   name: EnvSpace
   namespace: Client.Graphics.Scene
   union: False
-  size: 208
+  size: 240
   fields:
   - type: Client::Graphics::Scene::DrawObject
     name: DrawObject
@@ -61914,7 +61972,7 @@ structs:
   name: PadDevice
   namespace: Client.System.Input
   union: False
-  size: 20208
+  size: 20224
   fields:
   - type: Client::System::Input::PadDeviceInterface
     name: PadDeviceInterface
@@ -62119,7 +62177,7 @@ structs:
   name: ShaderPackageResourceHandle
   namespace: Client.System.Resource.Handle
   union: False
-  size: 184
+  size: 192
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle
     name: ResourceHandle
@@ -62787,7 +62845,7 @@ structs:
   name: AgentMonsterNote
   namespace: Client.UI.Agent
   union: False
-  size: 104
+  size: 96
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -63404,7 +63462,7 @@ structs:
   name: InfoProxy26
   namespace: Client.UI.Info
   union: False
-  size: 1048
+  size: 1096
   fields:
   - type: Client::UI::Info::InfoProxyInterface
     name: InfoProxyInterface
@@ -65048,7 +65106,7 @@ structs:
   name: AtkComponentIcon
   namespace: Component.GUI
   union: False
-  size: 280
+  size: 312
   fields:
   - type: Component::GUI::AtkComponentBase
     name: AtkComponentBase
@@ -67265,7 +67323,7 @@ structs:
   name: OutdoorTerritory
   namespace: Client.Game
   union: False
-  size: 44640
+  size: 44656
   fields:
   - type: Client::Game::HousingTerritory
     name: HousingTerritory
@@ -67483,7 +67541,7 @@ structs:
   name: EnvScene
   namespace: Client.Graphics.Scene
   union: False
-  size: 1936
+  size: 2224
   fields:
   - type: byte
     name: WeatherIds
@@ -67913,7 +67971,7 @@ structs:
   name: AgentFreeCompanyProfile
   namespace: Client.UI.Agent
   union: False
-  size: 636
+  size: 640
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -68668,7 +68726,7 @@ structs:
   name: InfoProxyLetter
   namespace: Client.UI.Info
   union: False
-  size: 21072
+  size: 30432
   fields:
   - type: Client::UI::Info::InfoProxyPageInterface
     name: InfoProxyPageInterface
@@ -70906,367 +70964,6 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::UI::Map
-- type: Client::Graphics::Scene::CharacterBase
-  name: CharacterBase
-  namespace: Client.Graphics.Scene
-  union: False
-  size: 2576
-  fields:
-  - type: Client::Graphics::Scene::DrawObject
-    name: DrawObject
-    offset: 0
-    base: true
-  - type: byte
-    name: UnkFlags_01
-    offset: 144
-  - type: byte
-    name: UnkFlags_02
-    offset: 145
-  - type: byte
-    name: UnkFlags_03
-    offset: 146
-  - type: int
-    name: SlotCount
-    offset: 152
-  - type: Client::Graphics::Render::Skeleton*
-    name: Skeleton
-    offset: 160
-  - type: Client::Graphics::Render::Model**
-    name: Models
-    offset: 168
-  - type: __int64
-    name: PostBoneDeformer
-    offset: 328
-  - type: Client::Graphics::Physics::BonePhysicsModule*
-    name: BonePhysicsModule
-    offset: 336
-  - type: Client::Graphics::Render::ModelRenderer::Callback
-    name: RenderModelCallback
-    offset: 368
-  - type: Client::Graphics::Render::ModelRenderer::Callback
-    name: RenderMaterialCallback
-    offset: 400
-  - type: Client::Graphics::Render::ModelRenderer::Callback
-    name: UnkCallback3
-    offset: 432
-  - type: float
-    name: VfxScale
-    offset: 548
-  - type: Client::Graphics::Kernel::ConstantBuffer*
-    name: CharacterDataCBuffer
-    offset: 624
-  - type: Client::Graphics::Kernel::ConstantBuffer*
-    name: UnkCBuffer
-    offset: 632
-  - type: Client::Graphics::Kernel::Texture**
-    name: ColorTableTextures
-    offset: 648
-  - type: Common::Math::Vector4
-    name: Tint
-    offset: 656
-  - type: float
-    name: WeatherWetness
-    offset: 736
-  - type: float
-    name: SwimmingWetness
-    offset: 740
-  - type: float
-    name: WetnessDepth
-    offset: 744
-  - type: float
-    name: ForcedWetness
-    offset: 748
-  - type: unsigned int
-    name: HasModelInSlotLoaded
-    offset: 760
-  - type: unsigned int
-    name: HasModelFilesInSlotLoaded
-    offset: 764
-  - type: __int64
-    name: TempData
-    offset: 768
-  - type: __int64
-    name: TempSlotData
-    offset: 776
-  - type: Client::Graphics::Render::Material**
-    name: Materials
-    offset: 848
-  - type: __int64
-    name: EID
-    offset: 856
-  - type: __int64*
-    name: IMCArray
-    offset: 864
-  - type: byte
-    name: AnimationVariant
-    offset: 2392
-  virtual_functions:
-  - name: GetModelType
-    offset: 400
-    return_type: Client::Graphics::Scene::CharacterBase::ModelType
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-  - name: OnRenderModel
-    offset: 504
-    return_type: __int64
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: Client::Graphics::Render::Model*
-      name: model
-  - name: OnRenderMaterial
-    offset: 512
-    return_type: __int64
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
-      name: param
-  - name: FlagSlotForUpdate
-    offset: 552
-    return_type: unsigned __int64
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: unsigned int
-      name: slot
-    - type: Client::Game::Character::EquipmentModelId*
-      name: slotBytes
-  - name: ResolveRootPath
-    offset: 600
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-  - name: ResolveSklbPath
-    offset: 608
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: partialSkeletonIndex
-  - name: ResolveMdlPath
-    offset: 616
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: slotIndex
-  - name: ResolveSkpPath
-    offset: 624
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: partialSkeletonIndex
-  - name: ResolvePhybPath
-    offset: 632
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: partialSkeletonIndex
-  - name: ResolvePapPath
-    offset: 672
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: unkAnimationIndex
-    - type: byte*
-      name: animationName
-  - name: ResolveTmbPath
-    offset: 680
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: byte*
-      name: timelineName
-  - name: ResolveMaterialPapPath
-    offset: 696
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: slotIndex
-    - type: unsigned int
-      name: unkSId
-  - name: ResolveImcPath
-    offset: 712
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: slotIndex
-  - name: ResolveMtrlPath
-    offset: 720
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: slotIndex
-    - type: byte*
-      name: mtrlFileName
-  - name: ResolveDecalPath
-    offset: 736
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: slotIndex
-  - name: ResolveVfxPath
-    offset: 744
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-    - type: unsigned int
-      name: slotIndex
-    - type: unsigned int*
-      name: unkOutParam
-  - name: ResolveEidPath
-    offset: 752
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte*
-      name: pathBuffer
-    - type: unsigned __int64
-      name: pathBufferSize
-  - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 864
-    return_type: byte
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte
-      name: slot
-  - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 872
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: byte
-      name: slot
-    - type: byte
-      name: isVisible
-  - name: SetFreeCompanyCrest
-    offset: 880
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-    - type: Client::Graphics::Kernel::Texture*
-      name: freeCompanyCrest
-  - name: GetObjectType
-    offset: 16
-    return_type: Client::Graphics::Scene::ObjectType
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-  - name: UpdateTint
-    offset: 192
-  - name: ForceWetness
-    offset: 416
-  - name: ResetWetness
-    offset: 424
-  - name: SetupScaling
-    offset: 464
-  - name: GetDataForSlot
-    offset: 576
-  - name: ResolveKdbPath
-    offset: 640
-  - name: ResolveBnmBPath
-    offset: 656
-  - name: GetDyeFlorSlot
-    offset: 760
-  - name: GetSkeletonCount
-    offset: 768
-  - name: CreateDeformer
-    offset: 808
-  - name: CreateRenderModelForMDL
-    offset: 816
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30
-    return_type: void
-    name: Destroy
-    parameters:
-    - type: Client::Graphics::Scene::CharacterBase*
-      name: this
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B 4F 08 48 8B D0 4C 8B 01
-    return_type: Client::Graphics::Scene::CharacterBase*
-    name: Create
-    parameters:
-    - type: unsigned int
-      name: modelId
-    - type: Client::Game::Character::CustomizeData*
-      name: customize
-    - type: Client::Game::Character::EquipmentModelId*
-      name: equipData
-    - type: byte
-      name: unk
 - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance
   name: CollisionBoxLayoutInstance
   namespace: Client.LayoutEngine.Layer
@@ -73938,799 +73635,6 @@ structs:
     return_type: Client::Game::MJI::MJIManager*
     name: Instance
     parameters: []
-- type: Client::Graphics::Scene::Demihuman
-  name: Demihuman
-  namespace: Client.Graphics.Scene
-  union: False
-  size: 2752
-  fields:
-  - type: Client::Graphics::Scene::CharacterBase
-    name: CharacterBase
-    offset: 0
-    base: true
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: HeadDecal
-    offset: 2656
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: TopDecal
-    offset: 2664
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: ArmsDecal
-    offset: 2672
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: LegsDecal
-    offset: 2680
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: FeetDecal
-    offset: 2688
-  - type: Client::Graphics::Kernel::Texture*
-    name: FreeCompanyCrest
-    offset: 2704
-  - type: unsigned int
-    name: SlotFreeCompanyCrestBitfield
-    offset: 2712
-  virtual_functions:
-  - name: GetObjectType
-    offset: 16
-    return_type: Client::Graphics::Scene::ObjectType
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-  - name: GetModelType
-    offset: 400
-    return_type: Client::Graphics::Scene::CharacterBase::ModelType
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-  - name: OnRenderModel
-    offset: 504
-    return_type: __int64
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: Client::Graphics::Render::Model*
-      name: a2
-  - name: OnRenderMaterial
-    offset: 512
-    return_type: __int64
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
-      name: a2
-  - name: FlagSlotForUpdate
-    offset: 552
-    return_type: unsigned __int64
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Client::Game::Character::EquipmentModelId*
-      name: a3
-  - name: ResolveRootPath
-    offset: 600
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-  - name: ResolveSklbPath
-    offset: 608
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveMdlPath
-    offset: 616
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveSkpPath
-    offset: 624
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolvePhybPath
-    offset: 632
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolvePapPath
-    offset: 672
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: byte*
-      name: a5
-  - name: ResolveTmbPath
-    offset: 680
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: byte*
-      name: a4
-  - name: ResolveMaterialPapPath
-    offset: 696
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned int
-      name: a5
-  - name: ResolveImcPath
-    offset: 712
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveMtrlPath
-    offset: 720
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: byte*
-      name: a5
-  - name: ResolveDecalPath
-    offset: 736
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveVfxPath
-    offset: 744
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned int*
-      name: a5
-  - name: ResolveEidPath
-    offset: 752
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-  - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 864
-    return_type: byte
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 872
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-  - name: SetFreeCompanyCrest
-    offset: 880
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: Client::Graphics::Kernel::Texture*
-      name: a2
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 0F 10 0F
-    return_type: byte
-    name: SetupFromData
-    parameters:
-    - type: Client::Graphics::Scene::Demihuman*
-      name: this
-    - type: byte*
-      name: data
-- type: Client::Graphics::Scene::Monster
-  name: Monster
-  namespace: Client.Graphics.Scene
-  union: False
-  size: 2624
-  fields:
-  - type: Client::Graphics::Scene::CharacterBase
-    name: CharacterBase
-    offset: 0
-    base: true
-  - type: unsigned __int16
-    name: ModelSetId
-    offset: 2576
-  - type: unsigned __int16
-    name: SecondaryId
-    offset: 2578
-  - type: unsigned __int16
-    name: Variant
-    offset: 2580
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: Decal
-    offset: 2592
-  virtual_functions:
-  - name: GetObjectType
-    offset: 16
-    return_type: Client::Graphics::Scene::ObjectType
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-  - name: GetModelType
-    offset: 400
-    return_type: Client::Graphics::Scene::CharacterBase::ModelType
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-  - name: OnRenderModel
-    offset: 504
-    return_type: __int64
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: Client::Graphics::Render::Model*
-      name: a2
-  - name: OnRenderMaterial
-    offset: 512
-    return_type: __int64
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
-      name: a2
-  - name: FlagSlotForUpdate
-    offset: 552
-    return_type: unsigned __int64
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Client::Game::Character::EquipmentModelId*
-      name: a3
-  - name: ResolveRootPath
-    offset: 600
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-  - name: ResolveSklbPath
-    offset: 608
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveMdlPath
-    offset: 616
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveSkpPath
-    offset: 624
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolvePhybPath
-    offset: 632
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolvePapPath
-    offset: 672
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: byte*
-      name: a5
-  - name: ResolveTmbPath
-    offset: 680
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: byte*
-      name: a4
-  - name: ResolveMaterialPapPath
-    offset: 696
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned int
-      name: a5
-  - name: ResolveImcPath
-    offset: 712
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveMtrlPath
-    offset: 720
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: byte*
-      name: a5
-  - name: ResolveDecalPath
-    offset: 736
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveVfxPath
-    offset: 744
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned int*
-      name: a5
-  - name: ResolveEidPath
-    offset: 752
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-  - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 864
-    return_type: byte
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 872
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-  - name: SetFreeCompanyCrest
-    offset: 880
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: Client::Graphics::Kernel::Texture*
-      name: a2
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F 57 C0 48 8D 4C 24 ??
-    return_type: byte
-    name: SetupFromData
-    parameters:
-    - type: Client::Graphics::Scene::Monster*
-      name: this
-    - type: byte*
-      name: data
-- type: Client::Graphics::Scene::Weapon
-  name: Weapon
-  namespace: Client.Graphics.Scene
-  union: False
-  size: 2640
-  fields:
-  - type: Client::Graphics::Scene::CharacterBase
-    name: CharacterBase
-    offset: 0
-    base: true
-  - type: unsigned __int16
-    name: ModelSetId
-    offset: 2576
-  - type: unsigned __int16
-    name: SecondaryId
-    offset: 2578
-  - type: unsigned __int16
-    name: Variant
-    offset: 2580
-  - type: byte
-    name: Stain0
-    offset: 2582
-  - type: byte
-    name: Stain1
-    offset: 2583
-  - type: byte
-    name: MaterialId
-    offset: 2586
-  - type: byte
-    name: DecalId
-    offset: 2587
-  - type: byte
-    name: VfxId
-    offset: 2590
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: Decal
-    offset: 2600
-  - type: Client::Graphics::Kernel::Texture*
-    name: FreeCompanyCrest
-    offset: 2608
-  - type: unsigned int
-    name: SlotFreeCompanyCrestBitfield
-    offset: 2616
-  - type: Client::Graphics::Scene::Weapon::ChangedWeaponData*
-    name: ChangedData
-    offset: 2624
-  virtual_functions:
-  - name: GetObjectType
-    offset: 16
-    return_type: Client::Graphics::Scene::ObjectType
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-  - name: GetModelType
-    offset: 400
-    return_type: Client::Graphics::Scene::CharacterBase::ModelType
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-  - name: OnRenderModel
-    offset: 504
-    return_type: __int64
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: Client::Graphics::Render::Model*
-      name: a2
-  - name: OnRenderMaterial
-    offset: 512
-    return_type: __int64
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
-      name: a2
-  - name: FlagSlotForUpdate
-    offset: 552
-    return_type: unsigned __int64
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Client::Game::Character::EquipmentModelId*
-      name: a3
-  - name: ResolveRootPath
-    offset: 600
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-  - name: ResolveSklbPath
-    offset: 608
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveMdlPath
-    offset: 616
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveSkpPath
-    offset: 624
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolvePhybPath
-    offset: 632
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolvePapPath
-    offset: 672
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: byte*
-      name: a5
-  - name: ResolveTmbPath
-    offset: 680
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: byte*
-      name: a4
-  - name: ResolveMaterialPapPath
-    offset: 696
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned int
-      name: a5
-  - name: ResolveImcPath
-    offset: 712
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveMtrlPath
-    offset: 720
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: byte*
-      name: a5
-  - name: ResolveDecalPath
-    offset: 736
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: ResolveVfxPath
-    offset: 744
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned int*
-      name: a5
-  - name: ResolveEidPath
-    offset: 752
-    return_type: byte*
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte*
-      name: a2
-    - type: unsigned __int64
-      name: a3
-  - name: IsFreeCompanyCrestVisibleOnSlot
-    offset: 864
-    return_type: byte
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetFreeCompanyCrestVisibleOnSlot
-    offset: 872
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-  - name: SetFreeCompanyCrest
-    offset: 880
-    return_type: void
-    parameters:
-    - type: Client::Graphics::Scene::Weapon*
-      name: this
-    - type: Client::Graphics::Kernel::Texture*
-      name: a2
-  member_functions: []
 - type: Client::System::Resource::Handle::ModelResourceHandle
   name: ModelResourceHandle
   namespace: Client.System.Resource.Handle
@@ -78104,7 +77008,7 @@ structs:
   name: SkeletonResourceHandle
   namespace: Client.System.Resource.Handle
   union: False
-  size: 312
+  size: 392
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle
     name: ResourceHandle
@@ -79554,378 +78458,378 @@ structs:
     - type: Client::Game::Event::HwdDevEventHandler*
       name: this
   member_functions: []
-- type: Client::Graphics::Scene::Human
-  name: Human
+- type: Client::Graphics::Scene::CharacterBase
+  name: CharacterBase
   namespace: Client.Graphics.Scene
   union: False
-  size: 3264
+  size: 2576
   fields:
-  - type: Client::Graphics::Scene::CharacterBase
-    name: CharacterBase
+  - type: Client::Graphics::Scene::DrawObject
+    name: DrawObject
     offset: 0
     base: true
-  - type: Client::Game::Character::CustomizeData
-    name: Customize
-    offset: 2576
-  - type: unsigned int
-    name: SlotNeedsUpdateBitfield
-    offset: 2604
-  - type: Client::Game::Character::EquipmentModelId
-    name: Head
-    offset: 2608
-  - type: Client::Game::Character::EquipmentModelId
-    name: Top
-    offset: 2616
-  - type: Client::Game::Character::EquipmentModelId
-    name: Arms
-    offset: 2624
-  - type: Client::Game::Character::EquipmentModelId
-    name: Legs
-    offset: 2632
-  - type: Client::Game::Character::EquipmentModelId
-    name: Feet
-    offset: 2640
-  - type: Client::Game::Character::EquipmentModelId
-    name: Ear
-    offset: 2648
-  - type: Client::Game::Character::EquipmentModelId
-    name: Neck
-    offset: 2656
-  - type: Client::Game::Character::EquipmentModelId
-    name: Wrist
-    offset: 2664
-  - type: Client::Game::Character::EquipmentModelId
-    name: RFinger
-    offset: 2672
-  - type: Client::Game::Character::EquipmentModelId
-    name: LFinger
-    offset: 2680
-  - type: Client::Game::Character::EquipmentModelId
-    name: Glasses0
-    offset: 2688
-  - type: Client::Game::Character::EquipmentModelId
-    name: Glasses1
-    offset: 2696
-  - type: unsigned __int16
-    name: RaceSexId
-    offset: 2704
-  - type: unsigned __int16
-    name: HairId
-    offset: 2706
-  - type: unsigned __int16
-    name: FaceId
-    offset: 2708
-  - type: unsigned __int16
-    name: TailEarId
-    offset: 2710
-  - type: unsigned __int16
-    name: FurId
-    offset: 2712
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: HeadDecal
-    offset: 2792
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: TopDecal
-    offset: 2800
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: ArmsDecal
-    offset: 2808
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: LegsDecal
-    offset: 2816
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: FeetDecal
-    offset: 2824
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: EarDecal
-    offset: 2832
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: NeckDecal
-    offset: 2840
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: WristDecal
-    offset: 2848
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: RFingerDecal
-    offset: 2856
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: LFingerDecal
-    offset: 2864
+  - type: byte
+    name: UnkFlags_01
+    offset: 144
+  - type: byte
+    name: UnkFlags_02
+    offset: 145
+  - type: byte
+    name: UnkFlags_03
+    offset: 146
+  - type: int
+    name: SlotCount
+    offset: 152
+  - type: Client::Graphics::Render::Skeleton*
+    name: Skeleton
+    offset: 160
+  - type: Client::Graphics::Render::Model**
+    name: Models
+    offset: 168
+  - type: __int64
+    name: PostBoneDeformer
+    offset: 328
+  - type: Client::Graphics::Physics::BonePhysicsModule*
+    name: BonePhysicsModule
+    offset: 336
+  - type: Client::Graphics::Render::ModelRenderer::Callback
+    name: RenderModelCallback
+    offset: 368
+  - type: Client::Graphics::Render::ModelRenderer::Callback
+    name: RenderMaterialCallback
+    offset: 400
+  - type: Client::Graphics::Render::ModelRenderer::Callback
+    name: UnkCallback3
+    offset: 432
+  - type: float
+    name: VfxScale
+    offset: 548
   - type: Client::Graphics::Kernel::ConstantBuffer*
-    name: CustomizeParameterCBuffer
-    offset: 3040
+    name: CharacterDataCBuffer
+    offset: 624
   - type: Client::Graphics::Kernel::ConstantBuffer*
-    name: DecalColorCBuffer
-    offset: 3048
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: Decal
-    offset: 3056
-  - type: Client::System::Resource::Handle::TextureResourceHandle*
-    name: LegacyBodyDecal
-    offset: 3064
-  - type: Client::Graphics::Kernel::Texture*
-    name: FreeCompanyCrest
-    offset: 3072
+    name: UnkCBuffer
+    offset: 632
+  - type: Client::Graphics::Kernel::Texture**
+    name: ColorTableTextures
+    offset: 648
+  - type: Common::Math::Vector4
+    name: Tint
+    offset: 656
+  - type: float
+    name: WeatherWetness
+    offset: 736
+  - type: float
+    name: SwimmingWetness
+    offset: 740
+  - type: float
+    name: WetnessDepth
+    offset: 744
+  - type: float
+    name: ForcedWetness
+    offset: 748
   - type: unsigned int
-    name: SlotFreeCompanyCrestBitfield
-    offset: 3080
-  - type: byte*
-    name: ChangedEquipData
-    offset: 3136
+    name: HasModelInSlotLoaded
+    offset: 760
+  - type: unsigned int
+    name: HasModelFilesInSlotLoaded
+    offset: 764
+  - type: __int64
+    name: TempData
+    offset: 768
+  - type: __int64
+    name: TempSlotData
+    offset: 776
+  - type: Client::Graphics::Render::Material**
+    name: Materials
+    offset: 848
+  - type: __int64
+    name: EID
+    offset: 856
+  - type: __int64*
+    name: IMCArray
+    offset: 864
+  - type: Client::Graphics::Scene::CharacterBase::SkeletonAnimationContainer
+    name: SkeletonAnimationContainers
+    offset: 984
+    size: 5
+    is_string: False
+  - type: Client::System::Resource::Handle::SkeletonResourceHandle*
+    name: MaterialAnimationSkeleton
+    offset: 2368
+  - type: Client::System::Resource::Handle::ResourceHandle**
+    name: MaterialAnimationPacks
+    offset: 2376
+  - type: byte
+    name: AnimationVariant
+    offset: 2392
   virtual_functions:
-  - name: GetObjectType
-    offset: 16
-    return_type: Client::Graphics::Scene::ObjectType
-    parameters:
-    - type: Client::Graphics::Scene::Human*
-      name: this
   - name: GetModelType
     offset: 400
     return_type: Client::Graphics::Scene::CharacterBase::ModelType
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
   - name: OnRenderModel
     offset: 504
     return_type: __int64
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: Client::Graphics::Render::Model*
-      name: a2
+      name: model
   - name: OnRenderMaterial
     offset: 512
     return_type: __int64
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
-      name: a2
+      name: param
   - name: FlagSlotForUpdate
     offset: 552
     return_type: unsigned __int64
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: unsigned int
-      name: a2
+      name: slot
     - type: Client::Game::Character::EquipmentModelId*
-      name: a3
+      name: slotBytes
   - name: ResolveRootPath
     offset: 600
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
   - name: ResolveSklbPath
     offset: 608
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: partialSkeletonIndex
   - name: ResolveMdlPath
     offset: 616
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: slotIndex
   - name: ResolveSkpPath
     offset: 624
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: partialSkeletonIndex
   - name: ResolvePhybPath
     offset: 632
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: partialSkeletonIndex
   - name: ResolvePapPath
     offset: 672
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: unkAnimationIndex
     - type: byte*
-      name: a5
+      name: animationName
   - name: ResolveTmbPath
     offset: 680
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: byte*
-      name: a4
+      name: timelineName
   - name: ResolveMaterialPapPath
     offset: 696
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: slotIndex
     - type: unsigned int
-      name: a5
+      name: unkSId
   - name: ResolveImcPath
     offset: 712
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: slotIndex
   - name: ResolveMtrlPath
     offset: 720
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: slotIndex
     - type: byte*
-      name: a5
+      name: mtrlFileName
   - name: ResolveDecalPath
     offset: 736
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: slotIndex
   - name: ResolveVfxPath
     offset: 744
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
     - type: unsigned int
-      name: a4
+      name: slotIndex
     - type: unsigned int*
-      name: a5
+      name: unkOutParam
   - name: ResolveEidPath
     offset: 752
     return_type: byte*
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte*
-      name: a2
+      name: pathBuffer
     - type: unsigned __int64
-      name: a3
+      name: pathBufferSize
   - name: IsFreeCompanyCrestVisibleOnSlot
     offset: 864
     return_type: byte
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte
-      name: a2
+      name: slot
   - name: SetFreeCompanyCrestVisibleOnSlot
     offset: 872
     return_type: void
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: byte
-      name: a2
+      name: slot
     - type: byte
-      name: a3
+      name: isVisible
   - name: SetFreeCompanyCrest
     offset: 880
     return_type: void
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
     - type: Client::Graphics::Kernel::Texture*
-      name: a2
+      name: freeCompanyCrest
+  - name: GetObjectType
+    offset: 16
+    return_type: Client::Graphics::Scene::ObjectType
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+  - name: UpdateTint
+    offset: 192
+  - name: ForceWetness
+    offset: 416
+  - name: ResetWetness
+    offset: 424
+  - name: SetupScaling
+    offset: 464
+  - name: GetDataForSlot
+    offset: 576
+  - name: ResolveKdbPath
+    offset: 640
+  - name: ResolveBnmBPath
+    offset: 656
+  - name: GetDyeFlorSlot
+    offset: 760
+  - name: GetSkeletonCount
+    offset: 768
+  - name: CreateDeformer
+    offset: 808
+  - name: CreateRenderModelForMDL
+    offset: 816
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF
-    return_type: byte
-    name: SetupVisor
+  - signature: E8 ?? ?? ?? ?? 40 F6 C7 01 74 3A 40 F6 C7 04 75 27 48 85 DB 74 2F 48 8B 05 ?? ?? ?? ?? 48 8B D3 48 8B 48 30
+    return_type: void
+    name: Destroy
     parameters:
-    - type: Client::Graphics::Scene::Human*
+    - type: Client::Graphics::Scene::CharacterBase*
       name: this
-    - type: unsigned __int16
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 4F 08 48 8B D0 4C 8B 01
+    return_type: Client::Graphics::Scene::CharacterBase*
+    name: Create
+    parameters:
+    - type: unsigned int
       name: modelId
+    - type: Client::Game::Character::CustomizeData*
+      name: customize
+    - type: Client::Game::Character::EquipmentModelId*
+      name: equipData
     - type: byte
-      name: visorState
-  - signature: E8 ?? ?? ?? ?? 66 44 89 A5 ?? ?? ?? ??
-    return_type: byte
-    name: UpdateDrawData
-    parameters:
-    - type: Client::Graphics::Scene::Human*
-      name: this
-    - type: byte*
-      name: data
-    - type: byte
-      name: skipEquipment
-  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8B EA 48 81 C1
-    return_type: byte
-    name: SetupFromCharacterData
-    parameters:
-    - type: Client::Graphics::Scene::Human*
-      name: this
-    - type: byte*
-      name: data
+      name: unk
 - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance
   name: SharedGroupLayoutInstance
   namespace: Client.LayoutEngine.Group
@@ -80868,7 +79772,7 @@ structs:
   name: ShaderPackage
   namespace: Client.Graphics.Kernel
   union: False
-  size: 1048
+  size: 1064
   fields:
   - type: Client::Graphics::ReferencedClassBase
     name: ReferencedClassBase
@@ -80949,6 +79853,799 @@ structs:
     name: SubviewValue2
     offset: 244
   virtual_functions: []
+  member_functions: []
+- type: Client::Graphics::Scene::Demihuman
+  name: Demihuman
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 2752
+  fields:
+  - type: Client::Graphics::Scene::CharacterBase
+    name: CharacterBase
+    offset: 0
+    base: true
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: HeadDecal
+    offset: 2656
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: TopDecal
+    offset: 2664
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: ArmsDecal
+    offset: 2672
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: LegsDecal
+    offset: 2680
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: FeetDecal
+    offset: 2688
+  - type: Client::Graphics::Kernel::Texture*
+    name: FreeCompanyCrest
+    offset: 2704
+  - type: unsigned int
+    name: SlotFreeCompanyCrestBitfield
+    offset: 2712
+  virtual_functions:
+  - name: GetObjectType
+    offset: 16
+    return_type: Client::Graphics::Scene::ObjectType
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+  - name: GetModelType
+    offset: 400
+    return_type: Client::Graphics::Scene::CharacterBase::ModelType
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+  - name: OnRenderModel
+    offset: 504
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: Client::Graphics::Render::Model*
+      name: a2
+  - name: OnRenderMaterial
+    offset: 512
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
+      name: a2
+  - name: FlagSlotForUpdate
+    offset: 552
+    return_type: unsigned __int64
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Client::Game::Character::EquipmentModelId*
+      name: a3
+  - name: ResolveRootPath
+    offset: 600
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+  - name: ResolveSklbPath
+    offset: 608
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveMdlPath
+    offset: 616
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveSkpPath
+    offset: 624
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolvePhybPath
+    offset: 632
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolvePapPath
+    offset: 672
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: byte*
+      name: a5
+  - name: ResolveTmbPath
+    offset: 680
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: byte*
+      name: a4
+  - name: ResolveMaterialPapPath
+    offset: 696
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned int
+      name: a5
+  - name: ResolveImcPath
+    offset: 712
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveMtrlPath
+    offset: 720
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: byte*
+      name: a5
+  - name: ResolveDecalPath
+    offset: 736
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveVfxPath
+    offset: 744
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned int*
+      name: a5
+  - name: ResolveEidPath
+    offset: 752
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+  - name: IsFreeCompanyCrestVisibleOnSlot
+    offset: 864
+    return_type: byte
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetFreeCompanyCrestVisibleOnSlot
+    offset: 872
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+  - name: SetFreeCompanyCrest
+    offset: 880
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: Client::Graphics::Kernel::Texture*
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 0F 10 0F
+    return_type: byte
+    name: SetupFromData
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: data
+- type: Client::Graphics::Scene::Monster
+  name: Monster
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 2624
+  fields:
+  - type: Client::Graphics::Scene::CharacterBase
+    name: CharacterBase
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: ModelSetId
+    offset: 2576
+  - type: unsigned __int16
+    name: SecondaryId
+    offset: 2578
+  - type: unsigned __int16
+    name: Variant
+    offset: 2580
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: Decal
+    offset: 2592
+  virtual_functions:
+  - name: GetObjectType
+    offset: 16
+    return_type: Client::Graphics::Scene::ObjectType
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+  - name: GetModelType
+    offset: 400
+    return_type: Client::Graphics::Scene::CharacterBase::ModelType
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+  - name: OnRenderModel
+    offset: 504
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: Client::Graphics::Render::Model*
+      name: a2
+  - name: OnRenderMaterial
+    offset: 512
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
+      name: a2
+  - name: FlagSlotForUpdate
+    offset: 552
+    return_type: unsigned __int64
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Client::Game::Character::EquipmentModelId*
+      name: a3
+  - name: ResolveRootPath
+    offset: 600
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+  - name: ResolveSklbPath
+    offset: 608
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveMdlPath
+    offset: 616
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveSkpPath
+    offset: 624
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolvePhybPath
+    offset: 632
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolvePapPath
+    offset: 672
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: byte*
+      name: a5
+  - name: ResolveTmbPath
+    offset: 680
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: byte*
+      name: a4
+  - name: ResolveMaterialPapPath
+    offset: 696
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned int
+      name: a5
+  - name: ResolveImcPath
+    offset: 712
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveMtrlPath
+    offset: 720
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: byte*
+      name: a5
+  - name: ResolveDecalPath
+    offset: 736
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveVfxPath
+    offset: 744
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned int*
+      name: a5
+  - name: ResolveEidPath
+    offset: 752
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+  - name: IsFreeCompanyCrestVisibleOnSlot
+    offset: 864
+    return_type: byte
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetFreeCompanyCrestVisibleOnSlot
+    offset: 872
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+  - name: SetFreeCompanyCrest
+    offset: 880
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: Client::Graphics::Kernel::Texture*
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F 57 C0 48 8D 4C 24 ??
+    return_type: byte
+    name: SetupFromData
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: data
+- type: Client::Graphics::Scene::Weapon
+  name: Weapon
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 2640
+  fields:
+  - type: Client::Graphics::Scene::CharacterBase
+    name: CharacterBase
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: ModelSetId
+    offset: 2576
+  - type: unsigned __int16
+    name: SecondaryId
+    offset: 2578
+  - type: unsigned __int16
+    name: Variant
+    offset: 2580
+  - type: byte
+    name: Stain0
+    offset: 2582
+  - type: byte
+    name: Stain1
+    offset: 2583
+  - type: byte
+    name: MaterialId
+    offset: 2586
+  - type: byte
+    name: DecalId
+    offset: 2587
+  - type: byte
+    name: VfxId
+    offset: 2590
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: Decal
+    offset: 2600
+  - type: Client::Graphics::Kernel::Texture*
+    name: FreeCompanyCrest
+    offset: 2608
+  - type: unsigned int
+    name: SlotFreeCompanyCrestBitfield
+    offset: 2616
+  - type: Client::Graphics::Scene::Weapon::ChangedWeaponData*
+    name: ChangedData
+    offset: 2624
+  virtual_functions:
+  - name: GetObjectType
+    offset: 16
+    return_type: Client::Graphics::Scene::ObjectType
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+  - name: GetModelType
+    offset: 400
+    return_type: Client::Graphics::Scene::CharacterBase::ModelType
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+  - name: OnRenderModel
+    offset: 504
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: Client::Graphics::Render::Model*
+      name: a2
+  - name: OnRenderMaterial
+    offset: 512
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
+      name: a2
+  - name: FlagSlotForUpdate
+    offset: 552
+    return_type: unsigned __int64
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Client::Game::Character::EquipmentModelId*
+      name: a3
+  - name: ResolveRootPath
+    offset: 600
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+  - name: ResolveSklbPath
+    offset: 608
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveMdlPath
+    offset: 616
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveSkpPath
+    offset: 624
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolvePhybPath
+    offset: 632
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolvePapPath
+    offset: 672
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: byte*
+      name: a5
+  - name: ResolveTmbPath
+    offset: 680
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: byte*
+      name: a4
+  - name: ResolveMaterialPapPath
+    offset: 696
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned int
+      name: a5
+  - name: ResolveImcPath
+    offset: 712
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveMtrlPath
+    offset: 720
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: byte*
+      name: a5
+  - name: ResolveDecalPath
+    offset: 736
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveVfxPath
+    offset: 744
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned int*
+      name: a5
+  - name: ResolveEidPath
+    offset: 752
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+  - name: IsFreeCompanyCrestVisibleOnSlot
+    offset: 864
+    return_type: byte
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetFreeCompanyCrestVisibleOnSlot
+    offset: 872
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+  - name: SetFreeCompanyCrest
+    offset: 880
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: Client::Graphics::Kernel::Texture*
+      name: a2
   member_functions: []
 - type: Client::UI::Agent::AgentColorant
   name: AgentColorant
@@ -105080,6 +104777,378 @@ structs:
     offset: 152
   virtual_functions: []
   member_functions: []
+- type: Client::Graphics::Scene::Human
+  name: Human
+  namespace: Client.Graphics.Scene
+  union: False
+  size: 3264
+  fields:
+  - type: Client::Graphics::Scene::CharacterBase
+    name: CharacterBase
+    offset: 0
+    base: true
+  - type: Client::Game::Character::CustomizeData
+    name: Customize
+    offset: 2576
+  - type: unsigned int
+    name: SlotNeedsUpdateBitfield
+    offset: 2604
+  - type: Client::Game::Character::EquipmentModelId
+    name: Head
+    offset: 2608
+  - type: Client::Game::Character::EquipmentModelId
+    name: Top
+    offset: 2616
+  - type: Client::Game::Character::EquipmentModelId
+    name: Arms
+    offset: 2624
+  - type: Client::Game::Character::EquipmentModelId
+    name: Legs
+    offset: 2632
+  - type: Client::Game::Character::EquipmentModelId
+    name: Feet
+    offset: 2640
+  - type: Client::Game::Character::EquipmentModelId
+    name: Ear
+    offset: 2648
+  - type: Client::Game::Character::EquipmentModelId
+    name: Neck
+    offset: 2656
+  - type: Client::Game::Character::EquipmentModelId
+    name: Wrist
+    offset: 2664
+  - type: Client::Game::Character::EquipmentModelId
+    name: RFinger
+    offset: 2672
+  - type: Client::Game::Character::EquipmentModelId
+    name: LFinger
+    offset: 2680
+  - type: Client::Game::Character::EquipmentModelId
+    name: Glasses0
+    offset: 2688
+  - type: Client::Game::Character::EquipmentModelId
+    name: Glasses1
+    offset: 2696
+  - type: unsigned __int16
+    name: RaceSexId
+    offset: 2704
+  - type: unsigned __int16
+    name: HairId
+    offset: 2706
+  - type: unsigned __int16
+    name: FaceId
+    offset: 2708
+  - type: unsigned __int16
+    name: TailEarId
+    offset: 2710
+  - type: unsigned __int16
+    name: FurId
+    offset: 2712
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: HeadDecal
+    offset: 2792
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: TopDecal
+    offset: 2800
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: ArmsDecal
+    offset: 2808
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: LegsDecal
+    offset: 2816
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: FeetDecal
+    offset: 2824
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: EarDecal
+    offset: 2832
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: NeckDecal
+    offset: 2840
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: WristDecal
+    offset: 2848
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: RFingerDecal
+    offset: 2856
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: LFingerDecal
+    offset: 2864
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: CustomizeParameterCBuffer
+    offset: 3040
+  - type: Client::Graphics::Kernel::ConstantBuffer*
+    name: DecalColorCBuffer
+    offset: 3048
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: Decal
+    offset: 3056
+  - type: Client::System::Resource::Handle::TextureResourceHandle*
+    name: LegacyBodyDecal
+    offset: 3064
+  - type: Client::Graphics::Kernel::Texture*
+    name: FreeCompanyCrest
+    offset: 3072
+  - type: unsigned int
+    name: SlotFreeCompanyCrestBitfield
+    offset: 3080
+  - type: byte*
+    name: ChangedEquipData
+    offset: 3136
+  virtual_functions:
+  - name: GetObjectType
+    offset: 16
+    return_type: Client::Graphics::Scene::ObjectType
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+  - name: GetModelType
+    offset: 400
+    return_type: Client::Graphics::Scene::CharacterBase::ModelType
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+  - name: OnRenderModel
+    offset: 504
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: Client::Graphics::Render::Model*
+      name: a2
+  - name: OnRenderMaterial
+    offset: 512
+    return_type: __int64
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: Client::Graphics::Render::ModelRenderer::OnRenderMaterialParams*
+      name: a2
+  - name: FlagSlotForUpdate
+    offset: 552
+    return_type: unsigned __int64
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Client::Game::Character::EquipmentModelId*
+      name: a3
+  - name: ResolveRootPath
+    offset: 600
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+  - name: ResolveSklbPath
+    offset: 608
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveMdlPath
+    offset: 616
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveSkpPath
+    offset: 624
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolvePhybPath
+    offset: 632
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolvePapPath
+    offset: 672
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: byte*
+      name: a5
+  - name: ResolveTmbPath
+    offset: 680
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: byte*
+      name: a4
+  - name: ResolveMaterialPapPath
+    offset: 696
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned int
+      name: a5
+  - name: ResolveImcPath
+    offset: 712
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveMtrlPath
+    offset: 720
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: byte*
+      name: a5
+  - name: ResolveDecalPath
+    offset: 736
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: ResolveVfxPath
+    offset: 744
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned int*
+      name: a5
+  - name: ResolveEidPath
+    offset: 752
+    return_type: byte*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: a2
+    - type: unsigned __int64
+      name: a3
+  - name: IsFreeCompanyCrestVisibleOnSlot
+    offset: 864
+    return_type: byte
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetFreeCompanyCrestVisibleOnSlot
+    offset: 872
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+  - name: SetFreeCompanyCrest
+    offset: 880
+    return_type: void
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: Client::Graphics::Kernel::Texture*
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 0F 57 FF
+    return_type: byte
+    name: SetupVisor
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: unsigned __int16
+      name: modelId
+    - type: byte
+      name: visorState
+  - signature: E8 ?? ?? ?? ?? 66 44 89 A5 ?? ?? ?? ??
+    return_type: byte
+    name: UpdateDrawData
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: data
+    - type: byte
+      name: skipEquipment
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F9 48 8B EA 48 81 C1
+    return_type: byte
+    name: SetupFromCharacterData
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: data
 - type: Client::UI::AddonActionMenu
   name: AddonActionMenu
   namespace: Client.UI
@@ -106895,7 +106964,7 @@ structs:
   name: AddonChatLog
   namespace: Client.UI
   union: False
-  size: 2872
+  size: 1592
   fields:
   - type: Component::GUI::AtkUnitBase
     name: AtkUnitBase
@@ -141448,7 +141517,7 @@ structs:
   name: LayoutManager
   namespace: Client.LayoutEngine
   union: False
-  size: 2960
+  size: 3024
   fields:
   - type: Client::LayoutEngine::IManagerBase
     name: IManagerBase
