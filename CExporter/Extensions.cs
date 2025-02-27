@@ -39,7 +39,7 @@ public static partial class TypeExtensions {
                    type == typeof(ushort) || type == typeof(int) || type == typeof(uint) ||
                    type == typeof(long) || type == typeof(ulong) || type == typeof(float) ||
                    type == typeof(double) || type == typeof(decimal) || type == typeof(nint) ||
-                   type == typeof(nuint) || type == typeof(Half);
+                   type == typeof(nuint) || type == typeof(Half) || type == typeof(StringPointer);
         }
     }
 
