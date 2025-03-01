@@ -13610,6 +13610,10 @@ classes:
     vtbls:
       - ea: 0x1421301E8
         base: Client::Game::Event::EventHandler
+  Client::Game::Event::ContentEntryEventHandler: # 0x2C
+    vtbls:
+      - ea: 0x1421BDFE0
+        base: Client::Game::Event::EventHandler
   Client::Game::Event::VerminionEventHandler: # 0x2D
     vtbls:
       - ea: 0x141FC13C8
