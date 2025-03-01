@@ -87,7 +87,8 @@ public unsafe partial struct InventoryContainer {
     [FieldOffset(0x08)] public InventoryItem* Items;
     [FieldOffset(0x10)] public InventoryType Type;
     [FieldOffset(0x14)] public uint Size;
-    [FieldOffset(0x18)] public byte Loaded;
+    [FieldOffset(0x18), Obsolete("Use bool IsLoaded")] public byte Loaded;
+    [FieldOffset(0x18)] public bool IsLoaded;
 
     [VirtualFunction(0)]
     public partial void Dtor();
