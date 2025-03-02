@@ -78,77 +78,12 @@ if api is None:
         import ida_hexrays
         import ida_name
         import idc
+        from ida_wrapper import IdaInterface
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
         # noinspection PyUnresolvedReferences
-        class IdaApi(BaseApi):
-            def get_tinfo_from_type(self, raw_type):
-                """
-                Retrieve a tinfo_t from a raw type string.
-                """
-
-                type_tinfo = idaapi.tinfo_t()
-                ptr_tinfo = None
-
-                ptr_count = raw_type.count("*")
-                type = raw_type.rstrip("*")
-
-                if not type_tinfo.get_named_type(idaapi.get_idati(), type):
-                    terminated = type + ";"
-                    if (
-                        idaapi.parse_decl(
-                            type_tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL
-                        )
-                        is None
-                    ):
-                        print("! failed to parse type '{0}'".format(type))
-                        return None
-
-                if ptr_count > 0:
-                    ptr_tinfo = idaapi.tinfo_t()
-                    for i in range(ptr_count):
-                        if not ptr_tinfo.create_ptr(type_tinfo):
-                            print("! failed to create pointer")
-                            return None
-                else:
-                    ptr_tinfo = type_tinfo
-
-                return ptr_tinfo
-
-            def get_idc_type_from_ida_type(self, type):
-                # type: (str) -> int
-                if type == "unsigned __int8" or type == "__int8" or type == "bool":
-                    return ida_bytes.byte_flag()
-                elif type == "unsigned __int16" or type == "__int16":
-                    return ida_bytes.word_flag()
-                elif type == "unsigned __int32" or type == "__int32":
-                    return ida_bytes.dword_flag()
-                elif type == "unsigned __int64" or type == "__int64":
-                    return ida_bytes.qword_flag()
-                elif type == "float":
-                    return ida_bytes.float_flag()
-
-            def get_size_from_ida_type(self, type):
-                # type: (str) -> int
-                if type == "unsigned __int8" or type == "__int8" or type == "bool":
-                    return 1
-                elif type == "unsigned __int16" or type == "__int16":
-                    return 2
-                elif type == "unsigned __int32" or type == "__int32" or type == "float":
-                    return 4
-                elif type == "unsigned __int64" or type == "__int64":
-                    return 8
-
-            def search_binary(self, ea, pattern, flag):
-                return ida_search.find_binary(
-                    ea,
-                    flag & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea,
-                    pattern,
-                    16,
-                    flag,
-                )
-
+        class IdaApi(BaseApi, IdaInterface):
             def do_pattern(self, pattern, suffix, struct_parsed):
                 ea = 0
 
@@ -183,19 +118,27 @@ if api is None:
                             elif ins == 0x4:
                                 ea = ea + 7
                             else:
-                                raise Exception("Unknown instruction {0} on function {1}".format(hex(ins), hex(funcEa)))
+                                raise Exception(
+                                    "Unknown instruction {0} on function {1}".format(
+                                        hex(ins), hex(funcEa)
+                                    )
+                                )
                         elif ins == 0x1:
                             ea = ea + 4
                         elif ins == 0x28:
                             ea = ea + 9
                         else:
-                            raise Exception("Unknown instruction {0} on function {1}".format(hex(ins), hex(funcEa)))
+                            raise Exception(
+                                "Unknown instruction {0} on function {1}".format(
+                                    hex(ins), hex(funcEa)
+                                )
+                            )
                         ins = idc.get_operand_value(ea, 0)
-                    
+
                     sheetIdx = self.get_dword(ea + 1)
                     ea = funcEa
                     origName = idc.get_func_name(ea)
-                    
+
                     # don't rename any funcs that are already named
                     if origName[0:4] == "sub_":
                         if exd_map.get(sheetIdx) == None:
@@ -250,17 +193,6 @@ if api is None:
                                         % (fnName, ea)
                                     )
                                     continue
-
-                            # func_info = ida_typeinf.tinfo_t()
-                            # funcdata = ida_typeinf.func_type_data_t()
-                            # if not ida_nalt.get_tinfo(func_info, ea):
-                            #     print(func_info.is_funcptr() or func_info.is_func())
-                            #     print("Failed to get tinfo for %s @ %X" % (fnName, ea))
-                            #     continue
-
-                            # if not func_info.get_func_details(funcdata):
-                            #     print("Failed to get func details for %s @ %X" % (fnName, ea))
-                            #     continue
 
                             rettype = self.get_tinfo_from_type(
                                 f"{exd_struct_map[sheetIdx]} *"
@@ -319,18 +251,6 @@ if api is None:
 
             def parse_name(self, name):
                 return name
-
-            def get_next_func(self, ea, pattern, flag):
-                return ida_search.find_binary(
-                    ea,
-                    flag & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea,
-                    pattern,
-                    16,
-                    flag,
-                )
-
-            def get_dword(self, ea):
-                return ida_bytes.get_original_dword(ea)
 
             def set_func_name(self, ea, name, cmt):
                 ida_name.set_name(ea, name)

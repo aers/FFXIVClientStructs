@@ -3,6 +3,7 @@
 # @runtime Jython
 
 from yaml import load
+
 try:
     from yaml import CSafeLoader as Loader
 except ImportError:
@@ -11,111 +12,7 @@ except ImportError:
 import os
 from abc import abstractmethod
 from time import time
-
-
-class DefinedBase:
-    def __init__(self, name, type, namespace):
-        # type: (str, str, str) -> None
-        self.name = name
-        self.type = type
-        self.namespace = namespace
-
-
-class DefinedEnum(DefinedBase, object):
-    def __init__(self, name, type, underlying, namespace, values):
-        # type: (str, str, str, str, dict[str, int]) -> None
-        super(DefinedEnum, self).__init__(name, type, namespace)
-        self.name = name
-        self.type = type
-        self.values = values
-        self.underlying = underlying
-
-
-class DefinedFuncParam:
-    def __init__(self, name, type):
-        # type: (str, str) -> None
-        self.name = name
-        self.type = type
-
-
-class DefinedVFunc:
-    def __init__(self, name, return_type, offset, parameters):
-        # type: (str, str, int, list[DefinedFuncParam]) -> None
-        self.name = name
-        self.return_type = return_type
-        self.offset = offset
-        self.parameters = parameters
-
-
-class DefinedMemFunc:
-    def __init__(self, signature, return_type, parameters, name):
-        # type: (str, str, list[DefinedFuncParam], str) -> None
-        self.signature = signature
-        self.return_type = return_type
-        self.parameters = parameters
-        self.name = name
-
-
-class DefinedField(DefinedFuncParam, object):
-    def __init__(self, name, type, offset, base):
-        # type: (str, str, int, bool) -> None
-        super(DefinedField, self).__init__(name, type)
-        self.offset = offset
-        self.base = base
-
-
-class DefinedFuncField(DefinedField, object):
-    def __init__(self, name, type, offset, base, return_type, params):
-        # type: (str, str, int, bool, str | None, list[DefinedFuncParam] | None) -> None
-        super(DefinedFuncField, self).__init__(name, type, offset, base)
-        self.return_type = return_type
-        self.parameters = params
-
-class DefinedStaticMember:
-    def __init__(self, signature, relative_offsets, return_type, is_pointer):
-        # type: (str, list[int], str, bool) -> None
-        self.signature = signature
-        self.relative_offsets = relative_offsets
-        self.return_type = return_type
-        self.is_pointer = is_pointer
-
-class DefinedFixedField(DefinedField, object):
-    def __init__(self, name, type, offset, base, size):
-        # type: (str, str, int, bool, str | None) -> None
-        super(DefinedFixedField, self).__init__(name, type, offset, base)
-        self.size = size
-
-
-class DefinedStruct(DefinedBase, object):
-    def __init__(
-        self,
-        name,
-        type,
-        namespace,
-        fields,
-        size,
-        virtual_functions,
-        member_functions,
-        union,
-        static_member_functions,
-        static_members
-    ):
-        # type: (str, str, str, list[DefinedField], int | None, list[DefinedVFunc] | None, list[DefinedMemFunc], str, list[DefinedMemFunc] | None, list[DefinedStaticMember] | None) -> None
-        super(DefinedStruct, self).__init__(name, type, namespace)
-        self.fields = fields
-        self.size = size
-        self.virtual_functions = virtual_functions
-        self.member_functions = member_functions
-        self.union = bool(union)
-        self.static_member_functions = static_member_functions
-        self.static_members = static_members
-
-
-class DefinedExport:
-    def __init__(self, enums, structs):
-        # type: (list[DefinedEnum], list[DefinedStruct]) -> None
-        self.enums = enums
-        self.structs = structs
+from data_schema import *
 
 
 class BaseApi:
@@ -181,14 +78,14 @@ class BaseApi:
         """
         Updates a virtual function in the database.
         """
-        
+
     @abstractmethod
     def update_static_member(self, static_member, struct):
         # type: (DefinedStaticMember, DefinedStruct) -> None
         """
         Updates a static member in the database.
         """
-    
+
     @abstractmethod
     def should_update_member_func(self):
         # type: () -> bool
@@ -212,7 +109,9 @@ class BaseApi:
 
     def get_yaml(self):
         # type: () -> DefinedExport
-        dic = load(open(self.get_file_path), Loader=Loader) # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
+        dic = load(
+            open(self.get_file_path), Loader=Loader
+        )  # type: dict[str, dict[str, list[dict[str, str | int | list[dict[str, str | int]]]]]]
         enums = []
         structs = []
         for enum in dic["enums"]:
@@ -316,7 +215,12 @@ class BaseApi:
                 static_members = []
                 for sm in struct["static_members"]:
                     static_members.append(
-                        DefinedStaticMember(sm["signature"], sm["relative_follow_offsets"], sm["return_type"], sm["is_pointer"] if "is_pointer" in sm else False)
+                        DefinedStaticMember(
+                            sm["signature"],
+                            sm["relative_follow_offsets"],
+                            sm["return_type"],
+                            sm["is_pointer"] if "is_pointer" in sm else False,
+                        )
                     )
             if "size" in struct:
                 structs.append(
@@ -330,7 +234,7 @@ class BaseApi:
                         member_functions,
                         struct["union"],
                         static_member_functions,
-                        static_members
+                        static_members,
                     )
                 )
             else:
@@ -345,7 +249,7 @@ class BaseApi:
                         member_functions,
                         struct["union"],
                         static_member_functions,
-                        static_members
+                        static_members,
                     )
                 )
         return DefinedExport(enums, structs)
@@ -367,300 +271,15 @@ if api is None:
         import ida_funcs
         import ida_name
         import ida_kernwin
+        from ida_wrapper import IdaInterface
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
         # noinspection PyUnresolvedReferences
-        class IdaApi(BaseApi):
+        class IdaApi(BaseApi, IdaInterface):
             def __init__(self, full_padding):
                 # type: (bool) -> None
                 self.full_padding = full_padding
-
-            def get_idc_type_from_ida_type(self, type):
-                # type: (str) -> int
-                if (
-                    type == "unsigned __int8"
-                    or type == "__int8"
-                    or type == "bool"
-                    or type == "char"
-                    or type == "unsigned char"
-                    or type == "byte"
-                ):
-                    return ida_bytes.byte_flag()
-                elif type == "unsigned __int16" or type == "__int16":
-                    return ida_bytes.word_flag()
-                elif (
-                    type == "unsigned __int32"
-                    or type == "__int32"
-                    or type == "int"
-                    or type == "unsigned int"
-                    or type == "_DWORD"
-                ):
-                    return ida_bytes.dword_flag()
-                elif (
-                    type == "unsigned __int64"
-                    or type == "__int64"
-                    or type == "__fastcall"
-                    or type.endswith("*")
-                ):
-                    return ida_bytes.qword_flag()
-                elif type == "float":
-                    return ida_bytes.float_flag()
-                elif ida_struct.get_struc_id(type) == idaapi.BADADDR:
-                    return ida_bytes.enum_flag()
-                else:
-                    return ida_bytes.stru_flag()
-
-            def get_idc_type_from_size(self, size):
-                if size == 1:
-                    return ida_bytes.byte_flag()
-                elif size >= 2 and size < 4:
-                    return ida_bytes.word_flag()
-                elif size >= 4 and size < 8:
-                    return ida_bytes.dword_flag()
-                else:
-                    return ida_bytes.qword_flag()
-
-            def get_idc_type_from_size(self, size, offset=0):
-                if offset == 0:
-                    offset = size
-                if offset % 8 == 0 and size >= 8:
-                    return ida_bytes.qword_flag()
-                elif offset % 4 == 0 and size >= 4:
-                    return ida_bytes.dword_flag()
-                elif offset % 2 == 0 and size >= 2:
-                    return ida_bytes.word_flag()
-                else:
-                    return ida_bytes.byte_flag()
-
-            def get_size_from_idc_type(self, type):
-                # type: (int) -> int
-                if type == ida_bytes.byte_flag():
-                    return 1
-                elif type == ida_bytes.word_flag():
-                    return 2
-                elif type == ida_bytes.dword_flag():
-                    return 4
-                elif type == ida_bytes.qword_flag():
-                    return 8
-                elif type == ida_bytes.float_flag():
-                    return 4
-                else:
-                    return 0
-
-            def is_signed(self, type):
-                # type: (str) -> bool
-                if (
-                    type == "__int8"
-                    or type == "__int16"
-                    or type == "__int32"
-                    or type == "__int64"
-                    or type == "int"
-                    or type == "_DWORD"
-                ):
-                    return True
-                else:
-                    return False
-
-            def get_size_from_ida_type(self, type):
-                # type: (str) -> int
-                if (
-                    type == "unsigned __int8"
-                    or type == "__int8"
-                    or type == "bool"
-                    or type == "char"
-                    or type == "unsigned char"
-                    or type == "byte"
-                ):
-                    return 1
-                elif type == "unsigned __int16" or type == "__int16":
-                    return 2
-                elif (
-                    type == "unsigned __int32"
-                    or type == "__int32"
-                    or type == "int"
-                    or type == "unsigned int"
-                    or type == "_DWORD"
-                    or type == "float"
-                ):
-                    return 4
-                elif (
-                    type == "unsigned __int64"
-                    or type == "__int64"
-                    or type == "__fastcall"
-                    or type.endswith("*")
-                ):
-                    return 8
-                elif ida_struct.get_struc_id(type) == idaapi.BADADDR:
-                    return ida_enum.get_enum_width(ida_enum.get_enum(type))
-                else:
-                    return ida_struct.get_struc_size(ida_struct.get_struc_id(type))
-
-            def get_named_type(self, name):
-                # type: (str) -> idaapi.tinfo_t
-                tinfo = ida_typeinf.tinfo_t()
-                clean_name = self.clean_struct_name(name)
-                if (
-                    ida_struct.get_struc_id(clean_name)
-                    != idaapi.BADADDR
-                    or 
-                    ida_enum.get_enum(clean_name)
-                    != idaapi.BADADDR
-                ):
-                    if not tinfo.get_named_type(idaapi.get_idati(), clean_name):
-                        raise ValueError("{0} not found in IDA database".format(clean_name))
-                        
-                    return tinfo
-
-                if name == "void":
-                    idaapi.parse_decl(
-                        tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL
-                    )
-                    return tinfo.get_rettype()
-
-                terminated = name + ";"
-                idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
-
-                tinfo_str = tinfo.dstr()
-                if tinfo_str == name or tinfo_str == clean_name:
-                    return tinfo
-
-                terminated = clean_name + ";"
-                idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
-                return tinfo
-
-            def get_tinfo_from_type(self, raw_type, array_size=0):
-                # type: (str, int) -> idaapi.tinfo_t
-                """
-                Retrieve a tinfo_t from a raw type string.
-                """
-
-                type = raw_type.rstrip("*")
-                ptr_count = len(raw_type) - len(type)
-
-                type_tinfo = self.get_named_type(type)
-
-                ptr_tinfo = None
-                if ptr_count > 0:
-                    for i in range(ptr_count):
-                        ptr_tinfo = idaapi.tinfo_t()
-                        if not ptr_tinfo.create_ptr(type_tinfo):
-                            print("! failed to create pointer")
-                            return None
-                        type_tinfo = ptr_tinfo
-                else:
-                    ptr_tinfo = type_tinfo
-
-                if array_size > 0:
-                    array_tinfo = idaapi.tinfo_t()
-                    if not array_tinfo.create_array(ptr_tinfo, array_size):
-                        print("! failed to create array")
-                        return None
-
-                    ptr_tinfo = array_tinfo
-
-                return ptr_tinfo
-
-            def get_tinfo_from_func_data(self, data):
-                # type: (DefinedFuncField) -> idaapi.tinfo_t
-                tinfo = ida_typeinf.tinfo_t()
-                func_data = ida_typeinf.func_type_data_t()
-                func_data.cc = ida_typeinf.CM_CC_FASTCALL
-                func_data.rettype = self.get_tinfo_from_type(data.return_type)
-                for param in data.parameters:
-                    arg = ida_typeinf.funcarg_t()
-                    arg.type = self.get_tinfo_from_type(param.type)
-                    arg.name = param.name
-                    func_data.push_back(arg)
-
-                tinfo.create_func(func_data)
-                return tinfo
-
-            def get_struct_opinfo_from_type(self, raw_type):
-                # type: (str) -> ida_nalt.opinfo_t
-                opinf = ida_nalt.opinfo_t()
-                opinf.tid = ida_struct.get_struc_id(raw_type)
-                return opinf
-
-            def get_enum_opinfo_from_type(self, raw_type):
-                # type: (str) -> ida_nalt.opinfo_t
-                opinf = ida_nalt.opinfo_t()
-                opinf.ec.tid = ida_enum.get_enum(raw_type)
-                return opinf
-
-            def clean_name(self, name):
-                # type: (str) -> str
-                return name
-
-            def clean_struct_name(self, name):
-                # type: (str) -> str
-                if name == "Tm":
-                    return "tm" # tm is a keyword in IDA for the time struct but C# exports it as Tm
-                return (
-                    name.replace(" ", "")
-                    .replace("unsigned", "u")
-                    .replace("__int64", "long")
-                    .replace("__int32", "int")
-                    .replace("__int16", "short")
-                    .replace("__int8", "byte")
-                )
-
-            def search_binary(self, ea, pattern, flag):
-                # type: (int, str, int) -> int
-                return ida_search.find_binary(
-                    ea,
-                    flag & 1 and ida_ida.cvar.inf.max_ea or ida_ida.cvar.inf.min_ea,
-                    pattern,
-                    16,
-                    flag,
-                )
-                
-            def get_dword(self, ea):
-                return ida_bytes.get_original_dword(ea)
-
-            def get_func_ea_by_name(self, name):
-                # type: (str) -> int
-                return ida_name.get_name_ea(0, name)
-
-            def get_func_ea_by_sig(self, pattern):
-                # type: (str) -> int
-                ea = self.search_binary(0, pattern, ida_search.SEARCH_DOWN)
-
-                if ida_funcs.get_func(ea) is None:
-                    finf = ida_funcs.func_t()
-                    finf.start_ea = ea
-                    finf.end_ea = idc.BADADDR
-                    ida_funcs.add_func_ex(finf)
-
-                if ida_funcs.get_func(ea) is None:
-                    return idc.BADADDR
-
-                if ida_funcs.get_func(ea).start_ea == ea:
-                    return ea
-                mnem = idc.print_insn_mnem(ea)
-                if not mnem:
-                    return idc.BADADDR
-
-                opType0 = idc.get_operand_type(ea, 0)
-                if mnem == "jmp" or mnem == "call" or mnem[0] == "j":
-                    if opType0 != idc.o_near and opType0 != idc.o_mem:
-                        print(
-                            "Error: Can't follow opType0 {0}".format(
-                                self.opTypeAsName(opType0)
-                            )
-                        )
-                        return idc.BADADDR
-                    return idc.get_operand_value(ea, 0)
-
-                if idc.next_head(ea) == ea + idc.get_item_size(ea) and idc.is_flow(
-                    idc.get_full_flags(idc.next_head(ea))
-                ):
-                    return idc.next_head(ea)
-
-            def opTypeAsName(self, n):
-                for item in [x for x in dir(idc) if x.startswith("o_")]:
-                    if getattr(idc, item) == n:
-                        return item
 
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
@@ -779,7 +398,9 @@ if api is None:
 
                     field_is_base = field.base and contiguous_fields
                     field_name = (
-                        field.name if not field_is_base else "baseclass_{0:X}".format(offset)
+                        field.name
+                        if not field_is_base
+                        else "baseclass_{0:X}".format(offset)
                     )
                     field_type = self.clean_name(field.type)
                     if field_type == "__fastcall":
@@ -957,12 +578,18 @@ if api is None:
                     func_data.push_back(arg)
                 tif.create_func(func_data)
                 ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
-            
+
             def update_static_member(self, static_member, struct):
                 # type: (DefinedStaticMember, DefinedStruct) -> None
-                ea = self.search_binary(0, static_member.signature, ida_search.SEARCH_DOWN)
+                ea = self.search_binary(
+                    0, static_member.signature, ida_search.SEARCH_DOWN
+                )
                 if ea == idc.BADADDR:
-                    print("Error: {0} not found something is wrong".format(static_member.signature))
+                    print(
+                        "Error: {0} not found something is wrong".format(
+                            static_member.signature
+                        )
+                    )
                     return
                 for follows in static_member.relative_offsets:
                     ea = ea + follows
@@ -972,11 +599,20 @@ if api is None:
                 return_type = static_member.return_type
                 if static_member.is_pointer:
                     return_type = return_type + "*"
-                ida_typeinf.apply_tinfo(ea, self.get_tinfo_from_type(return_type), ida_typeinf.TINFO_DEFINITE)
+                ida_typeinf.apply_tinfo(
+                    ea,
+                    self.get_tinfo_from_type(return_type),
+                    ida_typeinf.TINFO_DEFINITE,
+                )
                 if static_member.is_pointer:
-                    ida_name.set_name(ea, "g_{0}_{1}".format(self.clean_name(struct.type), "PtrInstance"))
+                    ida_name.set_name(
+                        ea,
+                        "g_{0}_{1}".format(self.clean_name(struct.type), "PtrInstance"),
+                    )
                 else:
-                    ida_name.set_name(ea, "g_{0}_{1}".format(self.clean_name(struct.type), "Instance"))
+                    ida_name.set_name(
+                        ea, "g_{0}_{1}".format(self.clean_name(struct.type), "Instance")
+                    )
 
             def should_update_member_func(self):
                 return (
@@ -1385,7 +1021,7 @@ if api is None:
                     False,
                     SourceType.USER_DEFINED,
                 )
-            
+
             def update_static_member(self, static_member, struct):
                 # type: (DefinedStaticMember, DefinedStruct) -> None
                 pass
@@ -1589,7 +1225,7 @@ if api is None:
                         if new_param_type is not None:
                             param_var.type = new_param_type
                         param_var.name = param.name
-            
+
             def update_static_member(self, static_member, struct):
                 # type: (DefinedStaticMember, DefinedStruct) -> None
                 pass
@@ -1684,7 +1320,7 @@ def run():
                 )
                 for member_func in struct.member_functions:
                     api.update_member_func(member_func, struct)
-            
+
             if struct.static_member_functions:
                 print(
                     "{0} Updating static member functions for {1}".format(
@@ -1693,7 +1329,7 @@ def run():
                 )
                 for member_func in struct.static_member_functions:
                     api.update_member_func(member_func, struct)
-            
+
             if struct.static_members:
                 print(
                     "{0} Updating static members for {1}".format(
