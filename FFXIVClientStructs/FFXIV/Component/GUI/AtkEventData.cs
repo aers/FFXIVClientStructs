@@ -31,6 +31,8 @@ public partial struct AtkEventData {
             Ctrl = 1 << 0,
             Alt = 1 << 1,
             Shift = 1 << 2,
+
+            Dragging = 1 << 4,
         }
     }
 
