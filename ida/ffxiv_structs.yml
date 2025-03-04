@@ -3524,6 +3524,7 @@ enums:
     "Ctrl": 1
     "Alt": 2
     "Shift": 4
+    "Dragging": 16
 - type: Client::UI::UIObjectKind
   name: UIObjectKind
   underlying: byte
@@ -6999,7 +7000,7 @@ structs:
     name: Size
     offset: 20
   - type: byte
-    name: Loaded
+    name: IsLoaded
     offset: 24
   virtual_functions:
   - name: Dtor
@@ -7196,7 +7197,7 @@ structs:
       name: this
     - type: byte
       name: grandcompanyId
-  - signature: E8 ?? ?? ?? ?? 8B F0 8D 4F FE
+  - signature: E8 ?? ?? ?? ?? 8B CD 2B F0
     return_type: unsigned int
     name: GetTomestoneCount
     parameters:
@@ -13344,6 +13345,38 @@ structs:
     name: ActionStatus
     offset: 26
   member_functions: []
+- type: Client::UI::Agent::AgentDawnInterface::DawnExpansionEntry
+  name: DawnExpansionEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 16
+  fields:
+  - type: byte
+    name: ExVersion
+    offset: 0
+  - type: byte
+    name: ListOffset
+    offset: 1
+  - type: byte
+    name: ContentEntries
+    offset: 2
+  - type: byte*
+    name: Name
+    offset: 8
+  member_functions: []
+- type: Client::UI::Agent::AgentDawnInterface::DawnPartyMember
+  name: DawnPartyMember
+  namespace: Client.UI.Agent
+  union: False
+  size: 2
+  fields:
+  - type: byte
+    name: MemberIndex
+    offset: 0
+  - type: byte
+    name: Role
+    offset: 1
+  member_functions: []
 - type: Client::UI::Agent::AgentDeepDungeonMapData
   name: AgentDeepDungeonMapData
   namespace: Client.UI.Agent
@@ -19084,6 +19117,12 @@ structs:
     parameters:
     - type: __int64
       name: row
+  - signature: E8 ?? ?? ?? ?? 49 8B 5E ?? BA 05 00 00 00
+    return_type: unsigned int
+    name: GetRoleForClassJobId
+    parameters:
+    - type: unsigned int
+      name: classJobId
 - type: Component::GUI::AtkAddonControl::ChildAddonInfo
   name: ChildAddonInfo
   namespace: Component.GUI
@@ -19523,7 +19562,7 @@ structs:
     name: WheelDirection
     offset: 4
   - type: byte
-    name: IsRightClick
+    name: ButtonId
     offset: 6
   - type: Component::GUI::AtkEventData::AtkMouseData::ModifierFlag
     name: Modifier
@@ -24754,7 +24793,7 @@ structs:
     size: 10
     is_string: False
   - type: byte
-    name: Ready
+    name: IsReady
     offset: 730
   - type: byte
     name: MaxRetainerEntitlement
@@ -30743,6 +30782,235 @@ structs:
   - type: Client::System::String::Utf8String
     name: Name
     offset: 8
+  member_functions: []
+- type: Client::UI::Agent::AgentDawnInterface::DawnContentEntry
+  name: DawnContentEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 240
+  fields:
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 0
+  - type: Client::System::String::Utf8String
+    name: LevelText
+    offset: 104
+  - type: unsigned int
+    name: ContentFinderConditionId
+    offset: 208
+  - type: unsigned __int16
+    name: AvgItemLevel
+    offset: 220
+  - type: unsigned __int16
+    name: ItemLevelSync
+    offset: 222
+  - type: unsigned __int16
+    name: SortOrder
+    offset: 224
+  - type: byte
+    name: DawnContentId
+    offset: 226
+  - type: byte
+    name: Level
+    offset: 227
+  - type: byte
+    name: MemberCount
+    offset: 228
+  - type: byte
+    name: ExVersion
+    offset: 229
+  - type: byte
+    name: IsSideQuest
+    offset: 230
+  - type: byte
+    name: Index
+    offset: 231
+  - type: byte
+    name: IsMemberSelectionAvailable
+    offset: 232
+  - type: byte
+    name: IsTrustAvailable
+    offset: 233
+  - type: byte
+    name: IsNotYetSupported
+    offset: 234
+  member_functions: []
+- type: Client::UI::Agent::AgentDawnInterface::DawnMemberEntry
+  name: DawnMemberEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 408
+  fields:
+  - type: byte
+    name: MemberId
+    offset: 0
+  - type: byte
+    name: MemberIdVariants
+    offset: 1
+    size: 3
+    is_string: False
+  - type: byte
+    name: DefaultMemberId
+    offset: 4
+  - type: byte
+    name: Roles
+    offset: 5
+  - type: byte
+    name: BlockedRoles
+    offset: 6
+  - type: byte
+    name: ClassJob
+    offset: 7
+  - type: byte
+    name: ClassJobVariants
+    offset: 8
+    size: 3
+    is_string: False
+  - type: byte
+    name: ClassJobIcon
+    offset: 11
+  - type: byte
+    name: ClassJobIconVariants
+    offset: 12
+    size: 3
+    is_string: False
+  - type: byte
+    name: CurrentGlamour
+    offset: 15
+  - type: unsigned __int16
+    name: Level
+    offset: 20
+  - type: byte
+    name: Flags
+    offset: 22
+  - type: unsigned int
+    name: Exp
+    offset: 24
+  - type: unsigned int
+    name: MaxExp
+    offset: 28
+  - type: unsigned int
+    name: SelectImages
+    offset: 32
+    size: 4
+    is_string: False
+  - type: unsigned int
+    name: PortraitImages
+    offset: 48
+    size: 4
+    is_string: False
+  - type: unsigned int
+    name: GlamourUnlocks
+    offset: 64
+    size: 4
+    is_string: False
+  - type: byte
+    name: Glamours
+    offset: 80
+    size: 4
+    is_string: False
+  - type: byte
+    name: GlamourCount
+    offset: 84
+  - type: unsigned int
+    name: VoiceLine
+    offset: 88
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 96
+  - type: Client::System::String::Utf8String
+    name: ClassName
+    offset: 200
+  - type: Client::System::String::Utf8String
+    name: ClassNameJapanese
+    offset: 304
+  member_functions: []
+- type: Client::UI::Agent::AgentDawnInterface::DawnPartyData
+  name: DawnPartyData
+  namespace: Client.UI.Agent
+  union: False
+  size: 16
+  fields:
+  - type: byte
+    name: PlayerClassJobId
+    offset: 0
+  - type: byte
+    name: MemberCount
+    offset: 1
+  - type: Client::UI::Agent::AgentDawnInterface::DawnPartyMember
+    name: PartyMembers
+    offset: 2
+    size: 7
+    is_string: False
+  member_functions:
+  - signature: 48 89 5C 24 ?? 0F B6 59 ?? 45 32 C9
+    return_type: byte
+    name: IsPartyMember
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface::DawnPartyData*
+      name: this
+    - type: byte
+      name: memberIndex
+    - type: byte*
+      name: outRole
+  - signature: 48 89 5C 24 ?? 48 89 7C 24 ?? 44 0F B6 51 ?? 32 C0
+    return_type: byte
+    name: AddMember
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface::DawnPartyData*
+      name: this
+    - type: byte
+      name: memberIndex
+    - type: Client::UI::Agent::AgentDawnInterface::DawnMemberEntry*
+      name: member
+  - signature: 32 C0 0F 1F 40 00 66 66 0F 1F 84 ?? 00 00 00 00 44 0F B6 C0 42 38 54
+    return_type: void
+    name: RemoveMember
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface::DawnPartyData*
+      name: this
+    - type: byte
+      name: memberIndex
+  - signature: 48 8D 41 ?? B9 07 00 00 00 0F 1F 80 00 00 00 00 C6 00 FF
+    return_type: void
+    name: ClearParty
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface::DawnPartyData*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B6 F0 48 8B 7B
+    return_type: byte
+    name: CanAddMember
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface::DawnPartyData*
+      name: this
+    - type: byte
+      name: memberIndex
+    - type: Client::UI::Agent::AgentDawnInterface::DawnMemberEntry*
+      name: member
+  - signature: 44 0F B6 41 ?? 32 C0 45 84 C0 74 ?? 0F 1F 40 00
+    return_type: byte
+    name: IsFull
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface::DawnPartyData*
+      name: this
+- type: Client::UI::Agent::AgentDawnStory::DawnRewardItemEntry
+  name: DawnRewardItemEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 120
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: unsigned int
+    name: IconId
+    offset: 4
+  - type: unsigned int
+    name: Amount
+    offset: 8
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 16
   member_functions: []
 - type: Client::UI::Agent::AgentDeepDungeonInspect::AgentDeepDungeonInspectData
   name: AgentDeepDungeonInspectData
@@ -44223,6 +44491,162 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentDawnInterface
+  name: AgentDawnInterface
+  namespace: Client.UI.Agent
+  union: False
+  size: 48
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: SelectedDawnContentId
+    offset: 40
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 85 D2 74 ?? 53 48 83 EC 50
+    return_type: void
+    name: PlayVoiceLine
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+    - type: unsigned int
+      name: id
+- type: Client::UI::Agent::AgentDawnInterface::DawnMemberData
+  name: DawnMemberData
+  namespace: Client.UI.Agent
+  union: False
+  size: 391848
+  fields:
+  - type: byte
+    name: DisplayMemberIndex
+    offset: 0
+  - type: byte
+    name: CurrentMembersIndex
+    offset: 2
+  - type: byte
+    name: MemberEntriesCount
+    offset: 3
+  - type: byte
+    name: MemberCounts
+    offset: 5
+    size: 80
+    is_string: False
+  - type: byte
+    name: MemberFlags
+    offset: 85
+    size: 80
+    is_string: False
+  - type: Client::UI::Agent::AgentDawnInterface::DawnMemberEntry
+    name: Members
+    offset: 168
+    size: 960
+    is_string: False
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 3A E8 72
+    return_type: byte
+    name: GetMemberCount
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface::DawnMemberData*
+      name: this
+    - type: byte
+      name: index
+  - signature: E8 ?? ?? ?? ?? 40 3A 2C
+    return_type: Client::UI::Agent::AgentDawnInterface::DawnMemberEntry*
+    name: GetMembers
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface::DawnMemberData*
+      name: this
+    - type: byte
+      name: index
 - type: Client::UI::Agent::AgentDeepDungeonInspect
   name: AgentDeepDungeonInspect
   namespace: Client.UI.Agent
@@ -54715,6 +55139,294 @@ structs:
     name: Unk21C
     offset: 540
   member_functions: []
+- type: Client::UI::Agent::AgentDawn
+  name: AgentDawn
+  namespace: Client.UI.Agent
+  union: False
+  size: 216
+  fields:
+  - type: Client::UI::Agent::AgentDawnInterface
+    name: AgentDawnInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentDawn::DawnData*
+    name: Data
+    offset: 48
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 40 56 48 83 EC 70 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 48 8B F1 E8
+    return_type: void
+    name: RegisterForDuty
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? C6 46 ?? 00 E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 49 8B 4E
+    return_type: void
+    name: SelectContentEntry
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+    - type: unsigned int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 80 FB 01 75 ?? 41 C6 46 ?? 00 49 8B CE
+    return_type: void
+    name: SetupDefaultParty
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 49 8B 46 ?? FE 00
+    return_type: void
+    name: UpdateAddon
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+- type: Client::UI::Agent::AgentDawnInterface::DawnContentData
+  name: DawnContentData
+  namespace: Client.UI.Agent
+  union: False
+  size: 19952
+  fields:
+  - type: byte
+    name: ContentEntryCount
+    offset: 0
+  - type: byte
+    name: SelectedContentEntry
+    offset: 1
+  - type: byte
+    name: ExpansionCount
+    offset: 2
+  - type: byte
+    name: SelectedExpansion
+    offset: 3
+  - type: Client::UI::Agent::AgentDawnInterface::DawnExpansionEntry
+    name: Expansions
+    offset: 8
+    size: 5
+    is_string: False
+  - type: Client::UI::Agent::AgentDawnInterface::DawnContentEntry
+    name: ContentEntries
+    offset: 104
+    size: 80
+    is_string: False
+  - type: Client::UI::Agent::AgentDawnInterface::DawnContentEntry*
+    name: ContentList
+    offset: 19304
+    size: 80
+    is_string: False
+  member_functions: []
+- type: Client::UI::Agent::AgentDawnStory
+  name: AgentDawnStory
+  namespace: Client.UI.Agent
+  union: False
+  size: 56
+  fields:
+  - type: Client::UI::Agent::AgentDawnInterface
+    name: AgentDawnInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentDawnStory::DawnStoryData*
+    name: Data
+    offset: 48
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 40 57 48 83 EC 30 48 8B 05 ?? ?? ?? ?? 48 33 C4
+    return_type: void
+    name: RegisterForDuty
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? C6 46 ?? 00 E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 0F B6 D0
+    return_type: void
+    name: SelectContentEntry
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+    - type: unsigned int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 40 80 FE 01
+    return_type: void
+    name: SetupDefaultParty
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+  - signature: E8 ?? ?? ?? ?? C6 46 ?? 00 E9 ?? ?? ?? ?? 32 C9
+    return_type: void
+    name: UpdateAddon
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
 - type: Client::UI::Agent::AgentFieldMarker
   name: AgentFieldMarker
   namespace: Client.UI.Agent
@@ -80748,6 +81460,33 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentDawn::DawnData
+  name: DawnData
+  namespace: Client.UI.Agent
+  union: False
+  size: 415928
+  fields:
+  - type: Client::UI::Agent::AgentDawnInterface::DawnContentData
+    name: ContentData
+    offset: 8
+  - type: Client::UI::Agent::AgentDawnInterface::DawnMemberData
+    name: MemberData
+    offset: 19960
+  - type: Client::UI::Agent::AgentDawnInterface::DawnPartyData
+    name: PartyData
+    offset: 411808
+  - type: Component::GUI::AtkValue
+    name: AtkValues
+    offset: 411824
+    size: 256
+    is_string: False
+  - type: unsigned int
+    name: ModalAddonId
+    offset: 415920
+  - type: unsigned int
+    name: Flags
+    offset: 415924
+  member_functions: []
 - type: Client::UI::Agent::AgentGearSet
   name: AgentGearSet
   namespace: Client.UI.Agent
@@ -103936,6 +104675,41 @@ structs:
     - type: Client::UI::AddonTeleport*
       name: this
   member_functions: []
+- type: Client::UI::Agent::AgentDawnStory::DawnStoryData
+  name: DawnStoryData
+  namespace: Client.UI.Agent
+  union: False
+  size: 422080
+  fields:
+  - type: Client::UI::Agent::AgentDawnInterface::DawnContentData
+    name: ContentData
+    offset: 8
+  - type: Client::UI::Agent::AgentDawnInterface::DawnMemberData
+    name: MemberData
+    offset: 19960
+  - type: Client::UI::Agent::AgentDawnInterface::DawnPartyData
+    name: PartyData
+    offset: 411808
+  - type: unsigned int
+    name: RewardItemCount
+    offset: 411824
+  - type: Client::UI::Agent::AgentDawnStory::DawnRewardItemEntry
+    name: RewardItems
+    offset: 411832
+    size: 2
+    is_string: False
+  - type: Component::GUI::AtkValue
+    name: AtkValues
+    offset: 412072
+    size: 489
+    is_string: False
+  - type: unsigned int
+    name: ModalAddonId
+    offset: 419896
+  - type: unsigned int
+    name: Flags
+    offset: 419900
+  member_functions: []
 - type: Client::UI::Agent::AgentHUD
   name: AgentHUD
   namespace: Client.UI.Agent
@@ -104522,7 +105296,7 @@ structs:
     parameters:
     - type: Client::UI::Misc::CharaViewPortrait*
       name: this
-  - signature: E8 ?? ?? ?? ?? 0F B7 47 10
+  - signature: E8 ?? ?? ?? ?? 0F B7 47 10 41 B9
     return_type: void
     name: SetCameraPosition
     parameters:
@@ -143509,6 +144283,30 @@ structs:
       name: style
     - type: int
       name: duration
+  - signature: 40 56 41 56 41 57 48 81 EC A0 00 00 00
+    return_type: byte
+    name: IsDawnSupported
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: unsigned int
+      name: contentFinderCondition
+  - signature: E8 ?? ?? ?? ?? C6 46 ?? 00 E9 ?? ?? ?? ?? 49 8B 46
+    return_type: void
+    name: OpenDawn
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: unsigned int
+      name: contentFinderCondition
+  - signature: E8 ?? ?? ?? ?? EB ?? 45 33 C9 49 8D 56 ?? 41 B0 01
+    return_type: void
+    name: OpenDawnStory
+    parameters:
+    - type: Client::UI::RaptureAtkModule*
+      name: this
+    - type: unsigned int
+      name: contentFinderCondition
 - type: Client::Game::UI::UIState
   name: UIState
   namespace: Client.Game.UI
