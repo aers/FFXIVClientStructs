@@ -95,6 +95,15 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73"), GenerateStringOverloads]
     public partial void ShowTextGimmickHint(byte* text, TextGimmickHintStyle style, int duration);
 
+    [MemberFunction("40 56 41 56 41 57 48 81 EC A0 00 00 00")]
+    public partial byte IsDawnSupported(uint contentFinderCondition); // return & 1 = dawnstory, & 2 = dawn
+
+    [MemberFunction("E8 ?? ?? ?? ?? C6 46 ?? 00 E9 ?? ?? ?? ?? 49 8B 46")]
+    public partial void OpenDawn(uint contentFinderCondition);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C9 49 8D 56 ?? 41 B0 01")]
+    public partial void OpenDawnStory(uint contentFinderCondition);
+
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
 
