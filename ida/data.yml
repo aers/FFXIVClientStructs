@@ -1421,7 +1421,7 @@ classes:
       0x140818F30: GetGil
       0x140819020: GetCompanySeals
       0x1408190A0: GetMaxCompanySeals
-#fail       0x140881360: GetTomestoneCount
+      0x140819210: GetTomestoneCount
       0x140819410: GetWolfMarks
       0x140819480: GetAlliedSeals
       0x1408194F0: GetGoldSaucerCoin
