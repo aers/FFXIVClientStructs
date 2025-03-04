@@ -9,7 +9,8 @@ public unsafe partial struct RetainerManager {
 
     [FieldOffset(0x000), FixedSizeArray] internal FixedSizeArray10<Retainer> _retainers;
     [FieldOffset(0x2D0), FixedSizeArray] internal FixedSizeArray10<byte> _displayOrder;
-    [FieldOffset(0x2DA)] public byte Ready;
+    [FieldOffset(0x2DA), Obsolete("Use bool IsReady")] public byte Ready;
+    [FieldOffset(0x2DA)] public bool IsReady;
     [FieldOffset(0x2DB)] public byte MaxRetainerEntitlement;
 
     /// <summary>
