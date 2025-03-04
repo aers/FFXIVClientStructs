@@ -4039,6 +4039,9 @@ classes:
       0x1400C27E0: OpenSelectOk2
       0x1400C5FC0: ShowScreenImage
       0x1400C9080: ShowTextGimmickHint
+      0x1400D1580: OpenDawnStory
+      0x1400D15B0: OpenDawn
+      0x1400D1670: IsDawnSupported
       0x1400D72B0: OnUpdate_Nameplates
       0x1400D8B10: IncRefNumberArrayData
       0x1400D8B60: IncRefStringArrayData
@@ -6269,6 +6272,7 @@ classes:
       0x14059D8C0: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
       0x1407E6BF0: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x1407CE740: GetItemRowById
+      0x1407CFDE0: GetRoleForClassJobId
   Component::Exd::Sheets::BannerCondition:
     funcs:
       0x1409659F0: GetUnlockState
@@ -11574,19 +11578,53 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A1F870: ctor
+  Client::UI::Agent::AgentDawnInterface::DawnPartyData:
+    funcs:
+      0x140BAE1E0: IsPartyMember
+      0x140BAE230: AddMember
+      0x140BAE2D0: AddMember2
+      0x140BAE3F0: CanAddMember
+      0x140BAE4B0: RemoveMember
+      0x140BAE4F0: ClearParty
+      0x140BAE520: IsFull
+  Client::UI::Agent::AgentDawnInterface::DawnMemberData:
+    funcs:
+      0x140C185C0: GetMembers
+      0x140C18600: GetMemberCount
+  Client::UI::Agent::AgentDawnInterface:
+    vtbls:
+      - ea: 0x141FB0170
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BAEDF0: PlayVoiceLine
   Client::UI::Agent::AgentDawn:
     vtbls:
       - ea: 0x141FB0200
-        base: Client::UI::Agent::AgentInterface
+        base: Client::UI::Agent::AgentDawnInterface
     funcs:
       0x140BAF500: ctor
       0x140BAF5E0: Finalizer
+      0x140BB0A00: UpdateAddon
+      0x140BB1890: RegisterForDuty
+      0x140BB2100: SetupDefaultParty
+      0x140BB2260: SelectContentEntry
+      0x140BB2690: GetMemberGlamour
+      0x140BB2760: SetMemberGlamour
+      0x140BB2840: OpenHelp
   Client::UI::Agent::AgentDawnStory:
     vtbls:
       - ea: 0x141FB0280
-        base: Client::UI::Agent::AgentDawn
+        base: Client::UI::Agent::AgentDawnInterface
     funcs:
       0x140BB2B40: ctor
+      0x140BB3FC0: UpdateAddon
+      0x140BB4C00: UpdatePartySelectAddon
+      0x140BB5310: RegisterForDuty
+      0x140BB59C0: SetupDefaultParty
+      0x140BB5A70: SelectContentEntry
+      0x140BB5CB0: OpenHelp
+      0x140BB5F90: OpenPartySelect
+      0x140BB6B20: AddRewardItem
   Client::UI::Agent::AgentHousingCatalogPreview:
     vtbls:
       - ea: 0x142084D20
