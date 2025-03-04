@@ -74,7 +74,7 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? EB 89 48 8B 8F")]
     public partial void ResetCamera(); // sets position, target, zoom etc.
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 47 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 47 10 41 B9")]
     public partial void SetCameraPosition(HalfVector4* cam, HalfVector4* target);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 97 ?? ?? ?? ?? 0F 28 D0")]
