@@ -6,7 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentDawnInterface {
-    [FieldOffset(0x28)] public uint SelectedDawnContentId;
+    [FieldOffset(0x28)] public byte SelectedContentId;
+    [FieldOffset(0x28), Obsolete("Use SelectedContentId instead", true)] public uint SelectedDawnContentId;
 
     [MemberFunction("85 D2 74 ?? 53 48 83 EC 50")]
     public partial void PlayVoiceLine(uint id);
