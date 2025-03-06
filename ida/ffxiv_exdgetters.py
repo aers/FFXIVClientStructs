@@ -42,11 +42,6 @@ class BaseApi:
         pass
 
     @abstractmethod
-    def get_dword(self, ea):
-        # type: (int) -> int
-        pass
-
-    @abstractmethod
     def set_func_name(self, ea, name, cmt):
         # type: (int, str, str) -> None
         pass
@@ -135,15 +130,16 @@ if api is None:
                             )
                         ins = idc.get_operand_value(ea, 0)
 
-                    sheetIdx = self.get_dword(ea + 1)
+                    sheetEa = ea + 1
                     ea = funcEa
+                    sheetIdx = self.get_dword(sheetEa)
                     origName = idc.get_func_name(ea)
 
                     # don't rename any funcs that are already named
                     if origName[0:4] == "sub_":
                         if exd_map.get(sheetIdx) == None:
                             print(
-                                f"Func @ 0x{ea:X} references unknown sheet {sheetIdx}!"
+                                f"Func @ 0x{ea:X} references unknown sheet {sheetIdx}! sheet dword offset = 0x{sheetEa:X}"
                             )
                             continue
 
