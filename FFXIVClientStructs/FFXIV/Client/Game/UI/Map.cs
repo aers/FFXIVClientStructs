@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
@@ -21,6 +22,9 @@ public unsafe partial struct Map {
     [FieldOffset(0x3EA0)] public StdList<MarkerInfo> TripleTriadMarkers;
     [FieldOffset(0x3EB0)] public StdList<MarkerInfo> CustomTalkMarkers;
     [FieldOffset(0x3F58)] public StdList<MarkerInfo> GemstoneTraderMarkers;
+
+    [MemberFunction("83 FA 3E 0F 83")]
+    public partial void AddHousingMarker(uint index, uint levelId, Vector3* pos, ushort territoryTypeId, int iconId);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
