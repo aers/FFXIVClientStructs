@@ -24,7 +24,7 @@ public unsafe partial struct GameMain {
     [FieldOffset(0x4098)] public uint TerritoryLoadState; // 1 = loading, 2 = loaded, 3 = unloading/shutting down
     [FieldOffset(0x409C)] public uint NextTerritoryTypeId;
     [FieldOffset(0x40A0)] public uint CurrentTerritoryTypeId; // can be 0 during loading screens
-    [FieldOffset(0x40A4)] public uint CurrentTerritoryIntendedUseId;
+    [FieldOffset(0x40A4)] public byte CurrentTerritoryIntendedUseId;
     [FieldOffset(0x40A8)] public uint CurrentTerritoryFilterKey;
     [FieldOffset(0x40AC)] public ushort CurrentContentFinderConditionId;
     [FieldOffset(0x40B0)] public uint TransitionTerritoryTypeId;
