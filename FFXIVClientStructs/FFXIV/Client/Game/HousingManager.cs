@@ -43,7 +43,7 @@ public unsafe partial struct HousingManager {
     public long GetCurrentHouseId() => GetCurrentIndoorHouseId();
 
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B F8 8D 4A 02")]
-    public partial long GetCurrentIndoorHouseId();
+    public partial HouseId GetCurrentIndoorHouseId();
 
     /// <summary>
     /// Gets the TerritoryTypeId of the house the player is currently standing at.<br/>
@@ -59,7 +59,7 @@ public unsafe partial struct HousingManager {
     /// <param name="type">The type of the estate.</param>
     /// <param name="sharedEstateIndex">For type <see cref="EstateType.SharedEstate"/> an index must be specified (currently either 0 or 1).</param>
     [MemberFunction("83 F9 06 77 64")]
-    public static partial long GetOwnedHouseId(EstateType type, int sharedEstateIndex = -1);
+    public static partial HouseId GetOwnedHouseId(EstateType type, int sharedEstateIndex = -1);
 
     /// <summary>
     /// Gets the airship voyage distance and time in pointers
@@ -138,6 +138,37 @@ public unsafe partial struct HousingManager {
 
     public HousingTerritoryType GetCurrentHousingTerritoryType()
         => CurrentTerritory != null ? CurrentTerritory->GetTerritoryType() : HousingTerritoryType.None;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+public struct HouseId {
+    /// <remarks>
+    /// Masked data:<br/>
+    /// - <c>0b1000_0000</c> (<c>0x80</c>) = Apartment Flag<br/>
+    /// - <c>0b0111_1111</c> (<c>0x7F</c>) = Apartment Division (only if Apartment Flag is <c>true</c>)<br/>
+    /// - <c>0b0111_1111</c> (<c>0x7F</c>) = PlotIndex (only if Apartment Flag is <c>false</c>)
+    /// </remarks>
+    [FieldOffset(0x0)] public byte Data0;
+    [FieldOffset(0x1)] public byte Unk1;
+    /// <remarks>
+    /// Masked data:<br/>
+    /// - <c>0b0000_0000_0011_1111</c> (<c>0x0003F</c>) = WardIndex<br/>
+    /// - <c>0b1111_1111_1100_0000</c> (<c>0xFFC06</c>) = Room
+    /// </remarks>
+    [FieldOffset(0x2)] public ushort Data2;
+    [FieldOffset(0x4)] public ushort TerritoryTypeId;
+    [FieldOffset(0x6)] public ushort WorldId;
+
+    public bool IsApartment => (Data0 & 0x80) != 0 && (byte)(Data0 & 0x7F) < 2;
+    public byte ApartmentDivision => (byte)(Data0 & 0x7F);
+
+    public byte PlotIndex => (byte)(Data0 & 0x7F);
+    public byte WardIndex => (byte)(Data2 & 0x3F);
+    public short RoomNumber => (short)(Data2 >> 6);
+    public bool IsWorkshop => RoomNumber == 0x3FF;
+
+    public static unsafe implicit operator long(HouseId id) => *(long*)&id;
+    public static unsafe implicit operator HouseId(long id) => *(HouseId*)&id;
 }
 
 public enum EstateType {
