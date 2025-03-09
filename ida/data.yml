@@ -10431,6 +10431,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x1414C3F90: ctor
+      0x1414C4980: ReadPacket
   Client::UI::Agent::AgentHousingTravellersNote:
     vtbls:
       - ea: 0x1420834E0
