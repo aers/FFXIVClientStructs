@@ -18,7 +18,7 @@ public unsafe partial struct FlagStatusModule {
     [FieldOffset(0xA8), FixedSizeArray] internal FixedSizeArray32<PatchMarkIdEntry> _patchMarkIds;
     // 4 bytes
 
-    [Obsolete("Wrong data type, use UIFlags")]
+    [Obsolete("Wrong data type, use UIFlags", true)]
     [FieldOffset(0x1AC), FixedSizeArray] internal FixedSizeArray64<byte> _flags;
 
     /// <remarks>

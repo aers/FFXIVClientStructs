@@ -130,12 +130,12 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0x1C), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
     [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain0Ids;
     [FieldOffset(0x62), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain1Ids;
-    [FieldOffset(0x70), Obsolete("Use GlassesIds[0]")] public ushort Glasses0Id;
-    [FieldOffset(0x72), Obsolete("Use GlassesIds[1]")] public ushort Glasses1Id;
+    [FieldOffset(0x70), Obsolete("Use GlassesIds[0]", true)] public ushort Glasses0Id;
+    [FieldOffset(0x72), Obsolete("Use GlassesIds[1]", true)] public ushort Glasses1Id;
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
     [FieldOffset(0x74)] public byte ClassJobId;
     [FieldOffset(0x75)] public bool HeadgearHidden;
-    [Obsolete("Renamed to HeadgearHidden")]
+    [Obsolete("Renamed to HeadgearHidden", true)]
     [FieldOffset(0x75)] public bool VisorHidden;
     [FieldOffset(0x76)] public bool WeaponHidden;
     [FieldOffset(0x77)] public bool VisorClosed;
