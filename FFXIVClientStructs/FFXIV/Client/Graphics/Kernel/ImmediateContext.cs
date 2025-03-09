@@ -11,6 +11,7 @@ public unsafe partial struct ImmediateContext {
     // <remark>
     // Reset and assigned each rendered frame from Device->SwapChain->BackBuffer
     // </remark>
-    [FieldOffset(0x28)] Texture* BackBufferReference;
+    [FieldOffset(0x28)] public Texture* BackBufferReference;
 
+    [FieldOffset(0xBE8)] public void* D3D11DeviceContext;
 }
