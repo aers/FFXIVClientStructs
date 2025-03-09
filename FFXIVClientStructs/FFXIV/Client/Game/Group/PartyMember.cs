@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
@@ -35,15 +36,18 @@ public unsafe partial struct PartyMember {
     [FieldOffset(0x379)] public byte ClassJob;
     [FieldOffset(0x37A)] public byte Level;
     [FieldOffset(0x37B)] public byte DamageShield;
-    [FieldOffset(0x37C), FixedSizeArray] internal FixedSizeArray3<ExtraProperty> _extraProperties;
+    /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
+    [FieldOffset(0x37C), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
     [FieldOffset(0x394)] public byte Flags; // 0x01 == set for valid alliance members, 0x04 == set if XYZ is valid?, 0x10 == in cutscene
-
-    public bool IsValidAllianceMember => (Flags & 1) != 0;
-
-    // TODO: check if the same as PlayerState.ContentKeyValueData
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public struct ExtraProperty {
-        [FieldOffset(0)] public byte Key; // 1 = ?, 2/3 = something eureka related, 5 = bozja rank
-        [FieldOffset(4)] public int Value;
+    
+    /// <inheritdoc cref="PlayerState.GetContentValue"/>
+    public uint GetContentValue(uint key) {
+        for (var i = 0; i < 3; i++) {
+            var entry = ContentKeyValueData.GetPointer(i);
+            if (entry->Item1 == key) {
+                return entry->Item2;
+            }
+        }
+        return 0;
     }
 }
