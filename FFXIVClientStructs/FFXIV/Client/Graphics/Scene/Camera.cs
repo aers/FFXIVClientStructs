@@ -16,7 +16,7 @@ public unsafe partial struct Camera {
     [FieldOffset(0xE0)] public Render.Camera* RenderCamera;
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E0 48 8B EB")]
-    public partial void ScreenPointToRay(Ray* ray, int x, int y);
+    public partial Ray* ScreenPointToRay(Ray* ray, int x, int y);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 C7 0F 28 CE")]
     public static partial Vector2* WorldToScreenPoint(Vector2* screenPoint, Vector3* worldPoint);
