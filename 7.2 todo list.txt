@@ -53,31 +53,13 @@ NOTE:
 TODO:
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Scheduler/Resource/SchedulerResourceManagement.cs
     ☐ [FieldOffset(0x10)] public void* Unknown; // TODO: SchedulerResources map/set<T>, see LoadActionTmb @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Scheduler/Resource/SchedulerResourceManagement.cs#7
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentInventoryContext.cs
-    ☐ public partial long UseItem(uint itemId, uint inventoryType = 9999, uint itemSlot = 0, short a5 = 0); // TODO: use InventoryType.Invalid @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentInventoryContext.cs#52
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentLobby.cs
     ☐ // TODO: everything below here is wrong @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentLobby.cs#82
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentModule.cs
-    ☐ public unsafe struct UIModuleAgentModulePtrStruct { // TODO: remove @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentModule.cs#25
-    ☐ Request = 38, // TODO: rename to NpcTrade (Agent struct too) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentModule.cs#81
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSalvage.cs
-    ☐ public partial void ItemListRefresh(); // TODO: missing bool parameter @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSalvage.cs#41
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs
     ☐ [FieldOffset(0x19)] public byte IsQuestSomething; // TODO: doesn't seem right, 0x18 is used as a dword... @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#65
     ☐ // TODO: this is likely part of SatisfactionSupplyManager, since it's filled by one of its member functions (assuming agent knows about manager and not vice versa) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#68
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/BannerModule.cs
-    ☐ public partial byte GetNextId(); // TODO: returns int @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/BannerModule.cs#39
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/CharaView.cs
-    ☐ public partial bool IsAnimationPaused(); // TODO: While this works on CharaView, this is part of CharaViewPortrait. Move it there. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/CharaView.cs#93
-    ☐ public partial void ToggleAnimationPlayback(bool paused); // TODO: While this works on CharaView, this is part of CharaViewPortrait. Move it there. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/CharaView.cs#96
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureTextModule.cs
-    ☐ // TODO: this is equivalent to ObjectKind, see Character.GetName() @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureTextModule.cs#86
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs
-    ☐ // TODO: correct size to 0x90, change _inventoryItemCache array to use ItemCache @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs#153
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs
     ☐ // TODO: move functions out of lua_State and make them static. own luaapi struct maybe? @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs#34
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Exd/ExdModule.cs
-    ☐ public static partial byte GetBannerConditionUnlockState(void* row); // TODO: returns int @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Exd/ExdModule.cs#45
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs
     ☐ // TODO: Actually call `SteamInternal_ContextInit(ctx)` here, rather than just returning the cached pointer. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs#48
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/TextParameter.cs

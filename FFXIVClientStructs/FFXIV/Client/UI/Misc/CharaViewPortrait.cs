@@ -133,4 +133,10 @@ public unsafe partial struct CharaViewPortrait {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 45 A4")]
     public partial void ToggleGearVisibility(bool hideVisor, bool hideWeapon, bool closeVisor);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 10 88 85")]
+    public partial bool IsAnimationPaused();
+
+    [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 8B CF E8 ?? ?? ?? ?? 32 C0")]
+    public partial void ToggleAnimationPlayback(bool paused);
 }
