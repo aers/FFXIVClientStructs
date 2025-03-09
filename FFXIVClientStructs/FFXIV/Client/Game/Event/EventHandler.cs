@@ -69,13 +69,12 @@ public struct EventHandlerObjective {
 public struct EventId {
     [FieldOffset(0x00), CExportIgnore] public uint Id;
     [FieldOffset(0x00)] public ushort EntryId;
-    [FieldOffset(0x02)] public EventHandlerType ContentId;
+    [FieldOffset(0x02)] public EventHandlerContent ContentId;
     public static implicit operator uint(EventId id) => id.Id;
     public static implicit operator EventId(uint id) => new() { Id = id };
 }
 
-// TODO adjust for name change EventId.Type -> EventId.ContentId?
-public enum EventHandlerType : ushort {
+public enum EventHandlerContent : ushort {
     Quest = 0x0001,
     Warp = 0x0002,
     GatheringPoint = 0x0003,
