@@ -24,6 +24,9 @@ public unsafe partial struct PlayerState {
     /// </remarks>
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<int> _penaltyTimestamps;
 
+    /// <remarks> Causes LogMessage 906 when queueing into content. Seems to be unused. </remarks>
+    [FieldOffset(0x78)] public bool HasAddictionRestrictions;
+
     [FieldOffset(0x79)] public byte MaxLevel;
     /// <remarks> Row Id of ExVersion sheet </remarks>
     [FieldOffset(0x7A)] public byte MaxExpansion;
@@ -36,7 +39,7 @@ public unsafe partial struct PlayerState {
     /// <remarks> Row Id of ClassJob sheet </remarks>
     [FieldOffset(0x7E)] public byte CurrentClassJobId;
 
-    [FieldOffset(0x80)] public nint CurrentClassJobRow;
+    [FieldOffset(0x80), CExporterExcel("ClassJob")] public nint CurrentClassJobRow;
     [FieldOffset(0x88)] public short CurrentLevel;
     /// <remarks> Index is ExpArrayIndex from the ClassJob sheet. </remarks>
     [FieldOffset(0x8A), FixedSizeArray] internal FixedSizeArray32<short> _classJobLevels;
@@ -83,7 +86,7 @@ public unsafe partial struct PlayerState {
     // Size: (GlassesStylesSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsGlassesUnlocked"/> </remarks>
     [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray4<byte> _unlockedGlassesStylesBitmask;
-    [FieldOffset(0x30E)] public ushort NumOwnedMounts;
+    [FieldOffset(0x310)] public ushort NumOwnedMounts;
 
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 49 8B D8"
     // Size: (SpearfishingNotebookSheet.RowCount + 7) / 8
@@ -181,6 +184,10 @@ public unsafe partial struct PlayerState {
 
     /// <remarks> Index is DohDolJobIndex from the ClassJob sheet. </remarks>
     [FieldOffset(0x7E0), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
+    // 0x800 (int): some Faux Hollows timestamp?
+    // 0x804 (int): some Faux Hollows state?
+
+    [FieldOffset(0x830), FixedSizeArray] internal FixedSizeArray26<byte> _unlockedFramersKitsBitmask;
 
     [FieldOffset(0x868)] public StdMap<uint, bool> TrackedStatuses;
     [FieldOffset(0x878)] public StdMap<uint, bool> TrackedActionUnlocks;
@@ -348,9 +355,9 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether all aether currents of a zone were discovered.
     /// </summary>
-    /// <param name="territoryTypeColumn32">Column 32 of TerritoryType</param>
+    /// <param name="aetherCurrentCompFlgSetId">RowId of AetherCurrentCompFlgSet</param>
     [MemberFunction("4C 8B C9 85 D2 74 1D")]
-    public partial bool IsAetherCurrentZoneComplete(uint territoryTypeColumn32);
+    public partial bool IsAetherCurrentZoneComplete(uint aetherCurrentCompFlgSetId);
 
     /// <summary>
     /// Check if all vistas of an expansion in the Sightseeing Log have been discovered.

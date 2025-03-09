@@ -41,6 +41,9 @@ public unsafe partial struct AtkUnitManager {
     [VirtualFunction(8)]
     public partial bool SetAddonVisibility(ushort addonId, bool visible);
 
+    [VirtualFunction(9)]
+    public partial AddonStatus GetAddonStatus(ushort addonId);
+
     [VirtualFunction(10)]
     public partial bool RefreshAddon(AtkUnitBase* addon, uint valueCount, AtkValue* values);
 
@@ -52,6 +55,13 @@ public unsafe partial struct AtkUnitManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6B 20")]
     public partial AtkUnitBase* GetAddonById(ushort id);
+
+    public enum AddonStatus {
+        NotLoaded = 0,
+
+        Shown = 1 << 2,
+        Hidden = 1 << 3,
+    }
 }
 
 [Flags]

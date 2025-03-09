@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 // renderer texture object, contains platform specific render objects (DX9/DX11/PS3/PS4)
 [GenerateInterop]
 [Inherits<Notifier>(parentOffset: 0x20)]
-[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe partial struct Texture {
     [FieldOffset(0x38)] public uint ActualWidth;
     [FieldOffset(0x38), Obsolete($"Use {nameof(ActualWidth)}")] public uint Width;

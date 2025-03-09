@@ -4,14 +4,16 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using static FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::RaptureAtkModule
 //   Component::GUI::AtkModule
 //     Component::GUI::AtkModuleInterface
+//   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
-[Inherits<AtkModule>]
+[Inherits<AtkModule>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x29720)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
@@ -21,6 +23,7 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     [FieldOffset(0x82C0)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
+    [FieldOffset(0x82C2)] public ushort UISetupStage; // unsure
 
     [FieldOffset(0x8338)] internal Utf8String Unk8338;
     [FieldOffset(0x83A0), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;
@@ -59,6 +62,13 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x296D0)] internal ExcelSheet* AddonParamSheet;
     [FieldOffset(0x296D8)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
 
+    [FieldOffset(0x296F4)] public uint LoginSummonCompanionId;
+    [FieldOffset(0x296F8)] public float LoginSummonCompanionCountdown;
+    /// <remarks> Only for Region 5 </remarks>
+    [FieldOffset(0x296FC)] public float HourTimer;
+    /// <remarks> Only for Region 5 </remarks>
+    [FieldOffset(0x29700)] public int HoursPlayed;
+
     [FieldOffset(0x29718)] internal nint ShellCommands; // only 1 function to open links?
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 89 5F 58")]
@@ -85,6 +95,15 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73"), GenerateStringOverloads]
     public partial void ShowTextGimmickHint(byte* text, TextGimmickHintStyle style, int duration);
 
+    [MemberFunction("40 56 41 56 41 57 48 81 EC A0 00 00 00")]
+    public partial byte IsDawnSupported(uint contentFinderCondition); // return & 1 = dawnstory, & 2 = dawn
+
+    [MemberFunction("E8 ?? ?? ?? ?? C6 46 ?? 00 E9 ?? ?? ?? ?? 49 8B 46")]
+    public partial void OpenDawn(uint contentFinderCondition);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C9 49 8D 56 ?? 41 B0 01")]
+    public partial void OpenDawnStory(uint contentFinderCondition);
+
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
 
@@ -102,6 +121,9 @@ public unsafe partial struct RaptureAtkModule {
     [StructLayout(LayoutKind.Explicit, Size = 0x250)]
     public struct NamePlateInfo {
         [FieldOffset(0x00)] public GameObjectId ObjectId;
+        [FieldOffset(0x20)] public uint Level;
+        [FieldOffset(0x24)] public uint ClassJobId;
+        [FieldOffset(0x2C)] public uint Icon;
         [FieldOffset(0x30)] public Utf8String Name;
         [FieldOffset(0xA0)] public Utf8String FcName;
         [FieldOffset(0x108)] public Utf8String Title;
@@ -128,6 +150,7 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x80)] public short LevelItem;
     }
 
+    // TODO: correct size to 0x90, change _inventoryItemCache array to use ItemCache
     // Client::UI::RaptureAtkModule::InventoryCache
     [GenerateInterop, Inherits<ItemCache>]
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]

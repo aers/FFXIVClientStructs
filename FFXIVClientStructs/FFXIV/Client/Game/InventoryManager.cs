@@ -42,7 +42,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 3B 44 24 58")]
     public partial uint GetGil();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 03 86")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 43 78")]
     public partial uint GetRetainerGil();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 BB ?? ?? ?? ?? 74 58 44 8B C7 BA ?? ?? ?? ?? 49 8B CF")]
@@ -63,7 +63,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 4C 24 48 03 CF")]
     public partial uint GetMaxCompanySeals(byte grandcompanyId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 8D 4F FE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B CD 2B F0")]
     public partial uint GetTomestoneCount(uint tomestoneItemId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B D8 E8 ?? ?? ?? ?? 42 8D 0C 23")]
@@ -87,7 +87,8 @@ public unsafe partial struct InventoryContainer {
     [FieldOffset(0x08)] public InventoryItem* Items;
     [FieldOffset(0x10)] public InventoryType Type;
     [FieldOffset(0x14)] public uint Size;
-    [FieldOffset(0x18)] public byte Loaded;
+    [FieldOffset(0x18), Obsolete("Use bool IsLoaded")] public byte Loaded;
+    [FieldOffset(0x18)] public bool IsLoaded;
 
     [VirtualFunction(0)]
     public partial void Dtor();
@@ -294,6 +295,8 @@ public enum InventoryType : uint {
     SaddleBag2 = 4001,
     PremiumSaddleBag1 = 4100,
     PremiumSaddleBag2 = 4101,
+
+    Invalid = 9999,
 
     RetainerPage1 = 10000,
     RetainerPage2 = 10001,

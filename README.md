@@ -20,10 +20,16 @@ This project would not be possible without significant work from many members of
 * [pohky](https://github.com/Pohky)
 * [Caraxi](https://github.com/Caraxi)
 * [daemitus](https://github.com/daemitus)
+* [wolfcomp](https://github.com/wolfcomp)
 
 #### Contributors
 
 [Too many](https://github.com/aers/FFXIVClientStructs/graphs/contributors) to list.
+
+> [!IMPORTANT]
+> The following information will have slight inaccuracies due to generator changes introduced to the project with Dawntrail
+> 
+> This is in the process of being updated
 
 ## For Library Users
 
@@ -34,11 +40,15 @@ The library uses signatures to resolve locations at runtime. In order to populat
 The following code is only necessary if you are not using Dalamud or using a local copy of the library in your plugin.
 
 ```csharp
-FFXIVClientStructs.Interop.Resolver.GetInstance.SetupSearchSpace();
-FFXIVClientStructs.Interop.Resolver.GetInstance.Resolve();
+InteropGenerator.Runtime.Resolver.GetInstance.Setup();
+FFXIVClientStructs.Interop.Generated.Addresses.Register();
+InteropGenerator.Runtime.Resolver.GetInstance.Resolve();
 ```
 
-SetupSearchSpace has two optional arguments. The first allows you to pass a pointer to a copy of the FFXIV module somewhere in memory. The primary use of this is to allow the resolver to scan a fresh copy of the binary rather than one modified by active hooks from other sources. You can access Dalamud's module copy via the `SigScanner` service's `SearchBase` argument if you are trying to resolve your local copy within a Dalamud plugin. The second argument takes a path to a json file as a C# `FileInfo` object. This will cause the resolver to use that json file as a signature cache, speeding up resolving on future runs. The resolver is relatively fast, but using the cache is near-instant, so using it is your choice.
+Setup has three optional arguments. 
+The first allows you to pass a pointer to a copy of the FFXIV module somewhere in memory. The primary use of this is to allow the resolver to scan a fresh copy of the binary rather than one modified by active hooks from other sources. You can access Dalamud's module copy via the `SigScanner` service's `SearchBase` argument if you are trying to resolve your local copy within a Dalamud plugin. 
+the second argument takes a string for the version of which is the key for what cache index to use from the file supplied in the third argument.
+The third argument takes a path to a JSON file as a C# `FileInfo` object. This will cause the resolver to use that JSON file as a signature cache, speeding up resolving on future runs. The resolver is relatively fast, but using the cache is near-instant, so using it is your choice.
 
 ### Library Design
 
@@ -62,7 +72,9 @@ No functions will ever return a C# `string` type in order to avoid making assump
 
 ##### Fixed-Size Arrays
 
-C# does not support fixed-sized buffers of arbitrary types. While this feature is being worked on for a future version of the language (see the fixed buffer section of [this](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-11.0/low-level-struct-improvements.md)), there is no ETA. All fixed-sized buffers of native types are represented as a buffer of `byte` instead. A future version of the library will support generation of convenience accessors for these, but that is currently not implemented. You will need to cast the type to access the array properly.
+C# fixed size arrays are not the same as C++ fixed size arrays. This means that we have to use another feature called [Inline Arrays](https://github.com/dotnet/csharplang/blob/main/proposals/csharp-12.0/inline-arrays.md). This feature allows us to create structs that represents the array type with a set size. This is done through generators which means that the array is only done after the Roslyn analyser has run after file modification.
+
+These will be accessible through `Span` when used.
 
 ##### Generic Pointers
 
@@ -70,7 +82,7 @@ C# doesn't allow pointer types in generics. This makes it impossible to represen
 
 ##### STD collections
 
-There are wrappers for accessing data from a handful of C++ std library collections used by the game such as vector and map. These do not support writing to those collections, and you will have to implement that yourself if you want to update them.
+There are wrappers for accessing data from a handful of C++ std library collections used by the game such as vector and map.
 
 ## For Library Developers
 
@@ -88,13 +100,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkResNode : ICreatable { }
 ```
 
-Native game classes are represented as explicit layout structs. If the official name of the class is available (via [old rtti](https://github.com/aers/FFXIVClientStructs/blob/main/ida/classinformer.csv)) use that for the name and namespace. For new classes or classes without virtual functions, make up a name that seems appropriate.
+Native game classes are represented as explicit layout structs. If the official name of the class is available (via [old RTTI](https://github.com/aers/FFXIVClientStructs/blob/main/ida/classinformer.csv)) use that for the name and namespace. For new classes or classes without virtual functions, make up a name that seems appropriate.
 
 If the struct has unsafe members, mark the struct unsafe rather than the individual members. If you are using a generator, the struct must also be partial. If you are unable to get the exact size, use your best estimate.
 
-##### ICreatable
+#### ICreatable
 
-If you give the struct a CTor function and the interface ICreatable it will be creatable using game allocators via convenience methods on IMemorySpace. This is only relevant for objects that you might want to create, which at this point in time is entirely UI objects.
+If you give the struct a Ctor function and the interface ICreatable it will be creatable using game allocators via convenience methods on IMemorySpace. This is only relevant for objects that you might want to create, which at this point in time is entirely UI objects.
 
 #### Class Fields
 
@@ -109,7 +121,7 @@ Because struct layouts are explicit, all fields are required to have a FieldOffs
 
 Field types can (generally) only be types that the runtime considers [unmanaged](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types). This boils down to most primitive integer/float types, enums, pointers, fixed-size primitive arrays, and structs that only contain fields meeting the definition. 
 
-##### Arrays
+#### Arrays
 
 Native fixed size arrays such as
 
@@ -117,13 +129,46 @@ Native fixed size arrays such as
 AtkResNode resNodeArray[10];
 ```
 
-cannot be represented in C# because the runtime does not currently allow fixed sized arrays of arbitrary types in structs, only integer primitives. Until this feature arrives, define all arrays that aren't integer primitives as byte arrays of `sizeof(T) * length`.
+has to be defined with the `FixedSizeArrayX<>` type and contain the Attribute `FixedSizeArray` this attribute has an optional parameter if it is a cstr.
 
 ```cs
-public fixed byte resNodeArray[4 * 0xA8]; // AtkResNode array
+[FixedSizeArray] internal FixedSizeArray10<AtkResNode> _resNodeArray;
 ```
 
-There are plans to implement a source generator to make interop with these arrays better, but that hasn't been developed yet.
+This will create a `Span` that is used to access the information that is in the array that has the correct size for how large the array is.
+
+##### Inline C strings
+
+C strings are usually passed in C++ with `char*` but inline struct strings have been defined with 
+
+```c++
+char freeCompanyTag[7];
+```
+
+which means we can use the same `FixedSizeArray` definition as above with the optional parameter.
+
+```cs
+[FixedSizeArray(isString: true)] internal FixedSizeArray7<byte> _freeCompanyTag;
+```
+
+This will then be used in the generator to create a method to be able to set and get the string as follows
+
+```cs
+/// <inheritdoc cref="_freeCompanyTag" />
+public string FreeCompanyTagString
+{
+    get => global::System.Text.Encoding.UTF8.GetString(global::System.Runtime.InteropServices.MemoryMarshal.CreateReadOnlySpanFromNullTerminated((byte*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref _freeCompanyTag[0])));
+    set
+    {
+        if (global::System.Text.Encoding.UTF8.GetByteCount(value) > 7 - 1)
+        {
+            InteropGenerator.Runtime.ThrowHelper.ThrowStringSizeTooLarge("FreeCompanyTagString", 7);
+        }
+        global::System.Text.Encoding.UTF8.GetBytes(value.AsSpan(), _freeCompanyTag);
+        _freeCompanyTag[6] = 0;
+    }
+}
+```
 
 ### Native Game Functions
 
@@ -152,12 +197,10 @@ This will generate the following wrapper:
 public partial void AddEvent(AtkEventType eventType, uint eventParam, global::FFXIVClientStructs.FFXIV.Component.GUI.AtkEventListener* listener, global::FFXIVClientStructs.FFXIV.Component.GUI.AtkResNode* nodeParam, bool isGlobalEvent)
 {
     if (MemberFunctionPointers.AddEvent is null)
-        throw new InvalidOperationException("Function pointer for AtkResNode.AddEvent is null. The resolver was either uninitialized or failed to resolve address with signature E8 ?? ?? ?? ?? C1 E7 0C ?? ?? ?? ?? ?? ?? ?? ??.");
-
-     fixed(AtkResNode* thisPtr = &this)
     {
-        MemberFunctionPointers.AddEvent(thisPtr, eventType, eventParam, listener, nodeParam, isGlobalEvent);
+        InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("MemberFunctionPointers.AddEvent", "E8 ?? ?? ?? ?? C1 E7 0C ?? ?? ?? ?? ?? ?? ?? ??.");
     }
+    MemberFunctionPointers.AddEvent((AtkResNode*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), eventType, eventParam, listener, nodeParam, isGlobalEvent)
 }
 ```
 
@@ -179,20 +222,15 @@ This will generate the following wrapper:
 
 ```csharp
 [StructLayout(LayoutKind.Explicit)]
-public unsafe struct CharacterVTable
+public unsafe struct CharacterVirtualTable
 {
-    [FieldOffset(624)] public delegate* unmanaged[Stdcall] <Character*, global::FFXIVClientStructs.FFXIV.Client.Game.StatusManager*> GetStatusManager;
+    [global::System.Runtime.InteropServices.FieldOffsetAttribute(624)] public delegate* unmanaged <Character*, global::FFXIVClientStructs.FFXIV.Client.Game.StatusManager*> GetStatusManager;
 }
 
-[FieldOffset(0x0)] public CharacterVTable* VTable;
+[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public CharacterVirtualTable* VirtualTable;
   
-public partial global::FFXIVClientStructs.FFXIV.Client.Game.StatusManager* GetStatusManager()
-{
-    fixed(Character* thisPtr = &this)
-    {
-        return VTable->GetStatusManager(thisPtr);
-    }
-}
+[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+public partial global::FFXIVClientStructs.FFXIV.Client.Game.StatusManager* GetStatusManager() => VirtualTable->GetStatusManager((Character*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this));
 ```
 
 Virtual functions are referenced via the index in the class's virtual table. These cannot be static and always include the object instance pointer. Since these calls resolve the function pointer via the instance object's virtual table they will work the same way they do in native code and call the appropriate virtual overload for the class.
@@ -221,7 +259,9 @@ public unsafe static class StaticAddressPointers
 public static partial global::FFXIVClientStructs.FFXIV.Client.System.Framework.Framework* Instance()
 {
     if (StaticAddressPointers.ppInstance is null)
-        throw new InvalidOperationException("Pointer for Framework.Instance is null. The resolver was either uninitialized or failed to resolve address with signature 44 0F B6 C0 48 8B 0D ?? ?? ?? ?? ?? ?? ?? ?? ??.");
+    {
+        InteropGenerator.Runtime.ThrowHelper.ThrowNullAddress("Framework.Instance", "49 8B DC 48 89 1D ?? ?? ?? ??");
+    }
     return *StaticAddressPointers.ppInstance;
 }
 ```
@@ -248,17 +288,18 @@ Used on structs for returning the static location of struct VTables in the binar
 This will generate the following wrapper:
 
 ```csharp
-public static partial class Addresses
+public static class Addresses
 {
-    public static readonly Address VTable = new StaticAddress("AddonRetainerTaskAsk.VTable", "48 8d 05 ?? ?? ?? ?? 48 89 03 48 8d 83 50 02 00 00 48 89 93 20 02 00 00 ?? ?? ?? ?? ?? ?? ?? ??", new ulong[] {0x4800000000058d48, 0x000250838d480389, 0x0000022093894800, 0x0000000000000000}, new ulong[] {0xFF00000000FFFFFF, 0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF, 0x0000000000000000}, 0, 3);
+    public static readonly global::InteropGenerator.Runtime.Address StaticVirtualTable = new global::InteropGenerator.Runtime.Address("FFXIVClientStructs.FFXIV.Client.UI.AddonRetainerTaskAsk.StaticVirtualTable", "48 8D 05 ?? ?? ?? ?? 48 89 03 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 80 8B ?? ?? ?? ?? ?? ??", new ushort[] {3}, new ulong[] {0x4800000000058D48, 0x00838948C0330389, 0x0000838948000000, 0x0000008389480000, 0x0000000083894800, 0x4800000000838948, 0x8948000000008389, 0x8389480000000083, 0x0083894800000000, 0x0000838948000000, 0x0000008389480000, 0x0000000083894800, 0x0000000000008B80}, new ulong[] {0xFF00000000FFFFFF, 0x00FFFFFFFFFFFFFF, 0x0000FFFFFF000000, 0x000000FFFFFF0000, 0x00000000FFFFFF00, 0xFF00000000FFFFFF, 0xFFFF00000000FFFF, 0xFFFFFF00000000FF, 0x00FFFFFF00000000, 0x0000FFFFFF000000, 0x000000FFFFFF0000, 0x00000000FFFFFF00, 0x000000000000FFFF}, 0);
 }
 
-public unsafe static class StaticAddressPointers
+[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
+public unsafe partial struct AddonRetainerTaskAskVirtualTable
 {
-    public static nuint VTable => AddonRetainerTaskAsk.Addresses.VTable.Value;
+    [global::System.Runtime.InteropServices.FieldOffsetAttribute(384)] public delegate* unmanaged <AddonRetainerTaskAsk*, uint, global::FFXIVClientStructs.FFXIV.Component.GUI.AtkValue*, void> OnSetup;
 }
 
-public static AddonRetainerTaskAskVTable StaticVTable => *(AddonRetainerTaskAskVTable*)StaticAddressPointers.VTable;
+public static AddonRetainerTaskAskVirtualTable* StaticVirtualTablePointer => (AddonRetainerTaskAskVirtualTable*)Addresses.StaticVirtualTable.Value;
 ```
 
 #### Static Virtual Function Pointers
@@ -266,7 +307,7 @@ public static AddonRetainerTaskAskVTable StaticVTable => *(AddonRetainerTaskAskV
 If a struct is both annotated with `[VTableAddress(...)]` and has functions annotated with `[VirtualFunction(...)]`, the `StaticVTable` can then be used to get static addresses for those functions which can be used for staticly hooking the function call. For example:
 
 ```csharp
-this.onSetupHook = Hook<OnSetupDelegate>.FromAddress((nint)AddonRetainerTaskAsk.StaticVTable.OnSetup, this.OnSetupDetour);
+this.onSetupHook = Hook<OnSetupDelegate>.FromAddress((nint)AddonRetainerTaskAsk.StaticVirtualTablePointer->OnSetup, this.OnSetupDetour);
 ```
 
 #### [GenerateStringOverloads]
@@ -288,11 +329,10 @@ This generator will generate the following overloads:
 ```csharp
 public global::FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitBase* GetAddonByName(string name, int index = 1)
 {
-    int utf8StringLengthname = global::System.Text.Encoding.UTF8.GetByteCount(name);
-    Span<byte> nameBytes = utf8StringLengthname <= 512 ? stackalloc byte[utf8StringLengthname + 1] : new byte[utf8StringLengthname + 1];
+    int nameUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(name);
+    Span<byte> nameBytes = nameUTF8StrLen <= 512 ? stackalloc byte[nameUTF8StrLen + 1] : new byte[nameUTF8StrLen + 1];
     global::System.Text.Encoding.UTF8.GetBytes(name, nameBytes);
-    nameBytes[utf8StringLengthname] = 0;
-
+    nameBytes[nameUTF8StrLen] = 0;
     fixed (byte* namePtr = nameBytes)
     {
         return GetAddonByName(namePtr, index);

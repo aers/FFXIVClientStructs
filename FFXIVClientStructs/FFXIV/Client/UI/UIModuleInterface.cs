@@ -46,7 +46,8 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(35)] public partial InfoModule* GetInfoModule();
     [VirtualFunction(36)] public partial UIModuleHelpers* GetUIModuleHelpers();
     [VirtualFunction(37)] public partial AgentModule* GetAgentModule();
-    // [VirtualFunction(37)] public partial UIModule* GetAfterAgentsPtr(); // points to the field right after the last Agent in AgentModule
+    [VirtualFunction(38), Obsolete("Renamed to GetAgentHelpers")] public partial AgentModule.UIModuleAgentModulePtrStruct* GetUIModuleAgentModulePtr();
+    [VirtualFunction(38)] public partial AgentHelpers* GetAgentHelpers();
     [VirtualFunction(39)] public partial UI3DModule* GetUI3DModule();
     // [VirtualFunction(40)] public partial Vf40Struct* GetVf40Struct();
     // [VirtualFunction(41)] public partial Vf41Struct* GetVf40Struct();
@@ -113,62 +114,66 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(121)] public partial ??? ShowContentIntroduction(???);
     // [VirtualFunction(122)] public partial ??? IsContentIntroductionInvisible(???);
     // [VirtualFunction(123)] public partial ??? HideContentIntroduction(???);
-    // [VirtualFunction(133)] public partial ??? SetCursorVisibility(???);
-    // [VirtualFunction(134)] public partial ??? ToggleCursor(???);
-    // [VirtualFunction(148)] public partial ??? ShowEventFadeIn(???);
-    // [VirtualFunction(149)] public partial ??? ShowEventFadeOut(???);
-    [VirtualFunction(153)] public partial void ToggleUi(UIModule.UiFlags flags, bool enable, bool unknown = true);
-    // [VirtualFunction(154)] public partial ??? ToggleUi_2(???);
-    // [VirtualFunction(156)] public partial ??? LoadScreenHideUi(???);
-    // [VirtualFunction(157)] public partial ??? LoadScreenShowUi(???);
-    // [VirtualFunction(159)] public partial ??? AnnounceHowTo(???);
-    // [VirtualFunction(161)] public partial ??? HideHowTo(???);
-    [VirtualFunction(163)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
-    [VirtualFunction(164)] public partial void HideGoldSaucerReward();
-    [VirtualFunction(165)] public partial void ShowTextRelicAtma(uint itemId);
-    // [VirtualFunction(167)] public partial ??? HideGoldSaucerReward_2(???);
-    [VirtualFunction(173)] public partial void ShowHousingHarvest(uint itemId, int amount, uint image = 0);
-    // [VirtualFunction(175)] public partial ??? OpenMiniGame(???);
-    // [VirtualFunction(176)] public partial ??? HideHousingHarvest(???);
-    [VirtualFunction(177)] public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
-    [VirtualFunction(178), GenerateStringOverloads] public partial void ShowText(int position, byte* text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
-    [VirtualFunction(179)] public partial void ShowTextChain(int chain, int hqChain = 0);
-    [VirtualFunction(180), GenerateStringOverloads] public partial void ShowWideText(byte* text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
-    [VirtualFunction(181), GenerateStringOverloads] public partial void ShowPoisonText(byte* text, int layer = 0);
-    [VirtualFunction(182), GenerateStringOverloads] public partial void ShowErrorText(byte* text, bool forceVisible = true);
-    [VirtualFunction(183)] public partial void ShowTextClassChange(uint classJobId);
-    [VirtualFunction(184)] public partial void ShowGetAction(ActionType actionType, uint actionId);
-    [VirtualFunction(185)] public partial void ShowLocationTitle(uint territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
-    // [VirtualFunction(186)] public partial ??? HideLocationTitle(???);
+    // [VirtualFunction(134)] public partial ??? SetCursorVisibility(???);
+    // [VirtualFunction(135)] public partial ??? ToggleCursor(???);
+    // [VirtualFunction(149)] public partial ??? ShowEventFadeIn(???);
+    // [VirtualFunction(150)] public partial ??? ShowEventFadeOut(???);
+    [VirtualFunction(154)] public partial void ToggleUi(UIModule.UiFlags flags, bool enable, bool unknown = true);
+    // [VirtualFunction(155)] public partial ??? ToggleUi_2(???);
+    // [VirtualFunction(157)] public partial ??? LoadScreenHideUi(???);
+    // [VirtualFunction(158)] public partial ??? LoadScreenShowUi(???);
+    // [VirtualFunction(160)] public partial ??? AnnounceHowTo(???);
+    // [VirtualFunction(162)] public partial ??? HideHowTo(???);
+    [VirtualFunction(164)] public partial void ShowGoldSaucerReward(byte type, uint mgp, uint rewardItemId, uint rewardItemCount);
+    [VirtualFunction(165)] public partial void HideGoldSaucerReward();
+    [VirtualFunction(166)] public partial void ShowTextRelicAtma(uint itemId);
+    // [VirtualFunction(168)] public partial ??? HideGoldSaucerReward_2(???);
+    [VirtualFunction(174)] public partial void ShowHousingHarvest(uint itemId, int amount, uint image = 0);
+    // [VirtualFunction(176)] public partial ??? OpenMiniGame(???);
+    // [VirtualFunction(177)] public partial ??? HideHousingHarvest(???);
+    [VirtualFunction(178)] public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
+    [VirtualFunction(179), GenerateStringOverloads] public partial void ShowText(int position, byte* text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
+    [VirtualFunction(180)] public partial void ShowTextChain(int chain, int hqChain = 0);
+    [VirtualFunction(181), GenerateStringOverloads] public partial void ShowWideText(byte* text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
+    [VirtualFunction(182), GenerateStringOverloads] public partial void ShowPoisonText(byte* text, int layer = 0);
+    [VirtualFunction(183), GenerateStringOverloads] public partial void ShowErrorText(byte* text, bool forceVisible = true);
+    [VirtualFunction(184)] public partial void ShowTextClassChange(uint classJobId);
+    [VirtualFunction(185)] public partial void ShowGetAction(ActionType actionType, uint actionId);
+    [VirtualFunction(186)] public partial void ShowLocationTitle(uint territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
+    // [VirtualFunction(187)] public partial ??? HideLocationTitle(???);
     [Obsolete("Renamed to ShowGrandCompanyRankUp", true)]
-    [VirtualFunction(189)] public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
-    [VirtualFunction(189)] public partial void ShowGrandCompanyRankUp(uint gc, uint gcRank, bool playSound = true);
-    [VirtualFunction(192)] public partial void ShowStreak(int streak, int streakType);
-    [VirtualFunction(193)] public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
-    [VirtualFunction(194)] public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
-    [VirtualFunction(195), GenerateStringOverloads] public partial void ShowBattleTalk(byte* name, byte* text, float duration, byte style);
-    [VirtualFunction(196), GenerateStringOverloads] public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style, int sound = -1, uint entityId = 0xE0000000);
-    // [VirtualFunction(197)] public partial ??? ShowBattleTalkUnknown(???);
-    [VirtualFunction(198), GenerateStringOverloads] public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
-    // [VirtualFunction(200)] public partial ??? OpenInventory(???);
-    // [VirtualFunction(201)] public partial ??? CloseInventory(???);
-    // [VirtualFunction(202)] public partial ??? IsInventoryOpen(???);
-    [VirtualFunction(203)] public partial void ExecuteMainCommand(uint command);
-    [VirtualFunction(204)] public partial bool IsMainCommandUnlocked(uint command);
-    // [VirtualFunction(207)] public partial ??? ShowRaceCountdownEnd(???);
-    // [VirtualFunction(211)] public partial ??? IsDutyRaidFinderOpen(???);
-    [VirtualFunction(217)] public partial void ShowAdventureNotice(int index);
-    [VirtualFunction(221)] public partial int RotateLinkshellHistory(int offset);
-    [VirtualFunction(222)] public partial void SetLinkshellCycle(int linkshellCycle);
-    [VirtualFunction(223)] public partial int RotateCrossLinkshellHistory(int offset);
-    // [VirtualFunction(239)] public partial ??? ShowRaceCountdownStart(???);
-    // [VirtualFunction(240)] public partial ??? ShowRaceCountdownEnd_2(???);
+    [VirtualFunction(190)] public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
+    [VirtualFunction(190)] public partial void ShowGrandCompanyRankUp(uint gc, uint gcRank, bool playSound = true);
+    [VirtualFunction(193)] public partial void ShowStreak(int streak, int streakType);
+    [VirtualFunction(194)] public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
+    [VirtualFunction(195)] public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
+    [VirtualFunction(196), GenerateStringOverloads] public partial void ShowBattleTalk(byte* name, byte* text, float duration, byte style);
+    [VirtualFunction(197), GenerateStringOverloads] public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style, int sound = -1, uint entityId = 0xE0000000);
+    // [VirtualFunction(198)] public partial ??? ShowBattleTalkUnknown(???);
+    [VirtualFunction(199), GenerateStringOverloads] public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
+    /// <param name="type">0 = Inventory, 1 = Key Items</param>
+    [VirtualFunction(201)] public partial void OpenInventory(byte type = 0);
+    [VirtualFunction(202)] public partial void CloseInventory();
+    [VirtualFunction(203)] public partial bool IsInventoryOpen();
+    [VirtualFunction(204)] public partial void ExecuteMainCommand(uint command);
+    [VirtualFunction(205)] public partial bool IsMainCommandUnlocked(uint command);
+    // [VirtualFunction(208)] public partial ??? ShowRaceCountdownEnd(???);
+    // [VirtualFunction(212)] public partial ??? IsDutyRaidFinderOpen(???);
+    [VirtualFunction(214)] public partial void ShowTalkSubtitle(Utf8String* text, float duration);
+    [VirtualFunction(215)] public partial void HideTalkSubtitle();
+    [VirtualFunction(218)] public partial void ShowAdventureNotice(int index);
+    [VirtualFunction(222)] public partial int RotateLinkshellHistory(int offset);
+    [VirtualFunction(223)] public partial void SetLinkshellCycle(int linkshellCycle);
+    [VirtualFunction(224)] public partial int RotateCrossLinkshellHistory(int offset);
+    // [VirtualFunction(240)] public partial ??? ShowRaceCountdownStart(???);
+    // [VirtualFunction(241)] public partial ??? ShowRaceCountdownEnd_2(???);
 }
 
 public enum UIModulePacketType {
     ClassJobChange = 2,
     LevelChange = 3,
     ShowLogMessage = 4,
+    Login = 6,
     Logout = 7,
     CloseLogoutDialog = 8,
     StartLogoutCountdown = 9,

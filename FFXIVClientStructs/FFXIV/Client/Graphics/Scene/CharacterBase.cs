@@ -80,6 +80,12 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x360)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
 
+    [FieldOffset(0x3D8)] internal FixedSizeArray5<SkeletonAnimationContainer> _skeletonAnimationContainers; // tentative name
+
+    [FieldOffset(0x940)] public SkeletonResourceHandle* MaterialAnimationSkeleton;
+
+    [FieldOffset(0x948)] public ResourceHandle** MaterialAnimationPacks;
+
     [FieldOffset(0x958)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap" in LoadAnimation
 
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
@@ -346,4 +352,15 @@ public unsafe partial struct CharacterBase {
 
     [VirtualFunction(110)]
     public partial void SetFreeCompanyCrest(Texture* freeCompanyCrest);
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x100)]
+    public partial struct SkeletonAnimationContainer { // tentative name
+        [FieldOffset(0)] public SkeletonResourceHandle* PartialSkeleton;
+        [FieldOffset(0x8)] public StdVector<Pointer<ResourceHandle>> PapVector1; // not well-understood yet
+        [FieldOffset(0x20)] public StdVector<Pointer<ResourceHandle>> PapVector2;
+        [FieldOffset(0x38)] public StdVector<Pointer<ResourceHandle>> PapVector3;
+
+        [FieldOffset(0xF8)] public ResourceHandle* AnimationExchangeTable;
+    }
 }

@@ -42,6 +42,9 @@ public unsafe partial struct UIGlobals {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 C7 4C 8B CB"), GenerateStringOverloads]
     public static partial bool IsValidPlayerCharacterName(byte* characterName);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 39 43 30 75 08")]
+    public static partial uint GenerateEquippedItemsChecksum();
+
     [MemberFunction("E8 ?? ?? ?? ?? 45 0F B7 C5")]
     public static partial void PlaySoundEffect(uint effectId, nint a2 = 0, nint a3 = 0, byte a4 = 0);
 

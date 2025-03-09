@@ -121,6 +121,10 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 11 4D 8B 07")]
     public partial Character* GetParentCharacter();
 
+    /// <summary>Check if this character is in a jumping/falling animation.</summary>
+    [MemberFunction("40 53 48 83 EC 20 48 8D 99 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 75 12")]
+    public partial bool IsJumping();
+
     /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height.  </summary>
     [Obsolete($"Function moved to {nameof(ModelContainer)}.")]
     public float CalculateHeight() => ModelContainer.CalculateHeight();

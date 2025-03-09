@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
-
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
 // Client::Game::InstanceContent::PublicContentDirector
@@ -12,7 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [Inherits<ContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x11D0)]
 public unsafe partial struct PublicContentDirector {
-    // fields from PublicContent sheet
     [FieldOffset(0xD80 + 0x00), CExporterExcelBegin("PublicContent")] public uint NameOffset;
     [FieldOffset(0xD80 + 0x04)] public uint MapIcon;
     [FieldOffset(0xD80 + 0x08)] public uint TextDataStart;

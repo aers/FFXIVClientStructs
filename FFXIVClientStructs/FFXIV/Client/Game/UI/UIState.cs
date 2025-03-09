@@ -46,7 +46,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0xB690)] public NpcTrade NpcTrade;
     [FieldOffset(0xB9B8)] public DirectorTodo DirectorTodo;
     [FieldOffset(0xBB00)] public DirectorTodo FateDirectorTodo;
-    [FieldOffset(0xBC48)] internal DirectorTodo UnkThirdTodo; // 7.1: a third one?
+    [FieldOffset(0xBC48)] public DirectorTodo MassivePcContentTodo;
     [FieldOffset(0xBD90)] public Map Map;
     [FieldOffset(0xFD90)] public MarkingController MarkingController;
     [FieldOffset(0x10070)] public LimitBreakController LimitBreakController;
@@ -71,7 +71,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x17E80)] public CharaCard CharaCard;
     // ItemAction Unlocks
     [FieldOffset(0x180C0)] public ClientSelectDataConfigFlags ClientSelectDataConfigFlags;
-    //[FieldOffset(0x180C2)] public ushort CharaViewGlamourIdFlag(s);
+    [FieldOffset(0x180C2)] public ushort CurrentGlamourErrorsBitmask;
     [FieldOffset(0x180C4)] public ushort CurrentItemLevel; // as shown in the Character window
     // [FieldOffset(0x180C8)] public long ?; // something regarding FreeCompanyCrest?
     [FieldOffset(0x180D0)] public long NextMapAllowanceTimestamp;

@@ -17,6 +17,7 @@ public unsafe partial struct RaptureGearsetModule {
         return uiModule == null ? null : uiModule->GetRaptureGearsetModule();
     }
 
+    [FieldOffset(0x48)] public UIModule* UIModulePtr;
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray100<GearsetEntry> _entries;
 
     [FieldOffset(0xB5D0)] public int CurrentGearsetIndex;
@@ -63,6 +64,9 @@ public unsafe partial struct RaptureGearsetModule {
     /// <returns>Returns 0 if the equip succeeded, -1 otherwise.</returns>
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9 41 0F B6 F0 48 8D 0D")]
     public partial int EquipGearset(int gearsetId, byte glamourPlateId = 0);
+
+    [MemberFunction("40 55 53 56 57 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 63 FA")]
+    public partial int EquipGearsetInternal(int gearsetId, byte glamourPlateId = 0);
 
     /// <summary>
     /// Save the player's current inventory to a new gearset at the next possible ID.
@@ -143,8 +147,17 @@ public unsafe partial struct RaptureGearsetModule {
     /// <param name="gearsetId">The ID of the gearset.</param>
     /// <returns>Returns <c>true</c> if the gearset has a Banner linked to it, <c>false</c> otherwise.</returns>
     /// <remarks>Equivalent to Flags.HasFlag(GearsetFlag.Exists) &amp;&amp; BannerIndex != 0.</remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 4F 0F B6 D3")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 68 48 8B 4F 48")]
     public partial bool HasLinkedBanner(byte gearsetId);
+
+    /// <summary>
+    /// Check if a specified gearset has a Banner linked to it.
+    /// </summary>
+    /// <param name="enabledGearsetIndex">The position of the list.</param>
+    /// <returns>Returns <c>true</c> if the gearset has a Banner linked to it, <c>false</c> otherwise.</returns>
+    /// <remarks>Equivalent to Flags.HasFlag(GearsetFlag.Exists) &amp;&amp; BannerIndex != 0.</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 4F 0F B6 D3")]
+    public partial bool HasLinkedBannerByEnabledIndex(byte enabledGearsetIndex);
 
     /// <summary>
     /// Resolves the index of a GearsetEntry array that only contains enabled gearsets to the index in the actual <see cref="Entries"/> array.
@@ -266,7 +279,8 @@ public unsafe partial struct RaptureGearsetModule {
         [FieldOffset(0x36)] public byte BannerIndex;
         [FieldOffset(0x37)] public GearsetFlag Flags;
         [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray14<GearsetItem> _items;
-        [FieldOffset(0x1C0)] public ushort GlassesId;
+        [FieldOffset(0x1C0), Obsolete("Use GlassesIds[0]")] public ushort GlassesId;
+        [FieldOffset(0x1C0), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
 
         [UnscopedRef] public ref GearsetItem GetItem(GearsetItemIndex index) => ref Items[(int)index];
 

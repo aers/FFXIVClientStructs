@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using FFXIVClientStructs.Interop;
 using InteropGenerator.Runtime.Attributes;
 // ReSharper disable LoopCanBeConvertedToQuery
 // Linq can be a performance hit in most cases
@@ -38,7 +39,7 @@ public static partial class TypeExtensions {
                    type == typeof(ushort) || type == typeof(int) || type == typeof(uint) ||
                    type == typeof(long) || type == typeof(ulong) || type == typeof(float) ||
                    type == typeof(double) || type == typeof(decimal) || type == typeof(nint) ||
-                   type == typeof(nuint) || type == typeof(Half);
+                   type == typeof(nuint) || type == typeof(Half) || type == typeof(StringPointer);
         }
     }
 
@@ -103,6 +104,7 @@ public static partial class TypeExtensions {
             _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
             _ when type == typeof(void*) => "__int64",
             _ when type == typeof(void**) => "__int64*",
+            _ when type == typeof(StringPointer) => "byte*",
             _ => type.SanitizeName()
         };
         return builder.Append(name).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).ToString();
@@ -113,7 +115,7 @@ public static partial class TypeExtensions {
             _ when type == typeof(sbyte) || type == typeof(byte) || type == typeof(bool) => 1,
             _ when type == typeof(char) || type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
-            _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace.AsSpan().SequenceEqual(ExporterStatics.InteropNamespacePrefix)) => 8,
+            _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace.AsSpan().SequenceEqual(ExporterStatics.InteropNamespacePrefix)) || type == typeof(StringPointer) => 8,
             _ when type.Name.StartsWith("FixedSizeArray") => type.GetGenericArguments()[0].SizeOf() * int.Parse(type.Name[14..type.Name.IndexOf('`')]),
             _ when type.GetCustomAttribute<InlineArrayAttribute>() is { Length: var length } => type.GetGenericArguments()[0].SizeOf() * length,
             _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,

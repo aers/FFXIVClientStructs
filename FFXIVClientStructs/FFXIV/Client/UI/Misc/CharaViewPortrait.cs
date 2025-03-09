@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -42,29 +43,35 @@ public unsafe partial struct CharaViewPortrait {
     [FieldOffset(0x400)] public bool CharacterVisible;
     [FieldOffset(0x401)] public bool CharaViewPortraitCharacterDataCopied;
     [FieldOffset(0x402)] public bool CharaViewPortraitCharacterLoaded;
+    [FieldOffset(0x403)] public bool IsAnimationPauseStatePending;
+    [FieldOffset(0x404)] public bool PendingAnimationPauseState;
+
+    [FieldOffset(0x408)] public AgentInterface* EventAgent;
+    [FieldOffset(0x410)] public int AgentEventId;
+    [FieldOffset(0x418)] public ulong AgentEventKind;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 45 33 C0")]
     public partial CharaViewPortrait* Ctor();
 
+    /// <summary>
+    /// Sets up the CharaViewPortrait.
+    /// </summary>
+    /// <param name="clientObjectId">The ClientObjectId to use.</param>
+    /// <param name="characterData">The character data.</param>
+    /// <param name="agent">An optional agent pointer.<br/>If set, vf8 will send an event with the given <paramref name="agentEventId"/> (as int in AtkValue[0]) containing a pointer to the CharaViewTexture (as int64 in AtkValue[1]).</param>
+    /// <param name="agentEventId">An id passed as int in AtkValue[0] of the event.</param>
+    /// <param name="agentEventKind">The eventKind parameter passed to agent->ReceiveEvent.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10")]
-    public partial void Setup(uint clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6); // a4 is set to +0x3A8, a5 is set to +0x3B0, a6 is set to +0x3B8
+    public partial void Setup(uint clientObjectId, CharaViewCharacterData* characterData, AgentInterface* agent, int agentEventId, ulong agentEventKind);
 
-    [VirtualFunction(4)]
-    public partial void SetCameraDistance(float deltaDistance);
-
-    [VirtualFunction(5)]
-    public partial void SetCameraYawAndPitch(float deltaRotation, float deltaPitch);
-
-    [VirtualFunction(6)]
-    public partial void SetCameraXAndY(float deltaX, float deltaY);
-
-    [VirtualFunction(10)]
-    public partial void Update();
+    [Obsolete("Use Setup with correct types.")]
+    public void Setup(uint clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6)
+        => Setup(clientObjectId, characterData, (AgentInterface*)a4, a5, (ulong)a6);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 89 48 8B 8F")]
     public partial void ResetCamera(); // sets position, target, zoom etc.
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 47 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 47 10 41 B9")]
     public partial void SetCameraPosition(HalfVector4* cam, HalfVector4* target);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 97 ?? ?? ?? ?? 0F 28 D0")]
@@ -126,28 +133,4 @@ public unsafe partial struct CharaViewPortrait {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 45 A4")]
     public partial void ToggleGearVisibility(bool hideVisor, bool hideWeapon, bool closeVisor);
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x34)]
-public unsafe struct ExportedPortraitData {
-    [FieldOffset(0x0)] public HalfVector4 CameraPosition;
-    [FieldOffset(0x8)] public HalfVector4 CameraTarget;
-    [FieldOffset(0x10)] public short ImageRotation;
-    [FieldOffset(0x12)] public byte CameraZoom;
-    [FieldOffset(0x14)] public ushort BannerTimeline;
-    [FieldOffset(0x18)] public float AnimationProgress;
-    [FieldOffset(0x1C)] public byte Expression;
-    [FieldOffset(0x1E)] public HalfVector2 HeadDirection;
-    [FieldOffset(0x22)] public HalfVector2 EyeDirection;
-    [FieldOffset(0x26)] public byte DirectionalLightingColorRed;
-    [FieldOffset(0x27)] public byte DirectionalLightingColorGreen;
-    [FieldOffset(0x28)] public byte DirectionalLightingColorBlue;
-    [FieldOffset(0x29)] public byte DirectionalLightingBrightness;
-    [FieldOffset(0x2A)] public short DirectionalLightingVerticalAngle;
-    [FieldOffset(0x2C)] public short DirectionalLightingHorizontalAngle;
-    [FieldOffset(0x2E)] public byte AmbientLightingColorRed;
-    [FieldOffset(0x2F)] public byte AmbientLightingColorGreen;
-    [FieldOffset(0x30)] public byte AmbientLightingColorBlue;
-    [FieldOffset(0x31)] public byte AmbientLightingBrightness;
-    [FieldOffset(0x32)] public ushort BannerBg;
 }

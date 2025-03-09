@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 //     Client::System::Common::NonCopyable
 [GenerateInterop]
 [Inherits<ResourceHandle>]
-[StructLayout(LayoutKind.Explicit, Size = 0x138)]
+[StructLayout(LayoutKind.Explicit, Size = 0x188)]
 public unsafe partial struct SkeletonResourceHandle {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]

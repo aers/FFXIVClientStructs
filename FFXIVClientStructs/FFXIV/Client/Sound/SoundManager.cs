@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 /// </summary>
 [GenerateInterop]
 [Inherits<ResourceEventListener>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1C88)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1D08)]
 public unsafe partial struct SoundManager {
     [FieldOffset(0x0008)] public Thread Thread; // TODO: make Thread properly inheritable
     [FieldOffset(0x0031)] public bool Disabled;

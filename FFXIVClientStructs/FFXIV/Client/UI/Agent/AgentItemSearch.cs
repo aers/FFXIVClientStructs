@@ -1,14 +1,16 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using static FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentItemSearch
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Common::Configuration::ConfigBase::ChangeEventInterface
 [Agent(AgentId.ItemSearch)]
 [GenerateInterop]
-[Inherits<AgentInterface>]
+[Inherits<AgentInterface>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3880)]
 public unsafe partial struct AgentItemSearch {
     [FieldOffset(0x98)] public StringHolder* StringData;

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -63,14 +62,15 @@ public class Exporter {
 
         var structs = xivStructs.Concat(havokStructs).ToArray();
         var now = DateTime.UtcNow;
+        var count = 1;
+
+        Console.WriteLine("::group::Processed Struct");
+        Console.WriteLine($"{PassString(count)} with {structs.Length} structs and enum types");
 
         foreach (var sStruct in structs) {
             ProcessType(sStruct);
         }
 
-        var count = 1;
-
-        Console.WriteLine("::group::Processed Struct");
         Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
 
         now = DateTime.UtcNow;
@@ -325,12 +325,14 @@ public class Exporter {
         if (field.FieldType.GetCustomAttribute<InlineArrayAttribute>() != null) {
             var arrLength = field.FieldType.GetCustomAttribute<InlineArrayAttribute>()!.Length;
             var elementType = field.FieldType.GetGenericArguments()[0];
+            var isString = field.GetCustomAttribute<FixedSizeArrayAttribute>()?.IsString ?? false;
             _processType.Add(elementType);
             return new ProcessedFixedField {
                 FieldType = elementType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name[1].ToString().ToUpper() + field.Name[2..],
-                FixedSize = arrLength
+                FixedSize = arrLength,
+                FixedString = isString
             };
         }
         if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
@@ -340,6 +342,15 @@ public class Exporter {
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = $"{sheetName}Sheet",
                 FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}"
+            };
+        }
+        if (field.GetCustomAttribute<CExporterExcelAttribute>() != null) {
+            var sheetName = field.GetCustomAttribute<CExporterExcelAttribute>()!.SheetName;
+            return new ProcessedField {
+                FieldType = field.FieldType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = field.Name,
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
             };
         }
         _processType.Add(field.FieldType);
@@ -365,6 +376,7 @@ public class Exporter {
                 EnumValues = type.GetFields().Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.FieldType == type).ToDictionary(f => f.Name, f => f.GetRawConstantValue()!.ToString()!)
             };
 
+            Console.WriteLine($"Processed {processedEnum.EnumNamespace}::{processedEnum.EnumName} with {processedEnum.EnumValues.Count} fields");
             _enums.Add(processedEnum);
         } else if (type.IsStruct()) {
             while (type.IsPointer) type = type.GetElementType()!;
@@ -382,7 +394,7 @@ public class Exporter {
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
                 var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => new { Name = t.Name, Parameters = t.GetParameters(), ReturnType = t.ReturnType }).ToArray();
-                virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Select(f => {
+                virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => {
                     var memberFunction = memberFunctions.FirstOrDefault(t => t.Name == f.Name);
                     var returnType = f.FieldType.GetFunctionPointerReturnType();
                     if (memberFunction?.ReturnType != returnType) memberFunction = null;
@@ -406,7 +418,7 @@ public class Exporter {
             var memberFunctionClass = type.GetMember("MemberFunctionPointers", ExporterStatics.BindingFlags).FirstOrDefault()?.DeclaringType;
             ProcessedMemberFunction[] memberFunctionsArray = [];
             if (memberFunctionClass != null) {
-                var memberFunctions = memberFunctionClass.GetMethods(ExporterStatics.BindingFlags);
+                var memberFunctions = memberFunctionClass.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).ToArray();
                 foreach (var memberFunction in memberFunctions) {
                     var memberFunctionAddress = memberFunction.GetCustomAttribute<MemberFunctionAttribute>();
                     if (memberFunctionAddress == null) continue;
@@ -493,6 +505,7 @@ public class Exporter {
                             FieldName = subStruct.StructName
                         }
                     ];
+                    Console.WriteLine($"Processed {unionStruct.StructTypeOverride} with {unionStruct.Fields.Length} fields and methods");
                     unions[unionStructIndex] = unionStruct;
                 }
                 _structs.AddRange(unions);
@@ -523,6 +536,7 @@ public class Exporter {
                 processedStruct.Fields = [.. processedStruct.Fields.OrderBy(t => t.FieldOffset)];
             }
 
+            Console.WriteLine($"Processed {processedStruct.StructTypeName} with {processedStruct.Fields.Length + (processedStruct.VirtualFunctions?.Length ?? 0) + processedStruct.MemberFunctions.Length} fields and methods");
             _structs.Add(processedStruct);
         }
         return null;
@@ -573,6 +587,7 @@ public class ProcessedField {
 
 public class ProcessedFixedField : ProcessedField {
     public required int FixedSize;
+    public bool FixedString;
 
     public override int FieldSize => FixedSize * FieldType.SizeOf();
 }
@@ -709,6 +724,8 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
             case ProcessedFixedField fix:
                 emitter.Emit(new Scalar("size"));
                 emitter.Emit(new Scalar(fix.FixedSize.ToString()));
+                emitter.Emit(new Scalar("is_string"));
+                emitter.Emit(new Scalar(fix.FixedString.ToString()));
                 break;
         }
         emitter.Emit(new MappingEnd());

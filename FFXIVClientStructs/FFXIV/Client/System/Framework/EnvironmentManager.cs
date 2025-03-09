@@ -11,8 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 /// This class is a high level abstraction of sound and window systems. And handles sanity checks before propagating values to the more low-level classes respectively
 /// </summary>
 [GenerateInterop]
-[Inherits<Task>]
-[Inherits<ChangeEventInterface>]
+[Inherits<Task>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x698)]
 public partial struct EnvironmentManager {
     [FieldOffset(0x050)] public bool IsShutDown;

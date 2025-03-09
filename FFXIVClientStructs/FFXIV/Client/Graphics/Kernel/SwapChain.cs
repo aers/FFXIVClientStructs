@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 //     Client::Graphics::DelayedReleaseClassBase
 //       Client::Graphics::ReferencedClassBase
 //   Client::Graphics::Kernel::Notifier
-[StructLayout(LayoutKind.Explicit, Size = 0x70)]
+[StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public unsafe struct SwapChain {
     [FieldOffset(0x38)] public uint Width;
     [FieldOffset(0x3C)] public uint Height;
