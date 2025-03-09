@@ -129,7 +129,7 @@ public unsafe partial struct RaptureHotbarModule {
     [FieldOffset(0x28725)] public bool ShowPvPHotbarSwapNotification;
 
     /// <summary>
-    /// Hotbar slots representing available Duty Actions (see also <see cref="ActionManager.GetDutyActionId"/>).
+    /// Hotbar slots representing available Duty Actions (see also <see cref="DutyActionManager.GetDutyActionId"/>).
     /// </summary>
     [FieldOffset(0x28728), FixedSizeArray] internal FixedSizeArray2<DutyActionSlot> _dutyActionSlots;
 
