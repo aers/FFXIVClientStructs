@@ -26,7 +26,7 @@ public unsafe partial struct Framework {
 
     [FieldOffset(0x0010)] public SystemConfig SystemConfig;
     [FieldOffset(0x0460)] public DevConfig DevConfig;
-    [Obsolete("Use CharamakeAvatarSaveData")]
+    [Obsolete("Use CharamakeAvatarSaveData", true)]
     [FieldOffset(0x0570)] public SavedAppearanceManager* SavedAppearanceData;
     [FieldOffset(0x0570)] public CharamakeAvatarSaveDataContainer* CharamakeAvatarSaveData;
     [FieldOffset(0x0580)] public byte ClientLanguage;

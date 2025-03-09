@@ -167,7 +167,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F0 E8 ?? ?? ?? ?? 48 8D 4D C0")]
     public partial void SanitizeString(AllowedEntities flags, Utf8String* characterList = null);
 
-    [Obsolete("Use SanitizeString with AllowedEntities enum")]
+    [Obsolete("Use SanitizeString with AllowedEntities enum", true)]
     public void SanitizeString(ushort flags, Utf8String* characterList) => SanitizeString((AllowedEntities)flags, characterList);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 48 8B 74 24 ?? 48 89 5C 24 ?? 48 89 5D 80 49 8B DE 48 C7 45 ?? ?? ?? ?? ?? 4C 3B F6 0F 84 ?? ?? ?? ?? 48 8B 03 80 38 00 74 1F 41 8B C4")]

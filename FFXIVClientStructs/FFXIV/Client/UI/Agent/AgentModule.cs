@@ -15,7 +15,7 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x18)] public float FrameDelta;
 
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray452<Pointer<AgentInterface>> _agents;
-    [FieldOffset(0xE40), Obsolete("Renamed to AgentHelpers")] public UIModuleAgentModulePtrStruct UIModuleAgentModulePtr;
+    [FieldOffset(0xE40), Obsolete("Renamed to AgentHelpers", true)] public UIModuleAgentModulePtrStruct UIModuleAgentModulePtr;
     [FieldOffset(0xE40)] public AgentHelpers AgentHelpers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
@@ -300,7 +300,7 @@ public enum AgentId : uint {
     Unk257 = 257, // PvPMKSHeaderSpec, PvPSpectatorCameraList, PvPSpectatorList
     Unk258 = 258,
     Aquarium = 259,
-    [Obsolete("Renamed to just Aquarium since it also handles the AquariumFishlist addon")]
+    [Obsolete("Renamed to just Aquarium since it also handles the AquariumFishlist addon", true)]
     AquariumSetting = 259,
     QTE = 260,
     DeepDungeonMenu = 261,
