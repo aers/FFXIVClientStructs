@@ -102,7 +102,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
         InContent = 5
     }
 
-    [Obsolete("Use FFXIVClientStructs.FFXIV.Client.UI.Agent.ContentsId.ContentsType")]
+    [Obsolete("Use FFXIVClientStructs.FFXIV.Client.UI.Agent.ContentsId.ContentsType", true)]
     public enum PoppedContentTypes : byte {
         None = 0,
         Roulette = 1,
