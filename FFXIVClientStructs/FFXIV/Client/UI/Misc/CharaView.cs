@@ -89,12 +89,6 @@ public unsafe partial struct CharaView : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 75 05 0F 57 C9")]
     public partial Character* GetCharacter();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 10 88 85")]
-    public partial bool IsAnimationPaused(); // TODO: While this works on CharaView, this is part of CharaViewPortrait. Move it there.
-
-    [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 8B CF E8 ?? ?? ?? ?? 32 C0")]
-    public partial void ToggleAnimationPlayback(bool paused); // TODO: While this works on CharaView, this is part of CharaViewPortrait. Move it there.
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 45 77 48 8D 4D 87")]
     public partial void UnequipGear(bool hasCharacterData = false, bool characterLoaded = true);
 

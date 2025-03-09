@@ -42,7 +42,7 @@ public unsafe partial struct ExdModule {
     public static partial void* GetItemRowById(uint itemId);
 
     [MemberFunction("40 53 48 83 EC 20 0F B6 41 29")]
-    public static partial byte GetBannerConditionUnlockState(void* row); // TODO: returns int
+    public static partial int GetBannerConditionUnlockState(void* row);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 5E ?? BA 05 00 00 00")]
     public static partial uint GetRoleForClassJobId(uint classJobId);

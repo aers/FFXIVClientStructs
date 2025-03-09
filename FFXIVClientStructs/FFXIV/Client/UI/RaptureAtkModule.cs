@@ -50,7 +50,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x23630), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
     [FieldOffset(0x240E0)] public ItemCache* KeyItemCache; // ptr to 120 entries
     [FieldOffset(0x240E8)] public ItemCache* EquippedItemCache; // ptr to 14 entries
-    [FieldOffset(0x240F0), FixedSizeArray] internal FixedSizeArray160<InventoryCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
+    [FieldOffset(0x240F0), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
     [FieldOffset(0x295F0)] public uint InventoryItemCacheSlotCount;
     [FieldOffset(0x295F4)] public uint GilCap;
 
@@ -150,10 +150,9 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x80)] public short LevelItem;
     }
 
-    // TODO: correct size to 0x90, change _inventoryItemCache array to use ItemCache
     // Client::UI::RaptureAtkModule::InventoryCache
     [GenerateInterop, Inherits<ItemCache>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x90)]
     public partial struct InventoryCache;
 
     // Client::UI::RaptureAtkModule::CrystalCache
