@@ -22,4 +22,12 @@ public unsafe partial struct DutyActionManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 41 8B D5")]
     public static partial DutyActionManager* GetInstanceIfReady();
+
+    /// <summary>
+    /// Returns the ID of the action present at the specified Duty Action slot.
+    /// </summary>
+    /// <param name="dutyActionSlot">The Duty Action slot number (0 or 1) to look up.</param>
+    /// <returns>Returns an Action ID.</returns>
+    [MemberFunction("E9 ?? ?? ?? ?? B1 02")]
+    public static partial uint GetDutyActionId(ushort dutyActionSlot);
 }

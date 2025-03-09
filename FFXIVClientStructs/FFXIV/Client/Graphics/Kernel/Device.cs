@@ -49,9 +49,8 @@ public unsafe partial struct Device {
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 45 48")]
     public partial ConstantBuffer* CreateConstantBuffer(int byteSize, uint flags, uint unk);
 
-    // TODO: use TextureFormat enum for textureFormat API 12 spec
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 48 8D 7F 20")]
-    public partial Texture* CreateTexture2D(int* size, byte mipLevel, uint textureFormat, uint flags, uint unk);
+    public partial Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, uint flags, uint unk);
 
     // /// <summary>
     // /// A collection of the render command buffer array.
@@ -74,7 +73,7 @@ public unsafe struct RenderCommandBufferGroup {
 public unsafe partial struct RenderCommandSetTarget {
     [FieldOffset(0x0)] public int SwitchType;
     [FieldOffset(0x4)] public int RenderTargetCount;
-    [FieldOffset(0x8), FixedSizeArray] private FixedSizeArray4<Pointer<Texture>> _renderTargets;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray4<Pointer<Texture>> _renderTargets;
     [FieldOffset(0x28)] public Texture* DepthBuffer;
     [FieldOffset(0x38)] public float Unk0;
     [FieldOffset(0x3C)] public float Unk1;
