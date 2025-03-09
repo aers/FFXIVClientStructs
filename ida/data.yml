@@ -2502,6 +2502,7 @@ classes:
         pointer: False
     funcs:
       0x1409A52E0: ctor
+      0x1409A8630: AddHousingMarker
   Client::Game::UI::Map::MapMarkerData:
     funcs:
       0x1409A4FD0: SetData
