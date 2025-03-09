@@ -1564,6 +1564,13 @@ classes:
       0x140C6E520: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
       0x140C6E660: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x1400B7FE0: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
+  Client::Game::HouseId:
+    funcs:
+      0x140C53840: GetWardIndex
+      0x140C53860: GetPlotIndex
+      0x140C538B0: GetTerritoryTypeId
+      0x140C538C0: GetWorldId
+      0x140C53B40: IsApartment
   Client::Game::HousingTerritory:
     vtbls:
       - ea: 0x141FB3198
