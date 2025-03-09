@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 
-// Client::UI::Info::InfoProxyBlacklist
+// Client::UI::Info::InfoProxyCatalogSearch
 //   Client::UI::Info::InfoProxyPageInterface
 //     Client::UI::Info::InfoProxyInterface
 [InfoProxy(InfoProxyId.CatalogSearch)]
