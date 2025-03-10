@@ -14,7 +14,7 @@ public unsafe partial struct AgentShop {
 
     [FieldOffset(0x88)] public AtkEventInterface* EventReceiver; // can be an agent or something else
 
-    [FieldOffset(0x98)] public byte* ShopName; // only for SpecialShop ?
+    [FieldOffset(0x98)] public StringPointer ShopName; // only for SpecialShop ?
 
     [FieldOffset(0xAC)] public uint DialogAddonId; // also not always used
 

@@ -143,7 +143,7 @@ public unsafe partial struct RaptureLogModule {
     public unsafe partial struct AddonMessageSub {
         [FieldOffset(0x00)] public ulong AccountId;
         [FieldOffset(0x08)] public ulong ContentId;
-        [FieldOffset(0x10)] public byte* Name;
+        [FieldOffset(0x10)] public StringPointer Name;
         [FieldOffset(0x18)] public Utf8String* MessageText;
         [FieldOffset(0x20)] public uint EntityId;
         [FieldOffset(0x24)] public ushort ChatType;

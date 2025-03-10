@@ -21,7 +21,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xB8)] public ByteColor EdgeColor;
     [FieldOffset(0xBC)] public ByteColor BackgroundColor;
     [FieldOffset(0xC0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
-    [FieldOffset(0x128)] public byte* OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
+    [FieldOffset(0x128)] public StringPointer OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
     [FieldOffset(0x130)] public StdList<Pointer<LinkData>>* LinkData;
     // if text is "asdf" and you selected "sd" this is 2, 3
     [FieldOffset(0x138)] public uint SelectStart;
@@ -72,7 +72,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 4A 8B 9C F6 ?? ?? ?? ??")]
-    public partial byte* GetText();
+    public partial StringPointer GetText();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 5A")]
     public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0, bool addZeroPadding = false);
