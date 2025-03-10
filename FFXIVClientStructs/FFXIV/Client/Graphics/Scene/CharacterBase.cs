@@ -118,144 +118,118 @@ public unsafe partial struct CharacterBase {
     public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotBytes);
 
     [VirtualFunction(75)]
-    public partial byte* ResolveRootPath(byte* pathBuffer, nuint pathBufferSize);
+    public partial StringPointer ResolveRootPath(byte* pathBuffer, nuint pathBufferSize);
 
     [VirtualFunction(76)]
-    public partial byte* ResolveSklbPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+    public partial StringPointer ResolveSklbPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
     [VirtualFunction(77)]
-    public partial byte* ResolveMdlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+    public partial StringPointer ResolveMdlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
     [VirtualFunction(78)]
-    public partial byte* ResolveSkpPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+    public partial StringPointer ResolveSkpPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
     [VirtualFunction(79)]
-    public partial byte* ResolvePhybPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+    public partial StringPointer ResolvePhybPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
     [VirtualFunction(84)]
-    public partial byte* ResolvePapPath(byte* pathBuffer, nuint pathBufferSize, uint unkAnimationIndex, byte* animationName);
+    public partial StringPointer ResolvePapPath(byte* pathBuffer, nuint pathBufferSize, uint unkAnimationIndex, byte* animationName);
 
     [VirtualFunction(85)]
-    public partial byte* ResolveTmbPath(byte* pathBuffer, nuint pathBufferSize, byte* timelineName);
+    public partial StringPointer ResolveTmbPath(byte* pathBuffer, nuint pathBufferSize, byte* timelineName);
 
     [VirtualFunction(87)]
-    public partial byte* ResolveMaterialPapPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint unkSId);
+    public partial StringPointer ResolveMaterialPapPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint unkSId);
 
     [VirtualFunction(89)]
-    public partial byte* ResolveImcPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+    public partial StringPointer ResolveImcPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
     /// <remarks>
     /// Caveat: this method will dereference a null pointer if determining the MTRL file path involves an IMC lookup and it is not called at the "right" moment.
     /// </remarks>
     [VirtualFunction(90)]
-    public partial byte* ResolveMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, byte* mtrlFileName);
+    public partial StringPointer ResolveMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, byte* mtrlFileName);
 
     [VirtualFunction(92)]
-    public partial byte* ResolveDecalPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+    public partial StringPointer ResolveDecalPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
     [VirtualFunction(93)]
-    public partial byte* ResolveVfxPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint* unkOutParam);
+    public partial StringPointer ResolveVfxPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint* unkOutParam);
 
     [VirtualFunction(94)]
-    public partial byte* ResolveEidPath(byte* pathBuffer, nuint pathBufferSize);
+    public partial StringPointer ResolveEidPath(byte* pathBuffer, nuint pathBufferSize);
 
     #region Resolve*Path(Span<byte>) overloads
     public ReadOnlySpan<byte> ResolveRootPath(Span<byte> pathBuffer) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveRootPath(pBuffer, (nuint)pathBuffer.Length);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveRootPath(pBuffer, (nuint)pathBuffer.Length);
     }
 
     public ReadOnlySpan<byte> ResolveSklbPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveSklbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveSklbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
     }
 
     public ReadOnlySpan<byte> ResolveMdlPath(Span<byte> pathBuffer, uint slotIndex) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveMdlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveMdlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
     }
 
     public ReadOnlySpan<byte> ResolveSkpPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveSkpPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveSkpPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
     }
 
     public ReadOnlySpan<byte> ResolvePhybPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolvePhybPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolvePhybPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
     }
 
     public ReadOnlySpan<byte> ResolvePapPath(Span<byte> pathBuffer, uint unkAnimationIndex, ReadOnlySpan<byte> animationName) {
-        byte* result;
         fixed (byte* pAnimationName = animationName)
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolvePapPath(pBuffer, (nuint)pathBuffer.Length, unkAnimationIndex, pAnimationName);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolvePapPath(pBuffer, (nuint)pathBuffer.Length, unkAnimationIndex, pAnimationName);
     }
 
     public ReadOnlySpan<byte> ResolveTmbPath(Span<byte> pathBuffer, ReadOnlySpan<byte> timelineName) {
-        byte* result;
         fixed (byte* pTimelineName = timelineName)
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveTmbPath(pBuffer, (nuint)pathBuffer.Length, pTimelineName);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveTmbPath(pBuffer, (nuint)pathBuffer.Length, pTimelineName);
     }
 
     public ReadOnlySpan<byte> ResolveMaterialPapPath(Span<byte> pathBuffer, uint slotIndex, uint unkSId) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveMaterialPapPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, unkSId);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveMaterialPapPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, unkSId);
     }
 
     public ReadOnlySpan<byte> ResolveImcPath(Span<byte> pathBuffer, uint slotIndex) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveImcPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveImcPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
     }
 
     /// <remarks>
     /// Caveat: this method will dereference a null pointer if determining the MTRL file path involves an IMC lookup and it is not called at the "right" moment.
     /// </remarks>
     public ReadOnlySpan<byte> ResolveMtrlPath(Span<byte> pathBuffer, uint slotIndex, ReadOnlySpan<byte> mtrlFileName) {
-        byte* result;
         fixed (byte* pMtrlFileName = mtrlFileName)
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pMtrlFileName);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pMtrlFileName);
     }
 
     public ReadOnlySpan<byte> ResolveDecalPath(Span<byte> pathBuffer, uint slotIndex) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveDecalPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveDecalPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
     }
 
     public ReadOnlySpan<byte> ResolveVfxPath(Span<byte> pathBuffer, uint slotIndex, out uint unkOutParam) {
-        byte* result;
         fixed (uint* pUnkOutParam = &unkOutParam)
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveVfxPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pUnkOutParam);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveVfxPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pUnkOutParam);
     }
 
     public ReadOnlySpan<byte> ResolveEidPath(Span<byte> pathBuffer) {
-        byte* result;
         fixed (byte* pBuffer = pathBuffer)
-            result = ResolveEidPath(pBuffer, (nuint)pathBuffer.Length);
-        return MemoryMarshal.CreateReadOnlySpanFromNullTerminated(result);
+            return ResolveEidPath(pBuffer, (nuint)pathBuffer.Length);
     }
     #endregion
 

@@ -25,7 +25,7 @@ public unsafe partial struct InfoProxyBlacklist {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct BlockedCharacter {
-        [FieldOffset(0x0)] public byte* Name;
+        [FieldOffset(0x0)] public StringPointer Name;
         [FieldOffset(0x8)] public ulong Id; // accountId for new, contentId for old
         [FieldOffset(0x10)] public byte Flag;
     }

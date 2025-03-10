@@ -243,7 +243,7 @@ public partial struct RaptureHotbarModule {
         /// <param name="actionId">The appearance action ID to use. Virtually almost always <see cref="ApparentActionId"/>.</param>
         /// <returns>Returns a string representation of the name to be displayed to the user for this hotbar slot.</returns>
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 48 85 C0 75 12")]
-        public partial byte* GetDisplayNameForSlot(HotbarSlotType slotType, uint actionId);
+        public partial StringPointer GetDisplayNameForSlot(HotbarSlotType slotType, uint actionId);
 
         /// <summary>
         /// Gets the <see cref="CostValue"/> for a specific hotbar slot, taking account the specified appearance slot type

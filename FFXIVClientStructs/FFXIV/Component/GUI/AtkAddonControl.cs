@@ -20,7 +20,7 @@ public unsafe partial struct AtkAddonControl {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public unsafe struct ChildAddonInfo {
-        [FieldOffset(0x00)] public byte* Unk0; // for example chat tab title
+        [FieldOffset(0x00)] public StringPointer Unk0; // for example chat tab title
         [FieldOffset(0x08)] public AtkUnitBase* AtkUnitBase;
 
         [FieldOffset(0x20)] public AtkCollisionNode* CollisionNode;

@@ -14,16 +14,16 @@ public unsafe partial struct LuaState {
         var top = State->lua_gettop();
         try {
             if (State->luaL_loadbuffer(code, code.Length, name ?? "chunk") != 0)
-                throw new Exception($"{State->lua_tostring(-1)}");
+                throw new Exception($"{State->lua_tolstring(-1)}");
 
             if (State->lua_pcall(0, -1, 0) != 0)
-                throw new Exception($"{State->lua_tostring(-1)}");
+                throw new Exception($"{State->lua_tolstring(-1)}");
 
             var cnt = State->lua_gettop() - top;
             var results = new string?[cnt];
             for (var i = 0; i < cnt; i++) {
                 State->luaB_tostring();
-                results[i] = State->lua_tostring(-1);
+                results[i] = State->lua_tolstring(-1);
                 State->lua_remove(1);
             }
 

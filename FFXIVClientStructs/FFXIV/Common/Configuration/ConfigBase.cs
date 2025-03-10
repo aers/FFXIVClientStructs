@@ -49,7 +49,7 @@ public unsafe struct ConfigValue {
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct ConfigEntry {
     [FieldOffset(0x0)] public ConfigProperties Properties;
-    [FieldOffset(0x10)] public byte* Name; // null-terminated string
+    [FieldOffset(0x10)] public StringPointer Name; // null-terminated string
     [FieldOffset(0x18)] public int Type; //1:Empty 2:uint 3:float 4:string
     [FieldOffset(0x20)] public ConfigValue Value;
     [FieldOffset(0x28)] public ConfigBase* Owner;

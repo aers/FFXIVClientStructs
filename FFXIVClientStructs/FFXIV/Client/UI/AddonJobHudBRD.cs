@@ -36,7 +36,7 @@ public unsafe partial struct AddonJobHudBRD0 {
         [FieldOffset(0x34)] public bool HasPlayedMage;
         [FieldOffset(0x35)] public bool HasPlayedArmy;
         [FieldOffset(0x36)] public bool HasPlayedWanderer;
-        [FieldOffset(0x38)] public byte* SongTitle;
+        [FieldOffset(0x38)] public StringPointer SongTitle;
     }
 
     [GenerateInterop]
