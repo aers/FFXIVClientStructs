@@ -38,7 +38,7 @@ public unsafe partial struct HousingSignboardPacket {
     [FieldOffset(0x2E), FixedSizeArray(isString: true)] internal FixedSizeArray193<byte> _greeting;
     [FieldOffset(0xEF), FixedSizeArray(isString: true)] internal FixedSizeArray31<byte> _ownerName;
 
-    // [FieldOffset(0x10E), FixedSizeArray(isString: true)] internal FixedSizeArrayUNK<byte> _unk;
+    [FieldOffset(0x10E), FixedSizeArray(isString: true)] internal FixedSizeArray4<byte> _FCTag;
 
     /// <remarks>HousingAppeal RowIds</remarks>
     [FieldOffset(0x115), FixedSizeArray] internal FixedSizeArray3<byte> _houseAppeals;
