@@ -9562,6 +9562,9 @@ structs:
   - type: Client::Graphics::Kernel::Texture*
     name: BackBufferReference
     offset: 40
+  - type: __int64
+    name: D3D11DeviceContext
+    offset: 3048
   member_functions: []
 - type: Client::Graphics::Kernel::Notifier
   name: Notifier
@@ -25295,7 +25298,7 @@ structs:
   - type: Client::Game::UI::LootItemMateria
     name: Materia
     offset: 14
-    size: 2
+    size: 5
     is_string: False
   - type: byte
     name: GlamourStainIds
@@ -44501,8 +44504,8 @@ structs:
     name: AgentInterface
     offset: 0
     base: true
-  - type: unsigned int
-    name: SelectedDawnContentId
+  - type: byte
+    name: SelectedContentId
     offset: 40
   virtual_functions:
   - name: ReceiveEvent
