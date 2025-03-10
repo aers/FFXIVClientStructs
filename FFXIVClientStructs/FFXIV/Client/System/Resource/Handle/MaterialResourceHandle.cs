@@ -202,40 +202,22 @@ public unsafe partial struct MaterialResourceHandle
     public Span<StainTableRow> StainTableSpan
         => StainTable switch { null => default, var ptr => new(ptr, TableRows) };
 
-    public byte* ShpkName
+    public StringPointer ShpkName
         => Strings + ShpkNameOffset;
 
-    public ReadOnlySpan<byte> ShpkNameSpan
-        => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(ShpkName);
-
-    public string ShpkNameString
-        => Encoding.UTF8.GetString(ShpkNameSpan);
-
-    public byte* TexturePath(int index)
+    public StringPointer TexturePath(int index)
     {
         if (index < 0 || index >= TextureCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + Textures[index].PathOffset;
     }
 
-    public ReadOnlySpan<byte> TexturePathSpan(int index)
-        => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(TexturePath(index));
-
-    public string TexturePathString(int index)
-        => Encoding.UTF8.GetString(TexturePathSpan(index));
-
-    public byte* AttributeSetName(int index)
+    public StringPointer AttributeSetName(int index)
     {
         if (index < 0 || index >= UvSetCount + ColorSetCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + AttributeSets[index].NameOffset;
     }
-
-    public ReadOnlySpan<byte> AttributeSetNameSpan(int index)
-        => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(AttributeSetName(index));
-
-    public string AttributeSetNameString(int index)
-        => Encoding.UTF8.GetString(AttributeSetNameSpan(index));
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 4A 0F B7 46 02")]
     public partial byte LoadTexFiles();

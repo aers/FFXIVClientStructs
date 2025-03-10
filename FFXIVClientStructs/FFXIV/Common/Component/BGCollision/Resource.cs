@@ -17,7 +17,7 @@ public unsafe partial struct Resource {
     public partial void Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
-    public partial byte* GetPath();
+    public partial StringPointer GetPath();
 
     [VirtualFunction(2)]
     public partial bool LoadSucceeded();

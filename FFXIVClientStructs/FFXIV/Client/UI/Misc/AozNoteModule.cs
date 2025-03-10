@@ -51,7 +51,7 @@ public unsafe partial struct AozNoteModule {
     }
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B 14 99")]
-    public partial byte* GetActiveSetCustomNamePtr(int activeSetIndex);
+    public partial StringPointer GetActiveSetCustomNamePtr(int activeSetIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 19 8B D3")]
     public partial bool HasActiveSetCustomName(int activeSetIndex);
@@ -66,5 +66,5 @@ public unsafe partial struct AozNoteModule {
     public partial void LoadActiveSetHotBars(int activeSetIndex);
 
     public void ResetActiveSetCustomName(int activeSetIndex)
-        => *GetActiveSetCustomNamePtr(activeSetIndex) = 0;
+        => *GetActiveSetCustomNamePtr(activeSetIndex).Value = 0;
 }

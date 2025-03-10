@@ -28,7 +28,7 @@ public unsafe partial struct AddonAOZNotebook {
         [FieldOffset(0x20)] public AtkTextNode* AtkTextNode;
         [FieldOffset(0x28)] public AtkResNode* AtkResNode1;
         [FieldOffset(0x30)] public AtkResNode* AtkResNode2;
-        [FieldOffset(0x38)] public byte* Name;
+        [FieldOffset(0x38)] public StringPointer Name;
         [FieldOffset(0x40)] public uint ActionId;
     }
 
@@ -36,7 +36,7 @@ public unsafe partial struct AddonAOZNotebook {
     public struct ActiveAction {
         [FieldOffset(0x0)] public AtkComponentDragDrop* AtkComponentDragDrop;
         [FieldOffset(0x8)] public AtkTextNode* AtkTextNode;
-        [FieldOffset(0x10)] public byte* Name;
+        [FieldOffset(0x10)] public StringPointer Name;
         [FieldOffset(0x18)] public uint ActionId;
     }
 }
