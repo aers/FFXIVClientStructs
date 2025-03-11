@@ -12,14 +12,13 @@ namespace FFXIVClientStructs.STD;
 public unsafe struct StdDeque<T>
     : IStdRandomElementModifiable<T>
         , IStaticNativeObjectOperation<StdDeque<T>>
+
     where T : unmanaged {
     private static readonly int BlockSize = sizeof(T) <= 1 ? 16 :
         sizeof(T) <= 2 ? 8 :
         sizeof(T) <= 4 ? 4 :
         sizeof(T) <= 8 ? 2 :
         1;
-
-    // TODO: set values accordingly after implementing IList<T>
     public static bool HasDefault => throw new NotImplementedException(); // StdOps<T>.HasDefault
     public static bool IsDisposable => true;
     public static bool IsCopyable => throw new NotImplementedException(); // StdOps<T>.IsCopyable
