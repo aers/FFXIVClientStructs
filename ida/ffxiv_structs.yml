@@ -1455,6 +1455,19 @@ enums:
     "MobHunt": 7
     "AetherCurrent": 8
     "Bozja": 9
+- type: Client::UI::Agent::AgentMateriaAttach::FilterCategory
+  name: FilterCategory
+  underlying: int
+  namespace: Client.UI.Agent
+  values:
+    "None": -1
+    "Inventory": 0
+    "ArmouryWeapon": 1
+    "ArmouryHeadBodyHands": 2
+    "ArmouryLegsFeet": 3
+    "ArmouryNeckEars": 4
+    "ArmouryWristRing": 5
+    "Equipped": 6
 - type: Client::UI::Agent::AgentMJIGatheringHouse::Confirmation
   name: Confirmation
   underlying: int
@@ -13892,6 +13905,19 @@ structs:
   - type: int
     name: MaxIndex
     offset: 4
+  member_functions: []
+- type: Client::UI::Agent::AgentMateriaAttach::FilterItems
+  name: FilterItems
+  namespace: Client.UI.Agent
+  union: False
+  size: 184
+  fields:
+  - type: Client::Game::InventoryItem***
+    name: Items
+    offset: 152
+  - type: Client::Game::InventoryItem***
+    name: Materia
+    offset: 160
   member_functions: []
 - type: Client::UI::Agent::AgentModule::UIModuleAgentModulePtrStruct
   name: UIModuleAgentModulePtrStruct
@@ -44501,8 +44527,8 @@ structs:
     name: AgentInterface
     offset: 0
     base: true
-  - type: unsigned int
-    name: SelectedDawnContentId
+  - type: byte
+    name: SelectedContentId
     offset: 40
   virtual_functions:
   - name: ReceiveEvent
@@ -47253,6 +47279,235 @@ structs:
   - type: byte
     name: IsValid
     offset: 3356
+  member_functions: []
+- type: Client::UI::Agent::AgentMateriaAttach
+  name: AgentMateriaAttach
+  namespace: Client.UI.Agent
+  union: False
+  size: 328
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentMateriaAttach::FilterItems*
+    name: Context
+    offset: 208
+  - type: unsigned int
+    name: StateVar
+    offset: 220
+  - type: unsigned int
+    name: AddonIdAttachDialog
+    offset: 224
+  - type: Client::UI::Agent::AgentMateriaAttach::FilterCategory
+    name: ActiveFilter
+    offset: 236
+  - type: __int16
+    name: ItemCount
+    offset: 240
+  - type: __int16
+    name: MateriaCount
+    offset: 242
+  - type: __int16
+    name: SelectedItem
+    offset: 244
+  - type: __int16
+    name: SelectedMateria
+    offset: 246
+  - type: __int16
+    name: HoveredItem
+    offset: 248
+  - type: __int16
+    name: HoveredMateria
+    offset: 250
+  - type: unsigned int
+    name: MeldCostGil
+    offset: 292
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
+- type: Client::UI::Agent::AgentMaterialize
+  name: AgentMaterialize
+  namespace: Client.UI.Agent
+  union: False
+  size: 232
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+  - name: Hide
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+  - name: IsAgentActive
+    offset: 40
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+  - name: Update
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 56
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+  - name: GetAddonId
+    offset: 64
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+  - name: OnGameEvent
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+    - type: byte
+      name: a2
   member_functions: []
 - type: Client::UI::Agent::AgentMiragePrismPrismItemDetail
   name: AgentMiragePrismPrismItemDetail
