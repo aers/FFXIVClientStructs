@@ -131,8 +131,21 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x08)] public Utf8String Name;
     }
 
+    public enum DecorationType : byte
+    {
+        /// This does not correspond to a real decoration and should be ignored.
+        Invalid = 0x0,
+        Backing = 0x1,
+        PatternOverlay = 0x2,
+        PortraitFrame = 0x3,
+        PlateFrame = 0x4,
+        Accent = 0x5,
+    }
+
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Decoration {
+        [FieldOffset(0x00)] public DecorationType Type;
+        [Obsolete("Use Type")]
         [FieldOffset(0x00)] public byte Index;
         [FieldOffset(0x01)] public byte Unk1;
         [FieldOffset(0x04)] public uint IconId;
