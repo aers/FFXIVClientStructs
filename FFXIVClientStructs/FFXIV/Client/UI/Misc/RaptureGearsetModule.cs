@@ -279,7 +279,7 @@ public unsafe partial struct RaptureGearsetModule {
         [FieldOffset(0x36)] public byte BannerIndex;
         [FieldOffset(0x37)] public GearsetFlag Flags;
         [FieldOffset(0x38), FixedSizeArray] internal FixedSizeArray14<GearsetItem> _items;
-        [FieldOffset(0x1C0), Obsolete("Use GlassesIds[0]")] public ushort GlassesId;
+        [FieldOffset(0x1C0), Obsolete("Use GlassesIds[0]", true)] public ushort GlassesId;
         [FieldOffset(0x1C0), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
 
         [UnscopedRef] public ref GearsetItem GetItem(GearsetItemIndex index) => ref Items[(int)index];
