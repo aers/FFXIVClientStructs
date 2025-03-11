@@ -112,9 +112,9 @@ public unsafe partial struct PlayerState {
 
     [FieldOffset(0x4EE), FixedSizeArray] internal FixedSizeArray7<byte> _selectedPoses;
     [FieldOffset(0x4F5), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
-    [FieldOffset(0x4F5), Obsolete("Use PlayerStateFlags[0]")] public byte PlayerStateFlags1;
-    [FieldOffset(0x4F6), Obsolete("Use PlayerStateFlags[1]")] public byte PlayerStateFlags2;
-    [FieldOffset(0x4F7), Obsolete("Use PlayerStateFlags[2]")] public byte PlayerStateFlags3;
+    [FieldOffset(0x4F5), Obsolete("Use PlayerStateFlags[0]", true)] public byte PlayerStateFlags1;
+    [FieldOffset(0x4F6), Obsolete("Use PlayerStateFlags[1]", true)] public byte PlayerStateFlags2;
+    [FieldOffset(0x4F7), Obsolete("Use PlayerStateFlags[2]", true)] public byte PlayerStateFlags3;
 
     [FieldOffset(0x522)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
     [FieldOffset(0x523)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)

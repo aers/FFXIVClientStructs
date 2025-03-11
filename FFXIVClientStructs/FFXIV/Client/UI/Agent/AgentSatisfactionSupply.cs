@@ -18,10 +18,10 @@ public unsafe partial struct AgentSatisfactionSupply {
     [FieldOffset(0x60)] public ushort ClassJobLevel;
 
     [FieldOffset(0x64)] public SatisfactionSupplyManager.NpcInfo NpcData;
-    [FieldOffset(0x64), Obsolete("Use NpcData.NpcId")] public uint NpcId;
-    [FieldOffset(0x78), Obsolete("Use NpcData.RemainingAllowances")] public ushort RemainingAllowances;
-    [FieldOffset(0x7A), Obsolete("Use NpcData.LevelUnlocked")] public short LevelUnlocked;
-    [FieldOffset(0x7C), Obsolete("Use NpcData.CanGlamour")] public byte CanGlamour;
+    [FieldOffset(0x64), Obsolete("Use NpcData.NpcId", true)] public uint NpcId;
+    [FieldOffset(0x78), Obsolete("Use NpcData.RemainingAllowances", true)] public ushort RemainingAllowances;
+    [FieldOffset(0x7A), Obsolete("Use NpcData.LevelUnlocked", true)] public short LevelUnlocked;
+    [FieldOffset(0x7C), Obsolete("Use NpcData.CanGlamour", true)] public byte CanGlamour;
 
     [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray3<ItemInfo> _items;
 
@@ -74,7 +74,7 @@ public unsafe partial struct AgentSatisfactionSupply {
         [FieldOffset(0x06)] public ushort Collectability2;
         [FieldOffset(0x08)] public ushort Collectability3;
         [FieldOffset(0x0A)] public bool IsBonus;
-        [FieldOffset(0x0A), Obsolete("Use IsBonus")] public ushort Bonus;
+        [FieldOffset(0x0A), Obsolete("Use IsBonus", true)] public ushort Bonus;
         [FieldOffset(0x0C)] public uint Reward1Id;
         [FieldOffset(0x10)] public uint Reward2Id;
         [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray3<ushort> _reward1Quantity; // per quality level
