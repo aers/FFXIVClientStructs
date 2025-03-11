@@ -64,5 +64,3 @@ TODO:
     ☐ // TODO: Actually call `SteamInternal_ContextInit(ctx)` here, rather than just returning the cached pointer. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs#48
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/TextParameter.cs
     ☐ // TODO: implement as Client::System::Data::Variant<> and Client::System::Data::VariantPtr<> @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/TextParameter.cs#3
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/STD/StdDeque.cs
-    ☐ // TODO: set values accordingly after implementing IList<T> @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/STD/StdDeque.cs#22
