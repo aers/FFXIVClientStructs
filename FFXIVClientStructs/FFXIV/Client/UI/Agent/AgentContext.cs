@@ -112,6 +112,6 @@ public unsafe partial struct ContextMenu {
 
     [FieldOffset(0x660)] public uint ContextItemDisabledMask;
     [FieldOffset(0x664)] public uint ContextSubMenuMask;
-    [FieldOffset(0x668)] public byte* ContextTitleString;
+    [FieldOffset(0x668)] public StringPointer ContextTitleString;
     [FieldOffset(0x670)] public byte SelectedContextItemIndex;
 }

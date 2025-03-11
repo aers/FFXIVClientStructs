@@ -43,7 +43,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [FieldOffset(0x8), CExporterUnion("Value")] public uint UInt;
     [FieldOffset(0x8), CExporterUnion("Value")] public ulong UInt64;
     [FieldOffset(0x8), CExporterUnion("Value")] public float Float;
-    [FieldOffset(0x8), CExporterUnion("Value")] public byte* String;
+    [FieldOffset(0x8), CExporterUnion("Value")] public StringPointer String;
     [FieldOffset(0x8), CExporterUnion("Value")] public char* WideString; // C# uses UTF-16 for char, which makes it easy for us to use it here
     [FieldOffset(0x8), CExporterUnion("Value")] public StdVector<AtkValue>* Vector;
     [Obsolete("Renamed to Pointer", true)]
@@ -56,7 +56,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
 
     public void Ctor() {
         Type = ValueType.Undefined;
-        String = null;
+        String.Value = null;
     }
 
     public void Dtor(bool free) => Dispose(free);
@@ -165,13 +165,13 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
             ValueType.Int => Int.ToString(),
             ValueType.UInt => UInt.ToString(),
             ValueType.Float => Float.ToString(),
-            ValueType.String or ValueType.ManagedString => Marshal.PtrToStringUTF8((nint)String) ?? string.Empty,
+            ValueType.String or ValueType.ManagedString => String.ToString(),
             ValueType.WideString => Marshal.PtrToStringUni((nint)WideString) ?? string.Empty,
-            ValueType.String8 => Marshal.PtrToStringUTF8((nint)String) ?? string.Empty,
+            ValueType.String8 => String.ToString(),
             ValueType.Vector or ValueType.ManagedVector => Vector != null ? Vector->ToString() : "null",
             ValueType.Pointer => $"0x{(nint)Pointer:X}",
             ValueType.AtkValues => $"0x{(nint)AtkValues:X}",
-            _ => BitConverter.ToString(BitConverter.GetBytes((ulong)String)).Replace("-", " ")
+            _ => BitConverter.ToString(BitConverter.GetBytes((ulong)String.Value)).Replace("-", " ")
         };
     }
 }
