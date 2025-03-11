@@ -8,7 +8,7 @@ public struct WeaponState {
     [FieldOffset(0x08)] public float AutoSheathTimer;
     [FieldOffset(0x0C)] public bool AutoSheatheState;
     [FieldOffset(0x10)] public AutoAttackState AutoAttackState; // note: not sure whether this is actually a part of this structure or next field of a parent
-    [FieldOffset(0x10), Obsolete("Use AutoAttackState.IsAutoAttacking")] public bool IsAutoAttacking;
+    [FieldOffset(0x10), Obsolete("Use AutoAttackState.IsAutoAttacking", true)] public bool IsAutoAttacking;
 }
 
 [GenerateInterop]

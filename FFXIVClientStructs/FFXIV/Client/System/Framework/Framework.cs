@@ -78,7 +78,7 @@ public unsafe partial struct Framework {
     /// <summary>
     /// If true <see cref="FrameDeltaTime"/> is set to 0.
     /// </summary>
-    [FieldOffset(0x17D0), Obsolete("Use PauseFrameTicksCounter != 0")] public bool DiscardFrame;
+    [FieldOffset(0x17D0), Obsolete("Use PauseFrameTicksCounter != 0", true)] public bool DiscardFrame;
     /// <summary>
     /// If set to anything non-zero, overrides <see cref="FrameDeltaTime"/>. If negative <see cref="FrameDeltaTimeOverride"/> is used and 60fps as a fallback.
     /// Unlike <see cref="FrameDeltaTimeOverride"/>, this applies only to the next frame, and is reset to zero on next tick.
