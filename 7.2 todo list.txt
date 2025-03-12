@@ -51,10 +51,6 @@ NOTE:
     ☐ // Note we've already partitioned around the pivot and do not have to move the pivot again. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/STD/Helper/MutateHelper.cs#91
 
 TODO:
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Scheduler/Resource/SchedulerResourceManagement.cs
-    ☐ [FieldOffset(0x10)] public void* Unknown; // TODO: SchedulerResources map/set<T>, see LoadActionTmb @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Scheduler/Resource/SchedulerResourceManagement.cs#7
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentLobby.cs
-    ☐ // TODO: everything below here is wrong @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentLobby.cs#82
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs
     ☐ [FieldOffset(0x19)] public byte IsQuestSomething; // TODO: doesn't seem right, 0x18 is used as a dword... @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#65
     ☐ // TODO: this is likely part of SatisfactionSupplyManager, since it's filled by one of its member functions (assuming agent knows about manager and not vice versa) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#68
