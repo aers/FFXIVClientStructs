@@ -40,7 +40,7 @@ public unsafe partial struct lua_State {
     public partial void lua_settop(int idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 38 23")]
-    public partial StringPointer lua_tolstring(int idx, int* len = null);
+    public partial StringPointer lua_tolstring(int idx, int* len);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 D0 48 8D 15")]
     public partial double lua_tonumber(int idx);
@@ -104,6 +104,10 @@ public unsafe partial struct lua_State {
 
     public void lua_pushcfunction(delegate* unmanaged<lua_State*, int> f) {
         lua_pushcclosure(f, 0);
+    }
+
+    public StringPointer lua_tostring(int idx) {
+        return lua_tolstring(idx, null);
     }
 
     public void lua_pop(int n) {
