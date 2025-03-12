@@ -131,8 +131,7 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x08)] public Utf8String Name;
     }
 
-    public enum DecorationType : byte
-    {
+    public enum DecorationType : byte {
         /// This does not correspond to a real decoration and should be ignored.
         Invalid = 0x0,
         Backing = 0x1,
