@@ -48,6 +48,18 @@ public unsafe partial struct TargetSystem {
     [Obsolete($"Renamed to {nameof(GetTargetObject)}", true)]
     public GameObject* GetCurrentTarget() => GetTargetObject();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 3B C7 75 ?? 32 C0")]
+    public partial GameObject* GetHardTarget();
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 8B 83")]
+    public partial bool SetHardTarget(GameObject* hardTargetObject, bool ignoreTargetModes = false, bool a4 = false, int a5 = 0);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 3B C3 74 ?? B0 01")]
+    public partial GameObject* GetSoftTarget();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 81 C4 E0 19 00 00 41 5F 41 5D")]
+    public partial bool SetSoftTarget(GameObject* softTargetObject);
+
     [MemberFunction("48 85 D2 74 2C 4C 63 89")]
     public partial bool IsObjectInViewRange(GameObject* obj);
 
