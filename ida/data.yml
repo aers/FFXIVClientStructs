@@ -6361,9 +6361,11 @@ classes:
       0x1405D2680: GetHardTargetObjectId
       0x1405D26A0: GetHardTargetId
       0x1405D26C0: GetHardTarget
+      0x1405C9AF0: SetHardTarget
       0x1405D26E0: GetSoftTargetObjectId
       0x1405D2700: GetSoftTargetId
       0x1405D2720: GetSoftTarget
+      0x1405C9810: SetSoftTarget
       0x1405D2740: GetMouseOverTargetPlayerId
       0x1405D2780: GetMouseOverTarget
       0x1405D2790: SetMouseOverEventObj
@@ -6381,6 +6383,7 @@ classes:
       0x1405D5100: HandleLeftClick # inlined @ 0x140602A35
       0x1405D5500: RemoveObjectFromTargets
       0x1405D0CC0: IsObjectOnScreen
+      0x1405D01B0: GetTargetModeByActiveIndex
   Client::Game::Control::Control:
     instances:
       - ea: 0x1427C5F40
