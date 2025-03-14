@@ -1,5 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
+// Client::Game::Object::HousingObject
+//   Client::Game::Object::GameObject
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
