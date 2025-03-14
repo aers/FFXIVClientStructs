@@ -45,7 +45,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x108)] public ILayoutInstance* LayoutInstance;
     [FieldOffset(0x108)] public SharedGroupLayoutInstance* SharedGroupLayoutInstance;
     [FieldOffset(0x110)] public uint NamePlateIconId;
-    [FieldOffset(0x118)] public int RenderFlags;
+    [FieldOffset(0x118)] public ulong RenderFlags;
     [FieldOffset(0x158)] public LuaActor* LuaActor;
     [FieldOffset(0x160)] public EventHandler* EventHandler;
 
@@ -135,6 +135,9 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 5A C7")]
     public partial Vector3* GetPosition();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 89 85")]
+    public partial uint GetObjStrId();
 }
 
 // if (EntityId == 0xE0000000)
