@@ -50,10 +50,10 @@ public unsafe partial struct TargetSystem {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B C7 75 ?? 32 C0")]
     public partial GameObject* GetHardTarget();
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 8B 83")]
     public partial bool SetHardTarget(GameObject* hardTargetObject, bool ignoreTargetModes = false, bool a4 = false, int a5 = 0);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B C3 74 ?? B0 01")]
     public partial GameObject* GetSoftTarget();
 
