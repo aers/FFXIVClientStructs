@@ -32,6 +32,9 @@ public unsafe partial struct LogViewer {
 
     [FieldOffset(0xF9)] public byte IsContextMenuShown;
 
+    [FieldOffset(0x120)] public bool IsMaximized;
+    [FieldOffset(0x121)] public bool IsSelectingText;
+
     [MemberFunction("48 85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 55 56 41 55 49 8D AB")]
     public partial void HandleLinkClick(LinkData* linkData);
 }
