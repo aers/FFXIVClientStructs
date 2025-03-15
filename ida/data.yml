@@ -1404,6 +1404,7 @@ classes:
         pointer: False
     funcs:
       0x14082A560: ctor
+      0x140800180: Initialize
       0x140800B20: Update
       0x140802960: GetInventoryContainer  # (this, containerId)
       0x140802A10: GetInventorySlot  # (this, containerId, slotId)
@@ -1444,7 +1445,7 @@ classes:
       0: Dtor
       1: Copy
       2: EqualTo
-      3: IsNotLinked
+      3: IsEmpty
       4: Clear
       5: GetBaseItemId
       6: GetItemId
@@ -1488,6 +1489,8 @@ classes:
       2: Clear
       4: GetSize
       5: GetInventorySlot
+    funcs:
+      0x1407FF9E0: ClearItems
   Client::Game::InventoryType:
     funcs:
       0x140802870: IsCrystals
@@ -8895,6 +8898,8 @@ classes:
       24: GetDrawObject_2
       25: UpdateRadius
       26: Highlight
+      30: TryGetEventHandler
+      31: GetEventHandlersImpl
       34: SetReadyToDraw
       35: Update
       46: GetCenterPosition
@@ -9765,6 +9770,7 @@ classes:
       0x140D78F10: SetMainCommandEnabledState
       0x140D7DEC0: UpdateCharacter
       0x140D7E490: UpdateParty
+      0x140D7E9A0: UpdateTargetInfo
       0x140D7FF90: UpdateDTR
       0x140D810F0: UpdateContentGauge
       0x140D81410: UpdateMainCommands
@@ -11384,6 +11390,9 @@ classes:
     funcs:
       0x140BE8EE0: Open
       0x140BE9440: OpenPreview
+  Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData:
+    funcs:
+      0x140C11AD0: ctor
   Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
     vtbls:
       - ea: 0x141FAF778
@@ -15501,6 +15510,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14104FB40: ctor
+      0x141050AE0: SetWindowLock
   Client::UI::AddonRecipeTree:
     vtbls:
       - ea: 0x141FFA550
@@ -15551,6 +15561,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BC500: ctor
+  Client::UI::AddonTeleportTown:
+    vtbls:
+      - ea: 0x142033968
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonArchiveItem:
     vtbls:
       - ea: 0x142034708
@@ -15723,6 +15737,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410FE020: ctor
+  Client::UI::AddonCurrency:
+    vtbls:
+      - ea: 0x14200B400
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410FF710: ctor
   Client::UI::AddonSalvageItemSelector:
     vtbls:
       - ea: 0x14200ED48
@@ -16136,6 +16156,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141112230: ctor
+      0x1411144B0: UpdateClasses
   Client::UI::AddonPvpProfile:
     vtbls:
       - ea: 0x14200BD70

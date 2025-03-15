@@ -81,7 +81,7 @@ public unsafe partial struct AgentContext {
     public partial void AddContextMenuItem(int eventId, byte* text, bool disabled = false, bool submenu = false, bool copyText = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 84 ED 79 0F")]
-    public partial void AddContextMenuItem2(int eventId, uint addonTextId, bool disabled = false, bool submenu = false, bool copyText = true);
+    public partial void AddContextMenuItem2(int eventId, uint addonTextId, bool disabled = false, bool submenu = false);
 
     public void SetPosition(int x, int y) {
         Position.X = x;

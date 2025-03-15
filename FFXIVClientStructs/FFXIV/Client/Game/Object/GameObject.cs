@@ -135,6 +135,9 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 5A C7")]
     public partial Vector3* GetPosition();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 89 85")]
+    public partial uint GetObjStrId();
 }
 
 // if (EntityId == 0xE0000000)
