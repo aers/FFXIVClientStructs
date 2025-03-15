@@ -1,13 +1,40 @@
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::InventoryManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x3620)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3730)]
 public unsafe partial struct InventoryManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
     public static partial InventoryManager* Instance();
 
+    [FieldOffset(0), FixedSizeArray] internal FixedSizeArray74<InventoryContainer> _containers;
+
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
+    [FieldOffset(0x1E10)] internal InventoryType UnkInventoryType; // Can be EquippedItems, RetainerEquippedItems...?
+
+    // This is *entirely* untested and seems to be reused for FATE HandIns and Mail too??!
+    [FieldOffset(0x1E18), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsLocal;
+    [FieldOffset(0x1FC8), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsRemote;
+    [FieldOffset(0x2178)] public uint TradeUnk2178;
+    [FieldOffset(0x217C)] public uint TradeUnk217C;
+    [FieldOffset(0x2180)] public uint TradeUnk2180;
+    [FieldOffset(0x2184), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _tradePartnerName;
+    [FieldOffset(0x21A4)] public uint TradePartnerEntityId;
+    [FieldOffset(0x21A8)] public bool TradeUnk21A8;
+    [FieldOffset(0x21A9)] public bool TradeWarnIfMovedTooFar;
+    [FieldOffset(0x21AB)] public bool TradeIsSyncPending;
+
+    // Data here for Gearset Item check
+    [FieldOffset(0x2400)] internal BannerData GearsetPortraitData;
+    // Related to Addon#4385 "<head(<ennoun(Item,2,lnum1,1,1)>)> registered to this gear set could not be found in your Armoury Chest. Replace it with <ennoun(Item,1,lnum2,1,1)>?"
+    [FieldOffset(0x2438)] internal int GearsetReplaceItemSelectYesNoAddonId;
+    [FieldOffset(0x2440)] internal uint GearsetId;
+
+    // Retainer item swap stuff?
+    [FieldOffset(0x3620)] internal InventoryItem UnkInventoryItem0;
+    [FieldOffset(0x3668)] internal InventoryItem UnkInventoryItem1;
 
     [MemberFunction("E8 ?? ?? ?? ?? 88 58 18")]
     public partial InventoryContainer* GetInventoryContainer(InventoryType inventoryType);
