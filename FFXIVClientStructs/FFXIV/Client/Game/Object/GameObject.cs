@@ -108,8 +108,17 @@ public unsafe partial struct GameObject {
     [VirtualFunction(58)]
     public partial bool IsNotMounted();
 
+    [VirtualFunction(59)]
+    public partial void Terminate();
+
+    [VirtualFunction(60)]
+    public partial void Destroy();
+
     [VirtualFunction(61)]
     public partial bool IsCharacter();
+
+    [VirtualFunction(68)]
+    public partial void OnInitialize();
 
     /// <summary>
     /// Determines whether a ray intersects with the game object, either by checking the model's geometry or the object's approximate center position.
