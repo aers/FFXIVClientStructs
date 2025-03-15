@@ -16152,6 +16152,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141112230: ctor
+      0x1411144B0: UpdateClasses
   Client::UI::AddonPvpProfile:
     vtbls:
       - ea: 0x14200BD70
