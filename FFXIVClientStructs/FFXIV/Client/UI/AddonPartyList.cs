@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using static FFXIVClientStructs.FFXIV.Client.UI.AddonNamePlate;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -10,6 +11,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1590)]
 public unsafe partial struct AddonPartyList {
+    public static PartyListIntArrayData* Instance() => (PartyListIntArrayData*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.PartyList)->IntArray;
+
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _partyMembers;
     [FieldOffset(0xA38), FixedSizeArray] internal FixedSizeArray7<PartyListMemberStruct> _trustMembers;
     [FieldOffset(0x1238)] public PartyListMemberStruct Chocobo;
@@ -69,5 +72,58 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(0xE0)] public AtkNineGridNode* ClickFlash;
         [FieldOffset(0xE8)] public AtkNineGridNode* TargetGlow;
         [FieldOffset(0xF8)] public byte EmnityByte; //01 or 02 or FF
+    }
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 745 * 4)]
+    public partial struct PartyListIntArrayData {
+        [FieldOffset(2 * 4)] public int PartyLeaderIndex;
+        /// <summary>
+        /// Amount of players in the party.
+        /// </summary>
+        [FieldOffset(6 * 4)] public int PartyListCount;
+        [FieldOffset(7 * 4), FixedSizeArray] internal FixedSizeArray8<PartyListMemberIntArrayData> _partyMembers;
+    }
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]
+    public partial struct PartyListMemberIntArrayData {
+        [FieldOffset(3 * 4)] public int Level;
+        [FieldOffset(4 * 4)] public int ClassIconId;
+        [FieldOffset(7 * 4)] public int CurrentHealth;
+        [FieldOffset(8 * 4)] public int MaxHealth;
+        /// <summary>
+        /// Goes from 0 to 200%
+        /// </summary>
+        [FieldOffset(9 * 4)] public int ShieldsPercentage;
+        [FieldOffset(10 * 4)] public int CurrentMana; 
+        [FieldOffset(11 * 4)] public int MaxMana;
+        /// <summary>
+        /// Goes from 0 to 100%
+        /// </summary>
+        [FieldOffset(13 * 4)] public int EmnityPercent;
+        /// <summary>
+        /// Starts at 1
+        /// <br>[A]</br>
+        /// <br>[2]</br>
+        /// <br>[3]</br>
+        /// <br>...</br>
+        /// <br>[8]</br>
+        /// </summary>
+        [FieldOffset(14 * 4)] public int EmnityLevel;
+        /// <summary>
+        /// Amount of Statuses applied to the player.
+        /// <br>Max is 10.</br>
+        /// </summary>
+        [FieldOffset(17 * 4)] public int StatusCount;
+        [FieldOffset(18 * 4), FixedSizeArray] internal FixedSizeArray10<int> _statusIconIds;
+        [FieldOffset(28 * 4), FixedSizeArray] internal FixedSizeArray10<int> _statusIsDispellable;
+        /// <summary>
+        /// -1 if not active
+        /// </summary>
+        [FieldOffset(38 * 4)] public int CastTime;
+        [FieldOffset(39 * 4)] public int CastId;
+        [FieldOffset(41 * 4)] public int ContentId;
+        [FieldOffset(42 * 4)] public int Targetable;
     }
 }
