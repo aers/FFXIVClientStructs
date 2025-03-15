@@ -1404,6 +1404,7 @@ classes:
         pointer: False
     funcs:
       0x14082A560: ctor
+      0x140800180: Initialize
       0x140800B20: Update
       0x140802960: GetInventoryContainer  # (this, containerId)
       0x140802A10: GetInventorySlot  # (this, containerId, slotId)
@@ -1488,6 +1489,8 @@ classes:
       2: Clear
       4: GetSize
       5: GetInventorySlot
+    funcs:
+      0x1407FF9E0: ClearItems
   Client::Game::InventoryType:
     funcs:
       0x140802870: IsCrystals
