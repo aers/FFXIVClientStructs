@@ -11390,6 +11390,9 @@ classes:
     funcs:
       0x140BE8EE0: Open
       0x140BE9440: OpenPreview
+  Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData:
+    funcs:
+      0x140C11AD0: ctor
   Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
     vtbls:
       - ea: 0x141FAF778
