@@ -15562,6 +15562,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BC500: ctor
+  Client::UI::AddonTeleportTown:
+    vtbls:
+      - ea: 0x142033968
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonArchiveItem:
     vtbls:
       - ea: 0x142034708
