@@ -53,7 +53,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial void EqualTo(InventoryItem* other);
 
     [VirtualFunction(3)]
-    public partial bool IsNotLinked();
+    public partial bool IsEmpty();
 
     [VirtualFunction(4)]
     public partial void Clear();
