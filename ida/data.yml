@@ -15511,6 +15511,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14104FB40: ctor
+      0x141050AE0: SetWindowLock
   Client::UI::AddonRecipeTree:
     vtbls:
       - ea: 0x141FFA550
