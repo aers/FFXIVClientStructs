@@ -12,7 +12,7 @@ public unsafe partial struct InventoryContainer {
     [FieldOffset(0x18)] public bool IsLoaded;
 
     [VirtualFunction(0)]
-    public partial void Dtor();
+    public partial void Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void SetInventoryType(InventoryType inventoryType);
