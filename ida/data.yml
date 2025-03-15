@@ -9771,6 +9771,7 @@ classes:
       0x140D78F10: SetMainCommandEnabledState
       0x140D7DEC0: UpdateCharacter
       0x140D7E490: UpdateParty
+      0x140D7E9A0: UpdateTargetInfo
       0x140D7FF90: UpdateDTR
       0x140D810F0: UpdateContentGauge
       0x140D81410: UpdateMainCommands
