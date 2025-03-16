@@ -11,8 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1590)]
 public unsafe partial struct AddonPartyList {
-    public static PartyListIntArrayData* Instance() => (PartyListIntArrayData*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.PartyList)->IntArray;
-
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray8<PartyListMemberStruct> _partyMembers;
     [FieldOffset(0xA38), FixedSizeArray] internal FixedSizeArray7<PartyListMemberStruct> _trustMembers;
     [FieldOffset(0x1238)] public PartyListMemberStruct Chocobo;
@@ -77,6 +75,8 @@ public unsafe partial struct AddonPartyList {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 745 * 4)]
     public partial struct PartyListIntArrayData {
+        public static PartyListIntArrayData* Instance() => (PartyListIntArrayData*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.PartyList)->IntArray;
+
         [FieldOffset(1 * 4)] public bool IsCrossRealmParty;
         [FieldOffset(2 * 4)] public int PartyLeaderIndex;
         [FieldOffset(3 * 4)] public bool PartyHasMembers;
