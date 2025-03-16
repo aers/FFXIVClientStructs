@@ -1576,6 +1576,8 @@ classes:
       - ea: 0x141FB3198
     vfuncs:
       0: Dtor
+      1: Update
+      2: IsLoaded
       6: GetTerritoryType
   Client::Game::OutdoorTerritory:
     vtbls:
@@ -3774,6 +3776,8 @@ classes:
         base: Common::Component::Environment::DebugInterface
       - ea: 0x141F62888
         base: Client::System::Resource::ResourceEventListener
+    instances:
+      - ea: 0x142CA7D78
     funcs:
       0x14059D300: ctor
   Component::Exd::ExdModuleResourceHandle:
