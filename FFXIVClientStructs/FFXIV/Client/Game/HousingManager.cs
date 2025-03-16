@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 // Client::Game::HousingManager
 // ctor inlined at "48 83 EC ?? 48 83 3D ?? ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 48 89 5C 24 ?? 45 33 C0 33 D2 48 89 7C 24 ?? B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 FF 48 8B D8 48 85 C0 0F 84 ?? ?? ?? ?? 48 89 38 48 8D 88 ?? ?? ?? ?? 48 89 78 ?? 48 89 78"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xE0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 60 60")]
     public static partial HousingManager* Instance();
@@ -20,8 +20,14 @@ public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B F5")]
     public partial bool HasHousePermissions();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 10 40 0F B6 D7")]
+    public partial bool IsOutside();
+
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B D6")]
     public partial bool IsInside();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0E 48 8B CB")]
+    public partial bool IsInWorkshop();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 3B 46 3C")]
     public partial sbyte GetCurrentWard();
