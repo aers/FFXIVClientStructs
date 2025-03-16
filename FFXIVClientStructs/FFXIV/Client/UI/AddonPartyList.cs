@@ -77,17 +77,23 @@ public unsafe partial struct AddonPartyList {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 745 * 4)]
     public partial struct PartyListIntArrayData {
+        [FieldOffset(1 * 4)] public bool IsCrossRealmParty;
         [FieldOffset(2 * 4)] public int PartyLeaderIndex;
+        [FieldOffset(3 * 4)] public bool PartyHasMembers;
+        [FieldOffset(4 * 4)] public bool HideWhenInSoloParty;
         /// <summary>
         /// Amount of players in the party.
         /// </summary>
         [FieldOffset(6 * 4)] public int PartyListCount;
         [FieldOffset(7 * 4), FixedSizeArray] internal FixedSizeArray8<PartyListMemberIntArrayData> _partyMembers;
+        [FieldOffset(352 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberIntArrayData> _trustMembers;
+        [FieldOffset(654 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberIntArrayData> _pets;
     }
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]
     public partial struct PartyListMemberIntArrayData {
+        [FieldOffset(0 * 4)] public int EnmityIndex;
         [FieldOffset(3 * 4)] public int Level;
         [FieldOffset(4 * 4)] public int ClassIconId;
         [FieldOffset(7 * 4)] public int CurrentHealth;
@@ -101,19 +107,19 @@ public unsafe partial struct AddonPartyList {
         /// <summary>
         /// Goes from 0 to 100%
         /// </summary>
-        [FieldOffset(13 * 4)] public int EmnityPercent;
+        [FieldOffset(13 * 4)] public int EnmityPercent;
         /// <summary>
         /// Starts at 1
-        /// <br>[A]</br>
-        /// <br>[2]</br>
-        /// <br>[3]</br>
-        /// <br>...</br>
-        /// <br>[8]</br>
+        /// <br/>[A]
+        /// <br/>[2]
+        /// <br/>[3]
+        /// <br/>...
+        /// <br/>[8]
         /// </summary>
-        [FieldOffset(14 * 4)] public int EmnityLevel;
+        [FieldOffset(14 * 4)] public int EnmityLevel;
         /// <summary>
         /// Amount of Statuses applied to the player.
-        /// <br>Max is 10.</br>
+        /// <br/>Max is 10.
         /// </summary>
         [FieldOffset(17 * 4)] public int StatusCount;
         [FieldOffset(18 * 4), FixedSizeArray] internal FixedSizeArray10<int> _statusIconIds;
