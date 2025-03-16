@@ -6540,10 +6540,20 @@ classes:
     funcs:
       0x14068BEB0: ctor
       0x14068C100: Initialize
-      0x14068C9F0: Finalizer
       0x14068C140: Update
       0x14068C5A0: Draw
+      0x14068C9F0: Finalizer
       0x14068D4D0: GetChildAddonInfoByAtkUnitBase
+      0x14068D240: HideAllChildren
+      0x14068D2D0: CloseAllChildren
+      0x14068D330: Hide2AllChildren
+      0x14068D710: ChildRefresh
+      0x14068D740: ChildRequestedUpdate
+      0x14068D770: ChildSetSize
+      0x14068D800: RegisterEvent
+      0x14068D830: UnregisterEvent
+      0x14068D850: IsEventRegistered
+      0x14068D880: DispatchEvent
   Component::GUI::AtkSimpleTweenHolder:
 #    funcs:
 #       0x140516980: Update # INLINED IN 7.0 0x14068A88C
