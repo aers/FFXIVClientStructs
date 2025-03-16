@@ -87,13 +87,12 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(6 * 4)] public int PartyListCount;
         [FieldOffset(7 * 4), FixedSizeArray] internal FixedSizeArray8<PartyListMemberIntArrayData> _partyMembers;
         [FieldOffset(352 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberIntArrayData> _trustMembers;
-        [FieldOffset(654 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberIntArrayData> _pets;
+        [FieldOffset(653 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberIntArrayData> _pets;
     }
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]
     public partial struct PartyListMemberIntArrayData {
-        [FieldOffset(0 * 4)] public int EnmityIndex;
         [FieldOffset(3 * 4)] public int Level;
         [FieldOffset(4 * 4)] public int ClassIconId;
         [FieldOffset(7 * 4)] public int CurrentHealth;
@@ -123,13 +122,13 @@ public unsafe partial struct AddonPartyList {
         /// </summary>
         [FieldOffset(17 * 4)] public int StatusCount;
         [FieldOffset(18 * 4), FixedSizeArray] internal FixedSizeArray10<int> _statusIconIds;
-        [FieldOffset(28 * 4), FixedSizeArray] internal FixedSizeArray10<int> _statusIsDispellable;
+        [FieldOffset(28 * 4), FixedSizeArray] internal FixedSizeArray10<bool> _statusIsDispellable;
         /// <summary>
         /// -1 if not active
         /// </summary>
         [FieldOffset(38 * 4)] public int CastTime;
         [FieldOffset(39 * 4)] public int CastId;
         [FieldOffset(41 * 4)] public int ContentId;
-        [FieldOffset(42 * 4)] public int Targetable;
+        [FieldOffset(42 * 4)] public bool Targetable;
     }
 }
