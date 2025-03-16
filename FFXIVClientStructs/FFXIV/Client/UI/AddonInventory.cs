@@ -37,40 +37,23 @@ public partial struct AddonInventory {
 
             [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
             public partial struct ItemFlag {
-                [FieldOffset(0x0)] public ItemTypeFlag ItemType;
-                [FieldOffset(0x2)] public ItemWearableIcon Wearable;
-                [FieldOffset(0x3)] public ItemMirageFlag MirageFlag;
-
-                public enum ItemTypeFlag : byte { 
-                    Gear = 1,
-                    Collectable = 16,
-                    Normal = 64
-                }
+                [FieldOffset(0)] public byte ItemType;
+                [FieldOffset(2)] public ItemWearableIcon Wearable;
+                [FieldOffset(3)] public byte MirageFlag;
 
                 public enum ItemWearableIcon : byte {
                     Wearable = 1,
                     Impossible = 2,
                     Unavailable = 3
                 }
-
-                public enum ItemMirageFlag : byte {
-                    IsGlamoured = 1,
-                    PartOfGearset = 2
-                }
             }
 
             [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
             public partial struct ItemDye {
-                [FieldOffset(0x0)] public byte R;
-                [FieldOffset(0x1)] public byte G;
-                [FieldOffset(0x2)] public byte B;
-                [FieldOffset(0x3)] public ItemDyeFlags DyeFlags;
-
-                public enum ItemDyeFlags : byte {
-                    CanBeDyed = 1,
-                    DyeLocked = 2,
-                    Dyed = 4
-                }
+                [FieldOffset(3)] public byte R;
+                [FieldOffset(2)] public byte G;
+                [FieldOffset(1)] public byte B;
+                [FieldOffset(0)] public byte DyeFlags;
             }
         }
     }
