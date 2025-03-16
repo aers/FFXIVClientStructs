@@ -88,7 +88,6 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(352 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberNumberArray> _trustMembers;
         [FieldOffset(653 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberNumberArray> _pets;
 
-        [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]
         public partial struct PartyListMemberNumberArray {
             [FieldOffset(3 * 4)] public int Level;

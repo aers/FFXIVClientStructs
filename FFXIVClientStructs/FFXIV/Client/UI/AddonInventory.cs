@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using static FFXIVClientStructs.FFXIV.Client.UI.AddonInventory.InventoryNumberArray.InventoryItemNumberArray.ItemDye;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -23,7 +22,6 @@ public partial struct AddonInventory {
     public partial struct InventoryNumberArray {
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray140<Pointer<InventoryItemNumberArray>> _items;
 
-        [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
         public partial struct InventoryItemNumberArray {
             [FieldOffset(0 * 4)] public uint IconId;
@@ -34,7 +32,6 @@ public partial struct AddonInventory {
 
             public int StackCount => (_stackCount >> 16) & 0xFFFF;
 
-            [GenerateInterop]
             [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
             public partial struct ItemFlag {
                 [FieldOffset(0x0)] public ItemTypeFlag ItemType;
@@ -59,7 +56,6 @@ public partial struct AddonInventory {
                 }
             }
 
-            [GenerateInterop]
             [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
             public partial struct ItemDye {
                 [FieldOffset(0x0)] public byte R;
