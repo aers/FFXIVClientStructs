@@ -23,7 +23,7 @@ public partial struct AddonInventory {
     public unsafe partial struct InventoryNumberArray {
         public static InventoryNumberArray* Instance() => (InventoryNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.Inventory)->IntArray;
 
-        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray140<Pointer<InventoryItemNumberArray>> _items;
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray140<InventoryItemNumberArray> _items;
 
         [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
         public partial struct InventoryItemNumberArray {
