@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using static FFXIVClientStructs.FFXIV.Client.UI.AddonPartyList;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -19,7 +20,9 @@ public partial struct AddonInventory {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1351 * 4)]
-    public partial struct InventoryNumberArray {
+    public unsafe partial struct InventoryNumberArray {
+        public static InventoryNumberArray* Instance() => (InventoryNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.Inventory)->IntArray;
+
         [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray140<Pointer<InventoryItemNumberArray>> _items;
 
         [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
