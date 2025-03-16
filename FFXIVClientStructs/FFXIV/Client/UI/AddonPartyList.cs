@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using static FFXIVClientStructs.FFXIV.Client.UI.AddonNamePlate;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -74,8 +73,8 @@ public unsafe partial struct AddonPartyList {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 745 * 4)]
-    public partial struct PartyListIntArrayData {
-        public static PartyListIntArrayData* Instance() => (PartyListIntArrayData*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.PartyList)->IntArray;
+    public partial struct PartyListNumberArray {
+        public static PartyListNumberArray* Instance() => (PartyListNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.PartyList)->IntArray;
 
         [FieldOffset(1 * 4)] public bool IsCrossRealmParty;
         [FieldOffset(2 * 4)] public int PartyLeaderIndex;
@@ -85,14 +84,14 @@ public unsafe partial struct AddonPartyList {
         /// Amount of players in the party.
         /// </summary>
         [FieldOffset(6 * 4)] public int PartyListCount;
-        [FieldOffset(7 * 4), FixedSizeArray] internal FixedSizeArray8<PartyListMemberIntArrayData> _partyMembers;
-        [FieldOffset(352 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberIntArrayData> _trustMembers;
-        [FieldOffset(653 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberIntArrayData> _pets;
+        [FieldOffset(7 * 4), FixedSizeArray] internal FixedSizeArray8<PartyListMemberNumberArray> _partyMembers;
+        [FieldOffset(352 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberNumberArray> _trustMembers;
+        [FieldOffset(653 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberNumberArray> _pets;
     }
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]
-    public partial struct PartyListMemberIntArrayData {
+    public partial struct PartyListMemberNumberArray {
         [FieldOffset(3 * 4)] public int Level;
         [FieldOffset(4 * 4)] public int ClassIconId;
         [FieldOffset(7 * 4)] public int CurrentHealth;
