@@ -7,10 +7,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 public unsafe partial struct InventoryNumberArray {
     public static InventoryNumberArray* Instance() => (InventoryNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.Inventory)->IntArray;
 
+    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1351<int> _data;
+
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray140<InventoryItemNumberArray> _items;
 
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
     public partial struct InventoryItemNumberArray {
+        [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray6<int> _data;
+
         [FieldOffset(0 * 4)] public uint IconId;
         [FieldOffset(2 * 4)] internal int _stackCount;
         [FieldOffset(3 * 4)] public ItemFlag ItemFlags;
@@ -21,6 +25,8 @@ public unsafe partial struct InventoryNumberArray {
 
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
         public partial struct ItemFlag {
+            [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<int> _data;
+
             [FieldOffset(0)] public byte ItemType;
             [FieldOffset(2)] public ItemWearableIcon Wearable;
             [FieldOffset(3)] public byte MirageFlag;
@@ -34,6 +40,8 @@ public unsafe partial struct InventoryNumberArray {
 
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
         public partial struct ItemDye {
+            [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<int> _data;
+
             [FieldOffset(3)] public byte R;
             [FieldOffset(2)] public byte G;
             [FieldOffset(1)] public byte B;

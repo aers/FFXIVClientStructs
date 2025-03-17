@@ -7,6 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 public unsafe partial struct NamePlateNumberArray {
     public static NamePlateNumberArray* Instance() => (NamePlateNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.NamePlate)->IntArray;
 
+    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1006<int> _data;
+
     [FieldOffset(0x0)] public int ActiveNamePlateCount;
     [FieldOffset(0x4)] public bool ForceNamePlateRebake;
     [FieldOffset(0x8)] public int NamePlateSize;

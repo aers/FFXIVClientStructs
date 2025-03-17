@@ -7,6 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 public unsafe partial struct PartyListNumberArray {
     public static PartyListNumberArray* Instance() => (PartyListNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.PartyList)->IntArray;
 
+    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray745<int> _data;
+
     [FieldOffset(1 * 4)] public bool IsCrossRealmParty;
     [FieldOffset(2 * 4)] public int PartyLeaderIndex;
     [FieldOffset(3 * 4)] public bool PartyHasMembers;
@@ -22,6 +24,8 @@ public unsafe partial struct PartyListNumberArray {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]
     public partial struct PartyListMemberNumberArray {
+        [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray43<int> _data;
+
         [FieldOffset(3 * 4)] public int Level;
         [FieldOffset(4 * 4)] public int ClassIconId;
         [FieldOffset(7 * 4)] public int CurrentHealth;

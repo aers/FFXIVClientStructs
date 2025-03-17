@@ -7,6 +7,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 public unsafe partial struct ActionBarNumberArray {
     public static ActionBarNumberArray* Instance() => (ActionBarNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ActionBar)->IntArray;
 
+    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray5564<int> _data;
+
     [FieldOffset(0 * 4)] public bool HotBarLocked;
     [FieldOffset(5482 * 4)] public bool DisplayPetBar;
     [FieldOffset(5473 * 4)] public int PulseDotForBar;
@@ -17,10 +19,14 @@ public unsafe partial struct ActionBarNumberArray {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 272 * 4)]
     public partial struct ActionBarBarNumberArray {
+        [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray272<int> _data;
+
         [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray12<ActionBarSlotNumberArray> _slots;
 
         [StructLayout(LayoutKind.Explicit, Size = 17 * 4)]
         public partial struct ActionBarSlotNumberArray {
+            [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray17<int> _data;
+
             [FieldOffset(0 * 4)] public int ActionType;
             [FieldOffset(1 * 4)] public bool Unk1;
             [FieldOffset(3 * 4)] public uint ActionId;
