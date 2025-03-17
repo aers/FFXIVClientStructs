@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x7E0)]
 public unsafe partial struct AddonAreaMap {
+    [Obsolete("Moved to: FFXIVClientStructs.FFXIV.Client.UI.Arrays.AreaMapNumberArray", true)]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
     public unsafe partial struct AddonAreaMapNumberArray {
