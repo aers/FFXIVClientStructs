@@ -25,7 +25,7 @@ public unsafe partial struct Hud2NumberArray {
     /// <summary>
     /// The final 3 bytes per status are used for the UIColor RowId
     /// </summary>
-    [FieldOffset(5 * 4), FixedSizeArray] internal FixedSizeArray30<int> _targetStatusIconIds;
+    [FieldOffset(5 * 4), FixedSizeArray] internal FixedSizeArray30<uint> _targetStatusIconIds;
     [FieldOffset(35 * 4), FixedSizeArray] internal FixedSizeArray30<bool> _targetStatusDispellable;
     [FieldOffset(65 * 4)] public Hud2ColorNumberArray TargetBarFillColor;
     [FieldOffset(66 * 4)] public Hud2ColorNumberArray TargetBarBackdropColor;
@@ -51,7 +51,7 @@ public unsafe partial struct Hud2NumberArray {
     [FieldOffset(87 * 4)] public Hud2ColorNumberArray FocusTargetBarBackdropColor;
     [FieldOffset(88 * 4)] public int FocusTargetCastPercent;
     [FieldOffset(91 * 4)] public int FocusTargetStatusCount;
-    [FieldOffset(92 * 4), FixedSizeArray] internal FixedSizeArray5<int> _focusTargetStatusIconIds;
+    [FieldOffset(92 * 4), FixedSizeArray] internal FixedSizeArray5<uint> _focusTargetStatusIconIds;
     [FieldOffset(97 * 4), FixedSizeArray] internal FixedSizeArray5<bool> _focusTargetStatusDispellable;
 
     [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]

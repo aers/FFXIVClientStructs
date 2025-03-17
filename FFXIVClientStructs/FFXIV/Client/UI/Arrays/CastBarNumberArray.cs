@@ -9,7 +9,7 @@ public unsafe partial struct CastBarNumberArray {
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray6<int> _data;
 
-    [FieldOffset(0 * 4)] public int CastIconId;
+    [FieldOffset(0 * 4)] public uint CastIconId;
     [FieldOffset(2 * 4)] public int CastTime;
     [FieldOffset(3 * 4)] public int TotalCastTime;
     /// <summary>
