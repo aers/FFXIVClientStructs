@@ -3,18 +3,9 @@
 # Automagically labels most exd getter functions along with a hint indicating which sheet/sheet id its fetching from
 #
 
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError, URLError
-from io import BufferedReader
-from enum import IntEnum
-from zlib import decompress
-from json import load, loads
-from zipfile import ZipFile
-from tempfile import TemporaryFile
-from yaml import load as yload, Loader
-from re import sub
-from os import listdir, walk, getenv
-from os.path import isdir, join
+from json import load
+from os import getenv
+from os.path import join
 from luminapie.game_data import GameData, ParsedFileName
 from luminapie.excel import ExcelListFile, ExcelHeaderFile
 from abc import abstractmethod
