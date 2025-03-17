@@ -1567,6 +1567,9 @@ classes:
       0x140C6E520: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
       0x140C6E660: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x1400B7FE0: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
+      0x140C4F0F0: RequestGuestAccessSettings
+      0x140C4F160: HandleGuestAccessSettings
+      0x140C4B480: SaveGuestAccessSettings
   Client::Game::HouseId:
     funcs:
       0x140C53840: GetWardIndex
