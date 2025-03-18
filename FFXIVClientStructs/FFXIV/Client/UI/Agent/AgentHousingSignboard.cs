@@ -27,12 +27,10 @@ public unsafe partial struct HousingSignboardPacket {
     /// Apartment = 5?
     /// </remarks>
     [FieldOffset(0x15)] public byte Size;
-    /// <remarks>
-    /// FreeCompany = 0<br/>
-    /// Individual = 2<br/>
-    /// Apartment = 6?
-    /// </remarks>
-    [FieldOffset(0x16)] public byte OwnerType;
+    /// <summary>
+    /// See <see cref="Game.EstateType"/>.
+    /// </summary>
+    [FieldOffset(0x16)] public byte EstateType;
     [FieldOffset(0x17), FixedSizeArray(isString: true)] internal FixedSizeArray21<byte> _name;
 
     [FieldOffset(0x2E), FixedSizeArray(isString: true)] internal FixedSizeArray193<byte> _greeting;
