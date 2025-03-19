@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // ctor "0F 57 C0 33 C0 0F 11 01 48 89 41 ?? 66 89 41"
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
-public partial struct CharacterData {
+public unsafe partial struct CharacterData {
     [FieldOffset(0x8)] public float ModelScale;
     [FieldOffset(0xC)] public uint Health;
     [FieldOffset(0x10)] public uint MaxHealth;
@@ -54,7 +54,7 @@ public partial struct CharacterData {
     [FieldOffset(0x38)] public GameObjectId CombatTaggerId;
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial CharacterData* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void ClassJobChanged(byte from, byte to);

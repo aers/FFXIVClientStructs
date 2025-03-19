@@ -30,7 +30,7 @@ public unsafe partial struct ILayoutInstance {
     public int NestingLevel => (Flags1 >> 4) & 7;
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial ILayoutInstance* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void Init(void* creator, byte* primaryPath);

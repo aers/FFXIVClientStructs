@@ -123,7 +123,7 @@ public enum NumberArrayType {
     GoldSaucerArcadeMachine = 103, // PunchingMachine, BasketBall, Hammer, MogCatcher, MinerBotanistAim
     PvPProfile = 104,
     Orchestrion = 105,
-
+    OrchestrionPlayListSelect = 106,
     RetainerTask = 107,
     YKWNote = 108,
     DeepDungeonNaviMap = 109,
@@ -267,6 +267,7 @@ public enum StringArrayType {
 
     PvPProfile = 93,
     Orchestrion = 94,
+    OrchestrionPlayListSelect = 95,
 
     RetainerTask = 97,
     YKWNote = 98,
