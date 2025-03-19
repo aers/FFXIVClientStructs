@@ -112,7 +112,7 @@ public unsafe partial struct GameObject {
     public partial void Terminate();
 
     [VirtualFunction(60)]
-    public partial void Destroy();
+    public partial void Destroy(byte freeFlags);
 
     [VirtualFunction(61)]
     public partial bool IsCharacter();
