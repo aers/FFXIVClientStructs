@@ -1404,6 +1404,7 @@ classes:
         pointer: False
     funcs:
       0x14082A560: ctor
+      0x140800180: Initialize
       0x140800B20: Update
       0x140802960: GetInventoryContainer  # (this, containerId)
       0x140802A10: GetInventorySlot  # (this, containerId, slotId)
@@ -1444,7 +1445,7 @@ classes:
       0: Dtor
       1: Copy
       2: EqualTo
-      3: IsNotLinked
+      3: IsEmpty
       4: Clear
       5: GetBaseItemId
       6: GetItemId
@@ -1488,6 +1489,8 @@ classes:
       2: Clear
       4: GetSize
       5: GetInventorySlot
+    funcs:
+      0x1407FF9E0: ClearItems
   Client::Game::InventoryType:
     funcs:
       0x140802870: IsCrystals
@@ -1564,6 +1567,9 @@ classes:
       0x140C6E520: GetAirshipVoyageTimeAndDistance # (unsigned __int8 pointA, unsigned __int8 pointB, __int16 speed, _DWORD *voyageTime, int *voyageDistance)
       0x140C6E660: GetAirshipSurveyDuration # (unsigned __int8 point, __int16 speed) -> SurveyDuration (return is time in seconds)
       0x1400B7FE0: GetHouseIcon # static (size, isOpen, isResident, isIndividual, isShared)
+      0x140C4F0F0: RequestGuestAccessSettings
+      0x140C4F160: HandleGuestAccessSettings
+      0x140C4B480: SaveGuestAccessSettings
   Client::Game::HouseId:
     funcs:
       0x140C53840: GetWardIndex
@@ -2244,6 +2250,8 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141F8CBD0
+    vfuncs:
+      0: Dtor
     funcs:
       0x1409A2980: ctor
       0x1409A2A80: Finalizer
@@ -6540,10 +6548,20 @@ classes:
     funcs:
       0x14068BEB0: ctor
       0x14068C100: Initialize
-      0x14068C9F0: Finalizer
       0x14068C140: Update
       0x14068C5A0: Draw
+      0x14068C9F0: Finalizer
       0x14068D4D0: GetChildAddonInfoByAtkUnitBase
+      0x14068D240: HideAllChildren
+      0x14068D2D0: CloseAllChildren
+      0x14068D330: Hide2AllChildren
+      0x14068D710: ChildRefresh
+      0x14068D740: ChildRequestedUpdate
+      0x14068D770: ChildSetSize
+      0x14068D800: RegisterEvent
+      0x14068D830: UnregisterEvent
+      0x14068D850: IsEventRegistered
+      0x14068D880: DispatchEvent
   Component::GUI::AtkSimpleTweenHolder:
 #    funcs:
 #       0x140516980: Update # INLINED IN 7.0 0x14068A88C
@@ -8902,6 +8920,8 @@ classes:
       24: GetDrawObject_2
       25: UpdateRadius
       26: Highlight
+      30: TryGetEventHandler
+      31: GetEventHandlersImpl
       34: SetReadyToDraw
       35: Update
       46: GetCenterPosition
@@ -8909,7 +8929,7 @@ classes:
       57: IsDead
       58: IsNotMounted
       59: Terminate
-      60: Destroy # dtor
+      60: Dtor
       61: IsCharacter
       68: OnInitialize
       69: IntersectsRay
@@ -9772,6 +9792,7 @@ classes:
       0x140D78F10: SetMainCommandEnabledState
       0x140D7DEC0: UpdateCharacter
       0x140D7E490: UpdateParty
+      0x140D7E9A0: UpdateTargetInfo
       0x140D7FF90: UpdateDTR
       0x140D810F0: UpdateContentGauge
       0x140D81410: UpdateMainCommands
@@ -11391,6 +11412,9 @@ classes:
     funcs:
       0x140BE8EE0: Open
       0x140BE9440: OpenPreview
+  Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData:
+    funcs:
+      0x140C11AD0: ctor
   Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView:
     vtbls:
       - ea: 0x141FAF778
@@ -12106,6 +12130,10 @@ classes:
   Client::UI::Agent::RecipeSearchContext:
     vtbls:
       - ea: 0x141F9FCF0
+    vfuncs:
+      0: Dtor
+      1: GetIsComplete
+      2: Iterate
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
       - ea: 0x141F9FB20
@@ -15508,6 +15536,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14104FB40: ctor
+      0x141050AE0: SetWindowLock
   Client::UI::AddonRecipeTree:
     vtbls:
       - ea: 0x141FFA550
@@ -15558,6 +15587,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BC500: ctor
+  Client::UI::AddonTeleportTown:
+    vtbls:
+      - ea: 0x142033968
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonArchiveItem:
     vtbls:
       - ea: 0x142034708
@@ -15730,6 +15763,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410FE020: ctor
+  Client::UI::AddonCurrency:
+    vtbls:
+      - ea: 0x14200B400
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410FF710: ctor
   Client::UI::AddonSalvageItemSelector:
     vtbls:
       - ea: 0x14200ED48
@@ -16143,6 +16182,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141112230: ctor
+      0x1411144B0: UpdateClasses
   Client::UI::AddonPvpProfile:
     vtbls:
       - ea: 0x14200BD70

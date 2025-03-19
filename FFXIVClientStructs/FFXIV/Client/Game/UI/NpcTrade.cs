@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::NpcTrade
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x328)]
-public partial struct NpcTrade {
+public unsafe partial struct NpcTrade {
     [FieldOffset(0x008)] public ItemRequests Requests;
 
     [GenerateInterop]
@@ -32,5 +32,5 @@ public partial struct NpcTrade {
     }
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial NpcTrade* Dtor(byte freeFlags);
 }

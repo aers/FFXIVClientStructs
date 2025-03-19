@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Excel;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct IExcelRowWrapper {
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial IExcelRowWrapper* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void DecRef();
