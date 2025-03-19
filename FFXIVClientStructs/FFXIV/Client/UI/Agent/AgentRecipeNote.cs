@@ -62,7 +62,7 @@ public unsafe partial struct RecipeSearchContext {
     [FieldOffset(0x258)] public StdVector<uint>* VectorPtr;
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial RecipeSearchContext* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial bool GetIsComplete();

@@ -2250,6 +2250,8 @@ classes:
         pointer: False
     vtbls:
       - ea: 0x141F8CBD0
+    vfuncs:
+      0: Dtor
     funcs:
       0x1409A2980: ctor
       0x1409A2A80: Finalizer
@@ -8924,7 +8926,7 @@ classes:
       57: IsDead
       58: IsNotMounted
       59: Terminate
-      60: Destroy # dtor
+      60: Dtor
       61: IsCharacter
       68: OnInitialize
       69: IntersectsRay
@@ -12125,6 +12127,10 @@ classes:
   Client::UI::Agent::RecipeSearchContext:
     vtbls:
       - ea: 0x141F9FCF0
+    vfuncs:
+      0: Dtor
+      1: GetIsComplete
+      2: Iterate
   Client::UI::Agent::AgentRecipeTree:
     vtbls:
       - ea: 0x141F9FB20

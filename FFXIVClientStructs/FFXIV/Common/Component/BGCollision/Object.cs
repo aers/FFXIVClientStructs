@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct Object {
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial Object* Dtor(byte freeFlags);
 }
 
 // collision objects are typically organized into intrusive linked lists
