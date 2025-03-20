@@ -10,13 +10,11 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [GenerateInterop]
 [Inherits<ResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
-public unsafe partial struct MaterialResourceHandle
-{
+public unsafe partial struct MaterialResourceHandle {
     public const int TableRows = 16;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct TextureEntry
-    {
+    public struct TextureEntry {
         [FieldOffset(0x0)]
         public TextureResourceHandle* TextureResourceHandle;
         [FieldOffset(0x8)]
@@ -24,34 +22,29 @@ public unsafe partial struct MaterialResourceHandle
         [FieldOffset(0xA)]
         public ushort Flags;
 
-        public bool IsDX11
-        {
+        public bool IsDX11 {
             get => (Flags & 0x8000) != 0;
             set => Flags = value ? (ushort)(Flags | 0x8000) : (ushort)(Flags & ~0x8000);
         }
 
-        public ushort Index1
-        {
+        public ushort Index1 {
             get => (ushort)(Flags & 0x001F);
             set => Flags = (ushort)((Flags & ~0x001F) | (value & 0x001F));
         }
 
-        public ushort Index2
-        {
+        public ushort Index2 {
             get => (ushort)((Flags & 0x03E0) >> 5);
             set => Flags = (ushort)((Flags & ~0x03E0) | ((value & 0x001F) << 5));
         }
 
-        public ushort Index3
-        {
+        public ushort Index3 {
             get => (ushort)((Flags & 0x7C00) >> 10);
             set => Flags = (ushort)((Flags & ~0x7C00) | ((value & 0x001F) << 10));
         }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x4)]
-    public struct AttributeSetEntry
-    {
+    public struct AttributeSetEntry {
         [FieldOffset(0x0)]
         public ushort NameOffset;
         [FieldOffset(0x2)]
@@ -62,8 +55,7 @@ public unsafe partial struct MaterialResourceHandle
     /// All RGB values in this structure are pre-squared.
     /// </remarks>
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct ColorTableRow
-    {
+    public struct ColorTableRow {
         [FieldOffset(0x0)] public Half DiffuseRed;
         [FieldOffset(0x2)] public Half DiffuseGreen;
         [FieldOffset(0x4)] public Half DiffuseBlue;
@@ -81,67 +73,55 @@ public unsafe partial struct MaterialResourceHandle
         [FieldOffset(0x1C)] public Half TileScaleVU;
         [FieldOffset(0x1E)] public Half TileScaleVV;
 
-        public ushort TileIndex
-        {
+        public ushort TileIndex {
             get => (ushort)((float)TileIndexW * 64.0f);
             set => TileIndexW = (Half)((value + 0.5f) / 64.0f);
         }
 
-        public Span<Half> AsSpan()
-        {
-            fixed (Half* ptr = &DiffuseRed)
-            {
+        public Span<Half> AsSpan() {
+            fixed (Half* ptr = &DiffuseRed) {
                 return new(ptr, 16);
             }
         }
 
-        public ReadOnlySpan<Half> AsReadOnlySpan()
-        {
-            fixed (Half* ptr = &DiffuseRed)
-            {
+        public ReadOnlySpan<Half> AsReadOnlySpan() {
+            fixed (Half* ptr = &DiffuseRed) {
                 return new(ptr, 16);
             }
         }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x2)]
-    public struct StainTableRow
-    {
+    public struct StainTableRow {
         [FieldOffset(0x0)]
         public ushort RawData;
 
-        public ushort Template
-        {
+        public ushort Template {
             get => (ushort)(RawData >> 5);
             set => RawData = (ushort)((RawData & 0x1F) | (value << 5));
         }
 
-        public bool Diffuse
-        {
+        public bool Diffuse {
             get => (RawData & 0x01) != 0;
             set => RawData = (ushort)(value ? RawData | 0x01 : RawData & 0xFFFE);
         }
 
-        public bool Specular
-        {
+        public bool Specular {
             get => (RawData & 0x02) != 0;
             set => RawData = (ushort)(value ? RawData | 0x02 : RawData & 0xFFFD);
         }
 
-        public bool Emissive
-        {
+        public bool Emissive {
             get => (RawData & 0x04) != 0;
             set => RawData = (ushort)(value ? RawData | 0x04 : RawData & 0xFFFB);
         }
 
-        public bool Gloss
-        {
+        public bool Gloss {
             get => (RawData & 0x08) != 0;
             set => RawData = (ushort)(value ? RawData | 0x08 : RawData & 0xFFF7);
         }
 
-        public bool SpecularStrength
-        {
+        public bool SpecularStrength {
             get => (RawData & 0x10) != 0;
             set => RawData = (ushort)(value ? RawData | 0x10 : RawData & 0xFFEF);
         }
@@ -190,10 +170,8 @@ public unsafe partial struct MaterialResourceHandle
     public Span<ColorTableRow> ColorTableSpan
         => ColorTable switch { null => default, var ptr => new(ptr, TableRows) };
 
-    public StainTableRow* StainTable
-    {
-        get
-        {
+    public StainTableRow* StainTable {
+        get {
             var offset = HasColorTable ? TableRows * sizeof(ColorTableRow) : 0;
             return DataSetSize >= offset + TableRows * sizeof(StainTableRow) && HasStainTable ? (StainTableRow*)(DataSet + offset) : null;
         }
@@ -205,15 +183,13 @@ public unsafe partial struct MaterialResourceHandle
     public StringPointer ShpkName
         => Strings + ShpkNameOffset;
 
-    public StringPointer TexturePath(int index)
-    {
+    public StringPointer TexturePath(int index) {
         if (index < 0 || index >= TextureCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + Textures[index].PathOffset;
     }
 
-    public StringPointer AttributeSetName(int index)
-    {
+    public StringPointer AttributeSetName(int index) {
         if (index < 0 || index >= UvSetCount + ColorSetCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + AttributeSets[index].NameOffset;

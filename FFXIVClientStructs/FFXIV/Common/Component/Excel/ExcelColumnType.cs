@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
+namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 public enum ExcelColumnType : ushort {
     String = 0x0,

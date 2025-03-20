@@ -10,8 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // all data in here is used for UI display
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x18722)] // unsure how big it really is
-public unsafe partial struct UIState
-{
+public unsafe partial struct UIState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
 
@@ -187,8 +186,7 @@ public unsafe partial struct UIState
     /// </summary>
     /// <param name="aetheryteId">The ID of the aetheryte to check for.</param>
     /// <returns>Returns true if the specified aetheryte is unlocked.</returns>
-    public bool IsAetheryteUnlocked(uint aetheryteId)
-    {
+    public bool IsAetheryteUnlocked(uint aetheryteId) {
         return ((1 << ((int)aetheryteId & 7)) & UnlockedAetherytesBitmask[(int)aetheryteId / 8]) > 0;
     }
 
@@ -197,8 +195,7 @@ public unsafe partial struct UIState
     /// </summary>
     /// <param name="howtoId">The ID of the HowTo to check for.</param>
     /// <returns>Returns true if the specified HowTo is unlocked.</returns>
-    public bool IsHowToUnlocked(uint howtoId)
-    {
+    public bool IsHowToUnlocked(uint howtoId) {
         return ((1 << ((int)howtoId & 7)) & UnlockedHowtoBitmask[(int)howtoId / 8]) > 0;
     }
 
@@ -207,13 +204,11 @@ public unsafe partial struct UIState
     /// </summary>
     /// <param name="companionId">The ID of the companion/minion to check for.</param>
     /// <returns>Returns true if the specified minion is unlocked.</returns>
-    public bool IsCompanionUnlocked(uint companionId)
-    {
+    public bool IsCompanionUnlocked(uint companionId) {
         return ((1 << ((int)companionId & 7)) & UnlockedCompanionsBitmask[(int)companionId / 8]) > 0;
     }
 
-    public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId)
-    {
+    public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId) {
         return ((1 << ((ushort)chocoboTaxiStandId & 7)) & ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId / 8]) > 0;
     }
 
@@ -245,8 +240,7 @@ public unsafe partial struct UIState
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 8D 48 05")]
     public partial long GetNextMapAllowanceTimestamp();
 
-    public DateTime GetNextMapAllowanceDateTime()
-    {
+    public DateTime GetNextMapAllowanceDateTime() {
         var timeStamp = GetNextMapAllowanceTimestamp();
         return timeStamp > 0 ? DateTime.UnixEpoch.AddSeconds(timeStamp) : DateTime.MinValue;
     }
@@ -254,8 +248,7 @@ public unsafe partial struct UIState
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 E8 ?? ?? ?? ?? 44 8B C8")]
     public partial long GetNextChallengeLogResetTimestamp();
 
-    public DateTime GetNextChallengeLogResetDateTime()
-    {
+    public DateTime GetNextChallengeLogResetDateTime() {
         var timeStamp = GetNextChallengeLogResetTimestamp();
         return timeStamp > 0 ? DateTime.UnixEpoch.AddSeconds(timeStamp) : DateTime.MinValue;
     }

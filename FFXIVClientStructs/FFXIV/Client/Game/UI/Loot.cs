@@ -7,8 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x6A0)]
-public unsafe partial struct Loot
-{
+public unsafe partial struct Loot {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 44 24 60", 3)]
     public static partial Loot* Instance();
 
@@ -20,8 +19,7 @@ public unsafe partial struct Loot
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public struct LootItem
-{
+public struct LootItem {
     [FieldOffset(0x00)] public uint ChestObjectId;
     [FieldOffset(0x04)] public uint ChestItemIndex; // This loot item's index in the chest it came from
     [FieldOffset(0x08)] public uint ItemId;
@@ -40,14 +38,12 @@ public struct LootItem
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 2)]
-public struct LootItemMateria
-{
+public struct LootItemMateria {
     [FieldOffset(0x00)] public byte MateriaId;
     [FieldOffset(0x01)] public byte MateriaGrade;
 }
 
-public enum RollState : byte
-{
+public enum RollState : byte {
     UpToNeed = 0, // Can roll up to Need
     UpToGreed = 1,// Can roll up to Gree
     UpToPass = 2, // Can only pass
@@ -56,8 +52,7 @@ public enum RollState : byte
     Unknown = 28, // Default value
 }
 
-public enum RollResult
-{
+public enum RollResult {
     UnAwarded = 0,
     Needed = 1,
     Greeded = 2,
@@ -66,8 +61,7 @@ public enum RollResult
     Unknown = 7, // Default Value
 }
 
-public enum LootMode
-{
+public enum LootMode {
     Normal = 0,
     GreedOnly = 1,
     Unavailable = 2,

@@ -17,7 +17,7 @@ public enum AtkEventType : byte {
 
     FocusStart = 18,
     FocusStop = 19,
-    
+
     Resize = 21, // ChatLogPanel
 
     // AtkComponentButton & children

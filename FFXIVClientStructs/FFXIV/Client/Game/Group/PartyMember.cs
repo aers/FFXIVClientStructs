@@ -39,7 +39,7 @@ public unsafe partial struct PartyMember {
     /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
     [FieldOffset(0x37C), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
     [FieldOffset(0x394)] public byte Flags; // 0x01 == set for valid alliance members, 0x04 == set if XYZ is valid?, 0x10 == in cutscene
-    
+
     /// <inheritdoc cref="PlayerState.GetContentValue"/>
     public uint GetContentValue(uint key) {
         for (var i = 0; i < 3; i++) {
