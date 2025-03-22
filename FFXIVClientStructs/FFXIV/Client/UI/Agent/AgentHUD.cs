@@ -126,9 +126,9 @@ public unsafe struct HudQueuedBattleTalk {
 [StructLayout(LayoutKind.Explicit, Size = 0x200, Pack = 0x8)]
 [GenerateInterop]
 public unsafe partial struct HudStatus {
-    [FieldOffset(0x0)] internal FixedSizeArray30<DisplayStatus> _DisplayedStatus;
-    [FieldOffset(0x168)] internal FixedSizeArray30<uint> _StatusIds;
-    [FieldOffset(0x1E0)] internal FixedSizeArray4<ushort> _StatusCustomAddonIds;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray30<DisplayStatus> _DisplayedStatus;
+    [FieldOffset(0x168), FixedSizeArray] internal FixedSizeArray30<uint> _StatusIds;
+    [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray4<ushort> _StatusCustomAddonIds;
     [FieldOffset(0x1E8)] public UIModuleInterface* UiModuleInterface;
     [FieldOffset(0x1F0)] public AgentHUD* AgentHUD;
     [FieldOffset(0x1F8)] public ushort AddonId;
