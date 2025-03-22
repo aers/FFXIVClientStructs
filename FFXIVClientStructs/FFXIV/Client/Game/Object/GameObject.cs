@@ -59,7 +59,7 @@ public unsafe partial struct GameObject {
     public partial bool GetIsTargetable();
 
     [VirtualFunction(6)]
-    public partial byte* GetName();
+    public partial StringPointer GetName();
 
     [VirtualFunction(7)]
     public partial float GetRadius(bool adjustByTransformation = true);
@@ -108,8 +108,17 @@ public unsafe partial struct GameObject {
     [VirtualFunction(58)]
     public partial bool IsNotMounted();
 
+    [VirtualFunction(59)]
+    public partial void Terminate();
+
+    [VirtualFunction(60)]
+    public partial GameObject* Dtor(byte freeFlags);
+
     [VirtualFunction(61)]
     public partial bool IsCharacter();
+
+    [VirtualFunction(68)]
+    public partial void OnInitialize();
 
     /// <summary>
     /// Determines whether a ray intersects with the game object, either by checking the model's geometry or the object's approximate center position.
@@ -135,6 +144,9 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 5A C7")]
     public partial Vector3* GetPosition();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 89 85")]
+    public partial uint GetObjStrId();
 }
 
 // if (EntityId == 0xE0000000)

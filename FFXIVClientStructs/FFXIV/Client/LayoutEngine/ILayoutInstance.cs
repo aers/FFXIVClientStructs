@@ -30,7 +30,7 @@ public unsafe partial struct ILayoutInstance {
     public int NestingLevel => (Flags1 >> 4) & 7;
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial ILayoutInstance* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void Init(void* creator, byte* primaryPath);
@@ -48,7 +48,7 @@ public unsafe partial struct ILayoutInstance {
     public partial int GetSizeOf();
 
     [VirtualFunction(7)]
-    public partial byte* GetPrimaryPath();
+    public partial StringPointer GetPrimaryPath();
 
     [VirtualFunction(14)]
     public partial Vector3* GetTranslation(Vector3* result);
@@ -91,7 +91,7 @@ public unsafe partial struct ILayoutInstance {
     public partial bool IsColliderLoaded();
 
     [VirtualFunction(31)]
-    public partial byte* GetSecondaryPath();
+    public partial StringPointer GetSecondaryPath();
 
     [VirtualFunction(32)]
     public partial void CreateSecondary();

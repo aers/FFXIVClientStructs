@@ -3,8 +3,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::CharacterManager
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x390)]
+[Inherits<CharacterManagerInterface>]
 public unsafe partial struct CharacterManager {
-    // TODO: implement baseclass, size 0x18, shared with GroupManager
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray100<Pointer<BattleChara>> _battleCharas;
     [FieldOffset(0x370)] public BattleChara* BattleCharaMemory;
     [FieldOffset(0x378)] public Companion* CompanionMemory;

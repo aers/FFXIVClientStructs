@@ -3739,6 +3739,17 @@ enums:
     "De": 2
     "Fr": 3
     "None": 255
+- type: Client::UI::Agent::AgentCharaCard::DecorationType
+  name: DecorationType
+  underlying: byte
+  namespace: Client.UI.Agent
+  values:
+    "Invalid": 0
+    "Backing": 1
+    "PatternOverlay": 2
+    "PortraitFrame": 3
+    "PlateFrame": 4
+    "Accent": 5
 - type: Client::UI::Agent::SimulatorActionStatus
   name: SimulatorActionStatus
   underlying: byte
@@ -9575,6 +9586,9 @@ structs:
   - type: Client::Graphics::Kernel::Texture*
     name: BackBufferReference
     offset: 40
+  - type: __int64
+    name: D3D11DeviceContext
+    offset: 3048
   member_functions: []
 - type: Client::Graphics::Kernel::Notifier
   name: Notifier
@@ -13289,8 +13303,8 @@ structs:
   union: False
   size: 8
   fields:
-  - type: byte
-    name: Index
+  - type: Client::UI::Agent::AgentCharaCard::DecorationType
+    name: Type
     offset: 0
   - type: byte
     name: Unk1
@@ -25321,7 +25335,7 @@ structs:
   - type: Client::Game::UI::LootItemMateria
     name: Materia
     offset: 14
-    size: 2
+    size: 5
     is_string: False
   - type: byte
     name: GlamourStainIds
@@ -40195,6 +40209,40 @@ structs:
     parameters:
     - type: Client::Game::Control::TargetSystem*
       name: this
+  - signature: E8 ?? ?? ?? ?? 48 3B C7 75 ?? 32 C0
+    return_type: Client::Game::Object::GameObject*
+    name: GetHardTarget
+    parameters:
+    - type: Client::Game::Control::TargetSystem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 48 83 C4 30 5F C3 8B 83
+    return_type: byte
+    name: SetHardTarget
+    parameters:
+    - type: Client::Game::Control::TargetSystem*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: hardTargetObject
+    - type: byte
+      name: ignoreTargetModes
+    - type: byte
+      name: a4
+    - type: int
+      name: a5
+  - signature: E8 ?? ?? ?? ?? 48 3B C3 74 ?? B0 01
+    return_type: Client::Game::Object::GameObject*
+    name: GetSoftTarget
+    parameters:
+    - type: Client::Game::Control::TargetSystem*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 81 C4 E0 19 00 00 41 5F 41 5D
+    return_type: byte
+    name: SetSoftTarget
+    parameters:
+    - type: Client::Game::Control::TargetSystem*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: softTargetObject
   - signature: 48 85 D2 74 2C 4C 63 89
     return_type: byte
     name: IsObjectInViewRange

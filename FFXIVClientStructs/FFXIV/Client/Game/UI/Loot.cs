@@ -24,13 +24,13 @@ public struct LootItem {
     [FieldOffset(0x04)] public uint ChestItemIndex; // This loot item's index in the chest it came from
     [FieldOffset(0x08)] public uint ItemId;
     [FieldOffset(0x0C)] public ushort ItemCount;
-    [FieldOffset(0x0E), FixedSizeArray] internal FixedSizeArray2<LootItemMateria> _materia;
+    [FieldOffset(0x0E), FixedSizeArray] internal FixedSizeArray5<LootItemMateria> _materia;
     [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray2<byte> _glamourStainIds;
 
     [FieldOffset(0x1C)] public uint GlamourItemId;
     [FieldOffset(0x20)] public RollState RollState;
     [FieldOffset(0x24)] public RollResult RollResult;
-    [FieldOffset(0x28)] public uint RollValue;
+    [FieldOffset(0x28)] public byte RollValue;
     [FieldOffset(0x2C)] public float Time;
     [FieldOffset(0x30)] public float MaxTime;
 
@@ -43,7 +43,7 @@ public struct LootItemMateria {
     [FieldOffset(0x01)] public byte MateriaGrade;
 }
 
-public enum RollState { // TODO: underlying type should be byte
+public enum RollState : byte {
     UpToNeed = 0, // Can roll up to Need
     UpToGreed = 1,// Can roll up to Gree
     UpToPass = 2, // Can only pass

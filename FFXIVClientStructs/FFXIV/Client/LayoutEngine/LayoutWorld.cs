@@ -25,7 +25,7 @@ public unsafe partial struct LayoutWorld {
     [FieldOffset(0x068)] public long MillisecondsSinceLastUpdate;
     [FieldOffset(0x080)] public StdMap<ulong, Pointer<LayoutManager>> LoadedLayouts; // key = (LvbCrc << 32) | TerritoryTypeRowId
     //[FieldOffset(0x090)] public StdMap<ulong, Pointer<LayoutManager>> UnkLayouts90; // key = (LvbCrc << 32) | TerritoryTypeRowId
-    [FieldOffset(0x0A0), FixedSizeArray] internal FixedSizeArray90<float> _streamingRadiusPerType; // TODO: did this get bigger by 2 floats in 7.0?
+    [FieldOffset(0x0A0), FixedSizeArray] internal FixedSizeArray92<float> _streamingRadiusPerType;
     // 0x210 - some other map, value = Client::System::Resource::Handle::ResourceHandle*
     [FieldOffset(0x220)] public StdMap<Utf8String, Pointer<byte>>* RsvMap;
     [FieldOffset(0x228)] public StdMap<ulong, Pointer<byte>>* RsfMap; // Key is v0 index hash, value is always 64 bytes in size
@@ -42,13 +42,13 @@ public unsafe partial struct LayoutWorld {
     public partial void LoadPrefetchLayout(int type, byte* bgName, byte layerEntryType, uint levelId, uint territoryTypeId, GameMain.Festival* festivals, uint cfcId);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 83 B9 ?? ?? ?? ?? ?? 48 8B F1"), GenerateStringOverloads]
-    public partial byte* ResolveRsvString(byte* rsvString);
+    public partial StringPointer ResolveRsvString(byte* rsvString);
 
     [MemberFunction("40 53 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4D 8B E8")]
     public partial bool AddRsvString(byte* rsvString, byte* resolvedString, nuint resolvedStringSize);
 
     [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 45")]
-    public partial byte* ResolveRsfEntry(ulong indexHash);
+    public partial StringPointer ResolveRsfEntry(ulong indexHash);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 50 48 8B 99")]
     public partial bool AddRsfEntry(ulong indexHash, byte* rsfData);

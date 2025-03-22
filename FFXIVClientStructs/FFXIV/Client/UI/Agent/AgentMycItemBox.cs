@@ -20,23 +20,23 @@ public unsafe partial struct AgentMycItemBox {
 public unsafe partial struct MycItemBoxData {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray7<MycItemCategory> _itemCaches;
 
-    [FieldOffset(0x08), Obsolete("Use ItemCacheArray[0]")] public MycItemCategory OffensiveCache;
-    [FieldOffset(0x18C), Obsolete("Use ItemCacheArray[1]")] public MycItemCategory DefensiveCache;
-    [FieldOffset(0x310), Obsolete("Use ItemCacheArray[2]")] public MycItemCategory RestorativeCache;
-    [FieldOffset(0x494), Obsolete("Use ItemCacheArray[3]")] public MycItemCategory BeneficialCache;
-    [FieldOffset(0x618), Obsolete("Use ItemCacheArray[4]")] public MycItemCategory TacticalCache;
-    [FieldOffset(0x79C), Obsolete("Use ItemCacheArray[5]")] public MycItemCategory DetrimentalCache;
-    [FieldOffset(0x920), Obsolete("Use ItemCacheArray[6]")] public MycItemCategory ItemRelatedCache;
+    [FieldOffset(0x08), Obsolete("Use ItemCacheArray[0]", true)] public MycItemCategory OffensiveCache;
+    [FieldOffset(0x18C), Obsolete("Use ItemCacheArray[1]", true)] public MycItemCategory DefensiveCache;
+    [FieldOffset(0x310), Obsolete("Use ItemCacheArray[2]", true)] public MycItemCategory RestorativeCache;
+    [FieldOffset(0x494), Obsolete("Use ItemCacheArray[3]", true)] public MycItemCategory BeneficialCache;
+    [FieldOffset(0x618), Obsolete("Use ItemCacheArray[4]", true)] public MycItemCategory TacticalCache;
+    [FieldOffset(0x79C), Obsolete("Use ItemCacheArray[5]", true)] public MycItemCategory DetrimentalCache;
+    [FieldOffset(0x920), Obsolete("Use ItemCacheArray[6]", true)] public MycItemCategory ItemRelatedCache;
 
     [FieldOffset(0xAA4), FixedSizeArray] internal FixedSizeArray7<MycItemCategory> _itemHolsters;
 
-    [FieldOffset(0xAA4), Obsolete("Use ItemHolsterArray[0]")] public MycItemCategory OffensiveHolster;
-    [FieldOffset(0xC28), Obsolete("Use ItemHolsterArray[1]")] public MycItemCategory DefensiveHolster;
-    [FieldOffset(0xDAC), Obsolete("Use ItemHolsterArray[2]")] public MycItemCategory RestorativeHolster;
-    [FieldOffset(0xF30), Obsolete("Use ItemHolsterArray[3]")] public MycItemCategory BeneficialHolster;
-    [FieldOffset(0x10B4), Obsolete("Use ItemHolsterArray[4]")] public MycItemCategory TacticalHolster;
-    [FieldOffset(0x1238), Obsolete("Use ItemHolsterArray[5]")] public MycItemCategory DetrimentalHolster;
-    [FieldOffset(0x13BC), Obsolete("Use ItemHolsterArray[6]")] public MycItemCategory ItemRelatedHolster;
+    [FieldOffset(0xAA4), Obsolete("Use ItemHolsterArray[0]", true)] public MycItemCategory OffensiveHolster;
+    [FieldOffset(0xC28), Obsolete("Use ItemHolsterArray[1]", true)] public MycItemCategory DefensiveHolster;
+    [FieldOffset(0xDAC), Obsolete("Use ItemHolsterArray[2]", true)] public MycItemCategory RestorativeHolster;
+    [FieldOffset(0xF30), Obsolete("Use ItemHolsterArray[3]", true)] public MycItemCategory BeneficialHolster;
+    [FieldOffset(0x10B4), Obsolete("Use ItemHolsterArray[4]", true)] public MycItemCategory TacticalHolster;
+    [FieldOffset(0x1238), Obsolete("Use ItemHolsterArray[5]", true)] public MycItemCategory DetrimentalHolster;
+    [FieldOffset(0x13BC), Obsolete("Use ItemHolsterArray[6]", true)] public MycItemCategory ItemRelatedHolster;
 
     [FieldOffset(0x1550)] public int HolsterCurrentTab;
     [FieldOffset(0x1558)] public int LastSelectedActionId;

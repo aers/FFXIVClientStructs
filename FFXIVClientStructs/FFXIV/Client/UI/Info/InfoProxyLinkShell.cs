@@ -21,7 +21,7 @@ public unsafe partial struct InfoProxyLinkshell {
     public partial Entry* GetLinkshellInfo(uint index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C8 44 8D 47 01")]
-    public partial byte* GetLinkshellName(ulong id);
+    public partial StringPointer GetLinkshellName(ulong id);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct Entry {

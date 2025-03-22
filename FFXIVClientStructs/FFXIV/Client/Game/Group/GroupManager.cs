@@ -1,11 +1,13 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 
 // Client::Game::Group::GroupManager
 // group manager has two copies of the state - the normal one and a separate used when viewing recordings
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xCB80)]
+[Inherits<CharacterManagerInterface>]
 public unsafe partial struct GroupManager {
-    // TODO: implement baseclass, size 0x18, shared with CharacterManager
     [FieldOffset(0x0020)] public Group MainGroup;
     [FieldOffset(0x65D0)] public Group ReplayGroup;
 

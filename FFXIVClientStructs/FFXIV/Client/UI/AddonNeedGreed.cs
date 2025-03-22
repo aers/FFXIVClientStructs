@@ -18,7 +18,7 @@ public unsafe partial struct AddonNeedGreed {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe struct LootItemInfo {
-    [FieldOffset(0x00)] public byte* ItemName; // Pointer to a SeString
+    [FieldOffset(0x00)] public StringPointer ItemName; // Pointer to a SeString
     [FieldOffset(0x08)] public uint ItemId;
     [FieldOffset(0x0C)] public uint IconId;
     // [FieldOffset(0x10)] public uint RollState; // Indicates something about the roll state for this item

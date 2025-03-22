@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 [GenerateInterop]
 [Inherits<CharaView>]
 [StructLayout(LayoutKind.Explicit, Size = 0x420)]
-public unsafe partial struct CharaViewPortrait : ICreatable {
+public unsafe partial struct CharaViewPortrait {
     // Spherical Camera?
     [FieldOffset(0x320)] public Vector4 CameraPosition;
     [FieldOffset(0x330)] public Vector4 CameraTarget;
@@ -50,11 +50,8 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
     [FieldOffset(0x410)] public int AgentEventId;
     [FieldOffset(0x418)] public ulong AgentEventKind;
 
-    public static CharaViewPortrait* Create()
-        => IMemorySpace.GetUISpace()->Create<CharaViewPortrait>();
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 45 33 C0")]
-    public partial void Ctor();
+    public partial CharaViewPortrait* Ctor();
 
     /// <summary>
     /// Sets up the CharaViewPortrait.
@@ -67,7 +64,7 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 10 C6 80 ?? ?? ?? ?? ?? 48 8B 4B 10")]
     public partial void Setup(uint clientObjectId, CharaViewCharacterData* characterData, AgentInterface* agent, int agentEventId, ulong agentEventKind);
 
-    [Obsolete("Use Setup with correct types.")]
+    [Obsolete("Use Setup with correct types.", true)]
     public void Setup(uint clientObjectId, CharaViewCharacterData* characterData, long a4, int a5, long a6)
         => Setup(clientObjectId, characterData, (AgentInterface*)a4, a5, (ulong)a6);
 
@@ -136,4 +133,10 @@ public unsafe partial struct CharaViewPortrait : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 45 A4")]
     public partial void ToggleGearVisibility(bool hideVisor, bool hideWeapon, bool closeVisor);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 10 88 85")]
+    public partial bool IsAnimationPaused();
+
+    [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 8B CF E8 ?? ?? ?? ?? 32 C0")]
+    public partial void ToggleAnimationPlayback(bool paused);
 }

@@ -14,10 +14,10 @@ public unsafe partial struct Resource {
     //[FieldOffset(0x80)] public long u80; - some argument passed to StartLoad and returned by vf6
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte freeFlags);
+    public partial Resource* Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
-    public partial byte* GetPath();
+    public partial StringPointer GetPath();
 
     [VirtualFunction(2)]
     public partial bool LoadSucceeded();

@@ -15,17 +15,10 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x18)] public float FrameDelta;
 
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray452<Pointer<AgentInterface>> _agents;
-    [FieldOffset(0xE40), Obsolete("Renamed to AgentHelpers")] public UIModuleAgentModulePtrStruct UIModuleAgentModulePtr;
     [FieldOffset(0xE40)] public AgentHelpers AgentHelpers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public unsafe struct UIModuleAgentModulePtrStruct { // TODO: remove
-        [FieldOffset(0x0)] public UIModule* UIModule;
-        [FieldOffset(0x8)] public AgentModule* AgentModule;
-    }
 }
 
 [GenerateInterop]
@@ -78,7 +71,7 @@ public enum AgentId : uint {
     Marker = 35,
     Trade = 36,
     ScreenLog = 37,
-    Request = 38, // TODO: rename to NpcTrade (Agent struct too)
+    NpcTrade = 38,
     Status = 39,
     Map = 40,
     Loot = 41, // NeedGreed
@@ -300,7 +293,7 @@ public enum AgentId : uint {
     Unk257 = 257, // PvPMKSHeaderSpec, PvPSpectatorCameraList, PvPSpectatorList
     Unk258 = 258,
     Aquarium = 259,
-    [Obsolete("Renamed to just Aquarium since it also handles the AquariumFishlist addon")]
+    [Obsolete("Renamed to just Aquarium since it also handles the AquariumFishlist addon", true)]
     AquariumSetting = 259,
     QTE = 260,
     DeepDungeonMenu = 261,

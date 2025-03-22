@@ -3,18 +3,9 @@
 # Automagically labels most exd getter functions along with a hint indicating which sheet/sheet id its fetching from
 #
 
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError, URLError
-from io import BufferedReader
-from enum import IntEnum
-from zlib import decompress
-from json import load, loads
-from zipfile import ZipFile
-from tempfile import TemporaryFile
-from yaml import load as yload, Loader
-from re import sub
-from os import listdir, walk, getenv
-from os.path import isdir, join
+from json import load
+from os import getenv
+from os.path import join
 from luminapie.game_data import GameData, ParsedFileName
 from luminapie.excel import ExcelListFile, ExcelHeaderFile
 from abc import abstractmethod
@@ -39,11 +30,6 @@ class BaseApi:
     @abstractmethod
     def get_next_func(self, ea, pattern, flag):
         # type: (int, str, int) -> int
-        pass
-
-    @abstractmethod
-    def get_dword(self, ea):
-        # type: (int) -> int
         pass
 
     @abstractmethod
@@ -135,15 +121,16 @@ if api is None:
                             )
                         ins = idc.get_operand_value(ea, 0)
 
-                    sheetIdx = self.get_dword(ea + 1)
+                    sheetEa = ea + 1
                     ea = funcEa
+                    sheetIdx = self.get_dword(sheetEa)
                     origName = idc.get_func_name(ea)
 
                     # don't rename any funcs that are already named
                     if origName[0:4] == "sub_":
                         if exd_map.get(sheetIdx) == None:
                             print(
-                                f"Func @ 0x{ea:X} references unknown sheet {sheetIdx}!"
+                                f"Func @ 0x{ea:X} references unknown sheet {sheetIdx}! sheet dword offset = 0x{sheetEa:X}"
                             )
                             continue
 

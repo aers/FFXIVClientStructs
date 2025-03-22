@@ -47,13 +47,13 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0xE58)] public ushort* AkatsukiNoteTitleIds;
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
-    public partial byte* GetAddonText(uint addonId);
+    public partial StringPointer GetAddonText(uint addonId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF")] // FormatAddonText1<int,int,uint>
-    public partial byte* FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
+    public partial StringPointer FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 51 0F B6 DB")] // FormatAddonText2<int,int>
-    public partial byte* FormatAddonText2IntInt(uint addonId, int intParam1, int intParam2);
+    public partial StringPointer FormatAddonText2IntInt(uint addonId, int intParam1, int intParam2);
 
     /// <summary>
     /// Display a timespan as hours, minutes or seconds with only the largest non zero unit.
@@ -62,56 +62,5 @@ public unsafe partial struct RaptureTextModule {
     /// <param name="alternativeMinutesGlyph">Use U+E028 for minutes</param>
     /// <returns>string containing one of 23h, 59m, 59s</returns>
     [MemberFunction("48 83 EC 28 45 0F B6 C8 85 D2")]
-    public partial byte* FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
-
-    /// <remarks> Singular only. The usage of intParam2 is unknown. </remarks>
-    /// <returns>
-    /// A pointer to a null terminated string containing the formatted name.<br/>
-    /// It was observed, that it can return a nullptr when the excel page was not loaded. Try calling it again in subsequent frames.
-    /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CE 48 8B D0")]
-    public static partial byte* FormatName(NameFormatterPlaceholder placeholder, int id, NameFormatterIdConverter idConverter, int intParam2 = 1);
-}
-
-public enum NameFormatterPlaceholder : int {
-    ObjStr = 0,
-    Item = 1,   // bypasses IdConverter
-    ActStr = 2,
-}
-
-public enum NameFormatterIdConverter : uint {
-    None = 0,
-
-    // ObjStr
-    // TODO: this is equivalent to ObjectKind, see Character.GetName()
-    BNpcName = 2,
-    ENpcResident = 3,
-    Treasure = 4,
-    Aetheryte = 5,
-    GatheringPointName = 6,
-    EObjName = 7,
-    // Mount = 8, // does not work?
-    Companion = 9,
-    // 10-11 unused
-    // Item = 12, // does not work?
-
-    // ActStr
-    Trait = 0,
-    Action = 1,
-    // Item = 2, // does not work?
-    // EventItem = 3, // does not work?
-    EventAction = 4,
-    // EObjName = 5, // does not work?
-    GeneralAction = 5,
-    BuddyAction = 6,
-    MainCommand = 7,
-    // Companion = 8, // unresolved, use Companion
-    CraftAction = 9,
-    Action2 = 10,
-    PetAction = 11,
-    CompanyAction = 12,
-    Mount = 13,
-    // 14-18 unused
-    BgcArmyAction = 19,
-    Ornament = 20,
+    public partial StringPointer FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
 }

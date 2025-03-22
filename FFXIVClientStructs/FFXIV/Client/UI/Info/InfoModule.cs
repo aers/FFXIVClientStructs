@@ -23,7 +23,7 @@ public unsafe partial struct InfoModule {
     public partial InfoProxyInterface* GetInfoProxyById(InfoProxyId id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 C7 C1 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ??")]
-    public partial byte* GetLocalCharacterName();
+    public partial StringPointer GetLocalCharacterName();
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 39 07")]
     public partial ulong GetLocalContentId();
@@ -35,7 +35,7 @@ public unsafe partial struct InfoModule {
     [MemberFunction("48 8B 81 ?? ?? ?? ?? 0F B6 CA 48 D3 E8")]
     public partial bool IsOnlineStatusSet(byte id);
 
-    [Obsolete("Use param type of byte instead")]
+    [Obsolete("Use param type of byte instead", true)]
     public bool IsOnlineStatusSet(uint id) => IsOnlineStatusSet((byte)id);
 
     /// <summary>

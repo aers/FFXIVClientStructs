@@ -46,7 +46,6 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(35)] public partial InfoModule* GetInfoModule();
     [VirtualFunction(36)] public partial UIModuleHelpers* GetUIModuleHelpers();
     [VirtualFunction(37)] public partial AgentModule* GetAgentModule();
-    [VirtualFunction(38), Obsolete("Renamed to GetAgentHelpers")] public partial AgentModule.UIModuleAgentModulePtrStruct* GetUIModuleAgentModulePtr();
     [VirtualFunction(38)] public partial AgentHelpers* GetAgentHelpers();
     [VirtualFunction(39)] public partial UI3DModule* GetUI3DModule();
     // [VirtualFunction(40)] public partial Vf40Struct* GetVf40Struct();

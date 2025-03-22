@@ -11,15 +11,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe partial struct Texture {
     [FieldOffset(0x38)] public uint ActualWidth;
-    [FieldOffset(0x38), Obsolete($"Use {nameof(ActualWidth)}")] public uint Width;
+    [FieldOffset(0x38), Obsolete($"Use {nameof(ActualWidth)}", true)] public uint Width;
     [FieldOffset(0x3C)] public uint ActualHeight;
-    [FieldOffset(0x3C), Obsolete($"Use {nameof(ActualHeight)}")] public uint Height;
+    [FieldOffset(0x3C), Obsolete($"Use {nameof(ActualHeight)}", true)] public uint Height;
     /// <remarks>Can be > ActualWidth, for example on render targets with dynamic resolution.</remarks>
     [FieldOffset(0x40)] public uint AllocatedWidth;
-    [FieldOffset(0x40), Obsolete($"Use {nameof(AllocatedWidth)}")] public uint Width2;
+    [FieldOffset(0x40), Obsolete($"Use {nameof(AllocatedWidth)}", true)] public uint Width2;
     /// <remarks>Can be > ActualHeight, for example on render targets with dynamic resolution.</remarks>
     [FieldOffset(0x44)] public uint AllocatedHeight;
-    [FieldOffset(0x44), Obsolete($"Use {nameof(AllocatedHeight)}")] public uint Height2;
+    [FieldOffset(0x44), Obsolete($"Use {nameof(AllocatedHeight)}", true)] public uint Height2;
     [FieldOffset(0x48)] public uint Width3; // new in 6.3, so far observed to always be the same as ActualWidth
     [FieldOffset(0x4C)] public uint Height3; // new in 6.3, so far observed to always be the same as ActualHeight
     [FieldOffset(0x50)] public uint Depth; // for 3d textures like the legacy material tiling texture
@@ -33,16 +33,14 @@ public unsafe partial struct Texture {
     [FieldOffset(0x68)] public void* D3D11Texture2D; // ID3D11Texture2D1
     [FieldOffset(0x70)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
 
-    // TODO: use TextureFormat enum for textureFormat API 12 spec
-    public static Texture* CreateTexture2D(int width, int height, byte mipLevel, uint textureFormat, uint flags, uint unk) {
+    public static Texture* CreateTexture2D(int width, int height, byte mipLevel, TextureFormat textureFormat, uint flags, uint unk) {
         var size = stackalloc int[2];
         size[0] = width;
         size[1] = height;
         return CreateTexture2D(size, mipLevel, textureFormat, flags, unk);
     }
 
-    // TODO: use TextureFormat enum for textureFormat API 12 spec
-    public static Texture* CreateTexture2D(int* size, byte mipLevel, uint textureFormat, uint flags, uint unk)
+    public static Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, uint flags, uint unk)
         => Device.Instance()->CreateTexture2D(size, mipLevel, textureFormat, flags, unk);
 
     [MemberFunction("E9 ?? ?? ?? ?? 8B 02 25")]

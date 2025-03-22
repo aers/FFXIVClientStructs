@@ -89,12 +89,6 @@ public unsafe partial struct CharaView : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 75 05 0F 57 C9")]
     public partial Character* GetCharacter();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 10 88 85")]
-    public partial bool IsAnimationPaused(); // TODO: While this works on CharaView, this is part of CharaViewPortrait. Move it there.
-
-    [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 8B CF E8 ?? ?? ?? ?? 32 C0")]
-    public partial void ToggleAnimationPlayback(bool paused); // TODO: While this works on CharaView, this is part of CharaViewPortrait. Move it there.
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 45 77 48 8D 4D 87")]
     public partial void UnequipGear(bool hasCharacterData = false, bool characterLoaded = true);
 
@@ -130,12 +124,12 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0x1C), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
     [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain0Ids;
     [FieldOffset(0x62), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain1Ids;
-    [FieldOffset(0x70), Obsolete("Use GlassesIds[0]")] public ushort Glasses0Id;
-    [FieldOffset(0x72), Obsolete("Use GlassesIds[1]")] public ushort Glasses1Id;
+    [FieldOffset(0x70), Obsolete("Use GlassesIds[0]", true)] public ushort Glasses0Id;
+    [FieldOffset(0x72), Obsolete("Use GlassesIds[1]", true)] public ushort Glasses1Id;
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
     [FieldOffset(0x74)] public byte ClassJobId;
     [FieldOffset(0x75)] public bool HeadgearHidden;
-    [Obsolete("Renamed to HeadgearHidden")]
+    [Obsolete("Renamed to HeadgearHidden", true)]
     [FieldOffset(0x75)] public bool VisorHidden;
     [FieldOffset(0x76)] public bool WeaponHidden;
     [FieldOffset(0x77)] public bool VisorClosed;

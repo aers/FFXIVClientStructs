@@ -42,7 +42,7 @@
 
   <ItemGroup>
     <CompilerVisibleProperty Include="InteropGenerator_InteropNamespace" />
-    <InternalsVisibleTo Include="CExporter"/>
+    <InternalsVisibleTo Include="CExporter" />
   </ItemGroup>
   
   <ItemGroup>
@@ -52,8 +52,7 @@
     </PackageReference>
     <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
     <ProjectReference Include="..\FFXIVClientStructs.Generators\FFXIVClientStructs.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\InteropGenerator\InteropGenerator.csproj"
-                      OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\InteropGenerator\InteropGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\InteropGenerator.Runtime\InteropGenerator.Runtime.csproj" />
   </ItemGroup>
 </Project>

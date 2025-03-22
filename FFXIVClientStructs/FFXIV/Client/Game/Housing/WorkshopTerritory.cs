@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
+// ReSharper disable once CheckNamespace
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::WorkshopTerritory
@@ -12,7 +13,7 @@ public unsafe partial struct WorkshopTerritory {
 
     [FieldOffset(0x2960)] public HousingWorkshopSubmersibleData Submersible;
 
-    [FieldOffset(0xB8B0)] public long HouseId;
+    [FieldOffset(0xB8B0)] public HouseId HouseId;
 }
 
 [GenerateInterop]

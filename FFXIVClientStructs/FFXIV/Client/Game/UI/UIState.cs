@@ -106,7 +106,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x18279), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;
     [FieldOffset(0x182B0)] public ulong UnlockedTripleTriadCardsCount;
 
-    [FieldOffset(0x182CA)] public float TerritoryTypeTransientOffsetZ; // TODO: this is a short in the sheet and copied with a 4 byte register??
+    [FieldOffset(0x182CA)] public int TerritoryTypeTransientOffsetZ; // this is a short in the sheet and copied with a 4 byte register causing it to be an int
 
     [FieldOffset(0x182CE)] public byte BeginnerGuideFlags;
     [FieldOffset(0x182CF)] public byte BattleEffectSelf;

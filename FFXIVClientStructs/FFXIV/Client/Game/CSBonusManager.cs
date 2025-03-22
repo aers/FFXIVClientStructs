@@ -11,25 +11,25 @@ public unsafe partial struct CSBonusManager {
     [FieldOffset(0x08)] public CSBonusEventInfo EventInfo;
     [FieldOffset(0x18)] public CSBonusMissionInfo MissionInfo;
 
-    [FieldOffset(0x08 + 0x00), Obsolete("Use EventInfo.Season")] public ushort State;
-    [FieldOffset(0x08 + 0x04), Obsolete("Use EventInfo.BaseTime")] public uint BaseTime;
-    [FieldOffset(0x08 + 0x08), Obsolete("Use EventInfo.SeasonTarget")] public uint SeasonTarget;
-    [FieldOffset(0x08 + 0x0C), Obsolete("Use EventInfo.IsOpenShop")] public byte IsOpenShop;
-    [FieldOffset(0x08 + 0x0D), Obsolete("Use EventInfo.IsOpenMission")] public byte IsOpenMission;
+    [FieldOffset(0x08 + 0x00), Obsolete("Use EventInfo.Season", true)] public ushort State;
+    [FieldOffset(0x08 + 0x04), Obsolete("Use EventInfo.BaseTime", true)] public uint BaseTime;
+    [FieldOffset(0x08 + 0x08), Obsolete("Use EventInfo.SeasonTarget", true)] public uint SeasonTarget;
+    [FieldOffset(0x08 + 0x0C), Obsolete("Use EventInfo.IsOpenShop", true)] public byte IsOpenShop;
+    [FieldOffset(0x08 + 0x0D), Obsolete("Use EventInfo.IsOpenMission", true)] public byte IsOpenMission;
 
-    [FieldOffset(0x18 + 0x00), Obsolete("Use MissionInfo.SeedBase")] public uint SeedBase;
+    [FieldOffset(0x18 + 0x00), Obsolete("Use MissionInfo.SeedBase", true)] public uint SeedBase;
 
-    [FieldOffset(0x18 + 0x18), FixedSizeArray, Obsolete("Use MissionInfo.WBAchieveFlag")] internal FixedSizeArray20<byte> _WBAchieveFlag;
-    [FieldOffset(0x18 + 0x2C), FixedSizeArray, Obsolete("Use MissionInfo.PMAchieveFlag")] internal FixedSizeArray20<byte> _PMAchieveFlag;
-    [FieldOffset(0x18 + 0x40), FixedSizeArray, Obsolete("Use MissionInfo.MMAchieveFlag")] internal FixedSizeArray20<byte> _MMAchieveFlag;
+    [FieldOffset(0x18 + 0x18), FixedSizeArray, Obsolete("Use MissionInfo.WBAchieveFlag", true)] internal FixedSizeArray20<byte> _WBAchieveFlag;
+    [FieldOffset(0x18 + 0x2C), FixedSizeArray, Obsolete("Use MissionInfo.PMAchieveFlag", true)] internal FixedSizeArray20<byte> _PMAchieveFlag;
+    [FieldOffset(0x18 + 0x40), FixedSizeArray, Obsolete("Use MissionInfo.MMAchieveFlag", true)] internal FixedSizeArray20<byte> _MMAchieveFlag;
 
-    [FieldOffset(0x18 + 0x68), FixedSizeArray, Obsolete("Use MissionInfo.WBReceiveFlag")] internal FixedSizeArray20<byte> _WBReceiveFlag;
-    [FieldOffset(0x18 + 0x7C), FixedSizeArray, Obsolete("Use MissionInfo.PMReceiveFlag")] internal FixedSizeArray20<byte> _PMReceiveFlag;
-    [FieldOffset(0x18 + 0x90), FixedSizeArray, Obsolete("Use MissionInfo.MMReceiveFlag")] internal FixedSizeArray20<byte> _MMReceiveFlag;
+    [FieldOffset(0x18 + 0x68), FixedSizeArray, Obsolete("Use MissionInfo.WBReceiveFlag", true)] internal FixedSizeArray20<byte> _WBReceiveFlag;
+    [FieldOffset(0x18 + 0x7C), FixedSizeArray, Obsolete("Use MissionInfo.PMReceiveFlag", true)] internal FixedSizeArray20<byte> _PMReceiveFlag;
+    [FieldOffset(0x18 + 0x90), FixedSizeArray, Obsolete("Use MissionInfo.MMReceiveFlag", true)] internal FixedSizeArray20<byte> _MMReceiveFlag;
 
-    [FieldOffset(0x18 + 0xA6), Obsolete("Use MissionInfo.WBCount")] public byte WBCount;
-    [FieldOffset(0x18 + 0xA8), Obsolete("Use MissionInfo.PMCount")] public byte PMCount;
-    [FieldOffset(0x18 + 0xAA), Obsolete("Use MissionInfo.MMCount")] public byte MMCount;
+    [FieldOffset(0x18 + 0xA6), Obsolete("Use MissionInfo.WBCount", true)] public byte WBCount;
+    [FieldOffset(0x18 + 0xA8), Obsolete("Use MissionInfo.PMCount", true)] public byte PMCount;
+    [FieldOffset(0x18 + 0xAA), Obsolete("Use MissionInfo.MMCount", true)] public byte MMCount;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
