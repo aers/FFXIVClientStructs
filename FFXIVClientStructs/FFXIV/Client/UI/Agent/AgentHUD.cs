@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
@@ -16,6 +17,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>, Inherits<ChangeEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4DF0)]
 public unsafe partial struct AgentHUD {
+    [FieldOffset(0x60)] public HudStatus* Status;
+
     [FieldOffset(0xB18)] public uint CastBarAddonId;
 
     [FieldOffset(0xB38)] public uint CurrentTargetId;
@@ -77,6 +80,9 @@ public unsafe partial struct AgentHUD {
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 48 8B F9 48 8B 49 10")]
     public partial void UpdateTargetInfo();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 64 48 8D 4D B0")]
+    public partial void UpdateStatusDisplay(HudStatus.DisplayStatus* displayStatus, StringArrayData* stringArray, int stringArrayIndex, int iconId, int remainingTime, byte unkCrafterStatus, bool isPermanent);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
@@ -115,4 +121,42 @@ public unsafe struct HudQueuedBattleTalk {
     [FieldOffset(0xDC)] public uint Image;
     [FieldOffset(0xE0)] public int Sound;
     [FieldOffset(0xE4)] public uint EntityId;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x200, Pack = 0x8)]
+[GenerateInterop]
+public unsafe partial struct HudStatus {
+    [FieldOffset(0x0)] internal FixedSizeArray30<DisplayStatus> _DisplayedStatus;
+    [FieldOffset(0x168)] internal FixedSizeArray30<uint> _StatusIds;
+    [FieldOffset(0x1E0)] internal FixedSizeArray4<ushort> _StatusCustomAddonIds;
+    [FieldOffset(0x1E8)] public UIModuleInterface* UiModuleInterface;
+    [FieldOffset(0x1F0)] public AgentHUD* AgentHUD;
+    [FieldOffset(0x1F8)] public ushort AddonId;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10, Pack = 0x8)]
+    [GenerateInterop]
+    public unsafe partial struct Status {
+        [FieldOffset(0x0)] public uint StatusId;
+        [FieldOffset(0x4)] public int RemainingTime;
+        [FieldOffset(0x8)] public ushort Param;
+        [FieldOffset(0xA)] public bool PartyListPriority;
+        [FieldOffset(0xB)] public byte CanIncreaseRewards;
+        [FieldOffset(0xC)] public bool IsOwnStatus;
+        [FieldOffset(0xD)] public byte StatusIndex;
+
+        [MemberFunction("E8 ?? ?? ?? ?? 6B DD 2B")]
+        public partial uint ProcessStatuses(int maxIndex, int entityId1, int entityId2, StatusManager* statusManager, PlayerState* playerState, char unk1, char unk2, char unk3, nint unk4, int unk5);
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xC, Pack = 0x4)]
+    public unsafe struct DisplayStatus {
+        [FieldOffset(0x0)] public uint IconId;
+        [FieldOffset(0x4)] public int RemainingTime;
+        [FieldOffset(0x8)] public byte UnkStatusFlag;
+        [FieldOffset(0x9)] public bool IsUpdated;
+        [FieldOffset(0xA)] public bool IsProcessedOnce;
+    }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CF 4C 8B C5 49 8B D6 48 8B CF")]
+    public partial void Update(NumberArrayData* numberArray, StringArrayData* stringArray);
 }
