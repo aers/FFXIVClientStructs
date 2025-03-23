@@ -1,2 +1,0 @@
-[E] FFXIVClientStructs\FFXIV\Client\Game\Character\Ornament.cs: Missing E8 ?? ?? ?? ?? 44 8B 84 24 ?? ?? ?? ?? 4C 8D 4C 24 - inlined
-[E] FFXIVClientStructs\FFXIV\Client\Game\Event\EventSceneModuleTaskManager.cs: Missing 48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 83 EC 20 48 8B 2D - inlined in 7.0

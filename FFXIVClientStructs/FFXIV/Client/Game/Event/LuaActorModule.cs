@@ -6,5 +6,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [Inherits<ModuleBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public partial struct LuaActorModule {
-    [FieldOffset(0x40)] public StdMap<long, LuaActor> ActorMap;
+    [FieldOffset(0x40)] public StdMap<ulong, Pointer<LuaActor>> ActorMap;
 }

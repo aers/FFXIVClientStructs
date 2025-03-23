@@ -67,10 +67,10 @@ public unsafe partial struct AgentMap {
 
     [FieldOffset(0x5ADB)] public byte MapMarkerCount;
     [FieldOffset(0x5ADC)] public byte TempMapMarkerCount;
-    [FieldOffset(0x5ADE)] public byte IsFlagMarkerSet;
+    [FieldOffset(0x5ADE)] public bool IsFlagMarkerSet;
     [FieldOffset(0x5AE0)] public byte MiniMapMarkerCount;
-    [FieldOffset(0x5AE8)] public byte IsPlayerMoving;
-    [FieldOffset(0x5AF0)] public byte IsControlKeyPressed;
+    [FieldOffset(0x5AE8)] public bool IsPlayerMoving;
+    [FieldOffset(0x5AF0)] public bool IsControlKeyPressed;
 
     [FieldOffset(0x5F00)] public QuestLinkContainer MapQuestLinkContainer;
     [FieldOffset(0x6A58)] public QuestLinkContainer MiniMapQuestLinkContainer;
@@ -97,7 +97,7 @@ public unsafe partial struct AgentMap {
     public partial void ShowMap(bool a1, bool a2); // native code calls a1 as true always, a2 is used both true and false
 
     public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
-        if (MiniMapMarkerCount >= 100) return false;
+        if (MiniMapMarkerCount >= MiniMapMarkers.Length) return false;
         var marker = new MiniMapMarker();
         marker.MapMarker.Index = MiniMapMarkerCount;
         marker.MapMarker.X = (short)(position.X * 16.0f);
@@ -109,7 +109,7 @@ public unsafe partial struct AgentMap {
     }
 
     public bool AddMapMarker(Vector3 position, uint icon, int scale = 0, byte* text = null, byte textPosition = 3, byte textStyle = 0) {
-        if (MapMarkerCount >= 132) return false;
+        if (MapMarkerCount >= MapMarkers.Length) return false;
         if (textPosition is > 0 and < 12)
             position *= SelectedMapSizeFactorFloat;
         var marker = new MapMarkerInfo();
@@ -126,7 +126,7 @@ public unsafe partial struct AgentMap {
     }
 
     public void SetFlagMapMarker(uint territoryId, uint mapId, Vector3 worldPosition, uint iconId = 0xEC91) {
-        IsFlagMarkerSet = 0;
+        IsFlagMarkerSet = false;
         var mapX = (int)(MathF.Round(worldPosition.X, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f;
         var mapY = (int)(MathF.Round(worldPosition.Z, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f;
         SetFlagMapMarker(territoryId, mapId, mapX, mapY, iconId);
@@ -141,7 +141,7 @@ public unsafe partial struct AgentMap {
     public void OpenMap(uint mapId, uint territoryId = 0, string? windowTitle = null, MapType type = MapType.FlagMarker) {
         var title = Utf8String.FromString(windowTitle ?? string.Empty);
         var info = stackalloc OpenMapInfo[1];
-        info->Type = type == MapType.FlagMarker && IsFlagMarkerSet != 1 ? MapType.Centered : type;
+        info->Type = type == MapType.FlagMarker && !IsFlagMarkerSet ? MapType.Centered : type;
         info->MapId = mapId;
         info->TerritoryId = territoryId;
         info->TitleString = *title;
