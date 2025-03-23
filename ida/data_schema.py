@@ -20,7 +20,10 @@ class DefinedFuncParam:
     def __init__(self, name, type):
         # type: (str, str) -> None
         self.name = name
-        self.type = type
+        if type == "__fastcall":
+            self.type = "__int64"
+        else:
+            self.type = type
 
 
 class DefinedVFunc:
