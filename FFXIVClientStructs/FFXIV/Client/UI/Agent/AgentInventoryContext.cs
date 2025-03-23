@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -60,6 +61,19 @@ public unsafe partial struct AgentInventoryContext {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 8B 83")]
     public partial void LowerItemQuality(InventoryItem* itemSlot, InventoryType inventory, int slot, uint addonId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 27 48 8B 01")]
+    public partial void MaterializeItem(EventFramework* framework, int eventID, InventoryType inventoryType, short inventorySlot, int extraParam = 0);
+
+    public void MaterializeItem(InventoryItem* itemSlot, MaterializeEventId eventId) {
+        MaterializeItem(EventFramework.Instance(), (int)eventId, itemSlot->Container, itemSlot->Slot, 0);
+    }
+
+    public enum MaterializeEventId {
+        Unk0 = 0x390000, // possibly salvage related
+        Retrieve = 0x390001,
+        Unk2 = 0x390002, // possibly purify related
+    }
 
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
