@@ -51,8 +51,6 @@ public unsafe partial struct ScreenShot {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 15 C6 05")]
     public partial bool ScheduleScreenShot(delegate* unmanaged<void*, int, byte> callback, void* initialArg);
 
-    public bool ScheduleScreenShot() => ScheduleScreenShot(null, null);
-
     public enum TargetFileFormat : int {
         Bmp = 0,
         Jpg = 1,
