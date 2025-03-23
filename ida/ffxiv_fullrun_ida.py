@@ -2,7 +2,7 @@ from os import path
 import idautils
 import ida_auto
 import idc
-import ida_kerwin
+import ida_kernwin
 import idaapi
 
 print("Loading ffxiv_idarename.py")
