@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.STD.ContainerInterface;
 using FFXIVClientStructs.STD.Helper;
-using JetBrains.Annotations;
 using static FFXIVClientStructs.STD.Helper.StdImplHelpers;
 
 namespace FFXIVClientStructs.STD;
@@ -336,13 +335,13 @@ public unsafe struct StdVector<T, TMemorySpace>
     }
 
     /// <inheritdoc/>
+    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public void InsertRangeCopy(long index, IEnumerable<T> collection) {
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
         if (!StdOps<T>.IsCopyable)
             throw new InvalidOperationException("Items are not copiable.");
-
         switch (collection) {
             case IStdVector<T> isv when isv.RepresentativePointer == RepresentativePointer:
                 // We're inserting this vector into itself.
@@ -693,7 +692,6 @@ public unsafe struct StdVector<T, TMemorySpace>
             StdOps<T>.StaticDispose(ref First[i]);
     }
 
-    [AssertionMethod]
     private readonly long CheckedIndex(long index) {
         if (index < 0)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
@@ -702,7 +700,6 @@ public unsafe struct StdVector<T, TMemorySpace>
         return index;
     }
 
-    [AssertionMethod]
     private readonly long CheckedRangeCount(long index, long count) {
         if (index < 0 || index > LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);

@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.STD.ContainerInterface;
 using FFXIVClientStructs.STD.Helper;
-using JetBrains.Annotations;
 
 namespace FFXIVClientStructs.STD;
 
@@ -328,7 +327,6 @@ public unsafe struct StdDeque<T>
     /// <inheritdoc/>
     public override int GetHashCode() => HashCode.Combine((nint)Map, MapSize, MyOff, MySize);
 
-    [AssertionMethod]
     private readonly long CheckedIndex(long index) {
         if (index < 0)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
@@ -337,7 +335,6 @@ public unsafe struct StdDeque<T>
         return index;
     }
 
-    [AssertionMethod]
     private readonly long CheckedRangeCount(long index, long count) {
         if (index < 0 || index > LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
