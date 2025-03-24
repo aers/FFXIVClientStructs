@@ -356,6 +356,7 @@ public enum AgentId : uint {
     MiragePrismENpcSatisfaction = 318,
     Description = 319, // Frontline/Bozja Description
     Alarm = 320,
+    Unk321 = 321,
     MerchantSetting = 322, // Mannequins
     FreeShop = 323,
     AozNotebook = 324, // Bluemage Spells
@@ -382,6 +383,7 @@ public enum AgentId : uint {
     Dawn = 345, // Trust
     DawnStory = 346, // Duty Support
     HousingCatalogPreview = 347,
+    Unk348 = 348,
     SubmersibleExplorationMapSelect = 349,
     QuestRedo = 350,
     QuestRedoHud = 351,
