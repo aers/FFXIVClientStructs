@@ -16,10 +16,10 @@ public unsafe partial struct ResourceManager {
     public partial ResourceHandle* FindResourceHandle(ResourceCategory* category, uint* type, uint* hash);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 8B C7"), GenerateStringOverloads]
-    public partial ResourceHandle* GetResourceSync(ResourceCategory* category, uint* type, uint* hash, byte* path, void* unknown);
+    public partial ResourceHandle* GetResourceSync(ResourceCategory* category, uint* type, uint* hash, CStringPointer path, void* unknown);
 
     [MemberFunction("E8 ?? ?? ?? 00 48 8B D8 EB ?? F0 FF 83 ?? ?? 00 00"), GenerateStringOverloads]
-    public partial ResourceHandle* GetResourceAsync(ResourceCategory* category, uint* type, uint* hash, byte* path, void* unknown, bool isUnknown);
+    public partial ResourceHandle* GetResourceAsync(ResourceCategory* category, uint* type, uint* hash, CStringPointer path, void* unknown, bool isUnknown);
 }
 
 public enum ResourceCategory {

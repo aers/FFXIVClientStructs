@@ -19,7 +19,7 @@ public sealed class GenerateInteropAttributeIsValidAnalyzer : DiagnosticAnalyzer
 
         context.RegisterCompilationStartAction(static context => {
             // get the attribute symbol
-            if (context.Compilation.GetTypeByMetadataName(AttributeNames.GenerateInteropAttribute) is not { } generateAttribute ||
+            if (context.Compilation.GetTypeByMetadataName(InteropTypeNames.GenerateInteropAttribute) is not { } generateAttribute ||
                 context.Compilation.GetTypeByMetadataName("System.Runtime.InteropServices.StructLayoutAttribute") is not { } structLayoutAttribute)
                 return;
 

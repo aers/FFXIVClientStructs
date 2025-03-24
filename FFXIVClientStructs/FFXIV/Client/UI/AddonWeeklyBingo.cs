@@ -81,19 +81,19 @@ public unsafe struct DutySlot {
 public unsafe struct StringThing {
     // No more seals can be applied. Deliver the journal to Khloe Aliapoh to receive your reward.
     [FieldOffset(0x08)]
-    public StringPointer FullSealsText;
+    public CStringPointer FullSealsText;
 
     // One or more lines of seals have been completed. Deliver the journal to Khloe Aliapoh to receive your reward or continue adventuring to add more seals.
     [FieldOffset(0x10)]
-    public StringPointer OneOrMoreLinesText;
+    public CStringPointer OneOrMoreLinesText;
 
     // Second Chance points can be used to increase your chances of completing lines.
     [FieldOffset(0x18)]
-    public StringPointer SecondChancePointsText;
+    public CStringPointer SecondChancePointsText;
 
-    [FieldOffset(0x20)] public StringPointer ReceiveSealCompleteText; // Select a completed duty to receive a seal.
-    [FieldOffset(0x28)] public StringPointer ReceiveSealIncompleteText; // Complete a task to receive a seal.
-    [FieldOffset(0x30)] public StringPointer SecondChanceRetryText; // Select a completed duty to be rendered incomplete.
+    [FieldOffset(0x20)] public CStringPointer ReceiveSealCompleteText; // Select a completed duty to receive a seal.
+    [FieldOffset(0x28)] public CStringPointer ReceiveSealIncompleteText; // Complete a task to receive a seal.
+    [FieldOffset(0x30)] public CStringPointer SecondChanceRetryText; // Select a completed duty to be rendered incomplete.
     [FieldOffset(0x40)] public AddonWeeklyBingo* Addon;
     [FieldOffset(0x48)] public AtkTextNode* TextNode;
 }

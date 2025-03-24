@@ -54,5 +54,5 @@ public unsafe struct ActionBarSlot {
     [FieldOffset(0xA0)] public AtkResNode* IconFrame;
     [FieldOffset(0xA8)] public AtkImageNode* ChargeIcon;
     [FieldOffset(0xB0)] public AtkResNode* RecastOverlayContainer;
-    [FieldOffset(0xB8)] public StringPointer PopUpHelpTextPtr; // Null when slot is empty
+    [FieldOffset(0xB8)] public CStringPointer PopUpHelpTextPtr; // Null when slot is empty
 }

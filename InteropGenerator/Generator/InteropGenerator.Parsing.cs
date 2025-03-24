@@ -32,7 +32,7 @@ public sealed partial class InteropGenerator {
 
         // other struct attributes
         SignatureInfo? virtualTableSignatureInfo = null;
-        if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.VirtualTableAttribute, out AttributeData? virtualTableAttribute)) {
+        if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.VirtualTableAttribute, out AttributeData? virtualTableAttribute)) {
             if (virtualTableAttribute.TryGetConstructorArgument(0, out string? signature)) {
                 if (virtualTableAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
                     virtualTableAttribute.TryGetMultiValueConstructorArgument(1, out ImmutableArray<ushort>? multipleOffsets)) {
@@ -47,7 +47,7 @@ public sealed partial class InteropGenerator {
         using ImmutableArrayBuilder<InheritanceInfo> inheritanceInfoBuilder = new();
         foreach (AttributeData attributeData in structSymbol.GetAttributes()) {
             if (attributeData.AttributeClass is not { } attributeSymbol) continue;
-            if (!attributeSymbol.HasFullyQualifiedMetadataName(AttributeNames.InheritsAttribute)) continue;
+            if (!attributeSymbol.HasFullyQualifiedMetadataName(InteropTypeNames.InheritsAttribute)) continue;
             if (attributeData.ConstructorArguments.Length != 1 ||
                 !attributeData.TryGetConstructorArgument(0, out int? parentOffset))
                 continue;
@@ -118,7 +118,7 @@ public sealed partial class InteropGenerator {
             MethodInfo? methodInfo = null;
 
             // check for one of the method body generation attributes
-            if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.MemberFunctionAttribute, out AttributeData? mfAttribute)) {
+            if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.MemberFunctionAttribute, out AttributeData? mfAttribute)) {
                 ImmutableArray<ushort> relativeOffsets = ImmutableArray<ushort>.Empty;
 
                 // get signature 
@@ -144,7 +144,7 @@ public sealed partial class InteropGenerator {
                     new SignatureInfo(signature, relativeOffsets));
 
                 memberFunctionsBuilder.Add(memberFunctionInfo);
-            } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.VirtualFunctionAttribute, out AttributeData? vfAttribute)) {
+            } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.VirtualFunctionAttribute, out AttributeData? vfAttribute)) {
                 if (vfAttribute.ConstructorArguments.Length != 1 ||
                     !vfAttribute.TryGetConstructorArgument(0, out uint? index))
                     continue; // ignore malformed attribute
@@ -157,7 +157,7 @@ public sealed partial class InteropGenerator {
                     index.Value);
 
                 virtualFunctionBuilder.Add(virtualFunctionInfo);
-            } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.StaticAddressAttribute, out AttributeData? saAttribute)) {
+            } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.StaticAddressAttribute, out AttributeData? saAttribute)) {
                 if (saAttribute.ConstructorArguments.Length != 3 ||
                     !saAttribute.TryGetConstructorArgument(0, out string? signature) ||
                     !saAttribute.TryGetConstructorArgument(2, out bool? isPointer))
@@ -191,7 +191,7 @@ public sealed partial class InteropGenerator {
             }
 
             // check for string overload, which could be applied to some of the above
-            if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.GenerateStringOverloads, out _)) {
+            if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.GenerateStringOverloads, out _)) {
                 // retrieve method info if it wasn't previously retrieved
                 if (methodInfo is null) {
                     if (!TryParseMethod(methodSymbol, token, out methodInfo))
@@ -201,8 +201,7 @@ public sealed partial class InteropGenerator {
                 using ImmutableArrayBuilder<string> ignoredParametersBuilder = new();
 
                 foreach (IParameterSymbol parameterSymbol in methodSymbol.Parameters) {
-                    if (parameterSymbol.Type.TypeKind == TypeKind.Pointer &&
-                        parameterSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.StringIgnore, out _))
+                    if (parameterSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.StringIgnore, out _))
                         ignoredParametersBuilder.Add(parameterSymbol.Name);
                 }
 
@@ -265,7 +264,7 @@ public sealed partial class InteropGenerator {
         using ImmutableArrayBuilder<FieldInfo> publicFieldBuilder = new();
 
         foreach (IFieldSymbol fieldSymbol in structSymbol.GetMembers().OfType<IFieldSymbol>()) {
-            if (fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName(AttributeNames.FixedSizeArrayAttribute, out AttributeData? fixedSizeArrayAttributeData)) {
+            if (fieldSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.FixedSizeArrayAttribute, out AttributeData? fixedSizeArrayAttributeData)) {
                 if (fieldSymbol.Type is not INamedTypeSymbol fieldTypeSymbol)
                     continue;
 

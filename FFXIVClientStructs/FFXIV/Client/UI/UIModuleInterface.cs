@@ -131,11 +131,11 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(176)] public partial ??? OpenMiniGame(???);
     // [VirtualFunction(177)] public partial ??? HideHousingHarvest(???);
     [VirtualFunction(178)] public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
-    [VirtualFunction(179), GenerateStringOverloads] public partial void ShowText(int position, byte* text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
+    [VirtualFunction(179), GenerateStringOverloads] public partial void ShowText(int position, CStringPointer text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
     [VirtualFunction(180)] public partial void ShowTextChain(int chain, int hqChain = 0);
-    [VirtualFunction(181), GenerateStringOverloads] public partial void ShowWideText(byte* text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
-    [VirtualFunction(182), GenerateStringOverloads] public partial void ShowPoisonText(byte* text, int layer = 0);
-    [VirtualFunction(183), GenerateStringOverloads] public partial void ShowErrorText(byte* text, bool forceVisible = true);
+    [VirtualFunction(181), GenerateStringOverloads] public partial void ShowWideText(CStringPointer text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
+    [VirtualFunction(182), GenerateStringOverloads] public partial void ShowPoisonText(CStringPointer text, int layer = 0);
+    [VirtualFunction(183), GenerateStringOverloads] public partial void ShowErrorText(CStringPointer text, bool forceVisible = true);
     [VirtualFunction(184)] public partial void ShowTextClassChange(uint classJobId);
     [VirtualFunction(185)] public partial void ShowGetAction(ActionType actionType, uint actionId);
     [VirtualFunction(186)] public partial void ShowLocationTitle(uint territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
@@ -146,10 +146,10 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(193)] public partial void ShowStreak(int streak, int streakType);
     [VirtualFunction(194)] public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
     [VirtualFunction(195)] public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
-    [VirtualFunction(196), GenerateStringOverloads] public partial void ShowBattleTalk(byte* name, byte* text, float duration, byte style);
-    [VirtualFunction(197), GenerateStringOverloads] public partial void ShowBattleTalkImage(byte* name, byte* text, float duration, uint image, byte style, int sound = -1, uint entityId = 0xE0000000);
+    [VirtualFunction(196), GenerateStringOverloads] public partial void ShowBattleTalk(CStringPointer name, CStringPointer text, float duration, byte style);
+    [VirtualFunction(197), GenerateStringOverloads] public partial void ShowBattleTalkImage(CStringPointer name, CStringPointer text, float duration, uint image, byte style, int sound = -1, uint entityId = 0xE0000000);
     // [VirtualFunction(198)] public partial ??? ShowBattleTalkUnknown(???);
-    [VirtualFunction(199), GenerateStringOverloads] public partial void ShowBattleTalkSound(byte* name, byte* text, float duration, int sound, byte style);
+    [VirtualFunction(199), GenerateStringOverloads] public partial void ShowBattleTalkSound(CStringPointer name, CStringPointer text, float duration, int sound, byte style);
     /// <param name="type">0 = Inventory, 1 = Key Items</param>
     [VirtualFunction(201)] public partial void OpenInventory(byte type = 0);
     [VirtualFunction(202)] public partial void CloseInventory();

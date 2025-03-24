@@ -14,7 +14,7 @@ public unsafe partial struct hkIstream {
     public partial void Ctor1(hkStreamReader* sr);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C3 48 8B D7 48 8B 48 10"), GenerateStringOverloads]
-    public partial void Ctor2(byte* filename);
+    public partial void Ctor2(CStringPointer filename);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 44 24 ?? 48 8B D5 48 8B 48 10")]
     public partial void Ctor3(void* mem, int memSize);
@@ -29,7 +29,7 @@ public unsafe partial struct hkIstream {
     public partial byte isOk();
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 54 41 56 41 57 48 83 EC 20 48 8B E9 45 0F B6 F9"), GenerateStringOverloads]
-    public partial int getline(byte* str, int maxsize, byte delim = 0x0A); // delim character is \n
+    public partial int getline(CStringPointer str, int maxsize, byte delim = 0x0A); // delim character is \n
 
     // [MemberFunction("")]
     // public partial hkIstream* get(char& c);

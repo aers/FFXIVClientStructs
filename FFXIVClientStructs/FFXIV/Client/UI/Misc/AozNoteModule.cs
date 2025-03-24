@@ -51,13 +51,13 @@ public unsafe partial struct AozNoteModule {
     }
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B 14 99")]
-    public partial StringPointer GetActiveSetCustomNamePtr(int activeSetIndex);
+    public partial CStringPointer GetActiveSetCustomNamePtr(int activeSetIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 19 8B D3")]
     public partial bool HasActiveSetCustomName(int activeSetIndex);
 
     [MemberFunction("41 0F 10 00 8B C2 48 69 D0 ?? ?? ?? ?? 0F 11 84 0A"), GenerateStringOverloads]
-    public partial void SetActiveSetCustomName(int activeSetIndex, byte* name);
+    public partial void SetActiveSetCustomName(int activeSetIndex, CStringPointer name);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 69 F6")]
     public partial void SaveActiveSetHotBars(int activeSetIndex);

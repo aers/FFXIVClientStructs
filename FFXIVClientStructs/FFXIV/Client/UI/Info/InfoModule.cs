@@ -23,7 +23,7 @@ public unsafe partial struct InfoModule {
     public partial InfoProxyInterface* GetInfoProxyById(InfoProxyId id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 C7 C1 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ??")]
-    public partial StringPointer GetLocalCharacterName();
+    public partial CStringPointer GetLocalCharacterName();
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 39 07")]
     public partial ulong GetLocalContentId();

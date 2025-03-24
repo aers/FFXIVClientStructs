@@ -70,7 +70,7 @@ public unsafe partial struct AgentHUD {
     public partial void OpenContextMenuFromTarget(GameObject* gameObject);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 08 48 8B CB E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 45 85 F6")]
-    public partial StringPointer GetMainCommandString(uint commandId, bool includeKeybind = true, bool includeNewIndicator = false);
+    public partial CStringPointer GetMainCommandString(uint commandId, bool includeKeybind = true, bool includeNewIndicator = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CF 4C 89 B4 24 B8 08 00 00")]
     public partial void OpenSystemMenu(AtkValue* atkValueArgs, uint menuSize);
@@ -95,7 +95,7 @@ public struct HudPartyMemberEnmity {
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe struct HudPartyMember {
     [FieldOffset(0x0)] public BattleChara* Object;
-    [FieldOffset(0x8)] public StringPointer Name;
+    [FieldOffset(0x8)] public CStringPointer Name;
     [FieldOffset(0x10)] public ulong ContentId;
     [FieldOffset(0x18)] public uint EntityId;
     [FieldOffset(0x20)] public byte Index;

@@ -180,16 +180,16 @@ public unsafe partial struct MaterialResourceHandle {
     public Span<StainTableRow> StainTableSpan
         => StainTable switch { null => default, var ptr => new(ptr, TableRows) };
 
-    public StringPointer ShpkName
+    public CStringPointer ShpkName
         => Strings + ShpkNameOffset;
 
-    public StringPointer TexturePath(int index) {
+    public CStringPointer TexturePath(int index) {
         if (index < 0 || index >= TextureCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + Textures[index].PathOffset;
     }
 
-    public StringPointer AttributeSetName(int index) {
+    public CStringPointer AttributeSetName(int index) {
         if (index < 0 || index >= UvSetCount + ColorSetCount)
             throw new ArgumentOutOfRangeException(nameof(index));
         return Strings + AttributeSets[index].NameOffset;

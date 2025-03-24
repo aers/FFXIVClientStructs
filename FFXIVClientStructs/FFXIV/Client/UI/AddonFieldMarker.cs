@@ -22,7 +22,7 @@ public unsafe partial struct AddonFieldMarker {
 public unsafe struct AddonFieldMarkerInfo {
     [FieldOffset(0x00)] public uint IconId; // Map IconId
     [FieldOffset(0x04)] public int Active;
-    [FieldOffset(0x08)] public StringPointer TooltipString;
+    [FieldOffset(0x08)] public CStringPointer TooltipString;
     [FieldOffset(0x10)] public int Slot; // Index 0-7 [A,B,C,D,1,2,3,4] 
 
     public bool IsActive => Active != 0;

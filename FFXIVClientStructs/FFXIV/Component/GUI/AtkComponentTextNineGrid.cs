@@ -20,5 +20,5 @@ public unsafe partial struct AtkComponentTextNineGrid : ICreatable {
     public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 FF C7 48 83 C3 0C"), GenerateStringOverloads]
-    public partial void SetText(byte* str);
+    public partial void SetText(CStringPointer str);
 }

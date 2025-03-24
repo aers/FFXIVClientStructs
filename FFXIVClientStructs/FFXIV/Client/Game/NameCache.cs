@@ -19,7 +19,7 @@ public unsafe partial struct NameCache {
 
     /// <remarks> If not cached, will return null. </remarks>
     [MemberFunction("40 53 48 83 EC 30 49 8B D8 4C 8D 44 24")]
-    public partial StringPointer GetNameByEntityId(uint entityId, byte* outSex = null);
+    public partial CStringPointer GetNameByEntityId(uint entityId, byte* outSex = null);
 
     /// <remarks> If not cached, will look it up locally (PlayerState, GroupManager, CharacterManager). </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 0D 48 8D 05")]
@@ -30,10 +30,10 @@ public unsafe partial struct NameCache {
 
     /// <remarks> If not cached, the name will be requested from the server! </remarks>
     [MemberFunction("40 53 48 83 EC 30 4C 8B D2 48 8B D9")]
-    public partial StringPointer GetNameByContentId(ulong contentId);
+    public partial CStringPointer GetNameByContentId(ulong contentId);
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 33 C9 45 33 C9"), GenerateStringOverloads]
-    public partial void SetNameForContentId(ulong contentId, byte* name);
+    public partial void SetNameForContentId(ulong contentId, CStringPointer name);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x4C)]
@@ -53,7 +53,7 @@ public unsafe partial struct NameCache {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0B)]
     public struct CharacterInfo {
-        [FieldOffset(0x00)] public StringPointer Name;
+        [FieldOffset(0x00)] public CStringPointer Name;
         [FieldOffset(0x08)] public short HomeWorldId;
         [FieldOffset(0x0A)] public byte Sex;
     }

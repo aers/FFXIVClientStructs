@@ -36,10 +36,10 @@ public unsafe partial struct MacroEncoder {
     public partial int EncodeParameter(Utf8String* output, Utf8String* param, byte type, int* outExtraParams);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 ?? 0F 8C"), GenerateStringOverloads]
-    public partial int EncodeMacro(Utf8String* output, byte* input, int* outNumCharsRead);
+    public partial int EncodeMacro(Utf8String* output, CStringPointer input, int* outNumCharsRead);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 83 F8 ?? 7C ?? 49 8D 8E"), GenerateStringOverloads]
-    public partial void EncodeString(Utf8String* output, byte* input);
+    public partial void EncodeString(Utf8String* output, CStringPointer input);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
