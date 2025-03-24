@@ -11,15 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe partial struct Texture {
     [FieldOffset(0x38)] public uint ActualWidth;
-    [FieldOffset(0x38), Obsolete($"Use {nameof(ActualWidth)}", true)] public uint Width;
     [FieldOffset(0x3C)] public uint ActualHeight;
-    [FieldOffset(0x3C), Obsolete($"Use {nameof(ActualHeight)}", true)] public uint Height;
     /// <remarks>Can be > ActualWidth, for example on render targets with dynamic resolution.</remarks>
     [FieldOffset(0x40)] public uint AllocatedWidth;
-    [FieldOffset(0x40), Obsolete($"Use {nameof(AllocatedWidth)}", true)] public uint Width2;
     /// <remarks>Can be > ActualHeight, for example on render targets with dynamic resolution.</remarks>
     [FieldOffset(0x44)] public uint AllocatedHeight;
-    [FieldOffset(0x44), Obsolete($"Use {nameof(AllocatedHeight)}", true)] public uint Height2;
     [FieldOffset(0x48)] public uint Width3; // new in 6.3, so far observed to always be the same as ActualWidth
     [FieldOffset(0x4C)] public uint Height3; // new in 6.3, so far observed to always be the same as ActualHeight
     [FieldOffset(0x50)] public uint Depth; // for 3d textures like the legacy material tiling texture
