@@ -30,5 +30,5 @@ public unsafe partial struct PronounModule {
     public partial Utf8String* ProcessString(Utf8String* input, bool encode, int maxLength = 1023);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? EB 0C"), GenerateStringOverloads]
-    public partial GameObject* ResolvePlaceholder(byte* placeholder, byte unknown0, byte unknown1);
+    public partial GameObject* ResolvePlaceholder(CStringPointer placeholder, byte unknown0, byte unknown1);
 }

@@ -33,7 +33,7 @@ public unsafe partial struct AtkCounterNode : ICreatable {
     public partial void SetNumber(int number);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 FF C4 49 83 C5 10"), GenerateStringOverloads]
-    public partial void SetText(byte* text);
+    public partial void SetText(CStringPointer text);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 F8 08")]
     public partial void UpdateWidth();

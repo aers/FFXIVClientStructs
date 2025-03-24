@@ -205,7 +205,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 B9 ?? ?? ?? ??"), GenerateStringOverloads]
-    public partial bool LoadUldByName(byte* name, byte a3 = 0, uint a4 = 6);
+    public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, uint a4 = 6);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 24")]
     public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);

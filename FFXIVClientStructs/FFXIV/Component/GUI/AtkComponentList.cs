@@ -58,7 +58,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
 
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? FF C5 48 8D 5B 70"), GenerateStringOverloads]
-    public partial void SetItemLabel(int index, byte* text);
+    public partial void SetItemLabel(int index, CStringPointer text);
 
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
     [MemberFunction("3B 91 ?? ?? ?? ?? 7C 03 33 C0 C3 4C 8B 81")]

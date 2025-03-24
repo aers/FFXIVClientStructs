@@ -141,8 +141,8 @@ internal static class DiagnosticDescriptors {
 
     public static readonly DiagnosticDescriptor GenerateStringOverloadsMethodMustHaveValidParameter = new(
         "CSIG0108",
-        "GenerateStringOverloads method generation target must have a valid byte* parameter to overload",
-        "Method {0} must contain a valid string overload parameter (byte*)",
+        "GenerateStringOverloads method generation target must have a valid CStringPointer parameter to overload",
+        "Method {0} must contain a valid string overload parameter (CStringPointer)",
         "InteropGenerator.Method",
         DiagnosticSeverity.Error,
         true,

@@ -121,7 +121,7 @@ public unsafe partial struct UIModule {
 
     [Obsolete("Moved to UIGlobals.IsValidPlayerCharacterName", true)]
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 C7 4C 8B CB"), GenerateStringOverloads]
-    public static partial bool IsPlayerCharacterName(byte* name);
+    public static partial bool IsPlayerCharacterName(CStringPointer name);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 45 84 C9")]
     public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);

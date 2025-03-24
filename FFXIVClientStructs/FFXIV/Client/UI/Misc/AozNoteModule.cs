@@ -57,7 +57,7 @@ public unsafe partial struct AozNoteModule {
     public partial bool HasActiveSetCustomName(int activeSetIndex);
 
     [MemberFunction("41 0F 10 00 8B C2 48 69 D0 ?? ?? ?? ?? 0F 11 84 0A"), GenerateStringOverloads]
-    public partial void SetActiveSetCustomName(int activeSetIndex, byte* name);
+    public partial void SetActiveSetCustomName(int activeSetIndex, CStringPointer name);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 69 F6")]
     public partial void SaveActiveSetHotBars(int activeSetIndex);

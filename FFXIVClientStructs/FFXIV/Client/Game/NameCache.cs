@@ -33,7 +33,7 @@ public unsafe partial struct NameCache {
     public partial CStringPointer GetNameByContentId(ulong contentId);
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 33 C9 45 33 C9"), GenerateStringOverloads]
-    public partial void SetNameForContentId(ulong contentId, byte* name);
+    public partial void SetNameForContentId(ulong contentId, CStringPointer name);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x4C)]

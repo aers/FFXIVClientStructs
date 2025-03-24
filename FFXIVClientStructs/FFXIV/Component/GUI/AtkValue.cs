@@ -97,7 +97,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     /// Type is set to ValueType.ManagedString.
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 41 03 ED"), GenerateStringOverloads]
-    public partial void SetManagedString(byte* value);
+    public partial void SetManagedString(CStringPointer value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 FF 89 7C 24")]
     public partial void CreateVector(uint size);
@@ -115,7 +115,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     public partial bool SetVectorValue(uint index, AtkValue* value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 C6 02 FF C7"), GenerateStringOverloads]
-    public partial bool SetVectorString(uint index, byte* value);
+    public partial bool SetVectorString(uint index, CStringPointer value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 60 4E 8D 24 3E")]
     public partial bool CopyVectorValue(uint index, AtkValue* outValue);

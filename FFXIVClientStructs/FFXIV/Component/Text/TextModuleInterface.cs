@@ -15,10 +15,10 @@ public unsafe partial struct TextModuleInterface {
     public partial Utf8String* EncodeString(Utf8String* ouput, Utf8String* input);
 
     [VirtualFunction(8), GenerateStringOverloads]
-    public partial int EncodeMacro(byte* input, Utf8String* output);
+    public partial int EncodeMacro(CStringPointer input, Utf8String* output);
 
     [VirtualFunction(9), GenerateStringOverloads]
-    public partial Utf8String* ProcessMacroCode(Utf8String* output, byte* input);
+    public partial Utf8String* ProcessMacroCode(Utf8String* output, CStringPointer input);
 
     [VirtualFunction(13)]
     public partial void SetFixedSheetInterface(FixedSheetInterface* fixedSheetInterface);

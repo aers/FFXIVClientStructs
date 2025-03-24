@@ -59,8 +59,8 @@ public unsafe partial struct AtkTooltipManager {
         bool unk8 = true);
 
     [GenerateStringOverloads] // cursed forced partial to make generator happy
-    public partial void ShowTooltip(ushort parentId, AtkResNode* targetNode, byte* tooltipString);
-    public partial void ShowTooltip(ushort parentId, AtkResNode* targetNode, byte* tooltipString) {
+    public partial void ShowTooltip(ushort parentId, AtkResNode* targetNode, CStringPointer tooltipString);
+    public partial void ShowTooltip(ushort parentId, AtkResNode* targetNode, CStringPointer tooltipString) {
         var args = stackalloc AtkTooltipArgs[1];
         args->Ctor();
         args->Text = tooltipString;

@@ -66,7 +66,7 @@ public unsafe partial struct RaptureLogModule {
     public partial void ShowLogMessageString(uint logMessageId, Utf8String* value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 C6 41"), GenerateStringOverloads]
-    public partial void PrintString(byte* str);
+    public partial void PrintString(CStringPointer str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8D 96 ?? ?? ?? ?? 48 8D 4C 24")]
     public partial bool GetLogMessage(int index, Utf8String* str);

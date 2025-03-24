@@ -89,11 +89,11 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 50")]
     public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong unk, ushort parentAddonId, int unk2);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9")]
-    public partial ushort OpenAddonByAgent(byte* addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9"), GenerateStringOverloads]
+    public partial ushort OpenAddonByAgent(CStringPointer addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
 
     [MemberFunction("48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73"), GenerateStringOverloads]
-    public partial void ShowTextGimmickHint(byte* text, TextGimmickHintStyle style, int duration);
+    public partial void ShowTextGimmickHint(CStringPointer text, TextGimmickHintStyle style, int duration);
 
     [MemberFunction("40 56 41 56 41 57 48 81 EC A0 00 00 00")]
     public partial byte IsDawnSupported(uint contentFinderCondition); // return & 1 = dawnstory, & 2 = dawn
@@ -111,7 +111,7 @@ public unsafe partial struct RaptureAtkModule {
     public partial void Update(float delta);
 
     [VirtualFunction(63), GenerateStringOverloads]
-    public partial bool OpenMapWithMapLink(byte* mapLink);
+    public partial bool OpenMapWithMapLink(CStringPointer mapLink);
 
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.AtkUnitManager.Flags.HasFlag(AtkUnitManagerFlags.UiHidden);

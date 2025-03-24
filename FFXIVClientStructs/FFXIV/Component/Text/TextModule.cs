@@ -18,5 +18,5 @@ public unsafe partial struct TextModule {
     [FieldOffset(0x478)] public FixedSheetInterface* FixedSheetInterface;
 
     [VirtualFunction(16), GenerateStringOverloads]
-    public partial bool FormatString(byte* input, StdDeque<TextParameter>* localParameters, Utf8String* output);
+    public partial bool FormatString(CStringPointer input, StdDeque<TextParameter>* localParameters, Utf8String* output);
 }

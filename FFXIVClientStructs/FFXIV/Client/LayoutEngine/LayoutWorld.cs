@@ -39,10 +39,10 @@ public unsafe partial struct LayoutWorld {
 
     /// <remarks> <paramref name="festivals"/> is a pointer to an array of 4 <see cref="GameMain.Festival"/>s. </remarks>
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 41 20"), GenerateStringOverloads]
-    public partial void LoadPrefetchLayout(int type, byte* bgName, byte layerEntryType, uint levelId, uint territoryTypeId, GameMain.Festival* festivals, uint cfcId);
+    public partial void LoadPrefetchLayout(int type, CStringPointer bgName, byte layerEntryType, uint levelId, uint territoryTypeId, GameMain.Festival* festivals, uint cfcId);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 83 B9 ?? ?? ?? ?? ?? 48 8B F1"), GenerateStringOverloads]
-    public partial CStringPointer ResolveRsvString(byte* rsvString);
+    public partial CStringPointer ResolveRsvString(CStringPointer rsvString);
 
     [MemberFunction("40 53 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4D 8B E8")]
     public partial bool AddRsvString(byte* rsvString, byte* resolvedString, nuint resolvedStringSize);

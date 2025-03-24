@@ -112,7 +112,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public partial void Dtor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 39 2E"), GenerateStringOverloads]
-    public partial void SetString(byte* cStr);
+    public partial void SetString(CStringPointer cStr);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 87 ?? ?? ?? ?? 48 83 EE 80")]
     public partial void Copy(Utf8String* other);
@@ -124,7 +124,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public partial bool EqualTo(Utf8String* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 25 83 F9 03"), GenerateStringOverloads]
-    public partial bool EqualToString(byte* other);
+    public partial bool EqualToString(CStringPointer other);
 
     [MemberFunction("45 33 C0 4C 8B C9 4C 39 41")]
     public partial Utf8String* ToLower();
@@ -179,7 +179,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     public static partial Utf8String* Concat(Utf8String* str, Utf8String* buffer, Utf8String* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6B 20"), GenerateStringOverloads]
-    public partial Utf8String* ConcatCStr(byte* buffer);
+    public partial Utf8String* ConcatCStr(CStringPointer buffer);
 
     public static implicit operator ReadOnlySpan<byte>(in Utf8String value)
         => value.AsSpan();

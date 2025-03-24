@@ -51,7 +51,7 @@ public unsafe partial struct AtkUnitManager {
     public partial void AddonRequestUpdateById(ushort addonId, NumberArrayData** numberArrayData, StringArrayData** stringArrayData, bool forced);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 41 B0 01"), GenerateStringOverloads]
-    public partial AtkUnitBase* GetAddonByName(byte* name, int index = 1);
+    public partial AtkUnitBase* GetAddonByName(CStringPointer name, int index = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6B 20")]
     public partial AtkUnitBase* GetAddonById(ushort id);

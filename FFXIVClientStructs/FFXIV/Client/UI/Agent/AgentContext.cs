@@ -60,25 +60,25 @@ public unsafe partial struct AgentContext {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 48 8B 01 FF 90 ?? ?? ?? ?? B2 01")]
     [GenerateStringOverloads]
-    public partial void OpenYesNo(byte* text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool setOwner = true);
+    public partial void OpenYesNo(CStringPointer text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool setOwner = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 6B CE 3C")]
     public partial void ClearMenu();
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 48 8D 44 24 ?? 41 8B D7")]
     [GenerateStringOverloads]
-    public partial void SetMenuTitle(byte* text);
+    public partial void SetMenuTitle(CStringPointer text);
 
     [MemberFunction("E8 ?? ?? ?? ?? FF CE 48 FF CF")]
     [GenerateStringOverloads]
-    public partial void AddMenuItem(byte* text, AtkEventInterface* handler, long handlerParam, bool disabled = false, bool submenu = false);
+    public partial void AddMenuItem(CStringPointer text, AtkEventInterface* handler, long handlerParam, bool disabled = false, bool submenu = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FD 0D")]
     public partial void AddMenuItem2(uint addonTextId, AtkEventInterface* handler, long handlerParam, bool disabled = false, bool submenu = false);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 99 ?? ?? ?? ?? 4C 8B D1")]
     [GenerateStringOverloads]
-    public partial void AddContextMenuItem(int eventId, byte* text, bool disabled = false, bool submenu = false, bool copyText = true);
+    public partial void AddContextMenuItem(int eventId, CStringPointer text, bool disabled = false, bool submenu = false, bool copyText = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 84 ED 79 0F")]
     public partial void AddContextMenuItem2(int eventId, uint addonTextId, bool disabled = false, bool submenu = false);
