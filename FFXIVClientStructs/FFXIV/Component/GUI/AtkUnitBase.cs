@@ -22,7 +22,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
     [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
-    [FieldOffset(0x180)] public StdVector<Pointer<byte>> CachedAtkValueStrings;
+    [FieldOffset(0x180)] public StdVector<CStringPointer> CachedAtkValueStrings;
 
     /// <summary>
     /// <code>
