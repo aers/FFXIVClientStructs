@@ -46,10 +46,6 @@ public unsafe partial struct AgentSalvage {
     [MemberFunction("E8 ?? ?? ?? ?? EB 5A 48 8B 07")]
     public partial void SalvageItem(InventoryItem* item, int addonId = 0, byte a4 = 0); // addonId = addon to go back to once done
 
-    public void SalvageItem(InventoryItem* item, int addonId = 0) {
-        SalvageItem(item, addonId, 0);
-    }
-
     public enum SalvageItemCategory {
         InventoryEquipment,
         InventoryHousing,
