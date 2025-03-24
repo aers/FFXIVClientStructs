@@ -129,7 +129,7 @@ public enum EventHandlerContent : ushort {
     TripleTriadCompetition = 0x0037,
     HwdDev = 0x0038, // Ishgardian Restoration (Firmament / Heavensward Development?!)
     Materialize = 0x0039, // Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002)
-    [Obsolete("Use Materialize")]
+    [Obsolete("Use Materialize", true)]
     Salvage = 0x0039,
     InclusionShop = 0x003A,
     CollectablesShop = 0x003B,
