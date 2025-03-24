@@ -28,7 +28,7 @@ public unsafe partial struct AgentMaterialize {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct MaterializeEntry {
-        [FieldOffset(0x00)] public InventoryItem Item;
+        [FieldOffset(0x00)] public InventoryItem* Item;
         [FieldOffset(0x0C)] public short ItemLevel;
         [FieldOffset(0x0E)] public short Spiritbond;
         [FieldOffset(0x12)] public short Index;
