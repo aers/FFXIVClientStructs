@@ -8,5 +8,5 @@ namespace FFXIVClientStructs.Havok.Common.Serialize.Resource;
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct hkResource {
     [VirtualFunction(7), GenerateStringOverloads]
-    public partial void* GetContentsPointer(byte* className, hkTypeInfoRegistry* typeInfoRegistry);
+    public partial void* GetContentsPointer(CStringPointer className, hkTypeInfoRegistry* typeInfoRegistry);
 }

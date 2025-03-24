@@ -43,7 +43,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [FieldOffset(0x8), CExporterUnion("Value")] public uint UInt;
     [FieldOffset(0x8), CExporterUnion("Value")] public ulong UInt64;
     [FieldOffset(0x8), CExporterUnion("Value")] public float Float;
-    [FieldOffset(0x8), CExporterUnion("Value")] public StringPointer String;
+    [FieldOffset(0x8), CExporterUnion("Value")] public CStringPointer String;
     [FieldOffset(0x8), CExporterUnion("Value")] public char* WideString; // C# uses UTF-16 for char, which makes it easy for us to use it here
     [FieldOffset(0x8), CExporterUnion("Value")] public StdVector<AtkValue>* Vector;
     [Obsolete("Renamed to Pointer", true)]

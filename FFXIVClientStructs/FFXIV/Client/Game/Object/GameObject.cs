@@ -59,7 +59,7 @@ public unsafe partial struct GameObject {
     public partial bool GetIsTargetable();
 
     [VirtualFunction(6)]
-    public partial StringPointer GetName();
+    public partial CStringPointer GetName();
 
     [VirtualFunction(7)]
     public partial float GetRadius(bool adjustByTransformation = true);

@@ -18,7 +18,7 @@ public unsafe partial struct AtkTooltipManager {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public partial struct AtkTooltipArgs : ICreatable {
-        [FieldOffset(0x0)] public StringPointer Text;
+        [FieldOffset(0x0)] public CStringPointer Text;
         [FieldOffset(0x8)] public ulong TypeSpecificId;
         [FieldOffset(0x10)] public uint Flags;
         [FieldOffset(0x14)] public short Unk_14;

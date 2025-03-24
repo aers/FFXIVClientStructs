@@ -27,13 +27,13 @@ public unsafe partial struct ExdModule {
     public partial int GetRowCountBySheetIndex(uint sheetIndex);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 48 8B FA 48 8B 49 20 48 8B 01"), GenerateStringOverloads]
-    public partial int GetRowCountBySheetName(byte* sheetName);
+    public partial int GetRowCountBySheetName(CStringPointer sheetName);
 
     [MemberFunction("E8 ?? ?? ?? ?? FE 47 30")]
     public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 
     [MemberFunction("48 8B 49 20 48 8B 01 48 FF 60 10"), GenerateStringOverloads]
-    public partial ExcelSheet* GetSheetByName(byte* sheetName);
+    public partial ExcelSheet* GetSheetByName(CStringPointer sheetName);
 
     [MemberFunction("48 83 EC 38 48 8B 05 ?? ?? ?? ?? 48 8B 88")]
     public partial bool IsColumnRsv(uint sheetIndex, uint rowId, uint subRowId, uint columnIndex);

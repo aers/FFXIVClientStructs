@@ -17,9 +17,9 @@ public sealed class SignatureIsValidAnalyzer : DiagnosticAnalyzer {
 
         context.RegisterCompilationStartAction(static context => {
             // get the attribute symbols
-            if (context.Compilation.GetTypeByMetadataName(AttributeNames.MemberFunctionAttribute) is not { } memberFunctionAttribute ||
-                context.Compilation.GetTypeByMetadataName(AttributeNames.StaticAddressAttribute) is not { } staticAddressAttribute ||
-                context.Compilation.GetTypeByMetadataName(AttributeNames.VirtualTableAttribute) is not { } virtualTableAttribute)
+            if (context.Compilation.GetTypeByMetadataName(InteropTypeNames.MemberFunctionAttribute) is not { } memberFunctionAttribute ||
+                context.Compilation.GetTypeByMetadataName(InteropTypeNames.StaticAddressAttribute) is not { } staticAddressAttribute ||
+                context.Compilation.GetTypeByMetadataName(InteropTypeNames.VirtualTableAttribute) is not { } virtualTableAttribute)
                 return;
 
             context.RegisterSymbolAction(context => {

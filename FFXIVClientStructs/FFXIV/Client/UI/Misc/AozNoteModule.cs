@@ -51,7 +51,7 @@ public unsafe partial struct AozNoteModule {
     }
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B 14 99")]
-    public partial StringPointer GetActiveSetCustomNamePtr(int activeSetIndex);
+    public partial CStringPointer GetActiveSetCustomNamePtr(int activeSetIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 19 8B D3")]
     public partial bool HasActiveSetCustomName(int activeSetIndex);

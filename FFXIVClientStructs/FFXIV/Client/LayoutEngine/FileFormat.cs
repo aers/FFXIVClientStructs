@@ -90,9 +90,9 @@ public unsafe struct FileSceneGeneral {
     [FieldOffset(0x34)] public int OffsetPathLCB;
     [FieldOffset(0x4C)] public bool HaveLCBUW;
 
-    public StringPointer PathTerrain => OffsetPathTerrain > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathTerrain : null;
-    public StringPointer PathSkyVisibility => OffsetPathSkyVisibility > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathSkyVisibility : null;
-    public StringPointer PathLCB => OffsetPathLCB > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathLCB : null;
+    public CStringPointer PathTerrain => OffsetPathTerrain > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathTerrain : null;
+    public CStringPointer PathSkyVisibility => OffsetPathSkyVisibility > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathSkyVisibility : null;
+    public CStringPointer PathLCB => OffsetPathLCB > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathLCB : null;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
@@ -124,7 +124,7 @@ public unsafe struct FileLayerGroupHeader {
     [FieldOffset(0x08)] public int OffsetLayers; // offset of int array - offsets to FileLayerGroupLayer
     [FieldOffset(0x0C)] public int NumLayers;
 
-    public StringPointer LayerGroupName => OffsetLayerGroupName > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetLayerGroupName : null;
+    public CStringPointer LayerGroupName => OffsetLayerGroupName > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetLayerGroupName : null;
     public Span<int> LayerOffsets => new((byte*)Unsafe.AsPointer(ref this) + OffsetLayers, NumLayers);
     public FileLayerGroupLayer* Layer(int offset) => (FileLayerGroupLayer*)((byte*)Unsafe.AsPointer(ref this) + OffsetLayers + offset);
 }
@@ -142,7 +142,7 @@ public unsafe struct FileLayerGroupLayer {
     //[FieldOffset(0x1C)] public byte u1C;
     //[FieldOffset(0x20)] public byte u20;
 
-    public StringPointer LayerName => OffsetLayerName > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetLayerName : null;
+    public CStringPointer LayerName => OffsetLayerName > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetLayerName : null;
     public FileLayerGroupLayerFilter* Filter => OffsetFilter > 0 ? (FileLayerGroupLayerFilter*)((byte*)Unsafe.AsPointer(ref this) + OffsetFilter) : null;
     public Span<int> InstanceOffsets => new((byte*)Unsafe.AsPointer(ref this) + OffsetInstances, NumInstances);
     public FileLayerGroupInstance* Instance(int offset) => (FileLayerGroupInstance*)((byte*)Unsafe.AsPointer(ref this) + OffsetInstances + offset);
@@ -178,7 +178,7 @@ public unsafe partial struct FileLayerGroupInstance {
     [FieldOffset(0x08)] public int OffsetName;
     [FieldOffset(0x0C)] public FileLayerGroupTransform Transform;
 
-    public StringPointer Name => OffsetName > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetName : null;
+    public CStringPointer Name => OffsetName > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetName : null;
 }
 
 [GenerateInterop]
@@ -202,8 +202,8 @@ public unsafe partial struct FileLayerGroupInstanceBgPart {
     //[FieldOffset(0x54)] public float u54;
     //[FieldOffset(0x54)] public int u58;
 
-    public StringPointer PathMdl => OffsetPathMdl > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathMdl : null;
-    public StringPointer PathPcb => OffsetPathPcb > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathPcb : null;
+    public CStringPointer PathMdl => OffsetPathMdl > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathMdl : null;
+    public CStringPointer PathPcb => OffsetPathPcb > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPathPcb : null;
     public FileLayerGroupAnalyticCollider* ColliderAnalyticData => OffsetColliderAnalyticData > 0 ? (FileLayerGroupAnalyticCollider*)((byte*)Unsafe.AsPointer(ref this) + OffsetColliderAnalyticData) : null;
 }
 
@@ -231,7 +231,7 @@ public unsafe partial struct FileLayerGroupInstanceSharedGroup {
     //[FieldOffset(0x3C)] public int u3C;
     //[FieldOffset(0x40)] public int u40;
 
-    public StringPointer Path => OffsetPath > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPath : null;
+    public CStringPointer Path => OffsetPath > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPath : null;
 }
 
 // base class used for various colliders / trigger volumes
@@ -255,5 +255,5 @@ public unsafe partial struct FileLayerGroupInstanceCollisionBox {
     [FieldOffset(0x4C)] public bool Layer43h;
     [FieldOffset(0x50)] public int OffsetPath;
 
-    public StringPointer Path => OffsetPath > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPath : null;
+    public CStringPointer Path => OffsetPath > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetPath : null;
 }

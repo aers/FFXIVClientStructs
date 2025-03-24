@@ -47,13 +47,13 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0xE58)] public ushort* AkatsukiNoteTitleIds;
 
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
-    public partial StringPointer GetAddonText(uint addonId);
+    public partial CStringPointer GetAddonText(uint addonId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF")] // FormatAddonText1<int,int,uint>
-    public partial StringPointer FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
+    public partial CStringPointer FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 51 0F B6 DB")] // FormatAddonText2<int,int>
-    public partial StringPointer FormatAddonText2IntInt(uint addonId, int intParam1, int intParam2);
+    public partial CStringPointer FormatAddonText2IntInt(uint addonId, int intParam1, int intParam2);
 
     /// <summary>
     /// Display a timespan as hours, minutes or seconds with only the largest non zero unit.
@@ -62,5 +62,5 @@ public unsafe partial struct RaptureTextModule {
     /// <param name="alternativeMinutesGlyph">Use U+E028 for minutes</param>
     /// <returns>string containing one of 23h, 59m, 59s</returns>
     [MemberFunction("48 83 EC 28 45 0F B6 C8 85 D2")]
-    public partial StringPointer FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
+    public partial CStringPointer FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
 }

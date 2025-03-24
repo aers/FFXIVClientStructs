@@ -240,8 +240,8 @@ public sealed partial class InteropGenerator {
         foreach (StringOverloadInfo stringOverloadInfo in structInfo.StringOverloads) {
             MethodInfo methodInfo = stringOverloadInfo.MethodInfo;
             // collect valid replacement targets
-            ImmutableArray<string> paramsToOverload = [.. methodInfo.Parameters.Where(p => p.Type == "byte*" && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
-
+            ImmutableArray<string> paramsToOverload = [.. methodInfo.Parameters.Where(p => p.Type == "global::" + InteropTypeNames.CStringPointer && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
+            
             // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
             string paramNames = methodInfo.GetParameterNamesStringForStringOverload(paramsToOverload);
 

@@ -23,10 +23,10 @@ public unsafe partial struct AddonSalvageItemSelector {
         [FieldOffset(0x00)] public InventoryType Inventory;
         [FieldOffset(0x04)] public int Slot;
         [FieldOffset(0x08)] public uint IconId;
-        [FieldOffset(0x10)] public StringPointer NamePtr;
+        [FieldOffset(0x10)] public CStringPointer NamePtr;
         [FieldOffset(0x18)] public uint Quantity;
         [FieldOffset(0x1C)] public uint JobIconId;
-        [FieldOffset(0x20)] public StringPointer JobNamePtr;
+        [FieldOffset(0x20)] public CStringPointer JobNamePtr;
         [FieldOffset(0x28)] public byte Unknown28;
     }
 }

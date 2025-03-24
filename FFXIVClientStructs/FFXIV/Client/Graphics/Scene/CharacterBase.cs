@@ -118,46 +118,46 @@ public unsafe partial struct CharacterBase {
     public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotBytes);
 
     [VirtualFunction(75)]
-    public partial StringPointer ResolveRootPath(byte* pathBuffer, nuint pathBufferSize);
+    public partial CStringPointer ResolveRootPath(byte* pathBuffer, nuint pathBufferSize);
 
     [VirtualFunction(76)]
-    public partial StringPointer ResolveSklbPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+    public partial CStringPointer ResolveSklbPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
     [VirtualFunction(77)]
-    public partial StringPointer ResolveMdlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+    public partial CStringPointer ResolveMdlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
     [VirtualFunction(78)]
-    public partial StringPointer ResolveSkpPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+    public partial CStringPointer ResolveSkpPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
     [VirtualFunction(79)]
-    public partial StringPointer ResolvePhybPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+    public partial CStringPointer ResolvePhybPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
     [VirtualFunction(84)]
-    public partial StringPointer ResolvePapPath(byte* pathBuffer, nuint pathBufferSize, uint unkAnimationIndex, byte* animationName);
+    public partial CStringPointer ResolvePapPath(byte* pathBuffer, nuint pathBufferSize, uint unkAnimationIndex, byte* animationName);
 
     [VirtualFunction(85)]
-    public partial StringPointer ResolveTmbPath(byte* pathBuffer, nuint pathBufferSize, byte* timelineName);
+    public partial CStringPointer ResolveTmbPath(byte* pathBuffer, nuint pathBufferSize, byte* timelineName);
 
     [VirtualFunction(87)]
-    public partial StringPointer ResolveMaterialPapPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint unkSId);
+    public partial CStringPointer ResolveMaterialPapPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint unkSId);
 
     [VirtualFunction(89)]
-    public partial StringPointer ResolveImcPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+    public partial CStringPointer ResolveImcPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
     /// <remarks>
     /// Caveat: this method will dereference a null pointer if determining the MTRL file path involves an IMC lookup and it is not called at the "right" moment.
     /// </remarks>
     [VirtualFunction(90)]
-    public partial StringPointer ResolveMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, byte* mtrlFileName);
+    public partial CStringPointer ResolveMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, byte* mtrlFileName);
 
     [VirtualFunction(92)]
-    public partial StringPointer ResolveDecalPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+    public partial CStringPointer ResolveDecalPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
     [VirtualFunction(93)]
-    public partial StringPointer ResolveVfxPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint* unkOutParam);
+    public partial CStringPointer ResolveVfxPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, uint* unkOutParam);
 
     [VirtualFunction(94)]
-    public partial StringPointer ResolveEidPath(byte* pathBuffer, nuint pathBufferSize);
+    public partial CStringPointer ResolveEidPath(byte* pathBuffer, nuint pathBufferSize);
 
     #region Resolve*Path(Span<byte>) overloads
     public ReadOnlySpan<byte> ResolveRootPath(Span<byte> pathBuffer) {

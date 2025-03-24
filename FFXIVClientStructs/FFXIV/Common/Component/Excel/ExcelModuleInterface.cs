@@ -9,10 +9,10 @@ public unsafe partial struct ExcelModuleInterface {
     public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 
     [VirtualFunction(2), GenerateStringOverloads]
-    public partial ExcelSheet* GetSheetByName(byte* sheetName);
+    public partial ExcelSheet* GetSheetByName(CStringPointer sheetName);
 
     [VirtualFunction(3), GenerateStringOverloads]
-    public partial void LoadSheet(byte* sheetName, byte a3 = 0, byte a4 = 0);
+    public partial void LoadSheet(CStringPointer sheetName, byte a3 = 0, byte a4 = 0);
 
     [VirtualFunction(6)]
     public partial ExcelLanguage GetLanguage();

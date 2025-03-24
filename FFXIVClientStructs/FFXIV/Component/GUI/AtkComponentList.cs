@@ -62,7 +62,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
 
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
     [MemberFunction("3B 91 ?? ?? ?? ?? 7C 03 33 C0 C3 4C 8B 81")]
-    public partial StringPointer GetItemLabel(int index);
+    public partial CStringPointer GetItemLabel(int index);
 
     [MemberFunction("83 FA FF 0F 8E ?? ?? ?? ?? 53")]
     public partial void DispatchItemEvent(int index, AtkEventType eventType);
@@ -70,7 +70,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct ListItem {
         /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
-        [FieldOffset(0)] public StringPointer Label;
+        [FieldOffset(0)] public CStringPointer Label;
         [FieldOffset(0x8)] public AtkComponentListItemRenderer* AtkComponentListItemRenderer;
 
         [FieldOffset(0x14)] public bool IsHighlighted;

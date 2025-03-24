@@ -12,7 +12,7 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
         // parse all structs and drop invalid results
         IncrementalValuesProvider<StructInfo> structInfos =
             context.SyntaxProvider.ForAttributeWithMetadataName(
-                    AttributeNames.GenerateInteropAttribute,
+                    InteropTypeNames.GenerateInteropAttribute,
                     static (node, _) => node is StructDeclarationSyntax { AttributeLists.Count: > 0 },
                     static (context, token) => {
                         // not sure if the check is truly necessary

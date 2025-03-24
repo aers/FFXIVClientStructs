@@ -13,5 +13,5 @@ public unsafe partial struct hkClassNameRegistry {
     [FieldOffset(0x24)] public int Ready;
 
     [VirtualFunction(5), GenerateStringOverloads]
-    public partial hkClass* GetClassByName(byte* name);
+    public partial hkClass* GetClassByName(CStringPointer name);
 }

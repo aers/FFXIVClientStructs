@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.String;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {
-    [FieldOffset(0x0)] public StringPointer StringPtr;
+    [FieldOffset(0x0)] public CStringPointer StringPtr;
     [FieldOffset(0x8)] public long BufSize; // default buffer = 0x40
     /// <remarks>String length including null terminator.</remarks>
     [FieldOffset(0x10)] public long BufUsed;

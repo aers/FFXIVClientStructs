@@ -17,7 +17,7 @@ public sealed class InheritsAttributeIsValidAnalyzer : DiagnosticAnalyzer {
 
         context.RegisterCompilationStartAction(static context => {
             // get the attribute symbol
-            if (context.Compilation.GetTypeByMetadataName(AttributeNames.GenerateInteropAttribute) is not { } generateAttribute)
+            if (context.Compilation.GetTypeByMetadataName(InteropTypeNames.GenerateInteropAttribute) is not { } generateAttribute)
                 return;
 
             context.RegisterSymbolAction(context => {
@@ -26,7 +26,7 @@ public sealed class InheritsAttributeIsValidAnalyzer : DiagnosticAnalyzer {
 
                 foreach (AttributeData attributeData in typeSymbol.GetAttributes()) {
                     if (attributeData.AttributeClass is not { } attributeSymbol) continue;
-                    if (!attributeSymbol.HasFullyQualifiedMetadataName(AttributeNames.InheritsAttribute)) continue;
+                    if (!attributeSymbol.HasFullyQualifiedMetadataName(InteropTypeNames.InheritsAttribute)) continue;
                     if (attributeSymbol.TypeArguments.Length != 1) continue;
                     if (attributeSymbol.TypeArguments[0] is not INamedTypeSymbol inheritedTypeSymbol) continue;
 
