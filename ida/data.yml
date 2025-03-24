@@ -12314,7 +12314,6 @@ classes:
     funcs:
       0x140DFC2B0: ctor
       0x140DFC330: Finalizer
-      0x140DFC45A: MaterializeItem
   Client::UI::Agent::AgentContentsTimer:
     vtbls:
       - ea: 0x141FCC4B0
@@ -13880,6 +13879,7 @@ classes:
       0x1409BB8D0: CanLeaveCurrentContent # static
       0x1409BD810: GetContentFinderCondition
       0x14184C860: GetPublicContentDirectorByType # static
+      0x140DFC45A: MaterializeItem
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141FA95C8

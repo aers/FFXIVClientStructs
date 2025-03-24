@@ -44,10 +44,10 @@ public unsafe partial struct AgentSalvage {
     public partial void ItemListAdd(bool meetsLevelRequirement, InventoryType containerId, int containerSlot, uint itemId, void* exdRow, uint quantity);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 5A 48 8B 07")]
-    public partial void SalvageItem(AgentSalvage* thisPtr, InventoryItem* item, int addonId = 0, byte a4 = 0); // addonId = addon to go back to once done
+    public partial void SalvageItem(InventoryItem* item, int addonId = 0, byte a4 = 0); // addonId = addon to go back to once done
 
     public void SalvageItem(InventoryItem* item, int addonId = 0) {
-        SalvageItem(Instance(), item, addonId, 0);
+        SalvageItem(item, addonId, 0);
     }
 
     public enum SalvageItemCategory {
