@@ -261,7 +261,7 @@ public unsafe partial struct CharacterBase {
 
     public string ResolvePapPath(uint unkAnimationIndex, string animationName) {
         var animationNameByteCount = Encoding.UTF8.GetByteCount(animationName);
-        Span<byte> animationNameBytes = animationNameByteCount <= 512 ? stackalloc byte[animationNameByteCount + 1] : new byte[animationNameByteCount + 1];
+        Span<byte> animationNameBytes = animationNameByteCount <= 511 ? stackalloc byte[512] : new byte[animationNameByteCount + 1];
         Encoding.UTF8.GetBytes(animationName, animationNameBytes);
         animationNameBytes[animationNameByteCount] = 0;
 
@@ -271,7 +271,7 @@ public unsafe partial struct CharacterBase {
 
     public string ResolveTmbPath(string timelineName) {
         var timelineNameByteCount = Encoding.UTF8.GetByteCount(timelineName);
-        Span<byte> timelineNameBytes = timelineNameByteCount <= 512 ? stackalloc byte[timelineNameByteCount + 1] : new byte[timelineNameByteCount + 1];
+        Span<byte> timelineNameBytes = timelineNameByteCount <= 511 ? stackalloc byte[512] : new byte[timelineNameByteCount + 1];
         Encoding.UTF8.GetBytes(timelineName, timelineNameBytes);
         timelineNameBytes[timelineNameByteCount] = 0;
 
@@ -294,7 +294,7 @@ public unsafe partial struct CharacterBase {
     /// </remarks>
     public string ResolveMtrlPath(uint slotIndex, string mtrlFileName) {
         var mtrlFileNameByteCount = Encoding.UTF8.GetByteCount(mtrlFileName);
-        Span<byte> mtrlFileNameBytes = mtrlFileNameByteCount <= 512 ? stackalloc byte[mtrlFileNameByteCount + 1] : new byte[mtrlFileNameByteCount + 1];
+        Span<byte> mtrlFileNameBytes = mtrlFileNameByteCount <= 511 ? stackalloc byte[512] : new byte[mtrlFileNameByteCount + 1];
         Encoding.UTF8.GetBytes(mtrlFileName, mtrlFileNameBytes);
         mtrlFileNameBytes[mtrlFileNameByteCount] = 0;
 

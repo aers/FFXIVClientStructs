@@ -7,6 +7,8 @@ namespace InteropGenerator.Runtime;
 public unsafe struct CStringPointer(byte* value) {
     [FieldOffset(0x00)] public byte* Value = value;
 
+    public bool HasValue => Value != null;
+
     public ReadOnlySpan<byte> AsSpan() => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(Value);
 
     public override string ToString() => AsSpan().IsEmpty ? string.Empty : Encoding.UTF8.GetString(AsSpan());

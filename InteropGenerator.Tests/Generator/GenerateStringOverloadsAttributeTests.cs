@@ -24,7 +24,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -68,7 +68,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -111,7 +111,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(string stringArg, int intArg = 7)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -153,11 +153,11 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg, string stringArgTwo)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       int stringArgTwoUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArgTwo);
-                                      Span<byte> stringArgTwoBytes = stringArgTwoUTF8StrLen <= 512 ? stackalloc byte[stringArgTwoUTF8StrLen + 1] : new byte[stringArgTwoUTF8StrLen + 1];
+                                      Span<byte> stringArgTwoBytes = stringArgTwoUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgTwoUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArgTwo, stringArgTwoBytes);
                                       stringArgTwoBytes[stringArgTwoUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -205,7 +205,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg, global::InteropGenerator.Runtime.CStringPointer notStringArg)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -267,7 +267,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)

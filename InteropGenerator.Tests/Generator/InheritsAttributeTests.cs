@@ -1118,7 +1118,7 @@ public class InheritsAttributeTests {
                                           public int TestFunction(int argOne, string stringArg)
                                           {
                                               int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                               global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                               stringArgBytes[stringArgUTF8StrLen] = 0;
                                               fixed (byte* stringArgPtr = stringArgBytes)
@@ -1149,7 +1149,7 @@ public class InheritsAttributeTests {
                                                     public int TestFunction(int argOne, string stringArg)
                                                     {
                                                         int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                                         global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                                         stringArgBytes[stringArgUTF8StrLen] = 0;
                                                         fixed (byte* stringArgPtr = stringArgBytes)
@@ -1202,7 +1202,7 @@ public class InheritsAttributeTests {
                                           public int TestFunction(int argOne, string stringArg)
                                           {
                                               int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                               global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                               stringArgBytes[stringArgUTF8StrLen] = 0;
                                               fixed (byte* stringArgPtr = stringArgBytes)
@@ -1236,7 +1236,7 @@ public class InheritsAttributeTests {
                                                     public int TestFunction(int argOne, string stringArg)
                                                     {
                                                         int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                                         global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                                         stringArgBytes[stringArgUTF8StrLen] = 0;
                                                         fixed (byte* stringArgPtr = stringArgBytes)
@@ -1764,7 +1764,7 @@ public class InheritsAttributeTests {
                                        public void BaseA_B_vf0(string arg)
                                        {
                                            int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
-                                           Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                           Span<byte> argBytes = argUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[argUTF8StrLen + 1];
                                            global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
                                            argBytes[argUTF8StrLen] = 0;
                                            fixed (byte* argPtr = argBytes)
@@ -1953,7 +1953,7 @@ public class InheritsAttributeTests {
                                                 public void BaseA_B_vf0(string arg)
                                                 {
                                                     int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
-                                                    Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                                    Span<byte> argBytes = argUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[argUTF8StrLen + 1];
                                                     global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
                                                     argBytes[argUTF8StrLen] = 0;
                                                     fixed (byte* argPtr = argBytes)
@@ -2070,7 +2070,7 @@ public class InheritsAttributeTests {
                                                 public void BaseA_B_vf0(string arg)
                                                 {
                                                     int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
-                                                    Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                                    Span<byte> argBytes = argUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[argUTF8StrLen + 1];
                                                     global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
                                                     argBytes[argUTF8StrLen] = 0;
                                                     fixed (byte* argPtr = argBytes)

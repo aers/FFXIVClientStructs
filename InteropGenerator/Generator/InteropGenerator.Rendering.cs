@@ -256,7 +256,7 @@ public sealed partial class InteropGenerator {
                     var strLenName = $"{overloadParamName}UTF8StrLen";
 
                     writer.WriteLine($"int {strLenName} = global::System.Text.Encoding.UTF8.GetByteCount({overloadParamName});");
-                    writer.WriteLine($"Span<byte> {overloadParamName}Bytes = {strLenName} <= 512 ? stackalloc byte[{strLenName} + 1] : new byte[{strLenName} + 1];");
+                    writer.WriteLine($"Span<byte> {overloadParamName}Bytes = {strLenName} <= 511 ? stackalloc byte[512] : new byte[{strLenName} + 1];");
                     writer.WriteLine($"global::System.Text.Encoding.UTF8.GetBytes({overloadParamName}, {overloadParamName}Bytes);");
                     writer.WriteLine($"{overloadParamName}Bytes[{strLenName}] = 0;");
                 }
