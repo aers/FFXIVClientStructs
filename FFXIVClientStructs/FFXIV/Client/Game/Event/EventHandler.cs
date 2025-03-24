@@ -128,7 +128,9 @@ public enum EventHandlerContent : ushort {
     PreHandler = 0x0036, // checks quest completion before handling something, for example opening the Scrip Exchange
     TripleTriadCompetition = 0x0037,
     HwdDev = 0x0038, // Ishgardian Restoration (Firmament / Heavensward Development?!)
-    Salvage = 0x0039, // Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002)
+    Materialize = 0x0039, // Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002)
+    [Obsolete("Use Materialize")]
+    Salvage = 0x0039,
     InclusionShop = 0x003A,
     CollectablesShop = 0x003B,
     EventPathMove = 0x003D, // Argos in Mare Lamentorum uses this
@@ -145,4 +147,10 @@ public enum EventHandlerContent : ushort {
     SkyIslandDirector = 0x800C, // used in early phases of the Diadem
     DpsChallengeDirector = 0x800D,
     FateDirector = 0x801A
+}
+
+public enum MaterializeEntryId : ushort {
+    Desynth = 0x0000,
+    Retrieve = 0x0001, // Materia Retrieval
+    Purify = 0x0002, // Aetherial Reduction
 }

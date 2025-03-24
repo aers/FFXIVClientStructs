@@ -159,7 +159,8 @@ functions:
   0x140819870: IsItemStainConditionUnlocked
   0x14081A2D0: IsEventItemItemId
   0x14081AA00: IsWeddingRelatedItemId
-  0x1409FFA50: ExecuteCommand
+  0x1409FFA50: ExecuteCommand # nint (int command, int param1, int param2, int param3, int param4)
+  0x1409FFBD0: ExecuteCommandComplexLocation # nint (int command, Vector3 position, int param1, int param2, int param3, int param4)
   0x1400B7230: IsBoundByDuty56
   0x1400B73B0: IsDutyRecorderPlayback
   0x1400B7410: IsInDeepDungeon
@@ -469,6 +470,10 @@ functions:
   0x141E6B9F0: CollisionAlloc
   0x141E6BA30: CollisionFree
   0x141B05050: ReadSqpkChunk
+  0x141A48EB0: FollowTargetRecast # bool (nint a1-a6)
+  0x1409C4AD0: RidePillion # (BattleChara* target, int seat)
+  0x1408CE470: FreeCompanyDialogPacketReceive # (InfoProxyInterface* ptr, byte* packetData)
+  0x141666B50: SnipeTask # ulong (EventSceneModuleImplBase* scene, lua_State* state)
 
 classes:
   Common::TimePoint:
@@ -6410,6 +6415,7 @@ classes:
     funcs:
       0x1405D7B00: Initialize
       0x1409C9830: Update
+      0x14162E6F0: GetFlightAllowedStatus
   Client::Game::Control::CameraManager:
     funcs:
       0x14164C2E0: ctor
@@ -10137,6 +10143,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A7C890: ctor
+      0x140A7D010: InvokeAction
   Client::UI::Agent::AgentCutscene:
     vtbls:
       - ea: 0x141FCC7A0
@@ -10495,6 +10502,7 @@ classes:
       0x140E96F80: ctor
 #fail       0x140BCA370: SalvageItem # (this, InventoryItem* ushort, byte)
       0x140A63D60: LoadCategoryNames
+      0x140A62D10: SalvageItem
 #fail       0x140BCA850: ItemListRefresh # Clears item list and signals agent to update it next frame
 #fail       0x140BCBC50: ItemListPopulate # inlined @ 0x140BC9A00
 #fail       0x140BCBD80: ItemListPopulateFromContainer
@@ -11549,6 +11557,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140ECD330: ctor
+      0x1409BB920: AbandonDuty
   Client::UI::Agent::AgentAozContentBriefing:
     vtbls:
       - ea: 0x141FAE578
@@ -13753,7 +13762,7 @@ classes:
         base: Client::Game::Event::EventHandler
     funcs:
       0x1418D36C0: ctor
-  Client::Game::Event::SalvageEventHandler: # 0x39
+  Client::Game::Event::MaterializeEventHandler: # 0x39
     vtbls:
       - ea: 0x1421B50E0
         base: Client::Game::Event::EventHandler
@@ -13762,19 +13771,19 @@ classes:
   Client::Game::Event::DesynthesisEventHandler:
     vtbls:
       - ea: 0x1420988B0
-        base: Client::Game::Event::SalvageEventHandler
+        base: Client::Game::Event::MaterializeEventHandler
     funcs:
       0x1416B9DB0: ctor
   Client::Game::Event::MateriaExtractionEventHandler:
     vtbls:
       - ea: 0x1421C42A0
-        base: Client::Game::Event::SalvageEventHandler
+        base: Client::Game::Event::MaterializeEventHandler
     funcs:
       0x1418F31B0: ctor
   Client::Game::Event::AetherialReductionEventHandler:
     vtbls:
       - ea: 0x1420992C0
-        base: Client::Game::Event::SalvageEventHandler
+        base: Client::Game::Event::MaterializeEventHandler
     funcs:
       0x1416BACA0: ctor
   Client::Game::Event::InclusionShopEventHandler: # 0x3A
@@ -13870,6 +13879,7 @@ classes:
       0x1409BB8D0: CanLeaveCurrentContent # static
       0x1409BD810: GetContentFinderCondition
       0x14184C860: GetPublicContentDirectorByType # static
+      0x140B21060: MaterializeItem
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x141FA95C8
