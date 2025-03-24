@@ -1,6 +1,5 @@
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError, URLError
-from json import loads
 from luminapie.definitions import (
     Definition,
     RepeatDefinition,
@@ -28,58 +27,24 @@ def get_url(url, supress=False):
         return None
 
 
-def get_latest_schema():
-    # type: () -> dict[SemanticVersion, str]
-    versions = {}
-    with TemporaryFile() as f:
-        f.write(
-            get_url(
-                "https://github.com/xivdev/EXDSchema/archive/refs/heads/main.zip", True
-            )
-        )
-        f.seek(0)
-        schema_zip = ZipFile(f)
-
-        for file in schema_zip.namelist():
-            if file.startswith("EXDSchema-main/Schemas"):
-                strs = file.split("/")
-                if strs[2] != "":
-                    versions[
-                        SemanticVersion(*(int(x) for x in strs[2].split(".")[0:5]))
-                    ] = ("EXDSchema-main/Schemas/" + strs[2])
-
-    return versions
-
-
-def get_latest_schema_url(ver):
-    # type: (SemanticVersion) -> str
-    latest_release = get_latest_schema()
-    # check if the current version can be retrieved
-    if ver in latest_release:
-        return latest_release[ver]
-    # grab the version before the current version if it can't be retrieved
-    for version in reversed(list(latest_release)):
-        if version < ver:
-            return latest_release[version]
-
-
+# TODO: Add the ability to use previous version schemas as well
 def get_definitions(schema):
     # type: (SemanticVersion) -> dict[str, list[Definition]]
     exd_schema_map = {}
-    subFolder = get_latest_schema_url(schema)
     with TemporaryFile() as f:
         f.write(
             get_url(
-                "https://github.com/xivdev/EXDSchema/archive/refs/heads/main.zip", True
+                "https://github.com/xivdev/EXDSchema/archive/refs/heads/latest.zip",
+                True,
             )
         )
         f.seek(0)
         schema_zip = ZipFile(f)
 
         for file in schema_zip.namelist():
-            if file.startswith(subFolder) and file.endswith(".yml"):
+            if file.endswith(".yml") and ".github" not in file:
                 schema_yml = load(schema_zip.read(file), Loader=Loader)
-                exd_schema_map[file.rsplit(".", 1)[0].rsplit("/", 1)[1]] = schema_yml[
+                exd_schema_map[file.rsplit(".", 1)[0].rsplit("/")[1]] = schema_yml[
                     "fields"
                 ]
 
