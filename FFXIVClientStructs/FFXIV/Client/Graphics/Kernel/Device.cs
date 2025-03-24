@@ -50,7 +50,7 @@ public unsafe partial struct Device {
     public partial ConstantBuffer* CreateConstantBuffer(int byteSize, uint flags, uint unk);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 48 8D 7F 20")]
-    public partial Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, uint flags, uint unk);
+    public partial Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, TextureFlags flags, uint unk);
 
     // /// <summary>
     // /// A collection of the render command buffer array.

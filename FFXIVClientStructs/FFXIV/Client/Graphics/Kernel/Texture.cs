@@ -28,19 +28,19 @@ public unsafe partial struct Texture {
     [FieldOffset(0x56)] public byte Unk_56;
     [FieldOffset(0x57)] public byte Unk_57;
     [FieldOffset(0x58)] public TextureFormat TextureFormat;
-    [FieldOffset(0x5C)] public uint Flags;
+    [FieldOffset(0x5C)] public TextureFlags Flags;
     [FieldOffset(0x60)] public byte ArraySize; // new in 6.3
     [FieldOffset(0x68)] public void* D3D11Texture2D; // ID3D11Texture2D1
     [FieldOffset(0x70)] public void* D3D11ShaderResourceView; // ID3D11ShaderResourceView1
 
-    public static Texture* CreateTexture2D(int width, int height, byte mipLevel, TextureFormat textureFormat, uint flags, uint unk) {
+    public static Texture* CreateTexture2D(int width, int height, byte mipLevel, TextureFormat textureFormat, TextureFlags flags, uint unk) {
         var size = stackalloc int[2];
         size[0] = width;
         size[1] = height;
         return CreateTexture2D(size, mipLevel, textureFormat, flags, unk);
     }
 
-    public static Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, uint flags, uint unk)
+    public static Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, TextureFlags flags, uint unk)
         => Device.Instance()->CreateTexture2D(size, mipLevel, textureFormat, flags, unk);
 
     [MemberFunction("E9 ?? ?? ?? ?? 8B 02 25")]
@@ -98,4 +98,32 @@ public enum TextureFormat : uint {
     R10G10B10A2_UNORM = 0x7450,
     /// <remarks> Can also be R24G8_TYPELESS or R24_UNORM_X8_TYPELESS depending on context. </remarks>
     D24_UNORM_S8_UINT_3 = 0x8250,
+}
+
+// From Lumina.Data.Files.TexFile.Attribute.
+[Flags]
+public enum TextureFlags : uint {
+    DiscardPerFrame = 0x1,
+    DiscardPerMap = 0x2,
+    Managed = 0x4,
+    UserManaged = 0x8,
+    CpuRead = 0x10,
+    LocationMain = 0x20,
+    NoGpuRead = 0x40,
+    AlignedSize = 0x80,
+    EdgeCulling = 0x100,
+    LocationOnion = 0x200,
+    ReadWrite = 0x400,
+    Immutable = 0x800,
+    TextureRenderTarget = 0x100000,
+    TextureDepthStencil = 0x200000,
+    TextureType1D = 0x400000,
+    TextureType2D = 0x800000,
+    TextureType3D = 0x1000000,
+    TextureType2DArray = 0x10000000,
+    TextureTypeCube = 0x2000000,
+    TextureTypeMask = 0x13C00000,
+    TextureSwizzle = 0x4000000,
+    TextureNoTiled = 0x8000000,
+    TextureNoSwizzle = 0x80000000,
 }
