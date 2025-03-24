@@ -42,6 +42,8 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x86)] public byte Flags1;
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded
 
+    public Span<Pointer<AtkResNode>> Nodes => new(NodeList, NodeListCount);
+
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 45 33 C9 4C 8B C0")]
     public partial void InitializeResourceRendererManager();
 
