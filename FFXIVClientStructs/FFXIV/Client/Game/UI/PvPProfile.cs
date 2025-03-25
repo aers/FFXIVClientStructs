@@ -79,11 +79,11 @@ public unsafe partial struct PvPProfile {
     public partial byte GetSeriesClaimedRank();
 
     /// <summary>Gets the current PvP Series rank experience.</summary>
-    [MemberFunction("0F B7 41 22 C3 CC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3B EE 8D 4E")]
     public partial ushort GetSeriesExperience();
 
     /// <summary>Returns whether the player had a rank last PvP Series.</summary>
-    [MemberFunction("80 79 24 00 0F 95 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F ?? 45 33 D2")]
     public partial bool HasPreviousSeriesRank();
 
     /// <summary>Gets the previous PvP Series achieved rank.</summary>

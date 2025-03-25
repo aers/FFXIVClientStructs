@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [Inherits<Notifier>]
 [StructLayout(LayoutKind.Explicit, Size = 0x710)]
 public unsafe partial struct RenderTargetManager {
-    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8B 70 70 48 85 F6 74 09 48 8B 06 48 8B CE FF 50 10", 3, isPointer: true)]
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 44 8B 86", 3, isPointer: true)]
     public static partial RenderTargetManager* Instance();
 
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray5<Pointer<Texture>> _unk20;

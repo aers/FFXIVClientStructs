@@ -207,7 +207,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 B9 ?? ?? ?? ??"), GenerateStringOverloads]
     public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, uint a4 = 6);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 10 0D ?? ?? ?? ?? 45 33 C9 F3 0F 59 0D")]
     public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 57 47 48 8B CE")]

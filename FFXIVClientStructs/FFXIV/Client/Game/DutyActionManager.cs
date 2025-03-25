@@ -20,7 +20,7 @@ public unsafe partial struct DutyActionManager {
     [FieldOffset(0x98), FixedSizeArray] internal FixedSizeArray2<byte> _maxCharges;
     [FieldOffset(0x9A), FixedSizeArray] internal FixedSizeArray2<byte> _curCharges;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 41 8B D5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 ?? 8B D3 48 8B C8 E8 ?? ?? ?? ?? 3C 01")]
     public static partial DutyActionManager* GetInstanceIfReady();
 
     /// <summary>
