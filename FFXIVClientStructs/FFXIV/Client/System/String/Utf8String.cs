@@ -164,7 +164,7 @@ public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNative
     /// <param name="characterList">
     /// An optional list of ASCII characters that are explicitly allowed in the sanitized string when the <see cref="AllowedEntities.CharacterList"/> flag is set in the <paramref name="flags"/> argument.
     /// </param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F0 E8 ?? ?? ?? ?? 48 8D 4D C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F8 E8 ?? ?? ?? ?? 48 8D 4D ?? 44 0F B6 F7")]
     public partial void SanitizeString(AllowedEntities flags, Utf8String* characterList = null);
 
     [Obsolete("Use SanitizeString with AllowedEntities enum", true)]
