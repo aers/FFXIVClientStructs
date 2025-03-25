@@ -63,8 +63,8 @@ public unsafe partial struct UIState {
     [FieldOffset(0x13C18)] public WeatherForecast WeatherForecast;
     // an int to control AgentRecommendList
     [FieldOffset(0x13C40)] public TripleTriad TripleTriad; // 7.2: size+0x70
-    [FieldOffset(0x15300)] public EurekaElementalEdit EurekaElementalEdit; // 7.2: size +0x04
-    [FieldOffset(0x1531C)] public LovmRanking LovmRanking;
+    [FieldOffset(0x15300)] public EurekaElementalEdit EurekaElementalEdit; // 7.2: size +0x04?
+    [FieldOffset(0x1531C)] public LovmRanking LovmRanking; // 7.2: size -0x04?
     [FieldOffset(0x16F58)] public CollectablesShop CollectablesShop; // 7.2: size +0x20
     [FieldOffset(0x17250)] public QTE QTE;
     [FieldOffset(0x17278)] public Emj Emj;
