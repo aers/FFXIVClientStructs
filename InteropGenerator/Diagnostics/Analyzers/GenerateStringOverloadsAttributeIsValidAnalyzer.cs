@@ -19,7 +19,7 @@ public sealed class GenerateStringOverloadsAttributeIsValidAnalyzer : Diagnostic
         context.RegisterCompilationStartAction(static context => {
             // get the attribute symbol
             if (context.Compilation.GetTypeByMetadataName(InteropTypeNames.GenerateStringOverloads) is not { } generateStringOverloadsAttribute ||
-                context.Compilation.GetTypeByMetadataName(InteropTypeNames.StringIgnore) is not { } stringIgnoreAttribute||
+                context.Compilation.GetTypeByMetadataName(InteropTypeNames.StringIgnore) is not { } stringIgnoreAttribute ||
                 context.Compilation.GetTypeByMetadataName(InteropTypeNames.CStringPointer) is not { } cStringPointerType)
                 return;
 
