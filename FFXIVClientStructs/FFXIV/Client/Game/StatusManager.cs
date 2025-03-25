@@ -23,7 +23,7 @@ public unsafe partial struct StatusManager {
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 2D 00")]
     public partial bool HasStatus(uint statusId, uint sourceId = 0xE0000000);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 79 21")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 0F 28 C6")]
     public partial int GetStatusIndex(uint statusId, uint sourceId = 0xE0000000);
 
     [MemberFunction("83 FA 3C 72 04 0F 57 C0")]
@@ -38,7 +38,7 @@ public unsafe partial struct StatusManager {
     [MemberFunction("66 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 6C 24 ??")]
     public partial void AddStatus(ushort statusId, ushort param = 0, void* u3 = null);
 
-    [MemberFunction("83 FA 3C 73 50")]
+    [MemberFunction("83 FA 3C 73 ?? 53 48 83 EC 30 48 8B D9")] // INLINED
     public partial void RemoveStatus(int statusIndex, byte u2 = 0); // u2 always appears to be 0
 
     [MemberFunction("E8 ?? ?? ?? ?? FF C6 48 8D 5B 0C")]
@@ -50,7 +50,7 @@ public unsafe partial struct StatusManager {
     /// </summary>
     /// <param name="statusId">Id of status to remove.</param>
     /// <param name="sourceId">Source of status to remove (default value would remove first matching).</param>
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 41 56 48 83 EC ?? 4C 8B 35")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 07 48 8B CF 48 8B 5D")]
     public static partial bool ExecuteStatusOff(uint statusId, uint sourceId = 0xE0000000);
 }
 

@@ -83,7 +83,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 6D 08")]
     public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0, int end = -1, bool considerScale = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D7 45 85 FF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0E 48 8B 9D")]
     public partial void SetAlignment(AlignmentType alignmentType);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]

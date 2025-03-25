@@ -36,7 +36,7 @@ public unsafe partial struct GroupManager {
         public unsafe bool IsAlliance => (AllianceFlags & 1) != 0;
         public unsafe bool IsSmallGroupAlliance => (AllianceFlags & 2) != 0; // alliance containing 6 groups of 4 members rather than 3x8
 
-        [MemberFunction("E8 ?? ?? ?? ?? F3 0F 10 05 ?? ?? ?? ?? 84 C0")]
+        [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? B0 01 E9 ?? ?? ?? ?? E8")]
         public partial bool IsEntityIdInParty(uint entityId);
 
         [MemberFunction("33 C0 44 8B CA F6 81")]

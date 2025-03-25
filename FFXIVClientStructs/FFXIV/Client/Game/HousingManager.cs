@@ -13,7 +13,7 @@ public unsafe partial struct HousingManager {
     [FieldOffset(0x10)] public IndoorTerritory* IndoorTerritory;
     [FieldOffset(0x18)] public WorkshopTerritory* WorkshopTerritory;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 48 8D 4C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 BE 05 00 00 00 8D 53")]
     private partial byte GetInvertedBrightness();
     public byte GetBrightness() => (byte)(5 - GetInvertedBrightness());
 

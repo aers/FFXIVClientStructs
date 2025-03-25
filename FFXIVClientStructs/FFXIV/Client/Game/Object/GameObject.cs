@@ -133,7 +133,7 @@ public unsafe partial struct GameObject {
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D")]
     public partial void SetDrawOffset(float x, float y, float z);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 FE 4F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 FE 20")]
     public partial void SetRotation(float value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 4B 70 01")]

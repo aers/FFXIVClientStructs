@@ -11,4 +11,7 @@ public unsafe partial struct PadDeviceInterface {
     /// <param name="leftMotorSpeed">Speed of the left motor in percent (0 - 100).</param>
     [VirtualFunction(13)]
     public partial void SetVibration(int rightMotorSpeed, int leftMotorSpeed);
+
+    [VirtualFunction(2)]
+    public partial nint Poll();
 }
