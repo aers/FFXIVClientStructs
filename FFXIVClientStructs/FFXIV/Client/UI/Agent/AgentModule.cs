@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentModule
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xE50)]
+[StructLayout(LayoutKind.Explicit, Size = 0xEF8)]
 public unsafe partial struct AgentModule {
     public static AgentModule* Instance() {
         var uiModule = UI.UIModule.Instance();
@@ -14,8 +14,8 @@ public unsafe partial struct AgentModule {
     [FieldOffset(0x14)] public uint FrameCounter;
     [FieldOffset(0x18)] public float FrameDelta;
 
-    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray452<Pointer<AgentInterface>> _agents;
-    [FieldOffset(0xE40)] public AgentHelpers AgentHelpers;
+    [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray473<Pointer<AgentInterface>> _agents;
+    [FieldOffset(0xEE8)] public AgentHelpers AgentHelpers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);

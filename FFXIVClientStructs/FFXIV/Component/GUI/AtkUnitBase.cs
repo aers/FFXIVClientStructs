@@ -295,34 +295,34 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(41)]
     public partial void Finalizer();
 
-    [VirtualFunction(42)]
+    [VirtualFunction(43)]
     public partial void Update(float delta);
 
-    [VirtualFunction(43)]
+    [VirtualFunction(44)]
     public partial void Draw();
 
-    [VirtualFunction(45)]
+    [VirtualFunction(46)]
     public partial bool LoadUldResourceHandle();
 
-    [VirtualFunction(46)]
+    [VirtualFunction(47)]
     public partial bool CheckWindowCollisionAtCoords(short x, short y);
 
-    [VirtualFunction(48)]
+    [VirtualFunction(49)]
     public partial void OnSetup(uint valueCount, AtkValue* values);
 
-    [VirtualFunction(50)]
+    [VirtualFunction(51)]
     public partial bool OnRefresh(uint valueCount, AtkValue* values);
 
-    [VirtualFunction(51)]
+    [VirtualFunction(52)]
     public partial void OnRequestedUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 
-    [VirtualFunction(53)]
+    [VirtualFunction(54)]
     public partial void FireCloseCallback();
 
-    [VirtualFunction(61)]
+    [VirtualFunction(62)]
     public partial void OnMouseOver();
 
-    [VirtualFunction(62)]
+    [VirtualFunction(63)]
     public partial void OnMouseOut();
 
     /// <summary>
@@ -331,7 +331,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <remarks>
     /// Use <see cref="IsReady" /> to check if OnSetup has been called (preferred).
     /// </remarks>
-    [VirtualFunction(65)]
+    [VirtualFunction(66)]
     public partial bool IsFullyLoaded();
 }
 

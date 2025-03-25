@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::PlayerState
 // ctor "E8 ?? ?? ?? ?? 33 D2 45 33 E4"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x8B0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8C0)]
 public unsafe partial struct PlayerState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02", 3)]
     public static partial PlayerState* Instance();
@@ -79,54 +79,54 @@ public unsafe partial struct PlayerState {
 
     // Size: (MountSheet.Max(row => row.Order) + 7) / 8
     /// <remarks> Use <see cref="IsMountUnlocked"/> </remarks>
-    [FieldOffset(0x2DD), FixedSizeArray] internal FixedSizeArray38<byte> _unlockedMountsBitmask;
+    [FieldOffset(0x2DD), FixedSizeArray] internal FixedSizeArray39<byte> _unlockedMountsBitmask;
     // Size: (OrnamentSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/> </remarks>
-    [FieldOffset(0x303), FixedSizeArray] internal FixedSizeArray7<byte> _unlockedOrnamentsBitmask;
+    [FieldOffset(0x304), FixedSizeArray] internal FixedSizeArray7<byte> _unlockedOrnamentsBitmask;
     // Size: (GlassesStylesSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsGlassesUnlocked"/> </remarks>
-    [FieldOffset(0x30A), FixedSizeArray] internal FixedSizeArray4<byte> _unlockedGlassesStylesBitmask;
-    [FieldOffset(0x310)] public ushort NumOwnedMounts;
+    [FieldOffset(0x30B), FixedSizeArray] internal FixedSizeArray5<byte> _unlockedGlassesStylesBitmask;
+    [FieldOffset(0x312)] public ushort NumOwnedMounts;
 
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 49 8B D8"
     // Size: (SpearfishingNotebookSheet.RowCount + 7) / 8
-    [FieldOffset(0x3C2), FixedSizeArray] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebookBitmask;
+    [FieldOffset(0x3C6), FixedSizeArray] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebookBitmask;
 
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) / 8
     /// <remarks> Use <see cref="IsFishCaught(uint)"/> </remarks>
-    [FieldOffset(0x3EC), FixedSizeArray] internal FixedSizeArray180<byte> _caughtFishBitmask;
-    [FieldOffset(0x4A0)] public uint NumFishCaught;
-    [FieldOffset(0x4A4)] public uint FishingBait;
+    [FieldOffset(0x3F0), FixedSizeArray] internal FixedSizeArray180<byte> _caughtFishBitmask;
+    [FieldOffset(0x4A8)] public uint NumFishCaught;
+    [FieldOffset(0x4AC)] public uint FishingBait;
     // Ref: "40 53 55 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 4C 8B 12"
     // Size: (SpearfishingItemSheet.RowCount + 7) / 8
     /// <remarks> Use <see cref="IsSpearfishCaught(uint)"/> </remarks>
-    [FieldOffset(0x4B1), FixedSizeArray] internal FixedSizeArray39<byte> _caughtSpearfishBitmask;
-    [FieldOffset(0x4D8)] public uint NumSpearfishCaught;
-    [FieldOffset(0x4DC)] internal int UnknownUnixTimestamp; // could be an array of size 1?!
+    [FieldOffset(0x4B9), FixedSizeArray] internal FixedSizeArray39<byte> _caughtSpearfishBitmask;
+    [FieldOffset(0x4E0)] public uint NumSpearfishCaught;
+    [FieldOffset(0x4E4)] internal int UnknownUnixTimestamp; // could be an array of size 1?!
     /// <remarks>
     /// Index is column 27 of ContentRoulette sheet.<br/>
     /// See also: <see cref="InstanceContent.IsRouletteComplete" />
     /// </remarks>
-    [FieldOffset(0x4E0), FixedSizeArray] internal FixedSizeArray12<byte> _contentRouletteCompletion;
-    [FieldOffset(0x4EC)] public short PlayerCommendations;
+    [FieldOffset(0x4E8), FixedSizeArray] internal FixedSizeArray12<byte> _contentRouletteCompletion;
+    [FieldOffset(0x4F4)] public short PlayerCommendations;
 
-    [FieldOffset(0x4EE), FixedSizeArray] internal FixedSizeArray7<byte> _selectedPoses;
-    [FieldOffset(0x4F5), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
-    [FieldOffset(0x4F5), Obsolete("Use PlayerStateFlags[0]", true)] public byte PlayerStateFlags1;
-    [FieldOffset(0x4F6), Obsolete("Use PlayerStateFlags[1]", true)] public byte PlayerStateFlags2;
-    [FieldOffset(0x4F7), Obsolete("Use PlayerStateFlags[2]", true)] public byte PlayerStateFlags3;
+    [FieldOffset(0x4F6), FixedSizeArray] internal FixedSizeArray7<byte> _selectedPoses;
+    [FieldOffset(0x4FD), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
+    [FieldOffset(0x4FD), Obsolete("Use PlayerStateFlags[0]", true)] public byte PlayerStateFlags1;
+    [FieldOffset(0x4FE), Obsolete("Use PlayerStateFlags[1]", true)] public byte PlayerStateFlags2;
+    [FieldOffset(0x4FF), Obsolete("Use PlayerStateFlags[2]", true)] public byte PlayerStateFlags3;
 
-    [FieldOffset(0x522)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
-    [FieldOffset(0x523)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
-    [FieldOffset(0x524), FixedSizeArray] internal FixedSizeArray44<byte> _unlockedAdventureBitmask; // maybe?
+    [FieldOffset(0x52A)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
+    [FieldOffset(0x52B)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
+    [FieldOffset(0x52C), FixedSizeArray] internal FixedSizeArray44<byte> _unlockedAdventureBitmask; // maybe?
     // Ref: PlayerState.IsAdventureComplete
     /// <remarks> Use <see cref="IsAdventureComplete"/> </remarks>
-    [FieldOffset(0x550), FixedSizeArray] internal FixedSizeArray44<byte> _completedAdventureBitmask;
+    [FieldOffset(0x558), FixedSizeArray] internal FixedSizeArray44<byte> _completedAdventureBitmask;
 
-    [FieldOffset(0x581), FixedSizeArray] internal FixedSizeArray56<byte> _unlockFlags;
+    [FieldOffset(0x589), FixedSizeArray] internal FixedSizeArray56<byte> _unlockFlags;
 
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
-    [FieldOffset(0x5BD)] public byte DeliveryLevel;
+    [FieldOffset(0x5C5)] public byte DeliveryLevel;
     // [FieldOffset(0x5BE)] public byte UnkWeddingPlanFlag; // see lua function "GetWeddingPlan"
     /// <summary>
     /// Flag containing information about which DoH job the player is specialized in.
@@ -137,63 +137,63 @@ public unsafe partial struct PlayerState {
     /// <see cref="IsMeisterFlagMaxCount" /><br/>
     /// <see cref="IsMeisterFlagAndHasSoulStoneEquipped" />
     /// </remarks>
-    [FieldOffset(0x5BF)] public byte MeisterFlag;
-    [FieldOffset(0x5C0)] internal byte WeeklyLockoutInfo; // unsure how exactly it's processed
+    [FieldOffset(0x5C7)] public byte MeisterFlag;
+    [FieldOffset(0x5C8)] internal byte WeeklyLockoutInfo; // unsure how exactly it's processed
 
-    [FieldOffset(0x5C4)] public int SquadronMissionCompletionTimestamp;
-    [FieldOffset(0x5C8)] public int SquadronTrainingCompletionTimestamp;
-    [FieldOffset(0x5CC)] public ushort ActiveGcArmyExpedition;
-    [FieldOffset(0x5CE)] public ushort ActiveGcArmyTraining;
-    [FieldOffset(0x5D0)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
-    // [FieldOffset(0x5D1)] public bool UnkGcPvpMountActionCheck; // see "80 3D ?? ?? ?? ?? ?? 75 3C"
+    [FieldOffset(0x5CC)] public int SquadronMissionCompletionTimestamp;
+    [FieldOffset(0x5D0)] public int SquadronTrainingCompletionTimestamp;
+    [FieldOffset(0x5D4)] public ushort ActiveGcArmyExpedition;
+    [FieldOffset(0x5D6)] public ushort ActiveGcArmyTraining;
+    [FieldOffset(0x5D8)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
+    // [FieldOffset(0x5D9)] public bool UnkGcPvpMountActionCheck; // see "80 3D ?? ?? ?? ?? ?? 75 3C"
 
-    [FieldOffset(0x5D2), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedMinerFolkloreTomeBitmask;
-    [FieldOffset(0x5D4), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedBotanistFolkloreTomeBitmask;
-    [FieldOffset(0x5D6), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedFishingFolkloreTomeBitmask;
-    [FieldOffset(0x5D8), FixedSizeArray] internal FixedSizeArray92<byte> _unlockedOrchestrionRollBitmask;
+    [FieldOffset(0x5DA), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedMinerFolkloreTomeBitmask;
+    [FieldOffset(0x5DC), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedBotanistFolkloreTomeBitmask;
+    [FieldOffset(0x5DE), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedFishingFolkloreTomeBitmask;
+    [FieldOffset(0x5E0), FixedSizeArray] internal FixedSizeArray92<byte> _unlockedOrchestrionRollBitmask;
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
-    [FieldOffset(0x6E8), FixedSizeArray] internal FixedSizeArray16<byte> _weeklyBingoOrderData;
+    [FieldOffset(0x6F4), FixedSizeArray] internal FixedSizeArray16<byte> _weeklyBingoOrderData;
     /// <summary>RowIds of WeeklyBingoRewardData sheet</summary>
-    [FieldOffset(0x6F8), FixedSizeArray] internal FixedSizeArray4<byte> _weeklyBingoRewardData;
+    [FieldOffset(0x704), FixedSizeArray] internal FixedSizeArray4<byte> _weeklyBingoRewardData;
     /// <summary>Bitflags of placed stickers.</summary>
     /// <remarks>Use IsWeeklyBingoStickerPlaced(index) and WeeklyBingoNumPlacedStickers instead.</remarks>
-    [FieldOffset(0x6FC)] private ushort _weeklyBingoStickers;
+    [FieldOffset(0x708)] private ushort _weeklyBingoStickers;
 
     /// <remarks>Use GetWeeklyBingoExpireUnixTimestamp(), WeeklyBingoNumSecondChancePoints and HasWeeklyBingoJournal instead</remarks>
-    [FieldOffset(0x700)] private uint _weeklyBingoFlags;
-    [FieldOffset(0x704), FixedSizeArray] internal FixedSizeArray4<byte> __weeklyBingoTaskStatus;
-    [FieldOffset(0x708)] public byte WeeklyBingoRequestOpenBingoNo;
+    [FieldOffset(0x70C)] private uint _weeklyBingoFlags;
+    [FieldOffset(0x710), FixedSizeArray] internal FixedSizeArray4<byte> __weeklyBingoTaskStatus;
+    [FieldOffset(0x714)] public byte WeeklyBingoRequestOpenBingoNo;
 
-    [FieldOffset(0x744)] public byte WeeklyBingoExpMultiplier;
-    [FieldOffset(0x745)] public bool WeeklyBingoUnk63;
+    [FieldOffset(0x750)] public byte WeeklyBingoExpMultiplier;
+    [FieldOffset(0x751)] public bool WeeklyBingoUnk63;
 
     #endregion
 
     /// <remarks> For easier access, use <see cref="GetContentValue"/>. </remarks>
-    [FieldOffset(0x74C), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
+    [FieldOffset(0x758), FixedSizeArray] internal FixedSizeArray3<StdPair<uint, uint>> _contentKeyValueData;
 
     /// <remarks>
     /// 1 = Shadowbringers
     /// 2 = Endwalker
     /// 3 = Dawntrail
     /// </remarks>
-    [FieldOffset(0x7DC)] public byte MentorVersion;
+    [FieldOffset(0x7E8)] public byte MentorVersion;
 
     /// <remarks> Index is DohDolJobIndex from the ClassJob sheet. </remarks>
-    [FieldOffset(0x7E0), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
-    // 0x800 (int): some Faux Hollows timestamp?
-    // 0x804 (int): some Faux Hollows state?
+    [FieldOffset(0x7EC), FixedSizeArray] internal FixedSizeArray8<uint> _desynthesisLevels;
+    // 0x80C (int): some Faux Hollows timestamp?
+    // 0x810 (int): some Faux Hollows state?
 
-    [FieldOffset(0x830), FixedSizeArray] internal FixedSizeArray26<byte> _unlockedFramersKitsBitmask;
+    [FieldOffset(0x83C), FixedSizeArray] internal FixedSizeArray26<byte> _unlockedFramersKitsBitmask;
 
-    [FieldOffset(0x868)] public StdMap<uint, bool> TrackedStatuses;
-    [FieldOffset(0x878)] public StdMap<uint, bool> TrackedActionUnlocks;
-    [FieldOffset(0x888)] public StdMap<uint, bool> TrackedTraitUnlocks;
-    [FieldOffset(0x898)] public bool TrackedTraitUnlocksDirty;
-    [FieldOffset(0x899)] public bool TrackedActionUnlocksDirty;
+    [FieldOffset(0x874)] public StdMap<uint, bool> TrackedStatuses;
+    [FieldOffset(0x884)] public StdMap<uint, bool> TrackedActionUnlocks;
+    [FieldOffset(0x894)] public StdMap<uint, bool> TrackedTraitUnlocks;
+    [FieldOffset(0x8A4)] public bool TrackedTraitUnlocksDirty;
+    [FieldOffset(0x8A5)] public bool TrackedActionUnlocksDirty;
 
     public bool IsLegacy => (QuestSpecialFlags & 1) != 0;
     public bool IsWarriorOfLight => (QuestSpecialFlags & 2) != 0;
