@@ -165,7 +165,7 @@ functions:
   0x1400B7C70: IsDutyRecorderPlayback
   0x1400B7CD0: IsInDeepDungeon
   0x1400B7D20: IsInEureka
-#fail   0x1400B7690: IsUnconscious
+  0x1400B7F70: IsUnconscious
   0x1400B7F80: IsRolePlaying
   0x1400B7F90: CanApplyGlamourPlates
   0x1400B80E0: IsClassJobAJob       # static, (classJobId, ClassJobExd*?) -> bool
@@ -384,7 +384,7 @@ functions:
   0x140A37CB0: ProcessPacketUpdateParty
   0x140A38490: ProcessPacketUpdateAllianceNormal
   0x140A384D0: ProcessPacketUpdateAllianceSmall
-#fail   0x140A15010: ProcessPacketInitZone
+  0x140A38510: ProcessPacketInitZone
 #fail   0x140A151E0: ProcessPacketApplyIdScramble
   0x140A38680: ProcessPacketUpdateHate
   0x140A386E0: ProcessPacketUpdateHater
@@ -656,7 +656,7 @@ classes:
       0x1408530D0: GetRemainingTime
       0x140853100: GetSourceId
       0x1408532C0: GetStatusIndex
-#fail       0x14083B6B0: GetParamForStatus
+      0x140853310: GetParamForStatus
       0x140853420: ProcessHotDot
       0x140853CB0: ExecuteStatusOff
       0x140853F30: CalculateMovementSpeedModifier
@@ -942,7 +942,7 @@ classes:
       - ea: 0x1420479A0
         base: Component::Text::Localize::Noun
     funcs:
-#fail       0x14074FCC0: ctor
+      0x140762AC0: ctor
   Component::Text::Localize::NounKo:
     vtbls:
       - ea: 0x142047D38
@@ -1010,8 +1010,8 @@ classes:
       0x140A3E170: Finalizer
       0x140A3E210: Initialize
       0x140A3F2A0: CreateQueuedBattleChara
-#fail       0x140A1C070: OnReceiveCreatePlayerBattleCharaPacket
-      0x140A3F360: OnReceiveCreateNonPlayerBattleCharaPacket
+      0x140A3F360: OnReceiveCreatePlayerBattleCharaPacket
+      0x140A3F440: OnReceiveCreateNonPlayerBattleCharaPacket
       0x140A3F5D0: ProcessBattleCharaCreationQueue
       0x140A42EE0: AddBattleCharaToCreationQueue
   Component::GUI::AtkInputManager:
@@ -1050,7 +1050,7 @@ classes:
       - ea: 0x14291B4A0
         pointer: False
     funcs:
-#fail       0x140938AB0: UpdateObjectArrays
+      0x140952C30: UpdateObjectArrays
       0x140952EA0: UpdateObjectArraysWrapper
       0x140952EB0: UpdateObjectArraysWrapper2
       0x140952ED0: ctor
@@ -1090,7 +1090,7 @@ classes:
       - ea: 0x142706A00
         pointer: False
     vtbls:
-#fail       - ea: 0x141F88BD0
+      - ea: 0x142056D78
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14094FC20: Initialize
@@ -1226,10 +1226,10 @@ classes:
       0x140977AB0: GetBattleChara
   Client::Game::Group::GroupManager:
     instances:
-#fail       - ea: 0x1425E34E0
+      - ea: 0x1427075B0
         pointer: False
     vtbls:
-#fail       - ea: 0x141FC44E0 # it has some abstract base even!
+      - ea: 0x142082468 # it has some abstract base even!
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140D07E20: Create
@@ -1626,11 +1626,11 @@ classes:
       0: Dtor
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
-#fail       - ea: 0x141FB2958
+      - ea: 0x1420707C0
         base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
     vtbls:
-#fail       - ea: 0x141FB29A0
+      - ea: 0x142070808
         base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
@@ -3213,7 +3213,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x14240D0B0
-#fail       - ea: 0x1422FC3C0
+      - ea: 0x14240D140
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -3294,7 +3294,7 @@ classes:
     vtbls:
       - ea: 0x14240C270
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x1422FB538
+      - ea: 0x14240C278
         base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
@@ -3304,9 +3304,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x1422FB7A0
+      - ea: 0x14240C4F0
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x1422FB7F8
+      - ea: 0x14240C548
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -3353,7 +3353,7 @@ classes:
     vtbls:
       - ea: 0x14240C0C8
         base: Common::Component::BGCollision::SceneWrapperNode
-#fail       - ea: 0x1422FB418
+      - ea: 0x14240C158
         base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
@@ -4142,7 +4142,7 @@ classes:
       10: EndRequest
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x141F85440
+      - ea: 0x142053688
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
@@ -5929,7 +5929,7 @@ classes:
       0x140555850: ctor
   Client::Graphics::Scene::Camera:
     vtbls:
-#fail       - ea: 0x141F5F410
+      - ea: 0x14202C2F0
         base: Client::Graphics::Scene::Object
     vfuncs:
       10: PrepareRenderCamera
@@ -8150,7 +8150,7 @@ classes:
       0x1407C9730: ctor
   Client::UI::Misc::HelperInterface:
     vtbls:
-#fail       - ea: 0x141F8C4A0
+      - ea: 0x14205A418
     vfuncs:
       0: Dtor
       1: OnLogin
@@ -8165,7 +8165,7 @@ classes:
       0x140980540: PropagateUpdate
   Client::UI::Misc::CurrencySettingHelper:
     vtbls:
-#fail       - ea: 0x141F8C4E0
+      - ea: 0x14205A478
         base: Client::UI::Misc::HelperInterface
     funcs:
       0x140982F40: GetDefaultCurrencySetting
@@ -8173,7 +8173,7 @@ classes:
       0x140982E30: GetRotationCount
   Client::UI::Misc::BannerHelper:
     vtbls:
-#fail       - ea: 0x141F8C4C0
+      - ea: 0x14205A448
         base: Client::UI::Misc::HelperInterface
     funcs:
       0x1409806B0: ctor
@@ -9274,7 +9274,7 @@ classes:
       - ea: 0x14204FD90
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x141F81B78
+      - ea: 0x14204FDA0
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -9611,7 +9611,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x141F84D60
+      - ea: 0x142052FA8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -10370,7 +10370,7 @@ classes:
       0x140EB5E40: ctor
   Client::UI::Agent::AgentPadMouseMode:
     vtbls:
-#fail       - ea: 0x141FCA608
+      - ea: 0x1420892A0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EC20B0: ctor
@@ -10724,7 +10724,7 @@ classes:
       0x140E436C0: ctor
   Client::UI::Agent::AgentMobhunt:
     vtbls:
-#fail       - ea: 0x141FC9F48
+      - ea: 0x142088B90
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EAE420: ctor
@@ -10781,7 +10781,7 @@ classes:
       0x14034AE30: ctor
   Client::UI::Agent::AgentCurrency:
     vtbls:
-#fail       - ea: 0x141FCC728
+      - ea: 0x1420848C8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140DA18A0: ctor
@@ -11317,7 +11317,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvpTeamInterface:
     vtbls:
-#fail       - ea: 0x141F3C068
+      - ea: 0x1420089E8
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvpTeamMember:
     vtbls:
@@ -11945,7 +11945,7 @@ classes:
       0x140C05E10: ctor
   Client::UI::Agent::AgentOrnamentNoteBook:
     vtbls:
-#fail       - ea: 0x141FCA590
+      - ea: 0x142089220
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EC04B0: ctor
@@ -12323,7 +12323,7 @@ classes:
       0x140D9A040: Finalizer
   Client::UI::Agent::AgentGatheringNote:
     vtbls:
-#fail       - ea: 0x141FC8210
+      - ea: 0x142086D00
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140DFBE20: ctor
@@ -12811,7 +12811,7 @@ classes:
       0x14035DC00: UpdateAddon
   Client::UI::Agent::AgentHousingInteriorPattern:
     vtbls:
-#fail       - ea: 0x142083248
+      - ea: 0x14214D9B8
         base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
@@ -13361,15 +13361,15 @@ classes:
       - ea: 0x14219DAF8
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
-#fail       - ea: 0x1420959B8
+      - ea: 0x14219DB08
         base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-#fail       - ea: 0x1420959C8
+      - ea: 0x14219DB18
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback:
     vtbls:
-#fail       - ea: 0x1420959E0
+      - ea: 0x14219DB30
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::EventSceneModule:
     funcs:
@@ -13512,21 +13512,21 @@ classes:
       0x14162B970: StartReadGilShopItems
   Client::Game::Event::ShopEventHandler::ProxyInterface:
     vtbls:
-#fail       - ea: 0x142086940
+      - ea: 0x14214F718
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::ShopEventHandler::AgentProxy:
     instances:
       - ea: 0x142717C40
         pointer: False
     vtbls:
-#fail       - ea: 0x142086970
+      - ea: 0x14214F748
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
       - ea: 0x142717C70
         pointer: False
     vtbls:
-#fail       - ea: 0x1420869A0
+      - ea: 0x14214F778
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
@@ -13576,7 +13576,7 @@ classes:
       0x14196D3F0: ctor
   Client::Game::Gimmick::GimmickAccessor: # 0x0F
     vtbls:
-#fail       - ea: 0x1421B9090
+      - ea: 0x1422BBEC0
         base: Client::Game::Gimmick::GimmickEventHandler
     funcs:
       0x14196E460: ctor
@@ -14279,7 +14279,7 @@ classes:
       0x1418FE4E0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonQarn: # The Sunken Temple of Qarn
     vtbls:
-#fail       - ea: 0x1420BF098
+      - ea: 0x1421C8FA0
         base: Client::Game::InstanceContent::InstanceContentDirector
   Client::Game::InstanceContent::InstanceContentDungeonCuttersCry: # Cutter's Cry
     vtbls:
@@ -15384,11 +15384,11 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonConfigSystem:
     vtbls:
-#fail       - ea: 0x141FD6A90
+      - ea: 0x142097800
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCharaSelectWorldServer:
     vtbls:
-#fail       - ea: 0x141FDD4C0
+      - ea: 0x14209E500
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410A7F00: ctor
@@ -15410,10 +15410,10 @@ classes:
       0x14110B840: ctor
   Client::UI::AddonGuildLeve:
     vtbls:
-#fail       - ea: 0x141FF3D38
+      - ea: 0x1420B5458
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x141006D30: ctor
+      0x14110D020: ctor
   Client::UI::AddonRetainerList:
     vtbls:
       - ea: 0x1420BAC40
@@ -15477,7 +15477,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonAdventureNoteBook:
     vtbls:
-#fail       - ea: 0x141FFB7E0
+      - ea: 0x1420BD250
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141165230: ctor
@@ -15536,10 +15536,10 @@ classes:
       # 0x1410F0BA0: ReceiveEvent_ClickTrialSynthesisButton # inlined @ 0x1410DA768
   Client::UI::AddonRecipeProductList:
     vtbls:
-#fail       - ea: 0x14201C8E8
+      - ea: 0x1420DF178
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14119A8C0: ctor
+      0x1412a1360: ctor
   Client::UI::AddonRecipeMaterialList:
     vtbls:
       - ea: 0x1420BC1B0
@@ -15599,7 +15599,7 @@ classes:
       0x1413408D0: ctor
   Client::UI::AddonTeleportTown:
     vtbls:
-#fail       - ea: 0x142033968
+      - ea: 0x1420F72C8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonArchiveItem:
     vtbls:
@@ -15649,10 +15649,10 @@ classes:
       0x1411833D0: ctor
   Client::UI::AddonContentsFinderConfirm:
     vtbls:
-#fail       - ea: 0x141FFE1A0
+      - ea: 0x1420BFD20
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14107F570: ctor
+      0x1411860E0: ctor
   Client::UI::AddonRaidFinder:
     vtbls:
       - ea: 0x1420C0420
@@ -15994,7 +15994,7 @@ classes:
       0x1412C6530: ctor
   Client::UI::AddonMJICraftSales:
     vtbls:
-#fail       - ea: 0x142038410
+      - ea: 0x1420FBF80
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141392580: ctor
@@ -16158,7 +16158,7 @@ classes:
       0x14117DB40: ctor
   Client::UI::AddonYKWNote:
     vtbls:
-#fail       - ea: 0x141FFC728
+      - ea: 0x1420BE1F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141172BF0: ctor
@@ -16275,13 +16275,13 @@ classes:
       0x14156C0E0: Finalize2
   Client::UI::AddonParameterWidget:
     vtbls:
-#fail       - ea: 0x14204E4C0
+      - ea: 0x142117770
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14144D870: ctor
   Client::UI::AddonExp:
     vtbls:
-#fail       - ea: 0x14204E700
+      - ea: 0x1421179C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14144DE70: ctor
@@ -16641,7 +16641,7 @@ classes:
       0x1411210B0: SwitchToKeyItems
   Client::UI::AddonInventoryBuddy:
     vtbls:
-#fail       - ea: 0x14201A468
+      - ea: 0x1420DCBF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14128A880: ctor
@@ -16656,7 +16656,7 @@ classes:
       0x1411274B0: SwitchToInventory
   Client::UI::AddonInventoryExpansion:
     vtbls:
-#fail       - ea: 0x141FF7050
+      - ea: 0x1420B88D0
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x141127BA0: ctor
@@ -17407,7 +17407,7 @@ classes:
       0x1415BAF90: ctor
   Client::UI::AddonAOZContentResult:
     vtbls:
-#fail       - ea: 0x14202B270
+      - ea: 0x1420EE370
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14130D940: ctor
@@ -17612,8 +17612,8 @@ classes:
       - ea: 0x142164EA0
         base: Client::Graphics::ReferencedClassBase
     funcs:
-#fail       0x1415DD0B0: CreateShaderPackage  # static function
-#fail       0x1415DDD20: ctor
+      0x14167ED00: CreateShaderPackage  # static function
+      0x1416801A0: ctor
 #fail       0x1415DDFA0: Finalizer
       # The following 3 funcs seems to be inlined in CreateShaderPackage
 #       0x141384720: VectorResize_PixelShader # these 3 functions are identical, just template-generated functions from std::vectors
