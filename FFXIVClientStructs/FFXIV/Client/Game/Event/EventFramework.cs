@@ -43,7 +43,7 @@ public unsafe partial struct EventFramework {
     /// When EventHandlerSelector is active, this function is used to select specific event handler to interact with.
     /// </summary>
     /// <param name="index">Index of the option in EventHandlerSelector singleton.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 89 B7 ?? ?? ?? ?? 80 BF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 80 BF")]
     public partial void InteractWithHandlerFromSelector(int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??")]

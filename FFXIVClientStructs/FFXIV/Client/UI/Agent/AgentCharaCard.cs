@@ -26,8 +26,8 @@ public unsafe partial struct AgentCharaCard {
     private partial void OpenCharaCardForObject(GameObject* gameObject);
     public void OpenCharaCard(GameObject* gameObject) => OpenCharaCardForObject(gameObject);
 
-    [MemberFunction("40 55 53 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 48 83 79")]
-    private partial void OpenCharaCardForPacket(CharaCardPacket* packet);
+    [MemberFunction("40 55 53 57 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC B8 04 00 00")]
+    private partial void OpenCharaCardForPacket(CharaCardPacket* packet, bool a3);
 
     // Client::UI::Agent::AgentCharaCard::Storage
     [GenerateInterop]
