@@ -21,29 +21,29 @@ public unsafe partial struct AgentInterface {
     [VirtualFunction(5)]
     public partial void Hide();
 
-    [VirtualFunction(10)]
+    [VirtualFunction(6)]
     public partial bool IsAgentActive();
 
-    [VirtualFunction(11)]
+    [VirtualFunction(7)]
     public partial void Update(uint frameCount);
 
     /// <summary>
     /// Checks if the Agent can be activated.<br/>
     /// This may be based on conditions, unlock state, completed quests or simply if the corresponding main command is enabled.
     /// </summary>
-    [VirtualFunction(12)]
+    [VirtualFunction(8)]
     public partial bool IsActivatable();
 
-    [VirtualFunction(13)]
+    [VirtualFunction(9)]
     public partial uint GetAddonId();
 
-    [VirtualFunction(14)]
+    [VirtualFunction(10)]
     public partial void OnGameEvent(GameEvent gameEvent);
 
-    [VirtualFunction(15)]
+    [VirtualFunction(11)]
     public partial void OnLevelChange(byte classJobId, ushort level);
 
-    [VirtualFunction(16)]
+    [VirtualFunction(12)]
     public partial void OnClassJobChange(byte classJobId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 FF")]
