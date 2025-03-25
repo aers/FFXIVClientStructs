@@ -2,14 +2,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Buddy
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1B8C)]
+[StructLayout(LayoutKind.Explicit, Size = 0x23FC)]
 public unsafe partial struct Buddy {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray9<BuddyMember> _battleBuddies; // BuddyMember array for Companion/Squadron/Trust
-    [FieldOffset(0x1B00)] public CompanionInfo CompanionInfo;
-    [FieldOffset(0x1B50)] public PetInfo PetInfo;
-    [FieldOffset(0x1B60)] public DutyHelperInfo DutyHelperInfo;
+    [FieldOffset(0x2370)] public CompanionInfo CompanionInfo;
+    [FieldOffset(0x23C0)] public PetInfo PetInfo;
+    [FieldOffset(0x23D0)] public DutyHelperInfo DutyHelperInfo;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x300)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
     public struct BuddyMember {
         [FieldOffset(0x0)] public uint EntityId;
         [FieldOffset(0x4)] public uint CurrentHealth;

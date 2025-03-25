@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 // base class for game objects in the world
 [GenerateInterop(isInherited: true)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? C7 81 80 00 00 00 00 00 00 00", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x190)]
 public unsafe partial struct GameObject {
     [FieldOffset(0x10)] public Vector3 DefaultPosition;
     [FieldOffset(0x20)] public float DefaultRotation;
@@ -31,23 +31,23 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x91)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
     [FieldOffset(0x92)] public byte YalmDistanceFromPlayerZ;
     [FieldOffset(0x96)] public ObjectTargetableFlags TargetableStatus; // Determines whether the game object can be targeted by the user
-    [FieldOffset(0xB0)] public Vector3 Position;
-    [FieldOffset(0xC0)] public float Rotation;
-    [FieldOffset(0xC4)] public float Scale;
-    [FieldOffset(0xC8)] public float Height;
-    [FieldOffset(0xCC)] public float VfxScale;
-    [FieldOffset(0xD0)] public float HitboxRadius;
-    [FieldOffset(0xE0)] public Vector3 DrawOffset;
-    [FieldOffset(0xF4)] public EventId EventId;
-    [FieldOffset(0xF8)] public ushort FateId;
-    [FieldOffset(0x100)] public DrawObject* DrawObject;
+    [FieldOffset(0xA0)] public Vector3 Position;
+    [FieldOffset(0xB0)] public float Rotation;
+    [FieldOffset(0xB4)] public float Scale;
+    [FieldOffset(0xB8)] public float Height;
+    [FieldOffset(0xBC)] public float VfxScale;
+    [FieldOffset(0xC0)] public float HitboxRadius;
+    [FieldOffset(0xD0)] public Vector3 DrawOffset;
+    [FieldOffset(0xE4)] public EventId EventId;
+    [FieldOffset(0xE8)] public ushort FateId;
+    [FieldOffset(0xF0)] public DrawObject* DrawObject;
     [Obsolete("Use SharedGroupLayoutInstance", true)]
-    [FieldOffset(0x108)] public ILayoutInstance* LayoutInstance;
-    [FieldOffset(0x108)] public SharedGroupLayoutInstance* SharedGroupLayoutInstance;
-    [FieldOffset(0x110)] public uint NamePlateIconId;
-    [FieldOffset(0x118)] public int RenderFlags;
-    [FieldOffset(0x158)] public LuaActor* LuaActor;
-    [FieldOffset(0x160)] public EventHandler* EventHandler;
+    [FieldOffset(0xF8)] public ILayoutInstance* LayoutInstance;
+    [FieldOffset(0xF8)] public SharedGroupLayoutInstance* SharedGroupLayoutInstance;
+    [FieldOffset(0x100)] public uint NamePlateIconId;
+    [FieldOffset(0x108)] public int RenderFlags;
+    [FieldOffset(0x148)] public LuaActor* LuaActor;
+    [FieldOffset(0x150)] public EventHandler* EventHandler;
 
     [VirtualFunction(1)]
     public partial GameObjectId GetGameObjectId();

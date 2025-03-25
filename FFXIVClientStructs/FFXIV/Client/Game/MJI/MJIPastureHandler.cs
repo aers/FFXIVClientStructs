@@ -12,31 +12,31 @@ public unsafe partial struct MJIPastureHandler {
     /// <summary>
     /// Mapping from MJIAnimal row id to Item row ids for both leavings.
     /// </summary>
-    [FieldOffset(0x2C8)] public StdMap<uint, StdPair<uint, uint>> AnimalToLeavingItemIds;
+    [FieldOffset(0x2D0)] public StdMap<uint, StdPair<uint, uint>> AnimalToLeavingItemIds;
 
     /// <summary>
     /// Per-item totals of uncollected leavings.
     /// Key is Item sheet row id, value is total amount for all animals.
     /// </summary>
-    [FieldOffset(0x2D8)] public StdMap<uint, int> AvailableMammetLeavings;
+    [FieldOffset(0x2E0)] public StdMap<uint, int> AvailableMammetLeavings;
 
     /// <summary>
     /// An array representing all animals currently present in the pastures on the Island. 
     /// </summary>
-    [FieldOffset(0x2E8), FixedSizeArray] internal FixedSizeArray20<MJIAnimal> _MJIAnimals;
+    [FieldOffset(0x2F0), FixedSizeArray] internal FixedSizeArray20<MJIAnimal> _MJIAnimals;
 
     /// <summary>
     /// An array representing which minions are currently out roaming the Island. This array is indexed by row ID from
     /// the Companion EXD sheet. See <see cref="MinionSlots"/> if information about minion locations is required.
     /// </summary>
     // Warning: This array will change size every time new minions are added!! Should be the row count of the Companion sheet.
-    [FieldOffset(0x6F8), FixedSizeArray] internal FixedSizeArray512<bool> _roamingMinions;
+    [FieldOffset(0x700), FixedSizeArray] internal FixedSizeArray512<bool> _roamingMinions;
 
     /// <summary>
     /// An array containing information on all the minion slots present on the Island Sanctuary.
     /// This array is indexed by an internal ID and does not appear to be grouped by location or similar.
     /// </summary>
-    [FieldOffset(0x8F8), FixedSizeArray] internal FixedSizeArray50<MJIMinionSlot> _minionSlots;
+    [FieldOffset(0x900), FixedSizeArray] internal FixedSizeArray50<MJIMinionSlot> _minionSlots;
 
     // 0xB50: substructure describing currently captured animal, if there are no slots available; size is at least 8
 
