@@ -5269,14 +5269,15 @@ classes:
     vfuncs:
       2: Dtor
       3: Show
-      4: Hide
-      5: IsAgentActive
-      6: Update
-      7: IsActivatable
-      8: GetAddonId
-      9: OnGameEvent
-      10: OnLevelChange
-      11: OnClassJobChange
+      4: Show2
+      5: Hide
+      6: IsAgentActive
+      7: Update
+      8: IsActivatable
+      9: GetAddonId
+      10: OnGameEvent
+      11: OnLevelChange
+      12: OnClassJobChange
     funcs:
 #fail       0x14023D060: ctor
       0x140249590: Finalizer
