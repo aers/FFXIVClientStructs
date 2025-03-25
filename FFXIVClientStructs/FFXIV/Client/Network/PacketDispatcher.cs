@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Network;
 //   Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 51 ?? 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 41 ?? 48 8B C1", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 51 ?? 48 89 01 48 8B D9 48 8D 05", 3)]
 public unsafe partial struct PacketDispatcher {
     [MemberFunction("48 89 5C 24 ?? 56 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 48 8B F2")]
     public static partial void HandleSocialPacket(uint targetId, nint packet);
