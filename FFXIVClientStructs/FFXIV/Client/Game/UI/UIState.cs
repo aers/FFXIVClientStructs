@@ -26,7 +26,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x1620)] public Cabinet Cabinet;
     [FieldOffset(0x16A8)] public Achievement Achievement; // 7.2: size +0x1E8
     [FieldOffset(0x1E90)] public Buddy Buddy; // 7.2: size +0x870
-    [FieldOffset(0x428C)] public PvPProfile PvPProfile; // 7.2: something shifted inside, size +0x08
+    [FieldOffset(0x428C)] public PvPProfile PvPProfile;
     [FieldOffset(0x4310)] internal void* Unk4310; // some UI timer for PvP Results?!
     [FieldOffset(0x4318)] public ContentsNote ContentsNote;
     [FieldOffset(0x43D0)] public RelicNote RelicNote;
