@@ -15276,7 +15276,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     vfuncs:
       71: Selected
-      72: OnMenuSelected
+      74: OnMenuSelected
     funcs:
       0x14103D1B0: ctor
   Client::UI::AddonContextMenuTitle:
@@ -16343,22 +16343,22 @@ classes:
       - ea: 0x142119A98
         base: Component::GUI::AtkUnitBase
     vfuncs:
-      74: UpdateCycledBar # also calls 77 if needed
-      75: UpdateLockState
-      76: UpdateSlotVisibility
-      77: UpdateBarNumberText
-      78: UpdateControlHints
-      79: PulseActionBarSlot
-      80: OnDragDropCancel  # calls 85 or 86 depending on why the dragdrop was cancelled
-      81: OnDragDropInsert
-      82: OnDragDropBegin
-      83: OnDragDropDiscard
-      84: OnDragDropRollover
-      85: OnDragDropCancelLocked
-      86: OnDragDropCancelByMouseUp
-      87: IsExpandedHold # always false on everything but _ActionCross
-      88: IsNotExpandedHold # always true on everything but _ActionCross
-      89: IsCross # only true on _ActionCross
+      76: UpdateCycledBar # also calls 77 if needed
+      77: UpdateLockState
+      78: UpdateSlotVisibility
+      79: UpdateBarNumberText
+      80: UpdateControlHints
+      81: PulseActionBarSlot
+      82: OnDragDropCancel  # calls 85 or 86 depending on why the dragdrop was cancelled
+      83: OnDragDropInsert
+      84: OnDragDropBegin
+      85: OnDragDropDiscard
+      86: OnDragDropRollover
+      87: OnDragDropCancelLocked
+      88: OnDragDropCancelByMouseUp
+      89: IsExpandedHold # always false on everything but _ActionCross
+      90: IsNotExpandedHold # always true on everything but _ActionCross
+      91: IsCross # only true on _ActionCross
     funcs:
       0x1414597B0: ctor
       0x14145A220: UpdatePulsingSlots # inlined @ 0x1413A6EA0
