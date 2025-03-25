@@ -9957,7 +9957,7 @@ classes:
       0x140DFA490: CancelTurnIn
   Client::UI::Agent::AgentMarker:
     vtbls:
-      - ea: 0x142083318
+      - ea: 0x142088638
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EA2990: ctor
@@ -10003,7 +10003,7 @@ classes:
         base: Client::UI::Misc::CharaView
   Client::UI::Agent::AgentColorant:
     vtbls:
-      - ea: 0x142088AC8
+      - ea: 0x142084240
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D84590: ctor
@@ -10017,10 +10017,10 @@ classes:
       0x140DAAEF0: ctor
   Client::UI::Agent::AgentHowToNotice:
     vtbls:
-      - ea: 0x142084D28
+      - ea: 0x142087630
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140DB2100: ctor
+      0x140E5AAC0: ctor
   Client::UI::Agent::AgentContentsTutorial:
     vtbls:
       - ea: 0x142084738
@@ -10174,10 +10174,10 @@ classes:
       0x1402F3130: Finalizer
   Client::UI::Agent::AgentGoldSaucerReward:
     vtbls:
-      - ea: 0x142087630
+      - ea: 0x142084D28
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140EE1290: ctor
+      0x140DB2100: ctor
   Client::UI::Agent::AgentFateProgress:
     vtbls:
       - ea: 0x142084CA8
@@ -10356,7 +10356,7 @@ classes:
       0x140D14410: OpenById
   Client::UI::Agent::AgentCrossEditor:
     vtbls:
-      - ea: 0x142089320
+      - ea: 0x142084848
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentLicenseViewer:
     vtbls:
@@ -10730,7 +10730,7 @@ classes:
       0x140EAE420: ctor
   Client::UI::Agent::AgentPatchMark:
     vtbls:
-      - ea: 0x142084848
+      - ea: 0x142089320
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EC2360: ctor
@@ -10760,14 +10760,14 @@ classes:
       0x140E8A5E0: ctor
   Client::UI::Agent::AgentMiragePrism:
     vtbls:
-      - ea: 0x142084240
+      - ea: 0x142088AC8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EA9C20: ctor
       0x140D84700: Finalizer
   Client::UI::Agent::AgentAetherCurrent:
     vtbls:
-      - ea: 0x142088638
+      - ea: 0x142083318
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D39160: ctor
@@ -11261,10 +11261,11 @@ classes:
       0x140AB2FF0: ctor
   Client::UI::Agent::AgentMountSpeed:
     vtbls:
-      - ea: 0x142083698
+      - ea: 0x142088E48
         base: Client::UI::Agent::AgentInterface
     funcs:
-#fail       0x140E0E1F0: ctor
+      0x140EB4FE0: ctor
+      0x140EB5020: Finalizer
   Client::UI::Agent::AgentPvpScreenInformationHotBar:
     vtbls:
       - ea: 0x1420895F8
@@ -12660,11 +12661,11 @@ classes:
       0x140F2A1C0: ctor
   Client::UI::Agent::AgentArchiveItem:
     vtbls:
-      - ea: 0x142088E48
+      - ea: 0x142083698
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x140EB4FE0: ctor
-      0x140EB5020: Finalizer
+      0x140D599E0: ctor
+      0x140D59A10: Finalizer
       0x140D59A70: ViewArchiveItem
   Client::UI::Agent::AgentClass2JobHotbar:
     vtbls:
@@ -15220,10 +15221,10 @@ classes:
       0x14103B5E0: ctor
   Client::UI::AddonBuddy:
     vtbls:
-      - ea: 0x1420BA0B0
+      - ea: 0x1420D1918
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x14110D020: ctor
+      0x141224EF0: ctor
       0x141225FD0: SetTab
   Client::UI::AddonBuddyAction:
     vtbls:
@@ -15404,7 +15405,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonJournalResult:
     vtbls:
-      - ea: 0x1420957A0
+      - ea: 0x1420B4F98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14110B840: ctor
@@ -15490,7 +15491,7 @@ classes:
       0x14127A770: SetTab
   Client::UI::AddonFateProgress:
     vtbls:
-      - ea: 0x1420BEEB8
+      - ea: 0x1420D3758
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14123EF20: SetTab
@@ -15524,7 +15525,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonGatheringNoteBook:
     vtbls:
-      - ea: 0x14209E750
+      - ea: 0x1420BB5E0
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonRecipeNote:
     vtbls:
@@ -15573,7 +15574,7 @@ classes:
       0x141163530: ctor
   Client::UI::AddonAOZNotebook:
     vtbls:
-      - ea: 0x1421029C0
+      - ea: 0x1420BE468
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141174340: ctor
@@ -15631,7 +15632,7 @@ classes:
       0x141260830: ctor
   Client::UI::AddonContentsFinder:
     vtbls:
-      - ea: 0x142094520
+      - ea: 0x1420Bf378
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1409EB020: SetJoinInProgress
@@ -15701,10 +15702,10 @@ classes:
       - ea: 0x1420C2040
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14108BD40: ctor
+      0x141192810: ctor
   Client::UI::AddonMiragePrismPrismBoxCrystallize:
     vtbls:
-      - ea: 0x1420D6F88
+      - ea: 0x1420C23B8
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonMobHunt:
     vtbls:
@@ -15781,10 +15782,10 @@ classes:
       0x141205FC0: ctor
   Client::UI::AddonSalvageItemSelector:
     vtbls:
-      - ea: 0x1420B9250
+      - ea: 0x1420D0FD8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x14110A4F0: ctor
+      0x141222A70: ctor
   Client::UI::AddonSalvageDialog:
     vtbls:
       - ea: 0x1420D1478
@@ -15867,7 +15868,7 @@ classes:
       0x141271500: ctor
   Client::UI::AddonPicturePreview:
     vtbls:
-      - ea: 0x1420CF1C8
+      - ea: 0x1420DBBA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141284F70: ctor
@@ -15891,10 +15892,10 @@ classes:
       0x1412C4400: ctor
   Client::UI::AddonItemInspectionList:
     vtbls:
-      - ea: 0x1420D0FD8
+      - ea: 0x1420E81D8
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x1411E3D80: ctor
+      0x1412EAC20: ctor
   Client::UI::AddonItemInspectionResult:
     vtbls:
       - ea: 0x1420E8678
@@ -16018,10 +16019,10 @@ classes:
       0x141307870: ctor
   Client::UI::AddonMJICraftScheduleMaterialList:
     vtbls:
-      - ea: 0x1420E7D38
+      - ea: 0x1420FC8C0
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1412E8D00: ctor
+      0x141397330: ctor
   Client::UI::AddonMJICraftScheduleSetting:
     vtbls:
       - ea: 0x1420FCB30
@@ -16104,7 +16105,7 @@ classes:
       0x1413A4F50: ctor
   Client::UI::AddonMJIDisposeShopShippingBulk:
     vtbls:
-      - ea: 0x1420EDA30
+      - ea: 0x1420FE980
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A5620: ctor
@@ -16134,7 +16135,7 @@ classes:
       0x1413AFD30: ctor
   Client::UI::AddonMJISetting:
     vtbls:
-      - ea: 0x1420EEA60
+      - ea: 0x1420FF780
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B1F10: ctor
@@ -16287,7 +16288,7 @@ classes:
       0x14144DE70: ctor
   Client::UI::AddonEnemyList:
     vtbls:
-      - ea: 0x142106FB8
+      - ea: 0x142117C10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14144E410: ctor
@@ -16648,7 +16649,7 @@ classes:
       0x1413F2C20: SetTab
   Client::UI::AddonInventoryEvent:
     vtbls:
-      - ea: 0x142096C70
+      - ea: 0x1420B8640
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411264B0: ctor
@@ -16670,7 +16671,7 @@ classes:
       0x141124A30: SetTab
   Client::UI::AddonInventoryRetainer:
     vtbls:
-      - ea: 0x142095300
+      - ea: 0x1420B9250
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14112C020: ctor
@@ -17397,7 +17398,7 @@ classes:
     vfuncs:
       0: Dtor
     funcs:
-#fail       0x1415B5E40: ctor
+      0x141648660: ctor
       0x141648FC0: Finalizer
   Client::UI::AddonLotteryDaily:
     vtbls:
@@ -17419,7 +17420,7 @@ classes:
       0x14130E880: ctor
   Client::UI::AddonAOZContentBriefing:
     vtbls:
-      - ea: 0x1420DE378
+      - ea: 0x1420EE120
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14130AF20: ctor
