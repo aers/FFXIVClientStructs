@@ -96,7 +96,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 41 3A C5 0F 85 ?? ?? ?? ??")]
     public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint extraParam = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 85 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 6C 24 ?? 85 C0 74")]
     public partial uint GetActionStatus(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, bool checkRecastActive = true, bool checkCastingActive = true, uint* outOptExtraInfo = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? 89 03 8B 03")]
@@ -167,7 +167,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The type of action to check.</param>
     /// <param name="actionId">The ID of the action to check.</param>
     /// <returns>Returns true if the action is off-cooldown or slidecastable.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 8B 84 24 ?? ?? ?? ?? 89 46")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? 88 46")]
     public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
 
     /// <summary>
@@ -176,7 +176,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The action type to check against.</param>
     /// <param name="actionId">The action ID to check against.</param>
     /// <returns>Returns true if target constraints are satisfied, false otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 46 40 EB 2F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 47 ?? 48 8B D7 0F B6 8B")]
     public partial bool IsActionTargetInRange(ActionType actionType, uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? F3 41 0F 11 07 80 3B 00")]
@@ -185,7 +185,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0")]
     public static partial uint GetActionInRangeOrLoS(uint actionId, GameObject* sourceObject, GameObject* targetObject);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B C8 0F BE 43 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 CE E9")]
     public static partial int GetActionCost(ActionType actionType, uint actionId, byte a3, byte a4, byte a5, byte a6);
 
     /// <summary>
@@ -206,10 +206,10 @@ public unsafe partial struct ActionManager {
     /// <param name="applyProcs">If true, applies various class mechanics (procs, swiftcast, etc).</param>
     /// <param name="outOptProc">If non-null and applyProcs is true, will be set to applied proc.</param>
     /// <returns></returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 33 D2 48 8B CF 66 0F 6E F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CF E8 ?? ?? ?? ?? 0F B7 55")]
     public static partial int GetAdjustedCastTime(ActionType actionType, uint actionId, bool applyProcs = true, CastTimeProc* outOptProc = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 01 7E 58")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B C8 83 F8 01 7E")]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
 
     /// <summary>
@@ -239,7 +239,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The action type to check.</param>
     /// <param name="actionId">The action ID to check.</param>
     /// <returns>Returns true if ants should be drawn, false otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 46 41 80 BF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 47 ?? 80 BB")]
     public partial bool IsActionHighlighted(ActionType actionType, uint actionId);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B DA 8B F9 E8 ?? ?? ?? ?? 4C 8B C3")]
