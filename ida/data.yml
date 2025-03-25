@@ -6972,18 +6972,18 @@ classes:
       36: Focus
       40: Initialize
       41: Finalizer
-      42: Update
-      43: Draw
-      45: LoadUldResourceHandle
-      46: CheckWindowCollisionAtCoords
-      48: OnSetup
-      50: OnRefresh
-      51: OnRequestedUpdate
-      53: FireCloseCallback
-      57: OnOpenTransitionStarted
-      61: OnMouseOver
-      62: OnMouseOut
-      65: IsFullyLoaded
+      43: Update
+      44: Draw
+      46: LoadUldResourceHandle
+      47: CheckWindowCollisionAtCoords
+      49: OnSetup
+      51: OnRefresh
+      52: OnRequestedUpdate
+      54: FireCloseCallback
+      58: OnOpenTransitionStarted
+      62: OnMouseOver
+      63: OnMouseOut
+      66: IsFullyLoaded
     funcs:
       0x14062CAF0: ctor
       0x14062CD50: Destructor
