@@ -15,7 +15,7 @@ public enum ItemDetailKind : byte {
 [GenerateInterop]
 [Inherits<AgentInterface>]
 [VirtualTable("48 89 18 48 8D 05 ?? ?? ?? ?? 48 89 07", 6)]
-[StructLayout(LayoutKind.Explicit, Size = 0x1B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x118)] public ItemDetailKind ItemKind;
     // Set to the item ID when hovering an item in the chat, otherwise it seems

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<EventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4D8)]
 public unsafe partial struct CraftEventHandler {
     [FieldOffset(0x218), FixedSizeArray] internal FixedSizeArray106<byte> _recipeExcelRows;
     [FieldOffset(0x320)] public Utf8String RecipeName;

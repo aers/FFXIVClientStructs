@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::DeviceDX11
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x8C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE0AC8)]
 public unsafe partial struct Device {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00", 3, isPointer: true)]
     public static partial Device* Instance();

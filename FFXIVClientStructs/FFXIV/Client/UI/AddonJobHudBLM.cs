@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("JobHudBLM0")]
 [GenerateInterop]
 [Inherits<AddonJobHud>]
-[StructLayout(LayoutKind.Explicit, Size = 0x528)]
+[StructLayout(LayoutKind.Explicit, Size = 0x508)]
 public unsafe partial struct AddonJobHudBLM0 {
     [FieldOffset(0x278)] public ElementalGaugeData DataPrevious;
     [FieldOffset(0x2B0)] public ElementalGaugeData DataCurrent;
@@ -39,7 +39,7 @@ public unsafe partial struct AddonJobHudBLM0 {
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x188)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x178)]
     public partial struct ElementalGauge {
         [FieldOffset(0x010)] public AtkResNode* Container;
         [FieldOffset(0x018)] public AtkResNode* ElementalCrescent;
@@ -94,7 +94,7 @@ public unsafe partial struct AddonJobHudBLM0 {
 
     [GenerateInterop]
     [Inherits<AddonJobHudGauge>]
-    [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
     public partial struct ElementalGaugeSimple {
         [FieldOffset(0x10)] public AtkResNode* Container;
         [FieldOffset(0x18)] public AtkResNode* Container2;

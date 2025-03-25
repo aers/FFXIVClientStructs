@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Agent(AgentId.Purify)]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x128)]
+[StructLayout(LayoutKind.Explicit, Size = 0x130)]
 public unsafe partial struct AgentPurify {
 
     [FieldOffset(0x38)] public StdVector<PurifyItem> ReducibleItems;

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Kernel::Notifier
 [GenerateInterop]
 [Inherits<Notifier>]
-[StructLayout(LayoutKind.Explicit, Size = 0x710)]
+[StructLayout(LayoutKind.Explicit, Size = 0x730)]
 public unsafe partial struct RenderTargetManager {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 44 8B 86", 3, isPointer: true)]
     public static partial RenderTargetManager* Instance();

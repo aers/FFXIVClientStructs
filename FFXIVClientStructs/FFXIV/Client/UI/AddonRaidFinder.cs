@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("RaidFinder")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xF88)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF90)]
 public unsafe partial struct AddonRaidFinder {
     [FieldOffset(0x238)] public AtkAddonControl AddonControl;
 

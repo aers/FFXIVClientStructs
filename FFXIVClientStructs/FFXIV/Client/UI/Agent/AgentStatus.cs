@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Status)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x400)]
+[StructLayout(LayoutKind.Explicit, Size = 0x408)]
 public partial struct AgentStatus {
     [FieldOffset(0x3C)] public byte TabIndex;
 

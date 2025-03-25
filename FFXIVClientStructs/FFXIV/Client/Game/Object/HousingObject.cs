@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 //   Client::Game::Object::GameObject
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
 public unsafe partial struct HousingObject {
     [FieldOffset(0x1A8)] public HousingObjectId HousingObjectId;
 

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<EventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x320)]
+[StructLayout(LayoutKind.Explicit, Size = 0x328)]
 public unsafe partial struct HwdDevEventHandler {
     [FieldOffset(0x218)] public byte DevelopmentLevel;
 

@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 // has id >63000 in InstanceContent sheet
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2438)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2440)]
 public unsafe partial struct InstanceContentOceanFishing {
 
     // Most of the fields, if not specified, can be found in "83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05"

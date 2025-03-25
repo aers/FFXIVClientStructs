@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 //     Client::System::Common::NonCopyable
 [GenerateInterop]
 [Inherits<ResourceHandle>]
-[StructLayout(LayoutKind.Explicit, Size = 0x280)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
 public partial struct ModelResourceHandle {
     [FieldOffset(0x228)] public StdMap<CStringPointer, short> Attributes;
     [FieldOffset(0x248)] public StdMap<CStringPointer, short> Shapes;

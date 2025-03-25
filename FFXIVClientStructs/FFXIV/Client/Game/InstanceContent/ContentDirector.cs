@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
-[StructLayout(LayoutKind.Explicit, Size = 0xD80)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD88)]
 public partial struct ContentDirector {
     [FieldOffset(0x542)] public byte ContentTypeRowId;
 

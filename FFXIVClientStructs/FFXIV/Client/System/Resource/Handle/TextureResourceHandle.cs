@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 // ctor "40 53 48 83 EC 30 48 8B 44 24 ?? 48 8B D9 48 89 44 24 ?? 48 8B 44 24 ?? 48 89 44 24 ?? E8 ?? ?? ?? ?? 81 A3"
 [GenerateInterop]
 [Inherits<ResourceHandle>]
-[StructLayout(LayoutKind.Explicit, Size = 0x140)]
+[StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct TextureResourceHandle {
     [FieldOffset(0xB0)] public TexFileHeader Header;
     [FieldOffset(0x118)] public Texture* Texture;

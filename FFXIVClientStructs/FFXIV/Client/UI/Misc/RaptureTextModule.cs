@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Component::Excel::ExcelLanguageEvent
 [GenerateInterop]
 [Inherits<TextModule>, Inherits<TextChecker.ExecNonMacroFunc>, Inherits<ExcelLanguageEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0xE60)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE68)]
 public unsafe partial struct RaptureTextModule {
     public static RaptureTextModule* Instance() {
         var uiModule = UI.UIModule.Instance();

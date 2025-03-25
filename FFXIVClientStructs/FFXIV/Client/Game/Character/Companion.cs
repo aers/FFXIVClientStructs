@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop]
 [Inherits<Character>]
 [VirtualTable("E8 ?? ?? ?? ?? 0F B7 56 68", [1, 0xDE])]
-[StructLayout(LayoutKind.Explicit, Size = 0x23B0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x23E0)]
 public unsafe partial struct Companion {
     [FieldOffset(0x2350)] public BattleChara* Owner;
 
