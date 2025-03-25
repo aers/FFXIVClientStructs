@@ -81,18 +81,18 @@ public unsafe partial struct DynamicEvent {
     /// <remarks>RowId of DynamicEventSingleBattle Sheet</remarks>
     [FieldOffset(0x30 + 0x2B)] public byte SingleBattle;
     [FieldOffset(0x30 + 0x2C), CExporterExcelEnd] public byte Unknown8;
-    [FieldOffset(0x5C)] public int StartTimestamp;
-    [FieldOffset(0x60)] public uint SecondsLeft;
-    [FieldOffset(0x64)] public uint SecondsDuration;
-    [FieldOffset(0x6A)] public DynamicEventState State;
-    [FieldOffset(0x6D)] public byte Participants;
-    [FieldOffset(0x6E)] public byte Progress;
+    [FieldOffset(0x60)] public int StartTimestamp;
+    [FieldOffset(0x64)] public uint SecondsLeft;
+    [FieldOffset(0x68)] public uint SecondsDuration;
+    [FieldOffset(0x78)] public DynamicEventState State;
+    [FieldOffset(0x7A)] public byte Participants;
+    [FieldOffset(0x7B)] public byte Progress;
     // new 1 byte field at 0x70 in 7.1
     [FieldOffset(0x80)] public Utf8String Name;
     [FieldOffset(0xE8)] public Utf8String Description;
-    [FieldOffset(0x148)] public uint IconObjective0;
-    [FieldOffset(0x14C)] public byte MaxParticipants2;
-    [FieldOffset(0x168)] public MapMarkerData MapMarker;
+    [FieldOffset(0x150)] public uint IconObjective0;
+    [FieldOffset(0x154)] public byte MaxParticipants2;
+    [FieldOffset(0x170)] public MapMarkerData MapMarker;
 }
 
 public enum DynamicEventState : byte {
