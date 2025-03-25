@@ -7869,7 +7869,7 @@ classes:
       89: ExitGPose
       90: IsInGPose
       91: EnterIdleCam
-      82: ExitIdleCam
+      92: ExitIdleCam
       93: IsInIdleCam
       99: ShowDeepDungeonHud
       100: HideDeepDungeonHud
