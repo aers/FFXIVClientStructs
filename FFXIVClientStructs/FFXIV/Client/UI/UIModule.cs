@@ -70,7 +70,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x95148)] internal AchievementListModule AchievementListModule;
     [FieldOffset(0x951E0)] internal GroupPoseModule GroupPoseModule;
     [FieldOffset(0x95320)] internal FieldMarkerModule FieldMarkerModule;
-    // [FieldOffset(0x95FA0)] UnkStdMap?
+    // [FieldOffset(0x95FA0)] internal ExcelSheetPreloader ExcelSheetPreloader;
     // [FieldOffset(0x95FB0)] internal MycNoteModule MycNoteModule;
     // [FieldOffset(0x96068)] internal OrnamentListModule OrnamentListModule;
     // [FieldOffset(0x960C8)] internal MycItemModule MycItemModule;
@@ -96,7 +96,7 @@ public unsafe partial struct UIModule {
     // [FieldOffset(0xA0C68)] internal MKDSJOB;
     // [FieldOffset(0xA0CC8)] internal MKDLORE;
     // [FieldOffset(0xA0D28)] internal MKDSJN;
-    // [FieldOffset(0xA0D88)] internal Something;
+    // [FieldOffset(0xA0D88)] internal Vf81Struct;
     [FieldOffset(0xA0E20)] internal ConfigModule ConfigModule;
     [FieldOffset(0xAF950)] internal RaptureShellModule RaptureShellModule;
     [FieldOffset(0xB0BA0)] internal PronounModule PronounModule;
@@ -117,7 +117,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xF4038)] public Utf8String LastTalkText;
     [FieldOffset(0xF40A0)] internal UIInputData UIInputData;
     [FieldOffset(0xF4AD0)] internal UIInputModule UIInputModule;
-    // [FieldOffset(??)] internal Vf70Struct;
+    // [FieldOffset(0xF4BC0)] internal Vf79Struct;
 
     [Obsolete("Moved to UIGlobals.PlaySoundEffect", true)]
     [MemberFunction("E8 ?? ?? ?? ?? 45 0F B7 C5")]
