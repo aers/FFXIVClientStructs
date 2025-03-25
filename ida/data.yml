@@ -5271,13 +5271,13 @@ classes:
       3: Show
       4: Show2
       5: Hide
-      6: IsAgentActive
-      7: Update
-      8: IsActivatable
-      9: GetAddonId
-      10: OnGameEvent
-      11: OnLevelChange
-      12: OnClassJobChange
+      10: IsAgentActive
+      11: Update
+      12: IsActivatable
+      13: GetAddonId
+      14: OnGameEvent
+      15: OnLevelChange
+      16: OnClassJobChange
     funcs:
 #fail       0x14023D060: ctor
       0x140249590: Finalizer
