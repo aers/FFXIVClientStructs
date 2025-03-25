@@ -34,12 +34,12 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x87F7)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
     [FieldOffset(0x87F8)] internal fixed byte AddonAllocators[0x28 * 917];
-    [FieldOffset(0x11760)] public StdVector<Utf8String> AddonNames;
-    [FieldOffset(0x11778)] public AddonConfig* AddonConfigPtr;
+    [FieldOffset(0x11740)] public StdVector<Utf8String> AddonNames;
+    [FieldOffset(0x11758)] public AddonConfig* AddonConfigPtr;
 
-    [FieldOffset(0x11830)] public UIModule* UIModulePtr;
-    [FieldOffset(0x11838)] public RaptureLogModule* RaptureLogModulePtr;
-    [FieldOffset(0x11840)] public AgentModule AgentModule;
+    [FieldOffset(0x11810)] public UIModule* UIModulePtr;
+    [FieldOffset(0x11818)] public RaptureLogModule* RaptureLogModulePtr;
+    [FieldOffset(0x11820)] public AgentModule AgentModule;
     [FieldOffset(0x12718)] public RaptureHotbarModule* RaptureHotbarModulePtr;
     [FieldOffset(0x12720)] public RaptureAtkUnitManager RaptureAtkUnitManager;
     [FieldOffset(0x1C438)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
