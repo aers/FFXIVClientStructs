@@ -13,5 +13,5 @@ public unsafe partial struct PadDeviceInterface {
     public partial void SetVibration(int rightMotorSpeed, int leftMotorSpeed);
 
     [VirtualFunction(2)]
-    public partial void Poll();
+    public partial nint Poll();
 }
