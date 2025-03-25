@@ -10563,7 +10563,7 @@ classes:
       0x140EC75F0: Finalizer
   Client::UI::Agent::AgentContentsNote:
     vtbls:
-      - ea: 0x1420892A0
+      - ea: 0x1420845A8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D97860: ctor
@@ -10642,7 +10642,7 @@ classes:
       0x140D611E0: ctor
   Client::UI::Agent::AgentAWMakingSpiritGrow:
     vtbls:
-      - ea: 0x142089220
+      - ea: 0x1420839E8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D64520: ctor
@@ -11381,9 +11381,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentInventoryBuddy:
     vtbls:
-      - ea: 0x142086D00
+      - ea: 0x1420837B0
         base: Client::UI::Agent::AgentInterface
-      - ea: 0x142086D80
+      - ea: 0x142083830
         base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x140D5DD60: ctor
@@ -11773,7 +11773,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMentorCondition:
     vtbls:
-      - ea: 0x1420848C8
+      - ea: 0x1420878D8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E66A90: ctor
@@ -12080,7 +12080,7 @@ classes:
       0x140E53E20: ctor
   Client::UI::Agent::AgentContentsFinderSetting:
     vtbls:
-      - ea: 0x142088B90
+      - ea: 0x1420844A8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D949F0: ctor
@@ -12559,7 +12559,7 @@ classes:
       0x140F01D30: FindItemDescByItemId
   Client::UI::Agent::AgentMJIFarmManagement:
     vtbls:
-      - ea: 0x14214D9B8
+      - ea: 0x14208A570
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F22530: ctor
@@ -14279,7 +14279,7 @@ classes:
       0x1418FE4E0: ctor
   Client::Game::InstanceContent::InstanceContentDungeonQarn: # The Sunken Temple of Qarn
     vtbls:
-      - ea: 0x1421C8FA0
+      - ea: 0x1422D8E60
         base: Client::Game::InstanceContent::InstanceContentDirector
   Client::Game::InstanceContent::InstanceContentDungeonCuttersCry: # Cutter's Cry
     vtbls:
@@ -15442,7 +15442,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonCharacter:
     vtbls:
-      - ea: 0x142097800
+      - ea: 0x1420B9C10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14106B1A0: ctor
@@ -15607,7 +15607,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonArmouryBoard:
     vtbls:
-      - ea: 0x1420B88D0
+      - ea: 0x1420D4308
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141247180: ctor
@@ -15615,7 +15615,7 @@ classes:
       0x141249700: PreviousTab # inlined in ReceiveEvent
   Client::UI::AddonCabinetWithdraw:
     vtbls:
-      - ea: 0x1420BD250
+      - ea: 0x1420D5148
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonContentsInfoDetail:
     vtbls:
@@ -15736,7 +15736,7 @@ classes:
       0x1411E8180: ctor
   Client::UI::AddonChatLog:
     vtbls:
-      - ea: 0x1420B5458
+      - ea: 0x1420CB0C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411EB710: ctor
@@ -15964,13 +15964,13 @@ classes:
       0x14138AAA0: ctor
   Client::UI::AddonMJIPouch:
     vtbls:
-      - ea: 0x1420E7898
+      - ea: 0x1420FB3F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412DF780: ctor
   Client::UI::AddonMJIRecipeNoteBook:
     vtbls:
-      - ea: 0x1420DCBF8
+      - ea: 0x1420FB640
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14138D3B0: ctor
@@ -16000,7 +16000,7 @@ classes:
       0x141392580: ctor
   Client::UI::AddonMJICraftSchedule:
     vtbls:
-      - ea: 0x1420E7F88
+      - ea: 0x1420FC1D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141393030: ctor
@@ -16074,7 +16074,7 @@ classes:
       0x14153E8D0: ctor
   Client::UI::AddonMJIBuilding:
     vtbls:
-      - ea: 0x1420DF178
+      - ea: 0x1420FDDF0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A1A70: ctor
@@ -16188,7 +16188,7 @@ classes:
       0x14117B570: ctor
   Client::UI::AddonPvPCharacter:
     vtbls:
-      - ea: 0x1420B9C10
+      - ea: 0x1420CF8B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141218800: ctor
@@ -16268,7 +16268,7 @@ classes:
       0x14142F250: Finalize2
   Client::UI::AddonMainCommand:
     vtbls:
-      - ea: 0x14213B0C0
+      - ea: 0x142117500
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14144C3E0: ctor
@@ -16323,7 +16323,7 @@ classes:
       0x141454A30: ctor
   Client::UI::AddonCastBar:
     vtbls:
-      - ea: 0x1420FBF80
+      - ea: 0x1421195C0
         base: Component::GUI::AtkUnitBase
     funcs:
 #fail       0x14131CC90: ctor
@@ -17596,13 +17596,13 @@ classes:
       - ea: 0x142164218
         base: Client::Graphics::Singleton
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
-    vtbls:
+#    vtbls:
 #fail       - ea: 0x14208DDA8
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>:
-    vtbls:
+#    vtbls:
 #fail       - ea: 0x14208DDB0
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>:
-    vtbls:
+#    vtbls:
 #fail       - ea: 0x14208DDB8
   Client::Graphics::Kernel::CBalanceSet<Client::Graphics::Kernel::ShaderPackage::SItem>:
     vtbls:
