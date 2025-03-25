@@ -9,14 +9,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [Inherits<EventHandler>]
 [StructLayout(LayoutKind.Explicit, Size = 0x330)]
 public unsafe partial struct LuaEventHandler {
-    [FieldOffset(0x210)] public LuaState* LuaState;
-    [FieldOffset(0x218)] public LuaScriptLoader<LuaEventHandler> LuaScriptLoader;
-    [FieldOffset(0x240)] public Utf8String LuaClass;
-    [FieldOffset(0x2A8)] public Utf8String LuaKey;
+    [FieldOffset(0x218)] public LuaState* LuaState;
+    [FieldOffset(0x220)] public LuaScriptLoader<LuaEventHandler> LuaScriptLoader;
+    [FieldOffset(0x248)] public Utf8String LuaClass;
+    [FieldOffset(0x2B0)] public Utf8String LuaKey;
 
-    [FieldOffset(0x310)] public StdMap<uint, LuaEventHandlerLuaText> LuaTexts;
-    [FieldOffset(0x320)] public LuaThread* LuaThread;
-    [FieldOffset(0x328)] public uint LuaScriptVersion;
+    [FieldOffset(0x318)] public StdMap<uint, LuaEventHandlerLuaText> LuaTexts;
+    [FieldOffset(0x328)] public LuaThread* LuaThread;
+    [FieldOffset(0x330)] public uint LuaScriptVersion;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
