@@ -12,24 +12,24 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.GoldSaucer;
 [Inherits<GoldSaucerDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x810)]
 public unsafe partial struct GFateDirector {
-    [FieldOffset(0x528)] public Utf8String MapMarkerTooltipText;
-    [FieldOffset(0x584)] public uint MapMarkerLevelId;
+    [FieldOffset(0x680)] public Utf8String MapMarkerTooltipText;
+    [FieldOffset(0x6E8)] public uint MapMarkerLevelId;
 
-    [FieldOffset(0x58C)] public uint MapMarkerIconId;
+    [FieldOffset(0x6F0)] public uint MapMarkerIconId;
 
-    [FieldOffset(0x5F6), FixedSizeArray] internal FixedSizeArray32<uint> _objectIds;
-    [FieldOffset(0x648)] public int EndTimestamp;
+    [FieldOffset(0x768), FixedSizeArray] internal FixedSizeArray32<uint> _objectIds;
+    [FieldOffset(0x7E8)] public int EndTimestamp;
 
-    [FieldOffset(0x652)] public ushort BgmId;
+    [FieldOffset(0x7F4)] public ushort BgmId;
 
-    [FieldOffset(0x65C)] public byte GateType;
-    [FieldOffset(0x65D)] public byte GatePositionType;
+    [FieldOffset(0x7FE)] public byte GateType;
+    [FieldOffset(0x7FF)] public byte GatePositionType;
 
-    [FieldOffset(0x656)] public ushort ScreenImageId1;
-    [FieldOffset(0x658)] public ushort ScreenImageId2;
-    [FieldOffset(0x65A)] public ushort ScreenImageId3;
+    [FieldOffset(0x7F8)] public ushort ScreenImageId1;
+    [FieldOffset(0x7FA)] public ushort ScreenImageId2;
+    [FieldOffset(0x7FC)] public ushort ScreenImageId3;
 
-    [FieldOffset(0x660)] public GFateDirectorFlag Flags;
+    [FieldOffset(0x804)] public GFateDirectorFlag Flags;
 
     [VirtualFunction(3)]
     public partial bool IsRunningGate();
