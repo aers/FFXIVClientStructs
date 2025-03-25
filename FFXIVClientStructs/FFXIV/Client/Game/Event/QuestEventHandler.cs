@@ -42,7 +42,7 @@ public unsafe partial struct QuestEventHandler {
     [FieldOffset(0x4F0)] public byte DailyQuestPool;
 
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 75 D0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 75 D0 44 3B EE")]
     public partial void GetTodoArgs(BattleChara* localPlayer, byte idx, uint* arg0, uint* arg1, uint* arg2);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 88 07 45 33 D2")]

@@ -304,7 +304,7 @@ public partial struct RaptureHotbarModule {
         /// on the hotbar slot.
         /// </summary>
         /// <returns>Returns a bool indicating whether the action's range constraints are met.</returns>
-        [MemberFunction("40 53 48 83 EC 20 44 0F B6 81 ?? ?? ?? ?? 48 8B D9")]
+        [MemberFunction("40 53 48 83 EC 20 44 0F B6 81 ?? ?? ?? ?? 48 8B D9 41 8B D0")]
         public partial bool IsSlotActionTargetInRange();
 
         /// <summary>

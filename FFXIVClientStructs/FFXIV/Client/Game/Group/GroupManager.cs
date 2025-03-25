@@ -45,7 +45,7 @@ public unsafe partial struct GroupManager {
         [MemberFunction("48 63 81 ?? ?? ?? ?? 85 C0 78 14")]
         public partial bool IsEntityIdPartyLeader(uint entityId);
 
-        [MemberFunction("E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 19")]
+        [MemberFunction("E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 19 48 8B CB")]
         public partial bool IsCharacterInPartyByName(byte* name);
 
         [MemberFunction("83 FA 14 72 03")]

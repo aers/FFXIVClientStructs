@@ -49,7 +49,7 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial CStringPointer GetAddonText(uint addonId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF")] // FormatAddonText1<int,int,uint>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF 45 33 FF")] // FormatAddonText1<int,int,uint>
     public partial CStringPointer FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 51 0F B6 DB")] // FormatAddonText2<int,int>

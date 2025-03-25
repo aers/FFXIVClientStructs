@@ -28,6 +28,6 @@ public unsafe partial struct DutyActionManager {
     /// </summary>
     /// <param name="dutyActionSlot">The Duty Action slot number (0 or 1) to look up.</param>
     /// <returns>Returns an Action ID.</returns>
-    [MemberFunction("E9 ?? ?? ?? ?? B1 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 EB 41")]
     public static partial uint GetDutyActionId(ushort dutyActionSlot);
 }

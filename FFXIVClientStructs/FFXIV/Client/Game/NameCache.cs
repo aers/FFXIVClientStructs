@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x73B4)]
 public unsafe partial struct NameCache {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 75 0D", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 75 0D 32 C0", 3)]
     public static partial NameCache* Instance();
 
     /// <remarks> Used for SeString macros PcName, IfPcGender and IfPcName. Data is cleared when switching zones. </remarks>
