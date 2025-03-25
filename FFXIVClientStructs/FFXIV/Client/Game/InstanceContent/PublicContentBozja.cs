@@ -11,11 +11,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //           Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<PublicContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2F78)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3058)]
 public unsafe partial struct PublicContentBozja {
     [FieldOffset(0x11E0)] public DynamicEventContainer DynamicEventContainer;
-    [FieldOffset(0x2E88)] public BozjaState State;
-    [FieldOffset(0x2F78)] public bool StateInitialized;
+    [FieldOffset(0x2F60)] public BozjaState State;
+    [FieldOffset(0x3050)] public bool StateInitialized;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 48 85 FF 74 1D")]
     public static partial PublicContentBozja* GetInstance();

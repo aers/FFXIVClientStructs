@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AgentInventoryContext.InventoryContextEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x32F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x32F8)]
 public unsafe partial struct ShopEventHandler {
     // 0x210: second base class, related to context menu integration for selling items
     // 0x218: third base class, related to buying items, not sure how it's used exactly

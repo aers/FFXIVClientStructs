@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<EventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x330)]
+[StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public unsafe partial struct LuaEventHandler {
     [FieldOffset(0x218)] public LuaState* LuaState;
     [FieldOffset(0x220)] public LuaScriptLoader<LuaEventHandler> LuaScriptLoader;
