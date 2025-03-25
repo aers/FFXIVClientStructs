@@ -48,14 +48,14 @@ public partial struct BozjaState {
 // Client::Game::InstanceContent::DynamicEventContainer
 //   Client::Game::InstanceContent::ContentSheetWaiterInterface
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1CA8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1D80)]
 public unsafe partial struct DynamicEventContainer {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray16<DynamicEvent> _events;
 }
 
 // Client::Game::InstanceContent::DynamicEvent
 //   Common::Component::Excel::ExcelSheetWaiter
-[StructLayout(LayoutKind.Explicit, Size = 0x1C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 public unsafe partial struct DynamicEvent {
     // [FieldOffset(0)] public ExcelSheetWaiter ExcelSheetWaiter;
     [FieldOffset(0x30 + 0x00), CExporterExcelBegin("DynamicEvent")] public uint NameOffset;
@@ -79,7 +79,8 @@ public unsafe partial struct DynamicEvent {
     [FieldOffset(0x30 + 0x29)] public byte Unknown4;
     [FieldOffset(0x30 + 0x2A)] public byte Unknown5;
     /// <remarks>RowId of DynamicEventSingleBattle Sheet</remarks>
-    [FieldOffset(0x30 + 0x2B), CExporterExcelEnd] public byte SingleBattle;
+    [FieldOffset(0x30 + 0x2B)] public byte SingleBattle;
+    [FieldOffset(0x30 + 0x2C), CExporterExcelEnd] public byte Unknown8;
     [FieldOffset(0x5C)] public int StartTimestamp;
     [FieldOffset(0x60)] public uint SecondsLeft;
     [FieldOffset(0x64)] public uint SecondsDuration;
@@ -87,8 +88,8 @@ public unsafe partial struct DynamicEvent {
     [FieldOffset(0x6D)] public byte Participants;
     [FieldOffset(0x6E)] public byte Progress;
     // new 1 byte field at 0x70 in 7.1
-    [FieldOffset(0x78)] public Utf8String Name;
-    [FieldOffset(0xE0)] public Utf8String Description;
+    [FieldOffset(0x80)] public Utf8String Name;
+    [FieldOffset(0xE8)] public Utf8String Description;
     [FieldOffset(0x148)] public uint IconObjective0;
     [FieldOffset(0x14C)] public byte MaxParticipants2;
     [FieldOffset(0x168)] public MapMarkerData MapMarker;
