@@ -2,23 +2,23 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::StatusManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x2F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3E0)]
 public unsafe partial struct StatusManager {
     // This field is often null and cannot be relied on to retrieve the owning Character object
     [FieldOffset(0x0)] public Character.Character* Owner;
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray60<Status> _status;
 
     // Flags is a bit vector; bit #i is set if any of the active statuses has column 30/31 in the sheet containing 'i'
-    [FieldOffset(0x2D8), FixedSizeArray] internal FixedSizeArray7<byte> _flags;
+    [FieldOffset(0x3C8), FixedSizeArray] internal FixedSizeArray7<byte> _flags;
 
-    [FieldOffset(0x2E0)] public long Unk_178;
+    [FieldOffset(0x3D0)] public long Unk3D0;
     //[FieldOffset(0x2E8)] public byte Unk_180;
-    [FieldOffset(0x2E8)] public byte NumValidStatuses;
+    [FieldOffset(0x3D8)] public byte NumValidStatuses;
 
     /// <summary>
     /// 0x01: lose control (set if any active status has IsGaze flag set in sheet)
     /// </summary>
-    [FieldOffset(0x2E9)] public byte ExtraFlags;
+    [FieldOffset(0x3D9)] public byte ExtraFlags;
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 2D 00")]
     public partial bool HasStatus(uint statusId, uint sourceId = 0xE0000000);
@@ -54,7 +54,7 @@ public unsafe partial struct StatusManager {
     public static partial bool ExecuteStatusOff(uint statusId, uint sourceId = 0xE0000000);
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xC)]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct Status {
     [FieldOffset(0x0)] public ushort StatusId;
     // this contains different information depending on the type of status
