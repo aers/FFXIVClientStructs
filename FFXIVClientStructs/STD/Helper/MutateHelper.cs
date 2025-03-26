@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.STD.ContainerInterface;
-using JetBrains.Annotations;
 
 namespace FFXIVClientStructs.STD.Helper;
 
@@ -172,7 +171,6 @@ internal static class MutateHelper<T, TOwner>
         }
     }
 
-    [AssertionMethod]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void CheckRangeArguments(ref readonly TOwner owner, long index, long count) {
         if (index < 0 || index > owner.LongCount)

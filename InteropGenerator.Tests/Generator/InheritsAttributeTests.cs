@@ -1099,7 +1099,7 @@ public class InheritsAttributeTests {
                             public unsafe partial struct BaseStruct
                             {
                                 [GenerateStringOverloads]
-                                public int TestFunction(int argOne, byte* stringArg) { return 0; }
+                                public int TestFunction(int argOne, CStringPointer stringArg) { return 0; }
                             }
                             
                             [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = 8)]
@@ -1118,7 +1118,7 @@ public class InheritsAttributeTests {
                                           public int TestFunction(int argOne, string stringArg)
                                           {
                                               int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                               global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                               stringArgBytes[stringArgUTF8StrLen] = 0;
                                               fixed (byte* stringArgPtr = stringArgBytes)
@@ -1142,14 +1142,14 @@ public class InheritsAttributeTests {
                                                 {
                                                     /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
-                                                    /// <inheritdoc cref="BaseStruct.TestFunction(int, byte*)" />
+                                                    /// <inheritdoc cref="BaseStruct.TestFunction(int, global::InteropGenerator.Runtime.CStringPointer)" />
                                                     /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-                                                    public int TestFunction(int argOne, byte* stringArg) => BaseStruct.TestFunction(argOne, stringArg);
+                                                    public int TestFunction(int argOne, global::InteropGenerator.Runtime.CStringPointer stringArg) => BaseStruct.TestFunction(argOne, stringArg);
                                                     public int TestFunction(int argOne, string stringArg)
                                                     {
                                                         int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                                         global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                                         stringArgBytes[stringArgUTF8StrLen] = 0;
                                                         fixed (byte* stringArgPtr = stringArgBytes)
@@ -1182,7 +1182,7 @@ public class InheritsAttributeTests {
                             {
                                 [Obsolete("This function is obsolete")]
                                 [GenerateStringOverloads]
-                                public int TestFunction(int argOne, byte* stringArg) { return 0; }
+                                public int TestFunction(int argOne, CStringPointer stringArg) { return 0; }
                             }
                             
                             [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = 8)]
@@ -1202,7 +1202,7 @@ public class InheritsAttributeTests {
                                           public int TestFunction(int argOne, string stringArg)
                                           {
                                               int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                              Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                               global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                               stringArgBytes[stringArgUTF8StrLen] = 0;
                                               fixed (byte* stringArgPtr = stringArgBytes)
@@ -1227,16 +1227,16 @@ public class InheritsAttributeTests {
                                                 {
                                                     /// <summary>Inherited parent class accessor for <see cref="BaseStruct">BaseStruct</see></summary>
                                                     [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStruct BaseStruct;
-                                                    /// <inheritdoc cref="BaseStruct.TestFunction(int, byte*)" />
+                                                    /// <inheritdoc cref="BaseStruct.TestFunction(int, global::InteropGenerator.Runtime.CStringPointer)" />
                                                     /// <remarks>Method inherited from parent class <see cref="BaseStruct">BaseStruct</see>.</remarks>
                                                     [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                     [global::System.ObsoleteAttribute("This function is obsolete", false)]
-                                                    public int TestFunction(int argOne, byte* stringArg) => BaseStruct.TestFunction(argOne, stringArg);
+                                                    public int TestFunction(int argOne, global::InteropGenerator.Runtime.CStringPointer stringArg) => BaseStruct.TestFunction(argOne, stringArg);
                                                     [global::System.ObsoleteAttribute("This function is obsolete", false)]
                                                     public int TestFunction(int argOne, string stringArg)
                                                     {
                                                         int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                                        Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                                         global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                                         stringArgBytes[stringArgUTF8StrLen] = 0;
                                                         fixed (byte* stringArgPtr = stringArgBytes)
@@ -1639,7 +1639,7 @@ public class InheritsAttributeTests {
                                 
                                 [VirtualFunction(0)]
                                 [GenerateStringOverloads]
-                                public partial void BaseA_B_vf0(byte* arg);
+                                public partial void BaseA_B_vf0(CStringPointer arg);
                             }
                             
                             [StructLayout(LayoutKind.Explicit, Size=12)]
@@ -1752,19 +1752,19 @@ public class InheritsAttributeTests {
                                        [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                        public unsafe partial struct BaseA_BVirtualTable
                                        {
-                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <BaseA_B*, byte*, void> BaseA_B_vf0;
+                                           [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public delegate* unmanaged <BaseA_B*, global::InteropGenerator.Runtime.CStringPointer, void> BaseA_B_vf0;
                                        }
                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseA_BVirtualTable* VirtualTable;
                                        public static partial class Delegates
                                        {
-                                           public delegate void BaseA_B_vf0(BaseA_B* thisPtr, byte* arg);
+                                           public delegate void BaseA_B_vf0(BaseA_B* thisPtr, global::InteropGenerator.Runtime.CStringPointer arg);
                                        }
                                        [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-                                       public partial void BaseA_B_vf0(byte* arg) => VirtualTable->BaseA_B_vf0((BaseA_B*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
+                                       public partial void BaseA_B_vf0(global::InteropGenerator.Runtime.CStringPointer arg) => VirtualTable->BaseA_B_vf0((BaseA_B*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
                                        public void BaseA_B_vf0(string arg)
                                        {
                                            int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
-                                           Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                           Span<byte> argBytes = argUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[argUTF8StrLen + 1];
                                            global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
                                            argBytes[argUTF8StrLen] = 0;
                                            fixed (byte* argPtr = argBytes)
@@ -1946,14 +1946,14 @@ public class InheritsAttributeTests {
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseA_A_vf0(int* arg) => VirtualTable->BaseA_A_vf0((MiddleA*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
-                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0(byte*)" />
+                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0(global::InteropGenerator.Runtime.CStringPointer)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-                                                public void BaseA_B_vf0(byte* arg) => BaseA_B.BaseA_B_vf0(arg);
+                                                public void BaseA_B_vf0(global::InteropGenerator.Runtime.CStringPointer arg) => BaseA_B.BaseA_B_vf0(arg);
                                                 public void BaseA_B_vf0(string arg)
                                                 {
                                                     int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
-                                                    Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                                    Span<byte> argBytes = argUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[argUTF8StrLen + 1];
                                                     global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
                                                     argBytes[argUTF8StrLen] = 0;
                                                     fixed (byte* argPtr = argBytes)
@@ -2051,10 +2051,10 @@ public class InheritsAttributeTests {
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_A">BaseA_A</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                                 public void BaseA_A_vf0(int* arg) => VirtualTable->BaseA_A_vf0((Child*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), arg);
-                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0(byte*)" />
+                                                /// <inheritdoc cref="BaseA_B.BaseA_B_vf0(global::InteropGenerator.Runtime.CStringPointer)" />
                                                 /// <remarks>Method inherited from parent class <see cref="BaseA_B">BaseA_B</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-                                                public void BaseA_B_vf0(byte* arg) => MiddleA.BaseA_B.BaseA_B_vf0(arg);
+                                                public void BaseA_B_vf0(global::InteropGenerator.Runtime.CStringPointer arg) => MiddleA.BaseA_B.BaseA_B_vf0(arg);
                                                 /// <inheritdoc cref="MiddleA.MiddleA_vf4(int*)" />
                                                 /// <remarks>Method inherited from parent class <see cref="MiddleA">MiddleA</see>.</remarks>
                                                 [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -2070,7 +2070,7 @@ public class InheritsAttributeTests {
                                                 public void BaseA_B_vf0(string arg)
                                                 {
                                                     int argUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(arg);
-                                                    Span<byte> argBytes = argUTF8StrLen <= 512 ? stackalloc byte[argUTF8StrLen + 1] : new byte[argUTF8StrLen + 1];
+                                                    Span<byte> argBytes = argUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[argUTF8StrLen + 1];
                                                     global::System.Text.Encoding.UTF8.GetBytes(arg, argBytes);
                                                     argBytes[argUTF8StrLen] = 0;
                                                     fixed (byte* argPtr = argBytes)

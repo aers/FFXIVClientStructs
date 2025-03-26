@@ -28,6 +28,9 @@ public struct GamepadInputData {
     [FieldOffset(0x8)] public int RightStickX; // from -99 (Right) to 99 (Left)
     [FieldOffset(0xC)] public int RightStickY; // from -99 (Down) to 99 (Up)
     [FieldOffset(0x10)] public GamepadButtonsFlags Buttons; // Not always set if UI is focused
+    [FieldOffset(0x14)] public GamepadButtonsFlags ButtonsPressed;
+    [FieldOffset(0x18)] public GamepadButtonsFlags ButtonsReleased;
+    [FieldOffset(0x20)] public GamepadButtonsFlags ButtonsRepeat;
 
     // These fields are only correct for actual physical Playstation Controllers
     // Tested with Sony DualSense Controller Model: CFI-ZCT1W

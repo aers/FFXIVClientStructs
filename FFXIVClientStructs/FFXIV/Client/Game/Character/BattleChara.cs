@@ -10,10 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop]
 [Inherits<Character>]
 [VirtualTable("E8 ?? ?? ?? ?? 48 8B F0 8D 14 3F", [1, 0x23])]
-[StructLayout(LayoutKind.Explicit, Size = 0x36A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3780)]
 public unsafe partial struct BattleChara {
-    [FieldOffset(0x2330)] public StatusManager StatusManager;
-    [FieldOffset(0x2620)] public CastInfo CastInfo;
-    [FieldOffset(0x2790)] public ActionEffectHandler ActionEffectHandler;
-    [FieldOffset(0x3690)] public ForayInfo ForayInfo;
+    [FieldOffset(0x2320)] public StatusManager StatusManager;
+    [FieldOffset(0x2700)] public CastInfo CastInfo;
+    [FieldOffset(0x2870)] public ActionEffectHandler ActionEffectHandler;
+    [FieldOffset(0x3770)] public ForayInfo ForayInfo;
 }

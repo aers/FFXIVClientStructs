@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Achievement)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x12740)]
+[StructLayout(LayoutKind.Explicit, Size = 0x127C0)]
 public partial struct AgentAchievement {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B 46 ?? 48 63 4E")]
     public partial void OpenById(uint achievementId);

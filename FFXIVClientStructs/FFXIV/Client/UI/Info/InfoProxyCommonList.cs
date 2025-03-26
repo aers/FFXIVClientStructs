@@ -19,9 +19,9 @@ public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0xA8)] public ushort UnkA8; //10 * DataSize
     [FieldOffset(0xB0)] public CharacterData* CharData;
     [FieldOffset(0xB8)] public CharacterIndex* IndexData;
-    [FieldOffset(0xC0)] public Sorting SortGroup;
-    [FieldOffset(0xC1)] public DisplayGroup FilterGroup;
+    [FieldOffset(0xC0)] public DisplayGroup FilterGroup;
     [FieldOffset(0xC4)] public byte MoveSelector; // 0x9 Not Selected or 0xB Selected
+    [FieldOffset(0xCA)] public Sorting SortGroup;
     //[FieldOffset(0xAC)] public uint UnkAC; // Some kind of flag mask for OnlineStatus check InfoProxyCommonlist_vf14
 
     public ReadOnlySpan<CharacterData> CharDataSpan => new(CharData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
@@ -37,7 +37,7 @@ public unsafe partial struct InfoProxyCommonList {
     public partial CharacterData* GetEntryByContentId(ulong contentId, uint nameCrc32 = 0, byte a4 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 44 41 8D 46 EF"), GenerateStringOverloads]
-    public partial CharacterData* GetEntryByName(byte* characterName, ushort worldId);
+    public partial CharacterData* GetEntryByName(CStringPointer characterName, ushort worldId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 13 45 33 C9")]
     public partial void ApplyFilters();

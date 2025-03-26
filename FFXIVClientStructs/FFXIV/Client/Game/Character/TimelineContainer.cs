@@ -16,8 +16,8 @@ public unsafe partial struct TimelineContainer {
 
     [FieldOffset(0x2C8)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
 
-    [FieldOffset(0x2E4)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state
-    [FieldOffset(0x2E6)] public ushort LipsOverride; // Forces the character lips to play timeline
+    [FieldOffset(0x2E6)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state
+    [FieldOffset(0x2E8)] public ushort LipsOverride; // Forces the character lips to play timeline
 
     [FieldOffset(0x308)] public nint BannerTimelineSheet; // only set when loading data
     [FieldOffset(0x310)] public nint BannerTimelineRowDescriptor; // only set when loading data
@@ -33,16 +33,17 @@ public unsafe partial struct TimelineContainer {
     [FieldOffset(0x330 + 0x0C)] public ushort BannerTimelineUnlockCondition;
     [FieldOffset(0x330 + 0x0E)] public ushort BannerTimelineUnknown_70_1;
     [FieldOffset(0x330 + 0x10)] public ushort BannerTimelineUnknown_70_2;
-    [FieldOffset(0x330 + 0x12)] public ushort BannerTimelineSortKey;
-    [FieldOffset(0x330 + 0x14)] public byte BannerTimelineType;
-    [FieldOffset(0x330 + 0x15)] public byte BannerTimelineAcceptClassJobCategory;
-    [FieldOffset(0x330 + 0x16), CExporterExcelEnd] public byte BannerTimelineCategory;
+    [FieldOffset(0x330 + 0x12)] public ushort BannerTimelineUnknown0;
+    [FieldOffset(0x330 + 0x14)] public ushort BannerTimelineSortKey;
+    [FieldOffset(0x330 + 0x16)] public byte BannerTimelineType;
+    [FieldOffset(0x330 + 0x17)] public byte BannerTimelineAcceptClassJobCategory;
+    [FieldOffset(0x330 + 0x18), CExporterExcelEnd] public byte BannerTimelineCategory;
 
-    [FieldOffset(0x346)] public byte Flags1;
-    [FieldOffset(0x347)] public byte Flags2; // bit 2 makes it load the requested banner animation
+    [FieldOffset(0x348)] public byte Flags1;
+    [FieldOffset(0x349)] public byte Flags2; // bit 2 makes it load the requested banner animation
 
     // 0x40 = WeaponDrawn
-    [FieldOffset(0x34A)] public byte Flags3;
+    [FieldOffset(0x34C)] public byte Flags3;
 
     /// <summary> Computes height difference between the player the action timeline belongs to and target to height adjust emotes. </summary>
     /// <param name="target"> The object id of the target of the emote. </param>

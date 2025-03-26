@@ -111,7 +111,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </summary>
     /// <param name="gearsetId">The gearset ID to link a glamour plate to </param>
     /// <param name="glamourPlateId">The glamour plate ID to link. 0 resets the linked glamour plate.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 20 41 C6 44 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 48 8B CB FF 50 ?? 41 C6 44 24")]
     public partial void LinkGlamourPlate(int gearsetId, byte glamourPlateId);
 
     /// <summary>

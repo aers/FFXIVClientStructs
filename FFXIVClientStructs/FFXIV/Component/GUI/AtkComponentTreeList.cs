@@ -48,7 +48,7 @@ public unsafe partial struct AtkComponentTreeList : ICreatable {
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe struct AtkComponentTreeListItem {
     [FieldOffset(0)] public StdVector<uint> UIntValues; // first entry should be AtkComponentTreeListItemType
-    [FieldOffset(0x18)] public StdVector<Pointer<byte>> StringValues; // first entry should be the displayed text
+    [FieldOffset(0x18)] public StdVector<CStringPointer> StringValues; // first entry should be the displayed text
     [FieldOffset(0x30)] public AtkComponentListItemRenderer* Renderer;
 
     // [FieldOffset(0x42)] public byte Flags; // for groups: 1 = expanded

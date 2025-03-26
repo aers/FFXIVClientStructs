@@ -48,7 +48,7 @@ public unsafe partial struct ILayoutInstance {
     public partial int GetSizeOf();
 
     [VirtualFunction(7)]
-    public partial StringPointer GetPrimaryPath();
+    public partial CStringPointer GetPrimaryPath();
 
     [VirtualFunction(14)]
     public partial Vector3* GetTranslation(Vector3* result);
@@ -91,7 +91,7 @@ public unsafe partial struct ILayoutInstance {
     public partial bool IsColliderLoaded();
 
     [VirtualFunction(31)]
-    public partial StringPointer GetSecondaryPath();
+    public partial CStringPointer GetSecondaryPath();
 
     [VirtualFunction(32)]
     public partial void CreateSecondary();

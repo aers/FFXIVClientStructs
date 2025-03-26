@@ -27,13 +27,13 @@ public unsafe partial struct EventFramework {
     [StaticAddress("4C 39 2D ?? ?? ?? ?? 74 14", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 0D 0F B6 CB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 75 E6 48 83 C4 20")]
     public partial ContentDirector* GetContentDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 98")]
     public partial InstanceContentDirector* GetInstanceContentDirector();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? 00 00 83 B8 38 03 00 00 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 80 B8")]
     public partial PublicContentDirector* GetPublicContentDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40")]
@@ -43,7 +43,7 @@ public unsafe partial struct EventFramework {
     /// When EventHandlerSelector is active, this function is used to select specific event handler to interact with.
     /// </summary>
     /// <param name="index">Index of the option in EventHandlerSelector singleton.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 89 B7 ?? ?? ?? ?? 80 BF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 80 BF")]
     public partial void InteractWithHandlerFromSelector(int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??")]
@@ -55,6 +55,13 @@ public unsafe partial struct EventFramework {
 
     [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B D9 48 89 6C 24")]
     public partial void SetTerritoryTypeId(ushort territoryType);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 27 48 8B 01")]
+    public partial void MaterializeItem(EventId eventID, InventoryType inventoryType, short inventorySlot, int extraParam = 0);
+
+    public void MaterializeItem(InventoryItem* itemSlot, MaterializeEntryId entryId) {
+        MaterializeItem(new EventId { ContentId = EventHandlerContent.Materialize, EntryId = (ushort)entryId }, itemSlot->Container, itemSlot->Slot, 0);
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8")]
     public static partial uint GetCurrentContentId();

@@ -240,7 +240,7 @@ public sealed partial class InteropGenerator {
         foreach (StringOverloadInfo stringOverloadInfo in structInfo.StringOverloads) {
             MethodInfo methodInfo = stringOverloadInfo.MethodInfo;
             // collect valid replacement targets
-            ImmutableArray<string> paramsToOverload = [.. methodInfo.Parameters.Where(p => p.Type == "byte*" && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
+            ImmutableArray<string> paramsToOverload = [.. methodInfo.Parameters.Where(p => p.Type == "global::" + InteropTypeNames.CStringPointer && !stringOverloadInfo.IgnoredParameters.Contains(p.Name)).Select(p => p.Name)];
 
             // when calling the original function we need the param names, but use "Ptr" for the arguments that have been converted
             string paramNames = methodInfo.GetParameterNamesStringForStringOverload(paramsToOverload);
@@ -256,7 +256,7 @@ public sealed partial class InteropGenerator {
                     var strLenName = $"{overloadParamName}UTF8StrLen";
 
                     writer.WriteLine($"int {strLenName} = global::System.Text.Encoding.UTF8.GetByteCount({overloadParamName});");
-                    writer.WriteLine($"Span<byte> {overloadParamName}Bytes = {strLenName} <= 512 ? stackalloc byte[{strLenName} + 1] : new byte[{strLenName} + 1];");
+                    writer.WriteLine($"Span<byte> {overloadParamName}Bytes = {strLenName} <= 511 ? stackalloc byte[512] : new byte[{strLenName} + 1];");
                     writer.WriteLine($"global::System.Text.Encoding.UTF8.GetBytes({overloadParamName}, {overloadParamName}Bytes);");
                     writer.WriteLine($"{overloadParamName}Bytes[{strLenName}] = 0;");
                 }

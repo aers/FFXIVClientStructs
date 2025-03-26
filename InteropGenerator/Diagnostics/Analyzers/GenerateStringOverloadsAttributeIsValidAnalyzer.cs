@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Data.Common;
 using InteropGenerator.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -17,8 +18,9 @@ public sealed class GenerateStringOverloadsAttributeIsValidAnalyzer : Diagnostic
 
         context.RegisterCompilationStartAction(static context => {
             // get the attribute symbol
-            if (context.Compilation.GetTypeByMetadataName(AttributeNames.GenerateStringOverloads) is not { } generateStringOverloadsAttribute ||
-                context.Compilation.GetTypeByMetadataName(AttributeNames.StringIgnore) is not { } stringIgnoreAttribute)
+            if (context.Compilation.GetTypeByMetadataName(InteropTypeNames.GenerateStringOverloads) is not { } generateStringOverloadsAttribute ||
+                context.Compilation.GetTypeByMetadataName(InteropTypeNames.StringIgnore) is not { } stringIgnoreAttribute ||
+                context.Compilation.GetTypeByMetadataName(InteropTypeNames.CStringPointer) is not { } cStringPointerType)
                 return;
 
             context.RegisterSymbolAction(context => {
@@ -32,7 +34,7 @@ public sealed class GenerateStringOverloadsAttributeIsValidAnalyzer : Diagnostic
 
                 foreach (IParameterSymbol parameterSymbol in methodSymbol.Parameters) {
                     bool hasStringIgnore = parameterSymbol.HasAttributeWithType(stringIgnoreAttribute);
-                    if (parameterSymbol.Type is not IPointerTypeSymbol { PointedAtType.SpecialType: SpecialType.System_Byte }) {
+                    if (!SymbolEqualityComparer.Default.Equals(parameterSymbol.Type, cStringPointerType)) {
                         if (hasStringIgnore) {
                             context.ReportDiagnostic(Diagnostic.Create(
                                 StringIgnoreMustTargetValidParameter,

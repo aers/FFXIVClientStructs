@@ -70,7 +70,7 @@ public unsafe partial struct CrossRealmMember {
 
     [FieldOffset(0x33), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
 
-    [FieldOffset(0x58)] public StringPointer NameOverride;
+    [FieldOffset(0x58)] public CStringPointer NameOverride;
     [FieldOffset(0x60)] public byte MemberIndex;
     [FieldOffset(0x61)] public byte GroupIndex;
 

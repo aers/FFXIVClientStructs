@@ -38,11 +38,11 @@ public unsafe partial struct AtkComponentButton : ICreatable {
     /// </summary>
     /// <param name="text">Null-terminated UTF-8 string buffer to set the text to.</param>
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 48 8B FA 48 8B 89 ?? ?? ?? ?? 48 85 C9 0F 84 ?? ?? ?? ?? 48 85 D2 74 ?? 0F B6 81")]
-    public partial void SetText(byte* text);
+    public partial void SetText(CStringPointer text);
 
     public void SetText(string str) {
         int strUtf8Len = Encoding.UTF8.GetByteCount(str);
-        Span<byte> strBytes = strUtf8Len <= 512 ? stackalloc byte[strUtf8Len + 1] : new byte[strUtf8Len + 1];
+        Span<byte> strBytes = strUtf8Len <= 511 ? stackalloc byte[512] : new byte[strUtf8Len + 1];
         Encoding.UTF8.GetBytes(str, strBytes);
         strBytes[strUtf8Len] = 0;
         fixed (byte* strPtr = strBytes) {

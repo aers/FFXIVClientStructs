@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.STD.ContainerInterface;
 using FFXIVClientStructs.STD.Helper;
-using JetBrains.Annotations;
 using static FFXIVClientStructs.STD.Helper.StdImplHelpers;
 
 namespace FFXIVClientStructs.STD;
@@ -373,6 +372,7 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
     public void InsertMove(long index, ref T item) => InsertCopy(index, item);
 
     /// <inheritdoc/>
+    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public void InsertRangeCopy(long index, IEnumerable<T> collection) {
         var prevCount = LongCount;
         if (index < 0 || index > prevCount)
@@ -753,14 +753,12 @@ public unsafe struct StdBasicString<T, TEncoding, TMemorySpace>
         First[newSize] = default;
     }
 
-    [AssertionMethod]
     private readonly long CheckedIndex(long index) {
         if (index < 0 || index >= LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);
         return index;
     }
 
-    [AssertionMethod]
     private readonly long CheckedRangeCount(long index, long count) {
         if (index < 0 || index > LongCount)
             throw new ArgumentOutOfRangeException(nameof(index), index, null);

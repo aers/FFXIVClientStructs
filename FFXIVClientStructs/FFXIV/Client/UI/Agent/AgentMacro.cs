@@ -47,7 +47,7 @@ public unsafe partial struct AgentMacro {
     /// <br/>
     /// This is the same behaviour as right-clicking on a Macro in the hotbar and selecting "Edit Macro".
     /// </remarks>
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B 01 41 8B F8 8B F2")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 30 48 8B 01 41 8B F8 8B F2 48 8B D9 FF 50 30")]
     public partial void OpenMacro(uint macroSet, uint macroIndex);
 
     [StructLayout(LayoutKind.Explicit, Size = 0xD20)]

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("_HudLayoutScreen")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x950)]
+[StructLayout(LayoutKind.Explicit, Size = 0x970)]
 public unsafe partial struct AddonHudLayoutScreen {
     [FieldOffset(0x2E0)] public AddonHudLayoutWindow* HudLayoutWindow;
 

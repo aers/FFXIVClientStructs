@@ -13,7 +13,7 @@ public unsafe partial struct ExcelModuleInterface {
     public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
 
     [VirtualFunction(2), GenerateStringOverloads]
-    public partial ExcelSheet* GetSheetByName(byte* sheetName);
+    public partial ExcelSheet* GetSheetByName(CStringPointer sheetName);
 
     [VirtualFunction(3)]
     public partial ExcelLanguage* GetLanguage(); // returns a pointer to ExcelModule->GetLanguage() - 1

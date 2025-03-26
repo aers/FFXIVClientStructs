@@ -13,7 +13,7 @@ public class GenerateStringOverloadsAttributeTests {
                             public unsafe partial struct TestStruct
                             {
                                 [GenerateStringOverloads]
-                                public int TestFunction(int argOne, byte* stringArg) { return 0; }
+                                public int TestFunction(int argOne, CStringPointer stringArg) { return 0; }
                             }
                             """;
 
@@ -24,7 +24,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -56,7 +56,7 @@ public class GenerateStringOverloadsAttributeTests {
                             {
                                 [Obsolete("This function is obsolete")]
                                 [GenerateStringOverloads]
-                                public int TestFunction(int argOne, byte* stringArg) { return 0; }
+                                public int TestFunction(int argOne, CStringPointer stringArg) { return 0; }
                             }
                             """;
 
@@ -68,7 +68,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -100,7 +100,7 @@ public class GenerateStringOverloadsAttributeTests {
                             public unsafe partial struct TestStruct
                             {
                                 [GenerateStringOverloads]
-                                public int TestFunction(byte* stringArg, int intArg = 7) { return 0; }
+                                public int TestFunction(CStringPointer stringArg, int intArg = 7) { return 0; }
                             }
                             """;
 
@@ -111,7 +111,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(string stringArg, int intArg = 7)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -142,7 +142,7 @@ public class GenerateStringOverloadsAttributeTests {
                             public unsafe partial struct TestStruct
                             {
                                 [GenerateStringOverloads]
-                                public int TestFunction(int argOne, byte* stringArg, byte* stringArgTwo) { return 0; }
+                                public int TestFunction(int argOne, CStringPointer stringArg, CStringPointer stringArgTwo) { return 0; }
                             }
                             """;
 
@@ -153,11 +153,11 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg, string stringArgTwo)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       int stringArgTwoUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArgTwo);
-                                      Span<byte> stringArgTwoBytes = stringArgTwoUTF8StrLen <= 512 ? stackalloc byte[stringArgTwoUTF8StrLen + 1] : new byte[stringArgTwoUTF8StrLen + 1];
+                                      Span<byte> stringArgTwoBytes = stringArgTwoUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgTwoUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArgTwo, stringArgTwoBytes);
                                       stringArgTwoBytes[stringArgTwoUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -194,7 +194,7 @@ public class GenerateStringOverloadsAttributeTests {
                             public unsafe partial struct TestStruct
                             {
                                 [GenerateStringOverloads]
-                                public int TestFunction(int argOne, byte* stringArg, [StringIgnore] byte* notStringArg) { return 0; }
+                                public int TestFunction(int argOne, CStringPointer stringArg, [StringIgnore] CStringPointer notStringArg) { return 0; }
                             }
                             """;
 
@@ -202,10 +202,10 @@ public class GenerateStringOverloadsAttributeTests {
                               // <auto-generated/>
                               unsafe partial struct TestStruct
                               {
-                                  public int TestFunction(int argOne, string stringArg, byte* notStringArg)
+                                  public int TestFunction(int argOne, string stringArg, global::InteropGenerator.Runtime.CStringPointer notStringArg)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)
@@ -213,7 +213,7 @@ public class GenerateStringOverloadsAttributeTests {
                                           return TestFunction(argOne, stringArgPtr, notStringArg);
                                       }
                                   }
-                                  public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg, byte* notStringArg)
+                                  public int TestFunction(int argOne, ReadOnlySpan<byte> stringArg, global::InteropGenerator.Runtime.CStringPointer notStringArg)
                                   {
                                       fixed (byte* stringArgPtr = stringArg)
                                       {
@@ -236,7 +236,7 @@ public class GenerateStringOverloadsAttributeTests {
                             {
                                 [GenerateStringOverloads]
                                 [MemberFunction("AA BB CC DD ?? ?? ?? ?? AA BB ?? DD")]
-                                public partial int TestFunction(int argOne, byte * stringArg);
+                                public partial int TestFunction(int argOne, CStringPointer stringArg);
                             }
                             """;
 
@@ -250,13 +250,13 @@ public class GenerateStringOverloadsAttributeTests {
                                   }
                                   public static partial class Delegates
                                   {
-                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, byte* stringArg);
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, global::InteropGenerator.Runtime.CStringPointer stringArg);
                                   }
                                   public unsafe static class MemberFunctionPointers
                                   {
-                                      public static delegate* unmanaged <TestStruct*, int, byte*, int> TestFunction => (delegate* unmanaged <TestStruct*, int, byte*, int>) TestStruct.Addresses.TestFunction.Value;
+                                      public static delegate* unmanaged <TestStruct*, int, global::InteropGenerator.Runtime.CStringPointer, int> TestFunction => (delegate* unmanaged <TestStruct*, int, global::InteropGenerator.Runtime.CStringPointer, int>) TestStruct.Addresses.TestFunction.Value;
                                   }
-                                  public partial int TestFunction(int argOne, byte* stringArg)
+                                  public partial int TestFunction(int argOne, global::InteropGenerator.Runtime.CStringPointer stringArg)
                                   {
                                       if (MemberFunctionPointers.TestFunction is null)
                                       {
@@ -267,7 +267,7 @@ public class GenerateStringOverloadsAttributeTests {
                                   public int TestFunction(int argOne, string stringArg)
                                   {
                                       int stringArgUTF8StrLen = global::System.Text.Encoding.UTF8.GetByteCount(stringArg);
-                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 512 ? stackalloc byte[stringArgUTF8StrLen + 1] : new byte[stringArgUTF8StrLen + 1];
+                                      Span<byte> stringArgBytes = stringArgUTF8StrLen <= 511 ? stackalloc byte[512] : new byte[stringArgUTF8StrLen + 1];
                                       global::System.Text.Encoding.UTF8.GetBytes(stringArg, stringArgBytes);
                                       stringArgBytes[stringArgUTF8StrLen] = 0;
                                       fixed (byte* stringArgPtr = stringArgBytes)

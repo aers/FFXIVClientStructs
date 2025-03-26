@@ -28,15 +28,15 @@ public unsafe partial struct AddonConfig {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xCBD8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD080)]
 public unsafe partial struct AddonConfigData {
     [FieldOffset(0x00)] public Utf8String DefaultString; // Literally says "Default"
     // [FieldOffset(0x68)] public StdList<[SomeStruct Size 48]> SomeList; // Contains 574 elements
     // [FieldOffset(0x78)] public StdList<[SomeStruct size 16]> SomeList; // Contains 424 elements
-    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray998<AddonConfigEntry> _configEntries; // 109 (Default HudLayout?) + 889 (the amount of addons in RaptureAtkModule)
-    [FieldOffset(0x8CE0), FixedSizeArray] internal FixedSizeArray4<Utf8String> _hudLayoutNames; // unused?!
-    [FieldOffset(0x8E80), FixedSizeArray] internal FixedSizeArray436<AddonConfigEntry> _hudLayoutConfigEntries; // 4 HudLayouts * 109 entries
-    [FieldOffset(0xCBD0)] public int CurrentHudLayout;
+    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray1027<AddonConfigEntry> _configEntries; // 110 (Default HudLayout?) + 917 (the amount of addons in RaptureAtkModule)
+    [FieldOffset(0x90F8), FixedSizeArray] internal FixedSizeArray4<Utf8String> _hudLayoutNames; // unused?!
+    [FieldOffset(0x9298), FixedSizeArray] internal FixedSizeArray440<AddonConfigEntry> _hudLayoutConfigEntries; // 4 HudLayouts * 110 entries
+    [FieldOffset(0xD078)] public int CurrentHudLayout;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x24)]

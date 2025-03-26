@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xB18)]
 public unsafe partial struct RecipeNote {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 39 86 ?? ?? ?? ??", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? 8B D6 85 FF", 3)]
     public static partial RecipeNote* Instance();
 
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray8<uint> _jobs;  // CraftType -> ClassJob

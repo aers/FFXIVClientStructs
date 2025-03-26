@@ -6,8 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 //   Client::Game::Object::GameObject
 [GenerateInterop]
 [Inherits<GameObject>]
-[StructLayout(LayoutKind.Explicit, Size = 0x240)]
+[StructLayout(LayoutKind.Explicit, Size = 0x230)]
 public unsafe partial struct MJIObject {
-    [FieldOffset(0x1B8)] public Utf8String SgbPath;
-    [FieldOffset(0x23C)] public uint EObjNameId;
+    [FieldOffset(0x1A8)] public Utf8String SgbPath;
+    [FieldOffset(0x22C)] public uint EObjNameId;
 }

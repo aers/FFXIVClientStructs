@@ -22,7 +22,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
     [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
-    [FieldOffset(0x180)] public StdVector<Pointer<byte>> CachedAtkValueStrings;
+    [FieldOffset(0x180)] public StdVector<CStringPointer> CachedAtkValueStrings;
 
     /// <summary>
     /// <code>
@@ -162,7 +162,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 1E")]
     public partial AtkTextNode* GetTextNodeById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 16")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 77")]
     public partial AtkImageNode* GetImageNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36")]
@@ -171,7 +171,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 46 48")]
     public partial AtkComponentList* GetComponentListById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 9F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 31")]
     public partial AtkComponentBase* GetComponentByNodeId(uint nodeId);
 
     public AtkComponentNode* GetComponentNodeById(uint nodeId) {
@@ -205,9 +205,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void UnsubscribeAtkArrayData(byte arrayType, byte arrayIndex, bool clean = false);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 B9 ?? ?? ?? ??"), GenerateStringOverloads]
-    public partial bool LoadUldByName(byte* name, byte a3 = 0, uint a4 = 6);
+    public partial bool LoadUldByName(CStringPointer name, byte a3 = 0, uint a4 = 6);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? F3 0F 10 0D ?? ?? ?? ?? 45 33 C9 F3 0F 59 0D")]
     public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 57 47 48 8B CE")]
@@ -295,34 +295,34 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(41)]
     public partial void Finalizer();
 
-    [VirtualFunction(42)]
+    [VirtualFunction(43)]
     public partial void Update(float delta);
 
-    [VirtualFunction(43)]
+    [VirtualFunction(44)]
     public partial void Draw();
 
-    [VirtualFunction(45)]
+    [VirtualFunction(46)]
     public partial bool LoadUldResourceHandle();
 
-    [VirtualFunction(46)]
+    [VirtualFunction(47)]
     public partial bool CheckWindowCollisionAtCoords(short x, short y);
 
-    [VirtualFunction(48)]
+    [VirtualFunction(49)]
     public partial void OnSetup(uint valueCount, AtkValue* values);
 
-    [VirtualFunction(50)]
+    [VirtualFunction(51)]
     public partial bool OnRefresh(uint valueCount, AtkValue* values);
 
-    [VirtualFunction(51)]
+    [VirtualFunction(52)]
     public partial void OnRequestedUpdate(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 
-    [VirtualFunction(53)]
+    [VirtualFunction(54)]
     public partial void FireCloseCallback();
 
-    [VirtualFunction(61)]
+    [VirtualFunction(62)]
     public partial void OnMouseOver();
 
-    [VirtualFunction(62)]
+    [VirtualFunction(63)]
     public partial void OnMouseOut();
 
     /// <summary>
@@ -331,7 +331,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <remarks>
     /// Use <see cref="IsReady" /> to check if OnSetup has been called (preferred).
     /// </remarks>
-    [VirtualFunction(65)]
+    [VirtualFunction(66)]
     public partial bool IsFullyLoaded();
 }
 

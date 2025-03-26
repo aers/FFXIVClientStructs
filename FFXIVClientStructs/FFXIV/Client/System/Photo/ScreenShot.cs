@@ -21,7 +21,7 @@ public unsafe partial struct ScreenShot {
     /// </summary>
     [FieldOffset(0x41)] public bool ScreenShotRequested;
 
-    [FieldOffset(0x48)] private void* CallbackFirstArg;
+    [FieldOffset(0x48)] private void* CallbackParam;
     [FieldOffset(0x50)] private nint EventHandle; // CreateEventA(0LL, 0, 0, 0LL)
 
     [FieldOffset(0x5C)] public ScreenShotResultCode ScreenShotResult;
@@ -35,7 +35,7 @@ public unsafe partial struct ScreenShot {
     /// The function to be called when a screenshot is completed.
     /// Set to null after being called.
     /// </summary>
-    [FieldOffset(0x68)] public delegate* unmanaged<void*, int, byte> ScreenShotCallbackFunc;
+    [FieldOffset(0x68)] public delegate* unmanaged<void*, int, void> ScreenShotCallbackFunc;
 
     /// <summary>
     /// The file format that screenshots should be taken in.
@@ -49,18 +49,16 @@ public unsafe partial struct ScreenShot {
     [FieldOffset(0x78)] private FileAccessPath ScreenShotLocation;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 15 C6 05")]
-    public partial bool ScheduleScreenShot(delegate* unmanaged<void*, int, byte> callback, void* initialArg);
+    public partial bool ScheduleScreenShot(delegate* unmanaged<void*, int, void> callback, void* callbackParam);
 
-    public bool ScheduleScreenShot() => ScheduleScreenShot(null, null);
-
-    public enum TargetFileFormat : int {
+    public enum TargetFileFormat {
         Bmp = 0,
         Jpg = 1,
         Png = 3,
         Dds = 4
     }
 
-    public enum ScreenShotResultCode : int {
+    public enum ScreenShotResultCode {
         Success = 0,
         NoDiskSpace = 1,
         // 2+ are errors

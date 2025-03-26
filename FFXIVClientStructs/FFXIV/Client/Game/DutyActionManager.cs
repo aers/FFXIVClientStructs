@@ -20,7 +20,7 @@ public unsafe partial struct DutyActionManager {
     [FieldOffset(0x98), FixedSizeArray] internal FixedSizeArray2<byte> _maxCharges;
     [FieldOffset(0x9A), FixedSizeArray] internal FixedSizeArray2<byte> _curCharges;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 41 8B D5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 ?? 8B D3 48 8B C8 E8 ?? ?? ?? ?? 3C 01")]
     public static partial DutyActionManager* GetInstanceIfReady();
 
     /// <summary>
@@ -28,6 +28,6 @@ public unsafe partial struct DutyActionManager {
     /// </summary>
     /// <param name="dutyActionSlot">The Duty Action slot number (0 or 1) to look up.</param>
     /// <returns>Returns an Action ID.</returns>
-    [MemberFunction("E9 ?? ?? ?? ?? B1 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 EB 41")]
     public static partial uint GetDutyActionId(ushort dutyActionSlot);
 }

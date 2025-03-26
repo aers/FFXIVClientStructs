@@ -17,7 +17,7 @@ public partial struct AtkCursor {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D B0 49 8B D7")]
     public partial void SetVisible(bool visible);
 
-    [MemberFunction("E9 ?? ?? ?? ?? 41 83 F9 63")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CE C6 83")]
     public partial void SetCursorType(CursorType type, byte a3 = 0);
 
     public enum CursorType : byte {

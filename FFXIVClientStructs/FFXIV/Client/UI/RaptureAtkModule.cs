@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //   Common::Configuration::ConfigBase::ChangeEventInterface
 [GenerateInterop]
 [Inherits<AtkModule>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x29720)]
+[StructLayout(LayoutKind.Explicit, Size = 0x29C08)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 8F ?? ?? ?? ?? 48 89 07", 3)]
 public unsafe partial struct RaptureAtkModule {
     public static RaptureAtkModule* Instance() {
@@ -33,43 +33,43 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x8748)] public Utf8String BoldOff; // <bold(0)>
 
     [FieldOffset(0x87F7)] public AgentUpdateFlags AgentUpdateFlag; // reset happens in RaptureAtkModule_OnUpdate
-    [FieldOffset(0x87F8)] internal fixed byte AddonAllocators[0x28 * 889];
-    [FieldOffset(0x112E0)] public StdVector<Utf8String> AddonNames;
-    [FieldOffset(0x112F8)] public AddonConfig* AddonConfigPtr;
+    [FieldOffset(0x87F8)] internal fixed byte AddonAllocators[0x28 * 917];
+    [FieldOffset(0x11740)] public StdVector<Utf8String> AddonNames;
+    [FieldOffset(0x11758)] public AddonConfig* AddonConfigPtr;
 
-    [FieldOffset(0x113B0)] public UIModule* UIModulePtr;
-    [FieldOffset(0x113B8)] public RaptureLogModule* RaptureLogModulePtr;
-    [FieldOffset(0x113C0)] public AgentModule AgentModule;
-    [FieldOffset(0x12210)] public RaptureHotbarModule* RaptureHotbarModulePtr;
-    [FieldOffset(0x12218)] public RaptureAtkUnitManager RaptureAtkUnitManager;
-    [FieldOffset(0x1BF30)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
+    [FieldOffset(0x11810)] public UIModule* UIModulePtr;
+    [FieldOffset(0x11818)] public RaptureLogModule* RaptureLogModulePtr;
+    [FieldOffset(0x11820)] public AgentModule AgentModule;
+    [FieldOffset(0x12718)] public RaptureHotbarModule* RaptureHotbarModulePtr;
+    [FieldOffset(0x12720)] public RaptureAtkUnitManager RaptureAtkUnitManager;
+    [FieldOffset(0x1C438)] public RaptureAtkColorDataManager RaptureAtkColorDataManager;
 
-    [FieldOffset(0x1C1B0)] public int NameplateInfoCount;
-    [FieldOffset(0x1C1B8), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
+    [FieldOffset(0x1C6B8)] public int NameplateInfoCount;
+    [FieldOffset(0x1C6C0), FixedSizeArray] internal FixedSizeArray50<NamePlateInfo> _namePlateInfoEntries;
 
-    [FieldOffset(0x23630), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
-    [FieldOffset(0x240E0)] public ItemCache* KeyItemCache; // ptr to 120 entries
-    [FieldOffset(0x240E8)] public ItemCache* EquippedItemCache; // ptr to 14 entries
-    [FieldOffset(0x240F0), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
-    [FieldOffset(0x295F0)] public uint InventoryItemCacheSlotCount;
-    [FieldOffset(0x295F4)] public uint GilCap;
+    [FieldOffset(0x23B38), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
+    [FieldOffset(0x245E8)] public ItemCache* KeyItemCache; // ptr to 120 entries
+    [FieldOffset(0x245F0)] public ItemCache* EquippedItemCache; // ptr to 14 entries
+    [FieldOffset(0x245F8), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
+    [FieldOffset(0x29AF8)] public uint InventoryItemCacheSlotCount;
+    [FieldOffset(0x29AFC)] public uint GilCap;
 
-    [FieldOffset(0x29638)] public uint LocalPlayerClassJobId;
-    [FieldOffset(0x2963C)] public uint LocalPlayerLevel;
+    [FieldOffset(0x29B40)] public uint LocalPlayerClassJobId;
+    [FieldOffset(0x29B44)] public uint LocalPlayerLevel;
 
-    [FieldOffset(0x29645)] public bool QuickGatheringEnabled;
+    [FieldOffset(0x29B4D)] public bool QuickGatheringEnabled;
 
-    [FieldOffset(0x296D0)] internal ExcelSheet* AddonParamSheet;
-    [FieldOffset(0x296D8)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
+    [FieldOffset(0x29BB8)] internal ExcelSheet* AddonParamSheet;
+    [FieldOffset(0x29BC0)] public AtkTexture CharaViewDefaultBackgroundTexture; // "ui/common/CharacterBg.tex" (or _hr1 variant)
 
-    [FieldOffset(0x296F4)] public uint LoginSummonCompanionId;
-    [FieldOffset(0x296F8)] public float LoginSummonCompanionCountdown;
+    [FieldOffset(0x29BDC)] public uint LoginSummonCompanionId;
+    [FieldOffset(0x29BE0)] public float LoginSummonCompanionCountdown;
     /// <remarks> Only for Region 5 </remarks>
-    [FieldOffset(0x296FC)] public float HourTimer;
+    [FieldOffset(0x29BE4)] public float HourTimer;
     /// <remarks> Only for Region 5 </remarks>
-    [FieldOffset(0x29700)] public int HoursPlayed;
+    [FieldOffset(0x29BE8)] public int HoursPlayed;
 
-    [FieldOffset(0x29718)] internal nint ShellCommands; // only 1 function to open links?
+    [FieldOffset(0x29C00)] internal nint ShellCommands; // only 1 function to open links?
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 89 5F 58")]
     public partial bool ChangeUiMode(uint uiMode);
@@ -89,11 +89,11 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 50")]
     public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong unk, ushort parentAddonId, int unk2);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9")]
-    public partial ushort OpenAddonByAgent(byte* addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9"), GenerateStringOverloads]
+    public partial ushort OpenAddonByAgent(CStringPointer addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
 
     [MemberFunction("48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73"), GenerateStringOverloads]
-    public partial void ShowTextGimmickHint(byte* text, TextGimmickHintStyle style, int duration);
+    public partial void ShowTextGimmickHint(CStringPointer text, TextGimmickHintStyle style, int duration);
 
     [MemberFunction("40 56 41 56 41 57 48 81 EC A0 00 00 00")]
     public partial byte IsDawnSupported(uint contentFinderCondition); // return & 1 = dawnstory, & 2 = dawn
@@ -111,7 +111,7 @@ public unsafe partial struct RaptureAtkModule {
     public partial void Update(float delta);
 
     [VirtualFunction(63), GenerateStringOverloads]
-    public partial bool OpenMapWithMapLink(byte* mapLink);
+    public partial bool OpenMapWithMapLink(CStringPointer mapLink);
 
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.AtkUnitManager.Flags.HasFlag(AtkUnitManagerFlags.UiHidden);
@@ -130,9 +130,10 @@ public unsafe partial struct RaptureAtkModule {
         [FieldOffset(0x170)] public Utf8String DisplayTitle;
         [FieldOffset(0x1D8)] public Utf8String LevelText;
         [FieldOffset(0x248)] public int Flags;
-        [FieldOffset(0x24C)] public bool IsDirty;
+        [FieldOffset(0x24C)] public bool IsPrefix;
+        [FieldOffset(0x24D)] public bool IsDirty;
 
-        public bool IsPrefixTitle => ((Flags >> (8 * 3)) & 0xFF) == 1;
+        public bool IsPrefixTitle => IsPrefix;
     }
 
     // Client::UI::RaptureAtkModule::ItemCache

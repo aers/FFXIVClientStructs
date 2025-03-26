@@ -6,7 +6,7 @@ using static InteropGenerator.Diagnostics.DiagnosticDescriptors;
 namespace InteropGenerator.Diagnostics.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class VirtualFunctionAttributeIsValidAnalyzer() : MethodAttributeIsValidAnalyzerBase(AttributeNames.VirtualFunctionAttribute, [VirtualFunctionMethodMustNotBeStatic]) {
+public sealed class VirtualFunctionAttributeIsValidAnalyzer() : MethodAttributeIsValidAnalyzerBase(InteropTypeNames.VirtualFunctionAttribute, [VirtualFunctionMethodMustNotBeStatic]) {
 
     protected override void ValidateSpecific(SymbolAnalysisContext context, IMethodSymbol methodSymbol, MethodDeclarationSyntax methodSyntax) {
         if (methodSymbol.IsStatic) {

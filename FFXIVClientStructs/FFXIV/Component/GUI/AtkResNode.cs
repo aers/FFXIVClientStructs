@@ -103,7 +103,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 55 48")]
     public partial AtkComponentRadioButton* GetAsAtkComponentRadioButton();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 56 33")]
+    [MemberFunction("E8 ?? ?? ?? ?? BA FB 01 00 00 48 89 83")]
     public partial AtkComponentScrollBar* GetAsAtkComponentScrollBar();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83")]
@@ -193,7 +193,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 0F BF C6")]
     public partial void SetWidth(ushort width);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 55 AF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 17 48 8B CD")]
     public partial void SetHeight(ushort height);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 7F")]

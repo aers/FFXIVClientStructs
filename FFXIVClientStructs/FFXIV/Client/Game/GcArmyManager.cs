@@ -19,7 +19,7 @@ public unsafe partial struct GcArmyManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E 28 8B FB")]
     public partial uint GetMemberCount();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 48 13")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 63 7D 00")]
     public partial GcArmyMember* GetMember(uint index);
 }
 

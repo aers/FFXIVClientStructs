@@ -12,7 +12,7 @@ public unsafe partial struct ActionTimelineManager {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct PreloadActionTmbInfo {
-        [FieldOffset(0x00)] public StringPointer Key;
+        [FieldOffset(0x00)] public CStringPointer Key;
 
         // ActionTimeline Row Index
         // or

@@ -40,7 +40,7 @@ public unsafe partial struct lua_State {
     public partial void lua_settop(int idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 38 23")]
-    public partial StringPointer lua_tolstring(int idx, int* len);
+    public partial CStringPointer lua_tolstring(int idx, int* len);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 D0 48 8D 15")]
     public partial double lua_tonumber(int idx);
@@ -52,10 +52,10 @@ public unsafe partial struct lua_State {
     public partial void lua_pushcclosure(delegate* unmanaged<lua_State*, int> fn, int n);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 56 ?? 85 D2 0F 88"), GenerateStringOverloads]
-    public partial void lua_setfield(int idx, byte* k);
+    public partial void lua_setfield(int idx, CStringPointer k);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 85 ED"), GenerateStringOverloads]
-    public partial void lua_getfield(int idx, byte* k);
+    public partial void lua_getfield(int idx, CStringPointer k);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 40 F6 C6")]
     public partial void lua_remove(int idx);
@@ -64,10 +64,10 @@ public unsafe partial struct lua_State {
     public partial int lua_pcall(int nargs, int nresults, int errfunc);
 
     [MemberFunction("48 83 EC 38 48 89 54 24 ?? 48 8D 15"), GenerateStringOverloads]
-    public partial int luaL_loadbuffer(byte* buff, long size, byte* name);
+    public partial int luaL_loadbuffer(CStringPointer buff, long size, CStringPointer name);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 85 C0 75 ?? 40 84 ED"), GenerateStringOverloads]
-    public partial int luaL_loadfile(byte* filename);
+    public partial int luaL_loadfile(CStringPointer filename);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 74 0D")]
     public partial LuaType lua_type(int idx);
@@ -106,7 +106,7 @@ public unsafe partial struct lua_State {
         lua_pushcclosure(f, 0);
     }
 
-    public StringPointer lua_tostring(int idx) {
+    public CStringPointer lua_tostring(int idx) {
         return lua_tolstring(idx, null);
     }
 

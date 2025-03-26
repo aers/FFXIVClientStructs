@@ -25,7 +25,7 @@ public unsafe partial struct GoldSaucerModule {
     }
 
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 63 DA 49 8B C0"), GenerateStringOverloads]
-    public partial void SetDeckName(int deckIndex, byte* name);
+    public partial void SetDeckName(int deckIndex, CStringPointer name);
 
     [MemberFunction("83 FA 09 77 1D")]
     public partial void SetDeckCard(int deckIndex, int cardIndex, ushort cardId);

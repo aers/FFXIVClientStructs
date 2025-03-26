@@ -12,8 +12,8 @@ public unsafe partial struct SchedulerTimeline {
     // [FieldOffset(0x90)] public TimelineGroup* TimelineGroup;
     [FieldOffset(0x98)] public SchedulerResource* SchedulerResource;
 
-    [FieldOffset(0xA8)] public StringPointer ActionTimelineKey;
-    [FieldOffset(0xB0)] public StringPointer FaceLibraryPath;
+    [FieldOffset(0xA8)] public CStringPointer ActionTimelineKey;
+    [FieldOffset(0xB0)] public CStringPointer FaceLibraryPath;
 
     [FieldOffset(0x18C)] public uint OwningGameObjectIndex;
 

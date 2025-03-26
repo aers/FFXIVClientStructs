@@ -40,7 +40,7 @@ public unsafe partial struct UIGlobals {
     /// <c>true</c> if the character name is valid; otherwise, <c>false</c>.
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 C7 4C 8B CB"), GenerateStringOverloads]
-    public static partial bool IsValidPlayerCharacterName(byte* characterName);
+    public static partial bool IsValidPlayerCharacterName(CStringPointer characterName);
 
     [MemberFunction("E8 ?? ?? ?? ?? 39 43 30 75 08")]
     public static partial uint GenerateEquippedItemsChecksum();

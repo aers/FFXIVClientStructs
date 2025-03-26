@@ -32,7 +32,7 @@ public unsafe partial struct DrawDataContainer {
         return ref EquipmentModelIds[(int)slot];
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? B1 01 41 FF C6")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF C3 4D 8D 7F ?? 4D 8D 76")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 45 7F")]

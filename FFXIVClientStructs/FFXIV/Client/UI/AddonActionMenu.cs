@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ActionMenu")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1888)]
+[StructLayout(LayoutKind.Explicit, Size = 0x19B8)]
 public unsafe partial struct AddonActionMenu {
     [FieldOffset(0x238)] public AtkComponentList* ActionList;
     [FieldOffset(0x240)] public AtkComponentList* TraitList;
@@ -42,8 +42,8 @@ public unsafe partial struct AddonActionMenu {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe struct ActionInfo {
-    [FieldOffset(0x00)] public StringPointer ActionText; // ie "Cure\nLv. 2 MP: 400"
-    [FieldOffset(0x08)] public StringPointer TooltipText; // ie "Displays a list of class actions." When hovering over the "Class" button in Compact View
+    [FieldOffset(0x00)] public CStringPointer ActionText; // ie "Cure\nLv. 2 MP: 400"
+    [FieldOffset(0x08)] public CStringPointer TooltipText; // ie "Displays a list of class actions." When hovering over the "Class" button in Compact View
     [FieldOffset(0x14)] public uint ActionId;
     [FieldOffset(0x18)] public uint IconId;
     [FieldOffset(0x24)] public uint ActionCategory; // ie "Ability", Seems to only be populated in the newer view for Actions

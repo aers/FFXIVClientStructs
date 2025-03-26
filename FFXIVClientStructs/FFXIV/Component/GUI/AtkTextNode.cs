@@ -21,7 +21,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xB8)] public ByteColor EdgeColor;
     [FieldOffset(0xBC)] public ByteColor BackgroundColor;
     [FieldOffset(0xC0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
-    [FieldOffset(0x128)] public StringPointer OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
+    [FieldOffset(0x128)] public CStringPointer OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
     [FieldOffset(0x130)] public StdList<Pointer<LinkData>>* LinkData;
     // if text is "asdf" and you selected "sd" this is 2, 3
     [FieldOffset(0x138)] public uint SelectStart;
@@ -51,11 +51,11 @@ public unsafe partial struct AtkTextNode : ICreatable {
     /// </summary>
     /// <param name="str">Null-terminated UTF-8 string buffer to set the text to.</param>
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 32")]
-    public partial void SetText(byte* str);
+    public partial void SetText(CStringPointer str);
 
     public void SetText(string str) {
         int strUtf8Len = Encoding.UTF8.GetByteCount(str);
-        Span<byte> strBytes = strUtf8Len <= 512 ? stackalloc byte[strUtf8Len + 1] : new byte[strUtf8Len + 1];
+        Span<byte> strBytes = strUtf8Len <= 511 ? stackalloc byte[512] : new byte[strUtf8Len + 1];
         Encoding.UTF8.GetBytes(str, strBytes);
         strBytes[strUtf8Len] = 0;
         fixed (byte* strPtr = strBytes) {
@@ -72,7 +72,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     }
 
     [MemberFunction("E8 ?? ?? ?? ?? 4A 8B 9C F6 ?? ?? ?? ??")]
-    public partial StringPointer GetText();
+    public partial CStringPointer GetText();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 5A")]
     public partial void SetNumber(int num, bool showCommaDelimiters = false, bool showPlusSign = false, byte digits = 0, bool addZeroPadding = false);
@@ -83,7 +83,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 6D 08")]
     public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0, int end = -1, bool considerScale = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D7 45 85 FF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0E 48 8B 9D")]
     public partial void SetAlignment(AlignmentType alignmentType);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]

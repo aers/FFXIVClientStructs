@@ -9,5 +9,5 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe partial struct AgentTermFilter {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4B 8B 8C C8"), GenerateStringOverloads]
-    public partial void OpenNewFilterWindow(byte* message = null);
+    public partial void OpenNewFilterWindow(CStringPointer message = default);
 }

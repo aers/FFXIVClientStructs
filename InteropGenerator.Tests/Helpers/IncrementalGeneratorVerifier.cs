@@ -24,7 +24,7 @@ internal static class IncrementalGeneratorVerifier<TIncrementalGenerator>
                     source
                 },
                 AnalyzerConfigFiles = { ("/.globalconfig", config) },
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net90,
                 AdditionalReferences = { MetadataReference.CreateFromFile(typeof(GenerateInteropAttribute).Assembly.Location) }
             }
         };

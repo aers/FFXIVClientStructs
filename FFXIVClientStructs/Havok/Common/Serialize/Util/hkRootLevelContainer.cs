@@ -18,8 +18,8 @@ public unsafe partial struct hkRootLevelContainer {
     [FieldOffset(0x00)] public hkArray<NamedVariant> NamedVariants;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA"), GenerateStringOverloads]
-    public partial void* findObjectByType(byte* typeName, void* prevObject);
+    public partial void* findObjectByType(CStringPointer typeName, void* prevObject);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 33 DB 48 8B EA"), GenerateStringOverloads]
-    public partial void* findObjectByName(byte* objectName, void* prevObject);
+    public partial void* findObjectByName(CStringPointer objectName, void* prevObject);
 }

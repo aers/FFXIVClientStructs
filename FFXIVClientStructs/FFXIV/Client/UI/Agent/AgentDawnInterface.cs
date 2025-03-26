@@ -7,7 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AgentDawnInterface {
     [FieldOffset(0x28)] public byte SelectedContentId;
-    [FieldOffset(0x28), Obsolete("Use SelectedContentId instead", true)] public uint SelectedDawnContentId;
 
     [MemberFunction("85 D2 74 ?? 53 48 83 EC 50")]
     public partial void PlayVoiceLine(uint id);
@@ -97,7 +96,7 @@ public unsafe partial struct AgentDawnInterface {
         [FieldOffset(0x00)] public byte ExVersion;
         [FieldOffset(0x01)] public byte ListOffset;
         [FieldOffset(0x02)] public byte ContentEntries;
-        [FieldOffset(0x08)] public StringPointer Name;
+        [FieldOffset(0x08)] public CStringPointer Name;
     }
 
     [GenerateInterop]

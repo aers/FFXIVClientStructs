@@ -17,7 +17,7 @@ public sealed class FixedSizeArrayAttributeIsValidAnalyzer : DiagnosticAnalyzer 
 
         context.RegisterCompilationStartAction(static context => {
             // get the attribute symbol
-            if (context.Compilation.GetTypeByMetadataName(AttributeNames.FixedSizeArrayAttribute) is not { } fixedSizeArrayAttribute)
+            if (context.Compilation.GetTypeByMetadataName(InteropTypeNames.FixedSizeArrayAttribute) is not { } fixedSizeArrayAttribute)
                 return;
 
             context.RegisterSymbolAction(context => {

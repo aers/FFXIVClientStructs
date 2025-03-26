@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::DeviceDX11
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x8C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE0AC8)]
 public unsafe partial struct Device {
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00", 3, isPointer: true)]
     public static partial Device* Instance();
@@ -30,27 +30,27 @@ public unsafe partial struct Device {
     // /// Use <see cref="RenderCommandBufferGroups" /> to access a collection of the array.
     // /// </summary>
     // Currently work in progress and will be wrong. Waiting to expose until it has been figured out fully.
-    [FieldOffset(0x758)] internal RenderCommandBufferGroup* RenderCommandBuffer;
-    [FieldOffset(0x760)] public uint RenderCommandBufferCount;
+    [FieldOffset(0x908)] internal RenderCommandBufferGroup* RenderCommandBuffer;
+    [FieldOffset(0x910)] public uint RenderCommandBufferCount;
 
-    [FieldOffset(0x820)] public void* hWnd;
-    [FieldOffset(0x830)] public uint NewWidth;
-    [FieldOffset(0x834)] public uint NewHeight;
-    [FieldOffset(0x838)] public int FrameRate;
+    [FieldOffset(0x9D8)] public void* hWnd;
+    [FieldOffset(0x9E8)] public uint NewWidth;
+    [FieldOffset(0x9EC)] public uint NewHeight;
+    [FieldOffset(0x9F0)] public int FrameRate;
 
-    [FieldOffset(0x890)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
-    [FieldOffset(0x898)] public void* DXGIFactory; // IDXGIFactory1
-    [FieldOffset(0x8A0)] public void* DXGIOutput; // IDXGIOutput6
-    [FieldOffset(0x8A8)] public void* D3D11Forwarder; // CID3D11Forwarder (ID3D11Device vtbl present here)
-    [FieldOffset(0x8B0)] public void* D3D11DeviceContext; // ID3D11DeviceContext5
+    [FieldOffset(0xE0A90)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
+    [FieldOffset(0xE0A98)] public void* DXGIFactory; // IDXGIFactory1
+    [FieldOffset(0xE0AA0)] public void* DXGIOutput; // IDXGIOutput6
+    [FieldOffset(0xE0AA8)] public void* D3D11Forwarder; // CID3D11Forwarder (ID3D11Device vtbl present here)
+    [FieldOffset(0xE0AB0)] public void* D3D11DeviceContext; // ID3D11DeviceContext5
 
-    [FieldOffset(0x8C0)] public ImmediateContext* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
+    [FieldOffset(0xE0AC0)] public ImmediateContext* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 45 48")]
     public partial ConstantBuffer* CreateConstantBuffer(int byteSize, uint flags, uint unk);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 48 8D 7F 20")]
-    public partial Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, uint flags, uint unk);
+    public partial Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, TextureFlags flags, uint unk);
 
     // /// <summary>
     // /// A collection of the render command buffer array.

@@ -12,5 +12,6 @@ internal static class GlobalUsings {
                                     global using global::System.Threading.Tasks;
 
                                     global using InteropGenerator.Runtime.Attributes;
+                                    global using InteropGenerator.Runtime;
                                     """;
 }
