@@ -19,9 +19,9 @@ public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0xA8)] public ushort UnkA8; //10 * DataSize
     [FieldOffset(0xB0)] public CharacterData* CharData;
     [FieldOffset(0xB8)] public CharacterIndex* IndexData;
-    [FieldOffset(0xC0)] public Sorting SortGroup;
-    [FieldOffset(0xC1)] public DisplayGroup FilterGroup;
+    [FieldOffset(0xC0)] public DisplayGroup FilterGroup;
     [FieldOffset(0xC4)] public byte MoveSelector; // 0x9 Not Selected or 0xB Selected
+    [FieldOffset(0xCA)] public Sorting SortGroup;
     //[FieldOffset(0xAC)] public uint UnkAC; // Some kind of flag mask for OnlineStatus check InfoProxyCommonlist_vf14
 
     public ReadOnlySpan<CharacterData> CharDataSpan => new(CharData, (int)InfoProxyPageInterface.InfoProxyInterface.EntryCount); // It cant be higher than 200 at this time anyways so this is fine
