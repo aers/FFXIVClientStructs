@@ -3842,7 +3842,7 @@ classes:
       - ea: 0x14240D398
         base: Common::Component::Excel::ExcelSheetInterface
     vfuncs:
-      2: IsColumnValid
+      2: GetColumnType
     funcs:
       0x141F48100: ctor
   Component::Excel::ExcelPage:
@@ -8930,8 +8930,8 @@ classes:
       24: GetDrawObject_2
       25: UpdateRadius
       26: Highlight
-      30: TryGetEventHandler
-      31: GetEventHandlersImpl
+      #30: TryGetEventHandler
+      #31: GetEventHandlersImpl
       34: SetReadyToDraw
       35: Update
       46: GetCenterPosition

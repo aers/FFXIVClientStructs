@@ -8,5 +8,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 [Inherits<GameObject>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 public unsafe partial struct Aetheryte {
-    [FieldOffset(0x1A0)] public AetheryteEventHandler* AetheryteEventHandler;
+    [FieldOffset(0x190)] public AetheryteEventHandler* AetheryteEventHandler;
 }

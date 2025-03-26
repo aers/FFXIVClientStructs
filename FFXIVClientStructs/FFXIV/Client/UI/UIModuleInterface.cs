@@ -146,8 +146,6 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(183)] public partial void ShowGetAction(ActionType actionType, uint actionId);
     [VirtualFunction(184)] public partial void ShowLocationTitle(uint territoryId, bool zoomAnim, bool restartAnim, int* language /*-1 = client lang*/);
     // [VirtualFunction(185)] public partial ??? HideLocationTitle(???);
-    [Obsolete("Renamed to ShowGrandCompanyRankUp", true)]
-    [VirtualFunction(188)] public partial void ShowGrandCompany1(uint gc, uint gcRank, bool playSound = true);
     [VirtualFunction(188)] public partial void ShowGrandCompanyRankUp(uint gc, uint gcRank, bool playSound = true);
     [VirtualFunction(191)] public partial void ShowStreak(int streak, int streakType);
     [VirtualFunction(192)] public partial void ShowAddonKillStreakForManeuvers(int streak, int streakType);
