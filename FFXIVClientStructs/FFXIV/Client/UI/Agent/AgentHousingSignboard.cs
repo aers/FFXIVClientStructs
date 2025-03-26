@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.HousingSignboard)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct AgentHousingSignboard {
     [MemberFunction("E9 ?? ?? ?? ?? 48 83 7B ?? ?? 74 16")]
     public partial void ReadPacket(HousingSignboardPacket* packet);
