@@ -33,10 +33,10 @@ public unsafe partial struct Device {
     [FieldOffset(0x908)] internal RenderCommandBufferGroup* RenderCommandBuffer;
     [FieldOffset(0x910)] public uint RenderCommandBufferCount;
 
-    [FieldOffset(0x820)] public void* hWnd;
-    [FieldOffset(0x830)] public uint NewWidth;
-    [FieldOffset(0x834)] public uint NewHeight;
-    [FieldOffset(0x838)] public int FrameRate;
+    [FieldOffset(0x9D8)] public void* hWnd;
+    [FieldOffset(0x9E8)] public uint NewWidth;
+    [FieldOffset(0x9EC)] public uint NewHeight;
+    [FieldOffset(0x9F0)] public int FrameRate;
 
     [FieldOffset(0x890)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
     [FieldOffset(0x898)] public void* DXGIFactory; // IDXGIFactory1

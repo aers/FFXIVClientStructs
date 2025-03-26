@@ -14,7 +14,7 @@ exec(open(path.join(path.dirname(path.realpath(__file__)), "ffxiv_exdgetters.py"
 print("Loading ffxiv_structimporter.py")
 exec(open(path.join(path.dirname(path.realpath(__file__)), "ffxiv_structimporter.py")).read())
 
-ida_base = ida_kerwin.ask_buttons(
+ida_base = ida_kernwin.ask_buttons(
     "ffxiv_dx11.exe",
     "__ImageBase",
     "",
