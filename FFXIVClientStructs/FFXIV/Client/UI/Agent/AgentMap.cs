@@ -53,27 +53,27 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x5968)] public short CurrentOffsetX;
     [FieldOffset(0x596A)] public short CurrentOffsetY;
 
-    [FieldOffset(0x5A00)] public uint CurrentTerritoryId;
-    [FieldOffset(0x5A04)] public uint CurrentMapId;
-    [FieldOffset(0x5A0C)] public uint CurrentMapMarkerRange;
-    [FieldOffset(0x5A10)] public uint CurrentMapDiscoveryFlag;
-    [FieldOffset(0x5A14)] public uint SelectedTerritoryId;
-    [FieldOffset(0x5A18)] public uint SelectedMapId;
-    [FieldOffset(0x5A1C)] public uint SelectedMapMarkerRange;
-    [FieldOffset(0x5A20)] public uint SelectedMapDiscoveryFlag;
-    [FieldOffset(0x5A24)] public uint SelectedMapSub;
+    [FieldOffset(0x5A10)] public uint CurrentTerritoryId;
+    [FieldOffset(0x5A14)] public uint CurrentMapId;
+    [FieldOffset(0x5A1C)] public uint CurrentMapMarkerRange;
+    [FieldOffset(0x5A20)] public uint CurrentMapDiscoveryFlag;
+    [FieldOffset(0x5A24)] public uint SelectedTerritoryId;
+    [FieldOffset(0x5A28)] public uint SelectedMapId;
+    [FieldOffset(0x5A2C)] public uint SelectedMapMarkerRange;
+    [FieldOffset(0x5A30)] public uint SelectedMapDiscoveryFlag;
+    [FieldOffset(0x5A34)] public uint SelectedMapSub;
 
-    [FieldOffset(0x5A3C)] public uint UpdateFlags;
+    [FieldOffset(0x5A4C)] public uint UpdateFlags;
 
-    [FieldOffset(0x5ADB)] public byte MapMarkerCount;
-    [FieldOffset(0x5ADC)] public byte TempMapMarkerCount;
-    [FieldOffset(0x5ADE)] public bool IsFlagMarkerSet;
-    [FieldOffset(0x5AE0)] public byte MiniMapMarkerCount;
-    [FieldOffset(0x5AE8)] public bool IsPlayerMoving;
-    [FieldOffset(0x5AF0)] public bool IsControlKeyPressed;
+    [FieldOffset(0x5AEB)] public byte MapMarkerCount;
+    [FieldOffset(0x5AEC)] public byte TempMapMarkerCount;
+    [FieldOffset(0x5AEE)] public bool IsFlagMarkerSet;
+    [FieldOffset(0x5AF0)] public byte MiniMapMarkerCount;
+    [FieldOffset(0x5AF8)] public bool IsPlayerMoving;
+    [FieldOffset(0x5B00)] public bool IsControlKeyPressed;
 
-    [FieldOffset(0x5F00)] public QuestLinkContainer MapQuestLinkContainer;
-    [FieldOffset(0x6A58)] public QuestLinkContainer MiniMapQuestLinkContainer;
+    [FieldOffset(0x5F10)] public QuestLinkContainer MapQuestLinkContainer;
+    [FieldOffset(0x6A68)] public QuestLinkContainer MiniMapQuestLinkContainer;
 
     [MemberFunction("40 56 48 83 EC 40 80 B9 ?? ?? ?? ?? ?? 48 8B F1 0F 29 7C 24")]
     public partial void SetFlagMapMarker(uint territoryId, uint mapId, float x, float y, uint iconId = 0xEC91);
