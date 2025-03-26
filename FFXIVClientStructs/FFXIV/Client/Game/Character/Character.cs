@@ -122,7 +122,7 @@ public unsafe partial struct Character {
     public partial Character* GetParentCharacter();
 
     /// <summary>Check if this character is in a jumping/falling animation.</summary>
-    [MemberFunction("40 53 48 83 EC 20 48 8D 99 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 84 C0 75 12")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 46 48 8B 4B 08")]
     public partial bool IsJumping();
 
     /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height.  </summary>
