@@ -51,7 +51,7 @@ public struct SageGauge {
 
 #region MagicDPS
 
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public struct BlackMageGauge {
     [FieldOffset(0x08)] public short EnochianTimer;
     [FieldOffset(0x0A)] public sbyte ElementStance;
