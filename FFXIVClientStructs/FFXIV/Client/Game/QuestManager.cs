@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::QuestManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x10D9)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1042)]
 public unsafe partial struct QuestManager {
     [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
     public static partial QuestManager* Instance();
@@ -24,7 +24,7 @@ public unsafe partial struct QuestManager {
     [FieldOffset(0x5D8), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
     [FieldOffset(0x698)] public byte DailyQuestSeed;
 
-    [FieldOffset(0x69A), FixedSizeArray] internal FixedSizeArray40<byte> _unkBitmask1;
+    [FieldOffset(0x69C), FixedSizeArray] internal FixedSizeArray40<byte> _unkBitmask1;
 
     [FieldOffset(0x6C8), FixedSizeArray] internal FixedSizeArray10<TrackingWork> _trackedQuests;
     [FieldOffset(0x768)] private byte UnkJournalByte;
@@ -46,21 +46,43 @@ public unsafe partial struct QuestManager {
     [FieldOffset(0xC74)] private uint UnkC74;
     [FieldOffset(0xC78)] private uint UnkC78;
 
-    [FieldOffset(0xCA8), FixedSizeArray] internal FixedSizeArray18<BeastReputationWork> _beastReputation;
-    [FieldOffset(0xDC8), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
+    [FieldOffset(0xCA8), FixedSizeArray] internal FixedSizeArray19<BeastReputationWork> _beastReputation;
+    [FieldOffset(0xDD8), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
 
-    [FieldOffset(0xF48)] public byte NumLeveAllowances;
-    [FieldOffset(0xF49)] private ushort UnkF49;
-    [FieldOffset(0xF4C)] private uint UnkF4C;
-    [FieldOffset(0xF50), FixedSizeArray] internal FixedSizeArray226<byte> _completedLeveQuestsBitmask;
+    [FieldOffset(0xF58)] public byte NumLeveAllowances;
+    [FieldOffset(0xF59)] private ushort UnkF49;
+    [FieldOffset(0xF5B)] private uint UnkF4C;
+    [FieldOffset(0xF60), FixedSizeArray] internal FixedSizeArray226<byte> _completedLeveQuestsBitmask;
 
-    /// <remarks>
-    /// This behaves weirdly in that it does not reset but add on top when logging onto different characters,
-    /// but does correspond to the number of accepted quests + prior accepted quests of other characters.
-    /// </remarks>>
-    [FieldOffset(0x1038)] public byte NumAcceptedQuests;
+    public byte NumAcceptedQuests {
+        get {
+            byte count = 0;
+            foreach (ref var entry in NormalQuests)
+                if (entry.QuestId != 0)
+                    count++;
+            return count;
+        }
+    }
 
-    [FieldOffset(0x10D8)] public byte NumAcceptedLeveQuests; // most likely not part of QuestManager anymore
+    public byte NumAcceptedDailyQuests {
+        get {
+            byte count = 0;
+            foreach (ref var entry in DailyQuests)
+                if (entry.QuestId != 0)
+                    count++;
+            return count;
+        }
+    }
+
+    public byte NumAcceptedLeveQuests {
+        get {
+            byte count = 0;
+            foreach (ref var entry in LeveQuests)
+                if (entry.LeveId != 0)
+                    count++;
+            return count;
+        }
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 43 88 84 3E ?? ?? ?? ??")]
     public static partial bool IsQuestComplete(ushort questId);
