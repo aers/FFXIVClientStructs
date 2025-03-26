@@ -51,14 +51,13 @@ public struct SageGauge {
 
 #region MagicDPS
 
-[StructLayout(LayoutKind.Explicit, Size = 0x30)]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct BlackMageGauge {
     [FieldOffset(0x08)] public short EnochianTimer;
-    [FieldOffset(0x0A)] public short ElementTimeRemaining;
-    [FieldOffset(0x0C)] public sbyte ElementStance;
-    [FieldOffset(0x0D)] public byte UmbralHearts;
-    [FieldOffset(0x0E)] public byte PolyglotStacks;
-    [FieldOffset(0x0F)] public EnochianFlags EnochianFlags;
+    [FieldOffset(0x0A)] public sbyte ElementStance;
+    [FieldOffset(0x0B)] public byte UmbralHearts;
+    [FieldOffset(0x0C)] public byte PolyglotStacks;
+    [FieldOffset(0x0D)] public EnochianFlags EnochianFlags;
 
     public int UmbralStacks => ElementStance >= 0 ? 0 : ElementStance * -1;
     public int AstralStacks => ElementStance <= 0 ? 0 : ElementStance;
