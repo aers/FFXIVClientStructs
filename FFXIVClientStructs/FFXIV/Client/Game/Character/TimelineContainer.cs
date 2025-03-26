@@ -16,8 +16,8 @@ public unsafe partial struct TimelineContainer {
 
     [FieldOffset(0x2C8)] public float OverallSpeed; // The overall speed which is applied to all slots as well as things like particles attached to the owner
 
-    [FieldOffset(0x2E4)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state
-    [FieldOffset(0x2E6)] public ushort LipsOverride; // Forces the character lips to play timeline
+    [FieldOffset(0x2E6)] public ushort BaseOverride; // Forces base animation when character is in a Normal or AnimLock state
+    [FieldOffset(0x2E8)] public ushort LipsOverride; // Forces the character lips to play timeline
 
     [FieldOffset(0x308)] public nint BannerTimelineSheet; // only set when loading data
     [FieldOffset(0x310)] public nint BannerTimelineRowDescriptor; // only set when loading data
