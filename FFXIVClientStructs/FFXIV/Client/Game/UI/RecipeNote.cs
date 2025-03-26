@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::RecipeNote
 // ctor "E8 ?? ?? ?? ?? BD ?? ?? ?? ?? 4C 89 A6"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xB18)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB40)]
 public unsafe partial struct RecipeNote {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 8B D6 85 FF", 3)]
     public static partial RecipeNote* Instance();
@@ -14,11 +14,12 @@ public unsafe partial struct RecipeNote {
 
     [FieldOffset(0xB8)] public RecipeData* RecipeList;
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x440)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x450)]
     public struct RecipeData {
         // E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? 33 FF 48 85 C9 74 0C E8 ?? ?? ?? ?? 48 89 BE ?? ?? ?? ?? 48 8B 86 ?? ?? ?? ?? 48 89 5C 24   (7.1)
-        [FieldOffset(0x000)] public RecipeEntry* Recipes;
-        [FieldOffset(0x428)] public ushort SelectedIndex;
+        [FieldOffset(0x00)] public RecipeEntry* Recipes;
+        [FieldOffset(0x08)] public int RecipeCount;
+        [FieldOffset(0x438)] public ushort SelectedIndex;
         public RecipeEntry* SelectedRecipe => Recipes + SelectedIndex;
     }
 
