@@ -10,7 +10,7 @@ public unsafe partial struct Map {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24", 3)]
     public static partial Map* Instance();
 
-    [FieldOffset(0xA0), FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questMarkers;
+    [FieldOffset(0xA8), FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questMarkers;
 
     [FieldOffset(0x1180), FixedSizeArray] internal FixedSizeArray16<MarkerInfo> _levequestMarkers;
 
