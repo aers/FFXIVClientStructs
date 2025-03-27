@@ -2125,10 +2125,9 @@ classes:
       0x140991610: SetUnsheathed2
   Client::Game::UI::AutoAttackState:
     funcs:
-      0x140991770: Get
-      0x1409917C0: OnActorControl
+      0x140991970: Get
       0x140991830: SetImpl
-      0x140991970: Set
+      0x140991770: Set
   Client::Game::UI::PlayerState:
     instances:
       - ea: 0x142921518
