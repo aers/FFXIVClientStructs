@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Fate;
 
 // Client::Game::Fate::FateManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 public unsafe partial struct FateManager {
     [FieldOffset(0x00)] public StdVector<GameObjectId> Unk_Vector;
     [FieldOffset(0x18)] public Utf8String Unk_String;
