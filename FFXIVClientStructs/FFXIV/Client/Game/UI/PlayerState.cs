@@ -214,6 +214,8 @@ public unsafe partial struct PlayerState {
     /// |   3 | Eureka      | Is Elemental Level Synced    |
     /// |   4 | Eureka      | Current Elemental Level      |
     /// |   5 | Bozja       | Current Resistance Rank      |
+    /// |   6 | TerritoryIntendedUse 61 | Unknown          |
+    /// |   7 | TerritoryIntendedUse 61 | Unknown          |
     /// |-----|-------------|------------------------------|
     /// </code>
     /// </summary>
