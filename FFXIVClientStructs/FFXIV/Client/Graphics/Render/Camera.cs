@@ -13,13 +13,13 @@ public unsafe partial struct Camera {
     [FieldOffset(0x090)] public Vector3 Origin;
     [FieldOffset(0x1A0)] public Matrix4x4 ProjectionMatrix;
 
-    [FieldOffset(0x1E8)] public float FoV;
-    [FieldOffset(0x1EC)] public float AspectRatio;
-    [FieldOffset(0x1F0)] public float NearPlane;
-    [FieldOffset(0x1F4)] public float FarPlane;
-    [FieldOffset(0x1F8)] public float OrthoHeight;
-    [FieldOffset(0x1FC)] public bool IsOrtho;
+    [FieldOffset(0x1EC)] public float FoV;
+    [FieldOffset(0x1F0)] public float AspectRatio;
+    [FieldOffset(0x1F4)] public float NearPlane;
+    [FieldOffset(0x1F8)] public float FarPlane;
+    [FieldOffset(0x1FC)] public float OrthoHeight;
+    [FieldOffset(0x200)] public bool IsOrtho;
 
-    [FieldOffset(0x1FF)] public bool StandardZ; // if false, use reversed Z mapping for projection matrix (far plane to 0, near plane to 1 after perspective divide)
-    [FieldOffset(0x200)] public bool FiniteFarPlane; // if false, use infinite far plane for projection matrix
+    [FieldOffset(0x203)] public bool StandardZ; // if false, use reversed Z mapping for projection matrix (far plane to 0, near plane to 1 after perspective divide)
+    [FieldOffset(0x204)] public bool FiniteFarPlane; // if false, use infinite far plane for projection matrix
 }
