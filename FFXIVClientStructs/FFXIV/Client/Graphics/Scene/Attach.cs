@@ -26,8 +26,8 @@ public unsafe partial struct Attach {
     [FieldOffset(0x54)] public int UnkValue;
     
     [FieldOffset(0x58)] public Skeleton* TargetSkeleton; // ExecuteType 3/4
-    [FieldOffset(0x60)] public Skeleton* OwnerSkeleton; // ExecuteType 4
-    [FieldOffset(0x60)] public CharacterBase* OwnerCharacter; // ExecuteType 3
+    [FieldOffset(0x60), CExporterUnion("Owner")] public Skeleton* OwnerSkeleton; // ExecuteType 4
+    [FieldOffset(0x60), CExporterUnion("Owner")] public CharacterBase* OwnerCharacter; // ExecuteType 3
     [FieldOffset(0x68)] public int AttachmentCount;
     [FieldOffset(0x70)] public Attachment* SkeletonBoneAttachments;
     
