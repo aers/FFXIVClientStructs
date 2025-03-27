@@ -75,6 +75,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </summary>
     [FieldOffset(0x1A5)] public byte Flags1A5;
 
+    [FieldOffset(0x1A8)] public int Param; //Appears to be a generic field that some addons use for storage
+
     [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
     [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
 
@@ -273,7 +275,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(22)]
     public partial bool ShouldIgnoreInputs();
 
-    [VirtualFunction(23)]
+    [VirtualFunction(24)]
     public partial AtkResNode* GetRootNode();
 
     [VirtualFunction(26)]

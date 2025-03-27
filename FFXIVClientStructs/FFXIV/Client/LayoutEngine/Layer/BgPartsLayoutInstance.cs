@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
@@ -11,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 [Inherits<ILayoutInstance>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct BgPartsLayoutInstance {
-    [FieldOffset(0x30)] public void* GraphicsObject; // Client::Graphics::Scene::BGObject*
+    [FieldOffset(0x30)] public BgObject* GraphicsObject; // Client::Graphics::Scene::BGObject*
     [FieldOffset(0x38)] public Collider* Collider;
     [FieldOffset(0x40)] public uint CollisionMeshPathCrc;
     [FieldOffset(0x44)] public uint AnalyticShapeDataCrc;
