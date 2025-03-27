@@ -9,5 +9,5 @@ public unsafe partial struct CastBarStringArray {
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<StringPointer> _data;
 
-    [FieldOffset(0 * 8)] public StringPointer CastName;
+    [FieldOffset(0 * 8)] public CStringPointer CastName;
 }
