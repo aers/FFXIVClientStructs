@@ -17600,6 +17600,24 @@ classes:
     vtbls:
       - ea: 0x142164218
         base: Client::Graphics::Singleton
+  Client::Graphics::Kernel::VertexShader:
+    vtbls:
+      - ea: 0x14200E810
+  Client::Graphics::Kernel::PixelShader:
+    vtbls:
+      - ea: 0x14200E888
+  Client::Graphics::Kernel::GeometryShader:
+    vtbls:
+      - ea: 0x14200E8B0
+  Client::Graphics::Kernel::ComputeShader:
+    vtbls:
+      - ea: 0x14200E978
+  Client::Graphics::Kernel::HullShader:
+    vtbls:
+      - ea: 0x14200E8D8
+  Client::Graphics::Kernel::DomainShader:
+    vtbls:
+      - ea: 0x14200E900
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
     vtbls:
       - ea: 0x142164E70
