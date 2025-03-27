@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
+[CExportIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
 public unsafe partial struct NamePlateNumberArray {
@@ -17,6 +18,7 @@ public unsafe partial struct NamePlateNumberArray {
     // [FieldOffset(0x14)] public int UnkInt;
     [FieldOffset(0x18)][FixedSizeArray] internal FixedSizeArray50<NamePlateObjectIntArrayData> _objectData;
 
+    [CExportIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 20 * 4)]
     public struct NamePlateObjectIntArrayData {
         [FieldOffset(0x0)] public UIObjectKind NamePlateKind;

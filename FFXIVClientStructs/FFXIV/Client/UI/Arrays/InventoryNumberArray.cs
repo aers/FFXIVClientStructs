@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
+[CExportIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 1351 * 4)]
 public unsafe partial struct InventoryNumberArray {
@@ -11,6 +12,7 @@ public unsafe partial struct InventoryNumberArray {
 
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray140<InventoryItemNumberArray> _items;
 
+    [CExportIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
     public partial struct InventoryItemNumberArray {
         [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray6<int> _data;
@@ -23,6 +25,7 @@ public unsafe partial struct InventoryNumberArray {
 
         public int StackCount => (_stackCount >> 16) & 0xFFFF;
 
+        [CExportIgnore]
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
         public partial struct ItemFlag {
             [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<int> _data;
@@ -38,6 +41,7 @@ public unsafe partial struct InventoryNumberArray {
             }
         }
 
+        [CExportIgnore]
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
         public partial struct ItemDye {
             [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<int> _data;

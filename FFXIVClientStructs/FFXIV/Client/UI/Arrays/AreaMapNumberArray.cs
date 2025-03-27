@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
+[CExportIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
 public unsafe partial struct AreaMapNumberArray {

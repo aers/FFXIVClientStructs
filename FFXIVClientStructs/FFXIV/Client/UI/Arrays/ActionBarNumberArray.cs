@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
+[CExportIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 5564 * 4)]
 public unsafe partial struct ActionBarNumberArray {
@@ -16,6 +17,7 @@ public unsafe partial struct ActionBarNumberArray {
 
     [FieldOffset(15 * 4), FixedSizeArray] internal FixedSizeArray20<ActionBarBarNumberArray> _bars;
 
+    [CExportIgnore]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 272 * 4)]
     public partial struct ActionBarBarNumberArray {

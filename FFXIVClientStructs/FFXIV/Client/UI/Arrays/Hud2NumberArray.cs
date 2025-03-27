@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
+[CExportIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 192 * 4)]
 public unsafe partial struct Hud2NumberArray {
@@ -54,6 +55,7 @@ public unsafe partial struct Hud2NumberArray {
     [FieldOffset(92 * 4), FixedSizeArray] internal FixedSizeArray5<uint> _focusTargetStatusIconIds;
     [FieldOffset(97 * 4), FixedSizeArray] internal FixedSizeArray5<bool> _focusTargetStatusDispellable;
 
+    [CExportIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
     public partial struct Hud2ColorNumberArray {
         [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<int> _data;

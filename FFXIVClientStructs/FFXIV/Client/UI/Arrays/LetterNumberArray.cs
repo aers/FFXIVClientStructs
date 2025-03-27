@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
+[CExportIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 146 * 4)]
 public unsafe partial struct LetterNumberArray {
@@ -27,6 +28,7 @@ public unsafe partial struct LetterNumberArray {
 
     [FieldOffset(141), FixedSizeArray] internal FixedSizeArray5<int> _attatchedItemIds;
 
+    [CExportIgnore]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
     public unsafe partial struct LetterLetterNumberArray {
