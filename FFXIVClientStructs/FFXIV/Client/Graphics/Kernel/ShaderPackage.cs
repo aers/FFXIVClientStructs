@@ -67,12 +67,12 @@ public unsafe struct ShaderPackage {
     [FieldOffset(0x120)] public void* MaterialElementDefaults;
 
     // again these are all CRC32s
-    [FieldOffset(0x120)] public uint* SystemKeys;
-    [FieldOffset(0x128)] public uint* SceneKeys;
-    [FieldOffset(0x130)] public uint* MaterialKeys;
-    [FieldOffset(0x138)] public uint* SystemValues;
-    [FieldOffset(0x140)] public uint* SceneValues;
-    [FieldOffset(0x148)] public uint* MaterialValues;
+    [FieldOffset(0x128)] public uint* SystemKeys;
+    [FieldOffset(0x130)] public uint* SceneKeys;
+    [FieldOffset(0x138)] public uint* MaterialKeys;
+    [FieldOffset(0x140)] public uint* SystemValues;
+    [FieldOffset(0x148)] public uint* SceneValues;
+    [FieldOffset(0x150)] public uint* MaterialValues;
     [FieldOffset(0x158)] public uint SubviewValue1;
     [FieldOffset(0x15C)] public uint SubviewValue2;
 
@@ -83,8 +83,13 @@ public unsafe struct ShaderPackage {
         => new(Constants, ConstantCount);
     public Span<ConstantSamplerUnknown> SamplersSpan
         => new(Samplers, SamplerCount);
+    [Obsolete($"Use {nameof(TexturesSpan)} instead")]
     public Span<ConstantSamplerUnknown> UnknownsSpan
         => new(Unknowns, UnkCount);
+    public Span<ConstantSamplerUnknown> TexturesSpan
+        => new(Textures, TextureCount);
+    public Span<ConstantSamplerUnknown> Unknowns2Span
+        => new(Unknowns2, Unk2Count);
 
     public Span<byte> MaterialElementDefaultsSpan
         => new(MaterialElementDefaults, MaterialConstantBufferSize);
