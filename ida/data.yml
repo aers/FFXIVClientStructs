@@ -17600,15 +17600,33 @@ classes:
     vtbls:
       - ea: 0x142164218
         base: Client::Graphics::Singleton
+  Client::Graphics::Kernel::VertexShader:
+    vtbls:
+      - ea: 0x14200E810
+  Client::Graphics::Kernel::PixelShader:
+    vtbls:
+      - ea: 0x14200E888
+  Client::Graphics::Kernel::GeometryShader:
+    vtbls:
+      - ea: 0x14200E8B0
+  Client::Graphics::Kernel::ComputeShader:
+    vtbls:
+      - ea: 0x14200E978
+  Client::Graphics::Kernel::HullShader:
+    vtbls:
+      - ea: 0x14200E8D8
+  Client::Graphics::Kernel::DomainShader:
+    vtbls:
+      - ea: 0x14200E900
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
-#    vtbls:
-#fail       - ea: 0x14208DDA8
+    vtbls:
+      - ea: 0x142164E70
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>:
-#    vtbls:
-#fail       - ea: 0x14208DDB0
+    vtbls:
+      - ea: 0x142164E78
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>:
-#    vtbls:
-#fail       - ea: 0x14208DDB8
+    vtbls:
+      - ea: 0x142164E98
   Client::Graphics::Kernel::CBalanceSet<Client::Graphics::Kernel::ShaderPackage::SItem>:
     vtbls:
       - ea: 0x1421652C0
