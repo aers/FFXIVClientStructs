@@ -10049,7 +10049,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AC4360: ctor
-#fail       0x140AA33F0: TeleportToAetheryte
+      0x140AC6830: TeleportToAetheryte
   Client::UI::Agent::AgentSocial:
     vtbls:
       - ea: 0x142005BB0
