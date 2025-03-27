@@ -13,7 +13,8 @@ public unsafe partial struct Camera {
     [FieldOffset(0x090)] public Vector3 Origin;
     [FieldOffset(0x1A0)] public Matrix4x4 ProjectionMatrix;
 
-    [FieldOffset(0x1EC)] public float FoV;
+    [FieldOffset(0x1E8)] public float FoV;
+    [FieldOffset(0x1EC)] public float FoV_2; // if a flag is passed to the set method this will be set alongside FoV, haven't seen anything read it
     [FieldOffset(0x1F0)] public float AspectRatio;
     [FieldOffset(0x1F4)] public float NearPlane;
     [FieldOffset(0x1F8)] public float FarPlane;
