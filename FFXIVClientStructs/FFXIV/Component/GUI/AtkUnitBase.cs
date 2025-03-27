@@ -74,7 +74,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x1A5)] public byte Flags1A5;
-
+    [FieldOffset(0x1A8)] public int Param; //Appears to be a generic field that some addons use for storage
     [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
     [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
 
