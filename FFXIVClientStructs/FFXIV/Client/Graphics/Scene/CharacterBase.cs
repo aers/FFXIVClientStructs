@@ -27,6 +27,8 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
 
     [FieldOffset(0xA8)] public Model** Models; // size = SlotCount
+    
+    [FieldOffset(0xD0)] public Attach Attach;
     [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
 
     public bool IsChangingVisor {
