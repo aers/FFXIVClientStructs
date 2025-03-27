@@ -14,11 +14,11 @@ public unsafe partial struct Map {
     [FieldOffset(0x1188), FixedSizeArray] internal FixedSizeArray16<MarkerInfo> _levequestMarkers;
 
     [FieldOffset(0x1A90)] public MarkerInfo ActiveLevequestMarker; // Marker for active levequest mission, it has to be actually started.
-    
+
     [FieldOffset(0x1B28)] public StdList<MarkerInfo> UnacceptedQuestMarkers;
-    
+
     [FieldOffset(0x1B70)] public StdList<MarkerInfo> GuildLeveAssignmentMarkers;
-    
+
     [FieldOffset(0x1BB8)] public StdList<MarkerInfo> GuildOrderGuideMarkers;
     [FieldOffset(0x1BC8), FixedSizeArray] internal FixedSizeArray62<MarkerInfo> _housingMarkers;// 60 Plots + 2 Apartments
     [FieldOffset(0x3EA8)] public StdList<MarkerInfo> TripleTriadMarkers;
