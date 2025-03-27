@@ -10,8 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1118)]
 public unsafe partial struct AddonMiragePrismPrismBox {
-    [FieldOffset(0x1A8)] public byte SelectedClassJobId;
-
     [FieldOffset(0xEC8)] public AtkComponentButton* PrevButton;
     [FieldOffset(0xED0)] public AtkComponentButton* NextButton;
     [FieldOffset(0xED8)] public AtkComponentButton* EditGlamourPlatesButton;
