@@ -40,8 +40,6 @@ public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x138)] public uint ItemId;
     [FieldOffset(0x148)] public Utf8String String1;
     [FieldOffset(0x1B0)] public Utf8String String2;
-    [FieldOffset(0x218)] public byte Flag2; // This needs to be set to 1 for the item detail tooltip to show
-    [FieldOffset(0x219)] public byte Flag3; // If set to zero, avoids an early return in addon->Show()
-    [FieldOffset(0x21A)] public byte Flag4; 
-    [FieldOffset(0x21B)] public byte Flag5; // Set to 1 for some gear and all HQ items
+    [FieldOffset(0x21A)] public byte Flag2; // This needs to be set to 1 for the item detail tooltip to show
+    [FieldOffset(0x21E)] public byte Flag3; // If set to zero, avoids an early return in addon->Show()
 }
