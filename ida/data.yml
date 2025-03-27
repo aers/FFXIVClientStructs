@@ -17601,14 +17601,14 @@ classes:
       - ea: 0x142164218
         base: Client::Graphics::Singleton
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
-#    vtbls:
-#fail       - ea: 0x14208DDA8
+    vtbls:
+      - ea: 0x142164E70
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>:
-#    vtbls:
-#fail       - ea: 0x14208DDB0
+    vtbls:
+      - ea: 0x142164E78
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>:
-#    vtbls:
-#fail       - ea: 0x14208DDB8
+    vtbls:
+      - ea: 0x142164E98
   Client::Graphics::Kernel::CBalanceSet<Client::Graphics::Kernel::ShaderPackage::SItem>:
     vtbls:
       - ea: 0x1421652C0
