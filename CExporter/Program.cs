@@ -7,7 +7,9 @@ using YamlDotNet.Serialization;
 namespace CExporter;
 
 public class Program {
-    public static void Main(string[] _) {
+    public static void Main(string[] args) {
+        var quiet = args.Contains("--quiet");
+        var noWrite = args.Contains("--no-write");
         var timeStart = DateTime.Now;
         var dir = new DirectoryInfo(Environment.CurrentDirectory);
         while (dir.FullName.Contains("ida") && !dir.FullName.EndsWith("ida")) {
@@ -17,8 +19,8 @@ public class Program {
             dir = dir.GetDirectories("ida", SearchOption.AllDirectories).FirstOrDefault() ?? dir.Parent!;
         }
 
-        Exporter.ProcessTypes();
-        Exporter.ProcessStaticFunctions();
+        Exporter.ProcessTypes(quiet);
+        Exporter.ProcessStaticFunctions(quiet);
 
         Exporter.VerifyNoOverlap();
 
@@ -35,7 +37,7 @@ public class Program {
         Exporter.VerifyNoNameOverlap(dataCheck);
         Exporter.ProcessDefinedVTables(data);
 
-        Console.WriteLine($"Processed all types in: {DateTime.Now - timeStart}");
+        if (!quiet) Console.WriteLine($"Processed all types in: {DateTime.Now - timeStart}");
         timeStart = DateTime.Now;
 
         foreach (var warning in ExporterStatics.WarningList) {
@@ -50,10 +52,11 @@ public class Program {
             Environment.Exit(1);
         }
 #else
-        new FileInfo(Path.Combine(dir.FullName, "errors.txt")).WriteFile(string.Join("\n", ExporterStatics.ErrorList));
+        if (!noWrite) new FileInfo(Path.Combine(dir.FullName, "errors.txt")).WriteFile(string.Join("\n", ExporterStatics.ErrorList));
 #endif
-
-        Exporter.Write(dir);
-        Console.WriteLine($"Files written in: {DateTime.Now - timeStart}");
+        if (!noWrite) {
+            Exporter.Write(dir);
+            if (!quiet) Console.WriteLine($"Files written in: {DateTime.Now - timeStart}");
+        }
     }
 }

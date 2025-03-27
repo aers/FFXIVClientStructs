@@ -45,67 +45,78 @@ public class Exporter {
         _ => $"Pass {i}"
     };
 
-    public static void ProcessTypes() {
+    public static void ProcessTypes(bool quiet) {
         var havokTypes = ExporterStatics.GetHavokTypes();
         var xivTypes = ExporterStatics.GetXIVTypes();
 
-        Console.WriteLine("::group::Discovered Info");
-        Console.WriteLine($"Found {havokTypes.Length} havok types");
-        Console.WriteLine($"Found {xivTypes.Length} xiv types");
+        if (!quiet) {
+            Console.WriteLine("::group::Discovered Info");
+            Console.WriteLine($"Found {havokTypes.Length} havok types");
+            Console.WriteLine($"Found {xivTypes.Length} xiv types");
+        }
+
 
         var havokStructs = havokTypes.Where(t => t.IsStruct() && !t.IsGenericType && !t.IsFixedBuffer()).ToArray();
         var xivStructs = xivTypes.Where(t => t.IsStruct() && !t.IsGenericType && !t.IsFixedBuffer()).ToArray();
 
-        Console.WriteLine($"Filtered havok to {havokStructs.Length} structs");
-        Console.WriteLine($"Filtered xiv to {xivStructs.Length} structs");
-        Console.WriteLine("::endgroup::");
+        if (!quiet) {
+            Console.WriteLine($"Filtered havok to {havokStructs.Length} structs");
+            Console.WriteLine($"Filtered xiv to {xivStructs.Length} structs");
+            Console.WriteLine("::endgroup::");
+        }
+
 
         var structs = xivStructs.Concat(havokStructs).ToArray();
         var now = DateTime.UtcNow;
         var count = 1;
-
-        Console.WriteLine("::group::Processed Struct");
-        Console.WriteLine($"{PassString(count)} with {structs.Length} structs and enum types");
-
-        foreach (var sStruct in structs) {
-            ProcessType(sStruct);
+        if (!quiet) {
+            Console.WriteLine("::group::Processed Struct");
+            Console.WriteLine($"{PassString(count)} with {structs.Length} structs and enum types");
         }
 
-        Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
+
+        foreach (var sStruct in structs) {
+            ProcessType(sStruct, quiet);
+        }
+
+        if (!quiet) Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
 
         now = DateTime.UtcNow;
 
         while (_processType.Count > 0) {
-            Console.WriteLine($"{PassString(count)} with {_processType.Count} structs and enum types");
+            if (!quiet) Console.WriteLine($"{PassString(count)} with {_processType.Count} structs and enum types");
             var tmp = _processType
                 .Where(t => t is { IsUnmanagedFunctionPointer: false, IsFunctionPointer: false })
                 .ToArray();
             _processType.Clear();
             foreach (var @struct in tmp) {
-                ProcessType(@struct);
+                ProcessType(@struct, quiet);
             }
 
-            Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
+            if (!quiet) Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
 
             now = DateTime.UtcNow;
         }
 
-        Console.WriteLine("::endgroup::");
-        Console.WriteLine();
-        Console.WriteLine($"Processed {_enums.Count} enums and {_structs.Count} structs");
-        Console.WriteLine();
+        if (!quiet) {
+            Console.WriteLine("::endgroup::");
+            Console.WriteLine();
+            Console.WriteLine($"Processed {_enums.Count} enums and {_structs.Count} structs");
+            Console.WriteLine();
+        }
+
     }
 
-    public static void ProcessStaticFunctions() {
+    public static void ProcessStaticFunctions(bool quiet) {
         Type[] types = [.. ExporterStatics.GetHavokTypes(), .. ExporterStatics.GetXIVTypes()];
         types = types.Where(t => t.IsStruct()).Where(type => type.GetMethods(ExporterStatics.StaticBindingFlags).Length != 0).ToArray();
-        Console.WriteLine("::group::Processed Struct Static Members");
+        if (!quiet) Console.WriteLine("::group::Processed Struct Static Members");
         var typeAndMembers = types.Select(t => (t, t.GetMethods(ExporterStatics.StaticBindingFlags))).ToArray();
         foreach (var (type, methods) in typeAndMembers) {
-            Console.WriteLine($"Processing {type} with {methods.Length} methods");
+            if (!quiet) Console.WriteLine($"Processing {type} with {methods.Length} methods");
             var currentStructIndex = _structs.FindIndex(s => s.StructTypeName == type.FullSanitizeName());
             if (currentStructIndex == -1) {
-                Console.WriteLine($"Error in struct {type} please fix");
+                if (!quiet) Console.WriteLine($"Error in struct {type} please fix");
                 continue;
             }
             var currentStruct = _structs[currentStructIndex];
@@ -144,33 +155,38 @@ public class Exporter {
             _structs[currentStructIndex] = currentStruct;
         }
 
-        Console.WriteLine("::endgroup::");
-        Console.WriteLine("::group::Processed Struct 2nd pass");
+        if (!quiet) {
+            Console.WriteLine("::endgroup::");
+            Console.WriteLine("::group::Processed Struct 2nd pass");
+        }
         var now = DateTime.UtcNow;
         var count = 1;
         var structsCount = _structs.Count;
         var enumsCount = _enums.Count;
 
         while (_processType.Count > 0) {
-            Console.WriteLine($"{PassString(count)} with {_processType.Count} structs and enum types");
+            if (!quiet) Console.WriteLine($"{PassString(count)} with {_processType.Count} structs and enum types");
             var tmp = _processType
                 .Where(t => t is { IsUnmanagedFunctionPointer: false, IsFunctionPointer: false })
                 .ToArray();
             _processType.Clear();
             foreach (var @struct in tmp) {
-                ProcessType(@struct);
+                ProcessType(@struct, quiet);
             }
 
-            Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
+            if (!quiet) Console.WriteLine($"{PassString(count++)} took {DateTime.UtcNow - now:g}");
 
             now = DateTime.UtcNow;
         }
-        Console.WriteLine("::endgroup::");
-        Console.WriteLine();
-        Console.WriteLine($"Processed {_enums.Count - enumsCount} enums and {_structs.Count - structsCount} structs");
-        Console.WriteLine($"Processed {typeAndMembers.Length} structs with {typeAndMembers.Sum(t => t.Item2.Length)} members");
-        Console.WriteLine();
-        Console.WriteLine($"Processed total {_enums.Count} enums and {_structs.Count} structs");
+        if (!quiet) {
+            Console.WriteLine("::endgroup::");
+            Console.WriteLine();
+            Console.WriteLine($"Processed {_enums.Count - enumsCount} enums and {_structs.Count - structsCount} structs");
+            Console.WriteLine($"Processed {typeAndMembers.Length} structs with {typeAndMembers.Sum(t => t.Item2.Length)} members");
+            Console.WriteLine();
+            Console.WriteLine($"Processed total {_enums.Count} enums and {_structs.Count} structs");
+        }
+
     }
 
     public static void VerifyNoOverlap() {
@@ -264,8 +280,8 @@ public class Exporter {
         new FileInfo(Path.Join(dir.FullName, "ffxiv_structs.yml")).WriteFile(yaml);
     }
 
-    private static void ProcessType(Type type) {
-        var ret = PreProcessType(type);
+    private static void ProcessType(Type type, bool quiet) {
+        var ret = PreProcessType(type, quiet);
         switch (ret) {
             case null:
                 return;
@@ -362,7 +378,7 @@ public class Exporter {
         };
     }
 
-    private static object? PreProcessType(Type type) {
+    private static object? PreProcessType(Type type, bool quiet) {
         if (type.IsFixedBuffer() || type.IsBaseType()) return null;
         while (type.IsPointer) type = type.GetElementType()!;
         while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
@@ -376,14 +392,14 @@ public class Exporter {
                 EnumValues = type.GetFields().Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.FieldType == type).ToDictionary(f => f.Name, f => f.GetRawConstantValue()!.ToString()!)
             };
 
-            Console.WriteLine($"Processed {processedEnum.EnumNamespace}::{processedEnum.EnumName} with {processedEnum.EnumValues.Count} fields");
+            if (!quiet) Console.WriteLine($"Processed {processedEnum.EnumNamespace}::{processedEnum.EnumName} with {processedEnum.EnumValues.Count} fields");
             _enums.Add(processedEnum);
         } else if (type.IsStruct()) {
             while (type.IsPointer) type = type.GetElementType()!;
             while (type.IsGenericPointer()) type = type.GenericTypeArguments[0];
             if (type.IsFunctionPointer || type.IsUnmanagedFunctionPointer) {
                 foreach (var functionPointerParameterType in type.GetFunctionPointerParameterTypes()) {
-                    ProcessType(functionPointerParameterType);
+                    ProcessType(functionPointerParameterType, quiet);
                     type = type.GetFunctionPointerReturnType();
                 }
             }
@@ -505,7 +521,7 @@ public class Exporter {
                             FieldName = subStruct.StructName
                         }
                     ];
-                    Console.WriteLine($"Processed {unionStruct.StructTypeOverride} with {unionStruct.Fields.Length} fields and methods");
+                    if (!quiet) Console.WriteLine($"Processed {unionStruct.StructTypeOverride} with {unionStruct.Fields.Length} fields and methods");
                     unions[unionStructIndex] = unionStruct;
                 }
                 _structs.AddRange(unions);
@@ -536,7 +552,7 @@ public class Exporter {
                 processedStruct.Fields = [.. processedStruct.Fields.OrderBy(t => t.FieldOffset)];
             }
 
-            Console.WriteLine($"Processed {processedStruct.StructTypeName} with {processedStruct.Fields.Length + (processedStruct.VirtualFunctions?.Length ?? 0) + processedStruct.MemberFunctions.Length} fields and methods");
+            if (!quiet) Console.WriteLine($"Processed {processedStruct.StructTypeName} with {processedStruct.Fields.Length + (processedStruct.VirtualFunctions?.Length ?? 0) + processedStruct.MemberFunctions.Length} fields and methods");
             _structs.Add(processedStruct);
         }
         return null;
