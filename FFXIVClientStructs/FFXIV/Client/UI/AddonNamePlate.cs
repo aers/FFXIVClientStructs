@@ -70,7 +70,7 @@ public unsafe partial struct AddonNamePlate {
         public bool IsLocalPlayer => IsPlayerCharacter && ClickThrough;
     }
 
-    [Obsolete("Renamed to AddonNamePlateNumberArray", true)]
+    [Obsolete("Moved to FFXIVClientStructs.FFXIV.Client.UI.Arrays.NamePlateNumberArray", true)]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
     public partial struct NamePlateIntArrayData {
@@ -122,6 +122,7 @@ public unsafe partial struct AddonNamePlate {
         }
     }
 
+    [Obsolete("Moved to FFXIVClientStructs.FFXIV.Client.UI.Arrays.NamePlateNumberArray", true)]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
     public partial struct AddonNamePlateNumberArray {
