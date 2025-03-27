@@ -6966,7 +6966,7 @@ classes:
       17: SetScaleToHudLayoutScale
       18: ShouldCollideWithWindow
       22: ShouldIgnoreInputs
-      23: GetRootNode
+      24: GetRootNode
       26: GetWindowBounds
       29: GetRootBounds
       36: Focus

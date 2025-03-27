@@ -273,7 +273,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(22)]
     public partial bool ShouldIgnoreInputs();
 
-    [VirtualFunction(23)]
+    [VirtualFunction(24)]
     public partial AtkResNode* GetRootNode();
 
     [VirtualFunction(26)]
