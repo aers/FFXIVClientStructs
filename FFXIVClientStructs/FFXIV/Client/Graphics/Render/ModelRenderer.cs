@@ -88,26 +88,33 @@ public unsafe partial struct ModelRenderer {
     /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_SamplerViewPosition sampler/texture (CRC: 0xBC615663). </summary>
     [FieldOffset(0x48), Obsolete("Use ConstantSamplerIds[(int)WellKnownSampler.SamplerViewPosition]", true)] public uint SamplerViewPositionId;
 
-    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray18<uint> _constantSamplerIds;
+    [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray18<uint> _constantSamplerIds; // Might be a FixedSizeArray22<uint> as of 7.2, unsure
 
-    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray18<ShaderSceneKey> _sceneKeys;
+    [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray18<ShaderSceneKey> _sceneKeys;
 
-    [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray5<ShaderSubViewKey> _subViewKeys;
+    [FieldOffset(0x180), FixedSizeArray] internal FixedSizeArray5<ShaderSubViewKey> _subViewKeys;
 
-    [FieldOffset(0x1C8)] public ShaderCodeResourceHandle* CharacterSelectionModelVS;
-    [FieldOffset(0x1D0)] public ShaderCodeResourceHandle* CharacterSelectionModelPS;
-    [FieldOffset(0x1D8)] public TextureResourceHandle* DitherTexture;
-    [FieldOffset(0x1E0)] public ShaderPackageResourceHandle* IrisShaderPackage;
-    [FieldOffset(0x1E8)] public ShaderPackageResourceHandle* CharacterGlassShaderPackage;
-    [FieldOffset(0x1F0)] public ShaderPackageResourceHandle* CharacterTransparencyShaderPackage;
-    [FieldOffset(0x1F8)] public ShaderPackageResourceHandle* CharacterTattooShaderPackage;
-    [FieldOffset(0x200)] public ShaderPackageResourceHandle* CharacterOcclusionShaderPackage;
-    [FieldOffset(0x208)] public ShaderPackageResourceHandle* HairMaskShaderPackage;
+    [FieldOffset(0x1D0)] public ShaderCodeResourceHandle* CharacterSelectionModelVS;
+    [FieldOffset(0x1D8)] public ShaderCodeResourceHandle* CharacterSelectionModelPS;
+    [FieldOffset(0x1E0)] public TextureResourceHandle* DitherTexture;
+    [FieldOffset(0x1E8)] public ShaderPackageResourceHandle* IrisShaderPackage;
+    [FieldOffset(0x1F0)] public ShaderPackageResourceHandle* CharacterGlassShaderPackage;
+    [FieldOffset(0x1F8)] public ShaderPackageResourceHandle* CharacterTransparencyShaderPackage;
+    [FieldOffset(0x200)] public ShaderPackageResourceHandle* CharacterTattooShaderPackage;
+    [FieldOffset(0x208)] public ShaderPackageResourceHandle* CharacterOcclusionShaderPackage;
+    [FieldOffset(0x210)] public ShaderPackageResourceHandle* HairMaskShaderPackage;
 
-    // At 0x238: pointer to an unknown ConstantBuffer of size 1 vector (0x10 bytes).
-    // At 0x240, ..., 0x2B8: pointers to 16 unknown ConstantBuffers of size 4 vectors (0x40 bytes) each.
+    // At 0x218: pointer to an unknown ConstantBuffer of size 1 vector (0x10 bytes).
+    // At 0x220, ..., 0x298: pointers to 16 unknown ConstantBuffers of size 4 vectors (0x40 bytes) each.
+    // At 0x2A0, ..., 0x328: pointers to 18 unknown ConstantBuffers of size 1 vector (0x10 bytes) each.
 
-    [FieldOffset(0x2C0)] public JobSystem JobSystem; // Client::Graphics::JobSystem<Client::Graphics::Render::ModelRenderer>
+    [FieldOffset(0x330)] public ShaderCodeResourceHandle* SkiningConnectionVertexCS;
+
+    // At 0x338: pointer to an unknown ConstantBuffer of size 1 vector (0x10 bytes).
+    // At 0x340, 0x348, 0x350: pointer to objects of the same unknown class that seems to wrap D3D11 objects.
+    // At 0x358: pointer to an unknown ConstantBuffer of size 1 vector (0x10 bytes).
+
+    [FieldOffset(0x360)] public JobSystem JobSystem; // Client::Graphics::JobSystem<Client::Graphics::Render::ModelRenderer>
 
     // This function, among other things, constructs an OnRenderMaterialParams struct with its params and calls CharacterBase.OnRenderMaterial with it (through some indirections - see Model.RenderMaterialCallback).
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 28")]
