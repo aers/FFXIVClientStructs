@@ -72,46 +72,49 @@ public unsafe partial struct Collider {
     public partial void GetWorldBB(AABB* bounds);
 
     [VirtualFunction(11)]
-    public partial void SetRotation(Vector3* eulerAngles);
+    public partial void GetBoundingBox(AABB* bounds);
 
     [VirtualFunction(12)]
-    public partial void GetRotation(Vector3* eulerAngles);
+    public partial void SetRotation(Vector3* eulerAngles);
 
     [VirtualFunction(13)]
-    public partial void SetScale(Vector3* scale);
+    public partial void GetRotation(Vector3* eulerAngles);
 
     [VirtualFunction(14)]
-    public partial void GetScale(Vector3* scale);
+    public partial void SetScale(Vector3* scale);
 
     [VirtualFunction(15)]
-    public partial void GetWorldTransform(Matrix4x4* transform);
+    public partial void GetScale(Vector3* scale);
 
     [VirtualFunction(16)]
-    public partial void GetInvWorldTransform(Matrix4x4* transform);
+    public partial void GetWorldTransform(Matrix4x4* transform);
 
     [VirtualFunction(17)]
+    public partial void GetInvWorldTransform(Matrix4x4* transform);
+
+    [VirtualFunction(18)]
     public partial ColliderType GetColliderType();
 
     /// <summary>
     /// Called every frame if WantUnload returns false. If returns true, it is readded to the quadtree - otherwise LastTranslationDeltaY is reset to 0.
     /// </summary>
     /// <returns></returns>
-    [VirtualFunction(18)]
+    [VirtualFunction(19)]
     public partial bool Update();
 
-    [VirtualFunction(19)]
+    [VirtualFunction(20)]
     public partial bool LoadInProgress();
 
-    [VirtualFunction(20)]
+    [VirtualFunction(21)]
     public partial bool Raycast(RaycastHit* result, ulong layerMask, RaycastParams* args);
 
-    [VirtualFunction(21)]
+    [VirtualFunction(22)]
     public partial bool IsInsideCheckLayer(ulong layerMask, Vector3* pos);
 
-    [VirtualFunction(22)]
+    [VirtualFunction(23)]
     public partial bool IsInside(Vector3* pos);
 
-    //vf23: Visit
+    //vf24: Visit
 }
 
 /// <summary>

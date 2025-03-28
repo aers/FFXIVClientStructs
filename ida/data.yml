@@ -3500,18 +3500,19 @@ classes:
       8: SetTranslation
       9: GetTranslation
       10: GetWorldBB
-      11: SetRotation
-      12: GetRotation
-      13: SetScale
-      14: GetScale
-      15: GetWorldTransform
-      16: GetInvWorldTransform
-      17: GetColliderType
-      18: Update
-      19: LoadInProgress
-      20: Raycast
-      21: IsInsideCheckLayer
-      22: IsInside
+      11: GetBoundingBox
+      12: SetRotation
+      13: GetRotation
+      14: SetScale
+      15: GetScale
+      16: GetWorldTransform
+      17: GetInvWorldTransform
+      18: GetColliderType
+      19: Update
+      20: LoadInProgress
+      21: Raycast
+      22: IsInsideCheckLayer
+      23: IsInside
     funcs:
       0x141F2F850: ctor
       0x141F2AB80: Finalizer
