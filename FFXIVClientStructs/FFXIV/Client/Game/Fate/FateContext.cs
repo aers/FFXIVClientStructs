@@ -32,11 +32,11 @@ public partial struct FateContext {
     [FieldOffset(0x7D8)] public uint MapIconId;
     [FieldOffset(0x7DC)] public uint InactiveMapIcon;
     [FieldOffset(0x7E0)] public uint EventItem;
-    [FieldOffset(0x7E8)] public byte FateRuleEx;
+    [FieldOffset(0x7E8)] public ushort Music;
     [FieldOffset(0x7EA)] public ushort GivenStatus;
     [FieldOffset(0x7EC)] internal ushort Unknown4;
     [FieldOffset(0x7EE)] public byte Rule;
-    [FieldOffset(0x7F0)] public ushort Music;
+    [FieldOffset(0x7F0)] public ushort FateRuleEx;
     [FieldOffset(0x7F3)] public byte Level;
     [FieldOffset(0x7F4)] public byte MaxLevel;
     [FieldOffset(0x7F5)] internal byte Unknown7;
