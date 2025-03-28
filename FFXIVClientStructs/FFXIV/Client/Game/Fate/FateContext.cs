@@ -25,7 +25,7 @@ public partial struct FateContext {
     /// </summary>
     [FieldOffset(0x3C1)] public bool IsBonus;
     [FieldOffset(0x3C1), Obsolete("Use IsBonus instead", true)] public bool IsExpBonus; // Since Shadowbringers the bonus fates have granted extra gemstones when this was true
-    
+
     [FieldOffset(0x3C6), FixedSizeArray, Obsolete("Use Objectives instead", true)] internal FixedSizeArray8<ushort> _objectiveIcons;
     [FieldOffset(0x3D0), FixedSizeArray] internal FixedSizeArray32<FateObjective> _objectives;
     [FieldOffset(0x7D4)] public uint IconId;

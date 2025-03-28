@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 [GenerateInterop]
 [Inherits<ResourceHandle>]

@@ -23,7 +23,7 @@ public unsafe partial struct Skeleton {
 
     // Client::Graphics::Animation::PartialSkeleton array, size = PartialSkeletonCount
     [FieldOffset(0x68)] public PartialSkeleton* PartialSkeletons;
-    
+
     // Used by attach execute type 3
     // 1. OwnerCharacter->Skeleton->AttachBonesSpan; find bone by BoneIndex matching Attach.BoneIdx
     // 2. Use the found bone's index to get the BoneIndexMask from OwnerCharacter->Skeleton->BoneMasksSpan
@@ -31,25 +31,23 @@ public unsafe partial struct Skeleton {
     [FieldOffset(0x88)] public Bone* AttachBones;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public struct Bone
-    {
+    public struct Bone {
         [FieldOffset(0x0)] public StdString BoneName;
         [FieldOffset(0x20)] public uint BoneIndex;
-        
+
         // Rest is likely rotation/translation relative to bone?
     }
-    
+
     [FieldOffset(0xA0)] public uint AttachBoneCount;
     [FieldOffset(0x98)] public BoneIndexMask* AttachBoneMasks;
 
     [FieldOffset(0xB8)] public CharacterBase* Owner;
-    
+
     public Span<Bone> AttachBonesSpan => new(AttachBones, (int)AttachBoneCount);
     public Span<BoneIndexMask> BoneMasksSpan => new(AttachBoneMasks, (int)AttachBoneCount);
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x2)]
-    public struct BoneIndexMask
-    {
+    public struct BoneIndexMask {
         [FieldOffset(0x0)] public ushort SkeletonIdxBoneIdx;
         public readonly byte PartialSkeletonIdx => (byte)((SkeletonIdxBoneIdx >> 12) & 0xF);
         public readonly ushort BoneIdx => (ushort)(SkeletonIdxBoneIdx & 0xFFF);

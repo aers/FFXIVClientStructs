@@ -39,7 +39,7 @@ public unsafe partial struct LetterNumberArray {
         [FieldOffset(1)] public byte UnkFlag2;
         [FieldOffset(0)] public byte UnkFlag3;  // This is definitely some kind of, user grabbed items, user opened type flag that sends a web request.
 
-        public enum LetterLetterMessageStatus : byte { 
+        public enum LetterLetterMessageStatus : byte {
             FromFriendRead = 0x01,              // Grey message in mailbox
             FromFriendUnread = 0x02,            // Ping and Green message in mailbox
             FromFriendReadButIgnored = 0x03,    // Green message in mailbox
