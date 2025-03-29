@@ -6969,10 +6969,10 @@ classes:
       22: ShouldIgnoreInputs
       24: GetRootNode
       27: GetWindowBounds
-      29: GetRootBounds
-      36: Focus
-      40: Initialize
-      41: Finalizer
+      30: GetRootBounds
+      37: Focus
+      41: Initialize
+      42: Finalizer
       43: Update
       44: Draw
       46: LoadUldResourceHandle
