@@ -50,10 +50,11 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0x3564)] public uint ExpClassJobId;
     [FieldOffset(0x3568)] public ushort ExpLevel;
     [FieldOffset(0x356A)] public ushort ExpContentLevel; // level in eureka and bozja for example
-    [FieldOffset(0x356C)] public bool ExpIsLevelSynced;
-    [FieldOffset(0x356D)] public bool ExpUnkBool2;
-    [FieldOffset(0x356E)] public bool ExpIsMaxLevel;
-    [FieldOffset(0x356F)] public bool ExpIsInEureka;
+    [FieldOffset(0x356C), Obsolete("Use ExpFlags.HasFlag(AgentHudExpFlag.Synced)", true)] public bool ExpIsLevelSynced;
+    [FieldOffset(0x356D), Obsolete("Use ExpFlags.HasFlag(AgentHudExpFlag.Unk2)", true)] public bool ExpUnkBool2;
+    [FieldOffset(0x356E), Obsolete("Use ExpFlags.HasFlag(AgentHudExpFlag.MaxLevel)", true)] public bool ExpIsMaxLevel;
+    [FieldOffset(0x356F), Obsolete("Use ExpFlags.HasFlag(AgentHudExpFlag.InEureka)", true)] public bool ExpIsInEureka;
+    [FieldOffset(0x356C)] public AgentHudExpFlag ExpFlags;
 
     [FieldOffset(0x3578), FixedSizeArray] internal FixedSizeArray16<HudQueuedBattleTalk> _queuedBattleTalks;
 
@@ -159,4 +160,15 @@ public unsafe partial struct HudStatus {
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CF 4C 8B C5 49 8B D6 48 8B CF")]
     public partial void Update(NumberArrayData* numberArray, StringArrayData* stringArray);
+}
+
+[Flags]
+public enum AgentHudExpFlag : byte {
+    None = 0,
+    Unk1 = 1 << 0,
+    Synced = 1 << 1,
+    Unk2 = 1 << 2,
+    MaxLevel = 1 << 3,
+    InEureka = 1 << 4,
+    Unk5 = 1 << 5, // In TerritoryIntendedUse 61?
 }

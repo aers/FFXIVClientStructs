@@ -150,6 +150,7 @@ jobs:
     needs: [build-pr, build-main, test]
     steps:
     - uses: actions/checkout@v4
+    - uses: ./.github/composites/update-dotnet
     - uses: actions/download-artifact@v4
       with:
         name: cs-pr

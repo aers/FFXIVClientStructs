@@ -9,11 +9,11 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [Inherits<ResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
 public unsafe partial struct ModelResourceHandle {
-    
+
     [FieldOffset(0xC8)] public byte* ModelData; // StringTable, ModelHeader ...
-    
+
     [FieldOffset(0x228)] public MaterialResourceHandle** MaterialResourceHandles;
-    
+
     [FieldOffset(0x248)] public StdMap<CStringPointer, short> Attributes;
     [FieldOffset(0x268)] public StdMap<CStringPointer, short> Shapes;
 

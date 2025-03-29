@@ -50,7 +50,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial void Copy(InventoryItem* other);
 
     [VirtualFunction(2)]
-    public partial void EqualTo(InventoryItem* other);
+    public partial bool EqualTo(InventoryItem* other);
 
     [VirtualFunction(3)]
     public partial bool IsEmpty();
