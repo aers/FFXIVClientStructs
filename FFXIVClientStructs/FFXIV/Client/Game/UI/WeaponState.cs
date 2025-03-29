@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 /// Represents the in-memory layout of the WeaponState structure.
 /// </summary>
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public partial struct WeaponState {
     // Offset 0x00: IsUnsheathed – a bool flag indicating whether the weapon is unsheathed.
     // Updated via SetUnsheathed/SetUnsheathed2.
@@ -25,6 +25,12 @@ public partial struct WeaponState {
     // Checked (e.g. param_1[0x0C] != 0) in various code paths.
     [FieldOffset(0x0C)]
     public bool AutoSheatheState;
+
+    // Offset 0x10: Originally, this offset was used for AutoAttackState.
+    // In older versions, a simple bool (IsAutoAttacking) resided here.
+    // In the current patch, analysis shows auto-attack state is handled globally via DAT_142921510.
+    [FieldOffset(0x10)]
+    public AutoAttackState AutoAttackState;
 
     /// <summary>
     /// Checks whether auto-sheathing is enabled.
