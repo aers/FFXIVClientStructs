@@ -6968,7 +6968,7 @@ classes:
       18: ShouldCollideWithWindow
       22: ShouldIgnoreInputs
       24: GetRootNode
-      26: GetWindowBounds
+      27: GetWindowBounds
       29: GetRootBounds
       36: Focus
       40: Initialize

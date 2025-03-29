@@ -278,7 +278,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(24)]
     public partial AtkResNode* GetRootNode();
 
-    [VirtualFunction(26)]
+    [VirtualFunction(27)]
     public partial void GetWindowBounds(Bounds* outBounds); // tries to get it from WindowCollisionNode first, then from RootNode
 
     [VirtualFunction(29)]
