@@ -11,5 +11,5 @@ public unsafe partial struct PartyMemberListNumberArray {
 
     [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray633<int> _data;
 
-    [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray48<SocialListMemberNumberArray> _partyMembers;
+    [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray48<SocialListMemberNumberArray> _partyMembers;
 }
