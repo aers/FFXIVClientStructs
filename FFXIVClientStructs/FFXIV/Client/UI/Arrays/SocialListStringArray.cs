@@ -11,7 +11,7 @@ public unsafe partial struct SocialListStringArray {
 
     [FieldOffset(0 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray1002<CStringPointer> _data;
 
-    [FieldOffset(0 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray200<SocialListMemberStringArray> _friends;
+    [FieldOffset(0 * 8), FixedSizeArray] internal FixedSizeArray200<SocialListMemberStringArray> _friends;
 
     [FieldOffset(1000 * 8)] public CStringPointer NotFoundText;
 }
