@@ -48,12 +48,12 @@ public unsafe partial struct HudNumberArray {
     [FieldOffset(29 * 4)] public HudJobType JobType;
     [FieldOffset(30 * 4)] public HudJobType JobType2;
     [FieldOffset(31 * 4)] public HudStatusElementLayout StatusElementLayout;
-    [FieldOffset(32 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray20<int> _positiveStatusIndexes;
-    [FieldOffset(52 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray20<int> _negativeStatusIndexes;
-    [FieldOffset(72 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray20<int> _otherStatusIndexes;
-    [FieldOffset(92 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray8<int> _comboStatusIndexes;
-    [FieldOffset(100 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray30<uint> _statusIconIds;
-    [FieldOffset(130 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray30<bool> _statusDispellables;
+    [FieldOffset(32 * 4), FixedSizeArray] internal FixedSizeArray20<int> _positiveStatusIndexes;
+    [FieldOffset(52 * 4), FixedSizeArray] internal FixedSizeArray20<int> _negativeStatusIndexes;
+    [FieldOffset(72 * 4), FixedSizeArray] internal FixedSizeArray20<int> _otherStatusIndexes;
+    [FieldOffset(92 * 4), FixedSizeArray] internal FixedSizeArray8<int> _comboStatusIndexes;
+    [FieldOffset(100 * 4), FixedSizeArray] internal FixedSizeArray30<uint> _statusIconIds;
+    [FieldOffset(130 * 4), FixedSizeArray] internal FixedSizeArray30<bool> _statusDispellables;
     [FieldOffset(160 * 4)] public uint GrandCompanyIconId;
     [FieldOffset(161 * 4)] public uint GrandCompanyRankIconId;
     [FieldOffset(162 * 4)] public uint ChainCount;
