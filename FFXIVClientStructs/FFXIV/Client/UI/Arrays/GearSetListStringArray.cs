@@ -11,6 +11,6 @@ public unsafe partial struct GearSetListStringArray {
     [FieldOffset(0 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray111<CStringPointer> _data;
 
     [FieldOffset(0 * 8)] public CStringPointer CountText;
-    [FieldOffset(1 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray10<CStringPointer> _warningTexts;
-    [FieldOffset(11 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray100<CStringPointer> _gearSetNames;
+    [FieldOffset(1 * 8), FixedSizeArray] internal FixedSizeArray10<CStringPointer> _warningTexts;
+    [FieldOffset(11 * 8), FixedSizeArray] internal FixedSizeArray100<CStringPointer> _gearSetNames;
 }
