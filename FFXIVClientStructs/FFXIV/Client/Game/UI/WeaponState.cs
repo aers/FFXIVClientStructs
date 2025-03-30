@@ -33,6 +33,12 @@ public partial struct WeaponState {
     public AutoAttackState AutoAttackState;
 
     /// <summary>
+    /// Keeping obsolete isAutoAttacking for removal later.
+    /// </summary>
+    [FieldOffset(0x10), Obsolete("Use AutoAttackState.IsAutoAttacking", true)]
+    public bool IsAutoAttacking;
+
+    /// <summary>
     /// Checks whether auto-sheathing is enabled.
     /// Internally, this checks a config option and the current AutoSheatheState.
     /// </summary>
