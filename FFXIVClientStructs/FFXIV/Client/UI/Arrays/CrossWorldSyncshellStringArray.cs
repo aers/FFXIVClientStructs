@@ -10,7 +10,7 @@ public unsafe partial struct CrossWorldSyncshellStringArray {
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<CStringPointer> _data;
 
-    [FieldOffset(0 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray64<CrossWorldSyncshellMemberStringArray> _members;
+    [FieldOffset(0 * 8), FixedSizeArray] internal FixedSizeArray64<CrossWorldSyncshellMemberStringArray> _members;
 
     [FieldOffset(128 * 8)] public CStringPointer MemberCountText;
 
