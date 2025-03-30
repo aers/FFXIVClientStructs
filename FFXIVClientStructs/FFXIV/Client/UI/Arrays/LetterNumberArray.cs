@@ -26,6 +26,7 @@ public unsafe partial struct LetterNumberArray {
 
     [FieldOffset(138 * 4)] public bool ClientAcquiringLetters;
 
+    [FieldOffset(140 * 4)] public int AttatchedGilAmount;
     [FieldOffset(141), FixedSizeArray] internal FixedSizeArray5<int> _attatchedItemIds;
 
     [CExportIgnore]
