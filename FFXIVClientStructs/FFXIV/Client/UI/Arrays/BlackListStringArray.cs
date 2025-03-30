@@ -10,7 +10,7 @@ public unsafe partial struct BlackListStringArray {
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray600<CStringPointer> _data;
 
-    [FieldOffset(0 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray200<CStringPointer> _playerName;
-    [FieldOffset(200 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray200<CStringPointer> _homeworld;
-    [FieldOffset(400 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray200<CStringPointer> _note;
+    [FieldOffset(0 * 8), FixedSizeArray] internal FixedSizeArray200<CStringPointer> _playerName;
+    [FieldOffset(200 * 8), FixedSizeArray] internal FixedSizeArray200<CStringPointer> _homeworld;
+    [FieldOffset(400 * 8), FixedSizeArray] internal FixedSizeArray200<CStringPointer> _note;
 }
