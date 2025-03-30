@@ -12,7 +12,7 @@ public unsafe partial struct InventoryNumberArray {
 
     [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray140<InventoryItemNumberArray> _items;
 
-    [FieldOffset(840 * 4), FixedSizeArray] internal FixedSizeArray35<InventoryKeyItemNumberArray> _keyItems;
+    [FieldOffset(840 * 4), FixedSizeArray] internal FixedSizeArray124<InventoryKeyItemNumberArray> _keyItems;
 
     [FieldOffset(1292 * 4), FixedSizeArray] internal FixedSizeArray18<InventoryCrystalNumberArray> _crystals;
 
