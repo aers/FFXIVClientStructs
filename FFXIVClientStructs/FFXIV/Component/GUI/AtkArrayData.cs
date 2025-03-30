@@ -52,6 +52,7 @@ public enum NumberArrayType {
     FlyText = 30,
     ActionDetail = 31,
 
+    InventoryRetainer = 33,
     MiniTalk = 34,
     Talk = 35,
     ItemSearch = 36,
@@ -203,6 +204,7 @@ public enum StringArrayType {
     FlyText = 27,
     ActionDetail = 28,
 
+    InventoryRetainer = 30,
     MiniTalk = 31,
     CommonCurrencies = 32, // holds Gil, Grand Company Seals, Dark Matter; used by Repair, MateriaAttachDialog, GrandCompanyExchange, GrandCompanySupplyList
     ItemSearch = 33,

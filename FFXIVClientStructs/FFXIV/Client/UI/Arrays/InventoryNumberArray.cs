@@ -10,7 +10,11 @@ public unsafe partial struct InventoryNumberArray {
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1351<int> _data;
 
-    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray140<InventoryItemNumberArray> _items;
+    [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray140<InventoryItemNumberArray> _items;
+
+    [FieldOffset(840 * 4), FixedSizeArray] internal FixedSizeArray35<InventoryKeyItemNumberArray> _keyItems;
+
+    [FieldOffset(1292 * 4), FixedSizeArray] internal FixedSizeArray18<InventoryCrystalNumberArray> _crystals;
 
     [CExportIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
@@ -51,5 +55,32 @@ public unsafe partial struct InventoryNumberArray {
             [FieldOffset(1)] public byte B;
             [FieldOffset(0)] public byte DyeFlags;
         }
+    }
+
+    [CExportIgnore]
+    [StructLayout(LayoutKind.Explicit, Size = 3 * 4)]
+    public partial struct InventoryKeyItemNumberArray {
+        [FieldOffset(0 * 4)] public uint IconId;
+        [FieldOffset(1 * 4)] public InventoryKeyItemFlagsNumberArray KeyItemFlags;
+        [FieldOffset(2 * 4)] public uint UnkFlags;
+
+        [CExportIgnore]
+        [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
+        public partial struct InventoryKeyItemFlagsNumberArray {
+            [FieldOffset(3)] public byte UnkFlags1;
+            [FieldOffset(2)] public byte TooltipIndex;
+            [FieldOffset(1)] public byte UnkFlags3;
+            [FieldOffset(0)] public byte StackCount;
+        }
+    }
+
+    [CExportIgnore]
+    [StructLayout(LayoutKind.Explicit, Size = 3 * 4)]
+    public partial struct InventoryCrystalNumberArray {
+        [FieldOffset(0 * 4)] public uint IconId;
+        [FieldOffset(1 * 4)] internal int _stackCount;
+        [FieldOffset(2 * 4)] public uint CrystalIndex;
+
+        public int StackCount => (_stackCount >> 16) & 0xFFFF;
     }
 }
