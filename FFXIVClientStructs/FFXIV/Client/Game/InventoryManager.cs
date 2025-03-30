@@ -9,8 +9,6 @@ public unsafe partial struct InventoryManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
     public static partial InventoryManager* Instance();
 
-    [FieldOffset(0), FixedSizeArray] internal FixedSizeArray74<InventoryContainer> _containers;
-
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
     [FieldOffset(0x1E10)] internal InventoryType UnkInventoryType; // Can be EquippedItems, RetainerEquippedItems...?
 
