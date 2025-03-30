@@ -8,6 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x440)]
 public unsafe partial struct MJIManager {
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 0F B6 44 01", 3, isPointer: true)]
+    public static partial MJIManager* Instance();
+
     [FieldOffset(0x0)] public ushort TerritoryId;
 
     // these control some form of loading state but not sure what exactly check Load and Update to figure these out
@@ -143,13 +146,6 @@ public unsafe partial struct MJIManager {
     /// May not be present until the Isleworks is loaded at least once by the player.
     /// </remarks>
     [FieldOffset(0x3F6)] public uint CurrentGroove; // unverified for 6.5!
-
-    /// <summary>
-    /// Retrieve an instance of IslandSanctuaryManager for consumption.
-    /// </summary>
-    /// <returns>Returns a pointer to the game's IslandSanctuaryManager instance.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 78 1C")]
-    public static partial MJIManager* Instance();
 
     /// <summary>
     /// Check if a specific MJIRecipe is *unlocked*. Does not care if the item has been crafted.
