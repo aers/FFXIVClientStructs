@@ -496,7 +496,6 @@ classes:
   Client::Game::GameMain:
     instances:
       - ea: 0x1428E9F90
-        pointer: False
     funcs:
       0x140047CD0: ctorStatic
       0x141FC4D90: DtorStatic
@@ -521,7 +520,7 @@ classes:
   Client::Game::BGMSystem:
     instances:
       - ea: 0x14290A780
-        pointer: True
+        pointer: true
     funcs:
       0x140809C90: Initialize
       0x140809CE0: Dtor
@@ -567,7 +566,6 @@ classes:
   Client::Game::Control::InputManager:
     instances:
       - ea: 0x142703770
-        pointer: False
     funcs:
       0x1405D82A0: Update
       0x1405D84F0: GetInputStatus
@@ -670,7 +668,6 @@ classes:
   Client::Game::RetainerManager:
     instances:
       - ea: 0x14293E640
-        pointer: False
     funcs:
       0x14102E8B0: Initialize
       0x14102EA00: Update
@@ -685,7 +682,6 @@ classes:
   Client::Game::SatisfactionSupplyManager:
     instances:
       - ea: 0x1429201D0
-        pointer: False
     funcs:
       0x1409712D0: Initialize
       0x140971300: Finalizer
@@ -1048,7 +1044,6 @@ classes:
   Client::Game::Object::GameObjectManager: # all game objects
     instances:
       - ea: 0x14291B4A0
-        pointer: False
     funcs:
       0x140952C30: UpdateObjectArrays
       0x140952EA0: UpdateObjectArraysWrapper
@@ -1063,7 +1058,6 @@ classes:
   Client::Game::Object::ClientObjectManager: # non-networked objects
     instances:
       - ea: 0x14293EF50
-        pointer: False
     funcs:
       0x141620510: Initialize
       0x141620560: Destroy
@@ -1088,7 +1082,6 @@ classes:
   Client::Game::Character::CharacterManager: # networked characters
     instances:
       - ea: 0x142706A00
-        pointer: False
     vtbls:
       - ea: 0x142056D78
         base: Client::Game::Character::CharacterManagerInterface
@@ -1112,7 +1105,7 @@ classes:
   Client::Game::GoldSaucer::GoldSaucerManager:
     instances:
       - ea: 0x14293E130
-        pointer: True
+        pointer: true
     funcs:
       0x140CC2260: Initialize
       0x140CC22F0: Dtor
@@ -1193,7 +1186,6 @@ classes:
   Client::Game::RaceChocoboManager:
     instances:
       - ea: 0x14293E140
-        pointer: False
     funcs:
       0x140CA8490: ctor
       0x140CA84C0: Dtor
@@ -1227,7 +1219,6 @@ classes:
   Client::Game::Group::GroupManager:
     instances:
       - ea: 0x1427075B0
-        pointer: False
     vtbls:
       - ea: 0x142082468 # it has some abstract base even!
         base: Client::Game::Character::CharacterManagerInterface
@@ -1238,10 +1229,8 @@ classes:
   Client::Game::Group::GroupManager::Group:
     instances:
       - ea: 0x1427075D0
-        pointer: False
       - ea: 0x14270F5C0
         name: ReplayInstance
-        pointer: False
     funcs:
       0x140977AD0: ResetAlliance
       0x140977CB0: SetPartySize
@@ -1282,7 +1271,7 @@ classes:
   Client::Game::Fate::FateManager:
     instances:
       - ea: 0x1429400C8
-        pointer: True
+        pointer: true
     funcs:
 #fail       0x1415B6400: HasInstance
       0x14164AC80: GetInstance
@@ -1297,7 +1286,6 @@ classes:
   Client::Game::QuestManager:
     instances:
       - ea: 0x142939E80
-        pointer: False
     funcs:
       0x1400BB7D0: IsQuestComplete # static (questId)
       0x140996DA0: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
@@ -1342,7 +1330,7 @@ classes:
   Client::Game::MirageManager:
     instances:
       - ea: 0x1429178F8
-        pointer: True
+        pointer: true
     funcs:
       0x140841B40: Initialize # unused, inlined into ctor
       0x140840100: ctor
@@ -1358,7 +1346,7 @@ classes:
   Client::Game::MateriaRequestManager:
     instances:
       - ea: 0x14294F2A0
-        pointer: True
+        pointer: true
     funcs:
       0x14175DA90: HasInstance
       0x14175DAB0: GetInstance
@@ -1369,7 +1357,7 @@ classes:
   Client::Game::CurrencyManager:
     instances:
       - ea: 0x14293E2B8
-        pointer: True
+        pointer: true
     funcs:
       0x140D08590: ctor
       0x140D086A0: Dtor
@@ -1395,7 +1383,7 @@ classes:
   Client::Game::ServerRequestCallbackManager:
     instances:
       - ea: 0x14290A778
-        pointer: True
+        pointer: true
     funcs:
       0x1407F2D30: Initialize
       0x1407F2DD0: HasInstance
@@ -1406,7 +1394,6 @@ classes:
   Client::Game::InventoryManager:
     instances:
       - ea: 0x142917920
-        pointer: False
     funcs:
       0x1408423D0: ctor
       0x1408180D0: Initialize
@@ -1504,14 +1491,13 @@ classes:
   Client::Game::MonsterNoteManager:
     instances:
       - ea: 0x142920630
-        pointer: False
     funcs:
       0x14097D2F0: Initialize
       0x14097D380: Update
   Client::Game::CSBonusManager:
     instances:
       - ea: 0x142920A98
-        pointer: True
+        pointer: true
     vtbls:
       - ea: 0x14205A0E8
         base: Client::Game::ServerRequestCallbackInterface
@@ -1530,7 +1516,7 @@ classes:
   Client::Game::GcArmyManager:
     instances:
       - ea: 0x142920198
-        pointer: True
+        pointer: true
     funcs:
       0x14096F0A0: ctor
       0x14096F0F0: Dtor
@@ -1542,7 +1528,7 @@ classes:
   Client::Game::HousingManager:
     instances:
       - ea: 0x14293E048
-        pointer: True
+        pointer: true
     funcs:
       0x140C78360: ctor
       0x140C78430: Dtor
@@ -1609,7 +1595,6 @@ classes:
   Client::Game::NameCache:
     instances:
       - ea: 0x14290A790
-        pointer: False
     funcs:
       0x1407F27B0: Initialize
       0x1407F2830: Update
@@ -1635,7 +1620,6 @@ classes:
   Client::Game::WeatherManager:
     instances:
       - ea: 0x142707330
-        pointer: False
     funcs:
       0x140C67FB0: ctor
       0x140C68760: GetCurrentWeather
@@ -1646,7 +1630,7 @@ classes:
   Client::Game::FashionCheckManager: # Fashion Report
     instances:
       - ea: 0x1429201B8
-        pointer: True
+        pointer: true
     funcs:
       0x14096FF80: Initialize
       0x140970050: Finalizer
@@ -1659,7 +1643,7 @@ classes:
         base: Client::Game::ServerRequestCallbackInterface
     instances:
       - ea: 0x142953928
-        pointer: True
+        pointer: true
     funcs:
       0x141857810: GetInstance
       0x141857820: HasInstance
@@ -1668,7 +1652,7 @@ classes:
   Client::Game::QuestRecompleteManager: # Seasonal Event Replay
     instances:
       - ea: 0x142953918
-        pointer: True
+        pointer: true
     funcs:
       0x141857190: ctor
       0x141857210: Dtor
@@ -1679,7 +1663,7 @@ classes:
   Client::Game::QuestRedoManager: # New Game+
     instances:
       - ea: 0x14293E2C0
-        pointer: True
+        pointer: true
     funcs:
       0x140D09C70: Initialize
       0x140D09DD0: Finalizer
@@ -1690,7 +1674,7 @@ classes:
   Client::Game::QuestRedoMapMarkerManager:
     instances:
       - ea: 0x142953948
-        pointer: True
+        pointer: true
     funcs:
       0x141859900: Initialize
       0x1418599F0: Finalizer
@@ -1701,7 +1685,7 @@ classes:
   Client::Game::FreeMoveManager:
     instances:
       - ea: 0x142953900
-        pointer: True
+        pointer: true
     funcs:
       0x1418539D0: Initialize
       0x141853B10: Finalizer
@@ -1712,7 +1696,7 @@ classes:
   Client::Game::SequentialEventManager:
     instances:
       - ea: 0x142953958
-        pointer: True
+        pointer: true
     funcs:
       0x14185DC30: Initialize
       0x14185DA80: Finalizer
@@ -1723,7 +1707,7 @@ classes:
   Client::Game::PathWalkManager:
     instances:
       - ea: 0x142953970
-        pointer: True
+        pointer: true
     funcs:
       0x141864E00: Initialize
       0x141864E90: Finalizer
@@ -1734,7 +1718,7 @@ classes:
   Client::Game::QuestEffectManager:
     instances:
       - ea: 0x1429538F0
-        pointer: True
+        pointer: true
     funcs:
       0x141851910: Initialize
       0x141851960: Finalizer
@@ -1745,7 +1729,7 @@ classes:
   Client::Game::DawnManager:
     instances:
       - ea: 0x1429201A8
-        pointer: True
+        pointer: true
     funcs:
       0x140956430: Initialize
       0x140956480: Finalizer
@@ -1755,7 +1739,7 @@ classes:
   Client::Game::ServerValueCallbackManager:
     instances:
       - ea: 0x142953CE0
-        pointer: True
+        pointer: true
     funcs:
 #fail       0x1417BF4B0: ctor
       0x141868940: Dtor
@@ -1766,7 +1750,7 @@ classes:
   Client::Game::HWDManager: # Diadem
     instances:
       - ea: 0x14293E298
-        pointer: True
+        pointer: true
     vtbls:
       - ea: 0x142082058
         base: Client::Game::ServerRequestCallbackInterface
@@ -1777,7 +1761,6 @@ classes:
   Client::Game::MJI::MJIManager: # Island Sanctuary
     instances:
       - ea: 0x14293E2A8
-        pointer: True
     funcs:
       0x140D00240: CreateInstance
       0x140D00290: DestroyInstance
@@ -2061,7 +2044,6 @@ classes:
   Client::Game::UI::UIState:
     instances:
       - ea: 0x142920AE0
-        pointer: False
     funcs:
       0x140A03F30: Initialize
       0x140A05320: Update
@@ -2099,11 +2081,9 @@ classes:
   Client::Game::UI::Hate:
     instances:
       - ea: 0x142920AE8
-        pointer: False
   Client::Game::UI::Hater:
     instances:
       - ea: 0x142920BF0
-        pointer: False
     funcs:
       0x140990EA0: UpdateAllNames
       0x140990F30: IsEntityInList
@@ -2111,11 +2091,9 @@ classes:
   Client::Game::UI::Chain:
     instances:
       - ea: 0x1429214F8
-        pointer: False
   Client::Game::UI::WeaponState:
     instances:
       - ea: 0x142921500
-        pointer: False
     funcs:
       0x1409911D0: CanAutoSheathe
       0x140991210: ExtendAutoSheatheTimer
@@ -2132,7 +2110,6 @@ classes:
   Client::Game::UI::PlayerState:
     instances:
       - ea: 0x142921518
-        pointer: False
     funcs:
       0x140991A50: ReadPacket
       0x140995D30: SetCharacterName   # inlined
@@ -2237,14 +2214,12 @@ classes:
   Client::Game::UI::Revive:
     instances:
       - ea: 0x142921DD8
-        pointer: False
     vtbls:
       - ea: 0x14205AD08
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Inspect:
     instances:
       - ea: 0x142921E08
-        pointer: False
     funcs:
       0x1409CEDA0: HandleExaminePacket
       0x1409CF3D0: Clear
@@ -2252,7 +2227,6 @@ classes:
   Client::Game::UI::NpcTrade:
     instances:
       - ea: 0x14292CC50
-        pointer: False
     vtbls:
       - ea: 0x14205AE00
     vfuncs:
@@ -2268,7 +2242,6 @@ classes:
   Client::Game::UI::Telepo:
     instances:
       - ea: 0x1429220A8
-        pointer: False
     vtbls:
       - ea: 0x14205AE20
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
@@ -2292,13 +2265,11 @@ classes:
   Client::Game::UI::Cabinet:
     instances:
       - ea: 0x142922100  # UIState.Cabinet
-        pointer: False
     funcs:
       0x1409D2550: IsItemInCabinet # row id of Cabinet sheet, not Item
   Client::Game::UI::Achievement:
     instances:
       - ea: 0x142922188  # UIState.Achievement
-        pointer: False
     vtbls:
       - ea: 0x14205AE38
         base: Client::Game::ServerRequestCallbackInterface
@@ -2310,7 +2281,6 @@ classes:
   Client::Game::UI::Buddy:
     instances:
       - ea: 0x142922970
-        pointer: False
     funcs:
       0x1409D8420: ctor
       0x1409D8BF0: ReadPacket
@@ -2326,7 +2296,6 @@ classes:
   Client::Game::UI::PvPProfile:
     instances:
       - ea: 0x142924D6C
-        pointer: False
     funcs:
       0x1409DA580: ReadPacket
       0x1409DA910: GetPvPRank
@@ -2347,7 +2316,6 @@ classes:
   Client::Game::UI::ContentsNote:
     instances:
       - ea: 0x142924DF8
-        pointer: False
     vtbls:
       - ea: 0x14205BEA8
     funcs:
@@ -2356,7 +2324,6 @@ classes:
   Client::Game::UI::RelicNote:
     instances:
       - ea: 0x142924EB0  # UIState.RelicNote
-        pointer: False
     vtbls:
       - ea: 0x14205BEB0
     funcs:
@@ -2374,7 +2341,6 @@ classes:
   Client::Game::UI::PublicInstance:
     instances:
       - ea: 0x142924F10
-        pointer: False
     funcs:
       0x1409E98D0: SetInstance
       0x1409E98E0: GetInstance
@@ -2388,7 +2354,6 @@ classes:
   Client::Game::UI::TerritoryInfo:
     instances:
       - ea: 0x1427073B0
-        pointer: False
     funcs:
       0x140C69AB0: Initialize
       0x140C69B00: Finalizer
@@ -2396,24 +2361,20 @@ classes:
   Client::Game::UI::RelicSphereUpgrade:
     instances:
       - ea: 0x142924F38
-        pointer: False
     vtbls:
       - ea: 0x14205BEE8
   Client::Game::UI::DailyQuestSupply:
     instances:
       - ea: 0x142924FB0
-        pointer: False
     vtbls:
       - ea: 0x14205BEF0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::RidePillon:
     instances:
       - ea: 0x142925398
-        pointer: False
   Client::Game::UI::Loot:
     instances:
       - ea: 0x1429253D8
-        pointer: False
     vtbls:
       - ea: 0x14205BF18
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
@@ -2429,7 +2390,6 @@ classes:
   Client::Game::UI::GatheringNote:
     instances:
       - ea: 0x142925A78
-        pointer: False
     funcs:
      0x14099DF90: ctor
      0x14099E100: Dtor
@@ -2437,7 +2397,6 @@ classes:
   Client::Game::UI::RecipeNote:
     instances:
       - ea: 0x142926150
-        pointer: False
     funcs:
       0x1409A3710: ctor
       0x1409A1420: CancelCrafting
@@ -2453,14 +2412,12 @@ classes:
   Client::Game::UI::FishingNote:
     instances:
       - ea: 0x142926C90
-        pointer: False
     funcs:
       0x1409A7A70: ctor
       0x1409A7910: Initialize
   Client::Game::UI::FishRecord:
     instances:
       - ea: 0x142926D70
-        pointer: False
     funcs:
       0x1409AA2E0: Initialize
       0x1409AA780: Finalizer
@@ -2482,7 +2439,6 @@ classes:
   Client::Game::UI::Journal:
     instances:
       - ea: 0x1429270A8
-        pointer: False
     vtbls:
       - ea: 0x14205ADB8
         base: Client::Game::UI::ScenarioTextReader
@@ -2492,7 +2448,6 @@ classes:
   Client::Game::UI::QuestUI:
     instances:
       - ea: 0x14292B810
-        pointer: False
     vtbls:
       - ea: 0x14205ADC8
         base: Client::Game::UI::ScenarioTextReader
@@ -2505,7 +2460,6 @@ classes:
   Client::Game::UI::QuestTodoList:
     instances:
       - ea: 0x14292C810
-        pointer: False
     vtbls:
       - ea: 0x14205ADF0
         base: Client::Game::UI::ScenarioTextReader
@@ -2514,7 +2468,6 @@ classes:
   Client::Game::UI::Map:
     instances:
       - ea: 0x14292D358
-        pointer: False
     funcs:
       0x1409C7990: ctor
       0x1409CACE0: AddHousingMarker
@@ -2530,7 +2483,6 @@ classes:
   Client::Game::UI::MarkingController:
     instances:
       - ea: 0x142931360 # note: it's actually a member of UIState instance
-        pointer: False
     vtbls:
       - ea: 0x14205A638
     vfuncs:
@@ -2559,7 +2511,6 @@ classes:
   Client::Game::UI::LimitBreakController:
     instances:
       - ea: 0x142931640
-        pointer: False
     vtbls:
       - ea: 0x14205ACF0
     vfuncs:
@@ -2590,13 +2541,11 @@ classes:
   Client::Game::UI::GCSupply:
     instances:
       - ea: 0x1429316F0   # Inside UIState
-        pointer: False
 #    funcs:
 #       0x1409A9D60: ctor  # inlined in UIState.ctor
   Client::Game::UI::InstanceContent:
     instances:
       - ea: 0x142934318
-        pointer: False
     vtbls:
       - ea: 0x14205BEA0
     funcs:
@@ -2605,13 +2554,11 @@ classes:
   Client::Game::UI::GuildOrderReward:
     instances:
       - ea: 0x142934390
-        pointer: False
     vtbls:
       - ea: 0x14205AE48
   Client::Game::UI::ContentsFinder:
     instances:
       - ea: 0x1429343F0
-        pointer: False
     vtbls:
       - ea: 0x14205BF10
     funcs:
@@ -2619,13 +2566,11 @@ classes:
   Client::Game::UI::Wedding:
     instances:
       - ea: 0x1429344A0
-        pointer: False
     vtbls:
       - ea: 0x14205BF40
   Client::Game::UI::MobHunt:
     instances:
       - ea: 0x142934508
-        pointer: False
     vtbls:
       - ea: 0x14205BF30
     funcs:
@@ -2638,43 +2583,35 @@ classes:
   Client::Game::UI::WeatherForecast:
     instances:
       - ea: 0x1429346F8
-        pointer: False
     vtbls:
       - ea: 0x14205BF38
   Client::Game::UI::TripleTriad:
     instances:
       - ea: 0x142934720
-        pointer: False
     vtbls:
       - ea: 0x14205BF48
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::EurekaElementalEdit:
     instances:
       - ea: 0x142935DE0
-        pointer: False
   Client::Game::UI::LovmRanking:
     instances:
       - ea: 0x142935DFC
-        pointer: False
   Client::Game::UI::CollectablesShop:
     instances:
       - ea: 0x142937A38
-        pointer: False
   Client::Game::UI::QTE:
     instances:
       - ea: 0x142937D30
-        pointer: False
     vtbls:
       - ea: 0x14205BF78
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Emj:
     instances:
       - ea: 0x142937D58
-        pointer: False
   Client::Game::UI::GoldSaucerYell:
     instances:
       - ea: 0x142937D90
-        pointer: False
     vtbls:
       - ea: 0x14205BFB0
     funcs:
@@ -2685,7 +2622,6 @@ classes:
   Client::Game::UI::CharaCard:
     instances:
       - ea: 0x1429394E0
-        pointer: False
     funcs:
       0x1409FD5F0: ctor
       0x1409FD790: RequestCurrentBannerData
@@ -2705,7 +2641,6 @@ classes:
   Client::Game::ActionManager:
     instances:
       - ea: 0x14293CC80
-        pointer: False
     vtbls:
       - ea: 0x14205FEE0
         base: Client::Graphics::Vfx::VfxDataListenner
@@ -2855,7 +2790,6 @@ classes:
   Client::Game::JobGaugeManager:
     instances:
       - ea: 0x1428EAA68
-        pointer: False
     funcs:
       0x140B12C70: ctor
       0x140B12CA0: Dtor
@@ -3078,7 +3012,6 @@ classes:
   Client::System::Framework::GameWindow:
     instances:
       - ea: 0x142746B70
-        pointer: false
     funcs:
       0x1400662E0: SetWindowRect
       0x1400665A0: SetBorderless # (bool maximized)
@@ -3108,6 +3041,7 @@ classes:
   Client::System::Framework::TaskManager:
     instances:
       - ea: 0x14274A7E0
+        pointer: true
     vtbls:
       - ea: 0x141FD7C50
     vfuncs:
@@ -3139,10 +3073,10 @@ classes:
   Client::System::Framework::Framework:
     instances:
       - ea: 0x142746C18
-        pointer: True
+        pointer: true
       - ea: 0x142748B28
         name: InstancePointer2
-        pointer: True
+        pointer: true
     vtbls:
       - ea: 0x141FD7CA8
     vfuncs:
@@ -4224,6 +4158,7 @@ classes:
   Client::UI::Info::InfoProxyCrossRealm:
     instances:
       - ea: 0x14291B300
+        pointer: true
     vtbls:
       - ea: 0x1420543E8
         base: Client::UI::Info::InfoProxyInterface
@@ -4505,7 +4440,6 @@ classes:
   Client::Graphics::Environment::EnvRenderController:
     instances:
       - ea: 0x1426FC290
-        pointer: False
     vtbls:
       - ea: 0x141FF6B58
   Client::System::Threading::Thread:
@@ -4525,6 +4459,7 @@ classes:
   Client::System::Threading::ThreadManager:
     instances:
       - ea: 0x14274F898
+        pointer: true
     vtbls:
       - ea: 0x141FF6E40
         base: Client::System::Common::NonCopyable
@@ -5704,7 +5639,7 @@ classes:
   Client::Graphics::Render::OffscreenRenderingManager:
     instances:
       - ea: 0x1428E59D0
-        pointer: True
+        pointer: true
     vtbls:
       - ea: 0x142017D20
     funcs:
@@ -5793,7 +5728,7 @@ classes:
   Client::Graphics::Render::Manager:
     instances:
       - ea: 0x142748B78
-        pointer: True
+        pointer: true
     vtbls:
       - ea: 0x142018368
         base: Client::Graphics::Singleton
@@ -5824,7 +5759,7 @@ classes:
   Client::Graphics::Render::LightingManager:
     instances:
       - ea: 0x142748B88
-        pointer: True
+        pointer: true
     vtbls:
       - ea: 0x1420183A8
         base: Client::Graphics::Singleton
@@ -5869,7 +5804,6 @@ classes:
   Client::Graphics::JobSystem<Apricot::Engine::Core>:
     instances:
       - ea: 0x1428E6930
-        pointer: False
     vtbls:
       - ea: 0x1420211C0
     funcs:
@@ -6636,6 +6570,7 @@ classes:
   Component::GUI::AtkStage:
     instances:
       - ea: 0x1428F57B8
+        pointer: true
     vtbls:
       - ea: 0x142034948
         base: Component::GUI::AtkEventTarget # This doesn't look right...'
@@ -12867,7 +12802,6 @@ classes:
   Client::Game::Event::EventHandlerSelector:
     instances:
       - ea: 0x14293D890
-        pointer: False
     vtbls:
       - ea: 0x142066928
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
@@ -13523,14 +13457,12 @@ classes:
   Client::Game::Event::ShopEventHandler::AgentProxy:
     instances:
       - ea: 0x142717C40
-        pointer: False
     vtbls:
       - ea: 0x14214F748
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
       - ea: 0x142717C70
-        pointer: False
     vtbls:
       - ea: 0x14214F778
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
@@ -13833,7 +13765,7 @@ classes:
   Client::Game::ReconstructionBoxManager:
     instances:
       - ea: 0x1429201B0
-        pointer: True
+        pointer: true
     vtbls:
       - ea: 0x1420590E0
     vfuncs:
@@ -13846,7 +13778,7 @@ classes:
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x14293D480
-        pointer: True
+        pointer: true
     funcs:
       0x140B3EE90: ctor
       0x140B3EBA0: Dtor
@@ -17695,7 +17627,7 @@ classes:
         base: Client::Game::Camera
     instances:
       - ea: 0x14274F9D0
-        pointer: True
+        pointer: true
     funcs:
       0x1416F25B0: ctor
   Client::Game::Camera3:
@@ -18254,7 +18186,7 @@ classes:
         base: SQEX::CDev::Engine::Sd::Driver::ISoundDriver
     instances:
       - ea: 0x142DA99D8
-        pointer: True
+        pointer: true
   SQEX::CDev::Engine::Sd::Driver::ToolBankController:
     vtbls:
       - ea: 0x142413C40
