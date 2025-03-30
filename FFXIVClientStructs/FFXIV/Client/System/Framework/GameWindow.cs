@@ -2,10 +2,10 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 
 // Client::System::Framework::GameWindow
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x282)]
+[StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct GameWindow {
-    [FieldOffset(0x00)] public ulong ArgumentCount;
-    [FieldOffset(0x08)] public byte** Arguments; // Points to an array that points to CStr
+    [FieldOffset(0x00)] public ulong ArgumentCount; // TODO: (u)int
+    [FieldOffset(0x08)] public byte** Arguments; // Points to an array that points to CStr // TODO: use CStringPointer, add Span
     [FieldOffset(0x10)] public float FrameDeltaTime;
     [FieldOffset(0x18)] public nint WindowHandle;
     [FieldOffset(0x20)] public int WindowWidth; // Only used and correct if in Windowed Mode
@@ -16,7 +16,6 @@ public unsafe partial struct GameWindow {
 
     [FieldOffset(0x58)] public int MinWidth;
     [FieldOffset(0x5C)] public int MinHeight;
-    [FieldOffset(0x80), FixedSizeArray(isString: true)] internal FixedSizeArray257<char> _userName;
 
     public string GetArgument(ulong idx) => Marshal.PtrToStringUTF8(idx >= ArgumentCount ? nint.Zero : (nint)Arguments[idx]) ?? string.Empty;
 }
