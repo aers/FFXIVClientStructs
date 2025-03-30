@@ -31,6 +31,7 @@ public struct LootItem {
     [FieldOffset(0x20)] public RollState RollState;
     [FieldOffset(0x24)] public RollResult RollResult;
     [FieldOffset(0x28)] public byte RollValue;
+    [FieldOffset(0x34)] public bool WeeklyLootItem;
     [FieldOffset(0x2C)] public float Time;
     [FieldOffset(0x30)] public float MaxTime;
 
