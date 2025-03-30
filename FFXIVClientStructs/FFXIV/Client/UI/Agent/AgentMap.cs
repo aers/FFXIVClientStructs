@@ -53,6 +53,8 @@ public unsafe partial struct AgentMap {
     [FieldOffset(0x5968)] public short CurrentOffsetX;
     [FieldOffset(0x596A)] public short CurrentOffsetY;
 
+    [FieldOffset(0x5970)] public OpenMapInfo CurrentOpenMapInfo;
+
     [FieldOffset(0x5A10)] public uint CurrentTerritoryId;
     [FieldOffset(0x5A14)] public uint CurrentMapId;
     [FieldOffset(0x5A1C)] public uint CurrentMapMarkerRange;
@@ -209,7 +211,7 @@ public struct TempMapMarker {
     [FieldOffset(0xAC)] public uint Type;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x8E)]
+[StructLayout(LayoutKind.Explicit, Size = 0x9C)]
 public struct OpenMapInfo {
     [FieldOffset(0x00)] public MapType Type;
     [FieldOffset(0x04)] public uint AddonId;
@@ -218,11 +220,14 @@ public struct OpenMapInfo {
     [FieldOffset(0x10)] public uint PlaceNameId;
     [FieldOffset(0x14)] public uint AetheryteId;
     [FieldOffset(0x18)] public uint FateId;
-    [FieldOffset(0x1C)] public uint Unk1C;
+    [FieldOffset(0x1C)] public uint QuestId;
     [FieldOffset(0x20)] public Utf8String TitleString;
     [FieldOffset(0x88)] public uint Unk88;
-    [FieldOffset(0x8C)] public byte Unk8C;
-    [FieldOffset(0x8D)] public bool Unk8D; // something for QuestRedoMapMarker
+    [FieldOffset(0x90)] public ulong Unk90;
+    [FieldOffset(0x98)] public bool Unk98; // something for QuestRedoMapMarker
+    [FieldOffset(0x99)] public byte Unk99;
+    [FieldOffset(0x9A)] public byte Unk9A;
+    [FieldOffset(0x9B)] public byte Unk9B;
 }
 
 [GenerateInterop]

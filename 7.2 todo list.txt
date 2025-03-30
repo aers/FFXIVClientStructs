@@ -1,7 +1,5 @@
 
 NOTE:
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/WeaponState.cs
-    ☐ [FieldOffset(0x10)] public AutoAttackState AutoAttackState; // note: not sure whether this is actually a part of this structure or next field of a parent @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/WeaponState.cs#10
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/LayoutEngine/ILayoutInstance.cs
     ☐ [FieldOffset(0x0C)] public int Type; // note: this is a padding field that in some contexts is used to store collider type @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/LayoutEngine/ILayoutInstance.cs#159
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/LayoutEngine/LayoutManager.cs
