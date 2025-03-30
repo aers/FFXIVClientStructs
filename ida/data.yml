@@ -12128,9 +12128,9 @@ classes:
       0x140E171B0: CanUseTeleport # static
   Client::UI::Agent::OpenMapInfo:
     funcs:
-#fail       0x140D5AA20: ctor
-#fail       0x140D5AA90: Clear
-#fail       0x140D5AAE0: EqualTo
+      0x140DFF130: ctor
+      0x140DFF1B0: Clear
+      0x140DFF210: EqualTo
   Client::UI::Agent::AgentRecipeNote:
     vtbls:
       - ea: 0x14205D650
