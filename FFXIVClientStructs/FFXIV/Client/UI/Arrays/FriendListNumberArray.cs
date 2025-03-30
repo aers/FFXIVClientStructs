@@ -11,7 +11,7 @@ public unsafe partial struct FriendListNumberArray {
 
     [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray2404<int> _data;
 
-    [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray200<SocialListMemberNumberArray> _friends;
+    [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray200<SocialListMemberNumberArray> _friends;
 
     [FieldOffset(2400 * 4)] public int TotalFriendCount;
     [FieldOffset(2401 * 4)] public int FriendCountInGroup;
