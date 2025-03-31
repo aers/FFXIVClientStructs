@@ -1196,8 +1196,8 @@ classes:
       0x140CA8B40: GetSessionsAvailable
       0x140CA8B60: HasRank
       # Not 100 confident what these 2 do
-      #0x140CA9320: GetAbilitySlotIfNotLearned
-      #0x140CA9350: GetAbilityIndexIfLearned
+      #0x140CA95D0: GetAbilitySlotIfNotLearned
+      #0x140CA9600: GetAbilityIndexIfLearned
       0x140CA9380: GetRank
       0x140CA9720: GetAdoptionDateFromItem # For Item#9560 (Proof of Covering)
       0x140CA9740: GetNameIdFromItem
@@ -1948,10 +1948,10 @@ classes:
       0x1405F6000: ChangeType
       0x1405F6040: CopyManagedMemory
       0x1405F63E0: ReleaseManagedMemory # ReleaseManagedMemoryInternal in cs
-#fail       # 0x1405822B0: SetBool # inlined at 0x14068840E
+      # 0x140582070: SetBool # inlined at 0x14068840E
       0x1406AB520: SetInt
       0x1406AB670: SetString
-#fail       # 0x1405A57D0: SetUInt # inlined in AtkDialogue_ReceiveEvent
+      # 0x1405A57D0: SetUInt # inlined in AtkDialogue_ReceiveEvent
   Component::GUI::AtkEvent:
     funcs:
       0x1405FE4A0: SetEventIsHandled
@@ -3847,7 +3847,7 @@ classes:
       0x141F44270: AssignClearThenCopy  # (ExcelRowDescriptor* this, ExcelRowDescriptor* that)
       0x141F44310: AssignByRowId  # (ExcelRowDescriptor* this, int nRowId)
       0x141F44460: Equals  # (ExcelRowDescriptor* this, ExcelRowDescriptor* that) -> bool
-      # 0x141F44010: GetSubRowCount  # (ExcelRowDescriptor* this) -> int # inlined
+      # 0x141F440D0: GetSubRowCount  # (ExcelRowDescriptor* this) -> int # inlined
   Component::Excel::IExcelRowWrapper:
     vtbls:
       - ea: 0x142412EA0
@@ -4220,7 +4220,7 @@ classes:
       0x1408E3480: Finalizer
       0x1408E3AA0: ProcessRequestResult
       0x1408E3D30: ProcessItemHistory
-      # 0x140105E90: ProcessItemHistory_Internal # inlined in ProcessItemHistory
+      # 0x140105BF0: ProcessItemHistory_Internal # inlined in ProcessItemHistory
       0x1408E45D0: SetLastPurchasedItem
       0x1408E4740: SendPurchaseRequestPacket
       0x1408E48D0: ProcessPlayerRetainerInfo
@@ -4231,7 +4231,7 @@ classes:
       - ea: 0x142053300
         base: Client::UI::Info::InfoProxyInvitedInterface
     funcs:
-      # 0x140107C40: ctor # inlined @ 1400bc629
+      # 0x1401079A0: ctor # inlined @ 1400bc629
       0x1408D98A0: InviteToParty
       0x1408D9A50: InviteToPartyContentId
       0x1408D9A70: InviteToPartyInInstanceByEntityId
@@ -4241,7 +4241,7 @@ classes:
       - ea: 0x142053318
         base: Client::UI::Info::InfoProxyPageInterface
     funcs:
-      # 0x1408DA030: ctor # inlined @ 1400BC762
+      # 0x1408DA120: ctor # inlined @ 1400BC762
       0x1408DAF20: GetLinkshellInfo
       0x1408DB3F0: GetLinkshellName
       0x14090FC20: Finalizer
@@ -5275,7 +5275,7 @@ classes:
       0x140253620: GetAgentTripleTriadRuleAnnounce
       0x140253630: GetAgentTripleTriadRuleSetting
       0x140253650: GetAgentTripleTriadTournamentMatchList
-#fail       # 0x140225840: GetAgentPerformanceMode # no xrefs
+      # 0x140225840: GetAgentPerformanceMode # no xrefs
       0x1402536A0: GetAgentCutsceneReplay
       0x1402536B0: GetAgentPvPHeader
       0x1402536D0: GetAgentBannerList
@@ -5292,7 +5292,7 @@ classes:
       0x1402537D0: GetAgentBannerMIP
       0x140253800: GetAgentSXTBattleLog
       0x140253810: GetAgentFGSHud
-      # 0x1401EB100: GetAgentContext # no xrefs
+      # 0x1401EADA0: GetAgentContext # no xrefs
       0x140253830: GetAgentInventoryContext
       0x14025ACA0: PropagateGameEvent
       0x14025AF10: PropagateLevelChange
@@ -5349,7 +5349,7 @@ classes:
       0x140269360: IsAllowedToOpenCharacterTarget
       0x14026AE40: AddContextMenuItem2 # (this, int eventId, uint textId, bool disabled, bool submenu)
       0x14026AEB0: AddContextMenuItem # (this, int eventId, char* text, bool disabled, bool submenu, bool copyText)
-      #0x140335DD0: Finalizer # inlined in 1403CD2C0
+      #0x1403359F0: Finalizer # inlined in 1403CD2C0
   Client::UI::Agent::LobbyUIClient:
     vtbls:
       - ea: 0x142003988
@@ -6446,7 +6446,7 @@ classes:
       - ea: 0x142034028
   Component::GUI::AtkTimerHolder:
     # funcs:
-      # 0x14057AFC0: Update # INLINED IN 7.0 14068A7EC
+      # 0x14057AD80: Update # INLINED IN 7.0 14068A7EC
   Component::GUI::AtkTimer:
     vtbls:
       - ea: 0x142034030
@@ -6545,7 +6545,7 @@ classes:
     vfuncs:
       0: Dtor
     funcs:
-#fail       # 0x140516EB0: ctor # INLINED IN 7.0
+      # 0x140516EB0: ctor # INLINED IN 7.0
       0x140606C70: Initialize
       0x140606F40: Update
   Component::GUI::AtkCrestFactory:
@@ -6565,7 +6565,7 @@ classes:
         base: Component::GUI::AtkTexture
   Component::GUI::AtkUIColorHolder:
     funcs:
-#fail       # 0x1405286A0: ctor # INLINED IN 7.0
+      # 0x1405286A0: ctor # INLINED IN 7.0
       0x14061AAE0: GetColor
   Component::GUI::AtkStage:
     instances:
@@ -6580,12 +6580,12 @@ classes:
       0x140608ED0: GetFocus
       0x140608F00: SetFocus
       0x140608FA0: ClearFocus
-      # 0x1405FE5F0: RemoveAllEvents # gone, inlined (using AtkEventManager.RemoveAllEvents directly)
+      # 0x1405FE330: RemoveAllEvents # gone, inlined (using AtkEventManager.RemoveAllEvents directly)
       0x1406098C0: GetNumberArrayData
       0x1406098D0: GetStringArrayData
       0x1406098E0: GetExtendArrayData
       0x1406099F0: ctor
-#fail       # 0x14051A310: Update INLINED IN 7.0 14068A6D6
+      # 0x14051A310: Update INLINED IN 7.0 14068A6D6
       0x140631050: Instance
       0x140631060: GetSingleton2
       0x14063FF90: GetSingleton3
@@ -6994,7 +6994,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
 #fail       0x1406706D0: ctor
-#fail       #0x140554440: LoadIconById # doesn't exist anymore
+      #0x140554440: LoadIconById # doesn't exist anymore
       0x14064E4C0: LoadIcon
       0x14068EDF0: SetDisabledColor
       0x14064E820: SetTimelineState
@@ -7012,7 +7012,7 @@ classes:
     funcs:
 #fail       0x14064FD50: ctor # no xrefs, inlined @ 0x14064B78B
       0x14064FE50: Finalizer # no xrefs
-#fail       #0x14056BF30: RemoveAllEvents # 7.0: no longer exists. instead there is a new function to remove individual events - see 0x140671AFA
+      #0x14056BCF0: RemoveAllEvents # 7.0: no longer exists. instead there is a new function to remove individual events - see 0x140671AFA
   Component::GUI::AtkComponentList:
     vtbls:
       - ea: 0x142035198
@@ -7222,13 +7222,13 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x1406884D0: ctor
-      # 0x1406886B0: Finalizer # can't find it
+      # 0x1406883F0: Finalizer # can't find it
   Component::GUI::AtkComponentPreview:
     vtbls:
       - ea: 0x1420360F8
         base: Component::GUI::AtkComponentBase
     #funcs:
-      # 0x14059A2E0: ctor # inlined in AtkUldManager_CreateAtkComponent
+      # 0x140599F20: ctor # inlined in AtkUldManager_CreateAtkComponent
   Component::GUI::AtkComponentScrollBar:
     vtbls:
       - ea: 0x142036198
@@ -7265,7 +7265,7 @@ classes:
       - ea: 0x1420363F8
         base: Component::GUI::AtkComponentBase
     #funcs:
-      # 0x140569620: ctor # inlined in AtkUldManager_CreateAtkComponent
+      # 0x1405693E0: ctor # inlined in AtkUldManager_CreateAtkComponent
   Component::GUI::AtkComponentWindow:
     vtbls:
       - ea: 0x142036568
@@ -7355,7 +7355,7 @@ classes:
       - ea: 0x1420381F8
         base: Client::LayoutEngine::IManagerBase
     funcs:
-      # 0x1405CD450: ctor # inlined in CreateSingleton
+      # 0x1405CD190: ctor # inlined in CreateSingleton
       0x1406C3010: CreateSingleton
       0x1406C4040: LoadPrefetchLayout
       0x1406C43F0: UnloadManagerLayout
@@ -7375,7 +7375,7 @@ classes:
         base: Client::LayoutEngine::IManagerBase
     funcs:
       0x1406CCB40: ctor
-      # 0x1405DCB50: SetInteriorFixture # inlined @ 1406CDF00
+      # 0x1405DC890: SetInteriorFixture # inlined @ 1406CDF00
       0x1406D0490: SetActiveFestivals
       0x1406D8BE0: GetLayoutInstance
   Client::LayoutEngine::OutdoorAreaLayoutData:
@@ -7704,19 +7704,19 @@ classes:
     funcs:
       0x140731D70: CalculateIsInScreen
       0x140731E80: CalculateNamePlatePosition
-      # 0x1405FD6B0: GetUIObjectKind # INLINED IN 7.0 140752672
+      # 0x1405FD3F0: GetUIObjectKind # INLINED IN 7.0 140752672
       0x140732290: CalculateNamePlateScale
       0x140732490: ctor
       0x1407323B0: WorldToScreenPoint # static (&x, &y, &world, width, height)
       0x1407334B0: Update
       0x1407339F0: UpdateGameObjects
-      # 0x1405FE940: SetupNamePlateForObjectInfo # INLINED IN 7.0 14075275C
+      # 0x1405FE680: SetupNamePlateForObjectInfo # INLINED IN 7.0 14075275C
       0x140734200: FinalizeNamePlates
   Client::UI::UIInputModule:
     vtbls:
       - ea: 0x142044820
     funcs:
-#fail #fail       # 0x140621E10: ctor # inlined @ 0x14075CDAD
+      # 0x140621E10: ctor # inlined @ 0x14075CDAD
       0x1407363F0: HandleInputUpdate
       0x140737C10: CheckCastCancel
       0x14073B9D0: CheckScreenshotState
@@ -8051,7 +8051,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
 #fail       0x1417C2B90: ctor
-#fail       # 0x141506590: SaveActions # inlined at 0x1415AC6C1
+      # 0x141506800: SaveActions # inlined at 0x1415AC6C1
   Client::UI::Misc::TofuModule:
     vtbls:
       - ea: 0x14204B3E0
@@ -8245,7 +8245,7 @@ classes:
       0x14075BBB0: ctor
   Component::Text::ReferencedUtf8String:
     # funcs:
-#fail     #   0x1403274A0: Create # INLINED IN 7.0 1407A8651
+    #   0x1403274A0: Create # INLINED IN 7.0 1407A8651
   Component::Text::TextParameter:
     funcs:
       0x14019C280: Finalizer
@@ -8515,7 +8515,7 @@ classes:
       0x140784580: GetDisplayNameForSlot
       0x140784D40: GetCostTextForSlot
       0x1407843D0: GetCostTypeForSlot
-      # 0x1407D6280: GetCostDisplayModeForSlot # inlined in LoadCostDisplayModeForSlot
+      # 0x1407D5F00: GetCostDisplayModeForSlot # inlined in LoadCostDisplayModeForSlot
       0x140784AD0: GetAdjustedSlotTooltip    # loads in some adjustment things and then calls GetSlotTooltip
       0x140784B90: GetCostValueForSlot
       0x140785480: GetActionTypeForSlotType
@@ -8704,7 +8704,7 @@ classes:
       0x140938BC0: Setup # (this, race, sex, level, classJob, grandCompany, pvpRank) # no xrefs
       0x140938E50: ctor
       0x140938F10: Update
-#fail       # 0x1406BEF90: SetupFromPlayerState # inlined in SetupForClassJob
+      # 0x1406BEF90: SetupFromPlayerState # inlined in SetupForClassJob
       0x1409394E0: SetupForClassJob
       0x1409396D0: Clear
       0x140939730: EquipRecommendedGear
@@ -8732,9 +8732,9 @@ classes:
       0x1407AEAF0: SetBannerChecksum
   Client::UI::Misc::BannerModuleData:
     #funcs:
-#fail       #0x1406BD5B0: ctor # inlined in Client::UI::Misc::BannerModule_vf8 (0x1407A40D0)
-      #0x1407ADD10: CreateBanner # inlined in Client::UI::Misc::BannerModule.CreateBanner (0x1407ADD10)
-#fail #fail       #0x1406DF940: DeleteBanner # inlined in Client::UI::Misc::BannerModule.DeleteBanner (0x1407A3430)
+      #0x1406BD240: ctor # inlined in Client::UI::Misc::BannerModule_vf8 (0x1407A40D0)
+      #0x1407AD990: CreateBanner # inlined in Client::UI::Misc::BannerModule.CreateBanner (0x1407AD990)
+      #0x1406DF940: DeleteBanner # inlined in Client::UI::Misc::BannerModule.DeleteBanner (0x1407A3430)
   Client::UI::Misc::BannerModuleEntry:
     funcs:
       0x1407AD8C0: ctorRetrurn
@@ -9035,7 +9035,7 @@ classes:
       - ea: 0x14204DF28
         base: Client::Game::Character::ContainerInterface
     funcs:
-#fail #fail       # 0x1413171F0: ctor # inlined at 0x1408CF5D2
+      # 0x1413171F0: ctor # inlined at 0x1408CF5D2
       0x14085BCC0: LoadGearsetData
       0x14085CB80: LoadWeapon
       0x14085D840: HideWeapons
@@ -9053,7 +9053,7 @@ classes:
       - ea: 0x14204DED8
         base: Client::Game::Character::ContainerInterface
     funcs:
-#fail #fail       # 0x141313710: ctor # inlined at 0x1408CF5C4
+      # 0x141313710: ctor # inlined at 0x1408CF5C4
       0x140856580: GetCompanionDataID
 #fail       0x14083DD10: SetupCompanion
   Client::Game::Character::BlacklistProxyContainer: # real name is unknown, probably has nothing to do with blacklist
@@ -9182,7 +9182,7 @@ classes:
       0x140868030: CalculateAndApplyOverallSpeed
       0x140868550: SetModelState
       0x140868700: SetAnimationState
-#fail       # 0x14139EA10: SetSlotSpeed # inlined @ 0x1408B6A6F and other occurrences
+      # 0x14139EC80: SetSlotSpeed # inlined @ 0x1408B6A6F and other occurrences
       0x14086ABE0: GetHeightAdjustActionTimelineRowId
       0x14086B7E0: SetLipsOverrideTimeline
       0x14086D770: ClearBannerData
@@ -10606,7 +10606,7 @@ classes:
       0x140AA3DF0: InitAtkValuesForAddon
       0x140AA5210: UpdateTimeRemaining # (this, resetTimestamp) returns true if an update occurred
       0x140AA52B0: UpdateAddon # at least the TimeRemaining
-#fail       #0x140A30050: UpdateClassJobLevel # inlined @ 140BE6850
+      #0x140A30050: UpdateClassJobLevel # inlined @ 140BE6850
   Client::UI::Agent::AgentSatisfactionSupplyResult:
     vtbls:
       - ea: 0x14205E030
@@ -12097,7 +12097,7 @@ classes:
     funcs:
       0x140A5D570: ctor
       0x140A5D640: OpenByRecipeId
-      #0x140A5E270: OpenRecipeResultItemContextMenu # inlined @ ReceiveEvent
+      #0x140A5E410: OpenRecipeResultItemContextMenu # inlined @ ReceiveEvent
   Client::UI::Agent::AgentRecipeProductList:
     vtbls:
       - ea: 0x14205D438
@@ -15469,9 +15469,9 @@ classes:
       - ea: 0x1420BB940
         base: Component::GUI::AtkUnitBase
     #funcs:
-#fail       # 0x140DB7660: ReceiveEvent_ClickSynthesizeButton # inlined @ 0x1410DA6FC
-#fail #fail       # 0x140EEC580: ReceiveEvent_ClickQuickSynthesisButton # inlined @ 0x1410DA732
-#fail       # 0x1410F0930: ReceiveEvent_ClickTrialSynthesisButton # inlined @ 0x1410DA768
+      # 0x140DB78D0: ReceiveEvent_ClickSynthesizeButton # inlined @ 0x1410DA6FC
+      # 0x140EEC580: ReceiveEvent_ClickQuickSynthesisButton # inlined @ 0x1410DA732
+      # 0x1410F0BA0: ReceiveEvent_ClickTrialSynthesisButton # inlined @ 0x1410DA768
   Client::UI::AddonRecipeProductList:
     vtbls:
       - ea: 0x1420DF018
@@ -15776,7 +15776,7 @@ classes:
       - ea: 0x142103B38
         base: Component::GUI::AtkUnitBase
     funcs:
-      # 0x1410F6FD0: ReceiveEvent_ToggleQuickGathering # inlined in ReceiveEvent
+      # 0x1410F7240: ReceiveEvent_ToggleQuickGathering # inlined in ReceiveEvent
       0x1413EC560: ReceiveEvent_Gather # no xrefs, inlined in ReceiveEvent
   Client::UI::AddonGatheringMasterpiece:
     vtbls:
@@ -17516,7 +17516,7 @@ classes:
         base: Client::Game::Object::GameObject
   #  Client::Game::Object::BKJObject:
   #    vtbls:
-  #      - ea: 0x1422DBFA0
+  #      - ea: 0x1422D6740
   #        base: Client::Game::Object::GameObject
   Client::Graphics::JobSystem<Client::Graphics::Culling::CullingManager,Client::Graphics::Culling::CullingJobOpt>:
     vtbls:
@@ -17583,7 +17583,7 @@ classes:
         base: Client::Game::Character::CharacterData
     funcs:
       0x14161B540: PlaceCompanion
-#fail       # 0x141333190: ctor # inlined @ 1408a74e5
+      # 0x141333190: ctor # inlined @ 1408a74e5
   Client::Game::Character::Ornament:
     vtbls:
       - ea: 0x14204E4C8
@@ -17837,7 +17837,7 @@ classes:
       - ea: 0x1421AC3D8
     funcs:
       0x1417AE2A0: CreateInstance
-      #0x1417AE370: ctor # no xrefs
+      #0x1417AE640: ctor # no xrefs
     instances:
       - ea: 0x1429565A8
   Client::System::Scheduler::ActionTimelineManager:
@@ -17847,7 +17847,7 @@ classes:
       - ea: 0x142954330
     funcs:
       0x141762FE0: CreateInstance
-      #0x141763330: ctor # inlined in CreateInstance
+      #0x141763600: ctor # inlined in CreateInstance
       0x1417637B0: PreloadActionTmb
   Client::System::Scheduler::TimelineGroup:
     vtbls:
@@ -17881,7 +17881,7 @@ classes:
       - ea: 0x1421B2D80
     funcs:
       0x1417CCE40: CreateInstance
-#fail       #0x1413C0010: ctor # inlined in CreateInstance
+      #0x1413C0010: ctor # inlined in CreateInstance
       0x1417CD1E0: LoadActionTmb
       0x1417CE3E0: CreateScheduleResource
   Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Resource::SchedulerResource>:
