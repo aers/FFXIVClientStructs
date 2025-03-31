@@ -4,12 +4,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x4CE8)]
 public unsafe partial struct GameObjectManager {
+    [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA", 3)]
+    public static partial GameObjectManager* Instance();
+
     [FieldOffset(0x00)] public uint NextUpdateIndex; // rate limiting for updates per frame
     [FieldOffset(0x04)] public byte Active;
     [FieldOffset(0x18)] public ObjectArrays Objects;
-
-    [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA", 3)]
-    public static partial GameObjectManager* Instance();
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x4CD0)]

@@ -8,11 +8,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 [StructLayout(LayoutKind.Explicit, Size = 0x10000)]
 [Inherits<CharacterManagerInterface>]
 public unsafe partial struct GroupManager {
-    [FieldOffset(0x0020)] public Group MainGroup;
-    [FieldOffset(0x8010)] public Group ReplayGroup;
-
     [StaticAddress("33 D2 48 8D 0D ?? ?? ?? ?? 33 DB", 5)]
     public static partial GroupManager* Instance();
+
+    [FieldOffset(0x0020)] public Group MainGroup;
+    [FieldOffset(0x8010)] public Group ReplayGroup;
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 55 80")]
     public partial Group* GetGroup(bool replayGroup = false);
