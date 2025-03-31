@@ -1083,7 +1083,7 @@ classes:
     instances:
       - ea: 0x14270BA10
     vtbls:
-#fail       - ea: 0x142056D78
+      - ea: 0x1420566F8
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14094FAE0: Initialize
@@ -1611,11 +1611,11 @@ classes:
       0: Dtor
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
-#fail       - ea: 0x1420707C0
+      - ea: 0x142070540
         base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
     vtbls:
-#fail       - ea: 0x142070808
+      - ea: 0x142070588
         base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
@@ -3238,9 +3238,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x14240C4F0
+      - ea: 0x142411EB0
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x14240C548
+      - ea: 0x142411F08
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -4077,7 +4077,7 @@ classes:
       10: EndRequest
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x142053688
+      - ea: 0x142052EA8
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
@@ -7662,7 +7662,7 @@ classes:
       - ea: 0x142043E68
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
-#fail       0x14072B190: ctor # unused, inlined @ 0x14075CD19
+      0x14072B190: ctor # unused, inlined @ 0x14075CD19
   Client::UI::Misc::RaptureUiDataModule:
     vtbls:
       - ea: 0x142044678
@@ -9214,7 +9214,7 @@ classes:
       - ea: 0x14204F5B0
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x14204FDA0
+      - ea: 0x14204F5C0
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -9551,7 +9551,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x142052FA8
+      - ea: 0x1420527C8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -13301,15 +13301,15 @@ classes:
       - ea: 0x1421A5AB8
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
-#fail       - ea: 0x14219DB08
+      - ea: 0x1421A5AC8
         base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-#fail       - ea: 0x14219DB18
+      - ea: 0x1421A5AD8
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback:
     vtbls:
-#fail       - ea: 0x14219DB30
+      - ea: 0x1421A5AF0
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::EventSceneModule:
     funcs:
@@ -13452,19 +13452,19 @@ classes:
       0x14162B700: StartReadGilShopItems
   Client::Game::Event::ShopEventHandler::ProxyInterface:
     vtbls:
-#fail       - ea: 0x14214F718
+      - ea: 0x14214FB00
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::ShopEventHandler::AgentProxy:
     instances:
       - ea: 0x14271CC50
     vtbls:
-#fail       - ea: 0x14214F748
+      - ea: 0x14214FB30
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
       - ea: 0x14271CC80
     vtbls:
-#fail       - ea: 0x14214F778
+      - ea: 0x14214FB60
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
