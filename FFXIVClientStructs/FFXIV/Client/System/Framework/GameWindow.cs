@@ -4,6 +4,9 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct GameWindow {
+    [StaticAddress("89 15 ?? ?? ?? ?? 48 F7 E1", 2)]
+    public static partial GameWindow* Instance();
+
     [FieldOffset(0x00)] public ulong ArgumentCount; // TODO: (u)int
     [FieldOffset(0x08)] public byte** Arguments; // Points to an array that points to CStr // TODO: use CStringPointer, add Span
     [FieldOffset(0x10)] public float FrameDeltaTime;

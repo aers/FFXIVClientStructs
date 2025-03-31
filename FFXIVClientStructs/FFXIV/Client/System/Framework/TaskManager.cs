@@ -9,6 +9,9 @@ public struct TaskManagerOsData {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct TaskManager {
+    [StaticAddress("4D 89 66 68 4C 89 35 ?? ?? ?? ??", 7, isPointer: true)]
+    public static partial TaskManager* Instance();
+
     [FieldOffset(0x08)] public TaskManagerOsData OsData;
     [FieldOffset(0x58)] public RootTask* TaskList;
     [FieldOffset(0x60)] public uint TaskCount;
