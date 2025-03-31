@@ -6,6 +6,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x6EF0)]
 public unsafe partial struct TargetSystem {
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
+    public static partial TargetSystem* Instance();
+
     [FieldOffset(0x80)] public GameObject* Target;
     [FieldOffset(0x88)] public GameObject* SoftTarget;
     [FieldOffset(0x98)] public GameObject* GPoseTarget;
@@ -24,9 +27,6 @@ public unsafe partial struct TargetSystem {
     // For example, when interacting with the aethernet menu, these values change presumable to limit your ability to select an object other than the aetheryte.
     [FieldOffset(0x6E60), FixedSizeArray] internal FixedSizeArray8<uint> _targetModes;
     [FieldOffset(0x6E80)] public uint TargetModeIndex;
-
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 3B C6 0F 95 C0", 3)]
-    public static partial TargetSystem* Instance();
 
     /// <summary>
     /// Method to get the player's current target's ObjectId. Will resolve the hard and soft targets, in

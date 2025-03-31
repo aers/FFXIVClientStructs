@@ -8,6 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x190)]
 public unsafe partial struct OffscreenRenderingManager {
+    [StaticAddress("48 89 98 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ??", 3, isPointer: true)]
+    public static partial OffscreenRenderingManager* Instance();
+
     [FieldOffset(0xC8), FixedSizeArray] internal FixedSizeArray4<Pointer<Camera>> _cameras;
 
     [FieldOffset(0x148)] public ShaderPackageResourceHandle* PrimitiveVSHandle;

@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
 public unsafe partial struct CSBonusManager {
-    [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0", 3, true)]
+    [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 63 D0", 3, isPointer: true)]
     public static partial CSBonusManager* Instance();
 
     [FieldOffset(0x08)] public CSBonusEventInfo EventInfo;

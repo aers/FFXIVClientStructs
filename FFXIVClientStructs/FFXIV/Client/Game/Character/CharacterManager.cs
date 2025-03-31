@@ -5,15 +5,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x390)]
 [Inherits<CharacterManagerInterface>]
 public unsafe partial struct CharacterManager {
+    [StaticAddress("8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B D0", 5)]
+    public static partial CharacterManager* Instance();
+
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray100<Pointer<BattleChara>> _battleCharas;
     [FieldOffset(0x370)] public BattleChara* BattleCharaMemory;
     [FieldOffset(0x378)] public Companion* CompanionMemory;
     //used to calculate the minion address in CompanionMemory when adding a BattleChara
     [FieldOffset(0x380)] public int CompanionClassSize;
     [FieldOffset(0x384)] public int UpdateIndex;
-
-    [StaticAddress("8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B D0", 5)]
-    public static partial CharacterManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 84 3D ?? ?? ?? ??")]
     public partial BattleChara* LookupBattleCharaByEntityId(uint entityId);
