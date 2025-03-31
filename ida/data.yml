@@ -15672,6 +15672,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411E7F10: ctor
+      0x1411EDA50: IsZoomed
   Client::UI::AddonChatLog:
     vtbls:
       - ea: 0x1420CAF68
