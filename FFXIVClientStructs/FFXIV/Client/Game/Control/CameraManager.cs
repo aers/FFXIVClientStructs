@@ -4,7 +4,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x180)]
 public unsafe partial struct CameraManager {
-    public static CameraManager* Instance() => (CameraManager*)Control.Instance();
+    [StaticAddress("48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 D2 45 33 C0 8D 4A 20", 3, isPointer: true)]
+    public static partial CameraManager* Instance();
 
     [FieldOffset(0x00)] public Camera* Camera;
     [FieldOffset(0x08)] public LowCutCamera* LowCutCamera;
