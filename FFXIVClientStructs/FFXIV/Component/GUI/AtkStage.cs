@@ -10,6 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0x75E00)]
 public unsafe partial struct AtkStage {
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 4C 8B 40 18 45 8B 40 18", 3, isPointer: true)]
+    public static partial AtkStage* Instance();
+
     [FieldOffset(0x10)] public AtkFontManager* AtkFontManager;
     [FieldOffset(0x18)] public AtkTextureResourceManager* AtkTextureResourceManager;
     [FieldOffset(0x20)] public RaptureAtkUnitManager* RaptureAtkUnitManager;
@@ -35,9 +38,6 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x858)] public uint NextEventDispatcherIndex;
     //[FieldOffset(0x85C)] public bool DispatchEvents;
     [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
-
-    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 48 8B C8 4C 8B CB 41 8D 50 03")]
-    public static partial AtkStage* Instance();
 
     [MemberFunction("48 8B 51 ?? 48 0F BF 82")]
     public partial AtkResNode* GetFocus();
