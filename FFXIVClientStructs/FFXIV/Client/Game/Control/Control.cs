@@ -20,7 +20,7 @@ public unsafe partial struct Control {
     [StaticAddress("4C 8D 35 ?? ?? ?? ?? 48 8B 09", 3)]
     public static partial Control* Instance();
 
-    [StaticAddress("48 8B 2D ?? ?? ?? ?? 75", 3, true)]
+    [StaticAddress("48 8B 2D ?? ?? ?? ?? 75", 3, isPointer: true)]
     public static partial BattleChara* GetLocalPlayer(); // g_Client::Game::Control::Control_LocalPlayer
 
     /// <summary>
