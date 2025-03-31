@@ -8,7 +8,7 @@ public unsafe partial struct CharaSelectCharacterList {
     [StaticAddress("48 8D 05 ?? ?? ?? ?? 48 89 7C 24 ?? 4C 8D 05 ?? ?? ?? ?? 33 FF 8B CF 66 0F 1F 44 00 ??", 3)]
     public static partial CharaSelectCharacterList* Instance();
 
-    [StaticAddress("75 39 48 8B 0D ?? ?? ?? ?? 48 85 C9", 5, true)]
+    [StaticAddress("75 39 48 8B 0D ?? ?? ?? ?? 48 85 C9", 5, isPointer: true)]
     public static partial Character* GetCurrentCharacter();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 0F BF 8E ?? ?? ?? ??")]

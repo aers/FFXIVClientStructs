@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x100)]
 public unsafe partial struct BGMSystem {
-    [StaticAddress("4C 8B 15 ?? ?? ?? ?? 4D 85 D2 74 77 41 83 7A", 3, true)]
+    [StaticAddress("4C 8B 15 ?? ?? ?? ?? 4D 85 D2 74 77 41 83 7A", 3, isPointer: true)]
     public static partial BGMSystem* Instance();
 
     [FieldOffset(0x8)] public uint NumScenes; // equals the amount of rows in the BGMScene sheet
