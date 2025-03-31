@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1042)]
 public unsafe partial struct QuestManager {
-    [MemberFunction("E8 ?? ?? ?? ?? 66 BA 10 0C")]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 84 24", 3)]
     public static partial QuestManager* Instance();
 
     [FieldOffset(0x00)] private ushort Unk0;
