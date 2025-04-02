@@ -54,7 +54,7 @@ public unsafe partial struct AtkTooltipManager {
         ushort parentId,
         AtkResNode* targetNode,
         AtkTooltipArgs* tooltipArgs,
-        delegate* unmanaged[Stdcall]<float*, float*, void*> unkDelegate = null,
+        delegate* unmanaged[Stdcall]<float*, float*, AtkResNode*, void> unkDelegate = null,
         bool unk7 = false,
         bool unk8 = true);
 
