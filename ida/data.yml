@@ -70,7 +70,6 @@ globals:
   0x14293E8B4: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
 #fail   0x14277F202: g_Client::Game::UI::UnlockedTripleTriadCardsBitmask  # not a pointer
   0x14293E998: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
-  0x142943010: g_Conditions # bool array, size is Condition sheet row count
   0x14270B128: g_Component::SteamApi::InterfaceContext::ISteamFriends
   0x14270B110: g_Component::SteamApi::InterfaceContext::ISteamUser
   0x14270B158: g_Component::SteamApi::InterfaceContext::ISteamApps
@@ -2358,6 +2357,17 @@ classes:
       0x140C69800: Initialize
       0x140C69850: Finalizer
       0x140C69970: Update
+  Client::Game::Conditions:
+    instances:
+      - ea: 0x142943010
+    funcs:
+      0x140C69CC0: SetCondition
+      0x140C69D40: ReadPacket
+      0x140C69F80: HasPermissionCondition
+      0x140C6A100: GetPermissionLogMessage
+      0x140C6A190: GetConditionLogMessage
+      0x140C6A1C0: GetPermissionCondition
+      0x140C6A260: SetCharacterMode
   Client::Game::UI::RelicSphereUpgrade:
     instances:
       - ea: 0x142929FB8
