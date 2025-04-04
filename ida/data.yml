@@ -570,6 +570,14 @@ classes:
       0x1405D8560: Update
       0x1405D87B0: GetInputStatus
       0x1416B3DF0: IsAutoRunning # static function, might belong in a different class.
+  Client::Game::ChocoboTaxiManager:
+    instances:
+      - ea: 0x1427087E0
+    funcs:
+      0x1405EE8E0: ctor
+      0x1405EEA10: Start
+      0x1405EEA80: Clear
+      0x1405EEC30: Dismount
   Client::Game::Control::EmoteManager:
     vtbls:
       - ea: 0x1421C5DE8
