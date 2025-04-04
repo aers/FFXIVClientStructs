@@ -155,12 +155,20 @@ public unsafe partial struct GameObject {
 //   if (BaseId != 0) ObjectId = BaseId, Type = 1
 // else ObjectId = EntityId, Type = 0
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct GameObjectId {
+public struct GameObjectId : IEquatable<GameObjectId>, IComparable<GameObjectId> {
     [FieldOffset(0x0)] public uint ObjectId;
     [FieldOffset(0x4)] public byte Type;
 
-    public static unsafe implicit operator ulong(GameObjectId id) => *(ulong*)&id;
+    [FieldOffset(0x0), CExportIgnore] public ulong Id;
+
+    public static implicit operator ulong(GameObjectId id) => id.Id;
     public static unsafe implicit operator GameObjectId(ulong id) => *(GameObjectId*)&id;
+    public bool Equals(GameObjectId other) => Id == other.Id;
+    public override bool Equals(object? obj) => obj is GameObjectId other && Equals(other);
+    public override int GetHashCode() => Id.GetHashCode();
+    public static bool operator ==(GameObjectId left, GameObjectId right) => left.Id == right.Id;
+    public static bool operator !=(GameObjectId left, GameObjectId right) => left.Id != right.Id;
+    public int CompareTo(GameObjectId other) => Id.CompareTo(other);
 }
 
 public enum ObjectKind : byte {

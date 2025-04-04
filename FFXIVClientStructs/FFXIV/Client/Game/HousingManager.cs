@@ -147,7 +147,7 @@ public unsafe partial struct HousingManager {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-public struct HouseId {
+public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     /// <remarks>
     /// Masked data:<br/>
     /// - <c>0b1000_0000</c> (<c>0x80</c>) = Apartment Flag<br/>
@@ -165,6 +165,8 @@ public struct HouseId {
     [FieldOffset(0x4)] public ushort TerritoryTypeId;
     [FieldOffset(0x6)] public ushort WorldId;
 
+    [FieldOffset(0x0), CExportIgnore] public long Id;
+
     public bool IsApartment => (Data0 & 0x80) != 0 && (byte)(Data0 & 0x7F) < 2;
     public byte ApartmentDivision => (byte)(Data0 & 0x7F);
 
@@ -173,8 +175,15 @@ public struct HouseId {
     public short RoomNumber => (short)(Data2 >> 6);
     public bool IsWorkshop => RoomNumber == 0x3FF;
 
-    public static unsafe implicit operator long(HouseId id) => *(long*)&id;
+    public static implicit operator long(HouseId id) => id.Id;
     public static unsafe implicit operator HouseId(long id) => *(HouseId*)&id;
+
+    public bool Equals(HouseId other) => Id == other.Id;
+    public override bool Equals(object? obj) => obj is HouseId other && Equals(other);
+    public override int GetHashCode() => Id.GetHashCode();
+    public static bool operator ==(HouseId left, HouseId right) => left.Id == right.Id;
+    public static bool operator !=(HouseId left, HouseId right) => left.Id != right.Id;
+    public int CompareTo(HouseId other) => Id.CompareTo(other);
 }
 
 public enum EstateType {
