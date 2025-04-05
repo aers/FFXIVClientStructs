@@ -179,7 +179,6 @@ functions:
   0x140CE32B0: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
   0x140E05A40: ConvertRawToMapPosX
   0x140E05AD0: ConvertRawToMapPosY
-  0x140C69CC0: SetCondition
   0x140C6A500: IsLocalPlayerLalafell
   0x140E69840: CreateSelectYesno
   0x1414B4760: Client::UI::AddonHudLayoutScreen::MoveableAddonInfoStruct_UpdateAddonPosition
@@ -3165,7 +3164,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x142412A70
-#fail       - ea: 0x14240D140
+      - ea: 0x142412B00
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -6896,8 +6895,8 @@ classes:
     vtbls:
       - ea: 0x142034AC8
         base: Component::GUI::AtkResNode
-#    funcs:
-#     0x1405A0300: ctor # INLINED IN 7.0 in CreateResNode
+    funcs:
+      0x1406A5D80: ctor
   Component::GUI::AtkUnitBase:
     vtbls:
       - ea: 0x142034AE0
@@ -17555,21 +17554,27 @@ classes:
   Client::Graphics::Kernel::VertexShader:
     vtbls:
       - ea: 0x14200E418
+        base: Client::Graphics::Kernel::Shader
   Client::Graphics::Kernel::PixelShader:
     vtbls:
       - ea: 0x14200E490
+        base: Client::Graphics::Kernel::Shader
   Client::Graphics::Kernel::GeometryShader:
     vtbls:
       - ea: 0x14200E4B8
+        base: Client::Graphics::Kernel::Shader
   Client::Graphics::Kernel::ComputeShader:
     vtbls:
       - ea: 0x14200E580
+        base: Client::Graphics::Kernel::Shader
   Client::Graphics::Kernel::HullShader:
     vtbls:
       - ea: 0x14200E4E0
+        base: Client::Graphics::Kernel::Shader
   Client::Graphics::Kernel::DomainShader:
     vtbls:
       - ea: 0x14200E508
+        base: Client::Graphics::Kernel::Shader
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::VertexShader*>:
     vtbls:
       - ea: 0x1421653B0
