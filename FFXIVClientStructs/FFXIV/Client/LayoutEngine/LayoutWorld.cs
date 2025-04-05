@@ -48,7 +48,7 @@ public unsafe partial struct LayoutWorld {
     public partial bool AddRsvString(byte* rsvString, byte* resolvedString, nuint resolvedStringSize);
 
     [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 45")]
-    public partial CStringPointer ResolveRsfEntry(ulong indexHash);
+    public partial byte* ResolveRsfEntry(ulong indexHash);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 50 48 8B 99")]
     public partial bool AddRsfEntry(ulong indexHash, byte* rsfData);
