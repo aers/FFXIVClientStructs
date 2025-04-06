@@ -44,9 +44,9 @@ We use [..\ida\ffxiv_idarename.py](../ida/ffxiv_idarename.py) to apply data.yml.
 Note: it has to be major version 2, so something like [Python 2.7.18](https://www.python.org/downloads/release/python-2718/) works.<br>
 
 - Execute the following:<br>
-`python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.3\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`<br>
+`python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Jython\lib\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`<br>
 Note: this must be run from Python 2.  If you have multiple versions installed, you may need to qualify the path like:<br>
-`c:\Python27\python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Python\data\jython-2.7.3\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`
+`c:\Python27\python.exe -m pip install -t <YourGhidraFolder\>\Ghidra\Features\Jython\lib\Lib\site-packages pyyaml==5.4.1 anytree==2.8.0`
 
 - Open the Script Manager <p align="center"><img src=".\images\Open Script Manager.png"></p>
 
@@ -146,36 +146,3 @@ This instruction set is physically just `e8 e4 69 03 00 48 8b c8 48 89 05 c2 eb 
 What this script does is, you place the cursor on the instruction you want the signature for, presss the keybind (`Ctrl+Alt+S` by default) and it will attempt to create the smallest signature that uniquely maps to just that one instruction.
 
 Technically it'll do a few more things like, if the instruction you picked is the first in a function, it'll find the signature of a caller of that function (which works fine for Dalamud/FFXIVClientStructs signatures).
-
-# Headers
-In FFXIVClientStructs, we also have a helper program, [CExporter](../ida/CExporter/).  This program will load FFXIVClientStructs, reflect over all structs, and makes an approximate C++ Header with the corresponding struct definitions.  This header file can also be imported into Ghidra to give type definitions.
-
-While we technically have pre-generated header files checked in, they are very rarely updated, so it is recommended you just run CExporter yourself before importing them.  Just set the project as startup in Visual Studio and run.  Assuming no errors, this should update 4 files under the ida folder, for which you really only care about [ffxiv_client_structs_arrays_ghidra.h](../ida/ffxiv_client_structs_arrays_ghidra.h).
-
-After re-generating the header, in Ghidra, `File -> Parse C Source...`.  In the window that comes up, delete everything in the `Source files to parse` section, as well as the `Parse Options`, and add the path to ffxiv_client_structs_arrays_ghidra.h.  Then Save this profile for future use:
-<p align="center"><img src=".\images\Parse C Source.png"></p>
-
-Click `Parse to Program`, then `Continue`, and `Don't Use Open Archives` (the last one doesn't really matter).
-
-This will allow you to retype variables, turning the decompiled code from:
-```cpp
-      uVar3 = *(uint *)((longlong)param_1 + 0x54);
-      uVar5 = (**(code **)(*param_1 + 0x40))(param_1);
-```
-
-To:
-```cpp
-      uVar5 = *(uint *)&(param_1->NpcInfo).SelectedItemIndex;
-      uVar7 = (*(code *)((param_1->AgentInterface)._union_0x0.VTable)->GetAddonID)(param_1);
-```
-
-There are some caveats to the imported headers.
-
-## Namespaces
-Ghidra's parser doesn't support namespaces.  To make the headers even import, the CExporter replaces :: with _, such as `Component_GUI_AgentInterface`.
-
-## Enums
-Ghidra doesn't honor any enum size/type.  All enums are imported as size 0x4.  To help with this, the CExporter appends the size to the end of all enum names.  For example: `Component_GUI_NodeType0x2`.  You can search in Data Type Manager for 0x1/0x2 and manually update the size of each.
-
-<p align="center"><img src=".\images\Enum Size.png"></p>
-

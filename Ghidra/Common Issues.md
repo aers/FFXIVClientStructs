@@ -89,17 +89,10 @@ Navigate to the vtable, scroll to vf79.  You'll see:
 Select that first line (a0) and press `p` to turn this into a pointer.  Re-run.
 
 ## Known Errors
-The following 2 errors are known and expected, as not everything is properly defined for these 2 classes yet:
+The following errors are known and expected and can be ignored:
 ```
-Error: Function at 0x141264890 had unexpected name "Client::Network::PacketDispatcher.OnReceivePacket" during naming of Client::Network::NetworkModulePacketReceiverCallback.OnReceivePacket (vtbl[1])
-Error: Function at 0x1412696E0 had unexpected name "Client::Network::PacketDispatcher___Client::Network::Protocol::Chat::PacketReceiverCallbackInterface.OnReceivePacket" during naming of Client::Network::NetworkModulePacketReceiverCallback.OnReceivePacket (vtbl[1])
+Error: Function at 0x1401A0810 had unexpected name "Component::GUI::AtkModuleInterface::AtkEventInterface.vf1" during naming of Client::Game::Event::ChocoboTaxiStandEventHandler.vf274 (vtbl[274])
+Error: Function at 0x1401A0810 had unexpected name "Component::GUI::AtkModuleInterface::AtkEventInterface.vf1" during naming of Client::Game::Event::GatheringPointEventHandler.vf288 (vtbl[288])
+Error: Function at 0x1401A0810 had unexpected name "Component::GUI::AtkModuleInterface::AtkEventInterface.vf1" during naming of Client::Game::OutdoorTerritory.vf8 (vtbl[8])
+Error: The sum of "Client::UI::RaptureAtkHistory"'s base vtbl sizes (8) is greater than the actual class itself (6)
 ```
-
-## Misaligned Structs
-The header files CExporter creates have all the fields from FFXIVClientStructs, but we don't have the luxury of omitting unknown fields.  To deal with sparse structs, the Arrays.h strategy is to create a "gap" field the size of the gap.  For example `byte _gap_0xB8[0x10];`.  Sometimes you'll see properties that look off, and if you edit the structure, you'll see something like:
-
-<p align="center"><img src=".\images\Misaligned Struct.png"></p>
-
-Ghidra believes this starts at 0x1de, but the header said the field was _gap_0x1D6.  This means that some property earlier in the structs definition was parsed into ghidra as larger than what we believe it to be in FFXIVClientStructs.  This most often happens because of the Enums (see above), but can happen for other reasons.  To resolve, scroll till you find the first gap that is misaligned, and start looking through properties prior to it.
-
-
