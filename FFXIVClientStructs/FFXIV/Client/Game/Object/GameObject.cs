@@ -41,8 +41,6 @@ public unsafe partial struct GameObject {
     [FieldOffset(0xE4)] public EventId EventId;
     [FieldOffset(0xE8)] public ushort FateId;
     [FieldOffset(0xF0)] public DrawObject* DrawObject;
-    [Obsolete("Use SharedGroupLayoutInstance", true)]
-    [FieldOffset(0xF8)] public ILayoutInstance* LayoutInstance;
     [FieldOffset(0xF8)] public SharedGroupLayoutInstance* SharedGroupLayoutInstance;
     [FieldOffset(0x100)] public uint NamePlateIconId;
     [FieldOffset(0x108)] public int RenderFlags;

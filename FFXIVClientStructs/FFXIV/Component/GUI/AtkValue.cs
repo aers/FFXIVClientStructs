@@ -18,8 +18,6 @@ public enum ValueType {
     WideString = 0x9, // 2 bytes per character (UTF-16)
     String8 = 0xA, // assumed to be a const char*
     Vector = 0xB,
-    [Obsolete("Renamed to Pointer", true)]
-    Texture = 0xC,
     Pointer = 0xC,
     AtkValues = 0xD,
 
@@ -46,8 +44,6 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [FieldOffset(0x8), CExporterUnion("Value")] public CStringPointer String;
     [FieldOffset(0x8), CExporterUnion("Value")] public char* WideString; // C# uses UTF-16 for char, which makes it easy for us to use it here
     [FieldOffset(0x8), CExporterUnion("Value")] public StdVector<AtkValue>* Vector;
-    [Obsolete("Renamed to Pointer", true)]
-    [FieldOffset(0x8), CExporterUnion("Value")] public Texture* Texture;
     [FieldOffset(0x8), CExporterUnion("Value")] public void* Pointer;
     [FieldOffset(0x8), CExporterUnion("Value")] public AtkValue* AtkValues;
 

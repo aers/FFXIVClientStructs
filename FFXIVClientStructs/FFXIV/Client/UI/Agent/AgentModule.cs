@@ -293,8 +293,6 @@ public enum AgentId : uint {
     Unk257 = 257, // PvPMKSHeaderSpec, PvPSpectatorCameraList, PvPSpectatorList
     Unk258 = 258,
     Aquarium = 259,
-    [Obsolete("Renamed to just Aquarium since it also handles the AquariumFishlist addon", true)]
-    AquariumSetting = 259,
     QTE = 260,
     DeepDungeonMenu = 261,
     ContextIconMenu = 262,

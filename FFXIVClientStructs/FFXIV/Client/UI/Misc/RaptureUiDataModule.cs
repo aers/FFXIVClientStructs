@@ -14,10 +14,6 @@ public unsafe partial struct RaptureUiDataModule {
         return uiModule == null ? null : uiModule->GetRaptureUiDataModule();
     }
 
-    [FieldOffset(0x4E0), FixedSizeArray, Obsolete("Moved to PartyRoleListModule", true)] internal FixedSizeArray16<ushort> _partyListTankOrder;
-    [FieldOffset(0x500), FixedSizeArray, Obsolete("Moved to PartyRoleListModule", true)] internal FixedSizeArray16<ushort> _partyListHealerOrder;
-    [FieldOffset(0x520), FixedSizeArray, Obsolete("Moved to PartyRoleListModule", true)] internal FixedSizeArray16<ushort> _partyListDpsOrder;
-
     [FieldOffset(0x38C0)] public MuteList Mutelist;
 
     [MemberFunction("4C 8B D1 41 83 F9 06")]

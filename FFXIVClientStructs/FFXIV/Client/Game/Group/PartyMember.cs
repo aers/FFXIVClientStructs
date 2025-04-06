@@ -11,8 +11,6 @@ public unsafe partial struct PartyMember {
     [FieldOffset(0x3E4)] public float Y;
     [FieldOffset(0x3E8)] public float Z;
 
-    [Obsolete("Renamed to AccountId", true)]
-    [FieldOffset(0x3F0)] public ulong Unk300; // content id for anonymous players?
     [FieldOffset(0x3F0)] public ulong AccountId;
 
     [FieldOffset(0x3F8)] public ulong ContentId;
@@ -28,8 +26,6 @@ public unsafe partial struct PartyMember {
     // GroupManager::GetPartyMemberName: "E8 ? ? ? ? 4C 8B C5 4C 2B C0" or "48 8B 81 ? ? ? ? 48 85 C0 74 ? 48 8B C8 E9"
     [FieldOffset(0x41C), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;
 
-    [Obsolete("Renamed to NameOverride", true)]
-    [FieldOffset(0x460)] public Utf8String* UnkName;
     [FieldOffset(0x460)] public Utf8String* NameOverride; // if non-null, replaces real name in ui (eg for blacklisted players)
 
     [FieldOffset(0x468)] public byte Sex;

@@ -144,8 +144,6 @@ public unsafe partial struct AgentCharaCard {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct Decoration {
         [FieldOffset(0x00)] public DecorationType Type;
-        [Obsolete("Use Type", true)]
-        [FieldOffset(0x00)] public byte Index;
         [FieldOffset(0x01)] public byte Unk1;
         [FieldOffset(0x04)] public uint IconId;
     }

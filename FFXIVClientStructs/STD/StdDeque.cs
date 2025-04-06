@@ -92,9 +92,6 @@ public unsafe struct StdDeque<T>
 
     public static void Swap(ref StdDeque<T> item1, ref StdDeque<T> item2) => (item1, item2) = (item2, item1);
 
-    [Obsolete("Use indexer", true)]
-    public readonly T Get(ulong index) => this[(long)index];
-
     /// <inheritdoc/>
     public readonly long BinarySearch(in T item) => LookupHelper<T, StdDeque<T>>.BinarySearch(in this, 0, LongCount, item, null);
 

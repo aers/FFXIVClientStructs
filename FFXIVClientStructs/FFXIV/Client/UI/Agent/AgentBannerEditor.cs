@@ -96,7 +96,6 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x3D8)] public EditorOpenType OpenType;
 
     [FieldOffset(0x3E4)] public float FrameCountdown; // starting at 0.5s on open
-    [FieldOffset(0x3E8), Obsolete("Renamed to OpenerEnabledGearsetIndex", true)] public int GearsetId;
     [FieldOffset(0x3E8)] public int OpenerEnabledGearsetIndex; // not exactly sure why there is a second field for this
 
     [FieldOffset(0x3F0)] public int CloseDialogAddonId;

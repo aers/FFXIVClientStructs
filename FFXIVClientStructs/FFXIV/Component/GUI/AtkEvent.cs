@@ -76,13 +76,6 @@ public enum AtkEventType : byte {
     LinkMouseClick = 75,
     LinkMouseOver = 76,
     LinkMouseOut = 77,
-
-    [Obsolete("Renamed to ListItemClick", true)]
-    ListItemToggle = 35,
-    [Obsolete("Renamed to DialogueClose", true)]
-    UnkAtkDialogue59 = 62,
-    [Obsolete("Renamed to DialogueSubmit", true)]
-    UnkAtkDialogue60 = 63,
 }
 
 // Component::GUI::AtkEvent

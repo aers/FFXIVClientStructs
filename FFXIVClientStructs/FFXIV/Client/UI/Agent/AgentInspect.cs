@@ -19,8 +19,6 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x038)] public Utf8String SearchComment;
     /// <remarks> PSN-Online-ID or Xbox-Gamertag </remarks>
     [FieldOffset(0x108)] public Utf8String OnlineId;
-    [Obsolete("Renamed to OnlineId", true)]
-    [FieldOffset(0x108)] public Utf8String PsnName;
     [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray3<Utf8String> _chocoboBarding;
     [FieldOffset(0x2A8), FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
     [FieldOffset(0x448)] public FreeCompanyData FreeCompany;
