@@ -31,12 +31,6 @@ public unsafe partial struct ContentsFinder {
 public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray5<QueueEntry> _queuedEntries;
 
-    [FieldOffset(0x04), Obsolete("Use QueuedEntries[0].ConditionId", true)] public uint QueuedContentFinderConditionId1;
-    [FieldOffset(0x0C), Obsolete("Use QueuedEntries[1].ConditionId", true)] public uint QueuedContentFinderConditionId2;
-    [FieldOffset(0x14), Obsolete("Use QueuedEntries[2].ConditionId", true)] public uint QueuedContentFinderConditionId3;
-    [FieldOffset(0x1C), Obsolete("Use QueuedEntries[3].ConditionId", true)] public uint QueuedContentFinderConditionId4;
-    [FieldOffset(0x24), Obsolete("Use QueuedEntries[4].ConditionId", true)] public uint QueuedContentFinderConditionId5;
-
     [FieldOffset(0x28)] public uint QueuedClassJobId;
 
     [FieldOffset(0x40)] public int EnteredQueueTimestamp;
@@ -51,16 +45,8 @@ public unsafe partial struct ContentsFinderQueueInfo {
     [FieldOffset(0x5C)] public sbyte PositionInQueue;
 
     [FieldOffset(0x62)] public QueueInfoState InfoState;
-    [FieldOffset(0x67), Obsolete("Use StateInfo.AverageWaitTime", true)] public byte AverageWaitTime; // In minutes
 
     [FieldOffset(0x7C)] public QueueEntry PoppedQueueEntry;
-    [FieldOffset(0x7C), Obsolete("Use PoppedQueueEntry.ContentType", true)] public PoppedContentTypes PoppedContentType;
-
-    /// <remarks>
-    /// Based on <see cref="PoppedContentType"/>, either a row id of the ContentRoulette
-    /// sheet for Roulettes or a row id of the ContentFinderCondition sheet for Duties.
-    /// </remarks>
-    [FieldOffset(0x80), Obsolete("Use PoppedQueueEntry.ConditionId", true)] public uint PoppedContentId;
 
     [FieldOffset(0x88)] public bool PoppedContentIsUnrestrictedParty;
     [FieldOffset(0x89)] public bool PoppedContentIsMinimalIL;
@@ -101,13 +87,6 @@ public unsafe partial struct ContentsFinderQueueInfo {
         Accepted = 4,
         InContent = 5
     }
-
-    [Obsolete("Use FFXIVClientStructs.FFXIV.Client.UI.Agent.ContentsId.ContentsType", true)]
-    public enum PoppedContentTypes : byte {
-        None = 0,
-        Roulette = 1,
-        Duty = 2
-    }
 }
 
 
@@ -143,4 +122,3 @@ public struct QueueInfoState {
         None5 = 5
     }
 }
-

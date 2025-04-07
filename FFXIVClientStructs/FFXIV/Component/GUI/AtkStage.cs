@@ -30,7 +30,6 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x140)] public AtkGroupManager AtkGroupManager;
     [FieldOffset(0x168)] public AtkTooltipManager TooltipManager;
     [FieldOffset(0x2B8)] public DialogueStruct Dialogue;
-    [FieldOffset(0x2C0), Obsolete("Use Dialogue.AtkDialogue", true)] public AtkDialogue AtkDialogue;
     [FieldOffset(0x2F8)] public FilterStruct Filter;
     [FieldOffset(0x308)] public OperationGuideStruct OperationGuide;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;

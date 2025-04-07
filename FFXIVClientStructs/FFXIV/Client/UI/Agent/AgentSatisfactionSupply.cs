@@ -18,10 +18,6 @@ public unsafe partial struct AgentSatisfactionSupply {
     [FieldOffset(0x60)] public ushort ClassJobLevel;
 
     [FieldOffset(0x64)] public SatisfactionSupplyManager.NpcInfo NpcData;
-    [FieldOffset(0x64), Obsolete("Use NpcData.NpcId", true)] public uint NpcId;
-    [FieldOffset(0x78), Obsolete("Use NpcData.RemainingAllowances", true)] public ushort RemainingAllowances;
-    [FieldOffset(0x7A), Obsolete("Use NpcData.LevelUnlocked", true)] public short LevelUnlocked;
-    [FieldOffset(0x7C), Obsolete("Use NpcData.CanGlamour", true)] public byte CanGlamour;
 
     [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray3<ItemInfo> _items;
 

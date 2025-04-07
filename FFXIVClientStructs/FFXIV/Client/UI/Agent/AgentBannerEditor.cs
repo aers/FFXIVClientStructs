@@ -80,15 +80,6 @@ public unsafe partial struct AgentBannerEditorState {
     [FieldOffset(0x230)] public BannerModuleEntry BannerEntry;
     [FieldOffset(0x2C0)] public BannerModuleEntry BannerEntryBackup; // BannerEntry is saved here when opening one of those Lists (e.g. "Display Backgrounds List"), and is restored when cancelling out.
     [FieldOffset(0x350)] public BannerGearData GearData;
-    [FieldOffset(0x350), FixedSizeArray, Obsolete("Use GearData.ItemIds", true)] internal FixedSizeArray14<uint> _itemIds;
-    [FieldOffset(0x388), FixedSizeArray, Obsolete("Use GearData.Stain1Ids", true)] internal FixedSizeArray14<byte> _stain0Ids;
-    [FieldOffset(0x396), FixedSizeArray, Obsolete("Use GearData.Stain2Ids", true)] internal FixedSizeArray14<byte> _stain1Ids;
-    [FieldOffset(0x3A4), FixedSizeArray, Obsolete("Use GearData.GlassesIds", true)] internal FixedSizeArray2<ushort> _glassesIds;
-    [FieldOffset(0x3A8), Obsolete("Use GearData.Checksum", true)] public uint Checksum;
-    [FieldOffset(0x3AC), Obsolete("Use GearData.GearVisibilityFlag", true)] public BannerGearVisibilityFlag GearVisibilityFlag;
-    [FieldOffset(0x3B0), Obsolete("Renamed to EnabledGearsetIndex. This is the index of a RaptureGearsetModule.Entries list, which only contains enabled entries.", true)] public byte GearsetIndex;
-    [FieldOffset(0x3B0), Obsolete("Use GearData.EnabledGearsetIndex", true)] public byte EnabledGearsetIndex;
-    [FieldOffset(0x3B1), Obsolete("Use GearData.ClassJobId", true)] public byte ClassJobId;
     [FieldOffset(0x3B8)] public AgentBannerEditor* AgentBannerEditor;
     [FieldOffset(0x3C0)] public UIModule* UIModule;
     [FieldOffset(0x3C8)] public CharaViewPortrait* CharaView;

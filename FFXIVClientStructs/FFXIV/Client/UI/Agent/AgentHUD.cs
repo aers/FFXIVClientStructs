@@ -50,10 +50,6 @@ public unsafe partial struct AgentHUD {
     [FieldOffset(0x3564)] public uint ExpClassJobId;
     [FieldOffset(0x3568)] public ushort ExpLevel;
     [FieldOffset(0x356A)] public ushort ExpContentLevel; // level in eureka and bozja for example
-    [FieldOffset(0x356C), Obsolete("Use ExpFlags.HasFlag(AgentHudExpFlag.Synced)", true)] public bool ExpIsLevelSynced;
-    [FieldOffset(0x356D), Obsolete("Use ExpFlags.HasFlag(AgentHudExpFlag.Unk2)", true)] public bool ExpUnkBool2;
-    [FieldOffset(0x356E), Obsolete("Use ExpFlags.HasFlag(AgentHudExpFlag.MaxLevel)", true)] public bool ExpIsMaxLevel;
-    [FieldOffset(0x356F), Obsolete("Use ExpFlags.HasFlag(AgentHudExpFlag.InEureka)", true)] public bool ExpIsInEureka;
     [FieldOffset(0x356C)] public AgentHudExpFlag ExpFlags;
 
     [FieldOffset(0x3578), FixedSizeArray] internal FixedSizeArray16<HudQueuedBattleTalk> _queuedBattleTalks;

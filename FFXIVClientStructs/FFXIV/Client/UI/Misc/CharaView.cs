@@ -31,8 +31,6 @@ public unsafe partial struct CharaView : ICreatable {
     /// <remarks> (AgentInterface* agent) -> Client::Game::Character::Character* </remarks>
     [FieldOffset(0x40)] public nint AgentCallbackGetCharacter;
     [FieldOffset(0x48)] public CharaViewModelData ModelData;
-    [Obsolete("Completely wrong. Use ModelData", true)]
-    [FieldOffset(0x48)] public CharaViewCharacterData CharacterData;
     [FieldOffset(0xE0)] public uint Race; // used to check EquipRestriction
     [FieldOffset(0xE4)] public uint Sex; // used to check EquipRestriction
     [FieldOffset(0xE8)] private uint UnkE8;
@@ -76,9 +74,6 @@ public unsafe partial struct CharaView : ICreatable {
 
     [VirtualFunction(10)]
     public partial void Update();
-
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4"), Obsolete("Completely wrong. Use SetModelData", true)]
-    public partial void SetCustomizeData(CharaViewCharacterData* data);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B CD 45 8B C4")]
     public partial void SetModelData(CharaViewModelData* data);
@@ -124,8 +119,6 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0x1C), FixedSizeArray] internal FixedSizeArray14<uint> _itemIds;
     [FieldOffset(0x54), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain0Ids;
     [FieldOffset(0x62), FixedSizeArray] internal FixedSizeArray14<byte> _itemStain1Ids;
-    [FieldOffset(0x70), Obsolete("Use GlassesIds[0]", true)] public ushort Glasses0Id;
-    [FieldOffset(0x72), Obsolete("Use GlassesIds[1]", true)] public ushort Glasses1Id;
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
     [FieldOffset(0x74)] public byte ClassJobId;
     [FieldOffset(0x75)] public bool HeadgearHidden;

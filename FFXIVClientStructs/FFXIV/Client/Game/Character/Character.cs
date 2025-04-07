@@ -29,10 +29,6 @@ public unsafe partial struct Character {
 
     // 0x1AA8: start of some substructure
     [FieldOffset(0x1A98)] public ModelContainer ModelContainer;
-    [Obsolete($"Use {nameof(ModelContainer)}.{nameof(ModelContainer.ModelCharaId)} instead.", true)]
-    [FieldOffset(0x1AA8)] public int ModelCharaId; // +0x10 in substructure
-    [Obsolete($"Use {nameof(ModelContainer)}.{nameof(ModelContainer.UnscaledRadius)} instead.", true)]
-    [FieldOffset(0x1ABC)] public float UnscaledRadius; // if character is unmounted, it's hitbox radius is calculated to be this value multiplied by scale
 
     // 0x01 = PartyMember
     // 0x02 = AllianceMember
@@ -124,10 +120,6 @@ public unsafe partial struct Character {
     /// <summary>Check if this character is in a jumping/falling animation.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 46 48 8B 4B 08")]
     public partial bool IsJumping();
-
-    /// <summary> Uses TransformationId, Tribe, BodyType, Sex and Height as well as RSP scaling values to calculate current height.  </summary>
-    [Obsolete($"Function moved to {nameof(ModelContainer)}.", true)]
-    public float CalculateHeight() => ModelContainer.CalculateHeight();
 
     /// <summary> Check if the character is using the World Visit system. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 8B CF")]

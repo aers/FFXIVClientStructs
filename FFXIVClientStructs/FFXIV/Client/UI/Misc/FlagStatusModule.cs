@@ -16,11 +16,6 @@ public unsafe partial struct FlagStatusModule {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray32<ushort> _patchMarkVersions;
     [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray32<byte> _patchMarkStates;
     [FieldOffset(0xA8), FixedSizeArray] internal FixedSizeArray32<PatchMarkIdEntry> _patchMarkIds;
-    // 4 bytes
-
-    [Obsolete("Wrong data type, use UIFlags", true)]
-    [FieldOffset(0x1AC), FixedSizeArray] internal FixedSizeArray64<byte> _flags;
-
     /// <remarks>
     /// 1 = Summoned Companion Id<br/>
     /// 10 = Last seen MentorRenewDialogue MentorVersion<br/>

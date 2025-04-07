@@ -19,8 +19,6 @@ public partial struct AtkEventData {
         [FieldOffset(0x02)] public short PosY;
         [FieldOffset(0x04)] public short WheelDirection;
         [FieldOffset(0x06)] public byte ButtonId;
-        [Obsolete("Use ButtonId == 1", true)]
-        [FieldOffset(0x06)] public bool IsRightClick;
         [FieldOffset(0x07)] public ModifierFlag Modifier;
         [FieldOffset(0x08)] private int Unk8;
         [FieldOffset(0x0C)] private short UnkC;

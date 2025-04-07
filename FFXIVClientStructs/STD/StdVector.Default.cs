@@ -149,38 +149,4 @@ public unsafe struct StdVector<T> : IStdVector<T>
     public long SetCapacity(long newCapacity) => WithOps.SetCapacity(newCapacity);
     public readonly override int GetHashCode() => HashCode.Combine((nint)First, (nint)Last, (nint)End);
     public readonly override string ToString() => $"{nameof(StdVector<T>)}<{typeof(T)}>({LongCount}/{LongCapacity})";
-
-    [Obsolete($"Use {nameof(AsSpan)} instead.", true)]
-    public ReadOnlySpan<T> Span {
-        get {
-            var size = Size();
-            if (size >= 0x7FEFFFFF)
-                throw new IndexOutOfRangeException($"Size exceeds max. Array index. (Size={size})");
-            return new ReadOnlySpan<T>(First, (int)size);
-        }
-    }
-
-    [Obsolete($"Use {nameof(LongCount)} instead.", true)]
-    public ulong Size() {
-        if (First == null || Last == null)
-            return 0;
-
-        return ((ulong)Last - (ulong)First) / (ulong)sizeof(T);
-    }
-
-    [Obsolete($"Use {nameof(LongCapacity)} instead.", true)]
-    public ulong Capacity() {
-        if (End == null || First == null)
-            return 0;
-
-        return ((ulong)End - (ulong)First) / (ulong)sizeof(T);
-    }
-
-    [Obsolete("Use index accessor instead.", true)]
-    public T Get(ulong index) {
-        if (index >= (ulong)LongCount)
-            throw new IndexOutOfRangeException($"Index out of Range: {index}");
-
-        return First[index];
-    }
 }

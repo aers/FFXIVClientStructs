@@ -44,10 +44,6 @@ public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 3C FF")]
     public partial sbyte GetCurrentPlot();
 
-    // Unique Identifier
-    [Obsolete("Renamed to GetCurrentIndoorHouseId, as this only returns the HouseId of IndoorTerritory", true)]
-    public long GetCurrentHouseId() => GetCurrentIndoorHouseId();
-
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B F8 8D 4A 02")]
     public partial HouseId GetCurrentIndoorHouseId();
 

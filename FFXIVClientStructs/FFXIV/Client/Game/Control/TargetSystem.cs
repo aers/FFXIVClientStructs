@@ -35,18 +35,12 @@ public unsafe partial struct TargetSystem {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 33 ED EB 16")]
     public partial GameObjectId GetTargetObjectId();
 
-    [Obsolete($"Renamed to {nameof(GetTargetObjectId)}", true)]
-    public GameObjectId GetCurrentTargetId() => GetTargetObjectId();
-
     /// <summary>
     /// Method to get the player's current target GameObject. Will resolve the hard and soft targets, in
     /// that order, returning the first one that's set.
     /// </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 41 8B C4")]
     public partial GameObject* GetTargetObject();
-
-    [Obsolete($"Renamed to {nameof(GetTargetObject)}", true)]
-    public GameObject* GetCurrentTarget() => GetTargetObject();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B C7 75 ?? 32 C0")]
     public partial GameObject* GetHardTarget();

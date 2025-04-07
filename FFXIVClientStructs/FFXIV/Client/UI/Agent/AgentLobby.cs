@@ -79,14 +79,6 @@ public unsafe partial struct AgentLobby {
 
     [FieldOffset(0x22B4)] public bool HasShownCharacterNotFound; // "The character you last logged out with in this play environment could not be found on the current data center."
 
-    // title movie stuff is seemingly no longer part of AgentLobby
-    [FieldOffset(0xA98), Obsolete("Title movie data no longer part of AgentLobby.", true)] public uint AccountExpansion;
-    [FieldOffset(0xA9C), Obsolete("Title movie data no longer part of AgentLobby.", true)] public bool ShowFreeTrialLogo;
-    [FieldOffset(0xAA0), Obsolete("Title movie data no longer part of AgentLobby.", true)] public uint TitleScreenExpansion;
-    [FieldOffset(0xAA4), Obsolete("Title movie data no longer part of AgentLobby.", true)] public bool ShowOriginalLogo; // pre-relaunch
-
-    [FieldOffset(0x12B0), Obsolete("Not updated since before Dawntrail.", true)] public byte RequestCharaterIndex;
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ?? 41 8B D7")]
     public partial void UpdateLobbyUIStage();
 

@@ -112,9 +112,6 @@ public unsafe partial struct PlayerState {
 
     [FieldOffset(0x4F6), FixedSizeArray] internal FixedSizeArray7<byte> _selectedPoses;
     [FieldOffset(0x4FD), FixedSizeArray] internal FixedSizeArray3<byte> _playerStateFlags;
-    [FieldOffset(0x4FD), Obsolete("Use PlayerStateFlags[0]", true)] public byte PlayerStateFlags1;
-    [FieldOffset(0x4FE), Obsolete("Use PlayerStateFlags[1]", true)] public byte PlayerStateFlags2;
-    [FieldOffset(0x4FF), Obsolete("Use PlayerStateFlags[2]", true)] public byte PlayerStateFlags3;
 
     [FieldOffset(0x52A)] public byte SightseeingLogUnlockState; // 0 = Not Unlocked, 1 = ARR Part 1, 2 = ARR Part 2
     [FieldOffset(0x52B)] public byte SightseeingLogUnlockStateEx; // 3 = Quest "Sights of the North" completed (= AdventureExPhase unlocked?)
@@ -360,14 +357,6 @@ public unsafe partial struct PlayerState {
     /// <param name="aetherCurrentCompFlgSetId">RowId of AetherCurrentCompFlgSet</param>
     [MemberFunction("4C 8B C9 85 D2 74 1D")]
     public partial bool IsAetherCurrentZoneComplete(uint aetherCurrentCompFlgSetId);
-
-    /// <summary>
-    /// Check if all vistas of an expansion in the Sightseeing Log have been discovered.
-    /// </summary>
-    /// <param name="adventureExPhaseId">AdventureExPhase RowId</param>
-    [Obsolete("The signature is wrong. There is currently no alternative to this function.", true)]
-    [MemberFunction("81 FA ?? ?? ?? ?? 73 1F 0F B6 C2")]
-    public partial bool IsAdventureExPhaseComplete(uint adventureExPhaseId);
 
     /// <summary>
     /// Check if a Sightseeing Log vista has been discovered.

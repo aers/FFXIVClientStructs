@@ -72,22 +72,6 @@ public unsafe partial struct ModelRenderer {
         SamplerDepthWithWater = 17,
     }
 
-    /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_LightDirection constant buffer (CRC: 0xEF4E7491). </summary>
-    [FieldOffset(0x8), Obsolete("Use ConstantSamplerIds[(int)WellKnownConstant.LightDirection]", true)] public uint LightDirectionId;
-    /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_WorldViewMatrix constant buffer (CRC: 0x76BB3DC0). </summary>
-    [FieldOffset(0xC), Obsolete("Use ConstantSamplerIds[(int)WellKnownConstant.WorldViewMatrix]", true)] public uint WorldViewMatrixId;
-    /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_JointMatrixArray constant buffer (CRC: 0x88AA546A). </summary>
-    [FieldOffset(0x10), Obsolete("Use ConstantSamplerIds[(int)WellKnownConstant.JointMatrixArray]", true)] public uint JointMatrixArrayId;
-    /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_SelectionModelParameter constant buffer (CRC: 0x04543FA3). </summary>
-    [FieldOffset(0x3C), Obsolete("Use ConstantSamplerIds[(int)WellKnownConstant.SelectionModelParameter]", true)] public uint SelectionModelParameterId;
-
-    /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_SamplerNormal sampler/texture (CRC: 0x0C5EC1F1). </summary>
-    [FieldOffset(0x40), Obsolete("Use ConstantSamplerIds[(int)WellKnownSampler.SamplerNormal]", true)] public uint SamplerNormalId;
-    /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_SamplerIndex sampler/texture (CRC: 0x565F8FD8). </summary>
-    [FieldOffset(0x44), Obsolete("Use ConstantSamplerIds[(int)WellKnownSampler.SamplerIndex]", true)] public uint SamplerIndexId;
-    /// <summary> <see cref="ShaderPackage.ConstantSamplerUnknown.Id"/> of the g_SamplerViewPosition sampler/texture (CRC: 0xBC615663). </summary>
-    [FieldOffset(0x48), Obsolete("Use ConstantSamplerIds[(int)WellKnownSampler.SamplerViewPosition]", true)] public uint SamplerViewPositionId;
-
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray18<uint> _constantSamplerIds; // Might be a FixedSizeArray22<uint> as of 7.2, unsure
 
     [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray18<ShaderSceneKey> _sceneKeys;

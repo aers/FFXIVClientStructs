@@ -45,14 +45,6 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x1A)] public bool CanEdit;
         [FieldOffset(0x1B)] public bool InvertPortraitPlacement;
         [FieldOffset(0x1C)] public PlateDesign PlateDesign;
-        [FieldOffset(0x1C), Obsolete("Use PlateDesign.BasePlate", true)] public byte BasePlate; // CharaCardBase RowId
-        [FieldOffset(0x1E), Obsolete("Use PlateDesign.TopBorder", true)] public byte TopBorder; // CharaCardHeader RowId
-        [FieldOffset(0x1F), Obsolete("Use PlateDesign.BottomBorder", true)] public byte BottomBorder; // CharaCardHeader RowId
-        [FieldOffset(0x22), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations", true)] public byte Backing; // CharaCardDecoration RowId
-        [FieldOffset(0x24), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations", true)] public byte PatternOverlay; // CharaCardDecoration RowId
-        [FieldOffset(0x26), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations", true)] public byte PortraitFrame; // CharaCardDecoration RowId
-        [FieldOffset(0x28), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations", true)] public byte PlateFrame; // CharaCardDecoration RowId
-        [FieldOffset(0x2A), Obsolete("Not a fixed field. Iterate over PlateDesign.Decorations", true)] public byte Accent; // CharaCardDecoration RowId
         [FieldOffset(0x2C)] public byte NumPlayStyles;
         /// <remarks> CharaCardPlayStyle RowIds </remarks>
         [FieldOffset(0x2D), FixedSizeArray] internal FixedSizeArray6<byte> _playStyles;
@@ -94,18 +86,6 @@ public unsafe partial struct AgentCharaCard {
         [FieldOffset(0x22C), FixedSizeArray] internal FixedSizeArray5<Decoration> _decorations;
 
         [FieldOffset(0x258), FixedSizeArray] internal FixedSizeArray6<Activity> _activities;
-        [FieldOffset(0x258), Obsolete("Use Activities[1].IconId", true)] public uint Activity1IconId;
-        [FieldOffset(0x260), Obsolete("Use Activities[1].Name", true)] public Utf8String Activity1Name;
-        [FieldOffset(0x2C8), Obsolete("Use Activities[2].IconId", true)] public uint Activity2IconId;
-        [FieldOffset(0x2D0), Obsolete("Use Activities[2].Name", true)] public Utf8String Activity2Name;
-        [FieldOffset(0x338), Obsolete("Use Activities[3].IconId", true)] public uint Activity3IconId;
-        [FieldOffset(0x340), Obsolete("Use Activities[3].Name", true)] public Utf8String Activity3Name;
-        [FieldOffset(0x3A8), Obsolete("Use Activities[4].IconId", true)] public uint Activity4IconId;
-        [FieldOffset(0x3B0), Obsolete("Use Activities[4].Name", true)] public Utf8String Activity4Name;
-        [FieldOffset(0x418), Obsolete("Use Activities[5].IconId", true)] public uint Activity5IconId;
-        [FieldOffset(0x420), Obsolete("Use Activities[5].Name", true)] public Utf8String Activity5Name;
-        [FieldOffset(0x488), Obsolete("Use Activities[6].IconId", true)] public uint Activity6IconId;
-        [FieldOffset(0x490), Obsolete("Use Activities[6].Name", true)] public Utf8String Activity6Name;
         [FieldOffset(0x4F8)] public uint BannerFrameIconId;
         [FieldOffset(0x4FC)] public uint BannerDecorationIconId;
         // When EditAddonId is closed without saving, these fields are used:
