@@ -4,9 +4,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Network;
 //   Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
 //   Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x08)] // 0x30???
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 51 ?? 48 89 01 48 8B D9 48 8D 05", 3)]
 public unsafe partial struct PacketDispatcher {
+    [FieldOffset(0x18)] public uint GameSessionRandom;
+    [FieldOffset(0x1C)] public uint LastPacketRandom;
+    [FieldOffset(0x20)] public uint Key0;
+    [FieldOffset(0x24)] public uint Key1;
+    [FieldOffset(0x28)] public uint Key2;
+    
     [MemberFunction("48 89 5C 24 ?? 56 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 48 8B F2")]
     public static partial void HandleSocialPacket(uint targetId, nint packet);
 
