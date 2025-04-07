@@ -1898,6 +1898,15 @@ enums:
     "Battle": 3
     "Daybreak": 4
     "Twilight": 5
+- type: Client::Game::ChocoboTaxiState
+  name: ChocoboTaxiState
+  underlying: int
+  namespace: Client.Game
+  values:
+    "None": 0
+    "Mounting": 1
+    "Traveling": 2
+    "Landing": 3
 - type: Client::Game::GcArmyMemberFlag
   name: GcArmyMemberFlag
   underlying: byte
@@ -4907,7 +4916,7 @@ structs:
     name: Jumping
     offset: 48
   - type: byte
-    name: AutorunActive
+    name: UsingChocoboTaxi
     offset: 49
   - type: byte
     name: OccupiedSummoningBell
@@ -4931,7 +4940,7 @@ structs:
     name: BoundByDuty56
     offset: 56
   - type: byte
-    name: Unknown57
+    name: MountOrOrnamentTransition
     offset: 57
   - type: byte
     name: WatchingCutscene
@@ -5042,7 +5051,7 @@ structs:
     name: WaitingToVisitOtherWorld
     offset: 93
   - type: byte
-    name: UsingParasol
+    name: UsingFashionAccessory
     offset: 94
   - type: byte
     name: BoundByDuty95
@@ -5072,7 +5081,7 @@ structs:
     name: Unknown103
     offset: 103
   - type: float
-    name: UnkTimer
+    name: MountOrOrnamentTransitionResetTimer
     offset: 104
   member_functions: []
   static_members:
@@ -6636,11 +6645,13 @@ structs:
     parameters:
     - type: Client::Game::HousingManager*
       name: this
+  static_members:
+  - signature: 48 89 1D ?? ?? ?? ?? EB 07
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Game::HousingManager
   static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 4C 8D 60 60
-    return_type: Client::Game::HousingManager*
-    name: Instance
-    parameters: []
   - signature: 48 8B 05 ?? ?? ?? ?? 48 8B 50 08 48 85 D2 74 10
     return_type: unsigned int
     name: GetOriginalHouseTerritoryTypeId
@@ -10014,6 +10025,12 @@ structs:
     offset: 352
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 89 98 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ??
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Graphics::Render::OffscreenRenderingManager
 - type: Client::Graphics::Render::PostBoneDeformerBaseUpdater
   name: PostBoneDeformerBaseUpdater
   namespace: Client.Graphics.Render
@@ -10617,6 +10634,12 @@ structs:
     offset: 56
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8B 3D ?? ?? ?? ?? 48 85 C0
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::System::File::FileManager
 - type: Client::System::File::FileThread
   name: FileThread
   namespace: Client.System.File
@@ -10687,6 +10710,12 @@ structs:
     name: MinHeight
     offset: 92
   member_functions: []
+  static_members:
+  - signature: 89 15 ?? ?? ?? ?? 48 F7 E1
+    relative_follow_offsets:
+    - 2
+    is_pointer: False
+    return_type: Client::System::Framework::GameWindow
 - type: Client::System::Framework::Task
   name: Task
   namespace: Client.System.Framework
@@ -10850,6 +10879,12 @@ structs:
   - name: LoadCursor
     offset: 184
   member_functions: []
+  static_members:
+  - signature: 75 36 48 8B 15 ?? ?? ?? ??
+    relative_follow_offsets:
+    - 5
+    is_pointer: True
+    return_type: Client::System::Input::Cursor
 - type: Client::System::Input::CursorInputData
   name: CursorInputData
   namespace: Client.System.Input
@@ -11584,7 +11619,7 @@ structs:
   - signature: 4C 8B 43 48 48 8B 0D ?? ?? ?? ??
     relative_follow_offsets:
     - 7
-    is_pointer: False
+    is_pointer: True
     return_type: Client::System::Scheduler::ActionTimelineManager
 - type: Client::System::Scheduler::ActionTimelineManager::PreloadActionTmbInfo
   name: PreloadActionTmbInfo
@@ -11947,6 +11982,12 @@ structs:
     offset: 4160
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 89 B3 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::System::Threading::ThreadManager
 - type: Client::System::Timer::ClientTime
   name: ClientTime
   namespace: Client.System.Timer
@@ -12165,25 +12206,6 @@ structs:
   - type: Component::GUI::AtkCollisionNode*
     name: AtkCollisionNode
     offset: 56
-  member_functions: []
-- type: Client::UI::AddonAreaMap::AddonAreaMapNumberArray
-  name: AddonAreaMapNumberArray
-  namespace: Client.UI
-  union: False
-  size: 24
-  fields:
-  - type: int
-    name: X
-    offset: 0
-  - type: int
-    name: Y
-    offset: 4
-  - type: int
-    name: PlayerRotation
-    offset: 8
-  - type: int
-    name: ConeRotation
-    offset: 12
   member_functions: []
 - type: Client::UI::AddonCharacterClass::ClassEntry
   name: ClassEntry
@@ -12983,64 +13005,6 @@ structs:
     name: BubbleImageNode
     offset: 48
   member_functions: []
-- type: Client::UI::AddonNamePlate::AddonNamePlateNumberArray::NamePlateObjectIntArrayData
-  name: NamePlateObjectIntArrayData
-  namespace: Client.UI
-  union: False
-  size: 80
-  fields:
-  - type: Client::UI::UIObjectKind
-    name: NamePlateKind
-    offset: 0
-  - type: int
-    name: HPLabelState
-    offset: 4
-  - type: int
-    name: UpdateFlags
-    offset: 8
-  - type: int
-    name: X
-    offset: 12
-  - type: int
-    name: Y
-    offset: 16
-  - type: float
-    name: Depth
-    offset: 20
-  - type: int
-    name: Scale
-    offset: 24
-  - type: int
-    name: GaugeFillPercentage
-    offset: 28
-  - type: unsigned int
-    name: NameTextColor
-    offset: 32
-  - type: unsigned int
-    name: NameEdgeColor
-    offset: 36
-  - type: unsigned int
-    name: GaugeFillColor
-    offset: 40
-  - type: unsigned int
-    name: GaugeContainerColor
-    offset: 44
-  - type: int
-    name: MarkerIconId
-    offset: 48
-  - type: int
-    name: NameIconId
-    offset: 52
-  - type: int
-    name: NamePlateObjectIndex
-    offset: 60
-  - type: int
-    name: DrawFlags
-    offset: 68
-  - type: int
-    name: VisibilityFlags
-    offset: 76
-  member_functions: []
 - type: Client::UI::AddonNamePlate::BakeData
   name: BakeData
   namespace: Client.UI
@@ -13076,64 +13040,6 @@ structs:
     name: DisableFixedFontResolution
     offset: 560
   virtual_functions: []
-  member_functions: []
-- type: Client::UI::AddonNamePlate::NamePlateIntArrayData::NamePlateObjectIntArrayData
-  name: NamePlateObjectIntArrayData
-  namespace: Client.UI
-  union: False
-  size: 80
-  fields:
-  - type: Client::UI::UIObjectKind
-    name: NamePlateKind
-    offset: 0
-  - type: int
-    name: HPLabelState
-    offset: 4
-  - type: int
-    name: UpdateFlags
-    offset: 8
-  - type: int
-    name: X
-    offset: 12
-  - type: int
-    name: Y
-    offset: 16
-  - type: float
-    name: Depth
-    offset: 20
-  - type: int
-    name: Scale
-    offset: 24
-  - type: int
-    name: GaugeFillPercentage
-    offset: 28
-  - type: unsigned int
-    name: NameTextColor
-    offset: 32
-  - type: unsigned int
-    name: NameEdgeColor
-    offset: 36
-  - type: unsigned int
-    name: GaugeFillColor
-    offset: 40
-  - type: unsigned int
-    name: GaugeContainerColor
-    offset: 44
-  - type: int
-    name: MarkerIconId
-    offset: 48
-  - type: int
-    name: NameIconId
-    offset: 52
-  - type: int
-    name: NamePlateObjectIndex
-    offset: 60
-  - type: int
-    name: DrawFlags
-    offset: 68
-  - type: int
-    name: VisibilityFlags
-    offset: 76
   member_functions: []
 - type: Client::UI::AddonPartyList::PartyListMemberStruct
   name: PartyListMemberStruct
@@ -16420,12 +16326,6 @@ structs:
   size: 8
   fields: []
   virtual_functions:
-  - name: GetExcelModule
-    offset: 40
-    return_type: Component::Excel::ExcelModuleInterface*
-    parameters:
-    - type: Client::UI::UIModuleInterface*
-      name: this
   - name: GetExcelModuleInterface
     offset: 40
     return_type: Component::Excel::ExcelModuleInterface*
@@ -24442,6 +24342,34 @@ structs:
     - type: Client::Game::CharamakeAvatarSaveDataContainer::VariableContainer*
       name: this
   member_functions: []
+- type: Client::Game::ChocoboTaxiManager
+  name: ChocoboTaxiManager
+  namespace: Client.Game
+  union: False
+  size: 64
+  fields:
+  - type: unsigned int
+    name: Id
+    offset: 0
+  - type: unsigned int
+    name: ClientPathId
+    offset: 4
+  - type: Common::Math::Vector3
+    name: DismountPosition
+    offset: 32
+  - type: Client::Game::ChocoboTaxiState
+    name: State
+    offset: 48
+  - type: byte
+    name: RegisteredForDutyErrorShown
+    offset: 52
+  member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? 44 89 77 04
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::ChocoboTaxiManager
 - type: Client::Game::Control::EmoteController
   name: EmoteController
   namespace: Client.Game.Control
@@ -27527,6 +27455,12 @@ structs:
       name: priority
     - type: Client::System::Framework::Task*
       name: task
+  static_members:
+  - signature: 4D 89 66 68 4C 89 35 ?? ?? ?? ??
+    relative_follow_offsets:
+    - 7
+    is_pointer: True
+    return_type: Client::System::Framework::TaskManager
 - type: Client::System::Framework::TaskManager::RootTask
   name: RootTask
   namespace: Client.System.Framework
@@ -31062,60 +30996,6 @@ structs:
   - type: Client::UI::AddonLotteryDaily::GameTileRow
     name: Row3
     offset: 48
-  member_functions: []
-- type: Client::UI::AddonNamePlate::AddonNamePlateNumberArray
-  name: AddonNamePlateNumberArray
-  namespace: Client.UI
-  union: False
-  size: 4024
-  fields:
-  - type: int
-    name: ActiveNamePlateCount
-    offset: 0
-  - type: byte
-    name: ForceNamePlateRebake
-    offset: 4
-  - type: int
-    name: NamePlateSize
-    offset: 8
-  - type: byte
-    name: DisableFixedFontResolution
-    offset: 12
-  - type: byte
-    name: DoFullUpdate
-    offset: 16
-  - type: Client::UI::AddonNamePlate::AddonNamePlateNumberArray::NamePlateObjectIntArrayData
-    name: ObjectData
-    offset: 24
-    size: 50
-    is_string: False
-  member_functions: []
-- type: Client::UI::AddonNamePlate::NamePlateIntArrayData
-  name: NamePlateIntArrayData
-  namespace: Client.UI
-  union: False
-  size: 4024
-  fields:
-  - type: int
-    name: ActiveNamePlateCount
-    offset: 0
-  - type: byte
-    name: ForceNamePlateRebake
-    offset: 4
-  - type: int
-    name: NamePlateSize
-    offset: 8
-  - type: byte
-    name: DisableFixedFontResolution
-    offset: 12
-  - type: byte
-    name: DoFullUpdate
-    offset: 16
-  - type: Client::UI::AddonNamePlate::NamePlateIntArrayData::NamePlateObjectIntArrayData
-    name: ObjectData
-    offset: 24
-    size: 50
-    is_string: False
   member_functions: []
 - type: Client::UI::AddonNamePlate::NamePlateObject
   name: NamePlateObject
@@ -41014,7 +40894,7 @@ structs:
       name: this
     - type: Client::Game::Object::GameObject*
       name: obj
-  - signature: E9 ?? ?? ?? ?? 48 8B 01 FF 50 08
+  - signature: E9 ?? ?? ?? ?? 48 8B 01 FF 50 08 48 8B C8
     return_type: unsigned __int64
     name: InteractWithObject
     parameters:
@@ -43044,6 +42924,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  static_members:
+  - signature: 48 89 35 ?? ?? ?? ?? 48 83 C4 20
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::Sound::SoundManager
 - type: Client::System::Input::ClipBoard
   name: ClipBoard
   namespace: Client.System.Input
@@ -55341,6 +55227,12 @@ structs:
     offset: 16
   virtual_functions: []
   member_functions: []
+  static_members:
+  - signature: 48 8B 0D ?? ?? ?? ?? 0F 28 CE E8 ?? ?? ?? ?? 48 83 7E ?? ??
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Client::System::Scheduler::Resource::SchedulerResourceManagement
 - type: Client::UI::AddonJobHudBLM0::ElementalGauge
   name: ElementalGauge
   namespace: Client.UI
@@ -73542,11 +73434,13 @@ structs:
     parameters:
     - type: Client::Game::QuestManager*
       name: this
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 84 24
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::QuestManager
   static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 66 BA 10 0C
-    return_type: Client::Game::QuestManager*
-    name: Instance
-    parameters: []
   - signature: E8 ?? ?? ?? ?? 43 88 84 3E ?? ?? ?? ??
     return_type: byte
     name: IsQuestComplete
@@ -111472,7 +111366,13 @@ structs:
     parameters:
     - type: Client::UI::AddonChatLog*
       name: this
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B CF 84 C0 74 07
+    return_type: byte
+    name: IsZoomed
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
 - type: Client::UI::AddonDialogue
   name: AddonDialogue
   namespace: Client.UI
@@ -144719,11 +144619,12 @@ structs:
     parameters:
     - type: Component::GUI::AtkStage*
       name: this
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 45 33 C0 48 8B C8 4C 8B CB 41 8D 50 03
-    return_type: Component::GUI::AtkStage*
-    name: Instance
-    parameters: []
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 4C 8B 40 18 45 8B 40 18
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Component::GUI::AtkStage
 - type: Client::Game::GoldSaucer::GFateDirector
   name: GFateDirector
   namespace: Client.Game.GoldSaucer
@@ -146236,10 +146137,6 @@ structs:
   - signature: 40 53 48 83 EC 20 48 8B 1D ?? ?? ?? ?? 48 85 DB 74 1E 48 8D 0D
     return_type: byte
     name: IsInPvPInstance
-    parameters: []
-  - signature: E8 ?? ?? ?? ?? 84 C0 75 21 48 8B 4F 10
-    return_type: byte
-    name: IsInSanctuary
     parameters: []
   - signature: E8 ?? ?? ?? ?? 41 83 7F ?? ?? 4C 8D 2D
     return_type: byte
@@ -148113,7 +148010,7 @@ structs:
     name: DailyQuests
     offset: 17064
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 75 E6 48 83 C4 20
+  - signature: E8 ?? ?? ?? ?? EB E0 41 81 E9
     return_type: Client::Game::InstanceContent::ContentDirector*
     name: GetContentDirector
     parameters:
@@ -149373,12 +149270,6 @@ structs:
     name: UIInputModule
     offset: 1002192
   virtual_functions:
-  - name: GetExcelModule
-    offset: 40
-    return_type: Component::Excel::ExcelModuleInterface*
-    parameters:
-    - type: Client::UI::UIModule*
-      name: this
   - name: GetExcelModuleInterface
     offset: 40
     return_type: Component::Excel::ExcelModuleInterface*
@@ -150112,22 +150003,3 @@ structs:
       name: a4
     - type: byte
       name: saveToHistory
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 45 0F B7 C5
-    return_type: byte
-    name: PlaySound
-    parameters:
-    - type: unsigned int
-      name: effectId
-    - type: __int64
-      name: a2
-    - type: __int64
-      name: a3
-    - type: byte
-      name: a4
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 C7 4C 8B CB
-    return_type: byte
-    name: IsPlayerCharacterName
-    parameters:
-    - type: byte*
-      name: name
