@@ -5198,23 +5198,21 @@ classes:
       - ea: 0x1421A1A08
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
+      0x141690020: ctor
       0x1418B7750: HandlePartyInvitePacket
       0x1418B7820: HandleSocialPacket
       0x1418BB560: HandleMarketBoardOfferingsPacket
       0x1418BB620: HandleMarketBoardPurchasePacket
       0x1418BC110: HandleMarketBoardHistoryPacket
       0x1418BB4E0: HandleMarketBoardItemRequestStartPacket
-#fail # wrong offset      0x14130DD20: ctor
-  Client::Network::NetworkModulePacketReceiverCallback: # derives Application::Network::PacketReceiverCallbackInterface & Client::Network::PacketDispatcher
+  Client::Network::NetworkModulePacketReceiverCallback:
     vtbls:
       - ea: 0x142002130
         base: Application::Network::PacketReceiverCallbackInterface
       - ea: 0x142002148
-        base: Client::Network::PacketDispatcher #Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
+        base: Client::Network::PacketDispatcher
       - ea: 0x142002158
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
-#    funcs:
-#fail       0x14021CC60: ctor
   Client::UI::Agent::AgentInterface:
     vtbls:
       - ea: 0x1420032F0
@@ -7743,7 +7741,7 @@ classes:
     vfuncs:
       0: Dtor
       4: Abort
-      5: GetExcelModule
+      5: GetExcelModuleInterface
       6: GetRaptureTextModule
       7: GetRaptureAtkModule
       8: GetRaptureAtkModule2

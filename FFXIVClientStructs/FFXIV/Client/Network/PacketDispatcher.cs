@@ -3,10 +3,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Network;
 // Client::Network::PacketDispatcher
 //   Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
 //   Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 51 ?? 48 89 01 48 8B D9 48 8D 05", 3)]
 public unsafe partial struct PacketDispatcher {
+    [FieldOffset(0x10)] public NetworkModuleProxy* NetworkModuleProxy;
     [FieldOffset(0x18)] public uint GameSessionRandom;
     [FieldOffset(0x1C)] public uint LastPacketRandom;
     [FieldOffset(0x20)] public uint Key0;
