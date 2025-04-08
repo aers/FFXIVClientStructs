@@ -14,6 +14,7 @@ public enum AtkEventType : byte {
     MouseDoubleClick = 10,
 
     InputReceived = 12,
+    // 13 is unfiltered/unhandled input?
 
     FocusStart = 18,
     FocusStop = 19,
