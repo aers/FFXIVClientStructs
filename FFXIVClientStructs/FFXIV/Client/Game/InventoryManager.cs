@@ -12,12 +12,12 @@ public unsafe partial struct InventoryManager {
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
     [FieldOffset(0x1E10)] internal InventoryType UnkInventoryType; // Can be EquippedItems, RetainerEquippedItems...?
 
-    // This is *entirely* untested and seems to be reused for FATE HandIns and Mail too??!
-    [FieldOffset(0x1E18), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsLocal;
-    [FieldOffset(0x1FC8), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsRemote;
+    // Seems to be reused for FATE HandIns and Mail too??!
+    [FieldOffset(0x1E18), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsLocal; // 6th slot is Gil
+    [FieldOffset(0x1FC8), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsRemote; // 6th slot is Gil
     [FieldOffset(0x2178)] public uint TradeUnk2178;
-    [FieldOffset(0x217C)] public uint TradeUnk217C;
-    [FieldOffset(0x2180)] public uint TradeUnk2180;
+    [FieldOffset(0x217C)] public TradeState TradeLocalState;
+    [FieldOffset(0x2180)] public TradeState TradeRemoteState;
     [FieldOffset(0x2184), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _tradePartnerName;
     [FieldOffset(0x21A4)] public uint TradePartnerEntityId;
     [FieldOffset(0x21A8)] public bool TradeUnk21A8;
@@ -101,4 +101,13 @@ public unsafe partial struct InventoryManager {
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
+}
+
+public enum TradeState {
+    NotTrading = 1, // ?
+    TradeRequestPending = 2,
+    SelectingTradeGoods = 3,
+    LockedIn = 4,
+    WaitingForConfirmation = 5,
+    Confirmed = 6
 }
