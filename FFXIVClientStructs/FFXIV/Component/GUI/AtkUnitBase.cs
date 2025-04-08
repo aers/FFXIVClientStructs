@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Common.Math;
+using static FFXIVClientStructs.FFXIV.Component.GUI.AtkEventData;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -272,7 +273,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(18)]
     public partial bool ShouldCollideWithWindow(AtkCollisionNode* collisionNode);
 
-    [VirtualFunction(22)]
+    [VirtualFunction(23)]
     public partial bool ShouldIgnoreInputs();
 
     [VirtualFunction(24)]
@@ -321,6 +322,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(54)]
     public partial void FireCloseCallback();
 
+    [VirtualFunction(57)]
+    public partial bool HandleCustomInput(AtkInputData* inputData);
+
     [VirtualFunction(62)]
     public partial void OnMouseOver();
 
@@ -335,6 +339,12 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </remarks>
     [VirtualFunction(66)]
     public partial bool IsFullyLoaded();
+
+    [VirtualFunction(69)]
+    public partial bool HandleDPadInput(int inputId, bool a3);
+
+    [VirtualFunction(71)]
+    public partial bool HandleBackButtonInput(int inputId, bool a3);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC)]

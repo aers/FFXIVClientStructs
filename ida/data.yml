@@ -6916,7 +6916,7 @@ classes:
       16: Hide2
       17: SetScaleToHudLayoutScale
       18: ShouldCollideWithWindow
-      22: ShouldIgnoreInputs
+      23: ShouldIgnoreInputs
       24: GetRootNode
       27: GetWindowBounds
       30: GetRootBounds
@@ -6931,10 +6931,13 @@ classes:
       51: OnRefresh
       52: OnRequestedUpdate
       54: FireCloseCallback
+      57: HandleCustomInput
       58: OnOpenTransitionStarted
       62: OnMouseOver
       63: OnMouseOut
       66: IsFullyLoaded
+      69: HandleDPadInput
+      71: HandleBackButtonInput
     funcs:
       0x14062CDB0: ctor
       0x14062D010: Destructor

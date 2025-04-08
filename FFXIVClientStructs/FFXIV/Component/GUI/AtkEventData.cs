@@ -39,7 +39,14 @@ public partial struct AtkEventData {
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct AtkInputData {
         [FieldOffset(0x00)] public int InputId;
-        [FieldOffset(0x04)] private byte Unk4;
+        [FieldOffset(0x04)] public InputState State;
+
+        public enum InputState : byte {
+            Down = 0,
+            Up = 1,
+            Held = 2,
+            Unk3 = 3, // for unfiltered only?
+        }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
