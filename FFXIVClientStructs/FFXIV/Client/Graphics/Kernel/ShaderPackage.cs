@@ -43,7 +43,7 @@ public unsafe struct ShaderPackage {
 
     [FieldOffset(0xD8)] public ushort ConstantCount;
     [FieldOffset(0xDC)] public ushort SamplerCount;
-    [FieldOffset(0xE0), Obsolete($"Use {nameof(TextureCount)} instead")] public ushort UnkCount;
+    [FieldOffset(0xE0), Obsolete($"Use {nameof(TextureCount)} instead", true)] public ushort UnkCount;
     [FieldOffset(0xE0)] public ushort TextureCount;
     [FieldOffset(0xE4)] public ushort Unk2Count;
 
@@ -60,7 +60,7 @@ public unsafe struct ShaderPackage {
     [FieldOffset(0x100)] public ConstantSamplerUnknown* Constants;
     [FieldOffset(0x108)] public ConstantSamplerUnknown* Samplers;
 
-    [FieldOffset(0x110), Obsolete($"Use {nameof(Textures)} instead")] public ConstantSamplerUnknown* Unknowns;
+    [FieldOffset(0x110), Obsolete($"Use {nameof(Textures)} instead", true)] public ConstantSamplerUnknown* Unknowns;
     [FieldOffset(0x110)] public ConstantSamplerUnknown* Textures;
     [FieldOffset(0x118)] public ConstantSamplerUnknown* Unknowns2;
 
@@ -83,7 +83,7 @@ public unsafe struct ShaderPackage {
         => new(Constants, ConstantCount);
     public Span<ConstantSamplerUnknown> SamplersSpan
         => new(Samplers, SamplerCount);
-    [Obsolete($"Use {nameof(TexturesSpan)} instead")]
+    [Obsolete($"Use {nameof(TexturesSpan)} instead", true)]
     public Span<ConstantSamplerUnknown> UnknownsSpan
         => new(Unknowns, UnkCount);
     public Span<ConstantSamplerUnknown> TexturesSpan

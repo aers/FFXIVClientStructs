@@ -65,7 +65,7 @@ public partial struct FateContext {
     [FieldOffset(0x864)] public float Radius;
     [FieldOffset(0xA10), FixedSizeArray] internal FixedSizeArray37<FateMapMarker> _mapMarkers;
 
-    [FieldOffset(0xACA), Obsolete("Use MapMarkers instead")] public ushort TerritoryId;
+    [FieldOffset(0xACA), Obsolete("Use MapMarkers instead", true)] public ushort TerritoryId;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct FateObjective {

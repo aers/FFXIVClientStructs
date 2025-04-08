@@ -58,7 +58,7 @@ public unsafe partial struct Conditions {
     [FieldOffset(47)] public bool Unknown47;
     [FieldOffset(48)] public bool Jumping;
     [FieldOffset(49)] public bool UsingChocoboTaxi;
-    [FieldOffset(49), Obsolete("To avoid confusion, renamed to UsingChocoboTaxi.")] public bool AutorunActive;
+    [FieldOffset(49), Obsolete("To avoid confusion, renamed to UsingChocoboTaxi.", true)] public bool AutorunActive;
     [FieldOffset(50)] public bool OccupiedSummoningBell;
     [FieldOffset(51)] public bool BetweenAreas51;
     [FieldOffset(52)] public bool SystemError;
@@ -67,7 +67,7 @@ public unsafe partial struct Conditions {
     [FieldOffset(55)] public bool WaitingForDuty;
     [FieldOffset(56)] public bool BoundByDuty56;
     [FieldOffset(57)] public bool MountOrOrnamentTransition;
-    [FieldOffset(57), Obsolete("Renamed to MountOrOrnamentTransition.")] public bool Unknown57;
+    [FieldOffset(57), Obsolete("Renamed to MountOrOrnamentTransition.", true)] public bool Unknown57;
     [FieldOffset(58)] public bool WatchingCutscene;
     [FieldOffset(59)] public bool WaitingForDutyFinder;
     [FieldOffset(60)] public bool CreatingCharacter;
@@ -105,7 +105,7 @@ public unsafe partial struct Conditions {
     [FieldOffset(92)] public bool ReadyingVisitOtherWorld;
     [FieldOffset(93)] public bool WaitingToVisitOtherWorld;
     [FieldOffset(94)] public bool UsingFashionAccessory;
-    [FieldOffset(94), Obsolete("Renamed to UsingFashionAccessory.")] public bool UsingParasol;
+    [FieldOffset(94), Obsolete("Renamed to UsingFashionAccessory.", true)] public bool UsingParasol;
     [FieldOffset(95)] public bool BoundByDuty95;
     [FieldOffset(96)] public bool Unknown96;
     [FieldOffset(97)] public bool Disguised;
@@ -116,5 +116,5 @@ public unsafe partial struct Conditions {
     [FieldOffset(102)] public bool Unknown102;
     [FieldOffset(103)] public bool Unknown103;
     [FieldOffset(104)] public float MountOrOrnamentTransitionResetTimer; // when this reaches 0, MountOrOrnamentTransition is set to false
-    [FieldOffset(104), Obsolete("Renamed to MountOrOrnamentTransitionResetTimer")] public float UnkTimer;
+    [FieldOffset(104), Obsolete("Renamed to MountOrOrnamentTransitionResetTimer", true)] public float UnkTimer;
 }
