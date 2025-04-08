@@ -13,7 +13,7 @@ from abc import abstractmethod
 
 class BaseApi:
     @abstractmethod
-    def create_enum(self, name, values):
+    def create_enum_struct(self, name, values):
         # type: (str, dict[str, int]) -> None
         pass
 
@@ -54,12 +54,7 @@ if api is None:
     try:
         import idaapi
         import ida_bytes
-        import ida_nalt
-        import ida_struct
-        import ida_enum
-        import ida_kernwin
         import ida_search
-        import ida_ida
         import ida_typeinf
         import ida_hexrays
         import ida_name
@@ -192,6 +187,8 @@ if api is None:
                                 )
                                 continue
 
+                            funcdata.empty()
+                            
                             funcdata.push_back(row_id_arg)
 
                             if suffix == "RowAndSubRowId":
@@ -205,24 +202,20 @@ if api is None:
 
                             ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
-            def create_enum(self, name, values):
-                enum_id = ida_enum.add_enum(idaapi.BADADDR, name, 0)
+            def create_enum_struct(self, name, values):
+                enum_id = self.create_enum(name)
                 for key in values:
-                    ida_enum.add_enum_member(enum_id, values[key], key)
+                    self.add_enum_member(enum_id, values[key], key)
 
             def create_struct(self, name, fields):
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
-                struct_id = ida_struct.add_struc(-1, name)
+                struct_id = self.create_struct_type(name)
                 if struct_id == idaapi.BADADDR:
-                    struct_id = ida_struct.get_struc_id(name)
-                    ida_struct.del_struc_members(
-                        ida_struct.get_struc(struct_id),
-                        0,
-                        ida_struct.get_struc_size(struct_id) + 1,
-                    )
-                struct_type = ida_struct.get_struc(struct_id)
+                    struct_id = self.get_struct_id(name)
+                    self.remove_struct_members(struct_id)
+                struct_type = self.get_struct(struct_id)
                 for [index, [type, name]] in fields.items():
-                    ida_struct.add_struc_member(
+                    self.create_struct_member(
                         struct_type,
                         name,
                         index,
@@ -230,8 +223,8 @@ if api is None:
                         None,
                         self.get_size_from_ida_type(type),
                     )
-                    meminfo = ida_struct.get_member_by_name(struct_type, name)
-                    ida_struct.set_member_tinfo(
+                    meminfo = self.get_struct_member_by_name(struct_type, name)
+                    self.set_struct_member_info(
                         struct_type, meminfo, 0, self.get_tinfo_from_type(type), 0
                     )
                 idaapi.end_type_updating(idaapi.UTP_STRUCT)
@@ -268,7 +261,7 @@ if api is None:
     else:
         # noinspection PyUnresolvedReferences
         class GhidraApi(BaseApi):
-            def create_enum(self, name, values):
+            def create_enum_struct(self, name, values):
                 # type: (str, dict[str, int]) -> None
                 pass
 
@@ -332,7 +325,7 @@ exd_map = ExcelListFile(game_data.get_file(ParsedFileName("exd/root.exl"))).dict
 exd_struct_map = {}
 exd_headers = {}
 
-api.create_enum(api.parse_name("Component::Exd::SheetsEnum"), exd_map)
+api.create_enum_struct(api.parse_name("Component::Exd::SheetsEnum"), exd_map)
 
 for key in exd_map:
     print(f"Parsing schema for {exd_map[key]}.")

@@ -17,7 +17,7 @@ from data_schema import *
 
 class BaseApi:
     @abstractmethod
-    def create_enum(self, enum):
+    def create_enum_struct(self, enum):
         # type: (DefinedEnum) -> None
         """
         Create an enum in the database.
@@ -262,11 +262,7 @@ if api is None:
         import idaapi
         import idc
         import ida_bytes
-        import ida_nalt
-        import ida_struct
-        import ida_enum
         import ida_search
-        import ida_ida
         import ida_typeinf
         import ida_funcs
         import ida_name
@@ -283,25 +279,13 @@ if api is None:
 
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
-                s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
-                if s is not None and ida_struct.get_struc_size(s) != 0:
-                    ida_struct.del_struc_members(
-                        s, 0, ida_struct.get_struc_last_offset(s) + 1
-                    )
+                self.remove_struct_members(self.get_struct_id(fullname))
 
             def delete_enum_members(self, enum):
                 # type: (DefinedEnum) -> None
-                e = ida_enum.get_enum(enum.type)
+                e = self.get_enum_id(enum.type)
                 for value in enum.values:
-                    mem = ida_enum.get_enum_member_by_name(
-                        "{0}.{1}".format(enum.name, value)
-                    )
-                    ida_enum.del_enum_member(
-                        e,
-                        ida_enum.get_enum_member_value(mem),
-                        ida_enum.get_enum_member_serial(mem),
-                        ida_enum.get_enum_member_bmask(mem),
-                    )
+                    self.remove_enum_member(e, value, enum.name)
 
             @property
             def get_file_path(self):
@@ -309,16 +293,16 @@ if api is None:
                     os.path.dirname(os.path.realpath(__file__)), "ffxiv_structs.yml"
                 )
 
-            def create_enum(self, enum):
+            def create_enum_struct(self, enum):
                 # type: (DefinedEnum) -> None
                 fullname = enum.type
-                ida_enum.add_enum(idc.BADADDR, fullname, 0)
-                e = ida_enum.get_enum(fullname)
-                ida_enum.set_enum_width(e, self.get_size_from_ida_type(enum.underlying))
+                self.create_enum(fullname)
+                e = self.get_enum_id(fullname)
+                self.set_enum_width(e, self.get_size_from_ida_type(enum.underlying))
                 if self.is_signed(enum.underlying):
-                    ida_enum.set_enum_flag(e, 0x20000)
+                    self.set_enum_flag(e, 0x20000)
                 for value in enum.values:
-                    ida_enum.add_enum_member(
+                    self.add_enum_member(
                         e, "{0}.{1}".format(enum.name, value), enum.values[value]
                     )
 
@@ -337,15 +321,15 @@ if api is None:
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_struct_name(struct.type)
-                if ida_struct.get_struc_id(fullname) == idaapi.BADADDR:
-                    ida_struct.add_struc(-1, fullname, struct.union)
+                if self.get_struct_id(fullname) == idaapi.BADADDR:
+                    self.create_struct_type(fullname, struct.union)
                 if struct.virtual_functions:
-                    ida_struct.add_struc(-1, fullname + "_vtbl")
+                    self.create_struct_type(fullname + "_vtbl")
 
             def create_struct_member_fill(self, struct_name, offset):
                 # type: (str, int) -> None
-                s = ida_struct.get_struc(ida_struct.get_struc_id(struct_name))
-                prev_size = ida_struct.get_struc_size(s)
+                s = self.get_struct(self.get_struct_id(struct_name))
+                prev_size = self.get_struct_size(s)
                 if self.full_padding:
                     flag = self.get_idc_type_from_size(prev_size)
                     size = self.get_size_from_idc_type(flag)
@@ -355,11 +339,11 @@ if api is None:
                         )
                         size = self.get_size_from_idc_type(flag)
 
-                    ida_struct.add_struc_member(
+                    self.create_struct_member(
                         s, "field_{0:X}".format(prev_size), prev_size, flag, None, size
                     )
                 else:
-                    ida_struct.add_struc_member(
+                    self.create_struct_member(
                         s,
                         "field_{0:X}".format(prev_size),
                         prev_size,
@@ -372,17 +356,17 @@ if api is None:
                 # type: (DefinedStruct) -> None
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
                 fullname = self.clean_struct_name(struct.type)
-                s = ida_struct.get_struc(ida_struct.get_struc_id(fullname))
+                s = self.get_struct(self.get_struct_id(fullname))
 
                 if struct.virtual_functions != None and (
                     struct.fields == [] or struct.fields[0].offset > 0
                 ):
-                    ida_struct.add_struc_member(
+                    self.create_struct_member(
                         s, "__vftable", 0, ida_bytes.qword_flag(), None, 8
                     )
                     type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
-                    meminfo = ida_struct.get_member(s, 0)
-                    ida_struct.set_member_tinfo(
+                    meminfo = self.get_struct_member(s, 0)
+                    self.set_struct_member_info(
                         s, meminfo, 0, self.get_tinfo_from_type(type), 0
                     )
 
@@ -390,11 +374,11 @@ if api is None:
                 for field in struct.fields:
                     offset = field.offset
 
-                    prev_size = ida_struct.get_struc_size(s)
+                    prev_size = self.get_struct_size(s)
                     while offset > prev_size:
                         contiguous_fields = False
                         self.create_struct_member_fill(fullname, offset)
-                        prev_size = ida_struct.get_struc_size(s)
+                        prev_size = self.get_struct_size(s)
 
                     field_is_base = field.base and contiguous_fields
                     field_name = (
@@ -404,7 +388,7 @@ if api is None:
                     )
                     field_type = self.clean_name(field.type)
                     if field_type == "__fastcall":
-                        ida_struct.add_struc_member(
+                        self.create_struct_member(
                             s,
                             field_name,
                             offset,
@@ -422,10 +406,10 @@ if api is None:
                         self.get_idc_type_from_ida_type(
                             self.clean_struct_name(field_type)
                         )
-                        == ida_bytes.stru_flag()
+                        == self.get_struct_flag()
                     ):
                         field_type = self.clean_struct_name(field_type)
-                        ida_struct.add_struc_member(
+                        self.create_struct_member(
                             s,
                             field_name,
                             offset,
@@ -435,9 +419,9 @@ if api is None:
                         )
                     elif (
                         self.get_idc_type_from_ida_type(field_type)
-                        == ida_bytes.enum_flag()
+                        == self.get_enum_flag()
                     ):
-                        ida_struct.add_struc_member(
+                        self.create_struct_member(
                             s,
                             field_name,
                             offset,
@@ -446,7 +430,7 @@ if api is None:
                             self.get_size_from_ida_type(field_type),
                         )
                     else:
-                        ida_struct.add_struc_member(
+                        self.create_struct_member(
                             s,
                             field_name,
                             offset,
@@ -454,11 +438,11 @@ if api is None:
                             None,
                             self.get_size_from_ida_type(field_type),
                         )
-                    meminfo = ida_struct.get_member_by_name(s, field_name)
+                    meminfo = self.get_struct_member_by_name(s, field_name)
                     if field_is_base:
-                        meminfo.props |= ida_struct.MF_BASECLASS
+                        meminfo.props |= self.get_base_class_flag()
                     array_size = field.size if hasattr(field, "size") else 0
-                    ida_struct.set_member_tinfo(
+                    self.set_struct_member_info(
                         s,
                         meminfo,
                         0,
@@ -467,21 +451,21 @@ if api is None:
                     )
 
                 if struct.size is not None and struct.size != 0:
-                    prev_size = ida_struct.get_struc_size(s)
+                    prev_size = self.get_struct_size(s)
                     while struct.size > prev_size:
                         self.create_struct_member_fill(fullname, struct.size)
-                        prev_size = ida_struct.get_struc_size(s)
+                        prev_size = self.get_struct_size(s)
 
                 idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def create_vtable(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_name(struct.type)
-                s = ida_struct.get_struc(ida_struct.get_struc_id(fullname + "_vtbl"))
+                s = self.get_struct(self.get_struct_id(fullname + "_vtbl"))
                 for virt_func in struct.virtual_functions:
                     offset = virt_func.offset
                     field_name = virt_func.name
-                    ida_struct.add_struc_member(
+                    self.create_struct_member(
                         s,
                         field_name,
                         offset,
@@ -492,7 +476,7 @@ if api is None:
                     if virt_func.return_type == None or virt_func.parameters == None:
                         continue
 
-                    meminfo = ida_struct.get_member_by_name(s, field_name)
+                    meminfo = self.get_struct_member_by_name(s, field_name)
                     field_type = self.clean_name(virt_func.return_type)
                     field_type = field_type + "(__fastcall* " + field_name + ")("
                     for param in virt_func.parameters:
@@ -500,13 +484,13 @@ if api is None:
                         field_type = field_type + param.name + ","
                     field_type = field_type[:-1] + ")"
 
-                    ida_struct.set_member_tinfo(
+                    self.set_struct_member_info(
                         s, meminfo, 0, self.get_tinfo_from_type(field_type), 0
                     )
-                size = int(ida_struct.get_struc_size(s) / 8)
+                size = int(self.get_struct_size(s) / 8)
                 for i in range(size):
-                    if ida_struct.get_member_id(s, i * 8) == idc.BADADDR:
-                        ida_struct.add_struc_member(
+                    if self.get_struct_member_id(s, i * 8) == idc.BADADDR:
+                        self.create_struct_member(
                             s,
                             "vf{0}".format(i),
                             i * 8,
@@ -514,8 +498,8 @@ if api is None:
                             None,
                             self.get_size_from_ida_type("__int64"),
                         )
-                        meminfo = ida_struct.get_member_by_name(s, "vf{0}".format(i))
-                        ida_struct.set_member_tinfo(
+                        meminfo = self.get_struct_member_by_name(s, "vf{0}".format(i))
+                        self.set_struct_member_info(
                             s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0
                         )
 
@@ -781,7 +765,7 @@ if api is None:
                     os.path.dirname(str(sourceFile)), "ffxiv_structs.yml"
                 )
 
-            def create_enum(self, enum):
+            def create_enum_struct(self, enum):
                 # type: (DefinedEnum) -> None
                 if monitor.isCancelled():
                     return
@@ -1104,7 +1088,7 @@ if api is None:
                 # type: () -> str
                 return os.path.join(os.path.dirname(__file__), "ffxiv_structs.yml")
 
-            def create_enum(self, enum):
+            def create_enum_struct(self, enum):
                 # type: (DefinedEnum) -> None
                 members = []
                 for value in enum.values:
@@ -1279,7 +1263,7 @@ def run():
     print("{0} Deleting old enums and creating new ones".format(get_time()))
     for enum in yaml.enums:
         api.delete_enum(enum)
-        api.create_enum(enum)
+        api.create_enum_struct(enum)
 
     print("{0} Creating new structs".format(get_time()))
     for struct in yaml.structs:
