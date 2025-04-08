@@ -13,7 +13,7 @@ public unsafe partial struct PacketDispatcher {
     [FieldOffset(0x20)] public uint Key0;
     [FieldOffset(0x24)] public uint Key1;
     [FieldOffset(0x28)] public uint Key2;
-    
+
     [MemberFunction("48 89 5C 24 ?? 56 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 48 8B F2")]
     public static partial void HandleSocialPacket(uint targetId, nint packet);
 
