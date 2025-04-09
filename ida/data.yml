@@ -15226,7 +15226,6 @@ classes:
       - ea: 0x142092760
         base: Component::GUI::AtkUnitBase
     vfuncs:
-      71: Selected
       74: OnMenuSelected
     funcs:
       0x14103CF40: ctor
