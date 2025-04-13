@@ -56,9 +56,13 @@ public unsafe partial struct MapMarkerData {
     [FieldOffset(0x30)] public uint MapId;
     [FieldOffset(0x34)] public uint PlaceNameZoneId;
     [FieldOffset(0x38)] public uint PlaceNameId;
+    [FieldOffset(0x3C)] public int EndTimestamp;
 
     [FieldOffset(0x40)] public ushort RecommendedLevel;
     [FieldOffset(0x42)] public ushort TerritoryTypeId;
+    [FieldOffset(0x44)] public ushort DataId;
+    [FieldOffset(0x46)] public byte MarkerType;
+    [FieldOffset(0x47)] public sbyte EventState;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 8B 86")]
     public partial MapMarkerData* SetData(
@@ -74,5 +78,5 @@ public unsafe partial struct MapMarkerData {
         uint placeNameZoneId,
         uint placeNameId,
         ushort recommendedLevel,
-        sbyte a14 = -1);
+        sbyte eventState = -1);
 }
