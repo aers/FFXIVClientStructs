@@ -31,7 +31,7 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     public partial bool IsAnimated();
 
     [VirtualFunction(5)]
-    public partial void OnUldUpdate();
+    public partial void OnUldUpdate(float delta);
 
     [VirtualFunction(10)]
     public partial void SetEnabledState(bool enabled);
