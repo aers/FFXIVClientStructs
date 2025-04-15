@@ -15,8 +15,8 @@ public unsafe partial struct AgentRecipeNote {
 
     [FieldOffset(0x3B0)] public int SelectedCraftType;
     [FieldOffset(0x3B4)] public int SelectedRecipeCategoryPage;
-    [FieldOffset(0x3B4)] public int SelectedRecipeCategory;
-    [FieldOffset(0x3B8)] public int SelectedRecipeIndex;
+    [FieldOffset(0x3B8)] public int SelectedRecipeCategory;
+    [FieldOffset(0x3BC)] public int SelectedRecipeIndex;
     [FieldOffset(0x3D4)] public uint ActiveCraftRecipeId; // 0 when not actively crafting, does not include 0x10_000
     [FieldOffset(0x3EC)] public bool RecipeSearchOpen;
     [FieldOffset(0x406)] public bool RecipeSearchProcessing;
