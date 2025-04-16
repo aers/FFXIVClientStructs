@@ -7290,6 +7290,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x140692390: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
+      0x140691D40: SetTitle
     vfuncs:
       20: GetWindowCollisionNode
       21: GetTitleBarCollisionNode
