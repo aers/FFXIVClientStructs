@@ -17,15 +17,15 @@ public unsafe partial struct EventFramework {
     [FieldOffset(0x160)] public LuaActorModule LuaActorModule;
     [FieldOffset(0x1B0)] public EventSceneModule EventSceneModule;
     // 7.1: something new
-    [FieldOffset(0x3BE8)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
+    [FieldOffset(0x3BF8)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
 
-    [FieldOffset(0x3BF0)] public LuaState* LuaState;
-    [FieldOffset(0x3BF8)] public LuaThread LuaThread;
+    [FieldOffset(0x3C00)] public LuaState* LuaState;
+    [FieldOffset(0x3C08)] public LuaThread LuaThread;
 
-    [FieldOffset(0x3C50)] public EventState EventState1;
-    [FieldOffset(0x3CB0)] public EventState EventState2;
+    [FieldOffset(0x3C60)] public EventState EventState1;
+    [FieldOffset(0x3CC0)] public EventState EventState2;
 
-    [FieldOffset(0x42A8)] public DailyQuestMap DailyQuests;
+    [FieldOffset(0x42B8)] public DailyQuestMap DailyQuests;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB E0 41 81 E9")]
     public partial ContentDirector* GetContentDirector();
