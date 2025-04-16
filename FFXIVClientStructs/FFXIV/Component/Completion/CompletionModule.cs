@@ -19,7 +19,7 @@ public unsafe partial struct CompletionModule {
 
     [FieldOffset(0x30)] public StdVector<Pointer<CategoryData>> CategoryData;
     [FieldOffset(0x48)] public StdVector<CStringPointer> CategoryNames;
-    // [FieldOffset(0x60)] public StdVector<{ 8 bytes }> Unk60;
+    [FieldOffset(0x60)] private StdVector<CategoryData.CompletionDataStruct> Unk60;
     [FieldOffset(0x78)] private StdVector<byte> Unk78;
 
     [FieldOffset(0xD0)] private Utf8String UnkD0;
@@ -31,6 +31,18 @@ public unsafe partial struct CompletionModule {
     [FieldOffset(0x290)] public StdVector<SheetName> SheetNames;
     [FieldOffset(0x2A8)] private Utf8String Unk2A8;
     [FieldOffset(0x310)] private Utf8String Unk310;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 1B 41 FF C7")]
+    public partial nint AddCompletionEntry(nint groupIndex, nint rowId, CStringPointer itemText, CStringPointer groupTitle, ushort itemKey);
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 3C 23")]
+    public partial nint AddCategory(nint sheetNameIndex, CStringPointer itemText, CStringPointer groupTitle, CategoryData* categoryData);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 6C 24 ??")]
+    public partial void ClearCompletionData();
+
+    [VirtualFunction(5)]
+    public partial int GetSelection(CategoryData.CompletionDataStruct* dataStructs, long index, Utf8String* outputString, Utf8String* outputDisplayString);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct SheetName {
