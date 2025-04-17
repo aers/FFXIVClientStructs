@@ -392,8 +392,10 @@ if api is None:
                 return None
 
             def format_func_name(self, ea, current_func_name, proposed_func_name, class_name):
-                if current_func_name.startswith("thunk_"):  # jump
-                    current_func_name = current_func_name.lstrip("thunk_")
+                # override default thunk names and thunks of already named funcs with the default
+                func = getFunctionAt(toAddr(ea))
+                if func and func.isThunk():
+                    current_func_name = "FUN_{0:x}".format(ea)
 
                 proposed_qualified_func_name = "{0}.{1}".format(class_name, proposed_func_name)
                 if current_func_name == proposed_qualified_func_name:
