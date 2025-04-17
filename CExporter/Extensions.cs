@@ -104,7 +104,7 @@ public static partial class TypeExtensions {
             _ when type == typeof(Half) => "__int16", // Half is a struct that is 2 bytes long and does not exist in C so we just use __int16
             _ when type == typeof(void*) => "__int64",
             _ when type == typeof(void**) => "__int64*",
-            _ when type == typeof(CStringPointer) => "byte*",
+            _ when type == typeof(CStringPointer) => "char*",
             _ => type.SanitizeName()
         };
         return builder.Append(name).Replace("+", ExporterStatics.Separator).Replace(".", ExporterStatics.Separator).ToString();

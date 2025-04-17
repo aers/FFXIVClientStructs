@@ -632,6 +632,11 @@ if api is None:
         import ghidra
         import re
 
+        try:
+            from ghidra.ghidra_builtins import *
+        except ImportError:
+            pass
+
         from ghidra.program.model.data import *
         from ghidra.program.model.listing import *
         from ghidra.program.model.symbol import SourceType
@@ -654,7 +659,7 @@ if api is None:
                 # type: (str) -> str
                 if "<" not in name:
                     return name
-                for match in re.finditer(r"unsigned __[\w*]{3,}|[:\w*]{3,}", name):
+                for match in re.finditer(r"unsigned _*[\w*]{3,}|[:\w*]{3,}", name):
                     tn = self.get_ghidra_type(
                         SymbolPathParser.parse(match.group(0)).getLast()
                     )
@@ -664,35 +669,27 @@ if api is None:
             def get_ghidra_type(self, name):
                 # type: (str) -> str
                 if name == "__int8":
-                    return "byte"
+                    return "sbyte"
                 elif name == "__int16":
                     return "short"
-                elif name == "unsigned __int16" or name == "unsigned short":
-                    return "ushort"
-                elif name == "__int32":
-                    return "int"
-                elif (
-                    name == "unsigned __int32"
-                    or name == "_DWORD"
-                    or name == "unsigned int"
-                ):
-                    return "uint"
                 elif name == "__int64":
                     return "longlong"
+                elif name == "unsigned __int16":
+                    return "ushort"
+                elif name == "unsigned int":
+                    return "uint"
                 elif name == "unsigned __int64":
                     return "ulonglong"
                 elif name == "__int8*":
-                    return "byte*"
+                    return "char*"
                 elif name == "__int16*":
                     return "short*"
-                elif name == "unsigned __int16*":
-                    return "ushort*"
-                elif name == "__int32*":
-                    return "int*"
-                elif name == "unsigned __int32*" or name == "unsigned int*":
-                    return "uint*"
                 elif name == "__int64*":
                     return "longlong*"
+                elif name == "unsigned __int16*":
+                    return "ushort*"
+                elif name == "unsigned int*":
+                    return "uint*"
                 elif name == "unsigned __int64*":
                     return "ulonglong*"
                 elif name == "__fastcall":
@@ -798,7 +795,7 @@ if api is None:
                 if struct.union:
                     dt = UnionDataType(name)
                 else:
-                    dt = StructureDataType(name, int(struct.size or "0"))
+                    dt = StructureDataType(name, struct.size or 0)
                 dt.setCategoryPath(self.get_category_path(struct.type))
                 self.create_datatype(dt)
 
@@ -811,7 +808,7 @@ if api is None:
                 dtsize = dt.getLength() if not dt.isZeroLength() else 0
                 if (
                     dtsize == 0
-                    and struct.virtual_functions != None
+                    and struct.virtual_functions is not None
                     and not struct.union
                 ):
                     dt.growStructure(8)
@@ -820,7 +817,7 @@ if api is None:
                     if monitor.isCancelled():
                         return
 
-                    offset = int(field.offset)
+                    offset = field.offset
                     dtsize = dt.getLength() if not dt.isZeroLength() else 0
 
                     ft = self.get_datatype(field.type)
@@ -879,7 +876,6 @@ if api is None:
                     self.create_datatype(u_type)
 
                 void_ptr = dtm.getPointer(VoidDataType.dataType)
-                last_offset = int(struct.virtual_functions[-1].offset)
                 for func in struct.virtual_functions:
                     if func.return_type and func.parameters:
                         func_def = self.create_function_def(func)
@@ -887,26 +883,36 @@ if api is None:
                             CategoryPath(vt_type.getCategoryPath(), [vt_type.getName()])
                         )
                         vt_type.insertAtOffset(
-                            int(func.offset),
+                            func.offset,
                             dtm.getPointer(func_def),
                             -1,
                             func.name,
-                            "vf{0}".format(int(func.offset) / 8),
+                            "vf{0}".format(func.offset / 8),
                         )
                     else:
-                        vt_type.insertAtOffset(
-                            int(func.offset),
-                            void_ptr,
-                            -1,
-                            func.name,
-                            "vf{0}".format(int(func.offset) / 8),
-                        )
+                        dtc = vt_type.getComponentAt(func.offset)
+                        if dtc and Undefined.isUndefined(dtc.getDataType()):
+                            vt_type.replaceAtOffset(
+                                func.offset,
+                                void_ptr,
+                                -1,
+                                func.name,
+                                "vf{0}".format(func.offset / 8),
+                            )
+                        else:
+                            vt_type.insertAtOffset(
+                                func.offset,
+                                void_ptr,
+                                -1,
+                                func.name,
+                                "vf{0}".format(func.offset / 8),
+                            )
 
-                for offset in range(last_offset):
+                for offset in range(struct.virtual_functions[-1].offset):
                     dtc = vt_type.getComponentContaining(offset)
                     if not dtc or Undefined.isUndefined(dtc.getDataType()):
                         vt_type.replaceAtOffset(
-                            offset, void_ptr, -1, "vf{0}".format(offset / 8), ""
+                            offset, void_ptr, -1, "vf{0}".format(offset / 8), None
                         )
 
             def create_union(self, struct):
