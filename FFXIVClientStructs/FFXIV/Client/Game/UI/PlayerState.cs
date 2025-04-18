@@ -94,7 +94,7 @@ public unsafe partial struct PlayerState {
 
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) / 8
     /// <remarks> Use <see cref="IsFishCaught(uint)"/> </remarks>
-    [FieldOffset(0x3F0), FixedSizeArray] internal FixedSizeArray180<byte> _caughtFishBitmask;
+    [FieldOffset(0x3F0), FixedSizeArray] internal FixedSizeArray181<byte> _caughtFishBitmask;
     [FieldOffset(0x4A8)] public uint NumFishCaught;
     [FieldOffset(0x4AC)] public uint FishingBait;
     // Ref: "40 53 55 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 4C 8B 12"
