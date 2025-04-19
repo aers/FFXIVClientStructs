@@ -18,6 +18,8 @@ public unsafe partial struct AgentTelepotTown {
 public struct AgentTelepotTownData {
     [FieldOffset(0x4)] public byte CurrentAetheryte; // the one you're standing at
 
+    [FieldOffset(0x8)] public byte AetheryteCount;
+
     [FieldOffset(0x70E)] public byte SelectedAetheryte;
 
     [FieldOffset(0x710)] public byte Flags;
