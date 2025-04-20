@@ -184,13 +184,13 @@ public unsafe partial struct PlayerState {
     // 0x80C (int): some Faux Hollows timestamp?
     // 0x810 (int): some Faux Hollows state?
 
-    [FieldOffset(0x83C), FixedSizeArray] internal FixedSizeArray26<byte> _unlockedFramersKitsBitmask;
+    [FieldOffset(0x840), FixedSizeArray] internal FixedSizeArray26<byte> _unlockedFramersKitsBitmask;
 
-    [FieldOffset(0x874)] public StdMap<uint, bool> TrackedStatuses;
-    [FieldOffset(0x884)] public StdMap<uint, bool> TrackedActionUnlocks;
-    [FieldOffset(0x894)] public StdMap<uint, bool> TrackedTraitUnlocks;
-    [FieldOffset(0x8A4)] public bool TrackedTraitUnlocksDirty;
-    [FieldOffset(0x8A5)] public bool TrackedActionUnlocksDirty;
+    [FieldOffset(0x878)] public StdMap<uint, bool> TrackedStatuses;
+    [FieldOffset(0x888)] public StdMap<uint, bool> TrackedActionUnlocks;
+    [FieldOffset(0x898)] public StdMap<uint, bool> TrackedTraitUnlocks;
+    [FieldOffset(0x8A8)] public bool TrackedTraitUnlocksDirty;
+    [FieldOffset(0x8A9)] public bool TrackedActionUnlocksDirty;
 
     public bool IsLegacy => (QuestSpecialFlags & 1) != 0;
     public bool IsWarriorOfLight => (QuestSpecialFlags & 2) != 0;
