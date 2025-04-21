@@ -7448,7 +7448,7 @@ structs:
   union: False
   size: 11
   fields:
-  - type: byte*
+  - type: char*
     name: Name
     offset: 0
   - type: __int16
@@ -10074,7 +10074,7 @@ structs:
   static_members:
   - signature: 48 89 98 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? E8 ?? ?? ?? ??
     relative_follow_offsets:
-    - 3
+    - 10
     is_pointer: True
     return_type: Client::Graphics::Render::OffscreenRenderingManager
 - type: Client::Graphics::Render::PostBoneDeformerBaseUpdater
@@ -10089,7 +10089,15 @@ structs:
   namespace: Client.Graphics.Render
   union: False
   size: 464
-  fields: []
+  fields:
+  - type: Client::System::Resource::Handle::ShaderPackageResourceHandle*
+    name: ShaderPackageResourceHandles
+    offset: 8
+    size: 56
+    is_string: False
+  - type: Client::System::Resource::Handle::ShaderCodeResourceHandle*
+    name: CopyEnvLocationShaderCodeResourceHandle
+    offset: 456
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Render::Skeleton::BoneIndexMask
@@ -10894,7 +10902,7 @@ structs:
     offset: 432
     size: 16
     is_string: False
-  - type: byte*
+  - type: char*
     name: CursorNames
     offset: 568
     size: 16
@@ -11635,7 +11643,7 @@ structs:
       name: type
     - type: unsigned int*
       name: hash
-    - type: byte*
+    - type: char*
       name: path
     - type: __int64
       name: unknown
@@ -11651,7 +11659,7 @@ structs:
       name: type
     - type: unsigned int*
       name: hash
-    - type: byte*
+    - type: char*
       name: path
     - type: __int64
       name: unknown
@@ -11691,7 +11699,7 @@ structs:
   union: False
   size: 16
   fields:
-  - type: byte*
+  - type: char*
     name: Key
     offset: 0
   - type: unsigned int
@@ -11772,7 +11780,7 @@ structs:
   union: False
   size: 104
   fields:
-  - type: byte*
+  - type: char*
     name: StringPtr
     offset: 0
   - type: __int64
@@ -11824,7 +11832,7 @@ structs:
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
-    - type: byte*
+    - type: char*
       name: cStr
   - signature: E8 ?? ?? ?? ?? 0F B6 87 ?? ?? ?? ?? 48 83 EE 80
     return_type: void
@@ -11854,7 +11862,7 @@ structs:
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
-    - type: byte*
+    - type: char*
       name: other
   - signature: 45 33 C0 4C 8B C9 4C 39 41
     return_type: Client::System::String::Utf8String*
@@ -11976,7 +11984,7 @@ structs:
     parameters:
     - type: Client::System::String::Utf8String*
       name: this
-    - type: byte*
+    - type: char*
       name: buffer
   static_member_functions:
   - signature: 48 89 5C 24 ?? 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 33 C0 48 C7 44 24
@@ -12102,7 +12110,7 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: RecastOverlayContainer
     offset: 176
-  - type: byte*
+  - type: char*
     name: PopUpHelpTextPtr
     offset: 184
   member_functions: []
@@ -12112,10 +12120,10 @@ structs:
   union: False
   size: 56
   fields:
-  - type: byte*
+  - type: char*
     name: ActionText
     offset: 0
-  - type: byte*
+  - type: char*
     name: TooltipText
     offset: 8
   - type: unsigned int
@@ -12140,7 +12148,7 @@ structs:
   - type: Component::GUI::AtkTextNode*
     name: AtkTextNode
     offset: 8
-  - type: byte*
+  - type: char*
     name: Name
     offset: 16
   - type: unsigned int
@@ -12174,7 +12182,7 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: AtkResNode2
     offset: 48
-  - type: byte*
+  - type: char*
     name: Name
     offset: 56
   - type: unsigned int
@@ -12318,7 +12326,7 @@ structs:
   - type: int
     name: Active
     offset: 4
-  - type: byte*
+  - type: char*
     name: TooltipString
     offset: 8
   - type: int
@@ -13236,7 +13244,7 @@ structs:
   - type: unsigned int
     name: IconId
     offset: 8
-  - type: byte*
+  - type: char*
     name: NamePtr
     offset: 16
   - type: unsigned int
@@ -13245,7 +13253,7 @@ structs:
   - type: unsigned int
     name: JobIconId
     offset: 28
-  - type: byte*
+  - type: char*
     name: JobNamePtr
     offset: 32
   - type: byte
@@ -13480,7 +13488,7 @@ structs:
   - type: byte
     name: ContentEntries
     offset: 2
-  - type: byte*
+  - type: char*
     name: Name
     offset: 8
   member_functions: []
@@ -14193,6 +14201,9 @@ structs:
     name: CurrentAetheryte
     offset: 4
   - type: byte
+    name: AetheryteCount
+    offset: 8
+  - type: byte
     name: SelectedAetheryte
     offset: 1806
   - type: byte
@@ -14356,7 +14367,7 @@ structs:
   - type: Client::Game::Character::BattleChara*
     name: Object
     offset: 0
-  - type: byte*
+  - type: char*
     name: Name
     offset: 8
   - type: unsigned __int64
@@ -14547,7 +14558,7 @@ structs:
   - type: int
     name: Scale
     offset: 12
-  - type: byte*
+  - type: char*
     name: Subtext
     offset: 16
   - type: byte
@@ -14682,7 +14693,7 @@ structs:
     offset: 51
     size: 32
     is_string: True
-  - type: byte*
+  - type: char*
     name: NameOverride
     offset: 88
   - type: byte
@@ -14717,7 +14728,7 @@ structs:
   union: False
   size: 24
   fields:
-  - type: byte*
+  - type: char*
     name: Name
     offset: 0
   - type: unsigned __int64
@@ -15060,7 +15071,7 @@ structs:
   union: False
   size: 48
   fields:
-  - type: byte*
+  - type: char*
     name: ItemName
     offset: 0
   - type: unsigned int
@@ -15751,7 +15762,7 @@ structs:
   - type: unsigned __int64
     name: ContentId
     offset: 8
-  - type: byte*
+  - type: char*
     name: Name
     offset: 16
   - type: Client::System::String::Utf8String*
@@ -16217,22 +16228,22 @@ structs:
   union: False
   size: 80
   fields:
-  - type: byte*
+  - type: char*
     name: FullSealsText
     offset: 8
-  - type: byte*
+  - type: char*
     name: OneOrMoreLinesText
     offset: 16
-  - type: byte*
+  - type: char*
     name: SecondChancePointsText
     offset: 24
-  - type: byte*
+  - type: char*
     name: ReceiveSealCompleteText
     offset: 32
-  - type: byte*
+  - type: char*
     name: ReceiveSealIncompleteText
     offset: 40
-  - type: byte*
+  - type: char*
     name: SecondChanceRetryText
     offset: 48
   - type: Client::UI::AddonWeeklyBingo*
@@ -16312,7 +16323,7 @@ structs:
     return_type: byte
     name: IsValidPlayerCharacterName
     parameters:
-    - type: byte*
+    - type: char*
       name: characterName
   - signature: E8 ?? ?? ?? ?? 39 43 30 75 08
     return_type: unsigned int
@@ -16844,7 +16855,7 @@ structs:
       name: this
     - type: int
       name: position
-    - type: byte*
+    - type: char*
       name: text
     - type: unsigned int
       name: iconOrCheck1
@@ -16870,7 +16881,7 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: text
     - type: int
       name: layer
@@ -16886,7 +16897,7 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: text
     - type: int
       name: layer
@@ -16896,7 +16907,7 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: text
     - type: byte
       name: forceVisible
@@ -16982,9 +16993,9 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: name
-    - type: byte*
+    - type: char*
       name: text
     - type: float
       name: duration
@@ -16996,9 +17007,9 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: name
-    - type: byte*
+    - type: char*
       name: text
     - type: float
       name: duration
@@ -17016,9 +17027,9 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: name
-    - type: byte*
+    - type: char*
       name: text
     - type: float
       name: duration
@@ -18322,7 +18333,7 @@ structs:
       name: freeFlags
   - name: GetPath
     offset: 8
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Common::Component::BGCollision::Resource*
       name: this
@@ -18387,7 +18398,7 @@ structs:
     parameters:
     - type: Common::Component::Excel::ExcelModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: sheetName
   - name: LoadSheet
     offset: 24
@@ -18395,7 +18406,7 @@ structs:
     parameters:
     - type: Common::Component::Excel::ExcelModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: sheetName
     - type: byte
       name: a3
@@ -19123,7 +19134,7 @@ structs:
     parameters:
     - type: Component::Excel::ExcelModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: sheetName
   - name: GetLanguage
     offset: 24
@@ -19309,7 +19320,7 @@ structs:
     parameters:
     - type: Component::Exd::ExdModule*
       name: this
-    - type: byte*
+    - type: char*
       name: sheetName
   - signature: E8 ?? ?? ?? ?? FE 47 30
     return_type: Common::Component::Excel::ExcelSheet*
@@ -19325,7 +19336,7 @@ structs:
     parameters:
     - type: Component::Exd::ExdModule*
       name: this
-    - type: byte*
+    - type: char*
       name: sheetName
   - signature: 48 83 EC 38 48 8B 05 ?? ?? ?? ?? 48 8B 88
     return_type: byte
@@ -19366,7 +19377,7 @@ structs:
   union: False
   size: 72
   fields:
-  - type: byte*
+  - type: char*
     name: Unk0
     offset: 0
   - type: Component::GUI::AtkUnitBase*
@@ -19569,7 +19580,7 @@ structs:
   union: False
   size: 24
   fields:
-  - type: byte*
+  - type: char*
     name: Label
     offset: 0
   - type: Component::GUI::AtkComponentListItemRenderer*
@@ -20149,16 +20160,16 @@ structs:
   - type: Common::Component::Excel::ExcelSheet*
     name: ErrorSheet
     offset: 96
-  - type: byte*
+  - type: char*
     name: OkText
     offset: 104
-  - type: byte*
+  - type: char*
     name: CancelText
     offset: 112
-  - type: byte*
+  - type: char*
     name: YesText
     offset: 120
-  - type: byte*
+  - type: char*
     name: NoText
     offset: 128
   - type: byte
@@ -20674,7 +20685,7 @@ structs:
   union: False
   size: 24
   fields:
-  - type: byte*
+  - type: char*
     name: Text
     offset: 0
   - type: unsigned __int64
@@ -20885,7 +20896,7 @@ structs:
   - type: float
     name: Float
     offset: 0
-  - type: byte*
+  - type: char*
     name: String
     offset: 0
   - type: wchar_t*
@@ -21221,7 +21232,7 @@ structs:
     parameters:
     - type: Component::Text::TextModuleInterface*
       name: this
-    - type: byte*
+    - type: char*
       name: input
     - type: Client::System::String::Utf8String*
       name: output
@@ -21233,7 +21244,7 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: output
-    - type: byte*
+    - type: char*
       name: input
   - name: SetFixedSheetInterface
     offset: 104
@@ -21263,7 +21274,7 @@ structs:
   - type: int
     name: IntValue
     offset: 0
-  - type: byte*
+  - type: char*
     name: StringValue
     offset: 0
   - type: Component::Text::ReferencedUtf8String*
@@ -21417,12 +21428,12 @@ structs:
     name: LongCount
     offset: 8
   member_functions: []
-- type: Helper::RedBlackTree<StdPair<Client::System::String::Utf8String, byte*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, byte*>>
+- type: Helper::RedBlackTree<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>
   name: RedBlackTree`3
   namespace: Helper
   union: False
   fields:
-  - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, byte*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, byte*>>*
+  - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>*
     name: Head
     offset: 0
   - type: __int64
@@ -21441,12 +21452,12 @@ structs:
     name: LongCount
     offset: 8
   member_functions: []
-- type: Helper::RedBlackTree<StdPair<byte*, __int16>, byte*, Helper::PairKeyExtractor<byte*, __int16>>
+- type: Helper::RedBlackTree<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>
   name: RedBlackTree`3
   namespace: Helper
   union: False
   fields:
-  - type: Helper::RedBlackTree::Node<StdPair<byte*, __int16>, byte*, Helper::PairKeyExtractor<byte*, __int16>>*
+  - type: Helper::RedBlackTree::Node<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>*
     name: Head
     offset: 0
   - type: __int64
@@ -22041,12 +22052,12 @@ structs:
     name: Item2
     offset: 8
   member_functions: []
-- type: StdPair<byte*, __int16>
+- type: StdPair<char*, __int16>
   name: StdPair`2
   namespace: ''
   union: False
   fields:
-  - type: byte*
+  - type: char*
     name: Item1
     offset: 0
   - type: __int16
@@ -23292,21 +23303,6 @@ structs:
     name: End
     offset: 16
   member_functions: []
-- type: StdVector<byte*, Helper::IStaticMemorySpace::Default>
-  name: StdVector`2
-  namespace: ''
-  union: False
-  fields:
-  - type: byte**
-    name: First
-    offset: 0
-  - type: byte**
-    name: Last
-    offset: 8
-  - type: byte**
-    name: End
-    offset: 16
-  member_functions: []
 - type: StdVector<byte, Helper::IStaticMemorySpace::Default>
   name: StdVector`2
   namespace: ''
@@ -23319,6 +23315,21 @@ structs:
     name: Last
     offset: 8
   - type: byte*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<char*, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: char**
+    name: First
+    offset: 0
+  - type: char**
+    name: Last
+    offset: 8
+  - type: char**
     name: End
     offset: 16
   member_functions: []
@@ -23954,7 +23965,7 @@ structs:
     parameters:
     - type: Client::Game::Character::CharacterManager*
       name: this
-    - type: byte*
+    - type: char*
       name: name
     - type: byte
       name: onlyPlayers
@@ -27137,7 +27148,7 @@ structs:
       name: this
   - name: GetPrimaryPath
     offset: 56
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::ILayoutInstance*
       name: this
@@ -27239,7 +27250,7 @@ structs:
       name: this
   - name: GetSecondaryPath
     offset: 248
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::ILayoutInstance*
       name: this
@@ -28155,7 +28166,7 @@ structs:
   - type: byte
     name: HasPlayedWanderer
     offset: 54
-  - type: byte*
+  - type: char*
     name: SongTitle
     offset: 56
   virtual_functions: []
@@ -33075,7 +33086,7 @@ structs:
     - type: Client::UI::Info::InfoProxyId
       name: id
   - signature: E8 ?? ?? ?? ?? 49 C7 C1 ?? ?? ?? ?? 48 8D 8C 24 ?? ?? ?? ??
-    return_type: byte*
+    return_type: char*
     name: GetLocalCharacterName
     parameters:
     - type: Client::UI::Info::InfoModule*
@@ -33247,7 +33258,7 @@ structs:
       name: this
   member_functions:
   - signature: E8 ?? ?? ?? ?? 4C 8B C8 44 8D 43
-    return_type: byte*
+    return_type: char*
     name: GetLinkShellName
     parameters:
     - type: Client::UI::Info::InfoProxyChat*
@@ -33498,7 +33509,7 @@ structs:
       name: contentId
     - type: unsigned __int16
       name: worldId
-    - type: byte*
+    - type: char*
       name: name
 - type: Client::UI::Info::InfoProxyPageInterface
   name: InfoProxyPageInterface
@@ -35406,7 +35417,7 @@ structs:
     - type: unsigned int
       name: actionId
   - signature: E8 ?? ?? ?? ?? 48 8B CB 48 85 C0 75 12
-    return_type: byte*
+    return_type: char*
     name: GetDisplayNameForSlot
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlot*
@@ -35999,7 +36010,7 @@ structs:
   - type: Component::GUI::AtkStage*
     name: AtkStage
     offset: 8
-  - type: byte**
+  - type: char**
     name: EntryNames
     offset: 16
   - type: Component::GUI::AtkComponentWindow*
@@ -36411,7 +36422,7 @@ structs:
     parameters:
     - type: Common::Component::Excel::ExcelModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
   - name: LoadSheet
     offset: 24
@@ -36419,7 +36430,7 @@ structs:
     parameters:
     - type: Common::Component::Excel::ExcelModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
     - type: byte
       name: a3
@@ -36445,7 +36456,7 @@ structs:
   - type: Common::Component::Excel::ExcelModuleInterface::ExcelLanguage
     name: Language
     offset: 8
-  - type: byte*
+  - type: char*
     name: SheetName
     offset: 16
   - type: unsigned int
@@ -36801,7 +36812,7 @@ structs:
     parameters:
     - type: Common::Serialize::Util::hkRootLevelContainer*
       name: this
-    - type: byte*
+    - type: char*
       name: typeName
     - type: __int64
       name: prevObject
@@ -36811,7 +36822,7 @@ structs:
     parameters:
     - type: Common::Serialize::Util::hkRootLevelContainer*
       name: this
-    - type: byte*
+    - type: char*
       name: objectName
     - type: __int64
       name: prevObject
@@ -37133,7 +37144,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkTexture*
       name: this
-    - type: byte*
+    - type: char*
       name: path
     - type: int
       name: version
@@ -37956,7 +37967,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkValue*
       name: this
-    - type: byte*
+    - type: char*
       name: value
   - signature: E8 ?? ?? ?? ?? 33 FF 89 7C 24
     return_type: void
@@ -38006,7 +38017,7 @@ structs:
       name: this
     - type: unsigned int
       name: index
-    - type: byte*
+    - type: char*
       name: value
   - signature: E8 ?? ?? ?? ?? 8B 44 24 60 4E 8D 24 3E
     return_type: byte
@@ -38094,7 +38105,7 @@ structs:
       name: this
     - type: int
       name: index
-    - type: byte*
+    - type: char*
       name: value
     - type: byte
       name: readBeforeWrite
@@ -38170,7 +38181,7 @@ structs:
       name: this
     - type: int
       name: index
-    - type: byte*
+    - type: char*
       name: value
     - type: byte
       name: readBeforeWrite
@@ -38500,18 +38511,18 @@ structs:
     name: _Myval
     offset: 28
   member_functions: []
-- type: Helper::RedBlackTree::Node<StdPair<byte*, __int16>, byte*, Helper::PairKeyExtractor<byte*, __int16>>
+- type: Helper::RedBlackTree::Node<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>
   name: Node
   namespace: Helper
   union: False
   fields:
-  - type: Helper::RedBlackTree::Node<StdPair<byte*, __int16>, byte*, Helper::PairKeyExtractor<byte*, __int16>>*
+  - type: Helper::RedBlackTree::Node<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>*
     name: _Left
     offset: 0
-  - type: Helper::RedBlackTree::Node<StdPair<byte*, __int16>, byte*, Helper::PairKeyExtractor<byte*, __int16>>*
+  - type: Helper::RedBlackTree::Node<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>*
     name: _Parent
     offset: 8
-  - type: Helper::RedBlackTree::Node<StdPair<byte*, __int16>, byte*, Helper::PairKeyExtractor<byte*, __int16>>*
+  - type: Helper::RedBlackTree::Node<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>*
     name: _Right
     offset: 16
   - type: Helper::RedBlackTreeNodeColor
@@ -38526,7 +38537,7 @@ structs:
   - type: byte
     name: _19
     offset: 27
-  - type: StdPair<byte*, __int16>
+  - type: StdPair<char*, __int16>
     name: _Myval
     offset: 28
   member_functions: []
@@ -39275,12 +39286,12 @@ structs:
     name: Tree
     offset: 0
   member_functions: []
-- type: StdMap<Client::System::String::Utf8String, byte*, Helper::IStaticMemorySpace::Default>
+- type: StdMap<Client::System::String::Utf8String, char*, Helper::IStaticMemorySpace::Default>
   name: StdMap`3
   namespace: ''
   union: False
   fields:
-  - type: Helper::RedBlackTree<StdPair<Client::System::String::Utf8String, byte*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, byte*>>
+  - type: Helper::RedBlackTree<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>
     name: Tree
     offset: 0
   member_functions: []
@@ -39293,12 +39304,12 @@ structs:
     name: Tree
     offset: 0
   member_functions: []
-- type: StdMap<byte*, __int16, Helper::IStaticMemorySpace::Default>
+- type: StdMap<char*, __int16, Helper::IStaticMemorySpace::Default>
   name: StdMap`3
   namespace: ''
   union: False
   fields:
-  - type: Helper::RedBlackTree<StdPair<byte*, __int16>, byte*, Helper::PairKeyExtractor<byte*, __int16>>
+  - type: Helper::RedBlackTree<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>
     name: Tree
     offset: 0
   member_functions: []
@@ -39587,7 +39598,7 @@ structs:
     name: Item2
     offset: 104
   member_functions: []
-- type: StdPair<Client::System::String::Utf8String, byte*>
+- type: StdPair<Client::System::String::Utf8String, char*>
   name: StdPair`2
   namespace: ''
   union: False
@@ -39595,7 +39606,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: Item1
     offset: 0
-  - type: byte*
+  - type: char*
     name: Item2
     offset: 104
   member_functions: []
@@ -40272,21 +40283,21 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
-- type: StdVector<byte*>
-  name: StdVector`1
-  namespace: ''
-  union: False
-  fields:
-  - type: StdVector<byte*, Helper::IStaticMemorySpace::Default>
-    name: WithOps
-    offset: 0
-  member_functions: []
 - type: StdVector<byte>
   name: StdVector`1
   namespace: ''
   union: False
   fields:
   - type: StdVector<byte, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdVector<char*>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<char*, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -41698,7 +41709,7 @@ structs:
     offset: 29616
   member_functions:
   - signature: 40 53 48 83 EC 30 49 8B D8 4C 8D 44 24
-    return_type: byte*
+    return_type: char*
     name: GetNameByEntityId
     parameters:
     - type: Client::Game::NameCache*
@@ -41728,7 +41739,7 @@ structs:
     - type: Client::Game::NameCache::CharacterInfo*
       name: characterInfo
   - signature: 40 53 48 83 EC 30 4C 8B D2 48 8B D9
-    return_type: byte*
+    return_type: char*
     name: GetNameByContentId
     parameters:
     - type: Client::Game::NameCache*
@@ -41743,7 +41754,7 @@ structs:
       name: this
     - type: unsigned __int64
       name: contentId
-    - type: byte*
+    - type: char*
       name: name
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 75 0D 32 C0
@@ -41908,7 +41919,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Object::GameObject*
       name: this
@@ -42523,7 +42534,7 @@ structs:
       name: this
   - name: GetPrimaryPath
     offset: 56
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
       name: this
@@ -42625,7 +42636,7 @@ structs:
       name: this
   - name: GetSecondaryPath
     offset: 248
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::Layer::BgPartsLayoutInstance*
       name: this
@@ -43168,10 +43179,10 @@ structs:
   - type: Client::System::Scheduler::Resource::SchedulerResource*
     name: SchedulerResource
     offset: 152
-  - type: byte*
+  - type: char*
     name: ActionTimelineKey
     offset: 168
-  - type: byte*
+  - type: char*
     name: FaceLibraryPath
     offset: 176
   - type: unsigned int
@@ -48827,7 +48838,7 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentPartyMember*
       name: this
-    - type: byte*
+    - type: char*
       name: name
     - type: unsigned __int16
       name: parentAddonId
@@ -48839,7 +48850,7 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentPartyMember*
       name: this
-    - type: byte*
+    - type: char*
       name: name
     - type: unsigned __int16
       name: parentAddonId
@@ -49547,7 +49558,7 @@ structs:
   - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
     name: EventReceiver
     offset: 136
-  - type: byte*
+  - type: char*
     name: ShopName
     offset: 152
   - type: unsigned int
@@ -49976,7 +49987,7 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentTermFilter*
       name: this
-    - type: byte*
+    - type: char*
       name: message
 - type: Client::UI::Agent::BalloonInfo
   name: BalloonInfo
@@ -50060,7 +50071,7 @@ structs:
   - type: unsigned int
     name: ContextSubMenuMask
     offset: 1636
-  - type: byte*
+  - type: char*
     name: ContextTitleString
     offset: 1640
   - type: byte
@@ -51031,7 +51042,7 @@ structs:
       name: this
     - type: int
       name: deckIndex
-    - type: byte*
+    - type: char*
       name: name
   - signature: 83 FA 09 77 1D
     return_type: void
@@ -51145,7 +51156,7 @@ structs:
       name: this
     - type: unsigned __int64
       name: accountId
-    - type: byte*
+    - type: char*
       name: name
     - type: __int16
       name: worldId
@@ -51165,7 +51176,7 @@ structs:
       name: this
     - type: unsigned __int64
       name: accountId
-    - type: byte*
+    - type: char*
       name: comment
 - type: Client::UI::Misc::RetainerCommentModule
   name: RetainerCommentModule
@@ -51268,10 +51279,10 @@ structs:
       name: this
     - type: unsigned __int64
       name: retainerId
-    - type: byte*
+    - type: char*
       name: comment
   - signature: 32 C0 0F 1F 40 00 66 66 0F 1F 84 ?? 00 00 00 00 44 0F B6 C0 4C 8D 51
-    return_type: byte*
+    return_type: char*
     name: GetComment
     parameters:
     - type: Client::UI::Misc::RetainerCommentModule*
@@ -51773,7 +51784,7 @@ structs:
     parameters:
     - type: Common::Base::Reflection::Registry::hkClassNameRegistry*
       name: this
-    - type: byte*
+    - type: char*
       name: name
   member_functions: []
 - type: Common::Base::Reflection::Registry::hkTypeInfoRegistry
@@ -52145,7 +52156,7 @@ structs:
     parameters:
     - type: Common::Serialize::Resource::hkResource*
       name: this
-    - type: byte*
+    - type: char*
       name: className
     - type: Common::Base::Reflection::Registry::hkTypeInfoRegistry*
       name: typeInfoRegistry
@@ -52499,7 +52510,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkUnitManager*
       name: this
-    - type: byte*
+    - type: char*
       name: name
     - type: int
       name: index
@@ -52584,18 +52595,18 @@ structs:
     name: _Myval
     offset: 28
   member_functions: []
-- type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, byte*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, byte*>>
+- type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>
   name: Node
   namespace: Helper
   union: False
   fields:
-  - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, byte*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, byte*>>*
+  - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>*
     name: _Left
     offset: 0
-  - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, byte*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, byte*>>*
+  - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>*
     name: _Parent
     offset: 8
-  - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, byte*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, byte*>>*
+  - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>*
     name: _Right
     offset: 16
   - type: Helper::RedBlackTreeNodeColor
@@ -52610,7 +52621,7 @@ structs:
   - type: byte
     name: _19
     offset: 27
-  - type: StdPair<Client::System::String::Utf8String, byte*>
+  - type: StdPair<Client::System::String::Utf8String, char*>
     name: _Myval
     offset: 28
   member_functions: []
@@ -52892,12 +52903,12 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
-- type: StdMap<Client::System::String::Utf8String, byte*>
+- type: StdMap<Client::System::String::Utf8String, char*>
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<Client::System::String::Utf8String, byte*, Helper::IStaticMemorySpace::Default>
+  - type: StdMap<Client::System::String::Utf8String, char*, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -52910,12 +52921,12 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
-- type: StdMap<byte*, __int16>
+- type: StdMap<char*, __int16>
   name: StdMap`2
   namespace: ''
   union: False
   fields:
-  - type: StdMap<byte*, __int16, Helper::IStaticMemorySpace::Default>
+  - type: StdMap<char*, __int16, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -54007,7 +54018,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Object::Aetheryte*
       name: this
@@ -54179,7 +54190,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Object::EventObject*
       name: this
@@ -54351,7 +54362,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Object::Treasure*
       name: this
@@ -57403,7 +57414,7 @@ structs:
       name: accountId
     - type: unsigned __int64
       name: contentId
-    - type: byte*
+    - type: char*
       name: name
     - type: __int16
       name: worldId
@@ -58405,7 +58416,7 @@ structs:
     parameters:
     - type: Client::UI::Info::InfoProxyCommonList*
       name: this
-    - type: byte*
+    - type: char*
       name: characterName
     - type: unsigned __int16
       name: worldId
@@ -58675,7 +58686,7 @@ structs:
     parameters:
     - type: Client::UI::Info::InfoProxyDetail*
       name: this
-    - type: byte*
+    - type: char*
       name: searchComment
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B D9 BF ?? ?? ?? ?? 8B C7
     return_type: void
@@ -58821,7 +58832,7 @@ structs:
     - type: unsigned int
       name: index
   - signature: E8 ?? ?? ?? ?? 4C 8B C8 44 8D 47 01
-    return_type: byte*
+    return_type: char*
     name: GetLinkshellName
     parameters:
     - type: Client::UI::Info::InfoProxyLinkshell*
@@ -59833,7 +59844,7 @@ structs:
     parameters:
     - type: Common::Base::System::IO::IStream::hkIstream*
       name: this
-    - type: byte*
+    - type: char*
       name: filename
   - signature: E8 ?? ?? ?? ?? 4C 8D 44 24 ?? 48 8B D5 48 8B 48 10
     return_type: void
@@ -59863,7 +59874,7 @@ structs:
     parameters:
     - type: Common::Base::System::IO::IStream::hkIstream*
       name: this
-    - type: byte*
+    - type: char*
       name: str
     - type: int
       name: maxsize
@@ -59889,7 +59900,7 @@ structs:
     parameters:
     - type: Common::Base::System::IO::OStream::hkOstream*
       name: this
-    - type: byte*
+    - type: char*
       name: filename
   - signature: E8 ?? ?? ?? ?? 44 8B 44 24 ?? 4C 8B 7C 24 ??
     return_type: void
@@ -60471,7 +60482,7 @@ structs:
     - type: int
       name: idx
   - signature: E8 ?? ?? ?? ?? 80 38 23
-    return_type: byte*
+    return_type: char*
     name: lua_tolstring
     parameters:
     - type: Common::Lua::lua_State*
@@ -60514,7 +60525,7 @@ structs:
       name: this
     - type: int
       name: idx
-    - type: byte*
+    - type: char*
       name: k
   - signature: E8 ?? ?? ?? ?? 48 8B 4F ?? 48 85 ED
     return_type: void
@@ -60524,7 +60535,7 @@ structs:
       name: this
     - type: int
       name: idx
-    - type: byte*
+    - type: char*
       name: k
   - signature: E8 ?? ?? ?? ?? 33 C9 40 F6 C6
     return_type: void
@@ -60552,11 +60563,11 @@ structs:
     parameters:
     - type: Common::Lua::lua_State*
       name: this
-    - type: byte*
+    - type: char*
       name: buff
     - type: __int64
       name: size
-    - type: byte*
+    - type: char*
       name: name
   - signature: E8 ?? ?? ?? ?? 8B D8 85 C0 75 ?? 40 84 ED
     return_type: int
@@ -60564,7 +60575,7 @@ structs:
     parameters:
     - type: Common::Lua::lua_State*
       name: this
-    - type: byte*
+    - type: char*
       name: filename
   - signature: E8 ?? ?? ?? ?? 3B C3 74 0D
     return_type: Common::Lua::LuaType
@@ -60668,6 +60679,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
+    - type: float
+      name: delta
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -62688,7 +62701,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Object::HousingObject*
       name: this
@@ -62866,7 +62879,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Object::MJIObject*
       name: this
@@ -63246,7 +63259,7 @@ structs:
   - type: byte
     name: CaughtFishBitmask
     offset: 1008
-    size: 180
+    size: 181
     is_string: False
   - type: unsigned int
     name: NumFishCaught
@@ -64058,7 +64071,7 @@ structs:
     offset: 160
     size: 92
     is_string: False
-  - type: StdMap<Client::System::String::Utf8String, byte*>*
+  - type: StdMap<Client::System::String::Utf8String, char*>*
     name: RsvMap
     offset: 544
   - type: StdMap<unsigned __int64, byte*>*
@@ -64102,7 +64115,7 @@ structs:
       name: this
     - type: int
       name: type
-    - type: byte*
+    - type: char*
       name: bgName
     - type: byte
       name: layerEntryType
@@ -64115,12 +64128,12 @@ structs:
     - type: unsigned int
       name: cfcId
   - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 83 B9 ?? ?? ?? ?? ?? 48 8B F1
-    return_type: byte*
+    return_type: char*
     name: ResolveRsvString
     parameters:
     - type: Client::LayoutEngine::LayoutWorld*
       name: this
-    - type: byte*
+    - type: char*
       name: rsvString
   - signature: 40 53 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4D 8B E8
     return_type: byte
@@ -66372,7 +66385,7 @@ structs:
       name: this
     - type: unsigned __int64
       name: contentId
-    - type: byte*
+    - type: char*
       name: name
     - type: unsigned __int16
       name: worldId
@@ -66934,7 +66947,7 @@ structs:
       name: this
     - type: Component::GUI::AtkUnitBase*
       name: addon
-    - type: byte*
+    - type: char*
       name: addonName
 - type: Common::Component::BGCollision::Collider
   name: Collider
@@ -67234,6 +67247,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentButton*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -67255,7 +67270,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentButton*
       name: this
-    - type: byte*
+    - type: char*
       name: text
   - signature: E8 ?? ?? ?? ?? 8D 46 12
     return_type: void
@@ -67333,6 +67348,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentDropDownList*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -67415,6 +67432,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentGuildLeveCard*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -67516,6 +67535,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentIcon*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -67584,6 +67605,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentIconText*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -67652,6 +67675,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentJournalCanvas*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -67821,6 +67846,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentList*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -67854,10 +67881,10 @@ structs:
       name: this
     - type: int
       name: index
-    - type: byte*
+    - type: char*
       name: text
   - signature: 3B 91 ?? ?? ?? ?? 7C 03 33 C0 C3 4C 8B 81
-    return_type: byte*
+    return_type: char*
     name: GetItemLabel
     parameters:
     - type: Component::GUI::AtkComponentList*
@@ -67939,6 +67966,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentPortrait*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -68007,6 +68036,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentScrollBar*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -68087,6 +68118,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentSlider*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -68193,6 +68226,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTextNineGrid*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -68214,7 +68249,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTextNineGrid*
       name: this
-    - type: byte*
+    - type: char*
       name: str
 - type: Component::GUI::AtkComponentTreeListItem
   name: AtkComponentTreeListItem
@@ -68225,7 +68260,7 @@ structs:
   - type: StdVector<unsigned int>
     name: UIntValues
     offset: 0
-  - type: StdVector<byte*>
+  - type: StdVector<char*>
     name: StringValues
     offset: 24
   - type: Component::GUI::AtkComponentListItemRenderer*
@@ -68311,6 +68346,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentWindow*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -68336,6 +68373,16 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentWindow*
       name: this
+  - signature: E8 ?? ?? ?? ?? 83 FD 4B
+    return_type: void
+    name: SetTitle
+    parameters:
+    - type: Component::GUI::AtkComponentWindow*
+      name: this
+    - type: char*
+      name: title
+    - type: char*
+      name: subtitle
 - type: Component::GUI::AtkFontCodeModule
   name: AtkFontCodeModule
   namespace: Component.GUI
@@ -69393,7 +69440,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Object::GatheringPointObject*
       name: this
@@ -69565,7 +69612,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Object::HousingCombinedObject*
       name: this
@@ -69963,7 +70010,7 @@ structs:
       name: this
   - name: GetPrimaryPath
     offset: 56
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
       name: this
@@ -70065,7 +70112,7 @@ structs:
       name: this
   - name: GetSecondaryPath
     offset: 248
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::Layer::TriggerBoxLayoutInstance*
       name: this
@@ -71967,7 +72014,7 @@ structs:
   - type: Common::Configuration::ConfigProperties
     name: Properties
     offset: 0
-  - type: byte*
+  - type: char*
     name: Name
     offset: 16
   - type: int
@@ -72047,7 +72094,7 @@ structs:
   union: False
   size: 192
   fields:
-  - type: StdVector<byte*>
+  - type: StdVector<char*>
     name: CompletionTexts
     offset: 8
   - type: StdVector<Component::Completion::CategoryData::CompletionDataStruct>
@@ -72241,6 +72288,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentCheckBox*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -72309,6 +72358,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentDragDrop*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -72383,6 +72434,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentHoldButton*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -72463,6 +72516,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentInputBase*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -72554,6 +72609,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentRadioButton*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -72613,7 +72670,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkImageNode*
       name: this
-    - type: byte*
+    - type: char*
       name: texturePath
     - type: unsigned int
       name: version
@@ -73726,7 +73783,7 @@ structs:
       name: this
   - name: GetPrimaryPath
     offset: 56
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
       name: this
@@ -73828,7 +73885,7 @@ structs:
       name: this
   - name: GetSecondaryPath
     offset: 248
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::Layer::CollisionBoxLayoutInstance*
       name: this
@@ -74848,7 +74905,7 @@ structs:
       name: a2
   member_functions:
   - signature: E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 8B 14 99
-    return_type: byte*
+    return_type: char*
     name: GetActiveSetCustomNamePtr
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
@@ -74871,7 +74928,7 @@ structs:
       name: this
     - type: int
       name: activeSetIndex
-    - type: byte*
+    - type: char*
       name: name
   - signature: E8 ?? ?? ?? ?? 49 69 F6
     return_type: void
@@ -75311,7 +75368,7 @@ structs:
     parameters:
     - type: Client::UI::Misc::PronounModule*
       name: this
-    - type: byte*
+    - type: char*
       name: placeholder
     - type: byte
       name: unknown0
@@ -75459,6 +75516,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentListItemRenderer*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -75538,7 +75597,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkCounterNode*
       name: this
-    - type: byte*
+    - type: char*
       name: text
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 F8 08
     return_type: void
@@ -75599,7 +75658,7 @@ structs:
   - type: Client::System::String::Utf8String
     name: NodeText
     offset: 192
-  - type: byte*
+  - type: char*
     name: OriginalTextPointer
     offset: 296
   - type: StdList<Component::GUI::LinkData*>*
@@ -75657,10 +75716,10 @@ structs:
     parameters:
     - type: Component::GUI::AtkTextNode*
       name: this
-    - type: byte*
+    - type: char*
       name: str
   - signature: E8 ?? ?? ?? ?? 4A 8B 9C F6 ?? ?? ?? ??
-    return_type: byte*
+    return_type: char*
     name: GetText
     parameters:
     - type: Component::GUI::AtkTextNode*
@@ -75805,7 +75864,7 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: output
-    - type: byte*
+    - type: char*
       name: input
     - type: int*
       name: outNumCharsRead
@@ -75817,7 +75876,7 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: output
-    - type: byte*
+    - type: char*
       name: input
 - type: Helper::RedBlackTree::Node<StdPair<Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Client::LayoutEngine::AnalyticShapeData>, Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Helper::PairKeyExtractor<Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Client::LayoutEngine::AnalyticShapeData>>
   name: Node
@@ -76320,10 +76379,10 @@ structs:
   - type: Client::System::Resource::Handle::MaterialResourceHandle**
     name: MaterialResourceHandles
     offset: 552
-  - type: StdMap<byte*, __int16>
+  - type: StdMap<char*, __int16>
     name: Attributes
     offset: 584
-  - type: StdMap<byte*, __int16>
+  - type: StdMap<char*, __int16>
     name: Shapes
     offset: 616
   virtual_functions:
@@ -76363,7 +76422,7 @@ structs:
       name: a3
   member_functions:
   - signature: E8 ?? ?? ?? ?? 44 8B CD 48 89 44 24 ?? 41 B8 ?? ?? ?? ??
-    return_type: byte*
+    return_type: char*
     name: GetMaterialFileNameBySlot
     parameters:
     - type: Client::System::Resource::Handle::ModelResourceHandle*
@@ -76725,7 +76784,7 @@ structs:
     - type: unsigned int
       name: itemId
   - signature: E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8D 4D B0 48 8B F8 E8 ?? ?? ?? ?? 41 8B D6
-    return_type: byte*
+    return_type: char*
     name: ChangeChannelName
     parameters:
     - type: Client::UI::Agent::AgentChatLog*
@@ -79156,6 +79215,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTextInput*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -79177,7 +79238,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTextInput*
       name: this
-    - type: byte*
+    - type: char*
       name: text
   - signature: E8 ?? ?? ?? ?? EB 5D E8
     return_type: void
@@ -79185,7 +79246,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTextInput*
       name: this
-    - type: byte*
+    - type: char*
       name: text
     - type: byte
       name: unique
@@ -79248,6 +79309,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTreeList*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -80603,7 +80666,7 @@ structs:
     parameters:
     - type: Client::UI::Misc::RaptureLogModule*
       name: this
-    - type: byte*
+    - type: char*
       name: str
   - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8D 96 ?? ?? ?? ?? 48 8D 4C 24
     return_type: byte
@@ -80864,6 +80927,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentGaugeBar*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -81263,7 +81328,7 @@ structs:
       name: this
   - name: GetPrimaryPath
     offset: 56
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
       name: this
@@ -81365,7 +81430,7 @@ structs:
       name: this
   - name: GetSecondaryPath
     offset: 248
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::LayoutEngine::Group::SharedGroupLayoutInstance*
       name: this
@@ -81699,7 +81764,7 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
-    - type: byte*
+    - type: char*
       name: text
     - type: unsigned int
       name: yesId
@@ -81721,7 +81786,7 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
-    - type: byte*
+    - type: char*
       name: text
   - signature: E8 ?? ?? ?? ?? FF CE 48 FF CF
     return_type: void
@@ -81729,7 +81794,7 @@ structs:
     parameters:
     - type: Client::UI::Agent::AgentContext*
       name: this
-    - type: byte*
+    - type: char*
       name: text
     - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
       name: handler
@@ -81763,7 +81828,7 @@ structs:
       name: this
     - type: int
       name: eventId
-    - type: byte*
+    - type: char*
       name: text
     - type: byte
       name: disabled
@@ -82895,6 +82960,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentNumericInput*
       name: this
+    - type: float
+      name: a2
   - name: SetEnabledState
     offset: 80
     return_type: void
@@ -82960,7 +83027,7 @@ structs:
   - type: Component::GUI::AtkValue*
     name: AtkValues
     offset: 376
-  - type: StdVector<byte*>
+  - type: StdVector<char*>
     name: CachedAtkValueStrings
     offset: 384
   - type: unsigned int
@@ -83561,7 +83628,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
-    - type: byte*
+    - type: char*
       name: name
     - type: byte
       name: a3
@@ -83969,7 +84036,7 @@ structs:
       name: slotBytes
   - name: ResolveRootPath
     offset: 600
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -83979,7 +84046,7 @@ structs:
       name: pathBufferSize
   - name: ResolveSklbPath
     offset: 608
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -83991,7 +84058,7 @@ structs:
       name: partialSkeletonIndex
   - name: ResolveMdlPath
     offset: 616
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84003,7 +84070,7 @@ structs:
       name: slotIndex
   - name: ResolveSkpPath
     offset: 624
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84015,7 +84082,7 @@ structs:
       name: partialSkeletonIndex
   - name: ResolvePhybPath
     offset: 632
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84027,7 +84094,7 @@ structs:
       name: partialSkeletonIndex
   - name: ResolvePapPath
     offset: 672
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84041,7 +84108,7 @@ structs:
       name: animationName
   - name: ResolveTmbPath
     offset: 680
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84053,7 +84120,7 @@ structs:
       name: timelineName
   - name: ResolveMaterialPapPath
     offset: 696
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84067,7 +84134,7 @@ structs:
       name: unkSId
   - name: ResolveImcPath
     offset: 712
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84079,7 +84146,7 @@ structs:
       name: slotIndex
   - name: ResolveMtrlPath
     offset: 720
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84093,7 +84160,7 @@ structs:
       name: mtrlFileName
   - name: ResolveDecalPath
     offset: 736
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84105,7 +84172,7 @@ structs:
       name: slotIndex
   - name: ResolveVfxPath
     offset: 744
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -84119,7 +84186,7 @@ structs:
       name: unkOutParam
   - name: ResolveEidPath
     offset: 752
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::CharacterBase*
       name: this
@@ -110593,7 +110660,7 @@ structs:
       name: a3
   - name: ResolveRootPath
     offset: 600
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110603,7 +110670,7 @@ structs:
       name: a3
   - name: ResolveSklbPath
     offset: 608
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110615,7 +110682,7 @@ structs:
       name: a4
   - name: ResolveMdlPath
     offset: 616
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110627,7 +110694,7 @@ structs:
       name: a4
   - name: ResolveSkpPath
     offset: 624
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110639,7 +110706,7 @@ structs:
       name: a4
   - name: ResolvePhybPath
     offset: 632
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110651,7 +110718,7 @@ structs:
       name: a4
   - name: ResolvePapPath
     offset: 672
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110665,7 +110732,7 @@ structs:
       name: a5
   - name: ResolveTmbPath
     offset: 680
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110677,7 +110744,7 @@ structs:
       name: a4
   - name: ResolveMaterialPapPath
     offset: 696
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110691,7 +110758,7 @@ structs:
       name: a5
   - name: ResolveImcPath
     offset: 712
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110703,7 +110770,7 @@ structs:
       name: a4
   - name: ResolveMtrlPath
     offset: 720
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110717,7 +110784,7 @@ structs:
       name: a5
   - name: ResolveDecalPath
     offset: 736
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110729,7 +110796,7 @@ structs:
       name: a4
   - name: ResolveVfxPath
     offset: 744
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110743,7 +110810,7 @@ structs:
       name: a5
   - name: ResolveEidPath
     offset: 752
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Demihuman*
       name: this
@@ -110849,7 +110916,7 @@ structs:
       name: a3
   - name: ResolveRootPath
     offset: 600
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110859,7 +110926,7 @@ structs:
       name: a3
   - name: ResolveSklbPath
     offset: 608
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110871,7 +110938,7 @@ structs:
       name: a4
   - name: ResolveMdlPath
     offset: 616
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110883,7 +110950,7 @@ structs:
       name: a4
   - name: ResolveSkpPath
     offset: 624
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110895,7 +110962,7 @@ structs:
       name: a4
   - name: ResolvePhybPath
     offset: 632
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110907,7 +110974,7 @@ structs:
       name: a4
   - name: ResolvePapPath
     offset: 672
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110921,7 +110988,7 @@ structs:
       name: a5
   - name: ResolveTmbPath
     offset: 680
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110933,7 +111000,7 @@ structs:
       name: a4
   - name: ResolveMaterialPapPath
     offset: 696
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110947,7 +111014,7 @@ structs:
       name: a5
   - name: ResolveImcPath
     offset: 712
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110959,7 +111026,7 @@ structs:
       name: a4
   - name: ResolveMtrlPath
     offset: 720
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110973,7 +111040,7 @@ structs:
       name: a5
   - name: ResolveDecalPath
     offset: 736
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110985,7 +111052,7 @@ structs:
       name: a4
   - name: ResolveVfxPath
     offset: 744
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -110999,7 +111066,7 @@ structs:
       name: a5
   - name: ResolveEidPath
     offset: 752
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Monster*
       name: this
@@ -111129,7 +111196,7 @@ structs:
       name: a3
   - name: ResolveRootPath
     offset: 600
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111139,7 +111206,7 @@ structs:
       name: a3
   - name: ResolveSklbPath
     offset: 608
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111151,7 +111218,7 @@ structs:
       name: a4
   - name: ResolveMdlPath
     offset: 616
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111163,7 +111230,7 @@ structs:
       name: a4
   - name: ResolveSkpPath
     offset: 624
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111175,7 +111242,7 @@ structs:
       name: a4
   - name: ResolvePhybPath
     offset: 632
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111187,7 +111254,7 @@ structs:
       name: a4
   - name: ResolvePapPath
     offset: 672
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111201,7 +111268,7 @@ structs:
       name: a5
   - name: ResolveTmbPath
     offset: 680
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111213,7 +111280,7 @@ structs:
       name: a4
   - name: ResolveMaterialPapPath
     offset: 696
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111227,7 +111294,7 @@ structs:
       name: a5
   - name: ResolveImcPath
     offset: 712
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111239,7 +111306,7 @@ structs:
       name: a4
   - name: ResolveMtrlPath
     offset: 720
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111253,7 +111320,7 @@ structs:
       name: a5
   - name: ResolveDecalPath
     offset: 736
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111265,7 +111332,7 @@ structs:
       name: a4
   - name: ResolveVfxPath
     offset: 744
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -111279,7 +111346,7 @@ structs:
       name: a5
   - name: ResolveEidPath
     offset: 752
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Weapon*
       name: this
@@ -121217,7 +121284,7 @@ structs:
     - type: Client::Game::Object::GameObject*
       name: gameObject
   - signature: E8 ?? ?? ?? ?? EB 08 48 8B CB E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 45 85 F6
-    return_type: byte*
+    return_type: char*
     name: GetMainCommandString
     parameters:
     - type: Client::UI::Agent::AgentHUD*
@@ -127194,7 +127261,7 @@ structs:
       name: a3
   - name: ResolveRootPath
     offset: 600
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127204,7 +127271,7 @@ structs:
       name: a3
   - name: ResolveSklbPath
     offset: 608
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127216,7 +127283,7 @@ structs:
       name: a4
   - name: ResolveMdlPath
     offset: 616
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127228,7 +127295,7 @@ structs:
       name: a4
   - name: ResolveSkpPath
     offset: 624
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127240,7 +127307,7 @@ structs:
       name: a4
   - name: ResolvePhybPath
     offset: 632
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127252,7 +127319,7 @@ structs:
       name: a4
   - name: ResolvePapPath
     offset: 672
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127266,7 +127333,7 @@ structs:
       name: a5
   - name: ResolveTmbPath
     offset: 680
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127278,7 +127345,7 @@ structs:
       name: a4
   - name: ResolveMaterialPapPath
     offset: 696
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127292,7 +127359,7 @@ structs:
       name: a5
   - name: ResolveImcPath
     offset: 712
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127304,7 +127371,7 @@ structs:
       name: a4
   - name: ResolveMtrlPath
     offset: 720
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127318,7 +127385,7 @@ structs:
       name: a5
   - name: ResolveDecalPath
     offset: 736
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127330,7 +127397,7 @@ structs:
       name: a4
   - name: ResolveVfxPath
     offset: 744
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127344,7 +127411,7 @@ structs:
       name: a5
   - name: ResolveEidPath
     offset: 752
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Graphics::Scene::Human*
       name: this
@@ -127922,7 +127989,7 @@ structs:
   - type: StdVector<Component::Completion::CategoryData*>
     name: CategoryData
     offset: 48
-  - type: StdVector<byte*>
+  - type: StdVector<char*>
     name: CategoryNames
     offset: 72
   - type: StdVector<byte>
@@ -145225,7 +145292,7 @@ structs:
     parameters:
     - type: Component::Text::TextModule*
       name: this
-    - type: byte*
+    - type: char*
       name: input
     - type: StdDeque<Component::Text::TextParameter>*
       name: localParameters
@@ -145265,7 +145332,7 @@ structs:
     parameters:
     - type: Component::Text::TextModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
     - type: Client::System::String::Utf8String*
       name: a3
@@ -145277,7 +145344,7 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-    - type: byte*
+    - type: char*
       name: a3
   - name: SetFixedSheetInterface
     offset: 104
@@ -149138,7 +149205,7 @@ structs:
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
     - type: Client::System::String::Utf8String*
       name: a3
@@ -149150,7 +149217,7 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-    - type: byte*
+    - type: char*
       name: a3
   - name: SetFixedSheetInterface
     offset: 104
@@ -149166,7 +149233,7 @@ structs:
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
     - type: StdDeque<Component::Text::TextParameter>*
       name: a3
@@ -149174,7 +149241,7 @@ structs:
       name: a4
   member_functions:
   - signature: E9 ?? ?? ?? ?? 80 EA 20
-    return_type: byte*
+    return_type: char*
     name: GetAddonText
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
@@ -149182,7 +149249,7 @@ structs:
     - type: unsigned int
       name: addonId
   - signature: E8 ?? ?? ?? ?? 8B 7D FF 45 33 FF
-    return_type: byte*
+    return_type: char*
     name: FormatAddonText1IntIntUInt
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
@@ -149196,7 +149263,7 @@ structs:
     - type: unsigned int
       name: uintParam
   - signature: E8 ?? ?? ?? ?? EB 51 0F B6 DB
-    return_type: byte*
+    return_type: char*
     name: FormatAddonText2IntInt
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
@@ -149208,7 +149275,7 @@ structs:
     - type: int
       name: intParam2
   - signature: 48 83 EC 28 45 0F B6 C8 85 D2
-    return_type: byte*
+    return_type: char*
     name: FormatTimeSpan
     parameters:
     - type: Client::UI::Misc::RaptureTextModule*
@@ -151651,7 +151718,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Character::Character*
       name: this
@@ -151904,7 +151971,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Character::Companion*
       name: this
@@ -152106,7 +152173,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Character::MJILivelyActor*
       name: this
@@ -152308,7 +152375,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Character::Ornament*
       name: this
@@ -152736,22 +152803,22 @@ structs:
     offset: 432
   - type: int
     name: LoadState
-    offset: 15336
+    offset: 15352
   - type: Common::Lua::LuaState*
     name: LuaState
-    offset: 15344
+    offset: 15360
   - type: Common::Lua::LuaThread
     name: LuaThread
-    offset: 15352
+    offset: 15368
   - type: Client::Game::Event::EventState
     name: EventState1
-    offset: 15440
+    offset: 15456
   - type: Client::Game::Event::EventState
     name: EventState2
-    offset: 15536
+    offset: 15552
   - type: Client::Game::Event::DailyQuestMap
     name: DailyQuests
-    offset: 17064
+    offset: 17080
   member_functions:
   - signature: E8 ?? ?? ?? ?? EB E0 41 81 E9
     return_type: Client::Game::InstanceContent::ContentDirector*
@@ -152899,7 +152966,7 @@ structs:
       name: this
   - name: GetName
     offset: 48
-    return_type: byte*
+    return_type: char*
     parameters:
     - type: Client::Game::Character::BattleChara*
       name: this
@@ -153219,7 +153286,7 @@ structs:
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
-    - type: byte*
+    - type: char*
       name: mapLink
   - name: Dtor
     offset: 0
@@ -153406,7 +153473,7 @@ structs:
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
-    - type: byte*
+    - type: char*
       name: addonName
     - type: Component::GUI::AtkUnitBase*
       name: addon
@@ -153426,7 +153493,7 @@ structs:
     parameters:
     - type: Client::UI::RaptureAtkModule*
       name: this
-    - type: byte*
+    - type: char*
       name: text
     - type: Client::UI::RaptureAtkModule::TextGimmickHintStyle
       name: style
@@ -154467,7 +154534,7 @@ structs:
       name: this
     - type: int
       name: a2
-    - type: byte*
+    - type: char*
       name: a3
     - type: unsigned int
       name: a4
@@ -154493,7 +154560,7 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
     - type: int
       name: a3
@@ -154509,7 +154576,7 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
     - type: int
       name: a3
@@ -154519,7 +154586,7 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
     - type: byte
       name: a3
@@ -154605,9 +154672,9 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
-    - type: byte*
+    - type: char*
       name: a3
     - type: float
       name: a4
@@ -154619,9 +154686,9 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
-    - type: byte*
+    - type: char*
       name: a3
     - type: float
       name: a4
@@ -154639,9 +154706,9 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
-    - type: byte*
+    - type: char*
       name: a2
-    - type: byte*
+    - type: char*
       name: a3
     - type: float
       name: a4
