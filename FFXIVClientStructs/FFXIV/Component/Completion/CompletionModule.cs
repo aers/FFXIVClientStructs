@@ -33,16 +33,18 @@ public unsafe partial struct CompletionModule {
     [FieldOffset(0x310)] private Utf8String Unk310;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 1B 41 FF C7")]
-    public partial nint AddCompletionEntry(nint groupIndex, nint rowId, CStringPointer itemText, CStringPointer groupTitle, ushort itemKey);
+    [GenerateStringOverloads]
+    public partial nint AddCompletionEntry(long groupIndex, uint rowId, CStringPointer itemText, CStringPointer groupTitle, ushort itemKey);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 3C 23")]
-    public partial nint AddCategory(nint sheetNameIndex, CStringPointer itemText, CStringPointer groupTitle, CategoryData* categoryData);
+    [GenerateStringOverloads]
+    public partial nint AddCategoryData(long groupIndex, CStringPointer itemText, CStringPointer groupTitle, CategoryData* categoryData);
     
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 6C 24 ??")]
     public partial void ClearCompletionData();
 
     [VirtualFunction(5)]
-    public partial int GetSelection(CategoryData.CompletionDataStruct* dataStructs, long index, Utf8String* outputString, Utf8String* outputDisplayString);
+    public partial int GetSelection(CategoryData.CompletionDataStruct* dataStructs, int index, Utf8String* outputString, Utf8String* outputDisplayString);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct SheetName {
