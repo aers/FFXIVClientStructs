@@ -1413,10 +1413,11 @@ classes:
       0x1408244E0: GetEquippedItemIdForSlot
       0x140827870: GetPermittedGearsetCount
       0x1408314F0: GetLimitedTomestoneCount
-#fail       0x14086FFB0: GetEmptySlotsInBag
+      0x1408223C0: GetEmptySlotsInBag
       0x14082BCA0: SendTradeRequest
       0x14082E170: GetRetainerGil
       0x14082F290: GetRetainerMarketPrice
+      0x14082F2B0: SetRetainerMarketPrice
       0x1408306D0: GetFreeCompanyGil
       0x140831140: GetGil
       0x140831230: GetCompanySeals
