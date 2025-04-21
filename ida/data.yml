@@ -2195,6 +2195,7 @@ classes:
       0x14099BFC0: GetParentClassJobId
       0x140997730: IsPlayerStateFlagSet
       0x140A124B0: ctor
+      0x14099A330: IsCrystariumDeliveryQuestComplete
       0x14099B280: GetClassJobLevel
       0x14099B400: SetCurrentLevel
       0x14099B420: SetClassJobLevel
