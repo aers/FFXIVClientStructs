@@ -12289,12 +12289,14 @@ classes:
       0x140DFBBB0: ctor
 #fail       0x140D57840: Finalizer
       0x140DFC990: OpenGatherableByItemId
-  Client::UI::Agent::AgentMcguffin:
+  Client::UI::Agent::AgentMcGuffin:
     vtbls:
       - ea: 0x14206C9A8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BECB20: ctor
+      0x140BED210: CanOpenMcGuffin
+      0x140BED250: OpenMcGuffin
   Client::UI::Agent::AgentCharaCard:
     vtbls:
       - ea: 0x14206D4D8
