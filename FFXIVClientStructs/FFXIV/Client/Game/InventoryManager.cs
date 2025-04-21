@@ -24,6 +24,8 @@ public unsafe partial struct InventoryManager {
     [FieldOffset(0x21A9)] public bool TradeWarnIfMovedTooFar;
     [FieldOffset(0x21AB)] public bool TradeIsSyncPending;
 
+    [FieldOffset(0x21B8), FixedSizeArray] internal FixedSizeArray20<ulong> _retainerItemsPrices;
+
     // Data here for Gearset Item check
     [FieldOffset(0x2400)] internal BannerData GearsetPortraitData;
     // Related to Addon#4385 "<head(<ennoun(Item,2,lnum1,1,1)>)> registered to this gear set could not be found in your Armoury Chest. Replace it with <ennoun(Item,1,lnum2,1,1)>?"
