@@ -101,6 +101,9 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 42 8D 0C 2B")]
     public static partial int GetLimitedTomestoneWeeklyLimit();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 0F AF C7 48 03 E8")]
+    public partial ulong GetRetainerMarketPrice(uint slot);
+
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
 }

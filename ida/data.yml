@@ -1416,6 +1416,7 @@ classes:
 #fail       0x14086FFB0: GetEmptySlotsInBag
       0x14082BCA0: SendTradeRequest
       0x14082E170: GetRetainerGil
+      0x14082F290: GetRetainerMarketPrice
       0x1408306D0: GetFreeCompanyGil
       0x140831140: GetGil
       0x140831230: GetCompanySeals
