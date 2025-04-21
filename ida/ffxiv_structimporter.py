@@ -805,6 +805,7 @@ if api is None:
                 if dt is None:
                     return
 
+                struct.fields.sort(key=lambda fld: fld.offset)
                 dtsize = dt.getLength() if not dt.isZeroLength() else 0
                 if (
                     dtsize == 0
@@ -857,6 +858,7 @@ if api is None:
                 dtm = currentProgram.getDataTypeManager()
                 dt = self.get_datatype(struct.type)
 
+                struct.virtual_functions.sort(key=lambda fn: fn.offset)
                 vt_type = StructureDataType("VTable", 0)
                 vt_type.setCategoryPath(
                     CategoryPath(dt.getCategoryPath(), [dt.getName()])
