@@ -485,4 +485,25 @@ public enum AgentId : uint {
     Glasses = 449,
     TermFilter = 450,
     HousingInteriorPattern = 451, // new in 7.1
+    WKSHud = 452, // new in 7.2
+    WKSAnnounce = 453, // new in 7.2
+    WKSPouch = 454, // new in 7.2
+    WKSMission = 455, // new in 7.2
+    WKSMissionInfomation = 456, // new in 7.2
+    WKSRecipeNotebook = 457, // new in 7.2
+    WKSMechaOperationEntry = 458, // new in 7.2 - WKSMechaOperationEntryUI, WKSMechaOperationEntryScreen, WKSMechaOperationEntryAccept
+    WKSScoreList = 459, // new in 7.2
+    WKSAchievement = 460, // new in 7.2
+    WKSPraiseBoard = 461, // new in 7.2
+    WKSLottery = 462, // new in 7.2
+    WKSToolCustomize = 463, // new in 7.2
+    WKSHistoryBoard = 464, // new in 7.2
+    MKDInfo = 465, // new in 7.2
+    MKDContentsInfo = 466, // new in 7.2
+    MKDSupportJob = 467, // new in 7.2
+    MKDSupportJobList = 468, // new in 7.2
+    MKDSettings = 469, // new in 7.2
+    MKDTowerEntry = 470, // new in 7.2
+    Unk471 = 471, // new in 7.2 - interacts with agents MKDLoreBook, MKDInfo
+    MKDLoreBook = 472, // new in 7.2
 }

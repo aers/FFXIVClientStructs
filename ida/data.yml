@@ -5230,7 +5230,7 @@ classes:
       11: OnLevelChange
       12: OnClassJobChange
     funcs:
-#fail       0x14023D060: ctor
+      0x140249940: ctor
       0x140249970: Finalizer
       0x140249CC0: CloseContextAddons
       0x140249E40: CloseAddon
@@ -12773,6 +12773,134 @@ classes:
     vtbls:
       - ea: 0x14214DC58
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x1415FC790: ctor
+  Client::UI::Agent::AgentWKSHud:
+    vtbls:
+      - ea: 0x14208AF00
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F6C870: ctor
+  Client::UI::Agent::AgentWKSAnnounce:
+    vtbls:
+      - ea: 0x14208AF80
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F6E070: ctor
+  Client::UI::Agent::AgentWKSPouch:
+    vtbls:
+      - ea: 0x14208B080
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F73D00: ctor
+  Client::UI::Agent::AgentWKSMission:
+    vtbls:
+      - ea: 0x14208B000
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F6F6F0: ctor
+  Client::UI::Agent::AgentWKSMissionInfomation:
+    vtbls:
+      - ea: 0x14208B100
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F74B90: ctor
+  Client::UI::Agent::AgentWKSRecipeNotebook:
+    vtbls:
+      - ea: 0x14208B190
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F75BC0: ctor
+  Client::UI::Agent::AgentWKSMechaOperationEntry:
+    vtbls:
+      - ea: 0x14208B220
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F77500: ctor
+  Client::UI::Agent::AgentWKSScoreList:
+    vtbls:
+      - ea: 0x14208B2A0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F7A8A0: ctor
+  Client::UI::Agent::AgentWKSAchievement:
+    vtbls:
+      - ea: 0x14208B320
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F7B690: ctor
+  Client::UI::Agent::AgentWKSPraiseBoard:
+    vtbls:
+      - ea: 0x14208B470
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F81180: ctor
+  Client::UI::Agent::AgentWKSLottery:
+    vtbls:
+      - ea: 0x14208B3A0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F7D850: ctor
+  Client::UI::Agent::AgentWKSToolCustomize:
+    vtbls:
+      - ea: 0x14208B4F0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F82450: ctor
+  Client::UI::Agent::AgentWKSHistoryBoard:
+    vtbls:
+      - ea: 0x14208B570
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F83D80: ctor
+  Client::UI::Agent::AgentMKDInfo:
+    vtbls:
+      - ea: 0x14208B710
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F88840: ctor
+  Client::UI::Agent::AgentMKDContentsInfo:
+    vtbls:
+      - ea: 0x14208B690
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F874A0: ctor
+  Client::UI::Agent::AgentMKDSupportJob:
+    vtbls:
+      - ea: 0x14208B930
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F8C560: ctor
+  Client::UI::Agent::AgentMKDSupportJobList:
+    vtbls:
+      - ea: 0x14208B9B0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F8D1D0: ctor
+  Client::UI::Agent::AgentMKDSettings:
+    vtbls:
+      - ea: 0x14208B8B0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F8BD60: ctor
+  Client::UI::Agent::AgentMKDTowerEntry:
+    vtbls:
+      - ea: 0x14208BA30
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F8D7A0: ctor
+  Client::UI::Agent::AgentUnk471:
+    vtbls:
+      - ea: 0x14208B830
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F8B0D0: ctor
+  Client::UI::Agent::AgentMKDLoreBook:
+    vtbls:
+      - ea: 0x14208B7A0
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140F898C0: ctor
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x14205CC60
