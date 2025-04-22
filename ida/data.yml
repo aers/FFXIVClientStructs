@@ -1902,6 +1902,29 @@ classes:
       0x140D0F430: GetInstance
       0x140D0F440: Load
       0x140D0F8C0: Update
+      0x140D10450: AddModule
+      0x140D105F0: RemoveModule
+  Client::Game::WKS::WKSModuleBase:
+    vtbls:
+      - ea: 0x1422915E0
+    vfuncs:
+      0: Dtor
+  Client::Game::WKS::WKSResearch: # Cosmic Research Information
+    vtbls:
+      - ea: 0x1422D9280
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x14199BE00: ctor
+      0x14199C070: RegisterModule
+      0x14199C140: GetCurrentAnalysis
+      0x14199C1C0: GetMaxAnalysis
+      0x14199C270: GetNeededAnalysis
+      0x14199C450: GetCurrentRank
+      0x14199C4A0: IsMaxRank
+      0x14199C520: IsNextRankAvailable
+      0x14199C5A0: GetRatePercentage
+      0x14199C850: GetUnlockedRank
+      0x14199CD20: GetClassJobLevel
   Client::System::String::Utf8String:
     funcs:
       0x14005A330: ctor  # empty string ctor
