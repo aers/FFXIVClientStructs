@@ -42,6 +42,9 @@ public enum InventoryType : uint {
     PremiumSaddleBag1 = 4100,
     PremiumSaddleBag2 = 4101,
 
+    Cosmopouch1 = 5000,
+    Cosmopouch2 = 5001,
+
     Invalid = 9999,
 
     RetainerPage1 = 10000,
