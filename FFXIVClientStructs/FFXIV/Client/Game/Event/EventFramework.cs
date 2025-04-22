@@ -27,7 +27,7 @@ public unsafe partial struct EventFramework {
 
     [FieldOffset(0x42B8)] public DailyQuestMap DailyQuests;
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB E0 41 81 E9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 0E 66 83 B8")]
     public partial ContentDirector* GetContentDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 98")]

@@ -82,6 +82,6 @@ public unsafe partial struct RecipeNote {
     [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 2E")]
     public partial bool IsRecipeUnlocked(ushort recipeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 40 32 FF 44 0F B7 F0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 F8 6B 83")]
     public partial ushort GetCraftTypeLevel(byte craftType);
 }
