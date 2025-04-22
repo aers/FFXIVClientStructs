@@ -1113,6 +1113,7 @@ classes:
       - ea: 0x1429431B0
         pointer: true
     funcs:
+      0x140CC1AA0: Update
       0x140CC1FB0: Initialize
       0x140CC2040: Dtor
       0x140CC2090: GetInstance
@@ -1766,9 +1767,11 @@ classes:
       0x140CFE020: ctor
       0x140CFE0B0: Destroy
       0x140CFE0E0: GetInstance
+      0x140CFE8A0: Update
   Client::Game::MJI::MJIManager: # Island Sanctuary
     instances:
       - ea: 0x142943328
+        pointer: true
     funcs:
       0x140CFFF90: CreateInstance
       0x140CFFFE0: DestroyInstance
@@ -1887,6 +1890,18 @@ classes:
       0x14197F890: GetNormalResourcePouchIds
       0x14197F8D0: GetNormalResourceCounts
       0x14197F910: GetFinishTime
+  Client::Game::WKSCosmoManager: # Cosmic Exploration
+    instances:
+      - ea: 0x142943350
+        pointer: true
+    vtbls:
+      - ea: 0x142082740
+        base: Client::Game::Character::CharacterManagerInterface
+    funcs:
+      0x140D0EAE0: Initialize
+      0x140D0EDE0: GetInstance
+      0x140D0EDF0: Load
+      0x140D0F250: Update
   Client::System::String::Utf8String:
     funcs:
       0x14005A480: ctor  # empty string ctor

@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Character;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 
 // Client::Game::Group::GroupManager
+//   Client::Game::Character::CharacterManagerInterface
 // group manager has two copies of the state - the normal one and a separate used when viewing recordings
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10000)]
