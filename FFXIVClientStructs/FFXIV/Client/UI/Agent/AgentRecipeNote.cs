@@ -41,7 +41,7 @@ public unsafe partial struct AgentRecipeNote {
     public void OpenRecipeByRecipeId(uint recipeId) => OpenRecipeByRecipeIdInternal(recipeId + 0x10_000);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 06")]
-    public partial void SearchRecipeByItemId(uint itemId, uint sourceAddonId = 0);
+    public partial void SearchRecipeByItemId(uint itemId, uint openerAddonId = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 06"), Obsolete("Use SearchRecipeByItemId instead.")]
     public partial void OpenRecipeByItemId(uint itemId);
