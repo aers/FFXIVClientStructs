@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 
 // Client::Game::Character::CharacterManager
+//   Client::Game::Character::CharacterManagerInterface
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x390)]
 [Inherits<CharacterManagerInterface>]
