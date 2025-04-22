@@ -1,16 +1,16 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 
-namespace FFXIVClientStructs.FFXIV.Client.Game;
+namespace FFXIVClientStructs.FFXIV.Client.Game.WKS;
 
-// Client::Game::WKSCosmoManager
+// Client::Game::WKS::WKSManager
 //   Client::Game::Character::CharacterManagerInterface
 // Manager for Cosmic Exploration
 [GenerateInterop]
 [Inherits<CharacterManagerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE20)]
-public unsafe partial struct WKSCosmoManager {
+public unsafe partial struct WKSManager {
     [StaticAddress("48 8B 7C 24 ?? 48 89 35 ?? ?? ?? ??", 8, isPointer: true)]
-    public static partial WKSCosmoManager* Instance();
+    public static partial WKSManager* Instance();
 
     [FieldOffset(0x18)] public ushort TerritoryId;
 

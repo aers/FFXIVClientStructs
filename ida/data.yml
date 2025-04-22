@@ -1890,7 +1890,7 @@ classes:
       0x14197F890: GetNormalResourcePouchIds
       0x14197F8D0: GetNormalResourceCounts
       0x14197F910: GetFinishTime
-  Client::Game::WKSCosmoManager: # Cosmic Exploration
+  Client::Game::WKS::WKSManager: # Cosmic Exploration
     instances:
       - ea: 0x142943350
         pointer: true
