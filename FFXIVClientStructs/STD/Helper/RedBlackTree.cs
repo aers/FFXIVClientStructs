@@ -454,8 +454,6 @@ public unsafe struct RedBlackTree<T, TKey, TKeyExtractor>
         public Node* _Right;
         public RedBlackTreeNodeColor _Color;
         public bool _Isnil;
-        public byte _18;
-        public byte _19;
         public T _Myval;
 
         public static Node* BuyHeadNode<TMemorySpace>()
