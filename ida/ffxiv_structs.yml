@@ -1433,6 +1433,27 @@ enums:
     "Glasses": 449
     "TermFilter": 450
     "HousingInteriorPattern": 451
+    "WKSHud": 452
+    "WKSAnnounce": 453
+    "WKSPouch": 454
+    "WKSMission": 455
+    "WKSMissionInfomation": 456
+    "WKSRecipeNotebook": 457
+    "WKSMechaOperationEntry": 458
+    "WKSScoreList": 459
+    "WKSAchievement": 460
+    "WKSPraiseBoard": 461
+    "WKSLottery": 462
+    "WKSToolCustomize": 463
+    "WKSHistoryBoard": 464
+    "MKDInfo": 465
+    "MKDContentsInfo": 466
+    "MKDSupportJob": 467
+    "MKDSupportJobList": 468
+    "MKDSettings": 469
+    "MKDTowerEntry": 470
+    "Unk471": 471
+    "MKDLoreBook": 472
 - type: Client::UI::Agent::ItemDetailKind
   name: ItemDetailKind
   underlying: byte
@@ -5467,430 +5488,442 @@ structs:
     offset: 232
   - name: YesNoItem
     offset: 240
-  - name: Menu
+  - name: YesNoItemCheck
     offset: 248
-  - name: List
+  - name: Menu
     offset: 256
-  - name: Letter
+  - name: List
     offset: 264
-  - name: LeveAccepted
+  - name: Letter
     offset: 272
-  - name: LeveCompleted
+  - name: LeveAccepted
     offset: 280
-  - name: LeveStart
+  - name: LeveCompleted
     offset: 288
-  - name: LeveSuccess
+  - name: LeveStart
     offset: 296
-  - name: LeveFailed
+  - name: LeveSuccess
     offset: 304
-  - name: ScreenImage
+  - name: LeveFailed
     offset: 312
-  - name: ScreenImageAndTextSimple
+  - name: ScreenImage
     offset: 320
-  - name: LoadEventPicture
+  - name: ScreenImageAndTextSimple
     offset: 328
-  - name: WaitForLoadEventPicture
+  - name: LoadEventPicture
     offset: 336
-  - name: EventPicture
+  - name: WaitForLoadEventPicture
     offset: 344
-  - name: EventPictureOffset
+  - name: EventPicture
     offset: 352
-  - name: LearningAction
+  - name: EventPictureOffset
     offset: 360
-  - name: LearningQuestRewardAction
+  - name: LearningAction
     offset: 368
-  - name: LearningTrait
+  - name: LearningQuestRewardAction
     offset: 376
-  - name: BattleTalk
+  - name: LearningTrait
     offset: 384
-  - name: Prompt
+  - name: BattleTalk
     offset: 392
-  - name: PromptName
+  - name: Prompt
     offset: 400
-  - name: NpcRepair
+  - name: PromptName
     offset: 408
-  - name: CutSceneReplay
+  - name: NpcRepair
     offset: 416
-  - name: CompanyChest
+  - name: CutSceneReplay
     offset: 424
-  - name: FreeCompanyExchange
+  - name: CompanyChest
     offset: 432
-  - name: FreeCompanyCrestEditor
+  - name: FreeCompanyExchange
     offset: 440
-  - name: FreeCompanyCrestDecal
+  - name: FreeCompanyCrestEditor
     offset: 448
-  - name: MateriaMeld
+  - name: FreeCompanyCrestDecal
     offset: 456
-  - name: Materialize
+  - name: MateriaMeld
     offset: 464
-  - name: SuspendedMateriaExchange
+  - name: Materialize
     offset: 472
-  - name: SuspendedMateriaSell
+  - name: SuspendedMateriaExchange
     offset: 480
-  - name: LegacyItemStorage
+  - name: SuspendedMateriaSell
     offset: 488
-  - name: HousingKickStorage
+  - name: LegacyItemStorage
     offset: 496
-  - name: Cabinet
+  - name: HousingKickStorage
     offset: 504
-  - name: ItemSearchWidget
+  - name: Cabinet
     offset: 512
-  - name: ScenarioMessage
+  - name: ItemSearchWidget
     offset: 520
-  - name: LogMessage
+  - name: ScenarioMessage
     offset: 528
-  - name: BalloonTalk
+  - name: LogMessage
     offset: 536
-  - name: ScreenGC
+  - name: BalloonTalk
     offset: 544
-  - name: Inventory
+  - name: ScreenGC
     offset: 552
-  - name: CloseInventory
+  - name: Inventory
     offset: 560
-  - name: GrandCompanyRankUp
+  - name: CloseInventory
     offset: 568
-  - name: FCOrganizeSheet
+  - name: GrandCompanyRankUp
     offset: 576
-  - name: TripleTriadCardToCoin
+  - name: FCOrganizeSheet
     offset: 584
-  - name: GoldSaucerBuyCoin
+  - name: TripleTriadCardToCoin
     offset: 592
-  - name: InputNumeric
+  - name: GoldSaucerBuyCoin
     offset: 600
-  - name: ContentFinder
+  - name: InputNumeric
     offset: 608
-  - name: ContentFinderByCondition
+  - name: ContentFinder
     offset: 616
-  - name: HousingPortal
+  - name: ContentFinderByCondition
     offset: 624
-  - name: HousingGardeningPlant
+  - name: HousingPortal
     offset: 632
-  - name: HousingGardeningPlantFertilizer
+  - name: HousingGardeningPlant
     offset: 640
-  - name: RefreshMonsterNote
+  - name: HousingGardeningPlantFertilizer
     offset: 648
-  - name: GrayoutMenu
+  - name: RefreshMonsterNote
     offset: 656
-  - name: IconMenu
+  - name: GrayoutMenu
     offset: 664
-  - name: GridMenu
+  - name: IconMenu
     offset: 672
-  - name: ResultMenu
+  - name: GridMenu
     offset: 680
-  - name: CancelNpcTrade
+  - name: ResultMenu
     offset: 688
-  - name: NpcTrade
+  - name: CancelNpcTrade
     offset: 696
-  - name: MateriaTrade
+  - name: NpcTrade
     offset: 704
-  - name: RelicSphereUpgrade
+  - name: MateriaTrade
     offset: 712
-  - name: HousingPersonalRoomPortal
+  - name: RelicSphereUpgrade
     offset: 720
-  - name: MiniGame
+  - name: HousingPersonalRoomPortal
     offset: 728
-  - name: MobHuntBoard
+  - name: MiniGame
     offset: 736
-  - name: HousingBuddyList
+  - name: MobHuntBoard
     offset: 744
-  - name: HousingBuddySelectReward
+  - name: HousingBuddyList
     offset: 752
-  - name: HousingBuddySelectFood
+  - name: HousingBuddySelectReward
     offset: 760
-  - name: HousingBuddyMenu
+  - name: HousingBuddySelectFood
     offset: 768
-  - name: Wedding
+  - name: HousingBuddyMenu
     offset: 776
-  - name: HousingWheelControlMenu
+  - name: Wedding
     offset: 784
-  - name: HousingWheelSelectEnergy
+  - name: HousingWheelControlMenu
     offset: 792
-  - name: HouseRetainerSaleHistory
+  - name: HousingWheelSelectEnergy
     offset: 800
-  - name: HouseRetainerSaleItem
+  - name: HouseRetainerSaleHistory
     offset: 808
-  - name: OpenSelectString
+  - name: HouseRetainerSaleItem
     offset: 816
-  - name: SkyIslandAetherialExchange
+  - name: OpenSelectString
     offset: 824
-  - name: TutorialContent
+  - name: SkyIslandAetherialExchange
     offset: 832
-  - name: HousingPlantPotSeed
+  - name: TutorialContent
     offset: 840
-  - name: HousingPlantPotFertilize
+  - name: HousingPlantPotSeed
     offset: 848
-  - name: LogMessageContentOpen
+  - name: HousingPlantPotFertilize
     offset: 856
-  - name: MentorQualified
+  - name: LogMessageContentOpen
     offset: 864
-  - name: MentorConfirm
+  - name: MentorQualified
     offset: 872
-  - name: OpenLuaUI
+  - name: MentorConfirm
     offset: 880
-  - name: ShortTalk
+  - name: OpenLuaUI
     offset: 888
-  - name: ShortTalkWithLineVoice
+  - name: ShortTalk
     offset: 896
-  - name: CloseShortTalk
+  - name: ShortTalkWithLineVoice
     offset: 904
-  - name: FakeNotice
+  - name: CloseShortTalk
     offset: 912
-  - name: Wait
+  - name: FakeNotice
     offset: 920
-  - name: WaitForPan
+  - name: Wait
     offset: 928
-  - name: WaitForFade
+  - name: WaitForPan
     offset: 936
-  - name: WaitForDolly
+  - name: WaitForFade
     offset: 944
-  - name: WaitForZoom
+  - name: WaitForDolly
     offset: 952
-  - name: WaitForGyro
+  - name: WaitForZoom
     offset: 960
-  - name: WaitForOrbit
+  - name: WaitForGyro
     offset: 968
-  - name: PlayScreenShake
+  - name: WaitForOrbit
     offset: 976
-  - name: StopScreenShake
+  - name: PlayScreenShake
     offset: 984
-  - name: PlaySE
+  - name: StopScreenShake
     offset: 992
-  - name: MakeRetainer
+  - name: PlaySE
     offset: 1000
-  - name: HairMake
+  - name: MakeRetainer
     offset: 1008
-  - name: WaitForBuildHouse
+  - name: HairMake
     offset: 1016
-  - name: Logout
+  - name: WaitForBuildHouse
     offset: 1024
-  - name: Shutdown
+  - name: Logout
     offset: 1032
-  - name: SetNpcTradeItem
+  - name: Shutdown
     offset: 1040
-  - name: PlayStaffRoll
+  - name: SetNpcTradeItem
     offset: 1048
-  - name: PlayToBeContinued
+  - name: PlayStaffRoll
     offset: 1056
-  - name: UpdownPan
+  - name: PlayToBeContinued
     offset: 1064
-  - name: SidePan
+  - name: UpdownPan
     offset: 1072
-  - name: UpdownDolly
+  - name: SidePan
     offset: 1080
-  - name: SideDolly
+  - name: UpdownDolly
     offset: 1088
-  - name: Zoom
+  - name: SideDolly
     offset: 1096
-  - name: Gyro
+  - name: Zoom
     offset: 1104
-  - name: Orbit
+  - name: Gyro
     offset: 1112
-  - name: ChangeBGMVolume
+  - name: Orbit
     offset: 1120
-  - name: ChangeEnvSoundVolume
+  - name: ChangeBGMVolume
     offset: 1128
-  - name: ResetEnvSoundVolume
+  - name: ChangeEnvSoundVolume
     offset: 1136
-  - name: PlayCamera
+  - name: ResetEnvSoundVolume
     offset: 1144
-  - name: PlayTwoShotCamera
+  - name: PlayCamera
     offset: 1152
-  - name: PlayLandscapeCamera
+  - name: PlayTwoShotCamera
     offset: 1160
-  - name: PlayIdleCamera
+  - name: PlayLandscapeCamera
     offset: 1168
-  - name: PlayWorldPositionCamera
+  - name: PlayIdleCamera
     offset: 1176
-  - name: PlayTargetRelationCamera
+  - name: PlayWorldPositionCamera
     offset: 1184
-  - name: FollowLookAt
+  - name: PlayTargetRelationCamera
     offset: 1192
-  - name: CameraCollisionMode
+  - name: FollowLookAt
     offset: 1200
-  - name: PlayHandShake
+  - name: CameraCollisionMode
     offset: 1208
-  - name: StopHandShake
+  - name: PlayHandShake
     offset: 1216
-  - name: PlayBGM
+  - name: StopHandShake
     offset: 1224
-  - name: PlayBGMWithVolume
+  - name: PlayBGM
     offset: 1232
-  - name: StopBGM
+  - name: PlayBGMWithVolume
     offset: 1240
-  - name: InvisibleStandCharacter
+  - name: StopBGM
     offset: 1248
-  - name: InvisibleStandObject
+  - name: InvisibleStandCharacter
     offset: 1256
-  - name: RevisibleStandObject
+  - name: InvisibleStandObject
     offset: 1264
-  - name: DOF
+  - name: RevisibleStandObject
     offset: 1272
-  - name: DisableDOF
+  - name: DOF
     offset: 1280
-  - name: ColorFilter
+  - name: DisableDOF
     offset: 1288
-  - name: DisableColorFilter
+  - name: ColorFilter
     offset: 1296
-  - name: Vignetting
+  - name: DisableColorFilter
     offset: 1304
-  - name: DisableVignetting
+  - name: Vignetting
     offset: 1312
-  - name: Weather
+  - name: DisableVignetting
     offset: 1320
-  - name: WorldTime
+  - name: Weather
     offset: 1328
-  - name: GetHouseSize
+  - name: WorldTime
     offset: 1336
-  - name: PlayHousingCamera
+  - name: GetHouseSize
     offset: 1344
-  - name: WaitForFeedBuddy
+  - name: PlayHousingCamera
     offset: 1352
-  - name: WaitForIdleCamera
+  - name: WaitForFeedBuddy
     offset: 1360
-  - name: GroupPose
+  - name: WaitForIdleCamera
     offset: 1368
-  - name: PlayEventVfx
+  - name: GroupPose
     offset: 1376
-  - name: StopEventVfx
+  - name: PlayEventVfx
     offset: 1384
-  - name: KickTriggerEventVfx
+  - name: StopEventVfx
     offset: 1392
-  - name: WhiteFadeIn
+  - name: KickTriggerEventVfx
     offset: 1400
-  - name: WhiteFadeOut
+  - name: WhiteFadeIn
     offset: 1408
-  - name: WaitForWhiteFade
+  - name: WhiteFadeOut
     offset: 1416
-  - name: PlayTargetAimingCamera
+  - name: WaitForWhiteFade
     offset: 1424
-  - name: PlayDirectionalAimingCamera
+  - name: PlayTargetAimingCamera
     offset: 1432
-  - name: StopAimingCamera
+  - name: PlayDirectionalAimingCamera
     offset: 1440
-  - name: Position
+  - name: StopAimingCamera
     offset: 1448
-  - name: PositionCamera
+  - name: Position
     offset: 1456
-  - name: ResetPosition
+  - name: PositionCamera
     offset: 1464
-  - name: Visible
+  - name: ResetPosition
     offset: 1472
-  - name: Direction
+  - name: Visible
     offset: 1480
-  - name: Distance
+  - name: Direction
     offset: 1488
-  - name: PlayActionTimeline
+  - name: Distance
     offset: 1496
-  - name: CancelActionTimeline
+  - name: PlayActionTimeline
     offset: 1504
-  - name: CancelActionTimelineAll
+  - name: CancelActionTimeline
     offset: 1512
-  - name: WaitForActionTimeline
+  - name: CancelActionTimelineAll
     offset: 1520
-  - name: WaitForActionTimelineLoad
+  - name: WaitForActionTimeline
     offset: 1528
-  - name: PlayEmote
+  - name: WaitForActionTimelineLoad
     offset: 1536
-  - name: CancelEmote
+  - name: PlayEmote
     offset: 1544
-  - name: WaitForEmote
+  - name: CancelEmote
     offset: 1552
-  - name: TurnTo
+  - name: WaitForEmote
     offset: 1560
-  - name: TurnToObject
+  - name: TurnTo
     offset: 1568
-  - name: TurnToLayout
+  - name: TurnFromLayout
     offset: 1576
-  - name: TurnToCamera
+  - name: TurnToObject
     offset: 1584
-  - name: TurnToDefault
+  - name: NoLookAtTurnToObject
     offset: 1592
-  - name: WaitForTurn
+  - name: TurnToLayout
     offset: 1600
-  - name: Idle
+  - name: TurnToCamera
     offset: 1608
-  - name: LookAt
+  - name: TurnToDefault
     offset: 1616
-  - name: LookAtLayout
+  - name: WaitForTurn
     offset: 1624
-  - name: LookAtCamera
+  - name: Idle
     offset: 1632
-  - name: LookAtDefault
+  - name: LookAt
     offset: 1640
-  - name: WaitForLookAt
+  - name: LookAtEID
     offset: 1648
-  - name: EyeLookAt
+  - name: LookAtLayout
     offset: 1656
-  - name: EyeLookAtYawPitch
+  - name: LookAtCamera
     offset: 1664
-  - name: Move
+  - name: LookAtTwoHead
     offset: 1672
-  - name: WaitForMove
+  - name: LookAtLayoutTwoHead
     offset: 1680
-  - name: PathMove
+  - name: WaitForLookAt
     offset: 1688
-  - name: WaitForPathMove
+  - name: EyeLookAt
     offset: 1696
-  - name: FootStep
+  - name: EyeLookAtYawPitch
     offset: 1704
-  - name: EndEventRollback
+  - name: Move
     offset: 1712
-  - name: PlayVfx
+  - name: WaitForMove
     offset: 1720
-  - name: EnableVfx
+  - name: PathMove
+    offset: 1728
+  - name: WaitForPathMove
     offset: 1736
-  - name: DisableVfx
+  - name: FootStep
     offset: 1744
-  - name: Transparency
+  - name: EndEventRollback
     offset: 1752
-  - name: WaitForTransparency
+  - name: PlayVfx
     offset: 1760
-  - name: WalkIn
-    offset: 1768
-  - name: WalkOut
+  - name: EnableVfx
     offset: 1776
-  - name: PathWalkIn
+  - name: DisableVfx
     offset: 1784
-  - name: PathWalkOut
+  - name: Transparency
     offset: 1792
-  - name: PathCurveWalkOut
+  - name: WaitForTransparency
     offset: 1800
-  - name: FlyIn
+  - name: WalkIn
     offset: 1808
-  - name: FlyOut
+  - name: WalkOut
     offset: 1816
-  - name: BattleMode
+  - name: PathWalkIn
     offset: 1824
-  - name: BattleModeEx
+  - name: PathWalkOut
     offset: 1832
-  - name: EquipWeapon
+  - name: PathCurveWalkOut
     offset: 1840
-  - name: EquipArmor
+  - name: FlyIn
     offset: 1848
-  - name: Equip
+  - name: FlyOut
     offset: 1856
-  - name: EquipQuestModel
+  - name: BattleMode
     offset: 1864
-  - name: AutoShake
+  - name: BattleModeEx
     offset: 1872
-  - name: AutoShakeBugFix236127
+  - name: EquipWeapon
     offset: 1880
-  - name: SetMount
+  - name: EquipArmor
     offset: 1888
-  - name: SetFlying
+  - name: Equip
     offset: 1896
-  - name: IsSwimming
+  - name: EquipQuestModel
     offset: 1904
-  - name: SetLodHigh
+  - name: NpcEquip
     offset: 1912
-  - name: SetGlassesAccessories
+  - name: AutoShake
     offset: 1920
-  - name: IsItemObtainable
+  - name: AutoShakeBugFix236127
     offset: 1928
-  - name: CheckItemsObtainable
+  - name: SetMount
     offset: 1936
-  - name: CheckItemsObtainableRareCheck
+  - name: SetFlying
     offset: 1944
+  - name: IsSwimming
+    offset: 1952
+  - name: SetLodHigh
+    offset: 1960
+  - name: SetGlassesAccessories
+    offset: 1968
+  - name: IsItemObtainable
+    offset: 1976
+  - name: CheckItemsObtainable
+    offset: 1984
+  - name: CheckItemsObtainableRareCheck
+    offset: 1992
   member_functions: []
 - type: Client::Game::Event::EventSceneTaskInterface
   name: EventSceneTaskInterface
@@ -9116,7 +9149,7 @@ structs:
       name: this
     - type: unsigned __int16
       name: recipeId
-  - signature: E8 ?? ?? ?? ?? 40 32 FF 44 0F B7 F0
+  - signature: E8 ?? ?? ?? ?? 0F B7 F8 6B 83
     return_type: unsigned __int16
     name: GetCraftTypeLevel
     parameters:
@@ -21346,15 +21379,33 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: Client::Game::Object::GameObject*
     name: _Myval
-    offset: 28
+    offset: 26
+  member_functions: []
+- type: Helper::RedBlackTree::Node<byte, byte, Helper::DefaultKeyExtractor<byte>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<byte, byte, Helper::DefaultKeyExtractor<byte>>*
+    name: _Left
+    offset: 0
+  - type: Helper::RedBlackTree::Node<byte, byte, Helper::DefaultKeyExtractor<byte>>*
+    name: _Parent
+    offset: 8
+  - type: Helper::RedBlackTree::Node<byte, byte, Helper::DefaultKeyExtractor<byte>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: byte
+    name: _Myval
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree<Client::Game::Object::GameObject*, Client::Game::Object::GameObject*, Helper::DefaultKeyExtractor<Client::Game::Object::GameObject*>>
   name: RedBlackTree`3
@@ -21806,6 +21857,18 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree::Node<StdPair<unsigned int, unsigned int>, unsigned int, Helper::PairKeyExtractor<unsigned int, unsigned int>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
+- type: Helper::RedBlackTree<byte, byte, Helper::DefaultKeyExtractor<byte>>
+  name: RedBlackTree`3
+  namespace: Helper
+  union: False
+  fields:
+  - type: Helper::RedBlackTree::Node<byte, byte, Helper::DefaultKeyExtractor<byte>>*
     name: Head
     offset: 0
   - type: __int64
@@ -23345,6 +23408,21 @@ structs:
     name: Last
     offset: 8
   - type: int*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<unsigned __int16, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned __int16*
+    name: First
+    offset: 0
+  - type: unsigned __int16*
+    name: Last
+    offset: 8
+  - type: unsigned __int16*
     name: End
     offset: 16
   member_functions: []
@@ -26133,6 +26211,71 @@ structs:
       name: this
     - type: byte
       name: newState
+- type: Client::Game::WKS::WKSManager
+  name: WKSManager
+  namespace: Client.Game.WKS
+  union: False
+  size: 3616
+  fields:
+  - type: Client::Game::Character::CharacterManagerInterface
+    name: CharacterManagerInterface
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: TerritoryId
+    offset: 24
+  - type: unsigned __int16
+    name: DevGrade
+    offset: 74
+  - type: __int64
+    name: UnkStructDB0
+    offset: 3504
+  - type: __int64
+    name: UnkStructDB8
+    offset: 3512
+  - type: __int64
+    name: UnkStructDC0
+    offset: 3520
+  - type: __int64
+    name: UnkStructDC8
+    offset: 3528
+  - type: __int64
+    name: UnkStructDD0
+    offset: 3536
+  - type: __int64
+    name: UnkStructDD8
+    offset: 3544
+  - type: __int64
+    name: UnkStructDE0
+    offset: 3552
+  - type: __int64
+    name: UnkStructDE8
+    offset: 3560
+  - type: __int64
+    name: UnkStructDF0
+    offset: 3568
+  - type: __int64
+    name: UnkStructDF8
+    offset: 3576
+  - type: __int64
+    name: UnkStructE00
+    offset: 3584
+  virtual_functions:
+  - name: Dtor
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::Game::WKS::WKSManager*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
+  static_members:
+  - signature: 48 8B 7C 24 ?? 48 89 35 ?? ?? ?? ??
+    relative_follow_offsets:
+    - 8
+    is_pointer: True
+    return_type: Client::Game::WKS::WKSManager
 - type: Client::Game::WeatherManager
   name: WeatherManager
   namespace: Client.Game
@@ -38471,15 +38614,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<Client::LayoutEngine::InstanceType, StdMap<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>, Component::GUI::AtkResNode*, Helper::PairKeyExtractor<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>>
   name: Node
@@ -38501,15 +38638,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>
   name: Node
@@ -38531,15 +38662,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<char*, __int16>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>, unsigned __int16, Helper::PairKeyExtractor<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>>
   name: Node
@@ -38561,15 +38686,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::Game::Event::LuaActor*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::Game::Event::LuaActor*>>
   name: Node
@@ -38591,15 +38710,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int64, Client::Game::Event::LuaActor*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>>
   name: Node
@@ -38621,15 +38734,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::LayoutEngine::LayoutManager*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::LayoutManager*>>
   name: Node
@@ -38651,15 +38758,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int64, Client::LayoutEngine::LayoutManager*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>
   name: Node
@@ -38681,15 +38782,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>>
   name: Node
@@ -38711,15 +38806,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>
   name: Node
@@ -38741,15 +38830,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int64, byte*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>
   name: Node
@@ -38771,15 +38854,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int64, int>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Animation::Mapper::hkaSkeletonMapper*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Animation::Mapper::hkaSkeletonMapper*>>
   name: Node
@@ -38801,15 +38878,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Animation::Mapper::hkaSkeletonMapper*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::EventHandler*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::EventHandler*>>
   name: Node
@@ -38831,15 +38902,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::Game::Event::EventHandler*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::ILayoutInstance*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::ILayoutInstance*>>
   name: Node
@@ -38861,15 +38926,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::LayoutEngine::ILayoutInstance*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::LayoutManager::Filter*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::LayoutManager::Filter*>>
   name: Node
@@ -38891,15 +38950,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::LayoutEngine::LayoutManager::Filter*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::RefCountedString*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::RefCountedString*>>
   name: Node
@@ -38921,15 +38974,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::LayoutEngine::RefCountedString*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::Terrain::TerrainManager*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::Terrain::TerrainManager*>>
   name: Node
@@ -38951,15 +38998,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::LayoutEngine::Terrain::TerrainManager*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>
   name: Node
@@ -38981,15 +39022,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Component::Shell::ShellCommandInterface*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Component::Shell::ShellCommandInterface*>>
   name: Node
@@ -39011,15 +39046,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Component::Shell::ShellCommandInterface*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>, unsigned int, Helper::PairKeyExtractor<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>>
   name: Node
@@ -39041,15 +39070,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>
   name: Node
@@ -39071,15 +39094,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, byte>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, int>, unsigned int, Helper::PairKeyExtractor<unsigned int, int>>
   name: Node
@@ -39101,15 +39118,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, int>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, unsigned int>, unsigned int, Helper::PairKeyExtractor<unsigned int, unsigned int>>
   name: Node
@@ -39131,15 +39142,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, unsigned int>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Shader::CameraLight
   name: CameraLight
@@ -39688,6 +39693,15 @@ structs:
   union: False
   fields:
   - type: Helper::RedBlackTree<Client::Game::Object::GameObject*, Client::Game::Object::GameObject*, Helper::DefaultKeyExtractor<Client::Game::Object::GameObject*>>
+    name: Tree
+    offset: 0
+  member_functions: []
+- type: StdSet<byte, Helper::IStaticMemorySpace::Default>
+  name: StdSet`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Helper::RedBlackTree<byte, byte, Helper::DefaultKeyExtractor<byte>>
     name: Tree
     offset: 0
   member_functions: []
@@ -40307,6 +40321,15 @@ structs:
   union: False
   fields:
   - type: StdVector<int, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdVector<unsigned __int16>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<unsigned __int16, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -43695,7 +43718,7 @@ structs:
   name: AgentActionDetail
   namespace: Client.UI.Agent
   union: False
-  size: 96
+  size: 104
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -43801,7 +43824,7 @@ structs:
     - type: byte
       name: a2
   member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 F8 0F
+  - signature: E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? E9 ?? ?? ?? ?? 83 F8 0F
     return_type: void
     name: HandleActionHover
     parameters:
@@ -48205,6 +48228,120 @@ structs:
     name: IsValid
     offset: 3356
   member_functions: []
+- type: Client::UI::Agent::AgentMcGuffin
+  name: AgentMcGuffin
+  namespace: Client.UI.Agent
+  union: False
+  size: 1216
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 83 EC 28 80 3D ?? ?? ?? ?? ?? 74 20
+    return_type: byte
+    name: CanOpenMcGuffin
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: unsigned int
+      name: mcGuffinId
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 40 80 3D
+    return_type: byte
+    name: OpenMcGuffin
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: unsigned int
+      name: mcGuffinId
 - type: Client::UI::Agent::AgentMiragePrismPrismItemDetail
   name: AgentMiragePrismPrismItemDetail
   namespace: Client.UI.Agent
@@ -52555,15 +52692,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, __int64>>
   name: Node
@@ -52585,15 +52716,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<Client::System::String::Utf8String, __int64>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>
   name: Node
@@ -52615,15 +52740,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<Client::System::String::Utf8String, char*>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>, unsigned __int16, Helper::PairKeyExtractor<unsigned __int16, Client::UI::Misc::WorldHelper::World>>
   name: Node
@@ -52645,15 +52764,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int16, StdPair<__int64, __int64>>, unsigned __int16, Helper::PairKeyExtractor<unsigned __int16, StdPair<__int64, __int64>>>
   name: Node
@@ -52675,15 +52788,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned __int16, StdPair<__int64, __int64>>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>>
   name: Node
@@ -52705,15 +52812,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::CurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::CurrencyItem>>
   name: Node
@@ -52735,15 +52836,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::Game::CurrencyManager::CurrencyItem>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>>
   name: Node
@@ -52765,15 +52860,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, StdPair<unsigned int, unsigned int>>, unsigned int, Helper::PairKeyExtractor<unsigned int, StdPair<unsigned int, unsigned int>>>
   name: Node
@@ -52795,15 +52884,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, StdPair<unsigned int, unsigned int>>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Shader::CustomizeParameter
   name: CustomizeParameter
@@ -53233,6 +53316,15 @@ structs:
   union: False
   fields:
   - type: StdSet<Client::Game::Object::GameObject*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
+- type: StdSet<byte>
+  name: StdSet`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdSet<byte, Helper::IStaticMemorySpace::Default>
     name: WithOps
     offset: 0
   member_functions: []
@@ -61258,15 +61350,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<int, Client::System::Scheduler::Resource::SchedulerResource>, int, Helper::PairKeyExtractor<int, Client::System::Scheduler::Resource::SchedulerResource>>
   name: Node
@@ -61288,15 +61374,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<int, Client::System::Scheduler::Resource::SchedulerResource>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>
   name: Node
@@ -61318,15 +61398,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Shader::CameraParameter
   name: CameraParameter
@@ -61850,7 +61924,7 @@ structs:
       name: this
     - type: unsigned int
       name: actionId
-  - signature: E8 ?? ?? ?? ?? 83 7F 4C 01 44 0F 28 C8
+  - signature: E8 ?? ?? ?? ?? 83 7F 54 01
     return_type: float
     name: GetRecastTime
     parameters:
@@ -62479,6 +62553,11 @@ structs:
   - type: byte
     name: TradeIsSyncPending
     offset: 8619
+  - type: unsigned __int64
+    name: RetainerMarketPrices
+    offset: 8632
+    size: 20
+    is_string: False
   - type: Client::Game::UI::BannerData
     name: GearsetPortraitData
     offset: 9216
@@ -62647,6 +62726,24 @@ structs:
       name: this
     - type: int
       name: a1
+  - signature: E8 ?? ?? ?? ?? 48 0F AF C7 48 03 E8
+    return_type: unsigned __int64
+    name: GetRetainerMarketPrice
+    parameters:
+    - type: Client::Game::InventoryManager*
+      name: this
+    - type: __int16
+      name: slot
+  - signature: E8 ?? ?? ?? ?? 48 8B 4B ?? 40 88 71
+    return_type: void
+    name: SetRetainerMarketPrice
+    parameters:
+    - type: Client::Game::InventoryManager*
+      name: this
+    - type: __int16
+      name: slot
+    - type: unsigned int
+      name: price
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? 81 C2
     relative_follow_offsets:
@@ -63074,575 +63171,6 @@ structs:
     - 6
     is_pointer: False
     return_type: Client::Game::UI::ContentsFinder
-- type: Client::Game::UI::PlayerState
-  name: PlayerState
-  namespace: Client.Game.UI
-  union: False
-  size: 2240
-  fields:
-  - type: byte
-    name: IsLoaded
-    offset: 0
-  - type: byte
-    name: CharacterName
-    offset: 1
-    size: 64
-    is_string: True
-  - type: byte
-    name: OnlineId
-    offset: 65
-    size: 17
-    is_string: True
-  - type: unsigned int
-    name: EntityId
-    offset: 100
-  - type: unsigned __int64
-    name: ContentId
-    offset: 104
-  - type: int
-    name: PenaltyTimestamps
-    offset: 112
-    size: 2
-    is_string: False
-  - type: byte
-    name: HasAddictionRestrictions
-    offset: 120
-  - type: byte
-    name: MaxLevel
-    offset: 121
-  - type: byte
-    name: MaxExpansion
-    offset: 122
-  - type: byte
-    name: Sex
-    offset: 123
-  - type: byte
-    name: Race
-    offset: 124
-  - type: byte
-    name: Tribe
-    offset: 125
-  - type: byte
-    name: CurrentClassJobId
-    offset: 126
-  - type: Component::Exd::Sheets::ClassJob*
-    name: CurrentClassJobRow
-    offset: 128
-  - type: __int16
-    name: CurrentLevel
-    offset: 136
-  - type: __int16
-    name: ClassJobLevels
-    offset: 138
-    size: 32
-    is_string: False
-  - type: int
-    name: ClassJobExperience
-    offset: 204
-    size: 32
-    is_string: False
-  - type: __int16
-    name: SyncedLevel
-    offset: 332
-  - type: byte
-    name: IsLevelSynced
-    offset: 334
-  - type: byte
-    name: HasPremiumSaddlebag
-    offset: 335
-  - type: byte
-    name: GuardianDeity
-    offset: 338
-  - type: byte
-    name: BirthMonth
-    offset: 339
-  - type: byte
-    name: BirthDay
-    offset: 340
-  - type: byte
-    name: FirstClass
-    offset: 341
-  - type: byte
-    name: StartTown
-    offset: 342
-  - type: byte
-    name: QuestSpecialFlags
-    offset: 343
-  - type: unsigned __int16
-    name: ActiveFestivalIds
-    offset: 344
-    size: 4
-    is_string: False
-  - type: unsigned __int16
-    name: ActiveFestivalPhases
-    offset: 352
-    size: 4
-    is_string: False
-  - type: int
-    name: BaseStrength
-    offset: 368
-  - type: int
-    name: BaseDexterity
-    offset: 372
-  - type: int
-    name: BaseVitality
-    offset: 376
-  - type: int
-    name: BaseIntelligence
-    offset: 380
-  - type: int
-    name: BaseMind
-    offset: 384
-  - type: int
-    name: BasePiety
-    offset: 388
-  - type: int
-    name: Attributes
-    offset: 392
-    size: 74
-    is_string: False
-  - type: byte
-    name: GrandCompany
-    offset: 688
-  - type: byte
-    name: GCRankMaelstrom
-    offset: 689
-  - type: byte
-    name: GCRankTwinAdders
-    offset: 690
-  - type: byte
-    name: GCRankImmortalFlames
-    offset: 691
-  - type: unsigned __int16
-    name: HomeAetheryteId
-    offset: 692
-  - type: byte
-    name: FavouriteAetheryteCount
-    offset: 694
-  - type: unsigned __int16
-    name: FavouriteAetherytes
-    offset: 696
-    size: 4
-    is_string: False
-  - type: unsigned __int16
-    name: FreeAetheryteId
-    offset: 704
-  - type: unsigned __int16
-    name: FreeAetherytePlayStationPlus
-    offset: 706
-  - type: unsigned int
-    name: BaseRestedExperience
-    offset: 708
-  - type: byte
-    name: UnlockedMountsBitmask
-    offset: 733
-    size: 39
-    is_string: False
-  - type: byte
-    name: UnlockedOrnamentsBitmask
-    offset: 772
-    size: 7
-    is_string: False
-  - type: byte
-    name: UnlockedGlassesStylesBitmask
-    offset: 779
-    size: 5
-    is_string: False
-  - type: unsigned __int16
-    name: NumOwnedMounts
-    offset: 786
-  - type: byte
-    name: UnlockedSpearfishingNotebookBitmask
-    offset: 966
-    size: 8
-    is_string: False
-  - type: byte
-    name: CaughtFishBitmask
-    offset: 1008
-    size: 181
-    is_string: False
-  - type: unsigned int
-    name: NumFishCaught
-    offset: 1192
-  - type: unsigned int
-    name: FishingBait
-    offset: 1196
-  - type: byte
-    name: CaughtSpearfishBitmask
-    offset: 1209
-    size: 39
-    is_string: False
-  - type: unsigned int
-    name: NumSpearfishCaught
-    offset: 1248
-  - type: int
-    name: UnknownUnixTimestamp
-    offset: 1252
-  - type: byte
-    name: ContentRouletteCompletion
-    offset: 1256
-    size: 12
-    is_string: False
-  - type: __int16
-    name: PlayerCommendations
-    offset: 1268
-  - type: byte
-    name: SelectedPoses
-    offset: 1270
-    size: 7
-    is_string: False
-  - type: byte
-    name: PlayerStateFlags
-    offset: 1277
-    size: 3
-    is_string: False
-  - type: byte
-    name: SightseeingLogUnlockState
-    offset: 1322
-  - type: byte
-    name: SightseeingLogUnlockStateEx
-    offset: 1323
-  - type: byte
-    name: UnlockedAdventureBitmask
-    offset: 1324
-    size: 44
-    is_string: False
-  - type: byte
-    name: CompletedAdventureBitmask
-    offset: 1368
-    size: 44
-    is_string: False
-  - type: byte
-    name: UnlockFlags
-    offset: 1417
-    size: 56
-    is_string: False
-  - type: byte
-    name: DeliveryLevel
-    offset: 1477
-  - type: byte
-    name: MeisterFlag
-    offset: 1479
-  - type: byte
-    name: WeeklyLockoutInfo
-    offset: 1480
-  - type: int
-    name: SquadronMissionCompletionTimestamp
-    offset: 1484
-  - type: int
-    name: SquadronTrainingCompletionTimestamp
-    offset: 1488
-  - type: unsigned __int16
-    name: ActiveGcArmyExpedition
-    offset: 1492
-  - type: unsigned __int16
-    name: ActiveGcArmyTraining
-    offset: 1494
-  - type: byte
-    name: HasNewGcArmyCandidate
-    offset: 1496
-  - type: byte
-    name: UnlockedMinerFolkloreTomeBitmask
-    offset: 1498
-    size: 2
-    is_string: False
-  - type: byte
-    name: UnlockedBotanistFolkloreTomeBitmask
-    offset: 1500
-    size: 2
-    is_string: False
-  - type: byte
-    name: UnlockedFishingFolkloreTomeBitmask
-    offset: 1502
-    size: 2
-    is_string: False
-  - type: byte
-    name: UnlockedOrchestrionRollBitmask
-    offset: 1504
-    size: 92
-    is_string: False
-  - type: byte
-    name: WeeklyBingoOrderData
-    offset: 1780
-    size: 16
-    is_string: False
-  - type: byte
-    name: WeeklyBingoRewardData
-    offset: 1796
-    size: 4
-    is_string: False
-  - type: unsigned __int16
-    name: _weeklyBingoStickers
-    offset: 1800
-  - type: unsigned int
-    name: _weeklyBingoFlags
-    offset: 1804
-  - type: byte
-    name: _weeklyBingoTaskStatus
-    offset: 1808
-    size: 4
-    is_string: False
-  - type: byte
-    name: WeeklyBingoRequestOpenBingoNo
-    offset: 1812
-  - type: byte
-    name: WeeklyBingoExpMultiplier
-    offset: 1872
-  - type: byte
-    name: WeeklyBingoUnk63
-    offset: 1873
-  - type: StdPair<unsigned int, unsigned int>
-    name: ContentKeyValueData
-    offset: 1880
-    size: 3
-    is_string: False
-  - type: byte
-    name: MentorVersion
-    offset: 2024
-  - type: unsigned int
-    name: DesynthesisLevels
-    offset: 2028
-    size: 8
-    is_string: False
-  - type: byte
-    name: UnlockedFramersKitsBitmask
-    offset: 2108
-    size: 26
-    is_string: False
-  - type: StdMap<unsigned int, byte>
-    name: TrackedStatuses
-    offset: 2164
-  - type: StdMap<unsigned int, byte>
-    name: TrackedActionUnlocks
-    offset: 2180
-  - type: StdMap<unsigned int, byte>
-    name: TrackedTraitUnlocks
-    offset: 2196
-  - type: byte
-    name: TrackedTraitUnlocksDirty
-    offset: 2212
-  - type: byte
-    name: TrackedActionUnlocksDirty
-    offset: 2213
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 3A 43 01
-    return_type: byte
-    name: GetGrandCompanyRank
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 3A 43 29 72 08
-    return_type: byte
-    name: GetBeastTribeRank
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: byte
-      name: beastTribeId
-  - signature: E8 ?? ?? ?? ?? 41 3A DE
-    return_type: unsigned __int16
-    name: GetBeastTribeCurrentReputation
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: byte
-      name: beastTribeId
-  - signature: E8 ?? ?? ?? ?? 66 3B D8 8B CE
-    return_type: unsigned __int16
-    name: GetBeastTribeNeededReputation
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: byte
-      name: beastTribeId
-  - signature: 0F B6 81 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 89 44 24 08
-    return_type: byte
-    name: IsMeisterFlagMaxCount
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 04 41 0F AB F6
-    return_type: byte
-    name: IsMeisterFlag
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: classJobId
-  - signature: E8 ?? ?? ?? ?? 38 43 45
-    return_type: byte
-    name: IsMeisterFlagAndHasSoulStoneEquipped
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: classJobId
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 83 FB 01
-    return_type: byte
-    name: IsMountUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: mountId
-  - signature: E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE
-    return_type: byte
-    name: IsOrnamentUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: ornamentId
-  - signature: E8 ?? ?? ?? ?? 88 44 1F 08
-    return_type: byte
-    name: IsOrchestrionRollUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: rollId
-  - signature: E8 ?? ?? ?? ?? 0F B6 4D 9A
-    return_type: byte
-    name: IsSecretRecipeBookUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: tomeId
-  - signature: E9 ?? ?? ?? ?? 0F B7 57 70
-    return_type: byte
-    name: IsFolkloreBookUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: tomeId
-  - signature: 8D 42 ?? 3C ?? 77 ?? 4C 8B 89
-    return_type: byte
-    name: IsMcGuffinUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: mcGuffinId
-  - signature: E9 ?? ?? ?? ?? 33 FF 8B 03
-    return_type: byte
-    name: IsFramersKitUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: kitId
-  - signature: 4C 8B C9 85 D2 74 1D
-    return_type: byte
-    name: IsAetherCurrentZoneComplete
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: aetherCurrentCompFlgSetId
-  - signature: E8 ?? ?? ?? ?? 84 C0 75 AA
-    return_type: byte
-    name: IsAdventureComplete
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: adventureIndex
-  - signature: E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3
-    return_type: byte
-    name: IsGlassesUnlocked
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned __int16
-      name: glassesId
-  - signature: E8 ?? ?? ?? ?? 3B C3 0F 93 C0
-    return_type: unsigned int
-    name: GetWeeklyBingoFlagsValue
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: unsigned int
-      name: mode
-  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 8D 90 ?? ?? ?? ??
-    return_type: byte
-    name: IsWeeklyBingoExpired
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: 8B 81 ?? ?? ?? ?? C1 E8 04 25
-    return_type: int
-    name: GetWeeklyBingoExpireUnixTimestamp
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 8B D3 41 88 06
-    return_type: byte
-    name: IsWeeklyBingoStickerPlaced
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: int
-      name: index
-  - signature: 48 8B C1 83 FA 10
-    return_type: Client::Game::UI::PlayerState::WeeklyBingoTaskStatus
-    name: GetWeeklyBingoTaskStatus
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: int
-      name: index
-  - signature: E8 ?? ?? ?? ?? 0F B6 C0 0F AF C3
-    return_type: unsigned int
-    name: GetWeeklyBingoExpMultiplier
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 0D B0 02
-    return_type: byte
-    name: IsMentor
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 04 C6 46 41 01
-    return_type: byte
-    name: IsBattleMentor
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B 53 28 F6 D8
-    return_type: byte
-    name: IsTradeMentor
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 66 C7 43 ?? ?? ??
-    return_type: byte
-    name: IsNovice
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 88 46 43
-    return_type: byte
-    name: IsReturner
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 3A D8 75 2E
-    return_type: byte
-    name: IsPlayerStateFlagSet
-    parameters:
-    - type: Client::Game::UI::PlayerState*
-      name: this
-    - type: Client::Game::UI::PlayerStateFlag
-      name: flag
-  static_members:
-  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02
-    relative_follow_offsets:
-    - 3
-    is_pointer: False
-    return_type: Client::Game::UI::PlayerState
 - type: Client::Graphics::Physics::BonePhysicsModule
   name: BonePhysicsModule
   namespace: Client.Graphics.Physics
@@ -64172,7 +63700,7 @@ structs:
     is_pointer: True
     return_type: Client::LayoutEngine::LayoutWorld
   static_member_functions:
-  - signature: E9 ?? ?? ?? ?? 8B 43 78
+  - signature: E9 ?? ?? ?? ?? 8B 43 78 45 33 C0
     return_type: Client::LayoutEngine::ILayoutInstance*
     name: GetLayoutInstance
     parameters:
@@ -64545,7 +64073,7 @@ structs:
   name: SharedGroupResourceHandle
   namespace: Client.System.Resource.Handle
   union: False
-  size: 184
+  size: 192
   fields:
   - type: Client::System::Resource::Handle::ResourceHandle
     name: ResourceHandle
@@ -69159,15 +68687,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Animation::Playback::Control::hkaAnimationControl
   name: hkaAnimationControl
@@ -74479,6 +74001,12 @@ structs:
     name: SelectedCraftType
     offset: 944
   - type: int
+    name: SelectedRecipeCategoryPage
+    offset: 948
+  - type: int
+    name: SelectedRecipeCategory
+    offset: 952
+  - type: int
     name: SelectedRecipeIndex
     offset: 956
   - type: unsigned int
@@ -75898,15 +75426,9 @@ structs:
   - type: byte
     name: _Isnil
     offset: 25
-  - type: byte
-    name: _18
-    offset: 26
-  - type: byte
-    name: _19
-    offset: 27
   - type: StdPair<Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Client::LayoutEngine::AnalyticShapeData>
     name: _Myval
-    offset: 28
+    offset: 26
   member_functions: []
 - type: Animation::Deform::Skinning::hkaMeshBinding
   name: hkaMeshBinding
@@ -81203,6 +80725,608 @@ structs:
     - type: Client::Game::Event::HwdDevEventHandler*
       name: this
   member_functions: []
+- type: Client::Game::UI::PlayerState
+  name: PlayerState
+  namespace: Client.Game.UI
+  union: False
+  size: 2240
+  fields:
+  - type: byte
+    name: IsLoaded
+    offset: 0
+  - type: byte
+    name: CharacterName
+    offset: 1
+    size: 64
+    is_string: True
+  - type: byte
+    name: OnlineId
+    offset: 65
+    size: 17
+    is_string: True
+  - type: unsigned int
+    name: EntityId
+    offset: 100
+  - type: unsigned __int64
+    name: ContentId
+    offset: 104
+  - type: int
+    name: PenaltyTimestamps
+    offset: 112
+    size: 2
+    is_string: False
+  - type: byte
+    name: HasAddictionRestrictions
+    offset: 120
+  - type: byte
+    name: MaxLevel
+    offset: 121
+  - type: byte
+    name: MaxExpansion
+    offset: 122
+  - type: byte
+    name: Sex
+    offset: 123
+  - type: byte
+    name: Race
+    offset: 124
+  - type: byte
+    name: Tribe
+    offset: 125
+  - type: byte
+    name: CurrentClassJobId
+    offset: 126
+  - type: Component::Exd::Sheets::ClassJob*
+    name: CurrentClassJobRow
+    offset: 128
+  - type: __int16
+    name: CurrentLevel
+    offset: 136
+  - type: __int16
+    name: ClassJobLevels
+    offset: 138
+    size: 32
+    is_string: False
+  - type: int
+    name: ClassJobExperience
+    offset: 204
+    size: 32
+    is_string: False
+  - type: __int16
+    name: SyncedLevel
+    offset: 332
+  - type: byte
+    name: IsLevelSynced
+    offset: 334
+  - type: byte
+    name: HasPremiumSaddlebag
+    offset: 335
+  - type: byte
+    name: GuardianDeity
+    offset: 338
+  - type: byte
+    name: BirthMonth
+    offset: 339
+  - type: byte
+    name: BirthDay
+    offset: 340
+  - type: byte
+    name: FirstClass
+    offset: 341
+  - type: byte
+    name: StartTown
+    offset: 342
+  - type: byte
+    name: QuestSpecialFlags
+    offset: 343
+  - type: unsigned __int16
+    name: ActiveFestivalIds
+    offset: 344
+    size: 4
+    is_string: False
+  - type: unsigned __int16
+    name: ActiveFestivalPhases
+    offset: 352
+    size: 4
+    is_string: False
+  - type: int
+    name: BaseStrength
+    offset: 368
+  - type: int
+    name: BaseDexterity
+    offset: 372
+  - type: int
+    name: BaseVitality
+    offset: 376
+  - type: int
+    name: BaseIntelligence
+    offset: 380
+  - type: int
+    name: BaseMind
+    offset: 384
+  - type: int
+    name: BasePiety
+    offset: 388
+  - type: int
+    name: Attributes
+    offset: 392
+    size: 74
+    is_string: False
+  - type: byte
+    name: GrandCompany
+    offset: 688
+  - type: byte
+    name: GCRankMaelstrom
+    offset: 689
+  - type: byte
+    name: GCRankTwinAdders
+    offset: 690
+  - type: byte
+    name: GCRankImmortalFlames
+    offset: 691
+  - type: unsigned __int16
+    name: HomeAetheryteId
+    offset: 692
+  - type: byte
+    name: FavouriteAetheryteCount
+    offset: 694
+  - type: unsigned __int16
+    name: FavouriteAetherytes
+    offset: 696
+    size: 4
+    is_string: False
+  - type: unsigned __int16
+    name: FreeAetheryteId
+    offset: 704
+  - type: unsigned __int16
+    name: FreeAetherytePlayStationPlus
+    offset: 706
+  - type: unsigned int
+    name: BaseRestedExperience
+    offset: 708
+  - type: __int8
+    name: Unk2DC
+    offset: 732
+  - type: byte
+    name: UnlockedMountsBitmask
+    offset: 733
+    size: 39
+    is_string: False
+  - type: byte
+    name: UnlockedOrnamentsBitmask
+    offset: 772
+    size: 7
+    is_string: False
+  - type: byte
+    name: UnlockedGlassesStylesBitmask
+    offset: 779
+    size: 5
+    is_string: False
+  - type: unsigned __int16
+    name: NumOwnedMounts
+    offset: 786
+  - type: unsigned __int16
+    name: NumOwnedMountsMinus1
+    offset: 788
+  - type: byte
+    name: UnlockedFishingSpotBitmask
+    offset: 966
+    size: 42
+    is_string: False
+  - type: byte
+    name: CaughtFishBitmask
+    offset: 1008
+    size: 181
+    is_string: False
+  - type: unsigned int
+    name: NumFishCaught
+    offset: 1192
+  - type: unsigned int
+    name: FishingBait
+    offset: 1196
+  - type: byte
+    name: UnlockedSpearfishingNotebookBitmask
+    offset: 1200
+    size: 8
+    is_string: False
+  - type: byte
+    name: CaughtSpearfishBitmask
+    offset: 1209
+    size: 39
+    is_string: False
+  - type: unsigned int
+    name: NumSpearfishCaught
+    offset: 1248
+  - type: int
+    name: UnknownUnixTimestamp
+    offset: 1252
+  - type: byte
+    name: ContentRouletteCompletion
+    offset: 1256
+    size: 12
+    is_string: False
+  - type: __int16
+    name: PlayerCommendations
+    offset: 1268
+  - type: byte
+    name: SelectedPoses
+    offset: 1270
+    size: 7
+    is_string: False
+  - type: byte
+    name: PlayerStateFlags
+    offset: 1277
+    size: 3
+    is_string: False
+  - type: byte
+    name: UnlockedSecretRecipeBooksBitmask
+    offset: 1280
+    size: 14
+    is_string: False
+  - type: byte
+    name: SightseeingLogUnlockState
+    offset: 1322
+  - type: byte
+    name: SightseeingLogUnlockStateEx
+    offset: 1323
+  - type: byte
+    name: UnlockedAdventureBitmask
+    offset: 1324
+    size: 44
+    is_string: False
+  - type: byte
+    name: CompletedAdventureBitmask
+    offset: 1368
+    size: 44
+    is_string: False
+  - type: byte
+    name: UnlockFlags
+    offset: 1417
+    size: 56
+    is_string: False
+  - type: byte
+    name: UnlockedAetherCurrentCompFlgSetBitmask
+    offset: 1473
+    size: 4
+    is_string: False
+  - type: byte
+    name: DeliveryLevel
+    offset: 1477
+  - type: byte
+    name: MeisterFlag
+    offset: 1479
+  - type: byte
+    name: WeeklyLockoutInfo
+    offset: 1480
+  - type: int
+    name: SquadronMissionCompletionTimestamp
+    offset: 1484
+  - type: int
+    name: SquadronTrainingCompletionTimestamp
+    offset: 1488
+  - type: unsigned __int16
+    name: ActiveGcArmyExpedition
+    offset: 1492
+  - type: unsigned __int16
+    name: ActiveGcArmyTraining
+    offset: 1494
+  - type: byte
+    name: HasNewGcArmyCandidate
+    offset: 1496
+  - type: byte
+    name: UnlockedMinerFolkloreTomeBitmask
+    offset: 1498
+    size: 2
+    is_string: False
+  - type: byte
+    name: UnlockedBotanistFolkloreTomeBitmask
+    offset: 1500
+    size: 2
+    is_string: False
+  - type: byte
+    name: UnlockedFishingFolkloreTomeBitmask
+    offset: 1502
+    size: 2
+    is_string: False
+  - type: byte
+    name: UnlockedOrchestrionRollBitmask
+    offset: 1504
+    size: 92
+    is_string: False
+  - type: byte
+    name: WeeklyBingoOrderData
+    offset: 1780
+    size: 16
+    is_string: False
+  - type: byte
+    name: WeeklyBingoRewardData
+    offset: 1796
+    size: 4
+    is_string: False
+  - type: unsigned __int16
+    name: _weeklyBingoStickers
+    offset: 1800
+  - type: unsigned int
+    name: _weeklyBingoFlags
+    offset: 1804
+  - type: byte
+    name: _weeklyBingoTaskStatus
+    offset: 1808
+    size: 4
+    is_string: False
+  - type: byte
+    name: WeeklyBingoRequestOpenBingoNo
+    offset: 1812
+  - type: byte
+    name: WeeklyBingoExpMultiplier
+    offset: 1872
+  - type: byte
+    name: WeeklyBingoUnk63
+    offset: 1873
+  - type: StdPair<unsigned int, unsigned int>
+    name: ContentKeyValueData
+    offset: 1880
+    size: 3
+    is_string: False
+  - type: byte
+    name: MentorVersion
+    offset: 2024
+  - type: unsigned int
+    name: DesynthesisLevels
+    offset: 2028
+    size: 8
+    is_string: False
+  - type: int
+    name: FauxHollowsTimestamp
+    offset: 2060
+  - type: int
+    name: FauxHollowsState
+    offset: 2064
+  - type: StdVector<unsigned __int16>
+    name: CompletedCrystariumDeliveryQuests
+    offset: 2072
+  - type: StdSet<byte>
+    name: UnlockedMcGuffins
+    offset: 2096
+  - type: byte
+    name: UnlockedFramersKitsBitmask
+    offset: 2112
+    size: 26
+    is_string: False
+  - type: StdMap<unsigned int, byte>
+    name: TrackedStatuses
+    offset: 2168
+  - type: StdMap<unsigned int, byte>
+    name: TrackedActionUnlocks
+    offset: 2184
+  - type: StdMap<unsigned int, byte>
+    name: TrackedTraitUnlocks
+    offset: 2200
+  - type: byte
+    name: TrackedTraitUnlocksDirty
+    offset: 2216
+  - type: byte
+    name: TrackedActionUnlocksDirty
+    offset: 2217
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 3A 43 01
+    return_type: byte
+    name: GetGrandCompanyRank
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 3A 43 29 72 08
+    return_type: byte
+    name: GetBeastTribeRank
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: byte
+      name: beastTribeId
+  - signature: E8 ?? ?? ?? ?? 41 3A DE
+    return_type: unsigned __int16
+    name: GetBeastTribeCurrentReputation
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: byte
+      name: beastTribeId
+  - signature: E8 ?? ?? ?? ?? 66 3B D8 8B CE
+    return_type: unsigned __int16
+    name: GetBeastTribeNeededReputation
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: byte
+      name: beastTribeId
+  - signature: 0F B6 81 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 89 44 24 08
+    return_type: byte
+    name: IsMeisterFlagMaxCount
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 04 41 0F AB F6
+    return_type: byte
+    name: IsMeisterFlag
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: classJobId
+  - signature: E8 ?? ?? ?? ?? 38 43 45
+    return_type: byte
+    name: IsMeisterFlagAndHasSoulStoneEquipped
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: classJobId
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 83 FB 01
+    return_type: byte
+    name: IsMountUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: mountId
+  - signature: E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 41 0F B6 CE
+    return_type: byte
+    name: IsOrnamentUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: ornamentId
+  - signature: E8 ?? ?? ?? ?? 88 44 1F 08
+    return_type: byte
+    name: IsOrchestrionRollUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: rollId
+  - signature: E8 ?? ?? ?? ?? 0F B6 4D 9A
+    return_type: byte
+    name: IsSecretRecipeBookUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: tomeId
+  - signature: E9 ?? ?? ?? ?? 0F B7 57 70
+    return_type: byte
+    name: IsFolkloreBookUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: tomeId
+  - signature: 8D 42 ?? 3C ?? 77 ?? 4C 8B 89
+    return_type: byte
+    name: IsMcGuffinUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: mcGuffinId
+  - signature: E9 ?? ?? ?? ?? 33 FF 8B 03
+    return_type: byte
+    name: IsFramersKitUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: kitId
+  - signature: 4C 8B C9 85 D2 74 1D
+    return_type: byte
+    name: IsAetherCurrentZoneComplete
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: aetherCurrentCompFlgSetId
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 AA
+    return_type: byte
+    name: IsAdventureComplete
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: adventureIndex
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 0B 66 FF C3
+    return_type: byte
+    name: IsGlassesUnlocked
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned __int16
+      name: glassesId
+  - signature: E8 ?? ?? ?? ?? 3B C3 0F 93 C0
+    return_type: unsigned int
+    name: GetWeeklyBingoFlagsValue
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: unsigned int
+      name: mode
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 8D 90 ?? ?? ?? ??
+    return_type: byte
+    name: IsWeeklyBingoExpired
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: 8B 81 ?? ?? ?? ?? C1 E8 04 25
+    return_type: int
+    name: GetWeeklyBingoExpireUnixTimestamp
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8B D3 41 88 06
+    return_type: byte
+    name: IsWeeklyBingoStickerPlaced
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: int
+      name: index
+  - signature: 48 8B C1 83 FA 10
+    return_type: Client::Game::UI::PlayerState::WeeklyBingoTaskStatus
+    name: GetWeeklyBingoTaskStatus
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 0F B6 C0 0F AF C3
+    return_type: unsigned int
+    name: GetWeeklyBingoExpMultiplier
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 0D B0 02
+    return_type: byte
+    name: IsMentor
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 04 C6 46 41 01
+    return_type: byte
+    name: IsBattleMentor
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 53 28 F6 D8
+    return_type: byte
+    name: IsTradeMentor
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 66 C7 43 ?? ?? ??
+    return_type: byte
+    name: IsNovice
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 88 46 43
+    return_type: byte
+    name: IsReturner
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 3A D8 75 2E
+    return_type: byte
+    name: IsPlayerStateFlagSet
+    parameters:
+    - type: Client::Game::UI::PlayerState*
+      name: this
+    - type: Client::Game::UI::PlayerStateFlag
+      name: flag
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::UI::PlayerState
 - type: Client::Game::WorkshopTerritory
   name: WorkshopTerritory
   namespace: Client.Game
@@ -152820,7 +152944,7 @@ structs:
     name: DailyQuests
     offset: 17080
   member_functions:
-  - signature: E8 ?? ?? ?? ?? EB E0 41 81 E9
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 0E 66 83 B8
     return_type: Client::Game::InstanceContent::ContentDirector*
     name: GetContentDirector
     parameters:
