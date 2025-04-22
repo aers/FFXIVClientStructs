@@ -9919,7 +9919,7 @@ classes:
     funcs:
       0x140D2F590: ctor
       0x140D128C0: Finalizer
-  Client::UI::Agent::AgentRequest:
+  Client::UI::Agent::AgentNpcTrade:
     vtbls:
       - ea: 0x14208AB48
         base: Client::UI::Agent::AgentInterface
@@ -11868,13 +11868,13 @@ classes:
       0x140BFCF70: ctor
   Client::UI::Agent::AgentInclusionShop:
     vtbls:
-      - ea: 0x142087FF8
+      - ea: 0x14208BB98
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D803A0: ctor
   Client::UI::Agent::AgentCollectablesShop:
     vtbls:
-      - ea: 0x14208BB98
+      - ea: 0x142087FF8
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E73A40: ctor
