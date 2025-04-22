@@ -1909,6 +1909,7 @@ classes:
       - ea: 0x1422915E0
     vfuncs:
       0: Dtor
+      2: ProcessPacket
   Client::Game::WKS::WKSResearch: # Cosmic Research Information
     vtbls:
       - ea: 0x1422D9280
