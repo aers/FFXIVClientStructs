@@ -16,6 +16,8 @@ public unsafe partial struct WKSManager {
 
     [FieldOffset(0x4A)] public ushort DevGrade;
 
+    [FieldOffset(0xC60)] public ushort CurrentMissionUnitRowId;
+
     [FieldOffset(0xDB0)] private void* UnkStructDB0; // size: 0x3A8
     [FieldOffset(0xDB8)] private void* UnkStructDB8; // size: 0x1D0
     [FieldOffset(0xDC0)] private void* UnkStructDC0; // size: 0xA110
