@@ -17948,8 +17948,12 @@ classes:
       0x14187F2F0: ctor
       0x14187F450: Finalizer
       0x14187F650: Update
+      0x14187FCB0: ClearCompletionData
+      0x141881320: AddCompletionEntry
       0x141880FE0: AddCategoryData
       0x141880A50: ParseLookupTable
+    vfuncs:
+      5: GetSelection
   Client::System::Data::BlockMemory:
     vtbls:
       - ea: 0x1422E9078
