@@ -32,13 +32,11 @@ public unsafe partial struct CompletionModule {
     [FieldOffset(0x2A8)] private Utf8String Unk2A8;
     [FieldOffset(0x310)] private Utf8String Unk310;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 1B 41 FF C7")]
-    [GenerateStringOverloads]
-    public partial nint AddCompletionEntry(long groupIndex, uint rowId, CStringPointer itemText, CStringPointer groupTitle, ushort itemKey);
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 1B 41 FF C7"), GenerateStringOverloads]
+    public partial void AddCompletionEntry(long groupIndex, uint rowId, CStringPointer itemText, CStringPointer groupTitle, ushort itemKey);
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 3C 23")]
-    [GenerateStringOverloads]
-    public partial nint AddCategoryData(long groupIndex, CStringPointer itemText, CStringPointer groupTitle, CategoryData* categoryData);
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 3C 23"), GenerateStringOverloads]
+    public partial CategoryData* AddCategoryData(long groupIndex, CStringPointer itemText, CStringPointer groupTitle, CategoryData* categoryData);
     
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 6C 24 ??")]
     public partial void ClearCompletionData();
