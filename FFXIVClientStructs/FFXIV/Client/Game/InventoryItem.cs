@@ -97,16 +97,16 @@ public unsafe partial struct InventoryItem : ICreatable {
     [VirtualFunction(17)]
     public partial void SetFlags(ItemFlags flags);
 
-    [VirtualFunction(16)]
+    [VirtualFunction(18)]
     public partial bool IsHighQuality();
 
-    [VirtualFunction(17)]
+    [VirtualFunction(19)]
     public partial void SetIsHighQuality(bool isHighQuality);
 
-    //[VirtualFunction(18)]
+    //[VirtualFunction(20)]
     //public partial bool IsHighQuality2();
 
-    //[VirtualFunction(19)]
+    //[VirtualFunction(21)]
     //public partial void SetIsHighQuality2(bool isHighQuality);
 
     /// <summary>
