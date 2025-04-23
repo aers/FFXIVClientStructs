@@ -1920,11 +1920,12 @@ classes:
       0x14199C140: GetCurrentAnalysis
       0x14199C1C0: GetMaxAnalysis
       0x14199C270: GetNeededAnalysis
-      0x14199C450: GetCurrentRank
-      0x14199C4A0: IsMaxRank
-      0x14199C520: IsNextRankAvailable
+      0x14199C450: GetCurrentStage
+      0x14199C4A0: IsMaxStage
+      0x14199C520: IsNextStageAvailable
+      0x14199C330: IsTypeAvailable
       0x14199C5A0: GetRatePercentage
-      0x14199C850: GetUnlockedRank
+      0x14199C850: GetUnlockedStage
       0x14199CD20: GetClassJobLevel
   Client::System::String::Utf8String:
     funcs:
