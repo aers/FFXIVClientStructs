@@ -37,7 +37,7 @@ public unsafe partial struct CompletionModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 3C 23"), GenerateStringOverloads]
     public partial CategoryData* AddCategoryData(long groupIndex, CStringPointer itemText, CStringPointer groupTitle, CategoryData* categoryData);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 6C 24 ??")]
     public partial void ClearCompletionData();
 
