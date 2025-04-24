@@ -17966,6 +17966,7 @@ classes:
       0x141B15940: ctor
       0x141B15A90: GetGroup
       0x141B15AA0: GetSheetNameIndex
+      0x141B16050: SortEntries
   Component::Completion::CategoryDataCache:
     vtbls:
       - ea: 0x1422E90A8
