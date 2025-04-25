@@ -23,6 +23,6 @@ public partial struct CategoryData {
     public struct CompletionDataStruct {
         [FieldOffset(0x00)] public ushort Group;
         [FieldOffset(0x02)] public ushort Key;
-        [FieldOffset(0x04)] public byte RowId;
+        [FieldOffset(0x04)] public uint RowId;
     }
 }
