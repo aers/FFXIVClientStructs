@@ -47,10 +47,13 @@ public unsafe partial struct Conditions {
     [FieldOffset(36)] public bool InDuelingArea;
     [FieldOffset(37)] public bool TradeOpen;
     [FieldOffset(38)] public bool Occupied38;
+    /// <remarks> Observed during Materialize (Desynthesis, Materia Extraction, Aetherial Reduction) and Repair. </remarks>
     [FieldOffset(39)] public bool Occupied39;
-    [FieldOffset(40)] public bool Crafting40;
+    [FieldOffset(40)] public bool ExecutingCraftingAction;
+    [FieldOffset(40), Obsolete("Renamed to ExecutingCraftingAction")] public bool Crafting40;
     [FieldOffset(41)] public bool PreparingToCraft;
-    [FieldOffset(42)] public bool Gathering42;
+    [FieldOffset(42)] public bool ExecutingGatheringAction; // includes Fishing
+    [FieldOffset(42), Obsolete("Renamed to ExecutingGatheringAction")] public bool Gathering42;
     [FieldOffset(43)] public bool Fishing;
     [FieldOffset(44)] public bool Unknown44;
     [FieldOffset(45)] public bool BetweenAreas;
@@ -81,6 +84,7 @@ public unsafe partial struct Conditions {
     [FieldOffset(68)] public bool Transformed;
     [FieldOffset(69)] public bool OnFreeTrial;
     [FieldOffset(70)] public bool BeingMoved;
+    /// <remarks> Observed in Cosmic Exploration while using the actions Astrodrill (only briefly) and Solar Flarethrower. </remarks>
     [FieldOffset(71)] public bool Mounting71;
     [FieldOffset(72)] public bool SufferingStatusAffliction72;
     [FieldOffset(73)] public bool SufferingStatusAffliction73;
@@ -95,6 +99,7 @@ public unsafe partial struct Conditions {
     [FieldOffset(82)] public bool RegisteringForTripleTriadMatch;
     [FieldOffset(83)] public bool WaitingForTripleTriadMatch83;
     [FieldOffset(84)] public bool ParticipatingInCrossWorldPartyOrAlliance;
+    /// <remarks> Observed in Cosmic Exploration while gathering during a stellar mission. </remarks>
     [FieldOffset(85)] public bool Unknown85;
     [FieldOffset(86)] public bool DutyRecorderPlayback;
     [FieldOffset(87)] public bool Casting87;
@@ -107,14 +112,19 @@ public unsafe partial struct Conditions {
     [FieldOffset(94)] public bool UsingFashionAccessory;
     [FieldOffset(94), Obsolete("Renamed to UsingFashionAccessory.", true)] public bool UsingParasol;
     [FieldOffset(95)] public bool BoundByDuty95;
+    /// <remarks> Observed in Cosmic Exploration while participating in MechaEvent. </remarks>
     [FieldOffset(96)] public bool Unknown96;
     [FieldOffset(97)] public bool Disguised;
     [FieldOffset(98)] public bool RecruitingWorldOnly;
     [FieldOffset(99)] public bool Unknown99;
     [FieldOffset(100)] public bool EditingPortrait;
+    /// <remarks> Observed in Cosmic Exploration, in mech flying to FATE or during Cosmoliner use. Maybe ClientPath related? </remarks>
     [FieldOffset(101)] public bool Unknown101;
-    [FieldOffset(102)] public bool Unknown102;
+    /// <remarks> Used in Cosmic Exploration. </remarks>
+    [FieldOffset(102)] public bool PilotingMech;
+    [FieldOffset(102), Obsolete("Renamed to PilotingMech")] public bool Unknown102;
     [FieldOffset(103)] public bool Unknown103;
-    [FieldOffset(104)] public float MountOrOrnamentTransitionResetTimer; // when this reaches 0, MountOrOrnamentTransition is set to false
+    /// <remarks> When this reaches <c>0</c>, <see cref="MountOrOrnamentTransition"/> is set to <c>false</c>. </remarks>
+    [FieldOffset(104)] public float MountOrOrnamentTransitionResetTimer;
     [FieldOffset(104), Obsolete("Renamed to MountOrOrnamentTransitionResetTimer", true)] public float UnkTimer;
 }
