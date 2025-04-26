@@ -12980,17 +12980,17 @@ classes:
       6: Terminate
       7: IsUnlocked
       154: CancelInteraction
-      199: GetTitle # lua function "GetEventHandlerTitle"
-      221: GetIconId
-      245: GetScriptVersion
-      252: GetDescription
-      253: GetReliefText
-      254: GetTimeRemaining # pass current unix timestamp as a2
-      255: HasTimer
-      257: GetEventItemId
-      260: GetObjectives
-      264: GetRecommendedLevel
-      268: Initialize
+      200: GetTitle # lua function "GetEventHandlerTitle"
+      222: GetIconId
+      246: GetScriptVersion
+      253: GetDescription
+      254: GetReliefText
+      255: GetTimeRemaining # pass current unix timestamp as a2
+      256: HasTimer
+      258: GetEventItemId
+      261: GetObjectives
+      265: GetRecommendedLevel
+      269: Initialize
   Client::Game::Event::EventHandlerSelector:
     instances:
       - ea: 0x14294F910

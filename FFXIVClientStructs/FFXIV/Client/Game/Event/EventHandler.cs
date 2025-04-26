@@ -24,28 +24,28 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(154)]
     public partial void CancelInteraction();
 
-    [VirtualFunction(199)]
+    [VirtualFunction(200)]
     public partial void GetTitle(Utf8String* outTitle);
 
-    [VirtualFunction(252)]
+    [VirtualFunction(253)]
     public partial void GetDescription(Utf8String* outDescription);
 
-    [VirtualFunction(253)]
+    [VirtualFunction(254)]
     public partial void GetReliefText(Utf8String* outReliefText);
 
-    [VirtualFunction(254)]
+    [VirtualFunction(255)]
     public partial int GetTimeRemaining(int currentTimestamp);
 
-    [VirtualFunction(255)]
+    [VirtualFunction(256)]
     public partial bool HasTimer();
 
-    [VirtualFunction(257)]
+    [VirtualFunction(258)]
     public partial uint GetEventItemId();
 
-    [VirtualFunction(260)]
+    [VirtualFunction(261)]
     public partial StdVector<EventHandlerObjective>* GetObjectives();
 
-    [VirtualFunction(264)]
+    [VirtualFunction(265)]
     public partial int GetRecommendedLevel();
 }
 
