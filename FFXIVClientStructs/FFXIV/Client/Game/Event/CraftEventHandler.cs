@@ -21,6 +21,8 @@ public unsafe partial struct CraftEventHandler {
     [FieldOffset(0x45E)] public ushort StepNumber;
     [FieldOffset(0x46F)] public CraftCondition Condition;
     [FieldOffset(0x470)] public CraftFlags CraftFlags;
+    [FieldOffset(0x48A), FixedSizeArray] internal FixedSizeArray2<ushort> _WKSClassLevels;
+    [FieldOffset(0x48E), FixedSizeArray] internal FixedSizeArray2<byte> _WKSClassJobs;
 }
 
 [Flags]
