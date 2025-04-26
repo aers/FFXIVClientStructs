@@ -21,7 +21,7 @@ public partial struct CategoryData {
 
     [MemberFunction("40 57 48 8B 79 28")]
     public partial void SortEntries();
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct CompletionDataStruct {
         [FieldOffset(0x00)] public ushort Group;
