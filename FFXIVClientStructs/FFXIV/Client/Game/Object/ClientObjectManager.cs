@@ -1,11 +1,30 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 // Client::Game::Object::ClientObjectManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF90)]
 public unsafe partial struct ClientObjectManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C7 43 60 FF FF FF FF", 3)]
     public static partial ClientObjectManager* Instance();
+
+    [FieldOffset(0x00)] public BattleChara* BattleCharaMemory;
+    [FieldOffset(0x08)] public uint CharacterSize;
+    [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray249<BattleCharaEntry> _battleCharas;
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public unsafe partial struct BattleCharaEntry {
+        [FieldOffset(0x00)] public BattleChara* Character;
+        [FieldOffset(0x08)] public ObjectKind ObjectKind;
+
+        /// <remarks> Index in <see cref="BattleCharas"/>. </remarks>
+        [FieldOffset(0x0C)] public byte Index;
+
+        /// <remarks> Index in <see cref="BattleCharaMemory"/>. </remarks>
+        [FieldOffset(0x0E)] public ushort MemoryIndex;
+    }
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 89 44 FC ??")]
     public partial uint CreateBattleCharacter(uint index = 0xFFFFFFFF, byte param = 0);
