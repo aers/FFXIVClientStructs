@@ -144,6 +144,7 @@ public unsafe partial struct HousingManager {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
+    [FieldOffset(0x0), CExportIgnore] public long Id;
     /// <remarks>
     /// Masked data:<br/>
     /// - <c>0b1000_0000</c> (<c>0x80</c>) = Apartment Flag<br/>
@@ -160,8 +161,6 @@ public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     [FieldOffset(0x2)] public ushort Data2;
     [FieldOffset(0x4)] public ushort TerritoryTypeId;
     [FieldOffset(0x6)] public ushort WorldId;
-
-    [FieldOffset(0x0), CExportIgnore] public long Id;
 
     public bool IsApartment => (Data0 & 0x80) != 0 && (byte)(Data0 & 0x7F) < 2;
     public byte ApartmentDivision => (byte)(Data0 & 0x7F);

@@ -154,10 +154,9 @@ public unsafe partial struct GameObject {
 // else ObjectId = EntityId, Type = 0
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct GameObjectId : IEquatable<GameObjectId>, IComparable<GameObjectId> {
+    [FieldOffset(0x0), CExportIgnore] public ulong Id;
     [FieldOffset(0x0)] public uint ObjectId;
     [FieldOffset(0x4)] public byte Type;
-
-    [FieldOffset(0x0), CExportIgnore] public ulong Id;
 
     public static implicit operator ulong(GameObjectId id) => id.Id;
     public static unsafe implicit operator GameObjectId(ulong id) => *(GameObjectId*)&id;
