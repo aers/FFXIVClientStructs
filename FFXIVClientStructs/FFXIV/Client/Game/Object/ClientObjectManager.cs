@@ -10,12 +10,12 @@ public unsafe partial struct ClientObjectManager {
     public static partial ClientObjectManager* Instance();
 
     [FieldOffset(0x00)] public BattleChara* BattleCharaMemory;
-    [FieldOffset(0x08)] public uint CharacterSize;
+    [FieldOffset(0x08)] public uint BattleCharaSize;
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray249<BattleCharaEntry> _battleCharas;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public unsafe struct BattleCharaEntry {
-        [FieldOffset(0x00)] public BattleChara* Character;
+        [FieldOffset(0x00)] public BattleChara* BattleChara;
         [FieldOffset(0x08)] public ObjectKind ObjectKind;
 
         /// <remarks> Index in <see cref="BattleCharas"/>. </remarks>
