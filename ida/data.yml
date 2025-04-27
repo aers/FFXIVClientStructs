@@ -1005,10 +1005,13 @@ classes:
     vtbls:
       - ea: 0x142060BC0
   Client::Game::Network::PacketQue:
+    instances:
+      - ea: 0x14294CEA0
     vtbls:
       - ea: 0x142060BC8
         base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
     funcs:
+      0x140A3DBF0: Ctor
       0x140A3E6A0: Finalizer
       0x140A3E740: Initialize
       0x140A3F7B0: CreateQueuedBattleChara
