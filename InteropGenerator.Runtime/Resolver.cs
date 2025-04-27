@@ -31,7 +31,13 @@ public sealed class Resolver {
     }
 
     public static Resolver GetInstance => Instance.Value;
-
+    
+    public static unsafe T* FromBasePointer<T, TB>(TB *bp, nint baseVtblAddr, nint baseOffset) where T : unmanaged where TB : unmanaged  {
+        if (bp == null) return null;
+        if (*(nint*)bp != baseVtblAddr) return null;
+        return (T*)((nint)bp - baseOffset);
+    }
+    
     public void Setup(nint moduleCopyPointer = 0, string version = "", FileInfo? cacheFile = null) {
         if (_isSetup) return;
         var module = Process.GetCurrentProcess().MainModule;

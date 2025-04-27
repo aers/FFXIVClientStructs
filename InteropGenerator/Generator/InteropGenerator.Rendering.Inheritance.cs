@@ -51,11 +51,12 @@ public sealed partial class InteropGenerator {
 
         HashSet<string> alreadyWrittenParents = new();
         HashSet<string> alreadyWrittenBases = new();
+        Dictionary<string, int> alreadyWrittenOffsets = new();
 
         // inherited fields
         foreach ((StructInfo inheritedStruct, string path, int offset) in resolvedInheritanceOrder) {
             // write parent accessor if its directly inherited
-            if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.InheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)
+            if (structInfo.InheritedStructs.Any(inheritanceInfo => inheritanceInfo.FullInheritedTypeName == inheritedStruct.FullyQualifiedMetadataName)
                 && !alreadyWrittenParents.Contains(inheritedStruct.FullyQualifiedMetadataName)) {
                 string fieldName = inheritedStruct.Name;
                 if (inheritedStruct.Name == structInfo.Name)
@@ -75,6 +76,7 @@ public sealed partial class InteropGenerator {
                 writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {field.Type} {adjustedFieldName};");
             }
             alreadyWrittenBases.Add(inheritedStruct.FullyQualifiedMetadataName);
+            alreadyWrittenOffsets[inheritedStruct.FullyQualifiedMetadataName] = offset;
         }
 
         token.ThrowIfCancellationRequested();
@@ -102,7 +104,19 @@ public sealed partial class InteropGenerator {
         }
 
         token.ThrowIfCancellationRequested();
+        
+        foreach (InheritanceInfo ii in structInfo.ExtraBases()) {
+            if (!alreadyWrittenOffsets.TryGetValue(ii.FullInheritedTypeName, out int offset)) {
+                continue;
+            }
+            writer.WriteLine($"public static {structInfo.Name}* FromBasePointer({ii.FullInheritedTypeName}* bp)");
+            using (writer.WriteBlock()) {
+                writer.WriteLine($"return InteropGenerator.Runtime.Resolver.FromBasePointer<{structInfo.Name}, {ii.FullInheritedTypeName}>(bp, {structInfo.Name}.Addresses.Static{ii.InheritedTypeName}VirtualTable.Value, {offset});");
+            }
+        }
 
+        token.ThrowIfCancellationRequested();
+        
         // inherited public methods
         foreach ((StructInfo inheritedStruct, string path, _) in resolvedInheritanceOrder) {
             if (!inheritedStruct.ExtraInheritedStructInfo!.PublicMethods.IsEmpty)

@@ -45,19 +45,59 @@ public sealed partial class InteropGenerator {
         }
 
         using ImmutableArrayBuilder<InheritanceInfo> inheritanceInfoBuilder = new();
+
+        bool GetOffsets(AttributeData attributeData, int index, [NotNullWhen(true)] out ImmutableArray<ushort>? multipleOffsets) {
+            if (attributeData.ConstructorArguments[index].Kind == TypedConstantKind.Array && attributeData.TryGetMultiValueConstructorArgument(index, out multipleOffsets)) return true;
+            if (attributeData.TryGetConstructorArgument(index, out ushort? singleOffset)) {
+                multipleOffsets = [singleOffset.Value];
+                return true;
+            }
+            multipleOffsets = null;
+            return false;
+        }
+
         foreach (AttributeData attributeData in structSymbol.GetAttributes()) {
             if (attributeData.AttributeClass is not { } attributeSymbol) continue;
             if (!attributeSymbol.HasFullyQualifiedMetadataName(InteropTypeNames.InheritsAttribute)) continue;
-            if (attributeData.ConstructorArguments.Length != 1 ||
-                !attributeData.TryGetConstructorArgument(0, out int? parentOffset))
-                continue;
+
             if (attributeSymbol.TypeArguments.Length != 1) continue;
 
-            InheritanceInfo inheritanceInfo = new(
+            int? parentOffset = null;
+            SignatureInfo? signatureInfo = null;
+
+            if (attributeData.ConstructorArguments.Length == 1 && 
+                !attributeData.TryGetConstructorArgument(0, out parentOffset)) {
+                continue;
+            }
+
+            if (attributeData.ConstructorArguments.Length == 2) {
+                if (!attributeData.TryGetConstructorArgument(0, out string? signature)) {
+                    continue;
+                }
+                
+                if (!GetOffsets(attributeData, 1, out ImmutableArray<ushort>? multipleOffsets)) continue;
+                signatureInfo = new SignatureInfo(signature, multipleOffsets.Value);
+            }
+            
+            if (attributeData.ConstructorArguments.Length == 3) {
+
+                if (!attributeData.TryGetConstructorArgument(0, out parentOffset)) {
+                    continue;
+                }
+
+                if (!attributeData.TryGetConstructorArgument(1, out string? signature)) {
+                    continue;
+                }
+                if (!GetOffsets(attributeData, 2, out ImmutableArray<ushort>? multipleOffsets)) continue;
+                signatureInfo = new SignatureInfo(signature, multipleOffsets.Value);
+            }
+
+            inheritanceInfoBuilder.Add(new InheritanceInfo(
                 attributeSymbol.TypeArguments[0].GetNameWithContainingTypeAndNamespace(),
-                parentOffset.Value
-            );
-            inheritanceInfoBuilder.Add(inheritanceInfo);
+                attributeSymbol.TypeArguments[0].ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                parentOffset ?? 0,
+                signatureInfo
+            ));
         }
 
         // get containing types; our analyzer validates structs are contained in a proper hierarchy so not needed here

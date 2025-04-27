@@ -97,6 +97,9 @@ public sealed partial class InteropGenerator {
             if (structInfo.StaticVirtualTableSignature is not null) {
                 writer.WriteLine(GetAddressString(structInfo, "StaticVirtualTable", structInfo.StaticVirtualTableSignature));
             }
+            foreach (var ii in structInfo.ExtraBases()) {
+                writer.WriteLine(GetAddressString(structInfo, $"Static{ii.InheritedTypeName}VirtualTable", ii.StaticVirtualTableSignature!));
+            }
         }
     }
 
@@ -363,6 +366,10 @@ public sealed partial class InteropGenerator {
                     if (sInfo.StaticVirtualTableSignature is not null) {
                         writer.WriteLine(GetAddToResolverString(sInfo, "StaticVirtualTable"));
                     }
+                    // Additional baseclass static virtual tables
+                    foreach (InheritanceInfo ii in sInfo.ExtraBases()) {
+                        writer.WriteLine(GetAddToResolverString(sInfo, $"Static{ii.InheritedTypeName}VirtualTable"));
+                    }
                 }
             }
             writer.WriteLine("public static void Unregister()");
@@ -379,6 +386,10 @@ public sealed partial class InteropGenerator {
                     // static virtual table
                     if (sInfo.StaticVirtualTableSignature is not null) {
                         writer.WriteLine(GetRemoveFromResolverString(sInfo, "StaticVirtualTable"));
+                    }
+                    // Additional baseclass static virtual tables
+                    foreach (InheritanceInfo ii in sInfo.ExtraBases()) {
+                        writer.WriteLine(GetRemoveFromResolverString(sInfo, $"Static{ii.InheritedTypeName}VirtualTable"));
                     }
                 }
             }

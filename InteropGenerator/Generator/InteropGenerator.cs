@@ -46,7 +46,7 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
                 using ImmutableArrayBuilder<StructInfo> inheritedStructsBuilder = new();
 
                 foreach (InheritanceInfo inheritedStruct in targetStruct.InheritedStructs) {
-                    CollectInheritedStructs(inheritedStruct.InheritedTypeName, structsInherited, tempInheritanceMap, inheritedStructsBuilder);
+                    CollectInheritedStructs(inheritedStruct.FullInheritedTypeName, structsInherited, tempInheritanceMap, inheritedStructsBuilder);
                 }
 
                 structInheritanceGroupedBuilder.Add((targetStruct, inheritedStructsBuilder.ToImmutable()));
@@ -104,7 +104,7 @@ public sealed partial class InteropGenerator : IIncrementalGenerator {
         // recursively add child types
         if (targetInheritedStruct.InheritedStructs.Length != 0) {
             foreach (InheritanceInfo inheritanceInfo in targetInheritedStruct.InheritedStructs) {
-                CollectInheritedStructs(inheritanceInfo.InheritedTypeName, validInheritedTypes, processedInheritanceMap, inheritanceHierarchyBuilder);
+                CollectInheritedStructs(inheritanceInfo.FullInheritedTypeName, validInheritedTypes, processedInheritanceMap, inheritanceHierarchyBuilder);
             }
         }
 
