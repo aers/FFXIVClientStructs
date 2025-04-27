@@ -15,9 +15,8 @@ public unsafe partial struct StandObjectManager {
     [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray120<CharacterEntry> _characters;
     [FieldOffset(0x798), FixedSizeArray] internal FixedSizeArray20<Pointer<EventObject>> _eventObjects;
 
-    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public unsafe partial struct CharacterEntry {
+    public unsafe struct CharacterEntry {
         [FieldOffset(0x00)] public Character.Character* Character;
         [FieldOffset(0x08)] public ObjectKind ObjectKind; // ushort??
 

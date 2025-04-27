@@ -13,9 +13,8 @@ public unsafe partial struct ClientObjectManager {
     [FieldOffset(0x08)] public uint CharacterSize;
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray249<BattleCharaEntry> _battleCharas;
 
-    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public unsafe partial struct BattleCharaEntry {
+    public unsafe struct BattleCharaEntry {
         [FieldOffset(0x00)] public BattleChara* Character;
         [FieldOffset(0x08)] public ObjectKind ObjectKind;
 
