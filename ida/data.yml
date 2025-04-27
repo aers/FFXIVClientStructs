@@ -1005,10 +1005,13 @@ classes:
     vtbls:
       - ea: 0x142060BC0
   Client::Game::Network::PacketQue:
+    instances:
+      - ea: 0x14294CEA0
     vtbls:
       - ea: 0x142060BC8
         base: Client::Network::Protocol::Zone::PacketReceiverCallbackInterface
     funcs:
+      0x140A3DBF0: ctor
       0x140A3E6A0: Finalizer
       0x140A3E740: Initialize
       0x140A3F7B0: CreateQueuedBattleChara
@@ -1080,6 +1083,13 @@ classes:
       0x141622D50: SetObjectAt #(idx, object)
       0x141622D90: RemoveObjectAt
       0x14048CAC0: HasObjectAt
+  Client::Game::Object::StandObjectManager: # Lively ENpcs
+    instances:
+      - ea: 0x142965110
+    funcs:
+      0x14184C9E0: Initialize
+      0x14184CCD0: Finalizer
+      0x14184CE10: Update
   Client::Game::Character::CharacterManagerInterface: # todo: needs a better name, interface for CharacterManager and GroupManager
     vtbls:
       - ea: 0x142008348
