@@ -68,12 +68,19 @@ public struct EventHandlerObjective {
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]
-public struct EventId {
+public struct EventId : IEquatable<EventId>, IComparable<EventId> {
     [FieldOffset(0x00), CExportIgnore] public uint Id;
     [FieldOffset(0x00)] public ushort EntryId;
     [FieldOffset(0x02)] public EventHandlerContent ContentId;
     public static implicit operator uint(EventId id) => id.Id;
     public static implicit operator EventId(uint id) => new() { Id = id };
+
+    public bool Equals(EventId other) => Id == other.Id;
+    public override bool Equals(object? obj) => obj is EventId other && Equals(other);
+    public override int GetHashCode() => Id.GetHashCode();
+    public static bool operator ==(EventId left, EventId right) => left.Id == right.Id;
+    public static bool operator !=(EventId left, EventId right) => left.Id != right.Id;
+    public int CompareTo(EventId other) => Id.CompareTo(other);
 }
 
 public enum EventHandlerContent : ushort {
