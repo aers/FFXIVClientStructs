@@ -629,6 +629,8 @@ enums:
     "SaddleBag2": 4001
     "PremiumSaddleBag1": 4100
     "PremiumSaddleBag2": 4101
+    "Cosmopouch1": 5000
+    "Cosmopouch2": 5001
     "Invalid": 9999
     "RetainerPage1": 10000
     "RetainerPage2": 10001
@@ -4944,13 +4946,13 @@ structs:
     name: Occupied39
     offset: 39
   - type: byte
-    name: Crafting40
+    name: ExecutingCraftingAction
     offset: 40
   - type: byte
     name: PreparingToCraft
     offset: 41
   - type: byte
-    name: Gathering42
+    name: ExecutingGatheringAction
     offset: 42
   - type: byte
     name: Fishing
@@ -5130,7 +5132,7 @@ structs:
     name: Unknown101
     offset: 101
   - type: byte
-    name: Unknown102
+    name: PilotingMech
     offset: 102
   - type: byte
     name: Unknown103
@@ -7535,60 +7537,25 @@ structs:
   fields: []
   virtual_functions: []
   member_functions: []
-- type: Client::Game::Object::ClientObjectManager
-  name: ClientObjectManager
+- type: Client::Game::Object::ClientObjectManager::BattleCharaEntry
+  name: BattleCharaEntry
   namespace: Client.Game.Object
   union: False
-  fields: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 41 89 44 FC ??
-    return_type: unsigned int
-    name: CreateBattleCharacter
-    parameters:
-    - type: Client::Game::Object::ClientObjectManager*
-      name: this
-    - type: unsigned int
-      name: index
-    - type: byte
-      name: param
-  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 0F B7 EA
-    return_type: Client::Game::Object::GameObject*
-    name: GetObjectByIndex
-    parameters:
-    - type: Client::Game::Object::ClientObjectManager*
-      name: this
-    - type: unsigned __int16
-      name: id
-  - signature: E8 ?? ?? ?? ?? 48 8B 5E 68
-    return_type: unsigned int
-    name: GetIndexByObject
-    parameters:
-    - type: Client::Game::Object::ClientObjectManager*
-      name: this
-    - type: Client::Game::Object::GameObject*
-      name: character
-  - signature: E8 ?? ?? ?? ?? C6 43 49 00
-    return_type: void
-    name: DeleteObjectByIndex
-    parameters:
-    - type: Client::Game::Object::ClientObjectManager*
-      name: this
-    - type: unsigned __int16
-      name: id
-    - type: byte
-      name: param
-  - signature: E8 ?? ?? ?? ?? 8B F8 48 8B CB 83 F8 FF
-    return_type: unsigned int
-    name: CalculateNextAvailableIndex
-    parameters:
-    - type: Client::Game::Object::ClientObjectManager*
-      name: this
-  static_members:
-  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C7 43 60 FF FF FF FF
-    relative_follow_offsets:
-    - 3
-    is_pointer: False
-    return_type: Client::Game::Object::ClientObjectManager
+  size: 16
+  fields:
+  - type: Client::Game::Character::BattleChara*
+    name: BattleChara
+    offset: 0
+  - type: Client::Game::Object::ObjectKind
+    name: ObjectKind
+    offset: 8
+  - type: byte
+    name: Index
+    offset: 12
+  - type: unsigned __int16
+    name: MemoryIndex
+    offset: 14
+  member_functions: []
 - type: Client::Game::Object::GameObjectId
   name: GameObjectId
   namespace: Client.Game.Object
@@ -7672,6 +7639,25 @@ structs:
   - type: Client::Game::Object::HousingObjectType
     name: Type
     offset: 2
+  member_functions: []
+- type: Client::Game::Object::StandObjectManager::CharacterEntry
+  name: CharacterEntry
+  namespace: Client.Game.Object
+  union: False
+  size: 16
+  fields:
+  - type: Client::Game::Character::Character*
+    name: Character
+    offset: 0
+  - type: Client::Game::Object::ObjectKind
+    name: ObjectKind
+    offset: 8
+  - type: unsigned __int16
+    name: Index
+    offset: 12
+  - type: unsigned __int16
+    name: MemoryIndex
+    offset: 14
   member_functions: []
 - type: Client::Game::PlotDetail
   name: PlotDetail
@@ -9321,6 +9307,30 @@ structs:
   size: 104
   fields: []
   virtual_functions: []
+  member_functions: []
+- type: Client::Game::WKS::WKSModuleBase
+  name: WKSModuleBase
+  namespace: Client.Game.WKS
+  union: False
+  size: 8
+  fields: []
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Client::Game::WKS::WKSModuleBase*
+    parameters:
+    - type: Client::Game::WKS::WKSModuleBase*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ProcessPacket
+    offset: 16
+    return_type: byte
+    parameters:
+    - type: Client::Game::WKS::WKSModuleBase*
+      name: this
+    - type: byte*
+      name: packet
   member_functions: []
 - type: Client::Game::WeatherManager::ServerWeather
   name: ServerWeather
@@ -12090,7 +12100,7 @@ structs:
   static_members:
   - signature: 48 89 B3 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B
     relative_follow_offsets:
-    - 3
+    - 10
     is_pointer: True
     return_type: Client::System::Threading::ThreadManager
 - type: Client::System::Timer::ClientTime
@@ -19123,7 +19133,7 @@ structs:
   - type: unsigned __int16
     name: Key
     offset: 2
-  - type: byte
+  - type: unsigned int
     name: RowId
     offset: 4
   member_functions: []
@@ -22571,6 +22581,21 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::Game::WKS::WKSModuleBase*, Helper::IStaticMemorySpace::Default>
+  name: StdVector`2
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::Game::WKS::WKSModuleBase**
+    name: First
+    offset: 0
+  - type: Client::Game::WKS::WKSModuleBase**
+    name: Last
+    offset: 8
+  - type: Client::Game::WKS::WKSModuleBase**
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::Graphics::Kernel::PixelShader*, Helper::IStaticMemorySpace::Default>
   name: StdVector`2
   namespace: ''
@@ -25224,6 +25249,72 @@ structs:
     name: Unknown3
     offset: 60
   member_functions: []
+- type: Client::Game::Object::ClientObjectManager
+  name: ClientObjectManager
+  namespace: Client.Game.Object
+  union: False
+  size: 4000
+  fields:
+  - type: Client::Game::Character::BattleChara*
+    name: BattleCharaMemory
+    offset: 0
+  - type: unsigned int
+    name: BattleCharaSize
+    offset: 8
+  - type: Client::Game::Object::ClientObjectManager::BattleCharaEntry
+    name: BattleCharas
+    offset: 16
+    size: 249
+    is_string: False
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 89 44 FC ??
+    return_type: unsigned int
+    name: CreateBattleCharacter
+    parameters:
+    - type: Client::Game::Object::ClientObjectManager*
+      name: this
+    - type: unsigned int
+      name: index
+    - type: byte
+      name: param
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 0F B7 EA
+    return_type: Client::Game::Object::GameObject*
+    name: GetObjectByIndex
+    parameters:
+    - type: Client::Game::Object::ClientObjectManager*
+      name: this
+    - type: unsigned __int16
+      name: id
+  - signature: E8 ?? ?? ?? ?? 48 8B 5E 68
+    return_type: unsigned int
+    name: GetIndexByObject
+    parameters:
+    - type: Client::Game::Object::ClientObjectManager*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: character
+  - signature: E8 ?? ?? ?? ?? C6 43 49 00
+    return_type: void
+    name: DeleteObjectByIndex
+    parameters:
+    - type: Client::Game::Object::ClientObjectManager*
+      name: this
+    - type: unsigned __int16
+      name: id
+    - type: byte
+      name: param
+  - signature: E8 ?? ?? ?? ?? 8B F8 48 8B CB 83 F8 FF
+    return_type: unsigned int
+    name: CalculateNextAvailableIndex
+    parameters:
+    - type: Client::Game::Object::ClientObjectManager*
+      name: this
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C7 43 60 FF FF FF FF
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Object::ClientObjectManager
 - type: Client::Game::Object::GameObjectManager
   name: GameObjectManager
   namespace: Client.Game.Object
@@ -25258,6 +25349,41 @@ structs:
     base: true
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Object::StandObjectManager
+  name: StandObjectManager
+  namespace: Client.Game.Object
+  union: False
+  size: 2112
+  fields:
+  - type: Client::Game::Character::Character*
+    name: CharacterMemory
+    offset: 0
+  - type: Client::Game::Object::EventObject*
+    name: EventObjectMemory
+    offset: 8
+  - type: unsigned int
+    name: CharacterSize
+    offset: 16
+  - type: unsigned int
+    name: EventObjectSize
+    offset: 20
+  - type: Client::Game::Object::StandObjectManager::CharacterEntry
+    name: Characters
+    offset: 24
+    size: 120
+    is_string: False
+  - type: Client::Game::Object::EventObject*
+    name: EventObjects
+    offset: 1944
+    size: 20
+    is_string: False
+  member_functions: []
+  static_members:
+  - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 11
+    relative_follow_offsets:
+    - 3
+    is_pointer: False
+    return_type: Client::Game::Object::StandObjectManager
 - type: Client::Game::RetainerManager
   name: RetainerManager
   namespace: Client.Game
@@ -26211,71 +26337,95 @@ structs:
       name: this
     - type: byte
       name: newState
-- type: Client::Game::WKS::WKSManager
-  name: WKSManager
+- type: Client::Game::WKS::WKSResearch
+  name: WKSResearch
   namespace: Client.Game.WKS
   union: False
-  size: 3616
+  size: 128
   fields:
-  - type: Client::Game::Character::CharacterManagerInterface
-    name: CharacterManagerInterface
+  - type: Client::Game::WKS::WKSModuleBase
+    name: WKSModuleBase
     offset: 0
     base: true
   - type: unsigned __int16
-    name: TerritoryId
-    offset: 24
+    name: Analysis
+    offset: 8
+    size: 11
+    is_string: False
+  - type: byte
+    name: CurrentStages
+    offset: 96
+    size: 11
+    is_string: False
+  - type: byte
+    name: UnlockedStages
+    offset: 107
+    size: 11
+    is_string: False
   - type: unsigned __int16
-    name: DevGrade
-    offset: 74
-  - type: __int64
-    name: UnkStructDB0
-    offset: 3504
-  - type: __int64
-    name: UnkStructDB8
-    offset: 3512
-  - type: __int64
-    name: UnkStructDC0
-    offset: 3520
-  - type: __int64
-    name: UnkStructDC8
-    offset: 3528
-  - type: __int64
-    name: UnkStructDD0
-    offset: 3536
-  - type: __int64
-    name: UnkStructDD8
-    offset: 3544
-  - type: __int64
-    name: UnkStructDE0
-    offset: 3552
-  - type: __int64
-    name: UnkStructDE8
-    offset: 3560
-  - type: __int64
-    name: UnkStructDF0
-    offset: 3568
-  - type: __int64
-    name: UnkStructDF8
-    offset: 3576
-  - type: __int64
-    name: UnkStructE00
-    offset: 3584
+    name: RatePercentage
+    offset: 118
+  - type: byte
+    name: IsLoaded
+    offset: 120
   virtual_functions:
   - name: Dtor
-    offset: 40
-    return_type: void
+    offset: 0
+    return_type: Client::Game::WKS::WKSModuleBase*
     parameters:
-    - type: Client::Game::WKS::WKSManager*
+    - type: Client::Game::WKS::WKSResearch*
       name: this
     - type: byte
       name: a2
-  member_functions: []
-  static_members:
-  - signature: 48 8B 7C 24 ?? 48 89 35 ?? ?? ?? ??
-    relative_follow_offsets:
-    - 8
-    is_pointer: True
-    return_type: Client::Game::WKS::WKSManager
+  - name: ProcessPacket
+    offset: 16
+    return_type: byte
+    parameters:
+    - type: Client::Game::WKS::WKSResearch*
+      name: this
+    - type: byte*
+      name: a2
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 41 0F B6 D8 0F B6 FA 48 8B F1 E8 ?? ?? ?? ?? 80 78 1D 00 74 36
+    return_type: unsigned __int16
+    name: GetCurrentAnalysis
+    parameters:
+    - type: Client::Game::WKS::WKSResearch*
+      name: this
+    - type: byte
+      name: toolClass
+    - type: byte
+      name: type
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 41 0F B6 D8
+    return_type: unsigned __int16
+    name: GetNeededAnalysis
+    parameters:
+    - type: Client::Game::WKS::WKSResearch*
+      name: this
+    - type: byte
+      name: toolClass
+    - type: byte
+      name: type
+  - signature: E8 ?? ?? ?? ?? 49 C1 E6 04 48 8D BD ?? ?? ?? ??
+    return_type: unsigned __int16
+    name: GetMaxAnalysis
+    parameters:
+    - type: Client::Game::WKS::WKSResearch*
+      name: this
+    - type: byte
+      name: toolClass
+    - type: byte
+      name: type
+  - signature: E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 0F B6 4E FD
+    return_type: byte
+    name: IsTypeAvailable
+    parameters:
+    - type: Client::Game::WKS::WKSResearch*
+      name: this
+    - type: byte
+      name: toolClass
+    - type: byte
+      name: type
 - type: Client::Game::WeatherManager
   name: WeatherManager
   namespace: Client.Game
@@ -35942,7 +36092,7 @@ structs:
     base: true
   virtual_functions:
   - name: GetSegment
-    offset: 104
+    offset: 112
     return_type: __int64
     parameters:
     - type: Client::UI::Misc::UiSavePackModule*
@@ -36025,8 +36175,6 @@ structs:
       name: this
     - type: byte
       name: a2
-  - name: GetSegment
-    offset: 112
   member_functions: []
 - type: Client::UI::Misc::UserFileManager
   name: UserFileManager
@@ -39820,6 +39968,15 @@ structs:
     name: WithOps
     offset: 0
   member_functions: []
+- type: StdVector<Client::Game::WKS::WKSModuleBase*>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: StdVector<Client::Game::WKS::WKSModuleBase*, Helper::IStaticMemorySpace::Default>
+    name: WithOps
+    offset: 0
+  member_functions: []
 - type: StdVector<Client::Graphics::Kernel::PixelShader*>
   name: StdVector`1
   namespace: ''
@@ -41493,23 +41650,19 @@ structs:
     - type: Client::Game::InventoryItem::ItemFlags
       name: flags
   - name: IsHighQuality
-    offset: 128
+    offset: 144
     return_type: byte
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
   - name: SetIsHighQuality
-    offset: 136
+    offset: 152
     return_type: void
     parameters:
     - type: Client::Game::InventoryItem*
       name: this
     - type: byte
       name: isHighQuality
-  - name: IsHighQuality
-    offset: 144
-  - name: SetIsHighQuality
-    offset: 152
   - name: IsHighQuality2
     offset: 160
   - name: SetIsHighQuality2
@@ -54261,6 +54414,12 @@ structs:
     name: GameObject
     offset: 0
     base: true
+  - type: Component::Exd::Sheets::EObj*
+    name: EObjRowPtr
+    offset: 400
+  - type: Component::Exd::Sheets::ExportedSG*
+    name: ExportedSGRowPtr
+    offset: 408
   virtual_functions:
   - name: GetGameObjectId
     offset: 8
@@ -54985,6 +55144,80 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::UI::Telepo
+- type: Client::Game::WKS::WKSManager
+  name: WKSManager
+  namespace: Client.Game.WKS
+  union: False
+  size: 3616
+  fields:
+  - type: Client::Game::Character::CharacterManagerInterface
+    name: CharacterManagerInterface
+    offset: 0
+    base: true
+  - type: unsigned __int16
+    name: TerritoryId
+    offset: 24
+  - type: unsigned __int16
+    name: DevGrade
+    offset: 74
+  - type: unsigned __int16
+    name: CurrentMissionUnitRowId
+    offset: 3168
+  - type: unsigned int
+    name: FishingBait
+    offset: 3228
+  - type: __int64
+    name: UnkStructDB0
+    offset: 3504
+  - type: __int64
+    name: UnkStructDB8
+    offset: 3512
+  - type: __int64
+    name: UnkStructDC0
+    offset: 3520
+  - type: __int64
+    name: UnkStructDC8
+    offset: 3528
+  - type: __int64
+    name: UnkStructDD0
+    offset: 3536
+  - type: __int64
+    name: UnkStructDD8
+    offset: 3544
+  - type: __int64
+    name: UnkStructDE0
+    offset: 3552
+  - type: __int64
+    name: UnkStructDE8
+    offset: 3560
+  - type: __int64
+    name: UnkStructDF0
+    offset: 3568
+  - type: Client::Game::WKS::WKSResearch*
+    name: Research
+    offset: 3576
+  - type: __int64
+    name: UnkStructE00
+    offset: 3584
+  - type: StdVector<Client::Game::WKS::WKSModuleBase*>
+    name: Modules
+    offset: 3592
+  virtual_functions:
+  - name: Dtor
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::Game::WKS::WKSManager*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
+  static_members:
+  - signature: 48 8B 7C 24 ?? 48 89 35 ?? ?? ?? ??
+    relative_follow_offsets:
+    - 8
+    is_pointer: True
+    return_type: Client::Game::WKS::WKSManager
 - type: Client::Graphics::Render::Camera
   name: Camera
   namespace: Client.Graphics.Render
@@ -61087,6 +61320,9 @@ structs:
   - type: Client::System::String::Utf8String
     name: CopyBufferFiltered
     offset: 768
+  - type: unsigned int
+    name: CompletionDepth
+    offset: 3056
   virtual_functions: []
   member_functions: []
 - type: Component::GUI::AtkUldComponentDataNumericInput
@@ -71637,7 +71873,23 @@ structs:
   virtual_functions:
   - name: Dtor
     offset: 0
-  member_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8D 05 ?? ?? ?? ?? 48 8B F1 48 89 01 41 0F B6 F8
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::Completion::CategoryData*
+      name: this
+    - type: byte
+      name: group
+    - type: byte
+      name: sheetNameIndex
+  - signature: 40 57 48 8B 79 28
+    return_type: void
+    name: SortEntries
+    parameters:
+    - type: Component::Completion::CategoryData*
+      name: this
 - type: Component::GUI::AtkAddonControl
   name: AtkAddonControl
   namespace: Component.GUI
@@ -72676,7 +72928,7 @@ structs:
     - type: Client::Game::Event::EventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::EventHandler*
@@ -72684,7 +72936,7 @@ structs:
     - type: Client::System::String::Utf8String*
       name: outTitle
   - name: GetDescription
-    offset: 2016
+    offset: 2024
     return_type: void
     parameters:
     - type: Client::Game::Event::EventHandler*
@@ -72692,7 +72944,7 @@ structs:
     - type: Client::System::String::Utf8String*
       name: outDescription
   - name: GetReliefText
-    offset: 2024
+    offset: 2032
     return_type: void
     parameters:
     - type: Client::Game::Event::EventHandler*
@@ -72700,7 +72952,7 @@ structs:
     - type: Client::System::String::Utf8String*
       name: outReliefText
   - name: GetTimeRemaining
-    offset: 2032
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::EventHandler*
@@ -72708,25 +72960,25 @@ structs:
     - type: int
       name: currentTimestamp
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::EventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::EventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::EventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::EventHandler*
@@ -72738,11 +72990,11 @@ structs:
   - name: IsUnlocked
     offset: 56
   - name: GetIconId
-    offset: 1768
+    offset: 1776
   - name: GetScriptVersion
-    offset: 1960
+    offset: 1968
   - name: Initialize
-    offset: 2144
+    offset: 2152
   member_functions: []
 - type: Client::Game::Event::EventSceneModule
   name: EventSceneModule
@@ -74123,12 +74375,14 @@ structs:
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 83 F8 06
     return_type: void
-    name: OpenRecipeByItemId
+    name: SearchRecipeByItemId
     parameters:
     - type: Client::UI::Agent::AgentRecipeNote*
       name: this
     - type: unsigned int
       name: itemId
+    - type: unsigned int
+      name: openerAddonId
   - signature: 48 89 5C 24 ?? 57 48 83 EC 30 83 B9 ?? ?? ?? ?? ?? 8B FA 48 8B D9 0F 85 ?? ?? ?? ?? 83 B9 ?? ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 83 B9 ?? ?? ?? ?? ??
     return_type: void
     name: OpenRecipeByRecipeIdInternal
@@ -75547,6 +75801,16 @@ structs:
   - type: Client::Game::Event::CraftFlags
     name: CraftFlags
     offset: 1136
+  - type: unsigned __int16
+    name: WKSClassLevels
+    offset: 1162
+    size: 2
+    is_string: False
+  - type: byte
+    name: WKSClassJobs
+    offset: 1166
+    size: 2
+    is_string: False
   virtual_functions:
   - name: CancelInteraction
     offset: 1232
@@ -75555,7 +75819,7 @@ structs:
     - type: Client::Game::Event::CraftEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::CraftEventHandler*
@@ -75563,14 +75827,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::CraftEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -75578,8 +75834,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::CraftEventHandler*
@@ -75587,25 +75851,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::CraftEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::CraftEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::CraftEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::CraftEventHandler*
@@ -75629,7 +75893,7 @@ structs:
     - type: Client::Game::Event::GatheringEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::GatheringEventHandler*
@@ -75637,14 +75901,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::GatheringEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -75652,8 +75908,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::GatheringEventHandler*
@@ -75661,25 +75925,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::GatheringEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::GatheringEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::GatheringEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::GatheringEventHandler*
@@ -79163,7 +79427,7 @@ structs:
     - type: Client::Game::Event::GatheringPointEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::GatheringPointEventHandler*
@@ -79171,14 +79435,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::GatheringPointEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -79186,8 +79442,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::GatheringPointEventHandler*
@@ -79195,25 +79459,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::GatheringPointEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::GatheringPointEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::GatheringPointEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::GatheringPointEventHandler*
@@ -80669,7 +80933,7 @@ structs:
     - type: Client::Game::Event::HwdDevEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::HwdDevEventHandler*
@@ -80677,14 +80941,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::HwdDevEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -80692,8 +80948,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::HwdDevEventHandler*
@@ -80701,25 +80965,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::HwdDevEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::HwdDevEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::HwdDevEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::HwdDevEventHandler*
@@ -83953,7 +84217,7 @@ structs:
     - type: Client::Game::Event::ShopEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::ShopEventHandler*
@@ -83961,14 +84225,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::ShopEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -83976,8 +84232,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::ShopEventHandler*
@@ -83985,25 +84249,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::ShopEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::ShopEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::ShopEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::ShopEventHandler*
@@ -128086,65 +128350,6 @@ structs:
     name: th
     offset: 0
   member_functions: []
-- type: Component::Completion::CompletionModule
-  name: CompletionModule
-  namespace: Component.Completion
-  union: False
-  size: 888
-  fields:
-  - type: Component::Completion::CompletionModuleInterface
-    name: CompletionModuleInterface
-    offset: 0
-    base: true
-  - type: Component::Text::TextModuleInterface::FixedSheetInterface
-    name: FixedSheetInterface
-    offset: 8
-    base: true
-  - type: Component::Excel::ExcelLanguageEvent
-    name: ExcelLanguageEvent
-    offset: 16
-    base: true
-  - type: Component::Excel::ExcelModuleInterface*
-    name: ExcelModuleInterface
-    offset: 24
-  - type: Client::UI::Misc::RaptureTextModule*
-    name: RaptureTextModule
-    offset: 32
-  - type: StdVector<Component::Completion::CategoryData*>
-    name: CategoryData
-    offset: 48
-  - type: StdVector<char*>
-    name: CategoryNames
-    offset: 72
-  - type: StdVector<byte>
-    name: Unk78
-    offset: 120
-  - type: Client::System::String::Utf8String
-    name: UnkD0
-    offset: 208
-  - type: Client::System::String::Utf8String
-    name: Unk138
-    offset: 312
-  - type: Client::System::String::Utf8String
-    name: Unk1A0
-    offset: 416
-  - type: Client::System::String::Utf8String
-    name: Unk208
-    offset: 520
-  - type: StdVector<Client::System::String::Utf8String>
-    name: CompanionNames
-    offset: 632
-  - type: StdVector<Component::Completion::CompletionModule::SheetName>
-    name: SheetNames
-    offset: 656
-  - type: Client::System::String::Utf8String
-    name: Unk2A8
-    offset: 680
-  - type: Client::System::String::Utf8String
-    name: Unk310
-    offset: 784
-  virtual_functions: []
-  member_functions: []
 - type: Client::Game::MJI::MJIPastureHandler
   name: MJIPastureHandler
   namespace: Client.Game.MJI
@@ -128184,7 +128389,7 @@ structs:
     - type: Client::Game::MJI::MJIPastureHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
@@ -128192,14 +128397,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::MJI::MJIPastureHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -128207,8 +128404,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
@@ -128216,25 +128421,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::MJI::MJIPastureHandler*
@@ -133191,7 +133396,7 @@ structs:
     - type: Client::Game::Event::LuaEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::LuaEventHandler*
@@ -133199,14 +133404,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::LuaEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -133214,8 +133411,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::LuaEventHandler*
@@ -133223,25 +133428,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::LuaEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::LuaEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::LuaEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::LuaEventHandler*
@@ -135803,6 +136008,118 @@ structs:
     parameters:
     - type: Client::UI::Shell::RaptureShellModule*
       name: this
+- type: Component::Completion::CompletionModule
+  name: CompletionModule
+  namespace: Component.Completion
+  union: False
+  size: 888
+  fields:
+  - type: Component::Completion::CompletionModuleInterface
+    name: CompletionModuleInterface
+    offset: 0
+    base: true
+  - type: Component::Text::TextModuleInterface::FixedSheetInterface
+    name: FixedSheetInterface
+    offset: 8
+    base: true
+  - type: Component::Excel::ExcelLanguageEvent
+    name: ExcelLanguageEvent
+    offset: 16
+    base: true
+  - type: Component::Excel::ExcelModuleInterface*
+    name: ExcelModuleInterface
+    offset: 24
+  - type: Client::UI::Misc::RaptureTextModule*
+    name: RaptureTextModule
+    offset: 32
+  - type: StdVector<Component::Completion::CategoryData*>
+    name: CategoryData
+    offset: 48
+  - type: StdVector<char*>
+    name: CategoryNames
+    offset: 72
+  - type: StdVector<Component::Completion::CategoryData::CompletionDataStruct>
+    name: Unk60
+    offset: 96
+  - type: StdVector<byte>
+    name: Unk78
+    offset: 120
+  - type: Client::System::String::Utf8String
+    name: UnkD0
+    offset: 208
+  - type: Client::System::String::Utf8String
+    name: Unk138
+    offset: 312
+  - type: Client::System::String::Utf8String
+    name: Unk1A0
+    offset: 416
+  - type: Client::System::String::Utf8String
+    name: Unk208
+    offset: 520
+  - type: StdVector<Client::System::String::Utf8String>
+    name: CompanionNames
+    offset: 632
+  - type: StdVector<Component::Completion::CompletionModule::SheetName>
+    name: SheetNames
+    offset: 656
+  - type: Client::System::String::Utf8String
+    name: Unk2A8
+    offset: 680
+  - type: Client::System::String::Utf8String
+    name: Unk310
+    offset: 784
+  virtual_functions:
+  - name: GetSelection
+    offset: 40
+    return_type: int
+    parameters:
+    - type: Component::Completion::CompletionModule*
+      name: this
+    - type: Component::Completion::CategoryData::CompletionDataStruct*
+      name: dataStructs
+    - type: int
+      name: index
+    - type: Client::System::String::Utf8String*
+      name: outputString
+    - type: Client::System::String::Utf8String*
+      name: outputDisplayString
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 1B 41 FF C7
+    return_type: void
+    name: AddCompletionEntry
+    parameters:
+    - type: Component::Completion::CompletionModule*
+      name: this
+    - type: __int64
+      name: groupIndex
+    - type: unsigned int
+      name: rowId
+    - type: char*
+      name: itemText
+    - type: char*
+      name: groupTitle
+    - type: unsigned __int16
+      name: itemKey
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 3C 23
+    return_type: Component::Completion::CategoryData*
+    name: AddCategoryData
+    parameters:
+    - type: Component::Completion::CompletionModule*
+      name: this
+    - type: __int64
+      name: groupIndex
+    - type: char*
+      name: itemText
+    - type: char*
+      name: groupTitle
+    - type: Component::Completion::CategoryData*
+      name: categoryData
+  - signature: E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 6C 24 ??
+    return_type: void
+    name: ClearCompletionData
+    parameters:
+    - type: Component::Completion::CompletionModule*
+      name: this
 - type: Client::Game::Event::AetheryteEventHandler
   name: AetheryteEventHandler
   namespace: Client.Game.Event
@@ -135821,7 +136138,7 @@ structs:
     - type: Client::Game::Event::AetheryteEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::AetheryteEventHandler*
@@ -135829,14 +136146,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::AetheryteEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -135844,8 +136153,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::AetheryteEventHandler*
@@ -135853,25 +136170,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::AetheryteEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::AetheryteEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::AetheryteEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::AetheryteEventHandler*
@@ -135895,7 +136212,7 @@ structs:
     - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::CustomTalkEventHandler*
@@ -135903,14 +136220,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::CustomTalkEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -135918,8 +136227,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::CustomTalkEventHandler*
@@ -135927,25 +136244,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::CustomTalkEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::CustomTalkEventHandler*
@@ -136059,7 +136376,7 @@ structs:
     - type: Client::Game::Event::QuestEventHandler*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::QuestEventHandler*
@@ -136067,14 +136384,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::QuestEventHandler*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -136082,8 +136391,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::QuestEventHandler*
@@ -136091,25 +136408,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::QuestEventHandler*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::QuestEventHandler*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::QuestEventHandler*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::QuestEventHandler*
@@ -146685,7 +147002,7 @@ structs:
     - type: Client::Game::Event::Director*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::Director*
@@ -146693,14 +147010,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::Director*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -146708,8 +147017,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::Director*
@@ -146717,25 +147034,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::Director*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::Director*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::Director*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::Director*
@@ -149071,7 +149388,7 @@ structs:
     - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Event::GoldSaucerDirector*
@@ -149079,14 +149396,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Event::GoldSaucerDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -149094,8 +149403,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Event::GoldSaucerDirector*
@@ -149103,25 +149420,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Event::GoldSaucerDirector*
@@ -149164,7 +149481,7 @@ structs:
     - type: Client::Game::Fate::FateDirector*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::Fate::FateDirector*
@@ -149172,14 +149489,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::Fate::FateDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -149187,8 +149496,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::Fate::FateDirector*
@@ -149196,25 +149513,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::Fate::FateDirector*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::Fate::FateDirector*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::Fate::FateDirector*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::Fate::FateDirector*
@@ -149599,7 +149916,7 @@ structs:
     - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
@@ -149607,14 +149924,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::GoldSaucer::GFateDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -149622,8 +149931,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
@@ -149631,25 +149948,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
@@ -149700,7 +150017,7 @@ structs:
     - type: Client::Game::InstanceContent::ContentDirector*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
@@ -149708,14 +150025,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::ContentDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -149723,8 +150032,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
@@ -149732,25 +150049,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
@@ -150285,7 +150602,7 @@ structs:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
@@ -150293,14 +150610,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -150308,8 +150617,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
@@ -150317,25 +150634,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
@@ -150378,7 +150695,7 @@ structs:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
@@ -150386,14 +150703,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentDirector*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -150401,8 +150710,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
@@ -150410,25 +150727,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
@@ -150865,7 +151182,7 @@ structs:
     - type: Client::Game::InstanceContent::PublicContentEureka*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
@@ -150873,14 +151190,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentEureka*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -150888,8 +151197,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
@@ -150897,25 +151214,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
@@ -151156,7 +151473,7 @@ structs:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
@@ -151164,14 +151481,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -151179,8 +151488,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
@@ -151188,25 +151505,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
@@ -151323,7 +151640,7 @@ structs:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
@@ -151331,14 +151648,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -151346,8 +151655,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
@@ -151355,25 +151672,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
@@ -151422,7 +151739,7 @@ structs:
     - type: Client::Game::InstanceContent::PublicContentBozja*
       name: this
   - name: GetTitle
-    offset: 1592
+    offset: 1600
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
@@ -151430,14 +151747,6 @@ structs:
     - type: Client::System::String::Utf8String*
       name: a2
   - name: GetDescription
-    offset: 2016
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
     offset: 2024
     return_type: void
     parameters:
@@ -151445,8 +151754,16 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
-  - name: GetTimeRemaining
+  - name: GetReliefText
     offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
@@ -151454,25 +151771,25 @@ structs:
     - type: int
       name: a2
   - name: HasTimer
-    offset: 2040
+    offset: 2048
     return_type: byte
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
       name: this
   - name: GetEventItemId
-    offset: 2056
+    offset: 2064
     return_type: unsigned int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
       name: this
   - name: GetObjectives
-    offset: 2080
+    offset: 2088
     return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
       name: this
   - name: GetRecommendedLevel
-    offset: 2112
+    offset: 2120
     return_type: int
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
