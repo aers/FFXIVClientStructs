@@ -21391,7 +21391,7 @@ structs:
     offset: 25
   - type: Client::Game::Object::GameObject*
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<byte, byte, Helper::DefaultKeyExtractor<byte>>
   name: Node
@@ -38764,7 +38764,7 @@ structs:
     offset: 25
   - type: StdPair<Client::LayoutEngine::InstanceType, StdMap<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>, Component::GUI::AtkResNode*, Helper::PairKeyExtractor<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>>
   name: Node
@@ -38788,7 +38788,7 @@ structs:
     offset: 25
   - type: StdPair<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<char*, __int16>, char*, Helper::PairKeyExtractor<char*, __int16>>
   name: Node
@@ -38812,7 +38812,7 @@ structs:
     offset: 25
   - type: StdPair<char*, __int16>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>, unsigned __int16, Helper::PairKeyExtractor<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>>
   name: Node
@@ -38836,7 +38836,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int16, Client::LayoutEngine::Layer::LayerManager*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::Game::Event::LuaActor*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::Game::Event::LuaActor*>>
   name: Node
@@ -38860,7 +38860,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int64, Client::Game::Event::LuaActor*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>>
   name: Node
@@ -38884,7 +38884,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int64, Client::LayoutEngine::ILayoutInstance*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::LayoutEngine::LayoutManager*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::LayoutEngine::LayoutManager*>>
   name: Node
@@ -38908,7 +38908,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int64, Client::LayoutEngine::LayoutManager*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>>
   name: Node
@@ -38932,7 +38932,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int64, Client::UI::Misc::ItemFinderRetainerInventory*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>>
   name: Node
@@ -38956,7 +38956,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int64, Client::UI::Misc::ItemOrderModuleSorter*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, byte*>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, byte*>>
   name: Node
@@ -38980,7 +38980,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int64, byte*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int64, int>, unsigned __int64, Helper::PairKeyExtractor<unsigned __int64, int>>
   name: Node
@@ -39004,7 +39004,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int64, int>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Animation::Mapper::hkaSkeletonMapper*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Animation::Mapper::hkaSkeletonMapper*>>
   name: Node
@@ -39028,7 +39028,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Animation::Mapper::hkaSkeletonMapper*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::EventHandler*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::EventHandler*>>
   name: Node
@@ -39052,7 +39052,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::Game::Event::EventHandler*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::ILayoutInstance*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::ILayoutInstance*>>
   name: Node
@@ -39076,7 +39076,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::LayoutEngine::ILayoutInstance*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::LayoutManager::Filter*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::LayoutManager::Filter*>>
   name: Node
@@ -39100,7 +39100,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::LayoutEngine::LayoutManager::Filter*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::RefCountedString*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::RefCountedString*>>
   name: Node
@@ -39124,7 +39124,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::LayoutEngine::RefCountedString*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::LayoutEngine::Terrain::TerrainManager*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::LayoutEngine::Terrain::TerrainManager*>>
   name: Node
@@ -39148,7 +39148,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::LayoutEngine::Terrain::TerrainManager*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>
   name: Node
@@ -39172,7 +39172,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Component::Shell::ShellCommandInterface*>, unsigned int, Helper::PairKeyExtractor<unsigned int, Component::Shell::ShellCommandInterface*>>
   name: Node
@@ -39196,7 +39196,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Component::Shell::ShellCommandInterface*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>, unsigned int, Helper::PairKeyExtractor<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>>
   name: Node
@@ -39220,7 +39220,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, StdMap<unsigned int, Client::System::Resource::Handle::ResourceHandle*>*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, byte>, unsigned int, Helper::PairKeyExtractor<unsigned int, byte>>
   name: Node
@@ -39244,7 +39244,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, byte>
     name: _Myval
-    offset: 26
+    offset: 28
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, int>, unsigned int, Helper::PairKeyExtractor<unsigned int, int>>
   name: Node
@@ -39268,7 +39268,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, int>
     name: _Myval
-    offset: 26
+    offset: 28
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, unsigned int>, unsigned int, Helper::PairKeyExtractor<unsigned int, unsigned int>>
   name: Node
@@ -39292,7 +39292,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, unsigned int>
     name: _Myval
-    offset: 26
+    offset: 28
   member_functions: []
 - type: Shader::CameraLight
   name: CameraLight
@@ -52847,7 +52847,7 @@ structs:
     offset: 25
   - type: StdPair<Client::System::String::Utf8String, Component::Shell::DebugCommandInterface*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, __int64>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, __int64>>
   name: Node
@@ -52871,7 +52871,7 @@ structs:
     offset: 25
   - type: StdPair<Client::System::String::Utf8String, __int64>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<Client::System::String::Utf8String, char*>, Client::System::String::Utf8String, Helper::PairKeyExtractor<Client::System::String::Utf8String, char*>>
   name: Node
@@ -52895,7 +52895,7 @@ structs:
     offset: 25
   - type: StdPair<Client::System::String::Utf8String, char*>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned __int16, Client::UI::Misc::WorldHelper::World>, unsigned __int16, Helper::PairKeyExtractor<unsigned __int16, Client::UI::Misc::WorldHelper::World>>
   name: Node
@@ -52943,7 +52943,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned __int16, StdPair<__int64, __int64>>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>>
   name: Node
@@ -52967,7 +52967,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::Game::CurrencyManager::ContentCurrencyItem>
     name: _Myval
-    offset: 26
+    offset: 28
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::CurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::CurrencyItem>>
   name: Node
@@ -52991,7 +52991,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::Game::CurrencyManager::CurrencyItem>
     name: _Myval
-    offset: 26
+    offset: 28
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>>
   name: Node
@@ -53015,7 +53015,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::Game::CurrencyManager::SpecialCurrencyItem>
     name: _Myval
-    offset: 26
+    offset: 28
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, StdPair<unsigned int, unsigned int>>, unsigned int, Helper::PairKeyExtractor<unsigned int, StdPair<unsigned int, unsigned int>>>
   name: Node
@@ -53039,7 +53039,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, StdPair<unsigned int, unsigned int>>
     name: _Myval
-    offset: 26
+    offset: 28
   member_functions: []
 - type: Shader::CustomizeParameter
   name: CustomizeParameter
@@ -61588,7 +61588,7 @@ structs:
     offset: 25
   - type: StdPair<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<int, Client::System::Scheduler::Resource::SchedulerResource>, int, Helper::PairKeyExtractor<int, Client::System::Scheduler::Resource::SchedulerResource>>
   name: Node
@@ -61612,7 +61612,7 @@ structs:
     offset: 25
   - type: StdPair<int, Client::System::Scheduler::Resource::SchedulerResource>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>>
   name: Node
@@ -61636,7 +61636,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::Game::Event::LuaEventHandlerLuaText>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Shader::CameraParameter
   name: CameraParameter
@@ -68925,7 +68925,7 @@ structs:
     offset: 25
   - type: StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>
     name: _Myval
-    offset: 26
+    offset: 32
   member_functions: []
 - type: Animation::Playback::Control::hkaAnimationControl
   name: hkaAnimationControl
@@ -75682,7 +75682,7 @@ structs:
     offset: 25
   - type: StdPair<Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Client::LayoutEngine::AnalyticShapeData>
     name: _Myval
-    offset: 26
+    offset: 28
   member_functions: []
 - type: Animation::Deform::Skinning::hkaMeshBinding
   name: hkaMeshBinding
