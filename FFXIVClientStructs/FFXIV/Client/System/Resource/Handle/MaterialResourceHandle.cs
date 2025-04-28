@@ -204,6 +204,7 @@ public unsafe partial struct MaterialResourceHandle {
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 04 3E")]
     public partial Texture* PrepareColorTable(byte stain0Id, byte stain1Id); // aka PrepareColorSet
 
+    /// <param name="stainChannel"> 0 or 1. With the current MTRL file format, values from 0 to 3 make sense. </param>
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B FB EB 07")]
-    public partial void ReadStainingTemplate(Half* colorTable, byte stainId, byte* a4);
+    public partial void ReadStainingTemplate(ushort* stainTable, byte stainId, Half* colorTable, uint stainChannel);
 }
