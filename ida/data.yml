@@ -137,8 +137,6 @@ functions:
   0x1404D9640: LoadCharacterVfx
   0x1405551C0: GetActionTimelineKey
   0x1405551F0: GetWeaponTimelineKey
-  0x140561510: PrepareColorSet
-  0x140561F40: ReadStainingTemplate
   0x1405A2A50: StartSpursJobEntityWorkerThread
   0x1405FEC10: RemoveAtkEventFromList # (AtkEvent**, AtkEvent*) Finds and removes param2 from the param1 list
   0x14062DC70: GetScaleListEntryFromScale
@@ -4598,6 +4596,8 @@ classes:
       0x1401EE1F0: ctor
       0x1401EEC00: LoadTexFiles
       0x1401EEA50: LoadShpkFiles
+      0x140561510: PrepareColorTable
+      0x140561F40: ReadStainingTemplate
   Client::System::Resource::Handle::MaterialResourceHandleFactory:
     vtbls:
       - ea: 0x141FFD9F0
