@@ -243,14 +243,11 @@ public static class FieldInfoExtensions {
         var fields = declaring.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         var offset = 0;
         foreach (var field in fields) {
+            var fieldPack = field.FieldType.PackSize();
             if (pack != 0) {
-                var actualPack = Math.Min(pack, field.FieldType.PackSize());
-                offset = (offset + actualPack - 1) / actualPack * actualPack;
+                fieldPack = Math.Min(pack, field.FieldType.PackSize());
             }
-            if (field.FieldType.IsStruct()) {
-                var firstField = field.FieldType.PackSize();
-                offset = (offset + firstField - 1) / firstField * firstField;
-            }
+            offset = (offset + fieldPack - 1) / fieldPack * fieldPack;
             if (field == info) {
                 return offset;
             }
