@@ -247,6 +247,10 @@ public static class FieldInfoExtensions {
                 var actualPack = Math.Min(pack, field.FieldType.PackSize());
                 offset = (offset + actualPack - 1) / actualPack * actualPack;
             }
+            if (field.FieldType.IsStruct()) {
+                var firstField = field.FieldType.PackSize();
+                offset = (offset + firstField - 1) / firstField * firstField;
+            }
             if (field == info) {
                 return offset;
             }
