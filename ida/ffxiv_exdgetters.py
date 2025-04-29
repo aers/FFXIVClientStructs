@@ -198,12 +198,14 @@ if api is None:
                             ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
             def create_enum_struct(self, name, values, width = 0):
+                # type: (str, dict[int, str], int) -> None
                 enum_id = self.create_enum(name)
                 enum_id = self.get_enum_id(name)
+                sheet_name = name.split("::")[-1]
                 self.set_enum_width(enum_id, width)
                 for key in values:
-                    self.remove_enum_member(enum_id, key, values[key])
-                    self.add_enum_member(enum_id, values[key], key)
+                    self.remove_enum_member(enum_id, key, f"{sheet_name}_{values[key]}")
+                    self.add_enum_member(enum_id, f"{sheet_name}_{values[key]}", key)
 
             def create_struct(self, name, fields):
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
