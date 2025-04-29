@@ -13,18 +13,13 @@ from abc import abstractmethod
 
 class BaseApi:
     @abstractmethod
-    def create_enum_struct(self, name, values):
-        # type: (str, dict[str, int]) -> None
+    def create_enum_struct(self, name, values, width=0):
+        # type: (str, dict[int, str], int) -> None
         pass
 
     @abstractmethod
     def create_struct(self, name, fields):
         # type: (str, dict[str, str]) -> None
-        pass
-
-    @abstractmethod
-    def parse_name(self, name):
-        # type: (str) -> str
         pass
 
     @abstractmethod
@@ -202,9 +197,12 @@ if api is None:
 
                             ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
-            def create_enum_struct(self, name, values):
+            def create_enum_struct(self, name, values, width = 0):
                 enum_id = self.create_enum(name)
+                enum_id = self.get_enum_id(name)
+                self.set_enum_width(enum_id, width)
                 for key in values:
+                    self.remove_enum_member(enum_id, key, values[key])
                     self.add_enum_member(enum_id, values[key], key)
 
             def create_struct(self, name, fields):
@@ -228,9 +226,6 @@ if api is None:
                         struct_type, meminfo, 0, self.get_tinfo_from_type(type), 0
                     )
                 idaapi.end_type_updating(idaapi.UTP_STRUCT)
-
-            def parse_name(self, name):
-                return name
 
             def set_func_name(self, ea, name, cmt):
                 ida_name.set_name(ea, name)
@@ -261,16 +256,12 @@ if api is None:
     else:
         # noinspection PyUnresolvedReferences
         class GhidraApi(BaseApi):
-            def create_enum_struct(self, name, values):
-                # type: (str, dict[str, int]) -> None
+            def create_enum_struct(self, name, values, width = 0):
+                # type: (str, dict[str, int], int) -> None
                 pass
 
             def create_struct(self, name, fields):
                 # type: (str, dict[str, str]) -> None
-                pass
-
-            def parse_name(self, name):
-                # type: (str) -> str
                 pass
 
             def get_next_func(self, ea, pattern, flag):
@@ -322,10 +313,10 @@ exd_func_patterns = {
 }
 
 exd_map = ExcelListFile(game_data.get_file(ParsedFileName("exd/root.exl"))).dict
-exd_struct_map = {}
-exd_headers = {}
+exd_struct_map: dict[str, str] = {}
+exd_headers: tuple[dict[int, tuple[str, str]], dict[str, dict[int, str]], int] = {}
 
-api.create_enum_struct(api.parse_name("Component::Exd::SheetsEnum"), exd_map)
+api.create_enum_struct("Component::Exd::SheetsEnum", exd_map)
 
 for key in exd_map:
     print(f"Parsing schema for {exd_map[key]}.")
@@ -334,10 +325,12 @@ for key in exd_map:
     ).map_names(game_data.get_exd_schema(exd_map[key]))
 
 for key in exd_headers:
-    [exd_header, exd_header_count] = exd_headers[key]
+    [exd_header, exd_header_enums, exd_header_count] = exd_headers[key]
     struct_name = f"Component::Exd::Sheets::{exd_map[key]}"
     exd_struct_map[key] = struct_name
-    api.create_struct(api.parse_name(struct_name), exd_header)
+    for enum_key in exd_header_enums:
+        api.create_enum_struct(f"{struct_name}::{enum_key}", exd_header_enums[enum_key], 1)
+    api.create_struct(struct_name, exd_header)
 
 # if a new pattern is found, add it to the exd_func_patterns dict
 for pattern in exd_func_patterns:

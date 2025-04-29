@@ -150,9 +150,19 @@ class ExcelHeaderFile:
                 ]
             )
 
-    def map_names(self, names):
-        # type: (list[Definition]) -> tuple[dict[int, tuple[str, str]], int]
+    def map_names(self, names: list[Definition]) -> tuple[dict[int, tuple[str, str]], dict[str, dict[int, str]], int]:
+        """
+        Map the column definitions to the names in the header.
+
+        Args:
+            names: A list of names of the columns in the header.
+
+        Returns:
+            A tuple of a dictionary mapping column offsets to tuples of the column type
+            and name, and the size of the structure.
+        """
         mapped: dict[int, tuple[str, str]] = {}
+        enumMapped: dict[str, dict[int, str]] = {}
         largest_offset_index: int = 0
         for i in range(self.header.column_count):
             if (
@@ -175,30 +185,48 @@ class ExcelHeaderFile:
                 )
         else:
             for i in range(self.header.column_count):
+                col_def = self.column_definitions[i]
                 if (
-                    self.column_definitions[i].offset in mapped
-                    and mapped[self.column_definitions[i].offset] is not None
+                    col_def.offset in mapped
+                    and mapped[col_def.offset] is not None
                 ):
-                    [_, name] = mapped[self.column_definitions[i].offset]
-                    if name.split("_")[0] == "Unknown":
-                        continue
-                    if (
-                        column_data_type_to_c_type(self.column_definitions[i].type)
-                        != "unsigned __int8"
-                    ):
-                        continue
+                    if (col_def.type in {ExcelColumnDataType.PackedBool0, ExcelColumnDataType.PackedBool1, ExcelColumnDataType.PackedBool2, ExcelColumnDataType.PackedBool3, ExcelColumnDataType.PackedBool4, ExcelColumnDataType.PackedBool5, ExcelColumnDataType.PackedBool6, ExcelColumnDataType.PackedBool7}):
+                        name = "PackedBool{0:X}".format(col_def.offset)
+                        if (name in enumMapped):
+                            enumMapped["PackedBool{0:X}".format(col_def.offset)][(1 << col_def.type - ExcelColumnDataType.PackedBool0)] = "{0}_{1}".format(name, names[i].name)
+                        else:
+                            # this should never be hit but just to be safe
+                            enumMapped["PackedBool{0:X}".format(col_def.offset)] = {(1 << col_def.type - ExcelColumnDataType.PackedBool0): "{0}_{1}".format(name, names[i].name)}
+                    else: 
+                        [_, name] = mapped[col_def.offset]
+                        if name.split("_")[0] == "Unknown":
+                            continue
+                        if (
+                            column_data_type_to_c_type(col_def.type)
+                            != "unsigned __int8"
+                        ):
+                            continue
+                        else:
+                            mapped[col_def.offset] = (
+                                column_data_type_to_c_type(col_def.type),
+                                names[i].name,
+                            )
+                else:
+                    if(col_def.type in {ExcelColumnDataType.PackedBool0, ExcelColumnDataType.PackedBool1, ExcelColumnDataType.PackedBool2, ExcelColumnDataType.PackedBool3, ExcelColumnDataType.PackedBool4, ExcelColumnDataType.PackedBool5, ExcelColumnDataType.PackedBool6, ExcelColumnDataType.PackedBool7}):
+                        name = "PackedBool{0:X}".format(col_def.offset)
+                        mapped[col_def.offset] = (
+                            name,
+                            name
+                        )
+                        enumMapped[name] = {(1 << col_def.type - ExcelColumnDataType.PackedBool0): "{0}_{1}".format(name, names[i].name)}
                     else:
                         mapped[self.column_definitions[i].offset] = (
                             column_data_type_to_c_type(self.column_definitions[i].type),
-                            "{0}_{1}".format(name, names[i].name),
+                            names[i].name,
                         )
-                else:
-                    mapped[self.column_definitions[i].offset] = (
-                        column_data_type_to_c_type(self.column_definitions[i].type),
-                        names[i].name,
-                    )
         mapped = dict(sorted(mapped.items()))
-        return [mapped, size]
+        enumMapped = dict(sorted(enumMapped.items()))
+        return [mapped, enumMapped, size]
 
 
 def column_data_type_to_c_type(column_data_type):
