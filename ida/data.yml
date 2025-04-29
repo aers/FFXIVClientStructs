@@ -335,8 +335,16 @@ functions:
   0x1400BA490: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400BA5C0: GetPartyMemberClassJobByContentId
   0x140844B40: ObjectIdToEntityId # returns invalid id if objectid is not a player
+  0x140A210E0: SendEventCompletePacket
+  0x140A21C20: ProcessPacketEventStart
+  0x140A21C80: ProcessPacketEventFinish
+  0x140A21D40: ProcessPacketBattleTalk
+  0x140A21DE0: ProcessPacketBalloonTalk
   0x140A21A00: ProcessPacketEventPlay
   0x140A21EE0: ProcessPacketSystemLogMessage
+  0x140A21FA0: ProcessPacketMapUpdate
+  0x140A22060: ProcessPacketFateInfo
+  0x140A220B0: ProcessPacketFateProgress
   0x140A251B0: SendClientSelectDataConfigFlagsUpdate
   0x140A25AE0: ProcessPacketSpawnPlayer
   0x140A25BE0: ProcessPacketSpawnNPC
@@ -396,6 +404,9 @@ functions:
   0x140A396B0: ProcessPacketUpdatePartyPositions
   0x140A396E0: ProcessPacketUpdateAllianceNormalPositions
   0x140A39710: ProcessPacketUpdateAllianceSmallPositions
+  0x140A39830: ProcessPacketChatReceived
+  0x140A399E0: ProcessPacketInventoryTransaction
+  0x140A39A00: ProcessPacketItemInfo
   0x140A39B90: ProcessPacketRSVData
   0x140A39BB0: ProcessPacketRSFData
   0x140A39C10: ProcessPacketHuntingLogEntry
