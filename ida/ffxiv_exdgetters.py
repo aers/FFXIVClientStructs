@@ -201,7 +201,7 @@ if api is None:
                 # type: (str, dict[int, str], int) -> None
                 enum_id = self.create_enum(name)
                 enum_id = self.get_enum_id(name)
-                sheet_name = name.split("::")[-1]
+                sheet_name = name.split("::")[-2]
                 self.set_enum_width(enum_id, width)
                 for key in values:
                     self.remove_enum_member(enum_id, key, f"{sheet_name}_{values[key]}")
@@ -215,14 +215,42 @@ if api is None:
                     self.remove_struct_members(struct_id)
                 struct_type = self.get_struct(struct_id)
                 for [index, [type, name]] in fields.items():
-                    self.create_struct_member(
-                        struct_type,
-                        name,
-                        index,
-                        self.get_idc_type_from_ida_type(type),
-                        None,
-                        self.get_size_from_ida_type(type),
-                    )
+                    if (
+                        self.get_idc_type_from_ida_type(
+                            self.clean_struct_name(type)
+                        )
+                        == self.get_struct_flag()
+                    ):
+                        type = self.clean_struct_name(type)
+                        self.create_struct_member(
+                            struct_type,
+                            name,
+                            index,
+                            self.get_idc_type_from_ida_type(type),
+                            self.get_struct_opinfo_from_type(type),
+                            self.get_size_from_ida_type(type),
+                        )
+                    elif (
+                        self.get_idc_type_from_ida_type(type)
+                        == self.get_enum_flag()
+                    ):
+                        self.create_struct_member(
+                            struct_type,
+                            name,
+                            index,
+                            self.get_idc_type_from_ida_type(type),
+                            self.get_enum_opinfo_from_type(type),
+                            self.get_size_from_ida_type(type),
+                        )
+                    else:
+                        self.create_struct_member(
+                            struct_type,
+                            name,
+                            index,
+                            self.get_idc_type_from_ida_type(type),
+                            None,
+                            self.get_size_from_ida_type(type),
+                        )
                     meminfo = self.get_struct_member_by_name(struct_type, name)
                     self.set_struct_member_info(
                         struct_type, meminfo, 0, self.get_tinfo_from_type(type), 0
@@ -323,7 +351,8 @@ api.create_enum_struct("Component::Exd::SheetsEnum", exd_map)
 for key in exd_map:
     print(f"Parsing schema for {exd_map[key]}.")
     exd_headers[key] = ExcelHeaderFile(
-        game_data.get_file(ParsedFileName("exd/" + exd_map[key] + ".exh"))
+        game_data.get_file(ParsedFileName("exd/" + exd_map[key] + ".exh")),
+        exd_map[key]
     ).map_names(game_data.get_exd_schema(exd_map[key]))
 
 for key in exd_headers:
