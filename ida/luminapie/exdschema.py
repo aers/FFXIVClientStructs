@@ -44,9 +44,14 @@ def get_definitions(schema):
         for file in schema_zip.namelist():
             if file.endswith(".yml") and ".github" not in file:
                 schema_yml = load(schema_zip.read(file), Loader=Loader)
-                exd_schema_map[file.rsplit(".", 1)[0].rsplit("/")[1]] = schema_yml[
-                    "fields"
-                ]
+                if "pendingFields" in schema_yml:
+                    exd_schema_map[file.rsplit(".", 1)[0].rsplit("/")[1]] = schema_yml[
+                        "pendingFields"
+                    ]
+                else:
+                    exd_schema_map[file.rsplit(".", 1)[0].rsplit("/")[1]] = schema_yml[
+                        "fields"
+                    ]
 
     defs_map = {}
     for exd in exd_schema_map:
