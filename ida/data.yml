@@ -14026,6 +14026,7 @@ classes:
       0x1409E0950: GetContentFinderCondition
       0x141654A10: GetPublicContentDirectorByType # static
       0x140B45710: MaterializeItem
+      0x140B4BD00: GetMassivePcContentDirector
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x14206B2A8
@@ -15186,7 +15187,7 @@ classes:
       0x141656780: ctor
   Client::Game::InstanceContent::PublicContentTripleTriad:
     vtbls:
-      - ea: 0x1422C9C68
+      - ea: 0x14215A198
         base: Client::Game::InstanceContent::PublicContentDirector
   Client::Game::InstanceContent::PublicContentEureka:
     vtbls:
@@ -15256,6 +15257,16 @@ classes:
     vtbls:
       - ea: 0x142163F00
         base: Client::Game::InstanceContent::PublicContentDirector
+  Client::Game::MassivePcContent::MassivePcContentDirector:
+    vtbls:
+      - ea: 0x1422C90F8
+        base: Client::Game::Event::Director
+    funcs:
+      0x1419647E0: ctor
+  Client::Game::MassivePcContent::MassivePcContentCosmicExploration:
+    vtbls:
+      - ea: 0x1422C9C68
+        base: Client::Game::MassivePcContent::MassivePcContentDirector
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x142094938

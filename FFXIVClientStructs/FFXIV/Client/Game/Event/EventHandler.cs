@@ -153,6 +153,7 @@ public enum EventHandlerContent : ushort {
     CompanyCraftDirector = 0x800B,
     SkyIslandDirector = 0x800C, // used in early phases of the Diadem
     DpsChallengeDirector = 0x800D,
+    MassivePcContentDirector = 0x800E,
     FateDirector = 0x801A
 }
 

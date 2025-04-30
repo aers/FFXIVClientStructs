@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
+using FFXIVClientStructs.FFXIV.Client.Game.MassivePcContent;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 
@@ -35,6 +36,9 @@ public unsafe partial struct EventFramework {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 80 B8")]
     public partial PublicContentDirector* GetPublicContentDirector();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 F6 74 ?? 48 81 C6")]
+    public partial MassivePcContentDirector* GetMassivePcContentDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40")]
     public static partial PublicContentDirector* GetPublicContentDirectorByType(PublicContentDirectorType publicContentDirectorType);
