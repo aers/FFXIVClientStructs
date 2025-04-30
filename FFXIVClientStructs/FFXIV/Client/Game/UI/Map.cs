@@ -48,9 +48,10 @@ public unsafe partial struct MapMarkerData {
     [FieldOffset(0x08)] public Utf8String* TooltipString;
     [FieldOffset(0x10)] public uint IconId;
 
-    [FieldOffset(0x1C)] public float X;
-    [FieldOffset(0x20)] public float Y;
-    [FieldOffset(0x24)] public float Z;
+    [FieldOffset(0x1C)] public global::System.Numerics.Vector3 Position;
+    [FieldOffset(0x1C), Obsolete("Use Position.X")] public float X;
+    [FieldOffset(0x20), Obsolete("Use Position.Y")] public float Y;
+    [FieldOffset(0x24), Obsolete("Use Position.Z")] public float Z;
     [FieldOffset(0x28)] public float Radius;
 
     [FieldOffset(0x30)] public uint MapId;
@@ -63,6 +64,7 @@ public unsafe partial struct MapMarkerData {
     [FieldOffset(0x44)] public ushort DataId;
     [FieldOffset(0x46)] public byte MarkerType;
     [FieldOffset(0x47)] public sbyte EventState;
+    [FieldOffset(0x48)] public byte Flags; // & 1 == IsHidden?
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 8B 86")]
     public partial MapMarkerData* SetData(
