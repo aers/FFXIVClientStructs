@@ -8621,7 +8621,8 @@ classes:
       0x140788CF0: GrandCompanyUpdateTask            # (this) -> void
       0x140788F70: PvPStateUpdateTask                # (this) -> void
       0x140789080: ToggleWXHBRightFocusFlag
-      0x1407F4B30: ToggleWXHBLeftFocusFlag
+      0x1407890E0: ToggleWXHBLeftFocusFlag
+      0x140789140: ToggleWXHBFocusFlags
       0x14078C440: SetStandardHotbarShareState
       0x14078C4B0: SetCrossHotbarShareState
       0x14078E420: DeleteAllHotbars                 # (this, performReset) -> void?
@@ -14024,7 +14025,7 @@ classes:
         base: Client::Game::Event::Director
     funcs:
       0x140CAD360: ctor
-  Client::Game::ReconstructionBoxManager:
+  Client::Game::DomanEnclaveManager:
     instances:
       - ea: 0x142932230
         pointer: true
@@ -14037,6 +14038,14 @@ classes:
       0x1409744F0: Destroy
       0x140974550: HasInstance
       0x140974570: GetInstance
+      0x140974680: GetProgress
+      0x140974730: ReadPacket
+      0x140974A20: ctor
+  Client::Game::DomanEnclaveManager::DomanEnclaveState:
+    funcs:
+      0x1409743C0: ctor
+      0x1409743F0: ReadPacket
+      0x140974420: GetAllowance
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x14294F4F0
