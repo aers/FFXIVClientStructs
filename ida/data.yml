@@ -8621,7 +8621,8 @@ classes:
       0x140788CF0: GrandCompanyUpdateTask            # (this) -> void
       0x140788F70: PvPStateUpdateTask                # (this) -> void
       0x140789080: ToggleWXHBRightFocusFlag
-      0x1407F4B30: ToggleWXHBLeftFocusFlag
+      0x1407890E0: ToggleWXHBLeftFocusFlag
+      0x140789140: ToggleWXHBFocusFlags
       0x14078C440: SetStandardHotbarShareState
       0x14078C4B0: SetCrossHotbarShareState
       0x14078E420: DeleteAllHotbars                 # (this, performReset) -> void?
