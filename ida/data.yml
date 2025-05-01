@@ -14025,7 +14025,7 @@ classes:
         base: Client::Game::Event::Director
     funcs:
       0x140CAD360: ctor
-  Client::Game::ReconstructionBoxManager:
+  Client::Game::DomanEnclaveManager:
     instances:
       - ea: 0x142932230
         pointer: true
@@ -14038,6 +14038,14 @@ classes:
       0x1409744F0: Destroy
       0x140974550: HasInstance
       0x140974570: GetInstance
+      0x140974680: GetProgress
+      0x140974730: ReadPacket
+      0x140974A20: ctor
+  Client::Game::DomanEnclaveManager::DomanEnclaveState:
+    funcs:
+      0x1409743C0: ctor
+      0x1409743F0: ReadPacket
+      0x140974420: GetAllowance
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x14294F4F0
