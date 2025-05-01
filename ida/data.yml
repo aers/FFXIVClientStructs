@@ -1288,7 +1288,7 @@ classes:
       - ea: 0x142952168
         pointer: true
     funcs:
-#fail       0x1415B6400: HasInstance
+      0x14164CAC0: HasInstance
       0x14164CAE0: GetInstance
 #fail       0x1415B6430: ctor
 #fail       0x1415B64E0: Dtor
@@ -1910,6 +1910,7 @@ classes:
       0x140D0F430: GetInstance
       0x140D0F440: Load
       0x140D0F8C0: Update
+      0x140D10370: IsFunctionUnlocked
       0x140D10450: AddModule
       0x140D105F0: RemoveModule
   Client::Game::WKS::WKSModuleBase:
@@ -1917,6 +1918,7 @@ classes:
       - ea: 0x1422915E0
     vfuncs:
       0: Dtor
+      1: SetIntData
       2: ProcessPacket
   Client::Game::WKS::WKSResearch: # Cosmic Research Information
     vtbls:
@@ -1935,6 +1937,56 @@ classes:
       0x14199C5A0: GetRatePercentage
       0x14199C850: GetUnlockedStage
       0x14199CD20: GetClassJobLevel
+  Client::Game::WKS::WKSMechaEventModule: # Mecha Events
+    vtbls:
+      - ea: 0x142291620
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x14194EED0: ctor
+      0x141951DB0: PrintLogMessage<int>
+  Client::Game::WKS::WKSMechaEvent:
+    funcs:
+      0x1419A0EC0: Initialize
+      0x1419A1590: Finalizer
+      0x1419A2100: IsPilotRegistrationTimeframeOpen
+      0x1419A2140: IsTeleportTimeframeOpen
+      0x1419A2190: GetEventProgressPercentage
+  Client::Game::WKS::WKSMechaEventStageHandlerBase:
+    vtbls:
+      - ea: 0x1422DA330
+    vfuncs:
+      0: SetOwnerEvent
+      4: GetStageIndex
+    funcs:
+      0x141B2F790: ctor
+  Client::Game::WKS::WKSMechaEventStageHandler1:
+    vtbls:
+      - ea: 0x1422DA380
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler2:
+    vtbls:
+      - ea: 0x1422DA3D0
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler3:
+    vtbls:
+      - ea: 0x1422DA420
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler4:
+    vtbls:
+      - ea: 0x1422DA470
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler5:
+    vtbls:
+      - ea: 0x1422DA4C0
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler6:
+    vtbls:
+      - ea: 0x1422DA510
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler7:
+    vtbls:
+      - ea: 0x1422DA560
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
   Client::System::String::Utf8String:
     funcs:
       0x14005A330: ctor  # empty string ctor
@@ -2421,6 +2473,7 @@ classes:
     funcs:
       0x140C6A350: SetCondition
       0x140C6A3D0: ReadPacket
+      0x140C6A490: HasPermission
       0x140C6A610: HasPermissionCondition
       0x140C6A790: GetPermissionLogMessage
       0x140C6A820: GetConditionLogMessage
@@ -13523,6 +13576,7 @@ classes:
     funcs:
       0x1417315E0: ctor
       0x141731C40: Dtor
+      0x141738D70: ShowScreenImage
   Client::Game::Event::EventSceneModule::UISkipListener:
     vtbls:
       - ea: 0x1421B1928
