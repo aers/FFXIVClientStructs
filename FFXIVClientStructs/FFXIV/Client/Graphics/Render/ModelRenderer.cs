@@ -103,4 +103,13 @@ public unsafe partial struct ModelRenderer {
     // This function, among other things, constructs an OnRenderMaterialParams struct with its params and calls CharacterBase.OnRenderMaterial with it (through some indirections - see Model.RenderMaterialCallback).
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 28")]
     public partial ushort* OnRenderMaterial(ushort* outFlags, OnRenderModelParams* param, Material* material, uint materialIndex);
+    
+    // This is called by Client::Graphics::Render::Model.SetupFromModelResourceHandle to set up the models pointers, before drawing, local resources (from the stack) are
+    // res8 = Render.Skeleton 
+    // res10 = Model Resource Handle 
+    // res18 = Render.Skeleton (??? exact same as res8, in case it needs to regenerate for a different skeleton?)  
+    // res20 = Render.Model
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 07 48 8B CF FF 50 ?? 32 C0")]
+    public partial uint ModelDrawInit(Model* data, ModelResourceHandle* mdlHandle, Callback _renderModelCallback, Callback *_renderMaterialCallback);
+
 }
