@@ -2730,7 +2730,7 @@ classes:
   Client::Game::UI::Emj:
     instances:
       - ea: 0x142949DC8
-  Client::Game::UI::GoldSaucerYell:
+  Client::Game::UI::NpcYell:
     instances:
       - ea: 0x142949E00
     vtbls:
