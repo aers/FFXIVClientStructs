@@ -68,7 +68,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0x16F58)] public CollectablesShop CollectablesShop; // 7.2: size +0x20
     [FieldOffset(0x17250)] public QTE QTE;
     [FieldOffset(0x17278)] public Emj Emj;
-    [FieldOffset(0x172B0)] public GoldSaucerYell GoldSaucerYell;
+    [FieldOffset(0x172B0)] public NpcYell NpcYell;
     [FieldOffset(0x18A00)] public CharaCard CharaCard;
     // 0x18068: ItemAction Unlocks
     [FieldOffset(0x18C40)] public ClientSelectDataConfigFlags ClientSelectDataConfigFlags;
