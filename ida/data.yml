@@ -418,11 +418,11 @@ functions:
   0x140A3A510: ProcessPacketLandSetInitialize
   0x140A3B450: ProcessPacketGcArmyExpeditionInfo
   0x140A3B490: ProcessPacketGcArmyExpeditionInfo2
-  0x140A3B4D0: ProcessPacketGcArmyExpeditionDailyQuestResult
+  0x140A3B4D0: ProcessPacketGcArmyExpeditionMissionResult
   0x140A3B510: ProcessPacketGcArmyExpeditionEnlistment
   0x140A3B610: ProcessPacketLandSetMap
   0x140A3B650: ProcessPacketMissionStart
-  0x140A3B710: ProcessPacketGcArmyExpeditionDailyQuestRepeatFlags
+  0x140A3B710: ProcessPacketGcArmyExpeditionMissionRepeatFlags
   0x140A3B9A0: ProcessPacketPlayMotionSync
   0x140A3BDF0: ProcessPacketMount
   0x140A3C5A0: ProcessPacketPrepareZoning
@@ -1041,11 +1041,20 @@ classes:
       0x140A3DBF0: ctor
       0x140A3E6A0: Finalizer
       0x140A3E740: Initialize
+      0x140A3ED50: ProcessPacketInventoryTransaction
+      0x140A3F110: ProcessPacketMarketBoardInfo
+      0x140A3F340: ProcessPacketRetainerInfo
+      0x140A3F590: DeleteCharacterAtIndex
+      0x140A3F6C0: SpawnBattleChara
       0x140A3F7B0: CreateQueuedBattleChara
       0x140A3F870: OnReceiveCreatePlayerBattleCharaPacket
-      0x140A3F950: OnReceiveCreateNonPlayerBattleCharaPacket
+      0x140A3F950: OnReceiveCreateNpcBattleCharaPacket
+      0x140A3FA20: OnReceiveCreateBossBattleCharaPacket
       0x140A3FAE0: ProcessBattleCharaCreationQueue
+      0x140A3FBB0: TrySpawnPlayerByEntityId
       0x140A433A0: AddBattleCharaToCreationQueue
+      0x140A3FEA0: ProcessMovement #Maybe
+      0x140A402F0: ProcessVfx #Maybe
   Component::GUI::AtkInputManager:
     funcs:
       0x1406419B0: HandleInput
@@ -1668,6 +1677,7 @@ classes:
       - ea: 0x142719340
     funcs:
       0x140C68390: ctor
+      0x140C687D0: Update
       0x140C68B40: GetCurrentWeather
       0x140C68B80: GetIndividualWeather
       0x140C68C00: HasIndividualWeather
