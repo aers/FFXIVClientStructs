@@ -6232,14 +6232,14 @@ classes:
       0x1405A9130: GetField
       0x1405A9140: ClassNameOf
       0x1405A9280: CallMemberFunction # (this, member, class, nresults) => pcall(_G[class][member], _G[class])
-#fail       0x1405CBCA0: CallMemberFunction_2 # (this, member, class, (int)arg2, (int)arg3, nresults) => pcall(_G[class][member], _G[class], arg2, arg3)
+      0x1405A94E0: CallMemberFunction_2 # (this, member, class, (int)arg2, (int)arg3, nresults) => pcall(_G[class][member], _G[class], arg2, arg3)
       0x1405A95E0: CallMemberFunction_3 # (this, member, class, argName, nresults) => pcall(_G[class][member], _G[class], _G[argName])
       0x1405A96E0: CallMemberFunction_4 # (this, member, class, argName, (int[])args, argCount nresults): above but with extra int args - used for the next 3
-#fail       0x1404C3DC0: CallMemberFunction_5 # (this, member, class, argName, (int)arg3, nresults)
-#fail       0x1404C3E00: CallMemberFunction_6 # (this, member, class, argName, (int)arg3, (int)arg4, nresults)
-#fail       0x1404C3E50: CallMemberFunction_7 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, nresults)
-#fail       0x1404C3ED0: CallMemberFunction_8 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, nresults)
-#fail       0x1404C4470: CallMemberFunction_9 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, (int)arg7, nresults)
+      0x1405A9820: CallMemberFunction_5 # (this, member, class, argName, (int)arg3, nresults)
+      0x1405A9930: CallMemberFunction_6 # (this, member, class, argName, (int)arg3, (int)arg4, nresults)
+      0x1405A9A60: CallMemberFunction_7 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, nresults)
+      0x1405A9BB0: CallMemberFunction_8 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, nresults)
+      0x1405A9D00: CallMemberFunction_9 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, (int)arg7, nresults)
       0x1405A9E60: CallMemberFunction_10 # (this, member, class, argName, (int)arg3, (int[])args, argCount, nresults)
       0x1405A9FB0: CallMemberFunction_11 # (this, member, class, argName, (int)arg3, (int)arg4, (int[])args, argCount, nresults)
       0x1405AA110: CallMemberFunction_12 # (this, member, class, argName, (int)arg3, (int)arg4, (bool)arg5, (int[])args, argCount nresults)
@@ -6249,8 +6249,9 @@ classes:
       0x1405AB6D0: CheckNumber
       0x1405AB700: CheckBoolean
       0x1405AB740: CheckString
-      0x1405AB760: PushNumber
-#fail       0x1404C57E0: PushBoolean
+      0x1405AB760: PushFloat
+      0x1405AB780: PushDouble
+      0x1405AB790: PushBoolean
       0x1405AB7B0: PushString
       0x1405AB7C0: PushGlobal
       0x1405AB7F0: PushNil
@@ -6269,9 +6270,9 @@ classes:
       0x1405ABC70: GCStep # (this, data)
       0x140C64840: PopByte
       0x140C648A0: PopShort
-#fail       0x1408FC540: PopInteger
-#fail       0x1408FC130: PopInteger_2
-#fail       0x1408FC600: PopInteger_3
+      0x140C64900: PopInteger
+      0x140C64960: PopInteger_2
+      0x140C649C0: PopInteger_3
   Common::Lua::LuaThread:
     vtbls:
       - ea: 0x142033D38
@@ -13630,39 +13631,6 @@ classes:
     funcs:
       0x140C48750: ctor
       0x140C489C0: dtor
-      0x140C4F5A0: LuaGetQuestId
-      0x140C4F600: LuaIsExistFate
-      0x140C4FFF0: LuaIsBattleNpcOwner
-      0x140C503D0: LuaIsBattleNpcTriggerOwner
-      0x140C50710: LuaIsGuardNpcOwner
-      0x140C50A60: LuaIsOwnersGuardNpcNear
-      0x140C50E10: LuaGetQuestGuardBNpcEventHandlerId
-      0x140C50FC0: LuaRemoveQuestGuardBNpc
-      0x140C512F0: LuaIsBattleNpcAlive
-      0x140C51600: LuaQuestOffer
-      0x140C51880: LuaQuestReward
-      0x140C52260: LuaQuestUnqualified
-      0x140C52DC0: LuaGetQuestBattleProgress
-      0x140C53270: LuaYesNoQuestBattle
-      0x140C53440: GetFestivals
-      0x140C53500: LuaSetWeddingFestivalParam
-      0x140C53620: LuaGetWeddingReservedFlag
-      0x140C536A0: LuaGetGsWeeklyLotOffsetTime
-      0x140C53700: LuaGetQuestAcceptClassJob
-      0x140C537A0: LuaGetEventItemTargetByLayoutId
-      0x140C53860: LuaSaveAnimaWeaponQuestGender
-      0x140C53930: LuaGetAnimaWeaponQuestGender
-      0x140C539E0: LuaOpenAnimaWeapon5TradeItem
-      0x140C53AA0: LuaOpenAnimaWeapon5StatusAllocation
-      0x140C53B50: LuaOpenAnimaWeapon5StatusReallocation
-      0x140C53C00: LuaResetAnimaWeapon5Status
-      0x140C53C90: LuaCloseUIAnimaWeapon5
-      0x140C53CC0: LuaIsInEventRange
-      0x140C53E40: LuaStartFreeMove
-      0x140C53EE0: LuaEndFreeMove
-      0x140C53FB0: LuaCheckFreeMove
-      0x140C54060: LuaCheckAction
-      0x140C54500: InitLua
       0x140C55490: IsTodoChecked
       0x140C55550: GetTodoArgs
       0x140C58060: OnQuestRowRead
@@ -14025,6 +13993,16 @@ classes:
         base: Client::Game::Event::Director
     funcs:
       0x140CAD360: ctor
+  Client::Game::EurekaStoryProgressManager:
+    instances:
+      - ea: 0x142932220
+        pointer: true
+    funcs:
+      0x140973710: Initialize
+      0x140973760: Destroy
+      0x1409737B0: HasInstance
+      0x1409737D0: GetInstance
+      0x1409737E0: Load
   Client::Game::DomanEnclaveManager:
     instances:
       - ea: 0x142932230
