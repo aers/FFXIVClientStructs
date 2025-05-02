@@ -412,11 +412,17 @@ functions:
   0x140A39C10: ProcessPacketHuntingLogEntry
   0x140A39C50: ProcessPacketNPCYell
   0x140A39D10: ProcessPacketEquipDisplayFlags
-  0x140A39DE0: ProcessPacketCompletedAchievements
-  0x140A39E30: ProcessPacketLandSetInitialize
-  0x140A3B4D0: ProcessPacketDailyQuests
+  0x140A39DE0: ProcessPacketAchievementList
+  0x140A39E10: ProcessPacketAchievementNearCompletion
+  0x140A39E30: ProcessPacketAchievementMergeBitmask
+  0x140A3A510: ProcessPacketLandSetInitialize
+  0x140A3B450: ProcessPacketGcArmyExpeditionInfo
+  0x140A3B490: ProcessPacketGcArmyExpeditionInfo2
+  0x140A3B4D0: ProcessPacketGcArmyExpeditionDailyQuestResult
+  0x140A3B510: ProcessPacketGcArmyExpeditionEnlistment
   0x140A3B610: ProcessPacketLandSetMap
-  0x140A3B710: ProcessPacketDailyQuestRepeatFlags
+  0x140A3B650: ProcessPacketMissionStart
+  0x140A3B710: ProcessPacketGcArmyExpeditionDailyQuestRepeatFlags
   0x140A3B9A0: ProcessPacketPlayMotionSync
   0x140A3BDF0: ProcessPacketMount
   0x140A3C5A0: ProcessPacketPrepareZoning
