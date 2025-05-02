@@ -53,7 +53,6 @@ class ExcelColumnDataType(enum.IntEnum):
     UInt64 = 0xB
     # unused?
     Unk2 = 0xC
-
     # 0 is read like data & 1, 1 is like data & 2, 2 = data & 4, etc...
     PackedBool0 = 0x19
     PackedBool1 = 0x1A

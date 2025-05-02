@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Fate;
@@ -78,10 +79,11 @@ public partial struct FateContext {
     [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
     public struct FateMapMarker {
         [FieldOffset(0x10)] public Utf8String Name;
-        [FieldOffset(0x88)] public uint IconId;
-        [FieldOffset(0x94)] public Vector3 Position;
-        [FieldOffset(0xA0)] public float Radius;
-        [FieldOffset(0xBA)] public ushort TerritoryId;
+        [FieldOffset(0x78)] public MapMarkerData MapMarkerData;
+        [FieldOffset(0x88), Obsolete("Use MapMarkerData.IconId")] public uint IconId;
+        [FieldOffset(0x94), Obsolete("Use MapMarkerData.Position")] public Vector3 Position;
+        [FieldOffset(0xA0), Obsolete("Use MapMarkerData.Radius")] public float Radius;
+        [FieldOffset(0xBA), Obsolete("Use MapMarkerData.TerritoryTypeId")] public ushort TerritoryId;
     }
 }
 

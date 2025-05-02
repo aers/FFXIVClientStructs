@@ -1326,7 +1326,7 @@ classes:
       - ea: 0x142952168
         pointer: true
     funcs:
-#fail       0x1415B6400: HasInstance
+      0x14164CAC0: HasInstance
       0x14164CAE0: GetInstance
 #fail       0x1415B6430: ctor
 #fail       0x1415B64E0: Dtor
@@ -1949,6 +1949,7 @@ classes:
       0x140D0F430: GetInstance
       0x140D0F440: Load
       0x140D0F8C0: Update
+      0x140D10370: IsFunctionUnlocked
       0x140D10450: AddModule
       0x140D105F0: RemoveModule
   Client::Game::WKS::WKSModuleBase:
@@ -1956,6 +1957,7 @@ classes:
       - ea: 0x1422915E0
     vfuncs:
       0: Dtor
+      1: SetIntData
       2: ProcessPacket
   Client::Game::WKS::WKSResearch: # Cosmic Research Information
     vtbls:
@@ -1974,6 +1976,56 @@ classes:
       0x14199C5A0: GetRatePercentage
       0x14199C850: GetUnlockedStage
       0x14199CD20: GetClassJobLevel
+  Client::Game::WKS::WKSMechaEventModule: # Mecha Events
+    vtbls:
+      - ea: 0x142291620
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x14194EED0: ctor
+      0x141951DB0: PrintLogMessage<int>
+  Client::Game::WKS::WKSMechaEvent:
+    funcs:
+      0x1419A0EC0: Initialize
+      0x1419A1590: Finalizer
+      0x1419A2100: IsPilotRegistrationTimeframeOpen
+      0x1419A2140: IsTeleportTimeframeOpen
+      0x1419A2190: GetEventProgressPercentage
+  Client::Game::WKS::WKSMechaEventStageHandlerBase:
+    vtbls:
+      - ea: 0x1422DA330
+    vfuncs:
+      0: SetOwnerEvent
+      4: GetStageIndex
+    funcs:
+      0x141B2F790: ctor
+  Client::Game::WKS::WKSMechaEventStageHandler1:
+    vtbls:
+      - ea: 0x1422DA380
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler2:
+    vtbls:
+      - ea: 0x1422DA3D0
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler3:
+    vtbls:
+      - ea: 0x1422DA420
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler4:
+    vtbls:
+      - ea: 0x1422DA470
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler5:
+    vtbls:
+      - ea: 0x1422DA4C0
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler6:
+    vtbls:
+      - ea: 0x1422DA510
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
+  Client::Game::WKS::WKSMechaEventStageHandler7:
+    vtbls:
+      - ea: 0x1422DA560
+        base: Client::Game::WKS::WKSMechaEventStageHandlerBase
   Client::System::String::Utf8String:
     funcs:
       0x14005A330: ctor  # empty string ctor
@@ -2460,6 +2512,7 @@ classes:
     funcs:
       0x140C6A350: SetCondition
       0x140C6A3D0: ReadPacket
+      0x140C6A490: HasPermission
       0x140C6A610: HasPermissionCondition
       0x140C6A790: GetPermissionLogMessage
       0x140C6A820: GetConditionLogMessage
@@ -2716,7 +2769,7 @@ classes:
   Client::Game::UI::Emj:
     instances:
       - ea: 0x142949DC8
-  Client::Game::UI::GoldSaucerYell:
+  Client::Game::UI::NpcYell:
     instances:
       - ea: 0x142949E00
     vtbls:
@@ -6218,14 +6271,14 @@ classes:
       0x1405A9130: GetField
       0x1405A9140: ClassNameOf
       0x1405A9280: CallMemberFunction # (this, member, class, nresults) => pcall(_G[class][member], _G[class])
-#fail       0x1405CBCA0: CallMemberFunction_2 # (this, member, class, (int)arg2, (int)arg3, nresults) => pcall(_G[class][member], _G[class], arg2, arg3)
+      0x1405A94E0: CallMemberFunction_2 # (this, member, class, (int)arg2, (int)arg3, nresults) => pcall(_G[class][member], _G[class], arg2, arg3)
       0x1405A95E0: CallMemberFunction_3 # (this, member, class, argName, nresults) => pcall(_G[class][member], _G[class], _G[argName])
       0x1405A96E0: CallMemberFunction_4 # (this, member, class, argName, (int[])args, argCount nresults): above but with extra int args - used for the next 3
-#fail       0x1404C3DC0: CallMemberFunction_5 # (this, member, class, argName, (int)arg3, nresults)
-#fail       0x1404C3E00: CallMemberFunction_6 # (this, member, class, argName, (int)arg3, (int)arg4, nresults)
-#fail       0x1404C3E50: CallMemberFunction_7 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, nresults)
-#fail       0x1404C3ED0: CallMemberFunction_8 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, nresults)
-#fail       0x1404C4470: CallMemberFunction_9 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, (int)arg7, nresults)
+      0x1405A9820: CallMemberFunction_5 # (this, member, class, argName, (int)arg3, nresults)
+      0x1405A9930: CallMemberFunction_6 # (this, member, class, argName, (int)arg3, (int)arg4, nresults)
+      0x1405A9A60: CallMemberFunction_7 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, nresults)
+      0x1405A9BB0: CallMemberFunction_8 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, nresults)
+      0x1405A9D00: CallMemberFunction_9 # (this, member, class, argName, (int)arg3, (int)arg4, (int)arg5, (int)arg6, (int)arg7, nresults)
       0x1405A9E60: CallMemberFunction_10 # (this, member, class, argName, (int)arg3, (int[])args, argCount, nresults)
       0x1405A9FB0: CallMemberFunction_11 # (this, member, class, argName, (int)arg3, (int)arg4, (int[])args, argCount, nresults)
       0x1405AA110: CallMemberFunction_12 # (this, member, class, argName, (int)arg3, (int)arg4, (bool)arg5, (int[])args, argCount nresults)
@@ -6235,8 +6288,9 @@ classes:
       0x1405AB6D0: CheckNumber
       0x1405AB700: CheckBoolean
       0x1405AB740: CheckString
-      0x1405AB760: PushNumber
-#fail       0x1404C57E0: PushBoolean
+      0x1405AB760: PushFloat
+      0x1405AB780: PushDouble
+      0x1405AB790: PushBoolean
       0x1405AB7B0: PushString
       0x1405AB7C0: PushGlobal
       0x1405AB7F0: PushNil
@@ -6255,9 +6309,9 @@ classes:
       0x1405ABC70: GCStep # (this, data)
       0x140C64840: PopByte
       0x140C648A0: PopShort
-#fail       0x1408FC540: PopInteger
-#fail       0x1408FC130: PopInteger_2
-#fail       0x1408FC600: PopInteger_3
+      0x140C64900: PopInteger
+      0x140C64960: PopInteger_2
+      0x140C649C0: PopInteger_3
   Common::Lua::LuaThread:
     vtbls:
       - ea: 0x142033D38
@@ -8607,7 +8661,8 @@ classes:
       0x140788CF0: GrandCompanyUpdateTask            # (this) -> void
       0x140788F70: PvPStateUpdateTask                # (this) -> void
       0x140789080: ToggleWXHBRightFocusFlag
-      0x1407F4B30: ToggleWXHBLeftFocusFlag
+      0x1407890E0: ToggleWXHBLeftFocusFlag
+      0x140789140: ToggleWXHBFocusFlags
       0x14078C440: SetStandardHotbarShareState
       0x14078C4B0: SetCrossHotbarShareState
       0x14078E420: DeleteAllHotbars                 # (this, performReset) -> void?
@@ -13562,6 +13617,7 @@ classes:
     funcs:
       0x1417315E0: ctor
       0x141731C40: Dtor
+      0x141738D70: ShowScreenImage
   Client::Game::Event::EventSceneModule::UISkipListener:
     vtbls:
       - ea: 0x1421B1928
@@ -13614,39 +13670,6 @@ classes:
     funcs:
       0x140C48750: ctor
       0x140C489C0: dtor
-      0x140C4F5A0: LuaGetQuestId
-      0x140C4F600: LuaIsExistFate
-      0x140C4FFF0: LuaIsBattleNpcOwner
-      0x140C503D0: LuaIsBattleNpcTriggerOwner
-      0x140C50710: LuaIsGuardNpcOwner
-      0x140C50A60: LuaIsOwnersGuardNpcNear
-      0x140C50E10: LuaGetQuestGuardBNpcEventHandlerId
-      0x140C50FC0: LuaRemoveQuestGuardBNpc
-      0x140C512F0: LuaIsBattleNpcAlive
-      0x140C51600: LuaQuestOffer
-      0x140C51880: LuaQuestReward
-      0x140C52260: LuaQuestUnqualified
-      0x140C52DC0: LuaGetQuestBattleProgress
-      0x140C53270: LuaYesNoQuestBattle
-      0x140C53440: GetFestivals
-      0x140C53500: LuaSetWeddingFestivalParam
-      0x140C53620: LuaGetWeddingReservedFlag
-      0x140C536A0: LuaGetGsWeeklyLotOffsetTime
-      0x140C53700: LuaGetQuestAcceptClassJob
-      0x140C537A0: LuaGetEventItemTargetByLayoutId
-      0x140C53860: LuaSaveAnimaWeaponQuestGender
-      0x140C53930: LuaGetAnimaWeaponQuestGender
-      0x140C539E0: LuaOpenAnimaWeapon5TradeItem
-      0x140C53AA0: LuaOpenAnimaWeapon5StatusAllocation
-      0x140C53B50: LuaOpenAnimaWeapon5StatusReallocation
-      0x140C53C00: LuaResetAnimaWeapon5Status
-      0x140C53C90: LuaCloseUIAnimaWeapon5
-      0x140C53CC0: LuaIsInEventRange
-      0x140C53E40: LuaStartFreeMove
-      0x140C53EE0: LuaEndFreeMove
-      0x140C53FB0: LuaCheckFreeMove
-      0x140C54060: LuaCheckAction
-      0x140C54500: InitLua
       0x140C55490: IsTodoChecked
       0x140C55550: GetTodoArgs
       0x140C58060: OnQuestRowRead
@@ -14009,7 +14032,17 @@ classes:
         base: Client::Game::Event::Director
     funcs:
       0x140CAD360: ctor
-  Client::Game::ReconstructionBoxManager:
+  Client::Game::EurekaStoryProgressManager:
+    instances:
+      - ea: 0x142932220
+        pointer: true
+    funcs:
+      0x140973710: Initialize
+      0x140973760: Destroy
+      0x1409737B0: HasInstance
+      0x1409737D0: GetInstance
+      0x1409737E0: Load
+  Client::Game::DomanEnclaveManager:
     instances:
       - ea: 0x142932230
         pointer: true
@@ -14022,6 +14055,14 @@ classes:
       0x1409744F0: Destroy
       0x140974550: HasInstance
       0x140974570: GetInstance
+      0x140974680: GetProgress
+      0x140974730: ReadPacket
+      0x140974A20: ctor
+  Client::Game::DomanEnclaveManager::DomanEnclaveState:
+    funcs:
+      0x1409743C0: ctor
+      0x1409743F0: ReadPacket
+      0x140974420: GetAllowance
   Client::Game::Event::EventFramework:
     instances:
       - ea: 0x14294F4F0
@@ -14065,6 +14106,7 @@ classes:
       0x1409E0950: GetContentFinderCondition
       0x141654A10: GetPublicContentDirectorByType # static
       0x140B45710: MaterializeItem
+      0x140B4BD00: GetMassivePcContentDirector
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x14206B2A8
@@ -15225,7 +15267,7 @@ classes:
       0x141656780: ctor
   Client::Game::InstanceContent::PublicContentTripleTriad:
     vtbls:
-      - ea: 0x1422C9C68
+      - ea: 0x14215A198
         base: Client::Game::InstanceContent::PublicContentDirector
   Client::Game::InstanceContent::PublicContentEureka:
     vtbls:
@@ -15295,6 +15337,16 @@ classes:
     vtbls:
       - ea: 0x142163F00
         base: Client::Game::InstanceContent::PublicContentDirector
+  Client::Game::MassivePcContent::MassivePcContentDirector:
+    vtbls:
+      - ea: 0x1422C90F8
+        base: Client::Game::Event::Director
+    funcs:
+      0x1419647E0: ctor
+  Client::Game::MassivePcContent::MassivePcContentCosmicExploration:
+    vtbls:
+      - ea: 0x1422C9C68
+        base: Client::Game::MassivePcContent::MassivePcContentDirector
   Client::UI::PopupMenu:
     vtbls:
       - ea: 0x142094938

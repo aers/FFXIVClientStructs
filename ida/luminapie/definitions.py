@@ -10,6 +10,15 @@ class Definition:
     def __init__(self, obj):
         # type: (dict[str, str]) -> None
         self.name = obj["name"]
+        if "pendingName" in obj:
+            self.pendingName = obj["pendingName"]
+
+    def get_name(self):
+        # type: () -> str
+        if hasattr(self, "pendingName"):
+            return self.pendingName
+        else:
+            return self.name
 
     def __repr__(self):
         # type: () -> str

@@ -13,18 +13,13 @@ from abc import abstractmethod
 
 class BaseApi:
     @abstractmethod
-    def create_enum_struct(self, name, values):
-        # type: (str, dict[str, int]) -> None
+    def create_enum_struct(self, name, values, width=0):
+        # type: (str, dict[int, str], int) -> None
         pass
 
     @abstractmethod
     def create_struct(self, name, fields):
         # type: (str, dict[str, str]) -> None
-        pass
-
-    @abstractmethod
-    def parse_name(self, name):
-        # type: (str) -> str
         pass
 
     @abstractmethod
@@ -202,10 +197,15 @@ if api is None:
 
                             ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
-            def create_enum_struct(self, name, values):
+            def create_enum_struct(self, name, values, width = 0):
+                # type: (str, dict[int, str], int) -> None
                 enum_id = self.create_enum(name)
+                enum_id = self.get_enum_id(name)
+                sheet_name = name.split("::")[-2]
+                self.set_enum_width(enum_id, width)
                 for key in values:
-                    self.add_enum_member(enum_id, values[key], key)
+                    self.remove_enum_member(enum_id, key, f"{sheet_name}_{values[key]}")
+                    self.add_enum_member(enum_id, f"{sheet_name}_{values[key]}", key)
 
             def create_struct(self, name, fields):
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
@@ -215,22 +215,47 @@ if api is None:
                     self.remove_struct_members(struct_id)
                 struct_type = self.get_struct(struct_id)
                 for [index, [type, name]] in fields.items():
-                    self.create_struct_member(
-                        struct_type,
-                        name,
-                        index,
-                        self.get_idc_type_from_ida_type(type),
-                        None,
-                        self.get_size_from_ida_type(type),
-                    )
+                    if (
+                        self.get_idc_type_from_ida_type(
+                            self.clean_struct_name(type)
+                        )
+                        == self.get_struct_flag()
+                    ):
+                        type = self.clean_struct_name(type)
+                        self.create_struct_member(
+                            struct_type,
+                            name,
+                            index,
+                            self.get_idc_type_from_ida_type(type),
+                            self.get_struct_opinfo_from_type(type),
+                            self.get_size_from_ida_type(type),
+                        )
+                    elif (
+                        self.get_idc_type_from_ida_type(type)
+                        == self.get_enum_flag()
+                    ):
+                        self.create_struct_member(
+                            struct_type,
+                            name,
+                            index,
+                            self.get_idc_type_from_ida_type(type),
+                            self.get_enum_opinfo_from_type(type),
+                            self.get_size_from_ida_type(type),
+                        )
+                    else:
+                        self.create_struct_member(
+                            struct_type,
+                            name,
+                            index,
+                            self.get_idc_type_from_ida_type(type),
+                            None,
+                            self.get_size_from_ida_type(type),
+                        )
                     meminfo = self.get_struct_member_by_name(struct_type, name)
                     self.set_struct_member_info(
                         struct_type, meminfo, 0, self.get_tinfo_from_type(type), 0
                     )
                 idaapi.end_type_updating(idaapi.UTP_STRUCT)
-
-            def parse_name(self, name):
-                return name
 
             def set_func_name(self, ea, name, cmt):
                 ida_name.set_name(ea, name)
@@ -261,16 +286,12 @@ if api is None:
     else:
         # noinspection PyUnresolvedReferences
         class GhidraApi(BaseApi):
-            def create_enum_struct(self, name, values):
-                # type: (str, dict[str, int]) -> None
+            def create_enum_struct(self, name, values, width = 0):
+                # type: (str, dict[str, int], int) -> None
                 pass
 
             def create_struct(self, name, fields):
                 # type: (str, dict[str, str]) -> None
-                pass
-
-            def parse_name(self, name):
-                # type: (str) -> str
                 pass
 
             def get_next_func(self, ea, pattern, flag):
@@ -322,22 +343,25 @@ exd_func_patterns = {
 }
 
 exd_map = ExcelListFile(game_data.get_file(ParsedFileName("exd/root.exl"))).dict
-exd_struct_map = {}
-exd_headers = {}
+exd_struct_map: dict[str, str] = {}
+exd_headers: tuple[dict[int, tuple[str, str]], dict[str, dict[int, str]], int] = {}
 
-api.create_enum_struct(api.parse_name("Component::Exd::SheetsEnum"), exd_map)
+api.create_enum_struct("Component::Exd::SheetsEnum", exd_map)
 
 for key in exd_map:
     print(f"Parsing schema for {exd_map[key]}.")
     exd_headers[key] = ExcelHeaderFile(
-        game_data.get_file(ParsedFileName("exd/" + exd_map[key] + ".exh"))
+        game_data.get_file(ParsedFileName("exd/" + exd_map[key] + ".exh")),
+        exd_map[key]
     ).map_names(game_data.get_exd_schema(exd_map[key]))
 
 for key in exd_headers:
-    [exd_header, exd_header_count] = exd_headers[key]
+    [exd_header, exd_header_enums, exd_header_count] = exd_headers[key]
     struct_name = f"Component::Exd::Sheets::{exd_map[key]}"
     exd_struct_map[key] = struct_name
-    api.create_struct(api.parse_name(struct_name), exd_header)
+    for enum_key in exd_header_enums:
+        api.create_enum_struct(f"{struct_name}::{enum_key}", exd_header_enums[enum_key], 1)
+    api.create_struct(struct_name, exd_header)
 
 # if a new pattern is found, add it to the exd_func_patterns dict
 for pattern in exd_func_patterns:
