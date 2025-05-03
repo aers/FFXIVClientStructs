@@ -294,6 +294,17 @@ public class Exporter {
     }
 
     private static ProcessedField ProcessField(FieldInfo field, int offset) {
+        if (field.FieldType is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
+            var fieldTypeOverride = $"RedBlackTree::Node<{field.FieldType.GetGenericArguments()[0].FullSanitizeName()}>*";
+            _processType.Add(new ProcessingType(field.FieldType, fieldTypeOverride[..^1]));
+            return new ProcessedField {
+                FieldType = field.FieldType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = field.Name,
+                IsBase = field.IsDirectBase(),
+                FieldTypeOverride = fieldTypeOverride
+            };
+        }
         if (field.FieldType.IsFunctionPointer || field.FieldType.IsUnmanagedFunctionPointer) {
             _processType.Add(field.FieldType.GetFunctionPointerReturnType());
             return new ProcessedFunctionField {
@@ -368,23 +379,50 @@ public class Exporter {
                 FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
             };
         }
-        if (field.FieldType is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
-            var fieldTypeOverride = $"RedBlackTree::Node<{field.FieldType.GetGenericArguments()[0].FullSanitizeName()}>*";
-            _processType.Add(new ProcessingType(field.FieldType, fieldTypeOverride[..^1]));
-            return new ProcessedField {
-                FieldType = field.FieldType,
-                FieldOffset = field.GetFieldOffset() - offset,
-                FieldName = field.Name,
-                IsBase = field.IsDirectBase(),
-                FieldTypeOverride = fieldTypeOverride
-            };
-        }
         _processType.Add(field.FieldType);
         return new ProcessedField {
             FieldType = field.FieldType,
             FieldOffset = field.GetFieldOffset() - offset,
             FieldName = field.Name,
             IsBase = field.IsDirectBase()
+        };
+    }
+
+    private static ProcessedField ProcessParameter(ParameterInfo parameter) {
+        if (parameter.ParameterType is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
+            var fieldTypeOverride = $"RedBlackTree::Node<{parameter.ParameterType.GetGenericArguments()[0].FullSanitizeName()}>*";
+            _processType.Add(new ProcessingType(parameter.ParameterType, fieldTypeOverride[..^1]));
+            return new ProcessedField {
+                FieldType = parameter.ParameterType,
+                FieldOffset = -1,
+                FieldName = parameter.Name!,
+                FieldTypeOverride = fieldTypeOverride
+            };
+        }
+        _processType.Add(parameter.ParameterType);
+        return new ProcessedField {
+            FieldType = parameter.ParameterType,
+            FieldOffset = -1,
+            FieldName = parameter.Name!
+        };
+    }
+
+    private static ProcessedField ProcessVirtualParameter(Type parameter, int i, ParameterInfo[]? parameters) {
+        if (parameter is { Namespace: "FFXIVClientStructs.STD.Helper", Name: "Node*" }) {
+            var fieldTypeOverride = $"RedBlackTree::Node<{parameter.GetGenericArguments()[0].FullSanitizeName()}>*";
+            _processType.Add(new ProcessingType(parameter, fieldTypeOverride[..^1]));
+            return new ProcessedField {
+                FieldType = parameter,
+                FieldOffset = -1,
+                FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
+                FieldTypeOverride = fieldTypeOverride
+            };
+        }
+        _processType.Add(parameter);
+        return new ProcessedField {
+            FieldType = parameter,
+            FieldOffset = -1,
+            FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}"
         };
     }
 
@@ -420,24 +458,17 @@ public class Exporter {
             ProcessedVirtualFunction[]? virtualFunctions = null;
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
-                var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => new { Name = t.Name, Parameters = t.GetParameters(), ReturnType = t.ReturnType }).ToArray();
+                var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => Tuple.Create(t.Name, t.GetParameters(), t.ReturnType)).ToArray();
                 virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => {
-                    var memberFunction = memberFunctions.FirstOrDefault(t => t.Name == f.Name);
+                    var memberFunction = memberFunctions.FirstOrDefault(t => t.Item1 == f.Name);
                     var returnType = f.FieldType.GetFunctionPointerReturnType();
-                    if (memberFunction?.ReturnType != returnType) memberFunction = null;
+                    if (memberFunction?.Item3 != returnType) memberFunction = null;
                     _processType.Add(f.FieldType.GetFunctionPointerReturnType());
                     return new ProcessedVirtualFunction {
                         VirtualFunctionName = f.Name,
                         Offset = f.GetFieldOffset(),
                         VirtualFunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
-                        VirtualFunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => {
-                            _processType.Add(p);
-                            return new ProcessedField {
-                                FieldType = p,
-                                FieldOffset = -1,
-                                FieldName = i == 0 ? "this" : memberFunction?.Parameters[i - 1].Name ?? $"a{i + 1}"
-                            };
-                        }).ToArray()
+                        VirtualFunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => ProcessVirtualParameter(p, i, memberFunction?.Item2)).ToArray()
                     };
                 }).ToArray();
             }
@@ -466,14 +497,7 @@ public class Exporter {
                                     FieldOffset = -1,
                                     FieldName = "this"
                                 },
-                                .. memberFunctionParameters.Select(p => {
-                                    _processType.Add(p.ParameterType);
-                                    return new ProcessedField {
-                                        FieldType = p.ParameterType,
-                                        FieldOffset = -1,
-                                        FieldName = p.Name!
-                                    };
-                                }).ToArray()]
+                                .. memberFunctionParameters.Select(ProcessParameter).ToArray()]
                         },
                     ];
                 }
