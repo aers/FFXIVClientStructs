@@ -13047,7 +13047,11 @@ classes:
       7: IsUnlocked
       154: CancelInteraction
       200: GetTitle # lua function "GetEventHandlerTitle"
+      202: GetEventId
       222: GetIconId
+      226: IsOccupied33
+      227: GetOccupiedConditionId
+      228: GetOccupiedPermissionId
       246: GetScriptVersion
       253: GetDescription
       254: GetReliefText

@@ -27,6 +27,9 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(200)]
     public partial void GetTitle(Utf8String* outTitle);
 
+    [VirtualFunction(202)]
+    public partial EventId GetEventId();
+
     [VirtualFunction(253)]
     public partial void GetDescription(Utf8String* outDescription);
 
