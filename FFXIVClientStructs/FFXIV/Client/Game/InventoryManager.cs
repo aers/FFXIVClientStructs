@@ -10,7 +10,12 @@ public unsafe partial struct InventoryManager {
     public static partial InventoryManager* Instance();
 
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
-    [FieldOffset(0x1E10)] internal InventoryType UnkInventoryType; // Can be EquippedItems, RetainerEquippedItems...?
+    /// <remarks>
+    /// Used to calculate the average item level of equipped items in various places,
+    /// for example in the agents MiragePrismMiragePlate, Status or TryOn.<br/>
+    /// Can be EquippedItems or RetainerEquippedItems.
+    /// </remarks>
+    [FieldOffset(0x1E10)] public InventoryType ItemLevelInventoryType;
 
     // Seems to be reused for FATE HandIns and Mail too??!
     [FieldOffset(0x1E18), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsLocal; // 6th slot is Gil
