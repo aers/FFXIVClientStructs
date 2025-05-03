@@ -261,4 +261,11 @@ public static class Extensions {
         using var stream = file.CreateText();
         stream.Write(content);
     }
+
+    public static bool IsInStructList(this string name, List<ProcessedStruct> structs) {
+        foreach (var str in structs) {
+            if (str.StructTypeName == name) return true;
+        }
+        return false;
+    }
 }
