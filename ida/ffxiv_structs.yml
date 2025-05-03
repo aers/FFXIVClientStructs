@@ -24898,7 +24898,7 @@ structs:
       name: this
     - type: Client::Game::Character::Character*
       name: player
-    - type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
+    - type: RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
       name: iterator
     - type: byte
       name: seed
@@ -61889,30 +61889,6 @@ structs:
     name: Value
     offset: 16
   member_functions: []
-- type: Helper::RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>, unsigned int, Helper::PairKeyExtractor<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>
-  name: Node
-  namespace: Helper
-  union: False
-  fields:
-  - type: RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
-    name: _Left
-    offset: 0
-  - type: RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
-    name: _Parent
-    offset: 8
-  - type: RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
-    name: _Right
-    offset: 16
-  - type: Helper::RedBlackTreeNodeColor
-    name: _Color
-    offset: 24
-  - type: byte
-    name: _Isnil
-    offset: 25
-  - type: StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>
-    name: _Myval
-    offset: 32
-  member_functions: []
 - type: RedBlackTree::Node<StdPair<Client::System::String::Utf8String, Component::Text::MacroEncoder::MacroCodeDescription>>
   name: Node
   namespace: Helper
@@ -61958,6 +61934,30 @@ structs:
     name: _Isnil
     offset: 25
   - type: StdPair<int, Client::System::Scheduler::Resource::SchedulerResource>
+    name: _Myval
+    offset: 32
+  member_functions: []
+- type: RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
+    name: _Left
+    offset: 0
+  - type: RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
+    name: _Parent
+    offset: 8
+  - type: RedBlackTree::Node<StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: StdPair<unsigned int, Client::Game::Event::DailyQuestMap::Entry>
     name: _Myval
     offset: 32
   member_functions: []
@@ -80456,6 +80456,14 @@ structs:
       name: this
     - type: unsigned __int64
       name: listingId
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 84 C0 74 07 C6 83 90 31 00 00 01
+    return_type: byte
+    name: OpenListingByContentId
+    parameters:
+    - type: Client::UI::Agent::AgentLookingForGroup*
+      name: this
+    - type: unsigned __int64
+      name: contentId
 - type: Client::UI::Misc::RaptureHotbarModule
   name: RaptureHotbarModule
   namespace: Client.UI.Misc
