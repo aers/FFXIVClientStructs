@@ -46,7 +46,7 @@ public unsafe partial struct AgentLookingForGroup {
     public partial bool OpenListing(ulong listingId);
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 84 C0 74 07 C6 83 90 31 00 00 01")]
-    public partial bool OpenListingByContentId(ulong contentId);
+    public partial bool OpenListingByContentId(ulong contentId); // Actual call inlined
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public unsafe partial struct TreasureMapDetail {
