@@ -10597,6 +10597,7 @@ classes:
       0x14031A6C0: ctor
       0x14031AA60: Finalizer
       0x140320A90: OpenListing
+      0x1403209B0: OpenListingByContentId
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
       - ea: 0x142088408
