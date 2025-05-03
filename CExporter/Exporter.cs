@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -138,20 +137,18 @@ public class Exporter {
                 if (memberFunction != null || staticAddress != null)
                     _processType.Add(methodInfo.ReturnType);
                 if (memberFunction == null) continue;
+                var memberFunctionReturnType = new ProcessedMemberFunctionReturn(methodInfo.ReturnType, null);
+                if (methodInfo.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
+                    _processType.Add(memberFunctionReturnType.Type);
+                else
+                    memberFunctionReturnType.OverrideType = $"Component::Exd::Sheets::{excelAttribute.SheetName}*";
                 currentStruct.StaticMemberFunctions ??= [];
                 currentStruct.StaticMemberFunctions = [.. currentStruct.StaticMemberFunctions,
                     new ProcessedMemberFunction {
                         MemberFunctionSignature = memberFunction.Signature,
                         MemberFunctionName = methodInfo.Name,
-                        MemberFunctionReturnType = methodInfo.ReturnType,
-                        MemberFunctionParameters = methodInfo.GetParameters().Select(p => {
-                            _processType.Add(p.ParameterType);
-                            return new ProcessedField {
-                                FieldType = p.ParameterType,
-                                FieldOffset = -1,
-                                FieldName = p.Name!
-                            };
-                        }).ToArray()
+                        MemberFunctionReturnType = memberFunctionReturnType,
+                        MemberFunctionParameters = methodInfo.GetParameters().Select(ProcessParameter).ToArray()
                     }];
             }
             _structs[currentStructIndex] = currentStruct;
@@ -399,6 +396,15 @@ public class Exporter {
                 FieldTypeOverride = fieldTypeOverride
             };
         }
+        if (parameter.GetCustomAttribute<CExporterExcelAttribute>() != null) {
+            var sheetName = parameter.GetCustomAttribute<CExporterExcelAttribute>()!.SheetName;
+            return new ProcessedField {
+                FieldType = parameter.ParameterType,
+                FieldOffset = -1,
+                FieldName = parameter.Name!,
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
+            };
+        }
         _processType.Add(parameter.ParameterType);
         return new ProcessedField {
             FieldType = parameter.ParameterType,
@@ -416,6 +422,15 @@ public class Exporter {
                 FieldOffset = -1,
                 FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
                 FieldTypeOverride = fieldTypeOverride
+            };
+        }
+        if (parameter.GetCustomAttribute<CExporterExcelAttribute>() != null) {
+            var sheetName = parameter.GetCustomAttribute<CExporterExcelAttribute>()!.SheetName;
+            return new ProcessedField {
+                FieldType = parameter,
+                FieldOffset = -1,
+                FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
+                FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
             };
         }
         _processType.Add(parameter);
@@ -481,8 +496,11 @@ public class Exporter {
                     var memberFunctionAddress = memberFunction.GetCustomAttribute<MemberFunctionAttribute>();
                     if (memberFunctionAddress == null) continue;
                     var memberFunctionParameters = memberFunction.GetParameters();
-                    var memberFunctionReturnType = memberFunction.ReturnType;
-                    _processType.Add(memberFunctionReturnType);
+                    var memberFunctionReturnType = new ProcessedMemberFunctionReturn(memberFunction.ReturnType, null);
+                    if (memberFunction.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
+                        _processType.Add(memberFunctionReturnType.Type);
+                    else
+                        memberFunctionReturnType.OverrideType = $"Component::Exd::Sheets::{excelAttribute.SheetName}*";
                     memberFunctionsArray =
                     [
                         .. memberFunctionsArray,
@@ -726,8 +744,18 @@ public class ProcessedVirtualFunction {
 public class ProcessedMemberFunction {
     public required string MemberFunctionSignature;
     public required string MemberFunctionName;
-    public required Type MemberFunctionReturnType;
+    public required ProcessedMemberFunctionReturn MemberFunctionReturnType;
     public required ProcessedField[] MemberFunctionParameters;
+}
+
+public class ProcessedMemberFunctionReturn(Type type, string? overrideType) {
+    public Type Type = type;
+    public string? OverrideType = overrideType;
+    public static implicit operator ProcessedMemberFunctionReturn((Type Type, string OverrideType) value) => new(value.Type, value.OverrideType);
+    public static implicit operator (Type Type, string? OverrideType) (ProcessedMemberFunctionReturn value) => (value.Type, value.OverrideType);
+    public static implicit operator ProcessedMemberFunctionReturn(Type type) => new(type, null);
+    public static implicit operator Type(ProcessedMemberFunctionReturn value) => value.Type;
+    public static implicit operator string(ProcessedMemberFunctionReturn value) => value.OverrideType ?? value.Type.FullSanitizeName();
 }
 
 public class ProcessedEnumConverter : IYamlTypeConverter {
@@ -875,7 +903,7 @@ public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("signature"));
         emitter.Emit(new Scalar(m.MemberFunctionSignature));
         emitter.Emit(new Scalar("return_type"));
-        emitter.Emit(new Scalar(m.MemberFunctionReturnType.FullSanitizeName()));
+        emitter.Emit(new Scalar(m.MemberFunctionReturnType));
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(m.MemberFunctionName));
         emitter.Emit(new Scalar("parameters"));
