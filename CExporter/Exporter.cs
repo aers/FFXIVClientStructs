@@ -752,7 +752,7 @@ public class ProcessedMemberFunctionReturn(Type type, string? overrideType) {
     public Type Type = type;
     public string? OverrideType = overrideType;
     public static implicit operator ProcessedMemberFunctionReturn((Type Type, string OverrideType) value) => new(value.Type, value.OverrideType);
-    public static implicit operator (Type Type, string? OverrideType) (ProcessedMemberFunctionReturn value) => (value.Type, value.OverrideType);
+    public static implicit operator (Type Type, string? OverrideType)(ProcessedMemberFunctionReturn value) => (value.Type, value.OverrideType);
     public static implicit operator ProcessedMemberFunctionReturn(Type type) => new(type, null);
     public static implicit operator Type(ProcessedMemberFunctionReturn value) => value.Type;
     public static implicit operator string(ProcessedMemberFunctionReturn value) => value.OverrideType ?? value.Type.FullSanitizeName();
