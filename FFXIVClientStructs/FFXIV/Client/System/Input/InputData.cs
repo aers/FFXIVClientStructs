@@ -19,6 +19,18 @@ public unsafe partial struct InputData {
      * All the following keyboard keys states are not triggered if the chat input is active
      */
     [FieldOffset(0x500)] public KeyboardInputData KeyboardInputs;
+
+    [MemberFunction("E9 ?? ?? ?? ?? 83 7F 44 02")]
+    public partial bool IsInputIdPressed(InputId inputId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 41 8B D5")]
+    public partial bool IsInputIdDown(InputId inputId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 37 EB 06")]
+    public partial bool IsInputIdHeld(InputId inputId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 88 43 0F")]
+    public partial bool IsInputIdReleased(InputId inputId);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x24C)]

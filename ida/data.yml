@@ -6520,8 +6520,10 @@ classes:
       - ea: 0x1420369C8
     funcs:
       0x1405F2FD0: ctor
-      0x1405F35D0: IsInputIdKeyPress
-      0x1405F36E0: IsInputIdClicked
+      0x1405F35D0: IsInputIdDown
+      0x1405F36E0: IsInputIdPressed
+      0x1405F3830: IsInputIdHeld
+      0x1405F3C10: IsInputIdReleased
       0x1405F4000: IsMouseCombinationDragged
   Client::System::Input::GamepadInputData:
     funcs:
