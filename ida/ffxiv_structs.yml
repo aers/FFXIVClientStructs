@@ -19385,7 +19385,7 @@ structs:
       name: columnIndex
   static_member_functions:
   - signature: E8 ?? ?? ?? ?? 8B 75 00
-    return_type: __int64
+    return_type: Component::Exd::Sheets::Item*
     name: GetItemRowById
     parameters:
     - type: unsigned int
@@ -19394,7 +19394,7 @@ structs:
     return_type: int
     name: GetBannerConditionUnlockState
     parameters:
-    - type: __int64
+    - type: Component::Exd::Sheets::BannerCondition*
       name: row
   - signature: E8 ?? ?? ?? ?? 49 8B 5E ?? BA 05 00 00 00
     return_type: unsigned int
@@ -62863,6 +62863,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: outTitle
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::EventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -62919,6 +62925,12 @@ structs:
     offset: 56
   - name: GetIconId
     offset: 1776
+  - name: IsOccupied33
+    offset: 1808
+  - name: GetOccupiedConditionId
+    offset: 1816
+  - name: GetOccupiedPermissionId
+    offset: 1824
   - name: GetScriptVersion
     offset: 1968
   - name: Initialize
@@ -63071,7 +63083,7 @@ structs:
     name: Inventories
     offset: 7688
   - type: Client::Game::InventoryType
-    name: UnkInventoryType
+    name: ItemLevelInventoryType
     offset: 7696
   - type: Client::Game::InventoryItem
     name: TradeItemsLocal
@@ -69454,6 +69466,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::CraftEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -69550,6 +69568,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::GatheringEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -73950,6 +73974,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::GatheringPointEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -74045,6 +74075,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::HwdDevEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -82069,6 +82105,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -82172,6 +82214,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::MJI::MJIPastureHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -108772,6 +108820,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::LuaEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -120371,6 +120425,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::AetheryteEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -120445,6 +120505,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::CustomTalkEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -120609,6 +120675,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::QuestEventHandler*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -127670,6 +127742,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::Director*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -132208,6 +132286,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Event::GoldSaucerDirector*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -132301,6 +132385,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::Fate::FateDirector*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -132385,6 +132475,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::MassivePcContent::MassivePcContentDirector*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -134423,6 +134519,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::GoldSaucer::GFateDirector*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -136531,6 +136633,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::ContentDirector*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -146188,6 +146296,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDirector*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -146281,6 +146395,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentDirector*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -147136,6 +147256,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentEureka*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -150450,6 +150576,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -150617,6 +150749,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
@@ -150716,6 +150854,12 @@ structs:
       name: this
     - type: Client::System::String::Utf8String*
       name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
   - name: GetDescription
     offset: 2024
     return_type: void
