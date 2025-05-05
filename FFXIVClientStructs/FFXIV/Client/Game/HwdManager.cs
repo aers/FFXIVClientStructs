@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct HwdManager {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8B 4C 24 ?? 0F B6 50 11", 3, isPointer: true)]
-    public static partial MirageManager* Instance();
+    public static partial HwdManager* Instance();
 
     [FieldOffset(0x11)] public byte DevelopmentLevel;
     [FieldOffset(0x12)] public ushort TerritoryTypeId;
