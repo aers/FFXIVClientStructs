@@ -416,18 +416,17 @@ functions:
   0x140A39E10: ProcessPacketAchievementNearCompletion
   0x140A39E30: ProcessPacketAchievementMergeBitmask
   0x140A3A510: ProcessPacketLandSetInitialize
-  0x140A3B450: ProcessPacketGcArmyExpeditionInfo
-  0x140A3B490: ProcessPacketGcArmyExpeditionInfo2
+  0x140A3B450: ProcessPacketUpdateGcArmyMember
+  0x140A3B490: ProcessPacketUpdateGcArmyData
   0x140A3B4D0: ProcessPacketGcArmyExpeditionMissionResult
   0x140A3B510: ProcessPacketGcArmyExpeditionEnlistment
   0x140A3B610: ProcessPacketLandSetMap
   0x140A3B650: ProcessPacketMissionStart
-  0x140A3B710: ProcessPacketGcArmyExpeditionMissionRepeatFlags
   0x140A3B9A0: ProcessPacketPlayMotionSync
   0x140A3BDF0: ProcessPacketMount
   0x140A3C5A0: ProcessPacketPrepareZoning
   0x140A3C600: ProcessPacketFall
-  0x140A3C660: ProcessPacketMSQTrackerComplete
+  0x140A3C660: ProcessPacketScenarioTreeComplete
   0x140A3C6C0: ProcessPacketPerformance
   0x140A3CAB0: ProcessPacketMapEffect
   0x1416975F0: ProcessPacketUIModulePacket
@@ -1042,8 +1041,8 @@ classes:
       0x140A3E6A0: Finalizer
       0x140A3E740: Initialize
       0x140A3ED50: ProcessPacketInventoryTransaction
-      0x140A3F110: ProcessPacketMarketBoardInfo
-      0x140A3F340: ProcessPacketRetainerInfo
+      0x140A3F110: ProcessPacketRetainerMarketPrices
+      0x140A3F340: ProcessPacketRetainerSummary
       0x140A3F590: DeleteCharacterAtIndex
       0x140A3F6C0: SpawnBattleChara
       0x140A3F7B0: CreateQueuedBattleChara
