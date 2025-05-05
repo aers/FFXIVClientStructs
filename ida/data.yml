@@ -162,6 +162,15 @@ functions:
   0x1400B7DC0: IsDutyRecorderPlayback
   0x1400B7E20: IsInDeepDungeon
   0x1400B7E70: IsInEureka
+  0x1400B7E90: GetEurekaPublicContentDirector
+  0x1400B7EB0: IsInSaveTheQueenInstance # static, IsInSaveTheQueenInstance(bool includeDelubrumReginae)
+  0x1400B7EE0: IsInDelubrumReginae # Delubrum Reginae, Delubrum Reginae (Savage)
+  0x1400B7F00: IsInAnythingBozjaRelated # Bozja, Delubrum Reginae, Delubrum Reginae (Savage), Gangos
+  0x1400B7F30: IsInOccultCrescent
+  0x1400B8030: IsInIslandSanctuary
+  0x1400B8060: IsInBlunderville
+  0x1400B8080: IsInCosmicExploration
+  0x1400B80A0: IsInSanctumOfTheTwelve
   0x1400B80C0: IsUnconscious
   0x1400B80D0: IsRolePlaying
   0x1400B80E0: CanApplyGlamourPlates
@@ -170,6 +179,8 @@ functions:
   0x1400B8270: IsClassJobAGatherer  # static, (classJobId) -> bool
   0x1400B8480: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
   0x1400BB820: OpenWebURL
+  0x14025B050: GetMainCommandAgentId
+  0x14025B0D0: GetMainCommandInputId
   0x1408353B0: GetUIModule
   0x140920720: ToObjStrId
   0x1409CEBF0: GenerateItemsChecksum # for Banners
@@ -506,7 +517,6 @@ classes:
       0x1405C49B0: GetTourismDirector
       0x1405C4F30: UpdateGameSpeedMultiplier
       0x1405C5020: SetActiveFestivals
-      0x1400B7EB0: IsInSaveTheQueenInstance # static, IsInSaveTheQueenInstance(bool includeDelubrumReginae)
       0x14097B420: IsInPvPInstance
       0x14097B460: IsInFrontlineArea
       0x14097B480: IsInCrystallineConflictArea
