@@ -33,6 +33,18 @@ public unsafe partial struct AgentGearSet {
     public void EquipGearset(int gearsetId)
         => SendEvent(4, gearsetId);
 
+    public void ReassignGear(int gearsetId)
+        => SendEvent(6, gearsetId);
+
+    public void ReassignSetNumber(int gearsetId)
+        => SendEvent(7, gearsetId);
+
+    public void MoveSetUp(int gearsetId)
+        => SendEvent(8, gearsetId);
+
+    public void MoveSetDown(int gearsetId)
+        => SendEvent(9, gearsetId);
+
     public void OpenRenameDialog(int gearsetId)
         => SendEvent(10, gearsetId);
 
@@ -42,8 +54,24 @@ public unsafe partial struct AgentGearSet {
     public void OpenGearsetPreview(int gearsetId)
         => SendEvent(12, gearsetId);
 
+    /// <remarks> Only works when Cross Hotbars are enabled. </remarks>
+    public void SetToHotbar(int gearsetId)
+        => SendEvent(13, gearsetId);
+
     public void UpdateGearset(int gearsetId)
         => SendEvent(16, gearsetId);
+
+    public void LinkToGlamourPlate(int gearsetId)
+        => SendEvent(20, gearsetId);
+
+    public void ChangeGlamourPlateLink(int gearsetId)
+        => SendEvent(21, gearsetId);
+
+    public void RemoveGlamourPlateLink(int gearsetId)
+        => SendEvent(22, gearsetId);
+
+    public void EditPortrait(int gearsetId)
+        => SendEvent(23, gearsetId);
 
     private void SendEvent(int evt, int gearsetId = 0) {
         var result = stackalloc AtkValue[1];
