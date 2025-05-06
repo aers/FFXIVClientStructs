@@ -6375,7 +6375,10 @@ classes:
       0x1407E6D10: GetRoleForClassJobId
   Component::Exd::Sheets::BannerCondition:
     funcs:
-      0x1409809B0: GetUnlockState
+      0x1409809B0: GetUnlockState # In CS as ExdModule.GetBannerConditionUnlockState
+  Component::Exd::Sheets::ZoneSharedGroup:
+    funcs:
+      0x1407F4170: GetEnabledRequirementIndex # In CS as ExdModule.GetEnabledZoneSharedGroupRequirementIndex
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x142034598

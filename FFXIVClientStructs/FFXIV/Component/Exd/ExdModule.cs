@@ -45,6 +45,9 @@ public unsafe partial struct ExdModule {
     [MemberFunction("40 53 48 83 EC 20 0F B6 41 ?? 48 8B D9 84 C0 74")]
     public static partial int GetBannerConditionUnlockState([CExporterExcel("BannerCondition")] void* row);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 53 6C")]
+    public static partial uint GetEnabledZoneSharedGroupRequirementIndex([CExporterExcel("ZoneSharedGroup")] void* row);
+
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 5E ?? BA 05 00 00 00")]
     public static partial uint GetRoleForClassJobId(uint classJobId);
 }
