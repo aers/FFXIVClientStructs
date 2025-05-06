@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using static FFXIVClientStructs.FFXIV.Client.UI.Misc.RaptureGearsetModule;
+using static FFXIVClientStructs.FFXIV.Client.UI.RaptureAtkModule;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -12,7 +13,13 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xBC0)]
 public unsafe partial struct AgentGearSet {
+    [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
+
+    [FieldOffset(0x118), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
+
     [FieldOffset(0x878)] public GearsetCharaView CharaView;
+
+    [FieldOffset(0xBA8)] public StdVector<int> GearSetIds;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24")]
     public partial void OpenBannerEditorForGearset(int gearsetId);
@@ -44,6 +51,13 @@ public unsafe partial struct AgentGearSet {
         values[0].SetInt(evt); // case
         values[1].SetInt(gearsetId); // optional gearsetId
         ReceiveEvent(result, values, 2, 0);
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
+    public struct ContextMenuParam {
+        [FieldOffset(0x00)] public int Unk0;
+        [FieldOffset(0x04)] public int EventId;
+        [FieldOffset(0x08)] public int GearSetId;
     }
 
     // Client::UI::Agent::AgentGearSet::GearsetCharaView
