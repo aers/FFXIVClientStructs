@@ -25,7 +25,7 @@ public unsafe partial struct Telepo {
     /// Then, the growth is halved after 1000, i.e. if f(Entry, Exit) > 1000, then return (f(Entry, Exit) - 1000) / 2 + 1000 instead.
     /// Additionally, if <paramref name="residentArea"/> is true, the cost is quartered, and if <paramref name="favored"/> is true, the cost is halved.
     [MemberFunction("E8 ?? ?? ?? ?? 89 84 9D")]
-    public partial uint GetTeleportCost(void* aetheryteRow, short multiplier, bool favored, bool residentArea);
+    public partial uint GetTeleportCost([CExporterExcel("Aetheryte")] void* aetheryteRow, short multiplier, bool favored, bool residentArea);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
