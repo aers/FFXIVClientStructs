@@ -10405,6 +10405,7 @@ classes:
     funcs:
       0x140E3E640: ctor
       0x140E3E910: Finalizer
+      0x140E425C0: OpenContextMenuForGearset
       0x140D76F10: OpenRegistGearSetList # (this, InventoryItem*, ushort)
       0x140E43430: OpenBannerEditorForGearset
   Client::UI::Agent::AgentSupportMain:
