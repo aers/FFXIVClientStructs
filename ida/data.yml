@@ -346,8 +346,16 @@ functions:
   0x1400BA490: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400BA5C0: GetPartyMemberClassJobByContentId
   0x140844B40: ObjectIdToEntityId # returns invalid id if objectid is not a player
+  0x140A210E0: SendEventCompletePacket
+  0x140A21C20: ProcessPacketEventStart
+  0x140A21C80: ProcessPacketEventFinish
+  0x140A21D40: ProcessPacketBattleTalk
+  0x140A21DE0: ProcessPacketBalloonTalk
   0x140A21A00: ProcessPacketEventPlay
   0x140A21EE0: ProcessPacketSystemLogMessage
+  0x140A21FA0: ProcessPacketMapUpdate
+  0x140A22060: ProcessPacketFateInfo
+  0x140A220B0: ProcessPacketFateProgress
   0x140A251B0: SendClientSelectDataConfigFlagsUpdate
   0x140A25AE0: ProcessPacketSpawnPlayer
   0x140A25BE0: ProcessPacketSpawnNPC
@@ -407,10 +415,30 @@ functions:
   0x140A396B0: ProcessPacketUpdatePartyPositions
   0x140A396E0: ProcessPacketUpdateAllianceNormalPositions
   0x140A39710: ProcessPacketUpdateAllianceSmallPositions
+  0x140A39830: ProcessPacketChatIncoming
+  0x140A399E0: ProcessPacketInventoryTransaction
+  0x140A39A00: ProcessPacketItemInfo
   0x140A39B90: ProcessPacketRSVData
   0x140A39BB0: ProcessPacketRSFData
   0x140A39C10: ProcessPacketHuntingLogEntry
   0x140A39C50: ProcessPacketNPCYell
+  0x140A39D10: ProcessPacketEquipDisplayFlags
+  0x140A39DE0: ProcessPacketAchievementList
+  0x140A39E10: ProcessPacketAchievementNearCompletion
+  0x140A39E30: ProcessPacketAchievementMergeBitmask
+  0x140A3A510: ProcessPacketLandSetInitialize
+  0x140A3B450: ProcessPacketUpdateGcArmyMember
+  0x140A3B490: ProcessPacketUpdateGcArmyData
+  0x140A3B4D0: ProcessPacketGcArmyExpeditionMissionResult
+  0x140A3B510: ProcessPacketGcArmyExpeditionEnlistment
+  0x140A3B610: ProcessPacketLandSetMap
+  0x140A3B650: ProcessPacketMissionStart
+  0x140A3B9A0: ProcessPacketPlayMotionSync
+  0x140A3BDF0: ProcessPacketMount
+  0x140A3C5A0: ProcessPacketPrepareZoning
+  0x140A3C600: ProcessPacketFall
+  0x140A3C660: ProcessPacketScenarioTreeComplete
+  0x140A3C6C0: ProcessPacketPerformance
   0x140A3CAB0: ProcessPacketMapEffect
   0x1416975F0: ProcessPacketUIModulePacket
   0x1418BB270: ProcessPacketCountdown
@@ -1029,11 +1057,20 @@ classes:
       0x140A3DBF0: ctor
       0x140A3E6A0: Finalizer
       0x140A3E740: Initialize
+      0x140A3ED50: ProcessPacketInventoryTransaction
+      0x140A3F110: ProcessPacketRetainerMarketPrices
+      0x140A3F340: ProcessPacketRetainerSummary
+      0x140A3F590: DeleteCharacterAtIndex
+      0x140A3F6C0: SpawnBattleChara
       0x140A3F7B0: CreateQueuedBattleChara
       0x140A3F870: OnReceiveCreatePlayerBattleCharaPacket
-      0x140A3F950: OnReceiveCreateNonPlayerBattleCharaPacket
+      0x140A3F950: OnReceiveCreateNpcBattleCharaPacket
+      0x140A3FA20: OnReceiveCreateBossBattleCharaPacket
       0x140A3FAE0: ProcessBattleCharaCreationQueue
+      0x140A3FBB0: TrySpawnPlayerByEntityId
       0x140A433A0: AddBattleCharaToCreationQueue
+      0x140A3FEA0: ProcessMovement #Maybe
+      0x140A402F0: ProcessVfx #Maybe
   Component::GUI::AtkInputManager:
     funcs:
       0x1406419B0: HandleInput
@@ -1656,6 +1693,7 @@ classes:
       - ea: 0x142719340
     funcs:
       0x140C68390: ctor
+      0x140C687D0: Update
       0x140C68B40: GetCurrentWeather
       0x140C68B80: GetIndividualWeather
       0x140C68C00: HasIndividualWeather
