@@ -12,6 +12,8 @@ public unsafe partial struct GameMain {
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray4<Festival> _activeFestivals;
     [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray4<Festival> _queuedFestivals;
 
+    [FieldOffset(0x210)] public ZoneSharedGroupManager ZoneSharedGroupManager;
+
     [FieldOffset(0xAD8)] public JobGaugeManager JobGaugeManager;
 
     [FieldOffset(0x3FD0)] public EmoteManager EmoteManager;

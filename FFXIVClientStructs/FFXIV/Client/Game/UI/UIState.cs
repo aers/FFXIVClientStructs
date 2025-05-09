@@ -161,7 +161,7 @@ public unsafe partial struct UIState {
     /// </list>
     /// </returns>
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B CE 89 86")]
-    public partial long IsItemActionUnlocked(void* itemExdPtr);
+    public partial long IsItemActionUnlocked([CExporterExcel("Item")] void* itemExdPtr);
 
     /// <summary>
     /// Check if a Triple Triad card is obtained by the character.

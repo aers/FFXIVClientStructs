@@ -523,6 +523,13 @@ classes:
       0x14097B4B0: IsInRivalWingsArea
       0x14097B4D0: IsInPvPArea
       0x1405C1CE0: GetEventGPoseController
+  Client::Game::ZoneSharedGroupManager:
+    vtbls:
+      - ea: 0x142050CB8
+        base: Common::Component::Excel::ExcelSheetWaiter
+    funcs:
+      0x1407F48D0: ctor
+      0x1407F4740: Refresh
   Client::Game::BGMSystem:
     instances:
       - ea: 0x14291C800
@@ -6368,7 +6375,10 @@ classes:
       0x1407E6D10: GetRoleForClassJobId
   Component::Exd::Sheets::BannerCondition:
     funcs:
-      0x1409809B0: GetUnlockState
+      0x1409809B0: GetUnlockState # In CS as ExdModule.GetBannerConditionUnlockState
+  Component::Exd::Sheets::ZoneSharedGroup:
+    funcs:
+      0x1407F4170: GetEnabledRequirementIndex # In CS as ExdModule.GetEnabledZoneSharedGroupRequirementIndex
   Client::System::Scheduler::ScheduleManagement:
     vtbls:
       - ea: 0x142034598
