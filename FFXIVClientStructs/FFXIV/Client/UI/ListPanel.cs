@@ -27,7 +27,7 @@ public unsafe partial struct ListPanel : ICreatable {
     }
 
     [VirtualFunction(0)]
-    public partial void Dtor(byte flags);
+    public partial ListPanel* Dtor(byte freeFlags);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 8F ?? ?? ?? ?? ?? 33 F6")]
     public partial void Ctor();
