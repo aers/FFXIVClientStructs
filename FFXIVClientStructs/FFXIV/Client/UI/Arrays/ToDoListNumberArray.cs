@@ -10,7 +10,7 @@ public unsafe partial struct ToDoListNumberArray {
 
     [FieldOffset(0)] public int HideDutyList;
 
-    [FieldOffset(1)] public int ForceFullRedraw;
+    [FieldOffset(1 * 4)] public int ForceFullRedraw;
 
     [FieldOffset(2 * 4)] public int DutyTimerEnabled;
 
@@ -66,6 +66,37 @@ public unsafe partial struct ToDoListNumberArray {
     [FieldOffset(136 * 4)] public int DutyObjectiveCount;
     [FieldOffset(137 * 4), FixedSizeArray] internal FixedSizeArray10<ObjectiveType> _dutyObjectiveTypes;
 
+    // -1 causes ???, otherwise in range 0~100 for percentage, otherwise just a value
+    [FieldOffset(147 * 4), FixedSizeArray] internal FixedSizeArray10<int> _dutyObjectiveValue;
+
+    // Bar color is only enabled for duty objectives, and only for objective type LargeColorBar
+    [FieldOffset(157 * 4), FixedSizeArray] internal FixedSizeArray10<BarColor> _barColors;
+
+    [FieldOffset(167 * 4)] public int CurrentDutyObjective;
+
+    // bitfield, bit index is objective index
+    [FieldOffset(168 * 4)] public int ObjectiveFocusable;
+    [FieldOffset(169 * 4)] public int DutyTitleFocusable;
+
+    // 170 - Related to MassivePcContent, displays a duty header section but is unstable when used
+
+    [FieldOffset(171 * 4)] public int ShowFateUI;
+    [FieldOffset(172 * 4)] public int ShowBonusEXPIndicator;
+
+    [FieldOffset(173 * 4)] public CheckboxButtonFlags LevelSyncButton;
+
+    [FieldOffset(174 * 4)] public int FateIconId;
+    [FieldOffset(175 * 4)] public int FateObjectiveCount;
+
+    [FieldOffset(176 * 4), FixedSizeArray] internal FixedSizeArray10<ObjectiveType> _fateObjectiveType;
+    [FieldOffset(186 * 4), FixedSizeArray] internal FixedSizeArray10<int> _fateObjectiveValue;
+
+    // 196 - Appears to be a bitfield with each bit from the lsb set if that objective is completed
+    // [FieldOffset(196 * 4)] public int Unknown196;
+
+    // Acts like 171- maybe cosmic/occult??
+    // [FieldOffset(197 * 4)] public int Unknown197;
+    
     public enum ObjectiveType {
         None = 0,
         SmallText = 1, // 2 also has this effect
@@ -81,13 +112,7 @@ public unsafe partial struct ToDoListNumberArray {
         InlineBarLong = 15 // 16 also has this effect
         // all values above 16 are treated as None
     }
-
-    // -1 causes ???, otherwise in range 0~100 for percentage, otherwise just a value
-    [FieldOffset(147 * 4), FixedSizeArray] internal FixedSizeArray10<int> _dutyObjectiveValue;
-
-    // Bar color is only enabled for duty objectives, and only for objective type LargeColorBar
-    [FieldOffset(157 * 4), FixedSizeArray] internal FixedSizeArray10<BarColor> _barColors;
-
+    
     public enum BarColor {
         Blue = 0,
         Red = 1,
@@ -95,36 +120,11 @@ public unsafe partial struct ToDoListNumberArray {
         White = 3,
         Green = 4
     }
-
-    [FieldOffset(167 * 4)] public int CurrentDutyObjective;
-
-    // bitfield, bit index is objective index
-    [FieldOffset(168 * 4)] public int ObjectiveFocusable;
-    [FieldOffset(169 * 4)] public int DutyTitleFocusable;
-
-    // 170 - Related to MassivePcContent, displays a duty header section but is unstable when used
-
-    [FieldOffset(171 * 4)] public int ShowFateUI;
-    [FieldOffset(172 * 4)] public int ShowBonusEXPIndicator;
-
-    [FieldOffset(173 * 4)] public CheckboxButtonFlags LevelSyncButton;
-
+    
     [Flags]
     public enum CheckboxButtonFlags {
         Show = 0x1000,
         Toggled = 0x0010,
         AsCheckbox = 0x0100
     }
-
-    [FieldOffset(174 * 4)] public int FateIconId;
-    [FieldOffset(175 * 4)] public int FateObjectiveCount;
-
-    [FieldOffset(176 * 4), FixedSizeArray] internal FixedSizeArray10<ObjectiveType> _fateObjectiveType;
-    [FieldOffset(186 * 4), FixedSizeArray] internal FixedSizeArray10<int> _fateObjectiveValue;
-
-    // 196 - Appears to be a bitfield with each bit from the lsb set if that objective is completed
-    // [FieldOffset(196 * 4)] public int Unknown196;
-
-    // Acts like 171- maybe cosmic/occult??
-    // [FieldOffset(197 * 4)] public int Unknown197;
 }

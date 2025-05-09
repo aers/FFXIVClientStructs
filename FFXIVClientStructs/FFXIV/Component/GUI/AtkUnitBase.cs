@@ -332,9 +332,6 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(54)]
     public partial void FireCloseCallback();
 
-    [VirtualFunction(56)]
-    public partial void OnShow(float width, float height);
-
     [VirtualFunction(57)]
     public partial bool HandleCustomInput(AtkInputData* inputData);
 
