@@ -121,6 +121,7 @@ class BaseApi:
                     enum["type"],
                     enum["underlying"],
                     enum["namespace"],
+                    enum["flags"],
                     enum["values"],
                 )
             )
@@ -301,6 +302,8 @@ if api is None:
                 self.set_enum_width(e, self.get_size_from_ida_type(enum.underlying))
                 if self.is_signed(enum.underlying):
                     self.set_enum_flag(e, 0x20000)
+                if enum.flags:
+                    self.set_enum_as_bf(e)
                 for value in enum.values:
                     self.add_enum_member(
                         e, "{0}.{1}".format(enum.name, value), enum.values[value]

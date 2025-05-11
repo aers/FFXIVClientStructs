@@ -453,6 +453,7 @@ public class Exporter {
                 EnumType = type,
                 EnumName = type.Name,
                 EnumNamespace = type.GetNamespace(),
+                IsFlags = type.GetCustomAttribute<FlagsAttribute>() != null,
                 EnumValues = type.GetFields().Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.FieldType == type).ToDictionary(f => f.Name, f => f.GetRawConstantValue()!.ToString()!)
             };
 
@@ -731,6 +732,7 @@ public class ProcessedEnum {
     public required Type EnumType;
     public required string EnumName;
     public required string EnumNamespace;
+    public required bool IsFlags;
     public required Dictionary<string, string> EnumValues;
 }
 
@@ -772,6 +774,8 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar(e.EnumType.GetEnumUnderlyingType().FullSanitizeName()));
         emitter.Emit(new Scalar("namespace"));
         emitter.Emit(new Scalar(e.EnumNamespace));
+        emitter.Emit(new Scalar("flags"));
+        emitter.Emit(e.IsFlags ? new Scalar("True") : new Scalar("False"));
         emitter.Emit(new Scalar("values"));
         emitter.Emit(new MappingStart());
         foreach (var (key, val) in e.EnumValues) {

@@ -7,12 +7,13 @@ class DefinedBase:
 
 
 class DefinedEnum(DefinedBase, object):
-    def __init__(self, name, type, underlying, namespace, values):
-        # type: (str, str, str, str, dict[str, int]) -> None
+    def __init__(self, name, type, underlying, namespace, flags, values):
+        # type: (str, str, str, str, bool, dict[str, int]) -> None
         super(DefinedEnum, self).__init__(name, type, namespace)
         self.name = name
         self.type = type
         self.values = values
+        self.flags = flags
         self.underlying = underlying
 
 

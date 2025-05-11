@@ -557,6 +557,9 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
             """
             ida_enum.set_enum_flag(eid, flag)
 
+        def set_enum_as_bf(self, eid: int):
+            ida_enum.set_enum_bf(eid, True)
+
         def add_enum_member(self, eid: int, name: str, value: int):
             """Add an enum member to an enum by its id
             Args:
@@ -564,7 +567,8 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 name (str): The name of the enum member
                 value (int): The value of the enum member
             """
-            ida_enum.add_enum_member(eid, name, value)
+            if ida_enum.add_enum_member(eid, name, value, value) == 4:
+                ida_enum.add_enum_member(eid, name, value)
         
         def get_struct_flag(self):
             """Get the flag for a struct data type

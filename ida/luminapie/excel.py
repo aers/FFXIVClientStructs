@@ -82,7 +82,10 @@ class ExcelColumnDefinition:
 
     def __lt__(self, other):
         # type: (ExcelColumnDefinition) -> bool
-        return self.offset <= other.offset
+        return self.offset < other.offset
+    
+    def __eq__(self, other):
+        return self.offset == other.offset and self.type == other.offset
 
     def __repr__(self):
         # type: () -> str
@@ -194,10 +197,10 @@ class ExcelHeaderFile:
                     if (col_def.type in {ExcelColumnDataType.PackedBool0, ExcelColumnDataType.PackedBool1, ExcelColumnDataType.PackedBool2, ExcelColumnDataType.PackedBool3, ExcelColumnDataType.PackedBool4, ExcelColumnDataType.PackedBool5, ExcelColumnDataType.PackedBool6, ExcelColumnDataType.PackedBool7}):
                         name = "PackedBool{0:X}".format(col_def.offset)
                         if (name in enumMapped):
-                            enumMapped["PackedBool{0:X}".format(col_def.offset)][(1 << 7 - (col_def.type - ExcelColumnDataType.PackedBool0))] = "{0}_{1}".format(name, names[i].get_name())
+                            enumMapped["PackedBool{0:X}".format(col_def.offset)][(1 << col_def.type - ExcelColumnDataType.PackedBool0)] = "{0}_{1}".format(name, names[i].get_name())
                         else:
                             # this should never be hit but just to be safe
-                            enumMapped[name] = {0: "{0}_{1}".format(name, "None"), (1 << 7 - (col_def.type - ExcelColumnDataType.PackedBool0)): "{0}_{1}".format(name, names[i].get_name())}
+                            enumMapped[name] = {0: "{0}_{1}".format(name, "None"), (1 << col_def.type - ExcelColumnDataType.PackedBool0): "{0}_{1}".format(name, names[i].get_name())}
                     else: 
                         [_, name] = mapped[col_def.offset]
                         if name.split("_")[0] == "Unknown":
@@ -219,7 +222,7 @@ class ExcelHeaderFile:
                             f"Component::Exd::Sheets::{self.name}::{name}",
                             name
                         )
-                        enumMapped[name] = {0: "{0}_{1}".format(name, "None"), (1 << 7 - (col_def.type - ExcelColumnDataType.PackedBool0)): "{0}_{1}".format(name, names[i].get_name())}
+                        enumMapped[name] = {0: "{0}_{1}".format(name, "None"), (1 << col_def.type - ExcelColumnDataType.PackedBool0): "{0}_{1}".format(name, names[i].get_name())}
                     else:
                         mapped[self.column_definitions[i].offset] = (
                             column_data_type_to_c_type(self.column_definitions[i].type),

@@ -3,6 +3,7 @@ enums:
   name: TextParameterType
   underlying: __int8
   namespace: Component.Text
+  flags: False
   values:
     "Uninitialized": -1
     "Integer": 0
@@ -12,6 +13,7 @@ enums:
   name: SteamCallbackFlags
   underlying: byte
   namespace: Component.SteamApi
+  flags: True
   values:
     "Registered": 1
     "GameServer": 2
@@ -19,6 +21,7 @@ enums:
   name: AtkEventType
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "MouseDown": 3
     "MouseUp": 4
@@ -70,6 +73,7 @@ enums:
   name: IconComponentFlags
   underlying: unsigned int
   namespace: Component.GUI
+  flags: True
   values:
     "None": 0
     "DyeIcon": 8
@@ -82,6 +86,7 @@ enums:
   name: CursorType
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "Arrow": 0
     "Boot": 1
@@ -105,6 +110,7 @@ enums:
   name: AtkEventStateFlags
   underlying: byte
   namespace: Component.GUI
+  flags: True
   values:
     "None": 0
     "Handled": 1
@@ -119,6 +125,7 @@ enums:
   name: NodeType
   underlying: unsigned __int16
   namespace: Component.GUI
+  flags: False
   values:
     "Res": 1
     "Image": 2
@@ -131,6 +138,7 @@ enums:
   name: NodeFlags
   underlying: unsigned __int16
   namespace: Component.GUI
+  flags: True
   values:
     "AnchorTop": 1
     "AnchorLeft": 2
@@ -152,6 +160,7 @@ enums:
   name: SimpleTweenValueType
   underlying: unsigned int
   namespace: Component.GUI
+  flags: False
   values:
     "X": 0
     "Y": 1
@@ -166,6 +175,7 @@ enums:
   name: SimpleTweenState
   underlying: unsigned int
   namespace: Component.GUI
+  flags: False
   values:
     "None": 0
     "Tweening": 1
@@ -174,6 +184,7 @@ enums:
   name: AlignmentType
   underlying: int
   namespace: Component.GUI
+  flags: False
   values:
     "TopLeft": 0
     "Top": 1
@@ -188,6 +199,7 @@ enums:
   name: FontType
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "Axis": 0
     "MiedingerMed": 1
@@ -199,6 +211,7 @@ enums:
   name: TextureType
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "Resource": 1
     "Crest": 2
@@ -207,6 +220,7 @@ enums:
   name: AtkTimelineJumpBehavior
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "Start": 0
     "PlayOnce": 1
@@ -216,6 +230,7 @@ enums:
   name: AtkTimelineKeyGroupType
   underlying: unsigned __int16
   namespace: Component.GUI
+  flags: False
   values:
     "Float2": 0
     "Float": 1
@@ -230,6 +245,7 @@ enums:
   name: AtkTimelineMask
   underlying: byte
   namespace: Component.GUI
+  flags: True
   values:
     "Position": 1
     "Rotation": 2
@@ -243,6 +259,7 @@ enums:
   name: AtkTimelineFlags
   underlying: byte
   namespace: Component.GUI
+  flags: True
   values:
     "IsAnimated": 64
     "UnknownFlag": 128
@@ -250,6 +267,7 @@ enums:
   name: AtkTimelineInterpolation
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "None": 0
     "Linear": 1
@@ -258,6 +276,7 @@ enums:
   name: AtkTooltipType
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "Text": 1
     "Item": 2
@@ -267,6 +286,7 @@ enums:
   name: ComponentType
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "Base": 0
     "Button": 1
@@ -298,6 +318,7 @@ enums:
   name: AtkLoadState
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "Unloaded": 0
     "ResourceLoading": 1
@@ -308,6 +329,7 @@ enums:
   name: AddonStatus
   underlying: int
   namespace: Component.GUI
+  flags: False
   values:
     "NotLoaded": 0
     "Shown": 4
@@ -316,6 +338,7 @@ enums:
   name: AtkUnitManagerFlags
   underlying: byte
   namespace: Component.GUI
+  flags: True
   values:
     "None": 0
     "Unk01": 1
@@ -330,6 +353,7 @@ enums:
   name: ValueType
   underlying: int
   namespace: Component.GUI
+  flags: True
   values:
     "Undefined": 0
     "Null": 1
@@ -353,6 +377,7 @@ enums:
   name: ExcelLanguage
   underlying: int
   namespace: Component.Excel
+  flags: False
   values:
     "Japanese": 0
     "English": 1
@@ -365,6 +390,7 @@ enums:
   name: LuaType
   underlying: int
   namespace: Common.Lua
+  flags: False
   values:
     "None": -1
     "Nil": 0
@@ -382,6 +408,7 @@ enums:
   name: ExcelLanguage
   underlying: int
   namespace: Common.Component.Excel
+  flags: False
   values:
     "None": 0
     "Japanese": 1
@@ -395,6 +422,7 @@ enums:
   name: ExcelColumnType
   underlying: unsigned __int16
   namespace: Common.Component.Excel
+  flags: False
   values:
     "String": 0
     "Bool": 1
@@ -419,6 +447,7 @@ enums:
   name: ExcelVariant
   underlying: unsigned int
   namespace: Common.Component.Excel
+  flags: False
   values:
     "SingleRow": 0
     "MultiRow": 1
@@ -426,6 +455,7 @@ enums:
   name: ColliderType
   underlying: int
   namespace: Common.Component.BGCollision
+  flags: False
   values:
     "Streamed": 1
     "Mesh": 2
@@ -438,6 +468,7 @@ enums:
   name: ActionBarLayout
   underlying: byte
   namespace: Client.UI
+  flags: False
   values:
     "Layout12X1": 0
     "Layout6X2": 1
@@ -449,6 +480,7 @@ enums:
   name: GSInfoCardListFilterMode
   underlying: int
   namespace: Client.UI
+  flags: False
   values:
     "DisplayAllCards": 14
     "DisplayOwnedCards": 6
@@ -457,6 +489,7 @@ enums:
   name: SearchMode
   underlying: unsigned int
   namespace: Client.UI
+  flags: False
   values:
     "Normal": 0
     "ArmsFilter": 1
@@ -470,6 +503,7 @@ enums:
   name: ViewType
   underlying: int
   namespace: Client.UI
+  flags: False
   values:
     "Favorites": 1
     "Normal": 2
@@ -478,6 +512,7 @@ enums:
   name: RaidFinderEntryFlags
   underlying: byte
   namespace: Client.UI
+  flags: True
   values:
     "AvailableForSelection": 1
     "Selected": 2
@@ -489,6 +524,7 @@ enums:
   name: SalvageItemCategory
   underlying: int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "InventoryEquipment": 0
     "InventoryHousing": 1
@@ -502,6 +538,7 @@ enums:
   name: TextGimmickHintStyle
   underlying: byte
   namespace: Client.UI
+  flags: False
   values:
     "Warning": 0
     "Info": 1
@@ -509,6 +546,7 @@ enums:
   name: AgentUpdateFlags
   underlying: byte
   namespace: Client.UI
+  flags: True
   values:
     "None": 0
     "InventoryUpdate": 1
@@ -522,6 +560,7 @@ enums:
   name: UiFlags
   underlying: int
   namespace: Client.UI
+  flags: True
   values:
     "Shortcuts": 1
     "Hud": 2
@@ -534,6 +573,7 @@ enums:
   name: UIModulePacketType
   underlying: int
   namespace: Client.UI
+  flags: False
   values:
     "ClassJobChange": 2
     "LevelChange": 3
@@ -547,6 +587,7 @@ enums:
   name: ActionType
   underlying: byte
   namespace: Client.Game
+  flags: False
   values:
     "None": 0
     "Action": 1
@@ -573,6 +614,7 @@ enums:
   name: CharaCardDataChangeReason
   underlying: int
   namespace: Client.UI.Misc
+  flags: False
   values:
     "Banner": 1
     "Design": 2
@@ -583,6 +625,7 @@ enums:
   name: BannerGearVisibilityFlag
   underlying: unsigned int
   namespace: Client.UI.Misc
+  flags: True
   values:
     "None": 0
     "HeadgearHidden": 1
@@ -592,6 +635,7 @@ enums:
   name: InventoryType
   underlying: unsigned int
   namespace: Client.Game
+  flags: False
   values:
     "Inventory1": 0
     "Inventory2": 1
@@ -674,6 +718,7 @@ enums:
   name: HotbarSlotType
   underlying: byte
   namespace: Client.UI.Misc
+  flags: False
   values:
     "Empty": 0
     "Action": 1
@@ -707,6 +752,7 @@ enums:
   name: CrossHotbarFlags
   underlying: unsigned __int16
   namespace: Client.UI.Misc
+  flags: True
   values:
     "ChangeSetActive": 1
     "Active": 2
@@ -727,6 +773,7 @@ enums:
   name: TermFilterSetting
   underlying: byte
   namespace: Client.UI.Misc
+  flags: False
   values:
     "DisplayFilterNumber": 0
     "HideMessageEntirety": 1
@@ -734,6 +781,7 @@ enums:
   name: InfoProxyId
   underlying: unsigned int
   namespace: Client.UI.Info
+  flags: False
   values:
     "PartyMember": 0
     "PartyMemberMji": 1
@@ -767,6 +815,7 @@ enums:
   name: BlockResultType
   underlying: int
   namespace: Client.UI.Info
+  flags: False
   values:
     "NotBlocked": 1
     "BlockedByAccountId": 2
@@ -775,6 +824,7 @@ enums:
   name: DisplayGroup
   underlying: __int8
   namespace: Client.UI.Info
+  flags: False
   values:
     "All": -1
     "None": 0
@@ -789,6 +839,7 @@ enums:
   name: Sorting
   underlying: byte
   namespace: Client.UI.Info
+  flags: False
   values:
     "FriendNumber": 0
     "Oldest": 1
@@ -799,6 +850,7 @@ enums:
   name: OnlineStatus
   underlying: unsigned __int64
   namespace: Client.UI.Info
+  flags: True
   values:
     "Offline": 0
     "GameQA": 2
@@ -852,6 +904,7 @@ enums:
   name: LanguageMask
   underlying: byte
   namespace: Client.UI.Info
+  flags: True
   values:
     "None": 0
     "Jp": 1
@@ -862,6 +915,7 @@ enums:
   name: GrandCompany
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "Maelstrom": 1
@@ -871,6 +925,7 @@ enums:
   name: GameEvent
   underlying: int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "LoggedIn": 0
     "LoadingEnded": 1
@@ -885,6 +940,7 @@ enums:
   name: ActionKind
   underlying: int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Action": 28
     "CraftingAction": 29
@@ -918,6 +974,7 @@ enums:
   name: AozWeeklyFlags
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "None": 0
     "Unknown": 1
@@ -928,6 +985,7 @@ enums:
   name: EditorOpenType
   underlying: int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Portrait": 0
     "Gearset": 1
@@ -936,6 +994,7 @@ enums:
   name: ChatChannel
   underlying: int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Say": 1
     "Party": 2
@@ -944,6 +1003,7 @@ enums:
   name: ContentsRouletteRole
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Tank": 0
     "Healer": 1
@@ -953,6 +1013,7 @@ enums:
   name: ContentsType
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "Roulette": 1
@@ -961,6 +1022,7 @@ enums:
   name: BlockFunctionsFlag
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "None": 0
     "Blacklisted": 1
@@ -970,6 +1032,7 @@ enums:
   name: AgentHudExpFlag
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "None": 0
     "Unk1": 1
@@ -982,6 +1045,7 @@ enums:
   name: AgentId
   underlying: unsigned int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Lobby": 0
     "CharaMake": 1
@@ -1460,6 +1524,7 @@ enums:
   name: ItemDetailKind
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "ChatItem": 1
     "InventoryItem": 2
@@ -1469,6 +1534,7 @@ enums:
   name: CharaSelectCharacterEntryLoginFlags
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "Locked": 1
@@ -1481,6 +1547,7 @@ enums:
   name: CharaSelectRetainerInfoLoginFlags
   underlying: unsigned __int16
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "NameChangeRequired": 4
@@ -1488,6 +1555,7 @@ enums:
   name: MapType
   underlying: unsigned int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "SharedFate": 0
     "FlagMarker": 1
@@ -1503,6 +1571,7 @@ enums:
   name: FilterCategory
   underlying: int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": -1
     "Inventory": 0
@@ -1516,6 +1585,7 @@ enums:
   name: Confirmation
   underlying: int
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "Start": 1
@@ -1526,6 +1596,7 @@ enums:
   name: ViewType
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Favorites": 1
     "Normal": 2
@@ -1534,6 +1605,7 @@ enums:
   name: MycDynamicEventState
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "Register": 1
@@ -1543,6 +1615,7 @@ enums:
   name: ReadyCheckStatus
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Unknown": 0
     "AwaitingResponse": 1
@@ -1553,6 +1626,7 @@ enums:
   name: AllowedEntities
   underlying: unsigned __int16
   namespace: Client.System.String
+  flags: True
   values:
     "UppercaseLetters": 1
     "LowercaseLetters": 2
@@ -1570,6 +1644,7 @@ enums:
   name: ResourceCategory
   underlying: int
   namespace: Client.System.Resource
+  flags: False
   values:
     "Common": 0
     "BgCommon": 1
@@ -1591,6 +1666,7 @@ enums:
   name: HandleCategory
   underlying: unsigned __int16
   namespace: Client.System.Resource.Handle
+  flags: False
   values:
     "Common": 0
     "BgCommon": 1
@@ -1612,6 +1688,7 @@ enums:
   name: ScreenShotResultCode
   underlying: int
   namespace: Client.System.Photo
+  flags: False
   values:
     "Success": 0
     "NoDiskSpace": 1
@@ -1619,6 +1696,7 @@ enums:
   name: TargetFileFormat
   underlying: int
   namespace: Client.System.Photo
+  flags: False
   values:
     "Bmp": 0
     "Jpg": 1
@@ -1628,6 +1706,7 @@ enums:
   name: GamepadButtonsFlags
   underlying: unsigned __int16
   namespace: Client.System.Input
+  flags: True
   values:
     "None": 0
     "DPadUp": 1
@@ -1650,6 +1729,7 @@ enums:
   name: MouseButtonFlags
   underlying: int
   namespace: Client.System.Input
+  flags: True
   values:
     "LBUTTON": 1
     "MBUTTON": 2
@@ -1660,6 +1740,7 @@ enums:
   name: KeyStateFlags
   underlying: int
   namespace: Client.System.Input
+  flags: True
   values:
     "Down": 1
     "Pressed": 2
@@ -1669,6 +1750,7 @@ enums:
   name: FileMode
   underlying: unsigned int
   namespace: Client.System.File
+  flags: False
   values:
     "LoadUnpackedResource": 0
     "LoadFileResource": 1
@@ -1679,6 +1761,7 @@ enums:
   name: Op
   underlying: int
   namespace: Client.LayoutEngine
+  flags: False
   values:
     "None": 0
     "Match": 1
@@ -1687,6 +1770,7 @@ enums:
   name: InstanceType
   underlying: byte
   namespace: Client.LayoutEngine
+  flags: False
   values:
     "BgPart": 1
     "Light": 3
@@ -1733,6 +1817,7 @@ enums:
   name: Collider
   underlying: int
   namespace: Client.LayoutEngine
+  flags: False
   values:
     "None": 0
     "Mesh": 1
@@ -1741,6 +1826,7 @@ enums:
   name: Type
   underlying: int
   namespace: Client.LayoutEngine
+  flags: False
   values:
     "None": 0
     "Box": 1
@@ -1751,6 +1837,7 @@ enums:
   name: ColliderType
   underlying: int
   namespace: Client.LayoutEngine.Layer
+  flags: False
   values:
     "None": 0
     "Box": 1
@@ -1763,6 +1850,7 @@ enums:
   name: ObjectType
   underlying: int
   namespace: Client.Graphics.Scene
+  flags: False
   values:
     "Object": 0
     "Terrain": 1
@@ -1778,6 +1866,7 @@ enums:
   name: ModelType
   underlying: byte
   namespace: Client.Graphics.Scene
+  flags: False
   values:
     "Human": 1
     "DemiHuman": 2
@@ -1787,6 +1876,7 @@ enums:
   name: PhysicsGroup
   underlying: unsigned int
   namespace: Client.Graphics.Physics
+  flags: False
   values:
     "Clothing": 2
     "HairA": 3
@@ -1800,6 +1890,7 @@ enums:
   name: TextureFormat
   underlying: unsigned int
   namespace: Client.Graphics.Kernel
+  flags: False
   values:
     "L8_UNORM": 4400
     "A8_UNORM": 4401
@@ -1839,6 +1930,7 @@ enums:
   name: TextureFlags
   underlying: unsigned int
   namespace: Client.Graphics.Kernel
+  flags: True
   values:
     "DiscardPerFrame": 1
     "DiscardPerMap": 2
@@ -1867,6 +1959,7 @@ enums:
   name: Input
   underlying: unsigned int
   namespace: Client.Graphics.Kernel
+  flags: True
   values:
     "Position": 1
     "BlendWeight": 2
@@ -1889,6 +1982,7 @@ enums:
   name: UseActionMode
   underlying: int
   namespace: Client.Game
+  flags: False
   values:
     "None": 0
     "Queue": 1
@@ -1898,6 +1992,7 @@ enums:
   name: BalloonType
   underlying: unsigned int
   namespace: Client.Game
+  flags: False
   values:
     "Timer": 0
     "Unknown": 1
@@ -1905,6 +2000,7 @@ enums:
   name: BalloonState
   underlying: unsigned int
   namespace: Client.Game
+  flags: False
   values:
     "Waiting": 0
     "Active": 1
@@ -1914,6 +2010,7 @@ enums:
   name: SituationKind
   underlying: unsigned int
   namespace: Client.Game
+  flags: False
   values:
     "None": 0
     "Daytime": 1
@@ -1925,6 +2022,7 @@ enums:
   name: ChocoboTaxiState
   underlying: int
   namespace: Client.Game
+  flags: False
   values:
     "None": 0
     "Mounting": 1
@@ -1934,6 +2032,7 @@ enums:
   name: GcArmyMemberFlag
   underlying: byte
   namespace: Client.Game
+  flags: True
   values:
     "None": 0
     "OnSquadronMission": 1
@@ -1943,6 +2042,7 @@ enums:
   name: HousingTerritoryType
   underlying: int
   namespace: Client.Game
+  flags: False
   values:
     "None": 0
     "Outdoor": 1
@@ -1952,6 +2052,7 @@ enums:
   name: ApartmentBuildingState
   underlying: byte
   namespace: Client.Game
+  flags: True
   values:
     "None": 0
     "IsFull": 1
@@ -1960,6 +2061,7 @@ enums:
   name: PlotState
   underlying: byte
   namespace: Client.Game
+  flags: False
   values:
     "None": 0
     "UnownedLand": 1
@@ -1969,6 +2071,7 @@ enums:
   name: PlotSize
   underlying: byte
   namespace: Client.Game
+  flags: False
   values:
     "Small": 0
     "Medium": 1
@@ -1977,6 +2080,7 @@ enums:
   name: PlotOwnerType
   underlying: unsigned int
   namespace: Client.Game
+  flags: False
   values:
     "FreeCompany": 0
     "Individual": 2
@@ -1984,6 +2088,7 @@ enums:
   name: SubmarineRating
   underlying: byte
   namespace: Client.Game
+  flags: False
   values:
     "SS": 0
     "S": 1
@@ -1994,6 +2099,7 @@ enums:
   name: ItemFlags
   underlying: byte
   namespace: Client.Game
+  flags: True
   values:
     "None": 0
     "HighQuality": 1
@@ -2004,6 +2110,7 @@ enums:
   name: TradeState
   underlying: int
   namespace: Client.Game
+  flags: False
   values:
     "NotTrading": 1
     "TradeRequestPending": 2
@@ -2015,12 +2122,14 @@ enums:
   name: WKSMechaEventFlag
   underlying: unsigned int
   namespace: Client.Game.WKS
+  flags: True
   values:
     "IsEventActive": 128
 - type: Client::Game::WKS::WKSEventModuleFlag
   name: WKSEventModuleFlag
   underlying: unsigned int
   namespace: Client.Game.WKS
+  flags: True
   values:
     "HasCurrentEvent": 1
     "IsJoined": 128
@@ -2028,6 +2137,7 @@ enums:
   name: AchievementState
   underlying: int
   namespace: Client.Game.UI
+  flags: False
   values:
     "Invalid": 0
     "Requested": 1
@@ -2036,6 +2146,7 @@ enums:
   name: CabinetState
   underlying: int
   namespace: Client.Game.UI
+  flags: False
   values:
     "Invalid": 0
     "Requested": 1
@@ -2044,6 +2155,7 @@ enums:
   name: CharaCardFlags
   underlying: int
   namespace: Client.Game.UI
+  flags: True
   values:
     "None": 0
     "HasCurrentBannerData": 1
@@ -2053,6 +2165,7 @@ enums:
   name: LootRule
   underlying: byte
   namespace: Client.Game.UI
+  flags: False
   values:
     "Normal": 0
     "GreedOnly": 1
@@ -2061,6 +2174,7 @@ enums:
   name: QueueStates
   underlying: byte
   namespace: Client.Game.UI
+  flags: False
   values:
     "None": 0
     "Pending": 1
@@ -2072,6 +2186,7 @@ enums:
   name: QueueContentType
   underlying: byte
   namespace: Client.Game.UI
+  flags: False
   values:
     "PositionAndWaitTime": 0
     "THDAndWaitTime": 1
@@ -2083,6 +2198,7 @@ enums:
   name: InspectGearVisibilityFlag
   underlying: byte
   namespace: Client.Game.UI
+  flags: True
   values:
     "None": 0
     "VisorClosed": 1
@@ -2092,6 +2208,7 @@ enums:
   name: RollState
   underlying: byte
   namespace: Client.Game.UI
+  flags: False
   values:
     "UpToNeed": 0
     "UpToGreed": 1
@@ -2103,6 +2220,7 @@ enums:
   name: RollResult
   underlying: int
   namespace: Client.Game.UI
+  flags: False
   values:
     "UnAwarded": 0
     "Needed": 1
@@ -2114,6 +2232,7 @@ enums:
   name: LootMode
   underlying: int
   namespace: Client.Game.UI
+  flags: False
   values:
     "Normal": 0
     "GreedOnly": 1
@@ -2124,6 +2243,7 @@ enums:
   name: WeeklyBingoTaskStatus
   underlying: int
   namespace: Client.Game.UI
+  flags: False
   values:
     "Open": 0
     "Claimable": 1
@@ -2132,6 +2252,7 @@ enums:
   name: PlayerStateFlag
   underlying: unsigned int
   namespace: Client.Game.UI
+  flags: False
   values:
     "IsLoginSecurityToken": 1
     "IsBuddyInStable": 2
@@ -2145,6 +2266,7 @@ enums:
   name: ClientSelectDataConfigFlags
   underlying: unsigned __int16
   namespace: Application.Network.WorkDefinitions
+  flags: True
   values:
     "None": 0
     "HideHead": 1
@@ -2157,6 +2279,7 @@ enums:
   name: ObjectKind
   underlying: byte
   namespace: Client.Game.Object
+  flags: False
   values:
     "None": 0
     "Pc": 1
@@ -2179,6 +2302,7 @@ enums:
   name: ObjectHighlightColor
   underlying: byte
   namespace: Client.Game.Object
+  flags: False
   values:
     "None": 0
     "Red": 1
@@ -2192,6 +2316,7 @@ enums:
   name: ObjectTargetableFlags
   underlying: byte
   namespace: Client.Game.Object
+  flags: True
   values:
     "IsTargetable": 2
     "Unk1": 4
@@ -2200,6 +2325,7 @@ enums:
   name: HousingObjectType
   underlying: unsigned __int16
   namespace: Client.Game.Object
+  flags: False
   values:
     "YardObject": 2
     "Furniture": 3
@@ -2207,6 +2333,7 @@ enums:
   name: FarmSlotFlags
   underlying: byte
   namespace: Client.Game.MJI
+  flags: True
   values:
     "UnderCare": 1
     "WasUnderCare": 2
@@ -2216,6 +2343,7 @@ enums:
   name: MJIMinimapIcons
   underlying: byte
   namespace: Client.Game.MJI
+  flags: True
   values:
     "Trees": 1
     "Vegetation": 2
@@ -2226,6 +2354,7 @@ enums:
   name: MJIAllowedVisitors
   underlying: byte
   namespace: Client.Game.MJI
+  flags: True
   values:
     "Friends": 1
     "FreeCompany": 2
@@ -2234,6 +2363,7 @@ enums:
   name: RoomFlags
   underlying: byte
   namespace: Client.Game.InstanceContent
+  flags: True
   values:
     "None": 0
     "ConnectionN": 1
@@ -2248,6 +2378,7 @@ enums:
   name: InstanceContentType
   underlying: byte
   namespace: Client.Game.InstanceContent
+  flags: False
   values:
     "Raid": 1
     "Dungeon": 2
@@ -2273,6 +2404,7 @@ enums:
   name: OceanFishingStatus
   underlying: unsigned int
   namespace: Client.Game.InstanceContent
+  flags: False
   values:
     "WaitingForPlayers": 0
     "SwitchingZone": 1
@@ -2283,6 +2415,7 @@ enums:
   name: DynamicEventState
   underlying: byte
   namespace: Client.Game.InstanceContent
+  flags: False
   values:
     "Inactive": 0
     "Register": 1
@@ -2292,6 +2425,7 @@ enums:
   name: PublicContentDirectorType
   underlying: byte
   namespace: Client.Game.InstanceContent
+  flags: False
   values:
     "BondingCeremony": 1
     "TripleTriad": 2
@@ -2307,6 +2441,7 @@ enums:
   name: GFateDirectorFlag
   underlying: unsigned int
   namespace: Client.Game.GoldSaucer
+  flags: True
   values:
     "IsJoined": 1
     "IsFinished": 2
@@ -2318,6 +2453,7 @@ enums:
   name: GoldSaucerFlag
   underlying: byte
   namespace: Client.Game.GoldSaucer
+  flags: True
   values:
     "Unk0": 1
     "ChocoboRaceTutorialClear": 2
@@ -2331,6 +2467,7 @@ enums:
   name: AstrologianDraw
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: False
   values:
     "Astral": 0
     "Umbral": 1
@@ -2338,6 +2475,7 @@ enums:
   name: EnochianFlags
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: True
   values:
     "None": 0
     "Enochian": 1
@@ -2346,6 +2484,7 @@ enums:
   name: AetherFlags
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: True
   values:
     "None": 0
     "Aetherflow1": 1
@@ -2362,6 +2501,7 @@ enums:
   name: CanvasFlags
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: True
   values:
     "Pom": 1
     "Wing": 2
@@ -2373,6 +2513,7 @@ enums:
   name: CreatureFlags
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: True
   values:
     "Pom": 1
     "Wings": 2
@@ -2383,6 +2524,7 @@ enums:
   name: SongFlags
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: True
   values:
     "None": 0
     "MagesBallad": 1
@@ -2398,6 +2540,7 @@ enums:
   name: BeastChakraType
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: False
   values:
     "None": 0
     "OpoOpo": 1
@@ -2407,6 +2550,7 @@ enums:
   name: NadiFlags
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: True
   values:
     "Lunar": 1
     "Solar": 2
@@ -2414,6 +2558,7 @@ enums:
   name: KaeshiAction
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: False
   values:
     "Higanbana": 1
     "Goken": 2
@@ -2423,6 +2568,7 @@ enums:
   name: SenFlags
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: True
   values:
     "None": 0
     "Setsu": 1
@@ -2432,6 +2578,7 @@ enums:
   name: DreadCombo
   underlying: byte
   namespace: Client.Game.Gauge
+  flags: False
   values:
     "Dreadwinder": 1
     "HuntersCoil": 2
@@ -2443,6 +2590,7 @@ enums:
   name: FateState
   underlying: byte
   namespace: Client.Game.Fate
+  flags: False
   values:
     "Running": 4
     "Ended": 7
@@ -2453,6 +2601,7 @@ enums:
   name: CraftStateFlags
   underlying: unsigned int
   namespace: Client.Game.Event
+  flags: True
   values:
     "Unk1": 1
     "NotFirstStep": 2
@@ -2466,6 +2615,7 @@ enums:
   name: CraftCondition
   underlying: byte
   namespace: Client.Game.Event
+  flags: False
   values:
     "Normal": 1
     "Good": 2
@@ -2481,6 +2631,7 @@ enums:
   name: CraftFlags
   underlying: unsigned int
   namespace: Client.Game.Event
+  flags: True
   values:
     "ExecutingAction2": 1
     "Unk1": 2
@@ -2492,6 +2643,7 @@ enums:
   name: LuaStatus
   underlying: unsigned int
   namespace: Common.Lua
+  flags: False
   values:
     "Ok": 0
     "Yield": 1
@@ -2503,6 +2655,7 @@ enums:
   name: EventHandlerContent
   underlying: unsigned __int16
   namespace: Client.Game.Event
+  flags: False
   values:
     "Quest": 1
     "Warp": 2
@@ -2577,6 +2730,7 @@ enums:
   name: EventSceneTaskType
   underlying: unsigned int
   namespace: Client.Game.Event
+  flags: False
   values:
     "None": 0
     "CreateAppearance": 1
@@ -2634,6 +2788,7 @@ enums:
   name: TargetInfoType
   underlying: int
   namespace: Client.Game.Control
+  flags: False
   values:
     "None": 0
     "GameObjectId": 1
@@ -2643,6 +2798,7 @@ enums:
   name: ConfigOption
   underlying: __int16
   namespace: Client.UI.Misc
+  flags: False
   values:
     "Invalid": -1
     "None": 0
@@ -3556,6 +3712,7 @@ enums:
   name: PoseType
   underlying: byte
   namespace: Client.Game.Control
+  flags: False
   values:
     "Idle": 0
     "WeaponDrawn": 1
@@ -3568,6 +3725,7 @@ enums:
   name: CharacterModes
   underlying: byte
   namespace: Client.Game.Character
+  flags: False
   values:
     "None": 0
     "Normal": 1
@@ -3589,6 +3747,7 @@ enums:
   name: CopyFlags
   underlying: unsigned int
   namespace: Client.Game.Character
+  flags: True
   values:
     "None": 0
     "Mode": 1
@@ -3606,6 +3765,7 @@ enums:
   name: EquipmentSlot
   underlying: unsigned int
   namespace: Client.Game.Character
+  flags: False
   values:
     "Head": 0
     "Body": 1
@@ -3621,6 +3781,7 @@ enums:
   name: WeaponSlot
   underlying: unsigned int
   namespace: Client.Game.Character
+  flags: False
   values:
     "MainHand": 0
     "OffHand": 1
@@ -3629,12 +3790,14 @@ enums:
   name: StatusEffect
   underlying: byte
   namespace: Client.Game.Character
+  flags: True
   values:
     "IsGPoseWet": 1
 - type: Client::Game::Character::LookAtContainer::BannerCameraFollowFlags
   name: BannerCameraFollowFlags
   underlying: byte
   namespace: Client.Game.Character
+  flags: True
   values:
     "None": 0
     "Head": 1
@@ -3643,6 +3806,7 @@ enums:
   name: ShroudFlags
   underlying: unsigned int
   namespace: Client.Game.Character
+  flags: True
   values:
     "ShroudAttacking": 1
     "ShroudActive": 2
@@ -3651,6 +3815,7 @@ enums:
   name: ModifierFlag
   underlying: byte
   namespace: Component.GUI
+  flags: True
   values:
     "Ctrl": 1
     "Alt": 2
@@ -3660,6 +3825,7 @@ enums:
   name: InputState
   underlying: byte
   namespace: Component.GUI
+  flags: False
   values:
     "Down": 0
     "Up": 1
@@ -3669,6 +3835,7 @@ enums:
   name: UIObjectKind
   underlying: byte
   namespace: Client.UI
+  flags: False
   values:
     "PlayerCharacter": 0
     "EventNpcCompanion": 1
@@ -3684,6 +3851,7 @@ enums:
   name: SeVirtualKey
   underlying: byte
   namespace: Client.UI
+  flags: False
   values:
     "NO_KEY": 0
     "LBUTTON": 1
@@ -3813,6 +3981,7 @@ enums:
   name: ModifierFlag
   underlying: byte
   namespace: Client.UI
+  flags: True
   values:
     "Shift": 1
     "Ctrl": 2
@@ -3821,6 +3990,7 @@ enums:
   name: GearsetItemFlag
   underlying: byte
   namespace: Client.UI.Misc
+  flags: True
   values:
     "None": 0
     "ItemMissing": 1
@@ -3835,6 +4005,7 @@ enums:
   name: GearsetFlag
   underlying: byte
   namespace: Client.UI.Misc
+  flags: True
   values:
     "None": 0
     "Exists": 1
@@ -3849,6 +4020,7 @@ enums:
   name: TermFilterChannelFlag
   underlying: byte
   namespace: Client.UI.Misc
+  flags: True
   values:
     "None": 0
     "Say": 1
@@ -3860,6 +4032,7 @@ enums:
   name: Language
   underlying: byte
   namespace: Client.UI.Info
+  flags: False
   values:
     "Jp": 0
     "En": 1
@@ -3870,6 +4043,7 @@ enums:
   name: DecorationType
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Invalid": 0
     "Backing": 1
@@ -3881,6 +4055,7 @@ enums:
   name: SimulatorActionStatus
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Available": 0
     "NotYetAvailable": 1
@@ -3889,6 +4064,7 @@ enums:
   name: FocusType
   underlying: unsigned __int16
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "RolePlaying": 1
@@ -3904,6 +4080,7 @@ enums:
   name: SeekingType
   underlying: unsigned __int16
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "Tank": 1
@@ -3915,6 +4092,7 @@ enums:
   name: ActiveType
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "Weekdays": 1
@@ -3924,6 +4102,7 @@ enums:
   name: RecruitmentType
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Closed": 0
     "Open": 1
@@ -3931,6 +4110,7 @@ enums:
   name: HouseInfoFlags
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "PlotOwned": 1
     "VisitorsAllowed": 2
@@ -3941,6 +4121,7 @@ enums:
   name: IconFlagsTopRight
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "Dyeable": 1
@@ -3949,6 +4130,7 @@ enums:
   name: Objective
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "DutyCompletion": 1
@@ -3958,6 +4140,7 @@ enums:
   name: CompletionStatus
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "None": 0
     "DutyComplete": 2
@@ -3967,6 +4150,7 @@ enums:
   name: DutyFinderSetting
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "None": 0
     "UnrestrictedParty": 1
@@ -3976,6 +4160,7 @@ enums:
   name: LootRule
   underlying: byte
   namespace: Client.UI.Agent
+  flags: False
   values:
     "Normal": 0
     "GreedOnly": 1
@@ -3984,6 +4169,7 @@ enums:
   name: Language
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "Japanese": 1
     "English": 2
@@ -3993,6 +4179,7 @@ enums:
   name: JoinCondition
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "Free": 1
     "PrivateParty": 3
@@ -4002,6 +4189,7 @@ enums:
   name: DataFlags1
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "DataInitialized": 1
     "MainAddonDirty": 2
@@ -4015,6 +4203,7 @@ enums:
   name: DataFlags2
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "PlayScheduleUpdateSFX": 1
     "ReviewMaterialsOnly": 2
@@ -4025,6 +4214,7 @@ enums:
   name: EntryFlags
   underlying: unsigned int
   namespace: Client.UI.Agent
+  flags: True
   values:
     "InPresent": 1
     "Linked": 2
@@ -4040,6 +4230,7 @@ enums:
   name: ItemFlags
   underlying: byte
   namespace: Client.UI.Agent
+  flags: True
   values:
     "Initialized": 1
     "Shipped": 2
@@ -4048,6 +4239,7 @@ enums:
   name: ModeUpdateOpType
   underlying: int
   namespace: Client.System.Framework
+  flags: False
   values:
     "Delay": 1
     "MakeWindowedAndResize": 2
@@ -4060,6 +4252,7 @@ enums:
   name: PlayState
   underlying: unsigned int
   namespace: Client.Game
+  flags: False
   values:
     "Paused": 0
     "Playing": 1
@@ -4067,6 +4260,7 @@ enums:
   name: RetainerTown
   underlying: byte
   namespace: Client.Game
+  flags: False
   values:
     "LimsaLominsa": 1
     "Gridania": 2
@@ -4079,6 +4273,7 @@ enums:
   name: SavedAppearanceSlotStatus
   underlying: int
   namespace: Client.Game
+  flags: False
   values:
     "Empty": 0
     "Valid": 1
@@ -4088,6 +4283,7 @@ enums:
   name: hkResultEnum
   underlying: int
   namespace: Common.Base.Types
+  flags: False
   values:
     "Success": 0
     "Failure": 1
@@ -4095,6 +4291,7 @@ enums:
   name: PoseSpace
   underlying: int
   namespace: Animation.Rig
+  flags: False
   values:
     "ModelSpace": 0
     "LocalSpace": 1
@@ -4102,6 +4299,7 @@ enums:
   name: PropagateOrNot
   underlying: int
   namespace: Animation.Rig
+  flags: False
   values:
     "DontPropagate": 0
     "Propagate": 1
@@ -4109,6 +4307,7 @@ enums:
   name: EaseStatusEnum
   underlying: int
   namespace: Animation.Playback.Control.Default
+  flags: False
   values:
     "EasingIn": 0
     "EasedIn": 1
@@ -4118,6 +4317,7 @@ enums:
   name: hkaReferenceFrameTypeEnum
   underlying: int
   namespace: Animation.Motion
+  flags: False
   values:
     "Unknown": 0
     "Default": 1
@@ -4126,6 +4326,7 @@ enums:
   name: AnimationType
   underlying: int
   namespace: Animation.Animation
+  flags: False
   values:
     "UnknownAnimation": 0
     "InterleavedAnimation": 1
@@ -4138,6 +4339,7 @@ enums:
   name: RedBlackTreeNodeColor
   underlying: byte
   namespace: Helper
+  flags: False
   values:
     "Red": 0
     "Black": 1
@@ -4145,6 +4347,7 @@ enums:
   name: CastTimeProc
   underlying: byte
   namespace: Client.Game
+  flags: False
   values:
     "None": 0
     "Firestarter": 1
@@ -4166,6 +4369,7 @@ enums:
   name: TargetCategory
   underlying: int
   namespace: Client.Game
+  flags: False
   values:
     "Self": 0
     "Party": 1
@@ -4179,6 +4383,7 @@ enums:
   name: EstateType
   underlying: int
   namespace: Client.Game
+  flags: False
   values:
     "FreeCompanyEstate": 0
     "PersonalChambers": 1
@@ -4191,6 +4396,7 @@ enums:
   name: ContentType
   underlying: byte
   namespace: Client.Game.Event
+  flags: False
   values:
     "None": 0
     "Instance": 1
@@ -4201,6 +4407,7 @@ enums:
   name: FlightAllowedStatus
   underlying: int
   namespace: Client.Game.Control
+  flags: False
   values:
     "CanFly": 0
     "Unk1": 1
@@ -4214,6 +4421,7 @@ enums:
   name: MouseButtonHoldState
   underlying: byte
   namespace: Client.Game.Control
+  flags: True
   values:
     "None": 0
     "Left": 1
@@ -7018,7 +7226,7 @@ structs:
     relative_follow_offsets:
     - 3
     is_pointer: True
-    return_type: Client::Game::MirageManager
+    return_type: Client::Game::HwdManager
 - type: Client::Game::InstanceContent::BozjaState
   name: BozjaState
   namespace: Client.Game.InstanceContent
@@ -13588,6 +13796,22 @@ structs:
     name: Recruitment
     offset: 5
   member_functions: []
+- type: Client::UI::Agent::AgentGearSet::ContextMenuParam
+  name: ContextMenuParam
+  namespace: Client.UI.Agent
+  union: False
+  size: 12
+  fields:
+  - type: int
+    name: Unk0
+    offset: 0
+  - type: int
+    name: EventId
+    offset: 4
+  - type: int
+    name: GearSetId
+    offset: 8
+  member_functions: []
 - type: Client::UI::Agent::AgentHelpers
   name: AgentHelpers
   namespace: Client.UI.Agent
@@ -19395,6 +19619,12 @@ structs:
     name: GetBannerConditionUnlockState
     parameters:
     - type: Component::Exd::Sheets::BannerCondition*
+      name: row
+  - signature: E8 ?? ?? ?? ?? 0F B6 53 6C
+    return_type: unsigned int
+    name: GetEnabledZoneSharedGroupRequirementIndex
+    parameters:
+    - type: Component::Exd::Sheets::ZoneSharedGroup*
       name: row
   - signature: E8 ?? ?? ?? ?? 49 8B 5E ?? BA 05 00 00 00
     return_type: unsigned int
@@ -26965,6 +27195,24 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::WeatherManager
+- type: Client::Game::ZoneSharedGroupManager
+  name: ZoneSharedGroupManager
+  namespace: Client.Game
+  union: False
+  size: 1848
+  fields:
+  - type: Common::Component::Excel::ExcelSheetWaiter
+    name: ExcelSheetWaiter
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions:
+  - signature: 33 C0 4C 8B C9 38 41 32
+    return_type: void
+    name: Refresh
+    parameters:
+    - type: Client::Game::ZoneSharedGroupManager*
+      name: this
 - type: Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>
   name: CVector`1
   namespace: Client.Graphics.Kernel
@@ -41847,7 +42095,7 @@ structs:
     parameters:
     - type: Client::Game::UI::Telepo*
       name: this
-    - type: __int64
+    - type: Component::Exd::Sheets::Aetheryte*
       name: aetheryteRow
     - type: __int16
       name: multiplier
@@ -41889,6 +42137,11 @@ structs:
   - type: unsigned int
     name: FishingBait
     offset: 3228
+  - type: int
+    name: Scores
+    offset: 3380
+    size: 11
+    is_string: False
   - type: __int64
     name: UnkStructDB0
     offset: 3504
@@ -41905,7 +42158,7 @@ structs:
     name: UnkStructDD0
     offset: 3536
   - type: __int64
-    name: UnkStructDD8
+    name: EmergencyInfoModule
     offset: 3544
   - type: __int64
     name: UnkStructDE0
@@ -65999,7 +66252,7 @@ structs:
       name: containerSlot
     - type: unsigned int
       name: itemId
-    - type: __int64
+    - type: Component::Exd::Sheets::Item*
       name: exdRow
     - type: unsigned int
       name: quantity
@@ -119466,115 +119719,6 @@ structs:
     name: Flags
     offset: 415924
   member_functions: []
-- type: Client::UI::Agent::AgentGearSet
-  name: AgentGearSet
-  namespace: Client.UI.Agent
-  union: False
-  size: 3008
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: Client::UI::Agent::AgentGearSet::GearsetCharaView
-    name: CharaView
-    offset: 2168
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: Hide
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: IsAgentActive
-    offset: 48
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: Update
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 64
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: GetAddonId
-    offset: 72
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-  - name: OnGameEvent
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24
-    return_type: void
-    name: OpenBannerEditorForGearset
-    parameters:
-    - type: Client::UI::Agent::AgentGearSet*
-      name: this
-    - type: int
-      name: gearsetId
 - type: Client::UI::Agent::AgentHUD
   name: AgentHUD
   namespace: Client.UI.Agent
@@ -136217,6 +136361,128 @@ structs:
     size: 8
     is_string: False
   member_functions: []
+- type: Client::UI::Agent::AgentGearSet
+  name: AgentGearSet
+  namespace: Client.UI.Agent
+  union: False
+  size: 3008
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentGearSet::ContextMenuParam
+    name: ContextMenuParams
+    offset: 72
+    size: 14
+    is_string: False
+  - type: Client::UI::RaptureAtkModule::ItemCache
+    name: ItemCaches
+    offset: 280
+    size: 13
+    is_string: False
+  - type: Client::UI::Agent::AgentGearSet::GearsetCharaView
+    name: CharaView
+    offset: 2168
+  - type: StdVector<int>
+    name: GearSetIds
+    offset: 2984
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24
+    return_type: void
+    name: OpenBannerEditorForGearset
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: int
+      name: gearsetId
 - type: Client::UI::Agent::AgentInspect
   name: AgentInspect
   namespace: Client.UI.Agent
@@ -151201,6 +151467,9 @@ structs:
     offset: 64
     size: 4
     is_string: False
+  - type: Client::Game::ZoneSharedGroupManager
+    name: ZoneSharedGroupManager
+    offset: 528
   - type: Client::Game::JobGaugeManager
     name: JobGaugeManager
     offset: 2776
@@ -153425,7 +153694,7 @@ structs:
     parameters:
     - type: Client::Game::UI::UIState*
       name: this
-    - type: __int64
+    - type: Component::Exd::Sheets::Item*
       name: itemExdPtr
   - signature: E9 ?? ?? ?? ?? 48 85 DB 74 03
     return_type: byte
