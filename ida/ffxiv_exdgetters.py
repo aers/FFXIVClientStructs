@@ -1,7 +1,7 @@
-# ffxiv-exdgetters.py
-#
 # Automagically labels most exd getter functions along with a hint indicating which sheet/sheet id its fetching from
-#
+# @category __UserScripts
+# @menupath Tools.Scripts.ffxiv_exdgetters
+# @runtime PyGhidra
 
 from json import load
 from os import getenv
@@ -23,23 +23,13 @@ class BaseApi:
         pass
 
     @abstractmethod
-    def get_next_func(self, ea, pattern, flag):
-        # type: (int, str, int) -> int
-        pass
-
-    @abstractmethod
     def set_func_name(self, ea, name, cmt):
         # type: (int, str, str) -> None
         pass
 
     @abstractmethod
     def process_pattern(self, pattern):
-        # type: (int, str) -> None
-        pass
-
-    @abstractmethod
-    def set_func_types(self):
-        # type: () -> None
+        # type: (str) -> None
         pass
 
 
@@ -277,11 +267,16 @@ if api is None:
     try:
         import ghidra
         import re
+        try:
+            from ghidra.ghidra_builtins import * # ghidra-stubs
+        except ImportError:
+            pass
 
         from ghidra.program.model.data import *
         from ghidra.program.model.listing import *
         from ghidra.program.model.symbol import SourceType
         from ghidra.app.util import SymbolPathParser
+        from java.util import ArrayList
 
     except ImportError:
         print("Warning: Unable to load Ghidra")
@@ -289,32 +284,143 @@ if api is None:
         # noinspection PyUnresolvedReferences
         class GhidraApi(BaseApi):
             def create_enum_struct(self, name, values, width = 0):
-                # type: (str, dict[str, int], int) -> None
-                pass
+                # type: (str, dict[int, str], int) -> None
+                path = self.get_datatype_path(name)
+                enum_dt = EnumDataType(path.getCategoryPath(), path.getDataTypeName(), width or 8)
+                is_sheets_enum = name == "Component::Exd::SheetsEnum"
+                for enum_value, enum_name in values.items():
+                    if monitor.isCancelled():
+                        break
+                    if not is_sheets_enum and "_" in enum_name:
+                        enum_name = "".join(enum_name.split("_")[1:])
+                    enum_dt.add(enum_name, enum_value)
+                if width == 0:
+                    enum_dt.setLength(enum_dt.getMinimumPossibleLength())
+                if enum_dt.getName(0) is None:
+                    enum_dt.add("None", 0)
+                dt = currentProgram.getDataTypeManager().getDataType(path)
+                if dt is None:
+                    currentProgram.getDataTypeManager().addDataType(enum_dt, None)
+                else:
+                    dt.replaceWith(enum_dt)
 
             def create_struct(self, name, fields):
                 # type: (str, dict[str, str]) -> None
-                pass
-
-            def get_next_func(self, ea, pattern, flag):
-                # type: (int, str, int) -> int
-                pass
-
-            def get_dword(self, ea):
-                # type: (int) -> int
-                pass
+                dt_path = self.get_datatype_path(name)
+                struct = StructureDataType(dt_path.getCategoryPath(), dt_path.getDataTypeName(), 0)
+                for [index, [type_name, field_name]] in fields.items():
+                    if monitor.isCancelled():
+                        break
+                    field_dt = currentProgram.getDataTypeManager().getDataType(self.get_datatype_path(type_name))
+                    if field_dt is None:
+                        print(f"Warning: Data type {name} field {field_name} has missing type {type_name} ({dt_path})")
+                        return
+                    struct.add(field_dt, field_name, None)
+                dt = currentProgram.getDataTypeManager().getDataType(dt_path)
+                if dt is None:
+                    currentProgram.getDataTypeManager().addDataType(struct, None)
+                else:
+                    dt.replaceWith(struct)
 
             def set_func_name(self, ea, name, cmt):
                 # type: (int, str, str) -> None
-                pass
+                func = getFunctionAt(ea)
+                if func is not None:
+                    func.setName(None, SourceType.DEFAULT)
+                    func.setName(name, SourceType.USER_DEFINED)
+                    func.setComment(cmt)
 
             def process_pattern(self, pattern):
-                # type: (int, str) -> None
-                pass
+                # type: (str) -> None
+                suffix = exd_func_patterns[pattern]
+                pattern = "".join(["\\x" + x if x != "?" else "." for x in pattern.split(" ")])
+                if suffix is not None:
+                    print(f"Finding exd funcs of {suffix}... please wait.")
+                self.do_pattern(pattern, suffix)
 
-            def set_func_types(self):
-                # type: () -> None
-                pass
+            def do_pattern(self, pattern, suffix):
+                # type: (string, string) -> None
+                block = currentProgram.getMemory().getBlock(".text")
+                address_set = currentProgram.getAddressFactory().getAddressSet(block.getStart(), block.getEnd())
+                result_list = findBytes(address_set, pattern, 8192, 1)
+                for ea in result_list:
+                    if monitor.isCancelled():
+                        break
+                    sheet_index = self.get_sheet_index(ea)
+                    sheet_name = exd_map.get(sheet_index)
+                    if sheet_name is None:
+                        print(f"Warning: sheet index {sheet_index} is undefined at {ea}")
+                        continue
+                    func_name = f"Component::Exd::ExdModule.Get{sheet_name}{suffix}"
+                    self.set_func_name(ea, func_name, f"Sheet: {sheet_name} ({sheet_index})")
+                    if suffix == "SheetIndex":
+                        return
+
+                    return_type = PointerDataType(VoidDataType.dataType)
+                    if suffix == "RowCount":
+                        return_type = IntegerDataType()
+                    else:
+                        path = self.get_datatype_path(f"{exd_struct_map[sheet_index]}")
+                        dt = currentProgram.getDataTypeManager().getDataType(path)
+                        if dt is not None:
+                            return_type = PointerDataType(dt)
+
+                    return_var = ReturnParameterImpl(return_type, currentProgram)
+                    arg_vars = ArrayList()
+                    arg_vars.add(ParameterImpl("rowId", UnsignedIntegerDataType(), currentProgram))
+                    if suffix == "RowAndSubRowId":
+                        arg_vars.add(ParameterImpl("subRowId", UnsignedIntegerDataType(), currentProgram))
+                    elif suffix == "RowCount":
+                        arg_vars.clear()
+
+                    update_type = Function.FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS
+                    getFunctionAt(ea).updateFunction("__fastcall", return_var, arg_vars, update_type, False, SourceType.USER_DEFINED)
+
+            def get_sheet_index(self, ea):
+                # type: (Address) -> int
+                func = getFunctionAt(ea)
+                if func is None and disassemble(ea):
+                    func = createFunction(ea, None)
+                if func is None:
+                    return -1
+                min_address = func.getBody().getMinAddress().getOffset()
+                instructions = currentProgram.getListing().getInstructions(func.getBody(), True)
+                for insn in instructions:
+                    if monitor.isCancelled():
+                        break
+                    if insn.getFlowType().isCall():
+                        return self.get_rdx_arg(insn, min_address)
+                return -1
+
+            def get_rdx_arg(self, insn, min_address):
+                # type: (Instruction, int) -> int
+                target = insn.getRegister("RDX")
+                while insn is not None and insn.getMinAddress().getOffset() >= min_address:
+                    if monitor.isCancelled():
+                        break
+                    insn = insn.getPrevious()
+                    if insn is None:
+                        break
+                    outp = insn.getResultObjects()
+                    if outp.length == 0 or outp[0] != target:
+                        continue
+                    value = insn.getScalar(1)
+                    if value is not None:
+                        return value.getValue()
+                return -1
+
+            def get_datatype_path(self, name):
+                # type: (str) -> DataTypePath
+                if name == "__int8": name = "char"
+                if name == "__int16": name = "short"
+                if name == "__int32": name = "int"
+                if name == "__int64": name = "longlong"
+                if name == "unsigned __int8" or name == "unsigned char": name = "byte"
+                if name == "unsigned __int16" or name == "unsigned short": name = "ushort"
+                if name == "unsigned __int32" or name == "unsigned int": name = "uint"
+                if name == "unsigned __int64" or name == "unsigned long long": name = "ulonglong"
+                path_parts = SymbolPathParser.parse(name)
+                return DataTypePath("/" + "/".join(path_parts[:-1]), path_parts[-1])
 
         api = GhidraApi()
 
@@ -348,7 +454,7 @@ exd_map = ExcelListFile(game_data.get_file(ParsedFileName("exd/root.exl"))).dict
 exd_struct_map: dict[str, str] = {}
 exd_headers: tuple[dict[int, tuple[str, str]], dict[str, dict[int, str]], int] = {}
 
-api.create_enum_struct("Component::Exd::SheetsEnum", exd_map)
+api.create_enum_struct("Component::Exd::SheetsEnum", exd_map, 4)
 
 for key in exd_map:
     print(f"Parsing schema for {exd_map[key]}.")
@@ -366,5 +472,5 @@ for key in exd_headers:
     api.create_struct(struct_name, exd_header)
 
 # if a new pattern is found, add it to the exd_func_patterns dict
-for pattern in exd_func_patterns:
-    api.process_pattern(pattern)
+for func_pattern in exd_func_patterns:
+    api.process_pattern(func_pattern)
