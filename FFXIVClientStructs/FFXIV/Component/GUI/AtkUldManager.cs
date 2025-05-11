@@ -84,6 +84,9 @@ public unsafe partial struct AtkUldManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 44 24 ?? 41 8B CF")]
     public partial void UpdateDrawNodeList();
+
+    [MemberFunction("40 57 48 83 EC 30 0F B6 81 ?? ?? ?? ?? 48 8B F9 A8 01")]
+    public partial void Finalizer();
 }
 
 public enum AtkLoadState : byte {
