@@ -2118,6 +2118,7 @@ classes:
       0x14062B920: SearchNodeByIndex
       0x14062B980: GetDuplicatedNode
       0x1406287B0: UpdateDrawNodeList
+      0x14062A450: Finalizer
   Component::GUI::AtkTimeline:
     funcs:
       0x14066D070: GetStartFrameIdxForLabelId
