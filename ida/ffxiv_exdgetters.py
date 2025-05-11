@@ -192,9 +192,7 @@ if api is None:
                 enum_id = self.create_enum(name)
                 enum_id = self.get_enum_id(name)
                 sheet_name = name.split("::")[-2]
-                if width == 1:
-                    self.set_enum_width(enum_id, width)
-                    self.set_enum_as_bf(enum_id)
+                self.set_enum_width(enum_id, width)
                 for key in values:
                     self.remove_enum_member(enum_id, key, f"{sheet_name}_{values[key]}")
                     self.add_enum_member(enum_id, f"{sheet_name}_{values[key]}", key)
