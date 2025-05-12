@@ -2103,9 +2103,12 @@ classes:
     funcs:
       0x1406286A0: InitializeResourceRendererManager # inlined in SetupFromULDResourceHandle, no xrefs
       0x140624E70: SetupFromULDResourceHandle
+      0x140623D50: SetupComponentFromULDResourceHandle
       0x140626450: CreateTimeline
-      0x140627370: ReadTPHD
-      0x140627580: ReadASHDAndLoadTextures
+      0x140626710: ReadComponentData
+      0x140626C10: ReadNodeData
+      0x140627370: ReadTPHD # PartList
+      0x140627580: ReadASHDAndLoadTextures # AssetList
       0x140627FD0: CreateAtkNode
       0x140628AF0: UpdateFromParentNode # (AtkResNode* node, AtkResNode *parent, bool force)
       0x140628ED0: UpdateNodeTransform
