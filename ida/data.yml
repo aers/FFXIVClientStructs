@@ -7129,8 +7129,12 @@ classes:
       - ea: 0x142039A80
         base: Component::GUI::AtkEventListener
     vfuncs:
-      5: OnUldUpdate
-      7: OnUldDraw
+      3: Initialize
+      4: Deinitialize
+      5: Update
+      6: Load # calls Setup when done
+      7: Draw
+      8: Setup
       10: SetEnabledState
       14: GetAtkResNode
       17: InitializeFromComponentData
@@ -7138,6 +7142,8 @@ classes:
       0x14064A7E0: ctor
       0x14064AA60: GetOwnerNodePosition
       0x14064AD80: GetScrollBarNodeById
+      0x14064ADE0: GetComponentById
+      0x14064AE90: GetComponentIconTextById
       0x14064AF40: GetTextNodeById
       0x14064AFA0: GetImageNodeById
       0x14061D250: IsAnimated
