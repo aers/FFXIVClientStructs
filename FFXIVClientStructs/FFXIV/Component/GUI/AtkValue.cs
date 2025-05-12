@@ -3,7 +3,6 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[Flags] // TODO: Remove FlagsAttribute again? This isn't a bitmask enum - for example, type Int is not Null | Bool.
 public enum ValueType {
     Undefined = 0,
     Null = 0x1,
