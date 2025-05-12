@@ -39182,6 +39182,12 @@ structs:
     parameters:
     - type: Component::GUI::AtkUldManager*
       name: this
+  - signature: 40 57 48 83 EC 30 0F B6 81 ?? ?? ?? ?? 48 8B F9 A8 01
+    return_type: void
+    name: Finalizer
+    parameters:
+    - type: Component::GUI::AtkUldManager*
+      name: this
 - type: Component::GUI::AtkUldWidgetInfo
   name: AtkUldWidgetInfo
   namespace: Component.GUI
