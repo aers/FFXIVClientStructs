@@ -5356,6 +5356,11 @@ classes:
     funcs:
       0x140249980: ctor
       0x1402499B0: Finalizer
+      0x140249AE0: ShowAddon
+      0x140249B20: HideAddon
+      0x140249B60: IsAddonShown
+      0x140249C00: GetAddonStatus
+      0x140249C40: FocusAddon
       0x140249D00: CloseContextAddons
       0x140249E80: CloseAddon
       0x140249EC0: IsAddonReady
