@@ -7105,8 +7105,13 @@ classes:
       0x140631C00: GetNodeCount
       0x140631C20: GetWindowComponent
       0x140631C50: GetComponentByNodeId
-      0x140631CE0: GetButtonNodeById
+      0x140631CE0: GetComponentButtonById
+      0x140631EE0: GetComponentCheckboxById
+      0x140631F80: GetComponentIconById
       0x140632020: GetComponentListById
+      0x1406320C0: GetComponentTreeListById
+      0x140632160: GetComponentDropDownListById
+      0x140632200: GetComponentTextNineGridById
       0x1406322A0: GetTextNodeById
       0x140632300: GetImageNodeById
       0x140632400: FireCallback
