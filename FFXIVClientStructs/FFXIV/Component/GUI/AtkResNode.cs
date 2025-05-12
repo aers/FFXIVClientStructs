@@ -230,18 +230,6 @@ public unsafe partial struct AtkResNode : ICreatable {
     public partial void UpdateFromTimeline();
 }
 
-public enum NodeType : ushort {
-    Res = 1,
-    Image = 2,
-    Text = 3,
-    NineGrid = 4,
-    Counter = 5,
-
-    Collision = 8,
-    ClippingMask = 10
-    // Component: >=1000
-}
-
 // 'visible' will change visibility immediately, the rest rely on other stuff to happen so they dont do anything
 // top and bottom assumed based on a scrollbar, lots of left-aligned text has AnchorLeft set
 [Flags]
