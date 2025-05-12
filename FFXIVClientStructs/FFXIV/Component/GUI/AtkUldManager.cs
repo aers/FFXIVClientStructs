@@ -82,6 +82,9 @@ public unsafe partial struct AtkUldManager {
         return (AtkCollisionNode*)CreateAtkNodeStatic(NodeType.Collision);
     }
 
+    [MemberFunction("E8 ?? ?? ?? ?? 66 41 3B B7")]
+    public partial void ExpandNodeListSize(ushort newNodeListSize);
+
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 44 24 ?? 41 8B CF")]
     public partial void UpdateDrawNodeList();
 

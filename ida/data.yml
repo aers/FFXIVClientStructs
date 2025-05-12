@@ -2109,6 +2109,7 @@ classes:
       0x1406290B0: UpdateNodeColor
       0x140629610: CreateAtkComponent
       0x14062A8A0: Update
+      0x14062AE70: LoadResourceAndTextures
       0x14062B5A0: SortNodeListByPriority
       0x14062B670: SwapNodeListIndex
       0x14062B480: SetDuplicateNodeInfo
@@ -2118,6 +2119,7 @@ classes:
       0x14062B920: SearchNodeByIndex
       0x14062B980: GetDuplicatedNode
       0x1406287B0: UpdateDrawNodeList
+      0x140628A20: TraverseNode
       0x14062A450: Finalizer
   Component::GUI::AtkTimeline:
     funcs:
