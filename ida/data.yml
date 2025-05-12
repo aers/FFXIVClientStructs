@@ -7070,6 +7070,7 @@ classes:
       62: OnMouseOver
       63: OnMouseOut
       66: IsFullyLoaded
+      67: PlaySoundEffect
       69: HandleDPadInput
       71: HandleBackButtonInput
     funcs:

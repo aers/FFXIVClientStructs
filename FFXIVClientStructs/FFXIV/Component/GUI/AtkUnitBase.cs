@@ -343,6 +343,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(66)]
     public partial bool IsFullyLoaded();
 
+    [VirtualFunction(67)]
+    public partial void PlaySoundEffect(int soundEffectId);
+
     [VirtualFunction(69)]
     public partial bool HandleDPadInput(int inputId, bool a3);
 
