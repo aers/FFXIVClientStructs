@@ -7,21 +7,13 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x90)]
 public unsafe partial struct AtkUldManager {
-    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public struct DuplicateNodeInfo {
-        [FieldOffset(0x0)] public uint NodeId;
-        [FieldOffset(0x4)] public uint Count;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-    public struct DuplicateObjectList {
-        [FieldOffset(0x0)] public AtkComponentNode* NodeList;
-        [FieldOffset(0x8)] public uint NodeCount;
-    }
-
     [FieldOffset(0x00)] public AtkUldAsset* Assets; // array with size AssetCount, "ashd" (asset) header
-    [FieldOffset(0x08)] public AtkUldPartsList* PartsList; // array with size PartsListCount, "tphd" header 
-    [FieldOffset(0x10)] public AtkUldObjectInfo* Objects; // cast to AtkUldWidgetInfo or AtkUldComponentInfo depending on base type
+    [FieldOffset(0x08)] public AtkUldPartsList* PartsList; // array with size PartsListCount, "tphd" header
+    /// <remarks>
+    /// Needs to be cast to <see cref="AtkUldComponentInfo"/>* if <see cref="BaseType"/> is <see cref="AtkUldManagerBaseType.Component"/>,<br/>
+    /// or to <see cref="AtkUldWidgetInfo"/>* if <see cref="BaseType"/> is <see cref="AtkUldManagerBaseType.Widget"/>.
+    /// </remarks>
+    [FieldOffset(0x10)] public AtkUldObjectInfo* Objects;
     [FieldOffset(0x18)] public AtkUldComponentDataBase* ComponentData; // need to cast this to the appropriate one for your component type
     [FieldOffset(0x20)] public ushort AssetCount;
     [FieldOffset(0x22)] public ushort PartsListCount;
@@ -40,6 +32,7 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x82)] public ushort RootNodeHeight;
     [FieldOffset(0x84)] public ushort NodeListSize; // this is the allocated size of nodelist, count is the amount of nodes it has
     [FieldOffset(0x86)] public byte Flags1;
+    [FieldOffset(0x88)] public AtkUldManagerBaseType BaseType;
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded
 
     public Span<Pointer<AtkResNode>> Nodes => new(NodeList, NodeListCount);
@@ -90,6 +83,18 @@ public unsafe partial struct AtkUldManager {
 
     [MemberFunction("40 57 48 83 EC 30 0F B6 81 ?? ?? ?? ?? 48 8B F9 A8 01")]
     public partial void Finalizer();
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+    public struct DuplicateNodeInfo {
+        [FieldOffset(0x0)] public uint NodeId;
+        [FieldOffset(0x4)] public uint Count;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct DuplicateObjectList {
+        [FieldOffset(0x0)] public AtkComponentNode* NodeList;
+        [FieldOffset(0x8)] public uint NodeCount;
+    }
 }
 
 public enum AtkLoadState : byte {
@@ -98,6 +103,12 @@ public enum AtkLoadState : byte {
     TexturesLoading = 2,
     Loaded = 3,
     LoadError = 4
+}
+
+public enum AtkUldManagerBaseType : byte {
+    None = 0,
+    Component = 1,
+    Widget = 2,
 }
 
 public enum NodeType : ushort {
