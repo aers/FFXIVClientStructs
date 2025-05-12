@@ -6839,6 +6839,7 @@ classes:
       0x14061C9E0: ctor
       0x14061CAA0: Finalizer
       0x14061CAF0: Initialize
+      0x14061CBC0: GetNodeType
       0x14061CC10: GetAsAtkImageNode
       0x14061CC30: GetAsAtkTextNode
       0x14061CC50: GetAsAtkNineGridNode
@@ -6882,8 +6883,8 @@ classes:
       0x14061DF40: SetYFloat
       0x14061DF70: SetXShort
       0x14061DFB0: SetYShort
-#fail       0x14060B060: GetScreenPos
-#fail       0x14060B080: SetScreenPos
+      0x14061DFF0: GetScreenPos
+      0x14061E010: SetScreenPos
       0x14061E040: GetScreenX
       0x14061E060: GetScreenY
       0x14061E080: GetScreenXInt
@@ -6896,7 +6897,7 @@ classes:
       0x14061E430: SetRotation
       0x14061E4A0: GetRotationDegrees
       0x14061E4D0: SetRotationDegrees
-#fail       0x14060B5C0: GetColor
+      0x14061E550: GetColor
       0x14061E570: SetColor
       0x14061E580: GetAddRGB
       0x14061E5B0: SetAddRGB
@@ -6932,34 +6933,31 @@ classes:
       0x14061F4D0: SetOriginYUnsafe
       0x14062B180: SetComponentSize
       0x14064AA30: GetComponent_2
-      0x14064DB50: GetAsComponentButton
-      0x14064F930: GetAsComponentIcon
-      0x140651EB0: GetAsComponentListItemRenderer
-      0x14065FE30: GetAsComponentList
-      0x140664A90: GetAsComponentTreeList
-      0x14066F0B0: GetAsComponentCheckBox
-      0x140670090: GetAsComponentGaugeBar
-      0x140671FB0: GetAsComponentSlider
-      0x1406774D0: GetAsComponentTextInput
-      0x14067BBB0: GetAsComponentNumericInput
-      0x1406805B0: GetAsComponentDropDownList
-      0x140681140: GetAsComponentRadioButton
-      0x140681A20: GetAsComponentTab
-      0x140682050: GetAsComponentGuildLeveCard
-      0x140682560: GetAsComponentTextNineGrid
-      0x140689800: GetAsComponentMap
-      0x14068B2B0: GetAsComponentPreview
-      0x14068C850: GetAsComponentScrollBar
-      0x14068E380: GetAsComponentIconText
-      0x140690670: GetAsComponentDragDrop
-      0x140691BE0: GetAsComponentMultipurpose
-      0x140692C30: GetAsComponentWindow
-      0x14069A1D0: GetAsComponentJournalCanvas
-      0x14069D030: GetAsComponentHoldButton
-      0x14069D730: GetAsComponentPortrait
-      0x1406A34D0: GetAsComponentDragDrop2
-      0x1406A3740: GetAsComponentIcon2
-      0x1406A3B30: GetAsComponentListItemRenderer2
+      0x14064DB50: GetAsAtkComponentButton
+      0x14064F930: GetAsAtkComponentIcon
+      0x140651EB0: GetAsAtkComponentListItemRenderer
+      0x14065FE30: GetAsAtkComponentList
+      0x140664A90: GetAsAtkComponentTreeList
+      0x14066F0B0: GetAsAtkComponentCheckBox
+      0x140670090: GetAsAtkComponentGaugeBar
+      0x140671FB0: GetAsAtkComponentSlider
+      0x1406774D0: GetAsAtkComponentTextInput
+      0x14067BBB0: GetAsAtkComponentNumericInput
+      0x1406805B0: GetAsAtkComponentDropDownList
+      0x140681140: GetAsAtkComponentRadioButton
+      0x140681A20: GetAsAtkComponentTab
+      0x140682050: GetAsAtkComponentGuildLeveCard
+      0x140682560: GetAsAtkComponentTextNineGrid
+      0x140689800: GetAsAtkComponentMap
+      0x14068B2B0: GetAsAtkComponentPreview
+      0x14068C850: GetAsAtkComponentScrollBar
+      0x14068E380: GetAsAtkComponentIconText
+      0x140690670: GetAsAtkComponentDragDrop
+      0x140691BE0: GetAsAtkComponentMultipurpose
+      0x140692C30: GetAsAtkComponentWindow
+      0x14069A1D0: GetAsAtkComponentJournalCanvas
+      0x14069D030: GetAsAtkComponentHoldButton
+      0x14069D730: GetAsAtkComponentPortrait
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x142039718
@@ -7096,12 +7094,14 @@ classes:
       0x14062E2B0: GetScaledHeight
       0x14062E2F0: CalculateBounds
       0x14062EC20: SetFlag
+      0x14062EF80: GetUnitBaseAttachmentPositionInfo
       0x140630360: ContainsNode
       0x140630990: Draw
       0x140630E50: LoadUldByName
       0x140630F70: SetScdResourceIndex
       0x140631000: SetOpenTransition
       0x140631040: SetCloseTransition
+      0x1406310E0: SetUnitBaseAttachmentPositionInfo
       0x140631100: SubscribeAtkArrayData
       0x140631200: UnsubscribeAtkArrayData
       0x140631410: SetFocusNode
@@ -7274,8 +7274,6 @@ classes:
       0x1406715C0: GetFillPosition1
       0x140671650: GetFillPosition2
 #fail       0x1406716A0: InitializeFillMargin # inlined in 0x140690350
-    vfuncs:
-      8: InitializeFillNodes
   Component::GUI::AtkComponentGaugeBar::GaugeValueTransition:
     funcs:
       0x140670110: GetTransitioningValue
@@ -10388,6 +10386,7 @@ classes:
     funcs:
       0x140D78720: ctor
       0x140D78800: Finalizer
+      0x140D78FE0: GetAgentCabinetWithdraw
   Client::UI::Agent::AgentCabinetWithdraw:
     vtbls:
       - ea: 0x142087CB8
@@ -15869,6 +15868,8 @@ classes:
     vtbls:
       - ea: 0x1420D8ED8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141257050: ApplyUnitBaseAttachmentPositionInfo
   Client::UI::AddonContentsInfoDetail:
     vtbls:
       - ea: 0x1420D9A68
