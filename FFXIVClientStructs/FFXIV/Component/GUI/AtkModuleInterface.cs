@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Input;
+using static FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitManager;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -39,8 +40,14 @@ public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(23)]
     public partial bool RefreshAddon(uint addonId, uint valueCount, AtkValue* values);
 
+    [VirtualFunction(25)]
+    public partial bool SetAddonVisibility(uint addonId, bool visible);
+
     [VirtualFunction(26)]
     public partial bool IsAddonReady(uint addonId);
+
+    [VirtualFunction(27)]
+    public partial bool FocusAddon(uint addonId, bool focusContextMenu = false);
 
     [VirtualFunction(28)]
     public partial void ClearFocus();
@@ -50,6 +57,9 @@ public unsafe partial struct AtkModuleInterface {
 
     [VirtualFunction(40)]
     public partial SoftKeyboardDeviceInterface* GetSoftKeyboardDeviceInterface();
+
+    [VirtualFunction(44)]
+    public partial AddonStatus GetAddonStatus(uint addonId);
 
     // Component::GUI::AtkModuleInterface::AtkEventInterface
     // no explicit constructor, just an event interface 

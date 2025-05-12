@@ -873,12 +873,15 @@ classes:
       18: SetAtkModuleEvent
       21: CloseAddon
       23: RefreshAddon
+      25: SetAddonVisibility
       26: IsAddonReady
+      27: FocusAddon
       28: ClearFocus
       33: IsCursorVisible
       36: SetAtkHistory
       39: SetUIVisibility
       40: GetSoftKeyboardDeviceInterface
+      44: GetAddonStatus
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x141FE8F98
