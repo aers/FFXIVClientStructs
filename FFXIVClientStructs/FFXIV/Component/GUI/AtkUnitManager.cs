@@ -36,6 +36,8 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x9180)] public AddonDragDrop* AddonDragDrop;
     [FieldOffset(0x9188)] public AtkManagedInterface* ManagedScreenFrame;
 
+    [FieldOffset(0x9350)] public ScreenSize LastScreenSize;
+
     [FieldOffset(0x9C88)] public AtkUnitManagerFlags Flags;
 
     [VirtualFunction(8)]

@@ -7066,6 +7066,7 @@ classes:
       54: FireCloseCallback
       57: HandleCustomInput
       58: OnOpenTransitionStarted
+      60: OnScreenSizeChange
       62: OnMouseOver
       63: OnMouseOut
       66: IsFullyLoaded
