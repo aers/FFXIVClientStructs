@@ -157,7 +157,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial float GetScaledHeight(bool getScaledHeight); // False returns unscaled height
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 45 2B E6")]
-    public partial float GetGlobalUIScale();
+    public partial float GetGlobalUIScale(); // TODO: should be static
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4B FC")]
     public partial AtkResNode* GetNodeById(uint nodeId);
