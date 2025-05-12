@@ -34,9 +34,9 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x308)] public OperationGuideStruct OperationGuide;
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
     [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray32<AtkEventDispatcher> _atkEventDispatcher;
-    [FieldOffset(0x860)] public ScreenSize ScreenSize;
     [FieldOffset(0x858)] public uint NextEventDispatcherIndex;
     //[FieldOffset(0x85C)] public bool DispatchEvents;
+    [FieldOffset(0x860)] public ScreenSize ScreenSize;
     [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
 
     [MemberFunction("48 8B 51 ?? 48 0F BF 82")]
