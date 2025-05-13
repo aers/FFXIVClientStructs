@@ -31,7 +31,8 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x80)] public ushort RootNodeWidth;
     [FieldOffset(0x82)] public ushort RootNodeHeight;
     [FieldOffset(0x84)] public ushort NodeListSize; // this is the allocated size of nodelist, count is the amount of nodes it has
-    [FieldOffset(0x86)] public byte Flags1;
+    [FieldOffset(0x86), Obsolete("Use ResourceFlags")] public byte Flags1;
+    [FieldOffset(0x86)] public AtkUldManagerResourceFlag ResourceFlags;
     [FieldOffset(0x88)] public AtkUldManagerBaseType BaseType;
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded
 
@@ -95,6 +96,22 @@ public unsafe partial struct AtkUldManager {
         [FieldOffset(0x0)] public AtkComponentNode* NodeList;
         [FieldOffset(0x8)] public uint NodeCount;
     }
+}
+
+[Flags]
+public enum AtkUldManagerResourceFlag : byte {
+    None = 0,
+    /// <summary> A flag to indicate UldManager itself is Initialized (Initialize from AtkUnitBase or AtkComponentBase was called). </summary>
+    Initialized = 1 << 0,
+    /// <summary> Keeps the UldResourceHandle after loading data from it, so duplicate nodes can read data later on. </summary>
+    KeepUldResourceHandle = 1 << 1,
+    /// <summary> Objects and NodeList were allocated. </summary>
+    ArraysAllocated = 1 << 2,
+    /// <summary> Set with <code>(*(_DWORD *)&amp;RootNode->Priority &amp; 0x400000) != 0</code> and is read for calling DrawUldFromDataClipped instead of DrawUldFromData. </summary>
+    ClippedDraw = 1 << 3,
+    /// <summary> Enables to check the ThemeSupportBitmask of a TextureEntry when loading assets. </summary>
+    AssetsHaveThemeSupport = 1 << 4,
+    ContainsClippingMaskNode = 1 << 5,
 }
 
 public enum AtkLoadState : byte {
