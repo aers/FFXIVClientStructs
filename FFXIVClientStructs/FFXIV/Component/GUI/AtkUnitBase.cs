@@ -15,6 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public AtkUldManager UldManager;
+    // AlignmentType, X, Y for the UnitBase it's attached to here?!
     [FieldOffset(0xC8)] public AtkResNode* RootNode;
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
     [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
