@@ -6624,6 +6624,10 @@ classes:
     funcs:
       0x1405FFCE0: ctor
       0x1405FFD60: Finalizer
+  Component::GUI::AtkTextureResourceManager:
+    funcs:
+      0x1405FCE20: LoadTexture
+      0x1405FD0B0: LoadIconTexture
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x142038D30
@@ -15648,10 +15652,10 @@ classes:
       0x1410A9790: ctor
   Client::UI::AddonLicenseViewer:
     vtbls:
-      - ea: 0x1420C4430
+      - ea: 0x1420AF308
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x14118C0E0: ctor
+      0x1410EBA10: ctor
   Client::UI::AddonJournalDetail:
     vtbls:
       - ea: 0x1420B83E8
