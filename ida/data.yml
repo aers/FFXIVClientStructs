@@ -2106,7 +2106,6 @@ classes:
       0x140623D50: SetupComponentFromULDResourceHandle
       0x140626450: CreateTimeline
       0x140626710: ReadComponentData
-      0x140626C10: ReadNodeData
       0x140627370: ReadTPHD # PartList
       0x140627580: ReadASHDAndLoadTextures # AssetList
       0x140627FD0: CreateAtkNode
@@ -6938,6 +6937,7 @@ classes:
       0x14061F410: SetOriginUnsafe
       0x14061F480: SetOriginXUnsafe
       0x14061F4D0: SetOriginYUnsafe
+      0x140626C10: ReadNodeData
       0x14062B180: SetComponentSize
       0x14064AA30: GetComponent_2
       0x14064DB50: GetAsAtkComponentButton
