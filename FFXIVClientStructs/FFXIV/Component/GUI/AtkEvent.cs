@@ -14,7 +14,7 @@ public enum AtkEventType : byte {
     MouseDoubleClick = 10,
 
     InputReceived = 12,
-    // 13 is unfiltered/unhandled input?
+    InputNavigation = 13, // for LEFT, RIGHT, UP, DOWN, TAB_NEXT, TAB_PREV, TAB_BOTH_NEXT, TAB_BOTH_PREV, PAGEUP, PAGEDOWN
 
     FocusStart = 18,
     FocusStop = 19,

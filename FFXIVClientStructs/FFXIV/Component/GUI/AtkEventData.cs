@@ -45,7 +45,9 @@ public partial struct AtkEventData {
             Down = 0,
             Up = 1,
             Held = 2,
-            Unk3 = 3, // for unfiltered only?
+            /// <remarks> For <see cref="AtkEventType.InputNavigation"/>. </remarks>
+            Repeat = 3,
+            [Obsolete("Renamed to Repeat")] Unk3 = 3,
         }
     }
 
