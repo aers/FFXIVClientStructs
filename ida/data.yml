@@ -611,7 +611,7 @@ classes:
       0x141BBF8E0: InitializeLobbyConnection
       0x141BC01B0: DtorHelper
       0x141BC5100: Update
-  Application::Network::ZoneConnection:
+  Application::Network::ZoneClient:
     funcs:
       0x141BC65B0: ctor
       0x141BC6650: Dtor
@@ -619,9 +619,14 @@ classes:
       0x141BC6990: ReceivePacket
       0x141BC69B0: SendPacket
       0x141BC69F0: CloseChannel
-  Application::Network::ChatConnection:
+  Application::Network::ChatClient:
     funcs:
+      0x141BC6C90: ctor
       0x141BC6CC0: Dtor
+      0x141BC6DD0: OpenChannel
+      0x141BC6E20: ReceivePacket
+      0x141BC6E40: SendPacket
+      0x141BC6E60: CloseChannel
   Application::Network::LobbyClient::LobbyClientMixin:
     vtbls:
       - ea: 0x14233C5C0
