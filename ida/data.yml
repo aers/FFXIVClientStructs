@@ -12467,6 +12467,11 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F020B0: ctor
+      0x140F02A20: IsPouchItemUnlocked
+      0x140F02B10: GetPouchItemCount
+      0x140F02CC0: GetPouchItemAllocation
+      0x140F02D00: HasMaterialDeficit
+      0x140F03970: IsItemUnlocked
   Client::UI::Agent::AgentMJIBuildingMove:
     vtbls:
       - ea: 0x14208DED0
