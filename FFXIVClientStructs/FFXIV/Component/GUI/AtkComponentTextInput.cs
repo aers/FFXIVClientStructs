@@ -14,9 +14,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // type 7
 [GenerateInterop]
 [Inherits<AtkComponentInputBase>]
+[Inherits<AtkTextInput.AtkTextInputEventInterface>("48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 81 ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 8B 48 68", 6)]
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
 public unsafe partial struct AtkComponentTextInput : ICreatable {
-
     [FieldOffset(0x1E8)] public SoftKeyboardDeviceInterface.SoftKeyboardInputInterface SoftKeyboardInputInterface; // implemented by class
 
     [FieldOffset(0x250)] public uint MaxTextLength;
