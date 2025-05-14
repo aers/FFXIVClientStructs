@@ -330,7 +330,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial bool HandleCustomInput(AtkInputData* inputData);
 
     [VirtualFunction(60)]
-    public partial void OnScreenSizeChange(uint width, uint height);
+    public partial void OnScreenSizeChange(int width, int height);
 
     [VirtualFunction(62)]
     public partial void OnMouseOver();
