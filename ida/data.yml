@@ -7154,6 +7154,17 @@ classes:
       0x14064AE90: GetComponentIconTextById
       0x14064AF40: GetTextNodeById
       0x14064AFA0: GetImageNodeById
+      0x14064B000: GetUldAssetByImageNodeId
+      0x14064B0A0: IsOwnerNodeAncestorOf
+      0x14064B220: CopyCursorNavigationInfoFrom
+      0x14064B2E0: SetCursorNavigationInfo
+      0x14064B340: ClearCursorNavigationInfo
+      0x14064B3B0: SetCursorNavigationIndex
+      0x14064B3F0: GetCursorNavigationStopFlags
+      0x14064B4D0: SetAtkResNodeById
+  Component::GUI::AtkCursorNavigationInfo:
+    funcs:
+      0x14064A7B0: ctor
   Component::GUI::AtkComponentButton:
     vtbls:
       - ea: 0x142039B20

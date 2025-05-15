@@ -64,10 +64,10 @@ public unsafe partial struct AtkResNode : ICreatable {
     /// <term>Bit 1 [0x1]</term> Is dirty (has updates to be drawn)<br/>
     /// <term>Bit 2 [0x2]</term> Is undergoing timeline animation (?)<br/>
     /// <term>Bit 3 [0x4]</term> Calculate transformation<br/>
-    /// <term>Bit 4 [0x10]</term> Repeat Right<br/>
-    /// <term>Bit 5 [0x20]</term> Repeat Left<br/>
-    /// <term>Bit 6 [0x40]</term> Repeat Down<br/>
-    /// <term>Bit 7 [0x80]</term> Repeat Up<br/>
+    /// <term>Bit 4 [0x10]</term> Stops rapid cursor navigation Up<br/>
+    /// <term>Bit 5 [0x20]</term> Stops rapid cursor navigation Down<br/>
+    /// <term>Bit 6 [0x40]</term> Stops rapid cursor navigation Left<br/>
+    /// <term>Bit 7 [0x80]</term> Stops rapid cursor navigation Right<br/>
     /// <term>Bit 9 [0x100]</term> Don't make visible on new timeline label<br/>
     /// <term>Bits 10-17</term> ClipCount<br/>
     /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular
