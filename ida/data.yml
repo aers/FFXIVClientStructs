@@ -6856,6 +6856,7 @@ classes:
       0x14061CCF0: GetComponent
       0x14061D200: EnableTimeline
       0x14061D220: DisableTimeline
+      0x14061D250: IsAnimated
       0x14061D280: LoopTimeline
       0x14061D300: InitializeTimeline
       0x14061D340: UpdateChildTimelines
@@ -7153,7 +7154,6 @@ classes:
       0x14064AE90: GetComponentIconTextById
       0x14064AF40: GetTextNodeById
       0x14064AFA0: GetImageNodeById
-      0x14061D250: IsAnimated
   Component::GUI::AtkComponentButton:
     vtbls:
       - ea: 0x142039B20

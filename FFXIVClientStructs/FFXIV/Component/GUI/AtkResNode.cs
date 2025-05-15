@@ -227,6 +227,9 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 3A C7")]
     public partial void DisableTimeline();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A C6 74 22")]
+    public partial bool IsAnimated();
+
     [VirtualFunction(1)]
     public partial void Destroy(bool free);
 

@@ -30,7 +30,7 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 3A C6 74 22")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A C6 74 22"), Obsolete("This is a AtkResNode function and won't work on components. Use AtkResNode.IsAnimated.", true)]
     public partial bool IsAnimated();
 
     [VirtualFunction(3)]
