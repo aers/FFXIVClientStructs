@@ -19,6 +19,9 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08")]
     public partial void Ctor();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]
+    public partial AtkResNode* GetNodeById(uint id);
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B 54 B5 D7")]
     public partial AtkComponentBase* GetComponentById(uint id);
 
@@ -28,7 +31,7 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 47")]
     public partial AtkResNode* GetImageNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8"), Obsolete("This function has not type check at all. Use GetNodeById instead.")]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 3A C6 74 22"), Obsolete("This is a AtkResNode function and won't work on components. Use AtkResNode.IsAnimated.", true)]

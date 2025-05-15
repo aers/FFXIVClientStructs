@@ -7149,7 +7149,7 @@ classes:
     funcs:
       0x14064A7E0: ctor
       0x14064AA60: GetOwnerNodePosition
-      0x14064AD80: GetScrollBarNodeById
+      0x14064AD80: GetNodeById
       0x14064ADE0: GetComponentById
       0x14064AE90: GetComponentIconTextById
       0x14064AF40: GetTextNodeById
