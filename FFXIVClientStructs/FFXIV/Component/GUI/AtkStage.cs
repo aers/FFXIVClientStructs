@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -36,6 +37,7 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray32<AtkEventDispatcher> _atkEventDispatcher;
     [FieldOffset(0x858)] public uint NextEventDispatcherIndex;
     //[FieldOffset(0x85C)] public bool DispatchEvents;
+    [FieldOffset(0x860)] public Size ScreenSize;
     [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
 
     [MemberFunction("48 8B 51 ?? 48 0F BF 82")]

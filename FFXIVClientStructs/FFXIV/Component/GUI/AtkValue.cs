@@ -1,10 +1,8 @@
 using System.Runtime.CompilerServices;
-using FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-[Flags]
 public enum ValueType {
     Undefined = 0,
     Null = 0x1,

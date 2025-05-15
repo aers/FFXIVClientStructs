@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.UI;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -7,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9C90)]
 public unsafe partial struct AtkUnitManager {
-    [FieldOffset(0x0)] public AtkEventListener AtkEventListener;
+    [FieldOffset(0x0)] public AtkEventListener AtkEventListener; // TODO: let AtkUnitManager inherit from AtkEventListener
     [FieldOffset(0x30), FixedSizeArray, CExportIgnore] internal FixedSizeArray13<AtkUnitList> _depthLayers;
     [FieldOffset(0x30)] public AtkUnitList DepthLayerOneList;
     [FieldOffset(0x840)] public AtkUnitList DepthLayerTwoList;
@@ -35,6 +36,8 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x9178)] public AddonFilter* AddonFilterSystem;
     [FieldOffset(0x9180)] public AddonDragDrop* AddonDragDrop;
     [FieldOffset(0x9188)] public AtkManagedInterface* ManagedScreenFrame;
+
+    [FieldOffset(0x9350)] public Size LastScreenSize;
 
     [FieldOffset(0x9C88)] public AtkUnitManagerFlags Flags;
 

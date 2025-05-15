@@ -14,9 +14,16 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
+    [FieldOffset(0xB4)] public AtkCursorNavigationInfo CursorNavigationInfo;
 
     [MemberFunction("48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08")]
     public partial void Ctor();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]
+    public partial AtkResNode* GetNodeById(uint id);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 54 B5 D7")]
+    public partial AtkComponentBase* GetComponentById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
     public partial AtkResNode* GetTextNodeById(uint id);
@@ -24,44 +31,85 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 47")]
     public partial AtkResNode* GetImageNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8"), Obsolete("This function has not type check at all. Use GetNodeById instead.")]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 3A C6 74 22")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 3A C6 74 22"), Obsolete("This is a AtkResNode function and won't work on components. Use AtkResNode.IsAnimated.", true)]
     public partial bool IsAnimated();
 
+    [MemberFunction("48 85 D2 74 19 48 8B 81")]
+    public partial bool IsOwnerNodeAncestorOf(AtkResNode* node);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 44 39 A3 ?? ?? ?? ?? 74 07")]
+    public partial void CopyCursorNavigationInfoFrom(AtkComponentBase* component);
+
+    [MemberFunction("E8 ?? ?? ?? ?? B3 05")]
+    public partial void SetCursorNavigationInfo(AtkCursorNavigationInfo* cursorNavigationInfo, AtkCursorNavigationStopFlag stopFlags = AtkCursorNavigationStopFlag.None);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4A 8B 0C 26")]
+    public partial void ClearCursorNavigationInfo(bool clearStopFlags);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 B0 F0")]
+    public partial void SetCursorNavigationIndex(AtkCursorNavigationDirection direction, byte index);
+
+    [MemberFunction("48 8B 81 ?? ?? ?? ?? 44 8B 80 ?? ?? ?? ?? 41 8B C0")]
+    public partial AtkCursorNavigationStopFlag GetCursorNavigationStopFlags();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 57 59")]
+    public partial void SetAtkResNodeById(uint id);
+
+    [VirtualFunction(3)]
+    public partial void Initialize();
+
+    [VirtualFunction(4)]
+    public partial void Deinitialize();
+
     [VirtualFunction(5)]
+    public partial void Update(float delta);
+
+    [VirtualFunction(5), Obsolete("Renamed to Update")]
     public partial void OnUldUpdate(float delta);
+
+    [VirtualFunction(7)]
+    public partial void Draw();
+
+    [VirtualFunction(8)]
+    public partial void Setup();
 
     [VirtualFunction(10)]
     public partial void SetEnabledState(bool enabled);
+
+    [VirtualFunction(17)]
+    public partial void InitializeFromComponentData(void* data); // AtkUldComponentDataBase* ?
 }
 
-public enum ComponentType : byte {
-    Base = 0,
-    Button = 1,
-    Window = 2,
-    CheckBox = 3,
-    RadioButton = 4,
-    GaugeBar = 5,
-    Slider = 6,
-    TextInput = 7,
-    NumericInput = 8,
-    List = 9,
-    DropDownList = 10,
-    Tab = 11,
-    TreeList = 12,
-    ScrollBar = 13,
-    ListItemRenderer = 14,
-    Icon = 15,
-    IconText = 16,
-    DragDrop = 17,
-    GuildLeveCard = 18,
-    TextNineGrid = 19,
-    JournalCanvas = 20,
-    Multipurpose = 21,
-    Map = 22,
-    Preview = 23,
-    HoldButton = 24,
-    Portrait = 25,
+// basically the same as AtkUldComponentDataBase
+[StructLayout(LayoutKind.Explicit, Size = 0x09)]
+public struct AtkCursorNavigationInfo {
+    [FieldOffset(0x00)] public byte Index;
+    [FieldOffset(0x01)] public byte UpIndex;
+    [FieldOffset(0x02)] public byte DownIndex;
+    [FieldOffset(0x03)] public byte LeftIndex;
+    [FieldOffset(0x04)] public byte RightIndex;
+    [FieldOffset(0x05)] public byte CursorType; // 0 = east, 1 = south-east (seen in Emj addon)
+    [FieldOffset(0x06)] public byte OffsetX;
+    [FieldOffset(0x07)] public byte OffsetY;
+    [FieldOffset(0x08)] public byte Unk08;
+}
+
+public enum AtkCursorNavigationDirection {
+    Left = 0,
+    Right = 1,
+    Up = 2,
+    Down = 3
+}
+
+/// <summary> Stop flags for rapid cursor advancement. </summary>
+[Flags]
+public enum AtkCursorNavigationStopFlag {
+    None = 0,
+    Left = 1 << 0,
+    Right = 1 << 1,
+    Up = 1 << 2,
+    Down = 1 << 3
 }
