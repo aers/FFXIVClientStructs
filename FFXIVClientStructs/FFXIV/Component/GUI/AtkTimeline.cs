@@ -24,7 +24,7 @@ public unsafe partial struct AtkTimeline {
     public partial void UpdateChildTimelines(float frameTime);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 7D 48 8B 43 20")]
-    public partial void GetInterpolatedValue(int keyGroupId, AtkTimelineKeyGroupType keyGroupType, AtkTimelineKeyValue* output);
+    public partial void GetInterpolatedValue(int keyGroupId, AtkTimelineKeyGroupType keyGroupType, AtkTimelineKeyValue* output); // TODO: return bool
 }
 
 [Flags]

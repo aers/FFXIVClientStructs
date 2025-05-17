@@ -14,12 +14,12 @@ public unsafe partial struct AtkUldComponentDataTextInput {
     [FieldOffset(0x60)] public uint MaxByte;
     [FieldOffset(0x64)] public uint MaxChar;
     [FieldOffset(0x68)] public ushort CharSet;
-    [FieldOffset(0x6A)] public byte Flags1;
-    [FieldOffset(0x6B)] public byte Flags2;
+    [FieldOffset(0x6A)] public byte Flags1; // TODO: use TextInputFlags1
+    [FieldOffset(0x6B)] public byte Flags2; // TODO: use TextInputFlags2
     [FieldOffset(0x6C), FixedSizeArray] internal FixedSizeArray16<byte> _charSetExtras;
 }
 
-public enum TextInputFlags1 {
+public enum TextInputFlags1 { // TODO: set underlying type to byte
     Capitalize = 0x1,
     Mask = 0x2,
     EnableDictionary = 0x4,
@@ -30,7 +30,7 @@ public enum TextInputFlags1 {
     AllowLowerCase = 0x80
 }
 
-public enum TextInputFlags2 {
+public enum TextInputFlags2 { // TODO: set underlying type to byte
     AllowNumberInput = 0x1,
     AllowSymbolInput = 0x2,
     WordWrap = 0x4,

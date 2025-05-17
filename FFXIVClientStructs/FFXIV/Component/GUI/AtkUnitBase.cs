@@ -15,6 +15,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public AtkUldManager UldManager;
+    // AlignmentType, X, Y for the UnitBase it's attached to here?!
     [FieldOffset(0xC8)] public AtkResNode* RootNode;
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
     [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
@@ -157,7 +158,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial float GetScaledHeight(bool getScaledHeight); // False returns unscaled height
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 45 2B E6")]
-    public partial float GetGlobalUIScale();
+    public partial float GetGlobalUIScale(); // TODO: should be static
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4B FC")]
     public partial AtkResNode* GetNodeById(uint nodeId);
@@ -169,6 +170,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial AtkImageNode* GetImageNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36")]
+    public partial AtkComponentButton* GetComponentButtonById(uint nodeId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36"), Obsolete("Renamed to GetComponentButtonById")]
     public partial AtkComponentButton* GetButtonNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 46 48")]
@@ -325,6 +329,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(57)]
     public partial bool HandleCustomInput(AtkInputData* inputData);
 
+    [VirtualFunction(60)]
+    public partial void OnScreenSizeChange(int width, int height);
+
     [VirtualFunction(62)]
     public partial void OnMouseOver();
 
@@ -339,6 +346,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </remarks>
     [VirtualFunction(66)]
     public partial bool IsFullyLoaded();
+
+    [VirtualFunction(67)]
+    public partial void PlaySoundEffect(int soundEffectId);
 
     [VirtualFunction(69)]
     public partial bool HandleDPadInput(int inputId, bool a3);

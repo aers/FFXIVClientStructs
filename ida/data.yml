@@ -873,12 +873,15 @@ classes:
       18: SetAtkModuleEvent
       21: CloseAddon
       23: RefreshAddon
+      25: SetAddonVisibility
       26: IsAddonReady
+      27: FocusAddon
       28: ClearFocus
       33: IsCursorVisible
       36: SetAtkHistory
       39: SetUIVisibility
       40: GetSoftKeyboardDeviceInterface
+      44: GetAddonStatus
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x141FE8F98
@@ -2100,15 +2103,18 @@ classes:
     funcs:
       0x1406286A0: InitializeResourceRendererManager # inlined in SetupFromULDResourceHandle, no xrefs
       0x140624E70: SetupFromULDResourceHandle
+      0x140623D50: SetupComponentFromULDResourceHandle
       0x140626450: CreateTimeline
-      0x140627370: ReadTPHD
-      0x140627580: ReadASHDAndLoadTextures
+      0x140626710: ReadComponentData
+      0x140627370: ReadTPHD # PartList
+      0x140627580: ReadASHDAndLoadTextures # AssetList
       0x140627FD0: CreateAtkNode
       0x140628AF0: UpdateFromParentNode # (AtkResNode* node, AtkResNode *parent, bool force)
       0x140628ED0: UpdateNodeTransform
       0x1406290B0: UpdateNodeColor
       0x140629610: CreateAtkComponent
       0x14062A8A0: Update
+      0x14062AE70: LoadResourceAndTextures
       0x14062B5A0: SortNodeListByPriority
       0x14062B670: SwapNodeListIndex
       0x14062B480: SetDuplicateNodeInfo
@@ -2118,6 +2124,7 @@ classes:
       0x14062B920: SearchNodeByIndex
       0x14062B980: GetDuplicatedNode
       0x1406287B0: UpdateDrawNodeList
+      0x140628A20: TraverseNode
       0x14062A450: Finalizer
   Component::GUI::AtkTimeline:
     funcs:
@@ -5356,6 +5363,11 @@ classes:
     funcs:
       0x140249980: ctor
       0x1402499B0: Finalizer
+      0x140249AE0: ShowAddon
+      0x140249B20: HideAddon
+      0x140249B60: IsAddonShown
+      0x140249C00: GetAddonStatus
+      0x140249C40: FocusAddon
       0x140249D00: CloseContextAddons
       0x140249E80: CloseAddon
       0x140249EC0: IsAddonReady
@@ -6613,6 +6625,10 @@ classes:
     funcs:
       0x1405FFCE0: ctor
       0x1405FFD60: Finalizer
+  Component::GUI::AtkTextureResourceManager:
+    funcs:
+      0x1405FCE20: LoadTexture
+      0x1405FD0B0: LoadIconTexture
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x142038D30
@@ -6831,6 +6847,7 @@ classes:
       0x14061C9E0: ctor
       0x14061CAA0: Finalizer
       0x14061CAF0: Initialize
+      0x14061CBC0: GetNodeType
       0x14061CC10: GetAsAtkImageNode
       0x14061CC30: GetAsAtkTextNode
       0x14061CC50: GetAsAtkNineGridNode
@@ -6841,6 +6858,7 @@ classes:
       0x14061CCF0: GetComponent
       0x14061D200: EnableTimeline
       0x14061D220: DisableTimeline
+      0x14061D250: IsAnimated
       0x14061D280: LoopTimeline
       0x14061D300: InitializeTimeline
       0x14061D340: UpdateChildTimelines
@@ -6874,8 +6892,8 @@ classes:
       0x14061DF40: SetYFloat
       0x14061DF70: SetXShort
       0x14061DFB0: SetYShort
-#fail       0x14060B060: GetScreenPos
-#fail       0x14060B080: SetScreenPos
+      0x14061DFF0: GetScreenPos
+      0x14061E010: SetScreenPos
       0x14061E040: GetScreenX
       0x14061E060: GetScreenY
       0x14061E080: GetScreenXInt
@@ -6888,7 +6906,7 @@ classes:
       0x14061E430: SetRotation
       0x14061E4A0: GetRotationDegrees
       0x14061E4D0: SetRotationDegrees
-#fail       0x14060B5C0: GetColor
+      0x14061E550: GetColor
       0x14061E570: SetColor
       0x14061E580: GetAddRGB
       0x14061E5B0: SetAddRGB
@@ -6922,36 +6940,34 @@ classes:
       0x14061F410: SetOriginUnsafe
       0x14061F480: SetOriginXUnsafe
       0x14061F4D0: SetOriginYUnsafe
+      0x140626C10: ReadNodeData
       0x14062B180: SetComponentSize
       0x14064AA30: GetComponent_2
-      0x14064DB50: GetAsComponentButton
-      0x14064F930: GetAsComponentIcon
-      0x140651EB0: GetAsComponentListItemRenderer
-      0x14065FE30: GetAsComponentList
-      0x140664A90: GetAsComponentTreeList
-      0x14066F0B0: GetAsComponentCheckBox
-      0x140670090: GetAsComponentGaugeBar
-      0x140671FB0: GetAsComponentSlider
-      0x1406774D0: GetAsComponentTextInput
-      0x14067BBB0: GetAsComponentNumericInput
-      0x1406805B0: GetAsComponentDropDownList
-      0x140681140: GetAsComponentRadioButton
-      0x140681A20: GetAsComponentTab
-      0x140682050: GetAsComponentGuildLeveCard
-      0x140682560: GetAsComponentTextNineGrid
-      0x140689800: GetAsComponentMap
-      0x14068B2B0: GetAsComponentPreview
-      0x14068C850: GetAsComponentScrollBar
-      0x14068E380: GetAsComponentIconText
-      0x140690670: GetAsComponentDragDrop
-      0x140691BE0: GetAsComponentMultipurpose
-      0x140692C30: GetAsComponentWindow
-      0x14069A1D0: GetAsComponentJournalCanvas
-      0x14069D030: GetAsComponentHoldButton
-      0x14069D730: GetAsComponentPortrait
-      0x1406A34D0: GetAsComponentDragDrop2
-      0x1406A3740: GetAsComponentIcon2
-      0x1406A3B30: GetAsComponentListItemRenderer2
+      0x14064DB50: GetAsAtkComponentButton
+      0x14064F930: GetAsAtkComponentIcon
+      0x140651EB0: GetAsAtkComponentListItemRenderer
+      0x14065FE30: GetAsAtkComponentList
+      0x140664A90: GetAsAtkComponentTreeList
+      0x14066F0B0: GetAsAtkComponentCheckBox
+      0x140670090: GetAsAtkComponentGaugeBar
+      0x140671FB0: GetAsAtkComponentSlider
+      0x1406774D0: GetAsAtkComponentTextInput
+      0x14067BBB0: GetAsAtkComponentNumericInput
+      0x1406805B0: GetAsAtkComponentDropDownList
+      0x140681140: GetAsAtkComponentRadioButton
+      0x140681A20: GetAsAtkComponentTab
+      0x140682050: GetAsAtkComponentGuildLeveCard
+      0x140682560: GetAsAtkComponentTextNineGrid
+      0x140689800: GetAsAtkComponentMap
+      0x14068B2B0: GetAsAtkComponentPreview
+      0x14068C850: GetAsAtkComponentScrollBar
+      0x14068E380: GetAsAtkComponentIconText
+      0x140690670: GetAsAtkComponentDragDrop
+      0x140691BE0: GetAsAtkComponentMultipurpose
+      0x140692C30: GetAsAtkComponentWindow
+      0x14069A1D0: GetAsAtkComponentJournalCanvas
+      0x14069D030: GetAsAtkComponentHoldButton
+      0x14069D730: GetAsAtkComponentPortrait
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x142039718
@@ -7063,9 +7079,11 @@ classes:
       54: FireCloseCallback
       57: HandleCustomInput
       58: OnOpenTransitionStarted
+      60: OnScreenSizeChange
       62: OnMouseOver
       63: OnMouseOut
       66: IsFullyLoaded
+      67: PlaySoundEffect
       69: HandleDPadInput
       71: HandleBackButtonInput
     funcs:
@@ -7086,12 +7104,14 @@ classes:
       0x14062E2B0: GetScaledHeight
       0x14062E2F0: CalculateBounds
       0x14062EC20: SetFlag
+      0x14062EF80: GetUnitBaseAttachmentPositionInfo
       0x140630360: ContainsNode
       0x140630990: Draw
       0x140630E50: LoadUldByName
       0x140630F70: SetScdResourceIndex
       0x140631000: SetOpenTransition
       0x140631040: SetCloseTransition
+      0x1406310E0: SetUnitBaseAttachmentPositionInfo
       0x140631100: SubscribeAtkArrayData
       0x140631200: UnsubscribeAtkArrayData
       0x140631410: SetFocusNode
@@ -7100,8 +7120,13 @@ classes:
       0x140631C00: GetNodeCount
       0x140631C20: GetWindowComponent
       0x140631C50: GetComponentByNodeId
-      0x140631CE0: GetButtonNodeById
+      0x140631CE0: GetComponentButtonById
+      0x140631EE0: GetComponentCheckboxById
+      0x140631F80: GetComponentIconById
       0x140632020: GetComponentListById
+      0x1406320C0: GetComponentTreeListById
+      0x140632160: GetComponentDropDownListById
+      0x140632200: GetComponentTextNineGridById
       0x1406322A0: GetTextNodeById
       0x140632300: GetImageNodeById
       0x140632400: FireCallback
@@ -7114,18 +7139,34 @@ classes:
       - ea: 0x142039A80
         base: Component::GUI::AtkEventListener
     vfuncs:
-      5: OnUldUpdate
-      7: OnUldDraw
+      3: Initialize
+      4: Deinitialize
+      5: Update
+      6: Load # calls Setup when done
+      7: Draw
+      8: Setup
       10: SetEnabledState
       14: GetAtkResNode
       17: InitializeFromComponentData
     funcs:
       0x14064A7E0: ctor
       0x14064AA60: GetOwnerNodePosition
-      0x14064AD80: GetScrollBarNodeById
+      0x14064AD80: GetNodeById
+      0x14064ADE0: GetComponentById
+      0x14064AE90: GetComponentIconTextById
       0x14064AF40: GetTextNodeById
       0x14064AFA0: GetImageNodeById
-      0x14061D250: IsAnimated
+      0x14064B000: GetUldAssetByImageNodeId
+      0x14064B0A0: IsOwnerNodeAncestorOf
+      0x14064B220: CopyCursorNavigationInfoFrom
+      0x14064B2E0: SetCursorNavigationInfo
+      0x14064B340: ClearCursorNavigationInfo
+      0x14064B3B0: SetCursorNavigationIndex
+      0x14064B3F0: GetCursorNavigationStopFlags
+      0x14064B4D0: SetAtkResNodeById
+  Component::GUI::AtkCursorNavigationInfo:
+    funcs:
+      0x14064A7B0: ctor
   Component::GUI::AtkComponentButton:
     vtbls:
       - ea: 0x142039B20
@@ -7253,8 +7294,6 @@ classes:
       0x1406715C0: GetFillPosition1
       0x140671650: GetFillPosition2
 #fail       0x1406716A0: InitializeFillMargin # inlined in 0x140690350
-    vfuncs:
-      8: InitializeFillNodes
   Component::GUI::AtkComponentGaugeBar::GaugeValueTransition:
     funcs:
       0x140670110: GetTransitioningValue
@@ -10367,6 +10406,7 @@ classes:
     funcs:
       0x140D78720: ctor
       0x140D78800: Finalizer
+      0x140D78FE0: GetAgentCabinetWithdraw
   Client::UI::Agent::AgentCabinetWithdraw:
     vtbls:
       - ea: 0x142087CB8
@@ -15625,10 +15665,10 @@ classes:
       0x1410A9790: ctor
   Client::UI::AddonLicenseViewer:
     vtbls:
-      - ea: 0x1420C4430
+      - ea: 0x1420AF308
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x14118C0E0: ctor
+      0x1410EBA10: ctor
   Client::UI::AddonJournalDetail:
     vtbls:
       - ea: 0x1420B83E8
@@ -15848,6 +15888,8 @@ classes:
     vtbls:
       - ea: 0x1420D8ED8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141257050: ApplyUnitBaseAttachmentPositionInfo
   Client::UI::AddonContentsInfoDetail:
     vtbls:
       - ea: 0x1420D9A68
