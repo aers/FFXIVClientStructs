@@ -16,6 +16,9 @@ public enum AtkEventType : byte {
     InputReceived = 12,
     InputNavigation = 13, // for LEFT, RIGHT, UP, DOWN, TAB_NEXT, TAB_PREV, TAB_BOTH_NEXT, TAB_BOTH_PREV, PAGEUP, PAGEDOWN
 
+    // AtkComponentTextInput and AtkComponentNumericInput
+    InputBaseInputReceived = 15, // fired for moving the text cursor, deletion of a character and inserting a new line, etc.
+
     FocusStart = 18,
     FocusStop = 19,
 
