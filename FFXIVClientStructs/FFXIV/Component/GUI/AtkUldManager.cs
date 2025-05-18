@@ -136,8 +136,10 @@ public enum NodeType : ushort {
     Counter = 5,
 
     Collision = 8,
-    ClippingMask = 10
-    // Component: >=1000
+    ClippingMask = 10,
+
+    /// <remarks> Components are >=1000, but <see cref="AtkResNode.GetNodeType"/> returns 10000 for them. </remarks>
+    Component = 10000
 }
 
 public enum ComponentType : byte {
