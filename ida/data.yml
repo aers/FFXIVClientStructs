@@ -7224,7 +7224,7 @@ classes:
     funcs:
       0x14065D9D0: ctor
       0x140655270: SetItemCount
-      0x140655950: SetPopulator
+      0x140655950: SetupRenderer
       0x140656720: SetItemLabel
       0x1406567E0: GetItemLabel
       0x14065C9C0: DispatchItemEvent
