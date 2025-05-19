@@ -116,17 +116,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
       - name: Perform Rebase
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git status
-          git pull
           git checkout ${{ github.event.pull_request.base.ref }}
           git status
-          git checkout ${{ github.event.pull_request.head.ref }}
+          git checkout ${{ github.event.pull_request.head.sha }}
           git merge ${{ github.event.pull_request.base.ref }} --no-edit
           git status
       - uses: ./.github/composites/update-dotnet
