@@ -7220,6 +7220,7 @@ classes:
       31: SelectItem
       32: DeselectItem
       36: GetItemCount
+      44: DispatchEvent
       45: GetSelectedItemAtkResNode
     funcs:
       0x14065D9D0: ctor

@@ -60,8 +60,12 @@ public partial struct AtkEventData {
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public unsafe struct AtkListItemData {
         [FieldOffset(0x00)] public AtkComponentListItemRenderer* ListItemRenderer;
-        [FieldOffset(0x10)] public int SelectedIndex;
-        // [FieldOffset(0x16)] public ushort HoveredItemIndex3;
+        [FieldOffset(0x08)] public AtkComponentTreeListItem* ListItem;
+        [FieldOffset(0x10)] public int SelectedIndex; // HoveredItemIndex2
+        [FieldOffset(0x14)] private short UnkListField15C;
+        [FieldOffset(0x16)] public short HoveredItemIndex3;
+        [FieldOffset(0x18)] public byte MouseButtonId;
+        [FieldOffset(0x19)] public AtkMouseData.ModifierFlag MouseModifier;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
