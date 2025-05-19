@@ -95,6 +95,11 @@ class Program {
                 }
             }
         }
+        if (sb.Length > 1500) {
+            sb.PrependLine("");
+            sb.PrependLine("<details>");
+            sb.Append("</details>");
+        }
         Console.WriteLine(sb);
 #if DEBUG
         Environment.Exit(isError ? 1 : 0);

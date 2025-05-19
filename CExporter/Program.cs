@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using YamlDotNet.Serialization;
 
 namespace CExporter;
@@ -52,7 +53,20 @@ public class Program {
             Environment.Exit(1);
         }
 #else
-        if (!noWrite) new FileInfo(Path.Combine(dir.FullName, "errors.txt")).WriteFile(string.Join("\n", ExporterStatics.ErrorList));
+        if (!noWrite) {
+            if (ExporterStatics.ErrorList.Count > 20) {
+                var sb = new StringBuilder();
+                sb.AppendLine("<details>");
+                sb.AppendLine();
+                foreach (var error in ExporterStatics.ErrorList) {
+                    sb.AppendLine($"{error}");
+                }
+                sb.Append("</details>");
+                new FileInfo(Path.Combine(dir.FullName, "errors.txt")).WriteFile(sb.ToString());
+            }
+            else
+                new FileInfo(Path.Combine(dir.FullName, "errors.txt")).WriteFile(string.Join("\n", ExporterStatics.ErrorList));
+        }
 #endif
         if (!noWrite) {
             Exporter.Write(dir);
