@@ -7224,9 +7224,15 @@ classes:
     funcs:
       0x14065D9D0: ctor
       0x140655270: SetItemCount
+      0x140655950: SetPopulator
       0x140656720: SetItemLabel
       0x1406567E0: GetItemLabel
       0x14065C9C0: DispatchItemEvent
+      0x1406A3A60: GetItemRendererByNodeId
+  Component::GUI::AtkComponentListItemPopulator:
+    funcs:
+      0x14064FD10: ctor_WithRenderer
+      0x14064FD30: ctor
   Component::GUI::ListComponentCallBackInterface:
     vtbls:
       - ea: 0x142039E58

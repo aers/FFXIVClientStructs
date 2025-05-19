@@ -53,6 +53,13 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [VirtualFunction(36)]
     public partial int GetItemCount();
 
+    // rendererNodeId is the node id of the ListItemRenderer to use. if 0, it uses FirstAtkComponentListItemRenderer
+    [MemberFunction("E8 ?? ?? ?? ?? 83 FE 47")]
+    public partial void SetPopulator(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, int columnCount, uint rendererNodeId = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C8 48 85 DB")]
+    public partial AtkComponentListItemRenderer* GetItemRendererByNodeId(uint nodeId);
+
     [MemberFunction("E8 ?? ?? ?? ?? 41 80 FF 04")]
     public partial void SetItemCount(int value);
 
@@ -75,5 +82,12 @@ public unsafe partial struct AtkComponentList : ICreatable {
 
         [FieldOffset(0x14)] public bool IsHighlighted;
         [FieldOffset(0x15)] public bool IsDisabled;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct ColumnNodeInfo {
+        [FieldOffset(0x00)] public uint NodeId;
+        [FieldOffset(0x04)] public uint ParentNodeId; // if AtkResNode is not set, this is used
+        [FieldOffset(0x08)] public AtkResNode* AtkResNode;
     }
 }
