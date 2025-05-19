@@ -32,6 +32,9 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0x998)] public Utf8String ZoneName;
     [FieldOffset(0xA00)] private Utf8String UnkA00;
 
+    [FieldOffset(0xA70)] private ZoneClient* ZoneClient;
+    [FieldOffset(0xA78)] private ChatClient* ChatClient;
+
     [FieldOffset(0xAA1)] public bool WinSockInitialized;
     [FieldOffset(0xAA8)] public NetworkModulePacketReceiverCallback* PacketReceiverCallback;
 
