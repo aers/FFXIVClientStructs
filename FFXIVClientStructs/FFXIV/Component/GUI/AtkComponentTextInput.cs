@@ -27,14 +27,8 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x280)] public Utf8String UnkText01;
     [FieldOffset(0x2E8)] public Utf8String UnkText02;
 
-    [FieldOffset(0x350)] [Obsolete("Renamed to AvailableLines")] public Utf8String UnkText03;
-    [FieldOffset(0x450)] [Obsolete("Renamed to HighlightedAutoTranslateOptionColorPrefix")] public Utf8String UnkText04;
-    [FieldOffset(0x4B8)] [Obsolete("Renamed to HighlightedAutoTranslateOptionColorSuffix")] public Utf8String UnkText05;
-
+    [FieldOffset(0x350), Obsolete("Renamed to AvailableLines")] public Utf8String UnkText03;
     [FieldOffset(0x350)] public Utf8String AvailableLines;
-    // Utf8Strings containing color macros that are wrapped around the highlighted AutoTranslate option
-    [FieldOffset(0x450)] public Utf8String HighlightedAutoTranslateOptionColorPrefix;
-    [FieldOffset(0x4B8)] public Utf8String HighlightedAutoTranslateOptionColorSuffix;
 
     [FieldOffset(0x3B8)] public AtkTextNode* AvailableLinesTextNode;
     [FieldOffset(0x3C0)] public AtkTextNode* AvailableCharsTextNode;
@@ -45,6 +39,14 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x3E0), FixedSizeArray] internal FixedSizeArray9<Pointer<AtkComponentButton>> _autoTranslateMenuButtons;
     [FieldOffset(0x428)] public AtkTextNode* AutoTranslateMenuPageInfoTextNode;
     [FieldOffset(0x430)] public AtkNineGridNode* AutoTranslateMenuBackground;
+    
+    [FieldOffset(0x450), Obsolete("Renamed to HighlightedAutoTranslateOptionColorPrefix")] public Utf8String UnkText04;
+    // Utf8Strings containing color macros that are wrapped around the highlighted AutoTranslate option
+    [FieldOffset(0x450)] public Utf8String HighlightedAutoTranslateOptionColorPrefix;
+    
+    [FieldOffset(0x4B8), Obsolete("Renamed to HighlightedAutoTranslateOptionColorSuffix")] public Utf8String UnkText05;
+    [FieldOffset(0x4B8)] public Utf8String HighlightedAutoTranslateOptionColorSuffix;
+
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0")]
     public partial void Ctor();
