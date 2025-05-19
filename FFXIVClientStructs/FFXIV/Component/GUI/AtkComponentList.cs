@@ -14,6 +14,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [FieldOffset(0xC0)] public AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     [FieldOffset(0xC8)] public AtkComponentScrollBar* AtkComponentScrollBarC8;
     [FieldOffset(0xF0)] public ListItem* ItemRendererList;
+    [FieldOffset(0x100)] public CategoryItem* CategoryItemRendererList;
     [FieldOffset(0x120)] public int ListLength;
     [FieldOffset(0x134)] public int SelectedItemIndex; // 0-N, -1 when none.
     [FieldOffset(0x138)] public int HeldItemIndex; // 0-N, -1 when none. While mouse is held down.
@@ -24,6 +25,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [FieldOffset(0x150)] public AtkCollisionNode* HoveredItemCollisionNode;
     [FieldOffset(0x158)] public int HoveredItemIndex2; // Repeat?
     [FieldOffset(0x160)] public int HoveredItemIndex3; // Repeat?
+    [FieldOffset(0x18C)] public byte NumCategoryRenderers;
     [FieldOffset(0x19B)] public bool IsUpdatePending;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 07 0F 57 C0")]
@@ -82,6 +84,14 @@ public unsafe partial struct AtkComponentList : ICreatable {
 
         [FieldOffset(0x14)] public bool IsHighlighted;
         [FieldOffset(0x15)] public bool IsDisabled;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public struct CategoryItem {
+        [FieldOffset(0)] public AtkComponentListItemRenderer* AtkComponentListItemRenderer;
+        [FieldOffset(0x8)] public AtkComponentNode* NodeList;
+        [FieldOffset(0x10)] private ushort NodeCount;
+        [FieldOffset(0x12)] public ushort NodeId;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
