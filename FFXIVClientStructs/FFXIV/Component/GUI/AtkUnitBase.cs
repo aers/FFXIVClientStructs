@@ -97,6 +97,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1BC)] public float OpenTransitionScale;
     [FieldOffset(0x1C0)] public float CloseTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
+    [FieldOffset(0x1C8)] public uint Flags1C8;
 
     /// <summary>
     /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>

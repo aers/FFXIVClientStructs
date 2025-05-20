@@ -14,6 +14,7 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
+    [FieldOffset(0xB0)] public int SoundEffectId;
     [FieldOffset(0xB4)] public AtkCursorNavigationInfo CursorNavigationInfo;
 
     [MemberFunction("48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08")]
