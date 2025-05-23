@@ -57,22 +57,32 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     /// <summary>
     /// <code>
-    /// 0b1000_0000 = Disable auto-focus (not adding it to Focused Units list)
+    /// 0b1000_0000 [0x80] = Disable auto-focus (not adding it to Focused Units list)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A0)] public byte Flags1A0;
 
     /// <summary>
     /// <code>
-    /// 0b0000_0001 = OnSetup was called (= IsReady)
+    /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A1)] public byte Flags1A1;
+
+    /// <summary>
+    /// <code>
+    /// 0b0000_0100 [0x4] = LoadUldByName called<br/>
+    /// 0b0000_1000 [0x8] = Disable close transition<br/>
+    /// 0b0010_0000 [0x20] = Suppress open/close sounds<br/>
+    /// 0b0100_0000 [0x40] = Don't load/save AddonConfig
+    /// </code>
+    /// </summary>
     [FieldOffset(0x1A2)] public byte Flags1A2;
 
     /// <summary>
     /// <code>
-    /// 0b0100_0000 = Don't show on open
+    /// 0b0010_0000 [0x20] = Populate TextNode texts (before OnSetup)<br/>
+    /// 0b0100_0000 [0x40] = Don't show on open
     /// </code>
     /// </summary>
     [FieldOffset(0x1A5)] public byte Flags1A5;
@@ -87,6 +97,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1BC)] public float OpenTransitionScale;
     [FieldOffset(0x1C0)] public float CloseTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
+    [FieldOffset(0x1C8)] public uint Flags1C8;
 
     /// <summary>
     /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>
