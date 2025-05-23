@@ -7067,10 +7067,12 @@ classes:
       16: Hide2
       17: SetScaleToHudLayoutScale
       18: ShouldCollideWithWindow
+      20: OnMove
       23: ShouldIgnoreInputs
       24: GetRootNode
       27: GetWindowBounds
       30: GetRootBounds
+      32: ShouldAllowCursorFocus
       37: Focus
       41: Initialize
       42: Finalizer
@@ -7082,6 +7084,7 @@ classes:
       51: OnRefresh
       52: OnRequestedUpdate
       54: FireCloseCallback
+      56: OnShow
       57: HandleCustomInput
       58: OnOpenTransitionStarted
       60: OnScreenSizeChange
