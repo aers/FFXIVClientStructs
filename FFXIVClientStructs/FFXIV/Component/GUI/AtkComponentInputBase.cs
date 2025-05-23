@@ -14,4 +14,5 @@ public unsafe partial struct AtkComponentInputBase {
     [FieldOffset(0xD0)] public AtkResNode* CursorContainer;
     [FieldOffset(0xE0)] public Utf8String UnkText1;
     [FieldOffset(0x148)] public Utf8String UnkText2;
+    [FieldOffset(0x1B0)] public AtkUnitBase* ContainingAddon;
 }
