@@ -7084,7 +7084,6 @@ classes:
       51: OnRefresh
       52: OnRequestedUpdate
       54: FireCloseCallback
-      56: OnShow
       57: HandleCustomInput
       58: OnOpenTransitionStarted
       60: OnScreenSizeChange

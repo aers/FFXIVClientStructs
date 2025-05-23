@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.Memory;
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -31,7 +31,7 @@ public unsafe partial struct ListPanel : ICreatable {
     public partial void AddEntry(ListPanelEntry* entry);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 86 ?? ?? ?? ?? 48 2B 86 ?? ?? ?? ?? 48 C1 F8 04")]
-    public partial ushort UpdateLayout();
+    public partial void UpdateLayout();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct ListPanelEntry {

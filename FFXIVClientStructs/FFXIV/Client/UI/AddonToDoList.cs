@@ -1,8 +1,8 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
-// Client::UI::AddonNamePlate
+// Client::UI::AddonToDoList
 //   Component::GUI::AtkUnitBase
 //     Component::GUI::AtkEventListener
 [Addon("_ToDoList")]
