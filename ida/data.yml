@@ -5813,6 +5813,7 @@ classes:
     funcs:
       0x1404023D0: ctor
       0x140402590: SetupFromModelResourceHandle
+      0x140404090: ModelDrawInit
 #fail       0x140383720: GetAttributeIndex
 #fail       0x1403837B0: GetShapeIndex
   Client::Graphics::Render::Material:
