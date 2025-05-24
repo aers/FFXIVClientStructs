@@ -19,6 +19,9 @@ public unsafe partial struct ContentsFinder {
     [FieldOffset(0x1E)] public bool IsLimitedLevelingRoulette;
     [FieldOffset(0x20)] public ContentsFinderQueueInfo QueueInfo;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 33 FF 0F B6 48")]
+    public partial ContentsFinderQueueInfo* GetQueueInfo();
+
     public enum LootRule : byte {
         Normal = 0,
         GreedOnly = 1,
@@ -71,6 +74,15 @@ public unsafe partial struct ContentsFinderQueueInfo {
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 8B FA 48 8B D9 45 84 C0")]
     public partial void UpdateQueueState(QueueStates newState, bool beganQueue);
+
+    [MemberFunction("4C 8B DC 53 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 80 79")]
+    public partial void QueueRoulette(byte contentRouletteId, byte a3 = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? B0 ?? 44 88 B6 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 0F B6 86")]
+    public partial void QueueDuties(QueueEntry* entries, int entryCount, byte a4 = 0);
+
+    [MemberFunction("40 53 48 83 EC ?? 48 8B D9 0F B6 49 ?? 8D 41")]
+    public partial void CancelQueue();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct QueueEntry {
