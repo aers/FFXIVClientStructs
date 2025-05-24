@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
@@ -96,7 +96,7 @@ public unsafe partial struct ToDoListNumberArray {
 
     // Acts like 171- maybe cosmic/occult??
     // [FieldOffset(197 * 4)] public int Unknown197;
-    
+
     public enum ObjectiveType {
         None = 0,
         SmallText = 1, // 2 also has this effect
@@ -112,7 +112,7 @@ public unsafe partial struct ToDoListNumberArray {
         InlineBarLong = 15 // 16 also has this effect
         // all values above 16 are treated as None
     }
-    
+
     public enum BarColor {
         Blue = 0,
         Red = 1,
@@ -120,7 +120,7 @@ public unsafe partial struct ToDoListNumberArray {
         White = 3,
         Green = 4
     }
-    
+
     [Flags]
     public enum CheckboxButtonFlags {
         Show = 0x1000,

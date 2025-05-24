@@ -39,11 +39,11 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x3E0), FixedSizeArray] internal FixedSizeArray9<Pointer<AtkComponentButton>> _autoTranslateMenuButtons;
     [FieldOffset(0x428)] public AtkTextNode* AutoTranslateMenuPageInfoTextNode;
     [FieldOffset(0x430)] public AtkNineGridNode* AutoTranslateMenuBackground;
-    
+
     [FieldOffset(0x450), Obsolete("Renamed to HighlightedAutoTranslateOptionColorPrefix")] public Utf8String UnkText04;
     // Utf8Strings containing color macros that are wrapped around the highlighted AutoTranslate option
     [FieldOffset(0x450)] public Utf8String HighlightedAutoTranslateOptionColorPrefix;
-    
+
     [FieldOffset(0x4B8), Obsolete("Renamed to HighlightedAutoTranslateOptionColorSuffix")] public Utf8String UnkText05;
     [FieldOffset(0x4B8)] public Utf8String HighlightedAutoTranslateOptionColorSuffix;
 
