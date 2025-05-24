@@ -1945,6 +1945,15 @@ classes:
       0: Dtor
       1: SetIntData
       2: ProcessPacket
+  Client::Game::WKS::WKSMissionModule: # Stellar Missions
+    vtbls:
+      - ea: 0x142291B38
+        base: Client::Game::WKS::WKSModuleBase
+    funcs:
+      0x141953F70: ctor
+      0x1419547F0: InitiateMission
+      0x141954830: ReportMission
+      0x141954870: AbandonMission
   Client::Game::WKS::WKSResearch: # Cosmic Research Information
     vtbls:
       - ea: 0x1422D9280
@@ -2714,6 +2723,16 @@ classes:
       - ea: 0x14205FEB8
     funcs:
       0x1409EE8A0: GetQueueInfo
+  Client::Game::UI::ContentsFinderQueueInfo:
+    funcs:
+      0x1409EBEF0: QueueDuties
+      0x1409EC150: QueueRoulette
+      0x1409ECA90: CancelQueue
+      0x1409ECCF0: SetQueuedLanguages
+      0x1409ED3E0: UpdateQueueState
+      0x1409ED7B0: ProcessInfoState
+      0x1409EDC80: SetQueuedJobAndRoulette
+      0x1409EDCB0: SetQueuedContentFinderConditions
   Client::Game::UI::Wedding:
     instances:
       - ea: 0x142946510
@@ -12994,6 +13013,8 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F6FD10: ctor
+      0x140F73D80: JobIndexToClassJobId
+      0x140F743C0: StartMission
   Client::UI::Agent::AgentWKSMissionInfomation:
     vtbls:
       - ea: 0x14208F140
@@ -16985,7 +17006,6 @@ classes:
       0x1414830E0: ctor
       0x1414832A0: GetNumberArrayData
     vfuncs:
-      60: UpdateGaugeType
       72: InitializePointers
       74: UpdateVisibility
       75: SetTimeLineLabelDefaults
