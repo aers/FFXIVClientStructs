@@ -37,7 +37,7 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0xDD8)] private void* EmergencyInfoModule; // Red Alert
     [FieldOffset(0xDE0)] private void* UnkStructDE0;
     [FieldOffset(0xDE8)] private void* UnkStructDE8;
-    [FieldOffset(0xDF0)] private void* UnkStructDF0;
+    [FieldOffset(0xDF0)] public WKSMissionModule* MissionModule; // Stellar Missions
     [FieldOffset(0xDF8)] public WKSResearch* Research; // TODO: add suffix "Module" at some point
     [FieldOffset(0xE00)] private void* UnkStructE00;
 
