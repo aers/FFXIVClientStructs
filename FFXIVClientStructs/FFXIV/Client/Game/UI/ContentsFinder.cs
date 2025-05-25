@@ -79,7 +79,7 @@ public unsafe partial struct ContentsFinderQueueInfo {
     public partial void QueueRoulette(byte contentRouletteId, byte a3 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? B0 ?? 44 88 B6 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 0F B6 86")]
-    public partial void QueueDuties(QueueEntry* entries, int entryCount, byte a4 = 0);
+    public partial void QueueDuties(uint* entries, int entryCount, byte a4 = 0);
 
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 0F B6 49 ?? 8D 41")]
     public partial void CancelQueue();
