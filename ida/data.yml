@@ -15667,6 +15667,8 @@ classes:
     vtbls:
       - ea: 0x14213C518
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141559A00: UpdateListItem
   Client::UI::AddonItemSearch:
     vtbls:
       - ea: 0x1421336C0
