@@ -19,9 +19,11 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0xC8)] public AtkResNode* RootNode;
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
     [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
+    [FieldOffset(0xE0), FixedSizeArray] internal FixedSizeArray2<Pointer<AtkResNode>> _additionalWindowMoveableNodes; // allow unitbase to be moved. for example, left and right end of ChatLog tabs
     [FieldOffset(0xF0)] public AtkResNode* CursorTarget; // Likely always AtkCollisionNode
     [FieldOffset(0xF8)] public AtkResNode* FocusNode;
     [FieldOffset(0x100)] public AtkResNode* ComponentFocusNode;
+    [FieldOffset(0x108), FixedSizeArray] internal FixedSizeArray2<Pointer<AtkResNode>> _additionalWindowFocusableNodes; // allow unitbase to be focused. for example, yellow bar above ContentsFinder
     [FieldOffset(0x118)] public AtkComponentNode* CurrentDropDownOwnerNode;
     [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
     [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
