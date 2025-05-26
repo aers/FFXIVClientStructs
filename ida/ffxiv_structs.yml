@@ -166,6 +166,7 @@ enums:
     "Counter": 5
     "Collision": 8
     "ClippingMask": 10
+    "Component": 10000
 - type: Component::GUI::NodeFlags
   name: NodeFlags
   underlying: unsigned __int16
@@ -4521,6 +4522,15 @@ enums:
     "GatheringPoint": 7
     "BattleNpcSubkind6": 8
     "Other": 9
+- type: Client::UI::ListPanel::Alignment
+  name: Alignment
+  underlying: int
+  namespace: Client.UI
+  flags: False
+  values:
+    "Left": 0
+    "Center": 1
+    "Right": 2
 - type: Client::UI::SeVirtualKey
   name: SeVirtualKey
   underlying: byte
@@ -4909,6 +4919,18 @@ enums:
     "Initialized": 1
     "Shipped": 2
     "Bonus": 4
+- type: Client::UI::Agent::AgentWKSMission::MissionFlags
+  name: MissionFlags
+  underlying: int
+  namespace: Client.UI.Agent
+  flags: True
+  values:
+    "TimeRestricted": 1
+    "Triggered": 2
+    "Silver": 4
+    "Gold": 8
+    "WeatherRestricted": 16
+    "Locked": 32
 - type: Client::System::Framework::EnvironmentManager::ModeUpdateOpType
   name: ModeUpdateOpType
   underlying: int
@@ -5279,6 +5301,13 @@ structs:
     parameters:
     - type: Animation::Rig::hkaSkeleton*
       name: skeleton
+- type: Application::Network::ChatClient
+  name: ChatClient
+  namespace: Application.Network
+  union: False
+  size: 168
+  fields: []
+  member_functions: []
 - type: Application::Network::LogoutCallbackInterface
   name: LogoutCallbackInterface
   namespace: Application.Network
@@ -5331,6 +5360,13 @@ structs:
   virtual_functions:
   - name: Dtor
     offset: 0
+  member_functions: []
+- type: Application::Network::ZoneClient
+  name: ZoneClient
+  namespace: Application.Network
+  union: False
+  size: 160
+  fields: []
   member_functions: []
 - type: Client::Game::BGMSystem::SceneIntermission
   name: SceneIntermission
@@ -14184,6 +14220,29 @@ structs:
     name: Name
     offset: 24
   member_functions: []
+- type: Client::UI::AddonToDoList::FocusableNodeHolder
+  name: FocusableNodeHolder
+  namespace: Client.UI
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AtkCollisionNode*
+    name: Node
+    offset: 40
+  member_functions: []
+- type: Client::UI::AddonToDoList::ObjectiveTimerTextNodeData
+  name: ObjectiveTimerTextNodeData
+  namespace: Client.UI
+  union: False
+  size: 16
+  fields:
+  - type: Component::GUI::AtkTextNode*
+    name: Node
+    offset: 0
+  - type: unsigned int
+    name: StringArrayIndex
+    offset: 8
+  member_functions: []
 - type: Client::UI::AddonWeeklyPuzzle::GameTileItem
   name: GameTileItem
   namespace: Client.UI
@@ -15131,6 +15190,44 @@ structs:
     name: Flags
     offset: 1808
   member_functions: []
+- type: Client::UI::Agent::AgentWKSMission::MissionEntry
+  name: MissionEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 24
+  fields:
+  - type: unsigned int
+    name: MissionUnitId
+    offset: 0
+  - type: unsigned int
+    name: IconId
+    offset: 4
+  - type: Client::UI::Agent::AgentWKSMission::MissionFlags
+    name: Flags
+    offset: 16
+  - type: byte
+    name: MissionGroup
+    offset: 20
+  member_functions: []
+- type: Client::UI::Agent::AgentWKSMissionInfomation::MissionInfo
+  name: MissionInfo
+  namespace: Client.UI.Agent
+  union: False
+  size: 24
+  fields:
+  - type: __int64
+    name: ServerTime
+    offset: 0
+  - type: unsigned int
+    name: CurrentMissionUnitId
+    offset: 12
+  - type: byte
+    name: State
+    offset: 16
+  - type: byte
+    name: Flags
+    offset: 20
+  member_functions: []
 - type: Client::UI::Agent::AozArrangementData
   name: AozArrangementData
   namespace: Client.UI.Agent
@@ -15985,6 +16082,25 @@ structs:
   - type: byte
     name: Stain1Id
     offset: 178
+  member_functions: []
+- type: Client::UI::ListPanel::ListPanelEntry
+  name: ListPanelEntry
+  namespace: Client.UI
+  union: False
+  size: 16
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: Node
+    offset: 0
+  - type: Client::UI::ListPanel::Alignment
+    name: Alignment
+    offset: 8
+  - type: unsigned __int16
+    name: TopSpacing
+    offset: 12
+  - type: unsigned __int16
+    name: Height
+    offset: 14
   member_functions: []
 - type: Client::UI::LootItemInfo
   name: LootItemInfo
@@ -20522,6 +20638,41 @@ structs:
     name: TransitionLength
     offset: 12
   member_functions: []
+- type: Component::GUI::AtkComponentList::CategoryItem
+  name: CategoryItem
+  namespace: Component.GUI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkComponentListItemRenderer*
+    name: AtkComponentListItemRenderer
+    offset: 0
+  - type: Component::GUI::AtkComponentNode*
+    name: NodeList
+    offset: 8
+  - type: unsigned __int16
+    name: NodeCount
+    offset: 16
+  - type: unsigned __int16
+    name: NodeId
+    offset: 18
+  member_functions: []
+- type: Component::GUI::AtkComponentList::ColumnNodeInfo
+  name: ColumnNodeInfo
+  namespace: Component.GUI
+  union: False
+  size: 16
+  fields:
+  - type: unsigned int
+    name: NodeId
+    offset: 0
+  - type: unsigned int
+    name: ParentNodeId
+    offset: 4
+  - type: Component::GUI::AtkResNode*
+    name: AtkResNode
+    offset: 8
+  member_functions: []
 - type: Component::GUI::AtkComponentList::ListItem
   name: ListItem
   namespace: Component.GUI
@@ -20540,6 +20691,86 @@ structs:
   - type: byte
     name: IsDisabled
     offset: 21
+  member_functions: []
+- type: Component::GUI::AtkComponentListItemPopulator
+  name: AtkComponentListItemPopulator
+  namespace: Component.GUI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkUnitBase*
+    name: UnitBase
+    offset: 0
+  - type: __fastcall
+    name: PopulateWithRenderer
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: a1
+    - type: int
+      name: a2
+    - type: Component::GUI::AtkResNode**
+      name: a3
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: a4
+  - type: __fastcall
+    name: Populate
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: a1
+    - type: Component::GUI::AtkComponentListItemPopulator::ListItemInfo*
+      name: a2
+    - type: Component::GUI::AtkResNode**
+      name: a3
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 B1 08
+    return_type: Component::GUI::AtkComponentListItemPopulator*
+    name: CtorWithRenderer
+    parameters:
+    - type: Component::GUI::AtkComponentListItemPopulator*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: unitBase
+    - type: __fastcall
+      name: populateWithRenderer
+  - signature: E8 ?? ?? ?? ?? 49 8B 8F ?? ?? ?? ?? 4C 8D 45 90
+    return_type: Component::GUI::AtkComponentListItemPopulator*
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentListItemPopulator*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: unitBase
+    - type: __fastcall
+      name: populate
+- type: Component::GUI::AtkComponentListItemPopulator::ListItemInfo
+  name: ListItemInfo
+  namespace: Component.GUI
+  union: False
+  size: 16
+  fields:
+  - type: int
+    name: ListItemIndex
+    offset: 0
+  - type: Component::GUI::AtkComponentTreeListItem*
+    name: ListItem
+    offset: 8
+  member_functions: []
+- type: Component::GUI::AtkComponentListItemRenderer::RowTemplate
+  name: RowTemplate
+  namespace: Component::GUI::AtkComponentListItemRenderer
+  union: True
+  size: 8
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: RowTemplateNode
+    offset: 0
+  - type: Component::GUI::AtkResNode**
+    name: RowTemplateNodeList
+    offset: 0
   member_functions: []
 - type: Component::GUI::AtkCrestManager
   name: AtkCrestManager
@@ -20772,9 +21003,24 @@ structs:
   - type: Component::GUI::AtkComponentListItemRenderer*
     name: ListItemRenderer
     offset: 0
+  - type: Component::GUI::AtkComponentTreeListItem*
+    name: ListItem
+    offset: 8
   - type: int
     name: SelectedIndex
     offset: 16
+  - type: __int16
+    name: UnkListField15C
+    offset: 20
+  - type: __int16
+    name: HoveredItemIndex3
+    offset: 22
+  - type: byte
+    name: MouseButtonId
+    offset: 24
+  - type: Component::GUI::AtkEventData::AtkMouseData::ModifierFlag
+    name: MouseModifier
+    offset: 25
   member_functions: []
 - type: Component::GUI::AtkEventData::AtkMouseData
   name: AtkMouseData
@@ -21461,6 +21707,16 @@ structs:
   - type: float
     name: Scale
     offset: 40
+  member_functions: []
+- type: Component::GUI::AtkTextInput::AtkTextInputEventInterface
+  name: AtkTextInputEventInterface
+  namespace: Component.GUI
+  union: False
+  size: 8
+  fields: []
+  virtual_functions:
+  - name: Dtor
+    offset: 0
   member_functions: []
 - type: Component::GUI::AtkTexture::Texture
   name: Texture
@@ -23743,6 +23999,36 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::UI::AddonToDoList::FocusableNodeHolder>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::AddonToDoList::FocusableNodeHolder*
+    name: First
+    offset: 0
+  - type: Client::UI::AddonToDoList::FocusableNodeHolder*
+    name: Last
+    offset: 8
+  - type: Client::UI::AddonToDoList::FocusableNodeHolder*
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Client::UI::AddonToDoList::ObjectiveTimerTextNodeData>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::AddonToDoList::ObjectiveTimerTextNodeData*
+    name: First
+    offset: 0
+  - type: Client::UI::AddonToDoList::ObjectiveTimerTextNodeData*
+    name: Last
+    offset: 8
+  - type: Client::UI::AddonToDoList::ObjectiveTimerTextNodeData*
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::UI::Agent::ActionData>
   name: StdVector`1
   namespace: ''
@@ -24013,6 +24299,21 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::UI::Agent::AgentWKSMission::MissionEntry>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::AgentWKSMission::MissionEntry*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::AgentWKSMission::MissionEntry*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::AgentWKSMission::MissionEntry*
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::UI::Agent::CharaSelectCharacterEntry*>
   name: StdVector`1
   namespace: ''
@@ -24163,6 +24464,21 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::UI::ListPanel::ListPanelEntry>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::ListPanel::ListPanelEntry*
+    name: First
+    offset: 0
+  - type: Client::UI::ListPanel::ListPanelEntry*
+    name: Last
+    offset: 8
+  - type: Client::UI::ListPanel::ListPanelEntry*
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::UI::Misc::DataCenterHelper::DataCenter>
   name: StdVector`1
   namespace: ''
@@ -24295,6 +24611,21 @@ structs:
     name: Last
     offset: 8
   - type: Component::GUI::AtkEvent**
+    name: End
+    offset: 16
+  member_functions: []
+- type: StdVector<Component::GUI::AtkTextNode*>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Component::GUI::AtkTextNode**
+    name: First
+    offset: 0
+  - type: Component::GUI::AtkTextNode**
+    name: Last
+    offset: 8
+  - type: Component::GUI::AtkTextNode**
     name: End
     offset: 16
   member_functions: []
@@ -27757,6 +28088,72 @@ structs:
       name: this
     - type: byte
       name: newState
+- type: Client::Game::WKS::WKSMissionModule
+  name: WKSMissionModule
+  namespace: Client.Game.WKS
+  union: False
+  size: 24
+  fields:
+  - type: Client::Game::WKS::WKSModuleBase
+    name: WKSModuleBase
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Client::Game::WKS::WKSModuleBase*
+    parameters:
+    - type: Client::Game::WKS::WKSMissionModule*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetIntData
+    offset: 8
+    return_type: byte
+    parameters:
+    - type: Client::Game::WKS::WKSMissionModule*
+      name: this
+    - type: int
+      name: a2
+    - type: int
+      name: a3
+    - type: int
+      name: a4
+    - type: int
+      name: a5
+    - type: int
+      name: a6
+    - type: int
+      name: a7
+  - name: ProcessPacket
+    offset: 16
+    return_type: byte
+    parameters:
+    - type: Client::Game::WKS::WKSMissionModule*
+      name: this
+    - type: byte*
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 B2 ?? EB ?? 49 8B D0
+    return_type: void
+    name: InitiateMission
+    parameters:
+    - type: Client::Game::WKS::WKSMissionModule*
+      name: this
+    - type: unsigned __int16
+      name: missionUnitId
+  - signature: 48 83 EC ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 45 33 C9 C7 44 24 ?? ?? ?? ?? ?? 45 33 C0 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 83 C4 ?? C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 48 83 EC
+    return_type: void
+    name: ReportMission
+    parameters:
+    - type: Client::Game::WKS::WKSMissionModule*
+      name: this
+  - signature: E8 ?? ?? ?? ?? B2 ?? C7 03
+    return_type: void
+    name: AbandonMission
+    parameters:
+    - type: Client::Game::WKS::WKSMissionModule*
+      name: this
 - type: Client::Game::WKS::WKSResearch
   name: WKSResearch
   namespace: Client.Game.WKS
@@ -28293,7 +28690,19 @@ structs:
     name: SlotIndex
     offset: 232
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 07 48 8B CF FF 50 ?? 32 C0
+    return_type: byte
+    name: ModelDrawInit
+    parameters:
+    - type: Client::Graphics::Render::Model*
+      name: this
+    - type: Client::System::Resource::Handle::ModelResourceHandle*
+      name: mdlHandle
+    - type: Client::Graphics::Render::ModelRenderer::Callback*
+      name: renderModelCallback
+    - type: Client::Graphics::Render::ModelRenderer::Callback*
+      name: renderMaterialCallback
 - type: Client::Graphics::Render::RenderTargetManager
   name: RenderTargetManager
   namespace: Client.Graphics.Render
@@ -35554,6 +35963,71 @@ structs:
     name: Name
     offset: 16
   member_functions: []
+- type: Client::UI::ListPanel
+  name: ListPanel
+  namespace: Client.UI
+  union: False
+  size: 40
+  fields:
+  - type: StdVector<Client::UI::ListPanel::ListPanelEntry>
+    name: Entries
+    offset: 8
+  - type: unsigned __int16
+    name: Width
+    offset: 32
+  - type: unsigned __int16
+    name: Height
+    offset: 34
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Client::UI::ListPanel*
+    parameters:
+    - type: Client::UI::ListPanel*
+      name: this
+    - type: byte
+      name: freeFlags
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 80 8F ?? ?? ?? ?? ?? 33 F6
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Client::UI::ListPanel*
+      name: this
+  - signature: 48 8B 41 08 48 89 41 10 33 C0
+    return_type: void
+    name: Clear
+    parameters:
+    - type: Client::UI::ListPanel*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 7D BF
+    return_type: void
+    name: AddNode
+    parameters:
+    - type: Client::UI::ListPanel*
+      name: this
+    - type: Component::GUI::AtkResNode*
+      name: node
+    - type: unsigned __int16
+      name: topSpacing
+    - type: unsigned int
+      name: mode
+    - type: unsigned __int16
+      name: height
+  - signature: E8 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 66 39 47 20
+    return_type: void
+    name: AddEntry
+    parameters:
+    - type: Client::UI::ListPanel*
+      name: this
+    - type: Client::UI::ListPanel::ListPanelEntry*
+      name: entry
+  - signature: E8 ?? ?? ?? ?? 48 8B 86 ?? ?? ?? ?? 48 2B 86 ?? ?? ?? ?? 48 C1 F8 04
+    return_type: void
+    name: UpdateLayout
+    parameters:
+    - type: Client::UI::ListPanel*
+      name: this
 - type: Client::UI::Misc::AchievementListModule
   name: AchievementListModule
   namespace: Client.UI.Misc
@@ -41438,6 +41912,12 @@ structs:
   - type: Client::System::String::Utf8String
     name: UnkA00
     offset: 2560
+  - type: Application::Network::ZoneClient*
+    name: ZoneClient
+    offset: 2672
+  - type: Application::Network::ChatClient*
+    name: ChatClient
+    offset: 2680
   - type: byte
     name: WinSockInitialized
     offset: 2721
@@ -42974,8 +43454,8 @@ structs:
   - type: __int64
     name: UnkStructDE8
     offset: 3560
-  - type: __int64
-    name: UnkStructDF0
+  - type: Client::Game::WKS::WKSMissionModule*
+    name: MissionModule
     offset: 3568
   - type: Client::Game::WKS::WKSResearch*
     name: Research
@@ -50993,6 +51473,49 @@ structs:
       name: this
     - type: char*
       name: message
+- type: Client::UI::Agent::AgentWKSMission::MissionData
+  name: MissionData
+  namespace: Client.UI.Agent
+  union: False
+  size: 176
+  fields:
+  - type: byte
+    name: SelectedJobIndex
+    offset: 1
+  - type: byte
+    name: SelectedTabIndex
+    offset: 2
+  - type: byte
+    name: SelectedFilterIndex
+    offset: 3
+  - type: unsigned int
+    name: SelectedMissionUnitId
+    offset: 8
+  - type: Client::UI::Agent::AgentWKSMission::MissionFlags
+    name: SelectedMissionFlags
+    offset: 12
+  - type: int
+    name: SelectedMissionIndex
+    offset: 16
+  - type: unsigned int
+    name: ConfirmMissionId
+    offset: 20
+  - type: unsigned int
+    name: ConfirmAddonId
+    offset: 24
+  - type: unsigned int
+    name: MapMissionId
+    offset: 28
+  - type: Client::System::String::Utf8String
+    name: SelectedMissionTitle
+    offset: 32
+  - type: StdVector<Client::UI::Agent::AgentWKSMission::MissionEntry>
+    name: MissionList
+    offset: 136
+  - type: byte
+    name: UpdateFlags
+    offset: 168
+  member_functions: []
 - type: Client::UI::Agent::BalloonInfo
   name: BalloonInfo
   namespace: Client.UI.Agent
@@ -55702,6 +56225,34 @@ structs:
       name: newState
     - type: byte
       name: beganQueue
+  - signature: 4C 8B DC 53 56 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 80 79
+    return_type: void
+    name: QueueRoulette
+    parameters:
+    - type: Client::Game::UI::ContentsFinderQueueInfo*
+      name: this
+    - type: byte
+      name: contentRouletteId
+    - type: byte
+      name: a3
+  - signature: E8 ?? ?? ?? ?? B0 ?? 44 88 B6 ?? ?? ?? ?? E9 ?? ?? ?? ?? 44 0F B6 86
+    return_type: void
+    name: QueueDuties
+    parameters:
+    - type: Client::Game::UI::ContentsFinderQueueInfo*
+      name: this
+    - type: unsigned int*
+      name: entries
+    - type: int
+      name: entryCount
+    - type: byte
+      name: a4
+  - signature: 40 53 48 83 EC ?? 48 8B D9 0F B6 49 ?? 8D 41
+    return_type: void
+    name: CancelQueue
+    parameters:
+    - type: Client::Game::UI::ContentsFinderQueueInfo*
+      name: this
 - type: Client::Game::UI::Loot
   name: Loot
   namespace: Client.Game.UI
@@ -59561,6 +60112,236 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentWKSMission
+  name: AgentWKSMission
+  namespace: Client.UI.Agent
+  union: False
+  size: 168
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentWKSMission::MissionData*
+    name: Data
+    offset: 40
+  - type: unsigned int
+    name: SelectedEntry
+    offset: 48
+  - type: byte
+    name: SelectedTab
+    offset: 52
+  - type: Client::System::String::Utf8String
+    name: MapTitle
+    offset: 56
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 40 53 48 83 EC ?? 8B DA E8 ?? ?? ?? ?? 48 85 C0 74 ?? E8 ?? ?? ?? ?? 48 83 B8 ?? ?? ?? ?? ?? 74 ?? E8 ?? ?? ?? ?? 0F B7 D3
+    return_type: void
+    name: StartMission
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: unsigned __int16
+      name: missionUnitId
+  - signature: E8 ?? ?? ?? ?? 44 0F B6 F0 33 C0
+    return_type: byte
+    name: JobIndexToClassJobId
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: byte
+      name: jobIndex
+- type: Client::UI::Agent::AgentWKSMissionInfomation
+  name: AgentWKSMissionInfomation
+  namespace: Client.UI.Agent
+  union: False
+  size: 152
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentWKSMissionInfomation::MissionInfo*
+    name: Data
+    offset: 40
+  - type: Client::System::String::Utf8String
+    name: MissionTitle
+    offset: 48
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
 - type: Client::UI::Agent::AozContentData
   name: AozContentData
   namespace: Client.UI.Agent
@@ -62435,6 +63216,9 @@ structs:
   union: False
   size: 3264
   fields:
+  - type: Component::GUI::AtkTextInput::AtkTextInputEventInterface*
+    name: TargetTextInputEventInterface
+    offset: 8
   - type: Component::Completion::CompletionModule*
     name: CompletionModule
     offset: 16
@@ -64727,7 +65511,13 @@ structs:
     name: QueueInfo
     offset: 32
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 33 FF 0F B6 48
+    return_type: Client::Game::UI::ContentsFinderQueueInfo*
+    name: GetQueueInfo
+    parameters:
+    - type: Client::Game::UI::ContentsFinder*
+      name: this
   static_members:
   - signature: 0F B6 FA 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 78 59 02
     relative_follow_offsets:
@@ -68487,6 +69277,9 @@ structs:
   - type: Component::GUI::AtkComponentNode*
     name: OwnerNode
     offset: 168
+  - type: int
+    name: SoundEffectId
+    offset: 176
   - type: Component::GUI::AtkCursorNavigationInfo
     name: CursorNavigationInfo
     offset: 180
@@ -68610,6 +69403,14 @@ structs:
       name: this
     - type: unsigned int
       name: id
+  - signature: E8 ?? ?? ?? ?? 8D 53 47
+    return_type: Component::GUI::AtkResNode*
+    name: GetImageNodeById
+    parameters:
+    - type: Component::GUI::AtkComponentBase*
+      name: this
+    - type: unsigned int
+      name: id
   - signature: E8 ?? ?? ?? ?? 49 63 D7
     return_type: Component::GUI::AtkResNode*
     name: GetTextNodeById
@@ -68618,9 +69419,9 @@ structs:
       name: this
     - type: unsigned int
       name: id
-  - signature: E8 ?? ?? ?? ?? 8D 53 47
-    return_type: Component::GUI::AtkResNode*
-    name: GetImageNodeById
+  - signature: E8 ?? ?? ?? ?? 8D 57 01 48 89 43 10
+    return_type: Component::GUI::AtkUldAsset*
+    name: GetUldAssetByImageNodeId
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
@@ -68839,6 +69640,12 @@ structs:
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
+  - signature: 48 85 C9 74 14 0F B7 41 40
+    return_type: Component::GUI::NodeType
+    name: GetNodeType
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
   - signature: E8 ?? ?? ?? ?? 8B 54 FB 04
     return_type: Component::GUI::AtkImageNode*
     name: GetAsAtkImageNode
@@ -68869,6 +69676,12 @@ structs:
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
+  - signature: 48 85 C9 74 0B 66 83 79 ?? 0A 75 04 48 8B C1 C3 33 C0 C3
+    return_type: Component::GUI::AtkClippingMaskNode*
+    name: GetAsAtkClippingMaskNode
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
   - signature: E8 ?? ?? ?? ?? 44 8D 4F 30
     return_type: Component::GUI::AtkComponentNode*
     name: GetAsAtkComponentNode
@@ -68878,6 +69691,54 @@ structs:
   - signature: E8 ?? ?? ?? ?? 49 63 DF
     return_type: Component::GUI::AtkComponentBase*
     name: GetComponent
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 89 43 D0
+    return_type: Component::GUI::AtkComponentButton*
+    name: GetAsAtkComponentButton
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B FD 48 85 C0
+    return_type: Component::GUI::AtkComponentWindow*
+    name: GetAsAtkComponentWindow
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8D 55 42
+    return_type: Component::GUI::AtkComponentCheckBox*
+    name: GetAsAtkComponentCheckBox
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8D 55 48
+    return_type: Component::GUI::AtkComponentRadioButton*
+    name: GetAsAtkComponentRadioButton
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8D 55 D7
+    return_type: Component::GUI::AtkComponentGaugeBar*
+    name: GetAsAtkComponentGaugeBar
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8B 4C 3D 80
+    return_type: Component::GUI::AtkComponentSlider*
+    name: GetAsAtkComponentSlider
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8D 55 0D 48 89 83
+    return_type: Component::GUI::AtkComponentTextInput*
+    name: GetAsAtkComponentTextInput
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F BF 57 30
+    return_type: Component::GUI::AtkComponentNumericInput*
+    name: GetAsAtkComponentNumericInput
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -68893,9 +69754,15 @@ structs:
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
-  - signature: E8 ?? ?? ?? ?? 8D 55 48
-    return_type: Component::GUI::AtkComponentRadioButton*
-    name: GetAsAtkComponentRadioButton
+  - signature: E8 ?? ?? ?? ?? 49 89 07 48 8B F8
+    return_type: Component::GUI::AtkComponentTab*
+    name: GetAsAtkComponentTab
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8D 53 19
+    return_type: Component::GUI::AtkComponentTreeList*
+    name: GetAsAtkComponentTreeList
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -68905,33 +69772,75 @@ structs:
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
-  - signature: E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83
-    return_type: Component::GUI::AtkComponentJournalCanvas*
-    name: GetAsAtkJournalCanvas
+  - signature: 48 85 C9 74 37 B8 ?? ?? ?? ?? 66 39 41 40 72 2C 48 8B 89 ?? ?? ?? ?? 48 85 C9 74 20 0F B6 81 ?? ?? ?? ?? 24 05 3C 05 75 13 80 B9 ?? ?? ?? ?? ?? 75 0A 48 8B 41 18 80 78 10 0E
+    return_type: Component::GUI::AtkComponentListItemRenderer*
+    name: GetAsAtkComponentListItemRenderer
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
-  - signature: E8 ?? ?? ?? ?? 48 89 43 D0
-    return_type: Component::GUI::AtkComponentButton*
-    name: GetAsAtkComponentButton
+  - signature: 48 85 C9 74 37 B8 ?? ?? ?? ?? 66 39 41 40 72 2C 48 8B 89 ?? ?? ?? ?? 48 85 C9 74 20 0F B6 81 ?? ?? ?? ?? 24 05 3C 05 75 13 80 B9 ?? ?? ?? ?? ?? 75 0A 48 8B 41 18 80 78 10 0F
+    return_type: Component::GUI::AtkComponentIcon*
+    name: GetAsAtkComponentIcon
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
-  - signature: E8 ?? ?? ?? ?? 8D 55 42
-    return_type: Component::GUI::AtkComponentCheckBox*
-    name: GetAsAtkComponentCheckBox
+  - signature: E8 ?? ?? ?? ?? FF C3 48 89 07 48 8D 7F 08 83 FB 10
+    return_type: Component::GUI::AtkComponentIconText*
+    name: GetAsAtkComponentIconText
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8B 54 34 20
+    return_type: Component::GUI::AtkComponentDragDrop*
+    name: GetAsAtkComponentDragDrop
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 85 DB 7E 1E 49 8B 4F 28
+    return_type: Component::GUI::AtkComponentGuildLeveCard*
+    name: GetAsAtkComponentGuildLeveCard
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 41 8D 57 1B
     return_type: Component::GUI::AtkComponentTextNineGrid*
-    name: GetAsAtkTextNineGrid
+    name: GetAsAtkComponentTextNineGrid
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83
+    return_type: Component::GUI::AtkComponentJournalCanvas*
+    name: GetAsAtkComponentJournalCanvas
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: 48 85 C9 74 3D B8 ?? ?? ?? ?? 66 39 41 40 72 2C 48 8B 89 ?? ?? ?? ?? 48 85 C9 74 20 0F B6 81 ?? ?? ?? ?? 24 05 3C 05 75 13 80 B9 ?? ?? ?? ?? ?? 75 0A 48 8B 41 18 80 78 10 15
+    return_type: Component::GUI::AtkComponentMultipurpose*
+    name: GetAsAtkComponentMultipurpose
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 89 43 20 48 8D BB
+    return_type: Component::GUI::AtkComponentMap*
+    name: GetAsAtkComponentMap
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 41 8D 56 03 4A 89 84 2E
+    return_type: Component::GUI::AtkComponentPreview*
+    name: GetAsAtkComponentPreview
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
   - signature: E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? BA ?? ?? ?? ?? 48 89 86 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 86
     return_type: Component::GUI::AtkComponentHoldButton*
-    name: GetAsAtkHoldButton
+    name: GetAsAtkComponentHoldButton
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8B 0E BA ?? ?? ?? ?? 48 89 46 60
+    return_type: Component::GUI::AtkComponentPortrait*
+    name: GetAsAtkComponentPortrait
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
@@ -73945,6 +74854,9 @@ structs:
   - type: Component::GUI::AtkComponentList::ListItem*
     name: ItemRendererList
     offset: 240
+  - type: Component::GUI::AtkComponentList::CategoryItem*
+    name: CategoryItemRendererList
+    offset: 256
   - type: int
     name: ListLength
     offset: 288
@@ -73966,6 +74878,9 @@ structs:
   - type: int
     name: HoveredItemIndex3
     offset: 352
+  - type: byte
+    name: NumCategoryRenderers
+    offset: 396
   - type: byte
     name: IsUpdatePending
     offset: 411
@@ -74130,6 +75045,8 @@ structs:
       name: this
     - type: __int64
       name: a2
+  - name: DispatchEvent
+    offset: 352
   - name: GetSelectedItemAtkResNode
     offset: 360
   member_functions:
@@ -74139,6 +75056,28 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentList*
       name: this
+  - signature: E8 ?? ?? ?? ?? 83 FE 47
+    return_type: void
+    name: SetupRenderer
+    parameters:
+    - type: Component::GUI::AtkComponentList*
+      name: this
+    - type: Component::GUI::AtkComponentListItemPopulator*
+      name: populator
+    - type: Component::GUI::AtkComponentList::ColumnNodeInfo*
+      name: columns
+    - type: int
+      name: columnCount
+    - type: unsigned int
+      name: rendererNodeId
+  - signature: E8 ?? ?? ?? ?? 4C 8B C8 48 85 DB
+    return_type: Component::GUI::AtkComponentListItemRenderer*
+    name: GetItemRendererByNodeId
+    parameters:
+    - type: Component::GUI::AtkComponentList*
+      name: this
+    - type: unsigned int
+      name: nodeId
   - signature: E8 ?? ?? ?? ?? 41 80 FF 04
     return_type: void
     name: SetItemCount
@@ -74175,6 +75114,220 @@ structs:
       name: index
     - type: Component::GUI::AtkEventType
       name: eventType
+- type: Component::GUI::AtkComponentMap
+  name: AtkComponentMap
+  namespace: Component.GUI
+  union: False
+  size: 1056
+  fields:
+  - type: Component::GUI::AtkComponentBase
+    name: AtkComponentBase
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+    - type: byte
+      name: a2
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 33 FF C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
+- type: Component::GUI::AtkComponentMultipurpose
+  name: AtkComponentMultipurpose
+  namespace: Component.GUI
+  union: False
+  size: 216
+  fields:
+  - type: Component::GUI::AtkComponentBase
+    name: AtkComponentBase
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+    - type: byte
+      name: a2
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions: []
 - type: Component::GUI::AtkComponentNode
   name: AtkComponentNode
   namespace: Component.GUI
@@ -74326,6 +75479,110 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentPortrait*
       name: this
+- type: Component::GUI::AtkComponentPreview
+  name: AtkComponentPreview
+  namespace: Component.GUI
+  union: False
+  size: 216
+  fields:
+  - type: Component::GUI::AtkComponentBase
+    name: AtkComponentBase
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+    - type: byte
+      name: a2
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions: []
 - type: Component::GUI::AtkComponentScrollBar
   name: AtkComponentScrollBar
   namespace: Component.GUI
@@ -77844,6 +79101,9 @@ structs:
   - type: Client::System::String::Utf8String
     name: UnkText2
     offset: 328
+  - type: Component::GUI::AtkUnitBase*
+    name: ContainingAddon
+    offset: 432
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -81280,29 +82540,22 @@ structs:
   - name: RaycastSimple
     offset: 240
   member_functions: []
-- type: Component::GUI::AtkComponentListItemRenderer
-  name: AtkComponentListItemRenderer
+- type: Component::GUI::AtkComponentTab
+  name: AtkComponentTab
   namespace: Component.GUI
   union: False
-  size: 424
+  size: 360
   fields:
-  - type: Component::GUI::AtkComponentButton
-    name: AtkComponentButton
+  - type: Component::GUI::AtkComponentRadioButton
+    name: AtkComponentRadioButton
     offset: 0
     base: true
-  - type: Component::GUI::AtkDragDropInterface
-    name: AtkDragDropInterface
-    offset: 240
-    base: true
-  - type: int
-    name: ListItemIndex
-    offset: 388
   virtual_functions:
   - name: Dtor
     offset: 0
     return_type: Component::GUI::AtkEventListener*
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
     - type: byte
       name: a2
@@ -81310,7 +82563,7 @@ structs:
     offset: 8
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
     - type: Component::GUI::AtkEventType
       name: a2
@@ -81324,7 +82577,7 @@ structs:
     offset: 16
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
     - type: Component::GUI::AtkEventType
       name: a2
@@ -81338,19 +82591,19 @@ structs:
     offset: 24
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
   - name: Deinitialize
     offset: 32
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
   - name: Update
     offset: 40
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
     - type: float
       name: a2
@@ -81358,7 +82611,7 @@ structs:
     offset: 40
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
     - type: float
       name: a2
@@ -81366,19 +82619,19 @@ structs:
     offset: 56
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
   - name: Setup
     offset: 64
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
   - name: SetEnabledState
     offset: 80
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
     - type: byte
       name: a2
@@ -81386,16 +82639,16 @@ structs:
     offset: 136
     return_type: void
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
     - type: __int64
       name: a2
   member_functions:
-  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 33 FF 48 8D 8B ?? ?? ?? ?? 48 89 03 89 BB ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C3
     return_type: void
     name: Ctor
     parameters:
-    - type: Component::GUI::AtkComponentListItemRenderer*
+    - type: Component::GUI::AtkComponentTab*
       name: this
 - type: Component::GUI::AtkComponentTreeList
   name: AtkComponentTreeList
@@ -82909,161 +84162,6 @@ structs:
     size: 17
     is_string: False
   member_functions: []
-- type: Component::GUI::AtkComponentTextInput
-  name: AtkComponentTextInput
-  namespace: Component.GUI
-  union: False
-  size: 1536
-  fields:
-  - type: Component::GUI::AtkComponentInputBase
-    name: AtkComponentInputBase
-    offset: 0
-    base: true
-  - type: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
-    name: SoftKeyboardInputInterface
-    offset: 488
-  - type: unsigned int
-    name: MaxTextLength
-    offset: 592
-  - type: unsigned int
-    name: MaxTextLength2
-    offset: 596
-  - type: unsigned __int16
-    name: InputSanitizationFlags
-    offset: 620
-  - type: Client::System::String::Utf8String
-    name: UnkText01
-    offset: 640
-  - type: Client::System::String::Utf8String
-    name: UnkText02
-    offset: 744
-  - type: Client::System::String::Utf8String
-    name: UnkText03
-    offset: 848
-  - type: Client::System::String::Utf8String
-    name: UnkText04
-    offset: 1104
-  - type: Client::System::String::Utf8String
-    name: UnkText05
-    offset: 1208
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Initialize
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: Deinitialize
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: Update
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: float
-      name: a2
-  - name: OnUldUpdate
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: Setup
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: SetEnabledState
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: byte
-      name: a2
-  - name: InitializeFromComponentData
-    offset: 136
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: __int64
-      name: a2
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 45 32 C0 33 D2
-    return_type: void
-    name: SetText
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: char*
-      name: text
-  - signature: E8 ?? ?? ?? ?? EB 5D E8
-    return_type: void
-    name: InsertText
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: char*
-      name: text
-    - type: byte
-      name: unique
 - type: Component::GUI::AtkEventDispatcher::Event
   name: Event
   namespace: Component.GUI
@@ -83161,6 +84259,9 @@ structs:
   - type: float
     name: Scale
     offset: 452
+  - type: unsigned int
+    name: Flags1C8
+    offset: 456
   - type: byte
     name: ScdResourceIndex
     offset: 460
@@ -83360,6 +84461,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -83388,6 +84495,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: outBounds
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -84452,6 +85565,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonActionCrossEditor*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -84480,6 +85599,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionCrossEditor*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -84823,6 +85948,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAetherCurrent*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -84851,6 +85982,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAetherCurrent*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -85191,6 +86328,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -85219,6 +86362,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -85554,6 +86703,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonArmouryBoard*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -85582,6 +86737,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonArmouryBoard*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -85930,6 +87091,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonBank*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -85958,6 +87125,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonBank*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -86317,6 +87490,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCabinetWithdraw*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -86345,6 +87524,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCabinetWithdraw*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -86680,6 +87865,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCharacterInspect*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -86708,6 +87899,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacterInspect*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -87046,6 +88243,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCharacterRepute*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -87074,6 +88277,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacterRepute*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -87412,6 +88621,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChocoboBreedTraining*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -87440,6 +88655,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChocoboBreedTraining*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -87796,6 +89017,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonContentsFinderConfirm*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -87824,6 +89051,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonContentsFinderConfirm*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -88195,6 +89428,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonContextIconMenu*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -88223,6 +89462,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonContextIconMenu*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -88565,6 +89810,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonContextMenu*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -88593,6 +89844,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonContextMenu*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -88930,6 +90187,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCurrency*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -88958,6 +90221,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCurrency*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -89290,6 +90559,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCursor*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -89318,6 +90593,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCursor*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -89656,6 +90937,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCutSceneSelectString*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -89684,6 +90971,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCutSceneSelectString*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -90016,6 +91309,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonDragDrop*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -90044,6 +91343,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonDragDrop*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -90388,6 +91693,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonEnemyList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -90416,6 +91727,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonEnemyList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -90760,6 +92077,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonExp*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -90788,6 +92111,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonExp*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -91134,6 +92463,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFateProgress*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -91162,6 +92497,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFateProgress*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -91552,6 +92893,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFateReward*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -91580,6 +92927,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFateReward*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -91912,6 +93265,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFlyText*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -91940,6 +93299,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFlyText*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -92341,6 +93706,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFriendList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -92369,6 +93740,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFriendList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -92704,6 +94081,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardDeck*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -92732,6 +94115,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardDeck*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -93070,6 +94459,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoChocoboParam*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -93098,6 +94493,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoChocoboParam*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -93451,6 +94852,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEmj*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -93479,6 +94886,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEmj*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -93829,6 +95242,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoGeneral*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -93857,6 +95276,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoGeneral*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -94204,6 +95629,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoMinionBattle*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -94232,6 +95663,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoMinionBattle*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -94621,6 +96058,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGathering*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -94649,6 +96092,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGathering*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -95008,6 +96457,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGcArmyCapture*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -95036,6 +96491,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGcArmyCapture*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -95416,6 +96877,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGcArmyExpedition*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -95444,6 +96911,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGcArmyExpedition*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -95779,6 +97252,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGcArmyExpeditionResult*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -95807,6 +97286,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGcArmyExpeditionResult*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -96142,6 +97627,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGearSetList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -96170,6 +97661,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGearSetList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -96544,6 +98041,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -96572,6 +98075,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -96910,6 +98419,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyReward*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -96938,6 +98453,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyReward*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -97279,6 +98800,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonHudLayoutScreen*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -97307,6 +98834,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonHudLayoutScreen*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -97642,6 +99175,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonHudLayoutWindow*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -97670,6 +99209,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonHudLayoutWindow*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -98017,6 +99562,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonImage*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -98045,6 +99596,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonImage*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -98390,6 +99947,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryBuddy*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -98418,6 +99981,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryBuddy*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -98763,6 +100332,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryGrid*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -98791,6 +100366,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryGrid*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -99123,6 +100704,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonItemInspectionList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -99151,6 +100738,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemInspectionList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -99483,6 +101076,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonItemInspectionResult*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -99511,6 +101110,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemInspectionResult*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -99864,6 +101469,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonItemSearchResult*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -99892,6 +101503,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemSearchResult*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -100254,6 +101871,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHud*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -100282,6 +101905,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHud*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -100689,6 +102318,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJournalDetail*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -100717,6 +102352,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJournalDetail*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -101079,6 +102720,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJournalResult*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -101107,6 +102754,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJournalResult*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -101444,6 +103097,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJICraftMaterialConfirmation*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -101472,6 +103131,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJICraftMaterialConfirmation*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -101807,6 +103472,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJICraftScheduleSetting*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -101835,6 +103506,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJICraftScheduleSetting*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -102179,6 +103856,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMYCWarResultNotebook*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -102207,6 +103890,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMYCWarResultNotebook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -102539,6 +104228,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMateriaRetrieveDialog*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -102567,6 +104262,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMateriaRetrieveDialog*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -102914,6 +104615,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMaterializeDialog*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -102942,6 +104649,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMaterializeDialog*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -103289,6 +105002,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMiragePrismPrismBox*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -103317,6 +105036,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMiragePrismPrismBox*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -103661,6 +105386,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMobHunt*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -103689,6 +105420,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMobHunt*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -104051,6 +105788,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -104079,6 +105822,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -104414,6 +106163,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRaceChocoboResult*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -104442,6 +106197,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRaceChocoboResult*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -104780,6 +106541,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRecipeMaterialList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -104808,6 +106575,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRecipeMaterialList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -105304,6 +107077,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRecipeNote*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -105332,6 +107111,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRecipeNote*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -105697,6 +107482,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRepair*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -105725,6 +107516,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRepair*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -106129,6 +107926,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRequest*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -106157,6 +107960,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRequest*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -106503,6 +108312,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -106531,6 +108346,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -106875,6 +108696,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferProgress*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -106903,6 +108730,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferProgress*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -107235,6 +109068,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -107263,6 +109102,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -107622,6 +109467,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerSell*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -107650,6 +109501,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerSell*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -107988,6 +109845,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerTaskAsk*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -108016,6 +109879,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerTaskAsk*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -108348,6 +110217,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerTaskList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -108376,6 +110251,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerTaskList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -108714,6 +110595,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRetainerTaskResult*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -108742,6 +110629,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerTaskResult*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -109092,6 +110985,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -109120,6 +111019,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -109458,6 +111363,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSelectOk*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -109486,6 +111397,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectOk*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -109866,6 +111783,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSelectYesno*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -109894,6 +111817,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectYesno*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -110229,6 +112158,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonShopCardDialog*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -110257,6 +112192,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonShopCardDialog*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -110664,6 +112605,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTeleport*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -110692,6 +112639,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTeleport*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -111027,6 +112980,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTeleportTown*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -111055,6 +113014,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTeleportTown*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -112076,6 +114041,317 @@ structs:
       name: this
     - type: int
       name: value
+- type: Component::GUI::AtkComponentListItemRenderer
+  name: AtkComponentListItemRenderer
+  namespace: Component.GUI
+  union: False
+  size: 424
+  fields:
+  - type: Component::GUI::AtkComponentButton
+    name: AtkComponentButton
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkDragDropInterface
+    name: AtkDragDropInterface
+    offset: 240
+    base: true
+  - type: Component::GUI::AtkComponentListItemRenderer::RowTemplate
+    name: RowTemplate
+    offset: 288
+  - type: Component::GUI::AtkComponentListItemPopulator
+    name: Populator
+    offset: 296
+  - type: int
+    name: ListItemIndex
+    offset: 388
+  - type: int
+    name: RowTemplateNodeCount
+    offset: 420
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+    - type: byte
+      name: a2
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+- type: Component::GUI::AtkComponentTextInput
+  name: AtkComponentTextInput
+  namespace: Component.GUI
+  union: False
+  size: 1536
+  fields:
+  - type: Component::GUI::AtkComponentInputBase
+    name: AtkComponentInputBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkTextInput::AtkTextInputEventInterface
+    name: AtkTextInputEventInterface
+    offset: 480
+    base: true
+  - type: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
+    name: SoftKeyboardInputInterface
+    offset: 488
+  - type: unsigned int
+    name: MaxTextLength
+    offset: 592
+  - type: unsigned int
+    name: MaxTextLength2
+    offset: 596
+  - type: unsigned __int16
+    name: InputSanitizationFlags
+    offset: 620
+  - type: Client::System::String::Utf8String
+    name: UnkText01
+    offset: 640
+  - type: Client::System::String::Utf8String
+    name: UnkText02
+    offset: 744
+  - type: Client::System::String::Utf8String
+    name: AvailableLines
+    offset: 848
+  - type: Component::GUI::AtkTextNode*
+    name: AvailableLinesTextNode
+    offset: 952
+  - type: Component::GUI::AtkTextNode*
+    name: AvailableCharsTextNode
+    offset: 960
+  - type: Component::GUI::AtkUnitBase*
+    name: ContainingAddon2
+    offset: 968
+  - type: Component::GUI::AtkResNode*
+    name: AutoTranslateMenuNode
+    offset: 976
+  - type: int
+    name: CompletionOffset
+    offset: 984
+  - type: Component::GUI::AtkComponentButton*
+    name: AutoTranslateMenuButtons
+    offset: 992
+    size: 9
+    is_string: False
+  - type: Component::GUI::AtkTextNode*
+    name: AutoTranslateMenuPageInfoTextNode
+    offset: 1064
+  - type: Component::GUI::AtkNineGridNode*
+    name: AutoTranslateMenuBackground
+    offset: 1072
+  - type: Client::System::String::Utf8String
+    name: HighlightedAutoTranslateOptionColorPrefix
+    offset: 1104
+  - type: Client::System::String::Utf8String
+    name: HighlightedAutoTranslateOptionColorSuffix
+    offset: 1208
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: byte
+      name: a2
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 45 32 C0 33 D2
+    return_type: void
+    name: SetText
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: char*
+      name: text
+  - signature: E8 ?? ?? ?? ?? EB 5D E8
+    return_type: void
+    name: InsertText
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: char*
+      name: text
+    - type: byte
+      name: unique
 - type: Animation::Rig::hkaSkeleton
   name: hkaSkeleton
   namespace: Animation.Rig
@@ -112846,6 +115122,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonActionBarBase*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -112874,6 +115156,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionBarBase*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -113307,6 +115595,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonActionMenu*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -113335,6 +115629,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionMenu*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -113697,6 +115997,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -113725,6 +116031,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -114152,6 +116464,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonBannerEditor*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -114180,6 +116498,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonBannerEditor*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -114521,6 +116845,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCastBar*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -114549,6 +116879,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCastBar*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -114909,6 +117245,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCharacterClass*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -114937,6 +117279,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacterClass*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -115288,6 +117636,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -115316,6 +117670,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -115658,6 +118018,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonDialogue*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -115686,6 +118052,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonDialogue*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -116063,6 +118435,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonDtr*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -116091,6 +118469,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonDtr*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -116437,6 +118821,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFieldMarker*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -116465,6 +118855,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFieldMarker*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -116801,6 +119197,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -116829,6 +119231,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -117227,6 +119635,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGatheringMasterpiece*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -117255,6 +119669,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGatheringMasterpiece*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -117619,6 +120039,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonItemSearch*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -117647,6 +120073,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemSearch*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -118050,6 +120482,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLookingForGroupDetail*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -118078,6 +120516,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLookingForGroupDetail*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -118439,6 +120883,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMacro*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -118467,6 +120917,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMacro*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -118804,6 +121260,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMiniTalk*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -118832,6 +121294,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMiniTalk*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -119176,6 +121644,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonNamePlate*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -119204,6 +121678,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonNamePlate*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -119547,6 +122027,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonNeedGreed*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -119575,6 +122061,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonNeedGreed*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -119911,6 +122403,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOperationGuide*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -119939,6 +122437,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOperationGuide*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -120359,6 +122863,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonPartyList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -120387,6 +122897,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonPartyList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -120724,6 +123240,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonPvPCharacter*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -120752,6 +123274,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonPvPCharacter*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -121102,6 +123630,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonReconstructionBox*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -121130,6 +123664,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonReconstructionBox*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -121558,6 +124098,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRelicNoteBook*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -121586,6 +124132,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRelicNoteBook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -121929,6 +124481,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSalvageItemSelector*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -121957,6 +124515,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSalvageItemSelector*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -122297,6 +124861,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSatisfactionSupply*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -122325,6 +124895,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSatisfactionSupply*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -122661,6 +125237,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonScreenFrame*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -122689,6 +125271,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonScreenFrame*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -123025,6 +125613,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTooltip*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -123053,6 +125647,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTooltip*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -125419,6 +128019,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAOZNotebook*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -125447,6 +128053,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAOZNotebook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -125792,6 +128404,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -125820,6 +128438,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -126157,6 +128781,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -126185,6 +128815,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -126532,6 +129168,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -126560,6 +129202,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -126895,6 +129543,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -126923,6 +129577,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -127316,6 +129976,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -127344,6 +130010,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -127679,6 +130351,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -127707,6 +130385,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -128042,6 +130726,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -128070,6 +130760,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -128405,6 +131101,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -128433,6 +131135,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -128771,6 +131479,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -128799,6 +131513,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -129140,6 +131860,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -129168,6 +131894,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -129503,6 +132235,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSelectIconString*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -129531,6 +132269,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectIconString*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -129866,6 +132610,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSelectString*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -129894,6 +132644,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectString*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -130340,6 +133096,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSynthesis*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -130368,6 +133130,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSynthesis*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -132054,6 +134822,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonActionBarX*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -132082,6 +134856,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionBarX*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -132465,6 +135245,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonActionDoubleCrossBase*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -132493,6 +135279,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionDoubleCrossBase*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -132846,6 +135638,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonBuddy*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -132874,6 +135672,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonBuddy*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -133231,6 +136035,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonCharacter*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -133259,6 +136069,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacter*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -133705,6 +136521,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonContentsFinder*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -133733,6 +136555,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonContentsFinder*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -134096,6 +136924,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGoldSaucerInfo*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -134124,6 +136958,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGoldSaucerInfo*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -134462,6 +137302,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonInventory*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -134490,6 +137336,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventory*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -134841,6 +137693,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryEvent*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -134869,6 +137727,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryEvent*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -135215,6 +138079,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryExpansion*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -135243,6 +138113,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryExpansion*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -135591,6 +138467,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryLarge*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -135619,6 +138501,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryLarge*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -135965,6 +138853,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryRetainer*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -135993,6 +138887,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryRetainer*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -136339,6 +139239,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonInventoryRetainerLarge*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -136367,6 +139273,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryRetainerLarge*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -137594,6 +140506,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonActionBar*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -137622,6 +140540,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionBar*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -137980,6 +140904,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonSocial*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -138008,6 +140938,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonSocial*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -138382,6 +141318,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTalk*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -138410,6 +141352,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTalk*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -139221,6 +142169,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonLotteryDaily*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -139249,6 +142203,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonLotteryDaily*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -139628,6 +142588,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonRaidFinder*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -139656,6 +142622,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonRaidFinder*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -139799,6 +142771,422 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::AddonRaidFinder*
+      name: this
+    - type: int
+      name: a2
+    - type: byte
+      name: a3
+  member_functions: []
+- type: Client::UI::AddonToDoList
+  name: AddonToDoList
+  namespace: Client.UI
+  union: False
+  size: 1240
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Client::UI::ListPanel
+    name: ListPanel
+    offset: 568
+  - type: Component::GUI::AtkTextNode*
+    name: DutyTimerTextNode
+    offset: 608
+  - type: Component::GUI::AtkTextNode*
+    name: FateTimerTextNode
+    offset: 616
+  - type: StdVector<Component::GUI::AtkTextNode*>
+    name: DutyFinderTextNodes
+    offset: 624
+  - type: StdVector<Client::UI::AddonToDoList::ObjectiveTimerTextNodeData>
+    name: ObjectiveTimerTextNodes
+    offset: 656
+  - type: StdVector<Client::UI::AddonToDoList::FocusableNodeHolder>
+    name: FocusableNodes
+    offset: 680
+  - type: int
+    name: FocusedRow
+    offset: 704
+  - type: int
+    name: FocusedColumn
+    offset: 708
+  - type: int
+    name: FocusedRow2
+    offset: 712
+  - type: int
+    name: FocusedColumn2
+    offset: 716
+  - type: int
+    name: ActionData
+    offset: 720
+    size: 128
+    is_string: False
+  - type: unsigned int
+    name: ActionDataCount
+    offset: 1232
+  - type: unsigned __int16
+    name: XPosition
+    offset: 1236
+  - type: byte
+    name: RightAligned
+    offset: 1239
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 408
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: HandleCustomInput
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: a2
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: int
+      name: a2
+    - type: int
+      name: a3
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: int
+      name: a2
+  - name: HandleDPadInput
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
+    - type: int
+      name: a2
+    - type: byte
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonToDoList*
       name: this
     - type: int
       name: a2
@@ -140000,6 +143388,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonWeeklyBingo*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -140028,6 +143422,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonWeeklyBingo*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -140411,6 +143811,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonWeeklyPuzzle*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -140439,6 +143845,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonWeeklyPuzzle*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -141753,6 +145165,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonActionCross*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -141781,6 +145199,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonActionCross*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -142142,6 +145566,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudBRD0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -142170,6 +145600,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudBRD0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -142514,6 +145950,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudDNC0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -142542,6 +145984,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDNC0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -142886,6 +146334,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudDNC1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -142914,6 +146368,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDNC1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -143258,6 +146718,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudDRG0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -143286,6 +146752,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDRG0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -143630,6 +147102,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudDRK0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -143658,6 +147136,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDRK0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -144002,6 +147486,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudDRK1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -144030,6 +147520,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDRK1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -144374,6 +147870,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudGFF0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -144402,6 +147904,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudGFF0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -144746,6 +148254,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudGFF1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -144774,6 +148288,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudGFF1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -145118,6 +148638,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudGNB0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -145146,6 +148672,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudGNB0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -145490,6 +149022,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudMCH0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -145518,6 +149056,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudMCH0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -145862,6 +149406,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudMNK0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -145890,6 +149440,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudMNK0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -146234,6 +149790,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudNIN0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -146262,6 +149824,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudNIN0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -146606,6 +150174,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudNIN1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -146634,6 +150208,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudNIN1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -146978,6 +150558,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudPLD0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -147006,6 +150592,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudPLD0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -147350,6 +150942,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRDB0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -147378,6 +150976,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRDB0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -147722,6 +151326,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRDB1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -147750,6 +151360,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRDB1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -148094,6 +151710,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRPM0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -148122,6 +151744,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRPM0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -148466,6 +152094,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRPM1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -148494,6 +152128,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRPM1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -148838,6 +152478,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRRP0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -148866,6 +152512,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRRP0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -149210,6 +152862,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSAM0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -149238,6 +152896,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSAM0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -149582,6 +153246,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSAM1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -149610,6 +153280,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSAM1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -149954,6 +153630,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSCH0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -149982,6 +153664,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSCH0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -150326,6 +154014,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSMN0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -150354,6 +154048,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSMN0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -150698,6 +154398,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudWAR0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -150726,6 +154432,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudWAR0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -151070,6 +154782,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudWHM0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -151098,6 +154816,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudWHM0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -151647,6 +155371,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudAST0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -151675,6 +155405,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudAST0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -152019,6 +155755,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRDM0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -152047,6 +155789,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRDM0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -152537,6 +156285,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudACN0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -152565,6 +156319,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudACN0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -152909,6 +156669,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudBLM0*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -152937,6 +156703,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudBLM0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -153281,6 +157053,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudBLM1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -153309,6 +157087,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudBLM1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -153653,6 +157437,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudMNK1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -153681,6 +157471,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudMNK1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -154025,6 +157821,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudRRP1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -154053,6 +157855,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRRP1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -154397,6 +158205,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonJobHudSMN1*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -154425,6 +158239,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSMN1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -155276,6 +159096,12 @@ structs:
       name: this
     - type: Component::GUI::AtkCollisionNode*
       name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonGuildLeve*
+      name: this
   - name: ShouldIgnoreInputs
     offset: 184
     return_type: byte
@@ -155304,6 +159130,12 @@ structs:
       name: this
     - type: Common::Math::Bounds*
       name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonGuildLeve*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
