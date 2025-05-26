@@ -29,7 +29,6 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
     [FieldOffset(0x180)] public StdVector<CStringPointer> CachedAtkValueStrings;
-
     /// <summary>
     /// <code>
     /// DepthLayer:<br/>
@@ -58,21 +57,19 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x198)] public uint Flags198;
-
+    // 4 bytes nothing?
     /// <summary>
     /// <code>
     /// 0b1000_0000 [0x80] = Disable auto-focus (not adding it to Focused Units list)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A0)] public byte Flags1A0;
-
     /// <summary>
     /// <code>
     /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A1)] public byte Flags1A1;
-
     /// <summary>
     /// <code>
     /// 0b0000_0100 [0x4] = LoadUldByName called<br/>
@@ -82,7 +79,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x1A2)] public byte Flags1A2;
-
+    [FieldOffset(0x1A3)] public byte Flags1A3;
+    [FieldOffset(0x1A4)] public byte Flags1A4;
     /// <summary>
     /// <code>
     /// 0b0010_0000 [0x20] = Populate TextNode texts (before OnSetup)<br/>
@@ -90,19 +88,24 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x1A5)] public byte Flags1A5;
-
+    // 1 byte nothing?
     [FieldOffset(0x1A8)] public int Param; //Appears to be a generic field that some addons use for storage
-
     [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
     [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
-
+    /// <summary>
+    /// <code>
+    /// 0x40000000 = Don't close when entering loading screen
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag
+    [FieldOffset(0x1B8)] public byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
     [FieldOffset(0x1B9)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
-
+    [FieldOffset(0x1BA)] public byte Unk1BA;
+    [FieldOffset(0x1BB)] public byte Unk1BB;
     [FieldOffset(0x1BC)] public float OpenTransitionScale;
     [FieldOffset(0x1C0)] public float CloseTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
     [FieldOffset(0x1C8)] public uint Flags1C8;
-
     /// <summary>
     /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>
     /// Mainly used by Gold Saucer addons. Handled in AtkModule handler 50.<br/>
@@ -115,11 +118,12 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x1CC)] public byte ScdResourceIndex;
-
+    [FieldOffset(0x1CD)] public byte HUDScaleTableIndex;
     [FieldOffset(0x1CE)] public byte VisibilityFlags;
-
+    // 1 byte nothing?
     [FieldOffset(0x1D0)] public ushort DrawOrderIndex;
-
+    [FieldOffset(0x1D2)] public byte Unk1D2;
+    // 1 byte nothing?
     [FieldOffset(0x1D4)] public short X;
     [FieldOffset(0x1D6)] public short Y;
     [FieldOffset(0x1D8)] public short OpenTransitionOffsetX;
@@ -135,7 +139,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1EC)] public byte CursorNavigationOwnIndex;
     [FieldOffset(0x1ED)] public byte Alpha;
     [FieldOffset(0x1EE)] public byte ShowHideFlags;
-
+    [FieldOffset(0x1EF)] public bool Unk1EF; // used in Draw
     [FieldOffset(0x1F0)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode

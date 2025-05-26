@@ -7131,6 +7131,7 @@ classes:
       0x14062E2B0: GetScaledHeight
       0x14062E2F0: CalculateBounds
       0x14062EC20: SetFlag
+      0x14062ED10: SetAddonParamUnknown1
       0x14062EF80: GetUnitBaseAttachmentPositionInfo
       0x140630360: ContainsNode
       0x140630990: Draw
