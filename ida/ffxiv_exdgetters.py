@@ -308,14 +308,15 @@ if api is None:
                 # type: (str, dict[str, str]) -> None
                 dt_path = self.get_datatype_path(name)
                 struct = StructureDataType(dt_path.getCategoryPath(), dt_path.getDataTypeName(), 0)
-                for [index, [type_name, field_name]] in fields.items():
+                struct.setExplicitMinimumAlignment(8)
+                for [offset, [type_name, field_name]] in fields.items():
                     if monitor.isCancelled():
                         break
                     field_dt = currentProgram.getDataTypeManager().getDataType(self.get_datatype_path(type_name))
                     if field_dt is None:
                         print(f"Warning: Data type {name} field {field_name} has missing type {type_name} ({dt_path})")
-                        return
-                    struct.add(field_dt, field_name, None)
+                        continue
+                    struct.insertAtOffset(offset, field_dt, -1, field_name, None)
                 dt = currentProgram.getDataTypeManager().getDataType(dt_path)
                 if dt is None:
                     currentProgram.getDataTypeManager().addDataType(struct, None)
