@@ -7142,6 +7142,7 @@ classes:
       0x140631100: SubscribeAtkArrayData
       0x140631200: UnsubscribeAtkArrayData
       0x140631410: SetFocusNode
+      0x140631740: SetComponentFocusNode
       0x140631B30: GetNodeById
       0x140631B90: GetNodeByIndex
       0x140631C00: GetNodeCount
@@ -7174,6 +7175,7 @@ classes:
       8: Setup
       10: SetEnabledState
       14: GetAtkResNode
+      15: GetCursorFocusNode
       17: InitializeFromComponentData
     funcs:
       0x14064A7E0: ctor

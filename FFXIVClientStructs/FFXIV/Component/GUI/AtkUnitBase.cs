@@ -20,6 +20,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0xD0)] public AtkCollisionNode* WindowCollisionNode;
     [FieldOffset(0xD8)] public AtkCollisionNode* WindowHeaderCollisionNode;
     [FieldOffset(0xF0)] public AtkResNode* CursorTarget; // Likely always AtkCollisionNode
+    [FieldOffset(0xF8)] public AtkResNode* FocusNode;
+    [FieldOffset(0x100)] public AtkResNode* ComponentFocusNode;
     [FieldOffset(0x118)] public AtkComponentNode* CurrentDropDownOwnerNode;
     [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
     [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
@@ -128,7 +130,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1E6)] public ushort ParentId;
     [FieldOffset(0x1E8)] public ushort HostId; // for example, in CharacterProfile this holds the ID of the Character addon
     [FieldOffset(0x1EA)] public ushort ContextMenuParentId;
-
+    [FieldOffset(0x1EC)] public byte CursorNavigationOwnIndex;
     [FieldOffset(0x1ED)] public byte Alpha;
     [FieldOffset(0x1EE)] public byte ShowHideFlags;
 
@@ -209,7 +211,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void UpdateCollisionNodeList(bool clearFocus);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BA E7 14")]
-    public partial bool SetFocusNode(AtkResNode* node, bool a3 = false, uint a4 = 0);
+    public partial bool SetFocusNode(AtkResNode* node, bool setCursorFocusNode = false, uint a4 = 0); // a4 = InputId?
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 39 BC 24")]
+    public partial void SetComponentFocusNode(AtkComponentBase* component);
 
     /// <param name="arrayType">0 for StringArrayData or 1 for NumberArrayData</param>
     /// <param name="arrayIndex">The index in AtkArrayDataHolder</param>
