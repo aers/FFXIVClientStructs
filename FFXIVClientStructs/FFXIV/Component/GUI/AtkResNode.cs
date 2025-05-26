@@ -203,6 +203,9 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 44 38 7D 67")]
     public partial void RemoveEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isGlobalEvent);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 48 32 DB")]
+    public partial bool CheckCollisionAtCoords(short x, short y, bool inclusive);
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B 5C 24 2C")]
     public partial void GetBounds(Bounds* outBounds);
 

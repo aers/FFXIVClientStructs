@@ -21,9 +21,6 @@ public unsafe partial struct AtkCollisionNode : ICreatable {
         AtkResNode.Ctor();
         VirtualTable = StaticVirtualTablePointer;
     }
-
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 48 32 DB")]
-    public partial bool CheckCollisionAtCoords(short x, short y, bool inclusive);
 }
 
 public enum CollisionType : ushort {

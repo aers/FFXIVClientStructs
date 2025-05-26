@@ -6881,6 +6881,7 @@ classes:
       0x14061CCB0: GetAsAtkClippingMaskNode
       0x14061CCD0: GetAsAtkComponentNode
       0x14061CCF0: GetComponent
+      0x14061CD20: CheckCollisionAtCoords
       0x14061D200: EnableTimeline
       0x14061D220: DisableTimeline
       0x14061D250: IsAnimated
@@ -7055,7 +7056,6 @@ classes:
         base: Component::GUI::AtkResNode
     funcs:
 #     0x1405B25B0: ctor # INLINED IN 7.0 in CreateResNode
-      0x14061CD20: CheckCollisionAtCoords
   Component::GUI::AtkClippingMaskNode:
     vtbls:
       - ea: 0x142039790
