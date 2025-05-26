@@ -21,8 +21,8 @@ public partial struct AddonAirShipExploration {
         [FieldOffset(0x08)] public CStringPointer LocationName;
         [FieldOffset(0x10)] public ushort X;
         [FieldOffset(0x12)] public ushort Y;
-        [FieldOffset(0x14)] public uint RankReq;
+        [FieldOffset(0x14)] public ushort RankReq;
         [FieldOffset(0x18)] public uint ExpReward;
-        [FieldOffset(0x1E)] public ushort Stars;
+        [FieldOffset(0x1E)] public byte Stars;
     }
 }
