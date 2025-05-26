@@ -83,6 +83,12 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [VirtualFunction(10)]
     public partial void SetEnabledState(bool enabled);
 
+    [VirtualFunction(14)]
+    public partial AtkResNode* GetAtkResNode();
+
+    [VirtualFunction(15)]
+    public partial AtkResNode* GetFocusNode();
+
     [VirtualFunction(17)]
     public partial void InitializeFromComponentData(void* data); // AtkUldComponentDataBase* ?
 

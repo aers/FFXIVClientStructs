@@ -6881,6 +6881,7 @@ classes:
       0x14061CCB0: GetAsAtkClippingMaskNode
       0x14061CCD0: GetAsAtkComponentNode
       0x14061CCF0: GetComponent
+      0x14061CD20: CheckCollisionAtCoords
       0x14061D200: EnableTimeline
       0x14061D220: DisableTimeline
       0x14061D250: IsAnimated
@@ -7055,7 +7056,6 @@ classes:
         base: Component::GUI::AtkResNode
     funcs:
 #     0x1405B25B0: ctor # INLINED IN 7.0 in CreateResNode
-      0x14061CD20: CheckCollisionAtCoords
   Component::GUI::AtkClippingMaskNode:
     vtbls:
       - ea: 0x142039790
@@ -7131,6 +7131,7 @@ classes:
       0x14062E2B0: GetScaledHeight
       0x14062E2F0: CalculateBounds
       0x14062EC20: SetFlag
+      0x14062ED10: SetAddonParamUnknown1
       0x14062EF80: GetUnitBaseAttachmentPositionInfo
       0x140630360: ContainsNode
       0x140630990: Draw
@@ -7142,6 +7143,7 @@ classes:
       0x140631100: SubscribeAtkArrayData
       0x140631200: UnsubscribeAtkArrayData
       0x140631410: SetFocusNode
+      0x140631740: SetComponentFocusNode
       0x140631B30: GetNodeById
       0x140631B90: GetNodeByIndex
       0x140631C00: GetNodeCount
@@ -7174,6 +7176,7 @@ classes:
       8: Setup
       10: SetEnabledState
       14: GetAtkResNode
+      15: GetCursorFocusNode
       17: InitializeFromComponentData
     funcs:
       0x14064A7E0: ctor
