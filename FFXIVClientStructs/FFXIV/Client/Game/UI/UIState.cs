@@ -124,7 +124,7 @@ public unsafe partial struct UIState {
 
     [FieldOffset(0x19053)] public byte GMRank;
 
-    [FieldOffset(0x190C8)] public Utf8String JournalDetailDescription;
+    [FieldOffset(0x190D0)] public Utf8String JournalDetailDescription;
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 23")]
     public partial bool IsUnlockLinkUnlocked(uint unlockLink);
