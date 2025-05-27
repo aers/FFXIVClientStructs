@@ -8436,23 +8436,26 @@ classes:
       38: DecodeFixed
       39: DecodeLower
       40: DecodeLowerHead
-      41: DecodeJaNoun
-      42: DecodeEnNoun
-      43: DecodeDeNoun
-      44: DecodeFrNoun
-      45: DecodeChNoun
-      47: DecodeJosa
-      48: DecodeJosaro
-      49: DecodePcName
-      50: DecodeIfPcGender
-      51: DecodeIfPcName
-      52: DecodeIfSelf
-      53: DecodeSound
-      54: DecodeLevelPos
+      41: DecodeSheetSub
+      42: DecodeJaNoun
+      43: DecodeEnNoun
+      44: DecodeDeNoun
+      45: DecodeFrNoun
+      46: DecodeChNoun
+      47: DecodeKoNoun
+      48: DecodeJosa
+      49: DecodeJosaro
+      50: DecodePcName
+      51: DecodeIfPcGender
+      52: DecodeIfPcName
+      53: DecodeIfSelf
+      54: DecodeSound
+      55: DecodeLevelPos
     funcs:
       0x140754210: ctor
       0x140754B40: ReadExpression
       0x140755130: ReadParameter
+      0x1407553A0: ReadExpressionToTextParameterDeque
   Component::Text::MacroEncoder:
     vtbls:
       - ea: 0x14204B170
@@ -8617,6 +8620,7 @@ classes:
       0x140920120: AppendIcon
       0x1409204F0: FormatAddonTextApply
       0x1409207C0: ResolveSheetRedirect
+      0x140923800: GetLinkTerminator
       0x14094BBC0: TempStartWithCurrentColors
   Client::UI::Misc::RaptureLogModule:
     vtbls:
