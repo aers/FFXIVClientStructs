@@ -86,7 +86,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 54 FB 04")]
     public partial AtkImageNode* GetAsAtkImageNode();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 97")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 6B E7")]
     public partial AtkTextNode* GetAsAtkTextNode();
 
     [MemberFunction("E8 ?? ?? ?? ?? B2 01 48 89 47 08")]
