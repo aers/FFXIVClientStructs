@@ -12262,9 +12262,13 @@ classes:
       0x140D4B2C0: ctor
       0x140D4B510: Finalizer
       0x140D4BD20: OpenRegularDuty
-#fail       0x140F1E190: OpenRouletteDuty
+      0x140D4BF00: OpenRouletteDuty
+      0x140D4C220: Refresh
       0x140D4C3E0: SetContentRouletteRoleBonus
       0x140D4F930: GetInstance # static
+      0x140D4FCD0: QueueSelectedContent
+      0x140D504F0: UpdateDescription
+      0x140D53820: UpdateAddon
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x14208AD70

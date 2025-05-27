@@ -18,11 +18,13 @@ public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x1E98)] public StdVector<Pointer<Contents>> ContentList;
     [FieldOffset(0x1EB0)] public StdVector<ContentsId> SelectedContent;
-
-    [FieldOffset(0x1ECC)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
+    [FieldOffset(0x1EC8)] public ContentsId SelectedDuty;
+    [FieldOffset(0x1ECC), Obsolete("Use SelectedDuty.Id instead")] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1ED8)] public byte NumCollectedRewards; // Value used for "Reward already received"
+    // TODO: change to bool
     [FieldOffset(0x1ED9)] public byte HasRouletteSelected; // Prevents more roulettes from being selected
 
+    // TODO: this is part of an event interface class
     [FieldOffset(0x1F18)] public UIModule* UIModule;
 
     [FieldOffset(0x1F28), FixedSizeArray] internal FixedSizeArray10<Utf8String> _strings; // Tooltips and Category headers, ie "Gil", "Trials (Endwalker)"
@@ -33,13 +35,25 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x23A0)] public uint UnkPenaltyMinutes;
 
     [FieldOffset(0x23D4)] public int CurrentTimestamp;
+
+    [FieldOffset(0x23DC)] public int RecruitingParties;
     [FieldOffset(0x23E0)] public byte SelectedTab;
+
+    [FieldOffset(0x23E8)] private bool TabChanged;
+    [FieldOffset(0x23E9)] public bool ListChanged;
+    [FieldOffset(0x23EA)] private bool DetailsChanged;
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8")]
     public partial void OpenRegularDuty(uint contentsFinderCondition, bool hideIfShown = false);
 
     [MemberFunction("E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20")]
     public partial void OpenRouletteDuty(byte roulette, bool hideIfShown = false);
+    
+    [MemberFunction("40 53 48 83 EC ?? 48 8B 01 48 8B D9 FF 50 ?? 84 C0 74 ?? 48 8B CB C6 83")]
+    public partial void Refresh();
+    
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8B 06 48 8B CE 48 81 C4")]
+    public partial void UpdateAddon();
 }
 
 public enum ContentsRouletteRole : byte {
