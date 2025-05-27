@@ -24,14 +24,19 @@ public unsafe partial struct RaptureTextModule {
     [FieldOffset(0x528)] public TextChecker TextChecker;
     [FieldOffset(0x620)] public ExcelSheet* AddonSheet;
 
+    // [0] = TempLinkString
+    // [1] = <edgecolortype(0)><colortype(0)>
+    // [2] = LinkTerminator (<link(0xCE,0,0,0,)>)
     [FieldOffset(0x630), FixedSizeArray] internal FixedSizeArray7<Utf8String> _unkStrings0;
 
     [FieldOffset(0x908)] public StdDeque<TextParameter> LocalTextParameters;
-    //[FieldOffset(0x930)] public StdDeque<TextParameter> ItemColorParameters;
+    // [FieldOffset(0x930)] public StdDeque<TextParameter> ItemRarityParameters; // to format Addon#6
 
+    // [3] = TempItemRarity
+    // [4] = TempItemNameOutput
     [FieldOffset(0x958), FixedSizeArray] internal FixedSizeArray9<Utf8String> _unkStrings1;
 
-    // [FieldOffset(0xD18)] public RowWrapper<Addon>* AddonRowCache; // only for the first 4000 Addon rows
+    // [FieldOffset(0xD18)] public IExcelRowWrapper** AddonRowCache; // only for the first 4000 Addon rows
 
     [FieldOffset(0xE18)] internal ExcelSheet* AchievementSheet;
     [FieldOffset(0xE20)] internal ExcelSheet* StatusSheet;
