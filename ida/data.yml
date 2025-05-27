@@ -16501,7 +16501,7 @@ classes:
       0x14142D510: ctor
   Client::UI::AddonOrnamentNoteBook:
     vtbls:
-      - ea: 0x14210C000
+      - ea: 0x1420C2D48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14117CEA0: ctor
