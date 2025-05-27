@@ -48,10 +48,10 @@ public unsafe partial struct AgentContentsFinder {
 
     [MemberFunction("E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20")]
     public partial void OpenRouletteDuty(byte roulette, bool hideIfShown = false);
-    
+
     [MemberFunction("40 53 48 83 EC ?? 48 8B 01 48 8B D9 FF 50 ?? 84 C0 74 ?? 48 8B CB C6 83")]
     public partial void Refresh();
-    
+
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 06 48 8B CE 48 81 C4")]
     public partial void UpdateAddon();
 }

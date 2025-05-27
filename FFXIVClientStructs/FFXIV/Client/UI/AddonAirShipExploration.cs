@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Component.GUI;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
@@ -9,12 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public partial struct AddonAirShipExploration {
     [FieldOffset(0x9E0), FixedSizeArray] internal FixedSizeArray64<Destination> _destinations;
     [FieldOffset(0x11F8)] public ushort DestinationCount;
-    
+
     /// <summary>
     /// The index of the destination that is currently being displayed on the right side of the addon.
     /// </summary>
     [FieldOffset(0x11FC)] public ushort DisplayedDestinationIndex;
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct Destination {
         [FieldOffset(0x00)] public CStringPointer DestinationName;
