@@ -12,6 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct AtkComponentBase : ICreatable {
     [FieldOffset(0x08)] public AtkUldManager UldManager;
+    [FieldOffset(0x98)] public uint ComponentFlags; // & 1 = UldLoaded, & 2 = Interactable/Enabled?
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
     [FieldOffset(0xB0)] public int SoundEffectId;
