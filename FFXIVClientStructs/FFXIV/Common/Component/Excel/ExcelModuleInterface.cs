@@ -19,12 +19,13 @@ public unsafe partial struct ExcelModuleInterface {
 
     public enum ExcelLanguage {
         None,
-        Japanese,
-        English,
-        German,
-        French,
-        ChineseSimplified,
-        ChineseTraditional,
-        Korean
+        Japanese, // ja
+        English, // en
+        German, // de
+        French, // fr
+        ChineseSimplified, // chs
+        ChineseTraditional, // cht
+        Korean, // ko
+        ChineseTraditional2 // tc
     }
 }
