@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //         Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<ContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1DF0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1FF0)]
 public unsafe partial struct InstanceContentDirector {
     //[FieldOffset(0x738), FixedSizeArray] internal FixedSizeArray168<byte> _instanceContentExcelRow;
 

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x518)]
+[StructLayout(LayoutKind.Explicit, Size = 0x558)]
 public partial struct AddonOrnamentNoteBook {
     [FieldOffset(0x2A8)] public TabController TabController;
 }
