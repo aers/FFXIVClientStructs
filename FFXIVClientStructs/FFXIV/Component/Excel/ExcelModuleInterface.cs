@@ -19,12 +19,13 @@ public unsafe partial struct ExcelModuleInterface {
     public partial ExcelLanguage* GetLanguage(); // returns a pointer to ExcelModule->GetLanguage() - 1
 
     public enum ExcelLanguage {
-        Japanese,
-        English,
-        German,
-        French,
-        ChineseSimplified,
-        ChineseTraditional,
-        Korean
+        Japanese, // ja
+        English, // en
+        German, // de
+        French, // fr
+        ChineseSimplified, // chs
+        ChineseTraditional, // cht
+        Korean, // ko
+        ChineseTraditional2 // tc
     }
 }
