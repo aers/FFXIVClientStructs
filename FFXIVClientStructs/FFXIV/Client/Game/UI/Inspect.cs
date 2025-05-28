@@ -58,15 +58,18 @@ public unsafe partial struct Inspect {
     /// Only loaded inside the relevant content.<br/>
     /// <br/>
     /// <code>
-    /// |-----|-------------|---------------------------|
-    /// | Key | Content     | Usage                     |
-    /// |-----|-------------|---------------------------|
-    /// |   1 | Eureka      | Elemental Level           |
-    /// |   2 | Eureka      | Is Elemental Level Synced |
-    /// |   3 | Eureka      | Time Remaining            |
-    /// |   4 | Bozja       | Resistance Rank           |
-    /// |   5 | Bozja       | Time Remaining            |
-    /// |-----|-------------|---------------------------|
+    /// |-----|-------------------|---------------------------|
+    /// | Key | Content           | Usage                     |
+    /// |-----|-------------------|---------------------------|
+    /// |   1 | Eureka            | Elemental Level           |
+    /// |   2 | Eureka            | Is Elemental Level Synced |
+    /// |   3 | Eureka            | Time Remaining            |
+    /// |   4 | Bozja             | Resistance Rank           |
+    /// |   5 | Bozja             | Time Remaining            |
+    /// |   6 | Occult Crescent   | Effective Knowledge Level |
+    /// |   7 | Occult Crescent   | Knowledge Level           |
+    /// |   8 | Occult Crescent   | Time Remaining            |
+    /// |-----|-------------------|---------------------------|
     /// </code>
     /// </summary>
     public uint GetContentValue(uint key) {

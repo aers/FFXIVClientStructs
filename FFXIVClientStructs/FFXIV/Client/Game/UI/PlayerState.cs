@@ -213,17 +213,17 @@ public unsafe partial struct PlayerState {
     /// Only loaded inside the relevant content.<br/>
     /// <br/>
     /// <code>
-    /// |-----|-------------|------------------------------|
-    /// | Key | Content     | Usage                        |
-    /// |-----|-------------|------------------------------|
-    /// |   1 | Rival Wings | ManeuversArmor RowId         |
-    /// |   2 | Eureka      | Effective Elemental Level    |
-    /// |   3 | Eureka      | Is Elemental Level Synced    |
-    /// |   4 | Eureka      | Current Elemental Level      |
-    /// |   5 | Bozja       | Current Resistance Rank      |
-    /// |   6 | TerritoryIntendedUse 61 | Unknown          |
-    /// |   7 | TerritoryIntendedUse 61 | Unknown          |
-    /// |-----|-------------|------------------------------|
+    /// |-----|-----------------|------------------------------|
+    /// | Key | Content         | Usage                        |
+    /// |-----|-----------------|------------------------------|
+    /// |   1 | Rival Wings     | ManeuversArmor RowId         |
+    /// |   2 | Eureka          | Effective Elemental Level    |
+    /// |   3 | Eureka          | Is Elemental Level Synced    |
+    /// |   4 | Eureka          | Current Elemental Level      |
+    /// |   5 | Bozja           | Current Resistance Rank      |
+    /// |   6 | Occult Crescent | Effective Knowledge Level    |
+    /// |   7 | Occult Crescent | Current Knowledge Level      |
+    /// |-----|-----------------|------------------------------|
     /// </code>
     /// </summary>
     public uint GetContentValue(uint key) {
