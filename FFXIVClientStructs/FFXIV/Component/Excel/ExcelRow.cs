@@ -14,4 +14,7 @@ public unsafe partial struct ExcelRow {
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 2C 5B")]
     public static partial void* ResolveStringColumnIndirection(void* columnPtr);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 55 F8")]
+    public partial CStringPointer GetFirstColumnAsString();
 }

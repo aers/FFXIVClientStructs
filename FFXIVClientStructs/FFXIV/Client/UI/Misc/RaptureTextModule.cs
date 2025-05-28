@@ -36,7 +36,7 @@ public unsafe partial struct RaptureTextModule {
     // [4] = TempItemNameOutput
     [FieldOffset(0x958), FixedSizeArray] internal FixedSizeArray9<Utf8String> _unkStrings1;
 
-    // [FieldOffset(0xD18)] public IExcelRowWrapper** AddonRowCache; // only for the first 4000 Addon rows
+    [FieldOffset(0xD18)] public IExcelRowWrapper** AddonRowCache; // only for the first 4000 Addon rows
 
     [FieldOffset(0xE18)] internal ExcelSheet* AchievementSheet;
     [FieldOffset(0xE20)] internal ExcelSheet* StatusSheet;
@@ -68,4 +68,24 @@ public unsafe partial struct RaptureTextModule {
     /// <returns>string containing one of 23h, 59m, 59s</returns>
     [MemberFunction("48 83 EC 28 45 0F B6 C8 85 D2")]
     public partial CStringPointer FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B E8 A8 10")]
+    public partial SheetRedirectFlags ResolveSheetRedirect(Utf8String* sheetName, int* outRowId, int* outColIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? F6 87 ?? ?? ?? ?? ?? 74 67")]
+    public partial void AddSheetRedirectItemDecoration(Utf8String* sheetName, SheetRedirectFlags flags, int rowId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D 80 48 8D 55 60")]
+    public partial void CreateSheetLink(ExcelSheet* sheet, Utf8String* text, int rowId, int colParam);
+
+    [Flags]
+    public enum SheetRedirectFlags {
+        None = 0,
+        Item = 1 << 0,
+        EventItem = 1 << 1,
+        HighQuality = 1 << 2,
+        Collectible = 1 << 3,
+        Action = 1 << 4,
+        ActionSheet = 1 << 5,
+    }
 }
