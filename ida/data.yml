@@ -7206,7 +7206,6 @@ classes:
     funcs:
       0x14064B500: SetText
       0x14064BC80: ctor
-      0x1406807A0: Finalizer
 #      0x1406AA4E0: GetOwnerNode # not sure, def got inlined in 0x1410E0F00, are they the same?
       0x14064B930: SetChecked
   Component::GUI::AtkComponentIcon:
@@ -7390,6 +7389,7 @@ classes:
         base: Component::GUI::AtkComponentButton
     funcs:
       0x140680770: ctor
+      0x1406807A0: Finalizer
   Component::GUI::AtkComponentTab:
     vtbls:
       - ea: 0x14203A5F0
