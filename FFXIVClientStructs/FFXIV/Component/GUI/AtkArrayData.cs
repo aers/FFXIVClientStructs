@@ -170,6 +170,8 @@ public enum NumberArrayType {
     MJIHousingGoods = 151,
     FGSHud = 152,
     FGSResult = 153,
+    MKDInfo = 154,
+    MKDInfo2 = 155
 }
 
 public enum StringArrayType {
