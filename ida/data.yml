@@ -921,6 +921,7 @@ classes:
     funcs:
       0x14075E3E0: ctor
     vfuncs:
+      15: FormatSheetValue
       16: FormatString # using byte* as input
       17: ProcessNoun
   Component::Text::TextModuleInterface:
@@ -4003,6 +4004,7 @@ classes:
       0x141F48AB0: IsColumnRsv  # (ExcelRow* this, size_t nColumnIndex) -> bool
       0x141F48020: CalculateStringColumnHash  # static (char* pStringOffsetBytes)
       0x141F48360: ResolveStringColumnIndirection  # static (char* pStringOffsetBytes)
+      0x141F48A00: GetFirstColumnAsString
   Component::Excel::ExcelRowDescriptor:
     # size 0x08+
     # 0x00: nRowId: int
@@ -8620,6 +8622,9 @@ classes:
       0x140920120: AppendIcon
       0x1409204F0: FormatAddonTextApply
       0x1409207C0: ResolveSheetRedirect
+      0x1409238E0: GetSubrowSheetIntValue
+      0x140920C80: AddSheetRedirectItemDecoration
+      0x140923400: CreateSheetLink
       0x140923800: GetLinkTerminator
       0x14094BBC0: TempStartWithCurrentColors
   Client::UI::Misc::RaptureLogModule:
