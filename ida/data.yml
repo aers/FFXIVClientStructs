@@ -13719,9 +13719,9 @@ classes:
       - ea: 0x14206B800
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
-      272: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
-      291: SetSequence
-      292: Synchronize
+      273: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
+      292: SetSequence
+      293: Synchronize
     funcs:
       0x140B32E80: ctor
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
