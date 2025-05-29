@@ -15383,7 +15383,7 @@ classes:
       - ea: 0x142157F78
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     funcs:
-#fail       0x1415BDA80: ctor
+      0x141654460: ctor
   Client::Game::InstanceContent::DynamicEvent:
     vtbls:
       - ea: 0x14228C958
@@ -15424,6 +15424,15 @@ classes:
     vtbls:
       - ea: 0x142163BE0
         base: Client::Game::InstanceContent::PublicContentDirector
+  Client::Game::InstanceContent::PublicContentOccultCrescent:
+    vtbls:
+      - ea: 0x1421647E0
+        base: Client::Game::InstanceContent::PublicContentDirector
+    funcs:
+      0x1416606D0: GetInstance # static
+      0x141660700: GetState # static
+      0x141660750: GetMKDData # static
+      0x141663120: ctor
   Client::Game::MassivePcContent::MassivePcContentDirector:
     vtbls:
       - ea: 0x1422C3F68

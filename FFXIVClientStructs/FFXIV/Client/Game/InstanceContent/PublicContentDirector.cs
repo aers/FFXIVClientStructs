@@ -54,4 +54,5 @@ public enum PublicContentDirectorType : byte {
     Delubrum = 8,
     IslandSanctuary = 9,
     FallGuys = 10,
+    OccultCrescent = 11,
 }
