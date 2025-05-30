@@ -20,7 +20,7 @@ public unsafe partial struct PublicContentOccultCrescent {
     [FieldOffset(0x31DC)] private uint Unk31DC;
     [FieldOffset(0x31E0)] private byte Unk31E0;
 
-    [FieldOffset(0x31E8)] private StdPair<uint,uint>* Unk31E8; // array of 6
+    [FieldOffset(0x31E8)] private StdPair<uint, uint>* Unk31E8; // array of 6
     [FieldOffset(0x31F0)] private float Unk31F0; // some countdown
 
     [FieldOffset(0x31F8), FixedSizeArray] internal FixedSizeArray4<Utf8String> _strings;
