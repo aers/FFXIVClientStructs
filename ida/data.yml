@@ -13109,6 +13109,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F8ECB0: ctor
+      0x140F8F240: ChangeSupportJob
   Client::UI::Agent::AgentMKDSettings:
     vtbls:
       - ea: 0x14208F8A8
@@ -15432,6 +15433,7 @@ classes:
       0x1416606D0: GetInstance # static
       0x141660700: GetState # static
       0x141660750: GetMKDData # static
+      0x1416608C0: ChangeSupportJob # static
       0x141663120: ctor
   Client::Game::MassivePcContent::MassivePcContentDirector:
     vtbls:
