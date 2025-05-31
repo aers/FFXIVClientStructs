@@ -12,6 +12,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkComponentButton>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF8)]
 public partial struct AtkComponentRadioButton : ICreatable {
+    [FieldOffset(0xF0)] public ushort GroupId;
+    [FieldOffset(0xF2)] public bool AlwaysFireButtonClickEvent; // otherwise it depends on AtkGroupManager
+
     public bool IsSelected {
         get => AtkComponentButton.IsChecked;
         set => AtkComponentButton.IsChecked = value;
