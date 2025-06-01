@@ -57,7 +57,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x198)] public uint Flags198;
-    // 4 bytes nothing?
+    // 4 bytes padding
     /// <summary>
     /// <code>
     /// 0b1000_0000 [0x80] = Disable auto-focus (not adding it to Focused Units list)
@@ -66,20 +66,32 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1A0)] public byte Flags1A0;
     /// <summary>
     /// <code>
-    /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)
+    /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)<br/>
+    /// 0b0000_0100 [0x4] = Disable "Close" option in title bar context menu
     /// </code>
     /// </summary>
     [FieldOffset(0x1A1)] public byte Flags1A1;
     /// <summary>
     /// <code>
-    /// 0b0000_0100 [0x4] = LoadUldByName called<br/>
+    /// 0b0000_0100 [0x4] = LoadUldByName was called<br/>
     /// 0b0000_1000 [0x8] = Disable close transition<br/>
     /// 0b0010_0000 [0x20] = Suppress open/close sounds<br/>
     /// 0b0100_0000 [0x40] = Don't load/save AddonConfig
     /// </code>
     /// </summary>
     [FieldOffset(0x1A2)] public byte Flags1A2;
+    /// <summary>
+    /// <code>
+    /// 0b0000_0001 [0x1] = Enable title bar context menu<br/>
+    /// 0b0010_0000 [0x20] = Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
+    /// </code>
+    /// </summary>
     [FieldOffset(0x1A3)] public byte Flags1A3;
+    /// <summary>
+    /// <code>
+    /// 0b0100_0000 [0x40] = Unknown, enables whatever <see cref="Unk1D2"/> does
+    /// </code>
+    /// </summary>
     [FieldOffset(0x1A4)] public byte Flags1A4;
     /// <summary>
     /// <code>
@@ -88,15 +100,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// </code>
     /// </summary>
     [FieldOffset(0x1A5)] public byte Flags1A5;
-    // 1 byte nothing?
-    [FieldOffset(0x1A8)] public int Param; //Appears to be a generic field that some addons use for storage
+    // 2 bytes padding
+    [FieldOffset(0x1A8)] public int Param; // appears to be a generic field that some addons use for storage
     [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
     [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
-    /// <summary>
-    /// <code>
-    /// 0x40000000 = Don't close when entering loading screen
-    /// </code>
-    /// </summary>
     [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag
     [FieldOffset(0x1B8)] public byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
     [FieldOffset(0x1B9)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
@@ -105,6 +112,11 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1BC)] public float OpenTransitionScale;
     [FieldOffset(0x1C0)] public float CloseTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
+    /// <summary>
+    /// <code>
+    /// 0x800 = Disable "Scale Window" option in the title bar context menu
+    /// </code>
+    /// </summary>
     [FieldOffset(0x1C8)] public uint Flags1C8;
     /// <summary>
     /// An optional scd resource that is loaded along with the uld resource in <see cref="LoadUldResourceHandle"/>.<br/>
@@ -120,10 +132,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1CC)] public byte ScdResourceIndex;
     [FieldOffset(0x1CD)] public byte HUDScaleTableIndex;
     [FieldOffset(0x1CE)] public byte VisibilityFlags;
-    // 1 byte nothing?
+    // 1 byte padding
     [FieldOffset(0x1D0)] public ushort DrawOrderIndex;
-    [FieldOffset(0x1D2)] public byte Unk1D2;
-    // 1 byte nothing?
+    [FieldOffset(0x1D2)] public byte Unk1D2; // index in array of AtkUnitManager+0x9388 (48 * 0x30)
+    // 1 byte padding
     [FieldOffset(0x1D4)] public short X;
     [FieldOffset(0x1D6)] public short Y;
     [FieldOffset(0x1D8)] public short OpenTransitionOffsetX;
