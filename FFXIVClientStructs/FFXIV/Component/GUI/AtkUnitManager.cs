@@ -39,6 +39,7 @@ public unsafe partial struct AtkUnitManager {
 
     [FieldOffset(0x9350)] public Size LastScreenSize;
 
+    // [FieldOffset(0x9388), FixedSizeArray] internal FixedSizeArray48<Unk9388Struct> Unk9388;
     [FieldOffset(0x9C88)] public AtkUnitManagerFlags Flags;
 
     [VirtualFunction(8)]
@@ -75,6 +76,12 @@ public unsafe partial struct AtkUnitManager {
         Shown = 1 << 2,
         Hidden = 1 << 3,
     }
+
+    // [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    // public struct Unk9388Struct {
+    //     [FieldOffset(0x00)] public AtkUnitBase* AtkUnitBase;
+    //     [FieldOffset(0x08)] public uint NameHash;
+    // }
 }
 
 [Flags]
