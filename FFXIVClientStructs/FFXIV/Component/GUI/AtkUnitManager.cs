@@ -59,6 +59,16 @@ public unsafe partial struct AtkUnitManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6B 20")]
     public partial AtkUnitBase* GetAddonById(ushort id);
 
+    /// <summary>
+    /// Gets an AtkUnitBase pointer to the addon that contains the input node.
+    /// This function will check all parents to the input node searching
+    /// for a node that matches any loaded AtkUnitBase's rootnode address
+    /// </summary>
+    /// <param name="node">Pointer to a AtkResNode</param>
+    /// <returns>Pointer to AtkUnitBase or null</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 3B E8 75 0E")]
+    public partial AtkUnitBase* GetAddonByNode(AtkResNode* node);
+
     public enum AddonStatus {
         NotLoaded = 0,
 
