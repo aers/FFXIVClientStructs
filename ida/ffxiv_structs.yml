@@ -432,6 +432,7 @@ enums:
     "ChineseSimplified": 4
     "ChineseTraditional": 5
     "Korean": 6
+    "ChineseTraditional2": 7
 - type: Common::Lua::LuaType
   name: LuaType
   underlying: int
@@ -464,6 +465,7 @@ enums:
     "ChineseSimplified": 5
     "ChineseTraditional": 6
     "Korean": 7
+    "ChineseTraditional2": 8
 - type: Common::Component::Excel::ExcelColumnType
   name: ExcelColumnType
   underlying: unsigned __int16
@@ -815,6 +817,19 @@ enums:
     "EditMode": 32768
     "LeftSideFocus": 20
     "RightSideFocus": 40
+- type: Client::UI::Misc::RaptureTextModule::SheetRedirectFlags
+  name: SheetRedirectFlags
+  underlying: int
+  namespace: Client.UI.Misc
+  flags: True
+  values:
+    "None": 0
+    "Item": 1
+    "EventItem": 2
+    "HighQuality": 4
+    "Collectible": 8
+    "Action": 16
+    "ActionSheet": 32
 - type: Client::UI::Misc::TermFilterModule::TermFilterSetting
   name: TermFilterSetting
   underlying: byte
@@ -3034,6 +3049,16 @@ enums:
     "Friends": 1
     "FreeCompany": 2
     "Party": 4
+- type: Client::Game::InstanceContent::DynamicEventState
+  name: DynamicEventState
+  underlying: byte
+  namespace: Client.Game.InstanceContent
+  flags: False
+  values:
+    "Inactive": 0
+    "Register": 1
+    "Warmup": 2
+    "Battle": 3
 - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::RoomFlags
   name: RoomFlags
   underlying: byte
@@ -3086,16 +3111,6 @@ enums:
     "Fishing": 2
     "NewZone": 3
     "Finished": 4
-- type: Client::Game::InstanceContent::DynamicEventState
-  name: DynamicEventState
-  underlying: byte
-  namespace: Client.Game.InstanceContent
-  flags: False
-  values:
-    "Inactive": 0
-    "Register": 1
-    "Warmup": 2
-    "Battle": 3
 - type: Client::Game::InstanceContent::PublicContentDirectorType
   name: PublicContentDirectorType
   underlying: byte
@@ -3112,6 +3127,7 @@ enums:
     "Delubrum": 8
     "IslandSanctuary": 9
     "FallGuys": 10
+    "OccultCrescent": 11
 - type: Client::Game::GoldSaucer::GFateDirectorFlag
   name: GFateDirectorFlag
   underlying: unsigned int
@@ -8064,6 +8080,74 @@ structs:
     size: 16
     is_string: False
   member_functions: []
+- type: Client::Game::InstanceContent::OccultCrescentMKDData
+  name: OccultCrescentMKDData
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 36
+  fields:
+  - type: Component::Exd::Sheets::MKDData
+    name: MKDDataSheet
+    offset: 0
+  member_functions: []
+- type: Client::Game::InstanceContent::OccultCrescentState
+  name: OccultCrescentState
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 90
+  fields:
+  - type: unsigned int
+    name: SupportJobExperience
+    offset: 0
+    size: 13
+    is_string: False
+  - type: unsigned int
+    name: CurrentKnowledge
+    offset: 52
+  - type: unsigned int
+    name: NeededKnowledge
+    offset: 56
+  - type: unsigned int
+    name: Unk8
+    offset: 60
+  - type: unsigned __int16
+    name: Unk40
+    offset: 64
+  - type: unsigned __int16
+    name: Unk42
+    offset: 66
+  - type: byte
+    name: SupportJobLevels
+    offset: 68
+    size: 13
+    is_string: False
+  - type: byte
+    name: UnlockedTeleportBitmask
+    offset: 81
+    size: 2
+    is_string: False
+  - type: byte
+    name: CurrentSupportJob
+    offset: 83
+  - type: byte
+    name: Unk54
+    offset: 84
+  - type: byte
+    name: Unk55
+    offset: 85
+  - type: byte
+    name: Unk56
+    offset: 86
+  - type: byte
+    name: Unk57
+    offset: 87
+  - type: byte
+    name: Unk58
+    offset: 88
+  - type: byte
+    name: Unk59
+    offset: 89
+  member_functions: []
 - type: Client::Game::InstanceContent::PublicContentDirector::EnterContentInfoPacket
   name: EnterContentInfoPacket
   namespace: Client.Game.InstanceContent
@@ -8928,25 +9012,6 @@ structs:
   - type: byte
     name: RankQuestComplete
     offset: 25
-  member_functions: []
-- type: Client::Game::Status
-  name: Status
-  namespace: Client.Game
-  union: False
-  size: 16
-  fields:
-  - type: unsigned __int16
-    name: StatusId
-    offset: 0
-  - type: unsigned __int16
-    name: Param
-    offset: 2
-  - type: float
-    name: RemainingTime
-    offset: 4
-  - type: unsigned int
-    name: SourceId
-    offset: 8
   member_functions: []
 - type: Client::Game::TitleController
   name: TitleController
@@ -16988,7 +17053,7 @@ structs:
   name: UIModuleHelpers
   namespace: Client.UI.Misc
   union: False
-  size: 32
+  size: 56
   fields:
   - type: Client::UI::Misc::CurrencySettingsHelper*
     name: CurrencySettingsHelper
@@ -16996,6 +17061,21 @@ structs:
   - type: Client::UI::Misc::BannerHelper*
     name: BannerHelper
     offset: 8
+  - type: Client::UI::Misc::HelperInterface*
+    name: ReplaceActionHelper
+    offset: 16
+  - type: Client::UI::Misc::HelperInterface*
+    name: TofuHelper
+    offset: 24
+  - type: Client::UI::Misc::HelperInterface*
+    name: MKDInfoHelper
+    offset: 32
+  - type: Client::UI::Misc::HelperInterface*
+    name: MKDInfoHelper2
+    offset: 40
+  - type: Client::UI::Misc::HelperInterface*
+    name: ScreenInfoFrontHelper
+    offset: 48
   member_functions: []
 - type: Client::UI::Misc::UserFileManager::UserFileEvent
   name: UserFileEvent
@@ -20255,6 +20335,12 @@ structs:
       name: this
     - type: unsigned int
       name: columnIndex
+  - signature: E8 ?? ?? ?? ?? 4D 8B 55 F8
+    return_type: char*
+    name: GetFirstColumnAsString
+    parameters:
+    - type: Component::Excel::ExcelRow*
+      name: this
   static_member_functions:
   - signature: E8 ?? ?? ?? ?? 8D 2C 5B
     return_type: __int64
@@ -27182,128 +27268,25 @@ structs:
     name: SlotIndex
     offset: 316
   member_functions: []
-- type: Client::Game::StatusManager
-  name: StatusManager
+- type: Client::Game::Status
+  name: Status
   namespace: Client.Game
   union: False
-  size: 992
+  size: 16
   fields:
-  - type: Client::Game::Character::Character*
-    name: Owner
+  - type: unsigned __int16
+    name: StatusId
     offset: 0
-  - type: Client::Game::Status
-    name: Status
+  - type: unsigned __int16
+    name: Param
+    offset: 2
+  - type: float
+    name: RemainingTime
+    offset: 4
+  - type: Client::Game::Object::GameObjectId
+    name: SourceObject
     offset: 8
-    size: 60
-    is_string: False
-  - type: byte
-    name: Flags
-    offset: 968
-    size: 7
-    is_string: False
-  - type: __int64
-    name: Unk3D0
-    offset: 976
-  - type: byte
-    name: NumValidStatuses
-    offset: 984
-  - type: byte
-    name: ExtraFlags
-    offset: 985
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? C6 43 2D 00
-    return_type: byte
-    name: HasStatus
-    parameters:
-    - type: Client::Game::StatusManager*
-      name: this
-    - type: unsigned int
-      name: statusId
-    - type: unsigned int
-      name: sourceId
-  - signature: E8 ?? ?? ?? ?? 8B D8 0F 28 C6
-    return_type: int
-    name: GetStatusIndex
-    parameters:
-    - type: Client::Game::StatusManager*
-      name: this
-    - type: unsigned int
-      name: statusId
-    - type: unsigned int
-      name: sourceId
-  - signature: 83 FA 3C 72 04 0F 57 C0
-    return_type: float
-    name: GetRemainingTime
-    parameters:
-    - type: Client::Game::StatusManager*
-      name: this
-    - type: int
-      name: statusIndex
-  - signature: E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 19
-    return_type: unsigned int
-    name: GetStatusId
-    parameters:
-    - type: Client::Game::StatusManager*
-      name: this
-    - type: int
-      name: statusIndex
-  - signature: E8 ?? ?? ?? ?? 3B 44 24 28
-    return_type: unsigned int
-    name: GetSourceId
-    parameters:
-    - type: Client::Game::StatusManager*
-      name: this
-    - type: int
-      name: statusIndex
-  - signature: 66 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 6C 24 ??
-    return_type: void
-    name: AddStatus
-    parameters:
-    - type: Client::Game::StatusManager*
-      name: this
-    - type: unsigned __int16
-      name: statusId
-    - type: unsigned __int16
-      name: param
-    - type: __int64
-      name: u3
-  - signature: 83 FA 3C 73 ?? 53 48 83 EC 30 48 8B D9
-    return_type: void
-    name: RemoveStatus
-    parameters:
-    - type: Client::Game::StatusManager*
-      name: this
-    - type: int
-      name: statusIndex
-    - type: byte
-      name: u2
-  - signature: E8 ?? ?? ?? ?? FF C6 48 8D 5B 0C
-    return_type: byte
-    name: SetStatus
-    parameters:
-    - type: Client::Game::StatusManager*
-      name: this
-    - type: int
-      name: statusIndex
-    - type: unsigned __int16
-      name: statusId
-    - type: float
-      name: remaining
-    - type: unsigned __int16
-      name: param
-    - type: unsigned int
-      name: sourceId
-    - type: byte
-      name: refreshFlags
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 07 48 8B CF 48 8B 5D
-    return_type: byte
-    name: ExecuteStatusOff
-    parameters:
-    - type: unsigned int
-      name: statusId
-    - type: unsigned int
-      name: sourceId
+  member_functions: []
 - type: Client::Game::UI::CharaCardData::Data8Struct
   name: Data8Struct
   namespace: Client.Game.UI
@@ -43285,31 +43268,128 @@ structs:
     - type: Client::Game::SavedAppearanceManager*
       name: this
   member_functions: []
-- type: Client::Game::UI::Buddy::BuddyMember
-  name: BuddyMember
-  namespace: Client.Game.UI
+- type: Client::Game::StatusManager
+  name: StatusManager
+  namespace: Client.Game
   union: False
-  size: 1008
+  size: 992
   fields:
-  - type: unsigned int
-    name: EntityId
+  - type: Client::Game::Character::Character*
+    name: Owner
     offset: 0
-  - type: unsigned int
-    name: CurrentHealth
-    offset: 4
-  - type: unsigned int
-    name: MaxHealth
+  - type: Client::Game::Status
+    name: Status
     offset: 8
+    size: 60
+    is_string: False
   - type: byte
-    name: DataId
-    offset: 12
+    name: Flags
+    offset: 968
+    size: 7
+    is_string: False
+  - type: __int64
+    name: Unk3D0
+    offset: 976
   - type: byte
-    name: Synced
-    offset: 13
-  - type: Client::Game::StatusManager
-    name: StatusManager
-    offset: 16
-  member_functions: []
+    name: NumValidStatuses
+    offset: 984
+  - type: byte
+    name: ExtraFlags
+    offset: 985
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? C6 43 2D 00
+    return_type: byte
+    name: HasStatus
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: unsigned int
+      name: statusId
+    - type: unsigned int
+      name: sourceId
+  - signature: E8 ?? ?? ?? ?? 8B D8 0F 28 C6
+    return_type: int
+    name: GetStatusIndex
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: unsigned int
+      name: statusId
+    - type: unsigned int
+      name: sourceId
+  - signature: 83 FA 3C 72 04 0F 57 C0
+    return_type: float
+    name: GetRemainingTime
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: int
+      name: statusIndex
+  - signature: E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 19
+    return_type: unsigned int
+    name: GetStatusId
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: int
+      name: statusIndex
+  - signature: E8 ?? ?? ?? ?? 3B 44 24 28
+    return_type: unsigned int
+    name: GetSourceId
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: int
+      name: statusIndex
+  - signature: 66 85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 6C 24 ??
+    return_type: void
+    name: AddStatus
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: unsigned __int16
+      name: statusId
+    - type: unsigned __int16
+      name: param
+    - type: __int64
+      name: u3
+  - signature: 83 FA 3C 73 ?? 53 48 83 EC 30 48 8B D9
+    return_type: void
+    name: RemoveStatus
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: int
+      name: statusIndex
+    - type: byte
+      name: u2
+  - signature: E8 ?? ?? ?? ?? FF C6 48 8D 5B 0C
+    return_type: byte
+    name: SetStatus
+    parameters:
+    - type: Client::Game::StatusManager*
+      name: this
+    - type: int
+      name: statusIndex
+    - type: unsigned __int16
+      name: statusId
+    - type: float
+      name: remaining
+    - type: unsigned __int16
+      name: param
+    - type: Client::Game::Object::GameObjectId
+      name: sourceObject
+    - type: byte
+      name: refreshFlags
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 07 48 8B CF 48 8B 5D
+    return_type: byte
+    name: ExecuteStatusOff
+    parameters:
+    - type: unsigned int
+      name: statusId
+    - type: unsigned int
+      name: sourceId
 - type: Client::Game::UI::MarkerInfo
   name: MarkerInfo
   namespace: Client.Game.UI
@@ -49574,6 +49654,112 @@ structs:
       name: item
     - type: int*
       name: outItemCount
+- type: Client::UI::Agent::AgentMKDSupportJobList
+  name: AgentMKDSupportJobList
+  namespace: Client.UI.Agent
+  union: False
+  size: 40
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 40 53 48 83 EC ?? 0F B6 DA E8 ?? ?? ?? ?? 48 85 C0 74 ?? 38 58
+    return_type: void
+    name: ChangeSupportJob
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+    - type: byte
+      name: id
 - type: Client::UI::Agent::AgentMacro::MacroHistoryEvent
   name: MacroHistoryEvent
   namespace: Client.UI.Agent
@@ -54351,32 +54537,36 @@ structs:
     offset: 312
   - name: DecodeLowerHead
     offset: 320
-  - name: DecodeJaNoun
+  - name: DecodeSheetSub
     offset: 328
-  - name: DecodeEnNoun
+  - name: DecodeJaNoun
     offset: 336
-  - name: DecodeDeNoun
+  - name: DecodeEnNoun
     offset: 344
-  - name: DecodeFrNoun
+  - name: DecodeDeNoun
     offset: 352
-  - name: DecodeChNoun
+  - name: DecodeFrNoun
     offset: 360
-  - name: DecodeJosa
+  - name: DecodeChNoun
+    offset: 368
+  - name: DecodeKoNoun
     offset: 376
-  - name: DecodeJosaro
+  - name: DecodeJosa
     offset: 384
-  - name: DecodePcName
+  - name: DecodeJosaro
     offset: 392
-  - name: DecodeIfPcGender
+  - name: DecodePcName
     offset: 400
-  - name: DecodeIfPcName
+  - name: DecodeIfPcGender
     offset: 408
-  - name: DecodeIfSelf
+  - name: DecodeIfPcName
     offset: 416
-  - name: DecodeSound
+  - name: DecodeIfSelf
     offset: 424
-  - name: DecodeLevelPos
+  - name: DecodeSound
     offset: 432
+  - name: DecodeLevelPos
+    offset: 440
   member_functions: []
   static_members:
   - signature: 48 8D 1D ?? ?? ?? ?? 8B 43 20
@@ -55372,86 +55562,6 @@ structs:
     - 6
     is_pointer: True
     return_type: Client::Game::Fate::FateManager
-- type: Client::Game::Group::PartyMember
-  name: PartyMember
-  namespace: Client.Game.Group
-  union: False
-  size: 1168
-  fields:
-  - type: Client::Game::StatusManager
-    name: StatusManager
-    offset: 0
-  - type: float
-    name: X
-    offset: 992
-  - type: float
-    name: Y
-    offset: 996
-  - type: float
-    name: Z
-    offset: 1000
-  - type: unsigned __int64
-    name: AccountId
-    offset: 1008
-  - type: unsigned __int64
-    name: ContentId
-    offset: 1016
-  - type: unsigned int
-    name: EntityId
-    offset: 1024
-  - type: unsigned int
-    name: PetEntityId
-    offset: 1028
-  - type: unsigned int
-    name: CompanionEntityId
-    offset: 1032
-  - type: unsigned int
-    name: CurrentHP
-    offset: 1036
-  - type: unsigned int
-    name: MaxHP
-    offset: 1040
-  - type: unsigned __int16
-    name: CurrentMP
-    offset: 1044
-  - type: unsigned __int16
-    name: MaxMP
-    offset: 1046
-  - type: unsigned __int16
-    name: TerritoryType
-    offset: 1048
-  - type: unsigned __int16
-    name: HomeWorld
-    offset: 1050
-  - type: byte
-    name: Name
-    offset: 1052
-    size: 64
-    is_string: True
-  - type: Client::System::String::Utf8String*
-    name: NameOverride
-    offset: 1120
-  - type: byte
-    name: Sex
-    offset: 1128
-  - type: byte
-    name: ClassJob
-    offset: 1129
-  - type: byte
-    name: Level
-    offset: 1130
-  - type: byte
-    name: DamageShield
-    offset: 1131
-  - type: StdPair<unsigned int, unsigned int>
-    name: ContentKeyValueData
-    offset: 1132
-    size: 3
-    is_string: False
-  - type: byte
-    name: Flags
-    offset: 1156
-  member_functions: []
 - type: Client::Game::HousingWorkshopAirshipData
   name: HousingWorkshopAirshipData
   namespace: Client.Game
@@ -56153,6 +56263,31 @@ structs:
       name: a3
     - type: byte*
       name: a4
+  member_functions: []
+- type: Client::Game::UI::Buddy::BuddyMember
+  name: BuddyMember
+  namespace: Client.Game.UI
+  union: False
+  size: 1008
+  fields:
+  - type: unsigned int
+    name: EntityId
+    offset: 0
+  - type: unsigned int
+    name: CurrentHealth
+    offset: 4
+  - type: unsigned int
+    name: MaxHealth
+    offset: 8
+  - type: byte
+    name: DataId
+    offset: 12
+  - type: byte
+    name: Synced
+    offset: 13
+  - type: Client::Game::StatusManager
+    name: StatusManager
+    offset: 16
   member_functions: []
 - type: Client::Game::UI::ContentsFinderQueueInfo
   name: ContentsFinderQueueInfo
@@ -64771,112 +64906,86 @@ structs:
   - name: SetupClasses_2
     offset: 32
   member_functions: []
-- type: Client::Game::Group::GroupManager::Group
-  name: Group
+- type: Client::Game::Group::PartyMember
+  name: PartyMember
   namespace: Client.Game.Group
   union: False
-  size: 32752
+  size: 1168
   fields:
-  - type: Client::Game::Group::PartyMember
-    name: PartyMembers
+  - type: Client::Game::StatusManager
+    name: StatusManager
     offset: 0
-    size: 8
-    is_string: False
-  - type: Client::Game::Group::PartyMember
-    name: AllianceMembers
-    offset: 9344
-    size: 20
-    is_string: False
-  - type: __int64
-    name: PartyId
-    offset: 32712
-  - type: __int64
-    name: PartyId_2
-    offset: 32720
+  - type: float
+    name: X
+    offset: 992
+  - type: float
+    name: Y
+    offset: 996
+  - type: float
+    name: Z
+    offset: 1000
+  - type: unsigned __int64
+    name: AccountId
+    offset: 1008
+  - type: unsigned __int64
+    name: ContentId
+    offset: 1016
   - type: unsigned int
-    name: PartyLeaderIndex
-    offset: 32728
+    name: EntityId
+    offset: 1024
+  - type: unsigned int
+    name: PetEntityId
+    offset: 1028
+  - type: unsigned int
+    name: CompanionEntityId
+    offset: 1032
+  - type: unsigned int
+    name: CurrentHP
+    offset: 1036
+  - type: unsigned int
+    name: MaxHP
+    offset: 1040
+  - type: unsigned __int16
+    name: CurrentMP
+    offset: 1044
+  - type: unsigned __int16
+    name: MaxMP
+    offset: 1046
+  - type: unsigned __int16
+    name: TerritoryType
+    offset: 1048
+  - type: unsigned __int16
+    name: HomeWorld
+    offset: 1050
   - type: byte
-    name: MemberCount
-    offset: 32732
+    name: Name
+    offset: 1052
+    size: 64
+    is_string: True
+  - type: Client::System::String::Utf8String*
+    name: NameOverride
+    offset: 1120
   - type: byte
-    name: AllianceFlags
-    offset: 32737
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? B0 01 E9 ?? ?? ?? ?? E8
-    return_type: byte
-    name: IsEntityIdInParty
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: unsigned int
-      name: entityId
-  - signature: 33 C0 44 8B CA F6 81
-    return_type: byte
-    name: IsEntityIdInAlliance
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: unsigned int
-      name: entityId
-  - signature: 48 63 81 ?? ?? ?? ?? 85 C0 78 14
-    return_type: byte
-    name: IsEntityIdPartyLeader
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: unsigned int
-      name: entityId
-  - signature: E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 19 48 8B CB
-    return_type: byte
-    name: IsCharacterInPartyByName
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: byte*
-      name: name
-  - signature: 83 FA 14 72 03
-    return_type: Client::Game::Group::PartyMember*
-    name: GetAllianceMemberByIndex
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: int
-      name: index
-  - signature: F6 81 ?? ?? ?? ?? ?? 4C 8B C9 74 1E
-    return_type: Client::Game::Group::PartyMember*
-    name: GetAllianceMemberByGroupAndIndex
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: int
-      name: group
-    - type: int
-      name: index
-  - signature: 85 D2 78 19 0F B6 81
-    return_type: Client::Game::Group::PartyMember*
-    name: GetPartyMemberByIndex
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: int
-      name: index
-  - signature: E8 ?? ?? ?? ?? 48 8B D8 4C 8B 07
-    return_type: Client::Game::Group::PartyMember*
-    name: GetPartyMemberByContentId
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: unsigned __int64
-      name: contentId
-  - signature: E8 ?? ?? ?? ?? 83 FF 68
-    return_type: Client::Game::Group::PartyMember*
-    name: GetPartyMemberByEntityId
-    parameters:
-    - type: Client::Game::Group::GroupManager::Group*
-      name: this
-    - type: unsigned int
-      name: entityId
+    name: Sex
+    offset: 1128
+  - type: byte
+    name: ClassJob
+    offset: 1129
+  - type: byte
+    name: Level
+    offset: 1130
+  - type: byte
+    name: DamageShield
+    offset: 1131
+  - type: StdPair<unsigned int, unsigned int>
+    name: ContentKeyValueData
+    offset: 1132
+    size: 3
+    is_string: False
+  - type: byte
+    name: Flags
+    offset: 1156
+  member_functions: []
 - type: Client::Game::InstanceContent::DynamicEventContainer
   name: DynamicEventContainer
   namespace: Client.Game.InstanceContent
@@ -70732,6 +70841,112 @@ structs:
   - name: Dtor
     offset: 0
   member_functions: []
+- type: Client::Game::Group::GroupManager::Group
+  name: Group
+  namespace: Client.Game.Group
+  union: False
+  size: 32752
+  fields:
+  - type: Client::Game::Group::PartyMember
+    name: PartyMembers
+    offset: 0
+    size: 8
+    is_string: False
+  - type: Client::Game::Group::PartyMember
+    name: AllianceMembers
+    offset: 9344
+    size: 20
+    is_string: False
+  - type: __int64
+    name: PartyId
+    offset: 32712
+  - type: __int64
+    name: PartyId_2
+    offset: 32720
+  - type: unsigned int
+    name: PartyLeaderIndex
+    offset: 32728
+  - type: byte
+    name: MemberCount
+    offset: 32732
+  - type: byte
+    name: AllianceFlags
+    offset: 32737
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? B0 01 E9 ?? ?? ?? ?? E8
+    return_type: byte
+    name: IsEntityIdInParty
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: unsigned int
+      name: entityId
+  - signature: 33 C0 44 8B CA F6 81
+    return_type: byte
+    name: IsEntityIdInAlliance
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: unsigned int
+      name: entityId
+  - signature: 48 63 81 ?? ?? ?? ?? 85 C0 78 14
+    return_type: byte
+    name: IsEntityIdPartyLeader
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: unsigned int
+      name: entityId
+  - signature: E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 19 48 8B CB
+    return_type: byte
+    name: IsCharacterInPartyByName
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: byte*
+      name: name
+  - signature: 83 FA 14 72 03
+    return_type: Client::Game::Group::PartyMember*
+    name: GetAllianceMemberByIndex
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: int
+      name: index
+  - signature: F6 81 ?? ?? ?? ?? ?? 4C 8B C9 74 1E
+    return_type: Client::Game::Group::PartyMember*
+    name: GetAllianceMemberByGroupAndIndex
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: int
+      name: group
+    - type: int
+      name: index
+  - signature: 85 D2 78 19 0F B6 81
+    return_type: Client::Game::Group::PartyMember*
+    name: GetPartyMemberByIndex
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 48 8B D8 4C 8B 07
+    return_type: Client::Game::Group::PartyMember*
+    name: GetPartyMemberByContentId
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+  - signature: E8 ?? ?? ?? ?? 83 FF 68
+    return_type: Client::Game::Group::PartyMember*
+    name: GetPartyMemberByEntityId
+    parameters:
+    - type: Client::Game::Group::GroupManager::Group*
+      name: this
+    - type: unsigned int
+      name: entityId
 - type: Client::Game::IndoorTerritory
   name: IndoorTerritory
   namespace: Client.Game
@@ -77005,54 +77220,6 @@ structs:
     offset: 64
   virtual_functions: []
   member_functions: []
-- type: Client::Game::Group::GroupManager
-  name: GroupManager
-  namespace: Client.Game.Group
-  union: False
-  size: 65536
-  fields:
-  - type: Client::Game::Character::CharacterManagerInterface
-    name: CharacterManagerInterface
-    offset: 0
-    base: true
-  - type: Client::Game::Group::GroupManager::Group
-    name: MainGroup
-    offset: 32
-  - type: Client::Game::Group::GroupManager::Group
-    name: ReplayGroup
-    offset: 32784
-  virtual_functions:
-  - name: Dtor
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::Game::Group::GroupManager*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 0F B6 55 80
-    return_type: Client::Game::Group::GroupManager::Group*
-    name: GetGroup
-    parameters:
-    - type: Client::Game::Group::GroupManager*
-      name: this
-    - type: byte
-      name: replayGroup
-  - signature: E8 ?? ?? ?? ?? 8D 57 DD
-    return_type: Client::Game::Group::GroupManager::Group*
-    name: GetGroupWithCheck
-    parameters:
-    - type: Client::Game::Group::GroupManager*
-      name: this
-    - type: byte
-      name: replayGroup
-  static_members:
-  - signature: 33 D2 48 8D 0D ?? ?? ?? ?? 33 DB
-    relative_follow_offsets:
-    - 5
-    is_pointer: False
-    return_type: Client::Game::Group::GroupManager
 - type: Client::Game::LowCutCamera
   name: LowCutCamera
   namespace: Client.Game
@@ -77338,27 +77505,6 @@ structs:
     return_type: int
     name: GetNextLeveAllowancesTimestamp
     parameters: []
-- type: Client::Game::UI::Buddy
-  name: Buddy
-  namespace: Client.Game.UI
-  union: False
-  size: 9212
-  fields:
-  - type: Client::Game::UI::Buddy::BuddyMember
-    name: BattleBuddies
-    offset: 0
-    size: 9
-    is_string: False
-  - type: Client::Game::UI::CompanionInfo
-    name: CompanionInfo
-    offset: 9072
-  - type: Client::Game::UI::PetInfo
-    name: PetInfo
-    offset: 9152
-  - type: Client::Game::UI::DutyHelperInfo
-    name: DutyHelperInfo
-    offset: 9168
-  member_functions: []
 - type: Client::Game::UI::CharaCard
   name: CharaCard
   namespace: Client.Game.UI
@@ -80005,6 +80151,54 @@ structs:
     offset: 144
   virtual_functions: []
   member_functions: []
+- type: Client::Game::Group::GroupManager
+  name: GroupManager
+  namespace: Client.Game.Group
+  union: False
+  size: 65536
+  fields:
+  - type: Client::Game::Character::CharacterManagerInterface
+    name: CharacterManagerInterface
+    offset: 0
+    base: true
+  - type: Client::Game::Group::GroupManager::Group
+    name: MainGroup
+    offset: 32
+  - type: Client::Game::Group::GroupManager::Group
+    name: ReplayGroup
+    offset: 32784
+  virtual_functions:
+  - name: Dtor
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::Game::Group::GroupManager*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 0F B6 55 80
+    return_type: Client::Game::Group::GroupManager::Group*
+    name: GetGroup
+    parameters:
+    - type: Client::Game::Group::GroupManager*
+      name: this
+    - type: byte
+      name: replayGroup
+  - signature: E8 ?? ?? ?? ?? 8D 57 DD
+    return_type: Client::Game::Group::GroupManager::Group*
+    name: GetGroupWithCheck
+    parameters:
+    - type: Client::Game::Group::GroupManager*
+      name: this
+    - type: byte
+      name: replayGroup
+  static_members:
+  - signature: 33 D2 48 8D 0D ?? ?? ?? ?? 33 DB
+    relative_follow_offsets:
+    - 5
+    is_pointer: False
+    return_type: Client::Game::Group::GroupManager
 - type: Client::Game::LobbyCamera
   name: LobbyCamera
   namespace: Client.Game
@@ -80205,6 +80399,27 @@ structs:
     - 3
     is_pointer: True
     return_type: Client::Game::MJI::MJIManager
+- type: Client::Game::UI::Buddy
+  name: Buddy
+  namespace: Client.Game.UI
+  union: False
+  size: 9212
+  fields:
+  - type: Client::Game::UI::Buddy::BuddyMember
+    name: BattleBuddies
+    offset: 0
+    size: 9
+    is_string: False
+  - type: Client::Game::UI::CompanionInfo
+    name: CompanionInfo
+    offset: 9072
+  - type: Client::Game::UI::PetInfo
+    name: PetInfo
+    offset: 9152
+  - type: Client::Game::UI::DutyHelperInfo
+    name: DutyHelperInfo
+    offset: 9168
+  member_functions: []
 - type: Client::Graphics::Kernel::ShaderPackage
   name: ShaderPackage
   namespace: Client.Graphics.Kernel
@@ -129750,7 +129965,30 @@ structs:
   - type: Component::Text::TextModuleInterface::FixedSheetInterface*
     name: FixedSheetInterface
     offset: 1144
+  - type: byte
+    name: TempSheetCellString
+    offset: 1152
+    size: 64
+    is_string: False
   virtual_functions:
+  - name: FormatSheetValue
+    offset: 120
+    return_type: int
+    parameters:
+    - type: Component::Text::TextModule*
+      name: this
+    - type: Common::Component::Excel::ExcelSheet*
+      name: sheet
+    - type: int
+      name: rowId
+    - type: int
+      name: colIndex
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: localParameters
+    - type: Client::System::String::Utf8String*
+      name: output
+    - type: byte
+      name: isRowIndex
   - name: FormatString
     offset: 128
     return_type: byte
@@ -129880,7 +130118,7 @@ structs:
     offset: 1208
   virtual_functions:
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::Event::Director*
@@ -129958,9 +130196,9 @@ structs:
     - type: Client::Game::Event::Director*
       name: this
   - name: SetSequence
-    offset: 2328
-  - name: Synchronize
     offset: 2336
+  - name: Synchronize
+    offset: 2344
   member_functions: []
 - type: Client::UI::AddonAOZNotebook
   name: AddonAOZNotebook
@@ -135507,7 +135745,7 @@ structs:
     - type: Client::Game::Event::GoldSaucerDirector*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::Event::GoldSaucerDirector*
@@ -135606,7 +135844,7 @@ structs:
     - type: Client::Game::Fate::FateDirector*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::Fate::FateDirector*
@@ -135696,7 +135934,7 @@ structs:
     - type: Client::Game::MassivePcContent::MassivePcContentDirector*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::MassivePcContent::MassivePcContentDirector*
@@ -141284,7 +141522,7 @@ structs:
     - type: Client::Game::GoldSaucer::GFateDirector*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::GoldSaucer::GFateDirector*
@@ -143033,6 +143271,9 @@ structs:
     offset: 2392
     size: 9
     is_string: False
+  - type: Component::Excel::IExcelRowWrapper**
+    name: AddonRowCache
+    offset: 3352
   - type: Common::Component::Excel::ExcelSheet*
     name: AchievementSheet
     offset: 3608
@@ -143114,6 +143355,24 @@ structs:
       name: this
     - type: Component::Text::TextModuleInterface::FixedSheetInterface*
       name: a2
+  - name: FormatSheetValue
+    offset: 120
+    return_type: int
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Common::Component::Excel::ExcelSheet*
+      name: a2
+    - type: int
+      name: a3
+    - type: int
+      name: a4
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: a5
+    - type: Client::System::String::Utf8String*
+      name: a6
+    - type: byte
+      name: a7
   - name: FormatString
     offset: 128
     return_type: byte
@@ -143171,6 +143430,44 @@ structs:
       name: seconds
     - type: byte
       name: alternativeMinutesGlyph
+  - signature: E8 ?? ?? ?? ?? 44 8B E8 A8 10
+    return_type: Client::UI::Misc::RaptureTextModule::SheetRedirectFlags
+    name: ResolveSheetRedirect
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: sheetName
+    - type: int*
+      name: outRowId
+    - type: int*
+      name: outColIndex
+  - signature: E8 ?? ?? ?? ?? F6 87 ?? ?? ?? ?? ?? 74 67
+    return_type: void
+    name: AddSheetRedirectItemDecoration
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: sheetName
+    - type: Client::UI::Misc::RaptureTextModule::SheetRedirectFlags
+      name: flags
+    - type: int
+      name: rowId
+  - signature: E8 ?? ?? ?? ?? 48 8B 4D 80 48 8D 55 60
+    return_type: void
+    name: CreateSheetLink
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Common::Component::Excel::ExcelSheet*
+      name: sheet
+    - type: Client::System::String::Utf8String*
+      name: text
+    - type: int
+      name: rowId
+    - type: int
+      name: colParam
 - type: Common::Lua::GCObject
   name: GCObject
   namespace: Common.Lua
@@ -143297,7 +143594,7 @@ structs:
     - type: Client::Game::InstanceContent::ContentDirector*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::ContentDirector*
@@ -145823,7 +146120,7 @@ structs:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDirector*
@@ -145922,7 +146219,7 @@ structs:
     - type: Client::Game::InstanceContent::PublicContentDirector*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::PublicContentDirector*
@@ -156141,7 +156438,7 @@ structs:
     - type: Client::Game::InstanceContent::PublicContentEureka*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::PublicContentEureka*
@@ -159995,7 +160292,7 @@ structs:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentDeepDungeon*
@@ -160168,7 +160465,7 @@ structs:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::InstanceContentOceanFishing*
@@ -160720,7 +161017,7 @@ structs:
     - type: Client::Game::InstanceContent::PublicContentBozja*
       name: this
   - name: PopulateMapMarkers
-    offset: 2176
+    offset: 2184
     return_type: void
     parameters:
     - type: Client::Game::InstanceContent::PublicContentBozja*
@@ -160828,6 +161125,156 @@ structs:
     name: Gunbreaker
     offset: 0
   member_functions: []
+- type: Client::Game::InstanceContent::PublicContentOccultCrescent
+  name: PublicContentOccultCrescent
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 13256
+  fields:
+  - type: Client::Game::InstanceContent::PublicContentDirector
+    name: PublicContentDirector
+    offset: 0
+    base: true
+  - type: Client::Game::InstanceContent::OccultCrescentMKDData
+    name: MKDData
+    offset: 5080
+  - type: Client::Game::InstanceContent::DynamicEventContainer
+    name: DynamicEventContainer
+    offset: 5120
+  - type: Client::Game::InstanceContent::OccultCrescentState
+    name: State
+    offset: 12672
+  - type: byte
+    name: Unk31DA
+    offset: 12762
+  - type: byte
+    name: Unk31DB
+    offset: 12763
+  - type: unsigned int
+    name: Unk31DC
+    offset: 12764
+  - type: byte
+    name: Unk31E0
+    offset: 12768
+  - type: StdPair<unsigned int, unsigned int>*
+    name: Unk31E8
+    offset: 12776
+  - type: float
+    name: Unk31F0
+    offset: 12784
+  - type: Client::System::String::Utf8String
+    name: Strings
+    offset: 12792
+    size: 4
+    is_string: False
+  - type: byte
+    name: StateLoaded
+    offset: 13220
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetTitle
+    offset: 1600
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetDescription
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2048
+    return_type: byte
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetEventItemId
+    offset: 2064
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetObjectives
+    offset: 2088
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2120
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2184
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: a3
+  - name: GetContentTimeMax
+    offset: 2504
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 08 0F B6 CB
+    return_type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+    name: GetInstance
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 89 AD
+    return_type: Client::Game::InstanceContent::OccultCrescentMKDData*
+    name: GetMKDData
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 75 12
+    return_type: Client::Game::InstanceContent::OccultCrescentState*
+    name: GetState
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 8B 06 48 8B CE FF 50 ?? EB ?? 48 8B 06 48 8B CE C7 46
+    return_type: byte
+    name: ChangeSupportJob
+    parameters:
+    - type: byte
+      name: id
 - type: Client::Game::JobGaugeManager
   name: JobGaugeManager
   namespace: Client.Game
@@ -163267,7 +163714,7 @@ structs:
     offset: 102483
   - type: Client::System::String::Utf8String
     name: JournalDetailDescription
-    offset: 102600
+    offset: 102608
   member_functions:
   - signature: E8 ?? ?? ?? ?? 3C 01 74 23
     return_type: byte
