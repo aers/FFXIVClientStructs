@@ -6718,6 +6718,7 @@ classes:
       - ea: 0x1420388B8
     funcs:
       0x1405FD2B0: ctor
+      0x1405FD330: LoadTextureWithDefaultVersion
       0x1405FD350: LoadTexture # (this, texturePath, version)
       0x1405FD520: LoadIconTexture
       0x1405FD740: GetLoadState
