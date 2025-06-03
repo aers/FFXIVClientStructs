@@ -37,7 +37,7 @@ public unsafe partial struct AtkTexture : ICreatable {
 
     [VirtualFunction(0)]
     public partial void Destroy(bool free);
-    
+
     // Based on call from AtkImageNode_LoadTextureWithDefaultVersion
     [GenerateStringOverloads]
     public int LoadTextureWithDefaultVersion(CStringPointer path)
