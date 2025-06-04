@@ -59,6 +59,9 @@ public unsafe partial struct MobHunt {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 57 28 48 8D 0D")]
     public partial int GetAvailableHuntOrderRowId(byte markIndex);
 
+    [MemberFunction("4C 8B DC 49 89 53 ?? 53 41 55")]
+    public partial bool IsHuntTarget(Character.Character* chara);
+
     /// <param name="itemId">Mark Bill ItemId</param>
     /// <returns>MaxMarkIndex Value Indicates Not Found</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D0 48 8D 0D ?? ?? ?? ?? 44 0F B6 E8")]
