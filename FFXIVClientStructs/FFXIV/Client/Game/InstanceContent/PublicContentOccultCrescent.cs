@@ -37,6 +37,9 @@ public unsafe partial struct PublicContentOccultCrescent {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 75 12")]
     public static partial OccultCrescentState* GetState();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? BB ?? ?? ?? ?? EB ?? 41 0F B6 47")]
+    public static partial bool IsChainTarget(Character.Character* chara);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 06 48 8B CE FF 50 ?? EB ?? 48 8B 06 48 8B CE C7 46")]
     public static partial bool ChangeSupportJob(byte id);
 }

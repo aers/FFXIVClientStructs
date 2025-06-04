@@ -2749,6 +2749,7 @@ classes:
       0x1409F27A0: GetKillCount
       0x1409F26F0: GetObtainedHuntOrderRowId
       0x1409F2690: GetAvailableHuntOrderRowId
+      0x1409F2B90: IsHuntTarget
       0x1409F2F20: GetMarkIndexFromItemId
       0x1409F2F70: IsMarkBillUnlocked
   Client::Game::UI::WeatherForecast:
@@ -15434,6 +15435,7 @@ classes:
       0x1416606D0: GetInstance # static
       0x141660700: GetState # static
       0x141660750: GetMKDData # static
+      0x1416607A0: IsChainTarget # static
       0x1416608C0: ChangeSupportJob # static
       0x141661900: ctor
   Client::Game::InstanceContent::PublicContentSouthHorn:

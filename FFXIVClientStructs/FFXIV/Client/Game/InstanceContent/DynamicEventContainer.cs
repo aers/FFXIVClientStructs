@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 
@@ -11,15 +12,17 @@ public unsafe partial struct DynamicEventContainer {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray16<DynamicEvent> _events;
 
     [FieldOffset(0x1D78)] private float Unk1D78;
-    [FieldOffset(0x1D7C)] private ushort Unk1D7C;
+    [FieldOffset(0x1D7C)] public ushort CurrentEventId;
     [FieldOffset(0x1D7E)] public sbyte CurrentEventIndex;
+    [FieldOffset(0x1D7F)] private byte ContentMemberLimit; // ContentMemberType.Unknown3
 }
 
 // Client::Game::InstanceContent::DynamicEvent
 //   Common::Component::Excel::ExcelSheetWaiter
+[GenerateInterop]
+[Inherits<ExcelSheetWaiter>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 public unsafe partial struct DynamicEvent {
-    // [FieldOffset(0)] public ExcelSheetWaiter ExcelSheetWaiter;
     [FieldOffset(0x30 + 0x00), CExporterExcelBegin("DynamicEvent")] public uint NameOffset;
     [FieldOffset(0x30 + 0x04)] public uint DescriptionOffset;
     [FieldOffset(0x30 + 0x08)] public uint LGBEventObject;
@@ -43,18 +46,26 @@ public unsafe partial struct DynamicEvent {
     /// <remarks>RowId of DynamicEventSingleBattle Sheet</remarks>
     [FieldOffset(0x30 + 0x2B)] public byte SingleBattle;
     [FieldOffset(0x30 + 0x2C), CExporterExcelEnd] public byte Unknown8;
+
     [FieldOffset(0x60)] public int StartTimestamp;
     [FieldOffset(0x64)] public uint SecondsLeft;
     [FieldOffset(0x68)] public uint SecondsDuration;
+    [FieldOffset(0x6C)] private uint SecondsRegistrationTime;
+    [FieldOffset(0x70)] private uint SecondsWarmupTime;
+    [FieldOffset(0x74)] public ushort DynamicEventId;
+    [FieldOffset(0x76)] public byte DynamicEventType;
+    [FieldOffset(0x77)] private bool Unk77; // ?? true if DynamicEventContainer+0x1D7F (ContentMemberType.Unknown3) == MaxParticipants
     [FieldOffset(0x78)] public DynamicEventState State;
+    
     [FieldOffset(0x7A)] public byte Participants;
     [FieldOffset(0x7B)] public byte Progress;
-    // new 1 byte field at 0x70 in 7.1
+
     [FieldOffset(0x80)] public Utf8String Name;
     [FieldOffset(0xE8)] public Utf8String Description;
     [FieldOffset(0x150)] public uint IconObjective0;
     [FieldOffset(0x154)] public byte MaxParticipants2;
     [FieldOffset(0x170)] public MapMarkerData MapMarker;
+    [FieldOffset(0x1C0)] public DynamicEventContainer* EventContainer;
 }
 
 public enum DynamicEventState : byte {
