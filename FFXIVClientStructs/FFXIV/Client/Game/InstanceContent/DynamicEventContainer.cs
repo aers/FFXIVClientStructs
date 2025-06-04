@@ -9,6 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [StructLayout(LayoutKind.Explicit, Size = 0x1D80)]
 public unsafe partial struct DynamicEventContainer {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray16<DynamicEvent> _events;
+
+    [FieldOffset(0x1D78)] private float Unk1D78;
+    [FieldOffset(0x1D7C)] private ushort Unk1D7C;
+    [FieldOffset(0x1D7E)] public sbyte CurrentEventIndex;
 }
 
 // Client::Game::InstanceContent::DynamicEvent

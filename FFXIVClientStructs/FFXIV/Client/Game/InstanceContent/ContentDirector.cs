@@ -9,10 +9,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD88)]
-public partial struct ContentDirector {
+public unsafe partial struct ContentDirector {
     [FieldOffset(0x542)] public byte ContentTypeRowId;
 
     [FieldOffset(0x580)] public DutyActionManager DutyActionManager;
+    
+    [FieldOffset(0xCF0)] private DynamicEventContainer* DynamicEvents;
 
     [FieldOffset(0xD48)] public float ContentTimeLeft;
 
