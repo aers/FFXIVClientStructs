@@ -26,7 +26,7 @@ public unsafe partial struct PublicContentOccultCrescent {
 
     [FieldOffset(0x31F8), FixedSizeArray] internal FixedSizeArray4<Utf8String> _strings;
 
-    [FieldOffset(0x33A4)] public bool StateLoaded; // todo: make this a byte
+    [FieldOffset(0x33A5)] public bool StateLoaded;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 08 0F B6 CB")]
     public static partial PublicContentOccultCrescent* GetInstance();
@@ -61,9 +61,9 @@ public struct OccultCrescentState {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray13<uint> _supportJobExperience;
     [FieldOffset(0x34)] public uint CurrentKnowledge;
     [FieldOffset(0x38)] public uint NeededKnowledge;
-    [FieldOffset(0x3C)] private uint Unk8;
-    [FieldOffset(0x40)] private ushort Unk40;
-    [FieldOffset(0x42)] private ushort Unk42;
+    [FieldOffset(0x3C)] private uint NeededJobExperience;
+    [FieldOffset(0x40)] private ushort Silver;
+    [FieldOffset(0x42)] private ushort Gold;
     [FieldOffset(0x44), FixedSizeArray] internal FixedSizeArray13<byte> _supportJobLevels;
     [FieldOffset(0x51), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedTeleportBitmask; // for TelepotTown
     [FieldOffset(0x53)] public byte CurrentSupportJob; // MKDSupportJob RowId
