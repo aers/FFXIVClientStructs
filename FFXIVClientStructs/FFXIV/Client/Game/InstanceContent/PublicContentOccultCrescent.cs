@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //           Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<PublicContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x33C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x33A8)]
 public unsafe partial struct PublicContentOccultCrescent {
     [FieldOffset(0x13D8)] public OccultCrescentMKDData MKDData;
     [FieldOffset(0x1400)] public DynamicEventContainer DynamicEventContainer;
@@ -20,12 +20,13 @@ public unsafe partial struct PublicContentOccultCrescent {
     [FieldOffset(0x31DC)] private uint Unk31DC;
     [FieldOffset(0x31E0)] private byte Unk31E0;
 
-    [FieldOffset(0x31E8)] private StdPair<uint, uint>* Unk31E8; // array of 6
-    [FieldOffset(0x31F0)] private float Unk31F0; // some countdown
+    [FieldOffset(0x31E8)] private StdPair<uint, uint>* Unk31E8; // array of 6, <layout id, quest id>
+    [FieldOffset(0x31F0)] private float Unk31F0; // some countdown, re-check the colision and quest state
+    [FieldOffset(0x31F4)] private byte Unk31F4; // count for the array at 0x31E8
 
     [FieldOffset(0x31F8), FixedSizeArray] internal FixedSizeArray4<Utf8String> _strings;
 
-    [FieldOffset(0x33A4)] public bool StateLoaded;
+    [FieldOffset(0x33A4)] public bool StateLoaded; // todo: make this a byte
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 08 0F B6 CB")]
     public static partial PublicContentOccultCrescent* GetInstance();

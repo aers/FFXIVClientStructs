@@ -14260,7 +14260,7 @@ classes:
       314: GetContentTypeIconId
       324: SetExperience
     funcs:
-#fail       0x1409B3B80: ctor
+      0x140B38C30: ctor
       0x140B3A770: ApplyMapEffect
   Client::Game::InstanceContent::InstanceContentDirector:
     vtbls:
@@ -15435,6 +15435,12 @@ classes:
       0x141660700: GetState # static
       0x141660750: GetMKDData # static
       0x1416608C0: ChangeSupportJob # static
+      0x141661900: ctor
+  Client::Game::InstanceContent::PublicContentSouthHorn:
+    vtbls:
+      - ea: 0x142165400
+        base: Client::Game::InstanceContent::PublicContentOccultCrescent
+    funcs:
       0x141663120: ctor
   Client::Game::MassivePcContent::MassivePcContentDirector:
     vtbls:
