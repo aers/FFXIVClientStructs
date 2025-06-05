@@ -8108,13 +8108,13 @@ structs:
     name: NeededKnowledge
     offset: 56
   - type: unsigned int
-    name: Unk8
+    name: NeededJobExperience
     offset: 60
   - type: unsigned __int16
-    name: Unk40
+    name: Silver
     offset: 64
   - type: unsigned __int16
-    name: Unk42
+    name: Gold
     offset: 66
   - type: byte
     name: SupportJobLevels
@@ -27821,6 +27821,14 @@ structs:
       name: this
     - type: byte
       name: markIndex
+  - signature: 4C 8B DC 49 89 53 ?? 53 41 55
+    return_type: byte
+    name: IsHuntTarget
+    parameters:
+    - type: Client::Game::UI::MobHunt*
+      name: this
+    - type: Client::Game::Character::Character*
+      name: chara
   - signature: E8 ?? ?? ?? ?? 0F B6 D0 48 8D 0D ?? ?? ?? ?? 44 0F B6 E8
     return_type: int
     name: GetMarkIndexFromItemId
@@ -55546,8 +55554,22 @@ structs:
     offset: 168
   - type: byte
     name: FateJoined
-    offset: 172
+    offset: 175
   member_functions:
+  - signature: 48 8B 81 ?? ?? ?? ?? 4C 8B D2 4C 8B 89
+    return_type: byte
+    name: IsInFateRadius
+    parameters:
+    - type: Client::Game::Fate::FateManager*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: position
+  - signature: E8 ?? ?? ?? ?? 66 39 87
+    return_type: unsigned __int16
+    name: GetCurrentFateId
+    parameters:
+    - type: Client::Game::Fate::FateManager*
+      name: this
   - signature: E8 ?? ?? ?? ?? 48 85 C0 48 8D 4C 24 ?? 0F 95 C2
     return_type: Client::Game::Fate::FateContext*
     name: GetFateById
@@ -55556,6 +55578,16 @@ structs:
       name: this
     - type: unsigned __int16
       name: fateId
+  - signature: 40 53 48 83 EC ?? 48 8B 81 ?? ?? ?? ?? 49 8B D8
+    return_type: byte
+    name: TryGetFatePosition
+    parameters:
+    - type: Client::Game::Fate::FateManager*
+      name: this
+    - type: unsigned __int16
+      name: fateId
+    - type: System::Numerics::Vector3*
+      name: position
   static_members:
   - signature: 48 89 01 48 8B 3D ?? ?? ?? ?? 48 8B 87
     relative_follow_offsets:
@@ -55601,50 +55633,6 @@ structs:
     offset: 35968
     size: 5
     is_string: False
-  member_functions: []
-- type: Client::Game::InstanceContent::DynamicEvent
-  name: DynamicEvent
-  namespace: Client.Game.InstanceContent
-  union: False
-  size: 464
-  fields:
-  - type: Component::Exd::Sheets::DynamicEvent
-    name: DynamicEventSheet
-    offset: 48
-  - type: int
-    name: StartTimestamp
-    offset: 96
-  - type: unsigned int
-    name: SecondsLeft
-    offset: 100
-  - type: unsigned int
-    name: SecondsDuration
-    offset: 104
-  - type: Client::Game::InstanceContent::DynamicEventState
-    name: State
-    offset: 120
-  - type: byte
-    name: Participants
-    offset: 122
-  - type: byte
-    name: Progress
-    offset: 123
-  - type: Client::System::String::Utf8String
-    name: Name
-    offset: 128
-  - type: Client::System::String::Utf8String
-    name: Description
-    offset: 232
-  - type: unsigned int
-    name: IconObjective0
-    offset: 336
-  - type: byte
-    name: MaxParticipants2
-    offset: 340
-  - type: Client::Game::UI::MapMarkerData
-    name: MapMarker
-    offset: 368
-  virtual_functions: []
   member_functions: []
 - type: Client::Game::MJI::IslandState
   name: IslandState
@@ -63703,6 +63691,14 @@ structs:
       name: this
     - type: unsigned __int16
       name: id
+  - signature: E8 ?? ?? ?? ?? 48 3B E8 75 0E
+    return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonByNode
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkResNode*
+      name: node
 - type: Component::GUI::LinkData
   name: LinkData
   namespace: Component.GUI
@@ -64986,17 +64982,70 @@ structs:
     name: Flags
     offset: 1156
   member_functions: []
-- type: Client::Game::InstanceContent::DynamicEventContainer
-  name: DynamicEventContainer
+- type: Client::Game::InstanceContent::DynamicEvent
+  name: DynamicEvent
   namespace: Client.Game.InstanceContent
   union: False
-  size: 7552
+  size: 464
   fields:
-  - type: Client::Game::InstanceContent::DynamicEvent
-    name: Events
-    offset: 8
-    size: 16
-    is_string: False
+  - type: Common::Component::Excel::ExcelSheetWaiter
+    name: ExcelSheetWaiter
+    offset: 0
+    base: true
+  - type: Component::Exd::Sheets::DynamicEvent
+    name: DynamicEventSheet
+    offset: 48
+  - type: int
+    name: StartTimestamp
+    offset: 96
+  - type: unsigned int
+    name: SecondsLeft
+    offset: 100
+  - type: unsigned int
+    name: SecondsDuration
+    offset: 104
+  - type: unsigned int
+    name: SecondsRegistrationTime
+    offset: 108
+  - type: unsigned int
+    name: SecondsWarmupTime
+    offset: 112
+  - type: unsigned __int16
+    name: DynamicEventId
+    offset: 116
+  - type: byte
+    name: DynamicEventType
+    offset: 118
+  - type: byte
+    name: Unk77
+    offset: 119
+  - type: Client::Game::InstanceContent::DynamicEventState
+    name: State
+    offset: 120
+  - type: byte
+    name: Participants
+    offset: 122
+  - type: byte
+    name: Progress
+    offset: 123
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 128
+  - type: Client::System::String::Utf8String
+    name: Description
+    offset: 232
+  - type: unsigned int
+    name: IconObjective0
+    offset: 336
+  - type: byte
+    name: MaxParticipants2
+    offset: 340
+  - type: Client::Game::UI::MapMarkerData
+    name: MapMarker
+    offset: 368
+  - type: Client::Game::InstanceContent::DynamicEventContainer*
+    name: EventContainer
+    offset: 448
   virtual_functions: []
   member_functions: []
 - type: Client::Game::InventoryManager
@@ -70840,7 +70889,17 @@ structs:
   virtual_functions:
   - name: Dtor
     offset: 0
-  member_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B FA 49 8B F0 8B 91
+    return_type: byte
+    name: TryGetPositionAndRadius
+    parameters:
+    - type: Client::Game::Fate::FateContext*
+      name: this
+    - type: System::Numerics::Vector3*
+      name: position
+    - type: System::Numerics::Vector3*
+      name: radius
 - type: Client::Game::Group::GroupManager::Group
   name: Group
   namespace: Client.Game.Group
@@ -71002,6 +71061,42 @@ structs:
     - type: Client::Game::IndoorTerritory*
       name: this
   member_functions: []
+- type: Client::Game::InstanceContent::DynamicEventContainer
+  name: DynamicEventContainer
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 7552
+  fields:
+  - type: Client::Game::InstanceContent::DynamicEvent
+    name: Events
+    offset: 8
+    size: 16
+    is_string: False
+  - type: float
+    name: Unk1D78
+    offset: 7544
+  - type: unsigned __int16
+    name: CurrentEventId
+    offset: 7548
+  - type: __int8
+    name: CurrentEventIndex
+    offset: 7550
+  - type: byte
+    name: ContentMemberLimit
+    offset: 7551
+  virtual_functions: []
+  member_functions:
+  - signature: 48 0F BE 81 ?? ?? ?? ?? 48 8B D1 84 C0 79
+    return_type: Client::Game::InstanceContent::DynamicEvent*
+    name: GetCurrentEvent
+    parameters:
+    - type: Client::Game::InstanceContent::DynamicEventContainer*
+      name: this
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 74 ?? 0F B7 56
+    return_type: Client::Game::InstanceContent::DynamicEventContainer*
+    name: GetInstance
+    parameters: []
 - type: Client::Game::Object::GatheringPointObject
   name: GatheringPointObject
   namespace: Client.Game.Object
@@ -79641,6 +79736,12 @@ structs:
     name: AtkComponentButton
     offset: 0
     base: true
+  - type: unsigned __int16
+    name: GroupId
+    offset: 240
+  - type: byte
+    name: AlwaysFireButtonClickEvent
+    offset: 242
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -83054,128 +83155,6 @@ structs:
   - name: RaycastSimple
     offset: 240
   member_functions: []
-- type: Component::GUI::AtkComponentTab
-  name: AtkComponentTab
-  namespace: Component.GUI
-  union: False
-  size: 360
-  fields:
-  - type: Component::GUI::AtkComponentRadioButton
-    name: AtkComponentRadioButton
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Initialize
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-  - name: Deinitialize
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-  - name: Update
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-    - type: float
-      name: a2
-  - name: OnUldUpdate
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-  - name: Setup
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-  - name: SetEnabledState
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-    - type: byte
-      name: a2
-  - name: GetAtkResNode
-    offset: 112
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-  - name: GetFocusNode
-    offset: 120
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-  - name: InitializeFromComponentData
-    offset: 136
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
-    - type: __int64
-      name: a2
-  member_functions:
-  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 33 FF 48 8D 8B ?? ?? ?? ?? 48 89 03 89 BB ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C3
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Component::GUI::AtkComponentTab*
-      name: this
 - type: Component::GUI::AtkComponentTreeList
   name: AtkComponentTreeList
   namespace: Component.GUI
@@ -84700,6 +84679,137 @@ structs:
     size: 17
     is_string: False
   member_functions: []
+- type: Component::GUI::AtkComponentTab
+  name: AtkComponentTab
+  namespace: Component.GUI
+  union: False
+  size: 360
+  fields:
+  - type: Component::GUI::AtkComponentRadioButton
+    name: AtkComponentRadioButton
+    offset: 0
+    base: true
+  - type: Client::System::String::Utf8String
+    name: UnkString
+    offset: 248
+  - type: __int16
+    name: OwnerNodeWidth
+    offset: 352
+  - type: __int16
+    name: ButtonTextNodeX
+    offset: 354
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+    - type: byte
+      name: a2
+  - name: GetAtkResNode
+    offset: 112
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+  - name: GetFocusNode
+    offset: 120
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 33 FF 48 8D 8B ?? ?? ?? ?? 48 89 03 89 BB ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C3
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
 - type: Component::GUI::AtkEventDispatcher::Event
   name: Event
   namespace: Component.GUI
@@ -143515,6 +143625,9 @@ structs:
   - type: Client::Game::DutyActionManager
     name: DutyActionManager
     offset: 1408
+  - type: Client::Game::InstanceContent::DynamicEventContainer*
+    name: DynamicEvents
+    offset: 3312
   - type: float
     name: ContentTimeLeft
     offset: 3400
@@ -160928,6 +161041,79 @@ structs:
     - type: byte
       name: a3
   member_functions: []
+- type: Client::Game::JobGaugeManager::Gauge
+  name: Gauge
+  namespace: Client::Game::JobGaugeManager
+  union: True
+  size: 80
+  fields:
+  - type: Client::Game::Gauge::JobGauge
+    name: EmptyGauge
+    offset: 0
+  - type: Client::Game::Gauge::WhiteMageGauge
+    name: WhiteMage
+    offset: 0
+  - type: Client::Game::Gauge::ScholarGauge
+    name: Scholar
+    offset: 0
+  - type: Client::Game::Gauge::AstrologianGauge
+    name: Astrologian
+    offset: 0
+  - type: Client::Game::Gauge::SageGauge
+    name: Sage
+    offset: 0
+  - type: Client::Game::Gauge::BardGauge
+    name: Bard
+    offset: 0
+  - type: Client::Game::Gauge::MachinistGauge
+    name: Machinist
+    offset: 0
+  - type: Client::Game::Gauge::DancerGauge
+    name: Dancer
+    offset: 0
+  - type: Client::Game::Gauge::BlackMageGauge
+    name: BlackMage
+    offset: 0
+  - type: Client::Game::Gauge::SummonerGauge
+    name: Summoner
+    offset: 0
+  - type: Client::Game::Gauge::RedMageGauge
+    name: RedMage
+    offset: 0
+  - type: Client::Game::Gauge::PictomancerGauge
+    name: Pictomancer
+    offset: 0
+  - type: Client::Game::Gauge::MonkGauge
+    name: Monk
+    offset: 0
+  - type: Client::Game::Gauge::DragoonGauge
+    name: Dragoon
+    offset: 0
+  - type: Client::Game::Gauge::NinjaGauge
+    name: Ninja
+    offset: 0
+  - type: Client::Game::Gauge::SamuraiGauge
+    name: Samurai
+    offset: 0
+  - type: Client::Game::Gauge::ReaperGauge
+    name: Reaper
+    offset: 0
+  - type: Client::Game::Gauge::ViperGauge
+    name: Viper
+    offset: 0
+  - type: Client::Game::Gauge::DarkKnightGauge
+    name: DarkKnight
+    offset: 0
+  - type: Client::Game::Gauge::PaladinGauge
+    name: Paladin
+    offset: 0
+  - type: Client::Game::Gauge::WarriorGauge
+    name: Warrior
+    offset: 0
+  - type: Client::Game::Gauge::GunbreakerGauge
+    name: Gunbreaker
+    offset: 0
+  member_functions: []
 - type: Client::Game::InstanceContent::PublicContentBozja
   name: PublicContentBozja
   namespace: Client.Game.InstanceContent
@@ -161052,229 +161238,6 @@ structs:
     return_type: Client::Game::InstanceContent::BozjaState*
     name: GetState
     parameters: []
-- type: Client::Game::JobGaugeManager::Gauge
-  name: Gauge
-  namespace: Client::Game::JobGaugeManager
-  union: True
-  size: 80
-  fields:
-  - type: Client::Game::Gauge::JobGauge
-    name: EmptyGauge
-    offset: 0
-  - type: Client::Game::Gauge::WhiteMageGauge
-    name: WhiteMage
-    offset: 0
-  - type: Client::Game::Gauge::ScholarGauge
-    name: Scholar
-    offset: 0
-  - type: Client::Game::Gauge::AstrologianGauge
-    name: Astrologian
-    offset: 0
-  - type: Client::Game::Gauge::SageGauge
-    name: Sage
-    offset: 0
-  - type: Client::Game::Gauge::BardGauge
-    name: Bard
-    offset: 0
-  - type: Client::Game::Gauge::MachinistGauge
-    name: Machinist
-    offset: 0
-  - type: Client::Game::Gauge::DancerGauge
-    name: Dancer
-    offset: 0
-  - type: Client::Game::Gauge::BlackMageGauge
-    name: BlackMage
-    offset: 0
-  - type: Client::Game::Gauge::SummonerGauge
-    name: Summoner
-    offset: 0
-  - type: Client::Game::Gauge::RedMageGauge
-    name: RedMage
-    offset: 0
-  - type: Client::Game::Gauge::PictomancerGauge
-    name: Pictomancer
-    offset: 0
-  - type: Client::Game::Gauge::MonkGauge
-    name: Monk
-    offset: 0
-  - type: Client::Game::Gauge::DragoonGauge
-    name: Dragoon
-    offset: 0
-  - type: Client::Game::Gauge::NinjaGauge
-    name: Ninja
-    offset: 0
-  - type: Client::Game::Gauge::SamuraiGauge
-    name: Samurai
-    offset: 0
-  - type: Client::Game::Gauge::ReaperGauge
-    name: Reaper
-    offset: 0
-  - type: Client::Game::Gauge::ViperGauge
-    name: Viper
-    offset: 0
-  - type: Client::Game::Gauge::DarkKnightGauge
-    name: DarkKnight
-    offset: 0
-  - type: Client::Game::Gauge::PaladinGauge
-    name: Paladin
-    offset: 0
-  - type: Client::Game::Gauge::WarriorGauge
-    name: Warrior
-    offset: 0
-  - type: Client::Game::Gauge::GunbreakerGauge
-    name: Gunbreaker
-    offset: 0
-  member_functions: []
-- type: Client::Game::InstanceContent::PublicContentOccultCrescent
-  name: PublicContentOccultCrescent
-  namespace: Client.Game.InstanceContent
-  union: False
-  size: 13256
-  fields:
-  - type: Client::Game::InstanceContent::PublicContentDirector
-    name: PublicContentDirector
-    offset: 0
-    base: true
-  - type: Client::Game::InstanceContent::OccultCrescentMKDData
-    name: MKDData
-    offset: 5080
-  - type: Client::Game::InstanceContent::DynamicEventContainer
-    name: DynamicEventContainer
-    offset: 5120
-  - type: Client::Game::InstanceContent::OccultCrescentState
-    name: State
-    offset: 12672
-  - type: byte
-    name: Unk31DA
-    offset: 12762
-  - type: byte
-    name: Unk31DB
-    offset: 12763
-  - type: unsigned int
-    name: Unk31DC
-    offset: 12764
-  - type: byte
-    name: Unk31E0
-    offset: 12768
-  - type: StdPair<unsigned int, unsigned int>*
-    name: Unk31E8
-    offset: 12776
-  - type: float
-    name: Unk31F0
-    offset: 12784
-  - type: Client::System::String::Utf8String
-    name: Strings
-    offset: 12792
-    size: 4
-    is_string: False
-  - type: byte
-    name: StateLoaded
-    offset: 13220
-  virtual_functions:
-  - name: CancelInteraction
-    offset: 1232
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-  - name: GetTitle
-    offset: 1600
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetEventId
-    offset: 1616
-    return_type: Client::Game::Event::EventId
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-  - name: GetDescription
-    offset: 2024
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetReliefText
-    offset: 2032
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: a2
-  - name: GetTimeRemaining
-    offset: 2040
-    return_type: int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-    - type: int
-      name: a2
-  - name: HasTimer
-    offset: 2048
-    return_type: byte
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-  - name: GetEventItemId
-    offset: 2064
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-  - name: GetObjectives
-    offset: 2088
-    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-  - name: GetRecommendedLevel
-    offset: 2120
-    return_type: int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-  - name: PopulateMapMarkers
-    offset: 2184
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-    - type: unsigned __int16
-      name: a2
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: a3
-  - name: GetContentTimeMax
-    offset: 2504
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-      name: this
-  member_functions: []
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 08 0F B6 CB
-    return_type: Client::Game::InstanceContent::PublicContentOccultCrescent*
-    name: GetInstance
-    parameters: []
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 89 AD
-    return_type: Client::Game::InstanceContent::OccultCrescentMKDData*
-    name: GetMKDData
-    parameters: []
-  - signature: E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 75 12
-    return_type: Client::Game::InstanceContent::OccultCrescentState*
-    name: GetState
-    parameters: []
-  - signature: E8 ?? ?? ?? ?? 48 8B 06 48 8B CE FF 50 ?? EB ?? 48 8B 06 48 8B CE C7 46
-    return_type: byte
-    name: ChangeSupportJob
-    parameters:
-    - type: byte
-      name: id
 - type: Client::Game::JobGaugeManager
   name: JobGaugeManager
   namespace: Client.Game
@@ -161443,6 +161406,165 @@ structs:
     return_type: byte
     name: CanLeaveCurrentContent
     parameters: []
+- type: Client::Game::InstanceContent::PublicContentOccultCrescent
+  name: PublicContentOccultCrescent
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 13224
+  fields:
+  - type: Client::Game::InstanceContent::PublicContentDirector
+    name: PublicContentDirector
+    offset: 0
+    base: true
+  - type: Client::Game::InstanceContent::OccultCrescentMKDData
+    name: MKDData
+    offset: 5080
+  - type: Client::Game::InstanceContent::DynamicEventContainer
+    name: DynamicEventContainer
+    offset: 5120
+  - type: Client::Game::InstanceContent::OccultCrescentState
+    name: State
+    offset: 12672
+  - type: byte
+    name: Unk31DA
+    offset: 12762
+  - type: byte
+    name: Unk31DB
+    offset: 12763
+  - type: unsigned int
+    name: Unk31DC
+    offset: 12764
+  - type: byte
+    name: Unk31E0
+    offset: 12768
+  - type: StdPair<unsigned int, unsigned int>*
+    name: Unk31E8
+    offset: 12776
+  - type: float
+    name: Unk31F0
+    offset: 12784
+  - type: byte
+    name: Unk31F4
+    offset: 12788
+  - type: Client::System::String::Utf8String
+    name: Strings
+    offset: 12792
+    size: 4
+    is_string: False
+  - type: byte
+    name: StateLoaded
+    offset: 13221
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1232
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetTitle
+    offset: 1600
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetEventId
+    offset: 1616
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetDescription
+    offset: 2024
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetReliefText
+    offset: 2032
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: a2
+  - name: GetTimeRemaining
+    offset: 2040
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: int
+      name: a2
+  - name: HasTimer
+    offset: 2048
+    return_type: byte
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetEventItemId
+    offset: 2064
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetObjectives
+    offset: 2088
+    return_type: StdVector<Client::Game::Event::EventHandlerObjective>*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: GetRecommendedLevel
+    offset: 2120
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2184
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: a3
+  - name: GetContentTimeMax
+    offset: 2504
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+      name: this
+  member_functions: []
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 08 0F B6 CB
+    return_type: Client::Game::InstanceContent::PublicContentOccultCrescent*
+    name: GetInstance
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 89 AD
+    return_type: Client::Game::InstanceContent::OccultCrescentMKDData*
+    name: GetMKDData
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 75 12
+    return_type: Client::Game::InstanceContent::OccultCrescentState*
+    name: GetState
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? BB ?? ?? ?? ?? EB ?? 41 0F B6 47
+    return_type: byte
+    name: IsChainTarget
+    parameters:
+    - type: Client::Game::Character::Character*
+      name: chara
+  - signature: E8 ?? ?? ?? ?? 48 8B 06 48 8B CE FF 50 ?? EB ?? 48 8B 06 48 8B CE C7 46
+    return_type: byte
+    name: ChangeSupportJob
+    parameters:
+    - type: byte
+      name: id
 - type: Client::Game::GameMain
   name: GameMain
   namespace: Client.Game
