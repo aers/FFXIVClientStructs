@@ -1,3 +1,4 @@
+using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
@@ -18,6 +19,15 @@ public unsafe partial struct FateManager {
     [FieldOffset(0xA8)] public ushort SyncedFateId;
     [FieldOffset(0xAF)] public byte FateJoined;
 
+    [MemberFunction("48 8B 81 ?? ?? ?? ?? 4C 8B D2 4C 8B 89")]
+    public partial bool IsInFateRadius(Vector3* position);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 39 87")]
+    public partial ushort GetCurrentFateId();
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 48 8D 4C 24 ?? 0F 95 C2")]
     public partial FateContext* GetFateById(ushort fateId);
+
+    [MemberFunction("40 53 48 83 EC ?? 48 8B 81 ?? ?? ?? ?? 49 8B D8")]
+    public partial bool TryGetFatePosition(ushort fateId, Vector3* position);
 }

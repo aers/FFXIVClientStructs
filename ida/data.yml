@@ -1316,11 +1316,14 @@ classes:
     funcs:
       0x14164CFE0: HasInstance
       0x14164D000: GetInstance
-#fail       0x1415B6430: ctor
-#fail       0x1415B64E0: Dtor
-      0x14164E180: Initialize
+      0x14164D010: Initialize
+      0x14164D170: Dtor
+      0x14164E180: ctor
       0x14164E290: Finalizer
-#fail       0x1415B9B10: GetFateById
+      0x141650390: IsInFateRadius
+      0x141650940: GetCurrentFateId
+      0x141650960: GetFateById
+      0x1416509E0: TryGetFatePosition
   Client::Game::BattleBuddyList:
     funcs:
       0x1409D8450: GetMemberBattleCharaByIndex
@@ -17746,6 +17749,7 @@ classes:
     funcs:
       0x14164A9E0: ctor
       0x14164B340: Finalizer
+      0x14164A4C0: TryGetPositionAndRadius
   Client::UI::AddonLotteryDaily:
     vtbls:
       - ea: 0x14214C948
