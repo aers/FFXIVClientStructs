@@ -61,13 +61,13 @@ public struct OccultCrescentState {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray13<uint> _supportJobExperience;
     [FieldOffset(0x34)] public uint CurrentKnowledge;
     [FieldOffset(0x38)] public uint NeededKnowledge;
-    [FieldOffset(0x3C)] private uint NeededJobExperience;
-    [FieldOffset(0x40)] private ushort Silver;
-    [FieldOffset(0x42)] private ushort Gold;
+    [FieldOffset(0x3C)] public uint NeededJobExperience;
+    [FieldOffset(0x40)] public ushort Silver;
+    [FieldOffset(0x42)] public ushort Gold;
     [FieldOffset(0x44), FixedSizeArray] internal FixedSizeArray13<byte> _supportJobLevels;
     [FieldOffset(0x51), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedTeleportBitmask; // for TelepotTown
     [FieldOffset(0x53)] public byte CurrentSupportJob; // MKDSupportJob RowId
-    [FieldOffset(0x54)] private byte Unk54;
+    [FieldOffset(0x54)] public byte KnowledgeLevelSync;
     [FieldOffset(0x55)] private byte Unk55;
     [FieldOffset(0x56)] private byte Unk56; // related to Sanguine Cipher item count, cur?
     [FieldOffset(0x57)] private byte Unk57; // related to Sanguine Cipher item count, max?
