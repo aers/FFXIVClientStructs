@@ -31,7 +31,7 @@ public unsafe partial struct SoftKeyboardDeviceInterface {
     public partial bool IsSoftKeyboardOpen();
 
     // Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
-    [GenerateInterop]
+    [GenerateInterop(true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public unsafe partial struct SoftKeyboardInputInterface {
         // CAUTION: May be the concrete class' dtor!
