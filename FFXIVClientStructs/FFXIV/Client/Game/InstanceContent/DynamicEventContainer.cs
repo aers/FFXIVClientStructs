@@ -15,6 +15,12 @@ public unsafe partial struct DynamicEventContainer {
     [FieldOffset(0x1D7C)] public ushort CurrentEventId;
     [FieldOffset(0x1D7E)] public sbyte CurrentEventIndex;
     [FieldOffset(0x1D7F)] private byte ContentMemberLimit; // ContentMemberType.Unknown3
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B E8 48 85 C0 74 ?? 0F B7 56")]
+    public static partial DynamicEventContainer* GetInstance();
+
+    [MemberFunction("48 0F BE 81 ?? ?? ?? ?? 48 8B D1 84 C0 79")]
+    public partial DynamicEvent* GetCurrentEvent();
 }
 
 // Client::Game::InstanceContent::DynamicEvent

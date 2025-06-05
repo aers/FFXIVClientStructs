@@ -15390,6 +15390,8 @@ classes:
         base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     funcs:
       0x141654460: ctor
+      0x141653970: GetInstance # static
+      0x141653CD0: GetCurrentEvent
   Client::Game::InstanceContent::DynamicEvent:
     vtbls:
       - ea: 0x14228C958
