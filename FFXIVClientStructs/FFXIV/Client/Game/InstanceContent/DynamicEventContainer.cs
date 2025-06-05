@@ -56,7 +56,7 @@ public unsafe partial struct DynamicEvent {
     [FieldOffset(0x76)] public byte DynamicEventType;
     [FieldOffset(0x77)] private bool Unk77; // ?? true if DynamicEventContainer+0x1D7F (ContentMemberType.Unknown3) == MaxParticipants
     [FieldOffset(0x78)] public DynamicEventState State;
-    
+
     [FieldOffset(0x7A)] public byte Participants;
     [FieldOffset(0x7B)] public byte Progress;
 
