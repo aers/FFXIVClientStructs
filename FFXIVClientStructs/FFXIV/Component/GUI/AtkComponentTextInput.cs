@@ -15,13 +15,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentInputBase>]
 [Inherits<AtkTextInput.AtkTextInputEventInterface>]
+[Inherits<SoftKeyboardDeviceInterface.SoftKeyboardInputInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
 public unsafe partial struct AtkComponentTextInput : ICreatable {
-    [FieldOffset(0x1E8)] public SoftKeyboardDeviceInterface.SoftKeyboardInputInterface SoftKeyboardInputInterface; // implemented by class
+    // [FieldOffset(0x1E8)] public SoftKeyboardDeviceInterface.SoftKeyboardInputInterface SoftKeyboardInputInterface; // implemented by class
 
-    [FieldOffset(0x250)] public uint MaxTextLength;
-    [FieldOffset(0x254)] public uint MaxTextLength2; // no idea when one of these are used over the other
-
+    [FieldOffset(0x1F0)] public AtkUldComponentDataTextInput ComponentTextData;
     [FieldOffset(0x26C)] public ushort InputSanitizationFlags; // passed to SanitizeString
 
     [FieldOffset(0x280)] public Utf8String UnkText01;
