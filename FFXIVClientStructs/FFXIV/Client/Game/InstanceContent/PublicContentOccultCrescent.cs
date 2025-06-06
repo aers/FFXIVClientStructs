@@ -67,10 +67,14 @@ public struct OccultCrescentState {
     [FieldOffset(0x44), FixedSizeArray] internal FixedSizeArray13<byte> _supportJobLevels;
     [FieldOffset(0x51), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedTeleportBitmask; // for TelepotTown
     [FieldOffset(0x53)] public byte CurrentSupportJob; // MKDSupportJob RowId
+    [Obsolete("Renamed AveragePartyKnowledgeLevel")]
     [FieldOffset(0x54)] public byte KnowledgeLevelSync;
-    [FieldOffset(0x55)] private byte Unk55;
-    [FieldOffset(0x56)] private byte Unk56; // related to Sanguine Cipher item count, cur?
-    [FieldOffset(0x57)] private byte Unk57; // related to Sanguine Cipher item count, max?
-    [FieldOffset(0x58)] private byte Unk58;
-    [FieldOffset(0x59)] private byte Unk59; // flags
+    [FieldOffset(0x54)] public byte AveragePartyKnowledgeLevel;
+    [FieldOffset(0x55)] public byte SyncedKnowledgeLevel; // 0 if unsynced
+    [FieldOffset(0x56)] public byte Cipher;
+    [FieldOffset(0x57)] public byte CiphersOfferedForEntry;
+    [FieldOffset(0x58)] public byte TowerEntryParticipants;
+    // 0x1 = Balanced Party
+    [FieldOffset(0x59)] private byte Flags; // flags
 }
+

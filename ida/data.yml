@@ -17910,6 +17910,17 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415D95E0: ctor
+  Client::UI::AddonMKDInfo:
+    vtbls:
+      - ea: 0x14210BDB0
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14140DFF0: ctor
+  Client::UI::ButtonOperationGuideManager:
+    vtbls:
+      - ea: 0x142094AB0
+    funcs:
+      0x141038E40: ctor
   Client::Game::Object::EventObject:
     vtbls:
       - ea: 0x142152258

@@ -57,6 +57,7 @@ public unsafe partial struct InfoProxyCommonList {
         //12 bytes
         /// <summary>
         /// Extra flags for status:
+        /// 0x1 = is party leader
         /// 0x10 = ? always set when accepted friend request
         /// 0x20 = WaitingForFriendListApproval
         /// 0x10000->0x70000 = DisplayGroup.Star -> DisplayGroup.Club
