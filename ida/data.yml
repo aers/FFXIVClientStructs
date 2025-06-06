@@ -130,7 +130,6 @@ functions:
 #fail   0x1403297E0: GetGlobalTextParameter
   0x1406A4E50: std::vector<Component::GUI::AtkValue>_SetSize
   0x140D5C190: GetGameObjectByIndex
-  0x14070EAF0: GetLayoutInstance
   0x140914BC0: GetRandomInteger
   0x140914C20: GetRandomFloat
   0x1404D8360: UpdateAnimFactor
@@ -7591,16 +7590,19 @@ classes:
       0x1406C2C90: CreateSingleton
       0x1406C3CC0: LoadPrefetchLayout
       0x1406C4070: UnloadManagerLayout
-      0x1406C6BE0: GetLayoutInstance
+      0x1406C6BE0: GetLayoutInstance2
+      0x1406C6C60: GetColliderLayoutInstance2
       0x1406C7790: AddRsvString
       0x1406C7A30: UnloadRsvMap
       0x1406C7B80: ResolveRsvString
       0x1406C7C80: AddRsfEntry
       0x1406C7FB0: ResolveRsfEntry
       0x14070E300: UnloadPrefetchLayout
-      0x14070E370: ActiveLayoutReady
-      0x14070E3A0: ActiveLayoutStreamed
-      0x14070E7D0: ActiveLayoutHousingReady
+      0x14070E370: ActiveLayoutReady # static
+      0x14070E3A0: ActiveLayoutStreamed # static
+      0x14070E7D0: ActiveLayoutHousingReady # static
+      0x14070EAF0: GetLayoutInstance # static
+      0x14070EC30: GetColliderLayoutInstance # static
   Client::LayoutEngine::LayoutManager:
     vtbls:
       - ea: 0x14203C990
