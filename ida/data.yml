@@ -15406,6 +15406,7 @@ classes:
     funcs:
       0x141954230: ctor
       0x1419543C0: Finalizer
+      0x141953500: IsActive
   Client::Game::InstanceContent::PublicContentBozja:
     vtbls:
       - ea: 0x14215F2D8

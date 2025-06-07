@@ -72,6 +72,9 @@ public unsafe partial struct DynamicEvent {
     [FieldOffset(0x154)] public byte MaxParticipants2;
     [FieldOffset(0x170)] public MapMarkerData MapMarker;
     [FieldOffset(0x1C0)] public DynamicEventContainer* EventContainer;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 44 0F B7 03")]
+    public partial bool IsActive();
 }
 
 public enum DynamicEventState : byte {
