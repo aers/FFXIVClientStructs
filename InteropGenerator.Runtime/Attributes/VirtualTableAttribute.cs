@@ -10,9 +10,11 @@ namespace InteropGenerator.Runtime.Attributes;
 ///     After resolving signature, offset by this amount and follow the 32-bit relative
 ///     address found there. Repeats for each entry.
 /// </param>
+/// <param name="functionCount">Optional count of functions in the virtual table. Used to set the size of the table struct.</param>
 [AttributeUsage(AttributeTargets.Struct)]
-public sealed class VirtualTableAttribute(string signature, ushort[] relativeFollowOffsets) : Attribute {
-    public VirtualTableAttribute(string signature, ushort relativeFollowOffset) : this(signature, [relativeFollowOffset]) { }
+public sealed class VirtualTableAttribute(string signature, ushort[] relativeFollowOffsets, uint functionCount = 0) : Attribute {
+    public VirtualTableAttribute(string signature, ushort relativeFollowOffset, uint functionCount = 0) : this(signature, [relativeFollowOffset], functionCount) { }
     public string Signature { get; } = signature;
     public ushort[] RelativeFollowOffsets { get; } = relativeFollowOffsets;
+    public uint FunctionCount { get; } = functionCount;
 }

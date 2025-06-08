@@ -11,6 +11,7 @@ internal sealed record StructInfo(
     EquatableArray<StaticAddressInfo> StaticAddresses,
     EquatableArray<StringOverloadInfo> StringOverloads,
     SignatureInfo? StaticVirtualTableSignature,
+    uint? VirtualTableFunctionCount,
     EquatableArray<FixedSizeArrayInfo> FixedSizeArrays,
     EquatableArray<InheritanceInfo> InheritedStructs,
     int? Size,

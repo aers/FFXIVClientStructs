@@ -8,7 +8,7 @@ namespace InteropGenerator.Diagnostics.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class StaticAddressAttributeIsValidAnalyzer() : MethodAttributeIsValidAnalyzerBase(InteropTypeNames.StaticAddressAttribute, [StaticAddressMethodMustNotHaveParameters, StaticAddressMethodMustBeStatic, StaticAddressMethodReturnMustBePointer]) {
 
-    protected override void ValidateSpecific(SymbolAnalysisContext context, IMethodSymbol methodSymbol, MethodDeclarationSyntax methodSyntax) {
+    protected override void ValidateSpecific(SymbolAnalysisContext context, IMethodSymbol methodSymbol, MethodDeclarationSyntax methodSyntax, AttributeData attributeData) {
         if (!methodSymbol.Parameters.IsEmpty) {
             context.ReportDiagnostic(Diagnostic.Create(
                 StaticAddressMethodMustNotHaveParameters,
