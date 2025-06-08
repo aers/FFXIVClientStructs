@@ -15,3 +15,16 @@ public unsafe partial struct AtkTextureResourceManager {
     [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray4<StdPair<uint, uint>> _localizedIconRange;
     [FieldOffset(0x50)] public uint LocalizedIconRangeCount;
 }
+
+public enum IconSubFolder {
+    None,
+    HighQuality,         // "hq/"
+    Japanese,            // "ja/"
+    English,             // "en/"
+    German,              // "de/"
+    French,              // "fr/"
+    ChineseSimplified,   // "chs/"
+    ChineseTraditional,  // "cht/"
+    Korean,              // "ko/"
+    ChineseTraditional2, // "tc/"
+}
