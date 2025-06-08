@@ -220,10 +220,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     }
 
     [MemberFunction("E9 ?? ?? ?? ?? 83 C3 F9")]
-    public partial byte FireCallbackInt(int callbackValue);
+    public partial byte FireCallbackInt(int callbackValue); // TODO: return bool
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 E8 8B 44 24 20")]
-    public partial void FireCallback(uint valueCount, AtkValue* values, bool close = false);
+    public partial void FireCallback(uint valueCount, AtkValue* values, bool close = false); // TODO: return bool
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 88 45 67")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
