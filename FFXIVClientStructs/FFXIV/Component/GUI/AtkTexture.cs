@@ -21,7 +21,7 @@ public unsafe partial struct AtkTexture : ICreatable {
     public partial int LoadIconTexture(uint iconId, int version = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 2F 48 8B 83"), GenerateStringOverloads]
-    public partial int LoadTexture(CStringPointer path, int version = 1);
+    public partial int LoadTexture(CStringPointer path, int scale = 1);
 
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 10 02")]
     public partial int ReleaseTexture();
@@ -38,10 +38,10 @@ public unsafe partial struct AtkTexture : ICreatable {
     [VirtualFunction(0)]
     public partial void Destroy(bool free);
 
-    // Based on call from AtkImageNode_LoadTextureWithDefaultVersion
+    // Based on call from AtkImageNode.LoadTextureWithDefaultVersion
     [GenerateStringOverloads]
     public int LoadTextureWithDefaultVersion(CStringPointer path)
-        => LoadTexture(path, AtkStage.Instance()->AtkTextureResourceManager->DefaultTextureVersion);
+        => LoadTexture(path, AtkStage.Instance()->AtkTextureResourceManager->DefaultTextureScale);
 }
 
 public enum TextureType : byte {
