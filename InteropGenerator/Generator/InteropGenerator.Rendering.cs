@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using InteropGenerator.Extensions;
 using InteropGenerator.Helpers;
 using InteropGenerator.Models;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace InteropGenerator.Generator;
 
@@ -127,13 +128,21 @@ public sealed partial class InteropGenerator {
         return $"""public static readonly global::InteropGenerator.Runtime.Address {signatureName} = new global::InteropGenerator.Runtime.Address("{structInfo.FullyQualifiedMetadataName}.{signatureName}", "{paddedSignature}", {offsets}, {ulongArraySignature}, {ulongArrayMask}, 0);""";
     }
 
+    private static string ObsoleteAttributeForVirtualFunc(VirtualFunctionInfo vfi) {
+        var oi = vfi.MethodInfo.ObsoleteInfo;
+        if (oi is not null) {
+            return $"[global::System.ObsoleteAttribute({SymbolDisplay.FormatLiteral(oi.Message, true)}, {oi.IsError.ToLowercaseString()})]";
+        }
+        return "";
+    }
+
     private static void RenderVirtualTable(StructInfo structInfo, IndentedTextWriter writer) {
         writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
         writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
         using (writer.WriteBlock()) {
             foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
                 var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{vfi.MethodInfo.ReturnType}>";
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] {ObsoleteAttributeForVirtualFunc(vfi)} public {functionPointerType} {vfi.MethodInfo.Name};");
             }
         }
         writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");

@@ -90,6 +90,9 @@ public class Exporter {
                 .ToArray();
             _processType.Clear();
             foreach (var @struct in tmp) {
+                if (@struct.Type.FullName == "FFXIVClientStructs.FFXIV.Component.GUI.AtkComponentBase") {
+                    Console.WriteLine("ATKCB!!");
+                }
                 ProcessType(@struct, quiet);
             }
 
@@ -219,6 +222,9 @@ public class Exporter {
         foreach (var c in def.classes) {
             if (c.Value == null || (c.Value.vfuncs == null || c.Value.vfuncs.Count == 0) && (c.Value.vtbls == null || c.Value.vtbls.Count == 0)) continue;
             var s = _structs.Find(s => s.StructTypeName == c.Key);
+            if (c.Key == "Component::GUI::AtkComponentBase") {
+                Console.WriteLine("Component::GUI::AtkComponentBase");
+            }
             if (s == null) continue;
             s.VirtualFunctions ??= [];
             if (c.Value.vfuncs == null) continue;
@@ -473,6 +479,9 @@ public class Exporter {
             var vtable = type.GetField("VirtualTable", ExporterStatics.BindingFlags)?.FieldType;
             ProcessedVirtualFunction[]? virtualFunctions = null;
             if (vtable != null) {
+                if (vtable.FullName == "FFXIVClientStructs.FFXIV.Component.GUI.AtkComponentButton+AtkComponentButtonVirtualTable*") {
+                    Console.WriteLine($"Checking vtbl {vtable.FullName}");
+                }
                 vtable = vtable.GetElementType()!;
                 var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => Tuple.Create(t.Name, t.GetParameters(), t.ReturnType)).ToArray();
                 virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => {
@@ -928,6 +937,9 @@ public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
     public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
     public void WriteYaml(IEmitter emitter, object? value, Type type) {
         if (value is not ProcessedVirtualFunction v) return;
+        if (v.VirtualFunctionName == "OnUldUpdate") {
+            Console.WriteLine("OnUldUpdate");
+        }
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("name"));
         emitter.Emit(new Scalar(v.VirtualFunctionName));
