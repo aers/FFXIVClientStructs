@@ -19,6 +19,22 @@ public class VirtualFunctionAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
+    
+    [Fact]
+    public async Task TargetMethodIsValidVirtualTable_NoWarn() {
+        const string code = """
+                            [GenerateInterop]
+                            [VirtualTable("AA BB CC DD ?? ??", 5, 3)]
+                            public partial struct TestStruct
+                            {
+                                [VirtualFunction(2)]
+                                public partial int TestFunction();
+                                
+                                public partial int TestFunction() => 0;
+                            }
+                            """;
+        await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
 
     [Fact]
     public async Task TargetMethodMustBePartial_Warn() {
@@ -73,6 +89,22 @@ public class VirtualFunctionAttributeIsValidAnalyzerTests {
                                 public static partial bool TestFunction();|}
                                 
                                 {|CSIG0107:public static partial bool TestFunction() { return true; }|}
+                            }
+                            """;
+        await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
+    }
+    
+    [Fact]
+    public async Task TargetMethodVirtualTableIndexOutOfBounds_Warn() {
+        const string code = """
+                            [GenerateInterop]
+                            [VirtualTable("AA BB CC DD ?? ??", 5, 3)]
+                            public partial struct TestStruct
+                            {
+                                {|CSIG0110:[VirtualFunction(5)]
+                                public partial int TestFunction();|}
+                                
+                                {|CSIG0110:public partial int TestFunction() => 0;|}
                             }
                             """;
         await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);

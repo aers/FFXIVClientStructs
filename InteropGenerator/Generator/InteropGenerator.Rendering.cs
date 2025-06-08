@@ -128,7 +128,11 @@ public sealed partial class InteropGenerator {
     }
 
     private static void RenderVirtualTable(StructInfo structInfo, IndentedTextWriter writer) {
-        writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
+        if (structInfo.VirtualTableFunctionCount is not null) {
+            writer.WriteLine($"[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size = {structInfo.VirtualTableFunctionCount * 8})]");
+        } else {
+            writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
+        }
         writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
         using (writer.WriteBlock()) {
             foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {

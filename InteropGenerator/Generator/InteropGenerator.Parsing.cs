@@ -32,6 +32,7 @@ public sealed partial class InteropGenerator {
 
         // other struct attributes
         SignatureInfo? virtualTableSignatureInfo = null;
+        uint? virtualTableFunctionCount = null;
         if (structSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.VirtualTableAttribute, out AttributeData? virtualTableAttribute)) {
             if (virtualTableAttribute.TryGetConstructorArgument(0, out string? signature)) {
                 if (virtualTableAttribute.ConstructorArguments[1].Kind == TypedConstantKind.Array &&
@@ -41,6 +42,9 @@ public sealed partial class InteropGenerator {
                     ImmutableArray<ushort> values = [singleOffset.Value];
                     virtualTableSignatureInfo = new SignatureInfo(signature, values);
                 }
+            }
+            if (virtualTableAttribute.TryGetConstructorArgument(2, out uint? functionCount)) {
+                virtualTableFunctionCount = functionCount == 0 ? null : functionCount;
             }
         }
 
@@ -95,6 +99,7 @@ public sealed partial class InteropGenerator {
             staticAddresses,
             stringOverloads,
             virtualTableSignatureInfo,
+            virtualTableFunctionCount,
             fixedSizeArrays,
             inheritanceInfoBuilder.ToImmutable(),
             structSize,

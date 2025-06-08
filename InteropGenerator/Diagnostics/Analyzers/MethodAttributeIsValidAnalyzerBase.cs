@@ -28,7 +28,7 @@ public abstract class MethodAttributeIsValidAnalyzerBase(
                 if (symbolContext.Symbol is not IMethodSymbol methodSymbol)
                     return;
 
-                if (!methodSymbol.HasAttributeWithType(attributeSymbol))
+                if (!methodSymbol.TryGetAttributeWithType(attributeSymbol, out AttributeData? attributeData))
                     return;
 
                 // validate method is partial
@@ -65,11 +65,11 @@ public abstract class MethodAttributeIsValidAnalyzerBase(
                         methodSymbol.ReturnType.Name));
                 }
 
-                ValidateSpecific(symbolContext, methodSymbol, methodSyntax);
+                ValidateSpecific(symbolContext, methodSymbol, methodSyntax, attributeData);
             },
                 SymbolKind.Method);
         });
     }
 
-    protected abstract void ValidateSpecific(SymbolAnalysisContext context, IMethodSymbol methodSymbol, MethodDeclarationSyntax methodSyntax);
+    protected abstract void ValidateSpecific(SymbolAnalysisContext context, IMethodSymbol methodSymbol, MethodDeclarationSyntax methodSyntax, AttributeData attributeData);
 }

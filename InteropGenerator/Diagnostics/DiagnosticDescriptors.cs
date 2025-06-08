@@ -158,6 +158,16 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for string overload generation has a StringIgnore attribute on an invalid target parameter."
     );
+    
+    public static readonly DiagnosticDescriptor VirtualFunctionIndexOutOfBounds = new(
+        "CSIG0110",
+        "The VirtualFunction attribute index is out of the bounds defined by the VirtualTable attribute",
+        "The VirtualFunction attribute on method {0} has index {1}, which is out of the bounds of {2} defined by the VirtualTable attribute",
+        "InteropGenerator.Method",
+        DiagnosticSeverity.Error,
+        true,
+        "A method marked for virtual function generation has an out of bounds index."
+    );
 
     public static readonly DiagnosticDescriptor SignatureContainsInvalidCharacters = new(
         "CSIG0201",
