@@ -72,8 +72,8 @@ public class VirtualTableAttributeTests {
             ("TestStruct.InteropGenerator.g.cs", result),
             SourceGeneration.GetInitializerSource(string.Empty, "TestStruct", ["StaticVirtualTable"]));
     }
-    
-        [Fact]
+
+    [Fact]
     public async Task GenerateStaticVirtualTableWithSize() {
         const string code = """
                             [global::System.Runtime.InteropServices.StructLayout(global::System.Runtime.InteropServices.LayoutKind.Explicit)]

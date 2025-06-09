@@ -158,7 +158,7 @@ internal static class DiagnosticDescriptors {
         true,
         "A method marked for string overload generation has a StringIgnore attribute on an invalid target parameter."
     );
-    
+
     public static readonly DiagnosticDescriptor VirtualFunctionIndexOutOfBounds = new(
         "CSIG0110",
         "The VirtualFunction attribute index is out of the bounds defined by the VirtualTable attribute",

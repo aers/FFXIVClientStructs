@@ -16,7 +16,7 @@ public sealed class VirtualFunctionAttributeIsValidAnalyzer() : MethodAttributeI
                 methodSyntax.GetLocation(),
                 methodSymbol.Name));
         }
-        
+
         // get the attribute symbol
         if (context.Compilation.GetTypeByMetadataName(InteropTypeNames.VirtualTableAttribute) is not { } virtualTableAttribute)
             return;

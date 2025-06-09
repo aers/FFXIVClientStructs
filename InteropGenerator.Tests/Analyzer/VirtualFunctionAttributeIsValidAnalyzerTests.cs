@@ -19,7 +19,7 @@ public class VirtualFunctionAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodIsValidVirtualTable_NoWarn() {
         const string code = """
@@ -93,7 +93,7 @@ public class VirtualFunctionAttributeIsValidAnalyzerTests {
                             """;
         await AnalyzerVerifier<VirtualFunctionAttributeIsValidAnalyzer>.VerifyAnalyzerAsync(code);
     }
-    
+
     [Fact]
     public async Task TargetMethodVirtualTableIndexOutOfBounds_Warn() {
         const string code = """
