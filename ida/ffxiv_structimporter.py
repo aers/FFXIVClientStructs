@@ -909,6 +909,7 @@ if api is None:
                 
                 if struct.vtable_size:
                     vt_size = struct.vtable_size
+                    vt_type.setLength(vt_size)
                 else:
                     vt_size = struct.virtual_functions[-1].offset
                 for offset in range(0, vt_size, 8):
