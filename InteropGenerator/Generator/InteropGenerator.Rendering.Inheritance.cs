@@ -194,7 +194,7 @@ public sealed partial class InteropGenerator {
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
                     var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingType()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
-                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
+                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] {ObsoleteAttributeForVirtualFunc(virtualFunctionInfo)} public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
                 }
             }
         }
@@ -226,7 +226,7 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             if (methodInfo.ObsoleteInfo is not null) {
-                writer.WriteLine($"""[global::System.ObsoleteAttribute("{methodInfo.ObsoleteInfo.Message}", {methodInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
+                writer.WriteLine(ObsoleteAttributeForVirtualFunc(virtualFunctionInfo));
             }
             // function in table - call via table
             if (offset == 0) {
