@@ -471,6 +471,7 @@ public class Exporter {
             if (!type.IsStruct() || type.IsEnum) return null;
             if (type.IsInStructList(_structs) || (overrideType?.IsInStructList(_structs) ?? false)) return null;
             var vtable = type.GetField("VirtualTable", ExporterStatics.BindingFlags)?.FieldType;
+            var vtableSize = 0;
             ProcessedVirtualFunction[]? virtualFunctions = null;
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
@@ -487,6 +488,7 @@ public class Exporter {
                         VirtualFunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => ProcessVirtualParameter(p, i, memberFunction?.Item2)).ToArray()
                     };
                 }).ToArray();
+                vtableSize = vtable.StructLayoutAttribute?.Size ?? vtableSize;
             }
 
             var memberFunctionClass = type.GetMember("MemberFunctionPointers", ExporterStatics.BindingFlags).FirstOrDefault()?.DeclaringType;
@@ -544,6 +546,7 @@ public class Exporter {
                             StructNamespace = type.FullSanitizeName() + (attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Union}" : ""),
                             StructTypeName = type.FullSanitizeName() + $"{ExporterStatics.Separator}{attr.Union}{(attr.IsStruct ? $"{ExporterStatics.Separator}{attr.Struct}" : "")}",
                             StructSize = 0,
+                            VirtualFunctionSize = 0,
                             Fields = [
                                 ProcessField(unionField, unionStartField.GetFieldOffset())
                             ],
@@ -588,6 +591,7 @@ public class Exporter {
                 StructNamespace = type.GetNamespace(),
                 StructTypeName = overrideType ?? type.FullSanitizeName(),
                 StructSize = type.SizeOf(),
+                VirtualFunctionSize = vtableSize,
                 Fields = ProcessFields(fields),
                 VirtualFunctions = virtualFunctions,
                 MemberFunctions = memberFunctionsArray,
@@ -686,6 +690,7 @@ public class ProcessedStruct {
     public required string StructNamespace;
     public required int StructSize;
     public required ProcessedField[] Fields;
+    public required int VirtualFunctionSize;
     public ProcessedVirtualFunction[]? VirtualFunctions; // null if there are no virtual functions, empty if there's a vtable with unknown contents
     public required ProcessedMemberFunction[] MemberFunctions;
     public ProcessedMemberFunction[]? StaticMemberFunctions;
@@ -863,6 +868,10 @@ public class ProcessedStructConverter : IYamlTypeConverter {
             ProcessedFieldConverter.Instance.WriteYaml(emitter, field, field.GetType());
         }
         emitter.Emit(new SequenceEnd());
+        if (s.VirtualFunctionSize != 0) {
+            emitter.Emit(new Scalar("vtable_size"));
+            emitter.Emit(new Scalar(s.VirtualFunctionSize.ToString()));
+        }
         if (s.VirtualFunctions != null) {
             emitter.Emit(new Scalar("virtual_functions"));
             emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));

@@ -85,16 +85,18 @@ class DefinedStruct(DefinedBase, object):
         namespace,
         fields,
         size,
+        vtable_size,
         virtual_functions,
         member_functions,
         union,
         static_member_functions,
         static_members,
     ):
-        # type: (str, str, str, list[DefinedField], int | None, list[DefinedVFunc] | None, list[DefinedMemFunc], str, list[DefinedMemFunc] | None, list[DefinedStaticMember] | None) -> None
+        # type: (str, str, str, list[DefinedField], int | None, int | None, list[DefinedVFunc] | None, list[DefinedMemFunc], str, list[DefinedMemFunc] | None, list[DefinedStaticMember] | None) -> None
         super(DefinedStruct, self).__init__(name, type, namespace)
         self.fields = fields
         self.size = size
+        self.vtable_size = vtable_size
         self.virtual_functions = virtual_functions
         self.member_functions = member_functions
         self.union = bool(union)

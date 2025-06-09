@@ -223,36 +223,27 @@ class BaseApi:
                             sm["is_pointer"] if "is_pointer" in sm else False,
                         )
                     )
+            size = None
             if "size" in struct:
-                structs.append(
-                    DefinedStruct(
-                        struct["name"],
-                        struct["type"],
-                        struct["namespace"],
-                        fields,
-                        struct["size"],
-                        virtual_functions,
-                        member_functions,
-                        struct["union"],
-                        static_member_functions,
-                        static_members,
-                    )
+                size = struct["size"]
+            vtable_size = None
+            if "vtable_size" in struct:
+                vtable_size = struct["vtable_size"]
+            structs.append(
+                DefinedStruct(
+                    struct["name"],
+                    struct["type"],
+                    struct["namespace"],
+                    fields,
+                    size,
+                    vtable_size,
+                    virtual_functions,
+                    member_functions,
+                    struct["union"],
+                    static_member_functions,
+                    static_members,
                 )
-            else:
-                structs.append(
-                    DefinedStruct(
-                        struct["name"],
-                        struct["type"],
-                        struct["namespace"],
-                        fields,
-                        None,
-                        virtual_functions,
-                        member_functions,
-                        struct["union"],
-                        static_member_functions,
-                        static_members,
-                    )
-                )
+            )
         return DefinedExport(enums, structs)
 
 
@@ -490,7 +481,10 @@ if api is None:
                     self.set_struct_member_info(
                         s, meminfo, 0, self.get_tinfo_from_type(field_type), 0
                     )
-                size = int(self.get_struct_size(s) / 8)
+                if struct.vtable_size:
+                    size = int(struct.vtable_size / 8)
+                else:
+                    size = int(self.get_struct_size(s) / 8)
                 for i in range(size):
                     if self.get_struct_member_id(s, i * 8) == idc.BADADDR:
                         self.create_struct_member(
@@ -912,8 +906,12 @@ if api is None:
                                 func.name,
                                 "vf{0}".format(func.offset / 8),
                             )
-
-                for offset in range(struct.virtual_functions[-1].offset):
+                
+                if struct.vtable_size:
+                    vt_size = struct.vtable_size
+                else:
+                    vt_size = struct.virtual_functions[-1].offset
+                for offset in range(0, vt_size, 8):
                     dtc = vt_type.getComponentContaining(offset)
                     if not dtc or Undefined.isUndefined(dtc.getDataType()):
                         vt_type.replaceAtOffset(
