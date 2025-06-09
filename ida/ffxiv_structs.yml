@@ -8130,7 +8130,7 @@ structs:
     name: CurrentSupportJob
     offset: 83
   - type: byte
-    name: Unk54
+    name: KnowledgeLevelSync
     offset: 84
   - type: byte
     name: Unk55
@@ -24399,6 +24399,21 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::UI::Agent::AgentMKDLoreBook::LoreEntry>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::AgentMKDLoreBook::LoreEntry*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::AgentMKDLoreBook::LoreEntry*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::AgentMKDLoreBook::LoreEntry*
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::UI::Agent::AgentMacro::TextCommandEntry>
   name: StdVector`1
   namespace: ''
@@ -34523,6 +34538,28 @@ structs:
   - type: Client::UI::Agent::AgentMJINekomimiRequest::ItemFlags
     name: Flags
     offset: 124
+  member_functions: []
+- type: Client::UI::Agent::AgentMKDLoreBook::LoreEntry
+  name: LoreEntry
+  namespace: Client.UI.Agent
+  union: False
+  size: 248
+  fields:
+  - type: byte
+    name: Id
+    offset: 0
+  - type: Component::Exd::Sheets::MKDLore
+    name: MKDLoreSheet
+    offset: 4
+  - type: Client::System::String::Utf8String
+    name: Name
+    offset: 32
+  - type: Client::System::String::Utf8String
+    name: Description
+    offset: 136
+  - type: byte
+    name: Flags
+    offset: 240
   member_functions: []
 - type: Client::UI::Agent::AgentMacro::TextCommandEntry
   name: TextCommandEntry
@@ -49662,6 +49699,236 @@ structs:
       name: item
     - type: int*
       name: outItemCount
+- type: Client::UI::Agent::AgentMKDInfo
+  name: AgentMKDInfo
+  namespace: Client.UI.Agent
+  union: False
+  size: 48
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: byte
+    name: QuestComplete
+    offset: 40
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 40 53 48 83 EC ?? 48 8B D9 0F B6 CA E8 ?? ?? ?? ?? 84 C0
+    return_type: void
+    name: SyncKnowledgeLevel
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: byte
+      name: level
+  - signature: 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 3D
+    return_type: void
+    name: OpenMapForDynamicEvent
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: unsigned int
+      name: dynamicEventId
+- type: Client::UI::Agent::AgentMKDSupportJob
+  name: AgentMKDSupportJob
+  namespace: Client.UI.Agent
+  union: False
+  size: 56
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: SelectedAction
+    offset: 40
+  - type: unsigned int
+    name: SelectedActionIcon
+    offset: 44
+  - type: byte
+    name: CurrentJob
+    offset: 48
+  - type: byte
+    name: DefaultAction
+    offset: 49
+  - type: byte
+    name: ActionHiddenFlags
+    offset: 50
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
 - type: Client::UI::Agent::AgentMKDSupportJobList
   name: AgentMKDSupportJobList
   namespace: Client.UI.Agent
@@ -59137,6 +59404,110 @@ structs:
       name: currentTabIndex
     - type: byte*
       name: currentSlotIndex
+- type: Client::UI::Agent::AgentMKDLoreBook
+  name: AgentMKDLoreBook
+  namespace: Client.UI.Agent
+  union: False
+  size: 232
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: StdVector<Client::UI::Agent::AgentMKDLoreBook::LoreEntry>
+    name: LoreEntries
+    offset: 200
+  - type: byte
+    name: SelectedLoreId
+    offset: 225
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
 - type: Client::UI::Agent::AgentMaterialize
   name: AgentMaterialize
   namespace: Client.UI.Agent
@@ -65047,7 +65418,13 @@ structs:
     name: EventContainer
     offset: 448
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 44 0F B7 03
+    return_type: byte
+    name: IsActive
+    parameters:
+    - type: Client::Game::InstanceContent::DynamicEvent*
+      name: this
 - type: Client::Game::InventoryManager
   name: InventoryManager
   namespace: Client.Game
