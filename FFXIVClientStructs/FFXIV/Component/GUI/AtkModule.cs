@@ -14,6 +14,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkModuleInterface>, Inherits<AtkExternalInterface>, Inherits<TextServiceEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x82A0)]
 public unsafe partial struct AtkModule {
+    public delegate AtkValue* CallbackHandlerDelegate(AtkModule* thisPtr, AtkValue* returnValue, AtkValue* values, uint valueCount);
+
     [FieldOffset(0x20)] public ExcelSheet* AddonSheet;
 
     [FieldOffset(0x128)] public AtkStage* AtkStage;
@@ -30,7 +32,7 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x5C50)] public AtkUIColorHolder AtkUIColorHolder;
 
     [FieldOffset(0x5D00)] public AtkFontCodeModule AtkFontCodeModule;
-    [FieldOffset(0x7280)] internal StdVector<nint> CallbackHandlerFunctions;
+    [FieldOffset(0x7280)] public StdVector<nint> CallbackHandlerFunctions; // see CallbackHandlerDelegate
     //[FieldOffset(0x72A0)] internal StdMap<?,?> AgentAddonMapping; // maybe?
 
     [FieldOffset(0x72B0)] public AtkMessageBoxManager* AtkMessageBoxManager;
@@ -56,4 +58,8 @@ public unsafe partial struct AtkModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3")]
     public partial bool IsTextInputActive();
+
+    // CallbackHandlerFunctions[2]
+    [MemberFunction("40 56 48 83 EC 50 C7 02")]
+    public partial AtkValue* UnitBaseCallbackHandler(AtkValue* returnValue, AtkValue* values, uint valueCount);
 }

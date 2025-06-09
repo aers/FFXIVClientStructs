@@ -7321,6 +7321,7 @@ classes:
       0x14066A6A0: HandleInput
       0x14066AAB0: IsTextInputActive
       0x14066A930: SetUIScene
+      0x140667920: UnitBaseCallbackHandler # 2
       0x140667E90: SubscribeAtkArrayDataHandler # 5
       0x140667F30: UnsubscribeAtkArrayDataHandler # 6
       0x1400D3F90: PlaySoundEffectHandler # 21
