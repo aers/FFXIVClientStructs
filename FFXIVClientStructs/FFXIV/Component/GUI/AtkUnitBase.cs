@@ -67,7 +67,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <summary>
     /// <code>
     /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)<br/>
-    /// 0b0000_0100 [0x4] = Disable "Close" option in title bar context menu
+    /// 0b0000_0100 [0x4] = Disable "Close" option in title bar context menu and prevents window from being closed via input (ESC or similar)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A1)] public byte Flags1A1;
