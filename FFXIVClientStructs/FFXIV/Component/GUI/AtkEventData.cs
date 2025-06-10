@@ -6,6 +6,7 @@ public unsafe partial struct AtkEventData {
     [FieldOffset(0x00)] public AtkMouseData MouseData;
     [FieldOffset(0x00)] public AtkInputData InputData;
     [FieldOffset(0x00)] public AtkFocusData FocusData;
+    [FieldOffset(0x00)] public AtkValueData ValueData;
     [FieldOffset(0x00)] public AtkListItemData ListItemData;
     [FieldOffset(0x00)] public AtkDragDropData DragDropData;
     [FieldOffset(0x00)] public LinkData* LinkData;
@@ -55,6 +56,12 @@ public partial struct AtkEventData {
     public unsafe struct AtkFocusData {
         [FieldOffset(0x00)] public AtkResNode* ResNode;
         [FieldOffset(0x08)] public AtkCollisionNode* CollisionNode;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public unsafe struct AtkValueData {
+        [FieldOffset(0x00)] public int LastValue;
+        [FieldOffset(0x04)] public int NewValue;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
