@@ -59,6 +59,14 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0x124), FixedSizeArray] internal FixedSizeArray24<uint> _blueMageActions;
     [FieldOffset(0x184), FixedSizeArray] internal FixedSizeArray80<RecastDetail> _cooldowns;
 
+    // used for some actions that are only conditionally usable, corresponding timer is set to 5s and ticks down every frame when ActionEffect is received
+    // 0 = unused (padding bytes?)
+    // 1 = player's action is dodged by any character (including player, i.e. SGE Pepsis)
+    // 2 = player blocks
+    // 3 = player parries
+    // 4 = player dodges
+    [FieldOffset(0x7C4), FixedSizeArray] internal FixedSizeArray5<float> _procTimers;
+
     [FieldOffset(0x7E8)] public float DistanceToTargetHitbox; // distance to target minus both self & target hitbox radius, clamped to 0
 
     /// <summary>
