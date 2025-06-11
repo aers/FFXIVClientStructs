@@ -7200,6 +7200,7 @@ classes:
       0x14064AFD0: SetCursorNavigationIndex
       0x14064B010: GetCursorNavigationStopFlags
       0x14064B0F0: SetAtkResNodeById
+      0x1406A2D70: GetComponentButtonById
   Component::GUI::AtkCursorNavigationInfo:
     funcs:
       0x14064A3D0: ctor
@@ -7465,6 +7466,11 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14068BCB0: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
+      0x14068CCE0: DispatchValueUpdate
+      0x14068B1F0: SetScrollPosition
+      0x14068B490: SetContentNode
+      0x14068B5F0: SetFadeTopNode
+      0x14068B630: SetFadeBottomNode
   Component::GUI::AtkComponentIconText:
     vtbls:
       - ea: 0x14203AAD8
