@@ -64748,6 +64748,11 @@ structs:
     size: 80
     is_string: False
   - type: float
+    name: ProcTimers
+    offset: 1988
+    size: 5
+    is_string: False
+  - type: float
     name: DistanceToTargetHitbox
     offset: 2024
   virtual_functions: []
