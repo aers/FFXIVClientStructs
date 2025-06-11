@@ -7218,11 +7218,31 @@ classes:
       - ea: 0x1420397A8
         base: Component::GUI::AtkComponentBase
     funcs:
-#fail       0x1406706D0: ctor
-      #0x140554050: LoadIconById # doesn't exist anymore
       0x14064E110: LoadIcon
-      0x14068EA40: SetDisabledColor
+      0x14064E230: LoadLocalizedIcon
+      0x14064E360: UnloadIcon
+      0x14064E3C0: IsIconLoaded
       0x14064E470: SetTimelineState
+      0x14064E610: SetFrameLabelId
+      0x14064E650: ResetFrame # unused
+      0x14064E710: SetCooldownProgress
+      0x14064E810: SetComboBorder # unsure
+      0x14064E8B0: SetDyeColor
+      0x14064E8E0: SetIconImageDisableState
+      0x14064E950: IsDisabled
+      0x14064E970: GetFrameLabelId
+      0x14064E9A0: SetHasFirstDyeSlot
+      0x14064E9E0: SetIsDyeLocked
+      0x14064EA20: SetHasSecondDyeSlot
+      0x14064EA60: SetIsMacro
+      0x14064EAA0: SetIsGlamoured
+      0x14064EAE0: SetIsRecipe
+      0x14064EB20: SetComboLevel
+      0x14064EB80: SetUnk8192
+      0x14064EBB0: SetOuterResNode
+      0x14064EC10: ctor
+      0x14064F630: UpdateIndicatorIcon
+      0x14064F7F0: SetIndicatorVisuals
   Component::GUI::AtkDragDropInterface:
     vtbls:
       - ea: 0x142039848
@@ -7302,6 +7322,7 @@ classes:
       0x14066A6A0: HandleInput
       0x14066AAB0: IsTextInputActive
       0x14066A930: SetUIScene
+      0x140667920: UnitBaseCallbackHandler # 2
       0x140667E90: SubscribeAtkArrayDataHandler # 5
       0x140667F30: UnsubscribeAtkArrayDataHandler # 6
       0x1400D3F90: PlaySoundEffectHandler # 21
@@ -7496,6 +7517,7 @@ classes:
       0x14068EE60: SetTimelineState
       0x14068F230: Finalizer
       0x14068EF40: GetTimelineActiveLabelId
+      0x14068EA40: SetIconDisableState
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
       - ea: 0x14203AC98
