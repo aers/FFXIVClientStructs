@@ -18,7 +18,7 @@ public unsafe partial struct ChatLogNumberArray {
     [CExportIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 7 * 4)]
     public partial struct ChatLogChatTabNumberArray {
-        [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray2<int> _data;
+        [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray7<int> _data;
 
         [FieldOffset(0 * 4)] public int UnkLastLineVisibleHelper;
         [FieldOffset(1 * 4)] public int LineCountVisible;

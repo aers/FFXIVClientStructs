@@ -16,7 +16,7 @@ public unsafe partial struct EnemyListNumberArray {
     [FieldOffset(3 * 4)] public int UnkEntityId;
     [FieldOffset(4 * 4)] public int Unk4;
 
-    [FieldOffset(5), FixedSizeArray, CExportIgnore] internal FixedSizeArray8<EnemyListEnemyNumberArray> _enemies;
+    [FieldOffset(5 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray8<EnemyListEnemyNumberArray> _enemies;
 
     [CExportIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]

@@ -10,10 +10,10 @@ public unsafe partial struct ChatLog2NumberArray {
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray2000<int> _data;
 
-    [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray500<ChatLog2ChatMessageNumberArray> _tab1Messages;
-    [FieldOffset(500 * 4), FixedSizeArray] internal FixedSizeArray500<ChatLog2ChatMessageNumberArray> _tab2Messages;
-    [FieldOffset(1000 * 4), FixedSizeArray] internal FixedSizeArray500<ChatLog2ChatMessageNumberArray> _tab3Messages;
-    [FieldOffset(1500 * 4), FixedSizeArray] internal FixedSizeArray500<ChatLog2ChatMessageNumberArray> _tab4Messages;
+    [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray250<ChatLog2ChatMessageNumberArray> _tab1Messages;
+    [FieldOffset(500 * 4), FixedSizeArray] internal FixedSizeArray250<ChatLog2ChatMessageNumberArray> _tab2Messages;
+    [FieldOffset(1000 * 4), FixedSizeArray] internal FixedSizeArray250<ChatLog2ChatMessageNumberArray> _tab3Messages;
+    [FieldOffset(1500 * 4), FixedSizeArray] internal FixedSizeArray250<ChatLog2ChatMessageNumberArray> _tab4Messages;
 
     [CExportIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 2 * 4)]
