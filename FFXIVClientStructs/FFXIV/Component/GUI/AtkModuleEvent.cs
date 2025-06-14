@@ -5,5 +5,5 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 8)]
 public unsafe partial struct AtkModuleEvent {
     [VirtualFunction(0)]
-    public partial void CallHandler(AtkValue* result, uint handlerIndex, AtkValue* values, uint valueCount);
+    public partial AtkValue* CallHandler(AtkValue* returnValue, uint handlerIndex, AtkValue* values, uint valueCount);
 }
