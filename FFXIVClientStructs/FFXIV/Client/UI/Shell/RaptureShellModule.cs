@@ -48,8 +48,8 @@ public unsafe partial struct RaptureShellModule {
     [FieldOffset(0x1208)] public ushort TempTellWorldId;
     [FieldOffset(0x120A)] public ushort TempTellReason;
 
-    [FieldOffset(0x1210)] public uint Flags;
-    [FieldOffset(0x1214)] public uint ErrorData; // ??? seems to be a byte + flags
+    [FieldOffset(0x1248)] public uint Flags;
+    [FieldOffset(0x124C)] public uint ErrorData; // ??? seems to be a byte + flags
 
     public bool IsTextCommandUnavailable => (Flags & 1) != 0;
 

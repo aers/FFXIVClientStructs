@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.System.Input.SoftKeyboards;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using TextServiceEvent = FFXIVClientStructs.FFXIV.Client.System.Input.TextServiceInterface.TextServiceEvent;
 
@@ -33,8 +34,8 @@ public unsafe partial struct AtkModule {
 
     [FieldOffset(0x5D00)] public AtkFontCodeModule AtkFontCodeModule;
     [FieldOffset(0x7280)] public StdVector<nint> CallbackHandlerFunctions; // see CallbackHandlerDelegate
-    //[FieldOffset(0x72A0)] internal StdMap<?,?> AgentAddonMapping; // maybe?
-
+    [FieldOffset(0x7298)] public AtkModuleEvent* UIModuleEvent;
+    [FieldOffset(0x72A0)] public StdMap<uint, AddonCallbackEntry> AddonCallbackMapping; // Key is UnitBase->Id
     [FieldOffset(0x72B0)] public AtkMessageBoxManager* AtkMessageBoxManager;
     [FieldOffset(0x72B8)] public TextService TextService;
     [FieldOffset(0x72E8)] public AtkTextInput TextInput;
@@ -59,7 +60,17 @@ public unsafe partial struct AtkModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3")]
     public partial bool IsTextInputActive();
 
+    [MemberFunction("40 56 48 83 EC 50 C7 02"), Obsolete("Renamed to HandleAddonAgentCallback")]
+    public partial AtkValue* UnitBaseCallbackHandler(AtkValue* returnValue, AtkValue* values, uint valueCount);
+
     // CallbackHandlerFunctions[2]
     [MemberFunction("40 56 48 83 EC 50 C7 02")]
-    public partial AtkValue* UnitBaseCallbackHandler(AtkValue* returnValue, AtkValue* values, uint valueCount);
+    public partial AtkValue* HandleAddonAgentCallback(AtkValue* returnValue, AtkValue* values, uint valueCount);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public struct AddonCallbackEntry {
+        [FieldOffset(0x00), CExporterUnion("Interface")] public AtkModuleInterface.AtkEventInterface* EventInterface;
+        [FieldOffset(0x00), CExporterUnion("Interface")] public AgentInterface* AgentInterface;
+        [FieldOffset(0x08)] public ulong EventKind;
+    }
 }
