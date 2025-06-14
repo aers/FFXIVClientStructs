@@ -112,6 +112,9 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 40 88 71")]
     public partial void SetRetainerMarketPrice(short slot, uint price);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 39 6B 38")]
+    public partial void SetSlotUnblocked(InventoryType type, short slot);
+
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
 }
