@@ -36,9 +36,10 @@ public unsafe partial struct AgentActionMenu {
     [FieldOffset(0x128)] public StdVector<ActionData> PerformanceList;
     [FieldOffset(0x140)] public StdVector<ActionData> ExtraList;
     [FieldOffset(0x158)] public StdVector<ActionData> CombatRoleActionList;
-    [FieldOffset(0x170)] public StdVector<ActionData> GatheringRoleActionList;
+    [FieldOffset(0x170)] public StdVector<ActionData> DutyActionList;
+    [FieldOffset(0x188)] public StdVector<ActionData> GatheringRoleActionList;
 
-    [FieldOffset(0x1C8)] public Utf8String ClassJobTitle;
+    [FieldOffset(0x1E0)] public Utf8String ClassJobTitle;
     //[FieldOffset(0x230)] public Utf8String UnkString248;
 
     [FieldOffset(0x2A0)] public StdVector<ExtraCommandData> ExtraCommandData;
