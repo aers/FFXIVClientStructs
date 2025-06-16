@@ -71,6 +71,7 @@ enums:
     "LinkMouseClick": 75
     "LinkMouseOver": 76
     "LinkMouseOut": 77
+    "Unk83": 83
 - type: Component::GUI::AtkCursorNavigationStopFlag
   name: AtkCursorNavigationStopFlag
   underlying: int
@@ -92,6 +93,22 @@ enums:
     "Right": 1
     "Up": 2
     "Down": 3
+- type: Component::GUI::IconSubFolder
+  name: IconSubFolder
+  underlying: int
+  namespace: Component.GUI
+  flags: False
+  values:
+    "None": 0
+    "HighQuality": 1
+    "Japanese": 2
+    "English": 3
+    "German": 4
+    "French": 5
+    "ChineseSimplified": 6
+    "ChineseTraditional": 7
+    "Korean": 8
+    "ChineseTraditional2": 9
 - type: Component::GUI::IconComponentFlags
   name: IconComponentFlags
   underlying: unsigned int
@@ -99,12 +116,20 @@ enums:
   flags: True
   values:
     "None": 0
-    "DyeIcon": 8
-    "Macro": 16
-    "GlamourIcon": 32
-    "Moving": 256
-    "Casting": 1024
-    "InventoryItem": 2048
+    "ComboLevel2": 1
+    "ComboLevel3": 2
+    "ComboLevel1": 4
+    "HasFirstDyeChannel": 8
+    "IsDyeLocked": 16
+    "HasSecondDyeChannel": 32
+    "IsMacro": 64
+    "IsGlamoured": 128
+    "IsRecipe": 256
+    "IsIconLoading": 512
+    "IsBeingDragged": 1024
+    "Unk2048": 2048
+    "IsDisabled": 4096
+    "Unk8192": 8192
 - type: Component::GUI::AtkCursor::CursorType
   name: CursorType
   underlying: byte
@@ -20752,6 +20777,35 @@ structs:
     name: TransitionLength
     offset: 12
   member_functions: []
+- type: Component::GUI::AtkComponentIcon::IndicatorNodesEntry
+  name: IndicatorNodesEntry
+  namespace: Component.GUI
+  union: False
+  size: 16
+  fields:
+  - type: Component::GUI::AtkResNode*
+    name: ResNode
+    offset: 0
+  - type: Component::GUI::AtkImageNode*
+    name: ImageNode
+    offset: 8
+  member_functions: []
+- type: Component::GUI::AtkComponentIcon::LocalizedIconInfo
+  name: LocalizedIconInfo
+  namespace: Component.GUI
+  union: False
+  size: 16
+  fields:
+  - type: unsigned int
+    name: Id
+    offset: 0
+  - type: Component::GUI::IconSubFolder
+    name: SubFolder
+    offset: 4
+  - type: byte
+    name: CheckLoadedIconFirst
+    offset: 8
+  member_functions: []
 - type: Component::GUI::AtkComponentList::CategoryItem
   name: CategoryItem
   namespace: Component.GUI
@@ -21170,6 +21224,19 @@ structs:
     name: Unk10
     offset: 16
   member_functions: []
+- type: Component::GUI::AtkEventData::AtkValueData
+  name: AtkValueData
+  namespace: Component.GUI
+  union: False
+  size: 40
+  fields:
+  - type: int
+    name: LastValue
+    offset: 0
+  - type: int
+    name: NewValue
+    offset: 4
+  member_functions: []
 - type: Component::GUI::AtkEventListener
   name: AtkEventListener
   namespace: Component.GUI
@@ -21292,12 +21359,12 @@ structs:
   virtual_functions:
   - name: CallHandler
     offset: 8
-    return_type: void
+    return_type: Component::GUI::AtkValue*
     parameters:
     - type: Component::GUI::AtkExternalInterface*
       name: this
     - type: Component::GUI::AtkValue*
-      name: result
+      name: returnValue
     - type: unsigned int
       name: handlerIndex
     - type: unsigned int
@@ -21534,12 +21601,12 @@ structs:
   virtual_functions:
   - name: CallHandler
     offset: 0
-    return_type: void
+    return_type: Component::GUI::AtkValue*
     parameters:
     - type: Component::GUI::AtkModuleEvent*
       name: this
     - type: Component::GUI::AtkValue*
-      name: result
+      name: returnValue
     - type: unsigned int
       name: handlerIndex
     - type: Component::GUI::AtkValue*
@@ -21828,6 +21895,7 @@ structs:
   union: False
   size: 8
   fields: []
+  vtable_size: 40
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -39771,7 +39839,7 @@ structs:
     - type: char*
       name: path
     - type: int
-      name: version
+      name: scale
   - signature: E8 ?? ?? ?? ?? C6 43 10 02
     return_type: int
     name: ReleaseTexture
@@ -54491,7 +54559,7 @@ structs:
     name: LoadedTextures
     offset: 0
   - type: int
-    name: DefaultTextureVersion
+    name: DefaultTextureScale
     offset: 24
   - type: Component::Exd::ExdModule*
     name: ExdModule
@@ -75259,161 +75327,6 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentGuildLeveCard*
       name: this
-- type: Component::GUI::AtkComponentIcon
-  name: AtkComponentIcon
-  namespace: Component.GUI
-  union: False
-  size: 312
-  fields:
-  - type: Component::GUI::AtkComponentBase
-    name: AtkComponentBase
-    offset: 0
-    base: true
-  - type: __int64
-    name: IconId
-    offset: 192
-  - type: Component::GUI::AtkUldAsset*
-    name: Texture
-    offset: 200
-  - type: Component::GUI::AtkResNode*
-    name: IconAdditionsContainer
-    offset: 208
-  - type: Component::GUI::AtkResNode*
-    name: ComboBorder
-    offset: 216
-  - type: Component::GUI::AtkResNode*
-    name: Frame
-    offset: 224
-  - type: __int64
-    name: Unknown0E8
-    offset: 232
-  - type: Component::GUI::AtkImageNode*
-    name: IconImage
-    offset: 240
-  - type: Component::GUI::AtkImageNode*
-    name: FrameIcon
-    offset: 248
-  - type: Component::GUI::AtkImageNode*
-    name: UnknownImageNode
-    offset: 256
-  - type: Component::GUI::AtkTextNode*
-    name: QuantityText
-    offset: 264
-  - type: Component::GUI::IconComponentFlags
-    name: Flags
-    offset: 276
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Initialize
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-  - name: Deinitialize
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-  - name: Update
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-    - type: float
-      name: a2
-  - name: OnUldUpdate
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-  - name: Setup
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-  - name: SetEnabledState
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-    - type: byte
-      name: a2
-  - name: GetAtkResNode
-    offset: 112
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-  - name: GetFocusNode
-    offset: 120
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-  - name: InitializeFromComponentData
-    offset: 136
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
-    - type: __int64
-      name: a2
-  member_functions:
-  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 51 08 48 8D 05 ?? ?? ?? ?? 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 01 48 8B C1 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ??
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Component::GUI::AtkComponentIcon*
-      name: this
 - type: Component::GUI::AtkComponentIconText
   name: AtkComponentIconText
   namespace: Component.GUI
@@ -76476,6 +76389,102 @@ structs:
     name: AtkComponentBase
     offset: 0
     base: true
+  - type: Component::GUI::AtkComponentNode*
+    name: ThumbNode
+    offset: 192
+  - type: Component::GUI::AtkComponentButton*
+    name: ThumbButton
+    offset: 200
+  - type: Component::GUI::AtkComponentNode*
+    name: TrackNode
+    offset: 208
+  - type: Component::GUI::AtkComponentButton*
+    name: TrackButton
+    offset: 216
+  - type: Component::GUI::AtkComponentButton*
+    name: ArrowUpButton
+    offset: 224
+  - type: Component::GUI::AtkComponentButton*
+    name: ArrowDownButton
+    offset: 232
+  - type: Component::GUI::AtkResNode*
+    name: ContentNode
+    offset: 240
+  - type: Component::GUI::AtkCollisionNode*
+    name: ContentCollisionNode
+    offset: 248
+  - type: Component::GUI::AtkComponentNode*
+    name: FadeTopNode
+    offset: 256
+  - type: Component::GUI::AtkComponentNode*
+    name: FadeBottomNode
+    offset: 264
+  - type: float
+    name: OwnerNodeScale
+    offset: 272
+  - type: int
+    name: ScrollMaxPosition
+    offset: 276
+  - type: int
+    name: ScrollPosition
+    offset: 280
+  - type: int
+    name: PendingScrollPosition
+    offset: 284
+  - type: int
+    name: EmptyLength
+    offset: 288
+  - type: __int16
+    name: ThumbPositionStartOffset
+    offset: 292
+  - type: __int16
+    name: MouseDownScreenPos
+    offset: 294
+  - type: __int16
+    name: ScrollbarLength
+    offset: 296
+  - type: __int16
+    name: Unk12A
+    offset: 298
+  - type: __int16
+    name: Margin
+    offset: 300
+  - type: __int16
+    name: MouseWheelSpeed
+    offset: 302
+  - type: __int16
+    name: ContentNodeOffset
+    offset: 304
+  - type: __int16
+    name: ContentNodeOffScreenLength
+    offset: 306
+  - type: byte
+    name: IsVertical
+    offset: 308
+  - type: byte
+    name: IsInputVertical
+    offset: 309
+  - type: byte
+    name: UnkIsVertical
+    offset: 310
+  - type: byte
+    name: IsBeingDragged
+    offset: 311
+  - type: byte
+    name: Unk138
+    offset: 312
+  - type: byte
+    name: Unk139
+    offset: 313
+  - type: byte
+    name: Unk13A
+    offset: 314
+  - type: byte
+    name: IsAcceptingMouseWheelEvents
+    offset: 315
+  - type: byte
+    name: IsContentNodeTextNode
+    offset: 316
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -76588,6 +76597,46 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentScrollBar*
       name: this
+  - signature: E8 ?? ?? ?? ?? 83 3E 0B
+    return_type: void
+    name: SetScrollPosition
+    parameters:
+    - type: Component::GUI::AtkComponentScrollBar*
+      name: this
+    - type: int
+      name: position
+    - type: byte
+      name: setScrollPosition
+    - type: byte
+      name: setPendingScrollPosition
+  - signature: E8 ?? ?? ?? ?? 41 8D 56 1E
+    return_type: void
+    name: SetContentNode
+    parameters:
+    - type: Component::GUI::AtkComponentScrollBar*
+      name: this
+    - type: Component::GUI::AtkResNode*
+      name: contentNode
+    - type: Component::GUI::AtkCollisionNode*
+      name: contentCollisionNode
+    - type: unsigned __int16
+      name: contentCollisionNodeHeight
+  - signature: E8 ?? ?? ?? ?? 41 8D 57 65
+    return_type: void
+    name: SetFadeTopNode
+    parameters:
+    - type: Component::GUI::AtkComponentScrollBar*
+      name: this
+    - type: Component::GUI::AtkComponentNode*
+      name: node
+  - signature: E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 48 8B 5C 24 ?? 45 33 C0
+    return_type: void
+    name: SetFadeBottomNode
+    parameters:
+    - type: Component::GUI::AtkComponentScrollBar*
+      name: this
+    - type: Component::GUI::AtkComponentNode*
+      name: node
 - type: Component::GUI::AtkComponentSlider
   name: AtkComponentSlider
   namespace: Component.GUI
@@ -77105,7 +77154,7 @@ structs:
     - type: char*
       name: texturePath
     - type: unsigned int
-      name: version
+      name: scale
   - signature: E8 ?? ?? ?? ?? 83 E7 0F
     return_type: void
     name: LoadIconTexture
@@ -80308,34 +80357,6 @@ structs:
     parameters:
     - type: Component::GUI::AtkCounterNode*
       name: this
-- type: Component::GUI::AtkEventData
-  name: AtkEventData
-  namespace: Component.GUI
-  union: True
-  size: 40
-  fields:
-  - type: Component::GUI::AtkEventData::AtkMouseData
-    name: MouseData
-    offset: 0
-  - type: Component::GUI::AtkEventData::AtkInputData
-    name: InputData
-    offset: 0
-  - type: Component::GUI::AtkEventData::AtkFocusData
-    name: FocusData
-    offset: 0
-  - type: Component::GUI::AtkEventData::AtkListItemData
-    name: ListItemData
-    offset: 0
-  - type: Component::GUI::AtkEventData::AtkDragDropData
-    name: DragDropData
-    offset: 0
-  - type: Component::GUI::LinkData*
-    name: LinkData
-    offset: 0
-  - type: Component::GUI::AtkEventData::AtkAddonControlData
-    name: AddonControlData
-    offset: 0
-  member_functions: []
 - type: Component::GUI::AtkTextNode
   name: AtkTextNode
   namespace: Component.GUI
@@ -83537,6 +83558,331 @@ structs:
   - name: RaycastSimple
     offset: 240
   member_functions: []
+- type: Component::GUI::AtkComponentIcon
+  name: AtkComponentIcon
+  namespace: Component.GUI
+  union: False
+  size: 312
+  fields:
+  - type: Component::GUI::AtkComponentBase
+    name: AtkComponentBase
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: IconId
+    offset: 192
+  - type: Component::GUI::IconSubFolder
+    name: IconSubFolder
+    offset: 196
+  - type: Component::GUI::AtkUldAsset*
+    name: Texture
+    offset: 200
+  - type: Component::GUI::AtkResNode*
+    name: FrameContainer
+    offset: 208
+  - type: Component::GUI::AtkResNode*
+    name: ComboBorder
+    offset: 216
+  - type: Component::GUI::AtkResNode*
+    name: Frame
+    offset: 224
+  - type: Component::GUI::AtkResNode*
+    name: OuterResNode
+    offset: 232
+  - type: Component::GUI::AtkImageNode*
+    name: IconImage
+    offset: 240
+  - type: Component::GUI::AtkImageNode*
+    name: FrameIcon
+    offset: 248
+  - type: Component::GUI::AtkTextNode*
+    name: QuantityText
+    offset: 256
+  - type: Client::Graphics::ByteColor
+    name: DyeColors
+    offset: 264
+    size: 2
+    is_string: False
+  - type: Component::GUI::AtkComponentIcon::IndicatorNodesEntry
+    name: IndicatorNodes
+    offset: 272
+    size: 2
+    is_string: False
+  - type: Component::GUI::IconComponentFlags
+    name: Flags
+    offset: 304
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: a2
+  - name: GetAtkResNode
+    offset: 112
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - name: GetFocusNode
+    offset: 120
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions:
+  - signature: 33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 51 08 48 8D 05 ?? ?? ?? ?? 48 89 51 10 48 89 51 18 48 89 51 20 48 89 51 28 48 89 51 30 48 89 51 38 48 89 51 40 89 51 48 48 89 51 50 48 89 51 58 48 89 51 60 48 89 51 68 89 51 70 48 89 51 78 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 66 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 88 91 ?? ?? ?? ?? 48 89 01 48 8B C1 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ?? 48 89 91 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8D 4D 12
+    return_type: byte
+    name: LoadIcon
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: unsigned int
+      name: iconId
+  - signature: E8 ?? ?? ?? ?? 8D 4D 12
+    return_type: byte
+    name: LoadLocalizedIcon
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: Component::GUI::AtkComponentIcon::LocalizedIconInfo*
+      name: info
+  - signature: E8 ?? ?? ?? ?? 0F B6 03 F6 D0
+    return_type: void
+    name: UnloadIcon
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 08 49 8B CD
+    return_type: byte
+    name: IsIconLoaded
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 0F B6 84 DF
+    return_type: void
+    name: SetTimelineState
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: unsigned __int16
+      name: keyframeValue
+  - signature: E8 ?? ?? ?? ?? 4D 8B C4 40 0F B6 D6
+    return_type: void
+    name: SetFrameLabelId
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: timelineId
+  - signature: E9 ?? ?? ?? ?? 83 F9 64
+    return_type: void
+    name: SetCooldownProgress
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: float
+      name: progress
+  - signature: E8 ?? ?? ?? ?? 41 8D 47 08
+    return_type: void
+    name: SetDyeColor
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: Client::Graphics::ByteColor
+      name: color
+    - type: int
+      name: channel
+  - signature: E8 ?? ?? ?? ?? 66 41 89 AF
+    return_type: void
+    name: SetIconImageDisableState
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: disabled
+  - signature: 48 8B 81 ?? ?? ?? ?? 48 85 C0 74 15 48 8B 40 10
+    return_type: byte
+    name: GetFrameLabelId
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - signature: E8 ?? ?? ?? ?? C1 EB 02 49 8B CE
+    return_type: void
+    name: SetHasFirstDyeChannel
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? 48 8B 0F 41 C1 EC 06
+    return_type: void
+    name: SetIsDyeLocked
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? 41 F6 C7 10 74 5C
+    return_type: void
+    name: SetHasSecondDyeChannel
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? 32 D2 45 8B C4
+    return_type: void
+    name: SetIsMacro
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? C1 EF 08 45 33 C0
+    return_type: void
+    name: SetIsGlamoured
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: E8 ?? ?? ?? ?? 41 83 FD 45
+    return_type: void
+    name: SetIsRecipe
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: enabled
+  - signature: 44 8B 89 ?? ?? ?? ?? 4C 8B D1 41 8B C1
+    return_type: void
+    name: SetComboLevel
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: enable
+    - type: byte
+      name: level
+  - signature: E8 ?? ?? ?? ?? 45 33 F6 FF C6
+    return_type: void
+    name: SetOuterResNode
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: Component::GUI::AtkResNode*
+      name: node
+  - signature: E8 ?? ?? ?? ?? 8B 87 ?? ?? ?? ?? 84 C0
+    return_type: void
+    name: UpdateIndicator
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+  - signature: 48 83 EC 38 41 83 F9 02
+    return_type: void
+    name: SetIndicatorVisuals
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
+    - type: byte
+      name: labelId
+    - type: Client::Graphics::ByteColor
+      name: color
+    - type: unsigned int
+      name: index
 - type: Component::GUI::AtkComponentTreeList
   name: AtkComponentTreeList
   namespace: Component.GUI
@@ -83779,6 +84125,37 @@ structs:
       name: groupHeaderItem
     - type: byte
       name: a3
+- type: Component::GUI::AtkEventData
+  name: AtkEventData
+  namespace: Component.GUI
+  union: True
+  size: 40
+  fields:
+  - type: Component::GUI::AtkEventData::AtkMouseData
+    name: MouseData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkInputData
+    name: InputData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkFocusData
+    name: FocusData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkValueData
+    name: ValueData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkListItemData
+    name: ListItemData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkDragDropData
+    name: DragDropData
+    offset: 0
+  - type: Component::GUI::LinkData*
+    name: LinkData
+    offset: 0
+  - type: Component::GUI::AtkEventData::AtkAddonControlData
+    name: AddonControlData
+    offset: 0
+  member_functions: []
 - type: Component::SteamApi::SteamApi
   name: SteamApi
   namespace: Component.SteamApi
@@ -85192,22 +85569,6 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTab*
       name: this
-- type: Component::GUI::AtkEventDispatcher::Event
-  name: Event
-  namespace: Component.GUI
-  union: False
-  size: 48
-  fields:
-  - type: Component::GUI::AtkEventState
-    name: State
-    offset: 0
-  - type: unsigned int
-    name: UnkFlags
-    offset: 4
-  - type: Component::GUI::AtkEventData
-    name: EventData
-    offset: 8
-  member_functions: []
 - type: Component::Shell::ShellCommandModule
   name: ShellCommandModule
   namespace: Component.Shell
@@ -86878,6 +87239,22 @@ structs:
       name: text
     - type: byte
       name: unique
+- type: Component::GUI::AtkEventDispatcher::Event
+  name: Event
+  namespace: Component.GUI
+  union: False
+  size: 48
+  fields:
+  - type: Component::GUI::AtkEventState
+    name: State
+    offset: 0
+  - type: unsigned int
+    name: UnkFlags
+    offset: 4
+  - type: Component::GUI::AtkEventData
+    name: EventData
+    offset: 8
+  member_functions: []
 - type: Component::GUI::AtkUnitBase
   name: AtkUnitBase
   namespace: Component.GUI
@@ -87073,6 +87450,7 @@ structs:
     offset: 508
     size: 5
     is_string: False
+  vtable_size: 592
   virtual_functions:
   - name: Open
     offset: 24
@@ -162364,6 +162742,18 @@ structs:
     parameters:
     - type: Component::GUI::AtkModule*
       name: this
+  - signature: 40 56 48 83 EC 50 C7 02
+    return_type: Component::GUI::AtkValue*
+    name: UnitBaseCallbackHandler
+    parameters:
+    - type: Component::GUI::AtkModule*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
 - type: Client::Game::Character::Character
   name: Character
   namespace: Client.Game.Character
