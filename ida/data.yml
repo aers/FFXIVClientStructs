@@ -100,6 +100,7 @@ functions:
   0x1401A2A80: std::_Throw_tree_length_error
   0x141C38D6C: std::_Xlength_error
   0x1401A2640: std::deque::_Growmap
+  0x14069DD80: IntToString
   0x140059F00: GetStdOut
   0x140059F10: vsprintf_s
   0x140059F70: vswprintf_s
@@ -113,6 +114,7 @@ functions:
   0x1400B6340: Client::UI::IsValidPlayerCharacterName
   0x1400B6970: Client::UI::RoundFloatToUInt
   0x1400B6CB0: Client::UI::PlaySoundEffect # this is a static function in the UI namespace, arg1 is the SE
+  0x1400B7600: Client::UI::GetArmoryInventoryTypeByIndex
   0x1400B8270: Client::UI::GetUIColor # (idx, &color, &edgeColor)
   0x1400B82B0: Client::UI::GetNumberAsBoxedChar # (uint) accepts numbers 0-30
   0x1400B8360: Client::UI::GetNumberAsDigitChars # (uint) accepts numbers 0-999
@@ -177,9 +179,12 @@ functions:
   0x1400B7FD0: IsClassJobACrafter   # static, (classJobId) -> bool
   0x1400B7FE0: IsClassJobAGatherer  # static, (classJobId) -> bool
   0x1400B81F0: GetClassJobParentId  # static, (classJobId, ClassJobExd*?) -> uint
+  0x1400BB500: GetDragDropTypeMask
+  0x1400BB4D0: GetDragDropTypeReferenceMask
   0x1400BB590: OpenWebURL
   0x14025ACA0: GetMainCommandAgentId
   0x14025AD20: GetMainCommandInputId
+  0x14078C380: GetHotbarSlotTypeFromDragDropType
   0x140835020: GetUIModule
   0x1409202E0: ToObjStrId
   0x1409CEC00: GenerateItemsChecksum # for Banners
@@ -6882,6 +6887,8 @@ classes:
     vtbls:
       - ea: 0x142038908
         base: Component::GUI::AtkEventListener
+    funcs:
+      0x1406028E0: ctor # unused, inlined
   Component::GUI::AtkDialogue:
     vtbls:
       - ea: 0x142038920
@@ -7271,7 +7278,17 @@ classes:
     vtbls:
       - ea: 0x142039848
     vfuncs:
+      1: GetScreenPosition
+      3: GetComponentNode
+      4: SetComponentNode
+      5: GetActiveNode
       7: GetComponent
+      11: GetPayloadContainer
+  Component::GUI::AtkDragDropPayloadContainer:
+    funcs:
+      0x140602820: ctor
+      0x140602880: Dtor
+      0x140602890: Clear
   Component::GUI::AtkComponentListItemRenderer:
     vtbls:
       - ea: 0x1420398C8
@@ -7523,7 +7540,7 @@ classes:
       - ea: 0x14203AAD8
         base: Component::GUI::AtkComponentBase
     funcs:
-#       0x140565F20: LoadIconByID # inlined
+      0x14068D4B0: LoadIconById
       0x14068D5D0: LoadIcon # this takes a struct arg that includes the icon ID and some params
       0x14068D7D0: SetText
       0x14068D7F0: SetTextColor
@@ -7537,13 +7554,18 @@ classes:
         base: Component::GUI::AtkDragDropInterface
     funcs:
       0x14068F140: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
-      0x14068E660: LoadIconById
+      0x14068E660: LoadIcon
+      0x14068E870: GetQuantityText
+      0x14068E8A0: SetQuantityText
+      0x14068E920: SetQuantity
       0x14068E680: GetIconId
       0x14068ED20: AttachTooltip
-      0x14068EE60: SetTimelineState
+      0x14068ED80: DetachTooltip
+      0x14068EE60: PlayAnimation
       0x14068F230: Finalizer
-      0x14068EF40: GetTimelineActiveLabelId
+      0x14068EF40: GetActiveTimelineLabelId
       0x14068EA40: SetIconDisableState
+      0x14068EF70: PlayFrameAnimation
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
       - ea: 0x14203AC98
@@ -16632,7 +16654,7 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonPvpProfileQuickChat:
     vtbls:
-      - ea: 0x1420BD5C0
+      - ea: 0x1420D2B60
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonPvpReward:
     vtbls:
