@@ -1323,6 +1323,8 @@ classes:
       0x141650940: GetCurrentFateId
       0x141650960: GetFateById
       0x1416509E0: TryGetFatePosition
+      0x141651490: LevelSync
+      0x1416522E0: IsSyncedToFate
   Client::Game::BattleBuddyList:
     funcs:
       0x1409D8450: GetMemberBattleCharaByIndex
@@ -13092,6 +13094,9 @@ classes:
       0x140F6FF30: ctor
       0x140F73FC0: JobIndexToClassJobId
       0x140F74600: StartMission
+      0x140F71050: GetBasicMissions
+      0x140F71310: GetProvisionalMissions
+      0x140F71910: GetMissionLog
   Client::UI::Agent::AgentWKSMissionInfomation:
     vtbls:
       - ea: 0x14208F0F8
@@ -14261,6 +14266,7 @@ classes:
       0x141654F30: GetPublicContentDirectorByType # static
       0x140B45590: MaterializeItem
       0x140B4BBC0: GetMassivePcContentDirector
+      0x140B4E180: GetEventMapMarkers
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x14206AE98
