@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 using FFXIVClientStructs.FFXIV.Client.Game.MassivePcContent;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
@@ -66,6 +67,9 @@ public unsafe partial struct EventFramework {
     public void MaterializeItem(InventoryItem* itemSlot, MaterializeEntryId entryId) {
         MaterializeItem(new EventId { ContentId = EventHandlerContent.Materialize, EntryId = (ushort)entryId }, itemSlot->Container, itemSlot->Slot, 0);
     }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 46 ?? 49 BF")]
+    public partial void GetEventMapMarkers(ushort territoryId, StdVector<MapMarkerData>* markerVector);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8")]
     public static partial uint GetCurrentContentId();
