@@ -87,10 +87,10 @@ public unsafe partial struct RaptureAtkModule {
     public partial bool DecRefStringArrayData(int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 50")]
-    public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong unk, ushort parentAddonId, int unk2);
+    public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong eventKind, ushort parentAddonId, int depthLayer); // TODO: parentAgent is supposed to be `AtkModuleInterface.AtkEventInterface* eventInterface`
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9"), GenerateStringOverloads]
-    public partial ushort OpenAddonByAgent(CStringPointer addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, ushort parentAddonId);
+    public partial ushort OpenAddonByAgent(CStringPointer addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint eventKind, ushort parentAddonId); // TODO: eventKind is ulong
 
     [MemberFunction("48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73"), GenerateStringOverloads]
     public partial void ShowTextGimmickHint(CStringPointer text, TextGimmickHintStyle style, int duration);

@@ -4177,12 +4177,34 @@ classes:
       0x1400D2630: OpenDawnStory
       0x1400D2660: OpenDawn
       0x1400D2720: IsDawnSupported
+      0x1400D3CE0: HandleSaveAddonConfig # 17
+      0x1400D3F90: HandlePlaySoundEffect # 21
+      0x1400D4090: HandleExecuteHotbarSlot # 22
+      0x1400D4170: HandleSetHotbarSlot # 23
+      0x1400D4260: HandleItemMove # 24
+      0x1400D47B0: HandleLootRoll # 25
+      0x1400D4940: HandleSellStack # 26
+      0x1400D4860: HandleSetBattleMode # 27
+      0x1400D49C0: HandleOpenInventory # 28
+      0x1400D4A20: HandleOpenItemContextMenu # 29
+      0x1400D4B40: HandleNameplateHover # 31
+      0x1400D4C00: HandleShowDetailAddon # 32
+      0x1400D4DB0: HandleFormatText # 33
+      0x1400D5580: HandleExecuteMainCommand # 41
+      0x1400D55E0: HandleIsMainCommandUnlocked # 42
+      0x1400D5850: HandleNowLoading # 44
+      0x1400D59F0: HandleItemDiscard # 45
+      0x1400D5D90: HandleWorldToScreenPoint # 49
+      0x1400D5EB0: HandleScdResource # 50
+      0x1400D6130: HandleCloseTryOn # 52
+      0x1400D61B0: HandleOpenContextMenuForAddon # 53
+      0x1400D6300: HandleGlassesDrop # 56
       0x1400D8630: OnUpdate_Nameplates
       0x1400D9EA0: IncRefNumberArrayData
       0x1400D9EF0: IncRefStringArrayData
       0x1400DD860: GetStaticAddonName
       0x1400DE870: RegisterAddonAllocators
-#fail       0x1400E9030: UpdateBattleCharaNameplates
+      0x1400EA700: UpdateBattleCharaNameplates
       0x1400EBAD0: UpdateNpcNameplates
       0x1400EDFA0: IsUIVisible
       0x1406665D0: DecRefNumberArrayData
@@ -7124,6 +7146,7 @@ classes:
       0x14062CC60: Destructor
       0x14062D110: FireCallbackAndHideOrClose
       0x14062D120: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
+      0x14062D2F0: FireCallback2 # calls AtkEventInterface.ReceiveEvent2
       0x14062D3D0: RegisterEvent
       0x14062D410: UnregisterEvent
       0x14062D460: SetPosition
@@ -7322,12 +7345,14 @@ classes:
       0x14066A6A0: HandleInput
       0x14066AAB0: IsTextInputActive
       0x14066A930: SetUIScene
-      0x140667920: UnitBaseCallbackHandler # 2
-      0x140667E90: SubscribeAtkArrayDataHandler # 5
-      0x140667F30: UnsubscribeAtkArrayDataHandler # 6
-      0x1400D3F90: PlaySoundEffectHandler # 21
-      0x140668C60: OpenMapWithMapLinkHandler # 14
-      0x1400D5EB0: ScdResourceHandler
+      0x1406678D0: HandleUnregisterAddonCallback # 1
+      0x140667920: HandleAddonAgentCallback # 2
+      0x140667B70: HandleAddonEventCallback # 3 - unsure, used in AddonFadeMiddleBack to send an event to ScheduleManagement
+      0x140667DA0: HandleAddonEventCallback2 # 4 - unsure, calls AtkEventInterface.ReceiveEvent2
+      0x140667E90: HandleSubscribeAtkArrayData # 5
+      0x140667F30: HandleUnsubscribeAtkArrayData # 6
+      0x140668800: HandleSetCursor # 11
+      0x140668C60: HandleOpenMapWithMapLink # 14
       0x1400DD2C0: SetRemappedIconId
   Component::GUI::AtkComponentCheckBox:
     vtbls:
