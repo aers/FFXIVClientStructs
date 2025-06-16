@@ -18,6 +18,15 @@ public unsafe partial struct AgentWKSMission {
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F0 33 C0")]
     public partial byte JobIndexToClassJobId(byte jobIndex);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 84 C0 74 ?? 4D 8B 55")]
+    public partial bool GetBasicMissions(StdVector<MissionEntry>* list);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 81 C2")]
+    public partial bool GetProvisionalMissions(StdVector<MissionEntry>* list);
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 4A ?? 85 C9")]
+    public partial bool GetMissionLog(StdVector<MissionEntry>* list);
+
     [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
     public struct MissionData {
         [FieldOffset(0x01)] public byte SelectedJobIndex;
