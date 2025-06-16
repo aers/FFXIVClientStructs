@@ -15,6 +15,9 @@ public partial struct AtkComponentSlider : ICreatable {
     [FieldOffset(0xEC)] public int MaxValue;
     [FieldOffset(0xF0)] public int Value;
     [FieldOffset(0xF4)] public int Steps;
+    [FieldOffset(0xF8)] public short OffsetL; // Not set automatically via component initializer
+    [FieldOffset(0xFA)] public short OffsetR; // Not set automatically via component initializer
+    [FieldOffset(0xFC)] public short SliderSize; // Size in pixels of the parent, not set automatically via component initializer, used for calculating/setting width of green bar/ninegridnode
 
     [MemberFunction("3B 91 ?? ?? ?? ?? 7F 06")]
     public partial void SetMinValue(int minValue);
