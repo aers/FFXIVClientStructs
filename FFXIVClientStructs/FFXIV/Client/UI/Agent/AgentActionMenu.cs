@@ -17,6 +17,7 @@ public unsafe partial struct AgentActionMenu {
     [FieldOffset(0x3C)] public uint ClassId;
     [FieldOffset(0x40)] public uint ClassJobCategoryId;
     [FieldOffset(0x44)] public bool JobStoneEquipped;
+    [FieldOffset(0x45)] public bool CrafterSoulEquipped;
 
     [FieldOffset(0x54)] public int Flags;
 
@@ -35,14 +36,16 @@ public unsafe partial struct AgentActionMenu {
     [FieldOffset(0x128)] public StdVector<ActionData> PerformanceList;
     [FieldOffset(0x140)] public StdVector<ActionData> ExtraList;
     [FieldOffset(0x158)] public StdVector<ActionData> CombatRoleActionList;
-    [FieldOffset(0x170)] public StdVector<ActionData> GatheringRoleActionList;
+    [FieldOffset(0x170)] public StdVector<ActionData> DutyActionList;
+    [FieldOffset(0x188)] public StdVector<ActionData> GatheringRoleActionList;
 
-    [FieldOffset(0x1C8)] public Utf8String ClassJobTitle;
+    [FieldOffset(0x1E0)] public Utf8String ClassJobTitle;
     //[FieldOffset(0x230)] public Utf8String UnkString248;
 
     [FieldOffset(0x2A0)] public StdVector<ExtraCommandData> ExtraCommandData;
     [FieldOffset(0x2B8)] public ExcelSheet* ExtraCommandExcelSheet;
-    [FieldOffset(0x2D0)] public uint UpgradeAddonId;
+    [FieldOffset(0x2E0)] public uint ActionChangeAddonId;
+    [FieldOffset(0x2E8)] public uint UpgradeAddonId;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
@@ -51,9 +54,9 @@ public struct ActionData {
     [FieldOffset(0x68)] public uint ActionId;
     [FieldOffset(0x6C)] public uint UnkValue0;
     [FieldOffset(0x70)] public uint ActionCategoryId;
-    [FieldOffset(0x74)] public uint IconId;
-    [FieldOffset(0x78)] public uint Level; // or flags?
-    [FieldOffset(0x81)] public bool IsSlotable;
+    [FieldOffset(0x78)] public uint IconId;
+    [FieldOffset(0x7C)] public uint Level; // or flags?
+    [FieldOffset(0x85)] public bool IsSlotable;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
