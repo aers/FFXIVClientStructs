@@ -1475,6 +1475,7 @@ classes:
       0x1408331D0: GetRacingChocoboBeedingCapacityFromItem
       0x140982490: GetSpecialItemId #static
       0x1408312A0: GetLimitedTomestoneWeeklyLimit #static
+      0x140820F90: SetSlotUnblocked
   Client::Game::InventoryItem:
     vtbls:
       - ea: 0x142050DB8
