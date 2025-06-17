@@ -21094,6 +21094,8 @@ structs:
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
       name: this
+  - name: GetPayloadContainer
+    offset: 88
   member_functions: []
 - type: Component::GUI::AtkEventData::AtkAddonControlData
   name: AtkAddonControlData
@@ -21592,6 +21594,19 @@ structs:
     offset: 138
   virtual_functions: []
   member_functions: []
+- type: Component::GUI::AtkModule::AddonCallbackEntry::Interface
+  name: Interface
+  namespace: Component::GUI::AtkModule::AddonCallbackEntry
+  union: True
+  size: 8
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
+    name: EventInterface
+    offset: 0
+  - type: Client::UI::Agent::AgentInterface*
+    name: AgentInterface
+    offset: 0
+  member_functions: []
 - type: Component::GUI::AtkModuleEvent
   name: AtkModuleEvent
   namespace: Component.GUI
@@ -21785,6 +21800,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Component::GUI::AtkModuleInterface::AtkEventInterface*
@@ -23408,6 +23437,18 @@ structs:
   union: False
   fields:
   - type: RedBlackTree::Node<StdPair<unsigned int, Client::System::Resource::Handle::ResourceHandle*>>*
+    name: Head
+    offset: 0
+  - type: __int64
+    name: LongCount
+    offset: 8
+  member_functions: []
+- type: StdMap<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>
+  name: StdMap`2
+  namespace: ''
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>>*
     name: Head
     offset: 0
   - type: __int64
@@ -26631,6 +26672,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler::AgentProxy*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   member_functions: []
   static_members:
   - signature: 48 8D 15 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 45 33 C9
@@ -26773,6 +26828,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::Event::ShopEventHandler::YesNoProxy*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::Game::Event::ShopEventHandler::YesNoProxy*
@@ -27503,6 +27572,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::DailyQuestSupply*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   member_functions: []
 - type: Client::Game::UI::DirectorTodo
   name: DirectorTodo
@@ -27851,6 +27934,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::MateriaTrade*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   member_functions: []
 - type: Client::Game::UI::MobHunt
   name: MobHunt
@@ -28003,6 +28100,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::PublicInstance::Listener*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   member_functions: []
 - type: Client::Game::UI::QTE
   name: QTE
@@ -28017,6 +28128,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::QTE*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::Game::UI::QTE*
@@ -28077,6 +28202,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::RelicSphereUpgrade*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   member_functions: []
 - type: Client::Game::UI::Revive
   name: Revive
@@ -28109,6 +28248,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::Revive*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   member_functions: []
 - type: Client::Game::UI::TripleTriad
   name: TripleTriad
@@ -28123,6 +28276,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::TripleTriad*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::Game::UI::TripleTriad*
@@ -33587,13 +33754,13 @@ structs:
     offset: 112
   - type: unsigned int
     name: IconId
-    offset: 116
+    offset: 120
   - type: unsigned int
     name: Level
-    offset: 120
+    offset: 124
   - type: byte
     name: IsSlotable
-    offset: 129
+    offset: 133
   member_functions: []
 - type: Client::UI::Agent::AgentCharaCard::Activity
   name: Activity
@@ -33999,6 +34166,9 @@ structs:
     name: AtkEventInterface
     offset: 0
     base: true
+  - type: byte
+    name: Unk8
+    offset: 8
   - type: Client::UI::UIModuleInterface*
     name: UIModuleInterface
     offset: 16
@@ -34080,6 +34250,20 @@ structs:
       name: classJobId
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentInterface*
@@ -39789,6 +39973,19 @@ structs:
     base: true
   virtual_functions: []
   member_functions: []
+- type: Component::GUI::AtkModule::AddonCallbackEntry
+  name: AddonCallbackEntry
+  namespace: Component.GUI
+  union: False
+  size: 16
+  fields:
+  - type: Component::GUI::AtkModule::AddonCallbackEntry::Interface
+    name: Interface
+    offset: 0
+  - type: unsigned __int64
+    name: EventKind
+    offset: 8
+  member_functions: []
 - type: Component::GUI::AtkTexture
   name: AtkTexture
   namespace: Component.GUI
@@ -42424,7 +42621,7 @@ structs:
       name: obj
     - type: byte
       name: checkLineOfSight
-  - signature: E9 ?? ?? ?? ?? 8B C0 48 8D 0D
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 94
     return_type: void
     name: OpenObjectInteraction
     parameters:
@@ -42476,6 +42673,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::Event::EventHandlerSelector*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::Game::Event::EventHandlerSelector*
@@ -45295,6 +45506,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentActionDetail*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -45410,6 +45635,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentAetherCurrent*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -45511,6 +45750,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentAozContentResult*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -45600,6 +45853,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentArchiveItem*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentArchiveItem*
@@ -45721,6 +45988,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentBannerEditor*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -45818,6 +46099,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentBannerInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentBannerInterface*
@@ -45931,6 +46226,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentBannerPreview*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -46017,6 +46326,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentCabinet*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentCabinet*
@@ -46118,6 +46441,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentCharaCard*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentCharaCard*
@@ -46253,6 +46590,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentCompanyCraftMaterial*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentCompanyCraftMaterial*
@@ -46403,6 +46754,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContentsTimer*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -46522,6 +46887,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentCountDownSettingDialog*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -46611,6 +46990,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentCrossWorldLinkshell*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentCrossWorldLinkshell*
@@ -46724,6 +47117,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDailyQuestSupply*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -46813,6 +47220,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDawnInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentDawnInterface*
@@ -46981,6 +47402,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDeepDungeonInspect*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -47082,6 +47517,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDeepDungeonMap*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -47171,6 +47620,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDeepDungeonStatus*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentDeepDungeonStatus*
@@ -47293,6 +47756,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDetail*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -47391,6 +47868,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentEmote*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentEmote*
@@ -47523,6 +48014,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentExplorationInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -47627,6 +48132,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentExplorationResultInterface*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -47713,6 +48232,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFishGuide*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentFishGuide*
@@ -47827,6 +48360,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGatheringNote*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentGatheringNote*
@@ -47954,6 +48501,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGcArmyExpedition*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -48052,6 +48613,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGoldSaucer*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentGoldSaucer*
@@ -48174,6 +48749,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGrandCompanySupply*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -48275,6 +48864,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentHUDLayout*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -48361,6 +48964,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPortal*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentHousingPortal*
@@ -48479,6 +49096,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentHousingSignboard*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -48576,6 +49207,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentIKDResult*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentIKDResult*
@@ -48720,6 +49365,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentInventory*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -48806,6 +49465,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentItemComp*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentItemComp*
@@ -48933,6 +49606,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLinkshell*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -49031,6 +49718,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLoot*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentLoot*
@@ -49202,6 +49903,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJICraftSchedule*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -49299,6 +50014,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJIDisposeShop*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMJIDisposeShop*
@@ -49412,6 +50141,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJIGatheringNoteBook*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -49509,6 +50252,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJINekomimiRequest*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMJINekomimiRequest*
@@ -49640,6 +50397,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJIPouch*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMJIPouch*
@@ -49795,6 +50566,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMKDInfo*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -49924,6 +50709,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJob*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -50010,6 +50809,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMKDSupportJobList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMKDSupportJobList*
@@ -50153,6 +50966,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMcGuffin*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -50270,6 +51097,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismItemDetail*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -50359,6 +51200,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismSetConvert*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMiragePrismPrismSetConvert*
@@ -50488,6 +51343,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMycBattleAreaInfo*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -50577,6 +51446,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMycItemBox*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMycItemBox*
@@ -50698,6 +51581,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentNpcTrade*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -50784,6 +51681,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentPartyMember*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentPartyMember*
@@ -50909,6 +51820,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeItemContext*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentRecipeItemContext*
@@ -51047,6 +51972,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeMaterialList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -51143,6 +52082,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeProductList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentRecipeProductList*
@@ -51252,6 +52205,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentRetainerItemTransfer*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentRetainerItemTransfer*
@@ -51408,6 +52375,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentRetainerTask*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -51497,6 +52478,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentScenarioTree*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentScenarioTree*
@@ -51634,6 +52629,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentShop*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -51726,6 +52735,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTeleport*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentTeleport*
@@ -51839,6 +52862,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTelepotTown*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -51933,6 +52970,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTermFilter*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentTermFilter*
@@ -55234,6 +56285,18 @@ structs:
     name: Item2
     offset: 8
   member_functions: []
+- type: StdPair<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>
+  name: StdPair`2
+  namespace: ''
+  union: False
+  fields:
+  - type: unsigned int
+    name: Item1
+    offset: 0
+  - type: Component::GUI::AtkModule::AddonCallbackEntry
+    name: Item2
+    offset: 8
+  member_functions: []
 - type: Animation::Mapper::hkaSkeletonMapperData::ChainMapping
   name: ChainMapping
   namespace: Animation.Mapper
@@ -55923,6 +56986,20 @@ structs:
       name: fateId
     - type: System::Numerics::Vector3*
       name: position
+  - signature: 40 53 48 83 EC ?? 48 8B 91 ?? ?? ?? ?? 48 8B D9 48 85 D2 0F 84 ?? ?? ?? ?? E8
+    return_type: Client::Game::Fate::FateContext*
+    name: LevelSync
+    parameters:
+    - type: Client::Game::Fate::FateManager*
+      name: this
+  - signature: 48 83 EC ?? 0F B7 42 ?? 66 39 81
+    return_type: byte
+    name: IsSyncedToFate
+    parameters:
+    - type: Client::Game::Fate::FateManager*
+      name: this
+    - type: Client::Game::Fate::FateContext*
+      name: fate
   static_members:
   - signature: 48 89 01 48 8B 3D ?? ?? ?? ?? 48 8B 87
     relative_follow_offsets:
@@ -56788,6 +57865,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::Game::UI::Loot*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   member_functions: []
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 44 24 60
@@ -57583,6 +58674,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentAchievement*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -57677,6 +58782,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentAirshipExplorationResult*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentAirshipExplorationResult*
@@ -57839,6 +58958,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentAozContentBriefing*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -57945,6 +59078,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentBannerMIP*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -58031,6 +59178,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentBannerParty*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentBannerParty*
@@ -58144,6 +59305,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentBlacklist*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentBlacklist*
@@ -58289,6 +59464,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentCraftActionSimulator*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -58378,6 +59567,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDawn*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentDawn*
@@ -58551,6 +59754,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentDawnStory*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -58689,6 +59906,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFieldMarker*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -58781,6 +60012,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFreeCompanyCrestEditor*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentFreeCompanyCrestEditor*
@@ -58900,6 +60145,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFriendlist*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentFriendlist*
@@ -59064,6 +60323,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentHousingInteriorPattern*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -59183,6 +60456,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentItemDetail*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentItemDetail*
@@ -59379,6 +60666,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJIMinionNoteBook*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -59491,6 +60792,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMKDLoreBook*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMKDLoreBook*
@@ -59616,6 +60931,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMaterialize*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMaterialize*
@@ -59779,6 +61108,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMonsterNote*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -59871,6 +61214,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMutelist*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMutelist*
@@ -60052,6 +61409,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentQuestJournal*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -60165,6 +61536,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentReadyCheck*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentReadyCheck*
@@ -60298,6 +61683,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentReconstructionBox*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -60399,6 +61798,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentRevive*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentRevive*
@@ -60541,6 +61954,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentSubmersibleExploration*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -60627,6 +62054,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentSubmersibleExplorationResult*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentSubmersibleExplorationResult*
@@ -60749,6 +62190,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -60838,6 +62293,30 @@ structs:
       name: this
     - type: byte
       name: jobIndex
+  - signature: E8 ?? ?? ?? ?? 0F B6 D8 84 C0 74 ?? 4D 8B 55
+    return_type: byte
+    name: GetBasicMissions
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: StdVector<Client::UI::Agent::AgentWKSMission::MissionEntry>*
+      name: list
+  - signature: E8 ?? ?? ?? ?? EB ?? 48 81 C2
+    return_type: byte
+    name: GetProvisionalMissions
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: StdVector<Client::UI::Agent::AgentWKSMission::MissionEntry>*
+      name: list
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 0F B6 4A ?? 85 C9
+    return_type: byte
+    name: GetMissionLog
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMission*
+      name: this
+    - type: StdVector<Client::UI::Agent::AgentWKSMission::MissionEntry>*
+      name: list
 - type: Client::UI::Agent::AgentWKSMissionInfomation
   name: AgentWKSMissionInfomation
   namespace: Client.UI.Agent
@@ -60857,6 +62336,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentWKSMissionInfomation*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentWKSMissionInfomation*
@@ -64372,6 +65865,30 @@ structs:
     name: _Myval
     offset: 32
   member_functions: []
+- type: RedBlackTree::Node<StdPair<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>>
+  name: Node
+  namespace: Helper
+  union: False
+  fields:
+  - type: RedBlackTree::Node<StdPair<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>>*
+    name: _Left
+    offset: 0
+  - type: RedBlackTree::Node<StdPair<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>>*
+    name: _Parent
+    offset: 8
+  - type: RedBlackTree::Node<StdPair<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>>*
+    name: _Right
+    offset: 16
+  - type: Helper::RedBlackTreeNodeColor
+    name: _Color
+    offset: 24
+  - type: byte
+    name: _Isnil
+    offset: 25
+  - type: StdPair<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>
+    name: _Myval
+    offset: 32
+  member_functions: []
 - type: Shader::CameraParameter
   name: CameraParameter
   namespace: Shader
@@ -65737,6 +67254,16 @@ structs:
       name: slot
     - type: unsigned int
       name: price
+  - signature: E8 ?? ?? ?? ?? 39 6B 38
+    return_type: void
+    name: SetSlotUnblocked
+    parameters:
+    - type: Client::Game::InventoryManager*
+      name: this
+    - type: Client::Game::InventoryType
+      name: type
+    - type: __int16
+      name: slot
   static_members:
   - signature: 48 8D 0D ?? ?? ?? ?? 81 C2
     relative_follow_offsets:
@@ -67655,6 +69182,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFreeCompany*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -67774,6 +69315,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentIKDFishingLog*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentIKDFishingLog*
@@ -67914,6 +69469,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJIGatheringHouse*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMJIGatheringHouse*
@@ -68093,6 +69662,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentPurify*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -68201,6 +69784,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentRetainerList*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentRetainerList*
@@ -68364,6 +69961,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentSalvage*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -68502,6 +70113,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentScreenLog*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentScreenLog*
@@ -72538,6 +74163,9 @@ structs:
   - type: byte
     name: JobStoneEquipped
     offset: 68
+  - type: byte
+    name: CrafterSoulEquipped
+    offset: 69
   - type: int
     name: Flags
     offset: 84
@@ -72581,11 +74209,14 @@ structs:
     name: CombatRoleActionList
     offset: 344
   - type: StdVector<Client::UI::Agent::ActionData>
-    name: GatheringRoleActionList
+    name: DutyActionList
     offset: 368
+  - type: StdVector<Client::UI::Agent::ActionData>
+    name: GatheringRoleActionList
+    offset: 392
   - type: Client::System::String::Utf8String
     name: ClassJobTitle
-    offset: 456
+    offset: 480
   - type: StdVector<Client::UI::Agent::ExtraCommandData>
     name: ExtraCommandData
     offset: 672
@@ -72593,11 +74224,28 @@ structs:
     name: ExtraCommandExcelSheet
     offset: 696
   - type: unsigned int
+    name: ActionChangeAddonId
+    offset: 736
+  - type: unsigned int
     name: UpgradeAddonId
-    offset: 720
+    offset: 744
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentActionMenu*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentActionMenu*
@@ -72704,6 +74352,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFateProgress*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentFateProgress*
@@ -72877,6 +74539,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentFreeCompanyProfile*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -72991,6 +74667,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentHousingPlant*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentHousingPlant*
@@ -73203,6 +74893,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJIFarmManagement*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -73377,6 +75081,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMateriaAttach*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -73475,6 +75193,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismPrismBox*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMiragePrismPrismBox*
@@ -73622,6 +75354,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentRecipeNote*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentRecipeNote*
@@ -75587,6 +77333,15 @@ structs:
   - type: Component::GUI::AtkComponentScrollBar*
     name: AtkComponentScrollBarC8
     offset: 200
+  - type: Component::GUI::AtkCollisionNode*
+    name: CollisionNode
+    offset: 208
+  - type: Component::GUI::AtkComponentBase*
+    name: BottomFadeComponent
+    offset: 216
+  - type: Component::GUI::AtkComponentBase*
+    name: TopFadeComponent
+    offset: 224
   - type: Component::GUI::AtkComponentList::ListItem*
     name: ItemRendererList
     offset: 240
@@ -76659,6 +78414,15 @@ structs:
   - type: int
     name: Steps
     offset: 244
+  - type: __int16
+    name: OffsetL
+    offset: 248
+  - type: __int16
+    name: OffsetR
+    offset: 250
+  - type: __int16
+    name: SliderSize
+    offset: 252
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -78811,6 +80575,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMacro*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -80026,137 +81804,6 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentHoldButton*
       name: this
-- type: Component::GUI::AtkComponentInputBase
-  name: AtkComponentInputBase
-  namespace: Component.GUI
-  union: False
-  size: 480
-  fields:
-  - type: Component::GUI::AtkComponentBase
-    name: AtkComponentBase
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkTextNode*
-    name: AtkTextNode
-    offset: 200
-  - type: Component::GUI::AtkResNode*
-    name: CursorContainer
-    offset: 208
-  - type: Client::System::String::Utf8String
-    name: UnkText1
-    offset: 224
-  - type: Client::System::String::Utf8String
-    name: UnkText2
-    offset: 328
-  - type: Component::GUI::AtkUnitBase*
-    name: ContainingAddon
-    offset: 432
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Initialize
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-  - name: Deinitialize
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-  - name: Update
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-    - type: float
-      name: a2
-  - name: OnUldUpdate
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-  - name: Setup
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-  - name: SetEnabledState
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-    - type: byte
-      name: a2
-  - name: GetAtkResNode
-    offset: 112
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-  - name: GetFocusNode
-    offset: 120
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-  - name: InitializeFromComponentData
-    offset: 136
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentInputBase*
-      name: this
-    - type: __int64
-      name: a2
-  member_functions: []
 - type: Component::GUI::AtkComponentRadioButton
   name: AtkComponentRadioButton
   namespace: Component.GUI
@@ -81097,6 +82744,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentChatLog*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -81361,6 +83022,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentConfigkey*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentConfigkey*
@@ -81730,6 +83405,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentInventoryContext*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -81927,6 +83616,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentItemSearch*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -82052,6 +83755,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMJIAnimalManagement*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentMJIAnimalManagement*
@@ -82334,6 +84051,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentSatisfactionSupply*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentSatisfactionSupply*
@@ -84831,6 +86562,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLookingForGroup*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -86122,6 +87867,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContext*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -86904,6 +88663,140 @@ structs:
       name: this
     - type: int
       name: value
+- type: Component::GUI::AtkComponentInputBase
+  name: AtkComponentInputBase
+  namespace: Component.GUI
+  union: False
+  size: 480
+  fields:
+  - type: Component::GUI::AtkComponentBase
+    name: AtkComponentBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkTextNode*
+    name: AtkTextNode
+    offset: 200
+  - type: Component::GUI::AtkResNode*
+    name: CursorContainer
+    offset: 208
+  - type: Client::System::String::Utf8String
+    name: UnkText1
+    offset: 224
+  - type: Client::System::String::Utf8String
+    name: UnkText2
+    offset: 328
+  - type: Component::GUI::AtkUnitBase*
+    name: ContainingAddon
+    offset: 432
+  - type: Component::GUI::AtkUldComponentDataInputBase
+    name: InputDataBase
+    offset: 464
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+    - type: byte
+      name: a2
+  - name: GetAtkResNode
+    offset: 112
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+  - name: GetFocusNode
+    offset: 120
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions: []
 - type: Component::GUI::AtkComponentListItemRenderer
   name: AtkComponentListItemRenderer
   namespace: Component.GUI
@@ -87042,203 +88935,6 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentListItemRenderer*
       name: this
-- type: Component::GUI::AtkComponentTextInput
-  name: AtkComponentTextInput
-  namespace: Component.GUI
-  union: False
-  size: 1536
-  fields:
-  - type: Component::GUI::AtkComponentInputBase
-    name: AtkComponentInputBase
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkTextInput::AtkTextInputEventInterface
-    name: AtkTextInputEventInterface
-    offset: 480
-    base: true
-  - type: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
-    name: SoftKeyboardInputInterface
-    offset: 488
-  - type: unsigned int
-    name: MaxTextLength
-    offset: 592
-  - type: unsigned int
-    name: MaxTextLength2
-    offset: 596
-  - type: unsigned __int16
-    name: InputSanitizationFlags
-    offset: 620
-  - type: Client::System::String::Utf8String
-    name: UnkText01
-    offset: 640
-  - type: Client::System::String::Utf8String
-    name: UnkText02
-    offset: 744
-  - type: Client::System::String::Utf8String
-    name: AvailableLines
-    offset: 848
-  - type: Component::GUI::AtkTextNode*
-    name: AvailableLinesTextNode
-    offset: 952
-  - type: Component::GUI::AtkTextNode*
-    name: AvailableCharsTextNode
-    offset: 960
-  - type: Component::GUI::AtkUnitBase*
-    name: ContainingAddon2
-    offset: 968
-  - type: Component::GUI::AtkResNode*
-    name: AutoTranslateMenuNode
-    offset: 976
-  - type: int
-    name: CompletionOffset
-    offset: 984
-  - type: Component::GUI::AtkComponentButton*
-    name: AutoTranslateMenuButtons
-    offset: 992
-    size: 9
-    is_string: False
-  - type: Component::GUI::AtkTextNode*
-    name: AutoTranslateMenuPageInfoTextNode
-    offset: 1064
-  - type: Component::GUI::AtkNineGridNode*
-    name: AutoTranslateMenuBackground
-    offset: 1072
-  - type: Client::System::String::Utf8String
-    name: HighlightedAutoTranslateOptionColorPrefix
-    offset: 1104
-  - type: Client::System::String::Utf8String
-    name: HighlightedAutoTranslateOptionColorSuffix
-    offset: 1208
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Initialize
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: Deinitialize
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: Update
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: float
-      name: a2
-  - name: OnUldUpdate
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: Setup
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: SetEnabledState
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: byte
-      name: a2
-  - name: GetAtkResNode
-    offset: 112
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: GetFocusNode
-    offset: 120
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - name: InitializeFromComponentData
-    offset: 136
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: __int64
-      name: a2
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 45 32 C0 33 D2
-    return_type: void
-    name: SetText
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: char*
-      name: text
-  - signature: E8 ?? ?? ?? ?? EB 5D E8
-    return_type: void
-    name: InsertText
-    parameters:
-    - type: Component::GUI::AtkComponentTextInput*
-      name: this
-    - type: char*
-      name: text
-    - type: byte
-      name: unique
 - type: Component::GUI::AtkEventDispatcher::Event
   name: Event
   namespace: Component.GUI
@@ -116433,6 +118129,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentColorant*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -116655,6 +118365,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentHUD*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -116842,6 +118566,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -116958,6 +118696,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentStatus*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -117047,6 +118799,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTryon*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentTryon*
@@ -129904,6 +131670,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLobby*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -130524,10 +132304,10 @@ structs:
     offset: 4618
   - type: unsigned int
     name: Flags
-    offset: 4624
+    offset: 4680
   - type: unsigned int
     name: ErrorData
-    offset: 4628
+    offset: 4684
   virtual_functions: []
   member_functions:
   - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4D 28
@@ -142262,6 +144042,201 @@ structs:
     offset: 1968
   virtual_functions: []
   member_functions: []
+- type: Component::GUI::AtkComponentTextInput
+  name: AtkComponentTextInput
+  namespace: Component.GUI
+  union: False
+  size: 1536
+  fields:
+  - type: Component::GUI::AtkComponentInputBase
+    name: AtkComponentInputBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkTextInput::AtkTextInputEventInterface
+    name: AtkTextInputEventInterface
+    offset: 480
+    base: true
+  - type: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
+    name: SoftKeyboardInputInterface
+    offset: 488
+    base: true
+  - type: Component::GUI::AtkUldComponentDataTextInput
+    name: ComponentTextData
+    offset: 496
+  - type: unsigned __int16
+    name: InputSanitizationFlags
+    offset: 620
+  - type: Client::System::String::Utf8String
+    name: UnkText01
+    offset: 640
+  - type: Client::System::String::Utf8String
+    name: UnkText02
+    offset: 744
+  - type: Client::System::String::Utf8String
+    name: AvailableLines
+    offset: 848
+  - type: Component::GUI::AtkTextNode*
+    name: AvailableLinesTextNode
+    offset: 952
+  - type: Component::GUI::AtkTextNode*
+    name: AvailableCharsTextNode
+    offset: 960
+  - type: Component::GUI::AtkUnitBase*
+    name: ContainingAddon2
+    offset: 968
+  - type: Component::GUI::AtkResNode*
+    name: AutoTranslateMenuNode
+    offset: 976
+  - type: int
+    name: CompletionOffset
+    offset: 984
+  - type: Component::GUI::AtkComponentButton*
+    name: AutoTranslateMenuButtons
+    offset: 992
+    size: 9
+    is_string: False
+  - type: Component::GUI::AtkTextNode*
+    name: AutoTranslateMenuPageInfoTextNode
+    offset: 1064
+  - type: Component::GUI::AtkNineGridNode*
+    name: AutoTranslateMenuBackground
+    offset: 1072
+  - type: Client::System::String::Utf8String
+    name: HighlightedAutoTranslateOptionColorPrefix
+    offset: 1104
+  - type: Client::System::String::Utf8String
+    name: HighlightedAutoTranslateOptionColorSuffix
+    offset: 1208
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: byte
+      name: a2
+  - name: GetAtkResNode
+    offset: 112
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: GetFocusNode
+    offset: 120
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 45 32 C0 33 D2
+    return_type: void
+    name: SetText
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: char*
+      name: text
+  - signature: E8 ?? ?? ?? ?? EB 5D E8
+    return_type: void
+    name: InsertText
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
+    - type: char*
+      name: text
+    - type: byte
+      name: unique
 - type: Client::Game::GoldSaucer::GFateDirector
   name: GFateDirector
   namespace: Client.Game.GoldSaucer
@@ -143707,6 +145682,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -143841,6 +145830,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentGearSet*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentGearSet*
@@ -143996,6 +145999,20 @@ structs:
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentInspect*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
     return_type: Component::GUI::AtkValue*
     parameters:
     - type: Client::UI::Agent::AgentInspect*
@@ -158264,6 +160281,20 @@ structs:
       name: a4
     - type: unsigned __int64
       name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMap*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
   - name: Dtor
     offset: 16
     return_type: void
@@ -162133,6 +164164,16 @@ structs:
       name: inventorySlot
     - type: int
       name: extraParam
+  - signature: E8 ?? ?? ?? ?? 4C 8B 46 ?? 49 BF
+    return_type: void
+    name: GetEventMapMarkers
+    parameters:
+    - type: Client::Game::Event::EventFramework*
+      name: this
+    - type: unsigned __int16
+      name: territoryId
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: markerVector
   static_members:
   - signature: 4C 39 2D ?? ?? ?? ?? 74 14
     relative_follow_offsets:
@@ -162534,6 +164575,12 @@ structs:
   - type: StdVector<__int64>
     name: CallbackHandlerFunctions
     offset: 29312
+  - type: Component::GUI::AtkModuleEvent*
+    name: UIModuleEvent
+    offset: 29336
+  - type: StdMap<unsigned int, Component::GUI::AtkModule::AddonCallbackEntry>
+    name: AddonCallbackMapping
+    offset: 29344
   - type: Component::GUI::AtkMessageBoxManager*
     name: AtkMessageBoxManager
     offset: 29360
@@ -162744,7 +164791,7 @@ structs:
       name: this
   - signature: 40 56 48 83 EC 50 C7 02
     return_type: Component::GUI::AtkValue*
-    name: UnitBaseCallbackHandler
+    name: HandleAddonAgentCallback
     parameters:
     - type: Component::GUI::AtkModule*
       name: this
@@ -164297,11 +166344,11 @@ structs:
     - type: Client::UI::Agent::AgentInterface*
       name: parentAgent
     - type: unsigned __int64
-      name: unk
+      name: eventKind
     - type: unsigned __int16
       name: parentAddonId
     - type: int
-      name: unk2
+      name: depthLayer
   - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9
     return_type: unsigned __int16
     name: OpenAddonByAgent
@@ -164319,7 +166366,7 @@ structs:
     - type: Client::UI::Agent::AgentInterface*
       name: agent
     - type: __int64
-      name: a7
+      name: eventKind
     - type: unsigned __int16
       name: parentAddonId
   - signature: 48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73
