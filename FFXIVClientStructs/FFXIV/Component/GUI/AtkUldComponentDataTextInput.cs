@@ -19,7 +19,7 @@ public unsafe partial struct AtkUldComponentDataTextInput {
     [FieldOffset(0x6C), FixedSizeArray] internal FixedSizeArray16<byte> _charSetExtras;
 }
 
-public enum TextInputFlags1 { // TODO: set underlying type to byte
+public enum TextInputFlags1 { // TODO: set underlying type to byte, additionally add [Flags] attribute
     Capitalize = 0x1,
     Mask = 0x2,
     EnableDictionary = 0x4,
@@ -30,7 +30,7 @@ public enum TextInputFlags1 { // TODO: set underlying type to byte
     AllowLowerCase = 0x80
 }
 
-public enum TextInputFlags2 { // TODO: set underlying type to byte
+public enum TextInputFlags2 { // TODO: set underlying type to byte, additionally add [Flags] attribute
     AllowNumberInput = 0x1,
     AllowSymbolInput = 0x2,
     WordWrap = 0x4,
