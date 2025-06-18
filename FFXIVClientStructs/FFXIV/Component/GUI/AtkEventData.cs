@@ -29,6 +29,7 @@ public partial struct AtkEventData {
         // different than the UIInputData one
         [Flags]
         public enum ModifierFlag : byte {
+            None = 0,
             Ctrl = 1 << 0,
             Alt = 1 << 1,
             Shift = 1 << 2,
@@ -79,8 +80,8 @@ public partial struct AtkEventData {
     public unsafe struct AtkDragDropData {
         [FieldOffset(0x00)] public AtkDragDropInterface* DragDropInterface;
         [FieldOffset(0x08)] public AtkComponentNode* ComponentNode;
-        [FieldOffset(0x10)] private byte Unk10;
-        [FieldOffset(0x11)] private byte Unk11;
+        [FieldOffset(0x10)] public byte MouseButtonId;
+        [FieldOffset(0x11)] public AtkMouseData.ModifierFlag MouseModifier;
         [FieldOffset(0x12)] private int Unk12;
         [FieldOffset(0x16)] private short Unk16;
         [FieldOffset(0x18)] private nint Unk18;

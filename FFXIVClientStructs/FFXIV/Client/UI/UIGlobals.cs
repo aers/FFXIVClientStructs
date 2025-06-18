@@ -1,3 +1,6 @@
+using FFXIVClientStructs.FFXIV.Client.UI.Misc;
+using FFXIVClientStructs.FFXIV.Component.GUI;
+
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 /// <summary>
@@ -54,4 +57,10 @@ public unsafe partial struct UIGlobals {
 
         PlaySoundEffect(effectId + 36);
     }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 4C 24 ?? 44 0F B6 C0")]
+    public static partial RaptureHotbarModule.HotbarSlotType GetHotbarSlotTypeFromDragDropType(DragDropType type);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 D8 74 2A")]
+    public static partial ulong GetDragDropTypeMask(DragDropType type);
 }
