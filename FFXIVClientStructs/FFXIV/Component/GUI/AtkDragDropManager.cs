@@ -27,7 +27,7 @@ public unsafe partial struct AtkDragDropManager {
     // Can't be false if ReclickToDrop is false
     [FieldOffset(0xBF)] public bool IsNotDiscarding;
 
-    /// <remarks> Check <see cref="IsDragging"/> before calling. </remarks>
+    /// <remarks> Check if not <see cref="IsDragging"/> before calling. </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 24 06")]
     public partial void StartDragDrop(AtkDragDropInterface* dragDropInterface, short dragStartX, short dragStartY);
 
