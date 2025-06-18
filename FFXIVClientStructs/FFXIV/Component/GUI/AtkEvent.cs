@@ -1,6 +1,5 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
-// max known: 79
 // seems to have generic events followed by component-specific events
 public enum AtkEventType : byte {
     // AtkResNode
@@ -45,7 +44,9 @@ public enum AtkEventType : byte {
     // AtkComponentDragDrop
     DragDropBegin = 50, // sent on MouseDown over a draggable icon (will NOT send for a locked icon)
     DragDropEnd = 51,
+    DragDropInsertAttempt = 52, // always fired before it checks whether or not it can actually accept the drop
     DragDropInsert = 53, // sent when dropping an icon into a hotbar/inventory slot or similar
+    DragDropCanAcceptCheck = 54, // optional, allows conditional drop acceptance
     DragDropRollOver = 55,
     DragDropRollOut = 56,
     DragDropDiscard = 57, // sent when dropping an icon into empty screenspace, eg to remove an action from a hotbar
@@ -81,7 +82,7 @@ public enum AtkEventType : byte {
     LinkMouseOver = 76,
     LinkMouseOut = 77,
 
-    Unk83 = 83, // found inside AtkComponentScrollBar.Deinitialize
+    Unk83 = 83, // found inside AtkComponentScrollBar.Deinitialize, AtkComponentDragDrop.BeginDragDrop - "clicked on viewport" event?
 }
 
 // Component::GUI::AtkEvent
@@ -104,7 +105,8 @@ public struct AtkEventState {
     [FieldOffset(0x0)] public AtkEventType EventType;
     // AtkInputManager_HandleInput reads these flags (at the very end) and writes them as 3 bools to AtkCollisionManager, which
     // are used in AtkModule_HandleInput to clear Gamepad inputs from UIInputData??
-    [FieldOffset(0x1)] public byte UnkFlags1;
+    [FieldOffset(0x1), Obsolete("Renamed to ReturnFlags")] public byte UnkFlags1;
+    [FieldOffset(0x1)] public byte ReturnFlags;
     [FieldOffset(0x2)] public AtkEventStateFlags StateFlags;
     [FieldOffset(0x3)] public byte UnkFlags3; // for cleanup maybe?
 }
@@ -121,7 +123,12 @@ public enum AtkEventStateFlags : byte {
     Forwarded = 0b0000_0010,
 
     Unk3 = 0b0000_0100,
-    Unk4 = 0b0000_1000,
+
+    /// <summary>
+    /// Specifies whether <see cref="AtkEventState.ReturnFlags"/> is copied to <see cref="AtkEventDispatcher.Event.ReturnFlags"/>.
+    /// </summary>
+    HasReturnFlags = 0b0000_1000,
+    [Obsolete("Renamed to HasReturnFlags")] Unk4 = 0b0000_1000,
 
     /// <summary>
     /// Specifies whether the event is a global event.<br/>
