@@ -16,6 +16,9 @@ public unsafe partial struct AgentContentsFinder {
 
     [FieldOffset(0x8A8)] public AgentContentsFinderReward RewardSub;
 
+    // Can be found with "48 89 5F ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B C8"
+    [FieldOffset(0x1E88)] public AgentContentsFinderReward.ItemWrap* SelectedReward;
+
     [FieldOffset(0x1E98)] public StdVector<Pointer<Contents>> ContentList;
     [FieldOffset(0x1EB0)] public StdVector<ContentsId> SelectedContent;
     [FieldOffset(0x1EC8)] public ContentsId SelectedDuty;
