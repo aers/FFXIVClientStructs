@@ -3019,6 +3019,15 @@ enums:
   values:
     "YardObject": 2
     "Furniture": 3
+- type: Client::Game::Object::TreasureFlags
+  name: TreasureFlags
+  underlying: byte
+  namespace: Client.Game.Object
+  flags: True
+  values:
+    "None": 0
+    "Opened": 1
+    "FadedOut": 2
 - type: Client::Game::MJI::FarmSlotFlags
   name: FarmSlotFlags
   underlying: byte
@@ -8079,6 +8088,22 @@ structs:
     offset: 18
     size: 16
     is_string: False
+  member_functions: []
+- type: Client::Game::InstanceContent::MapEffectItem
+  name: MapEffectItem
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 12
+  fields:
+  - type: unsigned int
+    name: LayoutId
+    offset: 0
+  - type: unsigned __int16
+    name: State
+    offset: 8
+  - type: byte
+    name: Flags
+    offset: 10
   member_functions: []
 - type: Client::Game::InstanceContent::OccultCrescentMKDData
   name: OccultCrescentMKDData
@@ -26820,6 +26845,24 @@ structs:
   - type: Client::System::String::Utf8String*
     name: Log
     offset: 416
+  member_functions: []
+- type: Client::Game::InstanceContent::MapEffectList
+  name: MapEffectList
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 1542
+  fields:
+  - type: Client::Game::InstanceContent::MapEffectItem
+    name: Items
+    offset: 0
+    size: 128
+    is_string: False
+  - type: unsigned __int16
+    name: ItemCount
+    offset: 1538
+  - type: byte
+    name: Dirty
+    offset: 1540
   member_functions: []
 - type: Client::Game::InventoryItem::Id
   name: Id
@@ -56357,6 +56400,9 @@ structs:
     name: GameObject
     offset: 0
     base: true
+  - type: Client::Game::Object::TreasureFlags
+    name: Flags
+    offset: 492
   virtual_functions:
   - name: GetGameObjectId
     offset: 8
@@ -144007,6 +144053,9 @@ structs:
   - type: Client::Game::DutyActionManager
     name: DutyActionManager
     offset: 1408
+  - type: Client::Game::InstanceContent::MapEffectList*
+    name: MapEffects
+    offset: 3304
   - type: Client::Game::InstanceContent::DynamicEventContainer*
     name: DynamicEvents
     offset: 3312
