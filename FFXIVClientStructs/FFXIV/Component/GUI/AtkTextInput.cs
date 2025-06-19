@@ -23,6 +23,7 @@ public unsafe partial struct AtkTextInput {
     // Component::GUI::AtkTextInput::AtkTextInputEventInterface
     // no explicit constructor, just an event interface 
     [GenerateInterop(true)]
+    [VirtualTable("48 89 86 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 86 ?? ?? ?? ?? E8 ?? ?? ?? ?? 40 F6 C5 01", 10, 5)]
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public unsafe partial struct AtkTextInputEventInterface;
 }

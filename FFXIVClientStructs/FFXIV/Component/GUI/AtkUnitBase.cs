@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x238)]
-[VirtualTable("48 89 51 28 48 8D 05 ?? ?? ?? ?? 48 89 01", 7)]
+[VirtualTable("48 89 51 28 48 8D 05 ?? ?? ?? ?? 48 89 01", 7, 74)]
 public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x8), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x28)] public AtkUldManager UldManager;
@@ -67,7 +67,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <summary>
     /// <code>
     /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)<br/>
-    /// 0b0000_0100 [0x4] = Disable "Close" option in title bar context menu
+    /// 0b0000_0100 [0x4] = Disable "Close" option in title bar context menu and prevents window from being closed via input (ESC or similar)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A1)] public byte Flags1A1;
@@ -220,10 +220,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     }
 
     [MemberFunction("E9 ?? ?? ?? ?? 83 C3 F9")]
-    public partial byte FireCallbackInt(int callbackValue);
+    public partial byte FireCallbackInt(int callbackValue); // TODO: return bool
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 E8 8B 44 24 20")]
-    public partial void FireCallback(uint valueCount, AtkValue* values, bool close = false);
+    public partial void FireCallback(uint valueCount, AtkValue* values, bool close = false); // TODO: return bool
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 88 45 67")]
     public partial void UpdateCollisionNodeList(bool clearFocus);

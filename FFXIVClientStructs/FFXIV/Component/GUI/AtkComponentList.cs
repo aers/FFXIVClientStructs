@@ -13,6 +13,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkComponentList : ICreatable {
     [FieldOffset(0xC0)] public AtkComponentListItemRenderer* FirstAtkComponentListItemRenderer;
     [FieldOffset(0xC8)] public AtkComponentScrollBar* AtkComponentScrollBarC8;
+    [FieldOffset(0xD0)] public AtkCollisionNode* CollisionNode;
+    [FieldOffset(0xD8)] public AtkComponentBase* BottomFadeComponent; // ComponentBase that has a image node
+    [FieldOffset(0xE0)] public AtkComponentBase* TopFadeComponent; // ComponentBase that has a image node
     [FieldOffset(0xF0)] public ListItem* ItemRendererList;
     [FieldOffset(0x100)] public CategoryItem* CategoryItemRendererList;
     [FieldOffset(0x120)] public int ListLength;
@@ -90,7 +93,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     public struct CategoryItem {
         [FieldOffset(0)] public AtkComponentListItemRenderer* AtkComponentListItemRenderer;
         [FieldOffset(0x8)] public AtkComponentNode* NodeList;
-        [FieldOffset(0x10)] private ushort NodeCount;
+        [FieldOffset(0x10)] public ushort NodeCount;
         [FieldOffset(0x12)] public ushort NodeId;
     }
 

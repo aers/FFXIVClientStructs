@@ -30,4 +30,10 @@ public unsafe partial struct FateManager {
 
     [MemberFunction("40 53 48 83 EC ?? 48 8B 81 ?? ?? ?? ?? 49 8B D8")]
     public partial bool TryGetFatePosition(ushort fateId, Vector3* position);
+
+    [MemberFunction("40 53 48 83 EC ?? 48 8B 91 ?? ?? ?? ?? 48 8B D9 48 85 D2 0F 84 ?? ?? ?? ?? E8")]
+    public partial FateContext* LevelSync();
+
+    [MemberFunction("48 83 EC ?? 0F B7 42 ?? 66 39 81")]
+    public partial bool IsSyncedToFate(FateContext* fate);
 }

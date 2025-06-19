@@ -80,6 +80,8 @@ public enum AtkEventType : byte {
     LinkMouseClick = 75,
     LinkMouseOver = 76,
     LinkMouseOut = 77,
+
+    Unk83 = 83, // found inside AtkComponentScrollBar.Deinitialize
 }
 
 // Component::GUI::AtkEvent

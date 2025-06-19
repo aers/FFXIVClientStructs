@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 using FFXIVClientStructs.FFXIV.Client.Game.MassivePcContent;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
@@ -67,6 +68,9 @@ public unsafe partial struct EventFramework {
         MaterializeItem(new EventId { ContentId = EventHandlerContent.Materialize, EntryId = (ushort)entryId }, itemSlot->Container, itemSlot->Slot, 0);
     }
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 46 ?? 49 BF")]
+    public partial void GetEventMapMarkers(ushort territoryId, StdVector<MapMarkerData>* markerVector);
+
     [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8")]
     public static partial uint GetCurrentContentId();
 
@@ -78,6 +82,9 @@ public unsafe partial struct EventFramework {
 
     [MemberFunction("48 83 EC 28 48 8B 05 ?? ?? ?? ?? 48 85 C0 74 2C")]
     public static partial bool CanLeaveCurrentContent();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 41 B2")]
+    public static partial void LeaveCurrentContent(bool forced = false);
 
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
         var instanceDirector = GetInstanceContentDirector();
