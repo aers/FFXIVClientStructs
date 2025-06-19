@@ -83,6 +83,9 @@ public unsafe partial struct EventFramework {
     [MemberFunction("48 83 EC 28 48 8B 05 ?? ?? ?? ?? 48 85 C0 74 2C")]
     public static partial bool CanLeaveCurrentContent();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 41 B2")]
+    public static partial void LeaveCurrentContent(bool forced = false);
+
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
         var instanceDirector = GetInstanceContentDirector();
         if (instanceDirector == null || instanceDirector->InstanceContentType != instanceContentType)

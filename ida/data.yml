@@ -11821,7 +11821,6 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D96B90: ctor
-      0x1409DEE50: AbandonDuty
   Client::UI::Agent::AgentAozContentBriefing:
     vtbls:
       - ea: 0x14206F390
@@ -14284,6 +14283,7 @@ classes:
       0x1409DECB0: GetCurrentContentType
       0x1409DED80: GetCurrentContentId # static
       0x1409DEE00: CanLeaveCurrentContent # static
+      0x1409DEE50: LeaveCurrentContent # static
       0x1409E0D40: GetContentFinderCondition
       0x1416551F0: GetPublicContentDirectorByType # static
       0x140B45900: MaterializeItem
