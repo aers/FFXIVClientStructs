@@ -66,7 +66,7 @@ public enum DragDropInputMode : byte {
     None = 0,
     Unk1 = 1,
     Unk2 = 2,
-    Unk4 = 3,
+    Unk3 = 3,
 }
 
 [Flags]
