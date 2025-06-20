@@ -21,6 +21,10 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x108)] public Utf8String OnlineId;
     [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray3<Utf8String> _chocoboBarding;
     [FieldOffset(0x2A8), FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
+
+    // Offset can be found with "44 89 BF ? ? ? ? E8 ? ? ? ? 48 8B C8 48 8B D8"
+    [FieldOffset(0x44C)] public int SelectedItemSlot;
+
     [FieldOffset(0x448)] public FreeCompanyData FreeCompany;
     // Status fields
     // 0: Nothing to do
