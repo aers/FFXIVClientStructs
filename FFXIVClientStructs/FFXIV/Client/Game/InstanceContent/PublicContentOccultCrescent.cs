@@ -44,20 +44,22 @@ public unsafe partial struct PublicContentOccultCrescent {
     public static partial bool ChangeSupportJob(byte id);
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x24)]
-public struct OccultCrescentMKDData {
+public partial struct OccultCrescentMKDData {
     [FieldOffset(0x00), CExporterExcelBegin("MKDData")] public uint QuestId;
     [FieldOffset(0x04)] public uint ZoneNameId; // Addon RowId
-    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray2<uint> _currencyItemIds;
-    [FieldOffset(0x10)] public uint CipherItemId;
-    [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray2<uint> _currencyNameIds; // Addon RowIds
-    [FieldOffset(0x1C)] public int CipherNameId;
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<uint> _currencyItemIds;
+    [FieldOffset(0x10), Obsolete("Use CurrencyItemIds[2] instead")] public uint CipherItemId;
+    [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray3<uint> _currencyNameIds; // Addon RowIds
+    [FieldOffset(0x1C), Obsolete("Use CurrencyNameIds[2] instead")] public int CipherNameId;
     [FieldOffset(0x20)] public byte Unknown8; // Minimum Knowledge Level?
     [FieldOffset(0x21), CExporterExcelEnd] public byte Unknown9;
 }
 
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x5A)] // unsure how long
-public struct OccultCrescentState {
+public partial struct OccultCrescentState {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray13<uint> _supportJobExperience;
     [FieldOffset(0x34)] public uint CurrentKnowledge;
     [FieldOffset(0x38)] public uint NeededKnowledge;
