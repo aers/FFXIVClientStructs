@@ -22,7 +22,7 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray3<Utf8String> _chocoboBarding;
     [FieldOffset(0x2A8), FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
 
-    [FieldOffset(0x449)] public bool IsPartOfFreeCompany;
+    [FieldOffset(0x449)] public bool IsBuddyInspect;
 
     // Offset can be found with "44 89 BF ? ? ? ? E8 ? ? ? ? 48 8B C8 48 8B D8"
     [FieldOffset(0x44C)] public int SelectedItemSlot;
@@ -57,7 +57,7 @@ public unsafe partial struct AgentInspect {
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct FreeCompanyData {
         //[FieldOffset(0x00)] public byte Unkown4b0; // Maybe FreeCompany get status 1 = Finished
-        [Obsolete("Use IsPartOfFreeCompany instead")]
+        [Obsolete("This field is wrong, it is IsBuddyInspect actually", true)]
         [FieldOffset(0x01)] public bool IsPartOfFreeCompany; // HasGuild???????? if 0 Client::UI::RaptureAtkModule.OpenAddon can be called without getting additional infos
         [FieldOffset(0x00)] public long Id;
         [FieldOffset(0x8)] public CrestData Crest;
