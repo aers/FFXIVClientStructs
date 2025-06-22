@@ -2552,6 +2552,7 @@ classes:
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x1409EF3D0: ctor # unused, inlined
+      0x1409EF250: FindLootObjectById
       0x1409F0A00: GetItem
       0x1409F0BA0: SetSelectedIndex
   Client::Game::UI::LootItem:
