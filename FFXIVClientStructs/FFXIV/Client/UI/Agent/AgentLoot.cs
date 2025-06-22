@@ -8,8 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x388)]
 public unsafe partial struct AgentLoot {
-    [FieldOffset(0x2C)] public byte HoveredSlotIndex;
-    [FieldOffset(0x30)] public uint HoveredItemId;
-    [FieldOffset(0x74)] public int SelectedSlotIndex;
-    [FieldOffset(0x7C)] public int NumItems;
+    [FieldOffset(0x34)] public byte HoveredSlotIndex;
+    [FieldOffset(0x38)] public uint HoveredItemId;
+    [FieldOffset(0x84)] public int SelectedSlotIndex;
+    [FieldOffset(0x8C)] public int NumItems;
 }
