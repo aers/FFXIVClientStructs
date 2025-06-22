@@ -18,7 +18,7 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x8A8)] public AgentContentsFinderReward RewardSub;
 
     // Offset can be found with "48 8D BE ? ? ? ? 48 85 DB"
-    [FieldOffset(0x1E70)] public ContextMenuEventHandler RewardContextMenuHandler;
+    [FieldOffset(0x1E70)] public RewardContextMenuEventHandler RewardContextMenuHandler;
 
     [FieldOffset(0x1E98)] public StdVector<Pointer<Contents>> ContentList;
     [FieldOffset(0x1EB0)] public StdVector<ContentsId> SelectedContent;
@@ -59,9 +59,10 @@ public unsafe partial struct AgentContentsFinder {
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 06 48 8B CE 48 81 C4")]
     public partial void UpdateAddon();
 
+    [GenerateInterop]
+    [Inherits<AtkModuleInterface.AtkEventInterface>]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct ContextMenuEventHandler {
-        [FieldOffset(0)] public AtkModuleInterface.AtkEventInterface* Vtable;
+    public partial struct RewardContextMenuEventHandler {
         [FieldOffset(0x10)] public uint AddonId;
         [FieldOffset(0x18)] public AgentContentsFinderReward.ItemWrap* SelectedReward;
     }

@@ -12392,6 +12392,10 @@ classes:
       0x140D4FF70: QueueSelectedContent
       0x140D50790: UpdateDescription
       0x140D53AC0: UpdateAddon
+  Client::UI::Agent::AgentContentsFinder::RewardContextMenuEventHandler:
+    vtbls:
+      - ea: 0x142086790
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::UI::Agent::AgentMap::MapMarkerStructSearchName:
     vtbls:
       - ea: 0x14208A0E0
