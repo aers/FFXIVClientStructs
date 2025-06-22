@@ -1392,6 +1392,7 @@ classes:
       0x140840850: RequestPrismBox
       0x140840DE0: RestorePrismBoxItem
       0x140841640: RequestGlamourPlates
+      0x140841790: GetGlamourPlateData
       0x1408419B0: ApplyGlamourPlate
   Client::Game::MateriaRequestManager:
     instances:
@@ -11698,6 +11699,20 @@ classes:
     funcs:
       0x140C10A00: ctor
       0x140C132B0: OpenForGearset
+      0x140C132F0: SetSelectedItemData
+      0x140C137D0: HideColorant
+      0x140C13470: SetItemStain
+      0x140C139C0: SetSelectedItemStains
+      0x140C13FF0: ClosePopups
+      0x140C14200: CloseDialogAddon
+      0x140C14250: SetDialogAddonId
+      0x140C14C40: SelectPlate
+      0x140C151D0: GetSelectedItem # inlined
+      0x140C151F0: GetCurrentItemByIndex # inlined
+      0x140C15210: HasChanges
+  Client::UI::Agent::AgentMiragePrismMiragePlateData::MiragePlateItem:
+    funcs:
+      0x140C46FC0: Clear
   Client::UI::Agent::AgentPerformanceMode:
     vtbls:
       - ea: 0x14206E7B8
