@@ -26,19 +26,19 @@ public unsafe partial struct ContentDirector {
     /// <returns>Time in seconds</returns>
     [VirtualFunction(313)]
     public partial uint GetContentTimeMax();
-}
 
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x606)]
-public partial struct MapEffectList {
-    [FieldOffset(0), FixedSizeArray] internal FixedSizeArray128<MapEffectItem> _items;
-    [FieldOffset(0x602)] public ushort ItemCount;
-    [FieldOffset(0x604)] public byte Dirty;
-}
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x608)]
+    public partial struct MapEffectList {
+        [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray128<MapEffectItem> _items;
+        [FieldOffset(0x602)] public ushort ItemCount;
+        [FieldOffset(0x604)] public byte Dirty;
+    }
 
-[StructLayout(LayoutKind.Explicit, Size = 0xC)]
-public struct MapEffectItem {
-    [FieldOffset(0)] public uint LayoutId;
-    [FieldOffset(0x8)] public ushort State;
-    [FieldOffset(0xA)] public byte Flags;
+    [StructLayout(LayoutKind.Explicit, Size = 0xC)]
+    public struct MapEffectItem {
+        [FieldOffset(0x00)] public uint LayoutId;
+        [FieldOffset(0x08)] public ushort State;
+        [FieldOffset(0x0A)] public byte Flags;
+    }
 }
