@@ -6892,6 +6892,16 @@ classes:
         base: Component::GUI::AtkEventListener
     funcs:
       0x140602CD0: ctor # unused, inlined
+      0x140602FA0: StartDragDrop
+      0x1406031E0: Drop
+      0x140602EA0: CancelDragDrop
+      0x140603A30: EndDragDrop
+      0x140603E40: TryInsert
+      0x140603D50: HandleMouseDown # inlined
+      0x140603B90: HandleMouseUp
+      0x140603DD0: HandleMouseMove # inlined
+      0x140604170: Discard
+      0x140603350: DispatchCanAcceptCheckEvent
   Component::GUI::AtkDialogue:
     vtbls:
       - ea: 0x1420383B0
@@ -7033,6 +7043,7 @@ classes:
       0x14069A1E0: GetAsAtkComponentJournalCanvas
       0x14069D040: GetAsAtkComponentHoldButton
       0x14069D740: GetAsAtkComponentPortrait
+      0x14061E800: IsDroppable
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x142038D68
@@ -7286,6 +7297,7 @@ classes:
       4: SetComponentNode
       5: GetActiveNode
       7: GetComponent
+      8: HandleMouseUpEvent
       11: GetPayloadContainer
   Component::GUI::AtkDragDropPayloadContainer:
     funcs:
@@ -7302,6 +7314,7 @@ classes:
 #fail       0x14064FD50: ctor # no xrefs, inlined @ 0x14064B78B
       0x14064FE90: Finalizer # no xrefs
       #0x14056BCF0: RemoveAllEvents # 7.0: no longer exists. instead there is a new function to remove individual events - see 0x140671AFA
+      0x1406546B0: StartDragDrop
   Component::GUI::AtkComponentList:
     vtbls:
       - ea: 0x1420394C8
@@ -7558,17 +7571,19 @@ classes:
     funcs:
       0x14068F530: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
       0x14068EA50: LoadIcon
+      0x14068EA70: GetIconId
       0x14068EC60: GetQuantityText
       0x14068EC90: SetQuantityText
       0x14068ED10: SetQuantity
-      0x14068EA70: GetIconId
+      0x14068EE30: SetIconDisableState
       0x14068F110: AttachTooltip
       0x14068F170: DetachTooltip
       0x14068F250: PlayAnimation
-      0x14068F620: Finalizer
       0x14068F330: GetActiveTimelineLabelId
-      0x14068EE30: SetIconDisableState
       0x14068F360: PlayFrameAnimation
+      0x14068F620: Finalizer
+      0x140690F70: BeginDragDrop
+      0x1406914C0: DispatchCancelEvent
   Component::GUI::AtkComponentMultipurpose:
     vtbls:
       - ea: 0x14203A728
