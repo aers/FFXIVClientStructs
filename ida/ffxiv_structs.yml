@@ -50,7 +50,9 @@ enums:
     "ListItemSelect": 38
     "DragDropBegin": 50
     "DragDropEnd": 51
+    "DragDropInsertAttempt": 52
     "DragDropInsert": 53
+    "DragDropCanAcceptCheck": 54
     "DragDropRollOver": 55
     "DragDropRollOut": 56
     "DragDropDiscard": 57
@@ -93,6 +95,143 @@ enums:
     "Right": 1
     "Up": 2
     "Down": 3
+- type: Component::GUI::AtkTooltipManager::AtkTooltipType
+  name: AtkTooltipType
+  underlying: byte
+  namespace: Component.GUI
+  flags: False
+  values:
+    "Text": 1
+    "Item": 2
+    "TextItem": 3
+    "Action": 4
+- type: Component::GUI::DragDropType
+  name: DragDropType
+  underlying: unsigned int
+  namespace: Component.GUI
+  flags: False
+  values:
+    "Nothing": 1
+    "Everything": 2
+    "ActionBar": 3
+    "Unknown4": 4
+    "Item": 5
+    "Macro": 6
+    "Action": 7
+    "Emote": 8
+    "Unknown9": 9
+    "EventItem": 10
+    "Marker": 11
+    "CraftingAction": 12
+    "GeneralAction": 13
+    "Unknown14": 14
+    "Crystal": 15
+    "Unknown16": 16
+    "Unknown17": 17
+    "Unknown18": 18
+    "BuddyAction": 19
+    "MainCommand": 20
+    "GearSet": 21
+    "Companion": 22
+    "PetAction": 23
+    "Mount": 24
+    "Unknown25": 25
+    "FieldMarker": 26
+    "Recipe": 27
+    "Unknown28": 28
+    "Unknown29": 29
+    "Unknown30": 30
+    "ExtraCommand": 31
+    "QuickChat": 32
+    "ActionComboRoute": 33
+    "BgcArmyAction": 34
+    "Unknown35": 35
+    "Perform": 36
+    "Unknown37": 37
+    "Unknown38": 38
+    "Unknown39": 39
+    "Ornament": 40
+    "MYCTemporaryItem": 41
+    "Glasses": 42
+    "EquipmentSlot": 43
+    "Unknown44": 44
+    "ActionBar_Macro": 45
+    "ActionBar_Action": 46
+    "ActionBar_Emote": 47
+    "ActionBar_Item": 48
+    "Unknown49": 49
+    "ActionBar_EventItem": 50
+    "Unknown51": 51
+    "Unknown52": 52
+    "ActionBar_Marker": 53
+    "ActionBar_CraftingAction": 54
+    "ActionBar_GeneralAction": 55
+    "ActionBar_BuddyAction": 56
+    "ActionBar_MainCommand": 57
+    "ActionBar_Companion": 58
+    "ActionBar_GearSet": 59
+    "ActionBar_PetAction": 60
+    "ActionBar_Mount": 61
+    "ActionBar_FieldMarker": 62
+    "ActionBar_Recipe": 63
+    "Unknown64": 64
+    "Unknown65": 65
+    "Unknown66": 66
+    "ActionBar_ExtraCommand": 67
+    "ActionBar_QuickChat": 68
+    "Unknown69": 69
+    "ActionBar_BgcArmyAction": 70
+    "Unknown71": 71
+    "ActionBar_Perform": 72
+    "ActionBar_McGuffin": 73
+    "ActionBar_Ornament": 74
+    "ActionBar_MYCTemporaryItem": 75
+    "ActionBar_Glasses": 76
+    "Unknown77": 77
+    "Unknown78": 78
+    "AOZNotebook_Action": 79
+    "Unknown80": 80
+    "Macro_Text": 81
+    "Unknown82": 82
+    "Inventory_Item": 83
+    "Inventory_Crystal": 84
+    "RemoteInventory_Item": 85
+    "Unknown86": 86
+    "Unknown87": 87
+    "LetterEditor_Item": 88
+- type: Component::GUI::DragDropVisibilityFlag
+  name: DragDropVisibilityFlag
+  underlying: byte
+  namespace: Component.GUI
+  flags: True
+  values:
+    "None": 0
+    "Unk1": 1
+    "HideAfterFlyBack": 2
+- type: Component::GUI::DragDropInputMode
+  name: DragDropInputMode
+  underlying: byte
+  namespace: Component.GUI
+  flags: False
+  values:
+    "None": 0
+    "Unk1": 1
+    "Unk2": 2
+    "Unk3": 3
+- type: Component::GUI::DragDropFlag
+  name: DragDropFlag
+  underlying: byte
+  namespace: Component.GUI
+  flags: True
+  values:
+    "None": 0
+    "SkipEnabledCheck": 1
+    "Unk2": 2
+    "Clickable": 4
+    "Unk4": 8
+    "Unk5": 16
+    "Unk6": 32
+    "Unk7": 64
 - type: Component::GUI::IconSubFolder
   name: IconSubFolder
   underlying: int
@@ -154,6 +293,16 @@ enums:
     "ChatBubble": 15
     "NoAccess": 16
     "Hidden": 17
+- type: Component::GUI::AtkDragDropInterface::SoundEffectSuppression
+  name: SoundEffectSuppression
+  underlying: byte
+  namespace: Component.GUI
+  flags: True
+  values:
+    "None": 0
+    "PickUp": 1
+    "Insert": 2
+    "Reset": 4
 - type: Component::GUI::AtkEventStateFlags
   name: AtkEventStateFlags
   underlying: byte
@@ -164,7 +313,7 @@ enums:
     "Handled": 1
     "Forwarded": 2
     "Unk3": 4
-    "Unk4": 8
+    "HasReturnFlags": 8
     "IsGlobalEvent": 16
     "Unk6": 32
     "Unk7": 64
@@ -330,16 +479,6 @@ enums:
     "None": 0
     "Linear": 1
     "Smooth": 2
-- type: Component::GUI::AtkTooltipManager::AtkTooltipType
-  name: AtkTooltipType
-  underlying: byte
-  namespace: Component.GUI
-  flags: False
-  values:
-    "Text": 1
-    "Item": 2
-    "TextItem": 3
-    "Action": 4
 - type: Component::GUI::ComponentType
   name: ComponentType
   underlying: byte
@@ -1667,6 +1806,15 @@ enums:
     "ArmouryNeckEars": 4
     "ArmouryWristRing": 5
     "Equipped": 6
+- type: Client::UI::Agent::AgentMiragePrismMiragePlateData::ItemSource
+  name: ItemSource
+  underlying: int
+  namespace: Client.UI.Agent
+  flags: False
+  values:
+    "None": 0
+    "PrismBox": 1
+    "Cabinet": 2
 - type: Client::UI::Agent::AgentMJIGatheringHouse::Confirmation
   name: Confirmation
   underlying: int
@@ -3044,7 +3192,7 @@ enums:
   values:
     "YardObject": 2
     "Furniture": 3
-- type: Client::Game::Object::TreasureFlags
+- type: Client::Game::Object::Treasure::TreasureFlags
   name: TreasureFlags
   underlying: byte
   namespace: Client.Game.Object
@@ -4542,6 +4690,7 @@ enums:
   namespace: Component.GUI
   flags: True
   values:
+    "None": 0
     "Ctrl": 1
     "Alt": 2
     "Shift": 4
@@ -4919,6 +5068,19 @@ enums:
     "PrivateParty": 3
     "LimitedRecruitingWorld": 8
     "OnePlayerPerJob": 33
+- type: Client::UI::Agent::AgentMiragePrismMiragePlateData::ItemFlag
+  name: ItemFlag
+  underlying: int
+  namespace: Client.UI.Agent
+  flags: True
+  values:
+    "None": 0
+    "HasStain0": 1
+    "Restricted": 2
+    "CanNotGlamour": 4
+    "CanNotTryOn": 8
+    "IsStainLocked": 16
+    "HasStain1": 32
 - type: Client::UI::Agent::AgentMJICraftSchedule::DataFlags1
   name: DataFlags1
   underlying: byte
@@ -8005,6 +8167,22 @@ structs:
     size: 100
     is_string: False
   member_functions: []
+- type: Client::Game::InstanceContent::ContentDirector::MapEffectItem
+  name: MapEffectItem
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 12
+  fields:
+  - type: unsigned int
+    name: LayoutId
+    offset: 0
+  - type: unsigned __int16
+    name: State
+    offset: 8
+  - type: byte
+    name: Flags
+    offset: 10
+  member_functions: []
 - type: Client::Game::InstanceContent::InstanceContentDeepDungeon::DeepDungeonChestInfo
   name: DeepDungeonChestInfo
   namespace: Client.Game.InstanceContent
@@ -8113,22 +8291,6 @@ structs:
     offset: 18
     size: 16
     is_string: False
-  member_functions: []
-- type: Client::Game::InstanceContent::MapEffectItem
-  name: MapEffectItem
-  namespace: Client.Game.InstanceContent
-  union: False
-  size: 12
-  fields:
-  - type: unsigned int
-    name: LayoutId
-    offset: 0
-  - type: unsigned __int16
-    name: State
-    offset: 8
-  - type: byte
-    name: Flags
-    offset: 10
   member_functions: []
 - type: Client::Game::InstanceContent::OccultCrescentMKDData
   name: OccultCrescentMKDData
@@ -12453,6 +12615,32 @@ structs:
       name: value
     - type: unsigned __int64
       name: size
+  - signature: E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 16 48 3B FB
+    return_type: __int64
+    name: Realloc
+    parameters:
+    - type: __int64
+      name: ptr
+    - type: unsigned __int64
+      name: size
+  - signature: E8 ?? ?? ?? ?? 33 C9 4C 8B E8
+    return_type: __int64
+    name: Calloc
+    parameters:
+    - type: unsigned __int64
+      name: count
+    - type: unsigned __int64
+      name: size
+  - signature: E8 ?? ?? ?? ?? 33 C9 48 8B D8 E8 ?? ?? ?? ?? 48 85 DB 74 20
+    return_type: __int64
+    name: Recalloc
+    parameters:
+    - type: __int64
+      name: ptr
+    - type: unsigned __int64
+      name: count
+    - type: unsigned __int64
+      name: size
 - type: Client::System::Resource::Handle::MaterialResourceHandle::AttributeSetEntry
   name: AttributeSetEntry
   namespace: Client.System.Resource.Handle
@@ -15179,6 +15367,79 @@ structs:
     name: Index
     offset: 18
   member_functions: []
+- type: Client::UI::Agent::AgentMiragePrismMiragePlateData::DispellItem
+  name: DispellItem
+  namespace: Client.UI.Agent
+  union: False
+  size: 12
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  member_functions: []
+- type: Client::UI::Agent::AgentMiragePrismMiragePlateData::MiragePlateItem
+  name: MiragePlateItem
+  namespace: Client.UI.Agent
+  union: False
+  size: 60
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 0
+  - type: unsigned int
+    name: SourceId
+    offset: 4
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlateData::ItemSource
+    name: Source
+    offset: 8
+  - type: unsigned int
+    name: IconId
+    offset: 12
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlateData::ItemFlag
+    name: Flags
+    offset: 16
+  - type: unsigned int
+    name: EquipSlotCategory
+    offset: 20
+  - type: byte
+    name: StainIds
+    offset: 24
+    size: 2
+    is_string: False
+  - type: byte
+    name: PendingStainIds
+    offset: 26
+    size: 2
+    is_string: False
+  - type: byte
+    name: StainState
+    offset: 28
+  - type: unsigned int
+    name: PendingStainItemIds
+    offset: 32
+    size: 2
+    is_string: False
+  - type: Client::Game::InventoryType
+    name: PendingStainInventoryTypes
+    offset: 40
+    size: 2
+    is_string: False
+  - type: unsigned __int16
+    name: PendingStainInventorySlots
+    offset: 48
+    size: 2
+    is_string: False
+  - type: byte
+    name: IsPendingStainFromInventoryItem
+    offset: 52
+    size: 2
+    is_string: False
+  - type: byte
+    name: IsPendingStainFromItemId
+    offset: 54
+    size: 2
+    is_string: False
+  member_functions: []
 - type: Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData::ItemSetItem
   name: ItemSetItem
   namespace: Client.UI.Agent
@@ -15760,6 +16021,22 @@ structs:
   - type: unsigned int
     name: ItemId
     offset: 8
+  member_functions: []
+- type: Client::UI::Agent::QuestRewardItem
+  name: QuestRewardItem
+  namespace: Client.UI.Agent
+  union: False
+  size: 24
+  fields:
+  - type: unsigned int
+    name: ItemId
+    offset: 12
+  - type: int
+    name: Amount
+    offset: 16
+  - type: byte
+    name: Stain0Id
+    offset: 20
   member_functions: []
 - type: Client::UI::Agent::ReadyCheckEntry
   name: ReadyCheckEntry
@@ -17536,6 +17813,18 @@ structs:
       name: a3
     - type: byte
       name: a4
+  - signature: E8 ?? ?? ?? ?? 44 8B 4C 24 ?? 44 0F B6 C0
+    return_type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType
+    name: GetHotbarSlotTypeFromDragDropType
+    parameters:
+    - type: Component::GUI::DragDropType
+      name: type
+  - signature: E8 ?? ?? ?? ?? 48 85 D8 74 2A
+    return_type: unsigned __int64
+    name: GetDragDropTypeMask
+    parameters:
+    - type: Component::GUI::DragDropType
+      name: type
 - type: Client::UI::UIInputData::Keybind
   name: Keybind
   namespace: Client.UI
@@ -21082,6 +21371,27 @@ structs:
   - type: Component::GUI::AtkResNode*
     name: ActiveNode
     offset: 16
+  - type: Component::GUI::AtkDragDropInterface::FlyBackAnimationData*
+    name: FlyBackData
+    offset: 24
+  - type: __int16
+    name: DragStartX
+    offset: 32
+  - type: __int16
+    name: DragStartY
+    offset: 34
+  - type: Component::GUI::DragDropType
+    name: DragDropType
+    offset: 36
+  - type: __int16
+    name: DragDropReferenceIndex
+    offset: 40
+  - type: byte
+    name: IsActive
+    offset: 42
+  - type: Component::GUI::AtkDragDropInterface::SoundEffectSuppression
+    name: DragDropSoundEffectSuppression
+    offset: 43
   virtual_functions:
   - name: GetScreenPosition
     offset: 8
@@ -21119,8 +21429,36 @@ structs:
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
       name: this
+  - name: HandleMouseUpEvent
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Component::GUI::AtkDragDropInterface*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkMouseData*
+      name: mouseData
   - name: GetPayloadContainer
     offset: 88
+    return_type: Component::GUI::AtkDragDropPayloadContainer*
+    parameters:
+    - type: Component::GUI::AtkDragDropInterface*
+      name: this
+  member_functions: []
+- type: Component::GUI::AtkDragDropInterface::FlyBackAnimationData
+  name: FlyBackAnimationData
+  namespace: Component.GUI
+  union: False
+  size: 12
+  fields:
+  - type: float
+    name: X
+    offset: 0
+  - type: float
+    name: Y
+    offset: 4
+  - type: float
+    name: Time
+    offset: 8
   member_functions: []
 - type: Component::GUI::AtkEventData::AtkAddonControlData
   name: AtkAddonControlData
@@ -21145,10 +21483,10 @@ structs:
     name: ComponentNode
     offset: 8
   - type: byte
-    name: Unk10
+    name: MouseButtonId
     offset: 16
-  - type: byte
-    name: Unk11
+  - type: Component::GUI::AtkEventData::AtkMouseData::ModifierFlag
+    name: MouseModifier
     offset: 17
   - type: int
     name: Unk12
@@ -21360,7 +21698,7 @@ structs:
     name: EventType
     offset: 0
   - type: byte
-    name: UnkFlags1
+    name: ReturnFlags
     offset: 1
   - type: Component::GUI::AtkEventStateFlags
     name: StateFlags
@@ -24743,6 +25081,21 @@ structs:
     name: End
     offset: 16
   member_functions: []
+- type: StdVector<Client::UI::Agent::QuestRewardItem>
+  name: StdVector`1
+  namespace: ''
+  union: False
+  fields:
+  - type: Client::UI::Agent::QuestRewardItem*
+    name: First
+    offset: 0
+  - type: Client::UI::Agent::QuestRewardItem*
+    name: Last
+    offset: 8
+  - type: Client::UI::Agent::QuestRewardItem*
+    name: End
+    offset: 16
+  member_functions: []
 - type: StdVector<Client::UI::ListPanel::ListPanelEntry>
   name: StdVector`1
   namespace: ''
@@ -26983,13 +27336,13 @@ structs:
     name: Log
     offset: 416
   member_functions: []
-- type: Client::Game::InstanceContent::MapEffectList
+- type: Client::Game::InstanceContent::ContentDirector::MapEffectList
   name: MapEffectList
   namespace: Client.Game.InstanceContent
   union: False
-  size: 1542
+  size: 1544
   fields:
-  - type: Client::Game::InstanceContent::MapEffectItem
+  - type: Client::Game::InstanceContent::ContentDirector::MapEffectItem
     name: Items
     offset: 0
     size: 128
@@ -33818,6 +34171,52 @@ structs:
     name: Name
     offset: 8
   member_functions: []
+- type: Client::UI::Agent::AgentContentsFinder::RewardContextMenuEventHandler
+  name: RewardContextMenuEventHandler
+  namespace: Client.UI.Agent
+  union: False
+  size: 32
+  fields:
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: AtkEventInterface
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: AddonId
+    offset: 16
+  - type: Client::UI::Agent::AgentContentsFinderReward::ItemWrap*
+    name: SelectedReward
+    offset: 24
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder::RewardContextMenuEventHandler*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder::RewardContextMenuEventHandler*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  member_functions: []
 - type: Client::UI::Agent::AgentDawnInterface::DawnContentEntry
   name: DawnContentEntry
   namespace: Client.UI.Agent
@@ -34890,6 +35289,18 @@ structs:
   - type: Client::UI::Agent::AgentMateriaAttach::MateriaAttachEntry*
     name: MateriaArray
     offset: 176
+  member_functions: []
+- type: Client::UI::Agent::AgentMiragePrismMiragePlateData::GlamourPlate
+  name: GlamourPlate
+  namespace: Client.UI.Agent
+  union: False
+  size: 720
+  fields:
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlateData::MiragePlateItem
+    name: Items
+    offset: 0
+    size: 12
+    is_string: False
   member_functions: []
 - type: Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData::ItemSet
   name: ItemSet
@@ -39765,84 +40176,37 @@ structs:
     name: Decrease
     offset: 16
   member_functions: []
-- type: Component::GUI::AtkDragDropManager
-  name: AtkDragDropManager
+- type: Component::GUI::AtkDragDropPayloadContainer
+  name: AtkDragDropPayloadContainer
   namespace: Component.GUI
   union: False
-  size: 200
+  size: 136
   fields:
-  - type: Component::GUI::AtkEventListener
-    name: AtkEventListener
+  - type: int
+    name: Int1
     offset: 0
-    base: true
-  - type: Component::GUI::AtkStage*
-    name: AtkStage
-    offset: 144
-  - type: Component::GUI::AtkDragDropInterface*
-    name: DragDrop1
-    offset: 152
-  - type: Component::GUI::AtkDragDropInterface*
-    name: DragDrop2
-    offset: 160
-  - type: Component::GUI::AtkComponentDragDrop*
-    name: DragDropS
-    offset: 168
-  - type: __int16
-    name: DragStartX
-    offset: 184
-  - type: __int16
-    name: DragStartY
-    offset: 186
-  - type: byte
-    name: IsDragging
-    offset: 188
-  - type: byte
-    name: ReclickToDrop
-    offset: 189
-  - type: byte
-    name: MouseMoved
-    offset: 190
-  - type: byte
-    name: IsNotDiscarding
-    offset: 191
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Component::GUI::AtkDragDropManager*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
+  - type: int
+    name: Int2
+    offset: 4
+  - type: unsigned __int64
+    name: Unk8
     offset: 8
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkDragDropManager*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
+  - type: Component::GUI::AtkValue*
+    name: AtkValue
     offset: 16
+  - type: Client::System::String::Utf8String
+    name: Text
+    offset: 24
+  - type: unsigned int
+    name: Flags
+    offset: 128
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 49 63 FD
     return_type: void
+    name: Clear
     parameters:
-    - type: Component::GUI::AtkDragDropManager*
+    - type: Component::GUI::AtkDragDropPayloadContainer*
       name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  member_functions: []
 - type: Component::GUI::AtkEvent
   name: AtkEvent
   namespace: Component.GUI
@@ -49353,26 +49717,23 @@ structs:
   name: FreeCompanyData
   namespace: Client.UI.Agent
   union: False
-  size: 136
+  size: 128
   fields:
-  - type: byte
-    name: IsPartOfFreeCompany
-    offset: 1
   - type: __int64
     name: Id
-    offset: 8
+    offset: 0
   - type: Client::UI::Agent::CrestData
     name: Crest
-    offset: 16
+    offset: 8
   - type: unsigned __int16
     name: MemberCount
-    offset: 24
+    offset: 16
   - type: unsigned __int16
     name: GrandCompany
-    offset: 26
+    offset: 18
   - type: Client::System::String::Utf8String
     name: GuildName
-    offset: 32
+    offset: 24
   member_functions: []
 - type: Client::UI::Agent::AgentInventory
   name: AgentInventory
@@ -49748,16 +50109,16 @@ structs:
     base: true
   - type: byte
     name: HoveredSlotIndex
-    offset: 44
+    offset: 52
   - type: unsigned int
     name: HoveredItemId
-    offset: 48
+    offset: 56
   - type: int
     name: SelectedSlotIndex
-    offset: 116
+    offset: 132
   - type: int
     name: NumItems
-    offset: 124
+    offset: 140
   virtual_functions:
   - name: ReceiveEvent
     offset: 0
@@ -57545,7 +57906,7 @@ structs:
     name: GameObject
     offset: 0
     base: true
-  - type: Client::Game::Object::TreasureFlags
+  - type: Client::Game::Object::Treasure::TreasureFlags
     name: Flags
     offset: 492
   virtual_functions:
@@ -60601,6 +60962,242 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentJournalAccept
+  name: AgentJournalAccept
+  namespace: Client.UI.Agent
+  union: False
+  size: 88
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: StdVector<Client::UI::Agent::QuestRewardItem>
+    name: RewardItems
+    offset: 48
+  - type: int
+    name: ContextMenuSelectedRewardIndex
+    offset: 76
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalAccept*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
+- type: Client::UI::Agent::AgentJournalResult
+  name: AgentJournalResult
+  namespace: Client.UI.Agent
+  union: False
+  size: 88
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: StdVector<Client::UI::Agent::QuestRewardItem>
+    name: RewardItems
+    offset: 48
+  - type: int
+    name: ContextMenuSelectedRewardIndex
+    offset: 76
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentJournalResult*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
 - type: Client::UI::Agent::AgentMJIDisposeShop::AgentData
   name: AgentData
   namespace: Client.UI.Agent
@@ -61076,6 +61673,58 @@ structs:
     - type: byte
       name: a2
   member_functions: []
+- type: Client::UI::Agent::AgentMiragePrismMiragePlateData
+  name: AgentMiragePrismMiragePlateData
+  namespace: Client.UI.Agent
+  union: False
+  size: 15320
+  fields:
+  - type: byte
+    name: HasChanges
+    offset: 1
+  - type: unsigned int
+    name: OpenMode
+    offset: 8
+  - type: unsigned int
+    name: GearsetId
+    offset: 16
+  - type: unsigned int
+    name: SelectedMiragePlateIndex
+    offset: 20
+  - type: unsigned int
+    name: SelectedItemIndex
+    offset: 24
+  - type: unsigned int
+    name: ContextMenuItemIndex
+    offset: 28
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlateData::GlamourPlate
+    name: GlamourPlates
+    offset: 36
+    size: 20
+    is_string: False
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlateData::MiragePlateItem
+    name: CurrentItems
+    offset: 14436
+    size: 12
+    is_string: False
+  - type: unsigned __int16
+    name: OpenerAddonId
+    offset: 15156
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlateData::DispellItem
+    name: DispellItems
+    offset: 15160
+    size: 12
+    is_string: False
+  - type: unsigned int
+    name: DispellItemsSelectedBitmask
+    offset: 15304
+  - type: unsigned int
+    name: DispellItemsBitmask
+    offset: 15308
+  - type: unsigned int
+    name: GlamourDispellerCount
+    offset: 15312
+  member_functions: []
 - type: Client::UI::Agent::AgentMiragePrismPrismSetConvert::AgentData
   name: AgentData
   namespace: Client.UI.Agent
@@ -61425,6 +62074,9 @@ structs:
   - type: unsigned int
     name: SelectedCompletedQuestId
     offset: 168
+  - type: unsigned int
+    name: ContextMenuSelectedItemId
+    offset: 208
   - type: unsigned int
     name: SearchFlag
     offset: 244
@@ -65334,6 +65986,142 @@ structs:
     - type: Component::GUI::AtkEventData*
       name: a5
   member_functions: []
+- type: Component::GUI::AtkDragDropManager
+  name: AtkDragDropManager
+  namespace: Component.GUI
+  union: False
+  size: 200
+  fields:
+  - type: Component::GUI::AtkEventListener
+    name: AtkEventListener
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkDragDropPayloadContainer
+    name: PayloadContainer
+    offset: 8
+  - type: Component::GUI::AtkStage*
+    name: AtkStage
+    offset: 144
+  - type: Component::GUI::AtkDragDropInterface*
+    name: DragDrop1
+    offset: 152
+  - type: Component::GUI::AtkDragDropInterface*
+    name: DragDrop2
+    offset: 160
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: DragDropS
+    offset: 168
+  - type: __fastcall
+    name: DragDropTypeMaskGetter
+    offset: 176
+    return_type: unsigned __int64
+    parameters:
+    - type: Component::GUI::DragDropType
+      name: a1
+  - type: __int16
+    name: DragStartX
+    offset: 184
+  - type: __int16
+    name: DragStartY
+    offset: 186
+  - type: byte
+    name: IsDragging
+    offset: 188
+  - type: byte
+    name: ReclickToDrop
+    offset: 189
+  - type: byte
+    name: MouseMoved
+    offset: 190
+  - type: byte
+    name: IsNotDiscarding
+    offset: 191
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkDragDropManager*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkDragDropManager*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkDragDropManager*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 24 06
+    return_type: void
+    name: StartDragDrop
+    parameters:
+    - type: Component::GUI::AtkDragDropManager*
+      name: this
+    - type: Component::GUI::AtkDragDropInterface*
+      name: dragDropInterface
+    - type: __int16
+      name: dragStartX
+    - type: __int16
+      name: dragStartY
+  - signature: E8 ?? ?? ?? ?? EB 48 48 8B 03
+    return_type: void
+    name: Drop
+    parameters:
+    - type: Component::GUI::AtkDragDropManager*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkDragDropData*
+      name: data
+    - type: Component::GUI::AtkComponentNode*
+      name: componentNode
+    - type: Component::GUI::DragDropType
+      name: acceptedType
+    - type: byte
+      name: canNotAccept
+  - signature: 80 B9 ?? ?? ?? ?? ?? 45 0F B6 D0
+    return_type: void
+    name: CancelDragDrop
+    parameters:
+    - type: Component::GUI::AtkDragDropManager*
+      name: this
+    - type: byte
+      name: allowSoundEffect
+    - type: byte
+      name: suppressFlyBack
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4C 8D 46 06
+    return_type: void
+    name: EndDragDrop
+    parameters:
+    - type: Component::GUI::AtkDragDropManager*
+      name: this
+    - type: byte
+      name: flyBack
+    - type: byte
+      name: playSoundEffect
+    - type: int
+      name: soundEffectId
 - type: Component::GUI::AtkFontCodeModule
   name: AtkFontCodeModule
   namespace: Component.GUI
@@ -69456,6 +70244,130 @@ structs:
     return_type: void
     parameters:
     - type: Client::UI::Agent::AgentIKDFishingLog*
+      name: this
+    - type: byte
+      name: a2
+  member_functions: []
+- type: Client::UI::Agent::AgentLeveQuest
+  name: AgentLeveQuest
+  namespace: Client.UI.Agent
+  union: False
+  size: 208
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: StdVector<Client::UI::Agent::QuestRewardItem>
+    name: RewardItems
+    offset: 48
+  - type: int
+    name: ContextMenuSelectedRewardIndex
+    offset: 76
+  - type: unsigned int
+    name: LeveRowId
+    offset: 80
+  - type: Client::System::String::Utf8String
+    name: LeveQuestName
+    offset: 88
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLeveQuest*
       name: this
     - type: byte
       name: a2
@@ -74212,6 +75124,15 @@ structs:
   - type: byte
     name: CrafterSoulEquipped
     offset: 69
+  - type: unsigned int
+    name: SelectedActionList
+    offset: 72
+  - type: unsigned int
+    name: MainCommandSelectedSubcategory
+    offset: 76
+  - type: unsigned int
+    name: OrdersSelectedSubcategory
+    offset: 80
   - type: int
     name: Flags
     offset: 84
@@ -81607,9 +82528,21 @@ structs:
   - type: Component::GUI::AtkDragDropInterface
     name: AtkDragDropInterface
     offset: 192
+  - type: Component::GUI::DragDropType
+    name: AcceptedType
+    offset: 240
   - type: Component::GUI::AtkComponentIcon*
     name: AtkComponentIcon
     offset: 248
+  - type: Component::GUI::DragDropVisibilityFlag
+    name: VisibilityFlags
+    offset: 264
+  - type: Component::GUI::DragDropInputMode
+    name: InputMode
+    offset: 265
+  - type: Component::GUI::DragDropFlag
+    name: Flags
+    offset: 266
   virtual_functions:
   - name: Dtor
     offset: 0
@@ -81728,6 +82661,80 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentDragDrop*
       name: this
+  - signature: E8 ?? ?? ?? ?? 8D 47 49
+    return_type: byte
+    name: LoadIcon
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+    - type: unsigned int
+      name: iconId
+  - signature: E8 ?? ?? ?? ?? 48 8B D0 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 46 F4
+    return_type: char*
+    name: GetQuantityText
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 46 F4
+    return_type: void
+    name: SetQuantityText
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+    - type: char*
+      name: quantityText
+  - signature: E8 ?? ?? ?? ?? 48 63 CF 48 83 C1 19
+    return_type: void
+    name: SetQuantity
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+    - type: int
+      name: quantity
+  - signature: E8 ?? ?? ?? ?? F2 41 0F 10 87
+    return_type: void
+    name: AttachTooltip
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+    - type: Component::GUI::AtkTooltipManager::AtkTooltipType
+      name: type
+    - type: unsigned __int16
+      name: parentId
+    - type: Component::GUI::AtkResNode*
+      name: targetNode
+    - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
+      name: tooltipArgs
+  - signature: E8 ?? ?? ?? ?? 48 8B 03 49 8B CF
+    return_type: void
+    name: DetachTooltip
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 8D 46 0B
+    return_type: void
+    name: SetIconDisableState
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+    - type: byte
+      name: disabled
+  - signature: E8 ?? ?? ?? ?? EB 18 66 C7 44 24
+    return_type: void
+    name: BeginDragDrop
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkMouseData*
+      name: mouseData
+  - signature: 48 83 EC 68 33 C0 45 33 C0
+    return_type: byte
+    name: DispatchCancelEvent
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkMouseData*
+      name: mouseData
 - type: Component::GUI::AtkComponentHoldButton
   name: AtkComponentHoldButton
   namespace: Component.GUI
@@ -88863,9 +89870,24 @@ structs:
   - type: Component::GUI::AtkComponentListItemPopulator
     name: Populator
     offset: 296
+  - type: Component::GUI::AtkComponentDragDrop*
+    name: DragDropComponent
+    offset: 376
   - type: int
     name: ListItemIndex
     offset: 388
+  - type: __int16
+    name: DragDropMouseDownPosX
+    offset: 412
+  - type: __int16
+    name: DragDropMouseDownPosY
+    offset: 414
+  - type: __int16
+    name: Unk1A0MouseDownPosX
+    offset: 416
+  - type: __int16
+    name: Unk1A2MouseDownPosY
+    offset: 418
   - type: int
     name: RowTemplateNodeCount
     offset: 420
@@ -88981,6 +90003,18 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentListItemRenderer*
       name: this
+  - signature: E8 ?? ?? ?? ?? 83 FE 04 75 12
+    return_type: Component::GUI::AtkComponentDragDrop*
+    name: StartDragDrop
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
+    - type: int
+      name: int1
+    - type: unsigned int
+      name: iconId
+    - type: int
+      name: int2
 - type: Component::GUI::AtkEventDispatcher::Event
   name: Event
   namespace: Component.GUI
@@ -88991,7 +90025,7 @@ structs:
     name: State
     offset: 0
   - type: unsigned int
-    name: UnkFlags
+    name: ReturnFlags
     offset: 4
   - type: Component::GUI::AtkEventData
     name: EventData
@@ -118584,133 +119618,6 @@ structs:
       name: unkCrafterStatus
     - type: byte
       name: isPermanent
-- type: Client::UI::Agent::AgentMiragePrismMiragePlate
-  name: AgentMiragePrismMiragePlate
-  namespace: Client.UI.Agent
-  union: False
-  size: 944
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
-    name: CharaView
-    offset: 128
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: ReceiveEvent2
-    offset: 8
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: Hide
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: IsAgentActive
-    offset: 48
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: Update
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 64
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: GetAddonId
-    offset: 72
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-  - name: OnGameEvent
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 48 89 5C 24 ?? 57 48 83 EC 30 8B FA 66 44 89 4C 24
-    return_type: void
-    name: OpenForGearset
-    parameters:
-    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
-      name: this
-    - type: int
-      name: gearsetId
-    - type: int
-      name: glamourSetLink
-    - type: unsigned __int16
-      name: openerAddonId
 - type: Client::UI::Agent::AgentStatus
   name: AgentStatus
   namespace: Client.UI.Agent
@@ -144088,6 +144995,203 @@ structs:
     offset: 1968
   virtual_functions: []
   member_functions: []
+- type: Client::UI::Agent::AgentMiragePrismMiragePlate
+  name: AgentMiragePrismMiragePlate
+  namespace: Client.UI.Agent
+  union: False
+  size: 944
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlateData*
+    name: Data
+    offset: 40
+  - type: Client::Game::InventoryItem
+    name: UnkInventoryItem
+    offset: 56
+  - type: unsigned __int16
+    name: DialogAddonId
+    offset: 128
+  - type: byte
+    name: CharaViewInitialized
+    offset: 130
+  - type: Client::UI::Agent::AgentMiragePrismMiragePlate::MiragePrismMiragePlateCharaView
+    name: CharaView
+    offset: 136
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 89 5C 24 ?? 57 48 83 EC 30 8B FA 66 44 89 4C 24
+    return_type: void
+    name: OpenForGearset
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: int
+      name: gearsetId
+    - type: int
+      name: glamourSetLink
+    - type: unsigned __int16
+      name: openerAddonId
+  - signature: 40 57 48 83 EC 20 80 79 30 00
+    return_type: void
+    name: ClearItemData
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: unsigned int
+      name: index
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 46 10
+    return_type: void
+    name: SetSelectedItemData
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlateData::ItemSource
+      name: source
+    - type: unsigned int
+      name: sourceId
+    - type: unsigned int
+      name: itemId
+    - type: byte
+      name: stain0Id
+    - type: byte
+      name: stain1Id
+  - signature: 48 89 74 24 ?? 57 48 83 EC 20 80 79 30 00 49 8B F9
+    return_type: void
+    name: SetItemStain
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: unsigned int
+      name: itemIndex
+    - type: byte
+      name: pendingStainId
+    - type: Client::Game::InventoryItem*
+      name: pendingStainInventoryItem
+    - type: unsigned int
+      name: pendingStainItemId
+    - type: int
+      name: pendingStainIndex
+  - signature: 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 48 8B 51 28
+    return_type: void
+    name: SetSelectedItemStains
+    parameters:
+    - type: Client::UI::Agent::AgentMiragePrismMiragePlate*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: pendingStain0InventoryItem
+    - type: byte
+      name: pendingStain0Id
+    - type: unsigned int
+      name: pendingStain0ItemId
+    - type: Client::Game::InventoryItem*
+      name: pendingStain1InventoryItem
+    - type: byte
+      name: pendingStain1Id
+    - type: unsigned int
+      name: pendingStain1ItemId
 - type: Component::GUI::AtkComponentTextInput
   name: AtkComponentTextInput
   namespace: Component.GUI
@@ -145645,208 +146749,6 @@ structs:
     size: 8
     is_string: False
   member_functions: []
-- type: Client::UI::Agent::AgentContentsFinder
-  name: AgentContentsFinder
-  namespace: Client.UI.Agent
-  union: False
-  size: 9296
-  fields:
-  - type: Client::UI::Agent::AgentInterface
-    name: AgentInterface
-    offset: 0
-    base: true
-  - type: Client::UI::Agent::AgentContentsFinderInterface
-    name: InterfaceSub
-    offset: 40
-  - type: Client::UI::Agent::AgentContentsFinderReward
-    name: RewardSub
-    offset: 2216
-  - type: StdVector<Client::UI::Agent::Contents*>
-    name: ContentList
-    offset: 7832
-  - type: StdVector<Client::UI::Agent::ContentsId>
-    name: SelectedContent
-    offset: 7856
-  - type: Client::UI::Agent::ContentsId
-    name: SelectedDuty
-    offset: 7880
-  - type: byte
-    name: NumCollectedRewards
-    offset: 7896
-  - type: byte
-    name: HasRouletteSelected
-    offset: 7897
-  - type: Client::UI::UIModule*
-    name: UIModule
-    offset: 7960
-  - type: Client::System::String::Utf8String
-    name: Strings
-    offset: 7976
-    size: 10
-    is_string: False
-  - type: Client::UI::Agent::ContentsRouletteRole
-    name: ContentRouletteRoleBonuses
-    offset: 9105
-    size: 11
-    is_string: False
-  - type: unsigned int
-    name: DutyPenaltyMinutes
-    offset: 9116
-  - type: unsigned int
-    name: UnkPenaltyMinutes
-    offset: 9120
-  - type: int
-    name: CurrentTimestamp
-    offset: 9172
-  - type: int
-    name: RecruitingParties
-    offset: 9180
-  - type: byte
-    name: SelectedTab
-    offset: 9184
-  - type: byte
-    name: TabChanged
-    offset: 9192
-  - type: byte
-    name: ListChanged
-    offset: 9193
-  - type: byte
-    name: DetailsChanged
-    offset: 9194
-  virtual_functions:
-  - name: ReceiveEvent
-    offset: 0
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: ReceiveEvent2
-    offset: 8
-    return_type: Component::GUI::AtkValue*
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: Component::GUI::AtkValue*
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-    - type: unsigned int
-      name: a4
-    - type: unsigned __int64
-      name: a5
-  - name: Dtor
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: Hide
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: IsAgentActive
-    offset: 48
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: Update
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: IsActivatable
-    offset: 64
-    return_type: byte
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: GetAddonId
-    offset: 72
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - name: OnGameEvent
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: Client::UI::Agent::AgentInterface::GameEvent
-      name: a2
-  - name: OnLevelChange
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned __int16
-      name: a3
-  - name: OnClassJobChange
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: a2
-  member_functions:
-  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8
-    return_type: void
-    name: OpenRegularDuty
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: unsigned int
-      name: contentsFinderCondition
-    - type: byte
-      name: hideIfShown
-  - signature: E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20
-    return_type: void
-    name: OpenRouletteDuty
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-    - type: byte
-      name: roulette
-    - type: byte
-      name: hideIfShown
-  - signature: 40 53 48 83 EC ?? 48 8B 01 48 8B D9 FF 50 ?? 84 C0 74 ?? 48 8B CB C6 83
-    return_type: void
-    name: Refresh
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
-  - signature: E9 ?? ?? ?? ?? 48 8B 06 48 8B CE 48 81 C4
-    return_type: void
-    name: UpdateAddon
-    parameters:
-    - type: Client::UI::Agent::AgentContentsFinder*
-      name: this
 - type: Client::UI::Agent::AgentGearSet
   name: AgentGearSet
   namespace: Client.UI.Agent
@@ -146021,9 +146923,15 @@ structs:
     offset: 680
     size: 13
     is_string: False
+  - type: byte
+    name: IsBuddyInspect
+    offset: 1097
+  - type: int
+    name: SelectedItemSlot
+    offset: 1100
   - type: Client::UI::Agent::AgentInspect::FreeCompanyData
     name: FreeCompany
-    offset: 1096
+    offset: 1104
   - type: unsigned int
     name: FetchCharacterDataStatus
     offset: 1232
@@ -146448,7 +147356,7 @@ structs:
   - type: Client::Game::DutyActionManager
     name: DutyActionManager
     offset: 1408
-  - type: Client::Game::InstanceContent::MapEffectList*
+  - type: Client::Game::InstanceContent::ContentDirector::MapEffectList*
     name: MapEffects
     offset: 3304
   - type: Client::Game::InstanceContent::DynamicEventContainer*
@@ -148976,6 +149884,211 @@ structs:
     - type: byte
       name: a3
   member_functions: []
+- type: Client::UI::Agent::AgentContentsFinder
+  name: AgentContentsFinder
+  namespace: Client.UI.Agent
+  union: False
+  size: 9296
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentContentsFinderInterface
+    name: InterfaceSub
+    offset: 40
+  - type: Client::UI::Agent::AgentContentsFinderReward
+    name: RewardSub
+    offset: 2216
+  - type: Client::UI::Agent::AgentContentsFinder::RewardContextMenuEventHandler
+    name: RewardContextMenuHandler
+    offset: 7792
+  - type: StdVector<Client::UI::Agent::Contents*>
+    name: ContentList
+    offset: 7832
+  - type: StdVector<Client::UI::Agent::ContentsId>
+    name: SelectedContent
+    offset: 7856
+  - type: Client::UI::Agent::ContentsId
+    name: SelectedDuty
+    offset: 7880
+  - type: byte
+    name: NumCollectedRewards
+    offset: 7896
+  - type: byte
+    name: HasRouletteSelected
+    offset: 7897
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 7960
+  - type: Client::System::String::Utf8String
+    name: Strings
+    offset: 7976
+    size: 10
+    is_string: False
+  - type: Client::UI::Agent::ContentsRouletteRole
+    name: ContentRouletteRoleBonuses
+    offset: 9105
+    size: 11
+    is_string: False
+  - type: unsigned int
+    name: DutyPenaltyMinutes
+    offset: 9116
+  - type: unsigned int
+    name: UnkPenaltyMinutes
+    offset: 9120
+  - type: int
+    name: CurrentTimestamp
+    offset: 9172
+  - type: int
+    name: RecruitingParties
+    offset: 9180
+  - type: byte
+    name: SelectedTab
+    offset: 9184
+  - type: byte
+    name: TabChanged
+    offset: 9192
+  - type: byte
+    name: ListChanged
+    offset: 9193
+  - type: byte
+    name: DetailsChanged
+    offset: 9194
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+    - type: unsigned int
+      name: a4
+    - type: unsigned __int64
+      name: a5
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: a2
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned __int16
+      name: a3
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: a2
+  member_functions:
+  - signature: 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B F9 41 0F B6 E8
+    return_type: void
+    name: OpenRegularDuty
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: unsigned int
+      name: contentsFinderCondition
+    - type: byte
+      name: hideIfShown
+  - signature: E9 ?? ?? ?? ?? 8B 93 ?? ?? ?? ?? 48 83 C4 20
+    return_type: void
+    name: OpenRouletteDuty
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+    - type: byte
+      name: roulette
+    - type: byte
+      name: hideIfShown
+  - signature: 40 53 48 83 EC ?? 48 8B 01 48 8B D9 FF 50 ?? 84 C0 74 ?? 48 8B CB C6 83
+    return_type: void
+    name: Refresh
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
+  - signature: E9 ?? ?? ?? ?? 48 8B 06 48 8B CE 48 81 C4
+    return_type: void
+    name: UpdateAddon
+    parameters:
+    - type: Client::UI::Agent::AgentContentsFinder*
+      name: this
 - type: Client::Game::InstanceContent::InstanceContentDirector
   name: InstanceContentDirector
   namespace: Client.Game.InstanceContent
@@ -162797,132 +163910,6 @@ structs:
     - type: byte
       name: a3
   member_functions: []
-- type: Component::GUI::AtkStage
-  name: AtkStage
-  namespace: Component.GUI
-  union: False
-  size: 482816
-  fields:
-  - type: Component::GUI::AtkEventTarget
-    name: AtkEventTarget
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkFontManager*
-    name: AtkFontManager
-    offset: 16
-  - type: Component::GUI::AtkTextureResourceManager*
-    name: AtkTextureResourceManager
-    offset: 24
-  - type: Client::UI::RaptureAtkUnitManager*
-    name: RaptureAtkUnitManager
-    offset: 32
-  - type: Component::GUI::AtkInputManager*
-    name: AtkInputManager
-    offset: 40
-  - type: Component::GUI::AtkCollisionManager*
-    name: AtkCollisionManager
-    offset: 48
-  - type: Component::GUI::AtkArrayDataHolder*
-    name: AtkArrayDataHolder
-    offset: 56
-  - type: Component::GUI::AtkTimerHolder*
-    name: AtkTimerHolder
-    offset: 64
-  - type: Component::GUI::AtkSimpleTweenHolder*
-    name: AtkSimpleTweenHolder
-    offset: 72
-  - type: Component::GUI::AtkCrestManager*
-    name: AtkCrestManager
-    offset: 80
-  - type: Component::GUI::AtkUIColorHolder*
-    name: AtkUIColorHolder
-    offset: 88
-  - type: Client::UI::Misc::RaptureTextModule*
-    name: RaptureTextModule
-    offset: 96
-  - type: Client::System::Input::SoftKeyboardDeviceInterface*
-    name: SoftKeyboardDevice
-    offset: 104
-  - type: Component::GUI::AtkExternalInterface*
-    name: AtkExternalInterface
-    offset: 112
-  - type: Component::GUI::AtkDragDropManager
-    name: DragDropManager
-    offset: 120
-  - type: Component::GUI::AtkGroupManager
-    name: AtkGroupManager
-    offset: 320
-  - type: Component::GUI::AtkTooltipManager
-    name: TooltipManager
-    offset: 360
-  - type: Component::GUI::AtkStage::DialogueStruct
-    name: Dialogue
-    offset: 696
-  - type: Component::GUI::AtkStage::FilterStruct
-    name: Filter
-    offset: 760
-  - type: Component::GUI::AtkStage::OperationGuideStruct
-    name: OperationGuide
-    offset: 776
-  - type: Component::GUI::AtkCursor
-    name: AtkCursor
-    offset: 824
-  - type: Component::GUI::AtkEventDispatcher
-    name: AtkEventDispatcher
-    offset: 856
-    size: 32
-    is_string: False
-  - type: unsigned int
-    name: NextEventDispatcherIndex
-    offset: 2136
-  - type: Common::Math::Size
-    name: ScreenSize
-    offset: 2144
-  - type: Component::GUI::AtkEvent
-    name: RegisteredEvents
-    offset: 2168
-    size: 10000
-    is_string: False
-  virtual_functions:
-  - name: Dtor
-    offset: 8
-  member_functions:
-  - signature: 48 8B 51 ?? 48 0F BF 82
-    return_type: Component::GUI::AtkResNode*
-    name: GetFocus
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: 48 8B 49 ?? 45 33 C9 45 33 C0 33 D2 E9
-    return_type: void
-    name: ClearFocus
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: 48 8B 41 38 48 8B 40 18
-    return_type: Component::GUI::NumberArrayData**
-    name: GetNumberArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 42 8D 1C AD
-    return_type: Component::GUI::StringArrayData**
-    name: GetStringArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: 48 8B 41 38 48 8B 40 48
-    return_type: Component::GUI::ExtendArrayData**
-    name: GetExtendArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  static_members:
-  - signature: 48 8B 05 ?? ?? ?? ?? 4C 8B 40 18 45 8B 40 18
-    relative_follow_offsets:
-    - 3
-    is_pointer: True
-    return_type: Component::GUI::AtkStage
 - type: Client::UI::Agent::AgentCharaCard::Storage
   name: Storage
   namespace: Client.UI.Agent
@@ -163881,6 +164868,135 @@ structs:
     - type: byte
       name: a3
   member_functions: []
+- type: Component::GUI::AtkStage
+  name: AtkStage
+  namespace: Component.GUI
+  union: False
+  size: 482816
+  fields:
+  - type: Component::GUI::AtkEventTarget
+    name: AtkEventTarget
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkFontManager*
+    name: AtkFontManager
+    offset: 16
+  - type: Component::GUI::AtkTextureResourceManager*
+    name: AtkTextureResourceManager
+    offset: 24
+  - type: Client::UI::RaptureAtkUnitManager*
+    name: RaptureAtkUnitManager
+    offset: 32
+  - type: Component::GUI::AtkInputManager*
+    name: AtkInputManager
+    offset: 40
+  - type: Component::GUI::AtkCollisionManager*
+    name: AtkCollisionManager
+    offset: 48
+  - type: Component::GUI::AtkArrayDataHolder*
+    name: AtkArrayDataHolder
+    offset: 56
+  - type: Component::GUI::AtkTimerHolder*
+    name: AtkTimerHolder
+    offset: 64
+  - type: Component::GUI::AtkSimpleTweenHolder*
+    name: AtkSimpleTweenHolder
+    offset: 72
+  - type: Component::GUI::AtkCrestManager*
+    name: AtkCrestManager
+    offset: 80
+  - type: Component::GUI::AtkUIColorHolder*
+    name: AtkUIColorHolder
+    offset: 88
+  - type: Client::UI::Misc::RaptureTextModule*
+    name: RaptureTextModule
+    offset: 96
+  - type: Client::System::Input::SoftKeyboardDeviceInterface*
+    name: SoftKeyboardDevice
+    offset: 104
+  - type: Component::GUI::AtkExternalInterface*
+    name: AtkExternalInterface
+    offset: 112
+  - type: Component::GUI::AtkDragDropManager
+    name: DragDropManager
+    offset: 120
+  - type: Component::GUI::AtkGroupManager
+    name: AtkGroupManager
+    offset: 320
+  - type: Component::GUI::AtkTooltipManager
+    name: TooltipManager
+    offset: 360
+  - type: Component::GUI::AtkStage::DialogueStruct
+    name: Dialogue
+    offset: 696
+  - type: Component::GUI::AtkStage::FilterStruct
+    name: Filter
+    offset: 760
+  - type: Component::GUI::AtkStage::OperationGuideStruct
+    name: OperationGuide
+    offset: 776
+  - type: Component::GUI::AtkCursor
+    name: AtkCursor
+    offset: 824
+  - type: Component::GUI::AtkEventDispatcher
+    name: AtkEventDispatcher
+    offset: 856
+    size: 32
+    is_string: False
+  - type: unsigned int
+    name: NextEventDispatcherIndex
+    offset: 2136
+  - type: Common::Math::Size
+    name: ScreenSize
+    offset: 2144
+  - type: Component::GUI::AtkEventManager
+    name: ViewportEventManager
+    offset: 2160
+  - type: Component::GUI::AtkEvent
+    name: RegisteredEvents
+    offset: 2168
+    size: 10000
+    is_string: False
+  virtual_functions:
+  - name: Dtor
+    offset: 8
+  member_functions:
+  - signature: 48 8B 51 ?? 48 0F BF 82
+    return_type: Component::GUI::AtkResNode*
+    name: GetFocus
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: 48 8B 49 ?? 45 33 C9 45 33 C0 33 D2 E9
+    return_type: void
+    name: ClearFocus
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: 48 8B 41 38 48 8B 40 18
+    return_type: Component::GUI::NumberArrayData**
+    name: GetNumberArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 42 8D 1C AD
+    return_type: Component::GUI::StringArrayData**
+    name: GetStringArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: 48 8B 41 38 48 8B 40 48
+    return_type: Component::GUI::ExtendArrayData**
+    name: GetExtendArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 4C 8B 40 18 45 8B 40 18
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Component::GUI::AtkStage
 - type: Client::Game::JobGaugeManager::Gauge
   name: Gauge
   namespace: Client::Game::JobGaugeManager
@@ -164256,6 +165372,12 @@ structs:
     return_type: byte
     name: CanLeaveCurrentContent
     parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 8B 43 ?? 41 B2
+    return_type: void
+    name: LeaveCurrentContent
+    parameters:
+    - type: byte
+      name: forced
 - type: Client::Game::InstanceContent::PublicContentOccultCrescent
   name: PublicContentOccultCrescent
   namespace: Client.Game.InstanceContent
