@@ -1127,7 +1127,7 @@ classes:
     instances:
       - ea: 0x14270DA00
     vtbls:
-#fail       - ea: 0x142059B78
+      - ea: 0x14205ABB8
         base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14094FE50: Initialize
@@ -1665,11 +1665,11 @@ classes:
       0: Dtor
   Client::Game::WeatherManager::ServerWeather:
     vtbls:
-#fail       - ea: 0x1420738E0
+      - ea: 0x142074690
         base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
     vtbls:
-#fail       - ea: 0x142073928
+      - ea: 0x1420746D8
         base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
@@ -3331,7 +3331,7 @@ classes:
   Common::Component::Excel::ExcelModuleInterface: # these are two different classes
     vtbls:
       - ea: 0x142413850
-#fail       - ea: 0x142415480
+      - ea: 0x1424138E0
         base: Common::Component::Excel::ExcelResourceListener
     vfuncs:
       1: GetSheetByIndex
@@ -3412,7 +3412,7 @@ classes:
     vtbls:
       - ea: 0x142412A10
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x1424145B8
+      - ea: 0x142412A18
         base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
@@ -3422,9 +3422,9 @@ classes:
       1: Clone
   Common::Component::BGCollision::Mesh:
     vtbls:
-#fail       - ea: 0x142414830
+      - ea: 0x142412C90
         base: Common::Component::BGCollision::Object
-#fail       - ea: 0x142414888
+      - ea: 0x142412CE8
         base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
@@ -3471,7 +3471,7 @@ classes:
     vtbls:
       - ea: 0x142412868
         base: Common::Component::BGCollision::SceneWrapperNode
-#fail       - ea: 0x142414498
+      - ea: 0x1424128F8
         base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
@@ -4284,7 +4284,7 @@ classes:
       10: EndRequest
   Client::UI::Info::InfoProxyPageInterface:
     vtbls:
-#fail       - ea: 0x1420565C8
+      - ea: 0x1420574B8
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
@@ -9555,7 +9555,7 @@ classes:
       - ea: 0x142053BC0
   Client::UI::Shell::RaptureShellCommandInterface:
     vtbls:
-#fail       - ea: 0x142052CE0
+      - ea: 0x142053BD0
         base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
@@ -9892,7 +9892,7 @@ classes:
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
     vtbls:
-#fail       - ea: 0x142055EE8
+      - ea: 0x142056DD8
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
@@ -13822,15 +13822,15 @@ classes:
       - ea: 0x1421AA4F8
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
     vtbls:
-#fail       - ea: 0x1421ADE58
+      - ea: 0x1421AA508
         base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
     vtbls:
-#fail       - ea: 0x1421ADE68
+      - ea: 0x1421AA518
         base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback:
     vtbls:
-#fail       - ea: 0x1421ADE80
+      - ea: 0x1421AA530
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::EventSceneModule:
     funcs:
@@ -13941,19 +13941,19 @@ classes:
       0x14162DED0: StartReadGilShopItems
   Client::Game::Event::ShopEventHandler::ProxyInterface:
     vtbls:
-#fail       - ea: 0x142152A90
+      - ea: 0x142153898
         base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::ShopEventHandler::AgentProxy:
     instances:
       - ea: 0x14271EC40
     vtbls:
-#fail       - ea: 0x142152AC0
+      - ea: 0x1421538C8
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
       - ea: 0x14271EC70
     vtbls:
-#fail       - ea: 0x142152AF0
+      - ea: 0x1421538F8
         base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
