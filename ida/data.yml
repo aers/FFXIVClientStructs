@@ -7616,6 +7616,10 @@ classes:
         base: Component::GUI::AtkComponentButton
     funcs:
       0x14069B720: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
+  Component::GUI::AtkComponentHoldButton::ProgressState:
+    funcs:
+      0x14069D160: StartProgress
+      0x14069D1B0: Update # inlined
   Component::GUI::AtkComponentPortrait:
     vtbls:
       - ea: 0x14203AAD0
