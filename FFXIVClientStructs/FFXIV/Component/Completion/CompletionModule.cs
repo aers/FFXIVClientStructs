@@ -16,6 +16,8 @@ namespace FFXIVClientStructs.FFXIV.Component.Completion;
 public unsafe partial struct CompletionModule {
     [FieldOffset(0x18)] public ExcelModuleInterface* ExcelModuleInterface;
     [FieldOffset(0x20)] public RaptureTextModule* RaptureTextModule;
+    [FieldOffset(0x28)] private bool Unk28;
+    [FieldOffset(0x29)] private byte Unk29;
 
     [FieldOffset(0x30)] public StdVector<Pointer<CategoryData>> CategoryData;
     [FieldOffset(0x48)] public StdVector<CStringPointer> CategoryNames;
@@ -29,8 +31,8 @@ public unsafe partial struct CompletionModule {
 
     [FieldOffset(0x278)] public StdVector<Utf8String> CompanionNames;
     [FieldOffset(0x290)] public StdVector<SheetName> SheetNames;
-    [FieldOffset(0x2A8)] private Utf8String Unk2A8;
-    [FieldOffset(0x310)] private Utf8String Unk310;
+    [FieldOffset(0x2A8)] public Utf8String OpenIconMacro;
+    [FieldOffset(0x310)] public Utf8String CloseIconMacro;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 1B 41 FF C7"), GenerateStringOverloads]
     public partial void AddCompletionEntry(long groupIndex, uint rowId, CStringPointer itemText, CStringPointer groupTitle, ushort itemKey);
@@ -40,6 +42,9 @@ public unsafe partial struct CompletionModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 6C 24 ??")]
     public partial void ClearCompletionData();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? 0F 28 CE")]
+    public partial void Update(Utf8String* completionSheetName, Utf8String* openIconMacro, Utf8String* closeIconMacro, nint a5);
 
     [VirtualFunction(5)]
     public partial int GetSelection(CategoryData.CompletionDataStruct* dataStructs, int index, Utf8String* outputString, Utf8String* outputDisplayString);

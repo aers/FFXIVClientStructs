@@ -901,6 +901,7 @@ classes:
       - ea: 0x142039CA0
     vfuncs:
       0: Dtor
+      4: GetOwnerNode
   Component::GUI::AtkGrid:
     vtbls:
       - ea: 0x1420396F0
@@ -910,6 +911,7 @@ classes:
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     funcs:
       0x1406459C0: ctor
+      0x140649690: OpenCompletion
   Component::Text::TextChecker::ExecNonMacroFunc:
     vtbls:
       - ea: 0x142009010
@@ -7233,6 +7235,7 @@ classes:
     funcs:
       0x14064A920: ctor
       0x14064ABA0: GetOwnerNodePosition
+      0x14064AC90: GetComponentType
       0x14064AEC0: GetNodeById
       0x14064AF20: GetComponentById
       0x14064AFD0: GetComponentIconTextById
