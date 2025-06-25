@@ -7233,6 +7233,7 @@ classes:
     funcs:
       0x14064A920: ctor
       0x14064ABA0: GetOwnerNodePosition
+      0x14064AC90: GetComponentType
       0x14064AEC0: GetNodeById
       0x14064AF20: GetComponentById
       0x14064AFD0: GetComponentIconTextById
