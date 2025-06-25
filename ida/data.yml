@@ -911,7 +911,7 @@ classes:
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     funcs:
       0x1406459C0: ctor
-      0x140649690: OpenCompletion
+      0x1406497C0: OpenCompletion
   Component::Text::TextChecker::ExecNonMacroFunc:
     vtbls:
       - ea: 0x142009010
