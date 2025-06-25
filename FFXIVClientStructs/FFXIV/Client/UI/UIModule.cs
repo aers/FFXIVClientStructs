@@ -34,9 +34,9 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x7F4)] public uint FrameCount;
     [FieldOffset(0x7F8)] internal ExcelModuleInterface* ExcelModuleInterface; // this is Component::Excel::ExcelModuleInterface, not Common::Component::Excel::ExcelModuleInterface!
     [FieldOffset(0x800)] internal RaptureTextModule RaptureTextModule;
-    [FieldOffset(0x1668)] internal CompletionModule CompletionModule;
+    [FieldOffset(0x1668)] public CompletionModule CompletionModule;
     [FieldOffset(0x19E0)] internal RaptureLogModule RaptureLogModule;
-    [FieldOffset(0x60B0)] internal UserFileManager UserFileManager;
+    [FieldOffset(0x60B0)] public UserFileManager UserFileManager;
     [FieldOffset(0x60D0)] internal RaptureMacroModule RaptureMacroModule;
     [FieldOffset(0x57B80)] internal RaptureHotbarModule RaptureHotbarModule;
     [FieldOffset(0x80910)] internal RaptureGearsetModule RaptureGearsetModule;
@@ -105,19 +105,19 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xC8490)] internal RaptureAtkModule RaptureAtkModule;
     [FieldOffset(0xF2098)] internal InfoModule InfoModule;
     [FieldOffset(0xF3D10)] internal UIModuleHelpers UIModuleHelpers;
-    [FieldOffset(0xF3D48)] internal Utf8String AddonSheetName;
+    [FieldOffset(0xF3D48)] public Utf8String AddonSheetName;
 
-    [FieldOffset(0xF3DB8)] internal Utf8String UIColorSheetName;
+    [FieldOffset(0xF3DB8)] public Utf8String UIColorSheetName;
 
-    [FieldOffset(0xF3E30)] internal Utf8String CompletionSheetName;
-    [FieldOffset(0xF3E98)] internal Utf8String CompletionOpenIconMacro;
-    [FieldOffset(0xF3F00)] internal Utf8String CompletionCloseIconMacro;
-    [FieldOffset(0xF3F68)] internal Utf8String NewLineMacro;
+    [FieldOffset(0xF3E30)] public Utf8String CompletionSheetName;
+    [FieldOffset(0xF3E98)] public Utf8String CompletionOpenIconMacro;
+    [FieldOffset(0xF3F00)] public Utf8String CompletionCloseIconMacro;
+    [FieldOffset(0xF3F68)] public Utf8String NewLineMacro;
     [FieldOffset(0xF3FD0)] public Utf8String LastTalkName;
     [FieldOffset(0xF4038)] public Utf8String LastTalkText;
     [FieldOffset(0xF40A0)] internal UIInputData UIInputData;
     [FieldOffset(0xF4AD0)] internal UIInputModule UIInputModule;
-    // [FieldOffset(0xF4BC0)] internal Vf79Struct;
+    // [FieldOffset(0xF4BC0)] public Vf79Struct;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 45 84 C9")]
     public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
