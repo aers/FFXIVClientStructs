@@ -25,5 +25,8 @@ public unsafe partial struct AtkTextInput {
     [GenerateInterop(true)]
     [VirtualTable("48 89 86 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 86 ?? ?? ?? ?? E8 ?? ?? ?? ?? 40 F6 C5 01", 10, 5)]
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public unsafe partial struct AtkTextInputEventInterface;
+    public unsafe partial struct AtkTextInputEventInterface {
+        [VirtualFunction(4)]
+        public partial AtkResNode* GetOwnerNode();
+    }
 }

@@ -901,6 +901,7 @@ classes:
       - ea: 0x142039CA0
     vfuncs:
       0: Dtor
+      4: GetOwnerNode
   Component::GUI::AtkGrid:
     vtbls:
       - ea: 0x1420396F0
