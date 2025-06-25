@@ -43,6 +43,9 @@ public unsafe partial struct CompletionModule {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 6C 24 ??")]
     public partial void ClearCompletionData();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? 0F 28 CE")]
+    public partial void Update(Utf8String* completionSheetName, Utf8String* openIconMacro, Utf8String* closeIconMacro, nint a5);
+
     [VirtualFunction(5)]
     public partial int GetSelection(CategoryData.CompletionDataStruct* dataStructs, int index, Utf8String* outputString, Utf8String* outputDisplayString);
 

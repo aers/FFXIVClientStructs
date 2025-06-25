@@ -18,7 +18,14 @@ public unsafe partial struct AtkTextInput {
     [FieldOffset(0x1C0)] public ClipBoard ClipboardData;
     [FieldOffset(0x298)] public Utf8String CopyBufferRaw;
     [FieldOffset(0x300)] public Utf8String CopyBufferFiltered;
-    [FieldOffset(0xBF0)] public uint CompletionDepth;
+
+    [FieldOffset(0xBF0)] public uint CompletionDepth; // TODO: should be (u)short
+
+    [FieldOffset(0xC10)] public AllowedEntities InputSanitizationFlags;
+
+    /// <remarks> Call this only if <see cref="InputSanitizationFlags"/> has Payloads! </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4E 18 48 8B 01")]
+    public partial void OpenCompletion();
 
     // Component::GUI::AtkTextInput::AtkTextInputEventInterface
     // no explicit constructor, just an event interface 
