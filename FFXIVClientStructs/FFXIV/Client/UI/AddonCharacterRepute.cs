@@ -9,7 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2C0)]
-public partial struct AddonCharacterRepute {
+public unsafe partial struct AddonCharacterRepute {
+    [FieldOffset(0x250)] public AtkComponentDropDownList* ExpansionsDropDownList;
+    [FieldOffset(0x2A0), FixedSizeArray] internal FixedSizeArray6<int> _expansionMapping;
     [FieldOffset(0x2B8)] public int SelectedExpansion;
     [FieldOffset(0x2BC)] public int ExpansionsCount;
 }

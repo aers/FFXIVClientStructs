@@ -6453,6 +6453,7 @@ classes:
       0x1407FF0F0: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x1407E5890: GetItemRowById
       0x1407E6F70: GetRoleForClassJobId
+      0x1407F1450: GetBannerConditionByIndex
   Component::Exd::Sheets::BannerCondition:
     funcs:
       0x1409807F0: GetUnlockState # In CS as ExdModule.GetBannerConditionUnlockState
@@ -9554,6 +9555,7 @@ classes:
       0x1408682E0: CalculateAndApplyOverallSpeed
       0x140868800: SetModelState
       0x1408689B0: SetAnimationState
+      0x1408695C0: PlayActionTimeline
       # 0x14139EC80: SetSlotSpeed # inlined @ 0x1408B6A6F and other occurrences
       0x14086AE90: GetHeightAdjustActionTimelineRowId
       0x14086BA90: SetLipsOverrideTimeline
@@ -10474,6 +10476,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EB09D0: ctor
+      0x140EB0ED0: OpenWithData
   Client::UI::Agent::AgentItemSearch:
     vtbls:
       - ea: 0x14200B598

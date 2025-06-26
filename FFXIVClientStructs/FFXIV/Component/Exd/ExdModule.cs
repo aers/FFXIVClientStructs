@@ -42,6 +42,10 @@ public unsafe partial struct ExdModule {
     [CExporterExcel("Item")]
     public static partial void* GetItemRowById(uint itemId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 48 2F")]
+    [CExporterExcel("BannerCondition")]
+    public static partial void* GetBannerConditionByIndex(uint rowIndex);
+
     [MemberFunction("40 53 48 83 EC 20 0F B6 41 ?? 48 8B D9 84 C0 74")]
     public static partial int GetBannerConditionUnlockState([CExporterExcel("BannerCondition")] void* row);
 
