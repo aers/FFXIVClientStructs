@@ -4180,6 +4180,7 @@ classes:
       0x1400C09D0: ctor
       0x1400C17C0: Finalizer
       0x1400C1B40: ChangeUiMode
+      0x1400C2780: CancelDragDrop
       0x1400C2DE0: OpenAddon
       0x1400C3260: OpenAddonByAgent
       0x1400C3600: OpenYesNo
@@ -4187,6 +4188,7 @@ classes:
       0x1400C3860: OpenSelectOk2
       0x1400C7170: ShowScreenImage
       0x1400CA3A0: ShowTextGimmickHint
+      0x1400CD900: SetCursorVisibility
       0x1400D28D0: OpenDawnStory
       0x1400D2900: OpenDawn
       0x1400D29C0: IsDawnSupported
@@ -8078,6 +8080,7 @@ classes:
     funcs:
       # 0x140621E10: ctor # inlined @ 0x14075CDAD
       0x140736590: HandleInputUpdate
+      0x140736E80: DisablePadMouseMode
       0x140737DB0: CheckCastCancel
       0x14073BB70: CheckScreenshotState
   Client::UI::UIModuleInterface:
@@ -8177,6 +8180,7 @@ classes:
       110: OpenMiniMap
       111: IsGamePadInputActive
       114: ToggleInputMode
+      115: CancelDragDrop
       116: IsUIHidden
       117: AddAtkHistoryEntry
       118: ClearAtkHistory
