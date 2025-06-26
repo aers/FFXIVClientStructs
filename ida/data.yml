@@ -7169,6 +7169,7 @@ classes:
       27: GetWindowBounds
       30: GetRootBounds
       32: ShouldAllowCursorFocus
+      35: GetUnitBaseForFocus
       37: Focus
       41: Initialize
       42: Finalizer

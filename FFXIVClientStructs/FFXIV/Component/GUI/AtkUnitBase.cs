@@ -329,6 +329,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(32)]
     public partial bool ShouldAllowCursorFocus();
 
+    [VirtualFunction(35)]
+    public partial AtkUnitBase* GetUnitBaseForFocus(); // this basically always returns the addon itself, except for in ChatLogPanel where it returns ChatLog
+
     [VirtualFunction(37)]
     public partial void Focus();
 
