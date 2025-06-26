@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Common.Math;
-using static FFXIVClientStructs.FFXIV.Component.GUI.AtkEventData;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -368,7 +367,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void FireCloseCallback();
 
     [VirtualFunction(57)]
-    public partial bool HandleCustomInput(AtkInputData* inputData);
+    public partial bool HandleCustomInput(AtkEventData.AtkInputData* inputData);
 
     [VirtualFunction(60)]
     public partial void OnScreenSizeChange(int width, int height);

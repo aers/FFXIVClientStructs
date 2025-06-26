@@ -8,35 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct AtkTooltipManager {
-    public enum AtkTooltipType : byte {
-        Text = 1,
-        Item = 2,
-        TextItem = 3,
-        Action = 4
-    }
-
-    [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
-    public partial struct AtkTooltipArgs : ICreatable {
-        [FieldOffset(0x0)] public CStringPointer Text;
-        [FieldOffset(0x8)] public ulong TypeSpecificId;
-        [FieldOffset(0x10)] public uint Flags;
-        [FieldOffset(0x14)] public short Unk_14;
-        [FieldOffset(0x16)] public byte Unk_16;
-
-        [MemberFunction("E8 ?? ?? ?? ?? C1 FB 04")]
-        public partial void Ctor();
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    public struct AtkTooltipInfo {
-        [FieldOffset(0x0)] public AtkTooltipArgs AtkTooltipArgs;
-        [FieldOffset(0x18)] public ushort ParentId; // same as IDs in addons
-        [FieldOffset(0x1A)] public AtkTooltipType Type;
-    }
-
     [FieldOffset(0x8)] public StdMap<Pointer<AtkResNode>, Pointer<AtkTooltipInfo>> TooltipMap;
     [FieldOffset(0x18)] public AtkStage* AtkStage;
+    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray5<AtkTimer> _timers;
     [FieldOffset(0x14C)] public byte Flag1; // Allows AddonItemDetail to be shown with Flag1 |= 2.
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 F6")]
@@ -69,4 +43,31 @@ public unsafe partial struct AtkTooltipManager {
 
     [MemberFunction("66 3B 91 ?? ?? ?? ?? 75 09")]
     public partial void HideTooltip(ushort parentId, bool unk = false);
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public partial struct AtkTooltipArgs : ICreatable {
+        [FieldOffset(0x0)] public CStringPointer Text;
+        [FieldOffset(0x8)] public ulong TypeSpecificId;
+        [FieldOffset(0x10)] public uint Flags;
+        [FieldOffset(0x14)] public short Unk_14;
+        [FieldOffset(0x16)] public byte Unk_16;
+
+        [MemberFunction("E8 ?? ?? ?? ?? C1 FB 04")]
+        public partial void Ctor();
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct AtkTooltipInfo {
+        [FieldOffset(0x0)] public AtkTooltipArgs AtkTooltipArgs;
+        [FieldOffset(0x18)] public ushort ParentId; // same as IDs in addons
+        [FieldOffset(0x1A)] public AtkTooltipType Type;
+    }
+
+    public enum AtkTooltipType : byte {
+        Text = 1,
+        Item = 2,
+        TextItem = 3,
+        Action = 4
+    }
 }

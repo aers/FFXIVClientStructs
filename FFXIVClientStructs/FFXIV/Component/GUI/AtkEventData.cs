@@ -11,6 +11,7 @@ public unsafe partial struct AtkEventData {
     [FieldOffset(0x00)] public AtkDragDropData DragDropData;
     [FieldOffset(0x00)] public LinkData* LinkData;
     [FieldOffset(0x00)] public AtkAddonControlData AddonControlData;
+    [FieldOffset(0x00)] public GUI.AtkInputData* RawInputData;
 }
 
 public partial struct AtkEventData {

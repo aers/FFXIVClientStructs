@@ -30,6 +30,8 @@ public partial struct AtkCursor {
         Hand,
         ResizeWE,
         ResizeNS,
+        ResizeNWSE,
+        [Obsolete("Fixed typo. Renamed to ResizeNWSE.")]
         ResizeNWSR,
         ResizeNESW,
         Clickable,
