@@ -6689,7 +6689,7 @@ classes:
       0x1405FF560: Start
       0x1405FF530: SetEndTimeAndInterval
       0x1405FF550: SetEndTime
-#fail       0x140510930: Update
+      0x1405FF770: Update
   Component::GUI::AtkGroupManager:
     vtbls:
       - ea: 0x142038FB8
