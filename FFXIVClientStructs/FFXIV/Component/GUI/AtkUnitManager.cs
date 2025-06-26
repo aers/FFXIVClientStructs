@@ -37,6 +37,7 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x9180)] public AddonDragDrop* AddonDragDrop;
     [FieldOffset(0x9188)] public AtkManagedInterface* ManagedScreenFrame;
 
+    [FieldOffset(0x92A0)] private AtkResNode Unk92A0;
     [FieldOffset(0x9350)] public Size LastScreenSize;
 
     // [FieldOffset(0x9388), FixedSizeArray] internal FixedSizeArray48<Unk9388Struct> Unk9388;
