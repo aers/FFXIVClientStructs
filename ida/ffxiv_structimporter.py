@@ -359,7 +359,7 @@ if api is None:
                         s, "__vftable", 0, ida_bytes.qword_flag(), None, 8
                     )
                     type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
-                    meminfo = self.get_struct_member(s, 0)
+                    meminfo = self.get_struct_member_by_name(s, "__vftable")
                     self.set_struct_member_info(
                         s, meminfo, 0, self.get_tinfo_from_type(type), 0
                     )

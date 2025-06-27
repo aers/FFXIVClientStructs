@@ -13,6 +13,7 @@ import ida_name
 import ida_funcs
 from data_schema import *
 
+
 class BaseIdaInterface(object):
     def get_idc_type_from_ida_type(self, type: str):
         """Retrieve the idc type from the ida type.
@@ -90,7 +91,7 @@ class BaseIdaInterface(object):
             return True
         else:
             return False
-        
+
     def get_size_from_ida_type(self, type: str):
         return self.get_size_from_idc_type(self.get_idc_type_from_ida_type(type))
 
@@ -126,78 +127,78 @@ class BaseIdaInterface(object):
             .replace("__int8", "byte")
         )
 
+    def get_named_type(self, name: str):
+        """Retrieve a tinfo_t from the named type.
+
+        Args:
+            name (str): Name of the type.
+        """
+
+        tinfo = ida_typeinf.tinfo_t()
+        clean_name = self.clean_struct_name(name)
+        if (
+            ida_struct.get_struc_id(clean_name) != idaapi.BADADDR
+            or ida_enum.get_enum(clean_name) != idaapi.BADADDR
+        ):
+            if not tinfo.get_named_type(idaapi.get_idati(), clean_name):
+                raise ValueError("{0} not found in IDA database".format(clean_name))
+            return tinfo
+
+        if name == "void":
+            idaapi.parse_decl(
+                tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL
+            )
+            return tinfo.get_rettype()
+
+        terminated = name + ";"
+        idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+
+        tinfo_str = tinfo.dstr()
+        if tinfo_str == name or tinfo_str == clean_name:
+            return tinfo
+
+        terminated = clean_name + ";"
+        idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
+
+        return tinfo
+    
+    def get_tinfo_from_type(self, raw_type: str, array_size=0):
+        """Retrieve a tinfo_t from a raw type string.
+
+        Args:
+            raw_type (str): Raw type string.
+            array_size (int, optional): Size of the array. Defaults to 0.
+        """
+
+        type = raw_type.rstrip("*")
+        ptr_count = len(raw_type) - len(type)
+
+        type_tinfo = self.get_named_type(type)
+
+        ptr_tinfo = None
+        if ptr_count > 0:
+            for i in range(ptr_count):
+                ptr_tinfo = idaapi.tinfo_t()
+                if not ptr_tinfo.create_ptr(type_tinfo):
+                    print("! failed to create pointer")
+                    return None
+                type_tinfo = ptr_tinfo
+        else:
+            ptr_tinfo = type_tinfo
+
+        if array_size > 0:
+            array_tinfo = idaapi.tinfo_t()
+            if not array_tinfo.create_array(ptr_tinfo, array_size):
+                print("! failed to create array")
+                return None
+
+            ptr_tinfo = array_tinfo
+
+        return ptr_tinfo
+
 if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
     # This is only for IDA 7 and 8 due to a change in the API for IDA 9
     class IdaInterface(BaseIdaInterface):
-        def get_named_type(self, name: str):
-            """Retrieve a tinfo_t from the named type.
-
-            Args:
-                name (str): Name of the type.
-            """
-
-            tinfo = ida_typeinf.tinfo_t()
-            clean_name = self.clean_struct_name(name)
-            if (
-                ida_struct.get_struc_id(clean_name) != idaapi.BADADDR
-                or ida_enum.get_enum(clean_name) != idaapi.BADADDR
-            ):
-                if not tinfo.get_named_type(idaapi.get_idati(), clean_name):
-                    raise ValueError("{0} not found in IDA database".format(clean_name))
-                return tinfo
-
-            if name == "void":
-                idaapi.parse_decl(
-                    tinfo, idaapi.get_idati(), "void (__fastcall)();", idaapi.PT_SIL
-                )
-                return tinfo.get_rettype()
-
-            terminated = name + ";"
-            idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
-
-            tinfo_str = tinfo.dstr()
-            if tinfo_str == name or tinfo_str == clean_name:
-                return tinfo
-
-            terminated = clean_name + ";"
-            idaapi.parse_decl(tinfo, idaapi.get_idati(), terminated, idaapi.PT_SIL)
-
-            return tinfo
-
-        def get_tinfo_from_type(self, raw_type: str, array_size=0):
-            """Retrieve a tinfo_t from a raw type string.
-
-            Args:
-                raw_type (str): Raw type string.
-                array_size (int, optional): Size of the array. Defaults to 0.
-            """
-
-            type = raw_type.rstrip("*")
-            ptr_count = len(raw_type) - len(type)
-
-            type_tinfo = self.get_named_type(type)
-
-            ptr_tinfo = None
-            if ptr_count > 0:
-                for i in range(ptr_count):
-                    ptr_tinfo = idaapi.tinfo_t()
-                    if not ptr_tinfo.create_ptr(type_tinfo):
-                        print("! failed to create pointer")
-                        return None
-                    type_tinfo = ptr_tinfo
-            else:
-                ptr_tinfo = type_tinfo
-
-            if array_size > 0:
-                array_tinfo = idaapi.tinfo_t()
-                if not array_tinfo.create_array(ptr_tinfo, array_size):
-                    print("! failed to create array")
-                    return None
-
-                ptr_tinfo = array_tinfo
-
-            return ptr_tinfo
-
         def get_tinfo_from_func_data(self, data: DefinedFuncField):
             """Retrieve a tinfo_t from a raw function data.
 
@@ -317,7 +318,9 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
             if mnem == "jmp" or mnem == "call" or mnem[0] == "j":
                 if opType0 != idc.o_near and opType0 != idc.o_mem:
                     print(
-                        "Error: Can't follow opType0 {0}".format(self.opTypeAsName(opType0))
+                        "Error: Can't follow opType0 {0}".format(
+                            self.opTypeAsName(opType0)
+                        )
                     )
                     return idc.BADADDR
                 return idc.get_operand_value(ea, 0)
@@ -366,7 +369,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 int: The struct id
             """
             return ida_struct.get_struc_id(name)
-        
+
         def get_struct(self, sid: int) -> ida_struct.struc_t:
             """Get the struct
 
@@ -377,7 +380,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 ida_struct.struc_t: The struct
             """
             return ida_struct.get_struc(sid)
-        
+
         def get_struct_size(self, sid: ida_struct.struc_t) -> int:
             """Get the struct size
 
@@ -440,7 +443,9 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 ida_struct.get_struc_size(sid) + 1,
             )
 
-        def get_struct_member(self, sid: ida_struct.struc_t, offset: int) -> ida_struct.member_t:
+        def get_struct_member(
+            self, sid: ida_struct.struc_t, offset: int
+        ) -> ida_struct.member_t:
             """Get a struct member
 
             Args:
@@ -451,8 +456,10 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 ida_struct.member_t: The member data
             """
             return ida_struct.get_member(sid, offset)
-        
-        def get_struct_member_by_name(self, sid: ida_struct.struc_t, name: str) -> ida_struct.member_t:
+
+        def get_struct_member_by_name(
+            self, sid: ida_struct.struc_t, name: str
+        ) -> ida_struct.member_t:
             """Get a struct member
 
             Args:
@@ -463,8 +470,15 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 ida_struct.member_t: The member data
             """
             return ida_struct.get_member_by_name(sid, name)
-        
-        def set_struct_member_info(self, sid: ida_struct.struc_t, member: ida_struct.member_t, offset: int, tif: ida_typeinf.tinfo_t, flag: int = 0):
+
+        def set_struct_member_info(
+            self,
+            sid: ida_struct.struc_t,
+            member: ida_struct.member_t,
+            offset: int,
+            tif: ida_typeinf.tinfo_t,
+            flag: int = 0,
+        ):
             """Set the info of a struct member
 
             Args:
@@ -478,7 +492,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 smt_code_t: Unknown IDA documentation
             """
             return ida_struct.set_member_tinfo(sid, member, offset, tif, flag)
-        
+
         def get_struct_member_id(self, sid: ida_struct.struc_t, offset: int) -> int:
             """Get the member id
 
@@ -490,7 +504,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 int: The member id inside of the struct
             """
             return ida_struct.get_member_id(sid, offset)
-        
+
         def get_base_class_flag(self):
             """Get the base class flag
 
@@ -501,10 +515,10 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
 
         def get_enum_id(self, name: str):
             """Get the id of an enum by its name
-            
+
             Args:
                 name (str): The name of the enum
-            
+
             Returns:
                 int: The id of the enum
             """
@@ -512,28 +526,26 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
 
         def remove_enum_member(self, eid: int, value: str, name: str):
             """Remove an enum member by its value and name
-            
+
             Args:
                 eid (int): The id of the enum
                 value (str): The value of the enum member
                 name (str): The name of the enum member
             """
-            mem = ida_enum.get_enum_member_by_name(
-                "{0}.{1}".format(name, value)
-            )
+            mem = ida_enum.get_enum_member_by_name("{0}.{1}".format(name, value))
             ida_enum.del_enum_member(
                 eid,
                 ida_enum.get_enum_member_value(mem),
                 ida_enum.get_enum_member_serial(mem),
                 ida_enum.get_enum_member_bmask(mem),
             )
-        
+
         def create_enum(self, name: str) -> int:
             """Create an enum by its name
-            
+
             Args:
                 name (str): The name of the enum
-            
+
             Returns:
                 int: The id of the added enum
             """
@@ -541,7 +553,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
 
         def set_enum_width(self, eid: int, width: int):
             """Set the width of an enum by its id
-            
+
             Args:
                 eid (int): The id of the enum
                 width (int): The width of the enum
@@ -550,7 +562,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
 
         def set_enum_flag(self, eid: int, flag: int):
             """Set a flag on an enum by its id
-            
+
             Args:
                 eid (int): The id of the enum
                 flag (int): The flag to set
@@ -569,7 +581,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
             """
             if ida_enum.add_enum_member(eid, name, value, value) == 4:
                 ida_enum.add_enum_member(eid, name, value)
-        
+
         def get_struct_flag(self):
             """Get the flag for a struct data type
 
@@ -577,7 +589,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 int: The flag for a struct data type
             """
             return ida_bytes.stru_flag()
-        
+
         def get_enum_flag(self):
             """Get the flag for an enum data type
 
@@ -585,7 +597,7 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
                 int: The flag for an enum data type
             """
             return ida_bytes.enum_flag()
-        
+
 elif idaapi.IDA_SDK_VERSION >= 900:
     raise RuntimeError("Currently unsupported IDA version due to a change in the struct and enum APIs")
 else:
