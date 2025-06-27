@@ -5,9 +5,9 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // Component::GUI::AtkTimer
 //   Component::GUI::AtkEventTarget
 [GenerateInterop]
+[Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AtkTimer : ICreatable {
-    [FieldOffset(0x00)] public AtkEventTarget EventTarget;
     [FieldOffset(0x08)] public AtkEventManager EventManager;
     /// <summary> Indicates the time at which the timer ends. </summary>
     [FieldOffset(0x10)] public uint EndTime;
