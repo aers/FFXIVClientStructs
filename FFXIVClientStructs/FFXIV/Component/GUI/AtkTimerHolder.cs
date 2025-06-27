@@ -8,5 +8,5 @@ public unsafe partial struct AtkTimerHolder {
     [FieldOffset(0x8)] public StdVector<AtkTimer> AtkTimers;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 18 48 03 03")]
-    public partial void RegisterTimer(AtkTimer* timer);
+    public partial bool RegisterTimer(AtkTimer* timer);
 }
