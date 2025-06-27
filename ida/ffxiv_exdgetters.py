@@ -45,8 +45,8 @@ if api is None:
         import ida_name
         import idc
         from ida_wrapper import IdaInterface
-    except ImportError:
-        print("Warning: Unable to load IDA")
+    except ImportError as e:
+        print("Warning: Unable to load IDA failed with {0}".format(e))
     else:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi, IdaInterface):
@@ -164,13 +164,6 @@ if api is None:
                             rettype = self.get_tinfo_from_type(
                                 f"{exd_struct_map[sheetIdx]} *"
                             )
-
-                            if rettype == None:
-                                print(
-                                    "Failed to get rettype for %s"
-                                    % exd_struct_map[sheetIdx]
-                                )
-                                continue
 
                             funcdata.empty()
                             
