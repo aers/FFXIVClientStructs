@@ -28,8 +28,8 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x7920)] public AtkUnitList UnitList16;
     [FieldOffset(0x8130)] public AtkUnitList UnitList17;
     [FieldOffset(0x8940)] public AtkUnitList UnitList18;
-    [FieldOffset(0x9150)] private AtkUnitBase* UnkOperationGuideAddon1; // used by AtkOperationGuide in AtkStage
-    [FieldOffset(0x9158)] private AtkUnitBase* UnkOperationGuideAddon2; // used by AtkOperationGuide in AtkStage
+    [FieldOffset(0x9150)] public AtkUnitBase* FocusedAddon;
+    [FieldOffset(0x9158)] private AtkUnitBase* FocusedAddon2; // unsure, looks like it's used for pushing it back to the FocusedUnitsList when FocusedAddon changed
     [FieldOffset(0x9160)] public AddonCursor* AddonCursor;
     [FieldOffset(0x9168)] public AddonOperationGuide* AddonOperationGuide;
     [FieldOffset(0x9170)] public AddonFilter* AddonFilter;
@@ -37,6 +37,7 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x9180)] public AddonDragDrop* AddonDragDrop;
     [FieldOffset(0x9188)] public AtkManagedInterface* ManagedScreenFrame;
 
+    [FieldOffset(0x92A0)] private AtkResNode Unk92A0;
     [FieldOffset(0x9350)] public Size LastScreenSize;
 
     // [FieldOffset(0x9388), FixedSizeArray] internal FixedSizeArray48<Unk9388Struct> Unk9388;

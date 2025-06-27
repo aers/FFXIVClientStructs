@@ -11,6 +11,9 @@ public unsafe partial struct AtkInputManager {
 
     [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray256<FocusEntry> _focusList;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 89 86 ?? ?? ?? ?? 88 86 ?? ?? ?? ?? 38 86")]
+    public partial void HandleInput(AtkUnitManager* unitManager, AtkCollisionManager* collisionManager);
+
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct FocusEntry {
         [FieldOffset(0x0)] public AtkEventListener* AtkEventListener;

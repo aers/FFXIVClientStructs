@@ -13,10 +13,13 @@ public enum AtkEventType : byte {
     MouseDoubleClick = 10,
 
     InputReceived = 12,
-    InputNavigation = 13, // for LEFT, RIGHT, UP, DOWN, TAB_NEXT, TAB_PREV, TAB_BOTH_NEXT, TAB_BOTH_PREV, PAGEUP, PAGEDOWN
+    /// <remarks> Fired for InputIds LEFT, RIGHT, UP, DOWN, TAB_NEXT, TAB_PREV, TAB_BOTH_NEXT, TAB_BOTH_PREV, PAGEUP, PAGEDOWN. </remarks>
+    InputNavigation = 13,
 
-    // AtkComponentTextInput and AtkComponentNumericInput
-    InputBaseInputReceived = 15, // fired for moving the text cursor, deletion of a character and inserting a new line, etc.
+    /// <remarks> Fired for moving the text cursor, deletion of a character and inserting a new line, etc. </remarks>
+    InputBaseInputReceived = 15,
+    /// <remarks> Fired at the very beginning of <see cref="AtkInputManager.HandleInput"/> on <see cref="AtkStage.ViewportEventManager"/>. Used in LovmMiniMap. </remarks>
+    RawInputData = 16,
 
     FocusStart = 18,
     FocusStop = 19,
@@ -24,11 +27,12 @@ public enum AtkEventType : byte {
     Resize = 21, // ChatLogPanel
 
     // AtkComponentButton & children
-    ButtonPress = 23, // sent on MouseDown on button
+    ButtonPress = 23, // sent on MouseDown
     ButtonRelease = 24, // sent on MouseUp and MouseOut
-    ButtonClick = 25, // sent on MouseUp and MouseClick on button
+    ButtonClick = 25, // sent on MouseUp and MouseClick
 
-    ValueUpdate = 27, // NumericInput, ScrollBar, etc.
+    /// <remarks> Used by components NumericInput, ScrollBar, ...? </remarks>
+    ValueUpdate = 27,
 
     // AtkComponentSlider
     SliderValueUpdate = 29,
@@ -64,6 +68,7 @@ public enum AtkEventType : byte {
     // AtkTimer
     TimerTick = 64,
     TimerEnd = 65,
+    TimerStart = 66,
 
     // AtkSimpleTween
     TweenProgress = 67,
@@ -82,7 +87,9 @@ public enum AtkEventType : byte {
     LinkMouseOver = 76,
     LinkMouseOut = 77,
 
-    Unk83 = 83, // found inside AtkComponentScrollBar.Deinitialize, AtkComponentDragDrop.BeginDragDrop - "clicked on viewport" event?
+    /// <remarks> This is not an event to be received. It's a wildcard used to unregister all events of a listener. </remarks>
+    UnregisterAll = 83,
+    [Obsolete("Renamed to UnregisterAll")] Unk83 = 83,
 }
 
 // Component::GUI::AtkEvent
@@ -140,7 +147,10 @@ public enum AtkEventStateFlags : byte {
     Unk7 = 0b0100_0000,
 
     /// <summary>
-    /// Specifies whether the <see cref="AtkEvent"/> should be freed.
+    /// If set, the <see cref="AtkEvent"/> is returned to the pool instead of being free'd.
     /// </summary>
+    Pooled = 0b1000_0000,
+
+    [Obsolete("Incorrect name. Renamed to Pooled")]
     Completed = 0b1000_0000
 }

@@ -2115,6 +2115,7 @@ classes:
     funcs:
       0x1405FE670: RegisterEvent
       0x1405FE760: UnregisterEvent
+      0x1405FE9C0: ClearEvents
       0x1405FEAB0: DispatchEvent
       0x1405FEC10: Cleanup
   Component::GUI::AtkEventDispatcher:
@@ -4179,6 +4180,7 @@ classes:
       0x1400C09D0: ctor
       0x1400C17C0: Finalizer
       0x1400C1B40: ChangeUiMode
+      0x1400C2780: CancelDragDrop
       0x1400C2DE0: OpenAddon
       0x1400C3260: OpenAddonByAgent
       0x1400C3600: OpenYesNo
@@ -4186,6 +4188,7 @@ classes:
       0x1400C3860: OpenSelectOk2
       0x1400C7170: ShowScreenImage
       0x1400CA3A0: ShowTextGimmickHint
+      0x1400CD900: SetCursorVisibility
       0x1400D28D0: OpenDawnStory
       0x1400D2900: OpenDawn
       0x1400D29C0: IsDawnSupported
@@ -6450,6 +6453,7 @@ classes:
       0x1407FF0F0: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x1407E5890: GetItemRowById
       0x1407E6F70: GetRoleForClassJobId
+      0x1407F1450: GetBannerConditionByIndex
   Component::Exd::Sheets::BannerCondition:
     funcs:
       0x1409807F0: GetUnlockState # In CS as ExdModule.GetBannerConditionUnlockState
@@ -6666,8 +6670,9 @@ classes:
     vtbls:
       - ea: 0x142038F98
   Component::GUI::AtkTimerHolder:
-    # funcs:
+    funcs:
       # 0x14057AD80: Update # INLINED IN 7.0 14068A7EC
+      0x1406664F0: RegisterTimer
   Component::GUI::AtkTimer:
     vtbls:
       - ea: 0x142038FA0
@@ -6680,7 +6685,14 @@ classes:
       0x1405FF4B0: Finalizer
       0x1405FF6B0: Stop
       0x1405FF6C0: StopAndReset
-#fail       0x140510930: Update
+      0x1405FF6E0: RegisterEvent
+      0x1405FF710: UnregisterEvent
+      0x1405FF730: HasEvent
+      0x1405FF760: ClearEvents
+      0x1405FF560: Start
+      0x1405FF530: SetEndTimeAndInterval
+      0x1405FF550: SetEndTime
+      0x1405FF770: Update
   Component::GUI::AtkGroupManager:
     vtbls:
       - ea: 0x142038FB8
@@ -6803,15 +6815,27 @@ classes:
     vfuncs:
       1: Dtor
     funcs:
+      # 0x1405FE4A0: RemoveAllEvents # gone, inlined (using AtkEventManager.RemoveAllEvents directly)
+      # 0x14051A310: Update INLINED IN 7.0 14068A6D6
       0x140609040: GetFocus
       0x140609070: SetFocus
       0x140609110: ClearFocus
-      # 0x1405FE4A0: RemoveAllEvents # gone, inlined (using AtkEventManager.RemoveAllEvents directly)
+      0x140609130: RegisterViewportEvent
+      0x140609180: UnregisterViewportEvent
+      0x140609240: FormatQuantityText
+      0x140609410: FormatQuantityTextKilo # unused
+      0x1406095F0: FormatCountText
+      0x140609780: GetStarsString
+      0x140609810: IntToString
+      0x140609850: FormatCString # uses vsprintf
+      0x1406098B0: SetScreenSize # inlined
+      0x140609960: UnregisterAllViewportEvents
+      0x1406099C0: ReturnAtkEventToPool
       0x140609A30: GetNumberArrayData
       0x140609A40: GetStringArrayData
       0x140609A50: GetExtendArrayData
+      0x140609A60: CreateTimerArray
       0x140609B60: ctor
-      # 0x14051A310: Update INLINED IN 7.0 14068A6D6
       0x1406311C0: Instance
       0x1406311D0: GetSingleton2
       0x140640100: GetSingleton3
@@ -6946,6 +6970,8 @@ classes:
       0x14061D620: GetTimelineActiveLabelId
       0x14061D830: RegisterEvent
       0x14061D870: UnregisterEvent
+      0x14061D890: RemoveAllEventsFromListener
+      0x14061D9A0: ClearEvents
       0x14061D9C0: DispatchEvent
       0x14061DAA0: IsEventRegistered
       0x14061DAD0: GetEventParam
@@ -7146,6 +7172,7 @@ classes:
       27: GetWindowBounds
       30: GetRootBounds
       32: ShouldAllowCursorFocus
+      35: GetUnitBaseForFocus
       37: Focus
       41: Initialize
       42: Finalizer
@@ -8054,6 +8081,7 @@ classes:
     funcs:
       # 0x140621E10: ctor # inlined @ 0x14075CDAD
       0x140736590: HandleInputUpdate
+      0x140736E80: DisablePadMouseMode
       0x140737DB0: CheckCastCancel
       0x14073BB70: CheckScreenshotState
   Client::UI::UIModuleInterface:
@@ -8153,6 +8181,7 @@ classes:
       110: OpenMiniMap
       111: IsGamePadInputActive
       114: ToggleInputMode
+      115: CancelDragDrop
       116: IsUIHidden
       117: AddAtkHistoryEntry
       118: ClearAtkHistory
@@ -9526,6 +9555,7 @@ classes:
       0x1408682E0: CalculateAndApplyOverallSpeed
       0x140868800: SetModelState
       0x1408689B0: SetAnimationState
+      0x1408695C0: PlayActionTimeline
       # 0x14139EC80: SetSlotSpeed # inlined @ 0x1408B6A6F and other occurrences
       0x14086AE90: GetHeightAdjustActionTimelineRowId
       0x14086BA90: SetLipsOverrideTimeline
@@ -10446,6 +10476,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140EB09D0: ctor
+      0x140EB0ED0: OpenWithData
   Client::UI::Agent::AgentItemSearch:
     vtbls:
       - ea: 0x14200B598

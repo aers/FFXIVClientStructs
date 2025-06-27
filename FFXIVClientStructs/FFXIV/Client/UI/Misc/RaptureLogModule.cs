@@ -46,6 +46,8 @@ public unsafe partial struct RaptureLogModule {
 
     [FieldOffset(0x3488)] public AddonMessageSub AddonMessageSub3488;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 83 EC 01")]
+    public partial uint FormatLogMessage(uint logKindId, Utf8String* sender, Utf8String* message, int* timestamp, void* a6, Utf8String* a7, int chatTabIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D8 48 8D 4D 00")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);

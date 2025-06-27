@@ -1,7 +1,9 @@
 using FFXIVClientStructs.FFXIV.Client.System.Input;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Common.Math;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -36,10 +38,21 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x338)] public AtkCursor AtkCursor;
     [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray32<AtkEventDispatcher> _atkEventDispatcher;
     [FieldOffset(0x858)] public uint NextEventDispatcherIndex;
-    //[FieldOffset(0x85C)] public bool DispatchEvents;
+    [FieldOffset(0x85C)] public bool CanDispatchEvents;
     [FieldOffset(0x860)] public Size ScreenSize;
-    [FieldOffset(0x870)] public AtkEventManager ViewportEventManager;
-    [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
+    [FieldOffset(0x868)] public float ScreenSizeScale;
+    [FieldOffset(0x86C)] public bool IsScreenSizeScaled;
+    [FieldOffset(0x870)] public AtkEventManager ViewportEventManager; // more like GlobalEventManager
+    [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _atkEventPool;
+    [FieldOffset(0x878), FixedSizeArray, Obsolete("Renamed to AtkEventPool")] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
+    [FieldOffset(0x75B78)] public AtkEvent* NextEvent;
+    [FieldOffset(0x75B80)] public StdDeque<TextParameter> FormatTextParameters;
+    [FieldOffset(0x75BA8)] public Utf8String FormatOutput;
+    [FieldOffset(0x75C10), FixedSizeArray(isString: true)] internal FixedSizeArray384<byte> _formatCStringBuffer;
+    [FieldOffset(0x75D90)] public AtkTimer ButtonClickTimer; // for example, used in NumericInput when clicking +/- buttons
+    [FieldOffset(0x75DC0)] public AtkTimer ButtonClickRepeatTimer; // for example, used in NumericInput when holding down +/- buttons
+    [FieldOffset(0x75DF0)] public AtkTimer* TimerArray; // only 1 right now
+    [FieldOffset(0x75DF8)] public int TimerCount;
 
     [MemberFunction("48 8B 51 ?? 48 0F BF 82")]
     public partial AtkResNode* GetFocus();
@@ -47,18 +60,15 @@ public unsafe partial struct AtkStage {
     [MemberFunction("48 8B 49 ?? 45 33 C9 45 33 C0 33 D2 E9")]
     public partial void ClearFocus();
 
+    [MemberFunction("81 62 ?? ?? ?? ?? ?? 45 33 C0")]
+    public partial void ReturnAtkEventToPool(AtkEvent* evt);
+
     [MemberFunction("48 8B 41 38 48 8B 40 18")]
     public partial NumberArrayData** GetNumberArrayData();
 
     public NumberArrayData* GetNumberArrayData(NumberArrayType type)
         => GetNumberArrayData()[(int)type];
 
-    // Top 5 Signatures out of 215 xrefs for 14062B5F0:
-    // XREF Signature #1 @ 14122E36C: E8 ?? ?? ?? ?? 41 6B CE
-    // XREF Signature #2 @ 1410EC295: E8 ?? ?? ?? ?? 42 8D 1C AD
-    // XREF Signature #3 @ 1410DDD25: E8 ?? ?? ?? ?? 43 8D 0C 3F
-    // XREF Signature #4 @ 1414A7A09: E8 ?? ?? ?? ?? 47 8D 34 3F
-    // XREF Signature #5 @ 1410AA69A: E8 ?? ?? ?? ?? 43 8D 0C FE
     [MemberFunction("E8 ?? ?? ?? ?? 42 8D 1C AD")]
     public partial StringArrayData** GetStringArrayData();
 

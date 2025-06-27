@@ -107,7 +107,7 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(111)] public partial ??? IsGamePadInputActive(???);
 
     // [VirtualFunction(114)] public partial ??? ToggleInputMode(???);
-
+    [VirtualFunction(115)] public partial void CancelDragDrop(bool condition = true); // doesn't do anything when false is passed
     // [VirtualFunction(116)] public partial ??? IsUIHidden(???);
     [VirtualFunction(117)] public partial void AddAtkHistoryEntry(Utf8String* text, int historyIdx);
     [VirtualFunction(118)] public partial void ClearAtkHistory(int historyIdx);
@@ -116,7 +116,7 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(122)] public partial ??? ShowContentIntroduction(???);
     // [VirtualFunction(123)] public partial ??? IsContentIntroductionInvisible(???);
     // [VirtualFunction(124)] public partial ??? HideContentIntroduction(???);
-    // [VirtualFunction(135)] public partial ??? SetCursorVisibility(???);
+    [VirtualFunction(135)] public partial void SetCursorVisibility(bool visible);
     // [VirtualFunction(136)] public partial ??? ToggleCursor(???);
     // [VirtualFunction(150)] public partial ??? ShowEventFadeIn(???);
     // [VirtualFunction(151)] public partial ??? ShowEventFadeOut(???);
