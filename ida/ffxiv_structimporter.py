@@ -434,7 +434,10 @@ if api is None:
                         )
                     meminfo = self.get_struct_member_by_name(s, field_name)
                     if field_is_base:
-                        meminfo.props |= self.get_base_class_flag()
+                        if idaapi.IDA_SDK_VERSION >= 900:
+                            meminfo.set_baseclass()
+                        else:
+                            meminfo.props |= self.get_base_class_flag()
                     array_size = field.size if hasattr(field, "size") else 0
                     self.set_struct_member_info(
                         s,
