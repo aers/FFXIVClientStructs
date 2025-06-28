@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 A3 ?? ?? ?? ?? 48 8D 8B", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 A3 ?? ?? ?? ?? 48 8D 8B", 3, 74)]
 public unsafe partial struct AddonMiniTalk {
 
     [FieldOffset(0x248), FixedSizeArray] internal FixedSizeArray10<TalkBubbleEntry> _talkBubbles;

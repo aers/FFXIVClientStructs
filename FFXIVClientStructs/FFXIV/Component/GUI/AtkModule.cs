@@ -12,6 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkExternalInterface
 //   Client::System::Input::TextServiceInterface::TextServiceEvent
 [GenerateInterop(isInherited: true)]
+[VirtualTable("48 8D 15 ?? ?? ?? ?? 4C 89 41 ?? ?? ?? ?? 48 8D 050", 3, 73)]
 [Inherits<AtkModuleInterface>, Inherits<AtkExternalInterface>, Inherits<TextServiceEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x82A0)]
 public unsafe partial struct AtkModule {

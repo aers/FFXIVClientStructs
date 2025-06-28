@@ -54,7 +54,7 @@ public unsafe partial struct AgentRecipeNote {
 }
 
 [GenerateInterop]
-[VirtualTable("48 8B 47 10 48 8D 0D ?? ?? ?? ??", 7)]
+[VirtualTable("48 8B 47 10 48 8D 0D ?? ?? ?? ??", 7, 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x260)]
 public unsafe partial struct RecipeSearchContext {
     [FieldOffset(0xE0)] public bool IsExact;

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 //     Client::UI::Info::InfoProxyInterface
 [GenerateInterop(isInherited: true)]
 [Inherits<InfoProxyPageInterface>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 30", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 69 30", 3, 32)]
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 public unsafe partial struct InfoProxyCommonList {
     [FieldOffset(0x38)] public Utf8String UnkString;

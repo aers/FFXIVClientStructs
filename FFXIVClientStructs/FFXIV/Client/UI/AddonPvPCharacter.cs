@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("PvPCharacter")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 89 03 E8 ?? ?? ?? ?? 33 FF 48 89 BB", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 89 03 E8 ?? ?? ?? ?? 33 FF 48 89 BB", 3, 74)]
 [StructLayout(LayoutKind.Explicit, Size = 0xD10)]
 public unsafe partial struct AddonPvPCharacter {
     [FieldOffset(0x258), FixedSizeArray] internal FixedSizeArray21<ClassEntry> _classEntries;

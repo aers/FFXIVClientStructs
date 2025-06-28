@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkEventListener
 [GenerateInterop]
 [Inherits<AtkUnitManager>]
-[VirtualTable("C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 83", 10)]
+[VirtualTable("C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 83", 10, 43)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9D18)]
 public unsafe partial struct RaptureAtkUnitManager {
     public static RaptureAtkUnitManager* Instance() {

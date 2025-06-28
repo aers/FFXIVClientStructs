@@ -10,6 +10,7 @@ public partial struct UserFileManager {
     // Client::UI::Misc::UserFileManager::UserFileEvent
     // ctor inlined
     [GenerateInterop(isInherited: true)]
+    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B CE ?? ?? ?? 48 8B 5C 24 ?? 48 8B 6C 24", 3, 14)]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]
     public unsafe partial struct UserFileEvent {
         [FieldOffset(0x08)] public ulong CharacterContentId;

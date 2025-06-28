@@ -8,6 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("RetainerList")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 06 48 8D 9E ?? ?? ?? ?? 0F 11 86", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 06 48 8D 9E ?? ?? ?? ?? 0F 11 86", 3, 74)]
 [StructLayout(LayoutKind.Explicit, Size = 0x688)]
 public unsafe partial struct AddonRetainerList;

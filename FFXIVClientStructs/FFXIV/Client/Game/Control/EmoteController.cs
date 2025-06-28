@@ -36,7 +36,7 @@ public unsafe partial struct EmoteController {
     // Client::Game::Control::EmoteController::PlayEmoteOption
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 89 44 24", 3)]
+    [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 89 44 24", 3, 1)]
     public partial struct PlayEmoteOption {
         [FieldOffset(0x08)] public GameObjectId TargetId;
         /// <remarks> If bit 1 is set it does not display a log message. </remarks>
