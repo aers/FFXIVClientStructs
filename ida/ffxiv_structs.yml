@@ -34,6 +34,7 @@ enums:
     "InputReceived": 12
     "InputNavigation": 13
     "InputBaseInputReceived": 15
+    "RawInputData": 16
     "FocusStart": 18
     "FocusStop": 19
     "Resize": 21
@@ -64,6 +65,7 @@ enums:
     "DialogueSubmit": 63
     "TimerTick": 64
     "TimerEnd": 65
+    "TimerStart": 66
     "TweenProgress": 67
     "TweenComplete": 68
     "ChildAddonAttached": 69
@@ -73,7 +75,39 @@ enums:
     "LinkMouseClick": 75
     "LinkMouseOver": 76
     "LinkMouseOut": 77
-    "Unk83": 83
+    "UnregisterAll": 83
+- type: Component::GUI::ComponentType
+  name: ComponentType
+  underlying: byte
+  namespace: Component.GUI
+  flags: False
+  values:
+    "Base": 0
+    "Button": 1
+    "Window": 2
+    "CheckBox": 3
+    "RadioButton": 4
+    "GaugeBar": 5
+    "Slider": 6
+    "TextInput": 7
+    "NumericInput": 8
+    "List": 9
+    "DropDownList": 10
+    "Tab": 11
+    "TreeList": 12
+    "ScrollBar": 13
+    "ListItemRenderer": 14
+    "Icon": 15
+    "IconText": 16
+    "DragDrop": 17
+    "GuildLeveCard": 18
+    "TextNineGrid": 19
+    "JournalCanvas": 20
+    "Multipurpose": 21
+    "Map": 22
+    "Preview": 23
+    "HoldButton": 24
+    "Portrait": 25
 - type: Component::GUI::AtkCursorNavigationStopFlag
   name: AtkCursorNavigationStopFlag
   underlying: int
@@ -284,7 +318,7 @@ enums:
     "Hand": 6
     "ResizeWE": 7
     "ResizeNS": 8
-    "ResizeNWSR": 9
+    "ResizeNWSE": 9
     "ResizeNESW": 10
     "Clickable": 11
     "TextInput": 12
@@ -317,7 +351,7 @@ enums:
     "IsGlobalEvent": 16
     "Unk6": 32
     "Unk7": 64
-    "Completed": 128
+    "Pooled": 128
 - type: Component::GUI::AtkUnitManager::AddonStatus
   name: AddonStatus
   underlying: int
@@ -387,6 +421,24 @@ enums:
     "None": 0
     "Tweening": 1
     "Complete": 2
+- type: Client::System::String::AllowedEntities
+  name: AllowedEntities
+  underlying: unsigned __int16
+  namespace: Client.System.String
+  flags: True
+  values:
+    "UppercaseLetters": 1
+    "LowercaseLetters": 2
+    "Numbers": 4
+    "SpecialCharacters": 8
+    "CharacterList": 16
+    "OtherCharacters": 32
+    "Payloads": 64
+    "Unknown7": 128
+    "Unknown8": 256
+    "Unknown9": 512
+    "CJK": 1024
+    "Unknown11": 2048
 - type: Component::GUI::AlignmentType
   name: AlignmentType
   underlying: int
@@ -479,38 +531,6 @@ enums:
     "None": 0
     "Linear": 1
     "Smooth": 2
-- type: Component::GUI::ComponentType
-  name: ComponentType
-  underlying: byte
-  namespace: Component.GUI
-  flags: False
-  values:
-    "Base": 0
-    "Button": 1
-    "Window": 2
-    "CheckBox": 3
-    "RadioButton": 4
-    "GaugeBar": 5
-    "Slider": 6
-    "TextInput": 7
-    "NumericInput": 8
-    "List": 9
-    "DropDownList": 10
-    "Tab": 11
-    "TreeList": 12
-    "ScrollBar": 13
-    "ListItemRenderer": 14
-    "Icon": 15
-    "IconText": 16
-    "DragDrop": 17
-    "GuildLeveCard": 18
-    "TextNineGrid": 19
-    "JournalCanvas": 20
-    "Multipurpose": 21
-    "Map": 22
-    "Preview": 23
-    "HoldButton": 24
-    "Portrait": 25
 - type: Component::GUI::AtkUldManagerResourceFlag
   name: AtkUldManagerResourceFlag
   underlying: byte
@@ -1856,24 +1876,6 @@ enums:
     "Ready": 2
     "NotReady": 3
     "MemberNotPresent": 4
-- type: Client::System::String::AllowedEntities
-  name: AllowedEntities
-  underlying: unsigned __int16
-  namespace: Client.System.String
-  flags: True
-  values:
-    "UppercaseLetters": 1
-    "LowercaseLetters": 2
-    "Numbers": 4
-    "SpecialCharacters": 8
-    "CharacterList": 16
-    "OtherCharacters": 32
-    "Payloads": 64
-    "Unknown7": 128
-    "Unknown8": 256
-    "Unknown9": 512
-    "CJK": 1024
-    "Unknown11": 2048
 - type: Client::System::Resource::ResourceCategory
   name: ResourceCategory
   underlying: int
@@ -12615,32 +12617,6 @@ structs:
       name: value
     - type: unsigned __int64
       name: size
-  - signature: E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 16 48 3B FB
-    return_type: __int64
-    name: Realloc
-    parameters:
-    - type: __int64
-      name: ptr
-    - type: unsigned __int64
-      name: size
-  - signature: E8 ?? ?? ?? ?? 33 C9 4C 8B E8
-    return_type: __int64
-    name: Calloc
-    parameters:
-    - type: unsigned __int64
-      name: count
-    - type: unsigned __int64
-      name: size
-  - signature: E8 ?? ?? ?? ?? 33 C9 48 8B D8 E8 ?? ?? ?? ?? 48 85 DB 74 20
-    return_type: __int64
-    name: Recalloc
-    parameters:
-    - type: __int64
-      name: ptr
-    - type: unsigned __int64
-      name: count
-    - type: unsigned __int64
-      name: size
 - type: Client::System::Resource::Handle::MaterialResourceHandle::AttributeSetEntry
   name: AttributeSetEntry
   namespace: Client.System.Resource.Handle
@@ -17853,8 +17829,19 @@ structs:
   - type: Client::UI::UIModule*
     name: UIModulePtr
     offset: 8
+  - type: byte
+    name: IsPadMouseModeEnabled
+    offset: 37
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 55 48 83 EC 20 80 79 25 00
+    return_type: void
+    name: DisablePadMouseMode
+    parameters:
+    - type: Client::UI::UIInputModule*
+      name: this
+    - type: byte
+      name: playSoundEffect
 - type: Client::UI::UIModule::UIModuleHandler
   name: UIModuleHandler
   namespace: Client.UI
@@ -18243,6 +18230,14 @@ structs:
     parameters:
     - type: Client::UI::UIModuleInterface*
       name: this
+  - name: CancelDragDrop
+    offset: 920
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+    - type: byte
+      name: condition
   - name: AddAtkHistoryEntry
     offset: 936
     return_type: void
@@ -18273,6 +18268,14 @@ structs:
       name: uintParam
     - type: __int64
       name: packet
+  - name: SetCursorVisibility
+    offset: 1080
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModuleInterface*
+      name: this
+    - type: byte
+      name: visible
   - name: ToggleUi
     offset: 1240
     return_type: void
@@ -18677,8 +18680,6 @@ structs:
     offset: 984
   - name: HideContentIntroduction
     offset: 992
-  - name: SetCursorVisibility
-    offset: 1080
   - name: ToggleCursor
     offset: 1088
   - name: ShowEventFadeIn
@@ -20870,6 +20871,12 @@ structs:
     parameters:
     - type: unsigned int
       name: itemId
+  - signature: E8 ?? ?? ?? ?? 0F B6 48 2F
+    return_type: Component::Exd::Sheets::BannerCondition*
+    name: GetBannerConditionByIndex
+    parameters:
+    - type: unsigned int
+      name: rowIndex
   - signature: 40 53 48 83 EC 20 0F B6 41 ?? 48 8B D9 84 C0 74
     return_type: int
     name: GetBannerConditionUnlockState
@@ -21091,6 +21098,37 @@ structs:
     name: TransitionLength
     offset: 12
   member_functions: []
+- type: Component::GUI::AtkComponentHoldButton::ProgressState
+  name: ProgressState
+  namespace: Component.GUI
+  union: False
+  size: 16
+  fields:
+  - type: float
+    name: StartValue
+    offset: 0
+  - type: float
+    name: TargetValue
+    offset: 4
+  - type: float
+    name: CurrentValue
+    offset: 8
+  - type: float
+    name: EndValue
+    offset: 12
+  member_functions:
+  - signature: F3 0F 10 05 ?? ?? ?? ?? 0F 2F C1 F3 0F 11 51
+    return_type: void
+    name: StartProgress
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton::ProgressState*
+      name: this
+    - type: float
+      name: currentValue
+    - type: float
+      name: targetValue
+    - type: float
+      name: endValue
 - type: Component::GUI::AtkComponentIcon::IndicatorNodesEntry
   name: IndicatorNodesEntry
   namespace: Component.GUI
@@ -21688,6 +21726,12 @@ structs:
       name: listener
     - type: byte
       name: isGlobalEvent
+  - signature: E8 ?? ?? ?? ?? 4C 89 3B 48 85 F6
+    return_type: void
+    name: ClearEvents
+    parameters:
+    - type: Component::GUI::AtkEventManager*
+      name: this
 - type: Component::GUI::AtkEventState
   name: AtkEventState
   namespace: Component.GUI
@@ -22289,6 +22333,12 @@ structs:
   fields: []
   vtable_size: 40
   virtual_functions:
+  - name: GetOwnerNode
+    offset: 32
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkTextInput::AtkTextInputEventInterface*
+      name: this
   - name: Dtor
     offset: 0
   member_functions: []
@@ -29231,7 +29281,10 @@ structs:
     name: Wind
     offset: 64
   - type: float
-    name: Spring
+    name: SimulationTime
+    offset: 80
+  - type: float
+    name: SimulationTimeInv
     offset: 84
   - type: byte
     name: IsStarted
@@ -29242,6 +29295,15 @@ structs:
   - type: byte
     name: IsReset
     offset: 248
+  - type: byte
+    name: IsSimulating
+    offset: 1092
+  - type: byte
+    name: IsTimeIntegrating
+    offset: 1093
+  - type: byte
+    name: IsCollidable
+    offset: 1094
   virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Physics::BoneSimulators
@@ -40515,36 +40577,6 @@ structs:
     name: AddRGBBitfield
     offset: 4
   member_functions: []
-- type: Component::GUI::AtkTimer
-  name: AtkTimer
-  namespace: Component.GUI
-  union: False
-  size: 48
-  fields:
-  - type: Component::GUI::AtkEventTarget
-    name: EventTarget
-    offset: 0
-  - type: unsigned int
-    name: EndTime
-    offset: 16
-  - type: unsigned int
-    name: ElapsedTime
-    offset: 20
-  - type: unsigned __int64
-    name: IntervalDuration
-    offset: 24
-  - type: unsigned __int64
-    name: CurrentTime
-    offset: 32
-  - type: byte
-    name: IsActive
-    offset: 40
-  virtual_functions:
-  - name: Dtor
-    offset: 8
-  - name: OnTick
-    offset: 16
-  member_functions: []
 - type: Component::GUI::AtkTimerHolder
   name: AtkTimerHolder
   namespace: Component.GUI
@@ -40557,7 +40589,15 @@ structs:
   - type: StdVector<Component::GUI::AtkTimer>
     name: AtkTimers
     offset: 8
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B 46 18 48 03 03
+    return_type: byte
+    name: RegisterTimer
+    parameters:
+    - type: Component::GUI::AtkTimerHolder*
+      name: this
+    - type: Component::GUI::AtkTimer*
+      name: timer
 - type: Component::GUI::AtkTooltipManager::AtkTooltipInfo
   name: AtkTooltipInfo
   namespace: Component.GUI
@@ -44957,6 +44997,14 @@ structs:
       name: instanceId
     - type: unsigned int
       name: subId
+  - signature: E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 ?? 8B 90
+    return_type: Client::LayoutEngine::ILayoutInstance*
+    name: GetColliderLayoutInstance
+    parameters:
+    - type: Client::LayoutEngine::InstanceType
+      name: instanceType
+    - type: Common::Component::BGCollision::Collider*
+      name: collider
   - signature: E8 ?? ?? ?? ?? 45 33 F6 44 89 B7
     return_type: void
     name: UnloadPrefetchLayout
@@ -54010,76 +54058,6 @@ structs:
     - type: Client::UI::Info::InfoProxyCircleFinder*
       name: this
   member_functions: []
-- type: Client::UI::LogViewer
-  name: LogViewer
-  namespace: Client.UI
-  union: False
-  size: 296
-  fields:
-  - type: Client::UI::AddonChatLogPanel*
-    name: ChatLogPanel
-    offset: 16
-  - type: Component::GUI::AtkTextNode*
-    name: ChatText
-    offset: 24
-  - type: Component::GUI::AtkComponentNode*
-    name: ScrollBarNode
-    offset: 32
-  - type: Component::GUI::AtkComponentScrollBar*
-    name: ScrollBarComponent
-    offset: 40
-  - type: Component::GUI::AtkStage*
-    name: AtkStage
-    offset: 56
-  - type: byte
-    name: FontSize
-    offset: 72
-  - type: unsigned int
-    name: FirstLineVisible
-    offset: 76
-  - type: unsigned int
-    name: LastLineVisible
-    offset: 80
-  - type: unsigned int
-    name: TotalLineCount
-    offset: 92
-  - type: unsigned __int16
-    name: ChatTextWidth
-    offset: 96
-  - type: unsigned __int16
-    name: DisplayableLineCount
-    offset: 98
-  - type: Component::GUI::NumberArrayData*
-    name: NumberArrayData
-    offset: 136
-  - type: unsigned int
-    name: MessagesAboveCurrent
-    offset: 144
-  - type: Component::GUI::AtkTimer
-    name: AtkTimer
-    offset: 168
-  - type: byte
-    name: IsScrolledBottom
-    offset: 217
-  - type: byte
-    name: IsContextMenuShown
-    offset: 249
-  - type: byte
-    name: IsMaximized
-    offset: 288
-  - type: byte
-    name: IsSelectingText
-    offset: 289
-  virtual_functions: []
-  member_functions:
-  - signature: 48 85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 55 56 41 55 49 8D AB
-    return_type: void
-    name: HandleLinkClick
-    parameters:
-    - type: Client::UI::LogViewer*
-      name: this
-    - type: Component::GUI::LinkData*
-      name: linkData
 - type: Client::UI::Misc::AddonConfigData
   name: AddonConfigData
   namespace: Client.UI.Misc
@@ -55871,7 +55849,17 @@ structs:
     offset: 128
     size: 256
     is_string: False
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 33 C0 48 89 86 ?? ?? ?? ?? 88 86 ?? ?? ?? ?? 38 86
+    return_type: void
+    name: HandleInput
+    parameters:
+    - type: Component::GUI::AtkInputManager*
+      name: this
+    - type: Component::GUI::AtkUnitManager*
+      name: unitManager
+    - type: Component::GUI::AtkCollisionManager*
+      name: collisionManager
 - type: Component::GUI::AtkSimpleTween
   name: AtkSimpleTween
   namespace: Component.GUI
@@ -56034,125 +56022,62 @@ structs:
     name: LocalizedIconRangeCount
     offset: 80
   member_functions: []
-- type: Component::GUI::AtkTooltipManager
-  name: AtkTooltipManager
+- type: Component::GUI::AtkTimer
+  name: AtkTimer
   namespace: Component.GUI
   union: False
-  size: 336
+  size: 48
   fields:
-  - type: Component::GUI::AtkEventListener
-    name: AtkEventListener
+  - type: Component::GUI::AtkEventTarget
+    name: AtkEventTarget
     offset: 0
     base: true
-  - type: StdMap<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
-    name: TooltipMap
+  - type: Component::GUI::AtkEventManager
+    name: EventManager
     offset: 8
-  - type: Component::GUI::AtkStage*
-    name: AtkStage
+  - type: unsigned int
+    name: EndTime
+    offset: 16
+  - type: unsigned int
+    name: ElapsedTime
+    offset: 20
+  - type: unsigned __int64
+    name: IntervalDuration
     offset: 24
+  - type: unsigned __int64
+    name: CurrentTime
+    offset: 32
   - type: byte
-    name: Flag1
-    offset: 332
+    name: IsActive
+    offset: 40
   virtual_functions:
   - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Component::GUI::AtkTooltipManager*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
     offset: 8
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkTooltipManager*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
+  - name: OnTick
     offset: 16
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkTooltipManager*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
   member_functions:
-  - signature: E8 ?? ?? ?? ?? 44 85 F6
+  - signature: E8 ?? ?? ?? ?? 49 8D 46 78
     return_type: void
-    name: AttachTooltip
+    name: Ctor
     parameters:
-    - type: Component::GUI::AtkTooltipManager*
+    - type: Component::GUI::AtkTimer*
       name: this
-    - type: Component::GUI::AtkTooltipManager::AtkTooltipType
-      name: type
-    - type: unsigned __int16
-      name: parentId
-    - type: Component::GUI::AtkResNode*
-      name: targetNode
-    - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
-      name: tooltipArgs
-  - signature: E8 ?? ?? ?? ?? 8B 75 DF
-    return_type: void
-    name: DetachTooltip
+  - signature: 40 55 56 48 83 EC 28 8B EA 48 8B F1 F6 C2 02 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 7C 24 ?? 48 8B 79 F8 4C 89 74 24
+    return_type: Component::GUI::AtkTimer*
+    name: Dtor
     parameters:
-    - type: Component::GUI::AtkTooltipManager*
+    - type: Component::GUI::AtkTimer*
       name: this
-    - type: Component::GUI::AtkResNode*
-      name: targetNode
-  - signature: E8 ?? ?? ?? ?? 45 33 C9 45 8D 44 24
-    return_type: void
-    name: DetachTooltipByAddonId
-    parameters:
-    - type: Component::GUI::AtkTooltipManager*
-      name: this
-    - type: unsigned __int16
-      name: addonId
     - type: byte
-      name: removeEvents
-  - signature: E8 ?? ?? ?? ?? 33 D2 EB 02
+      name: freeFlags
+  - signature: E9 ?? ?? ?? ?? 83 FA 01 75 30
     return_type: void
-    name: ShowTooltip
+    name: Start
     parameters:
-    - type: Component::GUI::AtkTooltipManager*
+    - type: Component::GUI::AtkTimer*
       name: this
-    - type: Component::GUI::AtkTooltipManager::AtkTooltipType
-      name: type
-    - type: unsigned __int16
-      name: parentId
-    - type: Component::GUI::AtkResNode*
-      name: targetNode
-    - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
-      name: tooltipArgs
-    - type: __fastcall
-      name: unkDelegate
     - type: byte
-      name: unk7
-    - type: byte
-      name: unk8
-  - signature: 66 3B 91 ?? ?? ?? ?? 75 09
-    return_type: void
-    name: HideTooltip
-    parameters:
-    - type: Component::GUI::AtkTooltipManager*
-      name: this
-    - type: unsigned __int16
-      name: parentId
-    - type: byte
-      name: unk
+      name: fireTimerStartEvent
 - type: Component::GUI::AtkUldAsset
   name: AtkUldAsset
   namespace: Component.GUI
@@ -57076,6 +57001,18 @@ structs:
     parameters:
     - type: Client::Game::Character::TimelineContainer*
       name: this
+  - signature: E8 ?? ?? ?? ?? EB 48 48 8B 45 08
+    return_type: void
+    name: PlayActionTimeline
+    parameters:
+    - type: Client::Game::Character::TimelineContainer*
+      name: this
+    - type: unsigned __int16
+      name: introId
+    - type: unsigned __int16
+      name: loopId
+    - type: __int64
+      name: a4
 - type: Client::Game::Character::VfxContainer
   name: VfxContainer
   namespace: Client.Game.Character
@@ -61889,7 +61826,21 @@ structs:
       name: this
     - type: byte
       name: a2
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 C6 46 ?? ?? 48 8B 5C 24 ?? 49 8B C6 48 8B 74 24
+    return_type: void
+    name: OpenWithData
+    parameters:
+    - type: Client::UI::Agent::AgentMonsterNote*
+      name: this
+    - type: byte
+      name: classIndex
+    - type: byte
+      name: rank
+    - type: byte
+      name: a4
+    - type: byte
+      name: a5
 - type: Client::UI::Agent::AgentMutelist
   name: AgentMutelist
   namespace: Client.UI.Agent
@@ -63812,6 +63763,76 @@ structs:
       name: this
     - type: unsigned __int64
       name: id
+- type: Client::UI::LogViewer
+  name: LogViewer
+  namespace: Client.UI
+  union: False
+  size: 296
+  fields:
+  - type: Client::UI::AddonChatLogPanel*
+    name: ChatLogPanel
+    offset: 16
+  - type: Component::GUI::AtkTextNode*
+    name: ChatText
+    offset: 24
+  - type: Component::GUI::AtkComponentNode*
+    name: ScrollBarNode
+    offset: 32
+  - type: Component::GUI::AtkComponentScrollBar*
+    name: ScrollBarComponent
+    offset: 40
+  - type: Component::GUI::AtkStage*
+    name: AtkStage
+    offset: 56
+  - type: byte
+    name: FontSize
+    offset: 72
+  - type: unsigned int
+    name: FirstLineVisible
+    offset: 76
+  - type: unsigned int
+    name: LastLineVisible
+    offset: 80
+  - type: unsigned int
+    name: TotalLineCount
+    offset: 92
+  - type: unsigned __int16
+    name: ChatTextWidth
+    offset: 96
+  - type: unsigned __int16
+    name: DisplayableLineCount
+    offset: 98
+  - type: Component::GUI::NumberArrayData*
+    name: NumberArrayData
+    offset: 136
+  - type: unsigned int
+    name: MessagesAboveCurrent
+    offset: 144
+  - type: Component::GUI::AtkTimer
+    name: AtkTimer
+    offset: 168
+  - type: byte
+    name: IsScrolledBottom
+    offset: 217
+  - type: byte
+    name: IsContextMenuShown
+    offset: 249
+  - type: byte
+    name: IsMaximized
+    offset: 288
+  - type: byte
+    name: IsSelectingText
+    offset: 289
+  virtual_functions: []
+  member_functions:
+  - signature: 48 85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 55 56 41 55 49 8D AB
+    return_type: void
+    name: HandleLinkClick
+    parameters:
+    - type: Client::UI::LogViewer*
+      name: this
+    - type: Component::GUI::LinkData*
+      name: linkData
 - type: Client::UI::Misc::AcquaintanceModule
   name: AcquaintanceModule
   namespace: Client.UI.Misc
@@ -66160,9 +66181,24 @@ structs:
   - type: Client::UI::Misc::RaptureTextModule*
     name: RaptureTextModule
     offset: 192
+  - type: Component::Text::TextChecker*
+    name: TextChecker
+    offset: 200
   - type: Component::GUI::AtkFontCodeModule*
     name: AtkFontCodeModule
     offset: 208
+  - type: __int16
+    name: CursorPos
+    offset: 218
+  - type: __int16
+    name: TextLength
+    offset: 220
+  - type: __int16
+    name: SelectionEnd
+    offset: 222
+  - type: __int16
+    name: SelectionStart
+    offset: 224
   - type: Client::System::Input::ClipBoard
     name: ClipboardData
     offset: 448
@@ -66175,8 +66211,17 @@ structs:
   - type: unsigned int
     name: CompletionDepth
     offset: 3056
+  - type: Client::System::String::AllowedEntities
+    name: InputSanitizationFlags
+    offset: 3088
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4E 18 48 8B 01
+    return_type: void
+    name: OpenCompletion
+    parameters:
+    - type: Component::GUI::AtkTextInput*
+      name: this
 - type: Component::GUI::AtkUIColorHolder
   name: AtkUIColorHolder
   namespace: Component.GUI
@@ -66294,177 +66339,6 @@ structs:
     size: 16
     is_string: False
   member_functions: []
-- type: Component::GUI::AtkUnitManager
-  name: AtkUnitManager
-  namespace: Component.GUI
-  union: False
-  size: 40080
-  fields:
-  - type: Component::GUI::AtkEventListener
-    name: AtkEventListener
-    offset: 0
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerOneList
-    offset: 48
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerTwoList
-    offset: 2112
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerThreeList
-    offset: 4176
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerFourList
-    offset: 6240
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerFiveList
-    offset: 8304
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerSixList
-    offset: 10368
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerSevenList
-    offset: 12432
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerEightList
-    offset: 14496
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerNineList
-    offset: 16560
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerTenList
-    offset: 18624
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerElevenList
-    offset: 20688
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerTwelveList
-    offset: 22752
-  - type: Component::GUI::AtkUnitList
-    name: DepthLayerThirteenList
-    offset: 24816
-  - type: Component::GUI::AtkUnitList
-    name: AllLoadedUnitsList
-    offset: 26880
-  - type: Component::GUI::AtkUnitList
-    name: FocusedUnitsList
-    offset: 28944
-  - type: Component::GUI::AtkUnitList
-    name: UnitList16
-    offset: 31008
-  - type: Component::GUI::AtkUnitList
-    name: UnitList17
-    offset: 33072
-  - type: Component::GUI::AtkUnitList
-    name: UnitList18
-    offset: 35136
-  - type: Component::GUI::AtkUnitBase*
-    name: UnkOperationGuideAddon1
-    offset: 37200
-  - type: Component::GUI::AtkUnitBase*
-    name: UnkOperationGuideAddon2
-    offset: 37208
-  - type: Client::UI::AddonCursor*
-    name: AddonCursor
-    offset: 37216
-  - type: Client::UI::AddonOperationGuide*
-    name: AddonOperationGuide
-    offset: 37224
-  - type: Client::UI::AddonFilter*
-    name: AddonFilter
-    offset: 37232
-  - type: Client::UI::AddonFilter*
-    name: AddonFilterSystem
-    offset: 37240
-  - type: Client::UI::AddonDragDrop*
-    name: AddonDragDrop
-    offset: 37248
-  - type: Component::GUI::AtkManagedInterface*
-    name: ManagedScreenFrame
-    offset: 37256
-  - type: Common::Math::Size
-    name: LastScreenSize
-    offset: 37712
-  - type: Component::GUI::AtkUnitManagerFlags
-    name: Flags
-    offset: 40072
-  virtual_functions:
-  - name: SetAddonVisibility
-    offset: 64
-    return_type: byte
-    parameters:
-    - type: Component::GUI::AtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: addonId
-    - type: byte
-      name: visible
-  - name: GetAddonStatus
-    offset: 72
-    return_type: Component::GUI::AtkUnitManager::AddonStatus
-    parameters:
-    - type: Component::GUI::AtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: addonId
-  - name: RefreshAddon
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Component::GUI::AtkUnitManager*
-      name: this
-    - type: Component::GUI::AtkUnitBase*
-      name: addon
-    - type: unsigned int
-      name: valueCount
-    - type: Component::GUI::AtkValue*
-      name: values
-  - name: AddonRequestUpdateById
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: addonId
-    - type: Component::GUI::NumberArrayData**
-      name: numberArrayData
-    - type: Component::GUI::StringArrayData**
-      name: stringArrayData
-    - type: byte
-      name: forced
-  - name: IsScdResourceLoaded
-    offset: 152
-  - name: LoadScdResource
-    offset: 160
-  - name: UnloadScdResource
-    offset: 168
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B F8 41 B0 01
-    return_type: Component::GUI::AtkUnitBase*
-    name: GetAddonByName
-    parameters:
-    - type: Component::GUI::AtkUnitManager*
-      name: this
-    - type: char*
-      name: name
-    - type: int
-      name: index
-  - signature: E8 ?? ?? ?? ?? 8B 6B 20
-    return_type: Component::GUI::AtkUnitBase*
-    name: GetAddonById
-    parameters:
-    - type: Component::GUI::AtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: id
-  - signature: E8 ?? ?? ?? ?? 48 3B E8 75 0E
-    return_type: Component::GUI::AtkUnitBase*
-    name: GetAddonByNode
-    parameters:
-    - type: Component::GUI::AtkUnitManager*
-      name: this
-    - type: Component::GUI::AtkResNode*
-      name: node
 - type: Component::GUI::LinkData
   name: LinkData
   namespace: Component.GUI
@@ -72629,6 +72503,12 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentBase*
       name: this
+  - signature: E8 ?? ?? ?? ?? 83 F8 0E 75 2B
+    return_type: Component::GUI::ComponentType
+    name: GetComponentType
+    parameters:
+    - type: Component::GUI::AtkComponentBase*
+      name: this
   - signature: E8 ?? ?? ?? ?? 8B 53 F8
     return_type: Component::GUI::AtkResNode*
     name: GetNodeById
@@ -72727,6 +72607,18 @@ structs:
       name: this
     - type: unsigned int
       name: id
+- type: Component::GUI::AtkInputData
+  name: AtkInputData
+  namespace: Component.GUI
+  union: False
+  size: 2512
+  fields:
+  - type: Client::System::Input::InputData
+    name: InputData
+    offset: 0
+    base: true
+  virtual_functions: []
+  member_functions: []
 - type: Component::GUI::AtkResNode
   name: AtkResNode
   namespace: Component.GUI
@@ -73116,6 +73008,20 @@ structs:
       name: listener
     - type: byte
       name: isGlobalEvent
+  - signature: 48 85 C9 0F 84 ?? ?? ?? ?? 48 89 74 24 ?? 41 56
+    return_type: void
+    name: RemoveAllEventsFromListener
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+    - type: Component::GUI::AtkEventListener*
+      name: listener
+  - signature: 48 85 C9 74 09 48 83 C1 18
+    return_type: void
+    name: ClearEvents
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
   - signature: E8 ?? ?? ?? ?? EB 96 CC
     return_type: byte
     name: DispatchEvent
@@ -73124,6 +73030,22 @@ structs:
       name: this
     - type: Component::GUI::AtkEventDispatcher::Event*
       name: evt
+  - signature: E8 ?? ?? ?? ?? 83 C5 03 84 C0
+    return_type: byte
+    name: IsEventRegistered
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+  - signature: E8 ?? ?? ?? ?? 33 C9 48 98
+    return_type: unsigned int
+    name: GetEventParam
+    parameters:
+    - type: Component::GUI::AtkResNode*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
   - signature: E8 ?? ?? ?? ?? 84 C0 75 48 32 DB
     return_type: byte
     name: CheckCollisionAtCoords
@@ -77122,81 +77044,6 @@ structs:
       name: unknown0
     - type: byte
       name: unknown1
-- type: Client::UI::RaptureAtkUnitManager
-  name: RaptureAtkUnitManager
-  namespace: Client.UI
-  union: False
-  size: 40216
-  fields:
-  - type: Component::GUI::AtkUnitManager
-    name: AtkUnitManager
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
-    name: WindowContextMenuHandler
-    offset: 40080
-  - type: Client::UI::UIModule::UiFlags
-    name: UiFlags
-    offset: 40192
-  - type: byte
-    name: IsUiFading
-    offset: 40212
-  virtual_functions:
-  - name: SetAddonVisibility
-    offset: 64
-    return_type: byte
-    parameters:
-    - type: Client::UI::RaptureAtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetAddonStatus
-    offset: 72
-    return_type: Component::GUI::AtkUnitManager::AddonStatus
-    parameters:
-    - type: Client::UI::RaptureAtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: a2
-  - name: RefreshAddon
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::RaptureAtkUnitManager*
-      name: this
-    - type: Component::GUI::AtkUnitBase*
-      name: a2
-    - type: unsigned int
-      name: a3
-    - type: Component::GUI::AtkValue*
-      name: a4
-  - name: AddonRequestUpdateById
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::RaptureAtkUnitManager*
-      name: this
-    - type: unsigned __int16
-      name: a2
-    - type: Component::GUI::NumberArrayData**
-      name: a3
-    - type: Component::GUI::StringArrayData**
-      name: a4
-    - type: byte
-      name: a5
-  member_functions:
-  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 49 8B F0 48 8B FA 4C 8B F1 48 85 D2
-    return_type: unsigned __int16
-    name: InitializeAddon
-    parameters:
-    - type: Client::UI::RaptureAtkUnitManager*
-      name: this
-    - type: Component::GUI::AtkUnitBase*
-      name: addon
-    - type: char*
-      name: addonName
 - type: Client::UI::UIInputData
   name: UIInputData
   namespace: Client.UI
@@ -79974,6 +79821,130 @@ structs:
     name: Value
     offset: 12
   member_functions: []
+- type: Component::GUI::AtkTooltipManager
+  name: AtkTooltipManager
+  namespace: Component.GUI
+  union: False
+  size: 336
+  fields:
+  - type: Component::GUI::AtkEventListener
+    name: AtkEventListener
+    offset: 0
+    base: true
+  - type: StdMap<Component::GUI::AtkResNode*, Component::GUI::AtkTooltipManager::AtkTooltipInfo*>
+    name: TooltipMap
+    offset: 8
+  - type: Component::GUI::AtkStage*
+    name: AtkStage
+    offset: 24
+  - type: Component::GUI::AtkTimer
+    name: Timers
+    offset: 80
+    size: 5
+    is_string: False
+  - type: byte
+    name: Flag1
+    offset: 332
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkTooltipManager*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkTooltipManager*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkTooltipManager*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 44 85 F6
+    return_type: void
+    name: AttachTooltip
+    parameters:
+    - type: Component::GUI::AtkTooltipManager*
+      name: this
+    - type: Component::GUI::AtkTooltipManager::AtkTooltipType
+      name: type
+    - type: unsigned __int16
+      name: parentId
+    - type: Component::GUI::AtkResNode*
+      name: targetNode
+    - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
+      name: tooltipArgs
+  - signature: E8 ?? ?? ?? ?? 8B 75 DF
+    return_type: void
+    name: DetachTooltip
+    parameters:
+    - type: Component::GUI::AtkTooltipManager*
+      name: this
+    - type: Component::GUI::AtkResNode*
+      name: targetNode
+  - signature: E8 ?? ?? ?? ?? 45 33 C9 45 8D 44 24
+    return_type: void
+    name: DetachTooltipByAddonId
+    parameters:
+    - type: Component::GUI::AtkTooltipManager*
+      name: this
+    - type: unsigned __int16
+      name: addonId
+    - type: byte
+      name: removeEvents
+  - signature: E8 ?? ?? ?? ?? 33 D2 EB 02
+    return_type: void
+    name: ShowTooltip
+    parameters:
+    - type: Component::GUI::AtkTooltipManager*
+      name: this
+    - type: Component::GUI::AtkTooltipManager::AtkTooltipType
+      name: type
+    - type: unsigned __int16
+      name: parentId
+    - type: Component::GUI::AtkResNode*
+      name: targetNode
+    - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
+      name: tooltipArgs
+    - type: __fastcall
+      name: unkDelegate
+    - type: byte
+      name: unk7
+    - type: byte
+      name: unk8
+  - signature: 66 3B 91 ?? ?? ?? ?? 75 09
+    return_type: void
+    name: HideTooltip
+    parameters:
+    - type: Component::GUI::AtkTooltipManager*
+      name: this
+    - type: unsigned __int16
+      name: parentId
+    - type: byte
+      name: unk
 - type: StdPair<Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Client::LayoutEngine::AnalyticShapeData>
   name: StdPair`2
   namespace: ''
@@ -82179,6 +82150,26 @@ structs:
     offset: 13448
   virtual_functions: []
   member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 83 EC 01
+    return_type: unsigned int
+    name: FormatLogMessage
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logKindId
+    - type: Client::System::String::Utf8String*
+      name: sender
+    - type: Client::System::String::Utf8String*
+      name: message
+    - type: int*
+      name: timestamp
+    - type: __int64
+      name: a6
+    - type: Client::System::String::Utf8String*
+      name: a7
+    - type: int
+      name: chatTabIndex
   - signature: E8 ?? ?? ?? ?? 8B D8 48 8D 4D 00
     return_type: unsigned int
     name: PrintMessage
@@ -82735,128 +82726,6 @@ structs:
       name: this
     - type: Component::GUI::AtkEventData::AtkMouseData*
       name: mouseData
-- type: Component::GUI::AtkComponentHoldButton
-  name: AtkComponentHoldButton
-  namespace: Component.GUI
-  union: False
-  size: 288
-  fields:
-  - type: Component::GUI::AtkComponentButton
-    name: AtkComponentButton
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Initialize
-    offset: 24
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-  - name: Deinitialize
-    offset: 32
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-  - name: Update
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-    - type: float
-      name: a2
-  - name: OnUldUpdate
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-  - name: Setup
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-  - name: SetEnabledState
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-    - type: byte
-      name: a2
-  - name: GetAtkResNode
-    offset: 112
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-  - name: GetFocusNode
-    offset: 120
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-  - name: InitializeFromComponentData
-    offset: 136
-    return_type: void
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
-    - type: __int64
-      name: a2
-  member_functions:
-  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 03 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 66 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ??
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Component::GUI::AtkComponentHoldButton*
-      name: this
 - type: Component::GUI::AtkComponentRadioButton
   name: AtkComponentRadioButton
   namespace: Component.GUI
@@ -86342,6 +86211,149 @@ structs:
   - name: RaycastSimple
     offset: 240
   member_functions: []
+- type: Component::GUI::AtkComponentHoldButton
+  name: AtkComponentHoldButton
+  namespace: Component.GUI
+  union: False
+  size: 288
+  fields:
+  - type: Component::GUI::AtkComponentButton
+    name: AtkComponentButton
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkResNode*
+    name: ProgressResNode
+    offset: 240
+  - type: Component::GUI::AtkImageNode*
+    name: ProgressImageNode
+    offset: 248
+  - type: byte
+    name: IsTargetReached
+    offset: 256
+  - type: byte
+    name: IsEventFired
+    offset: 257
+  - type: float
+    name: Duration
+    offset: 260
+  - type: float
+    name: DecreaseRate
+    offset: 264
+  - type: Component::GUI::AtkComponentHoldButton::ProgressState
+    name: Progress
+    offset: 268
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Initialize
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+  - name: Deinitialize
+    offset: 32
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+  - name: Update
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+    - type: float
+      name: a2
+  - name: OnUldUpdate
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+  - name: Setup
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+  - name: SetEnabledState
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+    - type: byte
+      name: a2
+  - name: GetAtkResNode
+    offset: 112
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+  - name: GetFocusNode
+    offset: 120
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+  - name: InitializeFromComponentData
+    offset: 136
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
+    - type: __int64
+      name: a2
+  member_functions:
+  - signature: 40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 03 33 C0 48 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ?? 66 89 83 ?? ?? ?? ?? 48 89 83 ?? ?? ?? ??
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
 - type: Component::GUI::AtkComponentIcon
   name: AtkComponentIcon
   namespace: Component.GUI
@@ -86938,6 +86950,9 @@ structs:
     offset: 0
   - type: Component::GUI::AtkEventData::AtkAddonControlData
     name: AddonControlData
+    offset: 0
+  - type: Component::GUI::AtkInputData*
+    name: RawInputData
     offset: 0
   member_functions: []
 - type: Component::SteamApi::SteamApi
@@ -88367,6 +88382,218 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTab*
       name: this
+- type: Component::GUI::AtkUnitManager
+  name: AtkUnitManager
+  namespace: Component.GUI
+  union: False
+  size: 40080
+  fields:
+  - type: Component::GUI::AtkEventListener
+    name: AtkEventListener
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerOneList
+    offset: 48
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerTwoList
+    offset: 2112
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerThreeList
+    offset: 4176
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerFourList
+    offset: 6240
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerFiveList
+    offset: 8304
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerSixList
+    offset: 10368
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerSevenList
+    offset: 12432
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerEightList
+    offset: 14496
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerNineList
+    offset: 16560
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerTenList
+    offset: 18624
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerElevenList
+    offset: 20688
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerTwelveList
+    offset: 22752
+  - type: Component::GUI::AtkUnitList
+    name: DepthLayerThirteenList
+    offset: 24816
+  - type: Component::GUI::AtkUnitList
+    name: AllLoadedUnitsList
+    offset: 26880
+  - type: Component::GUI::AtkUnitList
+    name: FocusedUnitsList
+    offset: 28944
+  - type: Component::GUI::AtkUnitList
+    name: UnitList16
+    offset: 31008
+  - type: Component::GUI::AtkUnitList
+    name: UnitList17
+    offset: 33072
+  - type: Component::GUI::AtkUnitList
+    name: UnitList18
+    offset: 35136
+  - type: Component::GUI::AtkUnitBase*
+    name: FocusedAddon
+    offset: 37200
+  - type: Component::GUI::AtkUnitBase*
+    name: FocusedAddon2
+    offset: 37208
+  - type: Client::UI::AddonCursor*
+    name: AddonCursor
+    offset: 37216
+  - type: Client::UI::AddonOperationGuide*
+    name: AddonOperationGuide
+    offset: 37224
+  - type: Client::UI::AddonFilter*
+    name: AddonFilter
+    offset: 37232
+  - type: Client::UI::AddonFilter*
+    name: AddonFilterSystem
+    offset: 37240
+  - type: Client::UI::AddonDragDrop*
+    name: AddonDragDrop
+    offset: 37248
+  - type: Component::GUI::AtkManagedInterface*
+    name: ManagedScreenFrame
+    offset: 37256
+  - type: Component::GUI::AtkResNode
+    name: Unk92A0
+    offset: 37536
+  - type: Common::Math::Size
+    name: LastScreenSize
+    offset: 37712
+  - type: Component::GUI::AtkUnitManagerFlags
+    name: Flags
+    offset: 40072
+  vtable_size: 344
+  virtual_functions:
+  - name: SetAddonVisibility
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: addonId
+    - type: byte
+      name: visible
+  - name: GetAddonStatus
+    offset: 72
+    return_type: Component::GUI::AtkUnitManager::AddonStatus
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: addonId
+  - name: RefreshAddon
+    offset: 80
+    return_type: byte
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: AddonRequestUpdateById
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: addonId
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+    - type: byte
+      name: forced
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: IsScdResourceLoaded
+    offset: 152
+  - name: LoadScdResource
+    offset: 160
+  - name: UnloadScdResource
+    offset: 168
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F8 41 B0 01
+    return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonByName
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: char*
+      name: name
+    - type: int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 8B 6B 20
+    return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonById
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: id
+  - signature: E8 ?? ?? ?? ?? 48 3B E8 75 0E
+    return_type: Component::GUI::AtkUnitBase*
+    name: GetAddonByNode
+    parameters:
+    - type: Component::GUI::AtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkResNode*
+      name: node
 - type: Component::Shell::ShellCommandModule
   name: ShellCommandModule
   namespace: Component.Shell
@@ -89741,6 +89968,15 @@ structs:
   - type: Component::GUI::AtkUnitBase*
     name: ContainingAddon
     offset: 432
+  - type: int
+    name: SelectionStart
+    offset: 452
+  - type: int
+    name: SelectionEnd
+    offset: 456
+  - type: int
+    name: CursorPos
+    offset: 460
   - type: Component::GUI::AtkUldComponentDataInputBase
     name: InputDataBase
     offset: 464
@@ -90401,6 +90637,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Component::GUI::AtkUnitBase*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Component::GUI::AtkUnitBase*
       name: this
@@ -91617,6 +91859,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionCrossEditor*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonActionCrossEditor*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -92000,6 +92248,12 @@ structs:
     parameters:
     - type: Client::UI::AddonAetherCurrent*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonAetherCurrent*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -92380,6 +92634,12 @@ structs:
     parameters:
     - type: Client::UI::AddonAreaMap*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonAreaMap*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -92752,6 +93012,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonArmouryBoard*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonArmouryBoard*
       name: this
@@ -93140,6 +93406,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonBank*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonBank*
       name: this
@@ -93542,6 +93814,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCabinetWithdraw*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonCabinetWithdraw*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -93917,6 +94195,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCharacterInspect*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonCharacterInspect*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -94076,6 +94360,14 @@ structs:
     name: AtkUnitBase
     offset: 0
     base: true
+  - type: Component::GUI::AtkComponentDropDownList*
+    name: ExpansionsDropDownList
+    offset: 592
+  - type: int
+    name: ExpansionMapping
+    offset: 672
+    size: 6
+    is_string: False
   - type: int
     name: SelectedExpansion
     offset: 696
@@ -94292,6 +94584,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonCharacterRepute*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonCharacterRepute*
       name: this
@@ -94670,6 +94968,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonChocoboBreedTraining*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonChocoboBreedTraining*
       name: this
@@ -95066,6 +95370,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonContentsFinderConfirm*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonContentsFinderConfirm*
       name: this
@@ -95480,6 +95790,12 @@ structs:
     parameters:
     - type: Client::UI::AddonContextIconMenu*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonContextIconMenu*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -95862,6 +96178,12 @@ structs:
     parameters:
     - type: Client::UI::AddonContextMenu*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonContextMenu*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -96239,6 +96561,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCurrency*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonCurrency*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -96608,6 +96936,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonCursor*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonCursor*
       name: this
@@ -96989,6 +97323,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCutSceneSelectString*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonCutSceneSelectString*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -97358,6 +97698,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonDragDrop*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonDragDrop*
       name: this
@@ -97745,6 +98091,12 @@ structs:
     parameters:
     - type: Client::UI::AddonEnemyList*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonEnemyList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -98126,6 +98478,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonExp*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonExp*
       name: this
@@ -98512,6 +98870,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonFateProgress*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonFateProgress*
       name: this
@@ -98945,6 +99309,12 @@ structs:
     parameters:
     - type: Client::UI::AddonFateReward*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonFateReward*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -99314,6 +99684,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonFlyText*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonFlyText*
       name: this
@@ -99758,6 +100134,12 @@ structs:
     parameters:
     - type: Client::UI::AddonFriendList*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonFriendList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -100130,6 +100512,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoCardDeck*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonGSInfoCardDeck*
       name: this
@@ -100508,6 +100896,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoChocoboParam*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonGSInfoChocoboParam*
       name: this
@@ -100904,6 +101298,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoEmj*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGSInfoEmj*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -101294,6 +101694,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoGeneral*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGSInfoGeneral*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -101678,6 +102084,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoMinionBattle*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonGSInfoMinionBattle*
       name: this
@@ -102110,6 +102522,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGathering*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGathering*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -102506,6 +102924,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonGcArmyCapture*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonGcArmyCapture*
       name: this
@@ -102929,6 +103353,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGcArmyExpedition*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGcArmyExpedition*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -103304,6 +103734,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGcArmyExpeditionResult*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGcArmyExpeditionResult*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -103676,6 +104112,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonGearSetList*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonGearSetList*
       name: this
@@ -104093,6 +104535,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGrandCompanySupplyList*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -104468,6 +104916,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonGrandCompanySupplyReward*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonGrandCompanySupplyReward*
       name: this
@@ -104852,6 +105306,12 @@ structs:
     parameters:
     - type: Client::UI::AddonHudLayoutScreen*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonHudLayoutScreen*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -105224,6 +105684,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonHudLayoutWindow*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonHudLayoutWindow*
       name: this
@@ -105614,6 +106080,12 @@ structs:
     parameters:
     - type: Client::UI::AddonImage*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonImage*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -105996,6 +106468,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryBuddy*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonInventoryBuddy*
       name: this
@@ -106384,6 +106862,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryGrid*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonInventoryGrid*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -106756,6 +107240,12 @@ structs:
     parameters:
     - type: Client::UI::AddonItemInspectionList*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonItemInspectionList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -107125,6 +107615,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemInspectionResult*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonItemInspectionResult*
       name: this
@@ -107518,6 +108014,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemSearchResult*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonItemSearchResult*
       name: this
@@ -107920,6 +108422,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHud*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHud*
       name: this
@@ -108370,6 +108878,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJournalDetail*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJournalDetail*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -108772,6 +109286,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJournalResult*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJournalResult*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -109149,6 +109669,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMJICraftMaterialConfirmation*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonMJICraftMaterialConfirmation*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -109521,6 +110047,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJICraftScheduleSetting*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonMJICraftScheduleSetting*
       name: this
@@ -109908,6 +110440,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMYCWarResultNotebook*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonMYCWarResultNotebook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -110277,6 +110815,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonMateriaRetrieveDialog*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonMateriaRetrieveDialog*
       name: this
@@ -110667,6 +111211,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMaterializeDialog*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonMaterializeDialog*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -111054,6 +111604,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMiragePrismPrismBox*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonMiragePrismPrismBox*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -111435,6 +111991,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonMobHunt*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonMobHunt*
       name: this
@@ -111840,6 +112402,12 @@ structs:
     parameters:
     - type: Client::UI::AddonParameterWidget*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonParameterWidget*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -112212,6 +112780,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonRaceChocoboResult*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonRaceChocoboResult*
       name: this
@@ -112590,6 +113164,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonRecipeMaterialList*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonRecipeMaterialList*
       name: this
@@ -113129,6 +113709,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRecipeNote*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonRecipeNote*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -113531,6 +114117,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonRepair*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonRepair*
       name: this
@@ -113978,6 +114570,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRequest*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonRequest*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -114361,6 +114959,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferList*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonRetainerItemTransferList*
       name: this
@@ -114748,6 +115352,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerItemTransferProgress*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonRetainerItemTransferProgress*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -115117,6 +115727,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerList*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonRetainerList*
       name: this
@@ -115519,6 +116135,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerSell*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonRetainerSell*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -115897,6 +116519,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRetainerTaskAsk*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonRetainerTaskAsk*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -116266,6 +116894,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerTaskList*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonRetainerTaskList*
       name: this
@@ -116644,6 +117278,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonRetainerTaskResult*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonRetainerTaskResult*
       name: this
@@ -117037,6 +117677,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSalvageDialog*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonSalvageDialog*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -117412,6 +118058,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectOk*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonSelectOk*
       name: this
@@ -117835,6 +118487,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSelectYesno*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonSelectYesno*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -118207,6 +118865,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonShopCardDialog*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonShopCardDialog*
       name: this
@@ -118657,6 +119321,12 @@ structs:
     parameters:
     - type: Client::UI::AddonTeleport*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonTeleport*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -119029,6 +119699,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonTeleportTown*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonTeleportTown*
       name: this
@@ -119868,6 +120544,117 @@ structs:
       name: glamourItemId
     - type: byte
       name: applyCompanyCrest
+- type: Client::UI::RaptureAtkUnitManager
+  name: RaptureAtkUnitManager
+  namespace: Client.UI
+  union: False
+  size: 40216
+  fields:
+  - type: Component::GUI::AtkUnitManager
+    name: AtkUnitManager
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkModuleInterface::AtkEventInterface
+    name: WindowContextMenuHandler
+    offset: 40080
+  - type: Client::UI::UIModule::UiFlags
+    name: UiFlags
+    offset: 40192
+  - type: byte
+    name: IsUiFading
+    offset: 40212
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: SetAddonVisibility
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetAddonStatus
+    offset: 72
+    return_type: Component::GUI::AtkUnitManager::AddonStatus
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: a2
+  - name: RefreshAddon
+    offset: 80
+    return_type: byte
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: a2
+    - type: unsigned int
+      name: a3
+    - type: Component::GUI::AtkValue*
+      name: a4
+  - name: AddonRequestUpdateById
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: unsigned __int16
+      name: a2
+    - type: Component::GUI::NumberArrayData**
+      name: a3
+    - type: Component::GUI::StringArrayData**
+      name: a4
+    - type: byte
+      name: a5
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 49 8B F0 48 8B FA 4C 8B F1 48 85 D2
+    return_type: unsigned __int16
+    name: InitializeAddon
+    parameters:
+    - type: Client::UI::RaptureAtkUnitManager*
+      name: this
+    - type: Component::GUI::AtkUnitBase*
+      name: addon
+    - type: char*
+      name: addonName
 - type: Common::Lua::LG
   name: LG
   namespace: Common.Lua
@@ -119905,6 +120692,12 @@ structs:
   - type: Client::UI::Misc::RaptureTextModule*
     name: RaptureTextModule
     offset: 32
+  - type: byte
+    name: Unk28
+    offset: 40
+  - type: byte
+    name: Unk29
+    offset: 41
   - type: StdVector<Component::Completion::CategoryData*>
     name: CategoryData
     offset: 48
@@ -119936,10 +120729,10 @@ structs:
     name: SheetNames
     offset: 656
   - type: Client::System::String::Utf8String
-    name: Unk2A8
+    name: OpenIconMacro
     offset: 680
   - type: Client::System::String::Utf8String
-    name: Unk310
+    name: CloseIconMacro
     offset: 784
   virtual_functions:
   - name: GetSelection
@@ -119993,6 +120786,20 @@ structs:
     parameters:
     - type: Component::Completion::CompletionModule*
       name: this
+  - signature: E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? 0F 28 CE
+    return_type: void
+    name: Update
+    parameters:
+    - type: Component::Completion::CompletionModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: completionSheetName
+    - type: Client::System::String::Utf8String*
+      name: openIconMacro
+    - type: Client::System::String::Utf8String*
+      name: closeIconMacro
+    - type: __int64
+      name: a5
 - type: Client::Game::Event::AetheryteEventHandler
   name: AetheryteEventHandler
   namespace: Client.Game.Event
@@ -121400,6 +122207,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionBarBase*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonActionBarBase*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -121873,6 +122686,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionMenu*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonActionMenu*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -122253,6 +123072,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonAirShipExploration*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonAirShipExploration*
       name: this
@@ -122655,6 +123480,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonAllianceListX*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonAllianceListX*
       name: this
@@ -123125,6 +123956,12 @@ structs:
     parameters:
     - type: Client::UI::AddonBannerEditor*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonBannerEditor*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -123503,6 +124340,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonCastBar*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonCastBar*
       name: this
@@ -123906,6 +124749,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCharacterClass*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonCharacterClass*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -124297,6 +125146,12 @@ structs:
     parameters:
     - type: Client::UI::AddonChatLog*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonChatLog*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -124676,6 +125531,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonDialogue*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonDialogue*
       name: this
@@ -125096,6 +125957,12 @@ structs:
     parameters:
     - type: Client::UI::AddonDtr*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonDtr*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -125482,6 +126349,12 @@ structs:
     parameters:
     - type: Client::UI::AddonFieldMarker*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonFieldMarker*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -125855,6 +126728,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonFilter*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonFilter*
       name: this
@@ -126296,6 +127175,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGatheringMasterpiece*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGatheringMasterpiece*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -126697,6 +127582,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonItemSearch*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonItemSearch*
       name: this
@@ -127143,6 +128034,12 @@ structs:
     parameters:
     - type: Client::UI::AddonLookingForGroupDetail*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonLookingForGroupDetail*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -127544,6 +128441,12 @@ structs:
     parameters:
     - type: Client::UI::AddonMacro*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonMacro*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -127918,6 +128821,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonMiniTalk*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonMiniTalk*
       name: this
@@ -128305,6 +129214,12 @@ structs:
     parameters:
     - type: Client::UI::AddonNamePlate*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonNamePlate*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -128688,6 +129603,12 @@ structs:
     parameters:
     - type: Client::UI::AddonNeedGreed*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonNeedGreed*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -129061,6 +129982,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonOperationGuide*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonOperationGuide*
       name: this
@@ -129524,6 +130451,12 @@ structs:
     parameters:
     - type: Client::UI::AddonPartyList*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonPartyList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -129898,6 +130831,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonPvPCharacter*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonPvPCharacter*
       name: this
@@ -130288,6 +131227,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonReconstructionBox*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonReconstructionBox*
       name: this
@@ -130759,6 +131704,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRelicNoteBook*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonRelicNoteBook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -131142,6 +132093,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSalvageItemSelector*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonSalvageItemSelector*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -131522,6 +132479,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSatisfactionSupply*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonSatisfactionSupply*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -131898,6 +132861,12 @@ structs:
     parameters:
     - type: Client::UI::AddonScreenFrame*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonScreenFrame*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -132271,6 +133240,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonTooltip*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonTooltip*
       name: this
@@ -134042,6 +135017,12 @@ structs:
     parameters:
     - type: Client::UI::AddonAOZNotebook*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonAOZNotebook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -134427,6 +135408,12 @@ structs:
     parameters:
     - type: Client::UI::AddonAdventureNoteBook*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonAdventureNoteBook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -134804,6 +135791,12 @@ structs:
     parameters:
     - type: Client::UI::AddonAlliance48*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonAlliance48*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -134947,393 +135940,6 @@ structs:
     return_type: byte
     parameters:
     - type: Client::UI::AddonAlliance48*
-      name: this
-    - type: int
-      name: a2
-    - type: byte
-      name: a3
-  member_functions: []
-- type: Client::UI::AddonChatLogPanel
-  name: AddonChatLogPanel
-  namespace: Client.UI
-  union: False
-  size: 1000
-  fields:
-  - type: Component::GUI::AtkUnitBase
-    name: AtkUnitBase
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkComponentButton*
-    name: ResizeButton
-    offset: 576
-  - type: Component::GUI::AtkCollisionNode*
-    name: PanelCollisionNode
-    offset: 584
-  - type: Component::GUI::AtkTextNode*
-    name: ChatText
-    offset: 624
-  - type: Client::UI::LogViewer
-    name: LogViewer
-    offset: 640
-  - type: byte
-    name: IsResizing
-    offset: 990
-  virtual_functions:
-  - name: Dtor
-    offset: 0
-    return_type: Component::GUI::AtkEventListener*
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-  - name: ReceiveGlobalEvent
-    offset: 8
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: ReceiveEvent
-    offset: 16
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::AtkEventType
-      name: a2
-    - type: int
-      name: a3
-    - type: Component::GUI::AtkEvent*
-      name: a4
-    - type: Component::GUI::AtkEventData*
-      name: a5
-  - name: Open
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: unsigned int
-      name: a2
-  - name: Close
-    offset: 32
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-  - name: Show
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-    - type: unsigned int
-      name: a3
-  - name: Hide
-    offset: 48
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-    - type: byte
-      name: a3
-    - type: unsigned int
-      name: a4
-  - name: SetPosition
-    offset: 56
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: SetX
-    offset: 64
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16
-      name: a2
-  - name: SetY
-    offset: 72
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16
-      name: a2
-  - name: GetX
-    offset: 80
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: GetY
-    offset: 88
-    return_type: __int16
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: GetPosition
-    offset: 96
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-  - name: SetAlpha
-    offset: 104
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: byte
-      name: a2
-  - name: SetScale
-    offset: 112
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: float
-      name: a2
-    - type: byte
-      name: a3
-  - name: GetSize
-    offset: 120
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16*
-      name: a2
-    - type: __int16*
-      name: a3
-    - type: byte
-      name: a4
-  - name: Hide2
-    offset: 128
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: SetScaleToHudLayoutScale
-    offset: 136
-    return_type: __int8
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: ShouldCollideWithWindow
-    offset: 144
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::AtkCollisionNode*
-      name: a2
-  - name: OnMove
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: ShouldIgnoreInputs
-    offset: 184
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: GetRootNode
-    offset: 192
-    return_type: Component::GUI::AtkResNode*
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: GetWindowBounds
-    offset: 216
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: GetRootBounds
-    offset: 240
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Common::Math::Bounds*
-      name: a2
-  - name: ShouldAllowCursorFocus
-    offset: 256
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: Focus
-    offset: 296
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: Initialize
-    offset: 328
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: Finalizer
-    offset: 336
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: Update
-    offset: 344
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: float
-      name: a2
-  - name: Draw
-    offset: 352
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: LoadUldResourceHandle
-    offset: 368
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: CheckWindowCollisionAtCoords
-    offset: 376
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: __int16
-      name: a2
-    - type: __int16
-      name: a3
-  - name: OnSetup
-    offset: 392
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRefresh
-    offset: 408
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: unsigned int
-      name: a2
-    - type: Component::GUI::AtkValue*
-      name: a3
-  - name: OnRequestedUpdate
-    offset: 416
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::NumberArrayData**
-      name: a2
-    - type: Component::GUI::StringArrayData**
-      name: a3
-  - name: FireCloseCallback
-    offset: 432
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: HandleCustomInput
-    offset: 456
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: Component::GUI::AtkEventData::AtkInputData*
-      name: a2
-  - name: OnScreenSizeChange
-    offset: 480
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: int
-      name: a2
-    - type: int
-      name: a3
-  - name: OnMouseOver
-    offset: 496
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: OnMouseOut
-    offset: 504
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: IsFullyLoaded
-    offset: 528
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-  - name: PlaySoundEffect
-    offset: 536
-    return_type: void
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: int
-      name: a2
-  - name: HandleDPadInput
-    offset: 552
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
-      name: this
-    - type: int
-      name: a2
-    - type: byte
-      name: a3
-  - name: HandleBackButtonInput
-    offset: 568
-    return_type: byte
-    parameters:
-    - type: Client::UI::AddonChatLogPanel*
       name: this
     - type: int
       name: a2
@@ -135563,6 +136169,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonFishGuide2*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonFishGuide2*
       name: this
@@ -135999,6 +136611,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGSInfoCardList*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGSInfoCardList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -136371,6 +136989,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonGSInfoEditDeck*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonGSInfoEditDeck*
       name: this
@@ -136749,6 +137373,12 @@ structs:
     parameters:
     - type: Client::UI::AddonLovmPaletteEdit*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonLovmPaletteEdit*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -137121,6 +137751,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonMJIMinionNoteBook*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonMJIMinionNoteBook*
       name: this
@@ -137499,6 +138135,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonMinionMountBase*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonMinionMountBase*
       name: this
@@ -137883,6 +138525,12 @@ structs:
     parameters:
     - type: Client::UI::AddonOrnamentNoteBook*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonOrnamentNoteBook*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -138258,6 +138906,12 @@ structs:
     parameters:
     - type: Client::UI::AddonSelectIconString*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonSelectIconString*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -138630,6 +139284,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonSelectString*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonSelectString*
       name: this
@@ -139116,6 +139776,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonSynthesis*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonSynthesis*
       name: this
@@ -140383,6 +141049,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionBarX*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonActionBarX*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -140806,6 +141478,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionDoubleCrossBase*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonActionDoubleCrossBase*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -141196,6 +141874,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonBuddy*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonBuddy*
       name: this
@@ -141596,6 +142280,12 @@ structs:
     parameters:
     - type: Client::UI::AddonCharacter*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonCharacter*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -141753,6 +142443,399 @@ structs:
       name: this
     - type: int
       name: tab
+- type: Client::UI::AddonChatLogPanel
+  name: AddonChatLogPanel
+  namespace: Client.UI
+  union: False
+  size: 1000
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkComponentButton*
+    name: ResizeButton
+    offset: 576
+  - type: Component::GUI::AtkCollisionNode*
+    name: PanelCollisionNode
+    offset: 584
+  - type: Component::GUI::AtkTextNode*
+    name: ChatText
+    offset: 624
+  - type: Client::UI::LogViewer
+    name: LogViewer
+    offset: 640
+  - type: byte
+    name: IsResizing
+    offset: 990
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: a2
+    - type: int
+      name: a3
+    - type: Component::GUI::AtkEvent*
+      name: a4
+    - type: Component::GUI::AtkEventData*
+      name: a5
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: unsigned int
+      name: a2
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+    - type: unsigned int
+      name: a3
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+    - type: byte
+      name: a3
+    - type: unsigned int
+      name: a4
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16
+      name: a2
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16
+      name: a2
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: byte
+      name: a2
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: float
+      name: a2
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16*
+      name: a2
+    - type: __int16*
+      name: a3
+    - type: byte
+      name: a4
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: a2
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Common::Math::Bounds*
+      name: a2
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: float
+      name: a2
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: __int16
+      name: a2
+    - type: __int16
+      name: a3
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRefresh
+    offset: 408
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: unsigned int
+      name: a2
+    - type: Component::GUI::AtkValue*
+      name: a3
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: a2
+    - type: Component::GUI::StringArrayData**
+      name: a3
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: HandleCustomInput
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: a2
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: int
+      name: a2
+    - type: int
+      name: a3
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: int
+      name: a2
+  - name: HandleDPadInput
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: int
+      name: a2
+    - type: byte
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonChatLogPanel*
+      name: this
+    - type: int
+      name: a2
+    - type: byte
+      name: a3
+  member_functions: []
 - type: Client::UI::AddonContentsFinder
   name: AddonContentsFinder
   namespace: Client.UI
@@ -142079,6 +143162,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonContentsFinder*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonContentsFinder*
       name: this
@@ -142485,6 +143574,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGoldSaucerInfo*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGoldSaucerInfo*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -142860,6 +143955,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventory*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonInventory*
       name: this
@@ -143254,6 +144355,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryEvent*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonInventoryEvent*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -143637,6 +144744,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryExpansion*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonInventoryExpansion*
       name: this
@@ -144028,6 +145141,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryLarge*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonInventoryLarge*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -144414,6 +145533,12 @@ structs:
     parameters:
     - type: Client::UI::AddonInventoryRetainer*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonInventoryRetainer*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -144797,6 +145922,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonInventoryRetainerLarge*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonInventoryRetainerLarge*
       name: this
@@ -145770,6 +146901,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionBar*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonActionBar*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -146165,6 +147302,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonSocial*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonSocial*
       name: this
@@ -146579,6 +147722,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonTalk*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonTalk*
       name: this
@@ -147249,6 +148398,16 @@ structs:
       name: intParam2
     - type: unsigned int
       name: uintParam
+  - signature: E8 ?? ?? ?? ?? 41 8D 55 0B
+    return_type: char*
+    name: FormatAddonText2Int
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: unsigned int
+      name: addonId
+    - type: int
+      name: value
   - signature: E8 ?? ?? ?? ?? EB 51 0F B6 DB
     return_type: char*
     name: FormatAddonText2IntInt
@@ -147261,6 +148420,20 @@ structs:
       name: intParam1
     - type: int
       name: intParam2
+  - signature: E8 ?? ?? ?? ?? 48 8B D8 EB 38
+    return_type: char*
+    name: FormatAddonText2IntIntUInt
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: unsigned int
+      name: addonId
+    - type: int
+      name: value1
+    - type: int
+      name: value2
+    - type: unsigned int
+      name: value3
   - signature: 48 83 EC 28 45 0F B6 C8 85 D2
     return_type: char*
     name: FormatTimeSpan
@@ -148093,6 +149266,12 @@ structs:
     parameters:
     - type: Client::UI::AddonLotteryDaily*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonLotteryDaily*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -148512,6 +149691,12 @@ structs:
     parameters:
     - type: Client::UI::AddonRaidFinder*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonRaidFinder*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -148928,6 +150113,12 @@ structs:
     parameters:
     - type: Client::UI::AddonToDoList*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonToDoList*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -149309,6 +150500,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonWeeklyBingo*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonWeeklyBingo*
       name: this
@@ -149732,6 +150929,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonWeeklyPuzzle*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonWeeklyPuzzle*
       name: this
@@ -150594,6 +151797,12 @@ structs:
     parameters:
     - type: Client::UI::AddonActionCross*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonActionCross*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -150995,6 +152204,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudBRD0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudBRD0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -151376,6 +152591,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDNC0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudDNC0*
       name: this
@@ -151763,6 +152984,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudDNC1*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudDNC1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -152144,6 +153371,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDRG0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudDRG0*
       name: this
@@ -152531,6 +153764,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudDRK0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudDRK0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -152912,6 +154151,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudDRK1*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudDRK1*
       name: this
@@ -153299,6 +154544,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudGFF0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudGFF0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -153680,6 +154931,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudGFF1*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudGFF1*
       name: this
@@ -154067,6 +155324,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudGNB0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudGNB0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -154448,6 +155711,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudMCH0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudMCH0*
       name: this
@@ -154835,6 +156104,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudMNK0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudMNK0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -155216,6 +156491,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudNIN0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudNIN0*
       name: this
@@ -155603,6 +156884,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudNIN1*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudNIN1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -155984,6 +157271,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudPLD0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudPLD0*
       name: this
@@ -156371,6 +157664,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudRDB0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudRDB0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -156752,6 +158051,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRDB1*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudRDB1*
       name: this
@@ -157139,6 +158444,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudRPM0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudRPM0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -157520,6 +158831,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRPM1*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudRPM1*
       name: this
@@ -157907,6 +159224,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudRRP0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudRRP0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -158288,6 +159611,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSAM0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudSAM0*
       name: this
@@ -158675,6 +160004,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudSAM1*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudSAM1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -159056,6 +160391,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSCH0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudSCH0*
       name: this
@@ -159443,6 +160784,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudSMN0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudSMN0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -159827,6 +161174,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudWAR0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudWAR0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -160208,6 +161561,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudWHM0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudWHM0*
       name: this
@@ -160741,6 +162100,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudAST0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudAST0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -161122,6 +162487,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudRDM0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudRDM0*
       name: this
@@ -161841,6 +163212,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudACN0*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudACN0*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -162222,6 +163599,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudBLM0*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudBLM0*
       name: this
@@ -162609,6 +163992,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudBLM1*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudBLM1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -162990,6 +164379,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudMNK1*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudMNK1*
       name: this
@@ -163377,6 +164772,12 @@ structs:
     parameters:
     - type: Client::UI::AddonJobHudRRP1*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonJobHudRRP1*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -163758,6 +165159,12 @@ structs:
   - name: ShouldAllowCursorFocus
     offset: 256
     return_type: byte
+    parameters:
+    - type: Client::UI::AddonJobHudSMN1*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
     parameters:
     - type: Client::UI::AddonJobHudSMN1*
       name: this
@@ -164719,6 +166126,12 @@ structs:
     parameters:
     - type: Client::UI::AddonGuildLeve*
       name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonGuildLeve*
+      name: this
   - name: Focus
     offset: 296
     return_type: void
@@ -164868,135 +166281,6 @@ structs:
     - type: byte
       name: a3
   member_functions: []
-- type: Component::GUI::AtkStage
-  name: AtkStage
-  namespace: Component.GUI
-  union: False
-  size: 482816
-  fields:
-  - type: Component::GUI::AtkEventTarget
-    name: AtkEventTarget
-    offset: 0
-    base: true
-  - type: Component::GUI::AtkFontManager*
-    name: AtkFontManager
-    offset: 16
-  - type: Component::GUI::AtkTextureResourceManager*
-    name: AtkTextureResourceManager
-    offset: 24
-  - type: Client::UI::RaptureAtkUnitManager*
-    name: RaptureAtkUnitManager
-    offset: 32
-  - type: Component::GUI::AtkInputManager*
-    name: AtkInputManager
-    offset: 40
-  - type: Component::GUI::AtkCollisionManager*
-    name: AtkCollisionManager
-    offset: 48
-  - type: Component::GUI::AtkArrayDataHolder*
-    name: AtkArrayDataHolder
-    offset: 56
-  - type: Component::GUI::AtkTimerHolder*
-    name: AtkTimerHolder
-    offset: 64
-  - type: Component::GUI::AtkSimpleTweenHolder*
-    name: AtkSimpleTweenHolder
-    offset: 72
-  - type: Component::GUI::AtkCrestManager*
-    name: AtkCrestManager
-    offset: 80
-  - type: Component::GUI::AtkUIColorHolder*
-    name: AtkUIColorHolder
-    offset: 88
-  - type: Client::UI::Misc::RaptureTextModule*
-    name: RaptureTextModule
-    offset: 96
-  - type: Client::System::Input::SoftKeyboardDeviceInterface*
-    name: SoftKeyboardDevice
-    offset: 104
-  - type: Component::GUI::AtkExternalInterface*
-    name: AtkExternalInterface
-    offset: 112
-  - type: Component::GUI::AtkDragDropManager
-    name: DragDropManager
-    offset: 120
-  - type: Component::GUI::AtkGroupManager
-    name: AtkGroupManager
-    offset: 320
-  - type: Component::GUI::AtkTooltipManager
-    name: TooltipManager
-    offset: 360
-  - type: Component::GUI::AtkStage::DialogueStruct
-    name: Dialogue
-    offset: 696
-  - type: Component::GUI::AtkStage::FilterStruct
-    name: Filter
-    offset: 760
-  - type: Component::GUI::AtkStage::OperationGuideStruct
-    name: OperationGuide
-    offset: 776
-  - type: Component::GUI::AtkCursor
-    name: AtkCursor
-    offset: 824
-  - type: Component::GUI::AtkEventDispatcher
-    name: AtkEventDispatcher
-    offset: 856
-    size: 32
-    is_string: False
-  - type: unsigned int
-    name: NextEventDispatcherIndex
-    offset: 2136
-  - type: Common::Math::Size
-    name: ScreenSize
-    offset: 2144
-  - type: Component::GUI::AtkEventManager
-    name: ViewportEventManager
-    offset: 2160
-  - type: Component::GUI::AtkEvent
-    name: RegisteredEvents
-    offset: 2168
-    size: 10000
-    is_string: False
-  virtual_functions:
-  - name: Dtor
-    offset: 8
-  member_functions:
-  - signature: 48 8B 51 ?? 48 0F BF 82
-    return_type: Component::GUI::AtkResNode*
-    name: GetFocus
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: 48 8B 49 ?? 45 33 C9 45 33 C0 33 D2 E9
-    return_type: void
-    name: ClearFocus
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: 48 8B 41 38 48 8B 40 18
-    return_type: Component::GUI::NumberArrayData**
-    name: GetNumberArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: E8 ?? ?? ?? ?? 42 8D 1C AD
-    return_type: Component::GUI::StringArrayData**
-    name: GetStringArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  - signature: 48 8B 41 38 48 8B 40 48
-    return_type: Component::GUI::ExtendArrayData**
-    name: GetExtendArrayData
-    parameters:
-    - type: Component::GUI::AtkStage*
-      name: this
-  static_members:
-  - signature: 48 8B 05 ?? ?? ?? ?? 4C 8B 40 18 45 8B 40 18
-    relative_follow_offsets:
-    - 3
-    is_pointer: True
-    return_type: Component::GUI::AtkStage
 - type: Client::Game::JobGaugeManager::Gauge
   name: Gauge
   namespace: Client::Game::JobGaugeManager
@@ -165216,6 +166500,178 @@ structs:
     - 3
     is_pointer: False
     return_type: Client::Game::JobGaugeManager
+- type: Component::GUI::AtkStage
+  name: AtkStage
+  namespace: Component.GUI
+  union: False
+  size: 482816
+  fields:
+  - type: Component::GUI::AtkEventTarget
+    name: AtkEventTarget
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkFontManager*
+    name: AtkFontManager
+    offset: 16
+  - type: Component::GUI::AtkTextureResourceManager*
+    name: AtkTextureResourceManager
+    offset: 24
+  - type: Client::UI::RaptureAtkUnitManager*
+    name: RaptureAtkUnitManager
+    offset: 32
+  - type: Component::GUI::AtkInputManager*
+    name: AtkInputManager
+    offset: 40
+  - type: Component::GUI::AtkCollisionManager*
+    name: AtkCollisionManager
+    offset: 48
+  - type: Component::GUI::AtkArrayDataHolder*
+    name: AtkArrayDataHolder
+    offset: 56
+  - type: Component::GUI::AtkTimerHolder*
+    name: AtkTimerHolder
+    offset: 64
+  - type: Component::GUI::AtkSimpleTweenHolder*
+    name: AtkSimpleTweenHolder
+    offset: 72
+  - type: Component::GUI::AtkCrestManager*
+    name: AtkCrestManager
+    offset: 80
+  - type: Component::GUI::AtkUIColorHolder*
+    name: AtkUIColorHolder
+    offset: 88
+  - type: Client::UI::Misc::RaptureTextModule*
+    name: RaptureTextModule
+    offset: 96
+  - type: Client::System::Input::SoftKeyboardDeviceInterface*
+    name: SoftKeyboardDevice
+    offset: 104
+  - type: Component::GUI::AtkExternalInterface*
+    name: AtkExternalInterface
+    offset: 112
+  - type: Component::GUI::AtkDragDropManager
+    name: DragDropManager
+    offset: 120
+  - type: Component::GUI::AtkGroupManager
+    name: AtkGroupManager
+    offset: 320
+  - type: Component::GUI::AtkTooltipManager
+    name: TooltipManager
+    offset: 360
+  - type: Component::GUI::AtkStage::DialogueStruct
+    name: Dialogue
+    offset: 696
+  - type: Component::GUI::AtkStage::FilterStruct
+    name: Filter
+    offset: 760
+  - type: Component::GUI::AtkStage::OperationGuideStruct
+    name: OperationGuide
+    offset: 776
+  - type: Component::GUI::AtkCursor
+    name: AtkCursor
+    offset: 824
+  - type: Component::GUI::AtkEventDispatcher
+    name: AtkEventDispatcher
+    offset: 856
+    size: 32
+    is_string: False
+  - type: unsigned int
+    name: NextEventDispatcherIndex
+    offset: 2136
+  - type: byte
+    name: CanDispatchEvents
+    offset: 2140
+  - type: Common::Math::Size
+    name: ScreenSize
+    offset: 2144
+  - type: float
+    name: ScreenSizeScale
+    offset: 2152
+  - type: byte
+    name: IsScreenSizeScaled
+    offset: 2156
+  - type: Component::GUI::AtkEventManager
+    name: ViewportEventManager
+    offset: 2160
+  - type: Component::GUI::AtkEvent
+    name: AtkEventPool
+    offset: 2168
+    size: 10000
+    is_string: False
+  - type: Component::GUI::AtkEvent*
+    name: NextEvent
+    offset: 482168
+  - type: StdDeque<Component::Text::TextParameter>
+    name: FormatTextParameters
+    offset: 482176
+  - type: Client::System::String::Utf8String
+    name: FormatOutput
+    offset: 482216
+  - type: byte
+    name: FormatCStringBuffer
+    offset: 482320
+    size: 384
+    is_string: True
+  - type: Component::GUI::AtkTimer
+    name: ButtonClickTimer
+    offset: 482704
+  - type: Component::GUI::AtkTimer
+    name: ButtonClickRepeatTimer
+    offset: 482752
+  - type: Component::GUI::AtkTimer*
+    name: TimerArray
+    offset: 482800
+  - type: int
+    name: TimerCount
+    offset: 482808
+  virtual_functions:
+  - name: Dtor
+    offset: 8
+  member_functions:
+  - signature: 48 8B 51 ?? 48 0F BF 82
+    return_type: Component::GUI::AtkResNode*
+    name: GetFocus
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: 48 8B 49 ?? 45 33 C9 45 33 C0 33 D2 E9
+    return_type: void
+    name: ClearFocus
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: 81 62 ?? ?? ?? ?? ?? 45 33 C0
+    return_type: void
+    name: ReturnAtkEventToPool
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+    - type: Component::GUI::AtkEvent*
+      name: evt
+  - signature: 48 8B 41 38 48 8B 40 18
+    return_type: Component::GUI::NumberArrayData**
+    name: GetNumberArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 42 8D 1C AD
+    return_type: Component::GUI::StringArrayData**
+    name: GetStringArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  - signature: 48 8B 41 38 48 8B 40 48
+    return_type: Component::GUI::ExtendArrayData**
+    name: GetExtendArrayData
+    parameters:
+    - type: Component::GUI::AtkStage*
+      name: this
+  static_members:
+  - signature: 48 8B 05 ?? ?? ?? ?? 4C 8B 40 18 45 8B 40 18
+    relative_follow_offsets:
+    - 3
+    is_pointer: True
+    return_type: Component::GUI::AtkStage
 - type: Client::Game::Event::EventFramework
   name: EventFramework
   namespace: Client.Game.Event
@@ -168491,6 +169947,14 @@ structs:
     parameters:
     - type: Client::UI::UIModule*
       name: this
+  - name: CancelDragDrop
+    offset: 920
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+    - type: byte
+      name: a2
   - name: AddAtkHistoryEntry
     offset: 936
     return_type: void
@@ -168521,6 +169985,14 @@ structs:
       name: a3
     - type: __int64
       name: a4
+  - name: SetCursorVisibility
+    offset: 1080
+    return_type: void
+    parameters:
+    - type: Client::UI::UIModule*
+      name: this
+    - type: byte
+      name: a2
   - name: ToggleUi
     offset: 1240
     return_type: void
