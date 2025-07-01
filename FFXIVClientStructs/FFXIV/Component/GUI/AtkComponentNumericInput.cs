@@ -20,7 +20,7 @@ public unsafe partial struct AtkComponentNumericInput : ICreatable {
     public partial void SetValue(int value);
 
     [MemberFunction("E9 ?? ?? ?? ?? 33 D2 F7 F1")]
-    public partial void SetValue(int value, bool triggerCallback, bool playSoundEffect);
+    public partial void SetValueInner(int value, bool triggerCallback, bool playSoundEffect);
 
-    public void SetValueSilent(int value) => SetValue(value, true, false);
+    public void SetValueSilent(int value) => SetValueInner(value, true, false);
 }
