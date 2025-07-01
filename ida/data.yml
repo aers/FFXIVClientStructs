@@ -7489,6 +7489,7 @@ classes:
     funcs:
       0x14067A630: ctor
       0x14067C6C0: SetValue
+      0x14067A240: SetValueInner
   Component::GUI::AtkComponentDropDownList:
     vtbls:
       - ea: 0x14203AB10
