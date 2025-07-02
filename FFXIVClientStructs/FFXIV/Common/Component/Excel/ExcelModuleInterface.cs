@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.Excel;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct ExcelModuleInterface {
     [VirtualFunction(1)]
-    public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
+    public partial ExcelSheet* GetSheetByIndex([CExporterTypeForce("Component::Exd::SheetsEnum")] uint sheetIndex);
 
     [VirtualFunction(2), GenerateStringOverloads]
     public partial ExcelSheet* GetSheetByName(CStringPointer sheetName);

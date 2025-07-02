@@ -10,7 +10,7 @@ public unsafe partial struct ExcelModuleInterface {
     [FieldOffset(0x08)] public ExdModule* ExdModule;
 
     [VirtualFunction(1)]
-    public partial ExcelSheet* GetSheetByIndex(uint sheetIndex);
+    public partial ExcelSheet* GetSheetByIndex([CExporterTypeForce("Component::Exd::SheetsEnum")] uint sheetIndex);
 
     [VirtualFunction(2), GenerateStringOverloads]
     public partial ExcelSheet* GetSheetByName(CStringPointer sheetName);

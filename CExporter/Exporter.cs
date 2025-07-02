@@ -376,6 +376,14 @@ public class Exporter {
                 FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
             };
         }
+        if (field.GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
+            return new ProcessedField {
+                FieldType = field.FieldType,
+                FieldOffset = field.GetFieldOffset() - offset,
+                FieldName = field.Name,
+                FieldTypeOverride = field.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName
+            };
+        }
         _processType.Add(field.FieldType);
         return new ProcessedField {
             FieldType = field.FieldType,
@@ -405,6 +413,14 @@ public class Exporter {
                 FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
             };
         }
+        if (parameter.GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
+            return new ProcessedField {
+                FieldType = parameter.ParameterType,
+                FieldOffset = -1,
+                FieldName = parameter.Name!,
+                FieldTypeOverride = parameter.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName
+            };
+        }
         _processType.Add(parameter.ParameterType);
         return new ProcessedField {
             FieldType = parameter.ParameterType,
@@ -431,6 +447,14 @@ public class Exporter {
                 FieldOffset = -1,
                 FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
                 FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
+            };
+        }
+        if (parameter.GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
+            return new ProcessedField {
+                FieldType = parameter,
+                FieldOffset = -1,
+                FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
+                FieldTypeOverride = parameter.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName
             };
         }
         _processType.Add(parameter);
@@ -475,9 +499,10 @@ public class Exporter {
             ProcessedVirtualFunction[]? virtualFunctions = null;
             if (vtable != null) {
                 vtable = vtable.GetElementType()!;
-                var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<VirtualFunctionAttribute>() != null).Select(t => Tuple.Create(t.Name, t.GetParameters(), t.ReturnType)).ToArray();
+                var memberFunctions = type.GetMethods(ExporterStatics.BindingFlags).Select(t => Tuple.Create(t.Name, t.GetParameters(), t.ReturnType)).ToArray();
                 virtualFunctions = vtable.GetFields(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExportIgnoreAttribute>() == null).Select(f => {
-                    var memberFunction = memberFunctions.FirstOrDefault(t => t.Item1 == f.Name);
+                    var parameterTypes = f.FieldType.GetFunctionPointerParameterTypes();
+                    var memberFunction = memberFunctions.FirstOrDefault(t => t.Item1 == f.Name && t.Item2.Length == parameterTypes.Length - 1);
                     var returnType = f.FieldType.GetFunctionPointerReturnType();
                     if (memberFunction?.Item3 != returnType) memberFunction = null;
                     _processType.Add(f.FieldType.GetFunctionPointerReturnType());
@@ -485,7 +510,7 @@ public class Exporter {
                         VirtualFunctionName = f.Name,
                         Offset = f.GetFieldOffset(),
                         VirtualFunctionReturnType = f.FieldType.GetFunctionPointerReturnType(),
-                        VirtualFunctionParameters = f.FieldType.GetFunctionPointerParameterTypes().Select((p, i) => ProcessVirtualParameter(p, i, memberFunction?.Item2)).ToArray()
+                        VirtualFunctionParameters = parameterTypes.Select((p, i) => ProcessVirtualParameter(p, i, memberFunction?.Item2)).ToArray()
                     };
                 }).ToArray();
                 vtableSize = vtable.StructLayoutAttribute?.Size ?? vtableSize;
