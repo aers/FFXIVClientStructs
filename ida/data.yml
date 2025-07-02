@@ -1486,6 +1486,8 @@ classes:
       0x1409826D0: GetSpecialItemId #static
       0x140831810: GetLimitedTomestoneWeeklyLimit #static
       0x140821500: SetSlotUnblocked
+      0x14081E240: SplitItem
+      0x14081FA70: DiscardItem
   Client::Game::InventoryItem:
     vtbls:
       - ea: 0x142051068
@@ -2051,8 +2053,13 @@ classes:
       0x14005AAB0: ConcatCStr
       0x14005AB70: EqualTo
       0x14005ABC0: EqualToString
+      0x14005DC40: EqualToString2
       0x14005AC00: NotEqualTo
       0x14005AC50: NotEqualToString
+      0x14005AC90: LessThanOrEqualTo
+      0x14005ACF0: GreaterThanOrEqualTo
+      0x14005AD50: LessThan
+      0x14005ADB0: GreaterThan
       0x14005B940: GetLength #count of character
       0x14005B9E0: CalcLength #does not use saved value
       0x14005BA60: GetSize
