@@ -11,11 +11,14 @@ internal sealed record MethodInfo(
     string GenericConstraints,
     bool IsStatic,
     EquatableArray<ParameterInfo> Parameters,
-    ObsoleteInfo? ObsoleteInfo) {
+    ObsoleteInfo? ObsoleteInfo,
+    CExporterExcelInfo? CExporterExcelInfo) {
 
     public string GetDeclarationString() => $"{Modifiers} {ReturnType} {Name}({GetParameterTypesAndNamesString()}){GenericConstraints}";
 
-    public string GetDeclarationStringWithoutPartial() => $"{Modifiers.Replace(" partial", string.Empty)} {ReturnType} {Name}({GetParameterTypesAndNamesStringWithDefaults()}){GenericConstraints}";
+    public string GetDeclarationStringWithAttributes() => $"{Modifiers} {ReturnType} {Name}({GetParameterTypesAndNamesStringWithAttributes()}){GenericConstraints}";
+
+    public string GetDeclarationStringWithoutPartial() => $"{Modifiers.Replace(" partial", string.Empty)} {ReturnType} {Name}({GetParameterTypesAndNamesStringWithAttributesAndDefaults()}){GenericConstraints}";
 
     public string GetDeclarationStringForDelegateType(string structType) {
         var paramTypesAndNames = $"{structType}* thisPtr";
@@ -46,6 +49,9 @@ internal sealed record MethodInfo(
 
     private string GetParameterTypesAndNamesStringWithDefaults() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));
 
+    public string GetParameterTypesAndNamesStringWithAttributes() => string.Join(", ", Parameters.Select(p => $"{p.GetAttributes()}{p.RefKind.GetStringPrefix()}{p.Type} {p.Name}"));
 
+    public string GetParameterTypesAndNamesStringWithAttributesAndDefaults() => string.Join(", ", Parameters.Select(p => $"{p.GetAttributes()}{p.RefKind.GetStringPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));
+    
     public string GetReturnString() => ReturnType == "void" ? "" : "return ";
 }

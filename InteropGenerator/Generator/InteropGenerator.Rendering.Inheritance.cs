@@ -176,6 +176,9 @@ public sealed partial class InteropGenerator {
             if (methodInfo.ObsoleteInfo is not null) {
                 writer.WriteLine($"""[global::System.ObsoleteAttribute("{methodInfo.ObsoleteInfo.Message}", {methodInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
             }
+            if (methodInfo.CExporterExcelInfo is not null) {
+                writer.WriteLine(methodInfo.CExporterExcelInfo.GetAttribute());
+            }
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
         }
@@ -227,6 +230,9 @@ public sealed partial class InteropGenerator {
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
             if (methodInfo.ObsoleteInfo is not null) {
                 writer.WriteLine($"""[global::System.ObsoleteAttribute("{methodInfo.ObsoleteInfo.Message}", {methodInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
+            }
+            if (methodInfo.CExporterExcelInfo is not null) {
+                writer.WriteLine(methodInfo.CExporterExcelInfo.GetAttribute());
             }
             // function in table - call via table
             if (offset == 0) {
