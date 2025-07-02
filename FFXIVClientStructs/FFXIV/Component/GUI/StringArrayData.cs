@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkArrayData>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct StringArrayData {
-    [FieldOffset(0x28)] public byte** StringArray;
+    [FieldOffset(0x28)] public byte** StringArray; // TODO: change this to CStringPointer*
     [FieldOffset(0x30)] public byte** ManagedStringArray;
 
     /// <summary>
