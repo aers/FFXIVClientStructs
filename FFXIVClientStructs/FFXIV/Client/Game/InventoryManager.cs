@@ -59,7 +59,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("40 55 53 56 57 41 55 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 8D B2")]
     public partial int SplitItem(InventoryType container, ushort slot, int quantity);
 
-    [MemberFunction("40 56 57 41 57 48 83 EC ?? 45 0F BF F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8B 11")]
     public partial int DiscardItem(InventoryType container, ushort slot);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 7F 66")]
