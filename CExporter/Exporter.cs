@@ -449,12 +449,12 @@ public class Exporter {
                 FieldTypeOverride = $"Component::Exd::Sheets::{sheetName}*"
             };
         }
-        if (parameter.GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
+        if (i != 0 && parameters?[i - 1] is not null && parameters[i - 1].GetCustomAttribute<CExporterTypeForceAttribute>() != null) {
             return new ProcessedField {
                 FieldType = parameter,
                 FieldOffset = -1,
-                FieldName = i == 0 ? "this" : parameters?[i - 1].Name ?? $"a{i + 1}",
-                FieldTypeOverride = parameter.GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName
+                FieldName = parameters[i - 1].Name ?? $"a{i + 1}",
+                FieldTypeOverride = parameters[i - 1].GetCustomAttribute<CExporterTypeForceAttribute>()!.TypeName
             };
         }
         _processType.Add(parameter);
