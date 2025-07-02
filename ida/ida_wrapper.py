@@ -857,11 +857,8 @@ class IdaInterface(BaseIdaInterface):
                 int: The number of members removed or -1 if failed
             """
             tif = self.get_struct(sid)
-            udm = ida_typeinf.udm_t()
-            udm.offset = self.get_struct_size(tif)
-            idx = tif.find_udm(udm, ida_typeinf.STRMEM_OFFSET)
             count = tif.get_udt_nmembers()
-            tif.del_udms(0, idx)
+            tif.del_udms(0, count)
             return count
 
         def get_struct_member(

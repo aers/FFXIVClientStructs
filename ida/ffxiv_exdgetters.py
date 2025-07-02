@@ -104,6 +104,9 @@ if api is None:
                             ea, fnName, "Sheet: {0} ({1})".format(sheetName, sheetIdx)
                         )
 
+                        if suffix == "SheetIndex":
+                            continue
+
                         tif, funcdata = (
                             ida_typeinf.tinfo_t(),
                             ida_typeinf.func_type_data_t(),
@@ -141,16 +144,17 @@ if api is None:
                 enum_id = self.get_enum_id(name)
                 if enum_id == idaapi.BADADDR:
                     enum_id = self.create_enum(name)
+                    self.set_enum_width(enum_id, width)
+                    if width == 1:
+                        self.set_enum_as_bf(enum_id)
                 sheet_name = name.split("::")[-2]
-                self.set_enum_width(enum_id, width)
-                if width == 1:
-                    self.set_enum_as_bf(enum_id)
                 for key in values:
                     self.remove_enum_member(enum_id, key, f"{sheet_name}_{values[key]}")
                     self.add_enum_member(enum_id, f"{sheet_name}_{values[key]}", key)
 
             def create_struct(self, name, fields):
-                idaapi.begin_type_updating(idaapi.UTP_STRUCT)
+                if idaapi.IDA_SDK_VERSION < 900:
+                    idaapi.begin_type_updating(idaapi.UTP_STRUCT)
                 struct_id = self.get_struct_id(name)
                 if struct_id == idaapi.BADADDR:
                     struct_id = self.create_struct_type(name)
@@ -198,7 +202,8 @@ if api is None:
                     self.set_struct_member_info(
                         struct_type, meminfo, 0, self.get_tinfo_from_type(type), 0
                     )
-                idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                if idaapi.IDA_SDK_VERSION < 900:
+                    idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def set_func_name(self, ea, name, cmt):
                 ida_name.set_name(ea, name)
