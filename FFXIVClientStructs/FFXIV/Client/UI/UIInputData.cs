@@ -8,6 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::UIInputData
 //   Component::GUI::AtkInputData
+//     Client::System::Input::InputData
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<InputData>, Inherits<UserFileEvent>]

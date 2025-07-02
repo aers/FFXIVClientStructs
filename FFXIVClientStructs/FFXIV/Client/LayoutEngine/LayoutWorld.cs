@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 
@@ -33,6 +34,9 @@ public unsafe partial struct LayoutWorld {
     /// <remarks> Tries to get it from <see cref="ActiveLayout"/> first, then from <see cref="GlobalLayout"/>. </remarks>
     [MemberFunction("E9 ?? ?? ?? ?? 8B 43 78 45 33 C0")]
     public static partial ILayoutInstance* GetLayoutInstance(InstanceType instanceType, uint instanceId, uint subId = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 ?? 8B 90")]
+    public static partial ILayoutInstance* GetColliderLayoutInstance(InstanceType instanceType, Collider* collider);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 44 89 B7")]
     public static partial void UnloadPrefetchLayout();

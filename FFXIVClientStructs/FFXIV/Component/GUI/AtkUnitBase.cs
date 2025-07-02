@@ -1,6 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Common.Math;
-using static FFXIVClientStructs.FFXIV.Component.GUI.AtkEventData;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -84,6 +83,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <code>
     /// 0b0000_0001 [0x1] = Enable title bar context menu<br/>
     /// 0b0010_0000 [0x20] = Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
+    /// 0b0100_0000 [0x40] = Make WindowCollisionNode non-interactable (no focus on click, not moving addon when dragged)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A3)] public byte Flags1A3;
@@ -329,6 +329,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(32)]
     public partial bool ShouldAllowCursorFocus();
 
+    [VirtualFunction(35)]
+    public partial AtkUnitBase* GetUnitBaseForFocus(); // this basically always returns the addon itself, except for in ChatLogPanel where it returns ChatLog
+
     [VirtualFunction(37)]
     public partial void Focus();
 
@@ -367,7 +370,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void FireCloseCallback();
 
     [VirtualFunction(57)]
-    public partial bool HandleCustomInput(AtkInputData* inputData);
+    public partial bool HandleCustomInput(AtkEventData.AtkInputData* inputData);
 
     [VirtualFunction(60)]
     public partial void OnScreenSizeChange(int width, int height);

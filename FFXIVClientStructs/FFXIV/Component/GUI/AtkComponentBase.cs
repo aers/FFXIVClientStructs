@@ -21,6 +21,9 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("48 8D 05 ?? ?? ?? ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 89 01 33 C0 48 89 41 08")]
     public partial void Ctor();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 0E 75 2B")]
+    public partial ComponentType GetComponentType();
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]
     public partial AtkResNode* GetNodeById(uint id);
 

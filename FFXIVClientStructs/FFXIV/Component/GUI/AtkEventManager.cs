@@ -11,4 +11,7 @@ public unsafe partial struct AtkEventManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? F6 43 0C 20")]
     public partial bool UnregisterEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, bool isGlobalEvent);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 89 3B 48 85 F6")]
+    public partial void ClearEvents();
 }

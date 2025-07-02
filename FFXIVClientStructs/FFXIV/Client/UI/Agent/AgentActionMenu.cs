@@ -18,7 +18,9 @@ public unsafe partial struct AgentActionMenu {
     [FieldOffset(0x40)] public uint ClassJobCategoryId;
     [FieldOffset(0x44)] public bool JobStoneEquipped;
     [FieldOffset(0x45)] public bool CrafterSoulEquipped;
-
+    [FieldOffset(0x48)] public uint SelectedActionList;
+    [FieldOffset(0x4C)] public uint MainCommandSelectedSubcategory;
+    [FieldOffset(0x50)] public uint OrdersSelectedSubcategory;
     [FieldOffset(0x54)] public int Flags;
 
     [FieldOffset(0x5C)] public bool CompactView;

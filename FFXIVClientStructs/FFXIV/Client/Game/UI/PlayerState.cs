@@ -278,6 +278,10 @@ public unsafe partial struct PlayerState {
     /// <returns> The 0-based value of the pose. </returns>
     public byte CurrentPose(EmoteController.PoseType pose) => !Enum.IsDefined(pose) ? (byte)0 : SelectedPoses[(int)pose];
 
+    /// <summary> Get the level of a specific job. </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 0D ?? ?? ?? ?? 4C 8D 3D")]
+    public partial short GetClassJobLevel(uint classJobId, bool shouldGetSynced);
+
     #region Unlocks
 
     /// <summary>

@@ -102,5 +102,6 @@ public unsafe partial struct MacroDecoder {
 // |   100 | Integer              | LogSetRoleColor 1: LogColorOtherClass       |
 // |   101 | Integer              | LogSetRoleColor 2: LogColorOtherClass       |
 // |   102 | Integer              | Has Login Security Token                    |
+// |   104 | Integer              | Is Pad Mouse Mode Enabled                   |
 // |   107 | Integer              | Occult Crescent Support Job Level           |
 // |-------|----------------------|---------------------------------------------|
