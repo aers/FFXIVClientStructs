@@ -56,6 +56,12 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? EB 7A 83 F8 04")]
     public partial int MoveItemSlot(InventoryType srcContainer, ushort srcSlot, InventoryType dstContainer, ushort dstSlot, byte unk = 0);
 
+    [MemberFunction("40 55 53 56 57 41 55 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 8D B2")]
+    public partial int SplitItem(InventoryType container, ushort slot, int quantity);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8B ?? ?? ?? ?? 48 8B 11")]
+    public partial int DiscardItem(InventoryType container, ushort slot);
+
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 7F 66")]
     private partial uint GetEquippedItemIdForSlot(int slotId);
 
