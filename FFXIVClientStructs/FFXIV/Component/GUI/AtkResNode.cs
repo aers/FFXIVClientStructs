@@ -123,7 +123,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 55 48")]
     public partial AtkComponentRadioButton* GetAsAtkComponentRadioButton();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 55 D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D5 48 89 87")]
     public partial AtkComponentGaugeBar* GetAsAtkComponentGaugeBar();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 4C 3D 80")]
