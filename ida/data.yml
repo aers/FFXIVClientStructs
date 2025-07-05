@@ -4132,9 +4132,14 @@ classes:
     vtbls:
       - ea: 0x141FEA2B0
     funcs:
-      0x140639470: Append
+      0x140639370: ctor
+      0x1406393B0: Clear
+      0x1406393E0: GetAtIndex
+      0x140639440: Append
+      0x140639470: Prepend
       0x1406394D0: Remove
       0x140639570: InsertAfter
+      0x140639670: OrderBy
   Component::GUI::AtkUnitManager:
     vtbls:
       - ea: 0x141FEA2B8
@@ -4151,6 +4156,7 @@ classes:
       0x14019C670: Finalizer
       0x140639970: ctor
       0x14063B1B0: Draw
+      0x14063B900: SetAddonDepthLayer
       0x14063C0F0: GetAddonById
       0x14063C150: GetAddonByName
       0x14063C2B0: GetAddonByNode
@@ -7178,6 +7184,7 @@ classes:
       24: GetRootNode
       27: GetWindowBounds
       30: GetRootBounds
+      31: SetDepthLayer
       32: ShouldAllowCursorFocus
       35: GetUnitBaseForFocus
       37: Focus
