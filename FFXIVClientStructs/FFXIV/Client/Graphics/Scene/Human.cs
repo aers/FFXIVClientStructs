@@ -35,17 +35,21 @@ public unsafe partial struct Human {
     [FieldOffset(0xAA6)] public ushort TailEarId; // tXXXX/zXXXX(viera)
     [FieldOffset(0xAA8)] public ushort FurId;
 
-    [FieldOffset(0xAF8), CExportIgnore] private nint _slotDecalBase;
-    [FieldOffset(0xAF8)] public TextureResourceHandle* HeadDecal;
-    [FieldOffset(0xB00)] public TextureResourceHandle* TopDecal;
-    [FieldOffset(0xB08)] public TextureResourceHandle* ArmsDecal;
-    [FieldOffset(0xB10)] public TextureResourceHandle* LegsDecal;
-    [FieldOffset(0xB18)] public TextureResourceHandle* FeetDecal;
-    [FieldOffset(0xB20)] public TextureResourceHandle* EarDecal;
-    [FieldOffset(0xB28)] public TextureResourceHandle* NeckDecal;
-    [FieldOffset(0xB30)] public TextureResourceHandle* WristDecal;
-    [FieldOffset(0xB38)] public TextureResourceHandle* RFingerDecal;
-    [FieldOffset(0xB40)] public TextureResourceHandle* LFingerDecal;
+    /// <remarks>
+    /// | Type    | Index |
+    /// | ------- | ----- |
+    /// | Head    | 0     |
+    /// | Top     | 1     |
+    /// | Arms    | 2     |
+    /// | Legs    | 3     |
+    /// | Feet    | 4     |
+    /// | Ear     | 5     |
+    /// | Neck    | 6     |
+    /// | Wrist   | 7     |
+    /// | RFinger | 8     |
+    /// | LFinger | 9     |
+    /// </remarks>
+    [FieldOffset(0xAF8), FixedSizeArray] internal FixedSizeArray10<Pointer<MaterialResourceHandle>> _slotDecals;
 
     /// <remarks>
     /// | Type | Index |
@@ -58,15 +62,6 @@ public unsafe partial struct Human {
     /// </remarks>
     [FieldOffset(0xB48), FixedSizeArray] internal FixedSizeArray5<Pointer<MaterialResourceHandle>> _slotSkinMaterials;
 
-
-    public ref TextureResourceHandle* SlotDecal(int slot) {
-        if (slot is < 0 or > 9)
-            throw new ArgumentOutOfRangeException(nameof(slot));
-        return ref ((TextureResourceHandle**)Unsafe.AsPointer(ref _slotDecalBase))[slot];
-    }
-
-    public Span<Pointer<TextureResourceHandle>> SlotDecalsSpan
-        => new(Unsafe.AsPointer(ref _slotDecalBase), 10);
 
     [FieldOffset(0xBF0)] public ConstantBuffer* CustomizeParameterCBuffer;
     [FieldOffset(0xBF8)] public ConstantBuffer* DecalColorCBuffer;
