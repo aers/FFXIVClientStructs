@@ -152,6 +152,9 @@ public unsafe partial struct CharacterBase {
     [VirtualFunction(90)]
     public partial CStringPointer ResolveMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex, byte* mtrlFileName);
 
+    [VirtualFunction(91)]
+    public partial CStringPointer ResolveSkinMtrlPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
+
     [VirtualFunction(92)]
     public partial CStringPointer ResolveDecalPath(byte* pathBuffer, nuint pathBufferSize, uint slotIndex);
 
@@ -216,6 +219,11 @@ public unsafe partial struct CharacterBase {
         fixed (byte* pMtrlFileName = mtrlFileName)
         fixed (byte* pBuffer = pathBuffer)
             return ResolveMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex, pMtrlFileName);
+    }
+
+    public ReadOnlySpan<byte> ResolveSkinMtrlPath(Span<byte> pathBuffer, uint slotIndex) {
+        fixed (byte* pBuffer = pathBuffer)
+            return ResolveSkinMtrlPath(pBuffer, (nuint)pathBuffer.Length, slotIndex);
     }
 
     public ReadOnlySpan<byte> ResolveDecalPath(Span<byte> pathBuffer, uint slotIndex) {
@@ -302,6 +310,11 @@ public unsafe partial struct CharacterBase {
 
         Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
         return Encoding.UTF8.GetString(ResolveMtrlPath(pathBuffer, slotIndex, mtrlFileNameBytes));
+    }
+
+    public string ResolveSkinMtrlPath(uint slotIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveSkinMtrlPath(pathBuffer, slotIndex));
     }
 
     public string ResolveDecalPath(uint slotIndex) {

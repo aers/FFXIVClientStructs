@@ -47,6 +47,17 @@ public unsafe partial struct Human {
     [FieldOffset(0xB38)] public TextureResourceHandle* RFingerDecal;
     [FieldOffset(0xB40)] public TextureResourceHandle* LFingerDecal;
 
+    /// <remarks>
+    /// | Type | Index |
+    /// | ---- | ----- |
+    /// | Head | 0     |
+    /// | Top  | 1     |
+    /// | Arms | 2     |
+    /// | Legs | 3     |
+    /// | Feet | 4     |
+    /// </remarks>
+    [FieldOffset(0xB48), FixedSizeArray] internal FixedSizeArray5<Pointer<MaterialResourceHandle>> _slotSkinMaterials;
+
 
     public ref TextureResourceHandle* SlotDecal(int slot) {
         if (slot is < 0 or > 9)
