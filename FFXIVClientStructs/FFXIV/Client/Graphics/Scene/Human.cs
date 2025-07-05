@@ -49,14 +49,14 @@ public unsafe partial struct Human {
 
     /// <remarks>
     /// | Type | Index |
-    /// | --- | --- |
-    /// | Head | 0 |
-    /// | Top | 1 |
-    /// | Arms | 2 |
-    /// | Legs | 3 |
-    /// | Feet | 4 |
+    /// | ---- | ----- |
+    /// | Head | 0     |
+    /// | Top  | 1     |
+    /// | Arms | 2     |
+    /// | Legs | 3     |
+    /// | Feet | 4     |
     /// </remarks>
-    [FieldOffset(0xB48), FixedSizeArray] internal FixedSizeArray5<Pointer<MaterialResourceHandle>> slotSkinMaterials;
+    [FieldOffset(0xB48), FixedSizeArray] internal FixedSizeArray5<Pointer<MaterialResourceHandle>> _slotSkinMaterials;
 
 
     public ref TextureResourceHandle* SlotDecal(int slot) {
