@@ -49,7 +49,7 @@ public unsafe partial struct Human {
     /// | RFinger | 8     |
     /// | LFinger | 9     |
     /// </remarks>
-    [FieldOffset(0xAF8), FixedSizeArray] internal FixedSizeArray10<Pointer<MaterialResourceHandle>> _slotDecals;
+    [FieldOffset(0xAF8), FixedSizeArray] internal FixedSizeArray10<Pointer<TextureResourceHandle>> _slotDecals;
     [FieldOffset(0xAF8), Obsolete("Use SlotDecals[0] instead.", true)] public TextureResourceHandle* HeadDecal;
     [FieldOffset(0xB00), Obsolete("Use SlotDecals[1] instead.", true)] public TextureResourceHandle* TopDecal;
     [FieldOffset(0xB08), Obsolete("Use SlotDecals[2] instead.", true)] public TextureResourceHandle* ArmsDecal;
