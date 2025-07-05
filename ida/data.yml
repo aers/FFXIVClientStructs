@@ -7184,6 +7184,7 @@ classes:
       24: GetRootNode
       27: GetWindowBounds
       30: GetRootBounds
+      31: SetDepthLayer
       32: ShouldAllowCursorFocus
       35: GetUnitBaseForFocus
       37: Focus

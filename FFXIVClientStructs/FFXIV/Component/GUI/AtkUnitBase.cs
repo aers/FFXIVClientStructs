@@ -156,7 +156,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
 
-    public uint DepthLayer => (Flags198 >> 16) & 0xF;
+    public uint DepthLayer {
+        get => (Flags198 >> 16) & 0xF;
+        set => SetDepthLayer(value);
+    }
 
     public bool IsVisible {
         get => (Flags198 & 0x200000) != 0;
@@ -325,6 +328,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [VirtualFunction(30)]
     public partial void GetRootBounds(Bounds* outBounds);
+
+    [VirtualFunction(31)]
+    public partial bool SetDepthLayer(uint depthLayerIndex);
 
     [VirtualFunction(32)]
     public partial bool ShouldAllowCursorFocus();
