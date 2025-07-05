@@ -47,12 +47,16 @@ public unsafe partial struct Human {
     [FieldOffset(0xB38)] public TextureResourceHandle* RFingerDecal;
     [FieldOffset(0xB40)] public TextureResourceHandle* LFingerDecal;
 
-    [FieldOffset(0xB48), CExportIgnore] private nint _slotSkinMaterialBase;
-    [FieldOffset(0xB48)] public MaterialResourceHandle* HeadSkinMaterial;
-    [FieldOffset(0xB50)] public MaterialResourceHandle* TopSkinMaterial;
-    [FieldOffset(0xB58)] public MaterialResourceHandle* ArmsSkinMaterial;
-    [FieldOffset(0xB60)] public MaterialResourceHandle* LegsSkinMaterial;
-    [FieldOffset(0xB68)] public MaterialResourceHandle* FeetSkinMaterial;
+    /// <remarks>
+    /// | Type | Index |
+    /// | --- | --- |
+    /// | Head | 0 |
+    /// | Top | 1 |
+    /// | Arms | 2 |
+    /// | Legs | 3 |
+    /// | Feet | 4 |
+    /// </remarks>
+    [FieldOffset(0xB48), FixedSizeArray] internal FixedSizeArray5<Pointer<MaterialResourceHandle>> slotSkinMaterials;
 
 
     public ref TextureResourceHandle* SlotDecal(int slot) {
@@ -61,17 +65,8 @@ public unsafe partial struct Human {
         return ref ((TextureResourceHandle**)Unsafe.AsPointer(ref _slotDecalBase))[slot];
     }
 
-    public ref MaterialResourceHandle* SlotSkinMaterial(int slot) {
-        if (slot is < 0 or > 4)
-            throw new ArgumentOutOfRangeException(nameof(slot));
-        return ref ((MaterialResourceHandle**)Unsafe.AsPointer(ref _slotSkinMaterialBase))[slot];
-    }
-
     public Span<Pointer<TextureResourceHandle>> SlotDecalsSpan
         => new(Unsafe.AsPointer(ref _slotDecalBase), 10);
-
-    public Span<Pointer<MaterialResourceHandle>> SlotSkinMaterialsSpan
-        => new(Unsafe.AsPointer(ref _slotSkinMaterialBase), 5);
 
     [FieldOffset(0xBF0)] public ConstantBuffer* CustomizeParameterCBuffer;
     [FieldOffset(0xBF8)] public ConstantBuffer* DecalColorCBuffer;
