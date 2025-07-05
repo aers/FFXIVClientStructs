@@ -242,6 +242,8 @@ public sealed partial class InteropGenerator {
 
         ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(methodSymbol);
 
+        CExporterExcelInfo? cExporterExcelInfo = ParseCExporterExcelInfo(methodSymbol);
+
         methodInfo =
             new MethodInfo(
                 methodSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
@@ -250,17 +252,26 @@ public sealed partial class InteropGenerator {
                 constraints,
                 methodSymbol.IsStatic,
                 methodSymbol.Parameters.Select(ParseParameter).ToImmutableArray(),
-                obsoleteInfo
+                obsoleteInfo,
+                cExporterExcelInfo
             );
 
         return true;
     }
 
-    private static ParameterInfo ParseParameter(IParameterSymbol parameterSymbol) => new(
-        parameterSymbol.Name,
-        parameterSymbol.Type.GetFullyQualifiedName(),
-        parameterSymbol.GetDefaultValueString(),
-        parameterSymbol.RefKind);
+    private static ParameterInfo ParseParameter(IParameterSymbol parameterSymbol) {
+        CExporterExcelInfo? cExporterExcelInfo = ParseCExporterExcelInfo(parameterSymbol);
+
+        CExporterTypeForceInfo? cExporterTypeForceInfo = ParseCExporterTypeForceInfo(parameterSymbol);
+
+        return new ParameterInfo(
+            parameterSymbol.Name,
+            parameterSymbol.Type.GetFullyQualifiedName(),
+            parameterSymbol.GetDefaultValueString(),
+            parameterSymbol.RefKind,
+            cExporterExcelInfo,
+            cExporterTypeForceInfo);
+    }
 
     private static void ParseFields(INamedTypeSymbol structSymbol, CancellationToken token, bool isInherited,
         out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<FieldInfo> publicFields) {
@@ -363,5 +374,21 @@ public sealed partial class InteropGenerator {
             isError = isErrorArgument.Value;
 
         return new ObsoleteInfo(message, isError);
+    }
+
+    private static CExporterExcelInfo? ParseCExporterExcelInfo(ISymbol symbol) {
+        if (!symbol.TryGetAttributeWithFullyQualifiedMetadataName("FFXIVClientStructs.Attributes.CExporterExcelAttribute", out AttributeData? cExporterExcelAttributeData) ||
+            !cExporterExcelAttributeData.TryGetConstructorArgument(0, out string? sheetName))
+            return null;
+
+        return new CExporterExcelInfo(sheetName);
+    }
+
+    private static CExporterTypeForceInfo? ParseCExporterTypeForceInfo(ISymbol symbol) {
+        if (!symbol.TryGetAttributeWithFullyQualifiedMetadataName("FFXIVClientStructs.Attributes.CExporterTypeForceAttribute", out AttributeData? cExporterTypeForceAttributeData) ||
+            !cExporterTypeForceAttributeData.TryGetConstructorArgument(0, out string? typeName))
+            return null;
+
+        return new CExporterTypeForceInfo(typeName);
     }
 }
