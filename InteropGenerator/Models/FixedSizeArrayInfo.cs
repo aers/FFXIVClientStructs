@@ -1,3 +1,5 @@
+using InteropGenerator.Helpers;
+
 namespace InteropGenerator.Models;
 
 internal sealed record FixedSizeArrayInfo(
@@ -5,7 +7,7 @@ internal sealed record FixedSizeArrayInfo(
     string Type,
     int Size,
     bool IsString,
-    ObsoleteInfo? ObsoleteInfo) {
+    EquatableArray<string> InheritableAttributes) {
     public string GetPublicFieldName() =>
         // drop _, capitalize first letter
         // _someFieldName => SomeFieldName

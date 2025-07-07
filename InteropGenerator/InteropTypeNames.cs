@@ -13,5 +13,7 @@ public static class InteropTypeNames {
     public const string FixedSizeArrayAttribute = AttributeNamespace + ".FixedSizeArrayAttribute";
     public const string InheritsAttribute = AttributeNamespace + ".InheritsAttribute`1";
 
+    public static HashSet<string> UninheritableAttributes = [MemberFunctionAttribute, VirtualFunctionAttribute, StaticAddressAttribute, GenerateStringOverloads, FixedSizeArrayAttribute, "System.Runtime.InteropServices.FieldOffsetAttribute"]; 
+
     public const string CStringPointer = "InteropGenerator.Runtime.CStringPointer";
 }
