@@ -8,12 +8,12 @@ public static class InteropTypeNames {
     public const string VirtualFunctionAttribute = AttributeNamespace + ".VirtualFunctionAttribute";
     public const string StaticAddressAttribute = AttributeNamespace + ".StaticAddressAttribute";
     public const string VirtualTableAttribute = AttributeNamespace + ".VirtualTableAttribute";
-    public const string GenerateStringOverloads = AttributeNamespace + ".GenerateStringOverloadsAttribute";
-    public const string StringIgnore = AttributeNamespace + ".StringIgnoreAttribute";
+    public const string GenerateStringOverloadsAttribute = AttributeNamespace + ".GenerateStringOverloadsAttribute";
+    public const string StringIgnoreAttribute = AttributeNamespace + ".StringIgnoreAttribute";
     public const string FixedSizeArrayAttribute = AttributeNamespace + ".FixedSizeArrayAttribute";
     public const string InheritsAttribute = AttributeNamespace + ".InheritsAttribute`1";
 
-    public static HashSet<string> UninheritableAttributes = [MemberFunctionAttribute, VirtualFunctionAttribute, StaticAddressAttribute, GenerateStringOverloads, FixedSizeArrayAttribute, "System.Runtime.InteropServices.FieldOffsetAttribute"]; 
-
     public const string CStringPointer = "InteropGenerator.Runtime.CStringPointer";
+
+    public static HashSet<string> UninheritableAttributes = [MemberFunctionAttribute, VirtualFunctionAttribute, StaticAddressAttribute, GenerateStringOverloadsAttribute, StringIgnoreAttribute, FixedSizeArrayAttribute, "System.Runtime.InteropServices.FieldOffsetAttribute"];
 }

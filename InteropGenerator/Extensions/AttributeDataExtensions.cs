@@ -44,7 +44,8 @@ public static class AttributeDataExtensions {
     }
 
     /// <summary>
-    ///     Tries to get a multi-value constructor argument at a given index from the input <see cref="AttributeData" /> instance.
+    ///     Tries to get a multi-value constructor argument at a given index from the input <see cref="AttributeData" />
+    ///     instance.
     /// </summary>
     /// <typeparam name="T">The type of constructor argument to retrieve.</typeparam>
     /// <param name="attributeData">The target <see cref="AttributeData" /> instance to get the argument from.</param>

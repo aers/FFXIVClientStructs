@@ -10,9 +10,9 @@ namespace InteropGenerator.Extensions;
 /// </summary>
 // ReSharper disable once InconsistentNaming
 public static class ISymbolExtensions {
-    public static string GetFullyQualifiedName(this ISymbol symbol) => symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
-    private static readonly SymbolDisplayFormat ContainingTypesAndNamespaces = new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+    private static readonly SymbolDisplayFormat ContainingTypesAndNamespaces = new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+    public static string GetFullyQualifiedName(this ISymbol symbol) => symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
     public static string GetNameWithContainingTypeAndNamespace(this ISymbol symbol) => symbol.ToDisplayString(ContainingTypesAndNamespaces);
 
     /// <summary>

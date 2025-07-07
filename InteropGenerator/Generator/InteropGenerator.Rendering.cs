@@ -146,7 +146,7 @@ public sealed partial class InteropGenerator {
     }
 
     private static void RenderDelegateTypes(StructInfo structInfo, IndentedTextWriter writer) {
-        writer.WriteLine($"public static partial class Delegates");
+        writer.WriteLine("public static partial class Delegates");
         using (writer.WriteBlock()) {
             foreach (MemberFunctionInfo memberFunctionInfo in structInfo.MemberFunctions) {
                 RenderDelegateTypeForMethod(structInfo.Name, memberFunctionInfo.MethodInfo, writer);
@@ -250,8 +250,9 @@ public sealed partial class InteropGenerator {
 
             // "string" overload
             if (stringOverloadInfo.InheritableAttributes is not null) {
-                foreach(string inheritedAttribute in stringOverloadInfo.InheritableAttributes)
+                foreach (string inheritedAttribute in stringOverloadInfo.InheritableAttributes) {
                     writer.WriteLine(inheritedAttribute);
+                }
             }
             writer.WriteLine(methodInfo.GetDeclarationStringForStringOverload("string", paramsToOverload));
             using (writer.WriteBlock()) {
@@ -280,8 +281,9 @@ public sealed partial class InteropGenerator {
             }
             // "ReadOnlySpan<byte>" overload
             if (stringOverloadInfo.InheritableAttributes is not null) {
-                foreach(string inheritedAttribute in stringOverloadInfo.InheritableAttributes)
+                foreach (string inheritedAttribute in stringOverloadInfo.InheritableAttributes) {
                     writer.WriteLine(inheritedAttribute);
+                }
             }
             writer.WriteLine(methodInfo.GetDeclarationStringForStringOverload("ReadOnlySpan<byte>", paramsToOverload));
             using (writer.WriteBlock()) {
@@ -304,14 +306,16 @@ public sealed partial class InteropGenerator {
     private static void RenderFixedSizeArrayAccessors(StructInfo structInfo, IndentedTextWriter writer) {
         foreach (FixedSizeArrayInfo fixedSizeArrayInfo in structInfo.FixedSizeArrays) {
             writer.WriteLine($"""/// <inheritdoc cref="{fixedSizeArrayInfo.FieldName}" />""");
-            foreach(string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes)
-               writer.WriteLine(inheritedAttribute);
+            foreach (string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes) {
+                writer.WriteLine(inheritedAttribute);
+            }
             // [UnscopedRef] public Span<T> FieldName => _fieldName;
             writer.WriteLine($"[global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {fixedSizeArrayInfo.FieldName};");
             if (fixedSizeArrayInfo.IsString) {
                 writer.WriteLine($"""/// <inheritdoc cref="{fixedSizeArrayInfo.FieldName}" />""");
-                foreach(string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes)
+                foreach (string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes) {
                     writer.WriteLine(inheritedAttribute);
+                }
                 writer.WriteLine($"public string {fixedSizeArrayInfo.GetPublicFieldName()}String");
                 using (writer.WriteBlock()) {
                     if (fixedSizeArrayInfo.Type == "byte") {

@@ -6,4 +6,3 @@ namespace InteropGenerator.Runtime;
 [JsonSourceGenerationOptions(WriteIndented = true)]
 internal partial class ResolverCacheSerializerContext : JsonSerializerContext {
 }
-

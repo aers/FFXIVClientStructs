@@ -124,7 +124,7 @@ public sealed partial class InteropGenerator {
 
             // check for one of the method body generation attributes
             if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.MemberFunctionAttribute, out AttributeData? mfAttribute)) {
-                ImmutableArray<ushort> relativeOffsets = ImmutableArray<ushort>.Empty;
+                var relativeOffsets = ImmutableArray<ushort>.Empty;
 
                 // get signature 
                 if (!mfAttribute.TryGetConstructorArgument(0, out string? signature))
@@ -196,7 +196,7 @@ public sealed partial class InteropGenerator {
             }
 
             // check for string overload, which could be applied to some of the above
-            if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.GenerateStringOverloads, out _)) {
+            if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.GenerateStringOverloadsAttribute, out _)) {
                 // retrieve method info if it wasn't previously retrieved
                 if (methodInfo is null) {
                     if (!TryParseMethod(methodSymbol, isInherited, token, out methodInfo))
@@ -206,7 +206,7 @@ public sealed partial class InteropGenerator {
                 using ImmutableArrayBuilder<string> ignoredParametersBuilder = new();
 
                 foreach (IParameterSymbol parameterSymbol in methodSymbol.Parameters) {
-                    if (parameterSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.StringIgnore, out _))
+                    if (parameterSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.StringIgnoreAttribute, out _))
                         ignoredParametersBuilder.Add(parameterSymbol.Name);
                 }
 
@@ -244,7 +244,7 @@ public sealed partial class InteropGenerator {
         }
 
         EquatableArray<string>? inheritableAttributes = isInherited ? ParseInheritedAttributes(methodSymbol, token) : null;
-        
+
         methodInfo =
             new MethodInfo(
                 methodSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
@@ -252,18 +252,19 @@ public sealed partial class InteropGenerator {
                 methodSymbol.ReturnType.GetFullyQualifiedName(),
                 constraints,
                 methodSymbol.IsStatic,
-                methodSymbol.Parameters.Select(ParseParameter).ToImmutableArray(),
+                methodSymbol.Parameters.Select(p => ParseParameter(p, isInherited, token)).ToImmutableArray(),
                 inheritableAttributes
             );
 
         return true;
     }
 
-    private static ParameterInfo ParseParameter(IParameterSymbol parameterSymbol) => new(
+    private static ParameterInfo ParseParameter(IParameterSymbol parameterSymbol, bool isInherited, CancellationToken token) => new(
         parameterSymbol.Name,
         parameterSymbol.Type.GetFullyQualifiedName(),
         parameterSymbol.GetDefaultValueString(),
-        parameterSymbol.RefKind);
+        parameterSymbol.RefKind,
+        isInherited ? ParseInheritedAttributes(parameterSymbol, token) : null);
 
     private static void ParseFields(INamedTypeSymbol structSymbol, CancellationToken token, bool isInherited,
         out EquatableArray<FixedSizeArrayInfo> fixedSizeArrays, out EquatableArray<FieldInfo> publicFields) {
@@ -331,7 +332,7 @@ public sealed partial class InteropGenerator {
 
         foreach (IPropertySymbol propertySymbol in structSymbol.GetMembers().OfType<IPropertySymbol>()) {
             if (propertySymbol.DeclaredAccessibility != Accessibility.Public ||
-               propertySymbol.IsIndexer) {
+                propertySymbol.IsIndexer) {
                 continue;
             }
 
@@ -356,20 +357,20 @@ public sealed partial class InteropGenerator {
 
     private static EquatableArray<string> ParseInheritedAttributes(ISymbol symbol, CancellationToken token) {
         ImmutableArrayBuilder<string> inheritedAttributes = new();
-      
+
         foreach (AttributeData attributeData in symbol.GetAttributes()) {
             // don't inherit our generator attributes
             if (attributeData.AttributeClass?.GetFullyQualifiedMetadataName() is not { } attributeName ||
                 InteropTypeNames.UninheritableAttributes.Contains(attributeName))
                 continue;
-            
+
             // rather than parse and store every argument to the attribute, get the attribute list from the original syntax
             // this can be slow, but there should be relatively few inherited attributes
             // the attribute name is still taken from the symbol so it uses the fully defined type name
             // this will break if an attribute argument has a type name in it and the type name is not in scope
             if (attributeData.ApplicationSyntaxReference is not { } syntaxReference)
                 continue;
-            
+
             SyntaxNode originalAttributeSyntax = syntaxReference.GetSyntax(token);
             AttributeArgumentListSyntax? argumentListSyntax = originalAttributeSyntax.ChildNodes().OfType<AttributeArgumentListSyntax>().FirstOrDefault();
 

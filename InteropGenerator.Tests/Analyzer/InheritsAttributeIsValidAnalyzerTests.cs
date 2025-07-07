@@ -15,7 +15,7 @@ public class InheritsAttributeIsValidAnalyzerTests {
                             public partial struct BaseStruct
                             {
                             }
-                            
+
                             [StructLayout(LayoutKind.Explicit, Size=8)]
                             [GenerateInterop]
                             [Inherits<BaseStruct>]

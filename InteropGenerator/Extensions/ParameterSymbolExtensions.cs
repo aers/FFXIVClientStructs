@@ -20,7 +20,7 @@ internal static class IParameterSymbolExtensions {
             return boolValue.ToLowercaseString();
 
         if (defaultValue is float floatValue)
-            return defaultValue.ToString() + "f";
+            return defaultValue + "f";
 
         return defaultValue.ToString();
     }

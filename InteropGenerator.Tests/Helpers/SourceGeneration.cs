@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace InteropGenerator.Tests.Helpers;
 
 internal static class SourceGeneration {

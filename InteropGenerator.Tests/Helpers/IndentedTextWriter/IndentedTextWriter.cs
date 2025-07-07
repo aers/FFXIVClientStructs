@@ -44,7 +44,8 @@ internal sealed class IndentedTextWriter : IDisposable {
     private string[] availableIndentations;
 
     /// <summary>
-    ///     The <see cref="InteropGenerator.Tests.Helpers.IndentedTextWriter.ImmutableArrayBuilder{T}" /> instance that text will be written to.
+    ///     The <see cref="InteropGenerator.Tests.Helpers.IndentedTextWriter.ImmutableArrayBuilder{T}" /> instance that text
+    ///     will be written to.
     /// </summary>
     private ImmutableArrayBuilder<char> builder;
 

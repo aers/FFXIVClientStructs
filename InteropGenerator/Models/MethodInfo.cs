@@ -44,7 +44,7 @@ internal sealed record MethodInfo(
 
     public string GetParameterTypesAndNamesString() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{p.Type} {p.Name}"));
 
-    private string GetParameterTypesAndNamesStringWithDefaults() => string.Join(", ", Parameters.Select(p => $"{p.RefKind.GetStringPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));
+    private string GetParameterTypesAndNamesStringWithDefaults() => string.Join(", ", Parameters.Select(p => $"{p.GetAttributeString()}{p.RefKind.GetStringPrefix()}{p.Type} {p.Name}{p.GetDefaultValue()}"));
 
 
     public string GetReturnString() => ReturnType == "void" ? "" : "return ";
