@@ -141,7 +141,7 @@ public sealed partial class InteropGenerator {
                         continue;
                 }
 
-                if (!TryParseMethod(methodSymbol, token, out methodInfo))
+                if (!TryParseMethod(methodSymbol, isInherited, token, out methodInfo))
                     continue;
 
                 MemberFunctionInfo memberFunctionInfo = new(
@@ -154,7 +154,7 @@ public sealed partial class InteropGenerator {
                     !vfAttribute.TryGetConstructorArgument(0, out uint? index))
                     continue; // ignore malformed attribute
 
-                if (!TryParseMethod(methodSymbol, token, out methodInfo))
+                if (!TryParseMethod(methodSymbol, isInherited, token, out methodInfo))
                     continue;
 
                 VirtualFunctionInfo virtualFunctionInfo = new(
@@ -179,7 +179,7 @@ public sealed partial class InteropGenerator {
                     continue;
                 }
 
-                if (!TryParseMethod(methodSymbol, token, out methodInfo))
+                if (!TryParseMethod(methodSymbol, isInherited, token, out methodInfo))
                     continue;
 
                 StaticAddressInfo staticAddressInfo = new(
@@ -189,7 +189,7 @@ public sealed partial class InteropGenerator {
 
                 staticAddressesBuilder.Add(staticAddressInfo);
             } else if (isInherited && methodSymbol.DeclaredAccessibility == Accessibility.Public && !methodSymbol.IsStatic) {
-                if (!TryParseMethod(methodSymbol, token, out methodInfo))
+                if (!TryParseMethod(methodSymbol, isInherited, token, out methodInfo))
                     continue;
 
                 extraPublicMethodsBuilder.Add(methodInfo);
@@ -199,7 +199,7 @@ public sealed partial class InteropGenerator {
             if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.GenerateStringOverloads, out _)) {
                 // retrieve method info if it wasn't previously retrieved
                 if (methodInfo is null) {
-                    if (!TryParseMethod(methodSymbol, token, out methodInfo))
+                    if (!TryParseMethod(methodSymbol, isInherited, token, out methodInfo))
                         continue;
                 }
 
@@ -210,9 +210,12 @@ public sealed partial class InteropGenerator {
                         ignoredParametersBuilder.Add(parameterSymbol.Name);
                 }
 
+                EquatableArray<string>? attributes = isInherited ? methodInfo.InheritableAttributes : ParseInheritedAttributes(methodSymbol, token);
+
                 StringOverloadInfo stringOverloadInfo = new(
                     methodInfo,
-                    ignoredParametersBuilder.ToImmutable());
+                    ignoredParametersBuilder.ToImmutable(),
+                    attributes);
 
                 stringOverloadsBuilder.Add(stringOverloadInfo);
 
@@ -227,7 +230,7 @@ public sealed partial class InteropGenerator {
         extraPublicMethods = extraPublicMethodsBuilder.ToImmutable();
     }
 
-    private static bool TryParseMethod(IMethodSymbol methodSymbol, CancellationToken token, [NotNullWhen(true)] out MethodInfo? methodInfo) {
+    private static bool TryParseMethod(IMethodSymbol methodSymbol, bool isInherited, CancellationToken token, [NotNullWhen(true)] out MethodInfo? methodInfo) {
         if (!methodSymbol.TryGetSyntaxNode(token, out MethodDeclarationSyntax? methodSyntax)) {
             methodInfo = null;
             return false; // unable to get method syntax
@@ -240,8 +243,8 @@ public sealed partial class InteropGenerator {
             constraints = string.Join("", symbolDisplayParts[1..]);
         }
 
-        ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(methodSymbol);
-
+        EquatableArray<string>? inheritableAttributes = isInherited ? ParseInheritedAttributes(methodSymbol, token) : null;
+        
         methodInfo =
             new MethodInfo(
                 methodSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
@@ -250,7 +253,7 @@ public sealed partial class InteropGenerator {
                 constraints,
                 methodSymbol.IsStatic,
                 methodSymbol.Parameters.Select(ParseParameter).ToImmutableArray(),
-                obsoleteInfo
+                inheritableAttributes
             );
 
         return true;
@@ -287,14 +290,14 @@ public sealed partial class InteropGenerator {
                 if (!fixedSizeArrayAttributeData.TryGetConstructorArgument(0, out bool? isString))
                     continue;
 
-                ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(fieldSymbol);
+                EquatableArray<string> inheritableAttributes = ParseInheritedAttributes(fieldSymbol, token);
 
                 FixedSizeArrayInfo fixedSizeArrayInfo = new(
                     fieldSymbol.Name,
                     fieldTypeSymbol.TypeArguments[0].GetFullyQualifiedName(),
                     size,
                     isString.Value,
-                    obsoleteInfo
+                    inheritableAttributes
                 );
 
                 fixedSizeArrayBuilder.Add(fixedSizeArrayInfo);
@@ -306,13 +309,13 @@ public sealed partial class InteropGenerator {
                 if (!fieldOffsetAttributeData.TryGetConstructorArgument(0, out int fieldOffset))
                     continue;
 
-                ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(fieldSymbol);
+                EquatableArray<string> inheritableAttributes = ParseInheritedAttributes(fieldSymbol, token);
 
                 FieldInfo fieldInfo = new(
                     fieldSymbol.Name,
                     fieldSymbol.Type.GetFullyQualifiedName(),
                     fieldOffset,
-                    obsoleteInfo);
+                    inheritableAttributes);
 
                 publicFieldBuilder.Add(fieldInfo);
             }
@@ -332,7 +335,7 @@ public sealed partial class InteropGenerator {
                 continue;
             }
 
-            ObsoleteInfo? obsoleteInfo = ParseObsoleteInfo(propertySymbol);
+            EquatableArray<string> inheritableAttributes = ParseInheritedAttributes(propertySymbol, token);
 
             PropertyInfo propertyInfo = new(
                 propertySymbol.Name,
@@ -340,7 +343,7 @@ public sealed partial class InteropGenerator {
                 propertySymbol.RefKind,
                 propertySymbol.GetMethod is not null,
                 propertySymbol.SetMethod is not null,
-                obsoleteInfo
+                inheritableAttributes
             );
 
             publicPropertiesBuilder.Add(propertyInfo);
@@ -351,17 +354,27 @@ public sealed partial class InteropGenerator {
         publicProperties = publicPropertiesBuilder.ToImmutable();
     }
 
-    private static ObsoleteInfo? ParseObsoleteInfo(ISymbol symbol) {
-        if (!symbol.TryGetAttributeWithFullyQualifiedMetadataName("System.ObsoleteAttribute", out AttributeData? obsoleteAttributeData) ||
-            !obsoleteAttributeData.TryGetConstructorArgument(0, out string? message))
-            return null;
+    private static EquatableArray<string> ParseInheritedAttributes(ISymbol symbol, CancellationToken token) {
+        ImmutableArrayBuilder<string> inheritedAttributes = new();
+      
+        foreach (AttributeData attributeData in symbol.GetAttributes()) {
+            // don't inherit our generator attributes
+            if (attributeData.AttributeClass?.GetFullyQualifiedMetadataName() is not { } attributeName ||
+                InteropTypeNames.UninheritableAttributes.Contains(attributeName))
+                continue;
+            
+            // rather than parse and store every argument to the attribute, get the attribute list from the original syntax
+            // this can be slow, but there should be relatively few inherited attributes
+            // the attribute name is still taken from the symbol so it uses the fully defined type name
+            // this will break if an attribute argument has a type name in it and the type name is not in scope
+            if (attributeData.ApplicationSyntaxReference is not { } syntaxReference)
+                continue;
+            
+            SyntaxNode originalAttributeSyntax = syntaxReference.GetSyntax(token);
+            AttributeArgumentListSyntax? argumentListSyntax = originalAttributeSyntax.ChildNodes().OfType<AttributeArgumentListSyntax>().FirstOrDefault();
 
-        var isError = false;
-
-        if (obsoleteAttributeData.ConstructorArguments.Length == 2 &&
-            obsoleteAttributeData.TryGetConstructorArgument(1, out bool? isErrorArgument))
-            isError = isErrorArgument.Value;
-
-        return new ObsoleteInfo(message, isError);
+            inheritedAttributes.Add(argumentListSyntax is not null ? $"[global::{attributeName}{argumentListSyntax.ToString()}]" : $"[global::{attributeName}]");
+        }
+        return inheritedAttributes.ToImmutable();
     }
 }

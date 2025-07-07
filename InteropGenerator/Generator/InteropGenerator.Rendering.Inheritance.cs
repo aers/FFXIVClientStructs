@@ -69,9 +69,8 @@ public sealed partial class InteropGenerator {
                 string adjustedFieldName = alreadyWrittenBases.Contains(inheritedStruct.FullyQualifiedMetadataName) ? $"{path.Replace(".", "_")}_{field.Name}" : field.Name;
                 writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{field.Name}" />""");
                 writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-                if (field.ObsoleteInfo is not null) {
-                    writer.WriteLine($"""[global::System.ObsoleteAttribute("{field.ObsoleteInfo.Message}", {field.ObsoleteInfo.IsError.ToLowercaseString()})]""");
-                }
+                foreach(string inheritedAttribute in field.InheritableAttributes)
+                    writer.WriteLine($"{inheritedAttribute}");
                 writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {field.Type} {adjustedFieldName};");
             }
             alreadyWrittenBases.Add(inheritedStruct.FullyQualifiedMetadataName);
@@ -173,8 +172,9 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
-            if (methodInfo.ObsoleteInfo is not null) {
-                writer.WriteLine($"""[global::System.ObsoleteAttribute("{methodInfo.ObsoleteInfo.Message}", {methodInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
+            if (methodInfo.InheritableAttributes is not null) {
+                foreach(string inheritedAttribute in methodInfo.InheritableAttributes)
+                    writer.WriteLine(inheritedAttribute);
             }
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
@@ -225,8 +225,9 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
-            if (methodInfo.ObsoleteInfo is not null) {
-                writer.WriteLine($"""[global::System.ObsoleteAttribute("{methodInfo.ObsoleteInfo.Message}", {methodInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
+            if (methodInfo.InheritableAttributes is not null) {
+                foreach(string inheritedAttribute in methodInfo.InheritableAttributes)
+                    writer.WriteLine(inheritedAttribute);
             }
             // function in table - call via table
             if (offset == 0) {
@@ -247,8 +248,9 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name.Replace('<', '{').Replace('>', '}')}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
-            if (methodInfo.ObsoleteInfo is not null) {
-                writer.WriteLine($"""[global::System.ObsoleteAttribute("{methodInfo.ObsoleteInfo.Message}", {methodInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
+            if (methodInfo.InheritableAttributes is not null) {
+                foreach(string inheritedAttribute in methodInfo.InheritableAttributes)
+                    writer.WriteLine(inheritedAttribute);
             }
             // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
             writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
@@ -259,9 +261,8 @@ public sealed partial class InteropGenerator {
         foreach (PropertyInfo propertyInfo in inheritedStruct.ExtraInheritedStructInfo!.PublicProperties) {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{propertyInfo.Name}" />""");
             writer.WriteLine($"""/// <remarks>Property inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-            if (propertyInfo.ObsoleteInfo is not null) {
-                writer.WriteLine($"""[global::System.ObsoleteAttribute("{propertyInfo.ObsoleteInfo.Message}", {propertyInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
-            }
+            foreach(string inheritedAttribute in propertyInfo.InheritableAttributes)
+                writer.WriteLine(inheritedAttribute);
             writer.WriteLine($"public {propertyInfo.RefKind.GetStringPrefix()}{propertyInfo.Type} {propertyInfo.Name}");
             using (writer.WriteBlock()) {
                 if (propertyInfo.Get) {
@@ -278,17 +279,15 @@ public sealed partial class InteropGenerator {
         foreach (FixedSizeArrayInfo fixedSizeArrayInfo in inheritedStruct.FixedSizeArrays) {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{fixedSizeArrayInfo.GetPublicFieldName()}" />""");
             writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-            if (fixedSizeArrayInfo.ObsoleteInfo is not null) {
-                writer.WriteLine($"""[global::System.ObsoleteAttribute("{fixedSizeArrayInfo.ObsoleteInfo.Message}", {fixedSizeArrayInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
-            }
+            foreach(string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes)
+                writer.WriteLine(inheritedAttribute);
             // [UnscopedRef] public Span<T> FieldName => Path.To.Parent_fieldName;
             writer.WriteLine($"[global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<{fixedSizeArrayInfo.Type}> {fixedSizeArrayInfo.GetPublicFieldName()} => {path}.{fixedSizeArrayInfo.FieldName};");
             if (fixedSizeArrayInfo.IsString) {
                 writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{fixedSizeArrayInfo.GetPublicFieldName()}" />""");
                 writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
-                if (fixedSizeArrayInfo.ObsoleteInfo is not null) {
-                    writer.WriteLine($"""[global::System.ObsoleteAttribute("{fixedSizeArrayInfo.ObsoleteInfo.Message}", {fixedSizeArrayInfo.ObsoleteInfo.IsError.ToLowercaseString()})]""");
-                }
+                foreach(string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes)
+                    writer.WriteLine(inheritedAttribute);
                 writer.WriteLine($"public string {fixedSizeArrayInfo.GetPublicFieldName()}String");
                 using (writer.WriteBlock()) {
                     if (fixedSizeArrayInfo.Type == "byte") {

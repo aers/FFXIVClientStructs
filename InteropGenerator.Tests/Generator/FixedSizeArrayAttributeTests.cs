@@ -52,7 +52,7 @@ public class FixedSizeArrayAttributeTests {
                               unsafe partial struct TestStruct
                               {
                                   /// <inheritdoc cref="_tenIntArray" />
-                                  [global::System.ObsoleteAttribute("This field is obsolete", false)]
+                                  [global::System.ObsoleteAttribute("This field is obsolete")]
                                   [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<int> TenIntArray => _tenIntArray;
                               }
                               """;
@@ -190,10 +190,10 @@ public class FixedSizeArrayAttributeTests {
                               unsafe partial struct TestStruct
                               {
                                   /// <inheritdoc cref="_testField" />
-                                  [global::System.ObsoleteAttribute("This field is obsolete", false)]
+                                  [global::System.ObsoleteAttribute("This field is obsolete")]
                                   [global::System.Diagnostics.CodeAnalysis.UnscopedRefAttribute] public Span<byte> TestField => _testField;
                                   /// <inheritdoc cref="_testField" />
-                                  [global::System.ObsoleteAttribute("This field is obsolete", false)]
+                                  [global::System.ObsoleteAttribute("This field is obsolete")]
                                   public string TestFieldString
                                   {
                                       get => global::System.Text.Encoding.UTF8.GetString(global::System.Runtime.InteropServices.MemoryMarshal.CreateReadOnlySpanFromNullTerminated((byte*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref _testField[0])));
