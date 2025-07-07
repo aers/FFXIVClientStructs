@@ -62149,6 +62149,144 @@ structs:
       name: this
     - type: unsigned __int64
       name: accountId
+- type: Client::UI::Agent::AgentPvpProfile
+  name: AgentPvpProfile
+  namespace: Client.UI.Agent
+  union: False
+  size: 1064
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: unsigned int
+    name: JobActionIds
+    offset: 44
+    size: 32
+    is_string: False
+  - type: unsigned int
+    name: ActionComboRouteId
+    offset: 172
+  - type: byte
+    name: JobActionIdCount
+    offset: 300
+  - type: byte
+    name: HasActionCombo
+    offset: 301
+  - type: byte
+    name: SelectedRoleActionIndex
+    offset: 344
+  - type: Client::System::String::Utf8String
+    name: JobName
+    offset: 512
+  - type: int
+    name: SelectedTab
+    offset: 720
+  - type: int
+    name: PvpRewardAddonId
+    offset: 744
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+    - type: byte
+      name: free
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentPvpProfile*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions: []
 - type: Client::UI::Agent::AgentQuestJournal
   name: AgentQuestJournal
   namespace: Client.UI.Agent
@@ -73044,7 +73182,7 @@ structs:
     parameters:
     - type: Component::GUI::AtkResNode*
       name: this
-  - signature: E8 ?? ?? ?? ?? 8D 55 D7
+  - signature: E8 ?? ?? ?? ?? 8B D5 48 89 87
     return_type: Component::GUI::AtkComponentGaugeBar*
     name: GetAsAtkComponentGaugeBar
     parameters:
@@ -91703,6 +91841,18 @@ structs:
       name: slotIndex
     - type: byte*
       name: mtrlFileName
+  - name: ResolveSkinMtrlPath
+    offset: 728
+    return_type: char*
+    parameters:
+    - type: Client::Graphics::Scene::CharacterBase*
+      name: this
+    - type: byte*
+      name: pathBuffer
+    - type: unsigned __int64
+      name: pathBufferSize
+    - type: unsigned int
+      name: slotIndex
   - name: ResolveDecalPath
     offset: 736
     return_type: char*
@@ -121542,6 +121692,18 @@ structs:
       name: slotIndex
     - type: byte*
       name: mtrlFileName
+  - name: ResolveSkinMtrlPath
+    offset: 728
+    return_type: char*
+    parameters:
+    - type: Client::Graphics::Scene::Demihuman*
+      name: this
+    - type: byte*
+      name: pathBuffer
+    - type: unsigned __int64
+      name: pathBufferSize
+    - type: unsigned int
+      name: slotIndex
   - name: ResolveDecalPath
     offset: 736
     return_type: char*
@@ -121798,6 +121960,18 @@ structs:
       name: slotIndex
     - type: byte*
       name: mtrlFileName
+  - name: ResolveSkinMtrlPath
+    offset: 728
+    return_type: char*
+    parameters:
+    - type: Client::Graphics::Scene::Monster*
+      name: this
+    - type: byte*
+      name: pathBuffer
+    - type: unsigned __int64
+      name: pathBufferSize
+    - type: unsigned int
+      name: slotIndex
   - name: ResolveDecalPath
     offset: 736
     return_type: char*
@@ -122078,6 +122252,18 @@ structs:
       name: slotIndex
     - type: byte*
       name: mtrlFileName
+  - name: ResolveSkinMtrlPath
+    offset: 728
+    return_type: char*
+    parameters:
+    - type: Client::Graphics::Scene::Weapon*
+      name: this
+    - type: byte*
+      name: pathBuffer
+    - type: unsigned __int64
+      name: pathBufferSize
+    - type: unsigned int
+      name: slotIndex
   - name: ResolveDecalPath
     offset: 736
     return_type: char*
@@ -140545,6 +140731,11 @@ structs:
   - type: Client::System::Resource::Handle::TextureResourceHandle*
     name: LFingerDecal
     offset: 2880
+  - type: Client::System::Resource::Handle::MaterialResourceHandle*
+    name: SlotSkinMaterials
+    offset: 2888
+    size: 5
+    is_string: False
   - type: Client::Graphics::Kernel::ConstantBuffer*
     name: CustomizeParameterCBuffer
     offset: 3056
@@ -140729,6 +140920,18 @@ structs:
       name: slotIndex
     - type: byte*
       name: mtrlFileName
+  - name: ResolveSkinMtrlPath
+    offset: 728
+    return_type: char*
+    parameters:
+    - type: Client::Graphics::Scene::Human*
+      name: this
+    - type: byte*
+      name: pathBuffer
+    - type: unsigned __int64
+      name: pathBufferSize
+    - type: unsigned int
+      name: slotIndex
   - name: ResolveDecalPath
     offset: 736
     return_type: char*
