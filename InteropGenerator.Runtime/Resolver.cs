@@ -205,7 +205,7 @@ public sealed class Resolver {
                 }
             }
         }
-    outLoop: ;
+outLoop:;
 
         SaveCache();
     }

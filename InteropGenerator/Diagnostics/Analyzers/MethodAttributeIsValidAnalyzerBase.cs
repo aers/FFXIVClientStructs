@@ -25,48 +25,48 @@ public abstract class MethodAttributeIsValidAnalyzerBase(
                 return;
 
             compilationStartAnalysisContext.RegisterSymbolAction(symbolContext => {
-                    if (symbolContext.Symbol is not IMethodSymbol methodSymbol)
-                        return;
+                if (symbolContext.Symbol is not IMethodSymbol methodSymbol)
+                    return;
 
-                    if (!methodSymbol.TryGetAttributeWithType(attributeSymbol, out AttributeData? attributeData))
-                        return;
+                if (!methodSymbol.TryGetAttributeWithType(attributeSymbol, out AttributeData? attributeData))
+                    return;
 
-                    // validate method is partial
-                    if (!methodSymbol.TryGetSyntaxNode(symbolContext.CancellationToken, out MethodDeclarationSyntax? methodSyntax))
-                        return;
+                // validate method is partial
+                if (!methodSymbol.TryGetSyntaxNode(symbolContext.CancellationToken, out MethodDeclarationSyntax? methodSyntax))
+                    return;
 
-                    if (!methodSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
+                if (!methodSyntax.HasModifier(SyntaxKind.PartialKeyword)) {
+                    symbolContext.ReportDiagnostic(Diagnostic.Create(
+                        GenerationRequiresPartialMethod,
+                        methodSyntax.GetLocation(),
+                        methodSymbol.Name));
+                }
+
+
+                // validate parameters are unmanaged types
+                foreach (IParameterSymbol paramSymbol in methodSymbol.Parameters) {
+                    if (!paramSymbol.Type.IsUnmanagedType) {
                         symbolContext.ReportDiagnostic(Diagnostic.Create(
-                            GenerationRequiresPartialMethod,
-                            methodSyntax.GetLocation(),
-                            methodSymbol.Name));
-                    }
-
-
-                    // validate parameters are unmanaged types
-                    foreach (IParameterSymbol paramSymbol in methodSymbol.Parameters) {
-                        if (!paramSymbol.Type.IsUnmanagedType) {
-                            symbolContext.ReportDiagnostic(Diagnostic.Create(
-                                MethodParameterMustBeUnmanaged,
-                                paramSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation(),
-                                paramSymbol.Name,
-                                methodSymbol.Name,
-                                paramSymbol.Type.Name));
-                        }
-                    }
-
-                    // validate return value is unmanaged type
-                    if (methodSymbol is { ReturnsVoid: false, ReturnType.IsUnmanagedType: false }
-                        or { ReturnType: IPointerTypeSymbol { PointedAtType.IsUnmanagedType: false } }) {
-                        symbolContext.ReportDiagnostic(Diagnostic.Create(
-                            MethodReturnMustBeUnmanaged,
-                            methodSyntax.GetLocation(),
+                            MethodParameterMustBeUnmanaged,
+                            paramSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation(),
+                            paramSymbol.Name,
                             methodSymbol.Name,
-                            methodSymbol.ReturnType.Name));
+                            paramSymbol.Type.Name));
                     }
+                }
 
-                    ValidateSpecific(symbolContext, methodSymbol, methodSyntax, attributeData);
-                },
+                // validate return value is unmanaged type
+                if (methodSymbol is { ReturnsVoid: false, ReturnType.IsUnmanagedType: false }
+                    or { ReturnType: IPointerTypeSymbol { PointedAtType.IsUnmanagedType: false } }) {
+                    symbolContext.ReportDiagnostic(Diagnostic.Create(
+                        MethodReturnMustBeUnmanaged,
+                        methodSyntax.GetLocation(),
+                        methodSymbol.Name,
+                        methodSymbol.ReturnType.Name));
+                }
+
+                ValidateSpecific(symbolContext, methodSymbol, methodSyntax, attributeData);
+            },
                 SymbolKind.Method);
         });
     }
