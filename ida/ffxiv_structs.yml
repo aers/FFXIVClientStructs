@@ -39774,7 +39774,7 @@ structs:
     parameters:
     - type: Common::Component::Excel::ExcelModule*
       name: this
-    - type: unsigned int
+    - type: Component::Exd::SheetsEnum
       name: sheetIndex
   - name: GetSheetByName
     offset: 16
