@@ -144,7 +144,7 @@ public unsafe partial struct RaptureTextModule {
     public partial CStringPointer FormatAddonText2IntIntUIntUIntUIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam1, uint uintParam2, uint uintParam3, uint uintParam4);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 64 24 ?? 4C 8B 74 24 ?? 48 8B 9C 24 ?? ?? ?? ??")]
-    public partial CStringPointer FormatAddonText2IntIntUIntUIntUIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam1, uint uintParam2, uint uintParam3, uint uintParam4, uint uintParam5);
+    public partial CStringPointer FormatAddonText2IntIntUIntUIntUIntUIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam1, uint uintParam2, uint uintParam3, uint uintParam4, uint uintParam5);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 41 41 8B F7")]
     public partial CStringPointer FormatAddonText2IntString(uint addonId, int intParam, CStringPointer strParam);
