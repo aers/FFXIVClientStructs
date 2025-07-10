@@ -72,6 +72,9 @@ public unsafe partial struct AtkUnitManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B E8 75 0E")]
     public partial AtkUnitBase* GetAddonByNode(AtkResNode* node);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 40 B5 ?? 48 83 C3")]
+    public partial bool SetAddonDepthLayer(ushort id, uint depthLayerIndex);
+
     public enum AddonStatus {
         NotLoaded = 0,
 
