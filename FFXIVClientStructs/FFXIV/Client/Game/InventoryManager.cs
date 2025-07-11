@@ -118,6 +118,9 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 40 88 71")]
     public partial void SetRetainerMarketPrice(short slot, uint price);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4A 8B B4 3D")]
+    public partial void SetSlotBlocked(InventoryType type, short slot);
+
     [MemberFunction("E8 ?? ?? ?? ?? 39 6B 38")]
     public partial void SetSlotUnblocked(InventoryType type, short slot);
 

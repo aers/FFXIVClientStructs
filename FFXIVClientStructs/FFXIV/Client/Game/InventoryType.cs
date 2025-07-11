@@ -15,7 +15,8 @@ public enum InventoryType : uint {
     KeyItems = 2004,
     HandIn = 2005,
     Unknown2006 = 2006,
-    DamagedGear = 2007,
+    [Obsolete("Renamed to BlockedItems")] DamagedGear = 2007,
+    BlockedItems = 2007,
     Unknown2008 = 2008,
     Examine = 2009,
     Reclaim = 2010, // LegacyItemStorage, HousingWithdrawStorage
