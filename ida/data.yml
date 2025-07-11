@@ -1514,6 +1514,9 @@ classes:
       19: SetIsHighQuality
       20: IsHighQuality2
       21: SetIsHighQuality2
+      22: IsCollectable
+      23: GetCollectability
+      24: SetCollectability
     funcs:
       0x14019FEB0: GetCondition
       0x14019FF50: GetGlamourId

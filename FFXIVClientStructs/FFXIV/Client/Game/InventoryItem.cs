@@ -109,6 +109,15 @@ public unsafe partial struct InventoryItem : ICreatable {
     //[VirtualFunction(21)]
     //public partial void SetIsHighQuality2(bool isHighQuality);
 
+    [VirtualFunction(22)]
+    public partial bool IsCollectable();
+
+    [VirtualFunction(23)]
+    public partial ushort GetCollectability();
+
+    [VirtualFunction(24)]
+    public partial void SetCollectability(ushort value);
+
     /// <summary>
     /// Resolves a symbolic InventoryItem, returning a pointer to the linked InventoryItem or to itself if not symbolic.
     /// </summary>
