@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
@@ -29,6 +30,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     [FieldOffset(0x32), FixedSizeArray] internal FixedSizeArray5<byte> _materiaGrades;
     [FieldOffset(0x37), FixedSizeArray] internal FixedSizeArray2<byte> _stains;
     [FieldOffset(0x3C)] public uint GlamourId;
+    [FieldOffset(0x40)] public EventId EventId;
 
     [Flags]
     public enum ItemFlags : byte {
