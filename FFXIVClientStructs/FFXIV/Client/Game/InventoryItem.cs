@@ -118,6 +118,10 @@ public unsafe partial struct InventoryItem : ICreatable {
     [VirtualFunction(24)]
     public partial void SetCollectability(ushort value);
 
+    /// <remarks> Calculated as: 100 * <see cref="Condition"/> / 30000 </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 C0 41 8D 57")]
+    public partial byte GetConditionPercentage();
+
     [MemberFunction("E8 ?? ?? ?? ?? 80 7D ?? ?? 75 ?? 8B 5D")]
     public partial void SetLinkedItem(InventoryType type, ushort slot);
 
