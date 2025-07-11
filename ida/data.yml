@@ -1485,6 +1485,7 @@ classes:
       0x140832FC0: GetRacingChocoboBeedingCapacityFromItem
       0x1409822F0: GetSpecialItemId #static
       0x140831090: GetLimitedTomestoneWeeklyLimit #static
+      0x140820CD0: SetSlotBlocked
       0x140820D80: SetSlotUnblocked
       0x14081DCA0: SplitItem
       0x14081F4D0: DiscardItem
