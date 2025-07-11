@@ -1525,6 +1525,7 @@ classes:
       0x1407D51A0: GetMateriaGrade
       0x140816740: ctor
       0x140816790: Finalize
+      0x1408169F0: SetLinkedItem
       0x140816B10: GetLinkedItem
       0x140817030: GetConditionPercentage
       0x140817070: GetStain

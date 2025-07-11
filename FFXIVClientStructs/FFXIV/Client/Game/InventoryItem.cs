@@ -118,6 +118,9 @@ public unsafe partial struct InventoryItem : ICreatable {
     [VirtualFunction(24)]
     public partial void SetCollectability(ushort value);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7D ?? ?? 75 ?? 8B 5D")]
+    public partial void SetLinkedItem(InventoryType type, ushort slot);
+
     /// <summary>
     /// Resolves a symbolic InventoryItem, returning a pointer to the linked InventoryItem or to itself if not symbolic.
     /// </summary>
