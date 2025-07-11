@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::InventoryItem
-[GenerateInterop]
+[GenerateInterop(isInherited: true)]
 [VirtualTable("66 89 51 0C 48 8D 05", 7)]
 [StructLayout(LayoutKind.Explicit, Size = 0x48)]
 public unsafe partial struct InventoryItem : ICreatable {

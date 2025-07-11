@@ -10143,6 +10143,10 @@ classes:
 #fail       0x140E37D20: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
       0x140E3B930: GetMainCommandString  # MainCommand exd
       0x140E3BC70: OpenSystemMenu
+  Client::UI::Agent::AgentChatLog::LinkedInventoryItem:
+    vtbls:
+      - ea: 0x142087868
+        base: Client::Game::InventoryItem
   Client::UI::Agent::AgentChatLog:
     vtbls:
       - ea: 0x142087930
