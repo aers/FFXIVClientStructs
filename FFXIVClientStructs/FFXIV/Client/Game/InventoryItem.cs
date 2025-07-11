@@ -41,6 +41,11 @@ public unsafe partial struct InventoryItem : ICreatable {
         Collectable = 8
     }
 
+    public enum ItemQuality : byte {
+        Normal = 0,
+        High = 1,
+    }
+
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 8D 4B 58")]
     public partial void Ctor();
 
@@ -105,11 +110,11 @@ public unsafe partial struct InventoryItem : ICreatable {
     [VirtualFunction(19)]
     public partial void SetIsHighQuality(bool isHighQuality);
 
-    //[VirtualFunction(20)]
-    //public partial bool IsHighQuality2();
+    [VirtualFunction(20)]
+    public partial ItemQuality GetItemQuality();
 
-    //[VirtualFunction(21)]
-    //public partial void SetIsHighQuality2(bool isHighQuality);
+    [VirtualFunction(21)]
+    public partial void SetItemQuality(ItemQuality quality);
 
     [VirtualFunction(22)]
     public partial bool IsCollectable();

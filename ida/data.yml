@@ -1513,8 +1513,8 @@ classes:
       17: SetFlags
       18: IsHighQuality
       19: SetIsHighQuality
-      20: IsHighQuality2
-      21: SetIsHighQuality2
+      20: GetItemQuality
+      21: SetItemQuality
       22: IsCollectable
       23: GetCollectability
       24: SetCollectability
