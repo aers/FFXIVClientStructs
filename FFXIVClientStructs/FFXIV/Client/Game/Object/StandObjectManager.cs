@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 // Client::Game::Object::StandObjectManager
-// Lively ENpcs - nameless background NPCs
+// Lively Actors (Named/Unnamed ENPCs)
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x840)]
 public unsafe partial struct StandObjectManager {

@@ -1100,16 +1100,17 @@ classes:
     funcs:
       0x141622710: Initialize
       0x141622760: Destroy
-#fail       0x1415FEAD0: CreateBattleCharacter
+      0x1416228E0: CreateBattleCharacter
       0x141622A50: CreateEventObject
       0x141622B20: CreateAreaObject
       0x141622C10: DeleteObjectByIndex
       0x141622D70: DeleteAllObjects
       0x141622EE0: CalculateNextAvailableIndex
-      0x141622F90: GetObjectByIndex
+      0x141622F30: GetObjectByIndex
+      0x141622F90: GetObjectIndexByIndex
       0x141623070: IsValidClientObject
       0x1416230A0: IsValidClientObjectIndex
-#fail       0x1415FF280: GetIndexByObject
+      0x1416230C0: GetIndexByObject
       0x1416230F0: SetObjectAt #(idx, object)
       0x141623130: RemoveObjectAt
       0x14048C680: HasObjectAt
@@ -1120,6 +1121,20 @@ classes:
       0x14184D120: Initialize
       0x14184D410: Finalizer
       0x14184D550: Update
+      0x14184F770: GetObjectByIndex
+  Client::Game::Object::ReactionEventObjectManager: # Gatherables/Farm in Island Sanctuary
+    instances:
+      - ea: 0x142951A30
+    funcs:
+      0x14186A890: Initialize
+      0x14186A8D0: Finalizer
+      0x14186A980: CreateObject
+      0x14186AA70: CreateObjectWithRotationVector
+      0x14186AB60: CreateObjectWithSgbPath
+      0x14186AC60: DeleteObjectByIndex
+      0x14186ADB0: DeleteObjectByIndex2
+      0x14186ACD0: DeleteAllObjects
+      0x14186AD50: GetObjectByIndex
   Client::Game::Character::CharacterManagerInterface: # todo: needs a better name, interface for CharacterManager and GroupManager
     vtbls:
       - ea: 0x142009748
@@ -18102,10 +18117,12 @@ classes:
     vtbls:
       - ea: 0x1421539A8
         base: Client::Game::Object::GameObject
-  Client::Game::Object::MJIObject:
+  Client::Game::Object::ReactionEventObject:
     vtbls:
       - ea: 0x1422D52C0
         base: Client::Game::Object::GameObject
+    funcs:
+      0x141B11BC0: ctor
   #  Client::Game::Object::BKJObject:
   #    vtbls:
   #      - ea: 0x1422D06D0
