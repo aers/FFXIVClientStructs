@@ -70,7 +70,8 @@ public unsafe partial struct AtkResNode : ICreatable {
     /// <term>Bit 7 [0x80]</term> Stops rapid cursor navigation Right<br/>
     /// <term>Bit 9 [0x100]</term> Don't make visible on new timeline label<br/>
     /// <term>Bits 10-17</term> ClipCount<br/>
-    /// <term>Bit 21 [0x100000]</term> Changes cursor to pointer when hovered (?)<br/>
+    /// <term>Bit 21 [0x100000]</term> Change CursorType to Clickable on hover<br/>
+    /// <term>Bit 23 [0x400000]</term> Change CursorType to TextInput on hover<br/>
     /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular
     /// </summary>
     [FieldOffset(0xA0)] public uint DrawFlags;
@@ -80,6 +81,12 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [MemberFunction("48 85 C9 74 14 0F B7 41 40")]
     public partial NodeType GetNodeType();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 63 7B")]
+    public partial uint GetBaseNodeId();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 41 8B 47 ?? 3D")]
+    public partial bool IsDuplicatedNode();
 
     #region Node getters
 
@@ -197,6 +204,9 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     #endregion
 
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 48 32 DB")]
+    public partial bool CheckCollisionAtCoords(short x, short y, bool inclusive);
+
     [MemberFunction("E8 ?? ?? ?? ?? C1 E7 0C")]
     public partial void AddEvent(AtkEventType eventType, uint eventParam, AtkEventListener* listener, AtkResNode* nodeParam, bool isGlobalEvent);
 
@@ -217,9 +227,6 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 48 98")]
     public partial uint GetEventParam(AtkEventType eventType);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 48 32 DB")]
-    public partial bool CheckCollisionAtCoords(short x, short y, bool inclusive);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 5C 24 2C")]
     public partial void GetBounds(Bounds* outBounds);
@@ -260,17 +267,17 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 43 10")]
     public partial float GetYFloat();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 07")]
-    public partial void SetXFloat(float x);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 41 83 FE 1C")]
-    public partial void SetYFloat(float y);
-
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 55 3C")]
     public partial short GetXShort();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 75 3E")]
     public partial short GetYShort();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F BF 07")]
+    public partial void SetXFloat(float x);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 83 FE 1C")]
+    public partial void SetYFloat(float y);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 55 1C")]
     public partial void SetXShort(short x);
@@ -290,11 +297,17 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B 17 48 8B CD")]
     public partial void SetHeight(ushort height);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 7F")]
-    public partial bool IsVisible();
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F 28 8C 24 ?? ?? ?? ?? 48 8D B3")]
+    public partial float GetRotation();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EE 01 75 D5 48 8B 4C 24 ??")]
-    public partial void ToggleVisibility(bool enable);
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 45 ?? 44 0F 28 44 24")]
+    public partial void SetRotation(float rotation);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 0F 57 C0 F3 0F 59 C6")]
+    public partial float GetRotationDegrees();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 8D 7E")]
+    public partial void SetRotationDegrees(float rotation);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 63 46 30")]
     public partial void SetAlpha(byte alpha);
@@ -305,8 +318,17 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 02 49 8B CD")]
     public partial void SetPriority(ushort priority);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 7F")]
+    public partial bool IsVisible();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 83 C7 08 48 83 EE 01 75 D5 48 8B 4C 24 ??")]
+    public partial void ToggleVisibility(bool enable);
+
     [MemberFunction("E8 ?? ?? ?? ?? FF C3 3B DE 72 E6")]
     public partial void SetUseDepthBasedPriority(bool enable);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F 28 C9 8B 87")]
+    public partial void SetOrigin(float originX, float originY);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 83 F8 66 EB 99")]
     public partial ushort GetTimelineLabel();
