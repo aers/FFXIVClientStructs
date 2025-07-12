@@ -15676,7 +15676,9 @@ classes:
       0x141037030: SetOwnerAddon
       0x141037090: SetPreviewComponent
       0x1410371A0: SetPortraitComponent
+      0x1410372B0: SetResetButtonDefaultText
       0x141037370: SetResetButton
+      0x141037430: SetCharacterDisplayModeCheckBoxDefaultText
       0x141037510: SetCharacterDisplayModeCheckBox
       0x141037600: SetPreviewTexture
       0x141037620: SetPreviewErrorText
