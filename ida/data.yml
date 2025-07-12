@@ -7583,8 +7583,12 @@ classes:
     vtbls:
       - ea: 0x14203B328
         base: Component::GUI::AtkComponentBase
-    #funcs:
+    funcs:
       # 0x140599BF0: ctor # inlined in AtkUldManager_CreateAtkComponent
+      0x14068A710: GetCollisionNode
+      0x14068A7B0: SetTexture
+      0x14068A8B0: SetErrorText
+      0x14068A940: SetErrorVisibility
   Component::GUI::AtkComponentScrollBar:
     vtbls:
       - ea: 0x14203B3C8
@@ -7670,6 +7674,7 @@ classes:
         base: Component::GUI::AtkComponentBase
     funcs:
       0x14069CE10: ctor # no xrefs, inlined in AtkUldManager_CreateAtkComponent
+      0x14069CE00: GetCollisionNode
   Client::LayoutEngine::IManagerBase:
     vtbls:
       - ea: 0x14203CAA0
@@ -15667,6 +15672,16 @@ classes:
     funcs:
       0x141036B50: ctor
       0x141036BA0: Finalize
+      0x141036BD0: Detach
+      0x141037030: SetOwnerAddon
+      0x141037090: SetPreviewComponent
+      0x1410371A0: SetPortraitComponent
+      0x141037370: SetResetButton
+      0x141037510: SetCharacterDisplayModeCheckBox
+      0x141037600: SetPreviewTexture
+      0x141037620: SetPreviewErrorText
+      0x141037640: SetPreviewErrorVisibility
+      0x1410376A0: SetCharacterDisplayMode
   Client::UI::TabController:
     vtbls:
       - ea: 0x142095598
@@ -15767,6 +15782,8 @@ classes:
     vtbls:
       - ea: 0x1420DB218
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141262D50: ctor
   Client::UI::AddonNowLoading:
     vtbls:
       - ea: 0x1420968E0
@@ -15913,6 +15930,8 @@ classes:
     vtbls:
       - ea: 0x14209C1A0
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14106CA60: ctor
   Client::UI::AddonCharaSelectWorldServer:
     vtbls:
       - ea: 0x1420A2EA0
@@ -15947,6 +15966,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14113F3C0: ctor
+  Client::UI::AddonRetainerCharacter:
+    vtbls:
+      - ea: 0x1420BEA50
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411388B0: ctor
   Client::UI::AddonRetainerTaskList:
     vtbls:
       - ea: 0x1420BECA0
@@ -15972,7 +15997,7 @@ classes:
       - ea: 0x1420BE5B0
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x14106CA60: ctor
+      0x141133550: ctor
       0x1411368D0: SetTab
   Client::UI::AddonCharacterStatus:
     vtbls:
@@ -16128,6 +16153,12 @@ classes:
     vtbls:
       - ea: 0x1420FBC68
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonFittingRoomStore:
+    vtbls:
+      - ea: 0x1420FC378
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141377170: ctor
   Client::UI::AddonArchiveItem:
     vtbls:
       - ea: 0x1420FCA68
@@ -16225,6 +16256,8 @@ classes:
     vtbls:
       - ea: 0x1420DC4D8
         base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14126D400: ctor
   Client::UI::AddonMiragePrismPrismBox:
     vtbls:
       - ea: 0x1420C69E0
@@ -16235,12 +16268,24 @@ classes:
     vtbls:
       - ea: 0x1420C6D58
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMiragePrismPlate:
+    vtbls:
+      - ea: 0x1420C7DD0
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14119D960: ctor
   Client::UI::AddonMobHunt:
     vtbls:
       - ea: 0x1420C9570
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411A4A60: ctor
+  Client::UI::ColorantColoringSelector:
+    vtbls:
+      - ea: 0x1420C9A28
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1411A6000: ctor
   Client::UI::AddonGrandCompanySupplyList:
     vtbls:
       - ea: 0x1420CA430
@@ -16302,13 +16347,19 @@ classes:
       - ea: 0x1420D1C50
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1411388B0: ctor
+      0x141206190: ctor
   Client::UI::AddonCurrency:
     vtbls:
       - ea: 0x1420D1EA0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412078D0: ctor
+  Client::UI::AddonGearSetPreview:
+    vtbls:
+      - ea: 0x1420D5728
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141223B60: ctor
   Client::UI::AddonSalvageItemSelector:
     vtbls:
       - ea: 0x1420D5978
@@ -16385,7 +16436,7 @@ classes:
       - ea: 0x1420D85B8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1411A6000: ctor
+      0x1412421F0: ctor
       0x1412425C0: SetCommonNamePlate  # x, y, scale, etc INLINED IN 7.0 in AddonNamePlate OnRequestedUpdate 1411CBBD5
       0x1412427F0: SetPlayerNamePlate # player specific nodes INLINED IN 7.0 ^ 1411CBEB6
       0x141246570: ToggleTextRenderMode
@@ -17895,6 +17946,12 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415B9430: ctor
+  Client::UI::AddonFashionCheck:
+    vtbls:
+      - ea: 0x14214E1A8
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1415BF170: ctor
   Client::UI::AddonMinionMountBase:
     vtbls:
       - ea: 0x1420C22E0

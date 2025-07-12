@@ -16,6 +16,8 @@ public unsafe partial struct AddonCharacter {
     [FieldOffset(0x4B4)] public int TabCount;
     [FieldOffset(0x4B8)] public AtkAddonControl AddonControl;
 
+    [FieldOffset(0xBB0)] public PreviewController PreviewController;
+    [Obsolete("Moved to PreviewController.CollisionNode")]
     [FieldOffset(0xBD8)] public AtkCollisionNode* CharacterPreviewCollisionNode;
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B AB ?? ?? ?? ?? 74 27")]

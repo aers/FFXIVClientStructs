@@ -13,6 +13,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonPvPCharacter {
     [FieldOffset(0x258), FixedSizeArray] internal FixedSizeArray21<ClassEntry> _classEntries;
 
+    [FieldOffset(0xC50)] public PreviewController PreviewController;
+
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B B7 ?? ?? ?? ?? 49 8B 46 28")]
     public partial void UpdateClasses(NumberArrayData** numberArrayData, StringArrayData** stringArrayData);
 
