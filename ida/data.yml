@@ -7029,10 +7029,10 @@ classes:
       0x14061D9F0: SetYFloat
       0x14061DA20: SetXShort
       0x14061DA60: SetYShort
-      0x14061DAA0: GetScreenPos
-      0x14061DAC0: SetScreenPos
-      0x14061DAF0: GetScreenX
-      0x14061DB10: GetScreenY
+      0x14061DAA0: GetScreenPosFloat
+      0x14061DAC0: SetScreenPosShort
+      0x14061DAF0: GetScreenXFloat
+      0x14061DB10: GetScreenYFloat
       0x14061DB30: GetScreenXInt
       0x14061DB50: GetScreenYInt
       0x14061DB70: GetWidth
@@ -7055,6 +7055,22 @@ classes:
       0x14061E120: SetPriority
       0x14061E140: IsVisible
       0x14061E170: ToggleVisibility
+      0x14061E1B0: IsEnabled
+      0x14061E1D0: SetEnabled
+      0x14061E200: IsRespondingToMouse
+      0x14061E220: SetRespondToMouse
+      0x14061E250: IsFocusable
+      0x14061E270: SetFocusable
+      0x14061E2A0: IsDroppable
+      0x14061E2C0: SetDroppable
+      0x14061E2F0: IsEmittingEvents
+      0x14061E310: SetEmitsEvents
+      0x14061E390: ShouldChangeCursorToClickableOnHover
+      0x14061E3B0: SetChangeCursorToClickableOnHover
+      0x14061E3E0: ShouldChangeCursorToTextInputOnHover
+      0x14061E400: SetChangeCursorToTextInputOnHover
+      0x14061E430: IsEllipticalCollision
+      0x14061E450: SetEllipticalCollision
       0x14061E5F0: GetIsUsingDepthBasedDrawPriority
       0x14061E610: SetUseDepthBasedPriority
       0x14061E640: GetDepth
@@ -7074,6 +7090,7 @@ classes:
       0x14061ED00: SetScaleUnsafe
       0x14061ED80: SetScaleXUnsafe
       0x14061EDF0: SetScaleYUnsafe
+      0x14061EEB0: SetDepthUnsafe
       0x14061EEC0: SetOriginUnsafe
       0x14061EF30: SetOriginXUnsafe
       0x14061EF80: SetOriginYUnsafe
@@ -7105,7 +7122,6 @@ classes:
       0x140699C80: GetAsAtkComponentJournalCanvas
       0x14069CAE0: GetAsAtkComponentHoldButton
       0x14069D1E0: GetAsAtkComponentPortrait
-      0x14061E2A0: IsDroppable
   Component::GUI::AtkImageNode:
     vtbls:
       - ea: 0x142039C68
@@ -7297,6 +7313,8 @@ classes:
       0x14064A290: ctor
       0x14064A510: GetOwnerNodePosition
       0x14064A600: GetComponentType
+      0x14064A630: ShouldChangeCursorToClickableOnHover
+      0x14064A6D0: ShouldChangeCursorToTextInputOnHover
       0x14064A830: GetNodeById
       0x14064A890: GetComponentById
       0x14064A940: GetComponentIconTextById
