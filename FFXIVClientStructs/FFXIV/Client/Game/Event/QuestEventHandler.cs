@@ -10,6 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [Inherits<LuaEventHandler>]
 [StructLayout(LayoutKind.Explicit, Size = 0x618)]
 public unsafe partial struct QuestEventHandler {
+    /// <remarks> Not a row ID in the Quest Sheet. This is only the first two bytes (e.g. row 67540 would be stored as 2004.) </remarks>
     [FieldOffset(0x340)] public ushort QuestId;
     [FieldOffset(0x348)] public Utf8String Title;
     [FieldOffset(0x3B0)] public Utf8String ScriptId;
