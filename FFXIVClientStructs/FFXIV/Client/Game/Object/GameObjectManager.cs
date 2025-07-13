@@ -16,12 +16,12 @@ public unsafe partial struct GameObjectManager {
     public unsafe partial struct ObjectArrays {
         // sparse array containing all objects; some slots could be null
         // different ranges have different meaning:
-        // 000-199: objects from CharacterManager at index 2*i and their dependendent objects (mounts, minions, etc) at index 2*i+1
-        // 200-448: objects from ClientObjectManager
-        // 449-488: objects from EventObjectManager?
-        // 489-628: ?
-        // 629-728: ?
-        // 729-818: something MJI (island sanctuary) related
+        // 000-199: 200 objects from CharacterManager, 100 BattleCharas at index 2*i and their dependendent 100 objects (mounts, minions, etc) at index 2*i+1 (networked)
+        // 200-448: 249 objects from ClientObjectManager (non-networked)
+        // 449-488:  40 objects from EventObjectManager? (contains AreaObject, EventObject, GatheringPointObject, HousingObject, HousingCombinedObject, Treasure)
+        // 489-628: 140 objects from StandObjectManager (Lively Actors (Named/Unnamed ENPCs))
+        // 629-728: 100 objects from ReactionEventObjectManager (Gatherables/Farm in Island Sanctuary)
+        // 729-818:  90 objects from MJIManager and WKSManager (more Lively Actors)
 
         /// <summary>
         /// Pointers to GameObjects, sorted by ObjectIndex. Contains null pointers for inactive indexes.
