@@ -16969,13 +16969,13 @@ classes:
       79: UpdateBarNumberText
       80: UpdateControlHints
       81: PulseActionBarSlot
-      82: OnDragDropCancel  # calls 85 or 86 depending on why the dragdrop was cancelled
+      82: OnDragDropClick
       83: OnDragDropInsert
       84: OnDragDropBegin
       85: OnDragDropDiscard
       86: OnDragDropRollover
-      87: OnDragDropCancelLocked
-      88: OnDragDropCancelByMouseUp
+      87: ExecuteActionBarSlot # calls RaptureAtkModule.HandleExecuteHotbarSlot
+      88: OpenContextMenu
       89: IsExpandedHold # always false on everything but _ActionCross
       90: IsNotExpandedHold # always true on everything but _ActionCross
       91: IsCross # only true on _ActionCross
