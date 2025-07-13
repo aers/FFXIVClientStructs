@@ -23,7 +23,7 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray8<Utf8String> _channelSelectorLSNames;
     [FieldOffset(0x478), FixedSizeArray] internal FixedSizeArray8<Utf8String> _channelSelectorCWLSNames;
 
-    [FieldOffset(0x8A0)] public InventoryItem LinkedItem;
+    [FieldOffset(0x8A0)] public InventoryItem LinkedItem; // TODO: use LinkedInventoryItem as type, obsolete LinkedItemQuality below
     [FieldOffset(0x8E8)] public byte LinkedItemQuality;
     [FieldOffset(0x8F0)] public Utf8String LinkedItemName;
 
@@ -55,6 +55,13 @@ public unsafe partial struct AgentChatLog {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 48 81 C4 ?? ?? ?? ?? 41 5F 41 5D 41 5C 5F")]
     public partial void SetTabName(int tabIndex, Utf8String* tabName);
+
+    [GenerateInterop]
+    [Inherits<InventoryItem>]
+    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
+    public partial struct LinkedInventoryItem {
+        [FieldOffset(0x48)] public byte Quality;
+    }
 }
 
 // There are definitely more channels than just these, these were all the ones I could find quickly.

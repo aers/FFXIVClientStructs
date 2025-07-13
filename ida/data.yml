@@ -1485,6 +1485,7 @@ classes:
       0x140832FC0: GetRacingChocoboBeedingCapacityFromItem
       0x1409822F0: GetSpecialItemId #static
       0x140831090: GetLimitedTomestoneWeeklyLimit #static
+      0x140820CD0: SetSlotBlocked
       0x140820D80: SetSlotUnblocked
       0x14081DCA0: SplitItem
       0x14081F4D0: DiscardItem
@@ -1514,6 +1515,9 @@ classes:
       19: SetIsHighQuality
       20: IsHighQuality2
       21: SetIsHighQuality2
+      22: IsCollectable
+      23: GetCollectability
+      24: SetCollectability
     funcs:
       0x14019FEB0: GetCondition
       0x14019FF50: GetGlamourId
@@ -1521,6 +1525,7 @@ classes:
       0x1407D51A0: GetMateriaGrade
       0x140816740: ctor
       0x140816790: Finalize
+      0x1408169F0: SetLinkedItem
       0x140816B10: GetLinkedItem
       0x140817030: GetConditionPercentage
       0x140817070: GetStain
@@ -10138,6 +10143,10 @@ classes:
 #fail       0x140E37D20: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
       0x140E3B930: GetMainCommandString  # MainCommand exd
       0x140E3BC70: OpenSystemMenu
+  Client::UI::Agent::AgentChatLog::LinkedInventoryItem:
+    vtbls:
+      - ea: 0x142087868
+        base: Client::Game::InventoryItem
   Client::UI::Agent::AgentChatLog:
     vtbls:
       - ea: 0x142087930
