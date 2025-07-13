@@ -3020,7 +3020,7 @@ classes:
       0: Dtor
       1: Init
       2: Tick
-      3: RecievePacketValues
+      3: ReceivePacketValues
       4: SetValues
       9: ProcessDeferredReplaceAction
   Client::Game::Gauge::PaladinGauge:

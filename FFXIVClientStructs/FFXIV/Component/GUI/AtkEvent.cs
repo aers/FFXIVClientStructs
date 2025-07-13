@@ -104,7 +104,7 @@ public unsafe partial struct AtkEvent {
     [FieldOffset(0x28)] public AtkEventState State;
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 9C")]
-    public partial void SetEventIsHandled(bool forced = false);
+    public partial void SetEventIsHandled(bool suppressViewportDispatch = false);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x4)]
@@ -125,9 +125,9 @@ public enum AtkEventStateFlags : byte {
     Handled = 0b0000_0001, // set in SetEventIsHandled
 
     /// <summary>
-    /// Specifies whether the event is dispatched again using another <see cref="AtkEventType"/>.
+    /// Specifies whether the event coming from <see cref="AtkInputManager.HandleInput(AtkUnitManager*, AtkCollisionManager*)"/> is not sent again via <see cref="AtkStage.ViewportEventManager"/>.
     /// </summary>
-    Forwarded = 0b0000_0010,
+    ViewportDispatchSuppressed = 0b0000_0010,
 
     Unk3 = 0b0000_0100,
 
@@ -135,21 +135,33 @@ public enum AtkEventStateFlags : byte {
     /// Specifies whether <see cref="AtkEventState.ReturnFlags"/> is copied to <see cref="AtkEventDispatcher.Event.ReturnFlags"/>.
     /// </summary>
     HasReturnFlags = 0b0000_1000,
-    [Obsolete("Renamed to HasReturnFlags")] Unk4 = 0b0000_1000,
 
     /// <summary>
-    /// Specifies whether the event is a global event.<br/>
-    /// When this is set, <see cref="AtkEventListener.ReceiveGlobalEvent(AtkEventType, int, AtkEvent*, AtkEventData*)"/> is called.
+    /// Specifies whether <see cref="AtkEventListener.ReceiveGlobalEvent(AtkEventType, int, AtkEvent*, AtkEventData*)"/> is called instead of <see cref="AtkEventListener.ReceiveEvent(AtkEventType, int, AtkEvent*, AtkEventData*)"/>.
     /// </summary>
     IsGlobalEvent = 0b0001_0000,
 
-    Unk6 = 0b0010_0000, // set in SetEventIsHandled, depending on a2. maybe prevents propagation/bubbling?
+    /// <summary>
+    /// Specifies whether <see cref="ViewportDispatchSuppressed"/> is set in <see cref="AtkEventDispatcher.Event.State"/> on the event passed to <see cref="AtkEventDispatcher.DispatchEvent(AtkEventDispatcher.Event*)"/> after the event was received.<br/>
+    /// Set by <see cref="AtkEvent.SetEventIsHandled(bool)"/>.
+    /// </summary>
+    SuppressViewportDispatch = 0b0010_0000,
+
     Unk7 = 0b0100_0000,
 
     /// <summary>
     /// If set, the <see cref="AtkEvent"/> is returned to the pool instead of being free'd.
     /// </summary>
     Pooled = 0b1000_0000,
+
+    [Obsolete("Renamed to SuppressViewportDispatch")]
+    Unk6 = 0b0000_1000,
+
+    [Obsolete("Renamed to ViewportDispatchSuppressed")]
+    Forwarded = 0b0000_1000,
+
+    [Obsolete("Renamed to HasReturnFlags")]
+    Unk4 = 0b0000_1000,
 
     [Obsolete("Incorrect name. Renamed to Pooled")]
     Completed = 0b1000_0000
