@@ -77,7 +77,7 @@ public unsafe partial struct AtkTooltipManager {
 
         [StructLayout(LayoutKind.Explicit, Size = 0x18)]
         public struct AtkTooltipTextArgs {
-            [FieldOffset(0), CExporterUnion("Args")] public CStringPointer Text;
+            [FieldOffset(0x00)] public CStringPointer Text;
             // [FieldOffset(0x08)] public int Field8;  // unused
             /// <remarks>
             /// Used in AddonTooltip's ManagedInterface vf0.<br/>
