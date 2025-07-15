@@ -21,23 +21,24 @@ public unsafe partial struct AddonActionMenu {
     [FieldOffset(0x278)] public AtkComponentRadioButton* PerformanceRadioButton;
     [FieldOffset(0x280)] public AtkComponentRadioButton* ExtrasRadioButton;
     [FieldOffset(0x288)] public AtkComponentRadioButton* RoleRadioButton;
+    [FieldOffset(0x290)] public AtkComponentRadioButton* DutiesRadioButton;
 
-    [FieldOffset(0x330), FixedSizeArray] internal FixedSizeArray80<ActionInfo> _actions;
+    [FieldOffset(0x338), FixedSizeArray] internal FixedSizeArray80<ActionInfo> _actions;
 
-    [FieldOffset(0x14C0)] public AtkResNode* SidebarContainer; // Contains radio buttons for Actions, Role, Traits etc, including all of the icon buttons that are on the left side
-    [FieldOffset(0x14C8)] public AtkResNode* ContentsContainer; // Contains all the nodes tha appear in the main area of the window
-    [FieldOffset(0x14D0)] public AtkResNode* ActionsFooterContainer; // Contains the compact view toggle, some text, and a help button
-    [FieldOffset(0x14D8)] public AtkComponentButton* HelpButton; // Opens Job Gauge Details window, Addon name: "Guide"
-    [FieldOffset(0x14E0)] public AtkComponentButton* CompactModeToggleButton;
-    [FieldOffset(0x14E8)] public AtkResNode* LevelTextContainer;
-    [FieldOffset(0x14F0)] public AtkImageNode* JobIcon;
-    [FieldOffset(0x14F8)] public AtkTextNode* JobText;
+    [FieldOffset(0x14C8)] public AtkResNode* SidebarContainer; // Contains radio buttons for Actions, Role, Traits etc, including all of the icon buttons that are on the left side
+    [FieldOffset(0x14D0)] public AtkResNode* ContentsContainer; // Contains all the nodes tha appear in the main area of the window
+    [FieldOffset(0x14D8)] public AtkResNode* ActionsFooterContainer; // Contains the compact view toggle, some text, and a help button
+    [FieldOffset(0x14E0)] public AtkComponentButton* HelpButton; // Opens Job Gauge Details window, Addon name: "Guide"
+    [FieldOffset(0x14E8)] public AtkComponentButton* CompactModeToggleButton;
+    [FieldOffset(0x14F0)] public AtkResNode* LevelTextContainer;
+    [FieldOffset(0x14F8)] public AtkImageNode* JobIcon;
+    [FieldOffset(0x1500)] public AtkTextNode* JobText;
 
-    // [FieldOffset(0x1500)] public AtkTextNode* UnknownText;
-    // [FieldOffset(0x1508)] public AtkComponentNode* UnknownNode; // Appears to be the first action node in the new action view? Not sure.
-    [FieldOffset(0x1528)] public AtkComponentScrollBar* Scrollbar;
-    [FieldOffset(0x1530)] public AtkResNode* ActionContentsContainer; // Contains only the Actions nodes, only the new view
-    [FieldOffset(0x1538)] public AtkCollisionNode* ActionCollision; // Collision node for the action contents area
+    // [FieldOffset(0x1508)] public AtkTextNode* UnknownText;
+    // [FieldOffset(0x1510)] public AtkComponentNode* UnknownNode; // Appears to be the first action node in the new action view? Not sure.
+    [FieldOffset(0x1530)] public AtkComponentScrollBar* Scrollbar;
+    [FieldOffset(0x1538)] public AtkResNode* ActionContentsContainer; // Contains only the Actions nodes, only the new view
+    [FieldOffset(0x1540)] public AtkCollisionNode* ActionCollision; // Collision node for the action contents area
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
