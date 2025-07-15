@@ -72,11 +72,21 @@ public enum DragDropInputMode : byte {
 [Flags]
 public enum DragDropFlag : byte {
     None = 0,
-    SkipEnabledCheck = 0b0000_0001, // checked in ReceiveEvent for AtkEventType.DragDropCanAcceptCheck
-    Unk2 = 0b0000_0010,
-    Clickable = 0b0000_0100, // checked in AtkDragDropInterface.HandleMouseUpEvent
+
+    /// <remarks> Checked in <see cref="AtkComponentDragDrop.ReceiveEvent"/> for <see cref="AtkEventType.DragDropCanAcceptCheck"/>. </remarks>
+    SkipEnabledCheck = 0b0000_0001,
+
+    /// <summary> Prevents the DragDrop from being started. </summary>
+    Locked = 0b0000_0010,
+
+    /// <summary> If set, a simple left click fires <see cref="AtkEventType.DragDropClick"/>. </summary>
+    /// <remarks> Checked in <see cref="AtkDragDropInterface.HandleMouseUpEvent"/>. </remarks>
+    Clickable = 0b0000_0100,
+
     Unk4 = 0b0000_1000,
     Unk5 = 0b0001_0000,
     Unk6 = 0b0010_0000,
     Unk7 = 0b0100_0000,
+
+    [Obsolete("Renamed to Locked")] Unk2 = 0b0000_0010,
 }
