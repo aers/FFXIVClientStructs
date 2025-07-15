@@ -11789,10 +11789,13 @@ classes:
     funcs:
       0x140C07710: ctor
       0x140C0B560: UpdateItems
-  Client::UI::Agent::AgentMiragePrismItemDetail:
+  Client::UI::Agent::AgentMiragePrismPrismItemDetail:
     vtbls:
       - ea: 0x142071F70
         base: Client::UI::Agent::AgentItemDetailBase
+    funcs:
+      0x140C0D8F0: HandleMiragePrismItemHover
+      0x140C0D970: HandleMiragePrismBoxItemHover
   Client::UI::Agent::AgentMiragePrismPrismSetConvert:
     vtbls:
       - ea: 0x142071FF8
@@ -12696,6 +12699,7 @@ classes:
       0x140E7FDB0: ctor
       0x140E7FEB0: Finalizer
       0x140E82420: OnItemHovered
+      0x140E7FF90: HandleItemHover
   Client::UI::Agent::AgentStatus::StatusCharaView:
     vtbls:
       - ea: 0x1420627D8
@@ -16312,6 +16316,12 @@ classes:
     vtbls:
       - ea: 0x1420C6D58
         base: Component::GUI::AtkUnitBase
+  Client::UI::AddonMiragePrismPrismItemDetail:
+    vtbls:
+      - ea: 0x1420C7B50
+        base: Component::GUI::AtkUnitBase
+      - ea: 0x1420C7DA0
+        base: Component::GUI::AtkManagedInterface
   Client::UI::AddonMiragePrismPlate:
     vtbls:
       - ea: 0x1420C7DD0
@@ -16360,13 +16370,31 @@ classes:
     funcs:
       0x1411ECFD0: ctor
       0x1411ED260: Finalize2
+  Client::UI::AddonActionDetailBase:
+    vtbls:
+      - ea: 0x1420D01E0
+        base: Component::GUI::AtkUnitBase
+      - ea: 0x1420D0430
+        base: Component::GUI::AtkManagedInterface
+    funcs:
+      0x1411FA370: ctor
   Client::UI::AddonActionDetail:
     vtbls:
       - ea: 0x1420D0448
-        base: Component::GUI::AtkUnitBase
+        base: Component::GUI::AddonActionDetailBase
+      - ea: 0x1420D0698
+        base: Component::GUI::AtkManagedInterface
     funcs:
       0x1411FA780: ctor
       0x1411FB130: GenerateTooltip
+  Client::UI::AddonLovmActionDetail:
+    vtbls:
+      - ea: 0x14214D398
+        base: Client::UI::AddonLovmActionDetailBase
+      - ea: 0x14214D5E8
+        base: Component::GUI::AtkManagedInterface
+    funcs:
+      0x1415BC0E0: ctor
   Client::UI::AddonMacro:
     vtbls:
       - ea: 0x1420CFD40
@@ -16375,6 +16403,8 @@ classes:
     vtbls:
       - ea: 0x1420D0930
         base: Component::GUI::AtkUnitBase
+      - ea: 0x1420D0B88
+        base: Component::GUI::AtkManagedInterface
     funcs:
       0x1411FB780: ctor
       0x1411FB9B0: Finalize2

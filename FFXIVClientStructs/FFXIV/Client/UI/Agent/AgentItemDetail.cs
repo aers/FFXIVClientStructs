@@ -1,7 +1,9 @@
+using FFXIVClientStructs.FFXIV.Client.Enums;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
+// TODO: remove with ItemKind field below
 public enum ItemDetailKind : byte {
     ChatItem = 1,      // all items linked in chat, except event items, also used for some shops
     InventoryItem = 2, // all(?) items outside of chat, including event items
@@ -18,7 +20,8 @@ public enum ItemDetailKind : byte {
 [VirtualTable("48 89 18 48 8D 05 ?? ?? ?? ?? 48 89 07", 6)]
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AgentItemDetail {
-    [FieldOffset(0x118)] public ItemDetailKind ItemKind;
+    [FieldOffset(0x118)] public DetailKind DetailKind;
+    [FieldOffset(0x118), Obsolete($"Use {nameof(DetailKind)}")] public ItemDetailKind ItemKind;
     // Set to the item ID when hovering an item in the chat, otherwise it seems
     // to be different for each inventory. Doesn't appear to have any relation
     // to InventoryType.

@@ -11,10 +11,12 @@ public unsafe partial struct AgentActionDetail {
     [FieldOffset(0x40)] public uint OriginalId; // Example: Summon Topaz
     [FieldOffset(0x44)] public uint AdjustedId; // Example: Summon Titan II
 
+    // flag & 1 = get AdjustedActionId
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? E9 ?? ?? ?? ?? 83 F8 0F")]
-    public partial void HandleActionHover(ActionKind actionKind, uint actionId, int flag, byte unk);
+    public partial void HandleActionHover(ActionKind actionKind, uint actionId, int flag, byte isLovmActionDetail);
 }
 
+/// Keep in sync with <see cref="Enums.DetailKind"/>
 public enum ActionKind {
     Action = 28,
     CraftingAction = 29,
@@ -44,5 +46,7 @@ public enum ActionKind {
     MYCTemporaryItem = 53,
     Ornament = 54,
     Glasses = 55,
+    Unk56 = 56,
+    MKDTrait = 57,
+    Unk58 = 58,
 }
-
