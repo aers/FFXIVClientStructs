@@ -54,7 +54,7 @@ public unsafe partial struct AgentCabinetWithdraw {
 
             [FieldOffset(0x8)] public uint CabinetCategoryRowId;
 
-            [FieldOffset(16)] public Utf8String Name;
+            [FieldOffset(0x10)] public Utf8String Name;
         }
     }
 }
