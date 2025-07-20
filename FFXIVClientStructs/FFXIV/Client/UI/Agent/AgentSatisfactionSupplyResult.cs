@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [GenerateInterop]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
-public unsafe partial struct AgentSatisfactionSupplyResult {
+public partial struct AgentSatisfactionSupplyResult {
     [FieldOffset(0x28)] private uint _currentSatisfactionNpcRowId;
 
     public uint CurrentSatisfactionNpcRowId => _currentSatisfactionNpcRowId - 1;
@@ -17,13 +17,13 @@ public unsafe partial struct AgentSatisfactionSupplyResult {
 
     [FieldOffset(0x40)] public SatisfactionSupplyManager.NpcInfo CurrentNpcInfo;
 
-    [FieldOffset(0x5C)] internal FixedSizeArray3<RewardDetail> Rewards;
+    [FieldOffset(0x5C)] internal FixedSizeArray3<RewardDetail> _rewards;
 
-    [FieldOffset(0x78)] private void* CurrentNpcResidentNpcRow;
+    [FieldOffset(0x78)] private nint CurrentNpcResidentNpcRow;
 
-    [FieldOffset(0x80)] private void* Reward1ItemRow;
-    [FieldOffset(0x88)] private void* Reward2ItemRow;
-    [FieldOffset(0x90)] private void* Reward3ItemRow;
+    [FieldOffset(0x80)] private nint Reward1ItemRow;
+    [FieldOffset(0x88)] private nint Reward2ItemRow;
+    [FieldOffset(0x90)] private nint Reward3ItemRow;
 
     [FieldOffset(0x98)] public int AvailableRewardCount;
     [FieldOffset(0x9C)] public int ContextMenuSelectedRewardIndex;
