@@ -57,7 +57,7 @@ enums:
     "DragDropRollOver": 55
     "DragDropRollOut": 56
     "DragDropDiscard": 57
-    "DragDropCancel": 58
+    "DragDropClick": 58
     "IconTextRollOver": 59
     "IconTextRollOut": 60
     "IconTextClick": 61
@@ -133,12 +133,14 @@ enums:
   name: AtkTooltipType
   underlying: byte
   namespace: Component.GUI
-  flags: False
+  flags: True
   values:
+    "None": 0
     "Text": 1
     "Item": 2
-    "TextItem": 3
     "Action": 4
+    "LovmAction": 8
+    "MiragePrismPrismItem": 16
 - type: Component::GUI::DragDropType
   name: DragDropType
   underlying: unsigned int
@@ -260,7 +262,7 @@ enums:
   values:
     "None": 0
     "SkipEnabledCheck": 1
-    "Unk2": 2
+    "Locked": 2
     "Clickable": 4
     "Unk4": 8
     "Unk5": 16
@@ -1224,6 +1226,9 @@ enums:
     "MYCTemporaryItem": 53
     "Ornament": 54
     "Glasses": 55
+    "Unk56": 56
+    "MKDTrait": 57
+    "Unk58": 58
 - type: Client::UI::Agent::AozWeeklyFlags
   name: AozWeeklyFlags
   underlying: byte
@@ -1774,16 +1779,71 @@ enums:
     "MKDTowerEntry": 470
     "Unk471": 471
     "MKDLoreBook": 472
-- type: Client::UI::Agent::ItemDetailKind
-  name: ItemDetailKind
+- type: Client::Enums::DetailKind
+  name: DetailKind
   underlying: byte
-  namespace: Client.UI.Agent
+  namespace: Client.Enums
   flags: False
   values:
-    "ChatItem": 1
+    "None": 0
+    "Item": 1
     "InventoryItem": 2
+    "ItemSearchResult": 3
+    "Loot": 4
+    "ShopBuyback": 5
     "ShopItem": 6
-    "ChatEventItem": 8
+    "Reclaim": 7
+    "KeyItem": 8
+    "GearSet": 9
+    "FreeCompanyChest": 10
+    "ItemId": 11
+    "InventoryContext": 12
+    "ItemInspection": 13
+    "TreasureHighLow": 14
+    "MiragePrismItem": 15
+    "MiragePrismBoxItem": 16
+    "MateriaAttach": 17
+    "ReconstructionBuyback": 18
+    "MerchantSetting": 19
+    "MJIItemPouch": 20
+    "MJIKeyItem": 21
+    "MJICraftworksObject": 22
+    "Cabinet": 23
+    "TradeRemote": 24
+    "HandIn": 25
+    "RepairRequest": 26
+    "LetterView": 27
+    "Action": 28
+    "CraftingAction": 29
+    "GeneralAction": 30
+    "BuddyOrder": 31
+    "MainCommand": 32
+    "ExtraCommand": 33
+    "Companion": 34
+    "PetOrder": 35
+    "Trait": 36
+    "BuddyAction": 37
+    "CompanyAction": 38
+    "Mount": 39
+    "ChocoboRaceAction": 40
+    "ChocoboRaceItem": 41
+    "DeepDungeonEquipment": 42
+    "DeepDungeonEquipment2": 43
+    "DeepDungeonItem": 44
+    "QuickChat": 45
+    "ActionComboRoute": 46
+    "PvPSelectTrait": 47
+    "BgcArmyAction": 48
+    "Perform": 49
+    "DeepDungeonMagicStone": 50
+    "DeepDungeonDemiclone": 51
+    "EurekaMagiaAction": 52
+    "MYCTemporaryItem": 53
+    "Ornament": 54
+    "Glasses": 55
+    "Unk56": 56
+    "MKDTrait": 57
+    "Unk58": 58
 - type: Client::UI::Agent::CharaSelectCharacterEntryLoginFlags
   name: CharaSelectCharacterEntryLoginFlags
   underlying: byte
@@ -22599,8 +22659,72 @@ structs:
     name: LabelSets
     offset: 16
   member_functions: []
-- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs
-  name: AtkTooltipArgs
+- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipActionArgs
+  name: AtkTooltipActionArgs
+  namespace: Component.GUI
+  union: False
+  size: 24
+  fields:
+  - type: int
+    name: Id
+    offset: 8
+  - type: __int16
+    name: Flags
+    offset: 20
+  - type: Client::Enums::DetailKind
+    name: Kind
+    offset: 22
+  member_functions: []
+- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipItemArgs::Id
+  name: Id
+  namespace: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipItemArgs
+  union: True
+  size: 4
+  fields:
+  - type: int
+    name: ItemId
+    offset: 0
+  - type: Client::Game::InventoryType
+    name: InventoryType
+    offset: 0
+  member_functions: []
+- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipLovmActionArgs
+  name: AtkTooltipLovmActionArgs
+  namespace: Component.GUI
+  union: False
+  size: 24
+  fields:
+  - type: int
+    name: Id
+    offset: 8
+  - type: __int16
+    name: Flags
+    offset: 20
+  - type: Client::Enums::DetailKind
+    name: Kind
+    offset: 22
+  member_functions: []
+- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipMiragePrismPrismItemArgs
+  name: AtkTooltipMiragePrismPrismItemArgs
+  namespace: Component.GUI
+  union: False
+  size: 24
+  fields:
+  - type: int
+    name: Id
+    offset: 8
+  - type: int
+    name: SetItemSlot
+    offset: 16
+  - type: __int16
+    name: Index
+    offset: 20
+  - type: Client::Enums::DetailKind
+    name: Kind
+    offset: 22
+  member_functions: []
+- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipTextArgs
+  name: AtkTooltipTextArgs
   namespace: Component.GUI
   union: False
   size: 24
@@ -22608,25 +22732,10 @@ structs:
   - type: char*
     name: Text
     offset: 0
-  - type: unsigned __int64
-    name: TypeSpecificId
-    offset: 8
   - type: unsigned int
-    name: Flags
-    offset: 16
-  - type: __int16
-    name: Unk_14
-    offset: 20
-  - type: byte
-    name: Unk_16
-    offset: 22
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? C1 FB 04
-    return_type: void
-    name: Ctor
-    parameters:
-    - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
-      name: this
+    name: AtkArrayType
+    offset: 12
+  member_functions: []
 - type: Component::GUI::AtkUIColorHolder::UIColor
   name: UIColor
   namespace: Component.GUI
@@ -40628,21 +40737,27 @@ structs:
       name: this
     - type: Component::GUI::AtkTimer*
       name: timer
-- type: Component::GUI::AtkTooltipManager::AtkTooltipInfo
-  name: AtkTooltipInfo
+- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipItemArgs
+  name: AtkTooltipItemArgs
   namespace: Component.GUI
   union: False
-  size: 32
+  size: 24
   fields:
-  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs
-    name: AtkTooltipArgs
-    offset: 0
-  - type: unsigned __int16
-    name: ParentId
-    offset: 24
-  - type: Component::GUI::AtkTooltipManager::AtkTooltipType
-    name: Type
-    offset: 26
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipItemArgs::Id
+    name: Id
+    offset: 8
+  - type: unsigned int
+    name: Flag1
+    offset: 12
+  - type: int
+    name: BuyQuantity
+    offset: 16
+  - type: __int16
+    name: Slot
+    offset: 20
+  - type: Client::Enums::DetailKind
+    name: Kind
+    offset: 22
   member_functions: []
 - type: Component::GUI::AtkUldComponentDataButton
   name: AtkUldComponentDataButton
@@ -45834,7 +45949,7 @@ structs:
     - type: int
       name: flag
     - type: byte
-      name: unk
+      name: isLovmActionDetail
 - type: Client::UI::Agent::AgentAetherCurrent
   name: AgentAetherCurrent
   namespace: Client.UI.Agent
@@ -51298,7 +51413,7 @@ structs:
   name: AgentMiragePrismPrismItemDetail
   namespace: Client.UI.Agent
   union: False
-  size: 88
+  size: 200
   fields:
   - type: Client::UI::Agent::AgentInterface
     name: AgentInterface
@@ -61149,8 +61264,8 @@ structs:
     name: AgentInterface
     offset: 0
     base: true
-  - type: Client::UI::Agent::ItemDetailKind
-    name: ItemKind
+  - type: Client::Enums::DetailKind
+    name: DetailKind
     offset: 280
   - type: unsigned int
     name: TypeOrId
@@ -83898,6 +84013,28 @@ structs:
       name: this
     - type: Component::GUI::FontType
       name: fontType
+- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::Args
+  name: Args
+  namespace: Component::GUI::AtkTooltipManager::AtkTooltipArgs
+  union: True
+  size: 24
+  fields:
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipTextArgs
+    name: TextArgs
+    offset: 0
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipItemArgs
+    name: ItemArgs
+    offset: 0
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipActionArgs
+    name: ActionArgs
+    offset: 0
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipLovmActionArgs
+    name: LovmActionArgs
+    offset: 0
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::AtkTooltipMiragePrismPrismItemArgs
+    name: MiragePrismPrismItemArgs
+    offset: 0
+  member_functions: []
 - type: RedBlackTree::Node<StdPair<Client::LayoutEngine::LayoutManager::AnalyticShapeDataKey, Client::LayoutEngine::AnalyticShapeData>>
   name: Node
   namespace: Helper
@@ -87375,6 +87512,22 @@ structs:
     name: RawInputData
     offset: 0
   member_functions: []
+- type: Component::GUI::AtkTooltipManager::AtkTooltipArgs
+  name: AtkTooltipArgs
+  namespace: Component.GUI
+  union: False
+  size: 24
+  fields:
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs::Args
+    name: Args
+    offset: 0
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? C1 FB 04
+    return_type: void
+    name: Ctor
+    parameters:
+    - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs*
+      name: this
 - type: Component::SteamApi::SteamApi
   name: SteamApi
   namespace: Component.SteamApi
@@ -89403,6 +89556,22 @@ structs:
     parameters:
     - type: Component::GUI::AtkComponentTab*
       name: this
+- type: Component::GUI::AtkTooltipManager::AtkTooltipInfo
+  name: AtkTooltipInfo
+  namespace: Component.GUI
+  union: False
+  size: 32
+  fields:
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipArgs
+    name: AtkTooltipArgs
+    offset: 0
+  - type: unsigned __int16
+    name: ParentId
+    offset: 24
+  - type: Component::GUI::AtkTooltipManager::AtkTooltipType
+    name: Type
+    offset: 26
+  member_functions: []
 - type: Component::GUI::AtkUnitManager
   name: AtkUnitManager
   namespace: Component.GUI
@@ -123645,7 +123814,7 @@ structs:
     offset: 632
   - name: UpdateControlHints
     offset: 640
-  - name: OnDragDropCancel
+  - name: OnDragDropClick
     offset: 656
   - name: OnDragDropInsert
     offset: 664
@@ -123655,9 +123824,9 @@ structs:
     offset: 680
   - name: OnDragDropRollover
     offset: 688
-  - name: OnDragDropCancelLocked
+  - name: ExecuteActionBarSlot
     offset: 696
-  - name: OnDragDropCancelByMouseUp
+  - name: OpenContextMenu
     offset: 704
   - name: IsExpandedHold
     offset: 712
@@ -123709,44 +123878,47 @@ structs:
   - type: Component::GUI::AtkComponentRadioButton*
     name: RoleRadioButton
     offset: 648
+  - type: Component::GUI::AtkComponentRadioButton*
+    name: DutiesRadioButton
+    offset: 656
   - type: Client::UI::ActionInfo
     name: Actions
-    offset: 816
+    offset: 824
     size: 80
     is_string: False
   - type: Component::GUI::AtkResNode*
     name: SidebarContainer
-    offset: 5312
-  - type: Component::GUI::AtkResNode*
-    name: ContentsContainer
     offset: 5320
   - type: Component::GUI::AtkResNode*
-    name: ActionsFooterContainer
+    name: ContentsContainer
     offset: 5328
-  - type: Component::GUI::AtkComponentButton*
-    name: HelpButton
+  - type: Component::GUI::AtkResNode*
+    name: ActionsFooterContainer
     offset: 5336
   - type: Component::GUI::AtkComponentButton*
-    name: CompactModeToggleButton
+    name: HelpButton
     offset: 5344
+  - type: Component::GUI::AtkComponentButton*
+    name: CompactModeToggleButton
+    offset: 5352
   - type: Component::GUI::AtkResNode*
     name: LevelTextContainer
-    offset: 5352
+    offset: 5360
   - type: Component::GUI::AtkImageNode*
     name: JobIcon
-    offset: 5360
+    offset: 5368
   - type: Component::GUI::AtkTextNode*
     name: JobText
-    offset: 5368
+    offset: 5376
   - type: Component::GUI::AtkComponentScrollBar*
     name: Scrollbar
-    offset: 5416
+    offset: 5424
   - type: Component::GUI::AtkResNode*
     name: ActionContentsContainer
-    offset: 5424
+    offset: 5432
   - type: Component::GUI::AtkCollisionNode*
     name: ActionCollision
-    offset: 5432
+    offset: 5440
   virtual_functions:
   - name: Dtor
     offset: 0
