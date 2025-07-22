@@ -4642,6 +4642,11 @@ classes:
   Client::Graphics::Kernel::Notifier:
     vtbls:
       - ea: 0x141FF0750
+  Client::System::Crypt::Md5:
+    funcs:
+      0x1401B1100: Init
+      0x1401B1140: Update
+      0x1401B1200: Final
   Client::System::Crypt::Crc32:
     vtbls:
       - ea: 0x141FF4360
