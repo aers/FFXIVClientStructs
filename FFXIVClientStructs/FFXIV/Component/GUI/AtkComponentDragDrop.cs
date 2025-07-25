@@ -88,5 +88,5 @@ public enum DragDropFlag : byte {
     Unk6 = 0b0010_0000,
     Unk7 = 0b0100_0000,
 
-    [Obsolete("Renamed to Locked")] Unk2 = 0b0000_0010,
+    [Obsolete("Renamed to Locked", true)] Unk2 = 0b0000_0010,
 }

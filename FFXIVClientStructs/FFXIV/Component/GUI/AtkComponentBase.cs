@@ -75,7 +75,7 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [VirtualFunction(5)]
     public partial void Update(float delta);
 
-    [VirtualFunction(5), Obsolete("Renamed to Update")]
+    [VirtualFunction(5), Obsolete("Renamed to Update", true)]
     public partial void OnUldUpdate(float delta);
 
     [VirtualFunction(7)]
