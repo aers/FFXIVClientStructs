@@ -1,0 +1,127 @@
+
+NOTE:
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/ActionManager.cs
+    ☐ [FieldOffset(0xF0)] public bool BallistaActive; // note that it is not cleared when exiting area-target mode until new area-targeting starts @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/ActionManager.cs#49
+    ☐ /// Note that the total value shown here depends on the last action used. For example, if a specific action is @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/ActionManager.cs#368
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Event/ShopEventHandler.cs
+    ☐ /// Note: BuyItemIndex field must be set before calling this function! @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Event/ShopEventHandler.cs#128
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/MJI/IslandState.cs
+    ☐ // Note: 0x78 to the game is treated as a single DWORD, but the actual values are only used in the context of @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/MJI/IslandState.cs#95
+    ☐ /// Note that this struct only provides mapping from a workshop ID to other data. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/MJI/IslandState.cs#150
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/MirageManager.cs
+    ☐ // Note: Data is cleared when switching zones @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/MirageManager.cs#4
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/MobHunt.cs
+    ☐ /// Note: The game does not clear the data when a mark is completed.<br/> @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/MobHunt.cs#4
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/WeaponState.cs
+    ☐ /// Note: Internally accesses LocalPlayer at offset 0x9a0 in version 7.0 (previously 0x9b0). @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/WeaponState.cs#106
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/LayoutEngine/ILayoutInstance.cs
+    ☐ [FieldOffset(0x0C)] public int Type; // note: this is a padding field that in some contexts is used to store collider type @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/LayoutEngine/ILayoutInstance.cs#159
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/LayoutEngine/LayoutManager.cs
+    ☐ [FieldOffset(0x268)] public StdMap<AnalyticShapeDataKey, AnalyticShapeData> CrcToAnalyticShapeData; // note: value is aligned to 16 bytes, so key has tons of padding @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/LayoutEngine/LayoutManager.cs#56
+    ☐ // note: this is a bad bad hack... @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/LayoutEngine/LayoutManager.cs#80
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/AddonActionBarBase.cs
+    ☐ /// Note that this method *CAN* trigger pulses on hotbar slots that don't have an item in them! @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/AddonActionBarBase.cs#40
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/AddonJobHudACN.cs
+    ☐ /// NOTE: this loads the UldResourceHandle "JobHudSCH0" @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/AddonJobHudACN.cs#8
+    ☐ /// NOTE: this loads the UldResourceHandle "JobHudSCH1" @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/AddonJobHudACN.cs#61
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/AddonMacro.cs
+    ☐ /// Note: Value is only set when changing page. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/AddonMacro.cs#32
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentMJICraftSchedule.cs
+    ☐ /// Note that game often reactivates same cycle to refresh data, e.g. after scheduling new craft. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentMJICraftSchedule.cs#188
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentRetainerItemTransfer.cs
+    ☐ /// Note: Not always set, unsure why... @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentRetainerItemTransfer.cs#31
+    ☐ /// Note: Not always set, unsure why... @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentRetainerItemTransfer.cs#37
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Component/BGCollision/BGCollisionModule.cs
+    ☐ /// Note that individual collider raycast operations are inconsistent in how they handle zero layer mask in raycast request: @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Component/BGCollision/BGCollisionModule.cs#11
+    ☐ /// Note that some colliders provide functions to perform raycast without layer check. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Component/BGCollision/BGCollisionModule.cs#14
+    ☐ [FieldOffset(0x50)] public Collider* Object; // note: it's actually always a Collider* @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Component/BGCollision/BGCollisionModule.cs#103
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Component/BGCollision/Collider.cs
+    ☐ [FieldOffset(0x04)] public AABB Bounds; // note: y bounds are ignored when reading the file @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Component/BGCollision/Collider.cs#153
+    ☐ // note: it has a bunch of extra no-op virtual funcs - I suspect these are various raycast flavours that were at some point removed from base class, but had empty overrides left in derived classes @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Component/BGCollision/Collider.cs#167
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentHoldButton.cs
+    ☐ // note: Name made up @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentHoldButton.cs#4
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/MacroDecoder.cs
+    ☐ // Note that the StdDeque (and this list) is zero-based, so you need to subtract 1 from gnum/gstr. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/MacroDecoder.cs#16
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/Havok/Common/Base/Reflection/Registry/hkClassNameRegistry.cs
+    ☐ // NOTE: this is actually a hkStaticClassNameRegistry : hkClassNameRegistry, which the game uses @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/Havok/Common/Base/Reflection/Registry/hkClassNameRegistry.cs#5
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/Havok/Common/Serialize/Util/hkSerializeUtil.cs
+    ☐ // 		/// NOTE: Some objects are inherently not serializable because they point to @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/Havok/Common/Serialize/Util/hkSerializeUtil.cs#169
+    ☐ // 		/// NOTE: Some objects are inherently not serializable because they point to @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/Havok/Common/Serialize/Util/hkSerializeUtil.cs#179
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/STD/Helper/MutateHelper.cs
+    ☐ // Note we've already partitioned around the pivot and do not have to move the pivot again. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/STD/Helper/MutateHelper.cs#90
+
+TODO:
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs
+    ☐ [FieldOffset(0xBB4)] public Vector2 BannerHeadDirection; // TODO: these are of type Client::Game::Control::MoveControl::SplineVector2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs#21
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/GcArmyManager.cs
+    ☐ [StructLayout(LayoutKind.Explicit, Size = 0xF28)] // TODO: size changed, fix offsets @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/GcArmyManager.cs#27
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/WKS/WKSManager.cs
+    ☐ [FieldOffset(0xDF8)] public WKSResearch* Research; // TODO: add suffix "Module" at some point @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/WKS/WKSManager.cs#41
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs
+    ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs#35
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/SubView.cs
+    ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/SubView.cs#9
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/View.cs
+    ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/View.cs#9
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Sound/SoundManager.cs
+    ☐ [FieldOffset(0x0008)] public Thread Thread; // TODO: make Thread properly inheritable @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Sound/SoundManager.cs#20
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Framework/Framework.cs
+    ☐ // TODO: convert to array of 64 strings each 32 bytes long if possible @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Framework/Framework.cs#99
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Framework/GameWindow.cs
+    ☐ [FieldOffset(0x00)] public ulong ArgumentCount; // TODO: (u)int @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Framework/GameWindow.cs#10
+    ☐ [FieldOffset(0x08)] public byte** Arguments; // Points to an array that points to CStr // TODO: use CStringPointer, add Span @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/System/Framework/GameWindow.cs#11
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentChatLog.cs
+    ☐ [FieldOffset(0x8A0)] public InventoryItem LinkedItem; // TODO: use LinkedInventoryItem as type, obsolete LinkedItemQuality below @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentChatLog.cs#26
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs
+    ☐ // TODO: change to bool @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs#28
+    ☐ // TODO: this is part of an event interface class @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs#31
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentItemDetail.cs
+    ☐ // TODO: remove with ItemKind field below @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentItemDetail.cs#6
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentMJIPouch.cs
+    ☐ [FieldOffset(0x18)] public byte Undiscovered; // TODO: bool, also move this struct into the agent @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentMJIPouch.cs#83
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs
+    ☐ [FieldOffset(0x19)] public byte IsQuestSomething; // TODO: doesn't seem right, 0x18 is used as a dword... @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#61
+    ☐ // TODO: this is likely part of SatisfactionSupplyManager, since it's filled by one of its member functions (assuming agent knows about manager and not vice versa) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#64
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/PvpSetModule.cs
+    ☐ // TODO: struct size decreased in 7.2 from 0xA0 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/PvpSetModule.cs#18
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs
+    ☐ public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong eventKind, ushort parentAddonId, int depthLayer); // TODO: parentAgent is supposed to be `AtkModuleInterface.AtkEventInterface* eventInterface` @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs#90
+    ☐ public partial ushort OpenAddonByAgent(CStringPointer addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint eventKind, ushort parentAddonId); // TODO: eventKind is ulong @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs#93
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs
+    ☐ // TODO: move functions out of lua_State and make them static. own luaapi struct maybe? @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs#34
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkCollisionNode.cs
+    ☐ [FieldOffset(0xB0)] public ushort CollisionType; // TODO: use CollisionType enum @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkCollisionNode.cs#15
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentBase.cs
+    ☐ public partial AtkResNode* GetImageNodeById(uint id); // TODO: return AtkImageNode* @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentBase.cs#34
+    ☐ public partial AtkResNode* GetTextNodeById(uint id); // TODO: return AtkTextNode* @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentBase.cs#37
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs
+    ☐ [FieldOffset(0x26C)] public ushort InputSanitizationFlags; // passed to SanitizeString // TODO: change type to AllowedEntities @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs#24
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkImageNode.cs
+    ☐ public partial void LoadTexture(CStringPointer texturePath, uint scale = 1); // TODO: scale should be int @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkImageNode.cs#27
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkTextInput.cs
+    ☐ [FieldOffset(0xBF0)] public uint CompletionDepth; // TODO: should be (u)short @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkTextInput.cs#30
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkTexture.cs
+    ☐ // TODO: use IconSubFolder enum here @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkTexture.cs#20
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkTimeline.cs
+    ☐ public partial void GetInterpolatedValue(int keyGroupId, AtkTimelineKeyGroupType keyGroupType, AtkTimelineKeyValue* output); // TODO: return bool @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkTimeline.cs#27
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs
+    ☐ [FieldOffset(0x6A)] public byte Flags1; // TODO: use TextInputFlags1 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs#17
+    ☐ [FieldOffset(0x6B)] public byte Flags2; // TODO: use TextInputFlags2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs#18
+    ☐ public enum TextInputFlags1 { // TODO: set underlying type to byte, additionally add [Flags] attribute @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs#22
+    ☐ public enum TextInputFlags2 { // TODO: set underlying type to byte, additionally add [Flags] attribute @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs#33
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs
+    ☐ public partial AtkComponentBase* CreateAtkComponent(ComponentType type); // TODO: takes (u)int param but enum is byte @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs#48
+    ☐ public partial AtkResNode* CreateAtkNode(NodeType type); // TODO: takes uint param but enum is ushort @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs#51
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs
+    ☐ public partial float GetGlobalUIScale(); // TODO: should be static @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#195
+    ☐ public partial byte FireCallbackInt(int callbackValue); // TODO: return bool @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#226
+    ☐ public partial void FireCallback(uint valueCount, AtkValue* values, bool close = false); // TODO: return bool @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#229
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/StringArrayData.cs
+    ☐ [FieldOffset(0x28)] public byte** StringArray; // TODO: change this to CStringPointer* @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/StringArrayData.cs#9
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs
+    ☐ // TODO: Actually call `SteamInternal_ContextInit(ctx)` here, rather than just returning the cached pointer. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs#48
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/TextParameter.cs
+    ☐ // TODO: implement as Client::System::Data::Variant<> and Client::System::Data::VariantPtr<> @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/TextParameter.cs#3
+  @file:///d%3A/source/repos/FFXIVClientStructs/ida/data.yml
+    ☐ Client::Game::Character::CharacterManagerInterface: # todo: needs a better name, interface for CharacterManager and GroupManager @file:///d%3A/source/repos/FFXIVClientStructs/ida/data.yml#1138
+    ☐ base: Client::UI::Agent::AgentInterface # TODO: incorrect inheritance @file:///d%3A/source/repos/FFXIVClientStructs/ida/data.yml#11570
