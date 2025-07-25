@@ -5,10 +5,11 @@ using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 
 // Client::System::Resource::Handle::MaterialResourceHandle
-//   Client::System::Resource::Handle::ResourceHandle
-//     Client::System::Common::NonCopyable
+//   Client::System::Resource::Handle::DefaultResourceHandle
+//     Client::System::Resource::Handle::ResourceHandle
+//       Client::System::Common::NonCopyable
 [GenerateInterop]
-[Inherits<ResourceHandle>]
+[Inherits<DefaultResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0x108)]
 public unsafe partial struct MaterialResourceHandle {
     public const int TableRows = 16;
@@ -127,7 +128,7 @@ public unsafe partial struct MaterialResourceHandle {
         }
     }
 
-    [FieldOffset(0xB8)] public ulong Length;
+    // [FieldOffset(0xB8)] public ulong Length;
     /// <summary>
     /// The instantiated material. Its <see cref="Material.MaterialResourceHandle"/> will be the current structure.
     /// </summary>
