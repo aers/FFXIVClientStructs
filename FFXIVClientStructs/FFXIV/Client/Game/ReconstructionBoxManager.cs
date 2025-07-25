@@ -6,8 +6,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [Obsolete("Use DomanEnclaveManager instead.", true)]
 [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public unsafe partial struct ReconstructionBoxManager {
-    [StaticAddress("48 8B 15 ?? ?? ?? ?? 48 8B C8 48 83 C4 28", 3, isPointer: true), Obsolete("Use DomanEnclaveManager instead.", true)]
-    public static partial ReconstructionBoxManager* Instance();
+    [Obsolete("Use DomanEnclaveManager instead.", true)]
+    public static ReconstructionBoxManager* Instance() => (ReconstructionBoxManager*)DomanEnclaveManager.Instance();
 
     [FieldOffset(0x8)] public bool Loaded;
 
