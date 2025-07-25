@@ -21,7 +21,6 @@ public enum ItemDetailKind : byte {
 [StructLayout(LayoutKind.Explicit, Size = 0x220)]
 public unsafe partial struct AgentItemDetail {
     [FieldOffset(0x118)] public DetailKind DetailKind;
-    [FieldOffset(0x118), Obsolete($"Use {nameof(DetailKind)}", true)] public ItemDetailKind ItemKind;
     // Set to the item ID when hovering an item in the chat, otherwise it seems
     // to be different for each inventory. Doesn't appear to have any relation
     // to InventoryType.

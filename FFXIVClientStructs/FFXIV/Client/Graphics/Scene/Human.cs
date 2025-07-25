@@ -50,16 +50,6 @@ public unsafe partial struct Human {
     /// | LFinger | 9     |
     /// </remarks>
     [FieldOffset(0xAF8), FixedSizeArray] internal FixedSizeArray10<Pointer<TextureResourceHandle>> _slotDecals;
-    [FieldOffset(0xAF8), Obsolete("Use SlotDecals[0] instead.", true)] public TextureResourceHandle* HeadDecal;
-    [FieldOffset(0xB00), Obsolete("Use SlotDecals[1] instead.", true)] public TextureResourceHandle* TopDecal;
-    [FieldOffset(0xB08), Obsolete("Use SlotDecals[2] instead.", true)] public TextureResourceHandle* ArmsDecal;
-    [FieldOffset(0xB10), Obsolete("Use SlotDecals[3] instead.", true)] public TextureResourceHandle* LegsDecal;
-    [FieldOffset(0xB18), Obsolete("Use SlotDecals[4] instead.", true)] public TextureResourceHandle* FeetDecal;
-    [FieldOffset(0xB20), Obsolete("Use SlotDecals[5] instead.", true)] public TextureResourceHandle* EarDecal;
-    [FieldOffset(0xB28), Obsolete("Use SlotDecals[6] instead.", true)] public TextureResourceHandle* NeckDecal;
-    [FieldOffset(0xB30), Obsolete("Use SlotDecals[7] instead.", true)] public TextureResourceHandle* WristDecal;
-    [FieldOffset(0xB38), Obsolete("Use SlotDecals[8] instead.", true)] public TextureResourceHandle* RFingerDecal;
-    [FieldOffset(0xB40), Obsolete("Use SlotDecals[9] instead.", true)] public TextureResourceHandle* LFingerDecal;
 
     /// <remarks>
     /// | Type | Index |
