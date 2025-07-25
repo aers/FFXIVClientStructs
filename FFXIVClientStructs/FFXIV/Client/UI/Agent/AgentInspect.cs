@@ -57,10 +57,10 @@ public unsafe partial struct AgentInspect {
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct FreeCompanyData {
         //[FieldOffset(0x00)] public byte Unkown4b0; // Maybe FreeCompany get status 1 = Finished
-        [Obsolete("This field is wrong, it is IsBuddyInspect actually", true)]
-        [FieldOffset(0x01)] public bool IsPartOfFreeCompany; // HasGuild???????? if 0 Client::UI::RaptureAtkModule.OpenAddon can be called without getting additional infos
+        [Obsolete("This field is in the wrong place, it is AgentInspect.IsBuddyInspect", true)]
+        [FieldOffset(-0x07)] public bool IsPartOfFreeCompany;
         [FieldOffset(0x00)] public long Id;
-        [FieldOffset(0x8)] public CrestData Crest;
+        [FieldOffset(0x08)] public CrestData Crest;
         [FieldOffset(0x10)] public ushort MemberCount;
         [FieldOffset(0x12)] public ushort GrandCompany; // 1 = Maelstorm 2 = TwinAdder 3 = ImmortalFlames
         [FieldOffset(0x18)] public Utf8String GuildName;

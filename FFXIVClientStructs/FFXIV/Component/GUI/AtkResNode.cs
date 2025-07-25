@@ -175,7 +175,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 57 1B")]
     public partial AtkComponentTextNineGrid* GetAsAtkComponentTextNineGrid();
 
-    [Obsolete("Renamed to GetAsAtkComponentTextNineGrid")]
+    [Obsolete("Renamed to GetAsAtkComponentTextNineGrid", true)]
     public AtkComponentTextNineGrid* GetAsAtkTextNineGrid() => GetAsAtkComponentTextNineGrid();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83")]

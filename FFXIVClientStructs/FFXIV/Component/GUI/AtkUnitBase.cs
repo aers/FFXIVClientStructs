@@ -206,7 +206,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36")]
     public partial AtkComponentButton* GetComponentButtonById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36"), Obsolete("Renamed to GetComponentButtonById")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36"), Obsolete("Renamed to GetComponentButtonById", true)]
     public partial AtkComponentButton* GetButtonNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 46 48")]

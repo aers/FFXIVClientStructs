@@ -71,7 +71,7 @@ public unsafe partial struct AgentMJIPouch {
 public struct PouchInventoryItem {
     [FieldOffset(0x00)] public uint ItemId;
     [FieldOffset(0x04)] public uint IconId;
-    [FieldOffset(0x08), Obsolete("Use RowId instead")] public int SlotIndex;
+    [FieldOffset(0x08), Obsolete("Use RowId instead", true)] public int SlotIndex;
     /// <remarks>MJIItemPouch or MJIKeyItem RowId</remarks>
     [FieldOffset(0x08)] public uint RowId;
     [FieldOffset(0x0C)] public int StackSize;

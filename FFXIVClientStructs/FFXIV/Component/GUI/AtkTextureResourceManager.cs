@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkTextureResourceManager {
     [FieldOffset(0x00)] public StdLinkedList<Pointer<AtkTextureResource>> LoadedTextures;
     [FieldOffset(0x18)] public int DefaultTextureScale;
-    [FieldOffset(0x18), Obsolete("Renamed to DefaultTextureScale")] public int DefaultTextureVersion;
+    [FieldOffset(0x18), Obsolete("Renamed to DefaultTextureScale", true)] public int DefaultTextureVersion;
     [FieldOffset(0x20)] public ExdModule* ExdModule;
     [FieldOffset(0x28)] public int IconLanguageSheetId;
     [FieldOffset(0x2C)] public int IconLanguage;

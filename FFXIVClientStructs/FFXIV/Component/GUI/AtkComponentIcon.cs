@@ -16,7 +16,7 @@ public unsafe partial struct AtkComponentIcon : ICreatable {
     [FieldOffset(0xC4)] public IconSubFolder IconSubFolder;
     [FieldOffset(0xC8)] public AtkUldAsset* Texture;
     [FieldOffset(0xD0)] public AtkResNode* FrameContainer;
-    [FieldOffset(0xD0), Obsolete("Renamed to FrameContainer")] public AtkResNode* IconAdditionsContainer;
+    [FieldOffset(0xD0), Obsolete("Renamed to FrameContainer", true)] public AtkResNode* IconAdditionsContainer;
     [FieldOffset(0xD8)] public AtkResNode* ComboBorder;
     [FieldOffset(0xE0)] public AtkResNode* Frame;
     [FieldOffset(0xE8)] public AtkResNode* OuterResNode; // seems to be used for showing tooltips and mouse click to open a window

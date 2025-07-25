@@ -46,7 +46,7 @@ public unsafe partial struct StatusManager {
     [MemberFunction("E8 ?? ?? ?? ?? FF C6 48 8D 5B 0C")]
     public partial bool SetStatus(int statusIndex, ushort statusId, float remaining, ushort param, GameObjectId sourceObject, bool refreshFlags);
 
-    [Obsolete("Use SetStatus with GameObjectId sourceObject")]
+    [Obsolete("Use SetStatus with GameObjectId sourceObject", true)]
     public bool SetStatus(int statusIndex, ushort statusId, float remaining, ushort param, uint sourceId, bool refreshFlags) => SetStatus(statusIndex, statusId, remaining, param, (ulong)sourceId, refreshFlags);
 
     /// <summary>
@@ -69,5 +69,5 @@ public struct Status {
     [FieldOffset(0x4)] public float RemainingTime;
     // ObjectId matching the entity that cast the effect - regens will be from the white mage ID etc
     [FieldOffset(0x8)] public GameObjectId SourceObject;
-    [FieldOffset(0x8), Obsolete("Use SourceObject")] public uint SourceId;
+    [FieldOffset(0x8), Obsolete("Use SourceObject.ObjectId", true)] public uint SourceId;
 }

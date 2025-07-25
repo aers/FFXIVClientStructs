@@ -50,10 +50,10 @@ public unsafe partial struct Conditions {
     /// <remarks> Observed during Materialize (Desynthesis, Materia Extraction, Aetherial Reduction) and Repair. </remarks>
     [FieldOffset(39)] public bool Occupied39;
     [FieldOffset(40)] public bool ExecutingCraftingAction;
-    [FieldOffset(40), Obsolete("Renamed to ExecutingCraftingAction")] public bool Crafting40;
+    [FieldOffset(40), Obsolete("Renamed to ExecutingCraftingAction", true)] public bool Crafting40;
     [FieldOffset(41)] public bool PreparingToCraft;
     [FieldOffset(42)] public bool ExecutingGatheringAction; // includes Fishing
-    [FieldOffset(42), Obsolete("Renamed to ExecutingGatheringAction")] public bool Gathering42;
+    [FieldOffset(42), Obsolete("Renamed to ExecutingGatheringAction", true)] public bool Gathering42;
     [FieldOffset(43)] public bool Fishing;
     [FieldOffset(44)] public bool Unknown44;
     [FieldOffset(45)] public bool BetweenAreas;
@@ -122,7 +122,7 @@ public unsafe partial struct Conditions {
     [FieldOffset(101)] public bool Unknown101;
     /// <remarks> Used in Cosmic Exploration. </remarks>
     [FieldOffset(102)] public bool PilotingMech;
-    [FieldOffset(102), Obsolete("Renamed to PilotingMech")] public bool Unknown102;
+    [FieldOffset(102), Obsolete("Renamed to PilotingMech", true)] public bool Unknown102;
     [FieldOffset(103)] public bool Unknown103;
     /// <remarks> When this reaches <c>0</c>, <see cref="MountOrOrnamentTransition"/> is set to <c>false</c>. </remarks>
     [FieldOffset(104)] public float MountOrOrnamentTransitionResetTimer;

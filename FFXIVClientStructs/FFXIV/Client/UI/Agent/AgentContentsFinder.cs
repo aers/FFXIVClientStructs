@@ -23,7 +23,7 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x1E98)] public StdVector<Pointer<Contents>> ContentList;
     [FieldOffset(0x1EB0)] public StdVector<ContentsId> SelectedContent;
     [FieldOffset(0x1EC8)] public ContentsId SelectedDuty;
-    [FieldOffset(0x1ECC), Obsolete("Use SelectedDuty.Id instead")] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
+    [FieldOffset(0x1ECC), Obsolete("Use SelectedDuty.Id instead", true)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1ED8)] public byte NumCollectedRewards; // Value used for "Reward already received"
     // TODO: change to bool
     [FieldOffset(0x1ED9)] public byte HasRouletteSelected; // Prevents more roulettes from being selected

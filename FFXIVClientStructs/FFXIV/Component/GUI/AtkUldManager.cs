@@ -31,7 +31,7 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x80)] public ushort RootNodeWidth;
     [FieldOffset(0x82)] public ushort RootNodeHeight;
     [FieldOffset(0x84)] public ushort NodeListSize; // this is the allocated size of nodelist, count is the amount of nodes it has
-    [FieldOffset(0x86), Obsolete("Use ResourceFlags")] public byte Flags1;
+    [FieldOffset(0x86), Obsolete("Use ResourceFlags", true)] public byte Flags1;
     [FieldOffset(0x86)] public AtkUldManagerResourceFlag ResourceFlags;
     [FieldOffset(0x88)] public AtkUldManagerBaseType BaseType;
     [FieldOffset(0x89)] public AtkLoadState LoadedState; // 3 is fully loaded

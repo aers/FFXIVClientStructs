@@ -36,7 +36,7 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
     public partial AtkResNode* GetTextNodeById(uint id); // TODO: return AtkTextNode*
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8"), Obsolete("This function has not type check at all. Use GetNodeById instead.")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8"), Obsolete("This function has not type check at all. Use GetNodeById instead.", true)]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 57 01 48 89 43 10")]
