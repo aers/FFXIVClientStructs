@@ -18,7 +18,7 @@ internal class CExporterExcelBeginAttribute(string SheetName) : Attribute {
 [AttributeUsage(AttributeTargets.Field)]
 internal class CExporterExcelEndAttribute : Attribute;
 
-[AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Method)]
+[AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Property)]
 internal class CExporterExcelAttribute(string SheetName) : Attribute {
     public string SheetName { get; } = SheetName;
 }

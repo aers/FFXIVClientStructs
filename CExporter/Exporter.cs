@@ -338,24 +338,32 @@ public class Exporter {
             _processType.Add(fixedType);
             if (fixedType.IsBaseType())
                 size /= fixedType.SizeOf();
+            var fieldOverrideType = fixedType == typeof(nint) ? field.GetCustomAttribute<CExporterExcelAttribute>()?.SheetName ?? null : null;
+            if (fieldOverrideType != null)
+                fieldOverrideType = $"Component::Exd::Sheets::{fieldOverrideType}*";
             return new ProcessedFixedField {
                 FieldType = fixedType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name,
-                FixedSize = size
+                FixedSize = size,
+                FieldTypeOverride = fieldOverrideType
             };
         }
         if (field.FieldType.GetCustomAttribute<InlineArrayAttribute>() != null) {
             var arrLength = field.FieldType.GetCustomAttribute<InlineArrayAttribute>()!.Length;
             var elementType = field.FieldType.GetGenericArguments()[0];
             var isString = field.GetCustomAttribute<FixedSizeArrayAttribute>()?.IsString ?? false;
+            var fieldOverrideType = elementType == typeof(nint) ? field.GetCustomAttribute<CExporterExcelAttribute>()?.SheetName ?? null : null;
+            if (fieldOverrideType != null)
+                fieldOverrideType = $"Component::Exd::Sheets::{fieldOverrideType}*";
             _processType.Add(elementType);
             return new ProcessedFixedField {
                 FieldType = elementType,
                 FieldOffset = field.GetFieldOffset() - offset,
                 FieldName = field.Name[1].ToString().ToUpper() + field.Name[2..],
                 FixedSize = arrLength,
-                FixedString = isString
+                FixedString = isString,
+                FieldTypeOverride = fieldOverrideType
             };
         }
         if (field.GetCustomAttribute<CExporterExcelBeginAttribute>() != null) {
