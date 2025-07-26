@@ -54,17 +54,94 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
     public partial CStringPointer GetAddonText(uint addonId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF 45 33 FF")] // FormatAddonText1<int,int,uint>
+    // FormatAddonText1
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 4D 2B")]
+    public partial CStringPointer FormatAddonText1String(uint addonId, CStringPointer strParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 4D 20")]
+    public partial CStringPointer FormatAddonText1StringInt(uint addonId, CStringPointer strParam, int intParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 67 B8 ?? ?? ?? ??")]
+    public partial CStringPointer FormatAddonText1StringIntUInt(uint addonId, CStringPointer strParam, int intParam, uint uintParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 4B 20 48 8B D0 33 C0")]
+    public partial CStringPointer FormatAddonText1StringString(uint addonId, CStringPointer strParam1, CStringPointer strParam2);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B B4 24 ?? ?? ?? ?? 49 8D B7 ?? ?? ?? ??")]
+    public partial CStringPointer FormatAddonText1StringStringString(uint addonId, CStringPointer strParam1, CStringPointer strParam2, CStringPointer strParam3);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF 45 33 FF")]
+    public partial CStringPointer FormatAddonText1Int(uint addonId, int intParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7E 4E 00")]
+    public partial CStringPointer FormatAddonText1IntInt(uint addonId, int intParam1, int intParam2);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF 45 33 FF")]
     public partial CStringPointer FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 55 0B")] // FormatAddonText2<int>
-    public partial CStringPointer FormatAddonText2Int(uint addonId, int value);
+    [MemberFunction("E8 ?? ?? ?? ?? EB 38 49 8B D2")]
+    public partial CStringPointer FormatAddonText1IntIntUIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam1, uint uintParam2);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 51 0F B6 DB")] // FormatAddonText2<int,int>
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 5C 24 44 48 8B D0")]
+    public partial CStringPointer FormatAddonText1IntString(uint addonId, int intParam, CStringPointer strParam);
+
+    // FormatAddonText2
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C5 48 89 44 24 ??")]
+    public partial CStringPointer FormatAddonText2String(uint addonId, CStringPointer strParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 67 48 8B 7E 10")]
+    public partial CStringPointer FormatAddonText2StringInt(uint addonId, CStringPointer strParam, int intParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? EB 14")]
+    public partial CStringPointer FormatAddonText2StringIntUInt(uint addonId, CStringPointer strParam, int intParam, uint uintParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8D 4D E0 E8 ?? ?? ?? ?? 49 8B 9D ?? ?? ?? ??")]
+    public partial CStringPointer FormatAddonText2StringIntUIntUIntUInt(uint addonId, CStringPointer strParam, int intParam, uint uintParam1, uint uintParam2, uint uintParam3);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8C 24 ?? ?? ?? ?? 45 33 C9 4C 8B C0 C6 44 24 ?? ??")]
+    public partial CStringPointer FormatAddonText2StringIntUIntUIntUIntUIntUInt(uint addonId, CStringPointer strParam, int intParam, uint uintParam1, uint uintParam2, uint uintParam3, uint uintParam4, uint uintParam5);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8B 8F ?? ?? ?? ??")]
+    public partial CStringPointer FormatAddonText2StringString(uint addonId, CStringPointer strParam1, CStringPointer strParam2);
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 0F B6 44 24 ?? 3C 01")]
+    public partial CStringPointer FormatAddonText2StringStringUInt(uint addonId, CStringPointer strParam1, CStringPointer strParam2, uint uintParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8D 4C 24 ?? 41 8B C7")]
+    public partial CStringPointer FormatAddonText2StringStringUIntUInt(uint addonId, CStringPointer strParam1, CStringPointer strParam2, uint uintParam1, uint uintParam2);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 39 7E 08")]
+    public partial CStringPointer FormatAddonText2StringStringUIntUIntUInt(uint addonId, CStringPointer strParam1, CStringPointer strParam2, uint uintParam1, uint uintParam2, uint uintParam3);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 65 80 4C 8B C0")]
+    public partial CStringPointer FormatAddonText2StringStringStringUIntUInt(uint addonId, CStringPointer strParam1, CStringPointer strParam2, CStringPointer strParam3, uint uintParam1, uint uintParam2);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 55 0B")]
+    public partial CStringPointer FormatAddonText2Int(uint addonId, int intParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 51 0F B6 DB")]
     public partial CStringPointer FormatAddonText2IntInt(uint addonId, int intParam1, int intParam2);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 EB 38")] // FormatAddonText2<int,int,uint>
-    public partial CStringPointer FormatAddonText2IntIntUInt(uint addonId, int value1, int value2, uint value3);
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 EB 38")]
+    public partial CStringPointer FormatAddonText2IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 72 4C 8B 42 30")]
+    public partial CStringPointer FormatAddonText2IntIntUIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam1, uint uintParam2);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 4D 64")]
+    public partial CStringPointer FormatAddonText2IntIntUIntUIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam1, uint uintParam2, uint uintParam3);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 64 24 ?? 4C 8B 74 24 ?? 48 8B 9C 24 ?? ?? ?? ??")]
+    public partial CStringPointer FormatAddonText2IntIntUIntUIntUIntUIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam1, uint uintParam2, uint uintParam3, uint uintParam4, uint uintParam5);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 41 41 8B F7")]
+    public partial CStringPointer FormatAddonText2IntString(uint addonId, int intParam, CStringPointer strParam);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 45 0F B7 C6")]
+    public partial CStringPointer FormatAddonText2IntIntString(uint addonId, int intParam1, int intParam2, CStringPointer strParam);
+
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 41 56 41 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 48 8B F1 4D 8B F1")]
+    public partial CStringPointer FormatAddonText2IntStringUInt(uint addonId, int intParam, CStringPointer strParam, uint uintParam);
 
     /// <summary>
     /// Display a timespan as hours, minutes or seconds with only the largest non zero unit.
