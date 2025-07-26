@@ -8,8 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [GenerateInterop(isInherited: true)]
 [Inherits<ResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
-public unsafe partial struct DefaultResourceHandle
-{
+public unsafe partial struct DefaultResourceHandle {
     [FieldOffset(0xB0)] public byte* Data;
     [FieldOffset(0xB8)] public ulong Length;
 }
