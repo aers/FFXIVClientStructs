@@ -28,7 +28,7 @@ public partial struct AgentBeginnersMansionProblem {
     // when CurrentRoleType is Tank, it will be rows from TutorialTank, same goes to Healer, DPS and Gimmick
     [FieldOffset(0x110)] public StdVector<nint> CurrentRoleTutorialRows;
 
-    [FieldOffset(0x128)] internal FixedSizeArray5<Utf8String> _strings;
+    [FieldOffset(0x128), FixedSizeArray] internal FixedSizeArray5<Utf8String> _strings;
 
     [FieldOffset(0x330)] public uint GroupMemberCount;
 

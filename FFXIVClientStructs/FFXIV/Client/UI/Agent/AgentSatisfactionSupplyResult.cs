@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public partial struct AgentSatisfactionSupplyResult {
-    [FieldOffset(0x28)] public uint CurrentSatisfactionNpcRowId;
+    [FieldOffset(0x28), CExporterExcel("SatisfactionNpc")] public uint CurrentSatisfactionNpcRowId;
 
     [FieldOffset(0x2D)] public bool IsRewardInitialized;
     [FieldOffset(0x2E)] public bool IsAddonOpen;
@@ -15,13 +15,11 @@ public partial struct AgentSatisfactionSupplyResult {
 
     [FieldOffset(0x40)] public SatisfactionSupplyManager.NpcInfo CurrentNpcInfo;
 
-    [FieldOffset(0x5C)] internal FixedSizeArray3<RewardDetail> _rewards;
+    [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray3<RewardDetail> _rewards;
 
-    [FieldOffset(0x78)] private nint CurrentNpcResidentNpcRow;
+    [FieldOffset(0x78), CExporterExcel("ENpcResident")] private nint CurrentNpcResidentNpcRow;
 
-    [FieldOffset(0x80)] private nint Reward1ItemRow;
-    [FieldOffset(0x88)] private nint Reward2ItemRow;
-    [FieldOffset(0x90)] private nint Reward3ItemRow;
+    [FieldOffset(0x80), CExporterExcel("Item"), FixedSizeArray] internal FixedSizeArray3<nint> _rewardItemRows;
 
     [FieldOffset(0x98)] public int AvailableRewardCount;
     [FieldOffset(0x9C)] public int ContextMenuSelectedRewardIndex;
