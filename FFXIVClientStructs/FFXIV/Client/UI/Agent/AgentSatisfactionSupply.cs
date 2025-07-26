@@ -21,31 +21,21 @@ public unsafe partial struct AgentSatisfactionSupply {
 
     [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray3<ItemInfo> _items;
 
-    [FieldOffset(0x138)] public void* ENpcResidentRow;
-    [FieldOffset(0x140)] public void* Item1Row;
-    [FieldOffset(0x148)] public void* Item2Row;
-    [FieldOffset(0x150)] public void* Item3Row;
+    [FieldOffset(0x138), CExporterExcel("ENpcResident")] public void* ENpcResidentRow;
+    [FieldOffset(0x140), CExporterExcel("Item")] internal FixedSizeArray3<nint> _itemRows;
 
-    [FieldOffset(0x158), FixedSizeArray] internal FixedSizeArray3<AgentDeliveryItemInfo> _deliveryInfo;
+    [FieldOffset(0x158), FixedSizeArray] internal FixedSizeArray3<DeliveryItemInfo> _deliveryInfo;
 
-    [FieldOffset(0x470)] public void* Item1Reward1Row;
-    [FieldOffset(0x478)] public void* Item2Reward1Row;
-    [FieldOffset(0x480)] public void* Item3Reward1Row;
-    [FieldOffset(0x488)] public void* Item1Reward2Row;
-    [FieldOffset(0x490)] public void* Item2Reward2Row;
-    [FieldOffset(0x498)] public void* Item3Reward2Row;
-    [FieldOffset(0x4A0)] public void* GilRow;
-    [FieldOffset(0x4A8)] public void* CrafterScripRow1;
-    [FieldOffset(0x4B0)] public void* CrafterScripRow2;
-    [FieldOffset(0x4B8)] public void* GathererScripRow1;
-    [FieldOffset(0x4C0)] public void* GathererScripRow2;
-    [FieldOffset(0x4C8)] public void* FishingSpotRow;
-    [FieldOffset(0x4D0)] public void* SpearfishingNotebookRow;
+    [FieldOffset(0x470), CExporterExcel("Item")] internal FixedSizeArray3<nint> ItemRewardRows1;
+    [FieldOffset(0x488), CExporterExcel("Item")] internal FixedSizeArray3<nint> ItemRewardRows2;
+    [FieldOffset(0x4A0), CExporterExcel("Item")] public void* GilRow;
+    [FieldOffset(0x4A8), CExporterExcel("Item")] internal FixedSizeArray2<nint> CrafterScripRows;
+    [FieldOffset(0x4B8), CExporterExcel("Item")] internal FixedSizeArray2<nint> GathererScripRows;
+    [FieldOffset(0x4C8), CExporterExcel("FishingSpot")] public void* FishingSpotRow;
+    [FieldOffset(0x4D0), CExporterExcel("SpearfishingNotebook")] public void* SpearfishingNotebookRow;
 
-    [FieldOffset(0x4D8)] public uint CrafterScripId1;
-    [FieldOffset(0x4DC)] public uint CrafterScripId2;
-    [FieldOffset(0x4E0)] public uint GathererScripId1;
-    [FieldOffset(0x4E4)] public uint GathererScripId2;
+    [FieldOffset(0x4D8)] internal FixedSizeArray2<uint> CrafterScripIds;
+    [FieldOffset(0x4E0)] internal FixedSizeArray2<uint> GathererScripIds;
     [FieldOffset(0x4E8)] public uint TimeRemainingHours;
     [FieldOffset(0x4EC)] public uint TimeRemainingMinutes;
 
@@ -82,9 +72,17 @@ public unsafe partial struct AgentSatisfactionSupply {
         [FieldOffset(0x38)] public ushort FishingSpotId;
         [FieldOffset(0x3A)] public ushort SpearFishingSpotId;
     }
+
+    /// <summary>
+    /// Byte info from 0x00 to one byte before <see cref="DeliveryItemInfo.ItemName"/> is filled with the info from ItemRow directly
+    /// </summary>
+    [StructLayout(LayoutKind.Explicit, Size = 0x108)]
+    public unsafe partial struct DeliveryItemInfo {
+        // the following two is just to expose the data properly in reverse engineering tools
+        [FieldOffset(0x00), CExporterExcelBegin("Item")] private uint Singular;
+        [FieldOffset(0x9F), CExporterExcelEnd] private byte PackedBool9F;
+        // the only useful data that is in the struct that can't be gotten through other means
+        [FieldOffset(0xA0)] public Utf8String ItemName;
+    }
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x108)]
-public unsafe partial struct AgentDeliveryItemInfo {
-    [FieldOffset(0xA0)] public Utf8String ItemName;
-}
