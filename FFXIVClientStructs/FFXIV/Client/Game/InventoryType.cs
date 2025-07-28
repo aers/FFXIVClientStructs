@@ -43,8 +43,8 @@ public enum InventoryType : uint {
     PremiumSaddleBag1 = 4100,
     PremiumSaddleBag2 = 4101,
 
-    Cosmopouch1 = 5000,
-    Cosmopouch2 = 5001,
+    Cosmopouch1 = 5000, // Cosmic Exploration: Mission Inventory (including Fishing Bait)
+    Cosmopouch2 = 5001, // Cosmic Exploration: Mech Ops Inventory
 
     Invalid = 9999,
 

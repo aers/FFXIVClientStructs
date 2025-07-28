@@ -132,6 +132,7 @@ functions:
 #fail   0x1403297E0: GetGlobalTextParameter
   0x1406A4CE0: std::vector<Component::GUI::AtkValue>_SetSize
   0x140D5C0D0: GetGameObjectByIndex
+  0x140D11AA0: IsTerritoryTypeCosmicExploration
   0x140914A20: GetRandomInteger
   0x140914A80: GetRandomFloat
   0x1404D8310: UpdateAnimFactor
@@ -1476,6 +1477,7 @@ classes:
       0x1408273A0: GetPermittedGearsetCount
       0x140831020: GetLimitedTomestoneCount
       0x140821EF0: GetEmptySlotsInBag
+      0x140822130: GetFirstEmptyInventorySlot
       0x14082B7D0: SendTradeRequest
       0x14082DCA0: GetRetainerGil
       0x14082EDC0: GetRetainerMarketPrice
@@ -1566,6 +1568,80 @@ classes:
       0x14081A680: IsCrystals
       0x14081A6B0: IsArmory
       0x140823D00: IsEquippedItems
+  Client::Game::ContentInventoryManager:
+    vtbls:
+      - ea: 0x1421C3F10
+    instances:
+      - ea: 0x142951D90
+    vfuncs:
+      0: Dtor
+      6: vf6
+    funcs:
+      0x14186D2E0: CreateInstance
+      0x14186D390: DestroyInstance
+      0x14186D3F0: HasInstance
+      0x14186D410: GetInstance
+      0x14186D4E0: ctor # inlined
+      0x14186D6B0: Update
+      0x14186D750: Load
+      0x14186D9C0: ProcessPacket
+      0x14186E0E0: HasItemIdByPtr
+      0x14186E1A0: IsInCosmicExploration1 # used by GatheringPointEventHandler
+      0x14186E1C0: IsInCosmicExploration2 # used by SpearFishingEventHandler
+      0x14186E1E0: HasInventoryContainer
+      0x14186E290: HasItemId
+      0x14186E350: GetInventorySlot
+      0x14186E420: GetInventoryContainer
+      0x14186E4E0: GetInventoryTypeByItemId
+  Client::Game::ContentInventoryItem:
+    vtbls:
+      - ea: 0x1422F6348
+        base: Client::Game::InventoryItem
+  Client::Game::ContentInventoryContainer:
+    vtbls:
+      - ea: 0x14231CF88
+        base: Client::Game::InventoryContainer
+    vfuncs:
+      6: GetInventoryType
+    funcs:
+      0x141BBD020: ctor
+  Client::Game::ContentInventoryProvider:
+    vtbls:
+      - ea: 0x1422D58F8
+    vfuncs:
+      0: Dtor
+      1: HasInventoryContainer
+      2: IsValidTerritoryType
+      3: Setup
+      9: GetInventorySlot
+      10: GetInventoryContainer
+      16: vf16
+    funcs:
+      0x141B14140: ctor
+      0x141B14490: HasItemId
+      0x141B141D0: GetInventoryTypeByItemId
+  Client::Game::WKS::WKSContentInventoryItem:
+    vtbls:
+      - ea: 0x1422F6410
+        base: Client::Game::ContentInventoryItem
+    funcs:
+      0x141BBD310: ctor
+  Client::Game::WKS::WKSContentInventoryContainer:
+    vtbls:
+      - ea: 0x1422F64D8
+        base: Client::Game::ContentInventoryContainer
+    vfuncs:
+      7: ClearItems
+      8: SetItem # (this, Client::Game::InventoryType inventoryType, short slot, uint itemId, ushort quantity)
+      9: SetItemEx # (this, Client::Game::InventoryType inventoryType, short slot, uint itemId, ushort quantity, Client::Game::InventoryItem::ItemFlags flags, ushort collectability)
+    funcs:
+      0x141B5F540: ctor
+  Client::Game::WKS::WKSContentInventoryProvider:
+    vtbls:
+      - ea: 0x1422D5AF0
+        base: Client::Game::ContentInventoryProvider
+    funcs:
+      0x141B14880: ctor
   Client::Game::MonsterNoteManager:
     instances:
       - ea: 0x14291E6B0
