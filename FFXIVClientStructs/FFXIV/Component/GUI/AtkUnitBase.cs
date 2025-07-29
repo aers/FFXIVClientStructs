@@ -173,6 +173,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     public Span<AtkValue> AtkValuesSpan => new Span<AtkValue>(AtkValues, AtkValuesCount);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 66 45 2B E6")]
+    public static partial float GetGlobalUIScale();
+
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8D 9F")]
     public partial void Ctor();
 
@@ -190,9 +193,6 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 2B DE")]
     public partial float GetScaledHeight(bool getScaledHeight); // False returns unscaled height
-
-    [MemberFunction("E8 ?? ?? ?? ?? 66 45 2B E6")]
-    public partial float GetGlobalUIScale(); // TODO: should be static
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4B FC")]
     public partial AtkResNode* GetNodeById(uint nodeId);
@@ -223,10 +223,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     }
 
     [MemberFunction("E9 ?? ?? ?? ?? 83 C3 F9")]
-    public partial byte FireCallbackInt(int callbackValue); // TODO: return bool
+    public partial bool FireCallbackInt(int callbackValue);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 E8 8B 44 24 20")]
-    public partial void FireCallback(uint valueCount, AtkValue* values, bool close = false); // TODO: return bool
+    public partial bool FireCallback(uint valueCount, AtkValue* values, bool close = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 88 45 67")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
