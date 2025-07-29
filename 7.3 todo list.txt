@@ -38,8 +38,6 @@ TODO:
     ☐ [FieldOffset(0x26C)] public ushort InputSanitizationFlags; // passed to SanitizeString // TODO: change type to AllowedEntities @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs#24
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkImageNode.cs
     ☐ public partial void LoadTexture(CStringPointer texturePath, uint scale = 1); // TODO: scale should be int @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkImageNode.cs#27
-  @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTexture.cs
-    ☐ // TODO: use IconSubFolder enum here @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTexture.cs#20
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTimeline.cs
     ☐ public partial void GetInterpolatedValue(int keyGroupId, AtkTimelineKeyGroupType keyGroupType, AtkTimelineKeyValue* output); // TODO: return bool @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTimeline.cs#27
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs
