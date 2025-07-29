@@ -178,8 +178,12 @@ public sealed partial class InteropGenerator {
                     writer.WriteLine(inheritedAttribute);
                 }
             }
-            // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
-            writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+            if (methodInfo.IsStatic) {
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+            } else {
+                // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+            }
         }
     }
 
@@ -256,8 +260,12 @@ public sealed partial class InteropGenerator {
                     writer.WriteLine(inheritedAttribute);
                 }
             }
-            // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
-            writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+            if (methodInfo.IsStatic) {
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+            } else {
+                // public int SomeInheritedMethod(int param, int param2) => Path.To.Parent.SomeInheritedMethod(param, param2);
+                writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {path}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
+            }
         }
     }
 

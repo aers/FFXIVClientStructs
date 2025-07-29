@@ -188,7 +188,7 @@ public sealed partial class InteropGenerator {
                     isPointer.Value);
 
                 staticAddressesBuilder.Add(staticAddressInfo);
-            } else if (isInherited && methodSymbol.DeclaredAccessibility == Accessibility.Public && !methodSymbol.IsStatic) {
+            } else if (isInherited && methodSymbol.DeclaredAccessibility == Accessibility.Public) {
                 if (!TryParseMethod(methodSymbol, isInherited, token, out methodInfo))
                     continue;
 
