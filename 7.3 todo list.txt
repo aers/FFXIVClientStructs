@@ -36,8 +36,6 @@ TODO:
     ☐ public partial AtkResNode* GetTextNodeById(uint id); // TODO: return AtkTextNode* @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentBase.cs#37
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs
     ☐ [FieldOffset(0x26C)] public ushort InputSanitizationFlags; // passed to SanitizeString // TODO: change type to AllowedEntities @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs#24
-  @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkImageNode.cs
-    ☐ public partial void LoadTexture(CStringPointer texturePath, uint scale = 1); // TODO: scale should be int @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkImageNode.cs#27
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs
     ☐ [FieldOffset(0x6A)] public byte Flags1; // TODO: use TextInputFlags1 @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs#17
     ☐ [FieldOffset(0x6B)] public byte Flags2; // TODO: use TextInputFlags2 @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs#18
