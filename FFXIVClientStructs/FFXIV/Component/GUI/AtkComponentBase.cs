@@ -31,10 +31,10 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     public partial AtkComponentBase* GetComponentById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 53 47")]
-    public partial AtkResNode* GetImageNodeById(uint id); // TODO: return AtkImageNode*
+    public partial AtkImageNode* GetImageNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
-    public partial AtkResNode* GetTextNodeById(uint id); // TODO: return AtkTextNode*
+    public partial AtkTextNode* GetTextNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8"), Obsolete("This function has not type check at all. Use GetNodeById instead.", true)]
     public partial AtkResNode* GetScrollBarNodeById(uint id);

@@ -31,9 +31,6 @@ TODO:
     ☐ // TODO: move functions out of lua_State and make them static. own luaapi struct maybe? @file://./FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs#34
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkCollisionNode.cs
     ☐ [FieldOffset(0xB0)] public ushort CollisionType; // TODO: use CollisionType enum @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkCollisionNode.cs#15
-  @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentBase.cs
-    ☐ public partial AtkResNode* GetImageNodeById(uint id); // TODO: return AtkImageNode* @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentBase.cs#34
-    ☐ public partial AtkResNode* GetTextNodeById(uint id); // TODO: return AtkTextNode* @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentBase.cs#37
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs
     ☐ [FieldOffset(0x26C)] public ushort InputSanitizationFlags; // passed to SanitizeString // TODO: change type to AllowedEntities @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs#24
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldComponentDataTextInput.cs
