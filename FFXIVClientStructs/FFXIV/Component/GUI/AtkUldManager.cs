@@ -47,16 +47,17 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 4D 08")]
     public partial AtkComponentBase* CreateAtkComponent(uint type);
 
-    public partial AtkComponentBase* CreateAtkComponent(ComponentType type)
+    public AtkComponentBase* CreateAtkComponent(ComponentType type)
         => CreateAtkComponent((uint)type);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 17")]
     public partial AtkResNode* CreateAtkNode(uint type);
 
-    public partial AtkResNode* CreateAtkNode(NodeType type)
+    public AtkResNode* CreateAtkNode(NodeType type)
         => CreateAtkNode((uint)type);
 
-    public static AtkResNode* CreateAtkNodeStatic(NodeType type) => MemberFunctionPointers.CreateAtkNode(null, type);
+    public static AtkResNode* CreateAtkNodeStatic(NodeType type)
+        => MemberFunctionPointers.CreateAtkNode(null, (uint)type);
 
     public static AtkResNode* CreateAtkResNode()
         => CreateAtkNodeStatic(NodeType.Res);
