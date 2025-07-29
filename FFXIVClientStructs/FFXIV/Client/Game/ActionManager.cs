@@ -333,10 +333,10 @@ public unsafe partial struct ActionManager {
 [StructLayout(LayoutKind.Explicit, Size = 0x14)]
 public struct RecastDetail {
     /// <summary>
-    /// A byte representing if this recast group is currently "active." When this is a non-zero value (true), this
+    /// A boolean representing if this recast group is currently "active." When this is a non-zero value (true), this
     /// recast group is actively in cooldown.
     /// </summary>
-    [FieldOffset(0x0)] public byte IsActive;
+    [FieldOffset(0x0)] public bool IsActive;
 
     /// <summary>
     /// The last Action ID that triggered an update for this recast group. 

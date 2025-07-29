@@ -15,7 +15,7 @@ public struct CharaCard {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x34)]
 public struct BannerData {
-    [FieldOffset(0x00)] public byte HasData;
+    [FieldOffset(0x00)] public bool HasData;
     [FieldOffset(0x01)] public byte Expression;
     [FieldOffset(0x02)] public byte CameraZoom;
     [FieldOffset(0x03)] public byte DirectionalLightingColorRed;

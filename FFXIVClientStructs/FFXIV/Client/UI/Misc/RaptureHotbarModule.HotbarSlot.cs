@@ -162,14 +162,14 @@ public partial struct RaptureHotbarModule {
         [FieldOffset(0xDE)] public byte UNK_0xDE;
 
         /// <summary>
-        /// A "boolean" representing if this specific hotbar slot has been fully loaded. False for empty slots and slots
+        /// A boolean representing if this specific hotbar slot has been fully loaded. False for empty slots and slots
         /// that have yet to be loaded in the UI.
         /// </summary>
         /// <remarks>
         /// This appears to initialize as 0 and is set to 1 when the hotbar slot appears on a visible hotbar. It will not
         /// reset if the slot is hidden (and subsequently outdated).
         /// </remarks>
-        [FieldOffset(0xDF)] public byte IsLoaded; // ?
+        [FieldOffset(0xDF)] public bool IsLoaded; // ?
 
         /// <summary>
         /// Check if this hotbar slot is considered "empty" or not, based on whether this hotbar slot has a <see cref="CommandId"/>

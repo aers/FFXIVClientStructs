@@ -23,7 +23,7 @@ public unsafe partial struct MJIManager {
     /// </summary>
     // Not actually sure about the accuracy of this name. It's a guess based on the fact that the map system and target
     // system appear to change their behavior when this is set to 1, plus verification with how it looks in game.
-    [FieldOffset(0x06)] public byte IsPlayerInSanctuary;
+    [FieldOffset(0x06)] public bool IsPlayerInSanctuary;
 
     /// <summary>
     /// Represents the currently allowed visitors to the Island Sanctuary.

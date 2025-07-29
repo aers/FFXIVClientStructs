@@ -48,7 +48,7 @@ public unsafe partial struct AgentSatisfactionSupply {
         [FieldOffset(0x12)] public bool AddonUpdated;
         [FieldOffset(0x13)] public bool ForceRefresh;
         [FieldOffset(0x14)] public ushort SelectedItemIndex;
-        [FieldOffset(0x19)] public byte IsQuestSomething; // TODO: doesn't seem right, 0x18 is used as a dword...
+        [FieldOffset(0x19)] public bool IsQuestSomething; // TODO: doesn't seem right, 0x18 is used as a dword...
     }
 
     // TODO: this is likely part of SatisfactionSupplyManager, since it's filled by one of its member functions (assuming agent knows about manager and not vice versa)
@@ -85,4 +85,3 @@ public unsafe partial struct AgentSatisfactionSupply {
         [FieldOffset(0xA0)] public Utf8String ItemName;
     }
 }
-

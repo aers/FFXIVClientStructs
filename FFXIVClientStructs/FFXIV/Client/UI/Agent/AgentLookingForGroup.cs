@@ -128,7 +128,7 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x59)] public byte SlotsFilled;
 
         [FieldOffset(0x5B)] public JoinCondition JoinConditionFlags;
-        [FieldOffset(0x5D)] public byte IsAlliance;
+        [FieldOffset(0x5D)] public bool IsAlliance;
         [FieldOffset(0x5E)] public byte NumberOfParties;
 
         [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray48<ulong> _memberContentIds;

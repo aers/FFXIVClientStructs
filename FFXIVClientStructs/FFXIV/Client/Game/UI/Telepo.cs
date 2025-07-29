@@ -46,7 +46,7 @@ public struct TeleportInfo {
     [FieldOffset(0x18)] public byte Ward;
     [FieldOffset(0x19)] public byte Plot;
     [FieldOffset(0x1A)] public byte SubIndex;
-    [FieldOffset(0x1B)] public byte IsFavourite;
+    [FieldOffset(0x1B)] public bool IsFavourite;
 
     public bool IsSharedHouse => Ward > 0 && Plot > 0;
     public bool IsApartment => SubIndex == 128 && !IsSharedHouse;

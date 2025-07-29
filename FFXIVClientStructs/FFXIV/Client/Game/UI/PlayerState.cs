@@ -11,7 +11,7 @@ public unsafe partial struct PlayerState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02", 3)]
     public static partial PlayerState* Instance();
 
-    [FieldOffset(0x00)] public byte IsLoaded;
+    [FieldOffset(0x00)] public bool IsLoaded;
     [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _characterName;
     /// <remarks> PSN-Online-ID or Xbox-Gamertag </remarks>
     [FieldOffset(0x41), FixedSizeArray(isString: true)] internal FixedSizeArray17<byte> _onlineId;
@@ -47,7 +47,7 @@ public unsafe partial struct PlayerState {
     /// <remarks> Index is ExpArrayIndex from the ClassJob sheet. </remarks>
     [FieldOffset(0xCC), FixedSizeArray] internal FixedSizeArray32<int> _classJobExperience;
     [FieldOffset(0x14C)] public short SyncedLevel;
-    [FieldOffset(0x14E)] public byte IsLevelSynced;
+    [FieldOffset(0x14E)] public bool IsLevelSynced;
     [FieldOffset(0x14F)] public bool HasPremiumSaddlebag;
 
     [FieldOffset(0x152)] public byte GuardianDeity;

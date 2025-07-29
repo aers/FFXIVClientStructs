@@ -137,7 +137,7 @@ public unsafe partial struct HudStatus {
         [FieldOffset(0x4)] public int RemainingTime;
         [FieldOffset(0x8)] public ushort Param;
         [FieldOffset(0xA)] public bool PartyListPriority;
-        [FieldOffset(0xB)] public byte CanIncreaseRewards;
+        [FieldOffset(0xB)] public bool CanIncreaseRewards;
         [FieldOffset(0xC)] public bool IsOwnStatus;
         [FieldOffset(0xD)] public byte StatusIndex;
 
