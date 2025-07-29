@@ -96,12 +96,12 @@ public unsafe partial struct Framework {
     [FieldOffset(0x2BD0)] public LuaState LuaState;
 
     [FieldOffset(0x2BF8), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _gameVersion;
-    // TODO: convert to array of 64 strings each 32 bytes long if possible
-    [FieldOffset(0x2CF8 + 0 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex1Version; // Heavensward
-    [FieldOffset(0x2CF8 + 1 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex2Version; // Stormblood
-    [FieldOffset(0x2CF8 + 2 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex3Version; // Shadowbringers
-    [FieldOffset(0x2CF8 + 3 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex4Version; // Endwalker
-    [FieldOffset(0x2CF8 + 4 * 0x20), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _ex5Version; // Dawntrail
+    // 0: Heavensward
+    // 1: Stormblood
+    // 2: Shadowbringers
+    // 3: Endwalker
+    // 4: Dawntrail
+    [FieldOffset(0x2CF8), FixedSizeArray] internal FixedSizeArray64<VersionStringEntry> _versionStrings;
 
     [FieldOffset(0x3508)] public bool UseWatchDogThread;
 
@@ -166,4 +166,10 @@ public unsafe partial struct Framework {
     /// <returns>Returns <c>true</c> if the API was initialized successfully, false otherwise.</returns>
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC 40 02 00 00 48 8B 05")]
     public partial bool SetupSteamApi();
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    public partial struct VersionStringEntry {
+        [FieldOffset(0), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _version;
+    }
 }
