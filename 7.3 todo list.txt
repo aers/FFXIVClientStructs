@@ -38,8 +38,6 @@ TODO:
     ☐ [FieldOffset(0x26C)] public ushort InputSanitizationFlags; // passed to SanitizeString // TODO: change type to AllowedEntities @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs#24
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkImageNode.cs
     ☐ public partial void LoadTexture(CStringPointer texturePath, uint scale = 1); // TODO: scale should be int @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkImageNode.cs#27
-  @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTextInput.cs
-    ☐ [FieldOffset(0xBF0)] public uint CompletionDepth; // TODO: should be (u)short @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTextInput.cs#30
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTexture.cs
     ☐ // TODO: use IconSubFolder enum here @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTexture.cs#20
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkTimeline.cs

@@ -27,7 +27,7 @@ public unsafe partial struct AtkTextInput {
     [FieldOffset(0x298)] public Utf8String CopyBufferRaw;
     [FieldOffset(0x300)] public Utf8String CopyBufferFiltered;
 
-    [FieldOffset(0xBF0)] public uint CompletionDepth; // TODO: should be (u)short
+    [FieldOffset(0xBF0)] public ushort CompletionDepth;
 
     [FieldOffset(0xC10)] public AllowedEntities InputSanitizationFlags;
 
