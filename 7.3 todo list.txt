@@ -36,8 +36,6 @@ TODO:
     ☐ public partial float GetGlobalUIScale(); // TODO: should be static @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#195
     ☐ public partial byte FireCallbackInt(int callbackValue); // TODO: return bool @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#226
     ☐ public partial void FireCallback(uint valueCount, AtkValue* values, bool close = false); // TODO: return bool @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#229
-  @file://./FFXIVClientStructs/FFXIV/Component/GUI/StringArrayData.cs
-    ☐ [FieldOffset(0x28)] public byte** StringArray; // TODO: change this to CStringPointer* @file://./FFXIVClientStructs/FFXIV/Component/GUI/StringArrayData.cs#9
   @file://./FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs
     ☐ // TODO: Actually call `SteamInternal_ContextInit(ctx)` here, rather than just returning the cached pointer. @file://./FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs#48
   @file://./FFXIVClientStructs/FFXIV/Component/Text/TextParameter.cs
