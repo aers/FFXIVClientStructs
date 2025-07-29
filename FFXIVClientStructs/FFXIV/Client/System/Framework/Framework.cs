@@ -101,7 +101,7 @@ public unsafe partial struct Framework {
     // 2: Shadowbringers
     // 3: Endwalker
     // 4: Dawntrail
-    [FieldOffset(0x2CF8), FixedSizeArray] internal FixedSizeArray64<VersionStringEntry> _versionStrings;
+    [FieldOffset(0x2CF8), FixedSizeArray] internal FixedSizeArray64<ExVersionString> _exVersions;
 
     [FieldOffset(0x3508)] public bool UseWatchDogThread;
 
@@ -169,7 +169,7 @@ public unsafe partial struct Framework {
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 32)]
-    public partial struct VersionStringEntry {
+    public partial struct ExVersionString {
         [FieldOffset(0), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _version;
     }
 }
