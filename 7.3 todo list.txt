@@ -23,9 +23,6 @@ TODO:
     ☐ // TODO: struct size decreased in 7.2 from 0xA0 @file://./FFXIVClientStructs/FFXIV/Client/UI/Misc/PvpSetModule.cs#18
   @file://./FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs
     ☐ // TODO: move functions out of lua_State and make them static. own luaapi struct maybe? @file://./FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs#34
-  @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs
-    ☐ public partial AtkComponentBase* CreateAtkComponent(ComponentType type); // TODO: takes (u)int param but enum is byte @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs#48
-    ☐ public partial AtkResNode* CreateAtkNode(NodeType type); // TODO: takes uint param but enum is ushort @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs#51
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs
     ☐ public partial float GetGlobalUIScale(); // TODO: should be static @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#195
     ☐ public partial byte FireCallbackInt(int callbackValue); // TODO: return bool @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#226
