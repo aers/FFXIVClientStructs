@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -42,24 +41,19 @@ public unsafe partial struct AgentInventoryContext {
     [FieldOffset(0x790)] public int DialogType; // ?? 1 = Discard, 2 = LowerQuality
 
     [MemberFunction("83 B9 ?? ?? ?? ?? ?? 7E ?? 39 91")]
-    public partial void OpenForItemSlot(uint inventory, int slot, int a4, uint addonId);
-
-    public void OpenForItemSlot(InventoryType inventory, int slot, uint addonId) {
-        OpenForItemSlot((uint)inventory, slot, 0, addonId);
-    }
+    public partial void OpenForItemSlot(InventoryType inventoryType, int slot, int a4, uint addonId);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 89 74 24 ??")]
     public partial long UseItem(uint itemId, InventoryType inventoryType = InventoryType.Invalid, uint itemSlot = 0, short a5 = 0);
 
-    public bool IsContextItemDisabled(int index) {
-        return index >= 0 && (ContextItemDisabledMask & (1 << index)) != 0;
-    }
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B B4 24 ?? ?? ?? ?? 0F B6 D8")]
-    public partial void DiscardItem(InventoryItem* itemSlot, InventoryType inventory, int slot, uint addonId, int position = -1); //position = YesNoPosition
+    public partial void DiscardItem(InventoryItem* itemSlot, InventoryType inventory, int slot, uint addonId, int position = -1); // position = YesNoPosition
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 83 C4 ?? 5B C3 8B 83")]
     public partial void LowerItemQuality(InventoryItem* itemSlot, InventoryType inventory, int slot, uint addonId);
+
+    public bool IsContextItemDisabled(int index)
+        => index >= 0 && (ContextItemDisabledMask & (1 << index)) != 0;
 
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
