@@ -29,8 +29,6 @@ TODO:
     ☐ public partial ushort OpenAddonByAgent(CStringPointer addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint eventKind, ushort parentAddonId); // TODO: eventKind is ulong @file://./FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs#93
   @file://./FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs
     ☐ // TODO: move functions out of lua_State and make them static. own luaapi struct maybe? @file://./FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs#34
-  @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs
-    ☐ [FieldOffset(0x26C)] public ushort InputSanitizationFlags; // passed to SanitizeString // TODO: change type to AllowedEntities @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkComponentTextInput.cs#24
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs
     ☐ public partial AtkComponentBase* CreateAtkComponent(ComponentType type); // TODO: takes (u)int param but enum is byte @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs#48
     ☐ public partial AtkResNode* CreateAtkNode(NodeType type); // TODO: takes uint param but enum is ushort @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs#51
