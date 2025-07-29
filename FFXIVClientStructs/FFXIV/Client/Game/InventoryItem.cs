@@ -45,7 +45,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial void Ctor();
 
     [VirtualFunction(0)]
-    public partial void Dtor();
+    public partial void Dtor(byte freeFlags);
 
     /// <summary>Copies the values from the other InventoryItem and, if it's symbolic, resolves its linked item.</summary>
     [VirtualFunction(1)]
