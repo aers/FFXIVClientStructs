@@ -4,7 +4,7 @@ using static FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-// Client::UI::Agent::ChatLog
+// Client::UI::Agent::AgentChatLog
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 //   Common::Configuration::ConfigBase::ChangeEventInterface
@@ -23,8 +23,7 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0x138), FixedSizeArray] internal FixedSizeArray8<Utf8String> _channelSelectorLSNames;
     [FieldOffset(0x478), FixedSizeArray] internal FixedSizeArray8<Utf8String> _channelSelectorCWLSNames;
 
-    [FieldOffset(0x8A0)] public InventoryItem LinkedItem; // TODO: use LinkedInventoryItem as type, obsolete LinkedItemQuality below
-    [FieldOffset(0x8E8)] public byte LinkedItemQuality;
+    [FieldOffset(0x8A0)] public LinkedInventoryItem LinkedItem;
     [FieldOffset(0x8F0)] public Utf8String LinkedItemName;
 
     [FieldOffset(0x958)] public uint ContextItemId;
@@ -60,7 +59,7 @@ public unsafe partial struct AgentChatLog {
     [Inherits<InventoryItem>]
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
     public partial struct LinkedInventoryItem {
-        [FieldOffset(0x48)] public byte Quality;
+        [FieldOffset(0x48)] public byte LinkedItemQuality;
     }
 }
 

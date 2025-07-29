@@ -12,8 +12,6 @@ TODO:
     ☐ // TODO check and update for 7.2 @file://./FFXIVClientStructs/FFXIV/Client/Graphics/Render/View.cs#9
   @file://./FFXIVClientStructs/FFXIV/Client/Sound/SoundManager.cs
     ☐ [FieldOffset(0x0008)] public Thread Thread; // TODO: make Thread properly inheritable @file://./FFXIVClientStructs/FFXIV/Client/Sound/SoundManager.cs#20
-  @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentChatLog.cs
-    ☐ [FieldOffset(0x8A0)] public InventoryItem LinkedItem; // TODO: use LinkedInventoryItem as type, obsolete LinkedItemQuality below @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentChatLog.cs#26
   @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs
     ☐ // TODO: change to bool @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs#28
     ☐ // TODO: this is part of an event interface class @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs#31
