@@ -24,9 +24,6 @@ TODO:
     ☐ // TODO: this is likely part of SatisfactionSupplyManager, since it's filled by one of its member functions (assuming agent knows about manager and not vice versa) @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#64
   @file://./FFXIVClientStructs/FFXIV/Client/UI/Misc/PvpSetModule.cs
     ☐ // TODO: struct size decreased in 7.2 from 0xA0 @file://./FFXIVClientStructs/FFXIV/Client/UI/Misc/PvpSetModule.cs#18
-  @file://./FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs
-    ☐ public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AgentInterface* parentAgent, ulong eventKind, ushort parentAddonId, int depthLayer); // TODO: parentAgent is supposed to be `AtkModuleInterface.AtkEventInterface* eventInterface` @file://./FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs#90
-    ☐ public partial ushort OpenAddonByAgent(CStringPointer addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, nint eventKind, ushort parentAddonId); // TODO: eventKind is ulong @file://./FFXIVClientStructs/FFXIV/Client/UI/RaptureAtkModule.cs#93
   @file://./FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs
     ☐ // TODO: move functions out of lua_State and make them static. own luaapi struct maybe? @file://./FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs#34
   @file://./FFXIVClientStructs/FFXIV/Component/GUI/AtkUldManager.cs
