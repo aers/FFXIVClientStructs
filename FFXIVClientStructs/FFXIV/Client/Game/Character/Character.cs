@@ -81,7 +81,7 @@ public unsafe partial struct Character {
     public bool IsOffhandDrawn => (WeaponFlags & 0x1) != 0;
     public bool InCombat => (CharacterData.Flags & 0x2) != 0;
     public bool IsHostile => (CharacterData.Flags & 0x1) != 0;
-    public bool IsCasting => GetCastInfo() != null && (GetCastInfo()->IsCasting & 0x1) == 0x1;
+    public bool IsCasting => GetCastInfo() != null && GetCastInfo()->IsCasting;
     public bool IsPartyMember => (RelationFlags & 0x1) != 0;
     public bool IsAllianceMember => (RelationFlags & 0x2) != 0;
     public bool IsFriend => (RelationFlags & 0x4) != 0;
