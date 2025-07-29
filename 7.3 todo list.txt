@@ -4,8 +4,6 @@ TODO:
     ☐ [FieldOffset(0xBB4)] public Vector2 BannerHeadDirection; // TODO: these are of type Client::Game::Control::MoveControl::SplineVector2 @file://./FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs#21
   @file://./FFXIVClientStructs/FFXIV/Client/Game/GcArmyManager.cs
     ☐ [StructLayout(LayoutKind.Explicit, Size = 0xF28)] // TODO: size changed, fix offsets @file://./FFXIVClientStructs/FFXIV/Client/Game/GcArmyManager.cs#27
-  @file://./FFXIVClientStructs/FFXIV/Client/Game/WKS/WKSManager.cs
-    ☐ [FieldOffset(0xDF8)] public WKSResearch* Research; // TODO: add suffix "Module" at some point @file://./FFXIVClientStructs/FFXIV/Client/Game/WKS/WKSManager.cs#41
   @file://./FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs
     ☐ // TODO check and update for 7.2 @file://./FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs#35
   @file://./FFXIVClientStructs/FFXIV/Client/Graphics/Render/SubView.cs

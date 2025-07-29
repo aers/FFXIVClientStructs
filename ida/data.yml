@@ -2066,7 +2066,7 @@ classes:
       0x141954CF0: InitiateMission
       0x141954D30: ReportMission
       0x141954D70: AbandonMission
-  Client::Game::WKS::WKSResearch: # Cosmic Research Information
+  Client::Game::WKS::WKSResearchModule: # Cosmic Research Information
     vtbls:
       - ea: 0x1422C8E10
         base: Client::Game::WKS::WKSModuleBase
