@@ -14,8 +14,6 @@ TODO:
     ☐ [FieldOffset(0x0008)] public Thread Thread; // TODO: make Thread properly inheritable @file://./FFXIVClientStructs/FFXIV/Client/Sound/SoundManager.cs#20
   @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs
     ☐ // TODO: this is part of an event interface class @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs#31
-  @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentItemDetail.cs
-    ☐ // TODO: remove with ItemKind field below @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentItemDetail.cs#6
   @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs
     ☐ [FieldOffset(0x19)] public byte IsQuestSomething; // TODO: doesn't seem right, 0x18 is used as a dword... @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#61
     ☐ // TODO: this is likely part of SatisfactionSupplyManager, since it's filled by one of its member functions (assuming agent knows about manager and not vice versa) @file://./FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#64
