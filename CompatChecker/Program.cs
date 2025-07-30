@@ -26,8 +26,8 @@ class Program {
         if (args.Length == 1) {
             Console.WriteLine("Using debug testing");
             var folder = FallbackPath("CompatChecker");
-            left = Path.Combine(folder, "tests", "FFXIVClientStructs-main.dll");
-            right = Path.Combine(folder, "tests", "FFXIVClientStructs-pr.dll");
+            left = Path.Combine(folder, "..", "tests", "FFXIVClientStructs-main", "FFXIVClientStructs.dll");
+            right = Path.Combine(folder, "..", "tests", "FFXIVClientStructs-pr", "FFXIVClientStructs.dll");
             if (args[0] == "pass")
                 right = left;
         } else {

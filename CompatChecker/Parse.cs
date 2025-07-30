@@ -20,6 +20,7 @@ CP0002: Member 'FFXIVClientStructs.STD.StdMap<TKey, TValue>.Node* FFXIVClientStr
 CP0002: Member 'FFXIVClientStructs.STD.StdMap<TKey, TValue>.Enumerator FFXIVClientStructs.STD.StdMap<TKey, TValue>.GetEnumerator()' exists on ida/cs-main/FFXIVClientStructs.dll but not on ida/cs-pr/FFXIVClientStructs.dll
 CP0001: Type 'FFXIVClientStructs.STD.StdSet<TKey>' exists on ida/cs-main/FFXIVClientStructs.dll but not on ida/cs-pr/FFXIVClientStructs.dll
 CP0002: Member 'System.ReadOnlySpan<byte> FFXIVClientStructs.STD.StdString.AsSpan()' exists on ida/cs-main/FFXIVClientStructs.dll but not on ida/cs-pr/FFXIVClientStructs.dll
+CP0002: Member 'FFXIVClientStructs.FFXIV.Client.Game.HouseId.implicit operator long(FFXIVClientStructs.FFXIV.Client.Game.HouseId)' exists on ida/cs-main/FFXIVClientStructs.dll but not on ida/cs-pr/FFXIVClientStructs.dll
 CP0007: Type 'FFXIVClientStructs.FFXIV.Component.SteamApi.SteamTypes' does not inherit from base type 'System.Object' on D:\source\repos\dotnet-compat-checker\test_files\fail\FFXIVClientStructs-pr.dll but it does on D:\source\repos\dotnet-compat-checker\test_files\fail\FFXIVClientStructs-main.dll
  */
 internal class Parse {
@@ -59,8 +60,25 @@ internal class Parse {
         return new Location(@namespace.Trim('.').Replace(",", ", "), @class.Trim('.').Replace(",", ", "), field.Trim('.').Replace(",", ", "));
     }
 
+    public static Location GetOperatorLocation(string location) {
+        if (string.IsNullOrWhiteSpace(location)) return new Location("", "");
+        var firstSpace = location.IndexOf(' ');
+        var lastSpace = location.LastIndexOf(' ');
+        var @namespace = location[..firstSpace];
+        @namespace = @namespace[..@namespace.LastIndexOf('.')];
+        var @class = @namespace[@namespace.LastIndexOf('.')..];
+        @namespace = @namespace[..@namespace.LastIndexOf('.')];
+        var field = location[lastSpace..];
+        field = field[..(field.IndexOf('(')+1)] + field[field.LastIndexOf('.')..].Trim('.');
+        if(field.Contains('.')) field = field[(field.IndexOf('(')+1)..];
+        return new Location(@namespace.Trim('.').Replace(",", ", "), @class.Trim('.').Replace(",", ", "), field.Trim('.').Replace(",", ", "));
+    }
+
     public static ChangeType ParseMember(Code code, Type type, string change, string message) {
         var count = change.IndexOf('(');
+        if (change.Split(' ')[1] == "operator") {
+            return new ChangeType(code, type, new Change("operator", GetOperatorLocation(change)), message);
+        }
         var lastSpace = count == -1 ? change.LastIndexOf(' ') : change[..count].LastIndexOf(' ');
         if (lastSpace == -1)
             lastSpace = change.Length;
