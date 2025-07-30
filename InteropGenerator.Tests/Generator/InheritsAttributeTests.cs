@@ -366,8 +366,8 @@ public class InheritsAttributeTests {
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode),
             SourceGeneration.GetInitializerSource(string.Empty, "BaseStruct", ["TestFunction"]));
     }
-    
-        [Fact]
+
+    [Fact]
     public async Task MemberFunctionInheritanceStatic() {
         const string code = """
                             [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit, Size=4)]
@@ -1204,7 +1204,7 @@ public class InheritsAttributeTests {
             code,
             ("ChildStruct.Inheritance.InteropGenerator.g.cs", childStructInheritanceCode));
     }
-    
+
     [Fact]
     public async Task PublicMethodInheritanceStatic() {
         const string code = """
