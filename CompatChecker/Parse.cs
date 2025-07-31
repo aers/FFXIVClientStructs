@@ -69,8 +69,8 @@ internal class Parse {
         var @class = @namespace[@namespace.LastIndexOf('.')..];
         @namespace = @namespace[..@namespace.LastIndexOf('.')];
         var field = location[lastSpace..];
-        field = field[..(field.IndexOf('(')+1)] + field[field.LastIndexOf('.')..].Trim('.');
-        if(field.Contains('.')) field = field[(field.IndexOf('(')+1)..];
+        field = field[..(field.IndexOf('(') + 1)] + field[field.LastIndexOf('.')..].Trim('.');
+        if (field.Contains('.')) field = field[(field.IndexOf('(') + 1)..];
         return new Location(@namespace.Trim('.').Replace(",", ", "), @class.Trim('.').Replace(",", ", "), field.Trim('.').Replace(",", ", "));
     }
 
