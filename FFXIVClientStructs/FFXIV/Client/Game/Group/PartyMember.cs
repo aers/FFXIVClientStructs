@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 
@@ -7,10 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Group;
 [StructLayout(LayoutKind.Explicit, Size = 0x490)]
 public unsafe partial struct PartyMember {
     [FieldOffset(0x0)] public StatusManager StatusManager;
-    [FieldOffset(0x3E0)] public float X;
-    [FieldOffset(0x3E4)] public float Y;
-    [FieldOffset(0x3E8)] public float Z;
-
+    [FieldOffset(0x3E0)] public Vector3 Position;
     [FieldOffset(0x3F0)] public ulong AccountId;
 
     [FieldOffset(0x3F8)] public ulong ContentId;

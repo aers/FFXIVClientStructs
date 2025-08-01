@@ -33,7 +33,7 @@ public unsafe partial struct AgentMap {
 
     [FieldOffset(0x698), FixedSizeArray] internal FixedSizeArray132<MapMarkerInfo> _mapMarkers;
     [FieldOffset(0x2BB8), FixedSizeArray] internal FixedSizeArray12<TempMapMarker> _tempMapMarkers;
-    [FieldOffset(0x38D8)] public FlagMapMarker FlagMapMarker;
+    [FieldOffset(0x38D8), FixedSizeArray] internal FixedSizeArray1<FlagMapMarker> _flagMapMarkers;
     [FieldOffset(0x3920), FixedSizeArray] internal FixedSizeArray12<MapMarkerBase> _warpMarkers;
 
     /// <remarks>
@@ -69,7 +69,7 @@ public unsafe partial struct AgentMap {
 
     [FieldOffset(0x5AEB)] public byte MapMarkerCount;
     [FieldOffset(0x5AEC)] public byte TempMapMarkerCount;
-    [FieldOffset(0x5AEE)] public bool IsFlagMarkerSet;
+    [FieldOffset(0x5AEE)] public byte FlagMarkerCount;
     [FieldOffset(0x5AF0)] public byte MiniMapMarkerCount;
     [FieldOffset(0x5AF8)] public bool IsPlayerMoving;
     [FieldOffset(0x5B00)] public bool IsControlKeyPressed;
@@ -128,7 +128,7 @@ public unsafe partial struct AgentMap {
     }
 
     public void SetFlagMapMarker(uint territoryId, uint mapId, Vector3 worldPosition, uint iconId = 0xEC91) {
-        IsFlagMarkerSet = false;
+        FlagMarkerCount = 0;
         var mapX = (int)(MathF.Round(worldPosition.X, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f;
         var mapY = (int)(MathF.Round(worldPosition.Z, 3, MidpointRounding.AwayFromZero) * 1000) * 0.001f;
         SetFlagMapMarker(territoryId, mapId, mapX, mapY, iconId);
@@ -143,7 +143,7 @@ public unsafe partial struct AgentMap {
     public void OpenMap(uint mapId, uint territoryId = 0, string? windowTitle = null, MapType type = MapType.FlagMarker) {
         var title = Utf8String.FromString(windowTitle ?? string.Empty);
         var info = stackalloc OpenMapInfo[1];
-        info->Type = type == MapType.FlagMarker && !IsFlagMarkerSet ? MapType.Centered : type;
+        info->Type = type == MapType.FlagMarker && FlagMarkerCount == 0 ? MapType.Centered : type;
         info->MapId = mapId;
         info->TerritoryId = territoryId;
         info->TitleString = *title;

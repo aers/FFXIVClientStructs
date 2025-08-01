@@ -7,7 +7,7 @@ public unsafe partial struct InstanceContent {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F 57 C0 4C 89 B4 24", 3)]
     public static partial InstanceContent* Instance();
 
-    [FieldOffset(0x70)] public byte IsLimitedTimeBonusActive;
+    [FieldOffset(0x70)] public bool IsLimitedTimeBonusActive;
 
     /// <summary>
     /// Provides the number of minutes remaining on the penalty.

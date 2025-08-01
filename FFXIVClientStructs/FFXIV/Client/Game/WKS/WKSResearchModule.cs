@@ -1,12 +1,12 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.WKS;
 
-// Client::Game::WKS::WKSResearch
+// Client::Game::WKS::WKSResearchModule
 //   Client::Game::WKS::WKSModuleBase
 // Cosmic Research Information
 [GenerateInterop]
 [Inherits<WKSModuleBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x80)]
-public unsafe partial struct WKSResearch {
+public unsafe partial struct WKSResearchModule {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray11<ushort> _analysis;
     [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray11<byte> _currentStages;
     [FieldOffset(0x6B), FixedSizeArray] internal FixedSizeArray11<byte> _unlockedStages;

@@ -215,7 +215,7 @@ public struct DarkKnightGauge {
 public struct PaladinGauge {
     [FieldOffset(0x08)] public byte OathGauge;
     [FieldOffset(0x0A)] public ushort ConfiteorComboTimer; //that only updates when you generate/spend oath
-    [FieldOffset(0x0C)] public ushort ConfiteorComboStep;
+    [FieldOffset(0x0C)] public byte ConfiteorComboStep;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

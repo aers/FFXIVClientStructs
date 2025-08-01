@@ -25,8 +25,7 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x1EC8)] public ContentsId SelectedDuty;
     [FieldOffset(0x1ECC), Obsolete("Use SelectedDuty.Id instead", true)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
     [FieldOffset(0x1ED8)] public byte NumCollectedRewards; // Value used for "Reward already received"
-    // TODO: change to bool
-    [FieldOffset(0x1ED9)] public byte HasRouletteSelected; // Prevents more roulettes from being selected
+    [FieldOffset(0x1ED9)] public bool HasRouletteSelected; // Prevents more roulettes from being selected
 
     // TODO: this is part of an event interface class
     [FieldOffset(0x1F18)] public UIModule* UIModule;

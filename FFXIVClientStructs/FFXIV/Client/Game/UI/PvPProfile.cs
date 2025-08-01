@@ -7,7 +7,7 @@ public unsafe partial struct PvPProfile {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 78 31", 3)]
     public static partial PvPProfile* Instance();
 
-    [FieldOffset(0x0)] public byte IsLoaded;
+    [FieldOffset(0x0)] public bool IsLoaded;
 
     [FieldOffset(0x4)] public uint ExperienceMaelstrom;
     [FieldOffset(0x8)] public uint ExperienceTwinAdder;

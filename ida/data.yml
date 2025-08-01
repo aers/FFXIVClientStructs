@@ -2066,7 +2066,7 @@ classes:
       0x141954CF0: InitiateMission
       0x141954D30: ReportMission
       0x141954D70: AbandonMission
-  Client::Game::WKS::WKSResearch: # Cosmic Research Information
+  Client::Game::WKS::WKSResearchModule: # Cosmic Research Information
     vtbls:
       - ea: 0x1422C8E10
         base: Client::Game::WKS::WKSModuleBase
@@ -2518,7 +2518,6 @@ classes:
       0x1409CFEB0: IsSelectUseTicketInactive
       0x1409D0050: UpdateAetheryteList
       0x1409D0C20: Teleport
-      0x1409D2040: InvokeSelectUseTicket
       0x1409D1AC0: GetTeleportCost
   Client::Game::UI::Telepo::SelectUseTicketInvoker:
     vtbls:
@@ -2527,6 +2526,7 @@ classes:
     vfuncs:
       2: Dtor
     funcs:
+      0x1409D2040: InvokeSelectUseTicket
       0x1409D1FB0: TeleportWithTickets
   Client::Game::UI::Cabinet:
     instances:

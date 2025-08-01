@@ -10,10 +10,10 @@ public unsafe partial struct InfoProxyCrossRealm {
     [FieldOffset(0x46D)] public byte LocalPlayerGroupIndex;
     [FieldOffset(0x46E)] public byte GroupCount;
 
-    [FieldOffset(0x470)] public byte IsCrossRealm; //i guess?
-    [FieldOffset(0x471)] public byte IsInAllianceRaid;
-    [FieldOffset(0x472)] public byte IsPartyLeader;
-    [FieldOffset(0x473)] public byte IsInCrossRealmParty;
+    [FieldOffset(0x470)] public bool IsCrossRealm; //i guess?
+    [FieldOffset(0x471)] public bool IsInAllianceRaid;
+    [FieldOffset(0x472)] public bool IsPartyLeader;
+    [FieldOffset(0x473)] public bool IsInCrossRealmParty;
 
     [FieldOffset(0x480), FixedSizeArray] internal FixedSizeArray6<CrossRealmGroup> _crossRealmGroups;
 
@@ -74,5 +74,5 @@ public unsafe partial struct CrossRealmMember {
     [FieldOffset(0x60)] public byte MemberIndex;
     [FieldOffset(0x61)] public byte GroupIndex;
 
-    [FieldOffset(0x63)] public byte IsPartyLeader;
+    [FieldOffset(0x63)] public bool IsPartyLeader;
 }

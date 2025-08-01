@@ -65,22 +65,22 @@ public unsafe partial struct AgentMJIPouch {
         [FieldOffset(0x148)] public uint MJIItemPouchItemCount;
         [FieldOffset(0x150), FixedSizeArray] internal FixedSizeArray3<AgentMJICraftSchedule.MaterialAllocationEntry> _materialAllocation;
     }
-}
 
-[StructLayout(LayoutKind.Explicit, Size = 0x88)]
-public struct PouchInventoryItem {
-    [FieldOffset(0x00)] public uint ItemId;
-    [FieldOffset(0x04)] public uint IconId;
-    [FieldOffset(0x08), Obsolete("Use RowId instead", true)] public int SlotIndex;
-    /// <remarks>MJIItemPouch or MJIKeyItem RowId</remarks>
-    [FieldOffset(0x08)] public uint RowId;
-    [FieldOffset(0x0C)] public int StackSize;
-    [FieldOffset(0x10)] public int MaxStackSize;
-    [FieldOffset(0x14)] public byte InventoryIndex;
-    [FieldOffset(0x15)] public byte ItemCategory;
-    [FieldOffset(0x16)] public byte SortIndex;
-    [FieldOffset(0x17)] public byte MjiGatheringItemRowId;
-    [FieldOffset(0x18)] public byte Undiscovered; // TODO: bool, also move this struct into the agent
+    [StructLayout(LayoutKind.Explicit, Size = 0x88)]
+    public struct PouchInventoryItem {
+        [FieldOffset(0x00)] public uint ItemId;
+        [FieldOffset(0x04)] public uint IconId;
+        [FieldOffset(0x08), Obsolete("Use RowId instead", true)] public int SlotIndex;
+        /// <remarks>MJIItemPouch or MJIKeyItem RowId</remarks>
+        [FieldOffset(0x08)] public uint RowId;
+        [FieldOffset(0x0C)] public int StackSize;
+        [FieldOffset(0x10)] public int MaxStackSize;
+        [FieldOffset(0x14)] public byte InventoryIndex;
+        [FieldOffset(0x15)] public byte ItemCategory;
+        [FieldOffset(0x16)] public byte SortIndex;
+        [FieldOffset(0x17)] public byte MjiGatheringItemRowId;
+        [FieldOffset(0x18)] public bool IsUndiscovered;
 
-    [FieldOffset(0x20)] public Utf8String Name;
+        [FieldOffset(0x20)] public Utf8String Name;
+    }
 }

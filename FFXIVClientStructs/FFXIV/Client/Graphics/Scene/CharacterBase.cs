@@ -334,10 +334,10 @@ public unsafe partial struct CharacterBase {
     #endregion
 
     [VirtualFunction(108)]
-    public partial byte IsFreeCompanyCrestVisibleOnSlot(byte slot);
+    public partial bool IsFreeCompanyCrestVisibleOnSlot(byte slot);
 
     [VirtualFunction(109)]
-    public partial void SetFreeCompanyCrestVisibleOnSlot(byte slot, byte isVisible);
+    public partial void SetFreeCompanyCrestVisibleOnSlot(byte slot, bool isVisible);
 
     [VirtualFunction(110)]
     public partial void SetFreeCompanyCrest(Texture* freeCompanyCrest);

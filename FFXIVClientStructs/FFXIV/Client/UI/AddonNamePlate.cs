@@ -33,7 +33,7 @@ public unsafe partial struct AddonNamePlate {
         [FieldOffset(0x4)] public short Width;
         [FieldOffset(0x6)] public short Height;
         [FieldOffset(0xA)] public byte Alpha;
-        [FieldOffset(0xB)] public byte IsBaked;
+        [FieldOffset(0xB)] public bool IsBaked;
     }
 
     public static int NumNamePlateObjects => 50;

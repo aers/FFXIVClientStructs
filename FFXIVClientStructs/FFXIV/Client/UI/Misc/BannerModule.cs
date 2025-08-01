@@ -104,7 +104,7 @@ public unsafe partial struct BannerModuleEntry {
     [FieldOffset(0x8A)] public byte CameraZoom;
     [FieldOffset(0x8B)] public byte DirectionalLightingBrightness;
     [FieldOffset(0x8C)] public byte AmbientLightingBrightness;
-    [FieldOffset(0x8D)] public byte HasBannerTimelineCustomName;
+    [FieldOffset(0x8D)] public bool HasBannerTimelineCustomName;
 
     [MemberFunction("0F B7 42 7C 4C 8B C1")]
     public partial bool EqualTo(BannerModuleEntry* other);

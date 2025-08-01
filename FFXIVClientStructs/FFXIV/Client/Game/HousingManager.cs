@@ -144,7 +144,7 @@ public unsafe partial struct HousingManager {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
-    [FieldOffset(0x0), CExportIgnore] public long Id;
+    [FieldOffset(0x0), CExportIgnore] public ulong Id;
     /// <remarks>
     /// Masked data:<br/>
     /// - <c>0b1000_0000</c> (<c>0x80</c>) = Apartment Flag<br/>
@@ -170,8 +170,8 @@ public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     public short RoomNumber => (short)(Data2 >> 6);
     public bool IsWorkshop => RoomNumber == 0x3FF;
 
-    public static implicit operator long(HouseId id) => id.Id;
-    public static unsafe implicit operator HouseId(long id) => *(HouseId*)&id;
+    public static implicit operator ulong(HouseId id) => id.Id;
+    public static unsafe implicit operator HouseId(ulong id) => *(HouseId*)&id;
 
     public bool Equals(HouseId other) => Id == other.Id;
     public override bool Equals(object? obj) => obj is HouseId other && Equals(other);
