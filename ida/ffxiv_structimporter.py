@@ -12,7 +12,7 @@ except ImportError:
 import os
 from abc import abstractmethod
 from time import time
-from data_schema import *
+from structs_schema import *
 
 
 class BaseApi:

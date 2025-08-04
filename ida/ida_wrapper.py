@@ -11,7 +11,7 @@ import ida_typeinf
 import ida_hexrays
 import ida_name
 import ida_funcs
-from data_schema import *
+from structs_schema import *
 
 
 class BaseIdaInterface(object):
