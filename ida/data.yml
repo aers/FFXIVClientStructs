@@ -5971,6 +5971,9 @@ classes:
   Client::Graphics::Render::View:
     vtbls:
       - ea: 0x14201D818
+  Client::Graphics::Render::SubView:
+    vtbls:
+      - ea: 0x14201D810
   Client::Graphics::Render::PostBoneDeformerBase:
     vtbls:
       - ea: 0x14201D8A0
