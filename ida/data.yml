@@ -774,6 +774,7 @@ classes:
   Client::System::Input::InputDeviceManager:
     instances:
       - ea: 0x142748858
+        pointer: true
     funcs:
       0x1400A25A0: GetInstance
       0x1401B5B80: ctor # static
@@ -1573,6 +1574,7 @@ classes:
       - ea: 0x1421C3F10
     instances:
       - ea: 0x142951D90
+        pointer: true
     vfuncs:
       0: Dtor
       6: vf6
@@ -2281,6 +2283,7 @@ classes:
   Client::System::Resource::ResourceManager:
     instances:
       - ea: 0x14274D940
+        pointer: true
     funcs:
       0x140201680: ctor
       0x140201B50: CreateSingleton
@@ -3270,6 +3273,7 @@ classes:
   Client::Sound::SoundManager: #base: Client::System::Common::NonCopyable
     instances:
       - ea: 0x14274DA08
+        pointer: true
     vtbls:
       - ea: 0x1420073D8
         base: Client::System::Resource::ResourceEventListener
@@ -4016,6 +4020,7 @@ classes:
         base: Client::System::Resource::ResourceEventListener
     instances:
       - ea: 0x142DCFF08
+        pointer: true
     funcs:
       0x1405AF7D0: ctor
   Component::Exd::ExdModuleResourceHandle:
@@ -4184,6 +4189,7 @@ classes:
   Client::System::Input::Cursor:
     instances:
       - ea: 0x142744C78
+        pointer: true
     vtbls:
       - ea: 0x141FDC458
     vfuncs:
@@ -4758,6 +4764,7 @@ classes:
   Client::Graphics::Environment::EnvManager:
     instances:
       - ea: 0x142746C28
+        pointer: true
     vtbls:
       - ea: 0x141FFC5C8
         base: Client::Graphics::Singleton
@@ -4809,6 +4816,7 @@ classes:
   Client::System::File::FileManager:
     instances:
       - ea: 0x14274D938
+        pointer: true
     vtbls:
       - ea: 0x141FFCF30
         base: Client::System::Framework::Task
@@ -5439,6 +5447,7 @@ classes:
   Client::Graphics::Primitive::Manager:
     instances:
       - ea: 0x142746BF0
+        pointer: true
     vtbls:
       - ea: 0x1420044A8
         base: Client::Graphics::Singleton
@@ -5460,6 +5469,7 @@ classes:
   Client::Graphics::AllocatorManager:
     instances:
       - ea: 0x142746BE8
+        pointer: true
     vtbls:
       - ea: 0x142006370
         base: Client::Graphics::Singleton
@@ -5873,6 +5883,7 @@ classes:
   Client::Graphics::Kernel::DeviceDX11:
     instances:
       - ea: 0x142745070
+        pointer: true
     vtbls:
       - ea: 0x1420148F8
         base: Client::Graphics::Kernel::DeviceWin
@@ -5918,6 +5929,7 @@ classes:
   Client::Graphics::Render::GraphicsConfig:
     instances:
       - ea: 0x142746B98
+        pointer: true
     vtbls:
       - ea: 0x14201D6A8
         base: Client::Graphics::Singleton
@@ -6073,6 +6085,7 @@ classes:
   Client::Graphics::Render::ShadowManager:
     instances:
       - ea: 0x142746C00
+        pointer: true
     vtbls:
       - ea: 0x14201DF60
     funcs:
@@ -6102,6 +6115,7 @@ classes:
   Client::Graphics::Render::RenderTargetManager:
     instances:
       - ea: 0x142746C10
+        pointer: true
     vtbls:
       - ea: 0x14201DFB0
         base: Client::Graphics::Singleton
@@ -6126,6 +6140,7 @@ classes:
   Client::Graphics::PostEffect::PostEffectManager:
     instances:
       - ea: 0x142746C20
+        pointer: true
     vtbls:
       - ea: 0x142022E58
         base: Client::Graphics::Singleton
@@ -6188,6 +6203,7 @@ classes:
   Client::Graphics::Scene::World:
     instances:
       - ea: 0x142746C30
+        pointer: true
     vtbls:
       - ea: 0x142032008
         base: Client::Graphics::Scene::Object
@@ -6215,6 +6231,7 @@ classes:
   Client::Graphics::Scene::CameraManager:
     instances:
       - ea: 0x142746C38
+        pointer: true
     vtbls:
       - ea: 0x142032120
         base: Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>
@@ -6223,6 +6240,7 @@ classes:
   Client::Graphics::Scene::CharacterUtility:
     instances:
       - ea: 0x142746C40
+        pointer: true
     vtbls:
       - ea: 0x1420322E8
         base: Client::Graphics::Singleton
@@ -6393,6 +6411,7 @@ classes:
   Client::Graphics::Scene::ResidentResourceManager:
     instances:
       - ea: 0x142746C48
+        pointer: true
     vtbls:
       - ea: 0x142033F80
         base: Client::Graphics::Singleton
@@ -6411,6 +6430,7 @@ classes:
   Client::System::Task::SpursJobEntityWorkerThread:
     instances:
       - ea: 0x1428E7570
+        pointer: true
     vtbls:
       - ea: 0x142034258
         base: Client::System::Threading::Thread
@@ -6584,6 +6604,7 @@ classes:
       0x1405B2C50: CreateCutSceneController
     instances:
       - ea: 0x1428E7D50
+        pointer: true
   Client::System::Photo::ScreenShot:
     instances:
       - ea: 0x1428E7D80
@@ -8944,6 +8965,7 @@ classes:
   Client::System::BlacklistManager: # real name is unknown
     instances:
       - ea: 0x14274E7B8
+        pointer: true
     vtbls:
       - ea: 0x1421A13A8 # maybe platform-specific implementation?
     funcs:
@@ -22282,6 +22304,7 @@ classes:
   Client::Graphics::Culling::CullingManager:
     instances:
       - ea: 0x142748848
+        pointer: true
     vtbls:
       - ea: 0x142168A60
         base: Client::Graphics::Singleton
@@ -22403,6 +22426,7 @@ classes:
   Client::Graphics::Culling::OcclusionCullingManager: # not convinced
     instances:
       - ea: 0x1428E3B58
+        pointer: true
     vtbls:
       - ea: 0x142006388
         base: Client::Graphics::Singleton
@@ -22415,6 +22439,7 @@ classes:
   Client::Graphics::Streaming::StreamingManager:
     instances:
       - ea: 0x142746C18
+        pointer: true
     vtbls:
       - ea: 0x1421A7498
         base: Client::Graphics::Singleton
@@ -22430,6 +22455,7 @@ classes:
   Client::Graphics::Physics::BonePhysicsUpdater:
     instances:
       - ea: 0x1428E3A68
+        pointer: true
     vtbls:
       - ea: 0x1421A7628
         base: Client::Graphics::Singleton
@@ -22603,11 +22629,13 @@ classes:
       #0x1417AE430: ctor # no xrefs
     instances:
       - ea: 0x14294F5B8
+        pointer: true
   Client::System::Scheduler::ActionTimelineManager:
     vtbls:
       - ea: 0x1421A6DE0
     instances:
       - ea: 0x14294D348
+        pointer: true
     funcs:
       0x141765670: CreateInstance
       #0x1417633F0: ctor # inlined in CreateInstance
@@ -22640,6 +22668,7 @@ classes:
   Client::System::Scheduler::Resource::SchedulerResourceManagement:
     instances:
       - ea: 0x14294F630
+        pointer: true
     vtbls:
       - ea: 0x1421AF380
     funcs:
@@ -22958,16 +22987,22 @@ classes:
     instances:
       - ea: 0x1427462B0
         name: DefaultSpace
+        pointer: true
       - ea: 0x1427462B8
         name: ApricotSpace
+        pointer: true
       - ea: 0x1427462C0
         name: AnimationSpace
+        pointer: true
       - ea: 0x1427462C8
         name: UISpace
+        pointer: true
       - ea: 0x1427462D0
         name: FileSpace
+        pointer: true
       - ea: 0x1427462D8
         name: SoundSpace
+        pointer: true
     vtbls:
       - ea: 0x141FD4960
     funcs:
