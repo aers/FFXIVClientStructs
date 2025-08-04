@@ -199,7 +199,7 @@ class BaseIdaInterface(object):
 if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
     # This is only for IDA 7 and 8 due to a change in the API for IDA 9
     class IdaInterface(BaseIdaInterface):
-        def get_tinfo_from_func_data(self, data: DefinedFuncField):
+        def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.
 
             Args:
