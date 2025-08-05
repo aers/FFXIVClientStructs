@@ -212,11 +212,11 @@ class BaseIdaInterface(object):
 class IdaInterface(BaseIdaInterface):
     if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
         # This is only for IDA 7 and 8 due to a change in the API for IDA 9
-        def get_tinfo_from_func_data(self, data: DefinedFuncField):
+        def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.
 
             Args:
-                data (DefinedFuncField): Function data.
+                data (DefinedStructFuncField): Function data.
 
             Returns:
                 idaapi.tinfo_t: tinfo_t created from the function data.
@@ -613,11 +613,11 @@ class IdaInterface(BaseIdaInterface):
 
     elif idaapi.IDA_SDK_VERSION >= 900:
 
-        def get_tinfo_from_func_data(self, data: DefinedFuncField):
+        def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.
 
             Args:
-                data (DefinedFuncField): Function data.
+                data (DefinedStructFuncField): Function data.
 
             Returns:
                 idaapi.tinfo_t: tinfo_t created from the function data.
@@ -857,6 +857,8 @@ class IdaInterface(BaseIdaInterface):
                 int: The number of members removed or -1 if failed
             """
             tif = self.get_struct(sid)
+            if tif == idaapi.BADADDR:
+                return 0
             count = tif.get_udt_nmembers()
             tif.del_udms(0, count)
             return count
@@ -959,12 +961,12 @@ class IdaInterface(BaseIdaInterface):
                 name (str): The name of the enum member
             """
             mem = idc.get_enum_member_by_name("{0}.{1}".format(name, value))
-            if mem != idc.BADADDR:
+            if mem != idc.BADADDR and idc.get_enum_member_value(mem) != None:
                 idc.del_enum_member(
                     eid,
                     idc.get_enum_member_value(mem),
                     0,
-                    idc.get_enum_member_bmask(mem),
+                    idc.get_enum_member_bmask(mem) or -1,
                 )
 
         def create_enum(self, name: str) -> int:
