@@ -2,14 +2,25 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 // Client::Game::Object::GameObjectManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x4CE8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4D1C)]
 public unsafe partial struct GameObjectManager {
     [StaticAddress("48 8D 35 ?? ?? ?? ?? 81 FA", 3)]
     public static partial GameObjectManager* Instance();
 
     [FieldOffset(0x00)] public uint NextUpdateIndex; // rate limiting for updates per frame
     [FieldOffset(0x04)] public byte Active;
-    [FieldOffset(0x18)] public ObjectArrays Objects;
+    [FieldOffset(0x20)] public ObjectArrays Objects;
+    // new in 7.3, used for draw distance
+    // [FieldOffset(0x4CF0)] internal float Unk4CF0; // default "819"
+    // [FieldOffset(0x4CF4)] internal float Unk4CF4; // default "0.08"
+    // [FieldOffset(0x4CF8)] internal float Unk4CF8; // default "0.25"
+    // [FieldOffset(0x4D00)] internal uint Unk4D00; // default "60"
+    // [FieldOffset(0x4D04)] internal uint Unk4D04; // default "0"
+    // [FieldOffset(0x4D08)] internal float Unk4D08; // default "30"
+    // [FieldOffset(0x4D0C)] internal float Unk4D0C; // default "1"
+    // [FieldOffset(0x4D10)] internal float Unk4D10; // default "1.1"
+    // [FieldOffset(0x4D14)] internal float Unk4D14; // default "0.9"
+    // [FieldOffset(0x4D18)] internal float Unk4D18; // default "0.8"
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x4CD0)]
