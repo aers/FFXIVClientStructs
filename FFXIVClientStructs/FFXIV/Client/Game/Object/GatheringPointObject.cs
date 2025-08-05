@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 public unsafe partial struct GatheringPointObject {
     [FieldOffset(0x1A0)] public GatheringPointObjectImplBase ObjectImplBase;
     [FieldOffset(0x1C0)] public GatheringPointObjectImpl ObjectImpl;
-    [FieldOffset(0x1D0)] public GatheringPointObjectImplBase* Impl;
+    [FieldOffset(0x1E0)] public GatheringPointObjectImplBase* Impl;
 
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
