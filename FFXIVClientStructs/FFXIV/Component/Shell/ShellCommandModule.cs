@@ -18,6 +18,6 @@ public unsafe partial struct ShellCommandModule {
     [FieldOffset(0x248)] public byte CommandColumn;
     [FieldOffset(0x249)] public byte AliasColumn;
 
-    [MemberFunction("E8 ?? ?? ?? ?? FE 86 ?? ?? ?? ?? C7 86")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 89 6E")]
     public partial void ExecuteCommandInner(Utf8String* command, UIModule* uiModule);
 }
