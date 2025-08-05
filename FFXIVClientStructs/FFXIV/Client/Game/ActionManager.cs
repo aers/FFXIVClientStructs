@@ -101,7 +101,7 @@ public unsafe partial struct ActionManager {
     /// <param name="location">Target position, important for area-targeted spells. Be careful if passing null - game doesn't really expect that and might dereference it in some code paths!</param>
     /// <param name="extraParam">See UseAction.</param>
     /// <returns></returns>
-    [MemberFunction("E8 ? ? ? ? 40 3A C7 0F 85")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 3A C7 0F 85 ?? ?? ?? ??")]
     public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint extraParam = 0, byte a7 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 6C 24 ?? 85 C0 74")]
