@@ -37,17 +37,17 @@ public unsafe partial struct PvPProfile {
     [FieldOffset(0x50)] public ushort CrystallineConflictCasualMatchesWon;
     [FieldOffset(0x52)] public ushort CrystallineConflictRankedMatches;
     [FieldOffset(0x54)] public ushort CrystallineConflictRankedMatchesWon;
-    // TODO: 7.3 - these shifted somehow. gotta play to find them
-    [FieldOffset(0x52)] public ushort CrystallineConflictCurrentCrystalCredit;
-    [FieldOffset(0x54)] public ushort CrystallineConflictHighestCrystalCredit;
+    // TODO: 7.3 - these shifted somewhere. gotta play to find them
+    [FieldOffset(0x52), Obsolete("Offset not updated for 7.3")] public ushort CrystallineConflictCurrentCrystalCredit;
+    [FieldOffset(0x54), Obsolete("Offset not updated for 7.3")] public ushort CrystallineConflictHighestCrystalCredit;
 
-    [FieldOffset(0x58)] public byte CrystallineConflictCurrentRank;
-    [FieldOffset(0x59)] public byte CrystallineConflictHighestRank;
-    [FieldOffset(0x5A)] public byte CrystallineConflictCurrentRiser;
-    [FieldOffset(0x5B)] public byte CrystallineConflictHighestRiser;
-    [FieldOffset(0x5C)] public byte CrystallineConflictCurrentRisingStars;
-    [FieldOffset(0x5D)] public byte CrystallineConflictHighestRisingStars;
-    // TODO: 7.3 - /these shifted somehow. gotta play to find them
+    [FieldOffset(0x58), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictCurrentRank;
+    [FieldOffset(0x59), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictHighestRank;
+    [FieldOffset(0x5A), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictCurrentRiser;
+    [FieldOffset(0x5B), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictHighestRiser;
+    [FieldOffset(0x5C), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictCurrentRisingStars;
+    [FieldOffset(0x5D), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictHighestRisingStars;
+    // TODO: 7.3 - /these shifted somewhere. gotta play to find them
 
     [FieldOffset(0x7C)] public uint RivalWingsTotalMatches;
     [FieldOffset(0x80)] public uint RivalWingsTotalMatchesWon;
