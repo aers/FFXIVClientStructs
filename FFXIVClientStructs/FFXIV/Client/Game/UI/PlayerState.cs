@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 // Client::Game::UI::PlayerState
 // ctor "E8 ?? ?? ?? ?? 33 D2 45 33 E4"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x8C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8D8)]
 public unsafe partial struct PlayerState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 06 F6 43 18 02", 3)]
     public static partial PlayerState* Instance();
