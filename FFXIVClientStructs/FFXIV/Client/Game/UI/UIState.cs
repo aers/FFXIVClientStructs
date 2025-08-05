@@ -109,7 +109,7 @@ public unsafe partial struct UIState {
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount / 8
     [FieldOffset(0x19FCC), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;
-    [FieldOffset(0x1A006)] public ulong UnlockedTripleTriadCardsCount;
+    [FieldOffset(0x1A008)] public ulong UnlockedTripleTriadCardsCount;
 
     [FieldOffset(0x1A022)] public int TerritoryTypeTransientOffsetZ; // this is a short in the sheet and copied with a 4 byte register causing it to be an int
     [FieldOffset(0x1A026)] public byte BeginnerGuideFlags;
