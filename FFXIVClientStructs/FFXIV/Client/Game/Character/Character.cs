@@ -91,7 +91,7 @@ public unsafe partial struct Character {
     /// target ID from the <see cref="TargetSystem"/>. Used for calculating ToT via /assist.
     /// </summary>
     /// <returns>Returns the object ID of this character's target.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C5 74 27")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E0 48 8B 4F")]
     public partial GameObjectId GetTargetId();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B FD 74 36")]
@@ -114,7 +114,7 @@ public unsafe partial struct Character {
     public partial void SetMode(CharacterModes mode, byte modeParam);
 
     /// <summary> Can only be used for Mounts, Minions, and Ornaments. Literally just checks if the game object at index - 1 is a character and returns that. </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 11 4D 8B 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 3B 47 ?? 75 ?? 48 8B CE")]
     public partial Character* GetParentCharacter();
 
     /// <summary>Check if this character is in a jumping/falling animation.</summary>
@@ -126,7 +126,7 @@ public unsafe partial struct Character {
     public partial bool IsWanderer();
 
     /// <summary> Check if the character is using the Data Center Travel system. </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 8B FD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 40 0F B6 C6")]
     public partial bool IsTraveler();
 
     /// <summary> Check if the character is using the Cross-region Data Center Travel system. </summary>

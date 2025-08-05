@@ -16,6 +16,6 @@ public unsafe partial struct ItemContextCustomizeModule {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray128<byte> _firstTier;
     [FieldOffset(0xC8), FixedSizeArray] internal FixedSizeArray128<byte> _secondTier;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 73 02 0F 1F 80 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 7E ?? ?? ?? ?? 48 85 C9")]
     public partial void ResetAll();
 }

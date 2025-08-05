@@ -47,6 +47,6 @@ public unsafe partial struct AgentQuestJournal {
     /// <summary>
     /// Opens the map for the currently selected quest.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 24 8B 56 20")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 8B 55 ?? 41 B0")]
     public partial void ShowOnMap(int a2 = 0);
 }

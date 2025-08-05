@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x44A0)]
 public unsafe partial struct EventFramework {
-    [StaticAddress("4C 39 2D ?? ?? ?? ?? 74 14", 3, isPointer: true)]
+    [StaticAddress("48 83 3D ?? ?? ?? ?? ?? 74 ?? E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 3C", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
@@ -29,7 +29,7 @@ public unsafe partial struct EventFramework {
 
     [FieldOffset(0x42B8)] public DailyQuestMap DailyQuests;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 0E 66 83 B8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B D8 48 85 C0 0F 84")]
     public partial ContentDirector* GetContentDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 98")]
@@ -38,10 +38,10 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 80 B8")]
     public partial PublicContentDirector* GetPublicContentDirector();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 F6 74 ?? 48 81 C6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 45 ?? 4C 8B F8")]
     public partial MassivePcContentDirector* GetMassivePcContentDirector();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B F0 48 8B 11 FF 52 40")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E8 48 85 C0 0F 84 ?? ?? ?? ?? 8B 80")]
     public static partial PublicContentDirector* GetPublicContentDirectorByType(PublicContentDirectorType publicContentDirectorType);
 
     /// <summary>
@@ -51,7 +51,7 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 89 AF ?? ?? ?? ?? 80 BF")]
     public partial void InteractWithHandlerFromSelector(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 1B 66 83 78 ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 65 ?? 4C 8B F8")]
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
 
@@ -61,7 +61,7 @@ public unsafe partial struct EventFramework {
     [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B D9 48 89 6C 24")]
     public partial void SetTerritoryTypeId(ushort territoryType);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 27 48 8B 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? ?? ?? ?? FF 50 ?? 48 8B 4E")]
     public partial void MaterializeItem(EventId eventID, InventoryType inventoryType, short inventorySlot, int extraParam = 0);
 
     public void MaterializeItem(InventoryItem* itemSlot, MaterializeEntryId entryId) {
@@ -71,13 +71,13 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 46 ?? 49 BF")]
     public partial void GetEventMapMarkers(ushort territoryId, StdVector<MapMarkerData>* markerVector);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 4E ?? 3B C8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 3B 85")]
     public static partial uint GetCurrentContentId();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 38 46 66")]
+    [MemberFunction("E8 ?? ?? ?? ?? 38 46 ?? 75")]
     public static partial ContentType GetCurrentContentType();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 89 45 82")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 EB ?? 0F B7 DF")]
     public static partial ushort GetContentFinderCondition(ContentType contentType, uint contentId);
 
     [MemberFunction("48 83 EC 28 48 8B 05 ?? ?? ?? ?? 48 85 C0 74 2C")]

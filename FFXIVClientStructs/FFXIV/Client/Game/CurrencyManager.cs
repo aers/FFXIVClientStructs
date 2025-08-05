@@ -199,7 +199,7 @@ public unsafe partial struct CurrencyManager {
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 76 0A")]
     public partial uint GetItemCount(uint itemId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3B D8 76 7C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3B D8 0F 86")]
     public partial uint GetItemMaxCount(uint itemId);
 
     /// <remarks>
@@ -211,7 +211,7 @@ public unsafe partial struct CurrencyManager {
     /// <summary>
     /// Checks if the item is in any bucket.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 3B 84 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 89 B7")]
     public partial bool HasItem(uint itemId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 32 8B D7")]

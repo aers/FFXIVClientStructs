@@ -25,13 +25,13 @@ public unsafe partial struct StatusManager {
     [MemberFunction("E8 ?? ?? ?? ?? C6 43 2D 00")]
     public partial bool HasStatus(uint statusId, uint sourceId = 0xE0000000);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 0F 28 C6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 79 ?? 4C 8B 15")]
     public partial int GetStatusIndex(uint statusId, uint sourceId = 0xE0000000);
 
     [MemberFunction("83 FA 3C 72 04 0F 57 C0")]
     public partial float GetRemainingTime(int statusIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3D ?? ?? ?? ?? 74 19")]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? FE C3 EB")]
     public partial uint GetStatusId(int statusIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B 44 24 28")]
@@ -43,7 +43,7 @@ public unsafe partial struct StatusManager {
     [MemberFunction("83 FA 3C 73 ?? 53 48 83 EC 30 48 8B D9")] // INLINED
     public partial void RemoveStatus(int statusIndex, byte u2 = 0); // u2 always appears to be 0
 
-    [MemberFunction("E8 ?? ?? ?? ?? FF C6 48 8D 5B 0C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 0A F0 48 8D 5B")]
     public partial bool SetStatus(int statusIndex, ushort statusId, float remaining, ushort param, GameObjectId sourceObject, bool refreshFlags);
 
     [Obsolete("Use SetStatus with GameObjectId sourceObject", true)]
@@ -55,7 +55,7 @@ public unsafe partial struct StatusManager {
     /// </summary>
     /// <param name="statusId">Id of status to remove.</param>
     /// <param name="sourceId">Source of status to remove (default value would remove first matching).</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 07 48 8B CF 48 8B 5D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? ?? ?? ?? 48 8B CB FF 50 ?? 48 8B 56")]
     public static partial bool ExecuteStatusOff(uint statusId, uint sourceId = 0xE0000000);
 }
 

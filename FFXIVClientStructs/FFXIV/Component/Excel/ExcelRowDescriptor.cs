@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Component.Excel;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct ExcelRowDescriptor {
-    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 89 57")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 48 8B DF 48 8D 4E")]
     public partial void Assign0xFFFF();
 
     [MemberFunction("48 89 5C 24 ?? 66 44 89 49")]

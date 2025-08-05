@@ -34,13 +34,13 @@ public unsafe partial struct CompletionModule {
     [FieldOffset(0x2A8)] public Utf8String OpenIconMacro;
     [FieldOffset(0x310)] public Utf8String CloseIconMacro;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 1B 41 FF C7"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 54 24 ?? 85 D2"), GenerateStringOverloads]
     public partial void AddCompletionEntry(long groupIndex, uint rowId, CStringPointer itemText, CStringPointer groupTitle, ushort itemKey);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 3C 23"), GenerateStringOverloads]
     public partial CategoryData* AddCategoryData(long groupIndex, CStringPointer itemText, CStringPointer groupTitle, CategoryData* categoryData);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 6C 24 ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B 64 24 ?? 4C 8B 7C 24")]
     public partial void ClearCompletionData();
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? 0F 28 CE")]

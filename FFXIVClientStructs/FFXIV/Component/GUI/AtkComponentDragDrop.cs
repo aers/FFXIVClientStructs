@@ -29,10 +29,10 @@ public unsafe partial struct AtkComponentDragDrop : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 47 49")]
     public partial bool LoadIcon(uint iconId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 46 F4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8B CB E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 8D 47")]
     public partial CStringPointer GetQuantityText();
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8D 46 F4"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C9 8B C1 48 85 F6"), GenerateStringOverloads]
     public partial void SetQuantityText(CStringPointer quantityText);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 63 CF 48 83 C1 19")]
@@ -41,10 +41,10 @@ public unsafe partial struct AtkComponentDragDrop : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? F2 41 0F 10 87")]
     public partial void AttachTooltip(AtkTooltipType type, ushort parentId, AtkResNode* targetNode, AtkTooltipArgs* tooltipArgs);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 49 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7E ?? 48 85 FF 75")]
     public partial void DetachTooltip();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 46 0B")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 8D 46")]
     public partial void SetIconDisableState(bool disabled); // if true, sets MultiplyRed/Green/Blue to 50. 100 otherwise
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 18 66 C7 44 24")]

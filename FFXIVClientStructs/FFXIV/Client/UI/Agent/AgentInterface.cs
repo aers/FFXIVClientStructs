@@ -51,13 +51,13 @@ public unsafe partial struct AgentInterface {
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 FF")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 7E 4B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F3 33 DB")]
     public partial bool IsAddonReady();
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 84 ED 74 1A")]
     public partial void ShowAddon();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 7D 40")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 48 8B 82")]
     public partial void HideAddon();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 05 41 B4 01")]
@@ -66,10 +66,10 @@ public unsafe partial struct AgentInterface {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1A 49 8B CF")]
     public partial bool IsAddonHidden();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 04 74 40")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 ?? 74 ?? 33 DB 48 8D 4D")]
     public partial AddonStatus GetAddonStatus();
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 08 8B 55 97")]
+    [MemberFunction("E9 ?? ?? ?? ?? 45 33 C9 41 B0 ?? 33 D2")]
     public partial bool FocusAddon();
 
     public enum GameEvent {

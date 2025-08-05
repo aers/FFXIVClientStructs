@@ -84,7 +84,7 @@ public unsafe partial struct QuestManager {
         }
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 43 88 84 3E ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 88 84 2E")]
     public static partial bool IsQuestComplete(ushort questId);
     public static bool IsQuestComplete(uint questId) => IsQuestComplete((ushort)(questId & 0xFFFF));
 
@@ -135,7 +135,7 @@ public unsafe partial struct QuestManager {
     /// </summary>
     /// <param name="gatheringItemId">The RowId of the GatheringItem sheet.</param>
     /// <returns>Returns <c>true</c> if the item has been gathered before, <c>false</c> otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 87 ?? ?? ?? ?? B8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 85 ?? ?? ?? ?? 41 BC ?? ?? ?? ?? B8")]
     public static partial bool IsGatheringItemGathered(ushort gatheringItemId);
 
     /// <summary>
@@ -153,7 +153,7 @@ public unsafe partial struct QuestManager {
     /// Has to be multiplied by 60 for a unix timestamp.<br/>
     /// Use <see cref="GetNextLeveAllowancesUnixTimestamp"/> or <see cref="GetNextLeveAllowancesDateTime"/> instead.
     /// </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 74 24 ?? 8B D8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 41 8D 44 24")]
     private static partial int GetNextLeveAllowancesTimestamp();
 
     /// <summary>

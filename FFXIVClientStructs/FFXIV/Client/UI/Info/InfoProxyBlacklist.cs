@@ -17,7 +17,7 @@ public unsafe partial struct InfoProxyBlacklist {
     [FieldOffset(0x13B8)] public StdMap<ulong, int> AccountIdMap;
     [FieldOffset(0x13C8)] public StdMap<ulong, int> ContentIdMap;
 
-    [MemberFunction("48 89 5C 24 ?? 4C 8B 91 ?? ?? ?? ?? 33 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 7C 24 ?? ?? 75 ?? E8")]
     public partial void GetBlockResult(BlockResult* outBlockResult, ulong accountId, ulong contentId);
 
     [MemberFunction("48 83 EC 48 F6 81 ?? ?? ?? ?? ?? 75 ?? 33 C0 48 83 C4 48")]

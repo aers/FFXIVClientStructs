@@ -46,7 +46,7 @@ public unsafe partial struct ItemFinderModule {
     /// </summary>
     /// <param name="retainerId">The Id of the retainer to check.</param>
     /// <returns>If <c>true</c>, the retainer has been summoned in the current session. Otherwise, the retainer inventory is from a client side cache.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 45 8D 46 EC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 56 ?? 0F B6 F0")]
     public partial bool IsRetainerCurrent(ulong retainerId);
 }
 

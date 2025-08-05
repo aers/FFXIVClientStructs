@@ -32,7 +32,7 @@ public unsafe partial struct DrawDataContainer {
         return ref EquipmentModelIds[(int)slot];
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? FF C3 4D 8D 7F ?? 4D 8D 76")]
+    [MemberFunction("E8 ?? ?? ?? ?? B1 ?? 41 FF C6")]
     public partial void LoadEquipment(EquipmentSlot slot, EquipmentModelId* modelId, bool force);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 45 7F")]
@@ -60,7 +60,7 @@ public unsafe partial struct DrawDataContainer {
     /// Called when Manually Adjust Visor is toggled or /visor is used.
     /// </summary>
     /// <param name="state">When true, visor will be toggled on, when false it will be toggled off.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 97 ?? ?? ?? ?? 48 8B CF C0 EA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B6 D6 48 8B CB")]
     public partial void SetVisor(bool state);
 
     /// <summary>

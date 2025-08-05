@@ -79,7 +79,7 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x3E6)] public ushort PatchNumber;
     }
 
-    [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 2E")]
+    [MemberFunction("4C 8B 81 ?? ?? ?? ?? 4D 85 C0 74 ?? ?? ?? ?? 4D 85 C9")]
     public partial bool IsRecipeUnlocked(ushort recipeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 F8 6B 83")]

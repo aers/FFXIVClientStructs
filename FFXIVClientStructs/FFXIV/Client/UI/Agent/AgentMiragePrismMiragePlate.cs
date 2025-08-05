@@ -26,7 +26,7 @@ public unsafe partial struct AgentMiragePrismMiragePlate {
     [MemberFunction("40 57 48 83 EC 20 80 79 30 00")]
     public partial void ClearItemData(uint index = uint.MaxValue); // anything >= 12 falls back to SelectedItemIndex
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 46 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? ?? ?? 49 8B 4E")]
     public partial void SetSelectedItemData(ItemSource source, uint sourceId, uint itemId, byte stain0Id, byte stain1Id);
 
     [MemberFunction("48 89 74 24 ?? 57 48 83 EC 20 80 79 30 00 49 8B F9")]

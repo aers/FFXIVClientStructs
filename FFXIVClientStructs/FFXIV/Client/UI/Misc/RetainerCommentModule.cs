@@ -15,7 +15,7 @@ public unsafe partial struct RetainerCommentModule {
 
     [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray10<RetainerComment> _retainers;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B BC 24 ?? ?? ?? ?? 48 8B 4E 10 48 8B 01 FF 50 58"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? ?? ?? ?? FF 50 ?? 48 8B C8 BA ?? ?? ?? ?? E8 ?? ?? ?? ?? ?? ?? ?? 48 8B CF FF 50 ?? 33 DB"), GenerateStringOverloads]
     public partial void SetComment(ulong retainerId, CStringPointer comment);
 
     [MemberFunction("32 C0 0F 1F 40 00 66 66 0F 1F 84 ?? 00 00 00 00 44 0F B6 C0 4C 8D 51")]

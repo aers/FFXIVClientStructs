@@ -171,6 +171,6 @@ public unsafe partial struct RenderTargetManager {
 
     [FieldOffset(0x6EC)] public float GraphicsRezoScale; // Offset most likely wrong, idk the right one
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 30 48 8B D0 FF 57 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 8B D0 FF D3")]
     public partial Texture* GetCharaViewTexture(uint clientObjectIndex);
 }

@@ -25,7 +25,7 @@ public unsafe partial struct AtkTooltipManager {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C9 45 8D 44 24")]
     public partial void DetachTooltipByAddonId(ushort addonId, bool removeEvents = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 D2 EB 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 63 47 ?? BB")]
     public partial void ShowTooltip(
         AtkTooltipType type,
         ushort parentId,

@@ -27,7 +27,7 @@ public unsafe partial struct AgentHelpers {
     [FieldOffset(0x0)] public UIModule* UIModule;
     [FieldOffset(0x8)] public AgentModule* AgentModule;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B B7 ?? ?? ?? ?? 45 33 FF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 10 45 ?? 48 8D 0D")]
     public partial void HideBlockingCharaViewAgents(uint clientObjectIndex, AgentId allowedAgent);
 }
 

@@ -17,6 +17,6 @@ public unsafe partial struct ModelResourceHandle {
     [FieldOffset(0x248)] public StdMap<CStringPointer, short> Attributes;
     [FieldOffset(0x268)] public StdMap<CStringPointer, short> Shapes;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B CD 48 89 44 24 ?? 41 B8 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 8B CE 48 89 44 24 ?? 41 B8 ?? ?? ?? ?? 48 8D 54 24")]
     public unsafe partial CStringPointer GetMaterialFileNameBySlot(uint slot);
 }

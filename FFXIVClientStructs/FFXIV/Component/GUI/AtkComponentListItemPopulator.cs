@@ -10,10 +10,10 @@ public unsafe partial struct AtkComponentListItemPopulator {
     [FieldOffset(0x08)] public delegate* unmanaged<AtkUnitBase*, int, AtkResNode**, AtkComponentListItemRenderer*, void> PopulateWithRenderer;
     [FieldOffset(0x10)] public delegate* unmanaged<AtkUnitBase*, ListItemInfo*, AtkResNode**, void> Populate;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 B1 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 CE 89 74 24")]
     public partial AtkComponentListItemPopulator* CtorWithRenderer(AtkUnitBase* unitBase, delegate* unmanaged<AtkUnitBase*, int, AtkResNode**, AtkComponentListItemRenderer*, void> populateWithRenderer);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 8F ?? ?? ?? ?? 4C 8D 45 90")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 CD")]
     public partial AtkComponentListItemPopulator* Ctor(AtkUnitBase* unitBase, delegate* unmanaged<AtkUnitBase*, ListItemInfo*, AtkResNode**, void> populate);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]

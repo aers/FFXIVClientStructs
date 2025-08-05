@@ -38,11 +38,11 @@ public unsafe partial struct ExdModule {
     [MemberFunction("48 83 EC 38 48 8B 05 ?? ?? ?? ?? 48 8B 88")]
     public partial bool IsColumnRsv([CExporterTypeForce("Component::Exd::SheetsEnum")] uint sheetIndex, uint rowId, uint subRowId, uint columnIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 75 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 63 FF")]
     [CExporterExcel("Item")]
     public static partial void* GetItemRowById(uint itemId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 48 2F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 48 ?? 84 C9 75")]
     [CExporterExcel("BannerCondition")]
     public static partial void* GetBannerConditionByIndex(uint rowIndex);
 
@@ -52,6 +52,6 @@ public unsafe partial struct ExdModule {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 53 6C")]
     public static partial uint GetEnabledZoneSharedGroupRequirementIndex([CExporterExcel("ZoneSharedGroup")] void* row);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 5E ?? BA 05 00 00 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ?? 44 0F B6 E8 48 83 C1")]
     public static partial uint GetRoleForClassJobId(uint classJobId);
 }

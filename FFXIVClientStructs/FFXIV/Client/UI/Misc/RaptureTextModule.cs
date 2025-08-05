@@ -75,7 +75,7 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("48 83 EC 28 45 0F B6 C8 85 D2")]
     public partial CStringPointer FormatTimeSpan(uint seconds, bool alternativeMinutesGlyph = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8B E8 A8 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 F6 89 44 24 ?? 33 D2")]
     public partial SheetRedirectFlags ResolveSheetRedirect(Utf8String* sheetName, int* outRowId, int* outColIndex);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8D 55 ?? E8 ?? ?? ?? ?? E9")]

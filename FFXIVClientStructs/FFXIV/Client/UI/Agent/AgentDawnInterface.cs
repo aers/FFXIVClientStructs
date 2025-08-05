@@ -59,7 +59,7 @@ public unsafe partial struct AgentDawnInterface {
         [MemberFunction("48 8D 41 ?? B9 07 00 00 00 0F 1F 80 00 00 00 00 C6 00 FF")]
         public partial void ClearParty();
 
-        [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F0 48 8B 7B")]
+        [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F8 BA ?? ?? ?? ?? 48 8D 8E")]
         public partial bool CanAddMember(byte memberIndex, DawnMemberEntry* member);
 
         [MemberFunction("44 0F B6 41 ?? 32 C0 45 84 C0 74 ?? 0F 1F 40 00")]

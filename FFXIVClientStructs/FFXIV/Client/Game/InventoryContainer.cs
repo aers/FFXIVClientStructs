@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::InventoryContainer
 [GenerateInterop(isInherited: true)]
-[VirtualTable("48 8D 0D ?? ?? ?? ?? 48 89 6C 24 ?? BD ?? ?? ?? ?? 48 89 28", 3)]
+[VirtualTable("4C 8D 05 ?? ?? ?? ?? ?? ?? ?? 8B CD 48 8B C2", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct InventoryContainer {
     [FieldOffset(0x08)] public InventoryItem* Items;

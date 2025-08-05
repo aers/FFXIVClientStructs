@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x84)]
 public unsafe partial struct PvPProfile {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F B6 78 31", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 3C ?? 0F 84 ?? ?? ?? ?? 48 85 DB", 3)]
     public static partial PvPProfile* Instance();
 
     [FieldOffset(0x0)] public bool IsLoaded;
@@ -78,15 +78,15 @@ public unsafe partial struct PvPProfile {
     public partial byte GetSeriesClaimedRank();
 
     /// <summary>Gets the current PvP Series rank experience.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 3B EE 8D 4E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 F8 BA ?? ?? ?? ?? 44 8B C7")]
     public partial ushort GetSeriesExperience();
 
     /// <summary>Returns whether the player had a rank last PvP Series.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F ?? 45 33 D2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4F ?? 0F B6 F0 ?? ?? ?? 41 FF 52")]
     public partial bool HasPreviousSeriesRank();
 
     /// <summary>Gets the previous PvP Series achieved rank.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 05 E8 ?? ?? ?? ?? 0F B6 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 EB ?? BA")]
     public partial byte GetPreviousSeriesRank();
 
     /// <summary>Gets the previous PvP Series claimed rank.</summary>

@@ -36,7 +36,7 @@ public unsafe partial struct RaptureUiDataModule {
     public unsafe partial struct MuteList {
         [FieldOffset(0x00)] public StdVector<MuteListEntry> Entries;
 
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8D 75 1F")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8D B4 24 ?? ?? ?? ?? 48 85 C0")]
         public partial MuteListEntry* GetByAccountId(ulong accountId);
 
         /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>
@@ -44,7 +44,7 @@ public unsafe partial struct RaptureUiDataModule {
         public partial MuteListEntry* Add(ulong accountId, CStringPointer name, short worldId);
 
         /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>
-        [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1B 49 8B 4E 10")]
+        [MemberFunction("E8 ?? ?? ?? ?? 84 C0 40 0F B6 FF 41 0F 45 FD FF C3")]
         public partial bool Remove(ulong accountId);
 
         /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>

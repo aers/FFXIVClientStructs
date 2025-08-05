@@ -24,19 +24,19 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 83 F8 0E 75 2B")]
     public partial ComponentType GetComponentType();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D5 BE")]
     public partial AtkResNode* GetNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 54 B5 D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B D7 48 89 87")]
     public partial AtkComponentBase* GetComponentById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 53 47")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 94 9E")]
     public partial AtkImageNode* GetImageNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
     public partial AtkTextNode* GetTextNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 53 F8"), Obsolete("This function has not type check at all. Use GetNodeById instead.", true)]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D5 BE"), Obsolete("This function has not type check at all. Use GetNodeById instead.", true)]
     public partial AtkResNode* GetScrollBarNodeById(uint id);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 57 01 48 89 43 10")]
@@ -48,7 +48,7 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("48 85 D2 74 19 48 8B 81")]
     public partial bool IsOwnerNodeAncestorOf(AtkResNode* node);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 44 39 A3 ?? ?? ?? ?? 74 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CE E8 ?? ?? ?? ?? 48 8B CE 48 8B D8")]
     public partial void CopyCursorNavigationInfoFrom(AtkComponentBase* component);
 
     [MemberFunction("E8 ?? ?? ?? ?? B3 05")]

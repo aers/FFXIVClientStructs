@@ -9,7 +9,7 @@ public unsafe partial struct AtkEventDispatcher {
     [FieldOffset(0x20)] public byte Unk20;
 
     /// <returns>A bool indicating if the event was handled.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 0F B6 C8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C8 41 BE")]
     public partial bool DispatchEvent(Event* evt);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5B 20 41 B2 01")]

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40200)]
 public unsafe partial struct Manager {
-    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8D 4D 80", 3, true)]
+    [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 33 C9", 3, true)]
     public static partial Manager* Instance();
 
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray87<View> _views;

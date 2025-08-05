@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
 public unsafe partial struct InstanceContent {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F 57 C0 4C 89 B4 24", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 0F 94 C3", 3)]
     public static partial InstanceContent* Instance();
 
     [FieldOffset(0x70)] public bool IsLimitedTimeBonusActive;

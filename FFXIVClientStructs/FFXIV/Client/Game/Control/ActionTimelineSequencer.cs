@@ -28,7 +28,7 @@ public unsafe partial struct ActionTimelineSequencer {
     [MemberFunction("E8 ?? ?? ?? ?? 66 83 F8 4D")]
     public partial ushort GetSlotTimeline(uint slot);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 0F B7 C6 4D 8B CC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C6 4D 8B CD")]
     public partial void SetSlotTimeline(uint slot, ushort actionTimelineId);
 
     /// <remarks>

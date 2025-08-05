@@ -20,7 +20,7 @@ public unsafe partial struct AgentMJIMinionNoteBook {
     /// Switch to ViewType.Normal = <c>0x40B</c><br/>
     /// Switch to ViewType.Search = <c>0x413</c><br/>
     /// </param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 86 ?? ?? ?? ?? 88 58 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 39 BB")]
     public partial void HandleCommand(int* flags);
 
     /// <inheritdoc cref="HandleCommand(int*)"/>

@@ -194,7 +194,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 66 2B DE")]
     public partial float GetScaledHeight(bool getScaledHeight); // False returns unscaled height
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 4B FC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 84 B7")]
     public partial AtkResNode* GetNodeById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 1E")]
@@ -209,7 +209,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 3C 36"), Obsolete("Renamed to GetComponentButtonById", true)]
     public partial AtkComponentButton* GetButtonNodeById(uint nodeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 89 46 48")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 FF 48 89 43")]
     public partial AtkComponentList* GetComponentListById(uint nodeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 56 31")]
@@ -254,7 +254,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? F3 0F 10 0D ?? ?? ?? ?? 45 33 C9 F3 0F 59 0D")]
     public partial void SetOpenTransition(float duration, short offsetX, short offsetY, float scale);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 57 47 48 8B CE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 4C 89 BF")]
     public partial void SetCloseTransition(float duration, short offsetX, short offsetY, float scale);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 8B D7 4C 8B 83")]

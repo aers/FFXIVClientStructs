@@ -16,6 +16,6 @@ public unsafe partial struct AddonInventoryEvent {
 
     [FieldOffset(0x320)] public int TabIndex;
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 09 83 FF 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 FB ?? 0F 85 ?? ?? ?? ?? 48 89 AC 24")]
     public partial void SetTab(int tab);
 }

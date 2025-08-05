@@ -53,8 +53,8 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F0 8D 4F FE")]
     public partial int GetItemCountInContainer(uint itemId, InventoryType inventoryType, bool isHq = false, short minCollectability = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 7A 83 F8 04")]
-    public partial int MoveItemSlot(InventoryType srcContainer, ushort srcSlot, InventoryType dstContainer, ushort dstSlot, byte unk = 0);
+    [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 66 89 6EE8 ?? ?? ?? ?? EB 7A 83 F8 04")]
+    public partial int MoveItemSlot(InventoryType srcContainer, ushort srcSlot, InventoryType dstContainer, ushort dstSlot, bool a6 = false);
 
     [MemberFunction("40 55 53 56 57 41 55 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 8D B2")]
     public partial int SplitItem(InventoryType container, ushort slot, int quantity);
@@ -81,7 +81,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 43 78")]
     public partial uint GetRetainerGil();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 BB ?? ?? ?? ?? 74 58 44 8B C7 BA ?? ?? ?? ?? 49 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 44 8B F8 ?? ?? ?? FF 52 ?? 80 BB")]
     public partial uint GetFreeCompanyGil();
 
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 73 25")]
@@ -108,17 +108,17 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4F DD")]
     private static partial int GetSpecialItemId(byte switchCase);
 
-    /// <summary>  Gets the current maximum weekly number of limited tomestones tha player can earn. </summary>
+    /// <summary> Gets the current maximum weekly number of limited tomestones tha player can earn. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 42 8D 0C 2B")]
     public static partial int GetLimitedTomestoneWeeklyLimit();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 0F AF C7 48 03 E8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 89 84 3C")]
     public partial ulong GetRetainerMarketPrice(short slot);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 40 88 71")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E ?? 40 88 69")]
     public partial void SetRetainerMarketPrice(short slot, uint price);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4A 8B B4 3D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B B4 35")]
     public partial void SetSlotBlocked(InventoryType type, short slot);
 
     [MemberFunction("E8 ?? ?? ?? ?? 39 6B 38")]

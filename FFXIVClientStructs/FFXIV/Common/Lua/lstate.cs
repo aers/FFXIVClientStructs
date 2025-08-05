@@ -51,7 +51,7 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 06 41 8B D7")]
     public partial void lua_pushcclosure(delegate* unmanaged<lua_State*, int> fn, int n);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 56 ?? 85 D2 0F 88"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6C 24 ?? 8D 43"), GenerateStringOverloads]
     public partial void lua_setfield(int idx, CStringPointer k);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 48 85 ED"), GenerateStringOverloads]

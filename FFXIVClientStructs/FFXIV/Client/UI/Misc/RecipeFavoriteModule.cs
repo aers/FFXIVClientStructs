@@ -30,12 +30,12 @@ public unsafe partial struct RecipeFavoriteModule {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 B9 ?? ?? ?? ?? 0F 45 F9")]
     public partial RecipeEntry* GetEntry(byte craftType, ushort recipeId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? C6 44 24 ?? ?? 41 B9 ?? ?? ?? ?? C6 44 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 41 83 CE ?? 0F B6 B5")]
     public partial bool IsFavorited(byte craftType, ushort recipeId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 4C 24 ?? 48 8B 74 24 ??")]
     public partial uint RemoveFromFavorites(byte craftType, ushort recipeId); // returns LogMessage RowId
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 49 8B CE 49 8B 06")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CE E8 ?? ?? ?? ?? 83 BB")]
     public partial uint AddToFavorites(byte craftType, ushort recipeId); // returns LogMessage RowId
 }

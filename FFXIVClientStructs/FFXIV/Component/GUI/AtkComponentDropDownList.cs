@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
-[VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 17", [1, 970])]
+[VirtualTable("E8 ?? ?? ?? ?? 4C 8B F0 48 85 C0 0F 84 ?? ?? ?? ?? 49 8B 4D 08", [1, 1345])]
 public unsafe partial struct AtkComponentDropDownList : ICreatable {
     [FieldOffset(0xC0)] public AtkComponentCheckBox* Checkbox;
     [FieldOffset(0xC8)] public AtkComponentList* List;

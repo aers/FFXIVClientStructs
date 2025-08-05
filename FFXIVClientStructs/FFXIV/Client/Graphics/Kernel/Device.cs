@@ -46,7 +46,7 @@ public unsafe partial struct Device {
 
     [FieldOffset(0xE0AC0)] public ImmediateContext* ImmediateContext; // Client::Graphics::Kernel::Device::ImmediateContext
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 89 45 48")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 47 ?? B0")]
     public partial ConstantBuffer* CreateConstantBuffer(int byteSize, uint flags, uint unk);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 07 48 8D 7F 20")]

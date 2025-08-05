@@ -55,7 +55,7 @@ public unsafe partial struct AgentContentsFinder {
     [MemberFunction("40 53 48 83 EC ?? 48 8B 01 48 8B D9 FF 50 ?? 84 C0 74 ?? 48 8B CB C6 83")]
     public partial void Refresh();
 
-    [MemberFunction("E9 ?? ?? ?? ?? 48 8B 06 48 8B CE 48 81 C4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 C6 45 ?? ?? 4C 8D 9C 24")]
     public partial void UpdateAddon();
 
     [GenerateInterop]

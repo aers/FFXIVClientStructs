@@ -13,14 +13,14 @@ public unsafe partial struct HousingManager {
     [FieldOffset(0x10)] public IndoorTerritory* IndoorTerritory;
     [FieldOffset(0x18)] public WorkshopTerritory* WorkshopTerritory;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 BE 05 00 00 00 8D 53")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 BB")]
     private partial byte GetInvertedBrightness();
     public byte GetBrightness() => (byte)(5 - GetInvertedBrightness());
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B F5")]
     public partial bool HasHousePermissions();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 10 40 0F B6 D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 84 C0 74 ?? 8B 95")]
     public partial bool IsOutside();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B D6")]
@@ -52,7 +52,7 @@ public unsafe partial struct HousingManager {
     /// For indoor territories that were renovated, this returns the original location.
     /// </summary>
     /// <returns></returns>
-    [MemberFunction("48 8B 05 ?? ?? ?? ?? 48 8B 50 08 48 85 D2 74 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C8 E8 ?? ?? ?? ?? 4C 89 74 24")]
     public static partial uint GetOriginalHouseTerritoryTypeId();
 
     /// <summary>
@@ -101,7 +101,7 @@ public unsafe partial struct HousingManager {
     /// <param name="pointB">The point to calculate to</param>
     /// <param name="speed">Speed of the submarine to use</param>
     /// <returns>Voyage time</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 8C 24 ?? ?? ?? ?? 03 F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 03 F8 48 8D 55")]
     public static partial uint GetSubmarineVoyageTime(byte pointA, byte pointB, short speed);
 
     /// <summary>
@@ -127,7 +127,7 @@ public unsafe partial struct HousingManager {
     /// </summary>
     /// <param name="point">The point to check is unlocked or not</param>
     /// <returns>True or False</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 4F 49 8B 57 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 49 8B 56")]
     public static partial bool IsSubmarineExplorationUnlocked(byte point);
 
     /// <summary>

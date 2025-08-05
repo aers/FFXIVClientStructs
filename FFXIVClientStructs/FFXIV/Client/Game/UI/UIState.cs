@@ -160,7 +160,7 @@ public unsafe partial struct UIState {
     /// <item><term>4</term><description>The item does not have an unlock status.</description></item>
     /// </list>
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CE 89 86")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CD 89 87")]
     public partial long IsItemActionUnlocked([CExporterExcel("Item")] void* itemExdPtr);
 
     /// <summary>
@@ -181,7 +181,7 @@ public unsafe partial struct UIState {
     /// </remarks>
     /// <param name="emoteId">The ID of the emote to check for.</param>
     /// <returns>Returns true if the emote is unlocked.</returns>
-    [MemberFunction("E9 ?? ?? ?? ?? 8B 13 41 B8 ?? ?? ?? ?? 8B CA")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? ?? ?? 41 B8")]
     public partial bool IsEmoteUnlocked(ushort emoteId);
 
     /// <summary>

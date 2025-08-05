@@ -34,6 +34,6 @@ public unsafe partial struct AtkComponentWindow : ICreatable {
     [MemberFunction("33 D2 C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 51 08 48 89 01 0F 57 C0")]
     public partial void Ctor();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 FD 4B"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4F ?? C6 85"), GenerateStringOverloads]
     public partial void SetTitle(CStringPointer title, CStringPointer subtitle);
 }

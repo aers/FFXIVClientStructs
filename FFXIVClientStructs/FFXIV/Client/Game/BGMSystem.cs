@@ -20,7 +20,7 @@ public unsafe partial struct BGMSystem {
     [FieldOffset(0xF8)] public bool LastingBGM;
     [FieldOffset(0xF9)] public bool ContinueBGMUntilWarp;
 
-    [MemberFunction("4C 8B 1D ?? ?? ?? ?? 4D 85 DB 0F 84")]
+    [MemberFunction("4C 8B 1D ?? ?? ?? ?? 4D 85 DB 0F 84 ?? ?? ?? ?? 41 3B 53")]
     public static partial void SetBGM(
         ushort bgmId,
         uint sceneId,

@@ -32,7 +32,7 @@ public unsafe partial struct TargetSystem {
     /// Method to get the player's current target's ObjectId. Will resolve the hard and soft targets, in
     /// that order, returning the first one that's set.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 33 ED EB 16")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 33 F6 EB")]
     public partial GameObjectId GetTargetObjectId();
 
     /// <summary>
@@ -57,7 +57,7 @@ public unsafe partial struct TargetSystem {
     [MemberFunction("48 85 D2 74 2C 4C 63 89")]
     public partial bool IsObjectInViewRange(GameObject* obj);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 1E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 75 ?? 48 63 87")]
     public partial bool IsObjectOnScreen(GameObject* obj);
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 8B 01 FF 50 08 48 8B C8")]

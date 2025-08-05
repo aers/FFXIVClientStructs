@@ -12,9 +12,9 @@ public unsafe partial struct ExcelRow {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D 70 0F B6 D8")]
     public partial bool IsColumnRsv(uint columnIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 2C 5B")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C9 81 FB")]
     public static partial void* ResolveStringColumnIndirection(void* columnPtr);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 55 F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 FF 33 C9")]
     public partial CStringPointer GetFirstColumnAsString();
 }

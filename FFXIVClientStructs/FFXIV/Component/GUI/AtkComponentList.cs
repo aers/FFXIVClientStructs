@@ -59,7 +59,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     public partial int GetItemCount();
 
     // rendererNodeId is the node id of the ListItemRenderer to use. if 0, it uses FirstAtkComponentListItemRenderer
-    [MemberFunction("E8 ?? ?? ?? ?? 83 FE 47")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D3 85 ED")]
     public partial void SetupRenderer(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, int columnCount, uint rendererNodeId = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C8 48 85 DB")]
@@ -69,7 +69,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     public partial void SetItemCount(int value);
 
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? FF C5 48 8D 5B 70"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 85 FF 79 ?? 44 39 75"), GenerateStringOverloads]
     public partial void SetItemLabel(int index, CStringPointer text);
 
     /// <remarks> Used by <see cref="AtkComponentDropDownList"/>. </remarks>

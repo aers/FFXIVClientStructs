@@ -33,7 +33,7 @@ public unsafe partial struct GoldSaucerModule {
     [MemberFunction("E8 ?? ?? ?? ?? 33 C9 48 2B D8")]
     public partial TripleTriadDeck* GetDeck(int deckIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 C3 8B D6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B7 C3 8B D6 48 8B CF")]
     public partial void SetHotbarMinion(int slotIndex, ushort companionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B D6 0F B7 D8")]

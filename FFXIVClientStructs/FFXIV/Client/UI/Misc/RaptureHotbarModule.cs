@@ -259,7 +259,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="commandId">The command ID to set.</param>
     /// <param name="ignoreSharedHotbars">Unclear use, appears to ignore writing to shared slots if set.</param>
     /// <param name="allowSaveToPvP">If in PVP mode, allow saving to PVP hotbars. No effect if not in PVP mode.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB BA")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 0F B6 44 24 ?? 44 8B CD")]
     public partial void SetAndSaveSlot(uint hotbarId, uint slotId, HotbarSlotType commandType, uint commandId,
         bool ignoreSharedHotbars = false, bool allowSaveToPvP = true);
 

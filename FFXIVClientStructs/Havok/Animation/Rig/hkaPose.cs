@@ -81,7 +81,7 @@ public unsafe partial struct hkaPose {
     [MemberFunction("48 83 EC 18 80 79 38 00")]
     public partial void SyncModelSpace();
 
-    [MemberFunction("4C 8B DC 53 55 56 57 41 54 41 56 48 81 EC")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 5B ?? F3 0F 11 30")]
     public partial hkQsTransformf* AccessBoneLocalSpace(int boneIdx);
 
     [MemberFunction("48 8B C4 89 50 10 53 57")]

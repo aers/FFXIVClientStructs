@@ -56,8 +56,8 @@ public unsafe partial struct InfoProxyItemSearch {
     [MemberFunction("40 57 41 56 48 83 EC 48 83 3A 00")]
     public partial void ProcessItemHistory(nint packet);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 3F 85 FF 74 16")]
-    public partial nint ProcessRequestResult(byte a2, int a3);
+    [MemberFunction("E8 ?? ?? ?? ?? ?? ?? ?? 74 ?? ?? ?? ?? 48 8B CF FF 90 ?? ?? ?? ?? ?? ?? 48 8B C8")]
+    public partial void ProcessRequestResult(byte a2, int a3);
 
     /// <summary>
     /// Load player retainer information from a packet into the

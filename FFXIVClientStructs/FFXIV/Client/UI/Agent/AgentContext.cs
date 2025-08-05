@@ -49,16 +49,16 @@ public unsafe partial struct AgentContext {
     [FieldOffset(0x17D9)] public byte ContextMenuIndex;
     [FieldOffset(0x17DA)] public byte OpenAtPosition; // if true menu opens at Position else at cursor location
 
-    [MemberFunction("E8 ?? ?? ?? ?? 45 88 74 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 89 6B ?? E9")]
     public partial void OpenContextMenu(bool bindToOwner = true, bool closeExisting = true);
 
-    [MemberFunction("41 0F B6 C0 89 91")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 32 C0 E9")]
     public partial void OpenContextMenuForAddon(uint ownerAddonId, bool bindToOwner = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 39 BB ?? ?? ?? ?? 0F 86 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 39 A3 ?? ?? ?? ?? 0F 86")]
     public partial bool OpenSubMenu();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B 10 48 8B 01 FF 90 ?? ?? ?? ?? B2 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D ?? E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 0F B7 B3")]
     [GenerateStringOverloads]
     public partial void OpenYesNo(CStringPointer text, uint yesId = 576, uint noId = 577, uint checkboxId = 0, bool setOwner = true);
 
@@ -76,7 +76,7 @@ public unsafe partial struct AgentContext {
     [MemberFunction("E8 ?? ?? ?? ?? 83 FD 0D")]
     public partial void AddMenuItem2(uint addonTextId, AtkEventInterface* handler, long handlerParam, bool disabled = false, bool submenu = false);
 
-    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 99 ?? ?? ?? ?? 4C 8B D1")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 99 ?? ?? ?? ?? 4C 8B D1 41 0F B6 F1 49 8B F8 44 8B DA ?? ?? ?? 66 83 F9 ?? 0F 8D ?? ?? ?? ?? 8D 42 ?? 83 F8 ?? 0F 87 ?? ?? ?? ?? 45 33 C9 45 8D 41 ?? 40 84 F6")]
     [GenerateStringOverloads]
     public partial void AddContextMenuItem(int eventId, CStringPointer text, bool disabled = false, bool submenu = false, bool copyText = true);
 

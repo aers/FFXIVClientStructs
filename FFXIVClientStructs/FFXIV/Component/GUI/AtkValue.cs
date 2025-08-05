@@ -74,7 +74,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 55 2A")]
     public partial void Copy(AtkValue* other);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 42 88 B4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 80 F6")]
     public partial void ChangeType(ValueType type);
 
     /// <summary>
@@ -111,7 +111,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
     [MemberFunction("E8 ?? ?? ?? ?? 83 C6 02 FF C7"), GenerateStringOverloads]
     public partial bool SetVectorString(uint index, CStringPointer value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 44 24 60 4E 8D 24 3E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 8B 8E")]
     public partial bool CopyVectorValue(uint index, AtkValue* outValue);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 55 9C ?? ?? ?? ?? ?? ?? ?? ??")]

@@ -58,10 +58,10 @@ public unsafe partial struct GroupManager {
         [MemberFunction("85 D2 78 19 0F B6 81")]
         public partial PartyMember* GetPartyMemberByIndex(int index);
 
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 4C 8B 07")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 ?? 41 B6")]
         public partial PartyMember* GetPartyMemberByContentId(ulong contentId);
 
-        [MemberFunction("E8 ?? ?? ?? ?? 83 FF 68")]
+        [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 75 ?? 0F B6 B7")]
         public partial PartyMember* GetPartyMemberByEntityId(uint entityId);
     }
 }

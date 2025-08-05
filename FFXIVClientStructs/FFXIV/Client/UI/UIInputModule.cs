@@ -8,6 +8,6 @@ public unsafe partial struct UIInputModule {
 
     [FieldOffset(0x25)] public bool IsPadMouseModeEnabled;
 
-    [MemberFunction("48 89 5C 24 ?? 55 48 83 EC 20 80 79 25 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? ?? ?? ?? FF 90 ?? ?? ?? ?? 48 8B C8 33 D2 48 83 C4")]
     public partial void DisablePadMouseMode(bool playSoundEffect = true);
 }

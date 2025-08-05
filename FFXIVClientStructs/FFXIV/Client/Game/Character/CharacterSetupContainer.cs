@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x18)]
 public unsafe partial struct CharacterSetupContainer {
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 9E ?? ?? ?? ?? 48 8D 8E ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 55 ?? 48 8B CF")]
     public partial ulong CopyFromCharacter(Character* source, CopyFlags flags);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 86 ?? ?? ?? ?? 48 8D 8F")]

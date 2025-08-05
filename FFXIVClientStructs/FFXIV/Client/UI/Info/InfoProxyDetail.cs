@@ -31,10 +31,10 @@ public unsafe partial struct InfoProxyDetail {
     [MemberFunction("48 39 51 30 74 0B")]
     public partial void SetUpdateLookingForPartyClassJobIdMask(ulong classJobIdMask);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 53 15")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6C 24 ?? ?? ?? ?? 41 B1")]
     public partial void SetUpdateOnlineStatus(InfoProxyCommonList.CharacterData.OnlineStatus onlineStatus, bool skipAwayCheck = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 53 16")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5C 24 ?? 41 83 FE")]
     public partial void SetUpdateLanguageMask(InfoProxyCommonList.CharacterData.LanguageMask languageMask);
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B CF E8 ?? ?? ?? ?? C6 46 08 01"), GenerateStringOverloads]

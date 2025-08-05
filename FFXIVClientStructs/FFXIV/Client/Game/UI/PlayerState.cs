@@ -263,7 +263,7 @@ public unsafe partial struct PlayerState {
     /// Returns whether the player is specialized in the given DoH ClassJob.
     /// </summary>
     /// <param name="classJobId">The ClassJob row id of the DoH job to check.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 04 41 0F AB F6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F AB F5")]
     public partial bool IsMeisterFlag(uint classJobId);
 
     /// <summary>
@@ -305,7 +305,7 @@ public unsafe partial struct PlayerState {
     /// </summary>
     /// <param name="rollId">The ID of the roll to look up.</param>
     /// <returns>Returns true if the roll has been unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 44 1F 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 D8 0F B6 87")]
     public partial bool IsOrchestrionRollUnlocked(uint rollId);
 
     /// <summary>
@@ -341,7 +341,7 @@ public unsafe partial struct PlayerState {
     /// </summary>
     /// <param name="mcGuffinId">The ID of the McGuffin to look up, generally from the McGuffin sheet.</param>
     /// <returns>Returns true if the McGuffin has been unlocked.</returns>
-    [MemberFunction("8D 42 ?? 3C ?? 77 ?? 4C 8B 89")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 48 8D 76")]
     public partial bool IsMcGuffinUnlocked(uint mcGuffinId);
 
     /// <summary>
@@ -353,7 +353,7 @@ public unsafe partial struct PlayerState {
     /// </remarks>
     /// <param name="kitId">The kit ID to check for.</param>
     /// <returns>Returns true if the framer's kit is unlocked.</returns>
-    [MemberFunction("E9 ?? ?? ?? ?? 33 FF 8B 03")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 33 ED 66 0F 1F 44 00")]
     public partial bool IsFramersKitUnlocked(uint kitId);
 
     public bool IsAetherCurrentUnlocked(uint aetherCurrentId) {
@@ -376,7 +376,7 @@ public unsafe partial struct PlayerState {
     /// Check if a Sightseeing Log vista has been discovered.
     /// </summary>
     /// <param name="adventureIndex">Index of the Adventure Row</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 AA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 88 84 24 ?? ?? ?? ?? 48 85 FF")]
     public partial bool IsAdventureComplete(uint adventureIndex);
 
     /// <summary>
@@ -459,13 +459,13 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether the player is a Battle Mentor.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 04 C6 46 41 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 81 FD")]
     public partial bool IsBattleMentor();
 
     /// <summary>
     /// Returns whether the player is a Trade Mentor.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 28 F6 D8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 81 FD")]
     public partial bool IsTradeMentor();
 
     /// <summary>
@@ -478,14 +478,14 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether the player is a returner.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 88 46 43")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 88 46 ?? 41 38 76")]
     public partial bool IsReturner();
 
     /// <summary>
     /// Returns whether the specified PlayerStateFlag is set.
     /// </summary>
     /// <param name="flag">The PlayerStateFlag to check.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 3A D8 75 2E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3A C3 74 ?? EB")]
     public partial bool IsPlayerStateFlagSet(PlayerStateFlag flag);
 
     #endregion

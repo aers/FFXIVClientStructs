@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // characters that fight (players, monsters, etc)
 [GenerateInterop]
 [Inherits<Character>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 33 D2 48 89 07 41 B8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 33", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 41 B8 ?? ?? ?? ?? 48 8D 05", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x3780)]
 public unsafe partial struct BattleChara {
     [FieldOffset(0x2320)] public StatusManager StatusManager;

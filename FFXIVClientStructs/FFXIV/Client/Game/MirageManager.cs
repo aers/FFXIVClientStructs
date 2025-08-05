@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1888)]
 public unsafe partial struct MirageManager {
-    [StaticAddress("74 2C 48 8B 0D ?? ?? ?? ?? 48 85 C9", 5, isPointer: true)]
+    [StaticAddress("48 8B 0D ?? ?? ?? ?? 48 8D 44 24 ?? 0F 57 C0", 3, isPointer: true)]
     public static partial MirageManager* Instance();
 
     [FieldOffset(0)] public bool IsApplyingGlamourPlate;
@@ -28,7 +28,7 @@ public unsafe partial struct MirageManager {
     /// Returns <c>true</c> if the command was sent to the server, or <c>false</c>
     /// if the player already possess a unique item or if inventory space is insufficient.
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 B0 01 48 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 B0 ?? 48 8B CE")]
     public partial bool RestorePrismBoxItem(uint itemIndex);
 
     [GenerateInterop]

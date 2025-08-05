@@ -32,7 +32,7 @@ public unsafe partial struct MacroEncoder {
         return null;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? FF CF 89 7C 24 ?? EB")]
+    [MemberFunction("E8 ?? ?? ?? ?? FF CE 89 74 24")]
     public partial int EncodeParameter(Utf8String* output, Utf8String* param, byte type, int* outExtraParams);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 83 F8 ?? 0F 8C"), GenerateStringOverloads]

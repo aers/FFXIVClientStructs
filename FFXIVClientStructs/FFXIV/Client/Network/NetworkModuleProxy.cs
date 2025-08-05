@@ -18,6 +18,6 @@ public unsafe partial struct NetworkModuleProxy {
     /// Does NOT invoke network request
     /// </summary>
     /// <returns>Current instance or 0 for non instanced zones</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 0F B7 F0 E8 ?? ?? ?? ?? 8B D8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 C0 33 D2 C1 E0")]
     public partial short GetCurrentInstance();
 }

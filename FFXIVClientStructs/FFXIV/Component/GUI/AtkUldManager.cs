@@ -50,7 +50,7 @@ public unsafe partial struct AtkUldManager {
     public AtkComponentBase* CreateAtkComponent(ComponentType type)
         => CreateAtkComponent((uint)type);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 17")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD")]
     public partial AtkResNode* CreateAtkNode(uint type);
 
     public AtkResNode* CreateAtkNode(NodeType type)
@@ -77,10 +77,10 @@ public unsafe partial struct AtkUldManager {
     public static AtkCollisionNode* CreateAtkCollisionNode()
         => (AtkCollisionNode*)CreateAtkNodeStatic(NodeType.Collision);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 41 3B B7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 ED 66 89 6B")]
     public partial void ExpandNodeListSize(ushort newNodeListSize);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 44 24 ?? 41 8B CF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 47 ?? 41 8B CC")]
     public partial void UpdateDrawNodeList();
 
     [MemberFunction("40 57 48 83 EC 30 0F B6 81 ?? ?? ?? ?? 48 8B F9 A8 01")]

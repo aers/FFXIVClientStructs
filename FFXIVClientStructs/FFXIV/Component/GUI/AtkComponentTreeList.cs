@@ -20,13 +20,13 @@ public unsafe partial struct AtkComponentTreeList : ICreatable {
     public partial void Ctor();
 
     /// <remarks> Does not add it to the <see cref="Items"/> list automatically! </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B F8 8B CD")]
+    [MemberFunction("40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 33 D2 45 33 C9")]
     public partial AtkComponentTreeListItem* CreateItem();
 
     [MemberFunction("48 83 EC 28 3B 91 ?? ?? ?? ??")]
     public partial AtkComponentTreeListItem* GetItem(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 FF 75 22")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3B F7 75")]
     public partial void LoadAtkValues(
         int atkValuesCount,
         AtkValue* atkValues,
@@ -41,7 +41,7 @@ public unsafe partial struct AtkComponentTreeList : ICreatable {
     /// Expands the given group and collapses all other groups.<br/>
     /// After calling this, you might also want to set <see cref="LayoutRefreshPending"/> to <c>true</c>.
     /// </remarks>
-    [MemberFunction("E8 ?? ?? ?? ?? 44 88 BB ?? ?? ?? ?? 80 4F 42 10")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 88 A3 ?? ?? ?? ?? 80 4F")]
     public partial void ExpandGroupExclusively(AtkComponentTreeListItem* groupHeaderItem, bool a3 = false);
 }
 

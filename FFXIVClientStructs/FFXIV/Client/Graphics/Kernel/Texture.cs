@@ -39,7 +39,7 @@ public unsafe partial struct Texture {
     public static Texture* CreateTexture2D(int* size, byte mipLevel, TextureFormat textureFormat, TextureFlags flags, uint unk)
         => Device.Instance()->CreateTexture2D(size, mipLevel, textureFormat, flags, unk);
 
-    [MemberFunction("E9 ?? ?? ?? ?? 8B 02 25")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? ?? ?? 25 ?? ?? ?? ?? 3D")]
     public partial bool InitializeContents(void* contents);
 
     [VirtualFunction(2u)]

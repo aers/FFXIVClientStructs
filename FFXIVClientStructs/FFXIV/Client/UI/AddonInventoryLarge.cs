@@ -14,6 +14,6 @@ public partial struct AddonInventoryLarge {
 
     [FieldOffset(0x338)] public int TabIndex;
 
-    [MemberFunction("E9 ?? ?? ?? ?? 41 83 FF 47")]
+    [MemberFunction("E9 ?? ?? ?? ?? 41 83 FE ?? 75 ?? 49 8B CD9 ?? ?? ?? ?? 41 83 FF 47")]
     public partial void SetTab(int tab);
 }

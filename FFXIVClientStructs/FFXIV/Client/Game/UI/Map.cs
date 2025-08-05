@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x4000)]
 public unsafe partial struct Map {
-    [StaticAddress("48 8D 0D ?? ?? ?? ?? 41 8B D4 66 89 44 24", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 40 84 F6", 3)]
     public static partial Map* Instance();
 
     [FieldOffset(0xA8), FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questMarkers;

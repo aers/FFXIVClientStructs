@@ -44,7 +44,7 @@ public unsafe partial struct AgentInspect {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 49 8B E8 8B DA")]
     public partial void ReceiveSearchComment(uint entityId, byte* searchComment);
 
-    [MemberFunction("48 8B 01 44 88 81 ?? ?? ?? ?? 89 51")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 C7 45")]
     public partial void ExamineCharacter(uint entityId, bool isChocobo = false);
 
     // Client::UI::Agent::AgentInspect::InspectCharaView

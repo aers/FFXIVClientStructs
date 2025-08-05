@@ -101,8 +101,8 @@ public unsafe partial struct ActionManager {
     /// <param name="location">Target position, important for area-targeted spells. Be careful if passing null - game doesn't really expect that and might dereference it in some code paths!</param>
     /// <param name="extraParam">See UseAction.</param>
     /// <returns></returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 41 3A C5 0F 85 ?? ?? ?? ??")]
-    public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint extraParam = 0);
+    [MemberFunction("E8 ? ? ? ? 40 3A C7 0F 85")]
+    public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint extraParam = 0, byte a7 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 6C 24 ?? 85 C0 74")]
     public partial uint GetActionStatus(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, bool checkRecastActive = true, bool checkCastingActive = true, uint* outOptExtraInfo = null);
@@ -175,7 +175,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The type of action to check.</param>
     /// <param name="actionId">The ID of the action to check.</param>
     /// <returns>Returns true if the action is off-cooldown or slidecastable.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 0F 85 ?? ?? ?? ?? 88 46")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C ?? 0F 85 ?? ?? ?? ?? 88 45")]
     public partial bool IsActionOffCooldown(ActionType actionType, uint actionId);
 
     /// <summary>
@@ -187,7 +187,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 88 47 ?? 48 8B D7 0F B6 8B")]
     public partial bool IsActionTargetInRange(ActionType actionType, uint actionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? F3 41 0F 11 07 80 3B 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 C8 48 8B CD")]
     public static partial float GetActionRange(uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0")]
@@ -217,7 +217,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B D0 48 8B CF E8 ?? ?? ?? ?? 0F B7 55")]
     public static partial int GetAdjustedCastTime(ActionType actionType, uint actionId, bool applyProcs = true, CastTimeProc* outOptProc = null);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B C8 83 F8 01 7E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 0F B7 47")]
     public static partial ushort GetMaxCharges(uint actionId, uint level); // 0 for current level
 
     /// <summary>
@@ -226,19 +226,19 @@ public unsafe partial struct ActionManager {
     /// </summary>
     /// <param name="actionId">The Action ID to check against.</param>
     /// <returns>Returns a uint.</returns>
-    [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC 50 8B EA")]
+    [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC ?? 8B EA 48 89 5C 24")]
     public partial uint GetCurrentCharges(uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? B0 01 EB D6")]
     public partial void AssignBlueMageActionToSlot(int slot, uint actionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 33 FF C3")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F0 8B EF")]
     public partial uint GetActiveBlueMageActionInSlot(int slot);
 
     [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 50 48 63 F2")]
     public partial void SwapBlueMageActionSlots(int slotA, int slotB);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 49 8B 4E 10 48 8B 01 FF 90 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 49 8B 4E ?? ?? ?? ?? FF 90 ?? ?? ?? ?? 48 8B C8 41 8B D4")]
     public partial bool SetBlueMageActions(uint* actionArray);
 
     /// <summary>

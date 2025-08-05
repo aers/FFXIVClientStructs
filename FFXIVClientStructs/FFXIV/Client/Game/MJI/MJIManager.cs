@@ -221,7 +221,7 @@ public unsafe partial struct MJIManager {
     /// <param name="startingHour">(slot + 17) % 24, where slot 0 is first hour of the cycle.</param>
     /// <param name="cycle">0-13 range, this/next week in order.</param>
     /// <param name="workshop">0-3 range.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 46 28 41 8D 4E FF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 ?? 8D 4B ?? 48 69 D1")]
     public partial void ScheduleCraft(ushort craftObjectId, byte startingHour, byte cycle, byte workshop);
 
     /// <summary>
