@@ -51,19 +51,19 @@ public unsafe partial struct RaptureTextModule {
     /// <remarks> Array of 51 (AkatsukiNote row count) ushorts. Mapping AkatsukiNote RowId to AkatsukiNoteString RowId. </remarks>
     [FieldOffset(0xE58)] public ushort* AkatsukiNoteTitleIds;
 
-    [MemberFunction("E9 ?? ?? ?? ?? 80 EA 20")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E0 BA")]
     public partial CStringPointer GetAddonText(uint addonId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 7D FF 45 33 FF")] // FormatAddonText1<int,int,uint>
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 44 89 7C 24 ?? 44 89 4C 24")] // FormatAddonText1<int,int,uint>
     public partial CStringPointer FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 55 0B")] // FormatAddonText2<int>
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 3A 56")] // FormatAddonText2<int>
     public partial CStringPointer FormatAddonText2Int(uint addonId, int value);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 51 0F B6 DB")] // FormatAddonText2<int,int>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 44 39 7E")] // FormatAddonText2<int,int>
     public partial CStringPointer FormatAddonText2IntInt(uint addonId, int intParam1, int intParam2);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 EB 38")] // FormatAddonText2<int,int,uint>
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 80 7E ?? ?? 74 ?? 48 8D 05")] // FormatAddonText2<int,int,uint>
     public partial CStringPointer FormatAddonText2IntIntUInt(uint addonId, int value1, int value2, uint value3);
 
     /// <summary>
