@@ -46,9 +46,9 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x4B8), Obsolete("Renamed to HighlightedAutoTranslateOptionColorSuffix", true)] public Utf8String UnkText05;
     [FieldOffset(0x4B8)] public Utf8String HighlightedAutoTranslateOptionColorSuffix;
 
-    // 7.3: inlined
-    // [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 45 33 C9 33 D2 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0")]
-    // public partial void Ctor();
+    // 7.3: inlined, this is an orphaned (no x-ref) copy
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 83")]
+    public partial void Ctor();
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 32 C0 33 D2"), GenerateStringOverloads]
     public partial void SetText(CStringPointer text);
