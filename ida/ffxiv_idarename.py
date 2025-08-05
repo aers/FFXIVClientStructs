@@ -553,7 +553,7 @@ def load_data():
             vfuncs = class_data.pop("vfuncs", {})
             funcs = class_data.pop("funcs", {})
             instances_raw = class_data.pop("instances", [])
-            instances = [(instance["ea"], instance["name"] if "name" in instance else "Instance") for instance in instances_raw] if instances_raw != None else []
+            instances = [(instance["ea"], instance["name"] if "name" in instance else "Instance") for instance in instances_raw] if instances_raw is None else []
             for leftover in class_data:
                 print("Warning: Extra key \"{0}\" present in {1}".format(leftover, class_name))
 
