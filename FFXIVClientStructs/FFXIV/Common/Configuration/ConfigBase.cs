@@ -56,7 +56,7 @@ public unsafe partial struct ConfigEntry {
     [FieldOffset(0x30)] public uint Index;
     [FieldOffset(0x34)] public uint _Padding; // pad to 0x38 to align pointers in array
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 5E 73")]
+    [MemberFunction("48 83 EC ?? 44 8B 51 ?? 44 8B CA 44 8B 59")]
     public partial bool SetValueUInt(uint value, uint unk = 1);
 
     [MemberFunction("48 83 EC 28 0F 2F 49 04")]
@@ -87,7 +87,7 @@ public unsafe partial struct ConfigBase {
     [FieldOffset(0x18)] public ConfigEntry* ConfigEntry; // array
     [FieldOffset(0x50)] public Utf8String UnkString;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 39 58 20 0F 94 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B C3 39 58")]
     public partial ConfigEntry* GetConfigOption(uint index);
 
     // Common::Configuration::ConfigBase::ChangeEventInterface

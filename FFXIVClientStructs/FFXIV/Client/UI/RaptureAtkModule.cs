@@ -71,7 +71,7 @@ public unsafe partial struct RaptureAtkModule {
 
     [FieldOffset(0x29C00)] internal nint ShellCommands; // only 1 function to open links?
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 89 9F ?? ?? ?? ?? 48 89 5F 58")]
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 0F BF 81 ?? ?? ?? ?? 8B FA")]
     public partial bool ChangeUiMode(uint uiMode);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4E 30")]
@@ -80,19 +80,19 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 89 76 30")]
     public partial bool DecRefNumberArrayData(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 45 33 ED 41 8B 47 44")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F ?? 44 88 77")]
     public partial bool IncRefStringArrayData(int index);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6B 28")]
     public partial bool DecRefStringArrayData(int index);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 50")]
+    [MemberFunction("4C 89 4C 24 ?? 44 89 44 24 ?? 53 55 56 57 41 57")]
     public partial ushort OpenAddon(uint addonNameId, uint valueCount, AtkValue* values, AtkModuleInterface.AtkEventInterface* eventInterface, ulong eventKind, ushort parentAddonId, int depthLayer);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 40 4C 8B F2 41 8B E9"), GenerateStringOverloads]
     public partial ushort OpenAddonByAgent(CStringPointer addonName, AtkUnitBase* addon, int valueCount, AtkValue* values, AgentInterface* agent, ulong eventKind, ushort parentAddonId);
 
-    [MemberFunction("48 ?? ?? 0F 84 ?? ?? ?? ?? 4C ?? ?? 49 89 5B ?? 49 89 73"), GenerateStringOverloads]
+    [MemberFunction("48 85 D2 0F 84 ?? ?? ?? ?? 4C 8B DC 49 89 6B ?? 56"), GenerateStringOverloads]
     public partial void ShowTextGimmickHint(CStringPointer text, TextGimmickHintStyle style, int duration);
 
     [MemberFunction("40 56 41 56 41 57 48 81 EC A0 00 00 00")]

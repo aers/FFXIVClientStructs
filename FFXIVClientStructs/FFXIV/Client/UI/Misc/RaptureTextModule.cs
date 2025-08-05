@@ -78,7 +78,7 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B E8 A8 10")]
     public partial SheetRedirectFlags ResolveSheetRedirect(Utf8String* sheetName, int* outRowId, int* outColIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? F6 87 ?? ?? ?? ?? ?? 74 67")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 48 8D 55 ?? E8 ?? ?? ?? ?? E9")]
     public partial void AddSheetRedirectItemDecoration(Utf8String* sheetName, SheetRedirectFlags flags, int rowId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D 80 48 8D 55 60")]

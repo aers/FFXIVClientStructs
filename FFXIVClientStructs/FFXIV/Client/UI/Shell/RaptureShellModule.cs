@@ -53,7 +53,7 @@ public unsafe partial struct RaptureShellModule {
 
     public bool IsTextCommandUnavailable => (Flags & 1) != 0;
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8D 4D 28")]
+    [MemberFunction("48 89 5C 24 ?? 41 56 48 83 EC ?? 80 B9 ?? ?? ?? ?? ?? 4C 8B F2")]
     public partial void ExecuteMacro(RaptureMacroModule.Macro* macro);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 42 4C 8B C6")]
@@ -68,12 +68,12 @@ public unsafe partial struct RaptureShellModule {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? EB 34")]
     public partial bool SetContextTellTarget(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong accountId, ulong contentId, ushort reason, bool setChatType);
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 41 BF ?? ?? ?? ?? 66 83 F9 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 49 8B 45 ?? 66 83 F9")]
     public partial void SetContextTellTargetInForay(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong accountId, ulong contentId, ushort reason);
 
     [MemberFunction("48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B 02 41 0F B7 E9")]
     public partial bool SetTellTargetInForay(Utf8String* playerName, Utf8String* worldName, ushort worldId, ulong accountId, ulong contentId, ushort reason, bool setChatType);
 
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 8B B9 ?? ?? ?? ?? 48 8B D9 83 FF FE")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B D0 44 89 64 24")]
     public partial void ReplyInSelectedChatMode();
 }
