@@ -53,7 +53,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F0 8D 4F FE")]
     public partial int GetItemCountInContainer(uint itemId, InventoryType inventoryType, bool isHq = false, short minCollectability = 0);
 
-    [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 66 89 6EE8 ?? ?? ?? ?? EB 7A 83 F8 04")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 03 66 FF C5")]
     public partial int MoveItemSlot(InventoryType srcContainer, ushort srcSlot, InventoryType dstContainer, ushort dstSlot, bool a6 = false);
 
     [MemberFunction("40 55 53 56 57 41 55 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 8D B2")]
