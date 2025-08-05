@@ -172,6 +172,8 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(223)] public partial int RotateCrossLinkshellHistory(int offset);
     // [VirtualFunction(239)] public partial ??? ShowRaceCountdownStart(???);
     // [VirtualFunction(240)] public partial ??? ShowRaceCountdownEnd_2(???);
+
+    [VirtualFunction(245)] public partial bool ShouldLimitFps();
 }
 
 public enum UIModulePacketType {
