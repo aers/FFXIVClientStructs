@@ -41,7 +41,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </remarks>
     /// <param name="gearsetName">The name of the gearset to look up.</param>
     /// <returns>Returns the index/ID of a GearsetEntry</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 81 FB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B F8 81 FF")]
     public partial int FindGearsetIdByName(Utf8String* gearsetName);
 
     /// <summary>
@@ -52,7 +52,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </remarks>
     /// <param name="gearsetId">The index of the gearset to look up.</param>
     /// <returns>Returns <c>true</c> if the gearset is valid, <c>false</c> otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B EE 84 C0")]
+    [MemberFunction("E9 ?? ?? ?? ?? 80 BB ?? ?? ?? ?? ?? 75 ?? 8B CF")]
     public partial bool IsValidGearset(int gearsetId);
 
     /// <summary>
@@ -79,7 +79,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// Delete the gearset at the specified ID.
     /// </summary>
     /// <param name="gearsetId">The gearset ID to delete.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 74 20 48 8B 17")]
+    [MemberFunction("E8 ?? ?? ?? ?? 80 BE ?? ?? ?? ?? ?? 74 ?? 48 8B 16")]
     public partial void DeleteGearset(int gearsetId);
 
     /// <summary>

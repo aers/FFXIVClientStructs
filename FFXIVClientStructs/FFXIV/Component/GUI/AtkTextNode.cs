@@ -14,7 +14,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop]
 [Inherits<AtkResNode>]
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
-[VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 08 48 89 04 17", [1, 144])]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 45 33 F6 48 89 01 8B EA", 3)]
 public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xB0)] public uint TextId;
     [FieldOffset(0xB4)] public ByteColor TextColor;
@@ -50,7 +50,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     /// The game assumes the pointer passed to this function will stay alive. See <see href="https://github.com/aers/FFXIVClientStructs/issues/1040">here</see> for more information.
     /// </summary>
     /// <param name="str">Null-terminated UTF-8 string buffer to set the text to.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 32")]
+    [MemberFunction("E8 ?? ?? ?? ?? 33 F6 0F B7 D6")]
     public partial void SetText(CStringPointer str);
 
     public void SetText(string str) {
@@ -71,7 +71,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
         OriginalTextPointer = NodeText.StringPtr;
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4A 8B 9C F6 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 32 ED 4C 8B C0")]
     public partial CStringPointer GetText();
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4E 5A")]
@@ -83,7 +83,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 6D 08")]
     public partial void GetTextDrawSize(ushort* outWidth, ushort* outHeight, byte* text = null, int start = 0, int end = -1, bool considerScale = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0E 48 8B 9D")]
+    [MemberFunction("48 85 C9 74 ?? 80 A1 ?? ?? ?? ?? ?? 80 E2")]
     public partial void SetAlignment(AlignmentType alignmentType);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]

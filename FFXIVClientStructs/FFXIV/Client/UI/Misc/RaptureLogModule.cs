@@ -49,7 +49,7 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? 41 83 EC 01")]
     public partial uint FormatLogMessage(uint logKindId, Utf8String* sender, Utf8String* message, int* timestamp, void* a6, Utf8String* a7, int chatTabIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 48 8D 4D 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 39 AE ?? ?? ?? ?? 7E")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 03 EB")]
@@ -70,7 +70,7 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 C6 41"), GenerateStringOverloads]
     public partial void PrintString(CStringPointer str);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 48 8D 96 ?? ?? ?? ?? 48 8D 4C 24")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8D 4D ?? E8 ?? ?? ?? ?? 48 8B D0")]
     public partial bool GetLogMessage(int index, Utf8String* str);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 51 44 0F B6 95")]
@@ -79,10 +79,10 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("4C 8B D9 48 8B 89")]
     public partial void AddMsgSourceEntry(ulong contentId, ulong accountId, int messageIndex, ushort worldId, ushort chatType);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 44 24 ?? 41 8B D7")]
+    [MemberFunction("48 89 5C 24 ?? 55 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 48 63 C2")]
     public partial void SetTabName(int tabIndex, Utf8String* tabName);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 73 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 08 44 38 21")]
     public partial Utf8String* GetTabName(int tabIndex);
 
     public bool GetLogMessage(int index, out byte[] message) {

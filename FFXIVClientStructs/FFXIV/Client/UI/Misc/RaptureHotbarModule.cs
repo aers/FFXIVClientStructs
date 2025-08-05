@@ -151,7 +151,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="macroSet">The macro set to scan for.</param>
     /// <param name="macroIndex">The macro index to scan for.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 13 FF 52 68 44 0F B6 C6")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 44 0F B6 E2 4C 8D A9")]
     public partial void DeleteMacroSlots(byte macroSet, byte macroIndex);
 
     /// <summary>
@@ -162,7 +162,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="macroSet">The macro set to scan for.</param>
     /// <param name="macroIndex">The macro index to scan for.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 13 FF 52 68 44 0F B6 C3")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 48 8B 01 FF 50 ?? 45 33 C9 41 B0")]
     public partial void ReloadMacroSlots(byte macroSet, byte macroIndex);
 
     /// <summary>
@@ -270,7 +270,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="commandType">The command type to save.</param>
     /// <param name="commandId">The command ID to save.</param>
     /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 62 83 7C 24")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 33 DB 48 63 FA")]
     public partial bool SetAndSaveFirstAvailableNormalSlot(uint hotbarId, HotbarSlotType commandType, uint commandId);
 
     /// <summary>
@@ -280,7 +280,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="commandType">The command type to save.</param>
     /// <param name="commandId">The command ID to save.</param>
     /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? EB 5D 83 7C 24")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 63 F2 48 8D 05")]
     public partial bool SetAndSaveFirstAvailableCrossSlot(uint hotbarId, HotbarSlotType commandType, uint commandId);
 
     /// <summary>
@@ -289,14 +289,14 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="commandType">The command type to save.</param>
     /// <param name="commandId">The command ID to save.</param>
     /// <returns>Returns <c>true</c> if the save is successful, false otherwise.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 FD 0A")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 41 8B E8 4C 8D 91")]
     public partial bool SetAndSaveFirstGloballyAvailableNormalSlot(HotbarSlotType commandType, uint commandId);
 
     /// <summary>
     /// Attempt to add the specified action to the first free slot of *any* normal hotbar.
     /// </summary>
     /// <inheritdoc cref="SetAndSaveFirstGloballyAvailableNormalSlot"/>
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 FD 08")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 41 8B E8 4C 8D 15")]
     public partial bool SetAndSaveFirstGloballyAvailableCrossSlot(HotbarSlotType commandType, uint commandId);
 
     /// <summary>
@@ -319,7 +319,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="hotbarId">The saved hotbar ID to select.</param>
     /// <param name="slotId">The saved slot ID to clear.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? FF C3 83 FB 10 7C E3")]
+    [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CF 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F E9 ?? ?? ?? ?? 48 8B CF")]
     public partial void ClearSavedSlotById(uint hotbarId, uint slotId);
 
     /// <summary>
@@ -353,7 +353,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// Sets the value of <see cref="DutyActionsPresent"/>.
     /// </summary>
     /// <param name="present">Whether to show/enable duty actions or not.</param>
-    [MemberFunction("E9 ?? ?? ?? ?? FF D2 48 8B C8 33 D2")]
+    [MemberFunction("E9 ?? ?? ?? ?? 41 FF 50 ?? 48 8B C8")]
     public partial void SetDutyActionsPresent(bool present);
 
     /// <summary>

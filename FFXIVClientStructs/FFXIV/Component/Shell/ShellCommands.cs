@@ -17,6 +17,6 @@ public unsafe partial struct ShellCommands {
     /// <param name="message">The message to process/attempt to invoke.</param>
     /// <param name="uiModule">A pointer to <see cref="UIModule"/>.</param>
     /// <returns>Returns 0 if the command was executed, -1 if the command is not found, -2 if the message is not a command at all.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 ?? 74 ?? 83 F8 ?? 0F 85 ?? ?? ?? ?? 48 8B 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 F8 ?? 74 ?? 83 F8 ?? 0F 85 ?? ?? ?? ?? 48 8B 06")]
     public partial int TryInvokeDebugCommand(Utf8String* message, UIModule* uiModule);
 }
