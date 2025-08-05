@@ -650,7 +650,7 @@ classes:
       0x141BD1F20: SetWorld
       0x141BD1FE0: SetZone
   Application::Network::LobbyClient::LobbyRequestCallback:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142327018
     vfuncs:
       0: Dtor
@@ -1145,9 +1145,9 @@ classes:
   Client::Game::Character::CharacterManager: # networked characters
     instances:
 #fail       - ea: 0x142704A10
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14205B528
-        base: Client::Game::Character::CharacterManagerInterface
+#fail        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14099A950: Initialize
       0x14099AE80: Finalizer
@@ -1283,9 +1283,9 @@ classes:
   Client::Game::Group::GroupManager:
     instances:
 #fail       - ea: 0x1427055C0
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142086E18 # it has some abstract base even!
-        base: Client::Game::Character::CharacterManagerInterface
+#fail        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140D256B0: Create
       0x140D255E0: GetGroupWithCheck
@@ -1766,13 +1766,13 @@ classes:
     vfuncs:
       0: Dtor
   Client::Game::WeatherManager::ServerWeather:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142075180
-        base: Client::Game::WeatherManager::WeatherInterface
+#fail        base: Client::Game::WeatherManager::WeatherInterface
   Client::Game::WeatherManager::Weather:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x1420751C8
-        base: Client::Game::WeatherManager::ServerWeather
+#fail        base: Client::Game::WeatherManager::ServerWeather
   Client::Game::WeatherManager:
     instances:
       - ea: 0x142732B00
@@ -2483,9 +2483,9 @@ classes:
   Client::Game::UI::Revive:
     instances:
       - ea: 0x14294A710
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14205F608
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+#fail        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::UI::Inspect:
     instances:
       - ea: 0x14294A740
@@ -2813,7 +2813,7 @@ classes:
   Client::Game::TitleList:
     instances:
       - ea: 0x142959FC8  # UIState.TitleList
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14205F600
     vfuncs:
       0: Dtor
@@ -2934,9 +2934,9 @@ classes:
   Client::Game::ActionManager:
     instances:
 #fail       - ea: 0x14293AD00
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x1420649F0
-        base: Client::Graphics::Vfx::VfxDataListenner
+#fail        base: Client::Graphics::Vfx::VfxDataListenner
     funcs:
 #fail       0x140048E10: StaticInitializer
       0x1400DF810: GetCurrentComboActionId
@@ -3317,7 +3317,7 @@ classes:
       0x14008F1A0: SetResizeBorder #(bool canResize, bool silent)
       0x14008F350: ScreenToClient
   Client::System::Framework::Task:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x141FDD7F8
     vfuncs:
       0: Dtor
@@ -3523,7 +3523,7 @@ classes:
       - ea: 0x14241F810
         base: Common::Component::BGCollision::Object
 #fail       - ea: 0x142409AD8
-        base: Common::Component::BGCollision::NodeLink
+#fail        base: Common::Component::BGCollision::NodeLink
   Common::Component::BGCollision::IMesh:
     vtbls:
       - ea: 0x14241FA80
@@ -3531,11 +3531,11 @@ classes:
       0: Dtor
       1: Clone
   Common::Component::BGCollision::Mesh:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142409D50
-        base: Common::Component::BGCollision::Object
+#fail        base: Common::Component::BGCollision::Object
 #fail       - ea: 0x142409DA8
-        base: Common::Component::BGCollision::IMesh
+#fail        base: Common::Component::BGCollision::IMesh
     vfuncs:
       2: GetBoundsMin
       3: GetBoundsMax
@@ -3582,7 +3582,7 @@ classes:
       - ea: 0x14241F668
         base: Common::Component::BGCollision::SceneWrapperNode
 #fail       - ea: 0x1424099B8
-        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
+#fail        base: Common::Component::BGCollision::NodeLink # indirect base, offset 8
     vfuncs:
       1: Clear
       2: SetStreamingSphere
@@ -4403,9 +4403,9 @@ classes:
       5: ClearListData
       10: EndRequest
   Client::UI::Info::InfoProxyPageInterface:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142057E38
-        base: Client::UI::Info::InfoProxyInterface
+#fail        base: Client::UI::Info::InfoProxyInterface
     vfuncs:
       12: AddPage
   Client::UI::Info::InfoProxyInvitedInterface:
@@ -5460,7 +5460,7 @@ classes:
     funcs:
       0x140316360: ctor
   Client::Graphics::IAllocator:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142006168
   Client::Graphics::AllocatorLowLevel:
     vtbls:
@@ -5470,9 +5470,9 @@ classes:
     instances:
       - ea: 0x142779740
         pointer: true
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142006370
-        base: Client::Graphics::Singleton
+#fail        base: Client::Graphics::Singleton
     funcs:
       0x140318E40: ctor
   Client::Network::NetworkModuleProxy:
@@ -5929,7 +5929,7 @@ classes:
   Client::Graphics::Render::GraphicsConfig:
     instances:
 #fail       - ea: 0x142746B98
-        pointer: true
+#fail        pointer: true
     vtbls:
       - ea: 0x14200FD08
         base: Client::Graphics::Singleton
@@ -5969,10 +5969,10 @@ classes:
       - ea: 0x14200FE28
         base: Client::Graphics::Render::Camera
   Client::Graphics::Render::View:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14201D818
   Client::Graphics::Render::SubView:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14201D810
   Client::Graphics::Render::PostBoneDeformerBase:
     vtbls:
@@ -7997,9 +7997,9 @@ classes:
       - ea: 0x142044450
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::GameObjectLayoutInstance:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14203DFD8
-        base: Client::LayoutEngine::ILayoutInstance
+#fail        base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::RangeLayoutInstance:
     vtbls:
       - ea: 0x142048558
@@ -8009,9 +8009,9 @@ classes:
       - ea: 0x142049DC0
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::BgPartsLayoutInstance:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14203ECA0
-        base: Client::LayoutEngine::ILayoutInstance
+#fail        base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::LightLayoutInstance:
     vtbls:
       - ea: 0x142046060
@@ -8039,17 +8039,17 @@ classes:
       - ea: 0x1420449A0
         base: Client::LayoutEngine::Layer::CharacterLayoutInstance
   Client::LayoutEngine::Layer::AetheryteLayoutInstance:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14203E260
-        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+#fail        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
   Client::LayoutEngine::Layer::EnvSpaceLayoutInstance:
     vtbls:
       - ea: 0x142045B80
         base: Client::LayoutEngine::ILayoutInstance
   Client::LayoutEngine::Layer::GatheringLayoutInstance:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14203E4E8
-        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+#fail        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
   Client::LayoutEngine::Group::SharedGroupLayoutInstance:
     vtbls:
       - ea: 0x142043CB0
@@ -8057,9 +8057,9 @@ classes:
       - ea: 0x142043F20
         base: Client::System::Resource::ResourceEventListener
   Client::LayoutEngine::Layer::TreasureLayoutInstance:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14203E770
-        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+#fail        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
   Client::LayoutEngine::Layer::WeaponLayoutInstance:
     vtbls:
       - ea: 0x1420467B0
@@ -8081,9 +8081,9 @@ classes:
       - ea: 0x142048A38
         base: Client::LayoutEngine::Layer::RangeLayoutInstance
   Client::LayoutEngine::Layer::EventObjectLayoutInstance:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14203E9F8
-        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
+#fail        base: Client::LayoutEngine::Layer::GameObjectLayoutInstance
   Client::LayoutEngine::Layer::EnvLocationLayoutInstance:
     vtbls:
       - ea: 0x142045DF0
@@ -9725,9 +9725,9 @@ classes:
       0x14087F560: ClearBannerData
       0x140D8F3A0: GetCurrentBannerTimelineTimestamp
   Client::Game::Character::LookAtContainer:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142052F60
-        base: Client::Game::Character::ContainerInterface
+#fail        base: Client::Game::Character::ContainerInterface
     funcs:
       0x1408810F0: ctor # inlined in Client::Game::Character::Character_ctor
       0x1408813A0: UpdateLookAt
@@ -9750,9 +9750,9 @@ classes:
     vtbls:
       - ea: 0x14205D1E0
   Client::UI::Shell::RaptureShellCommandInterface:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142054550
-        base: Component::Shell::ShellCommandInterface
+#fail        base: Component::Shell::ShellCommandInterface
   Client::UI::Shell::RaptureShellModule:
     vtbls:
       - ea: 0x14205D208
@@ -10087,9 +10087,9 @@ classes:
       - ea: 0x142060400
         base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbarBase:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142057758
-        base: Client::UI::Shell::RaptureShellCommandInterface
+#fail        base: Client::UI::Shell::RaptureShellCommandInterface
   Client::UI::Shell::ShellCommandHotbar:
     vtbls:
       - ea: 0x142060468
@@ -13522,9 +13522,9 @@ classes:
   Client::Game::Event::EventHandlerSelector:
     instances:
 #fail       - ea: 0x14293B920
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x14206B2F0
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+#fail        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
 #fail       0x140B6E5A0: ctor
   Client::Game::Event::LuaScriptLoader<Client::Game::Event::ModuleBase>:
@@ -14026,17 +14026,17 @@ classes:
     vtbls:
       - ea: 0x142175A78
   Client::Game::Event::TalkCallback::TalkAsyncEventImpl:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x1421A2220
-        base: Client::Game::Event::TalkCallback::TalkEventImpl
+#fail        base: Client::Game::Event::TalkCallback::TalkEventImpl
   Client::Game::Event::FormatStringCallback<Client::Game::Event::TalkCallback>:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x1421A2230
-        base: Client::Game::Event::FormatStringCallbackInterface
+#fail        base: Client::Game::Event::FormatStringCallbackInterface
   Client::Game::Event::TalkCallback:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x1421A2248
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
+#fail        base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
   Client::Game::Event::EventSceneModule:
     funcs:
       0x1416B53E0: ctor
@@ -14145,21 +14145,21 @@ classes:
       0x141641490: RequestBuybackUpdate
       0x141641670: StartReadGilShopItems
   Client::Game::Event::ShopEventHandler::ProxyInterface:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142154210
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface
+#fail        base: Component::GUI::AtkModuleInterface::AtkEventInterface
   Client::Game::Event::ShopEventHandler::AgentProxy:
     instances:
       - ea: 0x142743490
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142154240
-        base: Client::Game::Event::ShopEventHandler::ProxyInterface
+#fail        base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::ShopEventHandler::YesNoProxy:
     instances:
       - ea: 0x1427434C0
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142154270
-        base: Client::Game::Event::ShopEventHandler::ProxyInterface
+#fail        base: Client::Game::Event::ShopEventHandler::ProxyInterface
   Client::Game::Event::AetheryteEventHandler: # 0x05
     vtbls:
       - ea: 0x142240358
@@ -15934,9 +15934,9 @@ classes:
       - ea: 0x142104000
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonScreenLog::AddonChild:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x142104A90
-        base: Component::GUI::AtkUnitBase
+#fail        base: Component::GUI::AtkUnitBase
   Client::UI::AddonMiragePrismDialogBase:
     vtbls:
       - ea: 0x1420D00E0
@@ -21296,9 +21296,9 @@ classes:
       - ea: 0x142125B50
         base: Client::UI::AddonScreenInfoChild
   Client::UI::AddonPopUpText:
-    vtbls:
+#fail    vtbls:
 #fail       - ea: 0x1421053D0
-        base: Client::UI::AddonScreenLog::AddonChild
+#fail        base: Client::UI::AddonScreenLog::AddonChild
     funcs:
 #fail       0x1413BBF10: ctor # inlined in Client::UI::AddonScreenLog.LoadUldResourceHandle
   Client::UI::AddonFlyText:
@@ -22442,7 +22442,7 @@ classes:
   Client::Graphics::Streaming::StreamingManager:
     instances:
 #fail       - ea: 0x142746C18
-        pointer: true
+#fail        pointer: true
     vtbls:
       - ea: 0x142178C20
         base: Client::Graphics::Singleton
