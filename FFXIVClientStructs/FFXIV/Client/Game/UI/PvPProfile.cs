@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::PvPProfile
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x84)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8C)]
 public unsafe partial struct PvPProfile {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 3C ?? 0F 84 ?? ?? ?? ?? 48 85 DB", 3)]
     public static partial PvPProfile* Instance();
@@ -32,12 +32,12 @@ public unsafe partial struct PvPProfile {
     [FieldOffset(0x40)] public ushort FrontlineWeeklySecondPlace;
     [FieldOffset(0x42)] public ushort FrontlineWeeklyThirdPlace;
 
-    [FieldOffset(0x45)] public byte CrystallineConflictSeason;
-    [FieldOffset(0x46)] public ushort CrystallineConflictCasualMatches;
-    [FieldOffset(0x48)] public ushort CrystallineConflictCasualMatchesWon;
-    [FieldOffset(0x4A)] public ushort CrystallineConflictRankedMatches;
-    [FieldOffset(0x4C)] public ushort CrystallineConflictRankedMatchesWon;
-
+    [FieldOffset(0x4D)] public byte CrystallineConflictSeason;
+    [FieldOffset(0x4E)] public ushort CrystallineConflictCasualMatches;
+    [FieldOffset(0x50)] public ushort CrystallineConflictCasualMatchesWon;
+    [FieldOffset(0x52)] public ushort CrystallineConflictRankedMatches;
+    [FieldOffset(0x54)] public ushort CrystallineConflictRankedMatchesWon;
+    // TODO: 7.3 - these shifted somehow. gotta play to find them
     [FieldOffset(0x52)] public ushort CrystallineConflictCurrentCrystalCredit;
     [FieldOffset(0x54)] public ushort CrystallineConflictHighestCrystalCredit;
 
@@ -47,11 +47,12 @@ public unsafe partial struct PvPProfile {
     [FieldOffset(0x5B)] public byte CrystallineConflictHighestRiser;
     [FieldOffset(0x5C)] public byte CrystallineConflictCurrentRisingStars;
     [FieldOffset(0x5D)] public byte CrystallineConflictHighestRisingStars;
+    // TODO: 7.3 - /these shifted somehow. gotta play to find them
 
-    [FieldOffset(0x70)] public uint RivalWingsTotalMatches;
-    [FieldOffset(0x74)] public uint RivalWingsTotalMatchesWon;
-    [FieldOffset(0x78)] public uint RivalWingsWeeklyMatches;
-    [FieldOffset(0x7C)] public uint RivalWingsWeeklyMatchesWon;
+    [FieldOffset(0x7C)] public uint RivalWingsTotalMatches;
+    [FieldOffset(0x80)] public uint RivalWingsTotalMatchesWon;
+    [FieldOffset(0x84)] public uint RivalWingsWeeklyMatches;
+    [FieldOffset(0x88)] public uint RivalWingsWeeklyMatchesWon;
 
     /// <summary>Gets the current PvP rank for the active Grand Company.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 3A 47 4F")]
