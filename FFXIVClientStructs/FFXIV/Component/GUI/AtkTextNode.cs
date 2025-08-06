@@ -101,16 +101,16 @@ public unsafe partial struct AtkTextNode : ICreatable {
 
 [Flags]
 public enum TextFlags : ushort {
-    AutoAdjustNodeSize = 1 << 1,
-    Bold = 1 << 2,
-    Italic = 1 << 3,
-    Edge = 1 << 4,
-    Glare = 1 << 5,
-    Emboss = 1 << 6,
-    WordWrap = 1 << 7,
-    MultiLine = 1 << 8,
-    Ellipsis = 1 << 9,
-    FixedFontResolution = 1 << 10,
+    AutoAdjustNodeSize = 1 << 0,
+    Bold = 1 << 1,
+    Italic = 1 << 2,
+    Edge = 1 << 3,
+    Glare = 1 << 4,
+    Emboss = 1 << 5,
+    WordWrap = 1 << 6,
+    MultiLine = 1 << 7,
+    Ellipsis = 1 << 8,
+    FixedFontResolution = 1 << 9,
 }
 
 public enum FontType : byte {
