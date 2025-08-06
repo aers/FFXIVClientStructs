@@ -4,11 +4,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
 [CExportIgnore]
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 1006 * 4)]
+[StructLayout(LayoutKind.Explicit, Size = 1056 * 4)]
 public unsafe partial struct NamePlateNumberArray {
     public static NamePlateNumberArray* Instance() => (NamePlateNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.NamePlate)->IntArray;
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1006<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1056<int> _data;
 
     [FieldOffset(0x0)] public int ActiveNamePlateCount;
     [FieldOffset(0x4)] public bool ForceNamePlateRebake;
@@ -19,7 +19,7 @@ public unsafe partial struct NamePlateNumberArray {
     [FieldOffset(0x18)][FixedSizeArray] internal FixedSizeArray50<NamePlateObjectIntArrayData> _objectData;
 
     [CExportIgnore]
-    [StructLayout(LayoutKind.Explicit, Size = 20 * 4)]
+    [StructLayout(LayoutKind.Explicit, Size = 21 * 4)]
     public struct NamePlateObjectIntArrayData {
         [FieldOffset(0x0)] public UIObjectKind NamePlateKind;
         [FieldOffset(0x4)] public int HPLabelState;
@@ -56,5 +56,6 @@ public unsafe partial struct NamePlateNumberArray {
         /// &amp; 0x4 - Unknown, seems to be set 1-2 frames after node appears<br/>
         /// </summary>
         [FieldOffset(0x4C)] public int VisibilityFlags;
+        // [FieldOffset(0x50)] public int Unk;
     }
 }
