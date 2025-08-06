@@ -275,9 +275,7 @@ public enum AgentId : uint {
     DeepDungeonStatus = 240,
     DeepDungeonSaveData = 241,
     DeepDungeonScore = 242,
-    
-    Unk243 = 243, // new in 7.3
-
+    DeepDungeonHard = 243, // new in 7.3
     GcArmyTraining = 244,
     GcArmyMenberProfile = 245,
     GcArmyExpeditionResult = 246,
@@ -354,7 +352,7 @@ public enum AgentId : uint {
     ReconstructionBuyback = 317,
     CrossWorldLinkShell = 318,
     MiragePrismENpcSatisfaction = 319,
-    Description = 312, // Frontline/Bozja Description
+    Description = 320, // Frontline/Bozja Description
     Alarm = 321,
     Unk321 = 322,
     MerchantSetting = 323, // Mannequins
@@ -503,11 +501,9 @@ public enum AgentId : uint {
     WKSLottery = 464,
     WKSToolCustomize = 465,
     WKSHistoryBoard = 466,
-    
-    Unk467 = 467, // new in 7.3
-    Unk468 = 468, // new in 7.3
+    WKSPlanetSelect = 467, // new in 7.3
+    WKSSetting = 468, // new in 7.3
     Unk469 = 469, // new in 7.3
-
     MKDInfo = 470,
     MKDContentsInfo = 471,
     MKDSupportJob = 472,
@@ -516,11 +512,10 @@ public enum AgentId : uint {
     MKDTowerEntry = 475,
     Unk476 = 476, // new in 7.2 - interacts with agents MKDLoreBook, MKDInfo
     MKDLoreBook = 477,
-
-    Unk478 = 478, // new in 7.3
-    Unk479 = 479, // new in 7.3
+    MKDRelicGrowth = 478, // new in 7.3
+    QuickPanel = 479, // new in 7.3
     Unk480 = 480, // new in 7.3
-    Unk481 = 481, // new in 7.3
-    Unk482 = 482, // new in 7.3
+    ConfigCharacterChatLogMiniTalk = 481, // new in 7.3
+    ToggleContextMenu = 482, // new in 7.3
     Unk483 = 483, // new in 7.3
 }
