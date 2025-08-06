@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 // ctor "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 20 45 33 F6 48 89 51 10 48 8D 05 ?? ?? ?? ?? 4C 89 71 08 49 8B D8"
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 4C 89 79 08 49 8B F8", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 7B ?? 48 8D 73", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0xB810)]
 public unsafe partial struct RaptureGearsetModule {
     public static RaptureGearsetModule* Instance() {

@@ -51,7 +51,7 @@ public unsafe partial struct AtkComponentScrollBar : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 44 38 6E")]
     public partial void SetScrollPosition(int position, bool setScrollPosition = true, bool setPendingScrollPosition = true);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8D 56 1E")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 45 ?? 32 C9")]
     public partial void SetContentNode(AtkResNode* contentNode, AtkCollisionNode* contentCollisionNode, ushort contentCollisionNodeHeight = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 9E ?? ?? ?? ?? 41 8D 57")]

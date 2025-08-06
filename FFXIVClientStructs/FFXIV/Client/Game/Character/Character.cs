@@ -130,7 +130,7 @@ public unsafe partial struct Character {
     public partial bool IsTraveler();
 
     /// <summary> Check if the character is using the Cross-region Data Center Travel system. </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 3A 48 8B 4B 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 80 4E ?? ?? ?? ?? ?? 48 8B CB FF 92")]
     public partial bool IsVoyager();
 
     [VirtualFunction(77)]

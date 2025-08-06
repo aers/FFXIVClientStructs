@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.WKS;
 [Inherits<CharacterManagerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xE20)]
 public unsafe partial struct WKSManager {
-    [StaticAddress("48 8B 7C 24 ?? 48 89 35 ?? ?? ?? ??", 8, isPointer: true)]
+    [StaticAddress("48 89 05 ?? ?? ?? ?? 48 8B F8", 3, isPointer: true)]
     public static partial WKSManager* Instance();
 
     [FieldOffset(0x18)] public ushort TerritoryId;

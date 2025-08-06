@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 //   Component::GUI::AtkEventListener
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventListener>]
-[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B F9 ?? ?? ?? BA", 3, 43)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 15", 3, 43)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9C90)]
 public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x30), FixedSizeArray, CExportIgnore] internal FixedSizeArray13<AtkUnitList> _depthLayers;

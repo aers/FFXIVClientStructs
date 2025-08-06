@@ -32,7 +32,7 @@ public unsafe partial struct PreviewController {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 54 24 ?? 48 8B CF E8 ?? ?? ?? ?? 48 8B D0")]
     public partial void SetOwnerAddon(AtkUnitBase* addon, int callbackBaseId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 45 8D 47 ?? 48 8B D7")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 8D 44 24 ?? 48 8B D7")]
     public partial void SetPreviewComponent(AtkResNode* component);
 
     [MemberFunction("48 85 D2 0F 84 ?? ?? ?? ?? 53 48 83 EC ?? 48 8B D9 48 8B CA")]

@@ -108,7 +108,7 @@ public unsafe partial struct LobbyData {
     [FieldOffset(0x9DC)] public ushort CurrentWorldId;
     [FieldOffset(0x9DE)] public ushort HomeWorldId;
 
-    [MemberFunction("E9 ?? ?? ?? ?? 4C 0F BF 89")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? C6 87 ?? ?? ?? ?? ?? B0 ?? 48 8B 5C 24")]
     public partial CharaSelectCharacterEntry* GetCharacterEntryFromServer(byte index, ulong contentId);
 
     [MemberFunction("40 53 48 83 EC 20 49 63 D9 E8 ?? ?? ?? ??")]

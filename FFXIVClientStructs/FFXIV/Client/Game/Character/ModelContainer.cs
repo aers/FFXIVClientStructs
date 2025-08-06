@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop]
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x58)]
-[VirtualTable("48 89 87 ?? ?? ?? ?? 48 89 AF ?? ?? ?? ?? 48 89 AF ?? ?? ?? ?? 66 89 AF ?? ?? ?? ?? 40 88 AF", 3)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 80 61 ?? ?? 33 D2 ?? ?? ?? 48 8B C1 48 89 51 ?? 48 89 51 ?? C7 41", 3)]
 public unsafe partial struct ModelContainer {
     [FieldOffset(0x10)] public int ModelCharaId;
     [FieldOffset(0x14)] public int ModelSkeletonId;

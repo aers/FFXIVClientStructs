@@ -44,7 +44,7 @@ public unsafe partial struct BannerHelper {
 
     #region CharaCardData Helpers
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 6E 28")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 6F ?? 48 8B 8D")]
     public partial void RequestCurrentCharaCard();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 17 48 8B 4F 28")]
