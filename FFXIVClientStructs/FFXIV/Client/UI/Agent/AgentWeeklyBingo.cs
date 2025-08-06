@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.WeeklyBingo)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x218)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2C0)]
 public unsafe partial struct AgentWeeklyBingo {
     [FieldOffset(0x28)] public void* WeeklyBingoOrderDataSheet;
     [FieldOffset(0x30)] public ExcelSheetWaiter* WeeklyBingoOrderDataSheetWaiter;

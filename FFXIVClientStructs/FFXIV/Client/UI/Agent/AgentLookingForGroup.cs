@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.LookingForGroup)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3198)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3210)]
 public unsafe partial struct AgentLookingForGroup {
     [FieldOffset(0xE0)] public InfoProxyCrossRealm* InfoProxyCrossRealm;
 

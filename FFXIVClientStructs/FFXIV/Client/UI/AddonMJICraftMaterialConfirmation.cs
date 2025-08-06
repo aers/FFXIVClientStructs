@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("MJICraftMaterialConfirmation")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x270)]
+[StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct AddonMJICraftMaterialConfirmation {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray3<Pointer<AtkComponentRadioButton>> _radioButtons;
 }

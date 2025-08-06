@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("Character")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xF30)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF38)]
 public unsafe partial struct AddonCharacter {
     [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray4<Pointer<AtkComponentRadioButton>> _tabs;
 

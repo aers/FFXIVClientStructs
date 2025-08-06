@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
-using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -52,5 +51,5 @@ public partial struct LowCutCamera;
 [StructLayout(LayoutKind.Explicit, Size = 0x380)]
 public partial struct Camera4 {
     [FieldOffset(0x120)] public Graphics.Scene.Camera SceneCamera0;
-    [FieldOffset(0x210)] public Graphics.Scene.Camera SceneCamera1;
+    [FieldOffset(0x220)] public Graphics.Scene.Camera SceneCamera1;
 }

@@ -4,12 +4,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 //   Client::Game::Object::GameObject
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 public unsafe partial struct HousingObject {
-    [FieldOffset(0x1A8)] public HousingObjectId HousingObjectId;
+    [FieldOffset(0x1B8)] public HousingObjectId HousingObjectId;
 
     /// <remarks> Index in <see cref="IndoorTerritory.Furniture"/> or <see cref="OutdoorTerritory.Furniture"/> depending on <see cref="HousingObjectId.Type"/>. </remarks>
-    [FieldOffset(0x1AE)] public short HousingFurnitureIndex;
+    [FieldOffset(0x1BE)] public short HousingFurnitureIndex;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]

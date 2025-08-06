@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ItemSearch)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3880)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3888)]
 public unsafe partial struct AgentItemSearch {
     [FieldOffset(0x98)] public StringHolder* StringData;
     // [FieldOffset(0xA2C), FixedSizeArray] internal FixedSizeArray100<uint> _unkUints;

@@ -22,7 +22,7 @@ public unsafe partial struct AgentTryon {
     //   Client::UI::Misc::CharaView
     [GenerateInterop]
     [Inherits<CharaView>]
-    [StructLayout(LayoutKind.Explicit, Size = 0x320)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x328)]
     public unsafe partial struct TryonCharaView {
         [FieldOffset(0x318)] public bool DoUpdate; // beware: fetches data from agent too, happens in vf10
         [FieldOffset(0x319)] public bool HideOtherEquipment;

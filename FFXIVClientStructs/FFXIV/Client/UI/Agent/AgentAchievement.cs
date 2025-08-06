@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Achievement)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<ChangeEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x127C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x12810)]
 public partial struct AgentAchievement {
 
     // Can be found with "89 83 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B C8"

@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.WKS;
 // MechaEvent
 [GenerateInterop]
 [Inherits<WKSModuleBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xA130)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA2B0)]
 public unsafe partial struct WKSMechaEventModule {
     [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray2<WKSMechaEvent> _events;
     [FieldOffset(0xA0F0)] public WKSMechaEvent* CurrentEvent;

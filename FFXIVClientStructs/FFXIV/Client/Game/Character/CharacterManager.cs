@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 // Client::Game::Character::CharacterManager
 //   Client::Game::Character::CharacterManagerInterface
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x390)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3A8)]
 [Inherits<CharacterManagerInterface>]
 public unsafe partial struct CharacterManager {
     [StaticAddress("8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B D0", 5)]

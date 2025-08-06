@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [InfoProxy(InfoProxyId.Blacklist)]
 [GenerateInterop]
 [Inherits<InfoProxyPageInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x13D8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A18)]
 public unsafe partial struct InfoProxyBlacklist {
     [FieldOffset(0x20)] public Utf8String LastBlockedNameContacts; // Gets set with contacts
     [FieldOffset(0x88)] public Utf8String LastBlockedNameChat; // Gets set with chat and contacts

@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.WKS;
 // Cosmic Research Information
 [GenerateInterop]
 [Inherits<WKSModuleBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x80)]
+[StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct WKSResearchModule {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray11<ushort> _analysis;
     [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray11<byte> _currentStages;

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 //   Client::Graphics::Scene::Object
 [GenerateInterop]
 [Inherits<Object>]
-[StructLayout(LayoutKind.Explicit, Size = 0xF0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x100)]
 public unsafe partial struct Camera {
     [FieldOffset(0x80)] public Vector3 LookAtVector;
     [FieldOffset(0x90)] public Vector3 Vector_1;

@@ -4,5 +4,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 //   Client::Graphics::Render::BaseRenderer
 [GenerateInterop]
 [Inherits<BaseRenderer>]
-[StructLayout(LayoutKind.Explicit, Size = 0x550)]
+[StructLayout(LayoutKind.Explicit, Size = 0x570)]
 public partial struct WaterRenderer;

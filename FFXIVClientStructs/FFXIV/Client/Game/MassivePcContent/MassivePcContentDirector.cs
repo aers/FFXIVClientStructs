@@ -8,5 +8,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MassivePcContent;
 //       Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
-[StructLayout(LayoutKind.Explicit, Size = 0x900)]
+[StructLayout(LayoutKind.Explicit, Size = 0x960)]
 public unsafe partial struct MassivePcContentDirector;

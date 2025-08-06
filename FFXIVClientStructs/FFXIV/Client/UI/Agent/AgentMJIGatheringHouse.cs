@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.MJIGatheringHouse)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x200)]
+[StructLayout(LayoutKind.Explicit, Size = 0x208)]
 public unsafe partial struct AgentMJIGatheringHouse {
     public enum Confirmation : int { None, Start, ChangeExtend, Change, Extend }
 

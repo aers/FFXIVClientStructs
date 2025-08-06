@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 //   Client::Game::Object::GameObject
 [GenerateInterop]
 [Inherits<GameObject>]
-[StructLayout(LayoutKind.Explicit, Size = 0x200)]
+[StructLayout(LayoutKind.Explicit, Size = 0x210)]
 public unsafe partial struct Treasure {
     [FieldOffset(0x1EC)] public TreasureFlags Flags;
 

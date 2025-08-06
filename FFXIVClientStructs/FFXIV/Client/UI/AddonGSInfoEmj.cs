@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("GSInfoEmj")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2A8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
 public unsafe partial struct AddonGSInfoEmj {
     [FieldOffset(0x238)] public AtkTextNode* MatchesPlayed;
     [FieldOffset(0x240)] public AtkTextNode* CurrentRating;

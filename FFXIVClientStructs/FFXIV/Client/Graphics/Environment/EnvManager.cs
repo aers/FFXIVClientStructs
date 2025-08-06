@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Environment;
 
 // Client::Graphics::Environment::EnvManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xC10)]
+[StructLayout(LayoutKind.Explicit, Size = 0xBD0)]
 public unsafe partial struct EnvManager {
     [StaticAddress("0F 28 F2 48 8B 05", 6, isPointer: true)]
     public static partial EnvManager* Instance();

@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.WKS;
 // Manager for Cosmic Exploration
 [GenerateInterop]
 [Inherits<CharacterManagerInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xE20)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF60)]
 public unsafe partial struct WKSManager {
     [StaticAddress("48 89 05 ?? ?? ?? ?? 48 8B F8", 3, isPointer: true)]
     public static partial WKSManager* Instance();
