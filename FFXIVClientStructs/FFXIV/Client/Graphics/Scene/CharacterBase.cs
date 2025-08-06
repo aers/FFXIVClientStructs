@@ -23,13 +23,13 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x90)] public byte UnkFlags_01;
     [FieldOffset(0x91)] public byte UnkFlags_02;
     [FieldOffset(0x92)] public byte UnkFlags_03;
-    [FieldOffset(0x98)] public int SlotCount; // model slots
+    [FieldOffset(0x9C)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
 
     [FieldOffset(0xA8)] public Model** Models; // size = SlotCount
 
-    [FieldOffset(0xD0)] public Attach Attach;
-    [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
+    [FieldOffset(0xD8)] public Attach Attach;
+    [FieldOffset(0x150)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
 
     public bool IsChangingVisor {
         get => (UnkFlags_01 & 0x80) == 0x80;
@@ -47,8 +47,7 @@ public unsafe partial struct CharacterBase {
     }
 
 
-    [FieldOffset(0x150)]
-    public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
+    [FieldOffset(0x158)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
     [FieldOffset(0x170)] public ModelRenderer.Callback RenderModelCallback;
     [FieldOffset(0x190)] public ModelRenderer.Callback RenderMaterialCallback;
