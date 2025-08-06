@@ -21587,12 +21587,6 @@ classes:
       0x1414D57C0: AddonOverlayMouseClickEvent
       0x1414D5CC0: AddonOverlayMouseReleaseEvent
       0x1414D78B0: SetAddonScale
-  Client::UI::AddonTripleTriadTournamentResult:
-    vtbls:
-      - ea: 0x142151638
-        base: Component::GUI::AtkUnitBase
-    funcs:
-      0x1415AC630: ctor
   Client::UI::AddonGSInfoGeneral:
     vtbls:
       - ea: 0x1421521C8
