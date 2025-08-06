@@ -114,9 +114,9 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(119)] public partial void ClearAtkHistory(int historyIdx);
 
     [VirtualFunction(122)] public partial void HandlePacket(UIModulePacketType type, uint uintParam, void* packet);
-    
+
     // TODO: Not checked after 7.3, just blindly +1'd, but all seem correct.
-    
+
     // [VirtualFunction(123)] public partial ??? ShowContentIntroduction(???);
     // [VirtualFunction(124)] public partial ??? IsContentIntroductionInvisible(???);
     // [VirtualFunction(125)] public partial ??? HideContentIntroduction(???);
