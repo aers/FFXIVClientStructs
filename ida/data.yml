@@ -653,7 +653,7 @@ classes:
       0x141BD1FE0: SetZone
   Application::Network::LobbyClient::LobbyRequestCallback:
     vtbls:
-       - ea: 0x141FF9AE8
+       - ea: 0x141FF83B0
     vfuncs:
       0: Dtor
     funcs:
