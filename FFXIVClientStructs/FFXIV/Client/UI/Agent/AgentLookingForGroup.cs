@@ -45,9 +45,8 @@ public unsafe partial struct AgentLookingForGroup {
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B FA 48 8B D9 E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9")]
     public partial bool OpenListing(ulong listingId);
 
-    // 7.3: can't sig this
-    // [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 84 C0 74 07 C6 83 90 31 00 00 01")]
-    // public partial bool OpenListingByContentId(ulong contentId); // Actual call inlined
+    [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 84 C0 74 07 C6 83 ?? ?? ?? ?? ?? 48 83 C4 20 5B C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 40 53")]
+    public partial bool OpenListingByContentId(ulong contentId); // Actual call inlined
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public unsafe partial struct TreasureMapDetail {
