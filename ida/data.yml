@@ -5571,6 +5571,7 @@ classes:
       0x14045DEF0: GetAddonTextById
       0x14045DF20: FormatAddonTextInt
       0x14045DFB0: FormatAddonTextString
+      0x1409887E0: GetLocalPlayer
   Client::UI::Misc::ConfigModule::ConfigEventInterface:
     vtbls:
       - ea: 0x142033038

@@ -8,11 +8,11 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Status)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x408)]
+[StructLayout(LayoutKind.Explicit, Size = 0x410)]
 public partial struct AgentStatus {
     [FieldOffset(0x3C)] public byte TabIndex;
 
-    [FieldOffset(0xD8)] public StatusCharaView CharaView;
+    [FieldOffset(0xE8)] public StatusCharaView CharaView;
 
     // Client::UI::Agent::AgentStatus::StatusCharaView
     //   Client::UI::Misc::CharaView

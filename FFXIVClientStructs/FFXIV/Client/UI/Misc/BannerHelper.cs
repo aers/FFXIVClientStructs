@@ -151,6 +151,7 @@ public enum BannerGearVisibilityFlag : uint {
     HeadgearHidden = 1 << 0,
     WeaponHidden = 1 << 1,
     VisorClosed = 1 << 2,
+    HideVieraEars = 1 << 3,
 }
 
 public enum CharaCardDataChangeReason {
