@@ -92,9 +92,9 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x326)] private ushort NumOwnedMountsMinus1; // ???
     // [FieldOffset(0x328), FixedSizeArray] internal FixedSizeArray44<ushort> _unk316; // something FishParameter?
     // [FieldOffset(0x380), FixedSizeArray] internal FixedSizeArray44<ushort> _unk36E; // something FishingRecordType?
-    // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 49 8B D8"
-    // Size: (FishingSpotSheet.RowCount + 7) / 8
-    [FieldOffset(0x3D8), FixedSizeArray] internal FixedSizeArray62<byte> _unlockedFishingSpotBitmask;
+    // Ref: "49 83 F8 ?? 73 ?? 41 0F B6 C0 BA ?? ?? ?? ?? C0 E0 ?? 2A C8 48 8D 05 ?? ?? ?? ?? ?? ?? ?? ?? ?? D3 E2 84 D0 0F 95 C0 EB ?? 32 C0"
+    // Size: i have no idea, grab it from the sig
+    [FieldOffset(0x3D8), FixedSizeArray] internal FixedSizeArray42<byte> _unlockedFishingSpotBitmask;
     // Size: (FishParameterSheet.Count(row => row.IsInLog) + 7) / 8
     /// <remarks> Use <see cref="IsFishCaught(uint)"/> </remarks>
     [FieldOffset(0x402), FixedSizeArray] internal FixedSizeArray182<byte> _caughtFishBitmask;
@@ -103,10 +103,10 @@ public unsafe partial struct PlayerState {
     // Ref: "48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 30 48 8B 81 ?? ?? ?? ?? 48 8B F2"
     // Size: (SpearfishingNotebookSheet.RowCount + 7) / 8
     [FieldOffset(0x4C0), FixedSizeArray] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebookBitmask;
-    // Ref: "40 53 55 57 48 83 EC 50 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 4C 8B 12"
-    // Size: (SpearfishingItemSheet.RowCount + 7) / 8
+    // Ref: "42 8D 04 C5 ?? ?? ?? ?? 2B C8 48 8D 05 ?? ?? ?? ?? ?? ?? ?? ?? ?? D3 E2 84 D0 0F B6 47"
+    // Size: i have no idea, good luck
     /// <remarks> Use <see cref="IsSpearfishCaught(uint)"/> </remarks>
-    [FieldOffset(0x4C9), FixedSizeArray] internal FixedSizeArray41<byte> _caughtSpearfishBitmask;
+    [FieldOffset(0x4C9), FixedSizeArray] internal FixedSizeArray39<byte> _caughtSpearfishBitmask;
     [FieldOffset(0x4F0)] public uint NumSpearfishCaught;
     [FieldOffset(0x4F4)] internal int UnknownUnixTimestamp; // could be an array of size 1?!
     /// <remarks>
@@ -130,9 +130,9 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x568), FixedSizeArray] internal FixedSizeArray43<byte> _completedAdventureBitmask;
 
     [FieldOffset(0x599), FixedSizeArray] internal FixedSizeArray56<byte> _unlockFlags;
-    // Size: (AetherCurrentCompFlgSetSheet.RowCount + 7) / 8
+    // Size: (AetherCurrentCompFlgSetSheet.RowCount + 7) / 8 - 1???
     /// <remarks> Use <see cref="IsAetherCurrentZoneComplete"/> </remarks>
-    [FieldOffset(0x5D1), FixedSizeArray] internal FixedSizeArray5<byte> _unlockedAetherCurrentCompFlgSetBitmask;
+    [FieldOffset(0x5D1), FixedSizeArray] internal FixedSizeArray4<byte> _unlockedAetherCurrentCompFlgSetBitmask;
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
     [FieldOffset(0x5D5)] public byte DeliveryLevel;
     // [FieldOffset(0x5CE)] public byte UnkWeddingPlanFlag; // see lua function "GetWeddingPlan"
