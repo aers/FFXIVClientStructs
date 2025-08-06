@@ -23,7 +23,7 @@ public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB 84 C0 74 ?? 8B 95")]
     public partial bool IsOutside();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 8B D6")]
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B CE BA")]
     public partial bool IsInside();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0E 48 8B CB")]

@@ -33,7 +33,7 @@ public unsafe partial struct AtkComponentIcon : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8D 4D 12")]
     public partial bool LoadIcon(uint iconId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8D 4D 12")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 D2 48 8B CB")]
     public partial bool LoadLocalizedIcon(LocalizedIconInfo* info);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 03 F6 D0")]

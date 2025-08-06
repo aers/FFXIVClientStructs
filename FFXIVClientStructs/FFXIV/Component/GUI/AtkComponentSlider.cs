@@ -25,7 +25,7 @@ public partial struct AtkComponentSlider : ICreatable {
     [MemberFunction("3B 91 ?? ?? ?? ?? 7C 06")]
     public partial void SetMaxValue(int maxValue);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 43 3C")]
+    [MemberFunction("E9 ?? ?? ?? ?? 0F 29 7C 24 ?? E8")]
     public partial void SetValue(int value, bool dispatchEvent29 = true);
 
     // Inlined in 7.0, but still hanging around

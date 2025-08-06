@@ -8,10 +8,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Colorant)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x490)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4A0)]
 public partial struct AgentColorant {
 
-    [FieldOffset(0x150)] public ColorantCharaView CharaView;
+    [FieldOffset(0x158)] public ColorantCharaView CharaView;
 
     // Client::UI::Agent::AgentColorant::ColorantCharaView
     //   Client::UI::Misc::CharaView

@@ -52,10 +52,10 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 39 AE ?? ?? ?? ?? 7E")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 03 EB")]
+    [MemberFunction("E9 ?? ?? ?? ?? 55 A1")]
     public partial void ShowLogMessage(uint logMessageId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 8B 5E 28")] // ShowLogMessage<uint>
+    [MemberFunction("E9 ?? ?? ?? ?? 0C ?? 88 42")] // ShowLogMessage<uint>
     public partial void ShowLogMessageUInt(uint logMessageId, uint value);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 4B 44")] // ShowLogMessage<uint,uint>

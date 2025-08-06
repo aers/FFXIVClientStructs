@@ -9,6 +9,7 @@ public unsafe partial struct ExcelRow {
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 08")]
     public partial void* GetColumnPtr(uint columnIndex);
 
+    [Obsolete("Incorrect signature")]
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D 70 0F B6 D8")]
     public partial bool IsColumnRsv(uint columnIndex);
 

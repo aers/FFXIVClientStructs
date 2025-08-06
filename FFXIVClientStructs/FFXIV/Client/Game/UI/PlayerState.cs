@@ -470,7 +470,7 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Returns whether the player is a Trade Mentor.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 81 FD")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 43 ?? F6 D8")]
     public partial bool IsTradeMentor();
 
     /// <summary>

@@ -39,7 +39,7 @@ public unsafe partial struct TargetSystem {
     /// Method to get the player's current target GameObject. Will resolve the hard and soft targets, in
     /// that order, returning the first one that's set.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C7 41 8B C4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 48 8B F8 45 0F 57 C0")]
     public partial GameObject* GetTargetObject();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B C7 75 ?? 32 C0")]

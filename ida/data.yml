@@ -5571,6 +5571,7 @@ classes:
       0x14045DEF0: GetAddonTextById
       0x14045DF20: FormatAddonTextInt
       0x14045DFB0: FormatAddonTextString
+      0x1409887E0: GetLocalPlayer
   Client::UI::Misc::ConfigModule::ConfigEventInterface:
     vtbls:
       - ea: 0x142033038
@@ -7884,7 +7885,7 @@ classes:
       0x1406D70B0: CreateSingleton
       0x1406D8140: LoadPrefetchLayout
       0x1406D84F0: UnloadManagerLayout
-      0x1406DB080: GetLayoutInstance2
+      0x1406DB080: GetLayoutInstance
       0x1406DB100: GetColliderLayoutInstance2
       0x1406DBC30: AddRsvString
       0x1406DBED0: UnloadRsvMap
@@ -7895,7 +7896,7 @@ classes:
       0x14071E5F0: ActiveLayoutReady # static
       0x14071E620: ActiveLayoutStreamed # static
       0x14071EA50: ActiveLayoutHousingReady # static
-      0x14071ED70: GetLayoutInstance # static
+      0x14071ED70: GetLayoutInstanceStatic # static
       0x14071EEB0: GetColliderLayoutInstance # static
   Client::LayoutEngine::LayoutManager:
     vtbls:
@@ -10275,7 +10276,7 @@ classes:
       0x140E32100: SetMainCommandEnabledState
       0x140E37560: UpdateCharacter
       0x140E37B50: UpdateParty
-      0x140DB4D90: UpdateTargetInfo
+      0x140E38070: UpdateTargetInfo
       0x140E396E0: UpdateDTR
       0x140E3A870: UpdateContentGauge
       0x140E3ABF0: UpdateMainCommands
@@ -19540,7 +19541,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14129ABA0: ctor
-      0x14140EAB0: SetTab
+      0x14129C680: SetTab
   Client::UI::AddonInventoryBuddy2: # 635
   Client::UI::AddonContentMemberList: # 636
     vtbls:

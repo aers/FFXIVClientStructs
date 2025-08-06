@@ -1,4 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -9,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::CharaView
 [GenerateInterop]
 [Inherits<CharaView>]
-[StructLayout(LayoutKind.Explicit, Size = 0x420)]
+[StructLayout(LayoutKind.Explicit, Size = 0x430)]
 public unsafe partial struct CharaViewPortrait {
     // Spherical Camera?
     [FieldOffset(0x320)] public Vector4 CameraPosition;
@@ -39,15 +38,15 @@ public unsafe partial struct CharaViewPortrait {
     [FieldOffset(0x370)] public AtkTexture BackgroundTexture;
 
     [FieldOffset(0x388)] public CharaViewCharacterData PortraitCharacterData;
-    [FieldOffset(0x400)] public bool CharacterVisible;
-    [FieldOffset(0x401)] public bool CharaViewPortraitCharacterDataCopied;
-    [FieldOffset(0x402)] public bool CharaViewPortraitCharacterLoaded;
-    [FieldOffset(0x403)] public bool IsAnimationPauseStatePending;
-    [FieldOffset(0x404)] public bool PendingAnimationPauseState;
+    [FieldOffset(0x404)] public bool CharacterVisible;
+    [FieldOffset(0x405)] public bool CharaViewPortraitCharacterDataCopied;
+    [FieldOffset(0x406)] public bool CharaViewPortraitCharacterLoaded;
+    [FieldOffset(0x407)] public bool IsAnimationPauseStatePending;
+    [FieldOffset(0x408)] public bool PendingAnimationPauseState;
 
-    [FieldOffset(0x408)] public AgentInterface* EventAgent;
-    [FieldOffset(0x410)] public int AgentEventId;
-    [FieldOffset(0x418)] public ulong AgentEventKind;
+    [FieldOffset(0x410)] public AgentInterface* EventAgent;
+    [FieldOffset(0x418)] public int AgentEventId;
+    [FieldOffset(0x420)] public ulong AgentEventKind;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7C 24 ?? EB ?? 33 F6")]
     public partial CharaViewPortrait* Ctor();
@@ -127,7 +126,7 @@ public unsafe partial struct CharaViewPortrait {
     public partial void ToggleCharacterVisibility(bool visible);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 45 A4")]
-    public partial void ToggleGearVisibility(bool hideVisor, bool hideWeapon, bool closeVisor);
+    public partial void ToggleGearVisibility(bool hideVisor, bool hideWeapon, bool closeVisor, bool hideVieraEars);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4F 10 88 85")]
     public partial bool IsAnimationPaused();

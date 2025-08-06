@@ -32,7 +32,7 @@ public unsafe partial struct InfoProxyCrossRealm {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 EB 08")]
     public static partial byte GetGroupMemberCount(int groupIndex);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 5E 10 48 8B C8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B CB 89 5D")]
     public static partial CrossRealmMember* GetGroupMember(uint memberIndex, int groupIndex = -1);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 74 0C 0F B6 40 2E")]

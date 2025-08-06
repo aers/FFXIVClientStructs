@@ -11,15 +11,15 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.GearSet)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xBC0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xBD0)]
 public unsafe partial struct AgentGearSet {
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray14<ContextMenuParam> _contextMenuParams;
 
-    [FieldOffset(0x118), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
+    [FieldOffset(0x120), FixedSizeArray] internal FixedSizeArray13<ItemCache> _itemCaches;
 
-    [FieldOffset(0x878)] public GearsetCharaView CharaView;
+    [FieldOffset(0x880)] public GearsetCharaView CharaView;
 
-    [FieldOffset(0xBA8)] public StdVector<int> GearSetIds;
+    [FieldOffset(0xBB8)] public StdVector<int> GearSetIds;
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B F9 8B DA 48 8B 49 10 48 8B 01 FF 50 70 4C 8D 44 24")]
     public partial void OpenBannerEditorForGearset(int gearsetId);

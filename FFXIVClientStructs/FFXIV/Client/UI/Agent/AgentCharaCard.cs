@@ -31,7 +31,7 @@ public unsafe partial struct AgentCharaCard {
 
     // Client::UI::Agent::AgentCharaCard::Storage
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x9B0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x9C0)]
     public unsafe partial struct Storage {
         [FieldOffset(0x00)] public byte Flag0;
         [FieldOffset(0x01)] public byte Flag1;
@@ -95,14 +95,14 @@ public unsafe partial struct AgentCharaCard {
         // bunch of ExcelSheetWaiters
 
         [FieldOffset(0x540)] public CharaViewPortrait CharaView;
-        [FieldOffset(0x960)] public Texture* PortraitTexture;
-        [FieldOffset(0x968)] public ExportedPortraitData PortraitData;
+        [FieldOffset(0x970)] public Texture* PortraitTexture;
+        [FieldOffset(0x978)] public ExportedPortraitData PortraitData;
         /// <remarks> CharaCardEditMenu, CharaCardDesignSetting, BannerEditor, CharaCardProfileSetting </remarks>
-        [FieldOffset(0x99C)] public uint EditAddonId;
+        [FieldOffset(0x9AC)] public uint EditAddonId;
         /// <remarks> To display Addon#15091, Addon#15092 or Addon#15093 </remarks>
-        [FieldOffset(0x9A0)] public uint SelectOkAddonId;
-        [FieldOffset(0x9A4)] public uint InputSearchCommentAddonId;
-        [FieldOffset(0x9A8)] public uint PermissionSettingAddonId;
+        [FieldOffset(0x9B0)] public uint SelectOkAddonId;
+        [FieldOffset(0x9B4)] public uint InputSearchCommentAddonId;
+        [FieldOffset(0x9B8)] public uint PermissionSettingAddonId;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]

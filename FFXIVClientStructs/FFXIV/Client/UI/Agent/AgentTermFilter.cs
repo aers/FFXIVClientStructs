@@ -8,6 +8,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public unsafe partial struct AgentTermFilter {
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4B 8B 8C C8"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D ?? E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 4B 8B 8C C8"), GenerateStringOverloads]
     public partial void OpenNewFilterWindow(CStringPointer message = default);
 }

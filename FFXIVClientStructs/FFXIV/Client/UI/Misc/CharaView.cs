@@ -113,7 +113,7 @@ public unsafe partial struct CharaViewModelData {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x78)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7C)]
 public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0)] public CustomizeData CustomizeData;
     // Unk 2 bytes
@@ -125,6 +125,7 @@ public unsafe partial struct CharaViewCharacterData : ICreatable {
     [FieldOffset(0x75)] public bool HeadgearHidden;
     [FieldOffset(0x76)] public bool WeaponHidden;
     [FieldOffset(0x77)] public bool VisorClosed;
+    [FieldOffset(0x78)] public bool HideVieraEars;
 
     public static CharaViewCharacterData* Create()
         => IMemorySpace.GetUISpace()->Create<CharaViewCharacterData>();
