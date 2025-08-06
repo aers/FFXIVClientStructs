@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x44C0)]
 public unsafe partial struct EventFramework {
-    [StaticAddress("48 83 3D ?? ?? ?? ?? ?? 74 ?? E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 3C", 3, isPointer: true)]
+    [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 83 B8 ?? ?? ?? ?? ?? 7C", 3, isPointer: true)]
     public static partial EventFramework* Instance();
 
     [FieldOffset(0x00)] public EventHandlerModule EventHandlerModule;
