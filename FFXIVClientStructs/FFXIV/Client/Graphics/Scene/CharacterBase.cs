@@ -28,8 +28,8 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0xA8)] public Model** Models; // size = SlotCount
 
-    [FieldOffset(0xD0)] public Attach Attach;
-    [FieldOffset(0x148)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
+    [FieldOffset(0xD8)] public Attach Attach;
+    [FieldOffset(0x150)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
 
     public bool IsChangingVisor {
         get => (UnkFlags_01 & 0x80) == 0x80;
@@ -47,8 +47,7 @@ public unsafe partial struct CharacterBase {
     }
 
 
-    [FieldOffset(0x150)]
-    public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
+    [FieldOffset(0x158)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
     [FieldOffset(0x170)] public ModelRenderer.Callback RenderModelCallback;
     [FieldOffset(0x190)] public ModelRenderer.Callback RenderMaterialCallback;
