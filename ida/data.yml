@@ -16596,164 +16596,170 @@ classes:
       0x141250040: SetCommonNamePlate  # x, y, scale, etc INLINED IN 7.0 in AddonNamePlate OnRequestedUpdate 1411CBBD5
       0x141250270: SetPlayerNamePlate # player specific nodes INLINED IN 7.0 ^ 1411CBEB6
       0x141253A50: ToggleTextRenderMode
-  Client::UI::AddonInventoryRetainer: # 95
+  Client::UI::AddonCastBarEnemy: # 95
+    vtbls:
+      - ea: 0x1420E2848
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141253B40: ctor
+  Client::UI::AddonInventoryRetainer: # 96
     vtbls:
       - ea: 0x1420C7540
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x14113D980: ctor
       0x14113EA60: SetTab
-  Client::UI::AddonBank: # 96
+  Client::UI::AddonBank: # 97
     vtbls:
       - ea: 0x1420E5258
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412702A0: ctor
-  Client::UI::AddonTalkSubtitle: # 97
+  Client::UI::AddonTalkSubtitle: # 98
     vtbls:
       - ea: 0x1420D8828
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411F3F20: ctor
-  Client::UI::AddonEventSkip: # 98
+  Client::UI::AddonEventSkip: # 99
     vtbls:
       - ea: 0x1420D8F18
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411F7910: ctor
-  Client::UI::AddonRetainerSell: # 99
+  Client::UI::AddonRetainerSell: # 100
     vtbls:
       - ea: 0x1420C6E50
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14113AC80: ctor
-  Client::UI::AddonRetainerSellList: # 100
+  Client::UI::AddonRetainerSellList: # 101
     vtbls:
       - ea: 0x1420C70A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14113BBF0: ctor
-  Client::UI::AddonRepair: # 101
+  Client::UI::AddonRepair: # 102
     vtbls:
       - ea: 0x1421112F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413D5800: ctor
-  Client::UI::AddonRepairRequest: # 102
+  Client::UI::AddonRepairRequest: # 103
     vtbls:
       - ea: 0x142111548
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413D7F60: ctor
-  Client::UI::AddonHowTo: # 103
+  Client::UI::AddonHowTo: # 104
     vtbls:
       - ea: 0x1420D9168
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411F7B30: ctor
-  Client::UI::AddonHowToNotice: # 104
+  Client::UI::AddonHowToNotice: # 105
     vtbls:
       - ea: 0x1420D93B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411F89D0: ctor
-  Client::UI::AddonJobHudNotice: # 105
+  Client::UI::AddonJobHudNotice: # 106
     vtbls:
       - ea: 0x1420D9608
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411F8E80: ctor
-  Client::UI::AddonContentsTutorial: # 106
+  Client::UI::AddonContentsTutorial: # 107
     vtbls:
       - ea: 0x1420E10D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14123E680: ctor
-  Client::UI::AddonCharacterInspect: # 107
+  Client::UI::AddonCharacterInspect: # 108
     vtbls:
       - ea: 0x1420DBC90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141215830: ctor
-  Client::UI::AddonHudLayout: # 108
+  Client::UI::AddonHudLayout: # 109
     vtbls:
       - ea: 0x142135640
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414CE490: ctor
-  Client::UI::AddonHudLayoutSetCopy: # 109
+  Client::UI::AddonHudLayoutSetCopy: # 110
     vtbls:
       - ea: 0x142135D38
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414D8040: ctor
-  Client::UI::AddonHudLayoutCurrentWindow: # 110
+  Client::UI::AddonHudLayoutCurrentWindow: # 111
     vtbls:
       - ea: 0x1421361F8
         base: Client::UI::AddonHudLayoutCurrentBase
     funcs:
       0x1414D9640: ctor
-  Client::UI::AddonHudLayoutCurrentBuffStatus: # 111
+  Client::UI::AddonHudLayoutCurrentBuffStatus: # 112
     vtbls:
       - ea: 0x142136468
         base: Client::UI::AddonHudLayoutCurrentBase
     funcs:
       0x1414DB110: ctor
-  Client::UI::AddonHudLayoutCurrentTarget: # 112
+  Client::UI::AddonHudLayoutCurrentTarget: # 113
     vtbls:
       - ea: 0x1421366D8
         base: Client::UI::AddonHudLayoutCurrentBase
     funcs:
       0x1414DE920: ctor
-  Client::UI::AddonHudLayoutSnapSetting: # 113
+  Client::UI::AddonHudLayoutSnapSetting: # 114
     vtbls:
       - ea: 0x142136948
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414DF950: ctor
-  Client::UI::AddonSocial: # 114
+  Client::UI::AddonSocial: # 115
     vtbls:
       - ea: 0x14213CD90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141513820: ctor
-  Client::UI::AddonConfigLog: # 115
+  Client::UI::AddonConfigLog: # 116
     vtbls:
       - ea: 0x1420A4DD8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14106C670: ctor
-  Client::UI::AddonConfigLogFilter: # 116
+  Client::UI::AddonConfigLogFilter: # 117
     vtbls:
       - ea: 0x1420A5278
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14106FD40: ctor
-  Client::UI::AddonLogFilterInputString: # 117
+  Client::UI::AddonLogFilterInputString: # 118
     vtbls:
       - ea: 0x1420A54C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141071C60: ctor
-  Client::UI::AddonConfigKeybind: # 118
+  Client::UI::AddonConfigKeybind: # 119
     vtbls:
       - ea: 0x1420A4B88
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14106AF20: ctor
-  Client::UI::AddonConfigLogColor: # 119
+  Client::UI::AddonConfigLogColor: # 120
     vtbls:
       - ea: 0x1420A5028
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14106E120: ctor
-  Client::UI::AddonMonsterNote: # 120
+  Client::UI::AddonMonsterNote: # 121
     vtbls:
       - ea: 0x1420C9AE0
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x141141200: ctor
-  Client::UI::AddonItemSearch: # 121
+      0x141151CB0: ctor
+  Client::UI::AddonItemSearch: # 122
     vtbls:
       - ea: 0x14213F2E0
         base: Component::GUI::AtkUnitBase
@@ -16761,81 +16767,81 @@ classes:
       0x14152BA40: ctor
       0x14152E8A0: RunSearch
       0x14152E620: SetModeFilter
-  Client::UI::AddonItemSearchResult: # 122
+  Client::UI::AddonItemSearchResult: # 123
     vtbls:
       - ea: 0x14213F530
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14152EFD0: ctor
       0x14152FD60: PopulateColumns
-  Client::UI::AddonItemSearchFilter: # 123
+  Client::UI::AddonItemSearchFilter: # 124
     vtbls:
       - ea: 0x14213F780
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14152FE80: ctor
-  Client::UI::AddonItemHistory: # 124
+  Client::UI::AddonItemHistory: # 125
     vtbls:
       - ea: 0x14213F9D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141530550: ctor
-  Client::UI::AddonBattleTalk: # 125
+  Client::UI::AddonBattleTalk: # 126
     vtbls:
       - ea: 0x14211CE28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14144D3F0: ctor
-  Client::UI::AddonConfigSystem: # 126
+  Client::UI::AddonConfigSystem: # 127
     vtbls:
       - ea: 0x1420A5718
         base: Component::GUI::AtkUnitBase
     funcs:
-#fail       0x14106CA60: ctor
-  Client::UI::AddonChatConfig: # 127
+      0x14107BCC0: ctor
+  Client::UI::AddonChatConfig: # 128
     vtbls:
       - ea: 0x1420A9C98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410ABB60: ctor
-  Client::UI::AddonFateReward: # 128
+  Client::UI::AddonFateReward: # 129
     vtbls:
       - ea: 0x1420E2388
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14124EF80: ctor
-  Client::UI::AddonFateProgress: # 129
+  Client::UI::AddonFateProgress: # 130
     vtbls:
       - ea: 0x1420E2138
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14124DA60: ctor
       0x14124E390: SetTab
-  Client::UI::AddonGrandCompanyExchange: # 130
+  Client::UI::AddonGrandCompanyExchange: # 131
     vtbls:
       - ea: 0x1420D3AC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411B9060: ctor
-  Client::UI::AddonColorPicker: # 131
+  Client::UI::AddonColorPicker: # 132
     vtbls:
       - ea: 0x1420A1AA0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410532D0: ctor
-  Client::UI::AddonContextIconMenu: # 132
+  Client::UI::AddonContextIconMenu: # 133
     vtbls:
       - ea: 0x1420A1CF0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141053FF0: ctor
-  Client::UI::AddonFreeCompany: # 133
+  Client::UI::AddonFreeCompany: # 134
     vtbls:
       - ea: 0x142146D00
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141561EC0: ctor
-  Client::UI::AddonArmouryBoard: # 134
+  Client::UI::AddonArmouryBoard: # 135
     vtbls:
       - ea: 0x1420E2F38
         base: Component::GUI::AtkUnitBase
@@ -16843,43 +16849,43 @@ classes:
       0x141257190: ctor
       0x1412596C0: NextTab # inlined in ReceiveEvent
       0x141259780: PreviousTab # inlined in ReceiveEvent
-  Client::UI::AddonAchievement: # 135
+  Client::UI::AddonAchievement: # 136
     vtbls:
       - ea: 0x1420E31A8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14125AA70: ctor
-  Client::UI::AddonAchievementInfo: # 136
+  Client::UI::AddonAchievementInfo: # 137
     vtbls:
       - ea: 0x1420E33F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141262710: ctor
-  Client::UI::AddonAchievementSetting: # 137
+  Client::UI::AddonAchievementSetting: # 138
     vtbls:
       - ea: 0x1420E3648
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412630C0: ctor
-  Client::UI::AddonHowToList: # 138
+  Client::UI::AddonHowToList: # 139
     vtbls:
       - ea: 0x1420E38B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141263720: ctor
-  Client::UI::AddonCabinet: # 139
+  Client::UI::AddonCabinet: # 140
     vtbls:
       - ea: 0x1420E3B08
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141264B80: ctor
-  Client::UI::AddonFishingNote: # 140
+  Client::UI::AddonFishingNote: # 141
     vtbls:
       - ea: 0x1420CABC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14116A9F0: ctor
-  Client::UI::AddonContentsFinder: # 141
+  Client::UI::AddonContentsFinder: # 142
     vtbls:
       - ea: 0x1420CDB08
         base: Component::GUI::AtkUnitBase
@@ -16892,1668 +16898,1674 @@ classes:
       0x140A39730: SetIsExplorerMode
       0x140A39780: SetIsLevelSync
       0x140A397A0: SetIsLimitedLevelingRoulette
-  Client::UI::AddonContentsFinderSetting: # 142
+  Client::UI::AddonContentsFinderSetting: # 143
     vtbls:
       - ea: 0x1420CE010
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141194B70: ctor
-  Client::UI::AddonContentsFinderStatus: # 143
+  Client::UI::AddonContentsFinderStatus: # 144
     vtbls:
       - ea: 0x1420CE260
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141196F70: ctor
-  Client::UI::AddonContentsFinderConfirm: # 144
+  Client::UI::AddonContentsFinderConfirm: # 145
     vtbls:
       - ea: 0x1420CE4B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411977C0: ctor
-  Client::UI::AddonContentsFinderReady: # 145
+  Client::UI::AddonContentsFinderReady: # 146
     vtbls:
       - ea: 0x1420CE700
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141198320: ctor
-  Client::UI::AddonContentsFinderSupply: # 146
+  Client::UI::AddonContentsFinderSupply: # 147
     vtbls:
       - ea: 0x1420CE950
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141198700: ctor
-  Client::UI::AddonMaterialize: # 147
+  Client::UI::AddonMaterialize: # 148
     vtbls:
       - ea: 0x1420CEE30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14119BF40: ctor
-  Client::UI::AddonMaterializeDialog: # 148
+  Client::UI::AddonMaterializeDialog: # 149
     vtbls:
       - ea: 0x1420CF080
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14119CDF0: ctor
-  Client::UI::AddonMateriaAttach: # 149
+  Client::UI::AddonMateriaAttach: # 150
     vtbls:
       - ea: 0x1420CF2D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14119D3F0: ctor
-  Client::UI::AddonMateriaParameter: # 150
+  Client::UI::AddonMateriaParameter: # 151
     vtbls:
       - ea: 0x1420CFC20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411A10E0: ctor
-  Client::UI::AddonMateriaAttachDialog: # 151
+  Client::UI::AddonMateriaAttachDialog: # 152
     vtbls:
       - ea: 0x1420CF770
         base: Client::UI::AddonMateriaDialogBase
     funcs:
       0x14119F8B0: ctor
-  Client::UI::AddonMateriaRetrieveDialog: # 152
+  Client::UI::AddonMateriaRetrieveDialog: # 153
     vtbls:
       - ea: 0x1420CF9C8
         base: Client::UI::AddonMateriaDialogBase
     funcs:
       0x1411A0870: ctor
-  Client::UI::AddonMiragePrism: # 153
+  Client::UI::AddonMiragePrism: # 154
     vtbls:
       - ea: 0x1420CFE90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411A1460: ctor
-  Client::UI::AddonMiragePrismExecute: # 154
+  Client::UI::AddonMiragePrismExecute: # 155
     vtbls:
       - ea: 0x1420D0330
         base: Client::UI::AddonMiragePrismDialogBase
     funcs:
       0x1411A3960: ctor
-  Client::UI::AddonMiragePrismRemove: # 155
+  Client::UI::AddonMiragePrismRemove: # 156
     vtbls:
       - ea: 0x1420D0580
         base: Client::UI::AddonMiragePrismDialogBase
     funcs:
       0x1411A3D30: ctor
-  Client::UI::AddonColorantEquipment: # 156
+  Client::UI::AddonColorantEquipment: # 157
     vtbls:
       - ea: 0x1420D35C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411B4190: ctor
-  Client::UI::AddonColorantColoring: # 157
+  Client::UI::AddonColorantColoring: # 158
     vtbls:
       - ea: 0x1420D3818
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411B5220: ctor
-  Client::UI::AddonFreeCompanyOrganizeSheet: # 158
+  Client::UI::AddonFreeCompanyOrganizeSheet: # 159
     vtbls:
       - ea: 0x142144218
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14154ACB0: ctor
-  Client::UI::AddonFreeCompanyProfile: # 159
+  Client::UI::AddonFreeCompanyProfile: # 160
     vtbls:
       - ea: 0x142144468
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14154B7A0: ctor
-  Client::UI::AddonLegacyItemStorage: # 160
+  Client::UI::AddonLegacyItemStorage: # 161
     vtbls:
       - ea: 0x1420E3FC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141268120: ctor
-  Client::UI::AddonGrandCompanyRank: # 161
+  Client::UI::AddonGrandCompanyRank: # 162
     vtbls:
       - ea: 0x1420D3D70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411BAB10: ctor
-  Client::UI::AddonGrandCompanyRankUp: # 162
+  Client::UI::AddonGrandCompanyRankUp: # 163
     vtbls:
       - ea: 0x1420D3FD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411BB2B0: ctor
-  Client::UI::AddonSupportDesk: # 163
+  Client::UI::AddonSupportDesk: # 164
     vtbls:
       - ea: 0x1420B9918
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410FEA30: ctor
-  Client::UI::AddonGearSetList: # 164
+  Client::UI::AddonGearSetList: # 165
     vtbls:
       - ea: 0x1420DF078
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14122E690: ctor
-  Client::UI::AddonSupportDeskList: # 165
+  Client::UI::AddonSupportDeskList: # 166
     vtbls:
       - ea: 0x1420B9B78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141100140: ctor
-  Client::UI::AddonSupportDeskView: # 166
+  Client::UI::AddonSupportDeskView: # 167
     vtbls:
       - ea: 0x1420BA018
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141101FA0: ctor
-  Client::UI::AddonSupportDeskEdit: # 167
+  Client::UI::AddonSupportDeskEdit: # 168
     vtbls:
       - ea: 0x1420B9DC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141100920: ctor
-  Client::UI::AddonMainCross: # 168
+  Client::UI::AddonMainCross: # 169
     vtbls:
       - ea: 0x14212E0B8
         base: Client::UI::AddonMainCommandInterface
     funcs:
       0x14149A100: ctor
-  Client::UI::AddonCharaMakeFeatureColorL: # 169
-  Client::UI::AddonCharaMakeFeatureColorFacePaint: # 170
+  Client::UI::AddonCharaMakeFeatureColorL: # 170
+  Client::UI::AddonCharaMakeFeatureColorFacePaint: # 171
     vtbls:
       - ea: 0x1420B87F8
         base: Client::UI::AddonCharaMakeFeatureColor
     funcs:
       0x1410F98C0: ctor
-  Client::UI::AddonCharaMakeFeatureColorLip: # 171
+  Client::UI::AddonCharaMakeFeatureColorLip: # 172
     vtbls:
       - ea: 0x1420B8A68
         base: Client::UI::AddonCharaMakeFeatureColor
     funcs:
       0x1410F9DB0: ctor
-  Client::UI::AddonCharaMakeFeatureColorHair: # 172
+  Client::UI::AddonCharaMakeFeatureColorHair: # 173
     vtbls:
       - ea: 0x1420B8F60
         base: Client::UI::AddonCharaMakeFeatureColorDouble
     funcs:
       0x1410FBA10: ctor
-  Client::UI::AddonCharaMakeFeatureColorFaceEye: # 173
+  Client::UI::AddonCharaMakeFeatureColorFaceEye: # 174
     vtbls:
       - ea: 0x1420B91E8
         base: Client::UI::AddonCharaMakeFeatureColorDouble
     funcs:
       0x1410FBE90: ctor
-  Client::UI::AddonCharaMakeFeatureSlider: # 174
+  Client::UI::AddonCharaMakeFeatureSlider: # 175
     vtbls:
       - ea: 0x1420B9470
         base: Client::UI::AddonCharaMakeFeatureOption
     funcs:
       0x1410FC1E0: ctor
-  Client::UI::AddonCharaMakeFeatureRadioButton2: # 175
+  Client::UI::AddonCharaMakeFeatureRadioButton2: # 176
     vtbls:
       - ea: 0x1420B63F8
         base: Client::UI::AddonCharaMakeFeatureRadioButton
     funcs:
       0x1410F2690: ctor
-  Client::UI::AddonCharaMakeFeatureRadioButton3: # 176
+  Client::UI::AddonCharaMakeFeatureRadioButton3: # 177
     vtbls:
       - ea: 0x1420B6658
         base: Client::UI::AddonCharaMakeFeatureRadioButton
     funcs:
       0x1410F2A60: ctor
-  Client::UI::AddonCharaMakeFeatureRadioButton4: # 177
+  Client::UI::AddonCharaMakeFeatureRadioButton4: # 178
     vtbls:
       - ea: 0x1420B68B8
         base: Client::UI::AddonCharaMakeFeatureRadioButton
     funcs:
       0x1410F2E60: ctor
-  Client::UI::AddonCharaMakeFeatureRadioButton5: # 178
+  Client::UI::AddonCharaMakeFeatureRadioButton5: # 179
     vtbls:
       - ea: 0x1420B6B18
         base: Client::UI::AddonCharaMakeFeatureRadioButton
     funcs:
       0x1410F3260: ctor
-  Client::UI::AddonCharaMakeFeatureRadioButton6: # 179
+  Client::UI::AddonCharaMakeFeatureRadioButton6: # 180
     vtbls:
       - ea: 0x1420B6D78
         base: Client::UI::AddonCharaMakeFeatureRadioButton
     funcs:
       0x1410F3660: ctor
-  Client::UI::AddonCharaMakeFeatureRadioButton12: # 180
+  Client::UI::AddonCharaMakeFeatureRadioButton12: # 181
     vtbls:
       - ea: 0x1420B6FD8
         base: Client::UI::AddonCharaMakeFeatureRadioButton
     funcs:
       0x1410F3A70: ctor
-  Client::UI::AddonCharaMakeFeatureIconFacePaint: # 181
+  Client::UI::AddonCharaMakeFeatureIconFacePaint: # 182
     vtbls:
       - ea: 0x1420B74A0
         base: Client::UI::AddonCharaMakeFeatureIcon
     funcs:
       0x1410F53C0: ctor
-  Client::UI::AddonCharaMakeFeatureIconFaceType: # 182
+  Client::UI::AddonCharaMakeFeatureIconFaceType: # 183
     vtbls:
       - ea: 0x1420B7708
         base: Client::UI::AddonCharaMakeFeatureIcon
     funcs:
       0x1410F5BF0: ctor
-  Client::UI::AddonCharaMakeFeatureIconHair: # 183
+  Client::UI::AddonCharaMakeFeatureIconHair: # 184
     vtbls:
       - ea: 0x1420B7970
         base: Client::UI::AddonCharaMakeFeatureIcon
     funcs:
       0x1410F5E00: ctor
-  Client::UI::AddonCharaMakeFeatureIconTail: # 184
+  Client::UI::AddonCharaMakeFeatureIconTail: # 185
     vtbls:
       - ea: 0x1420B7E40
         base: Client::UI::AddonCharaMakeFeatureIcon
     funcs:
       0x1410F7B20: ctor
-  Client::UI::AddonCharaMakeDataExport: # 185
+  Client::UI::AddonCharaMakeDataExport: # 186
     vtbls:
       - ea: 0x1420B53A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410EF520: ctor
-  Client::UI::AddonCharaMakeDataImport: # 186
-  Client::UI::AddonSimpleClassSelect: # 187
+  Client::UI::AddonCharaMakeDataImport: # 187
+  Client::UI::AddonSimpleClassSelect: # 188
     vtbls:
       - ea: 0x1420B40A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410E9D60: ctor
-  Client::UI::AddonGrandCompanySupplyList: # 188
+  Client::UI::AddonGrandCompanySupplyList: # 189
     vtbls:
       - ea: 0x1420D4220
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411BB6C0: ctor
-  Client::UI::AddonGrandCompanySupplyReward: # 189
+  Client::UI::AddonGrandCompanySupplyReward: # 190
     vtbls:
       - ea: 0x1420D4478
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411BD030: ctor
-  Client::UI::AddonCabinetWithdraw: # 190
+  Client::UI::AddonCabinetWithdraw: # 191
     vtbls:
       - ea: 0x1420E3D78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141265A20: ctor
       0x1412659E0: ApplyUnitBaseAttachmentPositionInfo
-  Client::UI::AddonFreeCompanyMemberRankAssign: # 191
+  Client::UI::AddonFreeCompanyMemberRankAssign: # 192
     vtbls:
       - ea: 0x1421446B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14154C9D0: ctor
-  Client::UI::AddonFreeCompanyMemberRankEdit: # 192
+  Client::UI::AddonFreeCompanyMemberRankEdit: # 193
     vtbls:
       - ea: 0x142144908
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14154E7B0: ctor
-  Client::UI::AddonFreeCompanyRights: # 193
+  Client::UI::AddonFreeCompanyRights: # 194
     vtbls:
       - ea: 0x142143FC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141549F80: ctor
-  Client::UI::AddonFreeCompanyInputString: # 194
+  Client::UI::AddonFreeCompanyInputString: # 195
     vtbls:
       - ea: 0x142145000
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415527A0: ctor
-  Client::UI::AddonFreeCompanyMemberRankOrderEdit: # 195
+  Client::UI::AddonFreeCompanyMemberRankOrderEdit: # 196
     vtbls:
       - ea: 0x142144B58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141550B30: ctor
-  Client::UI::AddonConfigPadCalibration: # 196
+  Client::UI::AddonConfigPadCalibration: # 197
     vtbls:
       - ea: 0x1420A5968
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14107CF50: ctor
-  Client::UI::AddonConfigCharacter: # 197
+  Client::UI::AddonConfigCharacter: # 198
     vtbls:
       - ea: 0x1420A5BB8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14107D020: ctor
-  Client::UI::AddonActionCrossEditor: # 198
+  Client::UI::AddonActionCrossEditor: # 199
     vtbls:
       - ea: 0x1420E4468
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14126AD10: ctor
-  Client::UI::AddonLicenseViewer: # 199
+  Client::UI::AddonLicenseViewer: # 200
     vtbls:
       - ea: 0x1420B96C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410FD3A0: ctor
-  Client::UI::AddonWarning: # 200
+  Client::UI::AddonWarning: # 201
     vtbls:
       - ea: 0x1420AACC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410B0070: ctor
-  Client::UI::AddonLobbyScreenText: # 201
+  Client::UI::AddonLobbyScreenText: # 202
     vtbls:
       - ea: 0x14211D078
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14144E080: ctor
-  Client::UI::AddonTitleDataCenter: # 202
+  Client::UI::AddonTitleDataCenter: # 203
     vtbls:
       - ea: 0x1420AAF30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410B01B0: ctor
-  Client::UI::AddonTitleDCWorldMap: # 203
+  Client::UI::AddonTitleDCWorldMap: # 204
     vtbls:
       - ea: 0x1420AB190
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410B3CC0: ctor
-  Client::UI::AddonTitleConnect: # 204
+  Client::UI::AddonTitleConnect: # 205
     vtbls:
       - ea: 0x1420ABAD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410B8A90: ctor
-  Client::UI::AddonContentsInfo: # 205
+  Client::UI::AddonContentsInfo: # 206
     vtbls:
       - ea: 0x1420E46B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14126B120: ctor
-  Client::UI::AddonMovieSubtitleOpening: # 206, inherits from Client::UI::AddonMovieSubtitle
-  Client::UI::AddonCasting: # 207
-  Client::UI::AddonMovieSubtitleVoyage: # 208, inherits from Client::UI::AddonMovieSubtitle
-  Client::UI::AddonMovieSubtitleVer500: # 209
-  Client::UI::AddonAddonPadMouseMode: # 210
+  Client::UI::AddonMovieSubtitleOpening: # 207, inherits from Client::UI::AddonMovieSubtitle
+  Client::UI::AddonCasting: # 208
+  Client::UI::AddonMovieSubtitleVoyage: # 209, inherits from Client::UI::AddonMovieSubtitle
+  Client::UI::AddonMovieSubtitleVer500: # 210
+  Client::UI::AddonAddonPadMouseMode: # 211
     vtbls:
       - ea: 0x1420E4DB8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14126EEA0: ctor
-  Client::UI::AddonCharacterStatus: # 211
+  Client::UI::AddonCharacterStatus: # 212
     vtbls:
       - ea: 0x1420C8150
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonCharacterProfile: # 212
+  Client::UI::AddonCharacterProfile: # 213
     vtbls:
       - ea: 0x1420DB100
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonCharacterClass: # 213
+  Client::UI::AddonCharacterClass: # 214
     vtbls:
       - ea: 0x1420DB350
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141213600: SetTab
-  Client::UI::AddonCharacterCurrency: # 214
-  Client::UI::AddonFreeCompanyActivity: # 215
+  Client::UI::AddonCharacterCurrency: # 215
+  Client::UI::AddonFreeCompanyActivity: # 216
     vtbls:
       - ea: 0x142146F50
         base: Client::UI::AddonFreeCompanyMenuBase
     funcs:
       0x141562F10: ctor
-  Client::UI::AddonFreeCompanyMember: # 216
+  Client::UI::AddonFreeCompanyMember: # 217
     vtbls:
       - ea: 0x1421471F8
         base: Client::UI::AddonFreeCompanyMenuBase
     funcs:
       0x141563D00: ctor
-  Client::UI::AddonFreeCompanyRank: # 217
+  Client::UI::AddonFreeCompanyRank: # 218
     vtbls:
       - ea: 0x1421474A0
         base: Client::UI::AddonFreeCompanyMenuBase
     funcs:
       0x141567D60: ctor
-  Client::UI::AddonFreeCompanyTopics: # 218
+  Client::UI::AddonFreeCompanyTopics: # 219
     vtbls:
       - ea: 0x1421479F0
         base: Client::UI::AddonFreeCompanyMenuBase
     funcs:
       0x14156B0F0: ctor
-  Client::UI::AddonFreeCompanyAction: # 219
+  Client::UI::AddonFreeCompanyAction: # 220
     vtbls:
       - ea: 0x142145748
         base: Client::UI::AddonFreeCompanyMenuBase
     funcs:
       0x141556D60: ctor
-  Client::UI::AddonFreeCompanyStatus: # 220
+  Client::UI::AddonFreeCompanyStatus: # 221
     vtbls:
       - ea: 0x142147748
         base: Client::UI::AddonFreeCompanyMenuBase
     funcs:
       0x1415694E0: ctor
-  Client::UI::AddonFreeCompanyChest: # 221
+  Client::UI::AddonFreeCompanyChest: # 222
     vtbls:
       - ea: 0x142145250
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141552C60: ctor
-  Client::UI::AddonFreeCompanyExchange: # 222
+  Client::UI::AddonFreeCompanyExchange: # 223
     vtbls:
       - ea: 0x1421459F8
         base: Client::UI::AddonFreeCompanyMenuBase
     funcs:
       0x141557C00: ctor
-  Client::UI::AddonColosseumRecord: # 223
+  Client::UI::AddonColosseumRecord: # 224
     vtbls:
       - ea: 0x1420C3C40
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141122960: ctor
-  Client::UI::AddonBuddy: # 224
+  Client::UI::AddonBuddy: # 225
     vtbls:
       - ea: 0x1420E02F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141234F10: ctor
       0x141235FF0: SetTab
-  Client::UI::AddonFreeCompanyProfileEdit: # 225
+  Client::UI::AddonFreeCompanyProfileEdit: # 226
     vtbls:
       - ea: 0x142145CA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415593E0: ctor
-  Client::UI::AddonRetainerHistory: # 226
+  Client::UI::AddonRetainerHistory: # 227
     vtbls:
       - ea: 0x1420C72F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14113D090: ctor
-  Client::UI::AddonBuddyEquipList: # 227
+  Client::UI::AddonBuddyEquipList: # 228
     vtbls:
       - ea: 0x1420E0E88
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14123DEA0: ctor
-  Client::UI::AddonFreeCompanyCrestEditor: # 228
+  Client::UI::AddonFreeCompanyCrestEditor: # 229
     vtbls:
       - ea: 0x142145EF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14155A2A0: ctor
-  Client::UI::AddonFreeCompanyCrestColor: # 229
+  Client::UI::AddonFreeCompanyCrestColor: # 230
     vtbls:
       - ea: 0x142146170
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14155CEC0: ctor
-  Client::UI::AddonFreeCompanyCrestSymbolColor: # 230
+  Client::UI::AddonFreeCompanyCrestSymbolColor: # 231
     vtbls:
       - ea: 0x1421463C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14155E030: ctor
-  Client::UI::AddonConfigPadCustomize: # 231
+  Client::UI::AddonConfigPadCustomize: # 232
     vtbls:
       - ea: 0x1420A97F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410AA170: ctor
-  Client::UI::AddonSynthesisSimpleDialog: # 232
+  Client::UI::AddonSynthesisSimpleDialog: # 233
     vtbls:
       - ea: 0x1420E1A48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14124C390: ctor
-  Client::UI::AddonCreditPlayer: # 233
+  Client::UI::AddonCreditPlayer: # 234
     vtbls:
       - ea: 0x1420A3B58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14105EEA0: ctor
-  Client::UI::AddonCreditScroll: # 234
+  Client::UI::AddonCreditScroll: # 235
     vtbls:
       - ea: 0x1420A3DA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141060FD0: ctor
-  Client::UI::AddonCreditCast: # 235
+  Client::UI::AddonCreditCast: # 236
     vtbls:
       - ea: 0x1420A3FF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141064D80: ctor
-  Client::UI::AddonCreditEnd: # 236
+  Client::UI::AddonCreditEnd: # 237
     vtbls:
       - ea: 0x1420A4248
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141065780: ctor
-  Client::UI::AddonCreditCutCast: # 237
+  Client::UI::AddonCreditCutCast: # 238
     vtbls:
       - ea: 0x1420A4498
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141065CA0: ctor
-  Client::UI::AddonCredit: # 238
+  Client::UI::AddonCredit: # 239
     vtbls:
       - ea: 0x1420A46E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410662E0: ctor
-  Client::UI::AddonRecommendList: # 239
+  Client::UI::AddonRecommendList: # 240
     vtbls:
       - ea: 0x1420E56F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141271840: ctor
-  Client::UI::AddonCatch: # 240
+  Client::UI::AddonCatch: # 241
     vtbls:
       - ea: 0x1420E5948
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141272940: ctor
-  Client::UI::AddonFreeCompanyCrestDecal: # 241
+  Client::UI::AddonFreeCompanyCrestDecal: # 242
     vtbls:
       - ea: 0x142146610
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14155EDB0: ctor
-  Client::UI::AddonFishGuide2: # 242
+  Client::UI::AddonFishGuide2: # 243
     vtbls:
       - ea: 0x1420CAE30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14116EF70: ctor
-  Client::UI::AddonFishGuideFilterSetting: # 243
+  Client::UI::AddonFishGuideFilterSetting: # 244
     vtbls:
       - ea: 0x1420CB080
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141171DE0: ctor
-  Client::UI::AddonFishRecord: # 244
+  Client::UI::AddonFishRecord: # 245
     vtbls:
       - ea: 0x1420CB2D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141172760: ctor
-  Client::UI::AddonFishRelease: # 245
+  Client::UI::AddonFishRelease: # 246
     vtbls:
       - ea: 0x1420EEE18
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B6D50: ctor
-  Client::UI::AddonShopExchangeItem: # 246
+  Client::UI::AddonShopExchangeItem: # 247
     vtbls:
       - ea: 0x1420D7C78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411ECF00: ctor
-  Client::UI::AddonShopExchangeCurrency: # 247
+  Client::UI::AddonShopExchangeCurrency: # 248
     vtbls:
       - ea: 0x1420D7EE8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411EF520: ctor
-  Client::UI::AddonGearSetView: # 248
+  Client::UI::AddonGearSetView: # 249
     vtbls:
       - ea: 0x1420DF2C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412307D0: ctor
-  Client::UI::AddonCutSceneReplay: # 249
+  Client::UI::AddonCutSceneReplay: # 250
     vtbls:
       - ea: 0x1420E5BB8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412730F0: ctor
-  Client::UI::AddonMarker: # 250
-  Client::UI::AddonBait: # 251
+  Client::UI::AddonMarker: # 251
+  Client::UI::AddonBait: # 252
     vtbls:
       - ea: 0x142107AB8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14138BB00: ctor
-  Client::UI::AddonSystemMenu: # 252
-  Client::UI::AddonHousingHarvest: # 253
+  Client::UI::AddonSystemMenu: # 253
+  Client::UI::AddonHousingHarvest: # 254
     vtbls:
       - ea: 0x142137320
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414F4760: ctor
-  Client::UI::AddonHousingConfig: # 254
+  Client::UI::AddonHousingConfig: # 255
     vtbls:
       - ea: 0x142138CC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141500DF0: ctor
-  Client::UI::AddonHousingEditExterior: # 255
+  Client::UI::AddonHousingEditExterior: # 256
     vtbls:
       - ea: 0x142138A70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414FF5F0: ctor
-  Client::UI::AddonHousingEditInterior: # 256
+  Client::UI::AddonHousingEditInterior: # 257
     vtbls:
       - ea: 0x142138820
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414FD890: ctor
-  Client::UI::AddonHousingEditMessage: # 257
+  Client::UI::AddonHousingEditMessage: # 258
     vtbls:
       - ea: 0x1421385D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414FD270: ctor
-  Client::UI::AddonHousingGoods: # 258
+  Client::UI::AddonHousingGoods: # 259
     vtbls:
       - ea: 0x142137ED0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414F9720: ctor
-  Client::UI::AddonHousingSelectBlock: # 259
+  Client::UI::AddonHousingSelectBlock: # 260
     vtbls:
       - ea: 0x142137A10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414F6A30: ctor
-  Client::UI::AddonHousingSelectDeed: # 260
+  Client::UI::AddonHousingSelectDeed: # 261
     vtbls:
       - ea: 0x1421377C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414F5CB0: ctor
-  Client::UI::AddonHousingSignBoard: # 261
+  Client::UI::AddonHousingSignBoard: # 262
     vtbls:
       - ea: 0x142137570
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414F4AC0: ctor
-  Client::UI::AddonHousingMenu: # 262
+  Client::UI::AddonHousingMenu: # 263
     vtbls:
       - ea: 0x14213A3E8
         base: Client::UI::AddonSelectString
     funcs:
       0x141509440: ctor
-  Client::UI::AddonHousingSubmenu: # 263
-  Client::UI::AddonHousingLayout: # 264
+  Client::UI::AddonHousingSubmenu: # 264
+  Client::UI::AddonHousingLayout: # 265
     vtbls:
       - ea: 0x142138380
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414FC510: ctor
-  Client::UI::AddonHousingPadGuide: # 265
+  Client::UI::AddonHousingPadGuide: # 266
     vtbls:
       - ea: 0x142138F10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141501570: ctor
-  Client::UI::AddonPuzzle: # 266
+  Client::UI::AddonPuzzle: # 267
     vtbls:
       - ea: 0x1420D4BA8
         base: Client::UI::AddonMiniGameBase
     funcs:
       0x1411C2E50: ctor
-  Client::UI::AddonNego: # 267
+  Client::UI::AddonNego: # 268
     vtbls:
       - ea: 0x1420D4938
         base: Client::UI::AddonMiniGameBase
     funcs:
       0x1411BE210: ctor
-  Client::UI::AddonFreeCompanyChestLog: # 268
+  Client::UI::AddonFreeCompanyChestLog: # 269
     vtbls:
       - ea: 0x142146860
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141560600: ctor
-  Client::UI::AddonContextMenuTitle: # 269
+  Client::UI::AddonAddonContextMenuTitle: # 270
     vtbls:
       - ea: 0x1420A07B0
         base: Client::UI::AddonContextMenu
-  Client::UI::AddonBuddyInspect: # 270
+  Client::UI::AddonBuddyInspect: # 271
     vtbls:
       - ea: 0x1420E54A8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141270F90: ctor
-  Client::UI::AddonLookingForGroup: # 271
+  Client::UI::AddonLookingForGroup: # 272
     vtbls:
       - ea: 0x1421400C0
         base: Client::UI::AddonLookingForGroupBase
     funcs:
       0x141531C90: ctor
-  Client::UI::AddonLookingForGroupDetail: # 272
+  Client::UI::AddonLookingForGroupDetail: # 273
     vtbls:
       - ea: 0x142140310
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415339B0: ctor
-  Client::UI::AddonLookingForGroupCondition: # 273
+  Client::UI::AddonLookingForGroupCondition: # 274
     vtbls:
       - ea: 0x142140560
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415359E0: ctor
-  Client::UI::AddonLookingForGroupSearch: # 274, inherits from Client::UI::AddonLookingForGroupCondition
-  Client::UI::AddonLookingForGroupSelectRole: # 275
+  Client::UI::AddonLookingForGroupSearch: # 275, inherits from Client::UI::AddonLookingForGroupCondition
+  Client::UI::AddonLookingForGroupSelectRole: # 276
     vtbls:
       - ea: 0x142140A20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14153D070: ctor
-  Client::UI::AddonCharacterRepute: # 276
+  Client::UI::AddonCharacterRepute: # 277
     vtbls:
       - ea: 0x1420DB5A0
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonPvpProfile: # 277
+  Client::UI::AddonPvpProfile: # 278
     vtbls:
       - ea: 0x1420DC890
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14121D610: ctor
-  Client::UI::AddonPvpProfileAction: # 278
+  Client::UI::AddonPvpProfileAction: # 279
     vtbls:
       - ea: 0x1420DCAE0
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonPvpProfileColosseum: # 279
+  Client::UI::AddonPvpProfileColosseum: # 280
     vtbls:
       - ea: 0x1420DCD50
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonTreasureMap: # 280
+  Client::UI::AddonTreasureMap: # 281
     vtbls:
       - ea: 0x1420E6058
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141276300: ctor
-  Client::UI::AddonEmote: # 281
+  Client::UI::AddonEmote: # 282
     vtbls:
       - ea: 0x1420E62C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412768D0: ctor
-  Client::UI::AddonEmoteStatusHelp: # 282
+  Client::UI::AddonEmoteStatusHelp: # 283
     vtbls:
       - ea: 0x1420E6518
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14127B480: ctor
-  Client::UI::AddonVoteMvp: # 283
+  Client::UI::AddonVoteMvp: # 284
     vtbls:
       - ea: 0x1420DE738
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14122CED0: ctor
-  Client::UI::AddonVoteKick: # 284
+  Client::UI::AddonVoteKick: # 285
     vtbls:
       - ea: 0x1420DE988
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14122DA90: ctor
-  Client::UI::AddonVoteKickReply: # 285
+  Client::UI::AddonVoteKickReply: # 286
     vtbls:
       - ea: 0x1420DEBD8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14122DEE0: ctor
-  Client::UI::AddonVoteTreasure: # 286
+  Client::UI::AddonVoteTreasure: # 287
     vtbls:
       - ea: 0x1420DEE28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14122E2A0: ctor
-  Client::UI::AddonAllianceMemberList: # 287
+  Client::UI::AddonAllianceMemberList: # 288
     vtbls:
       - ea: 0x142140C70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14153EA50: ctor
-  Client::UI::AddonAlliance48: # 288
+  Client::UI::AddonAlliance48: # 289
     vtbls:
       - ea: 0x1420EE978
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B5CE0: ctor
-  Client::UI::AddonHousingTravellersNote: # 289
+  Client::UI::AddonHousingTravellersNote: # 290
     vtbls:
       - ea: 0x142139160
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141501770: ctor
-  Client::UI::AddonReadyCheck: # 290
+  Client::UI::AddonReadyCheck: # 291
     vtbls:
       - ea: 0x142140EC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14153F1F0: ctor
-  Client::UI::AddonFreeCompanyInputMessage: # 291
+  Client::UI::AddonFreeCompanyInputMessage: # 292
     vtbls:
       - ea: 0x142144DA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415521C0: ctor
-  Client::UI::AddonHousingGardening: # 292
+  Client::UI::AddonHousingGardening: # 293
     vtbls:
       - ea: 0x142137C60
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414F8370: ctor
-  Client::UI::AddonContentsNote: # 293
+  Client::UI::AddonContentsNote: # 294
     vtbls:
       - ea: 0x1420CB540
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141173790: ctor
-  Client::UI::AddonContentsInfoDetail: # 294
+  Client::UI::AddonContentsInfoDetail: # 295
     vtbls:
       - ea: 0x1420E4908
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14126C700: ctor
-  Client::UI::AddonLetterHistory: # 295
+  Client::UI::AddonLetterHistory: # 296
     vtbls:
       - ea: 0x142141608
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415408F0: ctor
-  Client::UI::AddonFieldMarker: # 296
+  Client::UI::AddonFieldMarker: # 297
     vtbls:
       - ea: 0x1420EDD88
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412AF010: ctor
-  Client::UI::AddonCursorLocation: # 297
+  Client::UI::AddonCursorLocation: # 298
     vtbls:
       - ea: 0x14209EB48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141048B80: ctor
-  Client::UI::AddonRetainerCharacter: # 298
+  Client::UI::AddonRetainerCharacter: # 299
     vtbls:
       - ea: 0x1420C83A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411489B0: ctor
-  Client::UI::AddonRetainerTaskList: # 299
+  Client::UI::AddonRetainerTaskList: # 300
     vtbls:
       - ea: 0x1420C85F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14114A8F0: ctor
-  Client::UI::AddonRetainerTaskAsk: # 300
+  Client::UI::AddonRetainerTaskAsk: # 301
     vtbls:
       - ea: 0x1420C8A90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14114DDB0: ctor
-  Client::UI::AddonRetainerTaskSupply: # 301
+  Client::UI::AddonRetainerTaskSupply: # 302
     vtbls:
       - ea: 0x1420C8840
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14114BF40: ctor
-  Client::UI::AddonRetainerTaskResult: # 302
+  Client::UI::AddonRetainerTaskResult: # 303
     vtbls:
       - ea: 0x1420C8CE0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14114E4E0: ctor
-  Client::UI::AddonRetainerItemTransferList: # 303
+  Client::UI::AddonRetainerItemTransferList: # 304
     vtbls:
       - ea: 0x1420C9620
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411513F0: ctor
-  Client::UI::AddonRetainerItemTransferProgress: # 304
+  Client::UI::AddonRetainerItemTransferProgress: # 305
     vtbls:
       - ea: 0x1420C9870
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141151A60: ctor
-  Client::UI::AddonRelicGlass: # 305
+  Client::UI::AddonRelicGlass: # 306
     vtbls:
       - ea: 0x1420E7118
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14127E550: ctor
-  Client::UI::AddonRelicMagicite: # 306
+  Client::UI::AddonRelicMagicite: # 307
     vtbls:
       - ea: 0x1420E6EC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14127DE90: ctor
-  Client::UI::AddonRelicSphereScroll: # 307
+  Client::UI::AddonRelicSphereScroll: # 308
     vtbls:
       - ea: 0x1420E7368
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14127EDA0: ctor
-  Client::UI::AddonRelicNoteBook: # 308
+  Client::UI::AddonRelicNoteBook: # 309
     vtbls:
       - ea: 0x1420CB790
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141174E30: ctor
-  Client::UI::AddonTryon: # 309 aka MiragePrismMiragePlate, FittingRoom
+  Client::UI::AddonTryon: # 310 aka MiragePrismMiragePlate, FittingRoom
     vtbls:
       - ea: 0x1420E6768
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14127B5A0: ctor
-  Client::UI::AddonTryonGlassesSelect: # 310
+  Client::UI::AddonTryonGlassesSelect: # 311
     vtbls:
       - ea: 0x1420E6A28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14127C650: ctor
-  Client::UI::AddonTradeMultiple: # 311
+  Client::UI::AddonTradeMultiple: # 312
     vtbls:
       - ea: 0x1420E6C78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14127CB50: ctor
-  Client::UI::AddonMacroTextCommandList: # 312
+  Client::UI::AddonMacroTextCommandList: # 313
     vtbls:
       - ea: 0x1420D9FD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141209320: ctor
-  Client::UI::AddonRelicSphereUpgrade: # 313
+  Client::UI::AddonRelicSphereUpgrade: # 314
     vtbls:
       - ea: 0x1420E75B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141280460: ctor
-  Client::UI::AddonRegistGearSetList: # 314
+  Client::UI::AddonRegistGearSetList: # 315
     vtbls:
       - ea: 0x1420DF518
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141231400: ctor
-  Client::UI::AddonPvpProfileFrontline: # 315
+  Client::UI::AddonPvpProfileFrontline: # 316
     vtbls:
       - ea: 0x1420DCFC0
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonAdventureNoteBook: # 316
+  Client::UI::AddonAdventureNoteBook: # 317
     vtbls:
       - ea: 0x1420CB9E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141176910: ctor
-  Client::UI::AddonArmouryNoteBook: # 317
+  Client::UI::AddonArmouryNoteBook: # 318
     vtbls:
       - ea: 0x1420CBE80
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141179B00: ctor
-  Client::UI::AddonInventoryLarge: # 318
+  Client::UI::AddonInventoryLarge: # 319
     vtbls:
       - ea: 0x1420C6450
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x141134F10: ctor
       0x141136260: SetTab
-  Client::UI::AddonHousingSelectRoom: # 319
+  Client::UI::AddonHousingSelectRoom: # 320
     vtbls:
       - ea: 0x1421393B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141501FE0: ctor
-  Client::UI::AddonSalvageItemSelector: # 320
+  Client::UI::AddonSalvageItemSelector: # 321
     vtbls:
       - ea: 0x1420DF9B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141232AA0: ctor
-  Client::UI::AddonMinionNoteBook: # 321
+  Client::UI::AddonMinionNoteBook: # 322
     vtbls:
       - ea: 0x1420CC3B8
         base: Client::UI::AddonMinionMountBase
     funcs:
       0x141180580: ctor
-  Client::UI::AddonMountNoteBook: # 322
+  Client::UI::AddonMountNoteBook: # 323
     vtbls:
       - ea: 0x1420CC6A0
         base: Client::UI::AddonMinionMountBase
     funcs:
       0x141182530: ctor
-  Client::UI::AddonInventoryRetainerLarge: # 323
+  Client::UI::AddonInventoryRetainerLarge: # 324
     vtbls:
       - ea: 0x1420C7C70
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x1411413A0: ctor
       0x141142550: SetTab
-  Client::UI::AddonShopExchangeItemDialog: # 324
+  Client::UI::AddonShopExchangeItemDialog: # 325
     vtbls:
       - ea: 0x1420D8388
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411F24A0: ctor
-  Client::UI::AddonSalvageDialog: # 325
+  Client::UI::AddonSalvageDialog: # 326
     vtbls:
       - ea: 0x1420DFE58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141233F50: ctor
-  Client::UI::AddonSalvageAutoDialog: # 326
+  Client::UI::AddonSalvageAutoDialog: # 327
     vtbls:
       - ea: 0x1420DFC08
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141233700: ctor
-  Client::UI::AddonSalvageResult: # 327
+  Client::UI::AddonSalvageResult: # 328
     vtbls:
       - ea: 0x1420E00A8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141234920: ctor
-  Client::UI::AddonMobHunt: # 328
+  Client::UI::AddonMobHunt: # 329
     vtbls:
       - ea: 0x1420D3360
         base: Client::UI::AddonMobHuntBase
     funcs:
       0x1411B3C70: ctor
-  Client::UI::AddonMobHunt2: # 329
+  Client::UI::AddonMobHunt2: # 330
     vtbls:
       - ea: 0x1420D30F8
         base: Client::UI::AddonMobHuntBase
     funcs:
       0x1411B37F0: ctor
-  Client::UI::AddonMobHunt3: # 330
+  Client::UI::AddonMobHunt3: # 331
     vtbls:
       - ea: 0x1420D2E90
         base: Client::UI::AddonMobHuntBase
     funcs:
       0x1411B3370: ctor
-  Client::UI::AddonMobHunt4: # 331
+  Client::UI::AddonMobHunt4: # 332
     vtbls:
       - ea: 0x1420D2C28
         base: Client::UI::AddonMobHuntBase
     funcs:
       0x1411B2EF0: ctor
-  Client::UI::AddonMobHunt5: # 332
+  Client::UI::AddonMobHunt5: # 333
     vtbls:
       - ea: 0x1420D29C0
         base: Client::UI::AddonMobHuntBase
     funcs:
       0x1411B2A90: ctor
-  Client::UI::AddonMobHunt6: # 333
+  Client::UI::AddonMobHunt6: # 334
     vtbls:
       - ea: 0x1420D2758
         base: Client::UI::AddonMobHuntBase
     funcs:
       0x1411B2630: ctor
-  Client::UI::AddonCharacterSalvage: # 334
+  Client::UI::AddonCharacterSalvage: # 335
     vtbls:
       - ea: 0x1420DB7F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141214630: ctor
-  Client::UI::AddonSelectOkTitle: # 335
+  Client::UI::AddonSelectOkTitle: # 336
     vtbls:
       - ea: 0x1420A1F40
         base: Client::UI::AddonSelectOk
-  Client::UI::AddonHousingChocoboList: # 336
+  Client::UI::AddonHousingChocoboList: # 337
     vtbls:
       - ea: 0x142139608
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141503300: ctor
-  Client::UI::AddonBuddyAction: # 337
+  Client::UI::AddonBuddyAction: # 338
     vtbls:
       - ea: 0x1420E0798
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonBuddyAppearance: # 338
+  Client::UI::AddonBuddyAppearance: # 339
     vtbls:
       - ea: 0x1420E09E8
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonBuddySkill: # 339
+  Client::UI::AddonBuddySkill: # 340
     vtbls:
       - ea: 0x1420E0C38
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonTeleport: # 340
+  Client::UI::AddonTeleport: # 341
     vtbls:
       - ea: 0x1420E7828
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141280D80: ctor
-  Client::UI::AddonTeleportSetting: # 341
+  Client::UI::AddonTeleportSetting: # 342
     vtbls:
       - ea: 0x1420E7A78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141283510: ctor
-  Client::UI::AddonTeleportTown: # 342
+  Client::UI::AddonTeleportTown: # 343
     vtbls:
       - ea: 0x142106818
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141380770: ctor
-  Client::UI::AddonDailyQuestSupply: # 343
+  Client::UI::AddonDailyQuestSupply: # 344
     vtbls:
       - ea: 0x1420E5008
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14126F040: ctor
-  Client::UI::AddonHousingWithdrawStorage: # 344
+  Client::UI::AddonHousingWithdrawStorage: # 345
     vtbls:
       - ea: 0x142139858
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141504C90: ctor
-  Client::UI::AddonWeatherReport: # 345
+  Client::UI::AddonWeatherReport: # 346
     vtbls:
       - ea: 0x1420E7F38
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141284420: ctor
-  Client::UI::AddonHousingMyChocobo: # 346
-  Client::UI::AddonWedding: # 347
+  Client::UI::AddonHousingMyChocobo: # 347
+  Client::UI::AddonWedding: # 348
     vtbls:
       - ea: 0x1420E8188
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141286490: ctor
-  Client::UI::AddonLoadingTips: # 348
+  Client::UI::AddonLoadingTips: # 349
     vtbls:
       - ea: 0x1420E8638
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141288810: ctor
-  Client::UI::AddonLetterAddress: # 349
+  Client::UI::AddonLetterAddress: # 350
     vtbls:
       - ea: 0x142141858
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141541410: ctor
-  Client::UI::AddonFriendGroupEdit: # 350
+  Client::UI::AddonFriendGroupEdit: # 351
     vtbls:
       - ea: 0x142141AA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141542020: ctor
-  Client::UI::AddonGoldSaucerReward: # 351
+  Client::UI::AddonGoldSaucerReward: # 352
     vtbls:
       - ea: 0x142158630
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415D36C0: ctor
-  Client::UI::AddonPunchingMachine: # 352
+  Client::UI::AddonPunchingMachine: # 353
     vtbls:
       - ea: 0x14214DAB0
         base: Client::UI::AddonGoldSaucerMiniGameBase
     funcs:
       0x14159CDD0: ctor
-  Client::UI::AddonBasketBall: # 353
+  Client::UI::AddonBasketBall: # 354
     vtbls:
       - ea: 0x14214DD38
         base: Client::UI::AddonGoldSaucerMiniGameBase
     funcs:
       0x14159D080: ctor
-  Client::UI::AddonHummer: # 354
+  Client::UI::AddonHummer: # 355
     vtbls:
       - ea: 0x14214DFB0
         base: Client::UI::AddonGoldSaucerMiniGameBase
     funcs:
       0x14159D440: ctor
-  Client::UI::AddonUfoCatcher: # 355
+  Client::UI::AddonUfoCatcher: # 356
     vtbls:
       - ea: 0x14214E228
         base: Client::UI::AddonGoldSaucerMiniGameBase
     funcs:
       0x14159D5F0: ctor
-  Client::UI::AddonBalloonMessage: # 356
+  Client::UI::AddonBalloonMessage: # 357
     vtbls:
       - ea: 0x14214E4A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14159E480: ctor
-  Client::UI::AddonTripleTriad: # 357
+  Client::UI::AddonTripleTriad: # 358
     vtbls:
       - ea: 0x14214F388
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A1160: ctor
-  Client::UI::AddonTripleTriadRequest: # 358
+  Client::UI::AddonTripleTriadRequest: # 359
     vtbls:
       - ea: 0x14214F5D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A5400: ctor
-  Client::UI::AddonTripleTriadResult: # 359
+  Client::UI::AddonTripleTriadResult: # 360
     vtbls:
       - ea: 0x14214F828
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A6830: ctor
-  Client::UI::AddonTripleTriadRuleAnnounce: # 360
+  Client::UI::AddonTripleTriadRuleAnnounce: # 361
     vtbls:
       - ea: 0x142150858
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A9A30: ctor
-  Client::UI::AddonTripleTriadRuleSetting: # 361
+  Client::UI::AddonTripleTriadRuleSetting: # 362
     vtbls:
       - ea: 0x142150AA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A9B20: ctor
-  Client::UI::AddonTripleTriadPickUpDeckSelect: # 362
+  Client::UI::AddonTripleTriadPickUpDeckSelect: # 363
     vtbls:
       - ea: 0x142150CF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415AA030: ctor
-  Client::UI::AddonTripleTriadDeckConfirmation: # 363
+  Client::UI::AddonTripleTriadDeckConfirmation: # 364
     vtbls:
       - ea: 0x142150F48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415AAC00: ctor
-  Client::UI::AddonLotteryDaily: # 364
+  Client::UI::AddonLotteryDaily: # 365
     vtbls:
       - ea: 0x142158880
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415D3D50: ctor
-  Client::UI::AddonAetherialWheel: # 365
+  Client::UI::AddonAetherialWheel: # 366
     vtbls:
       - ea: 0x142139AA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141505760: ctor
-  Client::UI::AddonGoldSaucerInfo: # 366
+  Client::UI::AddonGoldSaucerInfo: # 367
     vtbls:
       - ea: 0x142151F78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415AFD70: ctor
-  Client::UI::AddonGSInfoEditDeck: # 367
+  Client::UI::AddonGSInfoEditDeck: # 368
     vtbls:
       - ea: 0x142153448
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415B6310: ctor
-  Client::UI::AddonGSInfoCardFilter: # 368
+  Client::UI::AddonGSInfoCardFilter: # 369
     vtbls:
       - ea: 0x142153698
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415B8F70: ctor
-  Client::UI::AddonTripleTriadCoinExchange: # 369
+  Client::UI::AddonTripleTriadCoinExchange: # 370
     vtbls:
       - ea: 0x14214FA78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A7170: ctor
-  Client::UI::AddonLotteryWeeklyInput: # 370
+  Client::UI::AddonLotteryWeeklyInput: # 371
     vtbls:
       - ea: 0x1421538E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415BA700: ctor
-  Client::UI::AddonLotteryWeeklyHistory: # 371
+  Client::UI::AddonLotteryWeeklyHistory: # 372
     vtbls:
       - ea: 0x142153B58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415BB370: ctor
-  Client::UI::AddonLotteryWeeklyRewardList: # 372
+  Client::UI::AddonLotteryWeeklyRewardList: # 373
     vtbls:
       - ea: 0x142153DA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415BC210: ctor
-  Client::UI::AddonChocoboRace: # 373
+  Client::UI::AddonChocoboRace: # 374
     vtbls:
       - ea: 0x1421562C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415C5C10: ctor
-  Client::UI::AddonRaceChocoboResult: # 374
+  Client::UI::AddonRaceChocoboResult: # 375
     vtbls:
       - ea: 0x142155968
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415C3260: ctor
-  Client::UI::AddonRaceChocoboStatus: # 375
+  Client::UI::AddonRaceChocoboStatus: # 376
     vtbls:
       - ea: 0x142154DD8
         base: Client::UI::AddonGoldSaucerGameStatusBase
     funcs:
       0x1415C2830: ctor
-  Client::UI::AddonRaceChocoboConfirm: # 376
+  Client::UI::AddonRaceChocoboConfirm: # 377
     vtbls:
       - ea: 0x142155718
         base: Client::UI::AddonGoldSaucerGameConfirmBase
     funcs:
       0x1415C30D0: ctor
-  Client::UI::AddonRaceChocoboReady: # 377
+  Client::UI::AddonRaceChocoboReady: # 378
     vtbls:
       - ea: 0x142155278
         base: Client::UI::AddonGoldSaucerGameReadyBase
     funcs:
       0x1415C2B80: ctor
-  Client::UI::AddonChocoboBreedCoupling: # 378
+  Client::UI::AddonChocoboBreedCoupling: # 379
     vtbls:
       - ea: 0x142153FF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415BCF60: ctor
-  Client::UI::AddonChocoboBreedNaming: # 379
+  Client::UI::AddonChocoboBreedNaming: # 380
     vtbls:
       - ea: 0x142154248
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415BEC60: ctor
-  Client::UI::AddonChocoboBreedNamingList: # 380
+  Client::UI::AddonChocoboBreedNamingList: # 381
     vtbls:
       - ea: 0x142154498
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415BF960: ctor
-  Client::UI::AddonChocoboBreedAbility: # 381
+  Client::UI::AddonChocoboBreedAbility: # 382
     vtbls:
       - ea: 0x1421546E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415C0C40: ctor
-  Client::UI::AddonChocoboBreedTraining: # 382
+  Client::UI::AddonChocoboBreedTraining: # 383
     vtbls:
       - ea: 0x142154938
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415C1CD0: ctor
-  Client::UI::AddonTripleTriadSelDeck: # 383
+  Client::UI::AddonTripleTriadSelDeck: # 384
     vtbls:
       - ea: 0x14214FCC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A79B0: ctor
-  Client::UI::AddonTripleTriadRanking: # 384
+  Client::UI::AddonTripleTriadRanking: # 385
     vtbls:
       - ea: 0x14214FF18
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A7F90: ctor
-  Client::UI::AddonShopCardDialog: # 385
+  Client::UI::AddonShopCardDialog: # 386
     vtbls:
       - ea: 0x1421503B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A89E0: ctor
-  Client::UI::AddonShopExchangeCoin: # 386
+  Client::UI::AddonShopExchangeCoin: # 387
     vtbls:
       - ea: 0x142156510
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415C5C90: ctor
-  Client::UI::AddonTripleTriadRule: # 387
+  Client::UI::AddonTripleTriadRule: # 388
     vtbls:
       - ea: 0x142150168
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A8680: ctor
-  Client::UI::AddonTripleTriadPlayerInfo: # 388
+  Client::UI::AddonTripleTriadPlayerInfo: # 389
     vtbls:
       - ea: 0x142151198
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415AB2E0: ctor
-  Client::UI::AddonTripleTriadSchedule: # 389
+  Client::UI::AddonTripleTriadSchedule: # 390
     vtbls:
       - ea: 0x142150608
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415A9020: ctor
-  Client::UI::AddonTournamentRanking: # 390
+  Client::UI::AddonTournamentRanking: # 391
     vtbls:
       - ea: 0x1421513E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415AB700: ctor
-  Client::UI::AddonTripleTriadTournamentReward: # 392
+  Client::UI::AddonTripleTriadTournamentResult: # 392
+    vtbls:
+      - ea: 0x142151638
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1415AC630: ctor
+  Client::UI::AddonTripleTriadTournamentReward: # 393
     vtbls:
       - ea: 0x142151888
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415AE6D0: ctor
-  Client::UI::AddonTripleTriadTournamentMatchList: # 393
+  Client::UI::AddonTripleTriadTournamentMatchList: # 394
     vtbls:
       - ea: 0x142151AD8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415AF1E0: ctor
-  Client::UI::AddonTripleTriadTournamentMLReport: # 394
+  Client::UI::AddonTripleTriadTournamentMLReport: # 395
     vtbls:
       - ea: 0x142151D28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415AFA00: ctor
-  Client::UI::AddonHousingDimmingMenu: # 395
+  Client::UI::AddonHousingDimmingMenu: # 396
     vtbls:
       - ea: 0x142139CF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141507030: ctor
-  Client::UI::AddonCompanyCraftRecipeNoteBook: # 396
+  Client::UI::AddonCompanyCraftRecipeNoteBook: # 397
     vtbls:
       - ea: 0x142147C98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14156CB60: ctor
-  Client::UI::AddonAirShipPartsMenu: # 397
+  Client::UI::AddonAirShipPartsMenu: # 398
     vtbls:
       - ea: 0x142147EE8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14156F7E0: ctor
-  Client::UI::AddonAirShipExploration: # 398
+  Client::UI::AddonAirShipExploration: # 399
     vtbls:
       - ea: 0x142148138
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415712A0: ctor
       0x141572770: UpdateListItem
-  Client::UI::AddonAirShipExplorationResult: # 399
+  Client::UI::AddonAirShipExplorationResult: # 400
     vtbls:
       - ea: 0x142148608
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141573780: ctor
-  Client::UI::AddonAirShipExplorationDetail: # 400
+  Client::UI::AddonAirShipExplorationDetail: # 401
     vtbls:
       - ea: 0x1421483B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141572FC0: ctor
-  Client::UI::AddonCompanyCraftSupply: # 401
+  Client::UI::AddonCompanyCraftSupply: # 402
     vtbls:
       - ea: 0x142148B38
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141575790: ctor
-  Client::UI::AddonSubmarinePartsMenu: # 402
+  Client::UI::AddonSubmarinePartsMenu: # 403
     vtbls:
       - ea: 0x1421488E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141574940: ctor
-  Client::UI::AddonAetherCurrent: # 403
+  Client::UI::AddonAetherCurrent: # 404
     vtbls:
       - ea: 0x1420E8888
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141288F90: ctor
       0x141289C00: SetTab
-  Client::UI::AddonFreeCompanyCreditShop: # 404
+  Client::UI::AddonFreeCompanyCreditShop: # 405
     vtbls:
       - ea: 0x142146AB0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141561050: ctor
-  Client::UI::AddonCurrency: # 405
+  Client::UI::AddonCurrency: # 406
     vtbls:
       - ea: 0x1420DBEE0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412171B0: ctor
-  Client::UI::AddonCurrencySetting: # 406
+  Client::UI::AddonCurrencySetting: # 407
     vtbls:
       - ea: 0x142106A68
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141385BC0: ctor
-  Client::UI::AddonPurifyItemSelector: # 407
+  Client::UI::AddonPurifyItemSelector: # 408
     vtbls:
       - ea: 0x142114260
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14140EBB0: ctor
-  Client::UI::AddonPurifyDialog: # 408
+  Client::UI::AddonPurifyDialog: # 409
     vtbls:
       - ea: 0x1421144B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14140F510: ctor
-  Client::UI::AddonPurifyResult: # 409
+  Client::UI::AddonPurifyResult: # 410
     vtbls:
       - ea: 0x142114700
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14140FDF0: ctor
-  Client::UI::AddonPurifyAutoDialog: # 410
+  Client::UI::AddonPurifyAutoDialog: # 411
     vtbls:
       - ea: 0x142114950
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141410490: ctor
-  Client::UI::AddonGatheringMasterpiece: # 411
+  Client::UI::AddonGatheringMasterpiece: # 412
     vtbls:
       - ea: 0x142113DC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14140A810: ctor
-  Client::UI::AddonFrontlineRecord: # 412
+  Client::UI::AddonFrontlineRecord: # 413
     vtbls:
       - ea: 0x1420C3E90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411250C0: ctor
-  Client::UI::AddonFrontlineRecordDetail: # 413
+  Client::UI::AddonFrontlineRecordDetail: # 414
     vtbls:
       - ea: 0x1420C40E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141128100: ctor
-  Client::UI::AddonConcentration: # 414
+  Client::UI::AddonConcentration: # 415
     vtbls:
       - ea: 0x1420D4E18
         base: Client::UI::AddonMiniGameBase
     funcs:
       0x1411C52B0: ctor
-  Client::UI::AddonJigsawToyBox: # 415
+  Client::UI::AddonJigsawToyBox: # 416
     vtbls:
       - ea: 0x1420D5368
         base: Client::UI::AddonJigsawBase
     funcs:
       0x1411C8720: ctor
-  Client::UI::AddonJigsawEvent: # 416
+  Client::UI::AddonJigsawEvent: # 417
     vtbls:
       - ea: 0x1420D56C0
         base: Client::UI::AddonJigsawBase
     funcs:
       0x1411CCF40: ctor
-  Client::UI::AddonHousingMate: # 417
+  Client::UI::AddonHousingMate: # 418
     vtbls:
       - ea: 0x142139F48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415076E0: ctor
-  Client::UI::AddonCharacterTitle: # 418
+  Client::UI::AddonCharacterTitle: # 419
     vtbls:
       - ea: 0x1420DBA40
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141214B00: ctor
-  Client::UI::AddonCharacterTitleSelect: # 419
-  Client::UI::AddonHousingMateAuthority: # 420
+  Client::UI::AddonCharacterTitleSelect: # 420
+  Client::UI::AddonHousingMateAuthority: # 421
     vtbls:
       - ea: 0x14213A198
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141508FF0: ctor
-  Client::UI::AddonHousingSelectHouse: # 421
-  Client::UI::AddonHudMinionBattle: # 422
+  Client::UI::AddonHousingSelectHouse: # 422
+  Client::UI::AddonHudMinionBattle: # 423
     vtbls:
       - ea: 0x142156760
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415C6140: ctor
-  Client::UI::AddonLovmPalette: # 423
+  Client::UI::AddonLovmPalette: # 424
     vtbls:
       - ea: 0x142156C40
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415C8260: ctor
-  Client::UI::AddonLovmPartyList: # 424
+  Client::UI::AddonLovmPartyList: # 425
     vtbls:
       - ea: 0x142156E98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415C9FF0: ctor
-  Client::UI::AddonLovmQueueList: # 425
+  Client::UI::AddonLovmQueueList: # 426
     vtbls:
       - ea: 0x142157100
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415CAAD0: ctor
-  Client::UI::AddonLovmTypeInfo: # 426
+  Client::UI::AddonLovmTypeInfo: # 427
     vtbls:
       - ea: 0x142157350
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415CBF80: ctor
-  Client::UI::AddonLovmHelp: # 427
+  Client::UI::AddonLovmHelp: # 428
     vtbls:
       - ea: 0x1421575B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415CC520: ctor
-  Client::UI::AddonLovmRanking: # 428
-  Client::UI::AddonLovmNamePlate: # 429
+  Client::UI::AddonLovmRanking: # 429
+  Client::UI::AddonLovmNamePlate: # 430
     vtbls:
       - ea: 0x142157A70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415CD3D0: ctor
-  Client::UI::AddonLovmResult: # 430
+  Client::UI::AddonLovmResult: # 431
     vtbls:
       - ea: 0x142157CC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415CE870: ctor
-  Client::UI::AddonLovmMiniMap: # 431
+  Client::UI::AddonLovmMiniMap: # 432
     vtbls:
       - ea: 0x142157F10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415CF040: ctor
-  Client::UI::AddonLovmStatus: # 432
+  Client::UI::AddonLovmStatus: # 433
     vtbls:
       - ea: 0x142158AD0
         base: Client::UI::AddonGoldSaucerGameStatusBase
     funcs:
       0x1415D5760: ctor
-  Client::UI::AddonLovmConfirm: # 433
+  Client::UI::AddonLovmConfirm: # 434
     vtbls:
       - ea: 0x142158D20
         base: Client::UI::AddonGoldSaucerGameConfirmBase
     funcs:
       0x1415D5910: ctor
-  Client::UI::AddonLovmReady: # 434
+  Client::UI::AddonLovmReady: # 435
     vtbls:
       - ea: 0x142158F70
         base: Client::UI::AddonGoldSaucerGameReadyBase
     funcs:
       0x1415D5B60: ctor
-  Client::UI::AddonLovmActionDetail: # 435
+  Client::UI::AddonLovmActionDetail: # 436
     vtbls:
       - ea: 0x1421583B0
         base: Client::UI::AddonActionDetailBase
@@ -18561,1012 +18573,1024 @@ classes:
         base: Component::GUI::AtkManagedInterface
     funcs:
       0x1415D2CB0: ctor
-  Client::UI::AddonLovmPaletteEdit: # 436
+  Client::UI::AddonLovmPaletteEdit: # 437
     vtbls:
       - ea: 0x142158160
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415D04A0: ctor
-  Client::UI::AddonMiniGameMiner: # 437
+  Client::UI::AddonMiniGameMiner: # 438
     vtbls:
       - ea: 0x14214E978
         base: Client::UI::AddonGoldSaucerGatheringMiniGameBase
     funcs:
       0x14159EFE0: ctor
-  Client::UI::AddonMiniGameBotanist: # 438
+  Client::UI::AddonMiniGameBotanist: # 439
     vtbls:
       - ea: 0x14214EC10
         base: Client::UI::AddonGoldSaucerGatheringMiniGameBase
     funcs:
       0x14159F210: ctor
-  Client::UI::AddonMiniGameAimg: # 439
+  Client::UI::AddonMiniGameAimg: # 440
     vtbls:
       - ea: 0x14214EEA8
         base: Client::UI::AddonGoldSaucerMiniGameBase
     funcs:
       0x14159F4A0: ctor
-  Client::UI::AddonMiniGamePhaseMessage: # 440
+  Client::UI::AddonMiniGamePhaseMessage: # 441
     vtbls:
       - ea: 0x14214F120
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14159FAE0: ctor
-  Client::UI::AddonSkyIslandFinder: # 441
+  Client::UI::AddonSkyIslandFinder: # 442
     vtbls:
       - ea: 0x1420EF088
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B77B0: ctor
-  Client::UI::AddonSkyIslandFinderSetting: # 442
+  Client::UI::AddonSkyIslandFinderSetting: # 443
     vtbls:
       - ea: 0x1420EF2D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B93E0: ctor
-  Client::UI::AddonSkyIslandResult: # 443
+  Client::UI::AddonSkyIslandResult: # 444
     vtbls:
       - ea: 0x1420EF528
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BA370: ctor
-  Client::UI::AddonSkyIslandExchange: # 444
+  Client::UI::AddonSkyIslandExchange: # 445
     vtbls:
       - ea: 0x1420EF778
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BAAD0: ctor
-  Client::UI::AddonSkyIsland2Result: # 445
+  Client::UI::AddonSkyIsland2Result: # 446
     vtbls:
       - ea: 0x1420EF9C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BBA30: ctor
-  Client::UI::AddonHousingGoodsStain: # 446
+  Client::UI::AddonHousingGoodsStain: # 447
     vtbls:
       - ea: 0x142138128
         base: Client::UI::AddonHousingGoods
     funcs:
       0x1414FC390: ctor
-  Client::UI::AddonItemContextCustomize: # 447
+  Client::UI::AddonItemContextCustomize: # 448
     vtbls:
       - ea: 0x1420E8AD8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141289DA0: ctor
-  Client::UI::AddonBeginnersMansionProblem: # 448
+  Client::UI::AddonBeginnersMansionProblem: # 449
     vtbls:
       - ea: 0x1420EFC18
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BC170: ctor
-  Client::UI::AddonBeginnersMansionProblemCompList: # 449
+  Client::UI::AddonBeginnersMansionProblemCompList: # 450
     vtbls:
       - ea: 0x1420EFE68
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BD4A0: ctor
-  Client::UI::AddonBeginnersMansionTutorial: # 450
+  Client::UI::AddonBeginnersMansionTutorial: # 451
     vtbls:
       - ea: 0x1420F00C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BDE30: ctor
-  Client::UI::AddonDpsChallengeList: # 451
+  Client::UI::AddonDpsChallengeList: # 452
     vtbls:
       - ea: 0x1420F0338
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BE320: ctor
-  Client::UI::AddonPlayGuide: # 452
+  Client::UI::AddonPlayGuide: # 453
     vtbls:
       - ea: 0x1420BA268
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141103260: ctor
-  Client::UI::AddonOrchestrion: # 453
+  Client::UI::AddonOrchestrion: # 454
     vtbls:
       - ea: 0x1420F05A8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412BFF10: ctor
-  Client::UI::AddonBeginnerChatList: # 454
+  Client::UI::AddonBeginnerChatList: # 455
     vtbls:
       - ea: 0x142141CF8
         base: Client::UI::AddonSocialList
     funcs:
       0x141542540: ctor
-  Client::UI::AddonBeginnerChatKick: # 455
+  Client::UI::AddonBeginnerChatKick: # 456
     vtbls:
       - ea: 0x142141F48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141543870: ctor
-  Client::UI::AddonOrchestrionFurniture: # 456
-  Client::UI::AddonContextSub: # 457
-  Client::UI::AddonHousingEditVase: # 458
+  Client::UI::AddonOrchestrionFurniture: # 457
+  Client::UI::AddonAddonContextSub: # 458
+  Client::UI::AddonHousingEditVase: # 459
     vtbls:
       - ea: 0x14213A638
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415094D0: ctor
-  Client::UI::AddonConfigPartyListRoleSort: # 459
+  Client::UI::AddonConfigPartyListRoleSort: # 460
     vtbls:
       - ea: 0x1420A9A48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410AA330: ctor
-  Client::UI::AddonItemSearchSetting: # 460
+  Client::UI::AddonItemSearchSetting: # 461
     vtbls:
       - ea: 0x14213FC20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141530B40: ctor
-  Client::UI::AddonRecommendEquip: # 461
+  Client::UI::AddonRecommendEquip: # 462
     vtbls:
       - ea: 0x1420E8D28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14128B790: ctor
-  Client::UI::AddonYKWNote: # 462
+  Client::UI::AddonYKWNote: # 463
     vtbls:
       - ea: 0x1420CC988
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141184080: ctor
-  Client::UI::AddonContentsFinderMenu: # 463
+  Client::UI::AddonContentsFinderMenu: # 464
     vtbls:
       - ea: 0x1420C3038
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14111CE20: ctor
-  Client::UI::AddonGcArmyMemberList: # 464
+  Client::UI::AddonGcArmyMemberList: # 465
     vtbls:
       - ea: 0x1420F1178
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C4BB0: ctor
-  Client::UI::AddonGcArmyMenberProfile: # 465
+  Client::UI::AddonGcArmyMenberProfile: # 466
     vtbls:
       - ea: 0x1420F13C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C5880: ctor
-  Client::UI::AddonGcArmyChangeClass: # 466
+  Client::UI::AddonGcArmyChangeClass: # 467
     vtbls:
       - ea: 0x1420F1618
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C6860: ctor
-  Client::UI::AddonGcArmyChangeTrait: # 467
+  Client::UI::AddonGcArmyChangeTrait: # 468
     vtbls:
       - ea: 0x1420F1868
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C7670: ctor
-  Client::UI::AddonGcArmyChangeTactic: # 468
+  Client::UI::AddonGcArmyChangeTactic: # 469
     vtbls:
       - ea: 0x1420F1AB8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C7860: ctor
-  Client::UI::AddonGcArmyChangeMiragePrism: # 469
+  Client::UI::AddonGcArmyChangeMiragePrism: # 470
     vtbls:
       - ea: 0x1420F1D08
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C7F50: ctor
-  Client::UI::AddonGcArmyChangeMiragePrismSub: # 470
+  Client::UI::AddonGcArmyChangeMiragePrismSub: # 471
     vtbls:
       - ea: 0x1420F1F78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C9540: ctor
-  Client::UI::AddonGcArmyChangeMiragePrismConfirm: # 471
+  Client::UI::AddonGcArmyChangeMiragePrismConfirm: # 472
     vtbls:
       - ea: 0x1420F21E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C9F80: ctor
-  Client::UI::AddonGcArmyExpedition: # 472
+  Client::UI::AddonGcArmyExpedition: # 473
     vtbls:
       - ea: 0x1420F2430
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412CA6C0: ctor
-  Client::UI::AddonGcArmyExpeditionResult: # 473
+  Client::UI::AddonGcArmyExpeditionResult: # 474
     vtbls:
       - ea: 0x1420F2680
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412CC3F0: ctor
-  Client::UI::AddonGcArmyTraining: # 474
+  Client::UI::AddonGcArmyTraining: # 475
     vtbls:
       - ea: 0x1420F28D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412CCF20: ctor
-  Client::UI::AddonGcArmyCapture: # 475
+  Client::UI::AddonGcArmyCapture: # 476
     vtbls:
       - ea: 0x1420F2B30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412CDFF0: ctor
-  Client::UI::AddonGcArmyOrder: # 476
+  Client::UI::AddonGcArmyOrder: # 477
     vtbls:
       - ea: 0x1420F2D80
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412CF0A0: ctor
-  Client::UI::AddonAWGrowthFragTrade: # 477
+  Client::UI::AddonAWGrowthFragTrade: # 478
     vtbls:
       - ea: 0x1420E8F78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14128C390: ctor
-  Client::UI::AddonAWMakingSpiritGrow: # 478
+  Client::UI::AddonAWMakingSpiritGrow: # 479
     vtbls:
       - ea: 0x1420E91C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14128DAB0: ctor
-  Client::UI::AddonPvpActionSet: # 479
-  Client::UI::AddonPvpActionSetView: # 480
+  Client::UI::AddonPvpActionSet: # 480
+  Client::UI::AddonPvpActionSetView: # 481
     vtbls:
       - ea: 0x1420DDBA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412266C0: ctor
-  Client::UI::AddonPvPScreenInformationHotBar: # 481
+  Client::UI::AddonPvPScreenInformationHotBar: # 482
     vtbls:
       - ea: 0x1420C55B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141130C40: ctor
-  Client::UI::AddonRaidFinder: # 482
+  Client::UI::AddonRaidFinder: # 483
     vtbls:
       - ea: 0x1420CEBB0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141198B80: ctor
-  Client::UI::AddonDeepDungeonInspect: # 483
+  Client::UI::AddonDeepDungeonInspect: # 484
     vtbls:
       - ea: 0x1420F2FD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412CF930: ctor
-  Client::UI::AddonDeepDungeonMap: # 484
+  Client::UI::AddonDeepDungeonMap: # 485
     vtbls:
       - ea: 0x1420F3220
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412D0540: ctor
-  Client::UI::AddonDeepDungeonStatus: # 485
+  Client::UI::AddonDeepDungeonStatus: # 486
     vtbls:
       - ea: 0x1420F34A8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412D3E20: ctor
-  Client::UI::AddonDeepDungeonSaveData: # 486
+  Client::UI::AddonDeepDungeonSaveData: # 487
     vtbls:
       - ea: 0x1420F36F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412D5FF0: ctor
-  Client::UI::AddonDeepDungeonScore: # 487
+  Client::UI::AddonDeepDungeonScore: # 488
     vtbls:
       - ea: 0x1420F3B98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412D73C0: ctor
-  Client::UI::AddonProgressBar: # 488
+  Client::UI::AddonDeepDungeonHard: # 489
+    vtbls:
+      - ea: 0x1420F4038
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1412D8CD0: ctor
+  Client::UI::AddonProgressBar: # 490
     vtbls:
       - ea: 0x1420A2408
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141056030: ctor
-  Client::UI::AddonMansionSelectRoom: # 489
+  Client::UI::AddonMansionSelectRoom: # 491
     vtbls:
       - ea: 0x14213A888
         base: Client::UI::AddonHousingSelectRoom
     funcs:
       0x141509ED0: ctor
-  Client::UI::AddonOrchestrionPlayList: # 490
+  Client::UI::AddonOrchestrionPlayList: # 492
     vtbls:
       - ea: 0x1420F0A68
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C2970: ctor
-  Client::UI::AddonCountDownSettingDialog: # 491
+  Client::UI::AddonCountDownSettingDialog: # 493
     vtbls:
       - ea: 0x1421423E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141544000: ctor
-  Client::UI::AddonScreenInfo_CountDown: # 492
+  Client::UI::AddonScreenInfo_CountDown: # 494
     vtbls:
       - ea: 0x142142638
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415445B0: ctor
-  Client::UI::AddonWeeklyBingo: # 493
+  Client::UI::AddonWeeklyBingo: # 495
     vtbls:
       - ea: 0x142100DF0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14133EE20: ctor
-  Client::UI::AddonWeeklyBingoBonusInfo: # 494
+  Client::UI::AddonWeeklyBingoBonusInfo: # 496
     vtbls:
       - ea: 0x142101040
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413410C0: ctor
-  Client::UI::AddonWeeklyBingoResult: # 495
+  Client::UI::AddonWeeklyBingoResult: # 497
     vtbls:
       - ea: 0x142101290
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413416F0: ctor
-  Client::UI::AddonWeeklyPuzzle: # 496
+  Client::UI::AddonWeeklyBingoContentList: # 498
+    vtbls:
+      - ea: 0x1421014E0
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141343890: ctor
+  Client::UI::AddonWeeklyPuzzle: # 499
     vtbls:
       - ea: 0x142101730
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141344E50: ctor
-  Client::UI::AddonWeeklyPuzzleResult: # 497
+  Client::UI::AddonWeeklyPuzzleResult: # 500
     vtbls:
       - ea: 0x142101980
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413469F0: ctor
-  Client::UI::AddonPvPDuelRequest: # 498
+  Client::UI::AddonPvPDuelRequest: # 501
     vtbls:
       - ea: 0x1420F5390
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412F0AC0: ctor
-  Client::UI::AddonPvPMKSHeader: # 499
+  Client::UI::AddonPvPMKSHeader: # 502
     vtbls:
       - ea: 0x1420F5830
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412F2950: ctor
-  Client::UI::AddonPvPMKSHeaderSpec: # 500
-  Client::UI::AddonPvPMKSPartyList1: # 501
-  Client::UI::AddonPvPMKSPartyList2: # 502
-  Client::UI::AddonPvPMKSPartyList3: # 503
-  Client::UI::AddonPvPMKSPartyListSpec1: # 504
-  Client::UI::AddonPvPMKSPartyListSpec2: # 505
-  Client::UI::AddonPvPMKSBattleLog: # 506
+  Client::UI::AddonPvPMKSHeaderSpec: # 503
+  Client::UI::AddonPvPMKSPartyList1: # 504
+  Client::UI::AddonPvPMKSPartyList2: # 505
+  Client::UI::AddonPvPMKSPartyList3: # 506
+  Client::UI::AddonPvPMKSPartyListSpec1: # 507
+  Client::UI::AddonPvPMKSPartyListSpec2: # 508
+  Client::UI::AddonPvPMKSBattleLog: # 509
     vtbls:
       - ea: 0x1420F55E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412F1270: ctor
-  Client::UI::AddonPvPMKSBattleLogSpec: # 507
-  Client::UI::AddonPvPMKSRankRating: # 508
+  Client::UI::AddonPvPMKSBattleLogSpec: # 510
+  Client::UI::AddonPvPMKSRankRating: # 511
     vtbls:
       - ea: 0x1420F6270
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412F74F0: ctor
-  Client::UI::AddonPvPMKSIntroduction: # 509
+  Client::UI::AddonPvPMKSIntroduction: # 512
     vtbls:
       - ea: 0x1420F5F70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412F66F0: ctor
-  Client::UI::AddonPvPSpectatorCameraList: # 510
+  Client::UI::AddonPvPSpectatorCameraList: # 513
     vtbls:
       - ea: 0x1420F6BD8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FB960: ctor
-  Client::UI::AddonPvPSpectatorList: # 511
+  Client::UI::AddonPvPSpectatorList: # 514
     vtbls:
       - ea: 0x1420F6E28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FC220: ctor
-  Client::UI::AddonPvPFrontlineGauge: # 512
+  Client::UI::AddonPvPFrontlineGauge: # 515
     vtbls:
       - ea: 0x1420F64C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FA3F0: ctor
-  Client::UI::AddonPvPFrontlineHeader: # 513
+  Client::UI::AddonPvPFrontlineHeader: # 516
     vtbls:
       - ea: 0x1420F6728
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FA7D0: ctor
-  Client::UI::AddonPvPFrontlineInfo: # 514
+  Client::UI::AddonPvPFrontlineInfo: # 517
     vtbls:
       - ea: 0x1420F6988
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FB4B0: ctor
-  Client::UI::AddonPvPMap: # 515
+  Client::UI::AddonPvPMap: # 518
     vtbls:
       - ea: 0x1420DE4E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14122C200: ctor
-  Client::UI::AddonPvPMapSpec: # 516
-  Client::UI::AddonOrchestrionPlayListEdit: # 517
+  Client::UI::AddonPvPMapSpec: # 519
+  Client::UI::AddonOrchestrionPlayListEdit: # 520
     vtbls:
       - ea: 0x1420F0CC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412C3CF0: ctor
-  Client::UI::AddonOrchestrionPlayListSelect: # 518
-  Client::UI::AddonOrchestrionINN: # 519
-  Client::UI::AddonCameraSetting: # 520
+  Client::UI::AddonOrchestrionPlayListSelect: # 521
+  Client::UI::AddonOrchestrionINN: # 522
+  Client::UI::AddonCameraSetting: # 523
     vtbls:
       - ea: 0x1420F4508
         base: Client::UI::AddonCameraSettingBase
     funcs:
       0x1412DA430: ctor
-  Client::UI::AddonIdlingCameraSetting: # 521
+  Client::UI::AddonIdlingCameraSetting: # 524
     vtbls:
       - ea: 0x1420F47A0
         base: Client::UI::AddonCameraSettingBase
     funcs:
       0x1412DC7A0: ctor
-  Client::UI::AddonGroupPoseGuide: # 522
+  Client::UI::AddonGroupPoseGuide: # 525
     vtbls:
       - ea: 0x1420F4A20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412DD690: ctor
-  Client::UI::AddonGroupPoseFrame: # 523
+  Client::UI::AddonGroupPoseFrame: # 526
     vtbls:
       - ea: 0x1420F4C70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412DE370: ctor
-  Client::UI::AddonGroupPoseStamp: # 524
+  Client::UI::AddonGroupPoseStamp: # 527
     vtbls:
       - ea: 0x1420F5130
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412E68F0: ctor
-  Client::UI::AddonGroupPoseStampImage: # 525
+  Client::UI::AddonGroupPoseStampImage: # 528
     vtbls:
       - ea: 0x1420F4EE0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412DFCC0: ctor
-  Client::UI::AddonQTE: # 526
+  Client::UI::AddonQTE: # 529
     vtbls:
       - ea: 0x1420E9668
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141290B70: ctor
-  Client::UI::AddonQTEScreenInfo: # 527
+  Client::UI::AddonQTEScreenInfo: # 530
     vtbls:
       - ea: 0x1420E98B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412917A0: ctor
-  Client::UI::AddonAquariumSetting: # 528
+  Client::UI::AddonAquariumSetting: # 531
     vtbls:
       - ea: 0x14213AAE0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14150A070: ctor
-  Client::UI::AddonAquariumFishlist: # 529
+  Client::UI::AddonAquariumFishlist: # 532
     vtbls:
       - ea: 0x14213AD40
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14150AF90: ctor
-  Client::UI::AddonDeepDungeonMenu: # 530
+  Client::UI::AddonDeepDungeonMenu: # 533
     vtbls:
       - ea: 0x1420F3948
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412D6BC0: ctor
-  Client::UI::AddonDeepDungeonResult: # 531
+  Client::UI::AddonDeepDungeonResult: # 534
     vtbls:
       - ea: 0x1420F3DE8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412D8220: ctor
-  Client::UI::AddonItemAppraisal: # 532
+  Client::UI::AddonItemAppraisal: # 535
     vtbls:
       - ea: 0x1420F7078
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FC980: ctor
-  Client::UI::AddonItemInspectionList: # 533
+  Client::UI::AddonItemInspectionList: # 536
     vtbls:
       - ea: 0x1420F72C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FE1C0: ctor
-  Client::UI::AddonItemInspection: # 534
+  Client::UI::AddonItemInspection: # 537
     vtbls:
       - ea: 0x1420F7518
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FEC30: ctor
-  Client::UI::AddonItemInspectionResult: # 535
+  Client::UI::AddonItemInspectionResult: # 538
     vtbls:
       - ea: 0x1420F7768
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412FEE20: ctor
-  Client::UI::AddonRelic2Glass: # 536
+  Client::UI::AddonRelic2Glass: # 539
     vtbls:
       - ea: 0x1420E9418
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141290170: ctor
-  Client::UI::AddonLookingForGroupPrivate: # 537
+  Client::UI::AddonLookingForGroupPrivate: # 540
     vtbls:
       - ea: 0x142142888
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415449D0: ctor
-  Client::UI::AddonLookingForGroupNameSearch: # 538
+  Client::UI::AddonLookingForGroupNameSearch: # 541
     vtbls:
       - ea: 0x142142AD8
         base: Client::UI::AddonLookingForGroupBase
     funcs:
       0x141544F60: ctor
-  Client::UI::AddonGearSetPreview: # 539
+  Client::UI::AddonGearSetPreview: # 542
     vtbls:
       - ea: 0x1420DF768
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141232270: ctor
-  Client::UI::AddonContactList: # 540
+  Client::UI::AddonContactList: # 543
     vtbls:
       - ea: 0x1421431C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415464F0: ctor
-  Client::UI::AddonPicturePreview: # 541
+  Client::UI::AddonPicturePreview: # 544
     vtbls:
       - ea: 0x1420EA7D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141294470: ctor
-  Client::UI::AddonBeginnerChatInviteDialog: # 542
+  Client::UI::AddonBeginnerChatInviteDialog: # 545
     vtbls:
       - ea: 0x142142198
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141543DE0: ctor
-  Client::UI::AddonReturnerDialog: # 543
+  Client::UI::AddonReturnerDialog: # 546
     vtbls:
       - ea: 0x142143418
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141546CB0: ctor
-  Client::UI::AddonReturnerDialogDetail: # 544
+  Client::UI::AddonReturnerDialogDetail: # 547
     vtbls:
       - ea: 0x142143668
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141546ED0: ctor
-  Client::UI::AddonSatisfactionSupply: # 545
+  Client::UI::AddonSatisfactionSupply: # 548
     vtbls:
       - ea: 0x1420EAC78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141295940: ctor
-  Client::UI::AddonSatisfactionSupplyResult: # 546
+  Client::UI::AddonSatisfactionSupplyResult: # 549
     vtbls:
       - ea: 0x1420EAEC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141297820: ctor
-  Client::UI::AddonSatisfactionList: # 547
+  Client::UI::AddonSatisfactionList: # 550
     vtbls:
       - ea: 0x1420EAA28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141294AC0: ctor
-  Client::UI::AddonShopExchangeCurrencyDialog: # 548
+  Client::UI::AddonShopExchangeCurrencyDialog: # 551
     vtbls:
       - ea: 0x1420D8138
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411F1D00: ctor
-  Client::UI::AddonContentsReplayPlayer: # 549
+  Client::UI::AddonContentsReplayPlayer: # 552
     vtbls:
       - ea: 0x1420F9D78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14130C2F0: ctor
-  Client::UI::AddonContentsReplaySetting: # 550
+  Client::UI::AddonContentsReplaySetting: # 553
     vtbls:
       - ea: 0x1420F9FC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14130D400: ctor
-  Client::UI::AddonJobHudGLA: # 551
+  Client::UI::AddonJobHudGLA: # 554
     vtbls:
       - ea: 0x1421353F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414CE410: ctor
-  Client::UI::AddonJobHudPGL: # 552
-  Client::UI::AddonJobHudMRD: # 553
-  Client::UI::AddonJobHudTHM: # 554
-  Client::UI::AddonJobHudPLD: # 555
-  Client::UI::AddonJobHudMNK: # 556
-  Client::UI::AddonJobHudWAR: # 557
-  Client::UI::AddonJobHudDRG: # 558
-  Client::UI::AddonJobHudBRD: # 559
-  Client::UI::AddonJobHudWHM: # 560
-  Client::UI::AddonJobHudBLM: # 561
-  Client::UI::AddonJobHudACN: # 562
-  Client::UI::AddonJobHudSMN: # 563
-  Client::UI::AddonJobHudSCH: # 564
-  Client::UI::AddonJobHudNIN: # 565
-  Client::UI::AddonJobHudMCH: # 566
-  Client::UI::AddonJobHudDRK: # 567
-  Client::UI::AddonJobHudAST: # 568
-  Client::UI::AddonJobHudSAM: # 569
-  Client::UI::AddonJobHudRDM: # 570
-  Client::UI::AddonJobHudGNB: # 571
-  Client::UI::AddonJobHudDNC: # 572
-  Client::UI::AddonJobHudRRP: # 573
-  Client::UI::AddonJobHudGFF: # 574
-  Client::UI::AddonJobHudRDB: # 575
-  Client::UI::AddonJobHudRPM: # 576
-  Client::UI::AddonSnipe: # 577
+  Client::UI::AddonJobHudPGL: # 555
+  Client::UI::AddonJobHudMRD: # 556
+  Client::UI::AddonJobHudTHM: # 557
+  Client::UI::AddonJobHudPLD: # 558
+  Client::UI::AddonJobHudMNK: # 559
+  Client::UI::AddonJobHudWAR: # 560
+  Client::UI::AddonJobHudDRG: # 561
+  Client::UI::AddonJobHudBRD: # 562
+  Client::UI::AddonJobHudWHM: # 563
+  Client::UI::AddonJobHudBLM: # 564
+  Client::UI::AddonJobHudACN: # 565
+  Client::UI::AddonJobHudSMN: # 566
+  Client::UI::AddonJobHudSCH: # 567
+  Client::UI::AddonJobHudNIN: # 568
+  Client::UI::AddonJobHudMCH: # 569
+  Client::UI::AddonJobHudDRK: # 570
+  Client::UI::AddonJobHudAST: # 571
+  Client::UI::AddonJobHudSAM: # 572
+  Client::UI::AddonJobHudRDM: # 573
+  Client::UI::AddonJobHudGNB: # 574
+  Client::UI::AddonJobHudDNC: # 575
+  Client::UI::AddonJobHudRRP: # 576
+  Client::UI::AddonJobHudGFF: # 577
+  Client::UI::AddonJobHudRDB: # 578
+  Client::UI::AddonJobHudRPM: # 579
+  Client::UI::AddonSnipe: # 580
     vtbls:
       - ea: 0x1420F79D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141301010: ctor
-  Client::UI::AddonSnipeBg: # 578
+  Client::UI::AddonSnipeBg: # 581
     vtbls:
       - ea: 0x1420F7C28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141301FF0: ctor
-  Client::UI::AddonSnipeTitle: # 579
+  Client::UI::AddonSnipeTitle: # 582
     vtbls:
       - ea: 0x1420F80C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141302BC0: ctor
-  Client::UI::AddonSnipeTodo: # 580
+  Client::UI::AddonSnipeTodo: # 583
     vtbls:
       - ea: 0x1420F7E78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141302540: ctor
-  Client::UI::AddonMountSpeed: # 581
+  Client::UI::AddonMountSpeed: # 584
     vtbls:
       - ea: 0x1420EB138
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141297DD0: ctor
-  Client::UI::AddonDDungeon: # 582
+  Client::UI::AddonDDungeon: # 585
     vtbls:
       - ea: 0x1420D60B8
         base: Client::UI::AddonMiniGameBase
     funcs:
       0x1411D4D20: ctor
-  Client::UI::AddonDDungeonAnswer: # 583
+  Client::UI::AddonDDungeonAnswer: # 586
     vtbls:
       - ea: 0x1420D6328
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411D8460: ctor
-  Client::UI::AddonDDungeonResult: # 584
+  Client::UI::AddonDDungeonResult: # 587
     vtbls:
       - ea: 0x1420D6578
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411D8B90: ctor
-  Client::UI::AddonPvPCharacter: # 585
+  Client::UI::AddonPvPCharacter: # 588
     vtbls:
       - ea: 0x1420DE298
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141228A00: ctor
       0x14122AB10: UpdateClasses
-  Client::UI::AddonPvpProfileActionAdditional: # 586
-  Client::UI::AddonPvpProfileActionTraits: # 587
-  Client::UI::AddonPvpProfileActionQuickChat: # 588
-  Client::UI::AddonPvpProfileManeuvers: # 589
+  Client::UI::AddonPvpProfileActionAdditional: # 589
+  Client::UI::AddonPvpProfileActionTraits: # 590
+  Client::UI::AddonPvpProfileActionQuickChat: # 591
+  Client::UI::AddonPvpProfileManeuvers: # 592
     vtbls:
       - ea: 0x1420DD920
         base: Component::GUI::AtkUnitBase
-  Client::UI::AddonPvpWelcome: # 590
+  Client::UI::AddonPvpWelcome: # 593
     vtbls:
       - ea: 0x1420EB388
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141298DF0: ctor
-  Client::UI::AddonPvpCalendar: # 591
+  Client::UI::AddonPvpCalendar: # 594
     vtbls:
       - ea: 0x1420DDDF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141226D60: ctor
-  Client::UI::AddonPvpReward: # 592
+  Client::UI::AddonPvpReward: # 595
     vtbls:
       - ea: 0x1420DE048
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141227810: ctor
-  Client::UI::AddonLFGFilterSettings: # 593
+  Client::UI::AddonLFGFilterSettings: # 596
     vtbls:
       - ea: 0x142142D28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415459A0: ctor
-  Client::UI::AddonScenarioTree: # 594
+  Client::UI::AddonScenarioTree: # 597
     vtbls:
       - ea: 0x1420F8568
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141303300: ctor
-  Client::UI::AddonScenarioTreeDetail: # 595
+  Client::UI::AddonScenarioTreeDetail: # 598
     vtbls:
       - ea: 0x1420F8318
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141303030: ctor
-  Client::UI::AddonLFGLogSettings: # 596
+  Client::UI::AddonLFGLogSettings: # 599
     vtbls:
       - ea: 0x142142F78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141545F40: ctor
-  Client::UI::AddonTreasureHighLow: # 597
+  Client::UI::AddonTreasureHighLow: # 600
     vtbls:
       - ea: 0x1420EB5D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141299130: ctor
-  Client::UI::AddonManeuversRecord: # 598
+  Client::UI::AddonManeuversRecord: # 601
     vtbls:
       - ea: 0x1420C4330
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141128510: ctor
-  Client::UI::AddonManeuversHeader: # 599
+  Client::UI::AddonManeuversHeader: # 602
     vtbls:
       - ea: 0x1420C47D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14112C9A0: ctor
-  Client::UI::AddonManeuversTeamInfo: # 600
+  Client::UI::AddonManeuversTeamInfo: # 603
     vtbls:
       - ea: 0x1420C4A20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14112D110: ctor
-  Client::UI::AddonManeuversAllianceList: # 601
+  Client::UI::AddonManeuversAllianceList: # 604
     vtbls:
       - ea: 0x1420C4C70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14112DED0: ctor
-  Client::UI::AddonManeuversArmorBoarding: # 602
+  Client::UI::AddonManeuversArmorBoarding: # 605
     vtbls:
       - ea: 0x1420C4EC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14112F540: ctor
-  Client::UI::AddonManeuversStation: # 603
+  Client::UI::AddonManeuversStation: # 606
     vtbls:
       - ea: 0x1420C5110
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14112FDD0: ctor
-  Client::UI::AddonManeuversGoblinSoldier: # 604
+  Client::UI::AddonManeuversGoblinSoldier: # 607
     vtbls:
       - ea: 0x1420C5360
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411309B0: ctor
-  Client::UI::AddonHousingWareHouseStatus: # 605
+  Client::UI::AddonHousingWareHouseStatus: # 608
     vtbls:
       - ea: 0x14213AF90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14150BDE0: ctor
-  Client::UI::AddonHelpWindow: # 606
+  Client::UI::AddonHelpWindow: # 609
     vtbls:
       - ea: 0x1420A2658
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141056870: ctor
-  Client::UI::AddonMultipleHelpWindow: # 607
+  Client::UI::AddonMultipleHelpWindow: # 610
     vtbls:
       - ea: 0x1420A28A8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141056EF0: ctor
-  Client::UI::AddonUserPolicyPerformance: # 608
+  Client::UI::AddonUserPolicyPerformance: # 611
     vtbls:
       - ea: 0x1420EB828
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14129A260: ctor
-  Client::UI::AddonRoadStone: # 609
+  Client::UI::AddonRoadStone: # 612
     vtbls:
       - ea: 0x1420D5BF8
         base: Client::UI::AddonMiniGameBase
     funcs:
       0x1411D0A60: ctor
-  Client::UI::AddonRoadStoneResult: # 610
+  Client::UI::AddonRoadStoneResult: # 613
     vtbls:
       - ea: 0x1420D5E68
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411D4AB0: ctor
-  Client::UI::AddonPvPTeam: # 611
+  Client::UI::AddonPvPTeam: # 614
     vtbls:
       - ea: 0x142148FF0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141577E90: ctor
-  Client::UI::AddonPvPTeamInputString: # 612
+  Client::UI::AddonPvPTeamInputString: # 615
     vtbls:
       - ea: 0x142149240
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141578BC0: ctor
-  Client::UI::AddonPvPTeamMember: # 613
+  Client::UI::AddonPvPTeamMember: # 616
     vtbls:
       - ea: 0x142149490
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415790D0: ctor
-  Client::UI::AddonPvPTeamResult: # 614
+  Client::UI::AddonPvPTeamResult: # 617
     vtbls:
       - ea: 0x1421496E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14157A1C0: ctor
-  Client::UI::AddonPvPTeamActivity: # 615
+  Client::UI::AddonPvPTeamActivity: # 618
     vtbls:
       - ea: 0x142149930
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14157B1D0: ctor
-  Client::UI::AddonPvPTeamStatus: # 616
+  Client::UI::AddonPvPTeamStatus: # 619
     vtbls:
       - ea: 0x142149B80
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14157BA60: ctor
-  Client::UI::AddonPvPTeamCrestEditor: # 617
-  Client::UI::AddonPvPTeamCrestColor: # 618
-  Client::UI::AddonPvPTeamCrestSymbolColor: # 619
-  Client::UI::AddonPvPTeamOrganization: # 620
+  Client::UI::AddonPvPTeamCrestEditor: # 620
+  Client::UI::AddonPvPTeamCrestColor: # 621
+  Client::UI::AddonPvPTeamCrestSymbolColor: # 622
+  Client::UI::AddonPvPTeamOrganization: # 623
     vtbls:
       - ea: 0x142149DD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14157C200: ctor
-  Client::UI::AddonEurekaElementalHud: # 621
+  Client::UI::AddonEurekaElementalHud: # 624
     vtbls:
       - ea: 0x1420F87B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141304040: ctor
-  Client::UI::AddonEurekaElementalEdit: # 622
+  Client::UI::AddonEurekaElementalEdit: # 625
     vtbls:
       - ea: 0x1420F8A38
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141305DD0: ctor
-  Client::UI::AddonEurekaChainInfo: # 623
+  Client::UI::AddonEurekaChainInfo: # 626
     vtbls:
       - ea: 0x1420F8D48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141306CD0: ctor
-  Client::UI::AddonEurekaMagiciteItemAtherList: # 624
+  Client::UI::AddonEurekaMagiciteItemAtherList: # 627
     vtbls:
       - ea: 0x1420F8F98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141306F10: ctor
-  Client::UI::AddonEurekaMagiciteItemShardList: # 625
+  Client::UI::AddonEurekaMagiciteItemShardList: # 628
     vtbls:
       - ea: 0x1420F91E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141307CD0: ctor
-  Client::UI::AddonEurekaMagiciteItemSynthesis: # 626
+  Client::UI::AddonEurekaMagiciteItemSynthesis: # 629
     vtbls:
       - ea: 0x1420F9438
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141308E00: ctor
-  Client::UI::AddonEurekaMagiaActionNotebook: # 627
+  Client::UI::AddonEurekaMagiaActionNotebook: # 630
     vtbls:
       - ea: 0x1420F9688
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14130B360: ctor
-  Client::UI::AddonEurekaWeaponAdjust: # 628
+  Client::UI::AddonEurekaWeaponAdjust: # 631
     vtbls:
       - ea: 0x1420F98D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14130BAF0: ctor
-  Client::UI::AddonEurekaWeaponAdjustLottery: # 629
+  Client::UI::AddonEurekaWeaponAdjustLottery: # 632
     vtbls:
       - ea: 0x1420F9B28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14130BFD0: ctor
-  Client::UI::AddonTeleportHousingFriend: # 630
+  Client::UI::AddonTeleportHousingFriend: # 633
     vtbls:
       - ea: 0x1420E7CC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141283F60: ctor
-  Client::UI::AddonInventoryBuddy: # 631
+  Client::UI::AddonInventoryBuddy: # 634
     vtbls:
       - ea: 0x1420EBA78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14129ABA0: ctor
       0x14140EAB0: SetTab
-  Client::UI::AddonInventoryBuddy2: # 632
-  Client::UI::AddonContentMemberList: # 633
+  Client::UI::AddonInventoryBuddy2: # 635
+  Client::UI::AddonContentMemberList: # 636
     vtbls:
       - ea: 0x1421438B8
         base: Client::UI::AddonSocialList
     funcs:
       0x1415470A0: ctor
-  Client::UI::AddonMiragePrismPrismBox: # 634
+  Client::UI::AddonMiragePrismPrismBox: # 637
     vtbls:
       - ea: 0x1420D07D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411A3F10: ctor
-  Client::UI::AddonMiragePrismPrismBoxCrystallize: # 635
+  Client::UI::AddonMiragePrismPrismBoxCrystallize: # 638
     vtbls:
       - ea: 0x1420D0B48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411A79C0: ctor
-  Client::UI::AddonMiragePrismPrismBoxFilter: # 636
+  Client::UI::AddonMiragePrismPrismBoxFilter: # 639
     vtbls:
       - ea: 0x1420D0DB0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411A88B0: ctor
-  Client::UI::AddonMiragePrismPrismSetConvert: # 637
+  Client::UI::AddonMiragePrismPrismSetConvert: # 640
     vtbls:
       - ea: 0x1420D1000
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411A94E0: ctor
-  Client::UI::AddonMiragePrismPrismSetConvertC: # 638
+  Client::UI::AddonMiragePrismPrismSetConvertC: # 641
     vtbls:
       - ea: 0x1420D1250
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411AAA60: ctor
-  Client::UI::AddonMiragePrismPrismSetRevertC: # 639
+  Client::UI::AddonMiragePrismPrismSetRevertC: # 642
     vtbls:
       - ea: 0x1420D14A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411AAE80: ctor
-  Client::UI::AddonMiragePrismPrismSetPreview: # 640
+  Client::UI::AddonMiragePrismPrismSetPreview: # 643
     vtbls:
       - ea: 0x1420D16F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411AB670: ctor
-  Client::UI::AddonMiragePrismPrismItemDetail: # 641
+  Client::UI::AddonMiragePrismPrismItemDetail: # 644
     vtbls:
       - ea: 0x1420D1940
         base: Component::GUI::AtkUnitBase
@@ -19574,1628 +19598,1689 @@ classes:
         base: Component::GUI::AtkManagedInterface
     funcs:
       0x1411ABFA0: ctor
-  Client::UI::AddonMiragePrismMiragePlate: # 642
+  Client::UI::AddonMiragePrismMiragePlate: # 645
     vtbls:
       - ea: 0x1420D1BC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411AD140: ctor
-  Client::UI::AddonMiragePrismMiragePlateConfirm: # 643
+  Client::UI::AddonMiragePrismMiragePlateConfirm: # 646
     vtbls:
       - ea: 0x1420D1E10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411AFFE0: ctor
-  Client::UI::AddonPerformanceMode: # 644
+  Client::UI::AddonPerformanceMode: # 647
     vtbls:
       - ea: 0x1420FA478
         base: Client::UI::AddonPerformanceModeBase
     funcs:
       0x14130EE40: ctor
-  Client::UI::AddonPerformanceModeWide: # 645
+  Client::UI::AddonPerformanceModeWide: # 648
     vtbls:
       - ea: 0x1420FA828
         base: Client::UI::AddonPerformanceModeBase
     funcs:
       0x14130FDC0: ctor
-  Client::UI::AddonPerformanceModeSettings: # 646
+  Client::UI::AddonPerformanceModeSettings: # 649
     vtbls:
       - ea: 0x1420FACD8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141310BA0: ctor
-  Client::UI::AddonFashionCheck: # 647
+  Client::UI::AddonFashionCheck: # 650
     vtbls:
       - ea: 0x1421591C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415D5D20: ctor
-  Client::UI::AddonFashionCheckScoreGauge: # 648
+  Client::UI::AddonFashionCheckScoreGauge: # 651
     vtbls:
       - ea: 0x142159428
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415D6610: ctor
-  Client::UI::AddonReplayReadyCheck: # 649
+  Client::UI::AddonReplayReadyCheck: # 652
     vtbls:
       - ea: 0x142141128
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14153FC00: ctor
-  Client::UI::AddonReplayReadyCheckAlliance: # 650
+  Client::UI::AddonReplayReadyCheckAlliance: # 653
     vtbls:
       - ea: 0x142141388
         base: Client::UI::AddonReplayReadyCheck
     funcs:
       0x141540790: ctor
-  Client::UI::AddonSelectCustomString: # 651
+  Client::UI::AddonSelectCustomString: # 654
     vtbls:
       - ea: 0x1420A2D48
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141059ED0: ctor
-  Client::UI::AddonSelectStringEventGimmick: # 652
+  Client::UI::AddonSelectStringEventGimmick: # 655
     vtbls:
       - ea: 0x1420A2F98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14105B530: ctor
-  Client::UI::AddonHousingGuestBook: # 653
+  Client::UI::AddonHousingGuestBook: # 656
     vtbls:
       - ea: 0x14213B1E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14150C1D0: ctor
-  Client::UI::AddonInputMessage: # 654
+  Client::UI::AddonInputMessage: # 657
     vtbls:
       - ea: 0x1420A31E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14105C600: ctor
-  Client::UI::AddonCheckBoxDialog: # 655
+  Client::UI::AddonCheckBoxDialog: # 658
     vtbls:
       - ea: 0x1420A3438
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14105CD40: ctor
-  Client::UI::AddonCrossWorldLinkshell: # 656
+  Client::UI::AddonCrossWorldLinkshell: # 659
     vtbls:
       - ea: 0x14214C1E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415927D0: ctor
-  Client::UI::AddonReconstructionBox: # 657
+  Client::UI::AddonReconstructionBox: # 660
     vtbls:
       - ea: 0x1420FC680
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141319AA0: ctor
-  Client::UI::AddonReconstructionBuyback: # 658
+  Client::UI::AddonReconstructionBuyback: # 661
     vtbls:
       - ea: 0x1420FC8D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14131AE80: ctor
-  Client::UI::AddonMiragePrismENpcSatisfaction: # 659
+  Client::UI::AddonMiragePrismENpcSatisfaction: # 662
     vtbls:
       - ea: 0x1420D2060
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411B0860: ctor
-  Client::UI::AddonMiragePrismENpcSatisfactionSub: # 660
+  Client::UI::AddonMiragePrismENpcSatisfactionSub: # 663
     vtbls:
       - ea: 0x1420D22B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411B1860: ctor
-  Client::UI::AddonItemFinder: # 661
+  Client::UI::AddonItemFinder: # 664
     vtbls:
       - ea: 0x1420DAEB0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141211410: ctor
-  Client::UI::AddonDescription: # 662
+  Client::UI::AddonDescription: # 665
     vtbls:
       - ea: 0x1420EBCE8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14129C8E0: ctor
-  Client::UI::AddonDescriptionYTC: # 663
+  Client::UI::AddonDescriptionYTC: # 666
     vtbls:
       - ea: 0x1420EBF58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14129EAD0: ctor
-  Client::UI::AddonDescriptionDD: # 664
+  Client::UI::AddonDescriptionDD: # 667
     vtbls:
       - ea: 0x1420EC1C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A10A0: ctor
-  Client::UI::AddonAlarm: # 665
+  Client::UI::AddonAlarm: # 668
     vtbls:
       - ea: 0x1420EC418
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A3240: ctor
-  Client::UI::AddonAlarmSettings: # 666
+  Client::UI::AddonAlarmSettings: # 669
     vtbls:
       - ea: 0x1420EC668
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A3D80: ctor
-  Client::UI::AddonFreeShop: # 667
+  Client::UI::AddonFreeShop: # 670
     vtbls:
       - ea: 0x1420D85D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411F3370: ctor
-  Client::UI::AddonMountainClimbingResult: # 668
+  Client::UI::AddonMountainClimbingResult: # 671
     vtbls:
       - ea: 0x14215A828
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415E9F20: ctor
-  Client::UI::AddonMerchantEquipSelect: # 669
+  Client::UI::AddonMerchantEquipSelect: # 672
     vtbls:
       - ea: 0x1420FCB20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14131BB30: ctor
-  Client::UI::AddonMerchantSetting: # 670
+  Client::UI::AddonMerchantSetting: # 673
     vtbls:
       - ea: 0x1420FCD70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14131C330: ctor
-  Client::UI::AddonMerchantShop: # 671
+  Client::UI::AddonMerchantShop: # 674
     vtbls:
       - ea: 0x1420FCFC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14131D270: ctor
-  Client::UI::AddonInventoryExpansion: # 672
+  Client::UI::AddonInventoryExpansion: # 675
     vtbls:
       - ea: 0x1420C6BC0
         base: Client::UI::AddonInventoryInterface
     funcs:
       0x1411393E0: ctor
       0x14113A330: SetTab
-  Client::UI::AddonRhythmAction: # 673
+  Client::UI::AddonRhythmAction: # 676
     vtbls:
       - ea: 0x1420D6888
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411D8D00: ctor
-  Client::UI::AddonRhythmActionResult: # 674
+  Client::UI::AddonRhythmActionResult: # 677
     vtbls:
       - ea: 0x1420D6AD8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411DA0E0: ctor
-  Client::UI::AddonWeddingNotification: # 675
+  Client::UI::AddonWeddingNotification: # 678
     vtbls:
       - ea: 0x1420E83E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412882F0: ctor
-  Client::UI::AddonHousingAppealSettings: # 676
+  Client::UI::AddonHousingAppealSettings: # 679
     vtbls:
       - ea: 0x14213B430
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14150D7A0: ctor
-  Client::UI::AddonAOZNotebook: # 677
+  Client::UI::AddonAOZNotebook: # 680
     vtbls:
       - ea: 0x1420CCBF8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411857D0: ctor
       0x141189D90: SetTab
-  Client::UI::AddonAOZNotebookPresetList: # 678
+  Client::UI::AddonAOZNotebookPresetList: # 681
     vtbls:
       - ea: 0x1420CCF10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14118A870: ctor
-  Client::UI::AddonAOZActiveSetInputString: # 679
+  Client::UI::AddonAOZActiveSetInputString: # 682
     vtbls:
       - ea: 0x1420CD3F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14118BEC0: ctor
-  Client::UI::AddonEmj: # 680
+  Client::UI::AddonEmj: # 683
     vtbls:
       - ea: 0x142159678
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415D6F70: ctor
-  Client::UI::AddonEmjL: # 681
-  Client::UI::AddonEmjTotalResult: # 682
+  Client::UI::AddonEmjL: # 684
+  Client::UI::AddonEmjTotalResult: # 685
     vtbls:
       - ea: 0x1421599D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415E4520: ctor
-  Client::UI::AddonEmjRankResult: # 683
+  Client::UI::AddonEmjRankResult: # 686
     vtbls:
       - ea: 0x142159C30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415E50C0: ctor
-  Client::UI::AddonEmjIntro: # 684
+  Client::UI::AddonEmjIntro: # 687
     vtbls:
       - ea: 0x142159E98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415E58F0: ctor
-  Client::UI::AddonEmjVoiceCharacter: # 685
+  Client::UI::AddonEmjVoiceCharacter: # 688
     vtbls:
       - ea: 0x14215A368
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415E7590: ctor
-  Client::UI::AddonEmjVoiceMiragePrism: # 686
+  Client::UI::AddonEmjVoiceMiragePrism: # 689
     vtbls:
       - ea: 0x14215A5D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415E92B0: ctor
-  Client::UI::AddonAOZContentBriefing: # 687
+  Client::UI::AddonAOZContentBriefing: # 690
     vtbls:
       - ea: 0x1420FD210
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14131E640: ctor
-  Client::UI::AddonAOZContentResult: # 688
+  Client::UI::AddonAOZContentResult: # 691
     vtbls:
       - ea: 0x1420FD460
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141320F30: ctor
-  Client::UI::AddonAOZContentScoreBonus: # 689
+  Client::UI::AddonAOZContentScoreBonus: # 692
     vtbls:
       - ea: 0x1420FD6B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141321AA0: ctor
-  Client::UI::AddonWorldTravelSelect: # 690
+  Client::UI::AddonWorldTravelSelect: # 693
     vtbls:
       - ea: 0x142119C30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141438450: ctor
-  Client::UI::AddonWorldTravelFinderStatus: # 691
+  Client::UI::AddonWorldTravelFinderStatus: # 694
     vtbls:
       - ea: 0x1421199C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414381D0: ctor
-  Client::UI::AddonWorldTravelFinderReady: # 692
+  Client::UI::AddonWorldTravelFinderReady: # 695
     vtbls:
       - ea: 0x142119770
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141437FA0: ctor
-  Client::UI::AddonRideShooting: # 693
+  Client::UI::AddonRideShooting: # 696
     vtbls:
       - ea: 0x14215AF40
         base: Client::UI::AddonRideShootingInterface
     funcs:
       0x1415EA930: ctor
-  Client::UI::AddonRideShootingResult: # 694
+  Client::UI::AddonRideShootingResult: # 697
     vtbls:
       - ea: 0x14215B1D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EB760: ctor
-  Client::UI::AddonGsInfoEmj: # 695
+  Client::UI::AddonGsInfoEmj: # 698
     vtbls:
       - ea: 0x1421531F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415B58E0: ctor
-  Client::UI::AddonEmjSetting: # 696
+  Client::UI::AddonEmjSetting: # 699
     vtbls:
       - ea: 0x14215A118
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415E6570: ctor
-  Client::UI::AddonRetainerList: # 697
+  Client::UI::AddonRetainerList: # 700
     vtbls:
       - ea: 0x1420C8F30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14114F500: ctor
-  Client::UI::AddonRetainerListSort: # 698
+  Client::UI::AddonRetainerListSort: # 701
     vtbls:
       - ea: 0x1420C9180
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141150500: ctor
-  Client::UI::AddonQIBCStatus: # 699
+  Client::UI::AddonQIBCStatus: # 702
     vtbls:
       - ea: 0x1420EC8B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A6950: ctor
-  Client::UI::AddonHugeCraftworksSupply: # 700
+  Client::UI::AddonHugeCraftworksSupply: # 703
     vtbls:
       - ea: 0x1420ECB08
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A6CC0: ctor
-  Client::UI::AddonHugeCraftworksSupplyResult: # 701
+  Client::UI::AddonHugeCraftworksSupplyResult: # 704
     vtbls:
       - ea: 0x1420ECD58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A7F50: ctor
-  Client::UI::AddonSharlayanCraftworksSupply: # 702
+  Client::UI::AddonSharlayanCraftworksSupply: # 705
     vtbls:
       - ea: 0x142106550
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14137F4F0: ctor
-  Client::UI::AddonBankaCraftworksSupply: # 703
+  Client::UI::AddonBankaCraftworksSupply: # 706
     vtbls:
       - ea: 0x142107868
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14138A880: ctor
-  Client::UI::AddonCutSceneSelectString: # 704
+  Client::UI::AddonCutSceneSelectString: # 707
     vtbls:
       - ea: 0x1420FD900
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141321E70: ctor
-  Client::UI::AddonDawn: # 705
+  Client::UI::AddonDawn: # 708
     vtbls:
       - ea: 0x1420FE4C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413254A0: ctor
-  Client::UI::AddonDawnHelp: # 706
+  Client::UI::AddonDawnHelp: # 709
     vtbls:
       - ea: 0x1420FE710
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141329460: ctor
-  Client::UI::AddonDawnStory: # 707
+  Client::UI::AddonDawnStory: # 710
     vtbls:
       - ea: 0x1420FE980
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141329D20: ctor
-  Client::UI::AddonDawnStoryMemberSelect: # 708
+  Client::UI::AddonDawnStoryMemberSelect: # 711
     vtbls:
       - ea: 0x1420FEBD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14132C080: ctor
-  Client::UI::AddonHousingCatalogPreview: # 709
+  Client::UI::AddonHousingCatalogPreview: # 712
     vtbls:
       - ea: 0x14213B6A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14150E0B0: ctor
-  Client::UI::AddonGuide: # 710
+  Client::UI::AddonGuide: # 713
     vtbls:
       - ea: 0x1420ECFA8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A8270: ctor
-  Client::UI::AddonGuideCommon: # 711
-  Client::UI::AddonSubmarineExplorationMapSelect: # 712
+  Client::UI::AddonGuideCommon: # 714
+  Client::UI::AddonSubmarineExplorationMapSelect: # 715
     vtbls:
       - ea: 0x142148D88
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141577340: ctor
-  Client::UI::AddonQuestRedo: # 713
+  Client::UI::AddonQuestRedo: # 716
     vtbls:
       - ea: 0x1420ED1F8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412A94C0: ctor
-  Client::UI::AddonQuestRedoHud: # 714
+  Client::UI::AddonQuestRedoHud: # 717
     vtbls:
       - ea: 0x1420ED448
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412ACDC0: ctor
-  Client::UI::AddonDifficultySelectYesNo: # 715
+  Client::UI::AddonDifficultySelectYesNo: # 718
     vtbls:
       - ea: 0x1420ED698
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412AD630: ctor
-  Client::UI::AddonWebLauncher: # 716
+  Client::UI::AddonWebLauncher: # 719
     vtbls:
       - ea: 0x1420BA4B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141103D90: ctor
-  Client::UI::AddonWebGuidance: # 717
+  Client::UI::AddonWebGuidance: # 720
     vtbls:
       - ea: 0x1420BA708
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141104230: ctor
-  Client::UI::AddonCircleInvite: # 718
+  Client::UI::AddonCircleInvite: # 721
     vtbls:
       - ea: 0x14214A020
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14157C860: ctor
-  Client::UI::AddonCircleList: # 719
+  Client::UI::AddonCircleList: # 722
     vtbls:
       - ea: 0x14214A270
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14157D4C0: ctor
-  Client::UI::AddonCircleNameInputString: # 720
+  Client::UI::AddonCircleNameInputString: # 723
     vtbls:
       - ea: 0x14214A4C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14157E880: ctor
-  Client::UI::AddonCircleBook: # 721
+  Client::UI::AddonCircleBook: # 724
     vtbls:
       - ea: 0x14214A870
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415839C0: ctor
-  Client::UI::AddonCircleBookSetting: # 722
+  Client::UI::AddonCircleBookSetting: # 725
     vtbls:
       - ea: 0x14214AAC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141585370: ctor
-  Client::UI::AddonCircleBookQuestion: # 723
+  Client::UI::AddonCircleBookQuestion: # 726
     vtbls:
       - ea: 0x14214AD10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141586BA0: ctor
-  Client::UI::AddonCircleBookBlackList: # 724
+  Client::UI::AddonCircleBookBlackList: # 727
     vtbls:
       - ea: 0x14214AF60
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141588C10: ctor
-  Client::UI::AddonCircleBookWriteMessage: # 725
+  Client::UI::AddonCircleBookWriteMessage: # 728
     vtbls:
       - ea: 0x14214B1B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141589B10: ctor
-  Client::UI::AddonCircleBookGroupSetting: # 726
+  Client::UI::AddonCircleBookGroupSetting: # 729
     vtbls:
       - ea: 0x14214B400
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14158A730: ctor
-  Client::UI::AddonCircleBookInputString: # 727
+  Client::UI::AddonCircleBookInputString: # 730
     vtbls:
       - ea: 0x14214B650
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14158B460: ctor
-  Client::UI::AddonCircleFinder: # 728
+  Client::UI::AddonCircleFinder: # 731
     vtbls:
       - ea: 0x14214BAF0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14158D7C0: ctor
-  Client::UI::AddonCircleFinderSearch: # 729
+  Client::UI::AddonCircleFinderSearch: # 732
     vtbls:
       - ea: 0x14214B8A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14158B9F0: ctor
-  Client::UI::AddonCircleFinderSetting: # 730
+  Client::UI::AddonCircleFinderSetting: # 733
     vtbls:
       - ea: 0x14214BD40
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141590690: ctor
-  Client::UI::AddonCircleFinderHighlight: # 731
+  Client::UI::AddonCircleFinderHighlight: # 734
     vtbls:
       - ea: 0x14214BF90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415919D0: ctor
-  Client::UI::AddonPerformanceGamepadGuide: # 732
+  Client::UI::AddonPerformanceGamepadGuide: # 735
     vtbls:
       - ea: 0x1420FB210
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141314120: ctor
-  Client::UI::AddonPerformanceMetronome: # 733
+  Client::UI::AddonPerformanceMetronome: # 736
     vtbls:
       - ea: 0x1420FB5E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141314930: ctor
-  Client::UI::AddonPerformanceMetronomeSetting: # 734
+  Client::UI::AddonPerformanceMetronomeSetting: # 737
     vtbls:
       - ea: 0x1420FB840
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141315EA0: ctor
-  Client::UI::AddonPerformancePlayGuide: # 735
+  Client::UI::AddonPerformancePlayGuide: # 738
     vtbls:
       - ea: 0x1420FBA90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141316840: ctor
-  Client::UI::AddonPerformancePlayGuideSetting: # 736
+  Client::UI::AddonPerformancePlayGuideSetting: # 739
     vtbls:
       - ea: 0x1420FBD40
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141317C00: ctor
-  Client::UI::AddonPerformanceReadyCheck: # 737
+  Client::UI::AddonPerformanceReadyCheck: # 740
     vtbls:
       - ea: 0x1420FBF90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141318170: ctor
-  Client::UI::AddonPerformanceReadyCheckReceive: # 738
+  Client::UI::AddonPerformanceReadyCheckReceive: # 741
     vtbls:
       - ea: 0x1420FC1E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141318CD0: ctor
-  Client::UI::AddonPerformanceToneChange: # 739
+  Client::UI::AddonPerformanceToneChange: # 742
     vtbls:
       - ea: 0x1420FC430
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141319330: ctor
-  Client::UI::AddonMentorCondition: # 740
+  Client::UI::AddonMentorCondition: # 743
     vtbls:
       - ea: 0x1420FEE20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14132CF80: ctor
-  Client::UI::AddonMentorCertification: # 741
+  Client::UI::AddonMentorCertification: # 744
     vtbls:
       - ea: 0x1420FF080
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14132D810: ctor
-  Client::UI::AddonMentorRenewDialogue: # 742
+  Client::UI::AddonMentorRenewDialogue: # 745
     vtbls:
       - ea: 0x1420FF2D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14132DB60: ctor
-  Client::UI::AddonAOZNotebookFilterSettings: # 743
+  Client::UI::AddonAOZNotebookFilterSettings: # 746
     vtbls:
       - ea: 0x1420CD1A8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14118AF60: ctor
-  Client::UI::AddonMcGuffin: # 744
+  Client::UI::AddonMcGuffin: # 747
     vtbls:
       - ea: 0x142100B30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14133A4A0: ctor
-  Client::UI::AddonStorageCheck: # 745
+  Client::UI::AddonStorageCheck: # 748
     vtbls:
       - ea: 0x1420ED8E8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412AE0F0: ctor
-  Client::UI::AddonCraftActionSimulator: # 746
+  Client::UI::AddonCraftActionSimulator: # 749
     vtbls:
       - ea: 0x1420EDB38
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412AE4C0: ctor
-  Client::UI::AddonHWDInfoBoard: # 747
+  Client::UI::AddonHWDInfoBoard: # 750
     vtbls:
       - ea: 0x1420FF540
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14132DFD0: ctor
-  Client::UI::AddonHWDLottery: # 748
+  Client::UI::AddonHWDLottery: # 751
     vtbls:
       - ea: 0x1420FF790
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14132FC70: ctor
-  Client::UI::AddonHWDSupply: # 749
+  Client::UI::AddonHWDSupply: # 752
     vtbls:
       - ea: 0x1420FFB00
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141335650: ctor
-  Client::UI::AddonHWDAetherGauge: # 750
+  Client::UI::AddonHWDAetherGauge: # 753
     vtbls:
       - ea: 0x1420FFD50
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141336220: ctor
-  Client::UI::AddonHWDGathereInspect: # 751
+  Client::UI::AddonHWDGathereInspect: # 754
     vtbls:
       - ea: 0x1420FFFA0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141336960: ctor
-  Client::UI::AddonHWDGathereInspectTargetList: # 752
+  Client::UI::AddonHWDGathereInspectTargetList: # 755
     vtbls:
       - ea: 0x1421001F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141338230: ctor
-  Client::UI::AddonHWDScore: # 753
+  Client::UI::AddonHWDScore: # 756
     vtbls:
       - ea: 0x142100440
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141338C90: ctor
-  Client::UI::AddonHWDGathererInspectionItemCount: # 754
+  Client::UI::AddonHWDGathererInspectionItemCount: # 757
     vtbls:
       - ea: 0x142100690
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141339C20: ctor
-  Client::UI::AddonHWDMonument: # 755
+  Client::UI::AddonHWDMonument: # 758
     vtbls:
       - ea: 0x1421008E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14133A320: ctor
-  Client::UI::AddonIKDSchedule: # 756
+  Client::UI::AddonIKDSchedule: # 759
     vtbls:
       - ea: 0x142101BD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413474A0: ctor
-  Client::UI::AddonIKDFishingLog: # 757
+  Client::UI::AddonIKDFishingLog: # 760
     vtbls:
       - ea: 0x142101E20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141348F80: ctor
-  Client::UI::AddonIKDCreel: # 758
+  Client::UI::AddonIKDCreel: # 761
     vtbls:
       - ea: 0x142102090
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14134AD70: ctor
-  Client::UI::AddonIKDResult: # 759
+  Client::UI::AddonIKDResult: # 762
     vtbls:
       - ea: 0x1421022E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14134CB80: ctor
-  Client::UI::AddonIKDMission: # 760
+  Client::UI::AddonIKDMission: # 763
     vtbls:
       - ea: 0x142102530
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14134EFE0: ctor
-  Client::UI::AddonInclusionShop: # 761
+  Client::UI::AddonInclusionShop: # 764
     vtbls:
       - ea: 0x1420EE268
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B1AE0: ctor
-  Client::UI::AddonCollectablesShop: # 762
+  Client::UI::AddonCollectablesShop: # 765
     vtbls:
       - ea: 0x1420EE4D8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B35A0: ctor
-  Client::UI::AddonMYCWarResultNotebook: # 763
+  Client::UI::AddonMYCWarResultNotebook: # 766
     vtbls:
       - ea: 0x142102780
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14134F970: ctor
-  Client::UI::AddonMYCInfo: # 764
+  Client::UI::AddonMYCInfo: # 767
     vtbls:
       - ea: 0x142102A88
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141352000: ctor
-  Client::UI::AddonMYCItemBox: # 765
+  Client::UI::AddonMYCItemBox: # 768
     vtbls:
       - ea: 0x142102F28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141353CD0: ctor
-  Client::UI::AddonMYCItemBag: # 766
+  Client::UI::AddonMYCItemBag: # 769
     vtbls:
       - ea: 0x1421031F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141355AC0: ctor
-  Client::UI::AddonMYCItemBagTrade: # 767
-  Client::UI::AddonMYCItemBagMySet: # 768
-  Client::UI::AddonMYCItemMySet: # 769
+  Client::UI::AddonMYCItemBagTrade: # 770
+  Client::UI::AddonMYCItemBagMySet: # 771
+  Client::UI::AddonMYCItemMySet: # 772
     vtbls:
       - ea: 0x142103440
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141358520: ctor
-  Client::UI::AddonMYCActionSelect: # 770
+  Client::UI::AddonMYCActionSelect: # 773
     vtbls:
       - ea: 0x142103690
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141358CF0: ctor
-  Client::UI::AddonMYCBattleAreaInfo: # 771
+  Client::UI::AddonMYCBattleAreaInfo: # 774
     vtbls:
       - ea: 0x142102CD8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413529E0: ctor
-  Client::UI::AddonMYCDuelRequest: # 772
+  Client::UI::AddonMYCDuelRequest: # 775
     vtbls:
       - ea: 0x1421038E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141359100: ctor
-  Client::UI::AddonMYCDuelRequestDialog: # 773
+  Client::UI::AddonMYCDuelRequestDialog: # 776
     vtbls:
       - ea: 0x142103B30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141359480: ctor
-  Client::UI::AddonMYCWeaponAdjust: # 774
+  Client::UI::AddonMYCWeaponAdjust: # 777
     vtbls:
       - ea: 0x142104260
         base: Client::UI::AddonMYCWeaponAdjustBase
     funcs:
       0x14135D4C0: ctor
-  Client::UI::AddonMYCWeaponAdjust2: # 775
+  Client::UI::AddonMYCWeaponAdjust2: # 778
     vtbls:
       - ea: 0x1421044C0
         base: Client::UI::AddonMYCWeaponAdjustBase
     funcs:
       0x14135D670: ctor
-  Client::UI::AddonOrnamentNoteBook: # 776
+  Client::UI::AddonOrnamentNoteBook: # 779
     vtbls:
       - ea: 0x1420CD648
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14118CA60: ctor
-  Client::UI::AddonEventFade: # 777
+  Client::UI::AddonEventFade: # 780
     vtbls:
       - ea: 0x1420A0090
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14104C040: ctor
-  Client::UI::AddonCursorRect: # 778
+  Client::UI::AddonCursorRect: # 781
     vtbls:
       - ea: 0x14209ED98
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141048F80: ctor
-  Client::UI::AddonTourismMenu: # 779
+  Client::UI::AddonTourismMenu: # 782
     vtbls:
       - ea: 0x1420EE728
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B57E0: ctor
-  Client::UI::AddonSynthesisCondition: # 780
+  Client::UI::AddonSynthesisCondition: # 783
     vtbls:
       - ea: 0x1420EEBC8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1412B6710: ctor
-  Client::UI::AddonStarlight20GiftBox: # 781
+  Client::UI::AddonStarlight20GiftBox: # 784
     vtbls:
       - ea: 0x142104720
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14135D8A0: ctor
-  Client::UI::AddonSpearFishing: # 782
+  Client::UI::AddonHalloweenNpcSelect: # 785
+    vtbls:
+      - ea: 0x142113908
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1414065C0: ctor
+  Client::UI::AddonSpearFishing: # 786
     vtbls:
       - ea: 0x142104988
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14135E4B0: ctor
-  Client::UI::AddonAdventureNotice: # 783
+  Client::UI::AddonAdventureNotice: # 787
     vtbls:
       - ea: 0x1420CBC30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141179680: ctor
-  Client::UI::AddonRetainerInputString: # 784
+  Client::UI::AddonRetainerInputString: # 788
     vtbls:
       - ea: 0x1420C93D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141150D30: ctor
-  Client::UI::AddonOmikuji: # 785
+  Client::UI::AddonOmikuji: # 789
     vtbls:
       - ea: 0x142106CB8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413869F0: ctor
-  Client::UI::AddonAkatsukiNote: # 786
+  Client::UI::AddonAkatsukiNote: # 790
     vtbls:
       - ea: 0x1420CD898
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14118F0F0: ctor
-  Client::UI::AddonMKSRecord: # 787
+  Client::UI::AddonMKSRecord: # 791
     vtbls:
       - ea: 0x1420C4580
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14112AAB0: ctor
-  Client::UI::AddonBannerList: # 788
+  Client::UI::AddonBannerList: # 792
     vtbls:
       - ea: 0x142107F78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14138D3A0: ctor
-  Client::UI::AddonBannerEditor: # 789
+  Client::UI::AddonBannerEditor: # 793
     vtbls:
       - ea: 0x1421081E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14138F370: ctor
-  Client::UI::AddonBannerUpdateView: # 790
+  Client::UI::AddonBannerUpdateView: # 794
     vtbls:
       - ea: 0x142108430
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141393390: ctor
-  Client::UI::AddonBannerGearsetLink: # 791
+  Client::UI::AddonBannerGearsetLink: # 795
     vtbls:
       - ea: 0x142108680
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141393E00: ctor
-  Client::UI::AddonBannerConfirm: # 792
+  Client::UI::AddonBannerConfirm: # 796
     vtbls:
       - ea: 0x1421088D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141394440: ctor
-  Client::UI::AddonBannerPreview: # 793
+  Client::UI::AddonBannerPreview: # 797
     vtbls:
       - ea: 0x142108B20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413947D0: ctor
-  Client::UI::AddonFittingShop: # 794
+  Client::UI::AddonFittingShop: # 798
     vtbls:
       - ea: 0x142106F28
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141386E50: ctor
-  Client::UI::AddonFittingShopSetting: # 795
+  Client::UI::AddonFittingShopSetting: # 799
     vtbls:
       - ea: 0x142107178
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141388480: ctor
-  Client::UI::AddonExHotbarEditor: # 796
+  Client::UI::AddonExHotbarEditor: # 800
     vtbls:
       - ea: 0x1421073C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141388A10: ctor
-  Client::UI::AddonSelectYesNoTextScroll: # 797
+  Client::UI::AddonSelectYesNoTextScroll: # 801
     vtbls:
       - ea: 0x1420A3688
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14105D450: ctor
-  Client::UI::AddonCharaCard: # 798
+  Client::UI::AddonCharaCard: # 802
     vtbls:
       - ea: 0x1421096C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141397AA0: ctor
-  Client::UI::AddonCharaCardEditMenu: # 799
+  Client::UI::AddonCharaCardEditMenu: # 803
     vtbls:
       - ea: 0x142109910
         base: Client::UI::AddonSelectString
     funcs:
       0x141398C30: ctor
-  Client::UI::AddonCharaCardDesignSetting: # 800
+  Client::UI::AddonCharaCardDesignSetting: # 804
     vtbls:
       - ea: 0x142109B60
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141398EC0: ctor
-  Client::UI::AddonCharaCardProfileSetting: # 801
+  Client::UI::AddonCharaCardProfileSetting: # 805
     vtbls:
       - ea: 0x142109DB0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14139AF90: ctor
-  Client::UI::AddonCharaCardClassJobSetting: # 802
+  Client::UI::AddonCharaCardClassJobSetting: # 806
     vtbls:
       - ea: 0x14210A000
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14139B7C0: ctor
-  Client::UI::AddonCharaCardPlayStyleSetting: # 803
+  Client::UI::AddonCharaCardPlayStyleSetting: # 807
     vtbls:
       - ea: 0x14210A250
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14139BBA0: ctor
-  Client::UI::AddonCharaCardPermissionSetting: # 804
+  Client::UI::AddonCharaCardPermissionSetting: # 808
     vtbls:
       - ea: 0x14210A4A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14139C5C0: ctor
-  Client::UI::AddonMJIHud: # 805
+  Client::UI::AddonMJIHud: # 809
     vtbls:
       - ea: 0x14210A940
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14139CC60: ctor
-  Client::UI::AddonMJIPouch: # 806
+  Client::UI::AddonMJIPouch: # 810
     vtbls:
       - ea: 0x14210AB90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14139E2A0: ctor
-  Client::UI::AddonMJIRecipeNoteBook: # 807
+  Client::UI::AddonMJIRecipeNoteBook: # 811
     vtbls:
       - ea: 0x14210ADE0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14139F560: ctor
-  Client::UI::AddonMJIReward: # 808
+  Client::UI::AddonMJIReward: # 812
     vtbls:
       - ea: 0x14210B030
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A0C50: ctor
-  Client::UI::AddonMJICraftDemandResearch: # 809
+  Client::UI::AddonMJICraftDemandResearch: # 813
     vtbls:
       - ea: 0x14210B280
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A11A0: ctor
-  Client::UI::AddonMJICraftMaterialConfirmation: # 810
+  Client::UI::AddonMJICraftMaterialConfirmation: # 814
     vtbls:
       - ea: 0x14210B4D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A3540: ctor
-  Client::UI::AddonMJICraftSales: # 811
+  Client::UI::AddonMJICraftSales: # 815
     vtbls:
       - ea: 0x14210B720
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A4250: ctor
-  Client::UI::AddonMJICraftSchedule: # 812
+  Client::UI::AddonMJICraftSchedule: # 816
     vtbls:
       - ea: 0x14210B970
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A4D20: ctor
-  Client::UI::AddonMJICraftScheduleMaintenance: # 813
+  Client::UI::AddonMJICraftScheduleMaintenance: # 817
     vtbls:
       - ea: 0x14210BBC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A7D20: ctor
-  Client::UI::AddonMJICraftSchedulePreset: # 814
+  Client::UI::AddonMJICraftSchedulePreset: # 818
     vtbls:
       - ea: 0x14210BE10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A8630: ctor
-  Client::UI::AddonMJICraftScheduleMaterialList: # 815
+  Client::UI::AddonMJICraftScheduleMaterialList: # 819
     vtbls:
       - ea: 0x14210C060
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A9160: ctor
-  Client::UI::AddonMJICraftScheduleSetting: # 816
+  Client::UI::AddonMJICraftScheduleSetting: # 820
     vtbls:
       - ea: 0x14210C2D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413A9860: ctor
-  Client::UI::AddonMJIAnimalManagement: # 817
+  Client::UI::AddonMJIAnimalManagement: # 821
     vtbls:
       - ea: 0x14210C520
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413AB2C0: ctor
-  Client::UI::AddonMJIAnimalAutomatic: # 818
+  Client::UI::AddonMJIAnimalAutomatic: # 822
     vtbls:
       - ea: 0x14210C770
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413ACAA0: ctor
-  Client::UI::AddonMJIAnimalNameInput: # 819
+  Client::UI::AddonMJIAnimalNameInput: # 823
     vtbls:
       - ea: 0x14210C9C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413AD180: ctor
-  Client::UI::AddonMJIFarmManagement: # 820
+  Client::UI::AddonMJIFarmManagement: # 824
     vtbls:
       - ea: 0x14210CC10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413AD7F0: ctor
-  Client::UI::AddonMJIFarmAutomatic: # 821
+  Client::UI::AddonMJIFarmAutomatic: # 825
     vtbls:
       - ea: 0x14210CE60
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413AE700: ctor
-  Client::UI::AddonMJIGatheringHouse: # 822
+  Client::UI::AddonMJIGatheringHouse: # 826
     vtbls:
       - ea: 0x14210D0B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413AFB60: ctor
-  Client::UI::AddonMJISearchArea: # 823
+  Client::UI::AddonMJISearchArea: # 827
     vtbls:
       - ea: 0x14210D320
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B1E10: ctor
-  Client::UI::AddonMJIBuilding: # 824
+  Client::UI::AddonMJIBuilding: # 828
     vtbls:
       - ea: 0x14210D590
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B3A90: ctor
-  Client::UI::AddonMJIBuildingProgress: # 825
+  Client::UI::AddonMJIBuildingProgress: # 829
     vtbls:
       - ea: 0x14210D7E0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B4AC0: ctor
-  Client::UI::AddonMJIGatheringNoteBook: # 826
+  Client::UI::AddonMJIGatheringNoteBook: # 830
     vtbls:
       - ea: 0x14210DA30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B4C70: ctor
-  Client::UI::AddonMJIDisposeShop: # 827
+  Client::UI::AddonMJIDisposeShop: # 831
     vtbls:
       - ea: 0x14210DC80
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B6250: ctor
-  Client::UI::AddonMJIDisposeShopShipping: # 828
+  Client::UI::AddonMJIDisposeShopShipping: # 832
     vtbls:
       - ea: 0x14210DED0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B70C0: ctor
-  Client::UI::AddonMJIDisposeShopShippingBulk: # 829
+  Client::UI::AddonMJIDisposeShopShippingBulk: # 833
     vtbls:
       - ea: 0x14210E120
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B77A0: ctor
-  Client::UI::AddonMJIMinionManagement: # 830
+  Client::UI::AddonMJIMinionManagement: # 834
     vtbls:
       - ea: 0x14210E370
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413B9030: ctor
-  Client::UI::AddonMJIMinionNoteBook: # 831
+  Client::UI::AddonMJIMinionNoteBook: # 835
     vtbls:
       - ea: 0x14210E5C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413BD0A0: ctor
-  Client::UI::AddonMJIBuildingMove: # 832
+  Client::UI::AddonMJIBuildingMove: # 836
     vtbls:
       - ea: 0x14210E830
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413C0D10: ctor
-  Client::UI::AddonMJIEntrance: # 833
+  Client::UI::AddonMJIEntrance: # 837
     vtbls:
       - ea: 0x14210EA80
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413C2050: ctor
-  Client::UI::AddonMJIPadGuide: # 834
+  Client::UI::AddonMJIPadGuide: # 838
     vtbls:
       - ea: 0x14210ECD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413C3FF0: ctor
-  Client::UI::AddonMJISettings: # 835
+  Client::UI::AddonMJISettings: # 839
     vtbls:
       - ea: 0x14210EF20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413C4290: ctor
-  Client::UI::AddonMJIHousingGoods: # 836
+  Client::UI::AddonMJIHousingGoods: # 840
     vtbls:
       - ea: 0x14210F190
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413C5590: ctor
-  Client::UI::AddonMJIHousingGoodsStain: # 837
+  Client::UI::AddonMJIHousingGoodsStain: # 841
     vtbls:
       - ea: 0x14210F3E8
         base: Client::UI::AddonMJIHousingGoods
     funcs:
       0x1413C7D20: ctor
-  Client::UI::AddonMJIHousingMenu: # 838
-  Client::UI::AddonMJINekomimiRequest: # 839
+  Client::UI::AddonMJIHousingMenu: # 842
+  Client::UI::AddonMJINekomimiRequest: # 843
     vtbls:
       - ea: 0x14210F640
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413C7E80: ctor
-  Client::UI::AddonArchiveItem: # 840
+  Client::UI::AddonArchiveItem: # 844
     vtbls:
       - ea: 0x142107618
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14138A210: ctor
-  Client::UI::AddonInputSearchComment: # 841
+  Client::UI::AddonInputSearchComment: # 845
     vtbls:
       - ea: 0x142143B08
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415494E0: ctor
-  Client::UI::AddonClass2JobHotbar: # 842
+  Client::UI::AddonClass2JobHotbar: # 846
     vtbls:
       - ea: 0x14210A6F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14139C820: ctor
-  Client::UI::AddonConfigChatLogNameSetting: # 843
+  Client::UI::AddonConfigChatLogNameSetting: # 847
     vtbls:
       - ea: 0x1420A4938
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14106A240: ctor
-  Client::UI::AddonVVDNotebook: # 844
+  Client::UI::AddonVVDNotebook: # 848
     vtbls:
       - ea: 0x142110980
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413D1310: ctor
-  Client::UI::AddonVVDFinder: # 845
+  Client::UI::AddonVVDFinder: # 849
     vtbls:
       - ea: 0x142110BD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413D19F0: ctor
-  Client::UI::AddonVVDAction: # 846
+  Client::UI::AddonVVDAction: # 850
     vtbls:
       - ea: 0x142110730
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413D0E80: ctor
-  Client::UI::AddonTofuList: # 847
+  Client::UI::AddonTofuList: # 851
     vtbls:
       - ea: 0x142111820
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413E67E0: ctor
-  Client::UI::AddonTofuPreview: # 848
+  Client::UI::AddonTofuPreview: # 852
     vtbls:
       - ea: 0x142111A70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413E7B30: ctor
-  Client::UI::AddonTofuEdit: # 849
+  Client::UI::AddonTofuEdit: # 853
     vtbls:
       - ea: 0x142111CC0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413E8330: ctor
-  Client::UI::AddonTofuPreset: # 850
+  Client::UI::AddonTofuPreset: # 854
     vtbls:
       - ea: 0x142112880
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413FAC20: ctor
-  Client::UI::AddonTofuObjectList: # 851
-    vtbls:
-      - ea: 0x142112630
-        base: Component::GUI::AtkUnitBase
-    funcs:
-      0x1413F89D0: ctor
-  Client::UI::AddonTofuInputString: # 852
+  Client::UI::AddonTofuInputString: # 855
     vtbls:
       - ea: 0x142112AD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413FBAE0: ctor
-  Client::UI::AddonTofuGroupSetting: # 853
+  Client::UI::AddonTofuGroupSetting: # 856
     vtbls:
       - ea: 0x142112D20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413FD880: ctor
-  Client::UI::AddonBannerParty: # 854
+  Client::UI::AddonTofuSaveDialog: # 857
+    vtbls:
+      - ea: 0x142112F70
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1413FF000: ctor
+  Client::UI::AddonBannerParty: # 858
     vtbls:
       - ea: 0x142108D80
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141395610: ctor
-  Client::UI::AddonBannerPartySetting: # 855
+  Client::UI::AddonBannerPartySetting: # 859
     vtbls:
       - ea: 0x142109220
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413971C0: ctor
-  Client::UI::AddonBannerMIP: # 856
+  Client::UI::AddonBannerMIP: # 860
     vtbls:
       - ea: 0x142108FD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413964F0: ctor
-  Client::UI::AddonBannerMIPSetting: # 857
+  Client::UI::AddonBannerMIPSetting: # 861
     vtbls:
       - ea: 0x142109470
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141397720: ctor
-  Client::UI::AddonTurnBreak: # 858
+  Client::UI::AddonTurnBreak: # 862
     vtbls:
       - ea: 0x1420D6F78
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411DAD80: ctor
-  Client::UI::AddonTurnBreakTitle: # 859
+  Client::UI::AddonTurnBreakTitle: # 863
     vtbls:
       - ea: 0x1420D71C8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411DB770: ctor
-  Client::UI::AddonTurnBreakGame: # 860
+  Client::UI::AddonTurnBreakGame: # 864
     vtbls:
       - ea: 0x1420D7568
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411DBD00: ctor
-  Client::UI::AddonTurnBreakResult: # 861
+  Client::UI::AddonTurnBreakResult: # 865
     vtbls:
-      - ea: 0x1421101D0
+      - ea: 0x1420D77B8
         base: Component::GUI::AtkUnitBase
     funcs:
-      0x1413CCAB0: ctor
-  Client::UI::AddonMandervilleWeapon: # 862
+      0x1411EAA90: ctor
+  Client::UI::AddonMandervilleWeapon: # 866
     vtbls:
       - ea: 0x142110E58
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413D4AC0: ctor
-  Client::UI::AddonMandervilleConfirm: # 863
+  Client::UI::AddonMandervilleConfirm: # 867
     vtbls:
       - ea: 0x1421110A8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413D5560: ctor
-  Client::UI::AddonSXTBattleLog: # 864
+  Client::UI::AddonSXTBattleLog: # 868
     vtbls:
       - ea: 0x1421131C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1413FFA10: ctor
-  Client::UI::AddonMoogleCollection: # 865
+  Client::UI::AddonMoogleCollection: # 869
     vtbls:
       - ea: 0x142113468
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141400750: ctor
-  Client::UI::AddonMoogleCollectionRewardList: # 866
+  Client::UI::AddonMoogleCollectionRewardList: # 870
     vtbls:
       - ea: 0x1421136B8
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141405D50: ctor
-  Client::UI::AddonFGSStageDescription: # 867
+  Client::UI::AddonFGSStageDescription: # 871
     vtbls:
       - ea: 0x14215C260
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EEB70: ctor
-  Client::UI::AddonFGSStageIntroBanner: # 868
+  Client::UI::AddonFGSStageIntroBanner: # 872
     vtbls:
       - ea: 0x14215C4B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EF180: ctor
-  Client::UI::AddonFGSHudGoal: # 869
+  Client::UI::AddonFGSHudGoal: # 873
     vtbls:
       - ea: 0x14215B430
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EC260: ctor
-  Client::UI::AddonFGSHudScore: # 870
+  Client::UI::AddonFGSHudScore: # 874
     vtbls:
       - ea: 0x14215B680
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EC930: ctor
-  Client::UI::AddonFGSHudStatus: # 871
+  Client::UI::AddonFGSHudStatus: # 875
     vtbls:
       - ea: 0x14215B8D0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415ECE60: ctor
-  Client::UI::AddonFGSHudRaceLog: # 872
+  Client::UI::AddonFGSHudRaceLog: # 876
     vtbls:
       - ea: 0x14215BB20
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415ED940: ctor
-  Client::UI::AddonFGSSpectatorMenu: # 873
+  Client::UI::AddonFGSSpectatorMenu: # 877
     vtbls:
       - ea: 0x14215BD70
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EE280: ctor
-  Client::UI::AddonFGSEnterDialog: # 874
+  Client::UI::AddonFGSEnterDialog: # 878
     vtbls:
       - ea: 0x14215C700
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EF580: ctor
-  Client::UI::AddonFGSExitDialog: # 875
+  Client::UI::AddonFGSExitDialog: # 879
     vtbls:
       - ea: 0x14215BFF0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EE900: ctor
-  Client::UI::AddonFGSWinner: # 876
+  Client::UI::AddonFGSWinner: # 880
     vtbls:
       - ea: 0x14215C950
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EF920: ctor
-  Client::UI::AddonFGSResult: # 877
+  Client::UI::AddonFGSResult: # 881
     vtbls:
       - ea: 0x14215CBA0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415EFE00: ctor
-  Client::UI::AddonPointMenu: # 878
+  Client::UI::AddonPointMenu: # 882
     vtbls:
       - ea: 0x1420FDB50
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141322D10: ctor
-  Client::UI::AddonTradeScreenImage: # 879
+  Client::UI::AddonTradeScreenImage: # 883
     vtbls:
       - ea: 0x1420FDDD0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141324570: ctor
-  Client::UI::AddonGlassSelect: # 880
+  Client::UI::AddonGlassSelect: # 884
     vtbls:
       - ea: 0x142118050
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141428000: ctor
-  Client::UI::AddonRatingViewer: # 881
+  Client::UI::AddonRatingViewer: # 885
     vtbls:
       - ea: 0x1420BA958
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411045A0: ctor
-  Client::UI::AddonHousingBlackListAuthority: # 882
+  Client::UI::AddonHousingBlackListAuthority: # 886
     vtbls:
       - ea: 0x14213B8F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14150F5B0: ctor
-  Client::UI::AddonHousingBlackListSetting: # 883
+  Client::UI::AddonHousingBlackListSetting: # 887
     vtbls:
       - ea: 0x14213BD90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141511360: ctor
-  Client::UI::AddonHousingBlackListEviction: # 884
+  Client::UI::AddonHousingBlackListEviction: # 888
     vtbls:
       - ea: 0x14213BB40
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141510D30: ctor
-  Client::UI::AddonTalkAutoMessageSelector: # 885
+  Client::UI::AddonTalkAutoMessageSelector: # 889
     vtbls:
       - ea: 0x1420FE270
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141324E30: ctor
-  Client::UI::AddonTalkAutoMessageSetting: # 886
+  Client::UI::AddonTalkAutoMessageSetting: # 890
     vtbls:
       - ea: 0x1420FE020
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141324AD0: ctor
-  Client::UI::AddonNgWordFilterList: # 887
+  Client::UI::AddonNgWordFilterList: # 891
     vtbls:
       - ea: 0x14214C6A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1415949F0: ctor
-  Client::UI::AddonNgWordFilterSetting: # 888
+  Client::UI::AddonNgWordFilterSetting: # 892
     vtbls:
       - ea: 0x14214C450
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141594690: ctor
-  Client::UI::AddonNgWordEdit: # 889
+  Client::UI::AddonNgWordEdit: # 893
     vtbls:
       - ea: 0x14214C8F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141595910: ctor
-  Client::UI::AddonHousingInteriorPattern: # 890
+  Client::UI::AddonHousingInteriorPattern: # 894
     vtbls:
       - ea: 0x14213BFE0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141511E30: ctor
-  Client::UI::AddonWKSHud: # 891
+  Client::UI::AddonWKSHud: # 895
     vtbls:
       - ea: 0x142114BA0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141410AB0: ctor
-  Client::UI::AddonWKSAnnounce: # 892
+  Client::UI::AddonWKSAnnounce: # 896
     vtbls:
       - ea: 0x142114DF0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141411970: ctor
-  Client::UI::AddonWKSPouch: # 893
+  Client::UI::AddonWKSPouch: # 897
     vtbls:
       - ea: 0x142115040
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141412F20: ctor
-  Client::UI::AddonWKSMission: # 894
+  Client::UI::AddonWKSMission: # 898
     vtbls:
       - ea: 0x1421152B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141413990: ctor
-  Client::UI::AddonWKSMissionInfomation: # 895
+  Client::UI::AddonWKSMissionInfomation: # 899
     vtbls:
       - ea: 0x142115500
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141418470: ctor
-  Client::UI::AddonWKSRecipeNotebook: # 896
+  Client::UI::AddonWKSRecipeNotebook: # 900
     vtbls:
       - ea: 0x142115770
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141419040: ctor
-  Client::UI::AddonWKSMechaOperationEntryUI: # 897
+  Client::UI::AddonWKSMechaOperationEntryUI: # 901
     vtbls:
       - ea: 0x1421159C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14141A7E0: ctor
-  Client::UI::AddonWKSMechaOperationEntryScreen: # 898
+  Client::UI::AddonWKSMechaOperationEntryScreen: # 902
     vtbls:
       - ea: 0x142115C10
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14141CB00: ctor
-  Client::UI::AddonWKSMechaOperationEntryAccept: # 899
+  Client::UI::AddonWKSMechaOperationEntryAccept: # 903
     vtbls:
       - ea: 0x142115E60
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14141CE60: ctor
-  Client::UI::AddonWKSScoreList: # 900
+  Client::UI::AddonWKSScoreList: # 904
     vtbls:
       - ea: 0x1421160B0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14141D4D0: ctor
-  Client::UI::AddonWKSAchievement: # 901
+  Client::UI::AddonWKSAchievement: # 905
     vtbls:
       - ea: 0x142116300
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14141E4C0: ctor
-  Client::UI::AddonWKSPraiseBoard: # 902
+  Client::UI::AddonWKSPraiseBoard: # 906
     vtbls:
       - ea: 0x142116550
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14141F880: ctor
-  Client::UI::AddonWKSPraiseBoardDetail: # 903
+  Client::UI::AddonWKSPraiseBoardDetail: # 907
     vtbls:
       - ea: 0x1421167A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14141FE90: ctor
-  Client::UI::AddonWKSPraiseBoardDetailHologram: # 904
-  Client::UI::AddonWKSPraiseBoardPoseSelect: # 905
+  Client::UI::AddonWKSPraiseBoardDetailHologram: # 908
+  Client::UI::AddonWKSPraiseBoardPoseSelect: # 909
     vtbls:
       - ea: 0x1421169F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141420190: ctor
-  Client::UI::AddonWKSReward: # 906
+  Client::UI::AddonWKSReward: # 910
     vtbls:
       - ea: 0x142116C40
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414207B0: ctor
-  Client::UI::AddonWKSLottery: # 907
+  Client::UI::AddonWKSLottery: # 911
     vtbls:
       - ea: 0x142116E90
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414217B0: ctor
-  Client::UI::AddonWKSToolCustomize: # 908
+  Client::UI::AddonWKSToolCustomize: # 912
     vtbls:
       - ea: 0x1421174C0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141423040: ctor
-  Client::UI::AddonWKSHistoryBoard: # 909
+  Client::UI::AddonWKSHistoryBoard: # 913
     vtbls:
       - ea: 0x142117710
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141424E20: ctor
-  Client::UI::AddonMKDInfo: # 910
+  Client::UI::AddonWKSPlanetSelect: # 914
+    vtbls:
+      - ea: 0x142117960
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141425A10: ctor
+  Client::UI::AddonWKSSetting: # 915
+    vtbls:
+      - ea: 0x142117BB0
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141426C80: ctor
+  Client::UI::AddonWKSEnterInfo: # 916
+    vtbls:
+      - ea: 0x142117E00
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1414271C0: ctor
+  Client::UI::AddonMKDInfo: # 917
     vtbls:
       - ea: 0x1421184F0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14142B1D0: ctor
-  Client::UI::AddonMKDContentsInfo: # 911
+  Client::UI::AddonMKDContentsInfo: # 918
     vtbls:
       - ea: 0x1421182A0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14142A090: ctor
-  Client::UI::AddonMKDSupportJob: # 912
+  Client::UI::AddonMKDSupportJob: # 919
     vtbls:
       - ea: 0x142118BE0
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141432240: ctor
-  Client::UI::AddonMKDSupportJobList: # 913
+  Client::UI::AddonMKDSupportJobList: # 920
     vtbls:
       - ea: 0x142118E30
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414334C0: ctor
-  Client::UI::AddonMKDSettings: # 914
+  Client::UI::AddonMKDSettings: # 921
     vtbls:
       - ea: 0x142118990
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141431660: ctor
-  Client::UI::AddonMKDTowerEntry: # 915
+  Client::UI::AddonMKDTowerEntry: # 922
     vtbls:
       - ea: 0x142119080
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141435CC0: ctor
-  Client::UI::AddonMKDLoreBook: # 916
+  Client::UI::AddonMKDLoreBook: # 923
     vtbls:
       - ea: 0x142118740
         base: Component::GUI::AtkUnitBase
     funcs:
       0x14142FC60: ctor
+  Client::UI::AddonMKDRelicGrowth: # 924
+    vtbls:
+      - ea: 0x1421192D0
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141437030: ctor
+  Client::UI::AddonQuickPanel: # 925
+  Client::UI::AddonQuickPanelSetting: # 926
+    vtbls:
+      - ea: 0x142119520
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x141437CE0: ctor
+  Client::UI::AddonEventTutorial: # 927
+    vtbls:
+      - ea: 0x142107D08
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14138CD10: ctor
+  Client::UI::AddonConfigCharacterChatLogMiniTalk: # 928
+    vtbls:
+      - ea: 0x1420A9578
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1410A6CE0: ctor
+  Client::UI::AddonToggleContextMenu: # 929
+    vtbls:
+      - ea: 0x1420A3900
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x14105E210: ctor
+  Client::UI::AddonMiniTalkPlayer: # 930
+    vtbls:
+      - ea: 0x1421101D0
+        base: Component::GUI::AtkUnitBase
+    funcs:
+      0x1413CCAB0: ctor
   # Other Addons below
   Client::UI::AddonFadeMiddleBack:
     vtbls:
@@ -21512,12 +21597,6 @@ classes:
       0x1414D57C0: AddonOverlayMouseClickEvent
       0x1414D5CC0: AddonOverlayMouseReleaseEvent
       0x1414D78B0: SetAddonScale
-  Client::UI::AddonTripleTriadTournamentResult:
-    vtbls:
-      - ea: 0x142151638
-        base: Component::GUI::AtkUnitBase
-    funcs:
-      0x1415AC630: ctor
   Client::UI::AddonGSInfoGeneral:
     vtbls:
       - ea: 0x1421521C8
