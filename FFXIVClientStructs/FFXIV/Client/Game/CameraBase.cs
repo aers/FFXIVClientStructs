@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::CameraBase
 [GenerateInterop(isInherited: true)]
-[StructLayout(LayoutKind.Explicit, Size = 0x110)]
+[StructLayout(LayoutKind.Explicit, Size = 0x120)]
 public unsafe partial struct CameraBase {
     [FieldOffset(0x10)] public Graphics.Scene.Camera SceneCamera;
     [FieldOffset(0x100)] public uint UnkUInt;

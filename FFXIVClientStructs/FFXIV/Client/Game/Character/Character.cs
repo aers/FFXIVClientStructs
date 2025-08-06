@@ -8,42 +8,42 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Game::Character::CharacterData
 [GenerateInterop(isInherited: true)]
 [Inherits<GameObject>, Inherits<CharacterData>]
-[StructLayout(LayoutKind.Explicit, Size = 0x22E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2360)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3)]
 public unsafe partial struct Character {
-    [FieldOffset(0x610)] public EmoteController EmoteController;
-    [FieldOffset(0x650)] public MountContainer Mount;
-    [FieldOffset(0x6B8)] public CompanionContainer CompanionData;
-    [FieldOffset(0x6D8)] public DrawDataContainer DrawData;
-    [FieldOffset(0x8D0)] public OrnamentContainer OrnamentData;
-    [FieldOffset(0x948)] public ReaperShroudContainer ReaperShroud;
-    [FieldOffset(0x9A0)] public TimelineContainer Timeline;
-    [FieldOffset(0xCF0)] public LookAtContainer LookAt;
+    [FieldOffset(0x620)] public EmoteController EmoteController;
+    [FieldOffset(0x660)] public MountContainer Mount;
+    [FieldOffset(0x6C8)] public CompanionContainer CompanionData;
+    [FieldOffset(0x6E8)] public DrawDataContainer DrawData;
+    [FieldOffset(0x950)] public OrnamentContainer OrnamentData;
+    [FieldOffset(0x9C8)] public ReaperShroudContainer ReaperShroud;
+    [FieldOffset(0xA20)] public TimelineContainer Timeline;
+    [FieldOffset(0xD70)] public LookAtContainer LookAt;
 
     // 0x01 = OffhandDrawn
-    [FieldOffset(0x18F0)] public byte WeaponFlags;
-    [FieldOffset(0x18F8)] public VfxContainer Vfx;
+    [FieldOffset(0x1970)] public byte WeaponFlags;
+    [FieldOffset(0x1978)] public VfxContainer Vfx;
 
-    [FieldOffset(0x1A00)] public EffectContainer Effects;
-    [FieldOffset(0x1A80)] public CharacterSetupContainer CharacterSetup;
+    [FieldOffset(0x1A80)] public EffectContainer Effects;
+    [FieldOffset(0x1B00)] public CharacterSetupContainer CharacterSetup;
 
     // 0x1AA8: start of some substructure
-    [FieldOffset(0x1A98)] public ModelContainer ModelContainer;
+    [FieldOffset(0x1B18)] public ModelContainer ModelContainer;
 
     // 0x01 = PartyMember
     // 0x02 = AllianceMember
     // 0x04 = Friend
-    [FieldOffset(0x1C52)] public byte RelationFlags;
+    [FieldOffset(0x1CD2)] public byte RelationFlags;
 
     // 0x40 = All attacks will be cancelled, character is doing the the 'winded' emote, used in e.g. 'Strange Bedfellows' and 'Combat Evolved' when quest expects an item to be used on the character
-    [FieldOffset(0x1C58)] public byte ActorControlFlags;
+    [FieldOffset(0x1CD8)] public byte ActorControlFlags;
 
-    [FieldOffset(0x2150)] public Balloon Balloon;
+    [FieldOffset(0x21D0)] public Balloon Balloon;
 
-    [FieldOffset(0x2258)] public float Alpha;
+    [FieldOffset(0x22D8)] public float Alpha;
 
-    [FieldOffset(0x2268)] public Companion* CompanionObject; // minion
-    [FieldOffset(0x2270), FixedSizeArray(isString: true)] internal FixedSizeArray7<byte> _freeCompanyTag;
+    [FieldOffset(0x22E8)] public Companion* CompanionObject; // minion
+    [FieldOffset(0x22F0), FixedSizeArray(isString: true)] internal FixedSizeArray7<byte> _freeCompanyTag;
 
     /// <summary>
     /// The current (hard) target for this Character. This will not be set for the LocalPlayer.
@@ -52,7 +52,7 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the target for the local player.
     /// </remarks>
-    [FieldOffset(0x2278)] public GameObjectId TargetId;
+    [FieldOffset(0x22F8)] public GameObjectId TargetId;
 
     /// <summary>
     /// The current soft target for this Character. This will not be set for the LocalPlayer.
@@ -61,21 +61,21 @@ public unsafe partial struct Character {
     /// Developers should generally use <see cref="GetSoftTargetId"/> over reading this field directly, as it will
     /// properly handle resolving the soft target for the local player.
     /// </remarks>
-    [FieldOffset(0x2280)] public GameObjectId SoftTargetId;
+    [FieldOffset(0x2300)] public GameObjectId SoftTargetId;
 
-    [FieldOffset(0x228C)] public float CastRotation;
+    [FieldOffset(0x230C)] public float CastRotation;
 
-    [FieldOffset(0x22A4)] public uint NameId;
+    [FieldOffset(0x2328)] public uint NameId;
 
-    [FieldOffset(0x22B0)] public uint CompanionOwnerId;
+    [FieldOffset(0x2334)] public uint CompanionOwnerId;
 
-    [FieldOffset(0x22B8)] public ulong AccountId;
-    [FieldOffset(0x22C0)] public ulong ContentId;
-    [FieldOffset(0x22C8)] public ushort CurrentWorld;
-    [FieldOffset(0x22CA)] public ushort HomeWorld;
-    [FieldOffset(0x22CC)] public CharacterModes Mode;
-    [FieldOffset(0x22CD)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
-    [FieldOffset(0x22CE)] public byte GMRank;
+    [FieldOffset(0x2340)] public ulong AccountId;
+    [FieldOffset(0x2348)] public ulong ContentId;
+    [FieldOffset(0x2350)] public ushort CurrentWorld;
+    [FieldOffset(0x2352)] public ushort HomeWorld;
+    [FieldOffset(0x2354)] public CharacterModes Mode;
+    [FieldOffset(0x2355)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
+    [FieldOffset(0x2356)] public byte GMRank;
 
     public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;
     public bool IsOffhandDrawn => (WeaponFlags & 0x1) != 0;

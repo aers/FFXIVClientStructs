@@ -5,18 +5,18 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 // Client::Game::Control::Control
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x76E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x76F0)]
 public unsafe partial struct Control {
     [StaticAddress("4C 8D 35 ?? ?? ?? ?? 48 8B 09", 3)]
     public static partial Control* Instance();
 
     [FieldOffset(0x00)] public CameraManager CameraManager;
-    [FieldOffset(0x180)] public TargetSystem TargetSystem;
+    [FieldOffset(0x190)] public TargetSystem TargetSystem;
 
-    [FieldOffset(0x7623)] public bool IsWalking;
-    [FieldOffset(0x7688)] public uint LocalPlayerEntityId;
-    [FieldOffset(0x7690)] public BattleChara* LocalPlayer;
-    [FieldOffset(0x76A0)] public Matrix4x4 ViewProjectionMatrix;
+    [FieldOffset(0x7633)] public bool IsWalking;
+    [FieldOffset(0x7698)] public uint LocalPlayerEntityId;
+    [FieldOffset(0x76A0)] public BattleChara* LocalPlayer;
+    [FieldOffset(0x76B0)] public Matrix4x4 ViewProjectionMatrix;
 
     public static bool CanFly => GetFlightAllowedStatus() == FlightAllowedStatus.CanFly;
 
