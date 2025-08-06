@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 // Client::Game::Event::EventFramework
 // ctor "E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 28 E9"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x44A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x44C0)]
 public unsafe partial struct EventFramework {
     //[StaticAddress("48 83 3D ?? ?? ?? ?? ?? 74 ?? E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 3C", 3, isPointer: true)]
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 4F 03")]
@@ -22,13 +22,13 @@ public unsafe partial struct EventFramework {
     // 7.1: something new
     [FieldOffset(0x3BF8)] public int LoadState; //0=Exd, 1=EventHandler, 2=Director, 3=LuaActor, 4=EventScene, 5=Idle?, 6=Ready?
 
-    [FieldOffset(0x3C00)] public LuaState* LuaState;
-    [FieldOffset(0x3C08)] public LuaThread LuaThread;
+    [FieldOffset(0x3C20)] public LuaState* LuaState;
+    [FieldOffset(0x3C28)] public LuaThread LuaThread;
 
-    [FieldOffset(0x3C60)] public EventState EventState1;
-    [FieldOffset(0x3CC0)] public EventState EventState2;
+    [FieldOffset(0x3C80)] public EventState EventState1;
+    [FieldOffset(0x3CE0)] public EventState EventState2;
 
-    [FieldOffset(0x42B8)] public DailyQuestMap DailyQuests;
+    [FieldOffset(0x42D8)] public DailyQuestMap DailyQuests;
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 D2 48 8B D8 48 85 C0 0F 84")]
     public partial ContentDirector* GetContentDirector();
