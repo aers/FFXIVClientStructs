@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //   Client::Game::Character::ContainerInterface
 [GenerateInterop]
 [Inherits<ContainerInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1F8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x268)]
 public unsafe partial struct DrawDataContainer {
     [FieldOffset(0x010), FixedSizeArray] internal FixedSizeArray3<DrawObjectData> _weaponData;
     [FieldOffset(0x1D0), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _equipmentModelIds;
