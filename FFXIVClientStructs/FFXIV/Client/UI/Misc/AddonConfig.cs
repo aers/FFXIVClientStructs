@@ -34,9 +34,9 @@ public unsafe partial struct AddonConfigData {
     // [FieldOffset(0x68)] public StdList<[SomeStruct Size 48]> SomeList; // Contains 574 elements
     // [FieldOffset(0x78)] public StdList<[SomeStruct size 16]> SomeList; // Contains 424 elements
     [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray1027<AddonConfigEntry> _configEntries; // 110 (Default HudLayout?) + 917 (the amount of addons in RaptureAtkModule)
-    [FieldOffset(0x90F8), FixedSizeArray] internal FixedSizeArray4<Utf8String> _hudLayoutNames; // unused?!
-    [FieldOffset(0x9298), FixedSizeArray] internal FixedSizeArray440<AddonConfigEntry> _hudLayoutConfigEntries; // 4 HudLayouts * 110 entries
-    [FieldOffset(0xD078)] public int CurrentHudLayout;
+    [FieldOffset(0x92F0), FixedSizeArray] internal FixedSizeArray4<Utf8String> _hudLayoutNames; // unused?!
+    [FieldOffset(0x9490), FixedSizeArray] internal FixedSizeArray440<AddonConfigEntry> _hudLayoutConfigEntries; // 4 HudLayouts * 110 entries
+    [FieldOffset(0xD270)] public int CurrentHudLayout;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x24)]
