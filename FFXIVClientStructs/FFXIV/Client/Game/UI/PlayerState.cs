@@ -104,7 +104,7 @@ public unsafe partial struct PlayerState {
     // Size: (SpearfishingNotebookSheet.RowCount + 7) / 8
     [FieldOffset(0x4C0), FixedSizeArray] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebookBitmask;
     // Ref: "42 8D 04 C5 ?? ?? ?? ?? 2B C8 48 8D 05 ?? ?? ?? ?? ?? ?? ?? ?? ?? D3 E2 84 D0 0F B6 47"
-    // Size: i have no idea, good luck
+    // Size: Highest SpearfishingItemSheet row under 30000, subtract 20000 then right shift 3 to get highest array index
     /// <remarks> Use <see cref="IsSpearfishCaught(uint)"/> </remarks>
     [FieldOffset(0x4C9), FixedSizeArray] internal FixedSizeArray39<byte> _caughtSpearfishBitmask;
     [FieldOffset(0x4F0)] public uint NumSpearfishCaught;
