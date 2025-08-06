@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Inspect)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x808)]
+[StructLayout(LayoutKind.Explicit, Size = 0x940)]
 public unsafe partial struct AgentInspect {
     [FieldOffset(0x028)] public uint RequestEntityId;
     [FieldOffset(0x02C)] public uint RequestSearchCommentEntityId;
@@ -21,25 +21,26 @@ public unsafe partial struct AgentInspect {
     [FieldOffset(0x108)] public Utf8String OnlineId;
     [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray3<Utf8String> _chocoboBarding;
     [FieldOffset(0x2A8), FixedSizeArray] internal FixedSizeArray13<ItemData> _items;
+    [FieldOffset(0x414), FixedSizeArray] internal FixedSizeArray13<ItemData> _glamourItems;
 
-    [FieldOffset(0x449)] public bool IsBuddyInspect;
+    [FieldOffset(0x581)] public bool IsBuddyInspect;
 
     // Offset can be found with "44 89 BF ? ? ? ? E8 ? ? ? ? 48 8B C8 48 8B D8"
-    [FieldOffset(0x44C)] public int SelectedItemSlot;
+    [FieldOffset(0x584)] public int SelectedItemSlot;
 
-    [FieldOffset(0x450)] public FreeCompanyData FreeCompany;
+    [FieldOffset(0x588)] public FreeCompanyData FreeCompany;
     // Status fields
     // 0: Nothing to do
     // 1: Fetching Data
     // 2: Data ready (Fills window)
     // 3: Probably failure
-    [FieldOffset(0x4D0)] public uint FetchCharacterDataStatus;
-    [FieldOffset(0x4D4)] public uint FetchSearchCommentStatus;
-    [FieldOffset(0x4D8)] public uint FetchFreeCompanyStatus;
+    [FieldOffset(0x608)] public uint FetchCharacterDataStatus;
+    [FieldOffset(0x60C)] public uint FetchSearchCommentStatus;
+    [FieldOffset(0x610)] public uint FetchFreeCompanyStatus;
 
-    [FieldOffset(0x4E0)] public InfoProxyDetail* InfoProxyDetail;
-    [FieldOffset(0x4E8)] public InfoProxyFreeCompany* InfoProxyFreeCompany;
-    [FieldOffset(0x4F0)] public InspectCharaView CharaView;
+    [FieldOffset(0x618)] public InfoProxyDetail* InfoProxyDetail;
+    [FieldOffset(0x620)] public InfoProxyFreeCompany* InfoProxyFreeCompany;
+    [FieldOffset(0x628)] public InspectCharaView CharaView;
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC 20 49 8B E8 8B DA")]
     public partial void ReceiveSearchComment(uint entityId, byte* searchComment);
@@ -67,15 +68,20 @@ public unsafe partial struct AgentInspect {
     }
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public partial struct ItemData {
-        [FieldOffset(0x00)] public uint IconId;
-        [FieldOffset(0x04)] public IconFlagsTopRight IconFlags1;
-        [FieldOffset(0x05)] public ColorRgb Color;
-        [FieldOffset(0x08)] public bool Filled;
-        [FieldOffset(0x09)] public bool IsILevelSynced; // 1 if Level < Level{Equip} So probably ILVSynced
-        [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray4<short> _modelMain;
-        [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<short> _modelSub;
+        [FieldOffset(0x00)] public uint ItemId;
+        [FieldOffset(0x04)] public uint GlamourItemId;
+        [FieldOffset(0x08)] public uint IconId;
+        [FieldOffset(0x0C)] public IconFlagsTopRight IconFlags1;
+        [FieldOffset(0x0D)] public ColorRgb Color;
+        [FieldOffset(0x18)] public bool CanCompare;
+        [FieldOffset(0x19)] public bool CanTryOn;
+
+        [Obsolete("Not updated for 7.3")] [FieldOffset(0x18)] public bool Filled;
+        [Obsolete("Not updated for 7.3")] [FieldOffset(0x09)] public bool IsILevelSynced; // 1 if Level < Level{Equip} So probably ILVSynced
+        [Obsolete("Not updated for 7.3")] [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray4<short> _modelMain;
+        [Obsolete("Not updated for 7.3")] [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<short> _modelSub;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x3)]
         public struct ColorRgb {
