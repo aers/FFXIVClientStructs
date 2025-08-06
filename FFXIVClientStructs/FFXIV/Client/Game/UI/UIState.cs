@@ -95,20 +95,20 @@ public unsafe partial struct UIState {
     // Ref: g_Client::Game::UI::UnlockedCompanionsMask
     //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     // Size: (CompanionSheet.RowCount + 7) / 8
-    [FieldOffset(0x19ECB), FixedSizeArray] internal FixedSizeArray69<byte> _unlockedCompanionsBitmask;
+    [FieldOffset(0x19ECB), FixedSizeArray] internal FixedSizeArray71<byte> _unlockedCompanionsBitmask;
 
     // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
     [FieldOffset(0x19F12), FixedSizeArray] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
 
     // Ref: UIState#IsCutsceneSeen
     // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) / 8
-    [FieldOffset(0x19F1E), FixedSizeArray] internal FixedSizeArray166<byte> _cutsceneSeenBitmask;
+    [FieldOffset(0x19F1E), FixedSizeArray] internal FixedSizeArray172<byte> _cutsceneSeenBitmask;
 
     // unk bitmasks
 
     // Ref: UIState#IsTripleTriadCardUnlocked
     // Size: TripleTriadCard.RowCount / 8
-    [FieldOffset(0x19FCC), FixedSizeArray] internal FixedSizeArray55<byte> _unlockedTripleTriadCardsBitmask;
+    [FieldOffset(0x19FCC), FixedSizeArray] internal FixedSizeArray56<byte> _unlockedTripleTriadCardsBitmask;
     [FieldOffset(0x1A008)] public ulong UnlockedTripleTriadCardsCount;
 
     [FieldOffset(0x1A022)] public int TerritoryTypeTransientOffsetZ; // this is a short in the sheet and copied with a 4 byte register causing it to be an int
