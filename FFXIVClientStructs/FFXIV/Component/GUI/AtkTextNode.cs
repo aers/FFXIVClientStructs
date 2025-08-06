@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // simple text node
 [GenerateInterop]
 [Inherits<AtkResNode>]
-[StructLayout(LayoutKind.Explicit, Size = 0x160)]
+[StructLayout(LayoutKind.Explicit, Size = 0x168)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 144])]
 public unsafe partial struct AtkTextNode : ICreatable {
     [FieldOffset(0xB0)] public uint TextId;
