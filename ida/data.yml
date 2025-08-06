@@ -9625,7 +9625,7 @@ classes:
       0x14088E140: SetupBNpc
       0x14088D490: SetupEventNpc
       0x14088E740: SetupBuddyMount
-#oldfail       0x1408642D0: CopyFromCharacter
+      0x14088EF40: CopyFromCharacter
   Client::Game::Character::ModelContainer:
     vtbls:
       - ea: 0x142059C30
