@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::QuestManager
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1042)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1092)]
 public unsafe partial struct QuestManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 84 24", 3)]
     public static partial QuestManager* Instance();
@@ -17,42 +17,42 @@ public unsafe partial struct QuestManager {
     [FieldOffset(0x08)] private ushort Unk8;
     // [FieldOffset(0x0A)] array of 6 bytes?
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray30<QuestWork> _normalQuests;
-    [FieldOffset(0x2E0), FixedSizeArray] internal FixedSizeArray691<byte> _completedQuestsBitmask;
-    [FieldOffset(0x593), FixedSizeArray] internal FixedSizeArray64<byte> _unlockedMapMarkersBitmask;
-    [FieldOffset(0x5D3), FixedSizeArray] internal FixedSizeArray2<byte> _questRepeatFlagsBitmask;
+    [FieldOffset(0x2E0), FixedSizeArray] internal FixedSizeArray751<byte> _completedQuestsBitmask;
+    [FieldOffset(0x5CF), FixedSizeArray] internal FixedSizeArray64<byte> _unlockedMapMarkersBitmask;
+    [FieldOffset(0x60F), FixedSizeArray] internal FixedSizeArray2<byte> _questRepeatFlagsBitmask; // TODO: check
 
-    [FieldOffset(0x5D8), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
-    [FieldOffset(0x698)] public byte DailyQuestSeed;
+    [FieldOffset(0x618), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
+    [FieldOffset(0x6D8)] public byte DailyQuestSeed;
 
-    [FieldOffset(0x69C), FixedSizeArray] internal FixedSizeArray40<byte> _unkBitmask1;
+    [FieldOffset(0x6DC), FixedSizeArray] internal FixedSizeArray40<byte> _unkBitmask1;
 
-    [FieldOffset(0x6C8), FixedSizeArray] internal FixedSizeArray10<TrackingWork> _trackedQuests;
-    [FieldOffset(0x768)] private byte UnkJournalByte;
-    [FieldOffset(0x76A)] private byte UnkJournalWord; // QuestId?!
+    [FieldOffset(0x708), FixedSizeArray] internal FixedSizeArray10<TrackingWork> _trackedQuests;
+    [FieldOffset(0x7A8)] private byte UnkJournalByte;
+    [FieldOffset(0x7A9)] private byte UnkJournalWord; // QuestId?!
 
-    [FieldOffset(0x76C), FixedSizeArray] internal FixedSizeArray158<byte> _unkBitmask2;
+    [FieldOffset(0x7AC), FixedSizeArray] internal FixedSizeArray158<byte> _unkBitmask2;
 
-    [FieldOffset(0x80C), FixedSizeArray] internal FixedSizeArray94<byte> _unkBitmask3;
+    [FieldOffset(0x84C), FixedSizeArray] internal FixedSizeArray94<byte> _unkBitmask3;
 
-    [FieldOffset(0x86C), FixedSizeArray] internal FixedSizeArray40<byte> _seenGatheringNotebookDivisionLevelRangesBitmask;
-    [FieldOffset(0x894), FixedSizeArray] internal FixedSizeArray102<byte> _gatheredGatheringItemsBitmask;
+    [FieldOffset(0x8AC), FixedSizeArray] internal FixedSizeArray40<byte> _seenGatheringNotebookDivisionLevelRangesBitmask;
+    [FieldOffset(0x8D4), FixedSizeArray] internal FixedSizeArray102<byte> _gatheredGatheringItemsBitmask;
     /// <remarks>Used for Actions with SecondaryCostType 9 (Brunt Force and Deep Vigor).</remarks>
-    [FieldOffset(0x8FA)] public byte SuccessfulGatheringChainCount;
+    [FieldOffset(0x93A)] public byte SuccessfulGatheringChainCount;
 
-    [FieldOffset(0x8FC), FixedSizeArray] internal FixedSizeArray72<byte> _seenCraftingNotebookDivisionLevelRangesBitmask;
-    [FieldOffset(0x94C), FixedSizeArray] internal FixedSizeArray800<byte> _completedRecipesBitmask;
+    [FieldOffset(0x93C), FixedSizeArray] internal FixedSizeArray72<byte> _seenCraftingNotebookDivisionLevelRangesBitmask;
+    [FieldOffset(0x98C), FixedSizeArray] internal FixedSizeArray800<byte> _completedRecipesBitmask;
 
-    [FieldOffset(0xC70)] private uint UnkC70;
-    [FieldOffset(0xC74)] private uint UnkC74;
-    [FieldOffset(0xC78)] private uint UnkC78;
+    [FieldOffset(0xCB0)] private uint UnkCB0;
+    [FieldOffset(0xCB4)] private uint UnkCB4;
+    [FieldOffset(0xCB8)] private uint UnkCB8;
 
-    [FieldOffset(0xCA8), FixedSizeArray] internal FixedSizeArray19<BeastReputationWork> _beastReputation;
-    [FieldOffset(0xDD8), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
+    [FieldOffset(0xCE8), FixedSizeArray] internal FixedSizeArray20<BeastReputationWork> _beastReputation;
+    [FieldOffset(0xE28), FixedSizeArray] internal FixedSizeArray16<LeveWork> _leveQuests;
 
-    [FieldOffset(0xF58)] public byte NumLeveAllowances;
-    [FieldOffset(0xF59)] private ushort UnkF49;
-    [FieldOffset(0xF5B)] private uint UnkF4C;
-    [FieldOffset(0xF60), FixedSizeArray] internal FixedSizeArray226<byte> _completedLeveQuestsBitmask;
+    [FieldOffset(0xFA8)] public byte NumLeveAllowances;
+    [FieldOffset(0xFA9)] private ushort UnkFA9;
+    [FieldOffset(0xFAB)] private uint UnkFAB;
+    [FieldOffset(0xFB0), FixedSizeArray] internal FixedSizeArray226<byte> _completedLeveQuestsBitmask;
 
     public byte NumAcceptedQuests {
         get {
