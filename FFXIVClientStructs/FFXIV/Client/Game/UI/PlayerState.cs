@@ -42,20 +42,20 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x80), CExporterExcel("ClassJob")] public nint CurrentClassJobRow;
     [FieldOffset(0x88)] public short CurrentLevel;
     /// <remarks> Index is ExpArrayIndex from the ClassJob sheet. </remarks>
-    [FieldOffset(0x8A), FixedSizeArray] internal FixedSizeArray32<short> _classJobLevels;
+    [FieldOffset(0x8A), FixedSizeArray] internal FixedSizeArray35<short> _classJobLevels;
 
     /// <remarks> Index is ExpArrayIndex from the ClassJob sheet. </remarks>
-    [FieldOffset(0xCC), FixedSizeArray] internal FixedSizeArray32<int> _classJobExperience;
-    [FieldOffset(0x14C)] public short SyncedLevel;
-    [FieldOffset(0x14E)] public bool IsLevelSynced;
-    [FieldOffset(0x14F)] public bool HasPremiumSaddlebag;
+    [FieldOffset(0xD0), FixedSizeArray] internal FixedSizeArray35<int> _classJobExperience;
+    [FieldOffset(0x15C)] public short SyncedLevel;
+    [FieldOffset(0x15E)] public bool IsLevelSynced;
+    [FieldOffset(0x15F)] public bool HasPremiumSaddlebag;
 
-    [FieldOffset(0x152)] public byte GuardianDeity;
-    [FieldOffset(0x153)] public byte BirthMonth;
-    [FieldOffset(0x154)] public byte BirthDay;
-    [FieldOffset(0x155)] public byte FirstClass;
-    [FieldOffset(0x156)] public byte StartTown;
-    [FieldOffset(0x157)] public byte QuestSpecialFlags;
+    [FieldOffset(0x162)] public byte GuardianDeity;
+    [FieldOffset(0x163)] public byte BirthMonth;
+    [FieldOffset(0x164)] public byte BirthDay;
+    [FieldOffset(0x165)] public byte FirstClass;
+    [FieldOffset(0x166)] public byte StartTown;
+    [FieldOffset(0x167)] public byte QuestSpecialFlags;
     [FieldOffset(0x168), FixedSizeArray] internal FixedSizeArray4<ushort> _activeFestivalIds;
     [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray4<ushort> _activeFestivalPhases;
 
