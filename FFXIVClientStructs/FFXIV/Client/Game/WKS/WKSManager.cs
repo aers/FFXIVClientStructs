@@ -18,9 +18,9 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0x52)] public ushort DevGrade;
 
     /// <remarks> For Hub upgrades. RowId of WKSFateControl sheet. </remarks>
-    [FieldOffset(0x54)] public ushort CurrentFateControlRowId;
+    [FieldOffset(0x58)] public ushort CurrentFateControlRowId;
     /// <remarks> For Hub upgrades. Id of Fate in FateManager. </remarks>
-    [FieldOffset(0x58)] public ushort CurrentFateId;
+    [FieldOffset(0x5A)] public ushort CurrentFateId;
 
     /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
     [FieldOffset(0xC10)] public ushort CurrentMissionUnitRowId;
