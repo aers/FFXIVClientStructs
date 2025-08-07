@@ -109,8 +109,8 @@ public enum TextFlags : ushort {
     Emboss = 1 << 5,
     WordWrap = 1 << 6,
     MultiLine = 1 << 7,
-    Ellipsis = 1 << 8,
     FixedFontResolution = 1 << 9,
+    Ellipsis = 1 << 10,
 }
 
 public enum FontType : byte {
