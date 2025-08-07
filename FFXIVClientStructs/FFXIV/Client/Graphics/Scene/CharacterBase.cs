@@ -49,9 +49,9 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x158)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
-    [FieldOffset(0x170)] public ModelRenderer.Callback RenderModelCallback;
-    [FieldOffset(0x190)] public ModelRenderer.Callback RenderMaterialCallback;
-    [FieldOffset(0x1B0)] public ModelRenderer.Callback UnkCallback3;
+    [FieldOffset(0x178)] public ModelRenderer.Callback RenderModelCallback;
+    [FieldOffset(0x198)] public ModelRenderer.Callback RenderMaterialCallback;
+    [FieldOffset(0x1B8)] public ModelRenderer.Callback UnkCallback3;
 
     [FieldOffset(0x224)] public float VfxScale;
     [FieldOffset(0x270)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0xB0, contents may be InstanceParameter
