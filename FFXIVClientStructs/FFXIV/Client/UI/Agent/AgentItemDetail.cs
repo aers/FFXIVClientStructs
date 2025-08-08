@@ -4,8 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 [Obsolete($"Use {nameof(DetailKind)}", true)]
-public enum ItemDetailKind : byte
-{
+public enum ItemDetailKind : byte {
     ChatItem = 1,      // all items linked in chat, except event items, also used for some shops
     InventoryItem = 2, // all(?) items outside of chat, including event items
     ShopItem = 6,      // most shops use this, exceptions are grand company and sundry splendors
