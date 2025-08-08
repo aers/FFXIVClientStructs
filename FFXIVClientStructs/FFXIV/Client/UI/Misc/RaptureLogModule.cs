@@ -52,7 +52,7 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 39 AE ?? ?? ?? ?? 7E")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
-    [MemberFunction("E9 ?? ?? ?? ?? 55 A1")]
+    [MemberFunction("E9 ?? ?? ?? ?? 40 88 AE")]
     public partial void ShowLogMessage(uint logMessageId);
 
     [MemberFunction("E9 ?? ?? ?? ?? 0C ?? 88 42")] // ShowLogMessage<uint>
