@@ -81,9 +81,8 @@ public unsafe partial struct CharaView : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 4C 24 ?? 8B 51 04")]
     public partial void Render(uint frameIndex);
 
-    // 7.3: this was replaced with ClientObjectManager.GetObjectByIndex
-    // [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 75 05 0F 57 C9")]
-    // public partial Character* GetCharacter();
+    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 C3 40 0F B6 D7 48 8D 88")]
+    public partial Character* GetCharacter();
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 48 8D 3D ?? ?? ?? ?? BD")]
     public partial void UnequipGear(bool hasCharacterData = false, bool characterLoaded = true);

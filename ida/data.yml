@@ -1111,7 +1111,7 @@ classes:
       0x1416367D0: DeleteAllObjects
       0x141636940: CalculateNextAvailableIndex
       0x141636990: GetObjectByIndex
-      0x1416369F0: GetObjectIndexByIndex
+      0x1416369F0: GetObjectById
       0x141636AD0: IsValidClientObject
       0x141636B00: IsValidClientObjectIndex
       0x141636B20: GetIndexByObject
