@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 129 * 8)]
 public unsafe partial struct CrossWorldSyncshellStringArray {
-    public static CrossWorldSyncshellStringArray* Instance() => (CrossWorldSyncshellStringArray*)AtkStage.Instance()->GetStringArrayData(StringArrayType.CrossWorldLinkShell)->StringArray;
+    public static CrossWorldSyncshellStringArray* Instance() {
+        var stringArray = AtkStage.Instance()->GetStringArrayData(StringArrayType.CrossWorldLinkShell);
+        return stringArray == null ? null : (CrossWorldSyncshellStringArray*)stringArray->StringArray;
+    }
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<CStringPointer> _data;
 

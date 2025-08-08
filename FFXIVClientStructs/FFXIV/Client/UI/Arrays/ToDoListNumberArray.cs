@@ -4,7 +4,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
 [CExportIgnore, GenerateInterop, StructLayout(LayoutKind.Explicit, Size = 198 * 4)]
 public unsafe partial struct ToDoListNumberArray {
-    public static ToDoListNumberArray* Instance() => (ToDoListNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ToDoList)->IntArray;
+    public static ToDoListNumberArray* Instance() {
+        var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ToDoList);
+        return numberArray == null ? null : (ToDoListNumberArray*)numberArray->IntArray;
+    }
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray198<int> _data;
 

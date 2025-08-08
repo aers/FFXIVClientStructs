@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 146 * 4)]
 public unsafe partial struct LetterNumberArray {
-    public static LetterNumberArray* Instance() => (LetterNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.Letter)->IntArray;
+    public static LetterNumberArray* Instance() {
+        var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.Letter);
+        return numberArray == null ? null : (LetterNumberArray*)numberArray->IntArray;
+    }
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray146<int> _data;
 

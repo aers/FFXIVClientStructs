@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 111 * 8)]
 public unsafe partial struct GearSetListStringArray {
-    public static GearSetListStringArray* Instance() => (GearSetListStringArray*)AtkStage.Instance()->GetStringArrayData(StringArrayType.GearSetList)->StringArray;
+    public static GearSetListStringArray* Instance() {
+        var stringArray = AtkStage.Instance()->GetStringArrayData(StringArrayType.GearSetList);
+        return stringArray == null ? null : (GearSetListStringArray*)stringArray->StringArray;
+    }
 
     [FieldOffset(0 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray111<CStringPointer> _data;
 

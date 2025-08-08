@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 34 * 4)]
 public unsafe partial struct ChatLogNumberArray {
-    public static ChatLogNumberArray* Instance() => (ChatLogNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ChatLog)->IntArray;
+    public static ChatLogNumberArray* Instance() {
+        var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ChatLog);
+        return numberArray == null ? null : (ChatLogNumberArray*)numberArray->IntArray;
+    }
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray34<int> _data;
 

@@ -1,11 +1,16 @@
 using FFXIVClientStructs.FFXIV.Client.UI.Arrays.Common;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
+namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
+
 [CExportIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 1401 * 8)]
 public unsafe partial struct FreeCompanyMemberStringArray {
-    public static FreeCompanyMemberStringArray* Instance() => (FreeCompanyMemberStringArray*)AtkStage.Instance()->GetStringArrayData(StringArrayType.FreeCompanyMember)->StringArray;
+    public static FreeCompanyMemberStringArray* Instance() {
+        var stringArray = AtkStage.Instance()->GetStringArrayData(StringArrayType.FreeCompanyMember);
+        return stringArray == null ? null : (FreeCompanyMemberStringArray*)stringArray->StringArray;
+    }
 
     [FieldOffset(0 * 8), FixedSizeArray, CExportIgnore] internal FixedSizeArray1401<CStringPointer> _data;
 

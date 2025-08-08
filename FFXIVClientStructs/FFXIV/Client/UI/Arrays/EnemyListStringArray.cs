@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 16 * 8)]
 public unsafe partial struct EnemyListStringArray {
-    public static EnemyListStringArray* Instance() => (EnemyListStringArray*)AtkStage.Instance()->GetStringArrayData(StringArrayType.EnemyList)->StringArray;
+    public static EnemyListStringArray* Instance() {
+        var stringArray = AtkStage.Instance()->GetStringArrayData(StringArrayType.EnemyList);
+        return stringArray == null ? null : (EnemyListStringArray*)stringArray->StringArray;
+    }
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray16<CStringPointer> _data;
 
