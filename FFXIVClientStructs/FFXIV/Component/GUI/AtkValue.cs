@@ -62,7 +62,7 @@ public unsafe partial struct AtkValue : ICreatable, IDisposable {
         if (free) IMemorySpace.Free((AtkValue*)Unsafe.AsPointer(ref this));
     }
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F BA E6 11")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 83 CB ?? C7 45")]
     public partial void Ctor(AtkValue* other);
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 FF FE")]
