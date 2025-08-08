@@ -107,6 +107,11 @@ public unsafe partial struct DrawDataContainer {
         get => (Flags2 & 0x10) == 0x10;
         set => Flags2 = (byte)(value ? Flags2 | 0x10 : Flags2 & ~0x10);
     }
+
+    public bool VieraEarsHidden {
+        get => (Flags2 & 0x20) == 0x20;
+        set => Flags2 = (byte)(value ? Flags2 | 0x20 : Flags2 & ~0x20);
+    }
 }
 
 // ctor E8 ?? ?? ?? ?? 48 8B E8 EB ?? 33 ED 48 89 AB

@@ -20,9 +20,16 @@ public unsafe partial struct CharacterBase {
     public const int PathBufferSize = 260;
     public const int MaterialsPerSlot = 10;
 
-    [FieldOffset(0x90)] public byte UnkFlags_01;
-    [FieldOffset(0x91)] public byte UnkFlags_02;
-    [FieldOffset(0x92)] public byte UnkFlags_03;
+    [Flags]
+    public enum StateFlag : ulong {
+        VisorToggled = 0x00_00_00_00_40,
+        VisorChanging = 0x00_00_00_00_80,
+        HasUmbrella = 0x00_00_01_00_00,
+        VieraEarsHidden = 0x00_80_00_00_00,
+        VieraEarsChanging = 0x01_00_00_00_00
+    }
+
+    [FieldOffset(0x90)] public StateFlag StateFlags;
     [FieldOffset(0x9C)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
 
@@ -32,20 +39,29 @@ public unsafe partial struct CharacterBase {
     [FieldOffset(0x150)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
 
     public bool IsChangingVisor {
-        get => (UnkFlags_01 & 0x80) == 0x80;
-        set => UnkFlags_01 = (byte)(value ? UnkFlags_01 | 0x80 : UnkFlags_01 & ~0x80);
+        get => StateFlags.HasFlag(StateFlag.VisorChanging);
+        set => StateFlags = value ? StateFlags | StateFlag.VisorChanging : StateFlags & ~StateFlag.VisorChanging;
     }
 
     public bool VisorToggled {
-        get => (UnkFlags_01 & 0x40) == 0x40;
-        set => UnkFlags_01 = (byte)(value ? UnkFlags_01 | 0x40 : UnkFlags_01 & ~0x40);
+        get => StateFlags.HasFlag(StateFlag.VisorToggled);
+        set => StateFlags = value ? StateFlags | StateFlag.VisorToggled : StateFlags & ~StateFlag.VisorToggled;
     }
 
     public bool HasUmbrella {
-        get => (UnkFlags_03 & 0x01) == 0x01;
-        set => UnkFlags_03 = (byte)(value ? UnkFlags_03 | 0x01 : UnkFlags_03 & ~0x01);
+        get => StateFlags.HasFlag(StateFlag.HasUmbrella);
+        set => StateFlags = value ? StateFlags | StateFlag.HasUmbrella : StateFlags & ~StateFlag.HasUmbrella;
     }
 
+    public bool HideVieraEars {
+        get => StateFlags.HasFlag(StateFlag.VieraEarsHidden);
+        set => StateFlags = value ? StateFlags | StateFlag.VieraEarsHidden : StateFlags & ~StateFlag.VieraEarsHidden;
+    }
+
+    public bool VieraEarsChanging {
+        get => StateFlags.HasFlag(StateFlag.VieraEarsChanging);
+        set => StateFlags = value ? StateFlags | StateFlag.VieraEarsChanging : StateFlags & ~StateFlag.VieraEarsChanging;
+    }
 
     [FieldOffset(0x158)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
 
