@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 8 * 8)]
 public unsafe partial struct BuddyStringArray {
-    public static BuddyStringArray* Instance() => (BuddyStringArray*)AtkStage.Instance()->GetStringArrayData(StringArrayType.Buddy)->StringArray;
+    public static BuddyStringArray* Instance() {
+        var stringArray = AtkStage.Instance()->GetStringArrayData(StringArrayType.Buddy);
+        return stringArray == null ? null : (BuddyStringArray*)stringArray->StringArray;
+    }
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray8<CStringPointer> _data;
 

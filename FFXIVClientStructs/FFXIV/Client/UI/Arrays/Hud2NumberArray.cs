@@ -8,7 +8,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 192 * 4)]
 public unsafe partial struct Hud2NumberArray {
-    public static Hud2NumberArray* Instance() => (Hud2NumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.Hud2)->IntArray;
+    public static Hud2NumberArray* Instance() {
+        var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.Hud2);
+        return numberArray == null ? null : (Hud2NumberArray*)numberArray->IntArray;
+    }
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray192<int> _data;
 

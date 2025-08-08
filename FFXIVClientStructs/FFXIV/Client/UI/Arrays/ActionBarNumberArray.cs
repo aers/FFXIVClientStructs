@@ -6,7 +6,10 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 5564 * 4)]
 public unsafe partial struct ActionBarNumberArray {
-    public static ActionBarNumberArray* Instance() => (ActionBarNumberArray*)AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ActionBar)->IntArray;
+    public static ActionBarNumberArray* Instance() {
+        var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ActionBar);
+        return numberArray == null ? null : (ActionBarNumberArray*)numberArray->IntArray;
+    }
 
     [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray5564<int> _data;
 
