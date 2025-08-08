@@ -19,15 +19,15 @@ public unsafe partial struct AgentItemSearch {
     [FieldOffset(0xBBC), FixedSizeArray] internal FixedSizeArray100<uint> _listingPageItemIds;
     [FieldOffset(0xD50)] public uint ListingPageItemCount;
     [FieldOffset(0xD58), FixedSizeArray] internal FixedSizeArray100<ListingItem> _listingPageItems;
-    [FieldOffset(0x3120)] public byte ListingCurrentPage;
-    [FieldOffset(0x3121)] public byte ListingPageCount;
-    [FieldOffset(0x3384)] public uint ResultItemId;
-    [FieldOffset(0x338C)] public uint ResultSelectedIndex;
-    [FieldOffset(0x3398)] public InventoryItem ResultHoveredItem;
-    // [FieldOffset(0x3858)] public uint* ItemBuffer;
-    // [FieldOffset(0x3860)] public uint ItemCount;
-    [FieldOffset(0x3871)] public bool IsPartialSearching;
-    // [FieldOffset(0x386D)] public bool IsItemPushPending;
+    [FieldOffset(0x3128)] public byte ListingCurrentPage;
+    [FieldOffset(0x3129)] public byte ListingPageCount;
+    [FieldOffset(0x338C)] public uint ResultItemId;
+    [FieldOffset(0x3394)] public uint ResultSelectedIndex;
+    [FieldOffset(0x33A0)] public InventoryItem ResultHoveredItem;
+    [FieldOffset(0x3868)] public uint* ItemBuffer;
+    [FieldOffset(0x3870)] public uint ItemCount;
+    [FieldOffset(0x387C)] public bool IsPartialSearching;
+    [FieldOffset(0x387D)] public bool IsItemPushPending;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x98)]
     public struct StringHolder {
