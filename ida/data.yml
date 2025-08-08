@@ -9302,7 +9302,7 @@ classes:
       0x140988750: UnequipGear
       0x140988BB0: SetItemSlotData
       0x140988EB0: ToggleDrawWeapon
-      #0x140942DD0: GetCharacter # replaced with ClientObjectManager.GetObjectByIndex (7.3)
+      0x140988FD0: GetCharacter
   Client::UI::Misc::CharaViewModelData:
     funcs:
       0x140987540: ctor
