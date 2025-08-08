@@ -30,9 +30,6 @@ public unsafe partial struct CharacterBase {
     }
 
     [FieldOffset(0x90)] public StateFlag StateFlags;
-    [FieldOffset(0x90)] public byte UnkFlags_01;
-    [FieldOffset(0x91)] public byte UnkFlags_02;
-    [FieldOffset(0x92)] public byte UnkFlags_03;
     [FieldOffset(0x9C)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
 
