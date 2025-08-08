@@ -26,7 +26,7 @@ public unsafe partial struct CharacterBase {
         VisorChanging = 0x00_00_00_00_80,
         HasUmbrella = 0x00_00_01_00_00,
         VieraEarsHidden = 0x00_80_00_00_00,
-        VieraEarsChanging = 0x01_80_00_00_00
+        VieraEarsChanging = 0x01_00_00_00_00
     }
 
     [FieldOffset(0x90)] public StateFlag StateFlags;
