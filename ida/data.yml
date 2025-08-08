@@ -15606,12 +15606,18 @@ classes:
         base: Client::Game::InstanceContent::InstanceContentBeginnerTrainingExercise
   Client::Game::InstanceContent::InstanceContentDeepDungeon:
     vtbls:
-      - ea: 0x1422D68D0
+      - ea: 0x1422322C0
         base: Client::Game::InstanceContent::InstanceContentDirector
     funcs:
-      0x141984B60: ctor
+      0x1418B4B80: ctor
       0x1418B3030: UsePomander
       0x1418B30A0: UseStone
+  Client::Game::InstanceContent::InstanceContentDeepDungeon2:
+    vtbls:
+      - ea: 0x1422D68D0
+        base: Client::Game::InstanceContent::InstanceContentDeepDungeon
+    funcs:
+      0x141984B60: ctor
   Client::Game::InstanceContent::InstanceContentTreasureHuntDungeon0:
     vtbls:
       - ea: 0x14227D000
