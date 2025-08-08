@@ -7,11 +7,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.WKS;
 [Inherits<WKSModuleBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 public unsafe partial struct WKSResearchModule {
-    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray11<ushort> _analysis;
-    [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray11<byte> _currentStages;
-    [FieldOffset(0x6B), FixedSizeArray] internal FixedSizeArray11<byte> _unlockedStages;
-    [FieldOffset(0x76)] public ushort RatePercentage;
-    [FieldOffset(0x78)] public bool IsLoaded;
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray55<ushort> _analysis; // 11x toolClass * 5x type
+    [FieldOffset(0x76), FixedSizeArray] internal FixedSizeArray11<byte> _currentStages;
+    [FieldOffset(0x81), FixedSizeArray] internal FixedSizeArray11<byte> _unlockedStages;
+    [Obsolete("There are now 2 values, use RatePercentages.")][FieldOffset(0x8C)] public ushort RatePercentage;
+    [FieldOffset(0x8C), FixedSizeArray] internal FixedSizeArray2<byte> _ratePercentages;
+    [FieldOffset(0x90)] public bool IsLoaded;
 
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 0F B7 D8 48 8B CF E8 ?? ?? ?? ?? 48 8B 4C 24")]
     public partial ushort GetCurrentAnalysis(byte toolClass, byte type);
