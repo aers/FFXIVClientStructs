@@ -22741,8 +22741,8 @@ classes:
         base: Client::System::Scheduler::Base::SchedulerState
     vfuncs:
       20: GetActionTimelineKey
-      28: GetOwningGameObjectIndex
-      40: GetAnimationLength # C010
+      29: GetOwningGameObjectIndex
+      41: GetAnimationLength # C010
     funcs:
       0x1417E8240: ctor
   Client::System::Scheduler::Base::SchedulerTimeline:
