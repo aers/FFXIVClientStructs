@@ -1,8 +1,10 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // unsure about the name, seems to be an intermediate superclass
+[GenerateInterop(isInherited: true)]
+[Inherits<Shader>]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
-public unsafe struct PVShader {
+public unsafe partial struct PVShader {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct ResourceEntry {
         [FieldOffset(0x0)] public ushort Slot;
@@ -17,9 +19,7 @@ public unsafe struct PVShader {
         [FieldOffset(0x4)] public uint Id;
     }
 
-    [FieldOffset(0)] public Shader Shader;
-
-    // number at 0x20 has been observed to be ConstantBufferCount * 16 + SamplerCount * 24
+    // number at 0x20 has been observed to be ConstantBufferCount * 16 + (SamplerCount + Unk2Count) * 24
     [FieldOffset(0x28)] public ResourceEntry* ConstantBuffers;
     [FieldOffset(0x30)] public ResourceEntry* Samplers;
     [FieldOffset(0x38)] public ResourceEntry* Unknowns;

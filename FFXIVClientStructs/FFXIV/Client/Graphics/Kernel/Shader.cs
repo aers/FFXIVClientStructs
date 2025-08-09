@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
+[GenerateInterop(isInherited: true)]
+[Inherits<ReferencedClassBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
-public struct Shader {
-    // byte at 0x08 has been observed to always be 1
+public partial struct Shader {
 }

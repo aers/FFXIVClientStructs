@@ -1,7 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
+[GenerateInterop]
+[Inherits<PVShader>]
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
-public unsafe struct VertexShader {
+public unsafe partial struct VertexShader {
     [Flags]
     public enum Input : uint {
         Position = 1 << 0,
@@ -23,12 +25,12 @@ public unsafe struct VertexShader {
         Depth = 1 << 16,
     }
 
-    [FieldOffset(0)] public PVShader Shader;
+    [FieldOffset(0), Obsolete($"Use {nameof(PVShader)}, or inherited fields directly instead.", true)] public PVShader Shader;
     [FieldOffset(0x60)] public Input DeclaredInputs;
     [FieldOffset(0x64)] public Input UsedInputs;
     [FieldOffset(0x68)] public byte* DxbcBlob;
     [FieldOffset(0x70)] public void* DirectXObject;
 
     public Span<byte> DxbcBlobSpan
-        => new(DxbcBlob, unchecked((int)Shader.DxbcBlobSize));
+        => new(DxbcBlob, unchecked((int)DxbcBlobSize));
 }
