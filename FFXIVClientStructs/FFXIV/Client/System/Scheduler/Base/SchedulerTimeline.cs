@@ -23,6 +23,6 @@ public unsafe partial struct SchedulerTimeline {
     [MemberFunction("E8 ?? ?? ?? ?? EB CA 48 8B 8C 24 ?? ?? ?? ??")]
     public partial void UpdateBanner(float delta, byte a3 = 0); // not sure on the naming, but this advances the animation forward
 
-    [VirtualFunction(28)]
+    [VirtualFunction(29)]
     public partial int GetOwningGameObjectIndex();
 }
