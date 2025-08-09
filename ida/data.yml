@@ -22428,6 +22428,15 @@ classes:
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::PixelShader*>:
     vtbls:
       - ea: 0x142178668
+  Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::HullShader*>:
+    vtbls:
+      - ea: 0x142178670
+  Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::DomainShader*>:
+    vtbls:
+      - ea: 0x142178678
+  Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::GeometryShader*>:
+    vtbls:
+      - ea: 0x142178680
   Client::Graphics::Kernel::CVector<Client::Graphics::Kernel::ShaderNode*>:
     vtbls:
       - ea: 0x142178688

@@ -3,7 +3,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [GenerateInterop]
 [Inherits<PVShader>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct PixelShader {
-    [FieldOffset(0), Obsolete($"Use {nameof(PVShader)}, or inherited fields directly instead.", true)] public PVShader Shader;
+public unsafe partial struct DomainShader {
     [FieldOffset(0x60)] public void* DirectXObject;
 }

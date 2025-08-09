@@ -33,6 +33,9 @@ public unsafe struct ShaderPackage {
     [FieldOffset(0x00)] public ReferencedClassBase ReferencedClassBase;
     [FieldOffset(0x10)] public CVector<Pointer<VertexShader>> VertexShaders; // std::vector<VertexShader*>
     [FieldOffset(0x30)] public CVector<Pointer<PixelShader>> PixelShaders; // std::vector<PixelShader*>
+    [FieldOffset(0x50)] public CVector<Pointer<HullShader>> HullShaders; // std::vector<HullShader*>
+    [FieldOffset(0x70)] public CVector<Pointer<DomainShader>> DomainShaders; // std::vector<DomainShader*>
+    [FieldOffset(0x90)] public CVector<Pointer<GeometryShader>> GeometryShaders; // std::vector<GeometryShader*>
     [FieldOffset(0xB0)] public CVector<Pointer<ShaderNode>> ShaderNodes; // std::vector<ShaderNode*>
 
     [FieldOffset(0xD0)] public ushort MaterialConstantBufferSize;
