@@ -24,7 +24,9 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x88)] public uint OwnerId;
     [FieldOffset(0x8C)] public ushort ObjectIndex; // index in object table
     [FieldOffset(0x90)] public ObjectKind ObjectKind;
-    [FieldOffset(0x91)] public byte SubKind;
+    [FieldOffset(0x91), CExporterUnion("SubKind")] public byte SubKind;
+    /// <remarks> Use only when <see cref="ObjectKind"/> is <see cref="ObjectKind.BattleNpc"/>. </remarks>
+    [FieldOffset(0x91), CExporterUnion("SubKind")] public BattleNpcSubKind BattleNpcSubKind;
     [FieldOffset(0x92)] public byte Sex;
     [FieldOffset(0x94)] public byte YalmDistanceFromPlayerX;
     [FieldOffset(0x95)] public byte TargetStatus; // Goes from 6 to 2 when selecting a target and flashing a highlight
@@ -186,6 +188,29 @@ public enum ObjectKind : byte {
     [Obsolete("Renamed to ReactionEventObject", true)] MjiObject = 14,
     Ornament = 15,
     CardStand = 16
+}
+
+/// <summary>
+/// Enum for <see cref="GameObject.SubKind"/> when <see cref="GameObject.ObjectKind"/> is <see cref="ObjectKind.BattleNpc"/>.
+/// </summary>
+public enum BattleNpcSubKind : byte {
+    None = 0,
+    /// <summary> Weak Spots </summary>
+    BNpcPart = 1,
+    /// <summary> Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more. </summary>
+    Pet = 2,
+    /// <summary> Chocobo Companion </summary>
+    Buddy = 3,
+
+    /// <summary> Enemies, Guards </summary>
+    Combatant = 5,
+    /// <summary> Chocobos in Chocobo Racing </summary>
+    RaceChocobo = 6,
+    /// <summary> Minions in Lord of Verminion </summary>
+    LovmMinion = 7,
+
+    /// <summary> Squadron, Trust, Duty Support </summary>
+    NpcPartyMember = 9,
 }
 
 [Flags]
