@@ -183,7 +183,6 @@ public enum ObjectKind : byte {
     HousingEventObject = 12,
     Cutscene = 13,
     ReactionEventObject = 14,
-    [Obsolete("Renamed to ReactionEventObject", true)] MjiObject = 14,
     Ornament = 15,
     CardStand = 16
 }

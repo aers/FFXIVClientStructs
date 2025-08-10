@@ -36,14 +36,8 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
     public partial AtkTextNode* GetTextNodeById(uint id);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 8B D5 BE"), Obsolete("This function has not type check at all. Use GetNodeById instead.", true)]
-    public partial AtkResNode* GetScrollBarNodeById(uint id);
-
     [MemberFunction("E8 ?? ?? ?? ?? 8D 57 01 48 89 43 10")]
     public partial AtkUldAsset* GetUldAssetByImageNodeId(uint id);
-
-    [MemberFunction("E8 ?? ?? ?? ?? 41 3A C6 74 22"), Obsolete("This is a AtkResNode function and won't work on components. Use AtkResNode.IsAnimated.", true)]
-    public partial bool IsAnimated();
 
     [MemberFunction("48 85 D2 74 19 48 8B 81")]
     public partial bool IsOwnerNodeAncestorOf(AtkResNode* node);
@@ -74,9 +68,6 @@ public unsafe partial struct AtkComponentBase : ICreatable {
 
     [VirtualFunction(5)]
     public partial void Update(float delta);
-
-    [VirtualFunction(5), Obsolete("Renamed to Update", true)]
-    public partial void OnUldUpdate(float delta);
 
     [VirtualFunction(7)]
     public partial void Draw();
