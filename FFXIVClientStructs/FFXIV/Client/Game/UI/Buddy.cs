@@ -31,7 +31,9 @@ public unsafe partial struct Buddy {
 
 // sizes for Info structs are estimated
 
-// Chocobo Companion
+/// <summary>
+/// Chocobo Companion
+/// </summary>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct CompanionInfo {
@@ -59,7 +61,9 @@ public unsafe partial struct CompanionInfo {
     public partial bool IsBuddyEquipUnlocked(uint buddyEquipId);
 }
 
-// Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
+/// <summary>
+/// Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
+/// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe struct PetInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Pet;
@@ -67,7 +71,9 @@ public unsafe struct PetInfo {
     [FieldOffset(0x9)] public byte Stance; // PetAction RowId
 }
 
-// Squadron, Trust, Duty Support
+/// <summary>
+/// Squadron, Trust, Duty Support
+/// </summary>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct DutyHelperInfo {
