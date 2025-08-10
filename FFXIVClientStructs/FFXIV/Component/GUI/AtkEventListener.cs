@@ -4,6 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // no explicit constructor, just an event interface with 3 virtual functions
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
+[VirtualTable("4C 8D 3D ?? ?? ?? ?? 4C 89 3F 41 F6 C4", 3)]
 public unsafe partial struct AtkEventListener {
     [VirtualFunction(0)]
     public partial AtkEventListener* Dtor(byte freeFlags);
