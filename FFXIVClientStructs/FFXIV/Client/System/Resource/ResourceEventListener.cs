@@ -9,9 +9,8 @@ public unsafe partial struct ResourceEventListener {
 
     // vfuncs 1-4 are virtuals that are specific to the classes that inherits this
 
-    // unsure of what the function does but its specific to this class from what I find in the vtable references
-    // [VirtualFunction(3)]
-    // public partial void vf3(ResourceHandle* handle);
+    [VirtualFunction(3)]
+    public partial void Load(Handle.ResourceHandle* handle);
 
     // looks similar to vf3 but seems to be a different function
     // [VirtualFunction(4)]

@@ -4896,6 +4896,7 @@ classes:
       - ea: 0x142013188
     vfuncs:
       0: Dtor
+      3: Load
     funcs:
       0x1402ED630: ctor
   Client::System::Resource::Handle::GrassGridDataResourceHandle:
