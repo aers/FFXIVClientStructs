@@ -35,6 +35,12 @@ public unsafe partial struct AtkTexture : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 4C 8B C0 48 8B CB E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0")]
     public partial Texture* GetKernelTexture();
 
+    /// <summary>
+    /// Expects a 255 byte large buffer to store string result, does not automatically add null terminator, use a 0-initialized byte buffer.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 90 48 FF C7")]
+    public static partial int GetIconPath(byte* buffer, uint iconId, int textureScale, IconSubFolder iconSubFolder);
+
     [VirtualFunction(0)]
     public partial void Destroy(bool free);
 

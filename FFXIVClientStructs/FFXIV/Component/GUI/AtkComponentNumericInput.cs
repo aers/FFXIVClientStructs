@@ -18,4 +18,7 @@ public unsafe partial struct AtkComponentNumericInput : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 81 4F ?? ?? ?? ?? ?? EB 07")]
     public partial void SetValue(int value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 80 FE ?? 74")]
+    public partial void InnerSetValue(int value, bool triggerCallback, bool playSoundEffect);
 }
