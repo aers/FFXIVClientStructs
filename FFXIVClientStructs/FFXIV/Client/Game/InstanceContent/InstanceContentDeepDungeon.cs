@@ -28,7 +28,7 @@ public unsafe partial struct InstanceContentDeepDungeon {
 
     [FieldOffset(0x2ADE)] public byte DeepDungeonId; // 1-3
 
-    [FieldOffset(0x2B54), FixedSizeArray] internal FixedSizeArray49<RoomFlags> _mapData;
+    [FieldOffset(0x2B54), FixedSizeArray] internal FixedSizeArray25<RoomFlags> _mapData;
 
     // each DD floor map actually contains two mirrored copies of the same layout; this is usually either 0 or 1
     // but LayoutInfos[2] *is* referenced in the code - might be HoH hall of fallacies? (large rectangular room with no walls)
@@ -61,7 +61,7 @@ public unsafe partial struct InstanceContentDeepDungeon {
     }
 
     [Flags]
-    public enum RoomFlags : byte {
+    public enum RoomFlags : ushort {
         None = 0,
         ConnectionN = 1,
         ConnectionS = 1 << 1,
