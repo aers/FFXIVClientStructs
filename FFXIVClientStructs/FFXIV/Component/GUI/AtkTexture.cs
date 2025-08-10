@@ -35,6 +35,9 @@ public unsafe partial struct AtkTexture : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8B 57 ?? 4C 8B C0 48 8B CB E8 ?? ?? ?? ?? 48 8B 5C 24 ?? B0")]
     public partial Texture* GetKernelTexture();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 90 48 FF C7")]
+    public static partial int GetIconPath(byte* outputString, uint iconId, int textureScale, IconSubFolder iconSubFolder);
+
     [VirtualFunction(0)]
     public partial void Destroy(bool free);
 
