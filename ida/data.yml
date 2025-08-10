@@ -6916,6 +6916,7 @@ classes:
       0x14060ECB0: IsTextureReady
       0x14060ED60: ReleaseTexture
       0x14060EF70: GetKernelTexture
+      0x14060F1D0: GetIconPath # static method
   Component::GUI::AtkRenderTexture:
     vtbls:
       - ea: 0x14203FF60
@@ -7650,6 +7651,7 @@ classes:
     funcs:
       0x14068A4B0: ctor
       0x14068C370: SetValue
+      0x14068A0C0: InnerSetValue
   Component::GUI::AtkComponentDropDownList:
     vtbls:
       - ea: 0x142041AE0
