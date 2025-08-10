@@ -5733,7 +5733,7 @@ classes:
       0x1404B73E0: OpenCharaSelect
 #fail       0x1402A3910: OpenCharaMakeDataImport # inlined to ReceiveEvent (7.3)
       0x1404B86C0: OpenCreateNewCharacterDialog
-#oldfail       0x140552AA0: OpenLoginWaitDialog
+      0x1404B9880: OpenLoginWaitDialog
 #oldfail       0x1402DD020: OpenLobbyScreenText
       0x1404BA710: CloseDialog
       0x1404BB430: ShowCharacterNotFoundWarning
