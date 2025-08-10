@@ -15699,7 +15699,7 @@ classes:
     funcs:
       0x1416687A0: ctor
       0x141913FA0: HandleEnterContentInfoPacket  # static
-  Client::Game::InstanceContent::PublicContentBonding:
+  Client::Game::InstanceContent::PartyContentDirector:
     vtbls:
       - ea: 0x1422BF990
         base: Client::Game::InstanceContent::ContentDirector
