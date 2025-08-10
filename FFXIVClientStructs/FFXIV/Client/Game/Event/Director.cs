@@ -19,6 +19,10 @@ public unsafe partial struct Director {
     [FieldOffset(0x358)] public Utf8String Title;
     [FieldOffset(0x3C0)] public Utf8String Description;
     [FieldOffset(0x428)] public Utf8String ReliefText;
+    // So far, the Content*Timestamps have been seen in Leves.
+    // Dungeons and Frontlines do not use these.
+    [FieldOffset(0x490)] public long DirectorStartTimestamp;
+    [FieldOffset(0x498)] public long DirectorEndTimestamp;
     [FieldOffset(0x4A0)] public StdVector<EventHandlerObjective> Objectives; // 10 objectives max
     [FieldOffset(0x4B8)] public uint EventItemId;
 
