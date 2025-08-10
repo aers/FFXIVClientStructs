@@ -14585,11 +14585,11 @@ classes:
       0x1418F32D0: ctor
   Client::Game::Event::GatheringLeveDirector:
     vtbls:
-      - ea: 0x1422412B8
+      - ea: 0x142241C20
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::BattleLeveDirector:
     vtbls:
-      - ea: 0x142241C20
+      - ea: 0x1422412B8
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::CompanyLeveDirector:
     vtbls:
