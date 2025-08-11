@@ -10,7 +10,6 @@ public unsafe partial struct WKSResearchModule {
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray55<ushort> _analysis; // 11x toolClass * 5x type
     [FieldOffset(0x76), FixedSizeArray] internal FixedSizeArray11<byte> _currentStages;
     [FieldOffset(0x81), FixedSizeArray] internal FixedSizeArray11<byte> _unlockedStages;
-    [Obsolete("There are now 2 values, use RatePercentages.", true)][FieldOffset(0x8C)] public ushort RatePercentage;
     [FieldOffset(0x8C), FixedSizeArray] internal FixedSizeArray2<byte> _ratePercentages;
     [FieldOffset(0x90)] public bool IsLoaded;
 

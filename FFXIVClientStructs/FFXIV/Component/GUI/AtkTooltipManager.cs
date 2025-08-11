@@ -66,12 +66,6 @@ public unsafe partial struct AtkTooltipManager {
         /// <remarks> Args for <see cref="AtkTooltipType.MiragePrismPrismItem"/> / AddonMiragePrismPrismItemDetail. </remarks>
         [FieldOffset(0), CExporterUnion("Args")] public AtkTooltipMiragePrismPrismItemArgs MiragePrismPrismItemArgs;
 
-        [FieldOffset(0x00), Obsolete("Use TextArgs.Text", true)] public CStringPointer Text;
-        [FieldOffset(0x08), Obsolete("Use type-specific sub-structs", true)] public ulong TypeSpecificId;
-        [FieldOffset(0x10), Obsolete("Use type-specific sub-structs", true)] public uint Flags;
-        [FieldOffset(0x14), Obsolete("Use type-specific sub-structs", true)] public short Unk_14;
-        [FieldOffset(0x16), Obsolete("Use type-specific sub-structs", true)] public byte Unk_16;
-
         [MemberFunction("E8 ?? ?? ?? ?? C1 FB 04")]
         public partial void Ctor();
 
@@ -183,8 +177,6 @@ public unsafe partial struct AtkTooltipManager {
         None = 0,
         Text = 1 << 0,
         Item = 1 << 1,
-        [Obsolete("Use AtkTooltipType.Text | AtkTooltipType.Item", true)]
-        TextItem = Text | Item,
         Action = 1 << 2,
         LovmAction = 1 << 3,
         MiragePrismPrismItem = 1 << 4,

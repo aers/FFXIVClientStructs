@@ -60,9 +60,6 @@ public unsafe partial struct AtkModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3")]
     public partial bool IsTextInputActive();
 
-    [MemberFunction("40 56 48 83 EC ?? 48 8B F2 48 8B D1"), Obsolete("Renamed to HandleAddonAgentCallback", true)]
-    public partial AtkValue* UnitBaseCallbackHandler(AtkValue* returnValue, AtkValue* values, uint valueCount);
-
     // CallbackHandlerFunctions[2]
     [MemberFunction("40 56 48 83 EC ?? 48 8B F2 48 8B D1")]
     public partial AtkValue* HandleAddonAgentCallback(AtkValue* returnValue, AtkValue* values, uint valueCount);

@@ -58,8 +58,6 @@ public unsafe partial struct AgentInspect {
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct FreeCompanyData {
         //[FieldOffset(0x00)] public byte Unkown4b0; // Maybe FreeCompany get status 1 = Finished
-        [Obsolete("This field is in the wrong place, it is AgentInspect.IsBuddyInspect", true)]
-        [FieldOffset(0)] public bool IsPartOfFreeCompany;
         [FieldOffset(0x00)] public long Id;
         [FieldOffset(0x08)] public CrestData Crest;
         [FieldOffset(0x10)] public ushort MemberCount;

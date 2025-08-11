@@ -19,14 +19,11 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
 public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x1F0)] public AtkUldComponentDataTextInput ComponentTextData;
-    [FieldOffset(0x250), Obsolete("Use ComponentTextData.MaxByte instead", true)] public uint MaxTextLength;
-    [FieldOffset(0x254), Obsolete("Use ComponentTextData.MaxChar instead", true)] public uint MaxTextLength2;
     [FieldOffset(0x26C)] public AllowedEntities InputSanitizationFlags;
 
     [FieldOffset(0x280)] public Utf8String UnkText01;
     [FieldOffset(0x2E8)] public Utf8String UnkText02;
 
-    [FieldOffset(0x350), Obsolete("Renamed to AvailableLines", true)] public Utf8String UnkText03;
     [FieldOffset(0x350)] public Utf8String AvailableLines;
 
     [FieldOffset(0x3B8)] public AtkTextNode* AvailableLinesTextNode;
@@ -39,11 +36,9 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x428)] public AtkTextNode* AutoTranslateMenuPageInfoTextNode;
     [FieldOffset(0x430)] public AtkNineGridNode* AutoTranslateMenuBackground;
 
-    [FieldOffset(0x450), Obsolete("Renamed to HighlightedAutoTranslateOptionColorPrefix", true)] public Utf8String UnkText04;
     // Utf8Strings containing color macros that are wrapped around the highlighted AutoTranslate option
     [FieldOffset(0x450)] public Utf8String HighlightedAutoTranslateOptionColorPrefix;
 
-    [FieldOffset(0x4B8), Obsolete("Renamed to HighlightedAutoTranslateOptionColorSuffix", true)] public Utf8String UnkText05;
     [FieldOffset(0x4B8)] public Utf8String HighlightedAutoTranslateOptionColorSuffix;
 
     // 7.3: inlined, this is an orphaned (no x-ref) copy
