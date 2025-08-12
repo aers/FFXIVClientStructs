@@ -10,6 +10,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x528)]
 public unsafe partial struct AddonCharacterInspect {
-    [FieldOffset(0x450)] public PreviewController PreviewController;
-    [FieldOffset(0x460), Obsolete("Moved to PreviewController.Component", true)] public AtkComponentBase* PreviewComponent;
+    [FieldOffset(0x460)] public PreviewController PreviewController;
+    [FieldOffset(0x470), Obsolete("Moved to PreviewController.Component", true)] public AtkComponentBase* PreviewComponent;
 }
