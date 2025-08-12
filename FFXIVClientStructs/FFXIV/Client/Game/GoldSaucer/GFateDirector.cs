@@ -22,8 +22,14 @@ public unsafe partial struct GFateDirector {
 
     [FieldOffset(0x7F4)] public ushort BgmId;
 
-    [FieldOffset(0x7FE)] public GateType GateType;
-    [FieldOffset(0x7FF)] public GatePositionType GatePositionType;
+    /// <remarks>
+    /// Use <see cref="GateType"/> enum for comparison.
+    /// </remarks>
+    [FieldOffset(0x7FE)] public byte GateType; // TODO: 7.4 change this to the enum
+    /// <remarks>
+    /// Use <see cref="GatePositionType"/> enum for comparison.
+    /// </remarks>
+    [FieldOffset(0x7FF)] public byte GatePositionType; // TODO: 7.4 change this to the enum
 
     [FieldOffset(0x7F8)] public ushort ScreenImageId1;
     [FieldOffset(0x7FA)] public ushort ScreenImageId2;
