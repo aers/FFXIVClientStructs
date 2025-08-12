@@ -45,6 +45,7 @@ public unsafe partial struct GFateDirector {
 }
 
 public enum GateType : byte {
+    None = 0,
     Cliffhanger = 1,
     VaseOff = 2,
     SkinchangeWeCanBelieveIn = 3,
@@ -56,6 +57,7 @@ public enum GateType : byte {
 }
 
 public enum GatePositionType : byte {
+    None = 0,
     WonderSquareEast = 1,
     EventSquare = 2,
     RoundSquare = 3,
