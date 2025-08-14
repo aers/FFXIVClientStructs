@@ -45,7 +45,6 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x108)] public SharedGroupLayoutInstance* SharedGroupLayoutInstance;
     [FieldOffset(0x110)] public uint NamePlateIconId;
     [FieldOffset(0x118)] public int RenderFlags;
-    [FieldOffset(0x132)] public int ModelId;
     [FieldOffset(0x158)] public LuaActor* LuaActor;
     [FieldOffset(0x160)] public EventHandler* EventHandler;
 
