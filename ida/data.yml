@@ -9584,6 +9584,7 @@ classes:
       0x14086FD50: HideHeadgear
       0x1408704D0: HideLegacyTattoo
       0x14086FEE0: SetVisor
+      0x14086FF70: HideVieraEars
       0x140870660: EquipGlassesIds # sends it to the server
       0x1408706F0: GetGlassesId
       0x140870710: SetGlasses
