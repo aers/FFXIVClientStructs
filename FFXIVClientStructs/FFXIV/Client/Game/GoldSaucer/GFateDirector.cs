@@ -22,8 +22,14 @@ public unsafe partial struct GFateDirector {
 
     [FieldOffset(0x7F4)] public ushort BgmId;
 
-    [FieldOffset(0x7FE)] public byte GateType;
-    [FieldOffset(0x7FF)] public byte GatePositionType;
+    /// <remarks>
+    /// Use <see cref="GateType"/> enum for comparison.
+    /// </remarks>
+    [FieldOffset(0x7FE)] public byte GateType; // TODO: 7.4 change this to the enum
+    /// <remarks>
+    /// Use <see cref="GatePositionType"/> enum for comparison.
+    /// </remarks>
+    [FieldOffset(0x7FF)] public byte GatePositionType; // TODO: 7.4 change this to the enum
 
     [FieldOffset(0x7F8)] public ushort ScreenImageId1;
     [FieldOffset(0x7FA)] public ushort ScreenImageId2;
@@ -36,6 +42,26 @@ public unsafe partial struct GFateDirector {
 
     [VirtualFunction(294)]
     public partial bool IsAcceptingGate();
+}
+
+public enum GateType : byte {
+    None = 0,
+    Cliffhanger = 1,
+    VaseOff = 2,
+    SkinchangeWeCanBelieveIn = 3,
+    TheTimeOfMyLife = 4,
+    AnyWayTheWindBlows = 5,
+    LeapOfFaith = 6,
+    AirForceOne = 7,
+    SliceIsRight = 8,
+}
+
+public enum GatePositionType : byte {
+    None = 0,
+    WonderSquareEast = 1,
+    EventSquare = 2,
+    RoundSquare = 3,
+    TheCactpotBoard = 4,
 }
 
 [Flags]
