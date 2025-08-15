@@ -9448,7 +9448,7 @@ classes:
       0x14085A220: GetFrameDeltaMultiplier2
       0x14085A9F0: Initialize
       0x14085AC30: ctor
-      0x1400FE420: GetNamePlateColor
+      0x1400FE420: GetNamePlateColorType
       0x140965CB0: GetObjStrId
       0x1418E4070: PlayFootStepSound
   Client::Game::Character::Character:
