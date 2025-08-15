@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 // Client::Graphics::Physics::BoneSimulator
 [StructLayout(LayoutKind.Explicit, Size = 0x450)]
 public unsafe struct BoneSimulator {
-    [FieldOffset(0x10)] public PhysicsGroup Group;
+    [FieldOffset(0x10)] public uint Group; // Row ID in the PhysicsGroup sheet.
     [FieldOffset(0x18)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
     [FieldOffset(0x20)] public Vector3 CharacterPosition;
     [FieldOffset(0x30)] public Vector3 Gravity;
@@ -24,16 +24,4 @@ public unsafe struct BoneSimulator {
     [FieldOffset(0x444)] public bool IsSimulating;
     [FieldOffset(0x445)] public bool IsTimeIntegrating; // Whether the simulator is integrating (time stepping) on this frame
     [FieldOffset(0x446)] public bool IsCollidable;
-
-    /// <summary> Non-exhaustive list of physics groups </summary>
-    public enum PhysicsGroup : uint {
-        Clothing = 2,
-        HairA = 3, // Usually the hair's bangs
-        HairB = 4, // Typically the back of the hair
-        HairC = 5, // The sides of the hair
-        HairD = 6, // Extraneous hair bits
-        Chest = 7,
-        Earrings = 8,
-        Ears = 18,
-    }
 }
