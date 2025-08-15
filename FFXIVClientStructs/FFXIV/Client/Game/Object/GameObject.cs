@@ -182,7 +182,7 @@ public unsafe partial struct GameObject {
     /// [28] NamePlateEdgeHealer, NamePlateColorHealer<br/>
     /// [29] NamePlateEdgeDps, NamePlateColorDps<br/>
     /// [30] NamePlateEdgeOtherClass, NamePlateColorOtherClass
-    /// <remarks>
+    /// </remarks>
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B 35 ?? ?? ?? ?? 48 8B F9")]
     public partial byte GetNamePlateColorType();
 }
