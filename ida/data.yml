@@ -6767,7 +6767,7 @@ classes:
       0: Dtor
       1: FreeManagedData
     funcs:
-      0x140606090: SortSubscribedAddons
+      0x140606090: UnsubscribeAddon
       0x140606110: HasRefs
       0x140606120: IsUnused
       0x140606140: IncRef
