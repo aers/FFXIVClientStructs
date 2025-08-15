@@ -13700,7 +13700,7 @@ classes:
       146: ChangeEnvSoundVolume
       147: ResetEnvSoundVolume
       148: PlayCamera
-      149: PlayTwoShotCamera_
+      149: PlayTwoShotCamera
       150: PlayLandscapeCamera # also called "PlayLandscopeCamera"
       151: PlayIdleCamera
       152: PlayWorldPositionCamera
