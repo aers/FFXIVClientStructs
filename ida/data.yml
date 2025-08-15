@@ -10288,6 +10288,7 @@ classes:
       0x140E3BF30: UpdateEnemyList
 #oldfail       0x140D82F40: UpdateHotBar
       0x140E3D7D0: UpdateExp
+      0x140E3ED20: OpenContextMenuFromPartyAddon
       0x140E50E20: UpdateBattleTalk
 #oldfail       0x140E37D20: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
       0x140E50010: GetMainCommandString  # MainCommand exd
