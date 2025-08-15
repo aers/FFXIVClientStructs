@@ -203,6 +203,20 @@ public unsafe partial struct GameObject {
     /// </remarks>
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B 35 ?? ?? ?? ?? 48 8B F9")]
     public partial byte GetNamePlateColorType();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 FB")]
+    public partial ulong GetNamePlateColorsRaw();
+
+    public (ByteColor BackdropColor, ByteColor FillColor) GetNamePlateColors() {
+        var colors = GetNamePlateColorsRaw();
+        return (new ByteColor { RGBA = unchecked((uint)colors) }, new ByteColor { RGBA = unchecked((uint)(colors >> 32)) });
+    }
+
+    /// <summary>Gets the world position where the base (bottom center) of the nameplate is to be placed.</summary>
+    /// <param name="vector">A caller-supplied buffer (of one vector) to write the position into.</param>
+    /// <returns><paramref name="vector" /></returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
+    public partial Vector3* GetNamePlateWorldPosition(Vector3* vector);
 }
 
 // if (EntityId == 0xE0000000)
