@@ -39,14 +39,24 @@ public unsafe partial struct GameObject {
     [FieldOffset(0xCC)] public float VfxScale;
     [FieldOffset(0xD0)] public float HitboxRadius;
     [FieldOffset(0xE0)] public Vector3 DrawOffset;
+    // [FieldOffset(0xF0)] public float RotationOffset; ?
     [FieldOffset(0xF4)] public EventId EventId;
     [FieldOffset(0xF8)] public ushort FateId;
     [FieldOffset(0x100)] public DrawObject* DrawObject;
     [FieldOffset(0x108)] public SharedGroupLayoutInstance* SharedGroupLayoutInstance;
     [FieldOffset(0x110)] public uint NamePlateIconId;
     [FieldOffset(0x118)] public int RenderFlags;
+    [FieldOffset(0x120)] public Vector3 NameplateOffset; // interpolated
+    [FieldOffset(0x130)] public Vector3 CameraOffset; // interpolated
+    // [FieldOffset(0x140)] public Vector3 Unk140; // something SharedGroupLayoutInstance related
+    // [FieldOffset(0x150)] public uint Unk150; // something QuestRedo related
     [FieldOffset(0x158)] public LuaActor* LuaActor;
     [FieldOffset(0x160)] public EventHandler* EventHandler;
+    // [FieldOffset(0x168)] public float Unk168; // ModelChara.Unknown3 * 0.1f
+    [FieldOffset(0x16C)] public float NameplateOffsetScaleMultiplier; // ModelChara.Unknown6 * 0.1f
+    [FieldOffset(0x170)] public Vector3 NameplateOffsetTarget;
+    [FieldOffset(0x180)] public Vector3 CameraOffsetTarget;
+    // [FieldOffset(0x190)] public byte AnimationFlags; // not sure, but & 1 = PapVariation
 
     [VirtualFunction(1)]
     public partial GameObjectId GetGameObjectId();
