@@ -25,6 +25,12 @@ public unsafe partial struct AddonConfig {
     /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 12")]
     public partial void ChangeHudLayout(uint layoutIndex, bool unk1 = false, bool unk2 = true);
+
+    /// <summary>
+    /// Applies the current HUD Layout
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? 41 C6 46 ?? ??")]
+    public partial void ApplyHudLayout();
 }
 
 [GenerateInterop]
