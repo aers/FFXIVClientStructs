@@ -316,7 +316,8 @@ public sealed partial class InteropGenerator {
                     fieldSymbol.Name,
                     fieldSymbol.Type.GetFullyQualifiedName(),
                     fieldOffset,
-                    inheritableAttributes);
+                    inheritableAttributes,
+                    fieldSymbol.IsReadOnly);
 
                 publicFieldBuilder.Add(fieldInfo);
             }

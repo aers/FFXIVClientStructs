@@ -72,7 +72,7 @@ public sealed partial class InteropGenerator {
                 foreach (string inheritedAttribute in field.InheritableAttributes) {
                     writer.WriteLine($"{inheritedAttribute}");
                 }
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {field.Type} {adjustedFieldName};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {(field.IsReadOnly ? "readonly " : "")}{field.Type} {adjustedFieldName};");
             }
             alreadyWrittenBases.Add(inheritedStruct.FullyQualifiedMetadataName);
         }
