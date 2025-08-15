@@ -28,6 +28,7 @@ globals:
   0x142771790: g_FrameCountAccum # accumulates over a second to calc FPS
   0x142771794: g_FrameTimeAccum # accumulates over a second to calc FPS
   0x1427718A0: g_OSVersion
+  0x142773200: g_NameplateColors
   0x14290D150: g_Client::UI::Agent::CharaSelectCharacterList_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x142909300: g_RenderSkeletonLinkedListStart
   0x142909308: g_RenderSkeletonLinkedListEnd
@@ -183,6 +184,7 @@ functions:
   0x1400DF6D0: GetDragDropTypeMask
   0x1400DF6A0: GetDragDropTypeReferenceMask
   0x1400DF760: OpenWebURL
+  0x1400FEAE0: UpdateNameplateColors
   0x14046F400: GetMainCommandAgentId
   0x14046F480: GetMainCommandInputId
   0x14079E6D0: GetHotbarSlotTypeFromDragDropType
@@ -9448,6 +9450,7 @@ classes:
       0x14085A220: GetFrameDeltaMultiplier2
       0x14085A9F0: Initialize
       0x14085AC30: ctor
+      0x1400FE420: GetNamePlateColorType
       0x140965CB0: GetObjStrId
       0x1418E4070: PlayFootStepSound
   Client::Game::Character::Character:

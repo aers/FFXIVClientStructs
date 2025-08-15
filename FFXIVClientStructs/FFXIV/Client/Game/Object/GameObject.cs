@@ -146,6 +146,45 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 89 85 ?? ?? ?? ?? 0F 57 C0")]
     public partial uint GetObjStrId();
+
+    /// <summary>
+    /// Gets the id of a saved nameplate color for this game object
+    /// </summary>
+    /// <remarks>
+    /// The index refers to a hex-color array containing a mix of values from ConfigOptions and hardcoded values:<br/>
+    /// [0] NamePlateEdgeObject, NamePlateColorObject<br/>
+    /// [1] NamePlateEdgeSelf, NamePlateColorSelf<br/>
+    /// [2] NamePlateEdgeParty, NamePlateColorParty<br/>
+    /// [3] NamePlateEdgeOther, NamePlateColorOther<br/>
+    /// [4] NamePlateColorLimEdge, NamePlateColorLim<br/>
+    /// [5] NamePlateColorGriEdge, NamePlateColorGri<br/>
+    /// [6] NamePlateColorUldEdge, NamePlateColorUld<br/>
+    /// [7] NamePlateEdgeUnengagedEnemy, NamePlateColorUnengagedEnemy<br/>
+    /// [8] 0xFF000000, 0xFFBFBFBF (Dead)<br/>
+    /// [9] NamePlateEdgeEngagedEnemy, NamePlateColorEngagedEnemy<br/>
+    /// [10] NamePlateEdgeClaimedEnemy, NamePlateColorClaimedEnemy<br/>
+    /// [11] NamePlateEdgeUnclaimedEnemy, NamePlateColorUnclaimedEnemy<br/>
+    /// [12] NamePlateEdgeNpc, NamePlateColorNpc<br/>
+    /// [13] NamePlateEdgeNpc, NamePlateColorNpc<br/>
+    /// [14] NamePlateEdgeMinion, NamePlateColorMinion<br/>
+    /// [15] NamePlateEdgeSelfBuddy, NamePlateColorSelfBuddy<br/>
+    /// [16] NamePlateEdgeSelfPet, NamePlateColorSelfPet<br/>
+    /// [17] NamePlateEdgeOtherBuddy, NamePlateColorOtherBuddy<br/>
+    /// [18] NamePlateEdgeOtherPet, NamePlateColorOtherPet<br/>
+    /// [19] 0xFF985008, 0xFFFEFFE8<br/>
+    /// [20] NamePlateEdgeAlliance, NamePlateColorAlliance<br/>
+    /// [21] 0xFF000000, 0xFFBFBFBF<br/>
+    /// [23] NamePlateColorHousingFieldEdge, NamePlateColorHousingField<br/>
+    /// [24] NamePlateColorHousingFurnitureEdge, NamePlateColorHousingFurniture<br/>
+    /// [25] 0xFF8C5900, 0xFFFEFFE8<br/>
+    /// [26] 0xFF070F86, 0xFFBFBDFF<br/>
+    /// [27] NamePlateEdgeTank, NamePlateColorTank<br/>
+    /// [28] NamePlateEdgeHealer, NamePlateColorHealer<br/>
+    /// [29] NamePlateEdgeDps, NamePlateColorDps<br/>
+    /// [30] NamePlateEdgeOtherClass, NamePlateColorOtherClass
+    /// </remarks>
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B 35 ?? ?? ?? ?? 48 8B F9")]
+    public partial byte GetNamePlateColorType();
 }
 
 // if (EntityId == 0xE0000000)
