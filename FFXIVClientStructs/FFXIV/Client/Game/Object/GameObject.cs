@@ -146,6 +146,12 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 89 85 ?? ?? ?? ?? 0F 57 C0")]
     public partial uint GetObjStrId();
+
+    /// <summary>
+    /// Gets the id of a saved nameplate color for this game object
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 89 85 ?? ?? ?? ?? 0F 57 C0")]
+    public partial byte GetNamePlateColor();
 }
 
 // if (EntityId == 0xE0000000)
