@@ -150,7 +150,7 @@ public unsafe partial struct GameObject {
     /// <summary>
     /// Gets the id of a saved nameplate color for this game object
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 89 85 ?? ?? ?? ?? 0F 57 C0")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B 35 ?? ?? ?? ?? 48 8B F9")]
     public partial byte GetNamePlateColor();
 }
 
