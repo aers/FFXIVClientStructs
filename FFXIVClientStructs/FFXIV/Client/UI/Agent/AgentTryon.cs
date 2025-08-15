@@ -29,6 +29,7 @@ public unsafe partial struct AgentTryon {
         [FieldOffset(0x31A)] public bool HideVisor;
         [FieldOffset(0x31B)] public bool HideWeapon;
         [FieldOffset(0x31C)] public bool CloseVisor;
-        [FieldOffset(0x31D)] public bool DrawWeapon;
+        [FieldOffset(0x31D)] public bool HideVieraEars;
+        [FieldOffset(0x31E)] public bool DrawWeapon;
     }
 }
