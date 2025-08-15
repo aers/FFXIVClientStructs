@@ -9096,6 +9096,7 @@ classes:
     funcs:
       0x1407A34A0: ctor
       0x1407A4610: ChangeHudLayout
+      0x1407A60F0: ApplyHudLayout
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x142063818
