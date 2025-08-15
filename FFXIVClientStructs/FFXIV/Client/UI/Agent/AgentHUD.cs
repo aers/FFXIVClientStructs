@@ -66,6 +66,9 @@ public unsafe partial struct AgentHUD {
     [MemberFunction("48 85 D2 74 7F 48 89 5C 24")]
     public partial void OpenContextMenuFromTarget(GameObject* gameObject);
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 57 48 83 EC 20 49 63 D8")]
+    public partial void OpenContextMenuFromPartyAddon(int ownerAddonId, int hudPartyMemberIndex);
+
     [MemberFunction("E8 ?? ?? ?? ?? EB 08 48 8B CB E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 45 85 F6")]
     public partial CStringPointer GetMainCommandString(uint commandId, bool includeKeybind = true, bool includeNewIndicator = false);
 
