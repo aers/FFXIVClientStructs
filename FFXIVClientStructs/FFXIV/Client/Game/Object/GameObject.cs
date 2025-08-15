@@ -146,6 +146,23 @@ public unsafe partial struct GameObject {
 
     [MemberFunction("E8 ?? ?? ?? ?? 89 85 ?? ?? ?? ?? 0F 57 C0")]
     public partial uint GetObjStrId();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
+    public partial float* GetNameplateWorldPosition(float* vector);
+
+    public Vector3 GetNameplateWorldPosition() {
+        var vector = stackalloc float[3];
+        GetNameplateWorldPosition(vector);
+        return new Vector3(vector[0], vector[1], vector[2]);
+    }
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 FB")]
+    public partial ulong GetTargetColorsRaw();
+
+    public (uint BackdropColor, uint FillColor) GetTargetColors() {
+        var colors = GetTargetColorsRaw();
+        return (unchecked((uint)colors), unchecked((uint)(colors >> 32)));
+    }
 }
 
 // if (EntityId == 0xE0000000)
