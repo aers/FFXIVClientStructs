@@ -205,18 +205,23 @@ public unsafe partial struct GameObject {
     public partial byte GetNamePlateColorType();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 FB")]
-    public partial ulong GetNamePlateColorsRaw();
-
-    public (ByteColor BackdropColor, ByteColor FillColor) GetNamePlateColors() {
-        var colors = GetNamePlateColorsRaw();
-        return (new ByteColor { RGBA = unchecked((uint)colors) }, new ByteColor { RGBA = unchecked((uint)(colors >> 32)) });
-    }
+    public partial NamePlateColors GetNamePlateColorsRaw();
 
     /// <summary>Gets the world position where the base (bottom center) of the nameplate is to be placed.</summary>
     /// <param name="vector">A caller-supplied buffer (of one vector) to write the position into.</param>
     /// <returns><paramref name="vector" /></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
     public partial Vector3* GetNamePlateWorldPosition(Vector3* vector);
+
+    [StructLayout(LayoutKind.Explicit), Size = 8]
+    public struct NamePlateColors {
+        [FieldOffset(0), CExporterIgnore] public ulong Data;
+        [FieldOffset(0)] public ByteColor BackdropColor;
+        [FieldOffset(4)] public ByteColor FillColor;
+        
+        public static implicit operator ulong(NamePlateColors colors) => colors.Data;
+        public static implicit operator NamePlateColors(ulong colors) => *(NamePlateColors)&colors;
+    }
 }
 
 // if (EntityId == 0xE0000000)
