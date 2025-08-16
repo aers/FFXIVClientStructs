@@ -213,14 +213,14 @@ public unsafe partial struct GameObject {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
     public partial Vector3* GetNamePlateWorldPosition(Vector3* vector);
 
-    [StructLayout(LayoutKind.Explicit), Size = 8]
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct NamePlateColors {
-        [FieldOffset(0), CExporterIgnore] public ulong Data;
+        [FieldOffset(0), CExportIgnore] public ulong Data;
         [FieldOffset(0)] public ByteColor BackdropColor;
         [FieldOffset(4)] public ByteColor FillColor;
         
         public static implicit operator ulong(NamePlateColors colors) => colors.Data;
-        public static implicit operator NamePlateColors(ulong colors) => *(NamePlateColors)&colors;
+        public static implicit operator NamePlateColors(ulong colors) => *(NamePlateColors*)&colors;
     }
 }
 
