@@ -8917,10 +8917,10 @@ classes:
       0x1409647F0: FormatItemName
       0x140964A50: FormatItemIconSuffix
       0x140964DB0: GetTextChecker
-      0x140964E40: SetGlobalTempPlayer1Utf8
-      0x140964FF0: SetGlobalTempPlayer1
-      0x140965210: SetGlobalTempPlayer2Utf8
-      0x1409653C0: SetGlobalTempPlayer2
+      0x140964E40: SetGlobalTempEntity1Utf8
+      0x140964FF0: SetGlobalTempEntity1
+      0x140965210: SetGlobalTempEntity2Utf8
+      0x1409653C0: SetGlobalTempEntity2
       0x1409655E0: UpdateGlobalColors
       0x1409656D0: SetGlobalColorByConfigOption
       0x140965790: Update

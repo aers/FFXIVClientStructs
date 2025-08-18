@@ -19,13 +19,13 @@ public unsafe partial struct MacroDecoder {
 // | Index | Type                 | Label                                       |
 // |-------|----------------------|---------------------------------------------|
 // |     0 | ReferencedUtf8String | Player Name                                 |
-// |     1 | String               | Temp Player 1 Name                          |
-// |     2 | String               | Temp Player 2 Name                          |
+// |     1 | String               | Temp Entity 1: Name                         |
+// |     2 | String               | Temp Entity 2: Name                         |
 // |     3 | Integer              | Player Sex                                  |
-// |     4 | Integer              | Temp Player 1 Sex                           |
-// |     5 | Integer              | Temp Player 2 Sex                           |
-// |     6 | Integer              | Temp Player 1 Unk 1                         |
-// |     7 | Integer              | Temp Player 2 Unk 1                         |
+// |     4 | Integer              | Temp Entity 1: Sex                          |
+// |     5 | Integer              | Temp Entity 2: Sex                          |
+// |     6 | Integer              | Temp Entity 1: ObjStrId                     |
+// |     7 | Integer              | Temp Entity 2: ObjStrId                     |
 // |    10 | Integer              | Eorzea Time Hours                           |
 // |    11 | Integer              | Eorzea Time Minutes                         |
 // |    12 | Integer              | ColorSay                                    |
@@ -74,14 +74,19 @@ public unsafe partial struct MacroDecoder {
 // |    62 | Integer              | ColorLoot                                   |
 // |    63 | Integer              | ColorCraft                                  |
 // |    64 | Integer              | ColorGathering                              |
-// |    65 | Integer              | Temp Player 1 Unk 2                         |
-// |    66 | Integer              | Temp Player 2 Unk 2                         |
+// |    65 | Integer              | Temp Entity 1: Name starts with Vowel       |
+// |    66 | Integer              | Temp Entity 2: Name starts with Vowel       |
 // |    67 | Integer              | Player ClassJobId                           |
 // |    68 | Integer              | Player Level                                |
+// |    69 | Integer              | Player StartTown                            |
 // |    70 | Integer              | Player Race                                 |
 // |    71 | Integer              | Player Synced Level                         |
-// |    77 | Integer              | Client/Plattform?                           |
+// |    73 | Integer              | Quest#66047: Has met Alphinaud and Alisaie  |
+// |    74 | Integer              | PlayStation Generation                      |
+// |    75 | Integer              | Is Legacy Player                            |
+// |    77 | Integer              | Client/Platform?                            |
 // |    78 | Integer              | Player BirthMonth                           |
+// |    79 | Integer              | PadMode                                     |
 // |    82 | Integer              | Datacenter Region                           |
 // |    83 | Integer              | ColorCWLS2                                  |
 // |    84 | Integer              | ColorCWLS3                                  |
@@ -102,6 +107,9 @@ public unsafe partial struct MacroDecoder {
 // |   100 | Integer              | LogSetRoleColor 1: LogColorOtherClass       |
 // |   101 | Integer              | LogSetRoleColor 2: LogColorOtherClass       |
 // |   102 | Integer              | Has Login Security Token                    |
-// |   104 | Integer              | Is Pad Mouse Mode Enabled                   |
+// |   103 | Integer              | Is subscribed to PlayStation Plus           |
+// |   104 | Integer              | PadMouseMode                                |
+// |   106 | Integer              | Preferred World Bonus Max Level             |
 // |   107 | Integer              | Occult Crescent Support Job Level           |
+// |   108 | Integer              | Deep Dungeon Id                             |
 // |-------|----------------------|---------------------------------------------|
