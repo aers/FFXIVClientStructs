@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
+using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using EventHandler = FFXIVClientStructs.FFXIV.Client.Game.Event.EventHandler;
 
@@ -216,7 +217,9 @@ public unsafe partial struct GameObject {
     [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct NamePlateColors {
         [FieldOffset(0), CExportIgnore] public ulong Data;
+        /// <seealso cref="Hud2NumberArray.TargetBarBackdropColor"/>
         [FieldOffset(0)] public ByteColor EdgeColor;
+        /// <seealso cref="Hud2NumberArray.TargetBarFillColor"/>
         [FieldOffset(4)] public ByteColor Color;
         
         public static implicit operator ulong(NamePlateColors colors) => colors.Data;
