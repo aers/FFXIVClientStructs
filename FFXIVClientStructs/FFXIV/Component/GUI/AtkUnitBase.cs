@@ -104,7 +104,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1A8)] public int Param; // appears to be a generic field that some addons use for storage
     [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
     [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
-    [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag
+    [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag, AddonConfig related?
     [FieldOffset(0x1B8)] public byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
     [FieldOffset(0x1B9)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
     [FieldOffset(0x1BA)] public byte Unk1BA;

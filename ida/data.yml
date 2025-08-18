@@ -147,6 +147,7 @@ functions:
   0x1406AD5A0: Component::GUI::TextModuleInterface::GetTextLabelByID
 #fail   0x14064BB40: GetLocalTextParameter
   0x140779290: FormatNumber
+  0x1407A4CF0: ComputeAddonNameHash
   0x140969860: ConvertLogMessageIdToScreenLogKind
   0x1407F6180: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
   0x1407F6270: GetEventItemName
@@ -2184,6 +2185,8 @@ classes:
       0x1400874A0: FindLastOfImpl
       0x140087940: FindFirstOfImpl
       0x140087F30: FormatString2
+      0x14044E230: ToPosixPath
+      0x14044E240: ReplaceDirectorySeparatorChar
       0x140779080: ToInteger # strtoi for utf8string (str, base)
       0x141882FB0: SanitizeString
       0x141883650: SanitizeStringCh
@@ -4278,6 +4281,7 @@ classes:
         base: Component::GUI::AtkUnitManager
     funcs:
       0x1400DFA30: ctor # INLINED IN 7.0
+      0x1400E10D0: GetAddonByNameHash
       0x1401CA740: Finalizer
 #oldfail       0x14063FA30: InitializeAddon # inlined @ 0x1406C0B93
   Client::UI::RaptureAtkColorDataManager:
@@ -4833,8 +4837,10 @@ classes:
   Client::System::File::FileAccessPath:
     funcs:
       0x14008FA30: ctor
-      0x14008FA50: ctor_FromUtf8Str
+      0x14008FA50: ctor_FromUtf8String
+      0x14008FAD0: ctor_FromSequence
       0x1400CF620: Copy
+      0x140090390: SetPathUtf8String
       0x14008FB60: Dtor
   Client::System::Resource::Handle::ResourceHandle:
     vtbls:
@@ -9091,14 +9097,55 @@ classes:
   Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate:
     funcs:
       0x140795EA0: ctor
+  Client::UI::Misc::HudLayoutAddon: # just a bunch of static functions
+    funcs:
+      0x140E7CD80: GetAddonNameByHudRowId
+      0x140E7CDC0: GetAddonNameByIndex
+      0x140E7CDF0: GetHudRowIdByIndex
+      0x140E7CEA0: GetLength
+      0x140E7CEB0: GetByHudRowId
+      0x140E7CEE0: ElementAt
+      0x140E7CF80: HasFlag
+      0x140E7D040: IsStatusEffects
+      0x140E7D070: IsStatusInfo
+      0x140E7D0B0: IsTargetBar
+      0x140E7D0E0: IsPartyList
+      0x140E7D110: GetIndexByHudRowId
+      0x140E7D140: GetHudRowIdByAddonName
+      0x140E7D1A0: GetHudRowIdByAddonNameHash
+      0x1407A4D80: GetHudRowIdByAddonNameHash2
   Client::UI::Misc::AddonConfig:
     vtbls:
       - ea: 0x1420560C0
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407A34A0: ctor
+      0x1407A3560: Finalizer
+      0x1407A35B0: GetIsLoaded
+      0x1407A35C0: GetConfigEntryByAddonName
+      0x1407A3670: GetConfigEntryByAddonNameHash
+      0x1407A36C0: GetHudLayoutConfigEntryByAddonName
+      0x1407A3730: DeleteConfigEntryForAddonName # addon name needs to end with _a
+      0x1407A3790: DeleteConfigEntryForAddonNameHash
+      0x1407A3880: ClearActiveDataSet
+      0x1407A3890: ClearActiveDataSetHudLayout
+      0x1407A3FC0: SwitchToDataSet
+      0x1407A3FE0: SwitchToDefaultSet
+      0x1407A4050: ContainsDataSet
+      0x1407A40C0: CopyDefaultDataSet
       0x1407A4610: ChangeHudLayout
+      0x1407A4810: GetCurrentHudLayout
+      0x1407A4830: SetCurrentHudLayout
+      0x1407A5040: GetOrCreateDataSet
       0x1407A60F0: ApplyHudLayout
+  Client::UI::Misc::AddonConfigData:
+    funcs:
+      0x1407A2520: Clear
+      0x1407A2960: ClearHudLayout
+  Client::UI::Misc::AddonConfigEntry:
+    funcs:
+      0x1407A2180: SetAtkValue
+      0x1407A2060: GetAtkValue
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x142063818
