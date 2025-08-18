@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
+using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 using FFXIVClientStructs.FFXIV.Common.Math;
 using EventHandler = FFXIVClientStructs.FFXIV.Client.Game.Event.EventHandler;
 
@@ -203,6 +204,27 @@ public unsafe partial struct GameObject {
     /// </remarks>
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B 35 ?? ?? ?? ?? 48 8B F9")]
     public partial byte GetNamePlateColorType();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 43 FB")]
+    public partial NamePlateColors GetNamePlateColors();
+
+    /// <summary>Gets the world position where the base (bottom center) of the nameplate is to be placed.</summary>
+    /// <param name="vector">A caller-supplied buffer (of one vector) to write the position into.</param>
+    /// <returns><paramref name="vector" /></returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
+    public partial Vector3* GetNamePlateWorldPosition(Vector3* vector);
+
+    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    public struct NamePlateColors {
+        [FieldOffset(0), CExportIgnore] public ulong Data;
+        /// <seealso cref="Hud2NumberArray.TargetBarBackdropColor"/>
+        [FieldOffset(0)] public ByteColor EdgeColor;
+        /// <seealso cref="Hud2NumberArray.TargetBarFillColor"/>
+        [FieldOffset(4)] public ByteColor Color;
+        
+        public static implicit operator ulong(NamePlateColors colors) => colors.Data;
+        public static implicit operator NamePlateColors(ulong colors) => *(NamePlateColors*)&colors;
+    }
 }
 
 // if (EntityId == 0xE0000000)
