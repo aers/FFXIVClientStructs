@@ -39,8 +39,9 @@ public unsafe partial struct PvPProfile {
     [FieldOffset(0x52)] public ushort CrystallineConflictRankedMatches;
     [FieldOffset(0x54)] public ushort CrystallineConflictRankedMatchesWon;
 
-    [FieldOffset(0x5E)] public ushort CrystallineConflictCurrentCrystalCredit;
-    [FieldOffset(0x60)] public ushort CrystallineConflictHighestCrystalCredit;
+    [FieldOffset(0x5A)] public ushort CrystallineConflictCurrentCrystalCredit;
+    [FieldOffset(0x5C)] public ushort CrystallineConflictHighestCrystalCredit;
+
     [FieldOffset(0x62)] public byte CrystallineConflictCurrentRank;
     [FieldOffset(0x63)] public byte CrystallineConflictHighestRank;
     [FieldOffset(0x64)] public byte CrystallineConflictCurrentRiser;
