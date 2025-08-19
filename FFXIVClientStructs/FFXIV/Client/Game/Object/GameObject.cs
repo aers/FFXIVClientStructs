@@ -221,7 +221,7 @@ public unsafe partial struct GameObject {
         [FieldOffset(0)] public ByteColor EdgeColor;
         /// <seealso cref="Hud2NumberArray.TargetBarFillColor"/>
         [FieldOffset(4)] public ByteColor Color;
-        
+
         public static implicit operator ulong(NamePlateColors colors) => colors.Data;
         public static implicit operator NamePlateColors(ulong colors) => *(NamePlateColors*)&colors;
     }
