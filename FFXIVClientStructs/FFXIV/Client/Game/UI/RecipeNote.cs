@@ -25,6 +25,9 @@ public unsafe partial struct RecipeNote {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
     public struct RecipeIngredient {
+        [FieldOffset(0x08)] public byte NQCount;
+        [FieldOffset(0x09)] public byte HQCount;
+        
         [FieldOffset(0x10)] public Utf8String Name;
         [FieldOffset(0x78)] public uint ItemId;
         [FieldOffset(0x7C)] public uint IconId;
