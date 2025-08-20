@@ -2,4 +2,5 @@ namespace InteropGenerator.Models;
 
 internal sealed record VirtualFunctionInfo(
     MethodInfo MethodInfo,
-    uint Index);
+    uint Index,
+    string? ObsoleteConstructor);

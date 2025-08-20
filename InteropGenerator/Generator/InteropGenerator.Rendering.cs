@@ -136,7 +136,7 @@ public sealed partial class InteropGenerator {
         using (writer.WriteBlock()) {
             foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
                 var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{vfi.MethodInfo.ReturnType}>";
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})]{(vfi.ObsoleteConstructor != null ? $"[global::System.ObsoleteAttribute({vfi.ObsoleteConstructor})]" : "")} public {functionPointerType} {vfi.MethodInfo.Name};");
             }
         }
         writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
@@ -149,15 +149,15 @@ public sealed partial class InteropGenerator {
         writer.WriteLine("public static partial class Delegates");
         using (writer.WriteBlock()) {
             foreach (MemberFunctionInfo memberFunctionInfo in structInfo.MemberFunctions) {
-                RenderDelegateTypeForMethod(structInfo.Name, memberFunctionInfo.MethodInfo, writer);
+                RenderDelegateTypeForMethod(structInfo.Name, memberFunctionInfo.MethodInfo, writer, null);
             }
             foreach (VirtualFunctionInfo virtualFunctionInfo in structInfo.VirtualFunctions) {
-                RenderDelegateTypeForMethod(structInfo.Name, virtualFunctionInfo.MethodInfo, writer);
+                RenderDelegateTypeForMethod(structInfo.Name, virtualFunctionInfo.MethodInfo, writer, virtualFunctionInfo.ObsoleteConstructor);
             }
         }
     }
 
-    private static void RenderDelegateTypeForMethod(string structType, MethodInfo methodInfo, IndentedTextWriter writer) {
+    private static void RenderDelegateTypeForMethod(string structType, MethodInfo methodInfo, IndentedTextWriter writer, string? obsoleteConstructor) {
         // special case marshalled bool return for assemblies without DisableRuntimeMarshalling
         if (methodInfo.ReturnType == "bool") {
             writer.WriteLine("[return:global::System.Runtime.InteropServices.MarshalAsAttribute(global::System.Runtime.InteropServices.UnmanagedType.U1)]");
@@ -171,7 +171,7 @@ public sealed partial class InteropGenerator {
                 paramTypesAndNames += $", {methodInfo.GetParameterTypesAndNamesString()}";
         }
         string methodModifiers = methodInfo.Modifiers.Replace(" partial", string.Empty).Replace(" static", string.Empty);
-        writer.WriteLine($"{methodModifiers} delegate {methodInfo.ReturnType} {methodInfo.Name}({paramTypesAndNames});");
+        writer.WriteLine($"{(obsoleteConstructor != null ? $"[global::System.ObsoleteAttribute({obsoleteConstructor})] " : "")}{methodModifiers} delegate {methodInfo.ReturnType} {methodInfo.Name}({paramTypesAndNames});");
     }
 
     private static void RenderMemberFunctions(StructInfo structInfo, IndentedTextWriter writer) {
