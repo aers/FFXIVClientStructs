@@ -592,7 +592,9 @@ class IdaInterface(BaseIdaInterface):
                 name (str): The name of the enum member
                 value (int): The value of the enum member
             """
-            if ida_enum.add_enum_member(eid, name, value, value) == 4:
+            width = ida_enum.get_enum_width(eid)
+            mask = (1 << width) - 1
+            if ida_enum.add_enum_member(eid, name, value, mask) == 4:
                 ida_enum.add_enum_member(eid, name, value)
 
         def get_struct_flag(self):
@@ -1008,7 +1010,9 @@ class IdaInterface(BaseIdaInterface):
                 name (str): The name of the enum member
                 value (int): The value of the enum member
             """
-            if idc.add_enum_member(eid, name, value, value) != 0:
+            width = idc.get_enum_width(eid)
+            mask = (1 << width) - 1
+            if idc.add_enum_member(eid, name, value, mask) != 0:
                 idc.add_enum_member(eid, name, value)
 
         def get_struct_flag(self):
