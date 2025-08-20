@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
 public partial struct AgentSatisfactionSupplyResult {
-    [FieldOffset(0x28), CExporterExcel("SatisfactionNpc")] public uint CurrentSatisfactionNpcRowId;
+    [FieldOffset(0x28)] public uint CurrentSatisfactionNpcRowId;
 
     [FieldOffset(0x2D)] public bool IsRewardInitialized;
     [FieldOffset(0x2E)] public bool IsAddonOpen;
