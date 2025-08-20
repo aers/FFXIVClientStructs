@@ -582,8 +582,25 @@ class IdaInterface(BaseIdaInterface):
             """
             ida_enum.set_enum_flag(eid, flag)
 
+        def get_enum_mask(self, eid: int):
+            """Gets the largest mask for the enum possible
+
+            Args:
+                eid (int): The id of the enum
+            
+            Returns:
+                int: The mask of the enum
+            """
+            width = ida_enum.get_enum_width(eid)
+            mask = (1 << width) - 1
+            if mask == idaapi.BADADDR:
+                mask >>= 1
+            return mask
+
         def set_enum_as_bf(self, eid: int):
             ida_enum.set_enum_bf(eid, True)
+            name = ida_enum.get_enum_name(eid)
+            ida_enum.add_enum_member(eid, name, f"{name}_Mask", self.get_enum_mask(eid))
 
         def add_enum_member(self, eid: int, name: str, value: int):
             """Add an enum member to an enum by its id
@@ -592,9 +609,7 @@ class IdaInterface(BaseIdaInterface):
                 name (str): The name of the enum member
                 value (int): The value of the enum member
             """
-            width = ida_enum.get_enum_width(eid)
-            mask = (1 << width) - 1
-            if ida_enum.add_enum_member(eid, name, value, mask) == 4:
+            if ida_enum.add_enum_member(eid, name, value, self.get_enum_mask(eid)) == 4:
                 ida_enum.add_enum_member(eid, name, value)
 
         def get_struct_flag(self):
@@ -1000,8 +1015,25 @@ class IdaInterface(BaseIdaInterface):
             """
             idc.set_enum_flag(eid, flag)
 
+        def get_enum_mask(self, eid: int):
+            """Gets the largest mask for the enum possible
+
+            Args:
+                eid (int): The id of the enum
+            
+            Returns:
+                int: The mask of the enum
+            """
+            width = idc.get_enum_width(eid)
+            mask = (1 << width) - 1
+            if mask == idaapi.BADADDR:
+                mask >>= 1
+            return mask
+
         def set_enum_as_bf(self, eid: int):
             idc.set_enum_bf(eid, True)
+            name = idc.get_enum_name(eid)
+            idc.add_enum_member(eid, name, f"{name}_Mask", self.get_enum_mask(eid))
 
         def add_enum_member(self, eid: int, name: str, value: int):
             """Add an enum member to an enum by its id
@@ -1010,9 +1042,7 @@ class IdaInterface(BaseIdaInterface):
                 name (str): The name of the enum member
                 value (int): The value of the enum member
             """
-            width = idc.get_enum_width(eid)
-            mask = (1 << width) - 1
-            if idc.add_enum_member(eid, name, value, mask) != 0:
+            if idc.add_enum_member(eid, name, value, self.get_enum_mask(eid)) == 4:
                 idc.add_enum_member(eid, name, value)
 
         def get_struct_flag(self):
