@@ -10,4 +10,10 @@ public unsafe partial struct AgentMKDSupportJob {
     [FieldOffset(0x30)] public byte CurrentJob;
     [FieldOffset(0x31)] public byte DefaultAction;
     [FieldOffset(0x32)] public byte ActionHiddenFlags;
+
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 56 48 83 EC ?? 0F B6 D9")]
+    public static partial bool UpdateJobSettings(byte job, byte defaultAction, byte actionHiddenFlags);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 3F 48 8B 4F 08")]
+    public static partial bool GetJobSettings(byte job, byte* outDefaultAction, byte* outActionHiddenFlags);
 }
