@@ -18,7 +18,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x10)] public Vector3 DefaultPosition;
     [FieldOffset(0x20)] public float DefaultRotation;
     [FieldOffset(0x30), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _name;
-    [FieldOffset(0x74)] public byte EventState;
+    [FieldOffset(0x70)] public byte EventState;
     [FieldOffset(0x78)] public uint EntityId;
     [FieldOffset(0x7C)] public uint LayoutId;
     [FieldOffset(0x84)] public uint BaseId;
