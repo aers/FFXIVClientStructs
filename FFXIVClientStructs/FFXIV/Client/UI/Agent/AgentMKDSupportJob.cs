@@ -15,5 +15,5 @@ public unsafe partial struct AgentMKDSupportJob {
     public static partial void UpdateJobSettings(byte job, byte defaultAction, byte actionHiddenFlags);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 3F 48 8B 4F 08")]
-    public static partial void GetJobSettings(byte job, byte* outDefaultAction, byte* outActionHiddenFlags);
+    public static partial bool GetJobSettings(byte job, byte* outDefaultAction, byte* outActionHiddenFlags);
 }
