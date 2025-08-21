@@ -13493,6 +13493,7 @@ classes:
     funcs:
       0x140FA1800: ctor
       0x140FA1B50: RefreshAddon
+      0x1409D9240: GetJobSettings # static
       0x1409D93F0: UpdateJobSettings # static
   Client::UI::Agent::AgentMKDSupportJobList:
     vtbls:
