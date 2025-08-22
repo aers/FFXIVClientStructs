@@ -153,8 +153,7 @@ if api is None:
                     self.add_enum_member(enum_id, f"{sheet_name}_{values[key]}", key)
 
             def create_struct(self, name, fields):
-                if idaapi.IDA_SDK_VERSION < 900:
-                    idaapi.begin_type_updating(idaapi.UTP_STRUCT)
+                idaapi.begin_type_updating(idaapi.UTP_STRUCT)
                 struct_id = self.get_struct_id(name)
                 if struct_id == idaapi.BADADDR:
                     struct_id = self.create_struct_type(name)
@@ -202,8 +201,7 @@ if api is None:
                     self.set_struct_member_info(
                         struct_type, meminfo, 0, self.get_tinfo_from_type(type), 0
                     )
-                if idaapi.IDA_SDK_VERSION < 900:
-                    idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def set_func_name(self, ea, name, cmt):
                 ida_name.set_name(ea, name)
