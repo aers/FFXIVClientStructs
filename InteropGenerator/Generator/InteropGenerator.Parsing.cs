@@ -157,18 +157,9 @@ public sealed partial class InteropGenerator {
                 if (!TryParseMethod(methodSymbol, isInherited, token, out methodInfo))
                     continue;
 
-                string? obsoleteConstructor = null;
-                if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName("System.ObsoleteAttribute", out AttributeData? obsoleteAttribute)) {
-                    if(obsoleteAttribute.TryGetConstructorArgument(0, out string? obsoleteMessage))
-                        obsoleteConstructor = '"' + obsoleteMessage + '"';
-                    if (obsoleteAttribute.TryGetConstructorArgument(1, out bool isError))
-                        obsoleteConstructor += $", {isError.ToString().ToLowerInvariant()}";
-                }   
-
                 VirtualFunctionInfo virtualFunctionInfo = new(
                     methodInfo,
-                    index.Value,
-                    obsoleteConstructor);
+                    index.Value);
 
                 virtualFunctionBuilder.Add(virtualFunctionInfo);
             } else if (methodSymbol.TryGetAttributeWithFullyQualifiedMetadataName(InteropTypeNames.StaticAddressAttribute, out AttributeData? saAttribute)) {
@@ -252,7 +243,7 @@ public sealed partial class InteropGenerator {
             constraints = string.Join("", symbolDisplayParts[1..]);
         }
 
-        EquatableArray<string>? inheritableAttributes = isInherited ? ParseInheritedAttributes(methodSymbol, token) : null;
+        EquatableArray<string>? inheritableAttributes = ParseInheritedAttributes(methodSymbol, token);
 
         methodInfo =
             new MethodInfo(

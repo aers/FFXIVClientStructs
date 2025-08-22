@@ -261,14 +261,18 @@ public class VirtualFunctionAttributeTests {
                                   [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                   public unsafe partial struct TestStructVirtualTable
                                   {
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)][global::System.ObsoleteAttribute("This Field Has Been Obsoleted")] public delegate* unmanaged <TestStruct*, int, void*, int> TestFunction;
-                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(136)][global::System.ObsoleteAttribute("This Field Has Been Obsoleted With Error", true)] public delegate* unmanaged <TestStruct*, void> TestFunction2;
+                                      [global::System.ObsoleteAttribute("This Field Has Been Obsoleted")]
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <TestStruct*, int, void*, int> TestFunction;
+                                      [global::System.ObsoleteAttribute("This Field Has Been Obsoleted With Error", true)]
+                                      [global::System.Runtime.InteropServices.FieldOffsetAttribute(136)] public delegate* unmanaged <TestStruct*, void> TestFunction2;
                                   }
                                   [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public TestStructVirtualTable* VirtualTable;
                                   public static partial class Delegates
                                   {
-                                      [global::System.ObsoleteAttribute("This Field Has Been Obsoleted")] public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
-                                      [global::System.ObsoleteAttribute("This Field Has Been Obsoleted With Error", true)] public delegate void TestFunction2(TestStruct* thisPtr);
+                                      [global::System.ObsoleteAttribute("This Field Has Been Obsoleted")]
+                                      public delegate int TestFunction(TestStruct* thisPtr, int argOne, void* argTwo);
+                                      [global::System.ObsoleteAttribute("This Field Has Been Obsoleted With Error", true)]
+                                      public delegate void TestFunction2(TestStruct* thisPtr);
                                   }
                                   [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                                   public partial int TestFunction(int argOne, void* argTwo) => VirtualTable->TestFunction((TestStruct*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref this), argOne, argTwo);

@@ -200,7 +200,10 @@ public sealed partial class InteropGenerator {
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
                     var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingType()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
-                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})]{(virtualFunctionInfo.ObsoleteConstructor != null ? $"[global::System.ObsoleteAttribute({virtualFunctionInfo.ObsoleteConstructor})]" : "")} public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
+                    if (virtualFunctionInfo.MethodInfo.InheritableAttributes is not null)
+                        foreach (string inheritedAttribute in virtualFunctionInfo.MethodInfo.InheritableAttributes)
+                            writer.WriteLine(inheritedAttribute);
+                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
                 }
             }
         }
@@ -218,7 +221,7 @@ public sealed partial class InteropGenerator {
                 if (offset != 0)
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
-                    RenderDelegateTypeForMethod(structInfo.Name, virtualFunctionInfo.MethodInfo, writer, virtualFunctionInfo.ObsoleteConstructor);
+                    RenderDelegateTypeForMethod(structInfo.Name, virtualFunctionInfo.MethodInfo, writer);
                 }
             }
         }
