@@ -75,9 +75,9 @@ class BaseIdaInterface(object):
             return ida_bytes.float_flag()
         elif type == "double":
             return ida_bytes.double_flag()
-        elif idc.get_struc_id(type) != idaapi.BADADDR:
+        elif self.get_struct_id(type) != idaapi.BADADDR:
             return ida_bytes.stru_flag()
-        elif idc.get_enum(type) != idaapi.BADADDR:
+        elif self.get_enum_id(type) != idaapi.BADADDR:
             return ida_bytes.enum_flag()
         else:
             return ida_bytes.stru_flag()
@@ -167,8 +167,8 @@ class BaseIdaInterface(object):
         tinfo = ida_typeinf.tinfo_t()
         clean_name = self.clean_struct_name(name)
         if (
-            idc.get_struc_id(clean_name) != idaapi.BADADDR
-            or idc.get_enum(clean_name) != idaapi.BADADDR
+            self.get_struct_id(clean_name) != idaapi.BADADDR
+            or self.get_enum_id(clean_name) != idaapi.BADADDR
         ):
             if not tinfo.get_named_type(idaapi.get_idati(), clean_name):
                 raise ValueError("{0} not found in IDA database".format(clean_name))
@@ -226,17 +226,21 @@ class BaseIdaInterface(object):
 
         return ptr_tinfo
 
-    # This is only for IDA 7 and 8 due to a change in the API for IDA 9
-if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
+if idaapi.IDA_SDK_VERSION < 900:
     import ida_struct # pyright: ignore[reportMissingImports]
     import ida_enum # pyright: ignore[reportMissingImports]
+else:
+    print("Using IDA 9+ API")
 
-    class IdaInterface(BaseIdaInterface):
+class IdaInterface(BaseIdaInterface):
+    # This is only for IDA 7 and 8 due to a change in the API for IDA 9
+    if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
+
         def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.
 
             Args:
-                data (DefinedFuncField): Function data.
+                data (DefinedStructFuncField): Function data.
 
             Returns:
                 idaapi.tinfo_t: tinfo_t created from the function data.
@@ -602,17 +606,57 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
             """
             ida_enum.set_enum_flag(eid, flag)
 
+        def get_enum_default_mask(self, eid: int):
+            """Get the default bitmask for an enum
+
+            Args:
+                eid (int): The id of the enum
+
+            Returns:
+                int: The default bitmask for the enum
+            """
+            width = idc.get_enum_width(eid)
+            mask = (1 << (width * 8)) - 1
+
+            if mask == ida_enum.DEFMASK:
+                mask >>= 1
+            
+            return mask
+        
+        def get_enum_name(self, eid: int):
+            return idc.get_enum_name(eid)
+        
+        def get_enum_bf(self, eid: int):
+            return ida_enum.is_bf(eid)
+
         def set_enum_as_bf(self, eid: int):
             ida_enum.set_enum_bf(eid, True)
 
-        def add_enum_member(self, eid: int, name: str, value: int):
+            name = self.get_enum_name(eid)
+            bmask = self.get_enum_default_mask(eid)
+
+            # this shouldn't happen under normal circumstances
+            if ida_enum.get_bmask_name(eid, bmask) == f"{name}_Mask":
+                return
+
+            ida_enum.set_bmask_name(eid, bmask, f"{name}_Mask")
+
+        def add_enum_member(self, eid: int, name: str, value: int, mask: int = -1):
             """Add an enum member to an enum by its id
             Args:
                 eid (int): The id of the enum
                 name (str): The name of the enum member
                 value (int): The value of the enum member
+                mask (int): The bitmask of the enum member, or -1 to use the default mask
             """
-            if ida_enum.add_enum_member(eid, name, value, value) == 4:
+            if mask == -1 and self.get_enum_bf(eid):
+                mask = self.get_enum_default_mask(eid)
+
+            # print(f"Adding value: {value} with name: {name} and mask: {mask}")
+            ec = ida_enum.add_enum_member(eid, name, value, mask)
+            # print(f"Got error code: {ec}")
+            
+            if ec == ida_enum.ENUM_MEMBER_ERROR_MASK:
                 ida_enum.add_enum_member(eid, name, value)
 
         def get_struct_flag(self):
@@ -631,15 +675,13 @@ if idaapi.IDA_SDK_VERSION < 900 and idaapi.IDA_SDK_VERSION >= 700:
             """
             return ida_bytes.enum_flag()
 
-elif idaapi.IDA_SDK_VERSION >= 900:
-    print("Using IDA 9+ API")
+    elif idaapi.IDA_SDK_VERSION >= 900:
 
-    class IdaInterface(BaseIdaInterface):
         def get_tinfo_from_func_data(self, data: DefinedStructFuncField):
             """Retrieve a tinfo_t from a raw function data.
 
             Args:
-                data (DefinedFuncField): Function data.
+                data (DefinedStructFuncField): Function data.
 
             Returns:
                 idaapi.tinfo_t: tinfo_t created from the function data.
@@ -1070,6 +1112,18 @@ elif idaapi.IDA_SDK_VERSION >= 900:
                 flag (int): The flag to set
             """
             idc.set_enum_flag(eid, flag)
+        
+        def get_enum_bf(self, eid: int):
+            return idc.is_bf(eid)
+        
+        def get_enum_name(self, eid: int):
+            return idc.get_enum_name(eid)
+        
+        def get_enum_bitmask_field(self, eid: int):
+            name = self.get_enum_name(eid)
+            bmask = self.get_enum_default_mask(eid)
+
+            return (f"{name}_Mask", bmask)
 
         def set_enum_as_bf(self, eid: int):
             if idc.is_bf(eid):
@@ -1077,8 +1131,7 @@ elif idaapi.IDA_SDK_VERSION >= 900:
             
             idc.set_enum_bf(eid, True)
 
-            name = idc.get_enum_name(eid)
-            bmask = self.get_enum_default_mask(eid)
+            (name, bmask) = self.get_enum_bitmask_field(eid)
 
             # this shouldn't happen under normal circumstances
             if idc.get_enum_member_by_name(f"{name}_Mask") != idaapi.BADADDR:
@@ -1130,5 +1183,5 @@ elif idaapi.IDA_SDK_VERSION >= 900:
                 int: The flag for an enum data type
             """
             return ida_bytes.enum_flag()
-else:
-    raise RuntimeError("Unsupported IDA version")
+    else:
+        raise RuntimeError("Unsupported IDA version")
