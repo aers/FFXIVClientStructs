@@ -20311,6 +20311,8 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141336190: ctor
+      0x141336350: UpdateGaugeValue
+      0x141336570: RefreshGaugeSegments
   Client::UI::AddonHWDGathereInspect: # 754
     vtbls:
       - ea: 0x1420FFFB0
