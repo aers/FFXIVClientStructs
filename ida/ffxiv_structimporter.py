@@ -432,12 +432,17 @@ if api is None:
                             None,
                             self.get_size_from_ida_type(field_type),
                         )
+
                     meminfo = self.get_struct_member_by_name(s, field_name)
+                    if meminfo is None:
+                        raise RuntimeError(f"Failed to find member {field_name} in struct {fullname}")
+                    
                     if field_is_base:
                         if idaapi.IDA_SDK_VERSION >= 900:
                             meminfo.set_baseclass()
                         else:
                             meminfo.props |= self.get_base_class_flag()
+                            
                     array_size = field.size if hasattr(field, "size") else 0
                     self.set_struct_member_info(
                         s,
@@ -1276,6 +1281,8 @@ def run():
     print("{0} Deleting old enums and creating new ones".format(get_time()))
     for enum in yaml.enums:
         api.delete_enum(enum)
+    
+    for enum in yaml.enums:
         api.create_enum_struct(enum)
 
     print("{0} Creating new structs".format(get_time()))
