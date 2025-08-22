@@ -479,6 +479,9 @@ if api is None:
                         continue
 
                     meminfo = self.get_struct_member_by_name(s, field_name)
+                    if meminfo is None:
+                        raise RuntimeError(f"Failed to find member {field_name} in struct {fullname}")
+
                     field_type = self.clean_name(virt_func.return_type)
                     field_type = field_type + "(__fastcall* " + field_name + ")("
                     for param in virt_func.parameters:
