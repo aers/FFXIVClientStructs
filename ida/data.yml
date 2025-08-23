@@ -8355,7 +8355,8 @@ classes:
       104: HideEurekaHud
       110: CloseMiniMap
       111: OpenMiniMap
-      112: IsGamePadInputActive
+      112: IsPadModeEnabled
+      113: IsPadMouseModeEnabled
       115: ToggleInputMode
       116: CancelDragDrop
       117: IsUIHidden

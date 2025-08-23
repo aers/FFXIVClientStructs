@@ -105,7 +105,8 @@ public unsafe partial struct UIModuleInterface {
 
     // [VirtualFunction(110)] public partial ??? CloseMiniMap(???);
     // [VirtualFunction(111)] public partial ??? OpenMiniMap(???);
-    // [VirtualFunction(112)] public partial ??? IsGamePadInputActive(???);
+    [VirtualFunction(112)] public partial bool IsPadModeEnabled();
+    [VirtualFunction(113)] public partial bool IsPadMouseModeEnabled();
 
     // [VirtualFunction(115)] public partial ??? ToggleInputMode(???);
     [VirtualFunction(116)] public partial void CancelDragDrop(bool condition = true); // doesn't do anything when false is passed
