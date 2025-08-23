@@ -136,6 +136,8 @@ public sealed partial class InteropGenerator {
         using (writer.WriteBlock()) {
             foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
                 var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{vfi.MethodInfo.ReturnType}>";
+                foreach (string attr in vfi.MethodInfo.InheritableAttributes)
+                    writer.WriteLine(attr);
                 writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
             }
         }
@@ -171,6 +173,8 @@ public sealed partial class InteropGenerator {
                 paramTypesAndNames += $", {methodInfo.GetParameterTypesAndNamesString()}";
         }
         string methodModifiers = methodInfo.Modifiers.Replace(" partial", string.Empty).Replace(" static", string.Empty);
+        foreach (string attr in methodInfo.InheritableAttributes)
+            writer.WriteLine(attr);
         writer.WriteLine($"{methodModifiers} delegate {methodInfo.ReturnType} {methodInfo.Name}({paramTypesAndNames});");
     }
 
@@ -249,10 +253,8 @@ public sealed partial class InteropGenerator {
             string paramNames = methodInfo.GetParameterNamesStringForStringOverload(paramsToOverload);
 
             // "string" overload
-            if (stringOverloadInfo.InheritableAttributes is not null) {
-                foreach (string inheritedAttribute in stringOverloadInfo.InheritableAttributes) {
-                    writer.WriteLine(inheritedAttribute);
-                }
+            foreach (string inheritedAttribute in stringOverloadInfo.InheritableAttributes) {
+                writer.WriteLine(inheritedAttribute);
             }
             writer.WriteLine(methodInfo.GetDeclarationStringForStringOverload("string", paramsToOverload));
             using (writer.WriteBlock()) {
@@ -280,10 +282,8 @@ public sealed partial class InteropGenerator {
                 }
             }
             // "ReadOnlySpan<byte>" overload
-            if (stringOverloadInfo.InheritableAttributes is not null) {
-                foreach (string inheritedAttribute in stringOverloadInfo.InheritableAttributes) {
-                    writer.WriteLine(inheritedAttribute);
-                }
+            foreach (string inheritedAttribute in stringOverloadInfo.InheritableAttributes) {
+                writer.WriteLine(inheritedAttribute);
             }
             writer.WriteLine(methodInfo.GetDeclarationStringForStringOverload("ReadOnlySpan<byte>", paramsToOverload));
             using (writer.WriteBlock()) {

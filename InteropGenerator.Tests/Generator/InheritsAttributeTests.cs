@@ -466,6 +466,7 @@ public class InheritsAttributeTests {
                                                    }
                                                    public static partial class Delegates
                                                    {
+                                                       [global::System.ObsoleteAttribute("Function is obsolete", true)]
                                                        public delegate int TestFunction(BaseStruct* thisPtr, int argOne, void* argTwo);
                                                    }
                                                    public unsafe static class MemberFunctionPointers
@@ -537,6 +538,7 @@ public class InheritsAttributeTests {
                                                    }
                                                    public static partial class Delegates
                                                    {
+                                                       [global::TestAttribute]
                                                        public delegate int TestFunction(BaseStruct* thisPtr, int argOne, void* argTwo);
                                                    }
                                                    public unsafe static class MemberFunctionPointers
@@ -829,11 +831,13 @@ public class InheritsAttributeTests {
                                                    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                    public unsafe partial struct BaseStructVirtualTable
                                                    {
+                                                       [global::System.ObsoleteAttribute("Function is obsolete")]
                                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <BaseStruct*, int, void*, int> TestFunction;
                                                    }
                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStructVirtualTable* VirtualTable;
                                                    public static partial class Delegates
                                                    {
+                                                       [global::System.ObsoleteAttribute("Function is obsolete")]
                                                        public delegate int TestFunction(BaseStruct* thisPtr, int argOne, void* argTwo);
                                                    }
                                                    [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -850,11 +854,13 @@ public class InheritsAttributeTests {
                                                                [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                                public unsafe partial struct ChildStructVirtualTable
                                                                {
+                                                                   [global::System.ObsoleteAttribute("Function is obsolete")]
                                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <ChildStruct*, int, void*, int> TestFunction;
                                                                }
                                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
                                                                public static partial class Delegates
                                                                {
+                                                                   [global::System.ObsoleteAttribute("Function is obsolete")]
                                                                    public delegate int TestFunction(ChildStruct* thisPtr, int argOne, void* argTwo);
                                                                }
                                                                /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
@@ -901,11 +907,13 @@ public class InheritsAttributeTests {
                                                    [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                    public unsafe partial struct BaseStructVirtualTable
                                                    {
+                                                       [global::TestAttribute]
                                                        [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <BaseStruct*, int, void*, int> TestFunction;
                                                    }
                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public BaseStructVirtualTable* VirtualTable;
                                                    public static partial class Delegates
                                                    {
+                                                       [global::TestAttribute]
                                                        public delegate int TestFunction(BaseStruct* thisPtr, int argOne, void* argTwo);
                                                    }
                                                    [global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -922,11 +930,13 @@ public class InheritsAttributeTests {
                                                                [global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]
                                                                public unsafe partial struct ChildStructVirtualTable
                                                                {
+                                                                   [global::TestAttribute]
                                                                    [global::System.Runtime.InteropServices.FieldOffsetAttribute(40)] public delegate* unmanaged <ChildStruct*, int, void*, int> TestFunction;
                                                                }
                                                                [global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public ChildStructVirtualTable* VirtualTable;
                                                                public static partial class Delegates
                                                                {
+                                                                   [global::TestAttribute]
                                                                    public delegate int TestFunction(ChildStruct* thisPtr, int argOne, void* argTwo);
                                                                }
                                                                /// <inheritdoc cref="BaseStruct.TestFunction(int, void*)" />
