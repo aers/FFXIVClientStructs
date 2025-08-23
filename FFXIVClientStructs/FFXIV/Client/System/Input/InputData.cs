@@ -60,7 +60,7 @@ public unsafe partial struct InputData {
     public partial struct InputCodeModifiedInterface {
         /// <remarks> Called in <see cref="SetKeybind"/>. </remarks>
         [VirtualFunction(0)]
-        public partial void ReceiveEvent(InputId inputId, Keybind* keybind);
+        public partial void OnInputCodeModified(InputId inputId, Keybind* keybind);
     }
 }
 

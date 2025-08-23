@@ -762,6 +762,8 @@ classes:
       0: Dtor
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
+    vfuncs:
+      0: OnInputCodeModified
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
     vtbls:
       - ea: 0x142040010
