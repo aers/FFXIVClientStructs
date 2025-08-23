@@ -294,11 +294,15 @@ if api is None:
                 if self.is_signed(enum.underlying):
                     self.set_enum_flag(e, 0x20000)
                 if enum.flags:
+                    if idaapi.IDA_SDK_VERSION >= 900:
+                        self.add_enum_member(e, "{0}.{1}".format(enum.name, "tmp"), self.get_enum_default_mask(e))
                     self.set_enum_as_bf(e)
                 for value in enum.values:
                     self.add_enum_member(
                         e, "{0}.{1}".format(enum.name, value), enum.values[value]
                     )
+                if enum.flags and idaapi.IDA_SDK_VERSION >= 900:
+                    self.remove_enum_member(e, "tmp", enum.name)
 
             def delete_enum(self, enum):
                 # type: (DefinedStructEnum) -> None
@@ -432,17 +436,23 @@ if api is None:
                             None,
                             self.get_size_from_ida_type(field_type),
                         )
+
                     meminfo = self.get_struct_member_by_name(s, field_name)
-                    if field_is_base:
-                        meminfo.props |= self.get_base_class_flag()
-                    array_size = field.size if hasattr(field, "size") else 0
-                    self.set_struct_member_info(
-                        s,
-                        meminfo,
-                        0,
-                        self.get_tinfo_from_type(field_type, array_size),
-                        0,
-                    )
+                    if meminfo is not None:    
+                        if field_is_base:
+                            if idaapi.IDA_SDK_VERSION >= 900:
+                                meminfo.set_baseclass()
+                            else:
+                                meminfo.props |= self.get_base_class_flag()
+                                
+                        array_size = field.size if hasattr(field, "size") else 0
+                        self.set_struct_member_info(
+                            s,
+                            meminfo,
+                            0,
+                            self.get_tinfo_from_type(field_type, array_size),
+                            0,
+                        )
 
                 if struct.size is not None and struct.size != 0:
                     prev_size = self.get_struct_size(s)
@@ -471,6 +481,9 @@ if api is None:
                         continue
 
                     meminfo = self.get_struct_member_by_name(s, field_name)
+                    if meminfo is None:
+                        raise RuntimeError(f"Failed to find member {field_name} in struct {fullname}")
+
                     field_type = self.clean_name(virt_func.return_type)
                     field_type = field_type + "(__fastcall* " + field_name + ")("
                     for param in virt_func.parameters:
@@ -1273,6 +1286,8 @@ def run():
     print("{0} Deleting old enums and creating new ones".format(get_time()))
     for enum in yaml.enums:
         api.delete_enum(enum)
+    
+    for enum in yaml.enums:
         api.create_enum_struct(enum)
 
     print("{0} Creating new structs".format(get_time()))
