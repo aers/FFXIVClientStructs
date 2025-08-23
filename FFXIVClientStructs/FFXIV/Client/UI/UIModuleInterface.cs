@@ -108,7 +108,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(112)] public partial bool IsPadModeEnabled();
     [VirtualFunction(113)] public partial bool IsPadMouseModeEnabled();
 
-    // [VirtualFunction(115)] public partial ??? ToggleInputMode(???);
+    [VirtualFunction(115)] public partial bool SetPadMode(bool enable);
     [VirtualFunction(116)] public partial void CancelDragDrop(bool condition = true); // doesn't do anything when false is passed
     // [VirtualFunction(117)] public partial ??? IsUIHidden(???);
     [VirtualFunction(118)] public partial void AddAtkHistoryEntry(Utf8String* text, int historyIdx);

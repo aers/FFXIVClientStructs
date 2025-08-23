@@ -8357,7 +8357,7 @@ classes:
       111: OpenMiniMap
       112: IsPadModeEnabled
       113: IsPadMouseModeEnabled
-      115: ToggleInputMode
+      115: SetPadMode
       116: CancelDragDrop
       117: IsUIHidden
       118: AddAtkHistoryEntry
