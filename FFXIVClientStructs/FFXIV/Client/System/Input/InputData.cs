@@ -156,14 +156,14 @@ public partial struct KeyboardInputData {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x0B)]
 public partial struct Keybind {
-    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray2<KeyChord> _bindings;
-    [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray2<KeyChord> _controllerBindings;
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray2<KeySetting> _keySettings;
+    [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray2<KeySetting> _gamepadSettings;
     [FieldOffset(0x08)] private ushort Unk8;
     [FieldOffset(0x0A)] private byte UnkA;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x02)]
-public struct KeyChord {
+public struct KeySetting {
     [FieldOffset(0x00)] public SeVirtualKey Key;
     [FieldOffset(0x01), CExporterUnion("Modifier")] public KeyModifierFlag KeyModifier;
     [FieldOffset(0x01), CExporterUnion("Modifier")] public GamepadModifierFlag GamepadModifier;
