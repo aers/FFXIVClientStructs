@@ -149,6 +149,12 @@ public unsafe partial struct CharacterBase {
     [VirtualFunction(79)]
     public partial CStringPointer ResolvePhybPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
+    [VirtualFunction(80)]
+    public partial CStringPointer ResolveKdbPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+
+    [VirtualFunction(82)]
+    public partial CStringPointer ResolveBnmBPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+
     [VirtualFunction(84)]
     public partial CStringPointer ResolvePapPath(byte* pathBuffer, nuint pathBufferSize, uint unkAnimationIndex, byte* animationName);
 
@@ -203,6 +209,16 @@ public unsafe partial struct CharacterBase {
     public ReadOnlySpan<byte> ResolvePhybPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
         fixed (byte* pBuffer = pathBuffer)
             return ResolvePhybPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+    }
+
+    public ReadOnlySpan<byte> ResolveKdbPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
+        fixed (byte* pBuffer = pathBuffer)
+            return ResolveKdbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+    }
+
+    public ReadOnlySpan<byte> ResolveBnmBPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
+        fixed (byte* pBuffer = pathBuffer)
+            return ResolveBnmBPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
     }
 
     public ReadOnlySpan<byte> ResolvePapPath(Span<byte> pathBuffer, uint unkAnimationIndex, ReadOnlySpan<byte> animationName) {
@@ -282,6 +298,16 @@ public unsafe partial struct CharacterBase {
     public string ResolvePhybPath(uint partialSkeletonIndex) {
         Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
         return Encoding.UTF8.GetString(ResolvePhybPath(pathBuffer, partialSkeletonIndex));
+    }
+
+    public string ResolveKdbPath(uint partialSkeletonIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveKdbPath(pathBuffer, partialSkeletonIndex));
+    }
+
+    public string ResolveBnmBPath(uint partialSkeletonIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveBnmBPath(pathBuffer, partialSkeletonIndex));
     }
 
     public string ResolvePapPath(uint unkAnimationIndex, string animationName) {
