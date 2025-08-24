@@ -4308,6 +4308,7 @@ classes:
       0x1400E6770: OpenAddon
       0x1400E6BF0: OpenAddonByAgent
       0x1400E6F90: OpenYesNo
+      0x1400E7610: OpenYesNo2
       0x1400E7330: OpenSelectOk
       0x1400E71D0: OpenSelectOk2
       0x1400EAA70: ShowScreenImage
@@ -12076,6 +12077,17 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D56C10: ctor
+      0x140D572C0: DeleteAllAlarms
+      0x140D57800: OpenAlarmSettings
+      0x140D57B90: CloseDialogs
+      0x140D57BC0: UpdateAlarms
+      0x140D581C0: UpdateAlarmList
+      0x140D585C0: DeleteAlarm
+      0x140D596C0: GetContextMenuAlarmIndex
+      0x140D59710: PlayAlarmSoundEffect
+  Client::UI::Agent::AgentAlarm::Alarm:
+    funcs:
+      0x140D59860: CompareTo
   Client::UI::Agent::AgentMerchantSetting:
     vtbls:
       - ea: 0x1420956B8
