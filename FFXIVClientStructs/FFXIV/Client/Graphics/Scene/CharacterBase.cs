@@ -97,7 +97,7 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x360)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
 
-    [FieldOffset(0x3D8)] internal FixedSizeArray5<SkeletonAnimationContainer> _skeletonAnimationContainers; // tentative name
+    [FieldOffset(0x3D8), FixedSizeArray] internal FixedSizeArray5<SkeletonAnimationContainer> _skeletonAnimationContainers; // tentative name
 
     [FieldOffset(0x940)] public SkeletonResourceHandle* MaterialAnimationSkeleton;
 
