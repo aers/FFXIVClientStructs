@@ -55,7 +55,7 @@ public unsafe partial struct InputData {
 
     public Keybind* GetKeybind(int index) => GetKeybind((InputId)index);
 
-    [GenerateInterop]
+    [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public partial struct InputCodeModifiedInterface {
         /// <remarks> Called in <see cref="SetKeybind"/>. </remarks>
