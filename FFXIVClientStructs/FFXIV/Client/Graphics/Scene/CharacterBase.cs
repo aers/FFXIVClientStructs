@@ -371,6 +371,7 @@ public unsafe partial struct CharacterBase {
 
     [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
     public struct SlotStagingArea {
-        [FieldOffset(0x8)] public ModelResourceHandle* ModelResourceHandle;
+        [FieldOffset(0x08)] public ModelResourceHandle* ModelResourceHandle;
+        [FieldOffset(0x68)] public MaterialResourceHandle* SkinMaterialResourceHandle;
     }
 }
