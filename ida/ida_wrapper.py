@@ -25,14 +25,6 @@ class BaseIdaInterface(object):
     def get_enum_id(self, name):
         pass
 
-    @abstractmethod
-    def get_struct_size(self, sid):
-        pass
-
-    
-    def enum_exists(self, name: str) -> bool:
-        return self.get_enum_id(name) != idaapi.BADADDR
-
     def get_idc_type_from_ida_type(self, type: str):
         """Retrieve the idc type from the ida type.
 
@@ -102,7 +94,7 @@ class BaseIdaInterface(object):
         else:
             return ida_bytes.byte_flag()
 
-    def get_size_from_idc_type(self, type: int, name: str):
+    def get_size_from_idc_type(self, type: int):
         if type == ida_bytes.byte_flag():
             return 1
         elif type == ida_bytes.word_flag():
@@ -115,10 +107,6 @@ class BaseIdaInterface(object):
             return 4
         elif type == ida_bytes.double_flag():
             return 8
-        elif type == ida_bytes.stru_flag():
-            return self.get_struct_size(self.get_struct_id(name))
-        elif type == ida_bytes.stru_flag():
-            return idc.get_enum_width(self.get_enum_id(name))
         else:
             return 0
 
@@ -135,7 +123,7 @@ class BaseIdaInterface(object):
             return False
 
     def get_size_from_ida_type(self, type: str):
-        return self.get_size_from_idc_type(self.get_idc_type_from_ida_type(type), type)
+        return self.get_size_from_idc_type(self.get_idc_type_from_ida_type(type))
 
     def clean_name(self, name: str):
         """Clean a name

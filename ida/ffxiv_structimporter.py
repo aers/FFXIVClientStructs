@@ -52,8 +52,8 @@ class BaseApi:
         """
 
     @abstractmethod
-    def create_struct_members(self, struct, structs):
-        # type: (DefinedStruct, list[DefinedStruct]) -> None
+    def create_struct_members(self, struct):
+        # type: (DefinedStruct) -> None
         """
         Create members for a struct in the database.
         """
@@ -334,56 +334,61 @@ if api is None:
                 if struct.virtual_functions:
                     self.create_struct_type(fullname + "_vtbl")
 
-            def create_struct_member_fill(self, struct_name, offset, prev_offset):
-                # type: (str, int, int, int) -> None
+            def create_struct_member_fill(self, struct_name, offset):
+                # type: (str, int) -> None
                 s = self.get_struct(self.get_struct_id(struct_name))
+                prev_size = self.get_struct_size(s)
                 if self.full_padding:
-                    cur_offset = prev_offset
-                    while offset < cur_offset:
-                        size = 0
-                        if cur_offset % 8 == 0:
-                            size = 8
-                        elif cur_offset % 4 == 0:
-                            size = 4
-                        elif cur_offset % 2 == 0:
-                            size = 2
-                        else:
-                            size = 1
-                        cur_offset -= size
-                        while cur_offset < offset:
-                            size = int(size / 2)
-                            cur_offset += size
-                        flag = self.get_idc_type_from_size(size)
-                        self.create_struct_member(
-                            s, "field_{0:X}".format(cur_offset), cur_offset, flag, None, size
+                    flag = self.get_idc_type_from_size(prev_size)
+                    size = self.get_size_from_idc_type(flag)
+                    if size > offset - prev_size:
+                        flag = self.get_idc_type_from_size(
+                            offset - prev_size, prev_size
                         )
+                        size = self.get_size_from_idc_type(flag)
+
+                    self.create_struct_member(
+                        s, "field_{0:X}".format(prev_size), prev_size, flag, None, size
+                    )
                 else:
                     self.create_struct_member(
                         s,
-                        "field_{0:X}".format(offset),
-                        offset,
+                        "field_{0:X}".format(prev_size),
+                        prev_size,
                         ida_bytes.byte_flag(),
                         None,
-                        prev_offset - offset,
+                        offset - prev_size,
                     )
 
-            def create_struct_members(self, struct, structs):
-                # type: (DefinedStruct, list[DefinedStruct]) -> None
-                if idaapi.IDA_SDK_VERSION >= 900:
-                    print("{0} Creating members for struct {1}".format(get_time(), struct.name))
+            def create_struct_members(self, struct):
+                # type: (DefinedStruct) -> None
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
                 fullname = self.clean_struct_name(struct.type)
                 s = self.get_struct(self.get_struct_id(fullname))
 
-                prev_offset = -1
-                for field in reversed(struct.fields):
+                if struct.virtual_functions != None and (
+                    struct.fields == [] or struct.fields[0].offset > 0
+                ):
+                    self.create_struct_member(
+                        s, "__vftable", 0, ida_bytes.qword_flag(), None, 8
+                    )
+                    type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
+                    meminfo = self.get_struct_member_by_name(s, "__vftable")
+                    self.set_struct_member_info(
+                        s, meminfo, 0, self.get_tinfo_from_type(type), 0
+                    )
+
+                contiguous_fields = True
+                for field in struct.fields:
                     offset = field.offset
-                    size = self.get_size_from_ida_type(field.type)
 
-                    if prev_offset != -1:
-                        self.create_struct_member_fill(fullname, (offset + size), prev_offset)
+                    prev_size = self.get_struct_size(s)
+                    while offset > prev_size:
+                        contiguous_fields = False
+                        self.create_struct_member_fill(fullname, offset)
+                        prev_size = self.get_struct_size(s)
 
-                    field_is_base = field.base and (offset + size) == prev_offset
+                    field_is_base = field.base and contiguous_fields
                     field_name = (
                         field.name
                         if not field_is_base
@@ -458,30 +463,12 @@ if api is None:
                             self.get_tinfo_from_type(field_type, array_size),
                             0,
                         )
-                    prev_offset = offset
-
-                if struct.virtual_functions != None and (
-                    struct.fields == [] or struct.fields[0].offset > 0
-                ):
-                    if prev_offset != -1:
-                        # vftable is always a pointer so safe to hardcode 8 as the target offset to fill to
-                        self.create_struct_member_fill(fullname, 8, prev_offset)
-                    self.create_struct_member(
-                        s, "__vftable", 0, ida_bytes.qword_flag(), None, 8
-                    )
-                    type = fullname + "_vtbl*" if struct.virtual_functions else "void**"
-                    meminfo = self.get_struct_member_by_name(s, "__vftable")
-                    self.set_struct_member_info(
-                        s, meminfo, 0, self.get_tinfo_from_type(type), 0
-                    )
-                else:
-                    if prev_offset != -1:
-                        self.create_struct_member_fill(fullname, 0, prev_offset)
 
                 if struct.size is not None and struct.size != 0:
                     prev_size = self.get_struct_size(s)
-                    if struct.size > prev_size:
-                        self.create_struct_member_fill(fullname, prev_size, struct.size)
+                    while struct.size > prev_size:
+                        self.create_struct_member_fill(fullname, struct.size)
+                        prev_size = self.get_struct_size(s)
 
                 idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
@@ -835,8 +822,8 @@ if api is None:
                 dt.setCategoryPath(self.get_category_path(struct.type))
                 self.create_datatype(dt)
 
-            def create_struct_members(self, struct, structs):
-                # type: (DefinedStruct, list[DefinedStruct]) -> None
+            def create_struct_members(self, struct):
+                # type: (DefinedStruct) -> None
                 dt = self.get_datatype(struct.type)
                 if dt is None:
                     return
@@ -1157,8 +1144,8 @@ if api is None:
                 )
                 bv.define_user_type(struct.type, struct_type)
 
-            def create_struct_members(self, struct, structs):
-                # type: (DefinedStruct, list[DefinedStruct]) -> None
+            def create_struct_members(self, struct):
+                # type: (DefinedStruct) -> None
                 struct_type = bv.types[
                     struct.type
                 ].mutable_copy()  # type: binaryninja.StructureBuilder
@@ -1328,7 +1315,7 @@ def run():
 
     print("{0} Creating members for structs".format(get_time()))
     for struct in yaml.structs:
-        api.create_struct_members(struct, yaml.structs)
+        api.create_struct_members(struct)
 
     print("{0} Creating vtables for structs".format(get_time()))
     for struct in yaml.structs:
