@@ -287,7 +287,7 @@ if api is None:
                 )
             
             def can_run(self):
-                return self.enum_exists("Component::Exd::SheetsEnum")
+                idc.get_enum("Component::Exd::SheetsEnum") != idaapi.BADADDR
 
             def create_enum_struct(self, enum):
                 # type: (DefinedStructEnum) -> None
