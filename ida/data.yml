@@ -22637,6 +22637,8 @@ classes:
       - ea: 0x142179E88
     vfuncs:
       0: Dtor
+    funcs:
+      0x1417518D0: ctor
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x142187580
