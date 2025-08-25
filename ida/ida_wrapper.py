@@ -29,6 +29,10 @@ class BaseIdaInterface(object):
     def get_struct_size(self, sid):
         pass
 
+    
+    def enum_exists(self, name: str) -> bool:
+        return self.get_enum_id(name) != idaapi.BADADDR
+
     def get_idc_type_from_ida_type(self, type: str):
         """Retrieve the idc type from the ida type.
 

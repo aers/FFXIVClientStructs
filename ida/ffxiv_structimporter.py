@@ -17,6 +17,13 @@ from structs_schema import *
 
 class BaseApi:
     @abstractmethod
+    def can_run(self):
+        # type: () -> None
+        """
+        Checks if exdgetters has run before this is allowed to continue
+        """
+
+    @abstractmethod
     def create_enum_struct(self, enum):
         # type: (DefinedStructEnum) -> None
         """
@@ -284,6 +291,9 @@ if api is None:
                 return os.path.join(
                     os.path.dirname(os.path.realpath(__file__)), "ffxiv_structs.yml"
                 )
+            
+            def can_run(self):
+                return self.enum_exists("Component::Exd::SheetsEnum")
 
             def create_enum_struct(self, enum):
                 # type: (DefinedStructEnum) -> None
@@ -671,6 +681,9 @@ if api is None:
         # noinspection PyUnresolvedReferences
 
         class GhidraApi(BaseApi):
+            def can_run(self):
+                return True
+            
             def get_size_from_type(self, name):
                 # type: (str) -> int
                 dt = self.get_datatype(name)
@@ -1067,6 +1080,9 @@ if api is None:
     else:
         # TODO: VTables, Unions
         class BinjaApi(BaseApi):
+            def can_run(self):
+                return True
+            
             def get_binja_type(self, name):
                 # type: (str) -> str
                 lookup = {
@@ -1289,6 +1305,9 @@ def get_time():
 
 
 def run():
+    if not api.can_run():
+        raise RuntimeError("This script depends on exdgetters. Run that script before retrying")
+
     print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
 
