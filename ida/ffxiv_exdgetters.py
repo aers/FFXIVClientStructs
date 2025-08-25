@@ -141,21 +141,26 @@ if api is None:
 
             def create_enum_struct(self, name, values, width = 0):
                 # type: (str, dict[int, str], int) -> None
-                enum_id = self.get_enum_id(name)
                 if len(name.split("::")) > 3:
                     sheet_name = name.split("::")[-2]
                 else:
                     sheet_name = name.split("::")[-1]
+
+                # create or reset if exists
+                enum_id = self.get_enum_id(name)
                 if enum_id == idaapi.BADADDR:
                     enum_id = self.create_enum(name)
-                    self.set_enum_width(enum_id, width)
-                    if width == 1:
-                        if idaapi.IDA_SDK_VERSION < 900:
-                            self.add_enum_member(enum_id, f"{sheet_name}.tmp", self.get_enum_default_mask(enum_id))
-                        self.set_enum_as_bf(enum_id)
+                else:
+                    self.delete_enum_members(enum_id)
+                    idc.set_enum_bf(enum_id, False)
+                    
+                self.set_enum_width(enum_id, width)
+                if width == 1:
+                    if idaapi.IDA_SDK_VERSION < 900:
+                        self.add_enum_member(enum_id, f"{sheet_name}.tmp", self.get_enum_default_mask(enum_id))
+                    self.set_enum_as_bf(enum_id)
                         
                 for key in values:
-                    self.remove_enum_member(enum_id, values[key], sheet_name)
                     self.add_enum_member(enum_id, f"{sheet_name}.{values[key]}", key)
 
                 if width == 1 and idaapi.IDA_SDK_VERSION < 900:

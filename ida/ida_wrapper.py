@@ -26,12 +26,13 @@ class BaseIdaInterface(object):
         pass
 
     @abstractmethod
-    def get_struct_size(self, sid):
-        pass
+    def delete_enum_members(self, eid: int):
+        """Remove all enum members
 
-    
-    def enum_exists(self, name: str) -> bool:
-        return self.get_enum_id(name) != idaapi.BADADDR
+        Args:
+            eid (int): The id of the enum
+        """
+        pass
 
     def get_idc_type_from_ida_type(self, type: str):
         """Retrieve the idc type from the ida type.
@@ -102,7 +103,7 @@ class BaseIdaInterface(object):
         else:
             return ida_bytes.byte_flag()
 
-    def get_size_from_idc_type(self, type: int, name: str):
+    def get_size_from_idc_type(self, type: int):
         if type == ida_bytes.byte_flag():
             return 1
         elif type == ida_bytes.word_flag():
@@ -115,10 +116,6 @@ class BaseIdaInterface(object):
             return 4
         elif type == ida_bytes.double_flag():
             return 8
-        elif type == ida_bytes.stru_flag():
-            return self.get_struct_size(self.get_struct_id(name))
-        elif type == ida_bytes.stru_flag():
-            return idc.get_enum_width(self.get_enum_id(name))
         else:
             return 0
 
@@ -135,7 +132,7 @@ class BaseIdaInterface(object):
             return False
 
     def get_size_from_ida_type(self, type: str):
-        return self.get_size_from_idc_type(self.get_idc_type_from_ida_type(type), type)
+        return self.get_size_from_idc_type(self.get_idc_type_from_ida_type(type))
 
     def clean_name(self, name: str):
         """Clean a name
@@ -589,6 +586,36 @@ class IdaInterface(BaseIdaInterface):
                 ida_enum.get_enum_member_bmask(mem),
             )
 
+        def delete_enum_members(self, eid: int):
+            """Remove all enum members
+
+            Args:
+                eid (int): The id of the enum
+            """
+
+            masks = [ -1 ]
+            if idc.is_bf(eid):
+                mask = idc.get_first_bmask(eid)
+                while mask != idaapi.DEFMASK:
+                    masks.append(mask)
+                    mask = idc.get_next_bmask(eid, mask)
+
+            members = []
+            for mask in masks:
+                mem_val = idc.get_first_enum_member(eid, mask)
+                while mem_val != idaapi.BADNODE:
+                    cid = ida_enum.get_first_serial_enum_member(eid, mem_val, mask)
+                    members.append(cid[0])
+                    mem_val = idc.get_next_enum_member(eid, mem_val, mask)
+
+            for cid in members:
+                ida_enum.del_enum_member(
+                    eid,
+                    ida_enum.get_enum_member_value(cid),
+                    ida_enum.get_enum_member_serial(cid),
+                    ida_enum.get_enum_member_bmask(cid)
+                )
+                
         def create_enum(self, name: str) -> int:
             """Create an enum by its name
 
@@ -1072,6 +1099,36 @@ class IdaInterface(BaseIdaInterface):
                     0,
                     idc.get_enum_member_bmask(mem) or -1,
                 )
+
+        def delete_enum_members(self, eid: int):
+            """Remove all enum members
+
+            Args:
+                eid (int): The id of the enum
+            """
+            tif = ida_typeinf.tinfo_t()
+            if not tif.get_type_by_tid(eid):
+                raise RuntimeError(f'Failed to get tinfo_t for enum {eid}')
+
+            eti = ida_typeinf.enum_type_data_t()
+            if not tif.get_enum_details(eti):
+                raise RuntimeError(f'Failed to get enum details for enum id {eid}')
+            
+            # must clear values before groups
+
+            values = []
+            for (idx, _, _) in eti.all_constants():
+                values.append(eti[idx].name)
+
+            for name in values:
+                tif.del_edm(name)
+
+            groups = []
+            for (idx, _) in eti.all_groups():
+                groups.append(eti[idx].name)
+
+            for name in groups:
+                tif.del_edm(name)
 
         def create_enum(self, name: str) -> int:
             """Create an enum by its name
