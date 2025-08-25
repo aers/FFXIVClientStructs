@@ -280,12 +280,6 @@ if api is None:
                 # type: (str) -> None
                 self.remove_struct_members(self.get_struct_id(fullname))
 
-            def delete_enum_members(self, enum):
-                # type: (DefinedStructEnum) -> None
-                e = self.get_enum_id(enum.type)
-                for value in enum.values:
-                    self.remove_enum_member(e, value, enum.name)
-
             @property
             def get_file_path(self):
                 return os.path.join(
@@ -298,8 +292,11 @@ if api is None:
             def create_enum_struct(self, enum):
                 # type: (DefinedStructEnum) -> None
                 fullname = enum.type
-                self.create_enum(fullname)
+                
                 e = self.get_enum_id(fullname)
+                if e == idaapi.BADADDR:
+                    self.create_enum(fullname)
+
                 self.set_enum_width(e, self.get_size_from_ida_type(enum.underlying))
                 if self.is_signed(enum.underlying):
                     self.set_enum_flag(e, 0x20000)
@@ -316,7 +313,10 @@ if api is None:
 
             def delete_enum(self, enum):
                 # type: (DefinedStructEnum) -> None
-                self.delete_enum_members(enum)
+                eid = idc.get_enum(enum.type)
+                if eid != idaapi.BADADDR:
+                    self.delete_enum_members(eid)
+                    idc.set_enum_bf(eid, False)
 
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None

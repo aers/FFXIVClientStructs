@@ -577,6 +577,39 @@ class IdaInterface(BaseIdaInterface):
                 ida_enum.get_enum_member_bmask(mem),
             )
 
+        def delete_enum_members(self, eid: int):
+            """Remove all enum members
+
+            Args:
+                eid (int): The id of the enum
+            """
+
+            masks = [ -1 ]
+            if idc.is_bf(eid):
+                mask = idc.get_first_bmask(eid)
+                while mask != idaapi.DEFMASK:
+                    masks.append(mask)
+                    mask = idc.get_next_bmask(eid, mask)
+            members = []
+
+            for mask in masks:
+                mem_val = idc.get_first_enum_member(eid, mask)
+                while mem_val != idaapi.BADNODE:
+                    cid = ida_enum.get_first_serial_enum_member(eid, mem_val, mask)
+                    members.append(cid[0])
+                    mem_val = idc.get_next_enum_member(eid, mem_val, mask)
+
+            for cid in members:
+                ok = ida_enum.del_enum_member(
+                    eid,
+                    ida_enum.get_enum_member_value(cid),
+                    ida_enum.get_enum_member_serial(cid),
+                    ida_enum.get_enum_member_bmask(cid)
+                )
+                
+                if not ok:
+                    raise RuntimeError("Failed to delete enum member {} in enum {}"%(cid, eid))
+
         def create_enum(self, name: str) -> int:
             """Create an enum by its name
 
@@ -1060,6 +1093,36 @@ class IdaInterface(BaseIdaInterface):
                     0,
                     idc.get_enum_member_bmask(mem) or -1,
                 )
+
+        def delete_enum_members(self, eid: int):
+            """Remove all enum members
+
+            Args:
+                eid (int): The id of the enum
+            """
+            tif = ida_typeinf.tinfo_t()
+            if not tif.get_type_by_tid(eid):
+                raise RuntimeError(f'Failed to get tinfo_t for enum {eid}')
+
+            eti = ida_typeinf.enum_type_data_t()
+            if not tif.get_enum_details(eti):
+                raise RuntimeError(f'Failed to get enum details for enum id {eid}')
+            
+            # must clear values before groups
+
+            values = []
+            for (idx, _, _) in eti.all_constants():
+                values.append(eti[idx].name)
+
+            for name in values:
+                tif.del_edm(name)
+
+            groups = []
+            for (idx, _) in eti.all_groups():
+                groups.append(eti[idx].name)
+
+            for name in groups:
+                tif.del_edm(name)
 
         def create_enum(self, name: str) -> int:
             """Create an enum by its name
