@@ -762,6 +762,8 @@ classes:
       0: Dtor
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
+    vfuncs:
+      0: OnInputCodeModified
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
     vtbls:
       - ea: 0x142040010
@@ -6750,19 +6752,33 @@ classes:
   Client::System::Input::InputData:
     vtbls:
       - ea: 0x14203DC58
+    vfuncs:
+      2: SetKeybind
     funcs:
       0x140604270: ctor
       0x140604870: IsInputIdDown
       0x140604980: IsInputIdPressed
       0x140604AD0: IsInputIdHeld
       0x140604EB0: IsInputIdReleased
+      0x140605160: HasCursorPositionChanged
+      0x140605170: HasGamepadInputs2ButtonsChanged
+      0x140605180: HasKeyboardInputsChanged
+      0x140605190: HasUIFilteredCursorInputsButtonsChanged
+      0x1406051A0: HasGamepadInputsButtonsChanged
       0x1406052A0: IsMouseCombinationDragged
+      0x140605A80: GetKeybind
+      0x140605EA0: GetCurrentGamepadModifier
+      0x140605F50: GetCurrentKeyModifier
   Client::System::Input::GamepadInputData:
     funcs:
       0x140458500: ctor
+      0x140458640: PositionsDiffer
+      0x140458670: ButtonsDiffer
   Client::System::Input::CursorInputData:
     funcs:
       0x1405B7E60: ctor
+      0x1405B7E90: PositionsDiffer
+      0x1405B7EC0: ButtonsDiffer
   Client::System::Input::KeyboardInputData:
     funcs:
       0x1405B7FA0: ctor
@@ -8203,6 +8219,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14073C3C0: ctor # unused, inlined @ 0x14075CD19
+      0x14073D270: GetKeybindByName
   Client::UI::Misc::RaptureUiDataModule:
     vtbls:
       - ea: 0x142050658

@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.UI;
+
 namespace FFXIVClientStructs.FFXIV.Client.System.Input;
 
 // Client::System::Input::InputData
@@ -19,6 +21,22 @@ public unsafe partial struct InputData {
      * All the following keyboard keys states are not triggered if the chat input is active
      */
     [FieldOffset(0x500)] public KeyboardInputData KeyboardInputs;
+    [FieldOffset(0x994)] public GamepadModifierFlag CurrentGamepadModifier;
+    [FieldOffset(0x995)] public KeyModifierFlag CurrentKeyModifier;
+
+    [FieldOffset(0x9AE)] public bool GamepadInputs2ButtonsChanged;
+    [FieldOffset(0x9AF)] public bool CursorPositionsChanged;
+    [FieldOffset(0x9B0)] public bool KeyboardInputsChanged;
+    [FieldOffset(0x9B1)] public bool UIFilteredCursorInputsButtonsChanged;
+    [FieldOffset(0x9B2)] public bool GamepadInputsButtonsChanged;
+
+    [FieldOffset(0x9B4)] public int NumKeybinds; // amount of InputIds
+    [FieldOffset(0x9B8)] public Keybind* Keybinds; // index is InputId
+
+    [FieldOffset(0x9C8)] public InputCodeModifiedInterface* InputCodeModifiedCallback;
+
+    [VirtualFunction(2)]
+    public partial void SetKeybind(InputId inputId, Keybind* keybind);
 
     [MemberFunction("E9 ?? ?? ?? ?? 83 7F 44 02")]
     public partial bool IsInputIdPressed(InputId inputId);
@@ -31,6 +49,19 @@ public unsafe partial struct InputData {
 
     [MemberFunction("E8 ?? ?? ?? ?? 88 43 0F")]
     public partial bool IsInputIdReleased(InputId inputId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 33 FF 0F B6 DB")]
+    public partial Keybind* GetKeybind(InputId inputId);
+
+    public Keybind* GetKeybind(int index) => GetKeybind((InputId)index);
+
+    [GenerateInterop(isInherited: true)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public partial struct InputCodeModifiedInterface {
+        /// <remarks> Called in <see cref="SetKeybind"/>. </remarks>
+        [VirtualFunction(0)]
+        public partial void OnInputCodeModified(InputId inputId, Keybind* keybind);
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x24C)]
@@ -122,34 +153,62 @@ public partial struct KeyboardInputData {
     [FieldOffset(0x290)] public char LastKeyChar; // (actual character made by key combination, ie `a` or `A`)
 }
 
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x0B)]
+public partial struct Keybind {
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray2<KeySetting> _keySettings;
+    [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray2<KeySetting> _gamepadSettings;
+    [FieldOffset(0x08)] private ushort Unk8;
+    [FieldOffset(0x0A)] private byte UnkA;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x02)]
+public struct KeySetting {
+    [FieldOffset(0x00)] public SeVirtualKey Key;
+    [FieldOffset(0x01), CExporterUnion("Modifier")] public KeyModifierFlag KeyModifier;
+    [FieldOffset(0x01), CExporterUnion("Modifier")] public GamepadModifierFlag GamepadModifier;
+}
+
+[Flags]
+public enum GamepadModifierFlag : byte {
+    None = 0,
+    L1 = 1 << 0,
+    R1 = 1 << 1,
+    L2 = 1 << 2,
+    R2 = 1 << 3,
+    Start = 1 << 6,
+    Select = 1 << 7,
+}
+
 [Flags]
 public enum GamepadButtonsFlags : ushort {
     None = 0,
-    DPadUp = 1,
-    DPadDown = 2,
-    DPadLeft = 4,
-    DPadRight = 8,
-    Triangle = 16,
-    Cross = 32,
-    Square = 64,
-    Circle = 128,
-    L1 = 256,
-    L2 = 512,
-    L3 = 1024,
-    R1 = 2048,
-    R2 = 4096,
-    R3 = 8192,
-    Select = 16384,
-    Start = 32768,
+    DPadUp = 1 << 0,
+    DPadDown = 1 << 1,
+    DPadLeft = 1 << 2,
+    DPadRight = 1 << 3,
+    Triangle = 1 << 4,
+    Cross = 1 << 5,
+    Square = 1 << 6,
+    Circle = 1 << 7,
+    L1 = 1 << 8,
+    L2 = 1 << 9,
+    L3 = 1 << 10,
+    R1 = 1 << 11,
+    R2 = 1 << 12,
+    R3 = 1 << 13,
+    Select = 1 << 14,
+    Start = 1 << 15,
 }
 
 [Flags]
 public enum MouseButtonFlags {
-    LBUTTON = 1,
-    MBUTTON = 2,
-    RBUTTON = 4,
-    XBUTTON1 = 8,
-    XBUTTON2 = 16,
+    None = 0,
+    LBUTTON = 1 << 0,
+    MBUTTON = 1 << 1,
+    RBUTTON = 1 << 2,
+    XBUTTON1 = 1 << 3,
+    XBUTTON2 = 1 << 4,
 }
 
 /*
@@ -158,14 +217,24 @@ public enum MouseButtonFlags {
  */
 [Flags]
 public enum KeyStateFlags {
-    Down = 1,
-    Pressed = 2,
-    Released = 4,
-    Held = 8, // like Down but fires first after about 250ms and then only about every 50 ms
+    None = 0,
+    Down = 1 << 0,
+    Pressed = 1 << 1,
+    Released = 1 << 2,
+    Held = 1 << 3, // like Down but fires first after about 250ms and then only about every 50 ms
 }
 
-// From pointer found in UIInputData.GetKeybind
+[Flags]
+public enum KeyModifierFlag : byte {
+    None = 0,
+    Shift = 1 << 0,
+    Ctrl = 1 << 1,
+    Alt = 1 << 2,
+}
+
+/// From pointer found in <see cref="UIInputData.GetKeybindByName"/>
 public enum InputId {
+    NotFound = -1,
     CTRL = 0,
     OK = 1,
     CANCEL = 2,

@@ -1,13 +1,15 @@
 using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using FFXIVClientStructs.FFXIV.Client.System.Input;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::RaptureHotbarModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
+//   Client::System::Input::InputData::InputCodeModifiedInterface
 [GenerateInterop]
-[Inherits<UserFileEvent>]
+[Inherits<UserFileEvent>, Inherits<InputData.InputCodeModifiedInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2A9B8)]
 public unsafe partial struct RaptureHotbarModule {
     public static RaptureHotbarModule* Instance() {

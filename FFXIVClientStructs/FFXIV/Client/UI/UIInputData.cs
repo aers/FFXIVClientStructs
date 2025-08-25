@@ -31,9 +31,13 @@ public unsafe partial struct UIInputData {
     public bool IsKeyReleased(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Released);
     public bool IsKeyHeld(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Held);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8"), Obsolete("Use GetKeybindByName, or GetKeybind(InputId)")]
     public partial uint GetKeybind(Utf8String* name, Keybind* keybind);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8")]
+    public partial InputId GetKeybindByName(Utf8String* name, System.Input.Keybind* outKeybind);
+
+    // TODO: remove with GetKeybind
     [StructLayout(LayoutKind.Explicit, Size = 0xB)]
     public struct Keybind {
         [FieldOffset(0x0)] public SeVirtualKey Key;
@@ -44,13 +48,16 @@ public unsafe partial struct UIInputData {
     }
 }
 
+// TODO: remove with GetKeybind. replaced with KeyModifierFlag
 [Flags]
 public enum ModifierFlag : byte {
+    None = 0,
     Shift = 1 << 0,
     Ctrl = 1 << 1,
     Alt = 1 << 2,
 }
 
+// TODO: move below InputData
 public enum SeVirtualKey : byte {
     /// <summary>
     /// This is an addendum to use on functions in which you have to pass a zero value to represent no key code.
@@ -681,5 +688,29 @@ public enum SeVirtualKey : byte {
     /// <summary>
     /// F24 Key.
     /// </summary>
-    F24 = 135
+    F24 = 135,
+
+    PAD_LMB = 160,
+    PAD_MMB = 161,
+    PAD_RMB = 162,
+    PAD_MB4 = 163,
+    PAD_MB5 = 164,
+    PAD_MB6 = 165,
+    PAD_MB7 = 166,
+    PAD_UP = 167,
+    PAD_DOWN = 168,
+    PAD_LEFT = 169,
+    PAD_RIGHT = 170,
+    PAD_Y = 171,
+    PAD_A = 172,
+    PAD_X = 173,
+    PAD_B = 174,
+    PAD_LB = 175,
+    PAD_LT = 176,
+    PAD_LS = 177,
+    PAD_RB = 178,
+    PAD_RT = 179,
+    PAD_RS = 180,
+    PAD_Select = 181,
+    PAD_Start = 182,
 }
