@@ -25,6 +25,15 @@ class BaseIdaInterface(object):
     def get_enum_id(self, name):
         pass
 
+    @abstractmethod
+    def delete_enum_members(self, eid: int):
+        """Remove all enum members
+
+        Args:
+            eid (int): The id of the enum
+        """
+        pass
+
     def get_idc_type_from_ida_type(self, type: str):
         """Retrieve the idc type from the ida type.
 
