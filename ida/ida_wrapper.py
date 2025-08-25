@@ -599,8 +599,8 @@ class IdaInterface(BaseIdaInterface):
                 while mask != idaapi.DEFMASK:
                     masks.append(mask)
                     mask = idc.get_next_bmask(eid, mask)
-            members = []
 
+            members = []
             for mask in masks:
                 mem_val = idc.get_first_enum_member(eid, mask)
                 while mem_val != idaapi.BADNODE:
