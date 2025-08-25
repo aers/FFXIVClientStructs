@@ -6,7 +6,7 @@ import ida_kernwin
 import idaapi
 import sys
 
-if ida_kernwin.ask_buttons(
+if idaapi.IDA_SDK_VERSION >= 900 and ida_kernwin.ask_buttons(
     "",
     "",
     "",

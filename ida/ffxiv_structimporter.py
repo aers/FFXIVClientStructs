@@ -636,7 +636,7 @@ if api is None:
                     )
                     == ida_kernwin.ASKBTN_YES
                 )
-
+            
         full_padding = (
             ida_kernwin.ask_buttons(
                 "Full Padding",

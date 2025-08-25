@@ -874,12 +874,9 @@ class IdaInterface(BaseIdaInterface):
             Returns:
                 ida_typeinf.tinfo_t: The struct's parent tinfo_t
             """
-            tif = ida_typeinf.tinfo_t()
-            if not tif.get_type_by_tid(sid):
-                raise RuntimeError(f"Could not find struct of id {sid}")
-            return tif
+            return ida_typeinf.tinfo_t(tid=sid)
 
-        def get_struct_size(self, sid: ida_typeinf.tinfo_t) -> int:
+        def get_struct_size(self, sid: ida_typeinf.tinfo_t | int) -> int:
             """Get the struct size
 
             Args:
