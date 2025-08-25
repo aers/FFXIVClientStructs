@@ -22650,6 +22650,13 @@ classes:
       0x1417A6350: ctor
       0x1417A64B0: Finalizer
       0x1417A6590: Initialize
+  Client::Graphics::Physics::BoneKineDriverModule:
+    vtbls:
+      - ea: 0x142179E88
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x1417518D0: ctor
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x142187580

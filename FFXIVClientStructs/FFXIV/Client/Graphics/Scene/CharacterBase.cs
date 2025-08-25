@@ -64,6 +64,7 @@ public unsafe partial struct CharacterBase {
     }
 
     [FieldOffset(0x158)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
+    [FieldOffset(0x160)] public BoneKineDriverModule* BoneKineDriverModule;
 
     [FieldOffset(0x178)] public ModelRenderer.Callback RenderModelCallback;
     [FieldOffset(0x198)] public ModelRenderer.Callback RenderMaterialCallback;
