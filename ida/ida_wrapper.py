@@ -609,16 +609,13 @@ class IdaInterface(BaseIdaInterface):
                     mem_val = idc.get_next_enum_member(eid, mem_val, mask)
 
             for cid in members:
-                ok = ida_enum.del_enum_member(
+                ida_enum.del_enum_member(
                     eid,
                     ida_enum.get_enum_member_value(cid),
                     ida_enum.get_enum_member_serial(cid),
                     ida_enum.get_enum_member_bmask(cid)
                 )
                 
-                if not ok:
-                    raise RuntimeError("Failed to delete enum member {} in enum {}"%(cid, eid))
-
         def create_enum(self, name: str) -> int:
             """Create an enum by its name
 
