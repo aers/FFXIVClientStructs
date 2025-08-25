@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -66,6 +68,17 @@ public unsafe partial struct RaptureLogModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 8B 47 ?? 85 C0")] // ShowLogMessage<string>
     public partial void ShowLogMessageString(uint logMessageId, Utf8String* value);
+
+    /// <summary>
+    /// Shows a message in a chat bubble above a characters head.
+    /// </summary>
+    /// <param name="logKindId"> The LogKind RowId. </param>
+    /// <param name="sender"> The senders name. </param>
+    /// <param name="message"> The message. </param>
+    /// <param name="worldId"> The World RowId of the sender. Used for <see cref="CharacterManager.LookupBattleCharaByName(CStringPointer, bool, short)"/>. </param>
+    /// <param name="isLocalPlayer"> If <see langword="true"/>, uses <see cref="Control.LocalPlayer"/>, otherwise looks up the character via <see cref="CharacterManager.LookupBattleCharaByName(CStringPointer, bool, short)"/>. </param>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 41 8B C6 48 8B 8C 24")]
+    public partial void ShowMiniTalkPlayer(ushort logKindId, Utf8String* sender, Utf8String* message, ushort worldId, bool isLocalPlayer);
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 80 C6 41"), GenerateStringOverloads]
     public partial void PrintString(CStringPointer str);
