@@ -28,7 +28,7 @@ public unsafe partial struct MarkingController {
     /// 5 - Territory Permission Denied? <br/>
     /// </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? EB D8 83 FB 09")]
-    public partial byte ClearFieldMarker(uint index)
+    public partial byte ClearFieldMarker(uint index);
 
     /// <remarks>
     /// 0 - Success <br/>
@@ -38,7 +38,7 @@ public unsafe partial struct MarkingController {
     /// 5 - Territory Permission Denied? <br/>
     /// </remarks>
     [MemberFunction("41 55 48 83 EC 50 4C 8B E9")]
-    public partial byte ClearFieldMarkers()
+    public partial byte ClearFieldMarkers();
 }
 
 [GenerateInterop]
