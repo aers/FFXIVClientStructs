@@ -115,6 +115,9 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 49 89 84 3C")]
     public partial ulong GetRetainerMarketPrice(short slot);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 33 C0 89 87 ?? ?? ?? ?? 8B 47 20")]
+    public partial void SetTradeGilAmount(uint amount);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4E ?? 40 88 69")]
     public partial void SetRetainerMarketPrice(short slot, uint price);
 
