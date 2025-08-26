@@ -35,6 +35,8 @@ public unsafe partial struct InputData {
 
     [FieldOffset(0x9C8)] public InputCodeModifiedInterface* InputCodeModifiedCallback;
 
+    public Span<Keybind> GetKeybindSpan() => new (Keybinds, NumKeybinds);
+
     [VirtualFunction(2)]
     public partial void SetKeybind(InputId inputId, Keybind* keybind);
 
