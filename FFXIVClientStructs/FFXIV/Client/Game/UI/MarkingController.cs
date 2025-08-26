@@ -18,6 +18,28 @@ public unsafe partial struct MarkingController {
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 1B B0 01")]
     public partial void PlacePreset(MarkerPresetPlacement* placement);
+
+    /// <remarks>
+    /// 0 - Success <br/>
+    /// 1 - Invalid Index <br/>
+    /// 2 - Operation Lock (Too Frequent) (500ms) <br/>
+    /// 3 - Unknown <br/>
+    /// 4 - Territory Permission Denied? <br/>
+    /// 5 - Territory Permission Denied? <br/>
+    /// </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? EB D8 83 FB 09")]
+    public partial byte ClearFieldMarker(uint index)
+
+    /// <remarks>
+    /// 0 - Success <br/>
+    /// 1 - Invalid Index <br/>
+    /// 2 - Operation Lock (Too Frequent) (500ms) <br/>
+    /// 3 - Unknown <br/>
+    /// 4 - Territory Permission Denied? <br/>
+    /// 5 - Territory Permission Denied? <br/>
+    /// </remarks>
+    [MemberFunction("41 55 48 83 EC 50 4C 8B E9")]
+    public partial byte ClearFieldMarkers(uint index)
 }
 
 [GenerateInterop]
