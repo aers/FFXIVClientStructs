@@ -1487,6 +1487,7 @@ classes:
       0x140833780: GetEmptySlotsInBag
       0x1408339C0: GetFirstEmptyInventorySlot
       0x14083CDC0: SendTradeRequest
+      0x14083C8B0: SetTradeGilAmount
       0x14083F250: GetRetainerGil
       0x140840370: GetRetainerMarketPrice
       0x140840390: SetRetainerMarketPrice
