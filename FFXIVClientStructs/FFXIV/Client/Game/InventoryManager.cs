@@ -124,7 +124,7 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 39 6B 38")]
     public partial void SetSlotUnblocked(InventoryType type, short slot);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 39 6B 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 74 57 44 0F B6 8F ?? ?? ?? ??")]
     public partial void RefuseTrade()
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
