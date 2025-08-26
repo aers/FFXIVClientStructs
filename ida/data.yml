@@ -8987,6 +8987,7 @@ classes:
       0x140971880: GetLogMessage
       0x140972390: GetLogMessageDetail
       0x140974200: FormatLogMessage
+      0x1409759A0: ShowMiniTalkPlayer
       0x140975B00: AddMsgSourceEntry
   Component::Prohibit::ProhibitModuleInterface:
     vtbls:
