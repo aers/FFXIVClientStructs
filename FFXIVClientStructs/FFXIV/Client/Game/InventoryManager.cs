@@ -41,6 +41,9 @@ public unsafe partial struct InventoryManager {
     [FieldOffset(0x3620)] internal InventoryItem UnkInventoryItem0;
     [FieldOffset(0x3668)] internal InventoryItem UnkInventoryItem1;
 
+    [MemberFunction("48 89 6C 24 ?? 56 57 41 56 48 83 EC 50 48 8B E9 44 8B F2")]
+    public partial void SendTradeRequest(uint entityID);
+
     [MemberFunction("E8 ?? ?? ?? ?? 88 58 18")]
     public partial InventoryContainer* GetInventoryContainer(InventoryType inventoryType);
 
