@@ -2636,6 +2636,7 @@ classes:
     funcs:
       0x140C89B80: Initialize
       0x140C89BD0: Finalizer
+      0x140C89A60: LoadAreaVFXToLocalPlayer
       0x140C89CF0: Update
   Client::Game::Conditions:
     instances:
