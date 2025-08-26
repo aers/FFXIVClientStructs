@@ -295,7 +295,7 @@ if api is None:
                 
                 e = self.get_enum_id(fullname)
                 if e == idaapi.BADADDR:
-                    self.create_enum(fullname)
+                    e = self.create_enum(fullname)
 
                 self.set_enum_width(e, self.get_size_from_ida_type(enum.underlying))
                 if self.is_signed(enum.underlying):
