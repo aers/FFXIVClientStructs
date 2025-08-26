@@ -37,7 +37,7 @@ public unsafe partial struct AgentAlarm {
         /// <summary> A reminder, minutes ahead of alarm </summary>
         [FieldOffset(0x6F)] public byte Reminder;
         [FieldOffset(0x70)] public AlarmSoundEffect SoundEffect;
-        
+
         [FieldOffset(0x74)] public int Timestamp;
         [FieldOffset(0x78)] public AlarmFlag Flags;
     }

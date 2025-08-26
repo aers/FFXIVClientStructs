@@ -92,11 +92,11 @@ public unsafe partial struct MaterialResourceHandle {
 
     public byte ColorTableHeightLog
         => (byte)((DataFlags >> 8) & 0xF);
-    
+
     /// <summary>Width of the color table, in vectors of 4 <see cref="Half"/>.</summary>
     public int ColorTableWidth
         => HasColorTable ? ((DataFlags & 0xFF0) == 0 ? 4 : 1 << ColorTableWidthLog) : 0;
-    
+
     public int ColorTableHeight
         => HasColorTable ? ((DataFlags & 0xFF0) == 0 ? 16 : 1 << ColorTableHeightLog) : 0;
 
