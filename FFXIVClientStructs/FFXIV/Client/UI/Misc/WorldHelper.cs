@@ -1,6 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::WorldHelper
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct WorldHelper {
     public static WorldHelper* Instance() {
