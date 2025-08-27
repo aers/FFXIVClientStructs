@@ -14,6 +14,16 @@ public unsafe partial struct WorldHelper {
     // [FieldOffset(0x28)] public ClassThatLoadsWorlds WorldLoader; // size: 0x10
     [FieldOffset(0x38)] public bool IsLoaded;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 F6 75 17")]
+    public partial World GetWorldById(ushort world);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 63 F5")]
+    public partial CStringPointer GetWorldNameById(ushort world);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 41 89 07 66 85 C0")]
+    public partial ushort GetWorldIdByName(CStringPointer worldName);
+
+
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x22)]
     public partial struct World {
