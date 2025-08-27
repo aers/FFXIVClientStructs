@@ -123,6 +123,9 @@ public unsafe partial struct UIModule {
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F2 48 8B F9 45 84 C9")]
     public partial void ProcessChatBoxEntry(Utf8String* message, nint a4 = 0, bool saveToHistory = false);
 
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 48 8B 3D ?? ?? ?? ?? 48 8B D9 BA ?? ?? ?? ?? 48 8D 4F 10 E8 ?? ?? ?? ?? 83 78 18 00 74 21")]
+    public partial bool ShouldLimitFPS();
+
     [Flags]
     public enum UiFlags {
         Shortcuts = 1, //disable ui shortcuts
