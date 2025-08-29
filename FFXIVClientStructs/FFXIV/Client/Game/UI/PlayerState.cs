@@ -18,8 +18,8 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x64)] public uint EntityId;
     [FieldOffset(0x68)] public ulong ContentId;
     /// <remarks>
-    /// 0 = Duty penalty<br/>
-    /// 1 = Unknown<br/>
+    /// 0 = Duty Finder penalty<br/>
+    /// 1 = Inactivity penalty, presumably (e.g. for Crystalline Conflict Ranked Match)<br/>
     /// See also: <see cref="InstanceContent.GetPenaltyRemainingInMinutes" />
     /// </remarks>
     [FieldOffset(0x70), FixedSizeArray] internal FixedSizeArray2<int> _penaltyTimestamps;

@@ -1,16 +1,22 @@
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentLookingForGroup
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Component::Text::TextChecker::ExecNonMacroFunc
 [Agent(AgentId.LookingForGroup)]
 [GenerateInterop]
-[Inherits<AgentInterface>]
+[Inherits<AgentInterface>, Inherits<TextChecker.ExecNonMacroFunc>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3210)]
 public unsafe partial struct AgentLookingForGroup {
+    [FieldOffset(0x38)] public ContentRoulette ContentRoulette;
+    [FieldOffset(0x48)] public PartyContent PartyContent;
+    [FieldOffset(0x60)] public InstanceContent.ContentUI ContentUI;
     [FieldOffset(0xE0)] public InfoProxyCrossRealm* InfoProxyCrossRealm;
 
     [FieldOffset(0x1098)] public ListingsSub Listings;
