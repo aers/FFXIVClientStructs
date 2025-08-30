@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Common;
 
 namespace FFXIVClientStructs.FFXIV.Application.Network;
 
+// Application::Network::NetworkModule
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xC50)]
 public unsafe partial struct NetworkModule {
@@ -31,6 +32,9 @@ public unsafe partial struct NetworkModule {
     [FieldOffset(0x930)] public Utf8String World;
     [FieldOffset(0x998)] public Utf8String ZoneName;
     [FieldOffset(0xA00)] private Utf8String UnkA00;
+
+    [FieldOffset(0xAB0)] public ZoneLoginCallbackInterface* ZoneLoginCallback;
+    [FieldOffset(0xAB8)] public LogoutCallbackInterface* LogoutCallback;
 
     [FieldOffset(0xA70)] private ZoneClient* ZoneClient;
     [FieldOffset(0xA78)] private ChatClient* ChatClient;
