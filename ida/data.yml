@@ -15,6 +15,7 @@ globals:
   0x142717C58: g_FPS
   0x14271F160: g_LanguageCharArr # byte[] no pointer
   0x142721548: g_Client::Game::Control::InputManager_MouseButtonHoldState
+  0x142721640: g_GlobalUIScale
   0x14274E6F8: g_StackCookie
   0x14274E6F0: g_InverseStackCookie
   0x14276A778: g_stdout
@@ -189,7 +190,6 @@ functions:
   0x14046F400: GetMainCommandAgentId
   0x14046F480: GetMainCommandInputId
   0x14079E6D0: GetHotbarSlotTypeFromDragDropType
-  0x140846330: GetUIModule
   0x140965DC0: ToObjStrId
   0x140A1CD80: GenerateItemsChecksum # for Banners
   0x140A1CED0: GenerateEquippedItemsChecksum # for Banners; unused
@@ -664,6 +664,159 @@ classes:
   Client::Network::LobbyClient::LobbyCharacterRequestCallback:
     funcs:
       0x140142810: ctor # inlined (7.3)
+  Client::Game::UI::ContentInterface:
+    vtbls:
+      - ea: 0x141FF86F0
+    vfuncs:
+      0: Dtor
+      1: GetName
+      2: GetNameShortOrCategory
+      # 3:
+      4: GetContentType
+      5: IsPvP
+      6: GetImage
+      7: GetIcon
+      8: GetContentTypeIcon
+      9: GetRequiredLevel
+      10: GetSyncedLevel
+      11: GetItemLevelRequired
+      12: GetItemLevelSync
+      13: IsHighestAverageItemLevelApplied
+      14: IsUnlocked
+      # 15:
+      16: IsCompleted
+      17: IsInDutyFinderAndIsUnlocked
+      18: GetClassJobCategory
+      19: HasOnePlayerPerJobDetails
+      20: IsSeparatedDpsRoles
+      21: IsSeparatedHealerRoles
+      22: IsCrystallineConflict
+      23: IsLimitedJobAllowed
+      24: GetNumParties
+      25: GetQueueMaxPlayers
+      26: GetTanksPerParty
+      27: GetHealersPerParty
+      28: GetTotalDpsPerParty
+      29: GetMeleesPerParty
+      30: GetRangedPerParty
+      31: GetPartyCount
+      32: GetAlliancePartyCount
+      33: GetQueueMinPlayers
+      34: IsRoleIndependent
+      35: IsFixedItemLevelSync
+      36: IsUnrestrictedPartyAllowed
+      37: IsMatchingForAlliancesUnavailable
+      38: IsMemberRequiredInEveryParty
+      39: GetLootModeType
+      40: IsAdditionalLootRulesAvailable
+      41: IsMinimumILAllowed
+      # 42:
+      43: IsAllianceRegistrationAllowed
+      # 44:
+      45: GetAllianceRegistrationMinPlayers
+      # 46:
+      47: IsGrandCompanyRequired
+      48: IsBattleMentorWithCurrentCertificationOnly
+      # 49:
+      # 50:
+      51: IsRegistrationDataCenterLimited
+      52: IsExplorerModeAllowed
+      53: GetRewardResetType
+      54: GetEchoSetting
+      55: GetRequiredExVersion
+      56: GetTimeLimit
+      57: GetTimeLimitMax
+      # 58:
+      59: GetContentUICategory
+      60: GetJournalGenre
+      61: IsReplacementAllowed
+      62: GetTerritoryType
+      # 63:
+      64: IsInDutyFinder
+      65: IsHighEndDuty
+      66: IsConsumableItemAllowed
+      67: GetSortKey
+      68: GetGoldSaucerRegisterConditionCount
+      69: GetGoldSaucerRegisterConditionAddonId
+      # 70:
+      # 71:
+      # 72:
+      73: IsOnlyPvPTeamMembers
+      # 74:
+      75: GetContentCloseCycle
+      76: IsDutyRecorderAllowed
+      77: IsRegistrationHomeWorldLimited
+      # 78:
+      # 79:
+      # 80:
+      81: IsCurrentUnreal
+      82: IsRegistrationAllowedFromAnyDataCenter
+      83: GetCrystallineConflictGameplayFeatureCount
+      84: GetCrystallineConflictGameplayFeatureAddonId
+      85: GetUnlockType
+      86: GetUnlockCriteria
+      # 87:
+      88: GetPenaltyTimestampArrayIndex
+      89: IsLimitedTimeBonus
+      90: IsPhoenixDownAllowed
+    funcs:
+      0x140A2DAB0: HasUnmetConditions
+      0x140A2E8C0: GetIsResetDaily
+      0x140D69000: GetConditionFlags
+  Client::Game::UI::ContentRoulette:
+    vtbls:
+      - ea: 0x142068738
+        base: Client::Game::UI::ContentInterface
+    funcs:
+      0x140A2A1E0: ctor
+      0x140A2A200: Finalizer
+      0x140A2A820: GetIsInDutyFinder
+      0x140A2B280: CanGetAwards
+      0x140A2B2F0: GetDescription
+      0x140A2B310: GetDutyType
+      0x140A2B330: HasDutyRequirements
+      0x140A2B5A0: GetRow
+      0x140A2B5B0: GetContentMemberTypeRow
+  Client::Game::UI::ContentFinderConditionInterface:
+    vtbls:
+      - ea: 0x142068A10
+        base: Client::Game::UI::ContentInterface
+    funcs:
+      0x140A2B5E0: ctor
+  Client::Game::UI::PartyContent:
+    vtbls:
+      - ea: 0x142068CE8
+        base: Client::Game::UI::ContentFinderConditionInterface
+    funcs:
+      0x140A2C7A0: ctor
+  Client::Game::UI::PublicContent:
+    vtbls:
+      - ea: 0x142068FC0
+        base: Client::Game::UI::ContentFinderConditionInterface
+    funcs:
+      0x140A2C8D0: ctor
+  Client::Game::UI::GoldSaucerContent:
+    vtbls:
+      - ea: 0x142069298
+        base: Client::Game::UI::ContentFinderConditionInterface
+    funcs:
+      0x140A2CA20: ctor
+  Client::Game::UI::InstanceContentExcelWrapper: # can't name this Client::Game::UI::InstanceContent, because the struct already exists in UIState
+    vtbls:
+      - ea: 0x142069570
+        base: Client::Game::ContentFinderConditionInterface
+    funcs:
+      0x140A2CB50: ctor
+  Client::Game::UI::InstanceContent::ContentUI:
+    vtbls:
+      - ea: 0x141FF89C8
+    funcs:
+      0x140A39B20: ctor
+      0x1401CA580: Finalizer
+      0x140A2CD80: GetRow
+      0x140A39BB0: LoadByContentLookupInfo
+      0x140A39C30: LoadByContentFinderConditionId
+      0x140A39D30: GetContentInterface
   Client::Game::StatusManager:
     funcs:
       0x14085C550: OnGainStatus
@@ -1508,6 +1661,7 @@ classes:
       0x1408442E0: GetRacingChocoboAbilityIdFromItem
       0x140844390: GetRacingChocoboStainFromItem
       0x140844490: GetRacingChocoboBeedingCapacityFromItem
+      0x140846330: GetUIModule
       0x1409D1390: GetSpecialItemId #static
       0x1408426B0: GetLimitedTomestoneWeeklyLimit #static
       0x140832520: SetSlotBlocked
@@ -2842,6 +2996,7 @@ classes:
       - ea: 0x142069848
     funcs:
       0x140A2E8E0: GetPenaltyRemainingInMinutes
+      0x140A303E0: GetContentInterface
       0x140A31260: IsRouletteIncomplete
   Client::Game::UI::GuildOrderReward:
     instances:
@@ -11090,6 +11245,8 @@ classes:
     vtbls:
       - ea: 0x142036360
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1420363E0
+        base: Component::Text::TextChecker::ExecNonMacroFunc
     funcs:
       0x140528570: ctor
       0x140528910: Finalizer
