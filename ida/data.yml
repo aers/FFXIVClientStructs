@@ -5660,6 +5660,8 @@ classes:
       0x14045CD00: GetCurrentDeviceTimeInMillis
       0x14045CD80: GetLobbyCount
       0x14045D6A0: IsInCrossWorldDuty
+      0x14045D6E0: SetZoneLoginCallback
+      0x14045D700: SetLogoutCallback
       0x14045D720: SetCurrentInstance
       0x14045D740: GetCurrentInstance
       0x14045C330: HasZoneConnection
@@ -5870,21 +5872,27 @@ classes:
      0x140482850: ctor
   Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent:
     vtbls:
-      - ea: 0x142033FE8
+      - ea: 0x1420332C0
   Application::Network::LogoutCallbackInterface:
     vtbls:
-      - ea: 0x142033FF0
+      - ea: 0x1420339C0
     vfuncs:
       1: OnLogout
   Application::Network::ZoneLoginCallbackInterface:
     vtbls:
-      - ea: 0x142034000
+      - ea: 0x1420339D0
     vfuncs:
       1: OnZoneLogin
   Client::UI::Agent::AgentLobby:
     vtbls:
       - ea: 0x142033F68
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142033FE8
+        base: Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent
+      - ea: 0x142033FF0
+        base: Application::Network::LogoutCallbackInterface
+      - ea: 0x142034000
+        base: Application::Network::ZoneLoginCallbackInterface
     funcs:
       0x1404A7380: ctor
       0x1404A9980: HandleLogout
