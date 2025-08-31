@@ -11261,6 +11261,7 @@ classes:
       0x140528910: Finalizer
       0x14052E490: OpenListing
       0x14052E3B0: OpenListingByContentId
+      0x14052F180: RequestListingsUpdate
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
       - ea: 0x142091AE8
