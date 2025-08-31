@@ -66,6 +66,13 @@ class BaseApi:
         """
 
     @abstractmethod
+    def finalise_struct(self, struct):
+        # type: (DefinedStruct) -> None
+        """
+        Finalise a struct in the database.
+        """
+
+    @abstractmethod
     def create_union(self, struct):
         # type: (DefinedStruct) -> None
         """
@@ -266,15 +273,18 @@ if api is None:
         import ida_funcs
         import ida_name
         import ida_kernwin
+        import ida_srclang
+        import hashlib
         from ida_wrapper import IdaInterface
     except ImportError:
         print("Warning: Unable to load IDA")
     else:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi, IdaInterface):
-            def __init__(self, full_padding):
+            def __init__(self, full_padding, c_importer):
                 # type: (bool) -> None
                 self.full_padding = full_padding
+                self.c_importer = c_importer
 
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
@@ -286,6 +296,33 @@ if api is None:
                     os.path.dirname(os.path.realpath(__file__)), "ffxiv_structs.yml"
                 )
             
+            def generate_hashed_type_name(self, name: str) -> str:                
+                name = self.clean_struct_name(name)
+
+                name = hashlib.sha1(name.encode()).hexdigest()
+
+                return "struc_" + name
+
+            def get_c_type_name(self, name: str) -> str:
+                if not self.c_importer:
+                    return name
+                
+                ptr_count = 0
+                i = len(name) - 1
+                while i >= 0 and name[i] == '*':
+                    ptr_count += 1
+                    i -= 1
+
+                if ptr_count > 0:
+                    name = name.strip("*")
+
+                idc_type = self.get_idc_type_from_ida_type(name)
+                if idc_type != self.get_struct_flag() or \
+                    "Component::Exd::Sheets" in name:
+                    return name + "*" * ptr_count
+
+                return self.generate_hashed_type_name(name) + "*" * ptr_count
+
             def can_run(self):
                 return self.enum_exists("Component::Exd::SheetsEnum")
 
@@ -324,15 +361,201 @@ if api is None:
                 fullname = self.clean_struct_name(struct.type)
                 self.delete_struct_members(fullname)
                 self.delete_struct_members(fullname + "_vtbl")
+
+                # also check C types in case of an incomplete C run
+                if self.c_importer:
+                    cname = self.get_c_type_name(fullname)
+                    self.delete_struct_members(cname)
+                    self.delete_struct_members(cname + "_vtbl")
+
                 idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
             def create_struct(self, struct):
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_struct_name(struct.type)
+
+                if self.c_importer:
+                    # rename C++ -> C or create new C struct
+                    cname = self.generate_hashed_type_name(fullname)
+                    
+                    sid = self.get_struct_id(fullname)
+                    if sid == idaapi.BADADDR:
+                        if self.get_struct_id(cname) == idaapi.BADADDR:
+                            self.create_struct_type(cname, struct.union)
+                    else:
+                        self.rename_struct(sid, cname)
+                    
+                    if not struct.virtual_functions:
+                        return
+                    
+                    sid = self.get_struct_id(fullname + "_vtbl")
+                    if sid == idaapi.BADADDR:
+                        if self.get_struct_id(cname + "_vtbl") == idaapi.BADADDR:
+                            self.create_struct_type(cname + "_vtbl")
+                    else:
+                        self.rename_struct(sid, cname + "_vtbl")
+
+                    return
+
                 if self.get_struct_id(fullname) == idaapi.BADADDR:
                     self.create_struct_type(fullname, struct.union)
+
                 if struct.virtual_functions:
                     self.create_struct_type(fullname + "_vtbl")
+
+            def get_c_fill_type(self, available_bytes: int) -> tuple[str, int]:
+                if available_bytes >= 9:
+                    return ("__int64", 8)
+                elif available_bytes >= 4:
+                    return ("__int32", 4)
+                elif available_bytes >= 2:
+                    return ("__int16", 2)
+                else:
+                    return ("char", 1)
+
+            def create_c_decl(self, struct: DefinedStruct) -> str:
+                fullname = self.get_c_type_name(self.clean_struct_name(struct.type))
+
+                decl = [ "_" ] # placeholder, filled after we determine base classes
+
+                cur_size = 0
+
+                contiguous_fields = True
+                
+                seen_fields = {}
+
+                inherits_from = []
+
+                if struct.virtual_functions != None:
+                    # the placeholder will force IDA to mark the _vtbl struct as a VFT
+                    # and attach it to this struct
+                    if struct.virtual_functions:
+                        decl.append("virtual void _placeholder();")
+                    else:
+                        decl.append("void** __vftable;")
+
+                    # TODO(caitlyn): we are assuming that parent classes are always virtual
+                    # doing this properly will require checking the parent
+                    # eventually we'll probably want to build an inheritance hierarchy
+                    # so that we can propagate vfunc names and determine the need to
+                    # offset data members here
+                    needs_alloc = \
+                        len(struct.fields) == 0 or \
+                        not struct.fields[0].base or \
+                        struct.fields[0].offset != 0
+                    
+                    if needs_alloc:
+                        cur_size += 8
+
+                for field in struct.fields:
+                    offset = field.offset
+                    while offset > cur_size:
+                        contiguous_fields = False
+
+                        # TODO(caitlyn): move this into a separate function
+                        if self.full_padding:
+                            (fill_type, fill_size) = self.get_c_fill_type(offset - cur_size)
+                            decl.append(f"{fill_type} field_{cur_size:X};")
+                            cur_size += fill_size
+                        else:
+                            arr_size = offset - cur_size
+                            decl.append(f"char field_{cur_size:X}[{arr_size}];")
+                            cur_size += arr_size
+
+                    field_is_base = field.base and contiguous_fields
+                    field_name = (
+                        field.name
+                        if not field_is_base
+                        else f"baseclass_{offset:X}"
+                    )
+
+                    # ugly hack to workaround duplicate field names in structs
+                    if field_name in seen_fields:
+                        next = seen_fields[field_name] + 1
+                        seen_fields["field_name"] = next
+
+                        field_name += f"_{next}"
+                    else:
+                        seen_fields[field_name] = 1
+                    
+                    array_size = field.size if hasattr(field, "size") else 0
+
+                    field_type = self.clean_name(field.type)
+                    if field_type == "__fastcall":
+                        field_decl = self.get_c_type_name(self.clean_name(field.return_type))
+                        field_decl = field_decl + "(__fastcall* " + field_name + ")("
+                        for param in field.parameters:
+                            field_decl = field_decl + self.get_c_type_name(self.clean_name(param.type)) + ""
+                            field_decl = field_decl + param.name + ","
+                        field_decl = field_decl[:-2] + ")"
+
+                        decl.append(field_decl)
+                        cur_size += 8
+
+                        continue
+
+                    field_size = 0
+                    
+                    # struct type
+                    if self.get_idc_type_from_ida_type(
+                        self.get_c_type_name(self.clean_struct_name(field_type))
+                    ) == self.get_struct_flag():
+                        field_type = self.get_c_type_name(self.clean_struct_name(field_type))
+
+                        tinfo = self.get_tinfo_from_type(field_type)
+                        field_size = tinfo.get_size()
+
+                    # enum type
+                    elif (
+                        self.get_idc_type_from_ida_type(field_type)
+                        == self.get_enum_flag()
+                    ):
+                        field_size = idc.get_enum_width(self.get_enum_id(field_type))
+
+                    # primitive type
+                    else:
+                        field_size = self.get_size_from_ida_type(field_type)
+
+                        if field_type.endswith("*"):
+                            field_type = self.get_c_type_name(field_type)
+
+                    field_decl = f"{field_type} {field_name}"
+                    if array_size > 0:
+                        field_size *= array_size
+                        field_decl += f"[{array_size}];"
+                    else:
+                        field_decl += ";"
+
+                    if field_is_base:
+                        inherits_from.append(field_type)
+                    else:
+                        decl.append(field_decl)
+
+                    cur_size += field_size
+                
+                if struct.size is not None and struct.size != 0:
+                    # TODO(caitlyn): move this into a separate function
+
+                    while cur_size < struct.size:
+                        if self.full_padding:
+                            (fill_type, fill_size) = self.get_c_fill_type(struct.size - cur_size)
+                            decl.append(f"{fill_type} field_{cur_size:X};")
+                            cur_size += fill_size
+                        else:
+                            arr_size = struct.size - cur_size
+                            decl.append(f"char field_{cur_size:X}[{arr_size}];")
+                            cur_size += arr_size
+
+                decl.append("};")
+
+                # set struct type
+                decl[0] = f"struct __attribute__((packed)) {fullname} "
+                if len(inherits_from) > 0:
+                    decl[0] += f": {", ".join(inherits_from)}"
+                
+                decl[0] += " {"
+                
+                return "\n".join(decl)
 
             def create_struct_member_fill(self, struct_name, offset):
                 # type: (str, int) -> None
@@ -359,11 +582,40 @@ if api is None:
                         None,
                         offset - prev_size,
                     )
-
+                
             def create_struct_members(self, struct):
                 # type: (DefinedStruct) -> None
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
+
+                if self.c_importer:
+                    idaapi.begin_type_updating(idaapi.UTP_STRUCT)
+
+                    decl = self.create_c_decl(struct)
+                    num_errors = ida_srclang.parse_decls_for_srclang(
+                        ida_srclang.SRCLANG_C,
+                        None,
+                        decl,
+                        False
+                    )
+
+                    if num_errors != 0:
+                        # show messagebox
+                        print(f"errors occurred while parsing\n---\n{decl}\n---")
+                        ida_kernwin.warning(f"Error parsing C decl for {struct.type}, please see errors in Output window.\n\n{decl}")
+                        exit()
+
+                    if struct.virtual_functions:
+                        # delete the _placeholder function from the VFT
+                        cname = self.get_c_type_name(self.clean_struct_name(struct.type))
+                        sid = self.get_struct_id(f"{cname}_vtbl")
+                        tinfo = self.get_struct(sid)
+                        tinfo.del_udm(0)
+
+                    idaapi.end_type_updating(idaapi.UTP_STRUCT)
+                    return
+
                 fullname = self.clean_struct_name(struct.type)
+
                 s = self.get_struct(self.get_struct_id(fullname))
 
                 if struct.virtual_functions != None and (
@@ -523,6 +775,29 @@ if api is None:
                             s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0
                         )
 
+            def finalise_struct(self, struct: DefinedStruct):
+                if not self.c_importer:
+                    return
+                
+                fullname = self.clean_struct_name(struct.type)
+                cname = self.get_c_type_name(fullname)
+
+                sid = self.get_struct_id(cname)
+                if sid == idaapi.BADADDR:
+                    ida_kernwin.warning(f"Failed to find and finalise struct {cname}")
+                
+                self.rename_struct(sid, fullname)
+
+                if not struct.virtual_functions:
+                    return
+                
+                sid = self.get_struct_id(cname + "_vtbl")
+                if sid == idaapi.BADADDR:
+                    ida_kernwin.warning(f"Failed to find and finalise vtable for struct {cname}")
+                    return
+                
+                self.rename_struct(sid, fullname + "_vtbl")
+
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
                 pass
@@ -644,7 +919,21 @@ if api is None:
             )
             == ida_kernwin.ASKBTN_YES
         )
-        api = IdaApi(full_padding)
+
+        c_importer = False
+        if idaapi.IDA_SDK_VERSION >= 900 and full_padding:
+            c_importer = (
+                ida_kernwin.ask_buttons(
+                    "C Importer",
+                    "Old Importer",
+                    "",
+                    ida_kernwin.ASKBTN_YES,
+                    "HIDECANCEL\nFull Padding can take 8+ hours IDA 9.\nDo you want to use the experimental C importer for better performance?",
+                )
+                == ida_kernwin.ASKBTN_YES
+            )
+
+        api = IdaApi(full_padding, c_importer)
 
 
 if api is None:
@@ -944,6 +1233,9 @@ if api is None:
                         vt_type.replaceAtOffset(
                             offset, void_ptr, -1, "vf{0}".format(offset / 8), None
                         )
+
+            def finalise_struct(self, struct):
+                return
 
             def create_union(self, struct):
                 # type: (DefinedStruct) -> None
@@ -1290,7 +1582,6 @@ def get_time():
         val += "0"
     return val
 
-
 def run():
     if not api.can_run():
         raise RuntimeError("This script depends on exdgetters. Run that script before retrying")
@@ -1316,6 +1607,10 @@ def run():
     print("{0} Creating members for structs".format(get_time()))
     for struct in yaml.structs:
         api.create_struct_members(struct)
+
+    print("{0} Finalising structs".format(get_time()))
+    for struct in yaml.structs:
+        api.finalise_struct(struct)
 
     print("{0} Creating vtables for structs".format(get_time()))
     for struct in yaml.structs:
@@ -1366,6 +1661,5 @@ def run():
                 )
                 for member in struct.static_members:
                     api.update_static_member(member, struct)
-
 
 run()
