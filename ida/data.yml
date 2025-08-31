@@ -9034,6 +9034,7 @@ classes:
       0x140793870: ReplaceMacroLines # replaces macro with lines stored in string
       0x140793890: AppendMacroLines # appends lines stored in string to macro
       0x140793A70: GetLineCount
+      0x140793C10: TryResolveMacroIcon
       0x1407952F0: SetMacroLines # function called by replace/append
       0x140794E10: SetSavePendingFlag
   Client::UI::Misc::RaptureMacroModule::Macro:
