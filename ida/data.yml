@@ -12655,6 +12655,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E87890: ctor
+      0x140D97910: HandIn
   Client::UI::Agent::AgentMycWarResultNotebook:
     vtbls:
       - ea: 0x142079F08
