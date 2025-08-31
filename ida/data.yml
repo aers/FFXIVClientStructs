@@ -5716,10 +5716,16 @@ classes:
     funcs:
      0x140482850: ctor
   Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent:
+    vtbls:
+      - ea: 0x1420332C0
   Application::Network::LogoutCallbackInterface:
+    vtbls:
+      - ea: 0x1420339C0
     vfuncs:
       1: OnLogout
   Application::Network::ZoneLoginCallbackInterface:
+    vtbls:
+      - ea: 0x1420339D0
     vfuncs:
       1: OnZoneLogin
   Client::UI::Agent::AgentLobby:
