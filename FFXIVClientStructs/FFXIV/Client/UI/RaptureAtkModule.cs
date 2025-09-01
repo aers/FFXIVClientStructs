@@ -111,7 +111,7 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9B ?? ?? ?? ?? 48 8B CE")]
     public partial void OpenSatisfactionSupply(nint a1, uint satisfactionNPC, bool a3);
 
-    public void OpenSatisfactionSupply(uint satisfactionNPC) => OpenSatisfactionSupply(nint.Zero, satisfactionNPC, false);
+    public void OpenSatisfactionSupply(uint satisfactionNPC) => OpenSatisfactionSupply(nint.Zero, satisfactionNPC, true);
 
     [VirtualFunction(39)]
     public partial void SetUiVisibility(bool uiVisible);
