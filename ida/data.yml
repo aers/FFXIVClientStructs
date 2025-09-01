@@ -35,6 +35,9 @@ globals:
   0x142909308: g_RenderSkeletonLinkedListEnd
   0x142909358: g_RenderModelLinkedListStart
   0x142909360: g_RenderModelLinkedListEnd
+  0x1429095F0: g_Common::Math::Vector2::Zero
+  0x142909600: g_Common::Math::Vector3::Zero
+  0x142909610: g_Common::Math::Vector4::Zero
   0x142909BE8: g_animationFactorRemainder
   0x142909BEC: g_animationFactor #percentage of a 30fps frame rendered this frame
   0x14290DFD0: g_PerformanceFrequency
@@ -189,6 +192,7 @@ functions:
   0x1400FEAE0: UpdateNameplateColors
   0x14046F400: GetMainCommandAgentId
   0x14046F480: GetMainCommandInputId
+  0x140603E90: GetHighResolutionTimeMs
   0x14079E6D0: GetHotbarSlotTypeFromDragDropType
   0x140965DC0: ToObjStrId
   0x140A1CD80: GenerateItemsChecksum # for Banners
@@ -14820,6 +14824,12 @@ classes:
   Client::Game::Event::EventState:
     vtbls:
       - ea: 0x142074450
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x140B4D9D0: ctor
+      0x140B4DA10: ctor_From
+      0x140B4DAC0: SetState
   Client::Game::Event::EventGPoseController:
     funcs:
       0x1409A5110: ctor
