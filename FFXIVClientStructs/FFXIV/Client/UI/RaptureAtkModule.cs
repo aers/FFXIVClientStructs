@@ -109,7 +109,7 @@ public unsafe partial struct RaptureAtkModule {
     public partial void OpenDawnStory(uint contentFinderCondition);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9B ?? ?? ?? ?? 48 8B CE")]
-    public partial void OpenSatisfactionSupply(nint a1, uint satisfactionNPC, bool a3);
+    public partial void OpenSatisfactionSupply(nint a2, uint satisfactionNPC, bool a4);
 
     public void OpenSatisfactionSupply(uint satisfactionNPC) => OpenSatisfactionSupply(nint.Zero, satisfactionNPC, true);
 
