@@ -12346,6 +12346,7 @@ classes:
     funcs:
       0x140BFB290: ctor
       0x140BFB330: Finalizer
+      0x140BFD090: SetupWorldTravelInfo # (agent*, uint currentWorld, uint targetWorld)
   Client::UI::Agent::AgentRideShooting:
     vtbls:
       - ea: 0x14209AFB0
