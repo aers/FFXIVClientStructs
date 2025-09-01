@@ -21,11 +21,11 @@ public unsafe partial struct MarkingController {
 
     /// <remarks>
     /// 0 - Success <br/>
-    /// 1 - Invalid Index <br/>
-    /// 2 - Operation Lock (Too Frequent) (500ms) <br/>
-    /// 3 - Unknown <br/>
-    /// 4 - Territory Permission Denied? <br/>
-    /// 5 - Territory Permission Denied? <br/>
+    /// 1 - Invalid index <br/>
+    /// 2 - Operation lock (too frequent) (500ms) <br/>
+    /// 3 - All markers pending <br/>
+    /// 4 - In combat <br/>
+    /// 5 - No markers allowed in territory <br/>
     /// </remarks>
     [MemberFunction("E8 ?? ?? ?? ?? EB D8 83 FB 09")]
     public partial byte ClearFieldMarker(uint index);
