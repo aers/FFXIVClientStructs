@@ -174,14 +174,8 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8D 57 1B")]
     public partial AtkComponentTextNineGrid* GetAsAtkComponentTextNineGrid();
 
-    [Obsolete("Renamed to GetAsAtkComponentTextNineGrid", true)]
-    public AtkComponentTextNineGrid* GetAsAtkTextNineGrid() => GetAsAtkComponentTextNineGrid();
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0B 41 B8 ?? ?? ?? ?? 48 89 83")]
     public partial AtkComponentJournalCanvas* GetAsAtkComponentJournalCanvas();
-
-    [Obsolete("Renamed to GetAsAtkComponentJournalCanvas", true)]
-    public AtkComponentJournalCanvas* GetAsAtkJournalCanvas() => GetAsAtkComponentJournalCanvas();
 
     [MemberFunction("48 85 C9 74 3D B8 ?? ?? ?? ?? 66 39 41 40 72 2C 48 8B 89 ?? ?? ?? ?? 48 85 C9 74 20 0F B6 81 ?? ?? ?? ?? 24 05 3C 05 75 13 80 B9 ?? ?? ?? ?? ?? 75 0A 48 8B 41 18 80 78 10 15")]
     public partial AtkComponentMultipurpose* GetAsAtkComponentMultipurpose();
@@ -194,9 +188,6 @@ public unsafe partial struct AtkResNode : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? BA ?? ?? ?? ?? 48 89 86 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 86")]
     public partial AtkComponentHoldButton* GetAsAtkComponentHoldButton();
-
-    [Obsolete("Renamed to GetAsAtkComponentHoldButton", true)]
-    public AtkComponentHoldButton* GetAsAtkHoldButton() => GetAsAtkComponentHoldButton();
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 0E BA ?? ?? ?? ?? 48 89 46 60")]
     public partial AtkComponentPortrait* GetAsAtkComponentPortrait();

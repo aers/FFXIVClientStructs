@@ -66,8 +66,6 @@ public unsafe partial struct FateContext {
     [FieldOffset(0x864)] public float Radius;
     [FieldOffset(0xA10), FixedSizeArray] internal FixedSizeArray37<FateMapMarker> _mapMarkers;
 
-    [FieldOffset(0xACA), Obsolete("Use MapMarkers instead", true)] public ushort TerritoryId;
-
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B FA 49 8B F0 8B 91")]
     public partial bool TryGetPositionAndRadius(Vector3* position, Vector3* radius);
 
@@ -83,10 +81,6 @@ public unsafe partial struct FateContext {
     public struct FateMapMarker {
         [FieldOffset(0x10)] public Utf8String Name;
         [FieldOffset(0x78)] public MapMarkerData MapMarkerData;
-        [FieldOffset(0x88), Obsolete("Use MapMarkerData.IconId", true)] public uint IconId;
-        [FieldOffset(0x94), Obsolete("Use MapMarkerData.Position", true)] public Vector3 Position;
-        [FieldOffset(0xA0), Obsolete("Use MapMarkerData.Radius", true)] public float Radius;
-        [FieldOffset(0xBA), Obsolete("Use MapMarkerData.TerritoryTypeId", true)] public ushort TerritoryId;
     }
 }
 

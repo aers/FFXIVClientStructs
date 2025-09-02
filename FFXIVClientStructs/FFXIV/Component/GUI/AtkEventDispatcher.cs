@@ -20,7 +20,6 @@ public unsafe partial struct AtkEventDispatcher {
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public partial struct Event {
         [FieldOffset(0x0)] public AtkEventState State;
-        [FieldOffset(0x4), Obsolete("Renamed to ReturnFlags", true)] public uint UnkFlags;
         /// <summary>
         /// <see cref="AtkEventState.ReturnFlags"/> is copied in this field (as uint, was byte), whenever <see cref="AtkEventState.StateFlags"/> is set to <see cref="AtkEventStateFlags.HasReturnFlags"/>.<br/>
         /// Usage depends on AtkEventType and the call site that dispatched the event.

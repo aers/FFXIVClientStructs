@@ -25,7 +25,6 @@ public unsafe partial struct VertexShader {
         Depth = 1 << 16,
     }
 
-    [FieldOffset(0), Obsolete($"Use {nameof(PVShader)}, or inherited fields directly instead.", true)] public PVShader Shader;
     [FieldOffset(0x60)] public Input DeclaredInputs;
     [FieldOffset(0x64)] public Input UsedInputs;
     [FieldOffset(0x68)] public byte* DxbcBlob;

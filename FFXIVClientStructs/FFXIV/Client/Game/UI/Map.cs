@@ -49,9 +49,6 @@ public unsafe partial struct MapMarkerData {
     [FieldOffset(0x10)] public uint IconId;
 
     [FieldOffset(0x1C)] public global::System.Numerics.Vector3 Position;
-    [FieldOffset(0x1C), Obsolete("Use Position.X", true)] public float X;
-    [FieldOffset(0x20), Obsolete("Use Position.Y", true)] public float Y;
-    [FieldOffset(0x24), Obsolete("Use Position.Z", true)] public float Z;
     [FieldOffset(0x28)] public float Radius;
 
     [FieldOffset(0x30)] public uint MapId;

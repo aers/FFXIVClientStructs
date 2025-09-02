@@ -55,7 +55,6 @@ public enum AtkEventType : byte {
     DragDropRollOut = 56,
     DragDropDiscard = 57, // sent when dropping an icon into empty screenspace, eg to remove an action from a hotbar
     DragDropClick = 58, // sent on MouseUp if the cursor has not moved since DragDropBegin, OR on MouseDown over a locked icon
-    [Obsolete("Renamed to DragDropClick", true)] DragDropCancel = 58,
 
     // AtkComponentIconText
     IconTextRollOver = 59,
@@ -90,7 +89,6 @@ public enum AtkEventType : byte {
 
     /// <remarks> This is not an event to be received. It's a wildcard used to unregister all events of a listener. </remarks>
     UnregisterAll = 83,
-    [Obsolete("Renamed to UnregisterAll", true)] Unk83 = 83,
 }
 
 // Component::GUI::AtkEvent
@@ -113,7 +111,6 @@ public struct AtkEventState {
     [FieldOffset(0x0)] public AtkEventType EventType;
     // AtkInputManager_HandleInput reads these flags (at the very end) and writes them as 3 bools to AtkCollisionManager, which
     // are used in AtkModule_HandleInput to clear Gamepad inputs from UIInputData??
-    [FieldOffset(0x1), Obsolete("Renamed to ReturnFlags", true)] public byte UnkFlags1;
     [FieldOffset(0x1)] public byte ReturnFlags;
     [FieldOffset(0x2)] public AtkEventStateFlags StateFlags;
     [FieldOffset(0x3)] public byte UnkFlags3; // for cleanup maybe?
@@ -154,16 +151,4 @@ public enum AtkEventStateFlags : byte {
     /// If set, the <see cref="AtkEvent"/> is returned to the pool instead of being free'd.
     /// </summary>
     Pooled = 0b1000_0000,
-
-    [Obsolete("Renamed to SuppressViewportDispatch", true)]
-    Unk6 = 0b0000_1000,
-
-    [Obsolete("Renamed to ViewportDispatchSuppressed", true)]
-    Forwarded = 0b0000_1000,
-
-    [Obsolete("Renamed to HasReturnFlags", true)]
-    Unk4 = 0b0000_1000,
-
-    [Obsolete("Incorrect name. Renamed to Pooled", true)]
-    Completed = 0b1000_0000
 }

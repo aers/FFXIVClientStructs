@@ -44,7 +44,6 @@ public unsafe partial struct AtkStage {
     [FieldOffset(0x86C)] public bool IsScreenSizeScaled;
     [FieldOffset(0x870)] public AtkEventManager ViewportEventManager; // more like GlobalEventManager
     [FieldOffset(0x878), FixedSizeArray] internal FixedSizeArray10000<AtkEvent> _atkEventPool;
-    [FieldOffset(0x878), FixedSizeArray, Obsolete("Renamed to AtkEventPool", true)] internal FixedSizeArray10000<AtkEvent> _registeredEvents;
     [FieldOffset(0x75B78)] public AtkEvent* NextEvent;
     [FieldOffset(0x75B80)] public StdDeque<TextParameter> FormatTextParameters;
     [FieldOffset(0x75BA8)] public Utf8String FormatOutput;
