@@ -4694,6 +4694,7 @@ classes:
       - ea: 0x1420619E0
         base: Client::UI::Info::InfoProxyInterface
     funcs:
+      0x14093C040: SendJoinRequest
       0x14093C110: InviteToNoviceNetwork
   Client::UI::Info::InfoProxyFreeCompany:
     vtbls:
