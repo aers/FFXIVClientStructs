@@ -86,6 +86,10 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 ?? 41 B2")]
     public static partial void LeaveCurrentContent(bool forced = false);
 
+    // For ObjectKind.ReactionEventObject (12)
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B FA 48 8B D9 E8 ?? ?? ?? ?? 4C 8D 83")]
+    public partial void InteractWithReactionEventObject(GameObject* obj);
+
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
         var instanceDirector = GetInstanceContentDirector();
         if (instanceDirector == null || instanceDirector->InstanceContentType != instanceContentType)
