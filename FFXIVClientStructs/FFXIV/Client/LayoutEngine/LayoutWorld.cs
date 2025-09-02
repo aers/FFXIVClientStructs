@@ -32,7 +32,7 @@ public unsafe partial struct LayoutWorld {
     [FieldOffset(0x228)] public StdMap<ulong, Pointer<byte>>* RsfMap; // Key is v0 index hash, value is always 64 bytes in size
 
     /// <remarks> Tries to get it from <see cref="ActiveLayout"/> first, then from <see cref="GlobalLayout"/>. </remarks>
-    [MemberFunction("E9 ?? ?? ?? ?? 8B 43 ?? 45 33 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 47 ?? 0F 57 C0")]
     public static partial ILayoutInstance* GetLayoutInstance(InstanceType instanceType, uint instanceId, uint subId = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 ?? 8B 90")]

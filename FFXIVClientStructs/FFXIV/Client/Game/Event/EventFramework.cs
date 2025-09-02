@@ -38,7 +38,7 @@ public unsafe partial struct EventFramework {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 85 C0 74 ?? 80 B8")]
     public partial PublicContentDirector* GetPublicContentDirector();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 89 45 ?? 4C 8B F8")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 DB 74 ?? 48 8D 83")]
     public partial MassivePcContentDirector* GetMassivePcContentDirector();
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E8 48 85 C0 0F 84 ?? ?? ?? ?? 8B 80")]
