@@ -7111,6 +7111,8 @@ classes:
       0x14060ED60: ReleaseTexture
       0x14060EF70: GetKernelTexture
       0x14060F1D0: GetIconPath # static method
+      0x14060EFF0: GetTextureWidth
+      0x14060F060: GetTextureHeight
   Component::GUI::AtkRenderTexture:
     vtbls:
       - ea: 0x14203FF60
