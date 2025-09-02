@@ -7,6 +7,9 @@ globals:
   0x141FE21D4: g_FloatSix # 6f
   0x141FEB034: g_FloatTwenty # 20f
 #fail   0x141F0C404: g_ConfigFileName
+  0x141FED780: g_NumberArraySizes
+  0x141FED980: g_StringArraySizes
+  0x141FEDBF0: g_ExtendArraySizes
   0x141FF9A20: g_UIColorTable
   0x142041258: g_HUDScaleTable
   0x14272B380: g_ClientInstanceLimit
@@ -1034,6 +1037,9 @@ classes:
       - ea: 0x142041C30
     vfuncs:
       0: Dtor
+      6: EnsureNumberArray
+      7: EnsureStringArray
+      8: EnsureExtendArray
       9: GetNumberArrayData
       10: GetStringArrayData
       11: GetExtendArrayData
@@ -2439,6 +2445,9 @@ classes:
   Component::GUI::AtkArrayDataHolder:
     funcs:
       0x140608980: ctor
+      0x140608E00: EnsureNumberArray
+      0x140608F10: EnsureStringArray
+      0x140609020: EnsureExtendArray
       0x140609120: GetNumberArrayData
       0x1406091C0: GetStringArrayData
       0x140609260: GetExtendArrayData
