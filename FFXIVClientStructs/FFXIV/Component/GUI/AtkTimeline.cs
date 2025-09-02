@@ -20,7 +20,7 @@ public unsafe partial struct AtkTimeline {
     [MemberFunction("E8 ?? ?? ?? ?? 0F BF 4B ?? 66 FF C7")]
     public partial void PlayAnimation(AtkTimelineJumpBehavior behavior, ushort labelId, float startTime = 0, float endTime = 0);
 
-    [Obsolete("LabelId is the wrong data type (byte), use PlayAnimation overload with ushort LabelId instead")]
+    [Obsolete("LabelId is the wrong data type (byte), use PlayAnimation overload with ushort LabelId instead", true)]
     public void PlayAnimation(AtkTimelineJumpBehavior behavior, byte labelId, float startTime = 0, float endTime = 0)
         => PlayAnimation(behavior, (ushort)labelId, startTime, endTime);
 

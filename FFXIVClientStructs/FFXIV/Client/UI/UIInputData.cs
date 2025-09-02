@@ -31,7 +31,7 @@ public unsafe partial struct UIInputData {
     public bool IsKeyReleased(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Released);
     public bool IsKeyHeld(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Held);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8"), Obsolete("Use GetKeybindByName, or GetKeybind(InputId)")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8"), Obsolete("Use GetKeybindByName, or GetKeybind(InputId)", true)]
     public partial uint GetKeybind(Utf8String* name, Keybind* keybind);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8")]

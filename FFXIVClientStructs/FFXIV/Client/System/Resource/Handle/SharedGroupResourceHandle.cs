@@ -8,5 +8,5 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [Inherits<DefaultResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct SharedGroupResourceHandle {
-    [FieldOffset(0xB0), Obsolete("Use Data instead")] public byte* SceneChunk;
+    [FieldOffset(0xB0), Obsolete("Use Data instead", true)] public byte* SceneChunk;
 }

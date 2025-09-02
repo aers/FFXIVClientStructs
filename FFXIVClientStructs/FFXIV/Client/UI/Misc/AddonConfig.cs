@@ -16,7 +16,7 @@ public unsafe partial struct AddonConfig {
 
     [FieldOffset(0x50)] public bool IsLoaded;
     [FieldOffset(0x58)] public AddonConfigData* ActiveDataSet;
-    [FieldOffset(0x58), Obsolete("Use ActiveDataSet")] public AddonConfigData* ModuleData;
+    [FieldOffset(0x58), Obsolete("Use ActiveDataSet", true)] public AddonConfigData* ModuleData;
     [FieldOffset(0x60)] public StdList<Pointer<AddonConfigData>> DataSets;
 
     /// <summary>
@@ -68,7 +68,7 @@ public unsafe partial struct AddonConfig {
 [StructLayout(LayoutKind.Explicit, Size = 0xD278)]
 public unsafe partial struct AddonConfigData { // TODO: rename to AddonConfigDataSet
     [FieldOffset(0x00)] public Utf8String Name;
-    [FieldOffset(0x00), Obsolete("Renamed to Name")] public Utf8String DefaultString;
+    [FieldOffset(0x00), Obsolete("Renamed to Name", true)] public Utf8String DefaultString;
     [FieldOffset(0x68)] public StdList<Pointer<AddonConfigEntry>> UsedAddonConfigEntries;
     [FieldOffset(0x78)] public StdList<Pointer<AddonConfigEntry>> UnusedAddonConfigEntries;
     [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray1041<AddonConfigEntry> _configEntries; // 110 (Default HudLayout?) + 931 (the amount of addons in RaptureAtkModule)
