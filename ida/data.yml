@@ -490,7 +490,6 @@ functions:
   0x141F42DC0: CollisionFree
   0x141BDC4F0: ReadSqpkChunk
   0x141B11890: FollowTargetRecast # bool (nint a1-a6)
-  0x140A35E00: RidePillion # (BattleChara* target, int seat)
   0x14092D650: FreeCompanyDialogPacketReceive # (InfoProxyInterface* ptr, byte* packetData)
   0x14168FA00: SnipeTask # ulong (EventSceneModuleImplBase* scene, lua_State* state)
 
@@ -10480,6 +10479,7 @@ classes:
       - ea: 0x142064560
         base: Client::Game::Character::CharacterData
     funcs:
+      0x140A35E00: RidePillion # (BattleChara* target, int seat)
 #fail        0x1409517D0: ctor # inlined (7.3)
   Client::Game::Character::ActionEffectHandler:
     funcs:
