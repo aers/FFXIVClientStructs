@@ -4515,6 +4515,7 @@ classes:
       0x1406776B0: SetAtkMessageBoxManagerTexts
       0x14067AED0: GetAtkFontCodeModule
       0x14067C1B0: UpdateAtkUIColorHolder
+      0x1400F5F20: OpenSatisfactionSupply
   Client::UI::ExdSheetWaiter:
     vtbls:
       - ea: 0x141FF8188
