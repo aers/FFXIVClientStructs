@@ -773,7 +773,6 @@ classes:
     funcs:
       0x140A2B8E0: ctor
       0x140A2B900: Finalizer
-      0x140A2BF20: GetIsInDutyFinder
       0x140A2C980: CanGetAwards
       0x140A2C9F0: GetDescription
       0x140A2CA10: GetDutyType
