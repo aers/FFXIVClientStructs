@@ -210,7 +210,7 @@ public sealed partial class InteropGenerator {
                         ignoredParametersBuilder.Add(parameterSymbol.Name);
                 }
 
-                EquatableArray<string>? attributes = isInherited ? methodInfo.InheritableAttributes : ParseInheritedAttributes(methodSymbol, token);
+                EquatableArray<string> attributes = isInherited ? methodInfo.InheritableAttributes : ParseInheritedAttributes(methodSymbol, token);
 
                 StringOverloadInfo stringOverloadInfo = new(
                     methodInfo,
@@ -243,7 +243,7 @@ public sealed partial class InteropGenerator {
             constraints = string.Join("", symbolDisplayParts[1..]);
         }
 
-        EquatableArray<string>? inheritableAttributes = isInherited ? ParseInheritedAttributes(methodSymbol, token) : null;
+        EquatableArray<string> inheritableAttributes = ParseInheritedAttributes(methodSymbol, token);
 
         methodInfo =
             new MethodInfo(
@@ -316,7 +316,8 @@ public sealed partial class InteropGenerator {
                     fieldSymbol.Name,
                     fieldSymbol.Type.GetFullyQualifiedName(),
                     fieldOffset,
-                    inheritableAttributes);
+                    inheritableAttributes,
+                    fieldSymbol.IsReadOnly);
 
                 publicFieldBuilder.Add(fieldInfo);
             }

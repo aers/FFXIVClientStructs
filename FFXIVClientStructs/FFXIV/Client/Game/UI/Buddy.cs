@@ -31,23 +31,25 @@ public unsafe partial struct Buddy {
 
 // sizes for Info structs are estimated
 
-// Chocobo Companion
+/// <summary>
+/// Chocobo Companion
+/// </summary>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x50)]
 public unsafe partial struct CompanionInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Companion;
     [FieldOffset(0x8)] public float TimeLeft;
     [FieldOffset(0xC), FixedSizeArray] internal FixedSizeArray13<byte> _buddyEquipUnlockBitmask; // number of BuddyEquip rows / 8
-    [FieldOffset(0x19)] public byte BardingHead;
-    [FieldOffset(0x1A)] public byte BardingChest;
-    [FieldOffset(0x1B)] public byte BardingFeet;
-    [FieldOffset(0x1C), FixedSizeArray(isString: true)] internal FixedSizeArray21<byte> _name;
+    [FieldOffset(0x1A)] public byte BardingHead; // todo: make array
+    [FieldOffset(0x1B)] public byte BardingChest;
+    [FieldOffset(0x1C)] public byte BardingFeet;
+    [FieldOffset(0x1D), FixedSizeArray(isString: true)] internal FixedSizeArray21<byte> _name;
 
     [FieldOffset(0x34)] public uint CurrentXP;
     [FieldOffset(0x38)] public byte Rank;
     [FieldOffset(0x39)] public byte Stars;
     [FieldOffset(0x3A)] public byte SkillPoints;
-    [FieldOffset(0x3B)] public byte DefenderLevel;
+    [FieldOffset(0x3B)] public byte DefenderLevel; // todo: make array
     [FieldOffset(0x3C)] public byte AttackerLevel;
     [FieldOffset(0x3D)] public byte HealerLevel;
     [FieldOffset(0x3E)] public byte ActiveCommand;
@@ -59,7 +61,9 @@ public unsafe partial struct CompanionInfo {
     public partial bool IsBuddyEquipUnlocked(uint buddyEquipId);
 }
 
-// Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
+/// <summary>
+/// Carbuncle, Eos/Selene, Machinists Rook Autoturret/Automaton Queen, Whitemages Lilybell, probably more
+/// </summary>
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe struct PetInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Pet;
@@ -67,7 +71,9 @@ public unsafe struct PetInfo {
     [FieldOffset(0x9)] public byte Stance; // PetAction RowId
 }
 
-// Squadron, Trust, Duty Support
+/// <summary>
+/// Squadron, Trust, Duty Support
+/// </summary>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct DutyHelperInfo {

@@ -45,64 +45,24 @@ if api is None:
         import ida_name
         import idc
         from ida_wrapper import IdaInterface
-    except ImportError:
-        print("Warning: Unable to load IDA")
+    except ImportError as e:
+        print("Warning: Unable to load IDA failed with {0}".format(e))
     else:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi, IdaInterface):
-            def do_pattern(self, pattern, suffix, struct_parsed):
+            def do_pattern(self, pattern, suffix, sheetSearchPattern, sheetSearchOffset):
                 ea = 0
-
-                if suffix != None:
-                    print(f"Finding exd funcs of {suffix}... please wait.")
-                    row_id_arg = ida_typeinf.funcarg_t()
-                    row_id_arg.type = self.get_tinfo_from_type("unsigned int")
-                    row_id_arg.name = "rowId"
-                    sub_row_id_arg = ida_typeinf.funcarg_t()
-                    sub_row_id_arg.type = self.get_tinfo_from_type("__int16")
-                    sub_row_id_arg.name = "subRowId"
 
                 while True:
                     ea = self.search_binary(ea + 1, pattern, ida_search.SEARCH_DOWN)
 
                     if ea == 0xFFFFFFFFFFFFFFFF:
                         break
-
-                    funcEa = ea
-
-                    # This gets the first instance of EDX register followed by the RCX register, we need the value that is sent to the EDX register
-                    ins = idc.get_operand_value(ea, 0)
-                    while ins != 0x2:
-                        if ins == 0x0:
-                            ea = ea + 7
-                        elif ins == 0x4:
-                            ea = ea + 4
-                        elif ins == 0x8 or ins == 0x9:
-                            ins = idc.get_operand_type(ea, 1)
-                            if ins == 0x1:
-                                ea = ea + 3
-                            elif ins == 0x4:
-                                ea = ea + 7
-                            else:
-                                raise Exception(
-                                    "Unknown instruction {0} on function {1}".format(
-                                        hex(ins), hex(funcEa)
-                                    )
-                                )
-                        elif ins == 0x1:
-                            ea = ea + 4
-                        elif ins == 0x28:
-                            ea = ea + 9
-                        else:
-                            raise Exception(
-                                "Unknown instruction {0} on function {1}".format(
-                                    hex(ins), hex(funcEa)
-                                )
-                            )
-                        ins = idc.get_operand_value(ea, 0)
-
-                    sheetEa = ea + 1
-                    ea = funcEa
+                    
+                    if sheetSearchPattern == None:
+                        sheetEa = ea + sheetSearchOffset
+                    else:
+                        sheetEa = self.search_binary(ea, sheetSearchPattern, ida_search.SEARCH_DOWN) + sheetSearchOffset
                     sheetIdx = self.get_dword(sheetEa)
                     origName = idc.get_func_name(ea)
 
@@ -144,66 +104,74 @@ if api is None:
                             ea, fnName, "Sheet: {0} ({1})".format(sheetName, sheetIdx)
                         )
 
-                        if struct_parsed:
-                            tif, funcdata = (
-                                ida_typeinf.tinfo_t(),
-                                ida_typeinf.func_type_data_t(),
-                            )
+                        if suffix == "SheetIndex":
+                            continue
 
+                        tif, funcdata = (
+                            ida_typeinf.tinfo_t(),
+                            ida_typeinf.func_type_data_t(),
+                        )
+
+                        ida_typeinf.guess_tinfo(tif, ea)
+                        if not tif.get_func_details(funcdata):
+                            ida_hexrays.decompile(ea)
                             ida_typeinf.guess_tinfo(tif, ea)
                             if not tif.get_func_details(funcdata):
-                                ida_hexrays.decompile(ea)
-                                ida_typeinf.guess_tinfo(tif, ea)
-                                if not tif.get_func_details(funcdata):
-                                    print(
-                                        "Failed to get func details for %s @ %X"
-                                        % (fnName, ea)
-                                    )
-                                    continue
-
-                            rettype = self.get_tinfo_from_type(
-                                f"{exd_struct_map[sheetIdx]} *"
-                            )
-
-                            if rettype == None:
                                 print(
-                                    "Failed to get rettype for %s"
-                                    % exd_struct_map[sheetIdx]
+                                    "Failed to get func details for %s @ %X"
+                                    % (fnName, ea)
                                 )
                                 continue
 
-                            funcdata.empty()
-                            
-                            funcdata.push_back(row_id_arg)
 
-                            if suffix == "RowAndSubRowId":
-                                funcdata.push_back(sub_row_id_arg)
+                        if suffix == "RowAndSubRowId":
+                            tif = self.get_tinfo_from_type(
+                                f"{exd_struct_map[sheetIdx]} *__fastcall func(unsigned int rowId, unsigned int subRowId);"
+                            )
+                        elif suffix == "RowCount":
+                            tif = self.get_tinfo_from_type(
+                                f"{exd_struct_map[sheetIdx]} *__fastcall func();"
+                            )
+                        else:
+                            tif = self.get_tinfo_from_type(
+                                f"{exd_struct_map[sheetIdx]} *__fastcall func(unsigned int rowIdOrIndex);"
+                            )
 
-                            funcdata.rettype = rettype
-
-                            if not tif.create_func(funcdata):
-                                print("! failed to create function type for", fnName)
-                                return
-
-                            ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
+                        ida_typeinf.apply_tinfo(ea, tif, ida_typeinf.TINFO_DEFINITE)
 
             def create_enum_struct(self, name, values, width = 0):
                 # type: (str, dict[int, str], int) -> None
-                enum_id = self.create_enum(name)
+                if len(name.split("::")) > 3:
+                    sheet_name = name.split("::")[-2]
+                else:
+                    sheet_name = name.split("::")[-1]
+
+                # create or reset if exists
                 enum_id = self.get_enum_id(name)
-                sheet_name = name.split("::")[-2]
+                if enum_id == idaapi.BADADDR:
+                    enum_id = self.create_enum(name)
+                else:
+                    self.delete_enum_members(enum_id)
+                    idc.set_enum_bf(enum_id, False)
+                    
                 self.set_enum_width(enum_id, width)
                 if width == 1:
+                    if idaapi.IDA_SDK_VERSION < 900:
+                        self.add_enum_member(enum_id, f"{sheet_name}.tmp", self.get_enum_default_mask(enum_id))
                     self.set_enum_as_bf(enum_id)
+                        
                 for key in values:
-                    self.remove_enum_member(enum_id, key, f"{sheet_name}_{values[key]}")
-                    self.add_enum_member(enum_id, f"{sheet_name}_{values[key]}", key)
+                    self.add_enum_member(enum_id, f"{sheet_name}.{values[key]}", key)
+
+                if width == 1 and idaapi.IDA_SDK_VERSION < 900:
+                    self.remove_enum_member(enum_id, "tmp", sheet_name)
 
             def create_struct(self, name, fields):
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
-                struct_id = self.create_struct_type(name)
+                struct_id = self.get_struct_id(name)
                 if struct_id == idaapi.BADADDR:
-                    struct_id = self.get_struct_id(name)
+                    struct_id = self.create_struct_type(name)
+                else:
                     self.remove_struct_members(struct_id)
                 struct_type = self.get_struct(struct_id)
                 for [index, [type, name]] in fields.items():
@@ -253,13 +221,12 @@ if api is None:
                 ida_name.set_name(ea, name)
                 ida_bytes.set_cmt(ea, cmt, 0)
 
-            def process_pattern(self, pattern):
-                suffix = exd_func_patterns[pattern]
-                if suffix == None or suffix == "RowCount" or suffix == "SheetIndex":
-                    self.do_pattern(pattern, suffix, False)
-                else:
-                    self.do_pattern(pattern, suffix, True)
-                pass
+            def process_pattern(self, pattern: dict[str, tuple[str, tuple[str | None, int]]]):
+                (suffix, search) = exd_func_patterns[pattern]
+                if suffix is not None:
+                    print(f"Finding exd funcs of {suffix}... please wait.")
+                (searchPattern, searchOffset) = search
+                self.do_pattern(pattern, suffix, searchPattern, searchOffset)
 
         api = IdaApi()
 
@@ -334,7 +301,7 @@ if api is None:
 
             def process_pattern(self, pattern):
                 # type: (str) -> None
-                suffix = exd_func_patterns[pattern]
+                (suffix, _) = exd_func_patterns[pattern]
                 pattern = "".join(["\\x" + x if x != "?" else "." for x in pattern.split(" ")])
                 if suffix is not None:
                     print(f"Finding exd funcs of {suffix}... please wait.")
@@ -439,17 +406,16 @@ f.close()
 
 game_data = GameData(join(config["GamePath"], "game"))
 
-# nb: "pattern": ("func suffix", "instance pointer sig") OR None
+# nb: "pattern": ("func suffix", ("instance pointer sig" or None, offset from sig start or func start))
 exd_func_patterns = {
-    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "Row",
-    "48 83 EC 28 85 C9 74 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 07 33 C0 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "Row",
-    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA ? ? ? ? 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 38 C3 48 8B 00 48 83 C4 38 C3": "RowAndSubRowId",
-    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B6 C1 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "RowIndex",
-    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8D 81 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": "RowIndex",
-    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 14 48 8B 10 48 8B C8 FF 52 08 84 C0 75 07 B0 01 48 83 C4 28 C3 32 C0 48 83 C4 28 C3": "SheetIndex",
-    "48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E9 ? ? ? ?": "RowCount",
-    # this last one doesn't seem to exist in the binary anymore
-    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 17 48 8B 08 48 85 C9 74 0F 8B 01 25 ? ? ? ? 48 03 C1 48 83 C4 28 C3 33 C0 48 83 C4 28 C3": None,
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": ("Row", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 28 85 C9 74 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 07 33 C0 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": ("Row", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA ? ? ? ? 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 38 C3 48 8B 00 48 83 C4 38 C3": ("RowAndSubRowId", ("C1 48 C7 44 24 ? ? ? ? ? BA", 11)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B6 C1 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": ("RowIndex", ("48 8B 05 ? ? ? ? BA", 8)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8D 81 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": ("RowIndex", ("05 ? ? ? ? 44 8D 81 ? ? ? ? BA", 13)),
+    "48 83 EC 28 8D 41 ?? 3D ? ? ? ? 77 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 07 33 C0 48 83 C4 ? C3 48 8B 00 48 83 C4 ? C3": ("RowIndex", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 14 48 8B 10 48 8B C8 FF 52 08 84 C0 75 07 B0 01 48 83 C4 28 C3 32 C0 48 83 C4 28 C3": ("SheetIndex", ("48 8B 05 ? ? ? ? BA", 8)),
+    "48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E9 ? ? ? ?": ("RowCount", (None, 8))
 }
 
 exd_map = ExcelListFile(game_data.get_file(ParsedFileName("exd/root.exl"))).dict
@@ -468,6 +434,7 @@ for key in exd_map:
 for key in exd_headers:
     [exd_header, exd_header_enums, exd_header_count] = exd_headers[key]
     struct_name = f"Component::Exd::Sheets::{exd_map[key]}"
+    print(f'Creating struct {struct_name}.')
     exd_struct_map[key] = struct_name
     for enum_key in exd_header_enums:
         api.create_enum_struct(f"{struct_name}::{enum_key}", exd_header_enums[enum_key], 1)

@@ -23,31 +23,31 @@ public unsafe partial struct PvPProfile {
     [FieldOffset(0x28)] public ushort SeriesExperience;
     [FieldOffset(0x2A)] public byte PreviousSeriesClaimedRank;
     [FieldOffset(0x2B)] public byte PreviousSeriesRank;
-    [FieldOffset(0x2C)] public uint FrontlineTotalMatches;
-    [FieldOffset(0x30)] public uint FrontlineTotalFirstPlace;
-    [FieldOffset(0x34)] public uint FrontlineTotalSecondPlace;
-    [FieldOffset(0x38)] public uint FrontlineTotalThirdPlace;
-    [FieldOffset(0x3C)] public ushort FrontlineWeeklyMatches;
-    [FieldOffset(0x3E)] public ushort FrontlineWeeklyFirstPlace;
-    [FieldOffset(0x40)] public ushort FrontlineWeeklySecondPlace;
-    [FieldOffset(0x42)] public ushort FrontlineWeeklyThirdPlace;
+
+    [FieldOffset(0x34)] public uint FrontlineTotalMatches;
+    [FieldOffset(0x38)] public uint FrontlineTotalFirstPlace;
+    [FieldOffset(0x3C)] public uint FrontlineTotalSecondPlace;
+    [FieldOffset(0x40)] public uint FrontlineTotalThirdPlace;
+    [FieldOffset(0x44)] public ushort FrontlineWeeklyMatches;
+    [FieldOffset(0x46)] public ushort FrontlineWeeklyFirstPlace;
+    [FieldOffset(0x48)] public ushort FrontlineWeeklySecondPlace;
+    [FieldOffset(0x4A)] public ushort FrontlineWeeklyThirdPlace;
 
     [FieldOffset(0x4D)] public byte CrystallineConflictSeason;
     [FieldOffset(0x4E)] public ushort CrystallineConflictCasualMatches;
     [FieldOffset(0x50)] public ushort CrystallineConflictCasualMatchesWon;
     [FieldOffset(0x52)] public ushort CrystallineConflictRankedMatches;
     [FieldOffset(0x54)] public ushort CrystallineConflictRankedMatchesWon;
-    // TODO: 7.3 - these shifted somewhere. gotta play to find them
-    [FieldOffset(0x52), Obsolete("Offset not updated for 7.3")] public ushort CrystallineConflictCurrentCrystalCredit;
-    [FieldOffset(0x54), Obsolete("Offset not updated for 7.3")] public ushort CrystallineConflictHighestCrystalCredit;
 
-    [FieldOffset(0x58), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictCurrentRank;
-    [FieldOffset(0x59), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictHighestRank;
-    [FieldOffset(0x5A), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictCurrentRiser;
-    [FieldOffset(0x5B), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictHighestRiser;
-    [FieldOffset(0x5C), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictCurrentRisingStars;
-    [FieldOffset(0x5D), Obsolete("Offset not updated for 7.3")] public byte CrystallineConflictHighestRisingStars;
-    // TODO: 7.3 - /these shifted somewhere. gotta play to find them
+    [FieldOffset(0x5A)] public ushort CrystallineConflictCurrentCrystalCredit;
+    [FieldOffset(0x5C)] public ushort CrystallineConflictHighestCrystalCredit;
+
+    [FieldOffset(0x62)] public byte CrystallineConflictCurrentRank;
+    [FieldOffset(0x63)] public byte CrystallineConflictHighestRank;
+    [FieldOffset(0x64)] public byte CrystallineConflictCurrentRiser;
+    [FieldOffset(0x65)] public byte CrystallineConflictHighestRiser;
+    [FieldOffset(0x66)] public byte CrystallineConflictCurrentRisingStars;
+    [FieldOffset(0x67)] public byte CrystallineConflictHighestRisingStars;
 
     [FieldOffset(0x7C)] public uint RivalWingsTotalMatches;
     [FieldOffset(0x80)] public uint RivalWingsTotalMatchesWon;

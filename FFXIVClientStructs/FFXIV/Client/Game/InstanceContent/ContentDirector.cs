@@ -18,6 +18,7 @@ public unsafe partial struct ContentDirector {
 
     [FieldOffset(0xCF0)] private DynamicEventContainer* DynamicEvents;
 
+    /// <remarks> This might also be a countdown until the content starts (e.g. Frontlines), then the actual time left of the content. </remarks>
     [FieldOffset(0xD48)] public float ContentTimeLeft;
 
     /// <summary>

@@ -1,16 +1,22 @@
+using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Info;
+using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
 // Client::UI::Agent::AgentLookingForGroup
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Component::Text::TextChecker::ExecNonMacroFunc
 [Agent(AgentId.LookingForGroup)]
 [GenerateInterop]
-[Inherits<AgentInterface>]
+[Inherits<AgentInterface>, Inherits<TextChecker.ExecNonMacroFunc>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3210)]
 public unsafe partial struct AgentLookingForGroup {
+    [FieldOffset(0x38)] public ContentRoulette ContentRoulette;
+    [FieldOffset(0x48)] public PartyContent PartyContent;
+    [FieldOffset(0x60)] public InstanceContent.ContentUI ContentUI;
     [FieldOffset(0xE0)] public InfoProxyCrossRealm* InfoProxyCrossRealm;
 
     [FieldOffset(0x1098)] public ListingsSub Listings;
@@ -47,6 +53,9 @@ public unsafe partial struct AgentLookingForGroup {
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 84 C0 74 07 C6 83 ?? ?? ?? ?? ?? 48 83 C4 20 5B C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC CC 40 53")]
     public partial bool OpenListingByContentId(ulong contentId); // Actual call inlined
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 8B ?? ?? ?? ?? 85 C9 75 12")]
+    public partial bool RequestListingsUpdate();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x78)]
     public unsafe partial struct TreasureMapDetail {

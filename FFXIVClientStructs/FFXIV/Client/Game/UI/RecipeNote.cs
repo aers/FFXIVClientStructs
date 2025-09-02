@@ -14,6 +14,8 @@ public unsafe partial struct RecipeNote {
 
     [FieldOffset(0xB8)] public RecipeData* RecipeList;
 
+    [FieldOffset(0x118)] public ushort ActiveCraftRecipeId;
+
     [StructLayout(LayoutKind.Explicit, Size = 0x460)]
     public struct RecipeData {
         // E8 ?? ?? ?? ?? 48 8B 8E ?? ?? ?? ?? 33 FF 48 85 C9 74 0C E8 ?? ?? ?? ?? 48 89 BE ?? ?? ?? ?? 48 8B 86 ?? ?? ?? ?? 48 89 5C 24   (7.1)
@@ -25,6 +27,9 @@ public unsafe partial struct RecipeNote {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x88)]
     public struct RecipeIngredient {
+        [FieldOffset(0x08)] public byte NQCount;
+        [FieldOffset(0x09)] public byte HQCount;
+
         [FieldOffset(0x10)] public Utf8String Name;
         [FieldOffset(0x78)] public uint ItemId;
         [FieldOffset(0x7C)] public uint IconId;

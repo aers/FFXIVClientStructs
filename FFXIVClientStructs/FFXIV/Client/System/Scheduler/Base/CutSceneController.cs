@@ -12,5 +12,5 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Base;
 public unsafe partial struct CutSceneController {
     [FieldOffset(0x18)] public LinkedList<CutSceneController> LinkedList; // generator can't inherit from generics, so we put this here
     [FieldOffset(0x30)] public SchedulerResource* SchedulerResource;
-    [FieldOffset(0x168)] public uint CutsceneId;
+    [FieldOffset(0x1E8)] public uint CutsceneId;
 }

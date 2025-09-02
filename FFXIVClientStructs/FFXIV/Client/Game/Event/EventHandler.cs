@@ -143,7 +143,9 @@ public enum EventHandlerContent : ushort {
     Materialize = 0x0039, // Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002)
     InclusionShop = 0x003A,
     CollectablesShop = 0x003B,
+    MJIPasture = 0x003C, // Island Sanctuary Pasture
     EventPathMove = 0x003D, // Argos in Mare Lamentorum uses this
+    ReactionEvent = 0x003E, // Island Sanctuary Cropland, see ReactionEventObject
 
     BattleLeveDirector = 0x8001,
     GatheringLeveDirector = 0x8002,

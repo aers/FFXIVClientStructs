@@ -64,6 +64,7 @@ public unsafe partial struct CharacterBase {
     }
 
     [FieldOffset(0x158)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
+    [FieldOffset(0x160)] public BoneKineDriverModule* BoneKineDriverModule;
 
     [FieldOffset(0x178)] public ModelRenderer.Callback RenderModelCallback;
     [FieldOffset(0x198)] public ModelRenderer.Callback RenderMaterialCallback;
@@ -87,9 +88,10 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x2FC)] public uint HasModelFilesInSlotLoaded; // tracks which slots have loaded materials, etc into staging
 
-    [FieldOffset(0x300)] public void* TempData; // struct with temporary data (size = 0x88)
+    [FieldOffset(0x300)] public void* TempData; // struct with temporary data (size >= 0x88)
 
-    [FieldOffset(0x308)] public void* TempSlotData; // struct with temporary data for each slot (size = 0x88 * slot count)
+    [FieldOffset(0x308), Obsolete($"Use {nameof(PerSlotStagingArea)} instead", true)] public void* TempSlotData; // struct with temporary data for each slot (size = 0xE0 * slot count)
+    [FieldOffset(0x308)] public SlotStagingArea* PerSlotStagingArea;
 
     [FieldOffset(0x350)] public Material** Materials; // size = SlotCount * MaterialsPerSlot
 
@@ -97,7 +99,7 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x360)] public void** IMCArray; // array of Client::System::Resource::Handle::ImageChangeDataResourceHandle ptrs size = SlotCount - IMC file for model in slot
 
-    [FieldOffset(0x3D8)] internal FixedSizeArray5<SkeletonAnimationContainer> _skeletonAnimationContainers; // tentative name
+    [FieldOffset(0x3D8), FixedSizeArray] internal FixedSizeArray5<SkeletonAnimationContainer> _skeletonAnimationContainers; // tentative name
 
     [FieldOffset(0x940)] public SkeletonResourceHandle* MaterialAnimationSkeleton;
 
@@ -148,6 +150,12 @@ public unsafe partial struct CharacterBase {
 
     [VirtualFunction(79)]
     public partial CStringPointer ResolvePhybPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+
+    [VirtualFunction(80)]
+    public partial CStringPointer ResolveKdbPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
+
+    [VirtualFunction(82)]
+    public partial CStringPointer ResolveBnmBPath(byte* pathBuffer, nuint pathBufferSize, uint partialSkeletonIndex);
 
     [VirtualFunction(84)]
     public partial CStringPointer ResolvePapPath(byte* pathBuffer, nuint pathBufferSize, uint unkAnimationIndex, byte* animationName);
@@ -203,6 +211,16 @@ public unsafe partial struct CharacterBase {
     public ReadOnlySpan<byte> ResolvePhybPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
         fixed (byte* pBuffer = pathBuffer)
             return ResolvePhybPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+    }
+
+    public ReadOnlySpan<byte> ResolveKdbPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
+        fixed (byte* pBuffer = pathBuffer)
+            return ResolveKdbPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
+    }
+
+    public ReadOnlySpan<byte> ResolveBnmBPath(Span<byte> pathBuffer, uint partialSkeletonIndex) {
+        fixed (byte* pBuffer = pathBuffer)
+            return ResolveBnmBPath(pBuffer, (nuint)pathBuffer.Length, partialSkeletonIndex);
     }
 
     public ReadOnlySpan<byte> ResolvePapPath(Span<byte> pathBuffer, uint unkAnimationIndex, ReadOnlySpan<byte> animationName) {
@@ -282,6 +300,16 @@ public unsafe partial struct CharacterBase {
     public string ResolvePhybPath(uint partialSkeletonIndex) {
         Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
         return Encoding.UTF8.GetString(ResolvePhybPath(pathBuffer, partialSkeletonIndex));
+    }
+
+    public string ResolveKdbPath(uint partialSkeletonIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveKdbPath(pathBuffer, partialSkeletonIndex));
+    }
+
+    public string ResolveBnmBPath(uint partialSkeletonIndex) {
+        Span<byte> pathBuffer = stackalloc byte[PathBufferSize];
+        return Encoding.UTF8.GetString(ResolveBnmBPath(pathBuffer, partialSkeletonIndex));
     }
 
     public string ResolvePapPath(uint unkAnimationIndex, string animationName) {
@@ -366,5 +394,11 @@ public unsafe partial struct CharacterBase {
         [FieldOffset(0x38)] public StdVector<Pointer<ResourceHandle>> PapVector3;
 
         [FieldOffset(0xF8)] public ResourceHandle* AnimationExchangeTable;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0xE0)]
+    public struct SlotStagingArea {
+        [FieldOffset(0x08)] public ModelResourceHandle* ModelResourceHandle;
+        [FieldOffset(0x68)] public MaterialResourceHandle* SkinMaterialResourceHandle;
     }
 }

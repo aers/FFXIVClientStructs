@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using HotbarSlotType = FFXIVClientStructs.FFXIV.Client.UI.Misc.RaptureHotbarModule.HotbarSlotType;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -31,6 +32,9 @@ public unsafe partial struct RaptureMacroModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 33 DB 8B E8 85 C0 7E ?? 0F 1F 84 00")]
     public partial uint GetLineCount(Macro* macro);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 0F B6 74 24")]
+    public partial bool TryResolveMacroIcon(UIModule* uiModule, HotbarSlotType* outType, uint* outRowId, int setId, uint macroId, uint* outItemId);
 
     [MemberFunction("40 53 55 41 54 41 55 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 4C 8B E9")]
     public partial void SetMacroLines(Macro* macro, int lineStartIndex, Utf8String* lines);

@@ -50,6 +50,6 @@ public enum ClientSelectDataConfigFlags : ushort {
     // ? = 0x08,
     StoreNewItemsInArmouryChest = 0x10,
     StoreCraftedItemsInInventory = 0x20,
-    CloseVisor = 0x40
-    // ? = 0x80
+    CloseVisor = 0x40,
+    HideVieraEars = 0x80
 }

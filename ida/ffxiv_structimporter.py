@@ -17,6 +17,13 @@ from structs_schema import *
 
 class BaseApi:
     @abstractmethod
+    def can_run(self):
+        # type: () -> None
+        """
+        Checks if exdgetters has run before this is allowed to continue
+        """
+
+    @abstractmethod
     def create_enum_struct(self, enum):
         # type: (DefinedStructEnum) -> None
         """
@@ -273,36 +280,43 @@ if api is None:
                 # type: (str) -> None
                 self.remove_struct_members(self.get_struct_id(fullname))
 
-            def delete_enum_members(self, enum):
-                # type: (DefinedStructEnum) -> None
-                e = self.get_enum_id(enum.type)
-                for value in enum.values:
-                    self.remove_enum_member(e, value, enum.name)
-
             @property
             def get_file_path(self):
                 return os.path.join(
                     os.path.dirname(os.path.realpath(__file__)), "ffxiv_structs.yml"
                 )
+            
+            def can_run(self):
+                return self.enum_exists("Component::Exd::SheetsEnum")
 
             def create_enum_struct(self, enum):
                 # type: (DefinedStructEnum) -> None
                 fullname = enum.type
-                self.create_enum(fullname)
+                
                 e = self.get_enum_id(fullname)
+                if e == idaapi.BADADDR:
+                    e = self.create_enum(fullname)
+
                 self.set_enum_width(e, self.get_size_from_ida_type(enum.underlying))
                 if self.is_signed(enum.underlying):
                     self.set_enum_flag(e, 0x20000)
                 if enum.flags:
+                    if idaapi.IDA_SDK_VERSION < 900:
+                        self.add_enum_member(e, "{0}.{1}".format(enum.name, "tmp"), self.get_enum_default_mask(e))
                     self.set_enum_as_bf(e)
                 for value in enum.values:
                     self.add_enum_member(
                         e, "{0}.{1}".format(enum.name, value), enum.values[value]
                     )
+                if enum.flags and idaapi.IDA_SDK_VERSION < 900:
+                    self.remove_enum_member(e, "tmp", enum.name)
 
             def delete_enum(self, enum):
                 # type: (DefinedStructEnum) -> None
-                self.delete_enum_members(enum)
+                eid = idc.get_enum(enum.type)
+                if eid != idaapi.BADADDR:
+                    self.delete_enum_members(eid)
+                    idc.set_enum_bf(eid, False)
 
             def delete_struct(self, struct):
                 # type: (DefinedStruct) -> None
@@ -432,17 +446,23 @@ if api is None:
                             None,
                             self.get_size_from_ida_type(field_type),
                         )
+
                     meminfo = self.get_struct_member_by_name(s, field_name)
-                    if field_is_base:
-                        meminfo.props |= self.get_base_class_flag()
-                    array_size = field.size if hasattr(field, "size") else 0
-                    self.set_struct_member_info(
-                        s,
-                        meminfo,
-                        0,
-                        self.get_tinfo_from_type(field_type, array_size),
-                        0,
-                    )
+                    if meminfo is not None:    
+                        if field_is_base:
+                            if idaapi.IDA_SDK_VERSION >= 900:
+                                meminfo.set_baseclass()
+                            else:
+                                meminfo.props |= self.get_base_class_flag()
+                                
+                        array_size = field.size if hasattr(field, "size") else 0
+                        self.set_struct_member_info(
+                            s,
+                            meminfo,
+                            0,
+                            self.get_tinfo_from_type(field_type, array_size),
+                            0,
+                        )
 
                 if struct.size is not None and struct.size != 0:
                     prev_size = self.get_struct_size(s)
@@ -471,6 +491,9 @@ if api is None:
                         continue
 
                     meminfo = self.get_struct_member_by_name(s, field_name)
+                    if meminfo is None:
+                        raise RuntimeError("Failed to find member {0} in struct {1}".format(field_name, fullname))
+
                     field_type = self.clean_name(virt_func.return_type)
                     field_type = field_type + "(__fastcall* " + field_name + ")("
                     for param in virt_func.parameters:
@@ -610,7 +633,7 @@ if api is None:
                     )
                     == ida_kernwin.ASKBTN_YES
                 )
-
+            
         full_padding = (
             ida_kernwin.ask_buttons(
                 "Full Padding",
@@ -645,6 +668,9 @@ if api is None:
         # noinspection PyUnresolvedReferences
 
         class GhidraApi(BaseApi):
+            def can_run(self):
+                return True
+            
             def get_size_from_type(self, name):
                 # type: (str) -> int
                 dt = self.get_datatype(name)
@@ -1041,6 +1067,9 @@ if api is None:
     else:
         # TODO: VTables, Unions
         class BinjaApi(BaseApi):
+            def can_run(self):
+                return True
+            
             def get_binja_type(self, name):
                 # type: (str) -> str
                 lookup = {
@@ -1263,6 +1292,9 @@ def get_time():
 
 
 def run():
+    if not api.can_run():
+        raise RuntimeError("This script depends on exdgetters. Run that script before retrying")
+
     print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
 
@@ -1273,6 +1305,8 @@ def run():
     print("{0} Deleting old enums and creating new ones".format(get_time()))
     for enum in yaml.enums:
         api.delete_enum(enum)
+    
+    for enum in yaml.enums:
         api.create_enum_struct(enum)
 
     print("{0} Creating new structs".format(get_time()))

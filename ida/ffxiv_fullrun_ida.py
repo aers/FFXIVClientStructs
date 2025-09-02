@@ -4,6 +4,16 @@ import ida_auto
 import idc
 import ida_kernwin
 import idaapi
+import sys
+
+if idaapi.IDA_SDK_VERSION >= 900 and ida_kernwin.ask_buttons(
+    "",
+    "",
+    "",
+    ida_kernwin.ASKBTN_YES,
+    "HIDECANCEL\nIDA 9 script executions are experimental do you wish to continue?",
+) != ida_kernwin.ASKBTN_YES:
+    sys.exit()
 
 print("Loading ffxiv_idarename.py")
 exec(open(path.join(path.dirname(path.realpath(__file__)), "ffxiv_idarename.py")).read())

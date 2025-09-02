@@ -16,4 +16,9 @@ public unsafe partial struct AtkMessageBoxManager {
     [FieldOffset(0x88)] public byte Unk88;
     [FieldOffset(0x89)] public byte Unk89;
     [FieldOffset(0x8A)] public byte Unk8A;
+
+    // Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent
+    [GenerateInterop(isInherited: true)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    public partial struct AtkMessageBoxEvent;
 }

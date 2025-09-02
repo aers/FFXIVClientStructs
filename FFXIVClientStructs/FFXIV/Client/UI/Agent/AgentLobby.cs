@@ -3,6 +3,7 @@ using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.FFXIV.Component.Text;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -10,9 +11,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 // Client::UI::Agent::AgentLobby
 //   Client::UI::Agent::AgentInterface
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
+//   Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent
+//   Application::Network::LogoutCallbackInterface
+//   Application::Network::ZoneLoginCallbackInterface
 [Agent(AgentId.Lobby)]
 [GenerateInterop]
-[Inherits<AgentInterface>, Inherits<LogoutCallbackInterface>(0x30)]
+[Inherits<AgentInterface>, Inherits<AtkMessageBoxManager.AtkMessageBoxEvent>, Inherits<LogoutCallbackInterface>, Inherits<ZoneLoginCallbackInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2308)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? C6 41 ?? ?? 48 89 01 33 ED", 3)]
 public unsafe partial struct AgentLobby {

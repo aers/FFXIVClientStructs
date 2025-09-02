@@ -14,7 +14,34 @@ public unsafe partial struct AddonConfig {
         return uiModule == null ? null : uiModule->GetAddonConfig();
     }
 
-    [FieldOffset(0x58)] public AddonConfigData* ModuleData;
+    [FieldOffset(0x50)] public bool IsLoaded;
+    [FieldOffset(0x58)] public AddonConfigData* ActiveDataSet;
+    [FieldOffset(0x58), Obsolete("Use ActiveDataSet")] public AddonConfigData* ModuleData;
+    [FieldOffset(0x60)] public StdList<Pointer<AddonConfigData>> DataSets;
+
+    /// <summary>
+    /// Switches <see cref="ActiveDataSet"/> to the named <see cref="AddonConfigData"/>, creating it if needed.
+    /// </summary>
+    [MemberFunction("40 53 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 89 43")]
+    public partial void SwitchToDataSet(Utf8String* name);
+
+    /// <summary>
+    /// Switches <see cref="ActiveDataSet"/> to the "Default" <see cref="AddonConfigData"/>.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 DB 74 ?? 48 85 F6")]
+    public partial void SwitchToDefaultSet();
+
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B 41 ?? 48 8B F2 48 8B F9 ?? ?? ?? 48 3B D8 74 ?? 48 8B 4B ?? 48 8B D6")]
+    public partial bool ContainsDataSet(Utf8String* name);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 49 89 47")]
+    public partial AddonConfigData* GetOrCreateDataSet(Utf8String* name);
+
+    [MemberFunction("48 89 5C 24 ?? 55 56 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 41 0F B6 E8")]
+    public partial bool CopyDefaultDataSet(Utf8String* name, CopyDirection direction);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 ?? C6 40 ?? ?? 40 38 78"), GenerateStringOverloads]
+    public partial AddonConfigEntry* GetConfigEntryByAddonName(CStringPointer addonName);
 
     /// <summary>
     /// Changes the current HUD Layout to the specific value
@@ -22,17 +49,28 @@ public unsafe partial struct AddonConfig {
     /// <param name="layoutIndex">HUD Layout Index, 0-based</param>
     /// <param name="unk1">Unknown, generally False</param>
     /// <param name="unk2">Unknown, generally True</param>
-    /// <returns></returns>
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 EB 12")]
     public partial void ChangeHudLayout(uint layoutIndex, bool unk1 = false, bool unk2 = true);
+
+    /// <summary>
+    /// Applies the current HUD Layout
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? 41 C6 46 ?? ??")]
+    public partial void ApplyHudLayout();
+
+    public enum CopyDirection : byte {
+        FromDefault = 0,
+        ToDefault = 1,
+    }
 }
 
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xD278)]
-public unsafe partial struct AddonConfigData {
-    [FieldOffset(0x00)] public Utf8String DefaultString; // Literally says "Default"
-    // [FieldOffset(0x68)] public StdList<[SomeStruct Size 48]> SomeList; // Contains 574 elements
-    // [FieldOffset(0x78)] public StdList<[SomeStruct size 16]> SomeList; // Contains 424 elements
+public unsafe partial struct AddonConfigData { // TODO: rename to AddonConfigDataSet
+    [FieldOffset(0x00)] public Utf8String Name;
+    [FieldOffset(0x00), Obsolete("Renamed to Name")] public Utf8String DefaultString;
+    [FieldOffset(0x68)] public StdList<Pointer<AddonConfigEntry>> UsedAddonConfigEntries;
+    [FieldOffset(0x78)] public StdList<Pointer<AddonConfigEntry>> UnusedAddonConfigEntries;
     [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray1041<AddonConfigEntry> _configEntries; // 110 (Default HudLayout?) + 931 (the amount of addons in RaptureAtkModule)
     [FieldOffset(0x92F0), FixedSizeArray] internal FixedSizeArray4<Utf8String> _hudLayoutNames; // unused?!
     [FieldOffset(0x9490), FixedSizeArray] internal FixedSizeArray440<AddonConfigEntry> _hudLayoutConfigEntries; // 4 HudLayouts * 110 entries
@@ -57,4 +95,20 @@ public struct AddonConfigEntry {
 
     [FieldOffset(0x20)] public bool HasValue;
     [FieldOffset(0x21)] public bool IsOpen;
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public unsafe partial struct HudLayoutAddon {
+    [FieldOffset(0x00)] public CStringPointer AddonName;
+    [FieldOffset(0x08)] public uint HudRowId;
+    [FieldOffset(0x0C)] public uint Flags;
+
+    [StaticAddress("4C 8D 0D ?? ?? ?? ?? 4C 8D 1D ?? ?? ?? ?? 90", 3)]
+    public static partial HudLayoutAddon* GetArrayPointer();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 33 ED 44 8B F8 85 C0 0F 84")]
+    public static partial int GetLength();
+
+    public static Span<HudLayoutAddon> GetSpan() => new(GetArrayPointer(), GetLength());
 }

@@ -72,7 +72,7 @@ public sealed partial class InteropGenerator {
                 foreach (string inheritedAttribute in field.InheritableAttributes) {
                     writer.WriteLine($"{inheritedAttribute}");
                 }
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {field.Type} {adjustedFieldName};");
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({offset + field.Offset})] public {(field.IsReadOnly ? "readonly " : "")}{field.Type} {adjustedFieldName};");
             }
             alreadyWrittenBases.Add(inheritedStruct.FullyQualifiedMetadataName);
         }
@@ -173,10 +173,8 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
-            if (methodInfo.InheritableAttributes is not null) {
-                foreach (string inheritedAttribute in methodInfo.InheritableAttributes) {
-                    writer.WriteLine(inheritedAttribute);
-                }
+            foreach (string inheritedAttribute in methodInfo.InheritableAttributes) {
+                writer.WriteLine(inheritedAttribute);
             }
             if (methodInfo.IsStatic) {
                 writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");
@@ -200,6 +198,8 @@ public sealed partial class InteropGenerator {
                     continue;
                 foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
                     var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingType()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
+                    foreach (string inheritedAttribute in virtualFunctionInfo.MethodInfo.InheritableAttributes)
+                        writer.WriteLine(inheritedAttribute);
                     writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
                 }
             }
@@ -231,10 +231,8 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
-            if (methodInfo.InheritableAttributes is not null) {
-                foreach (string inheritedAttribute in methodInfo.InheritableAttributes) {
-                    writer.WriteLine(inheritedAttribute);
-                }
+            foreach (string inheritedAttribute in methodInfo.InheritableAttributes) {
+                writer.WriteLine(inheritedAttribute);
             }
             // function in table - call via table
             if (offset == 0) {
@@ -255,10 +253,8 @@ public sealed partial class InteropGenerator {
             writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name.Replace('<', '{').Replace('>', '}')}({methodInfo.GetParameterTypeStringForCref()})" />""");
             writer.WriteLine($"""/// <remarks>Method inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
             writer.WriteLine("[global::System.Runtime.CompilerServices.MethodImplAttribute(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]");
-            if (methodInfo.InheritableAttributes is not null) {
-                foreach (string inheritedAttribute in methodInfo.InheritableAttributes) {
-                    writer.WriteLine(inheritedAttribute);
-                }
+            foreach (string inheritedAttribute in methodInfo.InheritableAttributes) {
+                writer.WriteLine(inheritedAttribute);
             }
             if (methodInfo.IsStatic) {
                 writer.WriteLine($"{methodInfo.GetDeclarationStringWithoutPartial()} => {inheritedStruct.FullyQualifiedMetadataName}.{methodInfo.Name}({methodInfo.GetParameterNamesString()});");

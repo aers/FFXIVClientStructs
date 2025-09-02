@@ -73,7 +73,7 @@ public unsafe partial struct CharaView : ICreatable {
     public partial void OnReady();
 
     [VirtualFunction(10)]
-    public partial void Update();
+    public partial void Update(uint frameIndex, Character* character);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 4C 24 ?? 45 8B C5")]
     public partial void SetModelData(CharaViewModelData* data);

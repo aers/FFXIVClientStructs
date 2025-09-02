@@ -24,4 +24,7 @@ public unsafe partial struct RaptureAtkUnitManager {
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 49 8B F0 48 8B FA 4C 8B F1 48 85 D2"), GenerateStringOverloads]
     public partial ushort InitializeAddon(AtkUnitBase* addon, CStringPointer addonName); // 7.0: no xrefs/inlined, but callable
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 85 C0 75 ?? 8B D3")]
+    public partial AtkUnitBase* GetAddonByNameHash(uint addonNameHash);
 }

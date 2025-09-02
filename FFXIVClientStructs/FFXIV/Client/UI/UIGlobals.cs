@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.System.Input;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -63,4 +65,16 @@ public unsafe partial struct UIGlobals {
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 D8 74 2A")]
     public static partial ulong GetDragDropTypeMask(DragDropType type);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 78 ?? 48 8B 4E ?? ?? ?? ?? FF 90")]
+    public static partial InputId GetMainCommandInputId(ushort mainCommandId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 85 C0 78 ?? ?? ?? ?? 48 8B CE FF 92 ?? ?? ?? ?? ?? ?? ?? 48 8B CE")]
+    public static partial AgentId GetMainCommandAgentId(ushort mainCommandId);
+
+    /// <summary>
+    /// Computes the CRC32 hash of an addon name with <c>_a</c> appended.
+    /// </summary>
+    [MemberFunction("40 53 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 4C 8B C9"), GenerateStringOverloads]
+    public static partial uint ComputeAddonNameHash(CStringPointer addonName);
 }

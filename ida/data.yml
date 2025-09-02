@@ -15,6 +15,7 @@ globals:
   0x142717C58: g_FPS
   0x14271F160: g_LanguageCharArr # byte[] no pointer
   0x142721548: g_Client::Game::Control::InputManager_MouseButtonHoldState
+  0x142721640: g_GlobalUIScale
   0x14274E6F8: g_StackCookie
   0x14274E6F0: g_InverseStackCookie
   0x14276A778: g_stdout
@@ -28,11 +29,15 @@ globals:
   0x142771790: g_FrameCountAccum # accumulates over a second to calc FPS
   0x142771794: g_FrameTimeAccum # accumulates over a second to calc FPS
   0x1427718A0: g_OSVersion
+  0x142773200: g_NameplateColors
   0x14290D150: g_Client::UI::Agent::CharaSelectCharacterList_CurrentCharaSelectCharacter # Client::Game::Character::Character*
   0x142909300: g_RenderSkeletonLinkedListStart
   0x142909308: g_RenderSkeletonLinkedListEnd
   0x142909358: g_RenderModelLinkedListStart
   0x142909360: g_RenderModelLinkedListEnd
+  0x1429095F0: g_Common::Math::Vector2::Zero
+  0x142909600: g_Common::Math::Vector3::Zero
+  0x142909610: g_Common::Math::Vector4::Zero
   0x142909BE8: g_animationFactorRemainder
   0x142909BEC: g_animationFactor #percentage of a 30fps frame rendered this frame
   0x14290DFD0: g_PerformanceFrequency
@@ -146,6 +151,7 @@ functions:
   0x1406AD5A0: Component::GUI::TextModuleInterface::GetTextLabelByID
 #fail   0x14064BB40: GetLocalTextParameter
   0x140779290: FormatNumber
+  0x1407A4CF0: ComputeAddonNameHash
   0x140969860: ConvertLogMessageIdToScreenLogKind
   0x1407F6180: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
   0x1407F6270: GetEventItemName
@@ -183,10 +189,11 @@ functions:
   0x1400DF6D0: GetDragDropTypeMask
   0x1400DF6A0: GetDragDropTypeReferenceMask
   0x1400DF760: OpenWebURL
+  0x1400FEAE0: UpdateNameplateColors
   0x14046F400: GetMainCommandAgentId
   0x14046F480: GetMainCommandInputId
+  0x140603E90: GetHighResolutionTimeMs
   0x14079E6D0: GetHotbarSlotTypeFromDragDropType
-  0x140846330: GetUIModule
   0x140965DC0: ToObjStrId
   0x140A1CD80: GenerateItemsChecksum # for Banners
   0x140A1CED0: GenerateEquippedItemsChecksum # for Banners; unused
@@ -661,6 +668,159 @@ classes:
   Client::Network::LobbyClient::LobbyCharacterRequestCallback:
     funcs:
       0x140142810: ctor # inlined (7.3)
+  Client::Game::UI::ContentInterface:
+    vtbls:
+      - ea: 0x141FF86F0
+    vfuncs:
+      0: Dtor
+      1: GetName
+      2: GetNameShortOrCategory
+      # 3:
+      4: GetContentType
+      5: IsPvP
+      6: GetImage
+      7: GetIcon
+      8: GetContentTypeIcon
+      9: GetRequiredLevel
+      10: GetSyncedLevel
+      11: GetItemLevelRequired
+      12: GetItemLevelSync
+      13: IsHighestAverageItemLevelApplied
+      14: IsUnlocked
+      # 15:
+      16: IsCompleted
+      17: IsInDutyFinderAndIsUnlocked
+      18: GetClassJobCategory
+      19: HasOnePlayerPerJobDetails
+      20: IsSeparatedDpsRoles
+      21: IsSeparatedHealerRoles
+      22: IsCrystallineConflict
+      23: IsLimitedJobAllowed
+      24: GetNumParties
+      25: GetQueueMaxPlayers
+      26: GetTanksPerParty
+      27: GetHealersPerParty
+      28: GetTotalDpsPerParty
+      29: GetMeleesPerParty
+      30: GetRangedPerParty
+      31: GetPartyCount
+      32: GetAlliancePartyCount
+      33: GetQueueMinPlayers
+      34: IsRoleIndependent
+      35: IsFixedItemLevelSync
+      36: IsUnrestrictedPartyAllowed
+      37: IsMatchingForAlliancesUnavailable
+      38: IsMemberRequiredInEveryParty
+      39: GetLootModeType
+      40: IsAdditionalLootRulesAvailable
+      41: IsMinimumILAllowed
+      # 42:
+      43: IsAllianceRegistrationAllowed
+      # 44:
+      45: GetAllianceRegistrationMinPlayers
+      # 46:
+      47: IsGrandCompanyRequired
+      48: IsBattleMentorWithCurrentCertificationOnly
+      # 49:
+      # 50:
+      51: IsRegistrationDataCenterLimited
+      52: IsExplorerModeAllowed
+      53: GetRewardResetType
+      54: GetEchoSetting
+      55: GetRequiredExVersion
+      56: GetTimeLimit
+      57: GetTimeLimitMax
+      # 58:
+      59: GetContentUICategory
+      60: GetJournalGenre
+      61: IsReplacementAllowed
+      62: GetTerritoryType
+      # 63:
+      64: IsInDutyFinder
+      65: IsHighEndDuty
+      66: IsConsumableItemAllowed
+      67: GetSortKey
+      68: GetGoldSaucerRegisterConditionCount
+      69: GetGoldSaucerRegisterConditionAddonId
+      # 70:
+      # 71:
+      # 72:
+      73: IsOnlyPvPTeamMembers
+      # 74:
+      75: GetContentCloseCycle
+      76: IsDutyRecorderAllowed
+      77: IsRegistrationHomeWorldLimited
+      # 78:
+      # 79:
+      # 80:
+      81: IsCurrentUnreal
+      82: IsRegistrationAllowedFromAnyDataCenter
+      83: GetCrystallineConflictGameplayFeatureCount
+      84: GetCrystallineConflictGameplayFeatureAddonId
+      85: GetUnlockType
+      86: GetUnlockCriteria
+      # 87:
+      88: GetPenaltyTimestampArrayIndex
+      89: IsLimitedTimeBonus
+      90: IsPhoenixDownAllowed
+    funcs:
+      0x140A2DAB0: HasUnmetConditions
+      0x140A2E8C0: GetIsResetDaily
+      0x140D69000: GetConditionFlags
+  Client::Game::UI::ContentRoulette:
+    vtbls:
+      - ea: 0x142068738
+        base: Client::Game::UI::ContentInterface
+    funcs:
+      0x140A2A1E0: ctor
+      0x140A2A200: Finalizer
+      0x140A2A820: GetIsInDutyFinder
+      0x140A2B280: CanGetAwards
+      0x140A2B2F0: GetDescription
+      0x140A2B310: GetDutyType
+      0x140A2B330: HasDutyRequirements
+      0x140A2B5A0: GetRow
+      0x140A2B5B0: GetContentMemberTypeRow
+  Client::Game::UI::ContentFinderConditionInterface:
+    vtbls:
+      - ea: 0x142068A10
+        base: Client::Game::UI::ContentInterface
+    funcs:
+      0x140A2B5E0: ctor
+  Client::Game::UI::PartyContent:
+    vtbls:
+      - ea: 0x142068CE8
+        base: Client::Game::UI::ContentFinderConditionInterface
+    funcs:
+      0x140A2C7A0: ctor
+  Client::Game::UI::PublicContent:
+    vtbls:
+      - ea: 0x142068FC0
+        base: Client::Game::UI::ContentFinderConditionInterface
+    funcs:
+      0x140A2C8D0: ctor
+  Client::Game::UI::GoldSaucerContent:
+    vtbls:
+      - ea: 0x142069298
+        base: Client::Game::UI::ContentFinderConditionInterface
+    funcs:
+      0x140A2CA20: ctor
+  Client::Game::UI::InstanceContentExcelWrapper: # can't name this Client::Game::UI::InstanceContent, because the struct already exists in UIState
+    vtbls:
+      - ea: 0x142069570
+        base: Client::Game::ContentFinderConditionInterface
+    funcs:
+      0x140A2CB50: ctor
+  Client::Game::UI::InstanceContent::ContentUI:
+    vtbls:
+      - ea: 0x141FF89C8
+    funcs:
+      0x140A39B20: ctor
+      0x1401CA580: Finalizer
+      0x140A2CD80: GetRow
+      0x140A39BB0: LoadByContentLookupInfo
+      0x140A39C30: LoadByContentFinderConditionId
+      0x140A39D30: GetContentInterface
   Client::Game::StatusManager:
     funcs:
       0x14085C550: OnGainStatus
@@ -759,6 +919,8 @@ classes:
       0: Dtor
   Client::System::Crypt::CryptInterface:
   Client::System::Input::InputData::InputCodeModifiedInterface:
+    vfuncs:
+      0: OnInputCodeModified
   Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface:
     vtbls:
       - ea: 0x142040010
@@ -1503,6 +1665,7 @@ classes:
       0x1408442E0: GetRacingChocoboAbilityIdFromItem
       0x140844390: GetRacingChocoboStainFromItem
       0x140844490: GetRacingChocoboBeedingCapacityFromItem
+      0x140846330: GetUIModule
       0x1409D1390: GetSpecialItemId #static
       0x1408426B0: GetLimitedTomestoneWeeklyLimit #static
       0x140832520: SetSlotBlocked
@@ -2182,6 +2345,8 @@ classes:
       0x1400874A0: FindLastOfImpl
       0x140087940: FindFirstOfImpl
       0x140087F30: FormatString2
+      0x14044E230: ToPosixPath
+      0x14044E240: ReplaceDirectorySeparatorChar
       0x140779080: ToInteger # strtoi for utf8string (str, base)
       0x141882FB0: SanitizeString
       0x141883650: SanitizeStringCh
@@ -2629,6 +2794,7 @@ classes:
     funcs:
       0x140C89B80: Initialize
       0x140C89BD0: Finalizer
+      0x140C89A60: LoadAreaVFXToLocalPlayer
       0x140C89CF0: Update
   Client::Game::Conditions:
     instances:
@@ -2835,6 +3001,7 @@ classes:
       - ea: 0x142069848
     funcs:
       0x140A2E8E0: GetPenaltyRemainingInMinutes
+      0x140A303E0: GetContentInterface
       0x140A31260: IsRouletteIncomplete
   Client::Game::UI::GuildOrderReward:
     instances:
@@ -4276,6 +4443,7 @@ classes:
         base: Component::GUI::AtkUnitManager
     funcs:
       0x1400DFA30: ctor # INLINED IN 7.0
+      0x1400E10D0: GetAddonByNameHash
       0x1401CA740: Finalizer
 #oldfail       0x14063FA30: InitializeAddon # inlined @ 0x1406C0B93
   Client::UI::RaptureAtkColorDataManager:
@@ -4302,6 +4470,7 @@ classes:
       0x1400E6770: OpenAddon
       0x1400E6BF0: OpenAddonByAgent
       0x1400E6F90: OpenYesNo
+      0x1400E7610: OpenYesNo2
       0x1400E7330: OpenSelectOk
       0x1400E71D0: OpenSelectOk2
       0x1400EAA70: ShowScreenImage
@@ -4831,8 +5000,10 @@ classes:
   Client::System::File::FileAccessPath:
     funcs:
       0x14008FA30: ctor
-      0x14008FA50: ctor_FromUtf8Str
+      0x14008FA50: ctor_FromUtf8String
+      0x14008FAD0: ctor_FromSequence
       0x1400CF620: Copy
+      0x140090390: SetPathUtf8String
       0x14008FB60: Dtor
   Client::System::Resource::Handle::ResourceHandle:
     vtbls:
@@ -5494,6 +5665,8 @@ classes:
       0x14045CD00: GetCurrentDeviceTimeInMillis
       0x14045CD80: GetLobbyCount
       0x14045D6A0: IsInCrossWorldDuty
+      0x14045D6E0: SetZoneLoginCallback
+      0x14045D700: SetLogoutCallback
       0x14045D720: SetCurrentInstance
       0x14045D740: GetCurrentInstance
       0x14045C330: HasZoneConnection
@@ -5704,21 +5877,27 @@ classes:
      0x140482850: ctor
   Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent:
     vtbls:
-      - ea: 0x142033FE8
+      - ea: 0x1420332C0
   Application::Network::LogoutCallbackInterface:
     vtbls:
-      - ea: 0x142033FF0
+      - ea: 0x1420339C0
     vfuncs:
       1: OnLogout
   Application::Network::ZoneLoginCallbackInterface:
     vtbls:
-      - ea: 0x142034000
+      - ea: 0x1420339D0
     vfuncs:
       1: OnZoneLogin
   Client::UI::Agent::AgentLobby:
     vtbls:
       - ea: 0x142033F68
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x142033FE8
+        base: Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent
+      - ea: 0x142033FF0
+        base: Application::Network::LogoutCallbackInterface
+      - ea: 0x142034000
+        base: Application::Network::ZoneLoginCallbackInterface
     funcs:
       0x1404A7380: ctor
       0x1404A9980: HandleLogout
@@ -6742,19 +6921,33 @@ classes:
   Client::System::Input::InputData:
     vtbls:
       - ea: 0x14203DC58
+    vfuncs:
+      2: SetKeybind
     funcs:
       0x140604270: ctor
       0x140604870: IsInputIdDown
       0x140604980: IsInputIdPressed
       0x140604AD0: IsInputIdHeld
       0x140604EB0: IsInputIdReleased
+      0x140605160: HasCursorPositionChanged
+      0x140605170: HasGamepadInputs2ButtonsChanged
+      0x140605180: HasKeyboardInputsChanged
+      0x140605190: HasUIFilteredCursorInputsButtonsChanged
+      0x1406051A0: HasGamepadInputsButtonsChanged
       0x1406052A0: IsMouseCombinationDragged
+      0x140605A80: GetKeybind
+      0x140605EA0: GetCurrentGamepadModifier
+      0x140605F50: GetCurrentKeyModifier
   Client::System::Input::GamepadInputData:
     funcs:
       0x140458500: ctor
+      0x140458640: PositionsDiffer
+      0x140458670: ButtonsDiffer
   Client::System::Input::CursorInputData:
     funcs:
       0x1405B7E60: ctor
+      0x1405B7E90: PositionsDiffer
+      0x1405B7EC0: ButtonsDiffer
   Client::System::Input::KeyboardInputData:
     funcs:
       0x1405B7FA0: ctor
@@ -6765,7 +6958,7 @@ classes:
       0: Dtor
       1: FreeManagedData
     funcs:
-      0x140606090: SortSubscribedAddons
+      0x140606090: UnsubscribeAddon
       0x140606110: HasRefs
       0x140606120: IsUnused
       0x140606140: IncRef
@@ -8195,6 +8388,7 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x14073C3C0: ctor # unused, inlined @ 0x14075CD19
+      0x14073D270: GetKeybindByName
   Client::UI::Misc::RaptureUiDataModule:
     vtbls:
       - ea: 0x142050658
@@ -8347,8 +8541,9 @@ classes:
       104: HideEurekaHud
       110: CloseMiniMap
       111: OpenMiniMap
-      112: IsGamePadInputActive
-      115: ToggleInputMode
+      112: IsPadModeEnabled
+      113: IsPadMouseModeEnabled
+      115: SetPadMode
       116: CancelDragDrop
       117: IsUIHidden
       118: AddAtkHistoryEntry
@@ -8852,6 +9047,7 @@ classes:
       0x140793870: ReplaceMacroLines # replaces macro with lines stored in string
       0x140793890: AppendMacroLines # appends lines stored in string to macro
       0x140793A70: GetLineCount
+      0x140793C10: TryResolveMacroIcon
       0x1407952F0: SetMacroLines # function called by replace/append
       0x140794E10: SetSavePendingFlag
   Client::UI::Misc::RaptureMacroModule::Macro:
@@ -8915,10 +9111,10 @@ classes:
       0x1409647F0: FormatItemName
       0x140964A50: FormatItemIconSuffix
       0x140964DB0: GetTextChecker
-      0x140964E40: SetGlobalTempPlayer1Utf8
-      0x140964FF0: SetGlobalTempPlayer1
-      0x140965210: SetGlobalTempPlayer2Utf8
-      0x1409653C0: SetGlobalTempPlayer2
+      0x140964E40: SetGlobalTempEntity1Utf8
+      0x140964FF0: SetGlobalTempEntity1
+      0x140965210: SetGlobalTempEntity2Utf8
+      0x1409653C0: SetGlobalTempEntity2
       0x1409655E0: UpdateGlobalColors
       0x1409656D0: SetGlobalColorByConfigOption
       0x140965790: Update
@@ -8960,6 +9156,7 @@ classes:
       0x140971880: GetLogMessage
       0x140972390: GetLogMessageDetail
       0x140974200: FormatLogMessage
+      0x1409759A0: ShowMiniTalkPlayer
       0x140975B00: AddMsgSourceEntry
   Component::Prohibit::ProhibitModuleInterface:
     vtbls:
@@ -9089,13 +9286,55 @@ classes:
   Client::UI::Misc::RaptureHotbarModule::HotbarUiIntermediate:
     funcs:
       0x140795EA0: ctor
+  Client::UI::Misc::HudLayoutAddon: # just a bunch of static functions
+    funcs:
+      0x140E7CD80: GetAddonNameByHudRowId
+      0x140E7CDC0: GetAddonNameByIndex
+      0x140E7CDF0: GetHudRowIdByIndex
+      0x140E7CEA0: GetLength
+      0x140E7CEB0: GetByHudRowId
+      0x140E7CEE0: ElementAt
+      0x140E7CF80: HasFlag
+      0x140E7D040: IsStatusEffects
+      0x140E7D070: IsStatusInfo
+      0x140E7D0B0: IsTargetBar
+      0x140E7D0E0: IsPartyList
+      0x140E7D110: GetIndexByHudRowId
+      0x140E7D140: GetHudRowIdByAddonName
+      0x140E7D1A0: GetHudRowIdByAddonNameHash
+      0x1407A4D80: GetHudRowIdByAddonNameHash2
   Client::UI::Misc::AddonConfig:
     vtbls:
       - ea: 0x1420560C0
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407A34A0: ctor
+      0x1407A3560: Finalizer
+      0x1407A35B0: GetIsLoaded
+      0x1407A35C0: GetConfigEntryByAddonName
+      0x1407A3670: GetConfigEntryByAddonNameHash
+      0x1407A36C0: GetHudLayoutConfigEntryByAddonName
+      0x1407A3730: DeleteConfigEntryForAddonName # addon name needs to end with _a
+      0x1407A3790: DeleteConfigEntryForAddonNameHash
+      0x1407A3880: ClearActiveDataSet
+      0x1407A3890: ClearActiveDataSetHudLayout
+      0x1407A3FC0: SwitchToDataSet
+      0x1407A3FE0: SwitchToDefaultSet
+      0x1407A4050: ContainsDataSet
+      0x1407A40C0: CopyDefaultDataSet
       0x1407A4610: ChangeHudLayout
+      0x1407A4810: GetCurrentHudLayout
+      0x1407A4830: SetCurrentHudLayout
+      0x1407A5040: GetOrCreateDataSet
+      0x1407A60F0: ApplyHudLayout
+  Client::UI::Misc::AddonConfigData:
+    funcs:
+      0x1407A2520: Clear
+      0x1407A2960: ClearHudLayout
+  Client::UI::Misc::AddonConfigEntry:
+    funcs:
+      0x1407A2180: SetAtkValue
+      0x1407A2060: GetAtkValue
   Client::UI::Misc::PronounModule:
     vtbls:
       - ea: 0x142063818
@@ -9448,6 +9687,9 @@ classes:
       0x14085A220: GetFrameDeltaMultiplier2
       0x14085A9F0: Initialize
       0x14085AC30: ctor
+      0x1400FE420: GetNamePlateColorType
+      0x1400FE850: GetNamePlateColors
+      0x140855840: GetNamePlateWorldPosition
       0x140965CB0: GetObjStrId
       0x1418E4070: PlayFootStepSound
   Client::Game::Character::Character:
@@ -9584,6 +9826,7 @@ classes:
       0x14086FD50: HideHeadgear
       0x1408704D0: HideLegacyTattoo
       0x14086FEE0: SetVisor
+      0x14086FF70: HideVieraEars
       0x140870660: EquipGlassesIds # sends it to the server
       0x1408706F0: GetGlassesId
       0x140870710: SetGlasses
@@ -10288,6 +10531,7 @@ classes:
       0x140E3BF30: UpdateEnemyList
 #oldfail       0x140D82F40: UpdateHotBar
       0x140E3D7D0: UpdateExp
+      0x140E3ED20: OpenContextMenuFromPartyAddon
       0x140E50E20: UpdateBattleTalk
 #oldfail       0x140E37D20: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
       0x140E50010: GetMainCommandString  # MainCommand exd
@@ -11015,11 +11259,14 @@ classes:
     vtbls:
       - ea: 0x142036360
         base: Client::UI::Agent::AgentInterface
+      - ea: 0x1420363E0
+        base: Component::Text::TextChecker::ExecNonMacroFunc
     funcs:
       0x140528570: ctor
       0x140528910: Finalizer
       0x14052E490: OpenListing
       0x14052E3B0: OpenListingByContentId
+      0x14052F180: RequestListingsUpdate
   Client::UI::Agent::AgentContentsMvp:
     vtbls:
       - ea: 0x142091AE8
@@ -12021,6 +12268,17 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D56C10: ctor
+      0x140D572C0: DeleteAllAlarms
+      0x140D57800: OpenAlarmSettings
+      0x140D57B90: CloseDialogs
+      0x140D57BC0: UpdateAlarms
+      0x140D581C0: UpdateAlarmList
+      0x140D585C0: DeleteAlarm
+      0x140D596C0: GetContextMenuAlarmIndex
+      0x140D59710: PlayAlarmSoundEffect
+  Client::UI::Agent::AgentAlarm::Alarm:
+    funcs:
+      0x140D59860: CompareTo
   Client::UI::Agent::AgentMerchantSetting:
     vtbls:
       - ea: 0x1420956B8
@@ -12092,6 +12350,7 @@ classes:
     funcs:
       0x140BFB290: ctor
       0x140BFB330: Finalizer
+      0x140BFD090: SetupWorldTravelInfo # (agent*, uint currentWorld, uint targetWorld)
   Client::UI::Agent::AgentRideShooting:
     vtbls:
       - ea: 0x14209AFB0
@@ -12402,6 +12661,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140E87890: ctor
+      0x140D97910: HandIn
   Client::UI::Agent::AgentMycWarResultNotebook:
     vtbls:
       - ea: 0x142079F08
@@ -13438,6 +13698,7 @@ classes:
     funcs:
       0x140FA1800: ctor
       0x140FA1B50: RefreshAddon
+      0x1409D9240: GetJobSettings # static
       0x1409D93F0: UpdateJobSettings # static
   Client::UI::Agent::AgentMKDSupportJobList:
     vtbls:
@@ -13700,7 +13961,7 @@ classes:
       146: ChangeEnvSoundVolume
       147: ResetEnvSoundVolume
       148: PlayCamera
-      149: PlayTwoShotCamera_
+      149: PlayTwoShotCamera
       150: PlayLandscapeCamera # also called "PlayLandscopeCamera"
       151: PlayIdleCamera
       152: PlayWorldPositionCamera
@@ -14563,6 +14824,12 @@ classes:
   Client::Game::Event::EventState:
     vtbls:
       - ea: 0x142074450
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x140B4D9D0: ctor
+      0x140B4DA10: ctor_From
+      0x140B4DAC0: SetState
   Client::Game::Event::EventGPoseController:
     funcs:
       0x1409A5110: ctor
@@ -14585,11 +14852,11 @@ classes:
       0x1418F32D0: ctor
   Client::Game::Event::GatheringLeveDirector:
     vtbls:
-      - ea: 0x1422412B8
+      - ea: 0x142241C20
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::BattleLeveDirector:
     vtbls:
-      - ea: 0x142241C20
+      - ea: 0x1422412B8
         base: Client::Game::Event::LeveDirector
   Client::Game::Event::CompanyLeveDirector:
     vtbls:
@@ -20255,6 +20522,8 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x141336190: ctor
+      0x141336350: UpdateGaugeValue
+      0x141336570: RefreshGaugeSegments
   Client::UI::AddonHWDGathereInspect: # 754
     vtbls:
       - ea: 0x1420FFFB0
@@ -22574,6 +22843,13 @@ classes:
       0x1417A6350: ctor
       0x1417A64B0: Finalizer
       0x1417A6590: Initialize
+  Client::Graphics::Physics::BoneKineDriverModule:
+    vtbls:
+      - ea: 0x142179E88
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x1417518D0: ctor
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x142187580

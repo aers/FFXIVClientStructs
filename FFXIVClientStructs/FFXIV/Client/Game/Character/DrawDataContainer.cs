@@ -71,6 +71,13 @@ public unsafe partial struct DrawDataContainer {
     [MemberFunction("E8 ?? ?? ?? ?? EB 50 44 8B 03")]
     public partial void SetGlasses(int index, ushort id);
 
+    /// <summary>
+    /// Called when changing the visbility of Viera ears.
+    /// </summary>
+    /// <param name="hide">When false, the Viera ears are visible. When true they will be hidden.</param>
+    [MemberFunction("E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 41 BD")]
+    public partial void HideVieraEars(bool hide);
+
     [MemberFunction("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 44 0F B6 B9")]
     public partial void LoadGearsetData(PacketPlayerGearsetData* gearsetData);
 
