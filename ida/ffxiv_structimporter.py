@@ -281,10 +281,10 @@ if api is None:
     else:
         # noinspection PyUnresolvedReferences
         class IdaApi(BaseApi, IdaInterface):
-            def __init__(self, full_padding, c_importer):
+            def __init__(self, full_padding, srclang_importer):
                 # type: (bool) -> None
                 self.full_padding = full_padding
-                self.c_importer = c_importer
+                self.srclang_importer = srclang_importer
 
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
@@ -303,8 +303,8 @@ if api is None:
 
                 return "struc_" + name
 
-            def get_c_type_name(self, name: str) -> str:
-                if not self.c_importer:
+            def get_srclang_type_name(self, name: str) -> str:
+                if not self.srclang_importer:
                     return name
                 
                 ptr_count = 0
@@ -363,8 +363,8 @@ if api is None:
                 self.delete_struct_members(fullname + "_vtbl")
 
                 # also check C types in case of an incomplete C run
-                if self.c_importer:
-                    cname = self.get_c_type_name(fullname)
+                if self.srclang_importer:
+                    cname = self.get_srclang_type_name(fullname)
                     self.delete_struct_members(cname)
                     self.delete_struct_members(cname + "_vtbl")
 
@@ -374,7 +374,7 @@ if api is None:
                 # type: (DefinedStruct) -> None
                 fullname = self.clean_struct_name(struct.type)
 
-                if self.c_importer:
+                if self.srclang_importer:
                     # rename C++ -> C or create new C struct
                     cname = self.generate_hashed_type_name(fullname)
                     
@@ -403,8 +403,8 @@ if api is None:
                 if struct.virtual_functions:
                     self.create_struct_type(fullname + "_vtbl")
 
-            def verify_struct_offsets(self, struct: DefinedStruct):
-                cname = self.get_c_type_name(self.clean_struct_name(struct.type))
+            def validate_srclang_struct(self, struct: DefinedStruct):
+                cname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
                 sid = self.get_struct_id(cname)
                 if sid == idaapi.BADADDR:
                     ida_kernwin.warning(f"Struct {cname} ({struct.type}) not found during validation")
@@ -446,7 +446,7 @@ if api is None:
                         ida_kernwin.warning(f"Field \"{field_name}\" offset mismatch in struct {cname} ({struct.type}) during validation.\nExpected {field.offset}, got {(udm.offset/8)}")
                         exit()
 
-            def get_c_fill_type(self, available_bytes: int) -> tuple[str, int]:
+            def get_srclang_fill_type(self, available_bytes: int) -> tuple[str, int]:
                 if available_bytes >= 9:
                     return ("__int64", 8)
                 elif available_bytes >= 4:
@@ -456,8 +456,8 @@ if api is None:
                 else:
                     return ("char", 1)
 
-            def create_c_decl(self, struct: DefinedStruct) -> str:
-                fullname = self.get_c_type_name(self.clean_struct_name(struct.type))
+            def create_srclang_decl(self, struct: DefinedStruct) -> str:
+                fullname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
 
                 decl = [ "_" ] # placeholder, filled after we determine base classes
 
@@ -503,7 +503,8 @@ if api is None:
                         continue
 
                     if offset == last_field_offset:
-                        print(f"Skipping {struct.type}.{field.name} as it is at a duplicate offset")
+                        # TODO(caitlyn): Ghidra creates unions for this, but it's currently silently skipped for IDA
+                        print(f"Skipping {struct.type}.{field.name} as it is at a duplicate offset.")
                         continue
 
                     last_field_offset = offset
@@ -513,7 +514,7 @@ if api is None:
 
                         # TODO(caitlyn): move this into a separate function
                         if self.full_padding:
-                            (fill_type, fill_size) = self.get_c_fill_type(offset - cur_size)
+                            (fill_type, fill_size) = self.get_srclang_fill_type(offset - cur_size)
                             decl.append(f"{fill_type} field_{cur_size:X};")
                             cur_size += fill_size
                         else:
@@ -541,10 +542,10 @@ if api is None:
 
                     field_type = self.clean_name(field.type)
                     if field_type == "__fastcall":
-                        field_decl = self.get_c_type_name(self.clean_name(field.return_type))
+                        field_decl = self.get_srclang_type_name(self.clean_name(field.return_type))
                         field_decl = field_decl + "(__fastcall* " + field_name + ")("
                         for param in field.parameters:
-                            field_decl = field_decl + self.get_c_type_name(self.clean_name(param.type)) + ""
+                            field_decl = field_decl + self.get_srclang_type_name(self.clean_name(param.type)) + ""
                             field_decl = field_decl + param.name + ","
                         field_decl = field_decl[:-2] + ")"
 
@@ -557,9 +558,9 @@ if api is None:
                     
                     # struct type
                     if self.get_idc_type_from_ida_type(
-                        self.get_c_type_name(self.clean_struct_name(field_type))
+                        self.get_srclang_type_name(self.clean_struct_name(field_type))
                     ) == self.get_struct_flag():
-                        field_type = self.get_c_type_name(self.clean_struct_name(field_type))
+                        field_type = self.get_srclang_type_name(self.clean_struct_name(field_type))
 
                         tinfo = self.get_tinfo_from_type(field_type)
                         field_size = tinfo.get_size()
@@ -576,7 +577,7 @@ if api is None:
                         field_size = self.get_size_from_ida_type(field_type)
 
                         if field_type.endswith("*"):
-                            field_type = self.get_c_type_name(field_type)
+                            field_type = self.get_srclang_type_name(field_type)
 
                     field_decl = f"{field_type} {field_name}"
                     if array_size > 0:
@@ -597,7 +598,7 @@ if api is None:
 
                     while cur_size < struct.size:
                         if self.full_padding:
-                            (fill_type, fill_size) = self.get_c_fill_type(struct.size - cur_size)
+                            (fill_type, fill_size) = self.get_srclang_fill_type(struct.size - cur_size)
                             decl.append(f"{fill_type} field_{cur_size:X};")
                             cur_size += fill_size
                         else:
@@ -646,10 +647,10 @@ if api is None:
                 # type: (DefinedStruct) -> None
                 idaapi.begin_type_updating(idaapi.UTP_STRUCT)
 
-                if self.c_importer:
+                if self.srclang_importer:
                     idaapi.begin_type_updating(idaapi.UTP_STRUCT)
 
-                    decl = self.create_c_decl(struct)
+                    decl = self.create_srclang_decl(struct)
                     num_errors = ida_srclang.parse_decls_for_srclang(
                         ida_srclang.SRCLANG_C,
                         None,
@@ -659,20 +660,20 @@ if api is None:
 
                     if num_errors != 0:
                         # show messagebox
-                        print(f"errors occurred while parsing\n---\n{decl}\n---")
-                        ida_kernwin.warning(f"Error parsing C decl for {struct.type}, please see errors in Output window.\n\n{decl}")
+                        print(f"above errors occurred while parsing the following:\n---\n{decl}\n---")
+                        ida_kernwin.warning(f"Error parsing srclang decl for {struct.type}, please see errors in Output window.")
                         exit()
 
                     if struct.virtual_functions:
                         # delete the _placeholder function from the VFT
-                        cname = self.get_c_type_name(self.clean_struct_name(struct.type))
+                        cname = self.get_srclang_type_name(self.clean_struct_name(struct.type))
                         sid = self.get_struct_id(f"{cname}_vtbl")
                         tinfo = self.get_struct(sid)
                         tinfo.del_udm(0)
 
                     idaapi.end_type_updating(idaapi.UTP_STRUCT)
 
-                    self.verify_struct_offsets(struct)
+                    self.validate_srclang_struct(struct)
                     return
 
                 fullname = self.clean_struct_name(struct.type)
@@ -837,11 +838,11 @@ if api is None:
                         )
 
             def finalise_struct(self, struct: DefinedStruct):
-                if not self.c_importer:
+                if not self.srclang_importer:
                     return
                 
                 fullname = self.clean_struct_name(struct.type)
-                cname = self.get_c_type_name(fullname)
+                cname = self.get_srclang_type_name(fullname)
 
                 sid = self.get_struct_id(cname)
                 if sid == idaapi.BADADDR:
@@ -969,33 +970,37 @@ if api is None:
                     )
                     == ida_kernwin.ASKBTN_YES
                 )
-            
-        full_padding = (
-            ida_kernwin.ask_buttons(
-                "Full Padding",
-                "Array Padding",
-                "",
-                ida_kernwin.ASKBTN_YES,
-                "HIDECANCEL\nWhat padding style to use?\n\nFull Padding: Adds padding based on allignment of 1,2,4,8\nArray Padding: Adds padding based on the size between fields with byte arrays\n\nFull Padding will take longer to add padding between fields but is recommended for quick struct modifications.",
-            )
-            == ida_kernwin.ASKBTN_YES
-        )
 
-        c_importer = False
-        if idaapi.IDA_SDK_VERSION >= 900 and full_padding:
-            c_importer = (
+        full_padding = False
+        srclang_importer = False
+        if idaapi.IDA_SDK_VERSION >= 900: # TODO(caitlyn): check for support on older versions
+            srclang_importer = (
                 ida_kernwin.ask_buttons(
-                    "C Importer",
-                    "Old Importer",
+                    "SrcLang Importer",
+                    "Legacy Importer",
                     "",
                     ida_kernwin.ASKBTN_YES,
-                    "HIDECANCEL\nFull Padding can take 8+ hours IDA 9.\nDo you want to use the experimental C importer for better performance?",
+                    "HIDECANCEL\nWhich importer should be used?\n\nSrcLang Importer: Experimental - faster importer with full padding, and improved support for inheritance and virtual function calls.\n\nLegacy Importer: The original, battle-tested importer. Full Padding on the Legacy Importer on IDA 9+ can take 8 hours or longer.",
                 )
                 == ida_kernwin.ASKBTN_YES
             )
 
-        api = IdaApi(full_padding, c_importer)
+            if srclang_importer:
+                full_padding = True
 
+        if not srclang_importer:
+            full_padding = (
+                ida_kernwin.ask_buttons(
+                    "Full Padding",
+                    "Array Padding",
+                    "",
+                    ida_kernwin.ASKBTN_YES,
+                    "HIDECANCEL\nWhat padding style to use?\n\nFull Padding: Adds padding based on allignment of 1,2,4,8\nArray Padding: Adds padding based on the size between fields with byte arrays\n\nFull Padding will take longer to add padding between fields but is recommended for quick struct modifications.",
+                )
+                == ida_kernwin.ASKBTN_YES
+            )
+
+        api = IdaApi(full_padding, srclang_importer)
 
 if api is None:
     try:
