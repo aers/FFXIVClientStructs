@@ -221,12 +221,27 @@ if api is None:
                 ida_name.set_name(ea, name)
                 ida_bytes.set_cmt(ea, cmt, 0)
 
-            def process_pattern(self, pattern: dict[str, tuple[str, tuple[str | None, int]]]):
+            def process_pattern(self, pattern: str):
                 (suffix, search) = exd_func_patterns[pattern]
                 if suffix is not None:
                     print(f"Finding exd funcs of {suffix}... please wait.")
                 (searchPattern, searchOffset) = search
                 self.do_pattern(pattern, suffix, searchPattern, searchOffset)
+
+            def get_all_eas(self, pattern: str):
+                ea = self.search_binary(0, pattern, ida_search.SEARCH_DOWN)
+                while ea != idc.BADADDR:
+                    yield ea
+                    ea = ea + 1
+                    ea = self.search_binary(ea, pattern, ida_search.SEARCH_DOWN)
+            
+            def comment_rows(self, pattern: dict[str, int], values: dict[int, str]):
+                for pattern_key in pattern:
+                    for ea in list(self.get_all_eas(pattern_key)):
+                        sheetIdx = self.get_dword(ea + pattern[pattern_key])
+                        sheetName = values[sheetIdx]
+                        ida_bytes.set_cmt(ea, "Sheet: {0} ({1})".format(sheetName, sheetIdx), 0)
+                pass
 
         api = IdaApi()
 
@@ -390,6 +405,9 @@ if api is None:
                 if name == "unsigned __int64" or name == "unsigned long long": name = "ulonglong"
                 path_parts = SymbolPathParser.parse(name)
                 return DataTypePath("/" + "/".join(path_parts[:-1]), path_parts[-1])
+            
+            def comment_rows(self, pattern: dict[str, int], values: dict[int, str]):
+                pass
 
         api = GhidraApi()
 
@@ -407,15 +425,31 @@ f.close()
 game_data = GameData(join(config["GamePath"], "game"))
 
 # nb: "pattern": ("func suffix", ("instance pointer sig" or None, offset from sig start or func start))
-exd_func_patterns = {
-    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": ("Row", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
-    "48 83 EC 28 85 C9 74 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 07 33 C0 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": ("Row", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
-    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA ? ? ? ? 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 38 C3 48 8B 00 48 83 C4 38 C3": ("RowAndSubRowId", ("C1 48 C7 44 24 ? ? ? ? ? BA", 11)),
-    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B6 C1 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": ("RowIndex", ("48 8B 05 ? ? ? ? BA", 8)),
-    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8D 81 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 05 48 83 C4 28 C3 48 8B 00 48 83 C4 28 C3": ("RowIndex", ("05 ? ? ? ? 44 8D 81 ? ? ? ? BA", 13)),
-    "48 83 EC 28 8D 41 ?? 3D ? ? ? ? 77 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 75 07 33 C0 48 83 C4 ? C3 48 8B 00 48 83 C4 ? C3": ("RowIndex", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
-    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8 ? ? ? ? 48 85 C0 74 14 48 8B 10 48 8B C8 FF 52 08 84 C0 75 07 B0 01 48 83 C4 28 C3 32 C0 48 83 C4 28 C3": ("SheetIndex", ("48 8B 05 ? ? ? ? BA", 8)),
+exd_func_patterns: dict[str, tuple[str, tuple[str | None, int]]] = {
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 28 85 C9 74 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B6 C1 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? BA", 8)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B7 C1 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? BA", 8)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F B7 81 ?? ?? ?? ?? 48 8B 88 ? ? ? ? E8": ("Row", ("48 8B 05 ? ? ? ? BA", 8)),
+    "40 53 48 83 EC 20 48 8B 05 ? ? ? ? 44 8B C1 8B DA BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("Row", ("44 8B C1 8B DA BA", 6)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8B C1 84 D2 BA ? ? ? ? 48 8B 88 ? ? ? ? 74 07 E8": ("Row", ("44 8B C1 84 D2 BA", 6)),
+    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA ? ? ? ? 48 C7 44 24 ? ? ? ? ? 48 8B 88 ? ? ? ? E8": ("RowAndSubRowId", ("C1 48 C7 44 24 ? ? ? ? ? BA", 11)),
+    "48 83 EC 38 48 8B 05 ? ? ? ? 44 8B C1 44 0F ? CA BA ? ? ? ? 48 C7 44 24 28 ? ? ? ? 48 C7 44 24 20 ? ? ? ? 48 8B 88 ? ? ? ? E8": ("RowAndSubRowId", ("44 8B C1 44 0F ? CA BA", 8)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? 44 8D 81 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("RowIndex", ("05 ? ? ? ? 44 8D 81 ? ? ? ? BA", 13)),
+    "48 83 EC 28 8D 41 ?? 3D ? ? ? ? 77 20 48 8B 05 ? ? ? ? 44 8B C1 BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("RowIndex", ("48 8B 05 ? ? ? ? 44 8B C1 BA", 11)),
+    "48 83 EC 28 48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E8": ("SheetIndex", ("48 8B 05 ? ? ? ? BA", 8)),
     "48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 ? ? ? ? E9 ? ? ? ?": ("RowCount", (None, 8))
+}
+
+exd_comment_patterns: dict[str, int] = {
+    "48 8B 05 ? ? ? ? BA ? ? ? ? 48 8B 88 40 2B 00 00": 8,
+    "48 8B 05 ? ? ? ? BA ? ? ? ? 44 0F": 8,
+    "48 8B 05 ? ? ? ? 44 8B C1 8B DA BA": 13,
+    "48 8B 05 ? ? ? ? 44 8B C1 BA": 11,
+    "48 8B 05 ? ? ? ? 44 8B CA 44 8B C1 48 C7 44 24 ? ? ? ? ? BA": 23,
+    "48 8B 05 ? ? ? ? 44 8B C1 84 D2 BA": 13,
+    "48 8B 05 ? ? ? ? 44 8B C1 44 0F ? CA BA": 15,
+    "48 8B 05 ? ? ? ? 44 8D 81 ? ? ? ? BA": 15
 }
 
 exd_map = ExcelListFile(game_data.get_file(ParsedFileName("exd/root.exl"))).dict
@@ -443,3 +477,5 @@ for key in exd_headers:
 # if a new pattern is found, add it to the exd_func_patterns dict
 for func_pattern in exd_func_patterns:
     api.process_pattern(func_pattern)
+
+api.comment_rows(exd_comment_patterns, exd_map)
