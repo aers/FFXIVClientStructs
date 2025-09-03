@@ -39,8 +39,10 @@ public unsafe partial struct AgentWKSMission {
         [FieldOffset(0x14)] private uint ConfirmMissionId;
         [FieldOffset(0x18)] private uint ConfirmAddonId;
         [FieldOffset(0x1C)] private uint MapMissionId;
+        [FieldOffset(0x20)] private int MapPlayerPosX;
+        [FieldOffset(0x24)] private int MapPlayerPosY;
         [FieldOffset(0x28)] public Utf8String SelectedMissionTitle;
-
+        [FieldOffset(0x90)] public Utf8String ItemLevelWarningText;
         [FieldOffset(0xF8)] public StdVector<MissionEntry> MissionList;
 
         [FieldOffset(0x118)] public byte UpdateFlags;
