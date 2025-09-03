@@ -32,8 +32,13 @@ public unsafe partial struct LayoutWorld {
     [FieldOffset(0x228)] public StdMap<ulong, Pointer<byte>>* RsfMap; // Key is v0 index hash, value is always 64 bytes in size
 
     /// <remarks> Tries to get it from <see cref="ActiveLayout"/> first, then from <see cref="GlobalLayout"/>. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 89 47 ?? 0F 57 C0")] // TODO: replace with sig: E8 ?? ?? ?? ?? 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B 10 48 8B C8 FF 92 ?? ?? ?? ?? 8B 4E 04
+    [Obsolete("Use GetLayoutInstanceStatic", true)] // TODO: 7.4 remove this obsolete
+    public static partial ILayoutInstance* GetLayoutInstance(InstanceType instanceType, uint instanceId, uint subId = 0); // TODO: Make non static
+
+    /// <inheritdoc cref="GetLayoutInstance" />
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 47 ?? 0F 57 C0")]
-    public static partial ILayoutInstance* GetLayoutInstance(InstanceType instanceType, uint instanceId, uint subId = 0);
+    public static partial ILayoutInstance* GetLayoutInstanceStatic(InstanceType instanceType, uint instanceId, uint subId = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 ?? 8B 90")]
     public static partial ILayoutInstance* GetColliderLayoutInstance(InstanceType instanceType, Collider* collider);
