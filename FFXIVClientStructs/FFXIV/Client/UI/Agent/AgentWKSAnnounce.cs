@@ -43,10 +43,11 @@ public unsafe partial struct AgentWKSAnnounce {
         /// </remarks>
         [FieldOffset(0x90)] public uint ClassJobTypeFlags;
 
-        // goes between 0 and 25700 in red alert.
-        // default 125 when state is 8?
-        // Progress related?
-        [FieldOffset(0x94)] private uint Unk94;
+        /// <summary>
+        /// State == 8 => StateProgress / 125 = StateBars
+        /// State == 2 => StateProgress / 25700 = Emergency Completion Total State
+        /// </summary>
+        [FieldOffset(0x94)] public uint StateProgress;
         [FieldOffset(0x98)] private uint Unk98;
         [FieldOffset(0x9C)] public uint DevGrade;
 
