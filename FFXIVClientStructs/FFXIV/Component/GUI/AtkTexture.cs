@@ -22,7 +22,7 @@ public unsafe partial struct AtkTexture : ICreatable {
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 2F 48 8B 83"), GenerateStringOverloads]
     public partial int LoadTexture(CStringPointer path, int scale = 1);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 66 03 46 08")]
     public partial uint GetTextureWidth();
 
