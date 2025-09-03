@@ -403,6 +403,49 @@ if api is None:
                 if struct.virtual_functions:
                     self.create_struct_type(fullname + "_vtbl")
 
+            def verify_struct_offsets(self, struct: DefinedStruct):
+                cname = self.get_c_type_name(self.clean_struct_name(struct.type))
+                sid = self.get_struct_id(cname)
+                if sid == idaapi.BADADDR:
+                    ida_kernwin.warning(f"Struct {cname} ({struct.type}) not found during validation")
+                    exit()
+                
+                ti = self.get_struct(sid)
+
+                seen_fields = {}
+                
+                last_offset = -1
+                for field in struct.fields:
+                    if field.offset == last_offset:
+                        continue
+
+                    last_offset = field.offset
+
+                    if field.offset is None or field.base:
+                        continue
+
+                    if field.offset == 0 and field.name == "_vtable":
+                        continue
+
+                    # ugly hack to workaround duplicate field names in structs
+                    field_name = field.name
+                    if field_name in seen_fields:
+                        next = seen_fields[field_name] + 1
+                        seen_fields["field_name"] = next
+
+                        field_name += f"_{next}"
+                    else:
+                        seen_fields[field_name] = 1
+
+                    (idx, udm) = ti.get_udm(field_name)
+                    if idx == -1:
+                        ida_kernwin.warning(f"Field {field_name} not found in struct {cname} ({struct.type}) during validation")
+                        exit()
+
+                    if (udm.offset / 8) != field.offset:
+                        ida_kernwin.warning(f"Field \"{field_name}\" offset mismatch in struct {cname} ({struct.type}) during validation.\nExpected {field.offset}, got {(udm.offset/8)}")
+                        exit()
+
             def get_c_fill_type(self, available_bytes: int) -> tuple[str, int]:
                 if available_bytes >= 9:
                     return ("__int64", 8)
@@ -426,29 +469,45 @@ if api is None:
 
                 inherits_from = []
 
-                if struct.virtual_functions != None:
+                has_explicit_vtable = (len(struct.fields) != 0 and struct.fields[0].name == "_vtable")
+                
+                if struct.virtual_functions != None or has_explicit_vtable:
                     # the placeholder will force IDA to mark the _vtbl struct as a VFT
                     # and attach it to this struct
-                    if struct.virtual_functions:
-                        decl.append("virtual void _placeholder();")
-                    else:
-                        decl.append("void** __vftable;")
+                    decl.append("virtual void _placeholder();")
 
                     # TODO(caitlyn): we are assuming that parent classes are always virtual
                     # doing this properly will require checking the parent
                     # eventually we'll probably want to build an inheritance hierarchy
                     # so that we can propagate vfunc names and determine the need to
                     # offset data members here
+                    #
+                    # some types also have a base class which is not correctly flagged as such
+                    # so we're not checking the baseclass flag here
+                    #
+                    # we may want to check up-front if this struct has a struct type at offset 0 and a VFT
+                    # and automatically mark that as the baseclass
                     needs_alloc = \
                         len(struct.fields) == 0 or \
-                        not struct.fields[0].base or \
                         struct.fields[0].offset != 0
                     
-                    if needs_alloc:
+                    if needs_alloc or has_explicit_vtable:
                         cur_size += 8
 
+                last_field_offset = -1
                 for field in struct.fields:
                     offset = field.offset
+
+                    # skip explicit vtable fields
+                    if offset == 0 and field.name == "_vtable":
+                        continue
+
+                    if offset == last_field_offset:
+                        print(f"Skipping {struct.type}.{field.name} as it is at a duplicate offset")
+                        continue
+
+                    last_field_offset = offset
+
                     while offset > cur_size:
                         contiguous_fields = False
 
@@ -612,6 +671,8 @@ if api is None:
                         tinfo.del_udm(0)
 
                     idaapi.end_type_updating(idaapi.UTP_STRUCT)
+
+                    self.verify_struct_offsets(struct)
                     return
 
                 fullname = self.clean_struct_name(struct.type)
