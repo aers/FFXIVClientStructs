@@ -103,7 +103,8 @@ public sealed partial class InteropGenerator {
             fixedSizeArrays,
             inheritanceInfoBuilder.ToImmutable(),
             structSize,
-            extraInheritedStructInfo);
+            extraInheritedStructInfo,
+            structSymbol.IsGenericType);
     }
 
     private static void ParseMethods(INamedTypeSymbol structSymbol, CancellationToken token, bool isInherited,
