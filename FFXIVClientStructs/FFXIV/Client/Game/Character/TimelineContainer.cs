@@ -39,7 +39,7 @@ public unsafe partial struct TimelineContainer {
     [FieldOffset(0x330 + 0x17)] public byte BannerTimelineAcceptClassJobCategory;
     [FieldOffset(0x330 + 0x18), CExporterExcelEnd] public byte BannerTimelineCategory;
 
-    [FieldOffset(0x348)] public byte Flags1;
+    [FieldOffset(0x348), Obsolete("Bad field offset use BannerTimelineCategory if you wanted the offset of Flags1")] public byte Flags1;
     [FieldOffset(0x349)] public byte Flags2; // bit 2 makes it load the requested banner animation
 
     // 0x40 = WeaponDrawn
