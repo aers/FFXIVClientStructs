@@ -4,5 +4,5 @@ namespace FFXIVClientStructs.Havok.Common.Base.Object;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct hkBaseObject {
     [VirtualFunction(0)]
-    public partial hkBaseObject* Dtor(byte freeFlags);
+    public partial hkBaseObject* VirtDtor(byte freeFlags);
 }

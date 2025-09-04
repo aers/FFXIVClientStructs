@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using FFXIVClientStructs.Attributes;
 using InteropGenerator.Runtime;
 using InteropGenerator.Runtime.Attributes;
 // ReSharper disable LoopCanBeConvertedToQuery
@@ -74,7 +75,7 @@ public static partial class TypeExtensions {
 
     public static bool IsDirectBase(this FieldInfo field) {
         var bases = field.DeclaringType?.GetInheritsTypes() ?? [];
-        return bases.Any(b => field.FieldType == b && field.Name == (b.Name == field.DeclaringType?.Name ? b.Name + "Base" : b.Name));
+        return bases.Any(b => field.FieldType == b && field.Name == (b.Name == field.DeclaringType?.Name ? b.Name + "Base" : b.Name)) || field.GetCustomAttribute<CExporterBaseTypeAttribute>() != null;
     }
 
     public static string FixTypeName(this Type type, bool shouldLower = true) {

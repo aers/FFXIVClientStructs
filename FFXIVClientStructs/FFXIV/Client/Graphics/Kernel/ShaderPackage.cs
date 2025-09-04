@@ -30,7 +30,7 @@ public unsafe struct ShaderPackage {
         [FieldOffset(0xA)] public ushort Slot;
     }
 
-    [FieldOffset(0x00)] public ReferencedClassBase ReferencedClassBase;
+    [FieldOffset(0x00), CExporterBaseType] public ReferencedClassBase ReferencedClassBase; // TODO: Actual add as inheritance
     [FieldOffset(0x10)] public CVector<Pointer<VertexShader>> VertexShaders; // std::vector<VertexShader*>
     [FieldOffset(0x30)] public CVector<Pointer<PixelShader>> PixelShaders; // std::vector<PixelShader*>
     [FieldOffset(0x50)] public CVector<Pointer<HullShader>> HullShaders; // std::vector<HullShader*>

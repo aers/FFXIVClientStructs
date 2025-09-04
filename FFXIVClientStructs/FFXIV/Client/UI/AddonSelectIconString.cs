@@ -13,6 +13,6 @@ public partial struct AddonSelectIconString {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
     public struct PopupMenuDerive {
-        [FieldOffset(0x0)] public PopupMenu PopupMenu;
+        [FieldOffset(0x0), CExporterBaseType] public PopupMenu PopupMenu; // TODO: actual add as inheritance
     }
 }

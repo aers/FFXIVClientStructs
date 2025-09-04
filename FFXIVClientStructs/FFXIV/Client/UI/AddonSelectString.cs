@@ -15,6 +15,6 @@ public unsafe partial struct AddonSelectString {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
     public struct PopupMenuDerive {
-        [FieldOffset(0x0)] public PopupMenu PopupMenu;
+        [FieldOffset(0x0), CExporterBaseType] public PopupMenu PopupMenu; // TODO: actual add as inheritance
     }
 }

@@ -16,7 +16,7 @@ public unsafe partial struct LuaScriptLoader;
 //   Client::System::Resource::ResourceEventListener
 [StructLayout(LayoutKind.Sequential, Size = 0x28)]
 public unsafe struct LuaScriptLoader<T> where T : unmanaged {
-    public LuaScriptLoader Loader;
+    [CExporterBaseType] public LuaScriptLoader Loader;
     public LuaState* LuaState;
     public T* Parent;
     public StdMap<uint, Pointer<ResourceHandle>> Handles;
