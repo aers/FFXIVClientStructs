@@ -535,6 +535,7 @@ public enum PlayerAttribute : uint {
     AttackPower = 20,
     Defense = 21,
     DirectHitRate = 22,
+    Evasion = 23,
     MagicDefense = 24,
     CriticalHitPower = 25,
     CriticalHitResilience = 26,
