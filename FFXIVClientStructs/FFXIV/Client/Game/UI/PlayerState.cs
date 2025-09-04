@@ -162,6 +162,12 @@ public unsafe partial struct PlayerState {
     /// <remarks> Use <see cref="IsOrchestrionRollUnlocked(uint)"/> </remarks>
     [FieldOffset(0x5F0), FixedSizeArray] internal FixedSizeArray99<byte> _unlockedOrchestrionRollBitmask;
 
+    [MemberFunction("83 FA ?? 72 ?? 33 C0 C3 8B C2 8B 84 81 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 83 FA")]
+    public partial int GetAttributeByIndex(PlayerAttribute attribute);
+
+    public int GetAttributeByIndex(uint attribute) =>
+        GetAttributeByIndex((PlayerAttribute)attribute)
+
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
@@ -505,4 +511,32 @@ public enum PlayerStateFlag : uint {
     IsTradeMentorStatusActive = 10,
     IsPvPMentorStatusActive = 11,
     Unknown14 = 14,
+}
+
+public enum PlayerAttribute : uint {
+    Strength = 1,
+    Dexterity = 2,
+    Vitality = 3,
+    Intelligence = 4,
+    Mind = 5,
+    Piety = 6
+    Health = 7,
+    Mana = 8,
+    GatheringPoint = 10, // will be 10000 if current job is not a gathering job
+    CraftingPoint = 11,
+    Tenacity = 19,
+    AttackPower = 20，
+    Defense = 21,
+    DirectHitRate = 22
+    MagicDefense = 24,
+    CriticalHit = 27,
+    AttackMagicPotency = 33,
+    HealingMagicPotency = 34,
+    Determination = 44,
+    SkillSpeed = 45,
+    SpellSpeed = 46,
+    Craftsmanship = 70,
+    Control = 71,
+    Gathering = 72,
+    Perception = 73
 }
