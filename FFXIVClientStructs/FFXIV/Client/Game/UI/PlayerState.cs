@@ -520,7 +520,8 @@ public enum PlayerAttribute : uint {
     Mind = 5,
     Piety = 6,
     Health = 7,
-    Mana = 8,
+    MagicPoints = 8,
+    TacticalPoints = 9, // Yes TP is still in the game
     GatheringPoint = 10, // will be 10000 if current job is not a gathering job
     CraftingPoint = 11,
     Tenacity = 19,
