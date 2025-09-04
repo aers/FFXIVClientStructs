@@ -162,12 +162,8 @@ public unsafe partial struct PlayerState {
     /// <remarks> Use <see cref="IsOrchestrionRollUnlocked(uint)"/> </remarks>
     [FieldOffset(0x5F0), FixedSizeArray] internal FixedSizeArray99<byte> _unlockedOrchestrionRollBitmask;
 
-    [MemberFunction("83 FA ?? 72 ?? 33 C0 C3 8B C2 8B 84 81 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC 83 FA")]
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B C8 44 0F B7 C3")]
     public partial int GetAttributeByIndex(PlayerAttribute attribute);
-
-    public int GetAttributeByIndex(uint attribute) =>
-        GetAttributeByIndex((PlayerAttribute)attribute);
-
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
