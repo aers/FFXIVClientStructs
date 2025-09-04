@@ -509,6 +509,9 @@ public enum PlayerStateFlag : uint {
     Unknown14 = 14,
 }
 
+/// <remarks>
+/// Mirrors BaseParam sheet values for ease of lookup
+/// </remarks>
 public enum PlayerAttribute : uint {
     Strength = 1,
     Dexterity = 2,
