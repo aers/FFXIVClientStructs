@@ -25,7 +25,7 @@ public unsafe partial struct AgentWKSAnnounce {
 
         /// <summary>
         /// ClassJobTypeFlags >> 16 is the class job type flags for mission area 0
-        /// ClassJobTypeFlags & 0xFFFF is the class job type flags for mission area 1
+        /// ClassJobTypeFlags &amp; 0xFFFF is the class job type flags for mission area 1
         /// Remark maps the bitfields to class jobs
         /// </summary>
         /// <remarks>
