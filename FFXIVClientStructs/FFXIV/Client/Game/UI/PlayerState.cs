@@ -166,7 +166,7 @@ public unsafe partial struct PlayerState {
     public partial int GetAttributeByIndex(PlayerAttribute attribute);
 
     public int GetAttributeByIndex(uint attribute) =>
-        GetAttributeByIndex((PlayerAttribute)attribute)
+        GetAttributeByIndex((PlayerAttribute)attribute);
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
