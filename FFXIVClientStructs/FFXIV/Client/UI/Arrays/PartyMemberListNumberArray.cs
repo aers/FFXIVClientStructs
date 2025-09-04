@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 633 * 4)]
 public unsafe partial struct PartyMemberListNumberArray {
@@ -12,7 +12,7 @@ public unsafe partial struct PartyMemberListNumberArray {
         return numberArray == null ? null : (PartyMemberListNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray633<int> _data;
+    [FieldOffset(0 * 4), FixedSizeArray, CExporterIgnore] internal FixedSizeArray633<int> _data;
 
     [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray48<SocialListMemberNumberArray> _partyMembers;
 }

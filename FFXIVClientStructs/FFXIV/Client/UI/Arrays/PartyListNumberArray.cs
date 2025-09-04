@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 745 * 4)]
 public unsafe partial struct PartyListNumberArray {
@@ -11,7 +11,7 @@ public unsafe partial struct PartyListNumberArray {
         return numberArray == null ? null : (PartyListNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray745<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray745<int> _data;
 
     [FieldOffset(1 * 4)] public bool IsCrossRealmParty;
     [FieldOffset(2 * 4)] public int PartyLeaderIndex;
@@ -25,11 +25,11 @@ public unsafe partial struct PartyListNumberArray {
     [FieldOffset(352 * 4), FixedSizeArray] internal FixedSizeArray7<PartyListMemberNumberArray> _trustMembers;
     [FieldOffset(653 * 4), FixedSizeArray] internal FixedSizeArray2<PartyListMemberNumberArray> _pets;
 
-    [CExportIgnore]
+    [CExporterIgnore]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 43 * 4)]
     public partial struct PartyListMemberNumberArray {
-        [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray43<int> _data;
+        [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray43<int> _data;
 
         [FieldOffset(3 * 4)] public int Level;
         [FieldOffset(4 * 4)] public int ClassIconId;

@@ -21,7 +21,7 @@ public partial struct BattleLeveDirector {
     [FieldOffset(0x6D0)] public ushort RecommendedLevel;
 
     [GenerateInterop]
-    [CExportIgnore]
+    [CExporterIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public partial struct LeveDataStruct {
         [FieldOffset(0x00)] public uint BNpcName;

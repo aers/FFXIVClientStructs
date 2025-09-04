@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
 public unsafe partial struct AreaMapNumberArray {
@@ -11,7 +11,7 @@ public unsafe partial struct AreaMapNumberArray {
         return numberArray == null ? null : (AreaMapNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray6<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray6<int> _data;
 
     [FieldOffset(0x0)] public int X;
     [FieldOffset(0x4)] public int Y;

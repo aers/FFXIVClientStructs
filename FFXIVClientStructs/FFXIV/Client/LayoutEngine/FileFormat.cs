@@ -16,7 +16,7 @@ public unsafe struct FileHeader {
     [FieldOffset(4)] public uint TotalSize;
     [FieldOffset(8)] public uint NumSections;
 
-    [CExportIgnore]
+    [CExporterIgnore]
     public unsafe ref struct Enumerator {
         private FileHeader* _header;
         private FileSectionHeader* _next;

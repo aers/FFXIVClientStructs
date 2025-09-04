@@ -14,7 +14,7 @@ public unsafe partial struct HousingObject {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public struct HousingObjectId {
-    [FieldOffset(0x00), CExportIgnore] public uint Id;
+    [FieldOffset(0x00), CExporterIgnore] public uint Id;
     [FieldOffset(0x00)] public ushort EntryId;
     [FieldOffset(0x02)] public HousingObjectType Type;
 }

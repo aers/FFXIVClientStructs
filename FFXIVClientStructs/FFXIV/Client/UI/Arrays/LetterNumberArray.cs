@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 146 * 4)]
 public unsafe partial struct LetterNumberArray {
@@ -11,7 +11,7 @@ public unsafe partial struct LetterNumberArray {
         return numberArray == null ? null : (LetterNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray146<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray146<int> _data;
 
     [FieldOffset(0), FixedSizeArray] internal FixedSizeArray130<LetterLetterNumberArray> _allLetters;
 
@@ -32,11 +32,11 @@ public unsafe partial struct LetterNumberArray {
     [FieldOffset(140 * 4)] public int AttatchedGilAmount;
     [FieldOffset(141), FixedSizeArray] internal FixedSizeArray5<int> _attatchedItemIds;
 
-    [CExportIgnore]
+    [CExporterIgnore]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
     public unsafe partial struct LetterLetterNumberArray {
-        [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<int> _data;
+        [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray1<int> _data;
 
         [FieldOffset(3)] public LetterLetterMessageStatus MessageStatus;
         [FieldOffset(2)] public byte UnkFlag1;

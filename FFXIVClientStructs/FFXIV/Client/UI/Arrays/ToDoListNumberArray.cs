@@ -2,14 +2,14 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore, GenerateInterop, StructLayout(LayoutKind.Explicit, Size = 198 * 4)]
+[CExporterIgnore, GenerateInterop, StructLayout(LayoutKind.Explicit, Size = 198 * 4)]
 public unsafe partial struct ToDoListNumberArray {
     public static ToDoListNumberArray* Instance() {
         var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ToDoList);
         return numberArray == null ? null : (ToDoListNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray198<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray198<int> _data;
 
     [FieldOffset(0)] public int HideDutyList;
 

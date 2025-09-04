@@ -56,10 +56,10 @@ public unsafe partial struct AgentMJIPouch {
     public partial struct PouchInventoryData {
         [FieldOffset(0xA0)] public StdVector<PouchInventoryItem> Inventory;
         [FieldOffset(0xB8), FixedSizeArray] internal FixedSizeArray4<StdVector<Pointer<PouchInventoryItem>>> _inventories;
-        [FieldOffset(0xB8), CExportIgnore] public StdVector<Pointer<PouchInventoryItem>> Materials;
-        [FieldOffset(0xD0), CExportIgnore] public StdVector<Pointer<PouchInventoryItem>> Produce;
-        [FieldOffset(0xE8), CExportIgnore] public StdVector<Pointer<PouchInventoryItem>> StockStores;
-        [FieldOffset(0x100), CExportIgnore] public StdVector<Pointer<PouchInventoryItem>> Tools;
+        [FieldOffset(0xB8), CExporterIgnore] public StdVector<Pointer<PouchInventoryItem>> Materials;
+        [FieldOffset(0xD0), CExporterIgnore] public StdVector<Pointer<PouchInventoryItem>> Produce;
+        [FieldOffset(0xE8), CExporterIgnore] public StdVector<Pointer<PouchInventoryItem>> StockStores;
+        [FieldOffset(0x100), CExporterIgnore] public StdVector<Pointer<PouchInventoryItem>> Tools;
         [FieldOffset(0x118)] public StdVector<Pointer<PouchInventoryItem>> ItemPouchItems;
         [FieldOffset(0x130)] public StdVector<Utf8String> InventoryNames;
         [FieldOffset(0x148)] public uint MJIItemPouchItemCount;

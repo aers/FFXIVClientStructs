@@ -7,7 +7,7 @@ public unsafe partial struct Conditions {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 66 2B D8", 3)]
     public static partial Conditions* Instance();
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray104<bool> _flags;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray104<bool> _flags;
     [FieldOffset(0)] public bool None;
     [FieldOffset(1)] public bool Normal;
     [FieldOffset(2)] public bool Dead;

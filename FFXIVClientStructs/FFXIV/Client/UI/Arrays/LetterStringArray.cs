@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 393 * 8)]
 public unsafe partial struct LetterStringArray {
@@ -11,7 +11,7 @@ public unsafe partial struct LetterStringArray {
         return stringArray == null ? null : (LetterStringArray*)stringArray->StringArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray393<CStringPointer> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray393<CStringPointer> _data;
 
     /// <summary>
     /// Ordered based on date received. It doesn't care about which tab.

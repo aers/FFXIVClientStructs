@@ -1,9 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays.Common;
 
-[CExportIgnore]
+[CExporterIgnore]
 [StructLayout(LayoutKind.Explicit, Size = 12 * 4)]
 public partial struct SocialListMemberNumberArray {
-    [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray12<int> _data;
+    [FieldOffset(0 * 4), FixedSizeArray, CExporterIgnore] internal FixedSizeArray12<int> _data;
 
     [FieldOffset(0 * 4)] public int StatusIconId;
     [FieldOffset(1 * 4)] public int Level;

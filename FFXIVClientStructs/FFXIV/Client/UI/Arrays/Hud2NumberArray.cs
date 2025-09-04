@@ -4,7 +4,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 192 * 4)]
 public unsafe partial struct Hud2NumberArray {
@@ -13,7 +13,7 @@ public unsafe partial struct Hud2NumberArray {
         return numberArray == null ? null : (Hud2NumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray192<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray192<int> _data;
 
     [FieldOffset(0 * 4)] public bool TargetInfoUICombined;
     /// <summary>
@@ -58,10 +58,10 @@ public unsafe partial struct Hud2NumberArray {
     [FieldOffset(92 * 4), FixedSizeArray] internal FixedSizeArray5<uint> _focusTargetStatusIconIds;
     [FieldOffset(97 * 4), FixedSizeArray] internal FixedSizeArray5<bool> _focusTargetStatusDispellable;
 
-    [CExportIgnore]
+    [CExporterIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
     public partial struct Hud2ColorNumberArray {
-        [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1<int> _data;
+        [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray1<int> _data;
 
         [FieldOffset(3)] public byte R;
         [FieldOffset(2)] public byte G;

@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 163 * 4)]
 public unsafe partial struct HudNumberArray {
@@ -11,7 +11,7 @@ public unsafe partial struct HudNumberArray {
         return numberArray == null ? null : (HudNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray163<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray163<int> _data;
 
     [FieldOffset(0 * 4)] public int CurrentHealth;
     [FieldOffset(1 * 4)] public int MaxHealth;

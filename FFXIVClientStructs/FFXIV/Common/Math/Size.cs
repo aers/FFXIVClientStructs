@@ -2,7 +2,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Math;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct Size : IEquatable<Size>, IComparable<Size> {
-    [FieldOffset(0x0), CExportIgnore] private ulong Value;
+    [FieldOffset(0x0), CExporterIgnore] private ulong Value;
     [FieldOffset(0x0)] public int Width;
     [FieldOffset(0x4)] public int Height;
 

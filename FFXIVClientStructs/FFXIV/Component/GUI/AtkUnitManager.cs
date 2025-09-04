@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 8B D9 ?? ?? ?? 48 81 C1 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 15", 3, 43)]
 [StructLayout(LayoutKind.Explicit, Size = 0x9C90)]
 public unsafe partial struct AtkUnitManager {
-    [FieldOffset(0x30), FixedSizeArray, CExportIgnore] internal FixedSizeArray13<AtkUnitList> _depthLayers;
+    [FieldOffset(0x30), FixedSizeArray, CExporterIgnore] internal FixedSizeArray13<AtkUnitList> _depthLayers;
     [FieldOffset(0x30)] public AtkUnitList DepthLayerOneList;
     [FieldOffset(0x840)] public AtkUnitList DepthLayerTwoList;
     [FieldOffset(0x1050)] public AtkUnitList DepthLayerThreeList;

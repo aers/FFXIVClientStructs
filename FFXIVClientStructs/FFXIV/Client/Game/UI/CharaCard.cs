@@ -57,7 +57,7 @@ public partial struct CharaCardData {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x52)]
     public partial struct Data8Struct {
-        [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray82<byte> _data;
+        [FieldOffset(0x00), CExporterIgnore, FixedSizeArray] internal FixedSizeArray82<byte> _data;
 
         [FieldOffset(0x00)] public byte Version;
         [FieldOffset(0x01)] public byte Expression;
@@ -90,7 +90,7 @@ public partial struct CharaCardData {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x36)]
     public partial struct Data16Struct {
-        [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray27<ushort> _data;
+        [FieldOffset(0x00), CExporterIgnore, FixedSizeArray] internal FixedSizeArray27<ushort> _data;
 
         [FieldOffset(0x00)] public ushort BannerTimeline;
         [FieldOffset(0x02)] public ushort AnimationProgress;
@@ -119,7 +119,7 @@ public partial struct CharaCardData {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x34)]
     public partial struct Data32Struct {
-        [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray13<uint> _data;
+        [FieldOffset(0x00), CExporterIgnore, FixedSizeArray] internal FixedSizeArray13<uint> _data;
 
         [FieldOffset(0x00)] public uint Timestamp; // what for?
         [FieldOffset(0x04), FixedSizeArray] internal FixedSizeArray12<uint> _itemIds;

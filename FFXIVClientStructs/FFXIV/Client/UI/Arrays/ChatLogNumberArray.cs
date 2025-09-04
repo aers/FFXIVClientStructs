@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 34 * 4)]
 public unsafe partial struct ChatLogNumberArray {
@@ -11,17 +11,17 @@ public unsafe partial struct ChatLogNumberArray {
         return numberArray == null ? null : (ChatLogNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray34<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray34<int> _data;
 
     [FieldOffset(5 * 4)] public ChatLogChatTabNumberArray Tab1;
     [FieldOffset(12 * 4)] public ChatLogChatTabNumberArray Tab2;
     [FieldOffset(19 * 4)] public ChatLogChatTabNumberArray Tab3;
     [FieldOffset(26 * 4)] public ChatLogChatTabNumberArray Tab4;
 
-    [CExportIgnore]
+    [CExporterIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 7 * 4)]
     public partial struct ChatLogChatTabNumberArray {
-        [FieldOffset(0 * 4), FixedSizeArray, CExportIgnore] internal FixedSizeArray7<int> _data;
+        [FieldOffset(0 * 4), FixedSizeArray, CExporterIgnore] internal FixedSizeArray7<int> _data;
 
         [FieldOffset(0 * 4)] public int UnkLastLineVisibleHelper;
         [FieldOffset(1 * 4)] public int LineCountVisible;

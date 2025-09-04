@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Common.Math;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40)]
 public unsafe partial struct Matrix4x4 : IEquatable<Matrix4x4> {
-    [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray16<float> _matrix;
+    [FieldOffset(0x00), CExporterIgnore, FixedSizeArray] internal FixedSizeArray16<float> _matrix;
 
     [FieldOffset(0x00)] public float M11;
     [FieldOffset(0x04)] public float M12;

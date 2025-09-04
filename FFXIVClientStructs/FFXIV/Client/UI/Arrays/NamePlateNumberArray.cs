@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 1056 * 4)]
 public unsafe partial struct NamePlateNumberArray {
@@ -11,7 +11,7 @@ public unsafe partial struct NamePlateNumberArray {
         return numberArray == null ? null : (NamePlateNumberArray*)numberArray->IntArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray1056<int> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray1056<int> _data;
 
     [FieldOffset(0x0)] public int ActiveNamePlateCount;
     [FieldOffset(0x4)] public bool ForceNamePlateRebake;
@@ -21,7 +21,7 @@ public unsafe partial struct NamePlateNumberArray {
     // [FieldOffset(0x14)] public int UnkInt;
     [FieldOffset(0x18)][FixedSizeArray] internal FixedSizeArray50<NamePlateObjectIntArrayData> _objectData;
 
-    [CExportIgnore]
+    [CExporterIgnore]
     [StructLayout(LayoutKind.Explicit, Size = 21 * 4)]
     public struct NamePlateObjectIntArrayData {
         [FieldOffset(0x0)] public UIObjectKind NamePlateKind;

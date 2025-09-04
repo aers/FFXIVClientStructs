@@ -4,4 +4,4 @@ namespace FFXIVClientStructs.Attributes;
 /// Forces the exporter to ignore a field or struct.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Struct | AttributeTargets.Property)]
-internal class CExportIgnoreAttribute : Attribute;
+internal class CExporterIgnoreAttribute : Attribute;

@@ -72,7 +72,7 @@ public struct EventHandlerObjective {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]
 public struct EventId : IEquatable<EventId>, IComparable<EventId> {
-    [FieldOffset(0x00), CExportIgnore] public uint Id;
+    [FieldOffset(0x00), CExporterIgnore] public uint Id;
     [FieldOffset(0x00)] public ushort EntryId;
     [FieldOffset(0x02)] public EventHandlerContent ContentId;
     public static implicit operator uint(EventId id) => id.Id;

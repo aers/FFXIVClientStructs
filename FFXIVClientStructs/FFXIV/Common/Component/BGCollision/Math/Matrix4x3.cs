@@ -5,12 +5,12 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision.Math;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct Matrix4x3 {
-    [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray12<float> _matrix;
+    [FieldOffset(0x00), CExporterIgnore, FixedSizeArray] internal FixedSizeArray12<float> _matrix;
 
-    [FieldOffset(0x00), CExportIgnore] public Vector3 Row0;
-    [FieldOffset(0x0C), CExportIgnore] public Vector3 Row1;
-    [FieldOffset(0x18), CExportIgnore] public Vector3 Row2;
-    [FieldOffset(0x24), CExportIgnore] public Vector3 Row3; // aka Translation
+    [FieldOffset(0x00), CExporterIgnore] public Vector3 Row0;
+    [FieldOffset(0x0C), CExporterIgnore] public Vector3 Row1;
+    [FieldOffset(0x18), CExporterIgnore] public Vector3 Row2;
+    [FieldOffset(0x24), CExporterIgnore] public Vector3 Row3; // aka Translation
 
     [FieldOffset(0x00)] public float M11;
     [FieldOffset(0x04)] public float M12;

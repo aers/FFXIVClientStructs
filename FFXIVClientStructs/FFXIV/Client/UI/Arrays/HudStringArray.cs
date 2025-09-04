@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 72 * 8)]
 public unsafe partial struct HudStringArray {
@@ -11,7 +11,7 @@ public unsafe partial struct HudStringArray {
         return stringArray == null ? null : (HudStringArray*)stringArray->StringArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray72<CStringPointer> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray72<CStringPointer> _data;
 
     [FieldOffset(0 * 8)] public CStringPointer LocalPlayerName;
     [FieldOffset(1 * 8)] public CStringPointer MpIndicator;

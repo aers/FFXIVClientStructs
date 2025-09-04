@@ -216,7 +216,7 @@ public unsafe partial struct GameObject {
 
     [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct NamePlateColors {
-        [FieldOffset(0), CExportIgnore] public ulong Data;
+        [FieldOffset(0), CExporterIgnore] public ulong Data;
         /// <seealso cref="Hud2NumberArray.TargetBarBackdropColor"/>
         [FieldOffset(0)] public ByteColor EdgeColor;
         /// <seealso cref="Hud2NumberArray.TargetBarFillColor"/>
@@ -234,7 +234,7 @@ public unsafe partial struct GameObject {
 // else ObjectId = EntityId, Type = 0
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct GameObjectId : IEquatable<GameObjectId>, IComparable<GameObjectId> {
-    [FieldOffset(0x0), CExportIgnore] public ulong Id;
+    [FieldOffset(0x0), CExporterIgnore] public ulong Id;
     [FieldOffset(0x0)] public uint ObjectId;
     [FieldOffset(0x4)] public byte Type;
 

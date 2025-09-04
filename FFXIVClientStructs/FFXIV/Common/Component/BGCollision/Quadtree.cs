@@ -56,7 +56,7 @@ public unsafe partial struct Quadtree {
 [Inherits<Node>]
 [StructLayout(LayoutKind.Explicit, Size = 0x20)]
 public unsafe partial struct QuadtreeNode {
-    [CExportIgnore]
+    [CExporterIgnore]
     public unsafe ref struct Enumerator {
         private QuadtreeNode* _head;
         private Collider* _next;

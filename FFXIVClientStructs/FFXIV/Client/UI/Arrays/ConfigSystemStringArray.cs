@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExportIgnore]
+[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 2 * 8)]
 public unsafe partial struct ConfigSystemStringArray {
@@ -11,7 +11,7 @@ public unsafe partial struct ConfigSystemStringArray {
         return stringArray == null ? null : (ConfigSystemStringArray*)stringArray->StringArray;
     }
 
-    [FieldOffset(0), FixedSizeArray, CExportIgnore] internal FixedSizeArray2<CStringPointer> _data;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray2<CStringPointer> _data;
 
     [FieldOffset(0 * 8)] public CStringPointer FPSText;
     [FieldOffset(1 * 8)] public CStringPointer ImmersiveGamepackWarningLabel;

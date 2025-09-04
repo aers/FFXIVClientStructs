@@ -21,8 +21,8 @@ public struct hkMatrix4f {
     [FieldOffset(0x38)] public float M23;
     [FieldOffset(0x3C)] public float M33;
 
-    [FieldOffset(0x00), CExportIgnore] public hkVector4f Column0;
-    [FieldOffset(0x10), CExportIgnore] public hkVector4f Column1;
-    [FieldOffset(0x20), CExportIgnore] public hkVector4f Column2;
-    [FieldOffset(0x30), CExportIgnore] public hkVector4f Column3;
+    [FieldOffset(0x00), CExporterIgnore] public hkVector4f Column0;
+    [FieldOffset(0x10), CExporterIgnore] public hkVector4f Column1;
+    [FieldOffset(0x20), CExporterIgnore] public hkVector4f Column2;
+    [FieldOffset(0x30), CExporterIgnore] public hkVector4f Column3;
 }

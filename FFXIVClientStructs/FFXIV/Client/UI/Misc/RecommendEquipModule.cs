@@ -16,20 +16,20 @@ public unsafe partial struct RecommendEquipModule {
     [FieldOffset(0x04)] public uint CurrentSlotIndex; // used as index in the update loop
 
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray14<Pointer<InventoryItem>> _recommendedItems;
-    [FieldOffset(0x08), CExportIgnore] public InventoryItem* EquippedMainHand;
-    [FieldOffset(0x10), CExportIgnore] public InventoryItem* EquippedOffHand;
-    [FieldOffset(0x18), CExportIgnore] public InventoryItem* EquippedHead;
-    [FieldOffset(0x20), CExportIgnore] public InventoryItem* EquippedBody;
-    [FieldOffset(0x28), CExportIgnore] public InventoryItem* EquippedHands;
-    [FieldOffset(0x30), CExportIgnore] public InventoryItem* EquippedWaist;
-    [FieldOffset(0x38), CExportIgnore] public InventoryItem* EquippedLegs;
-    [FieldOffset(0x40), CExportIgnore] public InventoryItem* EquippedFeet;
-    [FieldOffset(0x48), CExportIgnore] public InventoryItem* EquippedEars;
-    [FieldOffset(0x50), CExportIgnore] public InventoryItem* EquippedNeck;
-    [FieldOffset(0x58), CExportIgnore] public InventoryItem* EquippedWrist;
-    [FieldOffset(0x60), CExportIgnore] public InventoryItem* EquippedLeftRing;
-    [FieldOffset(0x68), CExportIgnore] public InventoryItem* EquippedRightRing;
-    [FieldOffset(0x70), CExportIgnore] public InventoryItem* EquippedSoulCrystal;
+    [FieldOffset(0x08), CExporterIgnore] public InventoryItem* EquippedMainHand;
+    [FieldOffset(0x10), CExporterIgnore] public InventoryItem* EquippedOffHand;
+    [FieldOffset(0x18), CExporterIgnore] public InventoryItem* EquippedHead;
+    [FieldOffset(0x20), CExporterIgnore] public InventoryItem* EquippedBody;
+    [FieldOffset(0x28), CExporterIgnore] public InventoryItem* EquippedHands;
+    [FieldOffset(0x30), CExporterIgnore] public InventoryItem* EquippedWaist;
+    [FieldOffset(0x38), CExporterIgnore] public InventoryItem* EquippedLegs;
+    [FieldOffset(0x40), CExporterIgnore] public InventoryItem* EquippedFeet;
+    [FieldOffset(0x48), CExporterIgnore] public InventoryItem* EquippedEars;
+    [FieldOffset(0x50), CExporterIgnore] public InventoryItem* EquippedNeck;
+    [FieldOffset(0x58), CExporterIgnore] public InventoryItem* EquippedWrist;
+    [FieldOffset(0x60), CExporterIgnore] public InventoryItem* EquippedLeftRing;
+    [FieldOffset(0x68), CExporterIgnore] public InventoryItem* EquippedRightRing;
+    [FieldOffset(0x70), CExporterIgnore] public InventoryItem* EquippedSoulCrystal;
     [FieldOffset(0x78)] public ushort Level;
     [FieldOffset(0x7A)] public byte Race;
     [FieldOffset(0x7B)] public byte Sex;

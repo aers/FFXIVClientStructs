@@ -141,7 +141,7 @@ public unsafe partial struct DrawObjectData {
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A)]
 public unsafe partial struct CustomizeData {
-    [FieldOffset(0x00), CExportIgnore, FixedSizeArray] internal FixedSizeArray26<byte> _data;
+    [FieldOffset(0x00), CExporterIgnore, FixedSizeArray] internal FixedSizeArray26<byte> _data;
 
     [FieldOffset(0x00)] public byte Race;
     [FieldOffset(0x01)] public byte Sex;
@@ -204,7 +204,7 @@ public struct WeaponModelId {
     [FieldOffset(6)] public byte Stain0;
     [FieldOffset(7)] public byte Stain1;
 
-    [FieldOffset(0), CExportIgnore] public ulong Value;
+    [FieldOffset(0), CExporterIgnore] public ulong Value;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 8)]
@@ -214,7 +214,7 @@ public struct EquipmentModelId {
     [FieldOffset(3)] public byte Stain0;
     [FieldOffset(4)] public byte Stain1;
 
-    [FieldOffset(0), CExportIgnore] public ulong Value;
+    [FieldOffset(0), CExporterIgnore] public ulong Value;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 4)]

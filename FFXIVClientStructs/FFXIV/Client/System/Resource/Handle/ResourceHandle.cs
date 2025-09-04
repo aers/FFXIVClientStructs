@@ -56,7 +56,7 @@ public unsafe partial struct ResourceHandle {
 
 [StructLayout(LayoutKind.Explicit, Size = 4)]
 public struct ResourceHandleType {
-    [FieldOffset(0x0), CExportIgnore] public uint Value;
+    [FieldOffset(0x0), CExporterIgnore] public uint Value;
     [FieldOffset(0x0)] public HandleCategory Category;
     [FieldOffset(0x2)] public byte Unknown0A;
     [FieldOffset(0x3)] public byte Expansion;
