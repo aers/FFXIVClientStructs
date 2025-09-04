@@ -524,6 +524,13 @@ public enum PlayerAttribute : uint {
     TacticalPoints = 9, // Yes TP is still in the game
     GatheringPoint = 10, // will be 10000 if current job is not a gathering job
     CraftingPoint = 11,
+    PhysicalDamage = 12,
+    MagicDamage = 13,
+    Delay = 14,
+    AdditionalEffect = 15, // Honestly not sure what this one is
+    AttackSpeed = 16,
+    BlockRate = 17,
+    BlockStrength = 18,
     Tenacity = 19,
     AttackPower = 20,
     Defense = 21,
