@@ -519,15 +519,15 @@ public enum PlayerAttribute : uint {
     Intelligence = 4,
     Mind = 5,
     Piety = 6,
-    Health = 7,
+    HealthPoints = 7,
     MagicPoints = 8,
-    TacticalPoints = 9, // Yes TP is still in the game
-    GatheringPoint = 10, // will be 10000 if current job is not a gathering job
-    CraftingPoint = 11,
+    TacticalPoints = 9,
+    GatheringPoints = 10,
+    CraftingPoints = 11,
     PhysicalDamage = 12,
     MagicDamage = 13,
     Delay = 14,
-    AdditionalEffect = 15, // Honestly not sure what this one is
+    AdditionalEffect = 15,
     AttackSpeed = 16,
     BlockRate = 17,
     BlockStrength = 18,
@@ -553,7 +553,7 @@ public enum PlayerAttribute : uint {
     IceResistance = 38,
     WindResistance = 39,
     EarthResistance = 40,
-    LightingResistance = 41,
+    LightningResistance = 41,
     WaterResistance = 42,
     MagicResistance = 43,
     Determination = 44,
@@ -585,5 +585,5 @@ public enum PlayerAttribute : uint {
     Craftsmanship = 70,
     Control = 71,
     Gathering = 72,
-    Perception = 73
+    Perception = 73,
 }
