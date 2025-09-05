@@ -14817,6 +14817,7 @@ classes:
       0x140B6C0F0: MaterializeItem
       0x140B72910: GetMassivePcContentDirector
       0x140B74DD0: GetEventMapMarkers
+      0x140B6C380: InteractWithReactionEventObject
   Client::Game::Event::EventHandlerModule:
     vtbls:
       - ea: 0x142074FD0
