@@ -162,6 +162,8 @@ public unsafe partial struct PlayerState {
     /// <remarks> Use <see cref="IsOrchestrionRollUnlocked(uint)"/> </remarks>
     [FieldOffset(0x5F0), FixedSizeArray] internal FixedSizeArray99<byte> _unlockedOrchestrionRollBitmask;
 
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B C8 44 0F B7 C3")]
+    public partial int GetAttributeByIndex(PlayerAttribute attribute);
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
     /// <summary>RowIds of WeeklyBingoOrderData sheet</summary>
@@ -505,4 +507,83 @@ public enum PlayerStateFlag : uint {
     IsTradeMentorStatusActive = 10,
     IsPvPMentorStatusActive = 11,
     Unknown14 = 14,
+}
+
+/// <remarks>
+/// Mirrors BaseParam sheet values for ease of lookup
+/// </remarks>
+public enum PlayerAttribute : uint {
+    Strength = 1,
+    Dexterity = 2,
+    Vitality = 3,
+    Intelligence = 4,
+    Mind = 5,
+    Piety = 6,
+    Health = 7,
+    MagicPoints = 8,
+    TacticalPoints = 9, // Yes TP is still in the game
+    GatheringPoint = 10, // will be 10000 if current job is not a gathering job
+    CraftingPoint = 11,
+    PhysicalDamage = 12,
+    MagicDamage = 13,
+    Delay = 14,
+    AdditionalEffect = 15, // Honestly not sure what this one is
+    AttackSpeed = 16,
+    BlockRate = 17,
+    BlockStrength = 18,
+    Tenacity = 19,
+    AttackPower = 20,
+    Defense = 21,
+    DirectHitRate = 22,
+    Evasion = 23,
+    MagicDefense = 24,
+    CriticalHitPower = 25,
+    CriticalHitResilience = 26,
+    CriticalHit = 27,
+    CriticalHitEvasion = 28,
+    SlashingResistance = 29,
+    PiercingResistance = 30,
+    BluntResistance = 31,
+    ProjectileResistance = 32,
+    AttackMagicPotency = 33,
+    HealingMagicPotency = 34,
+    EnhancementMagicPotency = 35,
+    ElementalBonus = 36,
+    FireResistance = 37,
+    IceResistance = 38,
+    WindResistance = 39,
+    EarthResistance = 40,
+    LightingResistance = 41,
+    WaterResistance = 42,
+    MagicResistance = 43,
+    Determination = 44,
+    SkillSpeed = 45,
+    SpellSpeed = 46,
+    Haste = 47,
+    Morale = 48,
+    Enmity = 49,
+    EnmityReduction = 50,
+    DesynthesisSkillGain = 51,
+    EXPBonus = 52,
+    Regen = 53,
+    SpecialAttribute = 54,
+    MainAttribute = 55,
+    SecondaryAttribute = 56,
+    SlowResistance = 57,
+    PetrificationResistance = 58,
+    ParalysisResistance = 59,
+    SilenceResistance = 60,
+    BlindResistance = 61,
+    PoisonResistance = 62,
+    StunResistance = 63,
+    SleepResistance = 64,
+    BindResistance = 65,
+    HeavyResistance = 66,
+    DoomResistance = 67,
+    ReducedDurabilityLoss = 68,
+    IncreasedSpiritbondGain = 69,
+    Craftsmanship = 70,
+    Control = 71,
+    Gathering = 72,
+    Perception = 73
 }
