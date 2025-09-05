@@ -6782,7 +6782,7 @@ classes:
       0x1405C4B60: GetRowCountBySheetName  # (ExdModule* this, char* pcszName) -> int
       0x1405C4520: GetSheetByIndex  # (ExdModule* this, int nSheetIndex) -> ExcelSheet*
       0x1405C4500: GetSheetByName  # (ExdModule* this, char* pcszName) -> ExcelSheet*
-      0x140810850: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
+      0x140966640: IsColumnRsv  # (ExdModule* this, int nSheetIndex, int nRowId, int nSubRowId, int nColumnIndex) -> bool
       0x1407F6840: GetItemRowById
       0x1407F7F20: GetRoleForClassJobId
       0x140802770: GetBannerConditionByIndex
