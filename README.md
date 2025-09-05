@@ -21,7 +21,8 @@ This project would not be possible without significant work from many members of
 * [Caraxi](https://github.com/Caraxi)
 * [daemitus](https://github.com/daemitus)
 * [wolfcomp](https://github.com/wolfcomp)
-
+* [Haselnussbomber](https://github.com/Haselnussbomber)
+  
 #### Contributors
 
 [Too many](https://github.com/aers/FFXIVClientStructs/graphs/contributors) to list.
