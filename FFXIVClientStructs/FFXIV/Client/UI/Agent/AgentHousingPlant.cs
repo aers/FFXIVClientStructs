@@ -20,6 +20,9 @@ public unsafe partial struct AgentHousingPlant {
     [FieldOffset(0x948)] public byte SelectableItemCount;
     //[FieldOffset(0x949)] public bool IsPlantPot_IsNotGardening; ?
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 81 EC ?? ?? ?? ?? 45 33 FF")]
+    public partial void ConfirmSeedAndSoilSelection();
+
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct SelectedItem {
         [FieldOffset(0x00)] public InventoryType InventoryType;

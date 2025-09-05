@@ -11229,6 +11229,7 @@ classes:
         base: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
     funcs:
       0x1416183F0: ctor
+      0x1416196F0: ConfirmSeedAndSoilSelection
   Client::UI::Agent::AgentPersonalRoomPortal:
     vtbls:
       - ea: 0x1420963B0
