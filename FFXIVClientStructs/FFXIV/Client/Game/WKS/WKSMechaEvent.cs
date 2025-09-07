@@ -37,7 +37,7 @@ public unsafe partial struct WKSMechaEvent {
 
 [Flags]
 public enum WKSMechaEventFlag : uint {
-    IsPartitipating = 1 << 2,
+    IsParticipating = 1 << 2,
 
     PilotRegistrationOpen = 1 << 8, // LogMessage#10830, is not unset when the time is over
     GroundSupportTeleportOpen = 1 << 9, // is not unset when the time is over
