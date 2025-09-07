@@ -983,6 +983,9 @@ if api is None:
                 )
 
             def preprocess_yaml(self, yaml: DefinedStructExport) -> None:
+                if not self.srclang_importer:
+                    return
+                
                 class Node:
                     def __init__(self, struct: DefinedStruct):
                         self.base: 'Node' | None = None
