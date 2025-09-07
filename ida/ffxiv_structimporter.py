@@ -260,6 +260,13 @@ class BaseApi:
             )
         return DefinedStructExport(enums, structs)
 
+    @abstractmethod
+    def preprocess_yaml(self, yml: DefinedStructExport):
+        """
+        Preprocesses the YAML data before importing.
+
+        For the IDA srclang importer, this fixes issues with generic base classes.
+        """
 
 api = None
 
@@ -275,6 +282,7 @@ if api is None:
         import ida_kernwin
         import ida_srclang
         import hashlib
+        import copy
         from ida_wrapper import IdaInterface
     except ImportError:
         print("Warning: Unable to load IDA")
@@ -791,6 +799,9 @@ if api is None:
                 fullname = self.clean_name(struct.type)
                 s = self.get_struct(self.get_struct_id(fullname + "_vtbl"))
                 for virt_func in struct.virtual_functions:
+                    if virt_func is None:
+                        continue
+
                     offset = virt_func.offset
                     field_name = virt_func.name
                     self.create_struct_member(
@@ -970,6 +981,165 @@ if api is None:
                     )
                     == ida_kernwin.ASKBTN_YES
                 )
+
+            def preprocess_yaml(self, yaml: DefinedStructExport) -> None:
+                class Node:
+                    def __init__(self, struct: DefinedStruct):
+                        self.base: 'Node' | None = None
+                        self.children: list['Node'] = []
+                        self.struct: DefinedStruct = struct
+
+                    def is_virtual(self) -> bool:
+                        return self.struct.virtual_functions is not None
+
+                nodes: dict[str, Node] = {struct.type: Node(struct) for struct in yaml.structs}
+
+                def make_virtual(node: Node) -> None:
+                    if node.struct.virtual_functions is None:
+                        node.struct.virtual_functions = []
+                        node.struct.vtable_size = 0
+
+                    if node.base:
+                        make_virtual(node.base)
+
+                # discover hierarchical relationships and fix missing base flags
+                for node in nodes.values():
+                    if not node.struct.fields:
+                        continue
+                    
+                    # remove explicit/placeholder _vtable field
+                    if node.struct.fields and node.struct.fields[0].name == "_vtable":
+                        node.struct.fields.pop(0)
+                        
+                        if not node.is_virtual():
+                            node.struct.virtual_functions = []
+                            node.struct.vtable_size = 0
+
+                    for field in node.struct.fields:
+                        # if a struct has a VFT but the field at offset 0 wasn't marked base,
+                        # we assume it's the baseclass and fix the flag
+                        if node.is_virtual() and field.offset == 0 and not field.base:
+                            #log.write(f"Warning: Fixing missing baseclass '{field.type}' for '{node.struct.type}'\n")
+                            field.base = True
+
+                        if field.offset != 0 or not field.base:
+                            continue
+
+                        parent = nodes.get(field.type)
+                        if parent is None:
+                            #log.write(f"Warning: Could not find baseclass '{field.type}' for '{node.struct.type}'\n")
+                            continue
+
+                        parent.children.append(node)
+                        node.base = parent
+
+                        if node.is_virtual() and not parent.is_virtual():
+                            #log.write(f"Warning: Adding missing VFT for virtual baseclass '{parent.struct.type}'\n")
+                            make_virtual(parent)
+                        elif parent.is_virtual() and not node.is_virtual():
+                            #log.write(f"Warning: Fixing missing VFT for virtual subclass '{node.struct.type}'\n")
+                            node.struct.virtual_functions = []
+                            node.struct.vtable_size = 0
+
+                # normalize VFTs into indexable lists
+                for node in nodes.values():
+                    if not node.is_virtual():
+                        continue
+
+                    vfuncs = node.struct.virtual_functions or []
+
+                    max_offset = max((vf.offset for vf in vfuncs if vf is not None), default=-1)
+                    vft_size = max_offset + 8 if max_offset >= 0 else 0
+
+                    if node.struct.vtable_size and node.struct.vtable_size > vft_size:
+                        vft_size = node.struct.vtable_size
+
+                    # take baseclass VFT size if larger
+                    if node.base and (node.base.struct.vtable_size or 0) > vft_size:
+                        vft_size = node.base.struct.vtable_size
+
+                    new_vft = [None] * (vft_size // 8)
+                    for vf in vfuncs:
+                        if vf is not None:
+                            new_vft[vf.offset // 8] = vf
+
+                    node.struct.virtual_functions = new_vft
+                    node.struct.vtable_size = vft_size
+
+                # propagate known VFs down into subclasses
+                def propagate_vft_down(node: Node) -> None:
+                    if not node.is_virtual():
+                        return
+                    
+                    parent_vfs = node.struct.virtual_functions
+                    if not parent_vfs:
+                        return
+
+                    for child in node.children:
+                        if not child.is_virtual():
+                            #log.write(f"Warning: Fixing non-virtual child '{child.struct.type}' of virtual parent '{node.struct.type}'\n")
+                            child.struct.virtual_functions = [None] * len(parent_vfs)
+                            child.struct.vtable_size = node.struct.vtable_size
+                        elif len(child.struct.virtual_functions) < len(parent_vfs):
+                            #log.write(f"Warning: Fixing VFT size mismatch: parent '{node.struct.type}' has {len(parent_vfs)} slots, child '{child.struct.type}' has {len(child.struct.virtual_functions)} slots\n")
+                            extra_slots = len(parent_vfs) - len(child.struct.virtual_functions)
+                            child.struct.virtual_functions += [None] * extra_slots
+                            child.struct.vtable_size = max(child.struct.vtable_size or 0, node.struct.vtable_size)
+                    
+                        for i, vf in enumerate(parent_vfs):
+                            if vf is None or child.struct.virtual_functions[i] is not None:
+                                continue
+
+                            new_vf = copy.deepcopy(vf)
+                            if hasattr(new_vf, 'parameters') and new_vf.parameters:
+                                new_vf.parameters[0].type = child.struct.type + "*"
+
+                            #log.write(f"Propagating virtual function '{new_vf.name}' from '{node.struct.type}' down to subclass '{child.struct.type}'\n")
+                            child.struct.virtual_functions[i] = new_vf
+
+                        propagate_vft_down(child)
+
+                visited_nodes: set[str] = set()
+                def propagate_vft_up(node: Node) -> None:
+                    if node.struct.type in visited_nodes:
+                        return
+                    
+                    visited_nodes.add(node.struct.type)
+
+                    if not node.is_virtual():
+                        return
+
+                    for child in node.children:
+                        # propagate from bottom up
+                        propagate_vft_up(child)
+                        
+                        child_vfs = child.struct.virtual_functions
+                        parent_vfs = node.struct.virtual_functions
+                        if not child_vfs or not parent_vfs:
+                            continue
+
+                        for i, vf in enumerate(child_vfs):
+                            if i >= len(parent_vfs):
+                                break
+
+                            if (vf is None or parent_vfs[i] is not None):
+                                continue
+
+                            new_vf = copy.deepcopy(vf)
+                            if hasattr(new_vf, 'parameters') and new_vf.parameters:
+                                new_vf.parameters[0].type = node.struct.type + "*"
+
+                            #log.write(f"Propagating virtual function '{new_vf.name}' from '{child.struct.type}' up to baseclass '{node.struct.type}'\n")
+                            parent_vfs[i] = new_vf
+                    
+                for node in nodes.values():
+                    propagate_vft_down(node)
+
+                    if not node.is_virtual() or node.base is not None:
+                        continue
+
+                    propagate_vft_up(node)
+                    propagate_vft_down(node)
 
         full_padding = False
         srclang_importer = False
@@ -1414,6 +1584,9 @@ if api is None:
                     "ffxiv_structimporter", "Update virtual function types?"
                 )
 
+            def preprocess_yaml(self, yaml: DefinedStructExport):
+                return
+            
         api = GhidraApi()
 
 if api is None:
@@ -1632,6 +1805,9 @@ if api is None:
                     )
                     == 0
                 )
+            
+            def preprocess_yaml(self, yaml: DefinedStructExport):
+                return
 
         api = BinjaApi()
 
@@ -1654,6 +1830,9 @@ def run():
 
     print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
+
+    print("{0} Preprocessing yaml".format(get_time()))
+    api.preprocess_yaml(yaml)
 
     print("{0} Deleting old structs".format(get_time()))
     for struct in yaml.structs[::-1]:
@@ -1696,6 +1875,9 @@ def run():
                     )
                 )
                 for virt_func in struct.virtual_functions:
+                    if virt_func is None:
+                        continue
+
                     if virt_func.return_type != None and virt_func.parameters != None:
                         api.update_virt_func(virt_func, struct)
 
