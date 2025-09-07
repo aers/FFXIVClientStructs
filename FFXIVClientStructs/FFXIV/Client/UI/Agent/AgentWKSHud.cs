@@ -11,15 +11,6 @@ public unsafe partial struct AgentWKSHud {
 
     public readonly bool IsReady => Info != null && Info->State == 3;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 D5 48 8B 47 28")]
-    public partial bool InitZoneData();
-
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 EE")]
-    public partial bool InitAddon();
-
-    [MemberFunction("E8 ?? ?? ?? ?? 80 7F 30 00 74 08")]
-    public partial byte InitInventory();
-
     [StructLayout(LayoutKind.Explicit, Size = 0x190)]
     public unsafe partial struct HudInfo {
         [FieldOffset(0)] public byte State; // 1/2 = fetching data for current zone, 3 = ready
