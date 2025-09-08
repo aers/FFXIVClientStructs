@@ -13615,6 +13615,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140F80000: ctor
+      0x140F81E30: FetchTerritoryData
+      0x140F81FF0: UpdateCreditsText
+      0x140F82220: RefreshInventory
   Client::UI::Agent::AgentWKSAnnounce:
     vtbls:
       - ea: 0x142097C38
