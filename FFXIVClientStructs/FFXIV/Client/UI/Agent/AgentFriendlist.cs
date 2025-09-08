@@ -22,6 +22,9 @@ public unsafe partial struct AgentFriendlist {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CB E8 ?? ?? ?? ?? 33 D2 48 8B CB")]
     public partial void OpenFriendEstateTeleportation(ulong contentId);
 
+    /// <remarks>
+    /// Triggers a network packet send to get the requested friends online info.
+    /// </remarks>
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 48 8B FA 48 8B 49 ?? 48 8B 01 FF 90 ?? ?? ?? ?? 48 8B D7")]
     public partial void RequestFriendInfo(ulong contentId);
 }
