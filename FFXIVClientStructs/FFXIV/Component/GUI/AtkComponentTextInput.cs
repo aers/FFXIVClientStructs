@@ -17,6 +17,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkTextInput.AtkTextInputEventInterface>]
 [Inherits<SoftKeyboardDeviceInterface.SoftKeyboardInputInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x600)]
+[VirtualTable("48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 88 9F ?? ?? ?? ??", 6, 20)]
 public unsafe partial struct AtkComponentTextInput : ICreatable {
     [FieldOffset(0x1F0)] public AtkUldComponentDataTextInput ComponentTextData;
     [FieldOffset(0x26C)] public AllowedEntities InputSanitizationFlags;
