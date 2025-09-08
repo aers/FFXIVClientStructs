@@ -10816,6 +10816,7 @@ classes:
       0x1404F11A0: ctor
       0x1404F2A40: SendTell
       0x1404F2B90: OpenFriendEstateTeleportation
+      0x1404F3100: RequestFriendInfo
   Client::UI::Agent::AgentPartyMember:
     vtbls:
       - ea: 0x1420361B8
