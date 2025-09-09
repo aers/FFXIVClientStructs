@@ -454,12 +454,12 @@ if api is None:
                         ida_kernwin.warning(f"Field \"{field_name}\" offset mismatch in struct {cname} ({struct.type}) during validation.\nExpected {field.offset}, got {(udm.offset/8)}")
                         exit()
 
-            def get_srclang_fill_type(self, available_bytes: int) -> tuple[str, int]:
-                if available_bytes >= 9:
+            def get_srclang_fill_type(self, available_bytes: int, current_offset: int) -> tuple[str, int]:
+                if available_bytes >= 8 and (current_offset % 8) == 0:
                     return ("__int64", 8)
-                elif available_bytes >= 4:
+                elif available_bytes >= 4 and (current_offset % 4) == 0:
                     return ("__int32", 4)
-                elif available_bytes >= 2:
+                elif available_bytes >= 2 and (current_offset % 2) == 0:
                     return ("__int16", 2)
                 else:
                     return ("char", 1)
@@ -522,7 +522,7 @@ if api is None:
 
                         # TODO(caitlyn): move this into a separate function
                         if self.full_padding:
-                            (fill_type, fill_size) = self.get_srclang_fill_type(offset - cur_size)
+                            (fill_type, fill_size) = self.get_srclang_fill_type(offset - cur_size, cur_size)
                             decl.append(f"{fill_type} field_{cur_size:X};")
                             cur_size += fill_size
                         else:
@@ -606,7 +606,7 @@ if api is None:
 
                     while cur_size < struct.size:
                         if self.full_padding:
-                            (fill_type, fill_size) = self.get_srclang_fill_type(struct.size - cur_size)
+                            (fill_type, fill_size) = self.get_srclang_fill_type(struct.size - cur_size, cur_size)
                             decl.append(f"{fill_type} field_{cur_size:X};")
                             cur_size += fill_size
                         else:
