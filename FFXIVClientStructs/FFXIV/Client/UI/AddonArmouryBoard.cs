@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonArmouryBoard {
 
     [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray50<Pointer<AtkComponentDragDrop>> _slots;
-    
+
     [FieldOffset(0x678)] public AtkResNode* HeaderContainerNode; // Container node for following header nodes
     [FieldOffset(0x680)] public AtkTextNode* HeaderMajorTextNode; // Ex. "Chocobo Saddlebag" using above example
     [FieldOffset(0x688)] public AtkTextNode* HeaderMinorTextNode; // Ex. "Select an item to add to the saddlebag."

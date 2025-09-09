@@ -19,7 +19,7 @@ public unsafe partial struct AtkInputManager {
     // null is valid when setting focus, this will result in all focus being cleared
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 84 FF ?? ?? ?? ??")]
     public partial bool SetFocus(AtkResNode* node, AtkUnitBase* addon, int focusParam);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 66 89 BE ?? ?? ?? ??")]
     public partial bool HandleFocus(RaptureAtkUnitManager* unitManager, FocusEntry* focusEntry, AtkEventDispatcher.Event* eventData);
 
