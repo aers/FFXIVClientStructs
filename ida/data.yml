@@ -8566,6 +8566,7 @@ classes:
       117: IsUIHidden
       118: AddAtkHistoryEntry
       119: ClearAtkHistory
+      120: IsPerforming
       122: HandlePacket
       123: ShowContentIntroduction
       124: IsContentIntroductionInvisible

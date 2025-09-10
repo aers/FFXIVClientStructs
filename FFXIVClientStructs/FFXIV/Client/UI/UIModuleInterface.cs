@@ -113,6 +113,7 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(117)] public partial ??? IsUIHidden(???);
     [VirtualFunction(118)] public partial void AddAtkHistoryEntry(Utf8String* text, int historyIdx);
     [VirtualFunction(119)] public partial void ClearAtkHistory(int historyIdx);
+    [VirtualFunction(120)] public partial bool IsPerforming();
 
     [VirtualFunction(122)] public partial void HandlePacket(UIModulePacketType type, uint uintParam, void* packet);
 
