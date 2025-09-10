@@ -8505,6 +8505,7 @@ classes:
       38: GetAgentHelpers
       39: GetUI3DModule
       40: GetExtraCommandHelper
+      41: GetJobHudManualHelper
       42: GetEmoteHistoryModule
       43: GetMinionListModule
       44: GetMountListModule
@@ -9586,6 +9587,14 @@ classes:
       0x140980610: Finalizer
       0x140980630: ExecuteExtraCommand
       0x140980700: CanExecuteExtraCommand
+  Client::UI::Misc::JobHudManualModule:
+    vtbls:
+      - ea: 0x1420636E8
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x140980750: ctor
+      0x140980770: Finalizer
   Client::UI::Misc::GoldSaucerModule:
     vtbls:
       - ea: 0x142056438

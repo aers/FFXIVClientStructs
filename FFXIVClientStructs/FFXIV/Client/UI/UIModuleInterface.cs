@@ -47,7 +47,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(38)] public partial AgentHelpers* GetAgentHelpers();
     [VirtualFunction(39)] public partial UI3DModule* GetUI3DModule();
     [VirtualFunction(40)] public partial ExtraCommandHelper* GetExtraCommandHelper();
-    // [VirtualFunction(41)] public partial Vf41Struct* GetVf40Struct();
+    [VirtualFunction(41)] public partial JobHudManualHelper* GetJobHudManualHelper();
     [VirtualFunction(42)] public partial EmoteHistoryModule* GetEmoteHistoryModule();
     [VirtualFunction(43)] public partial MinionListModule* GetMinionListModule();
     [VirtualFunction(44)] public partial MountListModule* GetMountListModule();
