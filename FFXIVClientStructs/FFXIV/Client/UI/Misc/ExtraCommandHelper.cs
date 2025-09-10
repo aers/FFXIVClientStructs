@@ -1,10 +1,7 @@
-using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::ExtraCommandHelper
 [GenerateInterop]
-[Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct ExtraCommandHelper {
     public static ExtraCommandHelper* Instance() {
