@@ -8615,8 +8615,9 @@ classes:
       213: ShowTalkSubtitle
       214: HideTalkSubtitle
       217: ShowAdventureNotice
+      220: SetLinkshellCycle
       221: RotateLinkshellHistory
-      222: SetLinkshellCycle
+      222: SetCrossWorldLinkshellCycle
       223: RotateCrossLinkshellHistory
       239: ShowRaceCountdownStart
       240: ShowRaceCountdownEnd_2

@@ -169,8 +169,9 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(213)] public partial void ShowTalkSubtitle(Utf8String* text, float duration);
     [VirtualFunction(214)] public partial void HideTalkSubtitle();
     [VirtualFunction(217)] public partial void ShowAdventureNotice(int index);
+    [VirtualFunction(220)] public partial void SetLinkshellCycle(int linkshellCycle);
     [VirtualFunction(221)] public partial int RotateLinkshellHistory(int offset);
-    [VirtualFunction(222)] public partial void SetLinkshellCycle(int linkshellCycle);
+    [VirtualFunction(222)] public partial void SetCrossWorldLinkshellCycle(int crossWorldLinkshellCycle);
     [VirtualFunction(223)] public partial int RotateCrossLinkshellHistory(int offset);
     // [VirtualFunction(239)] public partial ??? ShowRaceCountdownStart(???);
     // [VirtualFunction(240)] public partial ??? ShowRaceCountdownEnd_2(???);
