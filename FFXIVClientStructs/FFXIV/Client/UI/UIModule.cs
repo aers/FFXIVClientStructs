@@ -59,7 +59,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x95408)] internal ItemContextCustomizeModule ItemContextCustomizeModule;
     [FieldOffset(0x955A0)] internal RecommendEquipModule RecommendEquipModule;
     [FieldOffset(0x95620)] internal PvpSetModule PvpSetModule;
-    // [FieldOffset(0x95698)] internal Vf40Struct;
+    [FieldOffset(0x95698)] internal ExtraCommandHelper ExtraCommandHelper;
     // [FieldOffset(0x956A8)] internal Vf41Struct;
     [FieldOffset(0x956B8)] internal EmoteHistoryModule EmoteHistoryModule;
     [FieldOffset(0x95838)] internal MinionListModule MinionListModule;

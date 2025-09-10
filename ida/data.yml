@@ -4518,6 +4518,7 @@ classes:
       0x14010F090: UpdateBattleCharaNameplates
       0x140110490: UpdateNpcNameplates
       0x140112B90: IsUIVisible
+      0x140112E60: IsEditingHudLayout
       0x140676CC0: DecRefNumberArrayData
       0x140676D20: DecRefStringArrayData
       0x140677890: SetupAtkMessageBoxManager
@@ -8458,6 +8459,8 @@ classes:
       # 0x140621E10: ctor # inlined @ 0x14075CDAD
       0x140747950: HandleInputUpdate
       0x140748230: DisablePadMouseMode
+      0x1407488C0: CanEnterIdleCam
+      0x140748920: CanEnterGPose
       0x1407491C0: CheckCastCancel
       0x14074CFF0: CheckScreenshotState
   Client::UI::UIModuleInterface:
@@ -8501,6 +8504,7 @@ classes:
       37: GetAgentModule
       38: GetAgentHelpers
       39: GetUI3DModule
+      40: GetExtraCommandHelper
       42: GetEmoteHistoryModule
       43: GetMinionListModule
       44: GetMountListModule
@@ -9572,6 +9576,16 @@ classes:
       0x14097F420: GetWorldById
       0x14097F4A0: GetWorldNameById
       0x14097F500: GetWorldIdByName
+  Client::UI::Misc::ExtraCommandHelper:
+    vtbls:
+      - ea: 0x1420636E0
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x1409805F0: ctor
+      0x140980610: Finalizer
+      0x140980630: ExecuteExtraCommand
+      0x140980700: CanExecuteExtraCommand
   Client::UI::Misc::GoldSaucerModule:
     vtbls:
       - ea: 0x142056438
