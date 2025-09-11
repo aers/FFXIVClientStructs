@@ -9620,6 +9620,9 @@ classes:
     funcs:
       0x1407AC260: ctor
       0x1407AC4B0: Finalizer
+      0x1407AD1A0: GetArmorySorter
+      0x1407AD1E0: GetActiveRetainerSorter
+      0x1407AD240: GetSorterByType
   Client::UI::Misc::ItemOrderModuleSorter:
     funcs:
       0x1407AA4C0: FreePreviousOrderArray
