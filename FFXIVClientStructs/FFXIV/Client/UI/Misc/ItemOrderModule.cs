@@ -34,6 +34,9 @@ public unsafe partial struct ItemOrderModule {
     [FieldOffset(0xC0)] public StdMap<ulong, Pointer<ItemOrderModuleSorter>> RetainerSorter;
     [FieldOffset(0xD0)] public ItemOrderModuleSorter* SaddleBagSorter;
     [FieldOffset(0xD8)] public ItemOrderModuleSorter* PremiumSaddleBagSorter;
+
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8B 41 ?? C3")]
+    public partial ItemOrderModuleSorter* GetActiveRetainerSorter();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
