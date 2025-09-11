@@ -20,6 +20,8 @@ public unsafe partial struct RaptureAtkUnitManager {
 
     [FieldOffset(0x9D00)] public UIModule.UiFlags UiFlags;
 
+    [FieldOffset(0x9D11)] public bool IsEditingHudLayout;
+
     [FieldOffset(0x9D14)] public bool IsUiFading; // true whenever FadeMiddleBack is active
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 49 8B F0 48 8B FA 4C 8B F1 48 85 D2"), GenerateStringOverloads]

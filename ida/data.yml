@@ -4518,6 +4518,7 @@ classes:
       0x14010F090: UpdateBattleCharaNameplates
       0x140110490: UpdateNpcNameplates
       0x140112B90: IsUIVisible
+      0x140112E60: IsEditingHudLayout
       0x140676CC0: DecRefNumberArrayData
       0x140676D20: DecRefStringArrayData
       0x140677890: SetupAtkMessageBoxManager
@@ -8458,6 +8459,8 @@ classes:
       # 0x140621E10: ctor # inlined @ 0x14075CDAD
       0x140747950: HandleInputUpdate
       0x140748230: DisablePadMouseMode
+      0x1407488C0: CanEnterIdleCam
+      0x140748920: CanEnterGPose
       0x1407491C0: CheckCastCancel
       0x14074CFF0: CheckScreenshotState
   Client::UI::UIModuleInterface:
@@ -8501,6 +8504,8 @@ classes:
       37: GetAgentModule
       38: GetAgentHelpers
       39: GetUI3DModule
+      40: GetExtraCommandHelper
+      41: GetJobHudManualHelper
       42: GetEmoteHistoryModule
       43: GetMinionListModule
       44: GetMountListModule
@@ -8521,21 +8526,21 @@ classes:
       59: GetBannerModule
       60: GetAdventureNoteModule
       61: GetAkatsukiNoteModule
-      62: GetVVDNoteModule
+      62: GetVVDNotebookModule
       63: GetVVDActionModule
       64: GetTofuModule
       65: GetFishingModule
-      66: GetACTION
+      66: GetActionModule
       67: GetTermFilterModule
-      68: GetREADYC
+      68: GetReadyCheckModule
       69: GetPartyRoleListModule
-      70: GetCATSBM
-      71: GetDESCRI
-      72: GetMJICWSP
-      73: GetPERFORM
-      74: GetMKDSJOB
-      75: GetMKDLORE
-      76: GetMKDSJN
+      70: GetCatalogSearchBookmarkModule
+      71: GetDescriptionModule
+      72: GetMJICraftworksPresetModule
+      73: GetPerformanceModule
+      74: GetMKDSupportJobModule
+      75: GetMKDLoreModule
+      76: GetMKDSupportJobNoteModule
       77: GetQPNL
       78: GetUIInputData
       79: GetUIInputModule
@@ -8561,6 +8566,7 @@ classes:
       117: IsUIHidden
       118: AddAtkHistoryEntry
       119: ClearAtkHistory
+      120: IsPerforming
       122: HandlePacket
       123: ShowContentIntroduction
       124: IsContentIntroductionInvisible
@@ -8609,8 +8615,9 @@ classes:
       213: ShowTalkSubtitle
       214: HideTalkSubtitle
       217: ShowAdventureNotice
+      220: SetLinkshellCycle
       221: RotateLinkshellHistory
-      222: SetLinkshellCycle
+      222: SetCrossWorldLinkshellCycle
       223: RotateCrossLinkshellHistory
       239: ShowRaceCountdownStart
       240: ShowRaceCountdownEnd_2
@@ -8700,6 +8707,29 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407CBD30: ctor
+      0x1407CBDE0: Clear
+      0x1407CBE30: GetSetting
+      0x1407CBEB0: SetSetting
+      0x1407CC050: SetTileSet
+      0x1407CC060: ToggleHints
+      0x1407CC080: ToggleDangerousTileMarker
+      0x1407CC0A0: ToggleChatLog
+      0x1407CC0C0: ToggleUnk4C
+      0x1407CC0E0: ToggleUnk4D
+      0x1407CC100: ToggleTileNames
+      0x1407CC120: ToggleTraditionalDoraIndicator
+      0x1407CC140: SetHighResolutionLayout
+      0x1407CC150: SetOwnPlayerNameSetting
+      0x1407CC170: SetOthersPlayerNameSetting
+      0x1407CC190: ToggleCharacterVoices
+      0x1407CC1B0: SetUnk54
+      0x1407CC1D0: IsVoiceUnlocked
+      0x1407CC1F0: SetUnk55
+      0x1407CC210: IsConstumeUnlocked
+      0x1407CC250: ToggleVoiceSeen
+      0x1407CC2B0: IsVoiceSeen
+      0x1407CC300: ToggleCostumeSeen
+      0x1407CC360: IsCostumeSeen
   Client::UI::Misc::AozNoteModule:
     vtbls:
       - ea: 0x142050D58
@@ -8736,6 +8766,12 @@ classes:
       0x1407D1AA0: ctor
       0x1407D1CF0: SaveCameraSettings
       0x1407D1D70: SaveLightingSettings
+  Client::UI::Misc::CraftModule:
+    vtbls:
+      - ea: 0x142056DB0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407D1EF0: ctor
   Client::UI::Misc::MycNoteModule:
     vtbls:
       - ea: 0x142056E90
@@ -8748,12 +8784,20 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407D33E0: ctor
+      0x1407D35B0: AddUnseenOrnament
+      0x1407D3660: RemoveUnseenOrnament
+      0x1407D3710: IsOrnamentUnseen
+      0x1407D3780: GetIndexOfUnseenOrnament
   Client::UI::Misc::MycItemModule:
     vtbls:
       - ea: 0x142056F70
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407D37E0: ctor
+      0x1407D3FC0: GetItemSetName
+      0x1407D3FF0: SetItemSetName
+      0x1407D4050: GetItemSetItemData
+      0x1407D4160: EnsureData
   Client::UI::Misc::GroupPoseStampModule:
     vtbls:
       - ea: 0x142056FE0
@@ -8772,13 +8816,21 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407D6010: ctor
+      0x1407D61B0: GetUnseenAdventureNoteByIndex
+      0x1407D61D0: AddUnseenAdventureNote
+      0x1407D6280: RemoveUnseenAdventureNote
+      0x1407D6320: IsAdventureNoteUnseen
+      0x1407D6360: SetAutomaticallyDisplayRecord
   Client::UI::Misc::AkatsukiNoteModule:
     vtbls:
       - ea: 0x142057130
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407D63C0: ctor
-  Client::UI::Misc::VVDNoteModule:
+      0x1407D65D0: SetUnseenAkatsukiNoteSubEntry
+      0x1407D6630: SetAkatsukiNoteSeen
+      0x1407D6680: IsAkatsukiNoteUnseen
+  Client::UI::Misc::VVDNotebookModule:
     vtbls:
       - ea: 0x1420571A0
         base: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -8803,6 +8855,25 @@ classes:
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407D7F70: ctor
+      0x1407D83D0: IsFishUnseen
+      0x1407D8420: HasUnseenFish
+      0x1407D8470: HasUnseenSpearfish
+      0x1407D84C0: AddUnseenFish
+      0x1407D85E0: RemoveUnseenFish
+      0x1407D86C0: Clear
+      0x1407D8730: HandleGMCommand
+  Client::UI::Misc::ActionModule:
+    vtbls:
+      - ea: 0x142057360
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407D8AF0: ctor
+      0x1407D25F0: SetFlag
+      0x1407D2610: GetNumFavorites
+      0x1407D2660: GetFavoriteAction
+      0x1407D26B0: AddFavoriteAction
+      0x1407D2710: RemoveFavoriteAction
+      0x1407D2830: IsFavoriteAction
   Client::UI::Misc::TermFilterModule:
     vtbls:
       - ea: 0x1420573D0
@@ -8821,12 +8892,91 @@ classes:
     funcs:
       0x1407D9740: ctor
       0x1407D9B50: HasTerm
+  Client::UI::Misc::ReadyCheckModule:
+    vtbls:
+      - ea: 0x142057440
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DA1C0: ctor
   Client::UI::Misc::PartyRoleListModule:
     vtbls:
       - ea: 0x1420574B0
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     funcs:
       0x1407DB850: ctor
+  Client::UI::Misc::CatalogSearchBookmarkModule:
+    vtbls:
+      - ea: 0x142057520
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DBE40: ctor
+      0x1407DBC90: AddToWishlist
+      0x1407DBCF0: RemoveFromWishlist
+      0x1407DBDC0: IsOnWishlist
+      0x1407DBDF0: GetWishlistItemByIndex
+  Client::UI::Misc::DescriptionModule:
+    vtbls:
+      - ea: 0x142057590
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DC140: ctor
+  Client::UI::Misc::MJICraftworksPresetModule:
+    vtbls:
+      - ea: 0x142057600
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DC340: ctor
+  Client::UI::Misc::PerformanceModule:
+    vtbls:
+      - ea: 0x142057670
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DC820: ctor
+      0x1407DC5F0: GetAssignAllNotesToKeyboard
+      0x1407DC600: SetAssignAllNotesToKeyboard
+      0x1407DC620: GetMuteOtherPerformers
+      0x1407DC630: SetMuteOtherPerformers
+      0x1407DC650: GetPlaybackTypeAllMembers
+      0x1407DC660: SetPlaybackTypeAllMembers
+      0x1407DC680: GetDisplayControlGuide
+      0x1407DC690: SetDisplayControlGuide
+      0x1407DC6B0: GetDisplayMode
+      0x1407DC6C0: SetDisplayMode
+      0x1407DC6E0: GetBeatsPerMinute
+      0x1407DC700: SetBeatsPerMinute
+      0x1407DC720: GetBeatsPerMeasure
+      0x1407DC740: SetBeatsPerMeasure
+      0x1407DC760: GetAccentEachMeasure
+      0x1407DC770: SetAccentEachMeasure
+      0x1407DC790: GetEnableCountIn
+      0x1407DC7A0: SetEnableCountIn
+      0x1407DC7C0: GetSoundEffectsOnlyDuringCountIn
+      0x1407DC7D0: SetSoundEffectsOnlyDuringCountIn
+      0x1407DC7F0: GetDisplayMetronome
+      0x1407DC800: SetDisplayMetronome
+  Client::UI::Misc::MKDSupportJobModule:
+    vtbls:
+      - ea: 0x1420576E0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DCFA0: ctor
+      0x1407DD140: SetJobSettings
+      0x1407DD1C0: GetJobSettings
+  Client::UI::Misc::MKDLoreModule:
+    vtbls:
+      - ea: 0x142057750
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DD880: ctor
+  Client::UI::Misc::MKDSupportJobNoteModule:
+    vtbls:
+      - ea: 0x1420577C0
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DE360: ctor
+      0x1407DE4C0: AddSeenSupportJob
+      0x1407DE650: IsSupportJobSeen
+      0x1407DE680: RemoveSeenSupportJob
   Client::UI::Misc::HelperInterface:
     vtbls:
       - ea: 0x142067348
@@ -9429,6 +9579,24 @@ classes:
       0x14097F420: GetWorldById
       0x14097F4A0: GetWorldNameById
       0x14097F500: GetWorldIdByName
+  Client::UI::Misc::ExtraCommandHelper:
+    vtbls:
+      - ea: 0x1420636E0
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x1409805F0: ctor
+      0x140980610: Finalizer
+      0x140980630: ExecuteExtraCommand
+      0x140980700: CanExecuteExtraCommand
+  Client::UI::Misc::JobHudManualModule:
+    vtbls:
+      - ea: 0x1420636E8
+    vfuncs:
+      0: Dtor
+    funcs:
+      0x140980750: ctor
+      0x140980770: Finalizer
   Client::UI::Misc::GoldSaucerModule:
     vtbls:
       - ea: 0x142056438
