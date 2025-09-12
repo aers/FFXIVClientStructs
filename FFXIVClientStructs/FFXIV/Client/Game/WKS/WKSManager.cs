@@ -48,12 +48,12 @@ public unsafe partial struct WKSManager {
     public bool IsMissionCompleted(uint missionUnitId) {
         var group = (byte)(missionUnitId >> 3);
         var mask = 1 << ((int)missionUnitId & 7);
-        return (mask & MissionCompletionFlags[group + 5]) != 0;
+        return (mask & MissionCompletionFlags[group]) != 0;
     }
 
     public bool IsMissionGolded(uint missionUnitId) {
         var group = (byte)(missionUnitId >> 3);
         var mask = 1 << ((int)missionUnitId & 7);
-        return (mask & MissionGoldFlags[group + 5]) != 0;
+        return (mask & MissionGoldFlags[group]) != 0;
     }
 }
