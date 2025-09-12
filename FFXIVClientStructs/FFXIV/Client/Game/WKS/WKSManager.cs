@@ -27,8 +27,8 @@ public unsafe partial struct WKSManager {
 
     [FieldOffset(0xC4C)] public uint FishingBait;
 
-    [FieldOffset(0xC50), FixedSizeArray] internal FixedSizeArray136<byte> _missionCompletionFlags;
-    [FieldOffset(0xCD8), FixedSizeArray] internal FixedSizeArray136<byte> _missionGoldFlags;
+    [FieldOffset(0xC55), FixedSizeArray] internal FixedSizeArray136<byte> _missionCompletionFlags;
+    [FieldOffset(0xCDD), FixedSizeArray] internal FixedSizeArray136<byte> _missionGoldFlags;
 
     [FieldOffset(0xD68), FixedSizeArray] internal FixedSizeArray11<int> _scores; // cosmic class scores
 
