@@ -27,6 +27,9 @@ public unsafe partial struct WKSManager {
 
     [FieldOffset(0xC4C)] public uint FishingBait;
 
+    [FieldOffset(0xC50), FixedSizeArray] internal FixedSizeArray136<byte> _missionCompletionFlags;
+    [FieldOffset(0xCD8), FixedSizeArray] internal FixedSizeArray136<byte> _missionGoldFlags;
+
     [FieldOffset(0xD68), FixedSizeArray] internal FixedSizeArray11<int> _scores; // cosmic class scores
 
     [FieldOffset(0xE10)] private void* UnkStructDB0;
@@ -41,4 +44,16 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0xE58)] public WKSResearchModule* ResearchModule;
     [FieldOffset(0xE60)] private void* UnkStructE00;
     [FieldOffset(0xE68)] public StdVector<Pointer<WKSModuleBase>> Modules;
+
+    public bool IsMissionCompleted(uint missionUnitId) {
+        var group = (byte)(missionUnitId >> 3);
+        var mask = 1 << ((int)missionUnitId & 7);
+        return (mask & MissionCompletionFlags[group + 5]) != 0;
+    }
+
+    public bool IsMissionGolded(uint missionUnitId) {
+        var group = (byte)(missionUnitId >> 3);
+        var mask = 1 << ((int)missionUnitId & 7);
+        return (mask & MissionGoldFlags[group + 5]) != 0;
+    }
 }
