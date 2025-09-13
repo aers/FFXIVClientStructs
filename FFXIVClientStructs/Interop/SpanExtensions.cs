@@ -35,7 +35,7 @@ public static class SpanExtensions {
     /// <summary>
     /// Checks if the bit in the byte span is set.
     /// </summary>
-    /// <param name="index">The bit index in the array</param>'
+    /// <param name="index">The bit index in the span</param>'
     /// <exception cref="IndexOutOfRangeException">Span bit length is shorter than index used.</exception>
     public bool CheckBitInSpan(this Span<byte> span, uint index)
     {
