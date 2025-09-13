@@ -31,4 +31,16 @@ public static class SpanExtensions {
     /// This allows enumeration over the span as a pointer type, T*, rather than T.
     /// </summary>
     public static SpanPointerEnumerator<T> PointerEnumerator<T>(this Span<T> span) where T : unmanaged => new(span);
+
+    /// <summary>
+    /// Checks if the bit in the byte span is set.
+    /// </summary>
+    /// <param name="index">The bit index in the array</param>'
+    /// <exception cref="IndexOutOfRangeException">Span bit length is shorter than index used.</exception>
+    public bool CheckBitInSpan(this Span<byte> span, uint index)
+    {
+        if (span.Length < (index >> 3))
+            return (span[index >> 3] & (1 << (index & 7))) != 0;
+        throw new IndexOutOfRangeException();
+    }
 }
