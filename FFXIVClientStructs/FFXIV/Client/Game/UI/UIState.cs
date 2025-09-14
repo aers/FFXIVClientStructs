@@ -188,31 +188,27 @@ public unsafe partial struct UIState {
     /// </summary>
     /// <param name="aetheryteId">The ID of the aetheryte to check for.</param>
     /// <returns>Returns true if the specified aetheryte is unlocked.</returns>
-    public bool IsAetheryteUnlocked(uint aetheryteId) {
-        return ((1 << ((int)aetheryteId & 7)) & UnlockedAetherytesBitmask[(int)aetheryteId / 8]) > 0;
-    }
+    public bool IsAetheryteUnlocked(uint aetheryteId)
+        => UnlockedAetherytesBitmask.CheckBitInSpan(aetheryteId);
 
     /// <summary>
     /// Check if a HowTo is unlocked for the current character.
     /// </summary>
     /// <param name="howtoId">The ID of the HowTo to check for.</param>
     /// <returns>Returns true if the specified HowTo is unlocked.</returns>
-    public bool IsHowToUnlocked(uint howtoId) {
-        return ((1 << ((int)howtoId & 7)) & UnlockedHowtoBitmask[(int)howtoId / 8]) > 0;
-    }
+    public bool IsHowToUnlocked(uint howtoId)
+        => UnlockedHowtoBitmask.CheckBitInSpan(howtoId);
 
     /// <summary>
     /// Check if a companion (minion) is unlocked for the current character.
     /// </summary>
     /// <param name="companionId">The ID of the companion/minion to check for.</param>
     /// <returns>Returns true if the specified minion is unlocked.</returns>
-    public bool IsCompanionUnlocked(uint companionId) {
-        return ((1 << ((int)companionId & 7)) & UnlockedCompanionsBitmask[(int)companionId / 8]) > 0;
-    }
+    public bool IsCompanionUnlocked(uint companionId)
+        => UnlockedCompanionsBitmask.CheckBitInSpan(companionId);
 
-    public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId) {
-        return ((1 << ((ushort)chocoboTaxiStandId & 7)) & ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId / 8]) > 0;
-    }
+    public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId)
+        => ChocoboTaxiStandsBitmask.CheckBitInSpan(chocoboTaxiStandId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 88 46 02 B0 01")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);

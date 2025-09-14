@@ -13,8 +13,6 @@ public unsafe partial struct ContentsNote {
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray19<int> _displayIds;
     [FieldOffset(0x6C), FixedSizeArray] internal FixedSizeArray19<int> _displayStatuses;
 
-    public bool IsContentNoteComplete(int index) {
-        var offsetIndex = index - 1;
-        return (CompletionFlags[offsetIndex / 8] & (1 << (offsetIndex % 8))) != 0;
-    }
+    public bool IsContentNoteComplete(int index)
+        => CompletionFlags.CheckBitInSpan(index - 1);
 }
