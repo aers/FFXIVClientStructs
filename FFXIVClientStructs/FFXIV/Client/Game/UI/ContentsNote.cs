@@ -14,5 +14,5 @@ public unsafe partial struct ContentsNote {
     [FieldOffset(0x6C), FixedSizeArray] internal FixedSizeArray19<int> _displayStatuses;
 
     public bool IsContentNoteComplete(int index)
-        => CompletionFlags.CheckBitInSpan(index - 1);
+        => CompletionFlags.CheckBitInSpan((uint)index - 1);
 }

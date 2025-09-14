@@ -40,9 +40,9 @@ public static class SpanExtensions {
     /// <returns>Whether the bit was set or not.</returns>
     /// <exception cref="IndexOutOfRangeException">Span bit length is shorter than index used.</exception>
     public static bool CheckBitInSpan(this Span<byte> span, uint bitIndex) {
-        return !span.TryCheckBitInSpan(bitIndex, out var value)
-            ? throw new IndexOutOfRangeException()
-            : value;
+        return span.TryCheckBitInSpan(bitIndex, out var value)
+            ? value
+            : throw new IndexOutOfRangeException();
     }
 
     /// <summary>
