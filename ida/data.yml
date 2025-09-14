@@ -2589,8 +2589,8 @@ classes:
       0x1409E7110: SetSightseeingLogUnlockStateEx
       0x1409E7160: SetAdventureComplete
       0x1409E71B0: IsAdventureComplete
-      0x1409E7390: SetAdventureUnlocked # maybe?
-      0x1409E73E0: IsAdventureUnlocked # maybe?
+      0x1409E7390: SetAdventureUnk
+      0x1409E73E0: IsAdventureUnk
       0x1409E7D40: IsFolkloreBookUnlocked     # DoL unlockable books
       0x1409E9A90: IsMcGuffinUnlocked
       0x1409E9F00: IsFramersKitUnlocked
