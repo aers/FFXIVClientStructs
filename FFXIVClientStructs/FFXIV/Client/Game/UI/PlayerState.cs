@@ -1,5 +1,6 @@
 using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
@@ -360,14 +361,12 @@ public unsafe partial struct PlayerState {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 33 ED 66 0F 1F 44 00")]
     public partial bool IsFramersKitUnlocked(uint kitId);
 
-    public bool IsAetherCurrentUnlocked(uint aetherCurrentId) {
-        if (aetherCurrentId < 0x2B0000)
-            return false;
-        var id = aetherCurrentId - 0x2B0000;
-        var idx = id / 8;
-        var flag = 1 << (byte)(id + idx * -8 & 0x1F);
-        return (UnlockFlags[(int)idx] & flag) != 0;
-    }
+    /// <summary>
+    /// Check if a specific Aether Current has been discovered.
+    /// </summary>
+    /// <param name="aetherCurrentId">RowId of the AetherCurrent sheet. This is an <see cref="EventId"/>.</param>
+    public bool IsAetherCurrentUnlocked(uint aetherCurrentId)
+        => UnlockFlags.CheckBitInSpan(aetherCurrentId - 0x2B0000);
 
     /// <summary>
     /// Returns whether all aether currents of a zone were discovered.
