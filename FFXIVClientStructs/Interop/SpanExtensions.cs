@@ -37,9 +37,9 @@ public static class SpanExtensions {
     /// </summary>
     /// <param name="index">The bit index in the span</param>'
     /// <exception cref="IndexOutOfRangeException">Span bit length is shorter than index used.</exception>
-    public bool CheckBitInSpan(this Span<byte> span, uint index) {
+    public static bool CheckBitInSpan(this Span<byte> span, uint index) {
         if (span.Length < (index >> 3))
-            return (span[index >> 3] & (1 << (index & 7))) != 0;
+            return (span[(int)(index >> 3)] & (1 << (byte)(index & 7))) != 0;
         throw new IndexOutOfRangeException();
     }
 }
