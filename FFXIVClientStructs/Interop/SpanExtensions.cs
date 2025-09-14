@@ -35,11 +35,12 @@ public static class SpanExtensions {
     /// <summary>
     /// Checks if the bit in the byte span is set.
     /// </summary>
-    /// <param name="index">The bit index in the span</param>'
+    /// <param name="span">The span to check the bit in.</param>
+    /// <param name="index">The bit index in the span.</param>
     /// <exception cref="IndexOutOfRangeException">Span bit length is shorter than index used.</exception>
     public static bool CheckBitInSpan(this Span<byte> span, uint index) {
         if (span.Length < (index >> 3))
-            return (span[(int)(index >> 3)] & (1 << (byte)(index & 7))) != 0;
-        throw new IndexOutOfRangeException();
+            throw new IndexOutOfRangeException();
+        return (span[(int)(index >> 3)] & (1 << (byte)(index & 7))) != 0;
     }
 }
