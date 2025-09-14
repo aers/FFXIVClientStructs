@@ -334,14 +334,11 @@ public unsafe partial struct PlayerState {
     public partial bool IsFolkloreBookUnlocked(uint tomeId);
 
     /// <remarks>Only call this for FishParameter rows where IsInLog is true.</remarks>
-    public bool IsFishCaught(uint fishParameterId) {
-        return ((CaughtFishBitmask[(int)fishParameterId / 8] >> (byte)(fishParameterId % 8)) & 1) == 1;
-    }
+    public bool IsFishCaught(uint fishParameterId)
+        => CaughtFishBitmask.CheckBitInSpan(fishParameterId);
 
-    public bool IsSpearfishCaught(uint spearfishingItemId) {
-        var id = spearfishingItemId - 20000;
-        return ((CaughtSpearfishBitmask[(int)id / 8] >> (byte)(id % 8)) & 1) == 1;
-    }
+    public bool IsSpearfishCaught(uint spearfishingItemId)
+        => CaughtSpearfishBitmask.CheckBitInSpan(spearfishingItemId - 20000);
 
     /// <summary>
     /// Check if a specific McGuffin (Collectible/Curiosity) has been unlocked by the player.
