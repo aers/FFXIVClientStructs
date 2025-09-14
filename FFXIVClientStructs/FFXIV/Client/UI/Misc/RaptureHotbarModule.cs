@@ -244,9 +244,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </remarks>
     /// <param name="hotbarId">The hotbar ID (bounded between 0 and 17) to check.</param>
     /// <returns>Returns true if the hotbar is shared, false otherwise.</returns>
-    public bool IsHotbarShared(uint hotbarId) {
-        return ((1 << ((int)hotbarId & 7)) & this.HotbarShareStateBitmask[(int)hotbarId >> 3]) > 0;
-    }
+    public bool IsHotbarShared(uint hotbarId) => HotbarShareStateBitmask.CheckBitInSpan(hotbarId);
 
     /// <summary>
     /// Sets a hotbar slot and triggers a save for it automatically via <see cref="WriteSavedSlot"/>. This will

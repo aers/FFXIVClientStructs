@@ -45,15 +45,7 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0xE60)] private void* UnkStructE00;
     [FieldOffset(0xE68)] public StdVector<Pointer<WKSModuleBase>> Modules;
 
-    public bool IsMissionCompleted(uint missionUnitId) {
-        var group = (byte)(missionUnitId >> 3);
-        var mask = 1 << ((int)missionUnitId & 7);
-        return (mask & MissionCompletionFlags[group]) != 0;
-    }
+    public bool IsMissionCompleted(uint missionUnitId) => MissionCompletionFlags.CheckBitInSpan(missionUnitId);
 
-    public bool IsMissionGolded(uint missionUnitId) {
-        var group = (byte)(missionUnitId >> 3);
-        var mask = 1 << ((int)missionUnitId & 7);
-        return (mask & MissionGoldFlags[group]) != 0;
-    }
+    public bool IsMissionGolded(uint missionUnitId) => MissionGoldFlags.CheckBitInSpan(missionUnitId);
 }
