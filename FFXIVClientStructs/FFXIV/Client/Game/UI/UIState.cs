@@ -80,35 +80,39 @@ public unsafe partial struct UIState {
     [FieldOffset(0x19E18)] public long NextMapAllowanceTimestamp;
     [FieldOffset(0x19E20)] public long NextChallengeLogResetTimestamp;
 
-    // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
     // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
+    /// <remarks> Use <see cref="IsUnlockLinkUnlocked"/>. </remarks>
     [FieldOffset(0x19E2C), FixedSizeArray] internal FixedSizeArray92<byte> _unlockLinkBitmask;
 
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
-    // Size: (AetheryteSheet.RowCount + 7) / 8
+    // Size: (AetheryteSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsAetheryteUnlocked"/>. </remarks>
     [FieldOffset(0x19E88), FixedSizeArray] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
 
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
-    // Size: (HowToSheet.RowCount + 7) / 8
+    // Size: (HowToSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsHowToUnlocked"/>. </remarks>
     [FieldOffset(0x19EA6), FixedSizeArray] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
 
-    // Ref: g_Client::Game::UI::UnlockedCompanionsMask
-    //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
-    // Size: (CompanionSheet.RowCount + 7) / 8
+    // Ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
+    // Size: (CompanionSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsCompanionUnlocked"/>. </remarks>
     [FieldOffset(0x19ECB), FixedSizeArray] internal FixedSizeArray71<byte> _unlockedCompanionsBitmask;
 
-    // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
-    [FieldOffset(0x19F12), FixedSizeArray] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
+    // Size: (ChocoboTaxiStandSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsChocoboTaxiStandUnlocked"/>. </remarks>
+    [FieldOffset(0x19F12), FixedSizeArray] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStandsBitmask;
+    [FieldOffset(0x19F12), FixedSizeArray, Obsolete("Renamed to UnlockedChocoboTaxiStandsBitmask")] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
 
-    // Ref: UIState#IsCutsceneSeen
-    // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) / 8
-    [FieldOffset(0x19F1E), FixedSizeArray] internal FixedSizeArray172<byte> _cutsceneSeenBitmask;
+    // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) >> 3
+    /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
+    [FieldOffset(0x19F1E), FixedSizeArray] internal FixedSizeArray173<byte> _cutsceneSeenBitmask;
 
     // unk bitmasks
 
-    // Ref: UIState#IsTripleTriadCardUnlocked
-    // Size: TripleTriadCard.RowCount / 8
-    [FieldOffset(0x19FCC), FixedSizeArray] internal FixedSizeArray56<byte> _unlockedTripleTriadCardsBitmask;
+    // Size: (TripleTriadCardSheet.RowCount + 7) >> 3
+    /// <remarks> Use <see cref="IsTripleTriadCardUnlocked"/>. </remarks>
+    [FieldOffset(0x19FCC), FixedSizeArray] internal FixedSizeArray57<byte> _unlockedTripleTriadCardsBitmask;
     [FieldOffset(0x1A008)] public ulong UnlockedTripleTriadCardsCount;
 
     [FieldOffset(0x1A022)] public int TerritoryTypeTransientOffsetZ; // this is a short in the sheet and copied with a 4 byte register causing it to be an int
@@ -208,7 +212,7 @@ public unsafe partial struct UIState {
         => UnlockedCompanionsBitmask.CheckBitInSpan(companionId);
 
     public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId)
-        => ChocoboTaxiStandsBitmask.CheckBitInSpan(chocoboTaxiStandId);
+        => UnlockedChocoboTaxiStandsBitmask.CheckBitInSpan(chocoboTaxiStandId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 88 46 02 B0 01")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
