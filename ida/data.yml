@@ -23233,7 +23233,7 @@ classes:
   Client::Game::Object::HousingFlowerPotObject:
     vtbls:
       - ea: 0x1422E1B60
-        base: Client::Game::Object::GameObject
+        base: Client::Game::Object::HousingObject
       - ea: 0x1422E1DF8
         base: Client::LayoutEngine::Housing::HousingEventListener
     funcs:
