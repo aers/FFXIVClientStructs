@@ -14697,6 +14697,8 @@ classes:
     vtbls:
       - ea: 0x14208D938
         base: Client::Game::Event::EventHandler
+    funcs:
+      0x140D148A0: RaycastFishingSpot
   Client::Game::Event::GCShopEventHandler: # 0x16
     vtbls:
       - ea: 0x142160398
