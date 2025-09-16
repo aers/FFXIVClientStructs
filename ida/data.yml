@@ -1284,6 +1284,13 @@ classes:
       0x141637450: SetObjectAt #(idx, object)
       0x141637490: RemoveObjectAt
       0x140328170: HasObjectAt
+  Client::Game::Object::EventObjectManager:
+    instances:
+      - ea: 0x14296CF70
+    funcs:
+      0x1416396A0: Initialize
+      0x1416397C0: Destroy
+      0x141639AE0: GetObjectByIndex
   Client::Game::Object::StandObjectManager: # Lively ENpcs
     instances:
       - ea: 0x14297F350
@@ -1863,10 +1870,13 @@ classes:
       0x140C8FEF0: Finalizer
       0x140C8FFD0: HasInstance
       0x140C8FFF0: GetInstance
+      0x140C98620: GetFurnitureManager
+      0x140C97AF0: HasIndoorOrOutdoorTerritory
       0x140C98140: Update
       0x140C95530: IsOutside
       0x140C95540: IsInside
       0x140C95550: IsInWorkshop
+      0x140C96B10: IsInMansion
       0x140C95790: GetCurrentDivision
       0x140C96200: HasHousePermissions
       0x140C95750: GetCurrentPlot
@@ -1903,18 +1913,49 @@ classes:
       1: Update
       2: IsLoaded
       6: GetTerritoryType
+  Client::Game::HousingFurnitureManager:
+    funcs:
+      0x140C9C2F0: ctor
+      0x140C9F140: GetValueSetsByFurnitureIndex
+      0x140C9FE40: GetHousingEventObjectByFurnitureIndex
+  Client::Game::HousingObjectManager::HousingObjectArray:
+    funcs:
+      0x141943AB0: ctor
+      0x141944250: GetObjectByIndex
+  Client::Game::HousingTemporaryObject:
+    vtbls:
+      - ea: 0x14207DA90
+        base: Client::LayoutEngine::Housing::HousingEventListener
+    funcs:
+      0x140CA0220: ctor
+      0x140CA0260: Finalizer
+      0x140CA0280: SetItem
+  Client::Game::HousingTerritory::HousingTerritoryUIEventListener:
+    vtbls:
+      - ea: 0x14207DA90
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface # technically Client::Game::HousingUIEventListener<Client::Game::HousingTerritory>
   Client::Game::OutdoorTerritory:
     vtbls:
       - ea: 0x14207DBC0
         base: Client::Game::HousingTerritory
     funcs:
+      0x140CA2070: ctor
       0x140CAA4F0: GetPlotIcon # (this, plotIndex)  # inlined @ 140D1ECF0
       0x140CA7DE0: IsEstateShared # (this, plotIndex)
       0x140CA7CC0: IsEstateResident # (this, plotIndex)
+  Client::Game::IndoorTerritory::IndoorTerritoryUIEventListener:
+    vtbls:
+      - ea: 0x14207DC10
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface # technically Client::Game::HousingUIEventListener<Client::Game::IndoorTerritory>
+  Client::Game::IndoorTerritory::IndoorTerritoryAquariumData:
+    funcs:
+      0x14198BE50: ctor
   Client::Game::IndoorTerritory:
     vtbls:
       - ea: 0x14207DC28
         base: Client::Game::HousingTerritory
+    funcs:
+      0x140CABDF0: ctor
   Client::Game::WorkshopTerritory:
     vtbls:
       - ea: 0x14207DC68
@@ -9306,6 +9347,7 @@ classes:
       0x14096E670: ShowLogMessage<uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2)
       0x14096EAC0: ShowLogMessage<uint,uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2, IntegerParameter3)
       0x14096EF70: ShowLogMessage<string> # (this, logMessageId, StringParameter1)
+      0x140970FB0: GetChatTab
       0x140970FD0: SetTabName
       0x140971180: GetTabName
       0x1409711F0: FormatPlayerLink
@@ -23182,14 +23224,39 @@ classes:
       0x14075C220: FindOrCreateInterface
   Client::Game::Object::HousingObject:
     vtbls:
-      - ea: 0x1422CC090
+      - ea: 0x1422B8F10
         base: Client::Game::Object::GameObject
+      - ea: 0x1422B91A8
+        base: Client::LayoutEngine::Housing::HousingEventListener
+    funcs:
+      0x141925510: ctor
+  Client::Game::Object::HousingFlowerPotObject:
+    vtbls:
+      - ea: 0x1422E1B60
+        base: Client::Game::Object::GameObject
+      - ea: 0x1422E1DF8
+        base: Client::LayoutEngine::Housing::HousingEventListener
+    funcs:
+      0x14198D270: ctor
+  Client::Game::Object::HousingObjectId:
     funcs:
       0x1419253F0: GetUsageType
+  Client::Game::Object::HousingEventObject:
+    vtbls:
+      - ea: 0x1422CC090
+        base: Client::Game::Object::HousingObject
+      - ea: 0x1422CC328
+        base: Client::LayoutEngine::Housing::HousingEventListener
+    funcs:
+      0x141970F40: ctor
   Client::Game::Object::HousingCombinedObject:
     vtbls:
       - ea: 0x1422E1670
         base: Client::Game::Object::HousingObject
+      - ea: 0x1422E1908
+        base: Client::LayoutEngine::Housing::HousingEventListener
+    funcs:
+      0x14198CDF0: ctor
   Client::System::Scheduler::Object::ObjectManager:
     vtbls:
       - ea: 0x142179818

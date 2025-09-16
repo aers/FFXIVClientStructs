@@ -47,6 +47,10 @@ public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B F8 8D 4A 02")]
     public partial HouseId GetCurrentIndoorHouseId();
 
+    /// <remarks> Only available when <see cref="OutdoorTerritory"/> or <see cref="IndoorTerritory"/> are loaded. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 56 ?? 41 B0")]
+    public partial HousingFurnitureManager* GetFurnitureManager();
+
     /// <summary>
     /// Gets the TerritoryTypeId of the house the player is currently standing at.<br/>
     /// For indoor territories that were renovated, this returns the original location.
