@@ -214,13 +214,13 @@ public unsafe partial struct GameObject {
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 FF 0F 84 ?? ?? ?? ?? F3 0F 10 97")]
     public partial Vector3* GetNamePlateWorldPosition(Vector3* vector);
 
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct NamePlateColors {
-        [FieldOffset(0), CExporterIgnore] public ulong Data;
+        [FieldOffset(0x00), CExporterIgnore] public ulong Data;
         /// <seealso cref="Hud2NumberArray.TargetBarBackdropColor"/>
-        [FieldOffset(0)] public ByteColor EdgeColor;
+        [FieldOffset(0x00)] public ByteColor EdgeColor;
         /// <seealso cref="Hud2NumberArray.TargetBarFillColor"/>
-        [FieldOffset(4)] public ByteColor Color;
+        [FieldOffset(0x04)] public ByteColor Color;
 
         public static implicit operator ulong(NamePlateColors colors) => colors.Data;
         public static implicit operator NamePlateColors(ulong colors) => *(NamePlateColors*)&colors;
@@ -232,11 +232,11 @@ public unsafe partial struct GameObject {
 //   if (BaseId == 0 || (ObjectIndex >= 200 && ObjectIndex < 244)) ObjectId = ObjectIndex, Type = 2
 //   if (BaseId != 0) ObjectId = BaseId, Type = 1
 // else ObjectId = EntityId, Type = 0
-[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public struct GameObjectId : IEquatable<GameObjectId>, IComparable<GameObjectId> {
-    [FieldOffset(0x0), CExporterIgnore] public ulong Id;
-    [FieldOffset(0x0)] public uint ObjectId;
-    [FieldOffset(0x4)] public byte Type;
+    [FieldOffset(0x00), CExporterIgnore] public ulong Id;
+    [FieldOffset(0x00)] public uint ObjectId;
+    [FieldOffset(0x04)] public byte Type;
 
     public static implicit operator ulong(GameObjectId id) => id.Id;
     public static unsafe implicit operator GameObjectId(ulong id) => *(GameObjectId*)&id;
