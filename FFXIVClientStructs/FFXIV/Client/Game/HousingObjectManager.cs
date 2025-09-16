@@ -3,7 +3,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xC98)]
+[StructLayout(LayoutKind.Explicit, Size = 0xCA8)]
 public unsafe partial struct HousingObjectManager {
     [FieldOffset(0x00)] public StdMap<ushort, HousingObjectData> DataMap;
     [FieldOffset(0x10)] public HousingObjectArray ObjectArray;
