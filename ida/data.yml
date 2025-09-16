@@ -23252,7 +23252,7 @@ classes:
   Client::Game::Object::HousingCombinedObject:
     vtbls:
       - ea: 0x1422E1670
-        base: Client::Game::Object::HousingObject
+        base: Client::Game::Object::HousingEventObject
       - ea: 0x1422E1908
         base: Client::LayoutEngine::Housing::HousingEventListener
     funcs:
