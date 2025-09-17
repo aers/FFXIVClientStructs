@@ -27,7 +27,7 @@ public unsafe partial struct IndoorTerritory {
     [FieldOffset(0x96F0)] public HousingObject* TargetedHousingObject;
     [FieldOffset(0x96F8)] public HousingObject* HoveredHousingObject;
     [FieldOffset(0x9700)] public HousingObject* MovingHousingObject;
-    [FieldOffset(0x9708)] public uint Unk9708;
+    [FieldOffset(0x9708)] public uint Unk9708; // something layout related. same as OutdoorTerritory.Unk9B50
     [FieldOffset(0x970C)] public uint CurrentFloor; // Might be int but was casted to uint
     [FieldOffset(0x9710)] public IndoorTerritoryUIEventListener UIEventListener1;
     [FieldOffset(0x9738)] public IndoorTerritoryUIEventListener UIEventListener2;

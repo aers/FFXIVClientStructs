@@ -448,6 +448,8 @@ functions:
   0x1409C97A0: IsCharacterPartyPet
   0x1409C9860: IsCharacterBattalionFriendlyToPlayer
   0x140C648A0: UseBozjaActionFromHolster
+  0x140C99A60: GetPlotSize # (territoryType, plot)
+  0x140C9A4C0: GetHousingLandSetRowIdForTerritoryType
   0x14181B580: ScheduleClipUpdate # vf31
   0x14191E0F0: GetInstanceContentCrystallineConflictDirector
   0x14190D660: GetInstanceContentMahjongDirector
@@ -1291,6 +1293,7 @@ classes:
       0x1416396A0: Initialize
       0x1416397C0: Destroy
       0x141639AE0: GetObjectByIndex
+      0x141639B00: GetObjectById
   Client::Game::Object::StandObjectManager: # Lively ENpcs
     instances:
       - ea: 0x14297F350
