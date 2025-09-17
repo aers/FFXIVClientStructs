@@ -7,6 +7,6 @@ public partial struct HousingFurnitureManager {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furnitureMemory;
     [FieldOffset(0x8940)] public StdVector<Pointer<HousingFurniture>> FurnitureVector;
     [FieldOffset(0x8958)] public HousingObjectManager ObjectManager;
-    
+
     [FieldOffset(0x9678)] public long LastUpdate; // every ~200ms
 }
