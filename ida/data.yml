@@ -1933,6 +1933,9 @@ classes:
       0x140CA0220: ctor
       0x140CA0260: Finalizer
       0x140CA0280: SetItem
+  Client::Game::HouseBuddy:
+    vtbls:
+      - ea: 0x14207DB80
   Client::Game::HousingTerritory::HousingTerritoryUIEventListener:
     vtbls:
       - ea: 0x14207DBA8
