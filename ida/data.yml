@@ -1932,7 +1932,7 @@ classes:
       0x140CA0280: SetItem
   Client::Game::HousingTerritory::HousingTerritoryUIEventListener:
     vtbls:
-      - ea: 0x14207DA90
+      - ea: 0x14207DBA8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # technically Client::Game::HousingUIEventListener<Client::Game::HousingTerritory>
   Client::Game::OutdoorTerritory:
     vtbls:
