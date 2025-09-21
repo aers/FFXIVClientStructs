@@ -48,11 +48,13 @@ public unsafe partial struct AtkTextInput {
         public partial AtkResNode* GetOwnerNode();
     }
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
     public struct TextSelectionInfo {
-        [FieldOffset(0x0)] public bool CharacterAdded;
-        [FieldOffset(0x4)] public ushort SelectionStart;
-        [FieldOffset(0x8)] public ushort SelectionEnd;
-        [FieldOffset(0xC)] public ushort StringLength;
+        [FieldOffset(0x0)] public short CharactersAdded;
+        [FieldOffset(0x2)] public ushort SelectionStart;
+        [FieldOffset(0x4)] public ushort SelectionEnd;
+        [FieldOffset(0x6)] public ushort StringLength;
+        [FieldOffset(0x8)] public Utf8String* String1;
+        [FieldOffset(0x10)] public Utf8String* String2;
     }
 }
