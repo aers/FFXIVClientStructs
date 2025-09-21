@@ -13,12 +13,14 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0xB48)]
 public unsafe partial struct AddonBannerEditor {
     [FieldOffset(0x238)] public PreviewController PreviewController;
-    [FieldOffset(0x2F0)] public AtkComponentDropDownList* PresetDropdown;
-    [FieldOffset(0x310)] public AtkComponentDropDownList* BackgroundDropdown;
-    [FieldOffset(0x330)] public AtkComponentDropDownList* FrameDropdown;
-    [FieldOffset(0x350)] public AtkComponentDropDownList* AccentDropdown;
-    [FieldOffset(0x370)] public AtkComponentDropDownList* PoseDropdown;
-    [FieldOffset(0x390)] public AtkComponentDropDownList* ExpressionDropdown;
+    /// <remarks> [0] Preset, [1] Background, [2] Frame, [3] Accent, [4] Pose, [5] Expression </remarks>
+    [FieldOffset(0x2F0), FixedSizeArray] internal FixedSizeArray6<DropdownEntry> _dropdowns;
+    [FieldOffset(0x2F0), Obsolete("Use Dropdowns[0].Dropdown")] public AtkComponentDropDownList* PresetDropdown;
+    [FieldOffset(0x310), Obsolete("Use Dropdowns[1].Dropdown")] public AtkComponentDropDownList* BackgroundDropdown;
+    [FieldOffset(0x330), Obsolete("Use Dropdowns[2].Dropdown")] public AtkComponentDropDownList* FrameDropdown;
+    [FieldOffset(0x350), Obsolete("Use Dropdowns[3].Dropdown")] public AtkComponentDropDownList* AccentDropdown;
+    [FieldOffset(0x370), Obsolete("Use Dropdowns[4].Dropdown")] public AtkComponentDropDownList* PoseDropdown;
+    [FieldOffset(0x390), Obsolete("Use Dropdowns[5].Dropdown")] public AtkComponentDropDownList* ExpressionDropdown;
 
     [FieldOffset(0x3D0), FixedSizeArray] internal FixedSizeArray15<Utf8String> _filterNames;
     [FieldOffset(0x9E8)] public AtkComponentCheckBox* PlayAnimationCheckbox;
@@ -48,4 +50,12 @@ public unsafe partial struct AddonBannerEditor {
     [FieldOffset(0xB28)] public short NumPresets;
 
     [FieldOffset(0xB43)] public bool IsWarningSymbolShown;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x20)]
+    public struct DropdownEntry {
+        [FieldOffset(0x00)] public AtkComponentDropDownList* Dropdown;
+        [FieldOffset(0x08)] public AtkComponentButton* PrevButton;
+        [FieldOffset(0x10)] public AtkComponentButton* NextButton;
+        [FieldOffset(0x18)] public AtkComponentButton* ListButton;
+    }
 }
