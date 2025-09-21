@@ -23773,8 +23773,16 @@ classes:
         pointer: true
     vtbls:
       - ea: 0x141FE1DD0
+    vfuncs:
+      0: Dtor
+      3: Malloc
+      5: AlignedMalloc
+      6: AlignedRealloc
+      7: AlignedFree
+      9: GetMemoryModule
     funcs:
       0x140089720: Free
+      0x140089E70: CreateMemorySpaces
   Client::System::Memory::IMemoryModule:
     vtbls:
       - ea: 0x141FE1ED8
@@ -23797,6 +23805,13 @@ classes:
   Client::System::Memory::Regular::FixedSpace:
     vtbls:
       - ea: 0x141FE21F8
+        base: Client::System::Memory::IMemorySpace
+  Client::System::Memory::Regular::DefaultSpace:
+    instances:
+      - ea: 0x142775E08
+        pointer: false
+    vtbls:
+      - ea: 0x141FE1F48
         base: Client::System::Memory::IMemorySpace
   Common::Math::Half:
     funcs:
