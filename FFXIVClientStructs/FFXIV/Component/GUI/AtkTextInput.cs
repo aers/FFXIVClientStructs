@@ -20,8 +20,8 @@ public unsafe partial struct AtkTextInput {
 
     [FieldOffset(0xDA)] public short CursorPos;
     [FieldOffset(0xDC)] public short TextLength;
-    [FieldOffset(0xDE)] public short SelectionEnd;
-    [FieldOffset(0xE0)] public short SelectionStart;
+    [FieldOffset(0xDE)] public short SelectionStart;
+    [FieldOffset(0xE0)] public short SelectionEnd;
 
     [FieldOffset(0x1C0)] public ClipBoard ClipboardData;
     [FieldOffset(0x298)] public Utf8String CopyBufferRaw;
@@ -40,8 +40,21 @@ public unsafe partial struct AtkTextInput {
     [GenerateInterop(true)]
     [VirtualTable("48 89 86 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 86 ?? ?? ?? ?? E8 ?? ?? ?? ?? 40 F6 C5 01", 10, 5)]
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
-    public unsafe partial struct AtkTextInputEventInterface {
+    public partial struct AtkTextInputEventInterface {
+        [VirtualFunction(1)]
+        public partial void UpdateTextSelection(TextSelectionInfo* selectionInfo);
+
         [VirtualFunction(4)]
         public partial AtkResNode* GetOwnerNode();
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x18)]
+    public struct TextSelectionInfo {
+        [FieldOffset(0x0)] public short CharactersAdded;
+        [FieldOffset(0x2)] public ushort SelectionStart;
+        [FieldOffset(0x4)] public ushort SelectionEnd;
+        [FieldOffset(0x6)] public ushort StringLength;
+        [FieldOffset(0x8)] public Utf8String* String1;
+        [FieldOffset(0x10)] public Utf8String* String2;
     }
 }

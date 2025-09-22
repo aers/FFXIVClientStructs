@@ -1073,6 +1073,7 @@ classes:
       - ea: 0x142041470
     vfuncs:
       0: Dtor
+      1: UpdateTextSelection
       4: GetOwnerNode
   Component::GUI::AtkGrid:
     vtbls:
@@ -16502,6 +16503,8 @@ classes:
       91: IsCross # only true on _ActionCross
     funcs:
       0x141478AC0: ctor
+      0x14147AC10: UpdateHotbarSlot
+      0x14147B6F0: ShowTooltip
 #oldfail       0x141459FB0: UpdatePulsingSlots # inlined @ 0x1413A6EA0
 #oldfail       0x14145A060: UpdateIconFrames # inlined @ 0x1413A6EA0
 #oldfail       0x14145A940: UpdateSlotVisibilityForDragDrop # inlined @ 0x1413A6EA0
@@ -21902,6 +21905,8 @@ classes:
     vtbls:
       - ea: 0x142124F70
         base: Client::UI::AddonScreenInfoChild
+    funcs:
+      0x141458B10: SetImage
   Client::UI::AddonPopUpText:
     vtbls:
       - ea: 0x14210F840

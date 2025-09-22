@@ -42,6 +42,12 @@ public unsafe partial struct AddonActionBarBase {
     /// <param name="slotIndex">A zero-indexed value of which slot to pulse.</param>
     [VirtualFunction(81)]
     public partial void PulseActionBarSlot(int slotIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 81 C6 ?? ?? ?? ?? 83 C7 11")]
+    public partial void UpdateHotbarSlot(ActionBarSlot* slot, NumberArrayData* numberArray, StringArrayData* stringArrayData, int numberArrayIndex, int stringArrayIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 64 24 ?? 48 8B 7C 24 ?? 48 8B 74 24 ?? 4C 8B 6C 24 ??")]
+    public partial void ShowTooltip(AtkResNode* node, NumberArrayData* numberArray, StringArrayData* stringArrayData, int numberArrayIndex, int stringArrayIndex);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
