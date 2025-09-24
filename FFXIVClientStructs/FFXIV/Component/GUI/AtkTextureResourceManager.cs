@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Component.Exd;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
@@ -13,6 +14,14 @@ public unsafe partial struct AtkTextureResourceManager {
     // Icon ranges are inclusive: id ∈ [a,b]
     [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray4<StdPair<uint, uint>> _localizedIconRange;
     [FieldOffset(0x50)] public uint LocalizedIconRangeCount;
+
+    /// <summary>
+    /// Unloads the texture if the reference count is 1, otherwise decrements the textures reference count.
+    /// </summary>
+    /// <param name="textureHandle">Pointer to a texture resource</param>
+    /// <returns>-1 if the textureHandle is null, 0 otherwise</returns>
+    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 45 84 FF")]
+    public partial long UnloadTexture(TextureResourceHandle* textureHandle);
 }
 
 public enum IconSubFolder {
