@@ -21,7 +21,7 @@ public unsafe partial struct AtkTextureResourceManager {
     /// <param name="textureHandle">Pointer to a texture resource</param>
     /// <returns>-1 if the textureHandle is null, 0 otherwise</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 45 84 FF")]
-    public partial long UnloadTexture(TextureResourceHandle* textureHandle);
+    public partial int UnloadTexture(TextureResourceHandle* textureHandle);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 35 48 8B 48 08")]
     public partial AtkTextureResource* LoadIconTexture(int iconId, IconSubFolder folder);
