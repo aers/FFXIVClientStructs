@@ -13,6 +13,8 @@ public unsafe partial struct AtkInputManager {
 
     [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray256<FocusEntry> _focusList;
 
+    [FieldOffset(0x1880)] public AtkCollisionNode* FocusedCollisionNode;
+
     [MemberFunction("E8 ?? ?? ?? ?? 33 C0 48 89 86 ?? ?? ?? ?? 88 86 ?? ?? ?? ?? 38 86")]
     public partial void HandleInput(AtkUnitManager* unitManager, AtkCollisionManager* collisionManager);
 
