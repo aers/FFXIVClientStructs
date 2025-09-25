@@ -60,5 +60,7 @@ public unsafe partial struct NamePlateNumberArray {
         /// </summary>
         [FieldOffset(0x4C)] public int VisibilityFlags;
         // [FieldOffset(0x50)] public int Unk;
+
+        [FieldOffset(0x80)] public int EntityId;
     }
 }
