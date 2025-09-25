@@ -209,8 +209,11 @@ public class Exporter {
         foreach (var processedStruct in _structs) {
             foreach (var processedStructField in processedStruct.Fields) {
                 if (!check.TryGetValue(processedStruct.StructType.FullSanitizeName(), out var checkStrings)) continue;
-                if (checkStrings.Contains(processedStructField.FieldName))
-                    ExporterStatics.ErrorList.Add($"Field name overlap detected in {processedStruct.StructType.FullSanitizeName().Pastel(Color.MediumSlateBlue)} with field {processedStructField.FieldName.Pastel(Color.Red)}");
+                if (checkStrings.Contains(processedStructField.FieldName)) {
+                    var structName = processedStruct.StructType.FullSanitizeName();
+                    var fieldName = processedStructField.FieldName;
+                    ExporterStatics.ErrorList.Add($"Field name overlap detected in {structName.Pastel(Color.MediumSlateBlue)} with field {fieldName.Pastel(Color.Red)} in data.yml {(structName + "_" + fieldName).Pastel(Color.BlueViolet)}");
+                }
             }
         }
     }
