@@ -26,8 +26,8 @@ public unsafe partial struct AtkTextureResourceManager {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 35 48 8B 48 08")]
     public partial AtkTextureResource* LoadIconTexture(int iconId, IconSubFolder folder);
     
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E8 48 85 C0 74 52")]
-    public partial AtkTextureResource* LoadTexture(CStringPointer path, IconSubFolder folder);
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E8 48 85 C0 74 52"), GenerateStringOverloads]
+    public partial AtkTextureResource* LoadTexture(CStringPointer path, int textureScale);
 }
 
 public enum IconSubFolder {
