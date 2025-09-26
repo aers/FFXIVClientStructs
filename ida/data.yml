@@ -7101,6 +7101,7 @@ classes:
     funcs:
       0x14060E360: LoadTexture
       0x14060E5F0: LoadIconTexture
+      0x14060E950: UnloadTexture
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x142040790
