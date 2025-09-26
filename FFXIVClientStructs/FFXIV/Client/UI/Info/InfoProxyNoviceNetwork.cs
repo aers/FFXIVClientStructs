@@ -17,5 +17,5 @@ public unsafe partial struct InfoProxyNoviceNetwork {
     public partial void SendJoinRequest();
 
     [MemberFunction("E8 ?? ?? ?? ?? 89 7B ?? C6 43")]
-    public partial void Leave();
+    public static partial void Leave();
 }
