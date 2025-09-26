@@ -9,4 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MassivePcContent;
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
 [StructLayout(LayoutKind.Explicit, Size = 0x960)]
-public unsafe partial struct MassivePcContentDirector;
+public unsafe partial struct MassivePcContentDirector {
+    [FieldOffset(0x648), FixedSizeArray] internal FixedSizeArray2<StdVector<MassivePcContentTodo>> _massivePcContentTodos;
+}

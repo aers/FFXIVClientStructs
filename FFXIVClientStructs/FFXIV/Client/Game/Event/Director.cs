@@ -17,13 +17,15 @@ public unsafe partial struct Director {
     [FieldOffset(0x348)] public byte Sequence;
     [FieldOffset(0x34A), FixedSizeArray] internal FixedSizeArray10<byte> _unionData; // I8A-I8J, UI8A-UI8J, Branch etc.
     [FieldOffset(0x358)] public Utf8String Title;
-    [FieldOffset(0x3C0)] public Utf8String Description;
+    [FieldOffset(0x3C0), Obsolete("Renamed to Objective")] public Utf8String Description;
+    [FieldOffset(0x3C0)] public Utf8String Objective; // name based on the Lua function "SetDirectorObjective"
     [FieldOffset(0x428)] public Utf8String ReliefText;
     // So far, the Content*Timestamps have been seen in Leves.
     // Dungeons and Frontlines do not use these.
     [FieldOffset(0x490)] public long DirectorStartTimestamp;
     [FieldOffset(0x498)] public long DirectorEndTimestamp;
-    [FieldOffset(0x4A0)] public StdVector<EventHandlerObjective> Objectives; // 10 objectives max
+    [FieldOffset(0x4A0), Obsolete($"Use {nameof(DirectorTodos)}, or {nameof(GetDirectorTodos)}")] public StdVector<EventHandlerObjective> Objectives;
+    [FieldOffset(0x4A0)] public StdVector<DirectorTodo> DirectorTodos; // name based on the Lua function "SetDirectorTodo", 10 objectives max
     [FieldOffset(0x4B8)] public uint EventItemId;
 
     [VirtualFunction(273)]

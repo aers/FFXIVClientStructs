@@ -2526,14 +2526,33 @@ classes:
       0x140A16160: Hide # lua function "HideDirectorTodo"
       0x140A16170: GetTitle
       0x140A16180: GetIconId
-      0x140A16190: GetDescription
+      0x140A16190: GetObjective
       0x140A161C0: GetReliefText
       0x140A161F0: GetEventItemId
       0x140A16250: GetRecommendedLevel
       0x140A162A0: GetCompanyLeveInfo
-      0x140A162E0: GetObjectives
+      0x140A162E0: GetTodos
       0x140A16300: GetTimeRemaining
       0x140A16340: HasTimer
+  Client::Game::UI::MassivePcContentTodo:
+    funcs:
+      0x140A4FB30: IsShown
+      0x140A4F7B0: SetDirector
+      0x140A4FAE0: SetUpdatePending
+      0x140A4FB00: UnsetUpdatePending
+      0x140A4FB10: Show
+      0x140A4FB20: Hide
+      0x140A4FB50: GetTitle
+      0x140A4FB60: GetIconId
+      0x140A4FDD0: IsTodoTitleFocusable
+      0x140A4FB70: GetObjective
+      0x140A4FBA0: GetReliefText
+      0x140A4FBD0: GetEventItemId
+      0x140A4FC30: GetRecommendedLevel
+      0x140A4FC80: GetCompanyLeveInfo
+      0x140A4FCC0: GetTodos
+      0x140A4FCE0: GetTimeRemaining
+      0x140A4FD20: HasTimer
   Client::Game::UI::UIState:
     instances:
       - ea: 0x14294F400
@@ -10760,7 +10779,7 @@ classes:
       0x140E38330: UpdateParty
       0x140E38850: UpdateTargetInfo
       0x140E39EC0: UpdateDTR
-      0x140E3B050: UpdateContentGauge
+      0x140E3B050: UpdateToDo
       0x140E3B3D0: UpdateMainCommands
       0x140E3B670: UpdateNaviMap
       0x140E3C7A0: UpdateEnemyList
@@ -10769,6 +10788,11 @@ classes:
       0x140E3F590: OpenContextMenuFromPartyAddon
       0x140E51690: UpdateBattleTalk
 #oldfail       0x140E37D20: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
+      0x140E49F70: UpdateDirectorToDo
+      0x140E4AA30: UpdateMassivePcContentToDo
+      0x140E490A0: UpdateFateDirectorToDo
+      0x140E49820: UpdateDynamicEventToDo
+      0x140E4B590: UpdateQuestToDo
       0x140E50880: GetMainCommandString  # MainCommand exd
       0x140E50BB0: OpenSystemMenu
   Client::UI::Agent::AgentChatLog::LinkedInventoryItem:
@@ -14017,7 +14041,9 @@ classes:
       255: GetTimeRemaining # pass current unix timestamp as a2
       256: HasTimer
       258: GetEventItemId
-      261: GetObjectives
+      261: GetDirectorTodos
+      262: GetMassivePcContentTodos
+      263: IsTodoTitleFocusable
       265: GetRecommendedLevel
       269: Initialize
   Client::Game::Event::EventHandlerSelector:
@@ -14566,10 +14592,13 @@ classes:
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
       273: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
+      290: Update
+      291: Update2
       292: SetSequence
       293: Synchronize
     funcs:
       0x140B58EE0: ctor
+      0x140B59620: SetGlobalParametersContentName
   Client::Game::CallbackSheetWaiter<Client::Game::UI::QuestTodoList>:
     vtbls:
       - ea: 0x142068FB8
@@ -15012,6 +15041,7 @@ classes:
       0x140B6E1D0: SetTerritoryTypeId
       0x140B6E430: ProcessDirectorUpdate
       0x140B6F420: ProcessMapEffect
+      0x140B6FD30: Update
       0x140B71620: GetDirectorByEventId
       0x140B71670: GetCompanyLeveDirector
       0x140B716D0: GetInstanceContentDirector
@@ -15062,6 +15092,7 @@ classes:
         base: Client::Game::Event::ModuleBase
     funcs:
       0x140B4C840: ctor
+      0x140B4D290: Update
   Client::Game::Event::EventState:
     vtbls:
       - ea: 0x142073AB0
@@ -16309,9 +16340,28 @@ classes:
     vtbls:
       - ea: 0x1422CD0F8
         base: Client::Game::Event::Director
+    vfuncs:
+      296: GetAdditionalTodoText
+      298: SetAdditionalTodo
+      299: SetAdditionalTodoNumber
+      300: SetAdditionalTodoFraction
+      301: SetAdditionalTodoFractionBar
+      302: SetAdditionalTodoLargeBar
+      303: SetAdditionalTodoColorableBar
+      304: SetAdditionalTodoTimeRemaining
+      305: SetAdditionalTodoQuestTitle
+      306: SetAdditionalTodoLargeTimeRemaining
+      307: SetAdditionalTodoLargeBlueText
+      308: SetAdditionalTodoLargeGrayText
+      309: SetAdditionalTodoJoinButton
+      329: ClearAdditionalTodo
     funcs:
       0x141972320: ctor
-  Client::Game::MassivePcContent::MassivePcContentCosmicExploration:
+  Client::Game::MassivePcContent::MassivePcContentCosmicExploration: # ContentId (MassivePcContent RowId?) 1 and 2: Sinus Ardorum and Phaenna
+    vtbls:
+      - ea: 0x1422CDC78
+        base: Client::Game::MassivePcContent::MassivePcContentDirector
+  Client::Game::MassivePcContent::MassivePcContentCosmicExploration2: # ContentId 3
     vtbls:
       - ea: 0x1422CE7C8
         base: Client::Game::MassivePcContent::MassivePcContentDirector
