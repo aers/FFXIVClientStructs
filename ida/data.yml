@@ -4772,6 +4772,7 @@ classes:
         base: Client::UI::Info::InfoProxyInterface
     funcs:
       0x14093C8F0: SendJoinRequest
+      0x14093CC60: Leave # static
       0x14093C9C0: InviteToNoviceNetwork
   Client::UI::Info::InfoProxyFreeCompany:
     vtbls:
