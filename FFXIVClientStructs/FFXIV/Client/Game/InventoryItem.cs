@@ -168,9 +168,8 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial byte GetMateriaCount();
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7F 5E 01")]
-    // a5 and a6 control behavior around IsPvP gear, but the PvP gear never has stats anymore, so they're meaningless
-    public static partial uint GetParameterValue(uint baseParamRowId, InventoryItem* inventoryItem, bool includeMateria, bool checkHQ, bool a5, bool a6);
+    public static partial uint GetParameterValue(uint baseParamRowId, InventoryItem* inventoryItem, bool includeMateria, bool checkHQ, bool checkPvPCharacterFlag, bool checkPvPItemFlag);
 
     [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 12")]
-    public static partial uint GetParameterMaxValue(uint baseParamRowId, void* itemRowData);
+    public static partial uint GetParameterMaxValue(uint baseParamRowId, [CExporterExcel("Item")] void* itemRowData);
 }

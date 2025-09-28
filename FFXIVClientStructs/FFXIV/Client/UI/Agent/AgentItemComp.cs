@@ -19,27 +19,30 @@ public unsafe partial struct AgentItemComp {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1650)]
     public partial struct ComparedItemData {
-        [FieldOffset(0), CExporterIgnore] public ComparedInventoryItem SelectedItem;
-        [FieldOffset(0x50), CExporterIgnore] public ComparedInventoryItem SelectedItemAlternateQuality;
-        [FieldOffset(0xA0), CExporterIgnore] public ComparedInventoryItem EquippedItem;
-        // If SelectedItem is a Ring, this will contain the left ring and EquippedItem will contain the right
-        [FieldOffset(0xF0), CExporterIgnore] public ComparedInventoryItem LeftRingItem;
-        // The game accesses these as an array
+        /// <remarks>
+        /// These items are, in order: the selected item, the alternate quality (HQ/NQ) of the selected item, the currently equipped item, and the left ring slot (if the SelectedItem is a ring)
+        /// Any item that doesn't exist is retained as an empty item in the array
+        /// </remarks>
         [FieldOffset(0), FixedSizeArray] internal FixedSizeArray4<ComparedInventoryItem> _items;
 
-        [FieldOffset(0x140), CExporterIgnore] public ComparedInventoryItemData SelectedItemData;
-        [FieldOffset(0x680), CExporterIgnore] public ComparedInventoryItemData SelectedItemAlternateQualityData;
-        [FieldOffset(0xBC0), CExporterIgnore] public ComparedInventoryItemData EquippedItemData;
-        [FieldOffset(0x1100), CExporterIgnore] public ComparedInventoryItemData LeftRingItemData;
-        // The game accesses these as an array
+        /// <remarks>
+        /// This array has the same layout as the one for Items
+        /// </remarks>
         [FieldOffset(0x140), FixedSizeArray] internal FixedSizeArray4<ComparedInventoryItemData> _itemData;
 
-        // 0 = No update needed
-        // 1 = Open
-        // 2 = Refresh
+        /// <summary>
+        /// This is set on any frame that the Agent will be updating the addon's UI
+        /// </summary>
+        /// <remarks>
+        /// 0 = No update needed
+        /// 1 = Open
+        /// 2 = Refresh
+        /// </remarks>
         [FieldOffset(0x1640)] public int UpdateState;
 
-        // Counts up across frames as the agent loads the necessary data
+        /// <remark>
+        /// Counts up across frames as the agent loads the necessary data
+        /// </remark>
         [FieldOffset(0x1644)] public int LoadState;
         [FieldOffset(0x1648)] public int ParentAddonId;
         [FieldOffset(0x164C)] public bool ShowAlternateQuality;
@@ -68,13 +71,14 @@ public unsafe partial struct AgentItemComp {
             [FieldOffset(0x51C), CExporterUnion("Delta")] public ShieldDataDelta Shield;
             [FieldOffset(0x51C), CExporterUnion("Delta")] public GearDataDelta Gear;
             [FieldOffset(0x53C)] public ushort ItemLevelRowId;
-            /*
-                0- Error
-                1- OK
-                2- Different Job can equip, but generally only for weapons?
-                3- Level Restricted
-                4- Class/Race/Gender/GC Restricted
-             */
+
+            /// <remark>
+            /// 0- Error
+            /// 1- OK
+            /// 2- Different Job can equip, but generally only for weapons?
+            /// 3- Level Restricted
+            /// 4- Class/Race/Gender/GC Restricted
+            /// </remark>
             [FieldOffset(0x53E)] public byte EquippableState;
             [FieldOffset(0x53F)] public byte DyeCount;
         }
@@ -100,11 +104,16 @@ public unsafe partial struct AgentItemComp {
             public int MagicDefense;
             public int PhysicalDefenseDelta;
             public int MagicDefenseDelta;
-            // Second values used when comparing against Left Ring
-            public int PhysicalDefense2;
-            public int MagicDefense2;
-            public int PhysicalDefenseDelta2;
-            public int MagicDefenseDelta2;
+            /// <remark>
+            /// This is always the same as PhysicalDefense, but the game sets it separately
+            /// </remark>
+            public int LeftRingSlotPhysicalDefense;
+            /// <remark>
+            /// This is always the same as MagicDefense, but the game sets it separately
+            /// </remark>
+            public int LeftRingSlotMagicDefense;
+            public int LeftRingSlotPhysicalDefenseDelta;
+            public int LeftRingSlotMagicDefenseDelta;
         }
     }
 }
