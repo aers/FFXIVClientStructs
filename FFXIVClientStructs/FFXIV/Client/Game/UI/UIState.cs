@@ -45,9 +45,7 @@ public unsafe partial struct UIState {
     [FieldOffset(0xC1B8)] public NpcTrade NpcTrade;
     [FieldOffset(0xC4E0)] public DirectorTodo DirectorTodo;
     [FieldOffset(0xC628)] public DirectorTodo FateDirectorTodo;
-    // [FieldOffset(0xC770)] public MassivePcContentTodo MassivePcContentTodo;
-    [FieldOffset(0xC770)] internal void* UnkC728; // TODO: remove for MassivePcContentTodo struct above
-    [FieldOffset(0xC778)] public DirectorTodo MassivePcContentTodo; // TODO: remove for MassivePcContentTodo struct above
+    [FieldOffset(0xC770)] public MassivePcContentTodo MassivePcContentTodo;
     [FieldOffset(0xC8C0)] public Map Map; // 7.2: size +0x08
     [FieldOffset(0x108D0)] public MarkingController MarkingController;
     [FieldOffset(0x10BB0)] public LimitBreakController LimitBreakController;
