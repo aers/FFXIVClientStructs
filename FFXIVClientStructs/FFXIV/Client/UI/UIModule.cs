@@ -55,7 +55,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x95010)] internal DataCenterHelper DataCenterHelper;
     [FieldOffset(0x95030)] internal WorldHelper WorldHelper;
     [FieldOffset(0x95070)] internal GoldSaucerModule GoldSaucerModule;
-    [FieldOffset(0x95340)] internal RaptureTeleportHistory RaptureTeleportHistory;
+    [FieldOffset(0x95340)] internal TeleportHistoryModule TeleportHistory;
     [FieldOffset(0x95408)] internal ItemContextCustomizeModule ItemContextCustomizeModule;
     [FieldOffset(0x955A0)] internal RecommendEquipModule RecommendEquipModule;
     [FieldOffset(0x95620)] internal PvpSetModule PvpSetModule;

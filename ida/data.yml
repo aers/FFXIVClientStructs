@@ -8563,7 +8563,7 @@ classes:
       27: GetDataCenterHelper
       28: GetWorldHelper
       29: GetGoldSaucerModule
-      30: GetRaptureTeleportHistory
+      30: GetTeleportHistoryModule
       31: GetItemContextCustomizeModule
       32: GetRecommendEquipModule
       33: GetPvpSetModule
@@ -9726,7 +9726,7 @@ classes:
       0x1407C1E10: GetEntry
       0x1407C2000: RemoveFromFavorites
       0x1407C20B0: AddToFavorites
-  Client::UI::Misc::RaptureTeleportHistory:
+  Client::UI::Misc::TeleportHistoryModule:
     vtbls:
       - ea: 0x142056860
         base: Client::UI::Misc::UserFileManager::UserFileEvent

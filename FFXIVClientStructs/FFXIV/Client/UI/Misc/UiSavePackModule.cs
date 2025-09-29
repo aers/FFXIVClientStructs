@@ -25,7 +25,7 @@ public enum DataSegment : byte {
     FLAGS = 0x02, // FlagStatus
     RCFAV = 0x03, // RecipeFavorite
     UIDATA = 0x04, // RaptureUiData
-    TLPH = 0x05, // RaptureTeleportHistory
+    TLPH = 0x05, // TeleportHistory
     ITCC = 0x06, // ItemContextCustomize
     PVPSET = 0x07, // PvpSet
     EMTH = 0x08, // EmoteHistory
