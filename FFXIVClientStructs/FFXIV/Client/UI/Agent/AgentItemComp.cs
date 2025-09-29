@@ -40,9 +40,9 @@ public unsafe partial struct AgentItemComp {
         /// </remarks>
         [FieldOffset(0x1640)] public int UpdateState;
 
-        /// <remark>
+        /// <remarks>
         /// Counts up across frames as the agent loads the necessary data
-        /// </remark>
+        /// </remarks>
         [FieldOffset(0x1644)] public int LoadState;
         [FieldOffset(0x1648)] public int ParentAddonId;
         [FieldOffset(0x164C)] public bool ShowAlternateQuality;
@@ -72,13 +72,13 @@ public unsafe partial struct AgentItemComp {
             [FieldOffset(0x51C), CExporterUnion("Delta")] public GearDataDelta Gear;
             [FieldOffset(0x53C)] public ushort ItemLevelRowId;
 
-            /// <remark>
+            /// <remarks>
             /// 0- Error
             /// 1- OK
             /// 2- Different Job can equip, but generally only for weapons?
             /// 3- Level Restricted
             /// 4- Class/Race/Gender/GC Restricted
-            /// </remark>
+            /// </remarks>
             [FieldOffset(0x53E)] public byte EquippableState;
             [FieldOffset(0x53F)] public byte DyeCount;
         }
@@ -104,13 +104,13 @@ public unsafe partial struct AgentItemComp {
             public int MagicDefense;
             public int PhysicalDefenseDelta;
             public int MagicDefenseDelta;
-            /// <remark>
+            /// <remarks>
             /// This is always the same as PhysicalDefense, but the game sets it separately
-            /// </remark>
+            /// </remarks>
             public int LeftRingSlotPhysicalDefense;
-            /// <remark>
+            /// <remarks>
             /// This is always the same as MagicDefense, but the game sets it separately
-            /// </remark>
+            /// </remarks>
             public int LeftRingSlotMagicDefense;
             public int LeftRingSlotPhysicalDefenseDelta;
             public int LeftRingSlotMagicDefenseDelta;
