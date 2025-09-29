@@ -9,9 +9,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [Inherits<ContainerInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xF0)]
 public unsafe partial struct VfxContainer {
-    [FieldOffset(0x18)] public VfxData* VfxData;
-    [FieldOffset(0x20)] public VfxData* VfxData2;
-    [FieldOffset(0x48)] public VfxData* Omen;
+    /// <remarks>
+    /// [6] = Omen
+    /// </remarks>
+    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray14<Pointer<VfxData>> _vfxData;
 
     [FieldOffset(0xA0), FixedSizeArray] internal FixedSizeArray2<Tether> _tethers;
     [FieldOffset(0xD0)] public ushort VoiceId;
