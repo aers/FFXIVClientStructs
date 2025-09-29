@@ -288,7 +288,9 @@ public sealed partial class InteropGenerator {
                 if (!int.TryParse(fieldTypeSymbol.Name[14..], out int size))
                     continue;
 
-                if (!fixedSizeArrayAttributeData.TryGetConstructorArgument(0, out bool? isString))
+                if (!fixedSizeArrayAttributeData.TryGetConstructorArgument(0, out bool isString) ||
+                    !fixedSizeArrayAttributeData.TryGetConstructorArgument(1, out bool isBitArray) ||
+                    !fixedSizeArrayAttributeData.TryGetConstructorArgument(2, out int bitCount))
                     continue;
 
                 EquatableArray<string> inheritableAttributes = ParseInheritedAttributes(fieldSymbol, token);
@@ -297,7 +299,9 @@ public sealed partial class InteropGenerator {
                     fieldSymbol.Name,
                     fieldTypeSymbol.TypeArguments[0].GetFullyQualifiedName(),
                     size,
-                    isString.Value,
+                    isString,
+                    isBitArray,
+                    bitCount,
                     inheritableAttributes
                 );
 
