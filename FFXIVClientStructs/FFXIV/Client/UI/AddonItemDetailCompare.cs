@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;
@@ -28,11 +28,11 @@ public partial struct AddonItemDetailCompare {
         [FieldOffset(ComparedItem.StructSize * 1)] public ComparedItem SelectedItemOtherQuality;
         [FieldOffset(ComparedItem.StructSize * 2)] public ComparedItem EquippedItem;
         [FieldOffset(ComparedItem.StructSize * 3)] public ComparedItem LeftRing;
-        [FieldOffset(ComparedItem.StructSize * 4 +AtkValue.StructSize * 0)] public AtkValue SlotName;
-        [FieldOffset(ComparedItem.StructSize * 4 +AtkValue.StructSize * 1)] public AtkValue QualityToggleHelpText;
-        [FieldOffset(ComparedItem.StructSize * 4 +AtkValue.StructSize * 2)] public AtkValue ShowRingSlotToggle;
-        [FieldOffset(ComparedItem.StructSize * 4 +AtkValue.StructSize * 3)] public AtkValue RingSlotState;
-        [FieldOffset(ComparedItem.StructSize * 4 +AtkValue.StructSize * 4)] public AtkValue CtrlHeld;
+        [FieldOffset(ComparedItem.StructSize * 4 + AtkValue.StructSize * 0)] public AtkValue SlotName;
+        [FieldOffset(ComparedItem.StructSize * 4 + AtkValue.StructSize * 1)] public AtkValue QualityToggleHelpText;
+        [FieldOffset(ComparedItem.StructSize * 4 + AtkValue.StructSize * 2)] public AtkValue ShowRingSlotToggle;
+        [FieldOffset(ComparedItem.StructSize * 4 + AtkValue.StructSize * 3)] public AtkValue RingSlotState;
+        [FieldOffset(ComparedItem.StructSize * 4 + AtkValue.StructSize * 4)] public AtkValue CtrlHeld;
 
         [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 0x560)]

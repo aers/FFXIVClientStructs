@@ -93,7 +93,7 @@ public partial struct AtkEventData {
     public unsafe struct AtkAddonControlData {
         [FieldOffset(0x00)] public AtkUnitBase* UnitBase;
     }
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct AtkTimelineData {
         [FieldOffset(0x00)] public ushort LabelId;
