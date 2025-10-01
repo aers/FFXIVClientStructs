@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 1351 * 4)]
 public unsafe partial struct InventoryNumberArray {
@@ -19,7 +18,7 @@ public unsafe partial struct InventoryNumberArray {
 
     [FieldOffset(1292 * 4), FixedSizeArray] internal FixedSizeArray18<InventoryCrystalNumberArray> _crystals;
 
-    [CExporterIgnore]
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
     public partial struct InventoryItemNumberArray {
         [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray6<int> _data;
@@ -32,7 +31,7 @@ public unsafe partial struct InventoryNumberArray {
 
         public int StackCount => (_stackCount >> 16) & 0xFFFF;
 
-        [CExporterIgnore]
+        [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
         public partial struct ItemFlag {
             [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray1<int> _data;
@@ -48,7 +47,7 @@ public unsafe partial struct InventoryNumberArray {
             }
         }
 
-        [CExporterIgnore]
+        [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
         public partial struct ItemDye {
             [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray1<int> _data;
@@ -60,24 +59,24 @@ public unsafe partial struct InventoryNumberArray {
         }
     }
 
-    [CExporterIgnore]
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 3 * 4)]
     public partial struct InventoryKeyItemNumberArray {
         [FieldOffset(0 * 4)] public uint IconId;
         [FieldOffset(1 * 4)] public InventoryKeyItemFlagsNumberArray KeyItemFlags;
         [FieldOffset(2 * 4)] public uint UnkFlags;
 
-        [CExporterIgnore]
+        [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
         public partial struct InventoryKeyItemFlagsNumberArray {
-            [FieldOffset(3)] public byte UnkFlags1;
-            [FieldOffset(2)] public byte TooltipIndex;
-            [FieldOffset(1)] public byte UnkFlags3;
             [FieldOffset(0)] public byte StackCount;
+            [FieldOffset(1)] public byte UnkFlags3;
+            [FieldOffset(2)] public byte TooltipIndex;
+            [FieldOffset(3)] public byte UnkFlags1;
         }
     }
 
-    [CExporterIgnore]
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 3 * 4)]
     public partial struct InventoryCrystalNumberArray {
         [FieldOffset(0 * 4)] public uint IconId;

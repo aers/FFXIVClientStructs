@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 2000 * 4)]
 public unsafe partial struct ChatLog2NumberArray {
@@ -18,7 +17,7 @@ public unsafe partial struct ChatLog2NumberArray {
     [FieldOffset(1000 * 4), FixedSizeArray] internal FixedSizeArray250<ChatLog2ChatMessageNumberArray> _tab3Messages;
     [FieldOffset(1500 * 4), FixedSizeArray] internal FixedSizeArray250<ChatLog2ChatMessageNumberArray> _tab4Messages;
 
-    [CExporterIgnore]
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 2 * 4)]
     public partial struct ChatLog2ChatMessageNumberArray {
         [FieldOffset(0 * 4), FixedSizeArray, CExporterIgnore] internal FixedSizeArray2<int> _data;

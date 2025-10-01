@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 53 * 4)]
 public unsafe partial struct EnemyListNumberArray {
@@ -21,7 +20,7 @@ public unsafe partial struct EnemyListNumberArray {
 
     [FieldOffset(5 * 4), FixedSizeArray, CExporterIgnore] internal FixedSizeArray8<EnemyListEnemyNumberArray> _enemies;
 
-    [CExporterIgnore]
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 6 * 4)]
     public partial struct EnemyListEnemyNumberArray {
         [FieldOffset(0 * 4), FixedSizeArray, CExporterIgnore] internal FixedSizeArray6<int> _data;

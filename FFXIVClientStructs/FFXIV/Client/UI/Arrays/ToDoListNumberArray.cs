@@ -3,7 +3,8 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore, GenerateInterop, StructLayout(LayoutKind.Explicit, Size = 198 * 4)]
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 198 * 4)]
 public unsafe partial struct ToDoListNumberArray {
     public static ToDoListNumberArray* Instance() {
         var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ToDoList);
