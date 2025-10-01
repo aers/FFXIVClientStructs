@@ -46,7 +46,7 @@ public unsafe partial struct ActionBarNumberArray {
             /// </summary>
             [FieldOffset(9 * 4)] public int ChargesCooldownPercent;
             [FieldOffset(10 * 4)] public int RechargeTime;              // Same slot as ManaCost            (The game reuses this)
-            [FieldOffset(11 * 4)] public int ManaCost;                  // Same slot as RechargeTime        (The game reuses this)
+            [FieldOffset(10 * 4), CExporterIgnore] public int ManaCost;                  // Same slot as RechargeTime        (The game reuses this)
             [FieldOffset(12 * 4)] public bool DisplayDot;
             [FieldOffset(13 * 4)] public int CurrentCharges;
             [FieldOffset(14 * 4)] public bool Glows;
