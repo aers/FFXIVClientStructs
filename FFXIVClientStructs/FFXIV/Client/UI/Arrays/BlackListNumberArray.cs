@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 8 * 4)]
 public unsafe partial struct BlackListNumberArray {
@@ -13,5 +12,5 @@ public unsafe partial struct BlackListNumberArray {
 
     [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray8<int> _data;
 
-    [FieldOffset(0)] public int BlackListCount;
+    [FieldOffset(0 * 4)] public int BlackListCount;
 }

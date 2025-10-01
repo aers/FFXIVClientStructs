@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 5564 * 4)]
 public unsafe partial struct ActionBarNumberArray {
@@ -14,13 +13,11 @@ public unsafe partial struct ActionBarNumberArray {
     [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray5564<int> _data;
 
     [FieldOffset(0 * 4)] public bool HotBarLocked;
+    [FieldOffset(15 * 4), FixedSizeArray] internal FixedSizeArray20<ActionBarBarNumberArray> _bars;
     [FieldOffset(5482 * 4)] public bool DisplayPetBar;
     [FieldOffset(5473 * 4)] public int PulseDotForBar;
     [FieldOffset(5474 * 4)] public int PulseDotForSlot;
 
-    [FieldOffset(15 * 4), FixedSizeArray] internal FixedSizeArray20<ActionBarBarNumberArray> _bars;
-
-    [CExporterIgnore]
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 272 * 4)]
     public partial struct ActionBarBarNumberArray {
@@ -28,7 +25,7 @@ public unsafe partial struct ActionBarNumberArray {
 
         [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray12<ActionBarSlotNumberArray> _slots;
 
-        [CExporterIgnore]
+        [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 17 * 4)]
         public partial struct ActionBarSlotNumberArray {
             [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray17<int> _data;
@@ -49,7 +46,7 @@ public unsafe partial struct ActionBarNumberArray {
             /// </summary>
             [FieldOffset(9 * 4)] public int ChargesCooldownPercent;
             [FieldOffset(10 * 4)] public int RechargeTime;              // Same slot as ManaCost            (The game reuses this)
-            [FieldOffset(10 * 4)] public int ManaCost;                  // Same slot as RechargeTime        (The game reuses this)
+            [FieldOffset(11 * 4)] public int ManaCost;                  // Same slot as RechargeTime        (The game reuses this)
             [FieldOffset(12 * 4)] public bool DisplayDot;
             [FieldOffset(13 * 4)] public int CurrentCharges;
             [FieldOffset(14 * 4)] public bool Glows;
