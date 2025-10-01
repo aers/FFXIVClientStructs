@@ -80,6 +80,58 @@ public readonly unsafe struct BitArray(byte* ptr, int bitCount) {
     }
 
     /// <summary>
+    /// Attempts to get the value of the bit at a specific position in the <see cref="BitArray"/>.
+    /// </summary>
+    /// <param name="index">The zero-based index of the value to get.</param>
+    /// <param name="value">
+    /// When this method returns, contains the value of the bit at position <paramref name="index"/>,
+    /// if the index was within range; otherwise <see langword="false"/>.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if the bit was successfully retrieved; 
+    /// otherwise, <see langword="false"/>.
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool TryGet(int index, out bool value) {
+        if ((uint)index >= (uint)bitCount) {
+            value = false;
+            return false;
+        }
+
+        (uint byteIndex, uint bitOffset) = Math.DivRem((uint)index, 8);
+        value = ((ptr[byteIndex]) & (1 << (int)bitOffset)) != 0;
+        return true;
+    }
+
+    /// <summary>
+    /// Attempts to set the value of the bit at a specific position in the <see cref="BitArray"/>.
+    /// </summary>
+    /// <param name="index">The zero-based index of the value to set.</param>
+    /// <param name="value">The Boolean value to assign to the bit.</param>
+    /// <returns>
+    /// <see langword="true"/> if the bit was successfully set; 
+    /// otherwise, <see langword="false"/>.
+    /// </returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool TrySet(int index, bool value) {
+        if ((uint)index >= (uint)bitCount) {
+            return false;
+        }
+
+        (uint byteIndex, uint bitOffset) = Math.DivRem((uint)index, 8);
+
+        ref byte segment = ref ptr[byteIndex];
+        byte bitMask = (byte)(1 << (int)bitOffset);
+        if (value) {
+            segment |= bitMask;
+        } else {
+            segment &= (byte)~bitMask;
+        }
+
+        return true;
+    }
+
+    /// <summary>
     /// Returns an enumerator that iterates through the <see cref="BitArray"/>.
     /// </summary>
     public BitArrayEnumerator GetEnumerator() => new(this);
