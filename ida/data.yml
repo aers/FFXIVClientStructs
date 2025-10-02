@@ -2929,12 +2929,13 @@ classes:
       0x1409F0440: CancelCrafting
       0x1409F18E0: IsRecipeUnlocked # (this, recipeId)  # no xrefs
       0x1409F1950: GetCraftTypeLevel
-      0x1409F1C30: FirstRecipeIndex
+      0x1409F1AE0: GetNoteBookDivisionIdByRecipe
       0x1409F1BF0: GetRecipeByIndex # (this, index)
+      0x1409F1C30: FirstRecipeIndex
       0x1409F1C70: GetSelectedRecipe
       0x1409F28A0: Initialize
       0x1409F4A40: CancelCraftingPassthrough
-      0x1409F4B60: InitializeStructs
+      0x1409F4B60: InitializeRecipeList
       0x1409F5A50: ClearFunctionPointers
   Client::Game::UI::FishingNote:
     instances:
@@ -13167,6 +13168,7 @@ classes:
       0x140AB14B0: OpenRecipeByRecipeId # OpenRecipeByRecipeIdInternal in cs
       0x140AB1610: SearchRecipeByItemId
       0x140AB5E20: CanCraft
+      0x140AB7740: IsNoteBookDivisionUnlocked
       0x140AB7860: SearchRecipe
   Client::UI::Agent::RecipeSearchContext:
     vtbls:
