@@ -328,7 +328,14 @@ public sealed partial class InteropGenerator {
                     }
                 }
             }
-
+            if (fixedSizeArrayInfo.IsBitArray) {
+                writer.WriteLine($"""/// <inheritdoc cref="{inheritedStruct.FullyQualifiedMetadataName}.{fixedSizeArrayInfo.GetPublicFieldName()}" />""");
+                writer.WriteLine($"""/// <remarks>Field inherited from parent class <see cref="{inheritedStruct.FullyQualifiedMetadataName}">{inheritedStruct.Name}</see>.</remarks>""");
+                foreach (string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes) {
+                    writer.WriteLine(inheritedAttribute);
+                }
+                writer.WriteLine($"public BitArray {fixedSizeArrayInfo.GetPublicFieldName()}BitArray => {path}.{fixedSizeArrayInfo.GetPublicFieldName()}BitArray;");
+            }
         }
     }
 }
