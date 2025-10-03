@@ -267,7 +267,7 @@ public class FixedSizeArrayAttributeTests {
                             public partial struct TestStruct
                             {
                                 [FixedSizeArray(isBitArray: true, bitCount: 13)]
-                                internal FixedSizeArray2<byte> _testField;
+                                internal FixedSizeArray3<byte> _testField;
                             }
                             """;
 
@@ -285,6 +285,6 @@ public class FixedSizeArrayAttributeTests {
         await VerifyIG.VerifyGeneratorAsync(
             code,
             ("TestStruct.InteropGenerator.g.cs", result),
-            SourceGeneration.GetFixedSizeArraySource([2]));
+            SourceGeneration.GetFixedSizeArraySource([3]));
     }
 }
