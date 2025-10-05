@@ -23,6 +23,8 @@ public unsafe partial struct AddonCastBarEnemy {
         [FieldOffset(0x00)] public GameObjectId ObjectId;
         [FieldOffset(0x04)] public byte Progress;  // 0 - 100, 0xFF if not active
         [FieldOffset(0x08)] public CStringPointer CastName;
+        [FieldOffset(0x10)] public bool Interruptible;
+        [FieldOffset(0x11)] public bool Unk11;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
