@@ -1902,6 +1902,7 @@ classes:
       0x140C94A40: RequestGuestAccessSettings
       0x140C94AB0: HandleGuestAccessSettings
       0x140C90D60: SaveGuestAccessSettings
+      0x140C90F70: MoveToEntry
   Client::Game::HouseId:
     funcs:
       0x140C99240: GetWardIndex

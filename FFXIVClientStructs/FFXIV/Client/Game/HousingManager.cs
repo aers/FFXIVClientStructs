@@ -51,6 +51,11 @@ public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 56 ?? 41 B0")]
     public partial HousingFurnitureManager* GetFurnitureManager();
 
+    /// <summary> Moves the character to the entry (Front Door, Front Gate, or Chamber Door). </summary>
+    /// <remarks> Triggers server communication (possibly multiple requests). </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 45 32 F6 E9")]
+    public partial bool MoveToEntry();
+
     /// <summary>
     /// Gets the TerritoryTypeId of the house the player is currently standing at.<br/>
     /// For indoor territories that were renovated, this returns the original location.
