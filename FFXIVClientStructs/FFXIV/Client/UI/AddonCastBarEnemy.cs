@@ -2,7 +2,12 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
+// Client::UI::AddonCastBarEnemy
+//   Component::GUI::AtkUnitBase
+//     Component::GUI::AtkEventListener
+[Addon("CastBarEnemy")]
 [GenerateInterop]
+[Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x530)]
 public unsafe partial struct AddonCastBarEnemy {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray10<CastBarPositionStruct> _castBarPositions;
@@ -24,7 +29,7 @@ public unsafe partial struct AddonCastBarEnemy {
         [FieldOffset(0x04)] public byte Progress;  // 0 - 100, 0xFF if not active
         [FieldOffset(0x08)] public CStringPointer CastName;
         [FieldOffset(0x10)] public bool Interruptible;
-        [FieldOffset(0x11)] public bool Unk11;
+        [FieldOffset(0x11)] public bool Interrupted;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
