@@ -10,6 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventTarget>]
 [StructLayout(LayoutKind.Explicit, Size = 0xB0)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 33 C0 48 89 41 ?? 66 C7 81", 3, 3)]
 public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x8)] public uint NodeId;
     [FieldOffset(0x10)] public AtkTimeline* Timeline;
