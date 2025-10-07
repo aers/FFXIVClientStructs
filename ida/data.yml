@@ -143,6 +143,8 @@ functions:
   0x140D30E10: IsTerritoryTypeCosmicExploration
   0x14095B870: GetRandomInteger
   0x14095B8D0: GetRandomFloat
+  0x14095B940: GenerateRandomNumber
+  0x14095B990: GetRandomShort
   0x140374160: UpdateAnimFactor
   0x140374C50: LoadCharacterVfx
   0x1403FE940: GetActionTimelineKey
@@ -155,7 +157,7 @@ functions:
 #fail   0x14064BB40: GetLocalTextParameter
   0x14077A1D0: FormatNumber
   0x1407A5C50: ComputeAddonNameHash
-  0x14096AB10: ConvertLogMessageIdToScreenLogKind
+  0x14096AB10: Client::UI::Misc::ScreenLog_ConvertLogMessageIdToScreenLogKind
   0x1407F70E0: GetItemName # (uint itemId, byte itemKind, Component::Exd::Sheets::Item* itemRow, bool withLinkPrefix) -> byte*
   0x1407F71D0: GetEventItemName
   0x1407F7360: GetItemIcon # (uint itemId, Component::Exd::Sheets::Item* itemRow) -> uint
@@ -198,7 +200,6 @@ functions:
   0x140604EC0: GetHighResolutionTimeMs
   0x14079F630: GetHotbarSlotTypeFromDragDropType
   0x140967070: ToObjStrId
-  0x140A1E0E0: GenerateItemsChecksum # for Banners
   0x140A1E230: GenerateEquippedItemsChecksum # for Banners; unused
   0x140D03B50: IsExportedGatheringPointTimed  # static, value of ExportedGatheringPoint.GatheringPointType
   0x140E1BBF0: ConvertRawToMapPosX
@@ -209,8 +210,6 @@ functions:
   0x1416DE7D0: Client::Graphics::crc32
   0x142178D90: crc32_tab # for Client::Graphics::crc32
   0x1416DEAC0: Client::Graphics::Kernel::CreateShader # static function
-  0x1417A5E50: FilterCustomizeData # ensures NPC specific faces etc aren't on players
-  0x1417A6420: NormalizeCustomizeData
   0x141781EA0: InitWinsockDLL
   0x141782060: InitWinsockDLL2
   0x1417E1F30: lua_close
@@ -361,77 +360,7 @@ functions:
   0x1400DE340: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400DE470: GetPartyMemberClassJobByContentId
   0x140856420: ObjectIdToEntityId # returns invalid id if objectid is not a player
-  0x140A71840: ProcessPacketEventPlay
-  0x140A71D50: ProcessPacketSystemLogMessage
   0x140A75040: SendClientSelectDataConfigFlagsUpdate
-  0x140A75A90: ProcessPacketSpawnPlayer
-  0x140A75B90: ProcessPacketSpawnNPC
-  0x140A75C90: ProcessPacketSpawnBoss
-  0x140A75D80: ProcessPacketDespawnCharacter
-  0x140A75EF0: ProcessPacketStatusEffectListPlayer
-  0x140A75F50: ProcessPacketStatusEffectListPlayerDouble
-  0x140A75FB0: ProcessPacketUpdateHpMpTp
-  0x140A76770: ProcessPacketStatusEffectList
-  0x140A76780: ProcessPacketStatusEffectListEureka
-  0x140A768E0: ProcessPacketStatusEffectListBozja
-  0x140A76B70: ProcessPacketStatusEffectListDouble
-  0x140A76D00: ProcessPacketUpdateClassInfo
-  0x140A76D10: ProcessPacketUpdateClassInfoEureka
-  0x140A76D60: ProcessPacketUpdateClassInfoBozja
-  0x140A76DE0: ProcessPacketEffectResult
-  0x140A771D0: ProcessPacketEffectResultBasic
-  0x140A77470: ProcessPacketPlayerStats
-  0x140A77500: ProcessPacketPlayerSetup
-  0x140A775C0: ProcessPacketFirstAttack
-  0x140A77610: ProcessPacketPlayerStateFlags
-  0x140A77630: ProcessPacketPlayerClassInfo
-  0x140A77760: ProcessPacketPlayerBlueMageActions
-  0x140A77780: ProcessPacketPlayerGearsetData
-  0x140A777C0: ProcessPacketUpdateRecastTimes
-  0x140A77810: ProcessPacketActorSetPos
-  0x140A77830: ProcessPacketActorMove
-  0x140A77AB0: ProcessPacketPlaceMarker
-  0x140A77AD0: ProcessPacketFieldMarkerPreset
-  0x140A77AF0: ProcessPacketFieldMarker
-  0x140A77B10: ProcessPacketActorCast
-  0x140A78050: ProcessPacketActorCustomizeData
-  0x140A78230: ProcessPacketActionEffect1
-  0x140A78290: ProcessPacketActionEffect8
-  0x140A78310: ProcessPacketActionEffect16
-  0x140A78390: ProcessPacketActionEffect24
-  0x140A78410: ProcessPacketActionEffect32
-  0x140A78490: ProcessPacketActorControl
-  0x140A87A90: ProcessPacketUpdateInventorySlot
-  0x140A87F30: ProcessPacketInventoryActionAck
-  0x140A88120: ProcessPacketUpdateParty
-  0x140A88900: ProcessPacketUpdateAllianceNormal
-  0x140A88940: ProcessPacketUpdateAllianceSmall
-  0x140A88980: ProcessPacketInitZone
-#fail   0x140A151E0: ProcessPacketApplyIdScramble
-  0x140A88B00: ProcessPacketUpdateHate
-  0x140A88B60: ProcessPacketUpdateHater
-  0x140A88C10: ProcessPacketSpawnObject
-  0x140A88FC0: ProcessPacketSpawnTreasure
-  0x140A891F0: ProcessPacketDespawnObject
-  0x140A89230: ProcessPacketOpenTreasure
-  0x140A89490: ProcessPacketLootMessage
-  0x140A894E0: ProcessPacketTreasureFadeOut
-  0x140A89570: ProcessPacketWeatherChange
-  0x140A89590: ProcessPacketDiscovery
-  0x140A895D0: ProcessPacketPlayerTitleList
-  0x140A89620: ProcessPacketUpdatePartyPositions
-  0x140A89650: ProcessPacketUpdateAllianceNormalPositions
-  0x140A89680: ProcessPacketUpdateAllianceSmallPositions
-  0x140A89B00: ProcessPacketRSVData
-  0x140A89B20: ProcessPacketRSFData
-  0x140A89B80: ProcessPacketHuntingLogEntry
-  0x140A89BC0: ProcessPacketNPCYell
-  0x140A8C9E0: ProcessPacketMapEffect
-  0x1417CAF60: ProcessPacketUIModulePacket
-  0x1418C8A40: ProcessPacketCountdown
-  0x1418C8F30: ProcessPacketCountdownCancel
-  0x140A8D870: ProcessPacketCurrentBannerData
-  0x140A8D890: ProcessPacketCurrentCharaCardData
 #fail   0x140A18290: CreatePacketTargetIfQueued
 #fail   0x140A19E90: InitIdScramble
   0x140C8B2B0: IsInMordionGaol # if this returns true, i'm sorry for you
@@ -1734,6 +1663,8 @@ classes:
       0x1408555B0: GetCrafterContentId
       0x140829C30: GetGlamourItemStainConditionUnlockQuestId
       0x140829C90: IsGlamourItemStainConditionUnlockQuestComplete
+      0x140849270: GetParameterValue
+      0x140A57E90: GetParameterMaxValue
 #oldfail       0x140887A00: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
   Client::Game::InventoryContainer:
     vtbls:
@@ -2363,7 +2294,7 @@ classes:
       0x140082D90: ctor_FromCStr # from null-terminated string
       0x140082DE0: ctor_FromSequence # (FFXIVString, char * str, size_t size)
       0x140083270: Copy
-      0x1400837C0: Dtor
+      0x1400837C0: dtor
       0x1400837F0: SetString
       0x140083AF0: FormatString
       0x1400842C0: GetString
@@ -2397,8 +2328,8 @@ classes:
       0x1400862E0: Compare
       0x1400867A0: SetSize
       0x140086BE0: IndexOf
-      0x1400874A0: FindLastOfImpl
-      0x140087940: FindFirstOfImpl
+      0x1400874A0: FindLastOf
+      0x1400871C0: FindFirstOf
       0x140087F30: FormatString2
       0x14044F260: ToPosixPath
       0x14044F270: ReplaceDirectorySeparatorChar
@@ -2410,7 +2341,7 @@ classes:
   Component::GUI::AtkValue:
     funcs:
       0x140607A90: ctor_copy # copy constructor
-      0x140607AF0: Dtor
+      0x140607AF0: dtor
       0x140607B30: GetBool
       0x140607B50: GetInt
       0x140607B90: GetUInt  # these two could be backwards
@@ -2453,9 +2384,6 @@ classes:
   Component::GUI::AtkEventDispatcher::Event:
     funcs:
       0x140610580: ctor
-  Component::GUI::AtkTooltipArgs:
-    funcs:
-      0x140612F20: ctor
   Component::GUI::AtkUldManager:
     funcs:
       0x14063AB30: InitializeResourceRendererManager # inlined in SetupFromULDResourceHandle, no xrefs
@@ -3000,7 +2928,7 @@ classes:
     funcs:
       0x140A172E0: ctor
       0x140A1A6E0: AddHousingMarker
-  Client::Game::UI::Map::MapMarkerData:
+  Client::Game::UI::MapMarkerData:
     funcs:
       0x140A16FF0: SetData
   Client::Game::BattleLog:
@@ -3065,6 +2993,7 @@ classes:
     vfuncs:
       0: Dtor
     funcs:
+      0x140A137D0: RequestTitleList
       0x140A13820: ReadPacket
       0x140A13BA0: IsTitleUnlocked
   Client::Game::UI::GCSupply:
@@ -3312,7 +3241,7 @@ classes:
       0x1408BD110: GetCurChargesByPrimaryCostType
       0x1408BD190: GetNumChargesByPrimaryCostType
 #oldfail       0x140AF4B50: GetPrimaryCostTypeByActionId
-#oldfail       0x140AF4BF0: GetDutyActionId            # (byte dutyActionSlot) -> uint
+      0x1408BD510: GetDutyActionId            # (byte dutyActionSlot) -> uint
       0x1408BD590: GetRecastDetail
       0x1408BD600: ReadRowData
       0x1408BD680: GetInstanceIfReady
@@ -3472,7 +3401,6 @@ classes:
         base: Common::Configuration::ConfigBase
     funcs:
       0x1400AB1E0: ctor
-      0x1400B36D0: GetLastWorldId
   Common::Configuration::DevConfig:
     vtbls:
       - ea: 0x141FEAF98
@@ -3606,6 +3534,7 @@ classes:
         base: Common::Configuration::SystemConfig
     funcs:
       0x1400AB390: BuildConfigList
+      0x1400B36D0: GetLastWorldId
   Client::System::Configuration::DevConfig:
     vtbls:
       - ea: 0x141FEC2E8
@@ -4462,6 +4391,8 @@ classes:
   Component::Shell::ShellCommands:
     vtbls:
       - ea: 0x142054310
+    funcs:
+      0x140778300: TryInvokeDebugCommand
   Component::Shell::ShellCommandModule:
     vtbls:
       - ea: 0x141FECCB0
@@ -4523,7 +4454,7 @@ classes:
       0x1400DFA70: ctor # INLINED IN 7.0
       0x1400E1110: GetAddonByNameHash
       0x1401CA7C0: Finalizer
-#oldfail       0x14063FA30: InitializeAddon # inlined @ 0x1406C0B93
+      0x140651590: InitializeAddon # inlined @ 0x1406C0B93
   Client::UI::RaptureAtkColorDataManager:
     vtbls:
       - ea: 0x141FF9ED0
@@ -4677,7 +4608,7 @@ classes:
       0x140914880: ctor
       0x140914B20: Finalizer
 #oldfail       0x1400EDAA0: ClearListDataImpl
-#oldfail       0x1408B76F0: GetContentIdForEntry
+      0x140915A00: GetContentIdForEntry
       0x140915A20: GetEntryByName
       0x140915B10: GetEntry
       0x140915E00: ApplyFilters
@@ -4765,6 +4696,7 @@ classes:
         base: Client::UI::Info::InfoProxyCommonList
     funcs:
       0x140916F60: ctor
+      0x140919E40: ChangeOrder
       0x14091BB40: ModifyCountdown
       0x14091BC50: CancelCountdown
       0x140956AD0: Finalizer
@@ -5779,12 +5711,83 @@ classes:
         base: Client::Network::Protocol::Chat::PacketReceiverCallbackInterface
     funcs:
       0x1417C5720: ctor
+      0x140A70E00: SendEventCompletePacket
+      0x140A71840: HandleEventPlayPacket
+      0x140A71D50: HandleSystemLogMessagePacket
+      0x140A75A90: HandleSpawnPlayerPacket
+      0x140A75B90: HandleSpawnNPCPacket
+      0x140A75C90: HandleSpawnBossPacket
+      0x140A75D80: HandleDespawnCharacterPacket
+      0x140A75EF0: HandleStatusEffectListPlayerPacket
+      0x140A75F50: HandleStatusEffectListPlayerDoublePacket
+      0x140A75FB0: HandleUpdateHpMpTpPacket
+      0x140A76770: HandleStatusEffectListPacket
+      0x140A76780: HandleStatusEffectListEurekaPacket
+      0x140A768E0: HandleStatusEffectListBozjaPacket
+      0x140A76B70: HandleStatusEffectListDoublePacket
+      0x140A76D00: HandleUpdateClassInfoPacket
+      0x140A76D10: HandleUpdateClassInfoEurekaPacket
+      0x140A76D60: HandleUpdateClassInfoBozjaPacket
+      0x140A76DE0: HandleEffectResultPacket
+      0x140A771D0: HandleEffectResultBasicPacket
+      0x140A77470: HandlePlayerStatsPacket
+      0x140A77500: HandlePlayerSetupPacket
+      0x140A775C0: HandleFirstAttackPacket
+      0x140A77610: HandlePlayerStateFlagsPacket
+      0x140A77630: HandlePlayerClassInfoPacket
+      0x140A77760: HandlePlayerBlueMageActionsPacket
+      0x140A77780: HandlePlayerGearsetDataPacket
+      0x140A777C0: HandleUpdateRecastTimesPacket
+      0x140A77810: HandleActorSetPosPacket
+      0x140A77830: HandleActorMovePacket
+      0x140A77AB0: HandlePlaceMarkerPacket
+      0x140A77AD0: HandleFieldMarkerPresetPacket
+      0x140A77AF0: HandleFieldMarkerPacket
+      0x140A77B10: HandleActorCastPacket
+      0x140A78050: HandleActorCustomizeDataPacket
+      0x140A78230: HandleActionEffect1Packet
+      0x140A78290: HandleActionEffect8Packet
+      0x140A78310: HandleActionEffect16Packet
+      0x140A78390: HandleActionEffect24Packet
+      0x140A78410: HandleActionEffect32Packet
+      0x140A78490: HandleActorControlPacket
+      0x140A87A90: HandleUpdateInventorySlotPacket
+      0x140A87F30: HandleInventoryActionAckPacket
+      0x140A88120: HandleUpdatePartyPacket
+      0x140A88900: HandleUpdateAllianceNormalPacket
+      0x140A88940: HandleUpdateAllianceSmallPacket
+      0x140A88980: HandleInitZonePacket
+      0x140A88B00: HandleUpdateHatePacket
+      0x140A88B60: HandleUpdateHaterPacket
+      0x140A88C10: HandleSpawnObjectPacket
+      0x140A88FC0: HandleSpawnTreasurePacket
+      0x140A891F0: HandleDespawnObjectPacket
+      0x140A89230: HandleOpenTreasurePacket
+      0x140A89490: HandleLootMessagePacket
+      0x140A894E0: HandleTreasureFadeOutPacket
+      0x140A89570: HandleWeatherChangePacket
+      0x140A89590: HandleDiscoveryPacket
+      0x140A895D0: HandlePlayerTitleListPacket
+      0x140A89620: HandleUpdatePartyPositionsPacket
+      0x140A89650: HandleUpdateAllianceNormalPositionsPacket
+      0x140A89680: HandleUpdateAllianceSmallPositionsPacket
+      0x140A89B00: HandleRSVDataPacket
+      0x140A89B20: HandleRSFDataPacket
+      0x140A89B80: HandleHuntingLogEntryPacket
+      0x140A89BC0: HandleNPCYellPacket
+      0x140A8C9E0: HandleMapEffectPacket
+      0x140A8D870: HandleCurrentBannerDataPacket
+      0x140A8D890: HandleCurrentCharaCardDataPacket
+      0x1417CAF60: HandleUIModulePacketPacket
       0x1418C7060: HandlePartyInvitePacket
       0x1418C7130: HandleSocialPacket
+      0x1418C8A40: HandleCountdownPacket
+      0x1418C8F30: HandleCountdownCancelPacket
+      0x1418CADB0: HandleMarketBoardItemRequestStartPacket
       0x1418CAE30: HandleMarketBoardOfferingsPacket
       0x1418CAEF0: HandleMarketBoardPurchasePacket
       0x1418CB9A0: HandleMarketBoardHistoryPacket
-      0x1418CADB0: HandleMarketBoardItemRequestStartPacket
+#fail   0x140A151E0: HandleApplyIdScramblePacket
   Client::Network::NetworkModulePacketReceiverCallback:
     vtbls:
       - ea: 0x142033588
@@ -5815,6 +5818,7 @@ classes:
       0x14045EA10: ShowAddon
       0x14045EA50: HideAddon
       0x14045EA90: IsAddonShown
+      0x14045EAE0: IsAddonHidden
       0x14045EB30: GetAddonStatus
       0x14045EB70: FocusAddon
       0x14045EC30: CloseContextAddons
@@ -6885,7 +6889,7 @@ classes:
       0x1405C7B40: Setup  # static
       0x1405C7BA0: Destroy  # static
       0x1405C7890: ctor
-      0x1405C7CE0: ScheduleScreenshot
+      0x1405C7CE0: ScheduleScreenShot
       0x1405C7AD0: Finalizer
   Client::System::Photo::ScreenShot::ScreenShotThread:
     vtbls:
@@ -7124,6 +7128,9 @@ classes:
       0x14060F070: LoadTexture
       0x14060F300: LoadIconTexture
       0x14060F660: UnloadTexture
+  Component::GUI::AtkTooltipManager::AtkTooltipArgs:
+    funcs:
+      0x140612F20: ctor
   Component::GUI::AtkTooltipManager:
     vtbls:
       - ea: 0x142040F80
@@ -7390,8 +7397,8 @@ classes:
       0x14062F770: GetTimelineLabelFrameIdxDuration
       0x14062F790: GetTimelineLabel
       0x14062F870: GetTimelineActiveLabelId
-      0x14062FA80: RegisterEvent
-      0x14062FAC0: UnregisterEvent
+      0x14062FA80: AddEvent
+      0x14062FAC0: RemoveEvent
       0x14062FAE0: RemoveAllEventsFromListener
       0x14062FBF0: ClearEvents
       0x14062FC10: DispatchEvent
@@ -7748,9 +7755,9 @@ classes:
       0x140660440: SetIconImageDisableState
       0x1406604B0: IsDisabled
       0x1406604D0: GetFrameLabelId
-      0x140660500: SetHasFirstDyeSlot
+      0x140660500: SetHasFirstDyeChannel
       0x140660540: SetIsDyeLocked
-      0x140660580: SetHasSecondDyeSlot
+      0x140660580: SetHasSecondDyeChannel
       0x1406605C0: SetIsMacro
       0x140660600: SetIsGlamoured
       0x140660640: SetIsRecipe
@@ -8709,6 +8716,7 @@ classes:
       0x140751A00: Initialize
       0x140751D60: Update
       0x1407521D0: HandleInputUpdate
+      0x140757110: ProcessChatBoxEntry
       0x140757DB0: PropagateLevelChange
       0x140757E00: PropagateClassJobChange
       0x140750530: ScreenShotCallback
@@ -9482,8 +9490,8 @@ classes:
       0x140798280: Initialize
       0x1407982C0: InitializeAndSet  # (this, UiModule*, HotbarSlotType, uint)
       0x140798340: Clear
-#oldfail       0x1407C0F80: Set
-      0x140799940: LoadIconFromSlotB
+      0x140798530: Set
+      0x140799940: LoadIconId
       0x140796E20: GetIconIdForSlot
       0x1407977E0: GetDisplayNameForSlot
       0x140798040: GetCostTextForSlot
@@ -9495,7 +9503,7 @@ classes:
       0x1407988B0: GetItemRowForSlot
       0x140799570: GetAdjustedIconIdForSlot  # loads in adjustment things and then calls GetIconForIdForSlot
       0x140799270: GetRecastTimeFromSlotB
-      0x140799170: GetRecastChargesFromSlotB  # (this) -> uint
+      0x140799170: GetApparentIconRecastCharges  # (this) -> uint
       0x140799040: GetMaxChargesFromSlotB
       0x140798D40: GetPrimaryRecastGroupPercentageFromSlotB # (this, out int, out int, int) -> int
       0x140798F40: GetAdditionalRecastGroupPercentageFromSlotB # (this, int) -> int
@@ -9514,7 +9522,7 @@ classes:
 #oldfail       0x140772320: PopulateIntermediateCooldownInfo # (this, HotbarUiIntermediate*)  - used for array population?
       0x140798780: GetAdjustedCommandId  # ???
       0x140799810: LoadMacroSlot
-#oldfail       0x1407724C0: GetSlotActionCooldownPercentage  # (this, out int, int) -> int
+      0x140798A80: GetSlotActionCooldownPercentage  # (this, out int, int) -> int
   Client::UI::Misc::RaptureHotbarModule::DutyActionSlot:
     funcs:
       0x14079FE70: Initialize
@@ -9780,6 +9788,7 @@ classes:
       0x1407C0460: GetFlag
       0x1407C04A0: SetFlag
       0x1407E4F70: CopyFrom
+      0x140A1E0E0: GenerateChecksum # static
   Client::UI::Misc::CharaView:
     vtbls:
       - ea: 0x1420648D8
@@ -9948,6 +9957,11 @@ classes:
       0x1408567E0: GetNamePlateWorldPosition
       0x140966F60: GetObjStrId
       0x1418E54A0: PlayFootStepSound
+  Client::Game::Character::CustomizeData:
+    funcs:
+      0x1417A5E50: FilterCustomizeData # ensures NPC specific faces etc aren't on players
+      0x1417A6420: NormalizeCustomizeData
+      0x1417A6640: RandomizeCustomizeData
   Client::Game::Character::Character:
     vtbls:
       - ea: 0x14205AC30
@@ -10790,14 +10804,21 @@ classes:
       0x140E3F080: UpdateExp
       0x140E405D0: OpenContextMenuFromPartyAddon
       0x140E526D0: UpdateBattleTalk
-#oldfail       0x140E37D20: OpenContextMenuFromTarget # inlined @ 0x140E0F2B0
+      0x140E4DF30: OpenContextMenuFromTarget # inlined
       0x140E4AFB0: UpdateDirectorToDo
       0x140E4BA70: UpdateMassivePcContentToDo
       0x140E4A0E0: UpdateFateDirectorToDo
       0x140E4A860: UpdateDynamicEventToDo
       0x140E4C5D0: UpdateQuestToDo
+      0x140E50520: UpdateStatusDisplay
       0x140E518C0: GetMainCommandString  # MainCommand exd
       0x140E51BF0: OpenSystemMenu
+  Client::UI::Agent::HudStatus::Status:
+    funcs:
+      0x140E35E90: ProcessStatuses
+  Client::UI::Agent::HudStatus:
+    funcs:
+      0x140EFC4C0: Update
   Client::UI::Agent::AgentChatLog::LinkedInventoryItem:
     vtbls:
       - ea: 0x142091198
@@ -11500,7 +11521,7 @@ classes:
 #oldfail       0x140BCA370: SalvageItem # (this, InventoryItem* ushort, byte)
       0x140AD49B0: LoadCategoryNames
       0x140AD3970: SalvageItem
-#oldfail       0x140BCA850: ItemListRefresh # Clears item list and signals agent to update it next frame
+      0x140AD3DC0: ItemListRefresh # Clears item list and signals agent to update it next frame
 #oldfail       0x140BCBC50: ItemListPopulate # inlined @ 0x140BC9A00
 #oldfail       0x140BCBD80: ItemListPopulateFromContainer
 #oldfail       0x140BCC080: ItemListPopulateEquipped
@@ -12435,6 +12456,7 @@ classes:
       0x140C31E40: ctor
       0x140C34200: OpenForGearset
       0x140C34240: SetSelectedItemData
+      0x140C34360: ClearItemData
       0x140C34720: HideColorant
       0x140C343C0: SetItemStain
       0x140C34910: SetSelectedItemStains
@@ -13886,7 +13908,7 @@ classes:
     funcs:
       0x140F84E40: ctor
       0x140F89810: JobIndexToClassJobId
-#fail       0x140F74560: StartMission # no xrefs
+      0x140F89FD0: StartMission # no xrefs
       0x140F864A0: GetBasicMissions
       0x140F86720: GetProvisionalMissions
       0x140F86CA0: GetMissionLog
@@ -16393,6 +16415,10 @@ classes:
     funcs:
       0x141046440: ctor
       0x141046470: Finalize
+      0x1410462E0: Clear
+      0x141046260: AddNode
+      0x14110F8A0: AddEntry
+      0x141046300: UpdateLayout
   Client::UI::PreviewController:
     vtbls:
       - ea: 0x14209F500
