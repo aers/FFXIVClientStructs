@@ -23687,9 +23687,6 @@ classes:
         base: SQEX::CDev::Engine::Sd::Driver::BankController
   Client::System::Memory::IMemorySpace:
     instances:
-      - ea: 0x14277ED98
-        name: DefaultSpace
-        pointer: true
       - ea: 0x14277EDA0
         name: ApricotSpace
         pointer: true
@@ -23707,8 +23704,16 @@ classes:
         pointer: true
     vtbls:
       - ea: 0x141FE1C80
+    vfuncs:
+      0: Dtor
+      3: Malloc
+      5: AlignedMalloc
+      6: AlignedRealloc
+      7: AlignedFree
+      9: GetMemoryModule
     funcs:
       0x140089700: Free
+      0x140089E50: CreateMemorySpaces
   Client::System::Memory::IMemoryModule:
     vtbls:
       - ea: 0x141FE1D88
@@ -23731,6 +23736,13 @@ classes:
   Client::System::Memory::Regular::FixedSpace:
     vtbls:
       - ea: 0x141FE20A8
+        base: Client::System::Memory::IMemorySpace
+  Client::System::Memory::Regular::DefaultSpace:
+    instances:
+      - ea: 0x14277ED98
+        pointer: true
+    vtbls:
+      - ea: 0x141FE1DF8
         base: Client::System::Memory::IMemorySpace
   Common::Math::Half:
     funcs:
