@@ -17,7 +17,7 @@ public unsafe partial struct AgentMutelist {
     public partial bool Add(ulong accountId, ulong contentId, CStringPointer name, short worldId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 54 24 50 48 8B CF E8")]
-    public partial bool Remove(ulong accountId, bool unknown = true);
+    public partial bool Remove(ulong accountId, bool showInLog = true);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 E8 48 85 DB")]
     public partial bool IsMuted(ulong accountId);
