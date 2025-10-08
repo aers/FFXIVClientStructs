@@ -78,7 +78,7 @@ public unsafe partial struct RecipeNote {
         [FieldOffset(0x3A8)] public uint StatusRequired;
         [FieldOffset(0x3AC)] public uint ItemRequired;
         [FieldOffset(0x3B0)] public bool RequiresMeisterSoulCrystal;
-        
+
         [FieldOffset(0x3B2)] public ushort RecipeId;
         [FieldOffset(0x3B4)] public ushort Difficulty; // recipeLevelTable->Difficulty * recipe->DifficultyFactor / 100
         [FieldOffset(0x3B8)] public uint Quality;      // recipeLevelTable->Quality    * recipe->QualityFactor    / 100
