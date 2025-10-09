@@ -24,7 +24,7 @@ public unsafe partial struct InfoProxyLetter {
     [FieldOffset(0x51E0)] public Utf8String UnkString1;
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
     public unsafe partial struct Letter {
         [FieldOffset(0x00)] public long SenderContentId;// 0xFFFFFFFF for Store
         [FieldOffset(0x08)] public int Timestamp;
