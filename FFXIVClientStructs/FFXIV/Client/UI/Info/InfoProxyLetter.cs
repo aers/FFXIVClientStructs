@@ -29,7 +29,7 @@ public unsafe partial struct InfoProxyLetter {
         [FieldOffset(0x00)] public long SenderContentId;// 0xFFFFFFFF for Store
         [FieldOffset(0x08)] public int Timestamp;
         [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray5<ItemAttachment> _attachments;
-        [FieldOffset(0x38)] public uint Gil;
+        [FieldOffset(0x74)] public uint Gil;
         [FieldOffset(0x3C)] public bool Read;
 
         [FieldOffset(0x3F), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _sender;
