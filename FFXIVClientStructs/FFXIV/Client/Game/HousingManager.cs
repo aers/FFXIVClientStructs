@@ -29,6 +29,9 @@ public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0E 48 8B CB")]
     public partial bool IsInWorkshop();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C6 75 ?? E8")]
+    public partial HouseId GetCurrentHouseId();
+
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 3B 46 3C")]
     public partial sbyte GetCurrentWard();
 

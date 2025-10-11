@@ -1820,6 +1820,7 @@ classes:
       0x140C976D0: GetCurrentRoom
       0x140C968C0: GetCurrentFloor # 0 - Ground Level, 1 - Upstairs, 10 - Downstairs
       0x140C969F0: GetInvertedBrightness # 0-5, higher is darker
+      0x140C96D50: GetCurrentHouseId
       0x140C9A330: GetOwnedHouseId
       0x140C9CF80: GetOriginalHouseTerritoryTypeId
       0x140CC2BE0: IsSubmarineExplorationUnlocked # static
