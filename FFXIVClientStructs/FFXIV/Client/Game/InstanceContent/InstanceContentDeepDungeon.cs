@@ -25,6 +25,12 @@ public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x2119)] public byte ArmorLevel;
     [FieldOffset(0x211A)] public byte SyncedGearLevel;
     [FieldOffset(0x211B)] public byte HoardCount;
+    [FieldOffset(0x211C)] public byte DeepDungeonGimmickEffectIdCurrent;
+    [FieldOffset(0x211D)] public byte DeepDungeonGimmickEffectIdNext;
+
+    [FieldOffset(0x212A)] public byte DeepDungeonStatusId;
+    [FieldOffset(0x212B)] public byte DeepDungeonBanId;
+    [FieldOffset(0x212C)] public byte DeepDungeonDangerId;
 
     [FieldOffset(0x2ADE)] public byte DeepDungeonId; // 1-3
 
