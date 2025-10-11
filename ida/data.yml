@@ -1835,6 +1835,14 @@ classes:
       0x140C95B10: HandleGuestAccessSettings
       0x140C91DC0: SaveGuestAccessSettings
       0x140C91FD0: MoveToEntry
+      0x140C92ED0: SetTargetedHousingObject
+      0x140C92F00: GetTargetedHousingObject
+      0x140C92F30: SetHoveredHousingObject
+      0x140C92F60: GetHoveredHousingObject
+      0x140C92F90: SetMovingHousingObject
+      0x140C92FE0: GetMovingHousingObject
+      0x140C935E0: SetTemporaryObject
+      0x140C936A0: SetTemporaryObjectStain
   Client::Game::HouseId:
     funcs:
       0x140C9A2A0: GetWardIndex
@@ -1867,6 +1875,7 @@ classes:
       0x140CA1280: ctor
       0x140CA12C0: Finalizer
       0x140CA12E0: SetItem
+      0x140CA14F0: SetData
   Client::Game::HouseBuddy:
     vtbls:
       - ea: 0x14207F290
