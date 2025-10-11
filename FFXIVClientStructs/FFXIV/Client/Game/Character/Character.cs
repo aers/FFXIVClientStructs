@@ -11,6 +11,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x2360)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3)]
 public unsafe partial struct Character {
+    /// <summary>
+    /// <code>
+    /// 0b0010_0000 [0x20] = <see cref="IsSwimming"/>
+    /// </code>
+    /// </summary>
+    [FieldOffset(0x618)] public byte Flags618;
+
     [FieldOffset(0x620)] public EmoteController EmoteController;
     [FieldOffset(0x660)] public MountContainer Mount;
     [FieldOffset(0x6C8)] public CompanionContainer CompanionData;
@@ -77,6 +84,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x2355)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x2356)] public byte GMRank;
 
+    public bool IsSwimming => (Flags618 & 0x20) != 0; // found in Client::Game::Event::EventSceneModuleUsualImpl.IsSwimming
     public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;
     public bool IsOffhandDrawn => (WeaponFlags & 0x1) != 0;
     public bool InCombat => (CharacterData.Flags & 0x2) != 0;
