@@ -17,7 +17,8 @@ public unsafe partial struct OutdoorTerritory {
     [FieldOffset(0x9690)] public ExcelSheetWaiter* ItemExcelSheetWaiter;
     [FieldOffset(0x9698)] public ExcelSheet* ItemExcelSheet;
     [FieldOffset(0x96A0)] public HouseId HouseId;
-    [FieldOffset(0x96A8)] public sbyte StandingInPlot; // LandSet index
+    [FieldOffset(0x96A8), Obsolete("Use HouseUnit.PlotIndex")] public sbyte StandingInPlot; // LandSet index
+    [FieldOffset(0x96A8)] public HouseUnit HouseUnit;
     [FieldOffset(0x96AA)] public sbyte EditingFixturesOfPlot; // LandSet index
     [FieldOffset(0x96B0)] public sbyte EditingFurnishingsOfPlot; // LandSet index
     [FieldOffset(0x96B2)] public sbyte EditingEstateHallOfPlot; // LandSet index
