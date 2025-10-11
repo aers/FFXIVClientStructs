@@ -8187,6 +8187,9 @@ classes:
       0x14071FA90: ActiveLayoutHousingReady # static
       0x14071FDB0: GetLayoutInstanceStatic # static
       0x14071FEF0: GetColliderLayoutInstance # static
+      0x1406BF5B0: GetOutdoorPlotExteriorData # static
+      0x1406BF630: SetOutdoorPlotExteriorData # static
+      0x1406BF690: SetOutdoorPlotExterior # static
   Client::LayoutEngine::LayoutManager:
     vtbls:
       - ea: 0x142045140
@@ -8195,11 +8198,16 @@ classes:
       0x1406DDE30: ctor
       # 0x1405DC890: SetInteriorFixture # inlined @ 1406CDF00
       0x1406E16C0: SetActiveFestivals
+      0x1406E5A20: SetOutdoorExteriorData
+      0x1406E5AE0: GetOutdoorExteriorData
       0x1406E97A0: GetLayoutInstance
   Client::LayoutEngine::OutdoorAreaLayoutData:
     funcs:
 #oldfail       0x1406B1D70: SetFixture # inlined in 0x1406F4B60 (not 100% sure)
 #oldfail       0x1406B20C0: SetFixtureStain # inlined in 0x1406F4B60 (not 100% sure)
+  Client::LayoutEngine::OutdoorPlotExteriorData:
+    funcs:
+      0x140730250: ctor
   Client::LayoutEngine::OutdoorPlotLayoutData:
     funcs:
       0x1406C2F40: SetFixture

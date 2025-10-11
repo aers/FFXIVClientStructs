@@ -30,11 +30,14 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x070)] public void* Environment;
     [FieldOffset(0x078)] public void* OBSetManager;
     [FieldOffset(0x080)] public OutdoorAreaLayoutData* OutdoorAreaData;
+    [FieldOffset(0x088)] public OutdoorExteriorLayoutData* OutdoorExteriorData;
     [FieldOffset(0x090)] public IndoorAreaLayoutData* IndoorAreaData;
     [FieldOffset(0x0C8)] public void* PVPData;
     [FieldOffset(0x0DC)] public int ForceUpdateAllStreaming;
     [FieldOffset(0x0E2)] public bool SkipAddingTerrainCollider;
     //[FieldOffset(0x0E3)] public bool uE3;
+    [FieldOffset(0x0E4)] public bool HousingLayoutDataUpdatePending;
+    [FieldOffset(0x0E5)] public bool OutdoorAreaDataUpdated;
     [FieldOffset(0x0EA)] public byte LayerEntryType;
     [FieldOffset(0x0EC)] public uint LevelId;
     [FieldOffset(0x0F0)] public int StreamingOriginType;
@@ -66,6 +69,9 @@ public unsafe partial struct LayoutManager {
     // 7.0: inlined in E8 ?? ?? ?? ?? 41 8B 4E 20
     // [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 4C 8B 91 ?? ?? ?? ?? 41 8B F9")]
     // public partial void SetInteriorFixture(int floor, int part, int fixtureId, byte unk = 255);
+
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 4C 8B 91 ?? ?? ?? ?? 49 8B F9")]
+    public partial void SetOutdoorPlotExterior(int plotIndex, OutdoorPlotExteriorData* data, delegate* unmanaged<uint, void> loadedCallback = null);
 
     [MemberFunction("8B 02 4C 8D 41 40")]
     public partial void SetActiveFestivals(GameMain.Festival* festivals); // Array of exactly 4 festivals. Use 0 for none.
@@ -109,6 +115,14 @@ public unsafe partial struct OutdoorPlotLayoutData {
     public partial void SetFixtureStain(uint part, byte stain);
 }
 
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x970)] // 60 * 0x28 + 0x08 + 0x04 (+0x04 alignment)
+public unsafe partial struct OutdoorExteriorLayoutData {
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray60<OutdoorPlotExteriorData> _plots;
+    [FieldOffset(0x960)] public delegate* unmanaged<uint, void> LoadedCallback; // LoadedCallback((uint)(LoadedCallbackPlotIndex + 1));
+    [FieldOffset(0x968)] public uint LoadedCallbackPlotIndex;
+}
+
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public struct OutdoorPlotFixtureData {
     [FieldOffset(0x00)] public ushort FixtureId;
@@ -130,4 +144,37 @@ public unsafe struct IndoorFloorLayoutData {
     [FieldOffset(0x08)] public int Part2;
     [FieldOffset(0x0C)] public int Part3;
     [FieldOffset(0x10)] public int Part4;
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
+public partial struct OutdoorPlotExteriorData {
+    [FieldOffset(0x00)] public PlotSize Size;
+    /// <remarks>
+    /// Stain RowIds<br/>
+    /// <br/>
+    /// 0 = Roof<br/>
+    /// 1 = Walls<br/>
+    /// 2 = Windows<br/>
+    /// 3 = Door<br/>
+    /// 4 = OptionalRoof<br/>
+    /// 5 = OptionalWall<br/>
+    /// 6 = OptionalSignboard<br/>
+    /// 7 = Fence
+    /// </remarks>
+    [FieldOffset(0x01), FixedSizeArray] internal FixedSizeArray8<sbyte> _stainIds;
+
+    /// <remarks>
+    /// HousingExterior RowIds<br/>
+    /// <br/>
+    /// 0 = Roof<br/>
+    /// 1 = Walls<br/>
+    /// 2 = Windows<br/>
+    /// 3 = Door<br/>
+    /// 4 = OptionalRoof<br/>
+    /// 5 = OptionalWall<br/>
+    /// 6 = OptionalSignboard<br/>
+    /// 7 = Fence
+    /// </remarks>
+    [FieldOffset(0x0A), FixedSizeArray] internal FixedSizeArray8<short> _housingExteriorIds;
 }

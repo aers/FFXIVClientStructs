@@ -1,5 +1,6 @@
 // ReSharper disable once CheckNamespace
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
@@ -36,6 +37,7 @@ public unsafe partial struct OutdoorTerritory {
 
     [FieldOffset(0x9B58)] public HousingTerritory.HousingTerritoryUIEventListener UIEventListener1;
     [FieldOffset(0x9B80)] public HousingTerritory.HousingTerritoryUIEventListener UIEventListener2;
+    [FieldOffset(0x9BA8)] public OutdoorPlotExteriorData EditingPlotExteriorDataBackup;
 
     [FieldOffset(0x9BF0)] public HouseBuddy HouseBuddy;
 
