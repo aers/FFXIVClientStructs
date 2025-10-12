@@ -2,6 +2,7 @@
 // https://github.com/dotnet/runtime
 // Licensed under the MIT license. See InteropGenerator/ThirdPartyLicenses.txt for details.
 
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace InteropGenerator.Runtime;
@@ -26,6 +27,25 @@ public readonly unsafe struct BitArray(byte* ptr, int bitCount) {
     /// Gets the length of the underlying storage in bytes.
     /// </summary>
     public int ByteLength => (BitCount + 7) / 8;
+
+    /// <summary>
+    /// Gets the number of bits set to <see langword="true"/> in the <see cref="BitArray"/>.
+    /// </summary>
+    public int PopCount {
+        get {
+            int popCount = 0;
+
+            int fullBytes = BitCount / 8;
+            for (int i = 0; i < fullBytes; i++)
+                popCount += BitOperations.PopCount(ptr[i]);
+
+            int remainingBits = BitCount & 7;
+            if (remainingBits > 0)
+                popCount += BitOperations.PopCount((byte)(ptr[fullBytes] & ((1 << remainingBits) - 1)));
+
+            return popCount;
+        }
+    }
 
     /// <summary>
     /// Gets or sets the value of the bit at a specific position in the <see cref="BitArray"/>.
