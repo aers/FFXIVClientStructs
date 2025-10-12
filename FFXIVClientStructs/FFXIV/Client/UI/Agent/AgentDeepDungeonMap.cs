@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -28,7 +27,7 @@ public unsafe partial struct AgentDeepDungeonMapData {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x78)]
+[StructLayout(LayoutKind.Explicit, Size = 0x70)]
 public unsafe partial struct AgentDeepDungeonMapEffectData {
     [FieldOffset(0x0)] public int EffectId;
     [FieldOffset(0x4)] public uint EffectStatusIcon;
