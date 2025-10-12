@@ -70,7 +70,7 @@ public unsafe partial struct TargetSystem {
     public partial GameObject* GetMouseOverObject(int x, int y, GameObjectArray* objectArray, Camera* camera);
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 56 30")]
-    public partial GameObject* SetFocusTargetByObjectId(GameObjectId objectId);
+    public partial void SetFocusTargetByObjectId(GameObjectId objectId);
 
     public GameObject* GetMouseOverObject(int x, int y) {
         var camera = Control.Instance()->CameraManager.Camera;
