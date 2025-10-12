@@ -82,9 +82,9 @@ public unsafe partial struct UIState {
     [FieldOffset(0x19E20)] public long NextChallengeLogResetTimestamp;
 
     [FieldOffset(0x19E2C), FixedSizeArray, Obsolete("Use UnlockLinksBitArray")] internal FixedSizeArray92<byte> _unlockLinkBitmask;
-    // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
+    // BitCount: See `Client::Game::UI::UIState.SetUnlockLinkValue`
     /// <remarks> Use <see cref="IsUnlockLinkUnlocked"/>. </remarks>
-    [FieldOffset(0x19E2C), FixedSizeArray] internal FixedSizeArray92<byte> _unlockLinks;
+    [FieldOffset(0x19E2C), FixedSizeArray(isBitArray: true, bitCount: 736)] internal FixedSizeArray92<byte> _unlockLinks;
 
     [FieldOffset(0x19E88), FixedSizeArray, Obsolete("Use UnlockedAetherytesBitArray")] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
