@@ -69,6 +69,9 @@ public unsafe partial struct TargetSystem {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 85 C0 74 50 48 8B CB")]
     public partial GameObject* GetMouseOverObject(int x, int y, GameObjectArray* objectArray, Camera* camera);
 
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 56 30")]
+    public partial void SetFocusTargetByObjectId(GameObjectId objectId);
+
     public GameObject* GetMouseOverObject(int x, int y) {
         var camera = Control.Instance()->CameraManager.Camera;
         var localPlayer = Control.GetLocalPlayer();
