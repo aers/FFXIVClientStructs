@@ -64,4 +64,4 @@ public enum TerritoryIntendedUse : byte {
     CosmicExploration = 60,
     OccultCrescent = 61,
     Unknown62 = 62, // future content
-};
+}
