@@ -32,9 +32,9 @@ public unsafe partial struct Control {
     public enum FlightAllowedStatus : int {
         CanFly = 0,
         Unk1 = 1, // something with certain territories
-        Unk2 = 2, // UIState.Instance() + 0x184C5 != 0
+        Unk2 = 2, // UIState.Instance() + 0x1A21D != 0
         NotMounted = 3,
-        MountedButCannotFly = 4, // !(PlayerState.Instance() + 0x5D1)
+        MountedButCannotFly = 4, // !PlayerState.CanFly
         IncompleteMountFlyingConditionQuest = 5,
         DefaultCase = 7,
         PlayerOrMountNull = 8
