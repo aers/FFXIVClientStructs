@@ -2589,6 +2589,7 @@ classes:
       0x1409E7790: IsBeastTribeRankedUpToday
       0x1409E6DD0: IsMountUnlocked
       0x1409EA7A0: IsOrnamentUnlocked
+      0x1409E8410: SetCanFly
       0x1409E8910: IsOrchestrionRollUnlocked
       0x1409E7A60: IsSecretRecipeBookUnlocked # DoH unlockable books
       0x1409E7BD0: SetSightseeingLogUnlockState

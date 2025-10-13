@@ -168,7 +168,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x5E4)] public ushort ActiveGcArmyExpedition;
     [FieldOffset(0x5E6)] public ushort ActiveGcArmyTraining;
     [FieldOffset(0x5E8)] public bool HasNewGcArmyCandidate; // see lua function "GcArmyIsNewCandidate"
-                                                            // [FieldOffset(0x5E9)] public bool UnkGcPvpMountActionCheck; // see "80 3D ?? ?? ?? ?? ?? 75 3C"
+    [FieldOffset(0x5E9)] public bool CanFly; // Set during zone loading, see "80 FA ?? 0F 94 C0 88 81"
 
     [FieldOffset(0x5EA), FixedSizeArray, Obsolete("Use UnlockedMinerFolkloreTomesBitArray")] internal FixedSizeArray2<byte> _unlockedMinerFolkloreTomeBitmask;
     // BitCount: GatheringSubCategorySheet.Where(row => row.ClassJob.RowId == 16 && row.Quest.RowId < 74).Max(row => row.Quest.RowId)
