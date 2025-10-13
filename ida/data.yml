@@ -1576,6 +1576,7 @@ classes:
       0x140854AF0: ctor
       0x14082A8E0: Initialize
       0x14082B0A0: Update
+      0x14082BB20: ClearOperationByContextId
       0x14082CEE0: GetInventoryContainer  # (this, containerId)
       0x14082CF90: GetInventorySlot  # (this, containerId, slotId)
       0x14082E1F0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
