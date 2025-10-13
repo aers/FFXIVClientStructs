@@ -12,7 +12,7 @@ public unsafe partial struct WorldHelper {
     [FieldOffset(0x08)] public StdMap<ushort, World> AllWorlds;
     /// <summary> Contains all worlds of the current data center. </summary>
     [FieldOffset(0x18)] public StdMap<ushort, World> DataCenterWorlds;
-    // [FieldOffset(0x28)] public ClassThatLoadsWorlds WorldLoader; // size: 0x10
+    [FieldOffset(0x28)] private ExcelRowCallback ExcelCallback;
     [FieldOffset(0x38)] public bool IsLoaded;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 85 F6 75 17")]
@@ -26,9 +26,16 @@ public unsafe partial struct WorldHelper {
 
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x22)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public partial struct World {
-        [FieldOffset(0x00)] public byte DataCenter;
-        [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+        [FieldOffset(0x00)] public ushort RowId;
+        [FieldOffset(0x02)] public byte DataCenter;
+        [FieldOffset(0x03), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+    }
+
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+    public partial struct ExcelRowCallback {
+        [FieldOffset(0x08)] public WorldHelper* WorldHelper;
     }
 }

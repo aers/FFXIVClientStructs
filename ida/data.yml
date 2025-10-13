@@ -9668,15 +9668,21 @@ classes:
       0x14097FB20: GetDataCenterNameByRowId # unused
   Client::UI::Misc::WorldHelper:
     vtbls:
-      - ea: 0x142064588
+      - ea: 0x1420636D8
     vfuncs:
       0: Dtor
     funcs:
-      0x14097FD40: ctor
-      0x14097FDE0: Finalizer
+      0x14097F1B0: ctor
+      0x14097F250: Finalizer
       0x14097FFB0: GetWorldById
       0x140980030: GetWorldNameById
       0x140980090: GetWorldIdByName
+  Client::UI::Misc::WorldHelper::ExcelRowCallback:
+    vtbls:
+      - ea: 0x1420636C8
+    vfuncs:
+      0: Dtor
+      1: Call
   Client::UI::Misc::ExtraCommandHelper:
     vtbls:
       - ea: 0x142064590
