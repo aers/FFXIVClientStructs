@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Enums;
+namespace FFXIVClientStructs.FFXIV.Client.Enums;
 
 public enum TerritoryIntendedUse : byte {
     Town = 0,
