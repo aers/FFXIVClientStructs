@@ -1,6 +1,7 @@
 *.dll
 ida/errors.txt
 ida/uld_names.txt
+.vscode/
 
 # CompatChecker test files
 tests/
