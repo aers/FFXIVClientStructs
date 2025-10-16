@@ -70,13 +70,13 @@ globals:
   0x142948D1C: g_Client::Game::UI::ContentsFinder::ExplorerMode
   0x142948D1D: g_Client::Game::UI::ContentsFinder::LevelSync
   0x142948D1E: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
-  0x14294F1CC: g_Client::Game::UI::UnlockLink  # not a pointer
+  0x14294F1CC: g_Client::Game::UI::UnlockLinks  # not a pointer
   0x14294F228: g_Client::Game::UI::UnlockedAetherytes  # not a pointer
-  0x14294F246: g_Client::Game::UI::UnlockedHowTo  # not a pointer
-  0x14294F26B: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
+  0x14294F246: g_Client::Game::UI::UnlockedHowTos  # not a pointer
+  0x14294F26B: g_Client::Game::UI::UnlockedCompanions  # not a pointer
   0x14294F2B2: g_Client::Game::UI::ChocoboTaxiStands  # not a pointer
-  0x14294F2BE: g_Client::Game::UI::CutsceneSeen  # not a pointer
-#fail   0x14277F202: g_Client::Game::UI::UnlockedTripleTriadCards  # not a pointer
+  0x14294F2BE: g_Client::Game::UI::SeenCutscenes  # not a pointer
+  0x14294F36C: g_Client::Game::UI::UnlockedTripleTriadCards  # not a pointer
   0x14294F3A8: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
   0x14295090C: g_Client::Game::QuestManager::MapMarkersReceived
   0x14295090D: g_Client::Game::QuestManager::CompletedQuestsReceived
@@ -95,7 +95,7 @@ globals:
   0x142743AA0: g_OodleDelete
   0x142743AB0: g_OodlePrintf
   0x142901FD8: g_MacroTime
-#fail   0x142951E80: g_LogoutCountdownAddonId
+  0x1429343F0: g_LogoutCountdownAddonId
   0x1429343F6: g_LogoutShouldCloseGame
   0x142DBDA10: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x142DBDC80: ?hkaAnimationContainerClass@@3VhkClass@@B
