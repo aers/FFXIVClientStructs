@@ -70,14 +70,21 @@ globals:
   0x142948D1C: g_Client::Game::UI::ContentsFinder::ExplorerMode
   0x142948D1D: g_Client::Game::UI::ContentsFinder::LevelSync
   0x142948D1E: g_Client::Game::UI::ContentsFinder::LimitedLevelingRoulette
-  0x14294F1CC: g_Client::Game::UI::UnlockLinkBitmask  # not a pointer
-  0x14294F228: g_Client::Game::UI::UnlockedAetherytesBitmask  # not a pointer
-  0x14294F246: g_Client::Game::UI::UnlockedHowToBitmask  # not a pointer
-  0x14294F26B: g_Client::Game::UI::UnlockedCompanionsMask  # not a pointer
-  0x14294F2B2: g_Client::Game::UI::ChocoboTaxiStandsBitmask  # not a pointer
-  0x14294F2BE: g_Client::Game::UI::CutsceneSeenBitmask  # not a pointer
-#fail   0x14277F202: g_Client::Game::UI::UnlockedTripleTriadCardsBitmask  # not a pointer
+  0x14294F1CC: g_Client::Game::UI::UnlockLinks  # not a pointer
+  0x14294F228: g_Client::Game::UI::UnlockedAetherytes  # not a pointer
+  0x14294F246: g_Client::Game::UI::UnlockedHowTos  # not a pointer
+  0x14294F26B: g_Client::Game::UI::UnlockedCompanions  # not a pointer
+  0x14294F2B2: g_Client::Game::UI::ChocoboTaxiStands  # not a pointer
+  0x14294F2BE: g_Client::Game::UI::SeenCutscenes  # not a pointer
+  0x14294F36C: g_Client::Game::UI::UnlockedTripleTriadCards  # not a pointer
   0x14294F3A8: g_Client::Game::UI::UnlockedTripleTriadCardsCount  # not a pointer
+  0x14295090C: g_Client::Game::QuestManager::MapMarkersReceived
+  0x14295090D: g_Client::Game::QuestManager::CompletedQuestsReceived
+  0x14295090E: g_Client::Game::QuestManager::CompletedLegacyQuestsReceived
+  0x14295090F: g_Client::Game::QuestManager::DailyQuestsReceived
+  0x142950918: g_Client::Game::QuestManager::QuestRepeatFlagsReceived
+  0x142950919: g_Client::Game::QuestManager::LeveQuestsReceived
+  0x14295091A: g_Client::Game::QuestManager::CompletedLeveQuestsReceived
   0x142717EC0: g_Component::SteamApi::InterfaceContext::ISteamFriends
   0x142717EA8: g_Component::SteamApi::InterfaceContext::ISteamUser
   0x142717EF0: g_Component::SteamApi::InterfaceContext::ISteamApps
@@ -88,7 +95,7 @@ globals:
   0x142743AA0: g_OodleDelete
   0x142743AB0: g_OodlePrintf
   0x142901FD8: g_MacroTime
-#fail   0x142951E80: g_LogoutCountdownAddonId
+  0x1429343F0: g_LogoutCountdownAddonId
   0x1429343F6: g_LogoutShouldCloseGame
   0x142DBDA10: ?hkaSkeletonMapperClass@@3VhkClass@@B
   0x142DBDC80: ?hkaAnimationContainerClass@@3VhkClass@@B
@@ -1466,20 +1473,6 @@ classes:
     funcs:
       0x1400DF8A0: IsQuestComplete # static (questId)
       0x1409E6D80: GetNextLeveAllowancesTimestamp # multiply by 60 for unix timestamp
-      0x140A8CFC0: SetUnkBitmask3
-      0x140A8D010: SetUnkBitmask2Bit2
-      0x140A90020: SetGatheringSuccessfulChainCount
-      0x140A90030: SetUnkBitmask2
-      0x140A900A0: SetUnkBitmask2Bit
-      0x140A900C0: SetSeenNotebookDivisionLevelRangeBitmask
-      0x140A900F0: SetGatheredGatheringItemBitmask
-      0x140A90150: SetGatheredGatheringItemBitmaskBit
-      0x140A90170: SetSeenCraftingNotebookDivisionLevelRangeBitmask
-      0x140A901B0: SetCompletedRecipesBitmask
-      0x140A90720: SetCompletedQuestsBitmask
-      0x140A90860: SetUnlockedMapMarkersBitmask
-      0x140A90A40: SetUnkBitmask1
-      0x140A90FE0: SetCompletedLeveQuestsBitmask
       0x140A91650: GetSingleton
       0x140C70910: GetQuestIndex
       0x140C70C00: IsQuestComplete1 # (this, questId)
@@ -1490,13 +1483,13 @@ classes:
       0x140C71050: GetQuestClassJob
       0x140C71110: IsQuestRepeatFlagSet # (byte, questRepeatFlag)
       0x140C71210: GetBeastTribeAllowance
-      0x140C724F0: IsUnkBitmask1Set
+      0x140C724F0: IsLegacyQuestComplete
       0x140D07AC0: IsGatheringItemGathered # static (ushort gatheringItemId)
       0x140D07B20: IsGatheringNotebookDivisionLevelRangeSeen # static (uint gatheringTypeId, uint notebookDivisionId)
-      0x140D07BB0: SetSeenGatheringNotebookDivisionLevelRangeBitmaskBit
+      0x140D07BB0: SetSeenGatheringNotebookDivisionLevelRangeEntry
       0x140D18720: IsRecipeComplete # static (uint recipeId)
       0x140D187C0: IsCraftingNotebookDivisionLevelRangeSeen # static (int craftingType, uint notebookDivisionId)
-      0x140D18860: SetSeenCraftingNotebookDivisionLevelRangeBitmaskBit
+      0x140D18860: SetSeenCraftingNotebookDivisionLevelRangeEntry
       0x1418F6520: IsLevequestComplete
   Client::Game::EventItemManager:
     instances:
@@ -2127,7 +2120,7 @@ classes:
       0x140D232A0: Dtor
   Client::Game::MJI::IslandState:
     funcs:
-      0x140A8FEE0: ctor
+      0x140D26190: ctor
   Client::Game::MJI::MJIPastureHandler:
     vtbls:
       - ea: 0x1422CA410
@@ -5788,8 +5781,23 @@ classes:
       0x140A89B80: HandleHuntingLogEntryPacket
       0x140A89BC0: HandleNPCYellPacket
       0x140A8C9E0: HandleMapEffectPacket
+      0x140A8CFC0: HandleQuestManagerUnkArray2SecondHalfPacket
+      0x140A8D010: HandleQuestManagerUnkArray2SecondHalfEntryPacket
       0x140A8D870: HandleCurrentBannerDataPacket
       0x140A8D890: HandleCurrentCharaCardDataPacket
+      0x140A90020: HandleGatheringSuccessfulChainCountPacket
+      0x140A90030: HandleQuestManagerUnkArray2FirstHalfPacket
+      0x140A900A0: HandleQuestManagerUnkArray2FirstHalfEntryPacket
+      0x140A900C0: HandleSeenNotebookDivisionLevelRangePacket
+      0x140A900F0: HandleGatheredGatheringItemPacket
+      0x140A90150: HandleGatheredGatheringItemEntryPacket
+      0x140A90170: HandleSeenCraftingNotebookDivisionLevelRangePacket
+      0x140A901B0: HandleCompletedRecipesPacket
+      0x140A90720: HandleCompletedQuestsPacket
+      0x140A90860: HandleUnlockedMapMarkersPacket
+      0x140A90A40: HandleCompletedLegacyQuestsPacket
+      0x140A90C50: HandleQuestRepeatFlagsPacket
+      0x140A90FE0: HandleCompletedLeveQuestsPacket
       0x1417CAF60: HandleUIModulePacketPacket
       0x1418C7060: HandlePartyInvitePacket
       0x1418C7130: HandleSocialPacket
