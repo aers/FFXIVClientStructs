@@ -41,7 +41,7 @@ public unsafe partial struct RecommendEquipModule {
     public partial bool Setup(byte race, byte sex, ushort level, byte classJob, byte grandCompany, byte pvpRank);
 
     // 7.0: inlined in SetupForClassJob
-    // [MemberFunction("41 54 41 55 41 56 41 57 48 83 EC 38 4C 8B F1")]
+    // [MemberFunction("")]
     // public partial bool SetupFromPlayerState();
 
     /// <remarks> Calls SetupFromPlayerState internally. </remarks>

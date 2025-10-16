@@ -53,7 +53,7 @@ public unsafe partial struct AgentChatLog {
     public partial CStringPointer ChangeChannelName();
 
     // got inlined
-    // [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 48 81 C4 ?? ?? ?? ?? 41 5F 41 5D 41 5C 5F")]
+    // [MemberFunction("")]
     // public partial void SetTabName(int tabIndex, Utf8String* tabName);
 
     [GenerateInterop]

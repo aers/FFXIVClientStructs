@@ -4,7 +4,6 @@ using FFXIVClientStructs.FFXIV.Component.Exd;
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::UIState
-// ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2"
 // this is a large object holding most of the other objects in the Client::Game::UI namespace
 // all data in here is used for UI display
 [GenerateInterop]

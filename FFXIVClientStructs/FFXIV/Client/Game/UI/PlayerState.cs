@@ -5,7 +5,6 @@ using FFXIVClientStructs.FFXIV.Client.Game.Event;
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::PlayerState
-// ctor "E8 ?? ?? ?? ?? 33 D2 45 33 E4"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x8D8)]
 public unsafe partial struct PlayerState {

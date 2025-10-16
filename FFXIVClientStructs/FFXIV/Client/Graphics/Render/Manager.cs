@@ -2,7 +2,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 
 // Client::Graphics::Render::Manager
 //   Client::Graphics::Singleton<Client::Graphics::Render::Manager>
-// ctor "48 89 01 48 8D 59 08"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x40250)]
 public unsafe partial struct Manager {
