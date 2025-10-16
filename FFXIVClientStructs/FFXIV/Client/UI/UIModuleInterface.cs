@@ -187,5 +187,6 @@ public enum UIModulePacketType {
     Logout = 7,
     CloseLogoutDialog = 8,
     StartLogoutCountdown = 9,
+    UnlockedMapMarkersUpdated = 10,
     PrintPlayTime = 11,
 }
