@@ -17,6 +17,7 @@ public unsafe partial struct AgentItemComp {
     [FieldOffset(0x50)] public ComparedItemData* ItemData;
     [FieldOffset(0x58)] public bool ShowLeftRing;
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x1650)]
     public partial struct ComparedItemData {
         /// <remarks>

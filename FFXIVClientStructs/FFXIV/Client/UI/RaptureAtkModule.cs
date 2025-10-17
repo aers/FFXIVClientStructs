@@ -54,7 +54,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x23DE0), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
     [FieldOffset(0x24890)] public ItemCache* KeyItemCache; // ptr to 120 entries
     [FieldOffset(0x24898)] public ItemCache* EquippedItemCache; // ptr to 14 entries
-    [FieldOffset(0x248A0), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
+    [FieldOffset(0x248A0), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // only 140 slots are processed, unused?
     [FieldOffset(0x29DA0)] public uint InventoryItemCacheSlotCount;
     [FieldOffset(0x29DA4)] public uint GilCap;
 

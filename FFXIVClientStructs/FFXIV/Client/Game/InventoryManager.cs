@@ -9,6 +9,9 @@ public unsafe partial struct InventoryManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
     public static partial InventoryManager* Instance();
 
+    [FieldOffset(0), FixedSizeArray] internal FixedSizeArray128<InventoryOperation> _pendingOperations;
+    [FieldOffset(0x1E00)] public uint NextContextId; // id for the next operation request
+
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
     /// <remarks>
     /// Used to calculate the average item level of equipped items in various places,
@@ -135,6 +138,26 @@ public unsafe partial struct InventoryManager {
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
+    public struct InventoryOperation {
+        [FieldOffset(0x00)] public bool IsEmpty;
+        [FieldOffset(0x04)] public uint ContextId;
+        [FieldOffset(0x08)] public int Type; // like an OpCode those change with every release :(
+        [FieldOffset(0x10)] public InventoryType SourceInventoryType;
+        [FieldOffset(0x14)] public short SourceInventorySlot;
+        [FieldOffset(0x18)] public int SourceItemQuantity;
+        [FieldOffset(0x1C)] public uint SourceItemId;
+        [FieldOffset(0x24)] public InventoryType DestinationInventoryType;
+        [FieldOffset(0x28)] public short DestinationInventorySlot;
+        [FieldOffset(0x2C)] public int DestinationItemQuantity;
+        [FieldOffset(0x30)] public uint DestinationItemId; // also used for MarketPrice??
+        [FieldOffset(0x34)] public bool Unk34;
+        [FieldOffset(0x35)] public bool Unk35;
+        [FieldOffset(0x36)] public bool Unk36;
+        [FieldOffset(0x37)] public bool Unk37;
+        [FieldOffset(0x38)] public uint Unk38;
+    }
 }
 
 public enum TradeState {

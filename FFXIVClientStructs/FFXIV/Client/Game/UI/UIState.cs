@@ -4,7 +4,6 @@ using FFXIVClientStructs.FFXIV.Component.Exd;
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::UIState
-// ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2"
 // this is a large object holding most of the other objects in the Client::Game::UI namespace
 // all data in here is used for UI display
 [GenerateInterop]
@@ -81,39 +80,46 @@ public unsafe partial struct UIState {
     [FieldOffset(0x19E18)] public long NextMapAllowanceTimestamp;
     [FieldOffset(0x19E20)] public long NextChallengeLogResetTimestamp;
 
-    // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
+    [FieldOffset(0x19E2C), FixedSizeArray, Obsolete("Use UnlockLinksBitArray")] internal FixedSizeArray92<byte> _unlockLinkBitmask;
+    // BitCount: See `Client::Game::UI::UIState.SetUnlockLinkValue`
     /// <remarks> Use <see cref="IsUnlockLinkUnlocked"/>. </remarks>
-    [FieldOffset(0x19E2C), FixedSizeArray] internal FixedSizeArray92<byte> _unlockLinkBitmask;
+    [FieldOffset(0x19E2C), FixedSizeArray(isBitArray: true, bitCount: 736)] internal FixedSizeArray92<byte> _unlockLinks;
 
+    [FieldOffset(0x19E88), FixedSizeArray, Obsolete("Use UnlockedAetherytesBitArray")] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
-    // Size: (AetheryteSheet.RowCount + 7) >> 3
+    // BitCount: AetheryteSheet.RowCount
     /// <remarks> Use <see cref="IsAetheryteUnlocked"/>. </remarks>
-    [FieldOffset(0x19E88), FixedSizeArray] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
+    [FieldOffset(0x19E88), FixedSizeArray(isBitArray: true, bitCount: 239)] internal FixedSizeArray30<byte> _unlockedAetherytes;
 
+    [FieldOffset(0x19EA6), FixedSizeArray, Obsolete("Use UnlockedHowTosBitArray")] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
-    // Size: (HowToSheet.RowCount + 7) >> 3
+    // BitCount: HowToSheet.RowCount
     /// <remarks> Use <see cref="IsHowToUnlocked"/>. </remarks>
-    [FieldOffset(0x19EA6), FixedSizeArray] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
+    [FieldOffset(0x19EA6), FixedSizeArray(isBitArray: true, bitCount: 296)] internal FixedSizeArray37<byte> _unlockedHowTos;
 
+    [FieldOffset(0x19ECB), FixedSizeArray, Obsolete("Use UnlockedCompanionsBitArray")] internal FixedSizeArray71<byte> _unlockedCompanionsBitmask;
     // Ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
-    // Size: (CompanionSheet.RowCount + 7) >> 3
+    // BitCount: CompanionSheet.RowCount
     /// <remarks> Use <see cref="IsCompanionUnlocked"/>. </remarks>
-    [FieldOffset(0x19ECB), FixedSizeArray] internal FixedSizeArray71<byte> _unlockedCompanionsBitmask;
+    [FieldOffset(0x19ECB), FixedSizeArray(isBitArray: true, bitCount: 568)] internal FixedSizeArray71<byte> _unlockedCompanions;
 
-    // Size: (ChocoboTaxiStandSheet.RowCount + 7) >> 3
+    [FieldOffset(0x19F12), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray")] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
+    [FieldOffset(0x19F12), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray")] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStandsBitmask;
+    // BitCount: ChocoboTaxiStandSheet.RowCount
     /// <remarks> Use <see cref="IsChocoboTaxiStandUnlocked"/>. </remarks>
-    [FieldOffset(0x19F12), FixedSizeArray] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStandsBitmask;
-    [FieldOffset(0x19F12), FixedSizeArray, Obsolete("Renamed to UnlockedChocoboTaxiStandsBitmask")] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
+    [FieldOffset(0x19F12), FixedSizeArray(isBitArray: true, bitCount: 93)] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStands;
 
-    // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) >> 3
+    [FieldOffset(0x19F1E), FixedSizeArray, Obsolete("Use SeenCutscenesBitArray")] internal FixedSizeArray173<byte> _cutsceneSeenBitmask;
+    // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
-    [FieldOffset(0x19F1E), FixedSizeArray] internal FixedSizeArray173<byte> _cutsceneSeenBitmask;
+    [FieldOffset(0x19F1E), FixedSizeArray(isBitArray: true, bitCount: 1384)] internal FixedSizeArray173<byte> _seenCutscenes;
 
     // unk bitmasks
 
-    // Size: (TripleTriadCardSheet.RowCount + 7) >> 3
+    [FieldOffset(0x19FCC), FixedSizeArray, Obsolete("Use UnlockedTripleTriadCardsBitArray")] internal FixedSizeArray57<byte> _unlockedTripleTriadCardsBitmask;
+    // BitCount: TripleTriadCardSheet.RowCount
     /// <remarks> Use <see cref="IsTripleTriadCardUnlocked"/>. </remarks>
-    [FieldOffset(0x19FCC), FixedSizeArray] internal FixedSizeArray57<byte> _unlockedTripleTriadCardsBitmask;
+    [FieldOffset(0x19FCC), FixedSizeArray(isBitArray: true, bitCount: 455)] internal FixedSizeArray57<byte> _unlockedTripleTriadCards;
     [FieldOffset(0x1A008)] public ulong UnlockedTripleTriadCardsCount;
 
     [FieldOffset(0x1A022)] public int TerritoryTypeTransientOffsetZ; // this is a short in the sheet and copied with a 4 byte register causing it to be an int
@@ -194,7 +200,7 @@ public unsafe partial struct UIState {
     /// <param name="aetheryteId">The ID of the aetheryte to check for.</param>
     /// <returns>Returns true if the specified aetheryte is unlocked.</returns>
     public bool IsAetheryteUnlocked(uint aetheryteId)
-        => UnlockedAetherytesBitmask.CheckBitInSpan(aetheryteId);
+        => UnlockedAetherytesBitArray.Get((int)aetheryteId);
 
     /// <summary>
     /// Check if a HowTo is unlocked for the current character.
@@ -202,7 +208,7 @@ public unsafe partial struct UIState {
     /// <param name="howtoId">The ID of the HowTo to check for.</param>
     /// <returns>Returns true if the specified HowTo is unlocked.</returns>
     public bool IsHowToUnlocked(uint howtoId)
-        => UnlockedHowtoBitmask.CheckBitInSpan(howtoId);
+        => UnlockedHowTosBitArray.Get((int)howtoId);
 
     /// <summary>
     /// Check if a companion (minion) is unlocked for the current character.
@@ -210,10 +216,10 @@ public unsafe partial struct UIState {
     /// <param name="companionId">The ID of the companion/minion to check for.</param>
     /// <returns>Returns true if the specified minion is unlocked.</returns>
     public bool IsCompanionUnlocked(uint companionId)
-        => UnlockedCompanionsBitmask.CheckBitInSpan(companionId);
+        => UnlockedCompanionsBitArray.Get((int)companionId);
 
     public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId)
-        => UnlockedChocoboTaxiStandsBitmask.CheckBitInSpan(chocoboTaxiStandId);
+        => UnlockedChocoboTaxiStandsBitArray.Get((int)chocoboTaxiStandId - 0x120000);
 
     [MemberFunction("E8 ?? ?? ?? ?? 88 46 02 B0 01")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);

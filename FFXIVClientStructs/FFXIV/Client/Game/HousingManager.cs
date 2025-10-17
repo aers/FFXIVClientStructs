@@ -29,6 +29,9 @@ public unsafe partial struct HousingManager {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 0E 48 8B CB")]
     public partial bool IsInWorkshop();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 49 3B C6 75 ?? E8")]
+    public partial HouseId GetCurrentHouseId();
+
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C0 3B 46 3C")]
     public partial sbyte GetCurrentWard();
 
@@ -154,13 +157,8 @@ public unsafe partial struct HousingManager {
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     [FieldOffset(0x0), CExporterIgnore] public ulong Id;
-    /// <remarks>
-    /// Masked data:<br/>
-    /// - <c>0b1000_0000</c> (<c>0x80</c>) = Apartment Flag<br/>
-    /// - <c>0b0111_1111</c> (<c>0x7F</c>) = Apartment Division (only if Apartment Flag is <c>true</c>)<br/>
-    /// - <c>0b0111_1111</c> (<c>0x7F</c>) = PlotIndex (only if Apartment Flag is <c>false</c>)
-    /// </remarks>
-    [FieldOffset(0x0)] public byte Data0;
+    [FieldOffset(0x0), Obsolete("Use Unit.Value")] public byte Data0;
+    [FieldOffset(0x0)] public HouseUnit Unit;
     [FieldOffset(0x1)] public byte Unk1;
     /// <remarks>
     /// Masked data:<br/>
@@ -171,10 +169,9 @@ public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     [FieldOffset(0x4)] public ushort TerritoryTypeId;
     [FieldOffset(0x6)] public ushort WorldId;
 
-    public bool IsApartment => (Data0 & 0x80) != 0 && (byte)(Data0 & 0x7F) < 2;
-    public byte ApartmentDivision => (byte)(Data0 & 0x7F);
-
-    public byte PlotIndex => (byte)(Data0 & 0x7F);
+    public bool IsApartment => Unit.IsApartment;
+    public byte ApartmentDivision => Unit.ApartmentDivision;
+    public byte PlotIndex => Unit.PlotIndex;
     public byte WardIndex => (byte)(Data2 & 0x3F);
     public short RoomNumber => (short)(Data2 >> 6);
     public bool IsWorkshop => RoomNumber == 0x3FF;
@@ -188,6 +185,31 @@ public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     public static bool operator ==(HouseId left, HouseId right) => left.Id == right.Id;
     public static bool operator !=(HouseId left, HouseId right) => left.Id != right.Id;
     public int CompareTo(HouseId other) => Id.CompareTo(other);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 1)]
+public struct HouseUnit : IEquatable<HouseUnit>, IComparable<HouseUnit> {
+    /// <remarks>
+    /// Masked data:<br/>
+    /// - <c>0b1000_0000</c> (<c>0x80</c>) = Apartment Flag<br/>
+    /// - <c>0b0111_1111</c> (<c>0x7F</c>) = Apartment Division (only if Apartment Flag is <c>true</c>)<br/>
+    /// - <c>0b0111_1111</c> (<c>0x7F</c>) = PlotIndex (only if Apartment Flag is <c>false</c>)
+    /// </remarks>
+    [FieldOffset(0x0)] public byte Value;
+
+    public bool IsApartment => (Value & 0x80) != 0 && (byte)(Value & 0x7F) < 2;
+    public byte ApartmentDivision => (byte)(Value & 0x7F);
+    public byte PlotIndex => (byte)(Value & 0x7F);
+
+    public static implicit operator byte(HouseUnit id) => id.Value;
+    public static unsafe implicit operator HouseUnit(byte id) => *(HouseUnit*)&id;
+
+    public bool Equals(HouseUnit other) => Value == other.Value;
+    public override bool Equals(object? obj) => obj is HouseUnit other && Equals(other);
+    public override int GetHashCode() => Value.GetHashCode();
+    public static bool operator ==(HouseUnit left, HouseUnit right) => left.Value == right.Value;
+    public static bool operator !=(HouseUnit left, HouseUnit right) => left.Value != right.Value;
+    public int CompareTo(HouseUnit other) => Value.CompareTo(other);
 }
 
 public enum EstateType {

@@ -290,7 +290,6 @@ if api is None:
                 # type: (str, dict[str, str]) -> None
                 dt_path = self.get_datatype_path(name)
                 struct = StructureDataType(dt_path.getCategoryPath(), dt_path.getDataTypeName(), 0)
-                struct.setToDefaultPacking()
                 struct.setExplicitMinimumAlignment(4)
                 for [offset, [type_name, field_name]] in fields.items():
                     if monitor.isCancelled():
