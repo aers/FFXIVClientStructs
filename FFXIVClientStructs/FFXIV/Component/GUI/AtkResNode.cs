@@ -60,6 +60,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     // asm accesses these fields together so this is one 32bit field with priority+flags
     [FieldOffset(0x9C)] public ushort Priority;
     [FieldOffset(0x9E)] public NodeFlags NodeFlags;
+
     /// <summary>
     /// <term>Bit 1 [0x1]</term> Is dirty (has updates to be drawn)<br/>
     /// <term>Bit 2 [0x2]</term> Is undergoing timeline animation (?)<br/>
@@ -72,7 +73,8 @@ public unsafe partial struct AtkResNode : ICreatable {
     /// <term>Bits 10-17</term> ClipCount<br/>
     /// <term>Bit 21 [0x100000]</term> Change CursorType to Clickable on hover<br/>
     /// <term>Bit 23 [0x400000]</term> Change CursorType to TextInput on hover<br/>
-    /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular
+    /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular<br/>
+    /// <term>Bit 25 [0x1000000]</term> Use transformed collision instead of rectangular, if the object is rotated represents a strict collision check, instead of just bounding box
     /// </summary>
     [FieldOffset(0xA0)] public uint DrawFlags;
 
