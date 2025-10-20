@@ -16,6 +16,6 @@ public unsafe partial struct AddonChatLog {
 
     [FieldOffset(0x2B0), FixedSizeArray] internal FixedSizeArray5<Utf8String> _tabNames;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF 84 C0 74 07")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 85 ?? ?? ?? ?? 49 8B B6")]
     public partial bool IsZoomed();
 }

@@ -40,7 +40,7 @@ public unsafe partial struct CompanionInfo {
     [FieldOffset(0)] public Buddy.BuddyMember* Companion;
     [FieldOffset(0x8)] public float TimeLeft;
     [FieldOffset(0xC), FixedSizeArray] internal FixedSizeArray13<byte> _buddyEquipUnlockBitmask; // number of BuddyEquip rows / 8
-    [FieldOffset(0x1A)] public byte BardingHead; // todo: make array
+    [FieldOffset(0x1A)] public byte BardingHead; // todo: make array (BuddyEquip RowIds)
     [FieldOffset(0x1B)] public byte BardingChest;
     [FieldOffset(0x1C)] public byte BardingFeet;
     [FieldOffset(0x1D), FixedSizeArray(isString: true)] internal FixedSizeArray21<byte> _name;

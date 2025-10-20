@@ -164,4 +164,10 @@ public unsafe partial struct InventoryItem : ICreatable {
     /// <summary>Gets the materia count from the original InventoryItem or itself if not symbolic.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 7D")]
     public partial byte GetMateriaCount();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 80 7F 5E 01")]
+    public static partial uint GetParameterValue(uint baseParamRowId, InventoryItem* inventoryItem, bool includeMateria, bool checkHQ, bool checkPvPCharacterFlag, bool checkPvPItemFlag);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 66 89 46 12")]
+    public static partial uint GetParameterMaxValue(uint baseParamRowId, [CExporterExcel("Item")] void* itemRowData);
 }

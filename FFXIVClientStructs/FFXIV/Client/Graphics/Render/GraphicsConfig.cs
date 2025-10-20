@@ -59,5 +59,7 @@ public unsafe partial struct GraphicsConfig {
 
     [FieldOffset(0x56)] public bool GrassEnableDynamicInterference;
 
+    [FieldOffset(0x65)] public bool HousingSSAOEnable;
+
     [FieldOffset(0x74)] public float JitterMultiplier;
 }

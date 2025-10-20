@@ -4,7 +4,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::GcArmyManager
 // Squadron
-// ctor "48 83 EC ?? 48 83 3D ?? ?? ?? ?? ?? 75 ?? 33 D2 45 33 C0 8D 4A ?? E8 ?? ?? ?? ?? 33 C9 48 85 C0 74 ?? 48 89 08 48 89 48 ?? 48 89 05"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe partial struct GcArmyManager {

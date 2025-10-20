@@ -6,7 +6,6 @@ using FFXIVClientStructs.STD.Helper;
 namespace FFXIVClientStructs.FFXIV.Client.System.String;
 
 // Client::System::String::Utf8String
-// ctor "E8 ?? ?? ?? ?? 48 03 1F"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {

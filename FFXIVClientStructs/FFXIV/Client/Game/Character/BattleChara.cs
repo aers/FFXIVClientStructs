@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 //     Client::Game::Object::GameObject
 //     Client::Graphics::Vfx::VfxDataListenner
 //     Client::Game::Character::CharacterData
-// ctor "E8 ?? ?? ?? ?? 48 8B F0 8D 14 3F"
 // characters that fight (players, monsters, etc)
 [GenerateInterop]
 [Inherits<Character>]

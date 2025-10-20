@@ -20,20 +20,20 @@ public unsafe partial struct InfoProxyLetter {
     [FieldOffset(0x2B)] public bool HasLettersFromSupportDesk;
     [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray130<Letter> _letters;
     //0xCC0 After
-    [FieldOffset(0x5178)] public Utf8String UnkString0;
-    [FieldOffset(0x51E0)] public Utf8String UnkString1;
+    [FieldOffset(0x7608)] public Utf8String UnkString0;
+    [FieldOffset(0x7670)] public Utf8String UnkString1;
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0xA0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
     public unsafe partial struct Letter {
         [FieldOffset(0x00)] public long SenderContentId;// 0xFFFFFFFF for Store
         [FieldOffset(0x08)] public int Timestamp;
         [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray5<ItemAttachment> _attachments;
-        [FieldOffset(0x38)] public uint Gil;
-        [FieldOffset(0x3C)] public bool Read;
+        [FieldOffset(0x74)] public uint Gil;
+        [FieldOffset(0x78)] public bool Read;
 
-        [FieldOffset(0x3F), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _sender;
-        [FieldOffset(0x5F), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _messagePreview;
+        [FieldOffset(0x87), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _sender;
+        [FieldOffset(0xA7), FixedSizeArray(isString: true)] internal FixedSizeArray64<byte> _messagePreview;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x8)]
         public partial struct ItemAttachment {

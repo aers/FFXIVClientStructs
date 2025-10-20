@@ -6,7 +6,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::Director
 //         Client::Game::Event::LuaEventHandler
 //           Client::Game::Event::EventHandler
-// ctor "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B D9 E8 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 48 89 03 48 8D 8B"
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B90)]
@@ -25,6 +24,12 @@ public unsafe partial struct InstanceContentDeepDungeon {
     [FieldOffset(0x2119)] public byte ArmorLevel;
     [FieldOffset(0x211A)] public byte SyncedGearLevel;
     [FieldOffset(0x211B)] public byte HoardCount;
+    [FieldOffset(0x211C)] public byte DeepDungeonGimmickEffectIdCurrent;
+    [FieldOffset(0x211D)] public byte DeepDungeonGimmickEffectIdNext;
+
+    [FieldOffset(0x212A)] public byte DeepDungeonStatusId;
+    [FieldOffset(0x212B)] public byte DeepDungeonBanId;
+    [FieldOffset(0x212C)] public byte DeepDungeonDangerId;
 
     [FieldOffset(0x2ADE)] public byte DeepDungeonId; // 1-3
 

@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
 // Client::UI::Misc::ConfigModule
 // For updating offsets:
-//  "48 8B CB E8 ?? ?? ?? ?? 48 8B 7C 24 ?? 33 C0 48 8B 5C 24"
 //    16 * (v6 + ConfigOptionCount * a6) + a1 + {ValuesFieldOffset}
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xECC0)]

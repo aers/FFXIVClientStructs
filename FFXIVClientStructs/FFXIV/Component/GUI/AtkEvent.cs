@@ -82,6 +82,9 @@ public enum AtkEventType : byte {
     WindowRollOut = 71,
     WindowChangeScale = 72,
 
+    // AtkTimeline
+    TimelineActiveLabelChanged = 74,
+
     // AtkTextNode
     LinkMouseClick = 75,
     LinkMouseOver = 76,

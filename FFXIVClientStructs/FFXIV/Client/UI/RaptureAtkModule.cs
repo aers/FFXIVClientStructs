@@ -54,7 +54,7 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x23DE0), FixedSizeArray] internal FixedSizeArray18<CrystalCache> _crystalItemCache;
     [FieldOffset(0x24890)] public ItemCache* KeyItemCache; // ptr to 120 entries
     [FieldOffset(0x24898)] public ItemCache* EquippedItemCache; // ptr to 14 entries
-    [FieldOffset(0x248A0), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // see "E8 ?? ?? ?? ?? 48 8B 07 8D 55 05", only 140 slots are processed, unused?
+    [FieldOffset(0x248A0), FixedSizeArray] internal FixedSizeArray160<ItemCache> _inventoryItemCache; // only 140 slots are processed, unused?
     [FieldOffset(0x29DA0)] public uint InventoryItemCacheSlotCount;
     [FieldOffset(0x29DA4)] public uint GilCap;
 
@@ -178,14 +178,32 @@ public unsafe partial struct RaptureAtkModule {
 
     [Flags]
     public enum AgentUpdateFlags : byte {
-        None = 0x00,
-        InventoryUpdate = 0x01,
-        ActionBarUpdate = 0x02, // Triggered by using Actions, Inventories, Gearsets, Macros
-        RetainerUpdate = 0x04,
-        NameplateUpdate = 0x08,
-        UnlocksUpdate = 0x10, // Triggered by Mounts, Minions, Orchestrion Rolls, Sightseeing Log, UnlockLinks...
-        MainCommandEnabledStateUpdate = 0x20,
-        HousingInventoryUpdate = 0x40,
+        None = 0,
+
+        /// <remarks> Set when an inventory has been updated. </remarks>
+        InventoryUpdate = 1 << 0,
+
+        /// <remarks> Set when a hotbar slot has been executed, or a Gearset or Macro has been changed. </remarks>
+        ActionBarUpdate = 1 << 1,
+
+        /// <remarks> Set when the RetainerMarket inventory has been updated. </remarks>
+        RetainerMarketInventoryUpdate = 1 << 2,
+        [Obsolete("Renamed to RetainerMarketInventoryUpdate")] RetainerUpdate = 1 << 2,
+
+        /// <remarks> Unknown use case. </remarks>
+        NameplateUpdate = 1 << 3,
+
+        /// <remarks> Set when the player unlocked collectibles, contents or systems. </remarks>
+        UnlocksUpdate = 1 << 4,
+
+        /// <remarks> Set when <see cref="AgentHUD.SetMainCommandEnabledState"/> was called. </remarks>
+        MainCommandEnabledStateUpdate = 1 << 5,
+
+        /// <remarks> Set when any housing inventory has been updated. </remarks>
+        HousingInventoryUpdate = 1 << 6,
+
+        /// <remarks> Set when any content inventory has been updated. </remarks>
+        ContentInventoryUpdate = 1 << 7,
     }
 
     public enum TextGimmickHintStyle : byte {

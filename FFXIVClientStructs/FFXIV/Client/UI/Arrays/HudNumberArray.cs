@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 163 * 4)]
 public unsafe partial struct HudNumberArray {
@@ -73,5 +72,3 @@ public unsafe partial struct HudNumberArray {
         FourElements = 2,
     }
 }
-
-

@@ -1,11 +1,11 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
+using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 using FFXIVClientStructs.FFXIV.Common.Lua;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::EventHandler
-// ctor "E8 ?? ?? ?? ?? 45 33 D2 48 8D 05 ?? ?? ?? ?? 48 89 03 4C 8D 8B"
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x218)]
 public unsafe partial struct EventHandler {
@@ -45,8 +45,14 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(258)]
     public partial uint GetEventItemId();
 
-    [VirtualFunction(261)]
+    [VirtualFunction(261), Obsolete($"Renamed to {nameof(GetDirectorTodos)}")]
     public partial StdVector<EventHandlerObjective>* GetObjectives();
+
+    [VirtualFunction(261)]
+    public partial StdVector<DirectorTodo>* GetDirectorTodos();
+
+    [VirtualFunction(262)]
+    public partial StdVector<MassivePcContentTodo>* GetMassivePcContentTodos(int setIndex);
 
     [VirtualFunction(265)]
     public partial int GetRecommendedLevel();
@@ -58,9 +64,11 @@ public struct EventHandlerInfo {
     [FieldOffset(0x04)] public byte Flags;
 }
 
+// TODO: remove (was renamed/replaced with DirectorTodo)
 [StructLayout(LayoutKind.Explicit, Size = 0x160)]
 public struct EventHandlerObjective {
     [FieldOffset(0x00)] public bool Enabled;
+
     [FieldOffset(0x04)] public int DisplayType;
     [FieldOffset(0x08)] public Utf8String Label;
 
@@ -68,6 +76,248 @@ public struct EventHandlerObjective {
     [FieldOffset(0x7C)] public int CountNeeded;
     [FieldOffset(0x80)] public ulong TimeLeft;
     [FieldOffset(0x88)] public uint MapRowId;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x160)]
+public struct DirectorTodo {
+    [FieldOffset(0x00)] public bool Enabled;
+
+    [FieldOffset(0x04)] public TodoType Type;
+    [FieldOffset(0x08)] public Utf8String Text;
+    [FieldOffset(0x70)] public bool Complete;
+    [FieldOffset(0x71)] public bool CheckOnCompletion; // also grays out the line
+
+    /// <remarks> Unix timestamp. </remarks>
+    [FieldOffset(0x78), CExporterIgnore] public long StartTimestamp;
+    [FieldOffset(0x78), CExporterIgnore] public TodoJoinButtonType JoinButtonType;
+    [FieldOffset(0x78)] public int CurrentCount;
+    [FieldOffset(0x78), CExporterIgnore] public int CurrentPercentage;
+    [FieldOffset(0x78), CExporterIgnore] public int IconId;
+    [FieldOffset(0x7C), CExporterIgnore] public TodoBarColor BarColor;
+    [FieldOffset(0x7C)] public int NeededCount;
+    [FieldOffset(0x7C), CExporterIgnore] public int NeededPercentage;
+    /// <remarks> Unix timestamp. </remarks>
+    [FieldOffset(0x80)] public long EndTimestamp;
+    /// <remarks> In seconds. </remarks>
+    [FieldOffset(0x88)] public long Duration;
+    [FieldOffset(0x88), CExporterIgnore] public uint MapRowId; // unsure where this is used that way. copied from old EventHandlerObjective struct
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x168)]
+public struct MassivePcContentTodo {
+    [FieldOffset(0x00)] public bool Enabled;
+
+    [FieldOffset(0x04)] public TodoType Type;
+    [FieldOffset(0x08)] public Utf8String Text;
+    [FieldOffset(0x70)] public bool Complete;
+    [FieldOffset(0x71)] public bool CheckOnCompletion; // also grays out the line
+
+    /// <remarks> Unix timestamp. </remarks>
+    [FieldOffset(0x78), CExporterIgnore] public long StartTimestamp;
+    [FieldOffset(0x78), CExporterIgnore] public TodoJoinButtonType JoinButtonType;
+    [FieldOffset(0x78)] public int CurrentCount;
+    [FieldOffset(0x78), CExporterIgnore] public int CurrentPercentage;
+    [FieldOffset(0x78), CExporterIgnore] public int IconId;
+    [FieldOffset(0x7C), CExporterIgnore] public TodoBarColor BarColor;
+    [FieldOffset(0x7C)] public int NeededCount;
+    [FieldOffset(0x7C), CExporterIgnore] public int NeededPercentage;
+    /// <remarks> Unix timestamp. </remarks>
+    [FieldOffset(0x80)] public long EndTimestamp;
+    /// <remarks> In seconds. </remarks>
+    [FieldOffset(0x88)] public long Duration;
+
+    [FieldOffset(0x160)] public ulong Unk160;
+}
+
+/// <remarks>
+/// Director only supports types up to 11.<br/>
+/// FateDirector only supports types 0-6 and 11.<br/>
+/// MassivePcContentDirector supports all 16 types.<br/>
+/// DynamicEvent supports types 1, 5, 6, 8.<br/>
+/// QuestTodoList supports ??.<br/>
+/// <br/>
+/// See also <see cref="ToDoListNumberArray.ObjectiveType"/> (same thing, different values).
+/// </remarks>
+public enum TodoType {
+    /// <summary>
+    /// Text.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - Complete
+    /// </summary>
+    Text = 0, // ObjectiveType 0
+
+    /// <summary>
+    /// Text with current/needed count and a progress bar.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - Complete<br/>
+    /// - CheckOnCompletion<br/>
+    /// - CurrentCount<br/>
+    /// - NeededCount<br/>
+    /// <br/>
+    /// Formatted with Addon#1146 (lnum1 = CurrentCount, lnum2 = NeededCount, lstr3 = Text).<br/>
+    /// </summary>
+    FractionBar = 1, // ObjectiveType 4, in Lua "TODO_TYPE_FRACTION_BAR"
+
+    /// <summary>
+    /// Text with count.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - Complete<br/>
+    /// - CurrentCount<br/>
+    /// <br/>
+    /// Formatted with Addon#1147 (lnum1 = CurrentCount, lnum2 = 0, lstr3 = Text).
+    /// </summary>
+    Number = 2, // ObjectiveType 1, in Lua "TODO_TYPE_NUMBER"
+
+    /// <summary>
+    /// Text and a progress bar.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - Complete<br/>
+    /// - CurrentPercentage
+    /// </summary>
+    Bar = 3, // ObjectiveType 3, in Lua "TODO_TYPE_BAR"
+
+    /// <summary>
+    /// Text and timer.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - Complete<br/>
+    /// - EndTimestamp<br/>
+    /// <br/>
+    /// Formatted with Addon#33 (via RaptureTextModule.FormatSecondsRemaining).
+    /// </summary>
+    TimeRemaining = 4, // ObjectiveType 5, in Lua "TODO_TYPE_TIME_REMAINING"
+
+    /// <summary>
+    /// Progress Bar.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - CurrentPercentage<br/>
+    /// - NeededPercentage<br/>
+    /// <br/>
+    /// When current value &lt;= minimum value, then the progress bar is red, otherwise yellow.
+    /// </summary>
+    LargeBar = 5, // ObjectiveType 9, in Lua "TODO_TYPE_LARGE_BAR"
+
+    /// <summary>
+    /// Text with current/needed count.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - Complete<br/>
+    /// - CheckOnCompletion<br/>
+    /// - CurrentCount<br/>
+    /// - NeededCount<br/>
+    /// <br/>
+    /// Formatted with Addon#1146 (lnum1 = CurrentCount, lnum2 = NeededCount, lstr3 = Text).
+    /// </summary>
+    Fraction = 6, // ObjectiveType 2, in Lua "TODO_TYPE_FRACTION"
+
+    /// <summary>
+    /// Colorable Progress Bar.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - CurrentPercentage<br/>
+    /// - BarColor<br/>
+    /// </summary>
+    ColorableBar = 7, // ObjectiveType 10
+
+    /// <summary>
+    /// Large gray text.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text
+    /// </summary>
+    LargeGrayText = 8, // ObjectiveType 6
+
+    /// <summary>
+    /// Large gray text with count.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - CurrentCount<br/>
+    /// <br/>
+    /// Formatted with Addon#1147 (lnum1 = CurrentCount, lnum2 = 0, lstr3 = Text).
+    /// </summary>
+    LargeGrayNumber = 9, // ObjectiveType 7
+
+    /// <summary>
+    /// Large gray text with current/needed count.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - CurrentCount<br/>
+    /// - NeededCount<br/>
+    /// <br/>
+    /// Formatted with Addon#1146 (lnum1 = CurrentCount, lnum2 = NeededCount, lstr3 = Text).
+    /// </summary>
+    LargeGrayFraction = 10, // ObjectiveType 8
+
+    /// <summary>
+    /// Text with long progress bar.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - Complete<br/>
+    /// - CurrentPercentage
+    /// </summary>
+    LongBar = 11, // ObjectiveType 15
+
+    /// <summary>
+    /// Quest title.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text<br/>
+    /// - IconId
+    /// </summary>
+    QuestTitle = 12, // ObjectiveType 11
+
+    /// <summary>
+    /// Large timer.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text (not really. needs lots of spaces after if used)<br/>
+    /// - EndTimestamp<br/>
+    /// - Duration
+    /// </summary>
+    LargeTimeRemaining = 13, // ObjectiveType 13
+
+    /// <summary>
+    /// Large blue text.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - Text
+    /// </summary>
+    LargeBlueText = 14, // ObjectiveType 12
+
+    /// <summary>
+    /// Join button.<br/>
+    /// <br/>
+    /// Available settings:<br/>
+    /// - JoinButtonType
+    /// </summary>
+    JoinButton = 15, // ObjectiveType 14
+}
+
+public enum TodoBarColor {
+    Blue = 0,
+    Red = 1,
+    Yellow = 2,
+    White = 3,
+    Green = 4
+}
+
+public enum TodoJoinButtonType : byte {
+    Joinable = 0,
+    Joined = 1,
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x04)]

@@ -224,4 +224,31 @@ internal static class DiagnosticDescriptors {
         DiagnosticSeverity.Error,
         true,
         "A field marked with the FixedSizeArray attribute and isString set to true does not use the proper type.");
+
+    public static readonly DiagnosticDescriptor FixedSizeArrayBitArrayFieldMustBeByte = new(
+        "CSIG0305",
+        "Fixed size bit array backing field must be byte type",
+        "The field {0} marked as a fixed size bit array must use byte type",
+        "InteropGenerator.Field",
+        DiagnosticSeverity.Error,
+        true,
+        "A field marked with the FixedSizeArray attribute and isBitArray set to true does not use the proper type.");
+
+    public static readonly DiagnosticDescriptor FixedSizeArrayBitArrayFieldBitCountMustMatchSize = new(
+        "CSIG0306",
+        "Fixed size bit array backing field must have a size that fits the bit count",
+        "The field {0} marked as a fixed size bit array must have a size that fits the bit count",
+        "InteropGenerator.Field",
+        DiagnosticSeverity.Error,
+        true,
+        "A field marked with the FixedSizeArray attribute and isBitArray set to true has a size that doesn't match the given bitCount. The size must be calculated as (bitCount + 7) / 8.");
+
+    public static readonly DiagnosticDescriptor FixedSizeArrayFieldCannotBeStringAndBitArray = new(
+        "CSIG0307",
+        "Fixed size array cannot be both string and bit array",
+        "The field {0} marked as a fixed size array cannot have both isString and isBitArray set to true",
+        "InteropGenerator.Field",
+        DiagnosticSeverity.Error,
+        true,
+        "A field marked with the FixedSizeArray attribute cannot set both isString and isBitArray to true.");
 }
