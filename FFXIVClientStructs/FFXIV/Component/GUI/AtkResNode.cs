@@ -74,7 +74,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     /// <term>Bit 21 [0x100000]</term> Change CursorType to Clickable on hover<br/>
     /// <term>Bit 23 [0x400000]</term> Change CursorType to TextInput on hover<br/>
     /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular<br/>
-    /// <term>Bit 25 [0x1000000]</term> Use transformed collision instead of rectangular, if the object is rotated represents a strict collision check, instead of just bounding box
+    /// <term>Bit 25 [0x1000000]</term> Perform a stricter collision check. Instead of using the axis-aligned bounding box, the node's rotation and scale is taken into account.
     /// </summary>
     [FieldOffset(0xA0)] public uint DrawFlags;
 
