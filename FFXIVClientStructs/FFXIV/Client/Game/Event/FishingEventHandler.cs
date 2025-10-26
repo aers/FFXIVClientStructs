@@ -1,15 +1,15 @@
-using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.ValueType;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
+// Client::Game::Event::FishingEventHandler
+//   Client::Game::Event::EventHandler
+//   Component::GUI::AtkModuleInterface::AtkEventInterface
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AtkModuleInterface.AtkEventInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x290)]
 public unsafe partial struct FishingEventHandler {
-	[FieldOffset(0x230)] public bool CanFish;
-
+    [FieldOffset(0x230)] public bool CanFish;
 
     /// <summary>
     /// Changes the currently equipped bait.
@@ -22,4 +22,4 @@ public unsafe partial struct FishingEventHandler {
         baitValue[1].SetBool(false);
         return ReceiveEvent(&returnValue, baitValue, 2, 2);
     }
-};
+}

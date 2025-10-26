@@ -14830,6 +14830,8 @@ classes:
     vtbls:
       - ea: 0x14208F098
         base: Client::Game::Event::EventHandler
+      - ea: 0x14208F910
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface
     funcs:
       0x140D0F030: ctor
       0x140D14F70: Create
