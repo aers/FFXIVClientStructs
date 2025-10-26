@@ -14832,6 +14832,7 @@ classes:
         base: Client::Game::Event::EventHandler
     funcs:
       0x140D0F030: ctor
+      0x140D14F70: Create
   Client::Game::Event::GCShopEventHandler: # 0x16
     vtbls:
       - ea: 0x142161B20
