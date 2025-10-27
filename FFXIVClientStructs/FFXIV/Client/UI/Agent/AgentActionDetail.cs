@@ -13,7 +13,7 @@ public unsafe partial struct AgentActionDetail {
 
     // flag & 1 = get AdjustedActionId
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? E9 ?? ?? ?? ?? 83 F8 0F")]
-    public partial void HandleActionHover(ActionKind actionKind, uint actionId, int flag, bool isLovmActionDetail);
+    public partial void HandleActionHover(ActionKind actionKind, uint actionId, int flag, bool isLovmActionDetail, int a5, int a6);
 }
 
 /// Keep in sync with <see cref="Enums.DetailKind"/>
