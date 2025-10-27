@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
@@ -27,6 +28,9 @@ public unsafe partial struct Director {
     [FieldOffset(0x4A0), Obsolete($"Use {nameof(DirectorTodos)}, or {nameof(GetDirectorTodos)}")] public StdVector<EventHandlerObjective> Objectives;
     [FieldOffset(0x4A0)] public StdVector<DirectorTodo> DirectorTodos; // name based on the Lua function "SetDirectorTodo", 10 objectives max
     [FieldOffset(0x4B8)] public uint EventItemId;
+
+    [VirtualFunction(204)]
+    public partial void GetNameplateIconForObject(GameObject* gameObject);
 
     [VirtualFunction(273)]
     public partial void PopulateMapMarkers(ushort territoryTypeId, StdVector<MapMarkerData>* markerVector);
