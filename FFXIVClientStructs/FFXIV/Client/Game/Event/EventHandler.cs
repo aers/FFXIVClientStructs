@@ -30,6 +30,9 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(202)]
     public partial EventId GetEventId();
 
+    [VirtualFunction(204)]
+    public partial uint GetNameplateIconForObject(GameObject* gameObject);
+
     [VirtualFunction(253)]
     public partial void GetDescription(Utf8String* outDescription);
 
