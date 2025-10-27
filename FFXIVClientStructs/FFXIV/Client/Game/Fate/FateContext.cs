@@ -8,6 +8,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Fate;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x29D0)]
 public unsafe partial struct FateContext {
+    [FieldOffset(0x10)] public uint MotivationNpc; // interact with this object to initiate fate
+    [FieldOffset(0x14)] public uint ObjectiveNpc; // interact with this object to hand in items
+
     [FieldOffset(0x18)] public ushort FateId;
     [FieldOffset(0x1A)] public byte EurekaFate;
     [FieldOffset(0x20)] public int StartTimeEpoch;
