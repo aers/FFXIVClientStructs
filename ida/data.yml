@@ -14645,6 +14645,7 @@ classes:
       - ea: 0x142075AA8
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
+      204: GetNameplateIconForObject # (this, GameObject* gameObject)
       273: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
       290: Update
       291: Update2
