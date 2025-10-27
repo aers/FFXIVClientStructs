@@ -30,7 +30,7 @@ public unsafe partial struct Director {
     [FieldOffset(0x4B8)] public uint EventItemId;
 
     [VirtualFunction(204)]
-    public partial void GetNameplateIconForObject(GameObject* gameObject);
+    public partial uint GetNameplateIconForObject(GameObject* gameObject);
 
     [VirtualFunction(273)]
     public partial void PopulateMapMarkers(ushort territoryTypeId, StdVector<MapMarkerData>* markerVector);
