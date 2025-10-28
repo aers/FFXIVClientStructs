@@ -3563,6 +3563,7 @@ classes:
       4: Tick
     funcs:
       0x1400C9110: ctor
+      0x1400CC480: Exit
       0x1400CCA70: SetInactive
       0x1400CCB30: UpdateClipCursor
       0x1400CCC30: PauseResumeFrameTicks
@@ -8574,7 +8575,7 @@ classes:
       - ea: 0x142050AD8
     vfuncs:
       0: Dtor
-      4: Abort
+      4: ExitGame
       5: GetExcelModuleInterface
       6: GetRaptureTextModule
       7: GetRaptureAtkModule

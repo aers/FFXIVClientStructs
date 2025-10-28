@@ -30,7 +30,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x3C0), FixedSizeArray] internal FixedSizeArray19<RaptureAtkHistory> _atkHistory;
     [FieldOffset(0x7E8)] public int LinkshellCycle;
     [FieldOffset(0x7EC)] public int CrossWorldLinkshellCycle;
-
+    [FieldOffset(0x7F0)] public bool ShouldExitGame;
     [FieldOffset(0x7F4)] public uint FrameCount;
     [FieldOffset(0x7F8)] internal ExcelModuleInterface* ExcelModuleInterface; // this is Component::Excel::ExcelModuleInterface, not Common::Component::Excel::ExcelModuleInterface!
     [FieldOffset(0x800)] internal RaptureTextModule RaptureTextModule;
