@@ -1612,6 +1612,7 @@ classes:
       0x14082F8B0: SplitItem
       0x1408310F0: DiscardItem
       0x14083D890: RefuseTrade
+      0x14083D7D0: LockInTrade
   Client::Game::InventoryItem:
     vtbls:
       - ea: 0x142059378
