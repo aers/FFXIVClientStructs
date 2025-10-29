@@ -11033,6 +11033,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140ACC540: ctor
+      0x140ACCBC0: ChangeInventoryContainer
+      0x14084B5E0: RepairItem
+      0x14084B8E0: RepairAllItems
+      0x14084B790: RepairEquipped
   Client::UI::Agent::AgentRepairRequest:
     vtbls:
       - ea: 0x14206C608
