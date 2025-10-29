@@ -135,6 +135,9 @@ public unsafe partial struct InventoryManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 BF ?? ?? ?? ?? ?? 74 57 44 0F B6 8F ?? ?? ?? ??")]
     public partial void RefuseTrade();
+	
+	[MemberFunction("E8 ?? ?? ?? ?? 32 DB E9 ?? ?? ?? ?? 48 8B CF")]
+	public partial void LockInTrade();
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
