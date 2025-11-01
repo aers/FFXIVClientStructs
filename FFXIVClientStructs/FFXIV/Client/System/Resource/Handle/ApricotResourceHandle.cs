@@ -7,4 +7,4 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 [GenerateInterop]
 [Inherits<ResourceHandle>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
-public unsafe struct ApricotResourceHandle { }
+public unsafe partial struct ApricotResourceHandle { }
