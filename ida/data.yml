@@ -6282,6 +6282,8 @@ classes:
     funcs:
       0x14024CF40: ctor
       0x14024D070: Initialize
+      0x14024E3A0: AssignBackgroundTexture
+      0x14024E400: AssignCamera
   Client::Graphics::Render::AmbientLight:
     vtbls:
       - ea: 0x142011230
@@ -6529,7 +6531,8 @@ classes:
     vtbls:
       - ea: 0x142030250
         base: Client::Graphics::Singleton<Client::Graphics::Scene::CameraManager>
-#    funcs:
+    funcs:
+      0x140401230: Update
 #oldfail       0x1404866D0: ctor
   Client::Graphics::Scene::CharacterUtility:
     instances:
