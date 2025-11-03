@@ -308,3 +308,11 @@ public enum ObjectHighlightColor : byte {
     Magenta = 6,
     Black = 7
 }
+
+[Flags]
+public enum VisibilityFlags : ulong
+{
+	None = 0,
+	Model = 1ul << 1,
+	Nameplate = 1ul << 11
+}
