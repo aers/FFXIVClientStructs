@@ -46,7 +46,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x100)] public DrawObject* DrawObject;
     [FieldOffset(0x108)] public SharedGroupLayoutInstance* SharedGroupLayoutInstance;
     [FieldOffset(0x110)] public uint NamePlateIconId;
-    [FieldOffset(0x118)] public int RenderFlags;
+    [FieldOffset(0x118)] public int RenderFlags; // TODO: 7.4 change type to VisibilityFlags
     /// <remarks>
     /// This value is interpolated and gets updated every frame.<br/>
     /// To set the target offset, use <see cref="NameplateOffsetTarget"/>.
