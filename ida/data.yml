@@ -4517,6 +4517,7 @@ classes:
       0x1400FA310: HandleOpenContextMenuForAddon # 53
       0x1400FA460: HandleGlassesDrop # 56
       0x1400FC7D0: OnUpdate_Nameplates
+      0x1400FD480: OnUpdate_NameplateCastbars
       0x1400FE5C0: IncRefNumberArrayData
       0x1400FE610: IncRefStringArrayData
       0x1401021B0: GetStaticAddonName
@@ -10046,6 +10047,7 @@ classes:
       0x1408C6190: StartOmenDirectional
       0x140856570: GetScale
       0x140895F90: IsJumping
+      0x1409CA3E0: IsInPvP
   Client::Game::Character::Character::CastInfo:
     funcs:
       0x140899730: Reset

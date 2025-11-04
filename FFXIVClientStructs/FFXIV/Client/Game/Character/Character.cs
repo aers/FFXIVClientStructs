@@ -141,6 +141,13 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 80 4E ?? ?? ?? ?? ?? 48 8B CB FF 92")]
     public partial bool IsVoyager();
 
+    /// <summary>
+    /// Checks if Character is in a PvP state <br/>
+    /// Will need to be called multiple times before returning correct result
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 05 8B 4D F4")]
+    public partial bool IsInPvP();
+
     [VirtualFunction(77)]
     public partial StatusManager* GetStatusManager();
 
