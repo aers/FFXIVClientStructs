@@ -67,6 +67,6 @@ public unsafe partial struct AgentRepair {
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
     public struct RepairEntry {
         [FieldOffset(0x0)] public uint InventoryType;
-        [FieldOffset(0x4)] public uint Unk_4;
+        [FieldOffset(0x4)] private uint Unk_4;
     }
 }
