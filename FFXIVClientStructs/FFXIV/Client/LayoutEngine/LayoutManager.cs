@@ -107,6 +107,10 @@ public unsafe partial struct OutdoorAreaLayoutData {
 [StructLayout(LayoutKind.Explicit, Size = 0x1D0)]
 public unsafe partial struct OutdoorPlotLayoutData {
     [FieldOffset(0x28), FixedSizeArray] internal FixedSizeArray8<OutdoorPlotFixtureData> _fixture;
+    /// <remarks>
+    /// Position of the entrance vfx object
+    /// </remarks>
+    [FieldOffset(0x190)] public Vector3 EntrancePosition;
 
     [MemberFunction("E9 ?? ?? ?? ?? 48 89 5C 24 ?? 48 8D 0C AD")]
     public partial void SetFixture(uint part, uint fixture, uint a4 = 0xFFFFFFFF);
