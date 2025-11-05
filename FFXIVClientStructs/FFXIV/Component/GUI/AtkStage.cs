@@ -101,7 +101,7 @@ public unsafe partial struct AtkStage {
         [FieldOffset(0x08)] private AtkUnitBase* UnkUnitBase1;
         [FieldOffset(0x10)] private AtkUnitBase* UnkUnitBase2;
         [FieldOffset(0x18)] private byte Unk18;
-        [FieldOffset(0x19)] private byte Unk19;
+        [FieldOffset(0x19)] public bool RequestRefresh;
         [FieldOffset(0x1A)] private byte Unk1A;
         [FieldOffset(0x1B)] private byte Unk1B;
         [FieldOffset(0x1C)] private short X;
