@@ -1491,6 +1491,13 @@ classes:
       0x140D17880: IsCraftingNotebookDivisionLevelRangeSeen # static (int craftingType, uint notebookDivisionId)
       0x140D17920: SetSeenCraftingNotebookDivisionLevelRangeEntry
       0x1418F5440: IsLevequestComplete
+  Client::Game::RepairManager:
+    instances:
+      - ea: 0x14293FC90
+    funcs:
+      0x14084B5E0: RepairItem
+      0x14084B8E0: RepairAllItems
+      0x14084B790: RepairEquipped
   Client::Game::EventItemManager:
     instances:
       - ea: 0x14293FC98
@@ -11038,6 +11045,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140ACC540: ctor
+      0x140ACCBC0: ChangeInventoryContainer
   Client::UI::Agent::AgentRepairRequest:
     vtbls:
       - ea: 0x14206C608
