@@ -23458,10 +23458,18 @@ classes:
   Client::System::Scheduler::Base::BaseInstanceObject:
     vtbls:
       - ea: 0x142183738
+    vfuncs:
+      13: GetGraphics
   Client::System::Scheduler::SchedulerInstanceObject:
     vtbls:
       - ea: 0x142183820
         base: Client::System::Scheduler::Base::BaseInstanceObject
+  Client::System::Scheduler::Instance::LayoutObject:
+    vtbls:
+      - ea: 0x1422E3A30
+        base: Client::System::Scheduler::SchedulerInstanceObject
+    vfuncs:
+      48: GetLayoutObject
   Client::System::Scheduler::Instance::VfxObject:
     vtbls:
       - ea: 0x1422E2330
@@ -23482,6 +23490,27 @@ classes:
     vtbls:
       - ea: 0x1421B7510
         base: Client::System::Scheduler::Base::SchedulerState
+  # Client::System::Scheduler::Base::SchedulerStateField8:
+  #   vtbls:
+  #     - ea: 0x1422E75F0
+  #       base: Client::System::Scheduler::Base::SchedulerState
+  # Client::System::Scheduler::Clip::BaseClipField28:
+  #   vtbls:
+  #     - ea: 0x1422E51A0
+  #       base: Client::System::Scheduler::Base::SchedulerState
+  # Client::System::Scheduler::Clip::BaseClipField40:
+  #   vtbls:
+  #     - ea: 0x1421B6E90
+  #   vfuncs:
+  #     3: Unk3
+  #   funcs:
+  #     0x1417EA8E0: ctor
+  Client::System::Scheduler::Clip::LayoutObjectClip:
+    vtbls:
+      - ea: 0x142186160
+        base: Client::System::Scheduler::Clip::BaseClip
+    funcs:
+      0x1417B2280: ctor
   Client::System::Scheduler::Clip::HavokAnimationClip:
     vtbls:
       - ea: 0x1421B8B10

@@ -7,6 +7,10 @@ public unsafe partial struct ActionTimelineManager {
     [StaticAddress("4C 8B 43 48 48 8B 0D ?? ?? ?? ??", 7, isPointer: true)]
     public static partial ActionTimelineManager* Instance();
 
+    [FieldOffset(0x30)] public TimelineGroup* Group1;
+    [FieldOffset(0x38)] public TimelineGroup* Group2;
+    [FieldOffset(0x68)] public TimelineGroup* Group3;
+
     [MemberFunction("48 83 EC 38 48 8B 02 C7 44 24")]
     public partial bool PreloadActionTmb(PreloadActionTmbInfo* info);
 
