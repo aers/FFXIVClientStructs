@@ -33,7 +33,8 @@ public unsafe partial struct AtkImageNode : ICreatable {
     public partial void UnloadTexture();
 }
 
-public enum ImageNodeFlags {
+[Flags]
+public enum ImageNodeFlags { // todo add : byte and replace public byte Flags with public ImageNodeFlags Flags
     FlipH = 0x01,
     FlipV = 0x02,
 
