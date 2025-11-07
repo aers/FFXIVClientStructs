@@ -1801,6 +1801,7 @@ classes:
       0x140C90110: GetInstance
       0x140C98740: GetFurnitureManager
       0x140C97C10: HasIndoorOrOutdoorTerritory
+      0x140C97C30: GetCurrentHousingGuestBookData
       0x140C98260: Update
       0x140C95650: IsOutside
       0x140C95660: IsInside

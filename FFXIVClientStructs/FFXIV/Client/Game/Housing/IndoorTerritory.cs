@@ -69,6 +69,8 @@ public unsafe partial struct IndoorTerritory {
     [FieldOffset(0x99B9)] public byte Unk99B9;
     [FieldOffset(0x99BA)] public bool ShowStoreroomTab; // in the "Indoor Furnishings" window
 
+    [FieldOffset(0x99C0)] public HousingGuestBookData GuestBook;
+
     [GenerateInterop]
     [Inherits<AtkModuleInterface.AtkEventInterface>] // technically Client::Game::HousingUIEventListener<Client::Game::IndoorTerritory>
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
