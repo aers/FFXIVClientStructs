@@ -58,6 +58,7 @@ public unsafe partial struct CraftEventHandler {
     [FieldOffset(0x468)] public uint DataSource;
     [FieldOffset(0x46c)] public CraftStateFlags StateFlags;
 
+    [FieldOffset(0x474)] public ushort RecipeId;
     [FieldOffset(0x476)] public ushort StepNumber;
 
     [FieldOffset(0x487)] public CraftCondition Condition;
