@@ -10054,6 +10054,7 @@ classes:
       0x1408C5DF0: StartOmen
       0x1408C6190: StartOmenDirectional
       0x140856570: GetScale
+      0x140866CF0: HasStatus
       0x140895F90: IsJumping
       0x1409CA3E0: IsInPvP
   Client::Game::Character::Character::CastInfo:
