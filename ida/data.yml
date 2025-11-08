@@ -14791,6 +14791,7 @@ classes:
         base: Client::Game::Event::EventHandler
     funcs:
       0x140D18A30: ctor # no xrefs
+      0x140D16590: EndCraftingMode
   Client::Game::Event::CustomTalkEventHandler: # 0x0B
     vtbls:
       - ea: 0x1422B2E58
