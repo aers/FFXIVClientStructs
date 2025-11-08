@@ -25,11 +25,11 @@ public unsafe partial struct AgentRepair {
     [FieldOffset(0x68)] private nint Unk_68; // points to a data structure that holds all information about the currently shown repairable items. likely some Atk Data?
     [FieldOffset(0x70)] private nint Unk_70; // same pointer as in Unk_68
     [FieldOffset(0x78)] private nint Unk_78;
-    [FieldOffset(0x80)] [FixedSizeArray] internal FixedSizeArray140<RepairItemInfo> _repairItemInfos;
+    [FieldOffset(0x80)][FixedSizeArray] internal FixedSizeArray140<RepairItemInfo> _repairItemInfos;
     [FieldOffset(0x940)] private byte Unk_940; // Seems to be some loading state
     [FieldOffset(0x944)] public int RepairEntriesAmount;
     [FieldOffset(0x948)] private int Unk_948; // Ends to be the same number as in RepairEntriesAmount. Maybe some counter for adding up AtkEntries.
-    [FieldOffset(0x94C)] [FixedSizeArray] internal FixedSizeArray140<RepairEntry> _repairEntries;
+    [FieldOffset(0x94C)][FixedSizeArray] internal FixedSizeArray140<RepairEntry> _repairEntries;
     [FieldOffset(0xDAC)] private int Unk_DAC; // This is checked in AgentRepair_Update for 1 or 2
     [FieldOffset(0xDB0)] private int Unk_DB0; // Some InventoryType
     [FieldOffset(0xDB4)] private ushort Unk_DB4;
