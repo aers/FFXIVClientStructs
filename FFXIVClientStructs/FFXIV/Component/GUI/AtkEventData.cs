@@ -58,6 +58,7 @@ public partial struct AtkEventData {
     public unsafe struct AtkFocusData {
         [FieldOffset(0x00)] public AtkResNode* ResNode;
         [FieldOffset(0x08)] public AtkCollisionNode* CollisionNode;
+        [FieldOffset(0x10)] public int FocusParam;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]

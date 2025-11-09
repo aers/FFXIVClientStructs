@@ -2349,6 +2349,7 @@ classes:
       0x141883570: SanitizeString
       0x141883C10: SanitizeStringCh
       0x1418840E0: SanitizeStringKo
+      0x141884590: SanitizeStringTc
       0x141884AD0: GetParts
   Component::GUI::AtkValue:
     funcs:
@@ -7897,6 +7898,7 @@ classes:
       0x140678600: HandleAddonEventCallback2 # 4 - unsure, calls AtkEventInterface.ReceiveEvent2
       0x1406786F0: HandleSubscribeAtkArrayData # 5
       0x140678790: HandleUnsubscribeAtkArrayData # 6
+      0x140678F70: HandleCalculateTextLength # 10
       0x140679060: HandleSetCursor # 11
       0x1406794C0: HandleOpenMapWithMapLink # 14
       0x140101C10: SetRemappedIconId
@@ -7959,10 +7961,30 @@ classes:
         base: Client::System::Input::SoftKeyboardDeviceInterface::SoftKeyboardInputInterface
     funcs:
       # 0x140674E30: ctor # inlined in AtkUldManager_CreateAtkComponent
-      0x140685950: Finalizer
       0x140683C90: SetText
       0x140684520: InsertText
+      0x140684C00: HasEvaluatedText
+      0x140684D30: ToggleUpperCase
+      0x140684D80: ToggleLowerCase
+      0x140684DD0: ToggleNumberInput
+      0x140684E10: ToggleSymbolInput
+      0x140684E60: ToggleIME
+      0x140684EB0: ToggleDictionary
+      0x140684F00: ToggleCapitalize
+      0x140684F50: ToggleEscapeClears
+      0x1406850B0: ToggleWordWrap
+      0x1406850E0: ToggleMask
+      0x140685110: SetMaxByte
+      0x1406851F0: SetMaxChar
+      0x1406852D0: ToggleAutoMaxWidth
+      0x140685310: SetMaxLine
+      0x140685400: SetEnabled
+      0x140685470: SetAvailableLinesTextNodeById
+      0x140685770: SetAtkHistoryIndex
       0x140685790: SetFontSize
+      0x140685950: Finalizer
+      0x140689500: UpdateCharacterCount
+      0x140689BB0: ApplyMask
   Component::GUI::AtkComponentNumericInput:
     vtbls:
       - ea: 0x1420427A8
