@@ -7722,7 +7722,9 @@ classes:
       0x140643FD0: FireCallback
       0x140644DE0: MoveDelta
       0x140646FA0: UpdateCollisionNodeList
-      0x140647A00: SetOperationGuide
+      0x140647BE0: SetOperationGuide
+      0x140647A00: SetOperationGuideEx
+      0x140647C30: ClearOperationGuide
       0x1406484B0: SetAtkValues
   Component::GUI::AtkComponentBase:
     vtbls:
@@ -7983,7 +7985,9 @@ classes:
       0x140685770: SetAtkHistoryIndex
       0x140685790: SetFontSize
       0x140685950: Finalizer
+      0x140688950: HandleCallbackResult
       0x140689500: UpdateCharacterCount
+      0x1406896F0: HandleInputBaseInputReceived
       0x140689BB0: ApplyMask
   Component::GUI::AtkComponentNumericInput:
     vtbls:

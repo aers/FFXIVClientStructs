@@ -229,7 +229,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial void UpdateCollisionNodeList(bool clearFocus);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F BA E7 14")]
-    public partial bool SetFocusNode(AtkResNode* node, bool setCursorFocusNode = false, uint a4 = 0); // a4 = InputId?
+    public partial bool SetFocusNode(AtkResNode* node, bool setCursorFocusNode = false, uint focusParam = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 39 BC 24")]
     public partial void SetComponentFocusNode(AtkComponentBase* component);
@@ -262,6 +262,15 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [MemberFunction("48 85 D2 74 1A 48 8B 81 ?? ?? ?? ??")]
     public partial bool ContainsNode(AtkResNode* node);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8D 6B")]
+    public partial bool SetOperationGuide(OperationGuide* operationGuide);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 47 38 A4 FE")]
+    public partial bool SetOperationGuideEx(uint addonTransientId, OperationGuidePoint relativePoint, int index, OperationGuidePoint point, short offsetX, short offsetY);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 8B CF BF")]
+    public partial bool ClearOperationGuide(int index);
 
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
