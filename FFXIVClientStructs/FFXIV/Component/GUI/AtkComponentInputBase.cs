@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkComponentBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
 public unsafe partial struct AtkComponentInputBase {
-    public delegate InputCallbackResult CallbackDelegate(AtkUnitBase* thisPtr, InputCallbackType type, byte* rawString, byte* evaluatedString, int eventKind);
+    public delegate InputCallbackResult CallbackDelegate(AtkUnitBase* thisPtr, InputCallbackType type, CStringPointer rawString, CStringPointer evaluatedString, int eventKind);
 
     [FieldOffset(0xC0)] public bool IsActive; // Possibly IsFocused
     [FieldOffset(0xC8)] public AtkTextNode* AtkTextNode;
@@ -23,7 +23,7 @@ public unsafe partial struct AtkComponentInputBase {
     [FieldOffset(0x148), Obsolete("Renamed to RawString")] public Utf8String UnkText2;
     [FieldOffset(0x1B0)] public AtkUnitBase* OwnerAddon;
     [FieldOffset(0x1B0), Obsolete("Renamed to OwnerAddon")] public AtkUnitBase* ContainingAddon;
-    [FieldOffset(0x1B8)] public delegate* unmanaged<AtkUnitBase*, InputCallbackType, byte*, byte*, int, InputCallbackResult> Callback;
+    [FieldOffset(0x1B8)] public delegate* unmanaged<AtkUnitBase*, InputCallbackType, CStringPointer, CStringPointer, int, InputCallbackResult> Callback;
     [FieldOffset(0x1C0)] public int CallbackEventKind;
     [FieldOffset(0x1C4)] public int SelectionStart;
     [FieldOffset(0x1C8)] public int SelectionEnd;
