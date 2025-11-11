@@ -41,6 +41,8 @@ public unsafe partial struct OutdoorTerritory {
 
     [FieldOffset(0x9BF0)] public HouseBuddy HouseBuddy;
 
+    [FieldOffset(0xA690)] public HousingGuestBookData GuestBook;
+
     /// <summary>
     /// Get the Icon ID used for map icons in housing areas.
     /// </summary>

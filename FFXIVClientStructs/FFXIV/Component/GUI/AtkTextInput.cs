@@ -14,6 +14,7 @@ public unsafe partial struct AtkTextInput {
     [FieldOffset(0x10)] public CompletionModule* CompletionModule;
     [FieldOffset(0x18)] public TextService* TextService;
     [FieldOffset(0x20), FixedSizeArray] internal FixedSizeArray19<Pointer<RaptureAtkHistory>> _atkHistory;
+    [FieldOffset(0xB8)] public int ActiveAtkHistoryIndex;
     [FieldOffset(0xC0)] public RaptureTextModule* RaptureTextModule;
     [FieldOffset(0xC8)] public TextChecker* TextChecker;
     [FieldOffset(0xD0)] public AtkFontCodeModule* AtkFontCodeModule;

@@ -125,6 +125,9 @@ public unsafe partial struct Character {
     [MemberFunction("E8 ?? ?? ?? ?? 48 3B 47 ?? 75 ?? 48 8B CE")]
     public partial Character* GetParentCharacter();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 38 43 ?? 0F 85")]
+    public partial bool HasStatus(uint statusId);
+
     /// <summary>Check if this character is in a jumping/falling animation.</summary>
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 46 48 8B 4B 08")]
     public partial bool IsJumping();

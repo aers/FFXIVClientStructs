@@ -16,7 +16,7 @@ public unsafe partial struct Achievement {
     [FieldOffset(0x224)] public uint ProgressMax;
 
     /// <summary> Requests Achievement Progress from the server. </summary>
-    [MemberFunction("48 83 EC ?? C7 81 ?? ?? ?? ?? ?? ?? ?? ?? 45 33 C9")]
+    [MemberFunction("E8 ?? ?? ?? ?? 41 C6 44 24 ?? ?? E9 ?? ?? ?? ?? 48 8D 4F ?? E8 ?? ?? ?? ?? 88 43")]
     public partial void RequestAchievementProgress(uint id);
 
     /// <summary> Receives Achievement Progress requested with <see cref="RequestAchievementProgress"/>. </summary>
