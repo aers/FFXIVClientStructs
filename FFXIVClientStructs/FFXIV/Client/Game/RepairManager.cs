@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public unsafe partial struct RepairManager {
-    [StaticAddress("38 46 31 48 8D 0D ?? ?? ?? ??", 3)]
+    [StaticAddress("38 46 31 48 8D 0D ?? ?? ?? ??", 6)]
     public static partial RepairManager* Instance();
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 7F 48 83 F8 02")]
