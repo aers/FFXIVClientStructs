@@ -98,6 +98,16 @@ public unsafe partial struct AgentMap {
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8B CE E8 ?? ?? ?? ?? 48 8B D0 48 8B CE E8 ?? ?? ?? ?? 49 8B 47")]
     public partial void ShowMap(bool a1, bool a2); // native code calls a1 as true always, a2 is used both true and false
 
+    // The game calls this function twice when adding markers to a map, the first time with true, then with false
+    // Specifically omits any MapMarkers with DataType == 3
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 8D ?? ?? ?? ?? 83 E1 FD")]
+    public partial void CreateMapMarkers(bool omitAetherytes);
+
+    // The game calls this function twice when adding markers to a map, the first time with true, then with false
+    // Specifically omits any MapMarkers with DataType == 3
+    [MemberFunction("E8 ?? ?? ?? ?? 81 A5 ?? ?? ?? ?? ?? ?? ?? ?? 8B 8D ?? ?? ?? ?? C1 E9 15")]
+    public partial void CreateMiniMapMarkers(bool omitAetherytes);
+
     public bool AddMiniMapMarker(Vector3 position, uint icon, int scale = 0) {
         if (MiniMapMarkerCount >= MiniMapMarkers.Length) return false;
         var marker = new MiniMapMarker();
