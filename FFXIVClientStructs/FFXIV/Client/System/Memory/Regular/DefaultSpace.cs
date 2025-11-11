@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Memory.Regular;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 [Inherits<IMemorySpace>]
-[VirtualTable("48 89 05 ?? ?? ?? ?? 48 8B CE", 3, 16)]
+[VirtualTable("4C 89 78 D8 48 8D 05 ?? ?? ?? ??", 7, 16)]
 public unsafe partial struct DefaultSpace {
     public static DefaultSpace* GetInstance() => (DefaultSpace*)IMemorySpace.GetDefaultSpace();
 
