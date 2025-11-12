@@ -61,7 +61,7 @@ public unsafe partial struct AtkTextInput {
         [FieldOffset(0x8)] public Utf8String* String1;
         [FieldOffset(0x10)] public Utf8String* String2;
     }
-    
+
     [StructLayout(LayoutKind.Explicit, Size = 0x06)]
     public struct KeyModifiers {
         [FieldOffset(0x00)] public bool IsControlDown;
