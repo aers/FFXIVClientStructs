@@ -1021,6 +1021,7 @@ classes:
     funcs:
       0x140657970: ctor
       0x14065B780: OpenCompletion
+      0x1406580F0: ProcessKeyShortcut
   Component::Text::TextChecker::ExecNonMacroFunc:
     vtbls:
       - ea: 0x1420351E8
