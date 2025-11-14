@@ -134,7 +134,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1CE)] public byte VisibilityFlags;
     // 1 byte padding
     [FieldOffset(0x1D0)] public ushort DrawOrderIndex;
-    [FieldOffset(0x1D2)] public byte Unk1D2; // index in array of AtkUnitManager+0x9388 (48 * 0x30)
+    /// <remarks> Index in <see cref="AtkUnitManager.HudAnchoringTable"/>. </remarks>
+    [FieldOffset(0x1D2)] public sbyte HudAnchoringInfoIndex; // -1 = undefined
+    [FieldOffset(0x1D2), Obsolete("Renamed to HudAnchoringInfoIndex")] public byte Unk1D2;
     // 1 byte padding
     [FieldOffset(0x1D4)] public short X;
     [FieldOffset(0x1D6)] public short Y;
@@ -436,6 +438,7 @@ public struct OperationGuide {
     }
 }
 
+// TODO: use AlignmentType
 public enum OperationGuidePoint : byte {
     TopLeft,
     Top,
