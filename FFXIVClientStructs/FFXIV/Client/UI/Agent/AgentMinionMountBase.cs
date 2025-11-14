@@ -5,7 +5,7 @@
 //     Component::GUI::AtkModuleInterface::AtkEventInterface
 [GenerateInterop(isInherited: true)]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x60)]
+[StructLayout(LayoutKind.Explicit, Size = 0x210)]
 public partial struct AgentMinionMountBase {
     // Selected mount or minion id in Guide.
     [FieldOffset(0x5c)] public int SelectedId;
