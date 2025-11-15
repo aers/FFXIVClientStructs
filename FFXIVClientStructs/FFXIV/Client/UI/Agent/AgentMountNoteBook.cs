@@ -1,6 +1,5 @@
 ﻿namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
-
 // Client::UI::Agent::AgentMountNoteBook
 //   Client::UI::Agent::AgentMinionMountBase
 //     Client::UI::Agent::AgentInterface
