@@ -7,6 +7,6 @@
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x210)]
 public partial struct AgentMinionMountBase {
-    // Selected mount or minion id in Guide.
+    // RowId from Mount/Minion Excel Sheet for the currently selected item in MountNotebook or MinionNoteBook.
     [FieldOffset(0x5c)] public int SelectedId;
 }
