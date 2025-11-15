@@ -7585,6 +7585,8 @@ classes:
       0x140634910: GetEdgeColor
       0x140634950: ToggleGlare
       0x1406349D0: ToggleItalic
+      0x140634A10: ToggleMultiLine
+      0x140634BC0: ApplyTextFlow
       0x140634F50: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
       0x140635010: SetSelection
       0x140635670: SetCharSpacing
