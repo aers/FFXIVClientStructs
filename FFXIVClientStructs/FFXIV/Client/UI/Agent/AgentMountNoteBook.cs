@@ -7,5 +7,5 @@
 [Agent(AgentId.MountNotebook)]
 [GenerateInterop]
 [Inherits<AgentMinionMountBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x210)]
 public partial struct AgentMountNoteBook { }
