@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace CExporter;
+
 public static class StringBuilderPool {
     private static readonly Stack<StringBuilderPooled> _pool = new();
 
