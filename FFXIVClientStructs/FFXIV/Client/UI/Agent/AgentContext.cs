@@ -103,10 +103,8 @@ public unsafe partial struct AgentContext {
 public unsafe partial struct ContextMenu {
     [FieldOffset(0x00)] public short CurrentEventIndex;
     [FieldOffset(0x02)] public short CurrentEventId;
-    
-    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray33<AtkValue> _eventParams; // 32 * AtkValue + 1 * AtkValue for submenus with title
 
-    [FieldOffset(0x2e0)] public AddonFocusTargetInfo AddonFocusTargetInfo;
+    [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray33<AtkValue> _eventParams; // 32 * AtkValue + 1 * AtkValue for submenus with title
 
     [FieldOffset(0x428), FixedSizeArray] internal FixedSizeArray32<byte> _eventIds;
     [FieldOffset(0x450), FixedSizeArray] internal FixedSizeArray32<Pointer<AtkEventInterface>> _eventHandlers;
