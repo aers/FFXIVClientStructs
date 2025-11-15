@@ -41,7 +41,7 @@ public unsafe partial struct AtkUnitManager {
     [FieldOffset(0x92A0)] private AtkResNode Unk92A0;
     [FieldOffset(0x9350)] public Size LastScreenSize;
 
-    // [FieldOffset(0x9388), FixedSizeArray] internal FixedSizeArray48<Unk9388Struct> Unk9388;
+    [FieldOffset(0x9388), FixedSizeArray] internal FixedSizeArray48<HudAnchoringInfo> _hudAnchoringTable;
     [FieldOffset(0x9C88)] public AtkUnitManagerFlags Flags;
 
     [VirtualFunction(8)]
@@ -82,11 +82,15 @@ public unsafe partial struct AtkUnitManager {
         Hidden = 1 << 3,
     }
 
-    // [StructLayout(LayoutKind.Explicit, Size = 0x30)]
-    // public struct Unk9388Struct {
-    //     [FieldOffset(0x00)] public AtkUnitBase* AtkUnitBase;
-    //     [FieldOffset(0x08)] public uint NameHash;
-    // }
+    // not sure how this works
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    public struct HudAnchoringInfo {
+        [FieldOffset(0x00)] public AtkUnitBase* AtkUnitBase;
+        [FieldOffset(0x08)] public uint NameHash;
+        [FieldOffset(0x0C)] public AlignmentType AlignmentType; // 9-slice anchor point, i guess
+        /// <remarks> X/Y coordinates between 0 and 1, depending on <see cref="AlignmentType"/>. </remarks>
+        [FieldOffset(0x10)] public float NormalizedCoordinate;
+    }
 }
 
 [Flags]

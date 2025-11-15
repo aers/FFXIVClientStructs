@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 namespace CExporter;
+
 public class DataDefinition {
     public string? version;
     public Dictionary<ulong, string>? globals;

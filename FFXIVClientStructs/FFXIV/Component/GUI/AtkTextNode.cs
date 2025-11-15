@@ -88,6 +88,12 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]
     public partial void SetFont(FontType fontType);
 
+    /// <summary>
+    /// Applies <see cref="TextFlags.Ellipsis"/> or <see cref="TextFlags.WordWrap"/> to the text from <see cref="OriginalTextPointer"/> and stores it in <see cref="NodeText"/>.
+    /// </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 44 0F B6 CE")]
+    public partial void ApplyTextFlow();
+
     public AlignmentType AlignmentType {
         get => (AlignmentType)(AlignmentFontType & 0x0F);
         set => SetAlignment(value);
@@ -109,6 +115,7 @@ public enum TextFlags : ushort {
     Emboss = 1 << 5,
     WordWrap = 1 << 6,
     MultiLine = 1 << 7,
+    OverflowHidden = 1 << 8,
     FixedFontResolution = 1 << 9,
     Ellipsis = 1 << 10,
 }
