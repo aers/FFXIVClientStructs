@@ -3246,7 +3246,7 @@ classes:
       0x1408AE1A0: IsActionUnlocked
       0x1408AE690: GetMaxCharges              # static
       0x1408AED80: OnCastStarted
-      0x1408AF290: UpdateCastBar
+      0x1408AF290: OpenCastBar
   Client::Game::DutyActionManager:
     funcs:
       0x1408BD710: ctor
