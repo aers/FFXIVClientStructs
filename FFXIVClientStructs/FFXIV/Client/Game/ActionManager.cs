@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 
@@ -287,6 +288,9 @@ public unsafe partial struct ActionManager {
     /// </summary>
     [MemberFunction("48 83 EC 28 81 E9")]
     public static partial byte GetExtraParamForSummonAction(uint actionId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 83 FC ?? 0F 84 ?? ?? ?? ?? 41 81 FC")]
+    public partial void UpdateCastBar(BattleChara* character, ActionType actionType, uint actionId, uint spellId, uint extraParam, float castTimeElapsed, float castTimeTotal);
 
     public enum CastTimeProc : byte {
         None = 0,
