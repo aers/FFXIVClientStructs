@@ -54,6 +54,9 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E0 BA")]
     public partial CStringPointer GetAddonText(uint addonId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4E ?? 48 8B D0 E8 ?? ?? ?? ?? 8B 44 24")]
+    public partial CStringPointer FormatAddonTextApply(uint addonId, FormatAddonTextApplyMode mode, StdDeque<TextParameter>* localParameters, Utf8String* formatBuffer, Utf8String* normalizationBuffer);
+
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 44 89 7C 24 ?? 44 89 4C 24")] // FormatAddonText1<int,int,uint>
     public partial CStringPointer FormatAddonText1IntIntUInt(uint addonId, int intParam1, int intParam2, uint uintParam);
 
@@ -93,5 +96,25 @@ public unsafe partial struct RaptureTextModule {
         Collectible = 1 << 3,
         Action = 1 << 4,
         ActionSheet = 1 << 5,
+    }
+
+    public enum FormatAddonTextApplyMode {
+        /// <summary>
+        /// Returns the Addon text as is.
+        /// </summary>
+        Raw = 0,
+
+        /// <summary>
+        /// Formats the Addon text with the given LocalParameters.
+        /// </summary>
+        Formatted = 1,
+
+        /// <summary>
+        /// Formats the Addon text with the given LocalParameters and decodes the following macro (for example for CounterNode, which uses a special font texture):<br/>
+        /// - Wait macros are removed (an internal counter goes up).<br/>
+        /// - NonBreakingSpace macros are replaced with a normal space (0x20: ' ').<br/>
+        /// - Hyphen macros are replaced with a normal hyphen-minus (0x2D: '-').
+        /// </summary>
+        Normalized = 2,
     }
 }
