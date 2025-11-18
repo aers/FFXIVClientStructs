@@ -6,55 +6,19 @@
 [GenerateInterop(isInherited: true)]
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x210)]
-public partial struct AgentMinionMountBase {
+public unsafe partial struct AgentMinionMountBase {
     [FieldOffset(0x40)] public AddonMinionMountBase.ViewType ViewType;
 
-    /// <summary>
-    /// RowId from Mount / Minion Excel Sheet for the currently selected item in MountNotebook or MinionNoteBook
-    /// while in viewType == ViewType.Favorites.
-    /// </summary>
-    ///
-    /// <remarks>
-    /// Will still update its value while in Normal and Search view, but it will not be what the user is actually selecting.
-    ///
-    /// It is basically doing FavoriteIds[index], and the index is updating in both Normal and Favorite View.
-    /// </remarks>
-    [FieldOffset(0x50)] public ushort SelectedIdInFavoritesView;
+    [FieldOffset(0x50)] public SelectionData FavoritesSelection;
+    [FieldOffset(0x5C)] public SelectionData NormalSelection;
+    [FieldOffset(0x68)] public SelectionData SearchSelection;
 
-    /// <summary>
-    /// RowId from Mount / Minion Excel Sheet for the currently selected item in MountNotebook or MinionNoteBook
-    /// while in viewType == ViewType.Normal.
-    /// </summary>
-    ///
-    /// <remarks>
-    /// Will still update its value while in Favorite and Search view, but it will not be what the user is actually selecting.
-    ///
-    /// It is basically doing NormalIds[index], and the index is updating in both Normal and Favorite View.
-    /// </remarks>
-    [FieldOffset(0x5c)] public ushort SelectedIdInNormalView;
+    [FieldOffset(0x78)] public SelectionData* CurrentSelection;
 
-    /// <summary>
-    /// Currently selected item index of Mount / Minion Notebook during Favorites or Normal view.
-    /// </summary>
-    [FieldOffset(0x58)] public ushort SelectedIndexInFavoritesAndNormalView1;
-
-    /// <summary>
-    /// Currently selected item index of Mount / Minion Notebook during Favorites or Normal view.
-    /// </summary>
-    [FieldOffset(0x64)] public ushort SelectedIndexInFavoritesAndNormalView2;
-
-    /// <summary>
-    /// RowId from Mount / Minion Excel Sheet for the currently selected item in MountNotebook or MinionNoteBook
-    /// while in viewType == ViewType.Search.
-    /// </summary>
-    ///
-    /// <remarks>
-    /// Updates completely independent of Favorites and Normal view.
-    /// </remarks>
-    [FieldOffset(0x68)] public ushort SelectedIdInSearchView;
-
-    /// <summary>
-    /// Currently selected item index of Mount / Minion Notebook during Search view.
-    /// </summary>
-    [FieldOffset(0x70)] public ushort SelectedIndexInSearchView;
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
+    public struct SelectionData {
+        [FieldOffset(0x00)] public uint Id;
+        [FieldOffset(0x04)] public uint Page;
+        [FieldOffset(0x08)] public uint Index;
+    }
 }
