@@ -59,7 +59,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     // 4 bytes padding
     /// <summary>
     /// <code>
-    /// 0b1000_0000 [0x80] = Disable auto-focus (not adding it to Focused Units list)
+    /// 0b1000_0000 [0x80] = Disable focusability
     /// </code>
     /// </summary>
     [FieldOffset(0x1A0)] public byte Flags1A0;
@@ -67,6 +67,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <code>
     /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)<br/>
     /// 0b0000_0100 [0x4] = Disable "Close" option in title bar context menu and prevents window from being closed via input (ESC or similar)
+    /// 0b0100_0000 [0x40] = Disable focus on show
     /// </code>
     /// </summary>
     [FieldOffset(0x1A1)] public byte Flags1A1;
@@ -89,7 +90,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1A3)] public byte Flags1A3;
     /// <summary>
     /// <code>
-    /// 0b0100_0000 [0x40] = Unknown, enables whatever <see cref="Unk1D2"/> does
+    /// 0b0100_0000 [0x40] = Unknown, enables whatever <see cref="HudAnchoringInfoIndex"/> does
     /// </code>
     /// </summary>
     [FieldOffset(0x1A4)] public byte Flags1A4;

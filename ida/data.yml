@@ -7192,10 +7192,11 @@ classes:
       0x1406B0860: Update
       0x1406B0CB0: Draw
       0x1406B1100: Finalizer
-      0x1406B1BE0: GetChildAddonInfoByAtkUnitBase
+      0x1406B17C0: ShowAllChildren
       0x1406B1950: HideAllChildren
       0x1406B19E0: CloseAllChildren
       0x1406B1A40: Hide2AllChildren
+      0x1406B1BE0: GetChildAddonInfoByAtkUnitBase
       0x1406B1E20: ChildRefresh
       0x1406B1E50: ChildRequestedUpdate
       0x1406B1E80: ChildSetSize
