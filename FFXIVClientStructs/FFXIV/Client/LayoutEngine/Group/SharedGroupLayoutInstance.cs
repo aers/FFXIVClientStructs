@@ -21,8 +21,14 @@ public unsafe partial struct SharedGroupLayoutInstance {
 
     [FieldOffset(0xD0)] public TimeLineContainer TimeLineContainer;
 
+    [FieldOffset(0x110)] public Motion.Base* MotionController1;
+    [FieldOffset(0x118)] public Motion.Base* MotionController2;
+
     [FieldOffset(0x120)] public uint PrefabFlags1; // 0x1 = load started; 0x3 = load failed or contents added; 0x4 = failed to add contents
     [FieldOffset(0x12C)] public uint PrefabFlags2; // 0x8 = colliders active
+
+    [MemberFunction("E8 ?? ?? ?? ?? 41 FF C7 48 8D 76 04")]
+    public partial bool InitAnimationHandlers(void* fileData);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x50)]
@@ -42,5 +48,11 @@ public unsafe partial struct SharedGroupLayoutInstance {
 
         [VirtualFunction(0)]
         public partial InstanceList* Dtor(byte freeFlags);
+
+        [MemberFunction("E8 ?? ?? ?? ?? F6 87 ?? ?? ?? ?? ?? 75 0E")]
+        public partial void ApplyTransforms();
+
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 10 48 85 C0 74 09")]
+        public partial void SetCollidersActive(bool active);
     }
 }

@@ -8415,6 +8415,12 @@ classes:
         base: Client::LayoutEngine::ILayoutInstance
       - ea: 0x142044EF0
         base: Client::System::Resource::ResourceEventListener
+    funcs:
+      0x1406D39C0: InitAnimationHandlers
+  Client::LayoutEngine::Group::SharedGroupLayoutInstance::InstanceList:
+    funcs:
+      0x1406C7F10: ApplyTransforms
+      0x1406C8310: SetCollidersActive
   Client::LayoutEngine::Layer::TreasureLayoutInstance:
     vtbls:
       - ea: 0x1420463B0
@@ -8511,6 +8517,55 @@ classes:
     vtbls:
       - ea: 0x14204C3E8
         base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Motion::Base:
+    vtbls:
+      - ea: 0x142044988
+    vfuncs:
+      0: Dtor
+      1: GetSize
+      10: Initialize
+      11: Tick
+    funcs:
+      0x1406C8910: SetTranslation
+      0x1406C8A40: SetRotation
+      0x1406C8B70: SetScale
+      0x1406C8CA0: SetTransform
+  Client::LayoutEngine::Motion::Sub1:
+    vtbls:
+      - ea: 0x14204D358
+        base: Client::LayoutEngine::Motion::Base
+    funcs:
+      0x140721FF0: LoadFromFile
+  Client::LayoutEngine::Motion::Sub2:
+    vtbls:
+      - ea: 0x14204D3B8
+        base: Client::LayoutEngine::Motion::Base
+    funcs:
+      0x140723E40: LoadFromFile
+  Client::LayoutEngine::Motion::Timeline:
+    vtbls:
+      - ea: 0x14204D418
+        base: Client::LayoutEngine::Motion::Base
+  Client::LayoutEngine::Motion::TimeOfDay:
+    vtbls:
+      - ea: 0x14204D478
+        base: Client::LayoutEngine::Motion::Base
+  Client::LayoutEngine::Motion::Periodic:
+    vtbls:
+      - ea: 0x14204D4D8
+        base: Client::LayoutEngine::Motion::Base
+    funcs:
+      0x140725CC0: LoadFromFile
+  Client::LayoutEngine::Motion::Sub6:
+    vtbls:
+      - ea: 0x14204D538
+        base: Client::LayoutEngine::Motion::Base
+  Client::LayoutEngine::Motion::Sub7:
+    vtbls:
+      - ea: 0x14204C658
+        base: Client::LayoutEngine::Motion::Base
+    funcs:
+      0x14071DA30: LoadFromFile
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbls:
       - ea: 0x142050A70
