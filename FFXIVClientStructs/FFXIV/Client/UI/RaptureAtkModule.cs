@@ -113,7 +113,7 @@ public unsafe partial struct RaptureAtkModule {
     public partial void OpenSatisfactionSupply(nint a2, uint satisfactionNPC, bool a4);
 
     [MemberFunction("40 53 55 57 41 56 48 81 EC ?? ?? ?? ?? 48 8B 84 24")]
-    public partial nint UpdateBattleCharaNameplates(NamePlateInfo* namePlateInfo, NumberArrayData* numArray, StringArrayData* stringArray, BattleChara* battleChara, int numArrayIndex, int stringArrayIndex);
+    public partial int UpdateBattleCharaNameplates(NamePlateInfo* namePlateInfo, NumberArrayData* numArray, StringArrayData* stringArray, BattleChara* battleChara, int numArrayIndex, int stringArrayIndex);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 4C 89 44 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 48 8B 7C 24")]
     public partial int UpdateNpcNameplates(NamePlateInfo* namePlateInfo, NumberArrayData* numArray, StringArrayData* stringArray, GameObject* gameObject, int numArrayIndex, int stringArrayIndex);
