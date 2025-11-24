@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [GenerateInterop]
 [Inherits<ReferencedClassBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
-public unsafe struct ShaderPackage {
+public unsafe partial struct ShaderPackage {
     public const ushort SamplerSlotMaterial = 2;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
