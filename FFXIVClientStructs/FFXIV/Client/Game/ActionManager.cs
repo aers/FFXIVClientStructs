@@ -393,7 +393,7 @@ public struct ComboDetail {
 }
 
 // TODO: underlying type should be (u)int
-public enum ActionType : byte {
+public enum ActionType : uint {
     None,
     Action,
     Item,
