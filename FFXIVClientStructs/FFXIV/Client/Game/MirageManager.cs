@@ -1,7 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::MirageManager
-// Note: Data is cleared when switching zones
+/// <remarks>
+/// Data is cleared when switching zones
+/// </remarks>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1888)]
 public unsafe partial struct MirageManager {
