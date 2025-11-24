@@ -4,26 +4,14 @@ TODO:
     ☐ [FieldOffset(0x2334)] public uint CompanionOwnerId; // TODO: Find a better name as it is used to index into FurnitureMemory for IndoorHousing @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/Character.cs#77
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs
     ☐ [FieldOffset(0xBB4)] public Vector2 BannerHeadDirection; // TODO: these are of type Client::Game::Control::MoveControl::SplineVector2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs#21
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Event/EventHandler.cs
-    ☐ // TODO: remove (was renamed/replaced with DirectorTodo) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Event/EventHandler.cs#70
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Event/EventHandlerModule.cs
-    ☐ [FieldOffset(0x70)] public EventHandler* FishingEventHandler; // 0x150001 // TODO: change type to FishingEventHandler* @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Event/EventHandlerModule.cs#13
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Event/EventSceneModuleImpl.cs
     ☐ [StructLayout(LayoutKind.Explicit, Size = 0xF28)] // TODO: size changed, fix offsets @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/GcArmyManager.cs#26
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/Buddy.cs
-    ☐ [FieldOffset(0x1A)] public byte BardingHead; // todo: make array (BuddyEquip RowIds) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/Buddy.cs#43
-    ☐ [FieldOffset(0x3B)] public byte DefenderLevel; // todo: make array @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/Buddy.cs#52
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/UIState.cs
-    ☐ // TODO: 7.3 - unsure from here on @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/UIState.cs#65
-    ☐ // TODO: 7.3 - sure from here on @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/UI/UIState.cs#69
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs
     ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs#34
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/SubView.cs
     ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/SubView.cs#9
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/View.cs
     ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/View.cs#9
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Sound/SoundManager.cs
-    ☐ [FieldOffset(0x0008)] public Thread Thread; // TODO: make Thread properly inheritable @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Sound/SoundManager.cs#20
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs
     ☐ // TODO: this is part of an event interface class @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs#29
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs
@@ -35,10 +23,6 @@ TODO:
     ☐ [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray12<bool> _expacJobHotbarsCreated; // TODO: Verify (7.3) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureHotbarModule.cs#44
     ☐ [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray22<bool> _pvPHotbarsCreated; // TODO: Verify (7.3) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureHotbarModule.cs#48
     ☐ [FieldOffset(0x7E)] internal bool ClearCallbackPresent; // TODO: Verify (7.3), possibly 0x83 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureHotbarModule.cs#51
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/UIInputData.cs
-    ☐ // TODO: move below InputData @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/UIInputData.cs#60
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/UIModuleInterface.cs
-    ☐ // TODO: Not checked after 7.3, just blindly +1'd, but all seem correct. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/UIModuleInterface.cs#121
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs
     ☐ // TODO: move functions out of lua_State and make them static. own luaapi struct maybe? @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs#34
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs
