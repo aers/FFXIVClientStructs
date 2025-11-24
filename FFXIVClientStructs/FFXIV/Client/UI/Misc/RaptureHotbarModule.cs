@@ -44,7 +44,7 @@ public unsafe partial struct RaptureHotbarModule {
     [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray12<bool> _expacJobHotbarsCreated; // TODO: Verify (7.3)
 
     // PvP hotbars for all jobs, appears to track if it's been initialized. 
-    // note: named this way so the actual field becomes PvPHotbarsCreated.
+    // named this way so the actual field becomes PvPHotbarsCreated.
     [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray22<bool> _pvPHotbarsCreated; // TODO: Verify (7.3)
 
     // ????? maybe AllowResets?

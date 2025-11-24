@@ -103,7 +103,6 @@ public partial struct AutoAttackState {
 
     /// <summary>
     /// Handles actor control updates related to AutoAttack state.
-    /// Note: Internally accesses LocalPlayer at offset 0x9a0 in version 7.0 (previously 0x9b0).
     /// </summary>
     /// <param name="newState">The new state value.</param>
     /// [MemberFunction("88 11 80 FA")] shorter but risky

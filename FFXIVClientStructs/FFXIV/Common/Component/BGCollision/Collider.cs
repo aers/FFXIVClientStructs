@@ -150,7 +150,10 @@ public unsafe partial struct ColliderStreamed {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public unsafe struct FileEntry {
         [FieldOffset(0x00)] public int MeshId;
-        [FieldOffset(0x04)] public AABB Bounds; // note: y bounds are ignored when reading the file
+        /// <remarks>
+        /// y bounds are ignored when reading the file
+        /// </remarks>
+        [FieldOffset(0x04)] public AABB Bounds;
         //0x1C: padding?
     }
 
@@ -164,7 +167,7 @@ public unsafe partial struct ColliderStreamed {
         [FieldOffset(0x1C)] public float MaxZ;
     }
 
-    // note: it has a bunch of extra no-op virtual funcs - I suspect these are various raycast flavours that were at some point removed from base class, but had empty overrides left in derived classes
+    // Remark: it has a bunch of extra no-op virtual funcs - I suspect these are various raycast flavours that were at some point removed from base class, but had empty overrides left in derived classes
 }
 
 /// <summary>

@@ -56,7 +56,7 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x230)] public StdVector<Pointer<Layer.LayerManager>> FestivalLayersToAdd;
     [FieldOffset(0x248)] public StdMap<InstanceType, Pointer<StdMap<ulong, Pointer<ILayoutInstance>>>> InstancesByType; // key in nested map is InstanceId << 32 | SubId
     [FieldOffset(0x258)] public StdMap<uint, Pointer<RefCountedString>> CrcToPath;
-    [FieldOffset(0x268)] public StdMap<AnalyticShapeDataKey, AnalyticShapeData> CrcToAnalyticShapeData; // note: value is aligned to 16 bytes, so key has tons of padding
+    [FieldOffset(0x268)] public StdMap<AnalyticShapeDataKey, AnalyticShapeData> CrcToAnalyticShapeData; // Value is aligned to 16 bytes, so key has tons of padding
     [FieldOffset(0x278)] public StdMap<uint, Pointer<Filter>> Filters;
     // 2A0: some map
     // 2B0: vector<LayoutU3*> streamingoriginupdatelisteners
@@ -83,10 +83,9 @@ public unsafe partial struct LayoutManager {
         [FieldOffset(8)] public uint CfcId;
     }
 
-    // note: this is a bad bad hack...
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
-    public struct AnalyticShapeDataKey : IComparable<AnalyticShapeDataKey> {
-        // [FieldOffset(0)] private uint alignment;
+    public unsafe struct AnalyticShapeDataKey {
+        //[FieldOffset(0)] private uint _alignment; // Hack to get StdMap to be alligned correctly with padding
         [FieldOffset(4)] public uint Key;
 
         public int CompareTo(AnalyticShapeDataKey other) => Key.CompareTo(other.Key);

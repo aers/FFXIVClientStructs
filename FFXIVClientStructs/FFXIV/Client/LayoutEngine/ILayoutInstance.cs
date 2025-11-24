@@ -156,7 +156,7 @@ public unsafe partial struct ILayoutInstance {
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct Transform {
     [FieldOffset(0x00)] public Vector3 Translation;
-    [FieldOffset(0x0C)] public int Type; // note: this is a padding field that in some contexts is used to store collider type
+    [FieldOffset(0x0C)] public int Type; // This is a padding field that in some contexts is used to store collider type
     [FieldOffset(0x10)] public Quaternion Rotation;
     [FieldOffset(0x20)] public Vector3 Scale;
 
