@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(0)]
-    public partial void Dtor(bool free);
+    public partial void Dtor(byte freeFlags);
 
     [VirtualFunction(9)]
     public partial NumberArrayData* GetNumberArrayData(int index);
