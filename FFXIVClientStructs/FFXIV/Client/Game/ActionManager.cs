@@ -392,7 +392,6 @@ public struct ComboDetail {
     [FieldOffset(0x04)] public uint Action;
 }
 
-// TODO: underlying type should be (u)int
 public enum ActionType : uint {
     None,
     Action,
