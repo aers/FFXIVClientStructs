@@ -4,8 +4,6 @@ TODO:
     ☐ [FieldOffset(0x2334)] public uint CompanionOwnerId; // TODO: Find a better name as it is used to index into FurnitureMemory for IndoorHousing @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/Character.cs#77
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs
     ☐ [FieldOffset(0xBB4)] public Vector2 BannerHeadDirection; // TODO: these are of type Client::Game::Control::MoveControl::SplineVector2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs#21
-  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Event/EventSceneModuleImpl.cs
-    ☐ [StructLayout(LayoutKind.Explicit, Size = 0xF28)] // TODO: size changed, fix offsets @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/GcArmyManager.cs#26
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs
     ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs#34
   @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/SubView.cs
