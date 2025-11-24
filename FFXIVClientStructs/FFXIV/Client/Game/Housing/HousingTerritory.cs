@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct HousingTerritory { // 6 vfuncs
     [VirtualFunction(0)]
-    public partial void Dtor(bool free);
+    public partial void Dtor(byte freeFlags);
     [VirtualFunction(1)]
     public partial void Update();
     [VirtualFunction(2)]
