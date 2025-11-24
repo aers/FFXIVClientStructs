@@ -17,13 +17,13 @@ public unsafe partial struct UIState {
     [FieldOffset(0x110)] public Hater Hater;
     [FieldOffset(0xA18)] public Chain Chain;
     [FieldOffset(0xA20)] public WeaponState WeaponState;
-    [FieldOffset(0xA38)] public PlayerState PlayerState; // 7.3: size +0x18
+    [FieldOffset(0xA38)] public PlayerState PlayerState;
     [FieldOffset(0x1310)] public Revive Revive;
     [FieldOffset(0x1340)] public Inspect Inspect;
     [FieldOffset(0x15E0)] public Telepo Telepo;
     [FieldOffset(0x1638)] public Cabinet Cabinet;
-    [FieldOffset(0x16C0)] public Achievement Achievement; // 7.2: size +0x1E8
-    [FieldOffset(0x1EA8)] public Buddy Buddy; // 7.2: size +0x870
+    [FieldOffset(0x16C0)] public Achievement Achievement;
+    [FieldOffset(0x1EA8)] public Buddy Buddy;
     [FieldOffset(0x42A4)] public PvPProfile PvPProfile;
     [FieldOffset(0x4330)] internal void* Unk4330; // some UI timer for PvP Results?!
     [FieldOffset(0x4338)] public ContentsNote ContentsNote;
@@ -34,18 +34,18 @@ public unsafe partial struct UIState {
     [FieldOffset(0x44F0)] public DailyQuestSupply DailyQuestSupply;
     [FieldOffset(0x48D8)] public RidePillon RidePillon;
     [FieldOffset(0x4918)] public Loot Loot;
-    [FieldOffset(0x4FB8)] public GatheringNote GatheringNote; // 7.2: size +0x38
-    [FieldOffset(0x56B8)] public RecipeNote RecipeNote; // 7.2: size +0x28
+    [FieldOffset(0x4FB8)] public GatheringNote GatheringNote;
+    [FieldOffset(0x56B8)] public RecipeNote RecipeNote;
     [FieldOffset(0x61F8)] public FishingNote FishingNote;
     [FieldOffset(0x62D8)] public FishRecord FishRecord;
     [FieldOffset(0x6610)] public Journal Journal;
-    [FieldOffset(0xAD78)] public QuestUI QuestUI; // 7.2: size +0x10
+    [FieldOffset(0xAD78)] public QuestUI QuestUI;
     [FieldOffset(0xBD78)] public QuestTodoList QuestTodoList;
     [FieldOffset(0xC1B8)] public NpcTrade NpcTrade;
     [FieldOffset(0xC4E0)] public DirectorTodo DirectorTodo;
     [FieldOffset(0xC628)] public DirectorTodo FateDirectorTodo;
     [FieldOffset(0xC770)] public MassivePcContentTodo MassivePcContentTodo;
-    [FieldOffset(0xC8C0)] public Map Map; // 7.2: size +0x08
+    [FieldOffset(0xC8C0)] public Map Map;
     [FieldOffset(0x108D0)] public MarkingController MarkingController;
     [FieldOffset(0x10BB0)] public LimitBreakController LimitBreakController;
     [FieldOffset(0x10BC0)] public TitleController TitleController;
@@ -59,12 +59,10 @@ public unsafe partial struct UIState {
     [FieldOffset(0x13A78)] public MobHunt MobHunt;
     [FieldOffset(0x13C68)] public WeatherForecast WeatherForecast;
     // an int to control AgentRecommendList
-    [FieldOffset(0x13C90)] public TripleTriad TripleTriad; // 7.2: size+0x70
-    // TODO: 7.3 - unsure from here on
-    [FieldOffset(0x153C8)] public EurekaElementalEdit EurekaElementalEdit; // 7.2: size +0x04?
-    [FieldOffset(0x153E0)] public LovmRanking LovmRanking; // 7.2: size -0x04?
-    [FieldOffset(0x17020)] public CollectablesShop CollectablesShop; // 7.2: size +0x20
-    // TODO: 7.3 - sure from here on
+    [FieldOffset(0x13C90)] public TripleTriad TripleTriad;
+    [FieldOffset(0x153C8)] public EurekaElementalEdit EurekaElementalEdit;
+    [FieldOffset(0x153E0)] public LovmRanking LovmRanking;
+    [FieldOffset(0x17020)] public CollectablesShop CollectablesShop;
     [FieldOffset(0x17318)] public QTE QTE;
     [FieldOffset(0x17340)] public Emj Emj;
     [FieldOffset(0x17378)] public NpcYell NpcYell;
