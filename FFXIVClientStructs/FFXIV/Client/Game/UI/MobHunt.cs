@@ -1,7 +1,7 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 /// <remarks>
-/// Note: The game does not clear the data when a mark is completed.<br/>
+/// NB: The game does not clear the data when a mark is completed.<br/>
 /// <br/>
 /// Index Order is a little weird<br/>
 /// The `A Realm Reborn Elite` was added after Heavensward<br/>

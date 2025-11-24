@@ -14,5 +14,8 @@ public unsafe partial struct AdventureNoteModule {
     }
 
     [FieldOffset(0x49)] public bool AutomaticallyDisplayRecord;
-    [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray10<short> _unseenAdventureNoteIds; // note: Adventure RowIds are EventIds, this is the EntryId part of it
+    /// <remarks>
+    /// Adventure RowIds are EventIds, this is the EntryId part of it
+    /// </remarks>
+    [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray10<short> _unseenAdventureNoteIds;
 }
