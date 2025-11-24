@@ -16,5 +16,5 @@ public unsafe partial struct AddonSelectString {
     [GenerateInterop]
     [Inherits<PopupMenu>]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
-    public struct PopupMenuDerive;
+    public partial struct PopupMenuDerive;
 }

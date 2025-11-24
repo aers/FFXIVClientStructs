@@ -5,11 +5,11 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop]
 [Inherits<EventSceneModuleImplBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public struct EventSceneModuleUsualImpl {}
+public partial struct EventSceneModuleUsualImpl {}
 
 // Client::Game::Event::EventSceneModuleImplBase
 [GenerateInterop(true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe struct EventSceneModuleImplBase {
+public unsafe partial struct EventSceneModuleImplBase {
     [FieldOffset(0x08)] public EventSceneModule* EventSceneModule;
 }
