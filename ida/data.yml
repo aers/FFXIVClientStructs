@@ -10145,9 +10145,9 @@ classes:
       0x1418E5C60: PlayFootStepSound
   Client::Game::Character::CustomizeData:
     funcs:
-      0x1417A65D0: FilterCustomizeData # ensures NPC specific faces etc aren't on players
-      0x1417A6BA0: NormalizeCustomizeData
-      0x1417A6DC0: RandomizeCustomizeData
+      0x1417A65D0: Filter # ensures NPC specific faces etc aren't on players
+      0x1417A6BA0: Normalize
+      0x1417A6DC0: Randomize
   Client::Game::Character::Character:
     vtbls:
       - ea: 0x14205A370

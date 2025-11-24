@@ -193,7 +193,7 @@ public unsafe partial struct CustomizeData {
     public byte this[int idx] => Data[idx];
 
     [MemberFunction("40 53 48 83 EC ?? 48 8B D9 48 8D 42")]
-    public partial bool NormalizeCustomizeData(CustomizeData* source);
+    public partial bool Normalize(CustomizeData* source);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 8)]
