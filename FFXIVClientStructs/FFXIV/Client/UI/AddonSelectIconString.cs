@@ -14,5 +14,5 @@ public partial struct AddonSelectIconString {
     [GenerateInterop]
     [Inherits<PopupMenu>]
     [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-    public struct PopupMenuDerive;
+    public partial struct PopupMenuDerive;
 }
