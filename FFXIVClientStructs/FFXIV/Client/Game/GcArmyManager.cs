@@ -23,7 +23,7 @@ public unsafe partial struct GcArmyManager {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xF28)] // TODO: size changed, fix offsets
+[StructLayout(LayoutKind.Explicit, Size = 0xF30)]
 public unsafe partial struct GcArmyData {
     [FieldOffset(0), FixedSizeArray] internal FixedSizeArray8<GcArmyMember> _members;
     // Receive network packet: "0F 10 02 48 8B C2"
