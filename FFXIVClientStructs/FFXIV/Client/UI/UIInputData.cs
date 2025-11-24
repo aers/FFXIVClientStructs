@@ -31,30 +31,8 @@ public unsafe partial struct UIInputData {
     public bool IsKeyReleased(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Released);
     public bool IsKeyHeld(int key) => GetKeyState(key).HasFlag(KeyStateFlags.Held);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8"), Obsolete("Use GetKeybindByName, or GetKeybind(InputId)", true)]
-    public partial uint GetKeybind(Utf8String* name, Keybind* keybind);
-
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D A0 8B F8")]
     public partial InputId GetKeybindByName(Utf8String* name, System.Input.Keybind* outKeybind);
-
-    // TODO: remove with GetKeybind
-    [StructLayout(LayoutKind.Explicit, Size = 0xB)]
-    public struct Keybind {
-        [FieldOffset(0x0)] public SeVirtualKey Key;
-        [FieldOffset(0x1)] public ModifierFlag Modifier;
-
-        [FieldOffset(0x2)] public SeVirtualKey AltKey;
-        [FieldOffset(0x3)] public ModifierFlag AltModifier;
-    }
-}
-
-// TODO: remove with GetKeybind. replaced with KeyModifierFlag
-[Flags]
-public enum ModifierFlag : byte {
-    None = 0,
-    Shift = 1 << 0,
-    Ctrl = 1 << 1,
-    Alt = 1 << 2,
 }
 
 // TODO: move below InputData

@@ -15,7 +15,7 @@ public unsafe partial struct AtkImageNode : ICreatable {
     [FieldOffset(0xB0)] public AtkUldPartsList* PartsList;
     [FieldOffset(0xB8)] public ushort PartId;
     [FieldOffset(0xBA)] public byte WrapMode;
-    [FieldOffset(0xBB)] public byte Flags; // actually a bitfield
+    [FieldOffset(0xBB)] public ImageNodeFlags Flags;
 
     // 7.0 inlines this ctor
     public void Ctor() {
@@ -34,7 +34,7 @@ public unsafe partial struct AtkImageNode : ICreatable {
 }
 
 [Flags]
-public enum ImageNodeFlags { // todo add : byte and replace public byte Flags with public ImageNodeFlags Flags
+public enum ImageNodeFlags : byte {
     FlipH = 0x01,
     FlipV = 0x02,
 
