@@ -148,7 +148,7 @@ public unsafe partial struct InventoryManager {
 
     /// <remarks>Return value is a LogMessage Id. 0 if you can equip. Row pointer is optional</remarks>
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 80 7E")]
-    public static partial int CanEquip(uint itemId, byte race, byte sex, ushort level, byte classJobId, byte grandCompany, byte pvpRank, ExcelRow* item);
+    public static partial int CanEquip(uint itemId, byte race, byte sex, ushort level, byte classJobId, byte grandCompany, byte pvpRank, [CExporterExcel("Item")] void* itemRow);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct InventoryOperation {
