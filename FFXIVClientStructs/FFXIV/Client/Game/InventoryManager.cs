@@ -33,9 +33,7 @@ public unsafe partial struct InventoryManager {
     [FieldOffset(0x21A9)] public bool TradeWarnIfMovedTooFar;
     [FieldOffset(0x21AB)] public bool TradeIsSyncPending;
 
-    [FieldOffset(0x2158), FixedSizeArray] internal FixedSizeArray20<ulong> _retainerMarketUnitPrice;
     [FieldOffset(0x21B8), FixedSizeArray] internal FixedSizeArray20<ulong> _retainerMarketPrices;
-    [FieldOffset(0x21F8), FixedSizeArray] internal FixedSizeArray20<byte> _retainerMarketF8;
 
     // Data here for Gearset Item check
     [FieldOffset(0x2400)] internal BannerData GearsetPortraitData;
