@@ -474,7 +474,7 @@ classes:
       0x1409CBA40: IsInPvPArea
       0x1405D4500: GetEventGPoseController
       0x140A73C00: ExecuteCommand
-      0x140A73D80: ExecuteCommandComplexLocation
+      0x140A73D80: ExecuteLocationCommand
   Client::Game::ZoneSharedGroupManager:
     vtbls:
       - ea: 0x142058678
