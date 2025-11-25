@@ -75,6 +75,9 @@ public unsafe partial struct AgentHUD {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CF 4C 89 B4 24 B8 08 00 00")]
     public partial void OpenSystemMenu(AtkValue* atkValueArgs, uint menuSize);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 40 B5 ?? 41 B9")]
+    public partial bool ExecuteSystemMenu(int menuType, int commandId, int a4 = -1, byte* a5 = null);
+
     [MemberFunction("E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 ?? 80 BF")]
     public partial void UpdateExp(NumberArrayData* expNumberArray, StringArrayData* expStringArray, StringArrayData* characterStringArray);
 

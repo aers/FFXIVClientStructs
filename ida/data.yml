@@ -176,8 +176,6 @@ functions:
   0x140844500: IsItemStainConditionUnlocked
   0x140844F70: IsEventItemItemId
   0x1408456C0: IsWeddingRelatedItemId
-  0x140A73C00: ExecuteCommand # nint (int command, int param1, int param2, int param3, int param4)
-  0x140A73D80: ExecuteCommandComplexLocation # nint (int command, Vector3 position, int param1, int param2, int param3, int param4)
   0x1400DBE40: IsBoundByDuty56
   0x1400DBFC0: IsDutyRecorderPlayback
   0x1400DC020: IsInDeepDungeon
@@ -475,6 +473,8 @@ classes:
       0x1409CBA20: IsInRivalWingsArea
       0x1409CBA40: IsInPvPArea
       0x1405D4500: GetEventGPoseController
+      0x140A73C00: ExecuteCommand
+      0x140A73D80: ExecuteCommandComplexLocation
   Client::Game::ZoneSharedGroupManager:
     vtbls:
       - ea: 0x142058678
@@ -1585,6 +1585,7 @@ classes:
       0x140836600: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400FFBF0: GetSizeByIndex # static
       0x1408372B0: GetEquippedItemIdForSlot
+      0x1408494B0: CanEquip
       0x14083A5C0: GetPermittedGearsetCount
       0x140843FF0: GetLimitedTomestoneCount
       0x140835130: GetEmptySlotsInBag
@@ -1594,6 +1595,8 @@ classes:
       0x140840C00: GetRetainerGil
       0x140841D20: GetRetainerMarketPrice
       0x140841D40: SetRetainerMarketPrice
+      0x14083DA40: MoveFromRetainerMarketToPlayerInventory
+      0x140841DC0: MoveToRetainerMarket
       0x140843180: GetFreeCompanyGil
       0x140843C30: GetGil
       0x140843D30: GetCompanySeals
@@ -4677,6 +4680,7 @@ classes:
       0x140929CF0: SetUpdateLanguageMask
       0x140929D10: SetUpdateSearchComment
       0x140929E50: SendOnlineStatusUpdate
+      0x140929F20: RefreshOnlineStatus
       0x14092A0B0: FixOnlineStatusFlag1
       0x14092A170: FixOnlineStatusFlag2
       0x14092A200: GetUpdateData
@@ -10887,6 +10891,7 @@ classes:
       0x140E50DA0: UpdateStatusDisplay
       0x140E52140: GetMainCommandString  # MainCommand exd
       0x140E52470: OpenSystemMenu
+      0x140E33CF0: ExecuteSystemMenu
   Client::UI::Agent::HudStatus::Status:
     funcs:
       0x140E36710: ProcessStatuses
@@ -11232,7 +11237,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AED4E0: ctor
-      0x140AEDD70: InvokeAction
+      0x140AEDD70: Return
   Client::UI::Agent::AgentCutscene:
     vtbls:
       - ea: 0x142091E58

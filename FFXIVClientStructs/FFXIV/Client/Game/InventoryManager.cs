@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -32,7 +33,9 @@ public unsafe partial struct InventoryManager {
     [FieldOffset(0x21A9)] public bool TradeWarnIfMovedTooFar;
     [FieldOffset(0x21AB)] public bool TradeIsSyncPending;
 
+    [FieldOffset(0x2158), FixedSizeArray] internal FixedSizeArray20<ulong> _retainerMarketUnitPrice;
     [FieldOffset(0x21B8), FixedSizeArray] internal FixedSizeArray20<ulong> _retainerMarketPrices;
+    [FieldOffset(0x21F8), FixedSizeArray] internal FixedSizeArray20<byte> _retainerMarketF8;
 
     // Data here for Gearset Item check
     [FieldOffset(0x2400)] internal BannerData GearsetPortraitData;
@@ -87,6 +90,12 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 43 78")]
     public partial uint GetRetainerGil();
 
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? BE ?? ?? ?? ?? 48 8D 45 90 8B CE 44 89 30")]
+    public partial int MoveFromRetainerMarketToPlayerInventory(InventoryType srcInv, ushort srcSlot, uint quantity);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 56 58 33 DB")]
+    public partial void MoveToRetainerMarket(InventoryType srcInv, ushort srcSlot, InventoryType dstInv, ushort dstSlot, uint quantity, uint unitPrice);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 44 8B F8 ?? ?? ?? FF 52 ?? 80 BB")]
     public partial uint GetFreeCompanyGil();
 
@@ -138,6 +147,10 @@ public unsafe partial struct InventoryManager {
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
+
+    /// <remarks>Return value is a LogMessage Id. 0 if you can equip. Row pointer is optional</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 80 7E")]
+    public static partial int CanEquip(uint itemId, byte race, byte sex, ushort level, byte classJobId, byte grandCompany, byte pvpRank, ExcelRow* item);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct InventoryOperation {
