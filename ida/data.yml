@@ -473,8 +473,8 @@ classes:
       0x1409CBA20: IsInRivalWingsArea
       0x1409CBA40: IsInPvPArea
       0x1405D4500: GetEventGPoseController
-      0x140A73C00: ExecuteCommand
-      0x140A73D80: ExecuteLocationCommand
+      0x140A73C00: ExecuteCommand # static
+      0x140A73D80: ExecuteLocationCommand # static
   Client::Game::ZoneSharedGroupManager:
     vtbls:
       - ea: 0x142058678
@@ -1585,7 +1585,7 @@ classes:
       0x140836600: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400FFBF0: GetSizeByIndex # static
       0x1408372B0: GetEquippedItemIdForSlot
-      0x1408494B0: CanEquip
+      0x1408494B0: CanEquip # static
       0x14083A5C0: GetPermittedGearsetCount
       0x140843FF0: GetLimitedTomestoneCount
       0x140835130: GetEmptySlotsInBag
