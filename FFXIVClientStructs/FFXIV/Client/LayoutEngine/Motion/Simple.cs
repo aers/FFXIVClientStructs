@@ -31,12 +31,12 @@ public unsafe partial struct Sub2 {
     [FieldOffset(0x68)] public SoundLayoutInstance* Sound2;
     [FieldOffset(0x70)] public SoundLayoutInstance* Sound3;
 
-    [FieldOffset(0x80)] public Quaternion RotationBase1;
-    [FieldOffset(0x90)] public Quaternion RotationBase2;
-    [FieldOffset(0xA0)] public Quaternion RotationBase3;
-    [FieldOffset(0xB0)] public Quaternion Rotation1;
-    [FieldOffset(0xC0)] public Quaternion Rotation2;
-    [FieldOffset(0xD0)] public Quaternion Rotation3;
+    [FieldOffset(0x80)] public Quaternion RotationBaseMain;
+    [FieldOffset(0x90)] public Quaternion RotationBaseVfx1;
+    [FieldOffset(0xA0)] public Quaternion RotationBaseVfx2;
+    [FieldOffset(0xB0)] public Quaternion RotationMain;
+    [FieldOffset(0xC0)] public Quaternion RotationVfx1;
+    [FieldOffset(0xD0)] public Quaternion RotationVfx2;
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 95 ?? ?? ?? ?? C1 E2 0C")]
     public partial void LoadFromFile(byte* data);

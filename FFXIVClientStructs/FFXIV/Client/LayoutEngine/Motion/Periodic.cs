@@ -1,4 +1,3 @@
-using System;
 using System.Numerics;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Motion;
@@ -33,9 +32,9 @@ public unsafe partial struct Periodic {
         [FieldOffset(0x04)] public uint Flags2;
 
         [FieldOffset(0x08)] public float Elapsed;
-        [FieldOffset(0x0C)] public float Period;
+        [FieldOffset(0x0C)] public float Period1;
+        [FieldOffset(0x10)] public float Period2;
 
-        [FieldOffset(0x10)] public float Unk1;
         // W component is only used in RotationTimer
         [FieldOffset(0x20)] public Vector4 Start;
         [FieldOffset(0x30)] public Vector4 End;

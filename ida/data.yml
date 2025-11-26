@@ -8289,6 +8289,8 @@ classes:
     vtbls:
       - ea: 0x142044FB0
         base: Client::LayoutEngine::IManagerBase
+    funcs:
+      0x140702690: CreateTimelineInstance
   Client::LayoutEngine::Terrain::TerrainManager:
     vtbls:
       - ea: 0x142044F88
@@ -8417,6 +8419,7 @@ classes:
         base: Client::System::Resource::ResourceEventListener
     funcs:
       0x1406D39C0: InitAnimationHandlers
+      0x1406D33A0: InitTimelines
   Client::LayoutEngine::Group::SharedGroupLayoutInstance::InstanceList:
     funcs:
       0x1406C7F10: ApplyTransforms
@@ -23570,6 +23573,34 @@ classes:
     vtbls:
       - ea: 0x1422E49D0
         base: Client::System::Scheduler::SchedulerInstanceObject
+  Client::System::Scheduler::Instance::CharacterObject:
+    vtbls:
+      - ea: 0x1422E4470
+        base: Client::System::Scheduler::SchedulerInstanceObject
+  Client::System::Scheduler::Instance::LayoutObjectBase:
+    vtbls:
+      - ea: 0x1422EAA20
+        base: Client::System::Scheduler::SchedulerInstanceObject
+    vfuncs:
+      47: GetLayoutInstance1
+      48: GetLayoutInstance2
+      49: GetParentInstance1
+      50: GetParentInstance2
+    funcs:
+      0x141B234E0: ctorId
+  Client::System::Scheduler::Instance::LayoutObjectGroup:
+    vtbls:
+      - ea: 0x1421D0E80
+        base: Client::System::Scheduler::Instance::LayoutObjectBase
+    funcs:
+      0x141889E10: ctorPrefab
+  Client::System::Scheduler::Instance::LayoutObjectSingle:
+    vtbls:
+      - ea: 0x1422E4E88
+        base: Client::System::Scheduler::Instance::LayoutObjectBase
+    funcs:
+      0x141ACEEE0: ctorId
+      0x141ACEF20: ctorPrefab
   Client::System::Scheduler::Clip::BaseClip:
     vtbls:
       - ea: 0x1421BCBD8
@@ -23578,6 +23609,12 @@ classes:
     vtbls:
       - ea: 0x1421BE1D8
         base: Client::System::Scheduler::Clip::BaseClip
+  Client::System::Scheduler::Clip::C013:
+    vtbls:
+      - ea: 0x1421BE3D0
+        base: Client::System::Scheduler::Clip::BaseClip
+    funcs:
+      0x1417FA940: ctor
   Client::System::Scheduler::Base::SceneConnectionBlock:
     vtbls:
       - ea: 0x1422E6050
