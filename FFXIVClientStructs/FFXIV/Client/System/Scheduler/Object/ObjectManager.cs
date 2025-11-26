@@ -5,6 +5,4 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Object;
 public unsafe partial struct ObjectManager {
     [FieldOffset(0x40)] private fixed byte CriticalSection1[40];
     [FieldOffset(0x68)] private fixed byte CriticalSection2[40];
-
-    // [FieldOffset(0x90)] pointer to 16-byte object...
 }

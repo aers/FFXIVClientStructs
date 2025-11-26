@@ -166,8 +166,8 @@ public unsafe partial struct FileSceneTimelineDescription {
 // - TMAC x1-N 28 bytes
 // - TMTR x1-N 24 bytes
 // - TMFC x0-N 32 bytes
-// - TMPP x?
-// other nodes are Cxxx where x <= 213, there is a big static list of constructors + metadata in the binary (see Scheduler.Base.TimelineConstructors)
+// - TMPP x? (handler is in the same section as previous 5, but haven't found any in level data yet)
+// other nodes are Cxxx where x <= 213, there is a big static list of constructors + metadata in the binary (search for xrefs for aC013 etc)
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct FileSceneTimelineNode {
     [FieldOffset(0x00)] public int Tag;
