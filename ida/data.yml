@@ -1021,6 +1021,7 @@ classes:
     funcs:
       0x140657970: ctor
       0x14065B780: OpenCompletion
+      0x1406580F0: ProcessKeyShortcut
   Component::Text::TextChecker::ExecNonMacroFunc:
     vtbls:
       - ea: 0x1420351E8
@@ -3245,6 +3246,7 @@ classes:
       0x1408AE1A0: IsActionUnlocked
       0x1408AE690: GetMaxCharges              # static
       0x1408AED80: OnCastStarted
+      0x1408AF290: OpenCastBar
   Client::Game::DutyActionManager:
     funcs:
       0x1408BD710: ctor
@@ -7190,10 +7192,11 @@ classes:
       0x1406B0860: Update
       0x1406B0CB0: Draw
       0x1406B1100: Finalizer
-      0x1406B1BE0: GetChildAddonInfoByAtkUnitBase
+      0x1406B17C0: ShowAllChildren
       0x1406B1950: HideAllChildren
       0x1406B19E0: CloseAllChildren
       0x1406B1A40: Hide2AllChildren
+      0x1406B1BE0: GetChildAddonInfoByAtkUnitBase
       0x1406B1E20: ChildRefresh
       0x1406B1E50: ChildRequestedUpdate
       0x1406B1E80: ChildSetSize
@@ -7584,6 +7587,8 @@ classes:
       0x140634910: GetEdgeColor
       0x140634950: ToggleGlare
       0x1406349D0: ToggleItalic
+      0x140634A10: ToggleMultiLine
+      0x140634BC0: ApplyTextFlow
       0x140634F50: ToggleFixedFontResolution  # this stops text from auto scaling, they turned this on for nameplates in 5.5
       0x140635010: SetSelection
       0x140635670: SetCharSpacing
@@ -16947,6 +16952,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411FEBA0: ctor
+      0x1412011D0: IsZoomed
   Client::UI::AddonContextMenu: # 31
     vtbls:
       - ea: 0x1420A0390
@@ -22102,7 +22108,6 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1411FB610: ctor
-      0x1412011D0: IsZoomed
   Client::UI::AddonScreenInfoChild:
     vtbls:
       - ea: 0x14211D290

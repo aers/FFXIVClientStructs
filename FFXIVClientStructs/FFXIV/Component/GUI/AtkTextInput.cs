@@ -36,6 +36,9 @@ public unsafe partial struct AtkTextInput {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B 4E 18 48 8B 01")]
     public partial void OpenCompletion();
 
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 85 ?? ?? ?? ?? C6 44 24 ?? ??")]
+    public partial bool ProcessKeyShortcut(SeVirtualKey key, KeyModifiers* modifiers);
+
     // Component::GUI::AtkTextInput::AtkTextInputEventInterface
     // no explicit constructor, just an event interface 
     [GenerateInterop(true)]
@@ -57,5 +60,15 @@ public unsafe partial struct AtkTextInput {
         [FieldOffset(0x6)] public ushort StringLength;
         [FieldOffset(0x8)] public Utf8String* String1;
         [FieldOffset(0x10)] public Utf8String* String2;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x06)]
+    public struct KeyModifiers {
+        [FieldOffset(0x00)] public bool IsControlDown;
+        [FieldOffset(0x01)] public bool IsShiftDown;
+        [FieldOffset(0x02)] public bool IsAltDown;
+        [FieldOffset(0x03)] public bool IsCapitalDown;
+        [FieldOffset(0x04)] public bool IsNumlockDown;
+        [FieldOffset(0x05)] public bool IsScrollDown;
     }
 }

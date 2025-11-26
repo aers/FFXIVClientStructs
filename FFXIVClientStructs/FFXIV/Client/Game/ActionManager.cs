@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Vfx;
 
@@ -288,6 +289,9 @@ public unsafe partial struct ActionManager {
     [MemberFunction("48 83 EC 28 81 E9")]
     public static partial byte GetExtraParamForSummonAction(uint actionId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 41 83 FC ?? 0F 84 ?? ?? ?? ?? 41 81 FC")]
+    public partial void OpenCastBar(BattleChara* character, ActionType actionType, uint actionId, uint spellId, uint extraParam, float castTimeElapsed, float castTimeTotal);
+
     public enum CastTimeProc : byte {
         None = 0,
         Firestarter = 1, // THM/BLM
@@ -385,26 +389,29 @@ public struct ComboDetail {
     [FieldOffset(0x04)] public uint Action;
 }
 
+// TODO: underlying type should be (u)int
 public enum ActionType : byte {
-    None = 0x00,
-    Action = 0x01, // Spell, Weaponskill, Ability. Confusing name, I know.
-    Item = 0x02,
-    KeyItem = 0x03,
-    Ability = 0x04, // Not in UseAction (??)
-    GeneralAction = 0x05,
-    BuddyAction = 0x06,
-    MainCommand = 0x07,
-    Companion = 0x08,
-    CraftAction = 0x09,
-    Unk_10 = 0x0A, // Fishing per Sapphire? Something to do with items.
-    PetAction = 0x0B,
-    Unk_12 = 0x0C, // Not in UseAction. Sapphire says CompanyAction, but not actually triggered.
-    Mount = 0x0D,
-    PvPAction = 0x0E,
-    FieldMarker = 0x0F,
-    ChocoboRaceAbility = 0x10,
-    ChocoboRaceItem = 0x11,
-    Unk_18 = 0x12, // Not in UseAction (?)
-    BgcArmyAction = 0x13,
-    Ornament = 0x14,
+    None,
+    Action,
+    Item,
+    EventItem,
+    [Obsolete("Renamed to EventItem")] KeyItem = 3,
+    EventAction,
+    [Obsolete("Renamed to EventAction")] Ability = 4,
+    GeneralAction,
+    BuddyAction,
+    MainCommand,
+    Companion,
+    CraftAction,
+    Unk_10, // Fishing per Sapphire? Something to do with items.
+    PetAction,
+    Unk_12, // Not in UseAction. Sapphire says CompanyAction, but not actually triggered.
+    Mount,
+    PvPAction,
+    FieldMarker,
+    ChocoboRaceAbility,
+    ChocoboRaceItem,
+    Unk_18, // Not in UseAction (?)
+    BgcArmyAction,
+    Ornament,
 }

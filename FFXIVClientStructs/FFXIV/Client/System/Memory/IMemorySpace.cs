@@ -17,7 +17,7 @@ public unsafe partial struct IMemorySpace {
         memory->Ctor();
         return memory;
     }
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 44 24 ?? 48 8D B3")]
     public static partial IMemorySpace* GetDefaultSpace();
 

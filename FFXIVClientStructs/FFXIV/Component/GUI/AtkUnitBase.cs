@@ -59,7 +59,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     // 4 bytes padding
     /// <summary>
     /// <code>
-    /// 0b1000_0000 [0x80] = Disable auto-focus (not adding it to Focused Units list)
+    /// 0b1000_0000 [0x80] = Disable focusability
     /// </code>
     /// </summary>
     [FieldOffset(0x1A0)] public byte Flags1A0;
@@ -67,6 +67,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <code>
     /// 0b0000_0001 [0x1] = OnSetup was called (= IsReady)<br/>
     /// 0b0000_0100 [0x4] = Disable "Close" option in title bar context menu and prevents window from being closed via input (ESC or similar)
+    /// 0b0100_0000 [0x40] = Disable focus on show
     /// </code>
     /// </summary>
     [FieldOffset(0x1A1)] public byte Flags1A1;
@@ -89,7 +90,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1A3)] public byte Flags1A3;
     /// <summary>
     /// <code>
-    /// 0b0100_0000 [0x40] = Unknown, enables whatever <see cref="Unk1D2"/> does
+    /// 0b0100_0000 [0x40] = Unknown, enables whatever <see cref="HudAnchoringInfoIndex"/> does
     /// </code>
     /// </summary>
     [FieldOffset(0x1A4)] public byte Flags1A4;
@@ -134,7 +135,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1CE)] public byte VisibilityFlags;
     // 1 byte padding
     [FieldOffset(0x1D0)] public ushort DrawOrderIndex;
-    [FieldOffset(0x1D2)] public byte Unk1D2; // index in array of AtkUnitManager+0x9388 (48 * 0x30)
+    /// <remarks> Index in <see cref="AtkUnitManager.HudAnchoringTable"/>. </remarks>
+    [FieldOffset(0x1D2)] public sbyte HudAnchoringInfoIndex; // -1 = undefined
+    [FieldOffset(0x1D2), Obsolete("Renamed to HudAnchoringInfoIndex")] public byte Unk1D2;
     // 1 byte padding
     [FieldOffset(0x1D4)] public short X;
     [FieldOffset(0x1D6)] public short Y;
@@ -436,6 +439,7 @@ public struct OperationGuide {
     }
 }
 
+// TODO: use AlignmentType
 public enum OperationGuidePoint : byte {
     TopLeft,
     Top,
