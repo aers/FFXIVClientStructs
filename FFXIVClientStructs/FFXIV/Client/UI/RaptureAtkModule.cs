@@ -23,8 +23,10 @@ public unsafe partial struct RaptureAtkModule {
         return uiModule == null ? null : uiModule->GetRaptureAtkModule();
     }
 
-    [FieldOffset(0x82C0)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
-    [FieldOffset(0x82C2)] public ushort UISetupStage; // unsure
+    [FieldOffset(0x82C0)] public GameUIScene UIScene;
+    [FieldOffset(0x82C0), Obsolete($"Renamed to {nameof(UIScene)}")] public ushort UiMode; // 0 = In Lobby, 1 = In Game
+    [FieldOffset(0x82C2)] public GameUIMode UIMode;
+    [FieldOffset(0x82C2), Obsolete($"Renamed to {nameof(UIMode)}")] public ushort UISetupStage; // unsure
 
     [FieldOffset(0x8358)] internal Utf8String Unk8358;
     [FieldOffset(0x83C0), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;
@@ -228,4 +230,21 @@ public unsafe partial struct RaptureAtkModule {
         Warning = 0,
         Info = 1,
     }
+}
+
+public enum GameUIScene : ushort {
+    LobbyMain = 0,
+    GameMain = 1,
+}
+
+public enum GameUIMode : ushort {
+    Normal = 0,
+    ChocoboRace = 1,
+    Lovm = 2, // Lord of Verminion
+    Spectator = 3,
+    ContentsReplay = 4,
+    Emj = 5, // Doman Mahjong
+    EmjSolo = 6,
+    RideShooting = 7,
+    TripleTriad = 8,
 }

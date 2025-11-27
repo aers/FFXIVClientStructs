@@ -4495,7 +4495,8 @@ classes:
     funcs:
       0x1400E48F0: ctor
       0x1400E56D0: Finalizer
-      0x1400E5A50: ChangeUiMode
+      0x1400E5A50: ChangeUIScene
+      0x1400E5C00: ChangeUIMode
       0x1400E6620: CancelDragDrop
       0x1400E6B90: OpenAddon
       0x1400E7010: OpenAddonByAgent
@@ -8726,6 +8727,8 @@ classes:
       123: ShowContentIntroduction
       124: IsContentIntroductionInvisible
       125: HideContentIntroduction
+      128: ChangeUIMode
+      129: InContentsReplay
       136: SetCursorVisibility
       137: ToggleCursor
       151: ShowEventFadeIn

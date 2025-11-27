@@ -95,13 +95,17 @@ public unsafe partial struct AtkUnitManager {
 
 [Flags]
 public enum AtkUnitManagerFlags : byte {
-    None = 0x00,
-    Unk01 = 0x01,
-    Unk02 = 0x02,
+    None = 0,
+    /// <summary> Set when any AtkUnitList was modified. Cleared in UpdateDrawOrderIndexes. </summary>
+    UnitListsChanged = 0x01,
+    [Obsolete($"Renamed to {nameof(UnitListsChanged)}")] Unk01 = 0x01,
+    Unk02 = 0x02, // EnableUiInput set to 1, which calls AtkModule Handler 0, which sets the bool after EnableUiInput to 1
     UiHidden = 0x04,
     Unk08 = 0x08,
     Unk10 = 0x10,
-    Unk20 = 0x20,
+    /// <remarks> <see cref="RaptureAtkModule.UIScene"/> == <see cref="GameUIScene.GameMain"/> </remarks>
+    InGame = 0x20,
+    [Obsolete($"Renamed to {nameof(InGame)}")] Unk20 = 0x20,
     Unk40 = 0x40,
     Unk80 = 0x80,
 }
