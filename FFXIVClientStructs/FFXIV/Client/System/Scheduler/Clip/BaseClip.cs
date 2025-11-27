@@ -10,9 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Clip;
 [StructLayout(LayoutKind.Explicit, Size = 0x98)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 33 D2 48 89 01 48 89 51 08 48 8B C1", 3, 63)]
 public unsafe partial struct BaseClip {
-    // embedding list fields directly since C# thinks this isn't a value type otherwise
-    [FieldOffset(0x18)] public BaseClip* First;
-    [FieldOffset(0x20)] public BaseClip* Last;
+    [FieldOffset(0x18)] public Base.LinkedList<BaseClip> List;
 
     [VirtualFunction(9)] public partial void ProcessEvent(int eventType, void* unknown);
     [VirtualFunction(47)] public partial void Event10(void* unknown);
