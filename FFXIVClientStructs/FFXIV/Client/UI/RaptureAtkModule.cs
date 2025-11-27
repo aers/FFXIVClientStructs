@@ -137,6 +137,9 @@ public unsafe partial struct RaptureAtkModule {
     [VirtualFunction(63), GenerateStringOverloads]
     public partial bool OpenMapWithMapLink(CStringPointer mapLink);
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 55 41 56 41 57 48 8B EC 48 83 EC 40 4C 8B F1")]
+    public partial AtkValue* HandleItemMove(AtkValue* returnValue, AtkValue* values, uint valueCount);
+
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.AtkUnitManager.Flags.HasFlag(AtkUnitManagerFlags.UiHidden);
         set => SetUiVisibility(value);

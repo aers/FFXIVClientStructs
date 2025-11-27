@@ -46,4 +46,7 @@ public unsafe partial struct InfoProxyDetail {
     /// <param name="updateData">The packet to send. If <c>null</c>, it will use <see cref="UpdateData"/>.</param>
     [MemberFunction("E8 ?? ?? ?? ?? C6 83 ?? ?? ?? ?? ?? 40 84 FF")]
     public partial void SendUpdateData(UpdateDataPacket* updateData = null);
+
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 4C 8B 49 28 48 8B D9")]
+    public partial void RefreshOnlineStatus();
 }

@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using static FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase;
@@ -74,6 +75,9 @@ public unsafe partial struct AgentHUD {
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CF 4C 89 B4 24 B8 08 00 00")]
     public partial void OpenSystemMenu(AtkValue* atkValueArgs, uint menuSize);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 B5 ?? 41 B9")]
+    public partial bool HandleMainCommandOperation(MainCommandOperation operation, uint param1, int param2 = -1, byte* param3 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 ?? 80 BF")]
     public partial void UpdateExp(NumberArrayData* expNumberArray, StringArrayData* expStringArray, StringArrayData* characterStringArray);
@@ -170,4 +174,18 @@ public enum AgentHudExpFlag : byte {
     MaxLevel = 1 << 3,
     InEureka = 1 << 4,
     Unk5 = 1 << 5, // In TerritoryIntendedUse 61?
+}
+
+public enum MainCommandOperation {
+    SetCategoryNames = 0,
+    /// <remarks> param1: MainCommandId </remarks>
+    ExecuteMainCommand = 1,
+    /// <remarks> param1: MainCommandId | 0x10000 for enabled, otherwise just MainCommandId. </remarks>
+    SetMainCommandEnabledState = 2,
+    /// <remarks> Fired <see cref="InputId.MENU_SYSTEM"/> was pressed. </remarks>
+    OpenSystemMenu = 4,
+    /// <remarks> param1: 0 = Hide, 1 = Show </remarks>
+    SetVisibility = 5,
+    // Unk6 = 6,
+    SetCategoryPatchMarks = 7,
 }
