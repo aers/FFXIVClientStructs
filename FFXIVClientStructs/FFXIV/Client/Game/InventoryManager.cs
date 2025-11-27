@@ -88,8 +88,11 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 43 78")]
     public partial uint GetRetainerGil();
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? BE ?? ?? ?? ?? 48 8D 45 90 8B CE 44 89 30")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 49 84 C0")]
     public partial int MoveFromRetainerMarketToPlayerInventory(InventoryType srcInv, ushort srcSlot, uint quantity);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 45 85 F6 75 22")]
+    public partial int MoveFromRetainerMarketToRetainerInventory(InventoryType srcInv, ushort srcSlot, uint quantity);
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 56 58 33 DB")]
     public partial void MoveToRetainerMarket(InventoryType srcInv, ushort srcSlot, InventoryType dstInv, ushort dstSlot, uint quantity, uint unitPrice);

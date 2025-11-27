@@ -1595,7 +1595,8 @@ classes:
       0x140840C00: GetRetainerGil
       0x140841D20: GetRetainerMarketPrice
       0x140841D40: SetRetainerMarketPrice
-      0x14083DA40: MoveFromRetainerMarketToPlayerInventory
+      0x140841310: MoveFromRetainerMarketToPlayerInventory
+      0x140841150: MoveFromRetainerMarketToRetainerInventory
       0x140841DC0: MoveToRetainerMarket
       0x140843180: GetFreeCompanyGil
       0x140843C30: GetGil
