@@ -170,7 +170,7 @@ public unsafe partial struct Character {
     public partial ForayInfo* GetForayInfo();
 }
 
-public enum MovementStateOptions {
+public enum MovementStateOptions : byte {
     Normal = 0,
     Flying = 1,
     Diving = 2,
