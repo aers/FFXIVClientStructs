@@ -10892,7 +10892,7 @@ classes:
       0x140E50DA0: UpdateStatusDisplay
       0x140E52140: GetMainCommandString  # MainCommand exd
       0x140E52470: OpenSystemMenu
-      0x140E33CF0: ExecuteSystemMenu
+      0x140E33CF0: HandleMainCommandOperation
   Client::UI::Agent::HudStatus::Status:
     funcs:
       0x140E36710: ProcessStatuses
