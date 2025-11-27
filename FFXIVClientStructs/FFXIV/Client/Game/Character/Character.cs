@@ -171,11 +171,10 @@ public unsafe partial struct Character {
 }
 
 public enum MovementStateOptions {
-    /// <remarks>Includes swimming above water and jumping/falling</remarks>
-    Grounded = 0,
+    Normal = 0,
     Flying = 1,
-    /// <remarks>Being mounted doesn't matter</remarks>
-    Underwater = 2,
+    Diving = 2,
+    // Spectating = 3,
 }
 
 // LogMessages for errors starting at 7700
