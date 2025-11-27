@@ -13,22 +13,22 @@ public unsafe partial struct Treasure {
     [FieldOffset(0x1A0)] public TreasureState State;
 
     /// <remarks>
-    /// Starts counting down from <see cref="CountdownStartingValue_Sec"/> once spawned.  Unsure what hitting zero actually does
+    /// Starts counting down in seconds from <see cref="CountdownStartTime"/> once spawned.  Unsure what hitting zero actually does
     /// in the unopened state.  If the treasure contains rollable items, opening the it resets this to the claim period length
     /// and it starts counting down again (except when lootmaster is active, in which case it resets to zero).  This value is
     /// rounded to nearest whole number and shown as the loot window timer.
     /// </remarks>
-    [FieldOffset(0x1A4)] public float CountdownTimer_Sec;
+    [FieldOffset(0x1A4)] public float CountdownTime;
 
     /// <summary>
-    /// The starting value of <see cref="CountdownTimer_Sec"/> at initial object spawn.
+    /// The starting value of <see cref="CountdownTime"/> (in seconds) at initial object spawn.
     /// </summary>
-    [FieldOffset(0x1A8)] public float CountdownStartingValue_Sec;
+    [FieldOffset(0x1A8)] public float CountdownStartTime;
 
     /// <summary>
-    /// The time after opening to be able to roll on or assign drops before auto-disposition of loot.
+    /// The number of seconds available after opening the treasure to be able to roll on or assign drops before auto-disposition of loot.
     /// </summary>
-    [FieldOffset(0x1AC)] public float ClaimPeriodLength_Sec;
+    [FieldOffset(0x1AC)] public float ClaimTime;
 
     /// <summary>
     /// The Item sheet row IDs for the contents of this treasure that have been added to the loot window.
@@ -40,15 +40,15 @@ public unsafe partial struct Treasure {
     /// </summary>
     [FieldOffset(0x1F0)] public byte LootableItemCount;
 
-    [FieldOffset(0x1F4)] public int Unk_1F4; // Probably just a bool.  Seems to be something like "has been opened for looting while object exists locally for the current player", but more testing required.
+    [FieldOffset(0x1F4)] private int Unk_1F4; // Probably just a bool.  Seems to be something like "has been opened for looting while object exists locally for the current player", but more testing required.
 
     /// <summary>
-    /// How long the treasure has been open.
+    /// How many seconds the treasure has been open.
     /// </summary>
     /// <remarks>
     /// Starts from zero when opening.  Stops when fadeout begins.
     /// </remarks>
-    [FieldOffset(0x1F8)] public float TreasureOpenTime_Sec;
+    [FieldOffset(0x1F8)] public float TreasureOpenTime;
 
     /// <remarks>
     /// Has a lot of overlap with <see cref="State"/>.
@@ -58,7 +58,7 @@ public unsafe partial struct Treasure {
     /// <remarks>
     /// Seems to be -1 for treasures that can spawn in non-fixed locations (i.e., enemies dropping coffers, deep dungeon).  Have only otherwise seen zero.
     /// </remarks>
-    [FieldOffset(0x1FE)] public short Unk_1FE;
+    [FieldOffset(0x1FE)] private short Unk_1FE;
 
     [FieldOffset(0x200)] public TreasureKind CofferKind;
 
