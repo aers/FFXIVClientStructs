@@ -132,8 +132,8 @@ public unsafe struct FileSceneTimeline {
     [FieldOffset(0x0C)] public int NumInstances;
     [FieldOffset(0x10)] public int OffsetActionTimelineKey;
     [FieldOffset(0x14)] public int OffsetTmlb; // can be negative, in which case it points into the scene header
-    [FieldOffset(0x20)] public byte Flags1;
-    [FieldOffset(0x21)] public byte Flags2;
+    [FieldOffset(0x20)] public byte AutoPlay;
+    [FieldOffset(0x21)] public byte Loop;
 
     public CStringPointer Type => OffsetType > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetType : null;
     public Span<FileSceneTimelineInstance> Instances => new((byte*)Unsafe.AsPointer(ref this) + OffsetInstances, NumInstances);

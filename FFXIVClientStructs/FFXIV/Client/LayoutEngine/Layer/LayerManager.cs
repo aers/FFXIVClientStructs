@@ -22,5 +22,5 @@ public unsafe partial struct LayerManager {
     [FieldOffset(0x28)] public StdMap<uint, Pointer<ILayoutInstance>> Instances;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8D 94 24 ?? ?? ?? ?? 48 89 84 24 ?? ?? ?? ?? 4C 8B E8")]
-    public partial void CreateTimelineInstance(SharedGroupLayoutInstance* group, int instanceKey, int subId, byte a5, byte a6, FileSceneTimeline* fileData, LayoutObjectGroup* timelineObj);
+    public partial TimeLineLayoutInstance* CreateTimelineInstance(SharedGroupLayoutInstance* group, int instanceKey, int subId, byte a5, byte a6, FileSceneTimeline* fileData, LayoutObjectGroup* timelineObj);
 }

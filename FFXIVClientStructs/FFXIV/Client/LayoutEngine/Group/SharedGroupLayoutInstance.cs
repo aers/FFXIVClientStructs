@@ -19,15 +19,17 @@ public unsafe partial struct SharedGroupLayoutInstance {
     [FieldOffset(0x040)] public LayoutObjectGroup* TimelineObject;
     [FieldOffset(0x050)] public Transform Transform;
     [FieldOffset(0x080)] public InstanceList Instances;
-    [FieldOffset(0x0A8)] public InstanceList uA8;
+    // [FieldOffset(0x0A8)] public InstanceList uA8;
 
     [FieldOffset(0xD0)] public TimeLineContainer TimeLineContainer;
-    [FieldOffset(0x108)] public ILayoutInstance* ExtraTimelineInstance; // used for timeline, not sure of purpose
-    [FieldOffset(0x110)] public Motion.Base* MotionController1;
-    [FieldOffset(0x118)] public Motion.Base* MotionController2;
+    // [FieldOffset(0x108)] public ILayoutInstance* ExtraTimelineInstance; // not sure of purpose
+    [FieldOffset(0x110)] public SGActionController* ActionController1;
+    [FieldOffset(0x118)] public SGActionController* ActionController2;
 
     [FieldOffset(0x120)] public uint PrefabFlags1; // 0x1 = load started; 0x3 = load failed or contents added; 0x4 = failed to add contents
     [FieldOffset(0x12C)] public uint PrefabFlags2; // 0x8 = colliders active
+
+    // [FieldOffset(0x14C), FixedSizeArray] internal FixedSizeArray16<byte> _timelineIndices; // used by EventObjAnimation ActorControl packet, some kind of simple lookup table
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 FF C7 48 8D 76 04")]
     public partial bool InitAnimationHandlers(void* fileData);

@@ -8525,7 +8525,7 @@ classes:
     vtbls:
       - ea: 0x14204C3E8
         base: Client::LayoutEngine::ILayoutInstance
-  Client::LayoutEngine::Motion::Base:
+  Client::LayoutEngine::Group::SGActionController:
     vtbls:
       - ea: 0x142044988
     vfuncs:
@@ -8538,42 +8538,16 @@ classes:
       0x1406C8A40: SetRotation
       0x1406C8B70: SetScale
       0x1406C8CA0: SetTransform
-  Client::LayoutEngine::Motion::Sub1:
-    vtbls:
-      - ea: 0x14204D358
-        base: Client::LayoutEngine::Motion::Base
-    funcs:
-      0x140721FF0: LoadFromFile
-  Client::LayoutEngine::Motion::Sub2:
-    vtbls:
-      - ea: 0x14204D3B8
-        base: Client::LayoutEngine::Motion::Base
-    funcs:
-      0x140723E40: LoadFromFile
-  Client::LayoutEngine::Motion::Timeline:
-    vtbls:
-      - ea: 0x14204D418
-        base: Client::LayoutEngine::Motion::Base
-  Client::LayoutEngine::Motion::TimeOfDay:
+  Client::LayoutEngine::Group::SGClockActionController:
     vtbls:
       - ea: 0x14204D478
-        base: Client::LayoutEngine::Motion::Base
-  Client::LayoutEngine::Motion::Periodic:
+        base: Client::LayoutEngine::Group::SGActionController
+  Client::LayoutEngine::Group::SGTransformActionController:
     vtbls:
       - ea: 0x14204D4D8
-        base: Client::LayoutEngine::Motion::Base
+        base: Client::LayoutEngine::Group::SGActionController
     funcs:
       0x140725CC0: LoadFromFile
-  Client::LayoutEngine::Motion::Sub6:
-    vtbls:
-      - ea: 0x14204D538
-        base: Client::LayoutEngine::Motion::Base
-  Client::LayoutEngine::Motion::Sub7:
-    vtbls:
-      - ea: 0x14204C658
-        base: Client::LayoutEngine::Motion::Base
-    funcs:
-      0x14071DA30: LoadFromFile
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbls:
       - ea: 0x142050A70
@@ -23318,6 +23292,8 @@ classes:
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x142185918
+    vfuncs:
+      0: Dtor
   Client::Graphics::Physics::BoneSimulator:
     vtbls:
       - ea: 0x1421CC010
@@ -23508,6 +23484,12 @@ classes:
       0x1417B5B20: CreateInstance
       #0x1417633F0: ctor # inlined in CreateInstance
       0x1417B62F0: PreloadActionTmb
+      0x1417B80D0: AddLayoutTimelineObject
+      0x1417BA1D0: InsertTimelineGroup
+  Client::System::Scheduler::ActionTimelineThread:
+    vtbls:
+      - ea: 0x1421858A8
+        base: Client::System::Threading::Thread
   Client::System::Scheduler::TimelineGroup:
     vtbls:
       - ea: 0x1421CFEA0
@@ -23519,6 +23501,7 @@ classes:
       - ea: 0x1421BC4E0
         base: Client::System::Scheduler::Base::SchedulerState
     vfuncs:
+      8: ProcessAll
       20: GetActionTimelineKey
       29: GetOwningGameObjectIndex
       41: GetAnimationLength # C010
@@ -23610,11 +23593,16 @@ classes:
     vtbls:
       - ea: 0x1421BCBD8
         base: Client::System::Scheduler::Base::SchedulerState
+    vfuncs:
+      9: ProcessEvent
+      47: Event10
+      49: Event15
+      51: Event16
   Client::System::Scheduler::Clip::HavokAnimationClip:
     vtbls:
       - ea: 0x1421BE1D8
         base: Client::System::Scheduler::Clip::BaseClip
-  Client::System::Scheduler::Clip::C013:
+  Client::System::Scheduler::Clip::SharedGroupClip:
     vtbls:
       - ea: 0x1421BE3D0
         base: Client::System::Scheduler::Clip::BaseClip
