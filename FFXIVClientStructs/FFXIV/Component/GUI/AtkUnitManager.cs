@@ -96,10 +96,11 @@ public unsafe partial struct AtkUnitManager {
 [Flags]
 public enum AtkUnitManagerFlags : byte {
     None = 0,
-    /// <summary> Set when any AtkUnitList was modified. Cleared in UpdateDrawOrderIndexes. </summary>
+    /// <summary> This flag is temporarily set when any AtkUnitList was modified. Cleared in UpdateDrawOrderIndexes. </summary>
     UnitListsChanged = 0x01,
     [Obsolete($"Renamed to {nameof(UnitListsChanged)}")] Unk01 = 0x01,
-    Unk02 = 0x02, // EnableUiInput set to 1, which calls AtkModule Handler 0, which sets the bool after EnableUiInput to 1
+    /// <summary> This flag is temporarily set to call AtkModule CallbackHandler 0, which sets <see cref="AtkModule.IsHudInitialized"/> to <see langword="true"/>. </summary>
+    Unk02 = 0x02,
     UiHidden = 0x04,
     Unk08 = 0x08,
     Unk10 = 0x10,
