@@ -290,7 +290,8 @@ public enum AgentId : uint {
     PvPDuelRequest = 255,
     PvPHeader = 256,
     PvPGauge = 257, // PvPFrontlineGauge
-    Unk257 = 258, // PvPMKSHeaderSpec, PvPSpectatorCameraList, PvPSpectatorList
+    PvPSpectator = 258, // PvPMKSHeaderSpec, PvPSpectatorCameraList, PvPSpectatorList
+    [Obsolete($"Renamed to {nameof(PvPSpectator)}")] Unk257 = 258, // PvPMKSHeaderSpec, PvPSpectatorCameraList, PvPSpectatorList
     Unk258 = 259,
     Aquarium = 260,
     QTE = 261,
