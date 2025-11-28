@@ -241,7 +241,7 @@ public enum GameUIMode : ushort {
     Normal = 0,
     ChocoboRace = 1,
     Lovm = 2, // Lord of Verminion
-    Spectator = 3,
+    PvPSpectator = 3,
     ContentsReplay = 4,
     Emj = 5, // Doman Mahjong
     EmjSolo = 6,
