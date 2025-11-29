@@ -9,4 +9,6 @@ public unsafe partial struct TimelineController {
     // [FieldOffset(0x28)] public nint TmbhData;
 
     [FieldOffset(0x34)] public float CurrentTimestamp;
+
+    [VirtualFunction(8)] public partial void ProcessAll(int eventType, byte* data);
 }

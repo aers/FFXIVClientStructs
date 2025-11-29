@@ -210,6 +210,7 @@ public enum InstanceType : byte {
     EnvLocation = 47,
     EventRange = 49, // collider in layer 4
     QuestMarker = 51,
+    Timeline = 52,
     CollisionBox = 57, // generic collider
     DoorRange = 58,
     LineVfx = 59,
