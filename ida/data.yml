@@ -1288,6 +1288,7 @@ classes:
       - ea: 0x1429611B0
         pointer: true
     funcs:
+      0x140CE28C0: HandleGMCommand
       0x140CE2F70: Update
       0x140CE3480: Initialize
       0x140CE3510: Dtor
@@ -2738,8 +2739,14 @@ classes:
         base: Client::Game::ServerRequestCallbackInterface
     funcs:
       0x140A22990: Initialize
-      0x140A22E80: IsComplete
+      0x140A22AB0: RequestCompletedAchievements
       0x140A22AE0: RequestAchievementProgress
+      0x140A22B60: RequestFateProgressTab
+      0x140A22B90: HandleFateProgressTabPacket
+      0x140A22BF0: SetAchievementCompleted
+      0x140A22E70: GetState
+      0x140A22E80: IsComplete
+      0x140A22F00: GetHistoryEntry
       0x140A22F20: ReceiveAchievementProgress
   Client::Game::UI::Buddy:
     instances:
@@ -5804,6 +5811,7 @@ classes:
       0x140A8A320: HandleRSFDataPacket
       0x140A8A380: HandleHuntingLogEntryPacket
       0x140A8A3C0: HandleNPCYellPacket
+      0x140A8A5F0: HandleFateProgressTabPacket
       0x140A8D1E0: HandleMapEffectPacket
       0x140A8D7C0: HandleQuestManagerUnkArray2SecondHalfPacket
       0x140A8D810: HandleQuestManagerUnkArray2SecondHalfEntryPacket
@@ -9308,6 +9316,7 @@ classes:
     funcs:
       0x1401CA320: Finalizer
       0x140992DA0: SetString
+      0x14075A2D0: SetInteger
   std::deque<Component::Text::TextParameter>:
     funcs:
       0x1405A7F80: ctor
@@ -15273,6 +15282,8 @@ classes:
     vtbls:
       - ea: 0x1421D3208
         base: Client::Game::InstanceContent::ContentDirector
+    vfuncs:
+      393: HandleGMCommand
     funcs:
       0x14189B820: ctor
       0x14189BAB0: Finalizer

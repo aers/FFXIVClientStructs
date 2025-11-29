@@ -19,6 +19,7 @@ public partial struct AgentFateProgress {
 [StructLayout(LayoutKind.Explicit, Size = 0x7E8)]
 public partial struct FateProgressTab {
     [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray6<FateProgressZone> _zones;
+    [FieldOffset(0x7E0)] public byte TabIndex;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
