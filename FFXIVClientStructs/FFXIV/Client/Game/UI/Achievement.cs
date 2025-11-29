@@ -8,7 +8,7 @@ public unsafe partial struct Achievement {
     public static partial Achievement* Instance();
 
     [FieldOffset(0x08)] public AchievementState State;
-    [FieldOffset(0x0C), FixedSizeArray] internal FixedSizeArray488<byte> _completedAchievements;
+    [FieldOffset(0x0C), FixedSizeArray(false, true, 3825)] internal FixedSizeArray479<byte> _completedAchievements;
 
     [FieldOffset(0x218)] public AchievementState ProgressRequestState;
     [FieldOffset(0x21C)] public uint ProgressAchievementId;
