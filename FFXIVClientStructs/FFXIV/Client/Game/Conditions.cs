@@ -120,4 +120,7 @@ public unsafe partial struct Conditions {
     [FieldOffset(103)] public bool Unknown103;
     /// <remarks> When this reaches <c>0</c>, <see cref="MountOrOrnamentTransition"/> is set to <c>false</c>. </remarks>
     [FieldOffset(104)] public float MountOrOrnamentTransitionResetTimer;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 8B FB")]
+    public partial bool HasPermission(uint permissionId, int excludedCondition1 = 0, int excludedCondition2 = 0);
 }

@@ -176,8 +176,6 @@ functions:
   0x140844500: IsItemStainConditionUnlocked
   0x140844F70: IsEventItemItemId
   0x1408456C0: IsWeddingRelatedItemId
-  0x140A73C00: ExecuteCommand # nint (int command, int param1, int param2, int param3, int param4)
-  0x140A73D80: ExecuteCommandComplexLocation # nint (int command, Vector3 position, int param1, int param2, int param3, int param4)
   0x1400DBE40: IsBoundByDuty56
   0x1400DBFC0: IsDutyRecorderPlayback
   0x1400DC020: IsInDeepDungeon
@@ -475,6 +473,8 @@ classes:
       0x1409CBA20: IsInRivalWingsArea
       0x1409CBA40: IsInPvPArea
       0x1405D4500: GetEventGPoseController
+      0x140A73C00: ExecuteCommand # static
+      0x140A73D80: ExecuteLocationCommand # static
   Client::Game::ZoneSharedGroupManager:
     vtbls:
       - ea: 0x142058678
@@ -975,6 +975,7 @@ classes:
       - ea: 0x142041770
     vfuncs:
       0: Dtor
+      4: IsUIReady # (AtkModule* this, bool checkIsHudInitialized) -> bool
       6: EnsureNumberArray
       7: EnsureStringArray
       8: EnsureExtendArray
@@ -999,6 +1000,7 @@ classes:
       39: SetUIVisibility
       40: GetSoftKeyboardDeviceInterface
       44: GetAddonStatus
+      56: InitializeHud
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x141FFA578
@@ -1286,6 +1288,7 @@ classes:
       - ea: 0x1429611B0
         pointer: true
     funcs:
+      0x140CE28C0: HandleGMCommand
       0x140CE2F70: Update
       0x140CE3480: Initialize
       0x140CE3510: Dtor
@@ -1585,6 +1588,7 @@ classes:
       0x140836600: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
       0x1400FFBF0: GetSizeByIndex # static
       0x1408372B0: GetEquippedItemIdForSlot
+      0x1408494B0: CanEquip # static
       0x14083A5C0: GetPermittedGearsetCount
       0x140843FF0: GetLimitedTomestoneCount
       0x140835130: GetEmptySlotsInBag
@@ -1594,6 +1598,9 @@ classes:
       0x140840C00: GetRetainerGil
       0x140841D20: GetRetainerMarketPrice
       0x140841D40: SetRetainerMarketPrice
+      0x140841310: MoveFromRetainerMarketToPlayerInventory
+      0x140841150: MoveFromRetainerMarketToRetainerInventory
+      0x140841DC0: MoveToRetainerMarket
       0x140843180: GetFreeCompanyGil
       0x140843C30: GetGil
       0x140843D30: GetCompanySeals
@@ -2732,8 +2739,14 @@ classes:
         base: Client::Game::ServerRequestCallbackInterface
     funcs:
       0x140A22990: Initialize
-      0x140A22E80: IsComplete
+      0x140A22AB0: RequestCompletedAchievements
       0x140A22AE0: RequestAchievementProgress
+      0x140A22B60: RequestFateProgressTab
+      0x140A22B90: HandleFateProgressTabPacket
+      0x140A22BF0: SetAchievementCompleted
+      0x140A22E70: GetState
+      0x140A22E80: IsComplete
+      0x140A22F00: GetHistoryEntry
       0x140A22F20: ReceiveAchievementProgress
   Client::Game::UI::Buddy:
     instances:
@@ -4443,6 +4456,7 @@ classes:
       - ea: 0x141FFA660
         base: Component::GUI::AtkEventListener
     vfuncs:
+      5: Update
       8: SetAddonVisibility
       9: GetAddonStatus
       10: RefreshAddon
@@ -4491,7 +4505,8 @@ classes:
     funcs:
       0x1400E48F0: ctor
       0x1400E56D0: Finalizer
-      0x1400E5A50: ChangeUiMode
+      0x1400E5A50: ChangeUIScene
+      0x1400E5C00: ChangeUIMode
       0x1400E6620: CancelDragDrop
       0x1400E6B90: OpenAddon
       0x1400E7010: OpenAddonByAgent
@@ -4541,7 +4556,9 @@ classes:
       0x1406783C0: DecRefStringArrayData
       0x140678F30: SetupAtkMessageBoxManager
       0x140679070: SetAtkMessageBoxManagerTexts
+      0x14067BB90: UpdateUI
       0x14067C890: GetAtkFontCodeModule
+      0x14067D3E0: UpdateSubscribedAddons
       0x14067DB70: UpdateAtkUIColorHolder
       0x1400F6340: OpenSatisfactionSupply
   Client::UI::ExdSheetWaiter:
@@ -4677,6 +4694,7 @@ classes:
       0x140929CF0: SetUpdateLanguageMask
       0x140929D10: SetUpdateSearchComment
       0x140929E50: SendOnlineStatusUpdate
+      0x140929F20: RefreshOnlineStatus
       0x14092A0B0: FixOnlineStatusFlag1
       0x14092A170: FixOnlineStatusFlag2
       0x14092A200: GetUpdateData
@@ -5793,6 +5811,7 @@ classes:
       0x140A8A320: HandleRSFDataPacket
       0x140A8A380: HandleHuntingLogEntryPacket
       0x140A8A3C0: HandleNPCYellPacket
+      0x140A8A5F0: HandleFateProgressTabPacket
       0x140A8D1E0: HandleMapEffectPacket
       0x140A8D7C0: HandleQuestManagerUnkArray2SecondHalfPacket
       0x140A8D810: HandleQuestManagerUnkArray2SecondHalfEntryPacket
@@ -7899,6 +7918,7 @@ classes:
       0x14067C4B0: HandleInput
       0x14067C8D0: IsTextInputActive
       0x14067C750: SetUIScene
+      0x1406796C0: HandleHudInitialized # 0
       0x1406796E0: HandleUnregisterAddonCallback # 1
       0x140679730: HandleAddonAgentCallback # 2
       0x140679980: HandleAddonEventCallback # 3 - unsure, used in AddonFadeMiddleBack to send an event to ScheduleManagement
@@ -8753,6 +8773,8 @@ classes:
       123: ShowContentIntroduction
       124: IsContentIntroductionInvisible
       125: HideContentIntroduction
+      128: ChangeUIMode
+      129: InContentsReplay
       136: SetCursorVisibility
       137: ToggleCursor
       151: ShowEventFadeIn
@@ -9326,6 +9348,7 @@ classes:
     funcs:
       0x1401CA320: Finalizer
       0x140992DA0: SetString
+      0x14075A2D0: SetInteger
   std::deque<Component::Text::TextParameter>:
     funcs:
       0x1405A7F80: ctor
@@ -10919,6 +10942,7 @@ classes:
       0x140E50DA0: UpdateStatusDisplay
       0x140E52140: GetMainCommandString  # MainCommand exd
       0x140E52470: OpenSystemMenu
+      0x140E33CF0: HandleMainCommandOperation
   Client::UI::Agent::HudStatus::Status:
     funcs:
       0x140E36710: ProcessStatuses
@@ -11264,7 +11288,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140AED4E0: ctor
-      0x140AEDD70: InvokeAction
+      0x140AEDD70: Return
   Client::UI::Agent::AgentCutscene:
     vtbls:
       - ea: 0x142091E58
@@ -15290,6 +15314,8 @@ classes:
     vtbls:
       - ea: 0x1421D3208
         base: Client::Game::InstanceContent::ContentDirector
+    vfuncs:
+      393: HandleGMCommand
     funcs:
       0x14189B820: ctor
       0x14189BAB0: Finalizer

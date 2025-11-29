@@ -13,4 +13,7 @@ public unsafe partial struct InfoProxyPageInterface {
     /// <param name="packetPtr">A pointer to the packet data to load in.</param>
     [VirtualFunction(11)]
     public partial void AddPage(nint packetPtr);
+
+    [FieldOffset(0x18)] public byte NextRequestId;
+    [FieldOffset(0x19)] public byte CurrentRequestId;
 }

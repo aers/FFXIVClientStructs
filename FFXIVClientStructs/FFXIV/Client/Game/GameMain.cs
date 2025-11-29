@@ -1,3 +1,4 @@
+using System.Numerics;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
@@ -62,6 +63,12 @@ public unsafe partial struct GameMain {
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 63 50 FE")]
     public partial void SetActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies immediately regardless of client state
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 46 0A")]
+    public static partial bool ExecuteCommand(int command, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 54 24 ?? B9")]
+    public static partial bool ExecuteLocationCommand(int command, Vector3* position, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct Festival {

@@ -11,6 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [StructLayout(LayoutKind.Explicit, Size = 0x2360)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 07 48 8D 8F ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 89 87 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? 33 ED 48 8D 05 ?? ?? ?? ??", 3)]
 public unsafe partial struct Character {
+    [FieldOffset(0x5FC)] public MovementStateOptions MovementState;
     /// <summary>
     /// <code>
     /// 0b0010_0000 [0x20] = <see cref="IsSwimming"/>
@@ -167,6 +168,13 @@ public unsafe partial struct Character {
 
     [VirtualFunction(83)]
     public partial ForayInfo* GetForayInfo();
+}
+
+public enum MovementStateOptions : byte {
+    Normal = 0,
+    Flying = 1,
+    Diving = 2,
+    // Spectating = 3,
 }
 
 // LogMessages for errors starting at 7700

@@ -78,7 +78,7 @@ public enum InfoProxyId : uint {
     NoviceNetworkMentor = 23,
     // unconfirmed:
     // PvpTeam = 24,
-    // PvpTeamMember = 25,
+    // PvpTeamMember = 25, // "xpvpgroup"?
     // PvpTeamResult = 26,
     // PvpTeamActivity = 27,
     // PvPTeamOrganization = 28,

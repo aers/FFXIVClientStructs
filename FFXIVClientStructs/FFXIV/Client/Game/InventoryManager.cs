@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -87,6 +88,15 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 43 78")]
     public partial uint GetRetainerGil();
 
+    [MemberFunction("E8 ?? ?? ?? ?? EB 49 84 C0")]
+    public partial int MoveFromRetainerMarketToPlayerInventory(InventoryType srcInv, ushort srcSlot, uint quantity);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 45 85 F6 75 22")]
+    public partial int MoveFromRetainerMarketToRetainerInventory(InventoryType srcInv, ushort srcSlot, uint quantity);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 56 58 33 DB")]
+    public partial void MoveToRetainerMarket(InventoryType srcInv, ushort srcSlot, InventoryType dstInv, ushort dstSlot, uint quantity, uint unitPrice);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 44 8B F8 ?? ?? ?? FF 52 ?? 80 BB")]
     public partial uint GetFreeCompanyGil();
 
@@ -138,6 +148,10 @@ public unsafe partial struct InventoryManager {
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
+
+    /// <remarks>Return value is a LogMessage Id. 0 if you can equip. Row pointer is optional</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 80 7E")]
+    public static partial int CanEquip(uint itemId, byte race, byte sex, ushort level, byte classJobId, byte grandCompany, byte pvpRank, [CExporterExcel("Item")] void* itemRow);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
     public struct InventoryOperation {
