@@ -4772,6 +4772,7 @@ classes:
       # 0x140105BF0: ProcessItemHistory_Internal # inlined in ProcessItemHistory
       0x14092BCA0: SetLastPurchasedItem
       0x14092BE10: SendPurchaseRequestPacket
+      0x14092B810: ProcessPurchaseResponse
       0x14092BFA0: ProcessPlayerRetainerInfo
   Client::UI::Info::InfoProxyPartyInvite:
     vtbls:
