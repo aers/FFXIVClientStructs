@@ -4473,6 +4473,7 @@ classes:
       0x14064EC30: GetAddonByName
       0x14064ED90: GetAddonByNode
       0x140652930: UpdateDrawOrderIndexes
+      0x1400E1880: UpdateCursor
   Client::UI::WindowContextMenuHandler:
     vtbls:
       - ea: 0x141FFA910
