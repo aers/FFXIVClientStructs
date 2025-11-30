@@ -33,12 +33,12 @@ public unsafe partial struct Treasure {
     /// <summary>
     /// The Item sheet row IDs for the contents of this treasure that have been added to the loot window.
     /// </summary>
-    [FieldOffset(0x1B0), FixedSizeArray] internal FixedSizeArray16<uint> _lootableItemIds; // Assuming 16 long due to the location of the count field and the layout of the loot window.  Was only able to confirm up to 12.
+    [FieldOffset(0x1B0), FixedSizeArray] internal FixedSizeArray16<uint> _lootableItemIds;
     
     /// <summary>
     /// The number of valid item IDs in <see cref="LootableItemIds"/>.
     /// </summary>
-    [FieldOffset(0x1F0)] public byte LootableItemCount;
+    [FieldOffset(0x1F0)] public byte ItemCount;
 
     [FieldOffset(0x1F4)] private int Unk_1F4; // Probably just a bool.  Seems to be something like "has been opened for looting while object exists locally for the current player", but more testing required.
 
