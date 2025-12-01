@@ -5,7 +5,10 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct SGActionController {
-    [FieldOffset(0x08)] public SharedGroupLayoutInstance* Group;
+    [FieldOffset(0x08)] public SharedGroupLayoutInstance* Owner;
+    // SGRotationActionController? 4/5
+    // SGClockActionController: 10
+    // SGTransformActionController: 12/13
     [FieldOffset(0x18)] public uint AnimationType;
     [FieldOffset(0x20)] public float SpeedFactor; // not sure
 
@@ -20,6 +23,35 @@ public unsafe partial struct SGActionController {
 
     [VirtualFunction(11)]
     public partial void Tick(float dt);
+}
+
+// applies a rotation
+[GenerateInterop]
+[Inherits<SGActionController>]
+[StructLayout(LayoutKind.Explicit, Size = 0xE0)]
+public unsafe partial struct SGRotationActionController {
+    [FieldOffset(0x41)] public bool HasChild1;
+    [FieldOffset(0x42)] public bool HasChild2;
+
+    [FieldOffset(0x48)] public SharedGroupLayoutInstance* ChildGroup;
+    [FieldOffset(0x50)] public ILayoutInstance* Child1;
+    [FieldOffset(0x58)] public ILayoutInstance* Child2;
+    [FieldOffset(0x80)] public Quaternion GroupRotation;
+    [FieldOffset(0x90)] public Quaternion ChildRotation1;
+    [FieldOffset(0x98)] public Quaternion ChildRotation2;
+}
+
+// sets rotation of objects based on ingame time of day
+[GenerateInterop]
+[Inherits<SGActionController>]
+[StructLayout(LayoutKind.Explicit, Size = 0x80)]
+public unsafe partial struct SGClockActionController {
+    [FieldOffset(0x28)] public ILayoutInstance* Instance1;
+    [FieldOffset(0x30)] public ILayoutInstance* Instance2;
+    [FieldOffset(0x40)] public Quaternion RotationBase1;
+    [FieldOffset(0x50)] public Quaternion RotationBase2;
+    [FieldOffset(0x60)] public Quaternion Rotation1;
+    [FieldOffset(0x70)] public Quaternion Rotation2;
 }
 
 // applies some basic transformation that repeats infinitely with a fixed period, i.e. rotating aetherytes, hovering objects that oscillate up and down, etc.
@@ -58,17 +90,4 @@ public unsafe partial struct SGTransformActionController {
         [FieldOffset(0x20)] public Vector4 Start;
         [FieldOffset(0x30)] public Vector4 End;
     }
-}
-
-// sets rotation of objects based on ingame time of day
-[GenerateInterop]
-[Inherits<SGActionController>]
-[StructLayout(LayoutKind.Explicit, Size = 0x80)]
-public unsafe partial struct SGClockActionController {
-    [FieldOffset(0x28)] public ILayoutInstance* Instance1;
-    [FieldOffset(0x30)] public ILayoutInstance* Instance2;
-    [FieldOffset(0x40)] public Quaternion RotationBase1;
-    [FieldOffset(0x50)] public Quaternion RotationBase2;
-    [FieldOffset(0x60)] public Quaternion Rotation1;
-    [FieldOffset(0x70)] public Quaternion Rotation2;
 }
