@@ -38,7 +38,7 @@ public unsafe partial struct SGRotationActionController {
     [FieldOffset(0x58)] public ILayoutInstance* Child2;
     [FieldOffset(0x80)] public Quaternion GroupRotation;
     [FieldOffset(0x90)] public Quaternion ChildRotation1;
-    [FieldOffset(0x98)] public Quaternion ChildRotation2;
+    [FieldOffset(0xA0)] public Quaternion ChildRotation2;
 }
 
 // sets rotation of objects based on ingame time of day
