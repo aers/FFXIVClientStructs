@@ -34,7 +34,7 @@ public unsafe partial struct Treasure {
     /// The Item sheet row IDs for the contents of this treasure that have been added to the loot window.
     /// </summary>
     [FieldOffset(0x1B0), FixedSizeArray] internal FixedSizeArray16<uint> _lootableItemIds;
-    
+
     /// <summary>
     /// The number of valid item IDs in <see cref="LootableItemIds"/>.
     /// </summary>
