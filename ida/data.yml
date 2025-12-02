@@ -431,6 +431,10 @@ functions:
   0x141B13DF0: FollowTargetRecast # bool (nint a1-a6)
   0x14092F180: FreeCompanyDialogPacketReceive # (InfoProxyInterface* ptr, byte* packetData)
   0x141691380: SnipeTask # ulong (EventSceneModuleImplBase* scene, lua_State* state)
+  0x140B629D0: ContentDirector_IsPlayCutscene # ulong (lua_State* state)
+  0x141978900: MassivePcContentDirector_IsPlayCutscene # ulong (lua_State* state)
+  0x140CCEBE0: GoldSaucerDirector_IsPlayCutscene # ulong (lua_State* state)
+  0x14194AE90: CustomTalk_IsPlayCutsceneContent # ulong (lua_State* state)
 
 classes:
   Common::TimePoint:
