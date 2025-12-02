@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 public unsafe partial struct SGActionController {
     [FieldOffset(0x08)] public SharedGroupLayoutInstance* Owner;
     // SGRotationActionController? 4/5
+    // SGMovePathActionController: 8/9
     // SGClockActionController: 10
     // SGTransformActionController: 12/13
     [FieldOffset(0x18)] public uint AnimationType;
@@ -90,4 +91,14 @@ public unsafe partial struct SGTransformActionController {
         [FieldOffset(0x20)] public Vector4 Start;
         [FieldOffset(0x30)] public Vector4 End;
     }
+}
+
+[GenerateInterop]
+[Inherits<SGActionController>]
+[StructLayout(LayoutKind.Explicit, Size = 0x100)]
+public partial struct SGMovePathActionController {
+    [FieldOffset(0x30)] public float Progress; // fractional representation
+    [FieldOffset(0x34)] public float DurationSeconds;
+    [FieldOffset(0x40)] public float ProgressSeconds;
+    [FieldOffset(0x50)] public Transform TransformBase;
 }

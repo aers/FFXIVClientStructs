@@ -8572,6 +8572,10 @@ classes:
         base: Client::LayoutEngine::Group::SGActionController
     funcs:
       0x140725CC0: LoadFromFile
+  Client::LayoutEngine::Group::SGMovePathActionController:
+    vtbls:
+      - ea: 0x14204D538
+        base: Client::LayoutEngine::Group::SGActionController
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbls:
       - ea: 0x142050A70
