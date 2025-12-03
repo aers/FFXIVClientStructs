@@ -1,4 +1,5 @@
 using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 
@@ -6,10 +7,11 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct SGActionController {
     [FieldOffset(0x08)] public SharedGroupLayoutInstance* Owner;
-    // SGRotationActionController? 4/5
-    // SGMovePathActionController: 8/9
+    // SGDoorActionController: 1-3
+    // SGRotationActionController? 4-5
+    // SGMovePathActionController: 8-9
     // SGClockActionController: 10
-    // SGTransformActionController: 12/13
+    // SGTransformActionController: 12-13
     [FieldOffset(0x18)] public uint AnimationType;
     [FieldOffset(0x20)] public float SpeedFactor; // not sure
 
@@ -24,6 +26,27 @@ public unsafe partial struct SGActionController {
 
     [VirtualFunction(11)]
     public partial void Tick(float dt);
+}
+
+[GenerateInterop]
+[Inherits<SGActionController>]
+[StructLayout(LayoutKind.Explicit, Size = 0x1F0)]
+public unsafe partial struct SGDoorActionController {
+    [FieldOffset(0x28)] public DoorState State; // 0 = opening; 1 = open; 2 = closing; 3 = closed
+    [FieldOffset(0x48)] public BgPartsLayoutInstance* Door1;
+    [FieldOffset(0x50)] public BgPartsLayoutInstance* Door2;
+    [FieldOffset(0x68)] public DoorRangeLayoutInstance* Range;
+    [FieldOffset(0x70)] public SoundLayoutInstance* Sound1;
+    [FieldOffset(0x78)] public SoundLayoutInstance* Sound2;
+    [FieldOffset(0x80)] public SoundLayoutInstance* Sound3;
+    [FieldOffset(0x88)] public CollisionBoxLayoutInstance* Collision;
+
+    public enum DoorState : int {
+        Opening = 0,
+        Open = 1,
+        Closing = 2,
+        Closed = 3
+    }
 }
 
 // applies a rotation

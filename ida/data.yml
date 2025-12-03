@@ -8558,6 +8558,10 @@ classes:
       0x1406C8A40: SetRotation
       0x1406C8B70: SetScale
       0x1406C8CA0: SetTransform
+  Client::LayoutEngine::Group::SGDoorActionController:
+    vtbls:
+      - ea: 0x14204D358
+        base: Client::LayoutEngine::Group::SGActionController
   Client::LayoutEngine::Group::SGRotationActionController:
     vtbls:
       - ea: 0x14204D3B8
