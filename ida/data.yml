@@ -2409,6 +2409,8 @@ classes:
     funcs:
       0x14063B4C0: InitializeResourceRendererManager # inlined in SetupFromULDResourceHandle, no xrefs
       0x140637B70: SetupFromULDResourceHandle
+      0x14063E220: UpdateTextLayouts
+      0x140638F50: PopulateTextLabels
       0x140636A50: SetupComponentFromULDResourceHandle
       0x140639180: CreateTimeline
       0x140639440: ReadComponentData
