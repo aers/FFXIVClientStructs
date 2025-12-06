@@ -10,17 +10,20 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [StructLayout(LayoutKind.Explicit, Size = 0x290)]
 public unsafe partial struct FishingEventHandler {
     [FieldOffset(0x220)] private byte Unk_220;
-    [FieldOffset(0x228)] public FishingState FishingState;
+    [FieldOffset(0x228)] public FishingState State;
 
     /// <remarks>
     /// 4 Hz inverse sawtooth between one and zero.  Latches upon cast.  No clue what it is for.
     /// </remarks>
     [FieldOffset(0x22C)] private float Unk_22C;
 
+    /// <summary>
+    /// Whether you are at a fishing hole.
+    /// </summary>
     /// <remarks>
-    /// Only updates when on FSH.
+    /// Only indicates that you are at a hole, not whether you can actually fish there.  Only updates when on FSH.
     /// </remarks>
-    [FieldOffset(0x230)] public bool AtFishingHole;
+    [FieldOffset(0x230)] public bool CanFish;
 
     /// <remarks>
     /// Returns to false when opportunity is gone (i.e., Spareful Hand is used).
@@ -50,7 +53,7 @@ public unsafe partial struct FishingEventHandler {
     /// <remarks>
     /// This is -1 when no swimbait has been selected.
     /// </remarks>
-    [FieldOffset(0x23C)] public sbyte SwimBaitIndex;
+    [FieldOffset(0x23C)] public sbyte CurrentSelectedSwimBait;
 
     /// <summary>
     /// The item IDs of currently-stored swimbait.
