@@ -4,11 +4,12 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::AddonItemDetailCompare
-//   Component::GUI::AtkUnitBase
-//     Component::GUI::AtkEventListener
+//   Client::UI::AddonItemDetailBase
+//     Component::GUI::AtkUnitBase
+//       Component::GUI::AtkEventListener
 [Addon("ItemDetailCompare")]
 [GenerateInterop]
-[Inherits<AtkUnitBase>]
+[Inherits<AtkUnitBase>] // TODO: inherit from AddonItemDetailBase
 [StructLayout(LayoutKind.Explicit, Size = 0x3F0)]
 public partial struct AddonItemDetailCompare {
     [FieldOffset(0x238)] public Glamour SelectedItem;

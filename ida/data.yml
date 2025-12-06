@@ -17244,6 +17244,11 @@ classes:
     funcs:
       0x14120D380: ctor
       0x14120EE60: GenerateTooltip
+      0x14120F870: SetEquipRestrictionInfo
+      0x141210110: SetBonuses
+      0x1412103C0: SetMateria
+      0x14120FBF0: SetSpiritbondInfo # Spiritbond, Condition, Crest, Crafting and Repairs...
+      0x141210680: UpdateGroupPositions
   Client::UI::AddonItemDetailCompare: # 86
     vtbls:
       - ea: 0x1420DABD0
@@ -19830,7 +19835,7 @@ classes:
   Client::UI::AddonItemInspectionResult: # 538
     vtbls:
       - ea: 0x1420F76F8
-        base: Component::GUI::AtkUnitBase
+        base: Client::UI::AddonItemDetailBase
     funcs:
       0x141300A50: ctor
   Client::UI::AddonRelic2Glass: # 539
