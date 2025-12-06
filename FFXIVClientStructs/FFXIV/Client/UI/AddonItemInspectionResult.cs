@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Component.GUI;
-
 namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 // Client::UI::AddonItemInspectionResult
@@ -7,6 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //     Component::GUI::AtkUnitBase
 //       Component::GUI::AtkEventListener
 [GenerateInterop]
-[Inherits<AtkUnitBase>] // TODO: inherit from AddonItemDetailBase
+[Inherits<AddonItemDetailBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x310)]
 public partial struct AddonItemInspectionResult;
