@@ -10057,9 +10057,9 @@ classes:
       0x1418E5C60: PlayFootStepSound
   Client::Game::Character::CustomizeData:
     funcs:
-      0x1417A65D0: FilterCustomizeData # ensures NPC specific faces etc aren't on players
-      0x1417A6BA0: NormalizeCustomizeData
-      0x1417A6DC0: RandomizeCustomizeData
+      0x1417A65D0: Filter # ensures NPC specific faces etc aren't on players
+      0x1417A6BA0: Normalize
+      0x1417A6DC0: Randomize
   Client::Game::Character::Character:
     vtbls:
       - ea: 0x14205A370
@@ -14854,6 +14854,10 @@ classes:
     vtbls:
       - ea: 0x1422B6C18
         base: Client::Game::Event::LuaEventHandler
+  Client::Game::Event::CustomTalkResidentEventHandler:
+    vtbls:
+      - ea: 0x1422EBCC0
+        base: Client::Game::Event::CustomTalkEventHandler
   Client::Game::Event::CompanyLeveOfficerEventHandler: # 0x0C
     vtbls:
       - ea: 0x14224A620
@@ -15103,6 +15107,14 @@ classes:
     vtbls:
       - ea: 0x1422CEF10
         base: Client::Game::Event::EventHandler
+  Client::Game::Event::GroupPoseEventHandler:
+    vtbls:
+      - ea: 0x1422BEAA0
+        base: Client::Game::Event::CustomTalkResidentEventHandler
+  Client::Game::Event::IdleCameraEventHandler:
+    vtbls:
+      - ea: 0x1422BF368
+        base: Client::Game::Event::CustomTalkResidentEventHandler
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x14207BF58

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 //       Component::GUI::AtkEventListener
 [Addon("_Image")]
 [GenerateInterop(isInherited: true)]
-[Inherits<AtkUnitBase>] // TODO: inherit from AddonScreenInfoChild
+[Inherits<AddonScreenInfoChild>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B8)]
 public unsafe partial struct AddonImage {
     [FieldOffset(0x288)] public AtkResNode* ResNode1; // Both AtkResNode's appear to be the same node
