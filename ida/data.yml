@@ -22085,13 +22085,17 @@ classes:
         base: Component::GUI::AtkUnitBase
   Client::UI::AddonImage:
     vtbls:
-      - ea: 0x142126878
+      - ea: 0x14211E598
         base: Client::UI::AddonScreenInfoChild
     funcs:
       0x14146B080: ctor
   Client::UI::AddonScreenText:
     vtbls:
       - ea: 0x142120BC8
+        base: Client::UI::AddonScreenInfoChild
+  Client::UI::AddonImage2:
+    vtbls:
+      - ea: 0x142122F60
         base: Client::UI::AddonScreenInfoChild
   Client::UI::AddonImage3:
     vtbls:
