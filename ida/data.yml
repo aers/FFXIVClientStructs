@@ -8714,7 +8714,7 @@ classes:
       74: GetMKDSupportJobModule
       75: GetMKDLoreModule
       76: GetMKDSupportJobNoteModule
-      77: GetQPNL
+      77: GetQuickPanelModule
       78: GetUIInputData
       79: GetUIInputModule
       81: GetLogFilterConfig
@@ -9153,6 +9153,12 @@ classes:
       0x1407DFA80: AddSeenSupportJob
       0x1407DFC10: IsSupportJobSeen
       0x1407DFC40: RemoveSeenSupportJob
+  Client::UI::Misc::QuickPanelModule:
+    vtbls:
+      - ea: 0x142057B70
+        base: Client::UI::Misc::UserFileManager::UserFileEvent
+    funcs:
+      0x1407DFF80: ctor
   Client::UI::Misc::HelperInterface:
     vtbls:
       - ea: 0x142067D58
