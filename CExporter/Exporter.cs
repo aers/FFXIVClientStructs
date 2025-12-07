@@ -803,8 +803,8 @@ public class ProcessedMemberFunctionReturn(Type type, string? overrideType) {
 
 public class ProcessedEnumConverter : IYamlTypeConverter {
     public bool Accepts(Type type) => type == typeof(ProcessedEnum);
-    public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type) {
+    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
+    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
         if (value is not ProcessedEnum e) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
@@ -826,13 +826,14 @@ public class ProcessedEnumConverter : IYamlTypeConverter {
         emitter.Emit(new MappingEnd());
         emitter.Emit(new MappingEnd());
     }
+
     public static readonly IYamlTypeConverter Instance = new ProcessedEnumConverter();
 }
 
 public class ProcessedFieldConverter : IYamlTypeConverter {
     public bool Accepts(Type type) => type == typeof(ProcessedField);
-    public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type) {
+    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
+    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
         if (value is not ProcessedField f) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
@@ -877,13 +878,14 @@ public class ProcessedFieldConverter : IYamlTypeConverter {
         }
         emitter.Emit(new MappingEnd());
     }
+
     public static readonly IYamlTypeConverter Instance = new ProcessedFieldConverter();
 }
 
 public class ProcessedStructConverter : IYamlTypeConverter {
     public bool Accepts(Type type) => type == typeof(ProcessedStruct);
-    public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type) {
+    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
+    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
         if (value is not ProcessedStruct s) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("type"));
@@ -901,7 +903,7 @@ public class ProcessedStructConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("fields"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var field in s.Fields) {
-            ProcessedFieldConverter.Instance.WriteYaml(emitter, field, field.GetType());
+            ProcessedFieldConverter.Instance.WriteYaml(emitter, field, field.GetType(), serializer);
         }
         emitter.Emit(new SequenceEnd());
         if (s.VirtualFunctionSize != 0) {
@@ -912,21 +914,21 @@ public class ProcessedStructConverter : IYamlTypeConverter {
             emitter.Emit(new Scalar("virtual_functions"));
             emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
             foreach (var virtualFunction in s.VirtualFunctions) {
-                ProcessedVirtualFunctionConverter.Instance.WriteYaml(emitter, virtualFunction, virtualFunction.GetType());
+                ProcessedVirtualFunctionConverter.Instance.WriteYaml(emitter, virtualFunction, virtualFunction.GetType(), serializer);
             }
             emitter.Emit(new SequenceEnd());
         }
         emitter.Emit(new Scalar("member_functions"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var memberFunction in s.MemberFunctions) {
-            ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, memberFunction, memberFunction.GetType());
+            ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, memberFunction, memberFunction.GetType(), serializer);
         }
         emitter.Emit(new SequenceEnd());
         if (s.StaticMembers != null) {
             emitter.Emit(new Scalar("static_members"));
             emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
             foreach (var staticMember in s.StaticMembers) {
-                ProcessedStaticMembersConverter.Instance.WriteYaml(emitter, staticMember, staticMember.GetType());
+                ProcessedStaticMembersConverter.Instance.WriteYaml(emitter, staticMember, staticMember.GetType(), serializer);
             }
             emitter.Emit(new SequenceEnd());
         }
@@ -934,19 +936,20 @@ public class ProcessedStructConverter : IYamlTypeConverter {
             emitter.Emit(new Scalar("static_member_functions"));
             emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
             foreach (var staticMemberFunction in s.StaticMemberFunctions) {
-                ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, staticMemberFunction, staticMemberFunction.GetType());
+                ProcessedMemberFunctionConverter.Instance.WriteYaml(emitter, staticMemberFunction, staticMemberFunction.GetType(), serializer);
             }
             emitter.Emit(new SequenceEnd());
         }
         emitter.Emit(new MappingEnd());
     }
+
     public static readonly IYamlTypeConverter Instance = new ProcessedStructConverter();
 }
 
 public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
     public bool Accepts(Type type) => type == typeof(ProcessedMemberFunction);
-    public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type) {
+    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
+    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
         if (value is not ProcessedMemberFunction m) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("signature"));
@@ -958,7 +961,7 @@ public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
         emitter.Emit(new Scalar("parameters"));
         emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
         foreach (var parameter in m.MemberFunctionParameters) {
-            ProcessedFieldConverter.Instance.WriteYaml(emitter, parameter, parameter.GetType());
+            ProcessedFieldConverter.Instance.WriteYaml(emitter, parameter, parameter.GetType(), serializer);
         }
         emitter.Emit(new SequenceEnd());
         emitter.Emit(new MappingEnd());
@@ -970,8 +973,8 @@ public class ProcessedMemberFunctionConverter : IYamlTypeConverter {
 public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
 
     public bool Accepts(Type type) => type == typeof(ProcessedVirtualFunction);
-    public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type) {
+    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
+    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
         if (value is not ProcessedVirtualFunction v) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("name"));
@@ -986,7 +989,7 @@ public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
             emitter.Emit(new Scalar("parameters"));
             emitter.Emit(new SequenceStart(null, null, true, SequenceStyle.Block));
             foreach (var parameter in v.VirtualFunctionParameters) {
-                ProcessedFieldConverter.Instance.WriteYaml(emitter, parameter, parameter.GetType());
+                ProcessedFieldConverter.Instance.WriteYaml(emitter, parameter, parameter.GetType(), serializer);
             }
             emitter.Emit(new SequenceEnd());
         }
@@ -998,8 +1001,8 @@ public class ProcessedVirtualFunctionConverter : IYamlTypeConverter {
 
 public class ProcessedStaticMembersConverter : IYamlTypeConverter {
     public bool Accepts(Type type) => type == typeof(ProcessedStaticMembers);
-    public object? ReadYaml(IParser parser, Type type) => throw new NotImplementedException();
-    public void WriteYaml(IEmitter emitter, object? value, Type type) {
+    public object? ReadYaml(IParser parser, Type type, ObjectDeserializer rootDeserializer) => throw new NotImplementedException();
+    public void WriteYaml(IEmitter emitter, object? value, Type type, ObjectSerializer serializer) {
         if (value is not ProcessedStaticMembers s) return;
         emitter.Emit(new MappingStart());
         emitter.Emit(new Scalar("signature"));
