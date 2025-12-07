@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CExporter</RootNamespace>
     <AssemblyName>CExporter</AssemblyName>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -37,8 +37,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Pastel" Version="5.0.0" />
-    <PackageReference Include="YamlDotNet" Version="15.1.2" />
+    <PackageReference Include="Pastel" Version="7.0.1" />
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FFXIVClientStructs\FFXIVClientStructs.csproj" />
