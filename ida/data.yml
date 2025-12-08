@@ -295,6 +295,8 @@ functions:
   0x141AF6F30: lua_gethookmask
   0x141AF7120: lua_sethook
   0x141AF7150: lua_setlocal
+  0x141BC9530: SupportDeskHttpCallback
+  0x141B2E810: SupportDeskCreateConnection
   0x1417E56B0: luaL_openlibs
   0x1417E58A0: luaL_addlstring
   0x1417E5940: luaL_addstring
@@ -853,6 +855,32 @@ classes:
       - ea: 0x14203E6F8
   Client::Graphics::RenderObjectList:
   Client::Graphics::Singleton:
+  Client::SupportDesk::HttpConnection:
+    vtbls:
+      - ea: 0x1422EBB20
+    vfuncs:
+      0: Dtor
+      1: OpenSession
+      2: CloseSession
+      4: MakeRequest
+  Client::SupportDesk::HttpConnectionImpl:
+    vtbls:
+      - ea: 0x142309430
+        base: Client::SupportDesk::HttpConnection
+    funcs:
+      0x141B6FF00: Initialize
+  Client::SupportDesk::HttpRequest:
+    vtbls:
+      - ea: 0x14232EEF0
+    vfuncs:
+      0: Dtor
+  Client::SupportDesk::HttpRequestImpl:
+    vtbls:
+      - ea: 0x14232ED58
+        base: Client::SupportDesk::HttpRequest
+    funcs:
+      0x141BC8C20: Initialize
+      0x141BC9000: BeginRequest
   Client::System::Common::NonCopyable:
     vfuncs:
       0: Dtor
