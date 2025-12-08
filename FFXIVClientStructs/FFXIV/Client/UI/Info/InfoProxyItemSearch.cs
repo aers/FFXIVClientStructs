@@ -51,6 +51,9 @@ public unsafe partial struct InfoProxyItemSearch {
     [FieldOffset(0x5B68), FixedSizeArray] internal FixedSizeArray10<uint> _wishlistItems;
     [FieldOffset(0x5B90)] public uint WishlistSize;
 
+    [FieldOffset(0x5B95)] public bool WaitingForWishlistUpdate;
+    [FieldOffset(0x5B96)] public bool WaitingForListings;
+
     // [FieldOffset(0x5B96)] public byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
 
     [MemberFunction("40 57 41 56 48 83 EC 48 83 3A 00")]
@@ -78,6 +81,9 @@ public unsafe partial struct InfoProxyItemSearch {
 
     [MemberFunction("40 53 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 ?? ?? ?? ?? 48 8B D9 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 4C 8B D0 48 85 C0 0F 84 ?? ?? ?? ?? 8B 8B")]
     public partial bool SendPurchaseRequestPacket();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4E 04 85 C9")]
+    public partial void ProcessPurchaseResponse(uint itemId, uint errorMessageId);
 }
 
 [GenerateInterop]
