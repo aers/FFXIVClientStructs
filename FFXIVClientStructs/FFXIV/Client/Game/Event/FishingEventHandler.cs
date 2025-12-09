@@ -143,7 +143,7 @@ public enum FishingState : int {
     [Obsolete("Use CastingOut", true)]
     PoleOut = 1,
     [Obsolete("Use PullingPoleIn", true)]
-    PolePullIn = 2,
+    PullPoleIn = 2,
     [Obsolete("Use Quitting", true)]
     Quit = 3,
     [Obsolete("Use Hooking", true)]
