@@ -47,7 +47,10 @@ public unsafe partial struct ActionManager {
     [FieldOffset(0xC0)] public bool AreaTargetingExecuteAtCursor; // if true, on the next update area-targeted action will be executed at cursor
 
     // the fields below are related to 'ballista' mode (eg. cannons on second boss of Stone Vigil Hard)
-    [FieldOffset(0xF0)] public bool BallistaActive; // note that it is not cleared when exiting area-target mode until new area-targeting starts
+    /// <remarks>
+    /// This value is not cleared when exiting area-target mode until new area-targeting starts
+    /// </remarks>
+    [FieldOffset(0xF0)] public bool BallistaActive;
     [FieldOffset(0xF1)] public byte BallistaRowId; // row of Ballista sheet
     [FieldOffset(0x100)] public Vector3 BallistaOrigin; // position of the cannon that is being aimed
     [FieldOffset(0x110)] public float BallistaRefAngle; // initial angle; Ballista.Angle is centered around this orientation
@@ -370,7 +373,7 @@ public struct RecastDetail {
     /// level).
     /// </summary>
     /// <remarks>
-    /// Note that the total value shown here depends on the last action used. For example, if a specific action is
+    /// The total value shown here depends on the last action used. For example, if a specific action is
     /// bound to the GCD but is faster/slower than the normal GCD, this value will be set accordingly.
     /// <para />
     /// Continuing the resource gauge analogy from <see cref="Elapsed"/>, this field would represent the "cap" of the
@@ -389,8 +392,7 @@ public struct ComboDetail {
     [FieldOffset(0x04)] public uint Action;
 }
 
-// TODO: underlying type should be (u)int
-public enum ActionType : byte {
+public enum ActionType : uint {
     None,
     Action,
     Item,

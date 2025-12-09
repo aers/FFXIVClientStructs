@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 public partial struct CastInfo {
     [FieldOffset(0x00)] public bool IsCasting;
     [FieldOffset(0x01)] public bool Interruptible;
-    [FieldOffset(0x02)] public ActionType ActionType;
+    [FieldOffset(0x02)] public byte ActionType;
     [FieldOffset(0x04)] public uint ActionId;
     [FieldOffset(0x08)] public uint SourceSequence; // for player-initiated casts - monotonically increasing id of the cast
     [FieldOffset(0x10)] public GameObjectId TargetId;

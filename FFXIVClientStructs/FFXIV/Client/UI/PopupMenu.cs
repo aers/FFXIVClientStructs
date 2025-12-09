@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 // Client::UI::PopupMenu
 //   Component::GUI::AtkEventListener
 // Used in several addons as inlined derivations
-[GenerateInterop]
+[GenerateInterop(true)]
 [Inherits<AtkEventListener>]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct PopupMenu {

@@ -56,6 +56,7 @@ public unsafe partial struct AtkModule {
     [FieldOffset(0x8294)] public bool EnableUiDraw;
 
     [FieldOffset(0x8298)] public bool EnableUiInput;
+    [FieldOffset(0x8299)] public bool IsHudInitialized;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3")]
     public partial bool IsTextInputActive();

@@ -1,3 +1,5 @@
+using System.Numerics;
+using FFXIVClientStructs.FFXIV.Client.Enums;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
@@ -26,7 +28,7 @@ public unsafe partial struct GameMain {
     [FieldOffset(0x4098)] public uint TerritoryLoadState; // 1 = loading, 2 = loaded, 3 = unloading/shutting down
     [FieldOffset(0x409C)] public uint NextTerritoryTypeId;
     [FieldOffset(0x40A0)] public uint CurrentTerritoryTypeId; // can be 0 during loading screens
-    [FieldOffset(0x40A4)] public byte CurrentTerritoryIntendedUseId;
+    [FieldOffset(0x40A4)] public TerritoryIntendedUse CurrentTerritoryIntendedUseId;
     [FieldOffset(0x40A8)] public uint CurrentTerritoryFilterKey;
     [FieldOffset(0x40AC)] public ushort CurrentContentFinderConditionId;
     [FieldOffset(0x40B0)] public uint TransitionTerritoryTypeId;
@@ -62,6 +64,12 @@ public unsafe partial struct GameMain {
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 63 50 FE")]
     public partial void SetActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies immediately regardless of client state
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 46 0A")]
+    public static partial bool ExecuteCommand(int command, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 54 24 ?? B9")]
+    public static partial bool ExecuteLocationCommand(int command, Vector3* position, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct Festival {

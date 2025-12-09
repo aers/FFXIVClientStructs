@@ -1,5 +1,5 @@
-using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
@@ -49,7 +49,7 @@ public unsafe partial struct CharaView : ICreatable {
     public partial void Ctor();
 
     [VirtualFunction(0)]
-    public partial void Dtor(bool freeMemory);
+    public partial void Dtor(byte freeFlags);
 
     [VirtualFunction(1)]
     public partial void Initialize(AgentInterface* agent, uint clientObjectId, nint agentCallbackReady);

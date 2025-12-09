@@ -23,8 +23,10 @@ public unsafe partial struct RaptureAtkModule {
         return uiModule == null ? null : uiModule->GetRaptureAtkModule();
     }
 
-    [FieldOffset(0x82C0)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
-    [FieldOffset(0x82C2)] public ushort UISetupStage; // unsure
+    [FieldOffset(0x82C0)] public GameUIScene UIScene;
+    [FieldOffset(0x82C0), Obsolete($"Renamed to {nameof(UIScene)}")] public ushort UiMode; // 0 = In Lobby, 1 = In Game
+    [FieldOffset(0x82C2)] public GameUIMode UIMode;
+    [FieldOffset(0x82C2), Obsolete($"Renamed to {nameof(UIMode)}")] public ushort UISetupStage; // unsure
 
     [FieldOffset(0x8358)] internal Utf8String Unk8358;
     [FieldOffset(0x83C0), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;
@@ -137,6 +139,10 @@ public unsafe partial struct RaptureAtkModule {
     [VirtualFunction(63), GenerateStringOverloads]
     public partial bool OpenMapWithMapLink(CStringPointer mapLink);
 
+    // CallbackHandlerFunctions[24]
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 55 41 56 41 57 48 8B EC 48 83 EC 40 4C 8B F1")]
+    public partial AtkValue* HandleItemMove(AtkValue* returnValue, AtkValue* values, uint valueCount);
+
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.AtkUnitManager.Flags.HasFlag(AtkUnitManagerFlags.UiHidden);
         set => SetUiVisibility(value);
@@ -188,7 +194,7 @@ public unsafe partial struct RaptureAtkModule {
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct AddonFactoryInfo {
         // Create(RaptureAtkModule* thisPtr, byte* addonName, uint numValues, AtkValue* values)
-        [FieldOffset(0)] public delegate*<RaptureAtkModule*, byte*, uint, AtkValue*, nint> Create;
+        [FieldOffset(0)] public delegate* unmanaged<RaptureAtkModule*, byte*, uint, AtkValue*, nint> Create;
     }
 
     [Flags]
@@ -225,4 +231,21 @@ public unsafe partial struct RaptureAtkModule {
         Warning = 0,
         Info = 1,
     }
+}
+
+public enum GameUIScene : ushort {
+    LobbyMain = 0,
+    GameMain = 1,
+}
+
+public enum GameUIMode : ushort {
+    Normal = 0,
+    ChocoboRace = 1,
+    Lovm = 2, // Lord of Verminion
+    PvPSpectator = 3,
+    ContentsReplay = 4,
+    Emj = 5, // Doman Mahjong
+    EmjSolo = 6,
+    RideShooting = 7,
+    TripleTriad = 8,
 }

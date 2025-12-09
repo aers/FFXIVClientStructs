@@ -84,7 +84,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(74)] public partial MKDSupportJobModule* GetMKDSupportJobModule();
     [VirtualFunction(75)] public partial MKDLoreModule* GetMKDLoreModule();
     [VirtualFunction(76)] public partial MKDSupportJobNoteModule* GetMKDSupportJobNoteModule();
-    // [VirtualFunction(77)] public partial QPNL* GetQPNL();
+    [VirtualFunction(77)] public partial QuickPanelModule* GetQuickPanelModule();
     [VirtualFunction(78)] public partial UIInputData* GetUIInputData();
     [VirtualFunction(79)] public partial UIInputModule* GetUIInputModule();
     // [VirtualFunction(80)] public partial Vf79Struct* GetVf70Struct();
@@ -118,11 +118,11 @@ public unsafe partial struct UIModuleInterface {
 
     [VirtualFunction(122)] public partial void HandlePacket(UIModulePacketType type, uint uintParam, void* packet);
 
-    // TODO: Not checked after 7.3, just blindly +1'd, but all seem correct.
-
     // [VirtualFunction(123)] public partial ??? ShowContentIntroduction(???);
     // [VirtualFunction(124)] public partial ??? IsContentIntroductionInvisible(???);
     // [VirtualFunction(125)] public partial ??? HideContentIntroduction(???);
+    [VirtualFunction(128)] public partial void ChangeUIMode(GameUIMode uiMode);
+    [VirtualFunction(129)] public partial bool InContentsReplay();
     [VirtualFunction(136)] public partial void SetCursorVisibility(bool visible);
     // [VirtualFunction(137)] public partial ??? ToggleCursor(???);
     // [VirtualFunction(151)] public partial ??? ShowEventFadeIn(???);
@@ -141,7 +141,6 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(176)] public partial ??? HideHousingHarvest(???);
     [VirtualFunction(177)] public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
-    // 7.2: everything after not checked yet
     [VirtualFunction(178), GenerateStringOverloads] public partial void ShowText(int position, CStringPointer text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
     [VirtualFunction(179)] public partial void ShowTextChain(int chain, int hqChain = 0);
     [VirtualFunction(180), GenerateStringOverloads] public partial void ShowWideText(CStringPointer text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);

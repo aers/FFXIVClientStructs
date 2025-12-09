@@ -4,8 +4,10 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 
 // Client::Graphics::Kernel::ShaderPackage
 //   Client::Graphics::ReferencedClassBase
+[GenerateInterop]
+[Inherits<ReferencedClassBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x178)]
-public unsafe struct ShaderPackage {
+public unsafe partial struct ShaderPackage {
     public const ushort SamplerSlotMaterial = 2;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x8)]
@@ -30,7 +32,6 @@ public unsafe struct ShaderPackage {
         [FieldOffset(0xA)] public ushort Slot;
     }
 
-    [FieldOffset(0x00), CExporterBaseType] public ReferencedClassBase ReferencedClassBase; // TODO: Actual add as inheritance
     [FieldOffset(0x10)] public CVector<Pointer<VertexShader>> VertexShaders; // std::vector<VertexShader*>
     [FieldOffset(0x30)] public CVector<Pointer<PixelShader>> PixelShaders; // std::vector<PixelShader*>
     [FieldOffset(0x50)] public CVector<Pointer<HullShader>> HullShaders; // std::vector<HullShader*>

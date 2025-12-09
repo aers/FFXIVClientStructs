@@ -96,7 +96,7 @@ public unsafe partial struct UIModule {
     [FieldOffset(0xA2888)] internal MKDSupportJobModule MKDSupportJobModule;
     [FieldOffset(0xA28E8)] internal MKDLoreModule MKDLoreModule;
     [FieldOffset(0xA2948)] internal MKDSupportJobNoteModule MKDSupportJobNoteModule;
-    // [FieldOffset(0xA29A8)] internal nint QPNL; // QuickPanel... something - not in game yet
+    [FieldOffset(0xA29A8)] internal QuickPanelModule QuickPanelModule;
     // [FieldOffset(0xA2BF8)] internal nint Vf81Struct;
     [FieldOffset(0xA2C90)] internal ConfigModule ConfigModule;
     [FieldOffset(0xB1950)] internal RaptureShellModule RaptureShellModule;
