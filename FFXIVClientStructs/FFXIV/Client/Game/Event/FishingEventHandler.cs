@@ -134,4 +134,20 @@ public enum FishingState : int {
     /// Or air, sand, etc.; just when you are actually fishing.
     /// </remarks>
     LineInWater = 12,
+    [Obsolete("Use None", true)]
+    NotFishing = 0,
+    [Obsolete("Use CastingOut", true)]
+    PoleOut = 1,
+    [Obsolete("Use PullingPoleIn", true)]
+    PolePullIn = 2,
+    [Obsolete("Use Quitting", true)]
+    Quit = 3,
+    [Obsolete("Use Hooking", true)]
+    Reeling = 6,
+    [Obsolete("Use ConfirmingCollectable", true)]
+    Waiting = 8,
+    [Obsolete("Use AmbitiousLure", true)]
+    NormalFishing = 9,
+    [Obsolete("Use LineInWaiter", true)]
+    LureFishing = 12,
 }
