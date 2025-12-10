@@ -61,7 +61,7 @@ public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(44)]
     public partial AddonStatus GetAddonStatus(uint addonId);
 
-    [VirtualFunction(4)]
+    [VirtualFunction(45)]
     public partial bool SetAddonDepthLayer(uint addonId, uint depthLayerIndex);
 
     // Component::GUI::AtkModuleInterface::AtkEventInterface
