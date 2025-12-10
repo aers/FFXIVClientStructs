@@ -61,6 +61,9 @@ public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(44)]
     public partial AddonStatus GetAddonStatus(uint addonId);
 
+    [VirtualFunction(4)]
+    public partial bool SetAddonDepthLayer(uint addonId, uint depthLayerIndex);
+
     // Component::GUI::AtkModuleInterface::AtkEventInterface
     // no explicit constructor, just an event interface 
     [GenerateInterop(isInherited: true)]

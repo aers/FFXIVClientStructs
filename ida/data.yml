@@ -1032,7 +1032,9 @@ classes:
       39: SetUIVisibility
       40: GetSoftKeyboardDeviceInterface
       44: GetAddonStatus
+      45: SetAddonDepthLayer
       56: InitializeHud
+      72: SetScreenSizeScale
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x141FFA578
