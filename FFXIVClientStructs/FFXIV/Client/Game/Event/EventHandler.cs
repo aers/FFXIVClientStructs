@@ -346,11 +346,11 @@ public enum EventHandlerContent : ushort {
     Warp = 0x0002,
     GatheringPoint = 0x0003,
     /// <remarks> See GilShop sheet. </remarks>
-    GilShop = 0x0004,
+    Shop = 0x0004,
     Aetheryte = 0x0005,
     /// <remarks> See GuildleveAssignment sheet. </remarks>
     GuildLeveAssignment = 0x0006,
-    /// DefaultTalk sheet.
+    /// <remarks> See DefaultTalk sheet. </remarks>
     DefaultTalk = 0x0009,
     Craft = 0x000A,
     /// <remarks> See CustomTalk sheet. </remarks>
@@ -359,7 +359,7 @@ public enum EventHandlerContent : ushort {
     /// <remarks> See ArrayEventHandler sheet. </remarks>
     Array = 0x000D,
     /// <remarks> See CraftLeve sheet. </remarks>
-    CraftLeve = 0x000E,
+    CraftLeveClient = 0x000E,
     GimmickAccessor = 0x000F,
     GimmickBill = 0x0010,
     GimmickRect = 0x0011,
@@ -375,7 +375,7 @@ public enum EventHandlerContent : ushort {
     GuildOrderGuide = 0x0017,
     /// <remarks> See GuildOrderOfficer sheet. </remarks>
     GuildOrderOfficer = 0x0018,
-    /// <remarks> see ContentNpc sheet. </remarks>
+    /// <remarks> See ContentNpc sheet. </remarks>
     ContentNpc = 0x0019,
     /// <remarks> See Story sheet. </remarks>
     Story = 0x001A,
@@ -412,13 +412,13 @@ public enum EventHandlerContent : ushort {
     /// <remarks> Used for Verminion Tables and Tournament Recordkeeper. </remarks>
     Verminion = 0x002D,
     SkyIslandEntrance = 0x002E,
-    /// <remarks> See DpsChallengeOfficer sheet. </remarks>
+    /// <remarks> Used for Stone, Sky, Sea. See DpsChallengeOfficer sheet. </remarks>
     DpsChallengeOfficer = 0x002F,
     BeginnerTrainingOfficer = 0x0030,
     RetainerBuyback = 0x0031,
     /// <remarks> See TopicSelect sheet. </remarks>
     TopicSelect = 0x0032,
-    /// <remarks> see LotteryExchangeShop sheet. </remarks>
+    /// <remarks> See LotteryExchangeShop sheet. </remarks>
     LotteryExchangeShop = 0x0034,
     /// <remarks> See DisposalShop sheet. </remarks>
     DisposalShop = 0x0035,
@@ -428,17 +428,17 @@ public enum EventHandlerContent : ushort {
     Description = 0x0037,
     /// <remarks> Used for Ishgardian Restoration (Firmament / Heavensward Development?!) </remarks>
     HwdDev = 0x0038,
-    /// <remarks> Used for Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002) </remarks>
+    /// <remarks> Used for Desynthesis (0x390000), Materia Extraction (0x390001), Aetherial Reduction (0x390002). </remarks>
     Materialize = 0x0039,
     /// <remarks> See InclusionShop sheet. </remarks>
     InclusionShop = 0x003A,
-    /// <remarks> see CollectablesShop sheet. </remarks>
+    /// <remarks> See CollectablesShop sheet. </remarks>
     CollectablesShop = 0x003B,
     /// <remarks> Used for Island Sanctuary Pasture. </remarks>
     MJIPasture = 0x003C,
     /// <remarks> Used for Argos in Mare Lamentorum. See EventPathMove sheet. </remarks>
     EventPathMove = 0x003D,
-    /// <remarks> Used for Island Sanctuary Cropland, see ReactionEventObject. </remarks>
+    /// <remarks> Used for Island Sanctuary Cropland. See ReactionEventObject sheet. </remarks>
     ReactionEvent = 0x003E,
     /// <remarks> Used for the teleporters in Solution None. See EventGimmickPathMove sheet. </remarks>
     EventGimmickPathMove = 0x0040,
