@@ -2021,6 +2021,7 @@ classes:
       0x141864280: GetInstance
       0x1418642B0: Initialize
       0x141864370: Finalizer
+      0x141864590: IsQuestRecompleteComplete
   Client::Game::QuestRedoManager: # New Game+
     instances:
       - ea: 0x142961340
@@ -2965,6 +2966,7 @@ classes:
         base: Client::Game::UI::ScenarioTextReader
     funcs:
       0x140354E20: ctor
+      0x140A06B40: AbandonQuest
       0x140A07BC0: IsQuestAccepted
   Client::Game::UI::QuestUI:
     instances:
