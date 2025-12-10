@@ -15147,7 +15147,7 @@ classes:
     vtbls:
       - ea: 0x1422410C8
         base: Client::Game::Event::EventHandler
-  Client::Game::Event::TripleTriadCompetitionEventHandler: # 0x37
+  Client::Game::Event::DescriptionEventHandler: # 0x37
     vtbls:
       - ea: 0x142246FC8
         base: Client::Game::Event::EventHandler
@@ -15194,6 +15194,14 @@ classes:
   Client::Game::Event::EventPathMoveEventHandler: # 0x3D
     vtbls:
       - ea: 0x1422CEF10
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::EventGimmickPathMoveHandler: # 0x40
+    vtbls:
+      - ea: 0x1422CDB50
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::EventMountGimmickPathMoveHandler: # 0x41
+    vtbls:
+      - ea: 0x1422CE530
         base: Client::Game::Event::EventHandler
   Client::Game::Event::GroupPoseEventHandler:
     vtbls:
