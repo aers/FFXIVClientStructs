@@ -8,33 +8,32 @@ internal static class Program {
 
         var nameSpace = "FFXIVClientStructs.FFXIV.Component.Exd.Sheets";
 
-        if (!Directory.Exists(gamePath))
-            throw new DirectoryNotFoundException("GamePath not Found.");
-
         if (string.IsNullOrWhiteSpace(schemaPath)) {
-            using var update = new Updater(gamePath, "Definitions");
-            schemaPath = update.TryUpdate();
+            schemaPath = Updater.TryUpdate("Definitions");
             if (schemaPath == null) {
                 Console.WriteLine("Update Failed. Using Existing Schema...");
-                schemaPath = update.GetLatesLocalDirectory();
+                schemaPath = Path.Combine("Definitions", "EXDSchema-latest");
             }
         }
 
-        if (string.IsNullOrWhiteSpace(schemaPath))
+        if (string.IsNullOrWhiteSpace(schemaPath) || !Directory.Exists(schemaPath))
             throw new DirectoryNotFoundException("No Schema Directory Available");
 
         Console.WriteLine($"Using Schema in: {schemaPath}");
 
-        using var generator = new Generator(Path.Combine(gamePath, "game", "sqpack"));
+        var gameDataPath = (string.IsNullOrEmpty(gamePath) || !Directory.Exists(gamePath)) ? null : Path.Combine(gamePath, "game", "sqpack");
 
-        foreach (var path in Directory.EnumerateFiles(schemaPath, "*.yml")) {
+        Console.WriteLine($"Using Column Data from: {gameDataPath ?? schemaPath}");
+
+        using var generator = new Generator(gameDataPath, schemaPath);
+
+        foreach (var path in Directory.EnumerateFiles(schemaPath, "*.yml", SearchOption.TopDirectoryOnly)) {
             var sheetName = Path.GetFileNameWithoutExtension(path);
-            var structName = sheetName;
-            var outputFile = Path.Combine(outputPath, $"{structName}.cs");
+            var outputFile = Path.Combine(outputPath, $"{sheetName}.cs");
 
             Console.WriteLine($"Processing: {sheetName,-30} -> {outputFile}");
 
-            var source = generator.ProcessDefinition(path, sheetName, structName, nameSpace);
+            var source = generator.ProcessDefinition(path, sheetName, sheetName, nameSpace);
 
             if (string.IsNullOrWhiteSpace(source)) {
                 Console.WriteLine($" -> Failed to Generate Source for '{sheetName} ({path})'");

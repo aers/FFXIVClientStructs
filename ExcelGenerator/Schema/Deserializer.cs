@@ -1,18 +1,36 @@
 using ExcelGenerator.Schema.ExdSchema;
+using Lumina.Data.Structs.Excel;
 using YamlDotNet.Serialization;
 
 namespace ExcelGenerator.Schema;
 
 public class Deserializer {
-    private readonly IDeserializer _yamlDeserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
+    private readonly IDeserializer _yamlDeserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().WithCaseInsensitivePropertyMatching().Build();
 
-    public Sheet Deserialize(string filePath) {
+    public Dictionary<string, List<ExcelColumnDefinition>> DeserializeColumns(string filePath) {
         if (filePath.EndsWith(".yml", StringComparison.OrdinalIgnoreCase))
-            return DeserializeYaml(File.ReadAllText(filePath));
+            return DeserializeColumnYml(File.ReadAllText(filePath));
         throw new ArgumentException($"Unsupported file: {filePath}", nameof(filePath));
     }
 
-    private Sheet DeserializeYaml(string yamlString) {
+    private Dictionary<string, List<ExcelColumnDefinition>> DeserializeColumnYml(string yamlString) {
+        var data = _yamlDeserializer.Deserialize<Dictionary<string, List<ExcelColumnDefinition>>>(yamlString);
+        var subKeys = data.Keys.Where(k => k.Contains('@')).ToList();
+        foreach (var subKey in subKeys) {
+            var key = subKey.Split('@').First().Trim();
+            data.Add(key, data[subKey]);
+            data.Remove(subKey);
+        }
+        return data;
+    }
+
+    public Sheet DeserializeSheet(string filePath) {
+        if (filePath.EndsWith(".yml", StringComparison.OrdinalIgnoreCase))
+            return DeserializeSheetYml(File.ReadAllText(filePath));
+        throw new ArgumentException($"Unsupported file: {filePath}", nameof(filePath));
+    }
+
+    private Sheet DeserializeSheetYml(string yamlString) {
         var input = _yamlDeserializer.Deserialize<YamlSheet>(yamlString);
         var sheet = new Sheet(input.Name);
         foreach (var field in input.Fields) {
