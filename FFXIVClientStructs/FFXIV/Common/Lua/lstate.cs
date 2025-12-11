@@ -79,7 +79,7 @@ public unsafe partial struct lua_State {
     public partial LuaType lua_type(int idx);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 ?? 83 CA"), GenerateStringOverloads]
-    public partial int lua_getinfo(CStringPointer what, lua_Debug *ar);
+    public partial int lua_getinfo(CStringPointer what, lua_Debug* ar);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B D3")]
     public partial TValue* index2adr(int idx);
