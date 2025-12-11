@@ -133,4 +133,27 @@ public unsafe partial struct CharaViewPortrait {
 
     [MemberFunction("E8 ?? ?? ?? ?? B2 ?? 48 8B CE E8 ?? ?? ?? ?? 32 C0")]
     public partial void ToggleAnimationPlayback(bool paused);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B D8 A8 ?? 74 ?? 49 8B 4C 24")]
+    public partial PortraitError GetPortraitError();
+
+    [Flags]
+    public enum PortraitError {
+        None = 0,
+
+        /// <remarks> LogMessage#5861: "Unable to save portrait. Character's expression is not in frame." </remarks>
+        ExpressionNotInFrame = 1 << 0,
+
+        /// <remarks> LogMessage#5871: "Unable to save. The camera is too close to the character." </remarks>
+        CameraTooClose = 1 << 1,
+
+        /// <remarks> LogMessage#5872: "Unable to save. The  is too far from the character." </remarks>
+        CameraTooFar = 1 << 2,
+
+        /// <remarks> LogMessage#5850: "Unable to save portrait. Character is not in frame." </remarks>
+        CharacterNotInFrame = 1 << 3,
+
+        /// <remarks> LogMessage#5882: "Unable to save portrait. A weapon or accessory is interfering with the camera." </remarks>
+        Obstructed = 1 << 4,
+    }
 }

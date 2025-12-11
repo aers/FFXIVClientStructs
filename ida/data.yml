@@ -10006,6 +10006,7 @@ classes:
       0x140991E60: ToggleCharacterVisibility
       0x1409921D0: ApplyCameraPositions
       0x140992520: SetCameraPosition
+      0x1409919F0: GetPortraitError
   Client::System::Configuration::CharamakeAvatarSaveDataContainer::ContainerInterface:
     vtbls:
       - ea: 0x142058028
