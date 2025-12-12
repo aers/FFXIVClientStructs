@@ -33,7 +33,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(23)] public partial FlagStatusModule* GetFlagStatusModule();
     [VirtualFunction(24)] public partial RecipeFavoriteModule* GetRecipeFavoriteModule();
     [VirtualFunction(25)] public partial CraftModule* GetCraftModule();
-    [VirtualFunction(26)] public partial RaptureUiDataModule* GetRaptureUiDataModule();
+    [VirtualFunction(26)] public partial UiDataModule* GetUiDataModule();
     [VirtualFunction(27)] public partial DataCenterHelper* GetDataCenterHelper();
     [VirtualFunction(28)] public partial WorldHelper* GetWorldHelper();
     [VirtualFunction(29)] public partial GoldSaucerModule* GetGoldSaucerModule();

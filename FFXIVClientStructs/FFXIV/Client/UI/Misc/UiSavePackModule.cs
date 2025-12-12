@@ -24,7 +24,7 @@ public enum DataSegment : byte {
     RETTASK = 0x01, // RetainerTaskData
     FLAGS = 0x02, // FlagStatus
     RCFAV = 0x03, // RecipeFavorite
-    UIDATA = 0x04, // RaptureUiData
+    UIDATA = 0x04, // UiData
     TLPH = 0x05, // RaptureTeleportHistory
     ITCC = 0x06, // ItemContextCustomize
     PVPSET = 0x07, // PvpSet
