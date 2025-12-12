@@ -130,15 +130,6 @@ public unsafe partial struct RaptureAtkModule {
 
     public void OpenSatisfactionSupply(uint satisfactionNPC) => OpenSatisfactionSupply(nint.Zero, satisfactionNPC, true);
 
-    [VirtualFunction(39)]
-    public partial void SetUiVisibility(bool uiVisible);
-
-    [VirtualFunction(58)]
-    public partial void Update(float delta);
-
-    [VirtualFunction(63), GenerateStringOverloads]
-    public partial bool OpenMapWithMapLink(CStringPointer mapLink);
-
     // CallbackHandlerFunctions[24]
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 55 41 56 41 57 48 8B EC 48 83 EC 40 4C 8B F1")]
     public partial AtkValue* HandleItemMove(AtkValue* returnValue, AtkValue* values, uint valueCount);

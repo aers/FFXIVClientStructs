@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using TextServiceEvent = FFXIVClientStructs.FFXIV.Client.System.Input.TextServiceInterface.TextServiceEvent;
+using static FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitManager;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -57,6 +58,18 @@ public unsafe partial struct AtkModule {
 
     [FieldOffset(0x8298)] public bool EnableUiInput;
     [FieldOffset(0x8299)] public bool IsHudInitialized;
+
+    [VirtualFunction(44)]
+    public partial AddonStatus GetAddonStatus(uint addonId);
+
+    [VirtualFunction(45)]
+    public partial bool SetAddonDepthLayer(uint addonId, uint depthLayerIndex);
+
+    [VirtualFunction(58)]
+    public partial void Update(float delta);
+
+    [VirtualFunction(63), GenerateStringOverloads]
+    public partial bool OpenMapWithMapLink(CStringPointer mapLink);
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 44 24 ?? 8B D3")]
     public partial bool IsTextInputActive();
