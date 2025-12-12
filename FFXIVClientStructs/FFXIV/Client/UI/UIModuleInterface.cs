@@ -37,7 +37,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(27)] public partial DataCenterHelper* GetDataCenterHelper();
     [VirtualFunction(28)] public partial WorldHelper* GetWorldHelper();
     [VirtualFunction(29)] public partial GoldSaucerModule* GetGoldSaucerModule();
-    [VirtualFunction(30)] public partial RaptureTeleportHistory* GetRaptureTeleportHistory();
+    [VirtualFunction(30)] public partial TeleportHistoryModule* GetTeleportHistoryModule();
     [VirtualFunction(31)] public partial ItemContextCustomizeModule* GetItemContextCustomizeModule();
     [VirtualFunction(32)] public partial RecommendEquipModule* GetRecommendEquipModule();
     [VirtualFunction(33)] public partial PvpSetModule* GetPvpSetModule();
