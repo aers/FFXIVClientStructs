@@ -1031,10 +1031,6 @@ classes:
       36: SetAtkHistory
       39: SetUIVisibility
       40: GetSoftKeyboardDeviceInterface
-      44: GetAddonStatus
-      45: SetAddonDepthLayer
-      56: InitializeHud
-      72: SetScreenSizeScale
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x141FFA578
@@ -7946,10 +7942,14 @@ classes:
       - ea: 0x142042590
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
+      44: GetAddonStatus
+      45: SetAddonDepthLayer
+      56: InitializeHud
       58: Update
       60: IsUISceneGameMain
       61: GetColorThemeTypeForUIScene
       63: OpenMapWithMapLink
+      72: SetScreenSizeScale
     funcs:
       0x140678CA0: GetAddonIdByName
       0x14067AB60: ctor
