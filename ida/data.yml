@@ -8613,7 +8613,7 @@ classes:
     funcs:
       0x14073DDB0: ctor # unused, inlined @ 0x14075CD19
       0x14073EC60: GetKeybindByName
-  Client::UI::Misc::RaptureUiDataModule:
+  Client::UI::Misc::UiDataModule:
     vtbls:
       - ea: 0x142051468
         base: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -8621,7 +8621,7 @@ classes:
       0x14075AC00: Finalizer
       0x1407C3C30: ctor
       0x1407DD820: MjiCreateWorkshopPreset
-  Client::UI::Misc::RaptureUiDataModule::MuteList:
+  Client::UI::Misc::UiDataModule::MuteList:
     funcs:
       0x1407C83E0: GetByAccountId
       0x1407C8410: Add # creates an entry by accountId, name, worldId and adds it to the vector
@@ -8700,7 +8700,7 @@ classes:
       23: GetFlagStatusModule
       24: GetRecipeFavoriteModule
       25: GetCraftModule
-      26: GetRaptureUiDataModule
+      26: GetUiDataModule
       27: GetDataCenterHelper
       28: GetWorldHelper
       29: GetGoldSaucerModule
