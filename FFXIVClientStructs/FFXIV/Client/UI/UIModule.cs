@@ -51,11 +51,11 @@ public unsafe partial struct UIModule {
     [FieldOffset(0x91298)] internal FlagStatusModule FlagStatusModule;
     [FieldOffset(0x91548)] internal RecipeFavoriteModule RecipeFavoriteModule;
     [FieldOffset(0x916D8)] internal CraftModule CraftModule;
-    [FieldOffset(0x91738)] internal RaptureUiDataModule RaptureUiDataModule;
+    [FieldOffset(0x91738)] internal UiDataModule UiDataModule;
     [FieldOffset(0x95010)] internal DataCenterHelper DataCenterHelper;
     [FieldOffset(0x95030)] internal WorldHelper WorldHelper;
     [FieldOffset(0x95070)] internal GoldSaucerModule GoldSaucerModule;
-    [FieldOffset(0x95340)] internal RaptureTeleportHistory RaptureTeleportHistory;
+    [FieldOffset(0x95340)] internal TeleportHistoryModule TeleportHistoryModule;
     [FieldOffset(0x95408)] internal ItemContextCustomizeModule ItemContextCustomizeModule;
     [FieldOffset(0x955A0)] internal RecommendEquipModule RecommendEquipModule;
     [FieldOffset(0x95620)] internal PvpSetModule PvpSetModule;
