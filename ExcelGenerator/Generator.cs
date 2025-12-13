@@ -2,6 +2,7 @@ using System.Text;
 using ExcelGenerator.CodeGen;
 using ExcelGenerator.Schema;
 using Lumina;
+using Lumina.Data.Files.Excel;
 using Lumina.Data.Structs.Excel;
 
 namespace ExcelGenerator;
@@ -34,8 +35,8 @@ public sealed class Generator(string gamePath) : IDisposable {
             return string.Empty;
         }
 
-        var sheet = _gameData.Excel.GetSheetRaw(name);
-        if (sheet == null) {
+        var exh = _gameData.GetFile<ExcelHeaderFile>($"exd/{name}.exh");
+        if (exh == null) {
             Console.WriteLine($" - sheet {name} no longer exists!");
             return string.Empty;
         }
@@ -47,7 +48,7 @@ public sealed class Generator(string gamePath) : IDisposable {
         builder.AppendLine($"namespace {nameSpace};");
         builder.AppendLine();
 
-        var columns = sheet.Columns.ToList();
+        var columns = exh.ColumnDefinitions.ToList();
         columns.Sort((c1, c2) => Util.CalculateBitOffset(c1).CompareTo(Util.CalculateBitOffset(c2)));
 
         var generators = new List<BaseGenerator>();

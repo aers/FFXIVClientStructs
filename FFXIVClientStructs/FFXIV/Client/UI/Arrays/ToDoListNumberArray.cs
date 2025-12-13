@@ -80,8 +80,8 @@ public unsafe partial struct ToDoListNumberArray {
     [FieldOffset(167 * 4), Obsolete($"Renamed to {nameof(DutyCompletedObjectives)}")] public int CurrentDutyObjective;
     // bitfields, bit index is objective index
     [FieldOffset(167 * 4)] public uint DutyCompletedObjectives;
-    [FieldOffset(168 * 4)] public int ObjectiveFocusable; // TODO: change type to uint
-    [FieldOffset(169 * 4)] public int DutyTitleFocusable; // TODO: change type to uint
+    [FieldOffset(168 * 4)] public uint ObjectiveFocusable;
+    [FieldOffset(169 * 4)] public uint DutyTitleFocusable;
 
     // 170 - Related to MassivePcContent, displays a duty header section but is unstable when used
 

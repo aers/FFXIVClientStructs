@@ -13,7 +13,7 @@ public unsafe partial struct MacroDecoder {
 
 //
 // GlobalParameters
-// Note that the StdDeque (and this list) is zero-based, so you need to subtract 1 from gnum/gstr.
+// NB that the StdDeque (and this list) is zero-based, so you need to subtract 1 from gnum/gstr.
 //
 // |-------|----------------------|----------------------------------------------------|
 // | Index | Type                 | Label                                              |

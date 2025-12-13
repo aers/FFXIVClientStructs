@@ -11,13 +11,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 /// The functions in this class are not intended by SE to be used directly and do not have proper checks for correct values.
 /// </summary>
 [GenerateInterop]
-[Inherits<ResourceEventListener>]
+[Inherits<ResourceEventListener>, Inherits<Thread>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1D08)]
 public unsafe partial struct SoundManager {
     [StaticAddress("48 89 35 ?? ?? ?? ?? 48 83 C4 20", 3, isPointer: true)]
     public static partial SoundManager* Instance();
 
-    [FieldOffset(0x0008)] public Thread Thread; // TODO: make Thread properly inheritable
     [FieldOffset(0x0031)] public bool Disabled;
     [FieldOffset(0x0034)] public float MasterVolume;
     [FieldOffset(0x0038)] public float ActiveVolume;
@@ -35,7 +34,7 @@ public unsafe partial struct SoundManager {
 
     [FieldOffset(0x02A0)] public nint CriticalSection;
 
-    [FieldOffset(0x02C8)] public nint EventHandle;
+    [FieldOffset(0x02C8)] public nint EventHandle2;
 
     /// <summary>
     /// Calculates effective volume
