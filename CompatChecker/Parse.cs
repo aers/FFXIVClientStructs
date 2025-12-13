@@ -79,7 +79,7 @@ internal class Parse {
 
     public static ChangeType ParseMember(Code code, Type type, string change, string message) {
         var count = change.IndexOf('(');
-        if (change.Split(' ')[1] == "operator") {
+        if (change.Split(' ').Length > 1 && change.Split(' ')[1] == "operator") {
             return new ChangeType(code, type, new Change("operator", GetOperatorLocation(change)), message);
         }
         var lastSpace = count == -1 ? change.LastIndexOf(' ') : change[..count].LastIndexOf(' ');
