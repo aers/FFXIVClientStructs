@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using FFXIVClientStructs.Attributes;
+using FFXIVClientStructs.FFXIV.Common.Lua;
 using InteropGenerator.Runtime.Attributes;
 using Pastel;
 using YamlDotNet.Core;
@@ -113,6 +115,7 @@ public class Exporter {
         if (!quiet) Console.WriteLine("::group::Processed Struct Static Members");
         var typeAndMembers = types.Select(t => (t, t.GetMethods(ExporterStatics.StaticBindingFlags))).ToArray();
         foreach (var (type, methods) in typeAndMembers) {
+            if (type == typeof(lua_State)) Debugger.Break();
             if (!quiet) Console.WriteLine($"Processing {type} with {methods.Length} methods");
             var sanitizedName = type.FullSanitizeName();
             var currentStructIndex = _structs.FindIndex(s => s.StructTypeName == sanitizedName);
@@ -529,13 +532,18 @@ public class Exporter {
 
             var memberFunctionClass = type.GetMember("MemberFunctionPointers", ExporterStatics.BindingFlags).FirstOrDefault()?.DeclaringType;
             ProcessedMemberFunction[] memberFunctionsArray = [];
+            //if (type == typeof(lua_State)) Debugger.Break();
             if (memberFunctionClass != null) {
                 var memberFunctions = memberFunctionClass.GetMethods(ExporterStatics.BindingFlags).Where(t => t.GetCustomAttribute<ObsoleteAttribute>() == null && t.GetCustomAttribute<CExporterIgnoreAttribute>() == null).ToArray();
                 foreach (var memberFunction in memberFunctions) {
                     var memberFunctionAddress = memberFunction.GetCustomAttribute<MemberFunctionAttribute>();
                     if (memberFunctionAddress == null) continue;
                     var memberFunctionParameters = memberFunction.GetParameters();
-                    var memberFunctionReturnType = new ProcessedMemberFunctionReturn(memberFunction.ReturnType, null);
+                    string? memberFunctionOverrideType = null;
+                    if(memberFunction.ReturnType.IsFunctionPointer) {
+                        memberFunctionOverrideType = "__int64";
+                    }
+                    var memberFunctionReturnType = new ProcessedMemberFunctionReturn(memberFunction.ReturnType, memberFunctionOverrideType);
                     if (memberFunction.GetCustomAttribute<CExporterExcelAttribute>() is not { } excelAttribute)
                         _processType.Add(memberFunctionReturnType.Type);
                     else
