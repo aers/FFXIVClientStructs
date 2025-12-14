@@ -26,7 +26,7 @@ public unsafe partial struct EventFramework {
 
     [FieldOffset(0x3C80)] public EventState EventState1;
     [FieldOffset(0x3CE0)] public EventState EventState2;
-    // Written by HandleInitializeScenePacket
+    // Written by ProcessEventPlay
     [FieldOffset(0x3D10)] public GameObjectId SceneGameObjectId;
     [FieldOffset(0x3D18)] public short Scene;
     [FieldOffset(0x3D20)] public ushort SceneFlags;
