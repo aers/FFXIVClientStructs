@@ -2,7 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Scheduler.Base;
 
 namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Clip;
 
-// Client::System::Scheduler::Base::BaseClip
+// Client::System::Scheduler::Clip::BaseClip
 //   Client::System::Scheduler::Base::SchedulerState
 //   Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Base::BaseClip>
 [GenerateInterop(isInherited: true)]

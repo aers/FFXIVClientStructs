@@ -6265,7 +6265,6 @@ classes:
     vfuncs:
       5: UpdateConstantBuffer
     funcs:
-      0x141B23D30: LoadMatrix
       0x140244A00: SetMatrices
       0x140250720: MakeProjectionMatrix # unused, inlined in 7.0 around 14042EA2D (approx)
   Client::Graphics::Render::ShadowCamera:
@@ -8332,6 +8331,9 @@ classes:
     vtbls:
       - ea: 0x142044970
         base: Client::System::Common::NonCopyable
+    funcs:
+      0x1406C7F10: ApplyTransforms
+      0x1406C8310: SetCollidersActive
   Client::LayoutEngine::Node::ChildNodeInstance:
     vtbls:
       - ea: 0x142044978
@@ -8339,6 +8341,8 @@ classes:
   Client::LayoutEngine::Group::TimeLineContainer:
     vtbls:
       - ea: 0x142044980
+    funcs:
+      0x1406C87E0: FindInstanceBySubId
   Client::LayoutEngine::Housing::HousingEventListener:
     vtbls:
       - ea: 0x142044FD8
@@ -8445,10 +8449,6 @@ classes:
     funcs:
       0x1406D39C0: InitAnimationHandlers
       0x1406D33A0: InitTimelines
-  Client::LayoutEngine::Group::SharedGroupLayoutInstance::InstanceList:
-    funcs:
-      0x1406C7F10: ApplyTransforms
-      0x1406C8310: SetCollidersActive
   Client::LayoutEngine::Layer::TreasureLayoutInstance:
     vtbls:
       - ea: 0x1420463B0
@@ -23102,6 +23102,8 @@ classes:
     vtbls:
       - ea: 0x14215DFC8
         base: Client::Game::Object::GameObject
+    funcs:
+      0x1416379F0: PlayAnimation
   Client::Game::Object::Treasure:
     vtbls:
       - ea: 0x14215E230
@@ -23603,7 +23605,7 @@ classes:
     vtbls:
       - ea: 0x1422E4470
         base: Client::System::Scheduler::SchedulerInstanceObject
-  Client::System::Scheduler::Instance::LayoutObjectBase:
+  Client::System::Scheduler::Instance::LayoutReferenceObject:
     vtbls:
       - ea: 0x1422EAA20
         base: Client::System::Scheduler::SchedulerInstanceObject
@@ -23614,16 +23616,16 @@ classes:
       50: GetParentInstance2
     funcs:
       0x141B234E0: ctorId
-  Client::System::Scheduler::Instance::LayoutObjectGroup:
+  Client::System::Scheduler::Instance::LayoutSharedGroupObject:
     vtbls:
       - ea: 0x1421D0E80
-        base: Client::System::Scheduler::Instance::LayoutObjectBase
+        base: Client::System::Scheduler::Instance::LayoutReferenceObject
     funcs:
       0x141889E10: ctorPrefab
-  Client::System::Scheduler::Instance::LayoutObjectSingle:
+  Client::System::Scheduler::Instance::LayoutMemberObject:
     vtbls:
       - ea: 0x1422E4E88
-        base: Client::System::Scheduler::Instance::LayoutObjectBase
+        base: Client::System::Scheduler::Instance::LayoutReferenceObject
     funcs:
       0x141ACEEE0: ctorId
       0x141ACEF20: ctorPrefab

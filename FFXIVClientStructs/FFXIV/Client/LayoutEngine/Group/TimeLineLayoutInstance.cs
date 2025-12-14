@@ -11,5 +11,5 @@ public unsafe partial struct TimeLineLayoutInstance {
     [FieldOffset(0x38)] public SharedGroupLayoutInstance* Parent;
     [FieldOffset(0x40)] public uint PathCrc;
     [FieldOffset(0x48)] public FileSceneTimeline* DataPtr;
-    [FieldOffset(0x50)] public LayoutObjectBase* TimelineObject;
+    [FieldOffset(0x50)] public LayoutReferenceObject* TimelineObject;
 }
