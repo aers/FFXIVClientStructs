@@ -540,7 +540,7 @@ public class Exporter {
                     if (memberFunctionAddress == null) continue;
                     var memberFunctionParameters = memberFunction.GetParameters();
                     string? memberFunctionOverrideType = null;
-                    if(memberFunction.ReturnType.IsFunctionPointer) {
+                    if (memberFunction.ReturnType.IsFunctionPointer) {
                         memberFunctionOverrideType = "__int64";
                     }
                     var memberFunctionReturnType = new ProcessedMemberFunctionReturn(memberFunction.ReturnType, memberFunctionOverrideType);
