@@ -53,6 +53,9 @@ internal class Parse {
             @class = location[location.IndexOf('.')..];
             return new Location(@namespace.Trim('.').Replace(",", ", "), @class.Trim('.').Replace(",", ", "));
         }
+        if (count == -1 && location.LastIndexOf('.') == -1) {
+            return new Location("", location);
+        }
         var field = count == -1 ? location[location.LastIndexOf('.')..] : location[location[..count].LastIndexOf('.')..];
         @namespace = count == -1 ? location[..location.LastIndexOf('.')] : location[..location[..count].LastIndexOf('.')];
         @class = @namespace[@namespace.LastIndexOf('.')..];
@@ -76,7 +79,7 @@ internal class Parse {
 
     public static ChangeType ParseMember(Code code, Type type, string change, string message) {
         var count = change.IndexOf('(');
-        if (change.Split(' ')[1] == "operator") {
+        if (change.Split(' ').Length > 1 && change.Split(' ')[1] == "operator") {
             return new ChangeType(code, type, new Change("operator", GetOperatorLocation(change)), message);
         }
         var lastSpace = count == -1 ? change.LastIndexOf(' ') : change[..count].LastIndexOf(' ');
@@ -137,7 +140,7 @@ public record Change(string? Type, Location? Main = null, Location? Parent = nul
 }
 
 public record Location(string Namespace, string Class, string? Member = null) {
-    public override string ToString() => !string.IsNullOrWhiteSpace(Member) ? Member.Pastel(Color.SkyBlue) : $"{Namespace}.{Class}".Pastel(Color.SkyBlue);
+    public override string ToString() => !string.IsNullOrWhiteSpace(Member) ? Member.Pastel(Color.SkyBlue) : !string.IsNullOrWhiteSpace(Namespace) ? $"{Namespace}.{Class}".Pastel(Color.SkyBlue) : $"{Class}".Pastel(Color.SkyBlue);
     public bool IsCompat() => !Namespace.Contains("FFXIVClientStructs.Interop") &&
                               Class != "Addresses" &&
                               Class != "MemberFunctionPointers" &&

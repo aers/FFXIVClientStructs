@@ -1,3 +1,6 @@
+using FFXIVClientStructs.FFXIV.Client.LayoutEngine.Group;
+using FFXIVClientStructs.FFXIV.Client.System.Scheduler.Instance;
+
 namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine.Layer;
 
 // Client::LayoutEngine::Layer::LayerManager
@@ -17,4 +20,7 @@ public unsafe partial struct LayerManager {
     //[FieldOffset(0x1F)] public byte u1F;
     //[FieldOffset(0x20)] public ushort u20;
     [FieldOffset(0x28)] public StdMap<uint, Pointer<ILayoutInstance>> Instances;
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 94 24 ?? ?? ?? ?? 48 89 84 24 ?? ?? ?? ?? 4C 8B E8")]
+    public partial TimeLineLayoutInstance* CreateTimelineInstance(SharedGroupLayoutInstance* group, int instanceKey, int subId, byte a5, byte a6, FileSceneTimeline* fileData, LayoutSharedGroupObject* timelineObj);
 }
