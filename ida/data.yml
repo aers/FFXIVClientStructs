@@ -6305,7 +6305,6 @@ classes:
     vfuncs:
       5: UpdateConstantBuffer
     funcs:
-      0x141B23D30: LoadMatrix
       0x140244A00: SetMatrices
       0x140250720: MakeProjectionMatrix # unused, inlined in 7.0 around 14042EA2D (approx)
   Client::Graphics::Render::ShadowCamera:
@@ -8354,6 +8353,8 @@ classes:
     vtbls:
       - ea: 0x142044FB0
         base: Client::LayoutEngine::IManagerBase
+    funcs:
+      0x140702690: CreateTimelineInstance
   Client::LayoutEngine::Terrain::TerrainManager:
     vtbls:
       - ea: 0x142044F88
@@ -8370,6 +8371,9 @@ classes:
     vtbls:
       - ea: 0x142044970
         base: Client::System::Common::NonCopyable
+    funcs:
+      0x1406C7F10: ApplyTransforms
+      0x1406C8310: SetCollidersActive
   Client::LayoutEngine::Node::ChildNodeInstance:
     vtbls:
       - ea: 0x142044978
@@ -8377,6 +8381,8 @@ classes:
   Client::LayoutEngine::Group::TimeLineContainer:
     vtbls:
       - ea: 0x142044980
+    funcs:
+      0x1406C87E0: FindInstanceBySubId
   Client::LayoutEngine::Housing::HousingEventListener:
     vtbls:
       - ea: 0x142044FD8
@@ -8480,6 +8486,9 @@ classes:
         base: Client::LayoutEngine::ILayoutInstance
       - ea: 0x142044EF0
         base: Client::System::Resource::ResourceEventListener
+    funcs:
+      0x1406D39C0: InitAnimationHandlers
+      0x1406D33A0: InitTimelines
   Client::LayoutEngine::Layer::TreasureLayoutInstance:
     vtbls:
       - ea: 0x1420463B0
@@ -8576,6 +8585,41 @@ classes:
     vtbls:
       - ea: 0x14204C3E8
         base: Client::LayoutEngine::ILayoutInstance
+  Client::LayoutEngine::Group::SGActionController:
+    vtbls:
+      - ea: 0x142044988
+    vfuncs:
+      0: Dtor
+      1: GetSize
+      10: Initialize
+      11: Tick
+    funcs:
+      0x1406C8910: SetTranslation
+      0x1406C8A40: SetRotation
+      0x1406C8B70: SetScale
+      0x1406C8CA0: SetTransform
+  Client::LayoutEngine::Group::SGDoorActionController:
+    vtbls:
+      - ea: 0x14204D358
+        base: Client::LayoutEngine::Group::SGActionController
+  Client::LayoutEngine::Group::SGRotationActionController:
+    vtbls:
+      - ea: 0x14204D3B8
+        base: Client::LayoutEngine::Group::SGActionController
+  Client::LayoutEngine::Group::SGClockActionController:
+    vtbls:
+      - ea: 0x14204D478
+        base: Client::LayoutEngine::Group::SGActionController
+  Client::LayoutEngine::Group::SGTransformActionController:
+    vtbls:
+      - ea: 0x14204D4D8
+        base: Client::LayoutEngine::Group::SGActionController
+    funcs:
+      0x140725CC0: LoadFromFile
+  Client::LayoutEngine::Group::SGMovePathActionController:
+    vtbls:
+      - ea: 0x14204D538
+        base: Client::LayoutEngine::Group::SGActionController
   Client::UI::Misc::UserFileManager::UserFileEvent:
     vtbls:
       - ea: 0x142050A70
@@ -23114,6 +23158,8 @@ classes:
     vtbls:
       - ea: 0x14215DFC8
         base: Client::Game::Object::GameObject
+    funcs:
+      0x1416379F0: PlayAnimation
   Client::Game::Object::Treasure:
     vtbls:
       - ea: 0x14215E230
@@ -23342,6 +23388,8 @@ classes:
   Client::System::Scheduler::Base::SchedulerState:
     vtbls:
       - ea: 0x142185918
+    vfuncs:
+      0: Dtor
   Client::Graphics::Physics::BoneSimulator:
     vtbls:
       - ea: 0x1421CC010
@@ -23532,6 +23580,12 @@ classes:
       0x1417B5B20: CreateInstance
       #0x1417633F0: ctor # inlined in CreateInstance
       0x1417B62F0: PreloadActionTmb
+      0x1417B80D0: AddLayoutTimelineObject
+      0x1417BA1D0: InsertTimelineGroup
+  Client::System::Scheduler::ActionTimelineThread:
+    vtbls:
+      - ea: 0x1421858A8
+        base: Client::System::Threading::Thread
   Client::System::Scheduler::TimelineGroup:
     vtbls:
       - ea: 0x1421CFEA0
@@ -23543,6 +23597,7 @@ classes:
       - ea: 0x1421BC4E0
         base: Client::System::Scheduler::Base::SchedulerState
     vfuncs:
+      8: ProcessAll
       20: GetActionTimelineKey
       29: GetOwningGameObjectIndex
       41: GetAnimationLength # C010
@@ -23602,14 +23657,53 @@ classes:
     vtbls:
       - ea: 0x1422E49D0
         base: Client::System::Scheduler::SchedulerInstanceObject
+  Client::System::Scheduler::Instance::CharacterObject:
+    vtbls:
+      - ea: 0x1422E4470
+        base: Client::System::Scheduler::SchedulerInstanceObject
+  Client::System::Scheduler::Instance::LayoutReferenceObject:
+    vtbls:
+      - ea: 0x1422EAA20
+        base: Client::System::Scheduler::SchedulerInstanceObject
+    vfuncs:
+      47: GetLayoutInstance1
+      48: GetLayoutInstance2
+      49: GetParentInstance1
+      50: GetParentInstance2
+    funcs:
+      0x141B234E0: ctorId
+  Client::System::Scheduler::Instance::LayoutSharedGroupObject:
+    vtbls:
+      - ea: 0x1421D0E80
+        base: Client::System::Scheduler::Instance::LayoutReferenceObject
+    funcs:
+      0x141889E10: ctorPrefab
+  Client::System::Scheduler::Instance::LayoutMemberObject:
+    vtbls:
+      - ea: 0x1422E4E88
+        base: Client::System::Scheduler::Instance::LayoutReferenceObject
+    funcs:
+      0x141ACEEE0: ctorId
+      0x141ACEF20: ctorPrefab
   Client::System::Scheduler::Clip::BaseClip:
     vtbls:
       - ea: 0x1421BCBD8
         base: Client::System::Scheduler::Base::SchedulerState
+    vfuncs:
+      9: ProcessEvent
+      47: Event10
+      49: Event15
+      51: Event16
   Client::System::Scheduler::Clip::HavokAnimationClip:
     vtbls:
       - ea: 0x1421BE1D8
         base: Client::System::Scheduler::Clip::BaseClip
+  Client::System::Scheduler::Clip::SharedGroupClip:
+    vtbls:
+      - ea: 0x1421BE3D0
+        base: Client::System::Scheduler::Clip::BaseClip
+    funcs:
+      0x1417FA940: ctor
   Client::System::Scheduler::Base::SceneConnectionBlock:
     vtbls:
       - ea: 0x1422E6050

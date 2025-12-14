@@ -85,9 +85,11 @@ public unsafe partial struct LayoutManager {
 
     // note: this is a bad bad hack...
     [StructLayout(LayoutKind.Explicit, Size = 0x14)]
-    public unsafe struct AnalyticShapeDataKey {
-        [FieldOffset(0)] private uint _alignment;
+    public struct AnalyticShapeDataKey : IComparable<AnalyticShapeDataKey> {
+        // [FieldOffset(0)] private uint alignment;
         [FieldOffset(4)] public uint Key;
+
+        public int CompareTo(AnalyticShapeDataKey other) => Key.CompareTo(other.Key);
     }
 }
 

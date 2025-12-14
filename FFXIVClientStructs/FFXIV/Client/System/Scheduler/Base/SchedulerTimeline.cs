@@ -5,11 +5,13 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Scheduler.Base;
 // Client::System::Scheduler::Base::SchedulerTimeline
 //   Client::System::Scheduler::Base::TimelineController
 //     Client::System::Scheduler::Base::SchedulerState
+//   Client::System::Scheduler::Base::LinkedList<SchedulerTimeline>
 [GenerateInterop]
 [Inherits<TimelineController>]
 [StructLayout(LayoutKind.Explicit, Size = 0x280)]
 public unsafe partial struct SchedulerTimeline {
-    // [FieldOffset(0x90)] public TimelineGroup* TimelineGroup;
+    [FieldOffset(0x80)] public LinkedList<SchedulerTimeline> List;
+    [FieldOffset(0x90)] public TimelineGroup* OwningGroup;
     [FieldOffset(0x98)] public SchedulerResource* SchedulerResource;
 
     [FieldOffset(0xA8)] public CStringPointer ActionTimelineKey;
