@@ -26,6 +26,12 @@ public unsafe partial struct EventFramework {
 
     [FieldOffset(0x3C80)] public EventState EventState1;
     [FieldOffset(0x3CE0)] public EventState EventState2;
+    // Written by HandleInitializeScenePacket
+    [FieldOffset(0x3D10)] public GameObjectId SceneGameObjectId;
+    [FieldOffset(0x3D18)] public short Scene;
+    [FieldOffset(0x3D20)] public ushort SceneFlags;
+    [FieldOffset(0x3D28), FixedSizeArray] internal FixedSizeArray255<uint> _sceneData;
+    [FieldOffset(0x4124)] public byte SceneDataCount;
 
     [FieldOffset(0x42D8)] public DailyQuestMap DailyQuests;
 
@@ -90,8 +96,11 @@ public unsafe partial struct EventFramework {
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B FA 48 8B D9 E8 ?? ?? ?? ?? 4C 8D 83")]
     public partial void InteractWithReactionEventObject(GameObject* obj);
 
+    [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 8B 81 ?? ?? ?? ?? 41 0F B7 F1")]
+    public partial void ProcessEventPlay(GameObject* gameObject, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
+
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 48 8D 9F ?? ?? ?? ??")]
-    public partial void ProcessEventPlay(GameObject* gameObject, EventId eventId, ushort scene, ulong flags, int* data, byte dataCount);
+    public partial void ProcessInitializeScene(GameObject* gameObject, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
 
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
         var instanceDirector = GetInstanceContentDirector();

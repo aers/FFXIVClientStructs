@@ -1,4 +1,6 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Client.Game.Network;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 namespace FFXIVClientStructs.FFXIV.Client.Network;
 
@@ -26,13 +28,13 @@ public unsafe partial struct PacketDispatcher {
     public static partial void HandleMarketBoardPurchasePacket(uint targetId, nint packet);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 40 B8 00 00 00 E0")]
-    public static partial void HandleEventPlayPacket(ulong objectId, uint eventId, ushort stage, ulong a4, uint* payload, byte payloadSize);
+    public static partial void HandleEventPlayPacket(GameObjectId objectId, EventId eventId, short scene, ulong sceneFlags, uint* sceneData, byte sceneDataCount);
 
     [MemberFunction("48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 0F B7 5A")]
     public static partial void HandleUpdateInventorySlotPacket(uint targetId, UpdateInventorySlotPacket* packet);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 10 48 8B 0D")]
-    public static partial void SendEventCompletePacket(uint eventId, ushort stage, byte a3, uint* payload, byte payloadSize, void* a6);
+    public static partial void SendEventCompletePacket(EventId eventId, short scene, byte a3, uint* payload, byte payloadSize, void* a6);
 
     [VirtualFunction(1)]
     public partial void OnReceivePacket(uint targetId, nint packet);
