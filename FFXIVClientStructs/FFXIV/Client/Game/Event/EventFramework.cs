@@ -91,7 +91,7 @@ public unsafe partial struct EventFramework {
     public partial void InteractWithReactionEventObject(GameObject* obj);
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 07 48 8D 9F ?? ?? ?? ??")]
-    public partial void ProcessEventPlay(GameObject* gameObject, EventId eventId, ushort scene, long unk, void* payload, byte payloadSize);
+    public partial void ProcessEventPlay(GameObject* gameObject, EventId eventId, ushort scene, ulong flags, int* data, byte dataCount);
 
     private T* GetInstanceContentDirector<T>(InstanceContentType instanceContentType) where T : unmanaged {
         var instanceDirector = GetInstanceContentDirector();
