@@ -14,7 +14,9 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x20)] public EventHandlerInfo Info;
     [FieldOffset(0x5C)] public uint IconId;
 
-    [FieldOffset(0x78)] public short Scene;
+    [FieldOffset(0x78)] public short Scene; // OnScene%05u
+    [FieldOffset(0x80)] public GameObject* SceneGameObject;
+    [FieldOffset(0x88)] public ulong SceneFlags;
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
 

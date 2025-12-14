@@ -14793,7 +14793,9 @@ classes:
     funcs:
       0x1416B7050: ctor
       0x1416B76A0: Dtor
+      0x1416B9110: AddInitializeSceneTask
       0x1416BE8F0: ShowScreenImage
+      0x1416CBE60: AddFinalizeSceneTask
   Client::Game::Event::EventSceneModule::UISkipListener:
     vtbls:
       - ea: 0x1421778E8
@@ -15280,6 +15282,7 @@ classes:
       0x140B66E70: Finalizer
       0x140B67BE0: InteractWithObject
       0x140B6CC90: ProcessEventPlay
+      0x140B796B0: ProcessInitializeScene
       0x140B6DC10: ProcessSystemLogMessage
       0x140B6F580: SetTerritoryTypeId
       0x140B6F7E0: ProcessDirectorUpdate
