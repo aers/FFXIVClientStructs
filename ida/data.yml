@@ -1031,10 +1031,6 @@ classes:
       36: SetAtkHistory
       39: SetUIVisibility
       40: GetSoftKeyboardDeviceInterface
-      44: GetAddonStatus
-      45: SetAddonDepthLayer
-      56: InitializeHud
-      72: SetScreenSizeScale
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x141FFA578
@@ -7945,10 +7941,14 @@ classes:
       - ea: 0x142042590
         base: Client::System::Input::TextServiceInterface::TextServiceEvent
     vfuncs:
+      44: GetAddonStatus
+      45: SetAddonDepthLayer
+      56: InitializeHud
       58: Update
       60: IsUISceneGameMain
       61: GetColorThemeTypeForUIScene
       63: OpenMapWithMapLink
+      72: SetScreenSizeScale
     funcs:
       0x140678CA0: GetAddonIdByName
       0x14067AB60: ctor
@@ -8657,7 +8657,7 @@ classes:
     funcs:
       0x14073DDB0: ctor # unused, inlined @ 0x14075CD19
       0x14073EC60: GetKeybindByName
-  Client::UI::Misc::RaptureUiDataModule:
+  Client::UI::Misc::UiDataModule:
     vtbls:
       - ea: 0x142051468
         base: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -8665,7 +8665,7 @@ classes:
       0x14075AC00: Finalizer
       0x1407C3C30: ctor
       0x1407DD820: MjiCreateWorkshopPreset
-  Client::UI::Misc::RaptureUiDataModule::MuteList:
+  Client::UI::Misc::UiDataModule::MuteList:
     funcs:
       0x1407C83E0: GetByAccountId
       0x1407C8410: Add # creates an entry by accountId, name, worldId and adds it to the vector
@@ -8744,11 +8744,11 @@ classes:
       23: GetFlagStatusModule
       24: GetRecipeFavoriteModule
       25: GetCraftModule
-      26: GetRaptureUiDataModule
+      26: GetUiDataModule
       27: GetDataCenterHelper
       28: GetWorldHelper
       29: GetGoldSaucerModule
-      30: GetRaptureTeleportHistory
+      30: GetTeleportHistoryModule
       31: GetItemContextCustomizeModule
       32: GetRecommendEquipModule
       33: GetPvpSetModule
@@ -9921,7 +9921,7 @@ classes:
       0x1407C33D0: GetEntry
       0x1407C35C0: RemoveFromFavorites
       0x1407C3670: AddToFavorites
-  Client::UI::Misc::RaptureTeleportHistory:
+  Client::UI::Misc::TeleportHistoryModule:
     vtbls:
       - ea: 0x142056BA0
         base: Client::UI::Misc::UserFileManager::UserFileEvent
@@ -10145,9 +10145,9 @@ classes:
       0x1418E5C60: PlayFootStepSound
   Client::Game::Character::CustomizeData:
     funcs:
-      0x1417A65D0: FilterCustomizeData # ensures NPC specific faces etc aren't on players
-      0x1417A6BA0: NormalizeCustomizeData
-      0x1417A6DC0: RandomizeCustomizeData
+      0x1417A65D0: Filter # ensures NPC specific faces etc aren't on players
+      0x1417A6BA0: Normalize
+      0x1417A6DC0: Randomize
   Client::Game::Character::Character:
     vtbls:
       - ea: 0x14205A370
@@ -14793,7 +14793,9 @@ classes:
     funcs:
       0x1416B7050: ctor
       0x1416B76A0: Dtor
+      0x1416B9110: AddInitializeSceneTask
       0x1416BE8F0: ShowScreenImage
+      0x1416CBE60: AddFinalizeSceneTask
   Client::Game::Event::EventSceneModule::UISkipListener:
     vtbls:
       - ea: 0x1421778E8
@@ -14942,6 +14944,10 @@ classes:
     vtbls:
       - ea: 0x1422B6C18
         base: Client::Game::Event::LuaEventHandler
+  Client::Game::Event::CustomTalkResidentEventHandler:
+    vtbls:
+      - ea: 0x1422EBCC0
+        base: Client::Game::Event::CustomTalkEventHandler
   Client::Game::Event::CompanyLeveOfficerEventHandler: # 0x0C
     vtbls:
       - ea: 0x14224A620
@@ -15143,7 +15149,7 @@ classes:
     vtbls:
       - ea: 0x1422410C8
         base: Client::Game::Event::EventHandler
-  Client::Game::Event::TripleTriadCompetitionEventHandler: # 0x37
+  Client::Game::Event::DescriptionEventHandler: # 0x37
     vtbls:
       - ea: 0x142246FC8
         base: Client::Game::Event::EventHandler
@@ -15191,6 +15197,22 @@ classes:
     vtbls:
       - ea: 0x1422CEF10
         base: Client::Game::Event::EventHandler
+  Client::Game::Event::EventGimmickPathMoveHandler: # 0x40
+    vtbls:
+      - ea: 0x1422CDB50
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::EventMountGimmickPathMoveHandler: # 0x41
+    vtbls:
+      - ea: 0x1422CE530
+        base: Client::Game::Event::EventHandler
+  Client::Game::Event::GroupPoseEventHandler:
+    vtbls:
+      - ea: 0x1422BEAA0
+        base: Client::Game::Event::CustomTalkResidentEventHandler
+  Client::Game::Event::IdleCameraEventHandler:
+    vtbls:
+      - ea: 0x1422BF368
+        base: Client::Game::Event::CustomTalkResidentEventHandler
   Client::Game::Event::JournalCallback:
     vtbls:
       - ea: 0x14207BF58
@@ -15260,6 +15282,7 @@ classes:
       0x140B66E70: Finalizer
       0x140B67BE0: InteractWithObject
       0x140B6CC90: ProcessEventPlay
+      0x140B796B0: ProcessInitializeScene
       0x140B6DC10: ProcessSystemLogMessage
       0x140B6F580: SetTerritoryTypeId
       0x140B6F7E0: ProcessDirectorUpdate

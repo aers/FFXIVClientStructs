@@ -3,15 +3,15 @@ using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.Us
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 
-// Client::UI::Misc::RaptureUiDataModule
+// Client::UI::Misc::UiDataModule
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
 [StructLayout(LayoutKind.Explicit, Size = 0x38D8)]
-public unsafe partial struct RaptureUiDataModule {
-    public static RaptureUiDataModule* Instance() {
+public unsafe partial struct UiDataModule {
+    public static UiDataModule* Instance() {
         var uiModule = UIModule.Instance();
-        return uiModule == null ? null : uiModule->GetRaptureUiDataModule();
+        return uiModule == null ? null : uiModule->GetUiDataModule();
     }
 
     [FieldOffset(0x38C0)] public MuteList Mutelist;
@@ -39,15 +39,15 @@ public unsafe partial struct RaptureUiDataModule {
         [MemberFunction("E8 ?? ?? ?? ?? 48 8D B4 24 ?? ?? ?? ?? 48 85 C0")]
         public partial MuteListEntry* GetByAccountId(ulong accountId);
 
-        /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>
+        /// <remarks>To save changes, call <see cref="UiDataModule.SaveFile(bool)"/>.</remarks>
         [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4F 10 48 8B 11 48 85 C0"), GenerateStringOverloads]
         public partial MuteListEntry* Add(ulong accountId, CStringPointer name, short worldId);
 
-        /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>
+        /// <remarks>To save changes, call <see cref="UiDataModule.SaveFile(bool)"/>.</remarks>
         [MemberFunction("E8 ?? ?? ?? ?? 84 C0 40 0F B6 FF 41 0F 45 FD FF C3")]
         public partial bool Remove(ulong accountId);
 
-        /// <remarks>To save changes, call <see cref="RaptureUiDataModule.SaveFile(bool)"/>.</remarks>
+        /// <remarks>To save changes, call <see cref="UiDataModule.SaveFile(bool)"/>.</remarks>
         [MemberFunction("40 53 48 83 EC 20 48 8B 19 48 8B 41 08"), GenerateStringOverloads]
         public partial MuteListEntry* UpdateComment(ulong accountId, CStringPointer comment);
 

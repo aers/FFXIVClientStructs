@@ -1,5 +1,3 @@
-using FFXIVClientStructs.FFXIV.Client.System.Memory.Regular;
-
 namespace FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 public interface ICreatable {
@@ -91,8 +89,8 @@ public unsafe partial struct IMemorySpace {
     // [VirtualFunction(15)]
     // public partial ? vf15(); // nullsub from what can find
 
-    public void* Malloc<T>(ulong alignment = 8) where T : unmanaged {
-        return Malloc((ulong)sizeof(T), alignment);
+    public T* Malloc<T>(ulong alignment = 8) where T : unmanaged {
+        return (T*)Malloc((ulong)sizeof(T), alignment);
     }
 
     public static void Free<T>(T* ptr) where T : unmanaged {

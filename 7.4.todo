@@ -1,0 +1,31 @@
+
+TODO:
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/Character.cs
+    ☐ [FieldOffset(0x2334)] public uint CompanionOwnerId; // TODO: Find a better name as it is used to index into FurnitureMemory for IndoorHousing @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/Character.cs#77
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs
+    ☐ [FieldOffset(0xBB4)] public Vector2 BannerHeadDirection; // TODO: these are of type Client::Game::Control::MoveControl::SplineVector2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Game/Character/LookAtContainer.cs#21
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs
+    ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/Manager.cs#34
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/SubView.cs
+    ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/SubView.cs#9
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/View.cs
+    ☐ // TODO check and update for 7.2 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/Graphics/Render/View.cs#9
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs
+    ☐ // TODO: this is part of an event interface class @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentContentsFinder.cs#29
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs
+    ☐ [FieldOffset(0x19)] public bool IsQuestSomething; // TODO: doesn't seem right, 0x18 is used as a dword... @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#51
+    ☐ // TODO: this is likely part of SatisfactionSupplyManager, since it's filled by one of its member functions (assuming agent knows about manager and not vice versa) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Agent/AgentSatisfactionSupply.cs#54
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/PvpSetModule.cs
+    ☐ // TODO: struct size decreased in 7.2 from 0xA0 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/PvpSetModule.cs#18
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureHotbarModule.cs
+    ☐ [FieldOffset(0x5C), FixedSizeArray] internal FixedSizeArray12<bool> _expacJobHotbarsCreated; // TODO: Verify (7.3) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureHotbarModule.cs#44
+    ☐ [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray22<bool> _pvPHotbarsCreated; // TODO: Verify (7.3) @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureHotbarModule.cs#48
+    ☐ [FieldOffset(0x7E)] internal bool ClearCallbackPresent; // TODO: Verify (7.3), possibly 0x83 @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Client/UI/Misc/RaptureHotbarModule.cs#51
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs
+    ☐ // TODO: move functions out of lua_State and make them static. own luaapi struct maybe? @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Common/Lua/lstate.cs#34
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs
+    ☐ // TODO: use AlignmentType @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/GUI/AtkUnitBase.cs#442
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs
+    ☐ // TODO: Actually call `SteamInternal_ContextInit(ctx)` here, rather than just returning the cached pointer. @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/SteamApi/SteamTypes.cs#48
+  @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/TextParameter.cs
+    ☐ // TODO: implement as Client::System::Data::Variant<> and Client::System::Data::VariantPtr<> @file:///d%3A/source/repos/FFXIVClientStructs/FFXIVClientStructs/FFXIV/Component/Text/TextParameter.cs#3

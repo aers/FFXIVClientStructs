@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.System.Input;
-using static FFXIVClientStructs.FFXIV.Component.GUI.AtkUnitManager;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -8,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(0)]
-    public partial void Dtor(bool free);
+    public partial void Dtor(byte freeFlags);
 
     [VirtualFunction(9)]
     public partial NumberArrayData* GetNumberArrayData(int index);
@@ -55,14 +54,11 @@ public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(33)]
     public partial bool IsCursorVisible();
 
+    [VirtualFunction(39)]
+    public partial void SetUiVisibility(bool uiVisible);
+
     [VirtualFunction(40)]
     public partial SoftKeyboardDeviceInterface* GetSoftKeyboardDeviceInterface();
-
-    [VirtualFunction(44)]
-    public partial AddonStatus GetAddonStatus(uint addonId);
-
-    [VirtualFunction(45)]
-    public partial bool SetAddonDepthLayer(uint addonId, uint depthLayerIndex);
 
     // Component::GUI::AtkModuleInterface::AtkEventInterface
     // no explicit constructor, just an event interface 

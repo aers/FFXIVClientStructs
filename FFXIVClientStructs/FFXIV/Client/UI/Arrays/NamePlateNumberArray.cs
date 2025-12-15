@@ -57,6 +57,6 @@ public unsafe partial struct NamePlateNumberArray {
         /// &amp; 0x4 - Unknown, seems to be set 1-2 frames after node appears<br/>
         /// </summary>
         [FieldOffset(19 * 4)] public int VisibilityFlags;
-        [FieldOffset(20 * 4)] public int EntityId;
+        [FieldOffset(20 * 4)] public uint EntityId;
     }
 }

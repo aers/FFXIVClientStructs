@@ -33,11 +33,11 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(23)] public partial FlagStatusModule* GetFlagStatusModule();
     [VirtualFunction(24)] public partial RecipeFavoriteModule* GetRecipeFavoriteModule();
     [VirtualFunction(25)] public partial CraftModule* GetCraftModule();
-    [VirtualFunction(26)] public partial RaptureUiDataModule* GetRaptureUiDataModule();
+    [VirtualFunction(26)] public partial UiDataModule* GetUiDataModule();
     [VirtualFunction(27)] public partial DataCenterHelper* GetDataCenterHelper();
     [VirtualFunction(28)] public partial WorldHelper* GetWorldHelper();
     [VirtualFunction(29)] public partial GoldSaucerModule* GetGoldSaucerModule();
-    [VirtualFunction(30)] public partial RaptureTeleportHistory* GetRaptureTeleportHistory();
+    [VirtualFunction(30)] public partial TeleportHistoryModule* GetTeleportHistoryModule();
     [VirtualFunction(31)] public partial ItemContextCustomizeModule* GetItemContextCustomizeModule();
     [VirtualFunction(32)] public partial RecommendEquipModule* GetRecommendEquipModule();
     [VirtualFunction(33)] public partial PvpSetModule* GetPvpSetModule();
@@ -118,8 +118,6 @@ public unsafe partial struct UIModuleInterface {
 
     [VirtualFunction(122)] public partial void HandlePacket(UIModulePacketType type, uint uintParam, void* packet);
 
-    // TODO: Not checked after 7.3, just blindly +1'd, but all seem correct.
-
     // [VirtualFunction(123)] public partial ??? ShowContentIntroduction(???);
     // [VirtualFunction(124)] public partial ??? IsContentIntroductionInvisible(???);
     // [VirtualFunction(125)] public partial ??? HideContentIntroduction(???);
@@ -143,7 +141,6 @@ public unsafe partial struct UIModuleInterface {
     // [VirtualFunction(176)] public partial ??? HideHousingHarvest(???);
     [VirtualFunction(177)] public partial void ShowImage(uint imageId, bool useLocalePath = false, int displayType = 0, bool playSound = false);
 
-    // 7.2: everything after not checked yet
     [VirtualFunction(178), GenerateStringOverloads] public partial void ShowText(int position, CStringPointer text, uint iconOrCheck1 = 0, bool playSound = true, uint iconOrCheck2 = 0, bool alsoPlaySound = true);
     [VirtualFunction(179)] public partial void ShowTextChain(int chain, int hqChain = 0);
     [VirtualFunction(180), GenerateStringOverloads] public partial void ShowWideText(CStringPointer text, int layer = 0, bool isTop = true, bool isFast = false, uint logMessageId = 0);
