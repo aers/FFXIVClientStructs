@@ -1029,7 +1029,7 @@ classes:
       28: ClearFocus
       33: IsCursorVisible
       36: SetAtkHistory
-      39: SetUIVisibility
+      39: SetUiVisibility
       40: GetSoftKeyboardDeviceInterface
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
