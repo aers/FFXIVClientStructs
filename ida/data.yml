@@ -2692,6 +2692,10 @@ classes:
       0x1409EBE50: GetMaxLevel
       0x1409EC0E0: IsCurrentJobCombat
       0x1409EC140: SetClassJobExp
+      0x1409EC190: GetClassJobExp
+      0x1409EC1D0: GetCurrentClassJobExp
+      0x1409EC280: GetClassJobNeededExp
+      0x1409EC2F0: GetCurrentClassJobNeededExp
       0x1409EC3E0: GetAttributeByIndex # (this, index)
       0x1409E9980: SetEurekaRank
       0x1409E9A80: SetBozjaRank

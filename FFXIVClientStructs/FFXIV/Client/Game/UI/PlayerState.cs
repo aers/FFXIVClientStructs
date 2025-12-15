@@ -310,6 +310,18 @@ public unsafe partial struct PlayerState {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 0D ?? ?? ?? ?? 4C 8D 3D")]
     public partial ushort GetClassJobLevel(int classJobId = -1, bool shouldGetSynced = true);
 
+    [MemberFunction("40 53 48 83 EC ?? 48 8B D9 83 FA ?? 77 ?? 8B CA")]
+    public partial uint GetClassJobExp(uint classJobId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 42 8D 1C")]
+    public partial uint GetCurrentClassJobExp();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 D7 48 8D 0D ?? ?? ?? ?? 44 8B E8")]
+    public partial uint GetClassJobNeededExp(int classJobId = -1);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 8B E8 F3 0F 10 35")]
+    public partial uint GetCurrentClassJobNeededExp();
+
     #region Unlocks
 
     /// <summary>
