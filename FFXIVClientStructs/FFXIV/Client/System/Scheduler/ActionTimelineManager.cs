@@ -18,7 +18,7 @@ public unsafe partial struct ActionTimelineManager {
     // [FieldOffset(0x60)] public TimelineGroup* TimelineGroup3;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D7 48 8B D8")]
-    public partial TimelineGroup* InsertTimelineGroup(int index); 
+    public partial TimelineGroup* InsertTimelineGroup(int index);
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D0 48 8D 4B 30 E8 ?? ?? ?? ?? 48 8B 4D 68")]
     public partial SchedulerInstanceObject** AddLayoutTimelineObject(SchedulerInstanceObject** obj, void* unknown1, void* unknown2);
 
