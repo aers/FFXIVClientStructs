@@ -308,7 +308,7 @@ public unsafe partial struct PlayerState {
 
     /// <summary> Get the level of a specific job. </summary>
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 0D ?? ?? ?? ?? 4C 8D 3D")]
-    public partial ushort GetClassJobLevel(uint classJobId, bool shouldGetSynced);
+    public partial ushort GetClassJobLevel(int classJobId = -1, bool shouldGetSynced = true);
 
     #region Unlocks
 
