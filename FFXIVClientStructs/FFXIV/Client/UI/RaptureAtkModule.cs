@@ -136,7 +136,7 @@ public unsafe partial struct RaptureAtkModule {
 
     public bool IsUiVisible {
         get => !RaptureAtkUnitManager.AtkUnitManager.Flags.HasFlag(AtkUnitManagerFlags.UiHidden);
-        set => SetUIVisibility(value);
+        set => SetUiVisibility(value);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x250)]

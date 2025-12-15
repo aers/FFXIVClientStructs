@@ -55,7 +55,7 @@ public unsafe partial struct AtkModuleInterface {
     public partial bool IsCursorVisible();
 
     [VirtualFunction(39)]
-    public partial void SetUIVisibility(bool uiVisible);
+    public partial void SetUiVisibility(bool uiVisible);
 
     [VirtualFunction(40)]
     public partial SoftKeyboardDeviceInterface* GetSoftKeyboardDeviceInterface();
