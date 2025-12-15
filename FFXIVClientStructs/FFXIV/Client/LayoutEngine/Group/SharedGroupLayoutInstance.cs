@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.LayoutEngine.Node;
 using FFXIVClientStructs.FFXIV.Client.System.Resource;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Client.System.Scheduler.Instance;
@@ -18,8 +19,8 @@ public unsafe partial struct SharedGroupLayoutInstance {
     [FieldOffset(0x038)] public ResourceHandle* ResourceHandle;
     [FieldOffset(0x040)] public LayoutSharedGroupObject* TimelineObject;
     [FieldOffset(0x050)] public Transform Transform;
-    [FieldOffset(0x080)] public InstanceList Instances;
-    // [FieldOffset(0x0A8)] public InstanceList uA8;
+    [FieldOffset(0x080)] public ChildNodeContainer Instances;
+    // [FieldOffset(0x0A8)] public ChildNodeContainer uA8;
 
     [FieldOffset(0xD0)] public TimeLineContainer TimeLineContainer;
     // [FieldOffset(0x108)] public ILayoutInstance* ExtraTimelineInstance; // not sure of purpose
@@ -35,30 +36,4 @@ public unsafe partial struct SharedGroupLayoutInstance {
     public partial bool InitAnimationHandlers(void* fileData);
     [MemberFunction("E8 ?? ?? ?? ?? 0F BE 8F ?? ?? ?? ?? 83 E9 01")]
     public partial void InitTimelines(void* fileData);
-
-    [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x50)]
-    public unsafe partial struct InstanceData {
-        [FieldOffset(0x10)] public ILayoutInstance* Instance;
-        [FieldOffset(0x20)] public Transform Transform;
-
-        [VirtualFunction(0)]
-        public partial InstanceData* Dtor(byte freeFlags);
-    }
-
-    [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-    public unsafe partial struct InstanceList {
-        [FieldOffset(0x08)] public SharedGroupLayoutInstance* Owner;
-        [FieldOffset(0x10)] public StdVector<Pointer<InstanceData>> Instances;
-
-        [VirtualFunction(0)]
-        public partial InstanceList* Dtor(byte freeFlags);
-
-        [MemberFunction("E8 ?? ?? ?? ?? F6 87 ?? ?? ?? ?? ?? 75 0E")]
-        public partial void ApplyTransforms();
-
-        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 47 10 48 85 C0 74 09")]
-        public partial void SetCollidersActive(bool active);
-    }
 }
