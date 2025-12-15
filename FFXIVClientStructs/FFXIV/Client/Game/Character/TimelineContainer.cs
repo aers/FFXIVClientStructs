@@ -39,8 +39,8 @@ public unsafe partial struct TimelineContainer {
     [FieldOffset(0x330 + 0x17)] public byte BannerTimelineAcceptClassJobCategory;
     [FieldOffset(0x330 + 0x18), CExporterExcelEnd] public byte BannerTimelineCategory;
 
-    [FieldOffset(0x348), Obsolete("This field hasn't been updated in several patches and is sharing an offset with BannerTimelineCategory. If you're using it, please PR an updated offset, otherwise it'll be removed.")] public byte Flags1;
-    [FieldOffset(0x349), Obsolete("This field hasn't been updated in several patches. If you're using it, please PR an updated offset, otherwise it'll be removed.")] public byte Flags2; // bit 2 makes it load the requested banner animation
+    [FieldOffset(0x348), Obsolete("This field hasn't been updated in several patches and is sharing an offset with BannerTimelineCategory. If you're using it, please PR an updated offset, otherwise it'll be removed.", true)] public byte Flags1;
+    [FieldOffset(0x349), Obsolete("This field hasn't been updated in several patches. If you're using it, please PR an updated offset, otherwise it'll be removed.", true)] public byte Flags2; // bit 2 makes it load the requested banner animation
 
     // 0x40 = WeaponDrawn
     [FieldOffset(0x34E)] public byte Flags3;

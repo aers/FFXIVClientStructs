@@ -200,7 +200,7 @@ public unsafe partial struct RaptureAtkModule {
 
         /// <remarks> Set when the RetainerMarket inventory has been updated. </remarks>
         RetainerMarketInventoryUpdate = 1 << 2,
-        [Obsolete("Renamed to RetainerMarketInventoryUpdate")] RetainerUpdate = 1 << 2,
+        [Obsolete("Renamed to RetainerMarketInventoryUpdate", true)] RetainerUpdate = 1 << 2,
 
         /// <remarks> Unknown use case. </remarks>
         NameplateUpdate = 1 << 3,

@@ -18,7 +18,7 @@ public unsafe partial struct Director {
     [FieldOffset(0x348)] public byte Sequence;
     [FieldOffset(0x34A), FixedSizeArray] internal FixedSizeArray10<byte> _unionData; // I8A-I8J, UI8A-UI8J, Branch etc.
     [FieldOffset(0x358)] public Utf8String Title;
-    [FieldOffset(0x3C0), Obsolete("Renamed to Objective")] public Utf8String Description;
+    [FieldOffset(0x3C0), Obsolete("Renamed to Objective", true)] public Utf8String Description;
     [FieldOffset(0x3C0)] public Utf8String Objective; // name based on the Lua function "SetDirectorObjective"
     [FieldOffset(0x428)] public Utf8String ReliefText;
     // So far, the Content*Timestamps have been seen in Leves.

@@ -16,13 +16,13 @@ public unsafe partial struct AtkComponentInputBase {
     [FieldOffset(0xC8)] public AtkTextNode* AtkTextNode;
     [FieldOffset(0xD0)] public AtkResNode* CursorContainer;
     [FieldOffset(0xE0)] public Utf8String EvaluatedString;
-    [FieldOffset(0xE0), Obsolete("Renamed to EvaluatedString")] public Utf8String UnkText1;
+    [FieldOffset(0xE0), Obsolete("Renamed to EvaluatedString", true)] public Utf8String UnkText1;
     [FieldOffset(0xD8)] public AtkCollisionNode* CollisionNode;
     /// <remarks> Can contain unevaluated fixed macros. </remarks>
     [FieldOffset(0x148)] public Utf8String RawString;
-    [FieldOffset(0x148), Obsolete("Renamed to RawString")] public Utf8String UnkText2;
+    [FieldOffset(0x148), Obsolete("Renamed to RawString", true)] public Utf8String UnkText2;
     [FieldOffset(0x1B0)] public AtkUnitBase* OwnerAddon;
-    [FieldOffset(0x1B0), Obsolete("Renamed to OwnerAddon")] public AtkUnitBase* ContainingAddon;
+    [FieldOffset(0x1B0), Obsolete("Renamed to OwnerAddon", true)] public AtkUnitBase* ContainingAddon;
     [FieldOffset(0x1B8)] public delegate* unmanaged<AtkUnitBase*, InputCallbackType, CStringPointer, CStringPointer, int, InputCallbackResult> Callback;
     [FieldOffset(0x1C0)] public int CallbackEventKind;
     [FieldOffset(0x1C4)] public int SelectionStart;

@@ -76,43 +76,43 @@ public unsafe partial struct UIState {
     [FieldOffset(0x19E18)] public long NextMapAllowanceTimestamp;
     [FieldOffset(0x19E20)] public long NextChallengeLogResetTimestamp;
 
-    [FieldOffset(0x19E2C), FixedSizeArray, Obsolete("Use UnlockLinksBitArray")] internal FixedSizeArray92<byte> _unlockLinkBitmask;
+    [FieldOffset(0x19E2C), FixedSizeArray, Obsolete("Use UnlockLinksBitArray", true)] internal FixedSizeArray92<byte> _unlockLinkBitmask;
     // BitCount: See `Client::Game::UI::UIState.SetUnlockLinkValue`
     /// <remarks> Use <see cref="IsUnlockLinkUnlocked"/>. </remarks>
     [FieldOffset(0x19E2C), FixedSizeArray(isBitArray: true, bitCount: 736)] internal FixedSizeArray92<byte> _unlockLinks;
 
-    [FieldOffset(0x19E88), FixedSizeArray, Obsolete("Use UnlockedAetherytesBitArray")] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
+    [FieldOffset(0x19E88), FixedSizeArray, Obsolete("Use UnlockedAetherytesBitArray", true)] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
     // BitCount: AetheryteSheet.RowCount
     /// <remarks> Use <see cref="IsAetheryteUnlocked"/>. </remarks>
     [FieldOffset(0x19E88), FixedSizeArray(isBitArray: true, bitCount: 239)] internal FixedSizeArray30<byte> _unlockedAetherytes;
 
-    [FieldOffset(0x19EA6), FixedSizeArray, Obsolete("Use UnlockedHowTosBitArray")] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
+    [FieldOffset(0x19EA6), FixedSizeArray, Obsolete("Use UnlockedHowTosBitArray", true)] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
     // BitCount: HowToSheet.RowCount
     /// <remarks> Use <see cref="IsHowToUnlocked"/>. </remarks>
     [FieldOffset(0x19EA6), FixedSizeArray(isBitArray: true, bitCount: 296)] internal FixedSizeArray37<byte> _unlockedHowTos;
 
-    [FieldOffset(0x19ECB), FixedSizeArray, Obsolete("Use UnlockedCompanionsBitArray")] internal FixedSizeArray71<byte> _unlockedCompanionsBitmask;
+    [FieldOffset(0x19ECB), FixedSizeArray, Obsolete("Use UnlockedCompanionsBitArray", true)] internal FixedSizeArray71<byte> _unlockedCompanionsBitmask;
     // Ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     // BitCount: CompanionSheet.RowCount
     /// <remarks> Use <see cref="IsCompanionUnlocked"/>. </remarks>
     [FieldOffset(0x19ECB), FixedSizeArray(isBitArray: true, bitCount: 568)] internal FixedSizeArray71<byte> _unlockedCompanions;
 
-    [FieldOffset(0x19F12), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray")] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
-    [FieldOffset(0x19F12), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray")] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStandsBitmask;
+    [FieldOffset(0x19F12), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray", true)] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
+    [FieldOffset(0x19F12), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray", true)] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStandsBitmask;
     // BitCount: ChocoboTaxiStandSheet.RowCount
     /// <remarks> Use <see cref="IsChocoboTaxiStandUnlocked"/>. </remarks>
     [FieldOffset(0x19F12), FixedSizeArray(isBitArray: true, bitCount: 93)] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStands;
 
-    [FieldOffset(0x19F1E), FixedSizeArray, Obsolete("Use SeenCutscenesBitArray")] internal FixedSizeArray173<byte> _cutsceneSeenBitmask;
+    [FieldOffset(0x19F1E), FixedSizeArray, Obsolete("Use SeenCutscenesBitArray", true)] internal FixedSizeArray173<byte> _cutsceneSeenBitmask;
     // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
     [FieldOffset(0x19F1E), FixedSizeArray(isBitArray: true, bitCount: 1384)] internal FixedSizeArray173<byte> _seenCutscenes;
 
     // unk bitmasks
 
-    [FieldOffset(0x19FCC), FixedSizeArray, Obsolete("Use UnlockedTripleTriadCardsBitArray")] internal FixedSizeArray57<byte> _unlockedTripleTriadCardsBitmask;
+    [FieldOffset(0x19FCC), FixedSizeArray, Obsolete("Use UnlockedTripleTriadCardsBitArray", true)] internal FixedSizeArray57<byte> _unlockedTripleTriadCardsBitmask;
     // BitCount: TripleTriadCardSheet.RowCount
     /// <remarks> Use <see cref="IsTripleTriadCardUnlocked"/>. </remarks>
     [FieldOffset(0x19FCC), FixedSizeArray(isBitArray: true, bitCount: 455)] internal FixedSizeArray57<byte> _unlockedTripleTriadCards;

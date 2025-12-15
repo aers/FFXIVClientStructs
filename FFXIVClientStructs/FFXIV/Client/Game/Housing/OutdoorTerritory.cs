@@ -12,13 +12,13 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0xAE80)]
 public unsafe partial struct OutdoorTerritory {
     [FieldOffset(0x10)] public HousingFurnitureManager FurnitureStruct;
-    [FieldOffset(0x10), Obsolete("Use FurnitureStruct.FurnitureMemory or FurnitureVector"), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture;
-    [FieldOffset(0x8968), Obsolete("Use FurnitureStruct.HousingObjectManager")] public HousingObjectManager HousingObjectManager;
+    [FieldOffset(0x10), Obsolete("Use FurnitureStruct.FurnitureMemory or FurnitureVector", true), FixedSizeArray] internal FixedSizeArray732<HousingFurniture> _furniture;
+    [FieldOffset(0x8968), Obsolete("Use FurnitureStruct.HousingObjectManager", true)] public HousingObjectManager HousingObjectManager;
 
     [FieldOffset(0x9690)] public ExcelSheetWaiter* ItemExcelSheetWaiter;
     [FieldOffset(0x9698)] public ExcelSheet* ItemExcelSheet;
     [FieldOffset(0x96A0)] public HouseId HouseId;
-    [FieldOffset(0x96A8), Obsolete("Use HouseUnit.PlotIndex")] public sbyte StandingInPlot; // LandSet index
+    [FieldOffset(0x96A8), Obsolete("Use HouseUnit.PlotIndex", true)] public sbyte StandingInPlot; // LandSet index
     [FieldOffset(0x96A8)] public HouseUnit HouseUnit;
     [FieldOffset(0x96AA)] public sbyte EditingFixturesOfPlot; // LandSet index
     [FieldOffset(0x96B0)] public sbyte EditingFurnishingsOfPlot; // LandSet index

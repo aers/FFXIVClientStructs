@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 public unsafe partial struct HousingObjectManager {
     [FieldOffset(0x00)] public StdMap<ushort, HousingObjectData> DataMap;
     [FieldOffset(0x10)] public HousingObjectArray ObjectArray;
-    [FieldOffset(0x18), FixedSizeArray, Obsolete("Use ObjectArray.Objects")] internal FixedSizeArray400<Pointer<GameObject>> _objects;
+    [FieldOffset(0x18), FixedSizeArray, Obsolete("Use ObjectArray.Objects", true)] internal FixedSizeArray400<Pointer<GameObject>> _objects;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0xC98)]

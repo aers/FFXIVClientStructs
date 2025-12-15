@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 public unsafe struct DirectorTodo {
     [FieldOffset(0x00)] public Director* Director;
     [FieldOffset(0x08)] public Utf8String Title;
-    [FieldOffset(0x70), Obsolete("Renamed to Objective")] public Utf8String Description;
+    [FieldOffset(0x70), Obsolete("Renamed to Objective", true)] public Utf8String Description;
     [FieldOffset(0x70)] public Utf8String Objective;
     [FieldOffset(0xD8)] public Utf8String ReliefText;
     [FieldOffset(0x140)] public bool IsFullUpdatePending;

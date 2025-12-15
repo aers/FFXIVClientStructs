@@ -17,17 +17,17 @@ public unsafe partial struct QuestManager {
     [FieldOffset(0x08)] private ushort Unk8;
     // [FieldOffset(0x0A)] array of 6 bytes?
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray30<QuestWork> _normalQuests;
-    [FieldOffset(0x2E0), FixedSizeArray, Obsolete("Use CompletedQuestsBitArray")] internal FixedSizeArray751<byte> _completedQuestsBitmask;
+    [FieldOffset(0x2E0), FixedSizeArray, Obsolete("Use CompletedQuestsBitArray", true)] internal FixedSizeArray751<byte> _completedQuestsBitmask;
     [FieldOffset(0x2E0), FixedSizeArray(isBitArray: true, bitCount: 751 * 8)] internal FixedSizeArray751<byte> _completedQuests; // BitCount: unknown, but we know the array is 751 bytes long
-    [FieldOffset(0x5CF), FixedSizeArray, Obsolete("Use UnlockedMapMarkersBitArray")] internal FixedSizeArray64<byte> _unlockedMapMarkersBitmask;
+    [FieldOffset(0x5CF), FixedSizeArray, Obsolete("Use UnlockedMapMarkersBitArray", true)] internal FixedSizeArray64<byte> _unlockedMapMarkersBitmask;
     [FieldOffset(0x5CF), FixedSizeArray(isBitArray: true, bitCount: 64 * 8)] internal FixedSizeArray64<byte> _unlockedMapMarkers; // BitCount: unknown, but we know the array is 64 bytes long
-    [FieldOffset(0x60F), FixedSizeArray, Obsolete("Use QuestRepeatFlags")] internal FixedSizeArray2<byte> _questRepeatFlagsBitmask;
+    [FieldOffset(0x60F), FixedSizeArray, Obsolete("Use QuestRepeatFlags", true)] internal FixedSizeArray2<byte> _questRepeatFlagsBitmask;
     [FieldOffset(0x60F), FixedSizeArray(isBitArray: true, bitCount: 16)] internal FixedSizeArray2<byte> _questRepeatFlags; // BitCount: QuestRepeatFlagSheet.Count
 
     [FieldOffset(0x618), FixedSizeArray] internal FixedSizeArray12<DailyQuestWork> _dailyQuests;
     [FieldOffset(0x6D8)] public byte DailyQuestSeed;
 
-    [FieldOffset(0x6DC), FixedSizeArray, Obsolete("Use CompletedLegacyQuestsBitArray")] internal FixedSizeArray40<byte> _unkBitmask1;
+    [FieldOffset(0x6DC), FixedSizeArray, Obsolete("Use CompletedLegacyQuestsBitArray", true)] internal FixedSizeArray40<byte> _unkBitmask1;
     [FieldOffset(0x6DC), FixedSizeArray(isBitArray: true, bitCount: 296 + 3 * 8)] internal FixedSizeArray40<byte> _completedLegacyQuests; // BitCount: at least LegacyQuestSheet.Count, might contain some relic stuff at the end?
 
     [FieldOffset(0x708), FixedSizeArray] internal FixedSizeArray10<TrackingWork> _trackedQuests;
@@ -36,22 +36,22 @@ public unsafe partial struct QuestManager {
 
     // UnkArray2 and 3 are connected somehow. GatheringPoint related, or at least Spearfishing.
     // The setter split in 2 arrays, but a getter was found that contains the full size (255 bytes)... hmm
-    [FieldOffset(0x7AC), FixedSizeArray, Obsolete("Use UnkArray2")] internal FixedSizeArray158<byte> _unkBitmask2;
+    [FieldOffset(0x7AC), FixedSizeArray, Obsolete("Use UnkArray2", true)] internal FixedSizeArray158<byte> _unkBitmask2;
     [FieldOffset(0x7AC), FixedSizeArray] internal FixedSizeArray158<byte> _unkArray2;
 
-    [FieldOffset(0x84C), FixedSizeArray, Obsolete("Use UnkArray3")] internal FixedSizeArray94<byte> _unkBitmask3;
+    [FieldOffset(0x84C), FixedSizeArray, Obsolete("Use UnkArray3", true)] internal FixedSizeArray94<byte> _unkBitmask3;
     [FieldOffset(0x84C), FixedSizeArray] internal FixedSizeArray94<byte> _unkArray3;
 
-    [FieldOffset(0x8AC), FixedSizeArray, Obsolete("Use SeenGatheringNotebookDivisionLevelRangesBitArray")] internal FixedSizeArray40<byte> _seenGatheringNotebookDivisionLevelRangesBitmask;
+    [FieldOffset(0x8AC), FixedSizeArray, Obsolete("Use SeenGatheringNotebookDivisionLevelRangesBitArray", true)] internal FixedSizeArray40<byte> _seenGatheringNotebookDivisionLevelRangesBitmask;
     [FieldOffset(0x8AC), FixedSizeArray(isBitArray: true, bitCount: 40 * 8)] internal FixedSizeArray40<byte> _seenGatheringNotebookDivisionLevelRanges; // BitCount: unknown, but we know the array is 40 bytes long
-    [FieldOffset(0x8D4), FixedSizeArray, Obsolete("Use GatheredGatheringItemsBitArray")] internal FixedSizeArray102<byte> _gatheredGatheringItemsBitmask;
+    [FieldOffset(0x8D4), FixedSizeArray, Obsolete("Use GatheredGatheringItemsBitArray", true)] internal FixedSizeArray102<byte> _gatheredGatheringItemsBitmask;
     [FieldOffset(0x8D4), FixedSizeArray(isBitArray: true, bitCount: 102 * 8)] internal FixedSizeArray102<byte> _gatheredGatheringItems; // BitCount: unknown, but we know the array is 102 bytes long
     /// <remarks>Used for Actions with SecondaryCostType 9 (Brunt Force and Deep Vigor).</remarks>
     [FieldOffset(0x93A)] public byte SuccessfulGatheringChainCount;
 
-    [FieldOffset(0x93C), FixedSizeArray, Obsolete("Use SeenCraftingNotebookDivisionLevelRangesBitArray")] internal FixedSizeArray72<byte> _seenCraftingNotebookDivisionLevelRangesBitmask;
+    [FieldOffset(0x93C), FixedSizeArray, Obsolete("Use SeenCraftingNotebookDivisionLevelRangesBitArray", true)] internal FixedSizeArray72<byte> _seenCraftingNotebookDivisionLevelRangesBitmask;
     [FieldOffset(0x93C), FixedSizeArray(isBitArray: true, bitCount: 72 * 8)] internal FixedSizeArray72<byte> _seenCraftingNotebookDivisionLevelRanges; // BitCount: unknown, but we know the array is 72 bytes long
-    [FieldOffset(0x98C), FixedSizeArray, Obsolete("Use CompletedRecipesBitArray")] internal FixedSizeArray801<byte> _completedRecipesBitmask;
+    [FieldOffset(0x98C), FixedSizeArray, Obsolete("Use CompletedRecipesBitArray", true)] internal FixedSizeArray801<byte> _completedRecipesBitmask;
     [FieldOffset(0x98C), FixedSizeArray(isBitArray: true, bitCount: 6407)] internal FixedSizeArray801<byte> _completedRecipes; // BitCount: RecipeSheet.Where(row => row.RowId < 30000).Max(row => row.RowId)
 
     [FieldOffset(0xCB0)] private uint UnkCB0;
@@ -64,7 +64,7 @@ public unsafe partial struct QuestManager {
     [FieldOffset(0xFA8)] public byte NumLeveAllowances;
     [FieldOffset(0xFA9)] private ushort UnkFA9;
     [FieldOffset(0xFAB)] private uint UnkFAB;
-    [FieldOffset(0xFB0), FixedSizeArray, Obsolete("Use CompletedLeveQuestsBitArray")] internal FixedSizeArray226<byte> _completedLeveQuestsBitmask;
+    [FieldOffset(0xFB0), FixedSizeArray, Obsolete("Use CompletedLeveQuestsBitArray", true)] internal FixedSizeArray226<byte> _completedLeveQuestsBitmask;
     [FieldOffset(0xFB0), FixedSizeArray(isBitArray: true, bitCount: 1808)] internal FixedSizeArray226<byte> _completedLeveQuests; // BitCount: LeveSheet.Count
 
     public byte NumAcceptedQuests {
