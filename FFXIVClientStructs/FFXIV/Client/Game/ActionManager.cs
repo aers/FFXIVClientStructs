@@ -106,7 +106,7 @@ public unsafe partial struct ActionManager {
     /// <param name="extraParam">See UseAction.</param>
     /// <param name="a7">unknown</param>
     /// <returns></returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 40 3A C7 0F 85 ?? ?? ?? ??")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B BC 24 ?? ?? ?? ?? 44 0F B6 F8 B0")]
     public partial bool UseActionLocation(ActionType actionType, uint actionId, ulong targetId = 0xE000_0000, Vector3* location = null, uint extraParam = 0, byte a7 = 0);
 
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 6C 24 ?? 85 C0 74")]
