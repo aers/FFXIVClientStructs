@@ -86,7 +86,7 @@ public unsafe partial struct UIState {
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
     // BitCount: AetheryteSheet.RowCount
     /// <remarks> Use <see cref="IsAetheryteUnlocked"/>. </remarks>
-    [FieldOffset(0x19FB8), FixedSizeArray(isBitArray: true, bitCount: 239)] internal FixedSizeArray30<byte> _unlockedAetherytes;
+    [FieldOffset(0x19FB8), FixedSizeArray(isBitArray: true, bitCount: 240)] internal FixedSizeArray30<byte> _unlockedAetherytes;
 
     [FieldOffset(0x19FD6), FixedSizeArray, Obsolete("Use UnlockedHowTosBitArray", true)] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
@@ -98,7 +98,7 @@ public unsafe partial struct UIState {
     // Ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
     // BitCount: CompanionSheet.RowCount
     /// <remarks> Use <see cref="IsCompanionUnlocked"/>. </remarks>
-    [FieldOffset(0x19FFB), FixedSizeArray(isBitArray: true, bitCount: 568)] internal FixedSizeArray71<byte> _unlockedCompanions;
+    [FieldOffset(0x19FFB), FixedSizeArray(isBitArray: true, bitCount: 584)] internal FixedSizeArray73<byte> _unlockedCompanions;
 
     [FieldOffset(0x1A044), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray", true)] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
     [FieldOffset(0x1A044), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray", true)] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStandsBitmask;
@@ -109,14 +109,14 @@ public unsafe partial struct UIState {
     [FieldOffset(0x1A050), FixedSizeArray, Obsolete("Use SeenCutscenesBitArray", true)] internal FixedSizeArray173<byte> _cutsceneSeenBitmask;
     // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
     /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
-    [FieldOffset(0x1A050), FixedSizeArray(isBitArray: true, bitCount: 1384)] internal FixedSizeArray173<byte> _seenCutscenes;
+    [FieldOffset(0x1A050), FixedSizeArray(isBitArray: true, bitCount: 1409)] internal FixedSizeArray177<byte> _seenCutscenes;
 
     // unk bitmasks
 
     [FieldOffset(0x1A103), FixedSizeArray, Obsolete("Use UnlockedTripleTriadCardsBitArray", true)] internal FixedSizeArray57<byte> _unlockedTripleTriadCardsBitmask;
     // BitCount: TripleTriadCardSheet.RowCount
     /// <remarks> Use <see cref="IsTripleTriadCardUnlocked"/>. </remarks>
-    [FieldOffset(0x1A103), FixedSizeArray(isBitArray: true, bitCount: 455)] internal FixedSizeArray57<byte> _unlockedTripleTriadCards;
+    [FieldOffset(0x1A103), FixedSizeArray(isBitArray: true, bitCount: 465)] internal FixedSizeArray59<byte> _unlockedTripleTriadCards;
     [FieldOffset(0x1A140)] public ulong UnlockedTripleTriadCardsCount;
 
     [FieldOffset(0x1A15A)] public int TerritoryTypeTransientOffsetZ; // this is a short in the sheet and copied with a 4 byte register causing it to be an int

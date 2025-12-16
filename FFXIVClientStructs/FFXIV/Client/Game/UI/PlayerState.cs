@@ -82,15 +82,15 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x2FD), FixedSizeArray, Obsolete("Use UnlockedMountsBitArray", true)] internal FixedSizeArray41<byte> _unlockedMountsBitmask;
     // BitCount: MountSheet.Where(row => row.ModelChara.RowId != 0).Max(row => row.Order))
     /// <remarks> Use <see cref="IsMountUnlocked"/>. </remarks>
-    [FieldOffset(0x2FD), FixedSizeArray(isBitArray: true, bitCount: 327)] internal FixedSizeArray41<byte> _unlockedMounts;
+    [FieldOffset(0x2FD), FixedSizeArray(isBitArray: true, bitCount: 343)] internal FixedSizeArray43<byte> _unlockedMounts;
     [FieldOffset(0x328), FixedSizeArray, Obsolete("Use UnlockedOrnamentsBitArray", true)] internal FixedSizeArray7<byte> _unlockedOrnamentsBitmask;
     // BitCount: OrnamentSheet.RowCount
     /// <remarks> Use <see cref="IsOrnamentUnlocked"/>. </remarks>
-    [FieldOffset(0x328), FixedSizeArray(isBitArray: true, bitCount: 52)] internal FixedSizeArray7<byte> _unlockedOrnaments;
+    [FieldOffset(0x328), FixedSizeArray(isBitArray: true, bitCount: 55)] internal FixedSizeArray7<byte> _unlockedOrnaments;
     [FieldOffset(0x330), FixedSizeArray, Obsolete("Use UnlockedGlassesStylesBitArray", true)] internal FixedSizeArray5<byte> _unlockedGlassesStylesBitmask;
     // BitCount: GlassesStylesSheet.RowCount
     /// <remarks> Use <see cref="IsGlassesUnlocked"/>. </remarks>
-    [FieldOffset(0x330), FixedSizeArray(isBitArray: true, bitCount: 40)] internal FixedSizeArray5<byte> _unlockedGlassesStyles;
+    [FieldOffset(0x330), FixedSizeArray(isBitArray: true, bitCount: 52)] internal FixedSizeArray7<byte> _unlockedGlassesStyles;
     [FieldOffset(0x338)] public ushort NumOwnedMounts;
     [FieldOffset(0x33A)] private ushort NumOwnedMountsMinus1; // ???
     // [FieldOffset(0x328), FixedSizeArray] internal FixedSizeArray44<ushort> _unk316; // something FishParameter?
@@ -102,7 +102,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x416), FixedSizeArray, Obsolete("Use CaughtFishBitArray", true)] internal FixedSizeArray182<byte> _caughtFishBitmask;
     // BitCount: FishParameterSheet.Last(row => row.IsInLog).RowId
     /// <remarks> Use <see cref="IsFishCaught"/>. </remarks>
-    [FieldOffset(0x416), FixedSizeArray(isBitArray: true, bitCount: 1455)] internal FixedSizeArray182<byte> _caughtFish;
+    [FieldOffset(0x416), FixedSizeArray(isBitArray: true, bitCount: 1463)] internal FixedSizeArray183<byte> _caughtFish;
     [FieldOffset(0x4D0)] public uint NumFishCaught;
     [FieldOffset(0x4D4)] public uint FishingBait;
     [FieldOffset(0x4D8), FixedSizeArray, Obsolete("Use UnlockedSpearfishingNotebooksBitArray", true)] internal FixedSizeArray8<byte> _unlockedSpearfishingNotebookBitmask;
@@ -180,7 +180,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x608), FixedSizeArray, Obsolete("Use UnlockedOrchestrionRollsBitArray", true)] internal FixedSizeArray99<byte> _unlockedOrchestrionRollBitmask;
     // BitCount: OrchestrionSheet.RowCount
     /// <remarks> Use <see cref="IsOrchestrionRollUnlocked"/>. </remarks>
-    [FieldOffset(0x608), FixedSizeArray(isBitArray: true, bitCount: 789)] internal FixedSizeArray99<byte> _unlockedOrchestrionRolls;
+    [FieldOffset(0x608), FixedSizeArray(isBitArray: true, bitCount: 833)] internal FixedSizeArray105<byte> _unlockedOrchestrionRolls;
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
