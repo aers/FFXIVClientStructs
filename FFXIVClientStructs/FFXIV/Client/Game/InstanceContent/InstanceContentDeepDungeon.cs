@@ -8,40 +8,40 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //           Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2B90)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2B30)]
 public unsafe partial struct InstanceContentDeepDungeon {
-    [FieldOffset(0x2090), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
-    [FieldOffset(0x20B0), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
-    [FieldOffset(0x20E0), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
-    [FieldOffset(0x2108), FixedSizeArray] internal FixedSizeArray3<byte> _magicite;
+    [FieldOffset(0x2030), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
+    [FieldOffset(0x2050), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
+    [FieldOffset(0x2080), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
+    [FieldOffset(0x20A8), FixedSizeArray] internal FixedSizeArray3<byte> _magicite;
 
-    [FieldOffset(0x2110)] public uint BonusLootItemId;
-    [FieldOffset(0x2114)] public byte Floor;
-    [FieldOffset(0x2115)] public byte ReturnProgress;
-    [FieldOffset(0x2116)] public byte PassageProgress;
+    [FieldOffset(0x20B0)] public uint BonusLootItemId;
+    [FieldOffset(0x20B4)] public byte Floor;
+    [FieldOffset(0x20B5)] public byte ReturnProgress;
+    [FieldOffset(0x20B6)] public byte PassageProgress;
 
-    [FieldOffset(0x2118)] public byte WeaponLevel;
-    [FieldOffset(0x2119)] public byte ArmorLevel;
-    [FieldOffset(0x211A)] public byte SyncedGearLevel;
-    [FieldOffset(0x211B)] public byte HoardCount;
-    [FieldOffset(0x211C)] public byte DeepDungeonGimmickEffectIdCurrent;
-    [FieldOffset(0x211D)] public byte DeepDungeonGimmickEffectIdNext;
+    [FieldOffset(0x20B8)] public byte WeaponLevel;
+    [FieldOffset(0x20B9)] public byte ArmorLevel;
+    [FieldOffset(0x20BA)] public byte SyncedGearLevel;
+    [FieldOffset(0x20BB)] public byte HoardCount;
+    [FieldOffset(0x20BC)] public byte DeepDungeonGimmickEffectIdCurrent;
+    [FieldOffset(0x20BD)] public byte DeepDungeonGimmickEffectIdNext;
 
-    [FieldOffset(0x212A)] public byte DeepDungeonStatusId;
-    [FieldOffset(0x212B)] public byte DeepDungeonBanId;
-    [FieldOffset(0x212C)] public byte DeepDungeonDangerId;
+    [FieldOffset(0x20CA)] public byte DeepDungeonStatusId;
+    [FieldOffset(0x20CB)] public byte DeepDungeonBanId;
+    [FieldOffset(0x20CC)] public byte DeepDungeonDangerId;
 
-    [FieldOffset(0x2ADE)] public byte DeepDungeonId; // 1-3
+    [FieldOffset(0x2A7E)] public byte DeepDungeonId; // 1-3
 
-    [FieldOffset(0x2B54), FixedSizeArray] internal FixedSizeArray25<RoomFlags> _mapData;
+    [FieldOffset(0x2AF4), FixedSizeArray] internal FixedSizeArray25<RoomFlags> _mapData;
 
     // each DD floor map actually contains two mirrored copies of the same layout; this is usually either 0 or 1
     // but LayoutInfos[2] *is* referenced in the code - might be HoH hall of fallacies? (large rectangular room with no walls)
-    [FieldOffset(0x2B87)] public byte ActiveLayoutIndex;
+    [FieldOffset(0x2B27)] public byte ActiveLayoutIndex;
     // seen values:
     // 1 - normal
     // 6 - in boss arena
-    [FieldOffset(0x2B88)] public byte LayoutInitializationType;
+    [FieldOffset(0x2B28)] public byte LayoutInitializationType;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct DeepDungeonPartyInfo {

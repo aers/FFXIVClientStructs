@@ -4,5 +4,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<EventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x690)]
+[StructLayout(LayoutKind.Explicit, Size = 0x630)]
 public partial struct TripleTriadEventHandler;

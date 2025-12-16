@@ -7,15 +7,15 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Component::GUI::AtkModuleInterface::AtkEventInterface
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AtkModuleInterface.AtkEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x290)]
+[StructLayout(LayoutKind.Explicit, Size = 0x230)]
 public unsafe partial struct FishingEventHandler {
-    [FieldOffset(0x220)] private byte Unk_220;
-    [FieldOffset(0x228)] public FishingState State;
+    [FieldOffset(0x1C0)] private byte Unk_220;
+    [FieldOffset(0x1C8)] public FishingState State;
 
     /// <remarks>
     /// 4 Hz inverse sawtooth between one and zero.  Latches upon cast.  No clue what it is for.
     /// </remarks>
-    [FieldOffset(0x22C)] private float Unk_22C;
+    [FieldOffset(0x1CC)] private float Unk_22C;
 
     /// <summary>
     /// Whether you are at a fishing hole.
@@ -23,29 +23,29 @@ public unsafe partial struct FishingEventHandler {
     /// <remarks>
     /// Only indicates that you are at a hole, not whether you can actually fish there.  Only updates when on FSH.
     /// </remarks>
-    [FieldOffset(0x230)] public bool CanFish;
+    [FieldOffset(0x1D0)] public bool CanFish;
 
     /// <remarks>
     /// Returns to false when opportunity is gone (i.e., Spareful Hand is used).
     /// </remarks>
-    [FieldOffset(0x231)] public bool CanMoochPreviousCatch;
+    [FieldOffset(0x1D1)] public bool CanMoochPreviousCatch;
 
     /// <remarks>
     /// Returns to false when opportunity is gone (i.e., 15s elapsed).  Ignores skill cooldown.
     /// </remarks>
-    [FieldOffset(0x232)] public bool CanMooch2PreviousCatch;
+    [FieldOffset(0x1D2)] public bool CanMooch2PreviousCatch;
 
-    [FieldOffset(0x233)] public bool CanReleasePreviousCatch;
+    [FieldOffset(0x1D3)] public bool CanReleasePreviousCatch;
 
     /// <remarks>
     /// True while in the process of sitting down or standing up.
     /// </remarks>
-    [FieldOffset(0x234)] public bool ChangingPosition;
+    [FieldOffset(0x1D4)] public bool ChangingPosition;
 
-    [FieldOffset(0x235)] public bool CanIdenticalCastPreviousCatch;
-    [FieldOffset(0x236)] public bool CanSurfaceSlapPreviousCatch;
-    [FieldOffset(0x237)] private bool Unk_237; // Never seen false.  vf57 actively sets it to true, whatever that does.
-    [FieldOffset(0x238)] public FishingBaitFlags CurrentCastBaitFlags;
+    [FieldOffset(0x1D5)] public bool CanIdenticalCastPreviousCatch;
+    [FieldOffset(0x1D6)] public bool CanSurfaceSlapPreviousCatch;
+    [FieldOffset(0x1D7)] private bool Unk_237; // Never seen false.  vf57 actively sets it to true, whatever that does.
+    [FieldOffset(0x1D8)] public FishingBaitFlags CurrentCastBaitFlags;
 
     /// <summary>
     /// The index into <see cref="SwimBaitItemIds"/> of the currently-selected swimbait.
@@ -53,28 +53,28 @@ public unsafe partial struct FishingEventHandler {
     /// <remarks>
     /// This is -1 when no swimbait has been selected.
     /// </remarks>
-    [FieldOffset(0x23C)] public sbyte CurrentSelectedSwimBait;
+    [FieldOffset(0x1DC)] public sbyte CurrentSelectedSwimBait;
 
     /// <summary>
     /// The item IDs of currently-stored swimbait.
     /// </summary>
-    [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray3<uint> _swimBaitItemIds;
+    [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray3<uint> _swimBaitItemIds;
 
-    [FieldOffset(0x240), Obsolete("Use SwimBaitItemIds[0]", true)] public uint SwimBaitId1;
-    [FieldOffset(0x244), Obsolete("Use SwimBaitItemIds[1]", true)] public uint SwimBaitId2;
-    [FieldOffset(0x248), Obsolete("Use SwimBaitItemIds[2]", true)] public uint SwimBaitId3;
+    [FieldOffset(0x1E0), Obsolete("Use SwimBaitItemIds[0]", true)] public uint SwimBaitId1;
+    [FieldOffset(0x1E4), Obsolete("Use SwimBaitItemIds[1]", true)] public uint SwimBaitId2;
+    [FieldOffset(0x1E8), Obsolete("Use SwimBaitItemIds[2]", true)] public uint SwimBaitId3;
 
-    [FieldOffset(0x24C)] private uint Unk_24C; // Sometimes matches 0x224, but that offset may just be uninitialized padding.
+    [FieldOffset(0x1EC)] private uint Unk_24C; // Sometimes matches 0x224, but that offset may just be uninitialized padding.
 
     /// <summary>
     /// Unix time (in milliseconds) for when the current Mooch/Spareful Hand opportunity will cease being available (if ever).
     /// </summary>
-    [FieldOffset(0x250)] public long MoochOpportunityExpirationTime;
+    [FieldOffset(0x1F0)] public long MoochOpportunityExpirationTime;
 
     /// <summary>
     /// Unix time (in milliseconds) for when actions like Surface Slap will cease being available.
     /// </summary>
-    [FieldOffset(0x258)] public long CatchActionExpirationTime;
+    [FieldOffset(0x1F8)] public long CatchActionExpirationTime;
 
     // An instance of something that looks like it has a 6-function vtable right before this event handler's vtable.  Probably 0x30 bytes long.
     //[FieldOffset( 0x260 )] private void* vTablePtr;

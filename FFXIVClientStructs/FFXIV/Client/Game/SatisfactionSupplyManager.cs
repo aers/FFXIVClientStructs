@@ -3,29 +3,29 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 // Client::Game::SatisfactionSupplyManager
 // Custom Deliveries
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x323)]
+[StructLayout(LayoutKind.Explicit, Size = 0x327)]
 public unsafe partial struct SatisfactionSupplyManager {
     [StaticAddress("8B D0 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 1E", 5)]
     public static partial SatisfactionSupplyManager* Instance();
 
     [FieldOffset(0x0)] public byte SupplySeed; // seed for pseudorandom transform that selects requested crafts for the week
     [FieldOffset(0x1)] public byte BonusGuaranteeRowId; // determines which two npcs per category will have bonus items, in addition to pseudo-random ones
-    [FieldOffset(0x2), FixedSizeArray] internal FixedSizeArray11<ushort> _satisfaction; // Satisfaction of the current Rank
-    [FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray11<byte> _satisfactionRanks; // 1-5 indicating each NPC's "Satisfaction" value (the hearts in the UI)
-    [FieldOffset(0x23), FixedSizeArray] internal FixedSizeArray11<byte> _usedAllowances;
-    [FieldOffset(0x2E)] public short CurrentNpc; // current NPC being shown in AddonSatisfactionSupply
-    [FieldOffset(0x30)] public short CurrentSupplyRowId;
-    [FieldOffset(0x32), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplySubRowIds; // unsure what the first entry is supposed to be
-    [FieldOffset(0x3A), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplyRewardRowIds; // unsure what the first entry is supposed to be
-    [FieldOffset(0x42)] public bool CurrentNpcInitInProgress;
-    [FieldOffset(0x43)] public bool CurrentNpcInitDone;
-    // 0x48: ulong set together with CurrentNpc, all callers pass zero
-    // 0x50: ExcelSheetWaiter* for SatisfactionSupply
-    // 0x58: ExcelSheetWaiter* for SatisfactionSupplyReward
-    // 0x60: ExcelSheetWaiter* for SatisfactionSupplyRewardExp
-    // 0x68: ExcelSheetWaiter* for SatisfactionBonusGuarantee
-    [FieldOffset(0x70)] public uint FixedRandom; // seems to be a debug thing, set by gm command, not actually used?
-    [FieldOffset(0x74)] public int TimeAdjustmentForBonusGuarantee; // seems to be a debug thing, set by gm command, this is added to server time (in seconds) and used to calculate bonus guarantee row
+    [FieldOffset(0x2), FixedSizeArray] internal FixedSizeArray12<ushort> _satisfaction; // Satisfaction of the current Rank
+    [FieldOffset(0x1A), FixedSizeArray] internal FixedSizeArray12<byte> _satisfactionRanks; // 1-5 indicating each NPC's "Satisfaction" value (the hearts in the UI)
+    [FieldOffset(0x26), FixedSizeArray] internal FixedSizeArray12<byte> _usedAllowances;
+    [FieldOffset(0x32)] public short CurrentNpc; // current NPC being shown in AddonSatisfactionSupply
+    [FieldOffset(0x34)] public short CurrentSupplyRowId;
+    [FieldOffset(0x36), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplySubRowIds; // unsure what the first entry is supposed to be
+    [FieldOffset(0x3E), FixedSizeArray] internal FixedSizeArray4<short> _currentSupplyRewardRowIds; // unsure what the first entry is supposed to be
+    [FieldOffset(0x46)] public bool CurrentNpcInitInProgress;
+    [FieldOffset(0x47)] public bool CurrentNpcInitDone;
+    // 0x4C: ulong set together with CurrentNpc, all callers pass zero
+    // 0x54: ExcelSheetWaiter* for SatisfactionSupply
+    // 0x5C: ExcelSheetWaiter* for SatisfactionSupplyReward
+    // 0x64: ExcelSheetWaiter* for SatisfactionSupplyRewardExp
+    // 0x6C: ExcelSheetWaiter* for SatisfactionBonusGuarantee
+    [FieldOffset(0x74)] public uint FixedRandom; // seems to be a debug thing, set by gm command, not actually used?
+    [FieldOffset(0x78)] public int TimeAdjustmentForBonusGuarantee; // seems to be a debug thing, set by gm command, this is added to server time (in seconds) and used to calculate bonus guarantee row
 
     [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
     public struct NpcInfo {
