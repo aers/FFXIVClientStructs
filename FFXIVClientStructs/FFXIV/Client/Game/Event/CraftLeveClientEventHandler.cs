@@ -5,5 +5,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //     Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<LuaEventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x548)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4E8)]
 public partial struct CraftLeveClientEventHandler;

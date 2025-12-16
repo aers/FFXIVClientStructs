@@ -5,5 +5,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //     Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<LuaEventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x4C8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x468)]
 public partial struct CustomTalkEventHandler;
