@@ -18,7 +18,7 @@ public unsafe partial struct ShopEventHandler {
     [FieldOffset(0x1C8)] public Utf8String ShopName;
     [FieldOffset(0x230)] public uint ShopIcon;
     [FieldOffset(0x234)] public GameMain.Festival Festival;
-    [FieldOffset(0x238)] public uint UnlockQuestId;
+    [FieldOffset(0x23C)] public uint UnlockQuestId;
     // 0x23C: byte, col 5 in GilShop row
     [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray60<ShopItem> _items;
     [FieldOffset(0x29A0)] public int ItemsCount; // num valid entries in Items array
