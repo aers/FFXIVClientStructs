@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // base class for all UI "nodes" which represent elements of the UI
 [GenerateInterop(isInherited: true)]
 [Inherits<AtkEventTarget>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? ?? ?? ?? 33 C0 48 89 41 ?? 66 C7 81", 3, 3)]
 public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x8)] public uint NodeId;
@@ -29,37 +29,37 @@ public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x4C)] public float ScaleX;
     [FieldOffset(0x50)] public float ScaleY;
     [FieldOffset(0x54)] public float Rotation; // radians (file is degrees)
-    [FieldOffset(0x58)] public Matrix2x2 Transform;
-    [FieldOffset(0x68)] public float ScreenX;
-    [FieldOffset(0x6C)] public float ScreenY;
+    [FieldOffset(0x60)] public Matrix2x2 Transform;
+    [FieldOffset(0x70)] public float ScreenX;
+    [FieldOffset(0x74)] public float ScreenY;
 
-    [FieldOffset(0x70)] public ByteColor Color;
+    [FieldOffset(0x80)] public ByteColor Color;
 
     // not sure what the _2s are for, the regular ones are loaded from the file
-    [FieldOffset(0x74)] public float Depth;
-    [FieldOffset(0x78)] public float Depth_2;
-    [FieldOffset(0x7C)] public short AddRed;
-    [FieldOffset(0x7E)] public short AddGreen;
-    [FieldOffset(0x80)] public short AddBlue;
-    [FieldOffset(0x82)] public short AddRed_2;
-    [FieldOffset(0x84)] public short AddGreen_2;
-    [FieldOffset(0x86)] public short AddBlue_2;
-    [FieldOffset(0x88)] public byte MultiplyRed;
-    [FieldOffset(0x89)] public byte MultiplyGreen;
-    [FieldOffset(0x8A)] public byte MultiplyBlue;
-    [FieldOffset(0x8B)] public byte MultiplyRed_2;
-    [FieldOffset(0x8C)] public byte MultiplyGreen_2;
-    [FieldOffset(0x8D)] public byte MultiplyBlue_2;
-    [FieldOffset(0x8E)] public byte Alpha_2;
-    [FieldOffset(0x8F)] public byte UnkByte_1;
-    [FieldOffset(0x90)] public ushort Width;
-    [FieldOffset(0x92)] public ushort Height;
-    [FieldOffset(0x94)] public float OriginX;
-    [FieldOffset(0x98)] public float OriginY;
+    [FieldOffset(0x84)] public float Depth;
+    [FieldOffset(0x88)] public float Depth_2;
+    [FieldOffset(0x8C)] public short AddRed;
+    [FieldOffset(0x8E)] public short AddGreen;
+    [FieldOffset(0x90)] public short AddBlue;
+    [FieldOffset(0x92)] public short AddRed_2;
+    [FieldOffset(0x94)] public short AddGreen_2;
+    [FieldOffset(0x96)] public short AddBlue_2;
+    [FieldOffset(0x98)] public byte MultiplyRed;
+    [FieldOffset(0x99)] public byte MultiplyGreen;
+    [FieldOffset(0x9A)] public byte MultiplyBlue;
+    [FieldOffset(0x9B)] public byte MultiplyRed_2;
+    [FieldOffset(0x9C)] public byte MultiplyGreen_2;
+    [FieldOffset(0x9D)] public byte MultiplyBlue_2;
+    [FieldOffset(0x9E)] public byte Alpha_2;
+    [FieldOffset(0x9F)] public byte UnkByte_1;
+    [FieldOffset(0xA0)] public ushort Width;
+    [FieldOffset(0xA2)] public ushort Height;
+    [FieldOffset(0xA4)] public float OriginX;
+    [FieldOffset(0xA8)] public float OriginY;
 
     // asm accesses these fields together so this is one 32bit field with priority+flags
-    [FieldOffset(0x9C)] public ushort Priority;
-    [FieldOffset(0x9E)] public NodeFlags NodeFlags;
+    [FieldOffset(0xAC)] public ushort Priority;
+    [FieldOffset(0xAE)] public NodeFlags NodeFlags;
     /// <summary>
     /// <term>Bit 1 [0x1]</term> Is dirty (has updates to be drawn)<br/>
     /// <term>Bit 2 [0x2]</term> Is undergoing timeline animation (?)<br/>
@@ -74,7 +74,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     /// <term>Bit 23 [0x400000]</term> Change CursorType to TextInput on hover<br/>
     /// <term>Bit 24 [0x800000]</term> Use elliptical collision instead of rectangular
     /// </summary>
-    [FieldOffset(0xA0)] public uint DrawFlags;
+    [FieldOffset(0xB0)] public uint DrawFlags;
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B D8 48 83 C4 ?? 5B C3 33 DB")]
     public partial void Ctor();

@@ -13,29 +13,29 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // simple text node
 [GenerateInterop]
 [Inherits<AtkResNode>]
-[StructLayout(LayoutKind.Explicit, Size = 0x168)]
+[StructLayout(LayoutKind.Explicit, Size = 0x180)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 144])]
 public unsafe partial struct AtkTextNode : ICreatable {
-    [FieldOffset(0xB0)] public uint TextId;
-    [FieldOffset(0xB4)] public ByteColor TextColor;
-    [FieldOffset(0xB8)] public ByteColor EdgeColor;
-    [FieldOffset(0xBC)] public ByteColor BackgroundColor;
-    [FieldOffset(0xC0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
-    [FieldOffset(0x128)] public CStringPointer OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
-    [FieldOffset(0x130)] public StdList<Pointer<LinkData>>* LinkData;
+    [FieldOffset(0xC0)] public uint TextId;
+    [FieldOffset(0xC4)] public ByteColor TextColor;
+    [FieldOffset(0xC8)] public ByteColor EdgeColor;
+    [FieldOffset(0xCC)] public ByteColor BackgroundColor;
+    [FieldOffset(0xD0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
+    [FieldOffset(0x138)] public CStringPointer OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
+    [FieldOffset(0x140)] public StdList<Pointer<LinkData>>* LinkData;
     // if text is "asdf" and you selected "sd" this is 2, 3
-    [FieldOffset(0x138)] public uint SelectStart;
-    [FieldOffset(0x13C)] public uint SelectEnd;
+    [FieldOffset(0x148)] public uint SelectStart;
+    [FieldOffset(0x14C)] public uint SelectEnd;
 
-    [FieldOffset(0x152)] public byte LineSpacing;
-    [FieldOffset(0x153)] public byte CharSpacing;
+    [FieldOffset(0x162)] public byte LineSpacing;
+    [FieldOffset(0x163)] public byte CharSpacing;
     /// <remarks>Alignment bits 0-3, Font Type bits 4-7</remarks>
-    [FieldOffset(0x154)] public byte AlignmentFontType;
-    [FieldOffset(0x155)] public byte FontSize;
-    [FieldOffset(0x156)] public byte SheetType;
+    [FieldOffset(0x164)] public byte AlignmentFontType;
+    [FieldOffset(0x165)] public byte FontSize;
+    [FieldOffset(0x166)] public byte SheetType;
 
-    [FieldOffset(0x158)] public ushort FontCacheHandle;
-    [FieldOffset(0x160)] public TextFlags TextFlags;
+    [FieldOffset(0x168)] public ushort FontCacheHandle;
+    [FieldOffset(0x170)] public TextFlags TextFlags;
 
     // 7.0 inlines this ctor
     public void Ctor() {
