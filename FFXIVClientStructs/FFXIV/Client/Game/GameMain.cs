@@ -56,13 +56,13 @@ public unsafe partial struct GameMain {
     [MemberFunction("E8 ?? ?? ?? ?? 83 7F ?? ?? 4C 8D 3D")]
     public static partial bool IsInGPose();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 57 FF 84 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 32 DB 0F B6 C3")]
     public static partial bool IsInIdleCam();
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??")]
     public partial void QueueActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies once the current "event" is done (GPose, Cutscene etc)
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 63 50 FE")]
+    [MemberFunction("40 53 45 33 D2 4C 8D 41 40")]
     public partial void SetActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies immediately regardless of client state
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 46 0A")]

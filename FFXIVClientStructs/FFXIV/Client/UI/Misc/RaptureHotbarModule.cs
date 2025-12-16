@@ -165,7 +165,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// </summary>
     /// <param name="macroSet">The macro set to scan for.</param>
     /// <param name="macroIndex">The macro index to scan for.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 48 8B 01 FF 50 ?? 45 33 C9 41 B0")]
+    [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 55 41 56 41 57 48 83 EC 20 44 0F B6 E2 48 8B D9")]
     public partial void ReloadMacroSlots(byte macroSet, byte macroIndex);
 
     /// <summary>

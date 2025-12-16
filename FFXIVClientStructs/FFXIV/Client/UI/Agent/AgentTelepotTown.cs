@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentTelepotTown {
     [FieldOffset(0x28)] public AgentTelepotTownData* Data;
 
-    [MemberFunction("E9 ?? ?? ?? ?? 83 F9 01 0F 85 ?? ?? ?? ?? 48 8B 4B 28")]
+    [MemberFunction("E9 ?? ?? ?? ?? 83 F9 01 0F 85 ?? ?? ?? ?? 48 8B 53 28")]
     public partial void TeleportToAetheryte(byte index);
 }
 

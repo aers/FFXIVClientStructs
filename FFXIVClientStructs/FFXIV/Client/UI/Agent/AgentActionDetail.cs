@@ -3,7 +3,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.ActionDetail)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[VirtualTable("83 79 5C 00 48 8D 05 ?? ?? ?? ?? 48 89 01 8B FA", 7)]
+[VirtualTable("48 8D 05 ?? ?? ?? ?? 48 89 01 8B FA 48 8B D9 74 ?? 0F B6 41", 3)]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct AgentActionDetail {
     [FieldOffset(0x38)] public ActionKind ActionKind;
@@ -12,7 +12,7 @@ public unsafe partial struct AgentActionDetail {
     [FieldOffset(0x44)] public uint AdjustedId; // Example: Summon Titan II
 
     // flag & 1 = get AdjustedActionId
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? E9 ?? ?? ?? ?? 83 F8 0F")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 83 F8 0F")]
     public partial void HandleActionHover(ActionKind actionKind, uint actionId, int flag, bool isLovmActionDetail, int a5, int a6);
 }
 

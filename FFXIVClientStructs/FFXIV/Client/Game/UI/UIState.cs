@@ -220,7 +220,7 @@ public unsafe partial struct UIState {
     [MemberFunction("E8 ?? ?? ?? ?? 88 46 02 B0 01")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 44")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
 
     [MemberFunction("48 83 EC 28 E8 ?? ?? ?? ?? 48 85 C0 74 14 0F B7 40 2A")]

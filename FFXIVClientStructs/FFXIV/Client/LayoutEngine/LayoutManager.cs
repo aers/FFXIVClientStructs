@@ -73,7 +73,7 @@ public unsafe partial struct LayoutManager {
     [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 4C 8B 91 ?? ?? ?? ?? 49 8B F9")]
     public partial void SetOutdoorPlotExterior(int plotIndex, OutdoorPlotExteriorData* data, delegate* unmanaged<uint, void> loadedCallback = null);
 
-    [MemberFunction("8B 02 4C 8D 41 40")]
+    [MemberFunction("40 53 45 33 D2 4C 8D 41 40")]
     public partial void SetActiveFestivals(GameMain.Festival* festivals); // Array of exactly 4 festivals. Use 0 for none.
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]

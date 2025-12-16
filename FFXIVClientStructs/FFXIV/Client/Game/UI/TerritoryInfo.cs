@@ -17,6 +17,6 @@ public unsafe partial struct TerritoryInfo {
     [FieldOffset(0x24)] public uint AreaPlaceNameId;
     [FieldOffset(0x28)] public uint SubAreaPlaceNameId;
 
-    [MemberFunction("E8 ?? ?? ?? ?? C6 05 ?? ?? ?? ?? ?? B2 01")]
+    [MemberFunction("48 89 5C 24 ?? 56 48 83 EC 40 48 83 79 ?? ?? 8B F2")]
     public partial void LoadAreaVFXToLocalPlayer(uint areaVFX);
 }

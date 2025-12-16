@@ -43,7 +43,7 @@ public unsafe partial struct InputData {
     [MemberFunction("E9 ?? ?? ?? ?? 83 7F 44 02")]
     public partial bool IsInputIdPressed(InputId inputId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 41 8B D5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 76 06")]
     public partial bool IsInputIdDown(InputId inputId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 37 EB 06")]

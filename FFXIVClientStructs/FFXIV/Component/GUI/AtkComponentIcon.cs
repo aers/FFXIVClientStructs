@@ -73,13 +73,13 @@ public unsafe partial struct AtkComponentIcon : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? C1 EE ?? 41 B8")]
     public partial void SetHasSecondDyeChannel(bool enabled);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 32 D2 45 8B C4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 32 D2 44 8B C3")]
     public partial void SetIsMacro(bool enabled);
 
     [MemberFunction("E8 ?? ?? ?? ?? C1 EF 08 45 33 C0")]
     public partial void SetIsGlamoured(bool enabled);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 83 FD 45")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 3E 33 D2")]
     public partial void SetIsRecipe(bool enabled);
 
     [MemberFunction("44 8B 89 ?? ?? ?? ?? 4C 8B D1 41 8B C1")]

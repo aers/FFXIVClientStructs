@@ -20,13 +20,13 @@ public unsafe partial struct AtkTextureResourceManager {
     /// </summary>
     /// <param name="textureHandle">Pointer to a texture resource</param>
     /// <returns>-1 if the textureHandle is null, 0 otherwise</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 45 84 FF")]
+    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 45 84 F6")]
     public partial int UnloadTexture(TextureResourceHandle* textureHandle);
 
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B F0 48 85 C0 74 35 48 8B 48 08")]
     public partial AtkTextureResource* LoadIconTexture(int iconId, IconSubFolder folder);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E8 48 85 C0 74 52"), GenerateStringOverloads]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 48 85 C0 74 52"), GenerateStringOverloads]
     public partial AtkTextureResource* LoadTexture(CStringPointer path, int textureScale);
 }
 

@@ -85,7 +85,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 45 39 B7")]
     public partial uint GetBaseNodeId();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 8B 4E ?? 81 F9")]
+    [MemberFunction("48 85 C9 74 0B 81 79")]
     public partial bool IsDuplicatedNode();
 
     #region Node getters

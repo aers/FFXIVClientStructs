@@ -118,7 +118,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("40 53 48 83 EC ?? FF C9")]
     public static partial uint GetSpellIdForAction(ActionType actionType, uint actionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 83 7F 54 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 83 7F 58 01")]
     public partial float GetRecastTime(ActionType actionType, uint actionId);
 
     /// <summary>
@@ -151,7 +151,7 @@ public unsafe partial struct ActionManager {
     /// <param name="actionType">The action type to look up.</param>
     /// <param name="actionId">The action ID to look up.</param>
     /// <returns>A cooldown group ID, or -1 if invalid.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 8B 4F 44 33 D2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 4F 48 33 D2")]
     public partial int GetAdditionalRecastGroup(ActionType actionType, uint actionId);
 
     [MemberFunction("40 53 48 83 EC 20 48 63 DA 85 D2")]

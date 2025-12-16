@@ -51,7 +51,7 @@ public unsafe partial struct RaptureTextModule {
     /// <remarks> Array of 51 (AkatsukiNote row count) ushorts. Mapping AkatsukiNote RowId to AkatsukiNoteString RowId. </remarks>
     [FieldOffset(0xE58)] public ushort* AkatsukiNoteTitleIds;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B E0 BA")]
+    [MemberFunction("E9 ?? ?? ?? ?? 80 EB 20")]
     public partial CStringPointer GetAddonText(uint addonId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 4E ?? 48 8B D0 E8 ?? ?? ?? ?? 8B 44 24")]
