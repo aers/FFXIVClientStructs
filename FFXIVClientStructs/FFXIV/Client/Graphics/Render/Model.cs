@@ -34,6 +34,6 @@ public unsafe partial struct Model {
         => new(Materials, MaterialCount);
 
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 48 8B 07 48 8B CF FF 50 ?? 32 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 29 48 8B 13")]
     public partial bool ModelDrawInit(ModelResourceHandle* mdlHandle, ModelRenderer.Callback* renderModelCallback, ModelRenderer.Callback* renderMaterialCallback);
 }

@@ -37,7 +37,7 @@ public unsafe partial struct InstanceContent {
         [FieldOffset(0x50)] public PublicContent PublicContent;
         [FieldOffset(0x68)] public GoldSaucerContent GoldSaucerContent;
 
-        [MemberFunction("E8 ?? ?? ?? ?? 33 FF 84 DB")]
+        [MemberFunction("45 33 C0 C6 41 08 00")]
         public partial void Ctor();
 
         [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8D 4E ?? 48 8B 5C 24")]

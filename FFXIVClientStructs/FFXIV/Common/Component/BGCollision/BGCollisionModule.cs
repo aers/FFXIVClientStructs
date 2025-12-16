@@ -46,7 +46,7 @@ public unsafe partial struct BGCollisionModule {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 0F B6 D6")]
     public partial bool RaycastMaterialFilter(RaycastHit* hitInfo, Vector3* origin, Vector3* direction, float maxDistance, int layerMask, int* flags);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 88 03 32 D2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 45 E0 0F B6 55 30")]
     public partial bool SweepSphereMaterialFilter(RaycastHit* hitInfo, Vector3* origin, Vector3* direction, float maxDistance, int layerMask, int* flags);
 
     public static bool RaycastMaterialFilter(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {

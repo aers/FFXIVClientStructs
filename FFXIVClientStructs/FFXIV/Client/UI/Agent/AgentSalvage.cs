@@ -37,13 +37,13 @@ public unsafe partial struct AgentSalvage {
     [FieldOffset(0x40C)] public uint DesynthItemId;
     [FieldOffset(0x410), FixedSizeArray] internal FixedSizeArray3<SalvageResult> _desynthResults;
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 2A 48 8B 06")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 2A 49 8B 07")]
     public partial void ItemListRefresh(bool isSalvageResultAddonOpen);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 81 BE ?? ?? ?? ?? ?? ?? ?? ?? 7D")]
     public partial void ItemListAdd(bool meetsLevelRequirement, InventoryType containerId, int containerSlot, uint itemId, [CExporterExcel("Item")] void* exdRow, uint quantity);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 96 ?? ?? ?? ?? E9")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 43 48 8D 4B 10")]
     public partial void SalvageItem(InventoryItem* item, int addonId = 0, byte a4 = 0); // addonId = addon to go back to once done
 
     public enum SalvageItemCategory {
