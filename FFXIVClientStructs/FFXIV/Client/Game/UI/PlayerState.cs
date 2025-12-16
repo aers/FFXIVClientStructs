@@ -318,7 +318,7 @@ public unsafe partial struct PlayerState {
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 0F B6 D7 48 8D 0D ?? ?? ?? ?? 44 8B E8")]
     public partial uint GetClassJobNeededExp(int classJobId = -1);
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 8B E8 F3 0F 10 35")]
     public partial uint GetCurrentClassJobNeededExp();
 

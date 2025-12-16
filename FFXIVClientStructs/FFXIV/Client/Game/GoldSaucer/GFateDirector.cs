@@ -22,7 +22,7 @@ public unsafe partial struct GFateDirector {
 
     [FieldOffset(0x7F4)] public ushort BgmId;
 
-    [FieldOffset(0x7FE)] public GateType GateType; 
+    [FieldOffset(0x7FE)] public GateType GateType;
     [FieldOffset(0x7FF)] public GatePositionType GatePositionType;
 
     [FieldOffset(0x7F8)] public ushort ScreenImageId1;

@@ -59,7 +59,7 @@ public unsafe partial struct FishingEventHandler {
     /// The item IDs of currently-stored swimbait.
     /// </summary>
     [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray3<uint> _swimBaitItemIds;
-    
+
     [FieldOffset(0x240), Obsolete("Use SwimBaitItemIds[0]", true)] public uint SwimBaitId1;
     [FieldOffset(0x244), Obsolete("Use SwimBaitItemIds[1]", true)] public uint SwimBaitId2;
     [FieldOffset(0x248), Obsolete("Use SwimBaitItemIds[2]", true)] public uint SwimBaitId3;

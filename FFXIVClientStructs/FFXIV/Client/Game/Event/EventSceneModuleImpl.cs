@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 [GenerateInterop]
 [Inherits<EventSceneModuleImplBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public partial struct EventSceneModuleUsualImpl {}
+public partial struct EventSceneModuleUsualImpl { }
 
 // Client::Game::Event::EventSceneModuleImplBase
 [GenerateInterop(true)]
