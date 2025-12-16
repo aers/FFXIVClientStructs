@@ -238,9 +238,12 @@ if api is None:
             def comment_rows(self, pattern: dict[str, int], values: dict[int, str]):
                 for pattern_key in pattern:
                     for ea in list(self.get_all_eas(pattern_key)):
-                        sheetIdx = self.get_dword(ea + pattern[pattern_key])
-                        sheetName = values[sheetIdx]
-                        ida_bytes.set_cmt(ea, "Sheet: {0} ({1})".format(sheetName, sheetIdx), 0)
+                        try:
+                            sheetIdx = self.get_dword(ea + pattern[pattern_key])
+                            sheetName = values[sheetIdx]
+                            ida_bytes.set_cmt(ea, "Sheet: {0} ({1})".format(sheetName, sheetIdx), 0)
+                        except Exception as e:
+                            print(f"An unexpected error occurred at 0x{hex(ea)}: {e}")
                 pass
 
         api = IdaApi()
