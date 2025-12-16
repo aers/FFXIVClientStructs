@@ -12311,11 +12311,11 @@ classes:
       0x141039D80: Finalizer
   Client::UI::Agent::AgentDeepDungeonScore:
     vtbls:
-      - ea: 0x1420D2728
+      - ea: 0x1420DFEA0
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CC3080: ctor
-      0x140BBB100: Finalizer
+      0x140CC31A0: Finalizer
   Client::UI::Agent::AgentGcArmyTraining:
     vtbls:
       - ea: 0x1420E02E0
@@ -12930,7 +12930,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentQuestRedo:
     vtbls:
-      - ea: 0x1420DFEA0
+      - ea: 0x1420D2728
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BBB000: ctor
