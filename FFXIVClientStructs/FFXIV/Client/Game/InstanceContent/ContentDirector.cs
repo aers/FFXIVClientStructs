@@ -8,18 +8,17 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 //       Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<Director>]
-[StructLayout(LayoutKind.Explicit, Size = 0xD88)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD30)]
 public unsafe partial struct ContentDirector {
-    [FieldOffset(0x542)] public byte ContentTypeRowId;
+    [FieldOffset(0x4EA)] public byte ContentTypeRowId;
 
-    [FieldOffset(0x580)] public DutyActionManager DutyActionManager;
+    [FieldOffset(0x508)] public DutyActionManager DutyActionManager;
 
-    [FieldOffset(0xCE8)] public MapEffectList* MapEffects;
-
-    [FieldOffset(0xCF0)] private DynamicEventContainer* DynamicEvents;
+    [FieldOffset(0xC90)] public MapEffectList* MapEffects;
+    [FieldOffset(0xC98)] private DynamicEventContainer* DynamicEvents;
 
     /// <remarks> This might also be a countdown until the content starts (e.g. Frontlines), then the actual time left of the content. </remarks>
-    [FieldOffset(0xD48)] public float ContentTimeLeft;
+    [FieldOffset(0xCF0)] public float ContentTimeLeft;
 
     /// <summary>
     /// Gets the max time for the content in seconds

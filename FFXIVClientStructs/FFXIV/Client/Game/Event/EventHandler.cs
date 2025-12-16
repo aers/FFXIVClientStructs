@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
-[StructLayout(LayoutKind.Explicit, Size = 0x218)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1B8)]
 public unsafe partial struct EventHandler {
     [FieldOffset(0x08)] public StdSet<Pointer<GameObject>> EventObjects;
     [FieldOffset(0x18)] public EventSceneModuleUsualImpl* EventSceneModule;
@@ -21,7 +21,6 @@ public unsafe partial struct EventHandler {
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
 
     [FieldOffset(0xC8)] public Utf8String UnkString0;
-    [FieldOffset(0x168)] public Utf8String UnkString1;
 
     [VirtualFunction(154)]
     public partial void CancelInteraction();

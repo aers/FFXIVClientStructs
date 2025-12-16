@@ -7,18 +7,18 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //         Client::Game::Event::EventHandler
 [GenerateInterop(isInherited: true)]
 [Inherits<LeveDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x6F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x690)]
 public partial struct BattleLeveDirector {
-    [FieldOffset(0x520 + 0x00), CExporterExcelBegin("BattleLeve")] private byte _rowStart;
-    [FieldOffset(0x520 + 0x00), FixedSizeArray] internal FixedSizeArray8<ushort> _time;
-    [FieldOffset(0x520 + 0x10), FixedSizeArray] internal FixedSizeArray8<LeveDataStruct> _leveData;
-    [FieldOffset(0x520 + 0x190), FixedSizeArray] internal FixedSizeArray8<byte> _toDoSequence;
-    [FieldOffset(0x520 + 0x198)] public int Rule;
-    [FieldOffset(0x520 + 0x19C), FixedSizeArray] internal FixedSizeArray3<ushort> _objectiveIds;
-    [FieldOffset(0x520 + 0x1A2), FixedSizeArray] internal FixedSizeArray2<ushort> _help;
-    [FieldOffset(0x520 + 0x1A6), CExporterExcelEnd] public byte Variant;
+    [FieldOffset(0x4C0 + 0x00), CExporterExcelBegin("BattleLeve")] private byte _rowStart;
+    [FieldOffset(0x4C0 + 0x00), FixedSizeArray] internal FixedSizeArray8<ushort> _time;
+    [FieldOffset(0x4C0 + 0x10), FixedSizeArray] internal FixedSizeArray8<LeveDataStruct> _leveData;
+    [FieldOffset(0x4C0 + 0x190), FixedSizeArray] internal FixedSizeArray8<byte> _toDoSequence;
+    [FieldOffset(0x4C0 + 0x198)] public int Rule;
+    [FieldOffset(0x4C0 + 0x19C), FixedSizeArray] internal FixedSizeArray3<ushort> _objectiveIds;
+    [FieldOffset(0x4C0 + 0x1A2), FixedSizeArray] internal FixedSizeArray2<ushort> _help;
+    [FieldOffset(0x4C0 + 0x1A6), CExporterExcelEnd] public byte Variant;
 
-    [FieldOffset(0x6D0)] public ushort RecommendedLevel;
+    [FieldOffset(0x670)] public ushort RecommendedLevel;
 
     [GenerateInterop]
     [CExporterIgnore]

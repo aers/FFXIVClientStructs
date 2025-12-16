@@ -6,43 +6,43 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::GameMain
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x4100)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4168)]
 public unsafe partial struct GameMain {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F 28 F2 48 89 44 24 ??", 3)]
     public static partial GameMain* Instance();
 
     [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray4<Festival> _activeFestivals;
-    [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray4<Festival> _queuedFestivals;
+    [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray4<Festival> _queuedFestivals;
 
-    [FieldOffset(0x210)] public ZoneSharedGroupManager ZoneSharedGroupManager;
+    [FieldOffset(0x260)] public ZoneSharedGroupManager ZoneSharedGroupManager;
 
-    [FieldOffset(0xAD8)] public JobGaugeManager JobGaugeManager;
+    [FieldOffset(0xB28)] public JobGaugeManager JobGaugeManager;
 
-    [FieldOffset(0x3FD0)] public EmoteManager EmoteManager;
+    [FieldOffset(0x4038)] public EmoteManager EmoteManager;
 
-    [FieldOffset(0x4088)] public void* CurrentContentFinderConditionRow;
-    [FieldOffset(0x4090)] public float TerritoryTransitionDelay; // in seconds
-    [FieldOffset(0x4094)] public byte TerritoryTransitionState; // 1 = waiting for layout to load or delay to end, 2 = transition finished, switching territories
-    [FieldOffset(0x4096)] public bool ConnectedToZone;
+    [FieldOffset(0x40F0)] public void* CurrentContentFinderConditionRow;
+    [FieldOffset(0x40F8)] public float TerritoryTransitionDelay; // in seconds
+    [FieldOffset(0x40FC)] public byte TerritoryTransitionState; // 1 = waiting for layout to load or delay to end, 2 = transition finished, switching territories
+    [FieldOffset(0x40FE)] public bool ConnectedToZone;
 
-    [FieldOffset(0x4098)] public uint TerritoryLoadState; // 1 = loading, 2 = loaded, 3 = unloading/shutting down
-    [FieldOffset(0x409C)] public uint NextTerritoryTypeId;
-    [FieldOffset(0x40A0)] public uint CurrentTerritoryTypeId; // can be 0 during loading screens
-    [FieldOffset(0x40A4)] public TerritoryIntendedUse CurrentTerritoryIntendedUseId;
-    [FieldOffset(0x40A8)] public uint CurrentTerritoryFilterKey;
-    [FieldOffset(0x40AC)] public ushort CurrentContentFinderConditionId;
-    [FieldOffset(0x40B0)] public uint TransitionTerritoryTypeId;
-    [FieldOffset(0x40B4)] public uint TransitionTerritoryFilterKey;
-    [FieldOffset(0x40B8)] public uint CurrentMapId;
+    [FieldOffset(0x4100)] public uint TerritoryLoadState; // 1 = loading, 2 = loaded, 3 = unloading/shutting down
+    [FieldOffset(0x4104)] public uint NextTerritoryTypeId;
+    [FieldOffset(0x4108)] public uint CurrentTerritoryTypeId; // can be 0 during loading screens
+    [FieldOffset(0x410C)] public TerritoryIntendedUse CurrentTerritoryIntendedUseId;
+    [FieldOffset(0x4110)] public uint CurrentTerritoryFilterKey;
+    [FieldOffset(0x4114)] public ushort CurrentContentFinderConditionId;
+    [FieldOffset(0x4118)] public uint TransitionTerritoryTypeId;
+    [FieldOffset(0x411C)] public uint TransitionTerritoryFilterKey;
+    [FieldOffset(0x4120)] public uint CurrentMapId;
 
-    [FieldOffset(0x40C8)] public float MilisecondCounter;
-    [FieldOffset(0x40CC)] public uint RuntimeSeconds;
-    [FieldOffset(0x40D0)] public bool RuntimeSecondsChanged;
-    [FieldOffset(0x40D4)] public float Runtime;
-    [FieldOffset(0x40D8), CExporterExcel("TerritoryType")] public nint CurrentTerritoryTypeRow;
-    [FieldOffset(0x40E0), CExporterExcel("TerritoryIntendedUse")] public nint CurrentTerritoryIntendedUseRow;
-    [FieldOffset(0x40E8), CExporterExcel("TerritoryType")] public nint NextTerritoryTypeRow;
-    [FieldOffset(0x40F0), CExporterExcel("TerritoryIntendedUse")] public nint NextTerritoryIntendedUseRow;
+    [FieldOffset(0x4130)] public float MilisecondCounter;
+    [FieldOffset(0x4134)] public uint RuntimeSeconds;
+    [FieldOffset(0x4138)] public bool RuntimeSecondsChanged;
+    [FieldOffset(0x413C)] public float Runtime;
+    [FieldOffset(0x4140), CExporterExcel("TerritoryType")] public nint CurrentTerritoryTypeRow;
+    [FieldOffset(0x4148), CExporterExcel("TerritoryIntendedUse")] public nint CurrentTerritoryIntendedUseRow;
+    [FieldOffset(0x4150), CExporterExcel("TerritoryType")] public nint NextTerritoryTypeRow;
+    [FieldOffset(0x4158), CExporterExcel("TerritoryIntendedUse")] public nint NextTerritoryIntendedUseRow;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B B3 ?? ?? ?? ?? 33 FF")]
     public partial bool IsInInstanceArea();
@@ -56,14 +56,14 @@ public unsafe partial struct GameMain {
     [MemberFunction("E8 ?? ?? ?? ?? 83 7F ?? ?? 4C 8D 3D")]
     public static partial bool IsInGPose();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 57 FF 84 C0")]
+    [MemberFunction("E8 ?? ?? ?? ?? 32 DB 0F B6 C3")]
     public static partial bool IsInIdleCam();
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??")]
-    public partial void QueueActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies once the current "event" is done (GPose, Cutscene etc)
+    public partial void QueueActiveFestivals(uint festival1, uint festival1Phase, uint festival2, uint festival2Phase, uint festival3, uint festival3Phase, uint festival4, uint festival4Phase); // Applies once the current "event" is done (GPose, Cutscene etc)
 
-    [MemberFunction("E8 ?? ?? ?? ?? 80 63 50 FE")]
-    public partial void SetActiveFestivals(uint festival1, uint festival2, uint festival3, uint festival4); // Applies immediately regardless of client state
+    [MemberFunction("E8 ?? ?? ?? ?? 80 A3 ?? ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8")]
+    public partial void SetActiveFestivals(uint festival1, uint festival1Phase, uint festival2, uint festival2Phase, uint festival3, uint festival3Phase, uint festival4, uint festival4Phase); // Applies immediately regardless of client state
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 46 0A")]
     public static partial bool ExecuteCommand(int command, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
@@ -71,9 +71,9 @@ public unsafe partial struct GameMain {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 54 24 ?? B9")]
     public static partial bool ExecuteLocationCommand(int command, Vector3* position, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
     public struct Festival {
-        [FieldOffset(0x00)] public ushort Id;
-        [FieldOffset(0x02)] public ushort Phase;
+        [FieldOffset(0x00)] public uint Id;
+        [FieldOffset(0x04)] public uint Phase;
     }
 }

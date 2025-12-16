@@ -8,38 +8,38 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //     Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<LuaEventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0x620)]
+[StructLayout(LayoutKind.Explicit, Size = 0x5C0)]
 public unsafe partial struct QuestEventHandler {
-    [FieldOffset(0x340)] public ushort QuestId;
-    [FieldOffset(0x348)] public Utf8String Title;
-    [FieldOffset(0x3B0)] public Utf8String ScriptId;
-    [FieldOffset(0x418)] public Utf8String ScriptPath;
-    [FieldOffset(0x480)] public byte PreviousQuestJoin;
-    [FieldOffset(0x482), FixedSizeArray] internal FixedSizeArray3<ushort> _previousQuests;
-    // 0x488: unknown column
-    [FieldOffset(0x489)] public byte QuestLockJoin;
-    [FieldOffset(0x48A), FixedSizeArray] internal FixedSizeArray2<ushort> _questLocks;
+    [FieldOffset(0x2E0)] public ushort QuestId;
+    [FieldOffset(0x2E8)] public Utf8String Title;
+    [FieldOffset(0x350)] public Utf8String ScriptId;
+    [FieldOffset(0x3B8)] public Utf8String ScriptPath;
+    [FieldOffset(0x420)] public byte PreviousQuestJoin;
+    [FieldOffset(0x422), FixedSizeArray] internal FixedSizeArray3<ushort> _previousQuests;
+    // 0x428: unknown column
+    [FieldOffset(0x429)] public byte QuestLockJoin;
+    [FieldOffset(0x42A), FixedSizeArray] internal FixedSizeArray2<ushort> _questLocks;
 
-    [FieldOffset(0x4C4)] public byte InstanceContentJoin;
-    [FieldOffset(0x4C8), FixedSizeArray] internal FixedSizeArray3<uint> _instanceContents;
-    [FieldOffset(0x4D4)] public ushort Festival;
-    [FieldOffset(0x4D6)] public ushort FestivalBegin;
-    [FieldOffset(0x4D8)] public ushort FestivalEnd;
-    [FieldOffset(0x4DA)] public byte RepeatIntervalType;
-    [FieldOffset(0x4DB)] public byte QuestRepeatFlag;
-    [FieldOffset(0x4DC)] public ushort BellStart;
-    [FieldOffset(0x4DE)] public ushort BellEnd;
-    [FieldOffset(0x4E0)] public byte BeastTribeId;
-    [FieldOffset(0x4E1)] public byte BeastTribeRank;
-    [FieldOffset(0x4E2)] public ushort BeastReputationValue;
-    [FieldOffset(0x4E4)] public ushort MountRequired;
-    [FieldOffset(0x4E6)] public byte SatisfactionNpc;
-    [FieldOffset(0x4E7)] public byte SatisfactionLevel;
-    [FieldOffset(0x4E8)] public uint IssuerStart;
-    [FieldOffset(0x4EC)] public uint TargetEnd;
-    [FieldOffset(0x4F0)] public uint JournalGenre;
-    [FieldOffset(0x4F4)] public uint IconSpecial;
-    [FieldOffset(0x4F8)] public byte DailyQuestPool;
+    [FieldOffset(0x464)] public byte InstanceContentJoin;
+    [FieldOffset(0x468), FixedSizeArray] internal FixedSizeArray3<uint> _instanceContents;
+    [FieldOffset(0x474)] public ushort Festival;
+    [FieldOffset(0x476)] public ushort FestivalBegin;
+    [FieldOffset(0x478)] public ushort FestivalEnd;
+    [FieldOffset(0x47A)] public byte RepeatIntervalType;
+    [FieldOffset(0x47B)] public byte QuestRepeatFlag;
+    [FieldOffset(0x47C)] public ushort BellStart;
+    [FieldOffset(0x47E)] public ushort BellEnd;
+    [FieldOffset(0x480)] public byte BeastTribeId;
+    [FieldOffset(0x481)] public byte BeastTribeRank;
+    [FieldOffset(0x482)] public ushort BeastReputationValue;
+    [FieldOffset(0x484)] public ushort MountRequired;
+    [FieldOffset(0x486)] public byte SatisfactionNpc;
+    [FieldOffset(0x487)] public byte SatisfactionLevel;
+    [FieldOffset(0x488)] public uint IssuerStart;
+    [FieldOffset(0x48C)] public uint TargetEnd;
+    [FieldOffset(0x490)] public uint JournalGenre;
+    [FieldOffset(0x494)] public uint IconSpecial;
+    [FieldOffset(0x498)] public byte DailyQuestPool;
 
 
     [MemberFunction("E8 ?? ?? ?? ?? 8B 6C 24 ?? 44 3B FD")]

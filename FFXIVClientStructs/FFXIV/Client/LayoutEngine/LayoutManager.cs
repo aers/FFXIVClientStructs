@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.LayoutEngine;
 /// </summary>
 [GenerateInterop]
 [Inherits<IManagerBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xBD0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xC30)]
 public unsafe partial struct LayoutManager {
     [FieldOffset(0x018)] public int InitState; // 7 is fully loaded and ready, <7 are various stages of init
     [FieldOffset(0x01C)] public int Type; // 2 for normal levels, 3 ???
@@ -23,48 +23,48 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x038)] public uint FestivalStatus; // SetActiveFestivals will not allow a change when not 5 or 0
     [FieldOffset(0x03D)] public bool InsideFestivalTransitionLayerUpdate; // when festival changes, layers are added/removed over 1s
     [FieldOffset(0x040), FixedSizeArray] internal FixedSizeArray4<GameMain.Festival> _activeFestivals;
-    [FieldOffset(0x050), FixedSizeArray] internal FixedSizeArray4<GameMain.Festival> _newFestivals; // festival (de)activation is not immedate
-    [FieldOffset(0x060)] public float FestivalLayersAddTimer; // dt * 30
-    [FieldOffset(0x064)] public float FestivalLayersRemoveTimer; // dt * 30
-    [FieldOffset(0x068)] public void* StreamingManager;
-    [FieldOffset(0x070)] public void* Environment;
-    [FieldOffset(0x078)] public void* OBSetManager;
-    [FieldOffset(0x080)] public OutdoorAreaLayoutData* OutdoorAreaData;
-    [FieldOffset(0x088)] public OutdoorExteriorLayoutData* OutdoorExteriorData;
-    [FieldOffset(0x090)] public IndoorAreaLayoutData* IndoorAreaData;
-    [FieldOffset(0x0C8)] public void* PVPData;
-    [FieldOffset(0x0DC)] public int ForceUpdateAllStreaming;
-    [FieldOffset(0x0E2)] public bool SkipAddingTerrainCollider;
-    //[FieldOffset(0x0E3)] public bool uE3;
-    [FieldOffset(0x0E4)] public bool HousingLayoutDataUpdatePending;
-    [FieldOffset(0x0E5)] public bool OutdoorAreaDataUpdated;
-    [FieldOffset(0x0EA)] public byte LayerEntryType;
-    [FieldOffset(0x0EC)] public uint LevelId;
-    [FieldOffset(0x0F0)] public int StreamingOriginType;
-    [FieldOffset(0x100)] public Vector3 ForcedStreamingOrigin;
-    //[FieldOffset(0x110)] public Vector3 u110_streamingType5Origin;
-    [FieldOffset(0x120)] public Vector3 LastUpdatedStreamingOrigin;
-    [FieldOffset(0x170)] public int HousingType;
-    [FieldOffset(0x184)] public float LastUpdateDT; // set to dt on update
-    [FieldOffset(0x188)] public int LastUpdateOdd; // flips between 0 and 1 on update, presumably for some double buffering somewhere
-    [FieldOffset(0x1A0)] public StringTable ResourcePaths;
-    [FieldOffset(0x1C0)] public ResourceHandle* LvbResourceHandle;
-    [FieldOffset(0x1C8)] public StdVector<Pointer<ResourceHandle>> LayerGroupResourceHandles;
-    [FieldOffset(0x1F8)] public StdMap<uint, Pointer<Terrain.TerrainManager>> Terrains;
-    [FieldOffset(0x208)] public StdMap<ushort, Pointer<Layer.LayerManager>> Layers;
-    [FieldOffset(0x218)] public StdVector<Pointer<Layer.LayerManager>> FestivalLayersToRemove;
-    [FieldOffset(0x230)] public StdVector<Pointer<Layer.LayerManager>> FestivalLayersToAdd;
-    [FieldOffset(0x248)] public StdMap<InstanceType, Pointer<StdMap<ulong, Pointer<ILayoutInstance>>>> InstancesByType; // key in nested map is InstanceId << 32 | SubId
-    [FieldOffset(0x258)] public StdMap<uint, Pointer<RefCountedString>> CrcToPath;
-    [FieldOffset(0x268)] public StdMap<AnalyticShapeDataKey, AnalyticShapeData> CrcToAnalyticShapeData; // Value is aligned to 16 bytes, so key has tons of padding
-    [FieldOffset(0x278)] public StdMap<uint, Pointer<Filter>> Filters;
-    // 2A0: some map
-    // 2B0: vector<LayoutU3*> streamingoriginupdatelisteners
-    [FieldOffset(0x2E8)] public ResourceHandle* SvbResourceHandle;
-    [FieldOffset(0x2F0)] public ResourceHandle* LcbResourceHandle;
-    [FieldOffset(0x2F8)] public ResourceHandle* UwbResourceHandle;
-    // 300: instance pools
-    // B70: gfx bg object pool ptr
+    [FieldOffset(0x060), FixedSizeArray] internal FixedSizeArray4<GameMain.Festival> _newFestivals; // festival (de)activation is not immedate
+    [FieldOffset(0x080)] public float FestivalLayersAddTimer; // dt * 30
+    [FieldOffset(0x084)] public float FestivalLayersRemoveTimer; // dt * 30
+    [FieldOffset(0x088)] public void* StreamingManager;
+    [FieldOffset(0x090)] public void* Environment;
+    [FieldOffset(0x098)] public void* OBSetManager;
+    [FieldOffset(0x0A0)] public OutdoorAreaLayoutData* OutdoorAreaData;
+    [FieldOffset(0x0A8)] public OutdoorExteriorLayoutData* OutdoorExteriorData;
+    [FieldOffset(0x0B0)] public IndoorAreaLayoutData* IndoorAreaData;
+    [FieldOffset(0x0E8)] public void* PVPData;
+    [FieldOffset(0x0FC)] public int ForceUpdateAllStreaming;
+    [FieldOffset(0x102)] public bool SkipAddingTerrainCollider;
+    //[FieldOffset(0x103)] public bool uE3;
+    [FieldOffset(0x104)] public bool HousingLayoutDataUpdatePending;
+    [FieldOffset(0x105)] public bool OutdoorAreaDataUpdated;
+    [FieldOffset(0x10A)] public byte LayerEntryType;
+    [FieldOffset(0x10C)] public uint LevelId;
+    [FieldOffset(0x110)] public int StreamingOriginType;
+    [FieldOffset(0x120)] public Vector3 ForcedStreamingOrigin;
+    //[FieldOffset(0x130)] public Vector3 u110_streamingType5Origin;
+    [FieldOffset(0x140)] public Vector3 LastUpdatedStreamingOrigin;
+    [FieldOffset(0x190)] public int HousingType;
+    [FieldOffset(0x1A4)] public float LastUpdateDT; // set to dt on update
+    [FieldOffset(0x1A8)] public int LastUpdateOdd; // flips between 0 and 1 on update, presumably for some double buffering somewhere
+    [FieldOffset(0x1C0)] public StringTable ResourcePaths;
+    [FieldOffset(0x1E0)] public ResourceHandle* LvbResourceHandle;
+    [FieldOffset(0x1E8)] public StdVector<Pointer<ResourceHandle>> LayerGroupResourceHandles;
+    [FieldOffset(0x218)] public StdMap<uint, Pointer<Terrain.TerrainManager>> Terrains;
+    [FieldOffset(0x228)] public StdMap<ushort, Pointer<Layer.LayerManager>> Layers;
+    [FieldOffset(0x238)] public StdVector<Pointer<Layer.LayerManager>> FestivalLayersToRemove;
+    [FieldOffset(0x250)] public StdVector<Pointer<Layer.LayerManager>> FestivalLayersToAdd;
+    [FieldOffset(0x268)] public StdMap<InstanceType, Pointer<StdMap<ulong, Pointer<ILayoutInstance>>>> InstancesByType; // key in nested map is InstanceId << 32 | SubId
+    [FieldOffset(0x278)] public StdMap<uint, Pointer<RefCountedString>> CrcToPath;
+    [FieldOffset(0x288)] public StdMap<AnalyticShapeDataKey, AnalyticShapeData> CrcToAnalyticShapeData; // Value is aligned to 16 bytes, so key has tons of padding
+    [FieldOffset(0x298)] public StdMap<uint, Pointer<Filter>> Filters;
+    // 0x2C0: some map
+    // 0x2D0: vector<LayoutU3*> streamingoriginupdatelisteners
+    [FieldOffset(0x308)] public ResourceHandle* SvbResourceHandle;
+    [FieldOffset(0x310)] public ResourceHandle* LcbResourceHandle;
+    [FieldOffset(0x318)] public ResourceHandle* UwbResourceHandle;
+    // 0x320: instance pools
+    // 0xB90: gfx bg object pool ptr
 
     // 7.0: inlined in E8 ?? ?? ?? ?? 41 8B 4E 20
     // [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 4C 8B 91 ?? ?? ?? ?? 41 8B F9")]
