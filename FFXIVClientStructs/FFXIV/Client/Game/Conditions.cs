@@ -2,12 +2,12 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::Condition
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 104 + 4)]
+[StructLayout(LayoutKind.Explicit, Size = 112 + 4)]
 public unsafe partial struct Conditions {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 66 2B D8", 3)]
     public static partial Conditions* Instance();
 
-    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray104<bool> _flags;
+    [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray112<bool> _flags;
     [FieldOffset(0)] public bool None;
     [FieldOffset(1)] public bool Normal;
     [FieldOffset(2)] public bool Dead;
@@ -118,8 +118,16 @@ public unsafe partial struct Conditions {
     /// <remarks> Used in Cosmic Exploration. </remarks>
     [FieldOffset(102)] public bool PilotingMech;
     [FieldOffset(103)] public bool Unknown103;
+    [FieldOffset(104)] public bool EditingStrategyBoard;
+    [FieldOffset(105)] public bool Unknown105;
+    [FieldOffset(106)] public bool Unknown106;
+    [FieldOffset(107)] public bool Unknown107;
+    [FieldOffset(108)] public bool Unknown108;
+    [FieldOffset(109)] public bool Unknown109;
+    [FieldOffset(110)] public bool Unknown110;
+    [FieldOffset(111)] public bool Unknown111;
     /// <remarks> When this reaches <c>0</c>, <see cref="MountOrOrnamentTransition"/> is set to <c>false</c>. </remarks>
-    [FieldOffset(104)] public float MountOrOrnamentTransitionResetTimer;
+    [FieldOffset(112)] public float MountOrOrnamentTransitionResetTimer;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 8B FB")]
     public partial bool HasPermission(uint permissionId, int excludedCondition1 = 0, int excludedCondition2 = 0);
