@@ -30,7 +30,7 @@ public unsafe partial struct RaptureGearsetModule {
     /// </summary>
     /// <param name="gearsetId">The index of the gearset to look up.</param>
     /// <returns>Returns a pointer to a GearsetEntry</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4F 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F0 48 63 CB")]
     public partial GearsetEntry* GetGearset(int gearsetId);
 
     /// <summary>

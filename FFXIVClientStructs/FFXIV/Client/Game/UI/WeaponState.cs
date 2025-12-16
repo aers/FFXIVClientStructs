@@ -70,7 +70,7 @@ public partial struct WeaponState {
     /// <param name="newState">The new unsheathed state (true = unsheathed, false = sheathed).</param>
     /// <param name="sendPacket">Whether to send a network update.</param>
     /// <param name="isInstant">Whether the change should occur instantly.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? F6 44 24 ?? ?? 75")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 47 ?? 3C ?? 77")]
     public partial bool SetUnsheathed(bool newState, bool sendPacket, bool isInstant);
 
     /// <summary>

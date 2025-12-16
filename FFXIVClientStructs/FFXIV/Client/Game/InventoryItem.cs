@@ -162,7 +162,7 @@ public unsafe partial struct InventoryItem : ICreatable {
     public partial byte GetMateriaGrade(byte materiaSlot);
 
     /// <summary>Gets the materia count from the original InventoryItem or itself if not symbolic.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 45 0F B6 7D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 E8 83 FD")]
     public partial byte GetMateriaCount();
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7F 5E 01")]

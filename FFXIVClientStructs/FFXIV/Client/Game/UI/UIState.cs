@@ -175,7 +175,7 @@ public unsafe partial struct UIState {
     /// </summary>
     /// <param name="cardId">The ID of the card (technically, of TripleTriadCardResident) to check against.</param>
     /// <returns>Returns true if the card is unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 33 C9 66 89 8C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 66 0F 44 FD")]
     public partial bool IsTripleTriadCardUnlocked(ushort cardId);
 
     /// <summary>

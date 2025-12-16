@@ -79,7 +79,7 @@ public unsafe partial struct AtkComponentIcon : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? C1 EF 08 45 33 C0")]
     public partial void SetIsGlamoured(bool enabled);
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 3E 33 D2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF 41 83 FC ?? 74")]
     public partial void SetIsRecipe(bool enabled);
 
     [MemberFunction("44 8B 89 ?? ?? ?? ?? 4C 8B D1 41 8B C1")]
