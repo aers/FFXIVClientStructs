@@ -12,60 +12,57 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 // has id >63000 in InstanceContent sheet
 [GenerateInterop]
 [Inherits<InstanceContentDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2640)]
+[StructLayout(LayoutKind.Explicit, Size = 0x25E8)]
 public unsafe partial struct InstanceContentOceanFishing {
 
     // Most of the fields, if not specified, can be found in "83 FA ?? 0F 87 ?? ?? ?? ?? 48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05"
 
     // Row ID for IKDRoute sheet
     // Each zone (and their time of day) can be extracted from sheet
-    [FieldOffset(0x2010)] public uint CurrentRoute;
+    [FieldOffset(0x1FB8)] public uint CurrentRoute;
 
-    [FieldOffset(0x2014)] public OceanFishingStatus Status;
+    [FieldOffset(0x1FBC)] public OceanFishingStatus Status;
 
-    [FieldOffset(0x2018)] public uint CurrentZone; // 0, 1, 2
+    [FieldOffset(0x1FC0)] public uint CurrentZone; // 0, 1, 2
 
     // It always is 420
-    [FieldOffset(0x201C)] public uint Duration;
+    [FieldOffset(0x1FC4)] public uint Duration;
 
     // InstanceContentDirector.ContentDirector.ContentTimeLeft - TimeOffset = time left in current zone
     // After changing zones, seems to tick down independent of the UI and then jump up
-    [FieldOffset(0x2020)] public uint TimeOffset;
+    [FieldOffset(0x1FC8)] public uint TimeOffset;
 
-    [FieldOffset(0x2024)] public uint WeatherId;
+    [FieldOffset(0x1FCC)] public uint WeatherId;
 
-    [FieldOffset(0x2028)] public bool SpectralCurrentActive;
+    [FieldOffset(0x1FD0)] public bool SpectralCurrentActive;
 
     // Offset, struct size, and array length can be found with this sig "45 8B 84 CF ?? ?? ?? ?? 48 8B CD"
-    [FieldOffset(0x207C), FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
-
-    // The first 10 of them are normal fish, the rest are spectral fish
-    [UnscopedRef]
-    public Span<FishDataStruct> FirstZoneFishData => FishData.Slice(0, 20);
-    [UnscopedRef]
-    public Span<FishDataStruct> SecondZoneFishData => FishData.Slice(20, 20);
-    [UnscopedRef]
-    public Span<FishDataStruct> ThirdZoneFishData => FishData.Slice(40, 20);
+    [FieldOffset(0x2024), FixedSizeArray] internal FixedSizeArray60<FishDataStruct> _fishData;
 
     // the function that sets the data -> "48 8D 81 ?? ?? ?? ?? B9 ?? ?? ?? ?? 0F 1F 40 ?? 48 8D 80"
     // Offsets can be found with "48 89 5C 24 ? 48 89 74 24 ? 57 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 84 24 ? ? ? ? 48 8B F1 48 8D 4C 24"
     // these are only valid when Status is Finished
-    [FieldOffset(0x2440)] public byte AllResultSize;
-    [FieldOffset(0x2441)] public byte LocalIndexInAllResult;
-    [FieldOffset(0x2442)] public IndividualResultStruct IndividualResult;
-    [FieldOffset(0x2464)] public AllResultStruct LocalPlayerAllResult;
-    [FieldOffset(0x248C), FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResults;
+    [FieldOffset(0x23E8)] public byte AllResultSize;
+    [FieldOffset(0x23E9)] public byte LocalIndexInAllResult;
+    [FieldOffset(0x23EA)] public IndividualResultStruct IndividualResult;
+    [FieldOffset(0x240C)] public AllResultStruct LocalPlayerAllResult;
+    [FieldOffset(0x2434), FixedSizeArray] internal FixedSizeArray10<AllResultStruct> _allResults;
 
     // Row ID for IKDPlayerMissionCondition sheet
     // Description and required amount can be extracted from sheet
-    [FieldOffset(0x2620)] public uint Mission1Type;
-    [FieldOffset(0x2624)] public uint Mission2Type;
-    [FieldOffset(0x2628)] public uint Mission3Type;
+    [FieldOffset(0x25C8)] public uint Mission1Type;
+    [FieldOffset(0x25CC)] public uint Mission2Type;
+    [FieldOffset(0x25D0)] public uint Mission3Type;
 
     // Progress can be larger than the mission's required amount
-    [FieldOffset(0x262C)] public ushort Mission1Progress;
-    [FieldOffset(0x262E)] public ushort Mission2Progress;
-    [FieldOffset(0x2630)] public ushort Mission3Progress;
+    [FieldOffset(0x25D4)] public ushort Mission1Progress;
+    [FieldOffset(0x25D6)] public ushort Mission2Progress;
+    [FieldOffset(0x25D8)] public ushort Mission3Progress;
+
+    // The first 10 of them are normal fish, the rest are spectral fish
+    [UnscopedRef] public Span<FishDataStruct> FirstZoneFishData => FishData.Slice(0, 20);
+    [UnscopedRef] public Span<FishDataStruct> SecondZoneFishData => FishData.Slice(20, 20);
+    [UnscopedRef] public Span<FishDataStruct> ThirdZoneFishData => FishData.Slice(40, 20);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct FishDataStruct {
