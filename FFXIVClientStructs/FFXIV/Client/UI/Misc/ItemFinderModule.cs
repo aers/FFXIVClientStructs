@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x11D8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1818)]
 public unsafe partial struct ItemFinderModule {
     public static ItemFinderModule* Instance() {
         var uiModule = UIModule.Instance();
@@ -30,8 +30,9 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0x300), FixedSizeArray] internal FixedSizeArray70<ushort> _saddleBagItemCount;
     [FieldOffset(0x38C), FixedSizeArray] internal FixedSizeArray70<ushort> _premiumSaddleBagItemCount;
     [FieldOffset(0x418), FixedSizeArray] internal FixedSizeArray800<uint> _glamourDresserItemIds;
+    [FieldOffset(0x1098), FixedSizeArray] internal FixedSizeArray800<ushort> _glamourDresserItemSetUnlockBits;
 
-    [FieldOffset(0x10A8)] public ItemFinderModuleResult* Result;
+    [FieldOffset(0x16E8)] public ItemFinderModuleResult* Result;
 
     /// <summary>
     /// Searches inventories for the specified item id and opens the Item Search List window to display the results.
