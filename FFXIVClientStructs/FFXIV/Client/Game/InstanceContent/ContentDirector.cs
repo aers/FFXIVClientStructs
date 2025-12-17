@@ -24,7 +24,7 @@ public unsafe partial struct ContentDirector {
     /// Gets the max time for the content in seconds
     /// </summary>
     /// <returns>Time in seconds</returns>
-    [VirtualFunction(313)]
+    [VirtualFunction(317)]
     public partial uint GetContentTimeMax();
 
     [GenerateInterop]

@@ -15395,6 +15395,7 @@ classes:
     vfuncs:
       281: GetCurrentLevel
       302: GetMaxLevel
+      317: GetContentTimeMax
       318: GetContentTypeIconId
       328: SetExperience
     funcs:
@@ -15405,7 +15406,7 @@ classes:
       - ea: 0x14222FB00
         base: Client::Game::InstanceContent::ContentDirector
     vfuncs:
-      393: HandleGMCommand
+      397: HandleGMCommand
     funcs:
       0x1418EAB00: ctor
       0x1418EADA0: Finalizer
