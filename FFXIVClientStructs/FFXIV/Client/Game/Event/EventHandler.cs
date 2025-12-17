@@ -22,43 +22,43 @@ public unsafe partial struct EventHandler {
 
     [FieldOffset(0xC8)] public Utf8String UnkString0;
 
-    [VirtualFunction(154)]
+    [VirtualFunction(158)]
     public partial void CancelInteraction();
 
-    [VirtualFunction(200)]
+    [VirtualFunction(204)]
     public partial void GetTitle(Utf8String* outTitle);
 
-    [VirtualFunction(202)]
+    [VirtualFunction(206)]
     public partial EventId GetEventId();
 
-    [VirtualFunction(204)]
+    [VirtualFunction(208)]
     public partial uint GetNameplateIconForObject(GameObject* gameObject);
 
-    [VirtualFunction(253)]
+    [VirtualFunction(257)]
     public partial void GetDescription(Utf8String* outDescription);
 
-    [VirtualFunction(254)]
+    [VirtualFunction(258)]
     public partial void GetReliefText(Utf8String* outReliefText);
 
-    [VirtualFunction(255)]
+    [VirtualFunction(259)]
     public partial int GetTimeRemaining(int currentTimestamp);
 
-    [VirtualFunction(256)]
+    [VirtualFunction(260)]
     public partial bool HasTimer();
 
-    [VirtualFunction(258)]
+    [VirtualFunction(262)]
     public partial uint GetEventItemId();
 
-    [VirtualFunction(261), Obsolete($"Renamed to {nameof(GetDirectorTodos)}")]
+    [VirtualFunction(265), Obsolete($"Renamed to {nameof(GetDirectorTodos)}")]
     public partial StdVector<EventHandlerObjective>* GetObjectives();
 
-    [VirtualFunction(261)]
+    [VirtualFunction(265)]
     public partial StdVector<DirectorTodo>* GetDirectorTodos();
 
-    [VirtualFunction(262)]
+    [VirtualFunction(266)]
     public partial StdVector<MassivePcContentTodo>* GetMassivePcContentTodos(int setIndex);
 
-    [VirtualFunction(265)]
+    [VirtualFunction(269)]
     public partial int GetRecommendedLevel();
 }
 

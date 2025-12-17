@@ -14256,25 +14256,25 @@ classes:
       0: Dtor
       6: Terminate
       7: IsUnlocked
-      154: CancelInteraction
-      200: GetTitle # lua function "GetEventHandlerTitle"
-      202: GetEventId
-      204: GetNameplateIconForObject # (this, GameObject* gameObject)
-      222: GetIconId
-      226: IsOccupied33
-      227: GetOccupiedConditionId
-      228: GetOccupiedPermissionId
-      246: GetScriptVersion
-      253: GetDescription
-      254: GetReliefText
-      255: GetTimeRemaining # pass current unix timestamp as a2
-      256: HasTimer
-      258: GetEventItemId
-      261: GetDirectorTodos
-      262: GetMassivePcContentTodos
-      263: IsTodoTitleFocusable
-      265: GetRecommendedLevel
-      269: Initialize
+      158: CancelInteraction
+      204: GetTitle # lua function "GetEventHandlerTitle"
+      206: GetEventId
+      208: GetNameplateIconForObject # (this, GameObject* gameObject)
+      226: GetIconId
+      230: IsOccupied33
+      231: GetOccupiedConditionId
+      232: GetOccupiedPermissionId
+      250: GetScriptVersion
+      257: GetDescription
+      258: GetReliefText
+      259: GetTimeRemaining # pass current unix timestamp as a2
+      260: HasTimer
+      262: GetEventItemId
+      265: GetDirectorTodos
+      266: GetMassivePcContentTodos
+      267: IsTodoTitleFocusable
+      269: GetRecommendedLevel
+      273: Initialize
   Client::Game::Event::EventHandlerSelector:
     instances:
       - ea: 0x1427A9710
@@ -14818,11 +14818,11 @@ classes:
       - ea: 0x1420DCC38
         base: Client::Game::Event::LuaEventHandler
     vfuncs:
-      273: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
-      290: Update
-      291: Update2
-      292: SetSequence
-      293: Synchronize
+      277: PopulateMapMarkers # (this, ushort territoryTypeId, StdVector<MapMarkerData>* markerVector)
+      294: Update
+      295: Update2
+      296: SetSequence
+      297: Synchronize
     funcs:
       0x140C71E00: ctor
       0x140C72540: SetGlobalParametersContentName
