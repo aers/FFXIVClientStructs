@@ -3963,9 +3963,9 @@ classes:
       - ea: 0x14248B808
         base: Common::Component::BGCollision::QuadtreeNodeLink # indirect base, offset 0x28
     vfuncs:
-      1: Load
-      2: Unload
-      3: WantUnload
+      1: WantUnload
+      2: Load
+      3: Unload
       4: GetMaterial
       5: GetMaterialId
       6: GetMaterialMask

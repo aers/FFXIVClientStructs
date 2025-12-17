@@ -34,22 +34,22 @@ public unsafe partial struct Collider {
     [FieldOffset(0xA0)] public bool Dirty;
     
     /// <summary>
-    /// No-op for all derived classes except Mesh.
+    /// Checked every update. Base implementation just checks NumRefs for zero, but derived classes that do async loads also check that load is not in progress.
     /// </summary>
     [VirtualFunction(1)]
+    public partial bool WantUnload();
+
+    /// <summary>
+    /// No-op for all derived classes except Mesh.
+    /// </summary>
+    [VirtualFunction(2)]
     public partial void Load(byte* path);
 
     /// <summary>
     /// No-op for all derived classes except Mesh. Called by Scene's update when WantUnload returns true before deleting the object.
     /// </summary>
-    [VirtualFunction(2)]
-    public partial void Unload();
-
-    /// <summary>
-    /// Checked every update. Base implementation just checks NumRefs for zero, but derived classes that do async loads also check that load is not in progress.
-    /// </summary>
     [VirtualFunction(3)]
-    public partial bool WantUnload();
+    public partial void Unload();
 
     [VirtualFunction(4)]
     public partial void GetMaterial(ulong* id, ulong* mask);
@@ -182,8 +182,8 @@ public unsafe partial struct ColliderMesh {
     [FieldOffset(0x0B0)] public Resource* Resource;
     [FieldOffset(0x0B8)] public byte* MemoryData; // if non-null, the mesh data is built programmatically in memory rather than being loaded from file
     [FieldOffset(0x0C0)] public int TotalPrimitives;
-    [FieldOffset(0x0C5)] public bool MeshIsSimple; // if true, Mesh is a MeshSimple rather than MeshPCB - this doesn't seem to be ever used in game
-    [FieldOffset(0x0C6)] public bool Loaded;
+    [FieldOffset(0x0C4)] public bool MeshIsSimple; // if true, Mesh is a MeshSimple rather than MeshPCB - this doesn't seem to be ever used in game
+    [FieldOffset(0x0C5)] public bool Loaded;
     [FieldOffset(0x0C8)] public float InvScaleX;
     [FieldOffset(0x0D0)] public Mesh* Mesh;
     [FieldOffset(0x0D8)] public int TotalChildren;
