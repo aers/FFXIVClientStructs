@@ -303,7 +303,7 @@ public enum StringArrayType {
     MYCInfo = 123,
     TeleportTown = 124,
     MJIHousingGoods = 125,
-    QuickPanel = 156,
+    QuickPanel = 126,
 }
 
 public enum ExtendArrayType {
