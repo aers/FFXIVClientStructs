@@ -118,7 +118,7 @@ public enum DragDropType : uint {
     ActionBar_Marker = 54,
     ActionBar_CraftingAction = 55,
     ActionBar_GeneralAction = 56,
-    ActionBar_BuddyAction = 57, // Phantom Action
+    ActionBar_BuddyAction = 57,
     ActionBar_MainCommand = 58,
     ActionBar_Companion = 59,
     ActionBar_GearSet = 60,
