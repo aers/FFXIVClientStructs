@@ -63,7 +63,7 @@ public enum DetailKind : byte {
     MYCTemporaryItem = 54,
     Ornament = 55,
     Glasses = 56,
-    Unk56 = 57,
+    Unk57 = 57,
     MKDTrait = 58,
-    Unk58 = 59,
+    Unk59 = 59,
 }

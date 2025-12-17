@@ -13947,10 +13947,34 @@ classes:
       0x140A22260: Finalizer
   Client::UI::Agent::AgentTofuList:
     vtbls:
-      - ea: 0x1420C8A80
+      - ea: 0x1420C9CD8
         base: Client::UI::Agent::AgentInterface
     funcs:
-      0x1409B4BC0: ctor
+      0x140A1DB10: ctor
+  Client::UI::Agent::AgentTofuPreview:
+    vtbls:
+      - ea: 0x1420C9D58
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A20710: ctor
+  Client::UI::Agent::AgentTofuEdit:
+    vtbls:
+      - ea: 0x1420C9B58
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A0CF70: ctor
+  Client::UI::Agent::AgentTofuImport:
+    vtbls:
+      - ea: 0x1420C9BD8
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A1CA70: ctor
+  Client::UI::Agent::AgentTofuExport:
+    vtbls:
+      - ea: 0x1420C9C58
+        base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140A1D2D0: ctor
   Client::UI::Agent::AgentBannerInterface:
     vtbls:
       - ea: 0x1420C8DB0
@@ -13980,18 +14004,6 @@ classes:
     funcs:
       0x1409BD6B0: ctor
       0x1409BD7D0: Finalizer
-  Client::UI::Agent::AgentTofuPreview:
-    vtbls:
-      - ea: 0x1420C9CD8
-        base: Client::UI::Agent::AgentInterface
-    funcs:
-      0x140A1DB10: ctor
-  Client::UI::Agent::AgentTofuPreset:
-    vtbls:
-      - ea: 0x1420C9B58
-        base: Client::UI::Agent::AgentInterface
-    funcs:
-      0x140A0CF70: ctor
   Client::UI::Agent::AgentTurnBreak:
     vtbls:
       - ea: 0x14209EC60
