@@ -106,8 +106,8 @@ public unsafe partial struct ContextMenu {
 
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray34<AtkValue> _eventParams; // 32 * AtkValue + 1 * AtkValue for submenus with title + 1 * unk
 
-    [FieldOffset(0x470), FixedSizeArray] internal FixedSizeArray34<byte> _eventIds;
-    [FieldOffset(0x4B0), FixedSizeArray] internal FixedSizeArray34<Pointer<AtkEventInterface>> _eventHandlers;
+    [FieldOffset(0x448), FixedSizeArray] internal FixedSizeArray34<byte> _eventIds;
+    [FieldOffset(0x470), FixedSizeArray] internal FixedSizeArray34<Pointer<AtkEventInterface>> _eventHandlers;
     [FieldOffset(0x580), FixedSizeArray] internal FixedSizeArray34<long> _eventHandlerParams;
 
     [FieldOffset(0x690)] public uint ContextItemDisabledMask;
