@@ -13,7 +13,7 @@ public unsafe partial struct MirageManager {
     [FieldOffset(0)] public bool IsApplyingGlamourPlate;
 
     [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray800<uint> _prismBoxItemIds;
-    [FieldOffset(0xC84), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain0Ids; // 7.4: now also contains bit arrays for partial outfits. collected = value & (1 << slotIndex)
+    [FieldOffset(0xC84), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain0Ids; // 7.4: now also contains bit arrays for partial outfits
     [FieldOffset(0xFA4), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain1Ids;
     [FieldOffset(0x12C4)] public bool PrismBoxRequested;
     [FieldOffset(0x12C5)] public bool PrismBoxLoaded;
