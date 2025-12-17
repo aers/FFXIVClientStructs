@@ -172,7 +172,8 @@ public enum NumberArrayType {
     FGSHud = 153,
     FGSResult = 154,
     MKDInfo = 155,
-    MKDInfo2 = 156
+    MKDInfo2 = 156,
+    QuickPanel = 157,
 }
 
 public enum StringArrayType {
@@ -302,6 +303,7 @@ public enum StringArrayType {
     MYCInfo = 123,
     TeleportTown = 124,
     MJIHousingGoods = 125,
+    QuickPanel = 156,
 }
 
 public enum ExtendArrayType {
