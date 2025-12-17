@@ -9,20 +9,20 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [GenerateInterop]
 [Inherits<AtkUnitManager>]
 [VirtualTable("C6 83 ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 C7 83", 10)]
-[StructLayout(LayoutKind.Explicit, Size = 0x9D18)]
+[StructLayout(LayoutKind.Explicit, Size = 0x9D30)]
 public unsafe partial struct RaptureAtkUnitManager {
     public static RaptureAtkUnitManager* Instance() {
         var raptureAtkModule = RaptureAtkModule.Instance();
         return raptureAtkModule == null ? null : &raptureAtkModule->RaptureAtkUnitManager;
     }
 
-    [FieldOffset(0x9C90)] public AtkEventInterface WindowContextMenuHandler;
+    [FieldOffset(0x9CA0)] public AtkEventInterface WindowContextMenuHandler;
 
-    [FieldOffset(0x9D00)] public UIModule.UiFlags UiFlags;
+    [FieldOffset(0x9D10)] public UIModule.UiFlags UiFlags;
 
-    [FieldOffset(0x9D11)] public bool IsEditingHudLayout;
+    [FieldOffset(0x9D21)] public bool IsEditingHudLayout;
 
-    [FieldOffset(0x9D14)] public bool IsUiFading; // true whenever FadeMiddleBack is active
+    [FieldOffset(0x9D24)] public bool IsUiFading; // true whenever FadeMiddleBack is active
 
     [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC 30 49 8B F0 48 8B FA 4C 8B F1 48 85 D2"), GenerateStringOverloads]
     public partial ushort InitializeAddon(AtkUnitBase* addon, CStringPointer addonName); // 7.0: no xrefs/inlined, but callable

@@ -28,8 +28,6 @@ public unsafe partial struct AgentSalvage {
     // [FieldOffset(0x38C)] public uint Unknown2; // 0x79 after desynth
 
     [FieldOffset(0x390)] public InventoryItem DesynthItemSlot;
-    [FieldOffset(0x3C8)] public SalvageResult DesynthItem; // does this even exist? looks like no
-
     [FieldOffset(0x3D8)] public Utf8String TextQuantity;
     // [FieldOffset(0x440)] public byte Unknown3; // 0xC8
     [FieldOffset(0x441)] public bool IsSalvageResultAddonOpen;

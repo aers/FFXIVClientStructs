@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::System::Input::InputData::InputCodeModifiedInterface
 [GenerateInterop]
 [Inherits<UserFileEvent>, Inherits<InputData.InputCodeModifiedInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x2A9B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2B3F8)]
 public unsafe partial struct RaptureHotbarModule {
     public static RaptureHotbarModule* Instance() {
         var uiModule = UI.UIModule.Instance();
@@ -79,20 +79,20 @@ public unsafe partial struct RaptureHotbarModule {
     public Span<Hotbar> StandardHotbars => new(Unsafe.AsPointer(ref Hotbars[0]), 10);
     public Span<Hotbar> CrossHotbars => new(Unsafe.AsPointer(ref Hotbars[10]), 8);
 
-    [FieldOffset(0xFCA0)] public Hotbar PetHotbar;
-    [FieldOffset(0x10AA0)] public Hotbar PetCrossHotbar;
+    [FieldOffset(0x105A0)] public Hotbar PetHotbar;
+    [FieldOffset(0x11420)] public Hotbar PetCrossHotbar;
 
     /// <summary>
     /// A scratch hotbar slot used for temporary operations such as saving and temporary rewrites.
     /// </summary>
-    [FieldOffset(0x118A0)] public HotbarSlot ScratchSlot;
+    [FieldOffset(0x122A0)] public HotbarSlot ScratchSlot;
 
     // No idea how this field works. Observed so far:
     // 15 (0x0E) - Quest mount (?)
     // 18 (0x12) - Mount/FashionAccessory
     // 34 (0x22) - Carbuncle up
     // Seems to control something with overriding the main bar too?
-    [FieldOffset(0x11980)] public uint PetHotbarMode;
+    [FieldOffset(0x12388)] public uint PetHotbarMode;
 
     /// <summary>
     /// A field containing all saved hotbars, as persisted to disk. This field tracks both normal and cross hotbars, at
@@ -103,9 +103,9 @@ public unsafe partial struct RaptureHotbarModule {
     /// To retrieve PvP hotbar information, pass in the result of the <see cref="GetPvPSavedHotbarIndexForClassJobId"/>
     /// method.
     /// </remarks>
-    [FieldOffset(0x11984), FixedSizeArray] internal FixedSizeArray70<SavedHotbarGroup> _savedHotbars;
+    [FieldOffset(0x1238C), FixedSizeArray] internal FixedSizeArray70<SavedHotbarGroup> _savedHotbars;
 
-    [FieldOffset(0x2A344)] public CrossHotbarFlags CrossHotbarFlags;
+    [FieldOffset(0x2AD4C)] public CrossHotbarFlags CrossHotbarFlags;
 
     /// <summary>
     /// Field to track the player's current Grand Company. Used for emote refresh/update purposes.
@@ -114,7 +114,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// If this field is out of sync with game state, it will be updated on the next frame. Setting
     /// this field manually appears to have no effect (?).
     /// </remarks>
-    [FieldOffset(0x2A348)] public uint GrandCompanyId;
+    [FieldOffset(0x2AD50)] public uint GrandCompanyId;
 
     /// <summary>
     /// Field to indicate whether the PvP hotbar is currently active or not.
@@ -123,24 +123,24 @@ public unsafe partial struct RaptureHotbarModule {
     /// If this field is out of sync with the game's PVP state, it will be updated on the next frame. Setting
     /// this field manually will not enable the PvP hotbars.
     /// </remarks>
-    [FieldOffset(0x2A34C)] public bool PvPHotbarsActive;
+    [FieldOffset(0x2AD54)] public bool PvPHotbarsActive;
 
     /// <summary>
     /// Field to indicate that the PvP hotbar swap notification (AgentPvpScreenInformation) needs to be shown.
     /// This field is set to <c>false</c> after the agent has been shown.
     /// </summary>
-    [FieldOffset(0x2A34D)] public bool ShowPvPHotbarSwapNotification;
+    [FieldOffset(0x2AD55)] public bool ShowPvPHotbarSwapNotification;
 
     /// <summary>
     /// Hotbar slots representing available Duty Actions (see also <see cref="DutyActionManager.GetDutyActionId"/>).
     /// </summary>
-    [FieldOffset(0x2A350), FixedSizeArray] internal FixedSizeArray2<DutyActionSlot> _dutyActionSlots;
+    [FieldOffset(0x2AD58), FixedSizeArray] internal FixedSizeArray2<DutyActionSlot> _dutyActionSlots;
 
     /// <summary>
     /// Sets whether Duty Actions are present or not. Controls whether to show the appropriate UI element and whether
     /// to rewrite the special DutyAction General Actions.
     /// </summary>
-    [FieldOffset(0x2A520)] public bool DutyActionsPresent;
+    [FieldOffset(0x2AF38)] public bool DutyActionsPresent;
 
     [MemberFunction("E9 ?? ?? ?? ?? 73 25")]
     public partial byte ExecuteSlot(HotbarSlot* hotbarSlot);

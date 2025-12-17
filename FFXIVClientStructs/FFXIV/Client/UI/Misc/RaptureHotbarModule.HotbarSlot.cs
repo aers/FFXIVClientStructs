@@ -7,7 +7,7 @@ public partial struct RaptureHotbarModule {
     [GenerateInterop(isInherited: true)]
     [StructLayout(LayoutKind.Explicit, Size = Size)]
     public unsafe partial struct HotbarSlot {
-        public const int Size = 0xE0;
+        public const int Size = 0xE8;
 
         /// The string that appears when a hotbar slot is hovered over.
         ///

@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.MJI;
 //   Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<Client.Game.Event.EventHandler>]
-[StructLayout(LayoutKind.Explicit, Size = 0xBB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xB68)]
 public unsafe partial struct MJIPastureHandler {
     // 0x230: AtkEventInterface-derived structure of size 0x30, used by agent to execute operations
 
