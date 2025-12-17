@@ -15393,10 +15393,10 @@ classes:
       - ea: 0x1420DD5A0
         base: Client::Game::Event::Director
     vfuncs:
-      297: GetCurrentLevel
-      298: GetMaxLevel
-      314: GetContentTypeIconId
-      324: SetExperience
+      281: GetCurrentLevel
+      302: GetMaxLevel
+      318: GetContentTypeIconId
+      328: SetExperience
     funcs:
       0x140C77F00: ctor
       0x140C79AA0: ApplyMapEffect
@@ -16597,20 +16597,20 @@ classes:
       - ea: 0x1422D7D48
         base: Client::Game::Event::Director
     vfuncs:
-      296: GetAdditionalTodoText
-      298: SetAdditionalTodo
-      299: SetAdditionalTodoNumber
-      300: SetAdditionalTodoFraction
-      301: SetAdditionalTodoFractionBar
-      302: SetAdditionalTodoLargeBar
-      303: SetAdditionalTodoColorableBar
-      304: SetAdditionalTodoTimeRemaining
-      305: SetAdditionalTodoQuestTitle
-      306: SetAdditionalTodoLargeTimeRemaining
-      307: SetAdditionalTodoLargeBlueText
-      308: SetAdditionalTodoLargeGrayText
-      309: SetAdditionalTodoJoinButton
-      329: ClearAdditionalTodo
+      300: GetAdditionalTodoText
+      302: SetAdditionalTodo
+      303: SetAdditionalTodoNumber
+      304: SetAdditionalTodoFraction
+      305: SetAdditionalTodoFractionBar
+      306: SetAdditionalTodoLargeBar
+      307: SetAdditionalTodoColorableBar
+      308: SetAdditionalTodoTimeRemaining
+      309: SetAdditionalTodoQuestTitle
+      310: SetAdditionalTodoLargeTimeRemaining
+      311: SetAdditionalTodoLargeBlueText
+      312: SetAdditionalTodoLargeGrayText
+      313: SetAdditionalTodoJoinButton
+      333: ClearAdditionalTodo
     funcs:
       0x1419608B0: ctor
   Client::Game::MassivePcContent::MassivePcContentCosmicExploration: # ContentId (MassivePcContent RowId?) 1 and 2: Sinus Ardorum and Phaenna
