@@ -35,6 +35,8 @@ public partial struct RaptureHotbarModule {
         McGuffin = 0x1E,
         Ornament = 0x1F,
         LostFindsItem = 0x20,
-        Glasses = 0x21
+        Glasses = 0x21,
+        PhantomAction = 0x22,
+        QuickPanel = 0x23,
     }
 }
