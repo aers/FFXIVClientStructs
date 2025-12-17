@@ -1551,6 +1551,7 @@ classes:
       0x14086AAF0: Update
       0x14086AB90: Clear
       0x14086AC50: RequestPrismBox
+      0x14086ADE0: IsSetSlotUnlocked
       0x14086B580: RestorePrismBoxItem
       0x14086BE30: RequestGlamourPlates
       0x14086BF80: GetGlamourPlateData
