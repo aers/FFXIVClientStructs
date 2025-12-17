@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Map)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x144D8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x144E8)]
 public unsafe partial struct AgentMap {
     /// <summary> Pointers to markers in <see cref="EventMarkers"/>. </summary>
     [FieldOffset(0xD0)] public StdVector<Pointer<MapMarkerData>> EventMarkersPtrs;
@@ -24,58 +24,58 @@ public unsafe partial struct AgentMap {
 
     [FieldOffset(0x160)] public StdMap<uint, uint> SymbolMap; // Icon:MapSymbol
 
-    [FieldOffset(0x1B8)] public Utf8String CurrentMapPath;
-    [FieldOffset(0x220)] public Utf8String SelectedMapPath;
-    [FieldOffset(0x288)] public Utf8String SelectedMapBgPath;
-    [FieldOffset(0x2F0)] public Utf8String CurrentMapBgPath;
-    [FieldOffset(0x358), FixedSizeArray] internal FixedSizeArray4<Utf8String> _mapSelectionStrings;
-    [FieldOffset(0x4F8)] public Utf8String MapTitleString;
+    [FieldOffset(0x1C8)] public Utf8String CurrentMapPath;
+    [FieldOffset(0x230)] public Utf8String SelectedMapPath;
+    [FieldOffset(0x298)] public Utf8String SelectedMapBgPath;
+    [FieldOffset(0x300)] public Utf8String CurrentMapBgPath;
+    [FieldOffset(0x368), FixedSizeArray] internal FixedSizeArray4<Utf8String> _mapSelectionStrings;
+    [FieldOffset(0x508)] public Utf8String MapTitleString;
 
-    [FieldOffset(0x698), FixedSizeArray] internal FixedSizeArray132<MapMarkerInfo> _mapMarkers;
-    [FieldOffset(0x2BB8), FixedSizeArray] internal FixedSizeArray12<TempMapMarker> _tempMapMarkers;
-    [FieldOffset(0x38D8), FixedSizeArray] internal FixedSizeArray1<FlagMapMarker> _flagMapMarkers;
-    [FieldOffset(0x3920), FixedSizeArray] internal FixedSizeArray12<MapMarkerBase> _warpMarkers;
+    [FieldOffset(0x6A8), FixedSizeArray] internal FixedSizeArray132<MapMarkerInfo> _mapMarkers;
+    [FieldOffset(0x2BC8), FixedSizeArray] internal FixedSizeArray12<TempMapMarker> _tempMapMarkers;
+    [FieldOffset(0x38E8), FixedSizeArray] internal FixedSizeArray1<FlagMapMarker> _flagMapMarkers;
+    [FieldOffset(0x3930), FixedSizeArray] internal FixedSizeArray12<MapMarkerBase> _warpMarkers;
 
     /// <remarks>
     /// 0 = mineral deposit and lush vegetation patch<br/>
     /// 1 = legendary mineral deposit<br/>
     /// 2 = unspoiled lush vegetation patch<br/>
     /// </remarks>
-    [FieldOffset(0x3BC0), FixedSizeArray] internal FixedSizeArray6<MiniMapGatheringMarker> _miniMapGatheringMarkers;
-    [FieldOffset(0x3FB0), FixedSizeArray] internal FixedSizeArray100<MiniMapMarker> _miniMapMarkers;
+    [FieldOffset(0x3BD0), FixedSizeArray] internal FixedSizeArray6<MiniMapGatheringMarker> _miniMapGatheringMarkers;
+    [FieldOffset(0x3FC0), FixedSizeArray] internal FixedSizeArray100<MiniMapMarker> _miniMapMarkers;
 
-    [FieldOffset(0x5958)] public float SelectedMapSizeFactorFloat;
-    [FieldOffset(0x595C)] public float CurrentMapSizeFactorFloat;
-    [FieldOffset(0x5960)] public short SelectedMapSizeFactor;
-    [FieldOffset(0x5962)] public short CurrentMapSizeFactor;
-    [FieldOffset(0x5964)] public short SelectedOffsetX;
-    [FieldOffset(0x5966)] public short SelectedOffsetY;
-    [FieldOffset(0x5968)] public short CurrentOffsetX;
-    [FieldOffset(0x596A)] public short CurrentOffsetY;
+    [FieldOffset(0x5968)] public float SelectedMapSizeFactorFloat;
+    [FieldOffset(0x596C)] public float CurrentMapSizeFactorFloat;
+    [FieldOffset(0x5970)] public short SelectedMapSizeFactor;
+    [FieldOffset(0x5972)] public short CurrentMapSizeFactor;
+    [FieldOffset(0x5974)] public short SelectedOffsetX;
+    [FieldOffset(0x5976)] public short SelectedOffsetY;
+    [FieldOffset(0x5978)] public short CurrentOffsetX;
+    [FieldOffset(0x597A)] public short CurrentOffsetY;
 
-    [FieldOffset(0x5970)] public OpenMapInfo CurrentOpenMapInfo;
+    [FieldOffset(0x5980)] public OpenMapInfo CurrentOpenMapInfo;
 
-    [FieldOffset(0x5A10)] public uint CurrentTerritoryId;
-    [FieldOffset(0x5A14)] public uint CurrentMapId;
-    [FieldOffset(0x5A1C)] public uint CurrentMapMarkerRange;
-    [FieldOffset(0x5A20)] public uint CurrentMapDiscoveryFlag;
-    [FieldOffset(0x5A24)] public uint SelectedTerritoryId;
-    [FieldOffset(0x5A28)] public uint SelectedMapId;
-    [FieldOffset(0x5A2C)] public uint SelectedMapMarkerRange;
-    [FieldOffset(0x5A30)] public uint SelectedMapDiscoveryFlag;
-    [FieldOffset(0x5A34)] public uint SelectedMapSub;
+    [FieldOffset(0x5A20)] public uint CurrentTerritoryId;
+    [FieldOffset(0x5A24)] public uint CurrentMapId;
+    [FieldOffset(0x5A2C)] public uint CurrentMapMarkerRange;
+    [FieldOffset(0x5A30)] public uint CurrentMapDiscoveryFlag;
+    [FieldOffset(0x5A34)] public uint SelectedTerritoryId;
+    [FieldOffset(0x5A38)] public uint SelectedMapId;
+    [FieldOffset(0x5A3C)] public uint SelectedMapMarkerRange;
+    [FieldOffset(0x5A40)] public uint SelectedMapDiscoveryFlag;
+    [FieldOffset(0x5A44)] public uint SelectedMapSub;
 
-    [FieldOffset(0x5A4C)] public uint UpdateFlags;
+    [FieldOffset(0x5A5C)] public uint UpdateFlags;
 
-    [FieldOffset(0x5AEB)] public byte MapMarkerCount;
-    [FieldOffset(0x5AEC)] public byte TempMapMarkerCount;
-    [FieldOffset(0x5AEE)] public byte FlagMarkerCount;
-    [FieldOffset(0x5AF0)] public byte MiniMapMarkerCount;
-    [FieldOffset(0x5AF8)] public bool IsPlayerMoving;
-    [FieldOffset(0x5B00)] public bool IsControlKeyPressed;
+    [FieldOffset(0x5AFB)] public byte MapMarkerCount;
+    [FieldOffset(0x5AFC)] public byte TempMapMarkerCount;
+    [FieldOffset(0x5AFE)] public byte FlagMarkerCount;
+    [FieldOffset(0x5B00)] public byte MiniMapMarkerCount;
+    [FieldOffset(0x5B08)] public bool IsPlayerMoving;
+    [FieldOffset(0x5B10)] public bool IsControlKeyPressed;
 
-    [FieldOffset(0x5F10)] public QuestLinkContainer MapQuestLinkContainer;
-    [FieldOffset(0x6A68)] public QuestLinkContainer MiniMapQuestLinkContainer;
+    [FieldOffset(0x5F20)] public QuestLinkContainer MapQuestLinkContainer;
+    [FieldOffset(0x6A78)] public QuestLinkContainer MiniMapQuestLinkContainer;
 
     [MemberFunction("40 56 48 83 EC 40 80 B9 ?? ?? ?? ?? ?? 48 8B F1 0F 29 7C 24")]
     public partial void SetFlagMapMarker(uint territoryId, uint mapId, float x, float y, uint iconId = 0xEC91);
