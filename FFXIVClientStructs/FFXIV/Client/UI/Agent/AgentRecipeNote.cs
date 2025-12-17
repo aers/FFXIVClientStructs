@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.RecipeNote)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x568)]
+[StructLayout(LayoutKind.Explicit, Size = 0x570)]
 public unsafe partial struct AgentRecipeNote {
 
     [FieldOffset(0x398)] public uint ContextMenuResultItemId;

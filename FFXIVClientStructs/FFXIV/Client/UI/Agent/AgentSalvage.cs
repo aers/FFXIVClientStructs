@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Salvage)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x438)]
+[StructLayout(LayoutKind.Explicit, Size = 0x470)]
 public unsafe partial struct AgentSalvage {
 
     [FieldOffset(0x30)] public SalvageItemCategory SelectedCategory;
@@ -27,15 +27,15 @@ public unsafe partial struct AgentSalvage {
     // [FieldOffset(0x384)] public uint Unknown1; // 0x79 before desynth
     // [FieldOffset(0x38C)] public uint Unknown2; // 0x79 after desynth
 
-    [FieldOffset(0x390)] public InventoryItem* DesynthItemSlot;
-    [FieldOffset(0x398)] public SalvageResult DesynthItem;
+    [FieldOffset(0x390)] public InventoryItem DesynthItemSlot;
+    [FieldOffset(0x3C8)] public SalvageResult DesynthItem; // does this even exist? looks like no
 
-    [FieldOffset(0x3A0)] public Utf8String TextQuantity;
-    // [FieldOffset(0x408)] public byte Unknown3; // 0xC8
-    [FieldOffset(0x409)] public bool IsSalvageResultAddonOpen;
+    [FieldOffset(0x3D8)] public Utf8String TextQuantity;
+    // [FieldOffset(0x440)] public byte Unknown3; // 0xC8
+    [FieldOffset(0x441)] public bool IsSalvageResultAddonOpen;
 
-    [FieldOffset(0x40C)] public uint DesynthItemId;
-    [FieldOffset(0x410), FixedSizeArray] internal FixedSizeArray3<SalvageResult> _desynthResults;
+    [FieldOffset(0x444)] public uint DesynthItemId;
+    [FieldOffset(0x448), FixedSizeArray] internal FixedSizeArray3<SalvageResult> _desynthResults;
 
     [MemberFunction("E8 ?? ?? ?? ?? EB 2A 49 8B 07")]
     public partial void ItemListRefresh(bool isSalvageResultAddonOpen);

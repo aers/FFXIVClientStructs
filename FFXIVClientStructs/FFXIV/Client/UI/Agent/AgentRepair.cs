@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Repair)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0xDD0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xDE0)]
 public unsafe partial struct AgentRepair {
     [FieldOffset(0x28)] private nint Unk_28;
     [FieldOffset(0x30)] public bool IsSelfRepairOpen;
@@ -26,18 +26,19 @@ public unsafe partial struct AgentRepair {
     [FieldOffset(0x70)] private nint Unk_70; // same pointer as in Unk_68
     [FieldOffset(0x78)] private nint Unk_78;
     [FieldOffset(0x80)][FixedSizeArray] internal FixedSizeArray140<RepairItemInfo> _repairItemInfos;
-    [FieldOffset(0x940)] private byte Unk_940; // Seems to be some loading state
-    [FieldOffset(0x944)] public int RepairEntriesAmount;
-    [FieldOffset(0x948)] private int Unk_948; // Ends to be the same number as in RepairEntriesAmount. Maybe some counter for adding up AtkEntries.
-    [FieldOffset(0x94C)][FixedSizeArray] internal FixedSizeArray140<RepairEntry> _repairEntries;
-    [FieldOffset(0xDAC)] private int Unk_DAC; // This is checked in AgentRepair_Update for 1 or 2
-    [FieldOffset(0xDB0)] private int Unk_DB0; // Some InventoryType
-    [FieldOffset(0xDB4)] private ushort Unk_DB4;
-    [FieldOffset(0xDB8)] private nint Unk_DB8;
-    [FieldOffset(0xDC0)] private int Unk_DC0;
-    [FieldOffset(0xDC4)] private byte Unk_DC4;
-    [FieldOffset(0xDC8)] private int Unk_DC8; // Maybe some AddonId
-    [FieldOffset(0xDCC)] private bool Unk_DCC; // Some state. Is set from argument in ChangeInventoryContainer. Changes for a short amount of time to true after "Repair all"
+    [FieldOffset(0x948)] private byte Unk_948; // Seems to be some loading state
+    [FieldOffset(0x94C)] public int RepairEntriesAmount;
+    [FieldOffset(0x950)] private int Unk_950; // Ends to be the same number as in RepairEntriesAmount. Maybe some counter for adding up AtkEntries.
+    [FieldOffset(0x954)][FixedSizeArray] internal FixedSizeArray140<RepairEntry> _repairEntries;
+    [FieldOffset(0xDB4)] private int Unk_DB4; // This is checked in AgentRepair_Update for 1 or 2
+    [FieldOffset(0xDB8)] private int Unk_DB8; // Some InventoryType
+    [FieldOffset(0xDBC)] private ushort Unk_DBC;
+    [FieldOffset(0xDC0)] private nint Unk_DC0;
+    [FieldOffset(0xDC8)] private int Unk_DC8;
+    [FieldOffset(0xDCC)] private byte Unk_DCC;
+    [FieldOffset(0xDD0)] private int Unk_DDD0; // Maybe some AddonId
+    [FieldOffset(0xDD4)] private bool Unk_DD4; // Some state. Is set from argument in ChangeInventoryContainer. Changes for a short amount of time to true after "Repair all"
+
 
 
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 08 74 2D")]
