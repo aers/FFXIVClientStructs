@@ -224,7 +224,7 @@ public partial struct RaptureHotbarModule {
         ///
         /// This method is virtually almost always called using the parameters from <see cref="ApparentSlotType"/> and <see cref="ApparentActionId"/>.
         ///
-        /// When <see cref="UNK_0xDE"/> is set to 3, this method will instead override the passed in slotType and actionId with
+        /// When <see cref="UNK_0xE2"/> is set to 3, this method will instead override the passed in slotType and actionId with
         /// the values present in <see cref="OriginalApparentSlotType"/> and <see cref="OriginalApparentActionId"/>.
         /// </summary>
         /// <param name="slotType">The appearance slot type to use. Virtually almost always <see cref="ApparentSlotType"/>.</param>
