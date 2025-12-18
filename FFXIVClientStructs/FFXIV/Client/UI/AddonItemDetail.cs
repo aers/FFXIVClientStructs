@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("ItemDetail")]
 [GenerateInterop]
 [Inherits<AddonItemDetailBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x7B8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7C0)]
 public unsafe partial struct AddonItemDetail {
     [FieldOffset(0x240)] public Utf8String ItemName;
     [FieldOffset(0x2A8)] public Utf8String GlamourItemName;

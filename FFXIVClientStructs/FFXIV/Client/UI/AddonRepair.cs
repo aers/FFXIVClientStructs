@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("Repair")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0xF800)]
+[StructLayout(LayoutKind.Explicit, Size = 0xF808)]
 public unsafe partial struct AddonRepair {
     [FieldOffset(0x240)] public AtkTextNode* UnusedText1; // Top right corner
     [FieldOffset(0x248)] public AtkTextNode* JobLevel;

@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("SalvageDialog")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x270)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
 public unsafe partial struct AddonSalvageDialog {
     [FieldOffset(0x240)] public AtkComponentIcon* ItemIconNode;
 
