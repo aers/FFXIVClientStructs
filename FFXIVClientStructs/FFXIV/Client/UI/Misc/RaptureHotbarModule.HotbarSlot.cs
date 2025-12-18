@@ -93,7 +93,7 @@ public partial struct RaptureHotbarModule {
         /// - 6: Blue (Job Gauge?)
         /// - 7: Bright Yellow (Rival Wings - CE)
         /// - All others: Grey
-        [FieldOffset(0xCA)] public byte CostType;
+        [FieldOffset(0xCB)] public byte CostType;
 
         /// Appears to control display of the primary cost of the action (0xCA).
         ///
@@ -102,13 +102,13 @@ public partial struct RaptureHotbarModule {
         /// - 3: Displays the value of 0xD0 in the bottom right (e.g. for Gearsets/UNK_0x17)
         /// - 4: Mode 3, but display a custom string from CostText instead (generally "x {count}" for Items)
         /// - 0/255: No display, all other cases
-        [FieldOffset(0xCB)] public byte CostDisplayMode;
+        [FieldOffset(0xCC)] public byte CostDisplayMode;
 
         /// <summary>
         /// The current Icon ID (usually used in form <c>ui/icon/{ID}.tex</c>) that this hotbar slot should display. Loaded
         /// with <see cref="LoadIconId"/> based on information in <see cref="ApparentActionId"/>.
         /// </summary>
-        [FieldOffset(0xCC)] public uint IconId;
+        [FieldOffset(0xD0)] public uint IconId;
 
         /// <summary>
         /// The "cost" of an action, usually in MP/TP/CP/GP or similar. The specific display type depends on the value in
@@ -116,7 +116,7 @@ public partial struct RaptureHotbarModule {
         ///
         /// For items, this contains the quantity currently present in the player's inventory.
         /// </summary>
-        [FieldOffset(0xD0)] public uint CostValue;
+        [FieldOffset(0xD4)] public uint CostValue;
 
         /// <summary>
         /// The ID of the item that this hotbar slot contains a recipe for.
@@ -124,7 +124,7 @@ public partial struct RaptureHotbarModule {
         /// <remarks>
         /// This field <em>may</em> be used for other purposes, but they have not been found yet.
         /// </remarks>
-        [FieldOffset(0xD4)] public uint RecipeItemId;
+        [FieldOffset(0xD8)] public uint RecipeItemId;
 
         /// <summary>
         /// The CraftType of the recipe currently in this hotbar slot.
@@ -132,7 +132,7 @@ public partial struct RaptureHotbarModule {
         /// <remarks>
         /// This field <em>may</em> be used for other purposes, but they have not been found yet.
         /// </remarks>
-        [FieldOffset(0xD8)] public uint RecipeCraftType;
+        [FieldOffset(0xDC)] public uint RecipeCraftType;
 
         /// <summary>
         /// A boolean representing if the recipe in this hotbar slot is valid or not. Set to 1 when the recipe would result
@@ -143,12 +143,12 @@ public partial struct RaptureHotbarModule {
         /// <remarks>
         /// This field <em>may</em> be used for other purposes, but they have not been found yet.
         /// </remarks>
-        [FieldOffset(0xDC)] public byte RecipeValid;
+        [FieldOffset(0xE0)] public byte RecipeValid;
 
         /// UNKNOWN. Appears to be Recipe specific.
         ///
         /// Always set to 1, apparently?
-        [FieldOffset(0xDD)] public byte UNK_0xDD;
+        [FieldOffset(0xE1)] public byte UNK_0xE1;
 
         /// UNKNOWN. Appears to control UI display mode (icon and displayed name) in some way
         ///
@@ -159,7 +159,7 @@ public partial struct RaptureHotbarModule {
         /// - 5: Set for Lost Finds Items (?)
         /// - 128: Appears as a flag?
         /// - 0/255: "generic"
-        [FieldOffset(0xDE)] public byte UNK_0xDE;
+        [FieldOffset(0xE2)] public byte UNK_0xE2;
 
         /// <summary>
         /// A boolean representing if this specific hotbar slot has been fully loaded. False for empty slots and slots
@@ -169,7 +169,7 @@ public partial struct RaptureHotbarModule {
         /// This appears to initialize as 0 and is set to 1 when the hotbar slot appears on a visible hotbar. It will not
         /// reset if the slot is hidden (and subsequently outdated).
         /// </remarks>
-        [FieldOffset(0xDF)] public bool IsLoaded; // ?
+        [FieldOffset(0xE3)] public bool IsLoaded; // ?
 
         /// <summary>
         /// Check if this hotbar slot is considered "empty" or not, based on whether this hotbar slot has a <see cref="CommandId"/>
