@@ -13,7 +13,7 @@ public unsafe partial struct EnemyListNumberArray {
     [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray53<int> _data;
 
     [FieldOffset(0 * 4)] private int Unk0;
-    [FieldOffset(1 * 4)] private int Unk1;
+    [FieldOffset(1 * 4)] public int EnemyCount;
     [FieldOffset(2 * 4)] public int TargetEntityId;
     [FieldOffset(3 * 4)] private int UnkEntityId;
     [FieldOffset(4 * 4)] private int Unk4;
