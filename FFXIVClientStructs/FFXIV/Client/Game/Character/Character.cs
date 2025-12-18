@@ -17,7 +17,7 @@ public unsafe partial struct Character {
     /// 0b0010_0000 [0x20] = <see cref="IsSwimming"/>
     /// </code>
     /// </summary>
-    [FieldOffset(0x618)] public byte Flags618;
+    [FieldOffset(0x628)] public byte Flags628;
 
     [FieldOffset(0x630)] public EmoteController EmoteController;
     [FieldOffset(0x670)] public MountContainer Mount;
@@ -85,7 +85,7 @@ public unsafe partial struct Character {
     [FieldOffset(0x2365)] public byte ModeParam; // Different purpose depending on mode. See CharacterModes for more info.
     [FieldOffset(0x2366)] public byte GMRank;
 
-    public bool IsSwimming => (Flags618 & 0x20) != 0; // found in Client::Game::Event::EventSceneModuleUsualImpl.IsSwimming
+    public bool IsSwimming => (Flags628 & 0x20) != 0; // found in Client::Game::Event::EventSceneModuleUsualImpl.IsSwimming
     public bool IsWeaponDrawn => (Timeline.Flags3 & 0x40) != 0;
     public bool IsOffhandDrawn => (WeaponFlags & 0x1) != 0;
     public bool InCombat => (CharacterData.Flags & 0x2) != 0;
