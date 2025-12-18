@@ -19,7 +19,7 @@ public unsafe partial struct AddonGlassSelect {
     [FieldOffset(0x1DD8)] public ushort NumVisibleGlassesStyles;
 
     [FieldOffset(0x1DE0), FixedSizeArray] internal FixedSizeArray30<Pointer<AtkComponentButton>> _glassesStyleButtons;
-    [FieldOffset(0x1DD8)] public ushort SelectedGlassesStyleIndex;
+    [FieldOffset(0x1ED0)] public ushort SelectedGlassesStyleIndex;
 
     [FieldOffset(0x1EF0), FixedSizeArray] internal FixedSizeArray12<GlassesEntry> _glasses;
     [FieldOffset(0x2910)] public ushort NumVisibleGlasses;
