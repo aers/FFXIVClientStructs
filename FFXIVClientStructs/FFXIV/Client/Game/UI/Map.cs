@@ -5,26 +5,26 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::Map
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x4000)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4020)]
 public unsafe partial struct Map {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B CF E8 ?? ?? ?? ?? 40 84 F6", 3)]
     public static partial Map* Instance();
 
-    [FieldOffset(0xB0), FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questMarkers;
-    [FieldOffset(0x1190), FixedSizeArray] internal FixedSizeArray16<MarkerInfo> _levequestMarkers;
+    [FieldOffset(0xB8), FixedSizeArray] internal FixedSizeArray30<MarkerInfo> _questMarkers;
+    [FieldOffset(0x1198), FixedSizeArray] internal FixedSizeArray16<MarkerInfo> _levequestMarkers;
 
-    [FieldOffset(0x1A98)] public MarkerInfo ActiveLevequestMarker; // Marker for active levequest mission, it has to be actually started.
+    [FieldOffset(0x1AA0)] public MarkerInfo ActiveLevequestMarker; // Marker for active levequest mission, it has to be actually started.
 
-    [FieldOffset(0x1B30)] public StdList<MarkerInfo> UnacceptedQuestMarkers;
+    [FieldOffset(0x1B38)] public StdList<MarkerInfo> UnacceptedQuestMarkers;
 
-    [FieldOffset(0x1B78)] public StdList<MarkerInfo> GuildLeveAssignmentMarkers;
+    [FieldOffset(0x1B80)] public StdList<MarkerInfo> GuildLeveAssignmentMarkers;
 
-    [FieldOffset(0x1BC0)] public StdList<MarkerInfo> GuildOrderGuideMarkers;
-    [FieldOffset(0x1BD0), FixedSizeArray] internal FixedSizeArray62<MarkerInfo> _housingMarkers;// 60 Plots + 2 Apartments
-    [FieldOffset(0x3EB0)] public StdList<MarkerInfo> TripleTriadMarkers;
-    [FieldOffset(0x3EC0)] public StdList<MarkerInfo> CustomTalkMarkers;
+    [FieldOffset(0x1BC8)] public StdList<MarkerInfo> GuildOrderGuideMarkers;
+    [FieldOffset(0x1BD8), FixedSizeArray] internal FixedSizeArray62<MarkerInfo> _housingMarkers;// 60 Plots + 2 Apartments
+    [FieldOffset(0x3EB8)] public StdList<MarkerInfo> TripleTriadMarkers;
+    [FieldOffset(0x3EC8)] public StdList<MarkerInfo> CustomTalkMarkers;
 
-    [FieldOffset(0x3F68)] public StdList<MarkerInfo> GemstoneTraderMarkers;
+    [FieldOffset(0x3F70)] public StdList<MarkerInfo> GemstoneTraderMarkers;
 
     [MemberFunction("83 FA 3E 0F 83")]
     public partial void AddHousingMarker(uint index, uint levelId, Vector3* pos, ushort territoryTypeId, int iconId);
