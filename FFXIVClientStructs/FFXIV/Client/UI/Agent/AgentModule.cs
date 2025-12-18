@@ -275,7 +275,7 @@ public enum AgentId : uint {
     DeepDungeonStatus = 240,
     DeepDungeonSaveData = 241,
     DeepDungeonScore = 242,
-    DeepDungeonHard = 243, // new in 7.3
+    DeepDungeonHard = 243,
     GcArmyTraining = 244,
     GcArmyMenberProfile = 245,
     GcArmyExpeditionResult = 246,
@@ -503,9 +503,9 @@ public enum AgentId : uint {
     WKSLottery = 468,
     WKSToolCustomize = 469,
     WKSHistoryBoard = 470,
-    WKSPlanetSelect = 471, // new in 7.3
-    WKSSetting = 472, // new in 7.3
-    WKSEnterInfo = 473, // new in 7.3
+    WKSPlanetSelect = 471,
+    WKSSetting = 472,
+    WKSEnterInfo = 473,
     MKDInfo = 474,
     MKDContentsInfo = 475,
     MKDSupportJob = 476,
@@ -514,12 +514,12 @@ public enum AgentId : uint {
     MKDTowerEntry = 479,
     Unk480 = 480, // new in 7.2 - interacts with agents MKDLoreBook, MKDInfo
     MKDLoreBook = 481,
-    MKDRelicGrowth = 482, // new in 7.3
-    MKDRelicGrowth2 = 483, // new in 7.3
-    QuickPanel = 484, // new in 7.3
+    MKDRelicGrowth = 482,
+    MKDRelicGrowth2 = 483,
+    QuickPanel = 484,
     Unk485 = 485, // new in 7.4
-    ConfigCharacterChatLogMiniTalk = 486, // new in 7.3
-    ToggleContextMenu = 487, // new in 7.3
+    ConfigCharacterChatLogMiniTalk = 486,
+    ToggleContextMenu = 487,
     Unk488 = 488, // new in 7.3
     Unk489 = 489, // new in 7.4
 }

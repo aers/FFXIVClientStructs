@@ -12317,6 +12317,12 @@ classes:
     funcs:
       0x140CC3080: ctor
       0x140CC31A0: Finalizer
+  Client::UI::Agent::AgentDeepDungeonHard:
+    vtbls:
+      - ea: 0x1420DFF30
+        base: Client::UI::Agent::AgentInterface
+      - ea: 0x1420DFF20
+        base: Common::Component::Excel::ExcelSheetWaiter
   Client::UI::Agent::AgentGcArmyTraining:
     vtbls:
       - ea: 0x1420E02E0
@@ -12405,6 +12411,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140CFBD70: ctor
+  Client::UI::Agent::AgentPvPSpectator:
+    vtbls:
+      - ea: 0x1420E12D8
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentAquarium:
     vtbls:
       - ea: 0x1420F8D00
@@ -14174,6 +14184,18 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A58BC0: ctor
+  Client::UI::Agent::AgentWKSPlanetSelect:
+    vtbls:
+      - ea: 0x1420CAD20
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentWKSSetting:
+    vtbls:
+      - ea: 0x1420CADA0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentWKSEnterInfo:
+    vtbls:
+      - ea: 0x1420CA608
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentMKDInfo:
     vtbls:
       - ea: 0x1420CAF40
@@ -14223,6 +14245,24 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140A60680: ctor
+  Client::UI::Agent::AgentMKDRelicGrowth:
+    vtbls:
+      - ea: 0x1420CB2E0
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentMKDRelicGrowth2:
+    vtbls:
+      - ea: 0x1420CB370
+        base: Client::UI::Agent::AgentInterface
+      - ea: 0x1420CB360
+        base: Common::Component::Excel::ExcelSheetWaiter
+  Client::UI::Agent::AgentQuickPanel:
+    vtbls:
+      - ea: 0x1420D2828
+        base: Client::UI::Agent::AgentInterface
+  Client::UI::Agent::AgentConfigCharacterChatLogMiniTalk:
+    vtbls:
+      - ea: 0x14209A390
+        base: Client::UI::Agent::AgentInterface
   Client::Game::UI::GameEventCallback:
     vtbls:
       - ea: 0x1420C8B00
