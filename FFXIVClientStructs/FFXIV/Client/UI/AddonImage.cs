@@ -17,4 +17,7 @@ public unsafe partial struct AddonImage {
 
     [FieldOffset(0x2A4)] public ushort Width;
     [FieldOffset(0x2A8)] public ushort Height;
+    
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 30 48 8B D9 89 91")]
+    public partial void SetImage(int iconId, IconSubFolder iconFolder, int sfxId);
 }
