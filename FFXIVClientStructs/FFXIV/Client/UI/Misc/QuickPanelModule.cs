@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x250)]
+[StructLayout(LayoutKind.Explicit, Size = 0x270)]
 public unsafe partial struct QuickPanelModule {
     public static QuickPanelModule* Instance() {
         var uiModule = UIModule.Instance();
