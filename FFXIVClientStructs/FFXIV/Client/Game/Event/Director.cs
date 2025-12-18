@@ -25,7 +25,7 @@ public unsafe partial struct Director {
     // Dungeons and Frontlines do not use these.
     [FieldOffset(0x430)] public long DirectorStartTimestamp;
     [FieldOffset(0x438)] public long DirectorEndTimestamp;
-    [FieldOffset(0x440), Obsolete($"Use {nameof(DirectorTodos)}, or {nameof(GetDirectorTodos)}")] public StdVector<EventHandlerObjective> Objectives;
+    [FieldOffset(0x440), Obsolete($"Use {nameof(DirectorTodos)}, or {nameof(GetDirectorTodos)}", true)] public StdVector<EventHandlerObjective> Objectives;
     [FieldOffset(0x440)] public StdVector<DirectorTodo> DirectorTodos; // name based on the Lua function "SetDirectorTodo", 10 objectives max
     [FieldOffset(0x458)] public uint EventItemId;
 

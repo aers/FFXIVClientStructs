@@ -24,9 +24,9 @@ public unsafe partial struct RaptureAtkModule {
     }
 
     [FieldOffset(0x82E0)] public GameUIScene UIScene;
-    [FieldOffset(0x82E0), Obsolete($"Renamed to {nameof(UIScene)}")] public ushort UiMode; // 0 = In Lobby, 1 = In Game
+    [FieldOffset(0x82E0), Obsolete($"Renamed to {nameof(UIScene)}", true)] public ushort UiMode; // 0 = In Lobby, 1 = In Game
     [FieldOffset(0x82E2)] public GameUIMode UIMode;
-    [FieldOffset(0x82E2), Obsolete($"Renamed to {nameof(UIMode)}")] public ushort UISetupStage; // unsure
+    [FieldOffset(0x82E2), Obsolete($"Renamed to {nameof(UIMode)}", true)] public ushort UISetupStage; // unsure
 
     [FieldOffset(0x8378)] internal Utf8String Unk8358;
     [FieldOffset(0x83E0), FixedSizeArray] internal FixedSizeArray6<Utf8String> _unkArray;

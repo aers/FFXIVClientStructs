@@ -19,7 +19,7 @@ public unsafe partial struct HousingTemporaryObject {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public unsafe partial struct HousingTemporaryObjectData {
-        [FieldOffset(0x00), Obsolete($"Renamed to {nameof(Kind)}")] public byte Unk0;
+        [FieldOffset(0x00), Obsolete($"Renamed to {nameof(Kind)}", true)] public byte Unk0;
         /// <remarks>
         /// 76 for HousingFurniture<br/>
         /// 77 for HousingYardObject
@@ -28,7 +28,7 @@ public unsafe partial struct HousingTemporaryObject {
         [FieldOffset(0x01)] public byte Stain;
         [FieldOffset(0x02)] public short ModelKey;
         [FieldOffset(0x04)] public byte HousingItemCategory;
-        [FieldOffset(0x05), Obsolete($"Renamed to {nameof(IsPadModeEnabled)}")] public byte Unk5;
+        [FieldOffset(0x05), Obsolete($"Renamed to {nameof(IsPadModeEnabled)}", true)] public byte Unk5;
         [FieldOffset(0x05)] public bool IsPadModeEnabled;
         [FieldOffset(0x06)] public byte Unk6;
         [FieldOffset(0x07)] public byte Unk7;

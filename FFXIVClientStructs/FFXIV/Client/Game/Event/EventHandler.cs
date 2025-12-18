@@ -49,7 +49,7 @@ public unsafe partial struct EventHandler {
     [VirtualFunction(262)]
     public partial uint GetEventItemId();
 
-    [VirtualFunction(265), Obsolete($"Renamed to {nameof(GetDirectorTodos)}")]
+    [VirtualFunction(265), Obsolete($"Renamed to {nameof(GetDirectorTodos)}", true)]
     public partial StdVector<EventHandlerObjective>* GetObjectives();
 
     [VirtualFunction(265)]
