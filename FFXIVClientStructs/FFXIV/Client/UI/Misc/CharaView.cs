@@ -24,7 +24,7 @@ public unsafe partial struct CharaView : ICreatable {
     [FieldOffset(0x14)] public uint CameraType; // turns portrait ambient/directional lighting on/off
     [FieldOffset(0x18)] public nint CameraManager;
     [FieldOffset(0x20)] public Camera* Camera;
-    //[FieldOffset(0x28)] public nint Unk28; // float CharacterRotation?
+    //[FieldOffset(0x28)] private nint Unk28; // float CharacterRotation?
     [FieldOffset(0x30)] public AgentInterface* Agent; // for example: AgentTryOn
     /// <remarks> (AgentInterface* agent, Texture* charaViewTexture) -> void </remarks>
     [FieldOffset(0x38)] public nint AgentCallbackReady; // if set, called when State changes to Ready
@@ -151,7 +151,7 @@ public struct CharaViewItem {
     [FieldOffset(0x4)] public byte Stain1Id;
     [FieldOffset(0x5)] public byte GlamourStain0Id;
     [FieldOffset(0x6)] public byte GlamourStain1Id;
-    //[FieldOffset(0x7)] public byte Unk7;
+    //[FieldOffset(0x7)] private byte Unk7;
     [FieldOffset(0x8)] public uint ItemId;
     [FieldOffset(0xC)] public uint GlamourItemId;
     [FieldOffset(0x10)] public ulong ModelMain; // WeaponModelId or EquipmentModelId

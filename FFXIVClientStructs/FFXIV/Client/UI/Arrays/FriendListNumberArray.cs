@@ -18,5 +18,5 @@ public unsafe partial struct FriendListNumberArray {
     [FieldOffset(2400 * 4)] public int TotalFriendCount;
     [FieldOffset(2401 * 4)] public int FriendCountInGroup;
 
-    [FieldOffset(2403 * 4)] public bool UnkBool2403;
+    [FieldOffset(2403 * 4)] private bool UnkBool2403;
 }

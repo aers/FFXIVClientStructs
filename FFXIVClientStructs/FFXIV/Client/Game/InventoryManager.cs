@@ -24,12 +24,12 @@ public unsafe partial struct InventoryManager {
     // Seems to be reused for FATE HandIns and Mail too??!
     [FieldOffset(0x1E18), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsLocal; // 6th slot is Gil
     [FieldOffset(0x1FC8), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsRemote; // 6th slot is Gil
-    [FieldOffset(0x2178)] public uint TradeUnk2178;
+    [FieldOffset(0x2178)] private uint TradeUnk2178;
     [FieldOffset(0x217C)] public TradeState TradeLocalState;
     [FieldOffset(0x2180)] public TradeState TradeRemoteState;
     [FieldOffset(0x2184), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _tradePartnerName;
     [FieldOffset(0x21A4)] public uint TradePartnerEntityId;
-    [FieldOffset(0x21A8)] public bool TradeUnk21A8;
+    [FieldOffset(0x21A8)] private bool TradeUnk21A8;
     [FieldOffset(0x21A9)] public bool TradeWarnIfMovedTooFar;
     [FieldOffset(0x21AB)] public bool TradeIsSyncPending;
 
@@ -166,11 +166,11 @@ public unsafe partial struct InventoryManager {
         [FieldOffset(0x28)] public short DestinationInventorySlot;
         [FieldOffset(0x2C)] public int DestinationItemQuantity;
         [FieldOffset(0x30)] public uint DestinationItemId; // also used for MarketPrice??
-        [FieldOffset(0x34)] public bool Unk34;
-        [FieldOffset(0x35)] public bool Unk35;
-        [FieldOffset(0x36)] public bool Unk36;
-        [FieldOffset(0x37)] public bool Unk37;
-        [FieldOffset(0x38)] public uint Unk38;
+        [FieldOffset(0x34)] private bool Unk34;
+        [FieldOffset(0x35)] private bool Unk35;
+        [FieldOffset(0x36)] private bool Unk36;
+        [FieldOffset(0x37)] private bool Unk37;
+        [FieldOffset(0x38)] private uint Unk38;
     }
 }
 

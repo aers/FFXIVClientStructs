@@ -19,9 +19,9 @@ public unsafe partial struct InfoProxyItemSearch {
     [FieldOffset(0x20)] public uint SearchItemId;
 
     // Following are used for requesting item data from the server in RequestData
-    // [FieldOffset(0x24)] public byte Unk_0x24; // ?
-    // [FieldOffset(0x25)] public byte Unk_0x25; // ?
-    // [FieldOffset(0x28)] public byte Unk_0x28;
+    // [FieldOffset(0x24)] private byte Unk_0x24; // ?
+    // [FieldOffset(0x25)] private byte Unk_0x25; // ?
+    // [FieldOffset(0x28)] private byte Unk_0x28;
 
     /// <summary>
     /// All items currently available on the general marketboard for the last specified search term (found in <see cref="SearchItemId"/>.
@@ -54,7 +54,7 @@ public unsafe partial struct InfoProxyItemSearch {
     [FieldOffset(0x5B95)] public bool WaitingForWishlistUpdate;
     [FieldOffset(0x5B96)] public bool WaitingForListings;
 
-    // [FieldOffset(0x5B96)] public byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
+    // [FieldOffset(0x5B96)] private byte Unk_0x5B96; // controls if AddData gets called? (ResultsPresent?)
 
     [MemberFunction("40 57 41 56 48 83 EC 48 83 3A 00")]
     public partial void ProcessItemHistory(nint packet);
@@ -91,7 +91,7 @@ public unsafe partial struct InfoProxyItemSearch {
 public unsafe partial struct MarketBoardListing {
     public const int Size = 0xB8;
 
-    // [FieldOffset(0x00)] public Utf8String Unk_0x00;
+    // [FieldOffset(0x00)] private Utf8String Unk_0x00;
 
     [FieldOffset(0x68)] public ulong ListingId;
     [FieldOffset(0x70)] public ulong SellingRetainerContentId; // ??
@@ -120,7 +120,7 @@ public unsafe partial struct MarketBoardListing {
     [FieldOffset(0xA9)] public byte MateriaCount;
     [FieldOffset(0xAA)] public bool IsMannequin;
 
-    // [FieldOffset(0xAC)] public ushort Unk_0xAC;
+    // [FieldOffset(0xAC)] private ushort Unk_0xAC;
 
     /// <summary>
     /// The Town (from EXD) that this marketboard entry is from.
@@ -152,8 +152,8 @@ public struct PlayerRetainerInfo {
     [FieldOffset(0x00)] public ulong RetainerId;
     [FieldOffset(0x08)] public byte TownId;
     [FieldOffset(0x09)] public bool SellingItems;
-    // [FieldOffset(0x0A)] public byte Unk_0x0A;
+    // [FieldOffset(0x0A)] private byte Unk_0x0A;
 
-    // [FieldOffset(0x0C)] public int Unk_0x0C; // Some kind of timestamp?
+    // [FieldOffset(0x0C)] private int Unk_0x0C; // Some kind of timestamp?
     [FieldOffset(0x10)] public Utf8String Name;
 }

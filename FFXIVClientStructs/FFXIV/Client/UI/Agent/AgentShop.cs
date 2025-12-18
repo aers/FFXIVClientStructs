@@ -34,17 +34,17 @@ public unsafe partial struct AgentShop {
     [StructLayout(LayoutKind.Explicit, Size = 0x240)]
     public struct ShopItem {
         [FieldOffset(0x00)] public Utf8String ItemName;
-        //[FieldOffset(0x68)] public Utf8String UnkString1;
-        //[FieldOffset(0xD0)] public Utf8String UnkString2;
+        //[FieldOffset(0x68)] private Utf8String UnkString1;
+        //[FieldOffset(0xD0)] private Utf8String UnkString2;
         [FieldOffset(0x138)] public Utf8String Qty;
         [FieldOffset(0x1A0)] public Utf8String Set;
         [FieldOffset(0x208)] public uint CategoryIconId;
         [FieldOffset(0x20C)] public uint ItemIconId;
-        //[FieldOffset(0x210)] public uint Unk210;
+        //[FieldOffset(0x210)] private uint Unk210;
         [FieldOffset(0x214)] public uint ItemCount;
         [FieldOffset(0x218)] public uint OwnedItemCount;
         [FieldOffset(0x21C)] public uint ItemId;
-        //[FieldOffset(0x220)] public uint Unk220;
+        //[FieldOffset(0x220)] private uint Unk220;
         [FieldOffset(0x224)] public uint MaxStack;
     }
 }

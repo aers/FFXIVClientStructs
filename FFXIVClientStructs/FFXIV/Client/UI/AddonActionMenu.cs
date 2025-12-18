@@ -34,8 +34,8 @@ public unsafe partial struct AddonActionMenu {
     [FieldOffset(0x14F8)] public AtkImageNode* JobIcon;
     [FieldOffset(0x1500)] public AtkTextNode* JobText;
 
-    // [FieldOffset(0x1508)] public AtkTextNode* UnknownText;
-    // [FieldOffset(0x1510)] public AtkComponentNode* UnknownNode; // Appears to be the first action node in the new action view? Not sure.
+    // [FieldOffset(0x1508)] private AtkTextNode* UnknownText;
+    // [FieldOffset(0x1510)] private AtkComponentNode* UnknownNode; // Appears to be the first action node in the new action view? Not sure.
     [FieldOffset(0x1530)] public AtkComponentScrollBar* Scrollbar;
     [FieldOffset(0x1538)] public AtkResNode* ActionContentsContainer; // Contains only the Actions nodes, only the new view
     [FieldOffset(0x1540)] public AtkCollisionNode* ActionCollision; // Collision node for the action contents area

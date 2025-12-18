@@ -13,10 +13,10 @@ public unsafe partial struct MinionListModule {
         return uiModule == null ? null : uiModule->GetMinionListModule();
     }
 
-    // [FieldOffset(0x48)] public byte Unk40; // set to 1 in ReadFile
+    // [FieldOffset(0x48)] private byte Unk40; // set to 1 in ReadFile
     [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenCompanions;
     [FieldOffset(0x5E), FixedSizeArray] internal FixedSizeArray30<ushort> _favorites;
-    // [FieldOffset(0x9A)] public uint Unk92;
+    // [FieldOffset(0x9A)] private uint Unk92;
 
     [MemberFunction("48 83 EC 28 44 0F B7 D2 4C 8B C9 45 32 C0 66 90 41 0F B6 C0 66 44 39 54 41 ??")]
     public partial bool AddToUnseenCompanions(ushort companionId);

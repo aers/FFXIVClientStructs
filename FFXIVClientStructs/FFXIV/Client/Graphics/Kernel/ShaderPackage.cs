@@ -48,7 +48,7 @@ public unsafe partial struct ShaderPackage {
     [FieldOffset(0xD8)] public ushort ConstantCount;
     [FieldOffset(0xDC)] public ushort SamplerCount;
     [FieldOffset(0xE0)] public ushort TextureCount;
-    [FieldOffset(0xE4)] public ushort Unk2Count;
+    [FieldOffset(0xE4)] private ushort Unk2Count;
 
     [FieldOffset(0xE8)]
     public ushort SystemKeyCount; // keys are all CRC32 but no idea what bytes they are actually CRC32s of 
@@ -64,7 +64,7 @@ public unsafe partial struct ShaderPackage {
     [FieldOffset(0x108)] public ConstantSamplerUnknown* Samplers;
 
     [FieldOffset(0x110)] public ConstantSamplerUnknown* Textures;
-    [FieldOffset(0x118)] public ConstantSamplerUnknown* Unknowns2;
+    [FieldOffset(0x118)] private ConstantSamplerUnknown* Unknowns2;
 
     [FieldOffset(0x120)] public void* MaterialElementDefaults;
 
@@ -87,8 +87,6 @@ public unsafe partial struct ShaderPackage {
         => new(Samplers, SamplerCount);
     public Span<ConstantSamplerUnknown> TexturesSpan
         => new(Textures, TextureCount);
-    public Span<ConstantSamplerUnknown> Unknowns2Span
-        => new(Unknowns2, Unk2Count);
 
     public Span<byte> MaterialElementDefaultsSpan
         => new(MaterialElementDefaults, MaterialConstantBufferSize);

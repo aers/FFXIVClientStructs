@@ -5,8 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkArrayData {
     [FieldOffset(0x8)] public int Size;
     [FieldOffset(0xC), FixedSizeArray] internal FixedSizeArray16<byte> _subscribedAddons;
-    [FieldOffset(0x1C)] public byte Unk1C;
-    [FieldOffset(0x1D)] public byte Unk1D;
+    [FieldOffset(0x1C)] private byte Unk1C;
+    [FieldOffset(0x1D)] private byte Unk1D;
     [FieldOffset(0x1E)] public byte SubscribedAddonsCount;
     /// <remarks>
     /// 0 = No update pending<br/>

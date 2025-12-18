@@ -42,7 +42,7 @@ public unsafe partial struct AgentActionMenu {
     [FieldOffset(0x188)] public StdVector<ActionData> GatheringRoleActionList;
 
     [FieldOffset(0x1E0)] public Utf8String ClassJobTitle;
-    //[FieldOffset(0x230)] public Utf8String UnkString248;
+    //[FieldOffset(0x230)] private Utf8String UnkString248;
 
     [FieldOffset(0x2A0)] public StdVector<ExtraCommandData> ExtraCommandData;
     [FieldOffset(0x2B8)] public ExcelSheet* ExtraCommandExcelSheet;
@@ -54,7 +54,7 @@ public unsafe partial struct AgentActionMenu {
 public struct ActionData {
     [FieldOffset(0x00)] public Utf8String DisplayString;
     [FieldOffset(0x68)] public uint ActionId;
-    [FieldOffset(0x6C)] public uint UnkValue0;
+    [FieldOffset(0x6C)] private uint UnkValue0;
     [FieldOffset(0x70)] public uint ActionCategoryId;
     [FieldOffset(0x78)] public uint IconId;
     [FieldOffset(0x7C)] public uint Level; // or flags?

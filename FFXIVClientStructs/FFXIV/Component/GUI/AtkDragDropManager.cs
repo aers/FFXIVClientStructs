@@ -47,7 +47,7 @@ public unsafe partial struct AtkDragDropPayloadContainer {
     // usage depends on implementation
     [FieldOffset(0x00)] public int Int1; // Index (like AtkDragDropInterface.ReferenceIndex), InventoryType, etc.
     [FieldOffset(0x04)] public int Int2; // ActionId, ItemId, EmoteId, InventorySlotIndex, ListIndex, MacroIndex etc.
-    [FieldOffset(0x08)] public ulong Unk8;
+    [FieldOffset(0x08)] private ulong Unk8;
     [FieldOffset(0x10)] public AtkValue* AtkValue;
     [FieldOffset(0x18)] public Utf8String Text; // MacroName, ...?
     [FieldOffset(0x80)] public uint Flags;

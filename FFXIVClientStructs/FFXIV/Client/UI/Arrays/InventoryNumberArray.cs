@@ -64,15 +64,15 @@ public unsafe partial struct InventoryNumberArray {
     public partial struct InventoryKeyItemNumberArray {
         [FieldOffset(0 * 4)] public uint IconId;
         [FieldOffset(1 * 4)] public InventoryKeyItemFlagsNumberArray KeyItemFlags;
-        [FieldOffset(2 * 4)] public uint UnkFlags;
+        [FieldOffset(2 * 4)] private uint UnkFlags;
 
         [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
         public partial struct InventoryKeyItemFlagsNumberArray {
             [FieldOffset(0)] public byte StackCount;
-            [FieldOffset(1)] public byte UnkFlags3;
+            [FieldOffset(1)] private byte UnkFlags3;
             [FieldOffset(2)] public byte TooltipIndex;
-            [FieldOffset(3)] public byte UnkFlags1;
+            [FieldOffset(3)] private byte UnkFlags1;
         }
     }
 

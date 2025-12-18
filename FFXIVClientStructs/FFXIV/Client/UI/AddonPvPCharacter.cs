@@ -24,6 +24,6 @@ public unsafe partial struct AddonPvPCharacter {
         [FieldOffset(0x08)] public AtkTextNode* Name;
         [FieldOffset(0x10)] public AtkTextNode* Level;
         [FieldOffset(0x18)] public AtkImageNode* Icon;
-        [FieldOffset(0x20)] public AtkImageNode* UnkImage;
+        [FieldOffset(0x20)] private AtkImageNode* UnkImage;
     }
 }

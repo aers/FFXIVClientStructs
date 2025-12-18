@@ -14,7 +14,7 @@ public unsafe struct RaptureAtkColorDataManager {
     public struct ColorSet {
         [FieldOffset(0x00)] public uint Id;
         [FieldOffset(0x04)] public short NumColors;
-        [FieldOffset(0x06)] public bool UnkBool;
+        [FieldOffset(0x06)] private bool UnkBool;
         [FieldOffset(0x08)] public uint* Colors;
 
         public Span<ColorSet> ColorSpan => new(Colors, NumColors);

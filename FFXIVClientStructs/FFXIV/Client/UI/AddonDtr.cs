@@ -27,5 +27,5 @@ public unsafe partial struct AddonDtr {
     [FieldOffset(0x368)] public AtkImageNode* WorldVisitImage; // Displays home icon if in home world
     [FieldOffset(0x370)] public AtkCollisionNode* CollisionNode;
 
-    // [FieldOffset(0x370)] public int unknown; // Some kind of pre-calculated size, might only update when one of the containers needs to be shown.
+    // [FieldOffset(0x370)] private int unknown; // Some kind of pre-calculated size, might only update when one of the containers needs to be shown.
 }

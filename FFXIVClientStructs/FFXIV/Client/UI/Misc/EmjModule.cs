@@ -17,19 +17,19 @@ public unsafe partial struct EmjModule {
     [FieldOffset(0x49)] public bool HideHints;
     [FieldOffset(0x4A)] public bool HideDangerousTileMarker;
     [FieldOffset(0x4B)] public bool HideChatLog;
-    [FieldOffset(0x4C)] public byte Unk4C;
-    [FieldOffset(0x4D)] public byte Unk4D;
+    [FieldOffset(0x4C)] private byte Unk4C;
+    [FieldOffset(0x4D)] private byte Unk4D;
     [FieldOffset(0x4E)] public bool HideTileNames;
     [FieldOffset(0x4F)] public bool ShowHighResolutionLayout;
     [FieldOffset(0x50)] public bool ShowTraditionalDoraIndicator;
     [FieldOffset(0x51)] public byte OwnPlayerNameSetting;
     [FieldOffset(0x52)] public byte OthersPlayerNameSetting;
     [FieldOffset(0x53)] public bool DisableCharacterVoices;
-    [FieldOffset(0x54)] public byte Unk54;
-    [FieldOffset(0x55)] public byte Unk55;
+    [FieldOffset(0x54)] private byte Unk54;
+    [FieldOffset(0x55)] private byte Unk55;
 
-    [FieldOffset(0x58)] public int Unk58;
-    [FieldOffset(0x5C)] public int Unk5C; // set to current time
+    [FieldOffset(0x58)] private int Unk58;
+    [FieldOffset(0x5C)] private int Unk5C; // set to current time
 
     [FieldOffset(0x68), FixedSizeArray] internal FixedSizeArray16<int> _unk68; // Unk58 history?
     [FieldOffset(0xA8), FixedSizeArray] internal FixedSizeArray3<short> _unkA8;

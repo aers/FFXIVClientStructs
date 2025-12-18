@@ -20,8 +20,8 @@ public unsafe partial struct InfoProxyLetter {
     [FieldOffset(0x2B)] public bool HasLettersFromSupportDesk;
     [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray130<Letter> _letters;
     //0xCC0 After
-    [FieldOffset(0x7608)] public Utf8String UnkString0;
-    [FieldOffset(0x7670)] public Utf8String UnkString1;
+    [FieldOffset(0x7608)] private Utf8String UnkString0;
+    [FieldOffset(0x7670)] private Utf8String UnkString1;
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0xE8)]

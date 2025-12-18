@@ -86,7 +86,7 @@ public unsafe partial struct AtkComponentIcon : ICreatable {
     public partial void SetComboLevel(bool enable, byte level = 0);
 
     // [MemberFunction("E8 ?? ?? ?? ?? 48 8B 06 80 88")]
-    // public partial void SetUnk8192(bool enabled);
+    // private partial void SetUnk8192(bool enabled);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 FF C6")]
     public partial void SetOuterResNode(AtkResNode* node);

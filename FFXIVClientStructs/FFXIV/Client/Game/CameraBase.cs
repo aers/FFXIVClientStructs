@@ -8,8 +8,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0x120)]
 public unsafe partial struct CameraBase {
     [FieldOffset(0x10)] public Graphics.Scene.Camera SceneCamera;
-    [FieldOffset(0x110)] public uint UnkUInt;
-    [FieldOffset(0x118)] public uint UnkFlags;
+    [FieldOffset(0x110)] private uint UnkUInt;
+    [FieldOffset(0x118)] private uint UnkFlags;
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 18 48 8D 0D ?? ?? ?? ?? B3 01")]
     public partial bool ShouldDrawGameObject(GameObject* gameObject, Vector3* sceneCameraPos, Vector3* lookAtVector);

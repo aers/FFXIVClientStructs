@@ -18,7 +18,7 @@ public partial struct UserFileManager {
         [FieldOffset(0x20)] public uint TempDataBytesWritten;
 
         [FieldOffset(0x30), FixedSizeArray(isString: true)] internal FixedSizeArray12<byte> _fileName;
-        [FieldOffset(0x3C)] public bool Unk3C;
+        [FieldOffset(0x3C)] private bool Unk3C;
         [FieldOffset(0x40)] private int Unk40; // new 7.1, defaults to 1
         [FieldOffset(0x44)] public bool HasChanges;
         [FieldOffset(0x45)] public bool IsSavePending;

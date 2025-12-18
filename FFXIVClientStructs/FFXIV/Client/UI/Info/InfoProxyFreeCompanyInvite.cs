@@ -11,6 +11,6 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [Inherits<InfoProxyInvitedList>, Inherits<InfoProxyInvitedInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x118)]
 public unsafe partial struct InfoProxyFreeCompanyInvite {
-    [FieldOffset(0x048)] public Utf8String UnkString0;
-    [FieldOffset(0x0B0)] public Utf8String UnkString1;
+    [FieldOffset(0x048)] private Utf8String UnkString0;
+    [FieldOffset(0x0B0)] private Utf8String UnkString1;
 }

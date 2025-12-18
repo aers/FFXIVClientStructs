@@ -12,7 +12,7 @@ public struct Balloon {
     [FieldOffset(0x8)] public BalloonType Type;
     [FieldOffset(0xC)] public BalloonState State;
     [FieldOffset(0x10)] public Utf8String Text; // this is "emptied" (first character set to null) when inactive
-    [FieldOffset(0x78)] public byte UnkBool;
+    [FieldOffset(0x78)] private byte UnkBool;
 }
 
 public enum BalloonType : uint {

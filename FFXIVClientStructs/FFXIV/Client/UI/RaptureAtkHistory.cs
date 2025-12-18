@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct RaptureAtkHistory {
     // this stuff seems like some sort of cursed circular buffer kind of thing
-    //[FieldOffset(0x08)] public void** Unk08; // points to a pointer to itself?
+    //[FieldOffset(0x08)] private void** Unk08; // points to a pointer to itself?
     // these names don't really fit, just didn't come up with better ones yet
     [FieldOffset(0x10)] public Utf8String** Entries;
     [FieldOffset(0x18)] public long Tail;

@@ -13,7 +13,7 @@ public unsafe partial struct PerformanceModule {
         return uiModule == null ? null : uiModule->GetPerformanceModule();
     }
 
-    [FieldOffset(0x48)] public ushort Unk48; // Version presumably. If 0, it migrates AssignAllNotesToKeyboard from FlagStatusModule or something like that.
+    [FieldOffset(0x48)] private ushort Unk48; // Version presumably. If 0, it migrates AssignAllNotesToKeyboard from FlagStatusModule or something like that.
     [FieldOffset(0x4A)] public ushort BPMSetting;
     [FieldOffset(0x4C)] public PerformanceSetting1Flag Settings1;
     [FieldOffset(0x4D)] public PerformanceSetting2Flag Settings2;

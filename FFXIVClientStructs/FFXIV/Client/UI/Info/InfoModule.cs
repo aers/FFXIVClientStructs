@@ -14,9 +14,9 @@ public unsafe partial struct InfoModule {
     [FieldOffset(0x1978), FixedSizeArray] internal FixedSizeArray35<Pointer<InfoProxyInterface>> _infoProxies;
     [FieldOffset(0x1A90)] public ulong LocalContentId;
     [FieldOffset(0x1A98)] public Utf8String LocalCharName;
-    [FieldOffset(0x1B00)] public Utf8String UnkString1;
-    [FieldOffset(0x1B68)] public Utf8String UnkString2;
-    [FieldOffset(0x1BD0)] public Utf8String UnkString3;
+    [FieldOffset(0x1B00)] private Utf8String UnkString1;
+    [FieldOffset(0x1B68)] private Utf8String UnkString2;
+    [FieldOffset(0x1BD0)] private Utf8String UnkString3;
     [FieldOffset(0x1C38)] public ulong OnlineStatusFlags;
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 85 E4 7E 5C")]

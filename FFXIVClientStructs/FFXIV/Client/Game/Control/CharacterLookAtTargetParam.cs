@@ -24,8 +24,8 @@ public partial struct CharacterLookAtTargetParam {
     /// <remarks>
     /// Used when Type is <see cref="TargetInfoType.Unk2"/> or <see cref="TargetInfoType.Unk3"/>.
     /// </remarks>
-    [FieldOffset(0x10), CExporterUnion("Target")] public Vector3 Unk10;
-    [FieldOffset(0x20)] public int Unk20;
+    [FieldOffset(0x10), CExporterUnion("Target")] private Vector3 Unk10;
+    [FieldOffset(0x20)] private int Unk20;
 
     public enum TargetInfoType {
         None = 0,

@@ -83,7 +83,7 @@ public unsafe partial struct AgentGearSet {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct ContextMenuParam {
-        [FieldOffset(0x00)] public int Unk0;
+        [FieldOffset(0x00)] private int Unk0;
         [FieldOffset(0x04)] public int EventId;
         [FieldOffset(0x08)] public int GearSetId;
     }

@@ -13,7 +13,7 @@ public unsafe partial struct InputTimerModule {
     [FieldOffset(0x10)] public float AfkTimer; // counts up if AutoAfk is enabled and negative if afk
     [FieldOffset(0x14)] public float ContentInputTimer;
     [FieldOffset(0x18)] public float InputTimer;
-    [FieldOffset(0x1C)] public float Unk1C; // used in a couple different ways, no idea
+    [FieldOffset(0x1C)] private float Unk1C; // used in a couple different ways, no idea
     [FieldOffset(0x20)] public float AutoAfkTimeLimit; // -1 if disabled
 
     [FieldOffset(0x28)] public float InstanceContentAfkTimeLimit;

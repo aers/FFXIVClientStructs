@@ -32,14 +32,14 @@ public unsafe partial struct Hud2NumberArray {
     [FieldOffset(35 * 4), FixedSizeArray] internal FixedSizeArray30<bool> _targetStatusDispellable;
     [FieldOffset(65 * 4)] public Hud2ColorNumberArray TargetBarFillColor;
     [FieldOffset(66 * 4)] public Hud2ColorNumberArray TargetBarBackdropColor;
-    [FieldOffset(67 * 4)] public bool UnkFlag1;
+    [FieldOffset(67 * 4)] private bool UnkFlag1;
     [FieldOffset(69 * 4)] public int TargetCastPercent;
     [FieldOffset(72 * 4)] public bool TargetHasTarget;
     /// <summary>
     /// Keeps count of how your target has targeted a new target.
     /// </summary>
     [FieldOffset(74 * 4)] public int TargetOfTargetCount;
-    [FieldOffset(76 * 4)] public bool UnkFlag2;
+    [FieldOffset(76 * 4)] private bool UnkFlag2;
     [FieldOffset(77 * 4)] public int TargetOfTargetEntityId;
     [FieldOffset(78 * 4)] public Hud2ColorNumberArray TargetOfTargetBarFillColor;
     [FieldOffset(79 * 4)] public Hud2ColorNumberArray TargetOfTargetBarBackdropColor;

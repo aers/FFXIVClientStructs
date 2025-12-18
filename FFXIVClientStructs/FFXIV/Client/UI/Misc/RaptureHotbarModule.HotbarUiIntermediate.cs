@@ -32,6 +32,6 @@ public partial struct RaptureHotbarModule {
         [FieldOffset(0x3F)] public bool ActionAvailable2; // to NumberArray idx slotBase + 6
         [FieldOffset(0x40)] public bool ActionTargetSatisfied; // to NumberArray idx slotBase + 15
         [FieldOffset(0x41)] public bool DrawAnts; // to NumberArray idx slotBase + 14
-        [FieldOffset(0x42)] public byte Unk_0x42;
+        [FieldOffset(0x42)] private byte Unk_0x42;
     }
 }
