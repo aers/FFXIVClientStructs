@@ -51,7 +51,7 @@ public unsafe partial struct AddonJobHudGNB0 {
         [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray3<PowderCartridge> _powderCartridges;
         [FieldOffset(0x58)] public AtkComponentBase* StanceIcon;
         [FieldOffset(0x68)] public AtkResNode* TwoGems;
-        [FieldOffset(0x68)] public AtkResNode* Container;
+        [FieldOffset(0x78)] public AtkResNode* Container;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]
