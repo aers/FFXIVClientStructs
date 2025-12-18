@@ -6239,10 +6239,14 @@ classes:
     vtbls:
       - ea: 0x14206C6B8
         base: Client::Graphics::Singleton
+    funcs:
+      0x14020F300: ctor
   Client::Graphics::Kernel::DeviceWin:
     vtbls:
       - ea: 0x14206C6C0
         base: Client::Graphics::Kernel::Device
+    funcs:
+      0x14020F490: ctor
   Client::Graphics::Kernel::DeviceDX11:
     instances:
       - ea: 0x1427E9A80
@@ -13229,6 +13233,12 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140D43270: ctor
+  Client::UI::Agent::AgentHalloweenNpcSelect:
+    vtbls:
+      - ea: 0x1420CA348
+        base: Client::UI::Agent::AgentInterface
+      - ea: 0x1420CA338
+        base: Common::Component::Excel::ExcelSheetWaiter
   Client::UI::Agent::AgentSpearFishing:
     vtbls:
       - ea: 0x1420D3F40

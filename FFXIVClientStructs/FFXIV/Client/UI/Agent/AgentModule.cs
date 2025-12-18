@@ -427,7 +427,7 @@ public enum AgentId : uint {
     TourismMenu = 392,
     GatheringMasterpiece = 393,
     StarlightGiftBox = 394,
-    Unk395 = 395, // new in 7.3
+    HalloweenNpcSelect = 395,
     Unk396 = 396, // new in 7.4
     SpearFishing = 397,
     Omikuji = 398,
