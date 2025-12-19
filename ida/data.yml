@@ -17698,6 +17698,7 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1410B86D0: ctor
+      0x1410B0E90: LoadDropDownList
   Client::UI::AddonChatConfig: # 130
     vtbls:
       - ea: 0x14210E388
