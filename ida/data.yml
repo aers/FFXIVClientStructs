@@ -1824,7 +1824,7 @@ classes:
       0x140ADD420: PrintDebugInfo
   Client::Game::GcArmyManager:
     instances:
-      - ea: 0x1429CE2F8
+      - ea: 0x1429CE308
         pointer: true
     funcs:
       0x140AC9350: ctor
@@ -15309,7 +15309,7 @@ classes:
       0x140ACD750: Load
   Client::Game::DomanEnclaveManager:
     instances:
-      - ea: 0x1429CE308
+      - ea: 0x1429CE2F8
         pointer: true
     vtbls:
       - ea: 0x1420CCB80
