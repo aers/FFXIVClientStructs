@@ -142,9 +142,9 @@ public unsafe struct LinkData {
 
     /// <remarks> The type of the Link payload. See LinkMacroPayloadType in Lumina. </remarks>
     [FieldOffset(0x1B)] public byte LinkType;
-    [FieldOffset(0x1C)] private ushort Unk1C;
-    [FieldOffset(0x1E)] private ushort Unk1E;
-    [FieldOffset(0x20)] private uint Unk20;
+    [FieldOffset(0x1C)] public ushort Unk1C;
+    [FieldOffset(0x1E)] public ushort Unk1E;
+    [FieldOffset(0x20)] public uint Unk20;
     // These are the 3 link payload parameters. Usually SeStrings have int expressions.
     [FieldOffset(0x24), CExporterUnion("Value1")] public int IntValue1;
     [FieldOffset(0x24), CExporterUnion("Value1")] public uint UIntValue1;

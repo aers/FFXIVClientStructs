@@ -143,7 +143,7 @@ public partial struct KeyboardInputData {
 
     [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray159<KeyStateFlags> _keyState;
 
-    //[FieldOffset(0x284)] private byte UnkFlag;
+    //[FieldOffset(0x284)] public byte UnkFlag;
     [FieldOffset(0x285)] public byte KeyHeldKeycode;
 
     /*

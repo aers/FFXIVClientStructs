@@ -21,8 +21,8 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0xAB)] public bool IsSaddleBagCached;
     [FieldOffset(0xAC)] public bool IsGlamourDresserCached;
     [FieldOffset(0xAD)] public bool ShouldResetInvalid; // only clears data if player does not meet criteria (for example: has glamour dresser NOT unlocked)
-    [FieldOffset(0xAE)] private byte UnkA6;
-    [FieldOffset(0xAF)] private byte UnkA7;
+    [FieldOffset(0xAE)] public byte UnkA6;
+    [FieldOffset(0xAF)] public byte UnkA7;
     [FieldOffset(0xB0)] public StdList<ulong> UpdatedRetainerIds;
     [FieldOffset(0xC0)] public StdMap<ulong, Pointer<ItemFinderRetainerInventory>> RetainerInventories;
     [FieldOffset(0xD0), FixedSizeArray] internal FixedSizeArray70<uint> _saddleBagItemIds;
@@ -110,9 +110,9 @@ public unsafe struct ItemFinderModuleResult {
     [FieldOffset(0x1E0)] public ItemFinderModuleRetainerResult** Retainer;
     [FieldOffset(0x1E8)] public long RetainerCount;
     [FieldOffset(0x1F0)] public bool ShowHQCount;
-    [FieldOffset(0x1F1)] private byte Unk1F1;
+    [FieldOffset(0x1F1)] public byte Unk1F1;
     [FieldOffset(0x1F2)] public bool ShowCollectibleCount;
-    [FieldOffset(0x1F3)] private byte Unk1F3;
+    [FieldOffset(0x1F3)] public byte Unk1F3;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x7C)]

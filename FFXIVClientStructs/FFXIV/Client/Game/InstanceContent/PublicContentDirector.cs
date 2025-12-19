@@ -21,13 +21,13 @@ public unsafe partial struct PublicContentDirector {
     [FieldOffset(0xD30 + 0x20)] public ushort Timelimit;
     [FieldOffset(0xD30 + 0x22)] public ushort ContentFinderCondition;
     [FieldOffset(0xD30 + 0x24)] public ushort AdditionalData;
-    [FieldOffset(0xD30 + 0x26)] private ushort Unknown0;
-    [FieldOffset(0xD30 + 0x28)] private ushort Unknown1;
-    [FieldOffset(0xD30 + 0x2A)] private ushort Unknown2;
-    [FieldOffset(0xD30 + 0x2C)] private ushort Unknown3;
-    [FieldOffset(0xD30 + 0x2E)] private ushort Unknown5;
+    [FieldOffset(0xD30 + 0x26)] public ushort Unknown0;
+    [FieldOffset(0xD30 + 0x28)] public ushort Unknown1;
+    [FieldOffset(0xD30 + 0x2A)] public ushort Unknown2;
+    [FieldOffset(0xD30 + 0x2C)] public ushort Unknown3;
+    [FieldOffset(0xD30 + 0x2E)] public ushort Unknown5;
     [FieldOffset(0xD30 + 0x30), CExporterForce] public PublicContentDirectorType Type;
-    [FieldOffset(0xD30 + 0x31), CExporterExcelEnd] private byte Unknown4;
+    [FieldOffset(0xD30 + 0x31), CExporterExcelEnd] public byte Unknown4;
 
     [MemberFunction("40 53 57 48 83 EC 78 48 8B D9 48 8D 0D")]
     public static partial nint HandleEnterContentInfoPacket(EnterContentInfoPacket* packet);

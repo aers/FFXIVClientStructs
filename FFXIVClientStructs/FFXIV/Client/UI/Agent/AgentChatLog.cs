@@ -29,7 +29,7 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0x958)] public uint ContextItemId;
 
     [FieldOffset(0x968)] public ulong LinkedPartyFinderId;
-    // [FieldOffset(0x960)] private byte LinkedPartyFinderUnkByte;
+    // [FieldOffset(0x960)] public byte LinkedPartyFinderUnkByte;
     [FieldOffset(0x978)] public Utf8String LinkedPartyFinderLeaderName;
 
     [FieldOffset(0x9E0)] public uint LinkedQuestId;

@@ -31,9 +31,9 @@ public unsafe partial struct TimelineContainer {
     [FieldOffset(0x330 + 0x04)] public uint BannerTimelineAdditionalData;
     [FieldOffset(0x330 + 0x08)] public int BannerTimelineIcon;
     [FieldOffset(0x330 + 0x0C)] public ushort BannerTimelineUnlockCondition;
-    [FieldOffset(0x330 + 0x0E)] private ushort BannerTimelineUnknown_70_1;
-    [FieldOffset(0x330 + 0x10)] private ushort BannerTimelineUnknown_70_2;
-    [FieldOffset(0x330 + 0x12)] private ushort BannerTimelineUnknown0;
+    [FieldOffset(0x330 + 0x0E)] public ushort BannerTimelineUnknown_70_1;
+    [FieldOffset(0x330 + 0x10)] public ushort BannerTimelineUnknown_70_2;
+    [FieldOffset(0x330 + 0x12)] public ushort BannerTimelineUnknown0;
     [FieldOffset(0x330 + 0x14)] public ushort BannerTimelineSortKey;
     [FieldOffset(0x330 + 0x16)] public byte BannerTimelineType;
     [FieldOffset(0x330 + 0x17)] public byte BannerTimelineAcceptClassJobCategory;

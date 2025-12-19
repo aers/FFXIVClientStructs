@@ -25,14 +25,14 @@ public unsafe partial struct Conditions {
     [FieldOffset(14)] public bool PlayingLordOfVerminion;
     [FieldOffset(15)] public bool ParticipatingInCustomMatch;
     [FieldOffset(16)] public bool Performing;
-    [FieldOffset(17)] private bool Unknown17;
-    [FieldOffset(18)] private bool Unknown18;
-    [FieldOffset(19)] private bool Unknown19;
-    [FieldOffset(20)] private bool Unknown20;
-    [FieldOffset(21)] private bool Unknown21;
-    [FieldOffset(22)] private bool Unknown22;
-    [FieldOffset(23)] private bool Unknown23;
-    [FieldOffset(24)] private bool Unknown24; // used as loop end? MAX_CHARACTER_MODE??
+    [FieldOffset(17)] public bool Unknown17;
+    [FieldOffset(18)] public bool Unknown18;
+    [FieldOffset(19)] public bool Unknown19;
+    [FieldOffset(20)] public bool Unknown20;
+    [FieldOffset(21)] public bool Unknown21;
+    [FieldOffset(22)] public bool Unknown22;
+    [FieldOffset(23)] public bool Unknown23;
+    [FieldOffset(24)] public bool Unknown24; // used as loop end? MAX_CHARACTER_MODE??
     [FieldOffset(25)] public bool Occupied;
     [FieldOffset(26)] public bool InCombat;
     [FieldOffset(27)] public bool Casting;
@@ -53,10 +53,10 @@ public unsafe partial struct Conditions {
     [FieldOffset(41)] public bool PreparingToCraft;
     [FieldOffset(42)] public bool ExecutingGatheringAction; // includes Fishing
     [FieldOffset(43)] public bool Fishing;
-    [FieldOffset(44)] private bool Unknown44;
+    [FieldOffset(44)] public bool Unknown44;
     [FieldOffset(45)] public bool BetweenAreas;
     [FieldOffset(46)] public bool Stealthed;
-    [FieldOffset(47)] private bool Unknown47;
+    [FieldOffset(47)] public bool Unknown47;
     [FieldOffset(48)] public bool Jumping;
     [FieldOffset(49)] public bool UsingChocoboTaxi;
     [FieldOffset(50)] public bool OccupiedSummoningBell;
@@ -96,7 +96,7 @@ public unsafe partial struct Conditions {
     [FieldOffset(83)] public bool WaitingForTripleTriadMatch83;
     [FieldOffset(84)] public bool ParticipatingInCrossWorldPartyOrAlliance;
     /// <remarks> Observed in Cosmic Exploration while gathering during a stellar mission. </remarks>
-    [FieldOffset(85)] private bool Unknown85;
+    [FieldOffset(85)] public bool Unknown85;
     [FieldOffset(86)] public bool DutyRecorderPlayback;
     [FieldOffset(87)] public bool Casting87;
     [FieldOffset(88)] public bool MountImmobile;
@@ -108,24 +108,24 @@ public unsafe partial struct Conditions {
     [FieldOffset(94)] public bool UsingFashionAccessory;
     [FieldOffset(95)] public bool BoundByDuty95;
     /// <remarks> Observed in Cosmic Exploration while participating in MechaEvent. </remarks>
-    [FieldOffset(96)] private bool Unknown96;
+    [FieldOffset(96)] public bool Unknown96;
     [FieldOffset(97)] public bool Disguised;
     [FieldOffset(98)] public bool RecruitingWorldOnly;
-    [FieldOffset(99)] private bool Unknown99;
+    [FieldOffset(99)] public bool Unknown99;
     [FieldOffset(100)] public bool EditingPortrait;
     /// <remarks> Observed in Cosmic Exploration, in mech flying to FATE or during Cosmoliner use. Maybe ClientPath related? </remarks>
-    [FieldOffset(101)] private bool Unknown101;
+    [FieldOffset(101)] public bool Unknown101;
     /// <remarks> Used in Cosmic Exploration. </remarks>
     [FieldOffset(102)] public bool PilotingMech;
-    [FieldOffset(103)] private bool Unknown103;
+    [FieldOffset(103)] public bool Unknown103;
     [FieldOffset(104)] public bool EditingStrategyBoard;
-    [FieldOffset(105)] private bool Unknown105;
-    [FieldOffset(106)] private bool Unknown106;
-    [FieldOffset(107)] private bool Unknown107;
-    [FieldOffset(108)] private bool Unknown108;
-    [FieldOffset(109)] private bool Unknown109;
-    [FieldOffset(110)] private bool Unknown110;
-    [FieldOffset(111)] private bool Unknown111;
+    [FieldOffset(105)] public bool Unknown105;
+    [FieldOffset(106)] public bool Unknown106;
+    [FieldOffset(107)] public bool Unknown107;
+    [FieldOffset(108)] public bool Unknown108;
+    [FieldOffset(109)] public bool Unknown109;
+    [FieldOffset(110)] public bool Unknown110;
+    [FieldOffset(111)] public bool Unknown111;
     /// <remarks> When this reaches <c>0</c>, <see cref="MountOrOrnamentTransition"/> is set to <c>false</c>. </remarks>
     [FieldOffset(112)] public float MountOrOrnamentTransitionResetTimer;
 

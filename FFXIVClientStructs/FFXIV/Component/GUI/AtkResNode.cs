@@ -51,7 +51,7 @@ public unsafe partial struct AtkResNode : ICreatable {
     [FieldOffset(0x9C)] public byte MultiplyGreen_2;
     [FieldOffset(0x9D)] public byte MultiplyBlue_2;
     [FieldOffset(0x9E)] public byte Alpha_2;
-    [FieldOffset(0x9F)] private byte UnkByte_1;
+    [FieldOffset(0x9F)] public byte UnkByte_1;
     [FieldOffset(0xA0)] public ushort Width;
     [FieldOffset(0xA2)] public ushort Height;
     [FieldOffset(0xA4)] public float OriginX;

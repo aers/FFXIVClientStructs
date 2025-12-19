@@ -33,7 +33,7 @@ public unsafe partial struct AgentLookingForGroup {
 
     [FieldOffset(0x2CC8)] public Utf8String LastLeader;
     [FieldOffset(0x2D30)] public Utf8String LastComment;
-    [FieldOffset(0x2DA8)] private Utf8String UnkString;
+    [FieldOffset(0x2DA8)] public Utf8String UnkString;
 
     [FieldOffset(0x31A0)] public uint OwnListingId;
 
@@ -60,7 +60,7 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x00)] public Utf8String String;
         [FieldOffset(0x68)] public uint DisplayOrder;
         [FieldOffset(0x6C)] public uint EventItemId;
-        [FieldOffset(0x70)] private byte TreasureHuntRank; // unk
+        [FieldOffset(0x70)] public byte TreasureHuntRank; // unk
     }
 
     [GenerateInterop]

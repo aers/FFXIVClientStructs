@@ -60,11 +60,11 @@ public unsafe partial struct GameObject {
     /// To set the target offset, use <see cref="CameraOffsetTarget"/>.
     /// </remarks>
     [FieldOffset(0x130)] public Vector3 CameraOffset;
-    // [FieldOffset(0x140)] private Vector3 Unk140; // something SharedGroupLayoutInstance related
-    // [FieldOffset(0x150)] private uint Unk150; // something QuestRedo related
+    // [FieldOffset(0x140)] public Vector3 Unk140; // something SharedGroupLayoutInstance related
+    // [FieldOffset(0x150)] public uint Unk150; // something QuestRedo related
     [FieldOffset(0x158)] public LuaActor* LuaActor;
     [FieldOffset(0x160)] public EventHandler* EventHandler;
-    // [FieldOffset(0x168)] private float Unk168; // ModelChara.Unknown3 * 0.1f
+    // [FieldOffset(0x168)] public float Unk168; // ModelChara.Unknown3 * 0.1f
     [FieldOffset(0x16C)] public float NameplateOffsetScaleMultiplier; // ModelChara.Unknown6 * 0.1f
     [FieldOffset(0x170)] public Vector3 NameplateOffsetTarget;
     [FieldOffset(0x180)] public Vector3 CameraOffsetTarget;

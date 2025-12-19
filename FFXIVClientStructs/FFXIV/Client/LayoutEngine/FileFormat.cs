@@ -143,7 +143,7 @@ public unsafe struct FileSceneTimeline {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct FileSceneTimelineInstance {
-    [FieldOffset(0)] private int Unknown;
+    [FieldOffset(0)] public int Unknown;
     [FieldOffset(4)] public int SubId;
 }
 

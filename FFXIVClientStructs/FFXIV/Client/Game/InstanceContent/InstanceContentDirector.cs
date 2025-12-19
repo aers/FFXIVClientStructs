@@ -14,7 +14,7 @@ public unsafe partial struct InstanceContentDirector {
     [FieldOffset(0xD30 + 0x00), CExporterExcelBegin("InstanceContent")] public uint NewPlayerBonusGil;
     [FieldOffset(0xD30 + 0x04)] public uint NewPlayerBonusExp;
     [FieldOffset(0xD30 + 0x08)] public uint FinalBossExp;
-    [FieldOffset(0xD30 + 0x0C)] private uint Unknown0;
+    [FieldOffset(0xD30 + 0x0C)] public uint Unknown0;
     [FieldOffset(0xD30 + 0x10)] public uint BossExp0;
     [FieldOffset(0xD30 + 0x14)] public uint BossExp1;
     [FieldOffset(0xD30 + 0x18)] public uint BossExp2;
@@ -43,8 +43,8 @@ public unsafe partial struct InstanceContentDirector {
     [FieldOffset(0xD30 + 0x52)] public ushort BossCurrencyC2;
     [FieldOffset(0xD30 + 0x54)] public ushort BossCurrencyC3;
     [FieldOffset(0xD30 + 0x56)] public ushort BossCurrencyC4;
-    [FieldOffset(0xD30 + 0x58)] private ushort Unknown1;
-    [FieldOffset(0xD30 + 0x5A)] private byte Unknown20;
+    [FieldOffset(0xD30 + 0x58)] public ushort Unknown1;
+    [FieldOffset(0xD30 + 0x5A)] public byte Unknown20;
     [FieldOffset(0xD30 + 0x5C)] public uint Cutscene;
     [FieldOffset(0xD30 + 0x60)] public uint LGBEventRange;
     [FieldOffset(0xD30 + 0x64)] public uint InstanceContentTextDataBossStart;
@@ -52,7 +52,7 @@ public unsafe partial struct InstanceContentDirector {
     [FieldOffset(0xD30 + 0x6C)] public uint BNpcBaseBoss;
     [FieldOffset(0xD30 + 0x70)] public uint InstanceContentTextDataObjectiveStart;
     [FieldOffset(0xD30 + 0x74)] public uint InstanceContentTextDataObjectiveEnd;
-    [FieldOffset(0xD30 + 0x78)] private uint Unknown2;
+    [FieldOffset(0xD30 + 0x78)] public uint Unknown2;
     [FieldOffset(0xD30 + 0x7C)] public uint ReqInstance;
     [FieldOffset(0xD30 + 0x80)] public int InstanceContentBuff;
     /// <summary>
@@ -63,24 +63,24 @@ public unsafe partial struct InstanceContentDirector {
     [FieldOffset(0xD30 + 0x88)] public ushort WinBGM;
     [FieldOffset(0xD30 + 0x8A)] public ushort Order;
     [FieldOffset(0xD30 + 0x8C)] public ushort SortKey;
-    [FieldOffset(0xD30 + 0x8E)] private ushort Unknown3;
-    [FieldOffset(0xD30 + 0x90)] private ushort Unknown4;
-    [FieldOffset(0xD30 + 0x92)] private ushort Unknown5;
-    [FieldOffset(0xD30 + 0x94)] private ushort Unknown6;
-    [FieldOffset(0xD30 + 0x96)] private ushort Unknown7;
-    [FieldOffset(0xD30 + 0x98)] private ushort Unknown8;
-    [FieldOffset(0xD30 + 0x9A)] private ushort Unknown_70;
+    [FieldOffset(0xD30 + 0x8E)] public ushort Unknown3;
+    [FieldOffset(0xD30 + 0x90)] public ushort Unknown4;
+    [FieldOffset(0xD30 + 0x92)] public ushort Unknown5;
+    [FieldOffset(0xD30 + 0x94)] public ushort Unknown6;
+    [FieldOffset(0xD30 + 0x96)] public ushort Unknown7;
+    [FieldOffset(0xD30 + 0x98)] public ushort Unknown8;
+    [FieldOffset(0xD30 + 0x9A)] public ushort Unknown_70;
     [FieldOffset(0xD30 + 0x9C)] public short PartyCondition;
     [FieldOffset(0xD30 + 0x9E), CExporterForce] public InstanceContentType InstanceContentType;
     [FieldOffset(0xD30 + 0x9F)] public byte WeekRestriction;
     [FieldOffset(0xD30 + 0xA0)] public byte Colosseum;
-    [FieldOffset(0xD30 + 0xA1)] private byte Unknown9;
-    [FieldOffset(0xD30 + 0xA2)] private byte Unknown10;
-    [FieldOffset(0xD30 + 0xA3)] private byte Unknown11;
-    [FieldOffset(0xD30 + 0xA4)] private byte Unknown12;
-    [FieldOffset(0xD30 + 0xA5)] private byte Unknown19;
-    [FieldOffset(0xD30 + 0xA6)] private byte Unknown13;
-    [FieldOffset(0xD30 + 0xA7), CExporterExcelEnd] private byte Unknown14_Unknown15_Unknown16_Unknown17_Unknown18;
+    [FieldOffset(0xD30 + 0xA1)] public byte Unknown9;
+    [FieldOffset(0xD30 + 0xA2)] public byte Unknown10;
+    [FieldOffset(0xD30 + 0xA3)] public byte Unknown11;
+    [FieldOffset(0xD30 + 0xA4)] public byte Unknown12;
+    [FieldOffset(0xD30 + 0xA5)] public byte Unknown19;
+    [FieldOffset(0xD30 + 0xA6)] public byte Unknown13;
+    [FieldOffset(0xD30 + 0xA7), CExporterExcelEnd] public byte Unknown14_Unknown15_Unknown16_Unknown17_Unknown18;
 }
 
 public enum InstanceContentType : byte {
