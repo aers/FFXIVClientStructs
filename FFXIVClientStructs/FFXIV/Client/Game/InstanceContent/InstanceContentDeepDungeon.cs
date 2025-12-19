@@ -10,28 +10,28 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [Inherits<InstanceContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x2B30)]
 public unsafe partial struct InstanceContentDeepDungeon {
-    [FieldOffset(0x2030), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
-    [FieldOffset(0x2050), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
-    [FieldOffset(0x2080), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
-    [FieldOffset(0x20A8), FixedSizeArray] internal FixedSizeArray3<byte> _magicite;
+    [FieldOffset(0x2038), FixedSizeArray] internal FixedSizeArray4<DeepDungeonPartyInfo> _party;
+    [FieldOffset(0x2058), FixedSizeArray] internal FixedSizeArray16<DeepDungeonItemInfo> _items;
+    [FieldOffset(0x2088), FixedSizeArray] internal FixedSizeArray16<DeepDungeonChestInfo> _chests;
+    [FieldOffset(0x20B0), FixedSizeArray] internal FixedSizeArray3<byte> _magicite;
 
-    [FieldOffset(0x20B0)] public uint BonusLootItemId;
-    [FieldOffset(0x20B4)] public byte Floor;
-    [FieldOffset(0x20B5)] public byte ReturnProgress;
-    [FieldOffset(0x20B6)] public byte PassageProgress;
+    [FieldOffset(0x20B8)] public uint BonusLootItemId;
+    [FieldOffset(0x20BC)] public byte Floor;
+    [FieldOffset(0x20BD)] public byte ReturnProgress;
+    [FieldOffset(0x20BE)] public byte PassageProgress;
 
-    [FieldOffset(0x20B8)] public byte WeaponLevel;
-    [FieldOffset(0x20B9)] public byte ArmorLevel;
-    [FieldOffset(0x20BA)] public byte SyncedGearLevel;
-    [FieldOffset(0x20BB)] public byte HoardCount;
-    [FieldOffset(0x20BC)] public byte DeepDungeonGimmickEffectIdCurrent;
-    [FieldOffset(0x20BD)] public byte DeepDungeonGimmickEffectIdNext;
+    [FieldOffset(0x20C0)] public byte WeaponLevel;
+    [FieldOffset(0x20C1)] public byte ArmorLevel;
+    [FieldOffset(0x20C2)] public byte SyncedGearLevel;
+    [FieldOffset(0x20C3)] public byte HoardCount;
+    [FieldOffset(0x20C4)] public byte DeepDungeonGimmickEffectIdCurrent;
+    [FieldOffset(0x20C5)] public byte DeepDungeonGimmickEffectIdNext;
 
-    [FieldOffset(0x20CA)] public byte DeepDungeonStatusId;
-    [FieldOffset(0x20CB)] public byte DeepDungeonBanId;
-    [FieldOffset(0x20CC)] public byte DeepDungeonDangerId;
+    [FieldOffset(0x20D2)] public byte DeepDungeonStatusId;
+    [FieldOffset(0x20D3)] public byte DeepDungeonBanId;
+    [FieldOffset(0x20D4)] public byte DeepDungeonDangerId;
 
-    [FieldOffset(0x2A7E)] public byte DeepDungeonId; // 1-3
+    [FieldOffset(0x2A86)] public byte DeepDungeonId; // 1-3
 
     [FieldOffset(0x2AF4), FixedSizeArray] internal FixedSizeArray25<RoomFlags> _mapData;
 

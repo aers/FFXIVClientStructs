@@ -10,9 +10,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [Inherits<Director>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD30)]
 public unsafe partial struct ContentDirector {
-    [FieldOffset(0x4EA)] public byte ContentTypeRowId;
+    [FieldOffset(0x4E6)] public byte ContentTypeRowId;
 
-    [FieldOffset(0x508)] public DutyActionManager DutyActionManager;
+    [FieldOffset(0x528)] public DutyActionManager DutyActionManager;
 
     [FieldOffset(0xC90)] public MapEffectList* MapEffects;
     [FieldOffset(0xC98)] private DynamicEventContainer* DynamicEvents;
