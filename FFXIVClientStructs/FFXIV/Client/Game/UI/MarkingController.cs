@@ -15,7 +15,7 @@ public unsafe partial struct MarkingController {
     [FieldOffset(0x100), FixedSizeArray] internal FixedSizeArray17<long> _markerTimes; //(1000 * QueryPerformanceCounter / QueryPerformanceFrequency)
 
     [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray8<FieldMarker> _fieldMarkers;
-    
+
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 EB 5C")]
     public partial byte PlaceFieldMarker(uint index, Vector3* position);
 

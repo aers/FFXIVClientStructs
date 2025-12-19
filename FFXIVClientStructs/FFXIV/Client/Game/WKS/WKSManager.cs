@@ -31,7 +31,7 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0xD0D), FixedSizeArray] internal FixedSizeArray172<byte> _missionGoldFlags;
 
     [FieldOffset(0xDBC), FixedSizeArray] internal FixedSizeArray11<int> _scores; // cosmic class scores
-    
+
     [FieldOffset(0xE38)] private void* UnkStructE38;
     [FieldOffset(0xE40)] private void* UnkStructE40;
     [FieldOffset(0xE48)] public WKSMechaEventModule* MechaEventModule;

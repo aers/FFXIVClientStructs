@@ -32,7 +32,7 @@ public unsafe partial struct Collider {
     [FieldOffset(0x84)] public byte VisibilityFlags; // 0x1 - active for raycasts/containing checks (if not set, collider is ignored during raycasts), 0x2 - active for some global visit function?, rest uninitialized
     //[FieldOffset(0x88)] public UpdateListeners UpdateListeners; // size 0x18 - a typical linked list of callback objects
     [FieldOffset(0xA0)] public bool Dirty;
-    
+
     /// <summary>
     /// Checked every update. Base implementation just checks NumRefs for zero, but derived classes that do async loads also check that load is not in progress.
     /// </summary>
