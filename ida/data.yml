@@ -22346,7 +22346,6 @@ classes:
     funcs:
       0x1414AADC0: ctor
       0x1414AAF00: Finalizer
-    funcs:
       0x1414AB360: SetImage
   Client::UI::AddonImage2:
     vtbls:
@@ -22356,6 +22355,28 @@ classes:
     vtbls:
       - ea: 0x14218DCA0
         base: Client::UI::AddonImage
+  Client::UI::AddonFGSCountDown:
+    vtbls:
+      - ea: 0x14218E4C8
+        base: Client::UI::AddonScreenInfoChild
+    funcs:
+     0x1414BBB10: ctor
+  Client::UI::AddonFgsScreenEliminated:
+    vtbls:
+      - ea: 0x14218ECF8
+        base: Client::UI::AddonFGSImage
+  Client::UI::AddonFgsScreenQualified:
+    vtbls:
+      - ea: 0x14218EFB8
+        base: Client::UI::AddonFGSImage
+  Client::UI::AddonFgsScreenRoundOver:
+    vtbls:
+      - ea: 0x14218F278
+        base: Client::UI::AddonFGSImage
+  Client::UI::AddonFgsScreenWinner:
+    vtbls:
+      - ea: 0x14218F538
+        base: Client::UI::AddonFGSImage
   Client::UI::AddonPopUpText:
     vtbls:
       - ea: 0x142176D00
@@ -23281,28 +23302,6 @@ classes:
     vtbls:
       - ea: 0x14219AE78
         base: Client::UI::AddonJobHudWHM0::HealingGauge
-  Client::UI::AddonFGSCountDown:
-    vtbls:
-      - ea: 0x14218E4C8
-        base: Client::UI::AddonScreenInfoChild
-    funcs:
-     0x1414BBB10: ctor
-  Client::UI::AddonFGSEliminated:
-    vtbls:
-      - ea: 0x14218ECF8
-        base: Client::UI::AddonFGSImage
-  Client::UI::AddonFGSQualified:
-    vtbls:
-      - ea: 0x14218EFB8
-        base: Client::UI::AddonFGSImage
-  Client::UI::AddonFGSRoundover:
-    vtbls:
-      - ea: 0x14218F278
-        base: Client::UI::AddonFGSImage
-  Client::UI::AddonFGSWinner:
-    vtbls:
-      - ea: 0x14218F538
-        base: Client::UI::AddonFGSImage
   Client::Game::Fate::FateDirector:
     vtbls:
       - ea: 0x1421CBC40
