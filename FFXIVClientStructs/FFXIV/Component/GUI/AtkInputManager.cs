@@ -22,7 +22,7 @@ public unsafe partial struct AtkInputManager {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 84 FF ?? ?? ?? ??")]
     public partial bool SetFocus(AtkResNode* node, AtkUnitBase* addon, int focusParam);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 89 BE ?? ?? ?? ??")]
+    [MemberFunction("4C 89 44 24 ?? 55 56 57 41 54 41 57")]
     public partial bool HandleFocus(RaptureAtkUnitManager* unitManager, FocusEntry* focusEntry, AtkEventDispatcher.Event* eventData);
 
     [StructLayout(LayoutKind.Explicit, Size = 0x18)]

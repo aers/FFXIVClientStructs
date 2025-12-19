@@ -338,7 +338,7 @@ public unsafe partial struct RaptureHotbarModule {
     /// <param name="classJobId">The ClassJob to look up, or 0 for the shared PVP hotbar.</param>
     /// <param name="negOneOnInvalid">Return -1 if the ClassJob can't have a PVP variant.</param>
     /// <returns>Returns an index for the requested ClassJob's PVP hotbar.</returns>
-    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC 20 8B CA 41 0F B6 F8")]
+    [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 8B CA 41 0F B6 F8 8B DA")]
     public partial int GetPvPSavedHotbarIndexForClassJobId(uint classJobId, bool negOneOnInvalid = true);
 
     /// <summary>

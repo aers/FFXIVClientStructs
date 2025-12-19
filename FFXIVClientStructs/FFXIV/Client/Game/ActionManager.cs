@@ -192,7 +192,7 @@ public unsafe partial struct ActionManager {
     [MemberFunction("E8 ?? ?? ?? ?? 88 47 ?? 48 8B D7 0F B6 8B")]
     public partial bool IsActionTargetInRange(ActionType actionType, uint actionId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 0F 28 C8 48 8B CD")]
+    [MemberFunction("E8 ?? ?? ?? ?? F3 41 0F 11 06 80 3B")]
     public static partial float GetActionRange(uint actionId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 02 33 C0")]

@@ -91,7 +91,7 @@ public unsafe partial struct AtkTextNode : ICreatable {
     /// <summary>
     /// Applies <see cref="TextFlags.Ellipsis"/> or <see cref="TextFlags.WordWrap"/> to the text from <see cref="OriginalTextPointer"/> and stores it in <see cref="NodeText"/>.
     /// </summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 44 0F B6 CE")]
+    [MemberFunction("48 85 C9 0F 84 ?? ?? ?? ?? 4C 8B DC 53 48 81 EC")]
     public partial void ApplyTextFlow();
 
     public AlignmentType AlignmentType {
