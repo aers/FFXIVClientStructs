@@ -127,18 +127,18 @@ public unsafe partial struct Collider {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
 public unsafe partial struct ColliderStreamed {
-    //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
-    [FieldOffset(0x0A8), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _pathBase; // root directory of the streamed meshes
-    [FieldOffset(0x1A8)] public Resource* Resource;
-    [FieldOffset(0x1B0)] public int NumMeshesLoading;
-    [FieldOffset(0x1B4)] public bool Loaded;
-    [FieldOffset(0x1B8)] public float StreamedMinX;
-    [FieldOffset(0x1BC)] public float StreamedMinZ;
-    [FieldOffset(0x1C0)] public float StreamedMaxX;
-    [FieldOffset(0x1C4)] public float StreamedMaxZ;
-    [FieldOffset(0x1C8)] public FileHeader* Header; // raw file data
-    [FieldOffset(0x1D0)] public FileEntry* Entries; // raw file data, count == Header->NumMeshes
-    [FieldOffset(0x1D8)] public Element* Elements; // count == Header->NumMeshes
+    //0xA8: base class Common::Component::Excel::ExcelResourceListener, size=8
+    [FieldOffset(0x0B0), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _pathBase; // root directory of the streamed meshes
+    [FieldOffset(0x1B0)] public Resource* Resource;
+    [FieldOffset(0x1B8)] public int NumMeshesLoading;
+    [FieldOffset(0x1BC)] public bool Loaded;
+    [FieldOffset(0x1C0)] public float StreamedMinX;
+    [FieldOffset(0x1C4)] public float StreamedMinZ;
+    [FieldOffset(0x1C8)] public float StreamedMaxX;
+    [FieldOffset(0x1CC)] public float StreamedMaxZ;
+    [FieldOffset(0x1D0)] public FileHeader* Header; // raw file data
+    [FieldOffset(0x1D8)] public FileEntry* Entries; // raw file data, count == Header->NumMeshes
+    [FieldOffset(0x1E0)] public Element* Elements; // count == Header->NumMeshes
 
     // header is followed by NumMeshes entries
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
@@ -178,24 +178,24 @@ public unsafe partial struct ColliderStreamed {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 public unsafe partial struct ColliderMesh {
-    //0xA8: base class Common::Component::Excel::ExcelResourceListener, size=8
-    [FieldOffset(0x0B0)] public Resource* Resource;
-    [FieldOffset(0x0B8)] public byte* MemoryData; // if non-null, the mesh data is built programmatically in memory rather than being loaded from file
-    [FieldOffset(0x0C0)] public int TotalPrimitives;
-    [FieldOffset(0x0C4)] public bool MeshIsSimple; // if true, Mesh is a MeshSimple rather than MeshPCB - this doesn't seem to be ever used in game
-    [FieldOffset(0x0C5)] public bool Loaded;
-    [FieldOffset(0x0C8)] public float InvScaleX;
-    [FieldOffset(0x0D0)] public Mesh* Mesh;
-    [FieldOffset(0x0D8)] public int TotalChildren;
-    [FieldOffset(0x0DC)] public Vector3 Translation;
-    [FieldOffset(0x0E8)] public Vector3 Rotation;
-    [FieldOffset(0x0F4)] public Vector3 Scale;
-    [FieldOffset(0x100)] public Vector3 TranslationPrev;
-    [FieldOffset(0x10C)] public Vector3 RotationPrev;
-    [FieldOffset(0x118)] public Matrix4x3 World;
-    [FieldOffset(0x148)] public Matrix4x3 InvWorld;
-    [FieldOffset(0x178)] public Vector4 BoundingSphere;
-    [FieldOffset(0x188)] public AABB WorldBoundingBox;
+    //0xB0: base class Common::Component::Excel::ExcelResourceListener, size=8
+    [FieldOffset(0x0B8)] public Resource* Resource;
+    [FieldOffset(0x0C0)] public byte* MemoryData; // if non-null, the mesh data is built programmatically in memory rather than being loaded from file
+    [FieldOffset(0x0C8)] public int TotalPrimitives;
+    [FieldOffset(0x0CC)] public bool MeshIsSimple; // if true, Mesh is a MeshSimple rather than MeshPCB - this doesn't seem to be ever used in game
+    [FieldOffset(0x0CD)] public bool Loaded;
+    [FieldOffset(0x0D0)] public float InvScaleX;
+    [FieldOffset(0x0D8)] public Mesh* Mesh;
+    [FieldOffset(0x0E0)] public int TotalChildren;
+    [FieldOffset(0x0E4)] public Vector3 Translation;
+    [FieldOffset(0x0F0)] public Vector3 Rotation;
+    [FieldOffset(0x0FC)] public Vector3 Scale;
+    [FieldOffset(0x108)] public Vector3 TranslationPrev;
+    [FieldOffset(0x114)] public Vector3 RotationPrev;
+    [FieldOffset(0x120)] public Matrix4x3 World;
+    [FieldOffset(0x150)] public Matrix4x3 InvWorld;
+    [FieldOffset(0x180)] public Vector4 BoundingSphere;
+    [FieldOffset(0x190)] public AABB WorldBoundingBox;
 }
 
 /// <summary>
@@ -205,13 +205,13 @@ public unsafe partial struct ColliderMesh {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct ColliderBox {
-    [FieldOffset(0x0A8)] public Vector3 Translation;
-    [FieldOffset(0x0B4)] public Vector3 TranslationPrev;
-    [FieldOffset(0x0C0)] public Vector3 Rotation;
-    [FieldOffset(0x0CC)] public Vector3 RotationPrev;
-    [FieldOffset(0x0D8)] public Vector3 Scale;
-    [FieldOffset(0x0E4)] public Matrix4x3 World;
-    [FieldOffset(0x114)] public Matrix4x3 InvWorld;
+    [FieldOffset(0x0B0)] public Vector3 Translation;
+    [FieldOffset(0x0BC)] public Vector3 TranslationPrev;
+    [FieldOffset(0x0C8)] public Vector3 Rotation;
+    [FieldOffset(0x0D4)] public Vector3 RotationPrev;
+    [FieldOffset(0x0E0)] public Vector3 Scale;
+    [FieldOffset(0x0EC)] public Matrix4x3 World;
+    [FieldOffset(0x11C)] public Matrix4x3 InvWorld;
 }
 
 /// <summary>
@@ -221,14 +221,14 @@ public unsafe partial struct ColliderBox {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct ColliderCylinder {
-    [FieldOffset(0x0A8)] public Vector3 Translation;
-    [FieldOffset(0x0B4)] public Vector3 TranslationPrev;
-    [FieldOffset(0x0C0)] public Vector3 Rotation;
-    [FieldOffset(0x0CC)] public Vector3 RotationPrev;
-    [FieldOffset(0x0D8)] public Vector3 Scale; // z component is set equal to x component on update
-    [FieldOffset(0x0E4)] public float Radius; // same as x scale
-    [FieldOffset(0x0E8)] public Matrix4x3 World;
-    [FieldOffset(0x118)] public Matrix4x3 InvWorld;
+    [FieldOffset(0x0B0)] public Vector3 Translation;
+    [FieldOffset(0x0BC)] public Vector3 TranslationPrev;
+    [FieldOffset(0x0C8)] public Vector3 Rotation;
+    [FieldOffset(0x0D4)] public Vector3 RotationPrev;
+    [FieldOffset(0x0E0)] public Vector3 Scale; // z component is set equal to x component on update
+    [FieldOffset(0x0EC)] public float Radius; // same as x scale
+    [FieldOffset(0x0F0)] public Matrix4x3 World;
+    [FieldOffset(0x120)] public Matrix4x3 InvWorld;
 }
 
 /// <summary>
@@ -239,14 +239,14 @@ public unsafe partial struct ColliderCylinder {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct ColliderSphere {
-    [FieldOffset(0x0A8)] public Vector3 Translation;
-    [FieldOffset(0x0B4)] public Vector3 TranslationPrev;
-    [FieldOffset(0x0C0)] public Vector3 Rotation;
-    [FieldOffset(0x0CC)] public Vector3 RotationPrev;
-    [FieldOffset(0x0D8)] public Vector3 Scale; // parts of code assume this is uniform and assume x component is radius
-    [FieldOffset(0x0E4)] public Vector3 ScalePrev;
-    [FieldOffset(0x0F0)] public Matrix4x3 World;
-    [FieldOffset(0x120)] public Matrix4x3 InvWorld;
+    [FieldOffset(0x0B0)] public Vector3 Translation;
+    [FieldOffset(0x0BC)] public Vector3 TranslationPrev;
+    [FieldOffset(0x0C8)] public Vector3 Rotation;
+    [FieldOffset(0x0D4)] public Vector3 RotationPrev;
+    [FieldOffset(0x0E0)] public Vector3 Scale; // parts of code assume this is uniform and assume x component is radius
+    [FieldOffset(0x0EC)] public Vector3 ScalePrev;
+    [FieldOffset(0x0F8)] public Matrix4x3 World;
+    [FieldOffset(0x128)] public Matrix4x3 InvWorld;
 }
 
 /// <summary>
@@ -257,12 +257,12 @@ public unsafe partial struct ColliderSphere {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct ColliderPlane {
-    [FieldOffset(0x0A8)] public Vector3 Translation;
-    [FieldOffset(0x0B4)] public Vector3 TranslationPrev;
-    [FieldOffset(0x0C0)] public Vector3 Rotation;
-    [FieldOffset(0x0CC)] public Vector3 RotationPrev;
-    [FieldOffset(0x0D8)] public Vector3 Scale;
-    [FieldOffset(0x0E4)] public Matrix4x3 World;
-    [FieldOffset(0x114)] public Matrix4x3 InvWorld;
-    [FieldOffset(0x144)] public bool TwoSided;
+    [FieldOffset(0x0B0)] public Vector3 Translation;
+    [FieldOffset(0x0BC)] public Vector3 TranslationPrev;
+    [FieldOffset(0x0C8)] public Vector3 Rotation;
+    [FieldOffset(0x0D4)] public Vector3 RotationPrev;
+    [FieldOffset(0x0E0)] public Vector3 Scale;
+    [FieldOffset(0x0EC)] public Matrix4x3 World;
+    [FieldOffset(0x11C)] public Matrix4x3 InvWorld;
+    [FieldOffset(0x14C)] public bool TwoSided;
 }
