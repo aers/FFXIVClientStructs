@@ -12,9 +12,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [Inherits<PublicContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x3360)]
 public unsafe partial struct PublicContentOccultCrescent {
-    [FieldOffset(0x1390)] public OccultCrescentMKDData MKDData;
-    [FieldOffset(0x13B8)] public DynamicEventContainer DynamicEventContainer;
-    [FieldOffset(0x3138)] public OccultCrescentState State;
+    [FieldOffset(0x1380)] public OccultCrescentMKDData MKDData;
+    [FieldOffset(0x13A8)] public DynamicEventContainer DynamicEventContainer;
+    [FieldOffset(0x3128)] public OccultCrescentState State;
     [FieldOffset(0x3192)] private byte Unk31DA;
     [FieldOffset(0x3193)] private byte Unk31DB;
     [FieldOffset(0x3194)] private uint Unk31DC;
@@ -56,21 +56,21 @@ public partial struct OccultCrescentMKDData {
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x5A)] // unsure how long
+[StructLayout(LayoutKind.Explicit, Size = 0x69)] // unsure how long
 public partial struct OccultCrescentState {
-    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray13<uint> _supportJobExperience;
-    [FieldOffset(0x34)] public uint CurrentKnowledge;
-    [FieldOffset(0x38)] public uint NeededKnowledge;
-    [FieldOffset(0x3C)] public uint NeededJobExperience;
-    [FieldOffset(0x40)] public ushort Silver;
-    [FieldOffset(0x42)] public ushort Gold;
-    [FieldOffset(0x44), FixedSizeArray] internal FixedSizeArray13<byte> _supportJobLevels;
-    [FieldOffset(0x51), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedTeleportBitmask; // for TelepotTown
-    [FieldOffset(0x53)] public byte CurrentSupportJob; // MKDSupportJob RowId
-    [FieldOffset(0x54)] public byte KnowledgeLevelSync;
-    [FieldOffset(0x55)] private byte Unk55;
-    [FieldOffset(0x56)] private byte Unk56; // related to Sanguine Cipher item count, cur?
-    [FieldOffset(0x57)] private byte Unk57; // related to Sanguine Cipher item count, max?
-    [FieldOffset(0x58)] private byte Unk58;
-    [FieldOffset(0x59)] private byte Unk59; // flags
+    [FieldOffset(0x00), FixedSizeArray] internal FixedSizeArray16<uint> _supportJobExperience;
+    [FieldOffset(0x40)] public uint CurrentKnowledge;
+    [FieldOffset(0x44)] public uint NeededKnowledge;
+    [FieldOffset(0x48)] public uint NeededJobExperience;
+    [FieldOffset(0x4C)] public ushort Silver;
+    [FieldOffset(0x4E)] public ushort Gold;
+    [FieldOffset(0x50), FixedSizeArray] internal FixedSizeArray16<byte> _supportJobLevels;
+    [FieldOffset(0x60), FixedSizeArray] internal FixedSizeArray2<byte> _unlockedTeleportBitmask; // for TelepotTown
+    [FieldOffset(0x62)] public byte CurrentSupportJob; // MKDSupportJob RowId
+    [FieldOffset(0x63)] public byte KnowledgeLevelSync;
+    [FieldOffset(0x64)] private byte Unk64;
+    [FieldOffset(0x65)] private byte Unk65; // related to Sanguine Cipher item count, cur?
+    [FieldOffset(0x66)] private byte Unk66; // related to Sanguine Cipher item count, max?
+    [FieldOffset(0x67)] private byte Unk67;
+    [FieldOffset(0x68)] private byte Unk68; // flags
 }
