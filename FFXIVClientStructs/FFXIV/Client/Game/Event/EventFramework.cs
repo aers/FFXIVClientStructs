@@ -61,7 +61,7 @@ public unsafe partial struct EventFramework {
     public partial EventHandler* GetEventHandlerById(uint id);
     public EventHandler* GetEventHandlerById(ushort id) => GetEventHandlerById((uint)(id | 0x10000));
 
-    [MemberFunction("40 53 57 41 56 48 83 EC 70 48 8B 02")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 80 4B ?? ?? 48 8B CB")]
     public partial bool CheckInteractRange(GameObject* source, GameObject* target, byte interactionType, bool logErrorsToUser);
 
     [MemberFunction("48 89 5C 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B D9 48 89 6C 24")]

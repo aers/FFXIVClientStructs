@@ -15360,13 +15360,14 @@ classes:
       0x140C899A0: GetContentDirector
       0x140C899B0: GetQuestBattleDirector
       0x140C89A00: GetGoldSaucerDirector
+      0x140C8C600: CheckInteractRange
       0x140C8D2A0: InteractWithHandlerFromSelector
       0x140C8DCD0: AddDailyHandler
       0x140C8DCF0: RemoveDailyHandler
       0x140C8DD10: IsDailyQuestAvailable
       0x140C8DDE0: InteractWithSelectorOptions
       0x140C8E350: GetEventHandlerById
-      0x140C8FA90: CheckInteractRange
+      0x140C8FA90: CheckInteractRangeEx
       0x140B429E0: GetCurrentContentType
       0x140B42AB0: GetCurrentContentId # static
       0x140B42B30: CanLeaveCurrentContent # static
