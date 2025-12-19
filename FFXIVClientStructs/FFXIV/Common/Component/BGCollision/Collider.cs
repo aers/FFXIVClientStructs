@@ -127,18 +127,18 @@ public unsafe partial struct Collider {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
 public unsafe partial struct ColliderStreamed {
-    //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
-    [FieldOffset(0x0A8), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _pathBase; // root directory of the streamed meshes
-    [FieldOffset(0x1A8)] public Resource* Resource;
-    [FieldOffset(0x1B0)] public int NumMeshesLoading;
-    [FieldOffset(0x1B4)] public bool Loaded;
-    [FieldOffset(0x1B8)] public float StreamedMinX;
-    [FieldOffset(0x1BC)] public float StreamedMinZ;
-    [FieldOffset(0x1C0)] public float StreamedMaxX;
-    [FieldOffset(0x1C4)] public float StreamedMaxZ;
-    [FieldOffset(0x1C8)] public FileHeader* Header; // raw file data
-    [FieldOffset(0x1D0)] public FileEntry* Entries; // raw file data, count == Header->NumMeshes
-    [FieldOffset(0x1D8)] public Element* Elements; // count == Header->NumMeshes
+    //0xA8: base class Common::Component::Excel::ExcelResourceListener, size=8
+    [FieldOffset(0x0B0), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _pathBase; // root directory of the streamed meshes
+    [FieldOffset(0x1B0)] public Resource* Resource;
+    [FieldOffset(0x1B8)] public int NumMeshesLoading;
+    [FieldOffset(0x1BC)] public bool Loaded;
+    [FieldOffset(0x1C0)] public float StreamedMinX;
+    [FieldOffset(0x1C4)] public float StreamedMinZ;
+    [FieldOffset(0x1C8)] public float StreamedMaxX;
+    [FieldOffset(0x1CC)] public float StreamedMaxZ;
+    [FieldOffset(0x1D0)] public FileHeader* Header; // raw file data
+    [FieldOffset(0x1D8)] public FileEntry* Entries; // raw file data, count == Header->NumMeshes
+    [FieldOffset(0x1E0)] public Element* Elements; // count == Header->NumMeshes
 
     // header is followed by NumMeshes entries
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
