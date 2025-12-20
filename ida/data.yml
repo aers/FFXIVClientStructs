@@ -15444,11 +15444,11 @@ classes:
       - ea: 0x1420DC5C0
         base: Client::Game::Event::Director
     vfuncs:
-      281: GetCurrentLevel
-      302: GetMaxLevel
-      317: GetContentTimeMax
-      318: GetContentTypeIconId
-      328: SetExperience
+      302: GetCurrentLevel
+      303: GetMaxLevel
+      328: GetContentTimeMax
+      329: GetContentTypeIconId
+      334: SetExperience
     funcs:
       0x140C76600: ctor
       0x140C781A0: ApplyMapEffect
