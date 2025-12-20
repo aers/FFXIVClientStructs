@@ -692,7 +692,7 @@ if api is None:
             def get_ghidra_type(self, name):
                 # type: (str) -> str
                 if name == "__int8":
-                    return "sbyte"
+                    return "char"
                 elif name == "__int16":
                     return "short"
                 elif name == "__int64":
