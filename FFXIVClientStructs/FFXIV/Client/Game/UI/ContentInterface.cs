@@ -50,6 +50,7 @@ public partial struct ContentInterface {
     public partial bool IsUnlocked();
 
     // [VirtualFunction(15)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown15();
 
     [VirtualFunction(16)]
@@ -131,18 +132,21 @@ public partial struct ContentInterface {
     public partial bool IsMinimumILAllowed();
 
     // [VirtualFunction(42)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown42();
 
     [VirtualFunction(43)]
     public partial bool IsAllianceRegistrationAllowed();
 
     // [VirtualFunction(44)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown44();
 
     [VirtualFunction(45)]
     public partial uint GetAllianceRegistrationMinPlayers();
 
     // [VirtualFunction(46)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown46();
 
     [VirtualFunction(47)]
@@ -152,9 +156,11 @@ public partial struct ContentInterface {
     public partial bool IsBattleMentorWithCurrentCertificationOnly();
 
     // [VirtualFunction(49)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown49();
 
     // [VirtualFunction(50)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown50();
 
     [VirtualFunction(51)]
@@ -217,18 +223,22 @@ public partial struct ContentInterface {
     public partial uint GetGoldSaucerRegisterConditionAddonId(int index);
 
     // [VirtualFunction(70)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown70();
 
     // [VirtualFunction(71)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown71();
 
     // [VirtualFunction(72)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown72();
 
     [VirtualFunction(73)]
     public partial bool IsOnlyPvPTeamMembers();
 
     // [VirtualFunction(74)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown74();
 
     [VirtualFunction(75)]
@@ -241,12 +251,15 @@ public partial struct ContentInterface {
     public partial bool IsRegistrationHomeWorldLimited();
 
     // [VirtualFunction(78)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown78();
 
     // [VirtualFunction(79)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown79();
 
     // [VirtualFunction(80)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown80();
 
     [VirtualFunction(81)]
@@ -268,6 +281,7 @@ public partial struct ContentInterface {
     public partial uint GetUnlockCriteria();
 
     // [VirtualFunction(87)]
+    // [Experimental("UnknownFunction")]
     // public partial bool Unknown87();
 
     [VirtualFunction(88)]
