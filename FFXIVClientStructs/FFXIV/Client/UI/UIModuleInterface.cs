@@ -185,6 +185,7 @@ public enum UIModulePacketType {
     LevelChange = 3,
     ShowLogMessage = 4,
     Login = 6,
+    InitZone = 5,
     Logout = 7,
     CloseLogoutDialog = 8,
     StartLogoutCountdown = 9,
