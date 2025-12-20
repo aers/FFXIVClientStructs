@@ -2710,7 +2710,9 @@ classes:
       0x140B00170: GetCurrentClassJobExp
       0x140B00220: GetClassJobNeededExp
       0x140B00290: GetCurrentClassJobNeededExp
+      0x140B00360: SetMainAttributeByIndex # (this, index, value)
       0x140B00380: GetAttributeByIndex # (this, index)
+      0x140B003A0: SetAttributeByIndex # (this, index, value)
       0x140AFD850: SetEurekaRank
       0x140AFD950: SetBozjaRank
       0x140AFDE00: TrackTraitUnlock
