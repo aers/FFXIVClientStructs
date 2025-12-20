@@ -449,6 +449,7 @@ functions:
   0x1419648D0: MassivePcContentDirector_IsPlayCutscene # ulong (lua_State* state)
   0x140DED460: GoldSaucerDirector_IsPlayCutscene # ulong (lua_State* state)
   0x1419C27C0: CustomTalk_IsPlayCutsceneContent # ulong (lua_State* state)
+  0x1418E9530: GetInstanceContentTypeAndIndex # bool (int instanceContentId, InstanceContentType *contentType, uint *outIndex)
 
 classes:
   Common::TimePoint:
