@@ -6,7 +6,6 @@ using FFXIVClientStructs.STD.Helper;
 namespace FFXIVClientStructs.FFXIV.Client.System.String;
 
 // Client::System::String::Utf8String
-// ctor "E8 ?? ?? ?? ?? 48 03 1F"
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
 public unsafe partial struct Utf8String : ICreatable, IDisposable, IStaticNativeObjectOperation<Utf8String> {
@@ -233,12 +232,12 @@ public enum AllowedEntities : ushort {
     /// <summary> Anything that's not handled in the alphanumerical filters (presumably). </summary>
     OtherCharacters = 1 << 5,
 
-    /// <summary> SeString payloads </summary>
+    /// <summary> SeString payloads, mostly used to carry fixed macros (auto translate). </summary>
     Payloads = 1 << 6,
 
     Unknown7 = 1 << 7,
     Unknown8 = 1 << 8,
-    Unknown9 = 1 << 9, // Only used in Chinese/Korean clients?!
+    Unknown9 = 1 << 9, // Only used in Chinese/Korean/Taiwanese clients
 
     /// <summary> Hiragana, Katakana, CJK Unified Ideographs </summary>
     CJK = 1 << 10,

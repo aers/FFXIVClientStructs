@@ -144,7 +144,7 @@ public unsafe partial struct AtkTooltipManager {
         [StructLayout(LayoutKind.Explicit, Size = 0x18)]
         public struct AtkTooltipMiragePrismPrismItemArgs {
             /// <remarks>
-            /// Used for <see cref="DetailKind.MiragePrismItem"/> as ItemId.<br/>
+            /// Used for <see cref="DetailKind.MiragePrismPlateItem"/> as ItemId.<br/>
             /// When this is a MirageStoreSetItem RowId (ItemId of the Set), then specify <see cref="SetItemSlot"/> for the slot.
             /// </remarks>
             [FieldOffset(0x08)] public int Id;
@@ -154,12 +154,12 @@ public unsafe partial struct AtkTooltipManager {
             /// </remarks>
             [FieldOffset(0x10)] public int SetItemSlot;
             /// <remarks>
-            /// Used for <see cref="DetailKind.MiragePrismItem"/>, but unsure what for.<br/>
+            /// Used for <see cref="DetailKind.MiragePrismPlateItem"/>, but unsure what for.<br/>
             /// Used for <see cref="DetailKind.MiragePrismBoxItem"/> as Index in <see cref="MirageManager.PrismBoxItemIds"/>/<see cref="MirageManager.PrismBoxStain0Ids"/>/<see cref="MirageManager.PrismBoxStain1Ids"/>.
             /// </remarks>
             [FieldOffset(0x14)] public short Index;
             /// <remarks>
-            /// Either <see cref="DetailKind.MiragePrismItem"/> or <see cref="DetailKind.MiragePrismBoxItem"/>.
+            /// Either <see cref="DetailKind.MiragePrismPlateItem"/> or <see cref="DetailKind.MiragePrismBoxItem"/>.
             /// </remarks>
             [FieldOffset(0x16)] public DetailKind Kind;
         }

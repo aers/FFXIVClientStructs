@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Component.Excel;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -8,6 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 public unsafe partial struct InventoryManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 81 C2", 3)]
     public static partial InventoryManager* Instance();
+
+    [FieldOffset(0), FixedSizeArray] internal FixedSizeArray128<InventoryOperation> _pendingOperations;
+    [FieldOffset(0x1E00)] public uint NextContextId; // id for the next operation request
 
     [FieldOffset(0x1E08)] public InventoryContainer* Inventories;
     /// <remarks>
@@ -20,12 +24,12 @@ public unsafe partial struct InventoryManager {
     // Seems to be reused for FATE HandIns and Mail too??!
     [FieldOffset(0x1E18), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsLocal; // 6th slot is Gil
     [FieldOffset(0x1FC8), FixedSizeArray] internal FixedSizeArray6<InventoryItem> _tradeItemsRemote; // 6th slot is Gil
-    [FieldOffset(0x2178)] public uint TradeUnk2178;
+    [FieldOffset(0x2178)] private uint TradeUnk2178;
     [FieldOffset(0x217C)] public TradeState TradeLocalState;
     [FieldOffset(0x2180)] public TradeState TradeRemoteState;
     [FieldOffset(0x2184), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _tradePartnerName;
     [FieldOffset(0x21A4)] public uint TradePartnerEntityId;
-    [FieldOffset(0x21A8)] public bool TradeUnk21A8;
+    [FieldOffset(0x21A8)] private bool TradeUnk21A8;
     [FieldOffset(0x21A9)] public bool TradeWarnIfMovedTooFar;
     [FieldOffset(0x21AB)] public bool TradeIsSyncPending;
 
@@ -84,6 +88,15 @@ public unsafe partial struct InventoryManager {
     [MemberFunction("E8 ?? ?? ?? ?? 8B F8 39 43 78")]
     public partial uint GetRetainerGil();
 
+    [MemberFunction("E8 ?? ?? ?? ?? EB 49 84 C0")]
+    public partial int MoveFromRetainerMarketToPlayerInventory(InventoryType srcInv, ushort srcSlot, uint quantity);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 45 85 F6 75 22")]
+    public partial int MoveFromRetainerMarketToRetainerInventory(InventoryType srcInv, ushort srcSlot, uint quantity);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 8B 56 58 33 DB")]
+    public partial void MoveToRetainerMarket(InventoryType srcInv, ushort srcSlot, InventoryType dstInv, ushort dstSlot, uint quantity, uint unitPrice);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4B ?? 44 8B F8 ?? ?? ?? FF 52 ?? 80 BB")]
     public partial uint GetFreeCompanyGil();
 
@@ -135,6 +148,30 @@ public unsafe partial struct InventoryManager {
 
     /// <summary> Gets the number of (limited) tomestones the user has acquired during the current reset cycle. </summary>
     public int GetWeeklyAcquiredTomestoneCount() => GetLimitedTomestoneCount(GetSpecialItemId(9));
+
+    /// <remarks>Return value is a LogMessage Id. 0 if you can equip. Row pointer is optional</remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 ?? 80 7E")]
+    public static partial int CanEquip(uint itemId, byte race, byte sex, ushort level, byte classJobId, byte grandCompany, byte pvpRank, [CExporterExcel("Item")] void* itemRow);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x3C)]
+    public struct InventoryOperation {
+        [FieldOffset(0x00)] public bool IsEmpty;
+        [FieldOffset(0x04)] public uint ContextId;
+        [FieldOffset(0x08)] public int Type; // like an OpCode those change with every release :(
+        [FieldOffset(0x10)] public InventoryType SourceInventoryType;
+        [FieldOffset(0x14)] public short SourceInventorySlot;
+        [FieldOffset(0x18)] public int SourceItemQuantity;
+        [FieldOffset(0x1C)] public uint SourceItemId;
+        [FieldOffset(0x24)] public InventoryType DestinationInventoryType;
+        [FieldOffset(0x28)] public short DestinationInventorySlot;
+        [FieldOffset(0x2C)] public int DestinationItemQuantity;
+        [FieldOffset(0x30)] public uint DestinationItemId; // also used for MarketPrice??
+        [FieldOffset(0x34)] private bool Unk34;
+        [FieldOffset(0x35)] private bool Unk35;
+        [FieldOffset(0x36)] private bool Unk36;
+        [FieldOffset(0x37)] private bool Unk37;
+        [FieldOffset(0x38)] private uint Unk38;
+    }
 }
 
 public enum TradeState {

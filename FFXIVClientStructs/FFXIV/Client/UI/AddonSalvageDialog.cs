@@ -8,12 +8,12 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Addon("SalvageDialog")]
 [GenerateInterop]
 [Inherits<AtkUnitBase>]
-[StructLayout(LayoutKind.Explicit, Size = 0x270)]
+[StructLayout(LayoutKind.Explicit, Size = 0x2A0)]
 public unsafe partial struct AddonSalvageDialog {
     [FieldOffset(0x240)] public AtkComponentIcon* ItemIconNode;
 
     [FieldOffset(0x248)] public AtkComponentCheckBox* BulkDesynthCheckboxNode;
-    [FieldOffset(0x250)] public AtkComponentCheckBox* UnkCheckboxNode; // Unused
+    [FieldOffset(0x250)] private AtkComponentCheckBox* UnkCheckboxNode; // Unused
 
     [FieldOffset(0x258)] public bool BulkDesynthEnabled; // Only changes state on first opening of the addon
 

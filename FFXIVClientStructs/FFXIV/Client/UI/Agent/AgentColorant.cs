@@ -19,7 +19,7 @@ public partial struct AgentColorant {
     [Inherits<CharaView>]
     [StructLayout(LayoutKind.Explicit, Size = 0x338)]
     public unsafe partial struct ColorantCharaView {
-        //[FieldOffset(0x318)] public uint Unk2C8; // a3 passed to vf13
+        //[FieldOffset(0x318)] private uint Unk2C8; // a3 passed to vf13
         [FieldOffset(0x31C)] public uint EntityId; // of local player
         [FieldOffset(0x320)] public bool DoUpdate;
         [FieldOffset(0x321)] public bool HideOtherEquipment;

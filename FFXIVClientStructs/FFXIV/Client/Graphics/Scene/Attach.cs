@@ -23,7 +23,7 @@ public unsafe partial struct Attach {
     // type 5: - ?
     [FieldOffset(0x50)] public int ExecuteType;
 
-    [FieldOffset(0x54)] public int UnkValue;
+    [FieldOffset(0x54)] private int UnkValue;
 
     [FieldOffset(0x58)] public Skeleton* TargetSkeleton; // ExecuteType 3/4
     [FieldOffset(0x60), CExporterUnion("Owner")] public Skeleton* OwnerSkeleton; // ExecuteType 4

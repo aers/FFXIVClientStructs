@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Network;
 using FFXIVClientStructs.FFXIV.Client.Sound;
@@ -19,11 +18,22 @@ namespace FFXIVClientStructs.FFXIV.Client.System.Framework;
 // Client::System::Framework::Framework
 [GenerateInterop]
 [VirtualTable("48 8D 05 ?? ?? ?? ?? 66 C7 41 ?? ?? ?? 48 89 01 48 8B F1", 3)]
-[StructLayout(LayoutKind.Explicit, Size = 0x35F0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x35D8)]
 public unsafe partial struct Framework {
-    [StaticAddress("49 8B DC 48 89 1D ?? ?? ?? ??", 6, isPointer: true)]
+    [StaticAddress("48 8B 1D ?? ?? ?? ?? 8B 7C 24", 3, isPointer: true)]
     public static partial Framework* Instance();
 
+    // Teardown sequence:
+    // - (optional) UIModule.ExitGame() sets UIModule.ShouldExitGame to true, that makes it call Framework.Exit() in its Update function
+    // - Framework.Exit() sets IsExiting to true and sets the ExitCode
+    // - When IsExiting is true: IsDestroying is set to true in TaskIntervalEnd
+    // - When IsDestroying and Framework.Destroy() both return true: Framework.Free() is called
+    // - At the end of Framework.Free(), IsFreed is set to true, which makes it stop calling Tick
+    // - Framework.Dtor() is called and some other stuff happens until WinMain ends
+    [FieldOffset(0x0008)] public bool IsDestroying;
+    [FieldOffset(0x0009)] public bool IsExiting;
+    [FieldOffset(0x000A)] public bool IsFreed;
+    [FieldOffset(0x000C)] public int ExitCode;
     [FieldOffset(0x0010)] public SystemConfig SystemConfig;
     [FieldOffset(0x0460)] public DevConfig DevConfig;
     [FieldOffset(0x0570)] public CharamakeAvatarSaveDataContainer* CharamakeAvatarSaveData;
@@ -136,6 +146,9 @@ public unsafe partial struct Framework {
 
     [VirtualFunction(4)]
     public partial bool Tick();
+
+    [MemberFunction("89 51 ?? C6 41 ?? ?? 48 8B 0D")]
+    public partial void Exit(int exitCode);
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 7B 1D 01")]
     public partial UIModule* GetUIModule();

@@ -15,7 +15,7 @@ public unsafe partial struct AgentInterface {
     [FieldOffset(0x20)] public uint AddonId;
 
     [VirtualFunction(2)]
-    public partial void Dtor(bool free);
+    public partial void Dtor(byte freeFlags);
 
     [VirtualFunction(3)]
     public partial void Show();
@@ -51,7 +51,7 @@ public unsafe partial struct AgentInterface {
     [MemberFunction("E8 ?? ?? ?? ?? 44 85 FF")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 44 0F B6 F3 33 DB")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 EB 31")]
     public partial bool IsAddonReady();
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 84 ED 74 1A")]

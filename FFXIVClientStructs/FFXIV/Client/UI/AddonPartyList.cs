@@ -37,9 +37,9 @@ public unsafe partial struct AddonPartyList {
     [FieldOffset(0x1578)] public int HoveredIndex;
     [FieldOffset(0x157C)] public int TargetedIndex;
 
-    [FieldOffset(0x1580)] public int Unknown1580;
-    [FieldOffset(0x1584)] public int Unknown1584;
-    [FieldOffset(0x1588)] public byte Unknown1588;
+    [FieldOffset(0x1580)] private int Unknown1580;
+    [FieldOffset(0x1584)] private int Unknown1584;
+    [FieldOffset(0x1588)] private byte Unknown1588;
 
     [FieldOffset(0x158A)] public byte PetCount; // or PetSummoned?
     [FieldOffset(0x158B)] public byte ChocoboCount; // or ChocoboSummoned?
@@ -51,7 +51,7 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(0x50)] public AtkComponentBase* PartyMemberComponent;
         [FieldOffset(0x58)] public AtkTextNode* IconBottomLeftText;
         [FieldOffset(0x60)] public AtkResNode* NameAndBarsContainer;  // only contains hp/mp bars
-        [FieldOffset(0x68)] public AtkResNode* Unknown68;  // seems to be related to MPGaugeBar
+        [FieldOffset(0x68)] private AtkResNode* Unknown68;  // seems to be related to MPGaugeBar
         [FieldOffset(0x70)] public AtkTextNode* GroupSlotIndicator;
         [FieldOffset(0x78)] public AtkTextNode* Name;
         [FieldOffset(0x80)] public AtkTextNode* CastingActionName;
@@ -60,8 +60,8 @@ public unsafe partial struct AddonPartyList {
         [FieldOffset(0x98)] public AtkResNode* EmnityBarContainer;
         [FieldOffset(0xA0)] public AtkNineGridNode* EmnityBarFill;
         [FieldOffset(0xA8)] public AtkImageNode* ClassJobIcon;
-        [FieldOffset(0xB0)] public void* UnknownB0;
-        [FieldOffset(0xB8)] public AtkImageNode* UnknownImageB8;
+        [FieldOffset(0xB0)] private void* UnknownB0;
+        [FieldOffset(0xB8)] private AtkImageNode* UnknownImageB8;
         [FieldOffset(0xC0)] public AtkComponentBase* HPGaugeComponent;
         [FieldOffset(0xC8)] public AtkComponentGaugeBar* HPGaugeBar;
         [FieldOffset(0xD0)] public AtkComponentGaugeBar* MPGaugeBar;

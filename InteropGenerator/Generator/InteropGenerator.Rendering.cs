@@ -345,6 +345,14 @@ public sealed partial class InteropGenerator {
                     }
                 }
             }
+            if (fixedSizeArrayInfo.IsBitArray) {
+                writer.WriteLine($"""/// <inheritdoc cref="{fixedSizeArrayInfo.FieldName}" />""");
+                foreach (string inheritedAttribute in fixedSizeArrayInfo.InheritableAttributes) {
+                    writer.WriteLine(inheritedAttribute);
+                }
+                // public BitArray FieldName => new BitArray((byte*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref _fieldName[0]), bitCount);
+                writer.WriteLine($"public BitArray {fixedSizeArrayInfo.GetPublicFieldName()}BitArray => new BitArray((byte*)global::System.Runtime.CompilerServices.Unsafe.AsPointer(ref {fixedSizeArrayInfo.FieldName}[0]), {fixedSizeArrayInfo.BitCount});");
+            }
         }
     }
 

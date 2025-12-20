@@ -1,7 +1,9 @@
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::MirageManager
-// Note: Data is cleared when switching zones
+/// <remarks>
+/// Data is cleared when switching zones
+/// </remarks>
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x1888)]
 public unsafe partial struct MirageManager {
@@ -11,7 +13,7 @@ public unsafe partial struct MirageManager {
     [FieldOffset(0)] public bool IsApplyingGlamourPlate;
 
     [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray800<uint> _prismBoxItemIds;
-    [FieldOffset(0xC84), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain0Ids;
+    [FieldOffset(0xC84), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain0Ids; // 7.4: now also contains bit arrays for partial outfits
     [FieldOffset(0xFA4), FixedSizeArray] internal FixedSizeArray800<byte> _prismBoxStain1Ids;
     [FieldOffset(0x12C4)] public bool PrismBoxRequested;
     [FieldOffset(0x12C5)] public bool PrismBoxLoaded;
@@ -28,8 +30,11 @@ public unsafe partial struct MirageManager {
     /// Returns <c>true</c> if the command was sent to the server, or <c>false</c>
     /// if the player already possess a unique item or if inventory space is insufficient.
     /// </returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 B0 ?? 48 8B CE")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 0F 84 ?? ?? ?? ?? 41 B0 01 48 8B CB")]
     public partial bool RestorePrismBoxItem(uint itemIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? 0B F3")]
+    public partial bool IsSetSlotUnlocked(uint itemIndex, int slot);
 
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x48)]

@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x46)]
 public partial struct PacketPlayerGearsetData {
-    // Stores the weapon data. Includes both dyes in the data. </summary>
+    /// <summary> Stores the weapon data. Includes both dyes in the data. </summary>
     [FieldOffset(0x00)] public WeaponModelId MainhandWeaponData;
     [FieldOffset(0x08)] public WeaponModelId OffhandWeaponData;
     [FieldOffset(0x10)] public byte CrestBitField; // A Bitfield:: ShieldCrest == 1, HeadCrest == 2, Chest Crest == 4

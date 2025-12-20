@@ -240,9 +240,7 @@ public unsafe partial struct MJIManager {
     /// </remarks>
     /// <param name="keyItemId">The RowID of the MJIKeyItem to check.</param>
     /// <returns>Returns true if the key item is unlocked.</returns>
-    public bool IsKeyItemUnlocked(ushort keyItemId) {
-        return ((1 << (keyItemId & 7)) & this.IslandState.UnlockedKeyItems[keyItemId >> 3]) > 0;
-    }
+    public bool IsKeyItemUnlocked(ushort keyItemId) => IslandState.UnlockedKeyItems.CheckBitInSpan(keyItemId);
 
     /// <summary>
     /// Return the Supply value for a specified craftwork.

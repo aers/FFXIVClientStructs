@@ -58,7 +58,7 @@ public unsafe partial struct ResourceHandle {
 public struct ResourceHandleType {
     [FieldOffset(0x0), CExporterIgnore] public uint Value;
     [FieldOffset(0x0)] public HandleCategory Category;
-    [FieldOffset(0x2)] public byte Unknown0A;
+    [FieldOffset(0x2)] private byte Unknown0A;
     [FieldOffset(0x3)] public byte Expansion;
 
     public static explicit operator ResourceHandleType(ResourceCategory value) {

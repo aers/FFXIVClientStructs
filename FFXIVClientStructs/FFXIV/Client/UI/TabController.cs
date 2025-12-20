@@ -59,7 +59,7 @@ public unsafe partial struct TabController {
         [FieldOffset(0x50)] public AtkComponentButton* BackButton;
         [FieldOffset(0x58)] public AtkComponentButton* ForwardButton;
         [FieldOffset(0x60)] public AtkComponentButton* SearchButton;
-        [FieldOffset(0x68)] public int UnkTimelineId1;
-        [FieldOffset(0x6C)] public int UnkTimelineId2;
+        [FieldOffset(0x68)] private int UnkTimelineId1;
+        [FieldOffset(0x6C)] private int UnkTimelineId2;
     }
 }

@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 [Inherits<AtkComponentRadioButton>]
 [StructLayout(LayoutKind.Explicit, Size = 0x168)]
 public partial struct AtkComponentTab : ICreatable {
-    [FieldOffset(0xF8)] public Utf8String UnkString;
+    [FieldOffset(0xF8)] private Utf8String UnkString;
     [FieldOffset(0x160)] public short OwnerNodeWidth;
     [FieldOffset(0x162)] public short ButtonTextNodeX;
 

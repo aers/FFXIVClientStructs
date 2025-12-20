@@ -1,7 +1,7 @@
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
-// note: Name made up
+// Name made up
 // This is the "hold to proceed" button type
 
 // Component::GUI::AtkComponentHoldButton

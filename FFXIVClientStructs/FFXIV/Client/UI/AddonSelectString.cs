@@ -13,8 +13,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonSelectString {
     [FieldOffset(0x238)] public PopupMenuDerive PopupMenu;
 
+    [GenerateInterop]
+    [Inherits<PopupMenu>]
     [StructLayout(LayoutKind.Explicit, Size = 0x70)]
-    public struct PopupMenuDerive {
-        [FieldOffset(0x0), CExporterBaseType] public PopupMenu PopupMenu; // TODO: actual add as inheritance
-    }
+    public partial struct PopupMenuDerive;
 }

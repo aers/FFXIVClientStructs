@@ -7,8 +7,8 @@ public unsafe partial struct RaceChocoboManager {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 F8 02 75 08", 3)]
     public static partial RaceChocoboManager* Instance();
 
-    //[FieldOffset(0x00)] public int Unknownx00;
-    //[FieldOffset(0x04)] public int Unknownx04;
+    //[FieldOffset(0x00)] private int Unknownx00;
+    //[FieldOffset(0x04)] private int Unknownx04;
 
     // These aren't direct stats but represent then number
     // of points in an attribute.  To get the stat value,
@@ -45,8 +45,8 @@ public unsafe partial struct RaceChocoboManager {
     [FieldOffset(0x12)] public byte AbilityHereditary;
     [FieldOffset(0x13)] public byte AbilityLearned;
 
-    //[FieldOffset(0x14)] public byte Unknownx14;
-    //[FieldOffset(0x15)] public byte Unknownx15;
+    //[FieldOffset(0x14)] private byte Unknownx14;
+    //[FieldOffset(0x15)] private byte Unknownx15;
 
     // ExcelSheet<RacingChocoboName>
     [FieldOffset(0x16)] public short NameFirst;
@@ -54,7 +54,7 @@ public unsafe partial struct RaceChocoboManager {
 
     [FieldOffset(0x1A)] public byte Rank;
 
-    //[FieldOffset(0x1B)] public byte Unknownx1B;
+    //[FieldOffset(0x1B)] private byte Unknownx1B;
 
     [FieldOffset(0x1C)] public short ExperienceCurrent;
     [FieldOffset(0x1E)] public short ExperienceMax;
@@ -69,5 +69,5 @@ public unsafe partial struct RaceChocoboManager {
 
     [FieldOffset(0x24)] public byte SessionsAvailable;
 
-    //[FieldOffset(0x25)] public byte Unknownx25;
+    //[FieldOffset(0x25)] private byte Unknownx25;
 }

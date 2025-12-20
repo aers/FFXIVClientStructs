@@ -24,11 +24,11 @@ public unsafe partial struct AgentBannerInterface {
         public struct CharacterData {
             [FieldOffset(0x018)] public Utf8String Name1;
             [FieldOffset(0x080)] public Utf8String Name2;
-            [FieldOffset(0x0E8)] public Utf8String UnkString1;
-            [FieldOffset(0x150)] public Utf8String UnkString2;
+            [FieldOffset(0x0E8)] private Utf8String UnkString1;
+            [FieldOffset(0x150)] private Utf8String UnkString2;
             [FieldOffset(0x1C0)] public Utf8String Job;
             [FieldOffset(0x238)] public uint WorldId;
-            [FieldOffset(0x240)] public Utf8String UnkString3;
+            [FieldOffset(0x240)] private Utf8String UnkString3;
 
             [FieldOffset(0x2B0)] public CharaViewPortrait CharaView;
 
@@ -38,8 +38,8 @@ public unsafe partial struct AgentBannerInterface {
 
         [FieldOffset(0x0000)] public AgentInterface* Agent; // AgentBannerParty, maybe other Banner agents
         [FieldOffset(0x0008)] public UIModule* UIModule;
-        //[FieldOffset(0x0010)] public uint Unk1; // Maybe count or bitfield, but probably not
-        //[FieldOffset(0x0014)] public uint Unk2;
+        //[FieldOffset(0x0010)] private uint Unk1; // Maybe count or bitfield, but probably not
+        //[FieldOffset(0x0014)] private uint Unk2;
 
         public const int NumCharacters = 8;
 

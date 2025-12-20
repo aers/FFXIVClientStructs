@@ -14,9 +14,9 @@ public unsafe partial struct AgentFreeCompanyProfile {
     //Next were the same as AgentINspect GuildStruct 0x08
     //These (in Decimal) are the same as used on the Lodestone
     [FieldOffset(0x028)] public long RequestId;
-    [FieldOffset(0x030)] public long UnkId2;
-    [FieldOffset(0x038)] public long UnkId3;
-    [FieldOffset(0x040)] public long UnkId4;
+    [FieldOffset(0x030)] private long UnkId2;
+    [FieldOffset(0x038)] private long UnkId3;
+    [FieldOffset(0x040)] private long UnkId4;
     [FieldOffset(0x048)] public CrestData Crest;
     //Estate Data
     [FieldOffset(0x050)] public ushort PlotNumber; //Starts at 0 (+1 in UI) Only last 6 bits are valid
@@ -38,10 +38,10 @@ public unsafe partial struct AgentFreeCompanyProfile {
     [FieldOffset(0x1A8)] public Utf8String Slogan;
     [FieldOffset(0x210)] public Utf8String EstateName;
     //4 Status bytes
-    //[FieldOffset(0x278)] public byte Unk278;
-    //[FieldOffset(0x279)] public byte Unk279;
-    //[FieldOffset(0x27A)] public byte Unk27A;
-    //[FieldOffset(0x27B)] public byte Unk27B;
+    //[FieldOffset(0x278)] private byte Unk278;
+    //[FieldOffset(0x279)] private byte Unk279;
+    //[FieldOffset(0x27A)] private byte Unk27A;
+    //[FieldOffset(0x27B)] private byte Unk27B;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x6)]
     public struct FCProfile {

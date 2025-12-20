@@ -1,8 +1,10 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Event;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore, GenerateInterop, StructLayout(LayoutKind.Explicit, Size = 198 * 4)]
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 198 * 4)]
 public unsafe partial struct ToDoListNumberArray {
     public static ToDoListNumberArray* Instance() {
         var numberArray = AtkStage.Instance()->GetNumberArrayData(NumberArrayType.ToDoList);
@@ -75,11 +77,11 @@ public unsafe partial struct ToDoListNumberArray {
     // Bar color is only enabled for duty objectives, and only for objective type LargeColorBar
     [FieldOffset(157 * 4), FixedSizeArray] internal FixedSizeArray10<BarColor> _barColors;
 
-    [FieldOffset(167 * 4)] public int CurrentDutyObjective;
-
-    // bitfield, bit index is objective index
-    [FieldOffset(168 * 4)] public int ObjectiveFocusable;
-    [FieldOffset(169 * 4)] public int DutyTitleFocusable;
+    [FieldOffset(167 * 4), Obsolete($"Renamed to {nameof(DutyCompletedObjectives)}", true)] public int CurrentDutyObjective;
+    // bitfields, bit index is objective index
+    [FieldOffset(167 * 4)] public uint DutyCompletedObjectives;
+    [FieldOffset(168 * 4)] public uint ObjectiveFocusable;
+    [FieldOffset(169 * 4)] public uint DutyTitleFocusable;
 
     // 170 - Related to MassivePcContent, displays a duty header section but is unstable when used
 
@@ -95,25 +97,58 @@ public unsafe partial struct ToDoListNumberArray {
     [FieldOffset(186 * 4), FixedSizeArray] internal FixedSizeArray10<int> _fateObjectiveValue;
 
     // 196 - Appears to be a bitfield with each bit from the lsb set if that objective is completed
-    // [FieldOffset(196 * 4)] public int Unknown196;
+    // [FieldOffset(196 * 4)] private int Unknown196;
 
     // Acts like 171- maybe cosmic/occult??
-    // [FieldOffset(197 * 4)] public int Unknown197;
+    // [FieldOffset(197 * 4)] private int Unknown197;
 
+    /// <remarks> See also <see cref="TodoType"/> (same thing, different values). </remarks>
     public enum ObjectiveType {
-        None = 0,
-        SmallText = 1, // 2 also has this effect
-        InlineBar = 3, // 4 also has this effect
-        InlineTimer = 5,
-        LargeText = 6, // 7 and 8 also have this effect
-        LargeBar = 9,
-        LargeBarColorable = 10,
+        /// <remarks> See <see cref="TodoType.Text"/>. </remarks>
+        Text = 0,
+        /// <remarks> See <see cref="TodoType.Number"/>. </remarks>
+        Number = 1,
+        /// <remarks> See <see cref="TodoType.Fraction"/>. </remarks>
+        Fraction = 2,
+        /// <remarks> See <see cref="TodoType.Bar"/>. </remarks>
+        Bar = 3,
+        /// <remarks> See <see cref="TodoType.FractionBar"/>. </remarks>
+        FractionBar = 4,
+        /// <remarks> See <see cref="TodoType.TimeRemaining"/>. </remarks>
+        TimeRemaining = 5,
+        /// <remarks> See <see cref="TodoType.LargeGrayText"/>. </remarks>
+        LargeGrayText = 6,
+        /// <remarks> See <see cref="TodoType.LargeGrayNumber"/>. </remarks>
+        LargeGrayNumber = 7,
+        /// <remarks> See <see cref="TodoType.LargeGrayFraction"/>. </remarks>
+        LargeGrayFraction = 8,
+        /// <remarks> See <see cref="TodoType.LargeBar"/>. </remarks>
+        ProgressBar = 9,
+        /// <remarks> See <see cref="TodoType.ColorableBar"/>. </remarks>
+        ColorableBar = 10,
+        /// <remarks> See <see cref="TodoType.QuestTitle"/>. </remarks>
         QuestTitle = 11,
-        LargeText2 = 12, // Much like LargeText, but different for unknown reasons
-        LargeInlineTimer = 13,
-        BigCheckbox = 14, // looks like level sync button
-        InlineBarLong = 15 // 16 also has this effect
-        // all values above 16 are treated as None
+        /// <remarks> See <see cref="TodoType.LargeBlueText"/>. </remarks>
+        LargeBlueText = 12,
+        /// <remarks> See <see cref="TodoType.LargeTimeRemaining"/>. </remarks>
+        LargeTimeRemaining = 13,
+        /// <remarks> See <see cref="TodoType.JoinButton"/>. </remarks>
+        JoinButton = 14,
+        /// <remarks> See <see cref="TodoType.LongBar"/>. </remarks>
+        LongBar = 15,
+
+        // old values
+        [Obsolete($"Renamed to {nameof(Text)}", true)] None = 0,
+        [Obsolete($"Renamed to {nameof(Number)}", true)] SmallText = 1, // 2 also has this effect
+        [Obsolete($"Renamed to {nameof(Bar)}", true)] InlineBar = 3, // 4 also has this effect
+        [Obsolete($"Renamed to {nameof(TimeRemaining)}", true)] InlineTimer = 5,
+        [Obsolete($"Renamed to {nameof(LargeGrayText)}", true)] LargeText = 6, // 7 and 8 also have this effect
+        [Obsolete($"Renamed to {nameof(ProgressBar)}", true)] LargeBar = 9,
+        [Obsolete($"Renamed to {nameof(ColorableBar)}", true)] LargeBarColorable = 10,
+        [Obsolete($"Renamed to {nameof(LargeBlueText)}", true)] LargeText2 = 12, // Much like LargeText, but different for unknown reasons
+        [Obsolete($"Renamed to {nameof(LargeTimeRemaining)}", true)] LargeInlineTimer = 13,
+        [Obsolete($"Renamed to {nameof(JoinButton)}", true)] BigCheckbox = 14, // looks like level sync button
+        [Obsolete($"Renamed to {nameof(LongBar)}", true)] InlineBarLong = 15 // 16 also has this effect
     }
 
     public enum BarColor {

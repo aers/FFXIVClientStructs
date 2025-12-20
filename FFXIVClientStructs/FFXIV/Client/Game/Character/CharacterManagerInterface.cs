@@ -5,5 +5,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Character;
 [GenerateInterop(isInherited: true)]
 public unsafe partial struct CharacterManagerInterface {
     [VirtualFunction(5)]
-    public partial void Dtor(bool free);
+    public partial void Dtor(byte freeFlags);
 }

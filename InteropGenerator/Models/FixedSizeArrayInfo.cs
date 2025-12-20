@@ -7,6 +7,8 @@ internal sealed record FixedSizeArrayInfo(
     string Type,
     int Size,
     bool IsString,
+    bool IsBitArray,
+    int BitCount,
     EquatableArray<string> InheritableAttributes) {
     public string GetPublicFieldName() =>
         // drop _, capitalize first letter

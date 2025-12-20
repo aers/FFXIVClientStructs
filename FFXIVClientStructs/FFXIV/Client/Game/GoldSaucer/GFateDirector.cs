@@ -10,32 +10,26 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.GoldSaucer;
 //         Client::Game::Event::EventHandler
 [GenerateInterop]
 [Inherits<GoldSaucerDirector>]
-[StructLayout(LayoutKind.Explicit, Size = 0x810)]
+[StructLayout(LayoutKind.Explicit, Size = 0x7B0)]
 public unsafe partial struct GFateDirector {
-    [FieldOffset(0x680)] public Utf8String MapMarkerTooltipText;
-    [FieldOffset(0x6E8)] public uint MapMarkerLevelId;
+    [FieldOffset(0x620)] public Utf8String MapMarkerTooltipText;
+    [FieldOffset(0x688)] public uint MapMarkerLevelId;
 
-    [FieldOffset(0x6F0)] public uint MapMarkerIconId;
+    [FieldOffset(0x690)] public uint MapMarkerIconId;
 
-    [FieldOffset(0x768), FixedSizeArray] internal FixedSizeArray32<uint> _objectIds;
-    [FieldOffset(0x7E8)] public int EndTimestamp;
+    [FieldOffset(0x708), FixedSizeArray] internal FixedSizeArray32<uint> _objectIds;
+    [FieldOffset(0x788)] public int EndTimestamp;
 
-    [FieldOffset(0x7F4)] public ushort BgmId;
+    [FieldOffset(0x794)] public ushort BgmId;
 
-    /// <remarks>
-    /// Use <see cref="GateType"/> enum for comparison.
-    /// </remarks>
-    [FieldOffset(0x7FE)] public byte GateType; // TODO: 7.4 change this to the enum
-    /// <remarks>
-    /// Use <see cref="GatePositionType"/> enum for comparison.
-    /// </remarks>
-    [FieldOffset(0x7FF)] public byte GatePositionType; // TODO: 7.4 change this to the enum
+    [FieldOffset(0x79E)] public GateType GateType;
+    [FieldOffset(0x79F)] public GatePositionType GatePositionType;
 
-    [FieldOffset(0x7F8)] public ushort ScreenImageId1;
-    [FieldOffset(0x7FA)] public ushort ScreenImageId2;
-    [FieldOffset(0x7FC)] public ushort ScreenImageId3;
+    [FieldOffset(0x798)] public ushort ScreenImageId1;
+    [FieldOffset(0x79A)] public ushort ScreenImageId2;
+    [FieldOffset(0x79C)] public ushort ScreenImageId3;
 
-    [FieldOffset(0x804)] public GFateDirectorFlag Flags;
+    [FieldOffset(0x7A4)] public GFateDirectorFlag Flags;
 
     [VirtualFunction(3)]
     public partial bool IsRunningGate();

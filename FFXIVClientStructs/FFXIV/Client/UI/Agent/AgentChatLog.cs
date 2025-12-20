@@ -29,7 +29,7 @@ public unsafe partial struct AgentChatLog {
     [FieldOffset(0x958)] public uint ContextItemId;
 
     [FieldOffset(0x968)] public ulong LinkedPartyFinderId;
-    // [FieldOffset(0x960)] public byte LinkedPartyFinderUnkByte;
+    // [FieldOffset(0x960)] private byte LinkedPartyFinderUnkByte;
     [FieldOffset(0x978)] public Utf8String LinkedPartyFinderLeaderName;
 
     [FieldOffset(0x9E0)] public uint LinkedQuestId;
@@ -46,14 +46,14 @@ public unsafe partial struct AgentChatLog {
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B F0")]
     public partial bool InsertTextCommandParam(uint textParamId, bool unk);
 
-    [MemberFunction("E8 ?? ?? ?? ?? C6 43 08 01 EB 7D")]
+    [MemberFunction("E8 ?? ?? ?? ?? 40 B5 ?? E9 ?? ?? ?? ?? 8B B9")]
     public partial void LinkItem(uint itemId);
 
     [MemberFunction("E8 ?? ?? ?? ?? BA ?? ?? ?? ?? 48 8D 4D B0 48 8B F8 E8 ?? ?? ?? ?? 41 8B D6")]
     public partial CStringPointer ChangeChannelName();
 
     // got inlined
-    // [MemberFunction("E8 ?? ?? ?? ?? 48 8B 8D ?? ?? ?? ?? 48 33 CC E8 ?? ?? ?? ?? 48 81 C4 ?? ?? ?? ?? 41 5F 41 5D 41 5C 5F")]
+    // [MemberFunction("")]
     // public partial void SetTabName(int tabIndex, Utf8String* tabName);
 
     [GenerateInterop]

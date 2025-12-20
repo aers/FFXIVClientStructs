@@ -2,13 +2,13 @@ using FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
-// Client::Game::HwdManager
+// Client::Game::HWDManager
 // Manager for Firmament (Ishgardian Restoration)
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-public unsafe partial struct HwdManager {
+public unsafe partial struct HWDManager {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 8B 4C 24 ?? 0F B6 50 11", 3, isPointer: true)]
-    public static partial HwdManager* Instance();
+    public static partial HWDManager* Instance();
 
     [FieldOffset(0x11)] public byte DevelopmentLevel;
     [FieldOffset(0x12)] public ushort TerritoryTypeId;

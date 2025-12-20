@@ -34,7 +34,7 @@ public unsafe partial struct AgentContentsFinder {
     [FieldOffset(0x2391), FixedSizeArray] internal FixedSizeArray11<ContentsRouletteRole> _contentRouletteRoleBonuses;
 
     [FieldOffset(0x239C)] public uint DutyPenaltyMinutes;
-    [FieldOffset(0x23A0)] public uint UnkPenaltyMinutes;
+    [FieldOffset(0x23A0)] private uint UnkPenaltyMinutes;
 
     [FieldOffset(0x23D4)] public int CurrentTimestamp;
 
@@ -98,7 +98,7 @@ public unsafe partial struct AgentContentsFinderReward {
     [FieldOffset(0x00)] public RewardWrap NormalItems; // Actual items, e.g "Cracked Cluster"
     [FieldOffset(0x220), FixedSizeArray] internal FixedSizeArray5<InventoryItem> _unkItems;
     [FieldOffset(0x388)] public RewardWrap BonusItems; // Actual items, e.g "Cracked Cluster"
-    [FieldOffset(0x5A8)] public RewardWrap UnkItemsWrap;
+    [FieldOffset(0x5A8)] private RewardWrap UnkItemsWrap;
 
     [FieldOffset(0x7D0)] public ExcelSheet* ItemSheet;
 
@@ -132,7 +132,7 @@ public unsafe partial struct AgentContentsFinderReward {
 public unsafe partial struct AgentContentsFinderInterface {
     [FieldOffset(0x00)] public AgentContentsFinder* AgentContentsFinder;
     [FieldOffset(0x10)] public Utf8String Description;
-    [FieldOffset(0x78)] public UnkItemsSub UnkSub;
+    [FieldOffset(0x78)] private UnkItemsSub UnkSub;
 
     [FieldOffset(0x840)] public ExcelSheet* InstanceContentSheet;
     [FieldOffset(0x848)] public ExcelSheet* ContentFinderConditionTransientSheet;
@@ -144,6 +144,6 @@ public unsafe partial struct AgentContentsFinderInterface {
     [FieldOffset(0x870)] public int SelectedDutyId; // ContentFinderCondition rowId for duties, ContentRoulette rowId for roulette
 
     [StructLayout(LayoutKind.Explicit, Size = 0x7C8)]
-    public unsafe partial struct UnkItemsSub {
+    private unsafe partial struct UnkItemsSub {
     }
 }

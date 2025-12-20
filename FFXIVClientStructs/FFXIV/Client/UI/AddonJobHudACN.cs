@@ -5,7 +5,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 
 /// <summary>
 /// ACN / SCH - Aetherflow Gauge<br/>
-/// NOTE: this loads the UldResourceHandle "JobHudSCH0"
+/// This loads the UldResourceHandle "JobHudSCH0"
 /// </summary>
 [Addon("JobHudACN0")]
 [GenerateInterop]
@@ -58,7 +58,7 @@ public unsafe partial struct AddonJobHudACN0 {
 
 /// <summary>
 /// SCH - Faerie Gauge<br/>
-/// NOTE: this loads the UldResourceHandle "JobHudSCH1"
+/// This loads the UldResourceHandle "JobHudSCH1"
 /// </summary>
 [Addon("JobHudSCH0")]
 [GenerateInterop]

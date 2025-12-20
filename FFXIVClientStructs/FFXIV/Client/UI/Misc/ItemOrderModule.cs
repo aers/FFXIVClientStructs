@@ -34,6 +34,9 @@ public unsafe partial struct ItemOrderModule {
     [FieldOffset(0xC0)] public StdMap<ulong, Pointer<ItemOrderModuleSorter>> RetainerSorter;
     [FieldOffset(0xD0)] public ItemOrderModuleSorter* SaddleBagSorter;
     [FieldOffset(0xD8)] public ItemOrderModuleSorter* PremiumSaddleBagSorter;
+
+    [MemberFunction("E9 ?? ?? ?? ?? 48 8B 41 ?? C3")]
+    public partial ItemOrderModuleSorter* GetActiveRetainerSorter();
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
@@ -48,7 +51,7 @@ public unsafe struct ItemOrderModuleSorter {
     [FieldOffset(0x3C)] public int PercentComplete; // set to 100 if done
     [FieldOffset(0x40)] public StdVector<ItemOrderModuleSorterSortFunctionEntry> SortFunctions;
     [FieldOffset(0x58)] public ItemOrderModuleSorterPreviousOrderEntry* PreviousOrderArray;
-    // [FieldOffset(0x60)] public bool UnkBool; Set to true, only when it's the InventorySorter?
+    // [FieldOffset(0x60)] private bool UnkBool; Set to true, only when it's the InventorySorter?
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC)]

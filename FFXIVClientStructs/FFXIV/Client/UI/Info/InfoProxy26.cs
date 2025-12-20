@@ -7,9 +7,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [Inherits<InfoProxyInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x448)]
 public unsafe partial struct InfoProxy26 {
-    [FieldOffset(0x038)] public Utf8String UnkString0;
-    [FieldOffset(0x0A0)] public Utf8String UnkString1;
-    [FieldOffset(0x108)] public AtkEventListener Unk108;
+    [FieldOffset(0x038)] private Utf8String UnkString0;
+    [FieldOffset(0x0A0)] private Utf8String UnkString1;
+    [FieldOffset(0x108)] private AtkEventListener Unk108;
 
-    [FieldOffset(0x3B0)] public AtkEventTarget Unk3B0;
+    [FieldOffset(0x3B0)] private AtkEventTarget Unk3B0;
 }

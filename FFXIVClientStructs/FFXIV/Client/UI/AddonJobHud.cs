@@ -9,9 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public unsafe partial struct AddonJobHud {
-    [FieldOffset(0x238)] public byte Unk220;
+    [FieldOffset(0x238)] private byte Unk220;
     [FieldOffset(0x239)] public bool UseSimpleGauge;
-    [FieldOffset(0x23A)] public byte Unk222;
+    [FieldOffset(0x23A)] private byte Unk222;
 
     // these 4 pointers get set in vf72, and point to varying offsets for each type of gauge
     [FieldOffset(0x240)] public AddonJobHudGauge* GaugeStandardPointer;

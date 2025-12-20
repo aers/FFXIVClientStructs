@@ -28,13 +28,13 @@ public unsafe partial struct AgentRetainerItemTransferData {
 
         /// <summary>
         /// Item ID for the duplicate item.
-        /// Note: Not always set, unsure why...
+        /// Not always set, unsure why...
         /// </summary>
         [FieldOffset(0x70)] public uint ItemId;
 
         /// <summary>.
         /// ItemUiCategory Icon ID
-        /// Note: Not always set, unsure why...
+        /// Not always set, unsure why...
         /// </summary>
         [FieldOffset(0x74)] public uint UiCategoryIconId;
     }

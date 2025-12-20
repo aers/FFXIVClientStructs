@@ -48,6 +48,12 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? FF CD BA")]
     public partial void lua_pushvalue(int idx);
 
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 33 F6 EB ?? 49 8B D6")]
+    public partial void lua_pushnumber(double n);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 63 47 ?? 48 8B CB"), GenerateStringOverloads]
+    public partial void lua_pushstring(CStringPointer s);
+
     [MemberFunction("E8 ?? ?? ?? ?? 4D 8B 06 41 8B D7")]
     public partial void lua_pushcclosure(delegate* unmanaged<lua_State*, int> fn, int n);
 
@@ -72,6 +78,9 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? 3B C3 74 0D")]
     public partial LuaType lua_type(int idx);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 85 C0 74 ?? 83 CA"), GenerateStringOverloads]
+    public partial int lua_getinfo(CStringPointer what, lua_Debug* ar);
+
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B D3")]
     public partial TValue* index2adr(int idx);
 
@@ -87,8 +96,14 @@ public unsafe partial struct lua_State {
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 26 33 D2")]
     public partial int lua_getmetatable(int idx);
 
+    [MemberFunction("E8 ?? ?? ?? ?? EB ?? 4C 8B CF 4C 8B C6 49 8B D6")]
+    public partial int lua_gettable(int idx);
+
     [MemberFunction("E8 ?? ?? ?? ?? FF C7 3B FE 7E")]
     public partial void lua_call(int nargs, int nresults);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CB FF D0 48 8B 5C 24")]
+    public partial delegate* unmanaged<lua_State*, int> lua_tocfunction(int index);
 
     public void lua_setglobal(string s) {
         lua_setfield(-10002, s);

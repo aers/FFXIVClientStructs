@@ -13,36 +13,38 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentMiragePrismPrismSetConvert {
     [FieldOffset(0x28)] public AgentData* Data;
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 43 28 C6 40 02 0B")]
+    [MemberFunction("40 53 41 55 48 81 EC ?? ?? ?? ?? 0F B7 84 24")]
     public partial void Open(uint itemId, InventoryType inventoryType, int slot, int openerAddonId, bool enableStoring);
 
     // OpenPreview in data.yml
     public void Open(uint itemId) => Open(itemId, InventoryType.Invalid, 0, 0, false);
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x18C0)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x1940)]
     public partial struct AgentData {
-        [FieldOffset(0x14)] public int ContextMenuItemIndex;
+        [FieldOffset(0x18)] public int ContextMenuItemIndex;
 
-        [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray5<ItemSet> _itemSets;
-        [FieldOffset(0x288)] public uint NumItemsInSet;
-        [FieldOffset(0x28C), FixedSizeArray] internal FixedSizeArray5<ItemSetItem> _items;
-        [FieldOffset(0x380)] internal Utf8String Unk380;
-        [FieldOffset(0x3F8)] internal Utf8String Unk3F8;
+        [FieldOffset(0x40), FixedSizeArray] internal FixedSizeArray5<ItemSet> _itemSets;
+        [FieldOffset(0x2C0)] public uint NumItemsInSet;
+        [FieldOffset(0x2C4), FixedSizeArray] internal FixedSizeArray5<ItemSetItem> _items;
 
-        [StructLayout(LayoutKind.Explicit, Size = 0x1C)]
-        public struct ItemSetItem {
-            [FieldOffset(0x00)] public uint ItemId;
-            [FieldOffset(0x04)] public uint IconId;
-            [FieldOffset(0x08)] public InventoryType InventoryType;
-            [FieldOffset(0x10)] public uint Slot;
-        }
-
-        [StructLayout(LayoutKind.Explicit, Size = 0x78)]
+        [StructLayout(LayoutKind.Explicit, Size = 0x80)]
         public struct ItemSet {
             [FieldOffset(0x00)] public uint ItemId;
             [FieldOffset(0x04)] public uint IconId;
-            [FieldOffset(0x08)] public Utf8String Name;
+
+            [FieldOffset(0x10)] public Utf8String Name;
+        }
+
+        [StructLayout(LayoutKind.Explicit, Size = 0x24)]
+        public struct ItemSetItem {
+            [FieldOffset(0x00)] public uint ItemId;
+            [FieldOffset(0x04)] public uint IconId;
+            [FieldOffset(0x08)] private uint SlotIndex; // probably? seems to match MainHand, OffHand, Head, Body etc.
+
+            [FieldOffset(0x0C)] public InventoryType InventoryType;
+
+            [FieldOffset(0x14)] public uint Slot;
         }
     }
 }

@@ -6,19 +6,19 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 //   Component::GUI::AtkModuleInterface::AtkEventInterface
 [GenerateInterop]
 [Inherits<AtkEventInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x6A0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x6E0)]
 public unsafe partial struct Loot {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 44 24 60", 3)]
     public static partial Loot* Instance();
 
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray16<LootItem> _items;
 
-    [FieldOffset(0x410)] public int SelectedIndex;
-    [FieldOffset(0x418)] public uint UnkObjectId;
-    [FieldOffset(0x678)] public uint UnkObjectId2;
+    [FieldOffset(0x450)] public int SelectedIndex;
+    [FieldOffset(0x458)] private uint UnkObjectId;
+    [FieldOffset(0x6B8)] private uint UnkObjectId2;
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
+[StructLayout(LayoutKind.Explicit, Size = 0x44)]
 public struct LootItem {
     [FieldOffset(0x00)] public uint ChestObjectId;
     [FieldOffset(0x04)] public uint ChestItemIndex; // This loot item's index in the chest it came from

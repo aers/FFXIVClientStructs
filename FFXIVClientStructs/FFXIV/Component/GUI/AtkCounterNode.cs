@@ -10,17 +10,17 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // type 5
 [GenerateInterop]
 [Inherits<AtkResNode>]
-[StructLayout(LayoutKind.Explicit, Size = 0x130)]
+[StructLayout(LayoutKind.Explicit, Size = 0x140)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 270])]
 public unsafe partial struct AtkCounterNode : ICreatable {
-    [FieldOffset(0xB0)] public AtkUldPartsList* PartsList;
-    [FieldOffset(0xB8)] public uint PartId;
-    [FieldOffset(0xBC)] public byte NumberWidth;
-    [FieldOffset(0xBD)] public byte CommaWidth;
-    [FieldOffset(0xBE)] public byte SpaceWidth;
-    [FieldOffset(0xC0)] public ushort TextAlign;
-    [FieldOffset(0xC4)] public float CounterWidth;
-    [FieldOffset(0xC8)] public Utf8String NodeText;
+    [FieldOffset(0xC0)] public AtkUldPartsList* PartsList;
+    [FieldOffset(0xC8)] public uint PartId;
+    [FieldOffset(0xCC)] public byte NumberWidth;
+    [FieldOffset(0xCD)] public byte CommaWidth;
+    [FieldOffset(0xCE)] public byte SpaceWidth;
+    [FieldOffset(0xD0)] public ushort TextAlign;
+    [FieldOffset(0xD4)] public float CounterWidth;
+    [FieldOffset(0xD8)] public Utf8String NodeText;
 
     // 7.0 inlines this ctor
     public void Ctor() {

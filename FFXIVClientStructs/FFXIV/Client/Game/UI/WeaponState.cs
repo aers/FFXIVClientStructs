@@ -70,7 +70,7 @@ public partial struct WeaponState {
     /// <param name="newState">The new unsheathed state (true = unsheathed, false = sheathed).</param>
     /// <param name="sendPacket">Whether to send a network update.</param>
     /// <param name="isInstant">Whether the change should occur instantly.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? F6 44 24 ?? ?? 75")]
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 47 ?? 3C ?? 77")]
     public partial bool SetUnsheathed(bool newState, bool sendPacket, bool isInstant);
 
     /// <summary>
@@ -103,7 +103,6 @@ public partial struct AutoAttackState {
 
     /// <summary>
     /// Handles actor control updates related to AutoAttack state.
-    /// Note: Internally accesses LocalPlayer at offset 0x9a0 in version 7.0 (previously 0x9b0).
     /// </summary>
     /// <param name="newState">The new state value.</param>
     /// [MemberFunction("88 11 80 FA")] shorter but risky

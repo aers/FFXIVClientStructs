@@ -8,10 +8,10 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 /// Collision scene supports two ways to filter colliders - layers and material masks.
 ///
 /// Each collider, when constructed, is provided a layer mask. Collider is ignored during raycasts if raycast request layer mask AND collider layer mask == 0.
-/// Note that individual collider raycast operations are inconsistent in how they handle zero layer mask in raycast request:
+/// Individual collider raycast operations are inconsistent in how they handle zero layer mask in raycast request:
 /// - primitive shape (non-mesh) colliders skip layer check in that case (so 0 is equivalent to 'all 1s' mask, meaning no colliders are rejected by layer check)
 /// - mesh colliders do a normal check, meaning that all mesh colliders are rejected by a layer check
-/// Note that some colliders provide functions to perform raycast without layer check.
+/// Some colliders provide functions to perform raycast without layer check.
 ///
 /// Each collider also has a material value (0x7000 by default on construction). When doing raycasts with material filtering, you supply a mask and a value.
 /// For primitive shape (non-mesh) colliders, the filtering is simple:
@@ -46,7 +46,7 @@ public unsafe partial struct BGCollisionModule {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 41 0F B6 D6")]
     public partial bool RaycastMaterialFilter(RaycastHit* hitInfo, Vector3* origin, Vector3* direction, float maxDistance, int layerMask, int* flags);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 88 03 32 D2")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B 45 E0 0F B6 55 30")]
     public partial bool SweepSphereMaterialFilter(RaycastHit* hitInfo, Vector3* origin, Vector3* direction, float maxDistance, int layerMask, int* flags);
 
     public static bool RaycastMaterialFilter(Vector3 origin, Vector3 direction, out RaycastHit hitInfo, float maxDistance = 1000000f) {
@@ -100,7 +100,7 @@ public unsafe partial struct RaycastHit {
     [FieldOffset(0x40)] public ulong Material; // see notes on collider materials
 
     [FieldOffset(0x48)] public float Distance;
-    [FieldOffset(0x50)] public Collider* Object; // note: it's actually always a Collider*
+    [FieldOffset(0x50)] public Collider* Object; // it's always a Collider*
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]

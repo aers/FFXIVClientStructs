@@ -81,10 +81,10 @@ public partial struct CharaCardData {
         [FieldOffset(0x39), FixedSizeArray] internal FixedSizeArray3<byte> _activeHoursWeekends;
         [FieldOffset(0x3C), FixedSizeArray] internal FixedSizeArray6<byte> _playStyles;
         [FieldOffset(0x42)] public byte Flags; // &1 == WasResetDueToFantasia; &2 == Visible to No One
-        [FieldOffset(0x43)] public byte Unk43;
+        [FieldOffset(0x43)] private byte Unk43;
         [FieldOffset(0x44)] public byte PrivacyFlags; // &1 == Friends Only
         [FieldOffset(0x45), FixedSizeArray] internal FixedSizeArray12<byte> _itemStain1Ids;
-        [FieldOffset(0x51)] public byte Unk51;
+        [FieldOffset(0x51)] private byte Unk51;
     }
 
     [GenerateInterop]

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x60)]
 public unsafe partial struct JobGaugeManager {
-    [StaticAddress("48 8B 3D ?? ?? ?? ?? 33 ED", 3)]
+    [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? B8 ?? ?? ?? ?? 66 3B F0", 3)]
     public static partial JobGaugeManager* Instance();
 
     [FieldOffset(0x00)] public JobGauge* CurrentGauge;

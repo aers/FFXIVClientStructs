@@ -14,14 +14,14 @@ public unsafe partial struct GroupPoseModule {
         return uiModule == null ? null : uiModule->GetGroupPoseModule();
     }
 
-    // [FieldOffset(0x48)] public byte Unk40;
-    // [FieldOffset(0x49)] public byte Unk41;
+    // [FieldOffset(0x48)] private byte Unk40;
+    // [FieldOffset(0x49)] private byte Unk41;
 
-    // [FieldOffset(0x4C)] public float Unk44;
-    // [FieldOffset(0x50)] public float Unk48;
+    // [FieldOffset(0x4C)] private float Unk44;
+    // [FieldOffset(0x50)] private float Unk48;
     [FieldOffset(0x54)] public float CameraAngle; // 0.5 to -0.5
-    // [FieldOffset(0x58)] public float Unk50;
-    // [FieldOffset(0x5C)] public float Unk54;
+    // [FieldOffset(0x58)] private float Unk50;
+    // [FieldOffset(0x5C)] private float Unk54;
 
     [FieldOffset(0x68)] public float CameraRotation; // -PI to PI
 

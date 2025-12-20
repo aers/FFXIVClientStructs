@@ -14,7 +14,7 @@ public unsafe partial struct AtkTexture : ICreatable {
     [FieldOffset(0x10)] public TextureType TextureType;
     [FieldOffset(0x11)] private bool CachedIsTextureReady; // Use IsTextureReady() to get this
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 45 33 ED")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 4C 89 AF")]
     public partial void Ctor();
 
     [MemberFunction("E9 ?? ?? ?? ?? 0F BA F0 14")]
@@ -23,7 +23,7 @@ public unsafe partial struct AtkTexture : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 85 C0 75 2F 48 8B 83"), GenerateStringOverloads]
     public partial int LoadTexture(CStringPointer path, int scale = 1);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 66 03 46 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 66 41 03 46")]
     public partial uint GetTextureWidth();
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 C6 8B C0")]

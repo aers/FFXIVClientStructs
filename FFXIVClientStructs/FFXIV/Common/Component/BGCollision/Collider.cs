@@ -16,7 +16,7 @@ public enum ColliderType : int {
 // base class for individual objects in the collision scene
 [GenerateInterop(isInherited: true)]
 [Inherits<Node>, Inherits<QuadtreeNode>(0x20)]
-[StructLayout(LayoutKind.Explicit, Size = 0xA0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xA8)]
 public unsafe partial struct Collider {
     //[FieldOffset(0x40)] public uint u40;
     [FieldOffset(0x44)] public uint NumRefs; // remove from scene actually decrements the refcount, collider is removed later in update; sometimes (e.g. while async load is in progress) there could be extra refs
@@ -31,24 +31,25 @@ public unsafe partial struct Collider {
     [FieldOffset(0x80)] public float LastTranslationDeltaY;
     [FieldOffset(0x84)] public byte VisibilityFlags; // 0x1 - active for raycasts/containing checks (if not set, collider is ignored during raycasts), 0x2 - active for some global visit function?, rest uninitialized
     //[FieldOffset(0x88)] public UpdateListeners UpdateListeners; // size 0x18 - a typical linked list of callback objects
+    [FieldOffset(0xA0)] public bool Dirty;
+
+    /// <summary>
+    /// Checked every update. Base implementation just checks NumRefs for zero, but derived classes that do async loads also check that load is not in progress.
+    /// </summary>
+    [VirtualFunction(1)]
+    public partial bool WantUnload();
 
     /// <summary>
     /// No-op for all derived classes except Mesh.
     /// </summary>
-    [VirtualFunction(1)]
+    [VirtualFunction(2)]
     public partial void Load(byte* path);
 
     /// <summary>
     /// No-op for all derived classes except Mesh. Called by Scene's update when WantUnload returns true before deleting the object.
     /// </summary>
-    [VirtualFunction(2)]
-    public partial void Unload();
-
-    /// <summary>
-    /// Checked every update. Base implementation just checks NumRefs for zero, but derived classes that do async loads also check that load is not in progress.
-    /// </summary>
     [VirtualFunction(3)]
-    public partial bool WantUnload();
+    public partial void Unload();
 
     [VirtualFunction(4)]
     public partial void GetMaterial(ulong* id, ulong* mask);
@@ -124,20 +125,20 @@ public unsafe partial struct Collider {
 /// </summary>
 [GenerateInterop]
 [Inherits<Collider>]
-[StructLayout(LayoutKind.Explicit, Size = 0x1E0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1E8)]
 public unsafe partial struct ColliderStreamed {
-    //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
-    [FieldOffset(0x0A8), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _pathBase; // root directory of the streamed meshes
-    [FieldOffset(0x1A8)] public Resource* Resource;
-    [FieldOffset(0x1B0)] public int NumMeshesLoading;
-    [FieldOffset(0x1B4)] public bool Loaded;
-    [FieldOffset(0x1B8)] public float StreamedMinX;
-    [FieldOffset(0x1BC)] public float StreamedMinZ;
-    [FieldOffset(0x1C0)] public float StreamedMaxX;
-    [FieldOffset(0x1C4)] public float StreamedMaxZ;
-    [FieldOffset(0x1C8)] public FileHeader* Header; // raw file data
-    [FieldOffset(0x1D0)] public FileEntry* Entries; // raw file data, count == Header->NumMeshes
-    [FieldOffset(0x1D8)] public Element* Elements; // count == Header->NumMeshes
+    //0xA8: base class Common::Component::Excel::ExcelResourceListener, size=8
+    [FieldOffset(0x0B0), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _pathBase; // root directory of the streamed meshes
+    [FieldOffset(0x1B0)] public Resource* Resource;
+    [FieldOffset(0x1B8)] public int NumMeshesLoading;
+    [FieldOffset(0x1BC)] public bool Loaded;
+    [FieldOffset(0x1C0)] public float StreamedMinX;
+    [FieldOffset(0x1C4)] public float StreamedMinZ;
+    [FieldOffset(0x1C8)] public float StreamedMaxX;
+    [FieldOffset(0x1CC)] public float StreamedMaxZ;
+    [FieldOffset(0x1D0)] public FileHeader* Header; // raw file data
+    [FieldOffset(0x1D8)] public FileEntry* Entries; // raw file data, count == Header->NumMeshes
+    [FieldOffset(0x1E0)] public Element* Elements; // count == Header->NumMeshes
 
     // header is followed by NumMeshes entries
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
@@ -150,7 +151,10 @@ public unsafe partial struct ColliderStreamed {
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public unsafe struct FileEntry {
         [FieldOffset(0x00)] public int MeshId;
-        [FieldOffset(0x04)] public AABB Bounds; // note: y bounds are ignored when reading the file
+        /// <remarks>
+        /// y bounds are ignored when reading the file
+        /// </remarks>
+        [FieldOffset(0x04)] public AABB Bounds;
         //0x1C: padding?
     }
 
@@ -164,7 +168,7 @@ public unsafe partial struct ColliderStreamed {
         [FieldOffset(0x1C)] public float MaxZ;
     }
 
-    // note: it has a bunch of extra no-op virtual funcs - I suspect these are various raycast flavours that were at some point removed from base class, but had empty overrides left in derived classes
+    // Remark: it has a bunch of extra no-op virtual funcs - I suspect these are various raycast flavours that were at some point removed from base class, but had empty overrides left in derived classes
 }
 
 /// <summary>
@@ -172,27 +176,26 @@ public unsafe partial struct ColliderStreamed {
 /// </summary>
 [GenerateInterop]
 [Inherits<Collider>]
-[StructLayout(LayoutKind.Explicit, Size = 0x198)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A0)]
 public unsafe partial struct ColliderMesh {
-    //0xA0: base class Common::Component::Excel::ExcelResourceListener, size=8
-    [FieldOffset(0x0A8)] public Resource* Resource;
-    [FieldOffset(0x0B0)] public byte* MemoryData; // if non-null, the mesh data is built programmatically in memory rather than being loaded from file
-    [FieldOffset(0x0B8)] public int TotalPrimitives;
-    [FieldOffset(0x0BC)] public bool Dirty; // set when object is moved, on next update matrices will be recalculated
-    [FieldOffset(0x0BD)] public bool MeshIsSimple; // if true, Mesh is a MeshSimple rather than MeshPCB - this doesn't seem to be ever used in game
-    [FieldOffset(0x0BE)] public bool Loaded;
-    [FieldOffset(0x0C0)] public float InvScaleX;
-    [FieldOffset(0x0C8)] public Mesh* Mesh;
-    [FieldOffset(0x0D0)] public int TotalChildren;
-    [FieldOffset(0x0D4)] public Vector3 Translation;
-    [FieldOffset(0x0E0)] public Vector3 Rotation;
-    [FieldOffset(0x0EC)] public Vector3 Scale;
-    [FieldOffset(0x0F8)] public Vector3 TranslationPrev;
-    [FieldOffset(0x104)] public Vector3 RotationPrev;
-    [FieldOffset(0x110)] public Matrix4x3 World;
-    [FieldOffset(0x140)] public Matrix4x3 InvWorld;
-    [FieldOffset(0x170)] public Vector4 BoundingSphere;
-    [FieldOffset(0x180)] public AABB WorldBoundingBox;
+    //0xA8: base class Common::Component::Excel::ExcelResourceListener, size=8
+    [FieldOffset(0x0B0)] public Resource* Resource;
+    [FieldOffset(0x0B8)] public byte* MemoryData; // if non-null, the mesh data is built programmatically in memory rather than being loaded from file
+    [FieldOffset(0x0C0)] public int TotalPrimitives;
+    [FieldOffset(0x0C4)] public bool MeshIsSimple; // if true, Mesh is a MeshSimple rather than MeshPCB - this doesn't seem to be ever used in game
+    [FieldOffset(0x0C5)] public bool Loaded;
+    [FieldOffset(0x0C8)] public float InvScaleX;
+    [FieldOffset(0x0D0)] public Mesh* Mesh;
+    [FieldOffset(0x0D8)] public int TotalChildren;
+    [FieldOffset(0x0DC)] public Vector3 Translation;
+    [FieldOffset(0x0E8)] public Vector3 Rotation;
+    [FieldOffset(0x0F4)] public Vector3 Scale;
+    [FieldOffset(0x100)] public Vector3 TranslationPrev;
+    [FieldOffset(0x10C)] public Vector3 RotationPrev;
+    [FieldOffset(0x118)] public Matrix4x3 World;
+    [FieldOffset(0x148)] public Matrix4x3 InvWorld;
+    [FieldOffset(0x178)] public Vector4 BoundingSphere;
+    [FieldOffset(0x188)] public AABB WorldBoundingBox;
 }
 
 /// <summary>
@@ -200,16 +203,15 @@ public unsafe partial struct ColliderMesh {
 /// </summary>
 [GenerateInterop]
 [Inherits<Collider>]
-[StructLayout(LayoutKind.Explicit, Size = 0x140)]
+[StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct ColliderBox {
-    [FieldOffset(0x0A0)] public Vector3 Translation;
-    [FieldOffset(0x0AC)] public Vector3 TranslationPrev;
-    [FieldOffset(0x0B8)] public Vector3 Rotation;
-    [FieldOffset(0x0C4)] public Vector3 RotationPrev;
-    [FieldOffset(0x0D0)] public Vector3 Scale;
-    [FieldOffset(0x0DC)] public Matrix4x3 World;
-    [FieldOffset(0x10C)] public Matrix4x3 InvWorld;
-    [FieldOffset(0x13C)] public bool Dirty;
+    [FieldOffset(0x0A8)] public Vector3 Translation;
+    [FieldOffset(0x0B4)] public Vector3 TranslationPrev;
+    [FieldOffset(0x0C0)] public Vector3 Rotation;
+    [FieldOffset(0x0CC)] public Vector3 RotationPrev;
+    [FieldOffset(0x0D8)] public Vector3 Scale;
+    [FieldOffset(0x0E4)] public Matrix4x3 World;
+    [FieldOffset(0x114)] public Matrix4x3 InvWorld;
 }
 
 /// <summary>
@@ -219,15 +221,14 @@ public unsafe partial struct ColliderBox {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct ColliderCylinder {
-    [FieldOffset(0x0A0)] public Vector3 Translation;
-    [FieldOffset(0x0AC)] public Vector3 TranslationPrev;
-    [FieldOffset(0x0B8)] public Vector3 Rotation;
-    [FieldOffset(0x0C4)] public Vector3 RotationPrev;
-    [FieldOffset(0x0D0)] public Vector3 Scale; // z component is set equal to x component on update
-    [FieldOffset(0x0DC)] public float Radius; // same as x scale
-    [FieldOffset(0x0E0)] public Matrix4x3 World;
-    [FieldOffset(0x110)] public Matrix4x3 InvWorld;
-    [FieldOffset(0x140)] public bool Dirty;
+    [FieldOffset(0x0A8)] public Vector3 Translation;
+    [FieldOffset(0x0B4)] public Vector3 TranslationPrev;
+    [FieldOffset(0x0C0)] public Vector3 Rotation;
+    [FieldOffset(0x0CC)] public Vector3 RotationPrev;
+    [FieldOffset(0x0D8)] public Vector3 Scale; // z component is set equal to x component on update
+    [FieldOffset(0x0E4)] public float Radius; // same as x scale
+    [FieldOffset(0x0E8)] public Matrix4x3 World;
+    [FieldOffset(0x118)] public Matrix4x3 InvWorld;
 }
 
 /// <summary>
@@ -238,15 +239,14 @@ public unsafe partial struct ColliderCylinder {
 [Inherits<Collider>]
 [StructLayout(LayoutKind.Explicit, Size = 0x150)]
 public unsafe partial struct ColliderSphere {
-    [FieldOffset(0x0A0)] public bool Dirty;
-    [FieldOffset(0x0A4)] public Vector3 Translation;
-    [FieldOffset(0x0B0)] public Vector3 TranslationPrev;
-    [FieldOffset(0x0BC)] public Vector3 Rotation;
-    [FieldOffset(0x0C8)] public Vector3 RotationPrev;
-    [FieldOffset(0x0D4)] public Vector3 Scale; // parts of code assume this is uniform and assume x component is radius
-    [FieldOffset(0x0E0)] public Vector3 ScalePrev;
-    [FieldOffset(0x0EC)] public Matrix4x3 World;
-    [FieldOffset(0x11C)] public Matrix4x3 InvWorld;
+    [FieldOffset(0x0A8)] public Vector3 Translation;
+    [FieldOffset(0x0B4)] public Vector3 TranslationPrev;
+    [FieldOffset(0x0C0)] public Vector3 Rotation;
+    [FieldOffset(0x0CC)] public Vector3 RotationPrev;
+    [FieldOffset(0x0D8)] public Vector3 Scale; // parts of code assume this is uniform and assume x component is radius
+    [FieldOffset(0x0E4)] public Vector3 ScalePrev;
+    [FieldOffset(0x0F0)] public Matrix4x3 World;
+    [FieldOffset(0x120)] public Matrix4x3 InvWorld;
 }
 
 /// <summary>
@@ -255,15 +255,14 @@ public unsafe partial struct ColliderSphere {
 /// </summary>
 [GenerateInterop]
 [Inherits<Collider>]
-[StructLayout(LayoutKind.Explicit, Size = 0x140)]
+[StructLayout(LayoutKind.Explicit, Size = 0x148)]
 public unsafe partial struct ColliderPlane {
-    [FieldOffset(0x0A0)] public Vector3 Translation;
-    [FieldOffset(0x0AC)] public Vector3 TranslationPrev;
-    [FieldOffset(0x0B8)] public Vector3 Rotation;
-    [FieldOffset(0x0C4)] public Vector3 RotationPrev;
-    [FieldOffset(0x0D0)] public Vector3 Scale;
-    [FieldOffset(0x0DC)] public Matrix4x3 World;
-    [FieldOffset(0x10C)] public Matrix4x3 InvWorld;
-    [FieldOffset(0x13C)] public bool Dirty;
-    [FieldOffset(0x13D)] public bool TwoSided;
+    [FieldOffset(0x0A8)] public Vector3 Translation;
+    [FieldOffset(0x0B4)] public Vector3 TranslationPrev;
+    [FieldOffset(0x0C0)] public Vector3 Rotation;
+    [FieldOffset(0x0CC)] public Vector3 RotationPrev;
+    [FieldOffset(0x0D8)] public Vector3 Scale;
+    [FieldOffset(0x0E4)] public Matrix4x3 World;
+    [FieldOffset(0x114)] public Matrix4x3 InvWorld;
+    [FieldOffset(0x144)] public bool TwoSided;
 }

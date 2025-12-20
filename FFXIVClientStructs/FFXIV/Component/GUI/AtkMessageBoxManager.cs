@@ -13,9 +13,9 @@ public unsafe partial struct AtkMessageBoxManager {
     [FieldOffset(0x70)] public CStringPointer CancelText;
     [FieldOffset(0x78)] public CStringPointer YesText;
     [FieldOffset(0x80)] public CStringPointer NoText;
-    [FieldOffset(0x88)] public byte Unk88;
-    [FieldOffset(0x89)] public byte Unk89;
-    [FieldOffset(0x8A)] public byte Unk8A;
+    [FieldOffset(0x88)] private byte Unk88;
+    [FieldOffset(0x89)] private byte Unk89;
+    [FieldOffset(0x8A)] private byte Unk8A;
 
     // Component::GUI::AtkMessageBoxManager::AtkMessageBoxEvent
     [GenerateInterop(isInherited: true)]

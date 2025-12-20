@@ -12,6 +12,7 @@ public unsafe partial struct AtkEventData {
     [FieldOffset(0x00)] public LinkData* LinkData;
     [FieldOffset(0x00)] public AtkAddonControlData AddonControlData;
     [FieldOffset(0x00)] public GUI.AtkInputData* RawInputData;
+    [FieldOffset(0x00)] public AtkTimelineData TimelineData;
 }
 
 public partial struct AtkEventData {
@@ -57,6 +58,7 @@ public partial struct AtkEventData {
     public unsafe struct AtkFocusData {
         [FieldOffset(0x00)] public AtkResNode* ResNode;
         [FieldOffset(0x08)] public AtkCollisionNode* CollisionNode;
+        [FieldOffset(0x10)] public int FocusParam;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
@@ -92,4 +94,11 @@ public partial struct AtkEventData {
     public unsafe struct AtkAddonControlData {
         [FieldOffset(0x00)] public AtkUnitBase* UnitBase;
     }
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public struct AtkTimelineData {
+        [FieldOffset(0x00)] public ushort LabelId;
+        [FieldOffset(0x02)] public AtkTimelineJumpBehavior JumpBehavior;
+    }
+
 }

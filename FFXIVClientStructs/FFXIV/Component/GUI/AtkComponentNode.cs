@@ -10,10 +10,10 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // holds an AtkComponentBase derived class
 [GenerateInterop]
 [Inherits<AtkResNode>]
-[StructLayout(LayoutKind.Explicit, Size = 0xB8)]
+[StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 457])]
 public unsafe partial struct AtkComponentNode : ICreatable {
-    [FieldOffset(0xB0)] public AtkComponentBase* Component;
+    [FieldOffset(0xC0)] public AtkComponentBase* Component;
 
     // 7.0 inlines this ctor
     public void Ctor() {

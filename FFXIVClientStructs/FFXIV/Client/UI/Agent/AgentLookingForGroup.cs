@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.LookingForGroup)]
 [GenerateInterop]
 [Inherits<AgentInterface>, Inherits<TextChecker.ExecNonMacroFunc>]
-[StructLayout(LayoutKind.Explicit, Size = 0x3210)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3288)]
 public unsafe partial struct AgentLookingForGroup {
     [FieldOffset(0x38)] public ContentRoulette ContentRoulette;
     [FieldOffset(0x48)] public PartyContent PartyContent;
@@ -25,28 +25,26 @@ public unsafe partial struct AgentLookingForGroup {
     [FieldOffset(0x14E4)] public ushort AvgItemLv;
     [FieldOffset(0x14E6)] public byte AvgItemLvEnabled;
 
-    [FieldOffset(0x14F0), FixedSizeArray] internal FixedSizeArray29<TreasureMapDetail> _treasureMaps;
+    [FieldOffset(0x14F0), FixedSizeArray] internal FixedSizeArray32<TreasureMapDetail> _treasureMaps;
 
-    // 7.1 - 0x78 more bytes here
+    [FieldOffset(0x2408)] public RecruitmentSub StoredRecruitmentInfo; // Holds infos for LookingForGroupCondition
 
-    [FieldOffset(0x2390)] public RecruitmentSub StoredRecruitmentInfo; // Holds infos for LookingForGroupCondition
+    [FieldOffset(0x2850)] public Detailed LastViewedListing; // Holds infos about the last viewed LookingForGroupDetailed
 
-    [FieldOffset(0x27D8)] public Detailed LastViewedListing; // Holds infos about the last viewed LookingForGroupDetailed
+    [FieldOffset(0x2CC8)] public Utf8String LastLeader;
+    [FieldOffset(0x2D30)] public Utf8String LastComment;
+    [FieldOffset(0x2DA8)] private Utf8String UnkString;
 
-    [FieldOffset(0x2C50)] public Utf8String LastLeader;
-    [FieldOffset(0x2CB8)] public Utf8String LastComment;
-    [FieldOffset(0x2D30)] public Utf8String UnkString;
+    [FieldOffset(0x31A0)] public uint OwnListingId;
 
-    [FieldOffset(0x3128)] public uint OwnListingId;
+    [FieldOffset(0x31D0)] public ulong ListingContentId; // Only populated while a Detailed listing is opened
+    [FieldOffset(0x31D8)] public uint ListingAccountId; // Only populated while a Detailed listing is opened
 
-    [FieldOffset(0x3158)] public ulong ListingContentId; // Only populated while a Detailed listing is opened
-    [FieldOffset(0x3160)] public uint ListingAccountId; // Only populated while a Detailed listing is opened
+    [FieldOffset(0x3262)] public ushort NumberOfListingsDisplayed;
 
-    [FieldOffset(0x31EA)] public ushort NumberOfListingsDisplayed;
-
-    [FieldOffset(0x31F1)] public byte SearchAreaTab; // 0 Data Center, 1 World, 2 Private
-    [FieldOffset(0x31F3)] public byte CategoryTab; // 0 All - 16 Other
-    [FieldOffset(0x31F4)] public byte GroupTypeTab; // Normal, Alliance, Custom Match
+    [FieldOffset(0x3269)] public byte SearchAreaTab; // 0 Data Center, 1 World, 2 Private
+    [FieldOffset(0x326B)] public byte CategoryTab; // 0 All - 16 Other
+    [FieldOffset(0x326C)] public byte GroupTypeTab; // Normal, Alliance, Custom Match
 
     [MemberFunction("48 89 5C 24 ?? 57 48 83 EC ?? 48 8B FA 48 8B D9 E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 85 C9")]
     public partial bool OpenListing(ulong listingId);
@@ -62,7 +60,7 @@ public unsafe partial struct AgentLookingForGroup {
         [FieldOffset(0x00)] public Utf8String String;
         [FieldOffset(0x68)] public uint DisplayOrder;
         [FieldOffset(0x6C)] public uint EventItemId;
-        [FieldOffset(0x70)] public byte TreasureHuntRank; // unk
+        [FieldOffset(0x70)] private byte TreasureHuntRank; // unk
     }
 
     [GenerateInterop]

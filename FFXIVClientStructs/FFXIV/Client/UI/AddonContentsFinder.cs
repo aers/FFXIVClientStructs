@@ -38,7 +38,7 @@ public unsafe partial struct AddonContentsFinder {
     [FieldOffset(0x370)] public AtkComponentButton* DutyTypeButton; // "Regular Duty" / "High End duty" toggle button
 
     [FieldOffset(0x378)] public AtkTextNode* JobNameTextNode;
-    [FieldOffset(0x380)] public AtkTextNode* UnkTextNode;
+    [FieldOffset(0x380)] private AtkTextNode* UnkTextNode;
     [FieldOffset(0x388)] public AtkTextNode* LevelTextNode;
     [FieldOffset(0x390)] public AtkTextNode* ItemLevelTextNode;
     [FieldOffset(0x398)] public AtkTextNode* RoleTextNode;

@@ -17,8 +17,8 @@ public unsafe partial struct AtkUIColorHolder {
     public struct UIColor {
         [FieldOffset(0x0)] public uint RowId;
         // the names of these fields are based on the column names in EXDSchema
-        [FieldOffset(0x4)] public uint Unknown0; // this field is used by GetColor() when useThemeColor is false or ActiveColorThemeType == 0
-        [FieldOffset(0x8)] public uint Unknown1; // this field is used by GetColor() when useThemeColor is true and ActiveColorThemeType != 0
+        [FieldOffset(0x4)] private uint Unknown0; // this field is used by GetColor() when useThemeColor is false or ActiveColorThemeType == 0
+        [FieldOffset(0x8)] private uint Unknown1; // this field is used by GetColor() when useThemeColor is true and ActiveColorThemeType != 0
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]

@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
@@ -23,7 +22,14 @@ public unsafe partial struct AgentDeepDungeonMapData {
     [FieldOffset(0x33)] public byte DeepDungeonId; // 1 POTD 2 HOH, see DeepDungeon sheet
     [FieldOffset(0x35)] public bool MapLocked;
 
-    [FieldOffset(0x40)] private Utf8String UnkString0;
+    [FieldOffset(0x38)] public AgentDeepDungeonMapEffectData EffectDataCurrent;
+    [FieldOffset(0xA8)] public AgentDeepDungeonMapEffectData EffectDataNext;
+}
 
-    [FieldOffset(0xB0)] private Utf8String UnkString1;
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x70)]
+public unsafe partial struct AgentDeepDungeonMapEffectData {
+    [FieldOffset(0x0)] public int EffectId;
+    [FieldOffset(0x4)] public uint EffectStatusIcon;
+    [FieldOffset(0x8)] public Utf8String EffectName;
 }

@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Agent(AgentId.Salvage)]
 [GenerateInterop]
 [Inherits<AgentInterface>]
-[StructLayout(LayoutKind.Explicit, Size = 0x438)]
+[StructLayout(LayoutKind.Explicit, Size = 0x470)]
 public unsafe partial struct AgentSalvage {
 
     [FieldOffset(0x30)] public SalvageItemCategory SelectedCategory;
@@ -24,26 +24,24 @@ public unsafe partial struct AgentSalvage {
     [FieldOffset(0x318)] public Utf8String TextCulinarian;
 
     [FieldOffset(0x380)] public uint ItemCount;
-    // [FieldOffset(0x384)] public uint Unknown1; // 0x79 before desynth
-    // [FieldOffset(0x38C)] public uint Unknown2; // 0x79 after desynth
+    // [FieldOffset(0x384)] private uint Unknown1; // 0x79 before desynth
+    // [FieldOffset(0x38C)] private uint Unknown2; // 0x79 after desynth
 
-    [FieldOffset(0x390)] public InventoryItem* DesynthItemSlot;
-    [FieldOffset(0x398)] public SalvageResult DesynthItem;
+    [FieldOffset(0x390)] public InventoryItem DesynthItemSlot;
+    [FieldOffset(0x3D8)] public Utf8String TextQuantity;
+    // [FieldOffset(0x440)] private byte Unknown3; // 0xC8
+    [FieldOffset(0x441)] public bool IsSalvageResultAddonOpen;
 
-    [FieldOffset(0x3A0)] public Utf8String TextQuantity;
-    // [FieldOffset(0x408)] public byte Unknown3; // 0xC8
-    [FieldOffset(0x409)] public bool IsSalvageResultAddonOpen;
+    [FieldOffset(0x444)] public uint DesynthItemId;
+    [FieldOffset(0x448), FixedSizeArray] internal FixedSizeArray3<SalvageResult> _desynthResults;
 
-    [FieldOffset(0x40C)] public uint DesynthItemId;
-    [FieldOffset(0x410), FixedSizeArray] internal FixedSizeArray3<SalvageResult> _desynthResults;
-
-    [MemberFunction("E8 ?? ?? ?? ?? EB 2A 48 8B 06")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 2A 49 8B 07")]
     public partial void ItemListRefresh(bool isSalvageResultAddonOpen);
 
     [MemberFunction("E8 ?? ?? ?? ?? 41 81 BE ?? ?? ?? ?? ?? ?? ?? ?? 7D")]
     public partial void ItemListAdd(bool meetsLevelRequirement, InventoryType containerId, int containerSlot, uint itemId, [CExporterExcel("Item")] void* exdRow, uint quantity);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 96 ?? ?? ?? ?? E9")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB 43 48 8D 4B 10")]
     public partial void SalvageItem(InventoryItem* item, int addonId = 0, byte a4 = 0); // addonId = addon to go back to once done
 
     public enum SalvageItemCategory {

@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 129 * 8)]
 public unsafe partial struct CrossWorldLinkShellStringArray {
@@ -17,7 +16,7 @@ public unsafe partial struct CrossWorldLinkShellStringArray {
 
     [FieldOffset(128 * 8)] public CStringPointer MemberCountText;
 
-    [CExporterIgnore]
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 2 * 8)]
     public partial struct CrossWorldSyncshellMemberStringArray {
         [FieldOffset(0 * 8), FixedSizeArray, CExporterIgnore] internal FixedSizeArray2<CStringPointer> _data;

@@ -31,16 +31,16 @@ public unsafe partial struct TimelineContainer {
     [FieldOffset(0x330 + 0x04)] public uint BannerTimelineAdditionalData;
     [FieldOffset(0x330 + 0x08)] public int BannerTimelineIcon;
     [FieldOffset(0x330 + 0x0C)] public ushort BannerTimelineUnlockCondition;
-    [FieldOffset(0x330 + 0x0E)] public ushort BannerTimelineUnknown_70_1;
-    [FieldOffset(0x330 + 0x10)] public ushort BannerTimelineUnknown_70_2;
-    [FieldOffset(0x330 + 0x12)] public ushort BannerTimelineUnknown0;
+    [FieldOffset(0x330 + 0x0E)] private ushort BannerTimelineUnknown_70_1;
+    [FieldOffset(0x330 + 0x10)] private ushort BannerTimelineUnknown_70_2;
+    [FieldOffset(0x330 + 0x12)] private ushort BannerTimelineUnknown0;
     [FieldOffset(0x330 + 0x14)] public ushort BannerTimelineSortKey;
     [FieldOffset(0x330 + 0x16)] public byte BannerTimelineType;
     [FieldOffset(0x330 + 0x17)] public byte BannerTimelineAcceptClassJobCategory;
     [FieldOffset(0x330 + 0x18), CExporterExcelEnd] public byte BannerTimelineCategory;
 
-    [FieldOffset(0x348), Obsolete("This field hasn't been updated in several patches and is sharing an offset with BannerTimelineCategory. If you're using it, please PR an updated offset, otherwise it'll be removed.")] public byte Flags1;
-    [FieldOffset(0x349), Obsolete("This field hasn't been updated in several patches. If you're using it, please PR an updated offset, otherwise it'll be removed.")] public byte Flags2; // bit 2 makes it load the requested banner animation
+    [FieldOffset(0x348), Obsolete("This field hasn't been updated in several patches and is sharing an offset with BannerTimelineCategory. If you're using it, please PR an updated offset, otherwise it'll be removed.", true)] public byte Flags1;
+    [FieldOffset(0x349), Obsolete("This field hasn't been updated in several patches. If you're using it, please PR an updated offset, otherwise it'll be removed.", true)] public byte Flags2; // bit 2 makes it load the requested banner animation
 
     // 0x40 = WeaponDrawn
     [FieldOffset(0x34E)] public byte Flags3;
@@ -62,6 +62,6 @@ public unsafe partial struct TimelineContainer {
     [MemberFunction("40 53 48 83 EC 30 48 8B D9 0F 29 74 24 ?? 48 8B 49 08 E8 ?? ?? ?? ?? 0F 28 F0 0F 57 C9 0F 2F F1 0F 86 ?? ?? ?? ?? 48 8B 4B 08 48 8B 01 FF 50 10 83 F8 08 75 60 48 8B 4B 08 48 89 7C 24 ?? E8 ?? ?? ?? ?? 48 8B F8 48 85 C0 74 45 66 83 B8 ?? ?? ?? ?? ?? 74 3B 48 8D 88 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 74 2B 0F B7 8F ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 1A 0F B6 40 50 66 0F 6E C0 0F 5B C0 F3 0F 59 C6 0F 28 F0 F3 0F 5E 35 ?? ?? ?? ?? 48 8B 7C 24 ?? F6 83")]
     public partial bool CalculateAndApplyOverallSpeed(); // Calculates the current overall speed and applies it, returns true if the speed changed
 
-    [MemberFunction("E8 ?? ?? ?? ?? EB 48 48 8B 45 08")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 8F ?? ?? ?? ?? B2 12")]
     public partial void PlayActionTimeline(ushort introId, ushort loopId = 0, void* a4 = null);
 }

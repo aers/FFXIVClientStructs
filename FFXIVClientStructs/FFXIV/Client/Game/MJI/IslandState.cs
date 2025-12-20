@@ -92,9 +92,7 @@ public unsafe partial struct IslandState {
     /// </summary>
     [FieldOffset(0x89)] public bool PastureUnderCare; // ??
 
-    // Note: 0x78 to the game is treated as a single DWORD, but the actual values are only used in the context of
-    // LOWORD or HIWORD, so we'll split these fields.
-
+    // NB: To the game this is treated as a single DWORD, but the actual values are used in the context of LOWORD or HIWORD, so we'll split these fields.
     /// <summary>
     /// The current daily care fee paid to the Creature Comforter for the pasture.
     /// </summary>
@@ -147,7 +145,7 @@ public unsafe partial struct IslandState {
     /// A struct representing the current state of workshops present on the island. See the struct documentation
     /// for more information on how to access this data.
     ///
-    /// Note that this struct only provides mapping from a workshop ID to other data.
+    /// This struct only provides mapping from a workshop ID to other data.
     /// </summary>
     [FieldOffset(0xA8)] public MJIWorkshops Workshops;
 

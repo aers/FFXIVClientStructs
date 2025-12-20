@@ -62,7 +62,7 @@ public unsafe partial struct AtkStage {
     [MemberFunction("81 62 ?? ?? ?? ?? ?? 45 33 C0")]
     public partial void ReturnAtkEventToPool(AtkEvent* evt);
 
-    [MemberFunction("48 8B 41 38 48 8B 40 18")]
+    [MemberFunction("E8 ?? ?? ?? ?? 6B 94")]
     public partial NumberArrayData** GetNumberArrayData();
 
     public NumberArrayData* GetNumberArrayData(NumberArrayType type)
@@ -74,7 +74,7 @@ public unsafe partial struct AtkStage {
     public StringArrayData* GetStringArrayData(StringArrayType type)
         => GetStringArrayData()[(int)type];
 
-    [MemberFunction("48 8B 41 38 48 8B 40 48")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 48 ?? 48 89 4D")]
     public partial ExtendArrayData** GetExtendArrayData();
 
     public ExtendArrayData* GetExtendArrayData(ExtendArrayType type)
@@ -98,10 +98,20 @@ public unsafe partial struct AtkStage {
     [StructLayout(LayoutKind.Explicit, Size = 0x30)]
     public unsafe struct OperationGuideStruct {
         [FieldOffset(0x00)] public AtkStage* AtkStage;
-        [FieldOffset(0x08)] private AtkUnitBase* UnkUnitBase1;
-        [FieldOffset(0x10)] private AtkUnitBase* UnkUnitBase2;
+        /// <summary>
+        /// The addon the Operations Guide is currently attached to.
+        /// </summary>
+        [FieldOffset(0x08)] public AtkUnitBase* AttachedToAddon;
+        /// <summary>
+        /// The addon the Operations Guide is currently attached to.
+        /// <br/>Appears to be the same as AttachedToAddon.
+        /// </summary>
+        [FieldOffset(0x10)] public AtkUnitBase* AttachedToAddon2;
         [FieldOffset(0x18)] private byte Unk18;
-        [FieldOffset(0x19)] private byte Unk19;
+        /// <summary>
+        /// True if the OperationsGuide should refresh.
+        /// </summary>
+        [FieldOffset(0x19)] public bool RequestRefresh;
         [FieldOffset(0x1A)] private byte Unk1A;
         [FieldOffset(0x1B)] private byte Unk1B;
         [FieldOffset(0x1C)] private short X;

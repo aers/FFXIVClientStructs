@@ -4,7 +4,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 192 * 4)]
 public unsafe partial struct Hud2NumberArray {
@@ -33,14 +32,14 @@ public unsafe partial struct Hud2NumberArray {
     [FieldOffset(35 * 4), FixedSizeArray] internal FixedSizeArray30<bool> _targetStatusDispellable;
     [FieldOffset(65 * 4)] public Hud2ColorNumberArray TargetBarFillColor;
     [FieldOffset(66 * 4)] public Hud2ColorNumberArray TargetBarBackdropColor;
-    [FieldOffset(67 * 4)] public bool UnkFlag1;
+    [FieldOffset(67 * 4)] private bool UnkFlag1;
     [FieldOffset(69 * 4)] public int TargetCastPercent;
     [FieldOffset(72 * 4)] public bool TargetHasTarget;
     /// <summary>
     /// Keeps count of how your target has targeted a new target.
     /// </summary>
     [FieldOffset(74 * 4)] public int TargetOfTargetCount;
-    [FieldOffset(76 * 4)] public bool UnkFlag2;
+    [FieldOffset(76 * 4)] private bool UnkFlag2;
     [FieldOffset(77 * 4)] public int TargetOfTargetEntityId;
     [FieldOffset(78 * 4)] public Hud2ColorNumberArray TargetOfTargetBarFillColor;
     [FieldOffset(79 * 4)] public Hud2ColorNumberArray TargetOfTargetBarBackdropColor;
@@ -58,16 +57,14 @@ public unsafe partial struct Hud2NumberArray {
     [FieldOffset(92 * 4), FixedSizeArray] internal FixedSizeArray5<uint> _focusTargetStatusIconIds;
     [FieldOffset(97 * 4), FixedSizeArray] internal FixedSizeArray5<bool> _focusTargetStatusDispellable;
 
-    [CExporterIgnore]
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 1 * 4)]
     public partial struct Hud2ColorNumberArray {
         [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray1<int> _data;
 
-        [FieldOffset(3)] public byte R;
-        [FieldOffset(2)] public byte G;
-        [FieldOffset(1)] public byte B;
         [FieldOffset(0)] public byte A;
+        [FieldOffset(1)] public byte B;
+        [FieldOffset(2)] public byte G;
+        [FieldOffset(3)] public byte R;
     }
 }
-
-

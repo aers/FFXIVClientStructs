@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
+using FFXIVClientStructs.FFXIV.Client.System.Input;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using static FFXIVClientStructs.FFXIV.Common.Configuration.ConfigBase;
@@ -72,8 +73,11 @@ public unsafe partial struct AgentHUD {
     [MemberFunction("E8 ?? ?? ?? ?? EB 08 48 8B CB E8 ?? ?? ?? ?? 48 8B 4C 24 ?? 45 85 F6")]
     public partial CStringPointer GetMainCommandString(uint commandId, bool includeKeybind = true, bool includeNewIndicator = false);
 
-    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CF 4C 89 B4 24 B8 08 00 00")]
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48 8B CF 4C 89 B4 24")]
     public partial void OpenSystemMenu(AtkValue* atkValueArgs, uint menuSize);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 40 B5 ?? 41 B9")]
+    public partial bool HandleMainCommandOperation(MainCommandOperation operation, uint param1, int param2 = -1, byte* param3 = null);
 
     [MemberFunction("E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 75 ?? 80 BF")]
     public partial void UpdateExp(NumberArrayData* expNumberArray, StringArrayData* expStringArray, StringArrayData* characterStringArray);
@@ -105,7 +109,7 @@ public unsafe struct HudPartyMember {
 public struct HudTargetInfoBuffTimeRemainingCacheEntry {
     [FieldOffset(0x00)] public uint Icon;
     [FieldOffset(0x04)] public uint TimeRemaining;
-    [FieldOffset(0x08)] public byte Unk8;
+    [FieldOffset(0x08)] private byte Unk8;
     [FieldOffset(0x09)] public bool HasTimeRemaining;
     [FieldOffset(0x0A)] internal bool UnkA; // temporary value to reset TimeRemaining after setting it?!?
 }
@@ -113,7 +117,7 @@ public struct HudTargetInfoBuffTimeRemainingCacheEntry {
 [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 public unsafe struct HudQueuedBattleTalk {
     [FieldOffset(0x0)] public bool IsPending;
-    //[FieldOffset(0x1)] public byte Unk1;
+    //[FieldOffset(0x1)] private byte Unk1;
     [FieldOffset(0x2)] public byte Style;
 
     [FieldOffset(0x8)] public Utf8String Name;
@@ -152,7 +156,7 @@ public unsafe partial struct HudStatus {
     public unsafe struct DisplayStatus {
         [FieldOffset(0x0)] public uint IconId;
         [FieldOffset(0x4)] public int RemainingTime;
-        [FieldOffset(0x8)] public byte UnkStatusFlag;
+        [FieldOffset(0x8)] private byte UnkStatusFlag;
         [FieldOffset(0x9)] public bool IsUpdated;
         [FieldOffset(0xA)] public bool IsProcessedOnce;
     }
@@ -170,4 +174,18 @@ public enum AgentHudExpFlag : byte {
     MaxLevel = 1 << 3,
     InEureka = 1 << 4,
     Unk5 = 1 << 5, // In TerritoryIntendedUse 61?
+}
+
+public enum MainCommandOperation {
+    SetCategoryNames = 0,
+    /// <remarks> param1: MainCommandId </remarks>
+    ExecuteMainCommand = 1,
+    /// <remarks> param1: MainCommandId | 0x10000 for enabled, otherwise just MainCommandId. </remarks>
+    SetMainCommandEnabledState = 2,
+    /// <remarks> Fired <see cref="InputId.MENU_SYSTEM"/> was pressed. </remarks>
+    OpenSystemMenu = 4,
+    /// <remarks> param1: 0 = Hide, 1 = Show </remarks>
+    SetVisibility = 5,
+    // Unk6 = 6,
+    SetCategoryPatchMarks = 7,
 }

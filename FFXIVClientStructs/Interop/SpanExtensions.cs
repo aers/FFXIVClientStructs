@@ -31,4 +31,35 @@ public static class SpanExtensions {
     /// This allows enumeration over the span as a pointer type, T*, rather than T.
     /// </summary>
     public static SpanPointerEnumerator<T> PointerEnumerator<T>(this Span<T> span) where T : unmanaged => new(span);
+
+    /// <summary>
+    /// Checks if the bit in the byte span is set.
+    /// </summary>
+    /// <param name="span">The span to check the bit in.</param>
+    /// <param name="bitIndex">The bit index in the span.</param>
+    /// <returns>Whether the bit was set or not.</returns>
+    /// <exception cref="IndexOutOfRangeException">Span bit length is shorter than index used.</exception>
+    public static bool CheckBitInSpan(this Span<byte> span, uint bitIndex) {
+        return span.TryCheckBitInSpan(bitIndex, out var value)
+            ? value
+            : throw new IndexOutOfRangeException();
+    }
+
+    /// <summary>
+    /// Checks if the bit in the byte span is set.
+    /// </summary>
+    /// <param name="span">The span to check the bit in.</param>
+    /// <param name="bitIndex">The bit index in the span.</param>
+    /// <param name="value">Whether the bit was set or not.</param>
+    /// <returns><see langword="true"/> if <paramref name="bitIndex"/> was in range, <see langword="false"/> otherwise.</returns>
+    public static bool TryCheckBitInSpan(this Span<byte> span, uint bitIndex, out bool value) {
+        var byteIndex = bitIndex >> 3;
+        if (byteIndex >= span.Length) {
+            value = false;
+            return false;
+        }
+
+        value = (span[(int)byteIndex] & (byte)(1 << ((int)bitIndex & 7))) != 0;
+        return true;
+    }
 }

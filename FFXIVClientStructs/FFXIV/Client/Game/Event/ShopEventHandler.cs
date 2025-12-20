@@ -10,51 +10,51 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 //   Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
 [GenerateInterop]
 [Inherits<EventHandler>, Inherits<AgentInventoryContext.InventoryContextEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x32F8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x3298)]
 public unsafe partial struct ShopEventHandler {
-    // 0x210: second base class, related to context menu integration for selling items
-    // 0x218: third base class, related to buying items, not sure how it's used exactly
+    // 0x1B0: second base class, related to context menu integration for selling items
+    // 0x1B8: third base class, related to buying items, not sure how it's used exactly
 
-    [FieldOffset(0x228)] public Utf8String ShopName;
-    [FieldOffset(0x290)] public uint ShopIcon;
-    [FieldOffset(0x294)] public GameMain.Festival Festival;
-    [FieldOffset(0x298)] public uint UnlockQuestId;
-    // 0x29C: byte, col 5 in GilShop row
-    [FieldOffset(0x2A0), FixedSizeArray] internal FixedSizeArray60<ShopItem> _items;
-    [FieldOffset(0x2A00)] public int ItemsCount; // num valid entries in Items array
-    [FieldOffset(0x2A04), FixedSizeArray] internal FixedSizeArray60<int> _visibleItems; // indices of items in Items array that are to be shown in shop
-    [FieldOffset(0x2AF4)] public int VisibleItemsCount; // num valid entries in VisibleItems array
-    [FieldOffset(0x2AF8)] public bool NeedSorting; // set after GilShopItem rows are loaded, used later when Item rows are loaded
-    // 0x2B00: int, ???
-    [FieldOffset(0x2B04)] public int SellPriceBuy; // the vendor buy price of the item being sold
-    [FieldOffset(0x2B08)] public int SellPrice; // the price vendor will pay for the item being sold (adjusted by materia etc)
-    [FieldOffset(0x2B0C)] public int SellStackMax; // max stack size of the item being sold
-    [FieldOffset(0x2B10)] public bool SellIsUnique; // is item being sold unique?
-    [FieldOffset(0x2B11)] public bool SellIsUntradeable; // is item attempted to be sold untradeable?
-    [FieldOffset(0x2B12)] public bool SellIsWithMateria; // is item being sold has attached materia?
-    [FieldOffset(0x2B13)] public bool SellIsFullySpiritbound; // is item being sold has full spiritbound?
-    [FieldOffset(0x2B14)] public bool SellIsCollectible; // is item being sold collectible?
-    [FieldOffset(0x2B18)] public Utf8String SellItemName;
-    [FieldOffset(0x2B80)] public int SellRarity;
-    [FieldOffset(0x2B88), FixedSizeArray] internal FixedSizeArray10<BuybackItem> _buyback;
-    [FieldOffset(0x32B8)] public int BuybackCount; // num valid entries in Buyback array
-    [FieldOffset(0x32BC)] public bool StartingSell; // set while waiting for Item sheet reader to complete before to continue sell transaction
-    [FieldOffset(0x32BD)] public bool StartingBuy; // set while waiting for Item sheet reader to complete before to continue buy transaction
-    [FieldOffset(0x32BE)] public bool UpdatingBuybackItems; // set while waiting for Item sheet reader to update buyback item details
-    [FieldOffset(0x32BF)] public bool BuybackTabActive;
-    [FieldOffset(0x32C0)] public bool WaitingForSellConfirm;
-    [FieldOffset(0x32C1)] public bool WaitingForTransactionToFinish;
-    [FieldOffset(0x32C2)] public bool IsTradingWithRetainer; // if set, eg. will warn about transaction exceeding gil cap
-    [FieldOffset(0x32C4)] public int CurrentMode; // 0 = none, 1 = normal, 2 = buyback
-    [FieldOffset(0x32C8)] public int TransactionType; // 0 = n/a, 1 = buying, 2 = selling
-    [FieldOffset(0x32CC)] public int BuyItemIndex; // index in Items or Buyback array, depending on mode
-    [FieldOffset(0x32D0)] public uint TransactionItemId; // in Item row; set during all types of transactions
-    [FieldOffset(0x32D4)] public int SellInventorySlot;
-    [FieldOffset(0x32D8)] public int TransactionItemCount; // num items being bought/sold
-    [FieldOffset(0x32DC)] public InventoryType SellInventoryType;
-    // 0x32D8: int, ??? - related to sound effects being played, etcs
-    [FieldOffset(0x32E8)] public void* SheetReader;
-    [FieldOffset(0x32F0)] public ExcelSheet* CurrentSheet;
+    [FieldOffset(0x1C8)] public Utf8String ShopName;
+    [FieldOffset(0x230)] public uint ShopIcon;
+    [FieldOffset(0x234)] public GameMain.Festival Festival;
+    [FieldOffset(0x23C)] public uint UnlockQuestId;
+    // 0x23C: byte, col 5 in GilShop row
+    [FieldOffset(0x240), FixedSizeArray] internal FixedSizeArray60<ShopItem> _items;
+    [FieldOffset(0x29A0)] public int ItemsCount; // num valid entries in Items array
+    [FieldOffset(0x29A4), FixedSizeArray] internal FixedSizeArray60<int> _visibleItems; // indices of items in Items array that are to be shown in shop
+    [FieldOffset(0x2A94)] public int VisibleItemsCount; // num valid entries in VisibleItems array
+    [FieldOffset(0x2A98)] public bool NeedSorting; // set after GilShopItem rows are loaded, used later when Item rows are loaded
+    // 0x2AA0: int, ???
+    [FieldOffset(0x2AA4)] public int SellPriceBuy; // the vendor buy price of the item being sold
+    [FieldOffset(0x2AA8)] public int SellPrice; // the price vendor will pay for the item being sold (adjusted by materia etc)
+    [FieldOffset(0x2AAC)] public int SellStackMax; // max stack size of the item being sold
+    [FieldOffset(0x2AB0)] public bool SellIsUnique; // is item being sold unique?
+    [FieldOffset(0x2AB1)] public bool SellIsUntradeable; // is item attempted to be sold untradeable?
+    [FieldOffset(0x2AB2)] public bool SellIsWithMateria; // is item being sold has attached materia?
+    [FieldOffset(0x2AB3)] public bool SellIsFullySpiritbound; // is item being sold has full spiritbound?
+    [FieldOffset(0x2AB4)] public bool SellIsCollectible; // is item being sold collectible?
+    [FieldOffset(0x2AB8)] public Utf8String SellItemName;
+    [FieldOffset(0x2B20)] public int SellRarity;
+    [FieldOffset(0x2B28), FixedSizeArray] internal FixedSizeArray10<BuybackItem> _buyback;
+    [FieldOffset(0x3258)] public int BuybackCount; // num valid entries in Buyback array
+    [FieldOffset(0x325C)] public bool StartingSell; // set while waiting for Item sheet reader to complete before to continue sell transaction
+    [FieldOffset(0x325D)] public bool StartingBuy; // set while waiting for Item sheet reader to complete before to continue buy transaction
+    [FieldOffset(0x325E)] public bool UpdatingBuybackItems; // set while waiting for Item sheet reader to update buyback item details
+    [FieldOffset(0x325F)] public bool BuybackTabActive;
+    [FieldOffset(0x3260)] public bool WaitingForSellConfirm;
+    [FieldOffset(0x3261)] public bool WaitingForTransactionToFinish;
+    [FieldOffset(0x3262)] public bool IsTradingWithRetainer; // if set, eg. will warn about transaction exceeding gil cap
+    [FieldOffset(0x3264)] public int CurrentMode; // 0 = none, 1 = normal, 2 = buyback
+    [FieldOffset(0x3268)] public int TransactionType; // 0 = n/a, 1 = buying, 2 = selling
+    [FieldOffset(0x326C)] public int BuyItemIndex; // index in Items or Buyback array, depending on mode
+    [FieldOffset(0x3270)] public uint TransactionItemId; // in Item row; set during all types of transactions
+    [FieldOffset(0x3274)] public int SellInventorySlot;
+    [FieldOffset(0x3278)] public int TransactionItemCount; // num items being bought/sold
+    [FieldOffset(0x327C)] public InventoryType SellInventoryType;
+    // 0x3278: int, ??? - related to sound effects being played, etcs
+    [FieldOffset(0x3288)] public void* SheetReader;
+    [FieldOffset(0x3290)] public ExcelSheet* CurrentSheet;
 
     [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
     public unsafe partial struct ShopItem {
@@ -125,7 +125,8 @@ public unsafe partial struct ShopEventHandler {
 
     /// <summary>
     /// Buy a bunch of items from the vendor.
-    /// Note: BuyItemIndex field must be set before calling this function!
+    /// <br/><br/>
+    /// BuyItemIndex field must be set before calling this function!
     /// </summary>
     /// <param name="count">Number of items to buy.</param>
     [MemberFunction("48 83 EC 48 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 44 24 ?? 80 B9")]

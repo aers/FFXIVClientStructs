@@ -37,22 +37,28 @@ public unsafe partial struct AddonActionBarBase {
     /// <summary>
     /// Trigger the "pulse" effect for the specified hotbar slot, similar to what happens on hotbar slot keypress.
     ///
-    /// Note that this method *CAN* trigger pulses on hotbar slots that don't have an item in them!
+    /// This method *CAN* trigger pulses on hotbar slots that don't have an item in them!
     /// </summary>
     /// <param name="slotIndex">A zero-indexed value of which slot to pulse.</param>
     [VirtualFunction(81)]
     public partial void PulseActionBarSlot(int slotIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 81 C6 ?? ?? ?? ?? 83 C7 11")]
+    public partial void UpdateHotbarSlot(ActionBarSlot* slot, NumberArrayData* numberArray, StringArrayData* stringArrayData, int numberArrayIndex, int stringArrayIndex);
+
+    [MemberFunction("E8 ?? ?? ?? ?? EB 4B 48 8B CB")]
+    public partial void ShowTooltip(AtkResNode* node, NumberArrayData* numberArray, StringArrayData* stringArrayData, int numberArrayIndex, int stringArrayIndex);
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe struct ActionBarSlot {
-    [FieldOffset(0x00)] public int HotbarId; // Not persistent, only updated if slot is visible
-    [FieldOffset(0x04)] public int ActionId;       // Not cleared when slot is emptied
-    [FieldOffset(0x88)] public AtkComponentDragDrop* ComponentDragDrop;
-    [FieldOffset(0x90)] public AtkComponentNode* Icon;
-    [FieldOffset(0x98)] public AtkTextNode* ControlHintTextNode;
-    [FieldOffset(0xA0)] public AtkResNode* IconFrame;
-    [FieldOffset(0xA8)] public AtkImageNode* ChargeIcon;
-    [FieldOffset(0xB0)] public AtkResNode* RecastOverlayContainer;
-    [FieldOffset(0xB8)] public CStringPointer PopUpHelpTextPtr; // Null when slot is empty
+    [FieldOffset(0x00)] public AtkComponentDragDrop* ComponentDragDrop;
+    [FieldOffset(0x08)] public AtkImageNode* ChargeIcon;
+    [FieldOffset(0x10)] public AtkResNode* RecastOverlayContainer;
+    [FieldOffset(0x18)] public AtkResNode* IconFrame;
+    [FieldOffset(0x20)] public CStringPointer PopUpHelpTextPtr; // Null when slot is empty
+    [FieldOffset(0x30)] public int HotbarId; // Not persistent, only updated if slot is visible
+    [FieldOffset(0x34)] public int ActionId;       // Not cleared when slot is emptied
+    [FieldOffset(0xB8)] public AtkComponentNode* Icon;
+    [FieldOffset(0xC0)] public AtkTextNode* ControlHintTextNode;
 }

@@ -26,9 +26,10 @@ public unsafe partial struct WorldHelper {
 
 
     [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x22)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x24)]
     public partial struct World {
-        [FieldOffset(0x00)] public byte DataCenter;
-        [FieldOffset(0x01), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+        [FieldOffset(0x00)] public ushort RowId;
+        [FieldOffset(0x02)] public byte DataCenter;
+        [FieldOffset(0x03), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     }
 }

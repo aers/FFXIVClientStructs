@@ -7,7 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
 //   Client::UI::Misc::UserFileManager::UserFileEvent
 [GenerateInterop]
 [Inherits<UserFileEvent>]
-[StructLayout(LayoutKind.Explicit, Size = 0x11D8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1818)]
 public unsafe partial struct ItemFinderModule {
     public static ItemFinderModule* Instance() {
         var uiModule = UIModule.Instance();
@@ -21,8 +21,8 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0xAB)] public bool IsSaddleBagCached;
     [FieldOffset(0xAC)] public bool IsGlamourDresserCached;
     [FieldOffset(0xAD)] public bool ShouldResetInvalid; // only clears data if player does not meet criteria (for example: has glamour dresser NOT unlocked)
-    [FieldOffset(0xAE)] public byte UnkA6;
-    [FieldOffset(0xAF)] public byte UnkA7;
+    [FieldOffset(0xAE)] private byte UnkA6;
+    [FieldOffset(0xAF)] private byte UnkA7;
     [FieldOffset(0xB0)] public StdList<ulong> UpdatedRetainerIds;
     [FieldOffset(0xC0)] public StdMap<ulong, Pointer<ItemFinderRetainerInventory>> RetainerInventories;
     [FieldOffset(0xD0), FixedSizeArray] internal FixedSizeArray70<uint> _saddleBagItemIds;
@@ -30,15 +30,16 @@ public unsafe partial struct ItemFinderModule {
     [FieldOffset(0x300), FixedSizeArray] internal FixedSizeArray70<ushort> _saddleBagItemCount;
     [FieldOffset(0x38C), FixedSizeArray] internal FixedSizeArray70<ushort> _premiumSaddleBagItemCount;
     [FieldOffset(0x418), FixedSizeArray] internal FixedSizeArray800<uint> _glamourDresserItemIds;
+    [FieldOffset(0x1098), FixedSizeArray] internal FixedSizeArray800<ushort> _glamourDresserItemSetUnlockBits;
 
-    [FieldOffset(0x10A8)] public ItemFinderModuleResult* Result;
+    [FieldOffset(0x16E8)] public ItemFinderModuleResult* Result;
 
     /// <summary>
     /// Searches inventories for the specified item id and opens the Item Search List window to display the results.
     /// </summary>
     /// <param name="itemId">The Id of the item to search for.</param>
     /// <param name="includeHQAndCollectibles">If <c>true</c>, it also searches for the item id as HQ and collectible versions.</param>
-    [MemberFunction("E8 ?? ?? ?? ?? C6 43 08 01 EB 59")]
+    [MemberFunction("E8 ?? ?? ?? ?? EB A9 33 DB")]
     public partial void SearchForItem(uint itemId, bool includeHQAndCollectibles = true);
 
     /// <summary>
@@ -109,9 +110,9 @@ public unsafe struct ItemFinderModuleResult {
     [FieldOffset(0x1E0)] public ItemFinderModuleRetainerResult** Retainer;
     [FieldOffset(0x1E8)] public long RetainerCount;
     [FieldOffset(0x1F0)] public bool ShowHQCount;
-    [FieldOffset(0x1F1)] public byte Unk1F1;
+    [FieldOffset(0x1F1)] private byte Unk1F1;
     [FieldOffset(0x1F2)] public bool ShowCollectibleCount;
-    [FieldOffset(0x1F3)] public byte Unk1F3;
+    [FieldOffset(0x1F3)] private byte Unk1F3;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x7C)]

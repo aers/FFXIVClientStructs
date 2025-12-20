@@ -68,11 +68,11 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x178)] public ModelRenderer.Callback RenderModelCallback;
     [FieldOffset(0x198)] public ModelRenderer.Callback RenderMaterialCallback;
-    [FieldOffset(0x1B8)] public ModelRenderer.Callback UnkCallback3;
+    [FieldOffset(0x1B8)] private ModelRenderer.Callback UnkCallback3;
 
     [FieldOffset(0x224)] public float VfxScale;
     [FieldOffset(0x270)] public ConstantBuffer* CharacterDataCBuffer; // Size has been observed to be 0xB0, contents may be InstanceParameter
-    [FieldOffset(0x278)] public ConstantBuffer* UnkCBuffer; // Size is also 0xB0
+    [FieldOffset(0x278)] private ConstantBuffer* UnkCBuffer; // Size is also 0xB0
 
     [FieldOffset(0x288)] public Texture** ColorTableTextures; // each one corresponds to a material, size = SlotCount * MaterialsPerSlot
 

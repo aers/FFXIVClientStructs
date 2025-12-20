@@ -27,6 +27,6 @@ public unsafe partial struct AddonSalvageItemSelector {
         [FieldOffset(0x18)] public uint Quantity;
         [FieldOffset(0x1C)] public uint JobIconId;
         [FieldOffset(0x20)] public CStringPointer JobNamePtr;
-        [FieldOffset(0x28)] public byte Unknown28;
+        [FieldOffset(0x28)] private byte Unknown28;
     }
 }

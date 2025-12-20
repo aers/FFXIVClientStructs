@@ -4,11 +4,10 @@ using FFXIVClientStructs.FFXIV.Component.Exd;
 namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 
 // Client::Game::UI::UIState
-// ctor "E8 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 83 C4 28 E9 ?? ?? ?? ?? 48 83 EC 28 33 D2"
 // this is a large object holding most of the other objects in the Client::Game::UI namespace
 // all data in here is used for UI display
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x1A230)]
+[StructLayout(LayoutKind.Explicit, Size = 0x1A360)]
 public unsafe partial struct UIState {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 8B ?? ?? ?? ?? 48 8B 01", 3)]
     public static partial UIState* Instance();
@@ -18,112 +17,121 @@ public unsafe partial struct UIState {
     [FieldOffset(0x110)] public Hater Hater;
     [FieldOffset(0xA18)] public Chain Chain;
     [FieldOffset(0xA20)] public WeaponState WeaponState;
-    [FieldOffset(0xA38)] public PlayerState PlayerState; // 7.3: size +0x18
-    [FieldOffset(0x1310)] public Revive Revive;
-    [FieldOffset(0x1340)] public Inspect Inspect;
-    [FieldOffset(0x15E0)] public Telepo Telepo;
-    [FieldOffset(0x1638)] public Cabinet Cabinet;
-    [FieldOffset(0x16C0)] public Achievement Achievement; // 7.2: size +0x1E8
-    [FieldOffset(0x1EA8)] public Buddy Buddy; // 7.2: size +0x870
-    [FieldOffset(0x42A4)] public PvPProfile PvPProfile;
-    [FieldOffset(0x4330)] internal void* Unk4330; // some UI timer for PvP Results?!
-    [FieldOffset(0x4338)] public ContentsNote ContentsNote;
-    [FieldOffset(0x43F0)] public RelicNote RelicNote;
-    [FieldOffset(0x4408)] public MateriaTrade MateriaTrade;
-    [FieldOffset(0x4450)] public PublicInstance PublicInstance;
-    [FieldOffset(0x4478)] public RelicSphereUpgrade RelicSphereUpgrade;
-    [FieldOffset(0x44F0)] public DailyQuestSupply DailyQuestSupply;
-    [FieldOffset(0x48D8)] public RidePillon RidePillon;
-    [FieldOffset(0x4918)] public Loot Loot;
-    [FieldOffset(0x4FB8)] public GatheringNote GatheringNote; // 7.2: size +0x38
-    [FieldOffset(0x56B8)] public RecipeNote RecipeNote; // 7.2: size +0x28
-    [FieldOffset(0x61F8)] public FishingNote FishingNote;
-    [FieldOffset(0x62D8)] public FishRecord FishRecord;
-    [FieldOffset(0x6610)] public Journal Journal;
-    [FieldOffset(0xAD78)] public QuestUI QuestUI; // 7.2: size +0x10
-    [FieldOffset(0xBD78)] public QuestTodoList QuestTodoList;
-    [FieldOffset(0xC1B8)] public NpcTrade NpcTrade;
-    [FieldOffset(0xC4E0)] public DirectorTodo DirectorTodo;
-    [FieldOffset(0xC628)] public DirectorTodo FateDirectorTodo;
-    [FieldOffset(0xC770)] internal void* UnkC728;
-    [FieldOffset(0xC778)] public DirectorTodo MassivePcContentTodo;
-    [FieldOffset(0xC8C0)] public Map Map; // 7.2: size +0x08
-    [FieldOffset(0x108D0)] public MarkingController MarkingController;
-    [FieldOffset(0x10BB0)] public LimitBreakController LimitBreakController;
-    [FieldOffset(0x10BC0)] public TitleController TitleController;
-    [FieldOffset(0x10BC8)] public TitleList TitleList;
+    [FieldOffset(0xA38)] public PlayerState PlayerState;
+    [FieldOffset(0x1340)] public Revive Revive;
+    [FieldOffset(0x1370)] public Inspect Inspect;
+    [FieldOffset(0x1610)] public Telepo Telepo;
+    [FieldOffset(0x1668)] public Cabinet Cabinet;
+    [FieldOffset(0x16F0)] public Achievement Achievement;
+    [FieldOffset(0x1F08)] public Buddy Buddy;
+    [FieldOffset(0x4304)] public PvPProfile PvPProfile;
+    [FieldOffset(0x4390)] internal void* Unk4330; // some UI timer for PvP Results?!
+    [FieldOffset(0x4398)] public ContentsNote ContentsNote;
+    [FieldOffset(0x4450)] public RelicNote RelicNote;
+    [FieldOffset(0x4468)] public MateriaTrade MateriaTrade;
+    [FieldOffset(0x44B0)] public PublicInstance PublicInstance;
+    [FieldOffset(0x44D8)] public RelicSphereUpgrade RelicSphereUpgrade;
+    [FieldOffset(0x4550)] public DailyQuestSupply DailyQuestSupply;
+    [FieldOffset(0x4938)] public RidePillon RidePillon;
+    [FieldOffset(0x4978)] public Loot Loot;
+    [FieldOffset(0x5058)] public GatheringNote GatheringNote;
+    [FieldOffset(0x5758)] public RecipeNote RecipeNote;
+    [FieldOffset(0x6298)] public FishingNote FishingNote;
+    [FieldOffset(0x6378)] public FishRecord FishRecord;
+    [FieldOffset(0x66B0)] public Journal Journal;
+    [FieldOffset(0xAE18)] public QuestUI QuestUI;
+    [FieldOffset(0xBE18)] public QuestTodoList QuestTodoList;
+    [FieldOffset(0xC258)] public NpcTrade NpcTrade;
+    [FieldOffset(0xC580)] public DirectorTodo DirectorTodo;
+    [FieldOffset(0xC6C8)] public DirectorTodo FateDirectorTodo;
+    [FieldOffset(0xC810)] public MassivePcContentTodo MassivePcContentTodo;
+    [FieldOffset(0xC960)] public Map Map;
+    [FieldOffset(0x10980)] public MarkingController MarkingController;
+    [FieldOffset(0x10C60)] public LimitBreakController LimitBreakController;
+    [FieldOffset(0x10C70)] public TitleController TitleController;
+    [FieldOffset(0x10C78)] public TitleList TitleList;
     // some GM Call stuff
-    [FieldOffset(0x10C60)] public GCSupply GCSupply;
-    [FieldOffset(0x13888)] public InstanceContent InstanceContent;
-    [FieldOffset(0x13900)] public GuildOrderReward GuildOrderReward;
-    [FieldOffset(0x13960)] public ContentsFinder ContentsFinder;
-    [FieldOffset(0x13A10)] public Wedding Wedding;
-    [FieldOffset(0x13A78)] public MobHunt MobHunt;
-    [FieldOffset(0x13C68)] public WeatherForecast WeatherForecast;
+    [FieldOffset(0x10D18)] public GCSupply GCSupply;
+    [FieldOffset(0x13940)] public InstanceContent InstanceContent;
+    [FieldOffset(0x139B8)] public GuildOrderReward GuildOrderReward;
+    [FieldOffset(0x13A18)] public ContentsFinder ContentsFinder;
+    [FieldOffset(0x13AC8)] public Wedding Wedding;
+    [FieldOffset(0x13B30)] public MobHunt MobHunt;
+    [FieldOffset(0x13D20)] public WeatherForecast WeatherForecast;
     // an int to control AgentRecommendList
-    [FieldOffset(0x13C90)] public TripleTriad TripleTriad; // 7.2: size+0x70
-    // TODO: 7.3 - unsure from here on
-    [FieldOffset(0x153C8)] public EurekaElementalEdit EurekaElementalEdit; // 7.2: size +0x04?
-    [FieldOffset(0x153E0)] public LovmRanking LovmRanking; // 7.2: size -0x04?
-    [FieldOffset(0x17020)] public CollectablesShop CollectablesShop; // 7.2: size +0x20
-    // TODO: 7.3 - sure from here on
-    [FieldOffset(0x17318)] public QTE QTE;
-    [FieldOffset(0x17340)] public Emj Emj;
-    [FieldOffset(0x17378)] public NpcYell NpcYell;
+    [FieldOffset(0x13D48)] public TripleTriad TripleTriad;
+    [FieldOffset(0x154F8)] public EurekaElementalEdit EurekaElementalEdit;
+    [FieldOffset(0x15510)] public LovmRanking LovmRanking;
+    [FieldOffset(0x17150)] public CollectablesShop CollectablesShop;
+    [FieldOffset(0x17448)] public QTE QTE;
+    [FieldOffset(0x17470)] public Emj Emj;
+    [FieldOffset(0x174A8)] public NpcYell NpcYell;
     // 7.3: huge space between these two
-    [FieldOffset(0x19BC8)] public CharaCard CharaCard;
+    [FieldOffset(0x19CF8)] public CharaCard CharaCard;
     // 0x19DB0: ItemAction Unlocks
-    [FieldOffset(0x19E08)] public ClientSelectDataConfigFlags ClientSelectDataConfigFlags;
-    [FieldOffset(0x19E0A)] public ushort CurrentGlamourErrorsBitmask;
-    [FieldOffset(0x19E0C)] public ushort CurrentItemLevel; // as shown in the Character window
-    // [FieldOffset(0x19E10)] public long ?; // something regarding FreeCompanyCrest?
-    [FieldOffset(0x19E18)] public long NextMapAllowanceTimestamp;
-    [FieldOffset(0x19E20)] public long NextChallengeLogResetTimestamp;
+    [FieldOffset(0x19F38)] public ClientSelectDataConfigFlags ClientSelectDataConfigFlags;
+    [FieldOffset(0x19F3A)] public ushort CurrentGlamourErrorsBitmask;
+    [FieldOffset(0x19F3C)] public ushort CurrentItemLevel; // as shown in the Character window
 
-    // Ref: UIState#IsUnlockLinkUnlocked (relative to uistate)
-    // Size: Offset of UnlockedAetherytesBitmask - Offset of UnlockLinkBitmask
-    [FieldOffset(0x19E2C), FixedSizeArray] internal FixedSizeArray92<byte> _unlockLinkBitmask;
+    // [FieldOffset(0x19F40)] public long ?; // something regarding FreeCompanyCrest?
+    [FieldOffset(0x19F48)] public long NextMapAllowanceTimestamp;
+    [FieldOffset(0x19F50)] public long NextChallengeLogResetTimestamp;
 
+    [FieldOffset(0x19F5C), FixedSizeArray, Obsolete("Use UnlockLinksBitArray", true)] internal FixedSizeArray92<byte> _unlockLinkBitmask;
+    // BitCount: See `Client::Game::UI::UIState.SetUnlockLinkValue`
+    /// <remarks> Use <see cref="IsUnlockLinkUnlocked"/>. </remarks>
+    [FieldOffset(0x19F5C), FixedSizeArray(isBitArray: true, bitCount: 736)] internal FixedSizeArray92<byte> _unlockLinks;
+
+    [FieldOffset(0x19FB8), FixedSizeArray, Obsolete("Use UnlockedAetherytesBitArray", true)] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
     // Ref: Telepo#UpdateAetheryteList (in the Aetheryte sheet loop)
-    // Size: (AetheryteSheet.RowCount + 7) / 8
-    [FieldOffset(0x19E88), FixedSizeArray] internal FixedSizeArray30<byte> _unlockedAetherytesBitmask;
+    // BitCount: AetheryteSheet.RowCount
+    /// <remarks> Use <see cref="IsAetheryteUnlocked"/>. </remarks>
+    [FieldOffset(0x19FB8), FixedSizeArray(isBitArray: true, bitCount: 240)] internal FixedSizeArray30<byte> _unlockedAetherytes;
 
+    [FieldOffset(0x19FD6), FixedSizeArray, Obsolete("Use UnlockedHowTosBitArray", true)] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
     // Ref: "85 D2 0F 84 ?? ?? ?? ?? 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC 20 48 8B F9"
-    // Size: (HowToSheet.RowCount + 7) / 8
-    [FieldOffset(0x19EA6), FixedSizeArray] internal FixedSizeArray37<byte> _unlockedHowtoBitmask;
+    // BitCount: HowToSheet.RowCount
+    /// <remarks> Use <see cref="IsHowToUnlocked"/>. </remarks>
+    [FieldOffset(0x19FD6), FixedSizeArray(isBitArray: true, bitCount: 296)] internal FixedSizeArray37<byte> _unlockedHowTos;
 
-    // Ref: g_Client::Game::UI::UnlockedCompanionsMask
-    //      direct ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
-    // Size: (CompanionSheet.RowCount + 7) / 8
-    [FieldOffset(0x19ECB), FixedSizeArray] internal FixedSizeArray71<byte> _unlockedCompanionsBitmask;
+    [FieldOffset(0x19FFB), FixedSizeArray, Obsolete("Use UnlockedCompanionsBitArray", true)] internal FixedSizeArray71<byte> _unlockedCompanionsBitmask;
+    // Ref: "48 8D 0D ?? ?? ?? ?? 0F B6 04 08 84 D0 75 10 B8 ?? ?? ?? ?? 48 8B 5C 24"
+    // BitCount: CompanionSheet.RowCount
+    /// <remarks> Use <see cref="IsCompanionUnlocked"/>. </remarks>
+    [FieldOffset(0x19FFB), FixedSizeArray(isBitArray: true, bitCount: 584)] internal FixedSizeArray73<byte> _unlockedCompanions;
 
-    // Size: (ChocoboTaxiStandSheet.RowCount + 7) / 8
-    [FieldOffset(0x19F12), FixedSizeArray] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
+    [FieldOffset(0x1A044), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray", true)] internal FixedSizeArray12<byte> _chocoboTaxiStandsBitmask;
+    [FieldOffset(0x1A044), FixedSizeArray, Obsolete("Use UnlockedChocoboTaxiStandsBitArray", true)] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStandsBitmask;
+    // BitCount: ChocoboTaxiStandSheet.RowCount
+    /// <remarks> Use <see cref="IsChocoboTaxiStandUnlocked"/>. </remarks>
+    [FieldOffset(0x1A044), FixedSizeArray(isBitArray: true, bitCount: 93)] internal FixedSizeArray12<byte> _unlockedChocoboTaxiStands;
 
-    // Ref: UIState#IsCutsceneSeen
-    // Size: (CutsceneWorkIndexSheet.Max(row => row.WorkIndex) + 7) / 8
-    [FieldOffset(0x19F1E), FixedSizeArray] internal FixedSizeArray172<byte> _cutsceneSeenBitmask;
+    [FieldOffset(0x1A050), FixedSizeArray, Obsolete("Use SeenCutscenesBitArray", true)] internal FixedSizeArray173<byte> _cutsceneSeenBitmask;
+    // BitCount: CutsceneWorkIndexSheet.Max(row => row.WorkIndex)
+    /// <remarks> Use <see cref="IsCutsceneSeen"/>. </remarks>
+    [FieldOffset(0x1A050), FixedSizeArray(isBitArray: true, bitCount: 1409)] internal FixedSizeArray177<byte> _seenCutscenes;
 
     // unk bitmasks
 
-    // Ref: UIState#IsTripleTriadCardUnlocked
-    // Size: TripleTriadCard.RowCount / 8
-    [FieldOffset(0x19FCC), FixedSizeArray] internal FixedSizeArray56<byte> _unlockedTripleTriadCardsBitmask;
-    [FieldOffset(0x1A008)] public ulong UnlockedTripleTriadCardsCount;
+    [FieldOffset(0x1A103), FixedSizeArray, Obsolete("Use UnlockedTripleTriadCardsBitArray", true)] internal FixedSizeArray57<byte> _unlockedTripleTriadCardsBitmask;
+    // BitCount: TripleTriadCardSheet.RowCount
+    /// <remarks> Use <see cref="IsTripleTriadCardUnlocked"/>. </remarks>
+    [FieldOffset(0x1A103), FixedSizeArray(isBitArray: true, bitCount: 465)] internal FixedSizeArray59<byte> _unlockedTripleTriadCards;
+    [FieldOffset(0x1A140)] public ulong UnlockedTripleTriadCardsCount;
 
-    [FieldOffset(0x1A022)] public int TerritoryTypeTransientOffsetZ; // this is a short in the sheet and copied with a 4 byte register causing it to be an int
-    [FieldOffset(0x1A026)] public byte BeginnerGuideFlags;
-    [FieldOffset(0x1A027)] public byte BattleEffectSelf;
-    [FieldOffset(0x1A028)] public byte BattleEffectParty;
-    [FieldOffset(0x1A029)] public byte BattleEffectOther;
+    [FieldOffset(0x1A15A)] public int TerritoryTypeTransientOffsetZ; // this is a short in the sheet and copied with a 4 byte register causing it to be an int
+    [FieldOffset(0x1A15E)] public byte BeginnerGuideFlags;
+    [FieldOffset(0x1A15F)] public byte BattleEffectSelf;
+    [FieldOffset(0x1A160)] public byte BattleEffectParty;
+    [FieldOffset(0x1A161)] public byte BattleEffectOther;
 
-    [FieldOffset(0x1A02B)] public byte BattleEffectPvPEnemyPc;
+    [FieldOffset(0x1A163)] public byte BattleEffectPvPEnemyPc;
 
-    [FieldOffset(0x1A030)] public uint UnlockedCompanionsCount;
+    [FieldOffset(0x1A168)] public uint UnlockedCompanionsCount;
 
-    [FieldOffset(0x1A221)] public bool TerritoryTypeTransientRowLoaded;
+    [FieldOffset(0x1A359)] public bool TerritoryTypeTransientRowLoaded;
 
-    [FieldOffset(0x1A223)] public byte GMRank;
+    [FieldOffset(0x1A35B)] public byte GMRank;
 
     [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 23")]
     public partial bool IsUnlockLinkUnlocked(uint unlockLink);
@@ -167,7 +175,7 @@ public unsafe partial struct UIState {
     /// </summary>
     /// <param name="cardId">The ID of the card (technically, of TripleTriadCardResident) to check against.</param>
     /// <returns>Returns true if the card is unlocked.</returns>
-    [MemberFunction("E8 ?? ?? ?? ?? 33 C9 66 89 8C")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 66 0F 44 FD")]
     public partial bool IsTripleTriadCardUnlocked(ushort cardId);
 
     /// <summary>
@@ -188,36 +196,32 @@ public unsafe partial struct UIState {
     /// </summary>
     /// <param name="aetheryteId">The ID of the aetheryte to check for.</param>
     /// <returns>Returns true if the specified aetheryte is unlocked.</returns>
-    public bool IsAetheryteUnlocked(uint aetheryteId) {
-        return ((1 << ((int)aetheryteId & 7)) & UnlockedAetherytesBitmask[(int)aetheryteId / 8]) > 0;
-    }
+    public bool IsAetheryteUnlocked(uint aetheryteId)
+        => UnlockedAetherytesBitArray.Get((int)aetheryteId);
 
     /// <summary>
     /// Check if a HowTo is unlocked for the current character.
     /// </summary>
     /// <param name="howtoId">The ID of the HowTo to check for.</param>
     /// <returns>Returns true if the specified HowTo is unlocked.</returns>
-    public bool IsHowToUnlocked(uint howtoId) {
-        return ((1 << ((int)howtoId & 7)) & UnlockedHowtoBitmask[(int)howtoId / 8]) > 0;
-    }
+    public bool IsHowToUnlocked(uint howtoId)
+        => UnlockedHowTosBitArray.Get((int)howtoId);
 
     /// <summary>
     /// Check if a companion (minion) is unlocked for the current character.
     /// </summary>
     /// <param name="companionId">The ID of the companion/minion to check for.</param>
     /// <returns>Returns true if the specified minion is unlocked.</returns>
-    public bool IsCompanionUnlocked(uint companionId) {
-        return ((1 << ((int)companionId & 7)) & UnlockedCompanionsBitmask[(int)companionId / 8]) > 0;
-    }
+    public bool IsCompanionUnlocked(uint companionId)
+        => UnlockedCompanionsBitArray.Get((int)companionId);
 
-    public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId) {
-        return ((1 << ((ushort)chocoboTaxiStandId & 7)) & ChocoboTaxiStandsBitmask[(ushort)chocoboTaxiStandId / 8]) > 0;
-    }
+    public bool IsChocoboTaxiStandUnlocked(uint chocoboTaxiStandId)
+        => UnlockedChocoboTaxiStandsBitArray.Get((int)chocoboTaxiStandId - 0x120000);
 
     [MemberFunction("E8 ?? ?? ?? ?? 88 46 02 B0 01")]
     public static partial bool IsInstanceContentCompleted(uint instanceContentId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 75 38")]
+    [MemberFunction("E8 ?? ?? ?? ?? 3C 01 74 44")]
     public static partial bool IsInstanceContentUnlocked(uint instanceContentId);
 
     [MemberFunction("48 83 EC 28 E8 ?? ?? ?? ?? 48 85 C0 74 14 0F B7 40 2A")]

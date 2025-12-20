@@ -5,7 +5,6 @@ namespace FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x88)]
 public unsafe partial struct Resource {
-    //[FieldOffset(0x08)] public void* VTable8; // unknown base class
     [FieldOffset(0x10)] public Resource* PrevResource;
     [FieldOffset(0x18)] public Resource* NextResource;
     [FieldOffset(0x20)] public ResourceHandle* Handle;

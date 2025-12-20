@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 163 * 4)]
 public unsafe partial struct HudNumberArray {
@@ -25,9 +24,9 @@ public unsafe partial struct HudNumberArray {
     [FieldOffset(9 * 4)] public int MaxGp;
     [FieldOffset(10 * 4)] public int CurrentMana2;
     [FieldOffset(11 * 4)] public int MaxMana2;
-    [FieldOffset(12 * 4)] public int Unk12;
-    [FieldOffset(13 * 4)] public int Unk13;
-    [FieldOffset(14 * 4)] public int Unk14;
+    [FieldOffset(12 * 4)] private int Unk12;
+    [FieldOffset(13 * 4)] private int Unk13;
+    [FieldOffset(14 * 4)] private int Unk14;
     [FieldOffset(15 * 4)] public int PlayerEntityId;
     [FieldOffset(16 * 4)] public int CurrentExp;
     /// <summary>
@@ -73,5 +72,3 @@ public unsafe partial struct HudNumberArray {
         FourElements = 2,
     }
 }
-
-

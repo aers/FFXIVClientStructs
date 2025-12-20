@@ -73,20 +73,20 @@ public unsafe partial struct AtkComponentIcon : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? C1 EE ?? 41 B8")]
     public partial void SetHasSecondDyeChannel(bool enabled);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 32 D2 45 8B C4")]
+    [MemberFunction("E8 ?? ?? ?? ?? 32 D2 44 8B C3")]
     public partial void SetIsMacro(bool enabled);
 
     [MemberFunction("E8 ?? ?? ?? ?? C1 EF 08 45 33 C0")]
     public partial void SetIsGlamoured(bool enabled);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 41 83 FD 45")]
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B CF 41 83 FC ?? 74")]
     public partial void SetIsRecipe(bool enabled);
 
     [MemberFunction("44 8B 89 ?? ?? ?? ?? 4C 8B D1 41 8B C1")]
     public partial void SetComboLevel(bool enable, byte level = 0);
 
     // [MemberFunction("E8 ?? ?? ?? ?? 48 8B 06 80 88")]
-    // public partial void SetUnk8192(bool enabled);
+    // private partial void SetUnk8192(bool enabled);
 
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 F6 FF C6")]
     public partial void SetOuterResNode(AtkResNode* node);

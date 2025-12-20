@@ -48,7 +48,7 @@ unsafe {
     }
 }
 /*
-using StreamReader dataReader = new StreamReader(@"..\..\..\..\ida\data.yml");
+using StreamReader dataReader = new StreamReader(@".\ida\data.yml");
 
 var deserializer = new YamlDotNet.Serialization.DeserializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build();
 var data = deserializer.Deserialize<Data>(dataReader);
@@ -140,6 +140,9 @@ foreach (Address addr in Resolver.GetInstance.Addresses) {
 
     if (functionName == "Dtor")
         functionName = "dtor";
+
+    if (theClass.Funcs == null)
+        continue;
     
     if (!theClass.Funcs.Any() || !theClass.Funcs.ContainsValue(functionName)) {
         notfoundOutputs.Add($"Function {functionName} of class {className} not found in data.yml for signature {addr.String}");
@@ -192,5 +195,5 @@ foreach (string line in notfoundOutputs)
     sb.AppendLine(line);
 
 Console.WriteLine(sb.ToString());
-File.WriteAllText(@"..\..\..\..\ida\data-missmatch2.txt", sb.ToString());
+File.WriteAllText(@".\ida\data-missmatch2.txt", sb.ToString());
 */

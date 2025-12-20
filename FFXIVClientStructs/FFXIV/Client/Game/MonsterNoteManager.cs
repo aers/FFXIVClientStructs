@@ -17,9 +17,9 @@ public unsafe partial struct MonsterNoteRankInfo {
 
     [FieldOffset(0x28)] public long Flags;
     [FieldOffset(0x30)] public int Rank;
-    [FieldOffset(0x34)] public int Unknown2; // Suspected to be some kind of flags?
+    [FieldOffset(0x34)] private int Unknown2; // Suspected to be some kind of flags?
     [FieldOffset(0x38)] public int Index;
-    [FieldOffset(0x3C)] public int Unknown3; // Seems to be zero padding
+    [FieldOffset(0x3C)] private int Unknown3; // Seems to be zero padding
 }
 
 [GenerateInterop]

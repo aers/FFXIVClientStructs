@@ -19,19 +19,19 @@ public unsafe partial struct AgentDeepDungeonInspect {
         [FieldOffset(0x00)] public uint RequestEntityId;
         [FieldOffset(0x04)] public uint CurrentEntityId;
         [FieldOffset(0x08)] public uint StatusSearchComment;
-        //[FieldOffset(0x0C)] public uint Unk0C;
+        //[FieldOffset(0x0C)] private uint Unk0C;
         [FieldOffset(0x10)] public Utf8String SearchComment;
         [FieldOffset(0x78)] public InfoProxyDetail* InfoProxyDetail;
         [FieldOffset(0x80)] public byte Title;
-        //[FieldOffset(0x81)] public byte Unk81; //Always 0 (solo in PotD)
+        //[FieldOffset(0x81)] private byte Unk81; //Always 0 (solo in PotD)
         [FieldOffset(0x82)] public byte WorldId;
-        //[FieldOffset(0x83)] public byte Unk83; //Always 0 (solo in PotD)
-        //[FieldOffset(0x84)] public byte Unk84; //Always 1 (solo in PotD)
+        //[FieldOffset(0x83)] private byte Unk83; //Always 0 (solo in PotD)
+        //[FieldOffset(0x84)] private byte Unk84; //Always 1 (solo in PotD)
         [FieldOffset(0x85)] public byte Job;
         [FieldOffset(0x86)] public byte Level;
         [FieldOffset(0x87)] public byte AetherPoolArmLvl;
         [FieldOffset(0x88)] public byte AetherPoolArmorLvl;
         [FieldOffset(0x90)] public Utf8String Name;
-        //[FieldOffset(0xF8)] public Utf8String UnkF8; //Never seen a value here. Type taken from Constructor
+        //[FieldOffset(0xF8)] private Utf8String UnkF8; //Never seen a value here. Type taken from Constructor
     }
 }

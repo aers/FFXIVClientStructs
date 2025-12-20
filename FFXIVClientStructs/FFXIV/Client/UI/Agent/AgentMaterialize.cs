@@ -21,7 +21,7 @@ public unsafe partial struct AgentMaterialize {
     [FieldOffset(0x50)] public MaterializeEntry** ItemArraySorted;
     [FieldOffset(0x58)] public MaterializeEntry* ItemArray;
     [FieldOffset(0x60)] public Utf8String ConfirmationText;
-    //[FieldOffset(0xC8)] public StdVector<Utf8String> unkC8;
+    //[FieldOffset(0xC8)] private StdVector<Utf8String> unkC8;
 
     public Span<Pointer<MaterializeEntry>> ItemsSorted => new(ItemArraySorted, 140);
     public Span<MaterializeEntry> Items => new(ItemArray, 140);

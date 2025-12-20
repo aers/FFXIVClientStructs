@@ -17,10 +17,10 @@ public unsafe partial struct AddonReconstructionBox {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe struct AddonItemDonationInfo {
-    [FieldOffset(0x00)] public void* UnkPtr1;
-    [FieldOffset(0x08)] public void* UnkPtr2;
-    [FieldOffset(0x10)] public void* UnkPtr3;
-    [FieldOffset(0x18)] public void* UnkPtr4;
-    [FieldOffset(0x20)] public void* UnkPtr5;
-    [FieldOffset(0x2C)] public int UnkValue1;
+    [FieldOffset(0x00)] private void* UnkPtr1;
+    [FieldOffset(0x08)] private void* UnkPtr2;
+    [FieldOffset(0x10)] private void* UnkPtr3;
+    [FieldOffset(0x18)] private void* UnkPtr4;
+    [FieldOffset(0x20)] private void* UnkPtr5;
+    [FieldOffset(0x2C)] private int UnkValue1;
 }

@@ -2,14 +2,14 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 
 // Client::Game::Event::EventSceneModuleUsualImpl
 //   Client::Game::Event::EventSceneModuleImplBase
+[GenerateInterop]
+[Inherits<EventSceneModuleImplBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public struct EventSceneModuleUsualImpl {
-    [FieldOffset(0x00), CExporterBaseType] public EventSceneModuleImplBase ImplBase; // TODO: actual add as inheritance
-}
+public partial struct EventSceneModuleUsualImpl { }
 
 // Client::Game::Event::EventSceneModuleImplBase
-// [GenerateInterop(true)] TODO: fix inheritance chain in 7.4
+[GenerateInterop(true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe struct EventSceneModuleImplBase {
+public unsafe partial struct EventSceneModuleImplBase {
     [FieldOffset(0x08)] public EventSceneModule* EventSceneModule;
 }

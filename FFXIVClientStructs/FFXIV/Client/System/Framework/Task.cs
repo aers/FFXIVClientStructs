@@ -7,7 +7,7 @@ public unsafe partial struct Task {
     [FieldOffset(0x08)] public void* Runner;
     [FieldOffset(0x10)] public Framework* Framework;
     [FieldOffset(0x18)] public void* Func;
-    // [FieldOffset(0x20)] public nint Unk; // Always 0? Probably reserved for subclasses
+    // [FieldOffset(0x20)] private nint Unk; // Always 0? Probably reserved for subclasses
     [FieldOffset(0x28)] public Task* Previous;
     [FieldOffset(0x30)] public Task* Next;
 

@@ -20,9 +20,9 @@ public unsafe partial struct Texture {
     [FieldOffset(0x4C)] public uint Height3; // new in 6.3, so far observed to always be the same as ActualHeight
     [FieldOffset(0x50)] public uint Depth; // for 3d textures like the legacy material tiling texture
     [FieldOffset(0x54)] public byte MipLevel;
-    [FieldOffset(0x55)] public byte Unk_55;
-    [FieldOffset(0x56)] public byte Unk_56;
-    [FieldOffset(0x57)] public byte Unk_57;
+    [FieldOffset(0x55)] private byte Unk_55;
+    [FieldOffset(0x56)] private byte Unk_56;
+    [FieldOffset(0x57)] private byte Unk_57;
     [FieldOffset(0x58)] public TextureFormat TextureFormat;
     [FieldOffset(0x5C)] public TextureFlags Flags;
     [FieldOffset(0x60)] public byte ArraySize; // new in 6.3

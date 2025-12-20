@@ -13,29 +13,29 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 // simple text node
 [GenerateInterop]
 [Inherits<AtkResNode>]
-[StructLayout(LayoutKind.Explicit, Size = 0x168)]
+[StructLayout(LayoutKind.Explicit, Size = 0x180)]
 [VirtualTable("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD", [1, 144])]
 public unsafe partial struct AtkTextNode : ICreatable {
-    [FieldOffset(0xB0)] public uint TextId;
-    [FieldOffset(0xB4)] public ByteColor TextColor;
-    [FieldOffset(0xB8)] public ByteColor EdgeColor;
-    [FieldOffset(0xBC)] public ByteColor BackgroundColor;
-    [FieldOffset(0xC0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
-    [FieldOffset(0x128)] public CStringPointer OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
-    [FieldOffset(0x130)] public StdList<Pointer<LinkData>>* LinkData;
+    [FieldOffset(0xC0)] public uint TextId;
+    [FieldOffset(0xC4)] public ByteColor TextColor;
+    [FieldOffset(0xC8)] public ByteColor EdgeColor;
+    [FieldOffset(0xCC)] public ByteColor BackgroundColor;
+    [FieldOffset(0xD0)] public Utf8String NodeText; // stores a copy of OriginalTextPointer
+    [FieldOffset(0x138)] public CStringPointer OriginalTextPointer; // set to the original argument of SetText even though the string is copied to the node
+    [FieldOffset(0x140)] public StdList<Pointer<LinkData>>* LinkData;
     // if text is "asdf" and you selected "sd" this is 2, 3
-    [FieldOffset(0x138)] public uint SelectStart;
-    [FieldOffset(0x13C)] public uint SelectEnd;
+    [FieldOffset(0x148)] public uint SelectStart;
+    [FieldOffset(0x14C)] public uint SelectEnd;
 
-    [FieldOffset(0x152)] public byte LineSpacing;
-    [FieldOffset(0x153)] public byte CharSpacing;
+    [FieldOffset(0x162)] public byte LineSpacing;
+    [FieldOffset(0x163)] public byte CharSpacing;
     /// <remarks>Alignment bits 0-3, Font Type bits 4-7</remarks>
-    [FieldOffset(0x154)] public byte AlignmentFontType;
-    [FieldOffset(0x155)] public byte FontSize;
-    [FieldOffset(0x156)] public byte SheetType;
+    [FieldOffset(0x164)] public byte AlignmentFontType;
+    [FieldOffset(0x165)] public byte FontSize;
+    [FieldOffset(0x166)] public byte SheetType;
 
-    [FieldOffset(0x158)] public ushort FontCacheHandle;
-    [FieldOffset(0x160)] public TextFlags TextFlags;
+    [FieldOffset(0x168)] public ushort FontCacheHandle;
+    [FieldOffset(0x170)] public TextFlags TextFlags;
 
     // 7.0 inlines this ctor
     public void Ctor() {
@@ -88,6 +88,12 @@ public unsafe partial struct AtkTextNode : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 45 33 C0 B2 18")]
     public partial void SetFont(FontType fontType);
 
+    /// <summary>
+    /// Applies <see cref="TextFlags.Ellipsis"/> or <see cref="TextFlags.WordWrap"/> to the text from <see cref="OriginalTextPointer"/> and stores it in <see cref="NodeText"/>.
+    /// </summary>
+    [MemberFunction("48 85 C9 0F 84 ?? ?? ?? ?? 4C 8B DC 53 48 81 EC")]
+    public partial void ApplyTextFlow();
+
     public AlignmentType AlignmentType {
         get => (AlignmentType)(AlignmentFontType & 0x0F);
         set => SetAlignment(value);
@@ -109,6 +115,7 @@ public enum TextFlags : ushort {
     Emboss = 1 << 5,
     WordWrap = 1 << 6,
     MultiLine = 1 << 7,
+    OverflowHidden = 1 << 8,
     FixedFontResolution = 1 << 9,
     Ellipsis = 1 << 10,
 }
@@ -135,9 +142,9 @@ public unsafe struct LinkData {
 
     /// <remarks> The type of the Link payload. See LinkMacroPayloadType in Lumina. </remarks>
     [FieldOffset(0x1B)] public byte LinkType;
-    [FieldOffset(0x1C)] public ushort Unk1C;
-    [FieldOffset(0x1E)] public ushort Unk1E;
-    [FieldOffset(0x20)] public uint Unk20;
+    [FieldOffset(0x1C)] private ushort Unk1C;
+    [FieldOffset(0x1E)] private ushort Unk1E;
+    [FieldOffset(0x20)] private uint Unk20;
     // These are the 3 link payload parameters. Usually SeStrings have int expressions.
     [FieldOffset(0x24), CExporterUnion("Value1")] public int IntValue1;
     [FieldOffset(0x24), CExporterUnion("Value1")] public uint UIntValue1;

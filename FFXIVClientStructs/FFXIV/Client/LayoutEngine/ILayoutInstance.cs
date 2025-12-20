@@ -153,10 +153,10 @@ public unsafe partial struct ILayoutInstance {
     // [VirtualFunction(77)] ...
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 0x2C)]
+[StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct Transform {
     [FieldOffset(0x00)] public Vector3 Translation;
-    [FieldOffset(0x0C)] public int Type; // note: this is a padding field that in some contexts is used to store collider type
+    [FieldOffset(0x0C)] public int Type; // This is a padding field that in some contexts is used to store collider type
     [FieldOffset(0x10)] public Quaternion Rotation;
     [FieldOffset(0x20)] public Vector3 Scale;
 
@@ -210,6 +210,7 @@ public enum InstanceType : byte {
     EnvLocation = 47,
     EventRange = 49, // collider in layer 4
     QuestMarker = 51,
+    Timeline = 52,
     CollisionBox = 57, // generic collider
     DoorRange = 58,
     LineVfx = 59,

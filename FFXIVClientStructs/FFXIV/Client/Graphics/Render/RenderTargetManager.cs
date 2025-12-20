@@ -106,7 +106,7 @@ public unsafe partial struct RenderTargetManager {
     [FieldOffset(0x43C)] public uint NearShadowMap_Height;
     [FieldOffset(0x440)] public uint FarShadowMap_Width;
     [FieldOffset(0x444)] public uint FarShadowMap_Height;
-    [FieldOffset(0x448)] public bool UnkBool_1;
+    [FieldOffset(0x448)] private bool UnkBool_1;
 
     [FieldOffset(0x4A8)] internal Texture* Unk4A8; // Looks the same as Unk68
     [FieldOffset(0x4B0)] internal Texture* Unk4B0; // Looks the same as Unk68

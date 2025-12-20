@@ -4,7 +4,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 [GenerateInterop]
 [Inherits<DrawObject>]
-[StructLayout(LayoutKind.Explicit, Size = 0xD0)]
+[StructLayout(LayoutKind.Explicit, Size = 0xE0)]
 public unsafe partial struct BgObject {
     [FieldOffset(0x90)] public ModelResourceHandle* ModelResourceHandle;
 }

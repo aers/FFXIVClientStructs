@@ -57,7 +57,7 @@ public unsafe partial struct AgentIKDResult {
         [FieldOffset(0x68)] public Utf8String Requirement;
         [FieldOffset(0xD0)] public uint IKDContentBonusId;
         [FieldOffset(0xD4)] public uint IconId;
-        [FieldOffset(0xD8)] public ushort UnkUShort; //IKDContentBonus Column 2
+        [FieldOffset(0xD8)] private ushort UnkUShort; //IKDContentBonus Column 2
         [FieldOffset(0xDA)] public byte Order;
     }
 
@@ -74,9 +74,9 @@ public unsafe partial struct AgentIKDResult {
         // more info for the catch results
         [FieldOffset(0x00)] public uint FishParameterId;
         [FieldOffset(0x04)] public uint ItemId;
-        [FieldOffset(0x08)] public byte UnkByte; //FishParameter Column 3
+        [FieldOffset(0x08)] private byte UnkByte; //FishParameter Column 3
 
         [FieldOffset(0x09)] public byte IKDContentBonusId;
-        //[FieldOffset(0x0A)] public ushort UnkUShort;
+        //[FieldOffset(0x0A)] private ushort UnkUShort;
     }
 }

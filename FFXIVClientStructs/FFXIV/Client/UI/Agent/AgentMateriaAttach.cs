@@ -46,8 +46,8 @@ public unsafe partial struct AgentMateriaAttach {
 
     [StructLayout(LayoutKind.Explicit, Size = 0xB8)]
     public struct MateriaAttachData {
-        // [FieldOffset(0x00)] public StdVector<Utf8String> unk0;
-        // [FieldOffset(0x18)] public StdVector<Utf8String> unk18;
+        // [FieldOffset(0x00)] private StdVector<Utf8String> unk0;
+        // [FieldOffset(0x18)] private StdVector<Utf8String> unk18;
         [FieldOffset(0x30)] public Utf8String ConfirmationText;
         [FieldOffset(0x98)] public MateriaAttachEntry** ItemArraySorted;
         [FieldOffset(0xA0)] public MateriaAttachEntry** MateriaArraySorted;
@@ -63,7 +63,7 @@ public unsafe partial struct AgentMateriaAttach {
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct MateriaAttachEntry {
         [FieldOffset(0x00)] public InventoryItem* Item;
-        // [FieldOffset(0x08)] public uint Item_Column_0x8C_Unknown4;
+        // [FieldOffset(0x08)] private uint Item_Column_0x8C_Unknown4;
         [FieldOffset(0x0C)] public short Index;
         [FieldOffset(0x0E)] public short ItemLevel;
     }

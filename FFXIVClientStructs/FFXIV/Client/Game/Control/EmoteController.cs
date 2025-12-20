@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Control;
 public unsafe partial struct EmoteController {
     [FieldOffset(0x08)] public BattleChara* OwnerObject;
     [FieldOffset(0x14)] public ushort EmoteId;
-    [FieldOffset(0x16)] public ushort Unk1; // Seems to be 1 when close enough to a target that height adjustment is needed, maybe.
+    [FieldOffset(0x16)] private ushort Unk1; // Seems to be 1 when close enough to a target that height adjustment is needed, maybe.
     [FieldOffset(0x18)] public GameObjectId Target;
     [FieldOffset(0x21)] public byte CPoseState;
 
@@ -41,7 +41,7 @@ public unsafe partial struct EmoteController {
         [FieldOffset(0x08)] public GameObjectId TargetId;
         /// <remarks> If bit 1 is set it does not display a log message. </remarks>
         [FieldOffset(0x10)] public byte Flags;
-        [FieldOffset(0x11)] public bool Unk11;
+        [FieldOffset(0x11)] private bool Unk11;
         [FieldOffset(0x18)] public ILayoutInstance* Layout;
     }
 }

@@ -100,9 +100,10 @@ public unsafe partial struct SceneWrapper {
     }
 }
 
+[GenerateInterop]
+[Inherits<Object>]
 [StructLayout(LayoutKind.Explicit, Size = 0xC0)]
 public unsafe partial struct Scene {
-    [FieldOffset(0x00), CExporterBaseType] public Object Object; // TODO: actual add as inheritance
     [FieldOffset(0x08)] public SceneManager* Manager;
     [FieldOffset(0x10)] public Collider* FirstCollider;
     [FieldOffset(0x18)] public int NumColliders;

@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 [Inherits<InfoProxyInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0x6E8)]
 public unsafe partial struct InfoProxyFreeCompany {
-    [FieldOffset(0x20)] public void* Unk20; //Low adress probably high in hierarchy
+    [FieldOffset(0x20)] private void* Unk20; //Low adress probably high in hierarchy
     [FieldOffset(0x30)] public ulong Id;
     [FieldOffset(0x46)] public ushort HomeWorldId;
     [FieldOffset(0x69)] public GrandCompany GrandCompany;
@@ -20,7 +20,7 @@ public unsafe partial struct InfoProxyFreeCompany {
     [FieldOffset(0x7A)] public ushort TotalMembers;
     [FieldOffset(0x7C), FixedSizeArray(isString: true)] internal FixedSizeArray22<byte> _name;
     [FieldOffset(0x93), FixedSizeArray(isString: true)] internal FixedSizeArray60<byte> _master;
-    [FieldOffset(0xD0)] public Utf8String UnkD0;
+    [FieldOffset(0xD0)] private Utf8String UnkD0;
     [FieldOffset(0x138)] public byte ActiveListItemNum; //0=Topics, 1 = Members, ....
     [FieldOffset(0x139)] public byte MemberTabIndex;
     [FieldOffset(0x13E)] public byte InfoTabIndex;

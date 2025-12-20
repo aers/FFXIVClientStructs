@@ -55,7 +55,7 @@ public unsafe partial struct PvPProfile {
     [FieldOffset(0x88)] public uint RivalWingsWeeklyMatchesWon;
 
     /// <summary>Gets the current PvP rank for the active Grand Company.</summary>
-    [MemberFunction("E8 ?? ?? ?? ?? 3A 47 4F")]
+    [MemberFunction("E8 ?? ?? ?? ?? 38 43 4F")]
     public partial byte GetPvPRank();
 
     /// <summary>Gets the total accumulated PvP experience for the active Grand Company.</summary>

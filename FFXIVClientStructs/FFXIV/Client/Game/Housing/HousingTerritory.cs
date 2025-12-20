@@ -1,4 +1,6 @@
 // ReSharper disable once CheckNamespace
+using FFXIVClientStructs.FFXIV.Component.GUI;
+
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
 // Client::Game::HousingTerritory
@@ -6,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [StructLayout(LayoutKind.Explicit, Size = 0x08)]
 public unsafe partial struct HousingTerritory { // 6 vfuncs
     [VirtualFunction(0)]
-    public partial void Dtor(bool free);
+    public partial void Dtor(byte freeFlags);
     [VirtualFunction(1)]
     public partial void Update();
     [VirtualFunction(2)]
@@ -16,6 +18,15 @@ public unsafe partial struct HousingTerritory { // 6 vfuncs
 
     [VirtualFunction(6)]
     public partial HousingTerritoryType GetTerritoryType();
+
+    [GenerateInterop]
+    [Inherits<AtkModuleInterface.AtkEventInterface>]
+    [StructLayout(LayoutKind.Explicit, Size = 0x28)]
+    public unsafe partial struct HousingTerritoryUIEventListener {
+        [FieldOffset(0x10)] public HousingTerritory* HousingTerritory;
+        [FieldOffset(0x18)] public InventoryItem* InventoryItem;
+        [FieldOffset(0x20)] public uint AddonId;
+    }
 }
 
 public enum HousingTerritoryType {

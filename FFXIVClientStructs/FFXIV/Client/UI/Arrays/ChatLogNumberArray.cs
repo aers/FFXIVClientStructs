@@ -2,7 +2,6 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
-[CExporterIgnore]
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 34 * 4)]
 public unsafe partial struct ChatLogNumberArray {
@@ -18,12 +17,12 @@ public unsafe partial struct ChatLogNumberArray {
     [FieldOffset(19 * 4)] public ChatLogChatTabNumberArray Tab3;
     [FieldOffset(26 * 4)] public ChatLogChatTabNumberArray Tab4;
 
-    [CExporterIgnore]
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 7 * 4)]
     public partial struct ChatLogChatTabNumberArray {
         [FieldOffset(0 * 4), FixedSizeArray, CExporterIgnore] internal FixedSizeArray7<int> _data;
 
-        [FieldOffset(0 * 4)] public int UnkLastLineVisibleHelper;
+        [FieldOffset(0 * 4)] private int UnkLastLineVisibleHelper;
         [FieldOffset(1 * 4)] public int LineCountVisible;
         [FieldOffset(2 * 4)] public int LineCountLoaded;
         [FieldOffset(3 * 4)] public int TotalLineCount;

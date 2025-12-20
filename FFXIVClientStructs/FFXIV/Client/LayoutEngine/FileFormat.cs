@@ -67,14 +67,15 @@ public unsafe struct FileSceneHeader {
     [FieldOffset(0x04)] public int NumEmbeddedLayerGroups;
     [FieldOffset(0x08)] public int OffsetGeneral; // offset to FileSceneGeneral
     [FieldOffset(0x0C)] public int OffsetFilters; // offset to FileSceneFilterList
-    //[FieldOffset(0x10)] public int Offset10;
+    [FieldOffset(0x10)] public int OffsetTimelines;
     [FieldOffset(0x14)] public int OffsetLayerGroupResources; // offset to a list of path offsets (ints)
     [FieldOffset(0x18)] public int NumLayerGroupResources;
-    //[FieldOffset(0x20)] public int Offset20;
+    [FieldOffset(0x20)] public int OffsetAnimationHandlers;
 
     public Span<FileLayerGroupHeader> EmbeddedLayerGroups => new((byte*)Unsafe.AsPointer(ref this) + OffsetEmbeddedLayerGroups, NumEmbeddedLayerGroups);
     public FileSceneGeneral* General => OffsetGeneral > 0 ? (FileSceneGeneral*)((byte*)Unsafe.AsPointer(ref this) + OffsetGeneral) : null;
     public FileSceneFilterList* Filters => OffsetFilters > 0 ? (FileSceneFilterList*)((byte*)Unsafe.AsPointer(ref this) + OffsetFilters) : null;
+    public FileSceneTimelineList* Timelines => OffsetTimelines > 0 ? (FileSceneTimelineList*)((byte*)Unsafe.AsPointer(ref this) + OffsetTimelines) : null;
     public Span<int> LayerGroupResourceOffsets => new((byte*)Unsafe.AsPointer(ref this) + OffsetLayerGroupResources, NumLayerGroupResources);
     public byte* LayerGroupResource(int offset) => (byte*)Unsafe.AsPointer(ref this) + OffsetLayerGroupResources + offset;
 }
@@ -113,6 +114,70 @@ public unsafe struct FileSceneFilter {
     [FieldOffset(0x12)] public ushort CfcId;
     //[FieldOffset(0x14)] public int u14;
     //[FieldOffset(0x18)] public int u18;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+public unsafe struct FileSceneTimelineList {
+    [FieldOffset(0)] public int OffsetEntries;
+    [FieldOffset(4)] public int NumEntries;
+
+    public Span<FileSceneTimeline> Entries => new((byte*)Unsafe.AsPointer(ref this) + OffsetEntries, NumEntries);
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x2C)]
+public unsafe struct FileSceneTimeline {
+    [FieldOffset(0x00)] public uint SubId;
+    [FieldOffset(0x04)] public int OffsetType;
+    [FieldOffset(0x08)] public int OffsetInstances;
+    [FieldOffset(0x0C)] public int NumInstances;
+    [FieldOffset(0x10)] public int OffsetActionTimelineKey;
+    [FieldOffset(0x14)] public int OffsetTmlb; // can be negative, in which case it points into the scene header
+    [FieldOffset(0x20)] public byte AutoPlay;
+    [FieldOffset(0x21)] public byte Loop;
+
+    public CStringPointer Type => OffsetType > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetType : null;
+    public Span<FileSceneTimelineInstance> Instances => new((byte*)Unsafe.AsPointer(ref this) + OffsetInstances, NumInstances);
+    public CStringPointer ActionTimelineKey => OffsetActionTimelineKey > 0 ? (byte*)Unsafe.AsPointer(ref this) + OffsetActionTimelineKey : null;
+    public byte* Tmlb => (byte*)Unsafe.AsPointer(ref this) + OffsetTmlb;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
+public struct FileSceneTimelineInstance {
+    [FieldOffset(0)] private int Unknown;
+    [FieldOffset(4)] public int SubId;
+}
+
+// 'TMLB'
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x1C)]
+public unsafe partial struct FileSceneTimelineDescription {
+    [FieldOffset(0x00)] public int Tag;
+    [FieldOffset(0x04)] public int Size;
+    [FieldOffset(0x08)] public int NumElements;
+    [FieldOffset(0x0C)] public FileSceneTimelineNode First;
+
+    [MemberFunction("81 39 ?? ?? ?? ?? 48 8B C1")]
+    public partial byte* GetC010Data();
+}
+
+// all TMLB sections seem to contain:
+// - TMDH x1 (header presumably) 16 bytes
+// - TMAL x1 16 bytes
+// - TMAC x1-N 28 bytes
+// - TMTR x1-N 24 bytes
+// - TMFC x0-N 32 bytes
+// - TMPP x? (handler is in the same section as previous 5, but haven't found any in level data yet)
+// other nodes are Cxxx where x <= 213, there is a big static list of constructors + metadata in the binary (search for xrefs for aC013 etc)
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public struct FileSceneTimelineNode {
+    [FieldOffset(0x00)] public int Tag;
+    [FieldOffset(0x04)] public int Size;
+    [FieldOffset(0x08)] public FileSceneTimelineNodeData Data;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 8)]
+public struct FileSceneTimelineNodeData {
+    [FieldOffset(0)] public byte Start;
 }
 
 

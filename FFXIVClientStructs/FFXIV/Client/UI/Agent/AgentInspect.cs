@@ -57,7 +57,7 @@ public unsafe partial struct AgentInspect {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct FreeCompanyData {
-        //[FieldOffset(0x00)] public byte Unkown4b0; // Maybe FreeCompany get status 1 = Finished
+        //[FieldOffset(0x00)] private byte Unkown4b0; // Maybe FreeCompany get status 1 = Finished
         [FieldOffset(0x00)] public long Id;
         [FieldOffset(0x08)] public CrestData Crest;
         [FieldOffset(0x10)] public ushort MemberCount;
@@ -76,10 +76,10 @@ public unsafe partial struct AgentInspect {
         [FieldOffset(0x18)] public bool CanCompare;
         [FieldOffset(0x19)] public bool CanTryOn;
 
-        [Obsolete("Not updated for 7.3")][FieldOffset(0x18)] public bool Filled;
-        [Obsolete("Not updated for 7.3")][FieldOffset(0x09)] public bool IsILevelSynced; // 1 if Level < Level{Equip} So probably ILVSynced
-        [Obsolete("Not updated for 7.3")][FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray4<short> _modelMain;
-        [Obsolete("Not updated for 7.3")][FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<short> _modelSub;
+        [Obsolete("Not updated for 7.3", true)][FieldOffset(0x18)] public bool Filled;
+        [Obsolete("Not updated for 7.3", true)][FieldOffset(0x09)] public bool IsILevelSynced; // 1 if Level < Level{Equip} So probably ILVSynced
+        [Obsolete("Not updated for 7.3", true)][FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray4<short> _modelMain;
+        [Obsolete("Not updated for 7.3", true)][FieldOffset(0x18), FixedSizeArray] internal FixedSizeArray4<short> _modelSub;
 
         [StructLayout(LayoutKind.Explicit, Size = 0x3)]
         public struct ColorRgb {

@@ -6,7 +6,7 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkEventDispatcher {
     [FieldOffset(0)] public AtkEventManager* AtkEventManager;
     [FieldOffset(0x8)] public StdVector<Pointer<AtkEvent>> Events;
-    [FieldOffset(0x20)] public byte Unk20;
+    [FieldOffset(0x20)] private byte Unk20;
 
     /// <returns>A bool indicating if the event was handled.</returns>
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 C8 41 BE")]

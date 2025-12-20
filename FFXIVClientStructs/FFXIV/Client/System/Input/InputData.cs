@@ -43,7 +43,7 @@ public unsafe partial struct InputData {
     [MemberFunction("E9 ?? ?? ?? ?? 83 7F 44 02")]
     public partial bool IsInputIdPressed(InputId inputId);
 
-    [MemberFunction("E8 ?? ?? ?? ?? 33 DB 41 8B D5")]
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8D 76 06")]
     public partial bool IsInputIdDown(InputId inputId);
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 37 EB 06")]
@@ -143,7 +143,7 @@ public partial struct KeyboardInputData {
 
     [FieldOffset(0x4), FixedSizeArray] internal FixedSizeArray159<KeyStateFlags> _keyState;
 
-    //[FieldOffset(0x284)] public byte UnkFlag;
+    //[FieldOffset(0x284)] private byte UnkFlag;
     [FieldOffset(0x285)] public byte KeyHeldKeycode;
 
     /*
@@ -758,123 +758,783 @@ public enum InputId {
     MENU_FACE_ACCESSORY = 519,
     MENU_MUTE_LIST = 520,
     TERM_FILTER = 521,
-    PAD_MAP = 522,
-    PAD_JUMPANDCANCELCAST = 523,
-    PAD_LOCKANDSWARD = 524,
-    PAD_SWARD = 525,
-    PAD_LOCKANDSIT = 526,
-    PAD_MAINMENUFOCUS = 527,
-    PAD_HUDFOCUS = 528,
-    PAD_MODECHANGE = 529,
-    PAD_CROSSEDITMODE = 530,
-    PAD_DRAWN_SWORD = 531,
-    PAD_CAMERA_LOCK_ON_ONLY = 532,
-    PAD_MACRO_98 = 533,
-    PAD_MACRO_99 = 534,
-    PAD_DISMOUNT = 535,
+    MENU_TOFU = 522,
+    QUICK_PANEL = 523,
+    PAD_MAP = 524,
+    PAD_JUMPANDCANCELCAST = 525,
+    PAD_LOCKANDSWARD = 526,
+    PAD_SWARD = 527,
+    PAD_LOCKANDSIT = 528,
+    PAD_MAINMENUFOCUS = 529,
+    PAD_HUDFOCUS = 530,
+    PAD_MODECHANGE = 531,
+    PAD_CROSSEDITMODE = 532,
+    PAD_DRAWN_SWORD = 533,
+    PAD_CAMERA_LOCK_ON_ONLY = 534,
+    PAD_QUICKPANEL = 535,
+    PAD_MACRO_98 = 536,
+    PAD_MACRO_99 = 537,
+    PAD_DISMOUNT = 538,
 
-    PAD_MAP_ZOOM = 546,
-    PAD_MAP_RESET = 547,
-    PAD_MAP_MENU = 548,
+    PAD_MAP_ZOOM = 549,
+    PAD_MAP_RESET = 550,
+    PAD_MAP_MENU = 551,
 
-    KEY_SCREENSHOT = 551,
-    PAD_SCREENSHOT = 552,
+    KEY_SCREENSHOT = 554,
+    PAD_SCREENSHOT = 555,
 
-    PERFORMANCE_MODE_OCTAVE_HIGHER = 564,
-    PERFORMANCE_MODE_OCTAVE_LOWER = 565,
-    PERFORMANCE_MODE_SHARP = 566,
-    PERFORMANCE_MODE_FLAT = 567,
-    PERFORMANCE_MODE_C4 = 568,
-    PERFORMANCE_MODE_C4_SHARP = 569,
-    PERFORMANCE_MODE_D4 = 570,
-    PERFORMANCE_MODE_D4_SHARP = 571,
-    PERFORMANCE_MODE_E4 = 572,
-    PERFORMANCE_MODE_F4 = 573,
-    PERFORMANCE_MODE_F4_SHARP = 574,
-    PERFORMANCE_MODE_G4 = 575,
-    PERFORMANCE_MODE_G4_SHARP = 576,
-    PERFORMANCE_MODE_A4 = 577,
-    PERFORMANCE_MODE_A4_SHARP = 578,
-    PERFORMANCE_MODE_B4 = 579,
-    PERFORMANCE_MODE_C5 = 580,
-    PERFORMANCE_MODE_TONE_NEXT = 581,
-    PERFORMANCE_MODE_TONE_PREV = 582,
-    PERFORMANCE_MODE_TONE0 = 583,
-    PERFORMANCE_MODE_TONE1 = 584,
-    PERFORMANCE_MODE_TONE2 = 585,
-    PERFORMANCE_MODE_TONE3 = 586,
-    PERFORMANCE_MODE_TONE4 = 587,
-    PERFORMANCE_MODE_EX_OCTAVE_HIGHER = 588,
-    PERFORMANCE_MODE_EX_OCTAVE_LOWER = 589,
-    PERFORMANCE_MODE_EX_SHARP = 590,
-    PERFORMANCE_MODE_EX_FLAT = 591,
-    PERFORMANCE_MODE_EX_C3 = 592,
-    PERFORMANCE_MODE_EX_C3_SHARP = 593,
-    PERFORMANCE_MODE_EX_D3 = 594,
-    PERFORMANCE_MODE_EX_D3_SHARP = 595,
-    PERFORMANCE_MODE_EX_E3 = 596,
-    PERFORMANCE_MODE_EX_F3 = 597,
-    PERFORMANCE_MODE_EX_F3_SHARP = 598,
-    PERFORMANCE_MODE_EX_G3 = 599,
-    PERFORMANCE_MODE_EX_G3_SHARP = 600,
-    PERFORMANCE_MODE_EX_A3 = 601,
-    PERFORMANCE_MODE_EX_A3_SHARP = 602,
-    PERFORMANCE_MODE_EX_B3 = 603,
-    PERFORMANCE_MODE_EX_C4 = 604,
-    PERFORMANCE_MODE_EX_C4_SHARP = 605,
-    PERFORMANCE_MODE_EX_D4 = 606,
-    PERFORMANCE_MODE_EX_D4_SHARP = 607,
-    PERFORMANCE_MODE_EX_E4 = 608,
-    PERFORMANCE_MODE_EX_F4 = 609,
-    PERFORMANCE_MODE_EX_F4_SHARP = 610,
-    PERFORMANCE_MODE_EX_G4 = 611,
-    PERFORMANCE_MODE_EX_G4_SHARP = 612,
-    PERFORMANCE_MODE_EX_A4 = 613,
-    PERFORMANCE_MODE_EX_A4_SHARP = 614,
-    PERFORMANCE_MODE_EX_B4 = 615,
-    PERFORMANCE_MODE_EX_C5 = 616,
-    PERFORMANCE_MODE_EX_C5_SHARP = 617,
-    PERFORMANCE_MODE_EX_D5 = 618,
-    PERFORMANCE_MODE_EX_D5_SHARP = 619,
-    PERFORMANCE_MODE_EX_E5 = 620,
-    PERFORMANCE_MODE_EX_F5 = 621,
-    PERFORMANCE_MODE_EX_F5_SHARP = 622,
-    PERFORMANCE_MODE_EX_G5 = 623,
-    PERFORMANCE_MODE_EX_G5_SHARP = 624,
-    PERFORMANCE_MODE_EX_A5 = 625,
-    PERFORMANCE_MODE_EX_A5_SHARP = 626,
-    PERFORMANCE_MODE_EX_B5 = 627,
-    PERFORMANCE_MODE_EX_C6 = 628,
-    PERFORMANCE_MODE_EX_TONE_NEXT = 629,
-    PERFORMANCE_MODE_EX_TONE_PREV = 630,
-    PERFORMANCE_MODE_EX_TONE0 = 631,
-    PERFORMANCE_MODE_EX_TONE1 = 632,
-    PERFORMANCE_MODE_EX_TONE2 = 633,
-    PERFORMANCE_MODE_EX_TONE3 = 634,
-    PERFORMANCE_MODE_EX_TONE4 = 635,
+    PERFORMANCE_MODE_OCTAVE_HIGHER = 567,
+    PERFORMANCE_MODE_OCTAVE_LOWER = 568,
+    PERFORMANCE_MODE_SHARP = 569,
+    PERFORMANCE_MODE_FLAT = 570,
+    PERFORMANCE_MODE_C4 = 571,
+    PERFORMANCE_MODE_C4_SHARP = 572,
+    PERFORMANCE_MODE_D4 = 573,
+    PERFORMANCE_MODE_D4_SHARP = 574,
+    PERFORMANCE_MODE_E4 = 575,
+    PERFORMANCE_MODE_F4 = 576,
+    PERFORMANCE_MODE_F4_SHARP = 577,
+    PERFORMANCE_MODE_G4 = 578,
+    PERFORMANCE_MODE_G4_SHARP = 579,
+    PERFORMANCE_MODE_A4 = 580,
+    PERFORMANCE_MODE_A4_SHARP = 581,
+    PERFORMANCE_MODE_B4 = 582,
+    PERFORMANCE_MODE_C5 = 583,
+    PERFORMANCE_MODE_TONE_NEXT = 584,
+    PERFORMANCE_MODE_TONE_PREV = 585,
+    PERFORMANCE_MODE_TONE0 = 586,
+    PERFORMANCE_MODE_TONE1 = 587,
+    PERFORMANCE_MODE_TONE2 = 588,
+    PERFORMANCE_MODE_TONE3 = 589,
+    PERFORMANCE_MODE_TONE4 = 590,
+    PERFORMANCE_MODE_EX_OCTAVE_HIGHER = 591,
+    PERFORMANCE_MODE_EX_OCTAVE_LOWER = 592,
+    PERFORMANCE_MODE_EX_SHARP = 593,
+    PERFORMANCE_MODE_EX_FLAT = 594,
+    PERFORMANCE_MODE_EX_C3 = 595,
+    PERFORMANCE_MODE_EX_C3_SHARP = 596,
+    PERFORMANCE_MODE_EX_D3 = 597,
+    PERFORMANCE_MODE_EX_D3_SHARP = 598,
+    PERFORMANCE_MODE_EX_E3 = 599,
+    PERFORMANCE_MODE_EX_F3 = 600,
+    PERFORMANCE_MODE_EX_F3_SHARP = 601,
+    PERFORMANCE_MODE_EX_G3 = 602,
+    PERFORMANCE_MODE_EX_G3_SHARP = 603,
+    PERFORMANCE_MODE_EX_A3 = 604,
+    PERFORMANCE_MODE_EX_A3_SHARP = 605,
+    PERFORMANCE_MODE_EX_B3 = 606,
+    PERFORMANCE_MODE_EX_C4 = 607,
+    PERFORMANCE_MODE_EX_C4_SHARP = 608,
+    PERFORMANCE_MODE_EX_D4 = 609,
+    PERFORMANCE_MODE_EX_D4_SHARP = 610,
+    PERFORMANCE_MODE_EX_E4 = 611,
+    PERFORMANCE_MODE_EX_F4 = 612,
+    PERFORMANCE_MODE_EX_F4_SHARP = 613,
+    PERFORMANCE_MODE_EX_G4 = 614,
+    PERFORMANCE_MODE_EX_G4_SHARP = 615,
+    PERFORMANCE_MODE_EX_A4 = 616,
+    PERFORMANCE_MODE_EX_A4_SHARP = 617,
+    PERFORMANCE_MODE_EX_B4 = 618,
+    PERFORMANCE_MODE_EX_C5 = 619,
+    PERFORMANCE_MODE_EX_C5_SHARP = 620,
+    PERFORMANCE_MODE_EX_D5 = 621,
+    PERFORMANCE_MODE_EX_D5_SHARP = 622,
+    PERFORMANCE_MODE_EX_E5 = 623,
+    PERFORMANCE_MODE_EX_F5 = 624,
+    PERFORMANCE_MODE_EX_F5_SHARP = 625,
+    PERFORMANCE_MODE_EX_G5 = 626,
+    PERFORMANCE_MODE_EX_G5_SHARP = 627,
+    PERFORMANCE_MODE_EX_A5 = 628,
+    PERFORMANCE_MODE_EX_A5_SHARP = 629,
+    PERFORMANCE_MODE_EX_B5 = 630,
+    PERFORMANCE_MODE_EX_C6 = 631,
+    PERFORMANCE_MODE_EX_TONE_NEXT = 632,
+    PERFORMANCE_MODE_EX_TONE_PREV = 633,
+    PERFORMANCE_MODE_EX_TONE0 = 634,
+    PERFORMANCE_MODE_EX_TONE1 = 635,
+    PERFORMANCE_MODE_EX_TONE2 = 636,
+    PERFORMANCE_MODE_EX_TONE3 = 637,
+    PERFORMANCE_MODE_EX_TONE4 = 638,
 
-    VIRTUAL_PAD_L1 = 651,
-    VIRTUAL_PAD_L2 = 652,
-    VIRTUAL_PAD_L3 = 653,
-    VIRTUAL_PAD_R1 = 654,
-    VIRTUAL_PAD_R2 = 655,
-    VIRTUAL_PAD_R3 = 656,
-    VIRTUAL_PAD_UP = 657,
-    VIRTUAL_PAD_DOWN = 658,
-    VIRTUAL_PAD_LEFT = 659,
-    VIRTUAL_PAD_RIGHT = 660,
-    VIRTUAL_PAD_TRIANGLE = 661,
-    VIRTUAL_PAD_CROSS = 662,
-    VIRTUAL_PAD_SQUARE = 663,
-    VIRTUAL_PAD_CIRCLE = 664,
-    VIRTUAL_PAD_START = 665,
-    VIRTUAL_PAD_SELECT = 666,
-    VIRTUAL_PAD_LSTICK_UP = 667,
-    VIRTUAL_PAD_LSTICK_DOWN = 668,
-    VIRTUAL_PAD_LSTICK_LEFT = 669,
-    VIRTUAL_PAD_LSTICK_RIGHT = 670,
-    VIRTUAL_PAD_RSTICK_UP = 671,
-    VIRTUAL_PAD_RSTICK_DOWN = 672,
-    VIRTUAL_PAD_RSTICK_LEFT = 673,
-    VIRTUAL_PAD_RSTICK_RIGHT = 674,
+    VIRTUAL_PAD_L1 = 654,
+    VIRTUAL_PAD_L2 = 655,
+    VIRTUAL_PAD_L3 = 656,
+    VIRTUAL_PAD_R1 = 657,
+    VIRTUAL_PAD_R2 = 658,
+    VIRTUAL_PAD_R3 = 659,
+    VIRTUAL_PAD_UP = 660,
+    VIRTUAL_PAD_DOWN = 661,
+    VIRTUAL_PAD_LEFT = 662,
+    VIRTUAL_PAD_RIGHT = 663,
+    VIRTUAL_PAD_TRIANGLE = 664,
+    VIRTUAL_PAD_CROSS = 665,
+    VIRTUAL_PAD_SQUARE = 666,
+    VIRTUAL_PAD_CIRCLE = 667,
+    VIRTUAL_PAD_START = 668,
+    VIRTUAL_PAD_SELECT = 669,
+    VIRTUAL_PAD_LSTICK_UP = 670,
+    VIRTUAL_PAD_LSTICK_DOWN = 671,
+    VIRTUAL_PAD_LSTICK_LEFT = 672,
+    VIRTUAL_PAD_LSTICK_RIGHT = 673,
+    VIRTUAL_PAD_RSTICK_UP = 674,
+    VIRTUAL_PAD_RSTICK_DOWN = 675,
+    VIRTUAL_PAD_RSTICK_LEFT = 676,
+    VIRTUAL_PAD_RSTICK_RIGHT = 677,
+}
+
+public enum SeVirtualKey : byte {
+    /// <summary>
+    /// This is an addendum to use on functions in which you have to pass a zero value to represent no key code.
+    /// </summary>
+    NO_KEY = 0,
+
+    /// <summary>
+    /// Left mouse button.
+    /// </summary>
+    LBUTTON = 1,
+
+    /// <summary>
+    /// Right mouse button.
+    /// </summary>
+    RBUTTON = 2,
+
+    /// <summary>
+    /// Control-break processing.
+    /// </summary>
+    CANCEL = 3,
+
+    /// <summary>
+    /// Middle mouse button (three-button mouse).
+    /// </summary>
+    /// <remarks>
+    /// NOT contiguous with L and R buttons.
+    /// </remarks>
+    MBUTTON = 4,
+
+    /// <summary>
+    /// X1 mouse button.
+    /// </summary>
+
+    /// <remarks>
+    /// NOT contiguous with L and R buttons.
+    /// </remarks>
+    XBUTTON1 = 5,
+
+    /// <summary>
+    /// X2 mouse button.
+    /// </summary>
+
+    /// <remarks>
+    /// NOT contiguous with L and R buttons.
+    /// </remarks>
+    XBUTTON2 = 6,
+
+    /// <summary>
+    /// BACKSPACE key.
+    /// </summary>
+    BACK = 8,
+
+    /// <summary>
+    /// TAB key.
+    /// </summary>
+    TAB = 9,
+
+    /// <summary>
+    /// CLEAR key.
+    /// </summary>
+    CLEAR = 12,
+
+    /// <summary>
+    /// RETURN key.
+    /// </summary>
+    RETURN = 13,
+
+    /// <summary>
+    /// SHIFT key.
+    /// </summary>
+    SHIFT = 16,
+
+    /// <summary>
+    /// CONTROL key.
+    /// </summary>
+    CONTROL = 17,
+
+    /// <summary>
+    /// ALT key.
+    /// </summary>
+    MENU = 18,
+
+    /// <summary>
+    /// PAUSE key.
+    /// </summary>
+    PAUSE = 19,
+
+    /// <summary>
+    /// CAPS LOCK key.
+    /// </summary>
+    CAPITAL = 20,
+
+    /// <summary>
+    /// IME Kana mode.
+    /// </summary>
+    KANA = 21,
+
+    /// <summary>
+    /// IME Hangeul mode (maintained for compatibility; use User32.VirtualKey.HANGUL).
+    /// </summary>
+    HANGEUL = KANA,
+
+    /// <summary>
+    /// IME Hangul mode.
+    /// </summary>
+    HANGUL = KANA,
+
+    /// <summary>
+    /// IME Junja mode.
+    /// </summary>
+    JUNJA = 23,
+
+    /// <summary>
+    /// IME final mode.
+    /// </summary>
+    FINAL = 24,
+
+    /// <summary>
+    /// IME Hanja mode.
+    /// </summary>
+    HANJA = 25,
+
+    /// <summary>
+    /// IME Kanji mode.
+    /// </summary>
+    KANJI = HANJA,
+
+    /// <summary>
+    /// ESC key.
+    /// </summary>
+    ESCAPE = 27,
+
+    /// <summary>
+    /// IME convert.
+    /// </summary>
+    CONVERT = 28,
+
+    /// <summary>
+    /// IME nonconvert.
+    /// </summary>
+    NONCONVERT = 29,
+
+    /// <summary>
+    /// IME accept.
+    /// </summary>
+    ACCEPT = 30,
+
+    /// <summary>
+    /// IME mode change request.
+    /// </summary>
+    MODECHANGE = 31,
+
+    /// <summary>
+    /// SPACEBAR.
+    /// </summary>
+    SPACE = 32,
+
+    /// <summary>
+    /// PAGE UP key.
+    /// </summary>
+    PRIOR = 33,
+
+    /// <summary>
+    /// PAGE DOWN key.
+    /// </summary>
+    NEXT = 34,
+
+    /// <summary>
+    /// END key.
+    /// </summary>
+    END = 35,
+
+    /// <summary>
+    /// HOME key.
+    /// </summary>
+    HOME = 36,
+
+    /// <summary>
+    /// LEFT ARROW key.
+    /// </summary>
+    LEFT = 37,
+
+    /// <summary>
+    /// UP ARROW key.
+    /// </summary>
+    UP = 38,
+
+    /// <summary>
+    /// RIGHT ARROW key.
+    /// </summary>
+    RIGHT = 39,
+
+    /// <summary>
+    /// DOWN ARROW key.
+    /// </summary>
+    DOWN = 40,
+
+    /// <summary>
+    /// SELECT key.
+    /// </summary>
+    SELECT = 41,
+
+    /// <summary>
+    /// PRINT key.
+    /// </summary>
+    PRINT = 42,
+
+    /// <summary>
+    /// EXECUTE key.
+    /// </summary>
+    EXECUTE = 43,
+
+    /// <summary>
+    /// PRINT SCREEN key.
+    /// </summary>
+    SNAPSHOT = 44,
+
+    /// <summary>
+    /// INS key.
+    /// </summary>
+    INSERT = 45,
+
+    /// <summary>
+    /// DEL key.
+    /// </summary>
+    DELETE = 46,
+
+    /// <summary>
+    /// HELP key.
+    /// </summary>
+    HELP = 47,
+
+    /// <summary>
+    /// 0 key.
+    /// </summary>
+    KEY_0 = 48,
+
+    /// <summary>
+    /// 1 key.
+    /// </summary>
+    KEY_1 = 49,
+
+    /// <summary>
+    /// 2 key.
+    /// </summary>
+    KEY_2 = 50,
+
+    /// <summary>
+    /// 3 key.
+    /// </summary>
+    KEY_3 = 51,
+
+    /// <summary>
+    /// 4 key.
+    /// </summary>
+    KEY_4 = 52,
+
+    /// <summary>
+    /// 5 key.
+    /// </summary>
+    KEY_5 = 53,
+
+    /// <summary>
+    /// 6 key.
+    /// </summary>
+    KEY_6 = 54,
+
+    /// <summary>
+    /// 7 key.
+    /// </summary>
+    KEY_7 = 55,
+
+    /// <summary>
+    /// 8 key.
+    /// </summary>
+    KEY_8 = 56,
+
+    /// <summary>
+    /// 9 key.
+    /// </summary>
+    KEY_9 = 57,
+
+    /// <summary>
+    /// A key.
+    /// </summary>
+    A = 65,
+
+    /// <summary>
+    /// B key.
+    /// </summary>
+    B = 66,
+
+    /// <summary>
+    /// C key.
+    /// </summary>
+    C = 67,
+
+    /// <summary>
+    /// D key.
+    /// </summary>
+    D = 68,
+
+    /// <summary>
+    /// E key.
+    /// </summary>
+    E = 69,
+
+    /// <summary>
+    /// F key.
+    /// </summary>
+    F = 70,
+
+    /// <summary>
+    /// G key.
+    /// </summary>
+    G = 71,
+
+    /// <summary>
+    /// H key.
+    /// </summary>
+    H = 72,
+
+    /// <summary>
+    /// I key.
+    /// </summary>
+    I = 73,
+
+    /// <summary>
+    /// J key.
+    /// </summary>
+    J = 74,
+
+    /// <summary>
+    /// K key.
+    /// </summary>
+    K = 75,
+
+    /// <summary>
+    /// L key.
+    /// </summary>
+    L = 76,
+
+    /// <summary>
+    /// M key.
+    /// </summary>
+    M = 77,
+
+    /// <summary>
+    /// N key.
+    /// </summary>
+    N = 78,
+
+    /// <summary>
+    /// O key.
+    /// </summary>
+    O = 79,
+
+    /// <summary>
+    /// P key.
+    /// </summary>
+    P = 80,
+
+    /// <summary>
+    /// Q key.
+    /// </summary>
+    Q = 81,
+
+    /// <summary>
+    /// R key.
+    /// </summary>
+    R = 82,
+
+    /// <summary>
+    /// S key.
+    /// </summary>
+    S = 83,
+
+    /// <summary>
+    /// T key.
+    /// </summary>
+    T = 84,
+
+    /// <summary>
+    /// U key.
+    /// </summary>
+    U = 85,
+
+    /// <summary>
+    /// V key.
+    /// </summary>
+    V = 86,
+
+    /// <summary>
+    /// W key.
+    /// </summary>
+    W = 87,
+
+    /// <summary>
+    /// X key.
+    /// </summary>
+    X = 88,
+
+    /// <summary>
+    /// Y key.
+    /// </summary>
+    Y = 89,
+
+    /// <summary>
+    /// Z key.
+    /// </summary>
+    Z = 90,
+
+    /// <summary>
+    /// Left Windows key (Natural keyboard).
+    /// </summary>
+    LWIN = 91,
+
+    /// <summary>
+    /// Right Windows key (Natural keyboard).
+    /// </summary>
+    RWIN = 92,
+
+    /// <summary>
+    /// Applications key (Natural keyboard).
+    /// </summary>
+    APPS = 93,
+
+    /// <summary>
+    /// Computer Sleep key.
+    /// </summary>
+    SLEEP = 95,
+
+    /// <summary>
+    /// Numeric keypad 0 key.
+    /// </summary>
+    NUMPAD0 = 96,
+
+    /// <summary>
+    /// Numeric keypad 1 key.
+    /// </summary>
+    NUMPAD1 = 97,
+
+    /// <summary>
+    /// Numeric keypad 2 key.
+    /// </summary>
+    NUMPAD2 = 98,
+
+    /// <summary>
+    /// Numeric keypad 3 key.
+    /// </summary>
+    NUMPAD3 = 99,
+
+    /// <summary>
+    /// Numeric keypad 4 key.
+    /// </summary>
+    NUMPAD4 = 100,
+
+    /// <summary>
+    /// Numeric keypad 5 key.
+    /// </summary>
+    NUMPAD5 = 101,
+
+    /// <summary>
+    /// Numeric keypad 6 key.
+    /// </summary>
+    NUMPAD6 = 102,
+
+    /// <summary>
+    /// Numeric keypad 7 key.
+    /// </summary>
+    NUMPAD7 = 103,
+
+    /// <summary>
+    /// Numeric keypad 8 key.
+    /// </summary>
+    NUMPAD8 = 104,
+
+    /// <summary>
+    /// Numeric keypad 9 key.
+    /// </summary>
+    NUMPAD9 = 105,
+
+    /// <summary>
+    /// Multiply key.
+    /// </summary>
+    MULTIPLY = 106,
+
+    /// <summary>
+    /// Add key.
+    /// </summary>
+    ADD = 107,
+
+    /// <summary>
+    /// Separator key.
+    /// </summary>
+    SEPARATOR = 108,
+
+    /// <summary>
+    /// Subtract key.
+    /// </summary>
+    SUBTRACT = 109,
+
+    /// <summary>
+    /// Decimal key.
+    /// </summary>
+    DECIMAL = 110,
+
+    /// <summary>
+    /// Divide key.
+    /// </summary>
+    DIVIDE = 111,
+
+    /// <summary>
+    /// F1 Key.
+    /// </summary>
+    F1 = 112,
+
+    /// <summary>
+    /// F2 Key.
+    /// </summary>
+    F2 = 113,
+
+    /// <summary>
+    /// F3 Key.
+    /// </summary>
+    F3 = 114,
+
+    /// <summary>
+    /// F4 Key.
+    /// </summary>
+    F4 = 115,
+
+    /// <summary>
+    /// F5 Key.
+    /// </summary>
+    F5 = 116,
+
+    /// <summary>
+    /// F6 Key.
+    /// </summary>
+    F6 = 117,
+
+    /// <summary>
+    /// F7 Key.
+    /// </summary>
+    F7 = 118,
+
+    /// <summary>
+    /// F8 Key.
+    /// </summary>
+    F8 = 119,
+
+    /// <summary>
+    /// F9 Key.
+    /// </summary>
+    F9 = 120,
+
+    /// <summary>
+    /// F10 Key.
+    /// </summary>
+    F10 = 121,
+
+    /// <summary>
+    /// F11 Key.
+    /// </summary>
+    F11 = 122,
+
+    /// <summary>
+    /// F12 Key.
+    /// </summary>
+    F12 = 123,
+
+    /// <summary>
+    /// F13 Key.
+    /// </summary>
+    F13 = 124,
+
+    /// <summary>
+    /// F14 Key.
+    /// </summary>
+    F14 = 125,
+
+    /// <summary>
+    /// F15 Key.
+    /// </summary>
+    F15 = 126,
+
+    /// <summary>
+    /// F16 Key.
+    /// </summary>
+    F16 = 127,
+
+    /// <summary>
+    /// NUM LOCK key.
+    /// </summary>
+    NUMLOCK = 128,
+
+    /// <summary>
+    /// SCROLL LOCK key.
+    /// </summary>
+    SCROLL = 129,
+
+    /// <summary>
+    /// F19 Key.
+    /// </summary>
+    F19 = 130,
+
+    /// <summary>
+    /// F20 Key.
+    /// </summary>
+    F20 = 131,
+
+    /// <summary>
+    /// F21 Key.
+    /// </summary>
+    F21 = 132,
+
+    /// <summary>
+    /// F22 Key.
+    /// </summary>
+    F22 = 133,
+
+    /// <summary>
+    /// F23 Key.
+    /// </summary>
+    F23 = 134,
+
+    /// <summary>
+    /// F24 Key.
+    /// </summary>
+    F24 = 135,
+
+    PAD_LMB = 160,
+    PAD_MMB = 161,
+    PAD_RMB = 162,
+    PAD_MB4 = 163,
+    PAD_MB5 = 164,
+    PAD_MB6 = 165,
+    PAD_MB7 = 166,
+    PAD_UP = 167,
+    PAD_DOWN = 168,
+    PAD_LEFT = 169,
+    PAD_RIGHT = 170,
+    PAD_Y = 171,
+    PAD_A = 172,
+    PAD_X = 173,
+    PAD_B = 174,
+    PAD_LB = 175,
+    PAD_LT = 176,
+    PAD_LS = 177,
+    PAD_RB = 178,
+    PAD_RT = 179,
+    PAD_RS = 180,
+    PAD_Select = 181,
+    PAD_Start = 182,
 }
