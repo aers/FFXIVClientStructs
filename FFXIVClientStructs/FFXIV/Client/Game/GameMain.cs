@@ -11,8 +11,8 @@ public unsafe partial struct GameMain {
     [StaticAddress("48 8D 0D ?? ?? ?? ?? 0F 28 F2 48 89 44 24 ??", 3)]
     public static partial GameMain* Instance();
 
-    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray4<Festival> _activeFestivals;
-    [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray4<Festival> _queuedFestivals;
+    [FieldOffset(0x0), FixedSizeArray] internal FixedSizeArray8<Festival> _activeFestivals;
+    [FieldOffset(0x80), FixedSizeArray] internal FixedSizeArray8<Festival> _queuedFestivals;
 
     [FieldOffset(0x260)] public ZoneSharedGroupManager ZoneSharedGroupManager;
 
@@ -60,10 +60,10 @@ public unsafe partial struct GameMain {
     public static partial bool IsInIdleCam();
 
     [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 8B 44 24 70 48 8D 8D ?? ?? ?? ??")]
-    public partial void QueueActiveFestivals(uint festival1, uint festival1Phase, uint festival2, uint festival2Phase, uint festival3, uint festival3Phase, uint festival4, uint festival4Phase); // Applies once the current "event" is done (GPose, Cutscene etc)
+    public partial void QueueActiveFestivals(Festival festival1, Festival festival2, Festival festival3, Festival festival4, Festival festival5, Festival festival6, Festival festival7, Festival festival8); // Applies once the current "event" is done (GPose, Cutscene etc)
 
     [MemberFunction("E8 ?? ?? ?? ?? 80 A3 ?? ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? E8")]
-    public partial void SetActiveFestivals(uint festival1, uint festival1Phase, uint festival2, uint festival2Phase, uint festival3, uint festival3Phase, uint festival4, uint festival4Phase); // Applies immediately regardless of client state
+    public partial void SetActiveFestivals(Festival festival1, Festival festival2, Festival festival3, Festival festival4, Festival festival5, Festival festival6, Festival festival7, Festival festival8); // Applies immediately regardless of client state
 
     [MemberFunction("E8 ?? ?? ?? ?? 8D 46 0A")]
     public static partial bool ExecuteCommand(int command, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
@@ -71,9 +71,9 @@ public unsafe partial struct GameMain {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 54 24 ?? B9")]
     public static partial bool ExecuteLocationCommand(int command, Vector3* position, int param1 = 0, int param2 = 0, int param3 = 0, int param4 = 0);
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x08)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x04)]
     public struct Festival {
-        [FieldOffset(0x00)] public uint Id;
-        [FieldOffset(0x04)] public uint Phase;
+        [FieldOffset(0x00)] public ushort Id;
+        [FieldOffset(0x02)] public ushort Phase;
     }
 }

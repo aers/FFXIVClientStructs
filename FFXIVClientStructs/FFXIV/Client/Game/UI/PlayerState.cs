@@ -56,8 +56,8 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x165)] public byte FirstClass;
     [FieldOffset(0x166)] public byte StartTown;
     [FieldOffset(0x167)] public byte QuestSpecialFlags;
-    [FieldOffset(0x168), FixedSizeArray] internal FixedSizeArray4<ushort> _activeFestivalIds;
-    [FieldOffset(0x170), FixedSizeArray] internal FixedSizeArray4<ushort> _activeFestivalPhases;
+    [FieldOffset(0x168), FixedSizeArray] internal FixedSizeArray8<ushort> _activeFestivalIds;
+    [FieldOffset(0x178), FixedSizeArray] internal FixedSizeArray8<ushort> _activeFestivalPhases;
 
     [FieldOffset(0x190)] public int BaseStrength;
     [FieldOffset(0x194)] public int BaseDexterity;
