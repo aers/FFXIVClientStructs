@@ -59,6 +59,18 @@ globals:
   0x1429CF9AC: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x1429CFA2C: g_Client::Game::UI::PlayerState.ObjectId
   0x1429CFA30: g_Client::Game::UI::PlayerState.ContentId
+  0x1429D004A: g_Client::Game::UI::PlayerState.UnlockedRaids
+  0x1429D0066: g_Client::Game::UI::PlayerState.UnlockedDungeons
+  0x1429D0078: g_Client::Game::UI::PlayerState.UnlockedGuildOrders
+  0x1429D0082: g_Client::Game::UI::PlayerState.UnlockedTrials
+  0x1429D0090: g_Client::Game::UI::PlayerState.UnlockedCrystallineConflicts
+  0x1429d0093: g_Client::Game::UI::PlayerState.UnlockedFrontlines
+  0x1429d0095: g_Client::Game::UI::PlayerState.CompletedRaids
+  0x1429D00B1: g_Client::Game::UI::PlayerState.CompletedDungeons
+  0x1429D00C3: g_Client::Game::UI::PlayerState.CompletedGuildOrders
+  0x1429D00CD: g_Client::Game::UI::PlayerState.CompletedTrials
+  0x1429D00DB: g_Client::Game::UI::PlayerState.CompletedCrystallineConflicts
+  0x1429D00DE: g_Client::Game::UI::PlayerState.CompletedFrontlines
   0x1429D3210: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining
   0x1429D3268: g_Client::Game::UI::Buddy.BattleBuddyListPtr
   0x1429DB510: g_Client::Game::UI::ActiveDirector
