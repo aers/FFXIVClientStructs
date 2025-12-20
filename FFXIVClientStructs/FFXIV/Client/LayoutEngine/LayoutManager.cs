@@ -22,8 +22,8 @@ public unsafe partial struct LayoutManager {
     [FieldOffset(0x028)] public uint LayerFilterKey; // used for finding correct layer filter if TerritoryTypeId == 0
     [FieldOffset(0x038)] public uint FestivalStatus; // SetActiveFestivals will not allow a change when not 5 or 0
     [FieldOffset(0x03D)] public bool InsideFestivalTransitionLayerUpdate; // when festival changes, layers are added/removed over 1s
-    [FieldOffset(0x040), FixedSizeArray] internal FixedSizeArray4<GameMain.Festival> _activeFestivals;
-    [FieldOffset(0x060), FixedSizeArray] internal FixedSizeArray4<GameMain.Festival> _newFestivals; // festival (de)activation is not immedate
+    [FieldOffset(0x040), FixedSizeArray] internal FixedSizeArray8<GameMain.Festival> _activeFestivals;
+    [FieldOffset(0x060), FixedSizeArray] internal FixedSizeArray8<GameMain.Festival> _newFestivals; // festival (de)activation is not immedate
     [FieldOffset(0x080)] public float FestivalLayersAddTimer; // dt * 30
     [FieldOffset(0x084)] public float FestivalLayersRemoveTimer; // dt * 30
     [FieldOffset(0x088)] public void* StreamingManager;
@@ -74,7 +74,7 @@ public unsafe partial struct LayoutManager {
     public partial void SetOutdoorPlotExterior(int plotIndex, OutdoorPlotExteriorData* data, delegate* unmanaged<uint, void> loadedCallback = null);
 
     [MemberFunction("40 53 45 33 D2 4C 8D 41 40")]
-    public partial void SetActiveFestivals(GameMain.Festival* festivals); // Array of exactly 4 festivals. Use 0 for none.
+    public partial void SetActiveFestivals(GameMain.Festival* festivals); // Array of exactly 8 festivals. Use 0 for none.
 
     [StructLayout(LayoutKind.Explicit, Size = 0xC)]
     public unsafe struct Filter {
