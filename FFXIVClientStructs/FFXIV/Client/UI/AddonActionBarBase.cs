@@ -52,13 +52,13 @@ public unsafe partial struct AddonActionBarBase {
 
 [StructLayout(LayoutKind.Explicit, Size = 0xC8)]
 public unsafe struct ActionBarSlot {
-    [FieldOffset(0x00)] public int HotbarId; // Not persistent, only updated if slot is visible
-    [FieldOffset(0x04)] public int ActionId;       // Not cleared when slot is emptied
-    [FieldOffset(0x88)] public AtkComponentDragDrop* ComponentDragDrop;
-    [FieldOffset(0x90)] public AtkComponentNode* Icon;
-    [FieldOffset(0x98)] public AtkTextNode* ControlHintTextNode;
-    [FieldOffset(0xA0)] public AtkResNode* IconFrame;
-    [FieldOffset(0xA8)] public AtkImageNode* ChargeIcon;
-    [FieldOffset(0xB0)] public AtkResNode* RecastOverlayContainer;
-    [FieldOffset(0xB8)] public CStringPointer PopUpHelpTextPtr; // Null when slot is empty
+    [FieldOffset(0x00)] public AtkComponentDragDrop* ComponentDragDrop;
+    [FieldOffset(0x08)] public AtkImageNode* ChargeIcon;
+    [FieldOffset(0x10)] public AtkResNode* RecastOverlayContainer;
+    [FieldOffset(0x18)] public AtkResNode* IconFrame;
+    [FieldOffset(0x20)] public CStringPointer PopUpHelpTextPtr; // Null when slot is empty
+    [FieldOffset(0x30)] public int HotbarId; // Not persistent, only updated if slot is visible
+    [FieldOffset(0x34)] public int ActionId;       // Not cleared when slot is emptied
+    [FieldOffset(0xB8)] public AtkComponentNode* Icon;
+    [FieldOffset(0xC0)] public AtkTextNode* ControlHintTextNode;
 }
