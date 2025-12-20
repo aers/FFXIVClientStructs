@@ -31,9 +31,9 @@ public unsafe partial struct AgentItemSearch {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x98)]
     public struct StringHolder {
-        // [FieldOffset(0x10)] private int Unk90Size;
+        // [FieldOffset(0x10)][Experimental("UnknownField")] public int Unk90Size;
         [FieldOffset(0x28)] public Utf8String SearchParam;
-        // [FieldOffset(0x90)] private nint Unk90Ptr;
+        // [FieldOffset(0x90)][Experimental("UnknownField")] public nint Unk90Ptr;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]

@@ -106,10 +106,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
     [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
     [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag, AddonConfig related?
-    [FieldOffset(0x1B8)] private byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
+    [FieldOffset(0x1B8)][Experimental("UnknownField")] public byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
     [FieldOffset(0x1B9)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
-    [FieldOffset(0x1BA)] private byte Unk1BA;
-    [FieldOffset(0x1BB)] private byte Unk1BB;
+    [FieldOffset(0x1BA)][Experimental("UnknownField")] public byte Unk1BA;
+    [FieldOffset(0x1BB)][Experimental("UnknownField")] public byte Unk1BB;
     [FieldOffset(0x1BC)] public float OpenTransitionScale;
     [FieldOffset(0x1C0)] public float CloseTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
@@ -154,7 +154,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1EC)] public byte CursorNavigationOwnIndex;
     [FieldOffset(0x1ED)] public byte Alpha;
     [FieldOffset(0x1EE)] public byte ShowHideFlags;
-    [FieldOffset(0x1EF)] private bool Unk1EF; // used in Draw
+    [FieldOffset(0x1EF)][Experimental("UnknownField")] public bool Unk1EF; // used in Draw
     [FieldOffset(0x1F0)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode

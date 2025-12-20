@@ -13,6 +13,6 @@ public unsafe partial struct ActionModule {
         return uiModule == null ? null : uiModule->GetActionModule();
     }
 
-    // [FieldOffset(0x48)] private StdSet<?> Unk48;
-    // [FieldOffset(0x58)] private StdSet<?> Unk58;
+    // [FieldOffset(0x48)][Experimental("UnknownField")] public StdSet<?> Unk48;
+    // [FieldOffset(0x58)][Experimental("UnknownField")] public StdSet<?> Unk58;
 }

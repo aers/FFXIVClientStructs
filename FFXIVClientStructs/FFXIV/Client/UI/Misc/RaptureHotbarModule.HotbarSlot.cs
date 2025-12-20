@@ -60,7 +60,7 @@ public partial struct RaptureHotbarModule {
         /// Appears to have relation to the following:
         /// - Lost Finds Items appear to set this value to 1
         /// - In PVP actions, the high byte controls combo icon and the low byte counts which action the combo is on
-        [FieldOffset(0xC4)] private ushort UNK_0xC4;
+        [FieldOffset(0xC4)][Experimental("UnknownField")] public ushort UNK_0xC4;
 
         // 0xC6 (198) does not appear to be referenced *anywhere*. Nothing ever reads or writes to it, save for a zero-out
         // operation.
@@ -148,7 +148,7 @@ public partial struct RaptureHotbarModule {
         /// UNKNOWN. Appears to be Recipe specific.
         ///
         /// Always set to 1, apparently?
-        [FieldOffset(0xE1)] private byte UNK_0xE1;
+        [FieldOffset(0xE1)][Experimental("UnknownField")] public byte UNK_0xE1;
 
         /// UNKNOWN. Appears to control UI display mode (icon and displayed name) in some way
         ///
@@ -159,7 +159,7 @@ public partial struct RaptureHotbarModule {
         /// - 5: Set for Lost Finds Items (?)
         /// - 128: Appears as a flag?
         /// - 0/255: "generic"
-        [FieldOffset(0xE2)] private byte UNK_0xE2;
+        [FieldOffset(0xE2)][Experimental("UnknownField")] public byte UNK_0xE2;
 
         /// <summary>
         /// A boolean representing if this specific hotbar slot has been fully loaded. False for empty slots and slots

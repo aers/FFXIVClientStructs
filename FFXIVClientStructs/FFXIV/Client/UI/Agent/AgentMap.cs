@@ -232,12 +232,12 @@ public struct OpenMapInfo {
     [FieldOffset(0x18)] public uint FateId;
     [FieldOffset(0x1C)] public uint QuestId;
     [FieldOffset(0x20)] public Utf8String TitleString;
-    [FieldOffset(0x88)] private uint Unk88;
-    [FieldOffset(0x90)] private ulong Unk90;
-    [FieldOffset(0x98)] private bool Unk98; // something for QuestRedoMapMarker
-    [FieldOffset(0x99)] private byte Unk99;
-    [FieldOffset(0x9A)] private byte Unk9A;
-    [FieldOffset(0x9B)] private byte Unk9B;
+    [FieldOffset(0x88)][Experimental("UnknownField")] public uint Unk88;
+    [FieldOffset(0x90)][Experimental("UnknownField")] public ulong Unk90;
+    [FieldOffset(0x98)][Experimental("UnknownField")] public bool Unk98; // something for QuestRedoMapMarker
+    [FieldOffset(0x99)][Experimental("UnknownField")] public byte Unk99;
+    [FieldOffset(0x9A)][Experimental("UnknownField")] public byte Unk9A;
+    [FieldOffset(0x9B)][Experimental("UnknownField")] public byte Unk9B;
 }
 
 [GenerateInterop]

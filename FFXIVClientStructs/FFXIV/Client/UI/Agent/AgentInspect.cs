@@ -57,7 +57,7 @@ public unsafe partial struct AgentInspect {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x80)]
     public struct FreeCompanyData {
-        //[FieldOffset(0x00)] private byte Unkown4b0; // Maybe FreeCompany get status 1 = Finished
+        //[FieldOffset$3][Experimental("UnknownFunction")] public byte Unkown4b0; // Maybe FreeCompany get status 1 = Finished
         [FieldOffset(0x00)] public long Id;
         [FieldOffset(0x08)] public CrestData Crest;
         [FieldOffset(0x10)] public ushort MemberCount;

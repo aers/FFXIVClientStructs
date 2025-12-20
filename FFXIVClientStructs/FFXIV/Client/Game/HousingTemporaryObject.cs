@@ -30,9 +30,9 @@ public unsafe partial struct HousingTemporaryObject {
         [FieldOffset(0x04)] public byte HousingItemCategory;
         [FieldOffset(0x05), Obsolete($"Renamed to {nameof(IsPadModeEnabled)}", true)] public byte Unk5;
         [FieldOffset(0x05)] public bool IsPadModeEnabled;
-        [FieldOffset(0x06)] private byte Unk6;
-        [FieldOffset(0x07)] private byte Unk7;
-        [FieldOffset(0x08)] private byte Unk8;
+        [FieldOffset(0x06)][Experimental("UnknownField")] public byte Unk6;
+        [FieldOffset(0x07)][Experimental("UnknownField")] public byte Unk7;
+        [FieldOffset(0x08)][Experimental("UnknownField")] public byte Unk8;
 
         [FieldOffset(0x10)] public HousingTemporaryObject* OwnerTemporaryObject;
     }

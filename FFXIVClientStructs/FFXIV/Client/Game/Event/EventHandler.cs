@@ -20,7 +20,7 @@ public unsafe partial struct EventHandler {
 
     [FieldOffset(0x94)] public LuaStatus LuaStatus;
 
-    [FieldOffset(0xC8)] private Utf8String UnkString0;
+    [FieldOffset(0xC8)][Experimental("UnknownField")] public Utf8String UnkString0;
 
     [VirtualFunction(158)]
     public partial void CancelInteraction();
@@ -130,7 +130,7 @@ public struct MassivePcContentTodo {
     /// <remarks> In seconds. </remarks>
     [FieldOffset(0x88)] public long Duration;
 
-    [FieldOffset(0x160)] private ulong Unk160;
+    [FieldOffset(0x160)][Experimental("UnknownField")] public ulong Unk160;
 }
 
 /// <remarks>

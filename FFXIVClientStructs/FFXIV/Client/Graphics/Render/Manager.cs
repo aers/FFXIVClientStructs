@@ -15,21 +15,21 @@ public unsafe partial struct Manager {
     [FieldOffset(0x10AE0)] public ModelRenderer ModelRenderer;
     [FieldOffset(0x10F30)] public BGInstancingRenderer BGInstancingRenderer;
     [FieldOffset(0x31D90)] public TerrainRenderer TerrainRenderer;
-    // [FieldOffset(0x47F20)] private UnknownRenderer UnknownRenderer; // 0x230 BGAmbient something?
+    // [FieldOffset(0x47F20)][Experimental("UnknownField")] public UnknownRenderer UnknownRenderer; // 0x230 BGAmbient something?
     [FieldOffset(0x363F0)] public WaterRenderer WaterRenderer;
     [FieldOffset(0x36960)] public VerticalFogRenderer VerticalFogRenderer;
 
-    // [FieldOffset(0x487F8)] private UnknownRenderer1 UnknownRenderer1; // 0xE0
-    // [FieldOffset(0x488E0)] private UnknownRenderer2 UnknownRenderer2; // 0x7A10 Grass?
-    // [FieldOffset(0x502F0)] private UnknownRenderer3 UnknownRenderer3; // 0xD0 Sky?
-    // [FieldOffset(0x503C0)] private UnknownRenderer4 UnknownRenderer4; // 0x480
-    // [FieldOffset(0x50840)] private UnknownRenderer5 UnknownRenderer5_1; // 0xE0 Clouds?
-    // [FieldOffset(0x50920)] private UnknownRenderer5 UnknownRenderer5_2; // 0xE0
-    // [FieldOffset(0x50A00)] private UnknownRenderer5 UnknownRenderer5_3; // 0xE0
-    // [FieldOffset(0x50AE0)] private UnknownRenderer6 UnknownRenderer6; // 0x1A8
-    // [FieldOffset(0x50C88)] private UnknownRenderer7 UnknownRenderer7; // 0x68
-    // [FieldOffset(0x50CF0)] private Unk1 Unk1; // 0x40
-    // [FieldOffset(0x50D30)] private Unk2 Unk2; // 0x40
+    // [FieldOffset(0x487F8)][Experimental("UnknownField")] public UnknownRenderer1 UnknownRenderer1; // 0xE0
+    // [FieldOffset(0x488E0)][Experimental("UnknownField")] public UnknownRenderer2 UnknownRenderer2; // 0x7A10 Grass?
+    // [FieldOffset(0x502F0)][Experimental("UnknownField")] public UnknownRenderer3 UnknownRenderer3; // 0xD0 Sky?
+    // [FieldOffset(0x503C0)][Experimental("UnknownField")] public UnknownRenderer4 UnknownRenderer4; // 0x480
+    // [FieldOffset(0x50840)][Experimental("UnknownField")] public UnknownRenderer5 UnknownRenderer5_1; // 0xE0 Clouds?
+    // [FieldOffset(0x50920)][Experimental("UnknownField")] public UnknownRenderer5 UnknownRenderer5_2; // 0xE0
+    // [FieldOffset(0x50A00)][Experimental("UnknownField")] public UnknownRenderer5 UnknownRenderer5_3; // 0xE0
+    // [FieldOffset(0x50AE0)][Experimental("UnknownField")] public UnknownRenderer6 UnknownRenderer6; // 0x1A8
+    // [FieldOffset(0x50C88)][Experimental("UnknownField")] public UnknownRenderer7 UnknownRenderer7; // 0x68
+    // [FieldOffset(0x50CF0)][Experimental("UnknownField")] public Unk1 Unk1; // 0x40
+    // [FieldOffset(0x50D30)][Experimental("UnknownField")] public Unk2 Unk2; // 0x40
 
     // TODO check and update for 7.2
     public enum RenderViews : uint {

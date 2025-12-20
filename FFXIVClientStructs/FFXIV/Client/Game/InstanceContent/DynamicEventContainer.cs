@@ -37,21 +37,21 @@ public unsafe partial struct DynamicEvent {
     [FieldOffset(0x30 + 0x10)] public uint Quest;
     /// <remarks>RowId of LogMessage Sheet</remarks>
     [FieldOffset(0x30 + 0x14)] public uint Announce;
-    [FieldOffset(0x30 + 0x18)] private uint Unknown0;
-    [FieldOffset(0x30 + 0x1C)] private uint Unknown1;
-    [FieldOffset(0x30 + 0x20)] private ushort Unknown6;
-    [FieldOffset(0x30 + 0x22)] private ushort Unknown7;
-    [FieldOffset(0x30 + 0x24)] private ushort Unknown2;
+    [FieldOffset(0x30 + 0x18)][Experimental("UnknownField")] public uint Unknown0;
+    [FieldOffset(0x30 + 0x1C)][Experimental("UnknownField")] public uint Unknown1;
+    [FieldOffset(0x30 + 0x20)][Experimental("UnknownField")] public ushort Unknown6;
+    [FieldOffset(0x30 + 0x22)][Experimental("UnknownField")] public ushort Unknown7;
+    [FieldOffset(0x30 + 0x24)][Experimental("UnknownField")] public ushort Unknown2;
     /// <remarks>RowId of DynamicEventType Sheet</remarks>
     [FieldOffset(0x30 + 0x26)] public byte EventType;
     /// <remarks>RowId of DynamicEventEnemyType Sheet</remarks>
     [FieldOffset(0x30 + 0x27)] public byte EnemyType;
     [FieldOffset(0x30 + 0x28)] public byte MaxParticipants;
-    [FieldOffset(0x30 + 0x29)] private byte Unknown4;
-    [FieldOffset(0x30 + 0x2A)] private byte Unknown5;
+    [FieldOffset(0x30 + 0x29)][Experimental("UnknownField")] public byte Unknown4;
+    [FieldOffset(0x30 + 0x2A)][Experimental("UnknownField")] public byte Unknown5;
     /// <remarks>RowId of DynamicEventSingleBattle Sheet</remarks>
     [FieldOffset(0x30 + 0x2B)] public byte SingleBattle;
-    [FieldOffset(0x30 + 0x2C), CExporterExcelEnd] private byte Unknown8;
+    [FieldOffset(0x30 + 0x2C), CExporterExcelEnd][Experimental("UnknownField")] public byte Unknown8;
 
     [FieldOffset(0x60)] public int StartTimestamp;
     [FieldOffset(0x64)] public uint SecondsLeft;

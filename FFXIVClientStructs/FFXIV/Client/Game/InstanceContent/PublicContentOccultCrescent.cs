@@ -51,8 +51,8 @@ public partial struct OccultCrescentMKDData {
     [FieldOffset(0x04)] public uint ZoneNameId; // Addon RowId
     [FieldOffset(0x08), FixedSizeArray] internal FixedSizeArray3<uint> _currencyItemIds;
     [FieldOffset(0x14), FixedSizeArray] internal FixedSizeArray3<uint> _currencyNameIds; // Addon RowIds
-    [FieldOffset(0x20)] private byte Unknown8; // Minimum Knowledge Level?
-    [FieldOffset(0x21), CExporterExcelEnd] private byte Unknown9;
+    [FieldOffset(0x20)][Experimental("UnknownField")] public byte Unknown8; // Minimum Knowledge Level?
+    [FieldOffset(0x21), CExporterExcelEnd][Experimental("UnknownField")] public byte Unknown9;
 }
 
 [GenerateInterop]

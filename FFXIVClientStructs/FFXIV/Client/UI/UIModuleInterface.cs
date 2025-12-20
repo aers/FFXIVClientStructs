@@ -58,7 +58,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(48)] public partial AchievementListModule* GetAchievementListModule();
     [VirtualFunction(49)] public partial GroupPoseModule* GetGroupPoseModule();
     [VirtualFunction(50)] public partial FieldMarkerModule* GetFieldMarkerModule();
-    // [VirtualFunction(51)] private partial StdMap* GetUnkStdMap95FC0();
+    // [VirtualFunction(51)][Experimental("UnknownFunction")] public partial StdMap* GetUnkStdMap95FC0();
     [VirtualFunction(52)] public partial MycNoteModule* GetMycNoteModule();
     [VirtualFunction(53)] public partial OrnamentListModule* GetOrnamentListModule();
     [VirtualFunction(54)] public partial MycItemModule* GetMycItemModule();
@@ -157,7 +157,7 @@ public unsafe partial struct UIModuleInterface {
     [VirtualFunction(195)] public partial void ShowBalloonMessage(float* worldPosition, byte pz, uint textImage); //121501 -> Nice Shot!
     [VirtualFunction(196), GenerateStringOverloads] public partial void ShowBattleTalk(CStringPointer name, CStringPointer text, float duration, byte style);
     [VirtualFunction(197), GenerateStringOverloads] public partial void ShowBattleTalkImage(CStringPointer name, CStringPointer text, float duration, uint image, byte style, int sound = -1, uint entityId = 0xE0000000);
-    // [VirtualFunction(198)] private partial ??? ShowBattleTalkUnknown(???);
+    // [VirtualFunction(198)][Experimental("UnknownFunction")] public partial ??? ShowBattleTalkUnknown(???);
     [VirtualFunction(199), GenerateStringOverloads] public partial void ShowBattleTalkSound(CStringPointer name, CStringPointer text, float duration, int sound, byte style);
     /// <param name="type">0 = Inventory, 1 = Key Items</param>
     [VirtualFunction(201)] public partial void OpenInventory(byte type = 0);

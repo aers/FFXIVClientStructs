@@ -21,21 +21,21 @@ public unsafe partial struct IndoorTerritory {
     [FieldOffset(0x9690)] public ExcelSheetWaiter* ItemExcelSheetWaiter;
     [FieldOffset(0x9698)] public ExcelSheet* ItemExcelSheet;
     [FieldOffset(0x96A0)] public HouseId HouseId; // Combines Ward, Plot, and Room
-    [FieldOffset(0x96A8)] private uint Unk96A8;
+    [FieldOffset(0x96A8)][Experimental("UnknownField")] public uint Unk96A8;
 
     [FieldOffset(0x96B0)] public HousingTemporaryObject TemporaryObject;
     [FieldOffset(0x96F0)] public HousingObject* TargetedHousingObject;
     [FieldOffset(0x96F8)] public HousingObject* HoveredHousingObject;
     [FieldOffset(0x9700)] public HousingObject* MovingHousingObject;
-    [FieldOffset(0x9708)] private uint Unk9708; // something layout related. same as OutdoorTerritory.Unk9B50
+    [FieldOffset(0x9708)][Experimental("UnknownField")] public uint Unk9708; // something layout related. same as OutdoorTerritory.Unk9B50
     [FieldOffset(0x970C)] public uint CurrentFloor; // Might be int but was casted to uint
     [FieldOffset(0x9710)] public IndoorTerritoryUIEventListener UIEventListener1;
     [FieldOffset(0x9738)] public IndoorTerritoryUIEventListener UIEventListener2;
     [FieldOffset(0x9760)] public IndoorAreaLayoutData IndoorAreaLayoutData;
 
-    [FieldOffset(0x97E8)] private uint Unk97E8;
+    [FieldOffset(0x97E8)][Experimental("UnknownField")] public uint Unk97E8;
 
-    [FieldOffset(0x97F0)] private long Unk97F0;
+    [FieldOffset(0x97F0)][Experimental("UnknownField")] public long Unk97F0;
     [FieldOffset(0x97F8)] public Utf8String UnplacementText;
     [FieldOffset(0x9860)] public Utf8String ConfirmReleaseText; // Addon#6433
     [FieldOffset(0x98C8)] public byte HousingEmploymentNpcListRowId;
@@ -45,15 +45,15 @@ public unsafe partial struct IndoorTerritory {
     [FieldOffset(0x98F8)] public IndoorTerritoryAquariumData AquariumData;
     [FieldOffset(0x9950)] public InventoryType StoreroomItemInventoryType;
     [FieldOffset(0x9954)] public short StoreroomItemInventorySlot;
-    [FieldOffset(0x9956)] private bool StoreroomItemInventoryUnk;
+    [FieldOffset(0x9956)][Experimental("UnknownField")] public bool StoreroomItemInventoryUnk;
 
     [FieldOffset(0x9960)] public Vector3 StoreroomItemPlacePosition;
     [FieldOffset(0x9970)] public float StoreroomItemPlaceRotation;
 
-    [FieldOffset(0x9978)] private InventoryItem* UnkInventoryItem9978;
+    [FieldOffset(0x9978)][Experimental("UnknownField")] public InventoryItem* UnkInventoryItem9978;
 
-    [FieldOffset(0x9990)] private InventoryItem* UnkInventoryItem9990; // retainer item?
-    [FieldOffset(0x9998)] private InventoryItem* UnkInventoryItem9998;
+    [FieldOffset(0x9990)][Experimental("UnknownField")] public InventoryItem* UnkInventoryItem9990; // retainer item?
+    [FieldOffset(0x9998)][Experimental("UnknownField")] public InventoryItem* UnkInventoryItem9998;
 
     [FieldOffset(0x99A0)] public byte InvertedBrightness;
     [FieldOffset(0x99A4)] public float BrightnessCurrent;
@@ -64,9 +64,9 @@ public unsafe partial struct IndoorTerritory {
     [FieldOffset(0x99B4)] public bool SSAOEnable;
     [FieldOffset(0x99B5)] public byte SavedInvertedBrightness;
     [FieldOffset(0x99B6)] public bool SavedSSAOEnable;
-    [FieldOffset(0x99B7)] private byte Unk99B7;
-    [FieldOffset(0x99B8)] private byte Unk99B8;
-    [FieldOffset(0x99B9)] private byte Unk99B9;
+    [FieldOffset(0x99B7)][Experimental("UnknownField")] public byte Unk99B7;
+    [FieldOffset(0x99B8)][Experimental("UnknownField")] public byte Unk99B8;
+    [FieldOffset(0x99B9)][Experimental("UnknownField")] public byte Unk99B9;
     [FieldOffset(0x99BA)] public bool ShowStoreroomTab; // in the "Indoor Furnishings" window
 
     [FieldOffset(0x99C0)] public HousingGuestBookData GuestBook;
