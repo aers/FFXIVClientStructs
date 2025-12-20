@@ -80,12 +80,12 @@ public unsafe partial struct HousingWorkshopAirshipGathered {
     [FieldOffset(0x10)] public uint ItemIdAdditional;
     [FieldOffset(0x14)] public ushort ItemCountPrimary;
     [FieldOffset(0x16)] public ushort ItemCountAdditional;
-    [FieldOffset(0x18)] public uint Unk1Primary;
-    [FieldOffset(0x1C)] public uint Unk1Additional;
-    [FieldOffset(0x20)] public uint Unk2Primary;
-    [FieldOffset(0x24)] public uint Unk2Additional;
-    [FieldOffset(0x28)] public uint Unk3Primary;
-    [FieldOffset(0x2C)] public uint Unk3Additional;
+    [FieldOffset(0x18)] private uint Unk1Primary;
+    [FieldOffset(0x1C)] private uint Unk1Additional;
+    [FieldOffset(0x20)] private uint Unk2Primary;
+    [FieldOffset(0x24)] private uint Unk2Additional;
+    [FieldOffset(0x28)] private uint Unk3Primary;
+    [FieldOffset(0x2C)] private uint Unk3Additional;
 
     //these might actually be HQ indicators
     [FieldOffset(0x32)] public bool AirshipItemValidPrimary;
@@ -152,7 +152,7 @@ public struct HousingWorkshopSubmarineGathered {
     [FieldOffset(0x3)] public bool FirstExploration;
     [FieldOffset(0x4)] public bool AdditionalSubmarineUnlocked;
     [FieldOffset(0x5)] public bool DoubleDip;
-    [FieldOffset(0x6)] public ushort UnknownUshort;
+    [FieldOffset(0x6)] private ushort UnknownUshort;
     [FieldOffset(0x8)] public uint FavorLine;
     [FieldOffset(0xC)] public uint ExpGained;
     [FieldOffset(0x10)] public uint ItemIdPrimary;
@@ -161,8 +161,8 @@ public struct HousingWorkshopSubmarineGathered {
     [FieldOffset(0x1A)] public ushort ItemCountAdditional;
     [FieldOffset(0x1C)] public bool ItemHQPrimary;
     [FieldOffset(0x1D)] public bool ItemHQAdditional;
-    [FieldOffset(0x1E)] public byte UnknownPrimary;
-    [FieldOffset(0x1F)] public byte UnknownAdditional;
+    [FieldOffset(0x1E)] private byte UnknownPrimary;
+    [FieldOffset(0x1F)] private byte UnknownAdditional;
     [FieldOffset(0x20)] public uint SurveyLinePrimary;
     [FieldOffset(0x24)] public uint SurveyLineAdditional;
     [FieldOffset(0x28)] public uint YieldLinePrimary;

@@ -11,7 +11,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonContextIconMenu {
     [FieldOffset(0x238)] public int EntryCount;
     [FieldOffset(0x258)] public AtkComponentList* AtkComponentList240;
-    [FieldOffset(0x260)] public void* unk248;
+    [FieldOffset(0x260)] private void* unk248;
     [FieldOffset(0x268)] public AtkComponentRadioButton* AtkComponentRadioButton250;
     [FieldOffset(0x270)] public AtkComponentRadioButton* AtkComponentRadioButton258;
     [FieldOffset(0x278)] public AtkComponentRadioButton* AtkComponentRadioButton260;

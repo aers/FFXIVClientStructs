@@ -127,7 +127,7 @@ public struct AtkCursorNavigationInfo {
     [FieldOffset(0x05)] public byte CursorType; // 0 = east, 1 = south-east (seen in Emj addon)
     [FieldOffset(0x06)] public byte OffsetX;
     [FieldOffset(0x07)] public byte OffsetY;
-    [FieldOffset(0x08)] public byte Unk08;
+    [FieldOffset(0x08)] private byte Unk08;
 }
 
 public enum AtkCursorNavigationDirection {

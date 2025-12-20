@@ -37,9 +37,9 @@ public unsafe partial struct LetterNumberArray {
         [FieldOffset(0), FixedSizeArray, CExporterIgnore] internal FixedSizeArray1<int> _data;
 
         [FieldOffset(3)] public LetterLetterMessageStatus MessageStatus;
-        [FieldOffset(2)] public byte UnkFlag1;
-        [FieldOffset(1)] public byte UnkFlag2;
-        [FieldOffset(0)] public byte UnkFlag3;  // This is definitely some kind of, user grabbed items, user opened type flag that sends a web request.
+        [FieldOffset(2)] private byte UnkFlag1;
+        [FieldOffset(1)] private byte UnkFlag2;
+        [FieldOffset(0)] private byte UnkFlag3;  // This is definitely some kind of, user grabbed items, user opened type flag that sends a web request.
 
         public enum LetterLetterMessageStatus : byte {
             FromFriendRead = 0x01,              // Grey message in mailbox

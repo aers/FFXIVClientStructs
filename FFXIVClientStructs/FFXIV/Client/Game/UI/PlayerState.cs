@@ -148,7 +148,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x5E9), FixedSizeArray(isBitArray: true, bitCount: 31)] internal FixedSizeArray4<byte> _unlockedAetherCurrentCompFlgSets;
     /// <summary>Carrier Level of Delivery Moogle Quests</summary>
     [FieldOffset(0x5ED)] public byte DeliveryLevel;
-    // [FieldOffset(0x5E6)] public byte UnkWeddingPlanFlag; // see lua function "GetWeddingPlan"
+    // [FieldOffset(0x5E6)] private byte UnkWeddingPlanFlag; // see lua function "GetWeddingPlan"
     /// <summary>
     /// Flag containing information about which DoH job the player is specialized in.
     /// </summary>
@@ -198,7 +198,7 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x74C)] public byte WeeklyBingoRequestOpenBingoNo;
 
     [FieldOffset(0x788)] public byte WeeklyBingoExpMultiplier;
-    [FieldOffset(0x789)] public bool WeeklyBingoUnk63;
+    [FieldOffset(0x789)] private bool WeeklyBingoUnk63;
 
     #endregion
 

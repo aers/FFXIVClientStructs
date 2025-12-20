@@ -28,5 +28,5 @@ public unsafe partial struct EnvManager {
 
     [FieldOffset(0x8E0)] public ShadowCamera ShadowCamera;
 
-    // [FieldOffset(0x8F4)] public uint UnkFlags;
+    // [FieldOffset(0x8F4)] private uint UnkFlags;
 }

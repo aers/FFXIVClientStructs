@@ -22,16 +22,14 @@ public unsafe partial struct PVShader {
     // number at 0x20 has been observed to be ConstantBufferCount * 16 + (SamplerCount + Unk2Count) * 24
     [FieldOffset(0x28)] public ResourceEntry* ConstantBuffers;
     [FieldOffset(0x30)] public ResourceEntry* Samplers;
-    [FieldOffset(0x38)] public ResourceEntry* Unknowns;
+    [FieldOffset(0x38)] private ResourceEntry* Unknowns;
     [FieldOffset(0x40)] public ushort ConstantBufferCount;
     [FieldOffset(0x44)] public ushort SamplerCount;
-    [FieldOffset(0x48)] public ushort UnkCount;
-    [FieldOffset(0x4C)] public ushort Unk2Count;
+    [FieldOffset(0x48)] private ushort UnkCount;
+    [FieldOffset(0x4C)] private ushort Unk2Count;
     [FieldOffset(0x58)] public uint DxbcBlobSize;
 
     public Span<ResourceEntry> ConstantBuffersSpan => new(ConstantBuffers, ConstantBufferCount);
 
     public Span<ResourceEntry> SamplersSpan => new(Samplers, SamplerCount);
-
-    public Span<ResourceEntry> UnknownsSpan => new(Unknowns, Unk2Count);
 }

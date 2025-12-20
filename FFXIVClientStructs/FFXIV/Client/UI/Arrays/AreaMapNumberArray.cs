@@ -16,6 +16,6 @@ public unsafe partial struct AreaMapNumberArray {
     [FieldOffset(1 * 4)] public int Y;
     [FieldOffset(2 * 4)] public int PlayerRotation; // 0 is South, -90 is West, -180/+180 is North, 90 is East
     [FieldOffset(3 * 4)] public int ConeRotation; // 0 is North, -90 is East, -180/+180 is South, 90 is West
-    // [FieldOffset(4 * 4)] public int UnkInt; // Always a zero it seems
-    // [FieldOffset(5 * 4)] public int UnkInt; // Always a zero it seems
+    // [FieldOffset(4 * 4)] private int UnkInt; // Always a zero it seems
+    // [FieldOffset(5 * 4)] private int UnkInt; // Always a zero it seems
 }

@@ -13,10 +13,10 @@ public unsafe partial struct MountListModule {
         return uiModule == null ? null : uiModule->GetMountListModule();
     }
 
-    // [FieldOffset(0x48)] public byte Unk40; // set to 1 in ReadFile
+    // [FieldOffset(0x48)] private byte Unk40; // set to 1 in ReadFile
     [FieldOffset(0x4A), FixedSizeArray] internal FixedSizeArray10<ushort> _unseenMounts; // Order column of Mount sheet, offset by 1
     [FieldOffset(0x5E), FixedSizeArray] internal FixedSizeArray30<ushort> _favorites; // Order column of Mount sheet, offset by 1
-    // [FieldOffset(0x9A)] public uint Unk92;
+    // [FieldOffset(0x9A)] private uint Unk92;
 
     [MemberFunction("48 83 EC 28 45 32 C0 44 0F B7 DA")]
     public partial bool AddToUnseenMounts(ushort orderId);

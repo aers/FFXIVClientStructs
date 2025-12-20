@@ -11,5 +11,5 @@ public partial struct AtkUldComponentDataBase {
     [FieldOffset(0x5)] public byte Cursor;
     [FieldOffset(0x6)] public byte OffsetX; // short in .uld file
     [FieldOffset(0x7)] public byte OffsetY; // short in .uld file
-    [FieldOffset(0x8)] public byte Unk;
+    [FieldOffset(0x8)] private byte Unk;
 }

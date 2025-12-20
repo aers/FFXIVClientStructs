@@ -22,12 +22,12 @@ public unsafe partial struct ConfigModule {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x20)]
     public struct Option {
-        [FieldOffset(0x00)] public void* Unk00;
-        [FieldOffset(0x08)] public ulong Unk08;
+        [FieldOffset(0x00)] private void* Unk00;
+        [FieldOffset(0x08)] private ulong Unk08;
         [FieldOffset(0x10)] public ConfigOption OptionId;
-        [FieldOffset(0x14)] public uint Unk14;
-        [FieldOffset(0x18)] public uint Unk18;
-        [FieldOffset(0x1C)] public ushort Unk1C;
+        [FieldOffset(0x14)] private uint Unk14;
+        [FieldOffset(0x18)] private uint Unk18;
+        [FieldOffset(0x1C)] private ushort Unk1C;
 
         public string GetName() {
             if ((short)OptionId < 0) return string.Empty;

@@ -159,7 +159,7 @@ public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     [FieldOffset(0x0), CExporterIgnore] public ulong Id;
     [FieldOffset(0x0), Obsolete("Use Unit.Value", true)] public byte Data0;
     [FieldOffset(0x0)] public HouseUnit Unit;
-    [FieldOffset(0x1)] public byte Unk1;
+    [FieldOffset(0x1)] private byte Unk1;
     /// <remarks>
     /// Masked data:<br/>
     /// - <c>0b0000_0000_0011_1111</c> (<c>0x0003F</c>) = WardIndex<br/>

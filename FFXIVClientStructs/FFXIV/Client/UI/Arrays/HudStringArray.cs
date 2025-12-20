@@ -18,12 +18,12 @@ public unsafe partial struct HudStringArray {
     [FieldOffset(3 * 8)] public CStringPointer GpIndicator;
     [FieldOffset(4 * 8)] public CStringPointer TpIndicator;
     [FieldOffset(5 * 8)] public CStringPointer CpIndicator;
-    [FieldOffset(6 * 8)] public CStringPointer Unk6;
+    [FieldOffset(6 * 8)] private CStringPointer Unk6;
     [FieldOffset(7 * 8), FixedSizeArray] internal FixedSizeArray30<CStringPointer> _statusTimesRemaining;
     [FieldOffset(37 * 8), FixedSizeArray] internal FixedSizeArray30<CStringPointer> _statusTooltips;
     [FieldOffset(67 * 8)] public CStringPointer JobName;
-    [FieldOffset(68 * 8)] public CStringPointer Unk68;
+    [FieldOffset(68 * 8)] private CStringPointer Unk68;
     [FieldOffset(69 * 8)] public CStringPointer ExpBarText;
-    [FieldOffset(70 * 8)] public CStringPointer Unk70;
+    [FieldOffset(70 * 8)] private CStringPointer Unk70;
     [FieldOffset(71 * 8)] public CStringPointer CombatTypeIndicator;
 }

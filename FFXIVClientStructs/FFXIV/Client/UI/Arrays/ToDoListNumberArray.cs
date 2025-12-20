@@ -97,10 +97,10 @@ public unsafe partial struct ToDoListNumberArray {
     [FieldOffset(186 * 4), FixedSizeArray] internal FixedSizeArray10<int> _fateObjectiveValue;
 
     // 196 - Appears to be a bitfield with each bit from the lsb set if that objective is completed
-    // [FieldOffset(196 * 4)] public int Unknown196;
+    // [FieldOffset(196 * 4)] private int Unknown196;
 
     // Acts like 171- maybe cosmic/occult??
-    // [FieldOffset(197 * 4)] public int Unknown197;
+    // [FieldOffset(197 * 4)] private int Unknown197;
 
     /// <remarks> See also <see cref="TodoType"/> (same thing, different values). </remarks>
     public enum ObjectiveType {

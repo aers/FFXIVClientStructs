@@ -85,7 +85,7 @@ public unsafe partial struct ConfigBase {
     [FieldOffset(0x8)] public ChangeEventInterface* Listener;
     [FieldOffset(0x14)] public uint ConfigCount;
     [FieldOffset(0x18)] public ConfigEntry* ConfigEntry; // array
-    [FieldOffset(0x50)] public Utf8String UnkString;
+    [FieldOffset(0x50)] private Utf8String UnkString;
 
     [MemberFunction("E8 ?? ?? ?? ?? 44 8B C3 39 58")]
     public partial ConfigEntry* GetConfigOption(uint index);

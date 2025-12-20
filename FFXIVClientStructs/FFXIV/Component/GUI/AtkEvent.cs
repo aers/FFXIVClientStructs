@@ -116,7 +116,7 @@ public struct AtkEventState {
     // are used in AtkModule_HandleInput to clear Gamepad inputs from UIInputData??
     [FieldOffset(0x1)] public byte ReturnFlags;
     [FieldOffset(0x2)] public AtkEventStateFlags StateFlags;
-    [FieldOffset(0x3)] public byte UnkFlags3; // for cleanup maybe?
+    [FieldOffset(0x3)] private byte UnkFlags3; // for cleanup maybe?
 }
 
 [Flags]

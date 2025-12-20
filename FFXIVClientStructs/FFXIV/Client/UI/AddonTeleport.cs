@@ -29,7 +29,7 @@ public unsafe partial struct AddonTeleport {
 
     // Inlined Class
     [FieldOffset(0x2C0)] public AddonTeleport* Addon;
-    [FieldOffset(0x2C8)] public delegate*<void*, AddonTeleport*, void*> UnknownFunction;
+    [FieldOffset(0x2C8)] private delegate*<void*, AddonTeleport*, void*> UnknownFunction;
     [FieldOffset(0x2D0)] public AtkComponentButton* SettingsButton;
     [FieldOffset(0x2D8)] public AtkTextNode* AetheryteTicketsText;
     [FieldOffset(0x2E0)] public uint SelectedTab;

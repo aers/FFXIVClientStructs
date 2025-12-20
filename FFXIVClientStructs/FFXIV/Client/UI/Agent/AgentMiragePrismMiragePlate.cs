@@ -13,7 +13,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [StructLayout(LayoutKind.Explicit, Size = 0x3B0)]
 public unsafe partial struct AgentMiragePrismMiragePlate {
     [FieldOffset(0x28)] public AgentMiragePrismMiragePlateData* Data;
-    [FieldOffset(0x38)] public InventoryItem UnkInventoryItem;
+    [FieldOffset(0x38)] private InventoryItem UnkInventoryItem;
 
     [FieldOffset(0x80)] public ushort DialogAddonId;
     [FieldOffset(0x82)] public bool CharaViewInitialized;

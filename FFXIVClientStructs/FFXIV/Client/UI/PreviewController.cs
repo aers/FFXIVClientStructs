@@ -15,7 +15,7 @@ public unsafe partial struct PreviewController {
     [FieldOffset(0x20)] public AtkComponentCheckBox* CharacterDisplayModeCheckBox;
     [FieldOffset(0x28)] public AtkCollisionNode* CollisionNode;
     [FieldOffset(0x30)] public AtkUnitBase* OwnerAddon;
-    [FieldOffset(0x38)] public AtkUnitBase* Unk38Addon;
+    [FieldOffset(0x38)] private AtkUnitBase* Unk38Addon;
     [FieldOffset(0x40)] public int CallbackBaseId;
     [FieldOffset(0x44)] public DragButtonType DragButton;
     [FieldOffset(0x48)] public short DragStartPosX;

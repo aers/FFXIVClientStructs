@@ -60,9 +60,9 @@ public unsafe partial struct AddonNamePlate {
         [FieldOffset(0x6D)] public byte HPLabelState;
         [FieldOffset(0x6E)] public bool ClickThrough;
         [FieldOffset(0x6F)] public bool IsPvpEnemy;
-        // [FieldOffset(0x70)] public bool UnkBool;
+        // [FieldOffset(0x70)] private bool UnkBool;
         [FieldOffset(0x71)] public bool NeedsToBeBaked;
-        // [FieldOffset(0x72)] public int UnkBakeState;
+        // [FieldOffset(0x72)] private int UnkBakeState;
         public bool IsVisible => RootComponentNode->IsVisible();
 
         public bool IsPlayerCharacter => NamePlateKind == UIObjectKind.PlayerCharacter;

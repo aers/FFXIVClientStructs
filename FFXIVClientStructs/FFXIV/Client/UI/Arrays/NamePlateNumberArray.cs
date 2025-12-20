@@ -17,7 +17,7 @@ public unsafe partial struct NamePlateNumberArray {
     [FieldOffset(2 * 4)] public int NamePlateSize;
     [FieldOffset(3 * 4)] public bool DisableFixedFontResolution;
     [FieldOffset(4 * 4)] public bool DoFullUpdate;
-    // [FieldOffset(5 * 4)] public int UnkInt;
+    // [FieldOffset(5 * 4)] private int UnkInt;
     [FieldOffset(6 * 4), FixedSizeArray] internal FixedSizeArray50<NamePlateObjectIntArrayData> _objectData;
 
     [StructLayout(LayoutKind.Explicit, Size = 21 * 4)]
@@ -40,9 +40,9 @@ public unsafe partial struct NamePlateNumberArray {
         [FieldOffset(11 * 4)] public uint GaugeContainerColor; // unused if Disable Alternate Part Id true
         [FieldOffset(12 * 4)] public int MarkerIconId;
         [FieldOffset(13 * 4)] public int NameIconId;
-        // [FieldOffset(14 * 4)] public int UnkAdjust;
+        // [FieldOffset(14 * 4)] private int UnkAdjust;
         [FieldOffset(15 * 4)] public int NamePlateObjectIndex;
-        // [FieldOffset(16 * 4)] public int Unk;
+        // [FieldOffset(16 * 4)] private int Unk;
         /// <summary>
         /// &amp; 0x1 - Is prefix title<br/>
         /// &amp; 0x8 - Use Depth-based Priority (terrain obstruction)<br/>
@@ -50,7 +50,7 @@ public unsafe partial struct NamePlateNumberArray {
         /// &amp; 0x100 - Disable Alternate Part Id<br/>
         /// </summary>
         [FieldOffset(17 * 4)] public int DrawFlags;
-        // [FieldOffset(18 * 4)] public int Unk;
+        // [FieldOffset(18 * 4)] private int Unk;
         /// <summary>
         /// &amp; 0x1 - Draw name text<br/>
         /// &amp; 0x2 - Draw gauge<br/>

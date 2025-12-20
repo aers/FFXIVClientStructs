@@ -22,7 +22,7 @@ public unsafe partial struct ChatLogNumberArray {
     public partial struct ChatLogChatTabNumberArray {
         [FieldOffset(0 * 4), FixedSizeArray, CExporterIgnore] internal FixedSizeArray7<int> _data;
 
-        [FieldOffset(0 * 4)] public int UnkLastLineVisibleHelper;
+        [FieldOffset(0 * 4)] private int UnkLastLineVisibleHelper;
         [FieldOffset(1 * 4)] public int LineCountVisible;
         [FieldOffset(2 * 4)] public int LineCountLoaded;
         [FieldOffset(3 * 4)] public int TotalLineCount;

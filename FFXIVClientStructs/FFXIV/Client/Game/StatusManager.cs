@@ -13,8 +13,8 @@ public unsafe partial struct StatusManager {
     // Flags is a bit vector; bit #i is set if any of the active statuses has column 30/31 in the sheet containing 'i'
     [FieldOffset(0x3C8), FixedSizeArray] internal FixedSizeArray7<byte> _flags;
 
-    [FieldOffset(0x3D0)] public long Unk3D0;
-    //[FieldOffset(0x2E8)] public byte Unk_180;
+    [FieldOffset(0x3D0)] private long Unk3D0;
+    //[FieldOffset(0x2E8)] private byte Unk_180;
     [FieldOffset(0x3D8)] public byte NumValidStatuses;
 
     /// <summary>

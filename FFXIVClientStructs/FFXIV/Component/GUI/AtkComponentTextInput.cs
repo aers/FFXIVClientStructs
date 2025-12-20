@@ -33,8 +33,8 @@ public unsafe partial struct AtkComponentTextInput : ICreatable {
 
     [FieldOffset(0x27E)] public bool EnableFocusSounds;
 
-    [FieldOffset(0x280)] public Utf8String UnkText01;
-    [FieldOffset(0x2E8)] public Utf8String UnkText02;
+    [FieldOffset(0x280)] private Utf8String UnkText01;
+    [FieldOffset(0x2E8)] private Utf8String UnkText02;
 
     [FieldOffset(0x350)] public Utf8String AvailableLines;
 

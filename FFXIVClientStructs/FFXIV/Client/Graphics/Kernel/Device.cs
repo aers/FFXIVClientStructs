@@ -60,8 +60,8 @@ public unsafe partial struct Device {
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public unsafe struct RenderCommandBufferGroup {
-    [FieldOffset(0x0)] public int Unk0;
-    [FieldOffset(0x4)] public int Unk1;
+    [FieldOffset(0x0)] private int Unk0;
+    [FieldOffset(0x4)] private int Unk1;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandSetTarget* SetTargetCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandViewport* ViewportCommand;
     [FieldOffset(0x8), CExporterUnion("RenderCommand")] public RenderCommandScissorsRect* ScissorsRectCommand;
@@ -75,8 +75,8 @@ public unsafe partial struct RenderCommandSetTarget {
     [FieldOffset(0x4)] public int RenderTargetCount;
     [FieldOffset(0x8), FixedSizeArray] internal FixedSizeArray4<Pointer<Texture>> _renderTargets;
     [FieldOffset(0x28)] public Texture* DepthBuffer;
-    [FieldOffset(0x38)] public float Unk0;
-    [FieldOffset(0x3C)] public float Unk1;
+    [FieldOffset(0x38)] private float Unk0;
+    [FieldOffset(0x3C)] private float Unk1;
 }
 
 [GenerateInterop]

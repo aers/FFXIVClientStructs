@@ -109,7 +109,7 @@ public unsafe struct HudPartyMember {
 public struct HudTargetInfoBuffTimeRemainingCacheEntry {
     [FieldOffset(0x00)] public uint Icon;
     [FieldOffset(0x04)] public uint TimeRemaining;
-    [FieldOffset(0x08)] public byte Unk8;
+    [FieldOffset(0x08)] private byte Unk8;
     [FieldOffset(0x09)] public bool HasTimeRemaining;
     [FieldOffset(0x0A)] internal bool UnkA; // temporary value to reset TimeRemaining after setting it?!?
 }
@@ -117,7 +117,7 @@ public struct HudTargetInfoBuffTimeRemainingCacheEntry {
 [StructLayout(LayoutKind.Explicit, Size = 0xE8)]
 public unsafe struct HudQueuedBattleTalk {
     [FieldOffset(0x0)] public bool IsPending;
-    //[FieldOffset(0x1)] public byte Unk1;
+    //[FieldOffset(0x1)] private byte Unk1;
     [FieldOffset(0x2)] public byte Style;
 
     [FieldOffset(0x8)] public Utf8String Name;
@@ -156,7 +156,7 @@ public unsafe partial struct HudStatus {
     public unsafe struct DisplayStatus {
         [FieldOffset(0x0)] public uint IconId;
         [FieldOffset(0x4)] public int RemainingTime;
-        [FieldOffset(0x8)] public byte UnkStatusFlag;
+        [FieldOffset(0x8)] private byte UnkStatusFlag;
         [FieldOffset(0x9)] public bool IsUpdated;
         [FieldOffset(0xA)] public bool IsProcessedOnce;
     }

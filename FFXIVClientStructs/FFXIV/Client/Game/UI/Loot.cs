@@ -14,8 +14,8 @@ public unsafe partial struct Loot {
     [FieldOffset(0x10), FixedSizeArray] internal FixedSizeArray16<LootItem> _items;
 
     [FieldOffset(0x450)] public int SelectedIndex;
-    [FieldOffset(0x458)] public uint UnkObjectId;
-    [FieldOffset(0x6B8)] public uint UnkObjectId2;
+    [FieldOffset(0x458)] private uint UnkObjectId;
+    [FieldOffset(0x6B8)] private uint UnkObjectId2;
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x44)]

@@ -61,7 +61,7 @@ public partial struct PrismBoxItem {
     [FieldOffset(0x68)] public uint Slot;
     [FieldOffset(0x6C)] public uint ItemId;
     [FieldOffset(0x70)] public uint IconId;
-    //[FieldOffset(0x74)] public uint Unk_SheetColumn19;
+    //[FieldOffset(0x74)] private uint Unk_SheetColumn19;
     [FieldOffset(0x7E), FixedSizeArray] internal FixedSizeArray2<byte> _stains;
 }
 
