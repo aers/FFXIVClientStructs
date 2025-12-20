@@ -28,5 +28,5 @@ public unsafe partial struct PublicContentEureka {
     [FieldOffset(0x1398)] public byte Magicite;
     [FieldOffset(0x1399)] public byte MagiaAether;
     [FieldOffset(0x13A0), FixedSizeArray] internal FixedSizeArray4<Utf8String> _publicContentTextDataStrings;  // starting at row 2000
-    [FieldOffset(0x1540)] public Utf8String Unk1540;
+    [FieldOffset(0x1540)] public Utf8String Unk1540;arent of 0973327d (private unk fields)
 }
