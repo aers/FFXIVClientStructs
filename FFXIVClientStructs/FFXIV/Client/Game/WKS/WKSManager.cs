@@ -23,7 +23,7 @@ public unsafe partial struct WKSManager {
     [FieldOffset(0x62)] public ushort CurrentFateId;
 
     /// <remarks> RowId of WKSMissionUnit sheet. </remarks>
-    [FieldOffset(0xC10)] public ushort CurrentMissionUnitRowId;
+    [FieldOffset(0xC18)] public ushort CurrentMissionUnitRowId;
 
     [FieldOffset(0xC54)] public uint FishingBait;
 
