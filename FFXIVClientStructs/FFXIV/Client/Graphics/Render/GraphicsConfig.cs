@@ -61,5 +61,5 @@ public unsafe partial struct GraphicsConfig {
 
     [FieldOffset(0x65)] public bool HousingSSAOEnable;
 
-    [FieldOffset(0x74)] public float JitterMultiplier;
+    [FieldOffset(0x78)] public float JitterMultiplier;
 }
