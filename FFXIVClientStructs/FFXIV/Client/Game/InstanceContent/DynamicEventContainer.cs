@@ -47,7 +47,8 @@ public unsafe partial struct DynamicEvent {
     /// <remarks>RowId of DynamicEventEnemyType Sheet</remarks>
     [FieldOffset(0x30 + 0x27)] public byte EnemyType;
     [FieldOffset(0x30 + 0x28)] public byte MaxParticipants;
-    [FieldOffset(0x30 + 0x29)] public byte MaybeRadius;
+    /// <remarks>In minutes</remarks>
+    [FieldOffset(0x30 + 0x29)] public byte Duration;
     [FieldOffset(0x30 + 0x2A)] private byte Unknown5;
     /// <remarks>RowId of DynamicEventSingleBattle Sheet</remarks>
     [FieldOffset(0x30 + 0x2B)] public byte SingleBattle;
