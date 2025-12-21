@@ -14269,6 +14269,8 @@ classes:
     vtbls:
       - ea: 0x1420D1848
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BBC620: OpenPanel # (this, panel, closeIfOpen, unknown)
   Client::UI::Agent::AgentConfigCharacterChatLogMiniTalk:
     vtbls:
       - ea: 0x142099678
