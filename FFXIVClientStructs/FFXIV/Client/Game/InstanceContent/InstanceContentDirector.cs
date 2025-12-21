@@ -9,8 +9,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.InstanceContent;
 [Inherits<ContentDirector>]
 [StructLayout(LayoutKind.Explicit, Size = 0x1F98)]
 public unsafe partial struct InstanceContentDirector {
-    //[FieldOffset(0x6E0), FixedSizeArray] internal FixedSizeArray168<byte> _instanceContentExcelRow;
-
     [FieldOffset(0xD30 + 0x00), CExporterExcelBegin("InstanceContent")] public uint NewPlayerBonusGil;
     [FieldOffset(0xD30 + 0x04)] public uint NewPlayerBonusExp;
     [FieldOffset(0xD30 + 0x08)] public uint FinalBossExp;
@@ -81,6 +79,8 @@ public unsafe partial struct InstanceContentDirector {
     [FieldOffset(0xD30 + 0xA5)] private byte Unknown19;
     [FieldOffset(0xD30 + 0xA6)] private byte Unknown13;
     [FieldOffset(0xD30 + 0xA7), CExporterExcelEnd] private byte Unknown14_Unknown15_Unknown16_Unknown17_Unknown18;
+
+    [FieldOffset(0xDE0)] public ContentDirector.MapEffectList ManagedSharedGroups;
 }
 
 public enum InstanceContentType : byte {
