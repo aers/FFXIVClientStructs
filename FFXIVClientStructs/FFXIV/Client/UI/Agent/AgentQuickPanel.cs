@@ -11,5 +11,5 @@ public unsafe partial struct AgentQuickPanel {
     [FieldOffset(0x30)] public uint ActivePanel;
 
     [MemberFunction("48 89 5C 24 ?? 57 41 54 41 57 48 83 EC ?? ?? ?? ?? 45 0F B6 E1")]
-    public partial void OpenPanel(uint panel, bool closeIfAlreadyOpen = true, bool a4 = true);
+    public partial void OpenPanel(uint panel, bool closeIfAlreadyOpen = true, bool showFirstTimeHelp = true);
 }
