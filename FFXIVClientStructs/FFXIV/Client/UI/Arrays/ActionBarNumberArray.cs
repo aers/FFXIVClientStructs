@@ -25,7 +25,7 @@ public unsafe partial struct ActionBarNumberArray {
 
         [FieldOffset(0 * 4), FixedSizeArray] internal FixedSizeArray12<ActionBarSlotNumberArray> _slots;
 
-        [Obsolete("Use the FFXIVClientStructs.FFXIV.Client.UI.Arrays.Common.ActionBarSlotNumberArray instead.")]
+        // TODO: Replace with the Common one.
         [GenerateInterop]
         [StructLayout(LayoutKind.Explicit, Size = 17 * 4)]
         public partial struct ActionBarSlotNumberArray {
