@@ -19,19 +19,19 @@ public unsafe partial struct AtkDragDropInterface {
     [VirtualFunction(3)]
     public partial AtkComponentNode* GetComponentNode();
 
-    [VirtualFunction(4)]
+    [VirtualFunction(5)]
     public partial void SetComponentNode(AtkComponentNode* node);
 
-    [VirtualFunction(5)]
+    [VirtualFunction(6)]
     public partial AtkResNode* GetActiveNode();
 
-    [VirtualFunction(7)]
+    [VirtualFunction(8)]
     public partial AtkComponentBase* GetComponent();
 
-    [VirtualFunction(8)]
+    [VirtualFunction(9)]
     public partial bool HandleMouseUpEvent(AtkEventData.AtkMouseData* mouseData);
 
-    [VirtualFunction(11)]
+    [VirtualFunction(12)]
     public partial AtkDragDropPayloadContainer* GetPayloadContainer();
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]

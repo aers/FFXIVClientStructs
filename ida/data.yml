@@ -7914,11 +7914,11 @@ classes:
     vfuncs:
       1: GetScreenPosition
       3: GetComponentNode
-      4: SetComponentNode
-      5: GetActiveNode
-      7: GetComponent
-      8: HandleMouseUpEvent
-      11: GetPayloadContainer
+      5: SetComponentNode
+      6: GetActiveNode
+      8: GetComponent
+      9: HandleMouseUpEvent
+      12: GetPayloadContainer
   Component::GUI::AtkDragDropPayloadContainer:
     funcs:
       0x1406245A0: ctor
