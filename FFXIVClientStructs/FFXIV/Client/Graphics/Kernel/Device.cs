@@ -7,16 +7,35 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0AC8)]
 public unsafe partial struct Device {
+    // Client::Graphics::Kernel::Device::CallbackManager
+    [GenerateInterop]
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public unsafe partial struct CallbackManager {
+        // Unsure about the names of things inside CallbackManager though
+        [GenerateInterop]
+        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+        public unsafe partial struct Entry {
+            [FieldOffset(0x0)] public void* Function;
+            [FieldOffset(0x8)] public void* Context;
+        }
+
+        [FieldOffset(0x8)] public void* Lock; // CRITICAL_SECTION*
+
+        [FieldOffset(0x30)] public Entry* Entries;
+        [FieldOffset(0x38)] public uint Capacity;
+        [FieldOffset(0x3c)] public uint Count;
+    }
+
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00", 3, isPointer: true)]
     public static partial Device* Instance();
 
     [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
     [FieldOffset(0x10)] public void* RenderThread; // Client::Graphics::Kernel::RenderThread
-    [FieldOffset(0x28)] private DeviceCallbacks* Unk28;
-    [FieldOffset(0x30)] private DeviceCallbacks* Unk30;
-    [FieldOffset(0x38)] private DeviceCallbacks* Unk38;
-    [FieldOffset(0x40)] public DeviceCallbacks* OnResizeDestroy;
-    [FieldOffset(0x48)] public DeviceCallbacks* OnResizeCreate;
+    [FieldOffset(0x28)] private CallbackManager* Unk28;
+    [FieldOffset(0x30)] private CallbackManager* Unk30;
+    [FieldOffset(0x38)] private CallbackManager* Unk38;
+    [FieldOffset(0x40)] public CallbackManager* OnResizeDestroy;
+    [FieldOffset(0x48)] public CallbackManager* OnResizeCreate;
     [FieldOffset(0x70)] public SwapChain* SwapChain;
     [FieldOffset(0x7A)] public byte RequestResolutionChange;
     [FieldOffset(0x8C)] public uint Width;
@@ -42,8 +61,8 @@ public unsafe partial struct Device {
     [FieldOffset(0x9E8)] public uint NewWidth;
     [FieldOffset(0x9EC)] public uint NewHeight;
     [FieldOffset(0x9F0)] public int FrameRate;
-    [FieldOffset(0xA10)] private DeviceCallbacks* UnkA10;
-    [FieldOffset(0xA18)] private DeviceCallbacks* UnkA18;
+    [FieldOffset(0xA10)] private CallbackManager* UnkA10;
+    [FieldOffset(0xA18)] private CallbackManager* UnkA18;
 
     [FieldOffset(0xE0A90)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
     [FieldOffset(0xE0A98)] public void* DXGIFactory; // IDXGIFactory1
@@ -126,22 +145,4 @@ public unsafe partial struct RenderCommandClearDepth {
     [FieldOffset(0x30)] public float Height;
     [FieldOffset(0x34)] public float MinZ;
     [FieldOffset(0x38)] public float MaxZ;
-}
-
-// Naming 100% made up, but it's fairly generic anyway.
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x40)]
-public unsafe partial struct DeviceCallbacks {
-    [FieldOffset(0x8)] public void* Lock; // CRITICAL_SECTION*
-
-    [FieldOffset(0x30)] public DeviceCallback* Slots;
-    [FieldOffset(0x38)] public uint Capacity;
-    [FieldOffset(0x3c)] public uint Count;
-}
-
-[GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x10)]
-public unsafe partial struct DeviceCallback {
-    [FieldOffset(0x0)] public void* Function;
-    [FieldOffset(0x8)] public void* Context;
 }
