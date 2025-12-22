@@ -65,6 +65,7 @@ public unsafe partial struct Device {
     // public Span<RenderCommandBufferGroup> RenderCommandBufferGroups => new(RenderCommandBuffer, (int)RenderCommandBufferCount);
 
     // Client::Graphics::Kernel::Device::CallbackManager
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x40)]
     public unsafe partial struct CallbackManager {
         [FieldOffset(0x8)] public void* Lock; // CRITICAL_SECTION
@@ -72,6 +73,15 @@ public unsafe partial struct Device {
         [FieldOffset(0x30)] public Entry* Entries;
         [FieldOffset(0x38)] public uint Capacity;
         [FieldOffset(0x3C)] public uint Count;
+
+        [MemberFunction("48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B F1 49 8B E8 48 83 C1")]
+        public partial int AddCallback(delegate*unmanaged<void*,bool> func, void* context);
+        
+        [MemberFunction("48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F1 8B FA 48 83 C1 ?? FF 15")]
+        public partial void RemoveCallback(int index);
+        
+        [MemberFunction("E8 ?? ?? ?? ?? 48 8B 5B ?? 48 8B 4B")]
+        public partial bool ExecuteCallbacks();
         
         // Unsure about the names of things inside CallbackManager though
         [StructLayout(LayoutKind.Explicit, Size = 0x10)]

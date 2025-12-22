@@ -6310,6 +6310,7 @@ classes:
       0x140225090: Initialize
       0x140225170: AddCallback
       0x140225210: RemoveCallback
+      0x140225270: ExecuteCallbacks
   Client::Graphics::Kernel::Device::HandleManager:
     vtbls:
       - ea: 0x14206B998
