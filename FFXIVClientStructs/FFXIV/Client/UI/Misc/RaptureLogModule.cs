@@ -4,6 +4,7 @@ using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.FFXIV.Component.Log;
+using FFXIVClientStructs.FFXIV.Component.Text;
 using ExcelModuleInterface = FFXIVClientStructs.FFXIV.Component.Excel.ExcelModuleInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -31,6 +32,15 @@ public unsafe partial struct RaptureLogModule {
     [FieldOffset(0x520)] public ExcelSheet* LogKindSheet;
 
     [FieldOffset(0x530), FixedSizeArray] internal FixedSizeArray5<RaptureLogModuleTab> _chatTabs;
+
+    /// <summary>
+    /// Queue of messages (from the LogMessage sheet) to add to the log.
+    /// Messages are added by ShowLogMessage calls and removed by a later Update.
+    /// </summary>
+    /// <remarks>
+    /// Messages can stay in this queue for multiple frames if the relevant excel data is not loaded yet.
+    /// </remarks>
+    [FieldOffset(0x33B0)] public StdDeque<LogMessageQueueItem> LogMessageQueue;
 
     [FieldOffset(0x33D8)] public ExcelSheet* LogMessageSheet;
     /// <remarks> Set to <c>true</c> to reload the tab. </remarks>
@@ -68,6 +78,9 @@ public unsafe partial struct RaptureLogModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 8B 47 ?? 85 C0")] // ShowLogMessage<string>
     public partial void ShowLogMessageString(uint logMessageId, Utf8String* value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? 49 8B 06 49 8B CE FF 50 40 4C 8B 7C 24")]
+    public partial void Update();
 
     /// <summary>
     /// Shows a message in a chat bubble above a characters head.
@@ -165,4 +178,51 @@ public struct LogMessageSource {
 public struct RaptureLogModuleTab {
     [FieldOffset(0x00)] public Utf8String Name;
     [FieldOffset(0x68)] public Utf8String VisibleLogLines;
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x248)]
+[GenerateInterop]
+public partial struct LogMessageQueueItem {
+    [FieldOffset(0)]
+    public StdDeque<TextParameter> Parameters;
+
+    [FieldOffset(0x28), FixedSizeArray(true)]
+    internal FixedSizeArray256<byte> _sourceName;
+    [FieldOffset(0x128), FixedSizeArray(true)]
+    internal FixedSizeArray256<byte> _targetName;
+
+    [FieldOffset(0x228)]
+    public uint LogMessageId;
+
+    [FieldOffset(0x22C)]
+    public byte SourceKind;
+    [FieldOffset(0x22D)]
+    public byte TargetKind;
+
+    [FieldOffset(0x22E)]
+    public byte SourceSex;
+    [FieldOffset(0x22F)]
+    public byte TargetSex;
+
+    /// <summary> ObjStr id of the source object. </summary>
+    /// <remarks> <seealso cref="RaptureTextModule.ResolveSheetRedirect"/> with the <c>ObjStr</c> sheet and column 0 </remarks>
+    [FieldOffset(0x230)]
+    public uint SourceObjStrId;
+    /// <summary> ObjStr id of the target object. </summary>
+    /// <remarks> <seealso cref="RaptureTextModule.ResolveSheetRedirect"/> with the <c>ObjStr</c> sheet and column 0 </remarks>
+    [FieldOffset(0x234)]
+    public uint TargetObjStrId;
+
+    [FieldOffset(0x238)]
+    public float SourceToLocalPlayerYDelta;
+
+    [FieldOffset(0x23C)]
+    public ushort SourceHomeWorld;
+    [FieldOffset(0x23E)]
+    public ushort TargetHomeWorld;
+
+    [FieldOffset(0x240)]
+    public bool SourceIsPlayer;
+    [FieldOffset(0x241)]
+    public bool TargetIsPlayer;
 }
