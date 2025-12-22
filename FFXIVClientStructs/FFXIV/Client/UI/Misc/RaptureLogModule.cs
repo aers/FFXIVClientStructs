@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
@@ -151,7 +152,15 @@ public unsafe partial struct RaptureLogModule {
     /// 9 = Pets/Companions (Alliance)<br/>
     /// 10 = Pets/Companions (Other PC)
     /// </remarks>
+    [OverloadResolutionPriority(1)]
+    [Obsolete("Use the overload with the EntityRelationKind parameters instead. Note that the numeric value of these parameters is different by one compared to this overload.")]
     public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out sbyte casterKind, out sbyte targetKind, out int timestamp) {
+        var result = GetLogMessageDetail(index, out sender, out message, out logKind, out EntityRelationKind casterKindRelation, out EntityRelationKind targetKindRelation, out timestamp);
+        casterKind = (sbyte)(casterKindRelation - 1);
+        targetKind = (sbyte)(targetKindRelation - 1);
+        return result;
+    }
+    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out EntityRelationKind casterKind, out EntityRelationKind targetKind, out int timestamp) {
         using var pSender = new Utf8String();
         using var pMessage = new Utf8String();
         short pLogInfo;
@@ -160,8 +169,8 @@ public unsafe partial struct RaptureLogModule {
         var result = GetLogMessageDetail(index, &pLogInfo, &pSender, &pMessage, &pTimestamp);
 
         logKind = (short)(pLogInfo & 0x7F);
-        casterKind = (sbyte)(((pLogInfo >> 11) & 0xF) - 1);
-        targetKind = (sbyte)(((pLogInfo >> 7) & 0xF) - 1);
+        casterKind = (EntityRelationKind)((pLogInfo >> 11) & 0xF);
+        targetKind = (EntityRelationKind)((pLogInfo >> 7) & 0xF);
         timestamp = pTimestamp;
         sender = pSender.AsSpan().ToArray();
         message = pMessage.AsSpan().ToArray();
@@ -199,6 +208,21 @@ public struct RaptureLogModuleTab {
     [FieldOffset(0x68)] public Utf8String VisibleLogLines;
 }
 
+public enum EntityRelationKind : byte {
+    None = 0,
+    LocalPlayer = 1,
+    PartyMember = 2,
+    AllianceMember = 3,
+    OtherPlayer = 4,
+    EngagedEnemy = 5,
+    UnengagedEnemy = 6,
+    FriendlyNpc = 7,
+    PetOrCompanion = 8,
+    PetOrCompanionParty = 9,
+    PetOrCompanionAlliance = 10,
+    PetOrCompanionOther = 11,
+}
+
 [StructLayout(LayoutKind.Explicit, Size = 0x248)]
 [GenerateInterop]
 public partial struct LogMessageQueueItem {
@@ -214,9 +238,9 @@ public partial struct LogMessageQueueItem {
     public uint LogMessageId;
 
     [FieldOffset(0x22C)]
-    public byte SourceKind;
+    public EntityRelationKind SourceKind;
     [FieldOffset(0x22D)]
-    public byte TargetKind;
+    public EntityRelationKind TargetKind;
 
     [FieldOffset(0x22E)]
     public byte SourceSex;
