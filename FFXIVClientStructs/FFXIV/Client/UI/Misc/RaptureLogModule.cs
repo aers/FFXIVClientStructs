@@ -65,6 +65,9 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 39 AE ?? ?? ?? ?? 7E")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 47 FF 83 F8 06")]
+    public partial void FormatPlayerLink(CStringPointer name, Utf8String* result, CStringPointer displayNamePrefix, uint unk5, bool isNotLocalPlayer, ushort homeWorld, bool unk8, CStringPointer displayNameOverride, bool unk10);
+
     [MemberFunction("E9 ?? ?? ?? ?? 40 88 AE")]
     public partial void ShowLogMessage(uint logMessageId);
 
