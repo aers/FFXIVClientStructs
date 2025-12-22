@@ -7,25 +7,6 @@ namespace FFXIVClientStructs.FFXIV.Client.Graphics.Kernel;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0xE0AC8)]
 public unsafe partial struct Device {
-    // Client::Graphics::Kernel::Device::CallbackManager
-    [GenerateInterop]
-    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
-    public unsafe partial struct CallbackManager {
-        // Unsure about the names of things inside CallbackManager though
-        [GenerateInterop]
-        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
-        public unsafe partial struct Entry {
-            [FieldOffset(0x0)] public void* Function;
-            [FieldOffset(0x8)] public void* Context;
-        }
-
-        [FieldOffset(0x8)] public void* Lock; // CRITICAL_SECTION*
-
-        [FieldOffset(0x30)] public Entry* Entries;
-        [FieldOffset(0x38)] public uint Capacity;
-        [FieldOffset(0x3c)] public uint Count;
-    }
-
     [StaticAddress("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 80 7B 08 00", 3, isPointer: true)]
     public static partial Device* Instance();
 
@@ -82,6 +63,23 @@ public unsafe partial struct Device {
     // /// A collection of the render command buffer array.
     // /// </summary>
     // public Span<RenderCommandBufferGroup> RenderCommandBufferGroups => new(RenderCommandBuffer, (int)RenderCommandBufferCount);
+
+    // Client::Graphics::Kernel::Device::CallbackManager
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public unsafe partial struct CallbackManager {
+        [FieldOffset(0x8)] public void* Lock; // CRITICAL_SECTION
+
+        [FieldOffset(0x30)] public Entry* Entries;
+        [FieldOffset(0x38)] public uint Capacity;
+        [FieldOffset(0x3C)] public uint Count;
+        
+        // Unsure about the names of things inside CallbackManager though
+        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+        public unsafe partial struct Entry {
+            [FieldOffset(0x0)] public void* Function;
+            [FieldOffset(0x8)] public void* Context;
+        }
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
