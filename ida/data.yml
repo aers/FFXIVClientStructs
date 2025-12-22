@@ -3598,7 +3598,6 @@ classes:
     vfuncs:
       0: Dtor
     funcs:
-      0x140225390: ctor
       0x140060A30: Finalizer
       0x140060B60: AddTask
       0x140060BD0: ExecuteAllTasks
@@ -6293,6 +6292,28 @@ classes:
     vtbls:
       - ea: 0x14206B920
         base: Client::System::Threading::Thread
+  Client::Graphics::Kernel::Device::DelayedReleaseManager:
+    vtbls:
+      - ea: 0x14206B980
+    funcs:
+      0x1402242A0: ctor
+  Client::Graphics::Kernel::Device::VertexDeclarationManager:
+    vtbls:
+      - ea: 0x14206B988
+    funcs:
+      0x1402248F0: ctor
+  Client::Graphics::Kernel::Device::CallbackManager:
+    vtbls:
+      - ea: 0x14206B990
+    funcs:
+      0x140225050: ctor
+      0x140225090: Initialize
+  Client::Graphics::Kernel::Device::HandleManager:
+    vtbls:
+      - ea: 0x14206B998
+    funcs:
+      0x140225310: ctor
+      0x140225390: Initialize
   Client::Graphics::Render::Skeleton:
     vtbls:
       - ea: 0x142074C60
@@ -14689,7 +14710,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::FinalizeSceneTask:
     vtbls:
-      - ea: 0x1421DF668
+      - ea: 0x1421DE8F8
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::SetPositionTask:
     vtbls:
@@ -15458,6 +15479,8 @@ classes:
     vtbls:
       - ea: 0x1420DC5C0
         base: Client::Game::Event::Director
+      - ea: 0x1420DD150
+        base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
       302: GetCurrentLevel
       303: GetMaxLevel
@@ -15471,6 +15494,8 @@ classes:
     vtbls:
       - ea: 0x14223CC40
         base: Client::Game::InstanceContent::ContentDirector
+      - ea: 0x14223D8D8
+        base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
       397: HandleGMCommand
     funcs:
