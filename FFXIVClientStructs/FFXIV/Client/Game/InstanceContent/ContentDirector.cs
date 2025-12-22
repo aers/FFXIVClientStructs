@@ -22,10 +22,10 @@ public unsafe partial struct ContentDirector {
 
     [VirtualFunction(302)]
     public partial uint GetCurrentLevel();
-    
+
     [VirtualFunction(303)]
     public partial uint GetMaxLevel();
-    
+
     /// <summary>
     /// Gets the max time for the content in seconds
     /// </summary>

@@ -28,7 +28,7 @@ public unsafe partial struct PublicContentDirector {
     [FieldOffset(0xD30 + 0x2E)] private ushort Unknown5;
     [FieldOffset(0xD30 + 0x30), CExporterForce] public PublicContentDirectorType Type;
     [FieldOffset(0xD30 + 0x31), CExporterExcelEnd] private byte Unknown4;
-    
+
     [FieldOffset(0xD64)] public ContentDirector.MapEffectList ManagedSharedGroups;
 
     [MemberFunction("40 53 57 48 83 EC 78 48 8B D9 48 8D 0D")]
