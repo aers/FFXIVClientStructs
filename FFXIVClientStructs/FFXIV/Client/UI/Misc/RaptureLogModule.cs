@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
@@ -78,6 +79,21 @@ public unsafe partial struct RaptureLogModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 8B 47 ?? 85 C0")] // ShowLogMessage<string>
     public partial void ShowLogMessageString(uint logMessageId, Utf8String* value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? C6 43 34 03")]
+    public partial void ShowLogMessageTextParameters(uint logMessageId, StdDeque<TextParameter>* value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 EB 59")]
+    public partial void ShowLogMessageSourceObjectTargetObject(uint logMessageId, GameObject* source, GameObject* target);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 45 DF")]
+    public partial void ShowLogMessageSourceObjectTargetObjectTextParameters(uint logMessageId, GameObject* source, GameObject* target, StdDeque<TextParameter>* value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 4D 18"), GenerateStringOverloads]
+    public partial void ShowLogMessageSourceTarget(uint logMessageId, CStringPointer sourceName, byte sourceGender, CStringPointer targetName, byte targetSex, ushort sourceHomeWorld, ushort targetHomeWorld);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 85 FF 74 3F"), GenerateStringOverloads]
+    public partial void ShowLogMessageSourceTargetTextParameters(uint logMessageId, CStringPointer sourceName, byte sourceSex, CStringPointer targetName, byte targetSex, StdDeque<TextParameter>* value, ushort sourceHomeWorld, ushort targetHomeWorld);
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? 49 8B 06 49 8B CE FF 50 40 4C 8B 7C 24")]
     public partial void Update();
