@@ -12,6 +12,11 @@ public unsafe partial struct Device {
 
     [FieldOffset(0x8)] public void* ContextArray; // Client::Graphics::Kernel::Context array
     [FieldOffset(0x10)] public void* RenderThread; // Client::Graphics::Kernel::RenderThread
+    [FieldOffset(0x28)] private CallbackManager* Unk28;
+    [FieldOffset(0x30)] private CallbackManager* Unk30;
+    [FieldOffset(0x38)] private CallbackManager* Unk38;
+    [FieldOffset(0x40)] public CallbackManager* OnResizeDestroy;
+    [FieldOffset(0x48)] public CallbackManager* OnResizeCreate;
     [FieldOffset(0x70)] public SwapChain* SwapChain;
     [FieldOffset(0x7A)] public byte RequestResolutionChange;
     [FieldOffset(0x8C)] public uint Width;
@@ -37,6 +42,8 @@ public unsafe partial struct Device {
     [FieldOffset(0x9E8)] public uint NewWidth;
     [FieldOffset(0x9EC)] public uint NewHeight;
     [FieldOffset(0x9F0)] public int FrameRate;
+    [FieldOffset(0xA10)] private CallbackManager* UnkA10;
+    [FieldOffset(0xA18)] private CallbackManager* UnkA18;
 
     [FieldOffset(0xE0A90)] public int D3DFeatureLevel; // D3D_FEATURE_LEVEL enum
     [FieldOffset(0xE0A98)] public void* DXGIFactory; // IDXGIFactory1
@@ -56,6 +63,23 @@ public unsafe partial struct Device {
     // /// A collection of the render command buffer array.
     // /// </summary>
     // public Span<RenderCommandBufferGroup> RenderCommandBufferGroups => new(RenderCommandBuffer, (int)RenderCommandBufferCount);
+
+    // Client::Graphics::Kernel::Device::CallbackManager
+    [StructLayout(LayoutKind.Explicit, Size = 0x40)]
+    public unsafe partial struct CallbackManager {
+        [FieldOffset(0x8)] public void* Lock; // CRITICAL_SECTION
+
+        [FieldOffset(0x30)] public Entry* Entries;
+        [FieldOffset(0x38)] public uint Capacity;
+        [FieldOffset(0x3C)] public uint Count;
+        
+        // Unsure about the names of things inside CallbackManager though
+        [StructLayout(LayoutKind.Explicit, Size = 0x10)]
+        public unsafe partial struct Entry {
+            [FieldOffset(0x0)] public void* Function;
+            [FieldOffset(0x8)] public void* Context;
+        }
+    }
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
