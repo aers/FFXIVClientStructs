@@ -6308,6 +6308,8 @@ classes:
     funcs:
       0x140225050: ctor
       0x140225090: Initialize
+      0x140225170: AddCallback
+      0x140225210: RemoveCallback
   Client::Graphics::Kernel::Device::HandleManager:
     vtbls:
       - ea: 0x14206B998
