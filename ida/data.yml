@@ -23577,6 +23577,7 @@ classes:
       0x141734F30: ctor
       0x1417350C0: Initialize
       0x141735B20: Update
+      0x1417360E0: BoneSimulatorTask
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
       - ea: 0x1421E9970
