@@ -866,6 +866,16 @@ classes:
     vtbls:
       - ea: 0x1420A1200
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
+    vtbls:
+      - ea: 0x1420BB820
+  Client::Game::SheetWaiterBase:
+    vtbls:
+      - ea: 0x1420BB838
+        base: Common::Component::Excel::ExcelSheetWaiter
+  Client::Game::InstanceContent::ContentSheetWaiter:
+    vtbls:
+      - ea: 0x1420BB848
+        base: Client::Game::SheetWaiterBase
   Client::Game::Object::IGameObjectEventListener:
   Client::Game::Object::IFilterCommand:
     vtbls:
@@ -2957,10 +2967,6 @@ classes:
     funcs:
       0x140B0E390: Initialize
       0x140B0E830: Finalizer
-#  Client::Game::SheetWaiterBase:
-#    vtbls:
-#      - ea:
-#        base: Common::Component::Excel::ExcelSheetWaiter
   Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>:
 #    vtbls:
 #      - ea:
@@ -8677,10 +8683,10 @@ classes:
       6: GetDataSize
       7: GetFileVersion
       8: GetFileType
-      10: GetHasChanges
-      11: GetIsSavePending
-      12: SetCharacterContentId
-      13: SaveFile
+      11: GetHasChanges
+      12: GetIsSavePending
+      13: SetCharacterContentId
+      14: SaveFile
   Client::UI::Misc::UserFileManager:
     vtbls:
       - ea: 0x1420B35E8
@@ -9507,7 +9513,7 @@ classes:
       - ea: 0x1420B9C78
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     vfuncs:
-      14: GetSegment
+      15: GetSegment
     funcs:
       0x1407DAED0: ctor
   Client::UI::Misc::RaptureMacroModule:
