@@ -23585,6 +23585,7 @@ classes:
       0x141734F30: ctor
       0x1417350C0: Initialize
       0x141735B20: Update
+      0x1417360E0: BoneSimulatorTask
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
       - ea: 0x1421E9970
@@ -23594,6 +23595,8 @@ classes:
       0x1417F8A90: ctor
       0x1417F8BF0: Finalizer
       0x1417F8CD0: Initialize
+      0x1417FC290: GetSimulationTime
+      0x1417FC330: GetSimulationTimeInv
   Client::Graphics::Physics::BoneKineDriverModule:
     vtbls:
       - ea: 0x1421E14B8
