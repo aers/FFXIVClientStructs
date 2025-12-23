@@ -12,7 +12,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonNeedGreed {
     [FieldOffset(0x238), FixedSizeArray] internal FixedSizeArray16<LootItemInfo> _items;
 
-    [FieldOffset(0x594)] public int NumItems;
+    [FieldOffset(0x5B4)] public int NumItems;
     [FieldOffset(0x5B8)] public int SelectedItemIndex;
 }
 
