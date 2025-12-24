@@ -38,9 +38,9 @@ public unsafe partial struct BoneSimulator {
 
     /// <remarks> Called when IsTimeIntegrating is true. </remarks>
     [MemberFunction("40 55 53 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 44 0F 29 94 24")]
-    public partial void Update(BonePhysicsModule *bonePhysicsModule);
+    public partial void Update(BonePhysicsModule* bonePhysicsModule);
 
     /// <remarks> Called when IsTimeIntegrating is false. </remarks>
     [MemberFunction("40 53 55 57 41 54 41 56 48 83 EC ?? 4C 89 AC 24")]
-    public partial void UpdateWithoutIntegration(BonePhysicsModule *bonePhysicsModule);
+    public partial void UpdateWithoutIntegration(BonePhysicsModule* bonePhysicsModule);
 }

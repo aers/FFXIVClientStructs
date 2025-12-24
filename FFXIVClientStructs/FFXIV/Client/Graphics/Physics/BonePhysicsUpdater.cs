@@ -15,7 +15,7 @@ public unsafe partial struct BonePhysicsUpdater {
     [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public partial struct UpdateBoneSimulatorJobData {
-        [FieldOffset(0x0)] BoneSimulator *BoneSimulator;
-        [FieldOffset(0x8)] BonePhysicsModule *BonePhysicsModule;
+        [FieldOffset(0x0)] BoneSimulator* BoneSimulator;
+        [FieldOffset(0x8)] BonePhysicsModule* BonePhysicsModule;
     }
 }
