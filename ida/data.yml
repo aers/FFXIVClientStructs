@@ -12272,6 +12272,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14102CBE0: ctor
+      0x14102D260: UpdateNumber
+      0x14102D310: UpdatePayout
+      0x14102D420: UpdateAddon
   Client::UI::Agent::AgentAetherialWheel:
     vtbls:
       - ea: 0x1421C4E60
