@@ -3609,6 +3609,18 @@ classes:
       0x140060A30: Finalizer
       0x140060B60: AddTask
       0x140060BD0: ExecuteAllTasks
+  Client::System::Framework::JobListInterface:
+    vtbls:
+      - ea: 0x14203C2A8
+  Client::System::Framework::JobListArgArrayAndIndex:
+    vtbls:
+      - ea: 0x14203C350
+        base: Client::System::Framework::JobListInterface
+      - ea: 0x14203C378
+        base: Client::System::Framework::Task
+    funcs:
+      0x140061B20: ctor
+      0x140061BE0: ctor2
   Common::Game::Time::GameTime:
     vtbls:
       - ea: 0x142050ED8
@@ -6562,22 +6574,140 @@ classes:
         base: Client::Graphics::Singleton
       - ea: 0x1420832F8
         base: Client::Graphics::Kernel::Notifier
-#    funcs:
-#oldfail       0x1403F0860: ctor
+    funcs:
+      0x140340440: ctor
   Client::Graphics::JobSystem<Apricot::Engine::Core>:
     instances:
       - ea: 0x142996900
     vtbls:
       - ea: 0x142087408
     funcs:
-#oldfail       0x140434F70: ctor
+      0x1403A1FC0: ctor
       0x1403A24C0: GetSingleton
-  Apricot::ApricotListenner:
+  Apricot::Engine::Instance::SchedulerInstance:
     vtbls:
-      - ea: 0x142086F80
-        base: Client::System::Threading::Thread
+      - ea: 0x142087410
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::TimelineInstance:
+    vtbls:
+      - ea: 0x142087530
+        base: Apricot::Engine::Instance::InstanceBase
     funcs:
-      0x140378C10: SoundPlay
+      0x1403AA420: ctor
+  Apricot::Engine::Instance::BinderInstance:
+    vtbls:
+      - ea: 0x142087778
+        base: Apricot::Engine::Instance::InstanceBase
+    funcs:
+      0x1403AD190: ctor
+  Apricot::Engine::Instance::CameraBinderInstance:
+    vtbls:
+      - ea: 0x1420878D0
+        base: Apricot::Engine::Instance::BinderInstance
+    funcs:
+      0x1403ADB10: ctor
+  Apricot::Engine::Instance::PointBinderInstance:
+    vtbls:
+      - ea: 0x142087A28
+        base: Apricot::Engine::Instance::BinderInstance
+    funcs:
+      0x1403AE8C0: ctor
+  Apricot::Engine::Instance::LinearBinderInstance:
+    vtbls:
+      - ea: 0x142087B80
+        base: Apricot::Engine::Instance::BinderInstance
+    funcs:
+      0x1403AFAE0: ctor
+  Apricot::Engine::Instance::SplineBinderInstance:
+    vtbls:
+      - ea: 0x142087CD8
+        base: Apricot::Engine::Instance::BinderInstance
+    funcs:
+      0x1403B1540: ctor
+  Apricot::Engine::Instance::EndClipInstance:
+    vtbls:
+      - ea: 0x142087F50
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::FadeInClipInstance:
+    vtbls:
+      - ea: 0x142088070
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::KillClipInstance:
+    vtbls:
+      - ea: 0x142088190
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::RandomTriggerClipInstance:
+    vtbls:
+      - ea: 0x1420882B0
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::TriggerClipInstance:
+    vtbls:
+      - ea: 0x1420883D0
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::UnlockLoopPointClipInstance:
+    vtbls:
+      - ea: 0x1420884F0
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::ParametricInstance:
+    vtbls:
+      - ea: 0x142089030
+        base: Apricot::Engine::Instance::InstanceBase
+    funcs:
+      0x1403B8320: ctor
+  Apricot::Engine::Instance::EmitterInstance:
+    vtbls:
+      - ea: 0x142089150
+        base: Apricot::Engine::Instance::ParametricInstance
+    funcs:
+      0x1403B9000: ctor
+  Apricot::Engine::Instance::ConeEmitterInstance:
+    vtbls:
+      - ea: 0x142089290
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403BE610: ctor
+  Apricot::Engine::Instance::ConeModelEmitterInstance:
+    vtbls:
+      - ea: 0x1420893D0
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C0870: ctor
+  Apricot::Engine::Instance::CylinderModelEmitterInstance:
+    vtbls:
+      - ea: 0x142089510
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C44E0: ctor
+  Apricot::Engine::Instance::ModelEmitterInstance:
+    vtbls:
+      - ea: 0x142089650
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C7310: ctor
+  Apricot::Engine::Instance::PointEmitterInstance:
+    vtbls:
+      - ea: 0x142089790
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C92F0: ctor # inlined
+  Apricot::Engine::Instance::SphereModelEmitterInstance:
+    vtbls:
+      - ea: 0x1420898D0
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C9FE0: ctor
+  Apricot::Engine::Instance::ParticleInstance:
+    vtbls:
+      - ea: 0x142089A10
+        base: Apricot::Engine::Instance::ParametricInstance
+    funcs:
+      0x1403CE7B0: ctor
+  Client::Graphics::JobSystem<Apricot::Engine::Core>::JobQueue:
+    vtbls:
+      - ea: 0x14208ACF8
+  Apricot::ILoaderListenner:
+    vtbls:
+      - ea: 0x142086D28
   Apricot::IInstanceListenner:
     vtbls:
       - ea: 0x142086D48
@@ -6585,10 +6715,59 @@ classes:
       0: Dtor
       1: GetCaster
       6: GetTarget
+  Apricot::IHandleListenner:
+    vtbls:
+      - ea: 0x142086DD0
+  Apricot::ApricotListenner:
+    vtbls:
+      - ea: 0x142086F80
+        base: Client::System::Threading::Thread
+    funcs:
+      0x140378C10: SoundPlay
   Apricot::ApricotInstanceListenner:
     vtbls:
       - ea: 0x142087008
         base: Apricot::IInstanceListenner
+  Client::Graphics::Vfx::VfxResourceObject:
+    vtbls:
+      - ea: 0x142087090
+        base: Apricot::ILoaderListenner
+    funcs:
+      0x14037B420: ctor
+  Client::Graphics::Vfx::VfxResourceInstanceListenner:
+    vtbls:
+      - ea: 0x1420870B0
+  Client::Graphics::Vfx::VfxResourceInstance:
+    vtbls:
+      - ea: 0x1420870C8
+        base: Apricot::IHandleListenner
+    funcs:
+      0x14037BD80: ctor
+  Client::Graphics::Vfx::VfxData:
+    vtbls:
+      - ea: 0x1420870D8
+        base: Apricot::ApricotInstanceListenner
+      - ea: 0x142087160
+        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
+    funcs:
+      0x14037E510: Finalizer
+  Apricot::Engine::Instance::InstanceBase:
+    vtbls:
+      - ea: 0x1420871B8
+    funcs:
+      0x14039C0C0: ctor
+      0x14039BBB0: ctor2
+      0x14039C560: ctor3
+  Client::Graphics::Scene::VfxObject:
+    vtbls:
+      - ea: 0x142095A00
+        base: Client::Graphics::Scene::DrawObject
+      - ea: 0x142095BA0
+        base: Apricot::ApricotInstanceListenner
+      - ea: 0x142095C28
+        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
+    funcs:
+      0x140446820: ctor
   Client::Graphics::Scene::CharacterBase::VfxInstanceListenner:
     vtbls:
       - ea: 0x142094018
@@ -6774,19 +6953,6 @@ classes:
         base: Client::Graphics::Scene::Object
     funcs:
       0x140441C80: ctor
-  Client::Graphics::Vfx::VfxResourceInstanceListenner:
-    vtbls:
-      - ea: 0x1420870B0
-  Client::Graphics::Scene::VfxObject:
-    vtbls:
-      - ea: 0x142095A00
-        base: Client::Graphics::Scene::DrawObject
-      - ea: 0x142095BA0
-        base: Apricot::ApricotInstanceListenner
-      - ea: 0x142095C28
-        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
-    funcs:
-      0x140446820: ctor
   Client::Graphics::Scene::Terrain:
     vtbls:
       - ea: 0x1420951F8
@@ -7057,14 +7223,12 @@ classes:
       # Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Base::CutSceneController>
     funcs:
       0x14180C150: ctor
-  Client::Graphics::Vfx::VfxData:
+  Apricot::Engine::Instance::DocumentInstance:
     vtbls:
-      - ea: 0x1420870D8
-        base: Apricot::ApricotInstanceListenner
-      - ea: 0x142087160
-        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
+      - ea: 0x1420872D8
+        base: Apricot::Engine::Instance::InstanceBase
     funcs:
-      0x14037E510: Finalizer
+      0x14039EBF0: ctor
   Client::Graphics::Vfx::VfxDataListenner:
     vtbls:
       - ea: 0x14205CE10
