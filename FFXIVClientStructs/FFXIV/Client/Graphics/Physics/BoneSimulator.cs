@@ -4,8 +4,9 @@ using FFXIVClientStructs.FFXIV.Common.Math;
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Physics;
 
 // Client::Graphics::Physics::BoneSimulator
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x450)]
-public unsafe struct BoneSimulator {
+public unsafe partial struct BoneSimulator {
     [FieldOffset(0x10)] public PhysicsGroup Group;
     [FieldOffset(0x18)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
     [FieldOffset(0x20)] public Vector3 CharacterPosition;
@@ -34,4 +35,12 @@ public unsafe struct BoneSimulator {
         Earrings = 8,
         Ears = 18,
     }
+
+    /// <remarks> Called when IsTimeIntegrating is true. </remarks>
+    [MemberFunction("40 55 53 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 44 0F 29 94 24")]
+    public partial void Update(BonePhysicsModule* bonePhysicsModule);
+
+    /// <remarks> Called when IsTimeIntegrating is false. </remarks>
+    [MemberFunction("40 53 55 57 41 54 41 56 48 83 EC ?? 4C 89 AC 24")]
+    public partial void UpdateWithoutIntegration(BonePhysicsModule* bonePhysicsModule);
 }

@@ -13,7 +13,7 @@ public unsafe partial struct UiSavePackModule {
         return uiModule == null ? null : uiModule->GetUiSavePackModule();
     }
 
-    [VirtualFunction(14)]
+    [VirtualFunction(15)]
     public partial nint GetSegment(byte segment);
 
     public nint GetSegment(DataSegment segment) => GetSegment((byte)segment);

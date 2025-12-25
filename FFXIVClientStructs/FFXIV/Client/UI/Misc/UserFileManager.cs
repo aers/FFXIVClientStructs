@@ -48,17 +48,18 @@ public partial struct UserFileManager {
         public partial ushort GetFileType();
 
         // vf9?
-
-        [VirtualFunction(10)]
-        public partial bool GetHasChanges();
+        // vf10?
 
         [VirtualFunction(11)]
-        public partial bool GetIsSavePending();
+        public partial bool GetHasChanges();
 
         [VirtualFunction(12)]
-        public partial void SetCharacterContentId(ulong contentId);
+        public partial bool GetIsSavePending();
 
         [VirtualFunction(13)]
+        public partial void SetCharacterContentId(ulong contentId);
+
+        [VirtualFunction(14)]
         public partial void SaveFile(bool force);
     }
 }

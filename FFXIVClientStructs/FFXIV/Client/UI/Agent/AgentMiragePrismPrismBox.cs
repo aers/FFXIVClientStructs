@@ -61,8 +61,15 @@ public partial struct PrismBoxItem {
     [FieldOffset(0x68)] public uint Slot;
     [FieldOffset(0x6C)] public uint ItemId;
     [FieldOffset(0x70)] public uint IconId;
-    //[FieldOffset(0x74)] private uint Unk_SheetColumn19;
-    [FieldOffset(0x7E), FixedSizeArray] internal FixedSizeArray2<byte> _stains;
+    [FieldOffset(0x7A)] public byte EquipRestriction;
+    [FieldOffset(0x7C)] private ushort Unk7C;
+    [FieldOffset(0x7E)] public ushort ItemLevel;
+    [FieldOffset(0x80)] public ushort LevelEquip;
+    [FieldOffset(0x82), FixedSizeArray] internal FixedSizeArray2<byte> _stains;
+    [FieldOffset(0x85)] public byte EquipSlotCategory;
+    [FieldOffset(0x87)] public byte ClassJobCategory;
+    [FieldOffset(0x88)] private byte Unk88; // Seemingly always 255
+    [FieldOffset(0x89)] public byte NumOutfitPiecesAdded; // Only for outfit glamours
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x1C)]

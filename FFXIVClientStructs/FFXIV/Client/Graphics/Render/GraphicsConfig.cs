@@ -60,6 +60,8 @@ public unsafe partial struct GraphicsConfig {
     [FieldOffset(0x56)] public bool GrassEnableDynamicInterference;
 
     [FieldOffset(0x65)] public bool HousingSSAOEnable;
+    [FieldOffset(0x66)] public bool PortraitPreview; // GPose: Preview the framing of the camera composition used in portrait mode.
+    [FieldOffset(0x67)] public bool PortraitMode; // GPose: Enter portrait mode, rotating the camera ninety degrees.<br>* Screenshots must be taken manually.
 
     [FieldOffset(0x78)] public float JitterMultiplier;
 }

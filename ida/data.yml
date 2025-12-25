@@ -59,6 +59,18 @@ globals:
   0x1429CF9AC: g_Client::Game::UI::Chain.MaxTime # not a pointer
   0x1429CFA2C: g_Client::Game::UI::PlayerState.ObjectId
   0x1429CFA30: g_Client::Game::UI::PlayerState.ContentId
+  0x1429D004A: g_Client::Game::UI::PlayerState.UnlockedRaids
+  0x1429D0066: g_Client::Game::UI::PlayerState.UnlockedDungeons
+  0x1429D0078: g_Client::Game::UI::PlayerState.UnlockedGuildOrders
+  0x1429D0082: g_Client::Game::UI::PlayerState.UnlockedTrials
+  0x1429D0090: g_Client::Game::UI::PlayerState.UnlockedCrystallineConflicts
+  0x1429d0093: g_Client::Game::UI::PlayerState.UnlockedFrontlines
+  0x1429d0095: g_Client::Game::UI::PlayerState.CompletedRaids
+  0x1429D00B1: g_Client::Game::UI::PlayerState.CompletedDungeons
+  0x1429D00C3: g_Client::Game::UI::PlayerState.CompletedGuildOrders
+  0x1429D00CD: g_Client::Game::UI::PlayerState.CompletedTrials
+  0x1429D00DB: g_Client::Game::UI::PlayerState.CompletedCrystallineConflicts
+  0x1429D00DE: g_Client::Game::UI::PlayerState.CompletedFrontlines
   0x1429D3210: g_Client::Game::UI::Buddy.CompanionStats.TimeRemaining
   0x1429D3268: g_Client::Game::UI::Buddy.BattleBuddyListPtr
   0x1429DB510: g_Client::Game::UI::ActiveDirector
@@ -437,6 +449,7 @@ functions:
   0x1419648D0: MassivePcContentDirector_IsPlayCutscene # ulong (lua_State* state)
   0x140DED460: GoldSaucerDirector_IsPlayCutscene # ulong (lua_State* state)
   0x1419C27C0: CustomTalk_IsPlayCutsceneContent # ulong (lua_State* state)
+  0x1418E9530: GetInstanceContentTypeAndIndex # bool (int instanceContentId, InstanceContentType *contentType, uint *outIndex)
 
 classes:
   Common::TimePoint:
@@ -853,6 +866,16 @@ classes:
     vtbls:
       - ea: 0x1420A1200
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
+    vtbls:
+      - ea: 0x1420BB820
+  Client::Game::SheetWaiterBase:
+    vtbls:
+      - ea: 0x1420BB838
+        base: Common::Component::Excel::ExcelSheetWaiter
+  Client::Game::InstanceContent::ContentSheetWaiter:
+    vtbls:
+      - ea: 0x1420BB848
+        base: Client::Game::SheetWaiterBase
   Client::Game::Object::IGameObjectEventListener:
   Client::Game::Object::IFilterCommand:
     vtbls:
@@ -2697,7 +2720,9 @@ classes:
       0x140B00170: GetCurrentClassJobExp
       0x140B00220: GetClassJobNeededExp
       0x140B00290: GetCurrentClassJobNeededExp
+      0x140B00360: SetMainAttributeByIndex # (this, index, value)
       0x140B00380: GetAttributeByIndex # (this, index)
+      0x140B003A0: SetAttributeByIndex # (this, index, value)
       0x140AFD850: SetEurekaRank
       0x140AFD950: SetBozjaRank
       0x140AFDE00: TrackTraitUnlock
@@ -2944,10 +2969,6 @@ classes:
     funcs:
       0x140B0E390: Initialize
       0x140B0E830: Finalizer
-#  Client::Game::SheetWaiterBase:
-#    vtbls:
-#      - ea:
-#        base: Common::Component::Excel::ExcelSheetWaiter
   Client::Game::SheetWaiter<Client::Game::UI::ScenarioTextReader>:
 #    vtbls:
 #      - ea:
@@ -3585,10 +3606,21 @@ classes:
     vfuncs:
       0: Dtor
     funcs:
-      0x140225390: ctor
       0x140060A30: Finalizer
       0x140060B60: AddTask
       0x140060BD0: ExecuteAllTasks
+  Client::System::Framework::JobListInterface:
+    vtbls:
+      - ea: 0x14203C2A8
+  Client::System::Framework::JobListArgArrayAndIndex:
+    vtbls:
+      - ea: 0x14203C350
+        base: Client::System::Framework::JobListInterface
+      - ea: 0x14203C378
+        base: Client::System::Framework::Task
+    funcs:
+      0x140061B20: ctor
+      0x140061BE0: ctor2
   Common::Game::Time::GameTime:
     vtbls:
       - ea: 0x142050ED8
@@ -6280,6 +6312,31 @@ classes:
     vtbls:
       - ea: 0x14206B920
         base: Client::System::Threading::Thread
+  Client::Graphics::Kernel::Device::DelayedReleaseManager:
+    vtbls:
+      - ea: 0x14206B980
+    funcs:
+      0x1402242A0: ctor
+  Client::Graphics::Kernel::Device::VertexDeclarationManager:
+    vtbls:
+      - ea: 0x14206B988
+    funcs:
+      0x1402248F0: ctor
+  Client::Graphics::Kernel::Device::CallbackManager:
+    vtbls:
+      - ea: 0x14206B990
+    funcs:
+      0x140225050: ctor
+      0x140225090: Initialize
+      0x140225170: AddCallback
+      0x140225210: RemoveCallback
+      0x140225270: ExecuteCallbacks
+  Client::Graphics::Kernel::Device::HandleManager:
+    vtbls:
+      - ea: 0x14206B998
+    funcs:
+      0x140225310: ctor
+      0x140225390: Initialize
   Client::Graphics::Render::Skeleton:
     vtbls:
       - ea: 0x142074C60
@@ -6517,22 +6574,140 @@ classes:
         base: Client::Graphics::Singleton
       - ea: 0x1420832F8
         base: Client::Graphics::Kernel::Notifier
-#    funcs:
-#oldfail       0x1403F0860: ctor
+    funcs:
+      0x140340440: ctor
   Client::Graphics::JobSystem<Apricot::Engine::Core>:
     instances:
       - ea: 0x142996900
     vtbls:
       - ea: 0x142087408
     funcs:
-#oldfail       0x140434F70: ctor
+      0x1403A1FC0: ctor
       0x1403A24C0: GetSingleton
-  Apricot::ApricotListenner:
+  Apricot::Engine::Instance::SchedulerInstance:
     vtbls:
-      - ea: 0x142086F80
-        base: Client::System::Threading::Thread
+      - ea: 0x142087410
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::TimelineInstance:
+    vtbls:
+      - ea: 0x142087530
+        base: Apricot::Engine::Instance::InstanceBase
     funcs:
-      0x140378C10: SoundPlay
+      0x1403AA420: ctor
+  Apricot::Engine::Instance::BinderInstance:
+    vtbls:
+      - ea: 0x142087778
+        base: Apricot::Engine::Instance::InstanceBase
+    funcs:
+      0x1403AD190: ctor
+  Apricot::Engine::Instance::CameraBinderInstance:
+    vtbls:
+      - ea: 0x1420878D0
+        base: Apricot::Engine::Instance::BinderInstance
+    funcs:
+      0x1403ADB10: ctor
+  Apricot::Engine::Instance::PointBinderInstance:
+    vtbls:
+      - ea: 0x142087A28
+        base: Apricot::Engine::Instance::BinderInstance
+    funcs:
+      0x1403AE8C0: ctor
+  Apricot::Engine::Instance::LinearBinderInstance:
+    vtbls:
+      - ea: 0x142087B80
+        base: Apricot::Engine::Instance::BinderInstance
+    funcs:
+      0x1403AFAE0: ctor
+  Apricot::Engine::Instance::SplineBinderInstance:
+    vtbls:
+      - ea: 0x142087CD8
+        base: Apricot::Engine::Instance::BinderInstance
+    funcs:
+      0x1403B1540: ctor
+  Apricot::Engine::Instance::EndClipInstance:
+    vtbls:
+      - ea: 0x142087F50
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::FadeInClipInstance:
+    vtbls:
+      - ea: 0x142088070
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::KillClipInstance:
+    vtbls:
+      - ea: 0x142088190
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::RandomTriggerClipInstance:
+    vtbls:
+      - ea: 0x1420882B0
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::TriggerClipInstance:
+    vtbls:
+      - ea: 0x1420883D0
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::UnlockLoopPointClipInstance:
+    vtbls:
+      - ea: 0x1420884F0
+        base: Apricot::Engine::Instance::InstanceBase
+  Apricot::Engine::Instance::ParametricInstance:
+    vtbls:
+      - ea: 0x142089030
+        base: Apricot::Engine::Instance::InstanceBase
+    funcs:
+      0x1403B8320: ctor
+  Apricot::Engine::Instance::EmitterInstance:
+    vtbls:
+      - ea: 0x142089150
+        base: Apricot::Engine::Instance::ParametricInstance
+    funcs:
+      0x1403B9000: ctor
+  Apricot::Engine::Instance::ConeEmitterInstance:
+    vtbls:
+      - ea: 0x142089290
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403BE610: ctor
+  Apricot::Engine::Instance::ConeModelEmitterInstance:
+    vtbls:
+      - ea: 0x1420893D0
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C0870: ctor
+  Apricot::Engine::Instance::CylinderModelEmitterInstance:
+    vtbls:
+      - ea: 0x142089510
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C44E0: ctor
+  Apricot::Engine::Instance::ModelEmitterInstance:
+    vtbls:
+      - ea: 0x142089650
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C7310: ctor
+  Apricot::Engine::Instance::PointEmitterInstance:
+    vtbls:
+      - ea: 0x142089790
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C92F0: ctor # inlined
+  Apricot::Engine::Instance::SphereModelEmitterInstance:
+    vtbls:
+      - ea: 0x1420898D0
+        base: Apricot::Engine::Instance::EmitterInstance
+    funcs:
+      0x1403C9FE0: ctor
+  Apricot::Engine::Instance::ParticleInstance:
+    vtbls:
+      - ea: 0x142089A10
+        base: Apricot::Engine::Instance::ParametricInstance
+    funcs:
+      0x1403CE7B0: ctor
+  Client::Graphics::JobSystem<Apricot::Engine::Core>::JobQueue:
+    vtbls:
+      - ea: 0x14208ACF8
+  Apricot::ILoaderListenner:
+    vtbls:
+      - ea: 0x142086D28
   Apricot::IInstanceListenner:
     vtbls:
       - ea: 0x142086D48
@@ -6540,10 +6715,59 @@ classes:
       0: Dtor
       1: GetCaster
       6: GetTarget
+  Apricot::IHandleListenner:
+    vtbls:
+      - ea: 0x142086DD0
+  Apricot::ApricotListenner:
+    vtbls:
+      - ea: 0x142086F80
+        base: Client::System::Threading::Thread
+    funcs:
+      0x140378C10: SoundPlay
   Apricot::ApricotInstanceListenner:
     vtbls:
       - ea: 0x142087008
         base: Apricot::IInstanceListenner
+  Client::Graphics::Vfx::VfxResourceObject:
+    vtbls:
+      - ea: 0x142087090
+        base: Apricot::ILoaderListenner
+    funcs:
+      0x14037B420: ctor
+  Client::Graphics::Vfx::VfxResourceInstanceListenner:
+    vtbls:
+      - ea: 0x1420870B0
+  Client::Graphics::Vfx::VfxResourceInstance:
+    vtbls:
+      - ea: 0x1420870C8
+        base: Apricot::IHandleListenner
+    funcs:
+      0x14037BD80: ctor
+  Client::Graphics::Vfx::VfxData:
+    vtbls:
+      - ea: 0x1420870D8
+        base: Apricot::ApricotInstanceListenner
+      - ea: 0x142087160
+        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
+    funcs:
+      0x14037E510: Finalizer
+  Apricot::Engine::Instance::InstanceBase:
+    vtbls:
+      - ea: 0x1420871B8
+    funcs:
+      0x14039C0C0: ctor
+      0x14039BBB0: ctor2
+      0x14039C560: ctor3
+  Client::Graphics::Scene::VfxObject:
+    vtbls:
+      - ea: 0x142095A00
+        base: Client::Graphics::Scene::DrawObject
+      - ea: 0x142095BA0
+        base: Apricot::ApricotInstanceListenner
+      - ea: 0x142095C28
+        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
+    funcs:
+      0x140446820: ctor
   Client::Graphics::Scene::CharacterBase::VfxInstanceListenner:
     vtbls:
       - ea: 0x142094018
@@ -6729,19 +6953,6 @@ classes:
         base: Client::Graphics::Scene::Object
     funcs:
       0x140441C80: ctor
-  Client::Graphics::Vfx::VfxResourceInstanceListenner:
-    vtbls:
-      - ea: 0x1420870B0
-  Client::Graphics::Scene::VfxObject:
-    vtbls:
-      - ea: 0x142095A00
-        base: Client::Graphics::Scene::DrawObject
-      - ea: 0x142095BA0
-        base: Apricot::ApricotInstanceListenner
-      - ea: 0x142095C28
-        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
-    funcs:
-      0x140446820: ctor
   Client::Graphics::Scene::Terrain:
     vtbls:
       - ea: 0x1420951F8
@@ -7012,14 +7223,12 @@ classes:
       # Client::System::Scheduler::Base::LinkList<Client::System::Scheduler::Base::CutSceneController>
     funcs:
       0x14180C150: ctor
-  Client::Graphics::Vfx::VfxData:
+  Apricot::Engine::Instance::DocumentInstance:
     vtbls:
-      - ea: 0x1420870D8
-        base: Apricot::ApricotInstanceListenner
-      - ea: 0x142087160
-        base: Client::Graphics::Vfx::VfxResourceInstanceListenner
+      - ea: 0x1420872D8
+        base: Apricot::Engine::Instance::InstanceBase
     funcs:
-      0x14037E510: Finalizer
+      0x14039EBF0: ctor
   Client::Graphics::Vfx::VfxDataListenner:
     vtbls:
       - ea: 0x14205CE10
@@ -7877,11 +8086,11 @@ classes:
     vfuncs:
       1: GetScreenPosition
       3: GetComponentNode
-      4: SetComponentNode
-      5: GetActiveNode
-      7: GetComponent
-      8: HandleMouseUpEvent
-      11: GetPayloadContainer
+      5: SetComponentNode
+      6: GetActiveNode
+      8: GetComponent
+      9: HandleMouseUpEvent
+      12: GetPayloadContainer
   Component::GUI::AtkDragDropPayloadContainer:
     funcs:
       0x1406245A0: ctor
@@ -8640,10 +8849,10 @@ classes:
       6: GetDataSize
       7: GetFileVersion
       8: GetFileType
-      10: GetHasChanges
-      11: GetIsSavePending
-      12: SetCharacterContentId
-      13: SaveFile
+      11: GetHasChanges
+      12: GetIsSavePending
+      13: SetCharacterContentId
+      14: SaveFile
   Client::UI::Misc::UserFileManager:
     vtbls:
       - ea: 0x1420B35E8
@@ -9470,7 +9679,7 @@ classes:
       - ea: 0x1420B9C78
         base: Client::UI::Misc::UserFileManager::UserFileEvent
     vfuncs:
-      14: GetSegment
+      15: GetSegment
     funcs:
       0x1407DAED0: ctor
   Client::UI::Misc::RaptureMacroModule:
@@ -12063,6 +12272,9 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x14102CBE0: ctor
+      0x14102D260: UpdateNumber
+      0x14102D310: UpdatePayout
+      0x14102D420: UpdateAddon
   Client::UI::Agent::AgentAetherialWheel:
     vtbls:
       - ea: 0x1421C4E60
@@ -14269,6 +14481,8 @@ classes:
     vtbls:
       - ea: 0x1420D1848
         base: Client::UI::Agent::AgentInterface
+    funcs:
+      0x140BBC620: OpenPanel # (this, panel, closeIfOpen, unknown)
   Client::UI::Agent::AgentConfigCharacterChatLogMiniTalk:
     vtbls:
       - ea: 0x142099678
@@ -14674,7 +14888,7 @@ classes:
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::FinalizeSceneTask:
     vtbls:
-      - ea: 0x1421DF668
+      - ea: 0x1421DE8F8
         base: Client::Game::Event::EventSceneTaskInterface
   Client::Game::Event::SetPositionTask:
     vtbls:
@@ -15443,6 +15657,8 @@ classes:
     vtbls:
       - ea: 0x1420DC5C0
         base: Client::Game::Event::Director
+      - ea: 0x1420DD150
+        base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
       302: GetCurrentLevel
       303: GetMaxLevel
@@ -15456,6 +15672,8 @@ classes:
     vtbls:
       - ea: 0x14223CC40
         base: Client::Game::InstanceContent::ContentDirector
+      - ea: 0x14223D8D8
+        base: Client::Game::InstanceContent::ContentSheetWaiterInterface
     vfuncs:
       397: HandleGMCommand
     funcs:
@@ -23534,6 +23752,7 @@ classes:
       0x141734F30: ctor
       0x1417350C0: Initialize
       0x141735B20: Update
+      0x1417360E0: BoneSimulatorTask
   Client::Graphics::Physics::BonePhysicsModule:
     vtbls:
       - ea: 0x1421E9970
@@ -23543,6 +23762,8 @@ classes:
       0x1417F8A90: ctor
       0x1417F8BF0: Finalizer
       0x1417F8CD0: Initialize
+      0x1417FC290: GetSimulationTime
+      0x1417FC330: GetSimulationTimeInv
   Client::Graphics::Physics::BoneKineDriverModule:
     vtbls:
       - ea: 0x1421E14B8
