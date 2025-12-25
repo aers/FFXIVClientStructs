@@ -1952,6 +1952,24 @@ enums:
     "Glasses": 33
     "PhantomAction": 34
     "QuickPanel": 35
+- type: Client::UI::Misc::QuickPanelModule::QuickPanelSetting
+  name: QuickPanelSetting
+  underlying: byte
+  namespace: Client.UI.Misc
+  flags: True
+  values:
+    "None": 0
+    "ClosePanelUponExecutingActions": 1
+    "OpenPanelAtMouseCursorPosition": 2
+    "DisableDraggingWithinCommandPanel": 4
+- type: Client::UI::Misc::QuickPanelModule::QuickPanelFlag
+  name: QuickPanelFlag
+  underlying: byte
+  namespace: Client.UI.Misc
+  flags: True
+  values:
+    "None": 0
+    "FirstTimeHelpSeen": 1
 - type: Client::UI::Misc::CrossHotbarFlags
   name: CrossHotbarFlags
   underlying: unsigned __int16
@@ -12446,6 +12464,21 @@ structs:
   - type: __int64
     name: RenderThread
     offset: 16
+  - type: Client::Graphics::Kernel::Device::CallbackManager*
+    name: Unk28
+    offset: 40
+  - type: Client::Graphics::Kernel::Device::CallbackManager*
+    name: Unk30
+    offset: 48
+  - type: Client::Graphics::Kernel::Device::CallbackManager*
+    name: Unk38
+    offset: 56
+  - type: Client::Graphics::Kernel::Device::CallbackManager*
+    name: OnResizeDestroy
+    offset: 64
+  - type: Client::Graphics::Kernel::Device::CallbackManager*
+    name: OnResizeCreate
+    offset: 72
   - type: Client::Graphics::Kernel::SwapChain*
     name: SwapChain
     offset: 112
@@ -12491,6 +12524,12 @@ structs:
   - type: int
     name: FrameRate
     offset: 2544
+  - type: Client::Graphics::Kernel::Device::CallbackManager*
+    name: UnkA10
+    offset: 2576
+  - type: Client::Graphics::Kernel::Device::CallbackManager*
+    name: UnkA18
+    offset: 2584
   - type: int
     name: D3DFeatureLevel
     offset: 920208
@@ -12545,6 +12584,63 @@ structs:
     - 3
     is_pointer: True
     return_type: Client::Graphics::Kernel::Device
+- type: Client::Graphics::Kernel::Device::CallbackManager
+  name: CallbackManager
+  namespace: Client.Graphics.Kernel
+  union: False
+  size: 64
+  fields:
+  - type: __int64
+    name: Lock
+    offset: 8
+  - type: Client::Graphics::Kernel::Device::CallbackManager::Entry*
+    name: Entries
+    offset: 48
+  - type: unsigned int
+    name: Capacity
+    offset: 56
+  - type: unsigned int
+    name: Count
+    offset: 60
+  virtual_functions: []
+  member_functions:
+  - signature: 48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 48 89 7C 24 ?? 41 56 48 83 EC ?? 48 8B F1 49 8B E8 48 83 C1
+    return_type: int
+    name: AddCallback
+    parameters:
+    - type: Client::Graphics::Kernel::Device::CallbackManager*
+      name: this
+    - type: __fastcall
+      name: func
+    - type: __int64
+      name: context
+  - signature: 48 89 5C 24 ?? 48 89 74 24 ?? 57 48 83 EC ?? 48 8B F1 8B FA 48 83 C1 ?? FF 15
+    return_type: void
+    name: RemoveCallback
+    parameters:
+    - type: Client::Graphics::Kernel::Device::CallbackManager*
+      name: this
+    - type: int
+      name: index
+  - signature: E8 ?? ?? ?? ?? 48 8B 5B ?? 48 8B 4B
+    return_type: byte
+    name: ExecuteCallbacks
+    parameters:
+    - type: Client::Graphics::Kernel::Device::CallbackManager*
+      name: this
+- type: Client::Graphics::Kernel::Device::CallbackManager::Entry
+  name: Entry
+  namespace: Client.Graphics.Kernel
+  union: False
+  size: 16
+  fields:
+  - type: __int64
+    name: Function
+    offset: 0
+  - type: __int64
+    name: Context
+    offset: 8
+  member_functions: []
 - type: Client::Graphics::Kernel::ImmediateContext
   name: ImmediateContext
   namespace: Client.Graphics.Kernel
@@ -12869,6 +12965,19 @@ structs:
     name: KineDriverResourceHandle
     offset: 0
   member_functions: []
+- type: Client::Graphics::Physics::BonePhysicsUpdater::UpdateBoneSimulatorJobData
+  name: UpdateBoneSimulatorJobData
+  namespace: Client.Graphics.Physics
+  union: False
+  size: 16
+  fields:
+  - type: Client::Graphics::Physics::BoneSimulator*
+    name: BoneSimulator
+    offset: 0
+  - type: Client::Graphics::Physics::BonePhysicsModule*
+    name: BonePhysicsModule
+    offset: 8
+  member_functions: []
 - type: Client::Graphics::ReferencedClassBase
   name: ReferencedClassBase
   namespace: Client.Graphics
@@ -13010,6 +13119,12 @@ structs:
   - type: byte
     name: HousingSSAOEnable
     offset: 101
+  - type: byte
+    name: PortraitPreview
+    offset: 102
+  - type: byte
+    name: PortraitMode
+    offset: 103
   - type: float
     name: JitterMultiplier
     offset: 120
@@ -13306,6 +13421,7 @@ structs:
   - type: Client::Graphics::Vfx::VfxResourceUnk*
     name: VfxResourceUnk
     offset: 8
+  virtual_functions: []
   member_functions: []
 - type: Client::Graphics::Vfx::VfxResourceUnk
   name: VfxResourceUnk
@@ -21331,19 +21447,19 @@ structs:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::UserFileManager::UserFileEvent*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::UserFileManager::UserFileEvent*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
@@ -21351,7 +21467,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::UserFileManager::UserFileEvent*
@@ -25522,7 +25638,7 @@ structs:
     - type: Component::GUI::AtkDragDropInterface*
       name: this
   - name: SetComponentNode
-    offset: 32
+    offset: 40
     return_type: void
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
@@ -25530,19 +25646,19 @@ structs:
     - type: Component::GUI::AtkComponentNode*
       name: node
   - name: GetActiveNode
-    offset: 40
+    offset: 48
     return_type: Component::GUI::AtkResNode*
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
       name: this
   - name: GetComponent
-    offset: 56
+    offset: 64
     return_type: Component::GUI::AtkComponentBase*
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
       name: this
   - name: HandleMouseUpEvent
-    offset: 64
+    offset: 72
     return_type: byte
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
@@ -25550,7 +25666,7 @@ structs:
     - type: Component::GUI::AtkEventData::AtkMouseData*
       name: mouseData
   - name: GetPayloadContainer
-    offset: 88
+    offset: 96
     return_type: Component::GUI::AtkDragDropPayloadContainer*
     parameters:
     - type: Component::GUI::AtkDragDropInterface*
@@ -35333,6 +35449,31 @@ structs:
   - name: Dtor
     offset: 0
   member_functions: []
+- type: Client::Graphics::Physics::BonePhysicsUpdater
+  name: BonePhysicsUpdater
+  namespace: Client.Graphics.Physics
+  union: False
+  size: 616
+  fields:
+  - type: Client::Graphics::JobSystem
+    name: CollisionObjectJob
+    offset: 32
+  - type: Client::Graphics::JobSystem
+    name: BoneSimulatorJob
+    offset: 224
+  - type: Client::Graphics::JobSystem
+    name: TransformUpdaterJob
+    offset: 416
+  virtual_functions: []
+  member_functions:
+  - signature: 48 8D 05 ?? ?? ?? ?? 48 89 6B ?? 48 89 43
+    return_type: void
+    name: BoneSimulatorTask
+    parameters:
+    - type: Client::Graphics::Physics::BonePhysicsUpdater*
+      name: this
+    - type: Client::Graphics::Physics::BonePhysicsUpdater::UpdateBoneSimulatorJobData*
+      name: data
 - type: Client::Graphics::Physics::BoneSimulator
   name: BoneSimulator
   namespace: Client.Graphics.Physics
@@ -35379,7 +35520,23 @@ structs:
     name: IsCollidable
     offset: 1094
   virtual_functions: []
-  member_functions: []
+  member_functions:
+  - signature: 40 55 53 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 44 0F 29 94 24
+    return_type: void
+    name: Update
+    parameters:
+    - type: Client::Graphics::Physics::BoneSimulator*
+      name: this
+    - type: Client::Graphics::Physics::BonePhysicsModule*
+      name: bonePhysicsModule
+  - signature: 40 53 55 57 41 54 41 56 48 83 EC ?? 4C 89 AC 24
+    return_type: void
+    name: UpdateWithoutIntegration
+    parameters:
+    - type: Client::Graphics::Physics::BoneSimulator*
+      name: this
+    - type: Client::Graphics::Physics::BonePhysicsModule*
+      name: bonePhysicsModule
 - type: Client::Graphics::Physics::BoneSimulators
   name: BoneSimulators
   namespace: Client.Graphics.Physics
@@ -43933,19 +44090,19 @@ structs:
     - type: Client::UI::Misc::AchievementListModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::AchievementListModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::AchievementListModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::AchievementListModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::AchievementListModule*
@@ -43953,7 +44110,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::AchievementListModule*
@@ -44079,19 +44236,19 @@ structs:
     - type: Client::UI::Misc::ActionModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::ActionModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::ActionModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::ActionModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::ActionModule*
@@ -44099,7 +44256,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::ActionModule*
@@ -44175,19 +44332,19 @@ structs:
     - type: Client::UI::Misc::AdventureNoteModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::AdventureNoteModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::AdventureNoteModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::AdventureNoteModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::AdventureNoteModule*
@@ -44195,7 +44352,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::AdventureNoteModule*
@@ -44266,19 +44423,19 @@ structs:
     - type: Client::UI::Misc::BannerModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::BannerModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::BannerModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::BannerModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::BannerModule*
@@ -44286,7 +44443,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::BannerModule*
@@ -44398,19 +44555,19 @@ structs:
     - type: Client::UI::Misc::CatalogSearchBookmarkModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::CatalogSearchBookmarkModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::CatalogSearchBookmarkModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::CatalogSearchBookmarkModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::CatalogSearchBookmarkModule*
@@ -44418,7 +44575,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::CatalogSearchBookmarkModule*
@@ -44559,19 +44716,19 @@ structs:
     - type: Client::UI::Misc::CrossWorldLinkShellModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::CrossWorldLinkShellModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::CrossWorldLinkShellModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::CrossWorldLinkShellModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::CrossWorldLinkShellModule*
@@ -44579,7 +44736,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::CrossWorldLinkShellModule*
@@ -44706,19 +44863,19 @@ structs:
     - type: Client::UI::Misc::DescriptionModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::DescriptionModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::DescriptionModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::DescriptionModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::DescriptionModule*
@@ -44726,7 +44883,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::DescriptionModule*
@@ -44862,19 +45019,19 @@ structs:
     - type: Client::UI::Misc::EmjModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::EmjModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::EmjModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::EmjModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::EmjModule*
@@ -44882,7 +45039,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::EmjModule*
@@ -44965,19 +45122,19 @@ structs:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::EmoteHistoryModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::EmoteHistoryModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
@@ -44985,7 +45142,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::EmoteHistoryModule*
@@ -45134,19 +45291,19 @@ structs:
     - type: Client::UI::Misc::GlassesModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::GlassesModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::GlassesModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::GlassesModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::GlassesModule*
@@ -45154,7 +45311,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::GlassesModule*
@@ -45247,19 +45404,19 @@ structs:
     - type: Client::UI::Misc::GroupPoseStampModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::GroupPoseStampModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::GroupPoseStampModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::GroupPoseStampModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::GroupPoseStampModule*
@@ -45267,7 +45424,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::GroupPoseStampModule*
@@ -45414,19 +45571,19 @@ structs:
     - type: Client::UI::Misc::ItemContextCustomizeModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::ItemContextCustomizeModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::ItemContextCustomizeModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::ItemContextCustomizeModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::ItemContextCustomizeModule*
@@ -45434,7 +45591,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::ItemContextCustomizeModule*
@@ -45668,19 +45825,19 @@ structs:
     - type: Client::UI::Misc::LetterDataModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::LetterDataModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::LetterDataModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::LetterDataModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::LetterDataModule*
@@ -45688,7 +45845,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::LetterDataModule*
@@ -45756,19 +45913,19 @@ structs:
     - type: Client::UI::Misc::LogFilterConfig*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::LogFilterConfig*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::LogFilterConfig*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::LogFilterConfig*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::LogFilterConfig*
@@ -45776,7 +45933,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::LogFilterConfig*
@@ -45863,19 +46020,19 @@ structs:
     - type: Client::UI::Misc::McAggreModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::McAggreModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::McAggreModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::McAggreModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::McAggreModule*
@@ -45883,7 +46040,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::McAggreModule*
@@ -45961,19 +46118,19 @@ structs:
     - type: Client::UI::Misc::MinionListModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::MinionListModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::MinionListModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::MinionListModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::MinionListModule*
@@ -45981,7 +46138,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::MinionListModule*
@@ -46121,19 +46278,19 @@ structs:
     - type: Client::UI::Misc::MountListModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::MountListModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::MountListModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::MountListModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::MountListModule*
@@ -46141,7 +46298,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::MountListModule*
@@ -46266,19 +46423,19 @@ structs:
     - type: Client::UI::Misc::MycNoteModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::MycNoteModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::MycNoteModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::MycNoteModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::MycNoteModule*
@@ -46286,7 +46443,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::MycNoteModule*
@@ -46359,19 +46516,19 @@ structs:
     - type: Client::UI::Misc::OrnamentListModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::OrnamentListModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::OrnamentListModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::OrnamentListModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::OrnamentListModule*
@@ -46379,7 +46536,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::OrnamentListModule*
@@ -46462,19 +46619,19 @@ structs:
     - type: Client::UI::Misc::PartyRoleListModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::PartyRoleListModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::PartyRoleListModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::PartyRoleListModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::PartyRoleListModule*
@@ -46482,7 +46639,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::PartyRoleListModule*
@@ -46562,19 +46719,19 @@ structs:
     - type: Client::UI::Misc::PerformanceModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::PerformanceModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::PerformanceModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::PerformanceModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::PerformanceModule*
@@ -46582,7 +46739,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::PerformanceModule*
@@ -46650,19 +46807,19 @@ structs:
     - type: Client::UI::Misc::PvpSetModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::PvpSetModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::PvpSetModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::PvpSetModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::PvpSetModule*
@@ -46670,7 +46827,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::PvpSetModule*
@@ -46688,6 +46845,58 @@ structs:
     name: UserFileEvent
     offset: 0
     base: true
+  - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType
+    name: Panel0CommandTypes
+    offset: 72
+    size: 25
+    is_string: False
+  - type: unsigned int
+    name: Panel0CommandIds
+    offset: 100
+    size: 25
+    is_string: False
+  - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType
+    name: Panel1CommandTypes
+    offset: 200
+    size: 25
+    is_string: False
+  - type: unsigned int
+    name: Panel1CommandIds
+    offset: 228
+    size: 25
+    is_string: False
+  - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType
+    name: Panel2CommandTypes
+    offset: 328
+    size: 25
+    is_string: False
+  - type: unsigned int
+    name: Panel2CommandIds
+    offset: 356
+    size: 25
+    is_string: False
+  - type: Client::UI::Misc::RaptureHotbarModule::HotbarSlotType
+    name: Panel3CommandTypes
+    offset: 456
+    size: 25
+    is_string: False
+  - type: unsigned int
+    name: Panel3CommandIds
+    offset: 484
+    size: 25
+    is_string: False
+  - type: Client::UI::Misc::QuickPanelModule::QuickPanelSetting
+    name: Settings
+    offset: 616
+  - type: Client::UI::Misc::QuickPanelModule::QuickPanelFlag
+    name: Flags
+    offset: 620
+  - type: byte
+    name: Tint
+    offset: 622
+  - type: __int8
+    name: PanelOpenIndex
+    offset: 623
   virtual_functions:
   - name: ReadFile
     offset: 8
@@ -46738,19 +46947,19 @@ structs:
     - type: Client::UI::Misc::QuickPanelModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::QuickPanelModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::QuickPanelModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::QuickPanelModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::QuickPanelModule*
@@ -46758,7 +46967,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::QuickPanelModule*
@@ -47145,19 +47354,19 @@ structs:
     - type: Client::UI::Misc::ReadyCheckModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::ReadyCheckModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::ReadyCheckModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::ReadyCheckModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::ReadyCheckModule*
@@ -47165,7 +47374,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::ReadyCheckModule*
@@ -47245,19 +47454,19 @@ structs:
     - type: Client::UI::Misc::RetainerTaskDataModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RetainerTaskDataModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RetainerTaskDataModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RetainerTaskDataModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::RetainerTaskDataModule*
@@ -47265,7 +47474,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::RetainerTaskDataModule*
@@ -47333,19 +47542,19 @@ structs:
     - type: Client::UI::Misc::TeleportHistoryModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::TeleportHistoryModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::TeleportHistoryModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::TeleportHistoryModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::TeleportHistoryModule*
@@ -47353,7 +47562,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::TeleportHistoryModule*
@@ -47421,19 +47630,19 @@ structs:
     - type: Client::UI::Misc::TofuModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::TofuModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::TofuModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::TofuModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::TofuModule*
@@ -47441,7 +47650,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::TofuModule*
@@ -47528,7 +47737,7 @@ structs:
     base: true
   virtual_functions:
   - name: GetSegment
-    offset: 112
+    offset: 120
     return_type: __int64
     parameters:
     - type: Client::UI::Misc::UiSavePackModule*
@@ -47584,19 +47793,19 @@ structs:
     - type: Client::UI::Misc::UiSavePackModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::UiSavePackModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::UiSavePackModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::UiSavePackModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::UiSavePackModule*
@@ -47604,7 +47813,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::UiSavePackModule*
@@ -47704,19 +47913,19 @@ structs:
     - type: Client::UI::Misc::VVDActionModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::VVDActionModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::VVDActionModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::VVDActionModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::VVDActionModule*
@@ -47724,7 +47933,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::VVDActionModule*
@@ -61838,6 +62047,146 @@ structs:
     - type: byte
       name: classJobId
   member_functions: []
+- type: Client::UI::Agent::AgentLotteryDaily
+  name: AgentLotteryDaily
+  namespace: Client.UI.Agent
+  union: False
+  size: 80
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: int
+    name: Status
+    offset: 40
+  - type: byte
+    name: Numbers
+    offset: 56
+    size: 9
+    is_string: False
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions:
+  - signature: 40 53 48 83 EC ?? 48 63 C2 48 8B D9 44 88 44
+    return_type: void
+    name: UpdateNumber
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: int
+      name: index
+    - type: byte
+      name: value
+  - signature: E8 ?? ?? ?? ?? 4C 8B 74 24 ?? 89 BB
+    return_type: void
+    name: UpdatePayout
+    parameters:
+    - type: Client::UI::Agent::AgentLotteryDaily*
+      name: this
+    - type: int
+      name: sum
+    - type: int
+      name: mgp
 - type: Client::UI::Agent::AgentMJIAnimalManagement::Slot
   name: Slot
   namespace: Client.UI.Agent
@@ -66459,19 +66808,19 @@ structs:
     - type: Client::UI::Misc::AddonConfig*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::AddonConfig*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::AddonConfig*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::AddonConfig*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::AddonConfig*
@@ -66479,7 +66828,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::AddonConfig*
@@ -66618,19 +66967,19 @@ structs:
     - type: Client::UI::Misc::AkatsukiNoteModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::AkatsukiNoteModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::AkatsukiNoteModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::AkatsukiNoteModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::AkatsukiNoteModule*
@@ -66638,7 +66987,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::AkatsukiNoteModule*
@@ -66865,19 +67214,19 @@ structs:
     - type: Client::UI::Misc::CraftModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::CraftModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::CraftModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::CraftModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::CraftModule*
@@ -66885,7 +67234,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::CraftModule*
@@ -67031,19 +67380,19 @@ structs:
     - type: Client::UI::Misc::FishingModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::FishingModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::FishingModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::FishingModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::FishingModule*
@@ -67051,7 +67400,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::FishingModule*
@@ -67139,19 +67488,19 @@ structs:
     - type: Client::UI::Misc::FlagStatusModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::FlagStatusModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::FlagStatusModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::FlagStatusModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::FlagStatusModule*
@@ -67159,7 +67508,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::FlagStatusModule*
@@ -67242,19 +67591,19 @@ structs:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::GoldSaucerModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::GoldSaucerModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
@@ -67262,7 +67611,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::GoldSaucerModule*
@@ -67425,19 +67774,19 @@ structs:
     - type: Client::UI::Misc::ItemOrderModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::ItemOrderModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::ItemOrderModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::ItemOrderModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::ItemOrderModule*
@@ -67445,7 +67794,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::ItemOrderModule*
@@ -67552,19 +67901,19 @@ structs:
     - type: Client::UI::Misc::MJICraftworksPresetModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::MJICraftworksPresetModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::MJICraftworksPresetModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::MJICraftworksPresetModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::MJICraftworksPresetModule*
@@ -67572,7 +67921,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::MJICraftworksPresetModule*
@@ -67643,19 +67992,19 @@ structs:
     - type: Client::UI::Misc::MKDLoreModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::MKDLoreModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::MKDLoreModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::MKDLoreModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::MKDLoreModule*
@@ -67663,7 +68012,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::MKDLoreModule*
@@ -67734,19 +68083,19 @@ structs:
     - type: Client::UI::Misc::MKDSupportJobModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::MKDSupportJobModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::MKDSupportJobModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::MKDSupportJobModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::MKDSupportJobModule*
@@ -67754,7 +68103,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::MKDSupportJobModule*
@@ -67825,19 +68174,19 @@ structs:
     - type: Client::UI::Misc::MKDSupportJobNoteModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::MKDSupportJobNoteModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::MKDSupportJobNoteModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::MKDSupportJobNoteModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::MKDSupportJobNoteModule*
@@ -67845,7 +68194,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::MKDSupportJobNoteModule*
@@ -67919,19 +68268,19 @@ structs:
     - type: Client::UI::Misc::MycItemModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::MycItemModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::MycItemModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::MycItemModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::MycItemModule*
@@ -67939,7 +68288,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::MycItemModule*
@@ -68053,19 +68402,19 @@ structs:
     - type: Client::UI::Misc::RetainerCommentModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RetainerCommentModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RetainerCommentModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RetainerCommentModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::RetainerCommentModule*
@@ -68073,7 +68422,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::RetainerCommentModule*
@@ -68170,19 +68519,19 @@ structs:
     - type: Client::UI::Misc::TermFilterModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::TermFilterModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::TermFilterModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::TermFilterModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::TermFilterModule*
@@ -68190,7 +68539,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::TermFilterModule*
@@ -68283,19 +68632,19 @@ structs:
     - type: Client::UI::Misc::VVDNotebookModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::VVDNotebookModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::VVDNotebookModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::VVDNotebookModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::VVDNotebookModule*
@@ -68303,7 +68652,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::VVDNotebookModule*
@@ -72641,10 +72990,25 @@ structs:
     offset: 400
     size: 5
     is_string: False
+  - type: float
+    name: FrameDeltaTime
+    offset: 440
   virtual_functions:
   - name: Dtor
     offset: 0
-  member_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 0F 2F C6 76 ?? 48 8B CE
+    return_type: float
+    name: GetSimulationTimeInv
+    parameters:
+    - type: Client::Graphics::Physics::BonePhysicsModule*
+      name: this
+  - signature: E8 ?? ?? ?? ?? F3 0F 5E F0 F3 0F 11 43
+    return_type: float
+    name: GetSimulationTime
+    parameters:
+    - type: Client::Graphics::Physics::BonePhysicsModule*
+      name: this
 - type: Client::Graphics::Render::Camera
   name: Camera
   namespace: Client.Graphics.Render
@@ -79083,19 +79447,19 @@ structs:
     - type: Client::UI::Misc::AcquaintanceModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::AcquaintanceModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::AcquaintanceModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::AcquaintanceModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::AcquaintanceModule*
@@ -79103,7 +79467,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::AcquaintanceModule*
@@ -79266,19 +79630,19 @@ structs:
     - type: Client::UI::Misc::FieldMarkerModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::FieldMarkerModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::FieldMarkerModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::FieldMarkerModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::FieldMarkerModule*
@@ -79286,7 +79650,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::FieldMarkerModule*
@@ -79383,19 +79747,19 @@ structs:
     - type: Client::UI::Misc::GroupPoseModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::GroupPoseModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::GroupPoseModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::GroupPoseModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::GroupPoseModule*
@@ -79403,7 +79767,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::GroupPoseModule*
@@ -79539,19 +79903,19 @@ structs:
     - type: Client::UI::Misc::ItemFinderModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::ItemFinderModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::ItemFinderModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::ItemFinderModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::ItemFinderModule*
@@ -79559,7 +79923,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::ItemFinderModule*
@@ -79664,19 +80028,19 @@ structs:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RaptureGearsetModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RaptureGearsetModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
@@ -79684,7 +80048,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::RaptureGearsetModule*
@@ -79909,19 +80273,19 @@ structs:
     - type: Client::UI::Misc::RaptureMacroModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RaptureMacroModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RaptureMacroModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
@@ -79929,7 +80293,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::RaptureMacroModule*
@@ -80080,19 +80444,19 @@ structs:
     - type: Client::UI::Misc::RecipeFavoriteModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RecipeFavoriteModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RecipeFavoriteModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RecipeFavoriteModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::RecipeFavoriteModule*
@@ -80100,7 +80464,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::RecipeFavoriteModule*
@@ -80211,19 +80575,19 @@ structs:
     - type: Client::UI::Misc::UiDataModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::UiDataModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::UiDataModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::UiDataModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::UiDataModule*
@@ -80231,7 +80595,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::UiDataModule*
@@ -99631,19 +99995,19 @@ structs:
     - type: Client::UI::Misc::AozNoteModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::AozNoteModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::AozNoteModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
@@ -99651,7 +100015,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::AozNoteModule*
@@ -107632,19 +107996,19 @@ structs:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
   - name: GetHasChanges
-    offset: 80
-    return_type: byte
-    parameters:
-    - type: Client::UI::Misc::RaptureHotbarModule*
-      name: this
-  - name: GetIsSavePending
     offset: 88
     return_type: byte
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
       name: this
-  - name: SetCharacterContentId
+  - name: GetIsSavePending
     offset: 96
+    return_type: byte
+    parameters:
+    - type: Client::UI::Misc::RaptureHotbarModule*
+      name: this
+  - name: SetCharacterContentId
+    offset: 104
     return_type: void
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
@@ -107652,7 +108016,7 @@ structs:
     - type: unsigned __int64
       name: contentId
   - name: SaveFile
-    offset: 104
+    offset: 112
     return_type: void
     parameters:
     - type: Client::UI::Misc::RaptureHotbarModule*
@@ -149940,7 +150304,7 @@ structs:
     is_string: False
   - type: int
     name: NumItems
-    offset: 1428
+    offset: 1460
   - type: int
     name: SelectedItemIndex
     offset: 1464
