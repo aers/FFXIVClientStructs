@@ -87,6 +87,24 @@ public unsafe partial struct RaptureTextModule {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 4D 80 48 8D 55 60")]
     public partial void CreateSheetLink(ExcelSheet* sheet, Utf8String* text, int rowId, int colParam);
 
+    /// <summary> Sets global parameters 1, 4, 6 and 65 </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D 97 E8 ?? ?? ?? ?? 0F B6 5E 05")]
+    public partial void SetGlobalTempEntity1Utf8(Utf8String* name, int sex, uint objStrId);
+
+    /// <summary> Sets global parameters 1, 4, 6 and 65 </summary>
+    /// <remarks> The caller must ensure the name pointer remains valid until the subsequent formatting call has processed global parameter 1. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 83 EE 16")]
+    public partial void SetGlobalTempEntity1(CStringPointer name, int sex, uint objStrId);
+
+    /// <summary> Sets global parameters 2, 5, 7 and 66 </summary>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8D 4D 97 E8 ?? ?? ?? ?? 4C 8B 64 24 ??")]
+    public partial void SetGlobalTempEntity2Utf8(Utf8String* name, int sex, uint objStrId);
+
+    /// <summary> Sets global parameters 2, 5, 7 and 66 </summary>
+    /// <remarks> The caller must ensure the name pointer remains valid until the subsequent formatting call has processed global parameter 1. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 75 A8")]
+    public partial void SetGlobalTempEntity2(CStringPointer name, int sex, uint objStrId);
+
     [Flags]
     public enum SheetRedirectFlags {
         None = 0,

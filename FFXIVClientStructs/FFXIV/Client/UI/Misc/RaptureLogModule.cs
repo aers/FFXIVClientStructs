@@ -1,9 +1,12 @@
+using System.Runtime.CompilerServices;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.System.String;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using FFXIVClientStructs.FFXIV.Component.Log;
+using FFXIVClientStructs.FFXIV.Component.Text;
 using ExcelModuleInterface = FFXIVClientStructs.FFXIV.Component.Excel.ExcelModuleInterface;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Misc;
@@ -32,6 +35,15 @@ public unsafe partial struct RaptureLogModule {
 
     [FieldOffset(0x530), FixedSizeArray] internal FixedSizeArray5<RaptureLogModuleTab> _chatTabs;
 
+    /// <summary>
+    /// Queue of messages (from the LogMessage sheet) to add to the log.
+    /// Messages are added by ShowLogMessage calls and removed by a later Update.
+    /// </summary>
+    /// <remarks>
+    /// Messages can stay in this queue for multiple frames if the relevant excel data is not loaded yet.
+    /// </remarks>
+    [FieldOffset(0x33B0)] public StdDeque<LogMessageQueueItem> LogMessageQueue;
+
     [FieldOffset(0x33D8)] public ExcelSheet* LogMessageSheet;
     /// <remarks> Set to <c>true</c> to reload the tab. </remarks>
     [FieldOffset(0x33E8), FixedSizeArray] internal FixedSizeArray4<bool> _chatTabIsPendingReload;
@@ -54,6 +66,9 @@ public unsafe partial struct RaptureLogModule {
     [MemberFunction("E8 ?? ?? ?? ?? 44 39 AE ?? ?? ?? ?? 7E")]
     public partial uint PrintMessage(ushort logKindId, Utf8String* senderName, Utf8String* message, int timestamp, bool silent = false);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 8D 47 FF 83 F8 06")]
+    public partial void FormatPlayerLink(CStringPointer name, Utf8String* result, CStringPointer displayNamePrefix, uint unk5, bool isNotLocalPlayer, ushort homeWorld, bool unk8, CStringPointer displayNameOverride, bool unk10);
+
     [MemberFunction("E9 ?? ?? ?? ?? 40 88 AE")]
     public partial void ShowLogMessage(uint logMessageId);
 
@@ -68,6 +83,24 @@ public unsafe partial struct RaptureLogModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 41 8B 47 ?? 85 C0")] // ShowLogMessage<string>
     public partial void ShowLogMessageString(uint logMessageId, Utf8String* value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? C6 43 34 03")]
+    public partial void ShowLogMessageTextParameters(uint logMessageId, StdDeque<TextParameter>* value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 32 C0 EB 59")]
+    public partial void ShowLogMessageSourceObjectTargetObject(uint logMessageId, GameObject* source, GameObject* target);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 45 DF")]
+    public partial void ShowLogMessageSourceObjectTargetObjectTextParameters(uint logMessageId, GameObject* source, GameObject* target, StdDeque<TextParameter>* value);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 44 8B 4D 18"), GenerateStringOverloads]
+    public partial void ShowLogMessageSourceTarget(uint logMessageId, CStringPointer sourceName, byte sourceGender, CStringPointer targetName, byte targetSex, ushort sourceHomeWorld, ushort targetHomeWorld);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 4D 85 FF 74 3F"), GenerateStringOverloads]
+    public partial void ShowLogMessageSourceTargetTextParameters(uint logMessageId, CStringPointer sourceName, byte sourceSex, CStringPointer targetName, byte targetSex, StdDeque<TextParameter>* value, ushort sourceHomeWorld, ushort targetHomeWorld);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? 49 8B 06 49 8B CE FF 50 40 4C 8B 7C 24")]
+    public partial void Update();
 
     /// <summary>
     /// Shows a message in a chat bubble above a characters head.
@@ -119,7 +152,15 @@ public unsafe partial struct RaptureLogModule {
     /// 9 = Pets/Companions (Alliance)<br/>
     /// 10 = Pets/Companions (Other PC)
     /// </remarks>
+    [OverloadResolutionPriority(1)]
+    [Obsolete("Use the overload with the EntityRelationKind parameters instead. Note that the numeric value of these parameters is different by one compared to this overload.")]
     public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out sbyte casterKind, out sbyte targetKind, out int timestamp) {
+        var result = GetLogMessageDetail(index, out sender, out message, out logKind, out EntityRelationKind casterKindRelation, out EntityRelationKind targetKindRelation, out timestamp);
+        casterKind = (sbyte)(casterKindRelation - 1);
+        targetKind = (sbyte)(targetKindRelation - 1);
+        return result;
+    }
+    public bool GetLogMessageDetail(int index, out byte[] sender, out byte[] message, out short logKind, out EntityRelationKind casterKind, out EntityRelationKind targetKind, out int timestamp) {
         using var pSender = new Utf8String();
         using var pMessage = new Utf8String();
         short pLogInfo;
@@ -128,8 +169,8 @@ public unsafe partial struct RaptureLogModule {
         var result = GetLogMessageDetail(index, &pLogInfo, &pSender, &pMessage, &pTimestamp);
 
         logKind = (short)(pLogInfo & 0x7F);
-        casterKind = (sbyte)(((pLogInfo >> 11) & 0xF) - 1);
-        targetKind = (sbyte)(((pLogInfo >> 7) & 0xF) - 1);
+        casterKind = (EntityRelationKind)((pLogInfo >> 11) & 0xF);
+        targetKind = (EntityRelationKind)((pLogInfo >> 7) & 0xF);
         timestamp = pTimestamp;
         sender = pSender.AsSpan().ToArray();
         message = pMessage.AsSpan().ToArray();
@@ -165,4 +206,43 @@ public struct LogMessageSource {
 public struct RaptureLogModuleTab {
     [FieldOffset(0x00)] public Utf8String Name;
     [FieldOffset(0x68)] public Utf8String VisibleLogLines;
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x248)]
+public partial struct LogMessageQueueItem {
+    [FieldOffset(0)] public StdDeque<TextParameter> Parameters;
+    [FieldOffset(0x28), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _sourceName;
+    [FieldOffset(0x128), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _targetName;
+    [FieldOffset(0x228)] public uint LogMessageId;
+    [FieldOffset(0x22C)] public EntityRelationKind SourceKind;
+    [FieldOffset(0x22D)] public EntityRelationKind TargetKind;
+    [FieldOffset(0x22E)] public byte SourceSex;
+    [FieldOffset(0x22F)] public byte TargetSex;
+    /// <summary> ObjStr id of the source object. </summary>
+    /// <remarks> <seealso cref="RaptureTextModule.ResolveSheetRedirect"/> with the <c>ObjStr</c> sheet and column 0 </remarks>
+    [FieldOffset(0x230)] public uint SourceObjStrId;
+    /// <summary> ObjStr id of the target object. </summary>
+    /// <remarks> <seealso cref="RaptureTextModule.ResolveSheetRedirect"/> with the <c>ObjStr</c> sheet and column 0 </remarks>
+    [FieldOffset(0x234)] public uint TargetObjStrId;
+    [FieldOffset(0x238)] public float SourceToLocalPlayerYDelta;
+    [FieldOffset(0x23C)] public ushort SourceHomeWorld;
+    [FieldOffset(0x23E)] public ushort TargetHomeWorld;
+    [FieldOffset(0x240)] public bool SourceIsPlayer;
+    [FieldOffset(0x241)] public bool TargetIsPlayer;
+}
+
+public enum EntityRelationKind : byte {
+    None = 0,
+    LocalPlayer = 1,
+    PartyMember = 2,
+    AllianceMember = 3,
+    OtherPlayer = 4,
+    EngagedEnemy = 5,
+    UnengagedEnemy = 6,
+    FriendlyNpc = 7,
+    PetOrCompanion = 8,
+    PetOrCompanionParty = 9,
+    PetOrCompanionAlliance = 10,
+    PetOrCompanionOther = 11,
 }

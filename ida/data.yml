@@ -9790,6 +9790,11 @@ classes:
       0x140986350: ShowLogMessage<uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2)
       0x1409867A0: ShowLogMessage<uint,uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2, IntegerParameter3)
       0x140986C50: ShowLogMessage<string> # (this, logMessageId, StringParameter1)
+      0x140987170: ShowLogMessageTextParameters
+      0x140987500: ShowLogMessageSourceObjectTargetObjectTextParameters
+      0x1409877C0: ShowLogMessageSourceObjectTargetObject
+      0x140987B90: ShowLogMessageSourceTarget
+      0x140988080: ShowLogMessageSourceTargetTextParameters 
       0x140988C90: GetChatTab
       0x140988CB0: SetTabName
       0x140988E60: GetTabName
