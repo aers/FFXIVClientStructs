@@ -492,6 +492,7 @@ classes:
       0x140ADB710: IsInRivalWingsArea
       0x140ADB730: IsInPvPArea
       0x1405E4420: GetEventGPoseController
+      0x1405E4460: GetEventIdleCamController
       0x140B89270: ExecuteCommand # static
       0x140B893F0: ExecuteLocationCommand # static
   Client::Game::ZoneSharedGroupManager:
@@ -15560,6 +15561,7 @@ classes:
       0x140C87860: ProcessDirectorUpdate
       0x140C889F0: ProcessMapEffect
       0x140C89310: Update
+      0x140C89D30: GetEventState1EventId
       0x140C8ACA0: GetDirectorByEventId
       0x140C8ACF0: GetCompanyLeveDirector
       0x140C8AD50: GetInstanceContentDirector
@@ -15624,6 +15626,7 @@ classes:
   Client::Game::Event::EventGPoseController:
     funcs:
       0x140AB5780: ctor
+      0x140AB9350: IsActive
       0x140AB9450: IsFaceCameraEnabled
       0x140AB9470: ToggleFaceCamera
       0x140AB94F0: IsGazeCameraEnabled
@@ -15634,7 +15637,12 @@ classes:
 #oldfail       0x1409866D0: SetupDefaultTarget # inlined at 0x140942529
       0x140AC1F30: AddCharacterToGPose
       0x140AC20B0: RemoveCharacterFromGPose
-      0x140AC3E40: CycleIdleCamTargets
+  Client::Game::Event::EventIdleCamController:
+    funcs:
+      0x140AC30A0: ctor
+      0x140AC3A50: Exit
+      0x140AC3AA0: IsActive
+      0x140AC3E40: CycleTargets
   Client::Game::Event::LeveDirector:
     vtbls:
       - ea: 0x1422AAC90

@@ -9,7 +9,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.Event;
 // Client::Game::Event::EventFramework
 // ctor "E8 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 28 E9"
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x44C0)]
+[StructLayout(LayoutKind.Explicit, Size = 0x4500)]
 public unsafe partial struct EventFramework {
     [StaticAddress("48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 83 B8 ?? ?? ?? ?? ?? 7C", 3, isPointer: true)]
     public static partial EventFramework* Instance();
