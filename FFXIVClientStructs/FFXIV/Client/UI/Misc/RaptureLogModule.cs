@@ -208,6 +208,30 @@ public struct RaptureLogModuleTab {
     [FieldOffset(0x68)] public Utf8String VisibleLogLines;
 }
 
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x248)]
+public partial struct LogMessageQueueItem {
+    [FieldOffset(0)] public StdDeque<TextParameter> Parameters;
+    [FieldOffset(0x28), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _sourceName;
+    [FieldOffset(0x128), FixedSizeArray(isString: true)] internal FixedSizeArray256<byte> _targetName;
+    [FieldOffset(0x228)] public uint LogMessageId;
+    [FieldOffset(0x22C)] public EntityRelationKind SourceKind;
+    [FieldOffset(0x22D)] public EntityRelationKind TargetKind;
+    [FieldOffset(0x22E)] public byte SourceSex;
+    [FieldOffset(0x22F)] public byte TargetSex;
+    /// <summary> ObjStr id of the source object. </summary>
+    /// <remarks> <seealso cref="RaptureTextModule.ResolveSheetRedirect"/> with the <c>ObjStr</c> sheet and column 0 </remarks>
+    [FieldOffset(0x230)] public uint SourceObjStrId;
+    /// <summary> ObjStr id of the target object. </summary>
+    /// <remarks> <seealso cref="RaptureTextModule.ResolveSheetRedirect"/> with the <c>ObjStr</c> sheet and column 0 </remarks>
+    [FieldOffset(0x234)] public uint TargetObjStrId;
+    [FieldOffset(0x238)] public float SourceToLocalPlayerYDelta;
+    [FieldOffset(0x23C)] public ushort SourceHomeWorld;
+    [FieldOffset(0x23E)] public ushort TargetHomeWorld;
+    [FieldOffset(0x240)] public bool SourceIsPlayer;
+    [FieldOffset(0x241)] public bool TargetIsPlayer;
+}
+
 public enum EntityRelationKind : byte {
     None = 0,
     LocalPlayer = 1,
@@ -221,51 +245,4 @@ public enum EntityRelationKind : byte {
     PetOrCompanionParty = 9,
     PetOrCompanionAlliance = 10,
     PetOrCompanionOther = 11,
-}
-
-[StructLayout(LayoutKind.Explicit, Size = 0x248)]
-[GenerateInterop]
-public partial struct LogMessageQueueItem {
-    [FieldOffset(0)]
-    public StdDeque<TextParameter> Parameters;
-
-    [FieldOffset(0x28), FixedSizeArray(true)]
-    internal FixedSizeArray256<byte> _sourceName;
-    [FieldOffset(0x128), FixedSizeArray(true)]
-    internal FixedSizeArray256<byte> _targetName;
-
-    [FieldOffset(0x228)]
-    public uint LogMessageId;
-
-    [FieldOffset(0x22C)]
-    public EntityRelationKind SourceKind;
-    [FieldOffset(0x22D)]
-    public EntityRelationKind TargetKind;
-
-    [FieldOffset(0x22E)]
-    public byte SourceSex;
-    [FieldOffset(0x22F)]
-    public byte TargetSex;
-
-    /// <summary> ObjStr id of the source object. </summary>
-    /// <remarks> <seealso cref="RaptureTextModule.ResolveSheetRedirect"/> with the <c>ObjStr</c> sheet and column 0 </remarks>
-    [FieldOffset(0x230)]
-    public uint SourceObjStrId;
-    /// <summary> ObjStr id of the target object. </summary>
-    /// <remarks> <seealso cref="RaptureTextModule.ResolveSheetRedirect"/> with the <c>ObjStr</c> sheet and column 0 </remarks>
-    [FieldOffset(0x234)]
-    public uint TargetObjStrId;
-
-    [FieldOffset(0x238)]
-    public float SourceToLocalPlayerYDelta;
-
-    [FieldOffset(0x23C)]
-    public ushort SourceHomeWorld;
-    [FieldOffset(0x23E)]
-    public ushort TargetHomeWorld;
-
-    [FieldOffset(0x240)]
-    public bool SourceIsPlayer;
-    [FieldOffset(0x241)]
-    public bool TargetIsPlayer;
 }
