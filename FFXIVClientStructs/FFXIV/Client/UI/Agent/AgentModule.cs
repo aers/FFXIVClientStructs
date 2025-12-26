@@ -437,8 +437,8 @@ public enum AgentId : uint {
     BannerList = 402, // Portraits
     BannerEditor = 403, // Portrait Editor
     BannerUpdateView = 404,
-    BannerPreview = 405,
-    Unk406 = 406,
+    Unk405 = 405,
+    BannerPreview = 406,
     PvPMap = 407,
     CharaCard = 408, // AdventurerPlate
     CharaCardDesignSetting = 409,

@@ -13523,7 +13523,7 @@ classes:
       0x1409B7DC0: ctor
   Client::UI::Agent::AgentBannerPreview:
     vtbls:
-      - ea: 0x1420C7F50
+      - ea: 0x1420C8078
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPMap:
     vtbls:
