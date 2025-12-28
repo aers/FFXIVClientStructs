@@ -12,6 +12,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 public unsafe partial struct AddonInventoryEvent {
     [FieldOffset(0x270), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentRadioButton>> _buttons;
 
+    [FieldOffset(0x298)] public int OpenerAddonId;
+
     [FieldOffset(0x2A8)] public AtkAddonControl AddonControl;
 
     [FieldOffset(0x320)] public int TabIndex;

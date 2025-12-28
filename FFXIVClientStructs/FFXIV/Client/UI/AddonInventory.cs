@@ -10,6 +10,8 @@ namespace FFXIVClientStructs.FFXIV.Client.UI;
 [Inherits<AtkUnitBase>]
 [StructLayout(LayoutKind.Explicit, Size = 0x338)]
 public partial struct AddonInventory {
+    [FieldOffset(0x240)] public int OpenerAddonId;
+
     [FieldOffset(0x2C0)] public AtkAddonControl AddonControl;
 
     [FieldOffset(0x334)] public int TabIndex;
