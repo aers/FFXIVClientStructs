@@ -8016,6 +8016,7 @@ classes:
       7: Draw
       8: Setup
       10: SetEnabledState
+      13: PlaySoundEffect
       14: GetAtkResNode
       15: GetFocusNode
       17: InitializeFromComponentData
