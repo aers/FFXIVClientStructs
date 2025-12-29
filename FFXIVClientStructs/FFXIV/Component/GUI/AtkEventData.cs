@@ -13,9 +13,7 @@ public unsafe partial struct AtkEventData {
     [FieldOffset(0x00)] public AtkAddonControlData AddonControlData;
     [FieldOffset(0x00)] public GUI.AtkInputData* RawInputData;
     [FieldOffset(0x00)] public AtkTimelineData TimelineData;
-}
 
-public partial struct AtkEventData {
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct AtkMouseData {
         [FieldOffset(0x00)] public short PosX;
@@ -29,21 +27,23 @@ public partial struct AtkEventData {
         [FieldOffset(0x10)] private short Unk10;
 
         // different than the UIInputData one
+        // TODO: move out and combine with AtkInputData.ModifierFlag
         [Flags]
         public enum ModifierFlag : byte {
             None = 0,
             Ctrl = 1 << 0,
             Alt = 1 << 1,
             Shift = 1 << 2,
-
+            // Unk8 = 1 << 3,
             Dragging = 1 << 4,
         }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct AtkInputData {
-        [FieldOffset(0x00)] public int InputId;
+        [FieldOffset(0x00)] public int InputId; // TODO: use InputId enum?
         [FieldOffset(0x04)] public InputState State;
+        [FieldOffset(0x05)] public ModifierFlag Modifier;
 
         public enum InputState : byte {
             Down = 0,
@@ -51,6 +51,17 @@ public partial struct AtkEventData {
             Held = 2,
             /// <remarks> For <see cref="AtkEventType.InputNavigation"/>. </remarks>
             Repeat = 3,
+        }
+
+        // TODO: move out and combine with AtkMouseData.ModifierFlag
+        [Flags]
+        public enum ModifierFlag : byte {
+            None = 0,
+            Ctrl = 1 << 0,
+            Alt = 1 << 1,
+            Shift = 1 << 2,
+            // Unk8 = 1 << 3,
+            Dragging = 1 << 4,
         }
     }
 

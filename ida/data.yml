@@ -8054,6 +8054,7 @@ classes:
       0x14066DC50: GetImageNodeById
       0x14066DCB0: GetUldAssetByImageNodeId
       0x14066DD50: IsOwnerNodeAncestorOf
+      0x14066DD80: IsFocused
       0x14066DED0: CopyCursorNavigationInfoFrom
       0x14066DF90: SetCursorNavigationInfo
       0x14066DFF0: ClearCursorNavigationInfo
@@ -8117,6 +8118,7 @@ classes:
       8: GetComponent
       9: HandleMouseUpEvent
       12: GetPayloadContainer
+      14: Cancel
   Component::GUI::AtkDragDropPayloadContainer:
     funcs:
       0x140625C00: ctor
@@ -8138,23 +8140,58 @@ classes:
       - ea: 0x1420A5278
         base: Component::GUI::AtkComponentBase
     vfuncs:
+      23: ScrollToItem
+      24: CenterScrollOnItem
       25: GetItemRenderer
       26: SetItemDisabledState
       27: GetItemDisabledState
       28: SetItemHighlightedState
       29: GetItemHighlightedState
+      30: IsItemVisible
       31: SelectItem
       32: DeselectItem
       36: GetItemCount
+      40: UpdateListItems
       44: DispatchEvent
       45: GetSelectedItemAtkResNode
     funcs:
-      0x140680750: ctor
+      0x140677E50: SetItemLabels
       0x140678000: SetItemCount
       0x1406786E0: SetupRenderer
       0x1406794B0: SetItemLabel
+      0x140679510: SetItemIcon
       0x140679570: GetItemLabel
+      0x140679D80: SetUnk144SelectedItemIndex2
+      0x140679DA0: SetHoveredItemIndex
+      0x140679DC0: ResetHoveredItemIndex
+      0x140679F10: SetVisibleColumnCount
+      0x140679F80: SetVisibleRowCount
+      0x140679FF0: SetSize
+      0x14067A0F0: SetupDropDownButton
+      0x14067A5D0: SetupSelectLogic # unsure
+      0x14067A5F0: IsScrollBarBeingDragged
+      0x14067A610: ToggleScrollSnapping
+      0x14067A7E0: ToggleScrollBarVisibility
+      0x14067A820: EndDragDrop
+      0x14067A9B0: SetDragDropState # unsure, takes a flag, 1 seems to enable DragDrop
+      0x14067AA80: SetItemRendererFlags
+      0x14067B010: FireHoveredItemRollOver
+      0x14067B0A0: FireHoveredItemRollOut
+      0x14067B0C0: ToggleDroppingDisabled
+      0x14067B340: SetDragDropPayloadData
+      0x14067B3B0: CancelDragDrop
+      0x14067DC30: HandleFocusStop
+      0x14067DE60: HandleFocusStart
+      0x14067DFF0: HandleMouseDown
+      0x14067E050: HandleMouseUp
+      0x14067E0A0: HandleButtonPress
+      0x14067E1A0: HandleInput
+      0x14067E620: HandleInputEvent
+      0x14067F5D0: HandleMouseWheel
       0x14067F740: DispatchItemEvent
+      0x14067F910: HandleDragDropEvent
+      0x1406803F0: PopulateAtkListItemData
+      0x140680750: ctor
       0x1406C6040: GetItemRendererByNodeId
   Component::GUI::AtkComponentListItemPopulator:
     funcs:

@@ -1,5 +1,6 @@
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
+// Component::GUI::AtkDragDropInterface
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x30)]
 public unsafe partial struct AtkDragDropInterface {
@@ -33,6 +34,9 @@ public unsafe partial struct AtkDragDropInterface {
 
     [VirtualFunction(12)]
     public partial AtkDragDropPayloadContainer* GetPayloadContainer();
+
+    [VirtualFunction(14)]
+    public partial void Cancel(); // stops drag drop and preview flies back to its original spot
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct FlyBackAnimationData {
