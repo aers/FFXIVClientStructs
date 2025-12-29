@@ -22727,6 +22727,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414C3C40: ctor
+  Client::UI::AddonNotificationItem:
+    vtbls:
+      - ea: 0x142191520
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonDTR:
     vtbls:
       - ea: 0x142191920
