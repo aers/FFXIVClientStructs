@@ -17441,12 +17441,6 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414C7D50: ctor
-  Client::UI::AddonNotificationTestOver32: # "_NotificationTestOver32" is the actual name.
-    vtbls:
-      - ea: 0x142191520
-        base: Component::GUI::AtkUnitBase
-    funcs:
-        0x1414C7D50: ctor
   Client::UI::AddonBlackList: # 53
     vtbls:
       - ea: 0x1421A4810
@@ -22719,6 +22713,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414C3C40: ctor
+  Client::UI::AddonNotificationItem:
+    vtbls:
+      - ea: 0x142191520
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonDTR:
     vtbls:
       - ea: 0x142191920
