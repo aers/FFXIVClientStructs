@@ -44,7 +44,7 @@ public unsafe partial struct AgentRepair {
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 08 74 2D")]
     public partial ItemEntry* ChangeInventoryContainer(bool arg0); // false for self- and NPC-Repair but will be set in 0xDCC. unsure for what that's used.
 
-    [StructLayout(LayoutKind.Explicit, Size = 0x16)]
+    [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct RepairItemInfo {
         [FieldOffset(0x0)] public int InventoryType;
         [FieldOffset(0x4)] public ushort Slot;
