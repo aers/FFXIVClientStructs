@@ -5102,6 +5102,14 @@ classes:
       - ea: 0x142096A60
     vfuncs:
       0: Dtor
+    funcs:
+      0x14045DAC0: ctor
+      0x14045DB60: Open
+      0x14045DF80: Close
+      0x14045DCF0: Read
+      0x14045DDA0: ReadWithOffset
+      0x14045DE50: Write
+      0x14045DF40: GetFileSize
   Client::System::File::FileThread:
     vtbls:
       - ea: 0x142096A80
@@ -5129,6 +5137,14 @@ classes:
       0x1400D4370: Copy
       0x140095180: SetPathUtf8String
       0x140094950: Dtor
+  Client::System::File::SqPackManager:
+    funcs:
+      0x1417CD170: ctor
+      0x1417CD4A0: LoadIndexFile
+      0x1417CD8B0: LoadDataFiles
+      0x1417CCD40: GetSqPackPath
+      0x1417CDA10: GetOffsetFromIndex
+      0x1417CDC70: GetOffsetFromIndex2    
   Client::System::Resource::Handle::ResourceHandle:
     vtbls:
       - ea: 0x142078258
