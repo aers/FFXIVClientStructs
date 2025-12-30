@@ -10,7 +10,7 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 [Inherits<AgentInterface>]
 [StructLayout(LayoutKind.Explicit, Size = 0xDE0)]
 public unsafe partial struct AgentRepair {
-    [FieldOffset(0x30)] private nint Unk_28;
+    [FieldOffset(0x30)] private nint Unk_30;
     [FieldOffset(0x38)] public bool IsSelfRepairOpen;
     [FieldOffset(0x39)] public bool UseSelfRepair;
     [FieldOffset(0x40)] private nint CustomTalkHandler; // assigned when using NPC. .data:0000000142740FB8 off_142740FB8   dq offset off_142175380 ;
@@ -20,15 +20,15 @@ public unsafe partial struct AgentRepair {
     [FieldOffset(0x58)] public int AddonId_SelectYesno;
     [FieldOffset(0x5C)] public int InventoryContainerIndex; // Used to lookup static array. Mapped index ids of repair gear dropdown. (7 = Equipped, 0 = Main/Off Hand, 1 = Head/Body/Hands, ...)
     [FieldOffset(0x60)] public int SelectedItemIndex;
-    [FieldOffset(0x64)] public int ShownRepairEntryAmount;
+    [FieldOffset(0x64)] public int RepairableItemAmount;
     [FieldOffset(0x68)] public int TotalRepairCost;
     [FieldOffset(0x70)] private nint Unk_70; // points to a data structure that holds all information about the currently shown repairable items. likely some Atk Data?
-    [FieldOffset(0x78)] private nint Unk_78; // same pointer as in Unk_68
+    [FieldOffset(0x78)] private nint Unk_78; // same pointer as in Unk_70
     [FieldOffset(0x80)] private nint Unk_80;
     [FieldOffset(0x88)][FixedSizeArray] internal FixedSizeArray140<RepairItemInfo> _repairItemInfos;
-    [FieldOffset(0x948)] private byte Unk_948; // Loading state for InventoryItemEntries. Is true while InventoryItemEntryAmount and Unk_850 are unequal
-    [FieldOffset(0x94C)] public int InventoryItemEntryAmount;
-    [FieldOffset(0x950)] private int Unk_950; // Ends to be the same number as in RepairEntriesAmount. Maybe some counter for adding up AtkEntries.
+    [FieldOffset(0x948)] private byte Unk_948; // Loading state for InventoryItemEntries. Is true while InventoryItemEntryAmount and Unk_950 are unequal
+    [FieldOffset(0x94C)] public int InventoryItemEntryAmount; // Amount of total inventory items for the selected InventoryContainerIndex
+    [FieldOffset(0x950)] private int Unk_950; // Ends to be the same number as in InventoryItemEntryAmount. Could be the amount of items in InventoryItemEntries after it loaded.
     [FieldOffset(0x954)][FixedSizeArray] internal FixedSizeArray140<ItemEntry> _inventoryItemEntries; // Holds all items of the selected InventoryContainerIndex in the same order as ItemODR
     [FieldOffset(0xDB4)] private int Unk_DB4; // This is checked in AgentRepair_Update for 1 or 2
     [FieldOffset(0xDB8)] private int Unk_DB8; // Some InventoryType
