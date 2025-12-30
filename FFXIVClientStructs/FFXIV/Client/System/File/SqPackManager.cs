@@ -7,7 +7,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 namespace FFXIVClientStructs.FFXIV.Client.System.File;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0xA80)]
+[StructLayout(LayoutKind.Explicit, Size = 0xAF0)]
 public unsafe partial struct SqPackManager {
     [FieldOffset(0x000)] public FileManager* FileManager;
     [FieldOffset(0x014)] public SqPackIndexHeader IndexHeader;
