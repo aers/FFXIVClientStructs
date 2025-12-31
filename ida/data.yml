@@ -8039,7 +8039,10 @@ classes:
       0x14066E060: SetCursorNavigationIndex
       0x14066E0A0: GetCursorNavigationStopFlags
       0x14066E180: SetAtkResNodeById
-      0x1406C5730: GetComponentButtonById
+      0x1406C5730: GetComponentButtonById # matches Button, CheckBox, RadioButton, ListItemRenderer, Tab
+      0x1406C5C50: GetComponentIconById
+      0x1406C6040: GetComponentItemRendererById
+      0x1406C6600: GetComponentTextNineGridById
   Component::GUI::AtkCursorNavigationInfo:
     funcs:
       0x14066D460: ctor
