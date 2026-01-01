@@ -11419,7 +11419,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BE4F30: ctor
-      0x140BE5720: ChangeInventoryContainer
+      0x140BE5720: ChangeRepairInventory
   Client::UI::Agent::AgentRepairRequest:
     vtbls:
       - ea: 0x1420D28A8
