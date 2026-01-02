@@ -19,7 +19,9 @@ public unsafe partial struct AgentRepair {
     [FieldOffset(0x4C)] public ushort SelectedItemInventorySlot;
     [FieldOffset(0x50)] public int SelectedItemId;
     [FieldOffset(0x58)] public int AddonId_SelectYesno;
-    [FieldOffset(0x5C)] public InventoryContainer InventoryContainerIndex; // Used to lookup static array. Mapped index ids of repair gear dropdown. (7 = Equipped, 0 = Main/Off Hand, 1 = Head/Body/Hands, ...)
+    [Obsolete("InventoryContainerIndex is deprecated, please use InventoryContainer instead.")]
+    [FieldOffset(0x5C)] public int InventoryContainerIndex; // Used to lookup static array. Mapped index ids of repair gear dropdown. (7 = Equipped, 0 = Main/Off Hand, 1 = Head/Body/Hands, ...)
+    [FieldOffset(0x5C)] public InventoryContainer InventoryContainer;
     [FieldOffset(0x60)] public int SelectedItemIndex;
     [Obsolete("RepairableItemAmount is deprecated, please use ShownRepairEntryAmount instead.")]
     [FieldOffset(0x64)] public int RepairableItemAmount;
