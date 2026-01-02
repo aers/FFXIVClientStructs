@@ -4641,6 +4641,11 @@ classes:
   Client::UI::RaptureAtkModule::ItemCache:
     vtbls:
       - ea: 0x14205E090
+    vfuncs:
+      0: Dtor
+      1: Clear
+      2: SetFromInventoryItem
+      3: Update
   Client::UI::RaptureAtkModule::InventoryCache:
     vtbls:
       - ea: 0x14205E0B0
