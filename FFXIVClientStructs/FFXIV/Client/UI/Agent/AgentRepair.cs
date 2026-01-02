@@ -21,7 +21,7 @@ public unsafe partial struct AgentRepair {
     [FieldOffset(0x58)] public int AddonId_SelectYesno;
     [Obsolete("InventoryContainerIndex is deprecated, please use InventoryContainer instead.")]
     [FieldOffset(0x5C)] public int InventoryContainerIndex; // Used to lookup static array. Mapped index ids of repair gear dropdown. (7 = Equipped, 0 = Main/Off Hand, 1 = Head/Body/Hands, ...)
-    [FieldOffset(0x5C)] public InventoryContainer InventoryContainer;
+    [FieldOffset(0x5C)] public InventoryContainerType InventoryContainer;
     [FieldOffset(0x60)] public int SelectedItemIndex;
     [Obsolete("RepairableItemAmount is deprecated, please use ShownRepairEntryAmount instead.")]
     [FieldOffset(0x64)] public int RepairableItemAmount;
@@ -81,7 +81,7 @@ public unsafe partial struct AgentRepair {
         [FieldOffset(0x4)] public uint Slot;
     }
 	
-    public enum InventoryContainer : int {
+    public enum InventoryContainerType : int {
         None = -1,
         Equipped,
         MainHandOffHand,
