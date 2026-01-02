@@ -4703,7 +4703,7 @@ classes:
       - ea: 0x1420C46A0
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
-      12: AddPage
+      11: AddPage
   Client::UI::Info::InfoProxyInvitedInterface:
     vtbls:
       - ea: 0x1420C4700
