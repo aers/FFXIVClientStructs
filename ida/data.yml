@@ -9851,6 +9851,10 @@ classes:
         pointer: true
     vtbls:
       - ea: 0x142224718 # maybe platform-specific implementation?
+      # Following offsets for BlacklistManager vtbls are from 2025.12.23.0000.0000 version
+      #  base: ??? # 0x1422246D8 is base
+      # - ea: 142224720 # some other struct that depends on critical section code for std::vector
+      #  base: ??? # 0x1422246E0 is base
     funcs:
       0x14181E150: IsCharacterBlocked
 #oldfail       0x140937B50: GetReplacementName # returns a Utf8String* to the set name that should be displayed instead of the character name
