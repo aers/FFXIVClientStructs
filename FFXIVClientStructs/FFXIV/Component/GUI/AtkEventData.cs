@@ -63,8 +63,8 @@ public partial struct AtkEventData {
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public unsafe struct AtkValueData {
-        [FieldOffset(0x00)] public int LastValue;
-        [FieldOffset(0x04)] public int NewValue;
+        [FieldOffset(0x00)] public int NewValue;
+        [FieldOffset(0x04)] public int LastValue;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
