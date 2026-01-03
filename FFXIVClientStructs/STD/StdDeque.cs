@@ -13,6 +13,7 @@ public unsafe struct StdDeque<T>
         , IStaticNativeObjectOperation<StdDeque<T>>
 
     where T : unmanaged {
+        // all of this is supposed to be `IStdDeque`
     private static readonly int BlockSize = sizeof(T) <= 1 ? 16 :
         sizeof(T) <= 2 ? 8 :
         sizeof(T) <= 4 ? 4 :
@@ -23,7 +24,7 @@ public unsafe struct StdDeque<T>
     public static bool IsCopyable => throw new NotImplementedException(); // StdOps<T>.IsCopyable
     public static bool IsMovable => true;
 
-    public void* ContainerBase; // iterator base nonsense
+    public ContainerProxy<T>* ContainerBase; // In reality should be ContainerBase12<T> but in IDA it looks nicer for it to be the full type resolution
     public T** Map; // pointer to array of pointers (size MapSize) to arrays of T (size BlockSize)
     public ulong MapSize; // size of map
     public ulong MyOff; // offset of current first element
