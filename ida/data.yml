@@ -4808,6 +4808,8 @@ classes:
     vtbls:
       - ea: 0x1420C4868
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C4968
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14092E100: ctor
       0x140930FE0: ChangeOrder
@@ -4877,12 +4879,16 @@ classes:
     vtbls:
       - ea: 0x1420C4B38
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C4C38
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140937B80: ctor
   Client::UI::Info::InfoProxyFriendList:
     vtbls:
       - ea: 0x1420C4CC8
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C4DC8
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14093A7A0: ctor
       0x14096DB00: Finalizer
@@ -4907,6 +4913,8 @@ classes:
     vtbls:
       - ea: 0x1420C4E80
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C4F80
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14093F4D0: ctor
   Client::UI::Info::InfoProxyCatalogSearch:
@@ -4929,6 +4937,8 @@ classes:
     vtbls:
       - ea: 0x1420C51F8
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C52F8
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14094AA80: ctor
   Client::UI::Info::InfoProxyChat:
@@ -4941,6 +4951,8 @@ classes:
     vtbls:
       - ea: 0x1420C54F0
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C55F0
+        base: Client::Game::Character::CharacterManagerInterface
   Client::UI::Info::InfoProxyNoviceNetworkMember:
     vtbls:
       - ea: 0x1420C5620
@@ -4957,6 +4969,8 @@ classes:
     vtbls:
       - ea: 0x1420C5880
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C5980
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140955050: ctor
   Client::UI::Info::InfoProxy25:
@@ -5000,6 +5014,8 @@ classes:
     vtbls:
       - ea: 0x1420C5DA0
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C5EA0
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14095FB40: ctor
   Client::UI::Info::InfoProxyCircleList:
