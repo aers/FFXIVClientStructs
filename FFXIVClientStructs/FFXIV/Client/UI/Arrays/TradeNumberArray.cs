@@ -1,5 +1,5 @@
-using FFXIVClientStructs.FFXIV.Component.GUI;
 using System.Diagnostics.CodeAnalysis;
+using FFXIVClientStructs.FFXIV.Component.GUI;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 
@@ -35,10 +35,10 @@ public unsafe partial struct TradeNumberArray {
 
     // the next 69 values are not used but could be in relation to expanded _itemDatas array
 
-    [UnscopedRef] 
+    [UnscopedRef]
     public Span<TradeItem> ItemsGive => ItemData[..5];
 
-    [UnscopedRef] 
+    [UnscopedRef]
     public Span<TradeItem> ItemsReviece => ItemData[5..];
 
     [GenerateInterop]

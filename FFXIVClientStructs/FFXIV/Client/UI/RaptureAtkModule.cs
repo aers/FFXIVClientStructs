@@ -173,7 +173,7 @@ public unsafe partial struct RaptureAtkModule {
         /// </remarks>
         [FieldOffset(0x7E)] public byte AdditionalData;
         [FieldOffset(0x7F)] public byte LevelEquip;
-        [FieldOffset(0x80)] public byte SubStatCategory; 
+        [FieldOffset(0x80)] public byte SubStatCategory;
         [FieldOffset(0x82)] public short LevelItem;
         /// <remarks>
         /// Only set if item contains a glamour and not FilterGroup == 15
@@ -190,7 +190,7 @@ public unsafe partial struct RaptureAtkModule {
         public partial bool SetFromInventoryItem(InventoryItem* item);
 
         [VirtualFunction(3)]
-        public partial void Update(uint itemId, [CExporterExcel("Item")]void* itemPtr, uint glamourId, [CExporterExcel("Item")]void* glamourItemPtr);
+        public partial void Update(uint itemId, [CExporterExcel("Item")] void* itemPtr, uint glamourId, [CExporterExcel("Item")] void* glamourItemPtr);
     }
 
     // Client::UI::RaptureAtkModule::InventoryCache

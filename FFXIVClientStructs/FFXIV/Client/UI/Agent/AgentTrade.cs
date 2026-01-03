@@ -16,9 +16,9 @@ public unsafe partial struct AgentTrade {
     /// </remarks>
     [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray10<RaptureAtkModule.ItemCache> _itemCache; // There seems to be space for 20 items in NumberArray and StringArray so maybe at some point SE adds 5 more slots for tradeing on each side to a total of 20
 
-    [UnscopedRef] 
+    [UnscopedRef]
     public Span<RaptureAtkModule.ItemCache> ItemsGive => ItemCache[..5];
 
-    [UnscopedRef] 
+    [UnscopedRef]
     public Span<RaptureAtkModule.ItemCache> ItemsReviece => ItemCache[5..];
 }
