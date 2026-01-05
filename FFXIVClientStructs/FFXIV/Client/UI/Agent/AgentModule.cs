@@ -19,6 +19,9 @@ public unsafe partial struct AgentModule {
 
     [MemberFunction("E8 ?? ?? ?? ?? 83 7B 48 00")]
     public partial AgentInterface* GetAgentByInternalId(AgentId agentId);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 85 ?? ?? ?? ?? 48 8B CE")]
+    public partial void Ctor();
 }
 
 [GenerateInterop]
