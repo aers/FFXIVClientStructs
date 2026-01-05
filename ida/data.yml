@@ -3188,6 +3188,7 @@ classes:
       0x140D78D80: Dtor
       0x140B61120: Initialize
       0x140B61920: Update
+      0x140B62200: HandleYell
   Client::Game::UI::CharaCard:
     instances:
       - ea: 0x1429E7C88
