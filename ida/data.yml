@@ -8151,6 +8151,7 @@ classes:
       31: SelectItem
       32: DeselectItem
       36: GetItemCount
+      38: RecalculateVisibleItems
       40: UpdateListItems
       44: DispatchEvent
       45: GetSelectedItemAtkResNode

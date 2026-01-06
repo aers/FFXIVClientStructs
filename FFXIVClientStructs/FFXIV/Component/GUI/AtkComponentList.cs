@@ -135,7 +135,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [VirtualFunction(36)]
     public partial int GetItemCount();
 
-    [VirtualFunction(36)]
+    [VirtualFunction(38)]
     public partial void RecalculateVisibleItems(bool a2);
 
     /// <remarks> Updates every ListItemRenderers postition, visibility, ListItemIndex etc. </remarks>
