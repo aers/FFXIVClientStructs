@@ -20,6 +20,9 @@ public unsafe partial struct AgentInterface {
     [VirtualFunction(3)]
     public partial void Show();
 
+    [VirtualFunction(4)]
+    public partial void ShowFromLua(int id, int* args, int argCount);
+
     [VirtualFunction(5)]
     public partial void Hide();
 

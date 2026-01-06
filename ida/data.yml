@@ -5951,7 +5951,7 @@ classes:
     vfuncs:
       2: Dtor
       3: Show
-      4: Show2
+      4: ShowFromLua
       5: Hide
       6: IsAgentActive
       7: Update
