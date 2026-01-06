@@ -11,7 +11,7 @@ public unsafe partial struct TradeStringArray {
         return stringArray == null ? null : (TradeStringArray*)stringArray->StringArray;
     }
 
-    [FieldOffset(0 * 8), FixedSizeArray, CExporterIgnore] internal FixedSizeArray1002<CStringPointer> _data;
+    [FieldOffset(0 * 8), FixedSizeArray, CExporterIgnore] internal FixedSizeArray22<CStringPointer> _data;
 
     /// <remarks>
     /// 0 -> 4 = Trade Away Items <br/>
