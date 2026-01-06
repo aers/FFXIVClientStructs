@@ -4593,6 +4593,7 @@ classes:
       0x1400FB4B0: OpenDawnStory
       0x1400FB4E0: OpenDawn
       0x1400FB5A0: IsDawnSupported
+      0x1400FBC90: OpenLuaUI
       0x1400FCA50: HandleSaveAddonConfig # 17
       0x1400FCD00: HandlePlaySoundEffect # 21
       0x1400FCE00: HandleExecuteHotbarSlot # 22

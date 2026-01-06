@@ -112,6 +112,9 @@ public unsafe partial struct RaptureAtkModule {
     [MemberFunction("E8 ?? ?? ?? ?? EB ?? 45 33 C9 49 8D 56 ?? 41 B0 01")]
     public partial void OpenDawnStory(uint contentFinderCondition);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B B4 24 ?? ?? ?? ?? 48 8B AC 24 ?? ?? ?? ?? 48 8D 4C 24")]
+    public partial void OpenLuaUI(int id, int* values, int valueCount);
+
     [MemberFunction("E8 ?? ?? ?? ?? 48 89 9B ?? ?? ?? ?? 48 8B CE")]
     public partial void OpenSatisfactionSupply(nint a2, uint satisfactionNPC, bool a4);
 
