@@ -13,7 +13,7 @@ public unsafe struct StdDeque<T>
         , IStaticNativeObjectOperation<StdDeque<T>>
 
     where T : unmanaged {
-        // all of this is supposed to be `IStdDeque`
+    // all of this is supposed to be `IStdDeque`
     private static readonly int BlockSize = sizeof(T) <= 1 ? 16 :
         sizeof(T) <= 2 ? 8 :
         sizeof(T) <= 4 ? 4 :
