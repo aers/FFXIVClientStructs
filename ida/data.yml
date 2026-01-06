@@ -14557,6 +14557,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BBDC70: OpenPanel # (this, panel, closeIfOpen, unknown)
+  Client::UI::Agent::AgentEventTutorial:
+    vtbls:
+      - ea: 0x1420F8828
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentConfigCharacterChatLogMiniTalk:
     vtbls:
       - ea: 0x142099C78

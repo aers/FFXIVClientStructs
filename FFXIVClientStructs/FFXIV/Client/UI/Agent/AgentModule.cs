@@ -520,7 +520,7 @@ public enum AgentId : uint {
     MKDRelicGrowth = 482,
     MKDRelicGrowth2 = 483,
     QuickPanel = 484,
-    Unk485 = 485, // new in 7.4
+    EventTutorial = 485,
     ConfigCharacterChatLogMiniTalk = 486,
     ToggleContextMenu = 487,
     Unk488 = 488, // new in 7.3
