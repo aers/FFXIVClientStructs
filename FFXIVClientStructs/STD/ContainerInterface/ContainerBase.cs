@@ -1,5 +1,5 @@
 
-namespace FFXIVClientStructs.STD;
+namespace FFXIVClientStructs.STD.ContainerInterface;
 
 /// <remarks>
 /// Based on MSVC 14.50.35717 definition
