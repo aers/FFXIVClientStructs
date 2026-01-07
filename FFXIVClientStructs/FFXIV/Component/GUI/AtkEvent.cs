@@ -39,11 +39,22 @@ public enum AtkEventType : byte {
     SliderReleased = 30,
 
     // AtkComponentList & children
+    ListButtonPress = 31,
+    // ListUnk32 = 32, // fired when the component received MouseUp with eventParam 1
     ListItemRollOver = 33,
     ListItemRollOut = 34,
     ListItemClick = 35,
     ListItemDoubleClick = 36,
+    ListItemHighlight = 37,
     ListItemSelect = 38,
+    // ListItemUnk39 = 39,
+    ListItemPadDragDropBegin = 40,
+    ListItemPadDragDropEnd = 41,
+    ListItemPadDragDropInsert = 42,
+    // ListUnk43 = 43,
+    // ListUnk44 = 44, // fired on DragDropInsert?!
+    // ListUnk45 = 45, // fired on DragDropEnd?!
+    // ListUnk46 = 46, // TreeList event
 
     // AtkComponentDragDrop
     DragDropBegin = 50, // sent on MouseDown over a draggable icon (will NOT send for a locked icon)
@@ -89,6 +100,9 @@ public enum AtkEventType : byte {
     LinkMouseClick = 75,
     LinkMouseOver = 76,
     LinkMouseOut = 77,
+
+    // Unk79 = 79, // focus related?!
+    // Unk80 = 80, // focus related?!
 
     /// <remarks> This is not an event to be received. It's a wildcard used to unregister all events of a listener. </remarks>
     UnregisterAll = 83,

@@ -1991,6 +1991,24 @@ enums:
     "EditMode": 32768
     "LeftSideFocus": 20
     "RightSideFocus": 40
+- type: Client::UI::Misc::EntityRelationKind
+  name: EntityRelationKind
+  underlying: byte
+  namespace: Client.UI.Misc
+  flags: False
+  values:
+    "None": 0
+    "LocalPlayer": 1
+    "PartyMember": 2
+    "AllianceMember": 3
+    "OtherPlayer": 4
+    "EngagedEnemy": 5
+    "UnengagedEnemy": 6
+    "FriendlyNpc": 7
+    "PetOrCompanion": 8
+    "PetOrCompanionParty": 9
+    "PetOrCompanionAlliance": 10
+    "PetOrCompanionOther": 11
 - type: Client::UI::Misc::RaptureTextModule::FormatAddonTextApplyMode
   name: FormatAddonTextApplyMode
   underlying: int
@@ -2834,8 +2852,8 @@ enums:
     "BannerList": 402
     "BannerEditor": 403
     "BannerUpdateView": 404
-    "BannerPreview": 405
-    "Unk406": 406
+    "Unk405": 405
+    "BannerPreview": 406
     "PvPMap": 407
     "CharaCard": 408
     "CharaCardDesignSetting": 409
@@ -3520,6 +3538,14 @@ enums:
     "Battle": 3
     "Daybreak": 4
     "Twilight": 5
+- type: Client::Game::CameraZoomMode
+  name: CameraZoomMode
+  underlying: int
+  namespace: Client.Game
+  flags: False
+  values:
+    "FirstPerson": 0
+    "ThirdPerson": 1
 - type: Client::Game::ChocoboTaxiState
   name: ChocoboTaxiState
   underlying: int
@@ -4474,6 +4500,16 @@ enums:
     "DpsChallengeDirector": 32781
     "MassivePcContentDirector": 32782
     "FateDirector": 32794
+- type: Client::Game::Event::EventIdleCamController::IdleCamFlag
+  name: IdleCamFlag
+  underlying: byte
+  namespace: Client.Game.Event
+  flags: True
+  values:
+    "None": 0
+    "Paused": 1
+    "Waiting": 8
+    "SwitchingEnabled": 32
 - type: Client::Game::Event::EventSceneTaskType
   name: EventSceneTaskType
   underlying: unsigned int
@@ -5639,6 +5675,16 @@ enums:
     "Position": 65536
     "UseSecondaryCharaId": 2097152
     "Ornament": 4194304
+- type: Client::Game::Character::CompanionMove
+  name: CompanionMove
+  underlying: unsigned int
+  namespace: Client.Game.Character
+  flags: False
+  values:
+    "None": 0
+    "Obedient": 1
+    "Independent": 2
+    "Stationary": 3
 - type: Client::Game::Character::DrawDataContainer::EquipmentSlot
   name: EquipmentSlot
   underlying: unsigned int
@@ -7445,7 +7491,7 @@ structs:
   name: EventGPoseController
   namespace: Client.Game.Event
   union: False
-  size: 12160
+  size: 13712
   fields: []
   member_functions:
   - signature: 48 89 5C 24 ?? 57 41 54 41 56 48 83 EC 20 33 FF
@@ -19862,6 +19908,48 @@ structs:
     name: ReadyingDutyText
     offset: 1688
   member_functions: []
+- type: Client::UI::Arrays::TradeNumberArray::TradeItem
+  name: TradeItem
+  namespace: Client.UI.Arrays
+  union: False
+  size: 24
+  fields:
+  - type: int
+    name: IconId
+    offset: 0
+  - type: unsigned int
+    name: Quantity
+    offset: 4
+  - type: int
+    name: EquipSlotCategory
+    offset: 8
+  - type: int
+    name: ItemFlags
+    offset: 12
+  - type: int
+    name: StainFlagsAndColor
+    offset: 16
+    size: 2
+    is_string: False
+  member_functions: []
+- type: Client::UI::Arrays::TradeStringArray
+  name: TradeStringArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 176
+  fields:
+  - type: char*
+    name: ItemNames
+    offset: 0
+    size: 10
+    is_string: False
+  - type: char*
+    name: OwnName
+    offset: 80
+  - type: char*
+    name: TradePartnerName
+    offset: 88
+  member_functions: []
 - type: Client::UI::DutySlot
   name: DutySlot
   namespace: Client.UI
@@ -25840,10 +25928,10 @@ structs:
   size: 40
   fields:
   - type: int
-    name: LastValue
+    name: NewValue
     offset: 0
   - type: int
-    name: NewValue
+    name: LastValue
     offset: 4
   member_functions: []
 - type: Component::GUI::AtkEventListener
@@ -27710,6 +27798,27 @@ structs:
     name: ContainerBase
     offset: 0
   - type: Client::UI::Agent::BalloonInfo**
+    name: Map
+    offset: 8
+  - type: unsigned __int64
+    name: MapSize
+    offset: 16
+  - type: unsigned __int64
+    name: MyOff
+    offset: 24
+  - type: unsigned __int64
+    name: MySize
+    offset: 32
+  member_functions: []
+- type: StdDeque<Client::UI::Misc::LogMessageQueueItem>
+  name: StdDeque`1
+  namespace: ''
+  union: False
+  fields:
+  - type: __int64
+    name: ContainerBase
+    offset: 0
+  - type: Client::UI::Misc::LogMessageQueueItem**
     name: Map
     offset: 8
   - type: unsigned __int64
@@ -31883,6 +31992,37 @@ structs:
   - type: unsigned int
     name: MapRowId
     offset: 136
+  member_functions: []
+- type: Client::Game::Event::EventIdleCamController
+  name: EventIdleCamController
+  namespace: Client.Game.Event
+  union: False
+  size: 56
+  fields:
+  - type: int
+    name: ObjectIndex
+    offset: 0
+  - type: Client::Game::Object::GameObjectId
+    name: CurrentTargetObjectId
+    offset: 8
+  - type: Client::Game::Object::GameObjectId
+    name: LockedTargetObjectId
+    offset: 16
+  - type: Client::Game::Object::GameObject*
+    name: Unk18
+    offset: 24
+  - type: byte
+    name: Unk20
+    offset: 32
+  - type: unsigned __int16
+    name: EmoteId
+    offset: 36
+  - type: float
+    name: EmoteCountdown
+    offset: 40
+  - type: Client::Game::Event::EventIdleCamController::IdleCamFlag
+    name: Flags
+    offset: 52
   member_functions: []
 - type: Client::Game::Event::EventSceneModuleTaskManager
   name: EventSceneModuleTaskManager
@@ -43305,6 +43445,33 @@ structs:
     name: NotFoundText
     offset: 8000
   member_functions: []
+- type: Client::UI::Arrays::TradeNumberArray
+  name: TradeNumberArray
+  namespace: Client.UI.Arrays
+  union: False
+  size: 532
+  fields:
+  - type: Client::UI::Arrays::TradeNumberArray::TradeItem
+    name: ItemData
+    offset: 0
+    size: 10
+    is_string: False
+  - type: unsigned int
+    name: SendGilCount
+    offset: 240
+  - type: unsigned int
+    name: ReceiveGilCount
+    offset: 244
+  - type: int
+    name: SelfState
+    offset: 248
+  - type: int
+    name: OtherState
+    offset: 252
+  - type: byte
+    name: IsLockedIn
+    offset: 256
+  member_functions: []
 - type: Client::UI::DutySlotList
   name: DutySlotList
   namespace: Client.UI
@@ -43935,8 +44102,6 @@ structs:
     parameters:
     - type: Client::UI::Info::InfoProxyPageInterface*
       name: this
-  - name: AddPage
-    offset: 96
   member_functions: []
 - type: Client::UI::Info::PlayerRetainerInfo
   name: PlayerRetainerInfo
@@ -45940,6 +46105,62 @@ structs:
       name: this
     - type: byte
       name: force
+  member_functions: []
+- type: Client::UI::Misc::LogMessageQueueItem
+  name: LogMessageQueueItem
+  namespace: Client.UI.Misc
+  union: False
+  size: 584
+  fields:
+  - type: StdDeque<Component::Text::TextParameter>
+    name: Parameters
+    offset: 0
+  - type: byte
+    name: SourceName
+    offset: 40
+    size: 256
+    is_string: True
+  - type: byte
+    name: TargetName
+    offset: 296
+    size: 256
+    is_string: True
+  - type: unsigned int
+    name: LogMessageId
+    offset: 552
+  - type: Client::UI::Misc::EntityRelationKind
+    name: SourceKind
+    offset: 556
+  - type: Client::UI::Misc::EntityRelationKind
+    name: TargetKind
+    offset: 557
+  - type: byte
+    name: SourceSex
+    offset: 558
+  - type: byte
+    name: TargetSex
+    offset: 559
+  - type: unsigned int
+    name: SourceObjStrId
+    offset: 560
+  - type: unsigned int
+    name: TargetObjStrId
+    offset: 564
+  - type: float
+    name: SourceToLocalPlayerYDelta
+    offset: 568
+  - type: unsigned __int16
+    name: SourceHomeWorld
+    offset: 572
+  - type: unsigned __int16
+    name: TargetHomeWorld
+    offset: 574
+  - type: byte
+    name: SourceIsPlayer
+    offset: 576
+  - type: byte
+    name: TargetIsPlayer
+    offset: 577
   member_functions: []
 - type: Client::UI::Misc::McAggreModule
   name: McAggreModule
@@ -48093,18 +48314,60 @@ structs:
     name: EquipSlotCategory
     offset: 124
   - type: byte
-    name: AdditionalData
+    name: AdditionalDataCount
     offset: 125
   - type: byte
-    name: LevelEquip
+    name: AdditionalData
     offset: 126
   - type: byte
-    name: SubStatCategory
+    name: LevelEquip
     offset: 127
+  - type: byte
+    name: SubStatCategory
+    offset: 128
   - type: __int16
     name: LevelItem
-    offset: 128
-  virtual_functions: []
+    offset: 130
+  - type: unsigned int
+    name: GlamourId
+    offset: 132
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Client::UI::RaptureAtkModule::ItemCache*
+    parameters:
+    - type: Client::UI::RaptureAtkModule::ItemCache*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Clear
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkModule::ItemCache*
+      name: this
+  - name: SetFromInventoryItem
+    offset: 16
+    return_type: byte
+    parameters:
+    - type: Client::UI::RaptureAtkModule::ItemCache*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: item
+  - name: Update
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkModule::ItemCache*
+      name: this
+    - type: unsigned int
+      name: itemId
+    - type: __int64
+      name: itemPtr
+    - type: unsigned int
+      name: glamourId
+    - type: __int64
+      name: glamourItemPtr
   member_functions: []
 - type: Client::UI::StickerSlotList
   name: StickerSlotList
@@ -68846,7 +69109,43 @@ structs:
     name: ItemCache
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Client::UI::RaptureAtkModule::ItemCache*
+    parameters:
+    - type: Client::UI::RaptureAtkModule::CrystalCache*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Clear
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkModule::CrystalCache*
+      name: this
+  - name: SetFromInventoryItem
+    offset: 16
+    return_type: byte
+    parameters:
+    - type: Client::UI::RaptureAtkModule::CrystalCache*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: item
+  - name: Update
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkModule::CrystalCache*
+      name: this
+    - type: unsigned int
+      name: itemId
+    - type: __int64
+      name: itemPtr
+    - type: unsigned int
+      name: glamourId
+    - type: __int64
+      name: glamourItemPtr
   member_functions: []
 - type: Client::UI::RaptureAtkModule::InventoryCache
   name: InventoryCache
@@ -68858,7 +69157,43 @@ structs:
     name: ItemCache
     offset: 0
     base: true
-  virtual_functions: []
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Client::UI::RaptureAtkModule::ItemCache*
+    parameters:
+    - type: Client::UI::RaptureAtkModule::InventoryCache*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Clear
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkModule::InventoryCache*
+      name: this
+  - name: SetFromInventoryItem
+    offset: 16
+    return_type: byte
+    parameters:
+    - type: Client::UI::RaptureAtkModule::InventoryCache*
+      name: this
+    - type: Client::Game::InventoryItem*
+      name: item
+  - name: Update
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::RaptureAtkModule::InventoryCache*
+      name: this
+    - type: unsigned int
+      name: itemId
+    - type: __int64
+      name: itemPtr
+    - type: unsigned int
+      name: glamourId
+    - type: __int64
+      name: glamourItemPtr
   member_functions: []
 - type: Client::UI::RaptureAtkModule::NamePlateInfo
   name: NamePlateInfo
@@ -78744,152 +79079,6 @@ structs:
     name: SearchString
     offset: 1194280
   member_functions: []
-- type: Client::UI::Info::InfoProxyCommonList
-  name: InfoProxyCommonList
-  namespace: Client.UI.Info
-  union: False
-  size: 208
-  fields:
-  - type: Client::UI::Info::InfoProxyPageInterface
-    name: InfoProxyPageInterface
-    offset: 0
-    base: true
-  - type: Client::System::String::Utf8String
-    name: UnkString
-    offset: 56
-  - type: byte
-    name: NumberArrayIndex
-    offset: 160
-  - type: byte
-    name: StringArrayIndex
-    offset: 161
-  - type: unsigned __int16
-    name: DataSize
-    offset: 162
-  - type: unsigned __int16
-    name: DictSize
-    offset: 164
-  - type: unsigned __int16
-    name: UnkA6
-    offset: 166
-  - type: unsigned __int16
-    name: UnkA8
-    offset: 168
-  - type: Client::UI::Info::InfoProxyCommonList::CharacterData*
-    name: CharData
-    offset: 176
-  - type: Client::UI::Info::InfoProxyCommonList::CharacterIndex*
-    name: IndexData
-    offset: 184
-  - type: Client::UI::Info::InfoProxyCommonList::DisplayGroup
-    name: FilterGroup
-    offset: 192
-  - type: byte
-    name: MoveSelector
-    offset: 196
-  - type: Client::UI::Info::InfoProxyCommonList::Sorting
-    name: SortGroup
-    offset: 202
-  virtual_functions:
-  - name: ClearData
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-  - name: AddData
-    offset: 8
-    return_type: __int64
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-    - type: __int64
-      name: packetPtr
-    - type: unsigned int
-      name: count
-  - name: RequestData
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-  - name: GetEntryCount
-    offset: 32
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-  - name: ClearListData
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-  - name: EndRequest
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-  - name: AddPage
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-    - type: __int64
-      name: packetPtr
-  - name: GetCurrentLocationName
-    offset: 120
-  - name: Compare
-    offset: 208
-  - name: CompareHomeworld
-    offset: 232
-  member_functions:
-  - signature: 3B 51 10 73 12 8B C2 48 6B D0 70
-    return_type: unsigned __int64
-    name: GetContentIdForEntry
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-    - type: unsigned int
-      name: idx
-  - signature: 8B 41 10 48 3B D0 73 0C
-    return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
-    name: GetEntry
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-    - type: unsigned int
-      name: idx
-  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 12 8B 40 20
-    return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
-    name: GetEntryByContentId
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-    - type: unsigned __int64
-      name: contentId
-    - type: unsigned int
-      name: nameCrc32
-    - type: byte
-      name: a4
-  - signature: E8 ?? ?? ?? ?? EB ?? 41 8D 47
-    return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
-    name: GetEntryByName
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
-    - type: char*
-      name: characterName
-    - type: unsigned __int16
-      name: worldId
-  - signature: E8 ?? ?? ?? ?? 48 8B 13 45 33 C9
-    return_type: void
-    name: ApplyFilters
-    parameters:
-    - type: Client::UI::Info::InfoProxyCommonList*
-      name: this
 - type: Client::UI::Info::InfoProxyCrossRealm
   name: InfoProxyCrossRealm
   namespace: Client.UI.Info
@@ -87786,66 +87975,6 @@ structs:
       name: worldIndex
     - type: int
       name: characterMappingIndex
-- type: Client::UI::Info::InfoProxy24
-  name: InfoProxy24
-  namespace: Client.UI.Info
-  union: False
-  size: 3416
-  fields:
-  - type: Client::UI::Info::InfoProxyCommonList
-    name: InfoProxyCommonList
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: AddData
-    offset: 8
-    return_type: __int64
-    parameters:
-    - type: Client::UI::Info::InfoProxy24*
-      name: this
-    - type: __int64
-      name: packetPtr
-    - type: unsigned int
-      name: count
-  - name: RequestData
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::Info::InfoProxy24*
-      name: this
-  - name: GetEntryCount
-    offset: 32
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Info::InfoProxy24*
-      name: this
-  - name: ClearListData
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy24*
-      name: this
-  - name: EndRequest
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy24*
-      name: this
-  - name: AddPage
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy24*
-      name: this
-    - type: __int64
-      name: packetPtr
-  - name: ClearData
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxy24*
-      name: this
-  member_functions: []
 - type: Client::UI::Info::InfoProxy26
   name: InfoProxy26
   namespace: Client.UI.Info
@@ -87966,22 +88095,68 @@ structs:
     - type: __int64
       name: packetPtr
   member_functions: []
-- type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember
-  name: InfoProxyCrossWorldLinkshellMember
+- type: Client::UI::Info::InfoProxyCommonList
+  name: InfoProxyCommonList
   namespace: Client.UI.Info
   union: False
-  size: 232
+  size: 208
   fields:
-  - type: Client::UI::Info::InfoProxyCommonList
-    name: InfoProxyCommonList
+  - type: Client::UI::Info::InfoProxyPageInterface
+    name: InfoProxyPageInterface
     offset: 0
     base: true
+  - type: Client::Game::Character::CharacterManagerInterface
+    name: CharacterManagerInterface
+    offset: 32
+    base: true
+  - type: Client::System::String::Utf8String
+    name: UnkString
+    offset: 56
+  - type: byte
+    name: NumberArrayIndex
+    offset: 160
+  - type: byte
+    name: StringArrayIndex
+    offset: 161
+  - type: unsigned __int16
+    name: DataSize
+    offset: 162
+  - type: unsigned __int16
+    name: DictSize
+    offset: 164
+  - type: unsigned __int16
+    name: UnkA6
+    offset: 166
+  - type: unsigned __int16
+    name: UnkA8
+    offset: 168
+  - type: Client::UI::Info::InfoProxyCommonList::CharacterData*
+    name: CharData
+    offset: 176
+  - type: Client::UI::Info::InfoProxyCommonList::CharacterIndex*
+    name: IndexData
+    offset: 184
+  - type: Client::UI::Info::InfoProxyCommonList::DisplayGroup
+    name: FilterGroup
+    offset: 192
+  - type: byte
+    name: MoveSelector
+    offset: 196
+  - type: Client::UI::Info::InfoProxyCommonList::Sorting
+    name: SortGroup
+    offset: 202
   virtual_functions:
+  - name: ClearData
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyCommonList*
+      name: this
   - name: AddData
     offset: 8
     return_type: __int64
     parameters:
-    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
+    - type: Client::UI::Info::InfoProxyCommonList*
       name: this
     - type: __int64
       name: packetPtr
@@ -87991,41 +88166,85 @@ structs:
     offset: 24
     return_type: byte
     parameters:
-    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
+    - type: Client::UI::Info::InfoProxyCommonList*
       name: this
   - name: GetEntryCount
     offset: 32
     return_type: unsigned int
     parameters:
-    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
+    - type: Client::UI::Info::InfoProxyCommonList*
       name: this
   - name: ClearListData
     offset: 40
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
+    - type: Client::UI::Info::InfoProxyCommonList*
       name: this
   - name: EndRequest
     offset: 80
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
+    - type: Client::UI::Info::InfoProxyCommonList*
       name: this
   - name: AddPage
     offset: 88
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
+    - type: Client::UI::Info::InfoProxyCommonList*
       name: this
     - type: __int64
       name: packetPtr
-  - name: ClearData
-    offset: 160
-    return_type: void
+  - name: GetCurrentLocationName
+    offset: 120
+  - name: Compare
+    offset: 208
+  - name: CompareHomeworld
+    offset: 232
+  member_functions:
+  - signature: 3B 51 10 73 12 8B C2 48 6B D0 70
+    return_type: unsigned __int64
+    name: GetContentIdForEntry
     parameters:
-    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
+    - type: Client::UI::Info::InfoProxyCommonList*
       name: this
-  member_functions: []
+    - type: unsigned int
+      name: idx
+  - signature: 8B 41 10 48 3B D0 73 0C
+    return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
+    name: GetEntry
+    parameters:
+    - type: Client::UI::Info::InfoProxyCommonList*
+      name: this
+    - type: unsigned int
+      name: idx
+  - signature: E8 ?? ?? ?? ?? 48 85 C0 74 12 8B 40 20
+    return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
+    name: GetEntryByContentId
+    parameters:
+    - type: Client::UI::Info::InfoProxyCommonList*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+    - type: unsigned int
+      name: nameCrc32
+    - type: byte
+      name: a4
+  - signature: E8 ?? ?? ?? ?? EB ?? 41 8D 47
+    return_type: Client::UI::Info::InfoProxyCommonList::CharacterData*
+    name: GetEntryByName
+    parameters:
+    - type: Client::UI::Info::InfoProxyCommonList*
+      name: this
+    - type: char*
+      name: characterName
+    - type: unsigned __int16
+      name: worldId
+  - signature: E8 ?? ?? ?? ?? 48 8B 13 45 33 C9
+    return_type: void
+    name: ApplyFilters
+    parameters:
+    - type: Client::UI::Info::InfoProxyCommonList*
+      name: this
 - type: Client::UI::Info::InfoProxyFreeCompany
   name: InfoProxyFreeCompany
   namespace: Client.UI.Info
@@ -88187,189 +88406,6 @@ structs:
     - type: Client::UI::Info::InfoProxyFreeCompanyInvite*
       name: this
   member_functions: []
-- type: Client::UI::Info::InfoProxyFreeCompanyMember
-  name: InfoProxyFreeCompanyMember
-  namespace: Client.UI.Info
-  union: False
-  size: 232
-  fields:
-  - type: Client::UI::Info::InfoProxyCommonList
-    name: InfoProxyCommonList
-    offset: 0
-    base: true
-  - type: unsigned __int64
-    name: FreeCompanyId
-    offset: 208
-  virtual_functions:
-  - name: AddData
-    offset: 8
-    return_type: __int64
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
-      name: this
-    - type: __int64
-      name: packetPtr
-    - type: unsigned int
-      name: count
-  - name: RequestData
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
-      name: this
-  - name: GetEntryCount
-    offset: 32
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
-      name: this
-  - name: ClearListData
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
-      name: this
-  - name: EndRequest
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
-      name: this
-  - name: AddPage
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
-      name: this
-    - type: __int64
-      name: packetPtr
-  - name: ClearData
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
-      name: this
-  member_functions: []
-- type: Client::UI::Info::InfoProxyLinkshellMember
-  name: InfoProxyLinkshellMember
-  namespace: Client.UI.Info
-  union: False
-  size: 232
-  fields:
-  - type: Client::UI::Info::InfoProxyCommonList
-    name: InfoProxyCommonList
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: AddData
-    offset: 8
-    return_type: __int64
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshellMember*
-      name: this
-    - type: __int64
-      name: packetPtr
-    - type: unsigned int
-      name: count
-  - name: RequestData
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshellMember*
-      name: this
-  - name: GetEntryCount
-    offset: 32
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshellMember*
-      name: this
-  - name: ClearListData
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshellMember*
-      name: this
-  - name: EndRequest
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshellMember*
-      name: this
-  - name: AddPage
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshellMember*
-      name: this
-    - type: __int64
-      name: packetPtr
-  - name: ClearData
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyLinkshellMember*
-      name: this
-  member_functions: []
-- type: Client::UI::Info::InfoProxyNoviceNetworkList
-  name: InfoProxyNoviceNetworkList
-  namespace: Client.UI.Info
-  union: False
-  size: 224
-  fields:
-  - type: Client::UI::Info::InfoProxyCommonList
-    name: InfoProxyCommonList
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: AddData
-    offset: 8
-    return_type: __int64
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
-      name: this
-    - type: __int64
-      name: packetPtr
-    - type: unsigned int
-      name: count
-  - name: RequestData
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
-      name: this
-  - name: GetEntryCount
-    offset: 32
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
-      name: this
-  - name: ClearListData
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
-      name: this
-  - name: EndRequest
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
-      name: this
-  - name: AddPage
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
-      name: this
-    - type: __int64
-      name: packetPtr
-  - name: ClearData
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
-      name: this
-  member_functions: []
 - type: Client::UI::Info::InfoProxyPartyInvite
   name: InfoProxyPartyInvite
   namespace: Client.UI.Info
@@ -88470,138 +88506,6 @@ structs:
       name: this
     - type: unsigned int
       name: entityId
-- type: Client::UI::Info::InfoProxyPartyMember
-  name: InfoProxyPartyMember
-  namespace: Client.UI.Info
-  union: False
-  size: 832
-  fields:
-  - type: Client::UI::Info::InfoProxyCommonList
-    name: InfoProxyCommonList
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: AddData
-    offset: 8
-    return_type: __int64
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
-    - type: __int64
-      name: packetPtr
-    - type: unsigned int
-      name: count
-  - name: RequestData
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
-  - name: GetEntryCount
-    offset: 32
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
-  - name: ClearListData
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
-  - name: EndRequest
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
-  - name: AddPage
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
-    - type: __int64
-      name: packetPtr
-  - name: ClearData
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? B3 01 88 5C 24 60
-    return_type: void
-    name: ChangeOrder
-    parameters:
-    - type: Client::UI::Info::InfoProxyPartyMember*
-      name: this
-    - type: int
-      name: selectedIndex
-    - type: int
-      name: targetIndex
-    - type: byte
-      name: doUpdate
-- type: Client::UI::Info::InfoProxySearch
-  name: InfoProxySearch
-  namespace: Client.UI.Info
-  union: False
-  size: 400
-  fields:
-  - type: Client::UI::Info::InfoProxyCommonList
-    name: InfoProxyCommonList
-    offset: 0
-    base: true
-  virtual_functions:
-  - name: AddData
-    offset: 8
-    return_type: __int64
-    parameters:
-    - type: Client::UI::Info::InfoProxySearch*
-      name: this
-    - type: __int64
-      name: packetPtr
-    - type: unsigned int
-      name: count
-  - name: RequestData
-    offset: 24
-    return_type: byte
-    parameters:
-    - type: Client::UI::Info::InfoProxySearch*
-      name: this
-  - name: GetEntryCount
-    offset: 32
-    return_type: unsigned int
-    parameters:
-    - type: Client::UI::Info::InfoProxySearch*
-      name: this
-  - name: ClearListData
-    offset: 40
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxySearch*
-      name: this
-  - name: EndRequest
-    offset: 80
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxySearch*
-      name: this
-  - name: AddPage
-    offset: 88
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxySearch*
-      name: this
-    - type: __int64
-      name: packetPtr
-  - name: ClearData
-    offset: 160
-    return_type: void
-    parameters:
-    - type: Client::UI::Info::InfoProxySearch*
-      name: this
-  member_functions: []
 - type: Client::UI::Misc::AozNoteModule::ActiveSet
   name: ActiveSet
   namespace: Client.UI.Misc
@@ -89023,6 +88927,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentBase*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -90267,28 +90177,6 @@ structs:
     parameters:
     - type: Client::Game::Event::CraftEventHandler*
       name: this
-- type: Client::Game::Event::EventSceneModule
-  name: EventSceneModule
-  namespace: Client.Game.Event
-  union: False
-  size: 12736
-  fields:
-  - type: Client::Game::Event::EventSceneModuleUsualImpl
-    name: EventSceneModuleUsualImpl
-    offset: 24
-  - type: Client::Game::Event::EventSceneModuleImplBase
-    name: EventSceneModuleImplBase
-    offset: 40
-  - type: Client::Game::Event::EventSceneModuleImplBase*
-    name: EventSceneModuleImpl
-    offset: 56
-  - type: Client::Game::Event::EventSceneModuleTaskManager
-    name: TaskManager
-    offset: 152
-  - type: Client::Game::Event::EventGPoseController
-    name: EventGPoseController
-    offset: 512
-  member_functions: []
 - type: Client::Game::Event::GatheringEventHandler
   name: GatheringEventHandler
   namespace: Client.Game.Event
@@ -93361,6 +93249,187 @@ structs:
       name: noteBookDivisionId
     - type: int
       name: craftType
+- type: Client::UI::Agent::AgentTrade
+  name: AgentTrade
+  namespace: Client.UI.Agent
+  union: False
+  size: 1440
+  fields:
+  - type: Client::UI::Agent::AgentInterface
+    name: AgentInterface
+    offset: 0
+    base: true
+  - type: Client::UI::Agent::AgentInventoryContext::InventoryContextEvent
+    name: InventoryContextEvent
+    offset: 40
+    base: true
+  - type: Client::UI::RaptureAtkModule::ItemCache
+    name: ItemCache
+    offset: 48
+    size: 10
+    is_string: False
+  virtual_functions:
+  - name: ReceiveEvent
+    offset: 0
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: ReceiveEvent2
+    offset: 8
+    return_type: Component::GUI::AtkValue*
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+    - type: Component::GUI::AtkValue*
+      name: returnValue
+    - type: Component::GUI::AtkValue*
+      name: values
+    - type: unsigned int
+      name: valueCount
+    - type: unsigned __int64
+      name: eventKind
+  - name: Dtor
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: Show
+    offset: 24
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+  - name: Hide
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+  - name: IsAgentActive
+    offset: 48
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+  - name: Update
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+    - type: unsigned int
+      name: frameCount
+  - name: IsActivatable
+    offset: 64
+    return_type: byte
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+  - name: GetAddonId
+    offset: 72
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+  - name: OnGameEvent
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+    - type: Client::UI::Agent::AgentInterface::GameEvent
+      name: gameEvent
+  - name: OnLevelChange
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+    - type: byte
+      name: classJobId
+    - type: unsigned __int16
+      name: level
+  - name: OnClassJobChange
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::Agent::AgentTrade*
+      name: this
+    - type: byte
+      name: classJobId
+  member_functions: []
+- type: Client::UI::Info::InfoProxy24
+  name: InfoProxy24
+  namespace: Client.UI.Info
+  union: False
+  size: 3416
+  fields:
+  - type: Client::UI::Info::InfoProxyCommonList
+    name: InfoProxyCommonList
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: AddData
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Info::InfoProxy24*
+      name: this
+    - type: __int64
+      name: packetPtr
+    - type: unsigned int
+      name: count
+  - name: RequestData
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::Info::InfoProxy24*
+      name: this
+  - name: GetEntryCount
+    offset: 32
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Info::InfoProxy24*
+      name: this
+  - name: ClearListData
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxy24*
+      name: this
+  - name: EndRequest
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxy24*
+      name: this
+  - name: AddPage
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxy24*
+      name: this
+    - type: __int64
+      name: packetPtr
+  - name: ClearData
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxy24*
+      name: this
+  member_functions: []
 - type: Client::UI::Info::InfoProxyBlacklist
   name: InfoProxyBlacklist
   namespace: Client.UI.Info
@@ -93457,39 +93526,22 @@ structs:
       name: accountId
     - type: unsigned __int64
       name: contentId
-- type: Client::UI::Info::InfoProxyFriendList
-  name: InfoProxyFriendList
+- type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember
+  name: InfoProxyCrossWorldLinkshellMember
   namespace: Client.UI.Info
   union: False
-  size: 15080
+  size: 232
   fields:
   - type: Client::UI::Info::InfoProxyCommonList
     name: InfoProxyCommonList
     offset: 0
     base: true
-  - type: Client::System::String::Utf8String
-    name: Str2
-    offset: 240
-  - type: Client::System::String::Utf8String
-    name: Str3
-    offset: 344
-  - type: Client::System::String::Utf8String
-    name: Str4
-    offset: 448
-  - type: Client::System::String::Utf8String
-    name: Str5
-    offset: 552
-  - type: Client::UI::Info::InfoProxyFriendList::NameBuffer
-    name: Names
-    offset: 656
-    size: 200
-    is_string: False
   virtual_functions:
   - name: AddData
     offset: 8
     return_type: __int64
     parameters:
-    - type: Client::UI::Info::InfoProxyFriendList*
+    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
     - type: __int64
       name: packetPtr
@@ -93499,31 +93551,31 @@ structs:
     offset: 24
     return_type: byte
     parameters:
-    - type: Client::UI::Info::InfoProxyFriendList*
+    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
   - name: GetEntryCount
     offset: 32
     return_type: unsigned int
     parameters:
-    - type: Client::UI::Info::InfoProxyFriendList*
+    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
   - name: ClearListData
     offset: 40
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyFriendList*
+    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
   - name: EndRequest
     offset: 80
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyFriendList*
+    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
   - name: AddPage
     offset: 88
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyFriendList*
+    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
       name: this
     - type: __int64
       name: packetPtr
@@ -93531,7 +93583,70 @@ structs:
     offset: 160
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyFriendList*
+    - type: Client::UI::Info::InfoProxyCrossWorldLinkshellMember*
+      name: this
+  member_functions: []
+- type: Client::UI::Info::InfoProxyFreeCompanyMember
+  name: InfoProxyFreeCompanyMember
+  namespace: Client.UI.Info
+  union: False
+  size: 232
+  fields:
+  - type: Client::UI::Info::InfoProxyCommonList
+    name: InfoProxyCommonList
+    offset: 0
+    base: true
+  - type: unsigned __int64
+    name: FreeCompanyId
+    offset: 208
+  virtual_functions:
+  - name: AddData
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
+      name: this
+    - type: __int64
+      name: packetPtr
+    - type: unsigned int
+      name: count
+  - name: RequestData
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
+      name: this
+  - name: GetEntryCount
+    offset: 32
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
+      name: this
+  - name: ClearListData
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
+      name: this
+  - name: EndRequest
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
+      name: this
+  - name: AddPage
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
+      name: this
+    - type: __int64
+      name: packetPtr
+  - name: ClearData
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyFreeCompanyMember*
       name: this
   member_functions: []
 - type: Client::UI::Info::InfoProxyLetter
@@ -93625,14 +93740,14 @@ structs:
   - name: RemoveData
     offset: 104
   member_functions: []
-- type: Client::UI::Info::InfoProxyNoviceNetworkMember
-  name: InfoProxyNoviceNetworkMember
+- type: Client::UI::Info::InfoProxyLinkshellMember
+  name: InfoProxyLinkshellMember
   namespace: Client.UI.Info
   union: False
-  size: 224
+  size: 232
   fields:
-  - type: Client::UI::Info::InfoProxyNoviceNetworkList
-    name: InfoProxyNoviceNetworkList
+  - type: Client::UI::Info::InfoProxyCommonList
+    name: InfoProxyCommonList
     offset: 0
     base: true
   virtual_functions:
@@ -93640,7 +93755,7 @@ structs:
     offset: 8
     return_type: __int64
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+    - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
     - type: __int64
       name: packetPtr
@@ -93650,31 +93765,31 @@ structs:
     offset: 24
     return_type: byte
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+    - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
   - name: GetEntryCount
     offset: 32
     return_type: unsigned int
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+    - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
   - name: ClearListData
     offset: 40
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+    - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
   - name: EndRequest
     offset: 80
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+    - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
   - name: AddPage
     offset: 88
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+    - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
     - type: __int64
       name: packetPtr
@@ -93682,17 +93797,17 @@ structs:
     offset: 160
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+    - type: Client::UI::Info::InfoProxyLinkshellMember*
       name: this
   member_functions: []
-- type: Client::UI::Info::InfoProxyNoviceNetworkMentor
-  name: InfoProxyNoviceNetworkMentor
+- type: Client::UI::Info::InfoProxyNoviceNetworkList
+  name: InfoProxyNoviceNetworkList
   namespace: Client.UI.Info
   union: False
   size: 224
   fields:
-  - type: Client::UI::Info::InfoProxyNoviceNetworkList
-    name: InfoProxyNoviceNetworkList
+  - type: Client::UI::Info::InfoProxyCommonList
+    name: InfoProxyCommonList
     offset: 0
     base: true
   virtual_functions:
@@ -93700,7 +93815,7 @@ structs:
     offset: 8
     return_type: __int64
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
     - type: __int64
       name: packetPtr
@@ -93710,31 +93825,31 @@ structs:
     offset: 24
     return_type: byte
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
   - name: GetEntryCount
     offset: 32
     return_type: unsigned int
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
   - name: ClearListData
     offset: 40
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
   - name: EndRequest
     offset: 80
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
   - name: AddPage
     offset: 88
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
       name: this
     - type: __int64
       name: packetPtr
@@ -93742,7 +93857,139 @@ structs:
     offset: 160
     return_type: void
     parameters:
-    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+    - type: Client::UI::Info::InfoProxyNoviceNetworkList*
+      name: this
+  member_functions: []
+- type: Client::UI::Info::InfoProxyPartyMember
+  name: InfoProxyPartyMember
+  namespace: Client.UI.Info
+  union: False
+  size: 832
+  fields:
+  - type: Client::UI::Info::InfoProxyCommonList
+    name: InfoProxyCommonList
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: AddData
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+    - type: __int64
+      name: packetPtr
+    - type: unsigned int
+      name: count
+  - name: RequestData
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+  - name: GetEntryCount
+    offset: 32
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+  - name: ClearListData
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+  - name: EndRequest
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+  - name: AddPage
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+    - type: __int64
+      name: packetPtr
+  - name: ClearData
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? B3 01 88 5C 24 60
+    return_type: void
+    name: ChangeOrder
+    parameters:
+    - type: Client::UI::Info::InfoProxyPartyMember*
+      name: this
+    - type: int
+      name: selectedIndex
+    - type: int
+      name: targetIndex
+    - type: byte
+      name: doUpdate
+- type: Client::UI::Info::InfoProxySearch
+  name: InfoProxySearch
+  namespace: Client.UI.Info
+  union: False
+  size: 400
+  fields:
+  - type: Client::UI::Info::InfoProxyCommonList
+    name: InfoProxyCommonList
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: AddData
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Info::InfoProxySearch*
+      name: this
+    - type: __int64
+      name: packetPtr
+    - type: unsigned int
+      name: count
+  - name: RequestData
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::Info::InfoProxySearch*
+      name: this
+  - name: GetEntryCount
+    offset: 32
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Info::InfoProxySearch*
+      name: this
+  - name: ClearListData
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxySearch*
+      name: this
+  - name: EndRequest
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxySearch*
+      name: this
+  - name: AddPage
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxySearch*
+      name: this
+    - type: __int64
+      name: packetPtr
+  - name: ClearData
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxySearch*
       name: this
   member_functions: []
 - type: Client::UI::Misc::BannerHelper
@@ -94639,6 +94886,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentButton*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -94784,6 +95037,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentDropDownList*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -94912,6 +95171,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentGuildLeveCard*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -95026,6 +95291,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIconText*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -95140,6 +95411,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentJournalCanvas*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -95370,6 +95647,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentList*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -95546,6 +95829,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMap*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -95660,6 +95949,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentMultipurpose*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -95809,6 +96104,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPortrait*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -96020,6 +96321,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentScrollBar*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -96195,6 +96502,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentSlider*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -96347,6 +96660,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextNineGrid*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -96495,6 +96814,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentWindow*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -96939,6 +97264,9 @@ structs:
   - type: float
     name: DirVMax
     offset: 348
+  - type: Client::Game::CameraZoomMode
+    name: ZoomMode
+    offset: 384
   - type: float
     name: InterpDistance
     offset: 396
@@ -97715,7 +98043,7 @@ structs:
     name: TradePartnerEntityId
     offset: 8612
   - type: byte
-    name: TradeUnk21A8
+    name: TradeLockedIn
     offset: 8616
   - type: byte
     name: TradeWarnIfMovedTooFar
@@ -99780,6 +100108,83 @@ structs:
     size: 18
     is_string: False
   member_functions: []
+- type: Client::UI::Info::InfoProxyFriendList
+  name: InfoProxyFriendList
+  namespace: Client.UI.Info
+  union: False
+  size: 15080
+  fields:
+  - type: Client::UI::Info::InfoProxyCommonList
+    name: InfoProxyCommonList
+    offset: 0
+    base: true
+  - type: Client::System::String::Utf8String
+    name: Str2
+    offset: 240
+  - type: Client::System::String::Utf8String
+    name: Str3
+    offset: 344
+  - type: Client::System::String::Utf8String
+    name: Str4
+    offset: 448
+  - type: Client::System::String::Utf8String
+    name: Str5
+    offset: 552
+  - type: Client::UI::Info::InfoProxyFriendList::NameBuffer
+    name: Names
+    offset: 656
+    size: 200
+    is_string: False
+  virtual_functions:
+  - name: AddData
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Info::InfoProxyFriendList*
+      name: this
+    - type: __int64
+      name: packetPtr
+    - type: unsigned int
+      name: count
+  - name: RequestData
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::Info::InfoProxyFriendList*
+      name: this
+  - name: GetEntryCount
+    offset: 32
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Info::InfoProxyFriendList*
+      name: this
+  - name: ClearListData
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyFriendList*
+      name: this
+  - name: EndRequest
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyFriendList*
+      name: this
+  - name: AddPage
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyFriendList*
+      name: this
+    - type: __int64
+      name: packetPtr
+  - name: ClearData
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyFriendList*
+      name: this
+  member_functions: []
 - type: Client::UI::Info::InfoProxyItemSearch
   name: InfoProxyItemSearch
   namespace: Client.UI.Info
@@ -99930,6 +100335,126 @@ structs:
       name: itemId
     - type: unsigned int
       name: errorMessageId
+- type: Client::UI::Info::InfoProxyNoviceNetworkMember
+  name: InfoProxyNoviceNetworkMember
+  namespace: Client.UI.Info
+  union: False
+  size: 224
+  fields:
+  - type: Client::UI::Info::InfoProxyNoviceNetworkList
+    name: InfoProxyNoviceNetworkList
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: AddData
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+      name: this
+    - type: __int64
+      name: packetPtr
+    - type: unsigned int
+      name: count
+  - name: RequestData
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+      name: this
+  - name: GetEntryCount
+    offset: 32
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+      name: this
+  - name: ClearListData
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+      name: this
+  - name: EndRequest
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+      name: this
+  - name: AddPage
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+      name: this
+    - type: __int64
+      name: packetPtr
+  - name: ClearData
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMember*
+      name: this
+  member_functions: []
+- type: Client::UI::Info::InfoProxyNoviceNetworkMentor
+  name: InfoProxyNoviceNetworkMentor
+  namespace: Client.UI.Info
+  union: False
+  size: 224
+  fields:
+  - type: Client::UI::Info::InfoProxyNoviceNetworkList
+    name: InfoProxyNoviceNetworkList
+    offset: 0
+    base: true
+  virtual_functions:
+  - name: AddData
+    offset: 8
+    return_type: __int64
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+      name: this
+    - type: __int64
+      name: packetPtr
+    - type: unsigned int
+      name: count
+  - name: RequestData
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+      name: this
+  - name: GetEntryCount
+    offset: 32
+    return_type: unsigned int
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+      name: this
+  - name: ClearListData
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+      name: this
+  - name: EndRequest
+    offset: 80
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+      name: this
+  - name: AddPage
+    offset: 88
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+      name: this
+    - type: __int64
+      name: packetPtr
+  - name: ClearData
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::Info::InfoProxyNoviceNetworkMentor*
+      name: this
+  member_functions: []
 - type: Client::UI::Misc::AozNoteModule
   name: AozNoteModule
   namespace: Client.UI.Misc
@@ -100269,251 +100794,6 @@ structs:
       name: this
     - type: byte
       name: drawn
-- type: Client::UI::Misc::RaptureLogModule
-  name: RaptureLogModule
-  namespace: Client.UI.Misc
-  union: False
-  size: 18128
-  fields:
-  - type: Component::Log::LogModule
-    name: LogModule
-    offset: 0
-    base: true
-  - type: Client::System::String::Utf8String
-    name: LogMessageDataTerminator
-    offset: 128
-  - type: Client::UI::UIModule*
-    name: UIModule
-    offset: 232
-  - type: Component::Excel::ExcelModuleInterface*
-    name: ExcelModuleInterface
-    offset: 240
-  - type: Client::UI::Misc::RaptureTextModule*
-    name: RaptureTextModule
-    offset: 248
-  - type: Component::GUI::AtkFontCodeModule*
-    name: AtkFontCodeModule
-    offset: 256
-  - type: Client::System::String::Utf8String
-    name: TempParseMessage
-    offset: 264
-    size: 10
-    is_string: False
-  - type: Common::Component::Excel::ExcelSheet*
-    name: LogKindSheet
-    offset: 1312
-  - type: Client::UI::Misc::RaptureLogModuleTab
-    name: ChatTabs
-    offset: 1328
-    size: 5
-    is_string: False
-  - type: Common::Component::Excel::ExcelSheet*
-    name: LogMessageSheet
-    offset: 13272
-  - type: byte
-    name: ChatTabIsPendingReload
-    offset: 13288
-    size: 4
-    is_string: False
-  - type: byte
-    name: ChatTabShouldDisplayTime
-    offset: 13293
-    size: 4
-    is_string: False
-  - type: byte
-    name: UseServerTime
-    offset: 13298
-  - type: byte
-    name: Use12HourClock
-    offset: 13299
-  - type: byte
-    name: LogNameType
-    offset: 13300
-  - type: Client::UI::Misc::LogMessageSource*
-    name: MsgSourceArray
-    offset: 13432
-  - type: int
-    name: MsgSourceArrayLength
-    offset: 13440
-  - type: Client::UI::Misc::RaptureLogModule::AddonMessageSub
-    name: AddonMessageSub3488
-    offset: 13448
-  virtual_functions: []
-  member_functions:
-  - signature: E8 ?? ?? ?? ?? 41 83 EC ?? 89 43
-    return_type: unsigned int
-    name: FormatLogMessage
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned int
-      name: logKindId
-    - type: Client::System::String::Utf8String*
-      name: sender
-    - type: Client::System::String::Utf8String*
-      name: message
-    - type: int*
-      name: timestamp
-    - type: __int64
-      name: a6
-    - type: Client::System::String::Utf8String*
-      name: a7
-    - type: int
-      name: chatTabIndex
-  - signature: E8 ?? ?? ?? ?? 44 39 AE ?? ?? ?? ?? 7E
-    return_type: unsigned int
-    name: PrintMessage
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned __int16
-      name: logKindId
-    - type: Client::System::String::Utf8String*
-      name: senderName
-    - type: Client::System::String::Utf8String*
-      name: message
-    - type: int
-      name: timestamp
-    - type: byte
-      name: silent
-  - signature: E9 ?? ?? ?? ?? 40 88 AE
-    return_type: void
-    name: ShowLogMessage
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned int
-      name: logMessageId
-  - signature: E9 ?? ?? ?? ?? 0C ?? 88 42
-    return_type: void
-    name: ShowLogMessageUInt
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned int
-      name: logMessageId
-    - type: unsigned int
-      name: value
-  - signature: E8 ?? ?? ?? ?? 0F BE 4B 44
-    return_type: void
-    name: ShowLogMessageUIntUInt
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned int
-      name: logMessageId
-    - type: unsigned int
-      name: value1
-    - type: unsigned int
-      name: value2
-  - signature: E8 ?? ?? ?? ?? 80 67 37 FE
-    return_type: void
-    name: ShowLogMessageUIntUIntUInt
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned int
-      name: logMessageId
-    - type: unsigned int
-      name: value1
-    - type: unsigned int
-      name: value2
-    - type: unsigned int
-      name: value3
-  - signature: E8 ?? ?? ?? ?? EB ?? 41 8B 47 ?? 85 C0
-    return_type: void
-    name: ShowLogMessageString
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned int
-      name: logMessageId
-    - type: Client::System::String::Utf8String*
-      name: value
-  - signature: E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 41 8B C6 48 8B 8C 24
-    return_type: void
-    name: ShowMiniTalkPlayer
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned __int16
-      name: logKindId
-    - type: Client::System::String::Utf8String*
-      name: sender
-    - type: Client::System::String::Utf8String*
-      name: message
-    - type: unsigned __int16
-      name: worldId
-    - type: byte
-      name: isLocalPlayer
-  - signature: E8 ?? ?? ?? ?? 40 80 C6 41
-    return_type: void
-    name: PrintString
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: char*
-      name: str
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8D 4D ?? E8 ?? ?? ?? ?? 48 8B D0
-    return_type: byte
-    name: GetLogMessage
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: int
-      name: index
-    - type: Client::System::String::Utf8String*
-      name: str
-  - signature: E8 ?? ?? ?? ?? 84 C0 74 51 44 0F B6 95
-    return_type: byte
-    name: GetLogMessageDetail
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: int
-      name: index
-    - type: __int16*
-      name: outLogInfo
-    - type: Client::System::String::Utf8String*
-      name: outSender
-    - type: Client::System::String::Utf8String*
-      name: outMessage
-    - type: int*
-      name: outTimestamp
-  - signature: 4C 8B D9 48 8B 89
-    return_type: void
-    name: AddMsgSourceEntry
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: unsigned __int64
-      name: contentId
-    - type: unsigned __int64
-      name: accountId
-    - type: int
-      name: messageIndex
-    - type: unsigned __int16
-      name: worldId
-    - type: unsigned __int16
-      name: chatType
-  - signature: 48 89 5C 24 ?? 55 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 48 63 C2
-    return_type: void
-    name: SetTabName
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: int
-      name: tabIndex
-    - type: Client::System::String::Utf8String*
-      name: tabName
-  - signature: E8 ?? ?? ?? ?? 48 8B 08 44 38 21
-    return_type: Client::System::String::Utf8String*
-    name: GetTabName
-    parameters:
-    - type: Client::UI::Misc::RaptureLogModule*
-      name: this
-    - type: int
-      name: tabIndex
 - type: Component::GUI::AtkComponentCheckBox
   name: AtkComponentCheckBox
   namespace: Component.GUI
@@ -100601,6 +100881,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentCheckBox*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -100727,6 +101013,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentDragDrop*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -100927,6 +101219,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentRadioButton*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -101366,6 +101664,31 @@ structs:
     name: IdleCameraEventHandler
     offset: 144
   virtual_functions: []
+  member_functions: []
+- type: Client::Game::Event::EventSceneModule
+  name: EventSceneModule
+  namespace: Client.Game.Event
+  union: False
+  size: 14808
+  fields:
+  - type: Client::Game::Event::EventSceneModuleUsualImpl
+    name: EventSceneModuleUsualImpl
+    offset: 24
+  - type: Client::Game::Event::EventSceneModuleImplBase
+    name: EventSceneModuleImplBase
+    offset: 40
+  - type: Client::Game::Event::EventSceneModuleImplBase*
+    name: EventSceneModuleImpl
+    offset: 56
+  - type: Client::Game::Event::EventSceneModuleTaskManager
+    name: TaskManager
+    offset: 152
+  - type: Client::Game::Event::EventGPoseController
+    name: EventGPoseController
+    offset: 512
+  - type: Client::Game::Event::EventIdleCamController
+    name: EventIdleCamController
+    offset: 14224
   member_functions: []
 - type: Client::Game::LobbyCamera
   name: LobbyCamera
@@ -103466,6 +103789,362 @@ structs:
     - type: Client::Game::Character::Character*
       name: character
   member_functions: []
+- type: Client::UI::Misc::RaptureLogModule
+  name: RaptureLogModule
+  namespace: Client.UI.Misc
+  union: False
+  size: 18128
+  fields:
+  - type: Component::Log::LogModule
+    name: LogModule
+    offset: 0
+    base: true
+  - type: Client::System::String::Utf8String
+    name: LogMessageDataTerminator
+    offset: 128
+  - type: Client::UI::UIModule*
+    name: UIModule
+    offset: 232
+  - type: Component::Excel::ExcelModuleInterface*
+    name: ExcelModuleInterface
+    offset: 240
+  - type: Client::UI::Misc::RaptureTextModule*
+    name: RaptureTextModule
+    offset: 248
+  - type: Component::GUI::AtkFontCodeModule*
+    name: AtkFontCodeModule
+    offset: 256
+  - type: Client::System::String::Utf8String
+    name: TempParseMessage
+    offset: 264
+    size: 10
+    is_string: False
+  - type: Common::Component::Excel::ExcelSheet*
+    name: LogKindSheet
+    offset: 1312
+  - type: Client::UI::Misc::RaptureLogModuleTab
+    name: ChatTabs
+    offset: 1328
+    size: 5
+    is_string: False
+  - type: StdDeque<Client::UI::Misc::LogMessageQueueItem>
+    name: LogMessageQueue
+    offset: 13232
+  - type: Common::Component::Excel::ExcelSheet*
+    name: LogMessageSheet
+    offset: 13272
+  - type: byte
+    name: ChatTabIsPendingReload
+    offset: 13288
+    size: 4
+    is_string: False
+  - type: byte
+    name: ChatTabShouldDisplayTime
+    offset: 13293
+    size: 4
+    is_string: False
+  - type: byte
+    name: UseServerTime
+    offset: 13298
+  - type: byte
+    name: Use12HourClock
+    offset: 13299
+  - type: byte
+    name: LogNameType
+    offset: 13300
+  - type: Client::UI::Misc::LogMessageSource*
+    name: MsgSourceArray
+    offset: 13432
+  - type: int
+    name: MsgSourceArrayLength
+    offset: 13440
+  - type: Client::UI::Misc::RaptureLogModule::AddonMessageSub
+    name: AddonMessageSub3488
+    offset: 13448
+  virtual_functions: []
+  member_functions:
+  - signature: E8 ?? ?? ?? ?? 41 83 EC ?? 89 43
+    return_type: unsigned int
+    name: FormatLogMessage
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logKindId
+    - type: Client::System::String::Utf8String*
+      name: sender
+    - type: Client::System::String::Utf8String*
+      name: message
+    - type: int*
+      name: timestamp
+    - type: __int64
+      name: a6
+    - type: Client::System::String::Utf8String*
+      name: a7
+    - type: int
+      name: chatTabIndex
+  - signature: E8 ?? ?? ?? ?? 44 39 AE ?? ?? ?? ?? 7E
+    return_type: unsigned int
+    name: PrintMessage
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned __int16
+      name: logKindId
+    - type: Client::System::String::Utf8String*
+      name: senderName
+    - type: Client::System::String::Utf8String*
+      name: message
+    - type: int
+      name: timestamp
+    - type: byte
+      name: silent
+  - signature: E8 ?? ?? ?? ?? 8D 47 FF 83 F8 06
+    return_type: void
+    name: FormatPlayerLink
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: char*
+      name: name
+    - type: Client::System::String::Utf8String*
+      name: result
+    - type: char*
+      name: displayNamePrefix
+    - type: unsigned int
+      name: unk5
+    - type: byte
+      name: isNotLocalPlayer
+    - type: unsigned __int16
+      name: homeWorld
+    - type: byte
+      name: unk8
+    - type: char*
+      name: displayNameOverride
+    - type: byte
+      name: unk10
+  - signature: E9 ?? ?? ?? ?? 40 88 AE
+    return_type: void
+    name: ShowLogMessage
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+  - signature: E9 ?? ?? ?? ?? 0C ?? 88 42
+    return_type: void
+    name: ShowLogMessageUInt
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: unsigned int
+      name: value
+  - signature: E8 ?? ?? ?? ?? 0F BE 4B 44
+    return_type: void
+    name: ShowLogMessageUIntUInt
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: unsigned int
+      name: value1
+    - type: unsigned int
+      name: value2
+  - signature: E8 ?? ?? ?? ?? 80 67 37 FE
+    return_type: void
+    name: ShowLogMessageUIntUIntUInt
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: unsigned int
+      name: value1
+    - type: unsigned int
+      name: value2
+    - type: unsigned int
+      name: value3
+  - signature: E8 ?? ?? ?? ?? EB ?? 41 8B 47 ?? 85 C0
+    return_type: void
+    name: ShowLogMessageString
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: Client::System::String::Utf8String*
+      name: value
+  - signature: E8 ?? ?? ?? ?? C6 43 34 03
+    return_type: void
+    name: ShowLogMessageTextParameters
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: value
+  - signature: E8 ?? ?? ?? ?? 32 C0 EB 59
+    return_type: void
+    name: ShowLogMessageSourceObjectTargetObject
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: Client::Game::Object::GameObject*
+      name: source
+    - type: Client::Game::Object::GameObject*
+      name: target
+  - signature: E8 ?? ?? ?? ?? 44 8B 45 DF
+    return_type: void
+    name: ShowLogMessageSourceObjectTargetObjectTextParameters
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: Client::Game::Object::GameObject*
+      name: source
+    - type: Client::Game::Object::GameObject*
+      name: target
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: value
+  - signature: E8 ?? ?? ?? ?? 44 8B 4D 18
+    return_type: void
+    name: ShowLogMessageSourceTarget
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: char*
+      name: sourceName
+    - type: byte
+      name: sourceGender
+    - type: char*
+      name: targetName
+    - type: byte
+      name: targetSex
+    - type: unsigned __int16
+      name: sourceHomeWorld
+    - type: unsigned __int16
+      name: targetHomeWorld
+  - signature: E8 ?? ?? ?? ?? 4D 85 FF 74 3F
+    return_type: void
+    name: ShowLogMessageSourceTargetTextParameters
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned int
+      name: logMessageId
+    - type: char*
+      name: sourceName
+    - type: byte
+      name: sourceSex
+    - type: char*
+      name: targetName
+    - type: byte
+      name: targetSex
+    - type: StdDeque<Component::Text::TextParameter>*
+      name: value
+    - type: unsigned __int16
+      name: sourceHomeWorld
+    - type: unsigned __int16
+      name: targetHomeWorld
+  - signature: E8 ?? ?? ?? ?? 49 8D 8E ?? ?? ?? ?? E8 ?? ?? ?? ?? 49 8B 06 49 8B CE FF 50 40 4C 8B 7C 24
+    return_type: void
+    name: Update
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+  - signature: E8 ?? ?? ?? ?? 48 8D 4C 24 ?? E8 ?? ?? ?? ?? 41 8B C6 48 8B 8C 24
+    return_type: void
+    name: ShowMiniTalkPlayer
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned __int16
+      name: logKindId
+    - type: Client::System::String::Utf8String*
+      name: sender
+    - type: Client::System::String::Utf8String*
+      name: message
+    - type: unsigned __int16
+      name: worldId
+    - type: byte
+      name: isLocalPlayer
+  - signature: E8 ?? ?? ?? ?? 40 80 C6 41
+    return_type: void
+    name: PrintString
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: char*
+      name: str
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 ?? 48 8D 4D ?? E8 ?? ?? ?? ?? 48 8B D0
+    return_type: byte
+    name: GetLogMessage
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: int
+      name: index
+    - type: Client::System::String::Utf8String*
+      name: str
+  - signature: E8 ?? ?? ?? ?? 84 C0 74 51 44 0F B6 95
+    return_type: byte
+    name: GetLogMessageDetail
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: int
+      name: index
+    - type: __int16*
+      name: outLogInfo
+    - type: Client::System::String::Utf8String*
+      name: outSender
+    - type: Client::System::String::Utf8String*
+      name: outMessage
+    - type: int*
+      name: outTimestamp
+  - signature: 4C 8B D9 48 8B 89
+    return_type: void
+    name: AddMsgSourceEntry
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: unsigned __int64
+      name: contentId
+    - type: unsigned __int64
+      name: accountId
+    - type: int
+      name: messageIndex
+    - type: unsigned __int16
+      name: worldId
+    - type: unsigned __int16
+      name: chatType
+  - signature: 48 89 5C 24 ?? 55 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 45 ?? 48 63 C2
+    return_type: void
+    name: SetTabName
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: int
+      name: tabIndex
+    - type: Client::System::String::Utf8String*
+      name: tabName
+  - signature: E8 ?? ?? ?? ?? 48 8B 08 44 38 21
+    return_type: Client::System::String::Utf8String*
+    name: GetTabName
+    parameters:
+    - type: Client::UI::Misc::RaptureLogModule*
+      name: this
+    - type: int
+      name: tabIndex
 - type: Common::Component::BGCollision::ColliderBox
   name: ColliderBox
   namespace: Common.Component.BGCollision
@@ -104509,6 +105188,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentHoldButton*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -104666,6 +105351,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentIcon*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -104943,6 +105634,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentPreview*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -105087,6 +105784,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTreeList*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -106683,6 +107386,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTab*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -108659,6 +109368,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentGaugeBar*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -108844,6 +109559,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentInputBase*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -108983,6 +109704,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentListItemRenderer*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -153995,6 +154722,396 @@ structs:
     - type: byte
       name: a3
   member_functions: []
+- type: Client::UI::AddonTrade
+  name: AddonTrade
+  namespace: Client.UI
+  union: False
+  size: 600
+  fields:
+  - type: Component::GUI::AtkUnitBase
+    name: AtkUnitBase
+    offset: 0
+    base: true
+  - type: Component::GUI::AtkManagedInterface
+    name: AtkManagedInterface
+    offset: 568
+    base: true
+  virtual_functions:
+  - name: Dtor
+    offset: 0
+    return_type: Component::GUI::AtkEventListener*
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: byte
+      name: freeFlags
+  - name: ReceiveGlobalEvent
+    offset: 8
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: ReceiveEvent
+    offset: 16
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: Component::GUI::AtkEventType
+      name: eventType
+    - type: int
+      name: eventParam
+    - type: Component::GUI::AtkEvent*
+      name: atkEvent
+    - type: Component::GUI::AtkEventData*
+      name: atkEventData
+  - name: Open
+    offset: 24
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: unsigned int
+      name: depthLayer
+  - name: Close
+    offset: 32
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: byte
+      name: fireCallback
+  - name: Show
+    offset: 40
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: byte
+      name: silenceOpenSoundEffect
+    - type: unsigned int
+      name: unsetShowHideFlags
+  - name: Hide
+    offset: 48
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: byte
+      name: unkBool
+    - type: byte
+      name: callHideCallback
+    - type: unsigned int
+      name: setShowHideFlags
+  - name: SetPosition
+    offset: 56
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: SetX
+    offset: 64
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: __int16
+      name: value
+  - name: SetY
+    offset: 72
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: __int16
+      name: value
+  - name: GetX
+    offset: 80
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: GetY
+    offset: 88
+    return_type: __int16
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: GetPosition
+    offset: 96
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: __int16*
+      name: outX
+    - type: __int16*
+      name: outY
+  - name: SetAlpha
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: byte
+      name: alpha
+  - name: SetScale
+    offset: 112
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: float
+      name: scale
+    - type: byte
+      name: a3
+  - name: GetSize
+    offset: 120
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: __int16*
+      name: outWidth
+    - type: __int16*
+      name: outHeight
+    - type: byte
+      name: scaled
+  - name: Hide2
+    offset: 128
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: SetScaleToHudLayoutScale
+    offset: 136
+    return_type: __int8
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: ShouldCollideWithWindow
+    offset: 144
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: Component::GUI::AtkCollisionNode*
+      name: collisionNode
+  - name: OnMove
+    offset: 160
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: ShouldIgnoreInputs
+    offset: 184
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: GetRootNode
+    offset: 192
+    return_type: Component::GUI::AtkResNode*
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: GetWindowBounds
+    offset: 216
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: GetRootBounds
+    offset: 240
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: Common::Math::Bounds*
+      name: outBounds
+  - name: SetDepthLayer
+    offset: 248
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: unsigned int
+      name: depthLayerIndex
+  - name: ShouldAllowCursorFocus
+    offset: 256
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: GetUnitBaseForFocus
+    offset: 280
+    return_type: Component::GUI::AtkUnitBase*
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: Focus
+    offset: 296
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: Initialize
+    offset: 328
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: Finalizer
+    offset: 336
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: Update
+    offset: 344
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: float
+      name: delta
+  - name: Draw
+    offset: 352
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: LoadUldResourceHandle
+    offset: 368
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: CheckWindowCollisionAtCoords
+    offset: 376
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: __int16
+      name: x
+    - type: __int16
+      name: y
+  - name: OnSetup
+    offset: 392
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRefresh
+    offset: 408
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: unsigned int
+      name: valueCount
+    - type: Component::GUI::AtkValue*
+      name: values
+  - name: OnRequestedUpdate
+    offset: 416
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: Component::GUI::NumberArrayData**
+      name: numberArrayData
+    - type: Component::GUI::StringArrayData**
+      name: stringArrayData
+  - name: FireCloseCallback
+    offset: 432
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: HandleCustomInput
+    offset: 456
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: Component::GUI::AtkEventData::AtkInputData*
+      name: inputData
+  - name: OnScreenSizeChange
+    offset: 480
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: int
+      name: width
+    - type: int
+      name: height
+  - name: OnMouseOver
+    offset: 496
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: OnMouseOut
+    offset: 504
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: IsFullyLoaded
+    offset: 528
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+  - name: PlaySoundEffect
+    offset: 536
+    return_type: void
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: int
+      name: soundEffectId
+  - name: HandleDPadInput
+    offset: 552
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: int
+      name: inputId
+    - type: byte
+      name: a3
+  - name: HandleBackButtonInput
+    offset: 568
+    return_type: byte
+    parameters:
+    - type: Client::UI::AddonTrade*
+      name: this
+    - type: int
+      name: inputId
+    - type: byte
+      name: a3
+  member_functions: []
 - type: Client::UI::Agent::AgentDawnStory::DawnStoryData
   name: DawnStoryData
   namespace: Client.UI.Agent
@@ -154910,6 +156027,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentNumericInput*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -165650,6 +166773,9 @@ structs:
     name: AtkUnitBase
     offset: 0
     base: true
+  - type: int
+    name: OpenerAddonId
+    offset: 576
   - type: Component::GUI::AtkAddonControl
     name: AddonControl
     offset: 704
@@ -166055,6 +167181,9 @@ structs:
     offset: 624
     size: 5
     is_string: False
+  - type: int
+    name: OpenerAddonId
+    offset: 664
   - type: Component::GUI::AtkAddonControl
     name: AddonControl
     offset: 680
@@ -166455,6 +167584,9 @@ structs:
     name: AtkUnitBase
     offset: 0
     base: true
+  - type: int
+    name: OpenerAddonId
+    offset: 576
   - type: Component::GUI::AtkAddonControl
     name: AddonControl
     offset: 664
@@ -166857,6 +167989,9 @@ structs:
     name: AtkUnitBase
     offset: 0
     base: true
+  - type: int
+    name: OpenerAddonId
+    offset: 576
   - type: Component::GUI::AtkAddonControl
     name: AddonControl
     offset: 680
@@ -172378,6 +173513,54 @@ structs:
       name: rowId
     - type: int
       name: colParam
+  - signature: E8 ?? ?? ?? ?? 48 8D 4D 97 E8 ?? ?? ?? ?? 0F B6 5E 05
+    return_type: void
+    name: SetGlobalTempEntity1Utf8
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: name
+    - type: int
+      name: sex
+    - type: unsigned int
+      name: objStrId
+  - signature: E8 ?? ?? ?? ?? 83 EE 16
+    return_type: void
+    name: SetGlobalTempEntity1
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: char*
+      name: name
+    - type: int
+      name: sex
+    - type: unsigned int
+      name: objStrId
+  - signature: E8 ?? ?? ?? ?? 48 8D 4D 97 E8 ?? ?? ?? ?? 4C 8B 64 24 ??
+    return_type: void
+    name: SetGlobalTempEntity2Utf8
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: name
+    - type: int
+      name: sex
+    - type: unsigned int
+      name: objStrId
+  - signature: E8 ?? ?? ?? ?? 48 8B 75 A8
+    return_type: void
+    name: SetGlobalTempEntity2
+    parameters:
+    - type: Client::UI::Misc::RaptureTextModule*
+      name: this
+    - type: char*
+      name: name
+    - type: int
+      name: sex
+    - type: unsigned int
+      name: objStrId
 - type: Common::Lua::GCObject
   name: GCObject
   namespace: Common.Lua
@@ -186279,6 +187462,12 @@ structs:
       name: this
     - type: byte
       name: enabled
+  - name: PlaySoundEffect
+    offset: 104
+    return_type: void
+    parameters:
+    - type: Component::GUI::AtkComponentTextInput*
+      name: this
   - name: GetAtkResNode
     offset: 112
     return_type: Component::GUI::AtkResNode*
@@ -192491,11 +193680,163 @@ structs:
     - type: Client::Game::IndoorTerritory*
       name: this
   member_functions: []
+- type: Client::Game::InstanceContent::PublicContentBozja
+  name: PublicContentBozja
+  namespace: Client.Game.InstanceContent
+  union: False
+  size: 12800
+  fields:
+  - type: Client::Game::InstanceContent::PublicContentDirector
+    name: PublicContentDirector
+    offset: 0
+    base: true
+  - type: Client::Game::InstanceContent::DynamicEventContainer
+    name: DynamicEventContainer
+    offset: 5000
+  - type: Client::Game::InstanceContent::BozjaState
+    name: State
+    offset: 12552
+  - type: byte
+    name: StateInitialized
+    offset: 12792
+  virtual_functions:
+  - name: CancelInteraction
+    offset: 1264
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: GetTitle
+    offset: 1632
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outTitle
+  - name: GetEventId
+    offset: 1648
+    return_type: Client::Game::Event::EventId
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: GetNameplateIconForObject
+    offset: 1664
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: Client::Game::Object::GameObject*
+      name: gameObject
+  - name: GetDescription
+    offset: 2056
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outDescription
+  - name: GetReliefText
+    offset: 2064
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: Client::System::String::Utf8String*
+      name: outReliefText
+  - name: GetTimeRemaining
+    offset: 2072
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: int
+      name: currentTimestamp
+  - name: HasTimer
+    offset: 2080
+    return_type: byte
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: GetEventItemId
+    offset: 2096
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: GetDirectorTodos
+    offset: 2120
+    return_type: StdVector<Client::Game::Event::DirectorTodo>*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: GetMassivePcContentTodos
+    offset: 2128
+    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: int
+      name: setIndex
+  - name: GetRecommendedLevel
+    offset: 2152
+    return_type: int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: PopulateMapMarkers
+    offset: 2216
+    return_type: void
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: unsigned __int16
+      name: territoryTypeId
+    - type: StdVector<Client::Game::UI::MapMarkerData>*
+      name: markerVector
+  - name: GetCurrentLevel
+    offset: 2416
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: GetMaxLevel
+    offset: 2424
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  - name: GetContentTimeMax
+    offset: 2624
+    return_type: unsigned int
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+  member_functions:
+  - signature: 40 53 55 57 48 83 EC 40 8B FA
+    return_type: byte
+    name: UseFromHolster
+    parameters:
+    - type: Client::Game::InstanceContent::PublicContentBozja*
+      name: this
+    - type: unsigned int
+      name: holsterIndex
+    - type: unsigned int
+      name: slot
+  static_member_functions:
+  - signature: E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 48 85 FF 74 1D
+    return_type: Client::Game::InstanceContent::PublicContentBozja*
+    name: GetInstance
+    parameters: []
+  - signature: E8 ?? ?? ?? ?? 48 85 FF 74 1D
+    return_type: Client::Game::InstanceContent::BozjaState*
+    name: GetState
+    parameters: []
 - type: Client::Game::Event::EventFramework
   name: EventFramework
   namespace: Client.Game.Event
   union: False
-  size: 17600
+  size: 17664
   fields:
   - type: Client::Game::Event::EventHandlerModule
     name: EventHandlerModule
@@ -192714,158 +194055,6 @@ structs:
     parameters:
     - type: byte
       name: forced
-- type: Client::Game::InstanceContent::PublicContentBozja
-  name: PublicContentBozja
-  namespace: Client.Game.InstanceContent
-  union: False
-  size: 12800
-  fields:
-  - type: Client::Game::InstanceContent::PublicContentDirector
-    name: PublicContentDirector
-    offset: 0
-    base: true
-  - type: Client::Game::InstanceContent::DynamicEventContainer
-    name: DynamicEventContainer
-    offset: 5000
-  - type: Client::Game::InstanceContent::BozjaState
-    name: State
-    offset: 12552
-  - type: byte
-    name: StateInitialized
-    offset: 12792
-  virtual_functions:
-  - name: CancelInteraction
-    offset: 1264
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  - name: GetTitle
-    offset: 1632
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: outTitle
-  - name: GetEventId
-    offset: 1648
-    return_type: Client::Game::Event::EventId
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  - name: GetNameplateIconForObject
-    offset: 1664
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: Client::Game::Object::GameObject*
-      name: gameObject
-  - name: GetDescription
-    offset: 2056
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: outDescription
-  - name: GetReliefText
-    offset: 2064
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: Client::System::String::Utf8String*
-      name: outReliefText
-  - name: GetTimeRemaining
-    offset: 2072
-    return_type: int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: int
-      name: currentTimestamp
-  - name: HasTimer
-    offset: 2080
-    return_type: byte
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  - name: GetEventItemId
-    offset: 2096
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  - name: GetDirectorTodos
-    offset: 2120
-    return_type: StdVector<Client::Game::Event::DirectorTodo>*
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  - name: GetMassivePcContentTodos
-    offset: 2128
-    return_type: StdVector<Client::Game::Event::MassivePcContentTodo>*
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: int
-      name: setIndex
-  - name: GetRecommendedLevel
-    offset: 2152
-    return_type: int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  - name: PopulateMapMarkers
-    offset: 2216
-    return_type: void
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: unsigned __int16
-      name: territoryTypeId
-    - type: StdVector<Client::Game::UI::MapMarkerData>*
-      name: markerVector
-  - name: GetCurrentLevel
-    offset: 2416
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  - name: GetMaxLevel
-    offset: 2424
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  - name: GetContentTimeMax
-    offset: 2624
-    return_type: unsigned int
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-  member_functions:
-  - signature: 40 53 55 57 48 83 EC 40 8B FA
-    return_type: byte
-    name: UseFromHolster
-    parameters:
-    - type: Client::Game::InstanceContent::PublicContentBozja*
-      name: this
-    - type: unsigned int
-      name: holsterIndex
-    - type: unsigned int
-      name: slot
-  static_member_functions:
-  - signature: E8 ?? ?? ?? ?? 48 8B F8 E8 ?? ?? ?? ?? 48 85 FF 74 1D
-    return_type: Client::Game::InstanceContent::PublicContentBozja*
-    name: GetInstance
-    parameters: []
-  - signature: E8 ?? ?? ?? ?? 48 85 FF 74 1D
-    return_type: Client::Game::InstanceContent::BozjaState*
-    name: GetState
-    parameters: []
 - type: Client::Game::InstanceContent::PublicContentOccultCrescent
   name: PublicContentOccultCrescent
   namespace: Client.Game.InstanceContent
@@ -193974,6 +195163,9 @@ structs:
     name: Character
     offset: 0
     base: true
+  - type: Client::Game::Character::CompanionMove
+    name: Behaviour
+    offset: 9108
   - type: Client::Game::Character::BattleChara*
     name: Owner
     offset: 9216

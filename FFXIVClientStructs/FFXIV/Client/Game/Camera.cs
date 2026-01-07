@@ -23,6 +23,7 @@ public unsafe partial struct Camera {
     [FieldOffset(0x154)] public float InputDeltaV;
     [FieldOffset(0x158)] public float DirVMin; // -85deg by default
     [FieldOffset(0x15C)] public float DirVMax; // +45deg by default
+    [FieldOffset(0x180)] public CameraZoomMode ZoomMode;
     [FieldOffset(0x18C)] public float InterpDistance;
     [FieldOffset(0x198)] public float SavedDistance;
 }
@@ -60,4 +61,9 @@ public partial struct LowCutCamera;
 public partial struct Camera4 {
     [FieldOffset(0x120)] public Graphics.Scene.Camera SceneCamera0;
     [FieldOffset(0x220)] public Graphics.Scene.Camera SceneCamera1;
+}
+
+public enum CameraZoomMode {
+    FirstPerson = 0,
+    ThirdPerson = 1,
 }

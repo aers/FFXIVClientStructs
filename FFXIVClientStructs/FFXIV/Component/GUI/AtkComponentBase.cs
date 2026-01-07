@@ -78,6 +78,10 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [VirtualFunction(10)]
     public partial void SetEnabledState(bool enabled);
 
+    /// <remarks> Plays the sound effect set in <see cref="SoundEffectId" />. </remarks>
+    [VirtualFunction(13)]
+    public partial void PlaySoundEffect();
+
     [VirtualFunction(14)]
     public partial AtkResNode* GetAtkResNode();
 

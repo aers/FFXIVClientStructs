@@ -125,7 +125,7 @@ public enum IconComponentFlags : uint {
     IsRecipe = 1 << 8,
     IsIconLoading = 1 << 9,
     IsBeingDragged = 1 << 10,
-    Unk2048 = 1 << 11,
+    Unk2048 = 1 << 11, // overrides DrawOrderIndex with one from RaptureAtkUnitManager
     IsDisabled = 1 << 12, // for example due to casting or having a window open that disables actions
     Unk8192 = 1 << 13,
 }

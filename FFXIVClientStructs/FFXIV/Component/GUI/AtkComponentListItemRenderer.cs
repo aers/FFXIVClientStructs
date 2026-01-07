@@ -20,11 +20,12 @@ public unsafe partial struct AtkComponentListItemRenderer : ICreatable {
 
     [FieldOffset(0x184)] public int ListItemIndex;
 
+    [FieldOffset(0x198)] public int DragDropListItemIndex;
     [FieldOffset(0x19C)] public short DragDropMouseDownPosX;
     [FieldOffset(0x19E)] public short DragDropMouseDownPosY;
-    [FieldOffset(0x1A0)] private short Unk1A0MouseDownPosX;
-    [FieldOffset(0x1A2)] private short Unk1A2MouseDownPosY;
-    [FieldOffset(0x1A4)] public int RowTemplateNodeCount;
+    [FieldOffset(0x1A0)] private short Unk1A0DragDropOwnerNodeScreenX;
+    [FieldOffset(0x1A2)] private short Unk1A2DragDropOwnerNodeScreenY;
+    [FieldOffset(0x1A4)] public int RowTemplateNodeCount; // TODO: also contains flags!
 
     [MemberFunction("40 53 48 83 EC 20 48 8B D9 E8 ?? ?? ?? ?? 33 C9 48 C7 83 ?? ?? ?? ?? ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ??")]
     public partial void Ctor();

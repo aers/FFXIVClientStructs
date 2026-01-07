@@ -492,6 +492,7 @@ classes:
       0x140ADB710: IsInRivalWingsArea
       0x140ADB730: IsInPvPArea
       0x1405E4420: GetEventGPoseController
+      0x1405E4460: GetEventIdleCamController
       0x140B89270: ExecuteCommand # static
       0x140B893F0: ExecuteLocationCommand # static
   Client::Game::ZoneSharedGroupManager:
@@ -4592,6 +4593,7 @@ classes:
       0x1400FB4B0: OpenDawnStory
       0x1400FB4E0: OpenDawn
       0x1400FB5A0: IsDawnSupported
+      0x1400FBC90: OpenLuaUI
       0x1400FCA50: HandleSaveAddonConfig # 17
       0x1400FCD00: HandlePlaySoundEffect # 21
       0x1400FCE00: HandleExecuteHotbarSlot # 22
@@ -4640,6 +4642,11 @@ classes:
   Client::UI::RaptureAtkModule::ItemCache:
     vtbls:
       - ea: 0x14205E090
+    vfuncs:
+      0: Dtor
+      1: Clear
+      2: SetFromInventoryItem
+      3: Update
   Client::UI::RaptureAtkModule::InventoryCache:
     vtbls:
       - ea: 0x14205E0B0
@@ -4697,7 +4704,7 @@ classes:
       - ea: 0x1420C46A0
         base: Client::UI::Info::InfoProxyInterface
     vfuncs:
-      12: AddPage
+      11: AddPage
   Client::UI::Info::InfoProxyInvitedInterface:
     vtbls:
       - ea: 0x1420C4700
@@ -4802,6 +4809,8 @@ classes:
     vtbls:
       - ea: 0x1420C4868
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C4968
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14092E100: ctor
       0x140930FE0: ChangeOrder
@@ -4871,12 +4880,16 @@ classes:
     vtbls:
       - ea: 0x1420C4B38
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C4C38
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140937B80: ctor
   Client::UI::Info::InfoProxyFriendList:
     vtbls:
       - ea: 0x1420C4CC8
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C4DC8
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14093A7A0: ctor
       0x14096DB00: Finalizer
@@ -4901,6 +4914,8 @@ classes:
     vtbls:
       - ea: 0x1420C4E80
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C4F80
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14093F4D0: ctor
   Client::UI::Info::InfoProxyCatalogSearch:
@@ -4923,6 +4938,8 @@ classes:
     vtbls:
       - ea: 0x1420C51F8
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C52F8
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14094AA80: ctor
   Client::UI::Info::InfoProxyChat:
@@ -4935,6 +4952,8 @@ classes:
     vtbls:
       - ea: 0x1420C54F0
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C55F0
+        base: Client::Game::Character::CharacterManagerInterface
   Client::UI::Info::InfoProxyNoviceNetworkMember:
     vtbls:
       - ea: 0x1420C5620
@@ -4951,6 +4970,8 @@ classes:
     vtbls:
       - ea: 0x1420C5880
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C5980
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x140955050: ctor
   Client::UI::Info::InfoProxy25:
@@ -4994,6 +5015,8 @@ classes:
     vtbls:
       - ea: 0x1420C5DA0
         base: Client::UI::Info::InfoProxyCommonList
+      - ea: 0x1420C5EA0
+        base: Client::Game::Character::CharacterManagerInterface
     funcs:
       0x14095FB40: ctor
   Client::UI::Info::InfoProxyCircleList:
@@ -5928,7 +5951,7 @@ classes:
     vfuncs:
       2: Dtor
       3: Show
-      4: Show2
+      4: ShowFromLua
       5: Hide
       6: IsAgentActive
       7: Update
@@ -8015,6 +8038,7 @@ classes:
       7: Draw
       8: Setup
       10: SetEnabledState
+      13: PlaySoundEffect
       14: GetAtkResNode
       15: GetFocusNode
       17: InitializeFromComponentData
@@ -8031,13 +8055,17 @@ classes:
       0x14066DC50: GetImageNodeById
       0x14066DCB0: GetUldAssetByImageNodeId
       0x14066DD50: IsOwnerNodeAncestorOf
+      0x14066DD80: IsFocused
       0x14066DED0: CopyCursorNavigationInfoFrom
       0x14066DF90: SetCursorNavigationInfo
       0x14066DFF0: ClearCursorNavigationInfo
       0x14066E060: SetCursorNavigationIndex
       0x14066E0A0: GetCursorNavigationStopFlags
       0x14066E180: SetAtkResNodeById
-      0x1406C5730: GetComponentButtonById
+      0x1406C5730: GetComponentButtonById # matches Button, CheckBox, RadioButton, ListItemRenderer, Tab
+      0x1406C5C50: GetComponentIconById
+      0x1406C6040: GetComponentItemRendererById
+      0x1406C6600: GetComponentTextNineGridById
   Component::GUI::AtkCursorNavigationInfo:
     funcs:
       0x14066D460: ctor
@@ -8091,6 +8119,7 @@ classes:
       8: GetComponent
       9: HandleMouseUpEvent
       12: GetPayloadContainer
+      14: Cancel
   Component::GUI::AtkDragDropPayloadContainer:
     funcs:
       0x140625C00: ctor
@@ -8112,23 +8141,59 @@ classes:
       - ea: 0x1420A5278
         base: Component::GUI::AtkComponentBase
     vfuncs:
+      23: ScrollToItem
+      24: CenterScrollOnItem
       25: GetItemRenderer
       26: SetItemDisabledState
       27: GetItemDisabledState
       28: SetItemHighlightedState
       29: GetItemHighlightedState
+      30: IsItemVisible
       31: SelectItem
       32: DeselectItem
       36: GetItemCount
+      38: RecalculateVisibleItems
+      40: UpdateListItems
       44: DispatchEvent
       45: GetSelectedItemAtkResNode
     funcs:
-      0x140680750: ctor
+      0x140677E50: SetItemLabels
       0x140678000: SetItemCount
       0x1406786E0: SetupRenderer
       0x1406794B0: SetItemLabel
+      0x140679510: SetItemIcon
       0x140679570: GetItemLabel
+      0x140679D80: SetUnk144SelectedItemIndex2
+      0x140679DA0: SetHoveredItemIndex
+      0x140679DC0: ResetHoveredItemIndex
+      0x140679F10: SetVisibleColumnCount
+      0x140679F80: SetVisibleRowCount
+      0x140679FF0: SetSize
+      0x14067A0F0: SetupDropDownButton
+      0x14067A5D0: SetupSelectLogic # unsure
+      0x14067A5F0: IsScrollBarBeingDragged
+      0x14067A610: ToggleScrollSnapping
+      0x14067A7E0: ToggleScrollBarVisibility
+      0x14067A820: EndDragDrop
+      0x14067A9B0: SetDragDropState # unsure, takes a flag, 1 seems to enable DragDrop
+      0x14067AA80: SetItemRendererFlags
+      0x14067B010: FireHoveredItemRollOver
+      0x14067B0A0: FireHoveredItemRollOut
+      0x14067B0C0: ToggleDroppingDisabled
+      0x14067B340: SetDragDropPayloadData
+      0x14067B3B0: CancelDragDrop
+      0x14067DC30: HandleFocusStop
+      0x14067DE60: HandleFocusStart
+      0x14067DFF0: HandleMouseDown
+      0x14067E050: HandleMouseUp
+      0x14067E0A0: HandleButtonPress
+      0x14067E1A0: HandleInput
+      0x14067E620: HandleInputEvent
+      0x14067F5D0: HandleMouseWheel
       0x14067F740: DispatchItemEvent
+      0x14067F910: HandleDragDropEvent
+      0x1406803F0: PopulateAtkListItemData
+      0x140680750: ctor
       0x1406C6040: GetItemRendererByNodeId
   Component::GUI::AtkComponentListItemPopulator:
     funcs:
@@ -9789,6 +9854,11 @@ classes:
       0x140986350: ShowLogMessage<uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2)
       0x1409867A0: ShowLogMessage<uint,uint,uint> # (this, logMessageId, IntegerParameter1, IntegerParameter2, IntegerParameter3)
       0x140986C50: ShowLogMessage<string> # (this, logMessageId, StringParameter1)
+      0x140987170: ShowLogMessageTextParameters
+      0x140987500: ShowLogMessageSourceObjectTargetObjectTextParameters
+      0x1409877C0: ShowLogMessageSourceObjectTargetObject
+      0x140987B90: ShowLogMessageSourceTarget
+      0x140988080: ShowLogMessageSourceTargetTextParameters 
       0x140988C90: GetChatTab
       0x140988CB0: SetTabName
       0x140988E60: GetTabName
@@ -9820,6 +9890,10 @@ classes:
         pointer: true
     vtbls:
       - ea: 0x142224718 # maybe platform-specific implementation?
+      # Following offsets for BlacklistManager vtbls are from 2025.12.23.0000.0000 version
+      #  base: ??? # 0x1422246D8 is base
+      # - ea: 142224720 # some other struct that depends on critical section code for std::vector
+      #  base: ??? # 0x1422246E0 is base
     funcs:
       0x14181E150: IsCharacterBlocked
 #oldfail       0x140937B50: GetReplacementName # returns a Utf8String* to the set name that should be displayed instead of the character name
@@ -13517,7 +13591,7 @@ classes:
       0x1409B7DC0: ctor
   Client::UI::Agent::AgentBannerPreview:
     vtbls:
-      - ea: 0x1420C7F50
+      - ea: 0x1420C8078
         base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentPvPMap:
     vtbls:
@@ -14483,6 +14557,10 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BBDC70: OpenPanel # (this, panel, closeIfOpen, unknown)
+  Client::UI::Agent::AgentEventTutorial:
+    vtbls:
+      - ea: 0x1420F8828
+        base: Client::UI::Agent::AgentInterface
   Client::UI::Agent::AgentConfigCharacterChatLogMiniTalk:
     vtbls:
       - ea: 0x142099C78
@@ -15560,6 +15638,7 @@ classes:
       0x140C87860: ProcessDirectorUpdate
       0x140C889F0: ProcessMapEffect
       0x140C89310: Update
+      0x140C89D30: GetEventState1EventId
       0x140C8ACA0: GetDirectorByEventId
       0x140C8ACF0: GetCompanyLeveDirector
       0x140C8AD50: GetInstanceContentDirector
@@ -15624,6 +15703,7 @@ classes:
   Client::Game::Event::EventGPoseController:
     funcs:
       0x140AB5780: ctor
+      0x140AB9350: IsActive
       0x140AB9450: IsFaceCameraEnabled
       0x140AB9470: ToggleFaceCamera
       0x140AB94F0: IsGazeCameraEnabled
@@ -15634,7 +15714,12 @@ classes:
 #oldfail       0x1409866D0: SetupDefaultTarget # inlined at 0x140942529
       0x140AC1F30: AddCharacterToGPose
       0x140AC20B0: RemoveCharacterFromGPose
-      0x140AC3E40: CycleIdleCamTargets
+  Client::Game::Event::EventIdleCamController:
+    funcs:
+      0x140AC30A0: ctor
+      0x140AC3A50: Exit
+      0x140AC3AA0: IsActive
+      0x140AC3E40: CycleTargets
   Client::Game::Event::LeveDirector:
     vtbls:
       - ea: 0x1422AAC90
@@ -22713,6 +22798,10 @@ classes:
         base: Component::GUI::AtkUnitBase
     funcs:
       0x1414C3C40: ctor
+  Client::UI::AddonNotificationItem:
+    vtbls:
+      - ea: 0x142191520
+        base: Component::GUI::AtkUnitBase
   Client::UI::AddonDTR:
     vtbls:
       - ea: 0x142191920

@@ -31,9 +31,6 @@ public unsafe partial struct CurrencyManager {
     /// |--------|-------------------------|<br/>
     /// | ItemId | Item Name               |<br/>
     /// |--------|-------------------------|<br/>
-    /// | 30341  | Faux Leaf               |<br/>
-    /// | 38534  | Sil'dihn Silver         |<br/>
-    /// | 39885  | Shishu Coin             |<br/>
     /// | 21072  | Venture                 |<br/>
     /// | 21073  | Ixali Oaknot            |<br/>
     /// | 21074  | Vanu Whitebone          |<br/>
@@ -44,23 +41,30 @@ public unsafe partial struct CurrencyManager {
     /// | 21079  | Black Copper Gil        |<br/>
     /// | 21080  | Carved Kupo Nut         |<br/>
     /// | 21081  | Kojin Sango             |<br/>
+    /// | 21172  | Achievement Certificate |<br/>
+    /// | 21173  |                         |<br/>
+    /// | 21935  | Ananta Dreamstaff       |<br/>
+    /// | 22525  | Namazu Koban            |<br/>
+    /// | 26533  | Sack of Nuts            |<br/>
+    /// | 26807  | Bicolor Gemstone        |<br/>
+    /// | 28063  | Skybuilders' Scrip      |<br/>
     /// | 28186  | Fae Fancy               |<br/>
     /// | 28187  | Qitari Compliment       |<br/>
     /// | 28188  | Hammered Frogment       |<br/>
-    /// | 41629  | MGF                     |<br/>
-    /// | 37854  | Omicron Omnitoken       |<br/>
-    /// | 28063  | Skybuilders' Scrip      |<br/>
-    /// | 26533  | Sack of Nuts            |<br/>
-    /// | 38952  | Loporrit Carat          |<br/>
-    /// | 21935  | Ananta Dreamstaff       |<br/>
+    /// | 30341  | Faux Leaf               |<br/>
     /// | 36656  | Trophy Crystal          |<br/>
     /// | 36657  | Arkasodara Pana         |<br/>
-    /// | 21172  | Achievement Certificate |<br/>
-    /// | 21173  |                         |<br/>
-    /// | 26807  | Bicolor Gemstone        |<br/>
+    /// | 37854  | Omicron Omnitoken       |<br/>
+    /// | 38534  | Sil'dihn Silver         |<br/>
+    /// | 38952  | Loporrit Carat          |<br/>
+    /// | 39885  | Shishu Coin             |<br/>
     /// | 41079  | Aloalo Coin             |<br/>
-    /// | 22525  | Namazu Koban            |<br/>
+    /// | 41629  | MGF                     |<br/>
     /// | 44472  | Pelu Pelplume           |<br/>
+    /// | 46178  | Yok Huy Ward            |<br/>
+    /// | 48084  | Mamool Ja Nanook        |<br/>
+    /// | 49124  |                         |<br/>
+    /// | 49125  |                         |<br/>
     /// |--------|-------------------------|
     /// </code>
     /// </remarks>
@@ -69,123 +73,123 @@ public unsafe partial struct CurrencyManager {
     /// <remarks>
     /// This bucket is known to contain the following items:<br/>
     /// <code>
-    /// |--------|---------------------------|<br/>
-    /// | ItemId | Item Name                 |<br/>
-    /// |--------|---------------------------|<br/>
+    /// |--------|----------------------------|<br/>
+    /// | ItemId | Item Name                  |<br/>
+    /// |--------|----------------------------|<br/>
     /// | 31135  | Bozjan Cluster            |<br/>
-    /// | 33138  |                           |<br/>
-    /// | 37549  | Seafarer's Cowrie         |<br/>
-    /// | 37550  | Islander's Cowrie         |<br/>
-    /// | 37551  | Island Palm Leaf          |<br/>
-    /// | 37552  | Island Apple              |<br/>
-    /// | 37553  | Island Branch             |<br/>
-    /// | 37554  | Island Stone              |<br/>
-    /// | 37555  | Island Clam               |<br/>
-    /// | 37556  | Island Laver              |<br/>
-    /// | 37557  | Island Coral              |<br/>
-    /// | 37558  | Islewort                  |<br/>
-    /// | 37559  | Island Sand               |<br/>
-    /// | 37560  | Island Log                |<br/>
-    /// | 37561  | Island Palm Log           |<br/>
-    /// | 37562  | Island Vine               |<br/>
-    /// | 37563  | Island Sap                |<br/>
-    /// | 37564  | Island Copper Ore         |<br/>
-    /// | 37565  | Island Limestone          |<br/>
-    /// | 37566  | Island Rock Salt          |<br/>
-    /// | 37567  | Island Sugarcane          |<br/>
-    /// | 37568  | Island Cotton Boll        |<br/>
-    /// | 37569  | Island Hemp               |<br/>
-    /// | 37570  | Island Clay               |<br/>
-    /// | 37571  | Island Tinsand            |<br/>
-    /// | 37572  | Island Iron Ore           |<br/>
-    /// | 37573  | Island Quartz             |<br/>
-    /// | 37574  | Island Leucogranite       |<br/>
-    /// | 37575  | Islefish                  |<br/>
-    /// | 37576  | Island Squid              |<br/>
-    /// | 37577  | Island Jellyfish          |<br/>
-    /// | 37578  | Island Alyssum            |<br/>
-    /// | 37579  | Raw Island Garnet         |<br/>
-    /// | 37580  | Island Spruce Log         |<br/>
-    /// | 37581  | Island Hammerhead         |<br/>
-    /// | 37582  | Island Silver Ore         |<br/>
-    /// | 37583  | Island Popoto Set         |<br/>
-    /// | 37584  | Island Cabbage Seeds      |<br/>
-    /// | 37585  | Isleberry Seeds           |<br/>
-    /// | 37586  | Island Pumpkin Seeds      |<br/>
-    /// | 37587  | Island Onion Set          |<br/>
-    /// | 37588  | Island Tomato Seeds       |<br/>
-    /// | 37589  | Island Wheat Seeds        |<br/>
-    /// | 37590  | Island Corn Seeds         |<br/>
-    /// | 37591  | Island Parsnip Seeds      |<br/>
-    /// | 37592  | Island Radish Seeds       |<br/>
-    /// | 37593  | Island Popoto             |<br/>
-    /// | 37594  | Island Cabbage            |<br/>
-    /// | 37595  | Isleberry                 |<br/>
-    /// | 37596  | Island Pumpkin            |<br/>
-    /// | 37597  | Island Onion              |<br/>
-    /// | 37598  | Island Tomato             |<br/>
-    /// | 37599  | Island Wheat              |<br/>
-    /// | 37600  | Island Corn               |<br/>
-    /// | 37601  | Island Parsnip            |<br/>
-    /// | 37602  | Island Radish             |<br/>
-    /// | 37603  | Sanctuary Fleece          |<br/>
-    /// | 37604  | Sanctuary Claw            |<br/>
-    /// | 37605  | Sanctuary Fur             |<br/>
-    /// | 37606  | Sanctuary Feather         |<br/>
-    /// | 37607  | Sanctuary Egg             |<br/>
-    /// | 37608  | Sanctuary Carapace        |<br/>
-    /// | 37609  | Sanctuary Fang            |<br/>
-    /// | 37610  | Sanctuary Horn            |<br/>
-    /// | 37611  | Sanctuary Milk            |<br/>
-    /// | 37612  | Island Sweetfeed          |<br/>
-    /// | 37613  | Island Greenfeed          |<br/>
-    /// | 37614  | Premium Island Greenfeed  |<br/>
-    /// | 37615  | Makeshift Net             |<br/>
-    /// | 37616  | Makeshift Restraint       |<br/>
-    /// | 37617  | Makeshift Soporific       |<br/>
-    /// | 39224  | Island Resin              |<br/>
-    /// | 39225  | Island Coconut            |<br/>
-    /// | 39226  | Island Beehive Chip       |<br/>
-    /// | 39227  | Island Wood Opal          |<br/>
-    /// | 39228  | Multicolored Isleblooms   |<br/>
-    /// | 39229  | Island Paprika Seeds      |<br/>
-    /// | 39230  | Island Leek Set           |<br/>
-    /// | 39231  | Island Paprika            |<br/>
-    /// | 39232  | Island Leek               |<br/>
-    /// | 39887  | Island Coal               |<br/>
-    /// | 39888  | Island Shale              |<br/>
-    /// | 39889  | Island Glimshroom         |<br/>
-    /// | 39890  | Island Marble             |<br/>
-    /// | 39891  | Island Mythril Ore        |<br/>
-    /// | 39892  | Island Effervescent Water |<br/>
-    /// | 39893  | Island Spectrine          |<br/>
-    /// | 39894  | Island Cave Shrimp        |<br/>
-    /// | 39895  | Island Runner Bean Seeds  |<br/>
-    /// | 39896  | Island Beet Seeds         |<br/>
-    /// | 39897  | Island Eggplant Seeds     |<br/>
-    /// | 39898  | Island Zucchini Seeds     |<br/>
-    /// | 39899  | Island Runner Beans       |<br/>
-    /// | 39900  | Island Beet               |<br/>
-    /// | 39901  | Island Eggplant           |<br/>
-    /// | 39902  | Island Zucchini           |<br/>
-    /// | 41630  | Island Durium Sand        |<br/>
-    /// | 41631  | Island Yellow Copper Ore  |<br/>
-    /// | 41632  | Island Gold Ore           |<br/>
-    /// | 41633  | Island Hawk's Eye Sand    |<br/>
-    /// | 41634  | Island Crystal Formation  |<br/>
-    /// | 41635  | Island Watermelon         |<br/>
-    /// | 41636  | Island Sweet Popoto       |<br/>
-    /// | 41637  | Island Broccoli           |<br/>
-    /// | 41638  | Island Buffalo Beans      |<br/>
-    /// | 41639  | Island Watermelon Seeds   |<br/>
-    /// | 41640  | Island Sweet Popoto Set   |<br/>
-    /// | 41641  | Island Broccoli Seeds     |<br/>
-    /// | 41642  | Island Buffalo Bean Seeds |<br/>
-    /// | 41643  | Flawless Net              |<br/>
-    /// | 41644  | Flawless Restraints       |<br/>
-    /// | 41645  | Flawless Soporifics       |<br/>
-    /// | 41668  | Felicitous Token          |<br/>
-    /// |--------|---------------------------|
+    /// | 33138  | (YoRHa Questline Progress) |<br/>
+    /// | 37549  | Seafarer's Cowrie          |<br/>
+    /// | 37550  | Islander's Cowrie          |<br/>
+    /// | 37551  | Island Palm Leaf           |<br/>
+    /// | 37552  | Island Apple               |<br/>
+    /// | 37553  | Island Branch              |<br/>
+    /// | 37554  | Island Stone               |<br/>
+    /// | 37555  | Island Clam                |<br/>
+    /// | 37556  | Island Laver               |<br/>
+    /// | 37557  | Island Coral               |<br/>
+    /// | 37558  | Islewort                   |<br/>
+    /// | 37559  | Island Sand                |<br/>
+    /// | 37560  | Island Log                 |<br/>
+    /// | 37561  | Island Palm Log            |<br/>
+    /// | 37562  | Island Vine                |<br/>
+    /// | 37563  | Island Sap                 |<br/>
+    /// | 37564  | Island Copper Ore          |<br/>
+    /// | 37565  | Island Limestone           |<br/>
+    /// | 37566  | Island Rock Salt           |<br/>
+    /// | 37567  | Island Sugarcane           |<br/>
+    /// | 37568  | Island Cotton Boll         |<br/>
+    /// | 37569  | Island Hemp                |<br/>
+    /// | 37570  | Island Clay                |<br/>
+    /// | 37571  | Island Tinsand             |<br/>
+    /// | 37572  | Island Iron Ore            |<br/>
+    /// | 37573  | Island Quartz              |<br/>
+    /// | 37574  | Island Leucogranite        |<br/>
+    /// | 37575  | Islefish                   |<br/>
+    /// | 37576  | Island Squid               |<br/>
+    /// | 37577  | Island Jellyfish           |<br/>
+    /// | 37578  | Island Alyssum             |<br/>
+    /// | 37579  | Raw Island Garnet          |<br/>
+    /// | 37580  | Island Spruce Log          |<br/>
+    /// | 37581  | Island Hammerhead          |<br/>
+    /// | 37582  | Island Silver Ore          |<br/>
+    /// | 37583  | Island Popoto Set          |<br/>
+    /// | 37584  | Island Cabbage Seeds       |<br/>
+    /// | 37585  | Isleberry Seeds            |<br/>
+    /// | 37586  | Island Pumpkin Seeds       |<br/>
+    /// | 37587  | Island Onion Set           |<br/>
+    /// | 37588  | Island Tomato Seeds        |<br/>
+    /// | 37589  | Island Wheat Seeds         |<br/>
+    /// | 37590  | Island Corn Seeds          |<br/>
+    /// | 37591  | Island Parsnip Seeds       |<br/>
+    /// | 37592  | Island Radish Seeds        |<br/>
+    /// | 37593  | Island Popoto              |<br/>
+    /// | 37594  | Island Cabbage             |<br/>
+    /// | 37595  | Isleberry                  |<br/>
+    /// | 37596  | Island Pumpkin             |<br/>
+    /// | 37597  | Island Onion               |<br/>
+    /// | 37598  | Island Tomato              |<br/>
+    /// | 37599  | Island Wheat               |<br/>
+    /// | 37600  | Island Corn                |<br/>
+    /// | 37601  | Island Parsnip             |<br/>
+    /// | 37602  | Island Radish              |<br/>
+    /// | 37603  | Sanctuary Fleece           |<br/>
+    /// | 37604  | Sanctuary Claw             |<br/>
+    /// | 37605  | Sanctuary Fur              |<br/>
+    /// | 37606  | Sanctuary Feather          |<br/>
+    /// | 37607  | Sanctuary Egg              |<br/>
+    /// | 37608  | Sanctuary Carapace         |<br/>
+    /// | 37609  | Sanctuary Fang             |<br/>
+    /// | 37610  | Sanctuary Horn             |<br/>
+    /// | 37611  | Sanctuary Milk             |<br/>
+    /// | 37612  | Island Sweetfeed           |<br/>
+    /// | 37613  | Island Greenfeed           |<br/>
+    /// | 37614  | Premium Island Greenfeed   |<br/>
+    /// | 37615  | Makeshift Net              |<br/>
+    /// | 37616  | Makeshift Restraint        |<br/>
+    /// | 37617  | Makeshift Soporific        |<br/>
+    /// | 39224  | Island Resin               |<br/>
+    /// | 39225  | Island Coconut             |<br/>
+    /// | 39226  | Island Beehive Chip        |<br/>
+    /// | 39227  | Island Wood Opal           |<br/>
+    /// | 39228  | Multicolored Isleblooms    |<br/>
+    /// | 39229  | Island Paprika Seeds       |<br/>
+    /// | 39230  | Island Leek Set            |<br/>
+    /// | 39231  | Island Paprika             |<br/>
+    /// | 39232  | Island Leek                |<br/>
+    /// | 39887  | Island Coal                |<br/>
+    /// | 39888  | Island Shale               |<br/>
+    /// | 39889  | Island Glimshroom          |<br/>
+    /// | 39890  | Island Marble              |<br/>
+    /// | 39891  | Island Mythril Ore         |<br/>
+    /// | 39892  | Island Effervescent Water  |<br/>
+    /// | 39893  | Island Spectrine           |<br/>
+    /// | 39894  | Island Cave Shrimp         |<br/>
+    /// | 39895  | Island Runner Bean Seeds   |<br/>
+    /// | 39896  | Island Beet Seeds          |<br/>
+    /// | 39897  | Island Eggplant Seeds      |<br/>
+    /// | 39898  | Island Zucchini Seeds      |<br/>
+    /// | 39899  | Island Runner Beans        |<br/>
+    /// | 39900  | Island Beet                |<br/>
+    /// | 39901  | Island Eggplant            |<br/>
+    /// | 39902  | Island Zucchini            |<br/>
+    /// | 41630  | Island Durium Sand         |<br/>
+    /// | 41631  | Island Yellow Copper Ore   |<br/>
+    /// | 41632  | Island Gold Ore            |<br/>
+    /// | 41633  | Island Hawk's Eye Sand     |<br/>
+    /// | 41634  | Island Crystal Formation   |<br/>
+    /// | 41635  | Island Watermelon          |<br/>
+    /// | 41636  | Island Sweet Popoto        |<br/>
+    /// | 41637  | Island Broccoli            |<br/>
+    /// | 41638  | Island Buffalo Beans       |<br/>
+    /// | 41639  | Island Watermelon Seeds    |<br/>
+    /// | 41640  | Island Sweet Popoto Set    |<br/>
+    /// | 41641  | Island Broccoli Seeds      |<br/>
+    /// | 41642  | Island Buffalo Bean Seeds  |<br/>
+    /// | 41643  | Flawless Net               |<br/>
+    /// | 41644  | Flawless Restraint         |<br/>
+    /// | 41645  | Flawless Soporific         |<br/>
+    /// | 41668  | Felicitous Token           |<br/>
+    /// |--------|----------------------------|
     /// </code>
     /// </remarks>
     [FieldOffset(0x20)] public StdMap<uint, ContentCurrencyItem> ContentItemBucket;
