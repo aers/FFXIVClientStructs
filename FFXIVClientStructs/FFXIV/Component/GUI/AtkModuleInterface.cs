@@ -60,6 +60,9 @@ public unsafe partial struct AtkModuleInterface {
     [VirtualFunction(40)]
     public partial SoftKeyboardDeviceInterface* GetSoftKeyboardDeviceInterface();
 
+    [VirtualFunction(66)]
+    public partial void OnCursorTypeChange(AtkCursor.CursorType cursorType);
+
     // Component::GUI::AtkModuleInterface::AtkEventInterface
     // no explicit constructor, just an event interface 
     [GenerateInterop(isInherited: true)]

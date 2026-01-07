@@ -41,6 +41,8 @@ public unsafe partial struct RaptureAtkModule {
     [FieldOffset(0x11B68)] public StdVector<Utf8String> AddonNames;
     [FieldOffset(0x11B80)] public AddonConfig* AddonConfigPtr;
 
+    [FieldOffset(0x11B8A)] public AtkCursor.CursorType CursorType;
+
     // [FieldOffset(0x11B90)] public ProhibitModule ProhibitModule;
     [FieldOffset(0x11C28)] public int AudioClientRpcTagSize;
 
