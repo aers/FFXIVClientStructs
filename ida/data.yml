@@ -2865,9 +2865,10 @@ classes:
       0x140B4AD90: GetRelicID
       0x140B4ADA0: GetRelicNoteID
       0x140B4ADB0: GetMonsterProgress
-      0x140B4AED0: IsDungeonComplete
       0x140B4AE50: IsFateComplete
       0x140B4AE90: IsLeveComplete
+      0x140B4AED0: IsDungeonComplete
+      0x140B4B850: IsMonsterNoteTarget
   Client::Game::UI::MateriaTrade:
     vtbls:
       - ea: 0x1420D0700
