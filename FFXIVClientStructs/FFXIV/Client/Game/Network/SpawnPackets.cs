@@ -25,6 +25,23 @@ public partial struct SpawnNpcPacket {
 }
 
 [GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x292)]
+public partial struct SpawnPlayerPacket {
+    [FieldOffset(0x00)] public ulong AccountId;
+    [FieldOffset(0x08)] public ulong ContentId;
+    [FieldOffset(0x10)] public ushort TitleId;
+    [FieldOffset(0x12)] public ushort TimelineBaseOverride;
+    [FieldOffset(0x14)] public ushort CurrentWorldId;
+    [FieldOffset(0x16)] public ushort HomeWorldId;
+    [FieldOffset(0x18)] public byte GMRank;
+    [FieldOffset(0x19)] private ushort Unk19; // Character+0x1CE0
+    [FieldOffset(0x1B)] private byte OnlineStatus;
+    [FieldOffset(0x1C)] private byte Pose; // 4 bits PoseType, 4 bits CPoseState
+    [FieldOffset(0x1D)] private ushort Unk1D; // GameObject+0x32
+    [FieldOffset(0x20)] public CommonSpawnData Common;
+}
+
+[GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x272)]
 public partial struct CommonSpawnData {
     [FieldOffset(0x00)] public GameObjectId TargetId;
