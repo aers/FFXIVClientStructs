@@ -97,7 +97,7 @@ public unsafe partial struct DrawDataContainer {
     public enum WeaponSlot : uint {
         MainHand = 0,
         OffHand = 1,
-        Unk = 2,
+        Unk = 2, // TODO: CraftTool?
     }
 
     public bool IsHatHidden {

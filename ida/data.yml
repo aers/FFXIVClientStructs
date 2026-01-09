@@ -10513,6 +10513,8 @@ classes:
       0x141934AB0: SetEurekaRank
       0x141934AE0: SetEurekaElement
       0x141934B10: SetBozjaRank
+      0x141934B40: SetOccultCrescentRank
+      0x141934B70: SetOccultCrescentElement
   Client::Game::Control::CharacterLookAtController:
     vtbls:
       - ea: 0x1420A1878

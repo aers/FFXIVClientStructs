@@ -21,6 +21,7 @@ public unsafe partial struct GameObject {
     [FieldOffset(0x70)] public byte EventState;
     [FieldOffset(0x78)] public uint EntityId;
     [FieldOffset(0x7C)] public uint LayoutId;
+    [FieldOffset(0x80)] public uint GimmickId;
     [FieldOffset(0x84)] public uint BaseId;
     [FieldOffset(0x88)] public uint OwnerId;
     [FieldOffset(0x8C)] public ushort ObjectIndex; // index in object table

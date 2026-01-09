@@ -1,0 +1,98 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Character;
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
+using FFXIVClientStructs.FFXIV.Client.UI.Agent;
+
+namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x22E)]
+public partial struct SpawnNpcPacket {
+    [FieldOffset(0x00)] public uint GimmickId;
+    [FieldOffset(0x04)] private uint Unk4; // Character+0x1BC0
+    [FieldOffset(0x08)] public byte CharacterDataFlags; // CharacterData.Flags
+    [FieldOffset(0x09)] public byte CharacterDataIcon; // CharacterData.Icon
+    [FieldOffset(0x0A)] private byte UnkA; // flag to toggle 2 on Character+0x48
+    [FieldOffset(0x0B)] private byte UnkB; // Character+0x41 Pose?
+    [FieldOffset(0x0C)] private byte UnkC; // Character+0x42
+    [FieldOffset(0x0D)] private byte UnkD; // Character+0x44
+    [FieldOffset(0x0E)] private byte UnkE; // Character+0x43
+    [FieldOffset(0x0F)] private byte UnkF; // flag to toggle 1 on Character+0x48
+    [FieldOffset(0x10)] public CommonSpawnData Common;
+
+    [FieldOffset(0x228)] private byte Unk228; // SubKind == 1 ? ModelContainer+0x39 : ModelContainer+0x3A
+    [FieldOffset(0x229)] private byte Unk229; // ModelContainer+0x3B
+    [FieldOffset(0x22A)] private uint Unk22A; // ModelContainer+0x3C
+}
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x272)]
+public partial struct CommonSpawnData {
+    [FieldOffset(0x00)] public GameObjectId TargetId;
+    [FieldOffset(0x08)] public CrestData FreeCompanyCrestData;
+    [FieldOffset(0x10)] public WeaponModelId MainhandWeaponModel;
+    [FieldOffset(0x18)] public WeaponModelId OffhandWeaponModel;
+    [FieldOffset(0x20)] public WeaponModelId CraftToolModel;
+    [FieldOffset(0x28)] private GameObjectId CombatTaggerId;
+    [FieldOffset(0x30)] public uint BNpcBaseId;
+    [FieldOffset(0x34)] public uint BNpcNameId;
+    [FieldOffset(0x38)] private uint LayoutId; // gap?
+    [FieldOffset(0x3C)] public uint ObjectType; // depends on ObjectKind? can be CompanionOwnerId, can also be FurnitureMemory index
+    [FieldOffset(0x40)] public uint EventId;
+    [FieldOffset(0x44)] public uint OwnerId;
+    [FieldOffset(0x48)] public uint TetherTargetId;
+    [FieldOffset(0x4C)] public uint MaxHealthPoints;
+    [FieldOffset(0x50)] public uint HealthPoints;
+    [FieldOffset(0x54)] public uint DisplayFlags;
+    [FieldOffset(0x58)] public ushort FateId;
+    [FieldOffset(0x5A)] public ushort MaxResourcePoints; // MP/GP/CP
+    [FieldOffset(0x5C)] public ushort ResourcePoints;
+    [FieldOffset(0x5E)] private ushort Unk5E;
+    [FieldOffset(0x60)] private ushort ModelChara;
+    [FieldOffset(0x62)] public ushort Rotation;
+    [FieldOffset(0x64)] public ushort MountId;
+    [FieldOffset(0x66)] public ushort CompanionId;
+    [FieldOffset(0x68)] public ushort FollowMountId;
+    [FieldOffset(0x6A)] public ushort OrnamentId;
+    [FieldOffset(0x6C)] public ushort TetherId;
+    [FieldOffset(0x6E)] public byte SpawnIndex; // unk
+    [FieldOffset(0x6F)] public CharacterModes CharacterMode;
+    [FieldOffset(0x70)] public byte ModeParam;
+    [FieldOffset(0x71)] public ObjectKind ObjectKind;
+    [FieldOffset(0x72)] public byte SubKind;
+    [FieldOffset(0x73)] public byte VoiceId;
+    [FieldOffset(0x74)] public byte FreeCompanyCrestBitfield;
+    [FieldOffset(0x75)] public byte Battalion;
+    [FieldOffset(0x76)] public byte Level;
+    [FieldOffset(0x77)] public byte ClassJobId;
+    [FieldOffset(0x78)] public byte EventState;
+    [FieldOffset(0x79)] private byte Unk79;
+    [FieldOffset(0x7A)] private byte CombatTagType;
+    [FieldOffset(0x7B)] public byte BuddyEquipHead;
+    [FieldOffset(0x7C)] public byte BuddyEquipChest;
+    [FieldOffset(0x7D)] public byte BuddyEquipFeet;
+    [FieldOffset(0x7E)] public byte BuddyStain;
+    [FieldOffset(0x7F)] public byte StatusLoopVfxId;
+    [FieldOffset(0x80)] public byte ForayRank;
+    [FieldOffset(0x81)] public byte ForayElement;
+    [FieldOffset(0x82)] private byte Unk82; // ModelContainer+0x21
+    [FieldOffset(0x83)] public byte ModelState; // Timeline.ModelState
+    [FieldOffset(0x84)] private byte Unk84; // ModelContainer+0x22
+    [FieldOffset(0x85)] public byte AnimationState; // Timeline.AnimationState, 4 bits each
+
+    [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray30<StatusEffect> _statusEffects;
+    [FieldOffset(0x1F0)] public global::System.Numerics.Vector3 Position;
+    [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray10<LegacyEquipmentModelId> _equipmentModelIds;
+    [FieldOffset(0x224), FixedSizeArray] internal FixedSizeArray10<byte> _modelStain2Ids;
+    [FieldOffset(0x22E), FixedSizeArray] internal FixedSizeArray2<ushort> _glassesIds;
+    [FieldOffset(0x232), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
+    [FieldOffset(0x252)] public CustomizeData CustomizeData;
+    [FieldOffset(0x26C), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
+    public struct StatusEffect {
+        [FieldOffset(0x0)] public ushort StatusId;
+        [FieldOffset(0x2)] public ushort Param;
+        [FieldOffset(0x4)] public float RemainingTime;
+        [FieldOffset(0x8)] public uint SourceObjectId;
+    }
+}
