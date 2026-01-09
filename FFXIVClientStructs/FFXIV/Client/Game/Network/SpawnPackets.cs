@@ -18,14 +18,13 @@ public partial struct SpawnNpcPacket {
     [FieldOffset(0x0E)] private byte UnkE; // Character+0x43
     [FieldOffset(0x0F)] private byte UnkF; // flag to toggle 1 on Character+0x48
     [FieldOffset(0x10)] public CommonSpawnData Common;
-
     [FieldOffset(0x228)] private byte Unk228; // SubKind == 1 ? ModelContainer+0x39 : ModelContainer+0x3A
     [FieldOffset(0x229)] private byte Unk229; // ModelContainer+0x3B
     [FieldOffset(0x22A)] private uint Unk22A; // ModelContainer+0x3C
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x292)]
+[StructLayout(LayoutKind.Explicit, Size = 0x294)]
 public partial struct SpawnPlayerPacket {
     [FieldOffset(0x00)] public ulong AccountId;
     [FieldOffset(0x08)] public ulong ContentId;
@@ -38,11 +37,12 @@ public partial struct SpawnPlayerPacket {
     [FieldOffset(0x1B)] private byte OnlineStatus;
     [FieldOffset(0x1C)] private byte Pose; // 4 bits PoseType, 4 bits CPoseState
     [FieldOffset(0x1D)] private ushort Unk1D; // GameObject+0x32
+    [FieldOffset(0x1F)] private byte Unk1F; // padding!?
     [FieldOffset(0x20)] public CommonSpawnData Common;
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x272)]
+[StructLayout(LayoutKind.Explicit, Size = 0x278)]
 public partial struct CommonSpawnData {
     [FieldOffset(0x00)] public GameObjectId TargetId;
     [FieldOffset(0x08)] public CrestData FreeCompanyCrestData;
@@ -52,7 +52,7 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x28)] public GameObjectId CombatTaggerId;
     [FieldOffset(0x30)] public uint BNpcBaseId;
     [FieldOffset(0x34)] public uint BNpcNameId;
-    [FieldOffset(0x38)] public uint LayoutId; // unused?
+    [FieldOffset(0x38)] public uint LayoutId;
     [FieldOffset(0x3C)] public uint ObjectType; // depends on ObjectKind? can be CompanionOwnerId, can also be FurnitureMemory index
     [FieldOffset(0x40)] public uint EventId;
     [FieldOffset(0x44)] public uint OwnerId;
