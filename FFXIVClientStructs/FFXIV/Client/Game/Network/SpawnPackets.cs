@@ -32,10 +32,10 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x10)] public WeaponModelId MainhandWeaponModel;
     [FieldOffset(0x18)] public WeaponModelId OffhandWeaponModel;
     [FieldOffset(0x20)] public WeaponModelId CraftToolModel;
-    [FieldOffset(0x28)] private GameObjectId CombatTaggerId;
+    [FieldOffset(0x28)] public GameObjectId CombatTaggerId;
     [FieldOffset(0x30)] public uint BNpcBaseId;
     [FieldOffset(0x34)] public uint BNpcNameId;
-    [FieldOffset(0x38)] private uint LayoutId; // gap?
+    [FieldOffset(0x38)] public uint LayoutId; // unused?
     [FieldOffset(0x3C)] public uint ObjectType; // depends on ObjectKind? can be CompanionOwnerId, can also be FurnitureMemory index
     [FieldOffset(0x40)] public uint EventId;
     [FieldOffset(0x44)] public uint OwnerId;
@@ -47,14 +47,14 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x5A)] public ushort MaxResourcePoints; // MP/GP/CP
     [FieldOffset(0x5C)] public ushort ResourcePoints;
     [FieldOffset(0x5E)] private ushort Unk5E;
-    [FieldOffset(0x60)] private ushort ModelChara;
+    [FieldOffset(0x60)] public ushort ModelChara;
     [FieldOffset(0x62)] public ushort Rotation;
     [FieldOffset(0x64)] public ushort MountId;
     [FieldOffset(0x66)] public ushort CompanionId;
     [FieldOffset(0x68)] public ushort FollowMountId;
     [FieldOffset(0x6A)] public ushort OrnamentId;
     [FieldOffset(0x6C)] public ushort TetherId;
-    [FieldOffset(0x6E)] public byte SpawnIndex; // unk
+    [FieldOffset(0x6E)] public byte SpawnIndex; // unused
     [FieldOffset(0x6F)] public CharacterModes CharacterMode;
     [FieldOffset(0x70)] public byte ModeParam;
     [FieldOffset(0x71)] public ObjectKind ObjectKind;
@@ -65,8 +65,8 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x76)] public byte Level;
     [FieldOffset(0x77)] public byte ClassJobId;
     [FieldOffset(0x78)] public byte EventState;
-    [FieldOffset(0x79)] private byte Unk79;
-    [FieldOffset(0x7A)] private byte CombatTagType;
+    [FieldOffset(0x79)] private byte Unk79; // GameObject+0x97
+    [FieldOffset(0x7A)] public byte CombatTagType;
     [FieldOffset(0x7B)] public byte BuddyEquipHead;
     [FieldOffset(0x7C)] public byte BuddyEquipChest;
     [FieldOffset(0x7D)] public byte BuddyEquipFeet;
