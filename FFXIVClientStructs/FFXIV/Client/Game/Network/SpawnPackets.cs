@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x22E)]
+[StructLayout(LayoutKind.Explicit, Size = 0x28E)]
 public partial struct SpawnNpcPacket {
     [FieldOffset(0x00)] public uint GimmickId;
     [FieldOffset(0x04)] private uint Unk4; // Character+0x1BC0
@@ -18,13 +18,13 @@ public partial struct SpawnNpcPacket {
     [FieldOffset(0x0E)] private byte UnkE; // Character+0x43
     [FieldOffset(0x0F)] private byte UnkF; // flag to toggle 1 on Character+0x48
     [FieldOffset(0x10)] public CommonSpawnData Common;
-    [FieldOffset(0x228)] private byte Unk228; // SubKind == 1 ? ModelContainer+0x39 : ModelContainer+0x3A
-    [FieldOffset(0x229)] private byte Unk229; // ModelContainer+0x3B
-    [FieldOffset(0x22A)] private uint Unk22A; // ModelContainer+0x3C
+    [FieldOffset(0x288)] private byte Unk288; // SubKind == 1 ? ModelContainer+0x39 : ModelContainer+0x3A
+    [FieldOffset(0x289)] private byte Unk289; // ModelContainer+0x3B
+    [FieldOffset(0x28A)] private uint Unk28A; // ModelContainer+0x3C
 }
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x294)]
+[StructLayout(LayoutKind.Explicit, Size = 0x298)]
 public partial struct SpawnPlayerPacket {
     [FieldOffset(0x00)] public ulong AccountId;
     [FieldOffset(0x08)] public ulong ContentId;
