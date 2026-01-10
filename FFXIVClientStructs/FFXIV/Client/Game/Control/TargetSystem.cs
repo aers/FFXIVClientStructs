@@ -12,6 +12,7 @@ public unsafe partial struct TargetSystem {
     [FieldOffset(0x80)] public GameObject* Target;
     [FieldOffset(0x88)] public GameObject* SoftTarget;
     [FieldOffset(0x98)] public GameObject* GPoseTarget;
+    [FieldOffset(0xA0)] public GameObject* IdleCamTarget;
     [FieldOffset(0xD0)] public GameObject* MouseOverTarget;
     [FieldOffset(0xE0)] public GameObject* MouseOverNameplateTarget;
     [FieldOffset(0xF8)] public GameObject* FocusTarget;
