@@ -7,6 +7,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 //     Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
 //     Client::System::Common::NonCopyable
 [GenerateInterop]
+[Inherits<ISoundData>]
 [StructLayout(LayoutKind.Explicit, Size = 0xD0)]
 public unsafe partial struct SoundData {
     [FieldOffset(0x28)] public SoundResourceHandle* SoundResourceHandle;
