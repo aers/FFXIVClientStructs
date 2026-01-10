@@ -7,9 +7,21 @@ namespace FFXIVClientStructs.FFXIV.Client.Game.UI;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x2850)]
 public partial struct NpcYell {
+
+    /// <remarks>
+    /// Entries at index <see cref="UnhandledYellCount"/> and above are stale.
+    /// </remarks>
     [FieldOffset(0x48), FixedSizeArray] internal FixedSizeArray32<NpcYellSlot> _yellSlots;
+
+    /// <remarks>
+    /// Entries at index <see cref="UnhandledYellCount"/> and above are stale.
+    /// </remarks>
     [FieldOffset(0x548), FixedSizeArray] internal FixedSizeArray32<NpcYellInfo> _yellInfo;
-    [FieldOffset(0x2848)] private short Unk_2848; // Probably number of unhandled yells.
+
+    /// <summary>
+    /// The number of new <see cref="YellSlots"/> and <see cref="YellInfo"/> entries that have not yet been handled.
+    /// </summary>
+    [FieldOffset(0x2848)] public short UnhandledYellCount;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct NpcYellSlot {
@@ -58,7 +70,7 @@ public partial struct NpcYell {
         [FieldOffset(0x104)] public NpcYellOutputFlags OutputType;
 
         /// <remarks>
-        /// Controls which UIModule::ShowBattleTalk is called.
+        /// Controls which UIModule::ShowBattleTalk overload is called.
         /// </remarks>
         [FieldOffset(0x108)] private uint Unk_108;
 
