@@ -4,5 +4,5 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 //   Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
 //   Client::System::Common::NonCopyable
 [GenerateInterop(isInherited: true)]
-[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+[StructLayout(LayoutKind.Explicit, Size = 0x28)]
 public unsafe partial struct ISoundData;
