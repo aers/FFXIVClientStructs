@@ -8,7 +8,7 @@ public unsafe partial struct CameraManager {
 
     /// <summary>
     /// [0] Camera (normal in-game camera)<br/>
-    /// [1] LowCutCamera (idle cam)<br/>
+    /// [1] LowCutCamera<br/>
     /// [2] LobbyCamera<br/>
     /// [3] SpectatorCamera<br/>
     /// [4] AimingCamera
