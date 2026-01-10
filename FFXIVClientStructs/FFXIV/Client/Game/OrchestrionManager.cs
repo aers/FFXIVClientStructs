@@ -33,7 +33,7 @@ public unsafe partial struct OrchestrionManager {
     /// <remarks>
     /// Positional and intended to stop when the UI window closes.<br/>
     /// Position and TrackId saved in <see cref="OrchestrionSampleState"/>.<br/>
-    /// Sets <see cref="Mode"/> to <see cref="OrchestrionMode.Listen"/>.
+    /// Sets <see cref="Mode"/> to <see cref="OrchestrionMode.Sampling"/>.
     /// </remarks>
     [MemberFunction("40 53 48 83 EC ?? 0F B7 D9 E8 ?? ?? ?? ?? 48 8B C8")]
     public static partial void PlaySample(ushort id);
@@ -63,9 +63,9 @@ public unsafe partial struct OrchestrionSampleState {
 public enum OrchestrionMode {
     Off = 0,
     Playing = 1,
-    Listen = 2,
+    Sampling = 2,
     /// <remarks> Used in Island Sanctuary </remarks>
-    Loop = 3,
+    Looping = 3,
 }
 
 public enum OrchestrionPlayMode {
