@@ -30,6 +30,11 @@ public unsafe partial struct OrchestrionManager {
     [MemberFunction("40 53 48 83 EC ?? 0F B7 D9 B9 ?? ?? ?? ?? 8D 43")]
     public static partial void PlayTrack(ushort id);
 
+    /// <remarks>
+    /// Positional and intended to stop when the UI window closes.<br/>
+    /// Position and TrackId saved in <see cref="OrchestrionSampleState"/>.<br/>
+    /// Sets <see cref="Mode"/> to <see cref="OrchestrionMode.Listen"/>.
+    /// </remarks>
     [MemberFunction("40 53 48 83 EC ?? 0F B7 D9 E8 ?? ?? ?? ?? 48 8B C8")]
     public static partial void PlaySample(ushort id);
 
