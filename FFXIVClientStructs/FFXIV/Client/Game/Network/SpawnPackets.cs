@@ -5,7 +5,7 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 namespace FFXIVClientStructs.FFXIV.Client.Game.Network;
 
 [GenerateInterop]
-[StructLayout(LayoutKind.Explicit, Size = 0x28E)]
+[StructLayout(LayoutKind.Explicit, Size = 0x290)]
 public partial struct SpawnNpcPacket {
     [FieldOffset(0x00)] public uint GimmickId;
     [FieldOffset(0x04)] private uint Unk4; // Character+0x1BC0
