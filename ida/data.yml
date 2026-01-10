@@ -23784,8 +23784,8 @@ classes:
       2: UpdateState
       3: Update
       5: ResetAngles
-      6: GetPitch
-      7: GetYaw
+      6: CalculateSceneCameraPitch
+      7: CalculateSceneCameraYaw
       8: ResetAngles2
     funcs:
       0x1417E0430: ctor
