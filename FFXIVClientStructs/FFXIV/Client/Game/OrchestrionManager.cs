@@ -38,6 +38,7 @@ public unsafe partial struct OrchestrionManager {
     [MemberFunction("83 3D ?? ?? ?? ?? ?? 0F 84 ?? ?? ?? ?? C3")]
     public static partial void StopSample();
 
+    /// <remarks> Used in Island Sanctuary </remarks>
     [MemberFunction("48 83 EC ?? 66 83 3D ?? ?? ?? ?? 00 75")]
     public static partial bool IsInRange();
 }
