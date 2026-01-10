@@ -152,6 +152,9 @@ public unsafe partial struct GameObject {
     [VirtualFunction(69)]
     public partial bool IntersectsRay(Ray* ray, Vector3* outHitPosition, bool* outModelChecked);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B F8 B8")]
+    public partial Character.Character* GetAsCharacter();
+
     [MemberFunction("E8 ?? ?? ?? ?? 0F 28 74 24 ?? 80 3D")]
     public partial void SetDrawOffset(float x, float y, float z);
 
