@@ -1628,6 +1628,15 @@ classes:
       0x14081B260: ctor
       0x14081B300: Dtor
       0x14081B370: Request # (this, callbackInterface, commandId, arg1, arg2)
+  Client::Game::ContentsReplayManager:
+    vtbls:
+      - ea: 0x14299AFA0
+    funcs:
+      0x14081E100: ctor
+      0x14081E380: Initialize
+      0x14081E530: Update
+      0x14081E4A0: Termiante
+      0x14081E2B0: Finalizer
   Client::Game::InventoryManager:
     instances:
       - ea: 0x1429C6D60
