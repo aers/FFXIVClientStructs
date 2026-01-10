@@ -3571,6 +3571,8 @@ classes:
       - ea: 0x14208CB90
         base: Client::System::Threading::Thread
     funcs:
+      0x1403FEE60: AcquireSoundData
+      0x1403FEEE0: ReleaseSoundData
       0x1403FF1C0: GetEffectiveVolume
       0x1403FF5A0: ctor
       0x140401320: SetAlwaysOn

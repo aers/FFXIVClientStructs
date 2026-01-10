@@ -32,7 +32,9 @@ public unsafe partial struct SoundManager {
     [FieldOffset(0x01CB)] public bool SoundEnabled;
     [FieldOffset(0x01CC)] public bool WindowInactive;
 
-    [FieldOffset(0x0218)] public SoundDataMemory* SoundData; // This points to +8 bytes into the allocated memory.
+    [FieldOffset(0x0218)] public SoundDataMemory* SoundDataPool; // This points to +8 bytes into the allocated memory.
+    [FieldOffset(0x0220)] public SoundData* InactiveSoundDataListHead;
+    [FieldOffset(0x0228)] public SoundData* ActiveSoundDataListHead;
 
     [FieldOffset(0x02A0)] public nint CriticalSection;
 

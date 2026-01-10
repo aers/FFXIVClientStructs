@@ -5,4 +5,8 @@ namespace FFXIVClientStructs.FFXIV.Client.Sound;
 //   Client::System::Common::NonCopyable
 [GenerateInterop(isInherited: true)]
 [StructLayout(LayoutKind.Explicit, Size = 0x28)]
-public unsafe partial struct ISoundData;
+public unsafe partial struct ISoundData {
+    [FieldOffset(0x18)] public ISoundData* Next;
+
+    [FieldOffset(0x24)] public bool IsActive;
+}
