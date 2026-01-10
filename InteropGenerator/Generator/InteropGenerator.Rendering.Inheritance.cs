@@ -186,27 +186,44 @@ public sealed partial class InteropGenerator {
     }
 
     private static void RenderInheritedVirtualTable(StructInfo structInfo, ImmutableArray<(StructInfo inheritedStruct, string path, int offset)> resolvedInheritanceOrder, IndentedTextWriter writer) {
-        // write virtual function pointers from inherited structs using the child struct type as the "this" pointer
-        // StructLayout can't be duplicated so only write it if it hasnt been written before
-        if (!structInfo.HasVirtualTable())
-            writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
-        writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
-        using (writer.WriteBlock()) {
-            foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
-                // only inherited structs at offset 0 are the primary inheritance chain that make up the main virtual table
-                if (offset != 0)
-                    continue;
-                foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
-                    var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingType()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
-                    foreach (string inheritedAttribute in virtualFunctionInfo.MethodInfo.InheritableAttributes)
-                        writer.WriteLine(inheritedAttribute);
-                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
-                }
+        if (structInfo.IsGeneric) {
+            // write virtual function pointers from inherited structs using the child struct type as the "this" pointer
+            // StructLayout can't be duplicated so only write it if it hasnt been written before
+            if (!structInfo.HasVirtualTable())
+                writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
+            writer.WriteLine($"public unsafe partial struct {structInfo.Name[..^3]}VirtualTable");
+            WriteVirtualFunctions(writer);
+            // if the only virtual functions were inherited we need to write the vtable accessor
+            if (!structInfo.HasVirtualTable()) {
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name[..^3]}VirtualTable* VirtualTable;");
+            }
+        } else {
+            // write virtual function pointers from inherited structs using the child struct type as the "this" pointer
+            // StructLayout can't be duplicated so only write it if it hasnt been written before
+            if (!structInfo.HasVirtualTable())
+                writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
+            writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
+            WriteVirtualFunctions(writer);
+            // if the only virtual functions were inherited we need to write the vtable accessor
+            if (!structInfo.HasVirtualTable()) {
+                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
             }
         }
-        // if the only virtual functions were inherited we need to write the vtable accessor
-        if (!structInfo.HasVirtualTable()) {
-            writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
+
+        void WriteVirtualFunctions(IndentedTextWriter writer) {
+            using (writer.WriteBlock()) {
+                foreach ((StructInfo inheritedStruct, _, int offset) in resolvedInheritanceOrder) {
+                    // only inherited structs at offset 0 are the primary inheritance chain that make up the main virtual table
+                    if (offset != 0)
+                        continue;
+                    foreach (VirtualFunctionInfo virtualFunctionInfo in inheritedStruct.VirtualFunctions) {
+                        var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {virtualFunctionInfo.MethodInfo.GetParameterTypeStringWithTrailingType()}{virtualFunctionInfo.MethodInfo.ReturnType}>";
+                        foreach (string inheritedAttribute in virtualFunctionInfo.MethodInfo.InheritableAttributes)
+                            writer.WriteLine(inheritedAttribute);
+                        writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({virtualFunctionInfo.Index * 8})] public {functionPointerType} {virtualFunctionInfo.MethodInfo.Name};");
+                    }
+                }
+            }
         }
     }
 
