@@ -1,5 +1,6 @@
 using FFXIVClientStructs.FFXIV.Client.Sound;
 using FFXIVClientStructs.FFXIV.Common.Component.Excel;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Client.Game;
 
@@ -41,6 +42,17 @@ public unsafe partial struct OrchestrionManager {
     /// <remarks> Used in Island Sanctuary </remarks>
     [MemberFunction("48 83 EC ?? 66 83 3D ?? ?? ?? ?? 00 75")]
     public static partial bool IsInRange();
+}
+
+// Client::Game::OrchestrionSampleState
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x18)]
+public unsafe partial struct OrchestrionSampleState {
+    [StaticAddress("F3 0F 11 05 ?? ?? ?? ?? F3 0F 10 4A", 4)]
+    public static partial OrchestrionSampleState* Instance();
+
+    [FieldOffset(0x00)] public Vector3 Position;
+    [FieldOffset(0x10)] public ushort TrackId;
 }
 
 public enum OrchestrionMode {

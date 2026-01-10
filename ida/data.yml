@@ -1879,6 +1879,9 @@ classes:
       0x140DE1710: GetPlayMode
       0x140DE1720: SetPlaylist
       0x140DE1750: GetPlaylist
+  Client::Game::OrchestrionSampleState:
+    instances:
+      - ea: 0x1429E9E10
   Client::Game::HousingManager:
     instances:
       - ea: 0x1429E9DF8
