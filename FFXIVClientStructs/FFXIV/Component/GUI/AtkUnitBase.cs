@@ -326,6 +326,11 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(20)]
     public partial void OnMove();
 
+    /// <remarks> Only called on the current <see cref="AtkCollisionManager.IntersectingAddon"/> for cursor types ChatPointer, Attack and Clickable. </remarks>
+    /// <returns> <see langword="true"/> when a custom sound effect was played, <see langword="false"/> when default should be played (Sound Effect 0). </returns>
+    [VirtualFunction(22)]
+    public partial bool HandleCursorTypeChange();
+
     [VirtualFunction(23)]
     public partial bool ShouldIgnoreInputs();
 
