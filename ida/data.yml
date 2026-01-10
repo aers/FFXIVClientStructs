@@ -3592,13 +3592,14 @@ classes:
       0x140401BD0: SetMicPosition
       0x140402950: SetVolume #(this, type, float: volume
   Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>:
-    #vtbls:
-    #    base: Client::System::Common::NonCopyable
-  Client::Sound::ISoundData:
     vtbls:
       - ea: 0x14208C940
+        base: Client::System::Common::NonCopyable
+  Client::Sound::ISoundData:
+    vtbls:
+      - ea: 0x14208C948
         base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
-  Client::Sound::SoundData: # Client::Sound::ISoundData, Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>, Client::System::Common::NonCopyable
+  Client::Sound::SoundData:
     vtbls:
       - ea: 0x14208CCA0
         base: Client::Sound::ISoundData
