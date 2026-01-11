@@ -1740,6 +1740,10 @@ classes:
       0x14085F460: GetParameterValue
       0x140B6DD50: GetParameterMaxValue
 #oldfail       0x1408A0170: GetEquipErrorLogMessageId # (this, race, sex, level, classJob, grandCompany, pvpRank, itemRow)
+  Client::Game::InventoryItemRef:
+    funcs:
+      0x1401176F0: Set
+      0x140117770: Get
   Client::Game::InventoryContainer:
     vtbls:
       - ea: 0x1420BC698
@@ -11536,7 +11540,7 @@ classes:
         base: Client::UI::Agent::AgentInterface
     funcs:
       0x140BE4F30: ctor
-      0x140BE5720: ChangeInventoryContainer
+      0x140BE5720: ChangeRepairInventory
   Client::UI::Agent::AgentRepairRequest:
     vtbls:
       - ea: 0x1420D28A8
@@ -15189,6 +15193,10 @@ classes:
     vtbls:
       - ea: 0x1421DC4B8
         base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler> but it's too hard to find
+  Client::Game::Event::NpcRepairCallback:
+    vtbls:
+      - ea: 0x1421DC9E0
+        base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler>
   Client::Game::Event::EventSceneModule:
     funcs:
       0x141709150: ctor
