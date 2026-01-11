@@ -1055,6 +1055,7 @@ classes:
       36: SetAtkHistory
       39: SetUiVisibility
       40: GetSoftKeyboardDeviceInterface
+      66: OnCursorTypeChange
   Component::GUI::AtkModuleInterface::AtkEventInterface:
     vtbls:
       - ea: 0x14205DCB0
@@ -7963,6 +7964,7 @@ classes:
       17: SetScaleToHudLayoutScale
       18: ShouldCollideWithWindow
       20: OnMove
+      22: HandleCursorTypeChange
       23: ShouldIgnoreInputs
       24: GetRootNode
       27: GetWindowBounds
