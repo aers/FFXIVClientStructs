@@ -5933,9 +5933,11 @@ classes:
       0x140BA6080: HandleCompletedRecipesPacket
       0x140BA65F0: HandleCompletedQuestsPacket
       0x140BA6730: HandleUnlockedMapMarkersPacket
+      0x140BA67A0: HandleQuestCompletePacket
       0x140BA6910: HandleCompletedLegacyQuestsPacket
       0x140BA6B20: HandleQuestRepeatFlagsPacket
-      0x140BA6EB0: HandleCompletedLeveQuestsPacket
+      0x140BA6EB0: HandleCompletedLevesPacket
+      0x140BA6F80: HandleLeveCompleteTogglePacket
       0x14181E0E0: HandleUIModulePacketPacket
       0x1419169D0: HandlePartyInvitePacket
       0x141916AA0: HandleSocialPacket
