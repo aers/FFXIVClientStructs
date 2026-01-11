@@ -1868,6 +1868,21 @@ classes:
       0x140ACABB0: GetMemberCount
       0x140ACABD0: GetMember
       0x140ACAA40: UpdateNotifications
+  Client::Game::OrchestrionManager:
+    instances:
+      - ea: 0x1429E9DC0
+    funcs:
+      0x140DE0F60: PlayTrack
+      0x140DE11B0: PlaySample
+      0x140DE1330: StopCurrentTrack
+      0x140DE1560: StopSample
+      0x140DE1680: IsInRange
+      0x140DE1710: GetPlayMode
+      0x140DE1720: SetPlaylist
+      0x140DE1750: GetPlaylist
+  Client::Game::OrchestrionSampleState:
+    instances:
+      - ea: 0x1429E9E10
   Client::Game::HousingManager:
     instances:
       - ea: 0x1429E9DF8
@@ -3557,6 +3572,8 @@ classes:
       - ea: 0x14208CB90
         base: Client::System::Threading::Thread
     funcs:
+      0x1403FEE60: AcquireSoundData
+      0x1403FEEE0: ReleaseSoundData
       0x1403FF1C0: GetEffectiveVolume
       0x1403FF5A0: ctor
       0x140401320: SetAlwaysOn
@@ -3580,6 +3597,18 @@ classes:
       0x140401B80: SetPerformAlways
       0x140401BD0: SetMicPosition
       0x140402950: SetVolume #(this, type, float: volume
+  Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>:
+    vtbls:
+      - ea: 0x14208C940
+        base: Client::System::Common::NonCopyable
+  Client::Sound::ISoundData:
+    vtbls:
+      - ea: 0x14208C948
+        base: Common::Component::BGCollision::LinkList<Client::Sound::ISoundData,Client::Sound::ISoundData>
+  Client::Sound::SoundData:
+    vtbls:
+      - ea: 0x14208CCA0
+        base: Client::Sound::ISoundData
   Client::System::Framework::GameWindow:
     instances:
       - ea: 0x1427F5600
