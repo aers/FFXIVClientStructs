@@ -7323,14 +7323,19 @@ classes:
     instances:
       - ea: 0x14299E590
     funcs:
+      0x14060E1B0: ctor
+      0x142033C20: Finalizer
       0x14060DE60: Initialize
+      0x14060DEF0: Terminate
       0x140B52420: Update
       0x1417798E0: GetFlightAllowedStatus
   Client::Game::Control::CameraManager:
     funcs:
       0x1417F45F0: ctor
-      0x1417F4E50: PreUpdate
       0x1417F48B0: GetActiveCamera
+      0x1417F5370: SetActiveCamera
+      0x1417F5670: Update
+      0x1417F5C00: UpdateActiveCameraState
   Client::Game::Control::MoveControl::SplineController2D<float,SplineVector2,SplineVector2>:
     vtbls:
       - ea: 0x1420A1860
@@ -23777,6 +23782,13 @@ classes:
   Client::Game::CameraBase:
     vtbls:
       - ea: 0x1421E7B58
+    vfuncs:
+      2: UpdateState
+      3: Update
+      5: ResetAngles
+      6: CalculateSceneCameraPitch
+      7: CalculateSceneCameraYaw
+      8: ResetAngles2
     funcs:
       0x1417E0430: ctor
       0x1417E0C50: ShouldDrawGameObject
@@ -23784,6 +23796,20 @@ classes:
     vtbls:
       - ea: 0x1421E7BC0
         base: Client::Game::CameraBase
+    vfuncs:
+      13: UpdateTiltOffset
+      16: DetermineControlMode
+      17: GetCameraTargetObject
+      18: GetTiltOffset
+      20: GetTargetObject
+      23: SaveConfigOptions
+      24: LoadConfigOptions
+      25: ResetConfigOptions
+      26: SetTiltOffset
+      27: GetZoomSpeed
+      28: GetZoomModeToggleSpeedMultiplier
+      29: GetInputDeltaHMultiplier
+      30: GetInputDeltaVMultiplier
     funcs:
 #oldfail       0x1416DAFB0: UpdateRotation
       0x1417EB3A0: ctor
@@ -23803,13 +23829,13 @@ classes:
         pointer: true
     funcs:
       0x1417F6750: ctor
-  Client::Game::Camera3:
+  Client::Game::SpectatorCamera:
     vtbls:
       - ea: 0x1421E7D30
         base: Client::Game::Camera
     funcs:
       0x1417F3940: ctor
-  Client::Game::Camera4:
+  Client::Game::AimingCamera:
     vtbls:
       - ea: 0x142357860
         base: Client::Game::CameraBase
