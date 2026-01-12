@@ -50,8 +50,8 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x18)] public WeaponModelId OffhandWeaponModel;
     [FieldOffset(0x20)] public WeaponModelId CraftToolModel;
     [FieldOffset(0x28)] public GameObjectId CombatTaggerId;
-    [FieldOffset(0x30)] public uint BNpcBaseId;
-    [FieldOffset(0x34)] public uint BNpcNameId;
+    [FieldOffset(0x30)] public uint BaseId;
+    [FieldOffset(0x34)] public uint NameId;
     [FieldOffset(0x38)] public uint LayoutId;
     [FieldOffset(0x3C)] public uint ObjectType; // depends on ObjectKind? can be CompanionOwnerId, can also be FurnitureMemory index
     [FieldOffset(0x40)] public uint EventId;
@@ -104,6 +104,9 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x232), FixedSizeArray(isString: true)] internal FixedSizeArray32<byte> _name;
     [FieldOffset(0x252)] public CustomizeData CustomizeData;
     [FieldOffset(0x26C), FixedSizeArray(isString: true)] internal FixedSizeArray6<byte> _freeCompanyTag;
+
+    [FieldOffset(0x30), Obsolete("Renamed to BaseId")] public uint BNpcBaseId;
+    [FieldOffset(0x34), Obsolete("Renamed to NameId")] public uint BNpcNameId;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x0C)]
     public struct StatusEffect {
