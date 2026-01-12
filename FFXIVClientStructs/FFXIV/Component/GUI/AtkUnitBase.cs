@@ -228,6 +228,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 0F B6 E8 8B 44 24 20")]
     public partial bool FireCallback(uint valueCount, AtkValue* values, bool close = false);
 
+    /// <remarks> Will call <see cref="AtkModuleInterface.AtkEventInterface.ReceiveEventWithResult(AtkValue*, AtkValue*, uint, ulong)"/> of the registered callback handler. </remarks>
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B C8 E8 ?? ?? ?? ?? 48 8D 4C 24 ?? 0F B6 F8")]
+    public partial AtkValue* FireCallbackWithResult(AtkValue* returnValue, uint valueCount, AtkValue* values);
+
     [MemberFunction("E8 ?? ?? ?? ?? 32 C0 88 45 67")]
     public partial void UpdateCollisionNodeList(bool clearFocus);
 

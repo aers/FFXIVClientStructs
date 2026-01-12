@@ -1061,6 +1061,7 @@ classes:
       - ea: 0x14205DCB0
     vfuncs:
       0: ReceiveEvent
+      1: ReceiveEventWithResult
   Component::GUI::AtkTextInput::AtkTextInputEventInterface:
     vtbls:
       - ea: 0x1420A4E00
@@ -8030,7 +8031,7 @@ classes:
       0x140650A70: Destructor
       0x140650F20: FireCallbackAndHideOrClose
       0x140650F30: FireCallbackInt  # this creates an int AtkValue and puts its argument into it before calling Callback
-      0x140651170: FireCallback2 # calls AtkEventInterface.ReceiveEvent2
+      0x140651170: FireCallbackWithResult # calls AtkEventInterface.ReceiveEventWithResult
       0x1406512D0: RegisterEvent
       0x140651310: UnregisterEvent
       0x140651360: SetPosition
@@ -8296,7 +8297,7 @@ classes:
       0x14068A3E0: HandleUnregisterAddonCallback # 1
       0x14068A430: HandleAddonAgentCallback # 2
       0x14068A680: HandleAddonEventCallback # 3 - unsure, used in AddonFadeMiddleBack to send an event to ScheduleManagement
-      0x14068A8B0: HandleAddonEventCallback2 # 4 - unsure, calls AtkEventInterface.ReceiveEvent2
+      0x14068A8B0: HandleAddonEventCallbackWithResult # 4 - calls AtkEventInterface.ReceiveEventWithResult
       0x14068A9A0: HandleSubscribeAtkArrayData # 5
       0x14068AA40: HandleUnsubscribeAtkArrayData # 6
       0x14068B220: HandleCalculateTextLength # 10
