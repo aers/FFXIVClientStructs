@@ -51,7 +51,7 @@ public unsafe partial struct AgentRepair {
     [FieldOffset(0x88), FixedSizeArray, Obsolete("Use to FilterItemRefs")] internal FixedSizeArray140<RepairItemInfo> _repairItemInfos;
     [FieldOffset(0x94C), Obsolete("Renamed to InventoryItemEntryAmount")] public int RepairEntriesAmount;
     [FieldOffset(0x954), FixedSizeArray, Obsolete("Use InventoryItemEntries")] internal FixedSizeArray140<RepairEntry> _repairEntries;
-    
+
     [Obsolete("Use ChangeRepairInventory.")]
     [MemberFunction("E8 ?? ?? ?? ?? 40 F6 C7 08 74 2D")]
     public partial RepairEntry* ChangeInventoryContainer(bool arg0); // false for self- and NPC-Repair but will be set in 0xDCC. unsure for what that's used.
@@ -85,7 +85,7 @@ public unsafe partial struct AgentRepair {
         [FieldOffset(0x0)] public uint InventoryType;
         [FieldOffset(0x4)] public uint Slot;
     }
-	
+
     public enum ItemFilter {
         None = -1,
         Equipped,

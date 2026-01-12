@@ -43,7 +43,7 @@ public unsafe partial struct Camera {
     [FieldOffset(0x1E8)] public bool IsEventCameraAutoControl; // also called Lockon => "Look at target when speaking."
 
     [FieldOffset(0x23C)] public uint SavedModelSkeletonId;
-    
+
     [FieldOffset(0x290)] public uint ConfigOption_ThirdPersonDefaultYAngle;
     [FieldOffset(0x294)] public uint ConfigOption_ThirdPersonDefaultZoom;
     [FieldOffset(0x298)] public uint ConfigOption_ThirdPersonDefaultDistance;
