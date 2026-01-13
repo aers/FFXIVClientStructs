@@ -111,6 +111,9 @@ public unsafe partial struct CharacterBase {
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
 
+    [VirtualFunction(56)]
+    public partial void LoadSlot(uint slot);
+
     [VirtualFunction(63)]
     public partial nint OnRenderModel(Model* model);
 
@@ -118,7 +121,19 @@ public unsafe partial struct CharacterBase {
     public partial nint OnRenderMaterial(ModelRenderer.OnRenderMaterialParams* param);
 
     [VirtualFunction(69)]
-    public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotBytes);
+    public partial bool SetEquipmentSlotModel(uint slot, EquipmentModelId* slotData);
+
+    [VirtualFunction(69), Obsolete("Use SetEquipmentSlotModel")]
+    public partial ulong FlagSlotForUpdate(uint slot, EquipmentModelId* slotData);
+
+    [VirtualFunction(70)]
+    public partial bool SetGlassesSlotModel(uint glassesSlot, EquipmentModelId* slotData);
+
+    [VirtualFunction(71)]
+    public partial void GetEquipmentSlotModel(EquipmentModelId* outSlotData, uint slot);
+
+    [VirtualFunction(72)]
+    public partial void GetGlassesSlotModel(EquipmentModelId* outSlotData, uint slot);
 
     [VirtualFunction(75)]
     public partial CStringPointer ResolveRootPath(byte* pathBuffer, nuint pathBufferSize);
