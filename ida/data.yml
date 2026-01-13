@@ -6857,8 +6857,9 @@ classes:
     vtbls:
       - ea: 0x1420945A8
         base: Client::Graphics::Scene::Object
-    vfuncs:
+    vfuncs: # 50
       11: UpdateMaterials
+      24: UpdateTint
     funcs:
       0x14040C370: ctor
   Client::Graphics::JobSystem<Client::Graphics::Scene::World>:
@@ -6922,8 +6923,7 @@ classes:
     vtbls:
       - ea: 0x142094AC0
         base: Client::Graphics::Scene::DrawObject
-    vfuncs:
-      24: UpdateTint
+    vfuncs: # 111
       52: ForceWetness
       53: ResetWetness
       58: SetupScaling
