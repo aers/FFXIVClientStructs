@@ -20,15 +20,6 @@ public unsafe partial struct CharacterBase {
     public const int PathBufferSize = 260;
     public const int MaterialsPerSlot = 10;
 
-    [Flags]
-    public enum StateFlag : ulong {
-        VisorToggled = 0x00_00_00_00_40,
-        VisorChanging = 0x00_00_00_00_80,
-        HasUmbrella = 0x00_00_01_00_00,
-        VieraEarsHidden = 0x00_80_00_00_00,
-        VieraEarsChanging = 0x01_00_00_00_00
-    }
-
     [FieldOffset(0x90)] public StateFlag StateFlags;
     [FieldOffset(0x9C)] public int SlotCount; // model slots
     [FieldOffset(0xA0)] public Skeleton* Skeleton; // Client::Graphics::Render::Skeleton
@@ -37,31 +28,6 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0xD8)] public Attach Attach;
     [FieldOffset(0x150)] public void* PostBoneDeformer; // Client::Graphics::Scene::PostBoneDeformer ptr
-
-    public bool IsChangingVisor {
-        get => StateFlags.HasFlag(StateFlag.VisorChanging);
-        set => StateFlags = value ? StateFlags | StateFlag.VisorChanging : StateFlags & ~StateFlag.VisorChanging;
-    }
-
-    public bool VisorToggled {
-        get => StateFlags.HasFlag(StateFlag.VisorToggled);
-        set => StateFlags = value ? StateFlags | StateFlag.VisorToggled : StateFlags & ~StateFlag.VisorToggled;
-    }
-
-    public bool HasUmbrella {
-        get => StateFlags.HasFlag(StateFlag.HasUmbrella);
-        set => StateFlags = value ? StateFlags | StateFlag.HasUmbrella : StateFlags & ~StateFlag.HasUmbrella;
-    }
-
-    public bool HideVieraEars {
-        get => StateFlags.HasFlag(StateFlag.VieraEarsHidden);
-        set => StateFlags = value ? StateFlags | StateFlag.VieraEarsHidden : StateFlags & ~StateFlag.VieraEarsHidden;
-    }
-
-    public bool VieraEarsChanging {
-        get => StateFlags.HasFlag(StateFlag.VieraEarsChanging);
-        set => StateFlags = value ? StateFlags | StateFlag.VieraEarsChanging : StateFlags & ~StateFlag.VieraEarsChanging;
-    }
 
     [FieldOffset(0x158)] public BonePhysicsModule* BonePhysicsModule; // Client::Graphics::Physics::BonePhysicsModule ptr
     [FieldOffset(0x160)] public BoneKineDriverModule* BoneKineDriverModule;
@@ -107,6 +73,31 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x958)] public byte AnimationVariant; // the "a%04d" part in "%s/animation/a%04d/%s/%s.pap" in LoadAnimation
 
+    public bool IsChangingVisor {
+        get => StateFlags.HasFlag(StateFlag.VisorChanging);
+        set => StateFlags = value ? StateFlags | StateFlag.VisorChanging : StateFlags & ~StateFlag.VisorChanging;
+    }
+
+    public bool VisorToggled {
+        get => StateFlags.HasFlag(StateFlag.VisorToggled);
+        set => StateFlags = value ? StateFlags | StateFlag.VisorToggled : StateFlags & ~StateFlag.VisorToggled;
+    }
+
+    public bool HasUmbrella {
+        get => StateFlags.HasFlag(StateFlag.HasUmbrella);
+        set => StateFlags = value ? StateFlags | StateFlag.HasUmbrella : StateFlags & ~StateFlag.HasUmbrella;
+    }
+
+    public bool HideVieraEars {
+        get => StateFlags.HasFlag(StateFlag.VieraEarsHidden);
+        set => StateFlags = value ? StateFlags | StateFlag.VieraEarsHidden : StateFlags & ~StateFlag.VieraEarsHidden;
+    }
+
+    public bool VieraEarsChanging {
+        get => StateFlags.HasFlag(StateFlag.VieraEarsChanging);
+        set => StateFlags = value ? StateFlags | StateFlag.VieraEarsChanging : StateFlags & ~StateFlag.VieraEarsChanging;
+    }
+
     public Span<Pointer<Model>> ModelsSpan => new(Models, SlotCount);
     public Span<Pointer<Texture>> ColorTableTexturesSpan => new(ColorTableTextures, SlotCount * MaterialsPerSlot);
     public Span<Pointer<Material>> MaterialsSpan => new(Materials, SlotCount * MaterialsPerSlot);
@@ -119,13 +110,6 @@ public unsafe partial struct CharacterBase {
 
     [VirtualFunction(50)]
     public partial ModelType GetModelType();
-
-    public enum ModelType : byte {
-        Human = 1,
-        DemiHuman = 2,
-        Monster = 3,
-        Weapon = 4,
-    }
 
     [VirtualFunction(63)]
     public partial nint OnRenderModel(Model* model);
@@ -400,5 +384,21 @@ public unsafe partial struct CharacterBase {
     public struct SlotStagingArea {
         [FieldOffset(0x08)] public ModelResourceHandle* ModelResourceHandle;
         [FieldOffset(0x68)] public MaterialResourceHandle* SkinMaterialResourceHandle;
+    }
+
+    [Flags]
+    public enum StateFlag : ulong {
+        VisorToggled = 0x00_00_00_00_40,
+        VisorChanging = 0x00_00_00_00_80,
+        HasUmbrella = 0x00_00_01_00_00,
+        VieraEarsHidden = 0x00_80_00_00_00,
+        VieraEarsChanging = 0x01_00_00_00_00
+    }
+
+    public enum ModelType : byte {
+        Human = 1,
+        DemiHuman = 2,
+        Monster = 3,
+        Weapon = 4,
     }
 }
