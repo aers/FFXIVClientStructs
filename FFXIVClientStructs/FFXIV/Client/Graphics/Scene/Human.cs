@@ -27,7 +27,7 @@ public unsafe partial struct Human {
     [FieldOffset(0xA78), CExporterIgnore] public EquipmentModelId Wrist;
     [FieldOffset(0xA80), CExporterIgnore] public EquipmentModelId RFinger;
     [FieldOffset(0xA88), CExporterIgnore] public EquipmentModelId LFinger;
-    [FieldOffset(0xA90), FixedSizeArray] internal FixedSizeArray10<EquipmentModelId> _glassesModels;
+    [FieldOffset(0xA90), FixedSizeArray] internal FixedSizeArray2<EquipmentModelId> _glassesModels;
     [FieldOffset(0xA90), CExporterIgnore] public EquipmentModelId Glasses0;
     [FieldOffset(0xA98), CExporterIgnore] public EquipmentModelId Glasses1;
     [FieldOffset(0xAA0)] public ushort RaceSexId; // cXXXX ID (0101, 0201, etc)
