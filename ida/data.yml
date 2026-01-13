@@ -13730,6 +13730,7 @@ classes:
       0x140F47590: CreateMapMarkers
       0x140F47DE0: ResetMiniMapMarkers
       0x140F47E20: CreateMiniMapMarkers
+      0x140F48020: UpdateEventMapMarkers
       0x140F48740: OpenMapByMapId
       0x140F4EEB0: CanUseTeleport # static
   Client::UI::Agent::OpenMapInfo:
