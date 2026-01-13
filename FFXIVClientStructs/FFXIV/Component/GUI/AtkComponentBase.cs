@@ -36,6 +36,9 @@ public unsafe partial struct AtkComponentBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 49 63 D7")]
     public partial AtkTextNode* GetTextNodeById(uint id);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C8 48 85 DB")]
+    public partial AtkComponentListItemRenderer* GetComponentItemRendererById(uint id);
+
     [MemberFunction("E8 ?? ?? ?? ?? 8D 57 01 48 89 43 10")]
     public partial AtkUldAsset* GetUldAssetByImageNodeId(uint id);
 

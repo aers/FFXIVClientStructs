@@ -8246,7 +8246,6 @@ classes:
       0x14067F910: HandleDragDropEvent
       0x1406803F0: PopulateAtkListItemData
       0x140680750: ctor
-      0x1406C6040: GetItemRendererByNodeId
   Component::GUI::AtkComponentListItemPopulator:
     funcs:
       0x140672A30: ctor_WithRenderer

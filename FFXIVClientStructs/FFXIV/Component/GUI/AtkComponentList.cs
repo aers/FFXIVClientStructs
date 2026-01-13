@@ -149,6 +149,7 @@ public unsafe partial struct AtkComponentList : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 8B D3 85 ED")]
     public partial void SetupRenderer(AtkComponentListItemPopulator* populator, ColumnNodeInfo* columns, int columnCount, uint rendererNodeId = 0);
 
+    [Obsolete("Use GetComponentItemRendererById")]
     [MemberFunction("E8 ?? ?? ?? ?? 4C 8B C8 48 85 DB")]
     public partial AtkComponentListItemRenderer* GetItemRendererByNodeId(uint nodeId);
 
