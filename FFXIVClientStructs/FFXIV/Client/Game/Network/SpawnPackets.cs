@@ -91,9 +91,9 @@ public partial struct CommonSpawnData {
     [FieldOffset(0x7F)] public byte StatusLoopVfxId;
     [FieldOffset(0x80)] public byte ForayRank;
     [FieldOffset(0x81)] public byte ForayElement;
-    [FieldOffset(0x82)] private byte Unk82; // ModelContainer+0x21
+    [FieldOffset(0x82)] public byte ModelScaleId; // ModelContainer.ModelScaleId
     [FieldOffset(0x83)] public byte ModelState; // Timeline.ModelState
-    [FieldOffset(0x84)] private byte Unk84; // ModelContainer+0x22
+    [FieldOffset(0x84)] public byte ModelAttributeFlags; // ModelContainer.ModelAttributeFlags
     [FieldOffset(0x85)] public byte AnimationState; // Timeline.AnimationState, 4 bits each
 
     [FieldOffset(0x88), FixedSizeArray] internal FixedSizeArray30<StatusEffect> _statusEffects;
