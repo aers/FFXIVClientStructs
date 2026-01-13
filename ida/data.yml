@@ -10439,7 +10439,7 @@ classes:
       13: DisableDraw
       17: SetDrawObject
       23: GetDrawObject
-      24: GetDrawObject_2
+      24: GetCharacterBase
       25: UpdateRadius
       26: Highlight
       #30: TryGetEventHandler
