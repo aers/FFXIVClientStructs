@@ -115,10 +115,10 @@ public unsafe partial struct CharacterBase {
     public partial void LoadSlot(uint slot);
 
     [VirtualFunction(63)]
-    public partial nint OnRenderModel(Model* model);
+    public partial nint OnRenderModel(Model* model); // TODO: return void
 
     [VirtualFunction(64)]
-    public partial nint OnRenderMaterial(ModelRenderer.OnRenderMaterialParams* param);
+    public partial nint OnRenderMaterial(ModelRenderer.OnRenderMaterialParams* param); // TODO: return void
 
     [VirtualFunction(69)]
     public partial bool SetEquipmentSlotModel(uint slot, EquipmentModelId* slotData);
