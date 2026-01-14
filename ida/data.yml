@@ -17102,7 +17102,7 @@ classes:
     vtbls:
       - ea: 0x142103B18
     vfuncs:
-      0: ManagedVf0
+      0: ManagedInvoke
       1: ManagedHide
       2: GetManagedUnitBase
   Client::UI::Atk2DAreaMap:
