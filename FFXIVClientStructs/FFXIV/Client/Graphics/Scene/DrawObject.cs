@@ -1,3 +1,5 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Object;
+
 namespace FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 
 // Client::Graphics::Scene::DrawObject
@@ -11,7 +13,7 @@ public unsafe partial struct DrawObject {
     [FieldOffset(0x88)] public byte Flags;
 
     /// <summary>
-    /// used in vanilla with Highlight Potential Targets, Housing object outlines
+    /// used in vanilla with Highlight Potential Targets, Housing object outlines. can be set by GameObject.Highlight
     /// </summary>
     [FieldOffset(0x89)] public Outline OutlineFlags;
 
@@ -33,11 +35,11 @@ public unsafe partial struct DrawObject {
         /// no color on its own, used in combination with other bits
         /// </summary>
         Default = 0x03,
-        Red = 0x10,
-        Green = 0x20,
-        Blue = 0x30,
-        Yellow = 0x40,
-        Orange = 0x50,
-        Pink = 0x60,
+        Red = ObjectHighlightColor.Red << 4,
+        Green = ObjectHighlightColor.Green << 4,
+        Blue = ObjectHighlightColor.Blue << 4,
+        Yellow = ObjectHighlightColor.Yellow << 4,
+        Orange = ObjectHighlightColor.Orange << 4,
+        Magenta = ObjectHighlightColor.Magenta << 4
     }
 }
