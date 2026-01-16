@@ -21,17 +21,15 @@ public partial struct NpcYell {
     /// <summary>
     /// The number of new <see cref="YellSlots"/> and <see cref="YellInfo"/> entries that have not yet been handled.
     /// </summary>
-    [FieldOffset(0x2848)] public short UnhandledYellCount;
+    [FieldOffset(0x2848)] public byte UnhandledYellCount;
+    [FieldOffset(0x2849)] private byte Unk_2849; // Looks like a counter that has something to do specifically with entries that show a BattleTalk.
+    [FieldOffset(0x284A)] private bool Unk_284A;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct NpcYellSlot {
         [FieldOffset(0x0)] public GameObjectId ObjectId;
         [FieldOffset(0xC)] public uint NameId;
-
-        /// <remarks>
-        /// Probably some kind of ID.  Matches <see cref="NpcYellInfo.Unk_E8"/> for the <see cref="NpcYellInfo"/> at the same index.
-        /// </remarks>
-        [FieldOffset(0x10)] private uint Unk_10;
+        [FieldOffset(0x10)] private uint Unk_MessageParams; // A (probably) four-long array of integer parameters for the message string.
         [FieldOffset(0x20)] private float Unk_20; // Probably a delay.  Has effective frame delta subracted each update.
     }
 
@@ -42,11 +40,8 @@ public partial struct NpcYell {
         [FieldOffset(0x10)] public uint NameId;
         [FieldOffset(0x18)] public Utf8String Name;
         [FieldOffset(0x80)] public Utf8String Message;
-
-        /// <remarks>
-        /// Probably some kind of ID.  Matches <see cref="NpcYellSlot.Unk_10"/> for the <see cref="NpcYellSlot"/> at the same index.
-        /// </remarks>
-        [FieldOffset(0xE8)] private uint Unk_E8;
+        [FieldOffset(0xE8)] private uint Unk_MessageParams; // A (probably) four-long array of integer parameters for the message string.
+        [FieldOffset(0xF8)] private float Unk_F8; // Countdown timer of unknown use.  Has effective frame delta subracted each update.
 
         /// <summary>
         /// How long (in seconds) to display the message as a balloon.
