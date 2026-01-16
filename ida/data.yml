@@ -173,6 +173,8 @@ functions:
   0x1406517A0: GetScaleListEntryFromScale
   0x140662400: GetScaleForListOption
   0x1406BFEF0: Component::GUI::TextModuleInterface::GetTextLabelByID
+  0x1406C0150: IsPadModeEnabled
+  0x1406C0180: IsPadMouseModeEnabled
 #fail   0x14064BB40: GetLocalTextParameter
   0x14078C5F0: FormatNumber
   0x1407B7E70: ComputeAddonNameHash
