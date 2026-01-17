@@ -28,7 +28,7 @@ public unsafe partial struct QuestManager {
     [FieldOffset(0x6D8)] public byte DailyQuestSeed;
 
     [FieldOffset(0x6DC), FixedSizeArray, Obsolete("Use CompletedLegacyQuestsBitArray", true)] internal FixedSizeArray40<byte> _unkBitmask1;
-    [FieldOffset(0x6DC), FixedSizeArray(isBitArray: true, bitCount: 296 + 3 * 8)] internal FixedSizeArray40<byte> _completedLegacyQuests; // BitCount: at least LegacyQuestSheet.Count, might contain some relic stuff at the end?
+    [FieldOffset(0x6DC), FixedSizeArray(isBitArray: true, bitCount: 296 + 3 * 8)] internal FixedSizeArray40<byte> _completedLegacyQuests; // BitCount: at least LegacyQuestSheet.Count, LegacyEpicQuestWeapon data at the end
 
     [FieldOffset(0x708), FixedSizeArray] internal FixedSizeArray10<TrackingWork> _trackedQuests;
     [FieldOffset(0x7A8)] private byte UnkJournalByte;

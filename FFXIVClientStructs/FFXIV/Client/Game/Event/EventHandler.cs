@@ -469,8 +469,7 @@ public enum MaterializeEntryId : ushort {
 
 // Taken from EventHandler lua definitions
 [Flags]
-public enum SceneFlag : ulong
-{
+public enum SceneFlag : ulong {
     None                = 0,
 
     NoDefaultCamera     = 1UL << 0,
