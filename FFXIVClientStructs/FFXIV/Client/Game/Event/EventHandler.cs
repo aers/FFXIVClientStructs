@@ -546,5 +546,5 @@ public enum SceneFlag : ulong
         | InvisCompanion,
 
     SetEObjBase = SetBase & ~InvisEObj,
-    SetInvisBase = SetEObjBase | InvisAll,
+    SetInvisBase = SetBase | InvisAll,
 }
