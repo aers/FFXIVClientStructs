@@ -13,7 +13,12 @@ namespace FFXIVClientStructs.FFXIV.Component.GUI;
 public unsafe partial struct AtkComponentBase : ICreatable {
     [FieldOffset(0x08)] public AtkUldManager UldManager;
     [FieldOffset(0x98)] public uint ComponentFlags; // & 1 = UldLoaded, & 2 = Interactable/Enabled?
+
+    [Obsolete("This field is not the owner for this node, you may have intended to use OwnerNode\n" +
+              "As the exact purpose of this field is unknown, this field is being renamed to UnkAtkResNode")]
     [FieldOffset(0xA0)] public AtkResNode* AtkResNode;
+    [FieldOffset(0xA0)] public AtkResNode* UnkAtkResNode;
+
     [FieldOffset(0xA8)] public AtkComponentNode* OwnerNode;
     [FieldOffset(0xB0)] public int SoundEffectId;
     [FieldOffset(0xB4)] public AtkCursorNavigationInfo CursorNavigationInfo;
