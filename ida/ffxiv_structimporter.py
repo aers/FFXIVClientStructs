@@ -253,6 +253,13 @@ class BaseApi:
             )
         return DefinedStructExport(enums, structs)
 
+    def load_data_yaml(self):
+        # type: () -> dict
+        path = os.path.join(os.path.dirname(self.get_file_path), "data.yml")
+        if not os.path.exists(path):
+            return None
+        return load(open(path), Loader=Loader)
+
 
 api = None
 
@@ -275,6 +282,36 @@ if api is None:
             def __init__(self, full_padding):
                 # type: (bool) -> None
                 self.full_padding = full_padding
+
+            def get_fallback_vfunc_name(self, class_name, index, visited=None):
+                # type: (str, int, set) -> str
+                if not hasattr(self, "data_yaml") or not self.data_yaml or "classes" not in self.data_yaml:
+                    return None
+                
+                if visited is None:
+                    visited = set()
+                
+                if class_name in visited:
+                    return None
+                visited.add(class_name)
+
+                if class_name not in self.data_yaml["classes"]:
+                    return None
+                
+                class_data = self.data_yaml["classes"][class_name]
+                if not class_data:
+                    return None
+
+                if "vfuncs" in class_data and index in class_data["vfuncs"]:
+                    return class_data["vfuncs"][index]
+                
+                if "vtbls" in class_data and isinstance(class_data["vtbls"], list):
+                    for vtbl in class_data["vtbls"]:
+                        if "base" in vtbl:
+                            res = self.get_fallback_vfunc_name(vtbl["base"], index, visited)
+                            if res: return res
+                
+                return None
 
             def delete_struct_members(self, fullname):
                 # type: (str) -> None
@@ -510,15 +547,21 @@ if api is None:
                     size = int(self.get_struct_size(s) / 8)
                 for i in range(size):
                     if self.get_struct_member_id(s, i * 8) == idc.BADADDR:
+                        name = "vf{0}".format(i)
+                        
+                        fallback_name = self.get_fallback_vfunc_name(struct.type, i)
+                        if fallback_name:
+                            name = fallback_name
+                        
                         self.create_struct_member(
                             s,
-                            "vf{0}".format(i),
+                            name,
                             i * 8,
                             self.get_idc_type_from_ida_type("__int64"),
                             None,
                             self.get_size_from_ida_type("__int64"),
                         )
-                        meminfo = self.get_struct_member_by_name(s, "vf{0}".format(i))
+                        meminfo = self.get_struct_member_by_name(s, name)
                         self.set_struct_member_info(
                             s, meminfo, 0, self.get_tinfo_from_type("__int64"), 0
                         )
@@ -1297,6 +1340,9 @@ def run():
 
     print("{0} Loading yaml".format(get_time()))
     yaml = api.get_yaml()
+    
+    print("{0} Loading data yaml".format(get_time()))
+    api.data_yaml = api.load_data_yaml()
 
     print("{0} Deleting old structs".format(get_time()))
     for struct in yaml.structs[::-1]:
