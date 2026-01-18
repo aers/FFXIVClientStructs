@@ -182,6 +182,10 @@ public unsafe partial struct PlayerState {
     /// <remarks> Use <see cref="IsOrchestrionRollUnlocked"/>. </remarks>
     [FieldOffset(0x608), FixedSizeArray(isBitArray: true, bitCount: 833)] internal FixedSizeArray105<byte> _unlockedOrchestrionRolls;
 
+    [FieldOffset(0x672), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedBeginnerTraining;
+    [FieldOffset(0x676), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedMaskedCarnivale;
+    /// <remarks>Used for Mahjong and Rival Wings content.</remarks>
+    [FieldOffset(0x681), FixedSizeArray(isBitArray: true, bitCount: 8)] internal FixedSizeArray1<byte> _unlockedSpecialContent;
     [FieldOffset(0x682), FixedSizeArray(isBitArray: true, bitCount: 224)] internal FixedSizeArray28<byte> _unlockedRaids;
     [FieldOffset(0x69E), FixedSizeArray(isBitArray: true, bitCount: 144)] internal FixedSizeArray18<byte> _unlockedDungeons;
     [FieldOffset(0x6B0), FixedSizeArray(isBitArray: true, bitCount: 80)] internal FixedSizeArray10<byte> _unlockedGuildOrders;
@@ -195,6 +199,9 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x705), FixedSizeArray(isBitArray: true, bitCount: 112)] internal FixedSizeArray14<byte> _completedTrials;
     [FieldOffset(0x713), FixedSizeArray(isBitArray: true, bitCount: 24)] internal FixedSizeArray3<byte> _completedCrystallineConflicts;
     [FieldOffset(0x716), FixedSizeArray(isBitArray: true, bitCount: 16)] internal FixedSizeArray2<byte> _completedFrontlines;
+    /// <remarks>Used for content like VC Dungeons, Faux Hallows trials and standalone deep dungeon bosses (The Final Verse).</remarks>
+    [FieldOffset(0x718), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _unlockedMiscContent;
+    [FieldOffset(0x71c), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedMiscContent;
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 
