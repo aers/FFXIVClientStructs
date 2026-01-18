@@ -132,18 +132,31 @@ public sealed partial class InteropGenerator {
         } else {
             writer.WriteLine("[global::System.Runtime.InteropServices.StructLayoutAttribute(global::System.Runtime.InteropServices.LayoutKind.Explicit)]");
         }
-        writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
-        using (writer.WriteBlock()) {
-            foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
-                var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{vfi.MethodInfo.ReturnType}>";
-                foreach (string attr in vfi.MethodInfo.InheritableAttributes)
-                    writer.WriteLine(attr);
-                writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
+        if (structInfo.IsGeneric) {
+            writer.WriteLine($"public unsafe partial struct {structInfo.Name[..^3]}VirtualTable");
+            WriteVirtualFunctions(writer);
+            writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name[..^3]}VirtualTable* VirtualTable;");
+            if (structInfo.StaticVirtualTableSignature is not null) {
+                writer.WriteLine($"public static {structInfo.Name[..^3]}VirtualTable* StaticVirtualTablePointer => ({structInfo.Name[..^3]}VirtualTable*)Addresses.StaticVirtualTable.Value;");
+            }
+        } else {
+            writer.WriteLine($"public unsafe partial struct {structInfo.Name}VirtualTable");
+            WriteVirtualFunctions(writer);
+            writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
+            if (structInfo.StaticVirtualTableSignature is not null) {
+                writer.WriteLine($"public static {structInfo.Name}VirtualTable* StaticVirtualTablePointer => ({structInfo.Name}VirtualTable*)Addresses.StaticVirtualTable.Value;");
             }
         }
-        writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute(0)] public {structInfo.Name}VirtualTable* VirtualTable;");
-        if (structInfo.StaticVirtualTableSignature is not null) {
-            writer.WriteLine($"public static {structInfo.Name}VirtualTable* StaticVirtualTablePointer => ({structInfo.Name}VirtualTable*)Addresses.StaticVirtualTable.Value;");
+
+        void WriteVirtualFunctions(IndentedTextWriter writer) {
+            using (writer.WriteBlock()) {
+                foreach (VirtualFunctionInfo vfi in structInfo.VirtualFunctions) {
+                    var functionPointerType = $"delegate* unmanaged <{structInfo.Name}*, {vfi.MethodInfo.GetParameterTypeStringWithTrailingType()}{vfi.MethodInfo.ReturnType}>";
+                    foreach (string attr in vfi.MethodInfo.InheritableAttributes)
+                        writer.WriteLine(attr);
+                    writer.WriteLine($"[global::System.Runtime.InteropServices.FieldOffsetAttribute({vfi.Index * 8})] public {functionPointerType} {vfi.MethodInfo.Name};");
+                }
+            }
         }
     }
 
