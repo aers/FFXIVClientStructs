@@ -182,8 +182,12 @@ public unsafe partial struct PlayerState {
     /// <remarks> Use <see cref="IsOrchestrionRollUnlocked"/>. </remarks>
     [FieldOffset(0x608), FixedSizeArray(isBitArray: true, bitCount: 833)] internal FixedSizeArray105<byte> _unlockedOrchestrionRolls;
 
-    [FieldOffset(0x672), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedBeginnerTraining;
+    // BitCount: TutorialSheet.Max(row => Math.Max(Math.Max(row.Unknown1, row.Unknown2), row.Unknown3))
+    [FieldOffset(0x672), FixedSizeArray(isBitArray: true, bitCount: 26)] internal FixedSizeArray4<byte> _completedBeginnerTraining;
+    // BitCount: InstanceContentSheet.Where(row => row.InstanceContentType.RowId == 13).Max(row => row.RowId - 35000)
     [FieldOffset(0x676), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedMaskedCarnivale;
+    // BitCount: VVDNotebookContentsSheet.RowCount - 1
+    [FieldOffset(0x67A), FixedSizeArray(isBitArray: true, bitCount: 49)] internal FixedSizeArray7<byte> _completedVVDNotebookContents;
     /// <remarks>Used for Mahjong and Rival Wings content.</remarks>
     [FieldOffset(0x681), FixedSizeArray(isBitArray: true, bitCount: 8)] internal FixedSizeArray1<byte> _unlockedSpecialContent;
     [FieldOffset(0x682), FixedSizeArray(isBitArray: true, bitCount: 224)] internal FixedSizeArray28<byte> _unlockedRaids;
@@ -201,7 +205,15 @@ public unsafe partial struct PlayerState {
     [FieldOffset(0x716), FixedSizeArray(isBitArray: true, bitCount: 16)] internal FixedSizeArray2<byte> _completedFrontlines;
     /// <remarks>Used for content like VC Dungeons, Faux Hallows trials and standalone deep dungeon bosses (The Final Verse).</remarks>
     [FieldOffset(0x718), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _unlockedMiscContent;
-    [FieldOffset(0x71c), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedMiscContent;
+    [FieldOffset(0x71C), FixedSizeArray(isBitArray: true, bitCount: 32)] internal FixedSizeArray4<byte> _completedMiscContent;
+    /// <remarks>
+    /// Flags:<br/>
+    /// 1 = Chocobo Race Unlocked<br/>
+    /// 2 = Has Race Chocobo<br/>
+    /// 4 = Advanced Mahjong Unlocked<br/>
+    /// </remarks>
+    [FieldOffset(0x720)] public byte GoldSaucerContentStatus;
+    [FieldOffset(0x721)] public byte CompletedLoVMStages;
 
     #region Weekly Bonus/Weekly Bingo/Wondrous Tails Fields (packet reader in "48 83 EC 28 48 8B D1 48 8D 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 0D ?? ?? ?? ??")
 

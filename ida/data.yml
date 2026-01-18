@@ -2735,6 +2735,8 @@ classes:
       0x140B004E0: IsGlassesStylesUnlocked
       0x140BA3410: SetDesynthesisLevels
       0x140B00520: IsGlassesUnlocked
+      0x140B00790: ToggleUnlockBit
+      0x140B007D0: IsUnlockBitSet
       0x140B00810: Initialize
       0x140B01CC0: IsCurrentJobCrafter
       0x140B01CE0: IsCurrentJobGatherer
