@@ -14,6 +14,9 @@ using InteropGenerator.Runtime.Attributes;
 namespace CExporter;
 
 public static partial class TypeExtensions {
+    // "FixedSizeArray".Length == 14, used for parsing generic FixedSizeArray type names
+    private const int FixedSizeArrayPrefixLength = 14;
+
     [GeneratedRegex(@"^`[1-9]\+Node", RegexOptions.Compiled)]
     public static partial Regex StdNodeRegex();
 
@@ -117,7 +120,7 @@ public static partial class TypeExtensions {
             _ when type == typeof(char) || type == typeof(short) || type == typeof(ushort) || type == typeof(Half) => 2,
             _ when type == typeof(int) || type == typeof(uint) || type == typeof(float) => 4,
             _ when type == typeof(long) || type == typeof(ulong) || type == typeof(double) || type.IsPointer || type.IsFunctionPointer || type.IsUnmanagedFunctionPointer || (type.Name == "Pointer`1" && type.Namespace.AsSpan().SequenceEqual(ExporterStatics.InteropNamespacePrefix)) || type == typeof(CStringPointer) => 8,
-            _ when type.Name.StartsWith("FixedSizeArray") => type.GetGenericArguments()[0].SizeOf() * int.Parse(type.Name[14..type.Name.IndexOf('`')]),
+            _ when type.Name.StartsWith("FixedSizeArray") => type.GetGenericArguments()[0].SizeOf() * int.Parse(type.Name[FixedSizeArrayPrefixLength..type.Name.IndexOf('`')]),
             _ when type.GetCustomAttribute<InlineArrayAttribute>() is { Length: var length } => type.GetGenericArguments()[0].SizeOf() * length,
             _ when type.IsStruct() && !type.IsGenericType && (type.StructLayoutAttribute?.Value ?? LayoutKind.Sequential) != LayoutKind.Sequential => type.StructLayoutAttribute?.Size ?? (int?)typeof(Unsafe).GetMethod("SizeOf")?.MakeGenericMethod(type).Invoke(null, null) ?? 0,
             _ when type.IsEnum => Enum.GetUnderlyingType(type).SizeOf(),
@@ -129,7 +132,21 @@ public static partial class TypeExtensions {
     private static int GetSizeOf(this Type type) {
         try {
             return Marshal.SizeOf(Activator.CreateInstance(type)!);
-        } catch {
+        } catch (ArgumentException ex) {
+            // Type cannot be marshaled (e.g., contains generic parameters or is not a value type)
+            ExporterStatics.WarningList.Add($"GetSizeOf failed for type '{type.FullName ?? type.Name}': {ex.Message}");
+            return 0;
+        } catch (NotSupportedException ex) {
+            // Type is not supported by Marshal.SizeOf
+            ExporterStatics.WarningList.Add($"GetSizeOf failed for type '{type.FullName ?? type.Name}': {ex.Message}");
+            return 0;
+        } catch (MissingMethodException ex) {
+            // Type does not have a parameterless constructor
+            ExporterStatics.WarningList.Add($"GetSizeOf failed for type '{type.FullName ?? type.Name}': {ex.Message}");
+            return 0;
+        } catch (Exception ex) {
+            // Unexpected exception - log as error for investigation
+            ExporterStatics.ErrorList.Add($"GetSizeOf unexpected error for type '{type.FullName ?? type.Name}': {ex.GetType().Name} - {ex.Message}");
             return 0;
         }
     }

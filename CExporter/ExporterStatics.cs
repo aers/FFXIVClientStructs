@@ -17,8 +17,26 @@ public static class ExporterStatics {
     public static readonly BindingFlags StaticBindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
     public static readonly string[] IgnoredTypeNames = ["MemberFunctionPointers", "StaticAddressPointers", "Addresses", "VirtualTable"];
+
+    /// <summary>
+    /// List of non-fatal warnings encountered during export.
+    /// Note: This list is not thread-safe. For concurrent scenarios, consider external synchronization.
+    /// </summary>
     public static readonly List<string> WarningList = [];
+
+    /// <summary>
+    /// List of errors encountered during export.
+    /// Note: This list is not thread-safe. For concurrent scenarios, consider external synchronization.
+    /// </summary>
     public static readonly List<string> ErrorList = [];
+
+    /// <summary>
+    /// Clears all warnings and errors. Call before starting a new export run.
+    /// </summary>
+    public static void Clear() {
+        WarningList.Clear();
+        ErrorList.Clear();
+    }
 
     public static readonly string Separator = "::";
 #pragma warning restore CA2211
