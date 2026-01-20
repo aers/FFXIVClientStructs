@@ -876,9 +876,6 @@ classes:
       0x1419BEF80: GetAdjustedTimestamp # static
       0x1419BEFA0: GetBonusGuaranteeForTimestamp # static
       0x1419BEFE0: GetSatisfactionBonusesForNpc # static
-  Client::Game::Control::TargetSystem::ListFeeder:
-    vtbls:
-      - ea: 0x1420A1950
   Client::Game::InstanceContent::ContentSheetWaiterInterface:
     vtbls:
       - ea: 0x1420BC100
@@ -891,9 +888,6 @@ classes:
       - ea: 0x1420BC128
         base: Client::Game::SheetWaiterBase
   Client::Game::Object::IGameObjectEventListener:
-  Client::Game::Object::IFilterCommand:
-    vtbls:
-      - ea: 0x1420A18A0
   Client::Graphics::RenderObjectList:
   Client::Graphics::Singleton:
   Client::SupportDesk::HttpConnection:
@@ -2916,8 +2910,8 @@ classes:
       - ea: 0x1420D06F8
     funcs:
       0x140B4ABD0: ReadPacket
-      0x140B4AD90: GetRelicID
-      0x140B4ADA0: GetRelicNoteID
+      0x140B4AD90: GetRelicId
+      0x140B4ADA0: GetRelicNoteId
       0x140B4ADB0: GetMonsterProgress
       0x140B4AE50: IsFateComplete
       0x140B4AE90: IsLeveComplete
@@ -7333,6 +7327,24 @@ classes:
   Client::Graphics::Vfx::VfxDataListenner:
     vtbls:
       - ea: 0x14205DCA0
+  Client::Game::Object::IFilterCommand:
+    vtbls:
+      - ea: 0x1420A18A0
+  Client::Game::Object::AggroFilter:
+    vtbls:
+      - ea: 0x1420A18E0
+        base: Client::Game::Object::IFilterCommand
+  Client::Game::Control::TargetSystem::Circle:
+    vtbls:
+      - ea: 0x1420A1930
+        base: Client::Game::Object::IFilterCommand
+  Client::Game::Control::TargetSystem::CircleManager:
+    vtbls:
+      - ea: 0x1420A1940
+        base: Client::Game::Object::IFilterCommand
+  Client::Game::Control::TargetSystem::ListFeeder:
+    vtbls:
+      - ea: 0x1420A1950
   Client::Game::Control::TargetSystem::AggroListFeeder:
     vtbls:
       - ea: 0x1420A1960
@@ -7345,6 +7357,17 @@ classes:
     vtbls:
       - ea: 0x1420A1980
         base: Client::Game::Control::TargetSystem::ListFeeder
+  Client::Game::Control::TargetSystem::TargetFilter:
+    vtbls:
+      - ea: 0x1420A1990
+        base: Client::Game::Object::IFilterCommand
+  Client::Game::Control::TargetSystem::SpaceFilter:
+    vtbls:
+      - ea: 0x1420A19A0
+        base: Client::Game::Object::IFilterCommand
+  Client::Game::Control::TargetSystem::OutlineInfo:
+    funcs:
+      0x1405FEB00: UpdateOutline
   Client::Game::Control::TargetSystem:
     instances:
       - ea: 0x14299E720
@@ -10474,11 +10497,14 @@ classes:
       25: UpdateRadius
       26: Highlight
       #30: TryGetEventHandler
-      #31: GetEventHandlersImpl
+      30: GetEventHandlersImpl
       34: SetReadyToDraw
       35: Update
       46: GetCenterPosition
       47: GetNameId
+      53: GetTargetType
+      54: PositionModified
+      55: RotationModified
       57: IsDead
       58: IsNotMounted
       59: Terminate
@@ -15228,7 +15254,7 @@ classes:
   Client::Game::Event::NpcRepairCallback:
     vtbls:
       - ea: 0x1421DC9E0
-        base: Component::GUI::AtkModuleInterface::AtkEventInterface # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler>
+        base: Client::Game::Event::TalkCallback # this should be Client::Game::Event::UICallbackBase<Client::Game::Event::EventHandler>
   Client::Game::Event::EventSceneModule:
     funcs:
       0x141709150: ctor
