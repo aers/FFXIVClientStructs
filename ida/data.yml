@@ -550,6 +550,17 @@ classes:
       0x140833D90: ResetBGM
       0x140833DE0: SetBGMPlayState # static
       0x140833E10: ctor
+  Client::Game::MapDiscoveryManager:
+    instances:
+      - ea: 0x1429BFFF0
+    funcs:
+      0x140835C00: ReadDiscoveryListPacket
+      0x140835D30: ReadDiscoveryPacket
+      0x140835F40: IsMapRegionDiscovered
+      0x140836290: IsRegionDiscovered
+      0x140836010: SendMapRangeEntered
+      0x140836190: Update
+      0x1408366A0: IsDiscoveryEnabledForMap
   Client::Game::Control::InputManager:
     instances:
       - ea: 0x1427AC640
@@ -5957,6 +5968,7 @@ classes:
       0x140B9F380: HandleTreasureFadeOutPacket
       0x140B9F410: HandleWeatherChangePacket
       0x140B9F430: HandleDiscoveryPacket
+      0x140B9F450: HandleDiscoveryListPacket
       0x140B9F470: HandlePlayerTitleListPacket
       0x140B9F4C0: HandleUpdatePartyPositionsPacket
       0x140B9F4F0: HandleUpdateAllianceNormalPositionsPacket
