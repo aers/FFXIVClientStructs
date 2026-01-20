@@ -6883,8 +6883,9 @@ classes:
     vtbls:
       - ea: 0x1420945A8
         base: Client::Graphics::Scene::Object
-    vfuncs:
+    vfuncs: # 50
       11: UpdateMaterials
+      24: UpdateTint
     funcs:
       0x14040C370: ctor
   Client::Graphics::JobSystem<Client::Graphics::Scene::World>:
@@ -6948,15 +6949,17 @@ classes:
     vtbls:
       - ea: 0x142094AC0
         base: Client::Graphics::Scene::DrawObject
-    vfuncs:
-      24: UpdateTint
+    vfuncs: # 111
       52: ForceWetness
       53: ResetWetness
+      56: LoadSlot
       58: SetupScaling
       63: OnRenderModel
       64: OnRenderMaterial
-      69: FlagSlotForUpdate
-      72: GetDataForSlot
+      69: SetEquipmentSlotModel
+      70: SetGlassesSlotModel
+      71: GetEquipmentSlotModel
+      72: GetGlassesSlotModel
       75: ResolveRootPath
       76: ResolveSklbPath
       77: ResolveMdlPath
@@ -6967,6 +6970,7 @@ classes:
       84: ResolvePapPath
       85: ResolveTmbPath
       87: ResolveMaterialPapPath
+      88: GetRaceSexId
       89: ResolveImcPath
       90: ResolveMtrlPath
       92: ResolveDecalPath
@@ -6989,6 +6993,8 @@ classes:
       0x140427290: LoadAllMTRLsFromMDLInSlot
       0x140427620: LoadAllDecalTexFromMDLInSlot
       0x140427790: LoadPHYBForSlot
+      0x140427910: LoadBKDForSlot
+      0x140427B50: LoadBNMBForSlot
       0x140427E90: UnloadMDLForSlot
       0x140428570: CopyIMCForSlot
 #oldfail       0x140498B30: CreateStagingArea
