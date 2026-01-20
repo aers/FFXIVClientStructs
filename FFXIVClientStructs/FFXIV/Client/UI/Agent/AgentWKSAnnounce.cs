@@ -13,7 +13,7 @@ public unsafe partial struct AgentWKSAnnounce {
     [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
     public partial struct AnnounceData {
         [FieldOffset(0x4)] public byte EmergencyInfoRowId;
-        [FieldOffset(0x8)] public byte EmergencyInfoSubRowId;
+        [FieldOffset(0x5)] public byte EmergencyInfoSubRowId;
         [FieldOffset(0xC), FixedSizeArray] internal FixedSizeArray2<uint> _emergencyProgress; // the game client indexes these individually and not as an array but this makes it easier to compare with the required value
         [FieldOffset(0x18)] public Utf8String FormattedString;
 
