@@ -1292,6 +1292,11 @@ classes:
       0x14168CCA0: Destroy
       0x14168CFC0: GetObjectByIndex
       0x14168CFE0: GetObjectById
+      0x14168D210: CreateGatheringPointObject
+      0x14168D390: CreateEventObject
+      0x14168D4E0: CreateHousingEventObject
+      0x14168D5E0: CreateHousingCombinedObject
+      0x14168D6E0: CreateAreaObject
   Client::Game::Object::StandObjectManager: # Lively ENpcs
     instances:
       - ea: 0x1429FE4C0
@@ -1637,10 +1642,11 @@ classes:
       - ea: 0x14299AFA0
     funcs:
       0x14081E100: ctor
-      0x14081E380: Initialize
-      0x14081E530: Update
-      0x14081E4A0: Termiante
       0x14081E2B0: Finalizer
+      0x14081E380: Initialize
+      0x14081E4A0: Termiante
+      0x14081E530: Update
+      0x140823A70: ProcessPacket
   Client::Game::InventoryManager:
     instances:
       - ea: 0x1429C6D60
@@ -1651,6 +1657,7 @@ classes:
       0x140841B00: ClearOperationByContextId
       0x140842EC0: GetInventoryContainer  # (this, containerId)
       0x140842F70: GetInventorySlot  # (this, containerId, slotId)
+      0x140843850: IsContainerLoaded
       0x1408441D0: MoveItemSlot # (srcContainer, srcSlot, dstContainer, dstSlot, 1)
       0x14084B480: GetInventoryItemCount # (this, itemId, hq, 1, 1, 0)
       0x14084BBD0: GetItemCountInContainer # (this, itemId, containerId, hq, 0)
@@ -1677,6 +1684,7 @@ classes:
       0x1408596C0: GetWolfMarks
       0x140859730: GetAlliedSeals
       0x1408597A0: GetGoldSaucerCoin
+      0x140859930: HasLowDurabilityItemsInContainer
       0x14085ADB0: GetWeddingDateFromItem
       0x14085AE50: GetRemainingWeddingInvitationCopiesFromItem
       0x14085AFC0: GetRacingChocoboAdoptionDateFromItem # For Item#9560 (Proof of Covering)
@@ -2611,6 +2619,7 @@ classes:
       0x140B691C0: IsEmoteUnlocked
       0x140B69330: IsItemActionUnlocked
       0x140B670F0: IsTripleTriadCardUnlocked
+      0x140B673C0: AnnounceHowTo
       0x140B681D0: Dismount
       0x140B688A0: RequestResetTimestamps # MapAllowance, ChallengeLogReset
       0x140B688E0: HasNextMapAllowanceTimestamp
