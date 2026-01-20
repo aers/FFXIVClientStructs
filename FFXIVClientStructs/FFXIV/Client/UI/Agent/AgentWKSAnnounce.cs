@@ -9,8 +9,9 @@ namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 public unsafe partial struct AgentWKSAnnounce {
     [FieldOffset(0x28)] public AnnounceData* Data;
 
+    [GenerateInterop]
     [StructLayout(LayoutKind.Explicit, Size = 0xA8)]
-    public struct AnnounceData {
+    public partial struct AnnounceData {
         [FieldOffset(0x4)] public byte EmergencyInfoRowId;
         [FieldOffset(0x8)] public byte EmergencyInfoSubRowId;
         [FieldOffset(0xC), FixedSizeArray] internal FixedSizeArray2<uint> _emergencyProgress; // the game client indexes these individually and not as an array but this makes it easier to compare with the required value
