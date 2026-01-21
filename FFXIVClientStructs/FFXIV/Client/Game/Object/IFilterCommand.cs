@@ -1,4 +1,4 @@
-﻿namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
+namespace FFXIVClientStructs.FFXIV.Client.Game.Object;
 
 [GenerateInterop(true)]
 [StructLayout(LayoutKind.Explicit, Size = 8)]

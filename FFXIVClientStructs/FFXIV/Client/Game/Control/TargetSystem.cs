@@ -102,7 +102,7 @@ public unsafe partial struct TargetSystem {
         [FieldOffset(0x22), FixedSizeArray] internal FixedSizeArray4<bool> _customFilters;
         [FieldOffset(0x26), FixedSizeArray] internal FixedSizeArray11<bool> _targetFilters;
     }
-    
+
     // Client::Game::Control::TargetSystem::OutlineInfo
     [StructLayout(LayoutKind.Explicit, Size = 0x10)]
     public struct OutlineInfo {

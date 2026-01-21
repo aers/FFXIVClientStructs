@@ -123,7 +123,7 @@ public unsafe partial struct GameObject {
 
     [VirtualFunction(47)]
     public partial uint GetNameId();
-    
+
     [VirtualFunction(53)]
     public partial TargetType GetTargetType();
 
