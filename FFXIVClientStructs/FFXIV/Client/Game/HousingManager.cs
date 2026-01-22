@@ -157,7 +157,6 @@ public unsafe partial struct HousingManager {
 [StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public struct HouseId : IEquatable<HouseId>, IComparable<HouseId> {
     [FieldOffset(0x0), CExporterIgnore] public ulong Id;
-    [FieldOffset(0x0), Obsolete("Use Unit.Value", true)] public byte Data0;
     [FieldOffset(0x0)] public HouseUnit Unit;
     [FieldOffset(0x1)] private byte Unk1;
     /// <remarks>

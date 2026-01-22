@@ -47,9 +47,6 @@ public unsafe partial struct CompanionInfo {
     /// 2 = Feet
     /// </remarks>
     [FieldOffset(0x1A), FixedSizeArray] internal FixedSizeArray3<byte> _buddyEquipRowIds;
-    [FieldOffset(0x1A), Obsolete("Use BuddyEquipRowIds[0]", true)] public byte BardingHead;
-    [FieldOffset(0x1B), Obsolete("Use BuddyEquipRowIds[1]", true)] public byte BardingChest;
-    [FieldOffset(0x1C), Obsolete("Use BuddyEquipRowIds[2]", true)] public byte BardingFeet;
     [FieldOffset(0x1D), FixedSizeArray(isString: true)] internal FixedSizeArray21<byte> _name;
 
     [FieldOffset(0x34)] public uint CurrentXP;

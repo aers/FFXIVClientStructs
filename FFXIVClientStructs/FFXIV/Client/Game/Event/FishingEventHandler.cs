@@ -60,10 +60,6 @@ public unsafe partial struct FishingEventHandler {
     /// </summary>
     [FieldOffset(0x1E0), FixedSizeArray] internal FixedSizeArray3<uint> _swimBaitItemIds;
 
-    [FieldOffset(0x1E0), Obsolete("Use SwimBaitItemIds[0]", true)] public uint SwimBaitId1;
-    [FieldOffset(0x1E4), Obsolete("Use SwimBaitItemIds[1]", true)] public uint SwimBaitId2;
-    [FieldOffset(0x1E8), Obsolete("Use SwimBaitItemIds[2]", true)] public uint SwimBaitId3;
-
     [FieldOffset(0x1EC)] private uint Unk_24C; // Sometimes matches 0x224, but that offset may just be uninitialized padding.
 
     /// <summary>
@@ -138,20 +134,4 @@ public enum FishingState : int {
     /// Or air, sand, etc.; just when you are actually fishing.
     /// </remarks>
     LineInWater = 12,
-    [Obsolete("Use None", true)]
-    NotFishing = 0,
-    [Obsolete("Use CastingOut", true)]
-    PoleOut = 1,
-    [Obsolete("Use PullingPoleIn", true)]
-    PullPoleIn = 2,
-    [Obsolete("Use Quitting", true)]
-    Quit = 3,
-    [Obsolete("Use Hooking", true)]
-    Reeling = 6,
-    [Obsolete("Use ConfirmingCollectable", true)]
-    Waiting = 8,
-    [Obsolete("Use AmbitiousLure", true)]
-    NormalFishing = 9,
-    [Obsolete("Use LineInWaiter", true)]
-    LureFishing = 12,
 }

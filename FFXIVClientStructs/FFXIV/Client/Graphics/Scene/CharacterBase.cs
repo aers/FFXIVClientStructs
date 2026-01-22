@@ -56,7 +56,6 @@ public unsafe partial struct CharacterBase {
 
     [FieldOffset(0x300)] public void* TempData; // struct with temporary data (size >= 0x88)
 
-    [FieldOffset(0x308), Obsolete($"Use {nameof(PerSlotStagingArea)} instead", true)] public void* TempSlotData; // struct with temporary data for each slot (size = 0xE0 * slot count)
     [FieldOffset(0x308)] public SlotStagingArea* PerSlotStagingArea;
 
     [FieldOffset(0x350)] public Material** Materials; // size = SlotCount * MaterialsPerSlot
