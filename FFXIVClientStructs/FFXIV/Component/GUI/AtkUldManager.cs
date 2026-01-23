@@ -1,4 +1,5 @@
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
+using FFXIVClientStructs.FFXIV.Common.Math;
 
 namespace FFXIVClientStructs.FFXIV.Component.GUI;
 
@@ -27,6 +28,10 @@ public unsafe partial struct AtkUldManager {
     [FieldOffset(0x48)] public AtkResourceRendererManager* ResourceRendererManager;
     [FieldOffset(0x50)] public AtkResNode** NodeList;
     [FieldOffset(0x58)] public StdLinkedList<Pointer<DuplicateObjectList>> DuplicateObjectsList; // linked list of lists of duplicates
+    /// <remarks>
+    /// Value may only be valid during an update call.
+    /// </remarks>
+    [FieldOffset(0x70)] public Bounds* ClipBounds;
     [FieldOffset(0x78)] public AtkResNode* RootNode;
     [FieldOffset(0x80)] public ushort RootNodeWidth;
     [FieldOffset(0x82)] public ushort RootNodeHeight;
