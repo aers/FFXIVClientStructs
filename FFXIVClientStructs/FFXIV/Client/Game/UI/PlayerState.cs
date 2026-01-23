@@ -432,7 +432,7 @@ public unsafe partial struct PlayerState {
     /// <summary>
     /// Check if a specific set of Glasses are unlocked. Internally, this will look up the associated GlassesStyle
     /// for the specified pair and check that it's valid and marked as unlocked in
-    /// <see cref="UnlockedGlassesStylesBitmask"/>.
+    /// <see cref="UnlockedGlassesStylesBitArray"/>.
     /// </summary>
     /// <param name="glassesId">The RowID of a set of glasses to check.</param>
     /// <returns>Returns true if the specified glasses are unlocked, false otherwise.</returns>
