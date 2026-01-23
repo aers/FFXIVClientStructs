@@ -376,8 +376,6 @@ functions:
   0x1403290B0: MatrixMultiply2
   0x140327490: MatrixVectorMultiply
 #fail   0x14036CD30: SubmitConstantBufferUpdate
-  0x1400E3090: IsLocalPlayerPartyLeader
-  0x1400E3030: IsLocalPlayerInParty
   0x1400E30E0: IsPartyMemberByNameOrContentId # (name, contentId)
   0x1400E3210: GetPartyMemberClassJobByContentId
   0x14086E5A0: ObjectIdToEntityId # returns invalid id if objectid is not a player
@@ -4867,6 +4865,8 @@ classes:
       0x140953FE0: GetMemberByContentId # Static
       0x1409540A0: GetMemberByEntityId # Static
       0x1405E3990: IsContentIdInParty # Static
+      0x1400E3090: IsLocalPlayerPartyLeader # Static
+      0x1400E3030: IsLocalPlayerInParty # Static
       0x140950150: ReceiveListing
   Client::UI::Info::InfoProxyPartyMember:
     vtbls:

@@ -44,6 +44,12 @@ public unsafe partial struct InfoProxyCrossRealm {
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 ?? ?? ?? ?? 48 8B CB FF 50 ?? 41 0F B7 4E")]
     public static partial bool IsContentIdInParty(ulong contentId);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 88 9F ?? ?? ?? ?? 0F B6 F0")]
+    public static partial bool IsLocalPlayerInParty();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 75 3F 33 D2")]
+    public static partial bool IsLocalPlayerPartyLeader();
+
     [MemberFunction("40 53 41 57 48 83 EC 28 48 8B D9 4C 8B FA 48 8B 0D")]
     public partial void ReceiveListing(nint packet);
 }
