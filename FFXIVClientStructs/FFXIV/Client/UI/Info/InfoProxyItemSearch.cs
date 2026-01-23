@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Info;
 

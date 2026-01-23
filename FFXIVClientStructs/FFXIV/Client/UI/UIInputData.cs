@@ -1,7 +1,6 @@
 // Suppress Inconsistent Naming due to VirtualKeyCode Names
 // ReSharper disable InconsistentNaming
 using FFXIVClientStructs.FFXIV.Client.System.Input;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 using UserFileEvent = FFXIVClientStructs.FFXIV.Client.UI.Misc.UserFileManager.UserFileEvent;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI;

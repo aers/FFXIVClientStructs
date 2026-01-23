@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Game.MJI;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 

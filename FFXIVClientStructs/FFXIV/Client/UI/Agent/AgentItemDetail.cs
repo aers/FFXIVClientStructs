@@ -1,5 +1,4 @@
 using FFXIVClientStructs.FFXIV.Client.Enums;
-using FFXIVClientStructs.FFXIV.Client.System.String;
 
 namespace FFXIVClientStructs.FFXIV.Client.UI.Agent;
 
