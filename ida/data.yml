@@ -8071,6 +8071,7 @@ classes:
       51: OnRefresh
       52: OnRequestedUpdate
       54: FireCloseCallback
+      56: SetSizeFromConfig
       57: HandleCustomInput
       58: OnOpenTransitionStarted
       59: OnFocusChange

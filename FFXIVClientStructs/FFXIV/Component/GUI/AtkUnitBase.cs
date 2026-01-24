@@ -396,6 +396,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(54)]
     public partial void FireCloseCallback();
 
+    /// <remarks> Called after <see cref="OnSetup(uint, AtkValue*)"/> when entry in AddonConfig existed. </remarks>
+    [VirtualFunction(56)]
+    public partial void SetSizeFromConfig(float width, float height);
+
     [VirtualFunction(57)]
     public partial bool HandleCustomInput(AtkEventData.AtkInputData* inputData);
 
