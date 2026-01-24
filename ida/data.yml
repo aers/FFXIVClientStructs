@@ -4851,6 +4851,7 @@ classes:
     funcs:
       0x14094FF70: ctor
       0x140950140: GetPtr  # Static
+      0x140950150: ReceiveListing
       0x140952EE0: IsCrossRealmParty # Static
       0x140952F60: IsCrossRealmPartyLeader # Static
       0x140952F80: IsAllianceRaid # Static
@@ -4860,14 +4861,13 @@ classes:
       0x140953160: GetAllianceGroupCount # Static
       0x140953190: GetPartyMemberCount_2 # Static
       0x1409531D0: GetGroupIndex # Static
-      0x140953E90: IsLocalPlayerInParty # Static
+      0x140953E90: IsLocalPlayerInGroup # Static
       0x140953F40: GetGroupMember # Static
       0x140953FE0: GetMemberByContentId # Static
       0x1409540A0: GetMemberByEntityId # Static
       0x1405E3990: IsContentIdInParty # Static
-      0x1400E3090: IsLocalPlayerPartyLeader # Static
       0x1400E3030: IsLocalPlayerInParty # Static
-      0x140950150: ReceiveListing
+      0x1400E3090: IsLocalPlayerPartyLeader # Static
   Client::UI::Info::InfoProxyPartyMember:
     vtbls:
       - ea: 0x1420C4868
