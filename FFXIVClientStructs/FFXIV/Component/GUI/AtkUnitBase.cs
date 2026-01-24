@@ -107,7 +107,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
     [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag, AddonConfig related?
     [FieldOffset(0x1B8)] private byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
-    [FieldOffset(0x1B9)] public byte NumOpenPopups; // used for dialogs and context menus to block inputs via ShouldIgnoreInputs
+    [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons")] public byte NumOpenPopups;
+    /// <remarks> Used for dialogs, context menus and other windows that cause inputs to be blocked. Checked in <see cref="ShouldIgnoreInputs"/>. </remarks>
+    [FieldOffset(0x1B9)] public byte NumBlockingAddons;
     [FieldOffset(0x1BA)] private byte Unk1BA;
     [FieldOffset(0x1BB)] private byte Unk1BB;
     [FieldOffset(0x1BC)] public float OpenTransitionScale;
@@ -149,7 +151,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1E4)] public ushort Id;
     [FieldOffset(0x1E6)] public ushort ParentId;
     [FieldOffset(0x1E8)] public ushort HostId; // for example, in CharacterProfile this holds the ID of the Character addon
-    [FieldOffset(0x1EA)] public ushort ContextMenuParentId;
+    [FieldOffset(0x1EA), Obsolete("Renamed to BlockedParentId")] public ushort ContextMenuParentId;
+    /// <remarks> Used by context menus or other windows that cause interaction with the addon set here to be blocked. </remarks>
+    [FieldOffset(0x1EA)] public ushort BlockedParentId;
     [FieldOffset(0x1EC)] public byte CursorNavigationOwnIndex;
     [FieldOffset(0x1ED)] public byte Alpha;
     [FieldOffset(0x1EE)] public byte ShowHideFlags;
