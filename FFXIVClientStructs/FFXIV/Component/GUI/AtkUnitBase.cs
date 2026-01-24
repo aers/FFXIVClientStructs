@@ -282,6 +282,12 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [MemberFunction("E8 ?? ?? ?? ?? 41 8B CF BF")]
     public partial bool ClearOperationGuide(int index);
 
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F0 44 0F B7 83"), GenerateStringOverloads]
+    public partial bool LoadAddonConfig(short* outWidth, short* outHeight, CStringPointer name, bool isInitialLoad);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 F0 44 0F B7 83"), GenerateStringOverloads]
+    public partial void SaveAddonConfig(CStringPointer name, bool a2, bool a3);
+
     [VirtualFunction(3)]
     public partial bool Open(uint depthLayer);
 
@@ -408,6 +414,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
 
     [VirtualFunction(60)]
     public partial void OnScreenSizeChange(int width, int height);
+
+    [VirtualFunction(61)]
+    public partial void OnConfigLoaded(bool isInitialLoad);
 
     [VirtualFunction(62)]
     public partial void OnMouseOver();
