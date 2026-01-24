@@ -289,10 +289,10 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     public partial bool Close(bool fireCallback);
 
     [VirtualFunction(5)]
-    public partial void Show(bool silenceOpenSoundEffect, uint unsetShowHideFlags);
+    public partial void Show(bool disableShowTransition, uint unsetShowHideFlags);
 
     [VirtualFunction(6)]
-    public partial void Hide(bool unkBool, bool callHideCallback, uint setShowHideFlags);
+    public partial void Hide(bool disableHideTransition, bool callCloseCallback, uint setShowHideFlags);
 
     [VirtualFunction(7)]
     public partial void SetPosition(short x, short y);
