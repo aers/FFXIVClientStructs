@@ -395,6 +395,9 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [VirtualFunction(57)]
     public partial bool HandleCustomInput(AtkEventData.AtkInputData* inputData);
 
+    [VirtualFunction(59)]
+    public partial void OnFocusChange(bool isFocused);
+
     [VirtualFunction(60)]
     public partial void OnScreenSizeChange(int width, int height);
 
