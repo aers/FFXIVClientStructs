@@ -117,6 +117,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1C4)] public float Scale;
     /// <summary>
     /// <code>
+    /// 0x4 = Enable Filter (Modal window)
     /// 0x800 = Disable "Scale Window" option in the title bar context menu
     /// </code>
     /// </summary>
