@@ -25,7 +25,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x108), FixedSizeArray] internal FixedSizeArray2<Pointer<AtkResNode>> _additionalFocusableNodes; // allow UnitBase to be focused. for example, yellow bar above ContentsFinder
     [FieldOffset(0x118)] public AtkComponentNode* CurrentDropDownOwnerNode;
     [FieldOffset(0x120)] public AtkComponentNode* WindowNode;
-    [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for open/close transitions
+    [FieldOffset(0x128)] public AtkSimpleTween RootNodeTween; // used for show/hide transitions
     [FieldOffset(0x178)] public AtkValue* AtkValues;
     [FieldOffset(0x180)] public StdVector<CStringPointer> CachedAtkValueStrings;
     /// <summary>
@@ -74,8 +74,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <summary>
     /// <code>
     /// 0b0000_0100 [0x4] = LoadUldByName was called<br/>
-    /// 0b0000_1000 [0x8] = Disable close transition<br/>
-    /// 0b0010_0000 [0x20] = Suppress open/close sounds<br/>
+    /// 0b0000_1000 [0x8] = Disable hide transition<br/>
+    /// 0b0010_0000 [0x20] = Suppress show/hide sounds<br/>
     /// 0b0100_0000 [0x40] = Don't load/save AddonConfig
     /// </code>
     /// </summary>
@@ -103,8 +103,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1A5)] public byte Flags1A5;
     // 2 bytes padding
     [FieldOffset(0x1A8)] public int Param; // appears to be a generic field that some addons use for storage
-    [FieldOffset(0x1AC)] public uint OpenTransitionDuration;
-    [FieldOffset(0x1B0)] public uint CloseTransitionDuration;
+    [FieldOffset(0x1AC)] public uint ShowTransitionDuration;
+    [FieldOffset(0x1B0)] public uint HideTransitionDuration;
     [FieldOffset(0x1B4)] public uint Flags1B4; // used by SetFlag, AddonConfig related?
     [FieldOffset(0x1B8)] private byte AddonParamUnknown1; // used in RaptureAtkUnitManager.vf18
     [FieldOffset(0x1B9), Obsolete("Renamed to NumBlockingAddons")] public byte NumOpenPopups;
@@ -112,8 +112,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1B9)] public byte NumBlockingAddons;
     [FieldOffset(0x1BA)] private byte Unk1BA;
     [FieldOffset(0x1BB)] private byte Unk1BB;
-    [FieldOffset(0x1BC)] public float OpenTransitionScale;
-    [FieldOffset(0x1C0)] public float CloseTransitionScale;
+    [FieldOffset(0x1BC)] public float ShowTransitionScale;
+    [FieldOffset(0x1C0)] public float HideTransitionScale;
     [FieldOffset(0x1C4)] public float Scale;
     /// <summary>
     /// <code>
@@ -143,11 +143,11 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     // 1 byte padding
     [FieldOffset(0x1D4)] public short X;
     [FieldOffset(0x1D6)] public short Y;
-    [FieldOffset(0x1D8)] public short OpenTransitionOffsetX;
-    [FieldOffset(0x1DA)] public short OpenTransitionOffsetY;
-    [FieldOffset(0x1DC)] public short CloseTransitionOffsetX;
-    [FieldOffset(0x1DE)] public short CloseTransitionOffsetY;
-    [FieldOffset(0x1E0)] public short OpenSoundEffectId;
+    [FieldOffset(0x1D8)] public short ShowTransitionOffsetX;
+    [FieldOffset(0x1DA)] public short ShowTransitionOffsetY;
+    [FieldOffset(0x1DC)] public short HideTransitionOffsetX;
+    [FieldOffset(0x1DE)] public short HideTransitionOffsetY;
+    [FieldOffset(0x1E0)] public short ShowSoundEffectId;
     [FieldOffset(0x1E2)] public ushort AtkValuesCount;
     [FieldOffset(0x1E4)] public ushort Id;
     [FieldOffset(0x1E6)] public ushort ParentId;
@@ -162,6 +162,16 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1F0)] public AtkResNode** CollisionNodeList; // seems to be all collision nodes in tree, may be something else though
     [FieldOffset(0x1F8)] public uint CollisionNodeListCount;
     [FieldOffset(0x1FC), FixedSizeArray] internal FixedSizeArray5<OperationGuide> _operationGuides; // the little button hints in controller mode
+
+    [FieldOffset(0x1AC), Obsolete("Renamed to ShowTransitionDuration")] public uint OpenTransitionDuration;
+    [FieldOffset(0x1B0), Obsolete("Renamed to HideTransitionDuration")] public uint CloseTransitionDuration;
+    [FieldOffset(0x1BC), Obsolete("Renamed to ShowTransitionScale")] public float OpenTransitionScale;
+    [FieldOffset(0x1C0), Obsolete("Renamed to HideTransitionScale")] public float CloseTransitionScale;
+    [FieldOffset(0x1D8), Obsolete("Renamed to ShowTransitionOffsetX")] public short OpenTransitionOffsetX;
+    [FieldOffset(0x1DA), Obsolete("Renamed to ShowTransitionOffsetY")] public short OpenTransitionOffsetY;
+    [FieldOffset(0x1DC), Obsolete("Renamed to HideTransitionOffsetX")] public short CloseTransitionOffsetX;
+    [FieldOffset(0x1DE), Obsolete("Renamed to HideTransitionOffsetY")] public short CloseTransitionOffsetY;
+    [FieldOffset(0x1E0), Obsolete("Renamed to ShowSoundEffectId")] public short OpenSoundEffectId;
 
     public uint DepthLayer {
         get => (Flags198 >> 16) & 0xF;
