@@ -75,8 +75,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <code>
     /// 0b0000_0100 [0x4] = LoadUldByName was called<br/>
     /// 0b0000_1000 [0x8] = Disable hide transition<br/>
-    /// 0b0010_0000 [0x20] = Suppress show/hide sounds<br/>
-    /// 0b0100_0000 [0x40] = Don't load/save AddonConfig
+    /// 0b0010_0000 [0x20] = Disable show/hide sound effects<br/>
+    /// 0b0100_0000 [0x40] = Disable loading/saving AddonConfig
     /// </code>
     /// </summary>
     [FieldOffset(0x1A2)] public byte Flags1A2;
@@ -84,7 +84,7 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     /// <code>
     /// 0b0000_0001 [0x1] = Enable title bar context menu<br/>
     /// 0b0010_0000 [0x20] = Disable clamping of position to the game window (Note: this will make the unitbase open at (0,0) if no position is set)
-    /// 0b0100_0000 [0x40] = Make WindowCollisionNode non-interactable (no focus on click, not moving addon when dragged)
+    /// 0b0100_0000 [0x40] = Disable WindowCollisionNode interactivity (no focus on click, not moving the addon when dragged)
     /// </code>
     /// </summary>
     [FieldOffset(0x1A3)] public byte Flags1A3;
@@ -96,8 +96,8 @@ public unsafe partial struct AtkUnitBase : ICreatable {
     [FieldOffset(0x1A4)] public byte Flags1A4;
     /// <summary>
     /// <code>
-    /// 0b0010_0000 [0x20] = Populate TextNode texts (before OnSetup)<br/>
-    /// 0b0100_0000 [0x40] = Don't show on open
+    /// 0b0010_0000 [0x20] = Enable TextNodes to be populated (before OnSetup)<br/>
+    /// 0b0100_0000 [0x40] = Disable show on open
     /// </code>
     /// </summary>
     [FieldOffset(0x1A5)] public byte Flags1A5;
