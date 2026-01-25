@@ -1647,7 +1647,7 @@ classes:
       0x14081E100: ctor
       0x14081E2B0: Finalizer
       0x14081E380: Initialize
-      0x14081E4A0: Termiante
+      0x14081E4A0: Terminate
       0x14081E530: Update
       0x140823A70: ProcessPacket
   Client::Game::InventoryManager:
@@ -5187,6 +5187,13 @@ classes:
       - ea: 0x142096A60
     vfuncs:
       0: Dtor
+  Client::System::File::FileHandleManager:
+    vtbls:
+      - ea: 0x142096A70
+  Client::System::File::StreamFile:
+    vtbls:
+      - ea: 0x142096A78
+        base: Client::System::File::FileInterface
   Client::System::File::FileThread:
     vtbls:
       - ea: 0x142096A80
@@ -5207,6 +5214,8 @@ classes:
       0x140464310: Finalizer
       0x140464D60: CreateFileThread
   Client::System::File::FileAccessPath:
+    vtbls:
+      - ea: 0x142096A68
     funcs:
       0x140094820: ctor
       0x140094840: ctor_FromUtf8String
