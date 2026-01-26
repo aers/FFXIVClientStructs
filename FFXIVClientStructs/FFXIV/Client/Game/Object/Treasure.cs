@@ -40,7 +40,7 @@ public unsafe partial struct Treasure {
     /// </summary>
     [FieldOffset(0x1F0)] public byte ItemCount;
 
-    [FieldOffset(0x1F4)] private int Unk_1F4; // Probably just a bool.  Seems to be something like "has been opened for looting while object exists locally for the current player", but more testing required.
+    [FieldOffset(0x1F4)] private int Unk1F4; // Probably just a bool.  Seems to be something like "has been opened for looting while object exists locally for the current player", but more testing required.
 
     /// <summary>
     /// How many seconds the treasure has been open.
@@ -58,7 +58,7 @@ public unsafe partial struct Treasure {
     /// <remarks>
     /// Seems to be -1 for treasures that can spawn in non-fixed locations (i.e., enemies dropping coffers, deep dungeon).  Have only otherwise seen zero.
     /// </remarks>
-    [FieldOffset(0x1FE)] private short Unk_1FE;
+    [FieldOffset(0x1FE)] private short Unk1FE;
 
     [FieldOffset(0x200)] public TreasureKind CofferKind;
 
@@ -71,9 +71,12 @@ public unsafe partial struct Treasure {
         Unopened = 0,
         Opening = 1,
         Opened = 2,
-        Unk_3 = 3, // Went directly to this (skipped 1 and 2) when opening personal spoils in certain instances.  Is also a transition state that lasts a few frames as fadeout beings for some coffers.
+        Unk3 = 3, // Went directly to this (skipped 1 and 2) when opening personal spoils in certain instances.  Is also a transition state that lasts a few frames as fadeout beings for some coffers.
         FadingOut = 4,
         FadedOut = 5,
+
+        [Obsolete("Why are you using this without documenting it in CS?", true)]
+        Unk3 = 3,
     }
 
     [Flags]
@@ -84,15 +87,21 @@ public unsafe partial struct Treasure {
         /// Sometimes set when fading starts, sometimes when fading is complete.  It depends upon when TreasureState 3 happens.
         /// </remarks>
         FadedOut = 2,
-        Unk_4 = 4, // Probably either "contains loot rollable by player's party", or "claim timer running for player's party" / "items from this treasure are in rolling UI window".
+        Unk4 = 4, // Probably either "contains loot rollable by player's party", or "claim timer running for player's party" / "items from this treasure are in rolling UI window".
+
+        [Obsolete("Why are you using this without documenting it in CS?", true)]
+        Unk_4 = 4,
     }
 
     public enum TreasureKind : byte {
         Unknown = 0,
         Levequest = 1,
         DungeonRaid = 2,
-        Unk_3 = 3,
+        Unk3 = 3,
         TreasureHunt = 4,
         PersonalLoot = 5, // Variant, Occult Crescent, etc.
+
+        [Obsolete("Why are you using this without documenting it in CS?", true)]
+        Unk_3 = 3,
     }
 }

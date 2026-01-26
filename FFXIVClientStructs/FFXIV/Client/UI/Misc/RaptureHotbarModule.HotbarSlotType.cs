@@ -25,12 +25,12 @@ public partial struct RaptureHotbarModule {
         Recipe = 0x14,
         ChocoboRaceAbility = 0x15,
         ChocoboRaceItem = 0x16,
-        //Unk_0x17 = 0x17, // seems to be a legacy type, possibly PvP related based on associated icon 000785
+        //Unk0x17 = 0x17, // seems to be a legacy type, possibly PvP related based on associated icon 000785
         ExtraCommand = 0x18,
         PvPQuickChat = 0x19,
         PvPCombo = 0x1A,
         BgcArmyAction = 0x1B,
-        //Unk_0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
+        //Unk0x1C = 0x1C, // seems to be a legacy type, possibly performance instrument related based on associated icon 000782
         PerformanceInstrument = 0x1D,
         McGuffin = 0x1E,
         Ornament = 0x1F,

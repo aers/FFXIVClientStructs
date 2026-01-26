@@ -59,8 +59,14 @@ public enum ObjectType {
     CharacterBase = 3,
     VfxObject = 4,
     Light = 5,
-    Unk_Type6 = 6,
+    UnkType6 = 6,
     EnvSpace = 7,
     EnvLocation = 8,
-    Unk_Type9 = 9
+    UnkType9 = 9,
+
+    [Obsolete("Why are you using this without documenting it in CS?", true)]
+    Unk_Type6 = 6,
+
+    [Obsolete("Why are you using this without documenting it in CS?", true)]
+    Unk_Type9 = 9,
 }

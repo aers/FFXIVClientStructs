@@ -14,7 +14,7 @@ public unsafe partial struct StatusManager {
     [FieldOffset(0x3C8), FixedSizeArray] internal FixedSizeArray7<byte> _flags;
 
     [FieldOffset(0x3D0)] private long Unk3D0;
-    //[FieldOffset(0x2E8)] private byte Unk_180;
+    //[FieldOffset(0x2E8)] private byte Unk180;
     [FieldOffset(0x3D8)] public byte NumValidStatuses;
 
     /// <summary>
