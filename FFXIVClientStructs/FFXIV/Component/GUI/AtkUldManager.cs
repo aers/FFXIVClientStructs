@@ -62,7 +62,7 @@ public unsafe partial struct AtkUldManager {
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 86 ?? ?? ?? ?? 48 85 C0 74 21")]
     public partial void SetupComponentFromULDResourceHandle(byte* uldResourceOffset, uint componentId, ushort* timeline, AtkUldAsset* uldAsset, AtkUldPartsList* uldPartList, ushort assetNum, ushort partsNum, AtkResourceRendererManager* renderManager, bool unkResourceBool, bool keepHandle);
     
-    [MemberFunction("48 89 6C 24 ?? 48 89 74 24 ?? 41 56 48 83 EC 30 4C 89 49")]
+    [MemberFunction("E8 ?? ?? ?? ?? 81 7F ?? ?? ?? ?? ?? 4C 8B CB")]
     public partial void SetupComponentTimelineFromULDResourceHandle(byte* uldResourceOffset, uint componetId, AtkTimelineManager* atkTimeLineManager, AtkResNode* node);
 
     [MemberFunction("E8 ?? ?? ?? ?? 0F B7 47 0E")]
