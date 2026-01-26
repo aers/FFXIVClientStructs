@@ -1,3 +1,4 @@
+using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.FFXIV.Client.System.Resource.Handle;
 using FFXIVClientStructs.FFXIV.Common.Math;
 
@@ -56,6 +57,33 @@ public unsafe partial struct AtkUldManager {
 
     [MemberFunction("E8 ?? ?? ?? ?? 49 8B 55 ?? 0F B7 CD")]
     public partial AtkResNode* CreateAtkNode(uint type);
+
+    [MemberFunction("E8 ?? ?? ?? ?? F6 83 ?? ?? ?? ?? ?? 75 17")]
+    public partial void SetupFromULDResourceHandle(byte* uldResourceOffset0, byte* uldResoruceOffset1);
+
+    [MemberFunction("40 57 41 56 41 57 48 83 EC 30 45 8B 71 18")]
+    public partial void SetupTimelineFromULDResourceHandle(IMemorySpace* memSpace, byte* uldResourceOffset0, byte* uldResoruceOffset1, ushort timelineNum);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 49 8B 86 ?? ?? ?? ?? 48 85 C0 74 21")]
+    public partial void SetupComponentFromULDResourceHandle(byte* uldResourceOffset, uint componentId, ushort* timeline, AtkUldAsset* uldAsset, AtkUldPartsList* uldPartList, ushort assetNum, ushort partsNum, AtkResourceRendererManager* renderManager, bool unkResourceBool, bool keepHandle);
+    
+    [MemberFunction("E8 ?? ?? ?? ?? 81 7F ?? ?? ?? ?? ?? 4C 8B CB")]
+    public partial void SetupComponentTimelineFromULDResourceHandle(byte* uldResourceOffset, uint componetId, AtkTimelineManager* atkTimeLineManager, AtkResNode* node);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B7 47 0E")]
+    public partial void BindTimeline(byte* uldResourceOffset, AtkUldObjectInfo* objects, byte* nodeData, AtkTimelineManager* atkTimeLineManager);
+
+    [MemberFunction("40 56 48 83 EC 20 48 8B 41 10")]
+    public partial void SetupText();
+
+    [MemberFunction("E8 ?? ?? ?? ?? 0F B6 8E ?? ?? ?? ?? 48 8B 86")]
+    public partial void SetupTexture(IMemorySpace* memSpace, AtkResNode* node, AtkUldPartsList** parts, uint id);
+
+    [MemberFunction("E8 ?? ?? ?? ?? 48 8B 7F 28 66 03 E8")]
+    public partial int GetNodeCount(AtkResNode* node);
+
+    [MemberFunction("E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 66 83 F8 04")]
+    public static partial void ReadAtkTextNodeData(AtkTextNode* node, byte* nodeData,bool unk);
 
     public AtkResNode* CreateAtkNode(NodeType type)
         => CreateAtkNode((uint)type);

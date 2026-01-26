@@ -2511,7 +2511,6 @@ classes:
       0x14064EC20: UpdateTextLayouts
       0x140649910: PopulateTextLabels
       0x140647410: SetupComponentFromULDResourceHandle
-      0x140649B40: CreateTimeline
       0x140649E00: ReadComponentData
       0x14064AA70: ReadTPHD # PartList
       0x14064AC80: ReadASHDAndLoadTextures # AssetList
@@ -2533,6 +2532,14 @@ classes:
       0x14064BFA0: UpdateDrawNodeList
       0x14064C210: TraverseNode
       0x14064DE50: Finalizer
+      0x140649B40: SetupTimelineFromULDResourceHandle # CreateTimeline
+      0x1406499D0: SetupComponentTimelineFromULDResourceHandle
+      0x140649C80: BindTimeline
+      0x140649850: SetupText
+      0x14064B560: SetupTexture
+      0x14064F230: GetNodeCount
+      0x14064A630: ReadAtkTextNodeData
+      0x14064A300: ReadAtkResNodeData
   Component::GUI::AtkTimeline:
     funcs:
       0x14068F770: GetStartFrameIdxForLabelId
@@ -7937,7 +7944,6 @@ classes:
       0x140642AD0: SetOriginUnsafe
       0x140642B40: SetOriginXUnsafe
       0x140642B90: SetOriginYUnsafe
-      0x14064A300: ReadNodeData
       0x14064EBD0: SetComponentSize
       0x14066D6E0: GetComponent_2
       0x140670800: GetAsAtkComponentButton
