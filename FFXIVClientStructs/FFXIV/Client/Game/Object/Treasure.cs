@@ -76,7 +76,7 @@ public unsafe partial struct Treasure {
         FadedOut = 5,
 
         [Obsolete("Why are you using this without documenting it in CS?", true)]
-        Unk3 = 3,
+        Unk_3 = 3,
     }
 
     [Flags]
