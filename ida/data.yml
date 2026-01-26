@@ -8080,10 +8080,12 @@ classes:
       51: OnRefresh
       52: OnRequestedUpdate
       54: FireCloseCallback
+      56: SetSizeFromConfig
       57: HandleCustomInput
       58: OnOpenTransitionStarted
       59: OnFocusChange
       60: OnScreenSizeChange
+      61: OnConfigLoaded
       62: OnMouseOver
       63: OnMouseOut
       66: IsFullyLoaded
@@ -8143,6 +8145,8 @@ classes:
       0x1406599C0: SetOperationGuideEx
       0x140659BF0: ClearOperationGuide
       0x14065A470: SetAtkValues
+      0x14065AF00: LoadAddonConfig
+      0x14065BD30: SaveAddonConfig
   Component::GUI::AtkComponentBase:
     vtbls:
       - ea: 0x1420A4E70
