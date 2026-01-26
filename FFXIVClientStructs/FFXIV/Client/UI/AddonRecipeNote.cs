@@ -20,11 +20,8 @@ public unsafe partial struct AddonRecipeNote {
     [FieldOffset(0x338)] public AtkComponentButton* QuickSynthesisButton;
     [FieldOffset(0x340)] public AtkComponentButton* SynthesizeButton;
     [FieldOffset(0x378)] public AtkTextNode* PaginationText; // Pagination Text [ex: "1-32"]
-    [FieldOffset(0x3A8)] public AtkTextNode* CharacteristicsTextLine1; // Characteristics Line 1 [ex: "Quick Synthesis Unavailable"]
-    [FieldOffset(0x3B0)] public AtkTextNode* CharacteristicsTextLine2; // Characteristics Line 2 [ex: "Craftsmanship Required: 3700"]
-    [FieldOffset(0x3B8)] public AtkTextNode* CharacteristicsTextLine3; // Characteristics Line 3 [ex: "Quality Required for Synthesis: 13500"]
-    [FieldOffset(0x3C0)] public AtkTextNode* CharacteristicsTextLine4; // Characteristics Line 4 [ex: "Expert Recipe"]
-    [FieldOffset(0x3C8)] public AtkTextNode* CharacteristicsTextLine5; // Characteristics Line 5 [ex: "High-quality Uncraftable"]
+    [FieldOffset(0x380), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkComponentBase>> _characteristicsComponents;
+    [FieldOffset(0x3A8), FixedSizeArray] internal FixedSizeArray5<Pointer<AtkTextNode>> _characteristicsTexts;
     [FieldOffset(0x3E0)] public AtkTextNode* RecipeLevelLiteral; // Recipe Level Literal [ex: "Recipe Level"]
     [FieldOffset(0x488)] public AtkTextNode* SelectedRecipeName; // Selected Recipe Name [ex: "Water Otter Fountain Lumber"]
     [FieldOffset(0x490)] public AtkTextNode* SelectedRecipeDurability; // Durability [ex: "60"]
@@ -90,4 +87,10 @@ public unsafe partial struct AddonRecipeNote {
     [FieldOffset(0x858)] public AtkTextNode* Ingredient6QuantityInInventoryHq; // Ingredient 6 Available HQ in Inventory [ex: "0"]
     [FieldOffset(0x868)] public AtkComponentButton* Ingredient6QuantityIncrementButtonNq; // Ingredient 6 increment button/number for NQ items
     [FieldOffset(0x870)] public AtkComponentButton* Ingredient6QuantityIncrementButtonHq; // Ingredient 6 increment button/number for HQ items
+
+    [FieldOffset(0x3A8), Obsolete("Use CharacteristicsTexts[0}")] public AtkTextNode* CharacteristicsTextLine1; // Characteristics Line 1 [ex: "Quick Synthesis Unavailable"]
+    [FieldOffset(0x3B0), Obsolete("Use CharacteristicsTexts[1}")] public AtkTextNode* CharacteristicsTextLine2; // Characteristics Line 2 [ex: "Craftsmanship Required: 3700"]
+    [FieldOffset(0x3B8), Obsolete("Use CharacteristicsTexts[2}")] public AtkTextNode* CharacteristicsTextLine3; // Characteristics Line 3 [ex: "Quality Required for Synthesis: 13500"]
+    [FieldOffset(0x3C0), Obsolete("Use CharacteristicsTexts[3}")] public AtkTextNode* CharacteristicsTextLine4; // Characteristics Line 4 [ex: "Expert Recipe"]
+    [FieldOffset(0x3C8), Obsolete("Use CharacteristicsTexts[4}")] public AtkTextNode* CharacteristicsTextLine5; // Characteristics Line 5 [ex: "High-quality Uncraftable"]
 }
