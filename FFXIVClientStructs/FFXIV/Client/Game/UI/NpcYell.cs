@@ -22,15 +22,15 @@ public partial struct NpcYell {
     /// The number of new <see cref="YellSlots"/> and <see cref="YellInfo"/> entries that have not yet been handled.
     /// </summary>
     [FieldOffset(0x2848)] public byte UnhandledYellCount;
-    [FieldOffset(0x2849)] private byte Unk_2849; // Looks like a counter that has something to do specifically with entries that show a BattleTalk.
-    [FieldOffset(0x284A)] private bool Unk_284A;
+    [FieldOffset(0x2849)] private byte Unk2849; // Looks like a counter that has something to do specifically with entries that show a BattleTalk.
+    [FieldOffset(0x284A)] private bool Unk284A;
 
     [StructLayout(LayoutKind.Explicit, Size = 0x28)]
     public struct NpcYellSlot {
         [FieldOffset(0x0)] public GameObjectId ObjectId;
         [FieldOffset(0xC)] public uint NameId;
         [FieldOffset(0x10)] private uint Unk_MessageParams; // A (probably) four-long array of integer parameters for the message string.
-        [FieldOffset(0x20)] private float Unk_20; // Probably a delay.  Has effective frame delta subracted each update.
+        [FieldOffset(0x20)] private float Unk20; // Probably a delay.  Has effective frame delta subracted each update.
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 0x118)]
@@ -40,8 +40,8 @@ public partial struct NpcYell {
         [FieldOffset(0x10)] public uint NameId;
         [FieldOffset(0x18)] public Utf8String Name;
         [FieldOffset(0x80)] public Utf8String Message;
-        [FieldOffset(0xE8)] private uint Unk_MessageParams; // A (probably) four-long array of integer parameters for the message string.
-        [FieldOffset(0xF8)] private float Unk_F8; // Countdown timer of unknown use.  Has effective frame delta subracted each update.
+        [FieldOffset(0xE8)] private uint UnkMessageParams; // A (probably) four-long array of integer parameters for the message string.
+        [FieldOffset(0xF8)] private float UnkF8; // Countdown timer of unknown use.  Has effective frame delta subracted each update.
 
         /// <summary>
         /// How long (in seconds) to display the message as a balloon.
@@ -67,7 +67,7 @@ public partial struct NpcYell {
         /// <remarks>
         /// Controls which UIModule::ShowBattleTalk overload is called.
         /// </remarks>
-        [FieldOffset(0x108)] private uint Unk_108;
+        [FieldOffset(0x108)] private uint Unk108;
 
         /// <summary>
         /// The index of the character bone to which to attach the <see cref="NpcYellBalloon"/>.
@@ -101,13 +101,13 @@ public partial struct NpcYell {
         /// Also checked when formatting NPC name.
         /// </remarks>
         SkipRangeCheck = 2,
-        Unk_4 = 4,
-        Unk_8 = 8,
+        Unk4 = 4,
+        Unk8 = 8,
         /// <remarks>
         /// This is the default value after initialization.
         /// </remarks>
-        Unk_10 = 0x10,
-        Unk_20 = 0x20,
-        Unk_40 = 0x40,
+        Unk10 = 0x10,
+        Unk20 = 0x20,
+        Unk40 = 0x40,
     }
 }
