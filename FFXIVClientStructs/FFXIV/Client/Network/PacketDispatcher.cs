@@ -42,6 +42,9 @@ public unsafe partial struct PacketDispatcher {
     [MemberFunction("40 53 57 48 83 EC ?? F6 42")]
     public static partial void HandleSpawnObjectPacket(uint targetId, SpawnObjectPacket* packet);
 
+    [MemberFunction("48 89 74 24 ?? 57 48 83 EC ?? 0F B6 42 ?? 48 8D 0D")]
+    public static partial void HandleSpawnTreasurePacket(uint targetId, SpawnTreasurePacket* packet);
+
     [MemberFunction("E8 ?? ?? ?? ?? EB 10 48 8B 0D")]
     public static partial void SendEventCompletePacket(EventId eventId, short scene, byte a3, uint* payload, byte payloadSize, void* a6);
 

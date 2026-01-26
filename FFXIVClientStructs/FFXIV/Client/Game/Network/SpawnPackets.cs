@@ -149,3 +149,29 @@ public struct SpawnObjectPacket {
     [FieldOffset(0x38)] public float PositionY;
     [FieldOffset(0x3C)] public float PositionZ;
 }
+
+[GenerateInterop]
+[StructLayout(LayoutKind.Explicit, Size = 0x70)]
+public partial struct SpawnTreasurePacket {
+    [FieldOffset(0x00)] public uint BaseId;
+    [FieldOffset(0x04)] public uint EntityId;
+    [FieldOffset(0x08)] public uint LayoutId;
+    [FieldOffset(0x0C)] public ushort Rotation;
+    [FieldOffset(0x0E)] public byte ObjectIndex;
+    [FieldOffset(0x0F)] public byte ItemCount;
+    [FieldOffset(0x10)] public byte EventState;
+    [FieldOffset(0x11)] public byte CofferKind;
+    [FieldOffset(0x12)] public byte Visibility;
+
+    [FieldOffset(0x14)] public float CountdownTime;
+    [FieldOffset(0x18)] public float CountdownStartTime;
+    [FieldOffset(0x1C)] public float ClaimTime;
+    [FieldOffset(0x20)] public EventId EventId;
+    [FieldOffset(0x24)] public uint ExportedSGRowId;
+    [FieldOffset(0x28)] public byte TargetableStatus;
+
+    [FieldOffset(0x2A)] public ushort PositionX;
+    [FieldOffset(0x2C)] public ushort PositionY;
+    [FieldOffset(0x2E)] public ushort PositionZ;
+    [FieldOffset(0x30), FixedSizeArray] internal FixedSizeArray16<uint> _lootableItemIds;
+}
