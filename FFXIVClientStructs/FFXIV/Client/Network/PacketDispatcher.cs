@@ -18,6 +18,21 @@ public unsafe partial struct PacketDispatcher {
     [FieldOffset(0x24)] public uint Key1;
     [FieldOffset(0x28)] public uint Key2;
 
+    [MemberFunction("E8 ?? ?? ?? ?? B0 ?? 48 8B 5C 24 ?? 48 8B 74 24 ?? 48 83 C4 ?? 5F C3 ?? ?? ?? B8")]
+    public static partial void HandleActorControlPacket(
+        uint entityId,
+        uint category,
+        uint arg1,
+        uint arg2,
+        uint arg3,
+        uint arg4,
+        uint arg5,
+        uint arg6,
+        uint arg7,
+        uint arg8,
+        GameObjectId targetId,
+        bool isRecorded);
+
     [MemberFunction("48 89 5C 24 ?? 56 48 83 EC ?? 48 8B 0D ?? ?? ?? ?? 48 8B F2")]
     public static partial void HandleSocialPacket(uint targetId, nint packet);
 
