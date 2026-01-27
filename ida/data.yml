@@ -3184,10 +3184,10 @@ classes:
     vtbls:
       - ea: 0x1420D07F8
     funcs:
-      0x140B60FC0: ctor
-      0x140D78D80: Dtor
-      0x140B61120: Initialize
-      0x140B61920: Update
+      0x140B60FD0: ctor
+      0x140D78CF0: Dtor
+      0x140B61130: Initialize
+      0x140B61930: Update
       0x140B62210: HandleYell
   Client::Game::UI::CharaCard:
     instances:
