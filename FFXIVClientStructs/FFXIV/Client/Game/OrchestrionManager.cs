@@ -8,7 +8,7 @@ namespace FFXIVClientStructs.FFXIV.Client.Game;
 [GenerateInterop]
 [StructLayout(LayoutKind.Explicit, Size = 0x38)]
 public unsafe partial struct OrchestrionManager {
-    [StaticAddress("66 44 3B 35 DA 6C 2E 01", 4)]
+    [StaticAddress("66 89 1D ?? ?? ?? ?? B9", 3)]
     public static partial OrchestrionManager* Instance();
 
     [FieldOffset(0x00)] public ushort TrackId;

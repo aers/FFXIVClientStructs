@@ -63,7 +63,7 @@ public unsafe partial struct AgentInterface {
     [MemberFunction("E8 ?? ?? ?? ?? 48 8B 53 ?? 48 8B 82")]
     public partial void HideAddon();
 
-    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 05 41 B4 01")]
+    [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 ?? 45 33 C9 8D 4D")]
     public partial bool IsAddonShown();
 
     [MemberFunction("E8 ?? ?? ?? ?? 84 C0 74 1A 49 8B CF")]
